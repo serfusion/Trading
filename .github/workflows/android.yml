@@ -21,7 +21,10 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - uses: android-actions/setup-android@v3
+      # Runner ubuntu-latest sudah membawa Android SDK (ANDROID_HOME); AGP mengunduh
+      # platform/build-tools yang kurang secara otomatis.
+      - name: Info Android SDK
+        run: echo "ANDROID_HOME=$ANDROID_HOME" && ls "$ANDROID_HOME/platforms" | tail -3
 
       - uses: gradle/actions/setup-gradle@v4
         with:

@@ -95,7 +95,50 @@ PnL per tahun (riset, R): 2012 +1,3 · 2013 +29,6 · 2014 +14,6 · 2015 −9,3 �
   USD standar. Saldo kecil → pakai akun **Cent**, jangan menaikkan risiko.
 - Hasil masa lalu tidak menjamin masa depan. Jalankan di akun demo dulu.
 
-## 5. Cara mengulang
+## 6. Berita (NFP, CPI, PPI, FOMC, Retail Sales, PCE, GDP)
+
+Kalender historis ForexFactory ([spoluan](https://github.com/spoluan/forex-factory-scraper) 2010–2023,
+[ehsanrs2](https://github.com/ehsanrs2/forexfactory-scraper) 2020–Jan 2026) lengkap dengan *actual* &
+*forecast*; 582 rilis dianalisis di candle M15 (`python -m research.news_study`).
+
+| Periode | Rilis | Candle 15m pertama searah kejutan data | Berlanjut 1 jam | Berlanjut 4 jam | Arah 4 jam sebelum = arah reaksi |
+|---|---|---|---|---|---|
+| 2012–17 | 302 | 67,8% | 49,7% | 49,0% | 42,4% |
+| 2018–22 | 232 | 62,3% | 48,7% | 53,4% | 50,0% |
+| 2025–26 | 48 | 73,3% | 52,1% | 56,2% | 50,0% |
+
+- Reaksi pertama mengikuti hasil data (actual vs forecast), tetapi hasilnya baru diketahui saat rilis;
+  setelah candle rilis tertutup arah berikutnya ≈ 50/50, dan pergerakan sebelum berita tidak memberi
+  petunjuk.
+- Scalping berita (ikut / lawan / ikut kejutan, TP 1R/2R/2 jam, spread 0,60): **tidak ada** yang positif
+  konsisten di 2012–17 dan 2018–22.
+- Trade TREND H1 yang dibuka ≤ 1 jam dari berita justru lebih baik (+1,07R dan +0,58R vs +0,03R dan
+  +0,06R) → berita memicu breakout yang ditangkap trend. Karena itu filter berita untuk mode trend
+  **mati** (`trend.respect_news: false`).
+
+## 7. Scalping (M5/M15) — TIDAK LOLOS
+
+Scalping searah trend H1 (breakout 10/20 bar, SL 1–2 ATR, TP 1–2R, keluar paksa 16 bar), 18 varian
+pra-daftar (`python -m research.scalp`): **0 dari 18** positif di semua periode; 2012–22 rata-rata
+−0,11 s/d −0,36R. Biaya spread terlalu besar dibanding target scalping. Setup SMC/ICT
+("Alchemist x ICT") di M5/M15 juga rugi (bagian 3).
+
+## 8. Ujian "soal & kunci jawaban" (masa depan tertutup)
+
+`python -m research.exam <dataset>` menjalankan bot mode SINYAL (kode yang sama yang mengirim ke
+aplikasi Android) candle demi candle. Setiap sinyal = soal; saat bot mengirim sinyal TUTUP, jawaban
+dibuka.
+
+| Data | Soal | Benar | Nilai total | Rata-rata benar / salah |
+|---|---|---|---|---|
+| M15 2012–2022 (230 rb candle) | 786 | 287 (36,5%) | **+84,9R** | +1,72R / −0,82R |
+| M15 2025–Sep 2026 | 106 | 43 (40,6%) | **+35,7R** | +2,03R / −0,82R |
+
+Jumlah soal yang benar hanya 37–41%, tetapi karena jawaban benar rata-rata 2× lebih besar dari
+jawaban salah, nilai totalnya positif. Contoh 8 soal terakhir (Agustus–September 2026): 2 benar, 6 salah
+— periode rugi seperti ini normal dan akan terjadi lagi.
+
+## 9. Cara mengulang
 
 ```bash
 bash research/download_data.sh                                  # unduh data ke data/research
@@ -106,4 +149,8 @@ python -m research.trend_grid
 python -m research.engine_validate m15_2012 --to 2018-01-01
 python -m research.engine_validate m15_2012 --from 2018-01-01
 python -m research.engine_validate m5_2025
+python -m research.news_study
+python -m research.scalp
+python -m research.exam m15_2012
+python -m research.exam m5_2025
 ```

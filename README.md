@@ -23,7 +23,29 @@ Fitur umum:
 
 ---
 
-## 1. Instalasi (Windows / VPS Windows)
+## 0. Mulai cepat (tanpa .env & config.yaml)
+
+1. Buka **MetaTrader 5 Exness** dan login ke akun (Standard atau **Cent/USC**) — biarkan terbuka.
+2. Pasang Python 3.11+, lalu di folder ini: `pip install -r requirements.txt`
+3. `python -m xau_bot run` → bot memakai akun yang sedang login di MT5, otomatis mengenali akun
+   Cent (USC → simbol `XAUUSDc`) dan berjalan dalam mode **SINYAL** (tidak membuka order).
+4. `python -m xau_bot app` → tampilkan **server & topik** untuk aplikasi Android.
+5. Setelah yakin, eksekusi otomatis: `python -m xau_bot run --auto`.
+
+## Aplikasi Android "XAU Signal"
+
+- APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "XAU Signal (APK terbaru)"**
+  (tag `android-latest`) atau **Actions → Android APK → Artifacts**, unduh `app-debug.apk`, pasang
+  (izinkan "instal dari sumber tidak dikenal").
+- Buka aplikasi → ⚙️ Pengaturan → isi **Server** (`https://ntfy.sh`) dan **Topik** dari
+  `python -m xau_bot app` → Simpan.
+- Aplikasi menampilkan harga & saldo terkini, posisi sinyal aktif (entry, SL, berjalan), riwayat
+  sinyal BUY/SELL & TUTUP beserta hasil BENAR/SALAH, dan notifikasi bersuara.
+- Sinyal dikirim lewat [ntfy](https://ntfy.sh) (open-source). Topik acak = kunci rahasia, jangan
+  dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
+- Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
+
+## 1. Instalasi lengkap (Windows / VPS Windows)
 
 1. Pasang **MetaTrader 5 Exness**, login ke akun, pastikan simbol XAUUSD tampil
    di Market Watch. Aktifkan *Tools → Options → Expert Advisors → Allow algorithmic trading*.
@@ -35,7 +57,7 @@ Fitur umum:
    copy config.example.yaml config.yaml
    ```
 4. Isi `.env` (login MT5, server, token & chat id Telegram).
-5. Tes semua koneksi:
+5. (Opsional — tanpa .env bot memakai akun yang sedang login di MT5.) Tes semua koneksi:
    ```bat
    python -m xau_bot check
    ```
@@ -45,8 +67,8 @@ Fitur umum:
 ## 2. Menjalankan
 
 ```bat
-python -m xau_bot run                 :: auto-trade + dashboard
-python -m xau_bot run --signals-only  :: hanya kirim sinyal Telegram
+python -m xau_bot run                 :: mode SINYAL (default) + dashboard
+python -m xau_bot run --auto          :: eksekusi order otomatis
 python -m xau_bot run --no-dashboard  :: log biasa (untuk VPS)
 start_bot.bat                         :: auto-restart bila tertutup
 ```
@@ -82,6 +104,9 @@ demo) → akun real dengan `risk_pct: 0.25–0.5`.
 
 | Kunci | Default | Arti |
 |---|---|---|
+| `trade_enabled` | false | false = sinyal saja; true / `run --auto` = order otomatis |
+| `broker.account_type` | auto | auto (USC = Cent), `cent`, `standard` |
+| `app.server` / `app.topic` | ntfy.sh / acak | tujuan sinyal aplikasi Android |
 | `strategy.mode` | trend | `trend`, `smc`, atau `both` |
 | `trend.timeframe` / `entry_period` / `exit_period` / `stop_atr` | H1 / 55 / 20 / 3.0 | parameter trend tervalidasi |
 | `risk.risk_pct` | 1.0 | % balance yang dirisikokan per setup (0.5 ≈ drawdown setengahnya) |
