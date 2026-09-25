@@ -1,0 +1,42 @@
+# Salin menjadi config.yaml. Semua jarak dalam satuan HARGA (1.00 = 1 poin di chart).
+trade_enabled: true        # false = hanya kirim sinyal Telegram
+signals_enabled: true
+poll_seconds: 2
+
+broker:
+  symbol: XAUUSD           # otomatis dicari XAUUSDm (Standard) / XAUUSDc (Cent)
+  magic: 250925
+  server_utc_offset_hours: 0   # Exness = UTC+0; jalankan "check" untuk memastikan
+
+strategy:
+  entry_tf: M5
+  bias_tf: H1
+  score_threshold: 7       # skor minimal (maks 13)
+  min_rr: 3.0              # RR minimal ke TP2
+  max_sl: 12.0             # lewati setup bila SL > 12 poin
+  sl_buffer: 0.30
+  smt_symbols:
+    - {symbol: XAGUSD, correlation: 1}
+    - {symbol: EURUSD, correlation: 1}
+    # - {symbol: DXY, correlation: -1}   # aktifkan bila broker menyediakan DXY
+
+sessions:
+  killzone_only: false     # true = hanya entry di killzone London/NY/Silver Bullet
+
+risk:
+  risk_pct: 1.0            # risiko per setup (% balance)
+  daily_loss_pct: 3.0
+  weekly_loss_pct: 6.0
+  max_consecutive_losses: 2
+  max_setups_per_direction: 1
+  allow_min_lot_over_risk: false
+  max_spread: 0.40
+  partial_ratio: 0.5       # 50% ditutup di TP1, sisanya ke TP2
+  pending_expiry_minutes: 120
+
+news:
+  enabled: true
+  block_before_minutes: 30
+  block_after_minutes: 30
+  impacts: [High]
+  currencies: [USD]

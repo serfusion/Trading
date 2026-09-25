@@ -107,18 +107,22 @@ sudah umum dipakai dan terdokumentasi:
 > dianggap valid** sampai dibuktikan dengan backtest bot sendiri di data Exness.
 
 ### 4.1 Skor konfluensi (entry hanya jika ≥ 7 dan syarat wajib terpenuhi)
-| Komponen | Poin | Wajib? |
-|---|---|---|
-| Sweep likuiditas / TS | 2 | ✅ |
-| MSS / CISD di TF entry | 2 | ✅ |
-| SMT dengan XAGUSD atau DXY | 2 | |
-| Entry di KEYY / OB / QML / FVG 50% | 1 | ✅ |
-| Premium (SELL) / discount (BUY) | 1 | ✅ |
-| Searah bias HTF (H1/H4) atau AMD harian | 1 | |
-| Dalam killzone (London / NY / Silver Bullet) | 1 | |
-| Inducement sudah tersapu | 1 | |
-| Tidak ada berita high-impact ±30 menit | — | ✅ (filter) |
-| Spread normal | — | ✅ (filter) |
+| Komponen | Poin | Wajib? | Implementasi (`xau_bot/strategy.py`) |
+|---|---|---|---|
+| Sweep likuiditas / TS | 2 | ✅ | ekor menembus level, close kembali di dalam ≤ 2 bar |
+| MSS / CISD di TF entry | 2 | ✅ | close menembus swing internal terakhir sebelum sweep, dengan displacement ≥ 1 ATR |
+| SMT dengan XAGUSD / EURUSD (/ DXY) | 2 | | pasangan gagal membuat high/low baru |
+| Entry di KEYY: FVG 50% atau Order Block | 1 | ✅ | FVG belum termitigasi, kalau tidak ada pakai OB (50% body) |
+| Premium (SELL) / discount (BUY) | 1 | ✅ | entry di atas/bawah 50% range sweep → leg |
+| Searah bias H1 | 1 | | BOS terakhir di H1 |
+| Dalam killzone (London / NY / Silver Bullet) | 1 | | jam New York, ikut DST otomatis |
+| Inducement di depan entry | 1 | | swing internal di antara harga & entry |
+| Entry di OTE 62–79% | 1 | | rasio retracement |
+| Likuiditas eksternal tersapu | 1 | | equal highs/lows, swing H1, high/low hari sebelumnya, range Asia |
+| Tidak ada berita high-impact ±30 menit | — | ✅ (filter) | kalender ForexFactory |
+| Spread ≤ 0.40 | — | ✅ (filter) | |
+
+Skor maksimum 13.
 
 ### 4.2 Timeframe
 - **H4/H1**: bias & likuiditas besar (BSL/SSL, high/low harian & mingguan).
