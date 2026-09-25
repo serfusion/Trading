@@ -8,7 +8,7 @@ import pandas as pd
 
 from ..models import (Account, ClosedTrade, Direction, OrderResult, PendingOrder, Position,
                       SymbolSpec, Tick)
-from .base import Broker
+from .base import Broker, symbol_candidates
 
 log = logging.getLogger(__name__)
 
@@ -56,19 +56,14 @@ class MT5Broker(Broker):
     def has_symbol(self, symbol: str) -> bool:
         return self.mt5.symbol_info(symbol) is not None and bool(self.mt5.symbol_select(symbol, True))
 
-    def resolve_symbol(self, symbol: str) -> str | None:
-        if self.has_symbol(symbol):
-            return symbol
-        # Exness: Standard = akhiran "m", Cent = "c", Pro/Raw/Zero tanpa akhiran.
-        for suffix in ("m", "c"):
-            if self.has_symbol(symbol + suffix):
-                return symbol + suffix
-        found = [s.name for s in (self.mt5.symbols_get(f"{symbol}*") or [])]
-        found.sort(key=len)
-        for name in found:
+    def resolve_symbol(self, symbol: str, cent: bool = False) -> str | None:
+        for name in symbol_candidates(symbol, cent):
             if self.has_symbol(name):
                 return name
-        return None
+        found = sorted((s.name for s in (self.mt5.symbols_get(f"{symbol}*") or [])), key=len)
+        if cent:
+            found.sort(key=lambda n: not n.endswith("c"))
+        return next((n for n in found if self.has_symbol(n)), None)
 
     def symbol_spec(self, symbol: str) -> SymbolSpec:
         info = self.mt5.symbol_info(symbol)

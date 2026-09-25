@@ -33,13 +33,37 @@ def _notifier(cfg: AppConfig):
     return TelegramNotifier(cfg.telegram) if cfg.telegram.enabled else Notifier()
 
 
+def _publisher(cfg: AppConfig):
+    from .publish import NtfyPublisher, Publisher, load_or_create_topic
+    if not cfg.app.enabled:
+        return Publisher()
+    topic = cfg.app.topic or load_or_create_topic(cfg.app.topic_file)
+    return NtfyPublisher(cfg.app.server, topic)
+
+
+def cmd_app(args) -> int:
+    cfg = load_config(args.config)
+    pub = _publisher(cfg)
+    print("Pengaturan aplikasi Android 'XAU Signal':")
+    print(f"  Server : {cfg.app.server}")
+    print(f"  Topik  : {pub.topic}")
+    print("Masukkan keduanya di menu Pengaturan aplikasi. Jangan bagikan topik ke orang lain.")
+    print(f"(Alternatif: aplikasi resmi 'ntfy' -> subscribe topik {pub.topic})")
+    return 0
+
+
 def cmd_run(args) -> int:
     from .engine import Engine
     cfg = load_config(args.config)
     if args.signals_only:
         cfg.trade_enabled = False
+    if args.auto:
+        cfg.trade_enabled = True
     setup_logging(cfg, console=args.no_dashboard)
-    engine = Engine(cfg, _mt5_broker(cfg), _notifier(cfg))
+    publisher = _publisher(cfg)
+    if publisher.topic:
+        print(f"Topik aplikasi Android: {publisher.topic}  (server {cfg.app.server})")
+    engine = Engine(cfg, _mt5_broker(cfg), _notifier(cfg), publisher=publisher)
     if not engine.start():
         print("Gagal start. Cek login MT5 di .env dan pastikan terminal MT5 terbuka.")
         return 1
@@ -54,6 +78,7 @@ def cmd_run(args) -> int:
         engine.log("Bot dihentikan manual", notify=True)
     finally:
         engine.notifier.stop()
+        engine.publisher.stop()
         engine.broker.shutdown()
     return 0
 
@@ -66,14 +91,18 @@ def cmd_check(args) -> int:
     if not broker.connect():
         print("❌ Tidak bisa login MT5")
         return 1
-    symbol = broker.resolve_symbol(cfg.broker.symbol)
+    acc0 = broker.account()
+    cent = cfg.broker.account_type == "cent" or (
+        cfg.broker.account_type == "auto" and acc0 is not None and acc0.currency.upper() in ("USC", "USX"))
+    symbol = broker.resolve_symbol(cfg.broker.symbol, cent=cent)
     if symbol is None:
         print(f"❌ Simbol {cfg.broker.symbol} tidak ada. Cek nama simbol di Market Watch MT5.")
         return 1
     spec = broker.symbol_spec(symbol)
     tick = broker.tick(symbol)
     acc = broker.account()
-    print(f"✅ MT5 OK | saldo {acc.balance:.2f} {acc.currency} | equity {acc.equity:.2f}")
+    print(f"✅ MT5 OK | saldo {acc.balance:.2f} {acc.currency}{' (akun CENT)' if cent else ''} | "
+          f"equity {acc.equity:.2f}")
     if symbol != cfg.broker.symbol:
         print(f"ℹ️  Simbol dipakai: {symbol}")
     print(f"✅ {spec.name}: digits {spec.digits}, tick {spec.tick_size}, nilai tick {spec.tick_value}, "
@@ -87,7 +116,7 @@ def cmd_check(args) -> int:
         else:
             print("✅ Offset jam server sesuai")
     for item in cfg.strategy.smt_symbols:
-        sym = broker.resolve_symbol(item.symbol)
+        sym = broker.resolve_symbol(item.symbol, cent=cent)
         print(f"{'✅' if sym else '⚠️ '} SMT {item.symbol}{' -> ' + sym if sym and sym != item.symbol else ''}")
     news = NewsFilter(cfg.news)
     news.refresh(pd.Timestamp.now(tz="UTC"), force=True)
@@ -102,6 +131,7 @@ def cmd_check(args) -> int:
         print("✅ Pesan tes Telegram dikirim")
     else:
         print("⚠️  Telegram belum diisi (TELEGRAM_TOKEN / TELEGRAM_CHAT_ID)")
+    print(f"📱 Topik aplikasi Android: {_publisher(cfg).topic or '(nonaktif)'}")
     broker.shutdown()
     return 0
 
@@ -162,9 +192,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--config", default="config.yaml" if Path("config.yaml").exists() else None)
     sub = parser.add_subparsers(dest="cmd", required=True)
     run = sub.add_parser("run", help="Jalankan bot 24 jam")
-    run.add_argument("--signals-only", action="store_true", help="Hanya kirim sinyal, tanpa order")
+    run.add_argument("--signals-only", action="store_true", help="Hanya kirim sinyal, tanpa order (default)")
+    run.add_argument("--auto", action="store_true", help="Aktifkan eksekusi order otomatis")
     run.add_argument("--no-dashboard", action="store_true", help="Log biasa tanpa dashboard")
     sub.add_parser("check", help="Tes koneksi MT5, simbol, berita, Telegram")
+    sub.add_parser("app", help="Tampilkan server & topik untuk aplikasi Android")
     bt = sub.add_parser("backtest", help="Backtest dari CSV")
     bt.add_argument("--data", required=True)
     bt.add_argument("--smt", action="append", help="SIMBOL=path.csv (boleh berulang)")
@@ -177,7 +209,8 @@ def main(argv: list[str] | None = None) -> int:
     fe.add_argument("--days", type=int, default=180)
     fe.add_argument("--out-dir", default="data")
     args = parser.parse_args(argv)
-    return {"run": cmd_run, "check": cmd_check, "backtest": cmd_backtest, "fetch": cmd_fetch}[args.cmd](args)
+    return {"run": cmd_run, "check": cmd_check, "backtest": cmd_backtest, "fetch": cmd_fetch,
+            "app": cmd_app}[args.cmd](args)
 
 
 if __name__ == "__main__":

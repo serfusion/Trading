@@ -91,6 +91,8 @@ def run_backtest(cfg: AppConfig, entry: pd.DataFrame, correlated: dict[str, pd.D
     cfg = copy.deepcopy(cfg)
     cfg.news.enabled = False
     cfg.telegram.enabled = False
+    cfg.app.enabled = False
+    cfg.trade_enabled = True   # backtest mensimulasikan eksekusi order
     cfg.poll_seconds = 0
     logging.getLogger("xau_bot").setLevel(logging.WARNING)
     data = {cfg.broker.symbol: entry}

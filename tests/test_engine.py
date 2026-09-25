@@ -37,7 +37,9 @@ WIN_ROWS = [
 
 
 def build(df, cfg=None, balance=10_000.0):
-    cfg = cfg or AppConfig()
+    if cfg is None:
+        cfg = AppConfig()
+        cfg.trade_enabled = True
     cfg.strategy.mode = "smc" if cfg.strategy.mode == "trend" else cfg.strategy.mode
     cfg.news.enabled = False
     cfg.telegram.enabled = False

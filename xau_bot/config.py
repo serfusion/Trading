@@ -16,7 +16,8 @@ import yaml
 
 @dataclass
 class BrokerConfig:
-    symbol: str = "XAUUSD"
+    symbol: str = "XAUUSD"          # otomatis jadi XAUUSDc (Cent) / XAUUSDm (Standard) di Exness
+    account_type: str = "auto"      # auto (deteksi dari mata uang akun USC) | cent | standard
     magic: int = 250925
     deviation_points: int = 30
     # Jam server Exness = UTC+0. Ubah bila broker memakai zona lain.
@@ -82,7 +83,8 @@ class TrendConfig:
     atr_period: int = 20
     stop_atr: float = 3.0
     bars: int = 200
-    respect_news: bool = False  # filter berita tidak ikut diuji di backtest -> default mati
+    respect_news: bool = False  # riset: entry dekat berita justru lebih baik -> default mati
+    virtual_file: str = "data/virtual_trend.json"  # posisi virtual di mode SINYAL
     magic_offset: int = 1   # magic = broker.magic + offset (dipisah dari posisi SMC)
 
 
@@ -141,8 +143,18 @@ class TelegramConfig:
 
 
 @dataclass
+class AppPushConfig:
+    """Pengiriman sinyal ke aplikasi Android (lihat xau_bot/publish.py & android/)."""
+    enabled: bool = True
+    server: str = "https://ntfy.sh"
+    topic: str = ""                 # kosong = dibuat acak & disimpan di topic_file
+    topic_file: str = "data/app_topic.txt"
+    heartbeat_minutes: int = 5
+
+
+@dataclass
 class AppConfig:
-    trade_enabled: bool = True      # eksekusi otomatis
+    trade_enabled: bool = False     # False = SINYAL saja (default); aktifkan dengan run --auto
     signals_enabled: bool = True    # kirim sinyal Telegram
     poll_seconds: float = 2.0
     journal_file: str = "data/journal.sqlite"
@@ -154,6 +166,7 @@ class AppConfig:
     risk: RiskConfig = field(default_factory=RiskConfig)
     news: NewsConfig = field(default_factory=NewsConfig)
     telegram: TelegramConfig = field(default_factory=TelegramConfig)
+    app: AppPushConfig = field(default_factory=AppPushConfig)
     # Diisi dari environment, tidak disimpan di YAML.
     mt5_login: int = 0
     mt5_password: str = ""

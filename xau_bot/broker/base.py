@@ -8,6 +8,14 @@ from ..models import (Account, ClosedTrade, Direction, OrderResult, PendingOrder
                       SymbolSpec, Tick)
 
 
+def symbol_candidates(symbol: str, cent: bool) -> list[str]:
+    suffixes = ["c", "", "m"] if cent else ["", "m", "c"]
+    out = [symbol + s for s in suffixes]
+    if symbol[-1:] in ("c", "m") and len(symbol) > 6:
+        out.insert(0, symbol)  # nama lengkap diberikan pengguna
+    return list(dict.fromkeys(out))
+
+
 class Broker(ABC):
     """Antarmuka broker. `rates` hanya mengembalikan bar yang SUDAH tertutup (index UTC)."""
 
@@ -20,9 +28,12 @@ class Broker(ABC):
     @abstractmethod
     def has_symbol(self, symbol: str) -> bool: ...
 
-    def resolve_symbol(self, symbol: str) -> str | None:
-        """Nama simbol yang benar di broker (mis. XAUUSD -> XAUUSDm di Exness Standard)."""
-        return symbol if self.has_symbol(symbol) else None
+    def resolve_symbol(self, symbol: str, cent: bool = False) -> str | None:
+        """Nama simbol yang benar di broker (Exness: XAUUSDc = Cent, XAUUSDm = Standard)."""
+        for name in symbol_candidates(symbol, cent):
+            if self.has_symbol(name):
+                return name
+        return None
 
     @abstractmethod
     def symbol_spec(self, symbol: str) -> SymbolSpec: ...
