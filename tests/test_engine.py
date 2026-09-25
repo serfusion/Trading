@@ -38,6 +38,7 @@ WIN_ROWS = [
 
 def build(df, cfg=None, balance=10_000.0):
     cfg = cfg or AppConfig()
+    cfg.strategy.mode = "smc" if cfg.strategy.mode == "trend" else cfg.strategy.mode
     cfg.news.enabled = False
     cfg.telegram.enabled = False
     start = df.index.get_loc(df.index[-len(WIN_ROWS) - 2])  # bar sebelum MSS
@@ -121,6 +122,7 @@ def test_small_account_skips_when_min_lot_too_risky():
 def test_run_backtest_summary():
     df = continuation(add_sweep_and_mss(sell_setup_path()), WIN_ROWS)
     cfg = AppConfig()
+    cfg.strategy.mode = "smc"
     cfg.strategy.bars = 60
     result = run_backtest(cfg, df, balance=10_000)
     assert result.end_balance > 10_000

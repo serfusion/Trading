@@ -1,23 +1,25 @@
-# XAUUSD SMC Bot (MetaTrader 5 / Exness)
+# XAUUSD Bot (MetaTrader 5 / Exness)
 
-Bot 24 jam untuk XAUUSD berbasis **Smart Money Concepts**, sesuai setup di
-[`docs/STRATEGY.md`](docs/STRATEGY.md): *sweep likuiditas (TS) → SMT → MSS →
-entry di KEYY (FVG 50% / Order Block) → TP di likuiditas lawan*. Berjalan
-untuk **SELL dan BUY** (BUY adalah cerminan persis logika SELL).
+Bot 24 jam untuk XAUUSD dengan dua mesin strategi:
 
-Fitur:
-- Deteksi otomatis swing, equal highs/lows, high/low hari sebelumnya, range Asia,
-  swing H1, sweep/turtle soup, MSS, FVG, Order Block, premium/discount, OTE,
-  inducement, SMT (XAGUSD / EURUSD / DXY), bias H1, killzone.
-- Skor konfluensi (default minimal 7 dari 13) + syarat wajib.
-- Entry **limit order** di POI, SL di balik ekstrem sweep, **2 posisi**: TP1
-  (likuiditas internal) dan TP2 (likuiditas eksternal). Setelah TP1 → SL ke BE,
-  lalu trailing di swing.
-- Filter: berita high-impact USD (±30 menit), spread, rollover, akhir pekan,
-  Jumat sore, batas rugi harian 3% / mingguan 6%, berhenti setelah 2 SL beruntun.
+| Mode | Strategi | Hasil backtest (lihat [`docs/BACKTEST.md`](docs/BACKTEST.md)) |
+|---|---|---|
+| **`trend` (default)** | Donchian H1 55/20, SL 3×ATR, keluar di channel 20 bar | **Lolos**: +53% (2012–17), +27,6% (2018–22, OOS), +28,7% (2025–26, OOS) dengan risiko 1%; 10 dari 13 tahun positif; max DD −18% |
+| `smc` | Setup gambar kamu: sweep/TS → SMT → MSS → FVG/OB → TP di likuiditas ([`docs/STRATEGY.md`](docs/STRATEGY.md)) | **Tidak lolos**: −0,12 s/d −0,31R per trade di ±350 ribu candle |
+| `both` | Keduanya (magic number terpisah) | |
+
+> ⚠️ Tidak ada strategi yang tidak pernah rugi. Mode `trend` punya win-rate 33–41%, tahun rugi
+> (2015, 2018, 2021) dan drawdown. Butuh saldo ±$5.000 untuk risiko 1% dengan 0,01 lot di akun
+> USD standar (SL median ±$50 per 0,01 lot) — saldo kecil gunakan akun Cent.
+
+Fitur umum:
 - Lot otomatis dari % risiko (default 1%). **Tidak ada martingale.**
+- Batas rugi harian 3% / mingguan 6%, berhenti setelah 2 SL beruntun, blok rollover, akhir
+  pekan, Jumat sore, spread melebar; filter berita high-impact USD untuk mode SMC.
 - Telegram: sinyal lengkap + perintah `/status /posisi /pause /resume /eval /berita /closeall`.
 - Dashboard terminal, jurnal SQLite (tahan restart), backtest memakai kode yang sama dengan live.
+- Mode SMC: deteksi swing, equal highs/lows, PDH/PDL, range Asia, sweep, MSS, FVG, Order Block,
+  premium/discount, OTE, inducement, SMT, bias H1, killzone; TP1/TP2 + BE + trailing.
 
 ---
 
@@ -80,7 +82,9 @@ demo) → akun real dengan `risk_pct: 0.25–0.5`.
 
 | Kunci | Default | Arti |
 |---|---|---|
-| `risk.risk_pct` | 1.0 | % balance yang dirisikokan per setup |
+| `strategy.mode` | trend | `trend`, `smc`, atau `both` |
+| `trend.timeframe` / `entry_period` / `exit_period` / `stop_atr` | H1 / 55 / 20 / 3.0 | parameter trend tervalidasi |
+| `risk.risk_pct` | 1.0 | % balance yang dirisikokan per setup (0.5 ≈ drawdown setengahnya) |
 | `risk.allow_min_lot_over_risk` | false | bila 0.01 lot melebihi risiko → setup dilewati |
 | `strategy.score_threshold` | 7 | skor minimal (maks 13) |
 | `strategy.min_rr` | 3.0 | RR minimal ke TP2 |
@@ -90,19 +94,26 @@ demo) → akun real dengan `risk_pct: 0.25–0.5`.
 
 Semua jarak memakai satuan harga: `1.00` = 1 poin di chart (4348.23 → 4349.23).
 
-## 5. Struktur kode
+## 5. Riset & backtest data historis
+
+Lihat [`docs/BACKTEST.md`](docs/BACKTEST.md): metodologi, hasil per periode/tahun, dan perintah
+untuk mengulang (`bash research/download_data.sh`, `python -m research.engine_validate ...`).
+
+## 6. Struktur kode
 
 ```
 xau_bot/
   smc.py        swing, equal levels, ATR, bias struktur (tanpa look-ahead)
-  strategy.py   sweep → MSS → POI → SL/TP → skor
+  trend.py      Donchian trend-following (mode default)
+  strategy.py   SMC: sweep → MSS → POI → SL/TP → skor
   engine.py     loop 24 jam, eksekusi, BE/trailing, Telegram, laporan harian
   risk.py       lot, batas harian/mingguan, SL beruntun
   sessions.py   killzone (jam New York + DST), rollover, akhir pekan
   news.py       kalender ekonomi ForexFactory
   broker/mt5.py MetaTrader 5 (Exness)   broker/paper.py simulasi backtest
   backtest.py   backtest dengan engine yang sama
-tests/          36 unit test (strategi, risiko, sesi, berita, engine, MT5 palsu)
+research/       scan, simulasi, uji ketahanan & validasi engine di data historis
+tests/          41 unit test (strategi, trend, risiko, sesi, berita, engine, MT5 palsu)
 ```
 
 Menjalankan test: `pip install -r requirements-dev.txt` lalu `pytest`.

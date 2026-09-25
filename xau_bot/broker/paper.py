@@ -1,6 +1,7 @@
 """Broker simulasi untuk backtest & test. Harga bar = BID, ASK = BID + spread.
 
-Aturan konservatif: bila SL dan TP tersentuh di bar yang sama, dianggap SL.
+Aturan konservatif: bila SL dan TP tersentuh di bar yang sama, dianggap SL; di bar
+saat order limit terisi, TP tidak dihitung (urutan harga di dalam bar tidak diketahui).
 """
 from __future__ import annotations
 
@@ -146,6 +147,7 @@ class PaperBroker(Broker):
         bar = self._bar()
         o, h, l = float(bar["open"]), float(bar["high"]), float(bar["low"])
         sp = self.spread
+        filled_now: set[int] = set()
         for ticket, order in list(self._orders.items()):
             if order.direction == Direction.SELL and h >= order.price:
                 fill = max(order.price, o)
@@ -154,18 +156,23 @@ class PaperBroker(Broker):
             else:
                 continue
             del self._orders[ticket]
+            filled_now.add(ticket)
             self._positions[ticket] = Position(ticket, ticket, order.direction, order.volume, fill,
                                                order.sl, order.tp, 0.0, self.now, order.comment)
         for p in list(self._positions.values()):
             if p.direction == Direction.SELL:
                 ask_o, ask_h, ask_l = o + sp, h + sp, l + sp
                 if p.sl and ask_h >= p.sl:
-                    self._close(p, max(p.sl, ask_o))
+                    self._close(p, p.sl if p.ticket in filled_now else max(p.sl, ask_o))
+                elif p.ticket in filled_now:
+                    continue  # urutan di dalam bar tidak diketahui: TP tidak dihitung di bar pengisian
                 elif p.tp and ask_l <= p.tp:
                     self._close(p, min(p.tp, ask_o) if ask_o < p.tp else p.tp)
             else:
                 if p.sl and l <= p.sl:
-                    self._close(p, min(p.sl, o))
+                    self._close(p, p.sl if p.ticket in filled_now else min(p.sl, o))
+                elif p.ticket in filled_now:
+                    continue
                 elif p.tp and h >= p.tp:
                     self._close(p, max(p.tp, o) if o > p.tp else p.tp)
         return True

@@ -18,6 +18,7 @@ from .sessions import SessionClock, fmt_wib, trading_day
 from .smc import find_swings
 from .strategy import TF_MINUTES, MarketContext, SmcStrategy
 from .telegram import Notifier
+from .trend import TrendStrategy
 
 log = logging.getLogger(__name__)
 
@@ -41,6 +42,11 @@ class Engine:
         self.risk = RiskGuard(cfg.risk)
         self.symbol = cfg.broker.symbol
         self.magic = cfg.broker.magic
+        self.trend_magic = cfg.broker.magic + cfg.trend.magic_offset
+        self.trend = TrendStrategy(cfg.trend)
+        self.use_smc = cfg.strategy.mode in ("smc", "both")
+        self.use_trend = cfg.strategy.mode in ("trend", "both")
+        self.last_trend_bar: pd.Timestamp | None = None
         self.status = EngineStatus()
         self.logs: deque[str] = deque(maxlen=14)
         self.paused = False
@@ -81,8 +87,13 @@ class Engine:
             else:
                 self.log(f"Simbol SMT {item.symbol} tidak tersedia, dilewati", "WARNING")
         mode = "AUTO-TRADE" if self.cfg.trade_enabled else "SINYAL SAJA"
-        self.log(f"Bot aktif {self.symbol} {self.cfg.strategy.entry_tf} | mode {mode} | "
-                 f"SMT: {', '.join(self.smt_symbols) or '-'}", notify=True)
+        parts = []
+        if self.use_trend:
+            t = self.cfg.trend
+            parts.append(f"TREND {t.timeframe} {t.entry_period}/{t.exit_period} SL {t.stop_atr}xATR")
+        if self.use_smc:
+            parts.append(f"SMC {self.cfg.strategy.entry_tf} (SMT: {', '.join(self.smt_symbols) or '-'})")
+        self.log(f"Bot aktif {self.symbol} | {mode} | {' + '.join(parts)}", notify=True)
         self.handlers = self.command_handlers()
         self.notifier.start()
         return True
@@ -134,8 +145,10 @@ class Engine:
         self._manage_orders(now, tick, orders, lo, hi)
         self._manage_positions(now, tick, positions, orders, bars, lo, hi)
         self._daily_report(now)
+        if self.use_trend:
+            self._trend_step(now, tick, account)
 
-        if not bars.empty and bars.index[-1] != self.last_bar_time:
+        if self.use_smc and not bars.empty and bars.index[-1] != self.last_bar_time:
             self.last_bar_time = bars.index[-1]
             positions = self.broker.positions(self.symbol, self.magic)
             orders = self.broker.orders(self.symbol, self.magic)
@@ -193,8 +206,7 @@ class Engine:
             return f"Spread {tick.spread:.2f} > {self.cfg.risk.max_spread:.2f}"
         if account is None:
             return "Info akun tidak tersedia"
-        trades = self.broker.closed_trades(self.symbol, self.magic, now - pd.Timedelta(days=8))
-        state = self.risk.evaluate(now, account, trades)
+        state = self.risk.evaluate(now, account, self._closed(now - pd.Timedelta(days=8)))
         if state.blocked:
             return state.blocked
         active = self._active_setups(positions, orders)
@@ -296,6 +308,76 @@ class Engine:
         lines.append(f"Waktu: {fmt_wib(self.clock())}")
         return "\n".join(lines)
 
+    # ----------------------------------------------------------------- trend
+    def _trend_step(self, now, tick: Tick, account) -> None:
+        cfg = self.cfg.trend
+        bars = self.broker.rates(self.symbol, cfg.timeframe, cfg.bars)
+        if bars.empty or bars.index[-1] == self.last_trend_bar:
+            return
+        self.last_trend_bar = bars.index[-1]
+        positions = self.broker.positions(self.symbol, self.trend_magic)
+        current = positions[0].direction if positions else None
+        sig = self.trend.evaluate(bars, current)
+        if sig.action == "close":
+            for p in positions:
+                res = self.broker.close_position(self.symbol, p.ticket)
+                if res.ok:
+                    self.log(f"🏁 TREND {p.direction.label} #{p.ticket} ditutup: {sig.note} "
+                             f"(PnL {p.profit:+.2f})", notify=True)
+            return
+        if sig.action != "open":
+            return
+        direction = sig.direction
+        sign = int(direction)
+        key = f"TREND-{direction.label}-{bars.index[-1]:%Y%m%d%H%M}"
+        entry = tick.ask if direction == Direction.BUY else tick.bid
+        sl = entry - sign * cfg.stop_atr * sig.atr
+        reason = self._trend_block_reason(now, tick, account)
+        volume, risk_money, note = 0.0, 0.0, ""
+        if reason is None:
+            volume, risk_money, note = lot_size(account.balance, self.cfg.risk.risk_pct, entry, sl,
+                                                self.spec, self.cfg.risk.allow_min_lot_over_risk)
+            if volume <= 0:
+                reason = note
+        lines = [
+            f"{'🟢' if direction == Direction.BUY else '🔴'} TREND {direction.label} {self.symbol} "
+            f"({cfg.timeframe} Donchian {cfg.entry_period}/{cfg.exit_period})",
+            f"Entry: {entry:.2f} (market) | SL: {sl:.2f} ({cfg.stop_atr}x ATR {sig.atr:.2f})",
+            f"TP: tidak ada - keluar saat close menembus channel {cfg.exit_period} bar",
+            f"Alasan: {sig.note}",
+        ]
+        if reason is not None:
+            self.journal.log(now, "INFO", f"{key} dilewati: {reason}")
+            self.log(f"Sinyal TREND {direction.label} dilewati: {reason}")
+            if self.cfg.signals_enabled and self.cfg.telegram.notify_skipped:
+                self.notifier.send("\n".join(lines + [f"Status: ⛔ Dilewati: {reason}"]))
+            return
+        lines.append(f"Lot: {volume} | Risiko: {risk_money:.2f} ({self.cfg.risk.risk_pct}%)")
+        if not self.cfg.trade_enabled:
+            self.log(f"Sinyal TREND {direction.label} {entry:.2f} (mode sinyal)")
+            if self.cfg.signals_enabled:
+                self.notifier.send("\n".join(lines + ["Status: 📡 Sinyal saja (auto-trade OFF)"]))
+            return
+        res = self.broker.market_order(self.symbol, direction, volume, sl, 0.0, self.trend_magic,
+                                       f"TREND {direction.label}")
+        status = "✅ Market order terbuka" if res.ok else f"❌ Ditolak broker: {res.message}"
+        self.log(f"TREND {direction.label} {volume} lot @ {entry:.2f} SL {sl:.2f}: {status}")
+        self.notifier.send("\n".join(lines + [f"Status: {status}", f"Waktu: {fmt_wib(now)}"]))
+
+    def _trend_block_reason(self, now, tick: Tick, account) -> str | None:
+        if self.paused:
+            return "Bot dijeda (/pause)"
+        reason = self.sessions.entry_block_reason(now)
+        if reason is None and self.cfg.trend.respect_news:
+            reason = self.news.blocked(now)
+        if reason:
+            return reason
+        if tick.spread > self.cfg.risk.max_spread:
+            return f"Spread {tick.spread:.2f} > {self.cfg.risk.max_spread:.2f}"
+        if account is None:
+            return "Info akun tidak tersedia"
+        return self.risk.evaluate(now, account, self._closed(now - pd.Timedelta(days=8))).blocked
+
     # ------------------------------------------------------------ management
     def _manage_orders(self, now, tick: Tick, orders: list[PendingOrder], lo: float, hi: float) -> None:
         by_setup: dict[str, list[PendingOrder]] = defaultdict(list)
@@ -395,9 +477,17 @@ class Engine:
             self.log(f"📈 Trailing SL #{p.ticket} -> {new_sl:.2f}")
 
     # --------------------------------------------------------------- laporan
+    def _closed(self, since: pd.Timestamp) -> list:
+        trades = self.broker.closed_trades(self.symbol, self.magic, since)
+        trades += self.broker.closed_trades(self.symbol, self.trend_magic, since)
+        return sorted(trades, key=lambda t: t.close_time)
+
+    def _all_positions(self) -> list[Position]:
+        return (self.broker.positions(self.symbol, self.magic)
+                + self.broker.positions(self.symbol, self.trend_magic))
+
     def _day_summary(self, day) -> str:
-        trades = [t for t in self.broker.closed_trades(self.symbol, self.magic,
-                                                        self.clock() - pd.Timedelta(days=8))
+        trades = [t for t in self._closed(self.clock() - pd.Timedelta(days=8))
                   if trading_day(t.close_time) == day]
         pnl = sum(t.pnl for t in trades)
         wins = sum(1 for t in trades if t.pnl > 0)
@@ -420,7 +510,7 @@ class Engine:
         st.price = tick.bid
         st.spread = tick.spread
         st.account = account
-        st.positions = self.broker.positions(self.symbol, self.magic)
+        st.positions = self._all_positions()
         st.orders = self.broker.orders(self.symbol, self.magic)
         bias = self.strategy.last_bias
         st.bias = {1: "BULLISH", -1: "BEARISH"}.get(bias, "NETRAL")
@@ -431,8 +521,7 @@ class Engine:
         st.block_reason = (self.sessions.entry_block_reason(now) or self.news.blocked(now) or "")
         if account is not None:
             if self._closed_cache is None or now - self._closed_cache[0] > pd.Timedelta(seconds=30):
-                self._closed_cache = (now, self.broker.closed_trades(
-                    self.symbol, self.magic, now - pd.Timedelta(days=2)))
+                self._closed_cache = (now, self._closed(now - pd.Timedelta(days=2)))
             trades = self._closed_cache[1]
             st.daily_pnl = sum(t.pnl for t in trades if trading_day(t.close_time) == trading_day(now))
 
@@ -448,6 +537,7 @@ class Engine:
                 f"Bias {self.cfg.strategy.bias_tf}: {st.bias} | Sesi: {st.session}",
                 f"Berita: {st.news}",
                 f"Evaluasi terakhir: {st.last_eval}",
+                f"Trend {self.cfg.trend.timeframe}: {self.trend.state}",
             ]
             if acc:
                 lines.append(f"Balance {acc.balance:.2f} | Equity {acc.equity:.2f} | PnL hari ini {st.daily_pnl:.2f}")
@@ -456,7 +546,7 @@ class Engine:
             return "\n".join(lines)
 
         def positions(_: str) -> str:
-            ps = self.broker.positions(self.symbol, self.magic)
+            ps = self._all_positions()
             os_ = self.broker.orders(self.symbol, self.magic)
             if not ps and not os_:
                 return "Tidak ada posisi/order aktif"
@@ -493,7 +583,7 @@ class Engine:
                 return "Ketik /closeall ya untuk menutup SEMUA posisi & order bot"
             for o in self.broker.orders(self.symbol, self.magic):
                 self.broker.cancel_order(o.ticket)
-            for p in self.broker.positions(self.symbol, self.magic):
+            for p in self._all_positions():
                 self.broker.close_position(self.symbol, p.ticket)
             self.paused = True
             return "Semua posisi & order ditutup. Bot dijeda (/resume untuk lanjut)"

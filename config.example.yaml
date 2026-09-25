@@ -8,7 +8,15 @@ broker:
   magic: 250925
   server_utc_offset_hours: 0   # Exness = UTC+0; jalankan "check" untuk memastikan
 
+trend:                     # mode default, tervalidasi di docs/BACKTEST.md
+  timeframe: H1
+  entry_period: 55
+  exit_period: 20
+  stop_atr: 3.0
+  respect_news: false      # filter berita tidak ikut diuji di backtest
+
 strategy:
+  mode: trend              # trend | smc | both   (smc TIDAK lolos backtest)
   entry_tf: M5
   bias_tf: H1
   score_threshold: 7       # skor minimal (maks 13)

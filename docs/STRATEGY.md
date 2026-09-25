@@ -1,5 +1,9 @@
 # Spesifikasi Strategi XAUUSD (acuan bot)
 
+> **Hasil backtest:** setup SMC di dokumen ini, setelah diotomasi, **rugi** di ±350 ribu candle
+> asli (2012–2022 & 2025–2026). Bot kini memakai mode `trend` (Donchian H1) sebagai default. Detail
+> di [`BACKTEST.md`](BACKTEST.md).
+
 Dokumen ini adalah hasil verifikasi dari 20+ screenshot setup (TradingView) dan
 screenshot bot referensi. Semua aturan di sini akan diterjemahkan ke kode.
 

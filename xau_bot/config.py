@@ -32,6 +32,8 @@ class CorrelatedSymbol:
 
 @dataclass
 class StrategyConfig:
+    # "trend" = modul tervalidasi backtest (default), "smc" = setup sweep/MSS, "both" = keduanya
+    mode: str = "trend"
     entry_tf: str = "M5"
     bias_tf: str = "H1"
     bars: int = 400
@@ -69,6 +71,19 @@ class StrategyConfig:
         CorrelatedSymbol("EURUSD", 1),
     ])
     smt_window_bars: int = 2
+
+
+@dataclass
+class TrendConfig:
+    """Donchian trend-following (lihat xau_bot/trend.py & docs/BACKTEST.md)."""
+    timeframe: str = "H1"
+    entry_period: int = 55
+    exit_period: int = 20
+    atr_period: int = 20
+    stop_atr: float = 3.0
+    bars: int = 200
+    respect_news: bool = False  # filter berita tidak ikut diuji di backtest -> default mati
+    magic_offset: int = 1   # magic = broker.magic + offset (dipisah dari posisi SMC)
 
 
 @dataclass
@@ -134,6 +149,7 @@ class AppConfig:
     log_file: str = "logs/bot.log"
     broker: BrokerConfig = field(default_factory=BrokerConfig)
     strategy: StrategyConfig = field(default_factory=StrategyConfig)
+    trend: TrendConfig = field(default_factory=TrendConfig)
     sessions: SessionConfig = field(default_factory=SessionConfig)
     risk: RiskConfig = field(default_factory=RiskConfig)
     news: NewsConfig = field(default_factory=NewsConfig)
