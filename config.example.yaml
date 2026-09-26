@@ -8,11 +8,15 @@ broker:
   magic: 250925
   server_utc_offset_hours: 0   # Exness = UTC+0; jalankan "check" untuk memastikan
 
-trend:                     # mode default, tervalidasi di docs/BACKTEST.md
+trend:                     # mode default: F-ensemble, tervalidasi di docs/BACKTEST.md
   timeframe: H1
-  entry_period: 55
-  exit_period: 20
+  ensemble: [[40, 15], [55, 20], [80, 30]]
+  legs: 5                  # posisi per sinyal (posisi #1 TP1, sisanya hold)
+  tp1_r: 1.0
   stop_atr: 3.0
+  risk_pct_per_set: 0.5    # lot dihitung dari % risiko ...
+  fixed_leg_lot: 0.0       # ... atau lot tetap per posisi, mis. 0.01 untuk akun Cent Rp5-10 jt
+  max_risk_pct_per_set: 2.0
   respect_news: false      # filter berita tidak ikut diuji di backtest
 
 strategy:

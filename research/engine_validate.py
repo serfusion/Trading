@@ -34,6 +34,9 @@ if __name__ == "__main__":
     cfg.strategy.entry_tf = tf
     cfg.strategy.bars = 60
     cfg.risk.risk_pct = a.risk
+    cfg.trend.risk_pct_per_set = a.risk
+    cfg.trend.state_dir = "/tmp/xau_state_" + a.name + (a.f or "") + (a.t or "")
+    import shutil; shutil.rmtree(cfg.trend.state_dir, ignore_errors=True)
     cfg.risk.max_spread = 5.0
     t0 = time.time()
     res = run_backtest(cfg, df, spread=a.spread or spread, balance=a.balance)

@@ -32,11 +32,12 @@ Fitur umum:
 4. `python -m xau_bot app` → tampilkan **server & topik** untuk aplikasi Android.
 5. Setelah yakin, eksekusi otomatis: `python -m xau_bot run --auto`.
 
-## Sinyal 24 jam tanpa PC (Vercel + Supabase)
+## Sinyal + auto order 24 jam tanpa PC (Vercel + Supabase + MetaApi)
 
 Tidak punya PC/VPS Windows? Folder `cloud/` bisa di-deploy ke Vercel dan dijadwalkan oleh
 Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke aplikasi lewat
-ntfy. Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md). Hanya sinyal (tanpa order otomatis).
+ntfy. Opsional: auto order ke akun MT5 Exness lewat MetaApi, dinyalakan/dijeda/diatur lot dari
+tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md).
 
 ## Aplikasi Android "XAU Signal"
 
@@ -49,6 +50,9 @@ ntfy. Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md). Hanya sinyal (tanpa ord
   sinyal BUY/SELL & TUTUP beserta hasil BENAR/SALAH, dan notifikasi bersuara.
 - Sinyal dikirim lewat [ntfy](https://ntfy.sh) (open-source). Topik acak = kunci rahasia, jangan
   dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
+- Tab **Statistik**: menang/kalah & profit/rugi harian, mingguan, bulanan + konversi Rupiah.
+- Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, TUTUP SEMUA, saldo
+  dan posisi bot yang sedang terbuka — semua dari HP.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
 
 ## 1. Instalasi lengkap (Windows / VPS Windows)

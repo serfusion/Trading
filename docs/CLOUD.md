@@ -4,13 +4,16 @@
 Supabase pg_cron (menit :02 & :32 tiap jam)
    └─ GET https://DOMAIN_KAMU/api/tick?key=RAHASIA   (fungsi Python di Vercel, folder cloud/)
         ├─ ambil candle H1 XAU/USD dari Twelve Data
-        ├─ logika TREND H1 (identik dengan bot, diuji di tests/test_cloud.py)
+        ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
+        │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
-        └─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
+        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
+        └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
-Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 106 sinyal, 41,5% benar,
-**+30,9R** (`python -m research.cloud_check`). Hanya SINYAL — order tetap dibuka manual di MT5/HP.
+Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 343 sinyal (3 set), 48,7% untung,
+**+65,2R** (`python -m research.cloud_check`). Default hanya SINYAL; auto order 24 jam tanpa PC bisa
+dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).
 
 ## Langkah 1 — Twelve Data (harga emas)
 1. Daftar gratis di <https://twelvedata.com> → Dashboard → salin **API Key**.
@@ -35,6 +38,8 @@ di aplikasi.
 | `CRON_SECRET` | kata sandi acak panjang buatanmu, mis. `k9Qm2...` |
 | `NTFY_SERVER` | (opsional) default `https://ntfy.sh` |
 | `SYMBOL` | (opsional) default `XAU/USD` |
+| `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
+| `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -53,11 +58,66 @@ di aplikasi.
 3. Di Supabase: `select status_code, content from net._http_response order by created desc limit 5;`
    → status 200 setiap 30 menit.
 
+## Langkah 6 — Auto order dari HP, tanpa PC (MetaApi, opsional)
+MT5 di HP tidak bisa menjalankan bot/EA, jadi order dieksekusi dari server: Vercel mengirim order ke
+[MetaApi](https://metaapi.cloud) (layanan resmi yang menjalankan terminal MT5 di cloud), MetaApi
+meneruskannya ke akun Exness. Aplikasi Android (tab **Auto**) hanya remote control, jadi HP boleh mati.
+
+> ⚠️ Mulai dengan akun **DEMO** Exness minimal 1–2 minggu. Auto order default **OFF** — walau semua
+> variabel sudah diisi, tidak ada order sampai kamu menyalakannya di aplikasi.
+
+1. **MetaApi**: daftar di <https://app.metaapi.cloud> → **Accounts → Add account**:
+   - Platform **MT5**, Login = nomor akun Exness, Password = **password trading** (bukan investor),
+     Server = nama server persis seperti di MT5 (mis. `Exness-MT5Trial9` untuk demo).
+   - Simpan → tunggu status **Deployed / Connected**. Catat **Account ID** dan **region** akun
+     (mis. `new-york`, `london`, `singapore`).
+   - Menu **API access / Token** → buat token → salin.
+   - Cek halaman harga MetaApi: ada kuota gratis/percobaan, akun yang aktif terus bisa dikenai biaya.
+2. **Vercel → Settings → Environment Variables**, tambah lalu **Redeploy**:
+
+| Nama | Isi |
+|---|---|
+| `METAAPI_TOKEN` | token MetaApi — rahasia |
+| `METAAPI_ACCOUNT_ID` | Account ID dari MetaApi |
+| `METAAPI_REGION` | region akun, default `new-york` |
+| `BROKER_SYMBOL` | simbol di MT5: `XAUUSDc` (Standard Cent, default), `XAUUSDm` (Standard), `XAUUSD` (Pro/Raw/Zero) — cek di Market Watch |
+| `CONTROL_KEY` | kata sandi acak panjang (beda dari `CRON_SECRET`) untuk aplikasi — rahasia |
+| `MAX_LEG_LOT` | (opsional) batas lot per posisi yang boleh diatur dari HP, default `0.10` |
+
+3. **Supabase → SQL Editor**: saat auto aktif, jalankan tick tiap 5 menit supaya TP1/SL+/TUTUP cepat
+   (288 panggilan/hari, masih di bawah kuota gratis Twelve Data 800):
+   ```sql
+   select cron.unschedule('xau-tick');
+   select cron.schedule('xau-tick', '*/5 * * * *', $$ select net.http_get(
+     url := 'https://DOMAIN_KAMU/api/tick?key=CRON_SECRET_KAMU', timeout_milliseconds := 60000); $$);
+   ```
+4. **Aplikasi (v1.2+) → tab Auto** → URL cloud (mis. `https://superfal-dev.com`) + `CONTROL_KEY` →
+   **Simpan & hubungkan**. Harus muncul saldo akun MetaApi dan "AUTO OFF".
+5. Atur **Lot/posisi** (akun Cent Rp5–10 jt: `0.01`) dan **Jumlah posisi** (`5`) → **Simpan lot** →
+   nyalakan **Auto order**.
+
+Cara kerja order (sama dengan sinyal & bot PC, skema F):
+- Sinyal baru → 5 market order, semua dengan **SL sungguhan di server broker**; posisi #1 juga TP1 (1R).
+- TP1 kena → SL 4 posisi sisa dipindah ke harga isi masing-masing ± 0,10 (SL+).
+- Sinyal TUTUP / SL virtual → semua posisi set itu ditutup.
+- Anti dobel: status disimpan ke Supabase **sebelum** order dikirim, order hanya dikirim bila set itu
+  tidak punya posisi, dan tiap set memakai magic sendiri (250936–250938). Posisi manual / EA lain
+  tidak pernah disentuh.
+- MetaApi gangguan → sinyal tetap terkirim, auto order set itu dilewati (ada notifikasi ⚠️).
+- **Auto OFF / Jeda** = tidak membuka order baru; posisi yang sudah terbuka tetap dikelola.
+- **TUTUP SEMUA** = tutup semua posisi bot di harga pasar lalu auto dijeda.
+- Jangan jalankan bot PC `run --auto` di akun yang sama bersamaan (magic sama → saling mengelola).
+
+Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan header
+`X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
+`{"close_all": true}`.
+
 ## Catatan
 - Sinyal BUY/SELL hanya muncul saat breakout H1 (rata-rata ±1–2 kali per minggu). Status/harga
   dikirim setiap tick, jadi aplikasi tetap terlihat "hidup".
 - Harga Twelve Data bisa selisih beberapa sen dari Exness; cek harga broker sebelum entry.
-- SL dicek setiap tick (30 menit) → **selalu pasang SL sungguhan di MT5** saat membuka posisi.
+- SL virtual dicek setiap tick → saat entry manual **selalu pasang SL sungguhan di MT5** (auto order
+  sudah otomatis memasang SL di server broker).
 - Jangan jalankan bot PC (`python -m xau_bot run`) dan versi cloud ke topik yang sama bersamaan,
   kecuali ingin menerima dua sumber sinyal.
 - Kalau `ok: false`, pesan `error` menjelaskan penyebabnya (mis. env belum diisi, API key salah).
