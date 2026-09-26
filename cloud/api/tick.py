@@ -18,11 +18,14 @@ def run() -> tuple[int, dict]:
                if not env.get(k)]
     if missing:
         return 500, {"ok": False, "error": f"Environment variable belum diisi: {', '.join(missing)}"}
+    cfg = {**_core.CFG, "legs": int(env.get("LEGS", _core.CFG["legs"])),
+           "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"]))}
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
         _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"]),
         _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
+        cfg,
         symbol=env.get("SYMBOL", "XAU/USD"),
     )
     return 200, result

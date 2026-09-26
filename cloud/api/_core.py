@@ -1,8 +1,9 @@
 """Inti bot sinyal cloud (Vercel + Supabase + ntfy) — hanya library standar Python.
 
-Logika trend IDENTIK dengan xau_bot/trend.py (diuji di tests/test_cloud.py):
-- BUY  bila close H1 > high tertinggi 55 bar sebelumnya; SELL bila close < low terendah 55 bar.
-- SL = entry -/+ 3 x ATR(20); keluar saat close menembus channel 20 bar berlawanan.
+Skema F-ensemble, IDENTIK dengan bot (xau_bot/trend.py + trend_ensemble.py; diuji di tests/test_cloud.py):
+- 3 set Donchian H1 (40/15, 55/20, 80/30). BUY bila close > high N bar sebelumnya, SELL kebalikannya.
+- SL = entry -/+ 3 x ATR(20). Tiap sinyal = 5 posisi: posisi #1 TP1 = 1R, sisanya hold.
+- TP1 kena -> SL posisi sisa ke entry (SL+). TUTUP saat close menembus channel exit.
 """
 from __future__ import annotations
 
@@ -13,7 +14,18 @@ import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
-CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 150, "tf_minutes": 60}
+CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 150, "tf_minutes": 60,
+       "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
+       "leg_lot": 0.01}
+
+
+def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
+             tp1_r: float) -> float:
+    """R rata-rata per posisi untuk skema F (sama dengan xau_bot/trend_ensemble.f_result)."""
+    exit_r = (exit_price - entry) * sign / risk if risk else 0.0
+    if legs >= 2 and tp1_hit:
+        return (tp1_r + (legs - 1) * exit_r) / legs
+    return exit_r
 
 
 @dataclass
@@ -145,66 +157,100 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     closed = [b for b in bars if b.t + tf <= now]
     price = bars[-1].c
     state = store.get_state() or {}
-    v = state.get("virtual")
+    state.pop("virtual", None)  # format lama (1 set)
+    systems = state.get("systems") or {}
     events: list[str] = []
+    lot_text = f"{cfg['legs']} x {cfg['leg_lot']}"
 
-    def close_virtual(exit_price: float, why: str) -> None:
-        nonlocal v
+    def close_virtual(name: str, v: dict, exit_price: float, why: str) -> None:
         sign = 1 if v["dir"] == "BUY" else -1
         points = (exit_price - v["entry"]) * sign
-        risk = abs(v["entry"] - v["sl"]) or 1.0
-        r = points / risk
-        ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "dir": v["dir"],
-              "entry": v["entry"], "price": round(exit_price, 3), "points": round(points, 3),
-              "r": round(r, 2), "reason": why}
-        text = (f"🏁 TUTUP {v['dir']} {symbol} @ {exit_price:.2f}\n"
-                f"Entry {v['entry']:.2f} -> {points:+.2f} poin ({r:+.2f}R)\nAlasan: {why}")
+        r = f_result(v["legs"], v["entry"], v["risk"], sign, v.get("tp1_hit", False), exit_price, cfg["tp1_r"])
+        ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name,
+              "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
+              "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
+              "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "reason": why}
+        text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
+                f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
         pub.publish(ev, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
         store.log("close", ev)
-        events.append(f"TUTUP {v['dir']} {r:+.2f}R")
-        v = None
+        events.append(f"{name} TUTUP {v['dir']} {r:+.2f}R")
 
-    # 1) SL posisi virtual (dicek terhadap semua bar sejak entry, termasuk bar berjalan)
-    if v:
-        since = parse_iso(v["bar_close"])
-        after = [b for b in bars if b.t >= since]
-        if v["dir"] == "BUY" and any(b.l <= v["sl"] for b in after):
-            close_virtual(v["sl"], "Stop loss tersentuh")
-        elif v["dir"] == "SELL" and any(b.h >= v["sl"] for b in after):
-            close_virtual(v["sl"], "Stop loss tersentuh")
+    def manage(name: str, v: dict | None) -> dict | None:
+        """Cek SL / TP1 / SL+ secara berurutan per bar sejak entry (konservatif: SL dulu)."""
+        if not v:
+            return None
+        buy = v["dir"] == "BUY"
+        if not v.get("be_done"):
+            for b in (b for b in bars if b.t >= parse_iso(v["bar_close"])):
+                if (b.l <= v["sl"]) if buy else (b.h >= v["sl"]):
+                    close_virtual(name, v, v["sl"], "Stop loss tersentuh")
+                    return None
+                if (b.h >= v["tp1"]) if buy else (b.l <= v["tp1"]):
+                    v.update(be_done=True, tp1_hit=True, be_bar=iso(b.t),
+                             sl=v["entry"] + (1 if buy else -1) * cfg["be_offset"])
+                    text = (f"🎯 [{name}] TP1 {v['tp1']:.2f} kena ({v['dir']})\n"
+                            f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.2f} (SL+)")
+                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": v["id"], "text": text},
+                                text, "TP1 + SL+", 5, ["dart"])
+                    store.log("tp1", {"id": v["id"], "set": name, "sl": v["sl"]})
+                    events.append(f"{name} TP1 -> SL+")
+                    break
+        if v.get("be_done"):
+            for b in (b for b in bars if b.t > parse_iso(v["be_bar"])):
+                if (b.l <= v["sl"]) if buy else (b.h >= v["sl"]):
+                    close_virtual(name, v, v["sl"], "SL+ (break-even) tersentuh")
+                    return None
+        return v
 
-    # 2) evaluasi hanya sekali per bar H1 yang baru tertutup
-    sig = {"state": "-"}
-    if closed and state.get("last_bar") != iso(closed[-1].t):
-        state["last_bar"] = iso(closed[-1].t)
-        sig = evaluate(closed, v["dir"] if v else None, cfg)
-        if sig["action"] == "close" and v:
-            close_virtual(price, sig["note"])
-        elif sig["action"] == "open" and v is None:
-            d = sig["dir"]
-            sign = 1 if d == "BUY" else -1
-            sl = price - sign * cfg["stop_atr"] * sig["atr"]
-            key = f"TREND-{d}-{closed[-1].t:%Y%m%d%H%M}"
-            ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "dir": d,
-                  "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": None,
-                  "atr": round(sig["atr"], 3), "timeframe": "H1", "status": "signal",
-                  "exit_rule": f"close H1 menembus channel {cfg['exit']} bar", "reason": sig["note"],
-                  "lot": None, "warning": "Harga dari data feed; cek harga broker sebelum entry."}
-            text = (f"{'🟢' if d == 'BUY' else '🔴'} TREND {d} {symbol} (H1 Donchian {cfg['entry']}/{cfg['exit']})\n"
-                    f"Entry: {price:.2f} (market) | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
-                    f"TP: tidak ada - tunggu sinyal TUTUP\nAlasan: {sig['note']}")
-            pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
-            store.log("signal", ev)
-            events.append(f"SINYAL {d} @ {price:.2f}")
-            v = {"id": key, "dir": d, "entry": price, "sl": sl, "bar_close": iso(closed[-1].t + tf)}
-        state["trend"] = sig["state"]
+    trends = []
+    for entry_p, exit_p in cfg["sets"]:
+        name = f"T{entry_p}/{exit_p}"
+        sc = {**cfg, "entry": entry_p, "exit": exit_p}
+        s = dict(systems.get(name) or {})
+        v = manage(name, s.get("virtual"))
+        if closed and s.get("last_bar") != iso(closed[-1].t):
+            s["last_bar"] = iso(closed[-1].t)
+            sig = evaluate(closed, v["dir"] if v else None, sc)
+            if sig["action"] == "close" and v:
+                close_virtual(name, v, price, sig["note"])
+                v = None
+            elif sig["action"] == "open" and v is None:
+                d = sig["dir"]
+                sign = 1 if d == "BUY" else -1
+                risk = cfg["stop_atr"] * sig["atr"]
+                sl = price - sign * risk
+                tp1 = price + sign * cfg["tp1_r"] * risk
+                key = f"{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
+                ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
+                      "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
+                      "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
+                      "legs": cfg["legs"], "lot": lot_text, "timeframe": "H1", "status": "signal",
+                      "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
+                      "warning": "Harga dari data feed; cek harga broker sebelum entry."}
+                text = (f"{'🟢' if d == 'BUY' else '🔴'} TREND {d} {symbol} [{name}] skema F\n"
+                        f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
+                        f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
+                        f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
+                pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
+                store.log("signal", ev)
+                events.append(f"{name} SINYAL {d} @ {price:.2f}")
+                v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
+                     "legs": cfg["legs"], "be_done": False, "tp1_hit": False,
+                     "bar_close": iso(closed[-1].t + tf)}
+            s["trend"] = sig["state"]
+        s["virtual"] = v
+        systems[name] = s
+        trends.append(f"{name}: {s.get('trend', '-')}")
 
-    state["virtual"] = v
+    state["systems"] = systems
     state["last_tick"] = iso(now)
     state["price"] = price
     store.save_state(state)
+    trend_text = " | ".join(trends)
     pub.publish({"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price,
-                 "mode": "SINYAL (cloud)", "trend": state.get("trend", "-"), "session": "cloud",
+                 "mode": "SINYAL (cloud)", "trend": trend_text, "session": "cloud",
                  "block": "", "news": "-", "currency": "", "positions": []})
-    return {"ok": True, "price": price, "last_closed_bar": state.get("last_bar"),
-            "virtual": v, "events": events, "trend": state.get("trend")}
+    return {"ok": True, "price": price, "last_closed_bar": iso(closed[-1].t) if closed else None,
+            "open": {k: v["virtual"] for k, v in systems.items() if v.get("virtual")},
+            "events": events, "trend": trend_text}

@@ -74,40 +74,66 @@ class FakePub:
         self.events.append(event)
 
 
-def run_ticks(df, every_minutes=30, double=False):
+def run_ticks(df, every_minutes=30, double=False, cfg=None):
+    cfg = cfg or _core.CFG
     prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
     now = df.index[60].to_pydatetime()
     end = df.index[-1].to_pydatetime() + timedelta(hours=1)
     while now <= end:
         prices.now = now
-        _core.tick(now, prices, store, pub)
+        _core.tick(now, prices, store, pub, cfg)
         if double:
-            _core.tick(now, prices, store, pub)   # cron terpanggil dua kali
+            _core.tick(now, prices, store, pub, cfg)   # cron terpanggil dua kali
         now += timedelta(minutes=every_minutes)
     return store, pub
 
 
-def test_tick_flow_signal_then_close_and_idempotent():
+ONE_SET = {**_core.CFG, "sets": [(55, 20)]}
+
+
+def test_tick_flow_ensemble_signal_close_and_idempotent():
     df = bars_from_path(trend_path(), start="2026-09-14 00:00", freq="1h", wick=0.5)
     store, pub = run_ticks(df)
     sig = [e for e in pub.events if e["type"] == "signal"]
     cls = [e for e in pub.events if e["type"] == "close"]
-    assert sig and sig[0]["dir"] == "BUY"
-    assert cls and cls[0]["id"] == sig[0]["id"] and cls[0]["points"] > 0
-    assert len(sig) - len(cls) in (0, 1)
+    assert sig and {e["set"] for e in sig} >= {"T40/15", "T55/20"}
+    ids = {e["id"] for e in sig}
+    assert all(c["id"] in ids for c in cls)                 # setiap TUTUP punya sinyal
+    for name in {e["set"] for e in sig}:
+        n_sig = sum(1 for e in sig if e["set"] == name)
+        n_cls = sum(1 for e in cls if e["set"] == name)
+        assert n_sig - n_cls in (0, 1)                      # tidak ada entry ganda per set
+    first = sig[0]
+    assert first["tp1"] > first["entry"] > first["sl"] and first["legs"] == 5 and first["lot"] == "5 x 0.01"
+    assert any(e["type"] == "info" and "TP1" in e["text"] for e in pub.events)
     assert any(e["type"] == "heartbeat" for e in pub.events)
     _, pub2 = run_ticks(df, double=True)
-    sig2 = [e for e in pub2.events if e["type"] == "signal"]
-    assert [e["id"] for e in sig2] == [e["id"] for e in sig]    # tidak ada sinyal ganda
+    assert [e["id"] for e in pub2.events if e["type"] == "signal"] == [e["id"] for e in sig]
 
 
-def test_stop_loss_closes_virtual_position():
-    path = trend_path(n_flat=80, n_up=30, n_down=0)
-    crash = list(np.linspace(path[-1], path[-1] - 80, 6))
-    df = bars_from_path(path + crash + [path[-1] - 80] * 10, start="2026-09-14 00:00", freq="1h", wick=0.5)
-    _, pub = run_ticks(df)
+def test_stop_loss_before_tp1_is_minus_one_r():
+    flat = [4300 + 2 * np.sin(i / 2) for i in range(80)]
+    top = flat[-1] + 4
+    df = bars_from_path(flat + [top] + list(np.linspace(top, top - 60, 3)) + [top - 60] * 10,
+                        start="2026-09-14 00:00", freq="1h", wick=0.5)
+    _, pub = run_ticks(df, cfg=ONE_SET)
     cls = [e for e in pub.events if e["type"] == "close"]
     assert cls and cls[0]["reason"] == "Stop loss tersentuh" and cls[0]["r"] == -1.0
+    assert not any(e["type"] == "info" and "TP1" in e.get("text", "") for e in pub.events)
+
+
+def test_tp1_then_break_even_is_small_profit():
+    flat = [4300 + 2 * np.sin(i / 2) for i in range(80)]
+    top = flat[-1] + 4
+    rise = list(np.linspace(top, top + 25, 4))
+    df = bars_from_path(flat + [top] + rise + list(np.linspace(rise[-1], top - 40, 4)) + [top - 40] * 10,
+                        start="2026-09-14 00:00", freq="1h", wick=0.5)
+    _, pub = run_ticks(df, cfg=ONE_SET)
+    info = [e for e in pub.events if e["type"] == "info" and "TP1" in e.get("text", "")]
+    cls = [e for e in pub.events if e["type"] == "close"]
+    assert info and cls
+    assert cls[0]["reason"] == "SL+ (break-even) tersentuh" and cls[0]["tp1_hit"]
+    assert 0.15 < cls[0]["r"] < 0.3                       # (1R + 4 x ~0R) / 5
 
 
 def test_twelvedata_parsing(monkeypatch):

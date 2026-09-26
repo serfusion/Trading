@@ -156,8 +156,8 @@ class TrendSystem:
                 self._save(st)
                 text = f"🛡️ {self.name} TP1 tercapai -> SL {len(positions)} posisi dipindah ke {be:.2f} (SL+)"
                 self.e.log(text, notify=True)
-                self.e.publisher.publish({"type": "info", "time": now, "text": text}, text, "SL+ aktif", 4,
-                                         ["shield"])
+                self.e.publisher.publish({"type": "info", "time": now, "id": st["key"], "set": self.name,
+                                          "text": text}, text, "SL+ aktif", 4, ["shield"])
 
     def _manage_virtual(self, now, tick: Tick, lo: float, hi: float) -> None:
         st = self.state
@@ -176,7 +176,8 @@ class TrendSystem:
             text = (f"🎯 {self.name} TP1 {st['tp1']:.2f} kena ({st['dir'].label})\n"
                     f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {st['sl']:.2f} (SL+)")
             self.e.log(text.replace("\n", " | "), notify=self.e.cfg.signals_enabled)
-            self.e.publisher.publish({"type": "info", "time": now, "text": text}, text, "TP1 + SL+", 5, ["dart"])
+            self.e.publisher.publish({"type": "info", "time": now, "id": st["key"], "set": self.name,
+                                      "text": text}, text, "TP1 + SL+", 5, ["dart"])
 
     def _close_virtual(self, now, price: float, why: str) -> None:
         st = self.state
@@ -189,8 +190,10 @@ class TrendSystem:
         self.e.log(text.replace("\n", " | "), notify=self.e.cfg.signals_enabled)
         self.e.publisher.publish({"type": "close", "id": st["key"], "time": now, "mode": "trend",
                                   "set": self.name, "dir": st["dir"].label, "entry": st["entry"],
-                                  "price": round(price, 3), "points": round(points, 3), "r": round(r, 2),
-                                  "reason": why}, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
+                                  "price": round(price, 3), "points": round(points, 3), "r": round(r, 3),
+                                  "risk_points": round(st["risk"], 3), "legs": st["legs"],
+                                  "tp1_hit": st.get("tp1_hit", False), "reason": why},
+                                 text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
         self._save(None)
 
     # --------------------------------------------------------------- sinyal
@@ -223,10 +226,12 @@ class TrendSystem:
             text = f"🏁 {self.name} {positions[0].direction.label} ditutup ({len(positions)} posisi): {why} " \
                    f"(PnL {self.e.money(total)})"
             self.e.log(text, notify=True)
-            self.e.publisher.publish({"type": "close", "id": (self.state or {}).get("key", self.name),
+            st = self.state or {}
+            self.e.publisher.publish({"type": "close", "id": st.get("key", self.name),
                                       "time": now, "mode": "trend", "set": self.name,
                                       "dir": positions[0].direction.label, "price": tick.bid, "pnl": total,
-                                      "reason": why}, text, "Posisi ditutup", 4, ["checkered_flag"])
+                                      "currency": self.e.currency, "reason": why},
+                                     text, "Posisi ditutup", 4, ["checkered_flag"])
         self._save(None)
 
     def _open(self, now, tick: Tick, account, bars: pd.DataFrame, sig) -> None:
@@ -243,7 +248,20 @@ class TrendSystem:
         spec = e.spec
         reason = e._trend_block_reason(now, tick, account)
         n_legs, per_leg, warn, risk_money = 0, 0.0, "", 0.0
-        if reason is None:
+        money_per_lot = abs(entry - sl) * spec.tick_value / spec.tick_size
+        if reason is None and cfg.fixed_leg_lot > 0:
+            n_legs, per_leg = cfg.legs, round_volume(max(cfg.fixed_leg_lot, spec.volume_min), spec)
+            risk_money = n_legs * per_leg * money_per_lot
+            pct = risk_money / account.balance * 100 if account.balance else 999
+            if pct > cfg.max_risk_pct_per_set:
+                msg = f"Lot tetap {n_legs}x{per_leg} = risiko {pct:.1f}% > batas {cfg.max_risk_pct_per_set}%"
+                if e.cfg.trade_enabled:
+                    reason = msg
+                else:
+                    warn = f"⚠️ {msg}"
+            if reason is None and e.cfg.trade_enabled and not e.throttle.allow(n_legs):
+                reason = "Batas order per menit tercapai"
+        elif reason is None:
             total, risk_money, note = lot_size(account.balance, cfg.risk_pct_per_set, entry, sl, spec,
                                                e.cfg.risk.allow_min_lot_over_risk)
             if total <= 0:
@@ -279,10 +297,12 @@ class TrendSystem:
             return
         self.last_skip = None
         e.journal.add_key(key, now)  # dicatat SEBELUM order -> tidak mungkin dobel
-        lines.append(f"Lot: {n_legs} x {per_leg} | risiko {e.money(risk_money)} ({cfg.risk_pct_per_set}%)")
+        pct_text = f"{risk_money / account.balance * 100:.2f}%" if account.balance else "-"
+        lines.append(f"Lot: {n_legs} x {per_leg} | risiko {e.money(risk_money)} ({pct_text} saldo)")
         if warn:
             lines.append(warn)
-        event.update(lot=f"{n_legs}x{per_leg}", legs=n_legs, risk=round(risk_money, 2), warning=warn)
+        event.update(lot=f"{n_legs}x{per_leg}", legs=n_legs, leg_lot=per_leg, risk=round(risk_money, 2),
+                     risk_points=round(risk, 3), currency=e.currency, warning=warn)
         state = {"key": key, "dir": direction, "entry": entry, "sl": sl, "risk": risk, "tp1": tp1,
                  "legs": n_legs, "be_done": False, "tp1_hit": False, "time": now}
         tags = ["green_circle" if direction == Direction.BUY else "red_circle"]

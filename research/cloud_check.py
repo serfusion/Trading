@@ -59,10 +59,14 @@ def main():
         _core.tick(t, prices, store, pub)
         t += timedelta(minutes=30)
     closes = [e for e in pub.events if e["type"] == "close"]
+    print(f"Cloud F-ensemble (tick 30 menit) {m5.index[0]:%Y-%m-%d} -> {m5.index[-1]:%Y-%m-%d}")
+    for name in sorted({e.get("set", "-") for e in closes}):
+        r = [e["r"] for e in closes if e.get("set") == name]
+        wins = sum(1 for x in r if x > 0)
+        print(f"  {name}: {len(r)} sinyal | untung {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R")
     r = [e["r"] for e in closes]
     wins = sum(1 for x in r if x > 0)
-    print(f"Cloud (tick 30 menit) {m5.index[0]:%Y-%m-%d} -> {m5.index[-1]:%Y-%m-%d}: "
-          f"{len(r)} sinyal selesai | benar {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R | "
+    print(f"  SEMUA: {len(r)} sinyal | untung {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R | "
           f"rata-rata {sum(r) / len(r):+.3f}R")
 
 

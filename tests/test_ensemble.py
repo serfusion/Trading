@@ -208,3 +208,40 @@ def test_ensemble_three_sets_independent_magics(tmp_path):
         per_magic.setdefault(c[5], 0)
         per_magic[c[5]] += 1
     assert per_magic and all(n % 5 == 0 and n <= 10 for n in per_magic.values())
+
+
+def test_fixed_leg_lot_for_cent_account(tmp_path):
+    m15 = bars_from_path(np.repeat(trend_path(), 4), start="2026-09-14 00:00", freq="15min", wick=0.3)
+    cfg = AppConfig()
+    cfg.trade_enabled = True
+    cfg.news.enabled = False
+    cfg.trend.ensemble = [[55, 20]]
+    cfg.trend.state_dir = str(tmp_path / "trend")
+    cfg.trend.fixed_leg_lot = 0.01
+    broker = CountingBroker({cfg.broker.symbol: m15}, "M15", XAU_SPEC, spread=0.2, balance=30_000,
+                            start_index=240)       # ~Rp5 jt di akun Cent = 30.000 USC
+    eng = Engine(cfg, broker, Notifier(), NewsFilter(cfg.news), Journal(":memory:"),
+                 clock=lambda: broker.now, publisher=Pub())
+    assert eng.start()
+    step_all(eng, broker)
+    buys = [c for c in broker.market_calls if c[1] == Direction.BUY]
+    assert len(buys) == 5 and all(c[2] == pytest.approx(0.01) for c in buys)
+
+
+def test_fixed_leg_lot_blocked_when_too_risky(tmp_path):
+    m15 = bars_from_path(np.repeat(trend_path(), 4), start="2026-09-14 00:00", freq="15min", wick=0.3)
+    cfg = AppConfig()
+    cfg.trade_enabled = True
+    cfg.news.enabled = False
+    cfg.trend.ensemble = [[55, 20]]
+    cfg.trend.state_dir = str(tmp_path / "trend")
+    cfg.trend.fixed_leg_lot = 0.01
+    pub = Pub()
+    broker = CountingBroker({cfg.broker.symbol: m15}, "M15", XAU_SPEC, spread=0.2, balance=300,
+                            start_index=240)       # saldo terlalu kecil untuk 5 x 0.01
+    eng = Engine(cfg, broker, Notifier(), NewsFilter(cfg.news), Journal(":memory:"),
+                 clock=lambda: broker.now, publisher=pub)
+    assert eng.start()
+    step_all(eng, broker)
+    assert broker.market_calls == []
+    assert any("batas" in e.get("note", "") for e in pub.events if e.get("status") == "skipped")

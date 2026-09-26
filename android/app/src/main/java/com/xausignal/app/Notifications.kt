@@ -47,9 +47,16 @@ object Notifications {
             .build()
 
     fun signal(context: Context, event: SignalEvent) {
-        val title = "${if (event.dir == "BUY") "🟢" else "🔴"} ${event.dir} XAUUSD @ ${fmt(event.num("entry"))}"
-        val text = "SL ${fmt(event.num("sl"))} • lot ${event.str("lot").ifBlank { "-" }} • ${event.str("reason")}"
+        val title = "${if (event.dir == "BUY") "🟢" else "🔴"} ${event.dir} XAUUSD ${event.str("set")} @ ${fmt(event.num("entry"))}"
+        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • lot ${event.str("lot").ifBlank { "-" }}\n" +
+            "TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP."
         post(context, event.id.hashCode(), title, text)
+    }
+
+    fun info(context: Context, event: SignalEvent) {
+        val text = event.str("text")
+        val title = text.lineSequence().firstOrNull() ?: "XAU Signal"
+        post(context, (event.id + "info").hashCode(), title, text)
     }
 
     fun close(context: Context, event: SignalEvent) {
@@ -67,6 +74,7 @@ object Notifications {
             .setSmallIcon(R.drawable.ic_stat)
             .setContentTitle(title)
             .setContentText(text)
+            .setSubText(BRAND)
             .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)

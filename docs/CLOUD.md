@@ -4,13 +4,14 @@
 Supabase pg_cron (menit :02 & :32 tiap jam)
    └─ GET https://DOMAIN_KAMU/api/tick?key=RAHASIA   (fungsi Python di Vercel, folder cloud/)
         ├─ ambil candle H1 XAU/USD dari Twelve Data
-        ├─ logika TREND H1 (identik dengan bot, diuji di tests/test_cloud.py)
+        ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
+        │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
         └─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
 ```
 
-Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 106 sinyal, 41,5% benar,
-**+30,9R** (`python -m research.cloud_check`). Hanya SINYAL — order tetap dibuka manual di MT5/HP.
+Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 343 sinyal (3 set), 48,7% untung,
+**+65,2R** (`python -m research.cloud_check`). Hanya SINYAL — order tetap dibuka manual di MT5/HP.
 
 ## Langkah 1 — Twelve Data (harga emas)
 1. Daftar gratis di <https://twelvedata.com> → Dashboard → salin **API Key**.
@@ -35,6 +36,8 @@ di aplikasi.
 | `CRON_SECRET` | kata sandi acak panjang buatanmu, mis. `k9Qm2...` |
 | `NTFY_SERVER` | (opsional) default `https://ntfy.sh` |
 | `SYMBOL` | (opsional) default `XAU/USD` |
+| `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
+| `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.

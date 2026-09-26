@@ -40,6 +40,22 @@ fun fmt(value: Double?, digits: Int = 2): String =
 
 data class Stats(val closed: Int, val wins: Int, val totalR: Double)
 
+/** Pengaturan uang untuk menghitung profit/rugi dari sinyal. */
+data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Double) {
+    val currency: String get() = if (cent) "USC" else "USD"
+}
+
+data class PeriodStats(
+    val label: String,
+    val wins: Int,
+    val losses: Int,
+    val profit: Double,   // jumlah untung (mata uang akun)
+    val loss: Double,     // jumlah rugi (negatif)
+) {
+    val net: Double get() = profit + loss
+    val total: Int get() = wins + losses
+}
+
 /** Penyimpanan sinyal (memori + SharedPreferences) yang dipakai layar & service. */
 object SignalRepository {
     private const val PREFS = "xau_signal"
@@ -64,6 +80,54 @@ object SignalRepository {
     }
 
     fun server(): String = prefs?.getString("server", DEFAULT_SERVER) ?: DEFAULT_SERVER
+
+    fun money(): MoneySettings = MoneySettings(
+        cent = prefs?.getBoolean("cent", true) ?: true,
+        legLot = (prefs?.getFloat("leg_lot", 0.01f) ?: 0.01f).toDouble(),
+        idrRate = (prefs?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble(),
+    )
+
+    fun saveMoney(m: MoneySettings) {
+        prefs?.edit()?.putBoolean("cent", m.cent)?.putFloat("leg_lot", m.legLot.toFloat())
+            ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
+        _moneyVersion.value = _moneyVersion.value + 1
+    }
+
+    private val _moneyVersion = MutableStateFlow(0)
+    val moneyVersion: StateFlow<Int> = _moneyVersion
+
+    /** Profit/rugi satu sinyal TUTUP dalam mata uang akun (USD atau USC). */
+    fun amount(e: SignalEvent, m: MoneySettings): Double? {
+        e.num("pnl")?.let { return it }
+        val r = e.num("r") ?: return null
+        val risk = e.num("risk_points") ?: return null
+        val legs = e.num("legs") ?: 5.0
+        // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
+        return r * risk * legs * (m.legLot / 0.01)
+    }
+
+    fun toIdr(amount: Double, m: MoneySettings): Double =
+        if (m.cent) amount / 100.0 * m.idrRate else amount * m.idrRate
+
+    private fun zoned(e: SignalEvent): java.time.ZonedDateTime? = try {
+        OffsetDateTime.parse(e.str("time").replace(" ", "T")).atZoneSameInstant(WIB)
+    } catch (ex: Exception) {
+        null
+    }
+
+    fun periodStats(events: List<SignalEvent>, m: MoneySettings, keyOf: (java.time.ZonedDateTime) -> String,
+                    labelOf: (String) -> String = { it }): List<PeriodStats> {
+        val groups = LinkedHashMap<String, MutableList<Double>>()
+        events.filter { it.type == "close" }.forEach { e ->
+            val t = zoned(e) ?: return@forEach
+            val a = amount(e, m) ?: return@forEach
+            groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
+        }
+        return groups.entries.sortedByDescending { it.key }.map { (k, v) ->
+            PeriodStats(labelOf(k), v.count { it > 0 }, v.count { it <= 0 },
+                v.filter { it > 0 }.sum(), v.filter { it <= 0 }.sum())
+        }
+    }
     fun topic(): String = prefs?.getString("topic", "") ?: ""
     fun lastMessageId(): String? = prefs?.getString("last_id", null)
 
@@ -102,13 +166,16 @@ object SignalRepository {
         return event
     }
 
-    /** Sinyal terakhir yang belum punya sinyal TUTUP. */
-    fun openSignal(events: List<SignalEvent>): SignalEvent? {
+    /** Semua sinyal (per set) yang belum punya sinyal TUTUP. */
+    fun openSignals(events: List<SignalEvent>): List<SignalEvent> {
         val closed = events.filter { it.type == "close" }.map { it.id }.toSet()
-        return events.firstOrNull {
+        return events.filter {
             it.type == "signal" && (it.status == "signal" || it.status == "opened") && it.id !in closed
         }
     }
+
+    fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean =
+        events.any { it.type == "info" && it.str("id") == signalId && it.str("text").contains("SL+") }
 
     fun stats(events: List<SignalEvent>): Stats {
         val closes = events.filter { it.type == "close" && it.num("r") != null }
