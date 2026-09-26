@@ -32,6 +32,12 @@ Fitur umum:
 4. `python -m xau_bot app` → tampilkan **server & topik** untuk aplikasi Android.
 5. Setelah yakin, eksekusi otomatis: `python -m xau_bot run --auto`.
 
+## Sinyal 24 jam tanpa PC (Vercel + Supabase)
+
+Tidak punya PC/VPS Windows? Folder `cloud/` bisa di-deploy ke Vercel dan dijadwalkan oleh
+Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke aplikasi lewat
+ntfy. Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md). Hanya sinyal (tanpa order otomatis).
+
 ## Aplikasi Android "XAU Signal"
 
 - APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "XAU Signal (APK terbaru)"**
