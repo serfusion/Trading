@@ -84,8 +84,15 @@ class TrendConfig:
     stop_atr: float = 3.0
     bars: int = 200
     respect_news: bool = False  # riset: entry dekat berita justru lebih baik -> default mati
-    virtual_file: str = "data/virtual_trend.json"  # posisi virtual di mode SINYAL
-    magic_offset: int = 1   # magic = broker.magic + offset (dipisah dari posisi SMC)
+    virtual_file: str = "data/virtual_trend.json"  # (lama) tidak dipakai lagi
+    magic_offset: int = 1   # magic per set = broker.magic + offset + 10 + index set
+    # Skema F-ensemble (docs/BACKTEST.md): 3 set parameter, tiap sinyal dipecah jadi `legs` posisi
+    ensemble: list = field(default_factory=lambda: [[40, 15], [55, 20], [80, 30]])
+    legs: int = 5
+    tp1_r: float = 1.0
+    risk_pct_per_set: float = 0.5
+    max_orders_per_minute: int = 20
+    state_dir: str = "data/trend"
 
 
 @dataclass

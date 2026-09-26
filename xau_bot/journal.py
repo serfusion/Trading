@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS tickets (
     ticket INTEGER PRIMARY KEY,
     setup_key TEXT, leg TEXT, placed TEXT, be_done INTEGER DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS keys (
+    key TEXT PRIMARY KEY, time TEXT
+);
 CREATE TABLE IF NOT EXISTS events (
     time TEXT, level TEXT, message TEXT
 );
@@ -32,6 +35,13 @@ class Journal:
         self.db = sqlite3.connect(path, check_same_thread=False)
         self.db.row_factory = sqlite3.Row
         self.db.executescript(SCHEMA)
+        self.db.commit()
+
+    def has_key(self, key: str) -> bool:
+        return self.db.execute("SELECT 1 FROM keys WHERE key=?", (key,)).fetchone() is not None
+
+    def add_key(self, key: str, time: pd.Timestamp) -> None:
+        self.db.execute("INSERT OR IGNORE INTO keys VALUES (?,?)", (key, str(time)))
         self.db.commit()
 
     def has_setup(self, key: str) -> bool:

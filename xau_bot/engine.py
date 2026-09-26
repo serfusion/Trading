@@ -1,11 +1,9 @@
 """Engine: loop 24 jam — ambil data, cari setup, eksekusi, kelola posisi, lapor."""
 from __future__ import annotations
 
-import json
 import logging
 import time as _time
 from collections import defaultdict, deque
-from pathlib import Path
 from typing import Callable
 
 import pandas as pd
@@ -22,6 +20,7 @@ from .strategy import TF_MINUTES, MarketContext, SmcStrategy
 from .publish import Publisher
 from .telegram import Notifier
 from .trend import TrendStrategy
+from .trend_ensemble import OrderThrottle, TrendSystem
 
 log = logging.getLogger(__name__)
 
@@ -39,8 +38,6 @@ class Engine:
         self.currency = "USD"
         self.cent = False
         self._last_heartbeat: pd.Timestamp | None = None
-        self.virtual: dict | None = None
-        self._last_trend_skip: tuple | None = None
         self.broker = broker
         self.notifier = notifier or Notifier()
         self.news = news or NewsFilter(cfg.news)
@@ -53,9 +50,10 @@ class Engine:
         self.magic = cfg.broker.magic
         self.trend_magic = cfg.broker.magic + cfg.trend.magic_offset
         self.trend = TrendStrategy(cfg.trend)
+        self.throttle = OrderThrottle(cfg.trend.max_orders_per_minute, self.clock)
+        self.trend_systems = [TrendSystem(self, i, ne, nx) for i, (ne, nx) in enumerate(cfg.trend.ensemble)]
         self.use_smc = cfg.strategy.mode in ("smc", "both")
         self.use_trend = cfg.strategy.mode in ("trend", "both")
-        self.last_trend_bar: pd.Timestamp | None = None
         self.status = EngineStatus()
         self.logs: deque[str] = deque(maxlen=14)
         self.paused = False
@@ -103,14 +101,15 @@ class Engine:
         parts = []
         if self.use_trend:
             t = self.cfg.trend
-            parts.append(f"TREND {t.timeframe} {t.entry_period}/{t.exit_period} SL {t.stop_atr}xATR")
+            sets = ", ".join(f"{a}/{b}" for a, b in t.ensemble)
+            parts.append(f"TREND {t.timeframe} F-ensemble [{sets}] {t.legs} posisi, TP1 {t.tp1_r}R, "
+                         f"SL {t.stop_atr}xATR, risiko {t.risk_pct_per_set}%/set")
         if self.use_smc:
             parts.append(f"SMC {self.cfg.strategy.entry_tf} (SMT: {', '.join(self.smt_symbols) or '-'})")
         acct = f"akun {'CENT ' if self.cent else ''}{self.currency}"
         self.log(f"Bot aktif {self.symbol} ({acct}) | {mode} | {' + '.join(parts)}", notify=True)
         self.handlers = self.command_handlers()
         self.notifier.start()
-        self.virtual = None if self.cfg.trade_enabled else self._load_virtual()
         self.publisher.start()
         self.publisher.publish({"type": "info", "time": self.clock(),
                                 "text": f"Bot aktif {self.symbol} ({acct}) | {mode}"},
@@ -170,8 +169,10 @@ class Engine:
         self._manage_positions(now, tick, positions, orders, bars, lo, hi)
         self._daily_report(now)
         if self.use_trend:
-            self._check_virtual_sl(now, tick, lo, hi)
-            self._trend_step(now, tick, account)
+            bars_t = self.broker.rates(self.symbol, self.cfg.trend.timeframe, self.cfg.trend.bars)
+            for system in self.trend_systems:
+                system.manage(now, tick, lo, hi)
+                system.on_bar(now, tick, account, bars_t)
 
         if self.use_smc and not bars.empty and bars.index[-1] != self.last_bar_time:
             self.last_bar_time = bars.index[-1]
@@ -193,7 +194,7 @@ class Engine:
             "spread": round(tick.spread, 3), "currency": self.currency, "cent": self.cent,
             "balance": account.balance if account else None, "equity": account.equity if account else None,
             "daily_pnl": st.daily_pnl, "mode": "AUTO" if self.cfg.trade_enabled else "SINYAL",
-            "paused": self.paused, "trend": self.trend.state, "session": st.session,
+            "paused": self.paused, "trend": self._trend_states(), "session": st.session,
             "block": st.block_reason, "news": st.news,
             "positions": [{"ticket": p.ticket, "dir": p.direction.label, "volume": p.volume,
                            "open": p.price_open, "sl": p.sl, "tp": p.tp, "profit": p.profit}
@@ -353,135 +354,8 @@ class Engine:
         return "\n".join(lines)
 
     # ----------------------------------------------------------------- trend
-    # posisi virtual: dipakai di mode SINYAL supaya sinyal keluar (exit/SL) tetap dikirim
-    def _load_virtual(self) -> dict | None:
-        try:
-            data = json.loads(Path(self.cfg.trend.virtual_file).read_text(encoding="utf-8"))
-            data["dir"] = Direction[data["dir"]]
-            return data
-        except (OSError, ValueError, KeyError):
-            return None
-
-    def _save_virtual(self, value: dict | None) -> None:
-        self.virtual = value
-        path = Path(self.cfg.trend.virtual_file)
-        if value is None:
-            path.unlink(missing_ok=True)
-            return
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({**value, "dir": value["dir"].name}, default=str), encoding="utf-8")
-
-    def _close_virtual(self, now, price: float, why: str) -> None:
-        v = self.virtual
-        sign = int(v["dir"])
-        points = (price - v["entry"]) * sign
-        r = points / abs(v["entry"] - v["sl"]) if v["entry"] != v["sl"] else 0.0
-        text = (f"🏁 TUTUP {v['dir'].label} {self.symbol} @ {price:.2f}\n"
-                f"Entry {v['entry']:.2f} -> hasil {points:+.2f} poin ({r:+.2f}R)\nAlasan: {why}")
-        self.log(text.replace("\n", " | "), notify=self.cfg.signals_enabled)
-        self.publisher.publish({"type": "close", "id": v["key"], "time": now, "mode": "trend",
-                                "dir": v["dir"].label, "entry": v["entry"], "price": round(price, 3),
-                                "points": round(points, 3), "r": round(r, 2), "reason": why},
-                               text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
-        self._save_virtual(None)
-
-    def _check_virtual_sl(self, now, tick: Tick, lo: float, hi: float) -> None:
-        v = self.virtual
-        if v is None or self.cfg.trade_enabled:
-            return
-        if v["dir"] == Direction.BUY and lo <= v["sl"]:
-            self._close_virtual(now, v["sl"], "Stop loss tersentuh")
-        elif v["dir"] == Direction.SELL and hi + tick.spread >= v["sl"]:
-            self._close_virtual(now, v["sl"], "Stop loss tersentuh")
-
-    def _trend_step(self, now, tick: Tick, account) -> None:
-        cfg = self.cfg.trend
-        bars = self.broker.rates(self.symbol, cfg.timeframe, cfg.bars)
-        if bars.empty or bars.index[-1] == self.last_trend_bar:
-            return
-        self.last_trend_bar = bars.index[-1]
-        positions = self.broker.positions(self.symbol, self.trend_magic)
-        virtual = None if self.cfg.trade_enabled else self.virtual
-        current = positions[0].direction if positions else (virtual["dir"] if virtual else None)
-        sig = self.trend.evaluate(bars, current)
-        if sig.action == "close":
-            for p in positions:
-                res = self.broker.close_position(self.symbol, p.ticket)
-                if res.ok:
-                    text = (f"🏁 TREND {p.direction.label} #{p.ticket} ditutup: {sig.note} "
-                            f"(PnL {self.money(p.profit)})")
-                    self.log(text, notify=True)
-                    self.publisher.publish({"type": "close", "time": now, "mode": "trend",
-                                            "dir": p.direction.label, "ticket": p.ticket,
-                                            "price": tick.bid, "pnl": p.profit, "reason": sig.note},
-                                           text, "Posisi ditutup", 4, ["checkered_flag"])
-            if virtual and not positions:
-                price = tick.bid if virtual["dir"] == Direction.BUY else tick.ask
-                self._close_virtual(now, price, sig.note)
-            return
-        if sig.action != "open":
-            return
-        direction = sig.direction
-        sign = int(direction)
-        key = f"TREND-{direction.label}-{bars.index[-1]:%Y%m%d%H%M}"
-        entry = tick.ask if direction == Direction.BUY else tick.bid
-        sl = entry - sign * cfg.stop_atr * sig.atr
-        reason = self._trend_block_reason(now, tick, account)
-        volume, risk_money, lot_warn = 0.0, 0.0, ""
-        if reason is None:
-            volume, risk_money, note = lot_size(account.balance, self.cfg.risk.risk_pct, entry, sl,
-                                                self.spec, self.cfg.risk.allow_min_lot_over_risk)
-            if volume <= 0:
-                if self.cfg.trade_enabled:
-                    reason = note
-                else:  # mode sinyal: tetap kirim, beri peringatan lot minimum
-                    volume, risk_money = self.spec.volume_min, abs(entry - sl) * self.spec.volume_min * (
-                        self.spec.tick_value / self.spec.tick_size)
-                    pct = risk_money / account.balance * 100 if account.balance else 0
-                    lot_warn = f"⚠️ Lot minimum {volume} = risiko {pct:.1f}% saldo"
-        event = {"type": "signal", "id": key, "time": now, "mode": "trend", "dir": direction.label,
-                 "symbol": self.symbol, "entry": round(entry, 3), "sl": round(sl, 3), "tp": None,
-                 "atr": round(sig.atr, 3), "exit_rule": f"close {cfg.timeframe} menembus channel {cfg.exit_period} bar",
-                 "timeframe": cfg.timeframe, "reason": sig.note}
-        lines = [
-            f"{'🟢' if direction == Direction.BUY else '🔴'} TREND {direction.label} {self.symbol} "
-            f"({cfg.timeframe} Donchian {cfg.entry_period}/{cfg.exit_period})",
-            f"Entry: {entry:.2f} (market) | SL: {sl:.2f} ({cfg.stop_atr}x ATR {sig.atr:.2f})",
-            f"TP: tidak ada - tunggu sinyal TUTUP (close menembus channel {cfg.exit_period} bar)",
-            f"Alasan: {sig.note}",
-        ]
-        if reason is not None:
-            self.journal.log(now, "INFO", f"{key} dilewati: {reason}")
-            if self._last_trend_skip == (direction, reason):
-                return  # alasan sama dengan bar sebelumnya -> jangan spam
-            self._last_trend_skip = (direction, reason)
-            self.log(f"Sinyal TREND {direction.label} dilewati: {reason}")
-            if self.cfg.signals_enabled and self.cfg.telegram.notify_skipped:
-                self.notifier.send("\n".join(lines + [f"Status: ⛔ Dilewati: {reason}"]))
-            self.publisher.publish({**event, "status": "skipped", "note": reason},
-                                   "\n".join(lines + [f"⛔ Dilewati: {reason}"]), "Sinyal dilewati", 2)
-            return
-        lines.append(f"Lot: {volume} | Risiko: {self.money(risk_money)} ({self.cfg.risk.risk_pct}%)")
-        if lot_warn:
-            lines.append(lot_warn)
-        event.update(lot=volume, risk=round(risk_money, 2), currency=self.currency, warning=lot_warn)
-        tags = ["green_circle" if direction == Direction.BUY else "red_circle"]
-        self._last_trend_skip = None
-        if not self.cfg.trade_enabled:
-            self.log(f"Sinyal TREND {direction.label} {entry:.2f} (mode sinyal)")
-            if self.cfg.signals_enabled:
-                self.notifier.send("\n".join(lines + ["Status: 📡 Sinyal (auto-trade OFF)"]))
-            self.publisher.publish({**event, "status": "signal"}, "\n".join(lines),
-                                   f"{direction.label} XAUUSD", 5, tags)
-            self._save_virtual({"dir": direction, "entry": entry, "sl": sl, "key": key, "time": now})
-            return
-        res = self.broker.market_order(self.symbol, direction, volume, sl, 0.0, self.trend_magic,
-                                       f"TREND {direction.label}")
-        status = "✅ Market order terbuka" if res.ok else f"❌ Ditolak broker: {res.message}"
-        self.log(f"TREND {direction.label} {volume} lot @ {entry:.2f} SL {sl:.2f}: {status}")
-        self.notifier.send("\n".join(lines + [f"Status: {status}", f"Waktu: {fmt_wib(now)}"]))
-        self.publisher.publish({**event, "status": "opened" if res.ok else "failed", "note": status},
-                               "\n".join(lines + [status]), f"{direction.label} XAUUSD", 5, tags)
+    def _trend_states(self) -> str:
+        return " | ".join(f"{t.name}: {t.strategy.state}" for t in self.trend_systems)
 
     def _trend_block_reason(self, now, tick: Tick, account) -> str | None:
         if self.paused:
@@ -599,11 +473,14 @@ class Engine:
     def _closed(self, since: pd.Timestamp) -> list:
         trades = self.broker.closed_trades(self.symbol, self.magic, since)
         trades += self.broker.closed_trades(self.symbol, self.trend_magic, since)
+        for t in self.trend_systems:
+            trades += self.broker.closed_trades(self.symbol, t.magic, since)
         return sorted(trades, key=lambda t: t.close_time)
 
     def _all_positions(self) -> list[Position]:
         return (self.broker.positions(self.symbol, self.magic)
-                + self.broker.positions(self.symbol, self.trend_magic))
+                + self.broker.positions(self.symbol, self.trend_magic)
+                + [p for t in self.trend_systems for p in t.positions()])
 
     def _day_summary(self, day) -> str:
         trades = [t for t in self._closed(self.clock() - pd.Timedelta(days=8))
@@ -656,7 +533,7 @@ class Engine:
                 f"Bias {self.cfg.strategy.bias_tf}: {st.bias} | Sesi: {st.session}",
                 f"Berita: {st.news}",
                 f"Evaluasi terakhir: {st.last_eval}",
-                f"Trend {self.cfg.trend.timeframe}: {self.trend.state}",
+                f"Trend {self.cfg.trend.timeframe}: {self._trend_states()}",
             ]
             if acc:
                 lines.append(f"Balance {acc.balance:.2f} | Equity {acc.equity:.2f} | PnL hari ini {st.daily_pnl:.2f}")

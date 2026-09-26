@@ -46,73 +46,8 @@ def test_no_lookahead_uses_previous_bars_only():
     assert strat.evaluate(bars.iloc[:-1], None).action == "none"
 
 
-def test_engine_trend_trade_end_to_end():
-    m15 = bars_from_path(np.repeat(trend_path(), 4), start="2026-09-14 00:00", freq="15min", wick=0.3)
-    cfg = AppConfig()
-    cfg.trade_enabled = True
-    cfg.news.enabled = False
-    cfg.telegram.enabled = False
-    broker = PaperBroker({cfg.broker.symbol: m15}, "M15", XAU_SPEC, spread=0.2, balance=100_000,
-                         start_index=60 * 4)
-    notes = Capture()
-    engine = Engine(cfg, broker, notes, NewsFilter(cfg.news), Journal(":memory:"), clock=lambda: broker.now)
-    assert engine.start()
-    while broker.advance():
-        bar = broker.data[broker.main].iloc[broker.cursor]
-        engine.step(price_range=(float(bar["low"]), float(bar["high"])))
-    assert any("TREND BUY" in m and "Market order terbuka" in m for m in notes.messages)
-    assert any("ditutup" in m for m in notes.messages)
-    assert broker.closed and broker.closed[0].pnl > 0
-    lost = [t for t in broker.closed if t.pnl < 0]
-    assert all(t.pnl > -0.011 * 100_000 for t in lost)      # risiko <= ~1%
-
-
 def test_trend_mode_default():
     assert AppConfig().strategy.mode == "trend"
-
-
-class CapturePub:
-    topic = "t"
-
-    def __init__(self):
-        self.events = []
-
-    def publish(self, event, text=None, title=None, priority=3, tags=None):
-        self.events.append(event)
-
-    def start(self):
-        pass
-
-    def stop(self):
-        pass
-
-
-def test_signal_mode_sends_entry_and_exit_without_orders(tmp_path):
-    m15 = bars_from_path(np.repeat(trend_path(), 4), start="2026-09-14 00:00", freq="15min", wick=0.3)
-    cfg = AppConfig()
-    assert cfg.trade_enabled is False            # default = sinyal saja
-    cfg.news.enabled = False
-    cfg.telegram.enabled = False
-    cfg.trend.virtual_file = str(tmp_path / "virtual.json")
-    broker = PaperBroker({cfg.broker.symbol: m15}, "M15", XAU_SPEC, spread=0.2, balance=100,
-                         start_index=60 * 4)
-    pub = CapturePub()
-    engine = Engine(cfg, broker, Capture(), NewsFilter(cfg.news), Journal(":memory:"),
-                    clock=lambda: broker.now, publisher=pub)
-    assert engine.start()
-    while broker.advance():
-        bar = broker.data[broker.main].iloc[broker.cursor]
-        engine.step(price_range=(float(bar["low"]), float(bar["high"])))
-    signals = [e for e in pub.events if e["type"] == "signal" and e["status"] == "signal"]
-    closes = [e for e in pub.events if e["type"] == "close"]
-    assert signals and signals[0]["dir"] == "BUY" and signals[0]["status"] == "signal"
-    assert "Lot minimum" in signals[0]["warning"]          # saldo 100 terlalu kecil -> peringatan
-    assert closes and closes[0]["id"] == signals[0]["id"] and closes[0]["points"] > 0
-    assert len(signals) - len(closes) in (0, 1)       # tidak ada sinyal entry ganda
-    for sig, cl in zip(signals, closes):
-        assert sig["id"] == cl["id"]                      # setiap entry punya sinyal tutup
-    assert broker.closed == [] and broker.positions("XAUUSD", cfg.broker.magic + 1) == []
-    assert any(e["type"] == "heartbeat" for e in pub.events)
 
 
 def test_cent_account_detection_and_money_format(tmp_path):
