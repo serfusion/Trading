@@ -103,7 +103,12 @@ class SignalService : Service() {
         when (event.type) {
             "signal" -> if (event.status == "signal" || event.status == "opened") Notifications.signal(this, event)
             "close" -> Notifications.close(this, event)
-            "info" -> if (event.str("text").contains("TP1")) Notifications.info(this, event)
+            "info" -> {
+                val text = event.str("text")
+                if (listOf("TP1", "Auto order", "Tutup semua", "LIVE").any { text.contains(it) }) {
+                    Notifications.info(this, event)
+                }
+            }
         }
     }
 

@@ -31,7 +31,7 @@ select cron.schedule(
   '2,32 * * * *',
   $$ select net.http_get(
        url := 'https://DOMAIN_KAMU/api/tick?key=CRON_SECRET_KAMU',
-       timeout_milliseconds := 30000
+       timeout_milliseconds := 60000
      ); $$
 );
 

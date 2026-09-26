@@ -12,6 +12,15 @@ sys.path.insert(0, os.path.dirname(__file__))
 import _core  # noqa: E402
 
 
+def executor_from_env():
+    """MetaApi hanya aktif bila token & account id diisi. Auto order tetap OFF sampai dinyalakan dari aplikasi."""
+    env = os.environ
+    if env.get("METAAPI_TOKEN") and env.get("METAAPI_ACCOUNT_ID"):
+        return _core.MetaApi(env["METAAPI_TOKEN"], env["METAAPI_ACCOUNT_ID"],
+                             env.get("METAAPI_REGION", "new-york"), env.get("BROKER_SYMBOL", "XAUUSDc"))
+    return None
+
+
 def run() -> tuple[int, dict]:
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
@@ -19,7 +28,8 @@ def run() -> tuple[int, dict]:
     if missing:
         return 500, {"ok": False, "error": f"Environment variable belum diisi: {', '.join(missing)}"}
     cfg = {**_core.CFG, "legs": int(env.get("LEGS", _core.CFG["legs"])),
-           "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"]))}
+           "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"])),
+           "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10))}
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
@@ -27,6 +37,7 @@ def run() -> tuple[int, dict]:
         _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
         cfg,
         symbol=env.get("SYMBOL", "XAU/USD"),
+        executor=executor_from_env(),
     )
     return 200, result
 

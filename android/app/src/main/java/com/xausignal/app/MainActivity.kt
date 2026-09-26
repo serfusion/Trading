@@ -60,9 +60,9 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
 import java.util.Locale
 
-private val BuyColor = Color(0xFF1FAA59)
-private val SellColor = Color(0xFFE5484D)
-private val Gold = Color(0xFFD4A017)
+val BuyColor = Color(0xFF1FAA59)
+val SellColor = Color(0xFFE5484D)
+val Gold = Color(0xFFD4A017)
 const val BRAND = "by: Superfal-Dev"
 
 class MainActivity : ComponentActivity() {
@@ -141,8 +141,13 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
             TabRow(selectedTabIndex = tab) {
                 Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Sinyal") })
                 Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Statistik") })
+                Tab(selected = tab == 2, onClick = { tab = 2 }, text = { Text("Auto") })
             }
-            if (tab == 0) SignalsTab(events, heartbeat, connection, money) else StatsTab(events, money)
+            when (tab) {
+                0 -> SignalsTab(events, heartbeat, connection, money)
+                1 -> StatsTab(events, money)
+                else -> AutoTab(money)
+            }
         }
     }
 
