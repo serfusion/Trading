@@ -175,34 +175,26 @@ def _iter_files(root: Path):
             yield p
 
 
-def _ext(p: Path) -> str:
-    if p.name.lower() == "dockerfile":
+def ext_of(name: str, head: bytes) -> str:
+    """Jenis file dari nama + awal isinya. Dipakai untuk file di disk maupun blob riwayat git."""
+    base = name.replace("\\", "/").rsplit("/", 1)[-1]
+    low = base.lower()
+    if low == "dockerfile":
         return ".dockerfile"
-    ext = p.suffix.lower()
+    ext = Path(low).suffix
     if ext in BINARY_DANGER or ext in BINARY_OPAQUE or ext in PICKLE_EXT:
         return ext
-    if _is_program(p):
+    if head[:2] == b"MZ" or head[:4] == b"\x7fELF":
         return ".exe"  # program Windows/Linux menyamar dengan ekstensi lain (mis. .jpg, .txt, .xlsx)
+    if low == ".env" or (low.startswith(".env.") and not re.search(r"example|sample|template", low)):
+        return ".env"
     if ext:
         return ext
-    return _sniff(p)
+    return _sniff_bytes(head)
 
 
-def _is_program(p: Path) -> bool:
-    try:
-        with open(p, "rb") as fh:
-            head = fh.read(4)
-    except OSError:
-        return False
-    return head[:2] == b"MZ" or head == b"\x7fELF"
-
-
-def _sniff(p: Path) -> str:
+def _sniff_bytes(head: bytes) -> str:
     """Tebak jenis file tanpa ekstensi (mis. source EA yang sengaja dibuang ekstensinya)."""
-    try:
-        head = p.read_bytes()[:4096]
-    except OSError:
-        return ""
     if head[:4] == b"PK\x03\x04":
         return ".zip"
     if b"\x00" in head:
@@ -217,6 +209,63 @@ def _sniff(p: Path) -> str:
     return ".txt"
 
 
+def _head(p: Path, n: int = 4096) -> bytes:
+    try:
+        with open(p, "rb") as fh:
+            return fh.read(n)
+    except OSError:
+        return b""
+
+
+def _ext(p: Path) -> str:
+    return ext_of(p.name, _head(p))
+
+
+def classify(rel: str, ext: str) -> tuple[str, Finding | None] | None:
+    """Untuk file non-teks: ('biner', level) atau ('temuan', Finding). None = file teks/biasa."""
+    if ext in BINARY_DANGER:
+        return "biner", "BAHAYA"
+    if ext in BINARY_OPAQUE:
+        return "biner", "WASPADA"
+    if ext in PICKLE_EXT:
+        return "temuan", Finding("WASPADA", "pickle_model", "File pickle/model: memuatnya bisa menjalankan kode",
+                                 rel, 0, "(biner)")
+    return None
+
+
+def scan_text(rel: str, text: str, ext: str) -> list[Finding]:
+    """Cocokkan semua aturan ke satu isi file teks (rel = path untuk laporan, ext = hasil ext_of)."""
+    if ext not in TEXT_EXT:
+        return []
+    if ext in MQL and VENDOR_MQL.search(text[:1500]) and "Include" in Path(rel).parts:
+        return []  # pustaka standar MetaQuotes (deklarasi WinAPI dll.), bukan kode penulis
+    findings = []
+    lines = text.splitlines()
+    for rule in RULES:
+        if rule.exts is not None and ext not in rule.exts:
+            continue
+        seen, lines_hit = 0, set()
+        for m in rule.pattern.finditer(text):
+            ln = text.count("\n", 0, m.start()) + 1
+            if ln in lines_hit:
+                continue
+            lines_hit.add(ln)
+            src = lines[ln - 1].strip() if ln - 1 < len(lines) else m.group(0)
+            if rule.code == "hardcoded_secret" and FALSE_POSITIVE_HINTS.search(src):
+                continue
+            if rule.code == "hardcoded_chat" and re.search(r"123456789|(\d)\1{5,}", src):
+                continue  # contoh/placeholder
+            if rule.code == "long_blob" and re.search(r"image/(png|jpe?g|gif|svg)|data:image|font/", src):
+                continue
+            if rule.code == "mql_account_send" and not MQL_NET.search(text):
+                continue  # hanya ditampilkan/dicatat di log, tidak ada kode internet di file ini
+            findings.append(Finding(rule.level, rule.code, rule.desc, rel, ln, src[:160]))
+            seen += 1
+            if seen >= 5:
+                break
+    return findings
+
+
 def scan(root: str | Path, ignore: list[str] | None = None) -> Report:
     """ignore: pola glob path relatif yang dilewati (mis. file berisi daftar pola pemindai ini sendiri)."""
     root = Path(root)
@@ -227,15 +276,12 @@ def scan(root: str | Path, ignore: list[str] | None = None) -> Report:
             continue
         n += 1
         ext = _ext(p)
-        if ext in BINARY_DANGER:
-            binaries.append((rel, "BAHAYA"))
-            continue
-        if ext in BINARY_OPAQUE:
-            binaries.append((rel, "WASPADA"))
-            continue
-        if ext in PICKLE_EXT:
-            findings.append(Finding("WASPADA", "pickle_model", "File pickle/model: memuatnya bisa menjalankan kode",
-                                    rel, 0, "(biner)"))
+        kind = classify(rel, ext)
+        if kind is not None:
+            if kind[0] == "biner":
+                binaries.append((rel, kind[1]))
+            else:
+                findings.append(kind[1])
             continue
         if ext not in TEXT_EXT or p.stat().st_size > MAX_BYTES:
             continue
@@ -243,31 +289,7 @@ def scan(root: str | Path, ignore: list[str] | None = None) -> Report:
             text = p.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
-        if ext in MQL and VENDOR_MQL.search(text[:1500]) and "Include" in Path(rel).parts:
-            continue  # pustaka standar MetaQuotes (deklarasi WinAPI dll.), bukan kode penulis
-        lines = text.splitlines()
-        for rule in RULES:
-            if rule.exts is not None and ext not in rule.exts:
-                continue
-            seen, lines_hit = 0, set()
-            for m in rule.pattern.finditer(text):
-                ln = text.count("\n", 0, m.start()) + 1
-                if ln in lines_hit:
-                    continue
-                lines_hit.add(ln)
-                src = lines[ln - 1].strip() if ln - 1 < len(lines) else m.group(0)
-                if rule.code == "hardcoded_secret" and FALSE_POSITIVE_HINTS.search(src):
-                    continue
-                if rule.code == "hardcoded_chat" and re.search(r"123456789|(\d)\1{5,}", src):
-                    continue  # contoh/placeholder
-                if rule.code == "long_blob" and re.search(r"image/(png|jpe?g|gif|svg)|data:image|font/", src):
-                    continue
-                if rule.code == "mql_account_send" and not MQL_NET.search(text):
-                    continue  # hanya ditampilkan/dicatat di log, tidak ada kode internet di file ini
-                findings.append(Finding(rule.level, rule.code, rule.desc, rel, ln, src[:160]))
-                seen += 1
-                if seen >= 5:
-                    break
+        findings.extend(scan_text(rel, text, ext))
     return Report(str(root), n, findings, binaries)
 
 
