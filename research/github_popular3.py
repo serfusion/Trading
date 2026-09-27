@@ -821,6 +821,53 @@ def aurum(p: Period, tf: str = "60min", learn: bool = True) -> pd.DataFrame:
     return trades_frame(rows, p.base)
 
 
+# ---------------------------------------------------------------- blackhunter4448-ops: main.py + technical_analysis.py
+def blackhunter(p: Period) -> pd.DataFrame:
+    """Versi yang DIMAKSUD (kode asli tidak jalan: modul mt5_connection.py tidak ada; SL/TP SELL terbalik sehingga
+    ditolak broker; Alligator memakai shift(-8) = data masa depan -> NaN saat live). H1: sinyal gabungan bila >=2 dari
+    Bollinger 20/2 (sentuh pita), RSI(SMA14) 30/70, Stochastic 14/3/3 (cross di <20/>80) searah; kalau tidak, cadangan
+    RSI -> BB -> Stochastic sendiri-sendiri. Order hanya bila arah berbeda dari order terakhir; posisi boleh menumpuk.
+    SL 2 ATR, TP 2 ATR (ATR = rata-rata TR 14)."""
+    H = resample(p.base, "60min")
+    A, sp = Arrays(p.base), p.spread
+    h, l, c = (H[k].to_numpy(float) for k in ("high", "low", "close"))
+    cs = pd.Series(c)
+    mid, sd = cs.rolling(20).mean().to_numpy(), cs.rolling(20).std().to_numpy()
+    bb = np.where(c <= mid - 2 * sd, 1, np.where(c >= mid + 2 * sd, -1, 0))
+    dl = cs.diff()
+    g, ls = dl.where(dl > 0, 0).rolling(14).mean(), (-dl.where(dl < 0, 0)).rolling(14).mean()
+    r = (100 - 100 / (1 + g / ls)).to_numpy()
+    rs = np.where(r < 30, 1, np.where(r > 70, -1, 0))
+    lo, hi = pd.Series(l).rolling(14).min(), pd.Series(h).rolling(14).max()
+    k_ = (100 * (cs - lo) / (hi - lo)).rolling(3).mean()
+    d_ = k_.rolling(3).mean()
+    k_, d_ = k_.to_numpy(), d_.to_numpy()
+    kp, dp = np.r_[np.nan, k_[:-1]], np.r_[np.nan, d_[:-1]]
+    st = np.where((kp <= dp) & (k_ > d_) & (k_ < 20), 1, np.where((kp >= dp) & (k_ < d_) & (k_ > 80), -1, 0))
+    atr = sma_tr(H, 14)
+    start = to_base(p.base, H.index)
+    rows, last = [], 0
+    for k in range(40, len(H) - 1):
+        votes = [x for x in (bb[k], rs[k], st[k]) if x != 0]
+        d = 0
+        if sum(1 for x in votes if x > 0) >= 2:
+            d = 1
+        elif sum(1 for x in votes if x < 0) >= 2:
+            d = -1
+        else:
+            d = next((x for x in (rs[k], bb[k], st[k]) if x != 0), 0)
+        if d == 0 or d == last or np.isnan(atr[k]):
+            continue
+        j0 = start[k + 1]
+        if j0 >= A.n - 2:
+            break
+        entry = A.o[j0] + (sp if d > 0 else 0.0)
+        j1, rr = simulate(A, sp, j0, d, entry, entry - d * 2 * atr[k], entry + d * 2 * atr[k], 10 * 24 * bph(p))
+        rows.append((j0, j1, d, rr))
+        last = d
+    return trades_frame(rows, p.base)
+
+
 def sma_tr(df: pd.DataFrame, n: int = 14) -> np.ndarray:
     """iATR MetaTrader 5 = rata-rata sederhana true range."""
     h, l, c = (df[k].to_numpy(float) for k in ("high", "low", "close"))
@@ -857,6 +904,7 @@ TESTS = {
     "aurum M15 (armza332)": lambda p: aurum(p, "15min"),
     "aurum H1 tanpa self-learning": lambda p: aurum(p, learn=False),
     "aurum M15 tanpa self-learning": lambda p: aurum(p, "15min", learn=False),
+    "blackhunter H1 (versi dimaksud)": blackhunter,
 }
 
 

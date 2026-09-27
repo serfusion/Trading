@@ -12,7 +12,7 @@ penulis, hasil uji ulang bot ini, dan daftar perubahan.
 | Platform, timeframe, scalping, login MT5, order otomatis, SL/TP, trailing, martingale/grid/hedging, manajemen risiko, filter berita/sesi, AI/LLM, Telegram, backtest | **Semua 63 repo**, otomatis + kolom `verifikasi_manual` | `python -m research.inventaris_repo` → `inventaris_63_repo.csv` (bila kolom otomatis berbeda, kolom manual yang benar) |
 | Kolom yang sama, diverifikasi manual (baca baris kodenya) | **41 kandidat** | Hasilnya di `ASAL.md` tiap folder |
 | Klaim win-rate / profit / drawdown | README & dokumen semua repo; laporan hasil (CSV/MD) bila ada | Dikutip apa adanya |
-| Uji ulang strategi di data asli 2012–2026 (spread, tanpa look-ahead) | **16 strategi**; 10 repo dari daftar Anda diuji langsung, 5 repo ML diwakili uji walk-forward | `research/github_popular*.py`, `research/mnauu_confluence.py` |
+| Uji ulang strategi di data asli 2012–2026 (spread, tanpa look-ahead) | **30 strategi** dari 18 repo + 5 repo ML diwakili uji walk-forward; yang tidak bisa diuji beserta alasannya: paragraf di bawah & `docs/AUDIT_63_REPO.md` §3.2 | `research/github_popular*.py`, `research/mnauu_confluence.py` |
 
 Yang **tidak** bisa dipastikan: isi EA terkompilasi (.ex5/.ex4 terenkripsi), kode tersandi (Minhtan2005), strategi
 yang aturannya privat (EA_SCALPER), bot berbasis LLM (hasilnya berubah-ubah), model AI tanpa dilatih ulang, dan

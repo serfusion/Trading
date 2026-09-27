@@ -39,6 +39,8 @@ Strategi yang aturannya jelas ditulis ulang di mesin uji bot ini dan diuji di da
   0,25%/set (docs/RISET_GITHUB.md bagian 5). Win-rate tidak bisa dinaikkan tanpa menurunkan profit — terbukti lagi
   di bagian 3.
 
+**Pemeriksaan sampai ke akar (tahap A, B, C):** riwayat git lengkap + Releases → [`AUDIT_RIWAYAT_RELEASES.md`](AUDIT_RIWAYAT_RELEASES.md) (temuan: perpustakaan EA bajakan berisi terminal modifikasi & `winmm.dll` di riwayat EA_SCALPER, EA "fix" bocoran di Lin-Thet-Zaw, API key OANDA yang "dihapus" tapi masih di riwayat); kemampuan setiap file → [`AUDIT_SETIAP_FILE.md`](AUDIT_SETIAP_FILE.md) (tidak ada pencurian data; server tanpa autentikasi di P1Piyush & GifariKemal); 14 strategi sisanya → bagian 3.2 (semua negatif / tidak jalan).
+
 **Kandidat disimpan:** 41 repo di [`kandidat/`](../kandidat/KATALOG.md) (kredensial penulis disensor, biner & model pickle tidak disalin) untuk dibandingkan sendiri.
 
 **Alat baru:** `python -m xau_bot audit <folder>` — periksa bot/EA apa pun sebelum dijalankan (bagian 5).
@@ -174,6 +176,36 @@ yang tidak kena SL/TP dalam 800 menit (±33%) juga tidak dihitung, dan spread ti
 | Seperti backtest penulis | M1 Feb – Mei 2026 (aturan persis) | 35 | 48,0% | +12,3R |
 | Diperbaiki | sama | 12 | 0 menang / 6 kalah / 6 timeout | −6,9R |
 
+### 3.2 Tahap B: 14 strategi sisanya (`python -m research.github_popular3`)
+
+Aturan dibaca dari kode asli lalu ditulis ulang di mesin uji yang sama. Hasil lengkap: `docs/hasil_github_popular3.txt`.
+Periode M5 saja (2022–26) untuk strategi yang memang M5.
+
+| Repo / strategi | Trade | Win-rate | Total | Periode positif | Catatan dari membaca kodenya |
+|---|---|---|---|---|---|
+| Turnipnator EMA trend H1 (BUY saja, sesuai config) | 406 | 30,0% | −34,3R | 0/4 | +SELL: −59,3R |
+| Turnipnator Triple Confirmation H1 | 520 | 51,3% | −67,8R | 0/4 | |
+| BlamzKunG Advanced Grid EA (akun $1.000) | 7.456 basket | 97–99% basket profit | akun **habis** 2012, 2020, 2023; 2025–26 −29,6% | 0/4 | Basket untung rata-rata +$1; tiap "hedge lock" −$160 s/d −$180; tutup darurat DD 20% rata-rata −$58 (terburuk −$235) |
+| shamshyder EA | 0 | — | — | — | Tidak terkompilasi (`ctrade`), `iMA` dipakai sebagai nilai; 4 syarat versi yang dimaksud tidak pernah terpenuhi bersamaan 2012–26 |
+| thanvish21 Gold Dominator v3 (asli) | 5 | 20% | −1,2 s/d −2,6R | ≤1/4 | Filter kurva ekuitas macet setelah rugi pertama (EMA float tidak pernah turun ke nilai ekuitas); SELL mustahil (StochRSI skala 0–1 dibanding 20/80) |
+| thanvish21 tanpa filter ekuitas & DD | 2.183 | 43,1% | −101,5R | 1/4 | Target penulis WR 80% |
+| P1Piyush PDH/PDL M5 (TP 3R) | 15 | 33,3% | +5,0R | 2/2 | Terlalu sedikit untuk disimpulkan; alpha_v3 tak bisa diuji (butuh M1 + DXY; trailing look-ahead) |
+| nazhmi12 FVG+OB+EMA200 di XAUUSD M5 | 89 | 36,0% | +7,0R | 1/2 | Bot aslinya men-trade EURUSD/GBPUSD/USDJPY/AUDUSD, **bukan emas** |
+| Kiran-Kumbar sinyal SMC M5 | 3.454 | 32,3% | −126,4R | 0/2 | Hanya kirim sinyal Telegram |
+| HillaryMurimi SMA5/20 · RSI 30/70 · MACD (M5, SL $10/TP $20) | 3.660 · 5.605 · 4.237 | 32–33% | −186R · −168R · −196R | 0/2 | Backtest penulis look-ahead; "classifier" dilatih dengan 3 baris data |
+| armza332 Aurum EA H1 (asli) | 74 | 36,5% | −9,4R | 1/4 | "Self-learning" mematikan agen secara permanen → berhenti trading (2014, 2019) |
+| armza332 tanpa self-learning H1 · M15 | 178 · 538 | 34 · 38% | −35,0R · −62,5R | 1/4 · 0/4 | |
+| blackhunter H1 (versi dimaksud) | 2.810 | 46,0% | −227,9R | 0/4 | Asli tak bisa jalan: `mt5_connection.py` tidak ada; SL/TP SELL terbalik (ditolak broker) → hanya 1 BUY per sesi; Alligator memakai data masa depan (`shift(-8)`) |
+| Sheyswaggz | — | — | — | — | Tidak ada kode strategi di branch/riwayat mana pun |
+| MarketForgeX | — | — | — | — | Bias berita (actual vs forecast), tanpa SL/TP; butuh kalender historis |
+| RobertN1D HFT scalper | — | — | — | — | Keluar per tick ($0,40–1,20), DOM & kecepatan tick → butuh data tick |
+
+**Kesimpulan B:** tidak satu pun dari 14 strategi ini yang positif secara konsisten; yang "positif" (P1Piyush, nazhmi12)
+hanya 15–89 trade di 2 periode. Enam repo punya **bug yang membuatnya tidak bisa trading sama sekali atau berhenti
+sendiri** (shamshyder, thanvish21, armza332, blackhunter, Sheyswaggz tanpa kode, nazhmi12 salah pasar). Peringkat di
+`kandidat/KATALOG.md` tidak berubah: terbaik tetap Keltner sederhana samw2591 (+33,4R), dan resep bot ini tetap
+A-ensemble Donchian H1.
+
 ## 4. Gabungan (`python -m research.combine2`)
 
 Ketahanan Keltner (81 variasi parameter): 93% positif di ≥3 periode, tetapi hanya 16% positif di keempatnya (lemah
@@ -208,5 +240,6 @@ python -m xau_bot audit --ringkas repos/*/
 python -m xau_bot audit repos/NAMA_REPO                  # detail per baris
 bash research/download_data.sh
 python -m research.github_popular2                         # bagian 3
+python -m research.github_popular3                         # bagian 3.2
 python -m research.combine2                                # bagian 4
 ```
