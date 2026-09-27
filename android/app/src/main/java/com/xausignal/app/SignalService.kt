@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.Build
 import android.os.IBinder
+import okhttp3.Call
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -24,6 +25,9 @@ class SignalService : Service() {
     @Volatile
     private var running = false
     private var worker: Thread? = null
+
+    @Volatile
+    private var call: Call? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -49,6 +53,7 @@ class SignalService : Service() {
 
     override fun onDestroy() {
         running = false
+        call?.cancel()   // putuskan stream lama segera (mis. topik diganti), jangan tunggu timeout baca
         worker?.interrupt()
         SignalRepository.setConnection("Berhenti")
         super.onDestroy()
@@ -67,14 +72,16 @@ class SignalService : Service() {
             val url = "${SignalRepository.server()}/$topic-data/json?since=$since"
             try {
                 val request = Request.Builder().url(url).build()
-                client.newCall(request).execute().use { response ->
+                val current = client.newCall(request).also { call = it }
+                if (!running) break
+                current.execute().use { response ->
                     if (!response.isSuccessful) throw IOException("HTTP ${response.code}")
                     SignalRepository.setConnection("Terhubung")
                     backoff = 2_000L
                     val source = response.body?.source() ?: throw IOException("respon kosong")
                     while (running) {
                         val line = source.readUtf8Line() ?: break
-                        handle(line)
+                        if (running) handle(line)
                     }
                 }
             } catch (e: Exception) {

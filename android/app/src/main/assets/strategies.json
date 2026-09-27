@@ -1,0 +1,3043 @@
+{
+ "generated": "2026-09-27",
+ "source": "python -m research.winrate_study (data XAUUSD asli, spread dihitung)",
+ "periods": [
+  "2012-17",
+  "2018-22",
+  "2025-26"
+ ],
+ "rule": "LOLOS = rata-rata R > 0 di ketiga periode dengan >= 30 trade; skema dipilih hanya dari 2012-17",
+ "combos": 351,
+ "combos_pass": 0,
+ "schemes": [
+  {
+   "scheme": "TP bawaan model",
+   "win": 31.5,
+   "avg_r": -0.124,
+   "positive_pct": 14.5,
+   "breakeven_win": null
+  },
+  {
+   "scheme": "TP 0,5R",
+   "win": 51.7,
+   "avg_r": -0.207,
+   "positive_pct": 3.4,
+   "breakeven_win": 66.7
+  },
+  {
+   "scheme": "TP 1R",
+   "win": 41.4,
+   "avg_r": -0.169,
+   "positive_pct": 6.8,
+   "breakeven_win": 50.0
+  },
+  {
+   "scheme": "TP 1,5R",
+   "win": 35.7,
+   "avg_r": -0.145,
+   "positive_pct": 10.3,
+   "breakeven_win": 40.0
+  },
+  {
+   "scheme": "TP 2R",
+   "win": 32.5,
+   "avg_r": -0.124,
+   "positive_pct": 14.5,
+   "breakeven_win": 33.3
+  },
+  {
+   "scheme": "TP 3R",
+   "win": 28.4,
+   "avg_r": -0.107,
+   "positive_pct": 22.2,
+   "breakeven_win": 25.0
+  },
+  {
+   "scheme": "BE di 0,5R + TP 1R",
+   "win": 48.9,
+   "avg_r": -0.174,
+   "positive_pct": 4.3,
+   "breakeven_win": null
+  },
+  {
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "win": 52.2,
+   "avg_r": -0.172,
+   "positive_pct": 4.3,
+   "breakeven_win": null
+  },
+  {
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "win": 42.0,
+   "avg_r": -0.134,
+   "positive_pct": 10.3,
+   "breakeven_win": null
+  }
+ ],
+ "items": [
+  {
+   "name": "Trend F-ensemble H1",
+   "kind": "Trend",
+   "tf": "H1",
+   "filter": "-",
+   "scheme": "Skema F (5 posisi, TP1 1R, SL+)",
+   "pass": true,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1408,
+     "win": 47.1,
+     "avg_r": 0.072,
+     "total_r": 102.0,
+     "pf": 1.16,
+     "dd_r": -41.3
+    },
+    {
+     "period": "2018-22",
+     "n": 1064,
+     "win": 46.7,
+     "avg_r": 0.09,
+     "total_r": 95.4,
+     "pf": 1.19,
+     "dd_r": -41.8
+    },
+    {
+     "period": "2025-26",
+     "n": 340,
+     "win": 49.1,
+     "avg_r": 0.212,
+     "total_r": 72.0,
+     "pf": 1.48,
+     "dd_r": -25.4
+    }
+   ],
+   "note": "Tanpa filter bias H4"
+  },
+  {
+   "name": "Trend F-ensemble H1 + bias H4 (bot)",
+   "kind": "Trend",
+   "tf": "H1",
+   "filter": "-",
+   "scheme": "Skema F (5 posisi, TP1 1R, SL+)",
+   "pass": true,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1144,
+     "win": 46.9,
+     "avg_r": 0.102,
+     "total_r": 116.4,
+     "pf": 1.23,
+     "dd_r": -37.9
+    },
+    {
+     "period": "2018-22",
+     "n": 878,
+     "win": 46.1,
+     "avg_r": 0.114,
+     "total_r": 99.8,
+     "pf": 1.25,
+     "dd_r": -46.1
+    },
+    {
+     "period": "2025-26",
+     "n": 280,
+     "win": 49.3,
+     "avg_r": 0.241,
+     "total_r": 67.5,
+     "pf": 1.57,
+     "dd_r": -33.1
+    }
+   ],
+   "note": "Strategi bot (default)"
+  },
+  {
+   "name": "Setup SMC bot (sweep-MSS-FVG/OB)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 2R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 927,
+     "win": 29.1,
+     "avg_r": -0.139,
+     "total_r": -129.3,
+     "pf": 0.81,
+     "dd_r": -137.3
+    },
+    {
+     "period": "2018-22",
+     "n": 710,
+     "win": 24.2,
+     "avg_r": -0.282,
+     "total_r": -200.0,
+     "pf": 0.63,
+     "dd_r": -203.0
+    },
+    {
+     "period": "2025-26",
+     "n": 656,
+     "win": 25.8,
+     "avg_r": -0.232,
+     "total_r": -152.0,
+     "pf": 0.69,
+     "dd_r": -152.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Setup SMC bot (sweep-MSS-FVG/OB)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 798,
+     "win": 53.3,
+     "avg_r": -0.202,
+     "total_r": -161.1,
+     "pf": 0.58,
+     "dd_r": -161.1
+    },
+    {
+     "period": "2018-22",
+     "n": 601,
+     "win": 49.1,
+     "avg_r": -0.268,
+     "total_r": -161.1,
+     "pf": 0.48,
+     "dd_r": -163.5
+    },
+    {
+     "period": "2025-26",
+     "n": 560,
+     "win": 38.9,
+     "avg_r": -0.352,
+     "total_r": -196.9,
+     "pf": 0.42,
+     "dd_r": -196.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Setup SMC bot (sweep-MSS-FVG/OB)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "BE di 0,5R + TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 182,
+     "win": 53.3,
+     "avg_r": -0.139,
+     "total_r": -25.3,
+     "pf": 0.69,
+     "dd_r": -27.5
+    },
+    {
+     "period": "2018-22",
+     "n": 115,
+     "win": 40.9,
+     "avg_r": -0.322,
+     "total_r": -37.0,
+     "pf": 0.38,
+     "dd_r": -37.6
+    },
+    {
+     "period": "2025-26",
+     "n": 180,
+     "win": 36.7,
+     "avg_r": -0.306,
+     "total_r": -55.1,
+     "pf": 0.5,
+     "dd_r": -56.1
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Setup SMC bot (sweep-MSS-FVG/OB)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 290,
+     "win": 57.2,
+     "avg_r": -0.142,
+     "total_r": -41.2,
+     "pf": 0.67,
+     "dd_r": -43.5
+    },
+    {
+     "period": "2018-22",
+     "n": 181,
+     "win": 50.3,
+     "avg_r": -0.241,
+     "total_r": -43.6,
+     "pf": 0.51,
+     "dd_r": -46.1
+    },
+    {
+     "period": "2025-26",
+     "n": 216,
+     "win": 38.9,
+     "avg_r": -0.369,
+     "total_r": -79.7,
+     "pf": 0.42,
+     "dd_r": -79.7
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "ICT Silver Bullet 10-11 NY",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 213,
+     "win": 46.5,
+     "avg_r": -0.025,
+     "total_r": -5.4,
+     "pf": 0.92,
+     "dd_r": -8.3
+    },
+    {
+     "period": "2018-22",
+     "n": 142,
+     "win": 40.8,
+     "avg_r": -0.207,
+     "total_r": -29.4,
+     "pf": 0.54,
+     "dd_r": -32.1
+    },
+    {
+     "period": "2025-26",
+     "n": 42,
+     "win": 47.6,
+     "avg_r": -0.066,
+     "total_r": -2.8,
+     "pf": 0.84,
+     "dd_r": -7.3
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "ICT Silver Bullet 10-11 NY",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "BE di 0,5R + TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 213,
+     "win": 55.4,
+     "avg_r": -0.026,
+     "total_r": -5.6,
+     "pf": 0.9,
+     "dd_r": -7.4
+    },
+    {
+     "period": "2018-22",
+     "n": 142,
+     "win": 44.4,
+     "avg_r": -0.227,
+     "total_r": -32.2,
+     "pf": 0.46,
+     "dd_r": -34.6
+    },
+    {
+     "period": "2025-26",
+     "n": 42,
+     "win": 57.1,
+     "avg_r": -0.081,
+     "total_r": -3.4,
+     "pf": 0.76,
+     "dd_r": -6.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "ICT Silver Bullet 10-11 NY",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 42,
+     "win": 54.8,
+     "avg_r": -0.001,
+     "total_r": -0.1,
+     "pf": 0.99,
+     "dd_r": -3.8
+    },
+    {
+     "period": "2018-22",
+     "n": 34,
+     "win": 38.2,
+     "avg_r": -0.348,
+     "total_r": -11.8,
+     "pf": 0.28,
+     "dd_r": -13.6
+    },
+    {
+     "period": "2025-26",
+     "n": 16,
+     "win": 75.0,
+     "avg_r": 0.108,
+     "total_r": 1.7,
+     "pf": 1.43,
+     "dd_r": -3.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "ICT Silver Bullet 10-11 NY",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "BE di 0,5R + TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 40,
+     "win": 55.0,
+     "avg_r": -0.015,
+     "total_r": -0.6,
+     "pf": 0.94,
+     "dd_r": -4.1
+    },
+    {
+     "period": "2018-22",
+     "n": 32,
+     "win": 37.5,
+     "avg_r": -0.397,
+     "total_r": -12.7,
+     "pf": 0.18,
+     "dd_r": -14.0
+    },
+    {
+     "period": "2025-26",
+     "n": 14,
+     "win": 71.4,
+     "avg_r": -0.033,
+     "total_r": -0.5,
+     "pf": 0.89,
+     "dd_r": -3.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "ICT Silver Bullet 3 jendela",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 330,
+     "win": 56.1,
+     "avg_r": -0.041,
+     "total_r": -13.6,
+     "pf": 0.86,
+     "dd_r": -14.4
+    },
+    {
+     "period": "2018-22",
+     "n": 234,
+     "win": 50.9,
+     "avg_r": -0.159,
+     "total_r": -37.3,
+     "pf": 0.59,
+     "dd_r": -40.4
+    },
+    {
+     "period": "2025-26",
+     "n": 92,
+     "win": 54.3,
+     "avg_r": -0.128,
+     "total_r": -11.8,
+     "pf": 0.67,
+     "dd_r": -14.8
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "ICT Silver Bullet 3 jendela",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 466,
+     "win": 56.7,
+     "avg_r": -0.054,
+     "total_r": -25.3,
+     "pf": 0.82,
+     "dd_r": -27.2
+    },
+    {
+     "period": "2018-22",
+     "n": 377,
+     "win": 50.4,
+     "avg_r": -0.178,
+     "total_r": -67.2,
+     "pf": 0.56,
+     "dd_r": -72.3
+    },
+    {
+     "period": "2025-26",
+     "n": 128,
+     "win": 56.2,
+     "avg_r": -0.102,
+     "total_r": -13.0,
+     "pf": 0.73,
+     "dd_r": -17.7
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "ICT Silver Bullet 3 jendela",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 113,
+     "win": 38.9,
+     "avg_r": 0.071,
+     "total_r": 8.0,
+     "pf": 1.15,
+     "dd_r": -6.3
+    },
+    {
+     "period": "2018-22",
+     "n": 86,
+     "win": 26.7,
+     "avg_r": -0.31,
+     "total_r": -26.7,
+     "pf": 0.49,
+     "dd_r": -30.3
+    },
+    {
+     "period": "2025-26",
+     "n": 36,
+     "win": 38.9,
+     "avg_r": -0.107,
+     "total_r": -3.8,
+     "pf": 0.81,
+     "dd_r": -7.6
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "ICT Silver Bullet 3 jendela",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 110,
+     "win": 60.0,
+     "avg_r": -0.007,
+     "total_r": -0.7,
+     "pf": 0.98,
+     "dd_r": -5.6
+    },
+    {
+     "period": "2018-22",
+     "n": 85,
+     "win": 40.0,
+     "avg_r": -0.307,
+     "total_r": -26.1,
+     "pf": 0.38,
+     "dd_r": -26.9
+    },
+    {
+     "period": "2025-26",
+     "n": 36,
+     "win": 55.6,
+     "avg_r": -0.185,
+     "total_r": -6.7,
+     "pf": 0.56,
+     "dd_r": -8.4
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Judas swing / Power of 3",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 920,
+     "win": 27.0,
+     "avg_r": -0.228,
+     "total_r": -209.9,
+     "pf": 0.68,
+     "dd_r": -212.6
+    },
+    {
+     "period": "2018-22",
+     "n": 707,
+     "win": 28.7,
+     "avg_r": -0.184,
+     "total_r": -130.4,
+     "pf": 0.74,
+     "dd_r": -141.4
+    },
+    {
+     "period": "2025-26",
+     "n": 208,
+     "win": 29.8,
+     "avg_r": -0.127,
+     "total_r": -26.3,
+     "pf": 0.82,
+     "dd_r": -33.4
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Judas swing / Power of 3",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 920,
+     "win": 46.7,
+     "avg_r": -0.299,
+     "total_r": -274.7,
+     "pf": 0.44,
+     "dd_r": -275.2
+    },
+    {
+     "period": "2018-22",
+     "n": 707,
+     "win": 47.0,
+     "avg_r": -0.293,
+     "total_r": -207.1,
+     "pf": 0.44,
+     "dd_r": -207.6
+    },
+    {
+     "period": "2025-26",
+     "n": 208,
+     "win": 51.4,
+     "avg_r": -0.226,
+     "total_r": -47.0,
+     "pf": 0.53,
+     "dd_r": -48.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Judas swing / Power of 3",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "BE di 0,5R + TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 288,
+     "win": 45.8,
+     "avg_r": -0.208,
+     "total_r": -59.8,
+     "pf": 0.59,
+     "dd_r": -60.4
+    },
+    {
+     "period": "2018-22",
+     "n": 211,
+     "win": 45.5,
+     "avg_r": -0.232,
+     "total_r": -49.0,
+     "pf": 0.55,
+     "dd_r": -51.2
+    },
+    {
+     "period": "2025-26",
+     "n": 59,
+     "win": 37.3,
+     "avg_r": -0.39,
+     "total_r": -23.0,
+     "pf": 0.36,
+     "dd_r": -24.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Judas swing / Power of 3",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 288,
+     "win": 49.7,
+     "avg_r": -0.255,
+     "total_r": -73.5,
+     "pf": 0.49,
+     "dd_r": -74.5
+    },
+    {
+     "period": "2018-22",
+     "n": 211,
+     "win": 49.3,
+     "avg_r": -0.261,
+     "total_r": -55.0,
+     "pf": 0.49,
+     "dd_r": -56.5
+    },
+    {
+     "period": "2025-26",
+     "n": 59,
+     "win": 40.7,
+     "avg_r": -0.39,
+     "total_r": -23.0,
+     "pf": 0.34,
+     "dd_r": -23.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Judas swing + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 613,
+     "win": 57.1,
+     "avg_r": -0.135,
+     "total_r": -82.8,
+     "pf": 0.68,
+     "dd_r": -85.3
+    },
+    {
+     "period": "2018-22",
+     "n": 470,
+     "win": 54.9,
+     "avg_r": -0.163,
+     "total_r": -76.8,
+     "pf": 0.63,
+     "dd_r": -80.3
+    },
+    {
+     "period": "2025-26",
+     "n": 136,
+     "win": 52.2,
+     "avg_r": -0.173,
+     "total_r": -23.6,
+     "pf": 0.6,
+     "dd_r": -24.1
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Judas swing + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 185,
+     "win": 43.2,
+     "avg_r": -0.138,
+     "total_r": -25.5,
+     "pf": 0.75,
+     "dd_r": -27.5
+    },
+    {
+     "period": "2018-22",
+     "n": 136,
+     "win": 50.7,
+     "avg_r": 0.011,
+     "total_r": 1.4,
+     "pf": 1.02,
+     "dd_r": -12.7
+    },
+    {
+     "period": "2025-26",
+     "n": 39,
+     "win": 35.9,
+     "avg_r": -0.27,
+     "total_r": -10.5,
+     "pf": 0.55,
+     "dd_r": -12.5
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Judas swing + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 185,
+     "win": 56.2,
+     "avg_r": -0.143,
+     "total_r": -26.5,
+     "pf": 0.66,
+     "dd_r": -30.0
+    },
+    {
+     "period": "2018-22",
+     "n": 136,
+     "win": 62.5,
+     "avg_r": -0.06,
+     "total_r": -8.2,
+     "pf": 0.84,
+     "dd_r": -11.2
+    },
+    {
+     "period": "2025-26",
+     "n": 39,
+     "win": 51.3,
+     "avg_r": -0.209,
+     "total_r": -8.1,
+     "pf": 0.55,
+     "dd_r": -9.1
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Sweep PDH/PDL",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 813,
+     "win": 33.8,
+     "avg_r": -0.112,
+     "total_r": -91.2,
+     "pf": 0.81,
+     "dd_r": -99.3
+    },
+    {
+     "period": "2018-22",
+     "n": 657,
+     "win": 36.1,
+     "avg_r": -0.061,
+     "total_r": -40.0,
+     "pf": 0.9,
+     "dd_r": -64.1
+    },
+    {
+     "period": "2025-26",
+     "n": 187,
+     "win": 27.8,
+     "avg_r": -0.205,
+     "total_r": -38.4,
+     "pf": 0.68,
+     "dd_r": -45.5
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Sweep PDH/PDL",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 813,
+     "win": 52.3,
+     "avg_r": -0.187,
+     "total_r": -151.7,
+     "pf": 0.58,
+     "dd_r": -153.2
+    },
+    {
+     "period": "2018-22",
+     "n": 657,
+     "win": 52.7,
+     "avg_r": -0.194,
+     "total_r": -127.4,
+     "pf": 0.57,
+     "dd_r": -130.9
+    },
+    {
+     "period": "2025-26",
+     "n": 187,
+     "win": 48.1,
+     "avg_r": -0.239,
+     "total_r": -44.8,
+     "pf": 0.5,
+     "dd_r": -44.8
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Sweep PDH/PDL",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 71,
+     "win": 54.9,
+     "avg_r": 0.128,
+     "total_r": 9.1,
+     "pf": 1.3,
+     "dd_r": -6.9
+    },
+    {
+     "period": "2018-22",
+     "n": 38,
+     "win": 28.9,
+     "avg_r": -0.378,
+     "total_r": -14.4,
+     "pf": 0.46,
+     "dd_r": -18.4
+    },
+    {
+     "period": "2025-26",
+     "n": 16,
+     "win": 43.8,
+     "avg_r": 0.096,
+     "total_r": 1.5,
+     "pf": 1.17,
+     "dd_r": -4.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Sweep PDH/PDL",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 71,
+     "win": 60.6,
+     "avg_r": -0.074,
+     "total_r": -5.2,
+     "pf": 0.8,
+     "dd_r": -7.7
+    },
+    {
+     "period": "2018-22",
+     "n": 38,
+     "win": 36.8,
+     "avg_r": -0.432,
+     "total_r": -16.4,
+     "pf": 0.3,
+     "dd_r": -17.9
+    },
+    {
+     "period": "2025-26",
+     "n": 16,
+     "win": 56.2,
+     "avg_r": -0.156,
+     "total_r": -2.5,
+     "pf": 0.64,
+     "dd_r": -5.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Sweep PDH/PDL + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 655,
+     "win": 42.7,
+     "avg_r": -0.108,
+     "total_r": -70.5,
+     "pf": 0.75,
+     "dd_r": -70.5
+    },
+    {
+     "period": "2018-22",
+     "n": 521,
+     "win": 46.1,
+     "avg_r": -0.057,
+     "total_r": -29.6,
+     "pf": 0.86,
+     "dd_r": -41.0
+    },
+    {
+     "period": "2025-26",
+     "n": 145,
+     "win": 45.5,
+     "avg_r": -0.052,
+     "total_r": -7.5,
+     "pf": 0.88,
+     "dd_r": -15.1
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Sweep PDH/PDL + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 655,
+     "win": 51.3,
+     "avg_r": -0.127,
+     "total_r": -83.0,
+     "pf": 0.65,
+     "dd_r": -83.0
+    },
+    {
+     "period": "2018-22",
+     "n": 521,
+     "win": 54.7,
+     "avg_r": -0.088,
+     "total_r": -45.6,
+     "pf": 0.74,
+     "dd_r": -50.6
+    },
+    {
+     "period": "2025-26",
+     "n": 145,
+     "win": 57.9,
+     "avg_r": -0.066,
+     "total_r": -9.5,
+     "pf": 0.81,
+     "dd_r": -14.8
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Sweep PDH/PDL + MSS",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 46,
+     "win": 52.2,
+     "avg_r": -0.199,
+     "total_r": -9.2,
+     "pf": 0.54,
+     "dd_r": -12.4
+    },
+    {
+     "period": "2018-22",
+     "n": 14,
+     "win": 78.6,
+     "avg_r": 0.231,
+     "total_r": 3.2,
+     "pf": 2.42,
+     "dd_r": -1.0
+    },
+    {
+     "period": "2025-26",
+     "n": 10,
+     "win": 70.0,
+     "avg_r": 0.227,
+     "total_r": 2.3,
+     "pf": 2.84,
+     "dd_r": -1.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Turtle Soup 20",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 3551,
+     "win": 20.3,
+     "avg_r": -0.305,
+     "total_r": -1082.8,
+     "pf": 0.62,
+     "dd_r": -1083.5
+    },
+    {
+     "period": "2018-22",
+     "n": 2637,
+     "win": 19.4,
+     "avg_r": -0.3,
+     "total_r": -792.0,
+     "pf": 0.63,
+     "dd_r": -800.7
+    },
+    {
+     "period": "2025-26",
+     "n": 966,
+     "win": 26.6,
+     "avg_r": -0.032,
+     "total_r": -30.8,
+     "pf": 0.96,
+     "dd_r": -89.8
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Turtle Soup 20",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 4143,
+     "win": 40.7,
+     "avg_r": -0.39,
+     "total_r": -1615.4,
+     "pf": 0.34,
+     "dd_r": -1615.9
+    },
+    {
+     "period": "2018-22",
+     "n": 3060,
+     "win": 39.1,
+     "avg_r": -0.413,
+     "total_r": -1263.2,
+     "pf": 0.32,
+     "dd_r": -1263.2
+    },
+    {
+     "period": "2025-26",
+     "n": 1100,
+     "win": 47.3,
+     "avg_r": -0.291,
+     "total_r": -320.3,
+     "pf": 0.45,
+     "dd_r": -320.8
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Turtle Soup 20",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1234,
+     "win": 29.1,
+     "avg_r": -0.293,
+     "total_r": -361.1,
+     "pf": 0.59,
+     "dd_r": -363.6
+    },
+    {
+     "period": "2018-22",
+     "n": 862,
+     "win": 27.7,
+     "avg_r": -0.309,
+     "total_r": -266.5,
+     "pf": 0.57,
+     "dd_r": -275.5
+    },
+    {
+     "period": "2025-26",
+     "n": 330,
+     "win": 41.5,
+     "avg_r": 0.023,
+     "total_r": 7.7,
+     "pf": 1.04,
+     "dd_r": -15.5
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Turtle Soup 20",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1290,
+     "win": 41.6,
+     "avg_r": -0.376,
+     "total_r": -485.3,
+     "pf": 0.36,
+     "dd_r": -485.8
+    },
+    {
+     "period": "2018-22",
+     "n": 912,
+     "win": 41.6,
+     "avg_r": -0.374,
+     "total_r": -341.5,
+     "pf": 0.36,
+     "dd_r": -343.0
+    },
+    {
+     "period": "2025-26",
+     "n": 344,
+     "win": 51.7,
+     "avg_r": -0.225,
+     "total_r": -77.4,
+     "pf": 0.53,
+     "dd_r": -77.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "FVG displacement",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 3638,
+     "win": 32.2,
+     "avg_r": -0.2,
+     "total_r": -728.3,
+     "pf": 0.71,
+     "dd_r": -730.8
+    },
+    {
+     "period": "2018-22",
+     "n": 2746,
+     "win": 32.7,
+     "avg_r": -0.184,
+     "total_r": -504.6,
+     "pf": 0.73,
+     "dd_r": -513.6
+    },
+    {
+     "period": "2025-26",
+     "n": 1017,
+     "win": 36.9,
+     "avg_r": -0.082,
+     "total_r": -82.9,
+     "pf": 0.87,
+     "dd_r": -88.4
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "FVG displacement",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 4016,
+     "win": 50.5,
+     "avg_r": -0.23,
+     "total_r": -924.7,
+     "pf": 0.53,
+     "dd_r": -926.6
+    },
+    {
+     "period": "2018-22",
+     "n": 2998,
+     "win": 51.8,
+     "avg_r": -0.207,
+     "total_r": -620.3,
+     "pf": 0.57,
+     "dd_r": -625.3
+    },
+    {
+     "period": "2025-26",
+     "n": 1104,
+     "win": 59.1,
+     "avg_r": -0.082,
+     "total_r": -90.5,
+     "pf": 0.8,
+     "dd_r": -93.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "FVG displacement",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1418,
+     "win": 32.1,
+     "avg_r": -0.2,
+     "total_r": -283.5,
+     "pf": 0.71,
+     "dd_r": -283.5
+    },
+    {
+     "period": "2018-22",
+     "n": 973,
+     "win": 33.5,
+     "avg_r": -0.166,
+     "total_r": -161.1,
+     "pf": 0.75,
+     "dd_r": -167.1
+    },
+    {
+     "period": "2025-26",
+     "n": 403,
+     "win": 38.7,
+     "avg_r": -0.048,
+     "total_r": -19.4,
+     "pf": 0.92,
+     "dd_r": -28.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "FVG displacement",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1486,
+     "win": 50.5,
+     "avg_r": -0.237,
+     "total_r": -352.3,
+     "pf": 0.52,
+     "dd_r": -352.3
+    },
+    {
+     "period": "2018-22",
+     "n": 1013,
+     "win": 52.9,
+     "avg_r": -0.178,
+     "total_r": -180.8,
+     "pf": 0.62,
+     "dd_r": -185.3
+    },
+    {
+     "period": "2025-26",
+     "n": 412,
+     "win": 59.2,
+     "avg_r": -0.09,
+     "total_r": -37.2,
+     "pf": 0.79,
+     "dd_r": -40.1
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "BOS + Order Block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2278,
+     "win": 21.1,
+     "avg_r": -0.166,
+     "total_r": -377.3,
+     "pf": 0.79,
+     "dd_r": -398.3
+    },
+    {
+     "period": "2018-22",
+     "n": 1790,
+     "win": 21.5,
+     "avg_r": -0.146,
+     "total_r": -262.0,
+     "pf": 0.82,
+     "dd_r": -286.0
+    },
+    {
+     "period": "2025-26",
+     "n": 564,
+     "win": 25.5,
+     "avg_r": 0.011,
+     "total_r": 6.4,
+     "pf": 1.02,
+     "dd_r": -57.1
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "BOS + Order Block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2399,
+     "win": 52.4,
+     "avg_r": -0.201,
+     "total_r": -481.5,
+     "pf": 0.58,
+     "dd_r": -487.9
+    },
+    {
+     "period": "2018-22",
+     "n": 1904,
+     "win": 52.9,
+     "avg_r": -0.206,
+     "total_r": -392.9,
+     "pf": 0.56,
+     "dd_r": -396.4
+    },
+    {
+     "period": "2025-26",
+     "n": 616,
+     "win": 60.7,
+     "avg_r": -0.063,
+     "total_r": -38.5,
+     "pf": 0.84,
+     "dd_r": -45.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "BOS + Order Block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 916,
+     "win": 26.6,
+     "avg_r": -0.217,
+     "total_r": -198.6,
+     "pf": 0.71,
+     "dd_r": -215.6
+    },
+    {
+     "period": "2018-22",
+     "n": 653,
+     "win": 26.0,
+     "avg_r": -0.224,
+     "total_r": -146.5,
+     "pf": 0.7,
+     "dd_r": -152.5
+    },
+    {
+     "period": "2025-26",
+     "n": 260,
+     "win": 38.1,
+     "avg_r": 0.14,
+     "total_r": 36.5,
+     "pf": 1.23,
+     "dd_r": -12.5
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "BOS + Order Block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 841,
+     "win": 50.7,
+     "avg_r": -0.224,
+     "total_r": -188.0,
+     "pf": 0.55,
+     "dd_r": -193.3
+    },
+    {
+     "period": "2018-22",
+     "n": 612,
+     "win": 55.6,
+     "avg_r": -0.161,
+     "total_r": -98.6,
+     "pf": 0.63,
+     "dd_r": -100.7
+    },
+    {
+     "period": "2025-26",
+     "n": 238,
+     "win": 61.3,
+     "avg_r": -0.036,
+     "total_r": -8.4,
+     "pf": 0.91,
+     "dd_r": -19.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "OTE 70,5%",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2153,
+     "win": 35.9,
+     "avg_r": -0.28,
+     "total_r": -603.2,
+     "pf": 0.57,
+     "dd_r": -607.8
+    },
+    {
+     "period": "2018-22",
+     "n": 1595,
+     "win": 35.0,
+     "avg_r": -0.296,
+     "total_r": -472.0,
+     "pf": 0.55,
+     "dd_r": -473.0
+    },
+    {
+     "period": "2025-26",
+     "n": 514,
+     "win": 44.4,
+     "avg_r": -0.054,
+     "total_r": -27.8,
+     "pf": 0.9,
+     "dd_r": -36.3
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "OTE 70,5%",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 311,
+     "win": 39.9,
+     "avg_r": -0.402,
+     "total_r": -125.0,
+     "pf": 0.33,
+     "dd_r": -126.5
+    },
+    {
+     "period": "2018-22",
+     "n": 204,
+     "win": 39.7,
+     "avg_r": -0.404,
+     "total_r": -82.5,
+     "pf": 0.33,
+     "dd_r": -83.5
+    },
+    {
+     "period": "2025-26",
+     "n": 69,
+     "win": 47.8,
+     "avg_r": -0.283,
+     "total_r": -19.5,
+     "pf": 0.46,
+     "dd_r": -19.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "OTE 70,5%",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 821,
+     "win": 34.1,
+     "avg_r": -0.31,
+     "total_r": -254.4,
+     "pf": 0.53,
+     "dd_r": -261.2
+    },
+    {
+     "period": "2018-22",
+     "n": 545,
+     "win": 36.1,
+     "avg_r": -0.276,
+     "total_r": -150.3,
+     "pf": 0.57,
+     "dd_r": -153.3
+    },
+    {
+     "period": "2025-26",
+     "n": 204,
+     "win": 43.6,
+     "avg_r": -0.063,
+     "total_r": -13.0,
+     "pf": 0.89,
+     "dd_r": -23.7
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "OTE 70,5%",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 160,
+     "win": 41.2,
+     "avg_r": -0.327,
+     "total_r": -52.3,
+     "pf": 0.43,
+     "dd_r": -56.9
+    },
+    {
+     "period": "2018-22",
+     "n": 88,
+     "win": 46.6,
+     "avg_r": -0.268,
+     "total_r": -23.6,
+     "pf": 0.49,
+     "dd_r": -23.6
+    },
+    {
+     "period": "2025-26",
+     "n": 33,
+     "win": 54.5,
+     "avg_r": -0.189,
+     "total_r": -6.2,
+     "pf": 0.59,
+     "dd_r": -8.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "CISD setelah sweep",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 1R + BE, sisa TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 3172,
+     "win": 44.4,
+     "avg_r": -0.115,
+     "total_r": -366.4,
+     "pf": 0.77,
+     "dd_r": -372.7
+    },
+    {
+     "period": "2018-22",
+     "n": 2618,
+     "win": 45.0,
+     "avg_r": -0.104,
+     "total_r": -272.9,
+     "pf": 0.8,
+     "dd_r": -277.6
+    },
+    {
+     "period": "2025-26",
+     "n": 902,
+     "win": 47.6,
+     "avg_r": -0.042,
+     "total_r": -38.0,
+     "pf": 0.91,
+     "dd_r": -42.8
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "CISD setelah sweep",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 3890,
+     "win": 55.6,
+     "avg_r": -0.135,
+     "total_r": -526.9,
+     "pf": 0.67,
+     "dd_r": -531.3
+    },
+    {
+     "period": "2018-22",
+     "n": 3293,
+     "win": 56.6,
+     "avg_r": -0.134,
+     "total_r": -442.3,
+     "pf": 0.67,
+     "dd_r": -444.6
+    },
+    {
+     "period": "2025-26",
+     "n": 1175,
+     "win": 61.2,
+     "avg_r": -0.072,
+     "total_r": -85.1,
+     "pf": 0.81,
+     "dd_r": -87.6
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "CISD setelah sweep",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1239,
+     "win": 44.3,
+     "avg_r": -0.111,
+     "total_r": -137.6,
+     "pf": 0.78,
+     "dd_r": -146.9
+    },
+    {
+     "period": "2018-22",
+     "n": 882,
+     "win": 44.9,
+     "avg_r": -0.111,
+     "total_r": -97.8,
+     "pf": 0.79,
+     "dd_r": -102.3
+    },
+    {
+     "period": "2025-26",
+     "n": 310,
+     "win": 48.1,
+     "avg_r": -0.043,
+     "total_r": -13.3,
+     "pf": 0.91,
+     "dd_r": -25.3
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "CISD setelah sweep",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1254,
+     "win": 56.1,
+     "avg_r": -0.135,
+     "total_r": -169.7,
+     "pf": 0.67,
+     "dd_r": -177.9
+    },
+    {
+     "period": "2018-22",
+     "n": 895,
+     "win": 57.7,
+     "avg_r": -0.129,
+     "total_r": -115.5,
+     "pf": 0.69,
+     "dd_r": -118.0
+    },
+    {
+     "period": "2025-26",
+     "n": 314,
+     "win": 63.4,
+     "avg_r": -0.036,
+     "total_r": -11.4,
+     "pf": 0.9,
+     "dd_r": -13.4
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Breaker block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2244,
+     "win": 17.9,
+     "avg_r": -0.29,
+     "total_r": -650.9,
+     "pf": 0.65,
+     "dd_r": -666.9
+    },
+    {
+     "period": "2018-22",
+     "n": 1743,
+     "win": 18.2,
+     "avg_r": -0.274,
+     "total_r": -478.0,
+     "pf": 0.67,
+     "dd_r": -480.0
+    },
+    {
+     "period": "2025-26",
+     "n": 613,
+     "win": 22.8,
+     "avg_r": -0.087,
+     "total_r": -53.0,
+     "pf": 0.89,
+     "dd_r": -75.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Breaker block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2032,
+     "win": 41.9,
+     "avg_r": -0.336,
+     "total_r": -682.6,
+     "pf": 0.42,
+     "dd_r": -685.2
+    },
+    {
+     "period": "2018-22",
+     "n": 1599,
+     "win": 44.5,
+     "avg_r": -0.287,
+     "total_r": -458.4,
+     "pf": 0.48,
+     "dd_r": -458.4
+    },
+    {
+     "period": "2025-26",
+     "n": 602,
+     "win": 56.1,
+     "avg_r": -0.105,
+     "total_r": -63.2,
+     "pf": 0.76,
+     "dd_r": -69.1
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Breaker block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 802,
+     "win": 17.0,
+     "avg_r": -0.325,
+     "total_r": -261.0,
+     "pf": 0.61,
+     "dd_r": -271.0
+    },
+    {
+     "period": "2018-22",
+     "n": 564,
+     "win": 21.5,
+     "avg_r": -0.145,
+     "total_r": -81.8,
+     "pf": 0.82,
+     "dd_r": -92.8
+    },
+    {
+     "period": "2025-26",
+     "n": 215,
+     "win": 20.5,
+     "avg_r": -0.181,
+     "total_r": -39.0,
+     "pf": 0.77,
+     "dd_r": -41.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Breaker block",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 494,
+     "win": 40.7,
+     "avg_r": -0.395,
+     "total_r": -195.3,
+     "pf": 0.34,
+     "dd_r": -195.8
+    },
+    {
+     "period": "2018-22",
+     "n": 344,
+     "win": 44.8,
+     "avg_r": -0.329,
+     "total_r": -113.3,
+     "pf": 0.4,
+     "dd_r": -114.3
+    },
+    {
+     "period": "2025-26",
+     "n": 142,
+     "win": 52.1,
+     "avg_r": -0.218,
+     "total_r": -31.0,
+     "pf": 0.54,
+     "dd_r": -31.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Unicorn (breaker + FVG)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 552,
+     "win": 20.1,
+     "avg_r": -0.397,
+     "total_r": -219.2,
+     "pf": 0.5,
+     "dd_r": -220.2
+    },
+    {
+     "period": "2018-22",
+     "n": 451,
+     "win": 23.1,
+     "avg_r": -0.315,
+     "total_r": -142.2,
+     "pf": 0.59,
+     "dd_r": -142.2
+    },
+    {
+     "period": "2025-26",
+     "n": 185,
+     "win": 23.2,
+     "avg_r": -0.303,
+     "total_r": -56.0,
+     "pf": 0.61,
+     "dd_r": -62.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Unicorn (breaker + FVG)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 452,
+     "win": 37.4,
+     "avg_r": -0.413,
+     "total_r": -186.5,
+     "pf": 0.34,
+     "dd_r": -187.6
+    },
+    {
+     "period": "2018-22",
+     "n": 370,
+     "win": 40.8,
+     "avg_r": -0.34,
+     "total_r": -125.9,
+     "pf": 0.42,
+     "dd_r": -125.9
+    },
+    {
+     "period": "2025-26",
+     "n": 148,
+     "win": 41.9,
+     "avg_r": -0.329,
+     "total_r": -48.7,
+     "pf": 0.43,
+     "dd_r": -49.3
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Unicorn (breaker + FVG)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 232,
+     "win": 16.4,
+     "avg_r": -0.345,
+     "total_r": -80.0,
+     "pf": 0.59,
+     "dd_r": -82.0
+    },
+    {
+     "period": "2018-22",
+     "n": 173,
+     "win": 16.2,
+     "avg_r": -0.363,
+     "total_r": -62.8,
+     "pf": 0.57,
+     "dd_r": -65.8
+    },
+    {
+     "period": "2025-26",
+     "n": 97,
+     "win": 16.5,
+     "avg_r": -0.34,
+     "total_r": -33.0,
+     "pf": 0.59,
+     "dd_r": -37.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Unicorn (breaker + FVG)",
+   "kind": "SMC/ICT",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "50% di 0,5R + BE, sisa TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 151,
+     "win": 37.7,
+     "avg_r": -0.417,
+     "total_r": -62.9,
+     "pf": 0.33,
+     "dd_r": -65.9
+    },
+    {
+     "period": "2018-22",
+     "n": 106,
+     "win": 41.5,
+     "avg_r": -0.31,
+     "total_r": -32.9,
+     "pf": 0.47,
+     "dd_r": -34.1
+    },
+    {
+     "period": "2025-26",
+     "n": 58,
+     "win": 39.7,
+     "avg_r": -0.34,
+     "total_r": -19.7,
+     "pf": 0.44,
+     "dd_r": -19.7
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping breakout searah trend H1",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2185,
+     "win": 27.8,
+     "avg_r": -0.176,
+     "total_r": -383.5,
+     "pf": 0.74,
+     "dd_r": -392.0
+    },
+    {
+     "period": "2018-22",
+     "n": 1674,
+     "win": 29.7,
+     "avg_r": -0.153,
+     "total_r": -256.1,
+     "pf": 0.77,
+     "dd_r": -265.8
+    },
+    {
+     "period": "2025-26",
+     "n": 633,
+     "win": 36.3,
+     "avg_r": 0.097,
+     "total_r": 61.6,
+     "pf": 1.16,
+     "dd_r": -24.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping breakout searah trend H1",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2681,
+     "win": 48.9,
+     "avg_r": -0.256,
+     "total_r": -685.5,
+     "pf": 0.49,
+     "dd_r": -687.9
+    },
+    {
+     "period": "2018-22",
+     "n": 2165,
+     "win": 52.1,
+     "avg_r": -0.211,
+     "total_r": -455.8,
+     "pf": 0.55,
+     "dd_r": -460.3
+    },
+    {
+     "period": "2025-26",
+     "n": 888,
+     "win": 61.1,
+     "avg_r": -0.078,
+     "total_r": -69.3,
+     "pf": 0.8,
+     "dd_r": -72.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping EMA 9/21 + EMA200",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2665,
+     "win": 22.9,
+     "avg_r": -0.187,
+     "total_r": -497.9,
+     "pf": 0.76,
+     "dd_r": -514.3
+    },
+    {
+     "period": "2018-22",
+     "n": 1974,
+     "win": 25.2,
+     "avg_r": -0.119,
+     "total_r": -234.0,
+     "pf": 0.84,
+     "dd_r": -240.0
+    },
+    {
+     "period": "2025-26",
+     "n": 627,
+     "win": 28.4,
+     "avg_r": 0.034,
+     "total_r": 21.6,
+     "pf": 1.05,
+     "dd_r": -34.2
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping EMA 9/21 + EMA200",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2898,
+     "win": 48.7,
+     "avg_r": -0.271,
+     "total_r": -784.9,
+     "pf": 0.47,
+     "dd_r": -789.4
+    },
+    {
+     "period": "2018-22",
+     "n": 2153,
+     "win": 53.9,
+     "avg_r": -0.196,
+     "total_r": -421.2,
+     "pf": 0.58,
+     "dd_r": -424.2
+    },
+    {
+     "period": "2025-26",
+     "n": 693,
+     "win": 58.6,
+     "avg_r": -0.127,
+     "total_r": -87.9,
+     "pf": 0.7,
+     "dd_r": -92.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping EMA 9/21 + EMA200",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1477,
+     "win": 20.6,
+     "avg_r": -0.237,
+     "total_r": -350.1,
+     "pf": 0.7,
+     "dd_r": -360.9
+    },
+    {
+     "period": "2018-22",
+     "n": 992,
+     "win": 23.9,
+     "avg_r": -0.136,
+     "total_r": -135.2,
+     "pf": 0.82,
+     "dd_r": -146.5
+    },
+    {
+     "period": "2025-26",
+     "n": 360,
+     "win": 29.2,
+     "avg_r": 0.062,
+     "total_r": 22.3,
+     "pf": 1.09,
+     "dd_r": -31.3
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping EMA 9/21 + EMA200",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1560,
+     "win": 46.3,
+     "avg_r": -0.305,
+     "total_r": -475.9,
+     "pf": 0.43,
+     "dd_r": -478.4
+    },
+    {
+     "period": "2018-22",
+     "n": 1051,
+     "win": 52.8,
+     "avg_r": -0.216,
+     "total_r": -226.5,
+     "pf": 0.55,
+     "dd_r": -229.5
+    },
+    {
+     "period": "2025-26",
+     "n": 381,
+     "win": 58.3,
+     "avg_r": -0.132,
+     "total_r": -50.3,
+     "pf": 0.69,
+     "dd_r": -53.8
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping RSI(2) Connors",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 4041,
+     "win": 34.2,
+     "avg_r": -0.094,
+     "total_r": -380.8,
+     "pf": 0.84,
+     "dd_r": -411.1
+    },
+    {
+     "period": "2018-22",
+     "n": 2904,
+     "win": 34.4,
+     "avg_r": -0.087,
+     "total_r": -252.5,
+     "pf": 0.85,
+     "dd_r": -266.8
+    },
+    {
+     "period": "2025-26",
+     "n": 965,
+     "win": 39.6,
+     "avg_r": 0.058,
+     "total_r": 55.9,
+     "pf": 1.1,
+     "dd_r": -21.9
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping RSI(2) Connors",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 5174,
+     "win": 57.5,
+     "avg_r": -0.116,
+     "total_r": -599.0,
+     "pf": 0.71,
+     "dd_r": -601.2
+    },
+    {
+     "period": "2018-22",
+     "n": 3699,
+     "win": 58.9,
+     "avg_r": -0.096,
+     "total_r": -355.3,
+     "pf": 0.75,
+     "dd_r": -357.8
+    },
+    {
+     "period": "2025-26",
+     "n": 1305,
+     "win": 66.0,
+     "avg_r": 0.0,
+     "total_r": 0.0,
+     "pf": 1.0,
+     "dd_r": -24.8
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping RSI(2) Connors",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 2844,
+     "win": 40.1,
+     "avg_r": -0.079,
+     "total_r": -224.6,
+     "pf": 0.85,
+     "dd_r": -244.4
+    },
+    {
+     "period": "2018-22",
+     "n": 1959,
+     "win": 40.6,
+     "avg_r": -0.061,
+     "total_r": -120.4,
+     "pf": 0.89,
+     "dd_r": -125.5
+    },
+    {
+     "period": "2025-26",
+     "n": 692,
+     "win": 46.8,
+     "avg_r": 0.06,
+     "total_r": 41.8,
+     "pf": 1.12,
+     "dd_r": -14.5
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping RSI(2) Connors",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 3438,
+     "win": 58.1,
+     "avg_r": -0.108,
+     "total_r": -371.1,
+     "pf": 0.73,
+     "dd_r": -381.3
+    },
+    {
+     "period": "2018-22",
+     "n": 2360,
+     "win": 60.4,
+     "avg_r": -0.078,
+     "total_r": -183.5,
+     "pf": 0.79,
+     "dd_r": -187.5
+    },
+    {
+     "period": "2025-26",
+     "n": 893,
+     "win": 67.3,
+     "avg_r": 0.022,
+     "total_r": 19.7,
+     "pf": 1.07,
+     "dd_r": -20.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping Bollinger reversal",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 6339,
+     "win": 29.6,
+     "avg_r": -0.127,
+     "total_r": -805.1,
+     "pf": 0.81,
+     "dd_r": -817.5
+    },
+    {
+     "period": "2018-22",
+     "n": 4633,
+     "win": 28.6,
+     "avg_r": -0.131,
+     "total_r": -605.2,
+     "pf": 0.81,
+     "dd_r": -622.2
+    },
+    {
+     "period": "2025-26",
+     "n": 1519,
+     "win": 33.4,
+     "avg_r": 0.003,
+     "total_r": 4.9,
+     "pf": 1.01,
+     "dd_r": -82.9
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping Bollinger reversal",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 7360,
+     "win": 54.4,
+     "avg_r": -0.179,
+     "total_r": -1320.8,
+     "pf": 0.6,
+     "dd_r": -1322.8
+    },
+    {
+     "period": "2018-22",
+     "n": 5431,
+     "win": 53.5,
+     "avg_r": -0.192,
+     "total_r": -1041.2,
+     "pf": 0.58,
+     "dd_r": -1043.2
+    },
+    {
+     "period": "2025-26",
+     "n": 1811,
+     "win": 59.7,
+     "avg_r": -0.103,
+     "total_r": -186.9,
+     "pf": 0.74,
+     "dd_r": -196.6
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping Bollinger reversal",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1805,
+     "win": 36.5,
+     "avg_r": -0.114,
+     "total_r": -206.3,
+     "pf": 0.81,
+     "dd_r": -214.2
+    },
+    {
+     "period": "2018-22",
+     "n": 1253,
+     "win": 35.5,
+     "avg_r": -0.145,
+     "total_r": -182.0,
+     "pf": 0.77,
+     "dd_r": -189.7
+    },
+    {
+     "period": "2025-26",
+     "n": 437,
+     "win": 41.2,
+     "avg_r": -0.003,
+     "total_r": -1.2,
+     "pf": 1.0,
+     "dd_r": -35.6
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping Bollinger reversal",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1832,
+     "win": 54.7,
+     "avg_r": -0.171,
+     "total_r": -313.8,
+     "pf": 0.61,
+     "dd_r": -313.8
+    },
+    {
+     "period": "2018-22",
+     "n": 1279,
+     "win": 55.0,
+     "avg_r": -0.17,
+     "total_r": -217.3,
+     "pf": 0.62,
+     "dd_r": -218.8
+    },
+    {
+     "period": "2025-26",
+     "n": 449,
+     "win": 59.9,
+     "avg_r": -0.096,
+     "total_r": -43.0,
+     "pf": 0.76,
+     "dd_r": -50.0
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping ORB London (02-03 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 3R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1182,
+     "win": 24.7,
+     "avg_r": -0.119,
+     "total_r": -140.7,
+     "pf": 0.84,
+     "dd_r": -152.8
+    },
+    {
+     "period": "2018-22",
+     "n": 892,
+     "win": 25.2,
+     "avg_r": -0.098,
+     "total_r": -87.7,
+     "pf": 0.87,
+     "dd_r": -132.9
+    },
+    {
+     "period": "2025-26",
+     "n": 323,
+     "win": 23.5,
+     "avg_r": -0.143,
+     "total_r": -46.3,
+     "pf": 0.81,
+     "dd_r": -80.4
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping ORB London (02-03 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1182,
+     "win": 54.2,
+     "avg_r": -0.185,
+     "total_r": -218.7,
+     "pf": 0.59,
+     "dd_r": -222.2
+    },
+    {
+     "period": "2018-22",
+     "n": 892,
+     "win": 55.3,
+     "avg_r": -0.171,
+     "total_r": -152.5,
+     "pf": 0.62,
+     "dd_r": -162.5
+    },
+    {
+     "period": "2025-26",
+     "n": 323,
+     "win": 54.2,
+     "avg_r": -0.187,
+     "total_r": -60.5,
+     "pf": 0.59,
+     "dd_r": -62.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping ORB London (02-03 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 378,
+     "win": 30.7,
+     "avg_r": -0.104,
+     "total_r": -39.3,
+     "pf": 0.85,
+     "dd_r": -55.5
+    },
+    {
+     "period": "2018-22",
+     "n": 292,
+     "win": 33.6,
+     "avg_r": -0.02,
+     "total_r": -5.8,
+     "pf": 0.97,
+     "dd_r": -31.9
+    },
+    {
+     "period": "2025-26",
+     "n": 106,
+     "win": 35.8,
+     "avg_r": 0.02,
+     "total_r": 2.1,
+     "pf": 1.03,
+     "dd_r": -26.0
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping ORB London (02-03 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 378,
+     "win": 50.3,
+     "avg_r": -0.246,
+     "total_r": -93.1,
+     "pf": 0.51,
+     "dd_r": -96.6
+    },
+    {
+     "period": "2018-22",
+     "n": 292,
+     "win": 57.2,
+     "avg_r": -0.141,
+     "total_r": -41.1,
+     "pf": 0.67,
+     "dd_r": -43.6
+    },
+    {
+     "period": "2025-26",
+     "n": 106,
+     "win": 58.5,
+     "avg_r": -0.123,
+     "total_r": -13.0,
+     "pf": 0.7,
+     "dd_r": -17.5
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping ORB New York (09:30-10 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP bawaan model",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1209,
+     "win": 34.7,
+     "avg_r": -0.146,
+     "total_r": -176.8,
+     "pf": 0.74,
+     "dd_r": -189.0
+    },
+    {
+     "period": "2018-22",
+     "n": 896,
+     "win": 38.1,
+     "avg_r": -0.065,
+     "total_r": -58.1,
+     "pf": 0.88,
+     "dd_r": -83.2
+    },
+    {
+     "period": "2025-26",
+     "n": 322,
+     "win": 37.0,
+     "avg_r": -0.096,
+     "total_r": -30.8,
+     "pf": 0.83,
+     "dd_r": -37.8
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping ORB New York (09:30-10 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "-",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 1209,
+     "win": 51.3,
+     "avg_r": -0.196,
+     "total_r": -237.0,
+     "pf": 0.56,
+     "dd_r": -238.5
+    },
+    {
+     "period": "2018-22",
+     "n": 896,
+     "win": 56.9,
+     "avg_r": -0.118,
+     "total_r": -106.0,
+     "pf": 0.7,
+     "dd_r": -109.3
+    },
+    {
+     "period": "2025-26",
+     "n": 322,
+     "win": 55.0,
+     "avg_r": -0.15,
+     "total_r": -48.3,
+     "pf": 0.64,
+     "dd_r": -49.3
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  },
+  {
+   "name": "Scalping ORB New York (09:30-10 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 1R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 412,
+     "win": 42.2,
+     "avg_r": -0.133,
+     "total_r": -54.9,
+     "pf": 0.74,
+     "dd_r": -61.2
+    },
+    {
+     "period": "2018-22",
+     "n": 277,
+     "win": 44.4,
+     "avg_r": -0.091,
+     "total_r": -25.2,
+     "pf": 0.81,
+     "dd_r": -33.3
+    },
+    {
+     "period": "2025-26",
+     "n": 120,
+     "win": 45.8,
+     "avg_r": -0.094,
+     "total_r": -11.2,
+     "pf": 0.82,
+     "dd_r": -16.4
+    }
+   ],
+   "note": "Skema terbaik di 2012-17; 0 dari 9 skema lolos 3 periode"
+  },
+  {
+   "name": "Scalping ORB New York (09:30-10 NY)",
+   "kind": "Scalping",
+   "tf": "M15",
+   "filter": "searah trend H1",
+   "scheme": "TP 0,5R",
+   "pass": false,
+   "periods": [
+    {
+     "period": "2012-17",
+     "n": 412,
+     "win": 52.2,
+     "avg_r": -0.187,
+     "total_r": -77.1,
+     "pf": 0.58,
+     "dd_r": -80.1
+    },
+    {
+     "period": "2018-22",
+     "n": 277,
+     "win": 61.0,
+     "avg_r": -0.061,
+     "total_r": -16.9,
+     "pf": 0.83,
+     "dd_r": -20.4
+    },
+    {
+     "period": "2025-26",
+     "n": 120,
+     "win": 59.2,
+     "avg_r": -0.101,
+     "total_r": -12.2,
+     "pf": 0.74,
+     "dd_r": -12.9
+    }
+   ],
+   "note": "Skema dengan win rate tertinggi"
+  }
+ ]
+}

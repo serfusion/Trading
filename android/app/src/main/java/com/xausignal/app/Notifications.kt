@@ -1,6 +1,7 @@
 package com.xausignal.app
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -66,6 +67,8 @@ object Notifications {
         post(context, event.id.hashCode() + 1, title, text)
     }
 
+    // Izin POST_NOTIFICATIONS dicek manual di bawah (API 33+) dan SecurityException ditangkap.
+    @SuppressLint("MissingPermission")
     private fun post(context: Context, id: Int, title: String, text: String) {
         if (Build.VERSION.SDK_INT >= 33 &&
             context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED

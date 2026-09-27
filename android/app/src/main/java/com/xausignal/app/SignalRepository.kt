@@ -141,10 +141,20 @@ object SignalRepository {
     }
     fun lastMessageId(): String? = prefs?.getString("last_id", null)
 
+    /** "ntfy.sh" / "https://ntfy.sh/" -> "https://ntfy.sh" (URL tanpa skema membuat koneksi gagal terus). */
+    fun normalizeServer(server: String): String {
+        var s = server.trim().trimEnd('/')
+        if (s.isBlank()) return DEFAULT_SERVER
+        if (!s.startsWith("http://") && !s.startsWith("https://")) s = "https://$s"
+        return s
+    }
+
     @Synchronized
     fun saveSettings(server: String, topic: String) {
-        val changed = server != server() || topic != topic()
-        prefs?.edit()?.putString("server", server.trim().trimEnd('/'))?.putString("topic", topic.trim())?.apply()
+        val cleanServer = normalizeServer(server)
+        val cleanTopic = topic.trim().trim('/')
+        val changed = cleanServer != server() || cleanTopic != topic()
+        prefs?.edit()?.putString("server", cleanServer)?.putString("topic", cleanTopic)?.apply()
         if (changed) clear()
     }
 

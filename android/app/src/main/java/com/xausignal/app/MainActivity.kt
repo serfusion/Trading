@@ -51,6 +51,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
@@ -139,14 +140,18 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     ) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
             TabRow(selectedTabIndex = tab) {
-                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Sinyal") })
-                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text("Statistik") })
-                Tab(selected = tab == 2, onClick = { tab = 2 }, text = { Text("Auto") })
+                listOf("Sinyal", "Statistik", "Auto", "Riset").forEachIndexed { i, name ->
+                    Tab(
+                        selected = tab == i, onClick = { tab = i }, text = { Text(name, maxLines = 1) },
+                        modifier = Modifier.testTag("tab_$i")
+                    )
+                }
             }
             when (tab) {
                 0 -> SignalsTab(events, heartbeat, connection, money)
                 1 -> StatsTab(events, money)
-                else -> AutoTab(money)
+                2 -> AutoTab(money)
+                else -> ResearchTab()
             }
         }
     }
@@ -169,7 +174,7 @@ fun SignalsTab(events: List<SignalEvent>, heartbeat: SignalEvent?, connection: S
     val history = events.filter { it.type == "signal" || it.type == "close" || it.type == "info" }
     val open = SignalRepository.openSignals(events)
     LazyColumn(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
+        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp).testTag("signals_list"),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         item { Spacer(Modifier.padding(2.dp)) }

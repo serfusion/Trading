@@ -159,6 +159,7 @@ python -m research.smc_models --m5                               # bagian 10 (±
 python -m research.trend_filters                                 # bagian 11
 python -m research.engine_validate m5_2025 --risk 0.5 [--no-bias]
 python -m research.cloud_check [--no-bias]
+python -m research.winrate_study --json android/app/src/main/assets/strategies.json   # bagian 12
 ```
 
 ## 10. Perbandingan menyeluruh metode SMC/ICT populer — SEMUA TIDAK LOLOS
@@ -250,3 +251,48 @@ tinggi di 6 dari 6 run engine dan hasil lebih besar di 5 dari 6. Yang jujur perl
   bukan jaminan.
 - Bisa dimatikan: `trend.bias_filter: false` di `config.yaml`, atau switch **Filter bias struktur H4**
   di tab Auto aplikasi (versi cloud).
+
+## 12. Win rate vs profit: TP kecil, break-even, tutup sebagian + scalping — TIDAK ADA YANG LOLOS
+
+`python -m research.winrate_study [--m5]` menguji **20 model** (14 SMC/ICT dari bagian 10 + 6 scalping
+populer: breakout searah trend H1, EMA 9/21 + EMA200, RSI(2) Connors, Bollinger reversal, ORB London,
+ORB New York), masing-masing tanpa filter dan searah trend H1, dengan **9 skema keluar**: TP bawaan,
+TP 0,5R / 1R / 1,5R / 2R / 3R, BE di 0,5R + TP 1R, 50% di 0,5R + BE sisa 1,5R, 50% di 1R + BE sisa 3R.
+Total **351 kombinasi × 3 periode**. Skema terbaik tiap model dipilih **hanya** dari 2012–17 lalu dinilai
+apa adanya di 2018–22 dan 2025–26.
+
+**Hasil: 0 dari 351 kombinasi untung di ketiga periode.** Rata-rata semua model per skema (M15):
+
+| Skema keluar | Win rate | R per trade | Win rate minimal agar impas* |
+|---|---|---|---|
+| TP 0,5R | **51,7%** | −0,21R | 66,7% |
+| 50% di 0,5R + BE, sisa 1,5R | 52,2% | −0,17R | – |
+| BE di 0,5R + TP 1R | 48,9% | −0,17R | – |
+| TP 1R | 41,4% | −0,17R | 50,0% |
+| TP 1,5R | 35,7% | −0,15R | 40,0% |
+| TP 2R | 32,5% | −0,12R | 33,3% |
+| TP 3R | 28,4% | −0,11R | 25,0% |
+
+\* sebelum spread. TP kecil memang menaikkan win rate, tetapi kerugian per kalah tetap 1R, sehingga
+win rate yang dibutuhkan untuk impas naik lebih cepat daripada win rate yang didapat.
+
+Contoh yang sering ditanyakan:
+
+| Model (M15) | Skema | 2012–17 | 2018–22 | 2025–26 |
+|---|---|---|---|---|
+| ICT Silver Bullet 10–11 NY | TP 1R (terbaik) | win 46,5% · −0,03R | win 40,8% · −0,21R | win 47,6% · −0,07R |
+| ICT Silver Bullet 10–11 NY | BE 0,5R + TP 1R (win tertinggi) | win 55,4% · −0,03R | win 44,4% · −0,23R | win 57,1% · −0,08R |
+| CISD setelah sweep, searah trend | TP 0,5R | win 56,1% · −0,14R | win 57,7% · −0,13R | win 63,4% · −0,04R |
+| Scalping RSI(2), searah trend | TP 0,5R | win 58,1% · −0,11R | win 60,4% · −0,08R | win 67,3% · +0,02R |
+| Scalping RSI(2), searah trend | TP 1,5R (terbaik) | win 40,1% · −0,08R | win 40,6% · −0,06R | win 46,8% · +0,06R |
+| Setup SMC bot | TP 2R (terbaik) | win 29,1% · −0,14R | win 24,2% · −0,28R | win 25,8% · −0,23R |
+| **Trend F-ensemble H1 + bias H4 (bot)** | skema F | win 46,9% · **+0,10R** | win 46,1% · **+0,11R** | win 49,3% · **+0,24R** |
+
+- Beberapa scalping (RSI(2), EMA cross, breakout) positif **hanya di 2025–26** (emas naik kuat) dan rugi
+  di 2012–22 → tidak bisa diandalkan. Di M5 2025–26 saja 30 dari 351 kombinasi positif; satu periode
+  tidak cukup (bagian 7 & 10).
+- Kombinasi "win rate tinggi + profit" tidak bertahan: win rate tertinggi dengan trade memadai (≥ 30) ada
+  di ±56–67% dengan TP 0,5R, paling bagus pas di batas impas 66,7% (RSI(2) searah trend 2025–26: 67,3% →
+  +0,02R) dan rugi di 2012–22. Angka lebih tinggi (mis. 78,6%) hanya dari ≤ 16 trade dan rugi di periode lain.
+- Hasil lengkap per model (skema terbaik & skema win rate tertinggi) tampil di tab **Riset** aplikasi
+  Android (`android/app/src/main/assets/strategies.json`, dibuat oleh skrip ini).

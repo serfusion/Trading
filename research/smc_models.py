@@ -65,25 +65,34 @@ class Frame:
 
 # ------------------------------------------------------------------ simulator
 def run(fr: Frame, sigs: list[Sig], spread: float, exit_fn: Callable[[int, int], bool] | None = None,
-        be_r: float | None = None, be_offset: float = 0.10, f_legs: int = 0, tp1_r: float = 1.0):
-    """f_legs >= 2 = skema F bot: posisi #1 TP1 (tp1_r R), sisanya runner; TP1 kena -> SL+ (entry + be_offset).
-    Hasil = R rata-rata per posisi (risiko awal total tetap 1R)."""
+        be_r: float | None = None, be_offset: float = 0.10, f_legs: int = 0, tp1_r: float = 1.0,
+        tp_r: float | None = None, partial: tuple[float, float] | None = None):
+    """Simulasi berurutan (satu posisi per model). Hasil = R per trade + waktu keluar.
+
+    tp_r    : timpa TP semua sinyal menjadi tp_r x risiko (None = TP bawaan sinyal).
+    be_r    : SL dipindah ke entry + be_offset setelah harga mencapai be_r x risiko.
+    partial : (r1, frac) -> `frac` posisi ditutup di r1 x risiko, SL sisa ke BE, sisa ke TP / exit.
+    f_legs  : skema F bot = partial (tp1_r, 1/f_legs): posisi #1 TP1, sisanya runner, lalu SL+.
+    """
     o, h, l, c, n = fr.o, fr.h, fr.l, fr.c, fr.n
     if f_legs >= 2:
-        be_r = tp1_r
+        partial = (tp1_r, 1.0 / f_legs)
+    if partial:
+        be_r = partial[0]
     out, busy = [], -1
     for s in sorted(sigs, key=lambda x: x.i):
         if s.i <= busy or s.i + 1 >= n:
             continue
         d = s.d
         adj = spread if d < 0 else 0.0      # SELL keluar di ASK
+        s_tp, s_tp_r = (None, tp_r) if tp_r is not None else (s.tp, s.tp_r)
         fill, j = None, s.i + 1
         if s.entry is None:
             fill = o[j] + (spread if d > 0 else 0.0)
         else:
             sl0 = s.sl if s.sl is not None else s.entry - d * s.sl_dist
             risk0 = (s.entry - sl0) * d
-            tp0 = s.tp if s.tp is not None else (s.entry + d * s.tp_r * risk0 if s.tp_r else None)
+            tp0 = s_tp if s_tp is not None else (s.entry + d * s_tp_r * risk0 if s_tp_r else None)
             for j in range(s.i + 1, min(n, s.i + 1 + s.expiry)):
                 if (l[j] + spread <= s.entry) if d > 0 else (h[j] >= s.entry):
                     fill = min(s.entry, o[j] + spread) if d > 0 else max(s.entry, o[j])
@@ -98,7 +107,7 @@ def run(fr: Frame, sigs: list[Sig], spread: float, exit_fn: Callable[[int, int],
         if risk <= 0:
             busy = j
             continue
-        tp = s.tp if s.tp is not None else (fill + d * s.tp_r * risk if s.tp_r else None)
+        tp = s_tp if s_tp is not None else (fill + d * s_tp_r * risk if s_tp_r else None)
         if tp is not None and (tp - fill) * d <= 0:
             busy = j
             continue
@@ -111,12 +120,14 @@ def run(fr: Frame, sigs: list[Sig], spread: float, exit_fn: Callable[[int, int],
                 r = (px - fill) * d / risk
                 break
             if k > fill_i:
-                if tp is not None and ((h[k] >= tp) if d > 0 else (l[k] + adj <= tp)):
-                    r = (tp - fill) * d / risk
-                    break
+                # BE / TP parsial dicek dulu (TP penuh di candle yang sama tetap dihitung setelahnya);
+                # SL baru berlaku mulai candle berikutnya karena SL candle ini sudah dicek.
                 if be_r and not be_done and ((h[k] >= fill + be_r * risk) if d > 0
                                              else (l[k] + adj <= fill - be_r * risk)):
                     be_done, sl = True, fill + d * be_offset
+                if tp is not None and ((h[k] >= tp) if d > 0 else (l[k] + adj <= tp)):
+                    r = (tp - fill) * d / risk
+                    break
                 if exit_fn is not None and k + 1 < n and exit_fn(k, d):
                     r = (o[k + 1] + adj - fill) * d / risk
                     break
@@ -124,8 +135,8 @@ def run(fr: Frame, sigs: list[Sig], spread: float, exit_fn: Callable[[int, int],
         if r is None:
             k = min(k, end)
             r = (c[k] + adj - fill) * d / risk
-        if f_legs >= 2 and be_done:
-            r = (tp1_r + (f_legs - 1) * r) / f_legs
+        if partial and be_done:
+            r = partial[1] * partial[0] + (1 - partial[1]) * r
         out.append((fr.df.index[min(k, n - 1)], r))
         busy = k
     # R per trade + waktu keluar (untuk urutan kronologis equity/drawdown)

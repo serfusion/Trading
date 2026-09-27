@@ -16,6 +16,11 @@ sweep PDH/PDL (± MSS), ICT Silver Bullet, FVG, BOS + Order Block, OTE, CISD, Br
 tanpa filter, dengan bias H1, dan searah trend (46 varian M15 × 3 periode + M5). **Tidak ada satu pun yang
 untung konsisten** (tanpa filter: −0,02 s/d −0,40R per trade di 2012–22). Yang paling baik tetap trend-following.
 
+Studi lanjutan **win rate vs profit** (bagian 12): 14 model SMC/ICT + 6 scalping populer (RSI(2), EMA 9/21,
+Bollinger, breakout, ORB London/NY) × TP 0,5R–3R, break-even, tutup sebagian = **351 kombinasi, 0 yang untung
+di ketiga periode**. TP kecil menaikkan win rate (±52%) tetapi rata-rata tetap −0,21R per trade karena
+win rate impasnya 66,7%. Semua hasil bisa dilihat di tab **Riset** aplikasi.
+
 Fitur yang digabung karena terbukti berguna:
 - **Bias struktur H4 (konsep BOS dari SMC) sebagai filter trend** — profit factor naik di 6/6 uji engine,
   hasil naik di 5/6; drawdown **tidak** lebih kecil (bagian 11). Default aktif, bisa dimatikan.
@@ -68,9 +73,13 @@ SL/TP dari harga broker (bukan harga feed) dan menolak order bila harga broker b
 - Sinyal dikirim lewat [ntfy](https://ntfy.sh) (open-source). Topik acak = kunci rahasia, jangan
   dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
 - Tab **Statistik**: menang/kalah & profit/rugi harian, mingguan, bulanan + konversi Rupiah.
+- Tab **Riset**: perbandingan semua metode (trend, SMC/ICT, scalping) — win rate, R per trade, total R,
+  profit factor per periode; filter Lolos/Trend/SMC/Scalping dan urutkan menurut profit atau win rate.
 - Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, filter bias H4 (SMC),
   batas rugi harian/mingguan, TUTUP SEMUA, saldo dan posisi bot yang sedang terbuka — semua dari HP.
-- Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
+- Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose). Setiap build di GitHub Actions
+  menjalankan lint, unit test, dan uji UI di emulator Android 8 & 14; APK baru dipublikasikan hanya bila
+  semuanya lolos.
 
 ## 1. Instalasi lengkap (Windows / VPS Windows)
 
@@ -170,6 +179,7 @@ xau_bot/
 research/       scan, simulasi, uji ketahanan & validasi engine di data historis
   smc_models.py     perbandingan 16 model SMC/ICT (+ filter) di 3 periode
   trend_filters.py  uji fitur SMC sebagai filter trend (76 varian + skema F)
+  winrate_study.py  win rate vs profit: SMC + scalping x TP/BE/parsial (351 kombinasi) -> data tab Riset
 cloud/          versi 24 jam tanpa PC (Vercel + Supabase + ntfy + MetaApi)
 tests/          87 unit test (strategi, trend, F-ensemble, filter bias, risiko, sesi, berita, engine,
                 MT5 palsu, cloud & auto order MetaApi palsu)
