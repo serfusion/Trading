@@ -394,6 +394,59 @@ def audit_archive_contents(mirrors: Path, biner_csv: Path, out_csv: Path) -> Non
     print(Counter((f["level"], f["code"]) for f in allf).most_common(30))
 
 
+def audit_fork(orig: Path, fork: Path) -> dict:
+    """Bandingkan fork dengan repo asli: hanya commit & blob yang TIDAK ada di asli yang dipindai (termasuk isi arsip
+    dan program Windows di dalamnya). fork dibuat dengan `git clone --mirror --reference <orig>`."""
+    orig_commits = set(git(orig, "rev-list", "--all").split())
+    fork_commits = git(fork, "rev-list", "--branches", "--tags").split()
+    new_commits = [c for c in fork_commits if c not in orig_commits]
+    orig_objs = objects(orig, "--all")
+    fork_objs = objects(fork, "--branches", "--tags")
+    cand = [sh for sh in fork_objs if sh not in orig_objs]
+    sizes = blob_sizes(fork, cand)
+    info = {"commit_baru": len(new_commits), "blob_baru": len(sizes), "file_baru": sorted({fork_objs[s] for s in sizes}),
+            "temuan": [], "penulis": sorted({l for l in git(fork, "log", "--format=%an <%ae> %ad", "--date=short",
+                                                              *new_commits[:200], "--no-walk").splitlines()})[:10]}
+    for sha, data in read_blobs(fork, [s for s in sizes if sizes[s] <= MAX_BYTES * 4]):
+        path = fork_objs[sha]
+        blevel, hits = _scan_blob(path, data)
+        if blevel:
+            info["temuan"].append({"level": blevel, "code": "biner", "path": path, "line": 0,
+                                   "text": f"({len(data)} byte)"})
+            if re.search(r"\.(zip|rar|7z)$", path, re.I):
+                found, _ = scan_archive_bytes(data, path)
+                info["temuan"] += [{"level": f["level"], "code": f["code"], "path": f"{path} :: {f['anggota']}",
+                                    "line": f["line"], "text": f["text"]} for f in found]
+        for f in hits:
+            info["temuan"].append({"level": f.level, "code": f.code, "path": f.path, "line": f.line,
+                                   "text": mask(f.text) if f.code in SECRET_CODES else f.text})
+    return info
+
+
+def audit_forks(forks_dir: Path, mirrors: Path, out_csv: Path) -> None:
+    rows, summ = [], []
+    for fk in sorted(forks_dir.glob("*@@*.git")):
+        orig_name, fork_name = fk.name.removesuffix(".git").split("@@")
+        info = audit_fork(mirrors / f"{orig_name}.git", fk)
+        lv = Counter(t["level"] for t in info["temuan"])
+        summ.append({"asli": orig_name.replace("__", "/", 1), "fork": fork_name.replace("__", "/", 1),
+                     "commit_baru": info["commit_baru"], "blob_baru": info["blob_baru"], "BAHAYA": lv["BAHAYA"],
+                     "WASPADA": lv["WASPADA"], "INFO": lv["INFO"], "penulis": " | ".join(info["penulis"])[:200],
+                     "file_baru": " ".join(info["file_baru"])[:500]})
+        for t in info["temuan"]:
+            rows.append({"fork": fork_name.replace("__", "/", 1), **t})
+        print(f"{fork_name[:45]:45s} commit+{info['commit_baru']:4d} blob+{info['blob_baru']:5d} "
+              f"bahaya={lv['BAHAYA']} waspada={lv['WASPADA']} info={lv['INFO']}", flush=True)
+    with open(out_csv, "w", newline="") as fh:
+        w = csv.DictWriter(fh, ["fork", "level", "code", "path", "line", "text"])
+        w.writeheader()
+        w.writerows(rows)
+    with open(out_csv.with_name(out_csv.stem + "_ringkasan.csv"), "w", newline="") as fh:
+        w = csv.DictWriter(fh, list(summ[0]))
+        w.writeheader()
+        w.writerows(summ)
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("mirrors")
@@ -401,7 +454,11 @@ def main(argv=None) -> int:
     ap.add_argument("--only", default="", help="kata kunci nama repo")
     ap.add_argument("--arsip", default="", help="CSV keluaran: isi arsip zip/rar dari <csv>_biner.csv")
     ap.add_argument("--isi-arsip", default="", help="CSV keluaran: temuan di DALAM file arsip (butuh libarchive-c)")
+    ap.add_argument("--fork", default="", help="folder berisi <asli>@@<fork>.git; hasil ke --csv")
     a = ap.parse_args(argv)
+    if a.fork:
+        audit_forks(Path(a.fork), Path(a.mirrors), Path(a.csv))
+        return 0
     if a.isi_arsip:
         audit_archive_contents(Path(a.mirrors), Path(a.csv).with_name(Path(a.csv).stem + "_biner.csv"),
                                Path(a.isi_arsip))
