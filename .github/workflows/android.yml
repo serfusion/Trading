@@ -67,6 +67,12 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      - name: Kosongkan disk runner (image emulator API 34 butuh ±7 GB)
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost /usr/local/lib/node_modules \
+            /usr/share/swift /opt/hostedtoolcache/CodeQL || true
+          df -h /
+
       - name: Aktifkan KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -84,6 +90,7 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: pixel_6
+          disk-size: 4096M
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           working-directory: android
