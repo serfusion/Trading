@@ -81,14 +81,24 @@ object SignalRepository {
 
     fun server(): String = prefs?.getString("server", DEFAULT_SERVER) ?: DEFAULT_SERVER
 
-    fun money(): MoneySettings = MoneySettings(
-        cent = prefs?.getBoolean("cent", true) ?: true,
-        legLot = (prefs?.getFloat("leg_lot", 0.01f) ?: 0.01f).toDouble(),
-        idrRate = (prefs?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble(),
-    )
+    /**
+     * Lot disimpan sebagai teks ("0.02"). Versi lama menyimpan Float: 0.01f dibaca sebagai Double menjadi
+     * 0.009999999776482582, jadi nilai lama tetap dibaca lalu dibulatkan ke kelipatan 0,01.
+     */
+    fun money(): MoneySettings {
+        val p = prefs
+        val lot = p?.getString("leg_lot_text", null)?.toDoubleOrNull()
+            ?: p?.let { if (it.contains("leg_lot")) it.getFloat("leg_lot", 0.01f).toDouble() else null }
+            ?: 0.01
+        return MoneySettings(
+            cent = p?.getBoolean("cent", true) ?: true,
+            legLot = roundLot(lot).coerceAtLeast(0.01),
+            idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
+        )
+    }
 
     fun saveMoney(m: MoneySettings) {
-        prefs?.edit()?.putBoolean("cent", m.cent)?.putFloat("leg_lot", m.legLot.toFloat())
+        prefs?.edit()?.putBoolean("cent", m.cent)?.putString("leg_lot_text", lotText(m.legLot))?.remove("leg_lot")
             ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
         _moneyVersion.value = _moneyVersion.value + 1
     }
@@ -103,7 +113,7 @@ object SignalRepository {
         val risk = e.num("risk_points") ?: return null
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
-        return r * risk * legs * (m.legLot / 0.01)
+        return r * risk * legs * Math.round(m.legLot * 100.0)
     }
 
     fun toIdr(amount: Double, m: MoneySettings): Double =
