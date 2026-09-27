@@ -16,10 +16,39 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
-       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20}
+       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20,
+       "market_hours": True, "skip_open_bars": 3}
+
+NEW_YORK = ZoneInfo("America/New_York")
+
+
+def market_open(t: datetime) -> bool:
+    """Candle H1 (waktu buka, UTC) jatuh di jam pasar emas: Minggu 18:00 – Jumat 17:00 New York,
+    tanpa jeda harian 17:00–18:00. Feed kadang tetap mengirim candle datar saat pasar tutup; candle itu
+    membuat ATR & channel palsu (sinyal Minggu 27 Sep 2026 22:02 UTC dengan SL hanya $1,23)."""
+    ny = t.astimezone(NEW_YORK)
+    return not weekend_closed(t) and not (ny.weekday() <= 3 and ny.hour == 17)
+
+
+def weekend_closed(t: datetime) -> bool:
+    """Jumat 17:00 – Minggu 18:00 New York: pasar emas tutup akhir pekan."""
+    ny = t.astimezone(NEW_YORK)
+    wd, h = ny.weekday(), ny.hour          # Senin = 0
+    return wd == 5 or (wd == 4 and h >= 17) or (wd == 6 and h < 18)
+
+
+def since_week_open(closed: list[Bar]) -> int:
+    """Jumlah candle sejak candle pertama setelah pasar tutup (> 12 jam tanpa candle). 0 = candle pertama."""
+    n = 0
+    for k in range(len(closed) - 1, 0, -1):
+        if closed[k].t - closed[k - 1].t > timedelta(hours=12):
+            return n
+        n += 1
+    return n
 
 
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
@@ -258,9 +287,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     """
     tf = timedelta(minutes=cfg["tf_minutes"])
     bars = prices.candles(cfg["bars"])
+    if cfg.get("market_hours", True):
+        bars = [b for b in bars if market_open(b.t)]
     if not bars:
         return {"ok": False, "error": "tidak ada candle"}
-    closed = [b for b in bars if b.t + tf <= now]
+    closed = [b for b in bars if b.t + tf <= now and (b.h > b.l or not cfg.get("market_hours", True))]
     price = bars[-1].c
     state = store.get_state() or {}
     state.pop("virtual", None)  # format lama (1 set)
@@ -333,6 +364,18 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         """Cek SL / TP1 / SL+ secara berurutan per bar sejak entry (konservatif: SL dulu)."""
         if not v:
             return None
+        if cfg.get("market_hours", True) and weekend_closed(parse_iso(v["bar_close"]) - tf):
+            # sinyal lama yang lahir dari candle saat pasar tutup -> batalkan, tidak dihitung menang/kalah
+            ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name, "dir": v["dir"],
+                  "entry": round(v["entry"], 3), "price": round(price, 3), "points": 0.0, "r": 0.0,
+                  "risk_points": round(v["risk"], 3), "legs": v["legs"], "tp1_hit": False,
+                  "star": v.get("star", False), "void": True,
+                  "reason": "Dibatalkan: sinyal dari data saat pasar tutup"}
+            text = f"⚠️ BATAL {v['dir']} [{name}] @ {v['entry']:.2f}: sinyal dari data saat pasar tutup, abaikan."
+            pub.publish(ev, text, "Sinyal dibatalkan", 4, ["warning"])
+            store.log("void", ev)
+            events.append(f"{name} BATAL {v['dir']} (data pasar tutup)")
+            return None
         buy = v["dir"] == "BUY"
         if not v.get("be_done"):
             for b in (b for b in bars if b.t >= parse_iso(v["bar_close"])):
@@ -369,6 +412,9 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             if sig["action"] == "close" and v:
                 close_virtual(name, v, price, sig["note"])
                 v = None
+            elif sig["action"] == "open" and v is None and since_week_open(closed) < cfg.get("skip_open_bars", 0):
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "gap buka pekan"})
+                events.append(f"{name} {sig['dir']} dilewati: {since_week_open(closed) + 1} candle pertama setelah buka")
             elif sig["action"] == "open" and v is None and cfg.get("star_only") and not (
                     star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})

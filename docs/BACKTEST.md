@@ -193,3 +193,14 @@ rugi harian/mingguan (jadi DD lebih dalam daripada engine bot). Format: hasil / 
 
 Rasio hasil/DD terbaik di 2 dari 3 periode: **⭐ penuh + biasa setengah**. Risiko 1,5% membuat DD 2012–17
 lebih dari −50% → terlalu besar. Tabel lot di aplikasi (Syarat & Ketentuan) memakai ⭐ 0,5% / biasa 0,25%.
+
+## 12. Gap pembukaan pekan (`python -m research.gap_study`)
+
+Sinyal di candle H1 pertama setelah pasar buka sering lahir dari gap. Skema F-ensemble (R per sinyal ÷ 3):
+
+| | 2012–17 | 2018–22 | 2025–26 |
+|---|---|---|---|
+| ⭐ | +34,4R, win 48,8%, DD −4,9R | +30,8R, win 42,9%, DD −7,3R | +17,1R, win 52,2%, DD −4,2R |
+| ⭐ + lewati 3 candle pertama pekan | +35,7R, win 49,0%, DD −5,0R | +33,3R, win 43,6%, DD −6,8R | +22,1R, win 54,2%, DD −3,6R |
+
+Efeknya kecil (±2–4% sinyal) tetapi positif di ketiga periode → dipakai di cloud (`skip_open_bars: 3`).

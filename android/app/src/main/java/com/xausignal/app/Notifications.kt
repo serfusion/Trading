@@ -45,6 +45,10 @@ object Notifications {
     }
 
     fun close(context: Context, event: SignalEvent) {
+        if (event.isVoid()) {
+            post(context, event.id.hashCode() + 1, "BATAL ${event.dir} XAU/USD", "Sinyal dari data saat pasar tutup, abaikan")
+            return
+        }
         val r = event.num("r") ?: 0.0
         val title = "TUTUP ${event.dir} • ${if (r > 0) "MENANG" else "KALAH"} ${signed(r)}R"
         post(context, event.id.hashCode() + 1, title, "Ditutup @ ${fmt(event.num("price"))}")

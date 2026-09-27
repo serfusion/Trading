@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import org.json.JSONArray
 import org.json.JSONObject
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
+import java.time.ZoneOffset
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -49,6 +51,26 @@ data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Dou
 }
 
 fun SignalEvent.isStar(): Boolean = json.optBoolean("star", false)
+
+private val NEW_YORK: ZoneId = ZoneId.of("America/New_York")
+private val STAMP: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
+
+/**
+ * Sinyal batal: ditandai cloud (void) atau lahir dari candle akhir pekan saat pasar tutup
+ * (Jumat 17:00 – Minggu 18:00 New York). ID sinyal cloud berakhiran waktu candle UTC, mis. ...-202609272100.
+ */
+fun SignalEvent.isVoid(): Boolean {
+    if (json.optBoolean("void", false)) return true
+    val stamp = id.substringAfterLast('-')
+    if (stamp.length != 12 || !stamp.all { it.isDigit() }) return false
+    return try {
+        val ny = LocalDateTime.parse(stamp, STAMP).atZone(ZoneOffset.UTC).withZoneSameInstant(NEW_YORK)
+        val wd = ny.dayOfWeek.value   // Senin = 1 ... Minggu = 7
+        wd == 6 || (wd == 5 && ny.hour >= 17) || (wd == 7 && ny.hour < 18)
+    } catch (e: Exception) {
+        false
+    }
+}
 
 data class PeriodStats(
     val label: String,
@@ -136,7 +158,7 @@ object SignalRepository {
     fun periodStats(events: List<SignalEvent>, m: MoneySettings, keyOf: (java.time.ZonedDateTime) -> String,
                     labelOf: (String) -> String = { it }, star: Boolean? = null): List<PeriodStats> {
         val groups = LinkedHashMap<String, MutableList<Double>>()
-        events.filter { it.type == "close" && (star == null || it.isStar() == star) }.forEach { e ->
+        events.filter { it.type == "close" && !it.isVoid() && (star == null || it.isStar() == star) }.forEach { e ->
             val t = zoned(e) ?: return@forEach
             val a = amount(e, m) ?: return@forEach
             groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
@@ -194,7 +216,7 @@ object SignalRepository {
     fun openSignals(events: List<SignalEvent>): List<SignalEvent> {
         val closed = events.filter { it.type == "close" }.map { it.id }.toSet()
         return events.filter {
-            it.type == "signal" && (it.status == "signal" || it.status == "opened") && it.id !in closed
+            it.type == "signal" && (it.status == "signal" || it.status == "opened") && it.id !in closed && !it.isVoid()
         }
     }
 

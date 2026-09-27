@@ -12,14 +12,21 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
 ```
 
 **Tanda ⭐**: semua sinyal dikirim; sinyal yang searah tren D1 (close D1 kemarin vs EMA50 D1) dan
-menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`). Simulasi di data asli
-Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check --semua`):
+menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`).
+
+**Jam pasar & gap**: candle saat pasar tutup (Jumat 17:00 – Minggu 18:00 New York, dan jeda harian
+17:00–18:00) dibuang, karena feed tetap mengirim candle datar yang membuat ATR/channel palsu
+(kasus Minggu 27 Sep 2026 22:02 UTC: BUY 4279,32 dengan SL hanya $1,23). Sinyal di **3 candle H1 pertama
+setelah pasar buka** (gap pekan) dilewati (`research/gap_study.py`). Sinyal lama yang lahir dari data
+pasar tutup otomatis dikirim sebagai **BATAL** dan tidak dihitung menang/kalah.
+
+Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check --semua`):
 
 | | Sinyal | Untung | Total | Rata-rata/sinyal |
 |---|---|---|---|---|
-| ⭐ | 114 | 57,0% | +63,1R | +0,55R |
-| Biasa | 229 | 44,5% | +2,1R | +0,01R |
-| Semua | 343 | 48,7% | +65,2R | +0,19R |
+| ⭐ | 112 | 58,0% | +74,9R | +0,67R |
+| Biasa | 223 | 43,5% | +1,8R | +0,01R |
+| Semua | 335 | 48,4% | +76,7R | +0,23R |
 
 Hampir semua profit datang dari sinyal ⭐; sinyal biasa rata-rata impas. Tidak ada yang pasti menang.
 dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).

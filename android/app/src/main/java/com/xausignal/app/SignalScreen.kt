@@ -173,6 +173,16 @@ fun legsLot(signal: SignalEvent, money: MoneySettings): String =
 /** Riwayat satu sinyal: kapan entry, kapan TP1 & SL+, kapan & di mana TUTUP, lalu MENANG/KALAH. */
 @Composable
 fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: MoneySettings) {
+    if (signal.isVoid()) {
+        AppCard {
+            SignalHeader(signal)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Pill("BATAL", Muted, solid = true)
+                Text("Data saat pasar tutup, abaikan", style = MaterialTheme.typography.bodyMedium, color = Muted)
+            }
+        }
+        return
+    }
     val tp1 = SignalRepository.tp1Event(events, signal.id)
     val close = SignalRepository.closeEvent(events, signal.id)
     val amount = close?.let { SignalRepository.amount(it, money) }
@@ -221,6 +231,15 @@ private fun closeReason(close: SignalEvent): String {
 
 @Composable
 fun CloseRow(event: SignalEvent, money: MoneySettings) {
+    if (event.isVoid()) {
+        AppCard {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Pill("BATAL ${event.dir}".trim(), Muted, solid = true)
+                Text(event.timeText(), style = MaterialTheme.typography.labelMedium, color = Muted)
+            }
+        }
+        return
+    }
     val amount = SignalRepository.amount(event, money)
     val win = (amount ?: event.num("r") ?: 0.0) > 0
     val result = if (win) BuyColor else SellColor
