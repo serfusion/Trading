@@ -16,27 +16,36 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
        "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20,
        "market_hours": True, "skip_open_bars": 3}
 
-NEW_YORK = ZoneInfo("America/New_York")
+
+def new_york(t: datetime) -> datetime:
+    """Waktu New York tanpa database zona waktu (aturan DST AS sejak 2007): EDT (UTC-4) dari Minggu kedua
+    Maret 02:00 sampai Minggu pertama November 02:00 waktu lokal, selain itu EST (UTC-5)."""
+    t = t.astimezone(timezone.utc)
+    mar = datetime(t.year, 3, 8, 7, tzinfo=timezone.utc)            # 02:00 EST = 07:00 UTC
+    start = mar + timedelta(days=(6 - mar.weekday()) % 7)           # Minggu kedua Maret
+    nov = datetime(t.year, 11, 1, 6, tzinfo=timezone.utc)           # 02:00 EDT = 06:00 UTC
+    end = nov + timedelta(days=(6 - nov.weekday()) % 7)             # Minggu pertama November
+    offset = 4 if start <= t < end else 5
+    return (t - timedelta(hours=offset)).replace(tzinfo=None)
 
 
 def market_open(t: datetime) -> bool:
     """Candle H1 (waktu buka, UTC) jatuh di jam pasar emas: Minggu 18:00 – Jumat 17:00 New York,
     tanpa jeda harian 17:00–18:00. Feed kadang tetap mengirim candle datar saat pasar tutup; candle itu
     membuat ATR & channel palsu (sinyal Minggu 27 Sep 2026 22:02 UTC dengan SL hanya $1,23)."""
-    ny = t.astimezone(NEW_YORK)
+    ny = new_york(t)
     return not weekend_closed(t) and not (ny.weekday() <= 3 and ny.hour == 17)
 
 
 def weekend_closed(t: datetime) -> bool:
     """Jumat 17:00 – Minggu 18:00 New York: pasar emas tutup akhir pekan."""
-    ny = t.astimezone(NEW_YORK)
+    ny = new_york(t)
     wd, h = ny.weekday(), ny.hour          # Senin = 0
     return wd == 5 or (wd == 4 and h >= 17) or (wd == 6 and h < 18)
 

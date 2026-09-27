@@ -13,6 +13,15 @@ import _core  # noqa: E402
 UTC = timezone.utc
 
 
+def test_new_york_time_matches_zoneinfo():
+    from zoneinfo import ZoneInfo
+    ny = ZoneInfo("America/New_York")
+    t = datetime(2012, 1, 1, tzinfo=UTC)
+    while t < datetime(2030, 1, 1, tzinfo=UTC):
+        assert _core.new_york(t) == t.astimezone(ny).replace(tzinfo=None), t
+        t += timedelta(minutes=97)
+
+
 def test_market_open_summer_and_winter():
     t = lambda *a: datetime(*a, tzinfo=UTC)  # noqa: E731
     # musim panas (EDT): tutup Jumat 21:00 UTC, buka Minggu 22:00 UTC
