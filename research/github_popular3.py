@@ -698,6 +698,137 @@ def kiran_smc(p: Period) -> pd.DataFrame | None:
     return trades_frame(rows, base)
 
 
+# ---------------------------------------------------------------- HillaryMurimi: strategies/*.py (M5, SL $10 / TP $20)
+def hillary(p: Period, kind: str) -> pd.DataFrame | None:
+    """main.py: M5, 200 bar, SL $10, TP $20 (tetap). kind: 'scalping' = SMA5 memotong SMA20 (BUY hanya bila std10 <
+    std(200 close)/2; SELL tanpa filter), 'day' = RSI(SMA14) <30 BUY / >70 SELL, 'swing' = MACD 12/26/9 cross.
+    backtest_runner.py penulis mengalikan sinyal bar i dengan return bar i yang sama (look-ahead); di sini sinyal dari
+    bar yang sudah tutup, masuk di open bar berikutnya, 1 posisi."""
+    if p.tf != "M5":
+        return None
+    base = p.base
+    A, sp = Arrays(base), p.spread
+    c = A.c
+    cs = pd.Series(c)
+    if kind == "scalping":
+        f, sl_ = cs.rolling(5).mean().to_numpy(), cs.rolling(20).mean().to_numpy()
+        vol, allv = cs.rolling(10).std().to_numpy(), cs.rolling(200).std().to_numpy()
+        up = (f > sl_) & (np.r_[np.nan, f[:-1]] <= np.r_[np.nan, sl_[:-1]]) & (vol < allv / 2)
+        dn = (f < sl_) & (np.r_[np.nan, f[:-1]] >= np.r_[np.nan, sl_[:-1]])
+    elif kind == "day":
+        dl = cs.diff()
+        g, ls = dl.where(dl > 0, 0).rolling(14).mean(), (-dl.where(dl < 0, 0)).rolling(14).mean()
+        r = (100 - 100 / (1 + g / ls)).to_numpy()
+        up, dn = r < 30, r > 70
+    else:
+        m = cs.ewm(span=12, adjust=False).mean() - cs.ewm(span=26, adjust=False).mean()
+        sg = m.ewm(span=9, adjust=False).mean()
+        m, sg = m.to_numpy(), sg.to_numpy()
+        up = (m > sg) & (np.r_[np.nan, m[:-1]] <= np.r_[np.nan, sg[:-1]])
+        dn = (m < sg) & (np.r_[np.nan, m[:-1]] >= np.r_[np.nan, sg[:-1]])
+    rows, busy = [], -1
+    for k in np.flatnonzero(up | dn):
+        if k < 210 or k + 1 >= A.n - 2 or k + 1 <= busy:
+            continue
+        d = 1 if up[k] else -1
+        j0 = k + 1
+        entry = A.o[j0] + (sp if d > 0 else 0.0)
+        j1, rr = simulate(A, sp, j0, d, entry, entry - d * 10.0, entry + d * 20.0, 5 * 24 * 12)
+        rows.append((j0, j1, d, rr))
+        busy = j1
+    return trades_frame(rows, base)
+
+
+# ---------------------------------------------------------------- armza332: mt5/Aurum_EA.mq5 (HAWK x5)
+def aurum(p: Period, tf: str = "60min", learn: bool = True) -> pd.DataFrame:
+    """Bar tertutup: wajib tembus high/low 20 bar (bar 2..21). Suara: HAWK-1 EMA20 vs EMA50 bila ADX>=22, HAWK-2 arah
+    tembus, HAWK-3 fade RSI>=70/<=30, HAWK-4 fade di luar Bollinger 20/2, HAWK-5 tembus dari zona Fib 38,2-61,8% (50
+    bar). Entry bila >=3 agen setuju (agen berbobot <0,5 dicadangkan; bobot +-0,08 per menang/kalah). SL 1,5 ATR,
+    separuh ditutup di 1,8 ATR lalu SL ke BE, sisa TP 3,6 ATR, trailing 2 ATR setelah profit 1 ATR. Stop harian: 5 kalah
+    beruntun atau rugi 3R; jeda 15 menit setelah rugi. Filter spread & berita tidak dipakai (tanpa data)."""
+    H = resample(p.base, tf)
+    A, sp = Arrays(p.base), p.spread
+    o, h, l, c = (H[k].to_numpy(float) for k in ("open", "high", "low", "close"))
+    atr = sma_tr(H, 14)
+    f, sl_ = ema(c, 20), ema(c, 50)
+    r, ad = rsi(c, 14), adx_w(H, 14)
+    mid = pd.Series(c).rolling(20).mean()
+    sd = pd.Series(c).rolling(20).std(ddof=0)
+    up_bb, lo_bb = (mid + 2 * sd).to_numpy(), (mid - 2 * sd).to_numpy()
+    hi20 = pd.Series(h).rolling(20).max().shift(1).to_numpy()
+    lo20 = pd.Series(l).rolling(20).min().shift(1).to_numpy()
+    hi50 = pd.Series(h).rolling(50).max().shift(1).to_numpy()
+    lo50 = pd.Series(l).rolling(50).min().shift(1).to_numpy()
+    start = to_base(p.base, H.index)
+    exit_k = np.searchsorted(start, np.arange(A.n), side="right") - 1
+    day = server_time(H.index).normalize().to_numpy()
+    w = np.ones(5)
+    rows, busy_k, cur_day, streak, day_r, last_loss_k = [], -1, None, 0, 0.0, -10**9
+    bars_15m = max(1, int(round(15 / (pd.Timedelta(tf).total_seconds() / 60))))
+    for k in range(60, len(H) - 1):
+        if day[k] != cur_day:
+            cur_day, streak, day_r = day[k], 0, 0.0
+        if k <= busy_k or np.isnan(atr[k]) or atr[k] <= 0:
+            continue
+        bu, bd = c[k] > hi20[k], c[k] < lo20[k]
+        if not (bu or bd):
+            continue
+        fib = (c[k] - lo50[k]) / (hi50[k] - lo50[k]) * 100 if hi50[k] > lo50[k] else 50.0
+        golden = 38.2 <= fib <= 61.8
+        v = [(1 if f[k] > sl_[k] else -1 if f[k] < sl_[k] else 0) if ad[k] >= 22 else 0,
+             1 if bu else -1,
+             -1 if r[k] >= 70 else (1 if r[k] <= 30 else 0),
+             1 if c[k] < lo_bb[k] else (-1 if c[k] > up_bb[k] else 0),
+             (1 if bu else -1) if golden else 0]
+        act = [i for i in range(5) if w[i] >= 0.5]
+        buy = sum(1 for i in act if v[i] > 0)
+        sell = sum(1 for i in act if v[i] < 0)
+        d = 1 if buy >= 3 else 0
+        d = -1 if sell >= 3 else d
+        if d == 0 or streak >= 5 or day_r <= -3.0 or k - last_loss_k < bars_15m:
+            continue
+        j0 = start[k + 1]
+        if j0 >= A.n - 2:
+            break
+        a = atr[k]
+        entry = A.o[j0] + (sp if d > 0 else 0.0)
+
+        def trail(j, d, entry, cur, a=a):
+            prof = (A.c[j] - entry) if d > 0 else (entry - A.c[j] - sp)
+            if prof < a and ((cur < entry) if d > 0 else (cur > entry)):
+                return cur
+            new = A.c[j] - 2 * a if d > 0 else A.c[j] + sp + 2 * a
+            if d > 0:
+                return new if new > cur + 0.1 * a and new < A.c[j] else cur
+            return new if new < cur - 0.1 * a and new > A.c[j] + sp else cur
+
+        hold = 10 * 24 * bph(p)
+        ja, ra = simulate(A, sp, j0, d, entry, entry - d * 1.5 * a, entry + d * 1.8 * a, hold, trail=trail)
+        jb, rb = simulate(A, sp, j0, d, entry, entry - d * 1.5 * a, entry + d * 3.6 * a, hold, trail=trail, be_at=1.2)
+        R = 0.5 * ra + 0.5 * rb
+        j1 = max(ja, jb)
+        rows.append((j0, j1, d, R))
+        win = R > 0
+        for i in act if learn else ():
+            if v[i] == d:
+                w[i] = min(1.5, max(0.1, w[i] + (0.08 if win else -0.08)))
+        busy_k = exit_k[min(j1, A.n - 1)]
+        if day[min(busy_k, len(H) - 1)] == cur_day:
+            streak = 0 if win else streak + 1
+            day_r += R
+        if not win:
+            last_loss_k = busy_k
+    return trades_frame(rows, p.base)
+
+
+def sma_tr(df: pd.DataFrame, n: int = 14) -> np.ndarray:
+    """iATR MetaTrader 5 = rata-rata sederhana true range."""
+    h, l, c = (df[k].to_numpy(float) for k in ("high", "low", "close"))
+    pc = np.r_[c[0], c[:-1]]
+    tr = np.maximum(h - l, np.maximum(abs(h - pc), abs(l - pc)))
+    return pd.Series(tr).rolling(n).mean().to_numpy()
+
+
 def htf_closed_base(base: pd.DataFrame, X: pd.DataFrame, values: np.ndarray) -> np.ndarray:
     """Nilai H1 yang sudah tertutup, dipetakan ke setiap bar dasar (dipakai saat bar dasar dibuka)."""
     s = pd.Series(values, index=X.index + pd.Timedelta(hours=1))
@@ -719,6 +850,13 @@ TESTS = {
     "nazhmi_fvg_ob M5 + batas harian (nazhmi12)": nazhmi_fvg_ob,
     "nazhmi_fvg_ob M5 tanpa batas harian": lambda p: nazhmi_fvg_ob(p, daily_limit=False),
     "kiran_smc sinyal M5 (Kiran-Kumbar)": kiran_smc,
+    "hillary scalping SMA5/20 M5 (HillaryMurimi)": lambda p: hillary(p, "scalping"),
+    "hillary day RSI 30/70 M5": lambda p: hillary(p, "day"),
+    "hillary swing MACD cross M5": lambda p: hillary(p, "swing"),
+    "aurum H1 (armza332)": aurum,
+    "aurum M15 (armza332)": lambda p: aurum(p, "15min"),
+    "aurum H1 tanpa self-learning": lambda p: aurum(p, learn=False),
+    "aurum M15 tanpa self-learning": lambda p: aurum(p, "15min", learn=False),
 }
 
 
