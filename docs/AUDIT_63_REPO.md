@@ -206,6 +206,34 @@ sendiri** (shamshyder, thanvish21, armza332, blackhunter, Sheyswaggz tanpa kode,
 `kandidat/KATALOG.md` tidak berubah: terbaik tetap Keltner sederhana samw2591 (+33,4R), dan resep bot ini tetap
 A-ensemble Donchian H1.
 
+### 3.3 Tahap B2: strategi sisa putaran kedua (`python -m research.github_popular4`)
+
+Hasil lengkap: `docs/hasil_github_popular4.txt`.
+
+| Repo / strategi | Trade | Win-rate | Total | Periode positif | Catatan dari membaca kodenya |
+|---|---|---|---|---|---|
+| samw2591 MACD + EMA100 H1 (**dinonaktifkan penulis**) | 1.841 | 34,3% | +21,9R | 2/4 | Positif hanya 2022–26; penulis sendiri mematikannya ("11 tahun Sharpe −0,36") |
+| samw2591 gap Senin (**dinonaktifkan penulis**) | 553 | 52,8% | +10,9R | 2/4 | Docstring klaim WR 79,3%; config: "dua backtest Sharpe negatif" |
+| GifariKemal XAUBot Pro V3 (asli) | 11 | 27% | −2,0R | 1/4 | `canTrade=false` setelah 3 kalah beruntun / rugi harian 5% hanya dibuka lagi oleh trade menang → **berhenti permanen**; filter ATR M15 $5–25 membuatnya hampir tak pernah trading sebelum 2025 |
+| XAUBot V3, halt direset harian | 78 | 44,9% | −10,1R | 1/4 | |
+| XAUBot V3, tanpa filter ATR | 501 | 37,9% | −88,4R | 0/4 | |
+| EA_SCALPER `EA_ULTRA_AGGRESSIVE` (EMA 8/21 + Fibo, SL $1,5) | 10.611 | 28,7% | −1.533R | 1/4 | |
+| AnggaKay, arah berbasis aturan tanpa filter ML (M5) | 28.457 | 47,2% | −1.707R | 0/2 | Model ML tidak ada di repo; ML hanya menyaring sinyal ini |
+| nathanaela2002 MLP M30 walk-forward (tanpa PMI & berita) | 17.108 | 20,4% | −11.219R | 0/4 | Label "naik >0,1%" membuat prob ≥0,7 hampir tak pernah muncul → **100% SELL**; SL di low/high 10 bar sangat sempit sehingga habis oleh spread & gap. Backtest penulis memakai data latihnya sendiri |
+
+Tidak bisa diuji (alasan dari kodenya):
+
+| Repo / file | Alasan |
+|---|---|
+| EA_SCALPER `EA_SCALPER_XAUUSD.mq5` | ±25 modul (order flow/footprint, berita, sentimen, AMD, ONNX); footprint butuh data tick bid/ask |
+| EA_SCALPER `EA_AGGRESSIVE_SCALPER.mq5` | Footprint + Hurst + "adaptive learning" yang menyimpan status ke file |
+| EA_SCALPER `SmartPropAI_Template.mq5` | Bukan AI: agen "Fundamental/News" = konstanta 50, `iMA/iRSI` dipakai sebagai nilai (handle), **TP ditentukan `MathRand()` (acak)** |
+| damaradam04 | Tidak ada sinyal otomatis; arah diketik manual dan `DIRECTION = "buy" or "sell"` di Python selalu bernilai `"buy"` |
+| GifariKemal bot Python ML | Diwakili uji walk-forward ML di `research/github_popular.py` |
+
+**Kesimpulan B2:** tidak ada yang mengalahkan resep bot ini (Donchian H1: +123,7R, 4/4 periode). Dua strategi samw2591
+yang positif justru yang dimatikan penulisnya sendiri, dan hanya positif di 2 dari 4 periode.
+
 ## 4. Gabungan (`python -m research.combine2`)
 
 Ketahanan Keltner (81 variasi parameter): 93% positif di ≥3 periode, tetapi hanya 16% positif di keempatnya (lemah
@@ -241,5 +269,6 @@ python -m xau_bot audit repos/NAMA_REPO                  # detail per baris
 bash research/download_data.sh
 python -m research.github_popular2                         # bagian 3
 python -m research.github_popular3                         # bagian 3.2
+python -m research.github_popular4                         # bagian 3.3
 python -m research.combine2                                # bagian 4
 ```

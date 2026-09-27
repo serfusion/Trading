@@ -12,7 +12,7 @@ penulis, hasil uji ulang bot ini, dan daftar perubahan.
 | Platform, timeframe, scalping, login MT5, order otomatis, SL/TP, trailing, martingale/grid/hedging, manajemen risiko, filter berita/sesi, AI/LLM, Telegram, backtest | **Semua 63 repo**, otomatis + kolom `verifikasi_manual` | `python -m research.inventaris_repo` → `inventaris_63_repo.csv` (bila kolom otomatis berbeda, kolom manual yang benar) |
 | Kolom yang sama, diverifikasi manual (baca baris kodenya) | **41 kandidat** | Hasilnya di `ASAL.md` tiap folder |
 | Klaim win-rate / profit / drawdown | README & dokumen semua repo; laporan hasil (CSV/MD) bila ada | Dikutip apa adanya |
-| Uji ulang strategi di data asli 2012–2026 (spread, tanpa look-ahead) | **30 strategi** dari 18 repo + 5 repo ML diwakili uji walk-forward; yang tidak bisa diuji beserta alasannya: paragraf di bawah & `docs/AUDIT_63_REPO.md` §3.2 | `research/github_popular*.py`, `research/mnauu_confluence.py` |
+| Uji ulang strategi di data asli 2012–2026 (spread, tanpa look-ahead) | **36 strategi** dari 22 repo + 5 repo ML diwakili uji walk-forward; yang tidak bisa diuji beserta alasannya: paragraf di bawah & `docs/AUDIT_63_REPO.md` §3.2 | `research/github_popular*.py`, `research/mnauu_confluence.py` |
 
 Yang **tidak** bisa dipastikan: isi EA terkompilasi (.ex5/.ex4 terenkripsi), kode tersandi (Minhtan2005), strategi
 yang aturannya privat (EA_SCALPER), bot berbasis LLM (hasilnya berubah-ubah), model AI tanpa dilatih ulang, dan
@@ -61,8 +61,12 @@ Temuan yang baru ketahuan setelah pemeriksaan sampai ke akar (termasuk riwayat g
 | # | Repo / strategi | Total | Periode positif |
 |---|---|---|---|
 | 1 | samw2591 Keltner sederhana (SL 4,5 / TP 8 ATR) | **+33,4R** | 3/4 |
-| 2 | samw2591 ORB New York | −68,1R (tapi +51,3R di 2022–26) | 2/4 |
-| 3 | Aniket EMA 13/34 + RSI H4 | −2,7R | 2/4 |
+| 2 | samw2591 MACD + EMA100 H1 (dimatikan penulis) | +21,9R | 2/4 |
+| 3 | samw2591 gap Senin (dimatikan penulis) | +10,9R | 2/4 |
+| 4 | nazhmi12 FVG+OB (di emas, M5 2022–26 saja) | +7,0R (89 trade) | 1/2 |
+| 5 | P1Piyush PDH/PDL (M5 2022–26 saja) | +5,0R (15 trade) | 2/2 |
+| — | samw2591 ORB New York | −68,1R (tapi +51,3R di 2022–26) | 2/4 |
+| — | Aniket EMA 13/34 + RSI H4 | −2,7R | 2/4 |
 | — | *Pembanding: Donchian H1 bot ini (1 set)* | *+123,7R* | *4/4* |
 
 ### Scalping

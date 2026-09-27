@@ -18,8 +18,8 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 |---|---|---|---|
 | A2 | Pindai ISI arsip di riwayat + audit dependensi | ✅ selesai: 404 arsip (zip **dan** rar via libarchive), 10.113 file, 14 program dianalisa statis; 286 paket (HEAD) + 459 (riwayat) dicek ke PyPI/npm | `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md`, `docs/arsip_dependensi/` |
 | D2 | Fork & wiki dari 63 repo | ✅ selesai: 0 wiki; 372 fork (342 identik, 30 berubah → isi barunya dipindai) | `docs/AUDIT_FORK_WIKI.md`, `docs/fork/` |
-| B2 | Strategi yang belum diuji: EA GifariKemal, EA EA_SCALPER, sisa samw2591, AnggaKay, damaradam04, nathanaela2002 | ⏳ | `research/github_popular4.py` |
-| C2 | Baca manual baris demi baris file inti 41 kandidat | ⏳ | `docs/TINJAUAN_MANUAL.md` |
+| B2 | Strategi yang belum diuji: EA GifariKemal, EA EA_SCALPER, sisa samw2591, AnggaKay, damaradam04, nathanaela2002 | ✅ selesai: 6 strategi diuji, 5 dicatat tak bisa diuji (alasan dari kode) | `research/github_popular4.py`, `docs/AUDIT_63_REPO.md` §3.3, `docs/hasil_github_popular4.txt` |
+| C2 | Baca manual file inti 41 kandidat | ⏳ berjalan: 298 file inti / 243.552 baris; kecil dibaca penuh, besar per titik aksi (order/jaringan/login/proses/kredensial) | `docs/TINJAUAN_MANUAL.md` |
 
 ## B — daftar strategi yang belum diuji
 
@@ -71,3 +71,4 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   **A, B, C selesai.** Sisa: keputusan pengguna (lihat CLAUDE.md) — skema A live, tab Android, bundle mentah.
 - 2026-09-27: A2 selesai. Loader injeksi kode + DLL palsu (winmm/aininet) di paket EA bajakan riwayat EA_SCALPER; terminal MT4/MT5 di dalamnya asli (hash tanda tangan cocok). Dependensi bersih.
 - 2026-09-27: D2 selesai. Tidak ada malware di fork; beberapa fork membocorkan password MT5 pemiliknya; fork Silentwolf360 berisi source .mq5 EA P1Piyush.
+- 2026-09-27: B2 selesai. Terbaik baru: samw2591 MACD +21,9R & gap Senin +10,9R (keduanya dimatikan penulis, 2/4 periode). XAUBot V3 berhenti permanen (bug canTrade); SmartPropAI = TP acak.
