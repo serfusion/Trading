@@ -46,9 +46,9 @@ Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke
 ntfy. Opsional: auto order ke akun MT5 Exness lewat MetaApi, dinyalakan/dijeda/diatur lot dari
 tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md).
 
-## Aplikasi Android "XAU Signal"
+## Aplikasi Android "Superfal-Dev"
 
-- APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "XAU Signal (APK terbaru)"**
+- APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "Superfal-Dev (APK terbaru)"**
   (tag `android-latest`) atau **Actions → Android APK → Artifacts**, unduh `app-debug.apk`, pasang
   (izinkan "instal dari sumber tidak dikenal").
 - Buka aplikasi → ⚙️ Pengaturan → isi **Server** (`https://ntfy.sh`) dan **Topik** dari
@@ -59,7 +59,9 @@ tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md
   dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
 - Tab **Statistik**: menang/kalah & profit/rugi harian, mingguan, bulanan + konversi Rupiah.
 - Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, TUTUP SEMUA, saldo
-  dan posisi bot yang sedang terbuka — semua dari HP.
+  dan posisi bot yang sedang terbuka — semua dari HP. Lot diisi dengan tombol −/+ (langkah 0.01) atau pilihan
+  cepat 0.01 / 0.02 / 0.03 / 0.05 / 0.10, jadi selalu tepat kelipatan 0.01.
+- Tab **Riset**: ringkasan hasil backtest, ujian sinyal, strategi yang gagal, dan audit 63 repo (dari `docs/`).
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
 
 ## Periksa keamanan bot/EA orang lain sebelum dijalankan

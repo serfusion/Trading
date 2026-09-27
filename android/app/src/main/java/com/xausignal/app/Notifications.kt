@@ -40,7 +40,7 @@ object Notifications {
     fun foreground(context: Context, text: String): Notification =
         NotificationCompat.Builder(context, CH_SERVICE)
             .setSmallIcon(R.drawable.ic_stat)
-            .setContentTitle("XAU Signal aktif")
+            .setContentTitle("$BRAND aktif")
             .setContentText(text)
             .setContentIntent(openApp(context))
             .setOngoing(true)
@@ -55,7 +55,7 @@ object Notifications {
 
     fun info(context: Context, event: SignalEvent) {
         val text = event.str("text")
-        val title = text.lineSequence().firstOrNull() ?: "XAU Signal"
+        val title = text.lineSequence().firstOrNull() ?: BRAND
         post(context, (event.id + "info").hashCode(), title, text)
     }
 

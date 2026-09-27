@@ -7,7 +7,7 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
         ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
         │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
-        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
+        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Superfal-Dev
         └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
@@ -53,7 +53,7 @@ di aplikasi.
 ## Langkah 5 — Tes
 1. Buka di browser: `https://signal.domainkamu.com/api/tick?key=CRON_SECRET` → harus muncul
    `{"ok": true, "price": ..., "trend": "close ... | channel 55: ... "}`.
-2. Aplikasi XAU Signal → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
+2. Aplikasi Superfal-Dev → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
    kartu atas menampilkan harga & "Mode: SINYAL (cloud)".
 3. Di Supabase: `select status_code, content from net._http_response order by created desc limit 5;`
    → status 200 setiap 30 menit.
