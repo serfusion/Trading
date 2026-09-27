@@ -4,6 +4,9 @@ Skema F-ensemble, IDENTIK dengan bot (xau_bot/trend.py + trend_ensemble.py; diuj
 - 3 set Donchian H1 (40/15, 55/20, 80/30). BUY bila close > high N bar sebelumnya, SELL kebalikannya.
 - SL = entry -/+ 3 x ATR(20). Tiap sinyal = 5 posisi: posisi #1 TP1 = 1R, sisanya hold.
 - TP1 kena -> SL posisi sisa ke entry (SL+). TUTUP saat close menembus channel exit.
+- ⭐: setiap sinyal diberi tanda star=True bila searah tren D1 (close D1 kemarin vs EMA50 D1) DAN
+  close H1 menembus high/low 20 candle H4 sebelumnya (research/filters.py, "tren D1 + H4 breakout").
+  star_only=True -> sinyal non-⭐ tidak dikirim sama sekali (default: semua dikirim, ⭐ ditandai).
 """
 from __future__ import annotations
 
@@ -14,9 +17,9 @@ import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
-CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 150, "tf_minutes": 60,
+CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
-       "leg_lot": 0.01}
+       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20}
 
 
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
@@ -92,6 +95,46 @@ def evaluate(closed: list[Bar], position: str | None, cfg: dict = CFG) -> dict:
     elif position is None and last < lo_e:
         out.update(action="open", dir="SELL", note=f"Breakdown H1: close {last:.2f} < low {cfg['entry']} bar {lo_e:.2f}")
     return out
+
+
+def star_check(closed: list[Bar], direction: str, ema_span: int = 50, h4_n: int = 20) -> tuple[bool, str]:
+    """Filter ⭐: searah tren D1 DAN H1 menembus 20 candle H4 sebelumnya. Hanya data yang sudah tertutup.
+
+    Sama dengan research/filters.py: hari & blok H4 dihitung dalam UTC (H4 mulai 00/04/08/...),
+    EMA = pandas ewm(span, adjust=True) atas close harian sampai kemarin.
+    """
+    last = closed[-1]
+    daily: dict = {}
+    for b in closed:
+        if b.t.date() < last.t.date():
+            daily[b.t.date()] = b.c
+    closes = [daily[k] for k in sorted(daily)]
+    if len(closes) < 20:
+        return False, "data D1 belum cukup"
+    alpha, num, den = 2 / (ema_span + 1), 0.0, 0.0
+    for x in closes:
+        num, den = num * (1 - alpha) + x, den * (1 - alpha) + 1
+    ema, prev_close = num / den, closes[-1]
+
+    def block(t: datetime) -> datetime:
+        return t.replace(hour=t.hour - t.hour % 4, minute=0, second=0, microsecond=0)
+
+    start, blocks = block(last.t), {}
+    for b in closed:
+        if b.t < start:
+            k = block(b.t)
+            hi, lo = blocks.get(k, (float("-inf"), float("inf")))
+            blocks[k] = (max(hi, b.h), min(lo, b.l))
+    prev = [blocks[k] for k in sorted(blocks)][-h4_n:]
+    if len(prev) < h4_n:
+        return False, "data H4 belum cukup"
+    buy = direction == "BUY"
+    d1_ok = prev_close > ema if buy else prev_close < ema
+    h4_lvl = max(h for h, _ in prev) if buy else min(lo for _, lo in prev)
+    h4_ok = last.c > h4_lvl if buy else last.c < h4_lvl
+    note = (f"D1 {prev_close:.2f} {'>' if prev_close > ema else '<'} EMA{ema_span} {ema:.2f} "
+            f"{'✓' if d1_ok else '✗'} | H4 {'high' if buy else 'low'} {h4_n} {h4_lvl:.2f} {'✓' if h4_ok else '✗'}")
+    return bool(d1_ok and h4_ok), note
 
 
 # ---------------------------------------------------------------- layanan luar
@@ -278,7 +321,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name,
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
-              "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "reason": why}
+              "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
+              "tp1_time": v.get("be_bar"), "reason": why}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
         pub.publish(ev, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
@@ -325,8 +369,13 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             if sig["action"] == "close" and v:
                 close_virtual(name, v, price, sig["note"])
                 v = None
+            elif sig["action"] == "open" and v is None and cfg.get("star_only") and not (
+                    star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})
+                events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
+                is_star, star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
@@ -337,8 +386,9 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                       "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
                       "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
-                      "warning": "Harga dari data feed; cek harga broker sebelum entry."}
-                text = (f"{'🟢' if d == 'BUY' else '🔴'} TREND {d} {symbol} [{name}] skema F\n"
+                      "warning": "Harga dari data feed; cek harga broker sebelum entry.",
+                      "star": is_star, "star_note": star_note}
+                text = (f"{'⭐ ' if is_star else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
@@ -346,7 +396,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False,
+                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": is_star,
                      "bar_close": iso(closed[-1].t + tf)}
                 existing = live_positions(magic) if live else []
                 if live and existing != []:

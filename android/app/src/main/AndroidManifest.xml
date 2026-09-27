@@ -3,8 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -23,9 +22,14 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".SignalService"
-            android:exported="false"
-            android:foregroundServiceType="dataSync" />
+        <!-- Cek sinyal di latar belakang (alarm) & jadwalkan ulang setelah HP restart / aplikasi diperbarui -->
+        <receiver
+            android:name=".PollReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

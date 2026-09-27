@@ -41,9 +41,14 @@ fun fmt(value: Double?, digits: Int = 2): String =
 data class Stats(val closed: Int, val wins: Int, val totalR: Double)
 
 /** Pengaturan uang untuk menghitung profit/rugi dari sinyal. */
-data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Double) {
+data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Double, val starLot: Double = legLot) {
     val currency: String get() = if (cent) "USC" else "USD"
+
+    /** Lot per posisi: sinyal ⭐ memakai lot ⭐, sinyal biasa memakai lot biasa. */
+    fun lotFor(star: Boolean): Double = if (star) starLot else legLot
 }
+
+fun SignalEvent.isStar(): Boolean = json.optBoolean("star", false)
 
 data class PeriodStats(
     val label: String,
@@ -67,7 +72,7 @@ object SignalRepository {
     private val _heartbeat = MutableStateFlow<SignalEvent?>(null)
     val heartbeat: StateFlow<SignalEvent?> = _heartbeat
 
-    private val _connection = MutableStateFlow("Belum terhubung")
+    private val _connection = MutableStateFlow("Memuat...")
     val connection: StateFlow<String> = _connection
 
     private var prefs: SharedPreferences? = null
@@ -81,14 +86,27 @@ object SignalRepository {
 
     fun server(): String = prefs?.getString("server", DEFAULT_SERVER) ?: DEFAULT_SERVER
 
-    fun money(): MoneySettings = MoneySettings(
-        cent = prefs?.getBoolean("cent", true) ?: true,
-        legLot = (prefs?.getFloat("leg_lot", 0.01f) ?: 0.01f).toDouble(),
-        idrRate = (prefs?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble(),
-    )
+    /**
+     * Lot disimpan sebagai teks ("0.02"). Versi lama menyimpan Float: 0.01f dibaca sebagai Double menjadi
+     * 0.009999999776482582, jadi nilai lama tetap dibaca lalu dibulatkan ke kelipatan 0,01.
+     */
+    fun money(): MoneySettings {
+        val p = prefs
+        val lot = p?.getString("leg_lot_text", null)?.toDoubleOrNull()
+            ?: p?.let { if (it.contains("leg_lot")) it.getFloat("leg_lot", 0.01f).toDouble() else null }
+            ?: 0.01
+        val star = p?.getString("star_lot_text", null)?.toDoubleOrNull() ?: lot
+        return MoneySettings(
+            cent = p?.getBoolean("cent", true) ?: true,
+            legLot = roundLot(lot).coerceAtLeast(0.01),
+            idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
+            starLot = roundLot(star).coerceAtLeast(0.01),
+        )
+    }
 
     fun saveMoney(m: MoneySettings) {
-        prefs?.edit()?.putBoolean("cent", m.cent)?.putFloat("leg_lot", m.legLot.toFloat())
+        prefs?.edit()?.putBoolean("cent", m.cent)?.putString("leg_lot_text", lotText(m.legLot))?.remove("leg_lot")
+            ?.putString("star_lot_text", lotText(m.starLot))
             ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
         _moneyVersion.value = _moneyVersion.value + 1
     }
@@ -103,7 +121,7 @@ object SignalRepository {
         val risk = e.num("risk_points") ?: return null
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
-        return r * risk * legs * (m.legLot / 0.01)
+        return r * risk * legs * Math.round(m.lotFor(e.isStar()) * 100.0)
     }
 
     fun toIdr(amount: Double, m: MoneySettings): Double =
@@ -116,9 +134,9 @@ object SignalRepository {
     }
 
     fun periodStats(events: List<SignalEvent>, m: MoneySettings, keyOf: (java.time.ZonedDateTime) -> String,
-                    labelOf: (String) -> String = { it }): List<PeriodStats> {
+                    labelOf: (String) -> String = { it }, star: Boolean? = null): List<PeriodStats> {
         val groups = LinkedHashMap<String, MutableList<Double>>()
-        events.filter { it.type == "close" }.forEach { e ->
+        events.filter { it.type == "close" && (star == null || it.isStar() == star) }.forEach { e ->
             val t = zoned(e) ?: return@forEach
             val a = amount(e, m) ?: return@forEach
             groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
@@ -130,15 +148,11 @@ object SignalRepository {
     }
     fun topic(): String = prefs?.getString("topic", "") ?: ""
 
-    /** Alamat cloud (mis. https://superfal-dev.com) + CONTROL_KEY untuk tab Auto. */
-    fun cloudUrl(): String = prefs?.getString("cloud_url", "") ?: ""
-    fun controlKey(): String = prefs?.getString("control_key", "") ?: ""
-
-    fun saveCloud(url: String, key: String) {
-        var u = url.trim().trimEnd('/')
-        if (u.isNotBlank() && !u.startsWith("http")) u = "https://$u"
-        prefs?.edit()?.putString("cloud_url", u)?.putString("control_key", key.trim())?.apply()
+    fun termsAccepted(): Boolean = prefs?.getBoolean("terms_ok", false) ?: false
+    fun acceptTerms() {
+        prefs?.edit()?.putBoolean("terms_ok", true)?.apply()
     }
+
     fun lastMessageId(): String? = prefs?.getString("last_id", null)
 
     @Synchronized
@@ -184,8 +198,14 @@ object SignalRepository {
         }
     }
 
-    fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean =
-        events.any { it.type == "info" && it.str("id") == signalId && it.str("text").contains("SL+") }
+    fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean = tp1Event(events, signalId) != null
+
+    /** Info TP1 kena (lalu SL+) untuk sinyal ini, bila ada. */
+    fun tp1Event(events: List<SignalEvent>, signalId: String): SignalEvent? =
+        events.firstOrNull { it.type == "info" && it.str("id") == signalId && it.str("text").contains("TP1") }
+
+    fun closeEvent(events: List<SignalEvent>, signalId: String): SignalEvent? =
+        events.firstOrNull { it.type == "close" && it.id == signalId }
 
     fun stats(events: List<SignalEvent>): Stats {
         val closes = events.filter { it.type == "close" && it.num("r") != null }

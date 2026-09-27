@@ -7,12 +7,21 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
         ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
         │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
-        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
+        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Gold XAU/USD Indicator
         └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
-Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 343 sinyal (3 set), 48,7% untung,
-**+65,2R** (`python -m research.cloud_check`). Default hanya SINYAL; auto order 24 jam tanpa PC bisa
+**Tanda ⭐**: semua sinyal dikirim; sinyal yang searah tren D1 (close D1 kemarin vs EMA50 D1) dan
+menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`). Simulasi di data asli
+Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check --semua`):
+
+| | Sinyal | Untung | Total | Rata-rata/sinyal |
+|---|---|---|---|---|
+| ⭐ | 114 | 57,0% | +63,1R | +0,55R |
+| Biasa | 229 | 44,5% | +2,1R | +0,01R |
+| Semua | 343 | 48,7% | +65,2R | +0,19R |
+
+Hampir semua profit datang dari sinyal ⭐; sinyal biasa rata-rata impas. Tidak ada yang pasti menang.
 dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).
 
 ## Langkah 1 — Twelve Data (harga emas)
@@ -40,6 +49,7 @@ di aplikasi.
 | `SYMBOL` | (opsional) default `XAU/USD` |
 | `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
 | `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
+| `STAR_ONLY` | (opsional) `0` = semua sinyal, ⭐ ditandai (default); `1` = hanya kirim sinyal ⭐ |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -53,7 +63,7 @@ di aplikasi.
 ## Langkah 5 — Tes
 1. Buka di browser: `https://signal.domainkamu.com/api/tick?key=CRON_SECRET` → harus muncul
    `{"ok": true, "price": ..., "trend": "close ... | channel 55: ... "}`.
-2. Aplikasi XAU Signal → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
+2. Aplikasi Gold XAU/USD Indicator → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
    kartu atas menampilkan harga & "Mode: SINYAL (cloud)".
 3. Di Supabase: `select status_code, content from net._http_response order by created desc limit 5;`
    → status 200 setiap 30 menit.
