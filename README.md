@@ -46,7 +46,7 @@ Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke
 ntfy. Opsional: auto order ke akun MT5 Exness lewat MetaApi, dinyalakan/dijeda/diatur lot dari
 tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md).
 
-## Aplikasi Android "Gold XAU/USD Indicator" (by: Superfal-Dev)
+## Aplikasi Android "Gold XAU/USD Indicator" — Superfal-Dev
 
 - APK dibuat otomatis oleh GitHub Actions: **Releases → "Gold XAU/USD Indicator (APK terbaru)"**
   (tag `android-latest`), unduh `app-debug.apk`, pasang (izinkan "instal dari sumber tidak dikenal").

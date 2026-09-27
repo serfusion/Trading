@@ -148,6 +148,11 @@ object SignalRepository {
     }
     fun topic(): String = prefs?.getString("topic", "") ?: ""
 
+    fun termsAccepted(): Boolean = prefs?.getBoolean("terms_ok", false) ?: false
+    fun acceptTerms() {
+        prefs?.edit()?.putBoolean("terms_ok", true)?.apply()
+    }
+
     fun lastMessageId(): String? = prefs?.getString("last_id", null)
 
     @Synchronized

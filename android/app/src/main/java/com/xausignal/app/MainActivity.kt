@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
@@ -115,6 +116,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     val connection by SignalRepository.connection.collectAsState()
     val moneyVersion by SignalRepository.moneyVersion.collectAsState()
     var showSettings by remember { mutableStateOf(SignalRepository.topic().isBlank()) }
+    var showTerms by remember { mutableStateOf(!SignalRepository.termsAccepted()) }
     var tab by remember { mutableIntStateOf(0) }
     val money = remember(moneyVersion) { SignalRepository.money() }
 
@@ -160,6 +162,9 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                     }
                 },
                 actions = {
+                    IconButton(onClick = { showTerms = true }) {
+                        Icon(Icons.Filled.Info, contentDescription = "Syarat & Ketentuan")
+                    }
                     IconButton(onClick = { showSettings = true }) {
                         Icon(Icons.Filled.Settings, contentDescription = "Pengaturan")
                     }
@@ -204,7 +209,12 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
         }
     }
 
-    if (showSettings) {
+    if (showTerms) {
+        TermsDialog(money.idrRate) {
+            SignalRepository.acceptTerms()
+            showTerms = false
+        }
+    } else if (showSettings) {
         SettingsDialog(
             onDismiss = { showSettings = false },
             onSave = { server, topic, m ->
