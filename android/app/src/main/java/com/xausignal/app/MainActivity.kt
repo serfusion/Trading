@@ -1,7 +1,6 @@
 package com.xausignal.app
 
 import android.Manifest
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -25,8 +24,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -58,28 +55,36 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.lifecycle.Lifecycle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SignalRepository.init(this)
-        startSignalService()
+        Notifications.createChannels(this)
+        PollScheduler.schedule(applicationContext)
         setContent {
             XauTheme {
-                AppScreen(onSettingsSaved = { restartSignalService() })
+                AppScreen(onSettingsSaved = { refresh() })
             }
         }
     }
 
-    private fun startSignalService() {
-        ContextCompat.startForegroundService(this, Intent(this, SignalService::class.java))
+    override fun onResume() {
+        super.onResume()
+        refresh()
     }
 
-    private fun restartSignalService() {
-        stopService(Intent(this, SignalService::class.java))
-        startSignalService()
+    /** Muat harga & sinyal terbaru saat aplikasi dibuka. */
+    private fun refresh() {
+        val app = applicationContext
+        Thread { SignalPoller.poll(app) }.start()
     }
 }
 
@@ -100,8 +105,6 @@ private data class TabItem(val title: String, val icon: ImageVector)
 private val TABS = listOf(
     TabItem("Sinyal", Icons.Filled.Notifications),
     TabItem("Statistik", Icons.Filled.DateRange),
-    TabItem("Auto", Icons.Filled.PlayArrow),
-    TabItem("Riset", Icons.Filled.Search),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -116,8 +119,18 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     val money = remember(moneyVersion) { SignalRepository.money() }
 
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
+    val context = LocalContext.current
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
     LaunchedEffect(Unit) {
         if (Build.VERSION.SDK_INT >= 33) permission.launch(Manifest.permission.POST_NOTIFICATIONS)
+    }
+    LaunchedEffect(Unit) {
+        while (true) {   // selama aplikasi terbuka: perbarui tiap menit
+            delay(60_000)
+            if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                withContext(Dispatchers.IO) { SignalPoller.poll(context.applicationContext) }
+            }
+        }
     }
 
     Scaffold(
@@ -140,9 +153,9 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                             )
                         }
                         Column(Modifier.padding(start = 12.dp)) {
-                            Text(BRAND, fontWeight = FontWeight.Bold, color = Gold,
-                                style = MaterialTheme.typography.titleLarge)
-                            Text(TAGLINE, style = MaterialTheme.typography.labelMedium, color = Muted)
+                            Text(APP_NAME, fontWeight = FontWeight.Bold, color = Gold,
+                                style = MaterialTheme.typography.titleMedium, maxLines = 1)
+                            Text(BRAND, style = MaterialTheme.typography.labelSmall, color = Muted)
                         }
                     }
                 },
@@ -186,9 +199,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
             }
             when (tab) {
                 0 -> SignalsTab(events, heartbeat, connection, money)
-                1 -> StatsTab(events, money)
-                2 -> AutoTab(money)
-                else -> ResearchTab()
+                else -> StatsTab(events, money)
             }
         }
     }
@@ -218,22 +229,18 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
-            Column {
-                Text("Pengaturan", fontWeight = FontWeight.Bold)
-                Text(BRAND, style = MaterialTheme.typography.labelMedium, color = Gold)
-            }
+            Text("Pengaturan", fontWeight = FontWeight.Bold)
         },
         text = {
             Column(
                 Modifier.verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                CardTitle("Sumber sinyal (ntfy)")
                 OutlinedTextField(value = server, onValueChange = { server = it }, label = { Text("Server") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(value = topic, onValueChange = { topic = it }, label = { Text("Topik") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
-                CardTitle("Akun trading (untuk statistik)")
+                CardTitle("Akun")
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
@@ -241,11 +248,6 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                 LotInput(lot, { lot = it }, "Lot per posisi", 100.0)
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
-                Text(
-                    "Lot di sini hanya untuk menghitung profit/rugi di tab Statistik. Lot order sungguhan " +
-                        "diatur di tab Auto.",
-                    style = MaterialTheme.typography.bodySmall, color = Muted
-                )
             }
         },
         confirmButton = {

@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.Locale
 
-const val BRAND = "Superfal-Dev"
-const val TAGLINE = "Sinyal & auto order XAUUSD"
+const val APP_NAME = "Gold XAU/USD Indicator"
+const val BRAND = "by: Superfal-Dev"
 
 /** Warna khusus trading; versi gelap & terang supaya teks tetap kontras. */
 data class TradeColors(
@@ -295,11 +295,8 @@ fun Footer() {
         Modifier.fillMaxWidth().padding(vertical = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(BRAND, style = MaterialTheme.typography.labelLarge, color = Gold, fontWeight = FontWeight.Bold)
-        Text(
-            "Bukan saran investasi • hasil tidak dijamin",
-            style = MaterialTheme.typography.labelSmall, color = Muted
-        )
+        Text(BRAND, style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
+        Text("Bukan saran investasi", style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }
 

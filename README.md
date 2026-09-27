@@ -46,22 +46,18 @@ Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke
 ntfy. Opsional: auto order ke akun MT5 Exness lewat MetaApi, dinyalakan/dijeda/diatur lot dari
 tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md).
 
-## Aplikasi Android "Superfal-Dev"
+## Aplikasi Android "Gold XAU/USD Indicator" (by: Superfal-Dev)
 
-- APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "Superfal-Dev (APK terbaru)"**
-  (tag `android-latest`) atau **Actions → Android APK → Artifacts**, unduh `app-debug.apk`, pasang
-  (izinkan "instal dari sumber tidak dikenal").
-- Buka aplikasi → ⚙️ Pengaturan → isi **Server** (`https://ntfy.sh`) dan **Topik** dari
-  `python -m xau_bot app` → Simpan.
-- Aplikasi menampilkan harga & saldo terkini, posisi sinyal aktif (entry, SL, berjalan), riwayat
-  sinyal BUY/SELL & TUTUP beserta hasil BENAR/SALAH, dan notifikasi bersuara.
-- Sinyal dikirim lewat [ntfy](https://ntfy.sh) (open-source). Topik acak = kunci rahasia, jangan
-  dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
-- Tab **Statistik**: menang/kalah & profit/rugi harian, mingguan, bulanan + konversi Rupiah.
-- Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, TUTUP SEMUA, saldo
-  dan posisi bot yang sedang terbuka — semua dari HP. Lot diisi dengan tombol −/+ (langkah 0.01) atau pilihan
-  cepat 0.01 / 0.02 / 0.03 / 0.05 / 0.10, jadi selalu tepat kelipatan 0.01.
-- Tab **Riset**: ringkasan hasil backtest, ujian sinyal, strategi yang gagal, dan audit 63 repo (dari `docs/`).
+- APK dibuat otomatis oleh GitHub Actions: **Releases → "Gold XAU/USD Indicator (APK terbaru)"**
+  (tag `android-latest`), unduh `app-debug.apk`, pasang (izinkan "instal dari sumber tidak dikenal").
+- ⚙️ Pengaturan → **Server** `https://ntfy.sh` + **Topik** (= `NTFY_TOPIC` cloud) → Simpan.
+- Tanpa notifikasi yang selalu tampil: aplikasi mengecek sinyal di latar belakang lewat alarm di menit
+  :05 & :35 UTC (±3 menit setelah cloud memeriksa pasar) dan membunyikan notifikasi saat ada sinyal ⭐,
+  TP1, atau TUTUP. Saat dibuka, harga & riwayat dimuat ulang (tiap menit selama terbuka).
+- Tab **Sinyal** (harga, sinyal aktif, ringkasan, riwayat) dan **Statistik** (menang/kalah, profit/rugi
+  harian/mingguan/bulanan + Rupiah).
+- Beberapa HP (Xiaomi, Oppo, Vivo, dll.) membatasi aplikasi latar belakang: set Baterai → **Tanpa
+  pembatasan** untuk aplikasi ini supaya notifikasi tidak terlambat.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
 
 ## Periksa keamanan bot/EA orang lain sebelum dijalankan

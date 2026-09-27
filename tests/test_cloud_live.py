@@ -13,7 +13,7 @@ from test_trend import trend_path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cloud" / "api"))
 import _core  # noqa: E402
 
-ONE_SET = {**_core.CFG, "sets": [(55, 20)], "max_leg_lot": 0.10}
+ONE_SET = {**_core.CFG, "star_only": False, "sets": [(55, 20)], "max_leg_lot": 0.10}
 
 
 class Store:

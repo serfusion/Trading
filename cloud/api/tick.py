@@ -29,7 +29,8 @@ def run() -> tuple[int, dict]:
         return 500, {"ok": False, "error": f"Environment variable belum diisi: {', '.join(missing)}"}
     cfg = {**_core.CFG, "legs": int(env.get("LEGS", _core.CFG["legs"])),
            "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"])),
-           "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10))}
+           "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10)),
+           "star_only": env.get("STAR_ONLY", "1") != "0"}   # 0 = ambil semua sinyal (tanpa filter ⭐)
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),

@@ -1,7 +1,6 @@
 package com.xausignal.app
 
 import android.Manifest
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -13,21 +12,16 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 object Notifications {
-    const val FOREGROUND_ID = 1
     private const val CH_SIGNAL = "signals"
-    private const val CH_SERVICE = "service"
 
     fun createChannels(context: Context) {
         val nm = context.getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(
-            NotificationChannel(CH_SIGNAL, "Sinyal trading", NotificationManager.IMPORTANCE_HIGH).apply {
-                description = "Sinyal BUY/SELL dan TUTUP posisi"
+            NotificationChannel(CH_SIGNAL, "Sinyal XAU/USD", NotificationManager.IMPORTANCE_HIGH).apply {
                 enableVibration(true)
             }
         )
-        nm.createNotificationChannel(
-            NotificationChannel(CH_SERVICE, "Koneksi ke bot", NotificationManager.IMPORTANCE_MIN)
-        )
+        nm.deleteNotificationChannel("service")   // notifikasi "menunggu sinyal" versi lama
     }
 
     private fun openApp(context: Context): PendingIntent {
@@ -37,33 +31,22 @@ object Notifications {
         )
     }
 
-    fun foreground(context: Context, text: String): Notification =
-        NotificationCompat.Builder(context, CH_SERVICE)
-            .setSmallIcon(R.drawable.ic_stat)
-            .setContentTitle("$BRAND aktif")
-            .setContentText(text)
-            .setContentIntent(openApp(context))
-            .setOngoing(true)
-            .build()
-
     fun signal(context: Context, event: SignalEvent) {
-        val title = "${if (event.dir == "BUY") "🟢" else "🔴"} ${event.dir} XAUUSD ${event.str("set")} @ ${fmt(event.num("entry"))}"
-        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • lot ${event.str("lot").ifBlank { "-" }}\n" +
-            "TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP."
+        val star = if (event.json.optBoolean("star", false)) "⭐ " else ""
+        val title = "$star${event.dir} XAU/USD @ ${fmt(event.num("entry"))}"
+        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • ${event.str("lot").ifBlank { "-" }}"
         post(context, event.id.hashCode(), title, text)
     }
 
     fun info(context: Context, event: SignalEvent) {
-        val text = event.str("text")
-        val title = text.lineSequence().firstOrNull() ?: BRAND
-        post(context, (event.id + "info").hashCode(), title, text)
+        val title = event.str("text").lineSequence().firstOrNull() ?: APP_NAME
+        post(context, (event.id + "info").hashCode(), title, "SL posisi sisa → entry (SL+)")
     }
 
     fun close(context: Context, event: SignalEvent) {
-        val r = event.num("r")
-        val title = "🏁 TUTUP ${event.dir} XAUUSD @ ${fmt(event.num("price"))}"
-        val text = "Hasil ${fmt(event.num("points"))} poin (${fmt(r)}R) • ${event.str("reason")}"
-        post(context, event.id.hashCode() + 1, title, text)
+        val r = event.num("r") ?: 0.0
+        val title = "TUTUP ${event.dir} • ${if (r > 0) "MENANG" else "KALAH"} ${signed(r)}R"
+        post(context, event.id.hashCode() + 1, title, "Ditutup @ ${fmt(event.num("price"))}")
     }
 
     private fun post(context: Context, id: Int, title: String, text: String) {
@@ -74,9 +57,9 @@ object Notifications {
             .setSmallIcon(R.drawable.ic_stat)
             .setContentTitle(title)
             .setContentText(text)
-            .setSubText(BRAND)
-            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
+            .setSubText(APP_NAME)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setAutoCancel(true)
             .setContentIntent(openApp(context))
             .build()

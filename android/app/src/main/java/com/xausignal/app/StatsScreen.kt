@@ -58,17 +58,9 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
             )
         }
         if (stats.isEmpty()) {
-            item { NoteBox("Belum ada sinyal TUTUP. Statistik muncul setelah posisi selesai.") }
+            item { AppCard { Text("Belum ada sinyal selesai", color = Muted) } }
         }
         items(stats, key = { it.label }) { PeriodCard(it, money) }
-        item {
-            NoteBox(
-                "Hitungan: hasil R × jarak SL × jumlah posisi × (lot ÷ 0.01). Akun ${money.currency}, " +
-                    "${lotText(money.legLot)} lot/posisi, kurs Rp${fmt(money.idrRate, 0)} per USD. " +
-                    "Ubah di ⚙️ Pengaturan.",
-                Muted
-            )
-        }
         item { Footer() }
     }
 }
@@ -103,7 +95,7 @@ private fun PeriodSelector(selected: Int, onSelect: (Int) -> Unit) {
 private fun TotalCard(s: PeriodStats, money: MoneySettings) {
     val rate = if (s.total > 0) s.wins * 100 / s.total else 0
     AppCard(accent = Gold) {
-        CardTitle("Total semua periode")
+        CardTitle("Total")
         Column {
             Text("Hasil bersih", style = MaterialTheme.typography.labelMedium, color = Muted)
             Text(

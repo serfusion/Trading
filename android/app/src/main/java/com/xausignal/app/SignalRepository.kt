@@ -67,7 +67,7 @@ object SignalRepository {
     private val _heartbeat = MutableStateFlow<SignalEvent?>(null)
     val heartbeat: StateFlow<SignalEvent?> = _heartbeat
 
-    private val _connection = MutableStateFlow("Belum terhubung")
+    private val _connection = MutableStateFlow("Memuat...")
     val connection: StateFlow<String> = _connection
 
     private var prefs: SharedPreferences? = null
@@ -140,15 +140,6 @@ object SignalRepository {
     }
     fun topic(): String = prefs?.getString("topic", "") ?: ""
 
-    /** Alamat cloud (mis. https://superfal-dev.com) + CONTROL_KEY untuk tab Auto. */
-    fun cloudUrl(): String = prefs?.getString("cloud_url", "") ?: ""
-    fun controlKey(): String = prefs?.getString("control_key", "") ?: ""
-
-    fun saveCloud(url: String, key: String) {
-        var u = url.trim().trimEnd('/')
-        if (u.isNotBlank() && !u.startsWith("http")) u = "https://$u"
-        prefs?.edit()?.putString("cloud_url", u)?.putString("control_key", key.trim())?.apply()
-    }
     fun lastMessageId(): String? = prefs?.getString("last_id", null)
 
     @Synchronized
