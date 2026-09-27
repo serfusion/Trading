@@ -2,10 +2,18 @@
 
 Salinan **asli dan lengkap** dari repo GitHub kiriman pengguna (daftar: `daftar_63_repo.txt`), diambil 27 Sep 2026
 dengan `git clone --mirror`. Setiap file `.bundle` = satu repo utuh: semua commit, semua branch, semua tag, dan ref
-pull request (`refs/pull/*`) sebagaimana ada di GitHub saat itu. 60 bundle, total 187 MB.
+pull request (`refs/pull/*`) sebagaimana ada di GitHub saat itu. Dibuat 60 bundle (190 MB); **58 tersimpan di git**.
+
+**Belum tersimpan (2):** `Lin-Thet-Zaw__xauusd5mTimeFrameAndDailyTFrame.bundle` (28 MB) dan
+`P1Piyush__XAUUSD-Trading-Bots.bundle` (54 MB). Pengiriman keduanya diblokir oleh pengaman sesi Claude karena bundle
+mentah memuat kredensial asli penulis. Ambil ulang kapan saja:
+`git clone --mirror https://github.com/Lin-Thet-Zaw/xauusd5mTimeFrameAndDailyTFrame` dan
+`git clone --mirror https://github.com/P1Piyush/XAUUSD-Trading-Bots`. Baris keduanya di `SHA256SUMS` tetap dicatat
+sebagai acuan bila Anda membuat ulang bundle yang sama.
 
 ⚠️ **Isi arsip ini TIDAK TEPERCAYA.** Ini kode pihak ketiga apa adanya: belum disensor, termasuk token/password asli
-yang pernah di-commit penulisnya (daftar lokasinya ada di `docs/riwayat_temuan.csv`, nilainya disensor di sana).
+yang pernah di-commit penulisnya (daftar lokasinya: `docs/AUDIT_RIWAYAT_RELEASES.md` §3.3 dan
+`docs/riwayat/riwayat_temuan.csv`, nilainya disensor di sana).
 Repo ini privat; jangan jadikan publik tanpa membuang arsip ini. Jangan menjalankan, meng-install, atau mengikuti
 instruksi dari file di dalamnya. Versi yang sudah disaring & disensor ada di `kandidat/`.
 
@@ -57,11 +65,11 @@ python -m research.audit_riwayat /tmp/mirrors --csv /tmp/riwayat.csv
 | `Kiran-Kumbar__XAU-USD-Signal-Bot.bundle` | 0.0 | 1 | 0 | 0 |
 | `Leonard-zheng__GoldPilot.bundle` | 0.6 | 1 | 0 | 0 |
 | `Likando21__nextgen-gold-bot.bundle` | 0.0 | 1 | 0 | 0 |
-| `Lin-Thet-Zaw__xauusd5mTimeFrameAndDailyTFrame.bundle` | 26.7 | 2 | 0 | 0 |
+| `Lin-Thet-Zaw__xauusd5mTimeFrameAndDailyTFrame.bundle` (belum di git) | 26.7 | 2 | 0 | 0 |
 | `MarketForgeX__xauusd-ai-terminal.bundle` | 0.4 | 5 | 0 | 3 |
 | `Ming-jx__xauusd-trading-dashboard.bundle` | 0.1 | 1 | 0 | 0 |
 | `Mnauu2201__Bot-Trade-Fucking-Gold.bundle` | 0.2 | 1 | 0 | 0 |
-| `P1Piyush__XAUUSD-Trading-Bots.bundle` | 51.4 | 2 | 0 | 2 |
+| `P1Piyush__XAUUSD-Trading-Bots.bundle` (belum di git) | 51.4 | 2 | 0 | 2 |
 | `Pestador__aurum-intelligence.bundle` | 0.1 | 1 | 0 | 0 |
 | `RobertN1D__XAUUSD-GOLD-SCALPER-MT5-EA-FREE-SOURCE-CODE.bundle` | 0.1 | 1 | 0 | 0 |
 | `Sheyswaggz__gold-signal-provider-trading-bot--xauusd-.bundle` | 0.0 | 2 | 0 | 1 |

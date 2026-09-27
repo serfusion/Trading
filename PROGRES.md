@@ -8,16 +8,16 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 | Tahap | Isi | Status | Hasil |
 |---|---|---|---|
 | Audit awal | Pemindai statis semua file, inventaris 63 repo, 41 kandidat disimpan | ✅ selesai | `docs/AUDIT_63_REPO.md`, `kandidat/` |
-| A | Riwayat git lengkap + GitHub Releases 63 repo; simpan repo mentah (git bundle) | ⏳ berjalan | `arsip_repo/`, `docs/AUDIT_RIWAYAT_RELEASES.md` |
-| C | Inventaris kemampuan SETIAP file (jaringan, file, proses, kode dinamis, kredensial, order) + tinjauan manual | ⏳ belum | `docs/AUDIT_SETIAP_FILE.md` |
-| B | Uji ulang strategi yang belum diuji | ⏳ belum | `research/github_popular3.py`, `docs/AUDIT_63_REPO.md` |
+| A | Riwayat git lengkap + GitHub Releases 63 repo; simpan repo mentah (git bundle) | ✅ selesai (2 bundle belum di git, lihat catatan) | `docs/AUDIT_RIWAYAT_RELEASES.md`, `docs/riwayat/`, `arsip_repo/` |
+| C | Inventaris kemampuan SETIAP file (jaringan, file, proses, kode dinamis, kredensial, order) + tinjauan manual | ⏳ berjalan (alat & data selesai, tinjauan manual sebagian) | `research/inventaris_file.py`, `docs/AUDIT_SETIAP_FILE.md` |
+| B | Uji ulang strategi yang belum diuji | ⏳ berjalan (2/14) | `research/github_popular3.py`, `docs/AUDIT_63_REPO.md` |
 
 ## B — daftar strategi yang belum diuji
 
 | Repo | Strategi | Status |
 |---|---|---|
-| Turnipnator/Oanda_Gold | EMA trend H1 (SL 1,5 ATR, TP 2R, trailing) | ⏳ |
-| Turnipnator/Oanda_Gold | Triple confirmation (EMA20/50 + RSI + engulfing/pin) | ⏳ |
+| Turnipnator/Oanda_Gold | EMA trend H1 (SL 1,5 ATR, TP 2R, trailing) | ✅ BUY saja (asli): WR 30%, −34,3R, 0/4 periode positif; +SELL: −59,3R, 1/4 |
+| Turnipnator/Oanda_Gold | Triple confirmation (EMA20/50 + RSI + engulfing/pin) | ✅ WR 51,3%, −67,8R, 0/4 periode positif |
 | BlamzKunG/XAUUSD-Grid-EA | Advanced Grid EA (lot ×1,20, hedge lock) | ⏳ |
 | shamshyder123-oss/gold-trading-ea | EA RSI/MACD/MA | ⏳ |
 | thanvish21/gold-dominator | Gold Dominator Pro v3 (skor ≥80, tanpa volume) | ⏳ |
@@ -48,3 +48,8 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 ## Catatan kerja
 
 - 2026-09-27: dimulai A (riwayat & Releases).
+- 2026-09-27: A selesai. 8.732 commit / 66.372 versi file dipindai. Temuan baru: perpustakaan EA bajakan (exe/dll) di
+  riwayat EA_SCALPER, EA "fix" bocoran di Lin-Thet-Zaw, kredensial terhapus (OANDA Turnipnator & nathanaela2002, dll.).
+  58 dari 60 bundle ter-push; push Lin-Thet-Zaw & P1Piyush **diblokir pengaman sesi** (bundle mentah berisi kredensial
+  asli penulis) → menunggu keputusan pengguna (lihat arsip_repo/README.md). Jangan mencoba mem-push-nya tanpa izin.
+- 2026-09-27: C dimulai: `research/inventaris_file.py` (4.351 file, AST Python + pola teks). B dimulai: Turnipnator (2 strategi).

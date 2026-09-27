@@ -111,6 +111,75 @@ def first_commits(repo: Path, wanted: set[str]) -> dict[str, tuple[int, str]]:
     return out
 
 
+def _vint(b: bytes, i: int) -> tuple[int, int]:
+    v = shift = 0
+    while i < len(b):
+        x = b[i]
+        i += 1
+        v |= (x & 0x7F) << shift
+        shift += 7
+        if not x & 0x80:
+            break
+    return v, i
+
+
+def archive_names(data: bytes) -> tuple[str, list[str]]:
+    """Daftar nama file di dalam arsip zip/rar TANPA mengekstrak (hanya membaca header).
+    -> (jenis, nama[]); jenis 'rar-terkunci' bila header RAR terenkripsi (nama tidak bisa dibaca)."""
+    import io
+    import struct
+    import zipfile
+    if data[:4] == b"PK\x03\x04":
+        try:
+            return "zip", zipfile.ZipFile(io.BytesIO(data)).namelist()
+        except (zipfile.BadZipFile, ValueError, OSError):
+            return "zip-rusak", []
+    names: list[str] = []
+    if data[:7] == b"Rar!\x1a\x07\x00":                          # RAR 4
+        i = 7
+        while i + 7 <= len(data):
+            _crc, typ, flags, size = struct.unpack_from("<HBHH", data, i)
+            if size < 7:
+                break
+            add = struct.unpack_from("<I", data, i + 7)[0] if flags & 0x8000 else 0
+            if typ == 0x74 and i + 32 <= len(data):
+                nlen = struct.unpack_from("<H", data, i + 26)[0]
+                off = i + 32 + (8 if flags & 0x100 else 0)
+                names.append(data[off:off + nlen].split(b"\x00")[0].decode("utf-8", "replace"))
+            elif typ == 0x73 and flags & 0x80:
+                return "rar-terkunci", names
+            i += size + add
+        return "rar", names
+    if data[:8] == b"Rar!\x1a\x07\x01\x00":                      # RAR 5
+        i = 8
+        while i + 4 < len(data):
+            hsize, j = _vint(data, i + 4)
+            end = j + hsize
+            htype, k = _vint(data, j)
+            hflags, k = _vint(data, k)
+            extra = data_size = 0
+            if hflags & 1:
+                extra, k = _vint(data, k)
+            if hflags & 2:
+                data_size, k = _vint(data, k)
+            if htype == 4:                                         # header arsip terenkripsi
+                return "rar-terkunci", names
+            if htype == 2:
+                fflags, k = _vint(data, k)
+                _, k = _vint(data, k)
+                _, k = _vint(data, k)
+                k += (4 if fflags & 2 else 0) + (4 if fflags & 4 else 0)
+                _, k = _vint(data, k)
+                _, k = _vint(data, k)
+                nlen, k = _vint(data, k)
+                names.append(data[k:k + nlen].decode("utf-8", "replace"))
+            if hsize == 0 or end + data_size <= i:
+                break
+            i = end + data_size
+        return "rar", names
+    return "lain", names
+
+
 def _scan_blob(path: str, data: bytes) -> tuple[str | None, list[Finding]]:
     """-> (level biner atau None, daftar temuan)."""
     ext = ext_of(path, data[:4096])
@@ -207,12 +276,47 @@ def audit_repo(repo: Path) -> dict:
     return info
 
 
+DANGER_INNER = re.compile(r"\.(exe|dll|scr|msi|com|pif|bat|cmd|ps1|vbs|vbe|js|jse|wsf|hta|lnk|jar|cpl|sys|so|dylib|"
+                          r"apk|dmg|pkg|deb|iso|img)$", re.I)
+OPAQUE_INNER = re.compile(r"\.(ex4|ex5|pyc|pyd|zip|rar|7z|gz|tar)$", re.I)
+
+
+def audit_archives(mirrors: Path, biner_csv: Path, out_csv: Path) -> None:
+    """Buka daftar isi setiap arsip .zip/.rar di riwayat (hanya header, tanpa ekstrak)."""
+    rows = list(csv.DictReader(open(biner_csv)))
+    out = []
+    for r in rows:
+        if not re.search(r"\.(zip|rar)$", r["path"], re.I):
+            continue
+        data = subprocess.run(["git", "-C", str(mirrors / (r["repo"] + ".git")), "cat-file", "blob", r["blob"]],
+                              capture_output=True).stdout
+        kind, names = archive_names(data)
+        files = [n for n in names if n and not n.endswith("/")]
+        danger = [n for n in files if DANGER_INNER.search(n)]
+        opaque = [n for n in files if OPAQUE_INNER.search(n)]
+        src = [n for n in files if re.search(r"\.(mq4|mq5|mqh|pine|txt|py|set)$", n, re.I)]
+        out.append({"repo": r["repo"], "path": r["path"], "di_head": r["di_head"], "jenis": kind, "isi": len(files),
+                    "berbahaya": len(danger), "biner_tertutup": len(opaque), "source": len(src),
+                    "contoh_berbahaya": " | ".join(danger[:5]), "contoh_isi": " | ".join(files[:4])[:250]})
+    with open(out_csv, "w", newline="") as fh:
+        w = csv.DictWriter(fh, list(out[0]) if out else ["repo"])
+        w.writeheader()
+        w.writerows(out)
+    kinds = Counter(o["jenis"] for o in out)
+    print(f"{len(out)} arsip: {dict(kinds)}; berisi file berbahaya: {sum(o['berbahaya'] > 0 for o in out)}; "
+          f"berisi .ex4/.ex5/arsip lain: {sum(o['biner_tertutup'] > 0 for o in out)}")
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("mirrors")
     ap.add_argument("--csv", default="")
     ap.add_argument("--only", default="", help="kata kunci nama repo")
+    ap.add_argument("--arsip", default="", help="CSV keluaran: isi arsip zip/rar dari <csv>_biner.csv")
     a = ap.parse_args(argv)
+    if a.arsip:
+        audit_archives(Path(a.mirrors), Path(a.csv).with_name(Path(a.csv).stem + "_biner.csv"), Path(a.arsip))
+        return 0
     repos = sorted(p for p in Path(a.mirrors).iterdir() if p.name.endswith(".git") and a.only in p.name)
     rows, bin_rows, summary = [], [], []
     for repo in repos:

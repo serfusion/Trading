@@ -18,7 +18,11 @@ Yang **tidak** bisa dipastikan: isi EA terkompilasi (.ex5/.ex4 terenkripsi), kod
 yang aturannya privat (EA_SCALPER), bot berbasis LLM (hasilnya berubah-ubah), model AI tanpa dilatih ulang, dan
 kinerja live siapa pun.
 
-Temuan yang baru ketahuan setelah pemeriksaan sampai ke akar:
+Temuan yang baru ketahuan setelah pemeriksaan sampai ke akar (termasuk riwayat git lengkap, `docs/AUDIT_RIWAYAT_RELEASES.md`):
+- **EA_SCALPER**: branch `feature/nova-funcionalidade` & commit lama menyimpan ±420 EA bajakan dari kanal Telegram,
+  termasuk terminal MT4/MT5 hasil modifikasi, `winmm.dll` "account changer", dan decompiler. Salinan di folder ini
+  (versi `main`) bersih dari file tersebut; jangan checkout branch itu.
+- **Turnipnator** & **nathanaela2002**: API key/token akses **OANDA** asli pernah ter-commit lalu dihapus (masih ada di riwayat).
 - **Mnauu2201** (klaim WR 62,3%, R:R 1:2): backtest penulis memakai candle H4/H1/M15/M5 yang **belum tutup**.
   Ditiru persis: WR 57,3% dan +79R (M5, 17 bulan). Setelah diperbaiki dan spread dihitung: WR 27,6%, −4,2R.
 - **codebytemirza** (klaim 65% akurasi di akun real): file kode intinya hanya berisi satu baris, *"Code is removed …
@@ -86,7 +90,7 @@ password: BlamzKunG, phatnomenal, RobertN1D, shamshyder, AnggaKay, Takura-Z, arm
 | 0xagarg/xau-ai-trading-bot, BizShibe/XAUUSD-ai-trading-bot | Salinan identik GifariKemal/xaubot-ai |
 | jlvalaty/gold-quant-trading | Salinan sebagian samw2591 (token Telegram sama) |
 | Minhtan2005/… | 🛑 Kode tersandi PyArmor + DLL, jualan "PRO" — **jangan dijalankan**, tidak ada di `ambil.sh` |
-| Lin-Thet-Zaw/xauusd5mTimeFrameAndDailyTFrame | Hanya 7 EA terkompilasi; bisa diunduh via `ambil.sh`, uji hanya di akun demo |
+| Lin-Thet-Zaw/xauusd5mTimeFrameAndDailyTFrame | Hanya 7 EA terkompilasi. ⚠️ Riwayat git-nya berisi 22 arsip EA komersial bocoran/"fix" (MM FLIP AI, Dominant, Goldex, ORION…) — lihat `docs/AUDIT_RIWAYAT_RELEASES.md` §3.2. Jangan dipakai |
 | codebytemirza/XAUUSD_TRADING_ASISTENT_AI | Kode inti dihapus penulis |
 | iamvishalvasava, kaleemullahkhan786, haseebjaan610, HisyamAlammar, tolgahan38, iiah656 | Tanpa kode: jualan / iklan / referral / rumus saja |
 | kalpeshsinghal0055-ai, t54983200 | Situs pemasaran EA & afiliasi; backend layanan berbayar |
