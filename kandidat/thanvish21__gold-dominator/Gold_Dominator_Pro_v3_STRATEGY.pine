@@ -1,0 +1,204 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0
+// © GoldDominatorPro v3.0 - STRATEGY VERSION (for backtesting)
+
+//@version=5
+strategy("Gold Dominator Pro v3.0 [Strategy]", shorttitle="GDP v3.0 [BT]", overlay=true,
+     initial_capital=10000, default_qty_type=strategy.percent_of_equity,
+     default_qty_value=100, commission_type=strategy.commission.cash_per_order,
+     commission_value=7, slippage=2, pyramiding=0,
+     process_orders_on_close=false, calc_on_every_tick=false,
+     use_bar_magnifier=true)
+
+// ============================================================================
+// INPUTS
+// ============================================================================
+
+grp_trend = "═══ TREND (H4) ═══"
+ema_fast_len = input.int(21, "Fast EMA", group=grp_trend)
+ema_mid_len  = input.int(55, "Medium EMA", group=grp_trend)
+ema_slow_len = input.int(200, "Slow EMA", group=grp_trend)
+htf = input.timeframe("240", "Trend TF", group=grp_trend)
+
+grp_mom = "═══ MOMENTUM ═══"
+rsi_len    = input.int(14, "RSI Period", group=grp_mom)
+rsi_ob     = input.int(72, "RSI OB", group=grp_mom)
+rsi_os     = input.int(28, "RSI OS", group=grp_mom)
+macd_f     = input.int(12, "MACD Fast", group=grp_mom)
+macd_s     = input.int(26, "MACD Slow", group=grp_mom)
+macd_sig   = input.int(9,  "MACD Signal", group=grp_mom)
+stk        = input.int(14, "StochRSI K", group=grp_mom)
+std        = input.int(3,  "StochRSI D", group=grp_mom)
+sts        = input.int(3,  "StochRSI Smooth", group=grp_mom)
+
+grp_vol = "═══ VOLATILITY ═══"
+atr_len       = input.int(14, "ATR Period", group=grp_vol)
+adx_len       = input.int(14, "ADX Period", group=grp_vol)
+adx_thresh    = input.int(20, "ADX Threshold", group=grp_vol)
+vol_sma_len   = input.int(20, "Volume SMA", group=grp_vol)
+vol_mult      = input.float(1.2, "Volume Mult", group=grp_vol)
+
+grp_risk = "═══ RISK ═══"
+sl_mult  = input.float(1.5, "SL ATR Mult", step=0.1, group=grp_risk)
+tp1_mult = input.float(1.2, "TP1 ATR Mult", step=0.1, group=grp_risk)
+tp2_mult = input.float(2.0, "TP2 ATR Mult", step=0.1, group=grp_risk)
+tp3_mult = input.float(3.0, "TP3 ATR Mult", step=0.1, group=grp_risk)
+tp1_pct  = input.float(50, "TP1 Close %", step=5, group=grp_risk)
+tp2_pct  = input.float(30, "TP2 Close %", step=5, group=grp_risk)
+
+grp_sess = "═══ SESSION ═══"
+use_sess = input.bool(true, "Session Filter", group=grp_sess)
+
+grp_eq = "═══ EQUITY FILTER ═══"
+use_eq_filter  = input.bool(true, "Equity Curve Filter", group=grp_eq, tooltip="Only trade when equity is above its own moving average — skips drawdown periods")
+eq_ema_len     = input.int(20, "Equity EMA Length", group=grp_eq, minval=5, maxval=100)
+
+grp_dd = "═══ DRAWDOWN GUARD ═══"
+use_dd_guard   = input.bool(true, "Max Drawdown Guard", group=grp_dd)
+max_dd_pct     = input.float(10.0, "Max Drawdown %", group=grp_dd, step=1.0, minval=1, maxval=50)
+
+// ============================================================================
+// CALCULATIONS
+// ============================================================================
+
+// H4 Trend
+htf_ef = request.security(syminfo.tickerid, htf, ta.ema(close, ema_fast_len))
+htf_em = request.security(syminfo.tickerid, htf, ta.ema(close, ema_mid_len))
+htf_es = request.security(syminfo.tickerid, htf, ta.ema(close, ema_slow_len))
+bull_trend = close > htf_es and htf_ef > htf_em
+bear_trend = close < htf_es and htf_ef < htf_em
+
+// Momentum
+rsi = ta.rsi(close, rsi_len)
+[ml, sl2, hl] = ta.macd(close, macd_f, macd_s, macd_sig)
+rsi_stoch_raw = (ta.rsi(close, stk) - ta.lowest(ta.rsi(close, stk), stk)) / (ta.highest(ta.rsi(close, stk), stk) - ta.lowest(ta.rsi(close, stk), stk)) * 100
+sk = ta.sma(rsi_stoch_raw, sts)
+sd = ta.sma(sk, std)
+stoch_up   = ta.crossover(sk, sd) and sk[1] < 20
+stoch_down = ta.crossunder(sk, sd) and sk[1] > 80
+
+// Volatility
+atr = ta.atr(atr_len)
+[dp, dm, adx] = ta.dmi(adx_len, adx_len)
+vsma = ta.sma(volume, vol_sma_len)
+
+// Session
+hr = hour(time, "UTC")
+in_session = use_sess ? ((hr >= 8 and hr < 11) or (hr >= 13 and hr < 17)) : true
+
+// ============================================================================
+// EQUITY CURVE FILTER
+// ============================================================================
+
+eq = strategy.equity
+var float eq_ema = na
+eq_ema := na(eq_ema) ? eq : eq_ema + (2.0 / (eq_ema_len + 1)) * (eq - eq_ema)
+eq_ok = use_eq_filter ? eq >= eq_ema : true
+
+// ============================================================================
+// DRAWDOWN GUARD
+// ============================================================================
+
+var float peak_eq = na
+peak_eq := na(peak_eq) ? eq : math.max(peak_eq, eq)
+current_dd = (peak_eq - eq) / peak_eq * 100
+dd_ok = use_dd_guard ? current_dd < max_dd_pct : true
+
+// ============================================================================
+// SCORING (10 conditions x 10 points = 100 max)
+// ============================================================================
+
+l_score = (bull_trend ? 10 : 0) + (close > htf_es ? 10 : 0) + (rsi > 45 and rsi < rsi_ob ? 10 : 0) + (hl > 0 ? 10 : 0) + (stoch_up ? 10 : 0) + (adx > adx_thresh ? 10 : 0) + (close > ta.lowest(close, 20) ? 10 : 0) + (volume > vsma * vol_mult ? 10 : 0) + (in_session ? 10 : 0) + (atr > 0 ? 10 : 0)
+s_score = (bear_trend ? 10 : 0) + (close < htf_es ? 10 : 0) + (rsi < 55 and rsi > rsi_os ? 10 : 0) + (hl < 0 ? 10 : 0) + (stoch_down ? 10 : 0) + (adx > adx_thresh ? 10 : 0) + (close < ta.highest(close, 20) ? 10 : 0) + (volume > vsma * vol_mult ? 10 : 0) + (in_session ? 10 : 0) + (atr > 0 ? 10 : 0)
+
+buy  = l_score >= 80 and stoch_up and eq_ok and dd_ok
+sell = s_score >= 80 and stoch_down and eq_ok and dd_ok
+
+// ============================================================================
+// STRATEGY EXECUTION WITH PROPER ENTRY-PRICE-BASED EXITS
+// ============================================================================
+
+var float entry_px = na
+
+if buy and strategy.position_size == 0
+    entry_px := close
+    strategy.entry("Long", strategy.long)
+
+if sell and strategy.position_size == 0
+    entry_px := close
+    strategy.entry("Short", strategy.short)
+
+// Set exits based on stored entry price (avoids recalculating on subsequent bars)
+if strategy.position_size > 0 and not na(entry_px)
+    float sl_l = entry_px - atr[1] * sl_mult
+    float t1_l = entry_px + atr[1] * tp1_mult
+    float t2_l = entry_px + atr[1] * tp2_mult
+    float t3_l = entry_px + atr[1] * tp3_mult
+    strategy.exit("TP1_L", "Long", qty_percent=tp1_pct, limit=t1_l, stop=sl_l)
+    strategy.exit("TP2_L", "Long", qty_percent=tp2_pct, limit=t2_l, stop=sl_l)
+    strategy.exit("TP3_L", "Long", limit=t3_l, stop=sl_l)
+
+if strategy.position_size < 0 and not na(entry_px)
+    float sl_s = entry_px + atr[1] * sl_mult
+    float t1_s = entry_px - atr[1] * tp1_mult
+    float t2_s = entry_px - atr[1] * tp2_mult
+    float t3_s = entry_px - atr[1] * tp3_mult
+    strategy.exit("TP1_S", "Short", qty_percent=tp1_pct, limit=t1_s, stop=sl_s)
+    strategy.exit("TP2_S", "Short", qty_percent=tp2_pct, limit=t2_s, stop=sl_s)
+    strategy.exit("TP3_S", "Short", limit=t3_s, stop=sl_s)
+
+if strategy.position_size == 0
+    entry_px := na
+
+// ============================================================================
+// PERFORMANCE METRICS TABLE
+// ============================================================================
+
+if barstate.islast
+    var table perf = table.new(position.bottom_right, 2, 8, bgcolor=color.new(#1a1a2e, 10), frame_color=color.new(#ffffff, 80), frame_width=1, border_color=color.new(#ffffff, 90), border_width=1)
+
+    net_pnl = strategy.netprofit
+    gross_pnl = strategy.grossprofit + strategy.grossloss
+    win_rate = strategy.wintrades / math.max(strategy.closedtrades, 1) * 100
+    pf = strategy.grossloss != 0 ? math.abs(strategy.grossprofit / strategy.grossloss) : 999
+    avg_win = strategy.wintrades > 0 ? strategy.grossprofit / strategy.wintrades : 0
+    avg_loss = strategy.losstrades > 0 ? math.abs(strategy.grossloss / strategy.losstrades) : 0
+
+    table.cell(perf, 0, 0, "PERFORMANCE", text_color=#ffaa00, text_size=size.normal, bgcolor=color.new(#1a1a2e, 0))
+    table.merge_cells(perf, 0, 0, 1, 0)
+
+    table.cell(perf, 0, 1, "Net Profit", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 1, "$" + str.tostring(net_pnl, "#.##"), text_color=net_pnl >= 0 ? #00ff88 : #ff4444, text_size=size.small)
+
+    table.cell(perf, 0, 2, "Win Rate", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 2, str.tostring(win_rate, "#.#") + "%", text_color=win_rate >= 75 ? #00ff88 : win_rate >= 60 ? #ffaa00 : #ff4444, text_size=size.small)
+
+    table.cell(perf, 0, 3, "Profit Factor", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 3, str.tostring(pf, "#.##"), text_color=pf >= 2 ? #00ff88 : pf >= 1.5 ? #ffaa00 : #ff4444, text_size=size.small)
+
+    table.cell(perf, 0, 4, "Total Trades", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 4, str.tostring(strategy.closedtrades), text_color=color.white, text_size=size.small)
+
+    table.cell(perf, 0, 5, "Avg Win", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 5, "$" + str.tostring(avg_win, "#.##"), text_color=#00ff88, text_size=size.small)
+
+    table.cell(perf, 0, 6, "Avg Loss", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 6, "$" + str.tostring(avg_loss, "#.##"), text_color=#ff4444, text_size=size.small)
+
+    table.cell(perf, 0, 7, "Max DD", text_color=color.white, text_size=size.small)
+    table.cell(perf, 1, 7, str.tostring(current_dd, "#.#") + "%", text_color=current_dd < 5 ? #00ff88 : current_dd < 10 ? #ffaa00 : #ff4444, text_size=size.small)
+
+// ============================================================================
+// VISUALS
+// ============================================================================
+
+plot(ta.ema(close, ema_fast_len), "EMA 21",  color=#00ff88, linewidth=1)
+plot(ta.ema(close, ema_mid_len),  "EMA 55",  color=#ffaa00, linewidth=1)
+plot(ta.ema(close, ema_slow_len), "EMA 200", color=#ff4444, linewidth=2)
+
+bgcolor(bull_trend ? color.new(#00ff88, 93) : bear_trend ? color.new(#ff4444, 93) : na)
+
+plotshape(buy,  "BUY",  shape.labelup,   location.belowbar, #00ff88, text="BUY",  textcolor=color.white)
+plotshape(sell, "SELL", shape.labeldown, location.abovebar, #ff4444, text="SELL", textcolor=color.white)
+
+// Equity curve filter visualization
+plot(use_eq_filter ? eq_ema : na, "Equity EMA", color=color.new(#ffaa00, 50), display=display.status_line)

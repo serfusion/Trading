@@ -1,0 +1,189 @@
+//@version=5
+indicator("XAUUSD Gold Blueprint - Logic Engine", overlay=true, max_labels_count=500, max_lines_count=500)
+
+// ==========================================
+// [ROLE] Lead Algorithmic Architect Inputs
+// ==========================================
+grp_risk = "The Fortress of Capital (Risk Management)"
+accountBalance = input.float(100000, "Current Equity ($)", group=grp_risk)
+riskPercent = input.float(1.0, "Risk Per Trade (%)", group=grp_risk)
+tp1_ratio = 2.0
+tp2_ratio = 3.0
+
+grp_time = "The Gold Clock (Killzones)"
+london_ny_start = input.string("1300", "Start Time (BST/UTC+1)", group=grp_time)
+london_ny_end = input.string("2200", "End Time (BST/UTC+1)", group=grp_time)
+
+grp_news = "News Shield Protocol"
+newsShieldEnabled = input.bool(true, "Enable News Shield", group=grp_news)
+newsBlackoutMinutes = input.int(30, "Blackout Before News (min)", group=grp_news)
+
+grp_idm = "Inducement (IDM) Settings"
+idm_lookback = input.int(5, "IDM Lookback Bars", group=grp_idm, minval=2, maxval=20)
+choch_lookback = input.int(10, "CHOCH Lookback Bars", group=grp_idm, minval=5, maxval=30)
+
+// ==========================================
+// [MACRO BIAS] Daily Structure & 200 EMA
+// ==========================================
+daily_ema200 = request.security(syminfo.tickerid, "D", ta.ema(close, 200))
+daily_high = request.security(syminfo.tickerid, "D", ta.highest(high, 20)[1])
+daily_low = request.security(syminfo.tickerid, "D", ta.lowest(low, 20)[1])
+
+is_bullish_bias = close > daily_ema200 and close > daily_high
+is_bearish_bias = close < daily_ema200 and close < daily_low
+
+// Macro Bias Label (one per day)
+plotshape(ta.change(dayofweek) != 0 and is_bullish_bias ? low * 0.999 : na, title="Daily Bullish Bias", style=shape.diamond, location=location.belowbar, color=color.new(#10b981, 20), size=size.tiny)
+plotshape(ta.change(dayofweek) != 0 and is_bearish_bias ? high * 1.001 : na, title="Daily Bearish Bias", style=shape.diamond, location=location.abovebar, color=color.new(#ef4444, 20), size=size.tiny)
+
+// 200 EMA Plot
+plot(daily_ema200, "Daily 200 EMA", color=color.new(#fbbf24, 60), linewidth=2)
+
+// ==========================================
+// [POI] H1 Unmitigated OB & FVG Detection
+// ==========================================
+h1_close = request.security(syminfo.tickerid, "60", close)
+h1_open = request.security(syminfo.tickerid, "60", open)
+h1_high = request.security(syminfo.tickerid, "60", high)
+h1_low = request.security(syminfo.tickerid, "60", low)
+
+// Bullish FVG: gap between bar[2] high and bar[0] low
+bullish_fvg = request.security(syminfo.tickerid, "60", high[2] < low[0] and close[1] > open[1])
+bearish_fvg = request.security(syminfo.tickerid, "60", low[2] > high[0] and close[1] < open[1])
+
+// Bullish OB: last bearish candle before bullish impulse + FVG
+bullish_ob_price = request.security(syminfo.tickerid, "60", close[1] < open[1] and close > open and bullish_fvg ? low[1] : na)
+bearish_ob_price = request.security(syminfo.tickerid, "60", close[1] > open[1] and close < open and bearish_fvg ? high[1] : na)
+
+// ==========================================
+// [OPERATIONAL CONSTRAINTS] Killzone & News
+// ==========================================
+t = time(timeframe.period, "1300-2200:1234567")
+is_killzone = not na(t)
+
+// London Open Session (07:00-10:00 UTC)
+t_london = time(timeframe.period, "0800-1100:1234567")
+is_london_open = not na(t_london)
+
+// NY Open Session (12:00-15:00 UTC) 
+t_ny = time(timeframe.period, "1300-1600:1234567")
+is_ny_open = not na(t_ny)
+
+// ==========================================
+// [ENTRY TRIGGER] CHOCH & IDM Logic
+// ==========================================
+// IDM: Sweep of latest minor pullback
+minor_high = ta.highest(high, idm_lookback)
+minor_low = ta.lowest(low, idm_lookback)
+
+// Buy-side IDM: price sweeps below minor low then closes back inside
+idm_swept_buy = low < minor_low[1] and close > minor_low[1]
+// Sell-side IDM: price sweeps above minor high then closes back inside
+idm_swept_sell = high > minor_high[1] and close < minor_high[1]
+
+// CHOCH: Change of Character (Internal BOS)
+choch_buy = ta.crossover(close, ta.highest(high, choch_lookback)[1])
+choch_sell = ta.crossunder(close, ta.lowest(low, choch_lookback)[1])
+
+// ==========================================
+// [EXECUTION ENGINE]
+// ==========================================
+long_condition = is_bullish_bias and is_killzone and idm_swept_buy and choch_buy
+short_condition = is_bearish_bias and is_killzone and idm_swept_sell and choch_sell
+
+// Calculate Lot Size
+// Formula: (Balance * RiskPercent) / (SL Pips * Pip Value)
+float stop_distance_pips = 30.0  // Default 30 pip SL for XAUUSD logic
+float risk_amt = accountBalance * (riskPercent / 100)
+float lot_size = risk_amt / (stop_distance_pips * 10)  // Gold Pip Value calculation
+
+// TP Levels
+float tp1_price_long = close + (stop_distance_pips / 10 * tp1_ratio)
+float tp2_price_long = close + (stop_distance_pips / 10 * tp2_ratio)
+float sl_price_long = close - (stop_distance_pips / 10)
+
+float tp1_price_short = close - (stop_distance_pips / 10 * tp1_ratio)
+float tp2_price_short = close - (stop_distance_pips / 10 * tp2_ratio)
+float sl_price_short = close + (stop_distance_pips / 10)
+
+// ==========================================
+// [OUTPUT REQUIREMENTS] Visual Markings
+// ==========================================
+
+// --- LONG SIGNALS ---
+if long_condition
+    label.new(bar_index, low, "GOLD BLUEPRINT: BUY\nIDM Swept ✓\nCHOCH Confirmed ✓\nLot: " + str.tostring(lot_size, "#.##") + "\nEntry: " + str.tostring(close, "#.##") + "\nSL: " + str.tostring(sl_price_long, "#.##") + "\nTP1: " + str.tostring(tp1_price_long, "#.##") + "\nTP2: " + str.tostring(tp2_price_long, "#.##"), color=color.new(#10b981, 0), textcolor=color.white, style=label.style_label_up, size=size.normal)
+    
+    // Entry Line
+    line.new(bar_index, close, bar_index + 15, close, color=color.new(#3b82f6, 0), width=2, style=line.style_solid)
+    // Stop Loss Line
+    line.new(bar_index, sl_price_long, bar_index + 15, sl_price_long, color=color.new(#ef4444, 0), width=2, style=line.style_dashed)
+    // TP1 Line
+    line.new(bar_index, tp1_price_long, bar_index + 15, tp1_price_long, color=color.new(#10b981, 0), width=2, style=line.style_dotted)
+    // TP2 Line
+    line.new(bar_index, tp2_price_long, bar_index + 15, tp2_price_long, color=color.new(#10b981, 40), width=1, style=line.style_dotted)
+
+// --- SHORT SIGNALS ---
+if short_condition
+    label.new(bar_index, high, "GOLD BLUEPRINT: SELL\nIDM Swept ✓\nCHOCH Confirmed ✓\nLot: " + str.tostring(lot_size, "#.##") + "\nEntry: " + str.tostring(close, "#.##") + "\nSL: " + str.tostring(sl_price_short, "#.##") + "\nTP1: " + str.tostring(tp1_price_short, "#.##") + "\nTP2: " + str.tostring(tp2_price_short, "#.##"), color=color.new(#ef4444, 0), textcolor=color.white, style=label.style_label_down, size=size.normal)
+    
+    line.new(bar_index, close, bar_index + 15, close, color=color.new(#3b82f6, 0), width=2, style=line.style_solid)
+    line.new(bar_index, sl_price_short, bar_index + 15, sl_price_short, color=color.new(#ef4444, 0), width=2, style=line.style_dashed)
+    line.new(bar_index, tp1_price_short, bar_index + 15, tp1_price_short, color=color.new(#10b981, 0), width=2, style=line.style_dotted)
+    line.new(bar_index, tp2_price_short, bar_index + 15, tp2_price_short, color=color.new(#10b981, 40), width=1, style=line.style_dotted)
+
+// ==========================================
+// [VISUAL] Background Kilzone Shading
+// ==========================================
+bgcolor(is_london_open ? color.new(#fbbf24, 93) : na, title="London Session")
+bgcolor(is_ny_open ? color.new(#3b82f6, 93) : na, title="NY Session")
+bgcolor(is_killzone and not is_london_open and not is_ny_open ? color.new(#a855f7, 95) : na, title="Overlap Zone")
+
+// ==========================================
+// [VISUAL] IDM & CHOCH Markers
+// ==========================================
+plotshape(idm_swept_buy and is_killzone, title="IDM Sweep (Buy)", style=shape.circle, location=location.belowbar, color=color.new(#fbbf24, 30), size=size.tiny)
+plotshape(idm_swept_sell and is_killzone, title="IDM Sweep (Sell)", style=shape.circle, location=location.abovebar, color=color.new(#f97316, 30), size=size.tiny)
+
+plotshape(choch_buy and is_killzone, title="CHOCH (Buy)", style=shape.triangleup, location=location.belowbar, color=color.new(#6366f1, 30), size=size.tiny)
+plotshape(choch_sell and is_killzone, title="CHOCH (Sell)", style=shape.triangledown, location=location.abovebar, color=color.new(#6366f1, 30), size=size.tiny)
+
+// ==========================================
+// [ALERTS]
+// ==========================================
+alertcondition(long_condition, title="Gold Blueprint BUY Signal", message="🟢 XAUUSD Buy Setup Detected!\n\nChecklist:\n✓ Daily Bullish Bias (> 200 EMA)\n✓ Killzone Active\n✓ IDM Swept\n✓ CHOCH Confirmed\n\nRisk: {{close}} | Lot Size calculated at 1% risk.\n\n⚠️ Check News Shield before executing.")
+
+alertcondition(short_condition, title="Gold Blueprint SELL Signal", message="🔴 XAUUSD Sell Setup Detected!\n\nChecklist:\n✓ Daily Bearish Bias (< 200 EMA)\n✓ Killzone Active\n✓ IDM Swept\n✓ CHOCH Confirmed\n\nRisk: {{close}} | Lot Size calculated at 1% risk.\n\n⚠️ Check News Shield before executing.")
+
+alertcondition(idm_swept_buy and is_killzone, title="IDM Sweep Detected (Buy)", message="⚡ IDM Sweep detected on buy side. Monitor for CHOCH confirmation.")
+alertcondition(idm_swept_sell and is_killzone, title="IDM Sweep Detected (Sell)", message="⚡ IDM Sweep detected on sell side. Monitor for CHOCH confirmation.")
+
+// ==========================================
+// [TABLE] Live Dashboard Overlay
+// ==========================================
+var table dashboard = table.new(position.top_right, 2, 8, bgcolor=color.new(#0a0a0a, 20), border_width=1, border_color=color.new(#ffffff, 90))
+
+if barstate.islast
+    table.cell(dashboard, 0, 0, "GOLD BLUEPRINT", text_color=color.new(#fbbf24, 0), text_size=size.small, text_halign=text.align_left)
+    table.cell(dashboard, 1, 0, "v4.2.0", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 1, "MACRO BIAS", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 1, is_bullish_bias ? "BULLISH ▲" : is_bearish_bias ? "BEARISH ▼" : "NEUTRAL ─", text_color=is_bullish_bias ? color.new(#10b981, 0) : is_bearish_bias ? color.new(#ef4444, 0) : color.new(#ffffff, 40), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 2, "KILLZONE", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 2, is_killzone ? "ACTIVE ●" : "INACTIVE ○", text_color=is_killzone ? color.new(#fbbf24, 0) : color.new(#ef4444, 0), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 3, "200 EMA", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 3, str.tostring(daily_ema200, "#.##"), text_color=color.new(#fbbf24, 0), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 4, "LOT SIZE", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 4, str.tostring(lot_size, "#.##"), text_color=color.new(#3b82f6, 0), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 5, "RISK AMT", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 5, "$" + str.tostring(risk_amt, "#.##"), text_color=color.new(#ef4444, 0), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 6, "SESSION", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 6, is_london_open ? "LONDON" : is_ny_open ? "NEW YORK" : is_killzone ? "OVERLAP" : "OFF-SESSION", text_color=is_london_open ? color.new(#fbbf24, 0) : is_ny_open ? color.new(#3b82f6, 0) : color.new(#ffffff, 40), text_size=size.tiny)
+    
+    table.cell(dashboard, 0, 7, "NEWS SHIELD", text_color=color.new(#ffffff, 60), text_size=size.tiny)
+    table.cell(dashboard, 1, 7, newsShieldEnabled ? "ARMED ▲" : "DISABLED", text_color=newsShieldEnabled ? color.new(#10b981, 0) : color.new(#ef4444, 0), text_size=size.tiny)

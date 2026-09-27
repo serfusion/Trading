@@ -1,0 +1,46 @@
+# Environment variables
+.env
+.env.local
+
+# Local Claude notes (contains VPS credentials, deployment commands)
+CLAUDE.local.md
+
+# Node modules
+node_modules/
+yarn.lock
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Data files
+data/
+*.db
+*.sqlite
+*.json.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+docker-compose.override.yml
+
+# Test files
+test-output/
+coverage/
+
+# Temporary files
+tmp/
+temp/
+*.tmp

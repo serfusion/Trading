@@ -1,0 +1,14 @@
+absl-py==2.1.0
+astunparse==1.6.3
+gym==0.26.2
+gym-notices==0.0.8
+gymnasium==1.0.0
+numpy==1.26.4
+matplotlib==3.8.0
+pandas==2.2.2
+tensorflow==2.15.0
+stable-baselines3==1.8.0
+Farama-Notifications==0.0.4
+opt_einsum==3.4.0
+flatbuffers==24.3.25
+ml-dtypes==0.4.1

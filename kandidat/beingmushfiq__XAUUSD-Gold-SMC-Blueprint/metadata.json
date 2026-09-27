@@ -1,0 +1,7 @@
+{
+  "name": "XAUUSD Gold Blueprint Logic Engine",
+  "description": "Institutional-grade SMC trading engine for Gold (XAUUSD) with top-down analysis, liquidity sweep detection, and risk management.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

@@ -1,0 +1,7 @@
+# unduhan lengkap dari ambil.sh tidak ikut di-commit
+_asli/
+# salinan kandidat harus tersimpan utuh: batalkan pola root (data/, logs/, config.yaml)
+!**/data/
+!**/logs/
+!config.yaml
+!**/config.yaml

@@ -74,7 +74,8 @@ tersamar (PyArmor, exec base64), EA yang mengirim data akun lewat `WebRequest` /
 Telegram orang lain yang tertanam, file model pickle, biner tanpa source, martingale/grid. Hasil audit 63 repo
 XAUUSD dan uji ulang strateginya: [`docs/AUDIT_63_REPO.md`](docs/AUDIT_63_REPO.md) — tidak ada malware aktif,
 1 repo tersandi (jangan dijalankan), 4 repo mengirim saldo Anda ke Telegram penulisnya, dan tidak ada strategi
-yang lebih baik dari resep bot ini.
+yang lebih baik dari resep bot ini. Kode 41 repo kandidat (win-rate tinggi, profit, scalping, fitur) tersimpan di
+[`kandidat/`](kandidat/KATALOG.md) untuk dibandingkan sendiri.
 
 ## Dompet Berbagi, zakat & tabungan emas
 

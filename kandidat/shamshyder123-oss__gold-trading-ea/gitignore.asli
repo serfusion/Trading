@@ -1,0 +1,43 @@
+# Compiled Expert Advisor files
+*.ex5
+*.ex4
+
+# Backtest data
+/backtest_results/
+*.tst
+*.fxt
+
+# Logs
+*.log
+logs/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cache
+__pycache__/
+.cache/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Build artifacts
+build/
+dist/
+*.pyc
+
+# Trade logs (sensitive)
+*.csv
+*.xlsx
+*.dat

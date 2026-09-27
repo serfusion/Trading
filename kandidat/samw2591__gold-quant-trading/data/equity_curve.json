@@ -1,0 +1,166 @@
+[
+  {
+    "date": "2026-03-30",
+    "equity": 2264.66,
+    "total_pnl": 264.66,
+    "daily_pnl": -39.58,
+    "daily_trades": 8,
+    "daily_wins": 4,
+    "daily_losses": 2,
+    "strategies": {
+      "keltner": {
+        "trades": 1,
+        "pnl": -42.04
+      },
+      "m15_rsi": {
+        "trades": 6,
+        "pnl": -42.63
+      },
+      "orb": {
+        "trades": 1,
+        "pnl": 31.19
+      }
+    }
+  },
+  {
+    "date": "2026-03-31",
+    "equity": 2177.03,
+    "total_pnl": 177.03,
+    "daily_pnl": -87.63,
+    "daily_trades": 3,
+    "daily_wins": 1,
+    "daily_losses": 2,
+    "strategies": {
+      "keltner": {
+        "trades": 1,
+        "pnl": -46.33
+      },
+      "m15_rsi": {
+        "trades": 2,
+        "pnl": -41.3
+      }
+    }
+  },
+  {
+    "date": "2026-04-01",
+    "equity": 2562.09,
+    "total_pnl": 562.09,
+    "daily_pnl": 262.28,
+    "daily_trades": 6,
+    "daily_wins": 6,
+    "daily_losses": 0,
+    "strategies": {
+      "m15_rsi": {
+        "trades": 3,
+        "pnl": 262.28
+      },
+      "keltner": {
+        "trades": 3,
+        "pnl": 122.78
+      }
+    }
+  },
+  {
+    "date": "2026-04-02",
+    "equity": 2330.72,
+    "total_pnl": 330.72,
+    "daily_pnl": -143.19,
+    "daily_trades": 5,
+    "daily_wins": 1,
+    "daily_losses": 4,
+    "strategies": {
+      "keltner": {
+        "trades": 3,
+        "pnl": -42.21
+      },
+      "m15_rsi": {
+        "trades": 2,
+        "pnl": -100.98
+      }
+    }
+  },
+  {
+    "date": "2026-04-03",
+    "equity": 2237.83,
+    "total_pnl": 237.83,
+    "daily_pnl": 0.0,
+    "daily_trades": 0,
+    "daily_wins": 0,
+    "daily_losses": 0,
+    "strategies": {}
+  },
+  {
+    "date": "2026-04-04",
+    "equity": 2237.83,
+    "total_pnl": 237.83,
+    "daily_pnl": 0.0,
+    "daily_trades": 0,
+    "daily_wins": 0,
+    "daily_losses": 0,
+    "strategies": {}
+  },
+  {
+    "date": "2026-04-06",
+    "equity": 2191.36,
+    "total_pnl": 191.36,
+    "daily_pnl": -46.47,
+    "daily_trades": 1,
+    "daily_wins": 0,
+    "daily_losses": 1,
+    "strategies": {
+      "keltner": {
+        "trades": 1,
+        "pnl": -46.47
+      }
+    }
+  },
+  {
+    "date": "2026-04-07",
+    "equity": 2144.42,
+    "total_pnl": 144.42,
+    "daily_pnl": -46.94,
+    "daily_trades": 1,
+    "daily_wins": 0,
+    "daily_losses": 1,
+    "strategies": {
+      "keltner": {
+        "trades": 1,
+        "pnl": -46.94
+      }
+    }
+  },
+  {
+    "date": "2026-04-08",
+    "equity": 2073.92,
+    "total_pnl": 73.92,
+    "daily_pnl": -70.5,
+    "daily_trades": 3,
+    "daily_wins": 0,
+    "daily_losses": 3,
+    "strategies": {
+      "keltner": {
+        "trades": 2,
+        "pnl": -65.77
+      },
+      "m15_rsi": {
+        "trades": 1,
+        "pnl": -4.73
+      }
+    }
+  },
+  {
+    "date": "2026-04-09",
+    "equity": 2120.9,
+    "total_pnl": 120.9,
+    "daily_pnl": 46.98,
+    "daily_trades": 1,
+    "daily_wins": 1,
+    "daily_losses": 0,
+    "strategies": {
+      "m15_rsi": {
+        "trades": 1,
+        "pnl": 46.98
+      }
+    }
+  }
+]

@@ -39,6 +39,8 @@ Strategi yang aturannya jelas ditulis ulang di mesin uji bot ini dan diuji di da
   0,25%/set (docs/RISET_GITHUB.md bagian 5). Win-rate tidak bisa dinaikkan tanpa menurunkan profit — terbukti lagi
   di bagian 3.
 
+**Kandidat disimpan:** 41 repo di [`kandidat/`](../kandidat/KATALOG.md) (kredensial penulis disensor, biner & model pickle tidak disalin) untuk dibandingkan sendiri.
+
 **Alat baru:** `python -m xau_bot audit <folder>` — periksa bot/EA apa pun sebelum dijalankan (bagian 5).
 
 ---
@@ -64,10 +66,10 @@ Kolom "Otomatis" = keluaran `python -m xau_bot audit`; "Kesimpulan" = setelah pe
 
 | # | Repo | Isi | Otomatis | Kesimpulan & catatan |
 |---|---|---|---|---|
-| 1 | francomascareloai/EA_SCALPER_XAUUSD | Riset MQL5 (tanpa aturan publik) | 🛑 | ✅ Bukan malware. Skrip infrastruktur VPS mereka memasang Chocolatey (`IEX DownloadString`) & pengecualian Windows Defender untuk folder MT5; jangan jalankan skrip itu di PC pribadi |
+| 1 | francomascareloai/EA_SCALPER_XAUUSD | Riset MQL5 (tanpa aturan publik) | 🛑 | ✅ Bukan malware; API key OpenRouter penulis ikut terunggah di 2 file .bat. Skrip infrastruktur VPS mereka memasang Chocolatey (`IEX DownloadString`) & pengecualian Windows Defender untuk folder MT5; jangan jalankan skrip itu di PC pribadi |
 | 2 | 3aLaee/xauusd-trading-bot | MACD M1 scalper | ✅ | ✅ Diuji sebelumnya: −0,39R/trade (spread 0,25) |
 | 3 | triqbit/mt5-ai-xauusd-trader | ML/DRL "enterprise" | ✅ | ✅ Klaim kinerja berjudul "Target Value" (bukan hasil) |
-| 4 | codebytemirza/XAUUSD_TRADING_ASISTENT_AI | Asisten LLM | ✅ | ✅ Klaim "65% akurasi" tanpa data |
+| 4 | codebytemirza/XAUUSD_TRADING_ASISTENT_AI | Asisten LLM | ✅ | ⚠️ File kode inti hanya berisi "Code is removed … contact after star this repo"; klaim "65% akurasi" tanpa kode |
 | 5 | GifariKemal/xaubot-ai | XGBoost + SMC + HMM | ⚠️ | ✅ .ex5 disertai source .mq5; file .pkl = pickle |
 | 6 | ilahuerta-IA/backtrader-pullback-window-xauusd | Pullback M5 | ✅ | ✅ Diuji sebelumnya: positif hanya di data optimasi penulis |
 | 7 | 0xagarg/xau-ai-trading-bot | — | ⚠️ | ⚠️ Salinan identik #5, deskripsi penuh kata kunci SEO |
@@ -101,7 +103,7 @@ Kolom "Otomatis" = keluaran `python -m xau_bot audit`; "Kesimpulan" = setelah pe
 | 35 | Shivkeerth-Laj/XAUUSD-Backtesting | Notebook "dari Instagram" | ✅ | ✅ Edukasi |
 | 36 | Leonard-zheng/GoldPilot | Alarm harga menit | ✅ | ✅ Bukan sistem trading |
 | 37 | t54983200/algomatic-backend | Backend layanan berbayar "arbitrase" | ✅ | ⚠️ Pembayaran LemonSqueezy & kripto; arbitrase spot–futures "milidetik" tidak realistis untuk ritel |
-| 38 | Mnauu2201/Bot-Trade-Fucking-Gold | LLM (Groq) + TA | ⚠️ | ✅ .zip hanya berisi CSV laporan |
+| 38 | Mnauu2201/Bot-Trade-Fucking-Gold | SMC multi-TF + LLM (Groq) | ⚠️ | ✅ .zip hanya berisi CSV laporan. Klaim WR 62,3% berasal dari look-ahead (bagian 3) |
 | 39 | blackhunter4448-ops/Bot-trading-xau-usd | Pustaka indikator | ✅ | ✅ |
 | 40 | wael-slimi/T-XAU | PPO (RL) | ⚠️ | ⚠️ Model .zip berisi 10 objek pickle |
 | 41 | nathanaela2002/Forex-Gold-Miner | LSTM + berita | ⚠️ | ⚠️ Model .h5; password penulis tertanam; scraping dengan undetected-chromedriver |
@@ -118,7 +120,7 @@ Kolom "Otomatis" = keluaran `python -m xau_bot audit`; "Kesimpulan" = setelah pe
 | 52 | iiah656/okx-xaut-guide | Artikel XAUT | ✅ | ⚠️ Tautan referral OKX |
 | 53 | AnggaKay/XAUUSD-Machine-Learning-EA | XGBoost ganda | ✅ | ✅ Diwakili uji ML |
 | 54 | Likando21/nextgen-gold-bot | Kosong (dihapus) | ✅ | ✅ Riwayat: widget harga emas |
-| 55 | sensesVoid/XAUUSD-AI-Agent | Sinyal RAG, wajib persetujuan manusia | ✅ | ✅ Desain aman: tidak pernah order tanpa persetujuan |
+| 55 | sensesVoid/XAUUSD-AI-Agent | Sinyal RAG, wajib persetujuan manusia | ✅ | ✅ Desain aman: tidak pernah order tanpa persetujuan. `test.py` berisi password MT5 demo penulis |
 | 56 | angelolockdev/trading-signals-generator | Aplikasi sinyal manual | ✅ | ✅ |
 | 57 | yogeshkb-yoyo/PREDICTIVE-AND-PRESCRIPTIVE-ANALYSIS-ON-XAU | Analisis fuzzy/ML | ✅ | ✅ Edukasi |
 | 58 | Srijan69/Gold-Indicator-For-XAUUSD-for-day-trader | Indikator Pine | ✅ | ✅ |
@@ -146,6 +148,7 @@ lebih dulu. Satuan R = kelipatan risiko awal per trade.
 | Sama, jarak diskalakan harga | 24–39% | −548,7R | −365,1R | −132,0R | −113,0R | −1.158,8R | 0/4 |
 | EMA 13/34 + RSI H4 (Aniket) | 25–49% | +11,3R | −2,9R | −14,2R | +3,1R | −2,7R | 2/4 |
 | **Keltner sederhana SL 4,5 / TP 8 ATR (samw2591)** | 29–39% | +20,5R | −20,4R | +13,4R | +19,9R | **+33,4R** | **3/4** |
+| Konfluensi SMC multi-TF, R:R 1:2 (Mnauu2201), M5 17 bln | 28% (penulis: 62%) | – | – | – | −4,2R | −4,2R | 0/1 |
 | *Pembanding: Donchian H1 55/20 (bot ini, 1 set)* | *33–43%* | *+48,8R* | *+30,7R* | *+9,3R* | *+34,9R* | *+123,7R* | *4/4* |
 
 \* % harga per trade tanpa leverage (strategi aslinya memakai 100% modal tanpa stop dekat).
@@ -157,6 +160,19 @@ ML (xaubot-ai & salinannya, triqbit, AnggaKay, Takura-Z, Franklin6840: akurasi a
 Pola yang sama terulang: **makin tinggi win-rate, makin kecil untungnya**. Win-rate tinggi di sini didapat dari
 target kecil dan stop jauh/tanpa stop, dan biaya spread memakan semua tepinya. Klaim samw2591 (Sharpe 0,52 selama 11 tahun sampai 8,4 di varian terbaiknya)
 tidak terulang: konfigurasi live mereka (stop waktu 3 jam + trailing 0,15 ATR) rugi di 3 dari 4 periode.
+
+### 3.1 Mnauu2201: klaim WR 62,3% dengan R:R 1:2 (`python -m research.mnauu_confluence`)
+
+Backtest penulis mengambil candle H4/H1/M15/M5 dengan `time <= waktu_sekarang`; karena `time` adalah jam BUKA,
+candle yang masih berjalan ikut terbaca dengan harga penutupan finalnya (mengintip hingga 4 jam ke depan). Sinyal
+yang tidak kena SL/TP dalam 800 menit (±33%) juga tidak dihitung, dan spread tidak dimasukkan.
+
+| Versi | Data | Sinyal | Win rate (cara penulis) | Hasil |
+|---|---|---|---|---|
+| Seperti backtest penulis | M5 Apr 2025 – Sep 2026 (trigger M1 → M5) | 122 | 57,3% | +79,2R |
+| Diperbaiki + spread 0,25 | sama | 42 | 27,6% | −4,2R |
+| Seperti backtest penulis | M1 Feb – Mei 2026 (aturan persis) | 35 | 48,0% | +12,3R |
+| Diperbaiki | sama | 12 | 0 menang / 6 kalah / 6 timeout | −6,9R |
 
 ## 4. Gabungan (`python -m research.combine2`)
 

@@ -1,0 +1,319 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0
+// © GoldDominatorPro v3.0
+
+//@version=5
+indicator("Gold Dominator Pro v3.0", shorttitle="GDP v3.0", overlay=true, max_lines_count=500, max_labels_count=500)
+
+// ============================================================================
+// INPUT PARAMETERS
+// ============================================================================
+
+// --- Trend EMAs (H4 confirmation) ---
+grp_trend = "═══ TREND SETTINGS (H4) ═══"
+ema_fast_len    = input.int(21,  "Fast EMA",     minval=5,  maxval=50,  group=grp_trend)
+ema_mid_len     = input.int(55,  "Medium EMA",   minval=20, maxval=100, group=grp_trend)
+ema_slow_len    = input.int(200, "Slow EMA",     minval=100,maxval=300, group=grp_trend)
+htf_trend       = input.timeframe("240", "Trend Timeframe", group=grp_trend)
+
+// --- Momentum (H1) ---
+grp_mom = "═══ MOMENTUM SETTINGS ═══"
+rsi_len         = input.int(14,  "RSI Period",        minval=5,  maxval=30,  group=grp_mom)
+rsi_ob          = input.int(72,  "RSI Overbought",    minval=65, maxval=85,  group=grp_mom)
+rsi_os          = input.int(28,  "RSI Oversold",      minval=15, maxval=35,  group=grp_mom)
+macd_fast       = input.int(12,  "MACD Fast",         minval=5,  maxval=20,  group=grp_mom)
+macd_slow       = input.int(26,  "MACD Slow",         minval=15, maxval=40,  group=grp_mom)
+macd_signal     = input.int(9,   "MACD Signal",       minval=3,  maxval=15,  group=grp_mom)
+stoch_k         = input.int(14,  "StochRSI K",        minval=5,  maxval=21,  group=grp_mom)
+stoch_d         = input.int(3,   "StochRSI D",        minval=2,  maxval=7,   group=grp_mom)
+stoch_smooth    = input.int(3,   "StochRSI Smooth",   minval=1,  maxval=5,   group=grp_mom)
+stoch_ob        = input.int(80,  "StochRSI OB",       minval=70, maxval=95,  group=grp_mom)
+stoch_os        = input.int(20,  "StochRSI OS",       minval=5,  maxval=30,  group=grp_mom)
+
+// --- Volatility ---
+grp_vol = "═══ VOLATILITY SETTINGS ═══"
+atr_len         = input.int(14,  "ATR Period",        minval=5,  maxval=30,  group=grp_vol)
+bb_len          = input.int(20,  "BB Period",         minval=10, maxval=30,  group=grp_vol)
+bb_mult         = input.float(2.0, "BB StdDev",       minval=1.0,maxval=3.0, step=0.1, group=grp_vol)
+adx_len         = input.int(14,  "ADX Period",        minval=7,  maxval=21,  group=grp_vol)
+adx_threshold   = input.int(20,  "ADX Threshold",     minval=15, maxval=30,  group=grp_vol)
+
+// --- Volume ---
+grp_volm = "═══ VOLUME SETTINGS ═══"
+vol_sma_len     = input.int(20,  "Volume SMA",        minval=10, maxval=50,  group=grp_volm)
+vol_mult        = input.float(1.2,"Volume Multiplier", minval=0.8,maxval=2.0, step=0.1, group=grp_volm)
+
+// --- Risk Management ---
+grp_risk = "═══ RISK MANAGEMENT ═══"
+sl_atr_mult     = input.float(1.5, "SL ATR Multiplier",  minval=0.5, maxval=3.0, step=0.1, group=grp_risk)
+tp1_atr_mult    = input.float(1.2, "TP1 ATR Multiplier", minval=0.5, maxval=3.0, step=0.1, group=grp_risk)
+tp2_atr_mult    = input.float(2.0, "TP2 ATR Multiplier", minval=1.0, maxval=4.0, step=0.1, group=grp_risk)
+tp3_atr_mult    = input.float(3.0, "TP3 ATR Multiplier", minval=1.5, maxval=5.0, step=0.1, group=grp_risk)
+
+// --- Session Filter ---
+grp_sess = "═══ SESSION FILTER ═══"
+use_session     = input.bool(true, "Enable Session Filter", group=grp_sess)
+london_start    = input.int(8,  "London Start (UTC)",  minval=0, maxval=23, group=grp_sess)
+london_end      = input.int(11, "London End (UTC)",    minval=0, maxval=23, group=grp_sess)
+ny_start        = input.int(13, "NY Start (UTC)",      minval=0, maxval=23, group=grp_sess)
+ny_end          = input.int(17, "NY End (UTC)",        minval=0, maxval=23, group=grp_sess)
+
+// --- Display ---
+grp_disp = "═══ DISPLAY SETTINGS ═══"
+show_emas       = input.bool(true,  "Show EMAs",          group=grp_disp)
+show_bb         = input.bool(true,  "Show Bollinger Bands",group=grp_disp)
+show_signals    = input.bool(true,  "Show Buy/Sell Signals",group=grp_disp)
+show_sl_tp      = input.bool(true,  "Show SL/TP Levels",  group=grp_disp)
+show_dashboard  = input.bool(true,  "Show Dashboard",      group=grp_disp)
+show_bg         = input.bool(true,  "Show Trend Background",group=grp_disp)
+
+// ============================================================================
+// CALCULATIONS
+// ============================================================================
+
+// --- Higher Timeframe Trend (H4) ---
+htf_ema_fast = request.security(syminfo.tickerid, htf_trend, ta.ema(close, ema_fast_len))
+htf_ema_mid  = request.security(syminfo.tickerid, htf_trend, ta.ema(close, ema_mid_len))
+htf_ema_slow = request.security(syminfo.tickerid, htf_trend, ta.ema(close, ema_slow_len))
+
+htf_bullish = close > htf_ema_slow and htf_ema_fast > htf_ema_mid
+htf_bearish = close < htf_ema_slow and htf_ema_fast < htf_ema_mid
+
+// --- Current TF EMAs ---
+ema_f = ta.ema(close, ema_fast_len)
+ema_m = ta.ema(close, ema_mid_len)
+ema_s = ta.ema(close, ema_slow_len)
+
+// --- RSI ---
+rsi_val = ta.rsi(close, rsi_len)
+rsi_long_ok  = rsi_val > 45 and rsi_val < rsi_ob
+rsi_short_ok = rsi_val < 55 and rsi_val > rsi_os
+
+// --- MACD ---
+[macd_line, signal_line, hist_line] = ta.macd(close, macd_fast, macd_slow, macd_signal)
+macd_bull = hist_line > 0
+macd_bear = hist_line < 0
+
+// --- Stochastic RSI ---
+rsi_for_stoch = ta.rsi(close, stoch_k)
+stoch_rsi_k_raw = (rsi_for_stoch - ta.lowest(rsi_for_stoch, stoch_k)) / (ta.highest(rsi_for_stoch, stoch_k) - ta.lowest(rsi_for_stoch, stoch_k)) * 100
+stoch_rsi_k = ta.sma(stoch_rsi_k_raw, stoch_smooth)
+stoch_rsi_d = ta.sma(stoch_rsi_k, stoch_d)
+stoch_cross_up   = ta.crossover(stoch_rsi_k, stoch_rsi_d) and stoch_rsi_k[1] < stoch_os
+stoch_cross_down = ta.crossunder(stoch_rsi_k, stoch_rsi_d) and stoch_rsi_k[1] > stoch_ob
+
+// --- ATR ---
+atr_val = ta.atr(atr_len)
+
+// --- Bollinger Bands ---
+[bb_mid, bb_upper, bb_lower] = ta.bb(close, bb_len, bb_mult)
+bb_width = bb_upper - bb_lower
+bb_squeeze = bb_width < 15
+
+// --- ADX ---
+[diplus, diminus, adx_val] = ta.dmi(adx_len, adx_len)
+adx_ok = adx_val > adx_threshold
+
+// --- Volume Filter ---
+vol_sma = ta.sma(volume, vol_sma_len)
+vol_ok = volume > vol_sma * vol_mult
+
+// --- Session Filter ---
+current_hour = hour(time, "UTC")
+in_london  = current_hour >= london_start and current_hour < london_end
+in_ny      = current_hour >= ny_start and current_hour < ny_end
+in_overlap = current_hour >= 13 and current_hour < 16
+session_ok = use_session ? (in_london or in_ny) : true
+
+// ============================================================================
+// SIGNAL SCORING SYSTEM (Each condition = 10 points, need >= 80)
+// ============================================================================
+
+// --- Long Score ---
+long_score = 0
+long_score := long_score + (htf_bullish ? 10 : 0)
+long_score := long_score + (close > htf_ema_slow ? 10 : 0)
+long_score := long_score + (rsi_long_ok ? 10 : 0)
+long_score := long_score + (macd_bull ? 10 : 0)
+long_score := long_score + (stoch_cross_up ? 10 : 0)
+long_score := long_score + (adx_ok ? 10 : 0)
+long_score := long_score + (close > bb_lower ? 10 : 0)
+long_score := long_score + (vol_ok ? 10 : 0)
+long_score := long_score + (session_ok ? 10 : 0)
+long_score := long_score + (not bb_squeeze ? 10 : 0)
+
+// --- Short Score ---
+short_score = 0
+short_score := short_score + (htf_bearish ? 10 : 0)
+short_score := short_score + (close < htf_ema_slow ? 10 : 0)
+short_score := short_score + (rsi_short_ok ? 10 : 0)
+short_score := short_score + (macd_bear ? 10 : 0)
+short_score := short_score + (stoch_cross_down ? 10 : 0)
+short_score := short_score + (adx_ok ? 10 : 0)
+short_score := short_score + (close < bb_upper ? 10 : 0)
+short_score := short_score + (vol_ok ? 10 : 0)
+short_score := short_score + (session_ok ? 10 : 0)
+short_score := short_score + (not bb_squeeze ? 10 : 0)
+
+// ============================================================================
+// SIGNAL GENERATION
+// ============================================================================
+
+long_signal  = long_score >= 80 and stoch_cross_up
+short_signal = short_score >= 80 and stoch_cross_down
+
+// Prevent duplicate signals
+var bool in_long  = false
+var bool in_short = false
+
+buy_signal  = long_signal and not in_long
+sell_signal = short_signal and not in_short
+
+if buy_signal
+    in_long  := true
+    in_short := false
+if sell_signal
+    in_short := true
+    in_long  := false
+
+// ============================================================================
+// SL/TP CALCULATIONS
+// ============================================================================
+
+var float entry_price = na
+var float sl_price    = na
+var float tp1_price   = na
+var float tp2_price   = na
+var float tp3_price   = na
+
+if buy_signal
+    entry_price := close
+    sl_price    := close - atr_val * sl_atr_mult
+    tp1_price   := close + atr_val * tp1_atr_mult
+    tp2_price   := close + atr_val * tp2_atr_mult
+    tp3_price   := close + atr_val * tp3_atr_mult
+
+if sell_signal
+    entry_price := close
+    sl_price    := close + atr_val * sl_atr_mult
+    tp1_price   := close - atr_val * tp1_atr_mult
+    tp2_price   := close - atr_val * tp2_atr_mult
+    tp3_price   := close - atr_val * tp3_atr_mult
+
+// ============================================================================
+// PLOTTING
+// ============================================================================
+
+// --- EMAs ---
+plot(show_emas ? ema_f : na, "EMA Fast",   color=color.new(#00ff88, 0), linewidth=1)
+plot(show_emas ? ema_m : na, "EMA Medium", color=color.new(#ffaa00, 0), linewidth=1)
+plot(show_emas ? ema_s : na, "EMA Slow",   color=color.new(#ff4444, 0), linewidth=2)
+
+// --- Bollinger Bands ---
+p_bb_upper = plot(show_bb ? bb_upper : na, "BB Upper", color=color.new(#2196F3, 60))
+p_bb_lower = plot(show_bb ? bb_lower : na, "BB Lower", color=color.new(#2196F3, 60))
+fill(p_bb_upper, p_bb_lower, color=color.new(#2196F3, 92))
+
+// --- Trend Background ---
+bg_col = htf_bullish ? color.new(#00ff88, 92) : htf_bearish ? color.new(#ff4444, 92) : color.new(#888888, 95)
+bgcolor(show_bg ? bg_col : na)
+
+// --- Buy/Sell Signals ---
+plotshape(show_signals and buy_signal  ? low  : na, "BUY",  style=shape.labelup,   location=location.belowbar, color=#00ff88, textcolor=color.white, text="BUY",  size=size.normal)
+plotshape(show_signals and sell_signal ? high : na, "SELL", style=shape.labeldown, location=location.abovebar, color=#ff4444, textcolor=color.white, text="SELL", size=size.normal)
+
+// --- SL/TP Lines ---
+plot(show_sl_tp and (in_long or in_short) ? sl_price  : na, "Stop Loss", color=color.red,    style=plot.style_linebr, linewidth=2)
+plot(show_sl_tp and (in_long or in_short) ? tp1_price : na, "TP1",       color=#00ff88,       style=plot.style_linebr, linewidth=1)
+plot(show_sl_tp and (in_long or in_short) ? tp2_price : na, "TP2",       color=#00ccff,       style=plot.style_linebr, linewidth=1)
+plot(show_sl_tp and (in_long or in_short) ? tp3_price : na, "TP3",       color=#ffaa00,       style=plot.style_linebr, linewidth=1)
+
+// ============================================================================
+// ALERT CONDITIONS
+// ============================================================================
+
+alertcondition(buy_signal,  "Gold Dominator BUY",  "GDP v3.0: BUY SIGNAL on {{ticker}} @ {{close}}")
+alertcondition(sell_signal, "Gold Dominator SELL", "GDP v3.0: SELL SIGNAL on {{ticker}} @ {{close}}")
+alertcondition(long_score >= 70 and long_score < 80, "Near BUY Setup", "GDP v3.0: Near BUY setup on {{ticker}} @ {{close}}")
+alertcondition(short_score >= 70 and short_score < 80, "Near SELL Setup", "GDP v3.0: Near SELL setup on {{ticker}}")
+
+// ============================================================================
+// DASHBOARD TABLE
+// ============================================================================
+
+if show_dashboard and barstate.islast
+    var table dash = table.new(position.top_right, 2, 14, bgcolor=color.new(#1a1a2e, 10), frame_color=color.new(#ffffff, 80), frame_width=1, border_color=color.new(#ffffff, 90), border_width=1)
+
+    // Header
+    table.cell(dash, 0, 0, "GOLD DOMINATOR PRO", text_color=#ffaa00, text_size=size.normal, bgcolor=color.new(#1a1a2e, 0), text_halign=text.align_center)
+    table.merge_cells(dash, 0, 0, 1, 0)
+
+    // Trend
+    trend_txt = htf_bullish ? "BULLISH" : htf_bearish ? "BEARISH" : "NEUTRAL"
+    trend_col = htf_bullish ? #00ff88 : htf_bearish ? #ff4444 : #888888
+    table.cell(dash, 0, 1, "H4 Trend",  text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 1, trend_txt,    text_color=trend_col,   text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // RSI
+    rsi_col = rsi_val > rsi_ob ? #ff4444 : rsi_val < rsi_os ? #00ff88 : #ffffff
+    table.cell(dash, 0, 2, "RSI",        text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 2, str.tostring(rsi_val, "#.#"), text_color=rsi_col, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // MACD
+    macd_txt = macd_bull ? "BULLISH" : "BEARISH"
+    macd_col = macd_bull ? #00ff88 : #ff4444
+    table.cell(dash, 0, 3, "MACD",       text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 3, macd_txt,     text_color=macd_col,    text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // ADX
+    adx_txt = adx_ok ? "TRENDING (" + str.tostring(adx_val, "#.#") + ")" : "CHOPPY (" + str.tostring(adx_val, "#.#") + ")"
+    adx_col = adx_ok ? #00ff88 : #ff4444
+    table.cell(dash, 0, 4, "ADX",        text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 4, adx_txt,      text_color=adx_col,     text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // StochRSI
+    stoch_txt = stoch_rsi_k > stoch_ob ? "OVERBOUGHT" : stoch_rsi_k < stoch_os ? "OVERSOLD" : "NEUTRAL"
+    stoch_col = stoch_rsi_k > stoch_ob ? #ff4444 : stoch_rsi_k < stoch_os ? #00ff88 : #ffffff
+    table.cell(dash, 0, 5, "StochRSI",   text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 5, stoch_txt,    text_color=stoch_col,   text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // ATR
+    table.cell(dash, 0, 6, "ATR(14)",    text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 6, str.tostring(atr_val, "#.##"), text_color=#ffffff, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // Volume
+    vol_txt = vol_ok ? "ABOVE AVG" : "BELOW AVG"
+    vol_col = vol_ok ? #00ff88 : #ff4444
+    table.cell(dash, 0, 7, "Volume",     text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 7, vol_txt,      text_color=vol_col,     text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // Session
+    sess_txt = in_overlap ? "OVERLAP (BEST)" : in_london ? "LONDON" : in_ny ? "NEW YORK" : "OFF HOURS"
+    sess_col = in_overlap ? #ffaa00 : (in_london or in_ny) ? #00ff88 : #ff4444
+    table.cell(dash, 0, 8, "Session",    text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 8, sess_txt,     text_color=sess_col,    text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // Signal Scores
+    table.cell(dash, 0, 9, "LONG Score",  text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 9, str.tostring(long_score) + "/100", text_color=long_score >= 80 ? #00ff88 : long_score >= 60 ? #ffaa00 : #ff4444, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    table.cell(dash, 0, 10, "SHORT Score", text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+    table.cell(dash, 1, 10, str.tostring(short_score) + "/100", text_color=short_score >= 80 ? #ff4444 : short_score >= 60 ? #ffaa00 : #00ff88, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // SL/TP Levels
+    if not na(sl_price)
+        table.cell(dash, 0, 11, "Stop Loss", text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+        table.cell(dash, 1, 11, str.tostring(sl_price, "#.##"), text_color=#ff4444, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+        table.cell(dash, 0, 12, "TP1 / TP2 / TP3", text_color=color.white, text_size=size.small, bgcolor=color.new(#16213e, 0))
+        table.cell(dash, 1, 12, str.tostring(tp1_price, "#.#") + " / " + str.tostring(tp2_price, "#.#") + " / " + str.tostring(tp3_price, "#.#"), text_color=#00ff88, text_size=size.small, bgcolor=color.new(#16213e, 0))
+
+    // Signal Status
+    signal_txt = buy_signal ? ">>> BUY NOW <<<" : sell_signal ? ">>> SELL NOW <<<" : long_score >= 70 ? "NEAR BUY SETUP" : short_score >= 70 ? "NEAR SELL SETUP" : "WAITING..."
+    signal_col = buy_signal ? #00ff88 : sell_signal ? #ff4444 : long_score >= 70 ? #ffaa00 : short_score >= 70 ? #ffaa00 : #888888
+    signal_bg  = buy_signal ? color.new(#00ff88, 80) : sell_signal ? color.new(#ff4444, 80) : color.new(#16213e, 0)
+    table.cell(dash, 0, 13, "SIGNAL",    text_color=#ffaa00,     text_size=size.normal, bgcolor=signal_bg)
+    table.cell(dash, 1, 13, signal_txt,  text_color=signal_col,  text_size=size.normal, bgcolor=signal_bg)
+
+// ============================================================================
+// END
+// ============================================================================

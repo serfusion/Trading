@@ -126,13 +126,15 @@ RULES = [
     R("INFO", "grid", "Grid / averaging (tambah posisi melawan harga)",
       r"\bgrid[_ ]?(trading|level|step|order|ea)|averaging|GridStep|grid_?step|recovery zone", TRADE_CODE),
     R("INFO", "hardcoded_secret", "Kredensial/token tertulis langsung di kode (bocor bila repo publik)",
-      r"(password|passwd|api_?key|secret|token)\s*[:=]\s*['\"][^'\"\s{}$<>]{6,}['\"]|"
-      r"\b\d{8,10}:AA[0-9A-Za-z_-]{30,}\b|sk-[A-Za-z0-9]{20,}", ANYCODE),
+      r"(password|passwd|api_?key|secret|token)\s*[:=]\s*['\"](?!\$\{)[^'\"\s{}<>]{6,}['\"]|"
+      r"\b\d{8,10}:AA[0-9A-Za-z_-]{30,}\b|\bsk-(?:or-v1-|proj-|ant-)?[A-Za-z0-9_-]{20,}|\bgh[pousr]_[A-Za-z0-9]{36,}|"
+      r"\bAIza[0-9A-Za-z_-]{35}\b|\bAKIA[0-9A-Z]{16}\b|-----BEGIN [A-Z ]*PRIVATE KEY-----", ANYCODE | {".bat", ".ps1"}),
 ]
 
 MQL_NET = re.compile(r"\bWebRequest\s*\(|SocketCreate|InternetOpen|SendFTP|SendMail")
 VENDOR_MQL = re.compile(r"Copyright\s+2000-20\d\d,\s*MetaQuotes", re.I)
-FALSE_POSITIVE_HINTS = re.compile(r"your[_-]?(password|api|token|key)|xxx|\*\*\*|<.*>|example|placeholder|"
+FALSE_POSITIVE_HINTS = re.compile(r"your[_-]?(password|api|token|key)|your_actual|xxx|\*\*\*|<.*>|example|placeholder|"
+                                  r"ISI_[A-Z_]+|GANTI_[A-Z_]+|REPLACE_ME|REPLACE_WITH|"
                                   r"changeme|os\.getenv|os\.environ|getenv|process\.env", re.I)
 
 

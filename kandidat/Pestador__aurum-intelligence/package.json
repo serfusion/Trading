@@ -1,0 +1,20 @@
+{
+  "name": "aurum-intelligence",
+  "version": "0.1.0",
+  "description": "A dependency-light multi-agent gold trading intelligence platform focused on XAU/USD.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/cli.js",
+    "server": "node src/server.js",
+    "vision:capture": "node src/vision/tradingview.js --symbol=XAUUSD",
+    "vision:monitor": "node src/vision/tradingview.js --multi=true --symbol=XAUUSD --timeframes=1,5,15,60,240",
+    "test": "node --test --test-isolation=none --test-concurrency=1"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "playwright": "^1.41.2"
+  }
+}

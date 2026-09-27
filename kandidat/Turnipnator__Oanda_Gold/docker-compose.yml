@@ -1,0 +1,169 @@
+version: '3.8'
+
+services:
+  gold-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gold-trading-bot
+    restart: unless-stopped
+
+    # TTY mode forces line buffering for stdout (prevents log loss after extended runtime)
+    tty: true
+    stdin_open: true
+
+    environment:
+      # Oanda API Configuration
+      - OANDA_API_KEY=${OANDA_API_KEY}
+      - OANDA_ACCOUNT_ID=${OANDA_ACCOUNT_ID}
+      - TRADING_MODE=${TRADING_MODE:-practice}
+
+      # Risk Management
+      - MAX_RISK_PER_TRADE=${MAX_RISK_PER_TRADE:-0.015}
+      - MAX_PORTFOLIO_RISK=${MAX_PORTFOLIO_RISK:-0.05}
+      - INITIAL_BALANCE=${INITIAL_BALANCE:-10000}
+
+      # Daily Targets
+      - TARGET_DAILY_PROFIT=${TARGET_DAILY_PROFIT:-100}
+      - MAX_DAILY_LOSS=${MAX_DAILY_LOSS:-150}
+
+      # Strategy Parameters
+      - STRATEGY_TYPE=${STRATEGY_TYPE:-breakout_adx}
+      - ALLOW_SHORT=${ALLOW_SHORT:-true}
+      - EMA_FAST=${EMA_FAST:-20}
+      - EMA_SLOW=${EMA_SLOW:-50}
+      - RSI_PERIOD=${RSI_PERIOD:-14}
+      - RSI_BULLISH_MIN=${RSI_BULLISH_MIN:-40}
+      - RSI_BULLISH_MAX=${RSI_BULLISH_MAX:-70}
+      - RSI_BEARISH_MIN=${RSI_BEARISH_MIN:-30}
+      - RSI_BEARISH_MAX=${RSI_BEARISH_MAX:-60}
+
+      # Entry/Exit Rules
+      - STOP_LOSS_PIPS=${STOP_LOSS_PIPS:-350}
+      - TRAILING_ONLY=${TRAILING_ONLY:-false}
+      - TRAILING_STOP_DISTANCE_PIPS=${TRAILING_STOP_DISTANCE_PIPS:-150}
+      - TRAILING_ACTIVATION_PIPS=${TRAILING_ACTIVATION_PIPS:-200}
+      - TAKE_PROFIT_RR=${TAKE_PROFIT_RR:-1.0}
+      - ENABLE_STAGED_TP=${ENABLE_STAGED_TP:-false}
+      - TAKE_PROFIT_1_RR=${TAKE_PROFIT_1_RR:-1.5}
+      - TAKE_PROFIT_2_RR=${TAKE_PROFIT_2_RR:-2.5}
+      - MOVE_STOP_TO_BE=${MOVE_STOP_TO_BE:-true}
+      - ENABLE_TRAILING_STOP=${ENABLE_TRAILING_STOP:-true}
+
+      # Breakout-specific settings (wider to survive post-breakout volatility)
+      - BREAKOUT_STOP_LOSS_PIPS=${BREAKOUT_STOP_LOSS_PIPS:-300}
+      - BREAKOUT_TRAILING_ACTIVATION_PIPS=${BREAKOUT_TRAILING_ACTIVATION_PIPS:-350}
+      - BREAKOUT_LOOKBACK=${BREAKOUT_LOOKBACK:-10}
+
+      # EMA Trend Strategy (from IG Gold backtest: PF=1.73, 47% WR)
+      - EMA_TREND_FAST=${EMA_TREND_FAST:-3}
+      - EMA_TREND_MEDIUM=${EMA_TREND_MEDIUM:-8}
+      - EMA_TREND_SLOW=${EMA_TREND_SLOW:-21}
+      - EMA_TREND_ATR_SL_MULT=${EMA_TREND_ATR_SL_MULT:-1.5}
+      - EMA_TREND_MIN_SL=${EMA_TREND_MIN_SL:-200}
+      - EMA_TREND_MAX_SL=${EMA_TREND_MAX_SL:-4000}  # $40 cap. Raised 800→4000 Jun 25 2026 ("C" variant): $8 cap whipsawed correct trades at ATR ~$25. Tune via .env EMA_TREND_MAX_SL. Rollback: 800.
+      - EMA_TREND_TP_RR=${EMA_TREND_TP_RR:-2.0}
+      - EMA_TREND_ADX_MIN=${EMA_TREND_ADX_MIN:-25}
+      - EMA_TREND_PULLBACK_PCT=${EMA_TREND_PULLBACK_PCT:-0.3}
+      - EMA_TREND_BE_TRIGGER_PCT=${EMA_TREND_BE_TRIGGER_PCT:-0.3}
+      - EMA_TREND_HTF=${EMA_TREND_HTF:-H4}
+      - EMA_TREND_LEG_FILTER_THRESHOLD=${EMA_TREND_LEG_FILTER_THRESHOLD:-2.0}
+      - EMA_TREND_LEG_FILTER_ENFORCE=${EMA_TREND_LEG_FILTER_ENFORCE:-true}
+      - EMA_TREND_RSI_SELL_MIN=${EMA_TREND_RSI_SELL_MIN:-35}  # Lowered 40→35 Jun 8 2026 (widen short RSI band — see backtest_rsi_band.js). Rollback: set to 40.
+
+      # Primary Timeframe (H1 = 24 signals/day vs H4 = 6)
+      - TIMEFRAME=${TIMEFRAME:-H1}
+
+      # Multi-Timeframe (MTF) Settings - M15 for entry timing with H1 primary
+      - ENABLE_MTF=${ENABLE_MTF:-true}
+      - MTF_ENTRY_TIMEFRAME=${MTF_ENTRY_TIMEFRAME:-M15}
+      - MTF_PULLBACK_PIPS=${MTF_PULLBACK_PIPS:-50}
+      - MTF_MAX_WAIT_CANDLES=${MTF_MAX_WAIT_CANDLES:-8}
+      - MTF_EMA_PERIOD=${MTF_EMA_PERIOD:-20}
+
+      # Trend Continuation Mode - re-enter on pullbacks during strong trends
+      - ENABLE_TREND_CONTINUATION=${ENABLE_TREND_CONTINUATION:-false}
+      - TREND_CONTINUATION_ADX_MIN=${TREND_CONTINUATION_ADX_MIN:-25}
+      - TREND_CONTINUATION_PULLBACK_EMA=${TREND_CONTINUATION_PULLBACK_EMA:-20}
+
+      # Order Retry Settings - retry failed orders with adjusted parameters
+      - ENABLE_ORDER_RETRY=${ENABLE_ORDER_RETRY:-true}
+      - ORDER_RETRY_WIDEN_SL_PIPS=${ORDER_RETRY_WIDEN_SL_PIPS:-100}
+
+      # Breakout Freshness Filters - prevent entering exhausted moves
+      - BREAKOUT_RSI_MAX_LONG=${BREAKOUT_RSI_MAX_LONG:-75}
+      - BREAKOUT_RSI_MIN_SHORT=${BREAKOUT_RSI_MIN_SHORT:-25}
+      - BREAKOUT_MAX_DISTANCE_FROM_LEVEL=${BREAKOUT_MAX_DISTANCE_FROM_LEVEL:-2000}
+      - BREAKOUT_MIN_CANDLE_POSITION=${BREAKOUT_MIN_CANDLE_POSITION:-0.4}
+
+      # Trade Cooldown - prevents rapid re-entries after stop-loss
+      - TRADE_COOLDOWN_HOURS=${TRADE_COOLDOWN_HOURS:-2}
+
+      # Config regime tag - stamped onto tracker trades (log-only, bump on config deploys)
+      - CONFIG_REGIME=${CONFIG_REGIME:-unversioned}
+
+      # Max Slippage Protection - worst acceptable fill distance from the LIVE market price
+      - MAX_SLIPPAGE_PIPS=${MAX_SLIPPAGE_PIPS:-200}
+      # Chase filter - max adverse move from the (possibly stale) signal price before we cancel
+      - MAX_ENTRY_DRIFT_PIPS=${MAX_ENTRY_DRIFT_PIPS:-200}
+
+      # Position Sizing
+      - MIN_POSITION_SIZE=${MIN_POSITION_SIZE:-100}
+      - MAX_POSITION_SIZE=${MAX_POSITION_SIZE:-50000}
+
+      # Telegram Configuration
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - ENABLE_TELEGRAM=${ENABLE_TELEGRAM:-true}
+
+      # Logging
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+      - LOG_TO_FILE=${LOG_TO_FILE:-true}
+
+      # Trading Schedule
+      - SCAN_INTERVAL_MINUTES=${SCAN_INTERVAL_MINUTES:-15}
+
+      # Trading Hours Filter (UK time) - avoids Asian session low liquidity
+      # Default 08:00-22:00 UK skips wild wicks in early hours
+      - TRADING_START_HOUR=${TRADING_START_HOUR:-0}
+      - TRADING_END_HOUR=${TRADING_END_HOUR:-24}
+
+      # Timezone
+      - TZ=${TZ:-UTC}
+
+    volumes:
+      # Persist logs and data
+      - ./logs:/app/logs
+      - ./data:/app/data
+
+    networks:
+      - gold-trading-network
+
+    # Resource limits (adjust based on VPS specs)
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+    # Health check
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+networks:
+  gold-trading-network:
+    driver: bridge

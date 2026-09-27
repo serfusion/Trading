@@ -66,6 +66,10 @@ def test_token_telegram_tertanam(tmp_path):
                               'TOKEN2 = "YOUR_TELEGRAM_BOT_TOKEN"\nkey = os.getenv("API_KEY")\n')
     found = [f for f in scan(tmp_path).findings if f.code == "hardcoded_secret"]
     assert len(found) == 1 and found[0].line == 1
+    write(tmp_path, "run.bat", "set OPENROUTER_API_KEY=sk-or-v1-" + "9b21" * 16 + "\n")
+    write(tmp_path, "t.py", 'mt5.initialize(password="f6ZQ0$BHmnJD$m")\npw = "${PASSWORD}"\n')
+    got = {(f.path, f.line) for f in scan(tmp_path).findings if f.code == "hardcoded_secret"}
+    assert ("run.bat", 1) in got and ("t.py", 1) in got and ("t.py", 2) not in got
     write(tmp_path, "notify.py", 'CHAT_ID = "6500991930"\nchat_id = os.getenv("CHAT_ID")\n')
     rep = scan(tmp_path)
     assert [f.line for f in rep.findings if f.code == "hardcoded_chat"] == [1] and rep.verdict == "WASPADA"
