@@ -18,7 +18,7 @@ import pandas as pd
 from .data import resample
 from .github_popular import atr_w, ema, rsi
 from .github_popular2 import adx_w, bph
-from .harness import Arrays, Period, fmt, periods, simulate, stats, to_base, trades_frame
+from .harness import Arrays, Period, fmt, periods, server_time, simulate, stats, to_base, trades_frame
 
 
 def htf_closed(H: pd.DataFrame, X: pd.DataFrame, values: np.ndarray, x_hours: float, h_hours: float = 1.0):
@@ -179,10 +179,255 @@ def turnip_triple(p: Period) -> pd.DataFrame:
     return trades_frame(rows, p.base)
 
 
+# ---------------------------------------------------------------- BlamzKunG: Advanced Grid EA (Experts/XAUUSD_Advanced_Grid_EA.mq5)
+def blamz_adv_grid(p: Period, balance0: float = 1000.0, leverage: float = 100.0) -> pd.DataFrame:
+    """Simulasi akun (bukan R): basket BUY & SELL dibuka BERSAMAAN tanpa sinyal bila filter lolos (jam server 7-21,
+    Jumat < 18, ATR H1 < $7,5, ADX H1 < 32, |harga - EMA200 H1| <= $15). Lot awal 0,01, x1,20 per level, jarak grid
+    max($2,50; 0,5 ATR H1) x 1,1^level, maks 8 level & 2,5 lot. Basket ditutup bila profit >= $15, harga >= BE + $1,
+    atau trailing (mulai $12, kunci $4). Level 8 tembus satu langkah lagi -> hedge lock (lot sama arah berlawanan),
+    ditutup bersama basketnya. DD mengambang >= 20% -> tutup semua & EA berhenti (dianggap dinyalakan lagi besok);
+    DD >= 12% / margin < 200% -> tidak menambah level; rugi harian $100 / untung $150 -> tidak buka basket baru hari itu
+    (baris 86-160, 467-560, 588-700, 716-900). 1 lot = 100 oz. Harga dicek per bar (M5/M15): SL darurat dicek dulu."""
+    df = p.base
+    A, sp = Arrays(df), p.spread
+    o, h, l, c = A.o, A.h, A.l, A.c
+    H = resample(df, "60min")
+    hc = H["close"].to_numpy(float)
+    atr_h = htf_closed_base(df, H, atr_w(H, 14))
+    adx_h = htf_closed_base(df, H, adx_w(H, 14))
+    ema_h = htf_closed_base(df, H, ema(hc, 200))
+    srv = server_time(df.index)
+    hour, dow, day = srv.hour.to_numpy(), srv.dayofweek.to_numpy(), srv.normalize().to_numpy()
+    OZ = 100.0
+    bal = balance0
+    side = {1: [], -1: []}          # list (harga, lot)
+    hedge = {1: None, -1: None}     # (harga, lot, arah)
+    peak = {1: 0.0, -1: 0.0}
+    opened = {1: 0, -1: 0}
+    day_pl, cur_day, lock_day = 0.0, None, None
+    rows, eq_curve, stops, hedges = [], [], 0, 0
+
+    def pnl(d, px_bid):
+        """Profit mengambang basket arah d + hedge-nya pada harga bid px_bid."""
+        tot = 0.0
+        for e, lot in side[d]:
+            tot += ((px_bid - e) if d > 0 else (e - (px_bid + sp))) * lot * OZ
+        if hedge[d] is not None:
+            e, lot, hd = hedge[d]
+            tot += ((px_bid - e) if hd > 0 else (e - (px_bid + sp))) * lot * OZ
+        return tot
+
+    def close(d, px_bid, j, why):
+        nonlocal bal, day_pl
+        prof = pnl(d, px_bid)
+        bal += prof
+        day_pl += prof
+        rows.append((opened[d], j, d, prof, len(side[d]), why, hedge[d] is not None))
+        side[d], hedge[d], peak[d] = [], None, 0.0
+
+    habis = None
+    for j in range(300, A.n - 1):
+        if bal <= 0.05 * balance0:      # akun habis (margin call) -> simulasi berhenti
+            habis = df.index[j]
+            break
+        if day[j] != cur_day:
+            cur_day, day_pl = day[j], 0.0
+        # 1. guard DD darurat: equity terburuk di dalam bar (low utk BUY, high utk SELL tidak bisa terjadi bersamaan;
+        #    ambil yang lebih buruk dari dua skenario harga)
+        if side[1] or side[-1]:
+            worst = min(pnl(1, l[j]) + pnl(-1, l[j]), pnl(1, h[j]) + pnl(-1, h[j]))
+            if (bal - (bal + worst)) / bal * 100 >= 20.0:
+                px = l[j] if pnl(1, l[j]) + pnl(-1, l[j]) <= pnl(1, h[j]) + pnl(-1, h[j]) else h[j]
+                for d in (1, -1):
+                    if side[d]:
+                        close(d, px, j, "darurat_DD20")
+                stops += 1
+                lock_day = cur_day
+                eq_curve.append(bal)
+                continue
+        # 2. keluar basket
+        for d in (1, -1):
+            if not side[d]:
+                continue
+            lots = sum(x[1] for x in side[d])
+            be = sum(e * x for e, x in side[d]) / lots
+            tgt = be + 1.0 if d > 0 else be - 1.0
+            hit_pts = (h[j] >= tgt) if d > 0 else (l[j] + sp <= tgt)
+            if hit_pts:
+                close(d, tgt if d > 0 else tgt - sp, j, "tp_titik")
+                continue
+            prof = pnl(d, c[j])
+            if prof >= 15.0:
+                close(d, c[j], j, "tp_usd")
+                continue
+            if prof >= 12.0:
+                peak[d] = max(peak[d], prof)
+                if prof <= peak[d] - 4.0 and peak[d] - 4.0 > 0:
+                    close(d, c[j], j, "trailing")
+                    continue
+            else:
+                peak[d] = 0.0
+        # 3. hedge lock
+        stepb = max(2.5, 0.5 * atr_h[j]) if not np.isnan(atr_h[j]) else 2.5
+        for d in (1, -1):
+            if len(side[d]) >= 8 and hedge[d] is None:
+                ext = min(e for e, _ in side[d]) if d > 0 else max(e for e, _ in side[d])
+                trig = ext - d * stepb * 1.1 ** len(side[d])
+                if (l[j] + sp <= trig) if d > 0 else (h[j] >= trig):
+                    lot = sum(x[1] for x in side[d])
+                    hedge[d] = ((trig - sp) if d > 0 else trig + sp, lot, -d)
+                    hedges += 1
+        # 4. tambah level grid
+        eq = bal + pnl(1, c[j]) + pnl(-1, c[j])
+        used = sum(x[1] for d in (1, -1) for x in side[d]) * OZ * c[j] / leverage
+        margin_ok = used == 0 or eq / used * 100 >= 200
+        dd_ok = eq >= bal or (bal - eq) / bal * 100 < 12.0
+        if margin_ok and dd_ok:
+            for d in (1, -1):
+                n = len(side[d])
+                if 0 < n < 8:
+                    ext = min(e for e, _ in side[d]) if d > 0 else max(e for e, _ in side[d])
+                    nxt = ext - d * round(stepb * 1.1 ** n, 2)
+                    lot = round(min(0.5, side[d][-1][1] * 1.2), 2)
+                    if sum(x[1] for x in side[d]) + lot <= 2.5 and ((l[j] + sp <= nxt) if d > 0 else (h[j] >= nxt)):
+                        side[d].append((nxt, lot))
+        # 5. basket baru (tanpa sinyal)
+        ok = (7 <= hour[j] <= 21 and not (dow[j] == 4 and hour[j] >= 18) and lock_day != cur_day
+              and -100.0 < day_pl < 150.0 and not np.isnan(ema_h[j]) and atr_h[j] < 7.5 and adx_h[j] <= 32
+              and abs(o[j] - ema_h[j]) <= 15.0)
+        if ok:
+            for d in (1, -1):
+                if not side[d]:
+                    side[d] = [(o[j] + (sp if d > 0 else 0.0), 0.01)]
+                    opened[d] = j
+        eq_curve.append(bal + pnl(1, c[j]) + pnl(-1, c[j]))
+    t = pd.DataFrame(rows, columns=["j0", "j1", "dir", "usd", "levels", "why", "hedged"])
+    if len(t):
+        t["time"] = df.index[t.j0.to_numpy()]
+        t["exit"] = df.index[np.minimum(t.j1.to_numpy(), len(df) - 1)]
+        t["R"] = t.usd / balance0 * 100   # "R" di sini = % saldo awal per basket
+    eq = np.array(eq_curve)
+    t.attrs.update(saldo_akhir=bal, dd_maks=float((eq / np.maximum.accumulate(eq) - 1).min() * 100) if len(eq) else 0.0,
+                   stop_darurat=stops, hedge=hedges, habis=habis)
+    return t
+
+
+# ---------------------------------------------------------------- shamshyder123-oss: GoldTradingEA.mq5
+def shamshyder(p: Period, unit: float = 0.01) -> pd.DataFrame:
+    """Versi yang DIMAKSUD penulis (kode aslinya tidak terkompilasi: tipe `ctrade`; dan `iMA()` dipakai sebagai nilai
+    padahal mengembalikan handle -> sinyal tidak pernah muncul). H1: BUY bila 25<RSI14<35, SMA20>SMA50, MACD>0,
+    close>SMA20; SELL kebalikannya (65<RSI<75). SL 100 x unit, TP 200 x unit, trailing 50 x unit saat profit.
+    unit=0,01 (=_Point, seperti kodenya: SL $1) atau 0,10 (bila 'pips' = 10 point: SL $10)."""
+    H = resample(p.base, "60min")
+    A, sp = Arrays(p.base), p.spread
+    c = H["close"].to_numpy(float)
+    r = rsi(c, 14)
+    macd = ema(c, 12) - ema(c, 26)
+    s20, s50 = pd.Series(c).rolling(20).mean().to_numpy(), pd.Series(c).rolling(50).mean().to_numpy()
+    start = to_base(p.base, H.index)
+    sl, tp, tr = 100 * unit, 200 * unit, 50 * unit
+    rows, busy = [], -1
+    for k in range(60, len(H) - 1):
+        if 25 < r[k] < 35 and s20[k] > s50[k] and macd[k] > 0 and c[k] > s20[k]:
+            d = 1
+        elif 65 < r[k] < 75 and s20[k] < s50[k] and macd[k] < 0 and c[k] < s20[k]:
+            d = -1
+        else:
+            continue
+        j0 = start[k + 1]
+        if j0 <= busy or j0 >= A.n - 2:
+            continue
+        entry = A.o[j0] + (sp if d > 0 else 0.0)
+
+        def trail(j, d, entry, cur, tr=tr):
+            if d > 0:
+                return max(cur, A.h[j] - tr) if A.h[j] > entry else cur
+            return min(cur, A.l[j] + sp + tr) if A.l[j] + sp < entry else cur
+
+        j1, rr = simulate(A, sp, j0, d, entry, entry - d * sl, entry + d * tp, 5 * 24 * bph(p), trail=trail)
+        rows.append((j0, j1, d, rr))
+        busy = j1
+    return trades_frame(rows, p.base)
+
+
+# ---------------------------------------------------------------- thanvish21: Gold_Dominator_Pro_v3_STRATEGY.pine
+def gold_dominator(p: Period, volume_ok: bool = False, eq_filter: bool = True) -> pd.DataFrame:
+    """Grafik H1. Skor 10 komponen x 10 (tren H4 EMA21/55/200, close>EMA200 H4, RSI 45-72, histogram MACD>0,
+    StochRSI naik, ADX>20, close>lowest20, volume>1,2xSMA20, sesi UTC 8-11/13-17, ATR>0). BUY bila skor>=80 DAN
+    StochRSI cross up, filter kurva ekuitas (ekuitas >= EMA20-nya) & DD < 10%. SL 1,5 ATR, TP 1,2/2,0/3,0 ATR
+    (50/30/20%). Bug asli dipertahankan: StochRSI berskala 0-1 tapi dibandingkan dengan 20/80 -> syarat 'sk[1]<20' selalu
+    benar dan SELL tidak pernah terjadi. Data tanpa volume: volume_ok=False (komponen volume selalu 0) / True (selalu 10).
+    Ukuran posisi 100% ekuitas tanpa leverage (default strategi) -> dipakai untuk filter ekuitas & DD."""
+    H = resample(p.base, "60min")
+    H4 = resample(p.base, "240min")
+    A, sp = Arrays(p.base), p.spread
+    c = H["close"].to_numpy(float)
+    c4 = H4["close"].to_numpy(float)
+    ef, em, es = (htf_closed(H, H4, ema(c4, n), 4) for n in (21, 55, 200))
+    r = rsi(c, 14)
+    macd = ema(c, 12) - ema(c, 26)
+    hist = macd - ema(macd, 9)
+    rs = pd.Series(r)
+    raw = ((rs - rs.rolling(14).min()) / (rs.rolling(14).max() - rs.rolling(14).min())).to_numpy()
+    sk = pd.Series(raw).rolling(3).mean().to_numpy()
+    sd = pd.Series(sk).rolling(3).mean().to_numpy()
+    stoch_up = (sk > sd) & (np.r_[np.nan, sk[:-1]] <= np.r_[np.nan, sd[:-1]]) & (np.r_[np.nan, sk[:-1]] < 20)
+    at, ad = atr_w(H, 14), adx_w(H, 14)
+    low20 = pd.Series(c).rolling(20).min().to_numpy()
+    hr = H.index.hour.to_numpy()
+    sess = ((hr >= 8) & (hr < 11)) | ((hr >= 13) & (hr < 17))
+    score = (10 * ((c > es) & (ef > em)) + 10 * (c > es) + 10 * ((r > 45) & (r < 72)) + 10 * (hist > 0) + 10 * stoch_up
+             + 10 * (ad > 20) + 10 * (c > low20) + (10 if volume_ok else 0) + 10 * sess + 10 * (at > 0))
+    start = to_base(p.base, H.index)
+    exit_h = np.searchsorted(start, np.arange(A.n), side="right") - 1   # bar H1 tempat bar dasar j berada
+    eq, eq_ema, peak = 1.0, 1.0, 1.0
+    pending: list[tuple[int, float]] = []      # (bar H1 selesai, faktor ekuitas)
+    rows, busy_k = [], -1
+    for k in range(250, len(H) - 1):
+        for item in [x for x in pending if x[0] <= k]:
+            eq *= item[1]
+            pending.remove(item)
+        eq_ema = eq_ema + 2.0 / 21 * (eq - eq_ema)
+        peak = max(peak, eq)
+        if k <= busy_k or not (score[k] >= 80 and stoch_up[k] and (eq >= eq_ema or not eq_filter)
+                               and ((peak - eq) / peak < 0.10 or not eq_filter)):
+            continue
+        j0 = start[k + 1]
+        if j0 >= A.n - 2:
+            break
+        entry = A.o[j0] + sp
+        a = at[k - 1]
+        sl = c[k] - 1.5 * a
+        if entry - sl <= 0:
+            continue
+        legs = []
+        for mult, w in ((1.2, 0.5), (2.0, 0.3), (3.0, 0.2)):
+            j1, rr = simulate(A, sp, j0, 1, entry, sl, c[k] + mult * a, 10 * 24 * bph(p))
+            legs.append((j1, rr, w))
+        j_end = max(x[0] for x in legs)
+        R = sum(rr * w for _, rr, w in legs)
+        rows.append((j0, j_end, 1, R))
+        pending.append((exit_h[min(j_end, A.n - 1)] + 1, 1 + R * (entry - sl) / entry))
+        busy_k = exit_h[min(j_end, A.n - 1)]
+    return trades_frame(rows, p.base)
+
+
+def htf_closed_base(base: pd.DataFrame, X: pd.DataFrame, values: np.ndarray) -> np.ndarray:
+    """Nilai H1 yang sudah tertutup, dipetakan ke setiap bar dasar (dipakai saat bar dasar dibuka)."""
+    s = pd.Series(values, index=X.index + pd.Timedelta(hours=1))
+    return s.reindex(base.index, method="ffill").to_numpy()
+
+
 TESTS = {
     "turnip_ema_trend BUY saja (asli)": turnip_ema_trend,
     "turnip_ema_trend + SELL": lambda p: turnip_ema_trend(p, allow_short=True),
     "turnip_triple (Turnipnator)": turnip_triple,
+    "blamz_adv_grid akun $1.000 (BlamzKunG)": blamz_adv_grid,
+    "shamshyder SL $1/TP $2 seperti kode": shamshyder,
+    "shamshyder SL $10/TP $20 (pips=10 point)": lambda p: shamshyder(p, 0.10),
+    "gold_dominator volume=0 (thanvish21)": gold_dominator,
+    "gold_dominator volume=10 (thanvish21)": lambda p: gold_dominator(p, True),
+    "gold_dominator volume=10 tanpa filter ekuitas & DD": lambda p: gold_dominator(p, True, eq_filter=False),
 }
 
 
@@ -205,8 +450,20 @@ def main(argv=None):
                 continue
             out[name][p.name] = t
             tot.append(t.R.to_numpy() if len(t) else np.array([]))
+            if "usd" in t:
+                a = t.attrs
+                print(f"   {p.name}: basket={len(t)} profit%={(t.usd > 0).mean() * 100:.1f} total=${t.usd.sum():+,.0f} "
+                      f"({t.usd.sum() / 10:+.1f}% dari $1.000) saldo akhir ${a['saldo_akhir']:,.0f} "
+                      f"DD maks {a['dd_maks']:.1f}% | stop darurat {a['stop_darurat']}x, hedge {a['hedge']}x, "
+                      f"rata level {t.levels.mean():.1f}"
+                      + (f" | AKUN HABIS {a['habis']:%Y-%m-%d}" if a.get("habis") is not None else ""), flush=True)
+                continue
             print(f"   {p.name}: {fmt(stats(t.R))}", flush=True)
-        if tot:
+        if tot and any("usd" in t for t in out[name].values()):
+            pct = [t.usd.sum() / 10 for t in out[name].values()]
+            print(f"   TOTAL  : {sum(pct):+.1f}% (jumlah 4 akun $1.000 terpisah) | periode positif "
+                  f"{sum(x > 0 for x in pct)}/{len(pct)}", flush=True)
+        elif tot:
             allr = np.concatenate(tot)
             pos = sum(1 for x in tot if len(x) and x.sum() > 0)
             print(f"   TOTAL  : {fmt(stats(allr))} | periode positif {pos}/{len(tot)}", flush=True)
