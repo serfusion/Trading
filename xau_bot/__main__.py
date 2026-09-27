@@ -1,4 +1,4 @@
-"""CLI: python -m xau_bot {run,check,backtest,fetch,app,berbagi,zakat,tabungan}"""
+"""CLI: python -m xau_bot {run,check,backtest,fetch,app,berbagi,zakat,tabungan,audit}"""
 from __future__ import annotations
 
 import argparse
@@ -232,6 +232,11 @@ def cmd_tabungan(args) -> int:
     return 0
 
 
+def cmd_audit(args) -> int:
+    from .audit import main as audit_main
+    return audit_main(args.folder, detail=not args.ringkas, ignore=args.abaikan)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="xau_bot", description="Bot XAUUSD Smart Money Concepts")
     parser.add_argument("--config", default="config.yaml" if Path("config.yaml").exists() else None)
@@ -270,9 +275,14 @@ def main(argv: list[str] | None = None) -> int:
     ta.add_argument("--harga-gram", type=float, required=True, help="harga emas per gram (Rupiah)")
     ta.add_argument("--bulan", type=int, default=60)
     ta.add_argument("--buyback", type=float, default=5.0, help="selisih harga beli-jual kembali (%%)")
+    au = sub.add_parser("audit", help="Periksa keamanan bot/EA pihak ketiga tanpa menjalankannya")
+    au.add_argument("folder", nargs="+")
+    au.add_argument("--ringkas", action="store_true", help="hanya satu baris per folder")
+    au.add_argument("--abaikan", action="append", help="pola glob file yang dilewati (boleh berulang)")
     args = parser.parse_args(argv)
     return {"run": cmd_run, "check": cmd_check, "backtest": cmd_backtest, "fetch": cmd_fetch,
-            "app": cmd_app, "berbagi": cmd_berbagi, "zakat": cmd_zakat, "tabungan": cmd_tabungan}[args.cmd](args)
+            "app": cmd_app, "berbagi": cmd_berbagi, "zakat": cmd_zakat, "tabungan": cmd_tabungan,
+            "audit": cmd_audit}[args.cmd](args)
 
 
 if __name__ == "__main__":

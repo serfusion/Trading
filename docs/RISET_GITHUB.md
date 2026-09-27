@@ -1,7 +1,8 @@
 # Riset: Repo GitHub XAUUSD Terpopuler, Seleksi "Terbaik dari yang Terbaik", dan Rencana Aplikasi untuk Dhuafa
 
 *Snapshot GitHub 26 September 2026. Semua angka dihasilkan ulang dari data harga asli dengan kode di folder
-`research/` (perintah di bagian 9).*
+`research/` (perintah di bagian 9). Lanjutan: audit keamanan & uji 63 repo kiriman pengguna di
+[`AUDIT_63_REPO.md`](AUDIT_63_REPO.md).*
 
 ## 0. Ringkasan jujur
 

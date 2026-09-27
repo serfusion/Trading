@@ -62,6 +62,20 @@ tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md
   dan posisi bot yang sedang terbuka — semua dari HP.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
 
+## Periksa keamanan bot/EA orang lain sebelum dijalankan
+
+```bat
+python -m xau_bot audit folder_bot_download        :: detail per baris
+python -m xau_bot audit --ringkas repos\*          :: satu baris per folder
+```
+
+Pemindai statis (kode **tidak** dijalankan): keylogger, pencuri password/cookie/wallet, unduh-lalu-jalankan, kode
+tersamar (PyArmor, exec base64), EA yang mengirim data akun lewat `WebRequest` / `#import` DLL, token & chat ID
+Telegram orang lain yang tertanam, file model pickle, biner tanpa source, martingale/grid. Hasil audit 63 repo
+XAUUSD dan uji ulang strateginya: [`docs/AUDIT_63_REPO.md`](docs/AUDIT_63_REPO.md) — tidak ada malware aktif,
+1 repo tersandi (jangan dijalankan), 4 repo mengirim saldo Anda ke Telegram penulisnya, dan tidak ada strategi
+yang lebih baik dari resep bot ini.
+
 ## Dompet Berbagi, zakat & tabungan emas
 
 Alat hitung untuk tujuan sosial proyek ini (detail & alasannya di [`docs/RISET_GITHUB.md`](docs/RISET_GITHUB.md) §7):
@@ -175,8 +189,9 @@ xau_bot/
   broker/mt5.py MetaTrader 5 (Exness)   broker/paper.py simulasi backtest
   backtest.py   backtest dengan engine yang sama
   berbagi.py    dompet berbagi (high-water mark), zakat mal, rencana tabungan emas
+  audit.py      pemindai keamanan statis untuk bot/EA pihak ketiga
 research/       scan, simulasi, uji ketahanan & validasi engine di data historis
-tests/          80 unit test (strategi, trend, ensemble, risiko, sesi, berita, engine, cloud, berbagi, MT5 palsu)
+tests/          88 unit test (strategi, trend, ensemble, risiko, sesi, berita, engine, cloud, berbagi, audit, MT5 palsu)
 ```
 
 Menjalankan test: `pip install -r requirements-dev.txt` lalu `pytest`.
