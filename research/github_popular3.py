@@ -412,6 +412,292 @@ def gold_dominator(p: Period, volume_ok: bool = False, eq_filter: bool = True) -
     return trades_frame(rows, p.base)
 
 
+# ---------------------------------------------------------------- P1Piyush: pdhl_bot.py (PDH/PDL breakout-retest)
+def piyush_pdhl(p: Period, partial: bool = False) -> pd.DataFrame | None:
+    """M5 (hanya periode M5). PDH/PDL = high/low hari sebelumnya. Sesi UTC 6-20 kecuali jam 1, 9, 10. RSI(SMA14)
+    22-78. BREAKOUT: close > PDH + 0,15% dan close sebelumnya < PDH, dan 2-3 bar sebelumnya sempat retest (low dalam
+    +-0,15% & close > PDH), bias H1 EMA50>EMA200 -> BUY (kebalikannya untuk PDL). Sweep-reversal DINONAKTIFKAN di kode
+    (hanya menandai level terpakai). 1 trade per level per hari, 1 posisi. SL = ATR(SMA14, M5), TP 3R (TP2, sama
+    dengan laporan backtest penulis) atau partial: 50% di 1,5R + 50% di 3R (pdhl_bot.py baris 150-270)."""
+    if p.tf != "M5":
+        return None
+    base = p.base
+    A, sp = Arrays(base), p.spread
+    o, h, l, c = A.o, A.h, A.l, A.c
+    srv = server_time(base.index)
+    sday = srv.normalize()
+    daily = pd.DataFrame({"h": h, "l": l}, index=sday).groupby(level=0).agg({"h": "max", "l": "min"})
+    pdh = pd.Series(daily["h"].shift(1).to_numpy(), index=daily.index).reindex(sday).to_numpy()
+    pdl = pd.Series(daily["l"].shift(1).to_numpy(), index=daily.index).reindex(sday).to_numpy()
+    pc = np.r_[c[0], c[:-1]]
+    tr = np.maximum(h - l, np.maximum(abs(h - pc), abs(l - pc)))
+    atr_s = pd.Series(tr).rolling(14).mean().to_numpy()
+    dlt = pd.Series(c).diff()
+    g, ls = dlt.clip(lower=0).rolling(14).mean(), (-dlt.clip(upper=0)).rolling(14).mean()
+    rsi_s = (100 - 100 / (1 + g / ls.replace(0, np.nan))).to_numpy()
+    H = resample(base, "60min")
+    hc = H["close"].to_numpy(float)
+    bias = np.sign(htf_closed_base(base, H, ema(hc, 50)) - htf_closed_base(base, H, ema(hc, 200)))
+    hr = base.index.hour.to_numpy()
+    uday = base.index.normalize().to_numpy()
+    rows, busy, tapped, cur_day = [], -1, {"PDH": False, "PDL": False}, None
+    for k in range(300, A.n - 2):
+        if uday[k] != cur_day:
+            cur_day, tapped = uday[k], {"PDH": False, "PDL": False}
+        if k <= busy or np.isnan(pdh[k]) or np.isnan(atr_s[k]):
+            continue
+        if hr[k] in (1, 9, 10) or not 6 <= hr[k] < 20:
+            continue
+        if rsi_s[k] > 78 or rsi_s[k] < 22:
+            continue
+        cur, prox = c[k], c[k] * 0.0015
+        d = 0
+        for lvl, sgn in (("PDH", 1), ("PDL", -1)):
+            L = pdh[k] if sgn > 0 else pdl[k]
+            if tapped[lvl] or abs(cur - L) >= 2 * prox:
+                continue
+            wick = (h[k] > L + 0.3 * prox) if sgn > 0 else (l[k] < L - 0.3 * prox)
+            back = (c[k] < L) if sgn > 0 else (c[k] > L)
+            mss = (c[k - 1] > o[k - 1] and c[k] < o[k]) if sgn > 0 else (c[k - 1] < o[k - 1] and c[k] > o[k])
+            if wick and back and mss and (bias[k] == -sgn or np.isnan(bias[k])):
+                tapped[lvl] = True          # sweep-reversal dinonaktifkan penulis: level dipakai, tanpa trade
+                break
+            brk = (c[k] > L + prox and c[k - 1] < L) if sgn > 0 else (c[k] < L - prox and c[k - 1] > L)
+            if not brk:
+                continue
+            ret = any((L - prox <= (l[k - i] if sgn > 0 else h[k - i]) <= L + prox)
+                      and ((c[k - i] > L) if sgn > 0 else (c[k - i] < L)) for i in range(1, 4))
+            if ret and (bias[k] == sgn or np.isnan(bias[k])):
+                tapped[lvl] = True
+                d = sgn
+                break
+        if d == 0:
+            continue
+        j0 = k + 1
+        entry = o[j0] + (sp if d > 0 else 0.0)
+        risk = atr_s[k]
+        if partial:
+            j1a, ra = simulate(A, sp, j0, d, entry, entry - d * risk, entry + d * 1.5 * risk, 5 * 24 * 12)
+            j1b, rb = simulate(A, sp, j0, d, entry, entry - d * risk, entry + d * 3.0 * risk, 5 * 24 * 12)
+            j1, rr = max(j1a, j1b), 0.5 * ra + 0.5 * rb
+        else:
+            j1, rr = simulate(A, sp, j0, d, entry, entry - d * risk, entry + d * 3.0 * risk, 5 * 24 * 12)
+        rows.append((j0, j1, d, rr))
+        busy = j1
+    return trades_frame(rows, base)
+
+
+# ---------------------------------------------------------------- nazhmi12: mesinBot.py (FVG + OB + EMA200 M5)
+def nazhmi_fvg_ob(p: Period, daily_limit: bool = True) -> pd.DataFrame | None:
+    """CATATAN: mesinBot.py aslinya men-trade EURUSD/GBPUSD/USDJPY/AUDUSD, BUKAN emas; botXauusd.py hanya dashboard.
+    Aturannya diterapkan ke XAUUSD M5: BUY bila close > EMA200, FVG (low[-1] > high[-3]) DAN order block (close[-1] >
+    open[-2] & bar[-2] merah); SELL kebalikannya. SL 1,5 ATR(14), TP 2R. 1 posisi. Batas harian lot 0,01: berhenti
+    setelah +$5 atau -$3 (hari = jam PC WIB). Keputusan diambil di awal bar (bar sinyal sudah tertutup)."""
+    if p.tf != "M5":
+        return None
+    base = p.base
+    A, sp = Arrays(base), p.spread
+    o, h, l, c = A.o, A.h, A.l, A.c
+    e200 = ema(c, 200)
+    at = atr_w(base, 14)
+    wib_day = (base.index + pd.Timedelta(hours=7)).normalize().to_numpy()
+    rows, busy, cur_day, pnl_day = [], -1, None, 0.0
+    for k in range(210, A.n - 2):
+        if wib_day[k] != cur_day:
+            cur_day, pnl_day = wib_day[k], 0.0
+        if k <= busy:
+            continue
+        if daily_limit and not -3.0 < pnl_day < 5.0:
+            continue
+        m = k - 1
+        if c[m] > e200[m] and l[m] > h[m - 2] and c[m] > o[m - 1] and c[m - 1] < o[m - 1]:
+            d = 1
+        elif c[m] < e200[m] and h[m] < l[m - 2] and c[m] < o[m - 1] and c[m - 1] > o[m - 1]:
+            d = -1
+        else:
+            continue
+        entry = o[k] + (sp if d > 0 else 0.0)
+        risk = 1.5 * at[m]
+        j1, rr = simulate(A, sp, k, d, entry, entry - d * risk, entry + d * 2 * risk, 5 * 24 * 12)
+        rows.append((k, j1, d, rr))
+        pnl_day += rr * risk          # 0,01 lot emas = $1 per $1 pergerakan
+        busy = j1
+    return trades_frame(rows, base)
+
+
+# ---------------------------------------------------------------- Kiran-Kumbar: bot.py (sinyal SMC ke Telegram)
+def _swings(h, l, lb=3):
+    """Indeks swing high/low (lookback 3 kiri-kanan, >=/<=), dipakai bila sudah terkonfirmasi 3 bar kemudian."""
+    n = len(h)
+    sh, sl_ = np.ones(n, bool), np.ones(n, bool)
+    for j in range(1, lb + 1):
+        sh[j:] &= h[j:] >= h[:-j]
+        sh[:-j] &= h[:-j] >= h[j:]
+        sl_[j:] &= l[j:] <= l[:-j]
+        sl_[:-j] &= l[:-j] <= l[j:]
+    sh[:lb] = sh[-lb:] = False
+    sl_[:lb] = sl_[-lb:] = False
+    return np.flatnonzero(sh), np.flatnonzero(sl_)
+
+
+def _structure(k, c, h, l, shi, sli, win=60, lb=3):
+    """analyze_structure_bos() pada bar k (jendela 60 bar terakhir)."""
+    lo, hi = k - win + 1 + lb, k - lb
+    a = shi[np.searchsorted(shi, lo):np.searchsorted(shi, hi, side="right")]
+    b = sli[np.searchsorted(sli, lo):np.searchsorted(sli, hi, side="right")]
+    if len(a) < 2 or len(b) < 2:
+        return 0, False, False
+    last_sh, prev_sh, last_sl, prev_sl = h[a[-1]], h[a[-2]], l[b[-1]], l[b[-2]]
+    cur = c[k]
+    ema_bull = c[k - 9:k + 1].mean() > c[k - 29:k + 1].mean()
+    bull_bos, bear_bos = cur > last_sh, cur < last_sl
+    was_bear = last_sh < prev_sh and last_sl < prev_sl
+    was_bull = last_sh > prev_sh and last_sl > prev_sl
+    if was_bear and bull_bos:
+        return 1, True, True
+    if was_bull and bear_bos:
+        return -1, True, True
+    if bull_bos and ema_bull and last_sh > prev_sh:
+        return 1, True, False
+    if bear_bos and not ema_bull and last_sl < prev_sl:
+        return -1, True, False
+    if ema_bull and last_sh > prev_sh and last_sl > prev_sl:
+        return 1, False, False
+    if not ema_bull and last_sh < prev_sh and last_sl < prev_sl:
+        return -1, False, False
+    return 0, False, False
+
+
+def kiran_smc(p: Period) -> pd.DataFrame | None:
+    """Sinyal (bukan eksekusi) tiap bar M5 tertutup: bias struktur 15 menit wajib (+30, CHoCH +10), bias M5 +15,
+    harga di order block +20, equal low/high tersapu +15, liquidity grab +10, FVG >= $1,5 +10, pola +10/+5,
+    RSI(SMA14) <35/>65 +8. Sinyal bila skor >= 65, searah bias 15m, dan lebih besar dari skor arah lawan. SL di
+    bawah OB/swing - $0,5 (min $3, maks $20), TP 2R. Maks 3 sinyal/hari (IST), hari kerja, arah sama tidak diulang
+    dalam 45 menit. Setiap sinyal dihitung sebagai trade terpisah (boleh tumpang tindih)."""
+    if p.tf != "M5":
+        return None
+    base = p.base
+    A, sp = Arrays(base), p.spread
+    o, h, l, c = A.o, A.h, A.l, A.c
+    M = resample(base, "15min")
+    mo, mh, ml, mc = (M[k].to_numpy(float) for k in ("open", "high", "low", "close"))
+    m_end = (M.index + pd.Timedelta(minutes=15)).to_numpy()
+    b_end = (base.index + pd.Timedelta(minutes=5)).to_numpy()
+    m_idx = np.searchsorted(m_end, b_end, side="right") - 1          # 15m terakhir yang sudah tutup
+    shi15, sli15 = _swings(mh, ml)
+    shi5, sli5 = _swings(h, l)
+    dl = pd.Series(c).diff()
+    g, ls = dl.clip(lower=0).rolling(14).mean().to_numpy(), (-dl.clip(upper=0)).rolling(14).mean().to_numpy()
+    ist = base.index + pd.Timedelta(hours=5, minutes=30)
+    ist_day, ist_dow = ist.normalize().to_numpy(), ist.dayofweek.to_numpy()
+    rows, cur_day, n_day, last_dir, last_k = [], None, 0, 0, -10**9
+    for k in range(120, A.n - 2):
+        if ist_day[k] != cur_day:
+            cur_day, n_day, last_dir = ist_day[k], 0, 0
+        if n_day >= 3 or ist_dow[k] >= 5:
+            continue
+        mk = m_idx[k]
+        if mk < 100:
+            continue
+        tf, _, choch = _structure(mk, mc, mh, ml, shi15, sli15)
+        if tf == 0:
+            continue
+        m5, _, _ = _structure(k, c, h, l, shi5, sli5)
+        cur = c[k]
+        # order block searah bias 15m
+        ob_h = ob_l = None
+        in_ob = False
+        for i in range(k - 2, max(k - 19, 3), -1):
+            red = c[i] < o[i]
+            if (tf > 0 and red and max(c[i + 1:min(i + 3, k + 1)]) > h[i]) or \
+               (tf < 0 and c[i] > o[i] and min(c[i + 1:min(i + 3, k + 1)]) < l[i]):
+                ob_h, ob_l = h[i], l[i]
+                in_ob = ob_l <= cur <= ob_h
+                break
+        # equal highs/lows (30 bar, tanpa 2 terakhir) & sapuan
+        hw, lw = np.sort(h[k - 29:k - 1]), np.sort(l[k - 29:k - 1])
+        dh, dlw = np.diff(hw) <= 0.30, np.diff(lw) <= 0.30
+        swept_high = bool(dh.any() and (hw[1:][dh] < h[k]).any())
+        swept_low = bool(dlw.any() and (lw[:-1][dlw] > l[k]).any())
+        # liquidity grab
+        mx, mn = h[k - 9:k - 1].max(), l[k - 9:k - 1].min()
+        grab = 0
+        if h[k - 1] > mx and h[k - 1] - max(o[k - 1], c[k - 1]) >= 1.0 and c[k] < o[k]:
+            grab = -1
+        if l[k - 1] < mn and min(o[k - 1], c[k - 1]) - l[k - 1] >= 1.0 and c[k] > o[k]:
+            grab = 1
+        # FVG
+        fvg = 0
+        for i in range(k - 2, max(k - 9, 0), -1):
+            if h[i] < l[i + 2] and l[i + 2] - h[i] >= 1.5 and cur > h[i]:
+                fvg = 1
+                break
+            if l[i] > h[i + 2] and l[i] - h[i + 2] >= 1.5 and cur < l[i]:
+                fvg = -1
+                break
+        # pola
+        body = abs(o[k] - c[k])
+        pat, pts = 0, 0
+        if o[k - 1] < c[k - 1] and o[k] > c[k] and o[k] >= c[k - 1] and c[k] <= o[k - 1]:
+            pat, pts = -1, 10
+        elif o[k - 1] > c[k - 1] and o[k] < c[k] and o[k] <= c[k - 1] and c[k] >= o[k - 1]:
+            pat, pts = 1, 10
+        elif h[k] - max(o[k], c[k]) > 2 * body and body > 0:
+            pat, pts = -1, 5
+        elif min(o[k], c[k]) - l[k] > 2 * body and body > 0:
+            pat, pts = 1, 5
+        r = 100.0 if ls[k] == 0 else 100 - 100 / (1 + g[k] / ls[k])
+        L = S = 0
+        L += 30 if tf > 0 else 0
+        S += 30 if tf < 0 else 0
+        L += 10 if choch and tf > 0 else 0
+        S += 10 if choch and tf < 0 else 0
+        L += 15 if m5 > 0 else 0
+        S += 15 if m5 < 0 else 0
+        L += 20 if in_ob and tf > 0 else 0
+        S += 20 if in_ob and tf < 0 else 0
+        L += 15 if swept_low and tf > 0 else 0
+        S += 15 if swept_high and tf < 0 else 0
+        L += 10 if grab > 0 else 0
+        S += 10 if grab < 0 else 0
+        L += 10 if fvg > 0 else 0
+        S += 10 if fvg < 0 else 0
+        L += pts if pat > 0 else 0
+        S += pts if pat < 0 else 0
+        L += 8 if r < 35 else 0
+        S += 8 if r > 65 else 0
+        if L > S and L >= 65 and tf > 0:
+            d = 1
+        elif S > L and S >= 65 and tf < 0:
+            d = -1
+        else:
+            continue
+        if d == last_dir and k - last_k < 9:
+            continue
+        if d > 0:
+            if ob_l is not None:
+                lvl = ob_l - 0.5
+            else:
+                w = sli5[(sli5 >= k - 29 + 3) & (sli5 <= k - 3)]
+                lvl = l[w[-1]] - 0.5 if len(w) else cur - 8.0
+            risk = max(cur - lvl, 3.0)
+        else:
+            if ob_h is not None:
+                lvl = ob_h + 0.5
+            else:
+                w = shi5[(shi5 >= k - 29 + 3) & (shi5 <= k - 3)]
+                lvl = h[w[-1]] + 0.5 if len(w) else cur + 8.0
+            risk = max(lvl - cur, 3.0)
+        risk = min(risk, 20.0)
+        j0 = k + 1
+        entry = o[j0] + (sp if d > 0 else 0.0)
+        j1, rr = simulate(A, sp, j0, d, entry, entry - d * risk, entry + d * 2 * risk, 5 * 24 * 12)
+        rows.append((j0, j1, d, rr))
+        n_day += 1
+        last_dir, last_k = d, k
+    return trades_frame(rows, base)
+
+
 def htf_closed_base(base: pd.DataFrame, X: pd.DataFrame, values: np.ndarray) -> np.ndarray:
     """Nilai H1 yang sudah tertutup, dipetakan ke setiap bar dasar (dipakai saat bar dasar dibuka)."""
     s = pd.Series(values, index=X.index + pd.Timedelta(hours=1))
@@ -428,6 +714,11 @@ TESTS = {
     "gold_dominator volume=0 (thanvish21)": gold_dominator,
     "gold_dominator volume=10 (thanvish21)": lambda p: gold_dominator(p, True),
     "gold_dominator volume=10 tanpa filter ekuitas & DD": lambda p: gold_dominator(p, True, eq_filter=False),
+    "piyush_pdhl TP 3R (P1Piyush)": piyush_pdhl,
+    "piyush_pdhl 50% 1,5R + 50% 3R": lambda p: piyush_pdhl(p, partial=True),
+    "nazhmi_fvg_ob M5 + batas harian (nazhmi12)": nazhmi_fvg_ob,
+    "nazhmi_fvg_ob M5 tanpa batas harian": lambda p: nazhmi_fvg_ob(p, daily_limit=False),
+    "kiran_smc sinyal M5 (Kiran-Kumbar)": kiran_smc,
 }
 
 

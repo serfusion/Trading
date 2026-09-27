@@ -10,7 +10,7 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 | Audit awal | Pemindai statis semua file, inventaris 63 repo, 41 kandidat disimpan | ✅ selesai | `docs/AUDIT_63_REPO.md`, `kandidat/` |
 | A | Riwayat git lengkap + GitHub Releases 63 repo; simpan repo mentah (git bundle) | ✅ selesai (2 bundle belum di git, lihat catatan) | `docs/AUDIT_RIWAYAT_RELEASES.md`, `docs/riwayat/`, `arsip_repo/` |
 | C | Inventaris kemampuan SETIAP file (jaringan, file, proses, kode dinamis, kredensial, order) + tinjauan manual | ✅ selesai | `docs/AUDIT_SETIAP_FILE.md`, `docs/inventaris_file.csv` |
-| B | Uji ulang strategi yang belum diuji | ⏳ berjalan (5/14) | `research/github_popular3.py`, `docs/AUDIT_63_REPO.md` |
+| B | Uji ulang strategi yang belum diuji | ⏳ berjalan (8/14) | `research/github_popular3.py`, `docs/AUDIT_63_REPO.md` |
 
 ## B — daftar strategi yang belum diuji
 
@@ -21,9 +21,9 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 | BlamzKunG/XAUUSD-Grid-EA | Advanced Grid EA (lot ×1,20, hedge lock) | ✅ akun $1.000: 97–99% basket profit, tapi **akun habis** di 2012, 2020, 2023; 2025-26 −29,6% |
 | shamshyder123-oss/gold-trading-ea | EA RSI/MACD/MA | ✅ tidak terkompilasi (`ctrade`), `iMA` dipakai sebagai nilai; versi diperbaiki: 4 syaratnya **tidak pernah terpenuhi bersamaan** (0 trade 2012-26) |
 | thanvish21/gold-dominator | Gold Dominator Pro v3 (skor ≥80, tanpa volume) | ✅ asli: filter ekuitas macet (EMA float) → berhenti setelah rugi pertama (1–2 trade/periode); tanpa filter: WR 43%, −101,5R, 1/4; SELL tak pernah (bug skala StochRSI) |
-| P1Piyush/XAUUSD-Trading-Bots | PDH/PDL (pdhl_bot.py), alpha_v3 | ⏳ |
-| nazhmi12/-XAUUSD-Hybrid-Trading-Bot-MT5- | FVG + OB + EMA200 M5 | ⏳ |
-| Kiran-Kumbar/XAU-USD-Signal-Bot | Sinyal SMC/FVG | ⏳ |
+| P1Piyush/XAUUSD-Trading-Bots | PDH/PDL (pdhl_bot.py), alpha_v3 | ✅ PDH/PDL M5: hanya 15 trade 2022-26, +5R (tidak bermakna); alpha_v3 tidak bisa diuji (butuh M1 + DXY; trailing memakai close bar yang sama = look-ahead) |
+| nazhmi12/-XAUUSD-Hybrid-Trading-Bot-MT5- | FVG + OB + EMA200 M5 | ✅ bot aslinya men-trade 4 pair forex, BUKAN emas; aturannya di XAUUSD M5: 89 trade, +7R (2022-25 −10R, 2025-26 +17R) |
+| Kiran-Kumbar/XAU-USD-Signal-Bot | Sinyal SMC/FVG | ✅ 3.454 sinyal, WR 32%, −126,4R, 0/2 periode positif |
 | Sheyswaggz/gold-signal-provider-trading-bot--xauusd- | Sinyal TA-Lib | ⏳ |
 | MarketForgeX/xauusd-ai-terminal | Aturan sinyal JS | ⏳ |
 | HillaryMurimi/mt5-gold-ai-trader | MA 5/20 (versi tanpa look-ahead) | ⏳ |
@@ -56,3 +56,4 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-27: C selesai. Tidak ada pencurian data di kode versi terakhir; risiko baru: server tanpa autentikasi
   (P1Piyush TCP/webhook 0.0.0.0, GifariKemal FastAPI POST filter), auto-push data ke GitHub (samw2591), alat crack (EA_SCALPER).
 - 2026-09-27: B 5/14 (Turnipnator ×2, BlamzKunG Advanced Grid, shamshyder, thanvish21) — semua negatif / tidak jalan.
+- 2026-09-27: B 8/14 (+ P1Piyush, nazhmi12, Kiran).
