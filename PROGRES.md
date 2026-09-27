@@ -12,6 +12,15 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 | C | Inventaris kemampuan SETIAP file (jaringan, file, proses, kode dinamis, kredensial, order) + tinjauan manual | ✅ selesai | `docs/AUDIT_SETIAP_FILE.md`, `docs/inventaris_file.csv` |
 | B | Uji ulang strategi yang belum diuji | ✅ selesai (14/14) | `research/github_popular3.py`, `docs/AUDIT_63_REPO.md` §3.2, `docs/hasil_github_popular3.txt` |
 
+## Putaran 2 (permintaan pengguna 27 Sep 2026: "A, B, C, D")
+
+| Tahap | Isi | Status | Hasil |
+|---|---|---|---|
+| A2 | Pindai ISI 267 zip di riwayat (rar tidak bisa: tanpa unrar) + audit 45 file dependensi di 28 repo | ⏳ | `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md` |
+| D2 | Fork & wiki dari 63 repo | ⏳ | `docs/AUDIT_FORK_WIKI.md` |
+| B2 | Strategi yang belum diuji: EA GifariKemal, EA EA_SCALPER, sisa samw2591, AnggaKay, damaradam04, nathanaela2002 | ⏳ | `research/github_popular4.py` |
+| C2 | Baca manual baris demi baris file inti 41 kandidat | ⏳ | `docs/TINJAUAN_MANUAL.md` |
+
 ## B — daftar strategi yang belum diuji
 
 | Repo | Strategi | Status |
