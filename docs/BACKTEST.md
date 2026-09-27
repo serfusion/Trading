@@ -176,3 +176,20 @@ python -m research.engine_ab m5_2020 F --from 2022-04-01 --to 2025-04-07 --risk 
 python -m research.engine_ab m5_2020 A --from 2022-04-01 --to 2025-04-07 --risk 0.25
 python -m research.combine
 ```
+
+## 11. Metode & risiko per sinyal — simulasi saldo (`python -m research.risk_compare`)
+
+Saldo majemuk, posisi 3 set boleh terbuka bersamaan, spread dihitung, swap belum, **tanpa** pengaman
+rugi harian/mingguan (jadi DD lebih dalam daripada engine bot). Format: hasil / DD terdalam.
+
+| Metode (risiko per sinyal) | 2012–17 | 2018–22 | 2025–26 |
+|---|---|---|---|
+| A-ensemble 5 runner, 0,5% | +59,6% / −25,7% | +56,6% / −20,4% | +47,0% / −9,6% |
+| F-ensemble semua sama, 0,5% | +36,2% / −23,5% | +59,2% / −15,8% | +37,1% / −10,1% |
+| F-ensemble ⭐ saja, 0,5% | +56,0% / −17,5% | +46,2% / −13,7% | +26,6% / −8,9% |
+| **F-ensemble ⭐ 0,5% + biasa 0,25%** | **+54,0% / −21,7%** | **+66,1% / −11,3%** | **+35,3% / −6,0%** |
+| F-ensemble ⭐ 1% + biasa 0,5% | +111,2% / −39,7% | +144,2% / −21,8% | +76,4% / −11,6% |
+| F-ensemble ⭐ 1,5% + biasa 0,75% | +162,0% / −54,4% | +224,9% / −31,5% | +122,7% / −17,0% |
+
+Rasio hasil/DD terbaik di 2 dari 3 periode: **⭐ penuh + biasa setengah**. Risiko 1,5% membuat DD 2012–17
+lebih dari −50% → terlalu besar. Tabel lot di aplikasi (Syarat & Ketentuan) memakai ⭐ 0,5% / biasa 0,25%.

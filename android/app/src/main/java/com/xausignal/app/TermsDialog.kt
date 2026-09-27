@@ -15,14 +15,20 @@ import androidx.compose.ui.unit.dp
 
 private const val SL_POINTS = 45.0      // contoh jarak SL (3 × ATR H1) dalam $
 private const val LEGS = 5
-private const val STAR_RISK = 0.015     // ⭐: rugi maks ±1,5% modal per sinyal
-private const val NORMAL_RISK = 0.0075  // biasa: ±0,75%
+private const val STAR_RISK = 0.005     // ⭐: rugi maks ±0,5% modal per sinyal (research/risk_compare.py)
+private const val NORMAL_RISK = 0.0025  // biasa: setengahnya
 
-/** Lot per posisi (akun Cent) supaya rugi saat SL ≈ persen risiko dari modal. */
+/** Lot per posisi (akun Cent) supaya rugi saat SL ≤ persen risiko dari modal; 0 = di bawah lot minimum. */
 fun suggestedLot(modalIdr: Double, idrRate: Double, risk: Double): Double {
     val usc = modalIdr / idrRate * 100.0
     val lossPer001 = LEGS * SL_POINTS            // USC per 0.01 lot untuk 5 posisi
-    return (Math.floor(usc * risk / lossPer001) / 100.0).coerceAtLeast(0.01)
+    return Math.floor(usc * risk / lossPer001 + 1e-9) / 100.0
+}
+
+private fun lotCell(lot: Double, star: Boolean): String = when {
+    lot >= 0.01 -> lotText(lot)
+    star -> "0.01*"
+    else -> "lewati"
 }
 
 @Composable
@@ -41,12 +47,13 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                     val modal = jt * 1_000_000.0
                     TableRow(
                         "Rp$jt jt",
-                        lotText(suggestedLot(modal, rate, NORMAL_RISK)),
-                        lotText(suggestedLot(modal, rate, STAR_RISK))
+                        lotCell(suggestedLot(modal, rate, NORMAL_RISK), false),
+                        lotCell(suggestedLot(modal, rate, STAR_RISK), true)
                     )
                 }
                 Text(
-                    "Risiko ±0,75% (biasa) & ±1,5% (⭐) modal per sinyal. SL lebih lebar → kecilkan lot.",
+                    "Rugi maks per sinyal ±0,5% modal (⭐) & ±0,25% (biasa). * = lot minimum, risiko sedikit " +
+                        "di atas 0,5%. lewati = modal terlalu kecil untuk sinyal biasa. SL lebih lebar → kecilkan lot.",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
             }
