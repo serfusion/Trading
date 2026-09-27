@@ -246,7 +246,7 @@ class TrendSystem:
         sl = entry - sign * risk
         tp1 = entry + sign * cfg.tp1_r * risk
         spec = e.spec
-        reason = e._trend_block_reason(now, tick, account)
+        reason = e._trend_block_reason(now, tick, account) or e.trend_bias_block(direction)
         n_legs, per_leg, warn, risk_money = 0, 0.0, "", 0.0
         money_per_lot = abs(entry - sl) * spec.tick_value / spec.tick_size
         if reason is None and cfg.fixed_leg_lot > 0:
@@ -284,6 +284,8 @@ class TrendSystem:
             "Setelah TP1 kena -> SL semua posisi sisa ke entry (SL+)",
             f"Alasan: {sig.note}",
         ]
+        if e.cfg.trend.bias_filter and reason is None:
+            lines.append(f"Filter SMC: bias struktur {cfg.bias_tf} searah {direction.label}")
         event = {"type": "signal", "id": key, "time": now, "mode": "trend", "set": self.name,
                  "dir": direction.label, "symbol": e.symbol, "entry": round(entry, 3), "sl": round(sl, 3),
                  "tp": round(tp1, 3), "tp1": round(tp1, 3), "atr": round(sig.atr, 3), "reason": sig.note,

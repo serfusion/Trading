@@ -6,14 +6,17 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
         ├─ ambil candle H1 XAU/USD dari Twelve Data
         ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
         │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
+        ├─ filter SMC: breakout hanya searah bias struktur H4; tidak entry akhir pekan/rollover
         ├─ simpan posisi virtual & riwayat di tabel Supabase
         ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi XAU Signal
         └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
-Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit): 343 sinyal (3 set), 48,7% untung,
-**+65,2R** (`python -m research.cloud_check`). Default hanya SINYAL; auto order 24 jam tanpa PC bisa
-dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).
+Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check`):
+dengan filter bias H4 (default) 281 sinyal, 47,7% untung, **+53,3R** (rata-rata +0,190R/sinyal); tanpa
+filter 344 sinyal, **+61,6R** (+0,179R/sinyal). Di periode ini filter mengurangi total R, di 2012–2022
+menambah (lihat [`BACKTEST.md`](BACKTEST.md) bagian 11). Default hanya SINYAL; auto order 24 jam tanpa PC
+bisa dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).
 
 ## Langkah 1 — Twelve Data (harga emas)
 1. Daftar gratis di <https://twelvedata.com> → Dashboard → salin **API Key**.
@@ -40,6 +43,7 @@ di aplikasi.
 | `SYMBOL` | (opsional) default `XAU/USD` |
 | `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
 | `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
+| `BIAS_FILTER` | (opsional) `0` = matikan filter bias struktur H4, default aktif (bisa juga dari aplikasi) |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -83,6 +87,8 @@ meneruskannya ke akun Exness. Aplikasi Android (tab **Auto**) hanya remote contr
 | `BROKER_SYMBOL` | simbol di MT5: `XAUUSDc` (Standard Cent, default), `XAUUSDm` (Standard), `XAUUSD` (Pro/Raw/Zero) — cek di Market Watch |
 | `CONTROL_KEY` | kata sandi acak panjang (beda dari `CRON_SECRET`) untuk aplikasi — rahasia |
 | `MAX_LEG_LOT` | (opsional) batas lot per posisi yang boleh diatur dari HP, default `0.10` |
+| `DAILY_LOSS_PCT` / `WEEKLY_LOSS_PCT` | (opsional) batas rugi harian / mingguan dari equity, default `3` / `6` (bisa diubah dari aplikasi) |
+| `MAX_SPREAD` | (opsional) spread broker maksimum saat order dibuka, default `0.50` |
 
 3. **Supabase → SQL Editor**: saat auto aktif, jalankan tick tiap 5 menit supaya TP1/SL+/TUTUP cepat
    (288 panggilan/hari, masih di bawah kuota gratis Twelve Data 800):
@@ -91,13 +97,20 @@ meneruskannya ke akun Exness. Aplikasi Android (tab **Auto**) hanya remote contr
    select cron.schedule('xau-tick', '*/5 * * * *', $$ select net.http_get(
      url := 'https://DOMAIN_KAMU/api/tick?key=CRON_SECRET_KAMU', timeout_milliseconds := 60000); $$);
    ```
-4. **Aplikasi (v1.2+) → tab Auto** → URL cloud (mis. `https://superfal-dev.com`) + `CONTROL_KEY` →
+4. **Aplikasi (v1.3+ untuk filter & batas rugi; v1.2+ untuk auto) → tab Auto** → URL cloud (mis. `https://superfal-dev.com`) + `CONTROL_KEY` →
    **Simpan & hubungkan**. Harus muncul saldo akun MetaApi dan "AUTO OFF".
 5. Atur **Lot/posisi** (akun Cent Rp5–10 jt: `0.01`) dan **Jumlah posisi** (`5`) → **Simpan lot** →
    nyalakan **Auto order**.
 
 Cara kerja order (sama dengan sinyal & bot PC, skema F):
 - Sinyal baru → 5 market order, semua dengan **SL sungguhan di server broker**; posisi #1 juga TP1 (1R).
+  SL/TP dihitung dari **harga broker** (ASK untuk BUY, BID untuk SELL) dengan jarak risiko yang sama
+  dengan sinyal; order dilewati bila spread > `MAX_SPREAD` atau harga broker beda > 0,5R dari feed.
+- **Batas rugi**: saldo dicatat di awal hari trading (17:00 New York) & awal minggu; bila equity turun
+  ≥ 3% dari saldo awal hari atau ≥ 6% dari awal minggu → order baru dihentikan sampai hari/minggu
+  berikutnya (sinyal tetap dikirim, posisi berjalan tetap dikelola). Status tampil di tab Auto.
+- Tidak ada entry baru saat akhir pekan, Jumat ≥ 15:00 NY, pembukaan Minggu, dan rollover 16:30–17:30 NY
+  (sama dengan bot PC); sinyal yang ditahan tampil sebagai "Dilewati" di aplikasi.
 - TP1 kena → SL 4 posisi sisa dipindah ke harga isi masing-masing ± 0,10 (SL+).
 - Sinyal TUTUP / SL virtual → semua posisi set itu ditutup.
 - Anti dobel: status disimpan ke Supabase **sebelum** order dikirim, order hanya dikirim bila set itu
@@ -109,8 +122,8 @@ Cara kerja order (sama dengan sinyal & bot PC, skema F):
 - Jangan jalankan bot PC `run --auto` di akun yang sama bersamaan (magic sama → saling mengelola).
 
 Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan header
-`X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
-`{"close_all": true}`.
+`X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}`,
+`{"bias_filter": false}`, `{"daily_loss_pct": 2, "weekly_loss_pct": 5}` atau `{"close_all": true}`.
 
 ## Catatan
 - Sinyal BUY/SELL hanya muncul saat breakout H1 (rata-rata ±1–2 kali per minggu). Status/harga

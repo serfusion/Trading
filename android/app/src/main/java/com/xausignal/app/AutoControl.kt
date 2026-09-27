@@ -29,6 +29,12 @@ data class AutoStatus(
     val currency: String,
     val positions: List<LivePosition>,
     val error: String,
+    val biasFilter: Boolean,
+    val bias: String,
+    val dailyLoss: Double,
+    val weeklyLoss: Double,
+    val guard: String,
+    val sessionBlock: String,
 )
 
 /**
@@ -98,6 +104,12 @@ object AutoControl {
             currency = acc?.optString("currency").orEmpty(),
             positions = positions,
             error = j.optString("error"),
+            biasFilter = c.optBoolean("bias_filter", true),
+            bias = j.optString("bias"),
+            dailyLoss = c.dbl("daily_loss_pct") ?: 3.0,
+            weeklyLoss = c.dbl("weekly_loss_pct") ?: 6.0,
+            guard = j.optString("guard"),
+            sessionBlock = j.optString("session_block"),
         )
     }
 }

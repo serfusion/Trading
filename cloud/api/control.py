@@ -1,7 +1,8 @@
 """Endpoint kontrol auto order untuk aplikasi Android.
 
-GET  /api/control            -> status (auto/jeda/lot, saldo & posisi dari MetaApi)
-POST /api/control  {"auto": true, "paused": false, "leg_lot": 0.01, "legs": 5, "close_all": false}
+GET  /api/control            -> status (auto/jeda/lot/filter/batas rugi, saldo & posisi dari MetaApi)
+POST /api/control  {"auto": true, "paused": false, "leg_lot": 0.01, "legs": 5, "bias_filter": true,
+                    "daily_loss_pct": 3, "weekly_loss_pct": 6, "close_all": false}
 Header wajib: X-Control-Key: <CONTROL_KEY>
 """
 import json
@@ -12,7 +13,7 @@ from http.server import BaseHTTPRequestHandler
 sys.path.insert(0, os.path.dirname(__file__))
 
 import _core  # noqa: E402
-from tick import executor_from_env  # noqa: E402
+from tick import config_from_env, executor_from_env  # noqa: E402
 
 
 def _store():
@@ -43,7 +44,7 @@ class handler(BaseHTTPRequestHandler):
             self._send(401, {"ok": False, "error": "Kunci kontrol salah atau CONTROL_KEY belum diisi"})
             return
         try:
-            self._send(200, _core.status(_store(), executor_from_env()))
+            self._send(200, _core.status(_store(), executor_from_env(), cfg=config_from_env()))
         except Exception as exc:  # noqa: BLE001
             self._send(500, {"ok": False, "error": str(exc)})
 
@@ -54,8 +55,9 @@ class handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length") or 0)
             changes = json.loads(self.rfile.read(length) or b"{}")
-            max_lot = float(os.environ.get("MAX_LEG_LOT", 0.10))
-            self._send(200, _core.apply_control(_store(), executor_from_env(), _pub(), changes, max_lot))
+            cfg = config_from_env()
+            self._send(200, _core.apply_control(_store(), executor_from_env(), _pub(), changes,
+                                                cfg["max_leg_lot"], cfg))
         except ValueError as exc:
             self._send(400, {"ok": False, "error": str(exc)})
         except Exception as exc:  # noqa: BLE001

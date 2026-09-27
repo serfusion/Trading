@@ -49,7 +49,7 @@ class CountingBroker(PaperBroker):
 
 
 def make(tmp_path, path=None, balance=1_000_000, trade=True, sets=((55, 20),), journal=None, broker=None,
-         start=60 * 4):
+         start=60 * 4, bias_filter=True):
     m15 = bars_from_path(np.repeat(path or trend_path(), 4), start="2026-09-14 00:00", freq="15min", wick=0.3)
     cfg = AppConfig()
     cfg.trade_enabled = trade
@@ -57,6 +57,7 @@ def make(tmp_path, path=None, balance=1_000_000, trade=True, sets=((55, 20),), j
     cfg.telegram.enabled = False
     cfg.trend.ensemble = [list(x) for x in sets]
     cfg.trend.state_dir = str(tmp_path / "trend")
+    cfg.trend.bias_filter = bias_filter
     broker = broker or CountingBroker({cfg.broker.symbol: m15}, "M15", XAU_SPEC, spread=0.2,
                                       balance=balance, start_index=start)
     pub = Pub()
@@ -168,7 +169,7 @@ def test_stop_loss_before_tp1_loses_about_risk(tmp_path):
     flat = [4300 + 2 * np.sin(i / 2) for i in range(80)]
     top = flat[-1] + 4                           # breakout kecil, lalu langsung jatuh
     path = flat + [top] + list(np.linspace(top, top - 60, 3)) + [top - 60] * 20
-    eng, broker, _ = make(tmp_path, path=path, balance=100_000)
+    eng, broker, _ = make(tmp_path, path=path, balance=100_000, bias_filter=False)  # uji mekanisme SL
     step_all(eng, broker)
     buys = [c for c in broker.market_calls if c[1] == Direction.BUY]
     assert len(buys) == 5

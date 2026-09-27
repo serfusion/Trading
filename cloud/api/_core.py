@@ -4,6 +4,10 @@ Skema F-ensemble, IDENTIK dengan bot (xau_bot/trend.py + trend_ensemble.py; diuj
 - 3 set Donchian H1 (40/15, 55/20, 80/30). BUY bila close > high N bar sebelumnya, SELL kebalikannya.
 - SL = entry -/+ 3 x ATR(20). Tiap sinyal = 5 posisi: posisi #1 TP1 = 1R, sisanya hold.
 - TP1 kena -> SL posisi sisa ke entry (SL+). TUTUP saat close menembus channel exit.
+- Filter SMC (default ON): breakout hanya diambil bila searah bias struktur H4 (BOS terakhir), tidak
+  entry saat akhir pekan / Jumat sore / pembukaan Minggu / rollover (sama dengan xau_bot/sessions.py).
+Pengaman auto order: spread & harga broker dicek, SL/TP dihitung dari harga broker, batas rugi
+harian/mingguan dari equity akun (order baru dihentikan, posisi berjalan tetap dikelola).
 """
 from __future__ import annotations
 
@@ -14,9 +18,14 @@ import urllib.request
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
-CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 150, "tf_minutes": 60,
+CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 1300, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
-       "leg_lot": 0.01}
+       "leg_lot": 0.01,
+       # filter SMC tervalidasi (research/trend_filters.py): bias struktur H4, swing 3, 300 bar H4
+       "bias_filter": True, "bias_hours": 4, "bias_swing": 3, "bias_bars": 300,
+       # pengaman auto order
+       "daily_loss_pct": 3.0, "weekly_loss_pct": 6.0, "max_spread": 0.50}
+BIAS_NAMES = {1: "BULLISH", -1: "BEARISH", 0: "NETRAL"}
 
 
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
@@ -94,6 +103,107 @@ def evaluate(closed: list[Bar], position: str | None, cfg: dict = CFG) -> dict:
     return out
 
 
+def swing_flags(vals: list[float], length: int, high: bool) -> list[bool]:
+    """Sama dengan xau_bot.smc.swing_mask: lebih ekstrem dari `length` bar kiri (strict) & kanan (>=)."""
+    n = len(vals)
+    out = [False] * n
+    for i in range(length, n - length):
+        left, right = vals[i - length:i], vals[i + 1:i + length + 1]
+        out[i] = (vals[i] > max(left) and vals[i] >= max(right)) if high else (
+            vals[i] < min(left) and vals[i] <= min(right))
+    return out
+
+
+def structure_bias(bars: list[Bar], length: int = 3) -> int:
+    """Sama dengan xau_bot.smc.structure_bias: +1 BOS terakhir ke atas, -1 ke bawah, 0 belum jelas."""
+    if len(bars) < 2 * length + 2:
+        return 0
+    hs, ls, cs = [b.h for b in bars], [b.l for b in bars], [b.c for b in bars]
+    hm, lm = swing_flags(hs, length, True), swing_flags(ls, length, False)
+    state, last_h, last_l = 0, None, None
+    for i in range(len(bars)):
+        k = i - length
+        if k >= 0:
+            if hm[k]:
+                last_h = hs[k]
+            if lm[k]:
+                last_l = ls[k]
+        if last_h is not None and cs[i] > last_h:
+            state, last_h = 1, None
+        elif last_l is not None and cs[i] < last_l:
+            state, last_l = -1, None
+    return state
+
+
+def htf_bars(closed: list[Bar], now: datetime, hours: int = 4) -> list[Bar]:
+    """Gabungkan bar H1 tertutup jadi bar H4 (00/04/08.. UTC, sama dengan MT5 Exness & pandas resample);
+    hanya bar H4 yang sudah tertutup."""
+    out: list[Bar] = []
+    for b in closed:
+        start = b.t.replace(hour=b.t.hour - b.t.hour % hours, minute=0, second=0, microsecond=0)
+        if start + timedelta(hours=hours) > now:
+            break
+        if out and out[-1].t == start:
+            last = out[-1]
+            out[-1] = Bar(start, last.o, max(last.h, b.h), min(last.l, b.l), b.c)
+        else:
+            out.append(Bar(start, b.o, b.h, b.l, b.c))
+    return out
+
+
+def ny_time(t: datetime) -> datetime:
+    """UTC -> jam New York (aturan DST AS) tanpa database zona waktu."""
+    t = t.astimezone(timezone.utc)
+    mar1, nov1 = datetime(t.year, 3, 1, tzinfo=timezone.utc), datetime(t.year, 11, 1, tzinfo=timezone.utc)
+    dst_start = mar1 + timedelta(days=(6 - mar1.weekday()) % 7 + 7, hours=7)   # Minggu ke-2 Maret 02:00 NY
+    dst_end = nov1 + timedelta(days=(6 - nov1.weekday()) % 7, hours=6)          # Minggu ke-1 Nov 02:00 NY
+    return (t + timedelta(hours=-4 if dst_start <= t < dst_end else -5)).replace(tzinfo=None)
+
+
+def trading_day(t: datetime) -> str:
+    """Hari trading forex (mulai 17:00 New York), sama dengan xau_bot.sessions.trading_day."""
+    return (ny_time(t) + timedelta(hours=7)).date().isoformat()
+
+
+def entry_block_reason(t: datetime) -> str | None:
+    """Sama dengan xau_bot.sessions.SessionClock.entry_block_reason (konfigurasi default)."""
+    ny = ny_time(t)
+    wd, m = ny.weekday(), ny.hour * 60 + ny.minute
+    if wd == 5 or (wd == 4 and m >= 17 * 60):
+        return "Pasar tutup (akhir pekan)"
+    if wd == 6 and m < 18 * 60:
+        return "Pembukaan pasar Minggu (gap/spread)"
+    if wd == 4 and m >= 15 * 60:
+        return "Jumat sore (tidak entry baru)"
+    if 16 * 60 + 30 <= m < 17 * 60 + 30:
+        return "Rollover harian (spread lebar)"
+    return None
+
+
+def loss_guard(guard: dict, acc: dict, now: datetime, daily_pct: float, weekly_pct: float) -> dict:
+    """Batas rugi harian/mingguan dari equity akun (saldo dicatat di tick pertama hari/minggu trading).
+    Return guard baru; guard['blocked'] berisi alasan bila order baru harus dihentikan."""
+    guard = dict(guard or {})
+    bal, eq = acc.get("balance"), acc.get("equity")
+    if bal is None or eq is None:
+        guard["blocked"] = ""
+        return guard
+    day = trading_day(now)
+    y, w, _ = datetime.fromisoformat(day).isocalendar()
+    week = f"{y}-W{w:02d}"
+    if guard.get("day") != day:
+        guard.update(day=day, day_balance=bal)
+    if guard.get("week") != week:
+        guard.update(week=week, week_balance=bal)
+    blocked = ""
+    if daily_pct and eq <= guard["day_balance"] * (1 - daily_pct / 100):
+        blocked = f"Batas rugi harian {daily_pct:g}% tercapai (equity {eq:.2f} dari {guard['day_balance']:.2f})"
+    elif weekly_pct and eq <= guard["week_balance"] * (1 - weekly_pct / 100):
+        blocked = f"Batas rugi mingguan {weekly_pct:g}% tercapai (equity {eq:.2f} dari {guard['week_balance']:.2f})"
+    guard["blocked"] = blocked
+    return guard
+
+
 # ---------------------------------------------------------------- layanan luar
 class TwelveData:
     def __init__(self, api_key: str, symbol: str = "XAU/USD"):
@@ -157,6 +267,11 @@ class MetaApi:
 
     def account(self) -> dict:
         return http("GET", self.base + "/account-information", self.headers) or {}
+
+    def price(self) -> dict:
+        """Harga broker saat ini: {'bid': .., 'ask': ..}."""
+        sym = urllib.parse.quote(self.symbol, safe="")
+        return http("GET", f"{self.base}/symbols/{sym}/current-price", self.headers) or {}
 
     def positions(self, magic: int | None = None) -> list[dict]:
         out = http("GET", self.base + "/positions", self.headers) or []
@@ -228,6 +343,21 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     legs_n = max(1, min(int(control.get("legs") or cfg["legs"]), 10))
     leg_lot = min(float(control.get("leg_lot") or cfg["leg_lot"]), float(cfg.get("max_leg_lot", 0.10)))
     lot_text = f"{legs_n} x {leg_lot}"
+    bias_on = bool(control.get("bias_filter", cfg.get("bias_filter", True)))
+    bias = structure_bias(htf_bars(closed, now, cfg.get("bias_hours", 4))[-cfg.get("bias_bars", 300):],
+                          cfg.get("bias_swing", 3))
+    state["bias"] = bias
+    acc, acc_error = None, ""
+    if executor is not None:
+        try:
+            acc = executor.account() or {}
+            state["guard"] = loss_guard(state.get("guard") or {}, acc, now,
+                                        float(control.get("daily_loss_pct", cfg.get("daily_loss_pct", 3.0))),
+                                        float(control.get("weekly_loss_pct", cfg.get("weekly_loss_pct", 6.0))))
+        except Exception as exc:  # noqa: BLE001
+            acc, acc_error = None, str(exc)
+            events.append(f"MetaApi error: {exc}")
+    guard_block = (state.get("guard") or {}).get("blocked", "")
 
     def live_close_all(name: str, magic: int, why: str) -> None:
         for p in executor.positions(magic):
@@ -312,6 +442,68 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                     return None
         return v
 
+    def open_signal(name, idx, magic, entry_p, s, d, sign, risk, sl, tp1, key, ev, text) -> dict:
+        """Sinyal lolos filter: kirim ke aplikasi, buat posisi virtual, lalu (bila auto ON) order sungguhan."""
+        s.pop("last_skip", None)
+        if bias_on:
+            text += f"\nFilter SMC: bias struktur H4 {BIAS_NAMES[bias]} searah"
+        pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
+        store.log("signal", ev)
+        events.append(f"{name} SINYAL {d} @ {price:.2f}")
+        v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
+             "legs": legs_n, "be_done": False, "tp1_hit": False,
+             "bar_close": iso(closed[-1].t + tf)}
+        existing = live_positions(magic) if live else []
+        why = ""
+        if live and existing != []:
+            why = "MetaApi tidak bisa dihubungi" if existing is None else f"masih ada {len(existing)} posisi lama"
+        elif live and guard_block:
+            why = guard_block
+        l_sl, l_tp1 = sl, tp1
+        if live and not why:
+            # SL/TP dari harga broker (bukan feed) + cek spread & selisih harga
+            try:
+                q = executor.price()
+                bid, ask = float(q["bid"]), float(q["ask"])
+            except Exception as exc:  # noqa: BLE001 - harga broker gagal -> pakai harga feed
+                bid = ask = None
+                events.append(f"{name} harga broker tidak tersedia ({exc}), SL dari harga feed")
+            if bid is not None:
+                fill = ask if d == "BUY" else bid
+                max_spread = float(control.get("max_spread", cfg.get("max_spread", 0.50)))
+                if ask - bid > max_spread:
+                    why = f"spread broker {ask - bid:.2f} > {max_spread:.2f}"
+                elif abs(fill - price) > 0.5 * risk:
+                    why = f"harga broker {fill:.2f} beda jauh dari feed {price:.2f}"
+                else:
+                    l_sl, l_tp1 = fill - sign * risk, fill + sign * cfg["tp1_r"] * risk
+        if live and why:
+            info = f"⚠️ Auto order {name} dilewati: {why}. Sinyal tetap berlaku (manual)."
+            pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
+                        info, "Auto order", 4, ["warning"])
+            events.append(info)
+        elif live:
+            # simpan dulu SEBELUM kirim order -> tidak mungkin dobel walau fungsi terputus
+            s["virtual"] = v
+            systems[name] = s
+            state["systems"] = systems
+            store.save_state(state)
+            opened = 0
+            for i in range(legs_n):
+                res = executor.market(d, leg_lot, l_sl, l_tp1 if (i == 0 and legs_n >= 2) else None, magic,
+                                      f"F{entry_p}L{i + 1}", f"{closed[-1].t:%m%d%H}{idx}{i}")
+                if not res["ok"]:
+                    events.append(f"{name} LIVE leg {i + 1} GAGAL: {res.get('message') or res.get('stringCode')}")
+                    break
+                opened += 1
+            v["live_legs"] = opened
+            info = f"🤖 Auto order {name}: {opened}/{legs_n} posisi {d} {leg_lot} lot terbuka"
+            pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
+                        info, "Auto order", 4, ["robot"])
+            store.log("live_open", {"id": key, "opened": opened, "lot": leg_lot})
+            events.append(info)
+        return v
+
     trends = []
     for idx, (entry_p, exit_p) in enumerate(cfg["sets"]):
         name = f"T{entry_p}/{exit_p}"
@@ -342,39 +534,18 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
-                pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
-                store.log("signal", ev)
-                events.append(f"{name} SINYAL {d} @ {price:.2f}")
-                v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False,
-                     "bar_close": iso(closed[-1].t + tf)}
-                existing = live_positions(magic) if live else []
-                if live and existing != []:
-                    why = "MetaApi tidak bisa dihubungi" if existing is None else f"masih ada {len(existing)} posisi lama"
-                    info = f"⚠️ Auto order {name} dilewati: {why}. Sinyal tetap berlaku (manual)."
-                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
-                                info, "Auto order", 4, ["warning"])
-                    events.append(info)
-                elif live:
-                    # simpan dulu SEBELUM kirim order -> tidak mungkin dobel walau fungsi terputus
-                    s["virtual"] = v
-                    systems[name] = s
-                    state["systems"] = systems
-                    store.save_state(state)
-                    opened = 0
-                    for i in range(legs_n):
-                        res = executor.market(d, leg_lot, sl, tp1 if (i == 0 and legs_n >= 2) else None, magic,
-                                              f"F{entry_p}L{i + 1}", f"{closed[-1].t:%m%d%H}{idx}{i}")
-                        if not res["ok"]:
-                            events.append(f"{name} LIVE leg {i + 1} GAGAL: {res.get('message') or res.get('stringCode')}")
-                            break
-                        opened += 1
-                    v["live_legs"] = opened
-                    info = f"🤖 Auto order {name}: {opened}/{legs_n} posisi {d} {leg_lot} lot terbuka"
-                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
-                                info, "Auto order", 4, ["robot"])
-                    store.log("live_open", {"id": key, "opened": opened, "lot": leg_lot})
-                    events.append(info)
+                block = entry_block_reason(now)
+                if block is None and bias_on and bias != sign:
+                    block = f"Bias struktur H4 {BIAS_NAMES[bias]} tidak searah {d} (filter SMC)"
+                if block is not None:
+                    if s.get("last_skip") != f"{d}|{block}":   # satu pemberitahuan per alasan
+                        s["last_skip"] = f"{d}|{block}"
+                        pub.publish({**ev, "status": "skipped", "note": block}, f"{text}\n⛔ Dilewati: {block}",
+                                    "Sinyal dilewati", 2)
+                        store.log("skip", {"id": key, "set": name, "reason": block})
+                        events.append(f"{name} {d} dilewati: {block}")
+                else:
+                    v = open_signal(name, idx, magic, entry_p, s, d, sign, risk, sl, tp1, key, ev, text)
             s["trend"] = sig["state"]
         try:
             v = live_sync(name, magic, v)
@@ -389,19 +560,26 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     state["price"] = price
     store.save_state(state)
     trend_text = " | ".join(trends)
+    if bias_on:
+        trend_text = f"Bias H4: {BIAS_NAMES[bias]} | {trend_text}"
     mode = "AUTO (cloud)" if live else ("SINYAL (auto dijeda)" if control.get("auto") else "SINYAL (cloud)")
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
-          "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": []}
+          "trend": trend_text, "session": "cloud", "block": entry_block_reason(now) or "", "news": "-",
+          "currency": "", "positions": []}
     if executor is not None:
-        try:
-            acc = executor.account()
+        if acc is None:
+            hb["block"] = f"MetaApi: {acc_error}"
+        else:
             hb.update(balance=acc.get("balance"), equity=acc.get("equity"), currency=acc.get("currency", ""))
-            hb["positions"] = [{"ticket": p["id"], "dir": "BUY" if p.get("type") == "POSITION_TYPE_BUY" else "SELL",
-                                "volume": p.get("volume"), "open": p.get("openPrice"), "sl": p.get("stopLoss"),
-                                "tp": p.get("takeProfit"), "profit": p.get("profit")}
-                               for p in executor.positions() if ours(p)]
-        except Exception as exc:  # noqa: BLE001
-            hb["block"] = f"MetaApi: {exc}"
+            if guard_block and live:
+                hb["block"] = guard_block
+            try:
+                hb["positions"] = [{"ticket": p["id"], "dir": "BUY" if p.get("type") == "POSITION_TYPE_BUY" else "SELL",
+                                    "volume": p.get("volume"), "open": p.get("openPrice"), "sl": p.get("stopLoss"),
+                                    "tp": p.get("takeProfit"), "profit": p.get("profit")}
+                                   for p in executor.positions() if ours(p)]
+            except Exception as exc:  # noqa: BLE001
+                hb["block"] = f"MetaApi: {exc}"
     pub.publish(hb)
     return {"ok": True, "price": price, "auto": live, "last_closed_bar": iso(closed[-1].t) if closed else None,
             "open": {k: v["virtual"] for k, v in systems.items() if v.get("virtual")},
@@ -409,7 +587,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
 
 
 # ------------------------------------------------------------------ kontrol
-def apply_control(store, executor, pub, changes: dict, max_leg_lot: float = 0.10) -> dict:
+def apply_control(store, executor, pub, changes: dict, max_leg_lot: float = 0.10, cfg: dict = CFG) -> dict:
     """Ubah pengaturan auto-order dari aplikasi. Return status terbaru."""
     control = dict(store.get_control() or {})
     notes = []
@@ -431,6 +609,16 @@ def apply_control(store, executor, pub, changes: dict, max_leg_lot: float = 0.10
             raise ValueError("Jumlah posisi harus 1 - 10")
         control["legs"] = legs
         notes.append(f"{legs} posisi")
+    if "bias_filter" in changes:
+        control["bias_filter"] = bool(changes["bias_filter"])
+        notes.append("Filter bias H4 " + ("ON" if control["bias_filter"] else "OFF"))
+    for key, label in (("daily_loss_pct", "harian"), ("weekly_loss_pct", "mingguan")):
+        if key in changes:
+            pct = round(float(changes[key]), 1)
+            if not 0.5 <= pct <= 50:
+                raise ValueError(f"Batas rugi {label} harus 0.5 - 50%")
+            control[key] = pct
+            notes.append(f"Batas rugi {label} {pct:g}%")
     closed = 0
     if changes.get("close_all"):
         if executor is None:
@@ -446,15 +634,22 @@ def apply_control(store, executor, pub, changes: dict, max_leg_lot: float = 0.10
         text = "⚙️ " + ", ".join(notes) + " (dari aplikasi)"
         pub.publish({"type": "info", "time": control["updated"], "text": text}, text, "Kontrol auto order", 3,
                     ["gear"])
-    return status(store, executor, control)
+    return status(store, executor, control, cfg)
 
 
-def status(store, executor, control: dict | None = None) -> dict:
+def status(store, executor, control: dict | None = None, cfg: dict = CFG) -> dict:
     control = control if control is not None else (store.get_control() or {})
+    state = store.get_state() or {}
     out = {"ok": True, "control": {"auto": bool(control.get("auto")), "paused": bool(control.get("paused")),
-                                   "leg_lot": control.get("leg_lot", CFG["leg_lot"]),
-                                   "legs": control.get("legs", CFG["legs"])},
-           "executor": executor is not None}
+                                   "leg_lot": control.get("leg_lot", cfg["leg_lot"]),
+                                   "legs": control.get("legs", cfg["legs"]),
+                                   "bias_filter": bool(control.get("bias_filter", cfg.get("bias_filter", True))),
+                                   "daily_loss_pct": control.get("daily_loss_pct", cfg.get("daily_loss_pct", 3.0)),
+                                   "weekly_loss_pct": control.get("weekly_loss_pct", cfg.get("weekly_loss_pct", 6.0))},
+           "executor": executor is not None,
+           "bias": BIAS_NAMES.get(state.get("bias", 0), "NETRAL"),
+           "guard": (state.get("guard") or {}).get("blocked", ""),
+           "session_block": entry_block_reason(datetime.now(timezone.utc)) or ""}
     if executor is not None:
         try:
             acc = executor.account()

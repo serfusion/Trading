@@ -58,6 +58,8 @@ fun AutoTab(money: MoneySettings) {
     var message by remember { mutableStateOf("") }
     var lot by remember { mutableStateOf("") }
     var legs by remember { mutableStateOf("") }
+    var daily by remember { mutableStateOf("") }
+    var weekly by remember { mutableStateOf("") }
     var confirm by remember { mutableStateOf<Confirm?>(null) }
 
     suspend fun load(changes: JSONObject?) {
@@ -69,6 +71,8 @@ fun AutoTab(money: MoneySettings) {
             status = s
             if (changes != null || lot.isBlank()) lot = s.legLot.toString()
             if (changes != null || legs.isBlank()) legs = s.legs.toString()
+            if (changes != null || daily.isBlank()) daily = s.dailyLoss.toString()
+            if (changes != null || weekly.isBlank()) weekly = s.weeklyLoss.toString()
             message = if (changes == null) "" else "✅ Tersimpan di cloud"
         } catch (e: Exception) {
             message = "❌ ${e.message ?: e.javaClass.simpleName}"
@@ -147,6 +151,21 @@ fun AutoTab(money: MoneySettings) {
         val s = status
         if (s != null && !editing) {
             item { AccountCard(s) }
+            item {
+                Card(modifier = Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        SwitchRow(
+                            "Filter bias struktur H4 (SMC)",
+                            "Bias H4 sekarang: ${s.bias.ifBlank { "-" }}. ON = hanya breakout searah BOS H4 " +
+                                "(backtest: profit factor lebih tinggi, sinyal ±18% lebih sedikit)",
+                            s.biasFilter, !busy
+                        ) { on -> send(JSONObject().put("bias_filter", on)) }
+                        if (s.sessionBlock.isNotBlank()) {
+                            Text("Entry baru ditahan: ${s.sessionBlock}", style = MaterialTheme.typography.bodySmall)
+                        }
+                    }
+                }
+            }
             if (s.executor) {
                 item {
                     Card(modifier = Modifier.fillMaxWidth()) {
@@ -185,6 +204,34 @@ fun AutoTab(money: MoneySettings) {
                                     send(JSONObject().put("leg_lot", l).put("legs", n))
                                 }
                             }) { Text("Simpan lot") }
+                            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                OutlinedTextField(
+                                    value = daily, onValueChange = { daily = it }, singleLine = true,
+                                    label = { Text("Rugi harian maks %") },
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                                    modifier = Modifier.weight(1f)
+                                )
+                                OutlinedTextField(
+                                    value = weekly, onValueChange = { weekly = it }, singleLine = true,
+                                    label = { Text("Mingguan maks %") },
+                                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
+                                    modifier = Modifier.weight(1f)
+                                )
+                            }
+                            OutlinedButton(enabled = !busy, onClick = {
+                                val d = daily.replace(",", ".").toDoubleOrNull()
+                                val w = weekly.replace(",", ".").toDoubleOrNull()
+                                if (d == null || w == null) {
+                                    message = "❌ Batas rugi tidak valid"
+                                } else {
+                                    send(JSONObject().put("daily_loss_pct", d).put("weekly_loss_pct", w))
+                                }
+                            }) { Text("Simpan batas rugi") }
+                            Text(
+                                "Equity turun melewati batas -> order baru dihentikan sampai hari/minggu " +
+                                    "berikutnya; posisi berjalan tetap dikelola (SL, TP1, SL+, TUTUP).",
+                                style = MaterialTheme.typography.bodySmall
+                            )
                             Text(
                                 "Contoh akun Cent Rp5–10 jt: 0.01 x 5. SL ±\$50 -> rugi maks ±250 " +
                                     "${s.currency.ifBlank { money.currency }} per sinyal.",
@@ -278,6 +325,11 @@ private fun AccountCard(s: AutoStatus) {
             Text(mode, fontWeight = FontWeight.Bold, color = if (s.auto && !s.paused) BuyColor else Gold)
             Text("Saldo ${fmt(s.balance)} ${s.currency} • Equity ${fmt(s.equity)} ${s.currency}")
             Text("${s.legs} posisi x ${s.legLot} lot per sinyal")
+            Text(
+                "Pengaman: rugi harian maks ${s.dailyLoss}% • mingguan ${s.weeklyLoss}%",
+                style = MaterialTheme.typography.bodySmall
+            )
+            if (s.guard.isNotBlank()) Text("⛔ ${s.guard}", color = SellColor, fontWeight = FontWeight.Bold)
             if (s.error.isNotBlank()) Text(s.error, color = SellColor, style = MaterialTheme.typography.bodySmall)
         }
     }

@@ -21,6 +21,7 @@ if __name__ == "__main__":
     ap.add_argument("--balance", type=float, default=10_000)
     ap.add_argument("--risk", type=float, default=1.0)
     ap.add_argument("--spread", type=float)
+    ap.add_argument("--no-bias", action="store_true", help="matikan filter bias struktur H4")
     a = ap.parse_args()
     df, tf, _, spread, _ = dataset(a.name)
     if tf == "M5":
@@ -35,7 +36,9 @@ if __name__ == "__main__":
     cfg.strategy.bars = 60
     cfg.risk.risk_pct = a.risk
     cfg.trend.risk_pct_per_set = a.risk
-    cfg.trend.state_dir = "/tmp/xau_state_" + a.name + (a.f or "") + (a.t or "")
+    cfg.trend.bias_filter = not a.no_bias
+    cfg.trend.state_dir = (f"/tmp/xau_state_{a.name}_{a.f or ''}_{a.t or ''}_r{a.risk}"
+                           + ("_nb" if a.no_bias else ""))
     import shutil; shutil.rmtree(cfg.trend.state_dir, ignore_errors=True)
     cfg.risk.max_spread = 5.0
     t0 = time.time()

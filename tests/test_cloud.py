@@ -88,14 +88,17 @@ def run_ticks(df, every_minutes=30, double=False, cfg=None):
     return store, pub
 
 
-ONE_SET = {**_core.CFG, "sets": [(55, 20)]}
+ONE_SET = {**_core.CFG, "sets": [(55, 20)], "bias_filter": False}   # uji mekanisme SL/TP1 murni
 
 
 def test_tick_flow_ensemble_signal_close_and_idempotent():
     df = bars_from_path(trend_path(), start="2026-09-14 00:00", freq="1h", wick=0.5)
     store, pub = run_ticks(df)
-    sig = [e for e in pub.events if e["type"] == "signal"]
+    sig = [e for e in pub.events if e["type"] == "signal" and e["status"] == "signal"]
     cls = [e for e in pub.events if e["type"] == "close"]
+    skipped = [e for e in pub.events if e["type"] == "signal" and e["status"] == "skipped"]
+    assert any("Bias struktur H4" in e["note"] for e in skipped)       # filter SMC aktif (default)
+    assert len({(e["set"], e["note"]) for e in skipped}) == len(skipped)  # tiap alasan hanya sekali
     assert sig and {e["set"] for e in sig} >= {"T40/15", "T55/20"}
     ids = {e["id"] for e in sig}
     assert all(c["id"] in ids for c in cls)                 # setiap TUTUP punya sinyal
@@ -108,7 +111,7 @@ def test_tick_flow_ensemble_signal_close_and_idempotent():
     assert any(e["type"] == "info" and "TP1" in e["text"] for e in pub.events)
     assert any(e["type"] == "heartbeat" for e in pub.events)
     _, pub2 = run_ticks(df, double=True)
-    assert [e["id"] for e in pub2.events if e["type"] == "signal"] == [e["id"] for e in sig]
+    assert [e["id"] for e in pub2.events if e["type"] == "signal" and e["status"] == "signal"] == [e["id"] for e in sig]
 
 
 def test_stop_loss_before_tp1_is_minus_one_r():

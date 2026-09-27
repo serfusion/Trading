@@ -95,6 +95,12 @@ class TrendConfig:
     max_risk_pct_per_set: float = 2.0   # pengaman lot tetap: lewati sinyal bila risiko > ini (% saldo)
     max_orders_per_minute: int = 20
     state_dir: str = "data/trend"
+    # Fitur SMC yang lolos uji (research/trend_filters.py, docs/BACKTEST.md bagian 11): breakout hanya
+    # diambil bila searah bias struktur H4 (arah BOS terakhir). Model entry SMC rugi (bagian 10).
+    bias_filter: bool = True
+    bias_tf: str = "H4"
+    bias_swing: int = 3
+    bias_bars: int = 300
 
 
 @dataclass

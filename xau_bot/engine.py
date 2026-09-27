@@ -15,7 +15,7 @@ from .models import Direction, EngineStatus, PendingOrder, Position, Setup, Tick
 from .news import NewsFilter
 from .risk import RiskGuard, lot_size, split_volume
 from .sessions import SessionClock, fmt_wib, trading_day
-from .smc import find_swings
+from .smc import find_swings, structure_bias
 from .strategy import TF_MINUTES, MarketContext, SmcStrategy
 from .publish import Publisher
 from .telegram import Notifier
@@ -23,6 +23,9 @@ from .trend import TrendStrategy
 from .trend_ensemble import OrderThrottle, TrendSystem
 
 log = logging.getLogger(__name__)
+
+
+BIAS_NAMES = {1: "BULLISH", -1: "BEARISH", 0: "NETRAL"}
 
 
 def _dir(value: str) -> Direction:
@@ -66,6 +69,8 @@ class Engine:
         self.handlers: dict[str, Callable[[str], str]] = {}
         self._closed_cache: tuple[pd.Timestamp, list] | None = None
         self._skip_notified: set[str] = set()
+        self._bias_cache: tuple[pd.Timestamp, int] | None = None
+        self._bias_bar: pd.Timestamp | None = None
 
     # ---------------------------------------------------------------- logging
     def log(self, message: str, level: str = "INFO", notify: bool = False) -> None:
@@ -103,7 +108,8 @@ class Engine:
             t = self.cfg.trend
             sets = ", ".join(f"{a}/{b}" for a, b in t.ensemble)
             parts.append(f"TREND {t.timeframe} F-ensemble [{sets}] {t.legs} posisi, TP1 {t.tp1_r}R, "
-                         f"SL {t.stop_atr}xATR, risiko {t.risk_pct_per_set}%/set")
+                         f"SL {t.stop_atr}xATR, risiko {t.risk_pct_per_set}%/set"
+                         + (f", filter bias struktur {t.bias_tf}" if t.bias_filter else ""))
         if self.use_smc:
             parts.append(f"SMC {self.cfg.strategy.entry_tf} (SMT: {', '.join(self.smt_symbols) or '-'})")
         acct = f"akun {'CENT ' if self.cent else ''}{self.currency}"
@@ -170,6 +176,9 @@ class Engine:
         self._daily_report(now)
         if self.use_trend:
             bars_t = self.broker.rates(self.symbol, self.cfg.trend.timeframe, self.cfg.trend.bars)
+            if self.cfg.trend.bias_filter and not bars_t.empty and bars_t.index[-1] != self._bias_bar:
+                self._bias_bar = bars_t.index[-1]
+                self.trend_bias()  # sekali per bar trend baru -> status & aplikasi selalu menampilkan bias
             for system in self.trend_systems:
                 system.manage(now, tick, lo, hi)
                 system.on_bar(now, tick, account, bars_t)
@@ -355,7 +364,30 @@ class Engine:
 
     # ----------------------------------------------------------------- trend
     def _trend_states(self) -> str:
-        return " | ".join(f"{t.name}: {t.strategy.state}" for t in self.trend_systems)
+        states = " | ".join(f"{t.name}: {t.strategy.state}" for t in self.trend_systems)
+        if self.cfg.trend.bias_filter and self._bias_cache is not None:
+            states = f"Bias {self.cfg.trend.bias_tf}: {BIAS_NAMES[self._bias_cache[1]]} | {states}"
+        return states
+
+    def trend_bias(self) -> int:
+        """Bias struktur TF bias (arah BOS terakhir) dari bar yang sudah tertutup; dihitung ulang per bar baru."""
+        t = self.cfg.trend
+        bars = self.broker.rates(self.symbol, t.bias_tf, t.bias_bars)
+        if bars.empty:
+            return 0
+        if self._bias_cache is None or self._bias_cache[0] != bars.index[-1]:
+            self._bias_cache = (bars.index[-1], structure_bias(bars, t.bias_swing))
+        return self._bias_cache[1]
+
+    def trend_bias_block(self, direction: Direction) -> str | None:
+        """Filter SMC untuk trend: breakout berlawanan / tanpa bias struktur H4 dilewati."""
+        if not self.cfg.trend.bias_filter:
+            return None
+        bias = self.trend_bias()
+        if bias == int(direction):
+            return None
+        return (f"Bias struktur {self.cfg.trend.bias_tf} {BIAS_NAMES[bias]} tidak searah {direction.label} "
+                f"(filter SMC)")
 
     def _trend_block_reason(self, now, tick: Tick, account) -> str | None:
         if self.paused:

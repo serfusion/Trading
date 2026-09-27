@@ -40,15 +40,21 @@ class Store:
 class FakeMetaApi:
     """Meniru MetaApi + server broker: SL/TP dieksekusi saat harga menyentuh (pakai bar terakhir)."""
 
-    def __init__(self, fail_on_leg=None):
+    def __init__(self, fail_on_leg=None, spread=0.2, offset=0.0):
         self.positions_ = []
         self.calls = []
         self.fail_on_leg = fail_on_leg
         self.next_id = 1
         self.closed = []
+        self.last = 0.0                     # harga feed terakhir (diisi run())
+        self.spread, self.offset = spread, offset
 
     def account(self):
         return {"balance": 30000.0, "equity": 30000.0, "currency": "USC"}
+
+    def price(self):
+        bid = self.last + self.offset
+        return {"bid": bid, "ask": bid + self.spread}
 
     def positions(self, magic=None):
         return [dict(p) for p in self.positions_ if magic is None or p["magic"] == magic]
@@ -59,7 +65,7 @@ class FakeMetaApi:
             return {"ok": False, "message": "TRADE_RETCODE_REJECT"}
         self.positions_.append({"id": str(self.next_id), "type": "POSITION_TYPE_BUY" if direction == "BUY"
                                 else "POSITION_TYPE_SELL", "symbol": "XAUUSDc", "magic": magic,
-                                "openPrice": self.price + 0.05, "stopLoss": sl, "takeProfit": tp, "volume": volume})
+                                "openPrice": self.last + 0.05, "stopLoss": sl, "takeProfit": tp, "volume": volume})
         self.next_id += 1
         return {"ok": True, "stringCode": "TRADE_RETCODE_DONE"}
 
@@ -97,7 +103,7 @@ def run(df, control, executor, twice=False, cfg=ONE_SET, every=30):
     while now <= end:
         prices.now = now
         bars = prices.candles(5)
-        executor.price = bars[-1].c
+        executor.last = bars[-1].c
         executor.broker_step(bars[-1])
         _core.tick(now, prices, store, pub, cfg, executor=executor)
         if twice:
@@ -201,7 +207,7 @@ def test_stop_loss_on_server_limits_loss():
     df = bars_from_path(flat + [top] + list(np.linspace(top, top - 60, 3)) + [top - 60] * 10,
                         start="2026-09-14 00:00", freq="1h", wick=0.5)
     ex = FakeMetaApi()
-    run(df, {"auto": True}, ex)
+    run(df, {"auto": True}, ex, cfg={**ONE_SET, "bias_filter": False})   # uji mekanisme SL murni
     buys = [p for p in ex.closed if p["type"] == "POSITION_TYPE_BUY"]
     assert len(buys) == 5 and all(p["by"] == "sl" for p in buys)
     assert not [c for c in ex.calls if c[0] == "modify"]           # tidak ada SL+ karena TP1 tak kena
@@ -209,13 +215,18 @@ def test_stop_loss_on_server_limits_loss():
 
 def test_control_validation_and_close_all():
     ex = FakeMetaApi()
-    ex.price = 4300
+    ex.last = 4300
     ex.market("BUY", 0.01, 4250, None, _core.BASE_MAGIC, "x", "y")
     ex.positions_.append({"id": "99", "type": "POSITION_TYPE_BUY", "symbol": "XAUUSDc", "magic": 12345,
                           "openPrice": 1, "stopLoss": 0, "takeProfit": 0, "volume": 1})   # posisi manual
     store, pub = Store(), FakePub()
     st = _core.apply_control(store, ex, pub, {"auto": True, "leg_lot": 0.02, "legs": 5})
-    assert st["control"] == {"auto": True, "paused": False, "leg_lot": 0.02, "legs": 5}
+    assert st["control"] == {"auto": True, "paused": False, "leg_lot": 0.02, "legs": 5, "bias_filter": True,
+                             "daily_loss_pct": 3.0, "weekly_loss_pct": 6.0}
+    st = _core.apply_control(store, ex, pub, {"bias_filter": False, "daily_loss_pct": 2, "weekly_loss_pct": 5})
+    assert st["control"]["bias_filter"] is False and st["control"]["daily_loss_pct"] == 2.0
+    with pytest.raises(ValueError):
+        _core.apply_control(store, ex, pub, {"daily_loss_pct": 0})
     with pytest.raises(ValueError):
         _core.apply_control(store, ex, pub, {"leg_lot": 1.0})
     with pytest.raises(ValueError):

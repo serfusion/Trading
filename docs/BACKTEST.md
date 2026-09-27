@@ -46,7 +46,8 @@ Diuji memakai `SmcStrategy` yang sama dengan bot, di setiap candle.
 - Konfigurasi terbaik hasil pencarian di data M5 (+0,16R, 89 trade) **gagal** di 10 tahun data
   M15 (−0,16R / −0,12R) → itu hasil kebetulan (*overfitting*).
 
-Kesimpulan: aturan SMC yang diotomasi **rugi** secara konsisten setelah biaya. Mode `smc`
+Kesimpulan: aturan SMC yang diotomasi **rugi** secara konsisten setelah biaya (16 model SMC/ICT populer
+lain juga rugi — bagian 10). Mode `smc`
 tetap tersedia, tapi **bukan default** dan hanya disarankan untuk mode sinyal.
 
 ## 4. Trend-following Donchian H1 — LOLOS
@@ -153,4 +154,99 @@ python -m research.news_study
 python -m research.scalp
 python -m research.exam m15_2012
 python -m research.exam m5_2025
+python -m research.run_scan m5_2025 data/research/scan_m5.pkl    # setup bot M5 untuk smc_models
+python -m research.smc_models --m5                               # bagian 10 (±1 menit)
+python -m research.trend_filters                                 # bagian 11
+python -m research.engine_validate m5_2025 --risk 0.5 [--no-bias]
+python -m research.cloud_check [--no-bias]
 ```
+
+## 10. Perbandingan menyeluruh metode SMC/ICT populer — SEMUA TIDAK LOLOS
+
+`python -m research.smc_models [--m5]` menguji **16 varian dasar model SMC/ICT** yang paling sering
+dipakai (setup bot sendiri dengan 2 jenis target + 14 varian model buku teks), masing-masing tanpa filter,
+dengan **bias struktur H1** (konsep SMC), dan **searah trend H1** (Donchian) → 46 varian di M15, ditambah
+semuanya di M5 2025–26. Parameter tetap (aturan buku teks, tidak dioptimasi), aturan simulasi sama
+untuk semua: entry setelah candle sinyal tertutup, spread dihitung, SL dicek dulu, satu posisi per model. **LOLOS** = rata-rata R > 0 di ketiga
+periode dengan ≥ 30 trade.
+
+Rata-rata R per trade (jumlah trade), M15, tanpa filter:
+
+| Model | 2012–17 | 2018–22 (OOS) | 2025–26 (OOS) | Lolos |
+|---|---|---|---|---|
+| Setup bot: sweep → MSS → FVG/OB, TP likuiditas | −0,19R (998) | −0,25R (764) | −0,10R (883) | ❌ |
+| Setup bot, TP 2R | −0,14R (927) | −0,28R (710) | −0,23R (656) | ❌ |
+| Turtle Soup 20 (Raschke) | −0,32R (3690) | −0,33R (2723) | −0,08R (1014) | ❌ |
+| Judas swing / Power of 3 (sweep range Asia di London) | −0,23R (920) | −0,18R (707) | −0,13R (208) | ❌ |
+| Judas swing, TP sisi lain range Asia | −0,21R (920) | −0,18R (706) | −0,19R (208) | ❌ |
+| Judas swing + MSS | −0,18R (613) | −0,09R (470) | −0,08R (136) | ❌ |
+| Sweep PDH/PDL (high/low kemarin) | −0,11R (813) | −0,06R (657) | −0,21R (187) | ❌ |
+| Sweep PDH/PDL + MSS | −0,13R (655) | −0,02R (521) | −0,01R (145) | ❌ |
+| ICT Silver Bullet 10–11 NY | −0,09R (223) | −0,16R (157) | −0,07R (52) | ❌ |
+| Silver Bullet 3 jendela (03, 10, 14 NY) | −0,08R (469) | −0,17R (387) | −0,11R (130) | ❌ |
+| FVG dengan displacement | −0,22R (3541) | −0,17R (2728) | −0,08R (992) | ❌ |
+| BOS + Order Block | −0,17R (2229) | −0,24R (1804) | +0,04R (592) | ❌ |
+| OTE 70,5% setelah BOS | −0,32R (1995) | −0,28R (1502) | −0,08R (479) | ❌ |
+| CISD setelah sweep | −0,13R (3185) | −0,09R (2641) | −0,07R (928) | ❌ |
+| Breaker block | −0,31R (2106) | −0,24R (1654) | −0,13R (588) | ❌ |
+| Unicorn (breaker + FVG) | −0,40R (552) | −0,32R (451) | −0,30R (185) | ❌ |
+
+- **Filter bias H1 atau searah trend tidak menyelamatkan satu pun**: 0 dari 30 varian berfilter lolos.
+  Yang tampak positif hanya di satu periode dengan trade sangat sedikit (mis. "Sweep PDH/PDL + MSS
+  searah trend": +0,71R dari 14 trade di 2018–22 tetapi −0,32R di 2012–17) → kebetulan.
+- M5 2025–26: 47 dari 48 varian rugi; Silver Bullet 10–11 NY ±0,00R (130 trade, impas). Satu periode
+  saja tidak cukup, dan versi M15-nya rugi di 2012–22.
+- Pembanding di H1 (periode sama): Donchian 55/20 +0,11R / +0,10R / +0,33R; ikut struktur BOS/CHoCH
+  H1 +0,03R / +0,00R / +0,10R (hampir impas); Turtle Soup H1 −0,15R / −0,21R / −0,17R.
+
+**Kesimpulan: yang paling baik tetap trend-following Donchian H1 (skema F-ensemble).** Konsep SMC tidak
+menghasilkan edge sebagai *entry*. Yang diuji ulang sebagai *filter* trend ada di bagian 11.
+
+## 11. Fitur SMC yang digabung ke trend: filter bias struktur H4 — dipakai (manfaat sedang)
+
+Karena tidak ada *entry* SMC yang lolos, konsep SMC diuji ulang sebagai **filter** trend Donchian
+(`python -m research.trend_filters`): breakout hanya diambil bila searah bias tertentu.
+
+### 11.1 Di 76 varian parameter Donchian H1 (1 posisi)
+
+| Filter | Varian positif di 3 periode | Varian yang R/trade-nya membaik (2012–17 / 2018–22 / 2025–26) |
+|---|---|---|
+| tanpa filter | 100% | – |
+| killzone London + NY (02–05, 07–11 NY) | 95% | 45% / 55% / 76% |
+| sesi London + NY penuh (02–12 NY) | 100% | 43% / 45% / 75% |
+| tanpa sesi Asia | 99% | 74% / 63% / 58% |
+| **bias struktur H4 (BOS terakhir, swing 3)** | **97%** | **67% / 71% / 84%** |
+| bias struktur H4 (swing 5) | 91% | 100% / 67% / 87% |
+| bias struktur H4 (swing 2) | 92% | 43% / 42% / 37% |
+| bias struktur D1 | 58% | 57% / 5% / 100% |
+
+### 11.2 Skema F-ensemble bot (R, drawdown kronologis)
+
+| Filter | 2012–17 | 2018–22 (OOS) | 2025–26 (OOS) |
+|---|---|---|---|
+| tanpa filter | +34,0R · PF 1,16 · DD −13,8R | +31,8R · PF 1,19 · DD −13,9R | +24,0R · PF 1,48 · DD −8,5R |
+| **bias struktur H4** | **+38,8R · PF 1,23** · DD −12,6R | **+33,3R · PF 1,25** · DD −15,4R | +22,5R · **PF 1,57** · DD −11,0R |
+| killzone London + NY | +17,7R · PF 1,10 · DD −15,2R | +21,0R · PF 1,16 · DD −16,9R | +24,2R · PF 1,71 · DD −5,0R |
+
+Killzone hanya bagus di 2025–26 dan merusak 2012–22 → **ditolak**. Bias H4 menaikkan kualitas per
+trade di ketiga periode dengan ±18% trade lebih sedikit.
+
+### 11.3 Validasi lewat Engine bot (kode live, risiko per set, batas rugi harian/mingguan aktif)
+
+| Periode | Risiko 0,5%/set (default) — dengan filter | tanpa filter | Risiko 1%/set — dengan filter | tanpa filter |
+|---|---|---|---|---|
+| 2012–2017 | **+36,6%** · PF 1,15 · DD −14,1% | +28,6% · PF 1,09 · DD −13,9% | **+96,8%** · PF 1,15 · DD −28,6% | +66,0% · PF 1,08 · DD −29,8% |
+| 2018–2022 (OOS) | **+29,5%** · PF 1,18 · DD −17,2% | +16,3% · PF 1,08 · DD −16,4% | **+81,1%** · PF 1,22 · DD −29,1% | +66,9% · PF 1,13 · DD −29,5% |
+| Apr 2025 – Sep 2026 (OOS) | +34,7% · PF 1,73 · DD −13,7% | **+41,0%** · PF 1,67 · DD −9,9% | **+50,4%** · PF 1,45 · DD −23,4% | +47,0% · PF 1,30 · DD −19,8% |
+
+Versi cloud (`python -m research.cloud_check`, 2025–26, tick 30 menit, termasuk blok akhir pekan/rollover):
+dengan filter 281 sinyal, +53,3R (rata-rata +0,190R); tanpa filter 344 sinyal, +61,6R (+0,179R).
+
+**Keputusan:** filter bias struktur H4 **aktif secara default** (bot PC & cloud) karena profit factor lebih
+tinggi di 6 dari 6 run engine dan hasil lebih besar di 5 dari 6. Yang jujur perlu diketahui:
+- **Drawdown tidak menjadi lebih kecil** (2012–22 hampir sama, 2025–26 lebih dalam ±4%): sinyal dari
+  3 set cenderung masuk bersamaan saat bias berbalik.
+- Di 2025–26 total hasil tanpa filter justru lebih besar (engine 0,5% & cloud). Manfaatnya sedang,
+  bukan jaminan.
+- Bisa dimatikan: `trend.bias_filter: false` di `config.yaml`, atau switch **Filter bias struktur H4**
+  di tab Auto aplikasi (versi cloud).

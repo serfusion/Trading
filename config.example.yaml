@@ -18,9 +18,12 @@ trend:                     # mode default: F-ensemble, tervalidasi di docs/BACKT
   fixed_leg_lot: 0.0       # ... atau lot tetap per posisi, mis. 0.01 untuk akun Cent Rp5-10 jt
   max_risk_pct_per_set: 2.0
   respect_news: false      # filter berita tidak ikut diuji di backtest
+  bias_filter: true        # filter SMC: breakout hanya searah bias struktur H4 (docs/BACKTEST.md bagian 11)
+  bias_tf: H4
+  bias_swing: 3
 
 strategy:
-  mode: trend              # trend | smc | both   (smc TIDAK lolos backtest)
+  mode: trend              # trend | smc | both   (smc & 16 model SMC/ICT lain TIDAK lolos backtest)
   entry_tf: M5
   bias_tf: H1
   score_threshold: 7       # skor minimal (maks 13)

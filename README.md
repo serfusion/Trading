@@ -4,16 +4,28 @@ Bot 24 jam untuk XAUUSD dengan dua mesin strategi:
 
 | Mode | Strategi | Hasil backtest (lihat [`docs/BACKTEST.md`](docs/BACKTEST.md)) |
 |---|---|---|
-| **`trend` (default)** | Donchian H1 55/20, SL 3×ATR, keluar di channel 20 bar | **Lolos**: +53% (2012–17), +27,6% (2018–22, OOS), +28,7% (2025–26, OOS) dengan risiko 1%; 10 dari 13 tahun positif; max DD −18% |
-| `smc` | Setup gambar kamu: sweep/TS → SMT → MSS → FVG/OB → TP di likuiditas ([`docs/STRATEGY.md`](docs/STRATEGY.md)) | **Tidak lolos**: −0,12 s/d −0,31R per trade di ±350 ribu candle |
+| **`trend` (default)** | F-ensemble Donchian H1 (40/15, 55/20, 80/30), SL 3×ATR, 5 posisi/sinyal (TP1 1R + SL+), keluar di channel exit, **+ filter SMC bias struktur H4** | **Lolos** (engine bot, risiko 0,5%/set): +36,6% (2012–17), +29,5% (2018–22, OOS), +34,7% (Apr 2025–Sep 2026, OOS); max DD −14 s/d −17% |
+| `smc` | Setup gambar kamu: sweep/TS → SMT → MSS → FVG/OB → TP di likuiditas ([`docs/STRATEGY.md`](docs/STRATEGY.md)) | **Tidak lolos**: −0,10 s/d −0,28R per trade di ±350 ribu candle |
 | `both` | Keduanya (magic number terpisah) | |
 
-> ⚠️ Tidak ada strategi yang tidak pernah rugi. Mode `trend` punya win-rate 33–41%, tahun rugi
-> (2015, 2018, 2021) dan drawdown. Butuh saldo ±$5.000 untuk risiko 1% dengan 0,01 lot di akun
-> USD standar (SL median ±$50 per 0,01 lot) — saldo kecil gunakan akun Cent.
+### Perbandingan menyeluruh metode SMC/ICT (ringkas)
+
+Semua metode SMC yang ramai dipakai diuji dengan aturan dan data yang sama (`python -m research.smc_models`,
+bagian 10 [`docs/BACKTEST.md`](docs/BACKTEST.md)): setup bot sendiri, Turtle Soup, Judas swing / Power of 3,
+sweep PDH/PDL (± MSS), ICT Silver Bullet, FVG, BOS + Order Block, OTE, CISD, Breaker, Unicorn — masing-masing
+tanpa filter, dengan bias H1, dan searah trend (46 varian M15 × 3 periode + M5). **Tidak ada satu pun yang
+untung konsisten** (tanpa filter: −0,02 s/d −0,40R per trade di 2012–22). Yang paling baik tetap trend-following.
+
+Fitur yang digabung karena terbukti berguna:
+- **Bias struktur H4 (konsep BOS dari SMC) sebagai filter trend** — profit factor naik di 6/6 uji engine,
+  hasil naik di 5/6; drawdown **tidak** lebih kecil (bagian 11). Default aktif, bisa dimatikan.
+- Killzone, displacement, entry pullback 50% (OB/FVG), bias D1 → diuji, **ditolak** (merusak periode lain).
+
+> ⚠️ Tidak ada strategi yang tidak pernah rugi. Mode `trend` punya win-rate ±46–50% per sinyal, tahun
+> rugi (mis. 2016, 2018, 2019) dan drawdown. Saldo kecil gunakan akun Cent, jangan menaikkan risiko.
 
 Fitur umum:
-- Lot otomatis dari % risiko (default 1%). **Tidak ada martingale.**
+- Lot otomatis dari % risiko (default 0,5% per set trend) atau lot tetap. **Tidak ada martingale.**
 - Batas rugi harian 3% / mingguan 6%, berhenti setelah 2 SL beruntun, blok rollover, akhir
   pekan, Jumat sore, spread melebar; filter berita high-impact USD untuk mode SMC.
 - Telegram: sinyal lengkap + perintah `/status /posisi /pause /resume /eval /berita /closeall`.
@@ -39,6 +51,11 @@ Supabase pg_cron tiap 30 menit (atau 5 menit); harga dari Twelve Data, sinyal ke
 ntfy. Opsional: auto order ke akun MT5 Exness lewat MetaApi, dinyalakan/dijeda/diatur lot dari
 tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md`](docs/CLOUD.md).
 
+Pengaman auto order (PC & cloud): SL wajib di server broker, anti order dobel, tidak entry saat
+akhir pekan / Jumat sore / pembukaan Minggu / rollover, spread maksimum, **batas rugi harian 3% &
+mingguan 6%** (order baru berhenti, posisi berjalan tetap dikelola). Versi cloud juga menghitung
+SL/TP dari harga broker (bukan harga feed) dan menolak order bila harga broker beda jauh dari feed.
+
 ## Aplikasi Android "XAU Signal"
 
 - APK dibuat otomatis oleh GitHub Actions: buka tab **Releases → "XAU Signal (APK terbaru)"**
@@ -51,8 +68,8 @@ tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md
 - Sinyal dikirim lewat [ntfy](https://ntfy.sh) (open-source). Topik acak = kunci rahasia, jangan
   dibagikan. Alternatif: aplikasi resmi "ntfy" → subscribe ke topik yang sama.
 - Tab **Statistik**: menang/kalah & profit/rugi harian, mingguan, bulanan + konversi Rupiah.
-- Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, TUTUP SEMUA, saldo
-  dan posisi bot yang sedang terbuka — semua dari HP.
+- Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, filter bias H4 (SMC),
+  batas rugi harian/mingguan, TUTUP SEMUA, saldo dan posisi bot yang sedang terbuka — semua dari HP.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
 
 ## 1. Instalasi lengkap (Windows / VPS Windows)
@@ -118,8 +135,10 @@ demo) → akun real dengan `risk_pct: 0.25–0.5`.
 | `broker.account_type` | auto | auto (USC = Cent), `cent`, `standard` |
 | `app.server` / `app.topic` | ntfy.sh / acak | tujuan sinyal aplikasi Android |
 | `strategy.mode` | trend | `trend`, `smc`, atau `both` |
-| `trend.timeframe` / `entry_period` / `exit_period` / `stop_atr` | H1 / 55 / 20 / 3.0 | parameter trend tervalidasi |
-| `risk.risk_pct` | 1.0 | % balance yang dirisikokan per setup (0.5 ≈ drawdown setengahnya) |
+| `trend.ensemble` / `stop_atr` / `legs` / `tp1_r` | [[40,15],[55,20],[80,30]] / 3.0 / 5 / 1.0 | parameter trend tervalidasi (skema F) |
+| `trend.risk_pct_per_set` / `fixed_leg_lot` | 0.5 / 0 | risiko % per set, atau lot tetap per posisi (mis. 0.01 akun Cent) |
+| `trend.bias_filter` / `bias_tf` / `bias_swing` | true / H4 / 3 | filter SMC: breakout hanya searah bias struktur H4 |
+| `risk.risk_pct` | 1.0 | % balance yang dirisikokan per setup SMC |
 | `risk.allow_min_lot_over_risk` | false | bila 0.01 lot melebihi risiko → setup dilewati |
 | `strategy.score_threshold` | 7 | skor minimal (maks 13) |
 | `strategy.min_rr` | 3.0 | RR minimal ke TP2 |
@@ -140,6 +159,7 @@ untuk mengulang (`bash research/download_data.sh`, `python -m research.engine_va
 xau_bot/
   smc.py        swing, equal levels, ATR, bias struktur (tanpa look-ahead)
   trend.py      Donchian trend-following (mode default)
+  trend_ensemble.py  skema F-ensemble (3 set, 5 posisi, TP1 + SL+) + filter bias H4, anti dobel
   strategy.py   SMC: sweep → MSS → POI → SL/TP → skor
   engine.py     loop 24 jam, eksekusi, BE/trailing, Telegram, laporan harian
   risk.py       lot, batas harian/mingguan, SL beruntun
@@ -148,7 +168,11 @@ xau_bot/
   broker/mt5.py MetaTrader 5 (Exness)   broker/paper.py simulasi backtest
   backtest.py   backtest dengan engine yang sama
 research/       scan, simulasi, uji ketahanan & validasi engine di data historis
-tests/          41 unit test (strategi, trend, risiko, sesi, berita, engine, MT5 palsu)
+  smc_models.py     perbandingan 16 model SMC/ICT (+ filter) di 3 periode
+  trend_filters.py  uji fitur SMC sebagai filter trend (76 varian + skema F)
+cloud/          versi 24 jam tanpa PC (Vercel + Supabase + ntfy + MetaApi)
+tests/          87 unit test (strategi, trend, F-ensemble, filter bias, risiko, sesi, berita, engine,
+                MT5 palsu, cloud & auto order MetaApi palsu)
 ```
 
 Menjalankan test: `pip install -r requirements-dev.txt` lalu `pytest`.

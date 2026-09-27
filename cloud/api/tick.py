@@ -21,15 +21,25 @@ def executor_from_env():
     return None
 
 
+def config_from_env() -> dict:
+    """CFG + pengaturan opsional dari environment Vercel (nilai dari aplikasi tetap diutamakan)."""
+    env, c = os.environ, _core.CFG
+    return {**c, "legs": int(env.get("LEGS", c["legs"])),
+            "leg_lot": float(env.get("LEG_LOT", c["leg_lot"])),
+            "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10)),
+            "bias_filter": env.get("BIAS_FILTER", "1").strip().lower() not in ("0", "false", "off", "no"),
+            "daily_loss_pct": float(env.get("DAILY_LOSS_PCT", c["daily_loss_pct"])),
+            "weekly_loss_pct": float(env.get("WEEKLY_LOSS_PCT", c["weekly_loss_pct"])),
+            "max_spread": float(env.get("MAX_SPREAD", c["max_spread"]))}
+
+
 def run() -> tuple[int, dict]:
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
                if not env.get(k)]
     if missing:
         return 500, {"ok": False, "error": f"Environment variable belum diisi: {', '.join(missing)}"}
-    cfg = {**_core.CFG, "legs": int(env.get("LEGS", _core.CFG["legs"])),
-           "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"])),
-           "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10))}
+    cfg = config_from_env()
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
