@@ -101,7 +101,8 @@ TEXT_RULES = {
     "order": r"\bOrderSend\s*\(|\btrade\.(Buy|Sell|BuyLimit|SellLimit|BuyStop|SellStop|PositionOpen|PositionClose|"
              r"PositionModify|OrderOpen|OrderDelete|OrderModify)\s*\(|\bOrderClose\s*\(|\bOrderModify\s*\(|"
              r"PositionClose\s*\(|createMarket(Buy|Sell)Order|order_send|placeOrder|create_order|strategy\.(entry|"
-             r"order|exit|close)\s*\(",
+             r"order|exit|close)\s*\(|/accounts/\$\{[^}]+\}/(orders|trades)|/v3/accounts/[^'\"]*/orders|"
+             r"MarketOrderRequest|\bmarketOrder\b",
     "sistem": r"GetAsyncKeyState|SetWindowsHookEx|navigator\.clipboard|HKEY_|RegOpenKey|RegSetValue|"
               r"GetClipboardData|screencapture|TerminalClose|crontab|schtasks|getUserMedia",
 }
