@@ -1,4 +1,4 @@
-"""CLI: python -m xau_bot {run,check,backtest,fetch}"""
+"""CLI: python -m xau_bot {run,check,backtest,fetch,app,berbagi,zakat,tabungan}"""
 from __future__ import annotations
 
 import argparse
@@ -187,6 +187,51 @@ def cmd_fetch(args) -> int:
     return 0
 
 
+def cmd_berbagi(args) -> int:
+    from .berbagi import alokasi_berbagi, baca_pnl_csv, format_alokasi
+    if args.csv:
+        pnl = baca_pnl_csv(args.csv)
+        cur = args.mata_uang
+    else:
+        from .engine import Engine
+        cfg = load_config(args.config)
+        broker = _mt5_broker(cfg)
+        if not broker.connect():
+            print("❌ Tidak bisa login MT5 (atau pakai --csv riwayat.csv)")
+            return 1
+        engine = Engine(cfg, broker, _notifier(cfg))
+        if not engine.start():
+            return 1
+        since = pd.Timestamp.now(tz="UTC") - pd.Timedelta(days=args.hari)
+        trades = engine._closed(since)
+        broker.shutdown()
+        pnl = pd.Series([t.pnl for t in trades], index=pd.DatetimeIndex([t.close_time for t in trades]),
+                        dtype=float)
+        cur = broker.account().currency if broker.account() else args.mata_uang
+    rows = alokasi_berbagi(pnl, args.persen, args.periode)
+    print(format_alokasi(rows, args.persen, cur, args.kurs) if rows else "Belum ada trade tertutup.")
+    return 0
+
+
+def cmd_zakat(args) -> int:
+    from .berbagi import rupiah, zakat_mal
+    z = zakat_mal(args.harta, args.harga_gram, haul=not args.belum_haul, hutang_jatuh_tempo=args.hutang)
+    print(f"Harta bersih {rupiah(z.harta)} | nisab 85 g = {rupiah(z.nisab)}")
+    print(f"{'✅ Zakat ' + rupiah(z.zakat) if z.wajib else 'ℹ️ '} {z.catatan}")
+    return 0
+
+
+def cmd_tabungan(args) -> int:
+    from .berbagi import rencana_tabungan_emas, rupiah
+    r = rencana_tabungan_emas(args.setoran, args.harga_gram, args.bulan, selisih_buyback_pct=args.buyback)
+    print(f"Setor {rupiah(args.setoran)}/bulan x {r.bulan} bulan = {rupiah(r.total_setor)} "
+          f"-> ±{r.gram:.2f} gram emas (harga sekarang {rupiah(args.harga_gram)}/g)")
+    for g, v in r.nilai.items():
+        print(f"   bila harga emas {g * 100:+.0f}%/tahun: nilai jual ±{rupiah(v)} ({(v / r.total_setor - 1) * 100:+.0f}%)")
+    print("Tanpa leverage: nilai bisa turun, tetapi tidak bisa 'habis' seperti akun trading.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="xau_bot", description="Bot XAUUSD Smart Money Concepts")
     parser.add_argument("--config", default="config.yaml" if Path("config.yaml").exists() else None)
@@ -208,9 +253,26 @@ def main(argv: list[str] | None = None) -> int:
     fe = sub.add_parser("fetch", help="Unduh histori dari MT5 ke CSV")
     fe.add_argument("--days", type=int, default=180)
     fe.add_argument("--out-dir", default="data")
+    be = sub.add_parser("berbagi", help="Hitung porsi sedekah dari profit bersih (high-water mark)")
+    be.add_argument("--csv", help="riwayat trade CSV (kolom waktu & profit); tanpa ini dibaca dari MT5")
+    be.add_argument("--hari", type=int, default=365, help="riwayat MT5 berapa hari ke belakang")
+    be.add_argument("--persen", type=float, default=10.0)
+    be.add_argument("--periode", choices=["W", "M"], default="M", help="W mingguan, M bulanan")
+    be.add_argument("--mata-uang", default="USD")
+    be.add_argument("--kurs", type=float, help="kurs ke Rupiah, mis. 16500 (USC: 165)")
+    za = sub.add_parser("zakat", help="Hitung zakat mal (nisab 85 gram emas)")
+    za.add_argument("--harta", type=float, required=True, help="total harta simpanan dalam Rupiah")
+    za.add_argument("--harga-gram", type=float, required=True, help="harga emas per gram (Rupiah)")
+    za.add_argument("--hutang", type=float, default=0.0, help="hutang jatuh tempo (Rupiah)")
+    za.add_argument("--belum-haul", action="store_true")
+    ta = sub.add_parser("tabungan", help="Rencana tabungan emas rutin tanpa leverage")
+    ta.add_argument("--setoran", type=float, required=True, help="Rupiah per bulan")
+    ta.add_argument("--harga-gram", type=float, required=True, help="harga emas per gram (Rupiah)")
+    ta.add_argument("--bulan", type=int, default=60)
+    ta.add_argument("--buyback", type=float, default=5.0, help="selisih harga beli-jual kembali (%%)")
     args = parser.parse_args(argv)
     return {"run": cmd_run, "check": cmd_check, "backtest": cmd_backtest, "fetch": cmd_fetch,
-            "app": cmd_app}[args.cmd](args)
+            "app": cmd_app, "berbagi": cmd_berbagi, "zakat": cmd_zakat, "tabungan": cmd_tabungan}[args.cmd](args)
 
 
 if __name__ == "__main__":

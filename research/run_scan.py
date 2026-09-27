@@ -6,7 +6,7 @@ from pathlib import Path
 
 from xau_bot.config import AppConfig
 
-from .data import load_m5_2025, load_m15_2012, load_parquet_utc, resample
+from .data import load_m5_2020, load_m5_2025, load_m15_2012, load_parquet_utc, resample
 from .scan import scan
 
 DATA = Path(os.getenv("XAU_DATA_DIR", "data/research"))
@@ -15,6 +15,8 @@ DATA = Path(os.getenv("XAU_DATA_DIR", "data/research"))
 def dataset(name):
     if name == "m5_2025":
         return load_m5_2025(DATA / "dineshelumalai007_xauusd-5m/gold_m5_historical.csv"), "M5", "H1", 0.25, {}
+    if name == "m5_2020":
+        return load_m5_2020(DATA / "ilahuerta-IA_backtrader-pullback-window-xauusd/data/XAUUSD_5m_5Yea.csv"), "M5", "H1", 0.25, {}
     if name == "m15_2012":
         return load_m15_2012(DATA / "ejtraderLabs_historical-data/XAUUSD"), "M15", "H4", 0.30, {}
     if name == "m5_2026_smt":

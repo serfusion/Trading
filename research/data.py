@@ -4,6 +4,8 @@ Sumber (publik, GitHub):
 - ejtraderLabs/historical-data  XAUUSD M15 2012-2022 (harga x100, jam server = New York + 7 jam)
 - dineshelumalai007/xauusd-5m   XAUUSD M5 2025-2026 (ekspor MT5, jam server = New York + 7 jam)
 - Sai310421/xauusd-data         XAUUSD M1 & XAGUSD M5 Feb-Mei 2026 (UTC)
+- ilahuerta-IA/backtrader-pullback-window-xauusd  XAUUSD M5 Agu 2020 - Agu 2025 (UTC; buka mingguan
+  Minggu 22:00/23:00 UTC, selisih median 0,22 dengan data dineshelumalai007 di periode yang sama)
 """
 from __future__ import annotations
 
@@ -38,6 +40,13 @@ def load_m15_2012(root: Path) -> pd.DataFrame:
 def load_m5_2025(path: Path) -> pd.DataFrame:
     df = pd.read_csv(path, parse_dates=["time"], index_col="time")
     df.index = server_ny7_to_utc(df.index)
+    return _clean(df)
+
+
+def load_m5_2020(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path, dtype={"Date": str, "Time": str})
+    df.index = pd.DatetimeIndex(pd.to_datetime(df["Date"] + " " + df["Time"])).tz_localize("UTC")
+    df.columns = [c.lower() for c in df.columns]
     return _clean(df)
 
 
