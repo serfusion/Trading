@@ -25,9 +25,9 @@ import java.time.temporal.TemporalAdjusters
 /** Tab Sinyal: harga, sinyal aktif, ringkasan, riwayat. */
 @Composable
 fun SignalsTab(events: List<SignalEvent>, heartbeat: SignalEvent?, connection: String, money: MoneySettings) {
-    val history = events.filter {
-        it.type == "signal" || it.type == "close" || (it.type == "info" && it.str("text").contains("TP1"))
-    }
+    // Satu kartu per sinyal (entry → TP1/SL+ → TUTUP → hasil); TUTUP tanpa sinyal asal tampil sendiri.
+    val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
+    val history = events.filter { it.type == "signal" || (it.type == "close" && it.id !in signalIds) }
     val open = SignalRepository.openSignals(events)
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -40,12 +40,14 @@ fun SignalsTab(events: List<SignalEvent>, heartbeat: SignalEvent?, connection: S
             item { AppCard { Text("Belum ada sinyal", color = Muted) } }
         } else {
             items(open, key = { "open-" + it.msgId }) {
-                OpenSignalCard(it, heartbeat, SignalRepository.slPlusActive(events, it.id))
+                OpenSignalCard(it, heartbeat, SignalRepository.slPlusActive(events, it.id), money)
             }
         }
         item { TodayCard(events, money) }
         if (history.isNotEmpty()) item { SectionTitle("Riwayat") }
-        items(history, key = { it.msgId }) { EventRow(it, money) }
+        items(history, key = { it.msgId }) {
+            if (it.type == "signal") SignalResultCard(it, events, money) else CloseRow(it, money)
+        }
         item { Footer() }
     }
 }
@@ -74,7 +76,7 @@ fun MarketCard(heartbeat: SignalEvent?, connection: String) {
 }
 
 @Composable
-fun OpenSignalCard(signal: SignalEvent, heartbeat: SignalEvent?, slPlus: Boolean) {
+fun OpenSignalCard(signal: SignalEvent, heartbeat: SignalEvent?, slPlus: Boolean, money: MoneySettings) {
     val color = dirColor(signal.dir)
     val entry = signal.num("entry")
     val price = heartbeat?.num("price")
@@ -98,7 +100,7 @@ fun OpenSignalCard(signal: SignalEvent, heartbeat: SignalEvent?, slPlus: Boolean
         MetricRow {
             Metric("SL", fmt(signal.num("sl")), SellColor, compact = true)
             Metric("TP1", fmt(signal.num("tp1")), BuyColor, compact = true)
-            Metric("Lot", signal.str("lot").ifBlank { "-" }, compact = true)
+            Metric("Lot", legsLot(signal, money), Gold, compact = true)
         }
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
     }
@@ -132,7 +134,7 @@ fun TodayCard(events: List<SignalEvent>, money: MoneySettings) {
     AppCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
             CardTitle("Ringkasan", Modifier.weight(1f))
-            Pill("${money.currency} • ${lotText(money.legLot)} lot", Gold)
+            Pill(money.currency, Gold)
         }
         SummaryLine("Hari ini", day, money)
         LineDivider()
@@ -164,30 +166,61 @@ fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
     }
 }
 
+/** "5 × 0.02": jumlah posisi × lot pilihanmu (lot ⭐ atau lot biasa). */
+fun legsLot(signal: SignalEvent, money: MoneySettings): String =
+    "${signal.num("legs")?.toInt() ?: 5} × ${lotText(money.lotFor(signal.isStar()))}"
+
+/** Riwayat satu sinyal: kapan entry, kapan TP1 & SL+, kapan & di mana TUTUP, lalu MENANG/KALAH. */
 @Composable
-fun EventRow(event: SignalEvent, money: MoneySettings) {
-    when (event.type) {
-        "signal" -> AppCard {
-            SignalHeader(event)
-            MetricRow {
-                Metric("Entry", fmt(event.num("entry")), compact = true)
-                Metric("SL", fmt(event.num("sl")), SellColor, compact = true)
-                Metric("TP1", fmt(event.num("tp1")), BuyColor, compact = true)
-            }
-        }
-        "close" -> CloseRow(event, money)
-        else -> AppCard {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                Pill("TP1", BuyColor)
-                Text("SL+ ke entry", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
-                Text(event.timeText(), style = MaterialTheme.typography.labelMedium, color = Muted)
+fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: MoneySettings) {
+    val tp1 = SignalRepository.tp1Event(events, signal.id)
+    val close = SignalRepository.closeEvent(events, signal.id)
+    val amount = close?.let { SignalRepository.amount(it, money) }
+    val win = close != null && (amount ?: close.num("r") ?: 0.0) > 0
+    val result = if (win) BuyColor else SellColor
+    AppCard(accent = if (close == null) dirColor(signal.dir) else result) {
+        SignalHeader(signal)
+        KeyValue("Entry", "${fmt(signal.num("entry"))} • ${legsLot(signal, money)}", bold = true)
+        KeyValue("SL / TP1", "${fmt(signal.num("sl"))} / ${fmt(signal.num("tp1"))}")
+        KeyValue(
+            "TP1 + SL+",
+            when {
+                tp1 != null -> "✓ ${tp1.timeText()}"
+                close != null -> "✗ tidak kena"
+                else -> "menunggu"
+            },
+            if (tp1 != null) BuyColor else Muted
+        )
+        if (close == null) {
+            KeyValue("Status", "berjalan", Gold, bold = true)
+        } else {
+            KeyValue("Tutup", "${fmt(close.num("price"))} • ${close.timeText()}")
+            KeyValue("Sebab", closeReason(close), Muted)
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Pill(if (win) "MENANG" else "KALAH", result, solid = true)
+                Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
+                    if (amount != null) {
+                        Text(moneyMain(amount, money), fontWeight = FontWeight.Bold, color = result,
+                            style = MaterialTheme.typography.titleLarge)
+                        Text(idrLine(amount, money), style = MaterialTheme.typography.bodySmall, color = Muted)
+                    }
+                }
             }
         }
     }
 }
 
+private fun closeReason(close: SignalEvent): String {
+    val reason = close.str("reason")
+    return when {
+        reason.contains("SL+") -> "SL+ (impas)"
+        reason.contains("Stop loss") -> "Stop loss"
+        else -> "Sinyal TUTUP"
+    }
+}
+
 @Composable
-private fun CloseRow(event: SignalEvent, money: MoneySettings) {
+fun CloseRow(event: SignalEvent, money: MoneySettings) {
     val amount = SignalRepository.amount(event, money)
     val win = (amount ?: event.num("r") ?: 0.0) > 0
     val result = if (win) BuyColor else SellColor

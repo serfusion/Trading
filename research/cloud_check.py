@@ -77,6 +77,12 @@ def main():
         r = [e["r"] for e in closes if e.get("set") == name]
         wins = sum(1 for x in r if x > 0)
         print(f"  {name}: {len(r)} sinyal | untung {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R")
+    for tag, want in (("⭐", True), ("biasa", False)):
+        r = [e["r"] for e in closes if e.get("star") is want]
+        if r:
+            wins = sum(1 for x in r if x > 0)
+            print(f"  {tag}: {len(r)} sinyal | untung {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R | "
+                  f"rata-rata {sum(r) / len(r):+.3f}R")
     r = [e["r"] for e in closes]
     wins = sum(1 for x in r if x > 0)
     print(f"  SEMUA: {len(r)} sinyal | untung {wins} ({wins / len(r) * 100:.1f}%) | total {sum(r):+.1f}R | "

@@ -52,10 +52,11 @@ tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md
   (tag `android-latest`), unduh `app-debug.apk`, pasang (izinkan "instal dari sumber tidak dikenal").
 - ⚙️ Pengaturan → **Server** `https://ntfy.sh` + **Topik** (= `NTFY_TOPIC` cloud) → Simpan.
 - Tanpa notifikasi yang selalu tampil: aplikasi mengecek sinyal di latar belakang lewat alarm di menit
-  :05 & :35 UTC (±3 menit setelah cloud memeriksa pasar) dan membunyikan notifikasi saat ada sinyal ⭐,
-  TP1, atau TUTUP. Saat dibuka, harga & riwayat dimuat ulang (tiap menit selama terbuka).
-- Tab **Sinyal** (harga, sinyal aktif, ringkasan, riwayat) dan **Statistik** (menang/kalah, profit/rugi
-  harian/mingguan/bulanan + Rupiah).
+  :05 & :35 UTC (±3 menit setelah cloud memeriksa pasar) dan membunyikan notifikasi saat ada sinyal
+  (⭐ ditandai), TP1, atau TUTUP. Saat dibuka, harga & riwayat dimuat ulang (tiap menit selama terbuka).
+- Tab **Sinyal**: harga, sinyal aktif, dan riwayat per sinyal (jam entry, TP1 + SL+, jam & harga TUTUP,
+  MENANG/KALAH + uang). Tab **Statistik**: harian/mingguan/bulanan, filter Semua / ⭐ / Biasa.
+- Pengaturan: lot sinyal biasa dan lot sinyal ⭐ terpisah (dipakai untuk hitungan profit/rugi).
 - Beberapa HP (Xiaomi, Oppo, Vivo, dll.) membatasi aplikasi latar belakang: set Baterai → **Tanpa
   pembatasan** untuk aplikasi ini supaya notifikasi tidak terlambat.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).

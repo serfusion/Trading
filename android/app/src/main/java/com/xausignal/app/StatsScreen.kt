@@ -32,14 +32,16 @@ import java.util.Locale
 @Composable
 fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
     var period by remember { mutableIntStateOf(0) }
+    var kind by remember { mutableIntStateOf(0) }
+    val star: Boolean? = when (kind) { 1 -> true; 2 -> false; else -> null }
     val idFmt = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale("id"))
     val stats = when (period) {
         0 -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString() },
-            { LocalDate.parse(it).format(idFmt) })
+            { LocalDate.parse(it).format(idFmt) }, star)
         1 -> SignalRepository.periodStats(events, money, ::weekKey,
-            { "Minggu " + LocalDate.parse(it).format(idFmt) })
+            { "Minggu " + LocalDate.parse(it).format(idFmt) }, star)
         else -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) },
-            { LocalDate.parse("$it-01").format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id"))) })
+            { LocalDate.parse("$it-01").format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id"))) }, star)
     }
     val all = stats.fold(PeriodStats("Total", 0, 0, 0.0, 0.0)) { acc, s ->
         PeriodStats("Total", acc.wins + s.wins, acc.losses + s.losses, acc.profit + s.profit, acc.loss + s.loss)
@@ -49,7 +51,8 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { PeriodSelector(period) { period = it } }
+        item { Selector(listOf("Semua", "⭐ saja", "Biasa"), kind) { kind = it } }
+        item { Selector(listOf("Harian", "Mingguan", "Bulanan"), period) { period = it } }
         item { TotalCard(all, money) }
         item {
             SectionTitle(
@@ -67,14 +70,14 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
 
 /** Pemilih periode bergaya segmented control. */
 @Composable
-private fun PeriodSelector(selected: Int, onSelect: (Int) -> Unit) {
+private fun Selector(options: List<String>, selected: Int, onSelect: (Int) -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
             .background(CardColor, RoundedCornerShape(14.dp))
             .padding(4.dp)
     ) {
-        listOf("Harian", "Mingguan", "Bulanan").forEachIndexed { i, name ->
+        options.forEachIndexed { i, name ->
             val on = selected == i
             Text(
                 name,

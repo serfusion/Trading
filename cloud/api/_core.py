@@ -4,8 +4,9 @@ Skema F-ensemble, IDENTIK dengan bot (xau_bot/trend.py + trend_ensemble.py; diuj
 - 3 set Donchian H1 (40/15, 55/20, 80/30). BUY bila close > high N bar sebelumnya, SELL kebalikannya.
 - SL = entry -/+ 3 x ATR(20). Tiap sinyal = 5 posisi: posisi #1 TP1 = 1R, sisanya hold.
 - TP1 kena -> SL posisi sisa ke entry (SL+). TUTUP saat close menembus channel exit.
-- ⭐ (star_only, default ON): sinyal hanya diambil bila searah tren D1 (close D1 kemarin vs EMA50 D1) DAN
+- ⭐: setiap sinyal diberi tanda star=True bila searah tren D1 (close D1 kemarin vs EMA50 D1) DAN
   close H1 menembus high/low 20 candle H4 sebelumnya (research/filters.py, "tren D1 + H4 breakout").
+  star_only=True -> sinyal non-⭐ tidak dikirim sama sekali (default: semua dikirim, ⭐ ditandai).
 """
 from __future__ import annotations
 
@@ -18,7 +19,7 @@ from datetime import datetime, timedelta, timezone
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
-       "leg_lot": 0.01, "star_only": True, "star_ema": 50, "star_h4": 20}
+       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20}
 
 
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
@@ -133,7 +134,7 @@ def star_check(closed: list[Bar], direction: str, ema_span: int = 50, h4_n: int 
     h4_ok = last.c > h4_lvl if buy else last.c < h4_lvl
     note = (f"D1 {prev_close:.2f} {'>' if prev_close > ema else '<'} EMA{ema_span} {ema:.2f} "
             f"{'✓' if d1_ok else '✗'} | H4 {'high' if buy else 'low'} {h4_n} {h4_lvl:.2f} {'✓' if h4_ok else '✗'}")
-    return d1_ok and h4_ok, note
+    return bool(d1_ok and h4_ok), note
 
 
 # ---------------------------------------------------------------- layanan luar
@@ -320,7 +321,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name,
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
-              "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "reason": why}
+              "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
+              "tp1_time": v.get("be_bar"), "reason": why}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
         pub.publish(ev, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
@@ -373,8 +375,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
-                star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))[1] \
-                    if cfg.get("star_only") else ""
+                is_star, star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
@@ -386,8 +387,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                       "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
                       "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-                      "star": bool(cfg.get("star_only")), "star_note": star_note}
-                text = (f"{'⭐ ' if cfg.get('star_only') else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                      "star": is_star, "star_note": star_note}
+                text = (f"{'⭐ ' if is_star else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
@@ -395,7 +396,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False,
+                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": is_star,
                      "bar_close": iso(closed[-1].t + tf)}
                 existing = live_positions(magic) if live else []
                 if live and existing != []:

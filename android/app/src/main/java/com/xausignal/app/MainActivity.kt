@@ -224,8 +224,10 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
     var topic by remember { mutableStateOf(SignalRepository.topic()) }
     var cent by remember { mutableStateOf(current.cent) }
     var lot by remember { mutableStateOf(lotText(current.legLot)) }
+    var starLot by remember { mutableStateOf(lotText(current.starLot)) }
     var rate by remember { mutableStateOf(fmt(current.idrRate, 0).replace(",", "")) }
     val lotValue = parseLot(lot)
+    val starValue = parseLot(starLot)
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -245,19 +247,21 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
-                LotInput(lot, { lot = it }, "Lot per posisi", 100.0)
+                LotInput(lot, { lot = it }, "Lot sinyal biasa", 100.0)
+                LotInput(starLot, { starLot = it }, "Lot sinyal ⭐", 100.0)
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
             }
         },
         confirmButton = {
             TextButton(
-                enabled = lotValue != null,
+                enabled = lotValue != null && starValue != null,
                 onClick = {
                     val m = MoneySettings(
                         cent = cent,
                         legLot = lotValue ?: 0.01,
                         idrRate = rate.replace(".", "").replace(",", "").toDoubleOrNull() ?: 16500.0,
+                        starLot = starValue ?: 0.01,
                     )
                     onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, m)
                 }

@@ -57,3 +57,19 @@ def test_star_only_skips_non_star_signals_and_marks_star():
     assert all(e["star"] and "✓" in e["star_note"] and "✗" not in e["star_note"] for e in signals)
     closes = {e["id"] for e in pub.events if e["type"] == "close"}
     assert closes <= {e["id"] for e in signals}                  # hanya sinyal ⭐ yang dikelola & ditutup
+
+
+def test_all_mode_marks_star_and_close_carries_it():
+    df = market(seed=11)
+    prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
+    now = df.index[24 * 60].to_pydatetime() + timedelta(minutes=2)
+    end = df.index[-1].to_pydatetime()
+    while now <= end:
+        prices.now = now
+        _core.tick(now, prices, store, pub, _core.CFG)          # default: semua sinyal, ⭐ ditandai
+        now += timedelta(minutes=30)
+    signals = {e["id"]: e for e in pub.events if e["type"] == "signal"}
+    assert {e["star"] for e in signals.values()} == {True, False}
+    assert all(isinstance(e["star"], bool) for e in signals.values())
+    closes = [e for e in pub.events if e["type"] == "close"]
+    assert closes and all(c["star"] == signals[c["id"]]["star"] for c in closes)

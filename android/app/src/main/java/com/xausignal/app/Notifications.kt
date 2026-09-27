@@ -32,9 +32,10 @@ object Notifications {
     }
 
     fun signal(context: Context, event: SignalEvent) {
-        val star = if (event.json.optBoolean("star", false)) "⭐ " else ""
+        val star = if (event.isStar()) "⭐ " else ""
         val title = "$star${event.dir} XAU/USD @ ${fmt(event.num("entry"))}"
-        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • ${event.str("lot").ifBlank { "-" }}"
+        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • " +
+            legsLot(event, SignalRepository.money())
         post(context, event.id.hashCode(), title, text)
     }
 
