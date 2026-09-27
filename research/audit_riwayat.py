@@ -307,13 +307,105 @@ def audit_archives(mirrors: Path, biner_csv: Path, out_csv: Path) -> None:
           f"berisi .ex4/.ex5/arsip lain: {sum(o['biner_tertutup'] > 0 for o in out)}")
 
 
+def scan_archive_bytes(data: bytes, where: str, depth: int = 0) -> tuple[list[dict], dict]:
+    """Baca ISI arsip (zip/rar/7z/tar) di memori lewat libarchive — tidak ada yang ditulis ke disk atau dijalankan.
+    Setiap anggota dipindai dengan aturan xau_bot.audit; arsip di dalam arsip dibuka sampai kedalaman 2."""
+    import libarchive
+    out: list[dict] = []
+    st = Counter()
+    try:
+        with libarchive.memory_reader(data) as arc:
+            for e in arc:
+                if not e.isfile:
+                    continue
+                name = e.pathname or "?"
+                if isinstance(name, bytes):
+                    name = name.decode("utf-8", "replace")
+                st["file"] += 1
+                try:
+                    buf = bytearray()
+                    for blk in e.get_blocks():
+                        buf += blk
+                        if len(buf) > MAX_BYTES * 4:
+                            break
+                    body = bytes(buf)
+                except libarchive.ArchiveError:
+                    st["terkunci"] += 1
+                    out.append({"lokasi": where, "anggota": name, "level": "WASPADA", "code": "arsip_terkunci",
+                                "line": 0, "text": "(berpassword / tidak bisa dibaca)"})
+                    continue
+                ext = ext_of(name, body[:4096])
+                if ext in {".zip", ".rar", ".7z", ".gz", ".tar"} and depth < 2:
+                    sub, sst = scan_archive_bytes(body, f"{where} :: {name}", depth + 1)
+                    out += sub
+                    st.update(sst)
+                    st["arsip_dalam"] += 1
+                    continue
+                kind = classify(name, ext)
+                if kind is not None:
+                    f = kind[1] if kind[0] == "temuan" else Finding(kind[1], "biner_dalam_arsip",
+                                                                   "File biner/program di dalam arsip", name, 0,
+                                                                   f"({ext or 'tanpa ekstensi'}, {len(body)} byte)")
+                    out.append({"lokasi": where, "anggota": name, "level": f.level, "code": f.code, "line": 0,
+                                "text": f.text})
+                    st["biner"] += 1
+                    continue
+                if ext not in TEXT_EXT or len(body) > MAX_BYTES:
+                    continue
+                st["teks"] += 1
+                for f in scan_text(name, body.decode("utf-8", "ignore"), ext):
+                    out.append({"lokasi": where, "anggota": name, "level": f.level, "code": f.code, "line": f.line,
+                                "text": mask(f.text) if f.code in SECRET_CODES else f.text})
+    except libarchive.ArchiveError as exc:
+        st["gagal"] += 1
+        out.append({"lokasi": where, "anggota": "", "level": "WASPADA", "code": "arsip_gagal_dibaca", "line": 0,
+                    "text": str(exc)[:120]})
+    return out, dict(st)
+
+
+def audit_archive_contents(mirrors: Path, biner_csv: Path, out_csv: Path) -> None:
+    rows = [r for r in csv.DictReader(open(biner_csv)) if re.search(r"\.(zip|rar|7z)$", r["path"], re.I)]
+    allf, tot = [], Counter()
+    per = []
+    for r in rows:
+        data = subprocess.run(["git", "-C", str(mirrors / (r["repo"] + ".git")), "cat-file", "blob", r["blob"]],
+                              capture_output=True).stdout
+        found, st = scan_archive_bytes(data, r["path"])
+        for f in found:
+            f["repo"] = r["repo"]
+        allf += found
+        tot.update(st)
+        lv = Counter(f["level"] for f in found)
+        per.append({"repo": r["repo"], "arsip": r["path"], "di_head": r["di_head"], "file": st.get("file", 0),
+                    "teks_dipindai": st.get("teks", 0), "biner": st.get("biner", 0), "BAHAYA": lv["BAHAYA"],
+                    "WASPADA": lv["WASPADA"], "INFO": lv["INFO"], "terkunci": st.get("terkunci", 0) + st.get("gagal", 0)})
+    with open(out_csv, "w", newline="") as fh:
+        w = csv.DictWriter(fh, ["repo", "lokasi", "anggota", "level", "code", "line", "text"])
+        w.writeheader()
+        order = {"BAHAYA": 0, "WASPADA": 1, "INFO": 2}
+        w.writerows(sorted(allf, key=lambda f: (f["repo"], order.get(f["level"], 3), f["code"], f["lokasi"])))
+    with open(out_csv.with_name(out_csv.stem + "_per_arsip.csv"), "w", newline="") as fh:
+        w = csv.DictWriter(fh, list(per[0]))
+        w.writeheader()
+        w.writerows(per)
+    print(f"{len(rows)} arsip, {tot.get('file', 0)} file di dalamnya, {tot.get('teks', 0)} file teks dipindai, "
+          f"{tot.get('biner', 0)} biner, {tot.get('arsip_dalam', 0)} arsip-dalam-arsip, "
+          f"{tot.get('terkunci', 0)} terkunci, {tot.get('gagal', 0)} gagal dibaca")
+    print(Counter((f["level"], f["code"]) for f in allf).most_common(30))
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("mirrors")
     ap.add_argument("--csv", default="")
     ap.add_argument("--only", default="", help="kata kunci nama repo")
     ap.add_argument("--arsip", default="", help="CSV keluaran: isi arsip zip/rar dari <csv>_biner.csv")
+    ap.add_argument("--isi-arsip", default="", help="CSV keluaran: temuan di DALAM file arsip (butuh libarchive-c)")
     a = ap.parse_args(argv)
+    if a.isi_arsip:
+        audit_archive_contents(Path(a.mirrors), Path(a.csv).with_name(Path(a.csv).stem + "_biner.csv"),
+                               Path(a.isi_arsip))
+        return 0
     if a.arsip:
         audit_archives(Path(a.mirrors), Path(a.csv).with_name(Path(a.csv).stem + "_biner.csv"), Path(a.arsip))
         return 0

@@ -16,7 +16,7 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 
 | Tahap | Isi | Status | Hasil |
 |---|---|---|---|
-| A2 | Pindai ISI 267 zip di riwayat (rar tidak bisa: tanpa unrar) + audit 45 file dependensi di 28 repo | ⏳ | `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md` |
+| A2 | Pindai ISI arsip di riwayat + audit dependensi | ✅ selesai: 404 arsip (zip **dan** rar via libarchive), 10.113 file, 14 program dianalisa statis; 286 paket (HEAD) + 459 (riwayat) dicek ke PyPI/npm | `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md`, `docs/arsip_dependensi/` |
 | D2 | Fork & wiki dari 63 repo | ⏳ | `docs/AUDIT_FORK_WIKI.md` |
 | B2 | Strategi yang belum diuji: EA GifariKemal, EA EA_SCALPER, sisa samw2591, AnggaKay, damaradam04, nathanaela2002 | ⏳ | `research/github_popular4.py` |
 | C2 | Baca manual baris demi baris file inti 41 kandidat | ⏳ | `docs/TINJAUAN_MANUAL.md` |
@@ -69,3 +69,4 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-27: B 13/14 (+ Sheyswaggz, MarketForgeX, HillaryMurimi, RobertN1D, armza332).
 - 2026-09-27: B selesai 14/14. Tidak ada yang positif konsisten; peringkat kandidat tidak berubah.
   **A, B, C selesai.** Sisa: keputusan pengguna (lihat CLAUDE.md) — skema A live, tab Android, bundle mentah.
+- 2026-09-27: A2 selesai. Loader injeksi kode + DLL palsu (winmm/aininet) di paket EA bajakan riwayat EA_SCALPER; terminal MT4/MT5 di dalamnya asli (hash tanda tangan cocok). Dependensi bersih.
