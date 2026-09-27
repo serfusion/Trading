@@ -19,7 +19,7 @@ agar Claude bisa melanjutkan di sesi berikutnya. Perbarui file ini setiap selesa
 | A2 | Pindai ISI arsip di riwayat + audit dependensi | ✅ selesai: 404 arsip (zip **dan** rar via libarchive), 10.113 file, 14 program dianalisa statis; 286 paket (HEAD) + 459 (riwayat) dicek ke PyPI/npm | `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md`, `docs/arsip_dependensi/` |
 | D2 | Fork & wiki dari 63 repo | ✅ selesai: 0 wiki; 372 fork (342 identik, 30 berubah → isi barunya dipindai) | `docs/AUDIT_FORK_WIKI.md`, `docs/fork/` |
 | B2 | Strategi yang belum diuji: EA GifariKemal, EA EA_SCALPER, sisa samw2591, AnggaKay, damaradam04, nathanaela2002 | ✅ selesai: 6 strategi diuji, 5 dicatat tak bisa diuji (alasan dari kode) | `research/github_popular4.py`, `docs/AUDIT_63_REPO.md` §3.3, `docs/hasil_github_popular4.txt` |
-| C2 | Baca manual file inti 41 kandidat | ⏳ berjalan: 298 file inti / 243.552 baris; kecil dibaca penuh, besar per titik aksi (order/jaringan/login/proses/kredensial) | `docs/TINJAUAN_MANUAL.md` |
+| C2 | Baca manual file inti 41 kandidat | ✅ selesai: 298 file inti / 243.552 baris (18 repo dibaca penuh, 7 campuran, 16 per titik aksi) + sapuan 93 file uji/backtest | `docs/TINJAUAN_MANUAL.md`, `docs/tinjauan_manual/file_inti.csv` |
 
 ## B — daftar strategi yang belum diuji
 
@@ -72,3 +72,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-27: A2 selesai. Loader injeksi kode + DLL palsu (winmm/aininet) di paket EA bajakan riwayat EA_SCALPER; terminal MT4/MT5 di dalamnya asli (hash tanda tangan cocok). Dependensi bersih.
 - 2026-09-27: D2 selesai. Tidak ada malware di fork; beberapa fork membocorkan password MT5 pemiliknya; fork Silentwolf360 berisi source .mq5 EA P1Piyush.
 - 2026-09-27: B2 selesai. Terbaik baru: samw2591 MACD +21,9R & gap Senin +10,9R (keduanya dimatikan penulis, 2/4 periode). XAUBot V3 berhenti permanen (bug canTrade); SmartPropAI = TP acak.
+- 2026-09-27: C2 selesai. Temuan baru terpenting:
+  - EA_SCALPER `install_trading_mcps.ps1` memasang 15 paket npm `@trading-mcps/*` yang tidak ada (slopsquatting — jangan dijalankan);
+  - EA_SCALPER `windows_setup.ps1` menambah pengecualian Windows Defender;
+  - Pestador: server tanpa login bisa disuruh membuka URL & menulis file;
+  - GifariKemal: API dasbor tanpa login bisa mematikan filter bot live;
+  - armza332: jembatan menerima `close_all` tanpa secret;
+  - order tanpa SL di BlamzKunG (semua order), AnggaKay & GifariKemal (retry tanpa SL);
+  - lot 10× kebesaran di HillaryMurimi;
+  - pipela memperlebar SL setelah entry.
+
+  Bot kita dicek: tidak punya pola-pola itu. **Putaran 2 (A2, B2, C2, D2) selesai.**

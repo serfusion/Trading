@@ -7,7 +7,8 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
 - **`PROGRES.md`** — status pekerjaan audit & uji 63 repo GitHub (A: riwayat & Releases, B: uji strategi, C: baca
   setiap file). Lanjutkan item yang belum selesai, perbarui file itu, commit & push setiap tahap.
 - Laporan: `docs/RISET_GITHUB.md`, `docs/AUDIT_63_REPO.md`, `docs/AUDIT_RIWAYAT_RELEASES.md`,
-  `docs/AUDIT_SETIAP_FILE.md`, `docs/BACKTEST.md`, `kandidat/KATALOG.md`.
+  `docs/AUDIT_SETIAP_FILE.md`, `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md`, `docs/AUDIT_FORK_WIKI.md`,
+  `docs/TINJAUAN_MANUAL.md`, `docs/BACKTEST.md`, `kandidat/KATALOG.md`.
 - **Keputusan pengguna yang masih ditunggu** (jangan dikerjakan tanpa izin): (1) ganti bot live ke skema A / risiko
   0,25% (opsi `tp1_r: 0`); (2) tab Tabungan Emas & Berbagi di Android; (3) nasib 2 bundle mentah yang belum
   di-push (Lin-Thet-Zaw, P1Piyush) dan 58 bundle mentah yang sudah ada di git (berisi kredensial asli penulis).

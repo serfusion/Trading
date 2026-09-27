@@ -11,6 +11,7 @@ penulis, hasil uji ulang bot ini, dan daftar perubahan.
 | Keamanan (malware, pencuri data, kebocoran) | **Semua 4.357 file** di 63 repo | Pemindai `xau_bot/audit.py` + setiap temuan dibaca manual; pemindaian rahasia kedua di folder ini |
 | Platform, timeframe, scalping, login MT5, order otomatis, SL/TP, trailing, martingale/grid/hedging, manajemen risiko, filter berita/sesi, AI/LLM, Telegram, backtest | **Semua 63 repo**, otomatis + kolom `verifikasi_manual` | `python -m research.inventaris_repo` → `inventaris_63_repo.csv` (bila kolom otomatis berbeda, kolom manual yang benar) |
 | Kolom yang sama, diverifikasi manual (baca baris kodenya) | **41 kandidat** | Hasilnya di `ASAL.md` tiap folder |
+| Baca manual file inti (order, login, jaringan, server, proses, pickle, kredensial) | **298 file inti 41 kandidat**: 18 repo dibaca penuh, 23 per titik aksi | `docs/TINJAUAN_MANUAL.md` |
 | Klaim win-rate / profit / drawdown | README & dokumen semua repo; laporan hasil (CSV/MD) bila ada | Dikutip apa adanya |
 | Uji ulang strategi di data asli 2012–2026 (spread, tanpa look-ahead) | **36 strategi** dari 22 repo + 5 repo ML diwakili uji walk-forward; yang tidak bisa diuji beserta alasannya: paragraf di bawah & `docs/AUDIT_63_REPO.md` §3.2 | `research/github_popular*.py`, `research/mnauu_confluence.py` |
 
@@ -78,9 +79,39 @@ GifariKemal (ML + SMC + HMM + dashboard + Telegram), triqbit (arsitektur ML/DRL,
 EA, safety gates), samw2591 (riset & validasi paling serius), Turnipnator (bot Oanda live dengan test), P1Piyush (web
 + EA + ML).
 
+### Temuan tinjauan manual (C2, `docs/TINJAUAN_MANUAL.md`)
+
+**Jangan dijalankan:**
+- **EA_SCALPER `scripts/install_trading_mcps.ps1`**: memasang 15 paket npm `@trading-mcps/*` yang tidak ada (siapa pun bisa mendaftarkannya).
+- **EA_SCALPER `windows_setup.ps1`**: menambah pengecualian Windows Defender.
+- **EA_SCALPER `coldturkey_blocker.py`**: alat bypass lisensi.
+
+**Server tanpa login** (jangan dipakai di jaringan bersama):
+- GifariKemal: API dasbor bisa mematikan filter bot live.
+- Pestador: bisa disuruh membuka URL dan menulis file.
+- P1Piyush: TCP 9998.
+- armza332: `close_all` tanpa secret.
+- EA_SCALPER: proxy LLM.
+- Sheyswaggz: Redis.
+
+**Order bisa tanpa SL:**
+- BlamzKunG: semua order grid.
+- AnggaKay: retry tanpa SL.
+- GifariKemal: retry tanpa SL.
+- Turnipnator: retry tanpa SL, tetapi ada peringatan.
+- damaradam04: `simple_buy.py`.
+
+**Risiko lebih besar dari yang tertulis:**
+- HillaryMurimi: lot 10×.
+- pipela: SL diperlebar setelah entry.
+- Kiran-Kumbar: 5%.
+- 3aLaee: SL lebih kecil dari spread.
+
 ### Desain paling aman
-sensesVoid (order hanya setelah Anda menyetujui), Turnipnator (SL dikirim bersama order), EA MQL (tidak menyimpan
-password: BlamzKunG, phatnomenal, RobertN1D, shamshyder, AnggaKay, Takura-Z, armza332).
+sensesVoid (order hanya setelah Anda menyetujui), damaradam04 (executor menolak akun live), Turnipnator (SL dikirim
+bersama order + verifikasi bracket), RobertN1D & a1shmuk (SL selalu di server). EA MQL tidak menyimpan password
+(BlamzKunG, phatnomenal, RobertN1D, shamshyder, AnggaKay, Takura-Z, armza332) — tetapi itu hanya soal password; lihat
+daftar "order bisa tanpa SL" di atas.
 
 ### Login MT5 — yang perlu diperhatikan
 - Aman: EA MQL (jalan di terminal), atau `.env` (GifariKemal, triqbit, 3aLaee, Mnauu2201, sensesVoid, HillaryMurimi).

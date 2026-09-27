@@ -24,6 +24,20 @@ Strategi yang aturannya jelas ditulis ulang di mesin uji bot ini dan diuji di da
   4. **File model AI** (`.zip` Stable-Baselines3, `.pkl`, `.h5`) di `pipela`, `wael-slimi`, `GifariKemal` (+2 salinan),
      `nathanaela2002`: memuat model pickle = bisa menjalankan kode apa pun. Model PPO di pipela & wael-slimi terbukti
      berisi 10 objek pickle. Muat hanya dari sumber yang Anda percaya.
+  5. **Tinjauan manual C2** (`docs/TINJAUAN_MANUAL.md`):
+     - **EA_SCALPER**:
+       - `scripts/install_trading_mcps.ps1` memasang 15 paket npm `@trading-mcps/*` yang **tidak ada** (celah
+         *slopsquatting*);
+       - `windows_setup.ps1` menambah pengecualian Windows Defender;
+       - `coldturkey_blocker.py` = alat bypass lisensi.
+     - **Server tanpa login**:
+       - GifariKemal (API dasbor bisa mematikan filter bot live);
+       - Pestador (bisa disuruh membuka URL & menulis file);
+       - P1Piyush (TCP 9998);
+       - armza332 (`close_all` tanpa secret).
+     - **Order bisa tanpa SL**:
+       - BlamzKunG (semua order grid);
+       - AnggaKay & GifariKemal (retry tanpa SL).
 - `0xagarg/xau-ai-trading-bot` dan `BizShibe/XAUUSD-ai-trading-bot` adalah **salinan identik byte-per-byte** dari
   `GifariKemal/xaubot-ai` dengan nama berbeda. Empat repo kosong (`cryptocoin81`, `eddiehng7`, `tensecrocodile`,
   `Likando21`).
