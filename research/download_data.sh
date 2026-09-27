@@ -11,5 +11,6 @@ fetch() {  # repo  path...
 }
 fetch ejtraderLabs/historical-data XAUUSD/
 fetch dineshelumalai007/xauusd-5m gold_m5_historical.csv
+fetch ilahuerta-IA/backtrader-pullback-window-xauusd data/XAUUSD_5m_5Yea.csv
 fetch Sai310421/xauusd-data parquet/XAUUSD_M1_90d_20260526.parquet parquet/XAGUSD_M5_90d_20260526.parquet
 echo "Selesai: $DIR"

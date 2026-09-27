@@ -1,0 +1,31 @@
+# 🔍 Technical Audit & Evidence Center
+
+This directory serves as the central repository for all technical audits, performance benchmarks, and security scorecards.
+
+## 📋 Technical Evidence Index
+
+| Report | Description | Status |
+| :--- | :--- | :--- |
+| [**walkforward_verification_report.md**](./walkforward_verification_report.md) | Institutional Walk-Forward Optimization and strategy robustness report. | ✅ Verified |
+| [**ENTERPRISE_EVIDENCE_SCORECARD.md**](./ENTERPRISE_EVIDENCE_SCORECARD.md) | Compliance with institutional engineering standards and subsystem maturity. | ✅ Active |
+| [**INTEGRATION_TEST_RESULTS.md**](../testing/INTEGRATION_TEST_RESULTS.md) | Verified results of end-to-end integration paths and API harmonization. | ✅ Verified |
+| [**ALIGNMENT_REPORT.md**](./ALIGNMENT_REPORT.md) | Strategy-to-code alignment and agent coordination audit. | ✅ Verified |
+| [**PERFORMANCE_COMPLEXITY_REPORT.md**](./PERFORMANCE_COMPLEXITY_REPORT.md) | Runtime efficiency and computational complexity analysis. | ✅ Verified |
+| [**CORRECTIVE_ACTION_VERIFICATION.md**](./CORRECTIVE_ACTION_VERIFICATION.md) | Post-incident audits and resolution verification. | ✅ Active |
+| [**ADR_AUDIT_REPORT.md**](./ADR_AUDIT_REPORT.md) | Review of key Architecture Decision Records (ADRs). | ✅ Active |
+
+---
+
+## 🗺️ System Map & Health Routing
+
+| Navigation Target | Purpose | Status |
+| :--- | :--- | :--- |
+| [**Architecture Quick-Start**](../ARCHITECTURE_QUICK.md) | High-level system topology and production maturity map. | ✅ Verified |
+| [**Project Health Dashboard**](../status/PROJECT_HEALTH.md) | Real-time CI, linter, and PR backlog metrics. | ✅ Active |
+| [**Process Integrity Log**](../status/PROCESS_INTEGRITY_LOG.md) | Audit trail of daily process invariant checks. | ✅ Active |
+
+---
+
+## 🏛️ Governance Context
+
+These audits are maintained by the Technical Credibility & Evidence Surface Engine (Jules06) to ensure the system remains enterprise-legible and trustworthy.

@@ -1,0 +1,48 @@
+samw_macd H1 (dinonaktifkan penulis)
+   2012-17: n= 720 win=33.2% rata=-0.010R total=   -7.2R PF=0.95 DD=-25.2R
+   2018-22: n= 547 win=32.7% rata=-0.010R total=   -5.5R PF=0.95 DD=-12.4R
+   2022-25: n= 385 win=37.7% rata=+0.050R total=  +19.3R PF=1.29 DD=-8.3R
+   2025-26: n= 189 win=36.0% rata=+0.081R total=  +15.3R PF=1.30 DD=-10.1R
+   TOTAL  : n=1841 win=34.3% rata=+0.012R total=  +21.9R PF=1.06 DD=-29.4R | periode positif 2/4
+samw_gapfill Senin (dinonaktifkan penulis)
+   2012-17: n= 209 win=54.5% rata=+0.040R total=   +8.4R PF=1.11 DD=-8.0R
+   2018-22: n= 145 win=57.9% rata=+0.126R total=  +18.2R PF=1.35 DD=-6.9R
+   2022-25: n= 124 win=50.0% rata=-0.043R total=   -5.3R PF=0.91 DD=-9.2R
+   2025-26: n=  75 win=42.7% rata=-0.138R total=  -10.4R PF=0.75 DD=-11.6R
+   TOTAL  : n= 553 win=52.8% rata=+0.020R total=  +10.9R PF=1.05 DD=-19.0R | periode positif 2/4
+xaubot_v3 asli (berhenti permanen)
+   2012-17: n=   1 win= 0.0% rata=-0.147R total=   -0.1R PF=0.00 DD=-0.1R
+   2018-22: n=   1 win= 0.0% rata=-0.671R total=   -0.7R PF=0.00 DD=-0.7R
+   2022-25: n=   5 win=40.0% rata=+0.065R total=   +0.3R PF=1.15 DD=-1.6R
+   2025-26: n=   4 win=25.0% rata=-0.381R total=   -1.5R PF=0.19 DD=-1.9R
+   TOTAL  : n=  11 win=27.3% rata=-0.183R total=   -2.0R PF=0.59 DD=-2.4R | periode positif 1/4
+xaubot_v3 halt direset harian
+   2012-17: n=   1 win= 0.0% rata=-0.147R total=   -0.1R PF=0.00 DD=-0.1R
+   2018-22: n=   1 win= 0.0% rata=-0.671R total=   -0.7R PF=0.00 DD=-0.7R
+   2022-25: n=   5 win=40.0% rata=+0.065R total=   +0.3R PF=1.15 DD=-1.6R
+   2025-26: n=  71 win=46.5% rata=-0.135R total=   -9.6R PF=0.59 DD=-10.5R
+   TOTAL  : n=  78 win=44.9% rata=-0.129R total=  -10.1R PF=0.62 DD=-10.7R | periode positif 1/4
+xaubot_v3 reset harian, tanpa filter ATR $5-25
+   2012-17: n= 179 win=32.4% rata=-0.217R total=  -38.8R PF=0.55 DD=-41.0R
+   2018-22: n= 108 win=38.0% rata=-0.202R total=  -21.8R PF=0.56 DD=-22.5R
+   2022-25: n= 125 win=40.0% rata=-0.132R total=  -16.5R PF=0.64 DD=-21.0R
+   2025-26: n=  89 win=46.1% rata=-0.127R total=  -11.3R PF=0.62 DD=-12.2R
+   TOTAL  : n= 501 win=37.9% rata=-0.176R total=  -88.4R PF=0.58 DD=-90.7R | periode positif 0/4
+ultra_aggressive M15 (EA_SCALPER)
+   2012-17: n=4216 win=26.9% rata=-0.198R total= -833.7R PF=0.73 DD=-840.7R
+   2018-22: n=3083 win=27.3% rata=-0.187R total= -576.5R PF=0.74 DD=-587.5R
+   2022-25: n=2297 win=31.0% rata=-0.069R total= -158.5R PF=0.90 DD=-180.5R
+   2025-26: n=1015 win=34.9% rata=+0.035R total=  +35.3R PF=1.05 DD=-43.6R
+   TOTAL  : n=10611 win=28.7% rata=-0.145R total=-1533.4R PF=0.80 DD=-1586.7R | periode positif 1/4
+angga_rules M5 tanpa ML (AnggaKay)
+   2012-17: - (butuh data M5)
+   2018-22: - (butuh data M5)
+   2022-25: n=14686 win=50.5% rata=-0.061R total= -899.9R PF=0.84 DD=-915.6R
+   2025-26: n=13771 win=43.6% rata=-0.059R total= -806.7R PF=0.86 DD=-816.5R
+   TOTAL  : n=28457 win=47.2% rata=-0.060R total=-1706.6R PF=0.85 DD=-1712.8R | periode positif 0/2
+nathanaela_mlp M30 walk-forward
+   2012-17: n=7373 win=19.7% rata=-0.708R total=-5220.4R PF=0.36 DD=-5229.3R
+   2018-22: n=5638 win=19.2% rata=-0.726R total=-4091.3R PF=0.35 DD=-4091.3R
+   2022-25: n=3629 win=22.3% rata=-0.512R total=-1858.7R PF=0.46 DD=-1859.1R
+   2025-26: n= 468 win=31.2% rata=-0.104R total=  -48.5R PF=0.86 DD=-59.7R
+   TOTAL  : n=17108 win=20.4% rata=-0.656R total=-11218.9R PF=0.38 DD=-11233.0R | periode positif 0/4

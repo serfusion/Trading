@@ -154,3 +154,25 @@ python -m research.scalp
 python -m research.exam m15_2012
 python -m research.exam m5_2025
 ```
+
+## 10. Periode baru 2022–2025 (data yang belum pernah dipakai)
+
+Dataset ke-4: [ilahuerta-IA/backtrader-pullback-window-xauusd](https://github.com/ilahuerta-IA/backtrader-pullback-window-xauusd)
+M5 Agu 2020 – Agu 2025 (UTC, selisih median $0,22 dengan dataset lain), dipakai untuk Apr 2022 – Apr 2025 yang
+sebelumnya kosong. Engine bot (`python -m research.engine_ab`), saldo $10.000:
+
+| Setelan | 2012–17 | 2018–22 | **2022–25** | 2025–26 |
+|---|---|---|---|---|
+| F-ensemble 0,5%/set (default) | +28,6% / DD −13,9% | +16,3% / −16,4% | **−14,9% / −28,9%** | +41,0% / −9,9% |
+| A-ensemble 0,25%/set (usulan) | +24,0% / −12,4% | +24,9% / −11,0% | **+3,7% / −14,4%** | (sinyal dilewati: lot min.) |
+
+- Uji ketahanan 76 varian Donchian H1: 91% positif di 2022–25 dan 89% positif di keempat periode, tetapi rata-rata
+  hanya +0,04R per trade di 2022–25 (pasar lebih "berombak").
+- Skema F (TP1 + SL+) memotong trend yang berlanjut; di 2022–25 hasilnya −6,2R vs +9,8R untuk skema A (uji sinyal).
+- Rincian, uji repo GitHub populer, kebijakan risiko & rencana aplikasi: [`RISET_GITHUB.md`](RISET_GITHUB.md).
+
+```bash
+python -m research.engine_ab m5_2020 F --from 2022-04-01 --to 2025-04-07 --risk 0.5
+python -m research.engine_ab m5_2020 A --from 2022-04-01 --to 2025-04-07 --risk 0.25
+python -m research.combine
+```

@@ -1,0 +1,85 @@
+{
+  "trained_at": "2026-06-03T10:04:53.428208",
+  "source": "train_optuna.py (Bayesian Optimized 20-Feature)",
+  "strategy_params": {
+    "SL_PIPS": 30,
+    "BREAKEVEN_PIPS": 20,
+    "TRAIL_STEP": 0,
+    "SPIKE_MIN": 12
+  },
+  "optuna_best_score": 0.746,
+  "best_hyperparameters": {
+    "n_estimators": 516,
+    "max_depth": 3,
+    "learning_rate": 0.09767026070942897,
+    "subsample": 0.6727456640116257,
+    "colsample_bytree": 0.7248348474340609,
+    "min_child_weight": 7,
+    "gamma": 1.9679353555952108,
+    "scale_pos_weight": 0.8904814780310452,
+    "objective": "binary:logistic",
+    "random_state": 42,
+    "eval_metric": "logloss",
+    "n_jobs": -1
+  },
+  "hst_bars": 10304,
+  "samples": 6141,
+  "n_profitable": 4497,
+  "profitable_pct": 73.2,
+  "classes": [
+    "LOSS",
+    "PROFIT"
+  ],
+  "val_accuracy": 0.5997,
+  "val_precision": 0.7367,
+  "val_recall": 0.6811,
+  "val_f1": 0.7078,
+  "confusion_matrix": [
+    [
+      141,
+      213
+    ],
+    [
+      279,
+      596
+    ]
+  ],
+  "prob_separation": 0.0233,
+  "prob_min": 0.0292,
+  "prob_max": 0.9782,
+  "prob_median": 0.5847,
+  "top_features": [
+    {
+      "feature": "M15_session_london",
+      "importance": 0.0564
+    },
+    {
+      "feature": "M15_choppiness_14",
+      "importance": 0.0507
+    },
+    {
+      "feature": "M15_rsi_7",
+      "importance": 0.0495
+    },
+    {
+      "feature": "M15_volatility_14",
+      "importance": 0.0492
+    },
+    {
+      "feature": "M15_atr_5",
+      "importance": 0.0489
+    },
+    {
+      "feature": "M15_session_us",
+      "importance": 0.0488
+    },
+    {
+      "feature": "M15_momentum_3",
+      "importance": 0.0485
+    },
+    {
+      "feature": "M15_spread_vol_ratio",
+      "importance": 0.0483
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "trained_at": "2026-06-17T14:22:21.015455",
+  "source": "train_v6.py (M5 scalper with trailing)",
+  "strategy_params": {
+    "SL_PIPS": 30,
+    "BREAKEVEN_PIPS": 20,
+    "TRAIL_STEP": 0,
+    "SPIKE_MIN": 12
+  },
+  "hst_file": "C:\\Users\\angga\\AppData\\Roaming\\MetaQuotes\\Terminal\\50CA3DFB510CC5A8F28B48D1BF2A5702\\history\\ValburyAsiaFutures-Demo\\XAUUSD5.hst",
+  "hst_range": "2025-12-18 20:55:00+00:00 -> 2026-06-16 20:55:00+00:00",
+  "hst_bars": 33860,
+  "samples": 14282,
+  "n_profitable": 10215,
+  "n_unprofitable": 4067,
+  "profitable_pct": 71.5,
+  "features": 31,
+  "feature_names": [
+    "M15_atr_5",
+    "M15_vwap_dist",
+    "M15_volatility_14",
+    "M15_rsi_7",
+    "M15_range_atr_ratio",
+    "M15_spike_intensity",
+    "M15_micro_trend",
+    "M15_macd_hist",
+    "M15_vol_anomaly",
+    "M15_bb_pos",
+    "M15_momentum_3",
+    "M15_rsi_14",
+    "M15_vol_zscore",
+    "M15_spread_vol_ratio",
+    "M15_vol_explosion",
+    "M15_ema200_dist",
+    "M15_rsi_diff",
+    "M15_choppiness_14",
+    "M15_session_london",
+    "M15_session_us",
+    "M15_confluence_score",
+    "M15_adx_14",
+    "M15_upper_wick_ratio",
+    "M15_lower_wick_ratio",
+    "M15_body_atr_ratio",
+    "M15_bb_width",
+    "M15_stoch_k",
+    "M15_stoch_d",
+    "M15_keltner_dist_upper",
+    "M15_keltner_dist_lower",
+    "M15_momentum_exp"
+  ],
+  "classes": [
+    "LOSS",
+    "PROFIT"
+  ],
+  "val_accuracy": 0.6822,
+  "val_precision": 0.7467,
+  "val_recall": 0.8627,
+  "val_f1": 0.8005,
+  "confusion_matrix": [
+    [
+      127,
+      618
+    ],
+    [
+      290,
+      1822
+    ]
+  ],
+  "prob_separation": 0.0098,
+  "prob_min": 0.0208,
+  "prob_max": 0.9713,
+  "prob_median": 0.6734,
+  "prob_p25": 0.4685,
+  "prob_p75": 0.7682,
+  "prob_iqr": 0.2997,
+  "n_train": 11425,
+  "n_val": 2857,
+  "top_features": [
+    {
+      "feature": "M15_atr_5",
+      "importance": 0.0633
+    },
+    {
+      "feature": "M15_volatility_14",
+      "importance": 0.035
+    },
+    {
+      "feature": "M15_keltner_dist_lower",
+      "importance": 0.0349
+    },
+    {
+      "feature": "M15_keltner_dist_upper",
+      "importance": 0.0331
+    },
+    {
+      "feature": "M15_macd_hist",
+      "importance": 0.0323
+    },
+    {
+      "feature": "M15_spread_vol_ratio",
+      "importance": 0.0323
+    },
+    {
+      "feature": "M15_range_atr_ratio",
+      "importance": 0.0323
+    },
+    {
+      "feature": "M15_vol_explosion",
+      "importance": 0.0321
+    }
+  ]
+}

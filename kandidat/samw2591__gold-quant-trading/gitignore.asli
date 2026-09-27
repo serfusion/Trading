@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+logs/*.log
+.env
+package-lock.json
+
+# data目录: 交易数据需要同步到GitHub供日报读取
+# 排除大文件，保留状态JSON
+data/download/
+data/bars_*.json
+
+# Python venv
+.venv/

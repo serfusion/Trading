@@ -12,6 +12,13 @@ Bot 24 jam untuk XAUUSD dengan dua mesin strategi:
 > (2015, 2018, 2021) dan drawdown. Butuh saldo ±$5.000 untuk risiko 1% dengan 0,01 lot di akun
 > USD standar (SL median ±$50 per 0,01 lot) — saldo kecil gunakan akun Cent.
 
+> 🔎 **Riset terbaru ([`docs/RISET_GITHUB.md`](docs/RISET_GITHUB.md))**: 11 repo emas GitHub terpopuler diuji
+> ulang di data asli 2012–2026 — klaim win-rate 55–68% mereka tidak terbukti. Di periode baru **2022–2025**
+> setelan default bot ini (skema F, 0,5%/set) **rugi −14,9% (DD −28,9%)**; skema A (hold sampai sinyal TUTUP)
+> pada 0,25%/set lebih baik (+61% vs +27% di 2012–2025, DD lebih kecil) → disarankan, menunggu persetujuan.
+> Membeli emas tanpa leverage (+178% 2012–2026) mengalahkan semua setelan bot. Untuk modal kecil/dhuafa:
+> tabungan emas + fitur berbagi & zakat.
+
 Fitur umum:
 - Lot otomatis dari % risiko (default 1%). **Tidak ada martingale.**
 - Batas rugi harian 3% / mingguan 6%, berhenti setelah 2 SL beruntun, blok rollover, akhir
@@ -54,6 +61,38 @@ tab **Auto** di aplikasi Android (default OFF). Panduan lengkap: [`docs/CLOUD.md
 - Tab **Auto** (versi cloud + MetaApi): Auto ON/OFF, Jeda, lot & jumlah posisi, TUTUP SEMUA, saldo
   dan posisi bot yang sedang terbuka — semua dari HP.
 - Kode aplikasi ada di folder `android/` (Kotlin + Jetpack Compose).
+
+## Periksa keamanan bot/EA orang lain sebelum dijalankan
+
+```bat
+python -m xau_bot audit folder_bot_download        :: detail per baris
+python -m xau_bot audit --ringkas repos\*          :: satu baris per folder
+```
+
+Pemindai statis (kode **tidak** dijalankan): keylogger, pencuri password/cookie/wallet, unduh-lalu-jalankan, kode
+tersamar (PyArmor, exec base64), EA yang mengirim data akun lewat `WebRequest` / `#import` DLL, token & chat ID
+Telegram orang lain yang tertanam, file model pickle, biner tanpa source, martingale/grid. Hasil audit 63 repo
+XAUUSD dan uji ulang strateginya: [`docs/AUDIT_63_REPO.md`](docs/AUDIT_63_REPO.md) — tidak ada malware aktif,
+1 repo tersandi (jangan dijalankan), 4 repo mengirim saldo Anda ke Telegram penulisnya, dan tidak ada strategi
+yang lebih baik dari resep bot ini. Kode 41 repo kandidat (win-rate tinggi, profit, scalping, fitur) tersimpan di
+[`kandidat/`](kandidat/KATALOG.md) untuk dibandingkan sendiri.
+
+## Dompet Berbagi, zakat & tabungan emas
+
+Alat hitung untuk tujuan sosial proyek ini (detail & alasannya di [`docs/RISET_GITHUB.md`](docs/RISET_GITHUB.md) §7):
+
+```bat
+python -m xau_bot berbagi --persen 10 --kurs 16500          :: dari riwayat MT5 (bot), sisihkan 10% profit bersih baru
+python -m xau_bot berbagi --csv riwayat.csv --periode W     :: atau dari CSV (kolom waktu & profit)
+python -m xau_bot zakat --harta 250000000 --harga-gram 2300000
+python -m xau_bot tabungan --setoran 300000 --harga-gram 2300000 --bulan 60
+```
+
+- **Berbagi** memakai *high-water mark*: setelah rugi, kerugian harus tertutup dulu sebelum ada alokasi lagi — tidak
+  ada sedekah dari profit semu.
+- **Zakat mal** 2,5% bila harta bersih ≥ nisab 85 gram emas dan sudah haul (alat hitung, bukan fatwa).
+- **Tabungan emas** rutin tanpa leverage: nilai bisa turun, tetapi tidak bisa "habis" seperti akun trading. Harga per
+  gram di contoh hanyalah contoh.
 
 ## 1. Instalasi lengkap (Windows / VPS Windows)
 
@@ -133,6 +172,9 @@ Semua jarak memakai satuan harga: `1.00` = 1 poin di chart (4348.23 → 4349.23)
 
 Lihat [`docs/BACKTEST.md`](docs/BACKTEST.md): metodologi, hasil per periode/tahun, dan perintah
 untuk mengulang (`bash research/download_data.sh`, `python -m research.engine_validate ...`).
+Uji ulang repo GitHub populer, gabungan strategi, kebijakan risiko (martingale/grid) dan tabungan emas:
+[`docs/RISET_GITHUB.md`](docs/RISET_GITHUB.md) (`python -m research.github_popular`, `research.combine`,
+`research.policy`, `research.dca`).
 
 ## 6. Struktur kode
 
@@ -147,8 +189,10 @@ xau_bot/
   news.py       kalender ekonomi ForexFactory
   broker/mt5.py MetaTrader 5 (Exness)   broker/paper.py simulasi backtest
   backtest.py   backtest dengan engine yang sama
+  berbagi.py    dompet berbagi (high-water mark), zakat mal, rencana tabungan emas
+  audit.py      pemindai keamanan statis untuk bot/EA pihak ketiga
 research/       scan, simulasi, uji ketahanan & validasi engine di data historis
-tests/          41 unit test (strategi, trend, risiko, sesi, berita, engine, MT5 palsu)
+tests/          88 unit test (strategi, trend, ensemble, risiko, sesi, berita, engine, cloud, berbagi, audit, MT5 palsu)
 ```
 
 Menjalankan test: `pip install -r requirements-dev.txt` lalu `pytest`.

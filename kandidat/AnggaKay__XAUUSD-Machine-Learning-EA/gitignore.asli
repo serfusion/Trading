@@ -1,0 +1,167 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data
+data/training/*.csv
+data/features/*.npy
+data/features/*.pkl
+
+# Models (Di-hosting di Hugging Face)
+models/*.h5
+models/*.pkl
+models/*.pth
+models/*.pt
+*.joblib
+
+# Logs & Txt
+logs/
+*.log
+*.log.*
+*.txt
+!requirements.txt
+!CMakeLists.txt
+
+# Config (sensitive)
+config/secrets.yaml
+config/api_keys.yaml
+*.env
+
+# Database
+database/*.db
+database/*.sqlite
+
+# Cache
+.cache/
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Temporary & Obsolete files
+*.tmp
+*.bak
+*.swp
+*.orig
+*.old
+*.lock
+*.ps1
+*.bat
+best_params.json
+
+# Output Dumps
+plots/
+scratch/
+.opencode/
+
+# MetaTrader 4 Compiled & Logs
+*.ex4
+mt4/*.log
+mt4/*.txt
+
+# ==========================================
+# FULL WHITELIST MODE (Mencegah file sampah)
+# ==========================================
+# Blokir semua file terlebih dahulu
+*
+
+# Izinkan folder git internal
+!.git/
+!.gitignore
+
+# Izinkan Root Files inti
+!README.md
+!requirements.txt
+!run_bot_v6.py
+
+# =======================
+# VEKTOR V6 CORE FILES
+# =======================
+
+# Izinkan folder src
+!src/
+src/*
+
+# Dependensi Features Reduced
+!src/scalpdaily/
+src/scalpdaily/*
+!src/scalpdaily/features_reduced.py
+!src/scalpdaily/volatility.py
+
+# Inti Logika AI & Trading V6
+!src/vektor_v6/
+src/vektor_v6/*
+!src/vektor_v6/__init__.py
+!src/vektor_v6/bridge.py
+!src/vektor_v6/config.py
+!src/vektor_v6/direction.py
+!src/vektor_v6/main.py
+!src/vektor_v6/quality.py
+
+# Konfigurasi Model
+!src/vektor_v6/models/
+src/vektor_v6/models/*
+!src/vektor_v6/models/metadata_v6.json
+!src/vektor_v6/models/metadata_v8_sideways.json
+
+# Izinkan folder scripts
+!scripts/
+scripts/*
+!scripts/train_v6.py
+!scripts/verify_v6.py
+!scripts/train_sideways.py
+!scripts/train_optuna.py
+
+# Izinkan folder mt4 dan EA v6
+!mt4/
+mt4/*
+!mt4/ScalpDaily_ML_EA_v6.mq4
+!mt4/ScalpDaily_DataCollector.mqh
+!mt4/ScalpDaily_OrderEngine.mqh
+!mt4/ScalpDaily_Bridge.mqh

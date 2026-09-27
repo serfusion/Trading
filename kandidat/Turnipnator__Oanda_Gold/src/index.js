@@ -1,0 +1,1957 @@
+/**
+ * Gold Trading Bot - Main Entry Point
+ * Automated XAU/USD trading using Triple Confirmation Strategy on Oanda
+ */
+import cron from 'node-cron';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Config from './config.js';
+import logger from './logger.js';
+import OandaClient from './oanda_client.js';
+import TechnicalAnalysis from './technical_analysis.js';
+import TripleConfirmationStrategy from './strategy.js';
+import BreakoutADXStrategy from './breakout_adx_strategy.js';
+import EmaTrendStrategy from './ema_trend_strategy.js';
+import RiskManager from './risk_manager.js';
+import GoldTelegramBot from './telegram_bot.js';
+import StrategyTracker from './strategy_tracker.js';
+import { formatConfidence } from './format.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Position data file path - use /app/data in Docker, ./data locally
+const DATA_DIR = process.env.NODE_ENV === 'production' ? '/app/data' : path.join(__dirname, '..', 'data');
+const POSITIONS_FILE = path.join(DATA_DIR, 'active_positions.json');
+const COOLDOWN_FILE = path.join(DATA_DIR, 'trade_cooldown.json');
+
+// A single failed position-monitor cycle (Oanda's sporadic 401/503 on the 60s poll) is transient
+// and self-heals on the next cycle, so it is logged at warn. Escalate to error only once this many
+// consecutive cycles have failed - at that point an open position may genuinely be unmonitored.
+const MONITOR_FAILURE_ESCALATE_AFTER = 3;
+// Once escalated, keep the error-level line for cycle 3 and every Nth cycle after it. Oanda's
+// Friday-night maintenance window returns 503 for ~100 minutes, which used to write ~100 error
+// lines for one event; the cycles in between still log at warn so the live log shows continuity.
+const MONITOR_FAILURE_ERROR_EVERY = 10;
+
+class GoldTradingBot {
+  constructor() {
+    this.isRunning = false;
+    this.monitorConsecutiveFailures = 0; // consecutive monitorPositions() cycles that threw
+    this.startTime = null;
+    this.logger = logger;
+
+    // Initialize components
+    this.client = new OandaClient(logger);
+    this.ta = new TechnicalAnalysis(logger);
+
+    // Initialize strategies
+    this.tripleStrategy = new TripleConfirmationStrategy(logger, this.ta);
+    this.breakoutStrategy = new BreakoutADXStrategy(logger, this.ta);
+    this.emaTrendStrategy = new EmaTrendStrategy(logger, this.ta);
+
+    // Determine which strategy trades live (from config)
+    const strategyMap = {
+      'triple_confirmation': { strategy: this.tripleStrategy, name: 'Triple Confirmation' },
+      'breakout_adx': { strategy: this.breakoutStrategy, name: 'Breakout + ADX' },
+      'ema_trend': { strategy: this.emaTrendStrategy, name: 'EMA Trend' },
+    };
+    const selected = strategyMap[Config.STRATEGY_TYPE] || strategyMap['breakout_adx'];
+    const liveStrategyName = selected.name;
+    this.liveStrategy = selected.strategy;
+
+    // Initialize strategy tracker
+    this.tracker = new StrategyTracker();
+    this.tracker.registerStrategy('Breakout + ADX', liveStrategyName === 'Breakout + ADX');
+    this.tracker.registerStrategy('Breakout + ADX (Realtime MTF)', liveStrategyName === 'Breakout + ADX');
+    this.tracker.registerStrategy('Triple Confirmation', liveStrategyName === 'Triple Confirmation');
+    this.tracker.registerStrategy('EMA Trend', liveStrategyName === 'EMA Trend');
+
+    logger.info(`🟢 LIVE Strategy: ${liveStrategyName}`);
+    const otherStrategies = Object.values(strategyMap).filter(s => s.name !== liveStrategyName).map(s => s.name);
+    logger.info(`📝 HYPOTHETICAL: ${otherStrategies.join(', ')}`);
+
+    this.riskManager = new RiskManager(logger, this.client);
+
+    // Telegram bot (optional)
+    this.telegramBot = null;
+
+    // Track active positions
+    this.activePositions = new Map();
+
+    // Load persisted positions on startup
+    this.loadPositions();
+
+    // Track last API error notification (to avoid spam)
+    this.lastApiErrorNotification = null;
+
+    // Watchdog: track last successful activity to detect hangs
+    this.lastActivityTime = Date.now();
+
+    // Trade cooldown: track when last trade closed to prevent rapid re-entries
+    this.lastTradeCloseTime = null;
+
+    // Load persisted cooldown on startup
+    this.loadCooldown();
+
+    logger.info(`🤖 ${Config.BOT_NAME} initialized`);
+  }
+
+  /**
+   * Check if trade cooldown is active (prevents rapid re-entries after losses)
+   * @returns {Object} { active: boolean, remainingMinutes: number }
+   */
+  checkTradeCooldown() {
+    if (!this.lastTradeCloseTime || Config.TRADE_COOLDOWN_HOURS <= 0) {
+      return { active: false, remainingMinutes: 0 };
+    }
+
+    const cooldownMs = Config.TRADE_COOLDOWN_HOURS * 60 * 60 * 1000;
+    const elapsed = Date.now() - this.lastTradeCloseTime;
+    const remaining = cooldownMs - elapsed;
+
+    if (remaining <= 0) {
+      return { active: false, remainingMinutes: 0 };
+    }
+
+    return {
+      active: true,
+      remainingMinutes: Math.ceil(remaining / 60000)
+    };
+  }
+
+  /**
+   * Check if we're within allowed trading hours
+   * Avoids Asian session (00:00-08:00 UK) when liquidity is low and wicks are wild
+   * @returns {{ allowed: boolean, currentHour: number, reason?: string }}
+   */
+  checkTradingHours() {
+    // Get current hour in UK timezone
+    const now = new Date();
+    const ukTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    const currentHour = ukTime.getHours();
+
+    const startHour = Config.TRADING_START_HOUR;
+    const endHour = Config.TRADING_END_HOUR;
+
+    // Handle normal range (e.g., 08:00-22:00)
+    if (startHour < endHour) {
+      const allowed = currentHour >= startHour && currentHour < endHour;
+      return {
+        allowed,
+        currentHour,
+        reason: allowed ? null : `Outside trading hours (${startHour}:00-${endHour}:00 UK, currently ${currentHour}:00)`
+      };
+    }
+
+    // Handle overnight range (e.g., 22:00-08:00) - would mean startHour > endHour
+    const allowed = currentHour >= startHour || currentHour < endHour;
+    return {
+      allowed,
+      currentHour,
+      reason: allowed ? null : `Outside trading hours (${startHour}:00-${endHour}:00 UK, currently ${currentHour}:00)`
+    };
+  }
+
+  /**
+   * Save cooldown timer to file for persistence across restarts
+   */
+  saveCooldown() {
+    try {
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      const data = {
+        lastTradeCloseTime: this.lastTradeCloseTime,
+        savedAt: Date.now()
+      };
+
+      fs.writeFileSync(COOLDOWN_FILE, JSON.stringify(data, null, 2));
+      logger.debug(`💾 Saved cooldown timer to file`);
+    } catch (error) {
+      logger.error(`Failed to save cooldown: ${error.message}`);
+    }
+  }
+
+  /**
+   * Load cooldown timer from file
+   */
+  loadCooldown() {
+    try {
+      if (!fs.existsSync(COOLDOWN_FILE)) {
+        logger.info('📂 No persisted cooldown found');
+        return;
+      }
+
+      const rawData = fs.readFileSync(COOLDOWN_FILE, 'utf8');
+      const data = JSON.parse(rawData);
+
+      if (data.lastTradeCloseTime) {
+        this.lastTradeCloseTime = data.lastTradeCloseTime;
+        const cooldown = this.checkTradeCooldown();
+        if (cooldown.active) {
+          logger.info(`📂 Loaded cooldown: ${cooldown.remainingMinutes} minutes remaining`);
+        } else {
+          logger.info(`📂 Loaded cooldown expired - ready to trade`);
+          this.lastTradeCloseTime = null;
+        }
+      }
+    } catch (error) {
+      logger.error(`Failed to load cooldown: ${error.message}`);
+    }
+  }
+
+  /**
+   * Save active positions to file for persistence across restarts
+   */
+  savePositions() {
+    try {
+      // Ensure data directory exists
+      if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      // Convert Map to plain object for JSON serialization
+      const data = {};
+      for (const [tradeId, position] of this.activePositions) {
+        data[tradeId] = {
+          ...position,
+          openTime: position.openTime?.toISOString?.() || position.openTime
+        };
+      }
+
+      fs.writeFileSync(POSITIONS_FILE, JSON.stringify(data, null, 2));
+      logger.debug(`💾 Saved ${this.activePositions.size} active positions to file`);
+    } catch (error) {
+      logger.error(`Failed to save positions: ${error.message}`);
+    }
+  }
+
+  /**
+   * Load active positions from file
+   */
+  loadPositions() {
+    try {
+      if (!fs.existsSync(POSITIONS_FILE)) {
+        logger.info('📂 No persisted positions found, starting fresh');
+        return;
+      }
+
+      const rawData = fs.readFileSync(POSITIONS_FILE, 'utf8');
+      const data = JSON.parse(rawData);
+
+      for (const [tradeId, position] of Object.entries(data)) {
+        // Restore Date objects
+        if (position.openTime) {
+          position.openTime = new Date(position.openTime);
+        }
+        this.activePositions.set(tradeId, position);
+      }
+
+      logger.info(`📂 Loaded ${this.activePositions.size} active positions from file`);
+
+      // Log details of loaded positions
+      for (const [tradeId, pos] of this.activePositions) {
+        logger.info(`   📍 Trade ${tradeId}: ${pos.signal} @ $${pos.entryPrice?.toFixed(2)} | TP1: $${pos.takeProfit1?.toFixed(2)} | TP1 Hit: ${pos.tp1Hit ? 'YES' : 'NO'}`);
+      }
+    } catch (error) {
+      logger.error(`Failed to load positions: ${error.message}`);
+    }
+  }
+
+  /**
+   * Sync persisted positions with actual Oanda trades
+   * Removes positions that no longer exist on Oanda and sends closure notifications
+   */
+  async syncPositionsWithOanda() {
+    try {
+      const openTrades = await this.client.getOpenTrades();
+      const oandaTradeIds = new Set(openTrades.map(t => t.tradeId));
+
+      // Find positions that were closed while bot was down/restarting
+      const closedWhileDown = [];
+      for (const tradeId of this.activePositions.keys()) {
+        if (!oandaTradeIds.has(tradeId)) {
+          closedWhileDown.push(tradeId);
+        }
+      }
+
+      // Process each closed position - fetch details and notify
+      for (const tradeId of closedWhileDown) {
+        const tracked = this.activePositions.get(tradeId);
+        logger.info(`🗑️ Position ${tradeId} was closed while bot was down`);
+
+        try {
+          const response = await this.client.makeRequest('GET', `/v3/accounts/${this.client.accountId}/trades/${tradeId}`);
+          if (response.trade && response.trade.state === 'CLOSED') {
+            const trade = response.trade;
+            const entryPrice = parseFloat(trade.price);
+            const exitPrice = parseFloat(trade.averageClosePrice || entryPrice);
+            const pnl = parseFloat(trade.realizedPL || 0);
+            const initialSL = trade.stopLossOrder ? parseFloat(trade.stopLossOrder.price) : (tracked?.stopLoss || 0);
+            const riskPerUnit = initialSL ? Math.abs(entryPrice - initialSL) : 0;
+            const units = Math.abs(parseFloat(trade.initialUnits));
+            const riskAmount = riskPerUnit * units;
+            const rMultiple = riskAmount > 0 ? pnl / riskAmount : 0;
+            // Derive close reason from which protective order actually FILLED (not just exists)
+            const reason = trade.stopLossOrder?.state === 'FILLED' ? 'STOP_LOSS_ORDER'
+              : trade.takeProfitOrder?.state === 'FILLED' ? 'TAKE_PROFIT_ORDER' : 'Unknown';
+
+            logger.info(`💰 Closed trade ${tradeId}: ${pnl >= 0 ? '+' : ''}£${pnl.toFixed(2)} (${reason})`);
+
+            // Set cooldown timer to prevent rapid re-entries
+            this.lastTradeCloseTime = Date.now();
+            this.saveCooldown();
+            logger.info(`⏳ Trade cooldown started - next trade in ${Config.TRADE_COOLDOWN_HOURS} hours`);
+
+            // Clear all pending breakout state to prevent stale tracking surviving cooldown
+            if (this.breakoutStrategy) {
+              this.breakoutStrategy.clearAllPendingState();
+            }
+
+            // Send Telegram notification if available
+            if (this.telegramBot) {
+              try {
+                await this.telegramBot.notifyTradeClosed(
+                  tracked?.symbol || 'XAU_USD',
+                  entryPrice,
+                  exitPrice,
+                  pnl,
+                  rMultiple,
+                  reason,
+                  tracked?.strategyName || 'Unknown'
+                );
+              } catch (telegramError) {
+                logger.warn(`Failed to send closure notification for ${tradeId}: ${telegramError.message}`);
+              }
+            }
+
+            // Update risk manager
+            this.riskManager.recordTrade(pnl);
+
+            // Update strategy tracker (store the real broker realized P&L, not notional)
+            const trackerCloseId = tracked?.trackerTradeId || `LIVE_${tradeId}`;
+            this.tracker.closeTrade(tracked?.strategyName || 'Unknown', trackerCloseId, exitPrice, reason, pnl);
+          }
+        } catch (error) {
+          logger.warn(`Could not fetch close details for trade ${tradeId}: ${error.message}`);
+        }
+
+        this.activePositions.delete(tradeId);
+      }
+
+      // Save cleaned up positions
+      this.savePositions();
+    } catch (error) {
+      logger.error(`Failed to sync positions with Oanda: ${error.message}`);
+    }
+  }
+
+  /**
+   * Start the trading bot
+   */
+  async start() {
+    try {
+      logger.info('');
+      logger.info('═'.repeat(70));
+      logger.info('🚀 STARTING GOLD TRADING BOT');
+      logger.info('═'.repeat(70));
+
+      // Display configuration
+      Config.displayConfig();
+
+      // Validate configuration
+      const validation = Config.validate();
+      if (!validation.valid) {
+        logger.error('Configuration validation failed:');
+        validation.errors.forEach(error => logger.error(`  ❌ ${error}`));
+        process.exit(1);
+      }
+
+      logger.info('✅ Configuration validated');
+
+      // Test Oanda connection
+      logger.info('Testing Oanda API connection...');
+      const connected = await this.client.testConnection();
+      if (!connected) {
+        logger.error('Failed to connect to Oanda API');
+        process.exit(1);
+      }
+
+      // Initialize risk manager with current balance
+      await this.riskManager.syncBalance();
+
+      // Start Telegram bot if enabled (must start BEFORE position sync so notifications work)
+      if (Config.ENABLE_TELEGRAM) {
+        try {
+          logger.info('Starting Telegram bot...');
+          this.telegramBot = new GoldTelegramBot(logger, this);
+          await this.telegramBot.start();
+        } catch (error) {
+          logger.error(`Failed to start Telegram bot: ${error.message}`);
+          logger.warn('⚠️ Trading bot will continue without Telegram notifications');
+          this.telegramBot = null; // Disable Telegram if it fails
+        }
+      }
+
+      // Sync persisted positions with actual Oanda trades
+      // Done after Telegram starts so closure notifications can be sent
+      await this.syncPositionsWithOanda();
+
+      // Display strategy information
+      logger.info('');
+      logger.info('═'.repeat(70));
+      logger.info('📊 DUAL STRATEGY COMPARISON MODE');
+      logger.info('═'.repeat(70));
+      logger.info('');
+      logger.info('🟢 LIVE STRATEGY (Trading Real Money):');
+      logger.info('   ' + this.liveStrategy.name);
+      logger.info(this.liveStrategy.getDescription().split('\n').map(l => '   ' + l).join('\n'));
+      logger.info('');
+      logger.info('📝 HYPOTHETICAL STRATEGY (Tracking Only):');
+      const hypotheticalStrategy = this.liveStrategy === this.tripleStrategy ? this.breakoutStrategy : this.tripleStrategy;
+      logger.info('   ' + hypotheticalStrategy.name);
+      logger.info(hypotheticalStrategy.getDescription().split('\n').map(l => '   ' + l).join('\n'));
+      logger.info('');
+      logger.info('═'.repeat(70));
+      logger.info('');
+
+      // Set running flag
+      this.isRunning = true;
+      this.startTime = Date.now();
+
+      // Schedule market scans using recursive setTimeout (most reliable)
+      const scanIntervalMs = Config.SCAN_INTERVAL_MINUTES * 60 * 1000;
+      logger.info(`⏰ Scheduling market scans every ${Config.SCAN_INTERVAL_MINUTES} minutes using recursive setTimeout`);
+      logger.info(`📍 Scans will fire every ${scanIntervalMs}ms (${scanIntervalMs / 1000} seconds)`);
+
+      const scheduleNextScan = () => {
+        setTimeout(async () => {
+          try {
+            // Heartbeat log to verify scan is executing
+            const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
+            logger.info(`⏰ [${now}] Scan timeout fired - isRunning: ${this.isRunning}`);
+
+            if (this.isRunning) {
+              try {
+                await this.scanMarket();
+                this.lastActivityTime = Date.now();
+              } catch (error) {
+                logger.error(`Market scan failed: ${error.message}`);
+                logger.error(`Stack: ${error.stack}`);
+                logger.warn(`Will retry in ${Config.SCAN_INTERVAL_MINUTES} minutes`);
+
+                // Notify user if it's an API outage (with safe error handling)
+                if (error.message.includes('503') || error.message.includes('failed after')) {
+                  if (this.telegramBot) {
+                    try {
+                      await this.telegramBot.notifyError(`⚠️ API Issue: ${error.message}\n\nBot is still running and will retry automatically.`);
+                    } catch (telegramError) {
+                      logger.warn(`Failed to send Telegram notification: ${telegramError.message}`);
+                    }
+                  }
+                }
+              }
+            } else {
+              logger.warn(`⏸️ Bot is paused (isRunning: false) - skipping scan`);
+            }
+          } catch (scanError) {
+            // CRITICAL: Catch ANY error
+            logger.error(`🚨 CRITICAL: Scan timeout error: ${scanError.message}`);
+            logger.error(`Stack: ${scanError.stack}`);
+          } finally {
+            // ALWAYS schedule the next scan, even if this one failed
+            // Use setImmediate to ensure scheduling happens in a fresh event loop tick
+            setImmediate(() => scheduleNextScan());
+          }
+        }, scanIntervalMs);
+      };
+
+      scheduleNextScan();
+      logger.info(`✅ Recursive setTimeout initialized`);
+      logger.info(`🕐 First scan will fire at: ${new Date(Date.now() + scanIntervalMs).toISOString()}`);
+
+      // Run initial scan
+      logger.info('Running initial market scan...');
+      try {
+        await this.scanMarket();
+        this.lastActivityTime = Date.now();
+      } catch (error) {
+        logger.error(`Initial market scan failed: ${error.message}`);
+        logger.warn('Bot will continue and retry on next scheduled scan');
+      }
+
+      // Schedule daily reset (at midnight UTC)
+      cron.schedule('0 0 * * *', async () => {
+        try {
+          this.riskManager.resetDailyStats();
+          logger.info('📅 Daily statistics reset');
+        } catch (error) {
+          logger.error(`Daily reset failed: ${error.message}`);
+        }
+      });
+
+      // Monitor existing positions every minute using recursive setTimeout
+      logger.info(`⏰ Scheduling position monitoring every 60 seconds using recursive setTimeout`);
+
+      const scheduleNextMonitor = () => {
+        setTimeout(async () => {
+          try {
+            // Heartbeat log every 5 minutes to avoid spam (60s * 5 = 300s intervals)
+            const now = Date.now();
+            if (!this.lastMonitorLog || now - this.lastMonitorLog >= 300000) {
+              logger.info(`⏰ Position monitoring active (checks every 60s)`);
+              this.lastMonitorLog = now;
+            }
+
+            if (this.isRunning) {
+              try {
+                await this.monitorPositions();
+                this.lastActivityTime = Date.now();
+              } catch (error) {
+                logger.error(`Position monitoring failed: ${error.message}`);
+                logger.error(`Stack: ${error.stack}`);
+                logger.warn('Will retry in 1 minute');
+
+                // Notify user if it's an API outage (but only once per hour to avoid spam)
+                if ((error.message.includes('503') || error.message.includes('failed after')) &&
+                    (!this.lastApiErrorNotification || Date.now() - this.lastApiErrorNotification > 3600000)) {
+                  if (this.telegramBot) {
+                    try {
+                      await this.telegramBot.notifyError(`⚠️ API Issue during position monitoring: ${error.message}\n\nBot is still running.`);
+                      this.lastApiErrorNotification = Date.now();
+                    } catch (telegramError) {
+                      logger.warn(`Failed to send Telegram notification: ${telegramError.message}`);
+                    }
+                  }
+                }
+              }
+            }
+          } catch (monitorError) {
+            // CRITICAL: Catch ANY error
+            logger.error(`🚨 CRITICAL: Position monitoring timeout error: ${monitorError.message}`);
+            logger.error(`Stack: ${monitorError.stack}`);
+          } finally {
+            // ALWAYS schedule the next monitor, even if this one failed
+            // Use setImmediate to ensure scheduling happens in a fresh event loop tick
+            setImmediate(() => scheduleNextMonitor());
+          }
+        }, 60000);
+      };
+
+      scheduleNextMonitor();
+      logger.info(`✅ Recursive setTimeout initialized for position monitoring`);
+
+      // Real-time price monitoring for breakout detection (every 30 seconds)
+      // Catches breakouts as they happen, not just at candle close
+      if (Config.STRATEGY_TYPE === 'breakout_adx') {
+        logger.info(`⏰ Scheduling real-time breakout checks every ${Config.REALTIME_CHECK_INTERVAL_SECONDS} seconds`);
+
+        const scheduleRealtimeCheck = () => {
+          setTimeout(async () => {
+            try {
+              if (this.isRunning) {
+                await this.checkRealtimeBreakout();
+                this.lastActivityTime = Date.now();
+              }
+            } catch (error) {
+              logger.error(`Realtime breakout check failed: ${error.message}`);
+            } finally {
+              setImmediate(() => scheduleRealtimeCheck());
+            }
+          }, Config.REALTIME_CHECK_INTERVAL_SECONDS * 1000);
+        };
+
+        scheduleRealtimeCheck();
+        logger.info(`✅ Real-time breakout monitoring initialized (${Config.BREAKOUT_CONFIRMATION_SECONDS}s confirmation delay)`);
+      }
+
+      // Watchdog timer - detects if the event loop is frozen/hung
+      // Replaces the need for hourly cron restart
+      const WATCHDOG_CHECK_INTERVAL = 5 * 60 * 1000;  // Check every 5 minutes
+      const WATCHDOG_TIMEOUT = 20 * 60 * 1000;        // Alert if no activity for 20 minutes
+      setInterval(() => {
+        const timeSinceActivity = Date.now() - this.lastActivityTime;
+        if (timeSinceActivity > WATCHDOG_TIMEOUT) {
+          logger.error(`🐕 WATCHDOG: No activity for ${Math.round(timeSinceActivity / 60000)} minutes - bot appears frozen!`);
+          logger.error(`🐕 WATCHDOG: Last activity was at ${new Date(this.lastActivityTime).toISOString()}`);
+          logger.error(`🐕 WATCHDOG: Exiting process - Docker will restart`);
+          process.exit(1);
+        }
+      }, WATCHDOG_CHECK_INTERVAL);
+      logger.info(`🐕 Watchdog timer active (exits if no activity for ${WATCHDOG_TIMEOUT / 60000} minutes)`);
+
+      logger.info('');
+      logger.info('═'.repeat(70));
+      logger.info('✅ BOT IS RUNNING - Press Ctrl+C to stop');
+      logger.info('═'.repeat(70));
+      logger.info('');
+
+      // Keep process alive
+      process.on('SIGINT', async () => {
+        await this.shutdown();
+      });
+
+      process.on('SIGTERM', async () => {
+        await this.shutdown();
+      });
+
+    } catch (error) {
+      logger.error(`Failed to start bot: ${error.message}`);
+      logger.error(error.stack);
+      process.exit(1);
+    }
+  }
+
+  /**
+   * Scan market for trade setups
+   */
+  async scanMarket() {
+    try {
+      logger.info('🔍 Scanning market for setups...');
+
+      // Get historical candles (H4 - main timeframe)
+      const allCandles = await this.client.getCandles(
+        Config.TRADING_SYMBOL,
+        Config.TIMEFRAME,
+        200
+      );
+
+      // CRITICAL: Filter out incomplete candles for strategy calculations
+      // Using incomplete candles causes SMAs to shift as price moves within the candle,
+      // which can trigger false crossover signals
+      const candles = allCandles.filter(c => c.complete);
+
+      logger.debug(`📊 H4 Candles: ${allCandles.length} total, ${candles.length} complete`);
+
+      if (candles.length < 100) {
+        logger.warn('Insufficient candle data');
+        return;
+      }
+
+      // Fetch MTF candles for breakout entry timing (if enabled)
+      let h1Candles = null;
+      if (Config.ENABLE_MTF) {
+        const allH1Candles = await this.client.getCandles(
+          Config.TRADING_SYMBOL,
+          Config.MTF_ENTRY_TIMEFRAME,
+          100
+        );
+        h1Candles = allH1Candles.filter(c => c.complete);
+        logger.debug(`📊 MTF Candles: ${allH1Candles.length} total, ${h1Candles.length} complete`);
+      }
+
+      // Fetch HTF candles for EMA Trend strategy alignment
+      let htfCandles = null;
+      if (Config.STRATEGY_TYPE === 'ema_trend') {
+        const allHTFCandles = await this.client.getCandles(
+          Config.TRADING_SYMBOL,
+          Config.EMA_TREND_HTF,
+          100
+        );
+        htfCandles = allHTFCandles.filter(c => c.complete);
+        logger.debug(`📊 HTF (${Config.EMA_TREND_HTF}) Candles: ${allHTFCandles.length} total, ${htfCandles.length} complete`);
+      }
+
+      // Perform technical analysis (uses completed candles for accurate indicators)
+      const analysis = this.ta.analyze(candles);
+      this.ta.logAnalysis(analysis);
+
+      // Evaluate all strategies
+      const tripleSetup = this.tripleStrategy.evaluateSetup(analysis);
+      const breakoutSetup = this.breakoutStrategy.evaluateSetup(analysis, candles, h1Candles);
+      const emaTrendSetup = this.emaTrendStrategy.evaluateSetup(analysis, candles, htfCandles);
+
+      const setupMap = {
+        'Breakout + ADX': breakoutSetup,
+        'Triple Confirmation': tripleSetup,
+        'EMA Trend': emaTrendSetup,
+      };
+
+      logger.info('');
+      logger.info('─'.repeat(70));
+      logger.info('📊 STRATEGY EVALUATION RESULTS:');
+      logger.info('─'.repeat(70));
+      logger.info(`🟢 Breakout + ADX: ${breakoutSetup.signal || 'NO SIGNAL'} (${breakoutSetup.confidence}%) - ${breakoutSetup.reason}`);
+      logger.info(`📊 EMA Trend: ${emaTrendSetup.signal || 'NO SIGNAL'} (${(emaTrendSetup.confidence * 100).toFixed(0)}%) - ${emaTrendSetup.reason}`);
+      logger.info(`📝 Triple Confirmation: ${tripleSetup.signal || 'NO SIGNAL'} (${tripleSetup.confidence}%) - ${tripleSetup.reason}`);
+      logger.info('─'.repeat(70));
+      logger.info('');
+
+      // Determine which setup to use for live trading
+      const liveStrategyName = Config.STRATEGY_TYPE === 'ema_trend' ? 'EMA Trend'
+        : Config.STRATEGY_TYPE === 'triple_confirmation' ? 'Triple Confirmation'
+        : 'Breakout + ADX';
+      const liveSetup = setupMap[liveStrategyName];
+      const hypotheticalStrategyName = Object.keys(setupMap).find(k => k !== liveStrategyName) || 'Triple Confirmation';
+      const hypotheticalSetup = setupMap[hypotheticalStrategyName];
+
+      // Check if live strategy has a signal
+      if (!liveSetup.signal) {
+        logger.info(`🟢 LIVE (${liveStrategyName}): No setup - ${liveSetup.reason}`);
+
+        // Check hypothetical strategy
+        if (hypotheticalSetup.signal) {
+          logger.info(`📝 HYPOTHETICAL (${hypotheticalStrategyName}): Would have signaled ${hypotheticalSetup.signal} at ${hypotheticalSetup.confidence}% confidence`);
+        }
+
+        return;
+      }
+
+      // We have a LIVE signal!
+      logger.info('');
+      logger.info('🎯 LIVE TRADE SETUP DETECTED!');
+      logger.info(`🟢 Strategy: ${liveStrategyName}`);
+      logger.info(`Signal: ${liveSetup.signal}`);
+      logger.info(`Confidence: ${formatConfidence(liveSetup.confidence)}`);
+      logger.info(`Reason: ${liveSetup.reason}`);
+      logger.info('');
+
+      // Check if we already have a position in this instrument.
+      // Use both Oanda's openTrades and our local activePositions cache to close a race window:
+      // if a trade closed on Oanda (e.g. trailing SL fired) between monitor cycles, Oanda already
+      // shows no open trade, but the monitor hasn't yet processed the closure or set cooldown.
+      const existingTrades = await this.client.getOpenTrades();
+      const hasOandaPosition = existingTrades.some(t => t.instrument === Config.TRADING_SYMBOL);
+      const hasLocalPosition = Array.from(this.activePositions.values())
+        .some(p => p.symbol === Config.TRADING_SYMBOL);
+
+      if (hasOandaPosition) {
+        logger.info('❌ Already have open position in XAU_USD - skipping');
+        return;
+      }
+
+      if (hasLocalPosition) {
+        // Local state has a trade Oanda doesn't — it just closed. Start cooldown now and skip;
+        // the next monitor cycle will reconcile and emit the closure notification.
+        logger.info('⚠️ Local position open but Oanda shows none — trade just closed. Starting cooldown and skipping entry.');
+        this.lastTradeCloseTime = Date.now();
+        this.saveCooldown();
+        return;
+      }
+
+      // Check trade cooldown (prevents rapid re-entries after losses)
+      const cooldown = this.checkTradeCooldown();
+      if (cooldown.active) {
+        logger.info(`⏳ Trade cooldown active - ${cooldown.remainingMinutes} minutes remaining`);
+        logger.info(`   Last trade closed at ${new Date(this.lastTradeCloseTime).toISOString()}`);
+        logger.info(`   Next trade allowed after ${new Date(this.lastTradeCloseTime + Config.TRADE_COOLDOWN_HOURS * 3600000).toISOString()}`);
+        return;
+      }
+
+      // Check trading hours (avoid Asian session with low liquidity and wild wicks)
+      const tradingHours = this.checkTradingHours();
+      if (!tradingHours.allowed) {
+        logger.info(`🌙 ${tradingHours.reason}`);
+        logger.info(`   Skipping trade entry - will resume at ${Config.TRADING_START_HOUR}:00 UK time`);
+        return;
+      }
+
+      // Calculate entry levels for LIVE strategy
+      // Use MTF entry price if available (better entry from H1 pullback)
+      const mtfEntryPrice = liveSetup.isMTFEntry ? liveSetup.entryPrice : null;
+      const levels = this.liveStrategy.calculateEntryLevels(analysis, liveSetup.signal, mtfEntryPrice);
+
+      // Calculate position size
+      const positionSize = this.riskManager.calculatePositionSize(
+        levels.entryPrice,
+        levels.stopLoss
+      );
+
+      if (positionSize === 0) {
+        logger.error('Position size calculation failed');
+        return;
+      }
+
+      // Adjust units for direction (negative for short)
+      const units = liveSetup.signal === 'LONG' ? positionSize : -positionSize;
+
+      // Check risk management
+      const canTrade = await this.riskManager.canOpenTrade(
+        levels.entryPrice,
+        levels.stopLoss,
+        Math.abs(units)
+      );
+
+      if (!canTrade.allowed) {
+        logger.risk(`Trade blocked: ${canTrade.reason}`);
+        return;
+      }
+
+      // Execute LIVE trade
+      await this.executeTrade(liveSetup.signal, units, levels, liveSetup.reason, liveStrategyName, liveSetup.confidence, liveSetup);
+
+      // Record hypothetical trade if other strategy also signaled
+      if (hypotheticalSetup.signal) {
+        logger.info(`📝 HYPOTHETICAL (${hypotheticalStrategyName}): Would also enter ${hypotheticalSetup.signal} at ${hypotheticalSetup.confidence}% confidence`);
+
+        // Calculate hypothetical entry levels
+        const hypotheticalLevels = this.liveStrategy === this.breakoutStrategy
+          ? this.tripleStrategy.calculateEntryLevels(analysis, hypotheticalSetup.signal)
+          : this.breakoutStrategy.calculateEntryLevels(analysis, hypotheticalSetup.signal);
+
+        // Track hypothetical trade
+        this.tracker.recordSignal(
+          hypotheticalStrategyName,
+          hypotheticalSetup.signal,
+          hypotheticalLevels.entryPrice,
+          hypotheticalLevels.stopLoss,
+          hypotheticalLevels.takeProfit1,
+          hypotheticalLevels.takeProfit2,
+          Math.abs(units),
+          hypotheticalSetup.reason,
+          hypotheticalSetup.confidence
+        );
+      }
+
+    } catch (error) {
+      logger.error(`Error scanning market: ${error.message}`);
+      if (this.telegramBot) {
+        try {
+          await this.telegramBot.notifyError(`Market scan error: ${error.message}`);
+        } catch (telegramError) {
+          logger.warn(`Failed to send Telegram notification: ${telegramError.message}`);
+        }
+      }
+    }
+  }
+
+  /**
+   * Execute a trade
+   */
+  async executeTrade(signal, units, levels, reason, strategyName, confidence, setup = null) {
+    try {
+      logger.info('');
+      logger.info('🎬 EXECUTING LIVE TRADE...');
+      logger.info(`🟢 Strategy: ${strategyName}`);
+      logger.info(`Side: ${signal}`);
+      logger.info(`Confidence: ${formatConfidence(confidence)}`);
+      logger.info(`Units: ${Math.abs(units)}`);
+      logger.info(`Entry: $${levels.entryPrice.toFixed(2)}`);
+      logger.info(`Stop Loss: $${levels.stopLoss.toFixed(2)}`);
+
+      if (Config.TRAILING_ONLY) {
+        logger.info(`Take Profit: NONE (trailing stop only @ ${Config.TRAILING_STOP_DISTANCE_PIPS} pips)`);
+      } else if (Config.ENABLE_STAGED_TP) {
+        logger.info(`Take Profit 1: $${levels.takeProfit1.toFixed(2)} (60%)`);
+        logger.info(`Take Profit 2: $${levels.takeProfit2.toFixed(2)} (40%)`);
+      } else {
+        // Derive the R multiple from the actual levels rather than printing a config
+        // constant. TAKE_PROFIT_RR only governs the legacy strategies; EMA Trend sets its
+        // target from EMA_TREND_TP_RR, so reading the former labelled a genuine 2R target
+        // as "1R". Measuring the prices we are about to send is right for every strategy.
+        const tpRisk = Math.abs(levels.entryPrice - levels.stopLoss);
+        const tpRR = tpRisk > 0 ? Math.abs(levels.takeProfit1 - levels.entryPrice) / tpRisk : 0;
+        logger.info(`Take Profit: $${levels.takeProfit1.toFixed(2)} (single TP @ ${tpRR.toFixed(1)}R)`);
+      }
+      logger.info('');
+
+      // Place market order
+      // - TRAILING_ONLY: No TP, just SL (trailing will manage exit)
+      // - STAGED_TP: No TP on order, managed manually
+      // - Otherwise: Single TP on order
+      let takeProfit = null;
+      if (!Config.TRAILING_ONLY && !Config.ENABLE_STAGED_TP) {
+        takeProfit = levels.takeProfit1;
+      }
+
+      // Two DISTINCT guards. These used to be one bound anchored to levels.entryPrice,
+      // which comes from the last COMPLETED H1 close and can be up to 60 minutes stale —
+      // so the "slippage" bound was really measuring how far price had run since the
+      // signal, and the broker rejected it after the fact with BOUNDS_VIOLATION.
+      //   1. CHASE — has the market run away from the signal? Cancel here, before sending
+      //      anything. Adverse direction only; a price in our favour is never rejected.
+      //   2. SLIPPAGE — how far off the LIVE market may the fill land? Anchored to the
+      //      current price, which is what MAX_SLIPPAGE_PIPS always claimed to mean.
+      const isLongOrder = signal === 'LONG';
+      const slippageAmount = Config.pipsToPrice(Config.MAX_SLIPPAGE_PIPS);
+      const maxDrift = Config.pipsToPrice(Config.MAX_ENTRY_DRIFT_PIPS);
+
+      let boundAnchor = levels.entryPrice; // fallback to old behaviour if pricing is unavailable
+      try {
+        const live = await this.client.getPrice(Config.TRADING_SYMBOL);
+        // Bound the side we actually fill on: LONG pays the ask, SHORT hits the bid.
+        boundAnchor = isLongOrder ? live.ask : live.bid;
+
+        const adverseDrift = isLongOrder
+          ? live.mid - levels.entryPrice
+          : levels.entryPrice - live.mid;
+
+        if (adverseDrift > maxDrift) {
+          logger.warn(
+            `🚫 Entry cancelled - price ran $${adverseDrift.toFixed(2)} against the signal ` +
+            `(limit $${maxDrift.toFixed(2)}): signal $${levels.entryPrice.toFixed(2)} → market ` +
+            `$${live.mid.toFixed(2)}. Not chasing.`
+          );
+          return;
+        }
+
+        logger.info(
+          `📏 Entry drift: $${adverseDrift.toFixed(2)} vs signal ` +
+          `(limit $${maxDrift.toFixed(2)}), spread $${live.spread.toFixed(2)}`
+        );
+      } catch (priceError) {
+        logger.warn(
+          `⚠️ Live price unavailable for chase check (${priceError.message}) - ` +
+          `bounding slippage off the signal price instead`
+        );
+      }
+
+      const priceBound = isLongOrder
+        ? boundAnchor + slippageAmount
+        : boundAnchor - slippageAmount;
+      logger.info(
+        `🛡️ Max fill price: $${priceBound.toFixed(2)} ` +
+        `(max slippage $${slippageAmount.toFixed(2)} from $${boundAnchor.toFixed(2)})`
+      );
+
+      let order = await this.client.placeMarketOrder(
+        Config.TRADING_SYMBOL,
+        units,
+        levels.stopLoss,
+        takeProfit,
+        priceBound
+      );
+
+      // Order retry logic - handle common failures
+      if (!order.success && Config.ENABLE_ORDER_RETRY) {
+        const retriableErrors = ['STOP_LOSS_ON_FILL_LOSS', 'STOP_LOSS_ON_FILL_GTD_TIMESTAMP_IN_PAST'];
+
+        if (retriableErrors.some(err => order.reason?.includes(err) || order.rejectReason?.includes(err))) {
+          logger.warn(`⚠️ Order failed with ${order.reason} - retrying with wider SL...`);
+
+          // Widen the stop loss
+          const widenAmount = Config.pipsToPrice(Config.ORDER_RETRY_WIDEN_SL_PIPS);
+          const isLong = signal === 'LONG';
+          const newStopLoss = isLong
+            ? levels.stopLoss - widenAmount
+            : levels.stopLoss + widenAmount;
+
+          logger.info(`🔧 Widening SL from $${levels.stopLoss.toFixed(2)} to $${newStopLoss.toFixed(2)} (+$${widenAmount.toFixed(2)})`);
+
+          // Retry with wider stop loss
+          order = await this.client.placeMarketOrder(
+            Config.TRADING_SYMBOL,
+            units,
+            newStopLoss,
+            takeProfit,
+            priceBound
+          );
+
+          if (order.success) {
+            logger.info(`✅ Retry successful with wider SL!`);
+            levels.stopLoss = newStopLoss; // Update levels for tracking
+          } else {
+            // Second retry: try without SL, add it after fill
+            logger.warn(`⚠️ Retry with wider SL failed - trying without SL...`);
+
+            order = await this.client.placeMarketOrder(
+              Config.TRADING_SYMBOL,
+              units,
+              null,  // No stop loss
+              null,  // No take profit
+              priceBound  // Still protect against slippage
+            );
+
+            if (order.success) {
+              logger.info(`✅ Order filled without SL - adding SL now...`);
+              try {
+                // Calculate SL based on actual fill price
+                const fillBasedSL = isLong
+                  ? order.price - Config.pipsToPrice(Config.BREAKOUT_STOP_LOSS_PIPS + Config.ORDER_RETRY_WIDEN_SL_PIPS)
+                  : order.price + Config.pipsToPrice(Config.BREAKOUT_STOP_LOSS_PIPS + Config.ORDER_RETRY_WIDEN_SL_PIPS);
+
+                await this.client.modifyTrade(order.tradeId, fillBasedSL, null);
+                levels.stopLoss = fillBasedSL;
+                logger.info(`✅ SL added at $${fillBasedSL.toFixed(2)}`);
+              } catch (slError) {
+                logger.error(`❌ Failed to add SL after fill: ${slError.message}`);
+                // Continue anyway - position is open, monitor will handle it
+              }
+            }
+          }
+        }
+      }
+
+      if (!order.success) {
+        // A bounds violation is the slippage guard doing its job — the market moved
+        // between decision and fill and we declined the price. That is a working safety
+        // net, not a fault, so it is logged at warn and kept out of error.log.
+        const rejectText = `${order.reason || ''} ${order.rejectReason || ''}`;
+        const log = /BOUNDS_VIOLATION/i.test(rejectText)
+          ? logger.warn.bind(logger)
+          : logger.error.bind(logger);
+        log(`Order failed: ${order.reason}`);
+        if (order.rejectReason) {
+          log(`Reject reason: ${order.rejectReason}`);
+        }
+        return;
+      }
+
+      // Recalculate SL based on actual fill price (not theoretical entry price)
+      // The calculated SL may be wrong if fill price differs from analysis price
+      const isLong = signal === 'LONG';
+      const isEmaTrend = strategyName?.includes('EMA Trend');
+      const isBreakoutTrade = strategyName?.includes('Breakout');
+      let stopDistance;
+      if (isEmaTrend) {
+        // EMA Trend uses ATR-based stops — recalculate from the strategy's stored ATR
+        const atrSL = (this.emaTrendStrategy.lastATR || 5.0) * Config.EMA_TREND_ATR_SL_MULT;
+        stopDistance = Math.max(Config.pipsToPrice(Config.EMA_TREND_MIN_SL), Math.min(Config.pipsToPrice(Config.EMA_TREND_MAX_SL), atrSL));
+      } else {
+        const stopPips = isBreakoutTrade ? Config.BREAKOUT_STOP_LOSS_PIPS : Config.STOP_LOSS_PIPS;
+        stopDistance = Config.pipsToPrice(stopPips);
+      }
+      const correctStopLoss = isLong
+        ? order.price - stopDistance
+        : order.price + stopDistance;
+
+      // Recalculate TP from the actual fill price too (same reason as the SL above)
+      // Without this, slippage makes TP closer than intended — e.g. 0.75:1 instead of 1:1
+      let correctTP = null;
+      if (!Config.TRAILING_ONLY && !Config.ENABLE_STAGED_TP) {
+        const tpRR = isEmaTrend ? Config.EMA_TREND_TP_RR : Config.TAKE_PROFIT_RR;
+        const tpDistance = stopDistance * tpRR;
+        correctTP = isLong
+          ? order.price + tpDistance
+          : order.price - tpDistance;
+      }
+
+      if (Math.abs(correctStopLoss - levels.stopLoss) > 0.01 ||
+          (correctTP !== null && Math.abs(correctTP - levels.takeProfit1) > 0.01)) {
+        logger.info(
+          `🔧 Adjusting bracket to fill price $${order.price.toFixed(2)}: ` +
+          `SL $${levels.stopLoss.toFixed(2)} → $${correctStopLoss.toFixed(2)}` +
+          (correctTP !== null ? `, TP $${levels.takeProfit1.toFixed(2)} → $${correctTP.toFixed(2)}` : '')
+        );
+      }
+
+      // Both legs go in one request and are then read back from Oanda. These resting orders are
+      // the whole exit strategy, so "the modify call did not throw" is not good enough evidence
+      // that they are actually in place at the intended prices.
+      const bracket = await this.ensureBracket(order.tradeId, correctStopLoss, correctTP);
+
+      // Track what the broker really holds, not what was requested — the monitor, the tracker
+      // and the Telegram notification should all describe the live position.
+      if (bracket.stopLoss !== null) {
+        levels.stopLoss = bracket.stopLoss;
+      }
+      if (bracket.takeProfit !== null) {
+        levels.takeProfit1 = bracket.takeProfit;
+        levels.takeProfit2 = bracket.takeProfit;
+      }
+
+      if (!bracket.verified) {
+        // The position is NOT naked unless stopLoss is null — the market order carried its own
+        // SL/TP and they are merely anchored to the pre-fill price, with drift bounded by
+        // MAX_ENTRY_DRIFT_PIPS. Closing the trade over that would turn a small discrepancy into
+        // a market exit, so hold the position and make the mismatch loud instead.
+        const actualSL = bracket.stopLoss !== null ? `$${bracket.stopLoss.toFixed(2)}` : 'NONE';
+        const actualTP = bracket.takeProfit !== null ? `$${bracket.takeProfit.toFixed(2)}` : 'NONE';
+        const wantTP = correctTP !== null ? `$${correctTP.toFixed(2)}` : 'none';
+
+        logger.error(
+          `❌ BRACKET UNVERIFIED on trade ${order.tradeId} — broker holds SL ${actualSL} / TP ${actualTP}, ` +
+          `intended SL $${correctStopLoss.toFixed(2)} / TP ${wantTP}. Reason: ${bracket.reason}`
+        );
+        if (bracket.stopLoss === null) {
+          logger.error(`🚨 NO STOP LOSS on trade ${order.tradeId} — position is UNPROTECTED, manual action required`);
+        }
+
+        if (this.telegramBot) {
+          try {
+            await this.telegramBot.notifyError(
+              `⚠️ Bracket not confirmed on trade ${order.tradeId}\n\n` +
+              `Broker holds: SL ${actualSL} / TP ${actualTP}\n` +
+              `Intended: SL $${correctStopLoss.toFixed(2)} / TP ${wantTP}\n` +
+              `Reason: ${bracket.reason}\n\n` +
+              (bracket.stopLoss === null
+                ? `🚨 NO STOP LOSS — the position is unprotected. Check Oanda now.`
+                : `The position is protected, but off the intended levels.`)
+            );
+          } catch (telegramError) {
+            logger.warn(`Failed to send bracket alert: ${telegramError.message}`);
+          }
+        }
+      }
+
+      if (Config.TRAILING_ONLY) {
+        logger.info(`📊 NO fixed TP - Trailing stop at ${Config.TRAILING_STOP_DISTANCE_PIPS} pips ($${(Config.TRAILING_STOP_DISTANCE_PIPS * 0.01).toFixed(2)}) will manage exit`);
+        logger.info(`🎯 Let winners run! Trail follows price, locks in profit as it moves.`);
+      } else if (Config.ENABLE_STAGED_TP) {
+        logger.info(`📊 TP1 target: $${levels.takeProfit1.toFixed(2)} (will close 60%)`);
+        logger.info(`📊 TP2 target: $${levels.takeProfit2.toFixed(2)} (will close 40%)`);
+      } else {
+        logger.info(`📊 TP set at $${levels.takeProfit1.toFixed(2)} (Oanda will close automatically)`);
+      }
+
+      logger.info('');
+      logger.info('✅ TRADE OPENED SUCCESSFULLY!');
+      logger.info(`Order ID: ${order.orderId}`);
+      logger.info(`Trade ID: ${order.tradeId}`);
+      logger.info(`Fill Price: $${order.price.toFixed(2)}`);
+      logger.info('');
+
+      // Track position
+      // Build position tracking object
+      const positionData = {
+        tradeId: order.tradeId,
+        symbol: Config.TRADING_SYMBOL,
+        signal,
+        strategyName,
+        entryPrice: order.price,
+        units: order.units,
+        stopLoss: levels.stopLoss,
+        takeProfit1: levels.takeProfit1,
+        takeProfit2: levels.takeProfit2,
+        reason,
+        openTime: new Date(),
+        tp1Hit: false,
+        bestPrice: order.price,
+        currentStopLoss: levels.stopLoss,
+        // EMA Trend breakeven fields
+        breakevenTriggered: false,
+        breakevenTriggerDistance: null,
+        atrTrailDistance: null,
+      };
+
+      // EMA Trend: store breakeven and ATR trailing parameters
+      if (strategyName?.includes('EMA Trend')) {
+        const tpDist = Math.abs(levels.takeProfit1 - order.price);
+        positionData.breakevenTriggerDistance = tpDist * Config.EMA_TREND_BE_TRIGGER_PCT;
+        // Cap the post-breakeven trail to the same bounds as the stop. Uncapped ATR×1.5
+        // on H1 (~$25) is wider than the whole 2R target, so the trail never re-engages
+        // and the trade strands at breakeven. The SL itself is capped at $2–$8; the trail
+        // must be too, or it's not a trail.
+        const rawTrail = (this.emaTrendStrategy.lastATR || 5.0) * Config.EMA_TREND_TRAIL_ATR_MULT;
+        const minTrail = Config.pipsToPrice(Config.EMA_TREND_MIN_SL);
+        const maxTrail = Config.pipsToPrice(Config.EMA_TREND_MAX_SL);
+        positionData.atrTrailDistance = Math.max(minTrail, Math.min(maxTrail, rawTrail));
+        // Only announce the machinery that is actually armed. Under the bracket-exit
+        // regime BE_TRIGGER_PCT is 0 (so breakevenTriggerDistance is falsy and the BE
+        // check at monitor time never fires) and ENABLE_TRAILING_STOP is false — printing
+        // "Breakeven at $0.00 profit, then trail at $20.00" implied both were live.
+        const beArmed = positionData.breakevenTriggerDistance > 0;
+        const trailArmed = Config.ENABLE_TRAILING_STOP;
+        if (beArmed && trailArmed) {
+          logger.info(`📊 Breakeven at $${positionData.breakevenTriggerDistance.toFixed(2)} profit, then trail at $${positionData.atrTrailDistance.toFixed(2)} (raw ATR trail $${rawTrail.toFixed(2)} capped to SL bounds)`);
+        } else if (beArmed) {
+          logger.info(`📊 Breakeven at $${positionData.breakevenTriggerDistance.toFixed(2)} profit (trailing disabled)`);
+        } else if (trailArmed) {
+          logger.info(`📊 Trailing at $${positionData.atrTrailDistance.toFixed(2)} (raw ATR trail $${rawTrail.toFixed(2)} capped to SL bounds), breakeven disabled`);
+        } else {
+          logger.info(`📊 Bracket exit: resting TP or original stop only (breakeven and trailing both disabled)`);
+        }
+      }
+
+      // Observational leg filter — stamp the trade so we can correlate with outcome later
+      if (setup && setup.legATR !== undefined) {
+        positionData.legATR = setup.legATR;
+        positionData.legSize = setup.legSize;
+        positionData.legInDirection = setup.legInDirection;
+        positionData.legWouldBlock = setup.legWouldBlock;
+      }
+
+      this.activePositions.set(order.tradeId, positionData);
+
+      // Persist position to file
+      this.savePositions();
+
+      // Record in strategy tracker and store tracker ID for closure matching.
+      // regime + entrySnapshot let later analysis segment trades by config era
+      // and market state without pooling incomparable regimes. Log-only.
+      const trackerMetadata = {
+        regime: Config.CONFIG_REGIME,
+        entryHourUK: this.checkTradingHours().currentHour,
+        ...(setup && setup.legATR !== undefined ? {
+          legATR: setup.legATR,
+          legSize: setup.legSize,
+          legInDirection: setup.legInDirection,
+          legWouldBlock: setup.legWouldBlock,
+        } : {}),
+        ...(setup && setup.entrySnapshot ? { entrySnapshot: setup.entrySnapshot } : {}),
+      };
+      const trackerTrade = this.tracker.recordSignal(
+        strategyName,
+        signal,
+        order.price,
+        levels.stopLoss,
+        levels.takeProfit1,
+        levels.takeProfit2,
+        Math.abs(order.units),
+        reason,
+        confidence,
+        trackerMetadata
+      );
+      if (trackerTrade) {
+        positionData.trackerTradeId = trackerTrade.id;
+        this.savePositions();
+      }
+
+      // Notify via Telegram
+      if (this.telegramBot) {
+        try {
+          await this.telegramBot.notifyTradeOpened(
+            Config.TRADING_SYMBOL,
+            signal,
+            order.price,
+            Math.abs(order.units),
+            levels.stopLoss,
+            levels.takeProfit1,
+            reason,
+            strategyName,
+            confidence
+          );
+        } catch (telegramError) {
+          logger.warn(`Failed to send trade notification: ${telegramError.message}`);
+        }
+      }
+
+    } catch (error) {
+      logger.error(`Failed to execute trade: ${error.message}`);
+      if (this.telegramBot) {
+        try {
+          await this.telegramBot.notifyError(`Trade execution failed: ${error.message}`);
+        } catch (telegramError) {
+          logger.warn(`Failed to send Telegram notification: ${telegramError.message}`);
+        }
+      }
+    }
+  }
+
+  /**
+   * Drive the broker-side bracket to the intended stop / take-profit and CONFIRM it landed.
+   *
+   * Under bracket exit the resting stop and take-profit ARE the entire exit strategy, so an
+   * adjustment that quietly fails matters as much as one that never ran. Two ways it can:
+   * Oanda rejects a modification inside an HTTP 2xx response, or a transport error lands
+   * between the stop leg and the target leg and leaves a mismatched bracket — a fill-based
+   * stop against a target still anchored to the pre-fill analysis price.
+   *
+   * Read -> compare -> write -> re-read, so the call is idempotent (safe to retry, and a no-op
+   * when the bracket is already right) and the return value reports what the broker actually
+   * holds rather than what we asked for.
+   *
+   * @param {string} tradeId
+   * @param {number} intendedSL - required; a trade with no stop is treated as unverified
+   * @param {number|null} intendedTP - null in modes that run without a resting target
+   * @returns {Promise<{verified: boolean, stopLoss: number|null, takeProfit: number|null, reason: string|null}>}
+   */
+  async ensureBracket(tradeId, intendedSL, intendedTP) {
+    const TOLERANCE = 0.011;  // Oanda rounds prices to 2dp; one cent plus float slack
+    const ATTEMPTS = 3;
+
+    // A leg is wrong if it is missing, no longer resting, or sits off the intended price.
+    // An order that is CANCELLED or already TRIGGERED still appears on the trade but protects
+    // nothing, so treat anything but PENDING as absent.
+    const resting = (price, state) => price !== null && (state === null || state === 'PENDING');
+    const slOk = trade => resting(trade.stopLoss, trade.stopLossState) &&
+      Math.abs(trade.stopLoss - intendedSL) <= TOLERANCE;
+    const tpOk = trade => intendedTP === null ||
+      (resting(trade.takeProfit, trade.takeProfitState) &&
+        Math.abs(trade.takeProfit - intendedTP) <= TOLERANCE);
+
+    let lastError = null;
+    let actual = { stopLoss: null, takeProfit: null };
+
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      try {
+        const trade = await this.client.getTrade(tradeId);
+
+        if (!trade) {
+          return { verified: false, stopLoss: null, takeProfit: null, reason: `trade ${tradeId} not found on Oanda` };
+        }
+        if (trade.state !== 'OPEN') {
+          // Filled and exited already (an immediate stop-out, say). Nothing left to protect.
+          return { verified: true, stopLoss: trade.stopLoss, takeProfit: trade.takeProfit, reason: `trade already ${trade.state}` };
+        }
+
+        actual = { stopLoss: trade.stopLoss, takeProfit: trade.takeProfit };
+
+        if (slOk(trade) && tpOk(trade)) {
+          if (attempt > 1) {
+            logger.info(`✅ Bracket verified on attempt ${attempt}`);
+          }
+          return { verified: true, stopLoss: trade.stopLoss, takeProfit: trade.takeProfit, reason: null };
+        }
+
+        // Send both wrong legs in ONE request, so there is no window in which the stop is
+        // fill-based and the target is not.
+        await this.client.modifyTrade(
+          tradeId,
+          slOk(trade) ? null : intendedSL,
+          tpOk(trade) ? null : intendedTP
+        );
+      } catch (error) {
+        lastError = error.message;
+        logger.warn(`Bracket adjustment attempt ${attempt}/${ATTEMPTS} failed: ${error.message}`);
+      }
+
+      if (attempt < ATTEMPTS) {
+        await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+      }
+    }
+
+    // The final attempt's write has not been read back yet — verify it before giving up.
+    try {
+      const trade = await this.client.getTrade(tradeId);
+      if (trade) {
+        actual = { stopLoss: trade.stopLoss, takeProfit: trade.takeProfit };
+        if (trade.state !== 'OPEN') {
+          return { verified: true, ...actual, reason: `trade already ${trade.state}` };
+        }
+        if (slOk(trade) && tpOk(trade)) {
+          return { verified: true, ...actual, reason: null };
+        }
+      }
+    } catch (error) {
+      lastError = `${lastError ? lastError + '; ' : ''}final verify read failed: ${error.message}`;
+    }
+
+    return {
+      verified: false,
+      ...actual,
+      reason: lastError || 'bracket still did not match the intended levels after retries'
+    };
+  }
+
+  /**
+   * Monitor existing positions
+   */
+  async monitorPositions() {
+    try {
+      const openTrades = await this.client.getOpenTrades();
+
+      for (const trade of openTrades) {
+        const tracked = this.activePositions.get(trade.tradeId);
+        if (!tracked) {
+          logger.warn(`⚠️ Trade ${trade.tradeId} not in activePositions (keys: [${Array.from(this.activePositions.keys()).join(', ')}])`);
+          continue;
+        }
+
+        logger.info(`📍 Monitoring trade ${trade.tradeId}: ${trade.units} units @ $${trade.price.toFixed(2)}, P&L: $${trade.unrealizedPL.toFixed(2)}`);
+
+        // Staged TP logic - only runs when ENABLE_STAGED_TP is true
+        // When single TP mode is used, Oanda handles TP automatically
+        if (Config.ENABLE_STAGED_TP && !tracked.tp1Hit) {
+          const currentPrice = await this.client.getPrice(trade.instrument);
+          const price = currentPrice.mid;
+
+          const isLong = trade.units > 0;
+          const tp1Hit = isLong
+            ? price >= tracked.takeProfit1
+            : price <= tracked.takeProfit1;
+
+          logger.info(`   TP1 Check: price=$${price.toFixed(2)}, TP1=$${tracked.takeProfit1?.toFixed(2)}, isLong=${isLong}, tp1Hit=${tp1Hit}`);
+
+          if (tp1Hit) {
+            logger.info(`🎯 TP1 reached for ${trade.tradeId} at $${price.toFixed(2)}`);
+
+            // Close 60% of position
+            const closeUnits = Math.floor(Math.abs(trade.units) * 0.6);
+
+            // For Oanda, units must be a string - try integer format first
+            // Oanda shows units as "159.0" but accepts integer strings for close
+            const unitsToClose = String(closeUnits);
+
+            logger.info(`📊 Attempting to close ${unitsToClose} units (60% of ${Math.abs(trade.units)})`);
+
+            try {
+              // Validate units before sending
+              if (closeUnits <= 0 || isNaN(closeUnits)) {
+                logger.error(`Invalid closeUnits calculated: ${closeUnits} from units: ${trade.units}`);
+                continue;
+              }
+
+              // Use Oanda's trade close endpoint for partial close
+              const response = await this.client.makeRequest('PUT',
+                `/v3/accounts/${this.client.accountId}/trades/${trade.tradeId}/close`,
+                { units: unitsToClose }
+              );
+
+              const partialClose = {
+                success: response.orderFillTransaction ? true : false,
+                pl: response.orderFillTransaction?.pl || 0
+              };
+
+              if (partialClose.success) {
+                const pnl = parseFloat(partialClose.pl || 0);
+                logger.info(`✅ Closed 60% (${closeUnits} units) - Banked: $${pnl.toFixed(2)}`);
+
+                // Move stop to breakeven on remaining 40%
+                await this.client.modifyTrade(trade.tradeId, tracked.entryPrice, null);
+                logger.info(`✅ Stop moved to breakeven ($${tracked.entryPrice.toFixed(2)})`);
+
+                // Set TP2 on remaining 40%
+                await this.client.modifyTrade(trade.tradeId, null, tracked.takeProfit2);
+                logger.info(`✅ TP2 set at $${tracked.takeProfit2.toFixed(2)} for remaining 40%`);
+
+                tracked.tp1Hit = true;
+
+                // Persist updated position state
+                this.savePositions();
+
+                if (this.telegramBot) {
+                  try {
+                    // Escape underscores in symbol for Markdown
+                    const symbolEscaped = trade.instrument.replace(/_/g, '\\_');
+
+                    await this.telegramBot.sendNotification(
+                      `🎯 *TP1 Hit - 60% Closed!*\n\n` +
+                      `${symbolEscaped}\n` +
+                      `Closed: ${closeUnits} units\n` +
+                      `Banked: $${pnl.toFixed(2)}\n\n` +
+                      `Remaining 40%:\n` +
+                      `Stop: Breakeven ($${tracked.entryPrice.toFixed(2)})\n` +
+                      `TP2: $${tracked.takeProfit2.toFixed(2)}`
+                    );
+                  } catch (telegramError) {
+                    logger.warn(`Failed to send TP1 notification: ${telegramError.message}`);
+                  }
+                }
+              }
+            } catch (error) {
+              logger.error(`Failed to close 60% at TP1: ${error.message}`);
+            }
+          }
+        }
+
+        // EMA Trend breakeven: once profit >= X% of TP, guarantee the stop is at least
+        // at entry — but NEVER move it backward. The pre-breakeven trail may have already
+        // locked profit beyond entry; resetting to entry would hand that profit back
+        // (this was the "scratch at $0" bug). Move to entry only if it tightens the stop.
+        if (tracked.strategyName?.includes('EMA Trend') && !tracked.breakevenTriggered && tracked.breakevenTriggerDistance) {
+          const currentPrice = await this.client.getPrice(trade.instrument);
+          const price = currentPrice.mid;
+          const isLong = trade.units > 0;
+          const profitMove = isLong ? price - tracked.entryPrice : tracked.entryPrice - price;
+
+          if (profitMove >= tracked.breakevenTriggerDistance) {
+            // Enable post-breakeven trailing mode regardless of whether we move the stop.
+            tracked.breakevenTriggered = true;
+            const beImproves = isLong
+              ? tracked.entryPrice > tracked.currentStopLoss
+              : tracked.entryPrice < tracked.currentStopLoss;
+            if (beImproves) {
+              try {
+                await this.client.modifyTrade(trade.tradeId, tracked.entryPrice, null);
+                tracked.currentStopLoss = tracked.entryPrice;
+                logger.info(`🔒 BREAKEVEN: ${trade.tradeId} SL moved to entry $${tracked.entryPrice.toFixed(2)} (profit $${profitMove.toFixed(2)} >= trigger $${tracked.breakevenTriggerDistance.toFixed(2)})`);
+              } catch (error) {
+                logger.error(`Failed to move SL to breakeven: ${error.message}`);
+              }
+            } else {
+              const locked = isLong
+                ? tracked.currentStopLoss - tracked.entryPrice
+                : tracked.entryPrice - tracked.currentStopLoss;
+              logger.info(`🔒 BREAKEVEN reached for ${trade.tradeId} — trail already locks $${locked.toFixed(2)}; stop left at $${tracked.currentStopLoss.toFixed(2)} (not loosened to entry)`);
+            }
+            this.savePositions();
+          }
+        }
+
+        // Trailing stop logic - activates when price has moved enough in our favor:
+        // 1. After TP1 is hit (staged TP mode), OR
+        // 2. After price moves by TRAILING_ACTIVATION_PIPS in our favor
+        // 3. EMA Trend: After breakeven triggered, use ATR-based trail distance
+        // This prevents trailing from triggering too early and closing at breakeven
+        if (Config.ENABLE_TRAILING_STOP) {
+          const currentPrice = await this.client.getPrice(trade.instrument);
+          const price = currentPrice.mid;
+          const isLong = trade.units > 0;
+
+          // EMA Trend uses ATR-based trail after breakeven; others use fixed distance
+          const isEmaTrend = tracked.strategyName?.includes('EMA Trend');
+          const trailDistance = (isEmaTrend && tracked.breakevenTriggered && tracked.atrTrailDistance)
+            ? tracked.atrTrailDistance
+            : Config.pipsToPrice(Config.TRAILING_STOP_DISTANCE_PIPS);
+
+          // Calculate how much price has moved in our favor
+          const profitMove = isLong
+            ? price - tracked.entryPrice
+            : tracked.entryPrice - price;
+
+          // Activate trailing when:
+          // - TP1 already hit (staged TP mode), OR
+          // - EMA Trend: breakeven triggered (trail immediately after BE), OR
+          // - Price moved in our favor by activation threshold
+          // Breakout trades use wider activation ($3.50) to let the move establish
+          const isBreakoutTrade = tracked.strategyName?.includes('Breakout');
+          const emaTrendTrailReady = isEmaTrend && tracked.breakevenTriggered;
+          const activationPips = isBreakoutTrade ? Config.BREAKOUT_TRAILING_ACTIVATION_PIPS : Config.TRAILING_ACTIVATION_PIPS;
+          const activationDistance = Config.pipsToPrice(activationPips);
+          const shouldTrail = tracked.tp1Hit || emaTrendTrailReady || profitMove >= activationDistance;
+
+          if (shouldTrail) {
+            // Update best price if price moved favorably
+            const priceMovedFavorably = isLong
+              ? price > tracked.bestPrice
+              : price < tracked.bestPrice;
+
+            if (priceMovedFavorably) {
+              tracked.bestPrice = price;
+
+              // Calculate new trailing stop
+              const newStopLoss = isLong
+                ? price - trailDistance
+                : price + trailDistance;
+
+              // Only update if new stop is better than current stop
+              const stopImproved = isLong
+                ? newStopLoss > tracked.currentStopLoss
+                : newStopLoss < tracked.currentStopLoss;
+
+              if (stopImproved) {
+                try {
+                  await this.client.modifyTrade(trade.tradeId, newStopLoss, null);
+
+                  const profitLocked = isLong
+                    ? newStopLoss - tracked.entryPrice
+                    : tracked.entryPrice - newStopLoss;
+
+                  if (profitLocked > 0) {
+                    logger.info(`📈 Trailing stop: ${trade.tradeId} @ $${newStopLoss.toFixed(2)} (locks in $${profitLocked.toFixed(2)} profit per unit)`);
+                  } else {
+                    logger.info(`📈 Trailing stop: ${trade.tradeId} @ $${newStopLoss.toFixed(2)} (trailing $${trailDistance.toFixed(2)} behind $${price.toFixed(2)})`);
+                  }
+
+                  tracked.currentStopLoss = newStopLoss;
+
+                  // Persist updated position state
+                  this.savePositions();
+                } catch (error) {
+                  logger.error(`Failed to update trailing stop: ${error.message}`);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // Check for closed positions
+      const closedTrades = Array.from(this.activePositions.keys()).filter(
+        tradeId => !openTrades.some(t => t.tradeId === tradeId)
+      );
+
+      for (const tradeId of closedTrades) {
+        const tracked = this.activePositions.get(tradeId);
+        this.activePositions.delete(tradeId);
+
+        // Persist removal
+        this.savePositions();
+
+        logger.info(`Trade ${tradeId} was closed`);
+
+        // ALWAYS set cooldown — prevents rapid re-entries regardless of API success
+        this.lastTradeCloseTime = Date.now();
+        this.saveCooldown();
+        logger.info(`⏳ Trade cooldown started - next trade in ${Config.TRADE_COOLDOWN_HOURS} hours`);
+
+        // Clear all pending breakout state to prevent stale tracking surviving cooldown
+        if (this.breakoutStrategy) {
+          this.breakoutStrategy.clearAllPendingState();
+        }
+
+        // Try to fetch close details — first from /trades/{id}, then from recent transactions
+        let pnl = null;
+        let exitPrice = null;
+        let reason = 'Unknown';
+        const entryPrice = tracked.entryPrice;
+
+        let closingTxIds = [];
+        try {
+          // Method 1: Direct trade lookup (P&L, exit price, and close reason from order state)
+          const response = await this.client.makeRequest('GET', `/v3/accounts/${this.client.accountId}/trades/${tradeId}`);
+          if (response.trade && response.trade.state === 'CLOSED') {
+            exitPrice = parseFloat(response.trade.averageClosePrice || entryPrice);
+            pnl = parseFloat(response.trade.realizedPL || 0);
+            // Reason is distance-independent: whichever protective order actually FILLED
+            reason = response.trade.stopLossOrder?.state === 'FILLED' ? 'STOP_LOSS_ORDER'
+              : response.trade.takeProfitOrder?.state === 'FILLED' ? 'TAKE_PROFIT_ORDER' : reason;
+            closingTxIds = (response.trade.closingTransactionIDs || []).map(Number);
+          }
+        } catch (error) {
+          logger.debug(`Trade lookup failed for ${tradeId}: ${error.message}`);
+        }
+
+        // Method 2: authoritative reason from the exact closing fill (also P&L fallback).
+        // Use the trade's own closingTransactionIDs — heavily-trailed trades close many IDs
+        // after they open, so a fixed window misses them.
+        try {
+          const ids = closingTxIds.length ? closingTxIds : [parseInt(tradeId), parseInt(tradeId) + 60];
+          const fromId = Math.min(...ids);
+          const toId = Math.max(...ids);
+          const txResponse = await this.client.makeRequest('GET',
+            `/v3/accounts/${this.client.accountId}/transactions/idrange?from=${fromId}&to=${toId}`);
+          if (txResponse.transactions) {
+            const closeFill = txResponse.transactions.find(tx =>
+              tx.type === 'ORDER_FILL' && tx.tradesClosed &&
+              tx.tradesClosed.some(tc => tc.tradeID === String(tradeId))
+            );
+            if (closeFill) {
+              reason = closeFill.reason || reason;
+              if (pnl === null) {
+                const closedTrade = closeFill.tradesClosed.find(tc => tc.tradeID === String(tradeId));
+                pnl = parseFloat(closedTrade.realizedPL || 0);
+                exitPrice = parseFloat(closedTrade.price || entryPrice);
+              }
+            }
+          }
+        } catch (error) {
+          logger.debug(`Transaction lookup failed for ${tradeId}: ${error.message}`);
+        }
+
+        // Log P&L (use what we have, even if incomplete)
+        if (pnl !== null) {
+          // R-multiple comes from PRICES, not from P&L. realizedPL is in account currency
+          // (GBP) while riskPerUnit × units is a USD price-notional — dividing one by the
+          // other silently understated R by the FX rate, so a clean 2.0R take-profit was
+          // reported as "+1.46R". Price-based R is currency-free and needs no conversion.
+          const riskPerUnit = tracked.stopLoss ? Math.abs(entryPrice - tracked.stopLoss) : 0;
+          const isLongTrade = tracked.signal
+            ? tracked.signal === 'LONG'
+            : (tracked.stopLoss || 0) < entryPrice;
+          let rMultiple = 0;
+          if (riskPerUnit > 0 && Number.isFinite(exitPrice)) {
+            const priceMove = isLongTrade ? exitPrice - entryPrice : entryPrice - exitPrice;
+            rMultiple = priceMove / riskPerUnit;
+          } else if (riskPerUnit > 0) {
+            // No exit price available — fall back to the P&L ratio (FX-approximate).
+            rMultiple = pnl / (riskPerUnit * Math.abs(tracked.units || 1));
+          }
+          const rSign = rMultiple >= 0 ? '+' : '';
+          logger.info(`💰 P&L: ${pnl >= 0 ? '+' : ''}$${pnl.toFixed(2)} (${rSign}${rMultiple.toFixed(2)}R)`);
+          logger.info(`Reason: ${reason}`);
+
+          // Update risk manager
+          this.riskManager.recordTrade(pnl);
+
+          // Notify via Telegram
+          if (this.telegramBot) {
+            try {
+              await this.telegramBot.notifyTradeClosed(
+                tracked.symbol,
+                entryPrice,
+                exitPrice || entryPrice,
+                pnl,
+                rMultiple,
+                reason,
+                tracked.strategyName
+              );
+            } catch (telegramError) {
+              logger.warn(`Failed to send trade closed notification: ${telegramError.message}`);
+            }
+          }
+
+          // Update strategy tracker (store the real broker realized P&L, not notional)
+          const trackerCloseId = tracked.trackerTradeId || `LIVE_${tradeId}`;
+          this.tracker.closeTrade(tracked.strategyName, trackerCloseId, exitPrice || entryPrice, reason, pnl);
+        } else {
+          logger.warn(`⚠️ Could not fetch P&L for trade ${tradeId} - cooldown still set`);
+
+          // Still notify via Telegram with what we know
+          if (this.telegramBot) {
+            try {
+              await this.telegramBot.notifyTradeClosed(
+                tracked.symbol,
+                entryPrice,
+                entryPrice, // unknown exit
+                0, // unknown P&L
+                0,
+                'Unknown (API lookup failed)',
+                tracked.strategyName
+              );
+            } catch (telegramError) {
+              logger.warn(`Failed to send trade closed notification: ${telegramError.message}`);
+            }
+          }
+        }
+      }
+
+      if (this.monitorConsecutiveFailures >= MONITOR_FAILURE_ESCALATE_AFTER) {
+        logger.info(`Position monitor recovered after ${this.monitorConsecutiveFailures} failed cycles`);
+      }
+      this.monitorConsecutiveFailures = 0;
+    } catch (error) {
+      this.monitorConsecutiveFailures++;
+      const n = this.monitorConsecutiveFailures;
+      if (n < MONITOR_FAILURE_ESCALATE_AFTER) {
+        logger.warn(`Position monitor cycle failed (${n}/${MONITOR_FAILURE_ESCALATE_AFTER}, transient - retrying in 60s): ${error.message}`);
+      } else if (n === MONITOR_FAILURE_ESCALATE_AFTER || n % MONITOR_FAILURE_ERROR_EVERY === 0) {
+        logger.error(`Error monitoring positions (${n} consecutive cycles): ${error.message}`);
+      } else {
+        const nextReport = Math.ceil((n + 1) / MONITOR_FAILURE_ERROR_EVERY) * MONITOR_FAILURE_ERROR_EVERY;
+        logger.warn(`Position monitor still failing (${n} consecutive cycles, next error-level report at ${nextReport}): ${error.message}`);
+      }
+    }
+  }
+
+  /**
+   * Check for real-time breakouts (runs every 30 seconds)
+   * Detects breakouts as they happen, not just at candle close
+   * With MTF enabled, waits for pullback before entering
+   */
+  async checkRealtimeBreakout() {
+    try {
+      logger.debug('🔍 Realtime check starting...');
+
+      // Only check if using breakout strategy
+      if (Config.STRATEGY_TYPE !== 'breakout_adx') {
+        logger.debug('🔍 Realtime check skipped - not breakout_adx strategy');
+        return;
+      }
+
+      // Check if we already have a position
+      const existingTrades = await this.client.getOpenTrades();
+      const hasPosition = existingTrades.some(t => t.instrument === Config.TRADING_SYMBOL);
+      if (hasPosition) {
+        logger.debug('🔍 Realtime check skipped - already have position');
+        // Clear any pending MTF signal if we have a position
+        if (this.breakoutStrategy.hasRealtimeMTFPending()) {
+          this.breakoutStrategy.clearRealtimeMTF();
+        }
+        return;
+      }
+
+      // Check trade cooldown (prevents rapid re-entries after losses)
+      const cooldown = this.checkTradeCooldown();
+      if (cooldown.active) {
+        logger.debug(`🔍 Realtime check skipped - cooldown active (${cooldown.remainingMinutes}m remaining)`);
+        return;
+      }
+
+      // Check trading hours (avoid Asian session with low liquidity and wild wicks)
+      const tradingHours = this.checkTradingHours();
+      if (!tradingHours.allowed) {
+        logger.debug(`🔍 Realtime check skipped - ${tradingHours.reason}`);
+        return;
+      }
+
+      // Check if there's a pending candle-based MTF signal (don't interfere)
+      if (this.breakoutStrategy.pendingSignal) {
+        logger.debug('🔍 Realtime check skipped - pending candle-based MTF signal');
+        return;
+      }
+
+      // Fetch current price
+      const priceData = await this.client.getPrice(Config.TRADING_SYMBOL);
+      const currentPrice = priceData.mid;
+      logger.debug(`🔍 Realtime: Price=$${currentPrice.toFixed(2)}`);
+
+      // Check if there's a pending realtime MTF signal waiting for pullback
+      if (this.breakoutStrategy.hasRealtimeMTFPending()) {
+        const mtfResult = this.breakoutStrategy.checkRealtimeMTFEntry(currentPrice);
+
+        if (mtfResult.pending) {
+          // Log pending status periodically (not every check to reduce noise)
+          if (!this.lastRealtimeMTFLog || Date.now() - this.lastRealtimeMTFLog >= 30000) {
+            logger.info(`⏳ Realtime MTF: ${mtfResult.reason}`);
+            this.lastRealtimeMTFLog = Date.now();
+          }
+          return;
+        }
+
+        if (mtfResult.signal) {
+          // MTF pullback entry found!
+          logger.info('');
+          logger.info('🎯 REALTIME MTF PULLBACK ENTRY!');
+          logger.info(`Signal: ${mtfResult.signal}`);
+          logger.info(`Entry: $${mtfResult.entryPrice.toFixed(2)}`);
+          logger.info(`Confidence: ${formatConfidence(mtfResult.confidence)}`);
+          logger.info(`Reason: ${mtfResult.reason}`);
+          logger.info('');
+
+          // Fetch candles for indicator calculation
+          const candles = await this.client.getCandles(Config.TRADING_SYMBOL, Config.TIMEFRAME, 60);
+          const completeCandles = candles.filter(c => c.complete);
+          const analysis = this.ta.analyze(completeCandles);
+
+          // Calculate entry levels
+          const levels = this.breakoutStrategy.calculateEntryLevels(analysis, mtfResult.signal, mtfResult.entryPrice);
+
+          // Calculate position size
+          const positionSize = this.riskManager.calculatePositionSize(levels.entryPrice, levels.stopLoss);
+
+          if (positionSize === 0) {
+            logger.error('Position size calculation failed');
+            return;
+          }
+
+          // Adjust units for direction
+          const units = mtfResult.signal === 'LONG' ? positionSize : -positionSize;
+
+          // Check risk management
+          const canTrade = await this.riskManager.canOpenTrade(levels.entryPrice, levels.stopLoss, Math.abs(units));
+
+          if (!canTrade.allowed) {
+            logger.risk(`Trade blocked: ${canTrade.reason}`);
+            return;
+          }
+
+          // Execute trade
+          await this.executeTrade(
+            mtfResult.signal,
+            units,
+            levels,
+            mtfResult.reason,
+            'Breakout + ADX (Realtime MTF)',
+            mtfResult.confidence
+          );
+          return;
+        }
+
+        // MTF signal was cleared (timeout or other reason) - continue to check for new breakouts
+      }
+
+      // Fetch recent candles for indicator calculation (need ~50 for ADX/RSI)
+      const candles = await this.client.getCandles(Config.TRADING_SYMBOL, Config.TIMEFRAME, 60);
+      const completeCandles = candles.filter(c => c.complete);
+
+      if (completeCandles.length < 50) {
+        logger.debug('🔍 Realtime check skipped - insufficient candles');
+        return;
+      }
+
+      // Calculate indicators
+      const analysis = this.ta.analyze(completeCandles);
+      const adx = analysis.indicators.adx;
+      const rsi = analysis.indicators.rsi;
+      logger.debug(`🔍 Realtime: ADX=${adx?.toFixed(1)}, RSI=${rsi?.toFixed(1)}, Channel=$${this.breakoutStrategy.previousLow?.toFixed(2)}-$${this.breakoutStrategy.previousHigh?.toFixed(2)}`);
+
+      // Check for real-time breakout (pass EMA values for trend alignment filter)
+      const emaFast = analysis.indicators.emaFast;
+      const emaSlow = analysis.indicators.emaSlow;
+      const result = this.breakoutStrategy.checkRealtimeBreakout(currentPrice, adx, rsi, emaFast, emaSlow);
+      logger.debug(`🔍 Realtime result: signal=${result.signal}, pending=${result.pending}, pendingMTF=${result.pendingMTF}, reason=${result.reason?.substring(0, 50)}...`);
+
+      if (result.pending) {
+        // Log pending status periodically (not every check to reduce noise)
+        if (!this.lastRealtimeLog || Date.now() - this.lastRealtimeLog >= 30000) {
+          logger.info(`⏳ Realtime: ${result.reason}`);
+          this.lastRealtimeLog = Date.now();
+        }
+        return;
+      }
+
+      if (result.pendingMTF) {
+        // Breakout confirmed, now waiting for MTF pullback
+        logger.info(`⏳ Realtime: ${result.reason}`);
+        return;
+      }
+
+      if (!result.signal) {
+        // No breakout - nothing to do
+        return;
+      }
+
+      // We have a confirmed real-time breakout signal (MTF disabled)
+      logger.info('');
+      logger.info('🎯 REAL-TIME BREAKOUT SIGNAL!');
+      logger.info(`Signal: ${result.signal}`);
+      logger.info(`Entry: $${result.entryPrice.toFixed(2)}`);
+      logger.info(`Confidence: ${formatConfidence(result.confidence)}`);
+      logger.info(`Reason: ${result.reason}`);
+      logger.info('');
+
+      // Calculate entry levels
+      const levels = this.breakoutStrategy.calculateEntryLevels(analysis, result.signal, result.entryPrice);
+
+      // Calculate position size
+      const positionSize = this.riskManager.calculatePositionSize(levels.entryPrice, levels.stopLoss);
+
+      if (positionSize === 0) {
+        logger.error('Position size calculation failed');
+        return;
+      }
+
+      // Adjust units for direction
+      const units = result.signal === 'LONG' ? positionSize : -positionSize;
+
+      // Check risk management
+      const canTrade = await this.riskManager.canOpenTrade(levels.entryPrice, levels.stopLoss, Math.abs(units));
+
+      if (!canTrade.allowed) {
+        logger.risk(`Trade blocked: ${canTrade.reason}`);
+        return;
+      }
+
+      // Execute trade
+      await this.executeTrade(
+        result.signal,
+        units,
+        levels,
+        result.reason,
+        'Breakout + ADX (Realtime)',
+        result.confidence
+      );
+
+    } catch (error) {
+      logger.error(`Error in realtime breakout check: ${error.message}`);
+    }
+  }
+
+  /**
+   * Graceful shutdown
+   */
+  async shutdown() {
+    logger.info('');
+    logger.info('🛑 Shutting down bot...');
+
+    this.isRunning = false;
+
+    try {
+      // Stop Telegram bot
+      if (this.telegramBot) {
+        await this.telegramBot.stop();
+      }
+
+      // Display final summary
+      const summary = await this.riskManager.getPortfolioSummary();
+      if (summary) {
+        logger.info('');
+        logger.info('📊 FINAL SUMMARY');
+        logger.info('─'.repeat(60));
+        logger.info(`Balance: $${summary.balance.toFixed(2)}`);
+        logger.info(`Total P&L: $${summary.totalPnL.toFixed(2)} (${summary.totalPnLPct >= 0 ? '+' : ''}${summary.totalPnLPct.toFixed(2)}%)`);
+        logger.info(`Daily P&L: $${summary.dailyPnL.toFixed(2)}`);
+        logger.info(`Total Trades: ${summary.totalTrades}`);
+        logger.info(`Win Rate: ${summary.winRate.toFixed(1)}%`);
+        logger.info(`Open Positions: ${summary.openPositions}`);
+        logger.info('─'.repeat(60));
+      }
+
+      logger.info('');
+      logger.info('✅ Bot stopped cleanly');
+      process.exit(0);
+    } catch (error) {
+      logger.error(`Error during shutdown: ${error.message}`);
+      process.exit(1);
+    }
+  }
+}
+
+// Global error handlers to prevent crashes
+process.on('unhandledRejection', (reason, promise) => {
+  logger.error(`Unhandled Promise Rejection: ${reason}`);
+  logger.warn('Bot will continue running despite the error');
+  // Don't exit - keep the bot running
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error(`Uncaught Exception: ${error.message}`);
+  logger.error(error.stack);
+  logger.warn('Bot will attempt to continue running');
+  // Don't exit immediately - give it a chance to recover
+});
+
+// Start the bot
+const bot = new GoldTradingBot();
+bot.start().catch(error => {
+  logger.error(`Fatal error during startup: ${error.message}`);
+  logger.error(error.stack);
+  process.exit(1);
+});
+
+export default GoldTradingBot;
