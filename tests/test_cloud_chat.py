@@ -53,7 +53,7 @@ def test_parse_fomc_dan_riwayat():
 def test_jawaban_nfp_memakai_angka_basis_pengetahuan():
     kb = _chat.KB["xau"]["NFP"]["bagus"]
     r = ask("hasil NFP sudah keluar 45K vs 98K, bisakah saya profit?")
-    assert "LEMAH" in r and f"naik pada {kb['1j']['searah']}% dari {kb['n']} kejadian" in r
+    assert "Kesimpulan: BAGUS" in r and f"naik pada {kb['1j']['searah']}% dari {kb['n']} kejadian" in r
     assert "lempar koin" in r
     assert "Minggu ini" in r and "forecast 98K" in r
     s = _chat.KB["sinyal_berita"]["sesudah"]
@@ -85,6 +85,29 @@ def test_btc_dan_intent_lain():
             funding_cache={"day": "2026-10-01", "f": [[i, i * 1e-6] for i in range(1200)]})
     assert "T55/20: BUY entry 4.280,00" in b and "SL+ aktif" in b and "persentil 100%" in b
     assert "contoh pertanyaan" in ask("halo").lower()
+
+
+def test_format_act_cons_prev_scanning():
+    rows = _chat.parse_rows("NFP Act: 45K Cons: 98K Prev: 162K\nUnemployment Rate Act: 4.3% Cons: 4.1% Prev: 4.1%")
+    assert [r["group"] for r in rows] == ["NFP", "NFP"]
+    assert rows[0]["act"] == 45000 and rows[0]["cons"] == 98000 and rows[0]["prev"] == 162000 and rows[0]["counts"]
+    assert not rows[1]["counts"] and rows[1]["inverse"]                # tingkat pengangguran = info saja
+    r = ask("NFP Act: 45K Cons: 98K Prev: 162K\nUnemployment Rate Act: 4.3% Cons: 4.1% Prev: 4.1%")
+    c = _chat.KB["xau_prev"]["NFP"]["bagus_searah"]
+    assert "Scanning" in r and "di BAWAH perkiraan 53K" in r and "info saja" in r
+    assert f"n={c['n']}): emas naik 1 jam {c['1j']['searah']}%" in r and "melebihi" in r
+    assert "Kesimpulan: BAGUS" in ask("Unemployment Claims Act: 250K Cons: 225K Prev: 218K")
+    f = ask("Federal Funds Rate Act: 4.00% Cons: 4.00% Prev: 4.25%")
+    assert "suku bunga turun" in f and "Bunga turun, sesuai ekspektasi" in f
+    assert "Cons" in ask("Act: 45K", history=[{"role": "user", "content": "NFP"}, {"role": "assistant", "content": "x"}])
+    assert "NFP Act: 45K" in ask("halo")                               # bantuan menyebut format
+    assert "Scanning" in ask("NFP 45K") and "vs Prev 162K" in ask("NFP 45K")   # Cons & Prev dari kalender
+
+
+def test_kalender_json():
+    c = _chat.calendar_json(CAL)
+    assert c[0]["group"] == "PCE" and c[1]["title"] == "Non-Farm Employment Change" and c[1]["forecast"] == "98K"
+    assert c[1]["when"].endswith("WIB") and len(c) == 2
 
 
 def test_riwayat_dibersihkan():

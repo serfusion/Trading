@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Button
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -53,12 +56,22 @@ import java.util.concurrent.TimeUnit
 data class ChatMessage(val role: String, val text: String, val sources: List<String> = emptyList())
 
 private val EXAMPLES = listOf(
-    "NFP 45K vs 98K",
+    "NFP Act: 45K Cons: 98K Prev: 162K",
     "CPI lebih tinggi dari perkiraan",
     "Sebelum FOMC suku bunga naik, apa yang harus saya lakukan?",
     "Berita apa saja minggu ini?",
     "Sinyal terbuka sekarang",
     "SL+ di 0,7R atau TP1?",
+)
+
+/** Berita minggu ini dari cloud (GET /api/chat) untuk mengisi Cons & Prev otomatis. */
+data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String)
+
+/** Pilihan cepat bila kalender minggu ini belum termuat. */
+private val DEFAULT_EVENTS = listOf(
+    "Non-Farm Employment Change", "Unemployment Rate", "CPI m/m", "Core CPI m/m", "CPI y/y", "PPI m/m",
+    "Core PCE Price Index m/m", "Retail Sales m/m", "Advance GDP q/q", "ISM Manufacturing PMI", "ISM Services PMI",
+    "Unemployment Claims", "Federal Funds Rate",
 )
 
 /** Klien POST <alamat cloud>/api/chat. Kunci = topik ntfy (sama dengan cloud). */
@@ -68,6 +81,24 @@ object ChatClient {
         .readTimeout(30, TimeUnit.SECONDS)
         .callTimeout(40, TimeUnit.SECONDS)
         .build()
+
+    fun calendar(): List<CalEvent> {
+        val base = SignalRepository.cloudUrl()
+        if (base.isBlank()) return emptyList()
+        val request = Request.Builder().url("$base/api/chat").get()
+            .header("X-Chat-Key", SignalRepository.topic()).build()
+        return try {
+            client.newCall(request).execute().use { res ->
+                val arr = JSONObject(res.body?.string().orEmpty()).optJSONArray("calendar") ?: JSONArray()
+                (0 until arr.length()).map { i ->
+                    val o = arr.getJSONObject(i)
+                    CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"))
+                }
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 
     fun ask(history: List<ChatMessage>): ChatMessage {
         val base = SignalRepository.cloudUrl()
@@ -103,6 +134,7 @@ fun ChatTab() {
     val messages by SignalRepository.chat.collectAsState()
     var input by remember { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
+    var showForm by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
 
@@ -136,8 +168,9 @@ fun ChatTab() {
                 Column(Modifier.padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     NoteBox(
                         "Tanya soal berita (NFP, CPI, FOMC, …), sinyal terbuka, atau skema SL+/TP. Jawaban dihitung " +
-                            "dari data historis 2012–2026 (bukan AI). Setelah berita keluar, ketik angkanya, " +
-                            "mis. \"NFP 45K vs 98K\". Bukan jaminan profit; chat tidak membuka order."
+                            "dari data historis 2012–2026 (bukan AI). Setelah berita keluar, tekan 📝 Act/Cons/Prev " +
+                            "lalu isi angkanya (Cons & Prev terisi otomatis dari kalender), atau ketik mis. " +
+                            "\"NFP Act: 45K Cons: 98K Prev: 162K\". Bukan jaminan profit; chat tidak membuka order."
                     )
                     if (SignalRepository.cloudUrl().isBlank()) {
                         NoteBox("Isi \"Alamat cloud\" di Pengaturan (alamat Vercel yang sama dengan cron).", SellColor)
@@ -162,10 +195,12 @@ fun ChatTab() {
                 }
             }
         }
+        if (showForm) ReleaseForm(busy) { text -> showForm = false; send(text) }
         Row(
             Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            TextButton(onClick = { showForm = !showForm }) { Text(if (showForm) "✖" else "📝") }
             if (messages.isNotEmpty()) {
                 IconButton(onClick = { SignalRepository.clearChat() }, enabled = !busy) {
                     Icon(Icons.Filled.Delete, contentDescription = "Hapus percakapan", tint = Muted)
@@ -179,6 +214,59 @@ fun ChatTab() {
             IconButton(onClick = { send(input) }, enabled = !busy && input.isNotBlank()) {
                 Icon(Icons.AutoMirrored.Filled.Send, contentDescription = "Kirim", tint = Gold)
             }
+        }
+    }
+}
+
+/**
+ * Kartu isian data rilis seperti ForexFactory: Berita, Act, Cons, Prev. Cons & Prev terisi otomatis dari kalender
+ * minggu ini. "+ Baris" menambah baris lain (mis. NFP + Unemployment Rate), "Analisa" mengirim semuanya ke chat.
+ */
+@Composable
+private fun ReleaseForm(busy: Boolean, onSend: (String) -> Unit) {
+    var events by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
+    var name by remember { mutableStateOf("") }
+    var act by remember { mutableStateOf("") }
+    var cons by remember { mutableStateOf("") }
+    var prev by remember { mutableStateOf("") }
+    var rows by remember { mutableStateOf<List<String>>(emptyList()) }
+    LaunchedEffect(Unit) { events = withContext(Dispatchers.IO) { ChatClient.calendar() } }
+
+    fun line(): String? = if (name.isBlank() || act.isBlank()) null else
+        "${name.trim()} Act: ${act.trim()}" + (if (cons.isNotBlank()) " Cons: ${cons.trim()}" else "") +
+            (if (prev.isNotBlank()) " Prev: ${prev.trim()}" else "")
+
+    AppCard {
+        CardTitle("Isi data rilis (Act / Cons / Prev)")
+        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (events.isNotEmpty()) {
+                events.forEach { e ->
+                    AssistChip(onClick = { name = e.title; cons = e.forecast; prev = e.previous; act = "" },
+                        label = { Text("${e.title} • ${e.whenText}") })
+                }
+            } else {
+                DEFAULT_EVENTS.forEach { t -> AssistChip(onClick = { name = t }, label = { Text(t) }) }
+            }
+        }
+        OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Berita") }, singleLine = true,
+            modifier = Modifier.fillMaxWidth())
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            OutlinedTextField(value = act, onValueChange = { act = it }, label = { Text("Act") }, singleLine = true,
+                modifier = Modifier.weight(1f))
+            OutlinedTextField(value = cons, onValueChange = { cons = it }, label = { Text("Cons") }, singleLine = true,
+                modifier = Modifier.weight(1f))
+            OutlinedTextField(value = prev, onValueChange = { prev = it }, label = { Text("Prev") }, singleLine = true,
+                modifier = Modifier.weight(1f))
+        }
+        rows.forEach { Text("• $it", style = MaterialTheme.typography.labelSmall, color = Muted) }
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            TextButton(onClick = { line()?.let { rows = rows + it; act = ""; cons = ""; prev = ""; name = "" } },
+                enabled = line() != null) { Text("+ Baris") }
+            Spacer(Modifier.weight(1f))
+            Button(
+                onClick = { onSend((rows + listOfNotNull(line())).joinToString("\n")) },
+                enabled = !busy && (rows.isNotEmpty() || line() != null)
+            ) { Text("Analisa") }
         }
     }
 }

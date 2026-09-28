@@ -1,6 +1,8 @@
 """Endpoint tab Tanya untuk aplikasi Android — penjawab berbasis DATA, tanpa AI (lihat _chat.py).
 
-POST /api/chat   {"messages": [{"role": "user", "content": "NFP 45K vs 98K"}, ...]}
+POST /api/chat   {"messages": [{"role": "user", "content": "NFP Act: 45K Cons: 98K Prev: 162K"}, ...]}
+GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...]} berita USD high-impact minggu ini untuk
+                 mengisi Cons & Prev otomatis di kartu "Act / Cons / Prev" aplikasi
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -64,4 +66,10 @@ class handler(BaseHTTPRequestHandler):
             self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
 
     def do_GET(self):
-        self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
+        if not self._authorized():
+            self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
+            return
+        try:
+            self._send(200, {"ok": True, "calendar": _chat.calendar_json(_chat.fetch_calendar())})
+        except Exception as exc:  # noqa: BLE001
+            self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})

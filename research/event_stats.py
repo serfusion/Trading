@@ -62,7 +62,8 @@ def releases(cal: pd.DataFrame) -> pd.DataFrame:
                      "event": main.event.iloc[0] if len(main) else gg.event.iloc[0],
                      "surp": float(main.surp.iloc[0]) if len(main) else np.nan,
                      "actual": main.actual.iloc[0] if len(main) else None,
-                     "forecast": main.forecast.iloc[0] if len(main) else None})
+                     "forecast": main.forecast.iloc[0] if len(main) else None,
+                     "previous": main.previous.iloc[0] if len(main) and "previous" in main else None})
     ev = pd.DataFrame(rows)
     # besar kejutan relatif terhadap median |kejutan| grup-event yang sama
     ev["besar"] = False
@@ -141,6 +142,48 @@ def group_json(r: pd.DataFrame, keys: list[str]) -> dict:
         out[tag] = cell
     if "lanjut1j" in r and r.lanjut1j.notna().any():
         out["lanjut1j"] = {"n": int(r.lanjut1j.notna().sum()), "pct": round(100 * float(r.lanjut1j.astype(float).mean()))}
+    return out
+
+
+INVERSE_GROUPS = {"CLAIMS"}
+
+
+def surprise_hist(ev: pd.DataFrame) -> dict:
+    """|actual - forecast| event utama tiap grup (terurut) -> persentil besar kejutan di chat."""
+    out = {}
+    for grp in PRIORITY:
+        g = ev[(ev.group == grp) & ev.event.isin(MAIN_EVENT[grp][:1])].surp.abs().dropna()
+        g = g[g > 0]
+        if len(g) >= 20:
+            out[grp] = sorted(round(float(x), 6) for x in g)
+    return out
+
+
+def prev_combo_json(r: pd.DataFrame) -> dict:
+    """Kejutan vs perkiraan (Act-Cons) DIGABUNG tren vs bulan lalu (Act-Prev), event utama saja.
+    searah = data lebih lemah dari perkiraan DAN dari sebelumnya (atau sama-sama lebih kuat); campur = berlawanan."""
+    out = {}
+    for grp in PRIORITY:
+        g = r[(r.group == grp) & r.event.isin(MAIN_EVENT[grp][:1])].copy()
+        if len(g) < 20:
+            continue
+        a, f, pv = g.actual.map(_num), g.forecast.map(_num), g.previous.map(_num)
+        sign = 1 if grp in INVERSE_GROUPS else -1
+        g["b"] = np.sign(a - f) * sign                      # arah untuk emas dari kejutan
+        g["t"] = np.sign(a - pv) * sign                     # arah untuk emas dari tren vs bulan lalu
+        g = g[(g.b != 0) & g.t.notna()]
+        cell = {}
+        for tag, m in (("bagus_searah", (g.b > 0) & (g.t > 0)), ("bagus_campur", (g.b > 0) & (g.t <= 0)),
+                       ("buruk_searah", (g.b < 0) & (g.t < 0)), ("buruk_campur", (g.b < 0) & (g.t >= 0))):
+            x = g[m]
+            if len(x) < 5:
+                continue
+            s1 = x["1j"] * x.b
+            s4 = x["4j"] * x.b
+            cell[tag] = {"n": int(len(x)), "1j": {"searah": round(100 * float((s1 > 0).mean())), "rata": round(float(s1.mean()), 3)},
+                         "4j": {"searah": round(100 * float((s4 > 0).mean())), "rata": round(float(s4.mean()), 3)}}
+        if cell:
+            out[grp] = cell
     return out
 
 
@@ -278,7 +321,8 @@ def main() -> None:
                   if (r.group == grp).sum() >= 10},
           "btc": {grp: group_json(rb[rb.group == grp], ["1j", "4j", "1h"]) for grp in ["FOMC", "NFP", "CPI"]
                   if (rb.group == grp).sum() >= 10},
-          "fomc": fomc_json(r), "sinyal_berita": money_json()}
+          "fomc": fomc_json(r), "sinyal_berita": money_json(),
+          "kejutan_hist": surprise_hist(ev), "xau_prev": prev_combo_json(r)}
     OUT_JSON.write_text(json.dumps(kb, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"ditulis {OUT} ({len(r)} rilis XAU, {len(rb)} rilis BTC, {len(OUT.read_text())} karakter) + {OUT_JSON.name}")
 

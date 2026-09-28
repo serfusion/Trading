@@ -26,9 +26,11 @@ GROUP_WORDS = [
     ("PPI", ["ppi", "inflasi produsen", "producer price"]),
     ("PCE", ["pce"]),
     ("CLAIMS", ["claims", "klaim", "jobless"]),
-    ("NFP", ["nfp", "non-farm", "nonfarm", "non farm", "payroll", "tenaga kerja", "lapangan kerja", "pengangguran"]),
+    ("NFP", ["nfp", "non-farm", "nonfarm", "non farm", "payroll", "tenaga kerja", "lapangan kerja", "pengangguran",
+             "unemployment rate", "average hourly"]),
     ("CPI", ["cpi", "inflasi"]),
     ("FOMC", ["fomc", "the fed", "fed ", "fed?", "fed,", "suku bunga", "interest rate", "rate decision", "powell",
+              "federal funds", "fed funds", "funds rate",
               "warsh", "dot plot", "fedwatch"]),
     ("GDP", ["gdp", "pdb"]),
     ("RETAIL", ["retail", "ritel"]),
@@ -120,6 +122,158 @@ def _val(v: float) -> str:
     if abs(v) >= 1000:
         return f"{v / 1000:g}K".replace(".", ",")
     return f"{v:g}".replace(".", ",")
+
+
+# ------------------------------------------------------------------ format "Act: Cons: Prev:" (seperti ForexFactory)
+LABEL = re.compile(r"(?<![a-z])(actual|act|aktual|consensus|cons|konsensus|forecast|fcst|perkiraan|previous|prev|"
+                   r"sebelumnya)\s*[:=]?\s*(-?\d+(?:[.,]\d+)?\s*(?:k|rb|ribu|jt|juta|m|%)?)")
+KIND = {"actual": "act", "act": "act", "aktual": "act", "consensus": "cons", "cons": "cons", "konsensus": "cons",
+        "forecast": "cons", "fcst": "cons", "perkiraan": "cons", "previous": "prev", "prev": "prev",
+        "sebelumnya": "prev"}
+# baris pendamping NFP yang tidak ikut statistik NFP (statistik historis memakai angka Non-Farm saja)
+INFO_ONLY = ["unemployment rate", "tingkat pengangguran", "average hourly", "upah", "earnings"]
+
+
+def parse_rows(text: str, prev_group: str | None = None) -> list[dict]:
+    """Baris 'NFP Act: 45K Cons: 98K Prev: 162K' (boleh beberapa baris / dipisah ';')."""
+    rows = []
+    for line in re.split(r"[\n;]+", text):
+        low = " " + line.lower().strip() + " "
+        vals, raw = {}, {}
+        for m in LABEL.finditer(low):
+            nums = _numbers(m.group(2))
+            if nums and KIND[m.group(1)] not in vals:
+                vals[KIND[m.group(1)]] = nums[0]
+                raw[KIND[m.group(1)]] = m.group(2).strip().upper().replace("RB", "K").replace("RIBU", "K")
+        if "act" not in vals:
+            continue
+        first = LABEL.search(low)
+        name = line.strip()[:max(first.start() - 1, 0)].strip(" :-•\t") if first else line.strip()
+        rows.append({"name": name, "group": _group(" " + name.lower() + " ") or _group(low), "act": vals["act"],
+                     "cons": vals.get("cons"), "prev": vals.get("prev"), "raw": raw, "low": low})
+    if not rows:
+        return []
+    default = next((r["group"] for r in rows if r["group"]), prev_group)
+    for r in rows:
+        r["group"] = r["group"] or default
+        low = r.pop("low")
+        r["inverse"] = r["group"] == "CLAIMS" or "pengangguran" in low or "unemployment" in low
+        r["counts"] = not (r["group"] == "NFP" and any(w in low for w in INFO_ONLY))
+        r["name"] = r["name"] or _nama(r["group"] or "?")
+    return rows
+
+
+def _pct_rank(grp: str, diff: float) -> int | None:
+    hist = (KB.get("kejutan_hist") or {}).get(grp)
+    if not hist or diff == 0:
+        return None
+    return round(100 * sum(1 for x in hist if x <= abs(diff) + 1e-12) / len(hist))
+
+
+def _gold_dir(diff: float, inverse: bool) -> int:
+    """+1 = bagus untuk emas (data lebih lemah / inflasi lebih rendah), −1 = buruk, 0 = sama."""
+    if diff == 0:
+        return 0
+    return (1 if diff > 0 else -1) * (1 if inverse else -1)
+
+
+def _arti(g: int) -> str:
+    return {1: "bagus untuk emas", -1: "buruk untuk emas", 0: "netral"}[g]
+
+
+def scan_answer(rows: list[dict], calendar: list[dict], now: datetime, btc: bool) -> str:
+    """Pemindaian menyeluruh data rilis: Act vs Cons (arah, besar, persentil), Act vs Prev (tren), gabungan -> peluang."""
+    grp = next((r["group"] for r in rows if r["group"]), None)
+    if grp is None:
+        return ("Nama beritanya belum saya kenali. Tulis mis. \"NFP Act: 45K Cons: 98K Prev: 162K\" atau "
+                "\"CPI m/m Act: 0,4% Cons: 0,3% Prev: 0,2%\".")
+    if grp == "FOMC":
+        r = rows[0]
+        info = {"group": "FOMC", "bias": None, "same": False, "big": False, "timing": "sesudah", "btc": btc,
+                "decision": None, "text": ""}
+        lines = [f"📊 Scanning FOMC — Federal Funds Rate Act {_val(r['act'])}%"
+                 + (f", Cons {_val(r['cons'])}%" if r["cons"] is not None else "")
+                 + (f", Prev {_val(r['prev'])}%" if r["prev"] is not None else "")]
+        if r["prev"] is not None:
+            info["decision"] = "naik" if r["act"] > r["prev"] else "turun" if r["act"] < r["prev"] else "tetap"
+            lines.append(f"• Keputusan: suku bunga {info['decision']} (vs sebelumnya).")
+        if r["cons"] is not None and r["act"] != r["cons"]:
+            info["bias"] = -1 if r["act"] > r["cons"] else 1
+            info["surprise"] = True
+            lines.append(f"• KEJUTAN: lebih {'hawkish (bunga lebih tinggi)' if r['act'] > r['cons'] else 'dovish (bunga lebih rendah)'} "
+                         f"dari perkiraan → {_arti(info['bias'])}.")
+        elif r["cons"] is not None:
+            lines.append("• Sesuai perkiraan (tanpa kejutan suku bunga).")
+        meta = KB.get("meta", {})
+        asset = "btc" if btc else "xau"
+        return "\n".join(lines + fomc_lines(info, asset, meta.get("harga_btc" if btc else "harga_emas", 0) or 0))
+    meta = KB.get("meta", {})
+    asset = "btc" if btc and grp in (KB.get("btc") or {}) else "xau"
+    price = meta.get("harga_btc" if asset == "btc" else "harga_emas", 0) or 0
+    L = [f"📊 Scanning {_nama(grp)} — {'BTC/USD (H1)' if asset == 'btc' else 'XAU/USD (M15)'}, data {meta.get('kalender')}"]
+    total, main = 0, None
+    for r in rows:
+        raw = r.get("raw") or {}
+        parts = [f"• {r['name'] or _nama(grp)}: Act {raw.get('act') or _val(r['act'])}"]
+        if r["cons"] is not None:
+            d = r["act"] - r["cons"]
+            g = _gold_dir(d, r["inverse"])
+            txt = "sama dengan" if d == 0 else ("di ATAS" if d > 0 else "di BAWAH")
+            parts.append(f"vs Cons {raw.get('cons') or _val(r['cons'])} → {txt} perkiraan"
+                         + ("" if d == 0 else f" {_val(abs(d))}") + f" ({_arti(g)})")
+            if r["counts"]:
+                total += g
+                if main is None:
+                    main = dict(r, g=g, diff=d)
+                    rank = _pct_rank(grp, d)
+                    if rank is not None:
+                        parts.append(f"besar kejutan melebihi {rank}% rilis sejak 2010")
+        if r["prev"] is not None:
+            dp = r["act"] - r["prev"]
+            gp = _gold_dir(dp, r["inverse"])
+            parts.append(f"vs Prev {raw.get('prev') or _val(r['prev'])} → {'naik' if dp > 0 else 'turun' if dp < 0 else 'sama'} "
+                         f"({_arti(gp)})")
+            if main is not None and main.get("name") == r["name"]:
+                main["gp"] = gp
+        if not r["counts"]:
+            parts.append("[info saja — peluang memakai angka Non-Farm]")
+        L.append("; ".join(parts))
+    if main is None:
+        L.append("Tidak ada Cons (perkiraan) untuk angka utama → arah kejutan tidak bisa dinilai. Tambahkan Cons.")
+        return "\n".join(L)
+    bias = 0 if total == 0 else (1 if total > 0 else -1)
+    if bias == 0:
+        s = ((KB.get(asset) or {}).get(grp) or {}).get("sesuai")
+        L.append("Kesimpulan: tanpa kejutan arah (sesuai perkiraan / sinyal campur).")
+        if s:
+            L.append(f"• Historis sesuai perkiraan (n={s['n']}): naik 1 jam {s['1j']['naik']}% → ≈ 50/50.")
+    else:
+        tag = "bagus" if bias > 0 else "buruk"
+        med = (KB.get("median_kejutan") or {}).get(grp)
+        big = bool(med) and abs(main["diff"]) >= 2 * med
+        L.append(f"Kesimpulan: {'BAGUS (emas cenderung naik)' if bias > 0 else 'BURUK (emas cenderung turun)'}"
+                 f"{' — kejutan BESAR (≥2× median)' if big else ''}.")
+        L.append("Peluang (historis):")
+        L += _stat_lines(asset, grp, tag, price)
+        b = ((KB.get(asset) or {}).get(grp, {}).get(tag) or {}).get("besar")
+        if big and b:
+            L.append(f"• Khusus kejutan besar (n={b['n']}): {b['jendela']} searah {b['searah']}%"
+                     f"{' — sampel kecil' if b['n'] < 20 else ''}.")
+        combo = (KB.get("xau_prev") or {}).get(grp, {}) if asset == "xau" else {}
+        if "gp" in main and combo:
+            key = f"{tag}_{'searah' if main['gp'] == bias else 'campur'}"
+            c = combo.get(key)
+            if c:
+                arah = "naik" if bias > 0 else "turun"
+                L.append(f"• Gabungan dengan Prev ({'searah: juga ' + ('lebih lemah' if bias > 0 else 'lebih kuat') + ' dari sebelumnya' if key.endswith('searah') else 'berlawanan dengan tren sebelumnya'}, "
+                         f"n={c['n']}): emas {arah} 1 jam {c['1j']['searah']}%, 4 jam {c['4j']['searah']}%"
+                         f"{' — sampel kecil' if c['n'] < 20 else ''}.")
+    lanjut = ((KB.get(asset) or {}).get(grp) or {}).get("lanjut1j")
+    if lanjut:
+        L.append(f"⚠️ Setelah candle 15 menit pertama TUTUP, 1 jam berikutnya searah hanya {lanjut['pct']}% (n={lanjut['n']}) "
+                 "≈ lempar koin → jangan mengejar lonjakan; spread melebar saat rilis.")
+    L += ["Saran berbasis data:"] + _signal_news_lines(pre=False)
+    return "\n".join(L)
 
 
 def parse(text: str, calendar: list[dict], prev_group: str | None = None) -> dict:
@@ -410,6 +564,7 @@ Nasib 4 running (XAU): 36% kena SL awal, 19% TP1 lalu SL+ (≈ +0,1R), 17% TUTUP
 Kesimpulan data: pertahankan skema bawaan."""
 
 BANTUAN = """Saya menjawab dari DATA historis (bukan AI, bukan ramalan). Contoh pertanyaan:
+• "NFP Act: 45K Cons: 98K Prev: 162K" (format ForexFactory; boleh beberapa baris, mis. + Unemployment Rate)
 • "NFP 45K vs 98K" / "NFP lebih kecil dari perkiraan" / "CPI lebih tinggi" → peluang reaksi emas
 • "Sebelum NFP / CPI / FOMC apa yang harus saya lakukan?" → skenario + saran
 • "FOMC suku bunga naik sesuai ekspektasi" / "FOMC hawkish" → statistik FOMC
@@ -451,7 +606,20 @@ def answer(messages: list, now: datetime, calendar_rows=None, states: dict | Non
     calendar = calendar_rows_for(calendar_rows)
     info = parse(question, calendar, prev_group)
     t = info["text"]
-    if info["group"]:
+    rows = parse_rows(question, prev_group)
+    if not rows and info["group"] not in (None, "FOMC") and info["actual"] is not None:
+        # angka bebas ("NFP 45K") -> pindai juga dengan Cons & Prev dari kalender minggu ini
+        cal = [c for c in calendar if c["group"] == info["group"]]
+        prev = _numbers(cal[0]["previous"].lower()) if cal and cal[0]["previous"] else []
+        rows = [{"name": cal[0]["title"] if cal else _nama(info["group"]), "group": info["group"],
+                 "act": info["actual"], "cons": info["forecast"], "prev": prev[0] if prev and len(_numbers(t)) < 2 else None,
+                 "inverse": info["group"] == "CLAIMS" or "pengangguran" in t, "counts": True}]
+    if rows:
+        reply = scan_answer(rows, calendar, now, info["btc"])
+        sched = _schedule_line(rows[0]["group"], calendar, now) if rows[0]["group"] else None
+        if sched:
+            reply = reply.replace("\n", "\n" + sched + "\n", 1)
+    elif info["group"]:
         reply = event_answer(info, calendar, now)
     elif _has(t, ["sl+", "sl +", "sl plus", "tp1", "tp 1", "tp2", "running", "trailing", "tangga", "0,7", "0.7", "skema"]):
         reply = SKEMA
@@ -465,6 +633,12 @@ def answer(messages: list, now: datetime, calendar_rows=None, states: dict | Non
         reply = BANTUAN
     reply += "\n\nHasil masa lalu bukan jaminan. Selalu pakai SL, risiko 0,25–0,5% modal per sinyal."
     return {"ok": True, "reply": reply, "sources": [], "model": "data (tanpa AI)"}
+
+
+def calendar_json(calendar_rows) -> list[dict]:
+    """Kalender minggu ini untuk aplikasi (kartu Act/Cons/Prev): judul, grup, waktu WIB, forecast, previous."""
+    return [{"title": c["title"], "group": c["group"], "time": c["time"].isoformat(), "when": _when(c["time"]),
+             "forecast": c["forecast"], "previous": c["previous"]} for c in calendar_rows_for(calendar_rows)]
 
 
 def fetch_calendar() -> list | None:

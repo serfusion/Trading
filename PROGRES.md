@@ -113,3 +113,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-28: pengguna: chat "tidak usah pakai AI, hanya analisa berdasarkan data" → `_chat.py` ditulis ulang
   (kata kunci + `pengetahuan.json`), dependensi anthropic dihapus. Riset SL+ bertangga/0,7R: pertahankan bawaan.
   Aplikasi 2.8 (ikon, skema tetap, level TUTUP) & 2.9 (teks Tanya). PR serfusion/Trading#13 dibuka.
+- 2026-09-28: pengguna minta isian "Act: Cons: Prev:" + scanning menyeluruh → kalender historis kini memuat Previous
+  (`research/news_data.py`), `pengetahuan.json` + persentil besar kejutan & gabungan Act vs Prev; `_chat.py`
+  memindai format ForexFactory (banyak baris); `GET /api/chat` = kalender minggu ini; aplikasi 3.0 kartu 📝.

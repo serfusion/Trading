@@ -181,10 +181,15 @@ hanya library standar:
   `pengetahuan.md`): reaksi emas/BTC per berita (NFP, CPI, PPI, FOMC, Retail, PCE, GDP, ISM, Claims) menurut arah &
   besar kejutan, FOMC sesuai ekspektasi vs kejutan, sinyal 💰 di sekitar berita — setiap peluang disertai n;
 - **konteks langsung**: kalender USD high-impact minggu ini (ForexFactory), posisi bot XAU/BTC (Supabase), filter BTC.
-- Pertanyaan dikenali dari kata kunci: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
-  ("NFP 45K vs 98K"; bila hanya satu angka, forecast diambil dari kalender minggu ini), waktu ("sebelum" /
-  "sudah keluar"), "sinyal terbuka", "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil
-  otomatis — pengguna mengetik angkanya.
+- **Format ForexFactory "Act: Cons: Prev:"** (kartu 📝 di aplikasi 3.0; Cons & Prev terisi otomatis dari kalender
+  lewat `GET /api/chat`): mis. `NFP Act: 45K Cons: 98K Prev: 162K`, boleh beberapa baris (`Unemployment Rate …` di
+  NFP ditandai info saja). Pemindaian: arah & besar kejutan per baris (persentil terhadap semua rilis sejak 2010),
+  tren vs bulan lalu, kesimpulan arah emas, peluang historis 15 menit – 1 hari, kejutan besar, dan **gabungan Act vs
+  Prev** (mis. NFP lebih lemah dari perkiraan DAN dari bulan lalu: emas naik 1 jam 78%, n=54; bila tidak searah
+  dengan bulan lalu: 54%, n=13). Federal Funds Rate Act/Cons/Prev → keputusan & kejutan FOMC.
+- Pertanyaan bebas juga dikenali: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
+  ("NFP 45K" → Cons & Prev dari kalender minggu ini), waktu ("sebelum" / "sudah keluar"), "sinyal terbuka",
+  "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil otomatis — pengguna mengisi Act.
 
 Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
 `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
