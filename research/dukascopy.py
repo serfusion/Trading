@@ -81,8 +81,17 @@ def fetch(sym: str, kind: str, start: str, end: str, pause: float = 0.3) -> dict
 
 
 def load(sym: str, kind: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-    return (pd.read_parquet(cache_path(f"dukascopy/{sym}_{kind}_BID.parquet")),
-            pd.read_parquet(cache_path(f"dukascopy/{sym}_{kind}_ASK.parquet")))
+    """(BID, ASK) dari semua file mentah yang sudah terunduh (boleh sebagian; ASK bisa kosong di tahun tertentu)."""
+    raw_dir = cache_path(f"dukascopy/raw_{sym}_{kind}")
+    out = []
+    for side in ("BID", "ASK"):
+        files = sorted(raw_dir.glob(f"{side}_*.bi5"))
+        if not files:
+            raise FileNotFoundError(raw_dir)
+        frames = [_decode(f.read_bytes(), pd.Timestamp(f.stem.split("_")[1], tz="UTC"), POINT[sym]) for f in files]
+        df = pd.concat([x for x in frames if len(x)]).sort_index()
+        out.append(df[~df.index.duplicated()])
+    return out[0], out[1]
 
 
 if __name__ == "__main__":

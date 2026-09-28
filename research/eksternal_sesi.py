@@ -57,16 +57,20 @@ def dukascopy_h1() -> tuple[pd.DataFrame, np.ndarray]:
     bid = bid[(bid.high > bid.low)]
     ask = ask.reindex(bid.index)
     sp = (ask.open - bid.open).to_numpy()
-    med = pd.Series(sp).rolling(500, min_periods=1).median().to_numpy()
-    sp = np.where(np.isfinite(sp) & (sp > 0), sp, med)                # ASK hilang -> median sekitar
-    return bid[["open", "high", "low", "close"]], sp
+    return bid[["open", "high", "low", "close"]], np.where(sp > 0, sp, np.nan)      # NaN = ASK belum ada
 
 
 def part_b() -> None:
     bid, sp = dukascopy_h1()
-    bid = bid[bid.index >= pd.Timestamp("2012-11-15", tz="UTC")]
-    sp = sp[-len(bid):]
-    s = pd.Series(sp, index=bid.index)
+    keep = bid.index >= pd.Timestamp("2012-11-15", tz="UTC")
+    bid, sp = bid[keep], sp[keep]
+    s = pd.Series(sp, index=bid.index).dropna()                       # hanya spread nyata
+    sp = np.where(np.isfinite(sp), sp, 0.30)                          # ASK tidak ada -> 0,30 (sama dgn riset lain)
+    ref = asset("XAUUSD").b.df
+    both = bid.index.intersection(ref.index)
+    d = (bid.close.reindex(both) - ref.close.reindex(both)).abs()
+    print(f"Selisih close Dukascopy vs data riset: median ${d.median():.2f}, p95 ${d.quantile(0.95):.2f} "
+          f"({len(both)} candle sama)")
     print(f"\nDukascopy XAUUSD H1: {len(bid)} candle {bid.index[0]:%Y-%m-%d} .. {bid.index[-1]:%Y-%m-%d}")
     print("Spread median ASK-BID per tahun ($):", " ".join(
         f"{y % 100:02d}:{v:.2f}" for y, v in s.groupby(s.index.year).median().items()))
