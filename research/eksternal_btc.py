@@ -111,6 +111,48 @@ def variants(sig: pd.DataFrame, fr: pd.DataFrame, mt: pd.DataFrame) -> dict[str,
     return out
 
 
+def robust(fr: pd.DataFrame, mt: pd.DataFrame) -> None:
+    """Ketahanan filter yang konsisten: parameter sekitar, BUY vs SELL, dan jeda data (cloud di AS tidak bisa
+    memanggil api.binance.com -> file harian data.binance.vision baru ada keesokan harinya)."""
+    a = asset("BTCUSD")
+    sig = a.money[a.money.t >= fr.index[0] + pd.Timedelta(days=365)].reset_index(drop=True)
+    t, d = pd.DatetimeIndex(sig.t), sig.dir.to_numpy()
+
+    def fund(avg, win, p, lag_h=0):
+        pct = fr.rate.rolling(avg).mean().rolling(win, min_periods=win // 3).apply(
+            lambda v: (v <= v[-1]).mean(), raw=True)
+        x = asof(t, pct, fr.index + pd.Timedelta(hours=lag_h))
+        return np.isnan(x) | ~(((d > 0) & (x >= p)) | ((d < 0) & (x <= 1 - p)))
+
+    def lsr(days, p):
+        pct = mt.ls.rolling(24 * days, min_periods=24 * max(days // 4, 2)).apply(
+            lambda v: (v <= v[-1]).mean(), raw=True)
+        x = asof(t, pct, mt.index + pd.Timedelta(minutes=60))
+        return np.isnan(x) | ~(((d > 0) & (x >= p)) | ((d < 0) & (x <= 1 - p)))
+
+    def cell(k, split):
+        j = judge(sig, k, split)
+        return (f"{j['uji_keep']:+.2f}/{j['uji_drop']:+.2f} ({j['uji_ndrop']:3d}) p={j['p']:.3f}"
+                f"{'✅' if j['konsisten'] else ''}")
+
+    print(f"\n=== Ketahanan funding (uji >= 2022, dasar uji {judge(sig, fund(3, 1095, 0.9), SPLIT_FUNDING)['uji_base']:+.2f}R):"
+          " lolos/dibuang (n dibuang) ===")
+    for avg in (1, 3, 9):
+        for win in (549, 1095, 2190):
+            print(f"rata {avg * 8:2d} jam, jendela {win // 3:4d} hari | " + " | ".join(
+                f"P{p * 100:.0f}: {cell(fund(avg, win, p), SPLIT_FUNDING)}" for p in (0.85, 0.9, 0.95)))
+    k = fund(3, 1095, 0.9)
+    for dd, lab in ((1, "BUY"), (-1, "SELL")):
+        m = d == dd
+        print(f"{lab}: dibuang {(~k & m).sum()} rata {sig.R[~k & m].mean():+.2f}R, lolos {sig.R[k & m].mean():+.2f}R")
+    for lag in (24, 48):
+        print(f"data terlambat {lag} jam: {cell(fund(3, 1095, 0.9, lag), SPLIT_FUNDING)}")
+    print(f"\n=== Ketahanan L/S akun (uji >= 2023, dasar uji {judge(sig, lsr(30, 0.8), SPLIT_OI)['uji_base']:+.2f}R) ===")
+    for days in (7, 30, 90):
+        print(f"jendela {days:2d} hari | " + " | ".join(f"P{p * 100:.0f}: {cell(lsr(days, p), SPLIT_OI)}"
+                                                    for p in (0.8, 0.9)))
+
+
 def main() -> None:
     fr, mt = funding(), metrics()
     print(f"funding: {len(fr)} nilai {fr.index[0]:%Y-%m-%d} .. {fr.index[-1]:%Y-%m-%d}; "
@@ -131,6 +173,7 @@ def main() -> None:
             for k in (k for k in res if res[k]["konsisten"]):
                 print(f"-> {k} konsisten; uji nyata (filter di allow seperti cloud):")
                 print(realistic_summary(a, bar_filter(a, lambda g, k=k: variants(g, fr, mt)[k])))
+    robust(fr, mt)
 
 
 if __name__ == "__main__":

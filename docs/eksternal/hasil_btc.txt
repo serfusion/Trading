@@ -1,0 +1,46 @@
+funding: 7305 nilai 2020-01-01 .. 2026-08-31; metrics: 53186 jam 2020-09-01 .. 2026-09-26
+
+=== BTCUSD — 💰 dikirim: 911 sinyal 2021-01 .. 2026-09 ===
+funding hindari ramai P80 (uji >= 2022)      kirim  597/ 911 | rata lolos +0.24 dibuang -0.12 (dasar +0.12) | latih -0.13/-0.07 [-0.11] uji +0.33/-0.13 [+0.17] | total   +142R (dasar +105) | tahun 5/6 | p=0.001
+funding ikut ramai P80 (uji >= 2022)         kirim  842/ 911 | rata lolos +0.07 dibuang +0.66 (dasar +0.12) | latih -0.08/-0.99 [-0.11] uji +0.11/+0.79 [+0.17] | total    +59R (dasar +105) | tahun 2/6 | p=0.988
+funding hindari ramai P90 (uji >= 2022)      kirim  717/ 911 | rata lolos +0.18 dibuang -0.12 (dasar +0.12) | latih -0.10/-0.16 [-0.11] uji +0.25/-0.11 [+0.17] | total   +128R (dasar +105) | tahun 6/6 | p=0.013  ✅ KONSISTEN
+funding ikut ramai P90 (uji >= 2022)         kirim  892/ 911 | rata lolos +0.08 dibuang +1.83 (dasar +0.12) | latih -0.11/  -   [-0.11] uji +0.12/+1.83 [+0.17] | total    +70R (dasar +105) | tahun 0/3 | p=0.999
+OI 24j naik (uji >= 2023)                    kirim  600/ 911 | rata lolos +0.17 dibuang +0.01 (dasar +0.12) | latih -0.10/-0.22 [-0.15] uji +0.31/+0.16 [+0.26] | total   +101R (dasar +105) | tahun 4/6 | p=0.113
+OI 24j turun (uji >= 2023)                   kirim  311/ 911 | rata lolos +0.01 dibuang +0.17 (dasar +0.12) | latih -0.22/-0.10 [-0.15] uji +0.16/+0.31 [+0.26] | total     +4R (dasar +105) | tahun 2/6 | p=0.881
+L/S akun hindari ramai P80 (uji >= 2023)     kirim  841/ 911 | rata lolos +0.16 dibuang -0.38 (dasar +0.12) | latih -0.09/-0.46 [-0.15] uji +0.28/-0.17 [+0.26] | total   +132R (dasar +105) | tahun 5/6 | p=0.002  ✅ KONSISTEN
+-> terbaik di LATIH: L/S akun hindari ramai P80; per tahun lolos/dibuang(n): 21:-0.03/-0.46(32) 22:-0.15/-0.47(19) 23:+0.54/+1.19(4) 24:+0.28/-0.53(6) 25:+0.22/-0.47(8) 26:-0.00/-1.00(1)
+-> funding hindari ramai P90 konsisten; uji nyata (filter di allow seperti cloud):
+tanpa filter: n=2097 WR=48.2% rata=+0.365R total=+765.7R | latih +0.655R (907) uji +0.144R (1190)
+dengan filter: n=1884 WR=49.5% rata=+0.434R total=+818.1R | latih +0.660R (904) uji +0.226R (980)
+-> L/S akun hindari ramai P80 konsisten; uji nyata (filter di allow seperti cloud):
+tanpa filter: n=2097 WR=48.2% rata=+0.365R total=+765.7R | latih +0.655R (907) uji +0.144R (1190)
+dengan filter: n=2035 WR=48.9% rata=+0.391R total=+796.0R | latih +0.669R (894) uji +0.174R (1141)
+
+=== BTCUSD — semua sinyal: 2211 sinyal 2021-01 .. 2026-09 ===
+funding hindari ramai P80 (uji >= 2022)      kirim 1764/2211 | rata lolos +0.09 dibuang -0.06 (dasar +0.06) | latih -0.18/-0.14 [-0.18] uji +0.16/-0.04 [+0.11] | total   +161R (dasar +136) | tahun 3/6 | p=0.058
+funding ikut ramai P80 (uji >= 2022)         kirim 1764/2211 | rata lolos +0.08 dibuang -0.03 (dasar +0.06) | latih -0.20/-0.10 [-0.18] uji +0.15/-0.01 [+0.11] | total   +148R (dasar +136) | tahun 4/6 | p=0.132
+funding hindari ramai P90 (uji >= 2022)      kirim 1953/2211 | rata lolos +0.08 dibuang -0.10 (dasar +0.06) | latih -0.17/-0.23 [-0.18] uji +0.14/-0.08 [+0.11] | total   +162R (dasar +136) | tahun 5/6 | p=0.062
+funding ikut ramai P90 (uji >= 2022)         kirim 1956/2211 | rata lolos +0.07 dibuang +0.02 (dasar +0.06) | latih -0.21/+0.20 [-0.18] uji +0.13/-0.01 [+0.11] | total   +131R (dasar +136) | tahun 4/6 | p=0.373
+OI 24j naik (uji >= 2023)                    kirim 1329/2211 | rata lolos +0.05 dibuang +0.09 (dasar +0.06) | latih -0.09/-0.11 [-0.10] uji +0.13/+0.17 [+0.15] | total    +60R (dasar +136) | tahun 3/6 | p=0.701
+OI 24j turun (uji >= 2023)                   kirim  882/2211 | rata lolos +0.09 dibuang +0.05 (dasar +0.06) | latih -0.11/-0.09 [-0.10] uji +0.17/+0.13 [+0.15] | total    +76R (dasar +136) | tahun 3/6 | p=0.316
+L/S akun hindari ramai P80 (uji >= 2023)     kirim 2010/2211 | rata lolos +0.06 dibuang +0.06 (dasar +0.06) | latih -0.07/-0.30 [-0.10] uji +0.13/+0.34 [+0.15] | total   +125R (dasar +136) | tahun 4/6 | p=0.511
+
+=== Ketahanan funding (uji >= 2022, dasar uji +0.17R): lolos/dibuang (n dibuang) ===
+rata  8 jam, jendela  183 hari | P85: +0.31/-0.09 (260) p=0.001✅ | P90: +0.28/-0.13 (209) p=0.004✅ | P95: +0.22/-0.06 (145) p=0.040✅
+rata  8 jam, jendela  365 hari | P85: +0.33/-0.24 (208) p=0.000 | P90: +0.29/-0.23 (175) p=0.000 | P95: +0.19/+0.05 (106) p=0.360
+rata  8 jam, jendela  730 hari | P85: +0.34/-0.17 (249) p=0.000 | P90: +0.26/-0.16 (159) p=0.016 | P95: +0.18/+0.08 (102) p=0.440
+rata 24 jam, jendela  183 hari | P85: +0.26/-0.01 (251) p=0.034✅ | P90: +0.25/-0.05 (204) p=0.030✅ | P95: +0.25/-0.19 (136) p=0.014
+rata 24 jam, jendela  365 hari | P85: +0.28/-0.10 (222) p=0.004✅ | P90: +0.25/-0.11 (164) p=0.013✅ | P95: +0.18/+0.10 ( 99) p=0.466
+rata 24 jam, jendela  730 hari | P85: +0.24/-0.01 (226) p=0.072 | P90: +0.21/-0.02 (148) p=0.088 | P95: +0.17/+0.15 ( 85) p=0.601
+rata 72 jam, jendela  183 hari | P85: +0.28/-0.09 (234) p=0.007✅ | P90: +0.28/-0.13 (203) p=0.003✅ | P95: +0.25/-0.25 (124) p=0.000✅
+rata 72 jam, jendela  365 hari | P85: +0.29/-0.16 (206) p=0.000✅ | P90: +0.23/-0.10 (149) p=0.022✅ | P95: +0.24/-0.39 ( 90) p=0.001✅
+rata 72 jam, jendela  730 hari | P85: +0.27/-0.10 (203) p=0.003✅ | P90: +0.20/+0.02 (143) p=0.208 | P95: +0.17/+0.16 ( 68) p=0.529
+BUY: dibuang 139 rata +0.03R, lolos +0.36R
+SELL: dibuang 55 rata -0.49R, lolos +0.02R
+data terlambat 24 jam: +0.23/-0.07 (159) p=0.032✅
+data terlambat 48 jam: +0.27/-0.16 (177) p=0.004✅
+
+=== Ketahanan L/S akun (uji >= 2023, dasar uji +0.26R) ===
+jendela  7 hari | P80: +0.29/-0.72 ( 15) p=0.000✅ | P90: +0.27/-0.26 (  3) p=0.054
+jendela 30 hari | P80: +0.28/-0.12 ( 18) p=0.002✅ | P90: +0.26/+nan (  0) p=0.026
+jendela 90 hari | P80: +0.27/-0.02 ( 11) p=0.001✅ | P90: +0.27/-0.95 (  3) p=0.001✅
