@@ -108,6 +108,11 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     }
     val m = signal.moneyBadge()
     val st = signal.stars()
+    if (signal.type == "signal" && !signal.json.has("money") && !signal.isGap()) {
+        // dikirim cloud versi lama (sebelum 28 Sep 10:02 WIB): semua sinyal dikirim, ★ = searah tren H4/EMA, belum ada 💰
+        Text("Sinyal format lama (sebelum ada 💰): ★ = searah tren H4, bukan win rate. Belum tentu termasuk sinyal 💰.",
+            style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
     if (m > 0 || st > 0 || signal.json.has("wr")) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             if (m > 0) Text("💰".repeat(m))
