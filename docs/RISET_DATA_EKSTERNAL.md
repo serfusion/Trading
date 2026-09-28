@@ -10,7 +10,7 @@ keluaran lengkap di [`docs/eksternal/`](eksternal/). Tidak ada perubahan pada bo
    (COT CFTC), jam sesi / spread nyata (Dukascopy), funding & open interest BTC (Binance) — bisa menyaring sinyal
    💰 yang sekarang dikirim cloud (XAU konf+⭐ & konf; BTC konf+⭐, konf, ⭐) supaya lebih untung?
 2. **XAU (emas): tidak ada satu pun filter yang lolos kriteria "konsisten" untuk sinyal 💰** (1.185 sinyal
-   2013–2026, 46 varian: berita, yield riil/dolar, COT, sesi). Sistem 💰 yang ada (konfluensi tren D1/H4 +
+   2013–2026, 62 varian: berita, yield riil/dolar, COT, sesi, GVZ/VIX, yield 2 th, breakeven, musiman). Sistem 💰 yang ada (konfluensi tren D1/H4 +
    momentum) tampaknya sudah menyerap informasi yang bisa diberikan data ini. **Rekomendasi: jangan tambahkan
    filter eksternal untuk XAU.**
 3. **BTC: satu kandidat nyata — funding rate Binance.** Lewati BUY BTC bila rata-rata funding 24 jam berada di 10%
@@ -20,7 +20,11 @@ keluaran lengkap di [`docs/eksternal/`](eksternal/). Tidak ada perubahan pada bo
    Uji nyata 2021–2026 (data terlambat 24 jam): **+171R → +214R**, rata-rata +0,144 → +0,217R/sinyal, 5 dari 6 tahun
    membaik; versi yang bisa diterapkan cloud (funding direkonstruksi dari file harian premium index, terlambat 36 jam)
    memberi hasil yang sama (+214R). **Tetapi**: periode latih hanya 1 tahun (2021), sebagian besar manfaat dari sisi SELL (55 sinyal dibuang,
-   −0,49R), dan 2024 sedikit memburuk. Ini **usulan**, bukan perubahan: cloud tidak diubah tanpa izin pengguna.
+   −0,49R), dan 2024 sedikit memburuk. **Dipasang di cloud atas permintaan pengguna (28 Sep 2026, "pasang semua")**
+   — `cloud/api/_funding.py`, bisa dimatikan dengan env `BTC_FUNDING_FILTER=0`.
+3b. **BTC: sinyal 💰 di bulan September** (putaran 2, §6b) rugi di 11 dari 11 tahun (rata-rata −0,43R, WR 29%,
+   BUY maupun SELL; bulan lain +0,05 s/d +0,79R). Uji nyata: +765,7R → +826,5R. Dipasang (env `BTC_SEPT_FILTER=0`
+   untuk mematikan). Catatan jujur: anomali kalender dengan hanya 11 sampel tahun — wajib dipantau.
 4. Filter lain yang lolos di atas kertas tetapi **tidak diusulkan**: BTC rasio long/short akun (bukti periode uji
    hanya 11–18 sinyal); BTC "lewati ≤ 2 jam sebelum NFP/CPI/FOMC" (8 sinyal, efek hilang di uji nyata karena sinyal
    yang ditolak masuk candle berikutnya); XAU COT "ikut ramai P90" (hanya konsisten di **semua** sinyal karena membuang
@@ -28,7 +32,9 @@ keluaran lengkap di [`docs/eksternal/`](eksternal/). Tidak ada perubahan pada bo
 5. Beberapa varian tampak sangat bagus di satu periode (mis. yield riil + dolar 60 hari untuk BTC: +1,39R/sinyal di
    periode latih vs +0,70R), lalu **gagal di periode uji** (+0,10R vs +0,12R). Ini pola *overfitting* yang persis
    ingin dihindari; karena itulah aturan penilaian ditetapkan sebelum melihat hasil.
-6. Data eksternal tetap berguna sebagai **informasi** (mis. menampilkan jadwal NFP/CPI/FOMC di aplikasi).
+6. Data eksternal tetap berguna sebagai **informasi**: dipakai di tab **Tanya** (chat) lewat basis pengetahuan
+   statistik berita `cloud/api/pengetahuan.md` (mis. NFP lebih lemah dari perkiraan → emas naik dalam 1 jam pada 73%
+   dari 67 rilis; sinyal 💰 XAU yang lahir ≤ 24 jam sebelum NFP/CPI/FOMC rata-rata −0,07R vs +0,40R sesudahnya).
 7. Tidak ada jaminan profit. Semua hasil adalah simulasi historis dengan spread, tanpa swap/komisi/biaya funding.
 
 ## 1. Cara uji (sama untuk semua data)
@@ -188,6 +194,30 @@ bawah dasar (terendah +0,17R, tertinggi +0,34R):
   "ramai" dilewati (seperti `profit_only`). Sebaiknya dijalankan dulu beberapa bulan sebagai **tanda informasi** di
   aplikasi (uji maju) sebelum benar-benar menyaring.
 
+## 6b. Putaran 2 — ide dari literatur/web (`research/eksternal_putaran2.py`)
+
+Dicari di web (28 Sep 2026): GVZ lebih berguna untuk rezim risiko daripada arah ([SSRN, Hysa](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6978741));
+keputusan FOMC hampir selalu sudah diperkirakan pasar, yang menggerakkan emas adalah kejutannya
+([Yale CSEC](https://csec.yale.edu/node/81)); musiman emas sebagian besar lemah, hanya bias Jumat yang signifikan
+([evtradelabs](https://evtradelabs.com/blog/xauusd-seasonality-day-month-session)); funding BTC negatif ekstrem
+sering mendahului short squeeze ([CoinDesk](https://www.coindesk.com/markets/2026/04/16/bitcoin-funding-rates-hit-most-negative-since-2023-history-suggests-bottom-is-in)).
+Diuji dengan kriteria yang sama (16 varian): GVZ/VIX (FRED GVZCLS/VIXCLS), yield 2 tahun (proksi ekspektasi Fed /
+FedWatch, FRED DGS2), breakeven 10 tahun (T10YIE), hari & bulan.
+
+| | Dikirim | Latih lolos/dibuang [dasar] | Uji lolos/dibuang [dasar] | Total R | tahun | p |
+|---|---|---|---|---|---|---|
+| XAU 💰 GVZ naik 5 hari dilewati | 679 | +0,51 / −0,04 [+0,27] | +0,32 / +0,11 [+0,23] | +273 (dasar +294) | 8/14 | 0,000 |
+| XAU 💰 VIX naik 5 hari dilewati | 641 | +0,41 / +0,12 | +0,39 / +0,04 | +253 | 7/14 | 0,002 |
+| XAU 💰 lewati 15 Des – 5 Jan | 1.110 | +0,31 / −0,33 | +0,26 / −0,24 | +315 | 10/11 | 0,001 ✅ |
+| XAU 💰 yield 2 th 20 hari searah | 801 | +0,13 / +0,50 | +0,24 / +0,21 | +159 | 8/14 | 0,90 |
+| **BTC 💰 lewati September** | 1.503 | +0,79 / **−0,36** [+0,70] | +0,16 / **−0,48** [+0,12] | +658 (dasar +606) | **11/11** | 0,000 ✅ |
+
+- XAU "lewati 15 Des – 5 Jan" lolos di atas kertas, tetapi di uji nyata **memburuk** (+323,8R → +308,3R): sinyal
+  yang ditolak masuk lagi setelah 5 Januari di harga yang lebih buruk → tidak dipasang.
+- XAU GVZ naik 5 hari: sinyal 💰 saat GVZ tidak naik WR 51,4% / +0,40R vs saat naik WR 45,5% / +0,04R — menaikkan
+  profit per sinyal, tetapi total turun dan hanya 8/14 tahun searah → dijadikan **informasi** di chat, bukan filter.
+- BTC September: bulan satu-satunya yang negatif (−0,43R, 121 sinyal); dipasang (lihat ringkasan 3b).
+
 ## 7. Yang belum / keterbatasan
 
 - **Data MT5 Exness pengguna (`data_mt5/`) belum diunggah** → spread asli akun Cent belum bisa diuji. Pengganti
@@ -213,4 +243,15 @@ python -m research.eksternal_makro      # (2)
 python -m research.eksternal_cot        # (3)
 python -m research.dukascopy h1 2012-01 2026-09 && python -m research.eksternal_sesi   # (4)
 python -m research.eksternal_btc        # (5)
+python -m research.eksternal_putaran2   # putaran 2 (GVZ, VIX, yield 2 th, breakeven, musiman)
+python -m research.event_stats          # basis pengetahuan chat -> cloud/api/pengetahuan.md
 ```
+
+## 9. Yang dipasang (28 Sep 2026, permintaan pengguna "pasang semua")
+
+- Cloud: filter BTC funding + September (`cloud/api/_funding.py`, `tick.py`), chat `POST /api/chat`
+  (`cloud/api/chat.py`, `_chat.py`, `pengetahuan.md`) — aktif setelah branch ini di-merge ke branch produksi
+  Vercel dan `ANTHROPIC_API_KEY` diisi (`docs/CLOUD.md`).
+- Aplikasi 2.7: tab **Tanya** (build CI sukses, APK di release `android-latest`).
+- Tidak dipasang: filter XAU apa pun (tidak ada yang konsisten), dan keputusan lama di CLAUDE.md (skema A live,
+  tab Tabungan Emas, bundle repo) yang bukan bagian riset ini.

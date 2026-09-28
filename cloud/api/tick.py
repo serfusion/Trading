@@ -21,6 +21,28 @@ def executor_from_env():
     return None
 
 
+def btc_skip_fn(store, now: datetime, result: dict):
+    """Filter BTC 💰 dari riset data eksternal (env BTC_FUNDING_FILTER=0 / BTC_SEPT_FILTER=0 untuk mematikan).
+    Cache funding di baris Supabase 'funding'; gagal unduh tidak menghentikan sinyal (filter funding dilewati)."""
+    import _funding
+    env = os.environ
+    use_funding = env.get("BTC_FUNDING_FILTER", "1") == "1"
+    cache = {}
+    if use_funding:
+        try:
+            old = store.get_state("funding") or {}
+            cache = _funding.refresh(old, now)
+            if cache != old:
+                store.save_state(cache, "funding")
+            f = cache.get("f") or []
+            result["funding"] = {"day": cache.get("day"), "n": len(f),
+                                 "pct": _funding.percentile_last([v for _, v in f])}
+        except Exception as exc:  # noqa: BLE001
+            result["funding_error"] = str(exc)
+    return lambda direction, t: _funding.skip_reason(direction, t, cache, use_funding,
+                                                     env.get("BTC_SEPT_FILTER", "1") == "1", _core.new_york)
+
+
 def run() -> tuple[int, dict]:
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
@@ -42,10 +64,12 @@ def run() -> tuple[int, dict]:
     )
     try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
         if env.get("BTC_SIGNALS", "1") == "1":
-            btc = _core.tick(datetime.now(timezone.utc), _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
-                             _core.RowStore(_core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"]), "btc"),
+            now = datetime.now(timezone.utc)
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            btc = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
+                             _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                             _core.BTC_CFG, symbol="BTC/USD")
+                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result)}, symbol="BTC/USD")
             result["btc"] = {k: btc.get(k) for k in ("ok", "price", "events", "error")}
     except Exception as exc:  # noqa: BLE001 - BTC tidak boleh mengganggu sinyal XAU
         result["btc_error"] = str(exc)

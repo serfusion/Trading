@@ -17,18 +17,23 @@ import _chat  # noqa: E402
 import _core  # noqa: E402
 
 
-def _states() -> dict:
+def _states() -> tuple[dict, dict]:
+    """(state XAU/BTC, cache funding) dari Supabase; kosong bila belum diatur / gagal (konteks opsional)."""
     env = os.environ
     if not (env.get("SUPABASE_URL") and env.get("SUPABASE_SERVICE_KEY")):
-        return {}
+        return {}, {}
     store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
-    out = {}
-    for asset, row in (("XAU/USD", "main"), ("BTC/USD", "btc")):
+    out, funding = {}, {}
+    for key, row in (("XAU/USD", "main"), ("BTC/USD", "btc"), ("funding", "funding")):
         try:
-            out[asset] = store.get_state(row)
-        except Exception:  # noqa: BLE001 - konteks opsional
-            out[asset] = {}
-    return out
+            data = store.get_state(row)
+        except Exception:  # noqa: BLE001
+            data = {}
+        if key == "funding":
+            funding = data or {}
+        else:
+            out[key] = data
+    return out, funding
 
 
 class handler(BaseHTTPRequestHandler):
@@ -56,7 +61,8 @@ class handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length") or 0)
             body = json.loads(self.rfile.read(min(length, 200_000)) or b"{}")
             client = anthropic.Anthropic(timeout=50.0, max_retries=1)   # batas fungsi Vercel 60 detik
-            context = _chat.live_context(datetime.now(timezone.utc), _chat.fetch_calendar(), _states())
+            states, funding = _states()
+            context = _chat.live_context(datetime.now(timezone.utc), _chat.fetch_calendar(), states, funding)
             self._send(200, _chat.ask(client, body.get("messages") or [], context,
                                       os.environ.get("CHAT_MODEL", _chat.MODEL)))
         except ValueError as exc:

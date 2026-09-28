@@ -95,6 +95,11 @@ di aplikasi.
 | `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
 | `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
 | `STAR_ONLY` | (opsional) `0` = semua sinyal, ⭐ ditandai (default); `1` = hanya kirim sinyal ⭐ |
+| `ANTHROPIC_API_KEY` | (untuk tab **Tanya**) API key dari <https://console.anthropic.com> → API Keys — rahasia |
+| `CHAT_KEY` | (opsional) kunci chat; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
+| `CHAT_MODEL` | (opsional) model Claude untuk chat, default `claude-opus-5` |
+| `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
+| `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -166,6 +171,33 @@ Cara kerja order (sama dengan sinyal & bot PC, skema F):
 Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan header
 `X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
 `{"close_all": true}`.
+
+## Tab Tanya (chat asisten berita & sinyal)
+
+`POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab pertanyaan seperti "hasil NFP sudah keluar, apa
+artinya?" atau "sebelum FOMC pasar memperkirakan suku bunga naik, apa yang harus saya lakukan?" dengan:
+- **basis pengetahuan statistik** `cloud/api/pengetahuan.md` (dibuat `python -m research.event_stats` dari data
+  2012–2026: reaksi emas/BTC per berita, arah & besar kejutan, FOMC sesuai ekspektasi vs kejutan, sinyal 💰 di
+  sekitar berita) — setiap peluang disebut dengan jumlah kejadian (n);
+- **konteks langsung**: kalender USD high-impact minggu ini (ForexFactory), harga & posisi virtual XAU/BTC;
+- **web search** untuk angka berita yang baru keluar / peluang CME FedWatch.
+
+Pengaturan: isi `ANTHROPIC_API_KEY` di Vercel → Redeploy; di aplikasi ⚙️ → **Alamat cloud** = domain Vercel
+(mis. `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Biaya API dibayar dari akun
+Anthropic (perkiraan beberapa sen dolar per pertanyaan karena memakai web search; basis pengetahuan di-cache).
+Fungsi dibatasi 60 detik (`vercel.json`); chat memakai effort rendah supaya cepat. Chat **tidak** membuka order
+dan jawabannya bukan jaminan profit.
+
+## Filter BTC dari riset data eksternal
+
+Dari `docs/RISET_DATA_EKSTERNAL.md` (hanya dua filter yang lolos kriteria ketat; untuk XAU tidak ada):
+- **Funding ramai** (`cloud/api/_funding.py`): sinyal BTC 💰 BUY dilewati bila rata-rata funding Binance 24 jam
+  berada di 10% tertinggi setahun, SELL dilewati bila di 10% terendah. Funding direkonstruksi dari file harian
+  `premiumIndexKlines` data.binance.vision (api.binance.com diblokir dari server AS), cache di baris Supabase
+  `funding`, diperbarui maks. 1x/jam. Uji nyata 2021–2026 dengan data terlambat 36 jam: +171R → +214R.
+- **September**: sinyal BTC 💰 di bulan September (waktu New York) dilewati (11 dari 11 tahun rugi).
+- Sinyal yang dilewati hanya dicatat (`skip` di tabel log), seperti sinyal tanpa 💰. Hasil `/api/tick` memuat
+  `funding: {day, n, pct}` untuk memantau.
 
 ## Catatan
 - Sinyal BUY/SELL hanya muncul saat breakout H1 (rata-rata ±1–2 kali per minggu). Status/harga

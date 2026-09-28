@@ -88,9 +88,22 @@ def bot_text(states: dict[str, dict]) -> str:
     return "Status bot (Supabase):\n" + ("\n".join(lines) if lines else "- tidak tersedia")
 
 
-def live_context(now: datetime, calendar_rows, states: dict[str, dict]) -> str:
+def filter_text(funding_cache: dict | None, now: datetime) -> str:
+    """Status filter BTC 💰 yang terpasang (funding ramai & September)."""
+    import _core
+    import _funding
+    pct = _funding.percentile_last([v for _, v in (funding_cache or {}).get("f") or []])
+    lines = [f"Filter BTC 💰: funding Binance 24 jam persentil "
+             f"{'-' if pct is None else f'{pct:.0%}'} (1 tahun, data s/d {(funding_cache or {}).get('day', '-')}); "
+             "BUY dilewati bila ≥90%, SELL bila ≤10%."]
+    if _core.new_york(now).month == 9:
+        lines.append("Sekarang September: sinyal BTC 💰 dilewati (11/11 tahun rugi).")
+    return "\n".join(lines)
+
+
+def live_context(now: datetime, calendar_rows, states: dict[str, dict], funding_cache: dict | None = None) -> str:
     return (f"KONTEKS LANGSUNG dari server (bukan dari pengguna), {now:%Y-%m-%d %H:%M} UTC:\n"
-            f"{calendar_text(calendar_rows)}\n{bot_text(states)}")
+            f"{calendar_text(calendar_rows)}\n{bot_text(states)}\n{filter_text(funding_cache, now)}")
 
 
 def clean_history(messages: list) -> list[dict]:

@@ -81,9 +81,11 @@ def test_konteks_langsung():
     states = {"XAU/USD": {"price": 4300.5, "last_tick": "t", "systems": {
         "T55/20": {"virtual": {"dir": "BUY", "entry": 4280, "sl": 4240, "tp1": 4320, "cat": "XAU konf+⭐"}},
         "T40/15": {"trend": "naik"}}}}
-    s = _chat.live_context(datetime(2026, 9, 28, 5, tzinfo=timezone.utc), cal, states)
+    s = _chat.live_context(datetime(2026, 9, 28, 5, tzinfo=timezone.utc), cal, states,
+                           {"day": "2026-09-27", "f": [[i, i * 1e-6] for i in range(1200)]})
     assert "Fri 02 Oct 12:30 UTC: Non-Farm Employment Change (forecast 98K" in s and "JPY" not in s
     assert "posisi terbuka T55/20: BUY entry 4280" in s and "T40/15: tidak ada posisi" in s
+    assert "persentil 100%" in s and "September" in s
 
 
 def test_bentuk_request_sdk_asli():

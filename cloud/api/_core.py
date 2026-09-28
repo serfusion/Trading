@@ -590,6 +590,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
                 events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
+            elif sig["action"] == "open" and v is None and cfg.get("skip_fn") and (
+                    why := cfg["skip_fn"](sig["dir"], now)):
+                # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": why})
+                events.append(f"{name} {sig['dir']} dilewati: {why}")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
                 meta, star_note = category(closed, d, cfg)
