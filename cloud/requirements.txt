@@ -1,1 +1,2 @@
-# Tidak ada dependensi: fungsi cloud hanya memakai library standar Python.
+# _core/tick/_gap hanya memakai library standar; chat (api/chat.py) memakai SDK resmi Anthropic.
+anthropic>=1.8
