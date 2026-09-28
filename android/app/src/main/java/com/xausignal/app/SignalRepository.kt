@@ -50,6 +50,8 @@ data class MoneySettings(
     val starLot: Double = legLot,
     val tpLegs: Int = 1,            // posisi yang ditutup di TP1 (1 atau 3)
     val be07: Boolean = false,      // SL+ saat profit 0,7R (bukan menunggu TP1)
+    val modalIdr: Double = 0.0,     // modal (Rp); 0 = pakai lot manual
+    val riskPct: Double = 0.5,      // rugi maks per sinyal saat SL, % modal
 ) {
     val currency: String get() = if (cent) "USC" else "USD"
 
@@ -58,6 +60,34 @@ data class MoneySettings(
 
     /** Lot per posisi: sinyal ⭐ memakai lot ⭐, sinyal biasa memakai lot biasa. */
     fun lotFor(star: Boolean): Double = if (star) starLot else legLot
+
+    /** Saldo akun dalam mata uang akun (USC untuk Cent, USD untuk akun USD). */
+    val balance: Double get() = if (cent) modalIdr / idrRate * 100.0 else modalIdr / idrRate
+
+    /**
+     * Lot per posisi untuk satu sinyal. Modal diisi: dihitung dari jarak SL sinyal supaya rugi semua posisi saat SL
+     * ≈ [riskPct]% modal (dibulatkan ke bawah, minimal 0,01). Modal kosong: lot manual.
+     */
+    fun lotForSignal(star: Boolean, riskPoints: Double?, pointValue: Double, legs: Int): Double {
+        if (modalIdr <= 0.0 || riskPoints == null || riskPoints <= 0.0) return lotFor(star)
+        val hundredths = Math.floor(balance * riskPct / 100.0 / (riskPoints * legs * pointValue) + 1e-9)
+        return (hundredths / 100.0).coerceAtLeast(0.01)
+    }
+}
+
+fun SignalEvent.legs(): Int = num("legs")?.toInt() ?: 5
+
+/** Jarak entry–SL awal (poin harga). */
+fun SignalEvent.riskPoints(): Double? = num("risk_points")
+    ?: num("entry")?.let { e -> num("sl")?.let { Math.abs(e - it) } }
+
+/** Lot per posisi yang dimasukkan untuk sinyal ini. */
+fun SignalEvent.entryLot(m: MoneySettings): Double =
+    m.lotForSignal(isStar(), riskPoints(), num("point_value") ?: 1.0, legs())
+
+/** Rugi semua posisi bila SL kena (mata uang akun, positif). */
+fun SignalEvent.maxLoss(m: MoneySettings): Double? = riskPoints()?.let {
+    it * legs() * Math.round(entryLot(m) * 100.0) * (num("point_value") ?: 1.0)
 }
 
 fun SignalEvent.isStar(): Boolean = json.optBoolean("star", false)
@@ -165,6 +195,8 @@ object SignalRepository {
             starLot = roundLot(star).coerceAtLeast(0.01),
             tpLegs = p?.getInt("tp_legs", 1) ?: 1,
             be07 = p?.getBoolean("be07", false) ?: false,
+            modalIdr = p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0,
+            riskPct = p?.getFloat("risk_pct", 0.5f)?.toDouble() ?: 0.5,
         )
     }
 
@@ -172,6 +204,7 @@ object SignalRepository {
         prefs?.edit()?.putBoolean("cent", m.cent)?.putString("leg_lot_text", lotText(m.legLot))?.remove("leg_lot")
             ?.putString("star_lot_text", lotText(m.starLot))
             ?.putInt("tp_legs", m.tpLegs)?.putBoolean("be07", m.be07)
+            ?.putString("modal_idr", m.modalIdr.toLong().toString())?.putFloat("risk_pct", m.riskPct.toFloat())
             ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
         _moneyVersion.value = _moneyVersion.value + 1
     }
@@ -190,8 +223,18 @@ object SignalRepository {
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
         val pointValue = e.num("point_value") ?: 1.0     // forex: nilai 1,0 harga per 0,01 lot
-        return r * risk * legs * Math.round(m.lotFor(e.isStar()) * 100.0) * pointValue
+        val lot = m.lotForSignal(e.isStar(), risk, pointValue, legs.toInt())
+        return r * risk * legs * Math.round(lot * 100.0) * pointValue
     }
+
+    /**
+     * Sinyal kembar: beberapa set dengan simbol, arah, entry, dan candle sama. Entry cukup 1×, jadi hasil tiap
+     * set dibagi jumlah kembarnya supaya riwayat/statistik = uang yang benar-benar didapat. id -> jumlah set.
+     */
+    fun twinCounts(events: List<SignalEvent>): Map<String, Int> =
+        events.filter { it.type == "signal" }
+            .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }
+            .values.flatMap { g -> g.map { it.id to g.size } }.toMap()
 
     fun toIdr(amount: Double, m: MoneySettings): Double =
         if (m.cent) amount / 100.0 * m.idrRate else amount * m.idrRate
@@ -206,12 +249,13 @@ object SignalRepository {
                     labelOf: (String) -> String = { it }, star: Boolean? = null,
                     symbol: String? = null): List<PeriodStats> {
         val groups = LinkedHashMap<String, MutableList<Double>>()
+        val twins = twinCounts(events)
         events.filter {
             it.type == "close" && !it.isVoid() && (star == null || it.isStar() == star) &&
                 (symbol == null || it.symbol() == symbol)
         }.forEach { e ->
             val t = zoned(e) ?: return@forEach
-            val a = amount(e, m) ?: return@forEach
+            val a = (amount(e, m) ?: return@forEach) / (twins[e.id] ?: 1)
             groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
         }
         return groups.entries.sortedByDescending { it.key }.map { (k, v) ->

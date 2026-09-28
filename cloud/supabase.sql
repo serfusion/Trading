@@ -23,12 +23,13 @@ alter table public.xau_signals enable row level security;
 create extension if not exists pg_cron;
 create extension if not exists pg_net;
 
--- 3) Jadwal: menit ke-2 dan ke-32 tiap jam (beri waktu candle H1 selesai terbentuk).
---    Mau lebih sering? ganti jadi '*/5 * * * *' (tiap 5 menit, masih dalam kuota gratis Twelve Data).
+-- 3) Jadwal: tiap 10 menit mulai menit ke-2 (:02, :12, ... :52) supaya TP1/SL+/harga cepat terkirim.
+--    Kuota gratis Twelve Data: 800 kredit/hari (reset tiap hari 00:00 UTC), 8/menit. Tiap cek = 2 kredit
+--    (XAU + BTC) -> 144 × 2 = 288 kredit/hari. Jadwal lama: '2,32 * * * *'.
 select cron.unschedule('xau-tick') where exists (select 1 from cron.job where jobname = 'xau-tick');
 select cron.schedule(
   'xau-tick',
-  '2,32 * * * *',
+  '2-59/10 * * * *',
   $$ select net.http_get(
        url := 'https://DOMAIN_KAMU/api/tick?key=CRON_SECRET_KAMU',
        timeout_milliseconds := 60000

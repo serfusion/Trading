@@ -138,14 +138,15 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         MetricRow {
             Metric("SL", signal.price("sl"), SellColor, compact = true)
             Metric(if (signal.isGap()) "TP" else "TP1", signal.price("tp1"), BuyColor, compact = true)
-            Metric("Lot", legsLot(signal, money, count), Gold, compact = true)
         }
-        if (count > 1) {
-            Text(
-                "$count set sinyal sama → lot dibagi $count (risiko tetap seperti 1 sinyal)",
-                style = MaterialTheme.typography.labelSmall, color = Muted
-            )
+        LineDivider()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("Entry", color = Muted, modifier = Modifier.weight(1f))
+            Text(legsLot(signal, money), style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold, color = Gold)
         }
+        Text(lossLine(signal, money) + if (count > 1) " • $count set sama, entry 1× saja" else "",
+            style = MaterialTheme.typography.labelSmall, color = Muted)
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
     }
 }
@@ -192,11 +193,16 @@ fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
     }
 }
 
-/** "5 × 0.02": jumlah posisi × lot. Sinyal kembar ×N: lot dibagi N (min 0.01) per set. */
-fun legsLot(signal: SignalEvent, money: MoneySettings, count: Int = 1): String {
-    val legs = signal.num("legs")?.toInt() ?: 5
-    val lot = roundLot(money.lotFor(signal.isStar()) / count).coerceAtLeast(0.01)
-    return if (count > 1) "$count×$legs × ${lotText(lot)}" else "$legs × ${lotText(lot)}"
+/** "5 posisi × 0.02 lot": yang dimasukkan di MT5. Sinyal kembar ×N tetap entry 1×. */
+fun legsLot(signal: SignalEvent, money: MoneySettings): String =
+    "${signal.legs()} posisi × ${lotText(signal.entryLot(money))} lot"
+
+/** "Rugi maks di SL −450 USC (≈ −Rp74.250, 0,45% modal)". */
+fun lossLine(signal: SignalEvent, money: MoneySettings): String {
+    val loss = signal.maxLoss(money) ?: return "Pasang SL sesuai sinyal"
+    val idr = idrText(SignalRepository.toIdr(loss, money))
+    val pct = if (money.modalIdr > 0) ", ${fmt(loss / money.balance * 100.0, 2).replace('.', ',')}% modal" else ""
+    return "Rugi maks di SL −${fmt(loss, 0)} ${money.currency} (≈ −$idr$pct)"
 }
 
 /** Riwayat satu sinyal: entry → tutup → MENANG/KALAH + uang. */
@@ -211,7 +217,8 @@ fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: Mone
     }
     val tp1 = SignalRepository.tp1Event(events, signal.id)
     val close = SignalRepository.closeEvent(events, signal.id)
-    val amount = close?.let { SignalRepository.amount(it, money) }
+    val twins = SignalRepository.twinCounts(events)[signal.id] ?: 1
+    val amount = close?.let { SignalRepository.amount(it, money)?.div(twins) }
     val win = close != null && (amount ?: close.num("r") ?: 0.0) > 0
     val result = if (close == null) Gold else if (win) BuyColor else SellColor
     AppCard(accent = result) {

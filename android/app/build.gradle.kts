@@ -11,8 +11,8 @@ android {
         applicationId = "com.xausignal.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 15
-        versionName = "2.4"
+        versionCode = 17
+        versionName = "2.6"
     }
 
     buildTypes {

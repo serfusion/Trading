@@ -53,6 +53,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -217,9 +222,23 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                     )
                 }
             }
-            when (tab) {
-                0 -> SignalsTab(events, prices, connection, money)
-                else -> StatsTab(events, money)
+            // Tarik ke bawah: ambil pesan & harga terbaru dari server sekarang juga.
+            val pull = rememberPullToRefreshState()
+            if (pull.isRefreshing) {
+                LaunchedEffect(true) {
+                    try {
+                        withContext(Dispatchers.IO) { SignalPoller.poll(context.applicationContext) }
+                    } finally {
+                        pull.endRefresh()
+                    }
+                }
+            }
+            Box(Modifier.fillMaxSize().nestedScroll(pull.nestedScrollConnection)) {
+                when (tab) {
+                    0 -> SignalsTab(events, prices, connection, money)
+                    else -> StatsTab(events, money)
+                }
+                PullToRefreshContainer(state = pull, modifier = Modifier.align(Alignment.TopCenter))
             }
         }
     }
@@ -255,6 +274,9 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
     val starValue = parseLot(starLot)
     var tpLegs by remember { mutableStateOf(current.tpLegs) }
     var be07 by remember { mutableStateOf(current.be07) }
+    var modal by remember { mutableStateOf(if (current.modalIdr > 0) fmt(current.modalIdr, 0).replace(",", ".") else "") }
+    var riskPct by remember { mutableStateOf(current.riskPct) }
+    val modalValue = modal.replace(".", "").replace(",", "").trim().toDoubleOrNull() ?: 0.0
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -274,7 +296,27 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
-                LotInput(lot, { lot = it; starLot = it }, "Lot per posisi", 100.0)
+                OutlinedTextField(
+                    value = modal, onValueChange = { modal = it.filter { c -> c.isDigit() || c == '.' } },
+                    label = { Text("Modal (Rp)") }, placeholder = { Text("mis. 10.000.000") },
+                    singleLine = true, modifier = Modifier.fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+                )
+                if (modalValue > 0) {
+                    CardTitle("Rugi maks per sinyal")
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(selected = riskPct == 0.25, onClick = { riskPct = 0.25 }, label = { Text("0,25%") })
+                        FilterChip(selected = riskPct == 0.5, onClick = { riskPct = 0.5 }, label = { Text("0,5%") })
+                    }
+                    Text(
+                        "Lot dihitung otomatis dari jarak SL tiap sinyal (min 0.01).",
+                        style = MaterialTheme.typography.bodySmall, color = Muted
+                    )
+                } else {
+                    LotInput(lot, { lot = it; starLot = it }, "Lot per posisi", 100.0)
+                    Text("Isi modal supaya lot dihitung otomatis.", style = MaterialTheme.typography.bodySmall,
+                        color = Muted)
+                }
                 CardTitle("Posisi di TP1")
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     FilterChip(selected = tpLegs == 1, onClick = { tpLegs = 1 }, label = { Text("1 (sisa 4)") })
@@ -291,7 +333,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
         },
         confirmButton = {
             TextButton(
-                enabled = lotValue != null && starValue != null,
+                enabled = modalValue > 0 || (lotValue != null && starValue != null),
                 onClick = {
                     val m = MoneySettings(
                         cent = cent,
@@ -300,6 +342,8 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                         starLot = starValue ?: 0.01,
                         tpLegs = tpLegs,
                         be07 = be07,
+                        modalIdr = modalValue,
+                        riskPct = riskPct,
                     )
                     onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, m)
                 }
