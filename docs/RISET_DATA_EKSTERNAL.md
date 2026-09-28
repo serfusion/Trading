@@ -354,3 +354,17 @@ Kesimpulan: untuk sinyal 💰💰💰 (konf+⭐) dan semua BTC, **tahan running 
 di TP1 memotong hasil ±55–90%. Untuk kategori "⭐ saja" (sinyal lama), SL bertangga 1R (profit 2R → SL ke +1R,
 3R → SL +2R, …) paling membantu tetapi kategori itu tetap rugi secara rata-rata — alasan kategori ini tidak dikirim
 lagi. XAU konf (💰): tangga/TP 3R sedikit lebih baik; efek kecil, skema bawaan tidak diubah.
+
+## 13. Sinyal XAU sesudah gap buka pekan (pertanyaan pengguna 28 Sep 2026, uji cepat)
+
+Sinyal ≤ 24 jam setelah buka pekan, searah vs lawan arah gap (2012–2026):
+
+| Kategori | searah gap | lawan gap | > 24 jam |
+|---|---|---|---|
+| konf+⭐ | n=98, WR 48%, +0,05R | n=56, WR 48%, +1,01R | n=696, +0,29R |
+| konf | n=26, WR 77%, +1,19R | n=35, WR 37%, −0,14R | n=274, +0,02R |
+| ⭐ saja (sinyal pengguna) | **n=43, WR 33%, −0,47R** | n=11, +0,29R | n=302, −0,02R |
+| biasa | n=216, −0,03R | n=126, −0,05R | n=1533, +0,00R |
+
+Pola berlawanan antar kategori dan sampel kecil → bukan aturan; tidak ada perubahan. Sinyal "⭐ saja" searah gap
+justru kelompok terburuk; profit 28 Sep adalah satu kejadian.
