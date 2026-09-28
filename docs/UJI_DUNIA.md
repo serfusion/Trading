@@ -40,3 +40,17 @@ Lintas pasar: rotasi momentum antar 12 instrumen (9 variasi), pairs trading (4 p
 Tidak ada metode "ajaib" ber-win rate tinggi yang untung stabil. Yang terbukti tetap: **trend-following di XAU
 dan BTC** dengan filter kualitas sinyal (lihat `docs/STRATEGI_LAB.md`: XAU konfluensi, BTC ⭐, skema F).
 Kandidat tambahan untuk diversifikasi: BTC volatility breakout.
+
+## Tambahan: trading gap pekan (`research/gap_trade.py`) & timeframe pendek (`research/short_lab.py`)
+Rating: ★ untung di latih & uji; ★★ meyakinkan (t>2) di latih & uji; ★★★ plus ≥70% tahun untung.
+
+**Gap pembukaan pekan** (lawan/ikut gap, TP 50–100% gap, masuk saat buka atau 1 jam kemudian, spread 3× saat buka):
+- XAU: rugi di semua variasi → gap XAU dihindari, bukan dimanfaatkan.
+- Nasdaq, S&P, Nikkei, EUR/USD mayoritas rugi/impas.
+- USD/JPY & EUR/JPY lawan gap: win 75–96%, untung di latih & uji (maks ★; latih belum t>2). ±1 trade/bulan.
+
+**M5/M15** (31 metode, XAU M15 2012–2026, XAU M5 2020–2026, BTC M5 2016–2026, 4 pair M15 2012–2022):
+- Rata-rata semua instrumen rugi setelah spread; 214 pasangan, 7 t>2 di uji (±5 wajar karena kebetulan).
+- Satu-satunya ★★★: BTC volatility breakout harian (k 0,6) dieksekusi di M5 — win rate 24%, +0,14R/trade,
+  semua tahun uji untung. Ini metode harian, bukan scalping.
+- Tidak ada metode menit/detik ber-win rate tinggi yang untung konsisten.
