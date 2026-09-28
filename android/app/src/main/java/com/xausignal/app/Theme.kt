@@ -45,7 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.Locale
 
-const val APP_NAME = "Gold XAU/USD Indicator"
+const val APP_NAME = "Dividend Indicator"
 const val BRAND = "Superfal-Dev"
 
 /** Warna khusus trading; versi gelap & terang supaya teks tetap kontras. */

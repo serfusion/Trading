@@ -32,10 +32,13 @@ object Notifications {
     }
 
     fun signal(context: Context, event: SignalEvent) {
-        val star = if (event.isStar()) "⭐ " else ""
-        val title = "$star${event.dir} XAU/USD @ ${fmt(event.num("entry"))}"
-        val text = "SL ${fmt(event.num("sl"))} • TP1 ${fmt(event.num("tp1"))} • " +
-            legsLot(event, SignalRepository.money())
+        val badge = "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
+        val title = "${if (badge.isBlank()) "" else "$badge "}${event.dir} ${event.symbol()} @ ${event.price("entry")}"
+        val stats = if (event.json.has("wr")) {
+            "WR ${fmt(event.json.optDouble("wr"), 0)}% • ${signed(event.json.optDouble("avg_r"))}R • "
+        } else ""
+        val text = stats +
+            "SL ${event.price("sl")} • TP ${event.price("tp1")} • " + legsLot(event, SignalRepository.money())
         post(context, event.id.hashCode(), title, text)
     }
 
@@ -45,6 +48,10 @@ object Notifications {
     }
 
     fun close(context: Context, event: SignalEvent) {
+        if (event.isVoid()) {
+            post(context, event.id.hashCode() + 1, "BATAL ${event.dir} XAU/USD", "Sinyal dari data saat pasar tutup, abaikan")
+            return
+        }
         val r = event.num("r") ?: 0.0
         val title = "TUTUP ${event.dir} • ${if (r > 0) "MENANG" else "KALAH"} ${signed(r)}R"
         post(context, event.id.hashCode() + 1, title, "Ditutup @ ${fmt(event.num("price"))}")

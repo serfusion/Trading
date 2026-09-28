@@ -75,7 +75,7 @@ class FakePub:
 
 
 def run_ticks(df, every_minutes=30, double=False, cfg=None):
-    cfg = cfg or {**_core.CFG, "star_only": False}
+    cfg = cfg or {**_core.CFG, "star_only": False, "market_hours": False, "skip_open_bars": 0, "profit_only": False}
     prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
     now = df.index[60].to_pydatetime()
     end = df.index[-1].to_pydatetime() + timedelta(hours=1)
@@ -88,7 +88,7 @@ def run_ticks(df, every_minutes=30, double=False, cfg=None):
     return store, pub
 
 
-ONE_SET = {**_core.CFG, "star_only": False, "sets": [(55, 20)]}
+ONE_SET = {**_core.CFG, "star_only": False, "market_hours": False, "skip_open_bars": 0, "profit_only": False, "sets": [(55, 20)]}
 
 
 def test_tick_flow_ensemble_signal_close_and_idempotent():

@@ -40,6 +40,27 @@ def run() -> tuple[int, dict]:
         symbol=env.get("SYMBOL", "XAU/USD"),
         executor=executor_from_env(),
     )
+    try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
+        if env.get("BTC_SIGNALS", "1") == "1":
+            btc = _core.tick(datetime.now(timezone.utc), _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
+                             _core.RowStore(_core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"]), "btc"),
+                             _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
+                             _core.BTC_CFG, symbol="BTC/USD")
+            result["btc"] = {k: btc.get(k) for k in ("ok", "price", "events", "error")}
+    except Exception as exc:  # noqa: BLE001 - BTC tidak boleh mengganggu sinyal XAU
+        result["btc_error"] = str(exc)
+    try:                                   # sinyal gap pekan forex (hanya ambil data saat perlu)
+        import _gap
+        now = datetime.now(timezone.utc)
+        store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+        if env.get("GAP_SIGNALS", "1") == "1" and _gap.needs_data(now, store):
+            feeds = {p: _core.TwelveData(env["TWELVEDATA_API_KEY"], p) for p in _gap.PAIRS}
+            usdchf = lambda: _core.TwelveData(env["TWELVEDATA_API_KEY"], "USD/CHF").candles(2)[-1].c  # noqa: E731
+            result["gap"] = _gap.gap_tick(now, feeds, store,
+                                          _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
+                                          usdchf)
+    except Exception as exc:  # noqa: BLE001 - gap tidak boleh mengganggu sinyal XAU
+        result["gap_error"] = str(exc)
     return 200, result
 
 

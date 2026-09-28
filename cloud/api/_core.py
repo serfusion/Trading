@@ -19,7 +19,45 @@ from datetime import datetime, timedelta, timezone
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
        "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
-       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20}
+       "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20,
+       "market_hours": True, "skip_open_bars": 3}
+
+
+def new_york(t: datetime) -> datetime:
+    """Waktu New York tanpa database zona waktu (aturan DST AS sejak 2007): EDT (UTC-4) dari Minggu kedua
+    Maret 02:00 sampai Minggu pertama November 02:00 waktu lokal, selain itu EST (UTC-5)."""
+    t = t.astimezone(timezone.utc)
+    mar = datetime(t.year, 3, 8, 7, tzinfo=timezone.utc)            # 02:00 EST = 07:00 UTC
+    start = mar + timedelta(days=(6 - mar.weekday()) % 7)           # Minggu kedua Maret
+    nov = datetime(t.year, 11, 1, 6, tzinfo=timezone.utc)           # 02:00 EDT = 06:00 UTC
+    end = nov + timedelta(days=(6 - nov.weekday()) % 7)             # Minggu pertama November
+    offset = 4 if start <= t < end else 5
+    return (t - timedelta(hours=offset)).replace(tzinfo=None)
+
+
+def market_open(t: datetime) -> bool:
+    """Candle H1 (waktu buka, UTC) jatuh di jam pasar emas: Minggu 18:00 – Jumat 17:00 New York,
+    tanpa jeda harian 17:00–18:00. Feed kadang tetap mengirim candle datar saat pasar tutup; candle itu
+    membuat ATR & channel palsu (sinyal Minggu 27 Sep 2026 22:02 UTC dengan SL hanya $1,23)."""
+    ny = new_york(t)
+    return not weekend_closed(t) and not (ny.weekday() <= 3 and ny.hour == 17)
+
+
+def weekend_closed(t: datetime) -> bool:
+    """Jumat 17:00 – Minggu 18:00 New York: pasar emas tutup akhir pekan."""
+    ny = new_york(t)
+    wd, h = ny.weekday(), ny.hour          # Senin = 0
+    return wd == 5 or (wd == 4 and h >= 17) or (wd == 6 and h < 18)
+
+
+def since_week_open(closed: list[Bar]) -> int:
+    """Jumlah candle sejak candle pertama setelah pasar tutup (> 12 jam tanpa candle). 0 = candle pertama."""
+    n = 0
+    for k in range(len(closed) - 1, 0, -1):
+        if closed[k].t - closed[k - 1].t > timedelta(hours=12):
+            return n
+        n += 1
+    return n
 
 
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
@@ -137,6 +175,87 @@ def star_check(closed: list[Bar], direction: str, ema_span: int = 50, h4_n: int 
     return bool(d1_ok and h4_ok), note
 
 
+def _ema(values: list[float], n: int) -> list[float]:
+    a, out = 2 / (n + 1), []
+    for v in values:
+        out.append(v if not out else a * v + (1 - a) * out[-1])
+    return out
+
+
+def konf_check(closed: list[Bar], direction: str) -> bool:
+    """Konfluensi 3/3 (research/strategy_lab2.trend_states): EMA50 vs EMA200 H1, Supertrend 3xATR(14) H1, dan
+    momentum 60 hari (close D1 kemarin vs 60 hari sebelumnya) semuanya searah dengan sinyal."""
+    d = 1 if direction == "BUY" else -1
+    c = [b.c for b in closed]
+    if len(c) < 210:
+        return False
+    if (1 if _ema(c, 50)[-1] > _ema(c, 200)[-1] else -1) != d:
+        return False
+    # ATR Wilder 14 (TR candle pertama memakai close sendiri) + Supertrend 3x
+    atr, st, fu, fd = 0.0, 1, 0.0, 0.0
+    for i, b in enumerate(closed):
+        pc = closed[i - 1].c if i else b.c
+        tr = max(b.h - b.l, abs(b.h - pc), abs(b.l - pc))
+        atr = tr if i == 0 else atr + (tr - atr) / 14
+        hl2 = (b.h + b.l) / 2
+        up, dn = hl2 - 3 * atr, hl2 + 3 * atr
+        if i == 0:
+            fu, fd = up, dn
+            continue
+        pfu, pfd = fu, fd
+        fu = max(up, pfu) if closed[i - 1].c > pfu else up
+        fd = min(dn, pfd) if closed[i - 1].c < pfd else dn
+        st = 1 if b.c > pfd else (-1 if b.c < pfu else st)
+    if st != d:
+        return False
+    daily: dict = {}
+    for b in closed:
+        if b.t.date() < closed[-1].t.date():
+            daily[b.t.date()] = b.c
+    p = [daily[k] for k in sorted(daily)]
+    if len(p) < 61:
+        return False
+    return (1 if p[-1] > p[-61] else -1 if p[-1] < p[-61] else 0) == d
+
+
+# Statistik historis per kategori (research/badge_stats.py & research/gap_years.py): (WR %, R/sinyal, n, periode)
+STATS = {
+    "XAU konf+⭐": (49.2, 0.309, 850, "2012–2026"),
+    "XAU konf": (48.1, 0.093, 335, "2012–2026"),
+    "XAU ⭐": (42.7, -0.062, 356, "2012–2026"),
+    "XAU biasa": (43.5, -0.005, 1875, "2012–2026"),
+    "BTC konf+⭐": (47.8, 0.310, 811, "2016–2026"),
+    "BTC konf": (48.1, 0.226, 430, "2016–2026"),
+    "BTC ⭐": (49.5, 0.678, 382, "2016–2026"),
+    "BTC biasa": (43.0, 0.073, 2159, "2016–2026"),
+    "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
+    "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
+    "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),
+    "GAP AUD/USD": (90.5, 0.248, 21, "2013–2022"),
+    "GAP EUR/CHF": (74.4, 0.134, 39, "2013–2022"),
+}
+
+
+def badges(cat: str) -> dict:
+    """💰 = profit/sinyal (≥0,25R 💰💰💰, ≥0,12R 💰💰, ≥0,05R 💰), ⭐ = win rate (≥75% ⭐⭐⭐, ≥60% ⭐⭐, ≥48% ⭐).
+    Profit didahulukan: badge = 💰 lalu ⭐."""
+    wr, avg, n, period = STATS[cat]
+    stars = 3 if wr >= 75 else 2 if wr >= 60 else 1 if wr >= 48 else 0
+    money = 3 if avg >= 0.245 else 2 if avg >= 0.12 else 1 if avg >= 0.05 else 0
+    return {"cat": cat, "wr": wr, "avg_r": avg, "n_hist": n, "period": period, "stars": stars, "money": money,
+            "badge": "💰" * money + "⭐" * stars, "star": money > 0}
+
+
+def category(closed: list[Bar], direction: str, cfg: dict) -> tuple[dict, str]:
+    """Kategori sinyal (konf+⭐ / konf / ⭐ / biasa) -> badge & statistik. 'star' = punya 💰 & bukan biasa."""
+    is_star, note = star_check(closed, direction, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
+    is_konf = konf_check(closed, direction)
+    name = "konf+⭐" if is_star and is_konf else "konf" if is_konf else "⭐" if is_star else "biasa"
+    meta = badges(f"{cfg.get('asset', 'XAU')} {name}")
+    meta["star"] = meta["money"] > 0 and name != "biasa"
+    return meta, note
+
+
 # ---------------------------------------------------------------- layanan luar
 class TwelveData:
     def __init__(self, api_key: str, symbol: str = "XAU/USD"):
@@ -175,9 +294,38 @@ class Supabase:
     def save_control(self, data: dict) -> None:
         self.save_state(data, "control")
 
+    def get_gap_state(self) -> dict:
+        return self.get_state("gap")
+
+    def save_gap_state(self, data: dict) -> None:
+        self.save_state(data, "gap")
+
     def log(self, kind: str, payload: dict) -> None:
         headers = {**self.headers, "Prefer": "return=minimal"}
         http("POST", f"{self.base}/xau_signals", headers, {"type": kind, "payload": payload})
+
+
+class RowStore:
+    """State di baris Supabase lain (mis. 'btc'). Kontrol auto order hanya untuk XAU (baris utama)."""
+
+    def __init__(self, store, row: str):
+        self.store, self.row = store, row
+
+    def get_state(self) -> dict:
+        return self.store.get_state(self.row)
+
+    def save_state(self, data: dict) -> None:
+        self.store.save_state(data, self.row)
+
+    def get_control(self) -> dict:
+        return {}
+
+    def log(self, kind: str, payload: dict) -> None:
+        self.store.log(kind, {**payload, "asset": self.row})
+
+
+BTC_CFG = {**CFG, "asset": "BTC", "id_prefix": "BTC-", "market_hours": False, "skip_open_bars": 0,
+           "point_value": 0.01}          # BTCUSD(c): kontrak 1 BTC/lot -> 0,01 lot = 0,01 per $1
 
 
 OK_CODES = {"ERR_NO_ERROR", "TRADE_RETCODE_PLACED", "TRADE_RETCODE_DONE", "TRADE_RETCODE_DONE_PARTIAL",
@@ -258,9 +406,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     """
     tf = timedelta(minutes=cfg["tf_minutes"])
     bars = prices.candles(cfg["bars"])
+    if cfg.get("market_hours", True):
+        bars = [b for b in bars if market_open(b.t)]
     if not bars:
         return {"ok": False, "error": "tidak ada candle"}
-    closed = [b for b in bars if b.t + tf <= now]
+    closed = [b for b in bars if b.t + tf <= now and (b.h > b.l or not cfg.get("market_hours", True))]
     price = bars[-1].c
     state = store.get_state() or {}
     state.pop("virtual", None)  # format lama (1 set)
@@ -322,6 +472,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
+              "cat": v.get("cat", ""), "point_value": cfg.get("point_value", 1.0),
               "tp1_time": v.get("be_bar"), "reason": why}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
@@ -332,6 +483,18 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     def manage(name: str, v: dict | None) -> dict | None:
         """Cek SL / TP1 / SL+ secara berurutan per bar sejak entry (konservatif: SL dulu)."""
         if not v:
+            return None
+        if cfg.get("market_hours", True) and weekend_closed(parse_iso(v["bar_close"]) - tf):
+            # sinyal lama yang lahir dari candle saat pasar tutup -> batalkan, tidak dihitung menang/kalah
+            ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name, "dir": v["dir"],
+                  "entry": round(v["entry"], 3), "price": round(price, 3), "points": 0.0, "r": 0.0,
+                  "risk_points": round(v["risk"], 3), "legs": v["legs"], "tp1_hit": False,
+                  "star": v.get("star", False), "void": True,
+                  "reason": "Dibatalkan: sinyal dari data saat pasar tutup"}
+            text = f"⚠️ BATAL {v['dir']} [{name}] @ {v['entry']:.2f}: sinyal dari data saat pasar tutup, abaikan."
+            pub.publish(ev, text, "Sinyal dibatalkan", 4, ["warning"])
+            store.log("void", ev)
+            events.append(f"{name} BATAL {v['dir']} (data pasar tutup)")
             return None
         buy = v["dir"] == "BUY"
         if not v.get("be_done"):
@@ -369,34 +532,48 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             if sig["action"] == "close" and v:
                 close_virtual(name, v, price, sig["note"])
                 v = None
+            elif sig["action"] == "open" and v is None and sig["atr"] < 0.4 * atr_last(closed, 120):
+                # ATR(20) jauh di bawah normal (mis. candle datar) -> SL terlalu sempit, sinyal tidak wajar
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "ATR tidak wajar"})
+                events.append(f"{name} {sig['dir']} dilewati: ATR {sig['atr']:.2f} terlalu kecil")
+            elif sig["action"] == "open" and v is None and since_week_open(closed) < cfg.get("skip_open_bars", 0):
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "gap buka pekan"})
+                events.append(f"{name} {sig['dir']} dilewati: {since_week_open(closed) + 1} candle pertama setelah buka")
             elif sig["action"] == "open" and v is None and cfg.get("star_only") and not (
                     star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})
                 events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
+            elif sig["action"] == "open" and v is None and cfg.get("profit_only", True) and not (
+                    cat := category(closed, sig["dir"], cfg))[0]["star"]:
+                # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
+                events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
-                is_star, star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
+                meta, star_note = category(closed, d, cfg)
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
                 tp1 = price + sign * cfg["tp1_r"] * risk
-                key = f"{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
+                key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
                 ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
                       "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
                       "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
                       "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
                       "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-                      "star": is_star, "star_note": star_note}
-                text = (f"{'⭐ ' if is_star else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                      "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
+                text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                        f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
+                        f"{meta['n_hist']} sinyal)\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
-                pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
+                pub.publish(ev, text, f"{d} {symbol}", 5, ["green_circle" if d == "BUY" else "red_circle"])
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": is_star,
+                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
                      "bar_close": iso(closed[-1].t + tf)}
                 existing = live_positions(magic) if live else []
                 if live and existing != []:

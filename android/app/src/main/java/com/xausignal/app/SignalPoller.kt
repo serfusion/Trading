@@ -64,7 +64,9 @@ object SignalPoller {
 
     private fun notify(context: Context, event: SignalEvent) {
         when (event.type) {
-            "signal" -> if (event.status == "signal" || event.status == "opened") Notifications.signal(context, event)
+            "signal" -> if ((event.status == "signal" || event.status == "opened") && !event.isVoid()) {
+                Notifications.signal(context, event)
+            }
             "close" -> Notifications.close(context, event)
             "info" -> if (event.str("text").contains("TP1")) Notifications.info(context, event)
         }

@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
         SignalRepository.init(this)
         Notifications.createChannels(this)
         PollScheduler.schedule(applicationContext)
+        askUnrestrictedBattery()
         setContent {
             XauTheme {
                 AppScreen(onSettingsSaved = { refresh() })
@@ -80,6 +81,20 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         refresh()
+    }
+
+    /** Minta dikecualikan dari penghemat baterai supaya alarm cek sinyal tidak ditunda/dimatikan HP. */
+    private fun askUnrestrictedBattery() {
+        val pm = getSystemService(android.os.PowerManager::class.java) ?: return
+        if (pm.isIgnoringBatteryOptimizations(packageName)) return
+        try {
+            startActivity(
+                android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                    .setData(android.net.Uri.parse("package:$packageName"))
+            )
+        } catch (e: Exception) {
+            // beberapa HP tidak punya layar ini
+        }
     }
 
     /** Muat harga & sinyal terbaru saat aplikasi dibuka. */
@@ -112,7 +127,7 @@ private val TABS = listOf(
 @Composable
 fun AppScreen(onSettingsSaved: () -> Unit) {
     val events by SignalRepository.events.collectAsState()
-    val heartbeat by SignalRepository.heartbeat.collectAsState()
+    val prices by SignalRepository.prices.collectAsState()
     val connection by SignalRepository.connection.collectAsState()
     val moneyVersion by SignalRepository.moneyVersion.collectAsState()
     var showSettings by remember { mutableStateOf(SignalRepository.topic().isBlank()) }
@@ -203,7 +218,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 }
             }
             when (tab) {
-                0 -> SignalsTab(events, heartbeat, connection, money)
+                0 -> SignalsTab(events, prices, connection, money)
                 else -> StatsTab(events, money)
             }
         }
@@ -257,8 +272,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
-                LotInput(lot, { lot = it }, "Lot sinyal biasa", 100.0)
-                LotInput(starLot, { starLot = it }, "Lot sinyal ⭐", 100.0)
+                LotInput(lot, { lot = it; starLot = it }, "Lot per posisi", 100.0)
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
             }

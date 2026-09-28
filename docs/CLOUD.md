@@ -7,19 +7,53 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
         ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
         │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
-        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Gold XAU/USD Indicator
+        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Dividend Indicator
         └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
 **Tanda ⭐**: semua sinyal dikirim; sinyal yang searah tren D1 (close D1 kemarin vs EMA50 D1) dan
-menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`). Simulasi di data asli
-Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check --semua`):
+menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`).
+
+**Badge di setiap sinyal** (profit didahulukan, dari data historis multi-tahun, `research/badge_stats.py` &
+`research/gap_years.py`): 💰 = profit rata-rata per sinyal (💰💰💰 ≥+0,25R, 💰💰 ≥+0,12R, 💰 ≥+0,05R), lalu
+⭐ = win rate (⭐⭐⭐ ≥75%, ⭐⭐ ≥60%, ⭐ ≥48%). **Hanya sinyal 💰 yang dikirim** (`profit_only`); sinyal biasa & XAU
+"⭐ saja" (profit ±0) dilewati.
+
+| Sinyal | WR | Profit/sinyal | Badge |
+|---|---|---|---|
+| Gap pekan AUD/USD | 90% | +0,25R | 💰💰💰⭐⭐⭐ |
+| Gap pekan USD/JPY | 82% | +0,26R | 💰💰💰⭐⭐⭐ |
+| Gap pekan EUR/JPY | 84% | +0,14R | 💰💰⭐⭐⭐ |
+| Gap pekan AUD/JPY | 86% | +0,10R | 💰⭐⭐⭐ |
+| Gap pekan EUR/CHF | 74% | +0,13R | 💰💰⭐⭐ |
+| BTC ⭐ (tren D1 + H4) | 50% | +0,68R | 💰💰💰⭐ |
+| BTC konfluensi + ⭐ | 48% | +0,31R | 💰💰💰 |
+| BTC konfluensi | 48% | +0,23R | 💰💰⭐ |
+| XAU konfluensi + ⭐ | 49% | +0,31R | 💰💰💰⭐ |
+| XAU konfluensi | 48% | +0,09R | 💰⭐ |
+
+**BTC/USD** (env `BTC_SIGNALS=0` untuk mematikan): mesin yang sama dengan XAU, 24 jam (tanpa aturan jam pasar/gap),
+state di baris Supabase `btc`, ID diawali `BTC-`. Lot memakai kontrak BTCUSD(c) 1 BTC per lot (0,01 lot = 0,01 per
+$1 gerak) — cek spesifikasi simbol di MT5.
+
+**Sinyal gap pekan forex** (`cloud/api/_gap.py`, env `GAP_SIGNALS=0` untuk mematikan): 1 jam setelah pasar forex
+buka (Minggu 17:00 New York), bila gap ≥ 0,5 × range harian 14 hari → lawan gap, TP 50% gap tertutup, SL 1× gap,
+tutup otomatis 24 jam. Data 5 pair hanya diambil di jendela buka pekan atau saat ada posisi gap terbuka (hemat
+kuota Twelve Data).
+
+**Jam pasar & gap**: candle saat pasar tutup (Jumat 17:00 – Minggu 18:00 New York, dan jeda harian
+17:00–18:00) dibuang, karena feed tetap mengirim candle datar yang membuat ATR/channel palsu
+(kasus Minggu 27 Sep 2026 22:02 UTC: BUY 4279,32 dengan SL hanya $1,23). Sinyal di **3 candle H1 pertama
+setelah pasar buka** (gap pekan) dilewati (`research/gap_study.py`). Sinyal lama yang lahir dari data
+pasar tutup otomatis dikirim sebagai **BATAL** dan tidak dihitung menang/kalah.
+
+Simulasi di data asli Apr 2025 – Sep 2026 (tick tiap 30 menit, `python -m research.cloud_check --semua`):
 
 | | Sinyal | Untung | Total | Rata-rata/sinyal |
 |---|---|---|---|---|
-| ⭐ | 114 | 57,0% | +63,1R | +0,55R |
-| Biasa | 229 | 44,5% | +2,1R | +0,01R |
-| Semua | 343 | 48,7% | +65,2R | +0,19R |
+| ⭐ | 112 | 58,0% | +74,9R | +0,67R |
+| Biasa | 223 | 43,5% | +1,8R | +0,01R |
+| Semua | 335 | 48,4% | +76,7R | +0,23R |
 
 Hampir semua profit datang dari sinyal ⭐; sinyal biasa rata-rata impas. Tidak ada yang pasti menang.
 dinyalakan lewat Langkah 6 (semua diatur dari aplikasi Android).
@@ -63,7 +97,7 @@ di aplikasi.
 ## Langkah 5 — Tes
 1. Buka di browser: `https://signal.domainkamu.com/api/tick?key=CRON_SECRET` → harus muncul
    `{"ok": true, "price": ..., "trend": "close ... | channel 55: ... "}`.
-2. Aplikasi Gold XAU/USD Indicator → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
+2. Aplikasi Dividend Indicator → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
    kartu atas menampilkan harga & "Mode: SINYAL (cloud)".
 3. Di Supabase: `select status_code, content from net._http_response order by created desc limit 5;`
    → status 200 setiap 30 menit.
