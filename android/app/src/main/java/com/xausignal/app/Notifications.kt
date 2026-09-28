@@ -7,18 +7,35 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.AudioAttributes
+import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
 object Notifications {
     private const val CH_SIGNAL = "signals"
+    private const val CH_ACTION = "action_loud"   // TP1 / SL+: suara alarm (lebih keras) agar tidak terlewat
 
     fun createChannels(context: Context) {
         val nm = context.getSystemService(NotificationManager::class.java)
         nm.createNotificationChannel(
             NotificationChannel(CH_SIGNAL, "Sinyal XAU/USD", NotificationManager.IMPORTANCE_HIGH).apply {
                 enableVibration(true)
+            }
+        )
+        nm.createNotificationChannel(
+            NotificationChannel(CH_ACTION, "TP1 & SL+ (suara keras)", NotificationManager.IMPORTANCE_HIGH).apply {
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 600, 250, 600, 250, 600)
+                setSound(
+                    RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                        ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION),
+                    AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_ALARM)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build()
+                )
             }
         )
         nm.deleteNotificationChannel("service")   // notifikasi "menunggu sinyal" versi lama
@@ -46,12 +63,19 @@ object Notifications {
         val m = SignalRepository.money()
         val title = "🎯 TP1 kena • ${event.str("symbol").ifBlank { "XAU/USD" }}"
         val left = 5 - m.tpLegs
-        post(context, (event.id + "info").hashCode(), title, "Tutup ${m.tpLegs} posisi, SL+ ke entry untuk $left posisi sisa")
+        post(context, (event.id + "info").hashCode(), title,
+            "Tutup ${m.tpLegs} posisi, pindahkan SL $left posisi sisa ke ${slPlus(event)}", CH_ACTION)
     }
 
     fun be07(context: Context, event: SignalEvent) {
         val sym = event.str("symbol").ifBlank { "XAU/USD" }
-        post(context, (event.id + "be07").hashCode(), "🛡️ SL+ sekarang • $sym", "Profit 0,7R tercapai: pindahkan SL semua posisi ke entry")
+        post(context, (event.id + "be07").hashCode(), "🛡️ SL+ sekarang • $sym",
+            "Profit 0,7R: pindahkan SL semua posisi ke ${slPlus(event)}", CH_ACTION)
+    }
+
+    /** Harga SL+ dari cloud (entry ± 0,10); event lama tanpa harga -> "entry". */
+    private fun slPlus(event: SignalEvent): String =
+        if (event.num("sl_plus") != null) event.price("sl_plus") else "entry"
     }
 
     fun close(context: Context, event: SignalEvent) {
@@ -64,14 +88,15 @@ object Notifications {
         post(context, event.id.hashCode() + 1, title, "Ditutup @ ${fmt(event.num("price"))}")
     }
 
-    private fun post(context: Context, id: Int, title: String, text: String) {
+    private fun post(context: Context, id: Int, title: String, text: String, channel: String = CH_SIGNAL) {
         if (Build.VERSION.SDK_INT >= 33 &&
             context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
         ) return
-        val n = NotificationCompat.Builder(context, CH_SIGNAL)
+        val n = NotificationCompat.Builder(context, channel)
             .setSmallIcon(R.drawable.ic_stat)
             .setContentTitle(title)
             .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setSubText(APP_NAME)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(NotificationCompat.DEFAULT_ALL)

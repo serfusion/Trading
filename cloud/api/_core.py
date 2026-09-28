@@ -538,7 +538,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                     text = (f"🎯 [{name}] TP1 {v['tp1']:.2f} kena ({v['dir']})\n"
                             f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.2f} (SL+)")
                     pub.publish({"type": "info", "kind": "tp1", "time": iso(now), "set": name, "id": v["id"],
-                                 "symbol": symbol, "text": text}, text, "TP1 + SL+", 5, ["dart"])
+                                 "symbol": symbol, "sl_plus": round(v["sl"], 3), "text": text}, text, "TP1 + SL+", 5, ["dart"])
                     store.log("tp1", {"id": v["id"], "set": name, "sl": v["sl"]})
                     events.append(f"{name} TP1 -> SL+")
                     break
@@ -547,9 +547,12 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                        for b in bars if b.t >= parse_iso(v["bar_close"])), default=0.0)
             if fav >= 0.7 * v["risk"]:
                 v["n07"] = True
-                text = f"✅ [{name}] {v['dir']} {symbol}: profit 0,7R tercapai → SL+ (bila memakai SL+ 0,7R)"
+                sl_plus = v["entry"] + (1 if buy else -1) * cfg["be_offset"]
+                text = (f"🛡️ [{name}] {v['dir']} {symbol}: profit 0,7R tercapai → SL+ ke {sl_plus:.2f}"
+                        " (bila memakai SL+ 0,7R)")
                 pub.publish({"type": "info", "kind": "be07", "time": iso(now), "set": name, "id": v["id"],
-                             "symbol": symbol, "text": text})
+                             "symbol": symbol, "sl_plus": round(sl_plus, 3), "text": text},
+                            text, "SL+ sekarang", 5, ["shield"])
                 events.append(f"{name} 0,7R")
         if v.get("be_done"):
             for b in (b for b in bars if b.t > parse_iso(v["be_bar"])):
