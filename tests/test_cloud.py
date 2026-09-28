@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 
 from helpers import bars_from_path
 from test_trend import trend_path
@@ -195,3 +196,24 @@ def test_scheme_r_matches_standard_and_variants():
     infos = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "be07"]
     tp1 = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "tp1"]
     assert tp1 and infos and all("TP1" not in e["text"] for e in infos)
+
+
+def test_heartbeat_level_tutup_sama_dengan_aturan_keluar():
+    """exits di heartbeat = low/high N candle terakhir yang sudah tutup; TUTUP terjadi tepat saat close menembusnya."""
+    df = bars_from_path(trend_path(), start="2026-09-14 00:00", freq="1h", wick=0.5)
+    store, pub = run_ticks(df, every_minutes=60)
+    hbs = [e for e in pub.events if e["type"] == "heartbeat"]
+    with_exit = [h for h in hbs if h.get("exits")]
+    assert with_exit
+    closes = {e["id"]: e for e in pub.events if e["type"] == "close"}
+    checked = 0
+    for h in with_exit:
+        for x in h["exits"]:
+            assert x["set"] in ("T40/15", "T55/20", "T80/30") and x["bars"] in (15, 20, 30)
+            t = pd.Timestamp(h["time"])
+            done = df[df.index + pd.Timedelta(hours=1) <= t]           # candle yang sudah tutup saat tick
+            window = done.iloc[-x["bars"]:]
+            want = window.low.min() if x["dir"] == "BUY" else window.high.max()
+            assert abs(x["level"] - round(want, 3)) < 1e-6
+            checked += 1
+    assert checked > 10 and closes

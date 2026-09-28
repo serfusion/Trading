@@ -240,8 +240,8 @@ object SignalRepository {
             legLot = roundLot(lot).coerceAtLeast(0.01),
             idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
             starLot = roundLot(star).coerceAtLeast(0.01),
-            tpLegs = p?.getInt("tp_legs", 1) ?: 1,
-            be07 = p?.getBoolean("be07", false) ?: false,
+            tpLegs = 1,                 // skema tetap: 1 posisi TP1 + 4 running, SL+ saat TP1 kena (2.8)
+            be07 = false,
             modalIdr = p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0,
             riskPct = p?.getFloat("risk_pct", 0.5f)?.toDouble() ?: 0.5,
         )
