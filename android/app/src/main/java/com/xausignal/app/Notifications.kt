@@ -76,7 +76,6 @@ object Notifications {
     /** Harga SL+ dari cloud (entry ± 0,10); event lama tanpa harga -> "entry". */
     private fun slPlus(event: SignalEvent): String =
         if (event.num("sl_plus") != null) event.price("sl_plus") else "entry"
-    }
 
     fun close(context: Context, event: SignalEvent) {
         if (event.isVoid()) {
