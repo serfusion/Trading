@@ -334,3 +334,54 @@ baik; kategori konf/⭐ yang sudah dipakai cloud menangkap efek tren itu.
 Kesimpulan: tidak ada konsep SMC dashboard yang menaikkan hasil sinyal 💰 secara andal. Pelajaran yang diambil
 hanya tampilan: status ringkas sekilas (WAIT / aktif), angka TUTUP besar, dan "profit terkunci" di kartu sinyal
 (aplikasi 3.3). Persentase zona ("T3 74%") di dashboard itu tidak bisa diverifikasi dari luar.
+
+## 12. Setelah TP1: tahan running atau ambil profit lebih awal, per kategori — `research/runner_kategori.py`
+
+Pertanyaan pengguna (28 Sep 2026) untuk sinyal SELL format lama (kategori "⭐ saja", tidak dikirim lagi sejak ada 💰)
+yang sudah TP1. Mesin sama dengan `sl_tangga.py`; semua varian identik sampai TP1. Keluaran:
+`docs/eksternal/hasil_runner_kategori.txt`.
+
+| XAU, R/sinyal (total) | bawaan (tahan sampai TUTUP/SL+) | semua tutup di TP1 | TP running 2R | TP running 3R | SL bertangga 1R | trailing 3 ATR |
+|---|---|---|---|---|---|---|
+| konf+⭐ (💰💰💰) | **+0,242 (+327R)** | +0,066 (+142R) | +0,121 (+214R) | +0,162 (+256R) | +0,206 (+302R) | +0,176 (+281R) |
+| konf (💰) | +0,026 (+11R) | −0,018 | +0,017 | +0,070 (+29R) | +0,056 (+24R, 12/14 th lebih baik) | +0,027 |
+| ⭐ saja (tidak dikirim) | −0,056 (−39R) | −0,062 (−50R) | −0,055 | −0,086 | **−0,012 (−8R, 11/15 th lebih baik, DD −39 vs −59)** | −0,054 |
+| biasa (tidak dikirim) | −0,011 | −0,021 | −0,005 | +0,000 | −0,005 | +0,002 |
+
+BTC: bawaan terbaik di semua kategori (mis. konf+⭐ +560R; varian lain ≤ +280R).
+
+Kesimpulan: untuk sinyal 💰💰💰 (konf+⭐) dan semua BTC, **tahan running sampai TUTUP** tetap terbaik; menutup semua
+di TP1 memotong hasil ±55–90%. Untuk kategori "⭐ saja" (sinyal lama), SL bertangga 1R (profit 2R → SL ke +1R,
+3R → SL +2R, …) paling membantu tetapi kategori itu tetap rugi secara rata-rata — alasan kategori ini tidak dikirim
+lagi. XAU konf (💰): tangga/TP 3R sedikit lebih baik; efek kecil, skema bawaan tidak diubah.
+
+## 13. Sinyal XAU sesudah gap buka pekan (pertanyaan pengguna 28 Sep 2026, uji cepat)
+
+Sinyal ≤ 24 jam setelah buka pekan, searah vs lawan arah gap (2012–2026):
+
+| Kategori | searah gap | lawan gap | > 24 jam |
+|---|---|---|---|
+| konf+⭐ | n=98, WR 48%, +0,05R | n=56, WR 48%, +1,01R | n=696, +0,29R |
+| konf | n=26, WR 77%, +1,19R | n=35, WR 37%, −0,14R | n=274, +0,02R |
+| ⭐ saja (sinyal pengguna) | **n=43, WR 33%, −0,47R** | n=11, +0,29R | n=302, −0,02R |
+| biasa | n=216, −0,03R | n=126, −0,05R | n=1533, +0,00R |
+
+Pola berlawanan antar kategori dan sampel kecil → bukan aturan; tidak ada perubahan. Sinyal "⭐ saja" searah gap
+justru kelompok terburuk; profit 28 Sep adalah satu kejadian.
+
+## 14. Sinyal kembar: satu harga TUTUP (permintaan pengguna 28 Sep 2026) — `research/kembar_tutup.py`
+
+Sinyal kembar = beberapa set (T40/15, T55/20, T80/30) sinyal di candle yang sama; pengguna entry sekali. Untuk SELL,
+high 30 candle ≥ high 20 ≥ high 15 (BUY: low sebaliknya), jadi set paling lambat selalu tutup paling akhir.
+
+| Grup 3 set (XAU n=173 / BTC n=241) | XAU R/grup | BTC R/grup |
+|---|---|---|
+| keluar di TUTUP pertama (T40/15) | +0,22 | +0,33 |
+| rata-rata 3 set (cara aplikasi lama) | +0,33 | +0,40 |
+| **keluar di set paling lambat (T80/30)** | **+0,42** | **+0,47** |
+
+Grup 2 set: campuran (XAU T55/20+T80/30: T55/20 lebih baik; BTC: T80/30 lebih baik). Total semua grup kembar: set
+paling lambat XAU ±+114R vs rata-rata ±+99R vs TUTUP pertama ±+80R; BTC ±+217R / ±+187R / ±+156R.
+Dipasang di aplikasi 3.4 (tanpa mengubah cloud): kartu menampilkan satu harga TUTUP (set paling lambat), notifikasi
+TUTUP hanya untuk set itu, riwayat/statistik memakai hasil set itu. Statistik aplikasi: MENANG = TP1 kena,
+KALAH = SL / TUTUP sebelum TP1 (permintaan pengguna).

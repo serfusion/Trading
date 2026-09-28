@@ -108,6 +108,9 @@ fun SignalEvent.price(key: String): String = priceText(symbol(), num(key))
 fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
 fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)
 
+/** Set "T55/20" -> 20 (candle channel keluar); 0 untuk gap / sinyal tanpa set. */
+fun SignalEvent.exitBars(): Int = str("set").substringAfter('/', "").toIntOrNull() ?: 0
+
 /** Sinyal gap pekan forex (1 posisi, TP & SL, tutup otomatis 24 jam). */
 fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
@@ -311,6 +314,24 @@ object SignalRepository {
             .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }
             .values.flatMap { g -> g.map { it.id to g.size } }.toMap()
 
+    /**
+     * Sinyal kembar di-entry sekali dengan SATU harga TUTUP: set paling lambat (candle keluar terbanyak, mis.
+     * T80/30), yang juga selalu tutup paling akhir. Riset (research: grup 3 set XAU 2012–2026): keluar di set
+     * paling lambat +0,42R/grup vs rata-rata 3 set +0,33R vs TUTUP pertama +0,22R; BTC +0,47 / +0,40 / +0,33R.
+     * id sinyal -> id sinyal utama grupnya.
+     */
+    fun primaryOf(events: List<SignalEvent>): Map<String, String> =
+        events.filter { it.type == "signal" }
+            .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }
+            .values.flatMap { g ->
+                val p = (g.maxByOrNull { it.exitBars() } ?: g.first()).id
+                g.map { it.id to p }
+            }.toMap()
+
+    /** Menang = TP1 kena (gap: TP kena); kalah = SL atau TUTUP sebelum TP1. */
+    fun isWin(close: SignalEvent, events: List<SignalEvent>): Boolean =
+        close.json.optBoolean("tp1_hit", false) || tp1Event(events, close.id) != null
+
     fun toIdr(amount: Double, m: MoneySettings): Double =
         if (m.cent) amount / 100.0 * m.idrRate else amount * m.idrRate
 
@@ -323,19 +344,20 @@ object SignalRepository {
     fun periodStats(events: List<SignalEvent>, m: MoneySettings, keyOf: (java.time.ZonedDateTime) -> String,
                     labelOf: (String) -> String = { it }, star: Boolean? = null,
                     symbol: String? = null): List<PeriodStats> {
-        val groups = LinkedHashMap<String, MutableList<Double>>()
-        val twins = twinCounts(events)
+        // (menang?, uang) per sinyal; sinyal kembar dihitung sekali lewat set utamanya (harga TUTUP yang dipakai)
+        val groups = LinkedHashMap<String, MutableList<Pair<Boolean, Double>>>()
+        val primary = primaryOf(events)
         events.filter {
             it.type == "close" && !it.isVoid() && (star == null || it.isStar() == star) &&
-                (symbol == null || it.symbol() == symbol)
+                (symbol == null || it.symbol() == symbol) && (primary[it.id] ?: it.id) == it.id
         }.forEach { e ->
             val t = zoned(e) ?: return@forEach
-            val a = (amount(e, m) ?: return@forEach) / (twins[e.id] ?: 1)
-            groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
+            val a = amount(e, m) ?: return@forEach
+            groups.getOrPut(keyOf(t)) { mutableListOf() }.add(isWin(e, events) to a)
         }
         return groups.entries.sortedByDescending { it.key }.map { (k, v) ->
-            PeriodStats(labelOf(k), v.count { it > 0 }, v.count { it <= 0 },
-                v.filter { it > 0 }.sum(), v.filter { it <= 0 }.sum())
+            PeriodStats(labelOf(k), v.count { it.first }, v.count { !it.first },
+                v.map { it.second }.filter { it > 0 }.sum(), v.map { it.second }.filter { it <= 0 }.sum())
         }
     }
     fun topic(): String = prefs?.getString("topic", "") ?: ""

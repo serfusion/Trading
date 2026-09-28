@@ -211,6 +211,10 @@ dari entry; terlambat; TP1 sudah kena → jangan entry baru). Tanpa sinyal 💰 
   sinyal, notifikasi, dan ringkasan tab Sinyal.
 - Pesan TUTUP yang terlewat (HP offline > 12 jam, cache ntfy habis) dikenali dari heartbeat (`exits`): sinyal itu
   tidak lagi dihitung aktif dan riwayatnya ditandai SELESAI.
+- Aplikasi 3.4: sinyal kembar (beberapa set, entry sama) memakai **satu** harga TUTUP = set paling lambat (tutup
+  paling akhir; di data paling untung, `docs/RISET_DATA_EKSTERNAL.md` bagian 14). Notifikasi TUTUP aplikasi hanya
+  untuk set itu. Cloud (setelah merge) juga hanya mengirim 1 teks ntfy per sinyal kembar: sinyal dari set pertama, TP1/SL+ dan TUTUP dari set paling lambat; data `-data` tetap per set. Statistik (3.5): PROFIT = TP1 kena, MINUS = SL /
+  TUTUP sebelum TP1; uang tetap dari hasil nyata skema. Riwayat: 4 kartu + tombol "Load more".
 
 ## Filter BTC dari riset data eksternal
 

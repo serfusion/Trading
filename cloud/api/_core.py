@@ -491,6 +491,24 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 events.append(f"{name} LIVE SL+ {len(ps)} posisi")
         return v
 
+    def twins_open(name: str, v: dict) -> list[str]:
+        """Set lain dengan sinyal kembar (arah & candle sinyal sama) yang masih punya posisi virtual. Set yang sudah
+        diproses di tick ini memakai state terbarunya (systems diperbarui di akhir tiap set)."""
+        return [n for n, s in systems.items() if n != name and s.get("virtual")
+                and s["virtual"].get("bar_close") == v.get("bar_close") and s["virtual"].get("dir") == v.get("dir")]
+
+    def exit_of(name: str) -> int:
+        try:
+            return int(name.split("/")[1])
+        except (IndexError, ValueError):
+            return 0
+
+    def is_primary(name: str, v: dict) -> bool:
+        """Sinyal kembar di-entry sekali dengan satu harga TUTUP: set paling lambat (tutup paling akhir). Teks ntfy
+        (aplikasi ntfy) hanya dikirim untuk set itu supaya pengguna menerima 1 pesan per sinyal; data -data tetap
+        dikirim untuk semua set."""
+        return all(exit_of(n) < exit_of(name) for n in twins_open(name, v))
+
     def close_virtual(name: str, v: dict, exit_price: float, why: str) -> None:
         sign = 1 if v["dir"] == "BUY" else -1
         points = (exit_price - v["entry"]) * sign
@@ -504,9 +522,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
                                                                      cfg["be_offset"]), 3)
                        for n in (1, 3) for e in (False, True)}}
-        text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
-                f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
-        pub.publish(ev, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
+        text = (f"🏁 TUTUP {v['dir']} {symbol} @ {exit_price:.2f} — tutup SEMUA posisi sinyal ini\n"
+                f"Entry {v['entry']:.2f} -> {points:+.2f} poin | {'PROFIT (TP1 kena)' if v.get('tp1_hit') else 'MINUS'}"
+                f"\nAlasan: {why}")
+        # sinyal kembar: hanya set terakhir yang masih terbuka mengirim teks (set lebih cepat tutup diam-diam)
+        pub.publish(ev, None if twins_open(name, v) else text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
         store.log("close", ev)
         events.append(f"{name} TUTUP {v['dir']} {r:+.2f}R")
 
@@ -538,7 +558,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                     text = (f"🎯 [{name}] TP1 {v['tp1']:.2f} kena ({v['dir']})\n"
                             f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.2f} (SL+)")
                     pub.publish({"type": "info", "kind": "tp1", "time": iso(now), "set": name, "id": v["id"],
-                                 "symbol": symbol, "sl_plus": round(v["sl"], 3), "text": text}, text, "TP1 + SL+", 5, ["dart"])
+                                 "symbol": symbol, "sl_plus": round(v["sl"], 3), "text": text},
+                                text if is_primary(name, v) else None, "TP1 + SL+", 5, ["dart"])
                     store.log("tp1", {"id": v["id"], "set": name, "sl": v["sl"]})
                     events.append(f"{name} TP1 -> SL+")
                     break
@@ -552,7 +573,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                         " (bila memakai SL+ 0,7R)")
                 pub.publish({"type": "info", "kind": "be07", "time": iso(now), "set": name, "id": v["id"],
                              "symbol": symbol, "sl_plus": round(sl_plus, 3), "text": text},
-                            text, "SL+ sekarang", 5, ["shield"])
+                            text if is_primary(name, v) else None, "SL+ sekarang", 5, ["shield"])
                 events.append(f"{name} 0,7R")
         if v.get("be_done"):
             for b in (b for b in bars if b.t > parse_iso(v["be_bar"])):
@@ -616,7 +637,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
-                pub.publish(ev, text, f"{d} {symbol}", 5, ["green_circle" if d == "BUY" else "red_circle"])
+                # sinyal kembar (set lain sudah membuka sinyal di candle & arah yang sama): cukup 1 teks ntfy
+                first = not twins_open(name, {"bar_close": iso(closed[-1].t + tf), "dir": d})
+                pub.publish(ev, text if first else None, f"{d} {symbol}", 5,
+                            ["green_circle" if d == "BUY" else "red_circle"])
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,

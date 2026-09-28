@@ -84,21 +84,17 @@ object Notifications {
             post(context, event.id.hashCode() + 1, "BATAL ${event.dir} $sym", "Sinyal dari data saat pasar tutup, abaikan")
             return
         }
-        val m = SignalRepository.money()
-        val r = event.num("r") ?: 0.0
-        val title = "🏁 TUTUP ${event.dir} $sym • ${if (r > 0) "MENANG" else "KALAH"} ${signed(r)}R"
-        val amount = SignalRepository.amount(event, m)
-        // set kembar (entry sama, set lain) yang masih berjalan: posisi belum selesai semuanya
         val events = SignalRepository.events.value
-        val sig = events.firstOrNull { it.type == "signal" && it.id == event.id }
-        val twins = if (sig == null) emptyList() else SignalRepository.openSignals(events).filter {
-            it.id != sig.id && it.symbol() == sig.symbol() && it.dir == sig.dir && it.price("entry") == sig.price("entry")
-        }
-        val text = "Ditutup @ ${event.price("price")}" +
+        // Sinyal kembar memakai 1 harga TUTUP (set paling lambat, tutup paling akhir). Set lain yang lebih cepat
+        // tutup tanpa notifikasi: posisi Anda belum perlu ditutup.
+        if ((SignalRepository.primaryOf(events)[event.id] ?: event.id) != event.id) return
+        val m = SignalRepository.money()
+        val win = SignalRepository.isWin(event, events)
+        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT (TP1 kena)" else "MINUS"}"
+        val amount = SignalRepository.amount(event, m)
+        val text = "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
             (event.str("reason").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +
-            (amount?.let { "\nHasil ≈ ${moneyMain(it, m)} (${idrLine(it, m)})" } ?: "") +
-            if (twins.isNotEmpty()) "\nSet kembar ${twins.joinToString { it.str("set") }} masih berjalan (level 🚪 di kartu)."
-            else "\nSinyal selesai: tutup semua posisi sisa sinyal ini di MT5."
+            (amount?.let { "\nHasil ≈ ${moneyMain(it, m)} (${idrLine(it, m)})" } ?: "")
         post(context, event.id.hashCode() + 1, title, text)
     }
 
