@@ -11,18 +11,21 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
   `docs/TINJAUAN_MANUAL.md`, `docs/BACKTEST.md`, `kandidat/KATALOG.md`.
 - **Keputusan pengguna yang masih ditunggu** (jangan dikerjakan tanpa izin): (1) ganti bot live ke skema A / risiko
   0,25% (opsi `tp1_r: 0`); (2) tab Tabungan Emas & Berbagi di Android; (3) nasib 2 bundle mentah yang belum
-  di-push (Lin-Thet-Zaw, P1Piyush) dan 58 bundle mentah yang sudah ada di git (berisi kredensial asli penulis).
-  Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
+  di-push (Lin-Thet-Zaw, P1Piyush) dan 58 bundle mentah yang sudah ada di git (berisi kredensial asli penulis);
+  (4) pasang filter funding BTC di cloud (usulan riset data eksternal, lihat di bawah). Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
 
-## Riset data eksternal (menunggu pengguna membuka akses)
-- Pengguna diminta membuka Network access environment Claude ke: api.twelvedata.com, datafeed.dukascopy.com,
-  api.stlouisfed.org, fred.stlouisfed.org, publicreporting.cftc.gov, www.cftc.gov, nfs.faireconomy.media,
-  query1.finance.yahoo.com, api.binance.com, data.binance.vision. Cek dulu: `curl -sS -o /dev/null -w "%{http_code}" https://<host>/`.
-- Secret environment (jangan minta ditempel di chat): `FRED_API_KEY`, `TWELVEDATA_API_KEY`.
-- Data MT5 Exness pengguna (spread asli akun Cent) diunggah ke folder `data_mt5/` (CSV/zip export Bars M1/H1).
-- Urutan uji sebagai filter sinyal 💰 yang ada (per tahun, train/test, spread): (1) kalender berita NFP/CPI/FOMC,
-  (2) real yield DFII10 & dolar (FRED), (3) COT ekstrem, (4) M1 Dukascopy/MT5 + filter sesi, (5) funding/OI BTC.
-  Filter hanya diusulkan ke cloud bila konsisten; perubahan live tetap menunggu izin pengguna.
+## Riset data eksternal (berjalan sejak 28 Sep 2026 — laporan `docs/RISET_DATA_EKSTERNAL.md`)
+- Akses jaringan sudah dibuka (api.binance.com tetap 451 dari AS → pakai data.binance.vision; Dukascopy membatasi
+  laju, ±15 detik/file). Cek: `curl -sS -o /dev/null -w "%{http_code}" https://<host>/`.
+- Secret environment (jangan minta ditempel di chat): `FRED_API_KEY` (OK), `TWELVEDATA_API_KEY` (di sesi 28 Sep masih
+  ditolak 401; nilai baru hanya terbaca di sesi baru → jalankan `python -m research.eksternal_twelvedata`).
+- Kerangka: `research/eksternal.py` (sinyal 💰 = badge cloud, `asof()` tanpa look-ahead, kriteria konsisten (a)–(d),
+  uji nyata di allow()). Unduhan di `data/research/eksternal/` (di-gitignore).
+- Hasil: (1) berita, (2) FRED yield riil/dolar, (3) COT, (4a) sesi → **tidak ada filter konsisten untuk XAU 💰**.
+  (5) **funding BTC "hindari ramai P90" konsisten** (+171R → +214R 2021–26, juga dengan proxy premium index harian
+  terlambat 36 jam) → USULAN ke pengguna, belum dipasang. (4b) Dukascopy BID/ASK H1: lihat laporan bagian 5.
+- Belum: `data_mt5/` (ekspor MT5 Exness pengguna, spread asli akun Cent) belum diunggah; cek Twelve Data.
+- Perubahan cloud/live (mis. filter funding BTC) tetap menunggu izin eksplisit pengguna.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
