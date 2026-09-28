@@ -64,7 +64,8 @@ object Notifications {
         val title = "🎯 TP1 kena • ${event.str("symbol").ifBlank { "XAU/USD" }}"
         val left = 5 - m.tpLegs
         post(context, (event.id + "info").hashCode(), title,
-            "Tutup ${m.tpLegs} posisi, pindahkan SL $left posisi sisa ke ${slPlus(event)}", CH_ACTION)
+            "Tutup ${m.tpLegs} posisi, pindahkan SL $left posisi sisa ke ${slPlus(event)} SEKARANG. " +
+                "$left posisi running jangan ditutup: tunggu notifikasi TUTUP.", CH_ACTION)
     }
 
     fun be07(context: Context, event: SignalEvent) {
@@ -78,13 +79,23 @@ object Notifications {
         if (event.num("sl_plus") != null) event.price("sl_plus") else "entry"
 
     fun close(context: Context, event: SignalEvent) {
+        val sym = event.symbol()
         if (event.isVoid()) {
-            post(context, event.id.hashCode() + 1, "BATAL ${event.dir} XAU/USD", "Sinyal dari data saat pasar tutup, abaikan")
+            post(context, event.id.hashCode() + 1, "BATAL ${event.dir} $sym", "Sinyal dari data saat pasar tutup, abaikan")
             return
         }
-        val r = event.num("r") ?: 0.0
-        val title = "TUTUP ${event.dir} • ${if (r > 0) "MENANG" else "KALAH"} ${signed(r)}R"
-        post(context, event.id.hashCode() + 1, title, "Ditutup @ ${fmt(event.num("price"))}")
+        val events = SignalRepository.events.value
+        // Sinyal kembar memakai 1 harga TUTUP (set paling lambat, tutup paling akhir). Set lain yang lebih cepat
+        // tutup tanpa notifikasi: posisi Anda belum perlu ditutup.
+        if ((SignalRepository.primaryOf(events)[event.id] ?: event.id) != event.id) return
+        val m = SignalRepository.money()
+        val win = SignalRepository.isWin(event, events)
+        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT (TP1 kena)" else "MINUS"}"
+        val amount = SignalRepository.amount(event, m)
+        val text = "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
+            (event.str("reason").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +
+            (amount?.let { "\nHasil ≈ ${moneyMain(it, m)} (${idrLine(it, m)})" } ?: "")
+        post(context, event.id.hashCode() + 1, title, text)
     }
 
     private fun post(context: Context, id: Int, title: String, text: String, channel: String = CH_SIGNAL) {

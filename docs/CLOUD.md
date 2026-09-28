@@ -195,6 +195,27 @@ Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Al
 `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
 bukan jaminan profit.
 
+Aplikasi 3.2 menaruh blok **🎯 REKOMENDASI ENTRY** (tebal & besar) di atas setiap jawaban, dihitung di HP dari data
+sinyal terbaru (dicek ulang saat bertanya) dan pengaturan modal/risiko: entry, SL, TP1, lot, WR & rata-rata R
+historis (≈ uang per sinyal), untung di TP1 / rugi di SL, level TUTUP, dan status (masih bisa entry bila harga ±0,25R
+dari entry; terlambat; TP1 sudah kena → jangan entry baru). Tanpa sinyal 💰 terbuka: "jangan entry dulu". Baris
+"Kesimpulan" jawaban berita juga ditebalkan.
+
+## Aplikasi: waktu notifikasi & tampilan (3.2)
+- Cloud mengecek pasar tiap 10 menit (:02, :12, … :52). TP1/SL/SL+ terdeteksi di cek berikutnya (≤ 10 menit);
+  sinyal TUTUP (close H1 menembus channel) dihitung saat candle H1 tutup → terkirim ±:02 jam berikutnya.
+- Aplikasi ntfy (langganan topik yang sama persis, **tanpa** `-data`) menerima teks dalam hitungan detik. Aplikasi XAU
+  Signal sendiri mengecek :05, :15, … memakai alarm tepat waktu (3.2; sebelumnya alarm biasa yang bisa ditunda Doze).
+- Floating di kartu sinyal aktif dalam uang (lot × posisi yang masih terbuka), peringatan bila harga sudah melewati
+  SL+/SL; ringkasan "Hari ini" dirinci per pair; ⚙️ **Pair yang saya ikuti** (XAU/USD, BTC/USD, Forex gap) menyaring
+  sinyal, notifikasi, dan ringkasan tab Sinyal.
+- Pesan TUTUP yang terlewat (HP offline > 12 jam, cache ntfy habis) dikenali dari heartbeat (`exits`): sinyal itu
+  tidak lagi dihitung aktif dan riwayatnya ditandai SELESAI.
+- Aplikasi 3.4: sinyal kembar (beberapa set, entry sama) memakai **satu** harga TUTUP = set paling lambat (tutup
+  paling akhir; di data paling untung, `docs/RISET_DATA_EKSTERNAL.md` bagian 14). Notifikasi TUTUP aplikasi hanya
+  untuk set itu. Cloud (setelah merge) juga hanya mengirim 1 teks ntfy per sinyal kembar: sinyal dari set pertama, TP1/SL+ dan TUTUP dari set paling lambat; data `-data` tetap per set. Statistik (3.5): PROFIT = TP1 kena, MINUS = SL /
+  TUTUP sebelum TP1; uang tetap dari hasil nyata skema. Riwayat: 4 kartu + tombol "Load more".
+
 ## Filter BTC dari riset data eksternal
 
 Dari `docs/RISET_DATA_EKSTERNAL.md` (hanya dua filter yang lolos kriteria ketat; untuk XAU tidak ada):

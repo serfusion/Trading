@@ -58,6 +58,12 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                     "Lot per posisi, akun Cent, 5 posisi, SL \$45. * = lot minimum. lewati = modal terlalu kecil.",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
+                Text(
+                    "Tabel ini hanya CONTOH (SL \$45). Lot yang dipakai = lot di kartu sinyal: dihitung dari jarak SL " +
+                        "sinyal itu. SL lebih jauh → lot lebih kecil, rugi Rupiah tetap ±0,25% / 0,5% modal. " +
+                        "Mis. Rp50 jt, 0,5%: SL \$45 → 0.06 lot, SL \$55 → 0.05 lot.",
+                    style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold
+                )
             }
         },
         confirmButton = { TextButton(onClick = onDismiss) { Text("Saya mengerti", fontWeight = FontWeight.Bold) } }

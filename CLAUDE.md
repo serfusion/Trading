@@ -12,7 +12,9 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
 - **Keputusan pengguna yang masih ditunggu** (jangan dikerjakan tanpa izin): (1) ganti bot live ke skema A / risiko
   0,25% (opsi `tp1_r: 0`); (2) tab Tabungan Emas & Berbagi di Android; (3) nasib 2 bundle mentah yang belum
   di-push (Lin-Thet-Zaw, P1Piyush) dan 58 bundle mentah yang sudah ada di git (berisi kredensial asli penulis);
-  (4) [SELESAI 28 Sep: filter BTC funding + September, tab Tanya berbasis data, aplikasi 2.8–2.9; PR serfusion/Trading#13 menunggu merge].
+  (4) [SELESAI 28 Sep: filter BTC funding + September, tab Tanya berbasis data, aplikasi 2.8–3.0; PR serfusion/Trading#13
+di-merge 28 Sep 07:21 UTC; aplikasi 3.1–3.2 (blok 🎯 REKOMENDASI ENTRY di Tanya, floating uang, pair diikuti,
+alarm tepat waktu) hanya menyentuh `android/`].
   Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
 
 ## Riset data eksternal (berjalan sejak 28 Sep 2026 — laporan `docs/RISET_DATA_EKSTERNAL.md`)

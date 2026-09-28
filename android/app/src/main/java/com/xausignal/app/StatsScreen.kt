@@ -34,18 +34,20 @@ import java.util.Locale
 fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
     var period by remember { mutableIntStateOf(0) }
     var kind by remember { mutableIntStateOf(0) }
-    val symbols = listOf("Semua") + events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted()
+    val symbols = remember(events) {
+        listOf("Semua") + events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted()
+    }
     val symbol: String? = symbols.getOrNull(kind)?.takeIf { kind > 0 }
     val star: Boolean? = null
     val idFmt = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale("id"))
-    val stats = when (period) {
+    val stats = remember(events, money, period, symbol) { when (period) {
         0 -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString() },
             { LocalDate.parse(it).format(idFmt) }, star, symbol)
         1 -> SignalRepository.periodStats(events, money, ::weekKey,
             { "Minggu " + LocalDate.parse(it).format(idFmt) }, star, symbol)
         else -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) },
             { LocalDate.parse("$it-01").format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id"))) }, star, symbol)
-    }
+    } }
     val all = stats.fold(PeriodStats("Total", 0, 0, 0.0, 0.0)) { acc, s ->
         PeriodStats("Total", acc.wins + s.wins, acc.losses + s.losses, acc.profit + s.profit, acc.loss + s.loss)
     }
@@ -130,12 +132,12 @@ private fun TotalCard(s: PeriodStats, money: MoneySettings) {
         WinBar(s.wins, s.losses)
         MetricRow {
             Metric("Sinyal", "${s.total}", compact = true)
-            Metric("Menang", "${s.wins}", BuyColor, compact = true)
-            Metric("Kalah", "${s.losses}", SellColor, compact = true)
+            Metric("Profit", "${s.wins}", BuyColor, compact = true)
+            Metric("Minus", "${s.losses}", SellColor, compact = true)
             Metric("Win rate", "$rate%", Gold, compact = true)
         }
         KeyValue("Total profit", moneyMain(s.profit, money), BuyColor, bold = true)
-        KeyValue("Total rugi", moneyMain(s.loss, money), SellColor, bold = true)
+        KeyValue("Total minus", moneyMain(s.loss, money), SellColor, bold = true)
     }
 }
 
@@ -147,7 +149,7 @@ private fun PeriodCard(s: PeriodStats, money: MoneySettings) {
             Column(Modifier.weight(1f)) {
                 Text(s.label, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                 Text(
-                    "${s.total} sinyal • ${s.wins} menang • ${s.losses} kalah • WR $rate%",
+                    "${s.total} sinyal • ${s.wins} profit • ${s.losses} minus • WR $rate%",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
             }
@@ -162,8 +164,8 @@ private fun PeriodCard(s: PeriodStats, money: MoneySettings) {
         }
         WinBar(s.wins, s.losses)
         MetricRow {
-            Metric("Profit", moneyMain(s.profit, money), BuyColor)
-            Metric("Rugi", moneyMain(s.loss, money), SellColor)
+            Metric("Total profit", moneyMain(s.profit, money), BuyColor)
+            Metric("Total minus", moneyMain(s.loss, money), SellColor)
         }
     }
 }
