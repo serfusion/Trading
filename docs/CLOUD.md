@@ -32,9 +32,12 @@ menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py
 | XAU konfluensi + ⭐ | 49% | +0,31R | 💰💰💰⭐ |
 | XAU konfluensi | 48% | +0,09R | 💰⭐ |
 
-**Skema pilihan pengguna** (aplikasi → Pengaturan): posisi di TP1 = 1 (sisa 4, bawaan) atau 3 (sisa 2); SL+ saat TP1
-kena (bawaan) atau saat profit 0,7R. Event TUTUP membawa `r_by` = hasil R untuk keempat skema (`scheme_r`), event
-info `kind: be07` dikirim saat profit 0,7R tercapai. Riset `research/early_be.py` (XAU 2012–2026 / BTC 2016–2026):
+**Skema** (aplikasi 2.8+): tetap **1 posisi TP1 (1R) + 4 posisi running sampai sinyal TUTUP, SL+ ke entry saat TP1
+kena** — pilihan "3 (sisa 2)" dan "SL+ 0,7R" dihapus atas permintaan pengguna (trading manual). Cloud tetap mengirim
+`r_by` (hasil R keempat skema) di event TUTUP dan event info `kind: be07`, tetapi aplikasi 2.8 hanya memakai skema
+bawaan. Kartu sinyal aktif menampilkan **level TUTUP** (heartbeat `exits`: low/high 15/20/30 candle H1 terakhir per
+set) — 4 posisi running ditutup saat close H1 menembus level itu. SL+ bertangga / TP2-TP3 / trailing ATR diuji dan
+lebih buruk (`docs/RISET_DATA_EKSTERNAL.md` §10). Riset `research/early_be.py` (XAU 2012–2026 / BTC 2016–2026):
 
 | Skema | XAU WR | XAU total | BTC WR | BTC total |
 |---|---|---|---|---|
