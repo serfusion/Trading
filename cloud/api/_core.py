@@ -175,6 +175,72 @@ def star_check(closed: list[Bar], direction: str, ema_span: int = 50, h4_n: int 
     return bool(d1_ok and h4_ok), note
 
 
+def _ema(values: list[float], n: int) -> list[float]:
+    a, out = 2 / (n + 1), []
+    for v in values:
+        out.append(v if not out else a * v + (1 - a) * out[-1])
+    return out
+
+
+def konf_check(closed: list[Bar], direction: str) -> bool:
+    """Konfluensi 3/3 (research/strategy_lab2.trend_states): EMA50 vs EMA200 H1, Supertrend 3xATR(14) H1, dan
+    momentum 60 hari (close D1 kemarin vs 60 hari sebelumnya) semuanya searah dengan sinyal."""
+    d = 1 if direction == "BUY" else -1
+    c = [b.c for b in closed]
+    if len(c) < 210:
+        return False
+    if (1 if _ema(c, 50)[-1] > _ema(c, 200)[-1] else -1) != d:
+        return False
+    # ATR Wilder 14 (TR candle pertama memakai close sendiri) + Supertrend 3x
+    atr, st, fu, fd = 0.0, 1, 0.0, 0.0
+    for i, b in enumerate(closed):
+        pc = closed[i - 1].c if i else b.c
+        tr = max(b.h - b.l, abs(b.h - pc), abs(b.l - pc))
+        atr = tr if i == 0 else atr + (tr - atr) / 14
+        hl2 = (b.h + b.l) / 2
+        up, dn = hl2 - 3 * atr, hl2 + 3 * atr
+        if i == 0:
+            fu, fd = up, dn
+            continue
+        pfu, pfd = fu, fd
+        fu = max(up, pfu) if closed[i - 1].c > pfu else up
+        fd = min(dn, pfd) if closed[i - 1].c < pfd else dn
+        st = 1 if b.c > pfd else (-1 if b.c < pfu else st)
+    if st != d:
+        return False
+    daily: dict = {}
+    for b in closed:
+        if b.t.date() < closed[-1].t.date():
+            daily[b.t.date()] = b.c
+    p = [daily[k] for k in sorted(daily)]
+    if len(p) < 61:
+        return False
+    return (1 if p[-1] > p[-61] else -1 if p[-1] < p[-61] else 0) == d
+
+
+# Statistik historis per kategori (research/badge_stats.py & research/gap_years.py): (WR %, R/sinyal, n, periode)
+STATS = {
+    "XAU konf+⭐": (49.2, 0.309, 850, "2012–2026"),
+    "XAU konf": (48.1, 0.093, 335, "2012–2026"),
+    "XAU ⭐": (42.7, -0.062, 356, "2012–2026"),
+    "XAU biasa": (43.5, -0.005, 1875, "2012–2026"),
+    "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
+    "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
+    "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),
+    "GAP AUD/USD": (90.5, 0.248, 21, "2013–2022"),
+    "GAP EUR/CHF": (74.4, 0.134, 39, "2013–2022"),
+}
+
+
+def badges(cat: str) -> dict:
+    """⭐ = win rate (≥75% ⭐⭐⭐, ≥60% ⭐⭐, ≥48% ⭐), 💸 = profit/sinyal (≥0,25R 💸💸💸, ≥0,12R 💸💸, ≥0,05R 💸)."""
+    wr, avg, n, period = STATS[cat]
+    stars = 3 if wr >= 75 else 2 if wr >= 60 else 1 if wr >= 48 else 0
+    money = 3 if avg >= 0.245 else 2 if avg >= 0.12 else 1 if avg >= 0.05 else 0
+    return {"cat": cat, "wr": wr, "avg_r": avg, "n_hist": n, "period": period, "stars": stars, "money": money,
+            "badge": "⭐" * stars + "💸" * money, "star": money > 0}
+
+
 # ---------------------------------------------------------------- layanan luar
 class TwelveData:
     def __init__(self, api_key: str, symbol: str = "XAU/USD"):
@@ -212,6 +278,12 @@ class Supabase:
 
     def save_control(self, data: dict) -> None:
         self.save_state(data, "control")
+
+    def get_gap_state(self) -> dict:
+        return self.get_state("gap")
+
+    def save_gap_state(self, data: dict) -> None:
+        self.save_state(data, "gap")
 
     def log(self, kind: str, payload: dict) -> None:
         headers = {**self.headers, "Prefer": "return=minimal"}
@@ -362,6 +434,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
+              "cat": v.get("cat", ""), "point_value": 1.0,
               "tp1_time": v.get("be_bar"), "reason": why}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
@@ -435,6 +508,9 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
                 is_star, star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
+                is_konf = konf_check(closed, d)
+                meta = badges("XAU " + ("konf+⭐" if is_star and is_konf else "konf" if is_konf
+                                        else "⭐" if is_star else "biasa"))
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
@@ -446,8 +522,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                       "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
                       "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-                      "star": is_star, "star_note": star_note}
-                text = (f"{'⭐ ' if is_star else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                      "star_note": star_note, "point_value": 1.0, **meta}
+                text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                        f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
+                        f"{meta['n_hist']} sinyal)\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
@@ -455,7 +533,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": is_star,
+                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
                      "bar_close": iso(closed[-1].t + tf)}
                 existing = live_positions(magic) if live else []
                 if live and existing != []:

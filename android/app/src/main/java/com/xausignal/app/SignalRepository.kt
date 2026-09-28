@@ -52,6 +52,30 @@ data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Dou
 
 fun SignalEvent.isStar(): Boolean = json.optBoolean("star", false)
 
+/** Simbol sinyal (XAU/USD bila kosong). */
+fun SignalEvent.symbol(): String = str("symbol").ifBlank { "XAU/USD" }
+
+/** Harga dengan digit sesuai instrumen: JPY 3, forex lain 5, emas/indeks 2. */
+fun SignalEvent.price(key: String): String {
+    val v = num(key) ?: return "-"
+    val sym = symbol()
+    val digits = if (sym.contains("JPY")) 3 else if (v < 20) 5 else 2
+    return fmt(v, digits)
+}
+
+/** Jumlah ⭐ (win rate historis) dan 💸 (profit historis). Sinyal lama: ⭐ = tanda kuat lama. */
+fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
+fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)
+
+/** "WR 82% • +0,26R/sinyal (2012–2020, 34 sinyal)" atau kosong untuk sinyal lama. */
+fun SignalEvent.statsLine(): String {
+    if (!json.has("wr")) return ""
+    val avg = json.optDouble("avg_r")
+    val sign = if (avg > 0) "+" else ""
+    return "WR ${fmt(json.optDouble("wr"), 0)}% • ${sign}${fmt(avg, 2)}R/sinyal " +
+        "(${str("period")}, ${json.optInt("n_hist")} sinyal)"
+}
+
 private val NEW_YORK: ZoneId = ZoneId.of("America/New_York")
 private val STAMP: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm")
 
@@ -143,7 +167,8 @@ object SignalRepository {
         val risk = e.num("risk_points") ?: return null
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
-        return r * risk * legs * Math.round(m.lotFor(e.isStar()) * 100.0)
+        val pointValue = e.num("point_value") ?: 1.0     // forex: nilai 1,0 harga per 0,01 lot
+        return r * risk * legs * Math.round(m.lotFor(e.isStar()) * 100.0) * pointValue
     }
 
     fun toIdr(amount: Double, m: MoneySettings): Double =

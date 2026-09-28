@@ -51,7 +51,7 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { Selector(listOf("Semua", "⭐ saja", "Biasa"), kind) { kind = it } }
+        item { Selector(listOf("Semua", "💸 teruji", "Lainnya"), kind) { kind = it } }
         item { Selector(listOf("Harian", "Mingguan", "Bulanan"), period) { period = it } }
         item { TotalCard(all, money) }
         item {

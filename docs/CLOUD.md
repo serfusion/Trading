@@ -14,6 +14,26 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
 **Tanda ⭐**: semua sinyal dikirim; sinyal yang searah tren D1 (close D1 kemarin vs EMA50 D1) dan
 menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`).
 
+**Badge di setiap sinyal** (dari data historis multi-tahun, `research/badge_stats.py` & `research/gap_years.py`):
+⭐ = win rate (⭐⭐⭐ ≥75%, ⭐⭐ ≥60%, ⭐ ≥48%), 💸 = profit rata-rata per sinyal (💸💸💸 ≥+0,25R, 💸💸 ≥+0,12R,
+💸 ≥+0,05R). Sinyal juga membawa `wr`, `avg_r`, `n_hist`, `period`.
+
+| Sinyal | WR | Profit/sinyal | Badge |
+|---|---|---|---|
+| XAU konfluensi + ⭐ (EMA50/200, Supertrend, momentum 60 hari + tren D1 & H4) | 49% | +0,31R | ⭐💸💸💸 |
+| XAU konfluensi saja | 48% | +0,09R | ⭐💸 |
+| XAU ⭐ saja / biasa | 43–44% | ±0 | – |
+| Gap pekan AUD/USD | 90% | +0,25R | ⭐⭐⭐💸💸💸 |
+| Gap pekan USD/JPY | 82% | +0,26R | ⭐⭐⭐💸💸💸 |
+| Gap pekan EUR/JPY | 84% | +0,14R | ⭐⭐⭐💸💸 |
+| Gap pekan AUD/JPY | 86% | +0,10R | ⭐⭐⭐💸 |
+| Gap pekan EUR/CHF | 74% | +0,13R | ⭐⭐💸💸 |
+
+**Sinyal gap pekan forex** (`cloud/api/_gap.py`, env `GAP_SIGNALS=0` untuk mematikan): 1 jam setelah pasar forex
+buka (Minggu 17:00 New York), bila gap ≥ 0,5 × range harian 14 hari → lawan gap, TP 50% gap tertutup, SL 1× gap,
+tutup otomatis 24 jam. Data 5 pair hanya diambil di jendela buka pekan atau saat ada posisi gap terbuka (hemat
+kuota Twelve Data).
+
 **Jam pasar & gap**: candle saat pasar tutup (Jumat 17:00 – Minggu 18:00 New York, dan jeda harian
 17:00–18:00) dibuang, karena feed tetap mengirim candle datar yang membuat ATR/channel palsu
 (kasus Minggu 27 Sep 2026 22:02 UTC: BUY 4279,32 dengan SL hanya $1,23). Sinyal di **3 candle H1 pertama

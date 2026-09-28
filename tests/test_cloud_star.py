@@ -54,7 +54,7 @@ def test_star_only_skips_non_star_signals_and_marks_star():
     signals = [e for e in pub.events if e["type"] == "signal"]
     skipped = [p for k, p in store.logs if k == "skip"]
     assert signals and skipped
-    assert all(e["star"] and "✓" in e["star_note"] and "✗" not in e["star_note"] for e in signals)
+    assert all(e["cat"] in ("XAU konf+⭐", "XAU ⭐") and "✗" not in e["star_note"] for e in signals)
     closes = {e["id"] for e in pub.events if e["type"] == "close"}
     assert closes <= {e["id"] for e in signals}                  # hanya sinyal ⭐ yang dikelola & ditutup
 

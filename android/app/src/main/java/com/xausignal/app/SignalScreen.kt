@@ -87,7 +87,7 @@ fun OpenSignalCard(signal: SignalEvent, heartbeat: SignalEvent?, slPlus: Boolean
         Row(verticalAlignment = Alignment.Bottom) {
             Column(Modifier.weight(1f)) {
                 Text("Entry", style = MaterialTheme.typography.labelMedium, color = Muted)
-                Text(fmt(entry), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+                Text(signal.price("entry"), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
             }
             if (floating != null) {
                 Text(
@@ -98,26 +98,32 @@ fun OpenSignalCard(signal: SignalEvent, heartbeat: SignalEvent?, slPlus: Boolean
             }
         }
         MetricRow {
-            Metric("SL", fmt(signal.num("sl")), SellColor, compact = true)
-            Metric("TP1", fmt(signal.num("tp1")), BuyColor, compact = true)
+            Metric("SL", signal.price("sl"), SellColor, compact = true)
+            Metric(if (signal.isGap()) "TP" else "TP1", signal.price("tp1"), BuyColor, compact = true)
             Metric("Lot", legsLot(signal, money), Gold, compact = true)
         }
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
     }
 }
 
-/** Baris atas kartu sinyal: arah, ⭐, waktu. */
+/** Baris atas kartu sinyal: arah, simbol, ★ (win rate) & 💸 (profit), waktu, lalu baris statistik historis. */
 @Composable
 private fun SignalHeader(signal: SignalEvent) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Pill(signal.dir, dirColor(signal.dir), solid = true)
-        if (signal.json.optBoolean("star", false)) Pill("⭐", Gold)
+        Text(signal.symbol(), fontWeight = FontWeight.Bold)
+        if (signal.stars() > 0) Text("★".repeat(signal.stars()), color = Gold, fontWeight = FontWeight.Bold)
+        if (signal.moneyBadge() > 0) Text("💸".repeat(signal.moneyBadge()))
         Text(
             signal.timeText(), style = MaterialTheme.typography.labelMedium, color = Muted,
             modifier = Modifier.weight(1f), textAlign = TextAlign.End
         )
     }
+    val stats = signal.statsLine()
+    if (stats.isNotBlank()) Text(stats, style = MaterialTheme.typography.bodySmall, color = Gold)
 }
+
+private fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
 fun weekKey(t: ZonedDateTime): String =
     t.toLocalDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toString()
@@ -190,9 +196,9 @@ fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: Mone
     val result = if (win) BuyColor else SellColor
     AppCard(accent = if (close == null) dirColor(signal.dir) else result) {
         SignalHeader(signal)
-        KeyValue("Entry", "${fmt(signal.num("entry"))} • ${legsLot(signal, money)}", bold = true)
-        KeyValue("SL / TP1", "${fmt(signal.num("sl"))} / ${fmt(signal.num("tp1"))}")
-        KeyValue(
+        KeyValue("Entry", "${signal.price("entry")} • ${legsLot(signal, money)}", bold = true)
+        KeyValue(if (signal.isGap()) "SL / TP" else "SL / TP1", "${signal.price("sl")} / ${signal.price("tp1")}")
+        if (!signal.isGap()) KeyValue(
             "TP1 + SL+",
             when {
                 tp1 != null -> "✓ ${tp1.timeText()}"
@@ -204,7 +210,7 @@ fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: Mone
         if (close == null) {
             KeyValue("Status", "berjalan", Gold, bold = true)
         } else {
-            KeyValue("Tutup", "${fmt(close.num("price"))} • ${close.timeText()}")
+            KeyValue("Tutup", "${close.price("price")} • ${close.timeText()}")
             KeyValue("Sebab", closeReason(close), Muted)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Pill(if (win) "MENANG" else "KALAH", result, solid = true)

@@ -40,8 +40,11 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
             Column(Modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text("• Bukan saran investasi. Hasil tidak dijamin, bisa rugi.")
                 Text("• Selalu pasang SL sesuai sinyal. Jangan tambah posisi saat minus.")
+                Text("• ★ kuning = win rate historis (★★★ ≥75%, ★★ ≥60%, ★ ≥48%).", color = Gold)
+                Text("• 💸 = profit rata-rata historis per sinyal (💸💸💸 ≥+0,25R, 💸💸 ≥+0,12R, 💸 ≥+0,05R).")
+                Text("• Angka WR & profit dari data 2007–2026, bukan jaminan hasil ke depan.")
                 Text("• Lot akun Cent, 5 posisi/sinyal, contoh SL \$45:", fontWeight = FontWeight.Bold)
-                TableRow("Modal", "Biasa", "⭐", header = true)
+                TableRow("Modal", "Lainnya", "💸", header = true)
                 LineDivider()
                 for (jt in 5..100 step 5) {
                     val modal = jt * 1_000_000.0
@@ -52,7 +55,7 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                     )
                 }
                 Text(
-                    "Rugi maks per sinyal ±0,5% modal (⭐) & ±0,25% (biasa). * = lot minimum, risiko sedikit " +
+                    "Rugi maks per sinyal ±0,5% modal (💸) & ±0,25% (lainnya). * = lot minimum, risiko sedikit " +
                         "di atas 0,5%. lewati = modal terlalu kecil untuk sinyal biasa. SL lebih lebar → kecilkan lot.",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
