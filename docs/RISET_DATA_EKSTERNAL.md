@@ -309,3 +309,28 @@ berikutnya, SL dicek lebih dulu. Keluaran: `docs/eksternal/hasil_sl_tangga.txt`.
 - Kesimpulan: **pertahankan skema bawaan**. (Skema A tanpa TP1 memberi total terbesar tetapi WR turun ke 34–37%
   dan drawdown lebih dalam — sudah tercatat sebagai keputusan pengguna yang menunggu.)
 
+
+## 11. Konsep dashboard "SMC ELITE PRO v9.1" (tangkapan layar pengguna 28 Sep 2026) — `research/smc_dashboard.py`
+
+Kode indikator tidak dipakai. Setiap baris dashboard ditulis ulang sebagai aturan tanpa look-ahead lalu diuji
+sebagai filter sinyal 💰 dengan kriteria konsisten yang sama (keluaran lengkap: `docs/eksternal/hasil_smc_dashboard.txt`).
+
+| Baris dashboard | Aturan yang diuji | XAU 💰 | BTC 💰 |
+|---|---|---|---|
+| Higher Timeframe | searah tren mingguan (SMA20 W) / harian (SMA50 D) | tidak konsisten | tidak konsisten (harian: uji +0,12 vs +0,12) |
+| PD Position (discount/premium, OTE) | BUY hanya di discount, SELL di premium (range 20 hari / 1 minggu) | tidak konsisten; hanya 41 sinyal lolos | tidak konsisten |
+| Market Structure (HH/HL, LH/LL) | struktur swing H1 searah / tidak berlawanan | lebih buruk (buang sinyal bagus) | lebih buruk |
+| Liquidity Pools (BSL/SSL) | BUY bila swing high belum tersapu di atas > swing low di bawah | lebih buruk | lebih buruk |
+| FVG / displacement | FVG searah di 3 candle terakhir | lebih buruk | tidak konsisten |
+| Zone Status (FVG lawan) | lewati bila ada FVG lawan belum terisi di depan harga (100 candle) | lolos kriteria (buang 104 sinyal, −0,07R; uji nyata +324R → +332R) | tidak konsisten |
+| Session | sudah diuji di bagian 4 | tidak konsisten | — |
+
+Cek ketahanan FVG lawan (XAU 💰): hanya lolos di jendela 100 candle; 75, 150, 200 candle gagal (dibuang +0,02 /
+−0,01 / +0,11R). Dengan 20 uji sekaligus, satu "lolos" di p = 0,023 wajar terjadi kebetulan → **tidak dipasang**.
+Catatan menarik: untuk SEMUA sinyal (termasuk "biasa" yang tidak dikirim), "BUY di premium" (ikut momentum) justru
+konsisten lebih baik — kebalikan dari saran SMC "beli di discount" — dan sinyal biasa yang searah tren harian lebih
+baik; kategori konf/⭐ yang sudah dipakai cloud menangkap efek tren itu.
+
+Kesimpulan: tidak ada konsep SMC dashboard yang menaikkan hasil sinyal 💰 secara andal. Pelajaran yang diambil
+hanya tampilan: status ringkas sekilas (WAIT / aktif), angka TUTUP besar, dan "profit terkunci" di kartu sinyal
+(aplikasi 3.3). Persentase zona ("T3 74%") di dashboard itu tidak bisa diverifikasi dari luar.

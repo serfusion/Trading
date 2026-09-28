@@ -108,6 +108,34 @@ fun SignalEvent.price(key: String): String = priceText(symbol(), num(key))
 fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
 fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)
 
+/** Sinyal gap pekan forex (1 posisi, TP & SL, tutup otomatis 24 jam). */
+fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
+
+/** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, atau GAP (forex gap pekan). */
+fun SignalEvent.pairGroup(): String = symbol().let {
+    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC")) "BTC" else "GAP"
+}
+
+/** Waktu event (UTC), null bila tidak terbaca. */
+fun SignalEvent.instant(): java.time.Instant? = try {
+    OffsetDateTime.parse(str("time").replace(" ", "T")).toInstant()
+} catch (e: Exception) {
+    null
+}
+
+/**
+ * Pesan TUTUP terlewat (mis. HP lama tidak mengecek > 12 jam sehingga cache ntfy habis): heartbeat cloud terbaru
+ * (≥ 15 menit setelah sinyal) memuat daftar posisi terbuka (`exits`) dan sinyal ini tidak ada di sana.
+ */
+fun SignalEvent.closedByHeartbeat(hb: SignalEvent?): Boolean {
+    val arr = hb?.json?.optJSONArray("exits") ?: return false
+    if (isGap()) return false
+    val t0 = instant() ?: return false
+    val t1 = hb?.instant() ?: return false
+    if (t1.isBefore(t0.plusSeconds(15 * 60))) return false
+    return (0 until arr.length()).none { arr.optJSONObject(it)?.optString("id") == id }
+}
+
 /** "WR 82% • +0,26R/sinyal (2012–2020, 34 sinyal)" atau kosong untuk sinyal lama. */
 fun SignalEvent.statsLine(): String {
     if (!json.has("wr")) return ""
@@ -312,6 +340,14 @@ object SignalRepository {
     }
     fun topic(): String = prefs?.getString("topic", "") ?: ""
 
+    /** Pair yang diikuti (XAU, BTC, GAP): sinyal, notifikasi, dan ringkasan di tab Sinyal. Bawaan: semua. */
+    fun followed(): Set<String> =
+        (prefs?.getString("follow", null) ?: "XAU,BTC,GAP").split(",").filter { it.isNotBlank() }.toSet()
+
+    fun saveFollowed(groups: Set<String>) {
+        prefs?.edit()?.putString("follow", groups.joinToString(","))?.apply()
+    }
+
     fun termsAccepted(): Boolean = prefs?.getBoolean("terms_ok", false) ?: false
     fun acceptTerms() {
         prefs?.edit()?.putBoolean("terms_ok", true)?.apply()
@@ -362,11 +398,15 @@ object SignalRepository {
         return event
     }
 
-    /** Semua sinyal (per set) yang belum punya sinyal TUTUP. */
-    fun openSignals(events: List<SignalEvent>): List<SignalEvent> {
+    /**
+     * Semua sinyal (per set) yang belum punya sinyal TUTUP. Dengan [prices] (heartbeat per simbol), sinyal yang
+     * menurut heartbeat terbaru sudah tidak terbuka di cloud (pesan TUTUP terlewat) juga tidak dihitung aktif.
+     */
+    fun openSignals(events: List<SignalEvent>, prices: Map<String, SignalEvent> = emptyMap()): List<SignalEvent> {
         val closed = events.filter { it.type == "close" }.map { it.id }.toSet()
         return events.filter {
-            it.type == "signal" && (it.status == "signal" || it.status == "opened") && it.id !in closed && !it.isVoid()
+            it.type == "signal" && (it.status == "signal" || it.status == "opened") && it.id !in closed &&
+                !it.isVoid() && !it.closedByHeartbeat(prices[it.symbol()])
         }
     }
 

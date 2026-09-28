@@ -58,7 +58,8 @@ Tujuan: apakah data luar grafik bisa menyaring sinyal 💰 cloud. Laporan: `docs
 | 5 | Funding/OI BTC (data.binance.vision) | ✅ | **funding "hindari ramai P90" konsisten** di BTC 💰 (tahan 27/27 parameter, data terlambat 24–48 jam, proxy premium index harian): uji nyata 2021–26 +171R → +214R → usulan, menunggu izin; OI tidak berguna; L/S bukti tipis |
 
 | 6 | Putaran 2: GVZ, VIX, yield 2 th (proksi FedWatch), breakeven, musiman | ✅ | **BTC 💰 "lewati September" konsisten** (11/11 tahun); XAU tidak ada (GVZ naik → info di chat) |
-| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ di branch | filter BTC funding + September di cloud; tab **Tanya** berbasis data tanpa AI (`POST /api/chat`); aplikasi 2.9 (ikon baru, skema tetap 1 TP + 4 running, level TUTUP); PR serfusion/Trading#13 — aktif setelah merge |
+| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ live | filter BTC funding + September di cloud; tab **Tanya** berbasis data tanpa AI (`POST /api/chat`); aplikasi 2.9–3.0; PR serfusion/Trading#13 di-merge 28 Sep 07:21 UTC |
+| 8 | Laporan pengguna "hari ini minus gede" (28 Sep) | ✅ | rekonstruksi dari data Yahoo (GC=F, BTC-USD): emas −$135 (−3,1%) sejak Jumat, BTC −2%; tidak ada sinyal XAU 💰 terbuka; BTC BUY 27 Sep kena SL 05:02 WIB (masuk "Hari ini"). Tidak ditemukan bug hitungan; aplikasi 3.2: floating dalam uang, rincian per pair, pair diikuti, alarm tepat waktu, blok 🎯 REKOMENDASI ENTRY di Tanya |
 
 Catatan: `data_mt5/` (ekspor MT5 Exness pengguna) belum diunggah; `TWELVEDATA_API_KEY` sudah diperbarui pengguna tetapi
 sesi ini masih membaca nilai lama (401) → jalankan `python -m research.eksternal_twelvedata` di sesi baru.
