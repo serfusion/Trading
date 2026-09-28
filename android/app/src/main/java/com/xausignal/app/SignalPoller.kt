@@ -80,8 +80,8 @@ object SignalPoller {
 
 /** Alarm latar belakang: cek sinyal beberapa menit setelah cloud memeriksa pasar (:02 & :32 UTC). */
 object PollScheduler {
-    private const val SLOT = 30 * 60_000L
-    private const val OFFSET = 5 * 60_000L   // :05 dan :35 UTC
+    private const val SLOT = 10 * 60_000L
+    private const val OFFSET = 5 * 60_000L   // :05, :15, ... :55 (3 menit setelah cek cloud :02, :12, ...)
 
     fun nextSlot(now: Long): Long = ((now - OFFSET) / SLOT + 1) * SLOT + OFFSET
 
