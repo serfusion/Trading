@@ -53,13 +53,13 @@ def load_calendar(root: Path) -> pd.DataFrame:
         d = d[(d["Currency"] == "USD") & (d["Impact"] == "High")]
         t = pd.to_datetime(d["Combined DateTime"], errors="coerce") - pd.Timedelta(hours=8)
         frames.append(pd.DataFrame({"time": t.dt.tz_localize("UTC"), "event": d["Event"],
-                                    "actual": d["Actual"], "forecast": d["Forecast"]}))
+                                    "actual": d["Actual"], "forecast": d["Forecast"], "previous": d["Previous"]}))
     old = pd.concat(frames)
     old = old[old["time"] < pd.Timestamp("2020-01-01", tz="UTC")]
     e = pd.read_csv(root / "ehsanrs2_forexfactory-scraper/high_impact_events_calendar.csv")
     e = e[e["Currency"] == "USD"]
     new = pd.DataFrame({"time": pd.to_datetime(e["DateTime"], utc=True), "event": e["Event"],
-                        "actual": e["Actual"], "forecast": e["Forecast"]})
+                        "actual": e["Actual"], "forecast": e["Forecast"], "previous": e["Previous"]})
     cal = pd.concat([old, new]).dropna(subset=["time"]).sort_values("time")
     cal = cal.drop_duplicates(["time", "event"])
     cal["group"] = cal["event"].map(_group)

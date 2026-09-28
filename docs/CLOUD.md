@@ -32,9 +32,12 @@ menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py
 | XAU konfluensi + ⭐ | 49% | +0,31R | 💰💰💰⭐ |
 | XAU konfluensi | 48% | +0,09R | 💰⭐ |
 
-**Skema pilihan pengguna** (aplikasi → Pengaturan): posisi di TP1 = 1 (sisa 4, bawaan) atau 3 (sisa 2); SL+ saat TP1
-kena (bawaan) atau saat profit 0,7R. Event TUTUP membawa `r_by` = hasil R untuk keempat skema (`scheme_r`), event
-info `kind: be07` dikirim saat profit 0,7R tercapai. Riset `research/early_be.py` (XAU 2012–2026 / BTC 2016–2026):
+**Skema** (aplikasi 2.8+): tetap **1 posisi TP1 (1R) + 4 posisi running sampai sinyal TUTUP, SL+ ke entry saat TP1
+kena** — pilihan "3 (sisa 2)" dan "SL+ 0,7R" dihapus atas permintaan pengguna (trading manual). Cloud tetap mengirim
+`r_by` (hasil R keempat skema) di event TUTUP dan event info `kind: be07`, tetapi aplikasi 2.8 hanya memakai skema
+bawaan. Kartu sinyal aktif menampilkan **level TUTUP** (heartbeat `exits`: low/high 15/20/30 candle H1 terakhir per
+set) — 4 posisi running ditutup saat close H1 menembus level itu. SL+ bertangga / TP2-TP3 / trailing ATR diuji dan
+lebih buruk (`docs/RISET_DATA_EKSTERNAL.md` §10). Riset `research/early_be.py` (XAU 2012–2026 / BTC 2016–2026):
 
 | Skema | XAU WR | XAU total | BTC WR | BTC total |
 |---|---|---|---|---|
@@ -95,6 +98,9 @@ di aplikasi.
 | `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
 | `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
 | `STAR_ONLY` | (opsional) `0` = semua sinyal, ⭐ ditandai (default); `1` = hanya kirim sinyal ⭐ |
+| `CHAT_KEY` | (opsional) kunci tab **Tanya**; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
+| `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
+| `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -166,6 +172,39 @@ Cara kerja order (sama dengan sinyal & bot PC, skema F):
 Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan header
 `X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
 `{"close_all": true}`.
+
+## Tab Tanya (chat berbasis data, tanpa AI)
+
+`POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab dari **data** saja — tanpa AI, tanpa API berbayar,
+hanya library standar:
+- **statistik historis** `cloud/api/pengetahuan.json` (dibuat `python -m research.event_stats`; versi baca-manusia
+  `pengetahuan.md`): reaksi emas/BTC per berita (NFP, CPI, PPI, FOMC, Retail, PCE, GDP, ISM, Claims) menurut arah &
+  besar kejutan, FOMC sesuai ekspektasi vs kejutan, sinyal 💰 di sekitar berita — setiap peluang disertai n;
+- **konteks langsung**: kalender USD high-impact minggu ini (ForexFactory), posisi bot XAU/BTC (Supabase), filter BTC.
+- **Format ForexFactory "Act: Cons: Prev:"** (kartu 📝 di aplikasi 3.0; Cons & Prev terisi otomatis dari kalender
+  lewat `GET /api/chat`): mis. `NFP Act: 45K Cons: 98K Prev: 162K`, boleh beberapa baris (`Unemployment Rate …` di
+  NFP ditandai info saja). Pemindaian: arah & besar kejutan per baris (persentil terhadap semua rilis sejak 2010),
+  tren vs bulan lalu, kesimpulan arah emas, peluang historis 15 menit – 1 hari, kejutan besar, dan **gabungan Act vs
+  Prev** (mis. NFP lebih lemah dari perkiraan DAN dari bulan lalu: emas naik 1 jam 78%, n=54; bila tidak searah
+  dengan bulan lalu: 54%, n=13). Federal Funds Rate Act/Cons/Prev → keputusan & kejutan FOMC.
+- Pertanyaan bebas juga dikenali: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
+  ("NFP 45K" → Cons & Prev dari kalender minggu ini), waktu ("sebelum" / "sudah keluar"), "sinyal terbuka",
+  "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil otomatis — pengguna mengisi Act.
+
+Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
+`https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
+bukan jaminan profit.
+
+## Filter BTC dari riset data eksternal
+
+Dari `docs/RISET_DATA_EKSTERNAL.md` (hanya dua filter yang lolos kriteria ketat; untuk XAU tidak ada):
+- **Funding ramai** (`cloud/api/_funding.py`): sinyal BTC 💰 BUY dilewati bila rata-rata funding Binance 24 jam
+  berada di 10% tertinggi setahun, SELL dilewati bila di 10% terendah. Funding direkonstruksi dari file harian
+  `premiumIndexKlines` data.binance.vision (api.binance.com diblokir dari server AS), cache di baris Supabase
+  `funding`, diperbarui maks. 1x/jam. Uji nyata 2021–2026 dengan data terlambat 36 jam: +171R → +214R.
+- **September**: sinyal BTC 💰 di bulan September (waktu New York) dilewati (11 dari 11 tahun rugi).
+- Sinyal yang dilewati hanya dicatat (`skip` di tabel log), seperti sinyal tanpa 💰. Hasil `/api/tick` memuat
+  `funding: {day, n, pct}` untuk memantau.
 
 ## Catatan
 - Sinyal BUY/SELL hanya muncul saat breakout H1 (rata-rata ±1–2 kali per minggu). Status/harga

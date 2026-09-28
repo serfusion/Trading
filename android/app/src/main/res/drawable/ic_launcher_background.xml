@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Latar ikon adaptif: gradien hijau -> navy, sama dengan tepi gambar ikon "Dividend Indicator". -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="270"
+        android:centerColor="#FF0C3440"
+        android:endColor="#FF031C3B"
+        android:startColor="#FF22774D"
+        android:type="linear" />
+</shape>

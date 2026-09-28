@@ -44,6 +44,25 @@ Tidak bisa diuji apa adanya: EA terkompilasi (.ex5), kode tersandi (Minhtan2005)
 (sensesVoid, armza332 bagian AI, Pestador, Mnauu2201 bagian Groq), model ML/RL tanpa dilatih ulang (diwakili uji
 walk-forward di `research/github_popular.py`).
 
+## Riset data eksternal (permintaan pengguna 28 Sep 2026: "lanjutkan riset data eksternal")
+
+Tujuan: apakah data luar grafik bisa menyaring sinyal 💰 cloud. Laporan: `docs/RISET_DATA_EKSTERNAL.md`, keluaran
+`docs/eksternal/`. Kriteria "konsisten" ditetapkan sebelum melihat hasil (`research/eksternal.py`).
+
+| # | Data | Status | Hasil |
+|---|---|---|---|
+| 1 | Kalender berita NFP/CPI/FOMC (FF + FRED) | ✅ | tidak ada yang konsisten di XAU 💰; BTC "≤2 jam sebelum berita" lolos di atas kertas tapi 0 efek di uji nyata |
+| 2 | Yield riil DFII10 & dolar DTWEXBGS (FRED, vintage ALFRED) | ✅ | tidak konsisten; varian terbaik latih gagal di uji (overfitting) |
+| 3 | COT CFTC emas & bitcoin | ✅ | tidak konsisten di 💰; "ikut ramai P90" konsisten hanya di SEMUA sinyal XAU (membuang sinyal biasa) |
+| 4 | Sesi + BID/ASK Dukascopy H1 | ✅ | statistik 💰 terulang di data Dukascopy; spread nyata hanya −2,4%; spread 22–23 UTC 2–3× lebih lebar; filter sesi tidak konsisten |
+| 5 | Funding/OI BTC (data.binance.vision) | ✅ | **funding "hindari ramai P90" konsisten** di BTC 💰 (tahan 27/27 parameter, data terlambat 24–48 jam, proxy premium index harian): uji nyata 2021–26 +171R → +214R → usulan, menunggu izin; OI tidak berguna; L/S bukti tipis |
+
+| 6 | Putaran 2: GVZ, VIX, yield 2 th (proksi FedWatch), breakeven, musiman | ✅ | **BTC 💰 "lewati September" konsisten** (11/11 tahun); XAU tidak ada (GVZ naik → info di chat) |
+| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ di branch | filter BTC funding + September di cloud; tab **Tanya** berbasis data tanpa AI (`POST /api/chat`); aplikasi 2.9 (ikon baru, skema tetap 1 TP + 4 running, level TUTUP); PR serfusion/Trading#13 — aktif setelah merge |
+
+Catatan: `data_mt5/` (ekspor MT5 Exness pengguna) belum diunggah; `TWELVEDATA_API_KEY` sudah diperbarui pengguna tetapi
+sesi ini masih membaca nilai lama (401) → jalankan `python -m research.eksternal_twelvedata` di sesi baru.
+
 ## Cara menyiapkan ulang di sesi baru
 
 ```bash
@@ -83,3 +102,17 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   - pipela memperlebar SL setelah entry.
 
   Bot kita dicek: tidak punya pola-pola itu. **Putaran 2 (A2, B2, C2, D2) selesai.**
+- 2026-09-28: riset data eksternal dimulai. Akses jaringan & FRED_API_KEY OK. Tahap 1–3 (berita, FRED, COT) selesai:
+  tidak ada filter konsisten untuk sinyal 💰 XAU. Kerangka + tes: `research/eksternal.py`, `tests/test_eksternal.py`.
+- 2026-09-28: tahap 5 selesai: funding BTC lolos (usulan). File funding Binance hanya bulanan → funding direkonstruksi
+  dari premiumIndexKlines harian (tetap konsisten). Menunggu unduhan Dukascopy untuk tahap 4b.
+- 2026-09-28: pengguna minta "pasang semua" + cari info sebanyak-banyaknya + kotak chat. Putaran 2 selesai (BTC
+  September lolos). Basis pengetahuan berita `cloud/api/pengetahuan.md` (`research/event_stats.py`), chat
+  (`cloud/api/_chat.py`, `chat.py`, tab Tanya di aplikasi 2.7), filter BTC (`cloud/api/_funding.py`) terpasang di
+  branch; 47 tes cloud lulus.
+- 2026-09-28: pengguna: chat "tidak usah pakai AI, hanya analisa berdasarkan data" → `_chat.py` ditulis ulang
+  (kata kunci + `pengetahuan.json`), dependensi anthropic dihapus. Riset SL+ bertangga/0,7R: pertahankan bawaan.
+  Aplikasi 2.8 (ikon, skema tetap, level TUTUP) & 2.9 (teks Tanya). PR serfusion/Trading#13 dibuka.
+- 2026-09-28: pengguna minta isian "Act: Cons: Prev:" + scanning menyeluruh → kalender historis kini memuat Previous
+  (`research/news_data.py`), `pengetahuan.json` + persentil besar kejutan & gabungan Act vs Prev; `_chat.py`
+  memindai format ForexFactory (banyak baris); `GET /api/chat` = kalender minggu ini; aplikasi 3.0 kartu 📝.

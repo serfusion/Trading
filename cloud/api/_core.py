@@ -590,6 +590,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
                 events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
+            elif sig["action"] == "open" and v is None and cfg.get("skip_fn") and (
+                    why := cfg["skip_fn"](sig["dir"], now)):
+                # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": why})
+                events.append(f"{name} {sig['dir']} dilewati: {why}")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
                 meta, star_note = category(closed, d, cfg)
@@ -659,8 +664,19 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     store.save_state(state)
     trend_text = " | ".join(trends)
     mode = "AUTO (cloud)" if live else ("SINYAL (auto dijeda)" if control.get("auto") else "SINYAL (cloud)")
+    # level TUTUP untuk candle H1 yang sedang berjalan: BUY ditutup bila close < low N candle terakhir yang sudah
+    # tutup (SELL: close > high N candle) — sama dengan evaluate() di tick berikutnya. Ditampilkan di kartu sinyal.
+    exits = []
+    for entry_p, exit_p in cfg["sets"]:
+        v = (systems.get(f"T{entry_p}/{exit_p}") or {}).get("virtual")
+        if v and len(closed) >= exit_p:
+            window = closed[-exit_p:]
+            level = min(b.l for b in window) if v["dir"] == "BUY" else max(b.h for b in window)
+            exits.append({"id": v["id"], "set": f"T{entry_p}/{exit_p}", "dir": v["dir"], "level": round(level, 3),
+                          "bars": exit_p})
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
-          "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": []}
+          "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
+          "exits": exits}
     if executor is not None:
         try:
             acc = executor.account()
