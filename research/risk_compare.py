@@ -13,7 +13,7 @@ from .filters import FILTERS, SETS, features, periods
 STAR = FILTERS["KOMBINASI: tren D1 + H4 breakout"]
 
 
-def trades(h1, spread, f, legs, n_entry, n_exit, star_only=False, stop_atr=3.0, be_r=0.1):
+def trades(h1, spread, f, legs, n_entry, n_exit, star_only=False, stop_atr=3.0, be_r=0.1, allow=None):
     """List (t_entry, t_exit, R per sinyal, star). legs: TP dalam R (None = runner); SL+ setelah TP pertama."""
     o, h, l, c = (h1[k].to_numpy(float) for k in ("open", "high", "low", "close"))
     t = h1.index
@@ -28,14 +28,18 @@ def trades(h1, spread, f, legs, n_entry, n_exit, star_only=False, stop_atr=3.0, 
         if d == 0:
             i += 1
             continue
+        if allow is not None and not allow(i):
+            i += 1
+            continue
         star = bool(STAR(f, i, d))
         if star_only and not star:
             i += 1
             continue
-        entry = o[i + 1] + (spread if d > 0 else 0.0)
+        sp = spread[i + 1] if np.ndim(spread) else spread       # spread tetap atau per candle (mis. % harga)
+        entry = o[i + 1] + (sp if d > 0 else 0.0)
         risk = stop_atr * a[i]
         sl = entry - d * risk
-        adj = spread if d < 0 else 0.0
+        adj = sp if d < 0 else 0.0
         open_legs, pnl, hits, j = list(range(len(legs))), 0.0, 0, i + 1
         while open_legs and j < len(c) - 1:
             if (l[j] <= sl) if d > 0 else (h[j] + adj >= sl):
