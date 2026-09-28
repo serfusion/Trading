@@ -334,3 +334,23 @@ baik; kategori konf/⭐ yang sudah dipakai cloud menangkap efek tren itu.
 Kesimpulan: tidak ada konsep SMC dashboard yang menaikkan hasil sinyal 💰 secara andal. Pelajaran yang diambil
 hanya tampilan: status ringkas sekilas (WAIT / aktif), angka TUTUP besar, dan "profit terkunci" di kartu sinyal
 (aplikasi 3.3). Persentase zona ("T3 74%") di dashboard itu tidak bisa diverifikasi dari luar.
+
+## 12. Setelah TP1: tahan running atau ambil profit lebih awal, per kategori — `research/runner_kategori.py`
+
+Pertanyaan pengguna (28 Sep 2026) untuk sinyal SELL format lama (kategori "⭐ saja", tidak dikirim lagi sejak ada 💰)
+yang sudah TP1. Mesin sama dengan `sl_tangga.py`; semua varian identik sampai TP1. Keluaran:
+`docs/eksternal/hasil_runner_kategori.txt`.
+
+| XAU, R/sinyal (total) | bawaan (tahan sampai TUTUP/SL+) | semua tutup di TP1 | TP running 2R | TP running 3R | SL bertangga 1R | trailing 3 ATR |
+|---|---|---|---|---|---|---|
+| konf+⭐ (💰💰💰) | **+0,242 (+327R)** | +0,066 (+142R) | +0,121 (+214R) | +0,162 (+256R) | +0,206 (+302R) | +0,176 (+281R) |
+| konf (💰) | +0,026 (+11R) | −0,018 | +0,017 | +0,070 (+29R) | +0,056 (+24R, 12/14 th lebih baik) | +0,027 |
+| ⭐ saja (tidak dikirim) | −0,056 (−39R) | −0,062 (−50R) | −0,055 | −0,086 | **−0,012 (−8R, 11/15 th lebih baik, DD −39 vs −59)** | −0,054 |
+| biasa (tidak dikirim) | −0,011 | −0,021 | −0,005 | +0,000 | −0,005 | +0,002 |
+
+BTC: bawaan terbaik di semua kategori (mis. konf+⭐ +560R; varian lain ≤ +280R).
+
+Kesimpulan: untuk sinyal 💰💰💰 (konf+⭐) dan semua BTC, **tahan running sampai TUTUP** tetap terbaik; menutup semua
+di TP1 memotong hasil ±55–90%. Untuk kategori "⭐ saja" (sinyal lama), SL bertangga 1R (profit 2R → SL ke +1R,
+3R → SL +2R, …) paling membantu tetapi kategori itu tetap rugi secara rata-rata — alasan kategori ini tidak dikirim
+lagi. XAU konf (💰): tangga/TP 3R sedikit lebih baik; efek kecil, skema bawaan tidak diubah.
