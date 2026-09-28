@@ -43,8 +43,15 @@ object Notifications {
     }
 
     fun info(context: Context, event: SignalEvent) {
-        val title = event.str("text").lineSequence().firstOrNull() ?: APP_NAME
-        post(context, (event.id + "info").hashCode(), title, "SL posisi sisa → entry (SL+)")
+        val m = SignalRepository.money()
+        val title = "🎯 TP1 kena • ${event.str("symbol").ifBlank { "XAU/USD" }}"
+        val left = 5 - m.tpLegs
+        post(context, (event.id + "info").hashCode(), title, "Tutup ${m.tpLegs} posisi, SL+ ke entry untuk $left posisi sisa")
+    }
+
+    fun be07(context: Context, event: SignalEvent) {
+        val sym = event.str("symbol").ifBlank { "XAU/USD" }
+        post(context, (event.id + "be07").hashCode(), "🛡️ SL+ sekarang • $sym", "Profit 0,7R tercapai: pindahkan SL semua posisi ke entry")
     }
 
     fun close(context: Context, event: SignalEvent) {

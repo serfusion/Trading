@@ -13,7 +13,7 @@ from .strategy_lab2 import signals
 warnings.filterwarnings("ignore")
 
 
-def bt(b, li, si, lo, so, be_at, sl_atr=3.0, legs=5):
+def bt(b, li, si, lo, so, be_at, sl_atr=3.0, legs=5, tp_legs=1):
     o, h, l, sp, a, n = b.o, b.h, b.l, b.sp, b.atr, b.n
     out, i = [], 0
     while i < n - 2:
@@ -36,8 +36,8 @@ def bt(b, li, si, lo, so, be_at, sl_atr=3.0, legs=5):
                 break
             fav = (h[k] + adj - entry) if d > 0 else (entry - l[k] - adj)
             if k > j and left == legs and fav >= risk:
-                pnl += risk
-                left -= 1
+                pnl += risk * tp_legs
+                left -= tp_legs
                 be = True
             if k > j and be_at is not None and fav >= be_at * risk:
                 be = True
@@ -63,11 +63,11 @@ def main():
         b = Bars(m.h1, m.spread)
         sig = signals(b, "donchian")
         print(f"### {m.name}")
-        for be in (None, 0.3, 0.5, 0.7):
-            tr = sorted(sum((bt(b, *s, be) for s in sig), []))
+        for tp_legs, be in ((1, None), (1, 0.3), (1, 0.5), (1, 0.7), (3, None), (3, 0.7)):
+            tr = sorted(sum((bt(b, *s, be, tp_legs=tp_legs) for s in sig), []))
             r = np.array([x[1] for x in tr])
             yr = pd.Series(r, index=[x[0].year for x in tr]).groupby(level=0).sum()
-            name = "SL+ setelah TP1 (sekarang)" if be is None else f"SL+ saat profit {be}R"
+            name = f"{tp_legs} TP1 + {5 - tp_legs} sisa, " + ("SL+ setelah TP1" if be is None else f"SL+ di {be}R")
             print(f"  {name:28s} n={len(r)} WR={np.mean(r > 0) * 100:4.1f}% rata={r.mean():+.3f}R "
                   f"total={r.sum():+.0f}R tahun untung {(yr > 0).sum()}/{len(yr)}")
 
