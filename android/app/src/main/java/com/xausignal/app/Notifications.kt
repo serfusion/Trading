@@ -90,7 +90,7 @@ object Notifications {
         if ((SignalRepository.primaryOf(events)[event.id] ?: event.id) != event.id) return
         val m = SignalRepository.money()
         val win = SignalRepository.isWin(event, events)
-        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "MENANG (TP1 kena)" else "KALAH"}"
+        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT (TP1 kena)" else "MINUS"}"
         val amount = SignalRepository.amount(event, m)
         val text = "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
             (event.str("reason").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +

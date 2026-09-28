@@ -217,3 +217,47 @@ def test_heartbeat_level_tutup_sama_dengan_aturan_keluar():
             assert abs(x["level"] - round(want, 3)) < 1e-6
             checked += 1
     assert checked > 10 and closes
+
+
+def test_sinyal_kembar_satu_teks_ntfy():
+    """Sinyal kembar (beberapa set, arah & candle sama): aplikasi ntfy hanya menerima 1 teks sinyal, 1 teks TP1,
+    dan 1 teks TUTUP (saat set terakhir tutup); data -data tetap dikirim untuk semua set."""
+    class TextPub(FakePub):
+        def __init__(self):
+            super().__init__()
+            self.texts = []
+
+        def publish(self, event, text=None, title="", priority=3, tags=None):
+            self.events.append(event)
+            if text:
+                self.texts.append(event)
+
+    df = bars_from_path(trend_path(), start="2026-09-14 00:00", freq="1h", wick=0.5)
+    cfg = {**_core.CFG, "star_only": False, "market_hours": False, "skip_open_bars": 0, "profit_only": False}
+    prices, store, pub = FakePrices(to_bars(df)), FakeStore(), TextPub()
+    now = df.index[60].to_pydatetime()
+    while now <= df.index[-1].to_pydatetime() + timedelta(hours=1):
+        prices.now = now
+        _core.tick(now, prices, store, pub, cfg)
+        now += timedelta(minutes=30)
+    key = lambda e: (e.get("dir"), e["id"].rsplit("-", 1)[-1])  # noqa: E731
+    sigs = [e for e in pub.events if e["type"] == "signal"]
+    groups = {}
+    for e in sigs:
+        groups.setdefault(key(e), []).append(e["id"])
+    assert any(len(v) >= 2 for v in groups.values())                      # ada sinyal kembar di data uji
+    for kind in ("signal", "close"):
+        sent = [e for e in pub.texts if e["type"] == kind]
+        per = {}
+        for e in sent:
+            k = next(g for g, ids in groups.items() if e["id"] in ids)
+            per[k] = per.get(k, 0) + 1
+        assert all(n == 1 for n in per.values()), (kind, per)
+        if kind == "close":                                              # grup yang semua setnya sudah tutup: tepat 1
+            closed_ids = {e["id"] for e in pub.events if e["type"] == "close"}
+            done = [g for g, ids in groups.items() if set(ids) <= closed_ids]
+            assert done and all(per.get(g) == 1 for g in done)
+    closes = [e for e in pub.events if e["type"] == "close"]
+    assert len(closes) == len(sigs) - sum(1 for s in store.state["systems"].values() if s.get("virtual"))
+    tp1 = [e for e in pub.texts if e.get("kind") == "tp1"]
+    assert len({next(g for g, ids in groups.items() if e["id"] in ids) for e in tp1}) == len(tp1)
