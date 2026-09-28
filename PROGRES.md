@@ -54,11 +54,11 @@ Tujuan: apakah data luar grafik bisa menyaring sinyal 💰 cloud. Laporan: `docs
 | 1 | Kalender berita NFP/CPI/FOMC (FF + FRED) | ✅ | tidak ada yang konsisten di XAU 💰; BTC "≤2 jam sebelum berita" lolos di atas kertas tapi 0 efek di uji nyata |
 | 2 | Yield riil DFII10 & dolar DTWEXBGS (FRED, vintage ALFRED) | ✅ | tidak konsisten; varian terbaik latih gagal di uji (overfitting) |
 | 3 | COT CFTC emas & bitcoin | ✅ | tidak konsisten di 💰; "ikut ramai P90" konsisten hanya di SEMUA sinyal XAU (membuang sinyal biasa) |
-| 4 | Sesi + BID/ASK Dukascopy H1 | ⏳ sesi selesai (tidak konsisten); unduhan Dukascopy berjalan (server membatasi laju) | |
+| 4 | Sesi + BID/ASK Dukascopy H1 | ✅ | statistik 💰 terulang di data Dukascopy; spread nyata hanya −2,4%; spread 22–23 UTC 2–3× lebih lebar; filter sesi tidak konsisten |
 | 5 | Funding/OI BTC (data.binance.vision) | ✅ | **funding "hindari ramai P90" konsisten** di BTC 💰 (tahan 27/27 parameter, data terlambat 24–48 jam, proxy premium index harian): uji nyata 2021–26 +171R → +214R → usulan, menunggu izin; OI tidak berguna; L/S bukti tipis |
 
 | 6 | Putaran 2: GVZ, VIX, yield 2 th (proksi FedWatch), breakeven, musiman | ✅ | **BTC 💰 "lewati September" konsisten** (11/11 tahun); XAU tidak ada (GVZ naik → info di chat) |
-| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ di branch | filter BTC funding + September di cloud; chat `POST /api/chat` + tab **Tanya** (aplikasi 2.7, build CI sukses); aktif setelah merge ke produksi Vercel + `ANTHROPIC_API_KEY` |
+| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ di branch | filter BTC funding + September di cloud; tab **Tanya** berbasis data tanpa AI (`POST /api/chat`); aplikasi 2.9 (ikon baru, skema tetap 1 TP + 4 running, level TUTUP); PR serfusion/Trading#13 — aktif setelah merge |
 
 Catatan: `data_mt5/` (ekspor MT5 Exness pengguna) belum diunggah; `TWELVEDATA_API_KEY` sudah diperbarui pengguna tetapi
 sesi ini masih membaca nilai lama (401) → jalankan `python -m research.eksternal_twelvedata` di sesi baru.
@@ -110,3 +110,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   September lolos). Basis pengetahuan berita `cloud/api/pengetahuan.md` (`research/event_stats.py`), chat
   (`cloud/api/_chat.py`, `chat.py`, tab Tanya di aplikasi 2.7), filter BTC (`cloud/api/_funding.py`) terpasang di
   branch; 47 tes cloud lulus.
+- 2026-09-28: pengguna: chat "tidak usah pakai AI, hanya analisa berdasarkan data" → `_chat.py` ditulis ulang
+  (kata kunci + `pengetahuan.json`), dependensi anthropic dihapus. Riset SL+ bertangga/0,7R: pertahankan bawaan.
+  Aplikasi 2.8 (ikon, skema tetap, level TUTUP) & 2.9 (teks Tanya). PR serfusion/Trading#13 dibuka.

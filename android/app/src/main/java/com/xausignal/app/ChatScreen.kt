@@ -53,18 +53,20 @@ import java.util.concurrent.TimeUnit
 data class ChatMessage(val role: String, val text: String, val sources: List<String> = emptyList())
 
 private val EXAMPLES = listOf(
-    "Hasil NFP sudah keluar, apa artinya untuk emas?",
-    "Sebelum FOMC pasar memperkirakan suku bunga naik. Apa yang sebaiknya saya lakukan?",
-    "Berita besar apa saja minggu ini dan kapan saya sebaiknya hati-hati?",
-    "Jelaskan sinyal yang sedang terbuka sekarang.",
+    "NFP 45K vs 98K",
+    "CPI lebih tinggi dari perkiraan",
+    "Sebelum FOMC suku bunga naik, apa yang harus saya lakukan?",
+    "Berita apa saja minggu ini?",
+    "Sinyal terbuka sekarang",
+    "SL+ di 0,7R atau TP1?",
 )
 
 /** Klien POST <alamat cloud>/api/chat. Kunci = topik ntfy (sama dengan cloud). */
 object ChatClient {
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
-        .readTimeout(75, TimeUnit.SECONDS)      // fungsi cloud maksimal 60 detik
-        .callTimeout(80, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .callTimeout(40, TimeUnit.SECONDS)
         .build()
 
     fun ask(history: List<ChatMessage>): ChatMessage {
@@ -133,9 +135,9 @@ fun ChatTab() {
             item {
                 Column(Modifier.padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     NoteBox(
-                        "Tanya soal berita (NFP, CPI, FOMC), sinyal yang terbuka, atau risiko. Jawaban memakai " +
-                            "statistik historis 2012–2026 + berita terbaru dari web. Bukan jaminan profit; " +
-                            "chat tidak membuka order."
+                        "Tanya soal berita (NFP, CPI, FOMC, …), sinyal terbuka, atau skema SL+/TP. Jawaban dihitung " +
+                            "dari data historis 2012–2026 (bukan AI). Setelah berita keluar, ketik angkanya, " +
+                            "mis. \"NFP 45K vs 98K\". Bukan jaminan profit; chat tidak membuka order."
                     )
                     if (SignalRepository.cloudUrl().isBlank()) {
                         NoteBox("Isi \"Alamat cloud\" di Pengaturan (alamat Vercel yang sama dengan cron).", SellColor)
@@ -154,7 +156,7 @@ fun ChatTab() {
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(8.dp)) {
                         CircularProgressIndicator(Modifier.padding(end = 10.dp).size(20.dp), color = Gold,
                             strokeWidth = 2.dp)
-                        Text("Menganalisa data & berita… (bisa sampai 1 menit)", color = Muted,
+                        Text("Menghitung dari data…", color = Muted,
                             style = MaterialTheme.typography.bodySmall)
                     }
                 }

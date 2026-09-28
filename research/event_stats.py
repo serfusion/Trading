@@ -1,6 +1,7 @@
 """Basis pengetahuan statistik berita untuk chat aplikasi (python -m research.event_stats).
 
-Menulis cloud/api/pengetahuan.md: reaksi XAU/USD (M15, 2012-2026) & BTC/USD (H1, 2016-2026) terhadap rilis berita
+Menulis cloud/api/pengetahuan.md (dibaca manusia) dan pengetahuan.json (dibaca penjawab chat tanpa AI,
+cloud/api/_chat.py): reaksi XAU/USD (M15, 2012-2026) & BTC/USD (H1, 2016-2026) terhadap rilis berita
 AS high-impact dari kalender ForexFactory historis (research/news_data.py, dengan actual & forecast), dipisah per
 jenis berita, arah kejutan (actual vs forecast, dilihat dari sisi emas) dan besar kejutan; FOMC dipisah sesuai
 ekspektasi vs kejutan. Ditambah performa sinyal 💰 di sekitar berita dan ringkasan riset filter.
@@ -9,6 +10,7 @@ Semua angka = frekuensi historis (bukan jaminan). Setiap sel menyertakan n (juml
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import numpy as np
@@ -20,6 +22,7 @@ from .news_data import load_calendar
 from .run_scan import DATA, dataset
 
 OUT = Path(__file__).resolve().parent.parent / "cloud" / "api" / "pengetahuan.md"
+OUT_JSON = OUT.with_suffix(".json")
 PRIORITY = ["FOMC", "NFP", "CPI", "PCE", "GDP", "PPI", "RETAIL", "ISM", "CLAIMS"]
 MAIN_EVENT = {"NFP": ["Non-Farm Employment Change"], "CPI": ["Core CPI m/m", "CPI m/m"],
               "PPI": ["Core PPI m/m", "PPI m/m"], "RETAIL": ["Core Retail Sales m/m", "Retail Sales m/m"],
@@ -115,6 +118,70 @@ def _fmt_group(r: pd.DataFrame, keys: list[str], price_now: float) -> list[str]:
     return lines
 
 
+def group_json(r: pd.DataFrame, keys: list[str]) -> dict:
+    """Statistik yang sama dengan _fmt_group dalam bentuk data (untuk penjawab chat tanpa AI, cloud/api/_chat.py)."""
+    out: dict = {"n": int(len(r))}
+    for tag, m in (("bagus", r.bias > 0), ("buruk", r.bias < 0), ("sesuai", ~(r.bias.abs() > 0))):
+        g = r[m]
+        if len(g) < 5:
+            continue
+        d = np.where(g.bias.abs() > 0, g.bias, 1.0)
+        cell: dict = {"n": int(len(g))}
+        for k in keys:
+            if tag == "sesuai":
+                cell[k] = {"naik": round(100 * float((g[k] > 0).mean())), "gerak": round(float(g[k].abs().median()), 3)}
+            else:
+                s = g[k] * d
+                cell[k] = {"searah": round(100 * float((s > 0).mean())), "rata": round(float(s.mean()), 3)}
+        big = g[g.besar]
+        if len(big) >= 5 and tag != "sesuai":
+            s = big[keys[1]] * big.bias
+            cell["besar"] = {"n": int(len(big)), "jendela": keys[1], "searah": round(100 * float((s > 0).mean())),
+                             "rata": round(float(s.mean()), 3)}
+        out[tag] = cell
+    if "lanjut1j" in r and r.lanjut1j.notna().any():
+        out["lanjut1j"] = {"n": int(r.lanjut1j.notna().sum()), "pct": round(100 * float(r.lanjut1j.astype(float).mean()))}
+    return out
+
+
+def fomc_rows(r: pd.DataFrame) -> pd.DataFrame:
+    f = r[r.group == "FOMC"].copy()
+    f["a"], f["f"] = f.actual.map(_num), f.forecast.map(_num)
+    f = f.dropna(subset=["a", "f"])
+    f["prev"] = f.a.shift(1)
+    f["jenis"] = np.where(f.a > f.prev + 1e-9, "naik", np.where(f.a < f.prev - 1e-9, "turun", "tetap"))
+    f["kejutan"] = np.where(abs(f.a - f.f) > 1e-9, np.where(f.a > f.f, "lebih hawkish", "lebih dovish"), "sesuai")
+    return f
+
+
+def fomc_json(r: pd.DataFrame) -> dict:
+    f = fomc_rows(r)
+    rows = []
+    for (jenis, kej), g in f.groupby(["jenis", "kejutan"]):
+        rows.append({"jenis": jenis, "kejutan": kej, "n": int(len(g)), "tanggal": g.time.dt.strftime("%Y-%m-%d").tolist(),
+                     "naik1j": round(100 * float((g["1j"] > 0).mean())), "med1j": round(float(g["1j"].median()), 3),
+                     "naik1h": round(100 * float((g["1h"] > 0).mean())), "med1h": round(float(g["1h"].median()), 3),
+                     "gerak1j": round(float(g["1j"].abs().median()), 3)})
+    return {"n": int(len(f)), "dari": int(f.time.min().year), "sampai": int(f.time.max().year),
+            "kejutan": int((f.kejutan != "sesuai").sum()), "rows": rows}
+
+
+def money_json() -> dict:
+    cal = load_calendar(DATA)
+    m = asset("XAUUSD").money
+    ev = np.unique(cal[cal.group.isin(["NFP", "CPI", "FOMC"])].time.to_numpy("datetime64[ns]").astype(np.int64))
+    t = m.t.to_numpy("datetime64[ns]").astype(np.int64)
+    h = 3600 * 10**9
+
+    def near(lo, hi):
+        return np.searchsorted(ev, t + int(hi * h), side="right") > np.searchsorted(ev, t + int(lo * h), side="right")
+    out = {}
+    for tag, mask in (("sesudah", near(-4, 0)), ("sebelum", near(0, 24)), ("jauh", ~near(-4, 0) & ~near(0, 24))):
+        g = m[mask]
+        out[tag] = {"n": int(len(g)), "wr": round(100 * float((g.R > 0).mean())), "r": round(float(g.R.mean()), 2)}
+    return out
+
+
 def fomc_table(ev: pd.DataFrame, r: pd.DataFrame) -> list[str]:
     f = r[r.group == "FOMC"].copy()
     f["a"], f["f"] = f.actual.map(_num), f.forecast.map(_num)
@@ -196,7 +263,24 @@ def main() -> None:
           "## 4. Ringkasan riset filter (docs/RISET_DATA_EKSTERNAL.md)", *KESIMPULAN, "",
           "## 5. Cara kerja sinyal bot (untuk menjelaskan ke pengguna)", *CARA_KERJA, ""]
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
-    print(f"ditulis {OUT} ({len(r)} rilis XAU, {len(rb)} rilis BTC, {len(OUT.read_text())} karakter)")
+    # versi data untuk penjawab chat tanpa AI (cloud/api/_chat.py)
+    med = {}
+    for grp in PRIORITY:
+        g = ev[(ev.group == grp) & ev.event.isin(MAIN_EVENT[grp][:1])]
+        v = g.surp.abs().replace(0, np.nan).median()
+        med[grp] = None if v != v else float(v)
+    kb = {"meta": {"kalender": f"{ev.time.min():%Y-%m}–{ev.time.max():%Y-%m}",
+                   "xau": f"{px.index[0]:%Y-%m}–{px.index[-1]:%Y-%m}",
+                   "btc": f"{btc.index[0]:%Y-%m}–{btc.index[-1]:%Y-%m}",
+                   "harga_emas": round(price_now, 2), "harga_btc": round(float(btc.close.iloc[-1]), 2)},
+          "nama": NAMA, "median_kejutan": med, "event_utama": {k: v[0] for k, v in MAIN_EVENT.items()},
+          "xau": {grp: group_json(r[r.group == grp], ["15m", "1j", "4j", "1h"]) for grp in PRIORITY
+                  if (r.group == grp).sum() >= 10},
+          "btc": {grp: group_json(rb[rb.group == grp], ["1j", "4j", "1h"]) for grp in ["FOMC", "NFP", "CPI"]
+                  if (rb.group == grp).sum() >= 10},
+          "fomc": fomc_json(r), "sinyal_berita": money_json()}
+    OUT_JSON.write_text(json.dumps(kb, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"ditulis {OUT} ({len(r)} rilis XAU, {len(rb)} rilis BTC, {len(OUT.read_text())} karakter) + {OUT_JSON.name}")
 
 
 CARA_KERJA = [

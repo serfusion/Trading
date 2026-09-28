@@ -1,66 +1,90 @@
-"""Chat asisten (cloud/api/_chat.py) — tanpa jaringan: klien Claude tiruan + transport HTTP tiruan."""
-import json
+"""Tab Tanya tanpa AI (cloud/api/_chat.py): jawaban dari pengetahuan.json + konteks langsung. Tanpa jaringan."""
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from types import SimpleNamespace as NS
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cloud" / "api"))
 import _chat  # noqa: E402
 
-
-class FakeClient:
-    def __init__(self, responses):
-        self.responses = list(responses)
-        self.calls = []
-        self.beta = NS(messages=NS(create=self._create))
-
-    def _create(self, **kw):
-        self.calls.append(kw)
-        return self.responses.pop(0)
+NOW = datetime(2026, 10, 2, 13, 0, tzinfo=timezone.utc)
+CAL = [{"title": "Non-Farm Employment Change", "country": "USD", "impact": "High",
+        "date": "2026-10-02T08:30:00-04:00", "forecast": "98K", "previous": "162K"},
+       {"title": "Core PCE Price Index m/m", "country": "USD", "impact": "High",
+        "date": "2026-09-30T08:30:00-04:00", "forecast": "0.3%", "previous": "0.2%"},
+       {"title": "x", "country": "JPY", "impact": "High", "date": "2026-10-02T08:30:00-04:00"}]
 
 
-def text(t, citations=None):
-    return NS(type="text", text=t, citations=citations)
+def ask(text, history=None, **kw):
+    msgs = (history or []) + [{"role": "user", "content": text}]
+    return _chat.answer(msgs, NOW, CAL, **kw)["reply"]
 
 
-def test_system_prompt_stabil_dan_dicache():
-    blocks = _chat.system_blocks()
-    assert blocks[-1]["cache_control"] == {"type": "ephemeral"}
-    assert "BASIS PENGETAHUAN" in blocks[-1]["text"] and "NFP" in blocks[-1]["text"]
-    assert blocks == _chat.system_blocks()                      # tidak ada waktu/ID acak -> cache tetap kena
+def parse(text, prev=None):
+    return _chat.parse(text, _chat.calendar_rows_for(CAL), prev)
 
 
-def test_ask_parameter_konteks_dan_sumber():
-    cite = NS(url="https://www.bls.gov/news.release/empsit.nr0.htm", title="BLS Employment Situation")
-    client = FakeClient([NS(stop_reason="end_turn", model="claude-opus-5",
-                            content=[NS(type="server_tool_use"), text("NFP lebih lemah.", [cite, cite])])])
-    out = _chat.ask(client, [{"role": "user", "content": "hasil NFP sudah keluar?"}], "KONTEKS X")
-    kw = client.calls[0]
-    assert kw["model"] == "claude-opus-5" and kw["fallbacks"] == "default"
-    assert kw["betas"] == ["server-side-fallback-2026-07-01"]
-    assert kw["thinking"] == {"type": "adaptive"}
-    assert kw["tools"][0]["type"] == "web_search_20260209"
-    last = kw["messages"][-1]
-    assert last["role"] == "user" and last["content"][0]["text"] == "KONTEKS X"      # konteks di luar cache
-    assert "hasil NFP" in last["content"][1]["text"]
-    assert out["reply"] == "NFP lebih lemah." and out["sources"] == [{"title": cite.title, "url": cite.url}]
+def test_parse_angka_dan_kata():
+    p = parse("NFP 45K vs 98K")
+    assert p["group"] == "NFP" and p["actual"] == 45000 and p["forecast"] == 98000 and p["bias"] == 1
+    assert p["timing"] == "sesudah"
+    assert parse("NFP keluar 45K")["bias"] == 1                        # forecast dari kalender minggu ini (98K)
+    assert parse("NFP 150K, perkiraan 98K")["bias"] == -1
+    assert parse("CPI lebih tinggi dari perkiraan")["bias"] == -1        # inflasi panas -> buruk untuk emas
+    assert parse("klaim pengangguran naik")["bias"] == 1                 # CLAIMS terbalik
+    assert parse("data inflasi lemah")["bias"] == 1
+    assert parse("CPI sesuai perkiraan")["same"]
+    p = parse("apakah emas akan naik setelah NFP?")                     # 'emas naik' bukan arah data
+    assert p["group"] == "NFP" and p["bias"] is None and p["timing"] == "sebelum"
+    assert parse("inflasi produsen lebih rendah")["group"] == "PPI"
+    p = parse("hasil nfp sudah keluar bisakah kamu melakukan sesuatu agar aku bisa mendapatkan profit wr tinggi")
+    assert p["bias"] is None and p["timing"] == "sesudah"                # 'WR tinggi' bukan arah data
 
 
-def test_pause_turn_dilanjutkan():
-    paused = NS(stop_reason="pause_turn", model="m", content=[NS(type="server_tool_use")])
-    done = NS(stop_reason="end_turn", model="m", content=[text("selesai")])
-    client = FakeClient([paused, done])
-    out = _chat.ask(client, [{"role": "user", "content": "FOMC?"}], "K")
-    assert out["reply"] == "selesai" and len(client.calls) == 2
-    assert client.calls[1]["messages"][-1] == {"role": "assistant", "content": paused.content}
+def test_parse_fomc_dan_riwayat():
+    p = parse("sebelum FOMC survey CME group suku bunga naik, apa yang harus saya lakukan")
+    assert p["group"] == "FOMC" and p["decision"] == "naik" and p["timing"] == "sebelum"
+    assert parse("FOMC hawkish")["bias"] == -1
+    assert parse("45K vs 98K", prev="NFP")["group"] == "NFP"            # grup dari pertanyaan sebelumnya
+    assert parse("halo")["group"] is None
 
 
-def test_refusal_tidak_membaca_konten():
-    client = FakeClient([NS(stop_reason="refusal", model="m", content=[])])
-    assert "tidak bisa" in _chat.ask(client, [{"role": "user", "content": "x"}], "K")["reply"]
+def test_jawaban_nfp_memakai_angka_basis_pengetahuan():
+    kb = _chat.KB["xau"]["NFP"]["bagus"]
+    r = ask("hasil NFP sudah keluar 45K vs 98K, bisakah saya profit?")
+    assert "LEMAH" in r and f"naik pada {kb['1j']['searah']}% dari {kb['n']} kejadian" in r
+    assert "lempar koin" in r
+    assert "Minggu ini" in r and "forecast 98K" in r
+    s = _chat.KB["sinyal_berita"]["sesudah"]
+    assert f"WR {s['wr']}%" in r
+
+
+def test_sudah_keluar_tanpa_angka_minta_angka():
+    r = ask("hasil nfp sudah keluar bisakah kamu melakukan sesuatu agar aku bisa mendapatkan profit wr tinggi")
+    assert "Ketik angkanya" in r and "Skenario" in r and "SESUDAH" in r and "SEBELUM" not in r
+
+
+def test_jawaban_sebelum_berita_dan_fomc():
+    r = ask("sebelum NFP apa yang harus saya lakukan?")
+    assert "Skenario" in r and "tidak ada data yang memprediksi" in r
+    assert f"WR {_chat.KB['sinyal_berita']['sebelum']['wr']}%" in r
+    f = ask("sebelum FOMC survei CME suku bunga naik, apa yang harus saya lakukan")
+    assert "SESUAI ekspektasi" in f and "Bunga naik, sesuai ekspektasi" in f and "FedWatch" in f
+    assert "Bunga turun" not in f
+
+
+def test_btc_dan_intent_lain():
+    assert "BTC/USD (H1)" in ask("CPI lebih rendah, bagaimana BTC?")
+    assert "Skema bawaan" in ask("SL+ di 0,7R lebih baik?")
+    assert "Berita USD high-impact minggu ini" in ask("berita apa saja minggu ini?")
+    states = {"XAU/USD": {"price": 4300.5, "last_tick": "2026-10-02T12:52:00+00:00", "systems": {
+        "T55/20": {"virtual": {"dir": "BUY", "entry": 4280, "sl": 4240, "tp1": 4320, "tp1_hit": True}},
+        "T40/15": {"trend": "naik"}}}}
+    b = ask("sinyal terbuka sekarang?", states=states,
+            funding_cache={"day": "2026-10-01", "f": [[i, i * 1e-6] for i in range(1200)]})
+    assert "T55/20: BUY entry 4.280,00" in b and "SL+ aktif" in b and "persentil 100%" in b
+    assert "contoh pertanyaan" in ask("halo").lower()
 
 
 def test_riwayat_dibersihkan():
@@ -70,42 +94,10 @@ def test_riwayat_dibersihkan():
     with pytest.raises(ValueError):
         _chat.clean_history(msgs[:1])
     out = _chat.clean_history(msgs + [{"role": "user", "content": "c" * 5000}])
-    # asisten di awal dibuang, 'system' dari aplikasi diabaikan, pesan kosong dibuang, user berurutan digabung
     assert out == [{"role": "user", "content": "a\n\nb\n\n" + "c" * _chat.MAX_CHARS}]
 
 
-def test_konteks_langsung():
-    cal = [{"title": "Non-Farm Employment Change", "country": "USD", "impact": "High",
-            "date": "2026-10-02T08:30:00-04:00", "forecast": "98K", "previous": "162K"},
-           {"title": "x", "country": "JPY", "impact": "High", "date": "2026-10-02T08:30:00-04:00"}]
-    states = {"XAU/USD": {"price": 4300.5, "last_tick": "t", "systems": {
-        "T55/20": {"virtual": {"dir": "BUY", "entry": 4280, "sl": 4240, "tp1": 4320, "cat": "XAU konf+⭐"}},
-        "T40/15": {"trend": "naik"}}}}
-    s = _chat.live_context(datetime(2026, 9, 28, 5, tzinfo=timezone.utc), cal, states,
-                           {"day": "2026-09-27", "f": [[i, i * 1e-6] for i in range(1200)]})
-    assert "Fri 02 Oct 12:30 UTC: Non-Farm Employment Change (forecast 98K" in s and "JPY" not in s
-    assert "posisi terbuka T55/20: BUY entry 4280" in s and "T40/15: tidak ada posisi" in s
-    assert "persentil 100%" in s and "September" in s
-
-
-def test_bentuk_request_sdk_asli():
-    """SDK resmi membangun request yang benar (header beta, fallbacks, tool) — ditangkap transport tiruan."""
-    anthropic = pytest.importorskip("anthropic")
-    import httpx2
-    seen = {}
-
-    def handle(request):
-        seen["headers"], seen["body"] = request.headers, json.loads(request.content)
-        return httpx2.Response(200, json={
-            "id": "msg_1", "type": "message", "role": "assistant", "model": "claude-opus-5",
-            "content": [{"type": "text", "text": "ok"}], "stop_reason": "end_turn", "stop_sequence": None,
-            "usage": {"input_tokens": 1, "output_tokens": 1}})
-    client = anthropic.Anthropic(api_key="x", http_client=anthropic.DefaultHttpxClient(
-        transport=httpx2.MockTransport(handle)))
-    out = _chat.ask(client, [{"role": "user", "content": "tes"}], "K")
-    assert out["reply"] == "ok"
-    assert "server-side-fallback-2026-07-01" in seen["headers"]["anthropic-beta"]
-    b = seen["body"]
-    assert b["fallbacks"] == "default" and b["model"] == "claude-opus-5"
-    assert b["tools"] == [{"type": "web_search_20260209", "name": "web_search", "max_uses": 3}]
-    assert b["system"][-1]["cache_control"] == {"type": "ephemeral"}
+def test_tanpa_ai():
+    root = Path(__file__).resolve().parent.parent / "cloud"
+    assert not any("anthropic" in p.read_text() for p in (root / "api").glob("*.py"))
+    assert "anthropic" not in (root / "requirements.txt").read_text()

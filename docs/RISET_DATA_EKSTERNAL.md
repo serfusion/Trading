@@ -32,7 +32,7 @@ keluaran lengkap di [`docs/eksternal/`](eksternal/). Tidak ada perubahan pada bo
 5. Beberapa varian tampak sangat bagus di satu periode (mis. yield riil + dolar 60 hari untuk BTC: +1,39R/sinyal di
    periode latih vs +0,70R), lalu **gagal di periode uji** (+0,10R vs +0,12R). Ini pola *overfitting* yang persis
    ingin dihindari; karena itulah aturan penilaian ditetapkan sebelum melihat hasil.
-6. Data eksternal tetap berguna sebagai **informasi**: dipakai di tab **Tanya** (chat) lewat basis pengetahuan
+6. Data eksternal tetap berguna sebagai **informasi**: dipakai di tab **Tanya** (chat berbasis data, tanpa AI) lewat basis pengetahuan
    statistik berita `cloud/api/pengetahuan.md` (mis. NFP lebih lemah dari perkiraan → emas naik dalam 1 jam pada 73%
    dari 67 rilis; sinyal 💰 XAU yang lahir ≤ 24 jam sebelum NFP/CPI/FOMC rata-rata −0,07R vs +0,40R sesudahnya).
 7. Tidak ada jaminan profit. Semua hasil adalah simulasi historis dengan spread, tanpa swap/komisi/biaya funding.
@@ -143,8 +143,20 @@ Bagian A — filter sesi (jam keputusan UTC) di data yang sama:
 - Tidak ada yang konsisten: sesi yang "buruk" di periode latih (Asia) justru bagus di periode uji, dan sebaliknya.
   Sinyal trend H1 tidak bergantung pada jam. BTC juga tidak ada yang konsisten (`docs/eksternal/hasil_sesi_a.txt`).
 
-⏳ Bagian B (spread nyata BID/ASK Dukascopy + mesin yang sama di sumber data kedua): unduhan masih berjalan
-(server membatasi laju).
+Bagian B — data kedua Dukascopy (H1 BID & ASK 2012-11 – 2026-08, 354 file bulanan; `docs/eksternal/hasil_sesi.txt`):
+
+- Close Dukascopy vs data riset: selisih median $0,04 (p95 $0,54) di 80.967 candle yang sama.
+- **Statistik 💰 terulang di sumber data independen**: konf+⭐ +0,334R (data riset +0,309R), konf +0,125R (+0,093R);
+  💰 total +323,7R (spread tetap 0,30), 9/14 tahun untung.
+- **Spread nyata** (ASK − BID di open tiap candle): median per tahun $0,24–0,38 (2012–2024), **$0,59 (2025) dan
+  $0,70 (2026)** seiring harga emas naik. Per jam UTC (2024–26): ±$0,44–0,58 hampir sepanjang hari, tetapi
+  **$1,77 pukul 22:00 dan $1,12 pukul 23:00 UTC** (pergantian hari / buka ulang).
+- Mesin yang sama dengan spread nyata per candle: 💰 +315,8R vs +323,7R dengan spread tetap (−2,4%), latih +0,310R /
+  uji +0,235R → biaya spread nyata kecil dibanding SL 3×ATR; hasil riset lain yang memakai spread 0,25–0,30 tetap valid.
+- Filter sesi di data Dukascopy + spread nyata: tidak ada yang konsisten (lewati sore NY 16–21 UTC p = 0,011 tetapi
+  sinyal yang dibuang di periode latih untung +0,26R; lewati 22–00 UTC membuang sinyal yang justru untung +0,53R).
+- Saran praktis: saat entry manual di jam 22:00–23:00 UTC (05:00–06:00 WIB), spread broker bisa 2–3× lebih lebar;
+  cek spread di MT5 sebelum masuk.
 
 ## 6. Funding rate & open interest BTC (Binance) (`research/eksternal_btc.py`)
 
@@ -223,7 +235,7 @@ FedWatch, FRED DGS2), breakeven 10 tahun (T10YIE), hari & bulan.
 - **Data MT5 Exness pengguna (`data_mt5/`) belum diunggah** → spread asli akun Cent belum bisa diuji. Pengganti
   sementara: spread BID/ASK Dukascopy (bagian 5).
 - M1 Dukascopy untuk 2012–2026 butuh ±10.000 unduhan; server membatasi laju (HTTP 503, ±15 detik/file) → hanya H1
-  BID/ASK yang diunduh. Ekspor M1 dari MT5 pengguna lebih praktis.
+  BID/ASK (354 file) yang diunduh. Ekspor M1 dari MT5 pengguna lebih praktis.
 - Nilai FRED yang dipakai adalah revisi terakhir (waktu terbitnya benar, nilainya bisa sedikit direvisi);
   DTWEXBGS sebelum 2019 adalah seri yang dihitung mundur.
 - Kalender ForexFactory adalah hasil scraping pihak ketiga (dicek silang dengan FRED: cocok ±98%).
@@ -249,10 +261,11 @@ python -m research.event_stats          # basis pengetahuan chat -> cloud/api/pe
 
 ## 9. Yang dipasang (28 Sep 2026, permintaan pengguna "pasang semua")
 
-- Cloud: filter BTC funding + September (`cloud/api/_funding.py`, `tick.py`), chat `POST /api/chat`
-  (`cloud/api/chat.py`, `_chat.py`, `pengetahuan.md`) — aktif setelah branch ini di-merge ke branch produksi
-  Vercel dan `ANTHROPIC_API_KEY` diisi (`docs/CLOUD.md`).
-- Aplikasi 2.7: tab **Tanya** (build CI sukses, APK di release `android-latest`).
+- Cloud: filter BTC funding + September (`cloud/api/_funding.py`, `tick.py`), level TUTUP di heartbeat, tab Tanya
+  `POST /api/chat` **berbasis data tanpa AI** (`cloud/api/chat.py`, `_chat.py`, `pengetahuan.json`; pengguna
+  memilih tidak memakai AI) — aktif setelah branch ini di-merge ke branch produksi Vercel (`docs/CLOUD.md`).
+- Aplikasi 2.9: tab **Tanya**, ikon baru, skema tetap 1 TP + 4 running, level TUTUP di kartu sinyal
+  (APK di release `android-latest`).
 - Tidak dipasang: filter XAU apa pun (tidak ada yang konsisten), dan keputusan lama di CLAUDE.md (skema A live,
   tab Tabungan Emas, bundle repo) yang bukan bagian riset ini.
 

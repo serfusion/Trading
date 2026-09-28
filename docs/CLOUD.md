@@ -98,9 +98,7 @@ di aplikasi.
 | `LEGS` | (opsional) jumlah posisi per sinyal, default `5` |
 | `LEG_LOT` | (opsional) lot per posisi yang ditampilkan di sinyal, default `0.01` |
 | `STAR_ONLY` | (opsional) `0` = semua sinyal, ⭐ ditandai (default); `1` = hanya kirim sinyal ⭐ |
-| `ANTHROPIC_API_KEY` | (untuk tab **Tanya**) API key dari <https://console.anthropic.com> → API Keys — rahasia |
-| `CHAT_KEY` | (opsional) kunci chat; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
-| `CHAT_MODEL` | (opsional) model Claude untuk chat, default `claude-opus-5` |
+| `CHAT_KEY` | (opsional) kunci tab **Tanya**; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
 | `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
 | `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
 
@@ -175,21 +173,22 @@ Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan 
 `X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
 `{"close_all": true}`.
 
-## Tab Tanya (chat asisten berita & sinyal)
+## Tab Tanya (chat berbasis data, tanpa AI)
 
-`POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab pertanyaan seperti "hasil NFP sudah keluar, apa
-artinya?" atau "sebelum FOMC pasar memperkirakan suku bunga naik, apa yang harus saya lakukan?" dengan:
-- **basis pengetahuan statistik** `cloud/api/pengetahuan.md` (dibuat `python -m research.event_stats` dari data
-  2012–2026: reaksi emas/BTC per berita, arah & besar kejutan, FOMC sesuai ekspektasi vs kejutan, sinyal 💰 di
-  sekitar berita) — setiap peluang disebut dengan jumlah kejadian (n);
-- **konteks langsung**: kalender USD high-impact minggu ini (ForexFactory), harga & posisi virtual XAU/BTC;
-- **web search** untuk angka berita yang baru keluar / peluang CME FedWatch.
+`POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab dari **data** saja — tanpa AI, tanpa API berbayar,
+hanya library standar:
+- **statistik historis** `cloud/api/pengetahuan.json` (dibuat `python -m research.event_stats`; versi baca-manusia
+  `pengetahuan.md`): reaksi emas/BTC per berita (NFP, CPI, PPI, FOMC, Retail, PCE, GDP, ISM, Claims) menurut arah &
+  besar kejutan, FOMC sesuai ekspektasi vs kejutan, sinyal 💰 di sekitar berita — setiap peluang disertai n;
+- **konteks langsung**: kalender USD high-impact minggu ini (ForexFactory), posisi bot XAU/BTC (Supabase), filter BTC.
+- Pertanyaan dikenali dari kata kunci: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
+  ("NFP 45K vs 98K"; bila hanya satu angka, forecast diambil dari kalender minggu ini), waktu ("sebelum" /
+  "sudah keluar"), "sinyal terbuka", "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil
+  otomatis — pengguna mengetik angkanya.
 
-Pengaturan: isi `ANTHROPIC_API_KEY` di Vercel → Redeploy; di aplikasi ⚙️ → **Alamat cloud** = domain Vercel
-(mis. `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Biaya API dibayar dari akun
-Anthropic (perkiraan beberapa sen dolar per pertanyaan karena memakai web search; basis pengetahuan di-cache).
-Fungsi dibatasi 60 detik (`vercel.json`); chat memakai effort rendah supaya cepat. Chat **tidak** membuka order
-dan jawabannya bukan jaminan profit.
+Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
+`https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
+bukan jaminan profit.
 
 ## Filter BTC dari riset data eksternal
 

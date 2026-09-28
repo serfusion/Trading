@@ -1,0 +1,896 @@
+{
+ "meta": {
+  "kalender": "2010-01–2026-01",
+  "xau": "2012-05–2026-09",
+  "btc": "2016-01–2026-09",
+  "harga_emas": 4314.54,
+  "harga_btc": 83592.72
+ },
+ "nama": {
+  "NFP": "NFP (Non-Farm Payrolls)",
+  "CPI": "CPI (inflasi konsumen)",
+  "PPI": "PPI (inflasi produsen)",
+  "RETAIL": "Retail Sales",
+  "PCE": "Core PCE",
+  "GDP": "GDP awal",
+  "ISM": "ISM PMI",
+  "CLAIMS": "Unemployment Claims (mingguan)",
+  "FOMC": "FOMC (suku bunga Fed)"
+ },
+ "median_kejutan": {
+  "FOMC": 0.25,
+  "NFP": 53000.0,
+  "CPI": 0.1,
+  "PCE": 0.1,
+  "GDP": 0.3999999999999999,
+  "PPI": 0.3,
+  "RETAIL": 0.39999999999999997,
+  "ISM": 1.0,
+  "CLAIMS": 9000.0
+ },
+ "event_utama": {
+  "NFP": "Non-Farm Employment Change",
+  "CPI": "Core CPI m/m",
+  "PPI": "Core PPI m/m",
+  "RETAIL": "Core Retail Sales m/m",
+  "PCE": "Core PCE Price Index m/m",
+  "GDP": "Advance GDP q/q",
+  "ISM": "ISM Manufacturing PMI",
+  "CLAIMS": "Unemployment Claims",
+  "FOMC": "Federal Funds Rate"
+ },
+ "xau": {
+  "FOMC": {
+   "n": 110,
+   "sesuai": {
+    "n": 108,
+    "15m": {
+     "naik": 59,
+     "gerak": 0.222
+    },
+    "1j": {
+     "naik": 56,
+     "gerak": 0.403
+    },
+    "4j": {
+     "naik": 57,
+     "gerak": 0.489
+    },
+    "1h": {
+     "naik": 50,
+     "gerak": 0.93
+    }
+   },
+   "lanjut1j": {
+    "n": 110,
+    "pct": 50
+   }
+  },
+  "NFP": {
+   "n": 162,
+   "bagus": {
+    "n": 67,
+    "15m": {
+     "searah": 75,
+     "rata": 0.376
+    },
+    "1j": {
+     "searah": 73,
+     "rata": 0.394
+    },
+    "4j": {
+     "searah": 69,
+     "rata": 0.425
+    },
+    "1h": {
+     "searah": 64,
+     "rata": 0.446
+    },
+    "besar": {
+     "n": 14,
+     "jendela": "1j",
+     "searah": 79,
+     "rata": 0.461
+    }
+   },
+   "buruk": {
+    "n": 92,
+    "15m": {
+     "searah": 70,
+     "rata": 0.244
+    },
+    "1j": {
+     "searah": 54,
+     "rata": 0.216
+    },
+    "4j": {
+     "searah": 55,
+     "rata": 0.246
+    },
+    "1h": {
+     "searah": 55,
+     "rata": 0.158
+    },
+    "besar": {
+     "n": 20,
+     "jendela": "1j",
+     "searah": 45,
+     "rata": 0.22
+    }
+   },
+   "lanjut1j": {
+    "n": 162,
+    "pct": 54
+   }
+  },
+  "CPI": {
+   "n": 164,
+   "bagus": {
+    "n": 68,
+    "15m": {
+     "searah": 74,
+     "rata": 0.226
+    },
+    "1j": {
+     "searah": 69,
+     "rata": 0.214
+    },
+    "4j": {
+     "searah": 66,
+     "rata": 0.271
+    },
+    "1h": {
+     "searah": 62,
+     "rata": 0.23
+    },
+    "besar": {
+     "n": 5,
+     "jendela": "1j",
+     "searah": 80,
+     "rata": 0.621
+    }
+   },
+   "buruk": {
+    "n": 60,
+    "15m": {
+     "searah": 53,
+     "rata": 0.124
+    },
+    "1j": {
+     "searah": 58,
+     "rata": 0.113
+    },
+    "4j": {
+     "searah": 47,
+     "rata": -0.011
+    },
+    "1h": {
+     "searah": 45,
+     "rata": -0.015
+    },
+    "besar": {
+     "n": 5,
+     "jendela": "1j",
+     "searah": 80,
+     "rata": 0.306
+    }
+   },
+   "sesuai": {
+    "n": 36,
+    "15m": {
+     "naik": 75,
+     "gerak": 0.127
+    },
+    "1j": {
+     "naik": 44,
+     "gerak": 0.208
+    },
+    "4j": {
+     "naik": 53,
+     "gerak": 0.233
+    },
+    "1h": {
+     "naik": 44,
+     "gerak": 0.665
+    }
+   },
+   "lanjut1j": {
+    "n": 164,
+    "pct": 43
+   }
+  },
+  "PCE": {
+   "n": 52,
+   "bagus": {
+    "n": 11,
+    "15m": {
+     "searah": 73,
+     "rata": 0.203
+    },
+    "1j": {
+     "searah": 91,
+     "rata": 0.292
+    },
+    "4j": {
+     "searah": 36,
+     "rata": -0.095
+    },
+    "1h": {
+     "searah": 18,
+     "rata": -0.687
+    }
+   },
+   "buruk": {
+    "n": 8,
+    "15m": {
+     "searah": 62,
+     "rata": 0.07
+    },
+    "1j": {
+     "searah": 75,
+     "rata": 0.167
+    },
+    "4j": {
+     "searah": 50,
+     "rata": -0.011
+    },
+    "1h": {
+     "searah": 38,
+     "rata": -0.221
+    }
+   },
+   "sesuai": {
+    "n": 33,
+    "15m": {
+     "naik": 55,
+     "gerak": 0.101
+    },
+    "1j": {
+     "naik": 39,
+     "gerak": 0.193
+    },
+    "4j": {
+     "naik": 39,
+     "gerak": 0.382
+    },
+    "1h": {
+     "naik": 67,
+     "gerak": 0.655
+    }
+   },
+   "lanjut1j": {
+    "n": 52,
+    "pct": 50
+   }
+  },
+  "GDP": {
+   "n": 53,
+   "bagus": {
+    "n": 27,
+    "15m": {
+     "searah": 70,
+     "rata": 0.141
+    },
+    "1j": {
+     "searah": 70,
+     "rata": 0.118
+    },
+    "4j": {
+     "searah": 74,
+     "rata": 0.213
+    },
+    "1h": {
+     "searah": 59,
+     "rata": 0.16
+    },
+    "besar": {
+     "n": 10,
+     "jendela": "1j",
+     "searah": 70,
+     "rata": 0.133
+    }
+   },
+   "buruk": {
+    "n": 24,
+    "15m": {
+     "searah": 75,
+     "rata": 0.105
+    },
+    "1j": {
+     "searah": 46,
+     "rata": 0.035
+    },
+    "4j": {
+     "searah": 54,
+     "rata": 0.183
+    },
+    "1h": {
+     "searah": 54,
+     "rata": 0.328
+    },
+    "besar": {
+     "n": 8,
+     "jendela": "1j",
+     "searah": 50,
+     "rata": 0.005
+    }
+   },
+   "lanjut1j": {
+    "n": 53,
+    "pct": 43
+   }
+  },
+  "PPI": {
+   "n": 140,
+   "bagus": {
+    "n": 63,
+    "15m": {
+     "searah": 71,
+     "rata": 0.103
+    },
+    "1j": {
+     "searah": 63,
+     "rata": 0.114
+    },
+    "4j": {
+     "searah": 63,
+     "rata": 0.062
+    },
+    "1h": {
+     "searah": 52,
+     "rata": -0.019
+    },
+    "besar": {
+     "n": 14,
+     "jendela": "1j",
+     "searah": 64,
+     "rata": 0.222
+    }
+   },
+   "buruk": {
+    "n": 55,
+    "15m": {
+     "searah": 58,
+     "rata": 0.02
+    },
+    "1j": {
+     "searah": 64,
+     "rata": 0.074
+    },
+    "4j": {
+     "searah": 47,
+     "rata": 0.021
+    },
+    "1h": {
+     "searah": 49,
+     "rata": -0.059
+    },
+    "besar": {
+     "n": 8,
+     "jendela": "1j",
+     "searah": 50,
+     "rata": 0.002
+    }
+   },
+   "sesuai": {
+    "n": 22,
+    "15m": {
+     "naik": 59,
+     "gerak": 0.116
+    },
+    "1j": {
+     "naik": 59,
+     "gerak": 0.181
+    },
+    "4j": {
+     "naik": 41,
+     "gerak": 0.217
+    },
+    "1h": {
+     "naik": 59,
+     "gerak": 0.607
+    }
+   },
+   "lanjut1j": {
+    "n": 140,
+    "pct": 49
+   }
+  },
+  "RETAIL": {
+   "n": 116,
+   "bagus": {
+    "n": 47,
+    "15m": {
+     "searah": 62,
+     "rata": 0.068
+    },
+    "1j": {
+     "searah": 68,
+     "rata": 0.102
+    },
+    "4j": {
+     "searah": 47,
+     "rata": -0.01
+    },
+    "1h": {
+     "searah": 57,
+     "rata": 0.174
+    },
+    "besar": {
+     "n": 12,
+     "jendela": "1j",
+     "searah": 75,
+     "rata": 0.15
+    }
+   },
+   "buruk": {
+    "n": 55,
+    "15m": {
+     "searah": 62,
+     "rata": 0.047
+    },
+    "1j": {
+     "searah": 58,
+     "rata": 0.079
+    },
+    "4j": {
+     "searah": 60,
+     "rata": -0.001
+    },
+    "1h": {
+     "searah": 47,
+     "rata": -0.063
+    },
+    "besar": {
+     "n": 10,
+     "jendela": "1j",
+     "searah": 50,
+     "rata": 0.045
+    }
+   },
+   "sesuai": {
+    "n": 14,
+    "15m": {
+     "naik": 50,
+     "gerak": 0.155
+    },
+    "1j": {
+     "naik": 43,
+     "gerak": 0.123
+    },
+    "4j": {
+     "naik": 21,
+     "gerak": 0.439
+    },
+    "1h": {
+     "naik": 57,
+     "gerak": 0.327
+    }
+   },
+   "lanjut1j": {
+    "n": 116,
+    "pct": 49
+   }
+  },
+  "ISM": {
+   "n": 312,
+   "bagus": {
+    "n": 153,
+    "15m": {
+     "searah": 64,
+     "rata": 0.098
+    },
+    "1j": {
+     "searah": 59,
+     "rata": 0.11
+    },
+    "4j": {
+     "searah": 58,
+     "rata": 0.151
+    },
+    "1h": {
+     "searah": 53,
+     "rata": 0.19
+    },
+    "besar": {
+     "n": 27,
+     "jendela": "1j",
+     "searah": 63,
+     "rata": 0.22
+    }
+   },
+   "buruk": {
+    "n": 156,
+    "15m": {
+     "searah": 67,
+     "rata": 0.1
+    },
+    "1j": {
+     "searah": 59,
+     "rata": 0.082
+    },
+    "4j": {
+     "searah": 58,
+     "rata": 0.05
+    },
+    "1h": {
+     "searah": 44,
+     "rata": -0.127
+    },
+    "besar": {
+     "n": 36,
+     "jendela": "1j",
+     "searah": 61,
+     "rata": 0.147
+    }
+   },
+   "lanjut1j": {
+    "n": 312,
+    "pct": 52
+   }
+  },
+  "CLAIMS": {
+   "n": 352,
+   "bagus": {
+    "n": 137,
+    "15m": {
+     "searah": 62,
+     "rata": 0.06
+    },
+    "1j": {
+     "searah": 57,
+     "rata": 0.032
+    },
+    "4j": {
+     "searah": 58,
+     "rata": 0.087
+    },
+    "1h": {
+     "searah": 53,
+     "rata": 0.08
+    },
+    "besar": {
+     "n": 24,
+     "jendela": "1j",
+     "searah": 58,
+     "rata": 0.055
+    }
+   },
+   "buruk": {
+    "n": 204,
+    "15m": {
+     "searah": 63,
+     "rata": 0.064
+    },
+    "1j": {
+     "searah": 58,
+     "rata": 0.063
+    },
+    "4j": {
+     "searah": 52,
+     "rata": 0.026
+    },
+    "1h": {
+     "searah": 51,
+     "rata": -0.013
+    },
+    "besar": {
+     "n": 36,
+     "jendela": "1j",
+     "searah": 67,
+     "rata": 0.207
+    }
+   },
+   "sesuai": {
+    "n": 11,
+    "15m": {
+     "naik": 45,
+     "gerak": 0.123
+    },
+    "1j": {
+     "naik": 27,
+     "gerak": 0.2
+    },
+    "4j": {
+     "naik": 27,
+     "gerak": 0.229
+    },
+    "1h": {
+     "naik": 45,
+     "gerak": 0.416
+    }
+   },
+   "lanjut1j": {
+    "n": 352,
+    "pct": 43
+   }
+  }
+ },
+ "btc": {
+  "FOMC": {
+   "n": 82,
+   "sesuai": {
+    "n": 80,
+    "1j": {
+     "naik": 56,
+     "gerak": 0.38
+    },
+    "4j": {
+     "naik": 57,
+     "gerak": 0.88
+    },
+    "1h": {
+     "naik": 48,
+     "gerak": 2.231
+    }
+   }
+  },
+  "NFP": {
+   "n": 122,
+   "bagus": {
+    "n": 48,
+    "1j": {
+     "searah": 65,
+     "rata": 0.178
+    },
+    "4j": {
+     "searah": 50,
+     "rata": -0.104
+    },
+    "1h": {
+     "searah": 46,
+     "rata": -0.581
+    },
+    "besar": {
+     "n": 12,
+     "jendela": "4j",
+     "searah": 42,
+     "rata": -0.395
+    }
+   },
+   "buruk": {
+    "n": 72,
+    "1j": {
+     "searah": 44,
+     "rata": -0.231
+    },
+    "4j": {
+     "searah": 38,
+     "rata": -0.411
+    },
+    "1h": {
+     "searah": 46,
+     "rata": -0.703
+    },
+    "besar": {
+     "n": 21,
+     "jendela": "4j",
+     "searah": 48,
+     "rata": -0.2
+    }
+   }
+  },
+  "CPI": {
+   "n": 122,
+   "bagus": {
+    "n": 50,
+    "1j": {
+     "searah": 68,
+     "rata": 0.601
+    },
+    "4j": {
+     "searah": 58,
+     "rata": 0.424
+    },
+    "1h": {
+     "searah": 62,
+     "rata": 0.573
+    },
+    "besar": {
+     "n": 5,
+     "jendela": "4j",
+     "searah": 80,
+     "rata": 2.081
+    }
+   },
+   "buruk": {
+    "n": 45,
+    "1j": {
+     "searah": 62,
+     "rata": 0.515
+    },
+    "4j": {
+     "searah": 60,
+     "rata": 0.558
+    },
+    "1h": {
+     "searah": 56,
+     "rata": 1.524
+    },
+    "besar": {
+     "n": 5,
+     "jendela": "4j",
+     "searah": 80,
+     "rata": 2.184
+    }
+   },
+   "sesuai": {
+    "n": 27,
+    "1j": {
+     "naik": 59,
+     "gerak": 0.398
+    },
+    "4j": {
+     "naik": 52,
+     "gerak": 0.911
+    },
+    "1h": {
+     "naik": 56,
+     "gerak": 1.663
+    }
+   }
+  }
+ },
+ "fomc": {
+  "n": 77,
+  "dari": 2014,
+  "sampai": 2025,
+  "kejutan": 2,
+  "rows": [
+   {
+    "jenis": "naik",
+    "kejutan": "lebih hawkish",
+    "n": 1,
+    "tanggal": [
+     "2022-06-15"
+    ],
+    "naik1j": 100,
+    "med1j": 0.537,
+    "naik1h": 100,
+    "med1h": 1.559,
+    "gerak1j": 0.537
+   },
+   {
+    "jenis": "naik",
+    "kejutan": "sesuai",
+    "n": 19,
+    "tanggal": [
+     "2015-12-16",
+     "2016-12-14",
+     "2017-03-15",
+     "2017-06-14",
+     "2017-12-13",
+     "2018-03-21",
+     "2018-06-13",
+     "2018-09-26",
+     "2018-12-19",
+     "2022-03-16",
+     "2022-05-04",
+     "2022-07-27",
+     "2022-09-21",
+     "2022-11-02",
+     "2022-12-14",
+     "2023-02-01",
+     "2023-03-22",
+     "2023-05-03",
+     "2023-07-26"
+    ],
+    "naik1j": 68,
+    "med1j": 0.223,
+    "naik1h": 53,
+    "med1h": 0.085,
+    "gerak1j": 0.455
+   },
+   {
+    "jenis": "tetap",
+    "kejutan": "sesuai",
+    "n": 47,
+    "tanggal": [
+     "2014-09-17",
+     "2014-10-29",
+     "2014-12-17",
+     "2015-01-28",
+     "2015-03-18",
+     "2015-04-29",
+     "2015-06-17",
+     "2015-07-29",
+     "2015-09-17",
+     "2015-10-28",
+     "2016-01-27",
+     "2016-03-16",
+     "2016-04-27",
+     "2016-06-15",
+     "2016-07-27",
+     "2016-09-21",
+     "2016-11-02",
+     "2017-02-01",
+     "2017-05-03",
+     "2017-09-20",
+     "2018-01-31",
+     "2018-05-02",
+     "2018-08-01",
+     "2018-11-08",
+     "2019-01-30",
+     "2019-03-20",
+     "2019-05-01",
+     "2019-06-19",
+     "2019-12-11",
+     "2020-01-29",
+     "2021-11-03",
+     "2021-12-15",
+     "2022-01-26",
+     "2023-06-14",
+     "2023-09-20",
+     "2023-11-01",
+     "2023-12-13",
+     "2024-01-31",
+     "2024-03-20",
+     "2024-05-01",
+     "2024-06-12",
+     "2024-07-31",
+     "2025-01-29",
+     "2025-03-19",
+     "2025-05-07",
+     "2025-06-18",
+     "2025-07-30"
+    ],
+    "naik1j": 55,
+    "med1j": 0.089,
+    "naik1h": 55,
+    "med1h": 0.168,
+    "gerak1j": 0.392
+   },
+   {
+    "jenis": "turun",
+    "kejutan": "lebih dovish",
+    "n": 1,
+    "tanggal": [
+     "2024-09-18"
+    ],
+    "naik1j": 100,
+    "med1j": 0.321,
+    "naik1h": 100,
+    "med1h": 0.812,
+    "gerak1j": 0.321
+   },
+   {
+    "jenis": "turun",
+    "kejutan": "sesuai",
+    "n": 9,
+    "tanggal": [
+     "2019-07-31",
+     "2019-09-18",
+     "2019-10-30",
+     "2020-06-10",
+     "2024-11-07",
+     "2024-12-18",
+     "2025-09-17",
+     "2025-10-29",
+     "2025-12-10"
+    ],
+    "naik1j": 33,
+    "med1j": -0.598,
+    "naik1h": 56,
+    "med1h": 0.801,
+    "gerak1j": 0.669
+   }
+  ]
+ },
+ "sinyal_berita": {
+  "sesudah": {
+   "n": 94,
+   "wr": 54,
+   "r": 0.4
+  },
+  "sebelum": {
+   "n": 115,
+   "wr": 40,
+   "r": -0.07
+  },
+  "jauh": {
+   "n": 981,
+   "wr": 50,
+   "r": 0.27
+  }
+ }
+}

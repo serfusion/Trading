@@ -1,9 +1,8 @@
-"""Endpoint chat untuk aplikasi Android.
+"""Endpoint tab Tanya untuk aplikasi Android — penjawab berbasis DATA, tanpa AI (lihat _chat.py).
 
-POST /api/chat   {"messages": [{"role": "user", "content": "hasil NFP sudah keluar, ..."}, ...]}
+POST /api/chat   {"messages": [{"role": "user", "content": "NFP 45K vs 98K"}, ...]}
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
-Environment: ANTHROPIC_API_KEY (wajib), CHAT_MODEL (opsional, bawaan claude-opus-5).
-Balasan: {"ok": true, "reply": "...", "sources": [{"title", "url"}], "model": "..."}
+Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
 import json
 import os
@@ -53,30 +52,14 @@ class handler(BaseHTTPRequestHandler):
         if not self._authorized():
             self._send(401, {"ok": False, "error": "Kunci chat salah (pakai topik ntfy yang sama dengan cloud)"})
             return
-        if not os.environ.get("ANTHROPIC_API_KEY"):
-            self._send(500, {"ok": False, "error": "ANTHROPIC_API_KEY belum diisi di Vercel"})
-            return
-        import anthropic
         try:
             length = int(self.headers.get("Content-Length") or 0)
             body = json.loads(self.rfile.read(min(length, 200_000)) or b"{}")
-            client = anthropic.Anthropic(timeout=50.0, max_retries=1)   # batas fungsi Vercel 60 detik
             states, funding = _states()
-            context = _chat.live_context(datetime.now(timezone.utc), _chat.fetch_calendar(), states, funding)
-            self._send(200, _chat.ask(client, body.get("messages") or [], context,
-                                      os.environ.get("CHAT_MODEL", _chat.MODEL)))
+            self._send(200, _chat.answer(body.get("messages") or [], datetime.now(timezone.utc),
+                                         _chat.fetch_calendar(), states, funding))
         except ValueError as exc:
             self._send(400, {"ok": False, "error": str(exc)})
-        except anthropic.AuthenticationError:
-            self._send(500, {"ok": False, "error": "ANTHROPIC_API_KEY ditolak Anthropic — cek kuncinya di Vercel"})
-        except anthropic.RateLimitError:
-            self._send(429, {"ok": False, "error": "Terlalu banyak pertanyaan, coba lagi sebentar"})
-        except anthropic.APITimeoutError:
-            self._send(504, {"ok": False, "error": "Jawaban terlalu lama, coba pertanyaan yang lebih singkat"})
-        except anthropic.APIStatusError as exc:
-            self._send(502, {"ok": False, "error": f"Claude API {exc.status_code}: {exc.message}"})
-        except anthropic.APIConnectionError:
-            self._send(502, {"ok": False, "error": "Tidak bisa menghubungi Claude API"})
         except Exception as exc:  # noqa: BLE001
             self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
 
