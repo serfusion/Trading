@@ -368,3 +368,20 @@ Sinyal ≤ 24 jam setelah buka pekan, searah vs lawan arah gap (2012–2026):
 
 Pola berlawanan antar kategori dan sampel kecil → bukan aturan; tidak ada perubahan. Sinyal "⭐ saja" searah gap
 justru kelompok terburuk; profit 28 Sep adalah satu kejadian.
+
+## 14. Sinyal kembar: satu harga TUTUP (permintaan pengguna 28 Sep 2026) — `research/kembar_tutup.py`
+
+Sinyal kembar = beberapa set (T40/15, T55/20, T80/30) sinyal di candle yang sama; pengguna entry sekali. Untuk SELL,
+high 30 candle ≥ high 20 ≥ high 15 (BUY: low sebaliknya), jadi set paling lambat selalu tutup paling akhir.
+
+| Grup 3 set (XAU n=173 / BTC n=241) | XAU R/grup | BTC R/grup |
+|---|---|---|
+| keluar di TUTUP pertama (T40/15) | +0,22 | +0,33 |
+| rata-rata 3 set (cara aplikasi lama) | +0,33 | +0,40 |
+| **keluar di set paling lambat (T80/30)** | **+0,42** | **+0,47** |
+
+Grup 2 set: campuran (XAU T55/20+T80/30: T55/20 lebih baik; BTC: T80/30 lebih baik). Total semua grup kembar: set
+paling lambat XAU ±+114R vs rata-rata ±+99R vs TUTUP pertama ±+80R; BTC ±+217R / ±+187R / ±+156R.
+Dipasang di aplikasi 3.4 (tanpa mengubah cloud): kartu menampilkan satu harga TUTUP (set paling lambat), notifikasi
+TUTUP hanya untuk set itu, riwayat/statistik memakai hasil set itu. Statistik aplikasi: MENANG = TP1 kena,
+KALAH = SL / TUTUP sebelum TP1 (permintaan pengguna).
