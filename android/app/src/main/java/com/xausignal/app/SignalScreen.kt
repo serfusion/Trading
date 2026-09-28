@@ -44,7 +44,13 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         item { TickerCard(prices, connection) }
         item { SectionTitle("Aktif", trailing = if (open.isEmpty()) null else "${open.size}") }
         if (open.isEmpty()) {
-            item { AppCard { Text("Menunggu sinyal 💰", color = Muted) } }
+            item {
+                AppCard {
+                    Text("⏳ WAIT — belum ada sinyal 💰", fontWeight = FontWeight.Bold)
+                    Text("Jangan entry manual. Cloud mengecek pasar tiap 10 menit; cek berikutnya ${nextCheckText()}.",
+                        style = MaterialTheme.typography.labelSmall, color = Muted)
+                }
+            }
         } else {
             items(open, key = { "open-" + it.first().msgId }) { g ->
                 val s = g.first()
@@ -125,9 +131,9 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
     val floating = if (entry != null && price != null) (price - entry) * sign else null
     // posisi yang masih terbuka: 5 sebelum TP1, 4 sesudahnya (posisi #1 sudah TP); gap = 1 posisi
     val legsOpen = if (!signal.isGap() && slPlus) signal.legs() - 1 else signal.legs()
-    val floatMoney = floating?.let {
-        it * legsOpen * Math.round(signal.entryLot(money) * 100.0) * (signal.num("point_value") ?: 1.0)
-    }
+    val cents = Math.round(signal.entryLot(money) * 100.0).toDouble()
+    val pv = signal.num("point_value") ?: 1.0
+    val floatMoney = floating?.let { it * legsOpen * cents * pv }
     AppCard(accent = dirColor(signal.dir)) {
         SignalHeader(signal, count)
         Row(verticalAlignment = Alignment.Bottom) {
@@ -178,25 +184,65 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         }
         val exits = exitLevels(hb, ids)
         if (exits.isNotEmpty()) {
-            LineDivider()
-            Text("4 posisi running ditutup saat sinyal TUTUP:", style = MaterialTheme.typography.labelMedium,
-                color = Muted)
             val buy = signal.dir == "BUY"
+            LineDivider()
+            Text("🚪 HARGA TUTUP — 4 posisi running", style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.ExtraBold, color = Gold)
             exits.forEach { x ->
                 val gap = price?.let { (it - x.level) * sign }
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Column(Modifier.weight(1f)) {
+                        Text("tutup bila close H1 ${if (buy) "di bawah" else "di atas"}",
+                            style = MaterialTheme.typography.labelSmall, color = Muted)
+                        Text(priceText(signal.symbol(), x.level), style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.ExtraBold)
+                    }
+                    Column(horizontalAlignment = Alignment.End) {
+                        Text(x.set, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                        Text(
+                            "${if (buy) "low" else "high"} ${x.bars} candle" +
+                                (gap?.let { " • jarak ${fmt(it, 2)}" } ?: ""),
+                            style = MaterialTheme.typography.labelSmall, color = Muted
+                        )
+                    }
+                }
+            }
+            // Bila harga berbalik sekarang, posisi keluar di yang lebih dulu kena: SL/SL+ (langsung) atau TUTUP
+            // (dicek saat candle H1 tutup) -> hasil minimal yang sudah "terkunci".
+            if (entry != null && !signal.isGap()) {
+                val stop = if (slPlus) entry + sign * 0.10 else signal.num("sl")
+                if (stop != null) {
+                    val near = if (buy) exits.maxOf { it.level } else exits.minOf { it.level }
+                    val exit = if (buy) maxOf(stop, near) else minOf(stop, near)
+                    val by = if (exit == stop) (if (slPlus) "SL+" else "SL") else "TUTUP"
+                    val result = (exit - entry) * sign * legsOpen * cents * pv
                     Text(
-                        "🚪 close H1 ${if (buy) "<" else ">"} ${priceText(signal.symbol(), x.level)}",
-                        fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)
-                    )
-                    Text(
-                        "${if (buy) "low" else "high"} ${x.bars} candle" + (gap?.let { " • jarak ${fmt(it, 2)}" } ?: ""),
-                        style = MaterialTheme.typography.labelSmall, color = Muted
+                        (if (result > 0 && by == "TUTUP") "🔒 Profit terkunci ≈ " else "Bila harga berbalik sekarang: ") +
+                            "${moneyMain(result, money)} (${idrLine(result, money)}) di $by " +
+                            priceText(signal.symbol(), exit),
+                        style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold,
+                        color = if (result >= 0) BuyColor else SellColor
                     )
                 }
             }
+            Text(
+                "Harga TUTUP berubah tiap jam, umumnya mengikuti harga ke arah profit (seperti trailing stop); " +
+                    "bisa bergeser menjauh bila ada ekor candle melewatinya tanpa close. Dicek saat candle H1 tutup, " +
+                    "jadi hasil bisa sedikit lebih jelek dari angkanya. " +
+                    "Update ${hb?.timeText() ?: "-"}.",
+                style = MaterialTheme.typography.labelSmall, color = Muted
+            )
         }
     }
+}
+
+/** Jam cek cloud berikutnya (menit :02, :12, … :52), WIB. */
+fun nextCheckText(): String {
+    val now = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
+    val m = now.minute
+    val next = ((m - 2).floorDiv(10) + 1) * 10 + 2
+    val t = now.withSecond(0).withNano(0).withMinute(0).plusMinutes(next.toLong())
+    return String.format(java.util.Locale.US, "%02d:%02d WIB", t.hour, t.minute)
 }
 
 /** Level TUTUP (channel keluar) untuk candle H1 yang sedang berjalan, dari heartbeat cloud (`exits`). */
