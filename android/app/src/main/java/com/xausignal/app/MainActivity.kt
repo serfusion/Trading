@@ -228,13 +228,18 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                     }
                 }
             }
-            Box(Modifier.fillMaxSize().nestedScroll(pull.nestedScrollConnection)) {
+            val pullable = if (tab != 2) Modifier.nestedScroll(pull.nestedScrollConnection) else Modifier
+            Box(Modifier.fillMaxSize().then(pullable)) {
                 when (tab) {
                     0 -> SignalsTab(events, prices, connection, money)
                     1 -> StatsTab(events, money)
                     else -> ChatTab()
                 }
-                PullToRefreshContainer(state = pull, modifier = Modifier.align(Alignment.TopCenter))
+                // Indikator hanya digambar saat ditarik / refresh: di Material3 1.2 lingkaran (bayangan) indikator
+                // tetap terlihat sebagai bulatan hitam di tengah atas walau tidak sedang ditarik.
+                if (tab != 2 && (pull.isRefreshing || pull.progress > 0f)) {
+                    PullToRefreshContainer(state = pull, modifier = Modifier.align(Alignment.TopCenter))
+                }
             }
         }
     }
