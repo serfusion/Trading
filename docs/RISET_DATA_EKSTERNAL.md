@@ -255,3 +255,34 @@ python -m research.event_stats          # basis pengetahuan chat -> cloud/api/pe
 - Aplikasi 2.7: tab **Tanya** (build CI sukses, APK di release `android-latest`).
 - Tidak dipasang: filter XAU apa pun (tidak ada yang konsisten), dan keputusan lama di CLAUDE.md (skema A live,
   tab Tabungan Emas, bundle repo) yang bukan bagian riset ini.
+
+## 10. SL+ bertangga, TP2/TP3, trailing ATR (pertanyaan pengguna 28 Sep 2026) — `research/sl_tangga.py`
+
+Pertanyaan: dengan skema bawaan (posisi #1 TP1 1R, 4 posisi jalan, SL+ setelah TP1), apakah lebih baik SL+ terus
+dinaikkan setiap harga mencapai target, atau memakai TP2/TP3? Mesin sama dengan cloud (hanya sinyal 💰, uji nyata),
+mereproduksi skema bawaan persis (XAU 1.554 sinyal +323,8R; BTC 2.097 sinyal +765,7R). SL baru berlaku candle
+berikutnya, SL dicek lebih dulu. Keluaran: `docs/eksternal/hasil_sl_tangga.txt`.
+
+| Skema | XAU WR | XAU R/sinyal | XAU total | BTC WR | BTC R/sinyal | BTC total |
+|---|---|---|---|---|---|---|
+| **Bawaan** (TP1 1R + 4 jalan, SL+ setelah TP1) | 48,3% | +0,208 | +324R | 48,2% | +0,365 | +766R |
+| Tangga 1R (2R→SL 1R, 3R→SL 2R, …) | 49,1% | +0,184 | +308R | 48,1% | +0,187 | +453R |
+| Tangga 0,5R (1,5R→SL 0,5R, 2R→SL 1R, …) | 49,0% | +0,141 | +249R | 48,0% | +0,179 | +447R |
+| Tangga jarak 2R (3R→SL 1R, …) | 48,8% | +0,189 | +301R | 47,9% | +0,237 | +534R |
+| Tangga jarak 3R (4R→SL 1R, 5R→SL 2R, …) | 48,1% | +0,230 | +360R | 48,1% | +0,294 | +638R |
+| TP 1R/2R/3R + 2 jalan | 48,3% | +0,162 | +252R | 48,2% | +0,248 | +520R |
+| TP 1R/2R/3R + 2 jalan + tangga 1R | 49,1% | +0,157 | +262R | 48,1% | +0,156 | +379R |
+| Trailing 3 ATR setelah TP1 | 49,2% | +0,151 | +276R | 47,1% | +0,182 | +463R |
+| Trailing 5 ATR setelah TP1 | 49,1% | +0,173 | +285R | 48,1% | +0,253 | +570R |
+| A: tanpa TP1 & SL+ (5 jalan) | 36,9% | +0,251 | +373R | 34,1% | +0,459 | +924R |
+
+- **SL+ yang terus dinaikkan TIDAK sepadan.** WR hanya naik ≤ 1 poin (sebagian besar sinyal rugi kena SL awal
+  sebelum 1R, jadi tangga tidak menolongnya), tetapi profit per sinyal turun 12–32% (XAU) dan 35–51% (BTC), karena
+  profit sistem trend datang dari sedikit trend besar yang terpotong oleh tangga yang rapat.
+- TP2/TP3 dan trailing ATR juga lebih buruk dari bawaan di kedua aset.
+- Satu-satunya yang tidak merugikan XAU adalah tangga yang sangat longgar (SL baru naik ke +1R setelah harga +4R):
+  XAU +360R vs +324R (11/14 tahun sama/lebih baik), tetapi di periode latih justru sedikit lebih buruk (+0,180 vs
+  +0,191R) dan di BTC lebih buruk (−128R) → tidak diusulkan sebagai perubahan.
+- Kesimpulan: **pertahankan skema bawaan**. (Skema A tanpa TP1 memberi total terbesar tetapi WR turun ke 34–37%
+  dan drawdown lebih dalam — sudah tercatat sebagai keputusan pengguna yang menunggu.)
+
