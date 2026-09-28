@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -141,6 +142,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     var showTerms by remember { mutableStateOf(!SignalRepository.termsAccepted()) }
     var tab by remember { mutableIntStateOf(0) }
     val money = remember(moneyVersion) { SignalRepository.money() }
+    val follow = remember(moneyVersion) { SignalRepository.followed() }
 
     val permission = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {}
     val context = LocalContext.current
@@ -231,7 +233,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
             val pullable = if (tab != 2) Modifier.nestedScroll(pull.nestedScrollConnection) else Modifier
             Box(Modifier.fillMaxSize().then(pullable)) {
                 when (tab) {
-                    0 -> SignalsTab(events, prices, connection, money)
+                    0 -> SignalsTab(events, prices, connection, money, follow)
                     1 -> StatsTab(events, money)
                     else -> ChatTab()
                 }
@@ -277,6 +279,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
     val starValue = parseLot(starLot)
     var modal by remember { mutableStateOf(if (current.modalIdr > 0) fmt(current.modalIdr, 0).replace(",", ".") else "") }
     var riskPct by remember { mutableStateOf(current.riskPct) }
+    var follow by remember { mutableStateOf(SignalRepository.followed()) }
     val modalValue = modal.replace(".", "").replace(",", "").trim().toDoubleOrNull() ?: 0.0
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -292,6 +295,11 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(value = topic, onValueChange = { topic = it }, label = { Text("Topik") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
+                Text(
+                    "Notifikasi instan: di aplikasi ntfy langganan topik yang sama persis " +
+                        "(${topic.ifBlank { "…" }}), tanpa \"-data\". Aplikasi ini sendiri mengecek tiap 10 menit.",
+                    style = MaterialTheme.typography.bodySmall, color = Muted
+                )
                 OutlinedTextField(value = cloud, onValueChange = { cloud = it },
                     label = { Text("Alamat cloud (untuk Tanya)") },
                     placeholder = { Text("https://nama-proyek.vercel.app") },
@@ -301,6 +309,26 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
+                Text(
+                    "Harus sama dengan akun MT5: Cent = saldo tertulis USC dan simbol berakhiran c (XAUUSDc). " +
+                        "Akun USD tetapi dipilih Cent → lot 100× terlalu besar!",
+                    style = MaterialTheme.typography.bodySmall, color = SellColor
+                )
+                CardTitle("Pair yang saya ikuti")
+                Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap").forEach { (k, label) ->
+                        FilterChip(
+                            selected = k in follow,
+                            onClick = { follow = if (k !in follow) follow + k else if (follow.size > 1) follow - k else follow },
+                            label = { Text(label) }
+                        )
+                    }
+                }
+                Text(
+                    "Sinyal, notifikasi, dan ringkasan \"Hari ini\" hanya untuk pair yang dipilih. Forex gap = USD/JPY, " +
+                        "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB).",
+                    style = MaterialTheme.typography.bodySmall, color = Muted
+                )
                 OutlinedTextField(
                     value = modal, onValueChange = { modal = it.filter { c -> c.isDigit() || c == '.' } },
                     label = { Text("Modal (Rp)") }, placeholder = { Text("mis. 10.000.000") },
@@ -345,6 +373,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                         modalIdr = modalValue,
                         riskPct = riskPct,
                     )
+                    SignalRepository.saveFollowed(follow)
                     onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, cloud, m)
                 }
             ) { Text("Simpan", fontWeight = FontWeight.Bold) }

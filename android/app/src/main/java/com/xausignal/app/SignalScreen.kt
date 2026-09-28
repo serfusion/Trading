@@ -26,11 +26,15 @@ import java.time.temporal.TemporalAdjusters
 
 /** Tab Sinyal: harga semua pair, sinyal aktif, ringkasan, riwayat. */
 @Composable
-fun SignalsTab(events: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings) {
+fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings,
+               follow: Set<String> = SignalRepository.followed()) {
+    // hanya pair yang diikuti (Pengaturan → Pair yang saya ikuti)
+    val events = allEvents.filter { it.pairGroup() in follow }
     val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
     val history = events.filter { it.type == "signal" || (it.type == "close" && it.id !in signalIds) }
+    val missed = events.filter { it.type == "signal" && it.closedByHeartbeat(prices[it.symbol()]) }.map { it.id }.toSet()
     // Sinyal kembar (beberapa set di candle sama: simbol, arah, entry sama) digabung jadi 1 kartu ×N.
-    val open = SignalRepository.openSignals(events)
+    val open = SignalRepository.openSignals(events, prices)
         .groupBy { Triple(it.symbol(), it.dir, it.price("entry")) }.values.toList()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
@@ -51,7 +55,7 @@ fun SignalsTab(events: List<SignalEvent>, prices: Map<String, SignalEvent>, conn
         item { TodayCard(events, money) }
         if (history.isNotEmpty()) item { SectionTitle("Riwayat") }
         items(history, key = { it.msgId }) {
-            if (it.type == "signal") SignalResultCard(it, events, money) else CloseRow(it, money)
+            if (it.type == "signal") SignalResultCard(it, events, money, it.id in missed) else CloseRow(it, money)
         }
         item { Footer() }
     }
@@ -112,8 +116,6 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     }
 }
 
-private fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
-
 @Composable
 fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money: MoneySettings, count: Int = 1,
                    ids: List<String> = listOf(signal.id)) {
@@ -121,6 +123,11 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
     val price = hb?.num("price")
     val sign = if (signal.dir == "BUY") 1 else -1
     val floating = if (entry != null && price != null) (price - entry) * sign else null
+    // posisi yang masih terbuka: 5 sebelum TP1, 4 sesudahnya (posisi #1 sudah TP); gap = 1 posisi
+    val legsOpen = if (!signal.isGap() && slPlus) signal.legs() - 1 else signal.legs()
+    val floatMoney = floating?.let {
+        it * legsOpen * Math.round(signal.entryLot(money) * 100.0) * (signal.num("point_value") ?: 1.0)
+    }
     AppCard(accent = dirColor(signal.dir)) {
         SignalHeader(signal, count)
         Row(verticalAlignment = Alignment.Bottom) {
@@ -128,13 +135,18 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
                 signal.price("entry"), style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)
             )
-            if (floating != null) {
+            if (floating != null && floatMoney != null) {
                 val digits = if (signal.symbol().contains("JPY")) 3 else if ((entry ?: 0.0) < 20) 5 else 2
-                Text(
-                    (if (floating > 0) "+" else "") + fmt(floating, digits),
-                    style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold,
-                    color = if (floating >= 0) BuyColor else SellColor
-                )
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(
+                        moneyMain(floatMoney, money), style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold, color = if (floating >= 0) BuyColor else SellColor
+                    )
+                    Text(
+                        "${idrLine(floatMoney, money)} • ${signed(floating, digits)} poin × $legsOpen posisi",
+                        style = MaterialTheme.typography.labelSmall, color = Muted
+                    )
+                }
             }
         }
         MetricRow {
@@ -150,6 +162,20 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         Text(lossLine(signal, money) + if (count > 1) " • $count set sama, entry 1× saja" else "",
             style = MaterialTheme.typography.labelSmall, color = Muted)
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
+        val sl = signal.num("sl")
+        if (floating != null && slPlus && !signal.isGap() && floating < 0) {
+            NoteBox(
+                "⚠️ Harga sudah melewati SL+ (≈ entry). Bila SL 4 posisi sudah digeser ke SL+, posisi itu sudah " +
+                    "tertutup ≈ impas. Bila di MT5 masih terbuka dan minus, SL belum digeser: tutup atau pasang SL sekarang.",
+                SellColor
+            )
+        } else if (price != null && sl != null && !slPlus && (price - sl) * sign <= 0) {
+            NoteBox(
+                "⚠️ Harga sudah melewati SL. Posisi seharusnya tertutup di SL; bila di MT5 masih terbuka, SL belum " +
+                    "terpasang — tutup sekarang. Konfirmasi TUTUP dari cloud menyusul (cek tiap 10 menit).",
+                SellColor
+            )
+        }
         val exits = exitLevels(hb, ids)
         if (exits.isNotEmpty()) {
             LineDivider()
@@ -190,14 +216,30 @@ fun weekKey(t: ZonedDateTime): String =
 @Composable
 fun TodayCard(events: List<SignalEvent>, money: MoneySettings) {
     val today = LocalDate.now(ZoneId.of("Asia/Jakarta"))
-    val day = SignalRepository.periodStats(events, money, { it.toLocalDate().toString() })
+    val dayKey: (ZonedDateTime) -> String = { it.toLocalDate().toString() }
+    val day = SignalRepository.periodStats(events, money, dayKey)
         .firstOrNull { it.label == today.toString() }
+    // rincian per pair supaya jelas dari mana untung/rugi hari ini (XAU, BTC, forex gap)
+    val perPair = events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted().mapNotNull { sym ->
+        SignalRepository.periodStats(events, money, dayKey, symbol = sym)
+            .firstOrNull { it.label == today.toString() }?.let { sym to it }
+    }
     val week = SignalRepository.periodStats(events, money, ::weekKey)
         .firstOrNull { it.label == today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toString() }
     val month = SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) })
         .firstOrNull { it.label == today.toString().substring(0, 7) }
     AppCard {
         SummaryLine("Hari ini", day, money)
+        if (perPair.size > 1 || perPair.any { !it.first.startsWith("XAU") }) {
+            perPair.forEach { (sym, s) ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("• $sym  ${s.wins}W • ${s.losses}L", style = MaterialTheme.typography.labelSmall,
+                        color = Muted, modifier = Modifier.weight(1f))
+                    Text(moneyMain(s.net, money), style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold, color = if (s.net >= 0) BuyColor else SellColor)
+                }
+            }
+        }
         LineDivider()
         SummaryLine("Minggu ini", week, money)
         LineDivider()
@@ -240,7 +282,7 @@ fun lossLine(signal: SignalEvent, money: MoneySettings): String {
 
 /** Riwayat satu sinyal: entry → tutup → MENANG/KALAH + uang. */
 @Composable
-fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: MoneySettings) {
+fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: MoneySettings, missed: Boolean = false) {
     if (signal.isVoid()) {
         AppCard {
             SignalHeader(signal)
@@ -262,7 +304,13 @@ fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: Mone
             Metric("Waktu tutup", close?.timeText()?.removeSuffix(" WIB") ?: "-", compact = true)
         }
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Pill(if (close == null) "BERJALAN" else if (win) "MENANG" else "KALAH", result, solid = true)
+            Pill(
+                if (close == null && missed) "SELESAI" else if (close == null) "BERJALAN" else if (win) "MENANG" else "KALAH",
+                if (close == null && missed) Muted else result, solid = true
+            )
+            if (close == null && missed) {
+                Text("pesan TUTUP terlewat (HP offline)", style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
             if (tp1 != null && !signal.isGap()) Pill("TP1 ✓", BuyColor)
             Spacer(Modifier.weight(1f))
             if (amount != null) {

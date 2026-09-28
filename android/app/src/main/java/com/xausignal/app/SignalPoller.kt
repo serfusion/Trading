@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -65,6 +66,7 @@ object SignalPoller {
     }
 
     private fun notify(context: Context, event: SignalEvent) {
+        if (event.pairGroup() !in SignalRepository.followed()) return   // pair yang tidak diikuti: tanpa notifikasi
         when (event.type) {
             "signal" -> if ((event.status == "signal" || event.status == "opened") && !event.isVoid()) {
                 Notifications.signal(context, event)
@@ -91,8 +93,16 @@ object PollScheduler {
         val pi = PendingIntent.getBroadcast(
             context, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
-        // Tetap berjalan saat HP tidur (Doze), tanpa izin alarm tepat waktu.
-        am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextSlot(System.currentTimeMillis()), pi)
+        // Tetap berjalan saat HP tidur (Doze). Alarm tepat waktu (tidak ditunda sistem sampai belasan menit) bila
+        // diizinkan: Android 12 ke atas memakai izin alarm tepat (USE_EXACT_ALARM / SCHEDULE_EXACT_ALARM).
+        val at = nextSlot(System.currentTimeMillis())
+        val exact = if (Build.VERSION.SDK_INT >= 31) am.canScheduleExactAlarms() else true
+        try {
+            if (exact) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+            else am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+        } catch (e: SecurityException) {
+            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)
+        }
     }
 }
 
