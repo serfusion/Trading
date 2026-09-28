@@ -15,6 +15,7 @@ Varian (ditetapkan sebelum melihat hasil):
   (s=1,g=1: 2R->SL 1R, 3R->SL 2R, ...; s=1,g=2; s=1,g=3; s=0,5,g=1)
 - TP bertingkat: posisi #1 TP 1R, #2 TP 2R, #3 TP 3R, #4-5 jalan (SL+ setelah TP1), dengan/tanpa tangga s=1,g=1
 - F + trailing ATR (chandelier): setelah TP1, SL sisa = ekstrem harga sejak entry - k x ATR (k = 3, 5)
+- (pertanyaan lanjutan) SL+ lebih awal saat profit 0,7R / 0,5R; TP1 tanpa SL+; 3 posisi TP1 + 2 jalan
 """
 from __future__ import annotations
 
@@ -37,12 +38,17 @@ VARIANTS = {
     "F + tangga 0,5R (1,5R->SL 0,5R, 2R->SL 1R, ...)": dict(tps=[1.0, None, None, None, None], ladder=(0.5, 1.0)),
     "TP 1R/2R/3R + 2 jalan": dict(tps=[1.0, 2.0, 3.0, None, None]),
     "TP 1R/2R/3R + 2 jalan + tangga 1R": dict(tps=[1.0, 2.0, 3.0, None, None], ladder=(1.0, 1.0)),
+    "F + SL+ saat profit 0,7R (sebelum TP1)": dict(tps=[1.0, None, None, None, None], be_at=0.7),
+    "F + SL+ saat profit 0,5R": dict(tps=[1.0, None, None, None, None], be_at=0.5),
+    "TP1 1R tanpa SL+ (4 jalan, SL awal tetap)": dict(tps=[1.0, None, None, None, None], be=False),
+    "3 posisi TP1 + 2 jalan, SL+ setelah TP1": dict(tps=[1.0, 1.0, 1.0, None, None]),
+    "3 posisi TP1 + 2 jalan, SL+ di 0,7R": dict(tps=[1.0, 1.0, 1.0, None, None], be_at=0.7),
     "F + trailing 3 ATR setelah TP1": dict(tps=[1.0, None, None, None, None], chand=3.0),
     "F + trailing 5 ATR setelah TP1": dict(tps=[1.0, None, None, None, None], chand=5.0),
 }
 
 
-def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl_atr=3.0):
+def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl_atr=3.0, be_at=None):
     """Satu set. Return list (t_entry, t_exit, R rata-rata per posisi, dir, R maksimum yang dicapai)."""
     trades, i, n = [], 0, b.n
     o, h, l, sp, a = b.o, b.h, b.l, b.sp, b.atr
@@ -92,6 +98,8 @@ def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl
             best = max(best, h[k]) if d > 0 else min(best, l[k] + adj)
             new = []
             if be and tp1_hit:
+                new.append(0.1)
+            if be_at is not None and max_r >= be_at:          # SL+ lebih awal (mis. saat profit 0,7R)
                 new.append(0.1)
             if ladder is not None and k > j:
                 s, g = ladder

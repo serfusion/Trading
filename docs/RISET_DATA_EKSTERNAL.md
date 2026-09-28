@@ -275,6 +275,11 @@ berikutnya, SL dicek lebih dulu. Keluaran: `docs/eksternal/hasil_sl_tangga.txt`.
 | Trailing 3 ATR setelah TP1 | 49,2% | +0,151 | +276R | 47,1% | +0,182 | +463R |
 | Trailing 5 ATR setelah TP1 | 49,1% | +0,173 | +285R | 48,1% | +0,253 | +570R |
 | A: tanpa TP1 & SL+ (5 jalan) | 36,9% | +0,251 | +373R | 34,1% | +0,459 | +924R |
+| SL+ lebih awal saat profit 0,7R (TP1 tetap 1 posisi) | 58,9% | +0,185 | +312R | 56,0% | +0,331 | +752R |
+| SL+ lebih awal saat profit 0,5R | 64,4% | +0,146 | +273R | 60,5% | +0,247 | +633R |
+| TP1 1R tanpa SL+ (4 jalan, SL awal tetap) | 39,9% | +0,211 | +313R | 37,6% | +0,372 | +750R |
+| 3 posisi TP1 + 2 jalan, SL+ setelah TP1 | 48,3% | +0,120 | +186R | 48,4% | +0,196 | +412R |
+| 3 posisi TP1 + 2 jalan, SL+ di 0,7R | 58,9% | +0,113 | +190R | 56,1% | +0,174 | +394R |
 
 - **SL+ yang terus dinaikkan TIDAK sepadan.** WR hanya naik ≤ 1 poin (sebagian besar sinyal rugi kena SL awal
   sebelum 1R, jadi tangga tidak menolongnya), tetapi profit per sinyal turun 12–32% (XAU) dan 35–51% (BTC), karena
@@ -283,6 +288,11 @@ berikutnya, SL dicek lebih dulu. Keluaran: `docs/eksternal/hasil_sl_tangga.txt`.
 - Satu-satunya yang tidak merugikan XAU adalah tangga yang sangat longgar (SL baru naik ke +1R setelah harga +4R):
   XAU +360R vs +324R (11/14 tahun sama/lebih baik), tetapi di periode latih justru sedikit lebih buruk (+0,180 vs
   +0,191R) dan di BTC lebih buruk (−128R) → tidak diusulkan sebagai perubahan.
+- **SL+ di 0,7R vs bawaan** (pertanyaan lanjutan): WR naik 8–11 poin (XAU 58,9% vs 48,3%, BTC 56,0% vs 48,2%)
+  karena lebih banyak sinyal berakhir di +0,1R, tetapi total sedikit turun (XAU −3,5%, BTC −1,8%), hanya 5 dari
+  14 (XAU) / 5 dari 11 (BTC) tahun lebih baik, dan drawdown XAU lebih dalam (−49,5R vs −43,6R) karena set lebih
+  cepat kosong lalu mengambil sinyal baru. Praktis seimbang; bawaan sedikit lebih untung dan lebih sederhana
+  untuk trading manual (satu tindakan saat TP1). SL+ 0,5R dan 3 posisi TP1 jelas lebih buruk.
 - Kesimpulan: **pertahankan skema bawaan**. (Skema A tanpa TP1 memberi total terbesar tetapi WR turun ke 34–37%
   dan drawdown lebih dalam — sudah tercatat sebagai keputusan pengguna yang menunggu.)
 

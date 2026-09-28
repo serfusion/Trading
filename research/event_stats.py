@@ -231,7 +231,8 @@ KESIMPULAN = [
     "- SL+ bertangga (mis. 2R→SL 1R, 3R→SL 2R), TP2/TP3 bertingkat, dan trailing ATR diuji pada sinyal 💰 "
     "(research/sl_tangga.py): WR hanya naik ≤1 poin tetapi profit per sinyal turun 12–32% (XAU) dan 35–51% (BTC). "
     "Skema bawaan (TP1 1R untuk 1 posisi, 4 posisi jalan, SL+ setelah TP1) tetap yang terbaik di antara itu. "
-    "Tanpa TP1 (5 posisi jalan) total lebih besar tetapi WR turun ke 34–37%.",
+    "Tanpa TP1 (5 posisi jalan) total lebih besar tetapi WR turun ke 34–37%. SL+ lebih awal saat profit 0,7R: WR "
+    "naik ke 56–59% tetapi total turun 2–4% dan drawdown XAU lebih dalam; 3 posisi TP1 + 2 jalan: total turun 43–46%.",
     "- Hasil masa lalu bukan jaminan; WR sinyal trend memang rendah (≈45–50%) dan profit datang dari sedikit trend besar.",
 ]
 
