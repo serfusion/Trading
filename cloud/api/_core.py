@@ -421,6 +421,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             if sig["action"] == "close" and v:
                 close_virtual(name, v, price, sig["note"])
                 v = None
+            elif sig["action"] == "open" and v is None and sig["atr"] < 0.4 * atr_last(closed, 120):
+                # ATR(20) jauh di bawah normal (mis. candle datar) -> SL terlalu sempit, sinyal tidak wajar
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "ATR tidak wajar"})
+                events.append(f"{name} {sig['dir']} dilewati: ATR {sig['atr']:.2f} terlalu kecil")
             elif sig["action"] == "open" and v is None and since_week_open(closed) < cfg.get("skip_open_bars", 0):
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "gap buka pekan"})
                 events.append(f"{name} {sig['dir']} dilewati: {since_week_open(closed) + 1} candle pertama setelah buka")

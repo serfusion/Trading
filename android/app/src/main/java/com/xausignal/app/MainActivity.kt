@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
         SignalRepository.init(this)
         Notifications.createChannels(this)
         PollScheduler.schedule(applicationContext)
+        askUnrestrictedBattery()
         setContent {
             XauTheme {
                 AppScreen(onSettingsSaved = { refresh() })
@@ -80,6 +81,20 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         refresh()
+    }
+
+    /** Minta dikecualikan dari penghemat baterai supaya alarm cek sinyal tidak ditunda/dimatikan HP. */
+    private fun askUnrestrictedBattery() {
+        val pm = getSystemService(android.os.PowerManager::class.java) ?: return
+        if (pm.isIgnoringBatteryOptimizations(packageName)) return
+        try {
+            startActivity(
+                android.content.Intent(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                    .setData(android.net.Uri.parse("package:$packageName"))
+            )
+        } catch (e: Exception) {
+            // beberapa HP tidak punya layar ini
+        }
     }
 
     /** Muat harga & sinyal terbaru saat aplikasi dibuka. */

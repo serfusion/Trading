@@ -61,15 +61,22 @@ def feed(weekend_jump=True):
     return bars
 
 
-def run(cfg, bars):
+def run(cfg, bars, guard=True):
+    if not guard:
+        orig = _core.atr_last
+        _core.atr_last = lambda b, n: orig(b, n) if n != 120 else 0.0
     prices, store, pub = FakePrices(bars), FakeStore(), FakePub()
     prices.now = datetime(2026, 9, 27, 22, 2, tzinfo=UTC)
-    _core.tick(prices.now, prices, store, pub, cfg)
+    try:
+        _core.tick(prices.now, prices, store, pub, cfg)
+    finally:
+        if not guard:
+            _core.atr_last = orig
     return [e for e in pub.events if e["type"] == "signal"], store
 
 
 def test_bug_reproduced_without_market_hours():
-    signals, _ = run({**_core.CFG, "market_hours": False, "skip_open_bars": 0}, feed())
+    signals, _ = run({**_core.CFG, "market_hours": False, "skip_open_bars": 0}, feed(), guard=False)
     assert signals and signals[0]["dir"] == "BUY"
     assert signals[0]["risk_points"] < 3                     # SL super dekat karena ATR dari candle datar
 
@@ -99,3 +106,8 @@ def test_stale_open_signal_is_voided():
     closes = [e for e in pub.events if e["type"] == "close"]
     assert len(closes) == 1 and closes[0]["void"] and closes[0]["r"] == 0.0
     assert store.state["systems"]["T40/15"].get("virtual") is None
+
+
+def test_tiny_atr_guard_blocks_signal_even_without_market_filter():
+    signals, _ = run({**_core.CFG, "market_hours": False, "skip_open_bars": 0}, feed())
+    assert signals == []                                     # dulu: BUY dengan SL < $3
