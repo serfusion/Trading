@@ -208,6 +208,13 @@ CARA_KERJA = [
     "BTC konf 48,1% / +0,23R / 430. Gap pekan forex (AUD/USD, USD/JPY, EUR/JPY, AUD/JPY, EUR/CHF): WR 74–90%, "
     "+0,10 s/d +0,26R.",
     "- 1R = rugi bila kena SL awal. WR rendah itu normal untuk trend-following: banyak rugi kecil, sedikit untung besar.",
+    "- 4 posisi 'running' TIDAK punya TP tetap: ditutup saat sinyal TUTUP (close H1 menembus low 15/20/30 candle untuk "
+    "BUY, high untuk SELL, sesuai set T40/15, T55/20, T80/30); level itu ikut naik bersama harga (trailing otomatis). "
+    "Nasib sinyal 💰 XAU 2012–2026 (n=1.554): 35,9% kena SL awal (−1R); 18,7% TP1 lalu SL+ (+0,1R); 16,7% TUTUP sebelum "
+    "TP1 (median −0,54R); 28,7% TP1 lalu TUTUP dengan running median +1,3R, 21% > +3R, 11% > +5R (maks +27,7R), "
+    "ditahan median 4,4 hari (p90 9,7). BTC (n=2.097): 25,4% TUTUP setelah TP1, running median +1,9R, 35% > +3R, "
+    "19% > +5R, median 3 hari. Saat TUTUP, running rata-rata sudah mengembalikan sebagian puncak (median puncak 3,1R → "
+    "keluar 1,3R) — itu harga untuk menangkap trend besar (research/sl_tangga.py: memperketat justru menurunkan total).",
 ]
 
 KESIMPULAN = [
