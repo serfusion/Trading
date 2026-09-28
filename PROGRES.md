@@ -44,6 +44,22 @@ Tidak bisa diuji apa adanya: EA terkompilasi (.ex5), kode tersandi (Minhtan2005)
 (sensesVoid, armza332 bagian AI, Pestador, Mnauu2201 bagian Groq), model ML/RL tanpa dilatih ulang (diwakili uji
 walk-forward di `research/github_popular.py`).
 
+## Riset data eksternal (permintaan pengguna 28 Sep 2026: "lanjutkan riset data eksternal")
+
+Tujuan: apakah data luar grafik bisa menyaring sinyal 💰 cloud. Laporan: `docs/RISET_DATA_EKSTERNAL.md`, keluaran
+`docs/eksternal/`. Kriteria "konsisten" ditetapkan sebelum melihat hasil (`research/eksternal.py`).
+
+| # | Data | Status | Hasil |
+|---|---|---|---|
+| 1 | Kalender berita NFP/CPI/FOMC (FF + FRED) | ✅ | tidak ada yang konsisten di XAU 💰; BTC "≤2 jam sebelum berita" lolos di atas kertas tapi 0 efek di uji nyata |
+| 2 | Yield riil DFII10 & dolar DTWEXBGS (FRED, vintage ALFRED) | ✅ | tidak konsisten; varian terbaik latih gagal di uji (overfitting) |
+| 3 | COT CFTC emas & bitcoin | ✅ | tidak konsisten di 💰; "ikut ramai P90" konsisten hanya di SEMUA sinyal XAU (membuang sinyal biasa) |
+| 4 | Sesi + BID/ASK Dukascopy H1 | ⏳ sesi selesai (tidak konsisten); unduhan Dukascopy berjalan (server membatasi laju) | |
+| 5 | Funding/OI BTC (data.binance.vision) | ⏳ funding terunduh, OI berjalan | |
+
+Catatan: `data_mt5/` (ekspor MT5 Exness pengguna) belum diunggah; `TWELVEDATA_API_KEY` di environment ditolak
+Twelve Data (401) — tidak dibutuhkan untuk uji filter.
+
 ## Cara menyiapkan ulang di sesi baru
 
 ```bash
@@ -83,3 +99,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   - pipela memperlebar SL setelah entry.
 
   Bot kita dicek: tidak punya pola-pola itu. **Putaran 2 (A2, B2, C2, D2) selesai.**
+- 2026-09-28: riset data eksternal dimulai. Akses jaringan & FRED_API_KEY OK. Tahap 1–3 (berita, FRED, COT) selesai:
+  tidak ada filter konsisten untuk sinyal 💰 XAU. Kerangka + tes: `research/eksternal.py`, `tests/test_eksternal.py`.
