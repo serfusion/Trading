@@ -151,8 +151,9 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
         if (Build.VERSION.SDK_INT >= 33) permission.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
     LaunchedEffect(Unit) {
-        while (true) {   // selama aplikasi terbuka: perbarui tiap menit
-            delay(60_000)
+        while (true) {   // selama aplikasi terbuka: ambil data tepat setelah cek cloud (tiap 10 menit, bukan tiap menit)
+            val now = System.currentTimeMillis()
+            delay(PollScheduler.nextSlot(now + 1_000L) - now)
             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
                 withContext(Dispatchers.IO) { SignalPoller.poll(context.applicationContext) }
             }

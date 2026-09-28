@@ -15,6 +15,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -36,13 +37,16 @@ private const val HISTORY_PAGE = 4
 fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings,
                follow: Set<String> = SignalRepository.followed()) {
     // hanya pair yang diikuti (Pengaturan → Pair yang saya ikuti)
-    val events = allEvents.filter { it.pairGroup() in follow }
-    val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
-    val primary = SignalRepository.primaryOf(events)
+    // dihitung ulang hanya saat pesan / pair diikuti berubah, bukan setiap harga bergerak (hemat baterai)
+    val events = remember(allEvents, follow) { allEvents.filter { it.pairGroup() in follow } }
     val twins = SignalRepository.twinCounts(events)
     // riwayat: sinyal kembar cukup 1 kartu (set utama = harga TUTUP yang dipakai)
-    val history = events.filter {
-        (it.type == "signal" && (primary[it.id] ?: it.id) == it.id) || (it.type == "close" && it.id !in signalIds)
+    val history = remember(events) {
+        val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
+        val primary = SignalRepository.primaryOf(events)
+        events.filter {
+            (it.type == "signal" && (primary[it.id] ?: it.id) == it.id) || (it.type == "close" && it.id !in signalIds)
+        }
     }
     val missed = events.filter { it.type == "signal" && it.closedByHeartbeat(prices[it.symbol()]) }.map { it.id }.toSet()
     var shown by rememberSaveable { mutableIntStateOf(HISTORY_PAGE) }
@@ -294,17 +298,25 @@ fun weekKey(t: ZonedDateTime): String =
 fun TodayCard(events: List<SignalEvent>, money: MoneySettings) {
     val today = LocalDate.now(ZoneId.of("Asia/Jakarta"))
     val dayKey: (ZonedDateTime) -> String = { it.toLocalDate().toString() }
-    val day = SignalRepository.periodStats(events, money, dayKey)
-        .firstOrNull { it.label == today.toString() }
-    // rincian per pair supaya jelas dari mana untung/rugi hari ini (XAU, BTC, forex gap)
-    val perPair = events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted().mapNotNull { sym ->
-        SignalRepository.periodStats(events, money, dayKey, symbol = sym)
-            .firstOrNull { it.label == today.toString() }?.let { sym to it }
+    // dihitung ulang hanya saat pesan / pengaturan / tanggal berubah, bukan setiap harga bergerak
+    val day = remember(events, money, today) {
+        SignalRepository.periodStats(events, money, dayKey).firstOrNull { it.label == today.toString() }
     }
-    val week = SignalRepository.periodStats(events, money, ::weekKey)
-        .firstOrNull { it.label == today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toString() }
-    val month = SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) })
-        .firstOrNull { it.label == today.toString().substring(0, 7) }
+    // rincian per pair supaya jelas dari mana untung/rugi hari ini (XAU, BTC, forex gap)
+    val perPair = remember(events, money, today) {
+        events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted().mapNotNull { sym ->
+            SignalRepository.periodStats(events, money, dayKey, symbol = sym)
+                .firstOrNull { it.label == today.toString() }?.let { sym to it }
+        }
+    }
+    val week = remember(events, money, today) {
+        SignalRepository.periodStats(events, money, ::weekKey)
+            .firstOrNull { it.label == today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).toString() }
+    }
+    val month = remember(events, money, today) {
+        SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) })
+            .firstOrNull { it.label == today.toString().substring(0, 7) }
+    }
     AppCard {
         SummaryLine("Hari ini", day, money)
         if (perPair.size > 1 || perPair.any { !it.first.startsWith("XAU") }) {
