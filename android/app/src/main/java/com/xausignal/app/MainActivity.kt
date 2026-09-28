@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
@@ -126,6 +127,7 @@ private data class TabItem(val title: String, val icon: ImageVector)
 private val TABS = listOf(
     TabItem("Sinyal", Icons.Filled.Notifications),
     TabItem("Statistik", Icons.Filled.DateRange),
+    TabItem("Tanya", Icons.Filled.Email),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -162,18 +164,11 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Box(
-                            Modifier
-                                .size(40.dp)
-                                .background(Color(0xFF14181F), RoundedCornerShape(12.dp)),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Image(
-                                painterResource(R.drawable.ic_launcher_foreground),
-                                contentDescription = null,
-                                modifier = Modifier.size(40.dp)
-                            )
-                        }
+                        Image(
+                            painterResource(R.drawable.logo),
+                            contentDescription = null,
+                            modifier = Modifier.size(40.dp)
+                        )
                         Column(Modifier.padding(start = 12.dp)) {
                             Text(APP_NAME, fontWeight = FontWeight.Bold, color = Gold,
                                 style = MaterialTheme.typography.titleMedium, maxLines = 1)
@@ -236,7 +231,8 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
             Box(Modifier.fillMaxSize().nestedScroll(pull.nestedScrollConnection)) {
                 when (tab) {
                     0 -> SignalsTab(events, prices, connection, money)
-                    else -> StatsTab(events, money)
+                    1 -> StatsTab(events, money)
+                    else -> ChatTab()
                 }
                 PullToRefreshContainer(state = pull, modifier = Modifier.align(Alignment.TopCenter))
             }
@@ -251,8 +247,9 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     } else if (showSettings) {
         SettingsDialog(
             onDismiss = { showSettings = false },
-            onSave = { server, topic, m ->
+            onSave = { server, topic, cloud, m ->
                 SignalRepository.saveSettings(server, topic)
+                SignalRepository.saveCloudUrl(cloud)
                 SignalRepository.saveMoney(m)
                 showSettings = false
                 onSettingsSaved()
@@ -262,18 +259,17 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
 }
 
 @Composable
-fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings) -> Unit) {
+fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, MoneySettings) -> Unit) {
     val current = SignalRepository.money()
     var server by remember { mutableStateOf(SignalRepository.server()) }
     var topic by remember { mutableStateOf(SignalRepository.topic()) }
+    var cloud by remember { mutableStateOf(SignalRepository.cloudUrl()) }
     var cent by remember { mutableStateOf(current.cent) }
     var lot by remember { mutableStateOf(lotText(current.legLot)) }
     var starLot by remember { mutableStateOf(lotText(current.starLot)) }
     var rate by remember { mutableStateOf(fmt(current.idrRate, 0).replace(",", "")) }
     val lotValue = parseLot(lot)
     val starValue = parseLot(starLot)
-    var tpLegs by remember { mutableStateOf(current.tpLegs) }
-    var be07 by remember { mutableStateOf(current.be07) }
     var modal by remember { mutableStateOf(if (current.modalIdr > 0) fmt(current.modalIdr, 0).replace(",", ".") else "") }
     var riskPct by remember { mutableStateOf(current.riskPct) }
     val modalValue = modal.replace(".", "").replace(",", "").trim().toDoubleOrNull() ?: 0.0
@@ -290,6 +286,10 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                 OutlinedTextField(value = server, onValueChange = { server = it }, label = { Text("Server") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
                 OutlinedTextField(value = topic, onValueChange = { topic = it }, label = { Text("Topik") },
+                    singleLine = true, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(value = cloud, onValueChange = { cloud = it },
+                    label = { Text("Alamat cloud (untuk Tanya)") },
+                    placeholder = { Text("https://nama-proyek.vercel.app") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
                 CardTitle("Akun")
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -317,16 +317,11 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     Text("Isi modal supaya lot dihitung otomatis.", style = MaterialTheme.typography.bodySmall,
                         color = Muted)
                 }
-                CardTitle("Posisi di TP1")
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(selected = tpLegs == 1, onClick = { tpLegs = 1 }, label = { Text("1 (sisa 4)") })
-                    FilterChip(selected = tpLegs == 3, onClick = { tpLegs = 3 }, label = { Text("3 (sisa 2)") })
-                }
-                CardTitle("SL+ saat")
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    FilterChip(selected = !be07, onClick = { be07 = false }, label = { Text("TP1 kena") })
-                    FilterChip(selected = be07, onClick = { be07 = true }, label = { Text("Profit 0,7R") })
-                }
+                CardTitle("Skema")
+                Text(
+                    "1 posisi TP1 (1R), 4 posisi running sampai sinyal TUTUP. TP1 kena → SL 4 posisi ke entry (SL+).",
+                    style = MaterialTheme.typography.bodySmall, color = Muted
+                )
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
             }
@@ -340,12 +335,12 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                         legLot = lotValue ?: 0.01,
                         idrRate = rate.replace(".", "").replace(",", "").toDoubleOrNull() ?: 16500.0,
                         starLot = starValue ?: 0.01,
-                        tpLegs = tpLegs,
-                        be07 = be07,
+                        tpLegs = 1,
+                        be07 = false,
                         modalIdr = modalValue,
                         riskPct = riskPct,
                     )
-                    onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, m)
+                    onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, cloud, m)
                 }
             ) { Text("Simpan", fontWeight = FontWeight.Bold) }
         },

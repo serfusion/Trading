@@ -169,11 +169,58 @@ object SignalRepository {
 
     private var prefs: SharedPreferences? = null
 
+    /** Percakapan tab Tanya (disimpan di HP, maksimal 40 pesan). */
+    private val _chat = MutableStateFlow<List<ChatMessage>>(emptyList())
+    val chat: StateFlow<List<ChatMessage>> = _chat
+
     @Synchronized
     fun init(context: Context) {
         if (prefs != null) return
         prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         load()
+        loadChat()
+    }
+
+    /** Alamat cloud Vercel (mis. https://nama.vercel.app) untuk tab Tanya. */
+    fun cloudUrl(): String = prefs?.getString("cloud", "") ?: ""
+
+    fun saveCloudUrl(url: String) {
+        var u = url.trim().trimEnd('/')
+        if (u.isNotEmpty() && !u.startsWith("http")) u = "https://$u"
+        prefs?.edit()?.putString("cloud", u)?.apply()
+    }
+
+    @Synchronized
+    fun addChat(m: ChatMessage) {
+        _chat.value = (_chat.value + m).takeLast(40)
+        saveChat()
+    }
+
+    @Synchronized
+    fun clearChat() {
+        _chat.value = emptyList()
+        saveChat()
+    }
+
+    private fun saveChat() {
+        val arr = JSONArray()
+        _chat.value.forEach { m ->
+            arr.put(JSONObject().put("r", m.role).put("t", m.text).put("s", JSONArray(m.sources)))
+        }
+        prefs?.edit()?.putString("chat", arr.toString())?.apply()
+    }
+
+    private fun loadChat() {
+        _chat.value = try {
+            val arr = JSONArray(prefs?.getString("chat", "[]") ?: "[]")
+            (0 until arr.length()).map { i ->
+                val o = arr.getJSONObject(i)
+                val s = o.optJSONArray("s") ?: JSONArray()
+                ChatMessage(o.optString("r"), o.optString("t"), (0 until s.length()).map { s.getString(it) })
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 
     fun server(): String = prefs?.getString("server", DEFAULT_SERVER) ?: DEFAULT_SERVER
@@ -193,8 +240,8 @@ object SignalRepository {
             legLot = roundLot(lot).coerceAtLeast(0.01),
             idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
             starLot = roundLot(star).coerceAtLeast(0.01),
-            tpLegs = p?.getInt("tp_legs", 1) ?: 1,
-            be07 = p?.getBoolean("be07", false) ?: false,
+            tpLegs = 1,                 // skema tetap: 1 posisi TP1 + 4 running, SL+ saat TP1 kena (2.8)
+            be07 = false,
             modalIdr = p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0,
             riskPct = p?.getFloat("risk_pct", 0.5f)?.toDouble() ?: 0.5,
         )

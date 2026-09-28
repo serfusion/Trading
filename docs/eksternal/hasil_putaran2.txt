@@ -1,0 +1,76 @@
+GVZCLS: 2008-06-03 .. 2026-09-22, 4607 nilai, terakhir 23.59
+VIXCLS: 2003-01-02 .. 2026-09-22, 6002 nilai, terakhir 14.21
+DGS2: 2003-01-02 .. 2026-09-24, 5937 nilai, terakhir 4.87
+T10YIE: 2003-01-02 .. 2026-09-25, 5938 nilai, terakhir 2.34
+
+=== XAUUSD — 💰 dikirim: 1185 sinyal (latih < 2019) — lolos/dibuang [dasar] ===
+GVZ tinggi (P80) dilewati                    kirim  943/1185 | rata lolos +0.26 dibuang +0.20 (dasar +0.25) | latih +0.27/+0.28 [+0.27] uji +0.26/+0.16 [+0.23] | total   +245R (dasar +294) | tahun 7/12 | p=0.327
+GVZ rendah (P20) dilewati                    kirim  903/1185 | rata lolos +0.21 dibuang +0.38 (dasar +0.25) | latih +0.21/+0.41 [+0.27] uji +0.21/+0.34 [+0.23] | total   +188R (dasar +294) | tahun 1/12 | p=0.897
+GVZ naik 5h dilewati                         kirim  679/1185 | rata lolos +0.40 dibuang +0.04 (dasar +0.25) | latih +0.51/-0.04 [+0.27] uji +0.32/+0.11 [+0.23] | total   +273R (dasar +294) | tahun 8/14 | p=0.000
+VIX tinggi (P80) dilewati                    kirim  970/1185 | rata lolos +0.23 dibuang +0.31 (dasar +0.25) | latih +0.28/+0.24 [+0.27] uji +0.21/+0.39 [+0.23] | total   +228R (dasar +294) | tahun 6/12 | p=0.692
+VIX rendah (P20) dilewati                    kirim  836/1185 | rata lolos +0.28 dibuang +0.18 (dasar +0.25) | latih +0.14/+0.57 [+0.27] uji +0.38/-0.12 [+0.23] | total   +232R (dasar +294) | tahun 9/14 | p=0.203
+VIX naik 5h dilewati                         kirim  641/1185 | rata lolos +0.40 dibuang +0.07 (dasar +0.25) | latih +0.41/+0.12 [+0.27] uji +0.39/+0.04 [+0.23] | total   +253R (dasar +294) | tahun 7/14 | p=0.002
+yield 2th 20h searah                         kirim  801/1185 | rata lolos +0.20 dibuang +0.35 (dasar +0.25) | latih +0.13/+0.50 [+0.27] uji +0.24/+0.21 [+0.23] | total   +159R (dasar +294) | tahun 8/14 | p=0.902
+yield 2th 20h lawan                          kirim  433/1185 | rata lolos +0.34 dibuang +0.20 (dasar +0.25) | latih +0.49/+0.11 [+0.27] uji +0.20/+0.25 [+0.23] | total   +146R (dasar +294) | tahun 7/14 | p=0.111
+breakeven 20h searah                         kirim  589/1185 | rata lolos +0.30 dibuang +0.20 (dasar +0.25) | latih +0.37/+0.17 [+0.27] uji +0.25/+0.22 [+0.23] | total   +177R (dasar +294) | tahun 4/14 | p=0.175
+breakeven 20h lawan                          kirim  631/1185 | rata lolos +0.24 dibuang +0.26 (dasar +0.25) | latih +0.24/+0.30 [+0.27] uji +0.24/+0.23 [+0.23] | total   +152R (dasar +294) | tahun 10/14 | p=0.553
+lewati Senin                                 kirim  970/1185 | rata lolos +0.20 dibuang +0.46 (dasar +0.25) | latih +0.25/+0.34 [+0.27] uji +0.16/+0.58 [+0.23] | total   +194R (dasar +294) | tahun 6/14 | p=0.965
+lewati Jumat                                 kirim  971/1185 | rata lolos +0.22 dibuang +0.37 (dasar +0.25) | latih +0.27/+0.27 [+0.27] uji +0.19/+0.43 [+0.23] | total   +215R (dasar +294) | tahun 5/14 | p=0.845
+lewati September                             kirim 1073/1185 | rata lolos +0.26 dibuang +0.14 (dasar +0.25) | latih +0.31/-0.10 [+0.27] uji +0.22/+0.39 [+0.23] | total   +278R (dasar +294) | tahun 8/13 | p=0.267
+lewati 15 Des - 5 Jan                        kirim 1110/1185 | rata lolos +0.28 dibuang -0.28 (dasar +0.25) | latih +0.31/-0.33 [+0.27] uji +0.26/-0.24 [+0.23] | total   +315R (dasar +294) | tahun 10/11 | p=0.001  ✅ KONSISTEN
+-> terbaik di LATIH: GVZ naik 5h dilewati; per tahun lolos/dibuang(n): 13:+2.29/+0.07(27) 14:+1.32/-0.04(32) 15:-0.37/-0.36(39) 16:+0.50/+0.54(29) 17:+0.30/-0.19(50) 18:-0.28/-0.03(45) 19:-0.30/+0.25(25) 20:+1.39/-0.41(23) 21:-0.13/-0.22(35) 22:+0.09/+0.01(43) 23:-0.38/+0.33(43) 24:+0.81/-0.03(44) 25:+0.46/+0.24(62) 26:+0.68/+1.45(9)
+-> lewati 15 Des - 5 Jan konsisten; uji nyata (filter di allow seperti cloud):
+tanpa filter: n=1554 WR=48.3% rata=+0.208R total=+323.8R | latih +0.191R (652) uji +0.221R (902)
+dengan filter: n=1476 WR=48.0% rata=+0.209R total=+308.3R | latih +0.211R (613) uji +0.207R (863)
+
+=== XAUUSD — semua sinyal: 3416 sinyal (latih < 2019) — lolos/dibuang [dasar] ===
+GVZ tinggi (P80) dilewati                    kirim 2650/3416 | rata lolos +0.09 dibuang +0.04 (dasar +0.08) | latih +0.06/-0.02 [+0.05] uji +0.11/+0.08 [+0.10] | total   +229R (dasar +262) | tahun 7/12 | p=0.244
+GVZ rendah (P20) dilewati                    kirim 2505/3416 | rata lolos +0.04 dibuang +0.18 (dasar +0.08) | latih -0.02/+0.19 [+0.05] uji +0.08/+0.17 [+0.10] | total    +99R (dasar +262) | tahun 1/12 | p=0.989
+GVZ naik 5h dilewati                         kirim 1993/3416 | rata lolos +0.13 dibuang +0.01 (dasar +0.08) | latih +0.16/-0.11 [+0.05] uji +0.10/+0.10 [+0.10] | total   +255R (dasar +262) | tahun 9/15 | p=0.008
+VIX tinggi (P80) dilewati                    kirim 2786/3416 | rata lolos +0.08 dibuang +0.08 (dasar +0.08) | latih +0.05/+0.03 [+0.05] uji +0.10/+0.12 [+0.10] | total   +214R (dasar +262) | tahun 6/13 | p=0.480
+VIX rendah (P20) dilewati                    kirim 2429/3416 | rata lolos +0.07 dibuang +0.09 (dasar +0.08) | latih -0.01/+0.18 [+0.05] uji +0.14/+0.01 [+0.10] | total   +177R (dasar +262) | tahun 7/15 | p=0.602
+VIX naik 5h dilewati                         kirim 1891/3416 | rata lolos +0.12 dibuang +0.03 (dasar +0.08) | latih +0.05/+0.04 [+0.05] uji +0.16/+0.02 [+0.10] | total   +221R (dasar +262) | tahun 11/15 | p=0.037
+yield 2th 20h searah                         kirim 1794/3416 | rata lolos +0.08 dibuang +0.08 (dasar +0.08) | latih +0.02/+0.08 [+0.05] uji +0.12/+0.07 [+0.10] | total   +140R (dasar +262) | tahun 9/15 | p=0.464
+yield 2th 20h lawan                          kirim 1810/3416 | rata lolos +0.06 dibuang +0.09 (dasar +0.08) | latih +0.07/+0.02 [+0.05] uji +0.06/+0.15 [+0.10] | total   +112R (dasar +262) | tahun 7/15 | p=0.726
+breakeven 20h searah                         kirim 1768/3416 | rata lolos +0.08 dibuang +0.07 (dasar +0.08) | latih +0.05/+0.04 [+0.05] uji +0.10/+0.10 [+0.10] | total   +143R (dasar +262) | tahun 8/15 | p=0.421
+breakeven 20h lawan                          kirim 1750/3416 | rata lolos +0.09 dibuang +0.07 (dasar +0.08) | latih +0.07/+0.02 [+0.05] uji +0.10/+0.11 [+0.10] | total   +149R (dasar +262) | tahun 8/15 | p=0.361
+lewati Senin                                 kirim 2811/3416 | rata lolos +0.07 dibuang +0.12 (dasar +0.08) | latih +0.03/+0.13 [+0.05] uji +0.10/+0.12 [+0.10] | total   +188R (dasar +262) | tahun 8/15 | p=0.791
+lewati Jumat                                 kirim 2849/3416 | rata lolos +0.06 dibuang +0.14 (dasar +0.08) | latih +0.05/+0.03 [+0.05] uji +0.08/+0.22 [+0.10] | total   +183R (dasar +262) | tahun 7/15 | p=0.862
+lewati September                             kirim 3112/3416 | rata lolos +0.08 dibuang +0.02 (dasar +0.08) | latih +0.06/-0.08 [+0.05] uji +0.10/+0.10 [+0.10] | total   +256R (dasar +262) | tahun 9/14 | p=0.233
+lewati 15 Des - 5 Jan                        kirim 3231/3416 | rata lolos +0.08 dibuang +0.02 (dasar +0.08) | latih +0.06/-0.09 [+0.05] uji +0.10/+0.13 [+0.10] | total   +259R (dasar +262) | tahun 12/15 | p=0.296
+
+=== BTCUSD — 💰 dikirim: 1624 sinyal (latih < 2021) — lolos/dibuang [dasar] ===
+GVZ tinggi (P80) dilewati                    kirim 1265/1624 | rata lolos +0.40 dibuang +0.27 (dasar +0.37) | latih +0.79/+0.32 [+0.70] uji +0.07/+0.24 [+0.12] | total   +510R (dasar +606) | tahun 3/9 | p=0.176
+GVZ rendah (P20) dilewati                    kirim 1200/1624 | rata lolos +0.37 dibuang +0.38 (dasar +0.37) | latih +0.72/+0.67 [+0.70] uji +0.11/+0.12 [+0.12] | total   +444R (dasar +606) | tahun 7/9 | p=0.546
+GVZ naik 5h dilewati                         kirim  907/1624 | rata lolos +0.28 dibuang +0.50 (dasar +0.37) | latih +0.56/+0.88 [+0.70] uji +0.06/+0.19 [+0.12] | total   +250R (dasar +606) | tahun 4/11 | p=0.967
+VIX tinggi (P80) dilewati                    kirim 1332/1624 | rata lolos +0.40 dibuang +0.27 (dasar +0.37) | latih +0.76/+0.47 [+0.70] uji +0.11/+0.12 [+0.12] | total   +527R (dasar +606) | tahun 3/9 | p=0.223
+VIX rendah (P20) dilewati                    kirim 1165/1624 | rata lolos +0.35 dibuang +0.44 (dasar +0.37) | latih +0.61/+1.00 [+0.70] uji +0.12/+0.11 [+0.12] | total   +406R (dasar +606) | tahun 8/11 | p=0.743
+VIX naik 5h dilewati                         kirim  896/1624 | rata lolos +0.20 dibuang +0.58 (dasar +0.37) | latih +0.38/+1.04 [+0.70] uji +0.08/+0.16 [+0.12] | total   +183R (dasar +606) | tahun 3/11 | p=1.000
+yield 2th 20h searah                         kirim  925/1624 | rata lolos +0.30 dibuang +0.47 (dasar +0.37) | latih +0.61/+0.83 [+0.70] uji +0.05/+0.20 [+0.12] | total   +281R (dasar +606) | tahun 6/11 | p=0.911
+yield 2th 20h lawan                          kirim  776/1624 | rata lolos +0.41 dibuang +0.34 (dasar +0.37) | latih +0.76/+0.65 [+0.70] uji +0.14/+0.09 [+0.12] | total   +320R (dasar +606) | tahun 6/11 | p=0.274
+breakeven 20h searah                         kirim 1021/1624 | rata lolos +0.29 dibuang +0.51 (dasar +0.37) | latih +0.73/+0.67 [+0.70] uji +0.01/+0.33 [+0.12] | total   +301R (dasar +606) | tahun 5/11 | p=0.953
+breakeven 20h lawan                          kirim  651/1624 | rata lolos +0.46 dibuang +0.32 (dasar +0.37) | latih +0.62/+0.77 [+0.70] uji +0.28/+0.03 [+0.12] | total   +297R (dasar +606) | tahun 6/11 | p=0.135
+lewati Senin                                 kirim 1289/1624 | rata lolos +0.36 dibuang +0.41 (dasar +0.37) | latih +0.68/+0.78 [+0.70] uji +0.11/+0.13 [+0.12] | total   +468R (dasar +606) | tahun 6/11 | p=0.631
+lewati Jumat                                 kirim 1410/1624 | rata lolos +0.42 dibuang +0.10 (dasar +0.37) | latih +0.75/+0.38 [+0.70] uji +0.15/-0.11 [+0.12] | total   +586R (dasar +606) | tahun 8/11 | p=0.024
+lewati September                             kirim 1503/1624 | rata lolos +0.44 dibuang -0.43 (dasar +0.37) | latih +0.79/-0.36 [+0.70] uji +0.16/-0.48 [+0.12] | total   +658R (dasar +606) | tahun 11/11 | p=0.000  ✅ KONSISTEN
+lewati 15 Des - 5 Jan                        kirim 1533/1624 | rata lolos +0.36 dibuang +0.65 (dasar +0.37) | latih +0.65/+1.52 [+0.70] uji +0.13/-0.09 [+0.12] | total   +547R (dasar +606) | tahun 6/10 | p=0.875
+-> terbaik di LATIH: GVZ tinggi (P80) dilewati; per tahun lolos/dibuang(n): 16:+0.90/+0.67(30) 17:+1.42/+nan(0) 18:+0.27/-0.33(26) 19:+0.90/+0.08(41) 20:+0.40/+0.76(36) 21:-0.11/+nan(0) 22:-0.22/-0.12(61) 23:+0.52/+2.96(2) 24:+0.20/+0.35(60) 25:+0.04/+0.44(58) 26:-0.19/+0.20(45)
+-> lewati September konsisten; uji nyata (filter di allow seperti cloud):
+tanpa filter: n=2097 WR=48.2% rata=+0.365R total=+765.7R | latih +0.655R (907) uji +0.144R (1190)
+dengan filter: n=1917 WR=49.3% rata=+0.431R total=+826.5R | latih +0.741R (827) uji +0.196R (1090)
+
+=== BTCUSD — semua sinyal: 3783 sinyal (latih < 2021) — lolos/dibuang [dasar] ===
+GVZ tinggi (P80) dilewati                    kirim 2862/3783 | rata lolos +0.24 dibuang +0.08 (dasar +0.20) | latih +0.46/+0.17 [+0.40] uji +0.07/+0.03 [+0.06] | total   +688R (dasar +764) | tahun 6/9 | p=0.022
+GVZ rendah (P20) dilewati                    kirim 2828/3783 | rata lolos +0.22 dibuang +0.15 (dasar +0.20) | latih +0.40/+0.39 [+0.40] uji +0.10/-0.08 [+0.06] | total   +625R (dasar +764) | tahun 7/10 | p=0.167
+GVZ naik 5h dilewati                         kirim 2090/3783 | rata lolos +0.22 dibuang +0.18 (dasar +0.20) | latih +0.38/+0.42 [+0.40] uji +0.11/+0.01 [+0.06] | total   +464R (dasar +764) | tahun 7/11 | p=0.255
+VIX tinggi (P80) dilewati                    kirim 3083/3783 | rata lolos +0.23 dibuang +0.09 (dasar +0.20) | latih +0.46/+0.16 [+0.40] uji +0.07/+0.03 [+0.06] | total   +703R (dasar +764) | tahun 8/10 | p=0.053
+VIX rendah (P20) dilewati                    kirim 2681/3783 | rata lolos +0.20 dibuang +0.20 (dasar +0.20) | latih +0.37/+0.50 [+0.40] uji +0.08/+0.03 [+0.06] | total   +548R (dasar +764) | tahun 6/11 | p=0.450
+VIX naik 5h dilewati                         kirim 2096/3783 | rata lolos +0.15 dibuang +0.27 (dasar +0.20) | latih +0.21/+0.62 [+0.40] uji +0.10/+0.01 [+0.06] | total   +307R (dasar +764) | tahun 5/11 | p=0.964
+yield 2th 20h searah                         kirim 2078/3783 | rata lolos +0.18 dibuang +0.22 (dasar +0.20) | latih +0.39/+0.41 [+0.40] uji +0.04/+0.08 [+0.06] | total   +384R (dasar +764) | tahun 6/11 | p=0.702
+yield 2th 20h lawan                          kirim 1865/3783 | rata lolos +0.21 dibuang +0.20 (dasar +0.20) | latih +0.42/+0.38 [+0.40] uji +0.06/+0.07 [+0.06] | total   +387R (dasar +764) | tahun 5/11 | p=0.433
+breakeven 20h searah                         kirim 1949/3783 | rata lolos +0.21 dibuang +0.19 (dasar +0.20) | latih +0.44/+0.35 [+0.40] uji +0.05/+0.07 [+0.06] | total   +418R (dasar +764) | tahun 6/11 | p=0.349
+breakeven 20h lawan                          kirim 1962/3783 | rata lolos +0.18 dibuang +0.23 (dasar +0.20) | latih +0.32/+0.48 [+0.40] uji +0.07/+0.05 [+0.06] | total   +344R (dasar +764) | tahun 5/11 | p=0.791
+lewati Senin                                 kirim 3041/3783 | rata lolos +0.22 dibuang +0.15 (dasar +0.20) | latih +0.38/+0.47 [+0.40] uji +0.10/-0.07 [+0.06] | total   +655R (dasar +764) | tahun 7/11 | p=0.208
+lewati Jumat                                 kirim 3312/3783 | rata lolos +0.22 dibuang +0.05 (dasar +0.20) | latih +0.44/+0.11 [+0.40] uji +0.07/+0.02 [+0.06] | total   +738R (dasar +764) | tahun 8/11 | p=0.048
+lewati September                             kirim 3441/3783 | rata lolos +0.22 dibuang -0.02 (dasar +0.20) | latih +0.44/+0.02 [+0.40] uji +0.07/-0.05 [+0.06] | total   +770R (dasar +764) | tahun 8/11 | p=0.015
+lewati 15 Des - 5 Jan                        kirim 3549/3783 | rata lolos +0.21 dibuang +0.11 (dasar +0.20) | latih +0.38/+0.61 [+0.40] uji +0.08/-0.26 [+0.06] | total   +737R (dasar +764) | tahun 7/11 | p=0.263

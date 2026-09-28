@@ -44,7 +44,8 @@ fun SignalsTab(events: List<SignalEvent>, prices: Map<String, SignalEvent>, conn
         } else {
             items(open, key = { "open-" + it.first().msgId }) { g ->
                 val s = g.first()
-                OpenSignalCard(s, prices[s.symbol()], g.any { SignalRepository.slPlusActive(events, it.id) }, money, g.size)
+                OpenSignalCard(s, prices[s.symbol()], g.any { SignalRepository.slPlusActive(events, it.id) }, money, g.size,
+                    g.map { it.id })
             }
         }
         item { TodayCard(events, money) }
@@ -114,7 +115,8 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
 private fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
 @Composable
-fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money: MoneySettings, count: Int = 1) {
+fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money: MoneySettings, count: Int = 1,
+                   ids: List<String> = listOf(signal.id)) {
     val entry = signal.num("entry")
     val price = hb?.num("price")
     val sign = if (signal.dir == "BUY") 1 else -1
@@ -148,7 +150,38 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         Text(lossLine(signal, money) + if (count > 1) " • $count set sama, entry 1× saja" else "",
             style = MaterialTheme.typography.labelSmall, color = Muted)
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
+        val exits = exitLevels(hb, ids)
+        if (exits.isNotEmpty()) {
+            LineDivider()
+            Text("4 posisi running ditutup saat sinyal TUTUP:", style = MaterialTheme.typography.labelMedium,
+                color = Muted)
+            val buy = signal.dir == "BUY"
+            exits.forEach { x ->
+                val gap = price?.let { (it - x.level) * sign }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        "🚪 close H1 ${if (buy) "<" else ">"} ${priceText(signal.symbol(), x.level)}",
+                        fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)
+                    )
+                    Text(
+                        "${if (buy) "low" else "high"} ${x.bars} candle" + (gap?.let { " • jarak ${fmt(it, 2)}" } ?: ""),
+                        style = MaterialTheme.typography.labelSmall, color = Muted
+                    )
+                }
+            }
+        }
     }
+}
+
+/** Level TUTUP (channel keluar) untuk candle H1 yang sedang berjalan, dari heartbeat cloud (`exits`). */
+data class ExitLevel(val set: String, val level: Double, val bars: Int)
+
+fun exitLevels(hb: SignalEvent?, ids: Collection<String>): List<ExitLevel> {
+    val arr = hb?.json?.optJSONArray("exits") ?: return emptyList()
+    return (0 until arr.length()).mapNotNull { i ->
+        val o = arr.optJSONObject(i) ?: return@mapNotNull null
+        if (o.optString("id") in ids) ExitLevel(o.optString("set"), o.optDouble("level"), o.optInt("bars")) else null
+    }.distinctBy { it.set }
 }
 
 fun weekKey(t: ZonedDateTime): String =

@@ -1,0 +1,97 @@
+DFII10: 2003-01-02 .. 2026-09-24, 5937 nilai, jeda terbit median 1.9 hari (maks 9)
+DTWEXBGS: 2006-01-02 .. 2026-09-18, 5193 nilai, jeda terbit median 5.9 hari (maks 9)
+DGS10: 2003-01-02 .. 2026-09-24, 5937 nilai, jeda terbit median 1.9 hari (maks 9)
+
+=== XAUUSD — 💰 dikirim: 1185 sinyal 2013-01 .. 2026-08 (latih < 2019) — lolos/dibuang [dasar] dalam R rata-rata per sinyal ===
+yield riil 5h searah                         kirim  758/1185 | rata lolos +0.26 dibuang +0.22 (dasar +0.25) | latih +0.26/+0.28 [+0.27] uji +0.27/+0.17 [+0.23] | total   +201R (dasar +294) | tahun 6/14 | p=0.350
+yield riil 5h lawan                          kirim  496/1185 | rata lolos +0.23 dibuang +0.26 (dasar +0.25) | latih +0.29/+0.25 [+0.27] uji +0.19/+0.26 [+0.23] | total   +116R (dasar +294) | tahun 7/14 | p=0.589
+dolar 5h searah                              kirim  719/1185 | rata lolos +0.14 dibuang +0.42 (dasar +0.25) | latih +0.07/+0.60 [+0.27] uji +0.19/+0.30 [+0.23] | total    +98R (dasar +294) | tahun 5/14 | p=0.993
+dolar 5h lawan                               kirim  466/1185 | rata lolos +0.42 dibuang +0.14 (dasar +0.25) | latih +0.60/+0.07 [+0.27] uji +0.30/+0.19 [+0.23] | total   +196R (dasar +294) | tahun 9/14 | p=0.008
+yield nominal 5h searah                      kirim  737/1185 | rata lolos +0.22 dibuang +0.29 (dasar +0.25) | latih +0.25/+0.29 [+0.27] uji +0.20/+0.29 [+0.23] | total   +165R (dasar +294) | tahun 7/14 | p=0.718
+yield nominal 5h lawan                       kirim  523/1185 | rata lolos +0.32 dibuang +0.19 (dasar +0.25) | latih +0.23/+0.31 [+0.27] uji +0.40/+0.12 [+0.23] | total   +167R (dasar +294) | tahun 9/14 | p=0.128
+yield riil+dolar 5h searah                   kirim  475/1185 | rata lolos +0.10 dibuang +0.35 (dasar +0.25) | latih +0.06/+0.41 [+0.27] uji +0.13/+0.30 [+0.23] | total    +48R (dasar +294) | tahun 3/14 | p=0.987
+yield riil 20h searah                        kirim  815/1185 | rata lolos +0.18 dibuang +0.41 (dasar +0.25) | latih +0.14/+0.55 [+0.27] uji +0.20/+0.30 [+0.23] | total   +144R (dasar +294) | tahun 7/14 | p=0.973
+yield riil 20h lawan                         kirim  392/1185 | rata lolos +0.40 dibuang +0.17 (dasar +0.25) | latih +0.51/+0.14 [+0.27] uji +0.31/+0.20 [+0.23] | total   +157R (dasar +294) | tahun 8/14 | p=0.031
+dolar 20h searah                             kirim  779/1185 | rata lolos +0.08 dibuang +0.58 (dasar +0.25) | latih -0.00/+0.90 [+0.27] uji +0.14/+0.38 [+0.23] | total    +60R (dasar +294) | tahun 4/14 | p=1.000
+dolar 20h lawan                              kirim  406/1185 | rata lolos +0.58 dibuang +0.08 (dasar +0.25) | latih +0.90/-0.00 [+0.27] uji +0.38/+0.14 [+0.23] | total   +234R (dasar +294) | tahun 10/14 | p=0.000
+yield nominal 20h searah                     kirim  775/1185 | rata lolos +0.22 dibuang +0.30 (dasar +0.25) | latih +0.22/+0.35 [+0.27] uji +0.21/+0.27 [+0.23] | total   +169R (dasar +294) | tahun 7/14 | p=0.773
+yield nominal 20h lawan                      kirim  437/1185 | rata lolos +0.32 dibuang +0.21 (dasar +0.25) | latih +0.38/+0.19 [+0.27] uji +0.27/+0.21 [+0.23] | total   +140R (dasar +294) | tahun 6/14 | p=0.155
+yield riil+dolar 20h searah                  kirim  586/1185 | rata lolos -0.02 dibuang +0.51 (dasar +0.25) | latih -0.20/+0.74 [+0.27] uji +0.11/+0.35 [+0.23] | total    -14R (dasar +294) | tahun 5/14 | p=1.000
+yield riil 60h searah                        kirim  798/1185 | rata lolos +0.31 dibuang +0.13 (dasar +0.25) | latih +0.41/+0.02 [+0.27] uji +0.24/+0.22 [+0.23] | total   +245R (dasar +294) | tahun 9/14 | p=0.055
+yield riil 60h lawan                         kirim  407/1185 | rata lolos +0.12 dibuang +0.32 (dasar +0.25) | latih +0.03/+0.42 [+0.27] uji +0.20/+0.25 [+0.23] | total    +47R (dasar +294) | tahun 6/14 | p=0.965
+dolar 60h searah                             kirim  705/1185 | rata lolos +0.18 dibuang +0.35 (dasar +0.25) | latih +0.18/+0.42 [+0.27] uji +0.18/+0.30 [+0.23] | total   +126R (dasar +294) | tahun 3/14 | p=0.935
+dolar 60h lawan                              kirim  480/1185 | rata lolos +0.35 dibuang +0.18 (dasar +0.25) | latih +0.42/+0.18 [+0.27] uji +0.30/+0.18 [+0.23] | total   +168R (dasar +294) | tahun 11/14 | p=0.064
+yield nominal 60h searah                     kirim  780/1185 | rata lolos +0.16 dibuang +0.42 (dasar +0.25) | latih +0.20/+0.40 [+0.27] uji +0.13/+0.43 [+0.23] | total   +125R (dasar +294) | tahun 5/14 | p=0.987
+yield nominal 60h lawan                      kirim  432/1185 | rata lolos +0.43 dibuang +0.15 (dasar +0.25) | latih +0.42/+0.19 [+0.27] uji +0.43/+0.11 [+0.23] | total   +185R (dasar +294) | tahun 8/14 | p=0.008
+yield riil+dolar 60h searah                  kirim  531/1185 | rata lolos +0.18 dibuang +0.31 (dasar +0.25) | latih +0.30/+0.24 [+0.27] uji +0.09/+0.35 [+0.23] | total    +94R (dasar +294) | tahun 6/14 | p=0.885
+-> terbaik di LATIH: dolar 20h lawan; per tahun lolos/dibuang(n): 13:+2.35/+0.41(33) 14:+0.99/+0.57(49) 15:-0.24/-0.40(72) 16:+1.25/+0.19(60) 17:+0.48/-0.12(66) 18:-0.01/-0.25(71) 19:-0.06/-0.12(38) 20:+2.40/-0.33(44) 21:-0.35/+0.08(35) 22:+0.58/-0.06(88) 23:-0.19/-0.03(68) 24:+0.74/-0.00(41) 25:-0.18/+0.57(69) 26:-0.58/+1.01(45)
+
+=== XAUUSD — semua sinyal: 3416 sinyal 2012-11 .. 2026-09 (latih < 2019) — lolos/dibuang [dasar] dalam R rata-rata per sinyal ===
+yield riil 5h searah                         kirim 1784/3416 | rata lolos +0.11 dibuang +0.04 (dasar +0.08) | latih +0.06/+0.03 [+0.05] uji +0.14/+0.06 [+0.10] | total   +190R (dasar +262) | tahun 9/15 | p=0.113
+yield riil 5h lawan                          kirim 1820/3416 | rata lolos +0.07 dibuang +0.08 (dasar +0.08) | latih +0.05/+0.04 [+0.05] uji +0.08/+0.12 [+0.10] | total   +130R (dasar +262) | tahun 6/15 | p=0.573
+dolar 5h searah                              kirim 1688/3416 | rata lolos +0.10 dibuang +0.06 (dasar +0.08) | latih -0.03/+0.12 [+0.05] uji +0.19/+0.01 [+0.10] | total   +161R (dasar +262) | tahun 9/15 | p=0.222
+dolar 5h lawan                               kirim 1728/3416 | rata lolos +0.06 dibuang +0.10 (dasar +0.08) | latih +0.12/-0.03 [+0.05] uji +0.01/+0.19 [+0.10] | total   +101R (dasar +262) | tahun 6/15 | p=0.759
+yield nominal 5h searah                      kirim 1803/3416 | rata lolos +0.08 dibuang +0.07 (dasar +0.08) | latih +0.04/+0.06 [+0.05] uji +0.12/+0.08 [+0.10] | total   +149R (dasar +262) | tahun 6/15 | p=0.395
+yield nominal 5h lawan                       kirim 1770/3416 | rata lolos +0.08 dibuang +0.08 (dasar +0.08) | latih +0.03/+0.06 [+0.05] uji +0.11/+0.09 [+0.10] | total   +138R (dasar +262) | tahun 7/15 | p=0.466
+yield riil+dolar 5h searah                   kirim  995/3416 | rata lolos +0.11 dibuang +0.06 (dasar +0.08) | latih -0.05/+0.09 [+0.05] uji +0.24/+0.05 [+0.10] | total   +107R (dasar +262) | tahun 9/15 | p=0.215
+yield riil 20h searah                        kirim 1744/3416 | rata lolos +0.11 dibuang +0.04 (dasar +0.08) | latih +0.03/+0.06 [+0.05] uji +0.18/+0.02 [+0.10] | total   +197R (dasar +262) | tahun 8/15 | p=0.074
+yield riil 20h lawan                         kirim 1749/3416 | rata lolos +0.04 dibuang +0.11 (dasar +0.08) | latih +0.06/+0.03 [+0.05] uji +0.03/+0.18 [+0.10] | total    +71R (dasar +262) | tahun 7/15 | p=0.922
+dolar 20h searah                             kirim 1741/3416 | rata lolos +0.04 dibuang +0.11 (dasar +0.08) | latih -0.02/+0.11 [+0.05] uji +0.09/+0.11 [+0.10] | total    +74R (dasar +262) | tahun 5/15 | p=0.912
+dolar 20h lawan                              kirim 1675/3416 | rata lolos +0.11 dibuang +0.04 (dasar +0.08) | latih +0.11/-0.02 [+0.05] uji +0.11/+0.09 [+0.10] | total   +188R (dasar +262) | tahun 10/15 | p=0.089
+yield nominal 20h searah                     kirim 1735/3416 | rata lolos +0.09 dibuang +0.06 (dasar +0.08) | latih +0.07/+0.02 [+0.05] uji +0.10/+0.10 [+0.10] | total   +156R (dasar +262) | tahun 7/15 | p=0.294
+yield nominal 20h lawan                      kirim 1759/3416 | rata lolos +0.07 dibuang +0.09 (dasar +0.08) | latih +0.05/+0.05 [+0.05] uji +0.08/+0.12 [+0.10] | total   +119R (dasar +262) | tahun 8/15 | p=0.634
+yield riil+dolar 20h searah                  kirim 1076/3416 | rata lolos +0.02 dibuang +0.10 (dasar +0.08) | latih -0.10/+0.11 [+0.05] uji +0.12/+0.09 [+0.10] | total    +24R (dasar +262) | tahun 6/15 | p=0.928
+yield riil 60h searah                        kirim 1701/3416 | rata lolos +0.13 dibuang +0.02 (dasar +0.08) | latih +0.11/-0.01 [+0.05] uji +0.14/+0.05 [+0.10] | total   +221R (dasar +262) | tahun 8/15 | p=0.016
+yield riil 60h lawan                         kirim 1755/3416 | rata lolos +0.02 dibuang +0.14 (dasar +0.08) | latih -0.01/+0.11 [+0.05] uji +0.05/+0.15 [+0.10] | total    +37R (dasar +262) | tahun 7/15 | p=0.989
+dolar 60h searah                             kirim 1680/3416 | rata lolos +0.09 dibuang +0.07 (dasar +0.08) | latih +0.05/+0.04 [+0.05] uji +0.12/+0.09 [+0.10] | total   +147R (dasar +262) | tahun 10/15 | p=0.331
+dolar 60h lawan                              kirim 1736/3416 | rata lolos +0.07 dibuang +0.09 (dasar +0.08) | latih +0.04/+0.05 [+0.05] uji +0.09/+0.12 [+0.10] | total   +115R (dasar +262) | tahun 5/15 | p=0.650
+yield nominal 60h searah                     kirim 1760/3416 | rata lolos +0.06 dibuang +0.10 (dasar +0.08) | latih +0.02/+0.07 [+0.05] uji +0.09/+0.12 [+0.10] | total   +103R (dasar +262) | tahun 7/15 | p=0.769
+yield nominal 60h lawan                      kirim 1706/3416 | rata lolos +0.10 dibuang +0.05 (dasar +0.08) | latih +0.07/+0.02 [+0.05] uji +0.12/+0.08 [+0.10] | total   +169R (dasar +262) | tahun 8/15 | p=0.192
+yield riil+dolar 60h searah                  kirim 1094/3416 | rata lolos +0.09 dibuang +0.07 (dasar +0.08) | latih +0.07/+0.03 [+0.05] uji +0.09/+0.10 [+0.10] | total    +93R (dasar +262) | tahun 9/15 | p=0.406
+
+=== BTCUSD — 💰 dikirim: 1624 sinyal 2016-01 .. 2026-09 (latih < 2021) — lolos/dibuang [dasar] dalam R rata-rata per sinyal ===
+yield riil 5h searah                         kirim  883/1624 | rata lolos +0.31 dibuang +0.45 (dasar +0.37) | latih +0.71/+0.70 [+0.70] uji +0.01/+0.25 [+0.12] | total   +271R (dasar +606) | tahun 3/11 | p=0.889
+yield riil 5h lawan                          kirim  808/1624 | rata lolos +0.46 dibuang +0.28 (dasar +0.37) | latih +0.76/+0.64 [+0.70] uji +0.20/+0.03 [+0.12] | total   +374R (dasar +606) | tahun 7/11 | p=0.069
+dolar 5h searah                              kirim  869/1624 | rata lolos +0.39 dibuang +0.36 (dasar +0.37) | latih +0.70/+0.71 [+0.70] uji +0.15/+0.08 [+0.12] | total   +337R (dasar +606) | tahun 6/11 | p=0.393
+dolar 5h lawan                               kirim  755/1624 | rata lolos +0.36 dibuang +0.39 (dasar +0.37) | latih +0.71/+0.70 [+0.70] uji +0.08/+0.15 [+0.12] | total   +269R (dasar +606) | tahun 5/11 | p=0.599
+yield nominal 5h searah                      kirim  854/1624 | rata lolos +0.37 dibuang +0.38 (dasar +0.37) | latih +0.67/+0.75 [+0.70] uji +0.11/+0.12 [+0.12] | total   +314R (dasar +606) | tahun 5/11 | p=0.535
+yield nominal 5h lawan                       kirim  833/1624 | rata lolos +0.41 dibuang +0.34 (dasar +0.37) | latih +0.77/+0.63 [+0.70] uji +0.13/+0.09 [+0.12] | total   +338R (dasar +606) | tahun 5/11 | p=0.289
+yield riil+dolar 5h searah                   kirim  519/1624 | rata lolos +0.37 dibuang +0.37 (dasar +0.37) | latih +0.67/+0.72 [+0.70] uji +0.16/+0.09 [+0.12] | total   +192R (dasar +606) | tahun 6/11 | p=0.505
+yield riil 20h searah                        kirim  924/1624 | rata lolos +0.36 dibuang +0.40 (dasar +0.37) | latih +0.91/+0.45 [+0.70] uji -0.06/+0.35 [+0.12] | total   +330R (dasar +606) | tahun 5/11 | p=0.623
+yield riil 20h lawan                         kirim  728/1624 | rata lolos +0.39 dibuang +0.36 (dasar +0.37) | latih +0.46/+0.92 [+0.70] uji +0.34/-0.06 [+0.12] | total   +287R (dasar +606) | tahun 6/11 | p=0.379
+dolar 20h searah                             kirim  891/1624 | rata lolos +0.27 dibuang +0.49 (dasar +0.37) | latih +0.59/+0.84 [+0.70] uji +0.03/+0.22 [+0.12] | total   +244R (dasar +606) | tahun 3/11 | p=0.966
+dolar 20h lawan                              kirim  733/1624 | rata lolos +0.49 dibuang +0.27 (dasar +0.37) | latih +0.84/+0.59 [+0.70] uji +0.22/+0.03 [+0.12] | total   +362R (dasar +606) | tahun 8/11 | p=0.034
+yield nominal 20h searah                     kirim  826/1624 | rata lolos +0.37 dibuang +0.37 (dasar +0.37) | latih +0.90/+0.50 [+0.70] uji -0.05/+0.28 [+0.12] | total   +308R (dasar +606) | tahun 7/11 | p=0.504
+yield nominal 20h lawan                      kirim  829/1624 | rata lolos +0.37 dibuang +0.38 (dasar +0.37) | latih +0.47/+0.94 [+0.70] uji +0.29/-0.07 [+0.12] | total   +304R (dasar +606) | tahun 4/11 | p=0.550
+yield riil+dolar 20h searah                  kirim  581/1624 | rata lolos +0.33 dibuang +0.40 (dasar +0.37) | latih +0.95/+0.59 [+0.70] uji -0.06/+0.23 [+0.12] | total   +194R (dasar +606) | tahun 4/11 | p=0.689
+yield riil 60h searah                        kirim  902/1624 | rata lolos +0.48 dibuang +0.25 (dasar +0.37) | latih +0.96/+0.36 [+0.70] uji +0.08/+0.16 [+0.12] | total   +428R (dasar +606) | tahun 8/11 | p=0.031
+yield riil 60h lawan                         kirim  730/1624 | rata lolos +0.24 dibuang +0.48 (dasar +0.37) | latih +0.36/+0.96 [+0.70] uji +0.15/+0.08 [+0.12] | total   +174R (dasar +606) | tahun 3/11 | p=0.980
+dolar 60h searah                             kirim  893/1624 | rata lolos +0.47 dibuang +0.26 (dasar +0.37) | latih +0.89/+0.48 [+0.70] uji +0.15/+0.08 [+0.12] | total   +418R (dasar +606) | tahun 8/11 | p=0.040
+dolar 60h lawan                              kirim  731/1624 | rata lolos +0.26 dibuang +0.47 (dasar +0.37) | latih +0.48/+0.89 [+0.70] uji +0.08/+0.15 [+0.12] | total   +188R (dasar +606) | tahun 3/11 | p=0.962
+yield nominal 60h searah                     kirim  869/1624 | rata lolos +0.44 dibuang +0.29 (dasar +0.37) | latih +0.86/+0.53 [+0.70] uji +0.12/+0.11 [+0.12] | total   +385R (dasar +606) | tahun 8/11 | p=0.105
+yield nominal 60h lawan                      kirim  771/1624 | rata lolos +0.29 dibuang +0.45 (dasar +0.37) | latih +0.51/+0.88 [+0.70] uji +0.12/+0.11 [+0.12] | total   +223R (dasar +606) | tahun 3/11 | p=0.912
+yield riil+dolar 60h searah                  kirim  598/1624 | rata lolos +0.62 dibuang +0.23 (dasar +0.37) | latih +1.39/+0.36 [+0.70] uji +0.10/+0.12 [+0.12] | total   +369R (dasar +606) | tahun 8/11 | p=0.003
+-> terbaik di LATIH: yield riil+dolar 60h searah; per tahun lolos/dibuang(n): 16:+1.69/+0.46(92) 17:+2.52/+0.81(89) 18:+0.57/-0.23(81) 19:+3.30/+0.34(127) 20:+0.74/+0.35(85) 21:-0.07/-0.12(130) 22:-0.14/-0.27(56) 23:+1.14/+0.23(92) 24:+0.13/+0.35(98) 25:-0.21/+0.39(107) 26:-0.12/+0.03(69)
+
+=== BTCUSD — semua sinyal: 3783 sinyal 2016-01 .. 2026-09 (latih < 2021) — lolos/dibuang [dasar] dalam R rata-rata per sinyal ===
+yield riil 5h searah                         kirim 2008/3783 | rata lolos +0.21 dibuang +0.19 (dasar +0.20) | latih +0.39/+0.41 [+0.40] uji +0.09/+0.03 [+0.06] | total   +426R (dasar +764) | tahun 5/11 | p=0.366
+yield riil 5h lawan                          kirim 1960/3783 | rata lolos +0.19 dibuang +0.22 (dasar +0.20) | latih +0.43/+0.37 [+0.40] uji +0.01/+0.12 [+0.06] | total   +371R (dasar +764) | tahun 6/11 | p=0.654
+dolar 5h searah                              kirim 1933/3783 | rata lolos +0.26 dibuang +0.15 (dasar +0.20) | latih +0.44/+0.35 [+0.40] uji +0.12/+0.00 [+0.06] | total   +495R (dasar +764) | tahun 7/11 | p=0.056
+dolar 5h lawan                               kirim 1850/3783 | rata lolos +0.15 dibuang +0.26 (dasar +0.20) | latih +0.35/+0.44 [+0.40] uji +0.00/+0.12 [+0.06] | total   +269R (dasar +764) | tahun 4/11 | p=0.946
+yield nominal 5h searah                      kirim 2051/3783 | rata lolos +0.22 dibuang +0.18 (dasar +0.20) | latih +0.35/+0.46 [+0.40] uji +0.13/-0.01 [+0.06] | total   +455R (dasar +764) | tahun 6/11 | p=0.264
+yield nominal 5h lawan                       kirim 1873/3783 | rata lolos +0.19 dibuang +0.21 (dasar +0.20) | latih +0.46/+0.34 [+0.40] uji -0.01/+0.13 [+0.06] | total   +356R (dasar +764) | tahun 6/11 | p=0.638
+yield riil+dolar 5h searah                   kirim 1148/3783 | rata lolos +0.25 dibuang +0.18 (dasar +0.20) | latih +0.39/+0.40 [+0.40] uji +0.15/+0.02 [+0.06] | total   +289R (dasar +764) | tahun 4/11 | p=0.170
+yield riil 20h searah                        kirim 1962/3783 | rata lolos +0.19 dibuang +0.22 (dasar +0.20) | latih +0.50/+0.29 [+0.40] uji -0.03/+0.16 [+0.06] | total   +369R (dasar +764) | tahun 6/11 | p=0.663
+yield riil 20h lawan                         kirim 1902/3783 | rata lolos +0.20 dibuang +0.20 (dasar +0.20) | latih +0.29/+0.52 [+0.40] uji +0.14/-0.02 [+0.06] | total   +383R (dasar +764) | tahun 5/11 | p=0.506
+dolar 20h searah                             kirim 1895/3783 | rata lolos +0.19 dibuang +0.21 (dasar +0.20) | latih +0.40/+0.40 [+0.40] uji +0.04/+0.08 [+0.06] | total   +359R (dasar +764) | tahun 4/11 | p=0.648
+dolar 20h lawan                              kirim 1888/3783 | rata lolos +0.21 dibuang +0.19 (dasar +0.20) | latih +0.40/+0.40 [+0.40] uji +0.08/+0.04 [+0.06] | total   +404R (dasar +764) | tahun 7/11 | p=0.357
+yield nominal 20h searah                     kirim 2009/3783 | rata lolos +0.19 dibuang +0.22 (dasar +0.20) | latih +0.49/+0.29 [+0.40] uji -0.03/+0.16 [+0.06] | total   +378R (dasar +764) | tahun 6/11 | p=0.665
+yield nominal 20h lawan                      kirim 1849/3783 | rata lolos +0.20 dibuang +0.20 (dasar +0.20) | latih +0.26/+0.53 [+0.40] uji +0.16/-0.03 [+0.06] | total   +372R (dasar +764) | tahun 5/11 | p=0.510
+yield riil+dolar 20h searah                  kirim 1132/3783 | rata lolos +0.20 dibuang +0.20 (dasar +0.20) | latih +0.54/+0.35 [+0.40] uji +0.00/+0.09 [+0.06] | total   +222R (dasar +764) | tahun 5/11 | p=0.548
+yield riil 60h searah                        kirim 2008/3783 | rata lolos +0.25 dibuang +0.15 (dasar +0.20) | latih +0.56/+0.22 [+0.40] uji +0.03/+0.10 [+0.06] | total   +506R (dasar +764) | tahun 7/11 | p=0.064
+yield riil 60h lawan                         kirim 1823/3783 | rata lolos +0.14 dibuang +0.26 (dasar +0.20) | latih +0.22/+0.57 [+0.40] uji +0.09/+0.04 [+0.06] | total   +257R (dasar +764) | tahun 4/11 | p=0.956
+dolar 60h searah                             kirim 1937/3783 | rata lolos +0.28 dibuang +0.12 (dasar +0.20) | latih +0.55/+0.24 [+0.40] uji +0.09/+0.03 [+0.06] | total   +544R (dasar +764) | tahun 7/11 | p=0.010
+dolar 60h lawan                              kirim 1846/3783 | rata lolos +0.12 dibuang +0.28 (dasar +0.20) | latih +0.24/+0.55 [+0.40] uji +0.03/+0.09 [+0.06] | total   +219R (dasar +764) | tahun 4/11 | p=0.991
+yield nominal 60h searah                     kirim 1945/3783 | rata lolos +0.21 dibuang +0.20 (dasar +0.20) | latih +0.43/+0.36 [+0.40] uji +0.05/+0.07 [+0.06] | total   +402R (dasar +764) | tahun 5/11 | p=0.441
+yield nominal 60h lawan                      kirim 1884/3783 | rata lolos +0.19 dibuang +0.22 (dasar +0.20) | latih +0.35/+0.45 [+0.40] uji +0.07/+0.06 [+0.06] | total   +351R (dasar +764) | tahun 6/11 | p=0.677
+yield riil+dolar 60h searah                  kirim 1266/3783 | rata lolos +0.35 dibuang +0.13 (dasar +0.20) | latih +0.83/+0.22 [+0.40] uji +0.08/+0.05 [+0.06] | total   +445R (dasar +764) | tahun 7/11 | p=0.002
