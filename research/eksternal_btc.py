@@ -30,7 +30,8 @@ SPLIT_FUNDING = pd.Timestamp("2022-01-01", tz="UTC")
 SPLIT_OI = pd.Timestamp("2023-01-01", tz="UTC")
 
 
-def _zip_csv(url: str) -> pd.DataFrame | None:
+def _zip_csv(url: str, names: list[str] | None = None) -> pd.DataFrame | None:
+    """names diberikan -> file dibaca tanpa header (file lama Binance tidak punya baris header)."""
     try:
         with urllib.request.urlopen(url, timeout=60) as r:
             raw = r.read()
@@ -39,7 +40,7 @@ def _zip_csv(url: str) -> pd.DataFrame | None:
             return None
         raise
     with zipfile.ZipFile(io.BytesIO(raw)) as z:
-        return pd.read_csv(z.open(z.namelist()[0]))
+        return pd.read_csv(z.open(z.namelist()[0]), header=None if names else "infer", names=names)
 
 
 def funding() -> pd.DataFrame:
@@ -62,6 +63,39 @@ def funding() -> pd.DataFrame:
     out = out[~out.index.duplicated()]
     out.to_parquet(path)
     return out
+
+
+def premium() -> pd.DataFrame:
+    """Premium index BTCUSDT per jam (monthly + daily premiumIndexKlines 1h). Tersedia HARIAN (file funding tidak)."""
+    path = cache_path("binance_premium_BTCUSDT.parquet")
+    if path.exists():
+        return pd.read_parquet(path)
+    frames = []
+    cols = ["open_time", "open", "high", "low", "close"] + [f"x{i}" for i in range(7)]
+    for p in pd.period_range("2020-01", pd.Timestamp.now().strftime("%Y-%m"), freq="M"):
+        df = _zip_csv(f"{BASE}/monthly/premiumIndexKlines/BTCUSDT/1h/BTCUSDT-1h-{p}.zip", cols)
+        if df is None:
+            for d in pd.date_range(p.to_timestamp(), min(p.to_timestamp(how="end"), pd.Timestamp.now()), freq="D"):
+                dd = _zip_csv(f"{BASE}/daily/premiumIndexKlines/BTCUSDT/1h/BTCUSDT-1h-{d:%Y-%m-%d}.zip", cols)
+                if dd is not None:
+                    frames.append(dd)
+            continue
+        frames.append(df)
+    df = pd.concat(frames)
+    df = df[pd.to_numeric(df.open_time, errors="coerce").notna()]           # sebagian file punya baris header
+    t = pd.to_numeric(df.open_time)
+    out = pd.DataFrame({"premium": pd.to_numeric(df.close).to_numpy()},
+                       index=pd.to_datetime(t.to_numpy() * (1000 if t.max() < 1e12 else 1), unit="ms", utc=True))
+    out = out[~out.index.duplicated()].sort_index()
+    out.to_parquet(path)
+    return out
+
+
+def funding_proxy(pr: pd.DataFrame) -> pd.Series:
+    """Funding tiap 8 jam dari premium index: rata-rata premium 8 jam + clamp(0,01% - premium, +-0,05%).
+    Indeks = waktu settlement (00/08/16 UTC)."""
+    p8 = pr.premium.resample("8h", offset="0h", label="right", closed="left").mean()
+    return (p8 + (0.0001 - p8).clip(-0.0005, 0.0005)).dropna()
 
 
 def metrics() -> pd.DataFrame:
@@ -147,6 +181,18 @@ def robust(fr: pd.DataFrame, mt: pd.DataFrame) -> None:
         print(f"{lab}: dibuang {(~k & m).sum()} rata {sig.R[~k & m].mean():+.2f}R, lolos {sig.R[k & m].mean():+.2f}R")
     for lag in (24, 48):
         print(f"data terlambat {lag} jam: {cell(fund(3, 1095, 0.9, lag), SPLIT_FUNDING)}")
+    # versi yang bisa dipakai cloud: file funding hanya bulanan, tetapi premiumIndexKlines ada per hari
+    px = funding_proxy(premium())
+    both = pd.concat([fr.rate, px.rename("proxy")], axis=1).dropna()
+    pp = px.rolling(3).mean().rolling(1095, min_periods=365).apply(lambda v: (v <= v[-1]).mean(), raw=True)
+
+    def proxy_keep(g):
+        x = asof(pd.DatetimeIndex(g.t), pp, pp.index + pd.Timedelta(hours=36))
+        dd = g.dir.to_numpy()
+        return np.isnan(x) | ~(((dd > 0) & (x >= 0.9)) | ((dd < 0) & (x <= 0.1)))
+    print(f"funding dari premium index harian (korelasi dgn funding asli {both.corr().iloc[0, 1]:.2f}), terlambat 36 jam: "
+          f"{cell(proxy_keep(sig), SPLIT_FUNDING)}")
+    print(realistic_summary(a, bar_filter(a, proxy_keep)))
     print(f"\n=== Ketahanan L/S akun (uji >= 2023, dasar uji {judge(sig, lsr(30, 0.8), SPLIT_OI)['uji_base']:+.2f}R) ===")
     for days in (7, 30, 90):
         print(f"jendela {days:2d} hari | " + " | ".join(f"P{p * 100:.0f}: {cell(lsr(days, p), SPLIT_OI)}"

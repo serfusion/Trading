@@ -18,7 +18,8 @@ keluaran lengkap di [`docs/eksternal/`](eksternal/). Tidak ada perubahan pada bo
    tahan di 27/27 kombinasi parameter sekitarnya, dan tetap bekerja walau data terlambat 24–48 jam (penting: cloud
    di AS tidak bisa memanggil api.binance.com, HTTP 451; file harian data.binance.vision baru ada keesokan harinya).
    Uji nyata 2021–2026 (data terlambat 24 jam): **+171R → +214R**, rata-rata +0,144 → +0,217R/sinyal, 5 dari 6 tahun
-   membaik. **Tetapi**: periode latih hanya 1 tahun (2021), sebagian besar manfaat dari sisi SELL (55 sinyal dibuang,
+   membaik; versi yang bisa diterapkan cloud (funding direkonstruksi dari file harian premium index, terlambat 36 jam)
+   memberi hasil yang sama (+214R). **Tetapi**: periode latih hanya 1 tahun (2021), sebagian besar manfaat dari sisi SELL (55 sinyal dibuang,
    −0,49R), dan 2024 sedikit memburuk. Ini **usulan**, bukan perubahan: cloud tidak diubah tanpa izin pengguna.
 4. Filter lain yang lolos di atas kertas tetapi **tidak diusulkan**: BTC rasio long/short akun (bukti periode uji
    hanya 11–18 sinyal); BTC "lewati ≤ 2 jam sebelum NFP/CPI/FOMC" (8 sinyal, efek hilang di uji nyata karena sinyal
@@ -173,13 +174,19 @@ bawah dasar (terendah +0,17R, tertinggi +0,34R):
 | Tanpa filter | 1.190 | 43,9% | +0,144R | +171R | −19 | −32 | +93 | +45 | +40 | +44 |
 | Funding P90 (data seketika) | 980 | 45,3% | +0,226R | +221R | −14 | −13 | +126 | +35 | +38 | +49 |
 | Funding P90 (terlambat 24 jam) | 988 | 45,6% | +0,217R | +214R | −13 | −26 | +115 | +39 | +45 | +53 |
+| Funding dari premium index harian (terlambat 36 jam) | 1.025 | — | +0,209R | +214R | −16 | −33 | +113 | +54 | +46 | +49 |
 
 - Rasio L/S akun: lolos di atas kertas dan tahan parameter, tetapi hanya 11–18 sinyal dibuang di periode uji → bukti
   terlalu tipis. Open interest: tidak berguna.
-- **Cara menerapkan bila pengguna setuju** (belum dikerjakan): cloud mengunduh file harian
-  `data.binance.vision/data/futures/um/daily/fundingRate/BTCUSDT/` (zip kecil, library standar) sekali sehari,
-  menyimpan 1 tahun funding di Supabase, lalu sinyal BTC 💰 yang "ramai" dilewati (seperti `profit_only`). Sebelum
-  itu sebaiknya dijalankan dulu sebagai **tanda informasi** di aplikasi selama beberapa bulan (uji maju).
+- **Kendala penerapan & jalan keluarnya:** api.binance.com / fapi diblokir dari server AS (HTTP 451, Vercel juga di
+  AS), dan data.binance.vision hanya punya file funding **bulanan**. Tetapi file **harian** `premiumIndexKlines`
+  (1 jam) tersedia, dan funding Binance dihitung dari premium index: funding ≈ rata-rata premium 8 jam +
+  clamp(0,01% − premium, ±0,05%) (`funding_proxy()`, korelasi 0,82 dengan funding asli 2020–2026, 0,93 sejak 2022).
+  Dengan proxy ini dan data dianggap terlambat 36 jam: subset p = 0,001 (tetap konsisten), uji nyata +171R → +214R.
+- **Cara menerapkan bila pengguna setuju** (belum dikerjakan): cloud mengunduh file harian premium index kemarin
+  (zip kecil, library standar) sekali sehari, menyimpan 1 tahun proxy funding di Supabase, lalu sinyal BTC 💰 yang
+  "ramai" dilewati (seperti `profit_only`). Sebaiknya dijalankan dulu beberapa bulan sebagai **tanda informasi** di
+  aplikasi (uji maju) sebelum benar-benar menyaring.
 
 ## 7. Yang belum / keterbatasan
 

@@ -39,6 +39,9 @@ BUY: dibuang 139 rata +0.03R, lolos +0.36R
 SELL: dibuang 55 rata -0.49R, lolos +0.02R
 data terlambat 24 jam: +0.23/-0.07 (159) p=0.032✅
 data terlambat 48 jam: +0.27/-0.16 (177) p=0.004✅
+funding dari premium index harian (korelasi dgn funding asli 0.82), terlambat 36 jam: +0.26/-0.22 (141) p=0.001✅
+tanpa filter: n=2097 WR=48.2% rata=+0.365R total=+765.7R | latih +0.655R (907) uji +0.144R (1190)
+dengan filter: n=1927 WR=49.4% rata=+0.418R total=+805.3R | latih +0.655R (902) uji +0.209R (1025)
 
 === Ketahanan L/S akun (uji >= 2023, dasar uji +0.26R) ===
 jendela  7 hari | P80: +0.29/-0.72 ( 15) p=0.000✅ | P90: +0.27/-0.26 (  3) p=0.054
