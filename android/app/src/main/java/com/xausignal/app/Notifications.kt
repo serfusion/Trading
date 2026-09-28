@@ -55,7 +55,7 @@ object Notifications {
             "WR ${fmt(event.json.optDouble("wr"), 0)}% • ${signed(event.json.optDouble("avg_r"))}R • "
         } else ""
         val text = stats +
-            "SL ${event.price("sl")} • TP ${event.price("tp1")} • " + legsLot(event, SignalRepository.money())
+            "SL ${event.price("sl")} • TP ${event.price("tp1")} • Entry " + legsLot(event, SignalRepository.money())
         post(context, event.id.hashCode(), title, text)
     }
 
