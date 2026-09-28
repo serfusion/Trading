@@ -57,6 +57,9 @@ Tujuan: apakah data luar grafik bisa menyaring sinyal 💰 cloud. Laporan: `docs
 | 4 | Sesi + BID/ASK Dukascopy H1 | ⏳ sesi selesai (tidak konsisten); unduhan Dukascopy berjalan (server membatasi laju) | |
 | 5 | Funding/OI BTC (data.binance.vision) | ✅ | **funding "hindari ramai P90" konsisten** di BTC 💰 (tahan 27/27 parameter, data terlambat 24–48 jam, proxy premium index harian): uji nyata 2021–26 +171R → +214R → usulan, menunggu izin; OI tidak berguna; L/S bukti tipis |
 
+| 6 | Putaran 2: GVZ, VIX, yield 2 th (proksi FedWatch), breakeven, musiman | ✅ | **BTC 💰 "lewati September" konsisten** (11/11 tahun); XAU tidak ada (GVZ naik → info di chat) |
+| 7 | Pasang (permintaan pengguna "pasang semua") | ✅ di branch | filter BTC funding + September di cloud; chat `POST /api/chat` + tab **Tanya** (aplikasi 2.7, build CI sukses); aktif setelah merge ke produksi Vercel + `ANTHROPIC_API_KEY` |
+
 Catatan: `data_mt5/` (ekspor MT5 Exness pengguna) belum diunggah; `TWELVEDATA_API_KEY` sudah diperbarui pengguna tetapi
 sesi ini masih membaca nilai lama (401) → jalankan `python -m research.eksternal_twelvedata` di sesi baru.
 
@@ -103,3 +106,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   tidak ada filter konsisten untuk sinyal 💰 XAU. Kerangka + tes: `research/eksternal.py`, `tests/test_eksternal.py`.
 - 2026-09-28: tahap 5 selesai: funding BTC lolos (usulan). File funding Binance hanya bulanan → funding direkonstruksi
   dari premiumIndexKlines harian (tetap konsisten). Menunggu unduhan Dukascopy untuk tahap 4b.
+- 2026-09-28: pengguna minta "pasang semua" + cari info sebanyak-banyaknya + kotak chat. Putaran 2 selesai (BTC
+  September lolos). Basis pengetahuan berita `cloud/api/pengetahuan.md` (`research/event_stats.py`), chat
+  (`cloud/api/_chat.py`, `chat.py`, tab Tanya di aplikasi 2.7), filter BTC (`cloud/api/_funding.py`) terpasang di
+  branch; 47 tes cloud lulus.

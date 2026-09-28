@@ -12,7 +12,8 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
 - **Keputusan pengguna yang masih ditunggu** (jangan dikerjakan tanpa izin): (1) ganti bot live ke skema A / risiko
   0,25% (opsi `tp1_r: 0`); (2) tab Tabungan Emas & Berbagi di Android; (3) nasib 2 bundle mentah yang belum
   di-push (Lin-Thet-Zaw, P1Piyush) dan 58 bundle mentah yang sudah ada di git (berisi kredensial asli penulis);
-  (4) pasang filter funding BTC di cloud (usulan riset data eksternal, lihat di bawah). Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
+  (4) [SELESAI 28 Sep: pengguna minta "pasang semua" → filter BTC funding + September, chat/tab Tanya].
+  Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
 
 ## Riset data eksternal (berjalan sejak 28 Sep 2026 — laporan `docs/RISET_DATA_EKSTERNAL.md`)
 - Akses jaringan sudah dibuka (api.binance.com tetap 451 dari AS → pakai data.binance.vision; Dukascopy membatasi
@@ -21,11 +22,14 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
   ditolak 401; nilai baru hanya terbaca di sesi baru → jalankan `python -m research.eksternal_twelvedata`).
 - Kerangka: `research/eksternal.py` (sinyal 💰 = badge cloud, `asof()` tanpa look-ahead, kriteria konsisten (a)–(d),
   uji nyata di allow()). Unduhan di `data/research/eksternal/` (di-gitignore).
-- Hasil: (1) berita, (2) FRED yield riil/dolar, (3) COT, (4a) sesi → **tidak ada filter konsisten untuk XAU 💰**.
-  (5) **funding BTC "hindari ramai P90" konsisten** (+171R → +214R 2021–26, juga dengan proxy premium index harian
-  terlambat 36 jam) → USULAN ke pengguna, belum dipasang. (4b) Dukascopy BID/ASK H1: lihat laporan bagian 5.
+- Hasil: (1) berita, (2) FRED yield riil/dolar, (3) COT, (4a) sesi, putaran 2 (GVZ/VIX/yield 2 th/musiman) →
+  **tidak ada filter konsisten untuk XAU 💰**. BTC: **funding "hindari ramai P90"** & **lewati September** konsisten
+  → DIPASANG (`cloud/api/_funding.py`, env BTC_FUNDING_FILTER/BTC_SEPT_FILTER). (4b) Dukascopy: laporan bagian 5.
+- Chat asisten: `cloud/api/_chat.py` + `chat.py` (Claude API, `claude-opus-5`, web search, basis pengetahuan
+  `cloud/api/pengetahuan.md` dari `python -m research.event_stats` — jalankan ulang bila data diperbarui), tab
+  **Tanya** di aplikasi 2.7. Butuh `ANTHROPIC_API_KEY` di Vercel. Chat tidak boleh membuka order.
 - Belum: `data_mt5/` (ekspor MT5 Exness pengguna, spread asli akun Cent) belum diunggah; cek Twelve Data.
-- Perubahan cloud/live (mis. filter funding BTC) tetap menunggu izin eksplisit pengguna.
+- Perubahan cloud/live berikutnya tetap menunggu izin eksplisit pengguna (filter BTC & chat sudah diizinkan 28 Sep).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
