@@ -55,15 +55,16 @@ fun SignalEvent.isStar(): Boolean = json.optBoolean("star", false)
 /** Simbol sinyal (XAU/USD bila kosong). */
 fun SignalEvent.symbol(): String = str("symbol").ifBlank { "XAU/USD" }
 
-/** Harga dengan digit sesuai instrumen: JPY 3, forex lain 5, emas/indeks 2. */
-fun SignalEvent.price(key: String): String {
-    val v = num(key) ?: return "-"
-    val sym = symbol()
-    val digits = if (sym.contains("JPY")) 3 else if (v < 20) 5 else 2
+/** Harga dengan digit sesuai instrumen: JPY 3, forex lain 5, emas/BTC 2. */
+fun priceText(symbol: String, v: Double?): String {
+    if (v == null) return "-"
+    val digits = if (symbol.contains("JPY")) 3 else if (Math.abs(v) < 20) 5 else 2
     return fmt(v, digits)
 }
 
-/** Jumlah ⭐ (win rate historis) dan 💸 (profit historis). Sinyal lama: ⭐ = tanda kuat lama. */
+fun SignalEvent.price(key: String): String = priceText(symbol(), num(key))
+
+/** Jumlah ★ (win rate historis) dan 💰 (profit historis). Sinyal lama: ★ = tanda kuat lama. */
 fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
 fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)
 
@@ -85,6 +86,7 @@ private val STAMP: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm
  */
 fun SignalEvent.isVoid(): Boolean {
     if (json.optBoolean("void", false)) return true
+    if (id.startsWith("BTC-") || symbol().contains("BTC")) return false      // BTC jalan 24/7
     val stamp = id.substringAfterLast('-')
     if (stamp.length != 12 || !stamp.all { it.isDigit() }) return false
     return try {
@@ -117,6 +119,10 @@ object SignalRepository {
 
     private val _heartbeat = MutableStateFlow<SignalEvent?>(null)
     val heartbeat: StateFlow<SignalEvent?> = _heartbeat
+
+    /** Harga terakhir per simbol (XAU/USD, BTC/USD, ...). */
+    private val _prices = MutableStateFlow<Map<String, SignalEvent>>(emptyMap())
+    val prices: StateFlow<Map<String, SignalEvent>> = _prices
 
     private val _connection = MutableStateFlow("Memuat...")
     val connection: StateFlow<String> = _connection
@@ -181,9 +187,13 @@ object SignalRepository {
     }
 
     fun periodStats(events: List<SignalEvent>, m: MoneySettings, keyOf: (java.time.ZonedDateTime) -> String,
-                    labelOf: (String) -> String = { it }, star: Boolean? = null): List<PeriodStats> {
+                    labelOf: (String) -> String = { it }, star: Boolean? = null,
+                    symbol: String? = null): List<PeriodStats> {
         val groups = LinkedHashMap<String, MutableList<Double>>()
-        events.filter { it.type == "close" && !it.isVoid() && (star == null || it.isStar() == star) }.forEach { e ->
+        events.filter {
+            it.type == "close" && !it.isVoid() && (star == null || it.isStar() == star) &&
+                (symbol == null || it.symbol() == symbol)
+        }.forEach { e ->
             val t = zoned(e) ?: return@forEach
             val a = amount(e, m) ?: return@forEach
             groups.getOrPut(keyOf(t)) { mutableListOf() }.add(a)
@@ -217,7 +227,10 @@ object SignalRepository {
     fun clear() {
         _events.value = emptyList()
         _heartbeat.value = null
-        prefs?.edit()?.remove("last_id")?.remove("events")?.remove("heartbeat")?.apply()
+        _prices.value = emptyMap()
+        val e = prefs?.edit() ?: return
+        prefs?.all?.keys?.filter { it.startsWith("hb_") }?.forEach { e.remove(it) }
+        e.remove("last_id").remove("events").remove("heartbeat").apply()
     }
 
     /** Tambah pesan; return null bila duplikat. */
@@ -227,8 +240,13 @@ object SignalRepository {
         val event = SignalEvent(msgId, type, payload)
         prefs?.edit()?.putString("last_id", msgId)?.apply()
         if (type == "heartbeat") {
-            _heartbeat.value = event
-            prefs?.edit()?.putString("heartbeat", payload.toString())?.apply()
+            val sym = payload.optString("symbol", "XAU/USD").ifBlank { "XAU/USD" }
+            _prices.value = _prices.value + (sym to event)
+            if (sym.startsWith("XAU")) {
+                _heartbeat.value = event
+                prefs?.edit()?.putString("heartbeat", payload.toString())?.apply()
+            }
+            prefs?.edit()?.putString("hb_$sym", payload.toString())?.apply()
             return event
         }
         if (_events.value.any { it.msgId == msgId }) return null
@@ -280,6 +298,9 @@ object SignalRepository {
             p.getString("heartbeat", null)?.let {
                 val hb = JSONObject(it)
                 _heartbeat.value = SignalEvent("hb", "heartbeat", hb)
+            }
+            _prices.value = p.all.keys.filter { it.startsWith("hb_") }.associate { k ->
+                k.removePrefix("hb_") to SignalEvent("hb", "heartbeat", JSONObject(p.getString(k, "{}") ?: "{}"))
             }
         } catch (e: Exception) {
             _events.value = emptyList()

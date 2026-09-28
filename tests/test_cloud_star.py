@@ -46,7 +46,7 @@ def test_star_only_skips_non_star_signals_and_marks_star():
     prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
     now = df.index[24 * 60].to_pydatetime() + timedelta(minutes=2)
     end = df.index[-1].to_pydatetime()
-    cfg = {**_core.CFG, "star_only": True}
+    cfg = {**_core.CFG, "star_only": True, "profit_only": False}
     while now <= end:
         prices.now = now
         _core.tick(now, prices, store, pub, cfg)
@@ -66,10 +66,23 @@ def test_all_mode_marks_star_and_close_carries_it():
     end = df.index[-1].to_pydatetime()
     while now <= end:
         prices.now = now
-        _core.tick(now, prices, store, pub, _core.CFG)          # default: semua sinyal, ⭐ ditandai
+        _core.tick(now, prices, store, pub, {**_core.CFG, "profit_only": False})
         now += timedelta(minutes=30)
     signals = {e["id"]: e for e in pub.events if e["type"] == "signal"}
-    assert {e["star"] for e in signals.values()} == {True, False}
+    assert {e["cat"] for e in signals.values()} >= {"XAU biasa"} and len({e["cat"] for e in signals.values()}) >= 2
     assert all(isinstance(e["star"], bool) for e in signals.values())
     closes = [e for e in pub.events if e["type"] == "close"]
     assert closes and all(c["star"] == signals[c["id"]]["star"] for c in closes)
+
+
+def test_profit_only_sends_only_money_categories():
+    df = market(seed=11)
+    prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
+    now = df.index[24 * 60].to_pydatetime() + timedelta(minutes=2)
+    while now <= df.index[-1].to_pydatetime():
+        prices.now = now
+        _core.tick(now, prices, store, pub, _core.CFG)            # default: hanya sinyal 💰
+        now += timedelta(minutes=30)
+    sig = [e for e in pub.events if e["type"] == "signal"]
+    assert sig and all(e["cat"] in ("XAU konf+⭐", "XAU konf") and e["badge"].startswith("💰") for e in sig)
+    assert any(p["why"] == "XAU biasa" for k, p in store.logs if k == "skip")

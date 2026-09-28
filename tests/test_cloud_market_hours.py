@@ -76,7 +76,8 @@ def run(cfg, bars, guard=True):
 
 
 def test_bug_reproduced_without_market_hours():
-    signals, _ = run({**_core.CFG, "market_hours": False, "skip_open_bars": 0}, feed(), guard=False)
+    signals, _ = run({**_core.CFG, "market_hours": False, "skip_open_bars": 0, "profit_only": False}, feed(),
+                     guard=False)
     assert signals and signals[0]["dir"] == "BUY"
     assert signals[0]["risk_points"] < 3                     # SL super dekat karena ATR dari candle datar
 

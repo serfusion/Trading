@@ -75,7 +75,7 @@ def test_big_gap_down_buy_then_tp_once():
     ev, store = run(bars, ticks)
     sig = [e for e in ev if e["type"] == "signal"]
     cls = [e for e in ev if e["type"] == "close"]
-    assert len(sig) == 1 and sig[0]["dir"] == "BUY" and sig[0]["badge"] == "⭐⭐⭐💸💸💸"
+    assert len(sig) == 1 and sig[0]["dir"] == "BUY" and sig[0]["badge"] == "💰💰💰⭐⭐⭐"
     assert sig[0]["sl"] < sig[0]["entry"] < sig[0]["tp"]
     assert len(cls) == 1 and cls[0]["r"] > 0 and "TP" in cls[0]["reason"]
     assert abs(sig[0]["point_value"] - 1000 / sig[0]["entry"]) < 1e-6

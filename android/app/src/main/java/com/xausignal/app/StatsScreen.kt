@@ -2,6 +2,7 @@ package com.xausignal.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,15 +34,17 @@ import java.util.Locale
 fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
     var period by remember { mutableIntStateOf(0) }
     var kind by remember { mutableIntStateOf(0) }
-    val star: Boolean? = when (kind) { 1 -> true; 2 -> false; else -> null }
+    val symbols = listOf("Semua") + events.filter { it.type == "close" }.map { it.symbol() }.distinct().sorted()
+    val symbol: String? = symbols.getOrNull(kind)?.takeIf { kind > 0 }
+    val star: Boolean? = null
     val idFmt = DateTimeFormatter.ofPattern("dd MMM yyyy", Locale("id"))
     val stats = when (period) {
         0 -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString() },
-            { LocalDate.parse(it).format(idFmt) }, star)
+            { LocalDate.parse(it).format(idFmt) }, star, symbol)
         1 -> SignalRepository.periodStats(events, money, ::weekKey,
-            { "Minggu " + LocalDate.parse(it).format(idFmt) }, star)
+            { "Minggu " + LocalDate.parse(it).format(idFmt) }, star, symbol)
         else -> SignalRepository.periodStats(events, money, { it.toLocalDate().toString().substring(0, 7) },
-            { LocalDate.parse("$it-01").format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id"))) }, star)
+            { LocalDate.parse("$it-01").format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale("id"))) }, star, symbol)
     }
     val all = stats.fold(PeriodStats("Total", 0, 0, 0.0, 0.0)) { acc, s ->
         PeriodStats("Total", acc.wins + s.wins, acc.losses + s.losses, acc.profit + s.profit, acc.loss + s.loss)
@@ -51,7 +54,7 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { Selector(listOf("Semua", "💸 teruji", "Lainnya"), kind) { kind = it } }
+        if (symbols.size > 2) item { SymbolChips(symbols, kind) { kind = it } }
         item { Selector(listOf("Harian", "Mingguan", "Bulanan"), period) { period = it } }
         item { TotalCard(all, money) }
         item {
@@ -65,6 +68,22 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
         }
         items(stats, key = { it.label }) { PeriodCard(it, money) }
         item { Footer() }
+    }
+}
+
+/** Pilihan pair yang bisa digeser ke samping. */
+@Composable
+private fun SymbolChips(options: List<String>, selected: Int, onSelect: (Int) -> Unit) {
+    Row(
+        Modifier.horizontalScroll(androidx.compose.foundation.rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        options.forEachIndexed { i, name ->
+            androidx.compose.material3.FilterChip(
+                selected = selected == i, onClick = { onSelect(i) },
+                label = { Text(name.replace("/", ""), fontWeight = FontWeight.Medium) }
+            )
+        }
     }
 }
 

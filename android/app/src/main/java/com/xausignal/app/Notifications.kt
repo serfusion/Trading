@@ -32,10 +32,12 @@ object Notifications {
     }
 
     fun signal(context: Context, event: SignalEvent) {
-        val badge = "⭐".repeat(event.stars()) + "💸".repeat(event.moneyBadge())
+        val badge = "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
         val title = "${if (badge.isBlank()) "" else "$badge "}${event.dir} ${event.symbol()} @ ${event.price("entry")}"
-        val stats = event.statsLine()
-        val text = (if (stats.isBlank()) "" else "$stats\n") +
+        val stats = if (event.json.has("wr")) {
+            "WR ${fmt(event.json.optDouble("wr"), 0)}% • ${signed(event.json.optDouble("avg_r"))}R • "
+        } else ""
+        val text = stats +
             "SL ${event.price("sl")} • TP ${event.price("tp1")} • " + legsLot(event, SignalRepository.money())
         post(context, event.id.hashCode(), title, text)
     }

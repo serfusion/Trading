@@ -224,6 +224,10 @@ STATS = {
     "XAU konf": (48.1, 0.093, 335, "2012–2026"),
     "XAU ⭐": (42.7, -0.062, 356, "2012–2026"),
     "XAU biasa": (43.5, -0.005, 1875, "2012–2026"),
+    "BTC konf+⭐": (47.8, 0.310, 811, "2016–2026"),
+    "BTC konf": (48.1, 0.226, 430, "2016–2026"),
+    "BTC ⭐": (49.5, 0.678, 382, "2016–2026"),
+    "BTC biasa": (43.0, 0.073, 2159, "2016–2026"),
     "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
     "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
     "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),
@@ -233,12 +237,23 @@ STATS = {
 
 
 def badges(cat: str) -> dict:
-    """⭐ = win rate (≥75% ⭐⭐⭐, ≥60% ⭐⭐, ≥48% ⭐), 💸 = profit/sinyal (≥0,25R 💸💸💸, ≥0,12R 💸💸, ≥0,05R 💸)."""
+    """💰 = profit/sinyal (≥0,25R 💰💰💰, ≥0,12R 💰💰, ≥0,05R 💰), ⭐ = win rate (≥75% ⭐⭐⭐, ≥60% ⭐⭐, ≥48% ⭐).
+    Profit didahulukan: badge = 💰 lalu ⭐."""
     wr, avg, n, period = STATS[cat]
     stars = 3 if wr >= 75 else 2 if wr >= 60 else 1 if wr >= 48 else 0
     money = 3 if avg >= 0.245 else 2 if avg >= 0.12 else 1 if avg >= 0.05 else 0
     return {"cat": cat, "wr": wr, "avg_r": avg, "n_hist": n, "period": period, "stars": stars, "money": money,
-            "badge": "⭐" * stars + "💸" * money, "star": money > 0}
+            "badge": "💰" * money + "⭐" * stars, "star": money > 0}
+
+
+def category(closed: list[Bar], direction: str, cfg: dict) -> tuple[dict, str]:
+    """Kategori sinyal (konf+⭐ / konf / ⭐ / biasa) -> badge & statistik. 'star' = punya 💰 & bukan biasa."""
+    is_star, note = star_check(closed, direction, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
+    is_konf = konf_check(closed, direction)
+    name = "konf+⭐" if is_star and is_konf else "konf" if is_konf else "⭐" if is_star else "biasa"
+    meta = badges(f"{cfg.get('asset', 'XAU')} {name}")
+    meta["star"] = meta["money"] > 0 and name != "biasa"
+    return meta, note
 
 
 # ---------------------------------------------------------------- layanan luar
@@ -288,6 +303,29 @@ class Supabase:
     def log(self, kind: str, payload: dict) -> None:
         headers = {**self.headers, "Prefer": "return=minimal"}
         http("POST", f"{self.base}/xau_signals", headers, {"type": kind, "payload": payload})
+
+
+class RowStore:
+    """State di baris Supabase lain (mis. 'btc'). Kontrol auto order hanya untuk XAU (baris utama)."""
+
+    def __init__(self, store, row: str):
+        self.store, self.row = store, row
+
+    def get_state(self) -> dict:
+        return self.store.get_state(self.row)
+
+    def save_state(self, data: dict) -> None:
+        self.store.save_state(data, self.row)
+
+    def get_control(self) -> dict:
+        return {}
+
+    def log(self, kind: str, payload: dict) -> None:
+        self.store.log(kind, {**payload, "asset": self.row})
+
+
+BTC_CFG = {**CFG, "asset": "BTC", "id_prefix": "BTC-", "market_hours": False, "skip_open_bars": 0,
+           "point_value": 0.01}          # BTCUSD(c): kontrak 1 BTC/lot -> 0,01 lot = 0,01 per $1
 
 
 OK_CODES = {"ERR_NO_ERROR", "TRADE_RETCODE_PLACED", "TRADE_RETCODE_DONE", "TRADE_RETCODE_DONE_PARTIAL",
@@ -434,7 +472,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
-              "cat": v.get("cat", ""), "point_value": 1.0,
+              "cat": v.get("cat", ""), "point_value": cfg.get("point_value", 1.0),
               "tp1_time": v.get("be_bar"), "reason": why}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
@@ -505,31 +543,33 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                     star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})
                 events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
+            elif sig["action"] == "open" and v is None and cfg.get("profit_only", True) and not (
+                    cat := category(closed, sig["dir"], cfg))[0]["star"]:
+                # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
+                events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
-                is_star, star_note = star_check(closed, d, cfg.get("star_ema", 50), cfg.get("star_h4", 20))
-                is_konf = konf_check(closed, d)
-                meta = badges("XAU " + ("konf+⭐" if is_star and is_konf else "konf" if is_konf
-                                        else "⭐" if is_star else "biasa"))
+                meta, star_note = category(closed, d, cfg)
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
                 tp1 = price + sign * cfg["tp1_r"] * risk
-                key = f"{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
+                key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
                 ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
                       "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
                       "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
                       "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
                       "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-                      "star_note": star_note, "point_value": 1.0, **meta}
+                      "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
                 text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
                         f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
                         f"{meta['n_hist']} sinyal)\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
-                pub.publish(ev, text, f"{d} XAUUSD", 5, ["green_circle" if d == "BUY" else "red_circle"])
+                pub.publish(ev, text, f"{d} {symbol}", 5, ["green_circle" if d == "BUY" else "red_circle"])
                 store.log("signal", ev)
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,

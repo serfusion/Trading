@@ -7,27 +7,34 @@ Supabase pg_cron (menit :02 & :32 tiap jam)
         ├─ skema F-ensemble: 3 set Donchian H1 (40/15, 55/20, 80/30), 5 posisi/sinyal,
         │  TP1 1R untuk posisi #1, SL+ ke entry setelah TP1 (identik dengan bot)
         ├─ simpan posisi virtual & riwayat di tabel Supabase
-        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Gold XAU/USD Indicator
+        ├─ kirim sinyal BUY/SELL/TUTUP + status → ntfy.sh → aplikasi Dividend Indicator
         └─ (opsional, Langkah 6) auto order → MetaApi → akun MT5 Exness  ← dikontrol dari tab "Auto" di HP
 ```
 
 **Tanda ⭐**: semua sinyal dikirim; sinyal yang searah tren D1 (close D1 kemarin vs EMA50 D1) dan
 menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py`).
 
-**Badge di setiap sinyal** (dari data historis multi-tahun, `research/badge_stats.py` & `research/gap_years.py`):
-⭐ = win rate (⭐⭐⭐ ≥75%, ⭐⭐ ≥60%, ⭐ ≥48%), 💸 = profit rata-rata per sinyal (💸💸💸 ≥+0,25R, 💸💸 ≥+0,12R,
-💸 ≥+0,05R). Sinyal juga membawa `wr`, `avg_r`, `n_hist`, `period`.
+**Badge di setiap sinyal** (profit didahulukan, dari data historis multi-tahun, `research/badge_stats.py` &
+`research/gap_years.py`): 💰 = profit rata-rata per sinyal (💰💰💰 ≥+0,25R, 💰💰 ≥+0,12R, 💰 ≥+0,05R), lalu
+⭐ = win rate (⭐⭐⭐ ≥75%, ⭐⭐ ≥60%, ⭐ ≥48%). **Hanya sinyal 💰 yang dikirim** (`profit_only`); sinyal biasa & XAU
+"⭐ saja" (profit ±0) dilewati.
 
 | Sinyal | WR | Profit/sinyal | Badge |
 |---|---|---|---|
-| XAU konfluensi + ⭐ (EMA50/200, Supertrend, momentum 60 hari + tren D1 & H4) | 49% | +0,31R | ⭐💸💸💸 |
-| XAU konfluensi saja | 48% | +0,09R | ⭐💸 |
-| XAU ⭐ saja / biasa | 43–44% | ±0 | – |
-| Gap pekan AUD/USD | 90% | +0,25R | ⭐⭐⭐💸💸💸 |
-| Gap pekan USD/JPY | 82% | +0,26R | ⭐⭐⭐💸💸💸 |
-| Gap pekan EUR/JPY | 84% | +0,14R | ⭐⭐⭐💸💸 |
-| Gap pekan AUD/JPY | 86% | +0,10R | ⭐⭐⭐💸 |
-| Gap pekan EUR/CHF | 74% | +0,13R | ⭐⭐💸💸 |
+| Gap pekan AUD/USD | 90% | +0,25R | 💰💰💰⭐⭐⭐ |
+| Gap pekan USD/JPY | 82% | +0,26R | 💰💰💰⭐⭐⭐ |
+| Gap pekan EUR/JPY | 84% | +0,14R | 💰💰⭐⭐⭐ |
+| Gap pekan AUD/JPY | 86% | +0,10R | 💰⭐⭐⭐ |
+| Gap pekan EUR/CHF | 74% | +0,13R | 💰💰⭐⭐ |
+| BTC ⭐ (tren D1 + H4) | 50% | +0,68R | 💰💰💰⭐ |
+| BTC konfluensi + ⭐ | 48% | +0,31R | 💰💰💰 |
+| BTC konfluensi | 48% | +0,23R | 💰💰⭐ |
+| XAU konfluensi + ⭐ | 49% | +0,31R | 💰💰💰⭐ |
+| XAU konfluensi | 48% | +0,09R | 💰⭐ |
+
+**BTC/USD** (env `BTC_SIGNALS=0` untuk mematikan): mesin yang sama dengan XAU, 24 jam (tanpa aturan jam pasar/gap),
+state di baris Supabase `btc`, ID diawali `BTC-`. Lot memakai kontrak BTCUSD(c) 1 BTC per lot (0,01 lot = 0,01 per
+$1 gerak) — cek spesifikasi simbol di MT5.
 
 **Sinyal gap pekan forex** (`cloud/api/_gap.py`, env `GAP_SIGNALS=0` untuk mematikan): 1 jam setelah pasar forex
 buka (Minggu 17:00 New York), bila gap ≥ 0,5 × range harian 14 hari → lawan gap, TP 50% gap tertutup, SL 1× gap,
@@ -90,7 +97,7 @@ di aplikasi.
 ## Langkah 5 — Tes
 1. Buka di browser: `https://signal.domainkamu.com/api/tick?key=CRON_SECRET` → harus muncul
    `{"ok": true, "price": ..., "trend": "close ... | channel 55: ... "}`.
-2. Aplikasi Gold XAU/USD Indicator → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
+2. Aplikasi Dividend Indicator → ⚙️ → Server `https://ntfy.sh`, Topik = `NTFY_TOPIC` → Simpan →
    kartu atas menampilkan harga & "Mode: SINYAL (cloud)".
 3. Di Supabase: `select status_code, content from net._http_response order by created desc limit 5;`
    → status 200 setiap 30 menit.

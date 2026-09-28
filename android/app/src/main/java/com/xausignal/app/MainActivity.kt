@@ -127,7 +127,7 @@ private val TABS = listOf(
 @Composable
 fun AppScreen(onSettingsSaved: () -> Unit) {
     val events by SignalRepository.events.collectAsState()
-    val heartbeat by SignalRepository.heartbeat.collectAsState()
+    val prices by SignalRepository.prices.collectAsState()
     val connection by SignalRepository.connection.collectAsState()
     val moneyVersion by SignalRepository.moneyVersion.collectAsState()
     var showSettings by remember { mutableStateOf(SignalRepository.topic().isBlank()) }
@@ -218,7 +218,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 }
             }
             when (tab) {
-                0 -> SignalsTab(events, heartbeat, connection, money)
+                0 -> SignalsTab(events, prices, connection, money)
                 else -> StatsTab(events, money)
             }
         }
@@ -272,8 +272,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     FilterChip(selected = cent, onClick = { cent = true }, label = { Text("Cent (USC)") })
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
-                LotInput(lot, { lot = it }, "Lot sinyal lainnya", 100.0)
-                LotInput(starLot, { starLot = it }, "Lot sinyal 💸", 100.0)
+                LotInput(lot, { lot = it; starLot = it }, "Lot per posisi", 100.0)
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
             }
