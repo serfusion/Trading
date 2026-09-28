@@ -37,10 +37,12 @@ object SignalPoller {
             client.newCall(Request.Builder().url(url).build()).execute().use { res ->
                 if (!res.isSuccessful) throw IOException("HTTP ${res.code}")
                 var added = 0
+                val seen = HashSet<String>()           // sinyal kembar (set berbeda, entry sama) = 1 notifikasi
                 res.body?.string().orEmpty().lineSequence().forEach { line ->
                     val event = parse(line) ?: return@forEach
                     added++
-                    if (last != null) notify(context, event)
+                    val twin = "${event.type}|${event.symbol()}|${event.dir}|${event.price("entry")}"
+                    if (last != null && (event.type != "signal" || seen.add(twin))) notify(context, event)
                 }
                 SignalRepository.setConnection("Terhubung")
                 added
