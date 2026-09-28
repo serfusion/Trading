@@ -179,3 +179,19 @@ def test_endpoint_requires_secret(monkeypatch):
     r = Req("/api/tick?key=rahasia")
     r.do_GET()
     assert r.code == 200 and b'"ok": true' in r.wfile.getvalue()
+
+
+def test_scheme_r_matches_standard_and_variants():
+    df = bars_from_path(trend_path(), start="2026-09-14 00:00", freq="1h", wick=0.5)
+    store, pub = run_ticks(df)
+    closes = [e for e in pub.events if e["type"] == "close"]
+    assert closes
+    for c in closes:
+        rb = c["r_by"]
+        assert set(rb) == {"1_tp1", "1_07", "3_tp1", "3_07"}
+        assert abs(rb["1_tp1"] - c["r"]) < 1e-3                  # skema standar = hasil virtual
+        if c["tp1_hit"]:
+            assert rb["3_tp1"] <= rb["1_tp1"] + 1e-9 or c["points"] <= c["risk_points"]
+    infos = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "be07"]
+    tp1 = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "tp1"]
+    assert tp1 and infos and all("TP1" not in e["text"] for e in infos)

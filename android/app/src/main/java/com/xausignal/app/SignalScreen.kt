@@ -29,7 +29,9 @@ import java.time.temporal.TemporalAdjusters
 fun SignalsTab(events: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings) {
     val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
     val history = events.filter { it.type == "signal" || (it.type == "close" && it.id !in signalIds) }
+    // Sinyal kembar (beberapa set di candle sama: simbol, arah, entry sama) digabung jadi 1 kartu ×N.
     val open = SignalRepository.openSignals(events)
+        .groupBy { Triple(it.symbol(), it.dir, it.price("entry")) }.values.toList()
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
@@ -40,8 +42,9 @@ fun SignalsTab(events: List<SignalEvent>, prices: Map<String, SignalEvent>, conn
         if (open.isEmpty()) {
             item { AppCard { Text("Menunggu sinyal 💰", color = Muted) } }
         } else {
-            items(open, key = { "open-" + it.msgId }) {
-                OpenSignalCard(it, prices[it.symbol()], SignalRepository.slPlusActive(events, it.id), money)
+            items(open, key = { "open-" + it.first().msgId }) { g ->
+                val s = g.first()
+                OpenSignalCard(s, prices[s.symbol()], g.any { SignalRepository.slPlusActive(events, it.id) }, money, g.size)
             }
         }
         item { TodayCard(events, money) }
@@ -84,10 +87,11 @@ fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
 
 /** Simbol + arah + waktu, lalu 💰 (profit) ★ (win rate) dan chip WR / R historis. */
 @Composable
-private fun SignalHeader(signal: SignalEvent) {
+private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         Text(signal.symbol(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
         Pill(signal.dir, dirColor(signal.dir), solid = true)
+        if (count > 1) Pill("×$count", Gold)
         Spacer(Modifier.weight(1f))
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
@@ -110,21 +114,22 @@ private fun SignalHeader(signal: SignalEvent) {
 private fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
 @Composable
-fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money: MoneySettings) {
+fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money: MoneySettings, count: Int = 1) {
     val entry = signal.num("entry")
     val price = hb?.num("price")
     val sign = if (signal.dir == "BUY") 1 else -1
     val floating = if (entry != null && price != null) (price - entry) * sign else null
     AppCard(accent = dirColor(signal.dir)) {
-        SignalHeader(signal)
+        SignalHeader(signal, count)
         Row(verticalAlignment = Alignment.Bottom) {
             Text(
                 signal.price("entry"), style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)
             )
             if (floating != null) {
+                val digits = if (signal.symbol().contains("JPY")) 3 else if ((entry ?: 0.0) < 20) 5 else 2
                 Text(
-                    (if (floating > 0) "+" else "") + priceText(signal.symbol(), floating),
+                    (if (floating > 0) "+" else "") + fmt(floating, digits),
                     style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold,
                     color = if (floating >= 0) BuyColor else SellColor
                 )
@@ -133,7 +138,13 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         MetricRow {
             Metric("SL", signal.price("sl"), SellColor, compact = true)
             Metric(if (signal.isGap()) "TP" else "TP1", signal.price("tp1"), BuyColor, compact = true)
-            Metric("Lot", legsLot(signal, money), Gold, compact = true)
+            Metric("Lot", legsLot(signal, money, count), Gold, compact = true)
+        }
+        if (count > 1) {
+            Text(
+                "$count set sinyal sama → lot dibagi $count (risiko tetap seperti 1 sinyal)",
+                style = MaterialTheme.typography.labelSmall, color = Muted
+            )
         }
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
     }
@@ -181,9 +192,12 @@ fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
     }
 }
 
-/** "5 × 0.02": jumlah posisi × lot pilihanmu. */
-fun legsLot(signal: SignalEvent, money: MoneySettings): String =
-    "${signal.num("legs")?.toInt() ?: 5} × ${lotText(money.lotFor(signal.isStar()))}"
+/** "5 × 0.02": jumlah posisi × lot. Sinyal kembar ×N: lot dibagi N (min 0.01) per set. */
+fun legsLot(signal: SignalEvent, money: MoneySettings, count: Int = 1): String {
+    val legs = signal.num("legs")?.toInt() ?: 5
+    val lot = roundLot(money.lotFor(signal.isStar()) / count).coerceAtLeast(0.01)
+    return if (count > 1) "$count×$legs × ${lotText(lot)}" else "$legs × ${lotText(lot)}"
+}
 
 /** Riwayat satu sinyal: entry → tutup → MENANG/KALAH + uang. */
 @Composable

@@ -43,8 +43,18 @@ fun fmt(value: Double?, digits: Int = 2): String =
 data class Stats(val closed: Int, val wins: Int, val totalR: Double)
 
 /** Pengaturan uang untuk menghitung profit/rugi dari sinyal. */
-data class MoneySettings(val cent: Boolean, val legLot: Double, val idrRate: Double, val starLot: Double = legLot) {
+data class MoneySettings(
+    val cent: Boolean,
+    val legLot: Double,
+    val idrRate: Double,
+    val starLot: Double = legLot,
+    val tpLegs: Int = 1,            // posisi yang ditutup di TP1 (1 atau 3)
+    val be07: Boolean = false,      // SL+ saat profit 0,7R (bukan menunggu TP1)
+) {
     val currency: String get() = if (cent) "USC" else "USD"
+
+    /** Kunci hasil skema di event TUTUP cloud (r_by), mis. "3_07". */
+    val schemeKey: String get() = "${tpLegs}_${if (be07) "07" else "tp1"}"
 
     /** Lot per posisi: sinyal ⭐ memakai lot ⭐, sinyal biasa memakai lot biasa. */
     fun lotFor(star: Boolean): Double = if (star) starLot else legLot
@@ -153,12 +163,15 @@ object SignalRepository {
             legLot = roundLot(lot).coerceAtLeast(0.01),
             idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
             starLot = roundLot(star).coerceAtLeast(0.01),
+            tpLegs = p?.getInt("tp_legs", 1) ?: 1,
+            be07 = p?.getBoolean("be07", false) ?: false,
         )
     }
 
     fun saveMoney(m: MoneySettings) {
         prefs?.edit()?.putBoolean("cent", m.cent)?.putString("leg_lot_text", lotText(m.legLot))?.remove("leg_lot")
             ?.putString("star_lot_text", lotText(m.starLot))
+            ?.putInt("tp_legs", m.tpLegs)?.putBoolean("be07", m.be07)
             ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
         _moneyVersion.value = _moneyVersion.value + 1
     }
@@ -169,7 +182,10 @@ object SignalRepository {
     /** Profit/rugi satu sinyal TUTUP dalam mata uang akun (USD atau USC). */
     fun amount(e: SignalEvent, m: MoneySettings): Double? {
         e.num("pnl")?.let { return it }
-        val r = e.num("r") ?: return null
+        // hasil sesuai skema pilihan (1/3 posisi TP1, SL+ setelah TP1 / di 0,7R); sinyal lama: hasil standar
+        val byScheme = e.json.optJSONObject("r_by")
+        val r = if (byScheme != null && byScheme.has(m.schemeKey)) byScheme.optDouble(m.schemeKey) else e.num("r")
+            ?: return null
         val risk = e.num("risk_points") ?: return null
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
@@ -263,7 +279,10 @@ object SignalRepository {
         }
     }
 
-    fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean = tp1Event(events, signalId) != null
+    fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean =
+        tp1Event(events, signalId) != null || (money().be07 && events.any {
+            it.type == "info" && it.str("id") == signalId && it.str("kind") == "be07"
+        })
 
     /** Info TP1 kena (lalu SL+) untuk sinyal ini, bila ada. */
     fun tp1Event(events: List<SignalEvent>, signalId: String): SignalEvent? =

@@ -32,6 +32,17 @@ menembus high/low 20 candle H4 sebelumnya diberi tanda ⭐ (`research/filters.py
 | XAU konfluensi + ⭐ | 49% | +0,31R | 💰💰💰⭐ |
 | XAU konfluensi | 48% | +0,09R | 💰⭐ |
 
+**Skema pilihan pengguna** (aplikasi → Pengaturan): posisi di TP1 = 1 (sisa 4, bawaan) atau 3 (sisa 2); SL+ saat TP1
+kena (bawaan) atau saat profit 0,7R. Event TUTUP membawa `r_by` = hasil R untuk keempat skema (`scheme_r`), event
+info `kind: be07` dikirim saat profit 0,7R tercapai. Riset `research/early_be.py` (XAU 2012–2026 / BTC 2016–2026):
+
+| Skema | XAU WR | XAU total | BTC WR | BTC total |
+|---|---|---|---|---|
+| 1 TP1 + 4 sisa, SL+ setelah TP1 (bawaan) | 45% | +245R | 45% | +765R |
+| 1 TP1 + 4 sisa, SL+ di 0,7R | 55% | +218R | 54% | +759R |
+| 3 TP1 + 2 sisa, SL+ setelah TP1 | 45% | +107R | 45% | +368R |
+| 3 TP1 + 2 sisa, SL+ di 0,7R | 55% | +99R | 54% | +354R |
+
 **BTC/USD** (env `BTC_SIGNALS=0` untuk mematikan): mesin yang sama dengan XAU, 24 jam (tanpa aturan jam pasar/gap),
 state di baris Supabase `btc`, ID diawali `BTC-`. Lot memakai kontrak BTCUSD(c) 1 BTC per lot (0,01 lot = 0,01 per
 $1 gerak) — cek spesifikasi simbol di MT5.

@@ -253,6 +253,8 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
     var rate by remember { mutableStateOf(fmt(current.idrRate, 0).replace(",", "")) }
     val lotValue = parseLot(lot)
     val starValue = parseLot(starLot)
+    var tpLegs by remember { mutableStateOf(current.tpLegs) }
+    var be07 by remember { mutableStateOf(current.be07) }
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -273,6 +275,16 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                     FilterChip(selected = !cent, onClick = { cent = false }, label = { Text("USD") })
                 }
                 LotInput(lot, { lot = it; starLot = it }, "Lot per posisi", 100.0)
+                CardTitle("Posisi di TP1")
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = tpLegs == 1, onClick = { tpLegs = 1 }, label = { Text("1 (sisa 4)") })
+                    FilterChip(selected = tpLegs == 3, onClick = { tpLegs = 3 }, label = { Text("3 (sisa 2)") })
+                }
+                CardTitle("SL+ saat")
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = !be07, onClick = { be07 = false }, label = { Text("TP1 kena") })
+                    FilterChip(selected = be07, onClick = { be07 = true }, label = { Text("Profit 0,7R") })
+                }
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
                     singleLine = true, modifier = Modifier.fillMaxWidth())
             }
@@ -286,6 +298,8 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, MoneySettings
                         legLot = lotValue ?: 0.01,
                         idrRate = rate.replace(".", "").replace(",", "").toDoubleOrNull() ?: 16500.0,
                         starLot = starValue ?: 0.01,
+                        tpLegs = tpLegs,
+                        be07 = be07,
                     )
                     onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, m)
                 }

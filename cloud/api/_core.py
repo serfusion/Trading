@@ -60,6 +60,33 @@ def since_week_open(closed: list[Bar]) -> int:
     return n
 
 
+def scheme_r(bars: list, v: dict, exit_price: float, tp_legs: int, be_07: bool, tp1_r: float = 1.0,
+             be_offset: float = 0.10) -> float:
+    """R rata-rata per posisi bila pengguna memakai skema lain: `tp_legs` posisi ditutup di TP1, sisanya ikut
+    sampai TUTUP; SL+ (entry ± be_offset) setelah TP1, atau lebih awal saat profit 0,7R bila `be_07`.
+    Urutan per candle sama dengan pengelolaan virtual: SL dulu, lalu TP1, lalu cek 0,7R."""
+    sign = 1 if v["dir"] == "BUY" else -1
+    entry, risk, legs = v["entry"], v["risk"], v["legs"]
+    tp_legs = min(tp_legs, legs)
+    sl, tp1 = entry - sign * risk, entry + sign * tp1_r * risk
+    be = entry + sign * be_offset
+    left, pnl, tp_hit = legs, 0.0, False
+    start = parse_iso(v["bar_close"])
+    for b in bars:
+        if b.t < start:
+            continue
+        if (b.l <= sl) if sign > 0 else (b.h >= sl):
+            return (pnl + left * (sl - entry) * sign / risk) / legs
+        if not tp_hit and ((b.h >= tp1) if sign > 0 else (b.l <= tp1)):
+            tp_hit, pnl, left = True, pnl + tp_legs * tp1_r, left - tp_legs
+            sl = max(sl, be) if sign > 0 else min(sl, be)
+            if left == 0:
+                return pnl / legs
+        if be_07 and ((b.h - entry) if sign > 0 else (entry - b.l)) >= 0.7 * risk:
+            sl = max(sl, be) if sign > 0 else min(sl, be)
+    return (pnl + left * (exit_price - entry) * sign / risk) / legs
+
+
 def f_result(legs: int, entry: float, risk: float, sign: int, tp1_hit: bool, exit_price: float,
              tp1_r: float) -> float:
     """R rata-rata per posisi untuk skema F (sama dengan xau_bot/trend_ensemble.f_result)."""
@@ -473,7 +500,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
               "cat": v.get("cat", ""), "point_value": cfg.get("point_value", 1.0),
-              "tp1_time": v.get("be_bar"), "reason": why}
+              "tp1_time": v.get("be_bar"), "reason": why,
+              "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
+                                                                     cfg["be_offset"]), 3)
+                       for n in (1, 3) for e in (False, True)}}
         text = (f"🏁 TUTUP {v['dir']} {symbol} [{name}] @ {exit_price:.2f}\n"
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | hasil skema F {r:+.2f}R\nAlasan: {why}")
         pub.publish(ev, text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
@@ -507,11 +537,23 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                              sl=v["entry"] + (1 if buy else -1) * cfg["be_offset"])
                     text = (f"🎯 [{name}] TP1 {v['tp1']:.2f} kena ({v['dir']})\n"
                             f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.2f} (SL+)")
-                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": v["id"], "text": text},
-                                text, "TP1 + SL+", 5, ["dart"])
+                    pub.publish({"type": "info", "kind": "tp1", "time": iso(now), "set": name, "id": v["id"],
+                                 "symbol": symbol, "sl_plus": round(v["sl"], 3), "text": text}, text, "TP1 + SL+", 5, ["dart"])
                     store.log("tp1", {"id": v["id"], "set": name, "sl": v["sl"]})
                     events.append(f"{name} TP1 -> SL+")
                     break
+        if not v.get("be_done") and not v.get("n07"):
+            fav = max(((b.h - v["entry"]) if buy else (v["entry"] - b.l)
+                       for b in bars if b.t >= parse_iso(v["bar_close"])), default=0.0)
+            if fav >= 0.7 * v["risk"]:
+                v["n07"] = True
+                sl_plus = v["entry"] + (1 if buy else -1) * cfg["be_offset"]
+                text = (f"🛡️ [{name}] {v['dir']} {symbol}: profit 0,7R tercapai → SL+ ke {sl_plus:.2f}"
+                        " (bila memakai SL+ 0,7R)")
+                pub.publish({"type": "info", "kind": "be07", "time": iso(now), "set": name, "id": v["id"],
+                             "symbol": symbol, "sl_plus": round(sl_plus, 3), "text": text},
+                            text, "SL+ sekarang", 5, ["shield"])
+                events.append(f"{name} 0,7R")
         if v.get("be_done"):
             for b in (b for b in bars if b.t > parse_iso(v["be_bar"])):
                 if (b.l <= v["sl"]) if buy else (b.h >= v["sl"]):
