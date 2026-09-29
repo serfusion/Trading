@@ -1,0 +1,39 @@
+NQ=F H1 2024-05-06 .. 2026-09-29, 13700 candle; latih < 2025-07-18
+
+Metode                     latih: n  win   R/trade  t |     uji: n  win   R/trade  t
+Bollinger fade           122    59%   +0.123  +1.4 |   106    55%   +0.111  +1.1  {'k': 2.0, 'tp': None}
+Inside bar D1             84    43%   +0.010  +0.1 |    66    52%   +0.095  +0.8  {'tp': None}
+Momentum D1               17    47%   +0.233  +0.9 |    23    35%   +0.095  +0.6  {'days': 20, 'tp': 2.0}
+RSI(14) 30/70             23    57%   +0.015  +0.1 |    20    60%   +0.083  +0.4  {'trend': True, 'tp': 2.0}
+Keltner breakout          85    51%   +0.261  +2.2 |    74    42%   +0.072  +0.6  {'mult': 3.0, 'tp': 2.0}
+Williams %R              518    57%   +0.006  +0.2 |   526    61%   +0.029  +0.8  {'tp': 1.0}
+Overnight drift          292    55%   +0.078  +2.0 |   297    53%   +0.028  +0.7  {'tp': 2.0}
+Engulfing D1              21    52%   +0.189  +0.8 |    23    48%   +0.027  +0.1  {'tp': None}
+Stochastic               318    56%   +0.047  +0.9 |   339    56%   +0.017  +0.3  {'tp': None}
+Heikin-Ashi              922    35%   +0.015  +0.8 |   923    36%   +0.009  +0.5  {'tp': None}
+Supertrend               102    32%   +0.050  +0.3 |   119    37%   -0.005  -0.0  {'mult': 3, 'tp': None}
+Volatility breakout      384    46%   +0.090  +1.4 |   397    44%   -0.006  -0.1  {'k': 0.3, 'tp': None}
+CCI                      249    59%   +0.057  +1.1 |   215    54%   -0.013  -0.2  {'lvl': 200, 'tp': 2.0}
+Parabolic SAR            372    42%   +0.050  +1.3 |   376    40%   -0.014  -0.4  {'step': 0.02, 'tp': 1.0}
+RSI(2) Connors           324    66%   +0.048  +1.8 |   292    60%   -0.015  -0.5  {'lvl': 10, 'tp': None}
+Pivot S1/R1              308    52%   -0.031  -0.7 |   323    54%   -0.016  -0.4  {'tp': 1.0}
+Ichimoku                 156    34%   +0.047  +0.6 |   137    35%   -0.018  -0.2  {'tp': 2.0}
+Donchian                 133    55%   +0.096  +1.1 |   134    48%   -0.026  -0.3  {'n': 120, 'tp': 1.0}
+MACD + tren              234    44%   +0.066  +1.5 |   247    38%   -0.029  -0.7  {'tp': 1.0}
+Aroon                    192    46%   -0.002  -0.0 |   176    43%   -0.032  -0.5  {'tp': 1.0}
+Z-score                  214    44%   -0.037  -0.5 |   216    46%   -0.033  -0.4  {'z': 2.0, 'tp': None}
+Turtle D1                 24    62%   +0.292  +1.6 |    24    42%   -0.073  -0.4  {'n': 20, 'tp': 1.0}
+Pin bar D1                39    54%   +0.038  +0.3 |    39    51%   -0.091  -0.7  {'tp': 1.0}
+Hull MA                  122    33%   +0.052  +0.4 |   107    34%   -0.099  -0.9  {'n': 100, 'tp': None}
+Bollinger squeeze        163    33%   -0.037  -0.3 |   151    34%   -0.101  -1.2  {'tp': None}
+Triple MA                 95    42%   +0.212  +1.6 |    85    26%   -0.124  -0.9  {'tp': 2.0}
+ADX/DMI                  157    30%   -0.015  -0.2 |   153    29%   -0.136  -2.6  {'lvl': 20, 'tp': None}
+London breakout          227    33%   -0.108  -1.1 |   204    34%   -0.153  -1.8  {'tp': None}
+Gap fade pekan            18    61%   +0.203  +1.0 |    20    45%   -0.241  -1.3  {'tp': 2.0}
+EMA cross                 33    45%   +0.357  +1.4 |    49    24%   -0.264  -1.4  {'f': 50, 's': 200, 'tp': 2.0}
+
+Meyakinkan (t>2) di latih DAN uji: tidak ada
+Untung di periode uji: 10 dari 30 metode
+Sistem kita (F-ensemble) semua: n=671 WR=46% rata=-0.011R total=-7.3R
+Sistem kita (F-ensemble) latih: n=325 WR=45% rata=+0.040R total=+13.1R
+Sistem kita (F-ensemble) uji  : n=346 WR=47% rata=-0.059R total=-20.3R
