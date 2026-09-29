@@ -24,6 +24,7 @@ import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -90,22 +91,24 @@ object ChatClient {
         .callTimeout(40, TimeUnit.SECONDS)
         .build()
 
-    fun calendar(): List<CalEvent> {
+    /** Kalender pekan ini + status tren per indikator (GET /api/chat). */
+    fun news(): Pair<List<CalEvent>, JSONObject?> {
         val base = SignalRepository.cloudUrl()
-        if (base.isBlank()) return emptyList()
+        if (base.isBlank()) return emptyList<CalEvent>() to null
         val request = Request.Builder().url("$base/api/chat").get()
             .header("X-Chat-Key", SignalRepository.topic()).build()
         return try {
             client.newCall(request).execute().use { res ->
-                val arr = JSONObject(res.body?.string().orEmpty()).optJSONArray("calendar") ?: JSONArray()
+                val obj = JSONObject(res.body?.string().orEmpty())
+                val arr = obj.optJSONArray("calendar") ?: JSONArray()
                 (0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
                     CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
                         o.optString("time"), o.optBoolean("released"), o.optString("actual"))
-                }
+                } to obj.optJSONObject("tren")
             }
         } catch (e: Exception) {
-            emptyList()
+            emptyList<CalEvent>() to null
         }
     }
 
@@ -214,6 +217,70 @@ private fun countdown(e: CalEvent): String {
     }
 }
 
+/**
+ * Status tren sekarang per indikator, diurutkan dari yang paling sering benar di atas tebakan dasar (periode
+ * terbaru). Persentase dari riset (research/tren_kedepan.py); ini status, bukan ramalan.
+ */
+@Composable
+private fun TrendCard(tren: JSONObject?, loading: Boolean) {
+    var asset by remember { mutableStateOf("XAU/USD") }
+    var horizon by remember { mutableStateOf("1 minggu") }
+    AppCard {
+        CardTitle("📈 Status tren sekarang (per indikator)")
+        Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            listOf("XAU/USD", "BTC/USD").forEach { a ->
+                FilterChip(selected = asset == a, onClick = { asset = a }, label = { Text(a) })
+            }
+            listOf("1 hari", "1 minggu", "1 bulan").forEach { h ->
+                FilterChip(selected = horizon == h, onClick = { horizon = h }, label = { Text(h) })
+            }
+        }
+        val a = tren?.optJSONObject(asset)
+        val j = a?.optJSONObject("jangka")?.optJSONObject(horizon)
+        if (a == null || j == null) {
+            Text(if (loading) "Memuat…" else a?.optString("error")?.ifBlank { null } ?: "Status tren belum tersedia " +
+                "(butuh cloud terbaru).", color = Muted)
+            return@AppCard
+        }
+        Text("Close ${a.optString("tanggal")}: ${priceText(asset, a.optDouble("harga"))} • " +
+            "🟢 Bullish ${j.optInt("bullish")} • 🔴 Bearish ${j.optInt("bearish")}",
+            fontWeight = FontWeight.Bold)
+        val uji = a.optString("uji_mulai")
+        val rows = j.optJSONArray("baris") ?: JSONArray()
+        for (i in 0 until rows.length()) {
+            val r = rows.getJSONObject(i)
+            val arah = r.optInt("arah")
+            LineDivider()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(r.optString("nama"), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                    if (arah != 0) {
+                        val lebih = r.optDouble("lebih")
+                        Text("dasar ${fmt(r.optDouble("dasar_uji"), 0)}% (${signed(lebih, 1)}) • semua data " +
+                            "${fmt(r.optDouble("benar"), 0)}%, n=${r.optInt("n")}",
+                            style = MaterialTheme.typography.labelSmall, color = Muted)
+                    }
+                }
+                Column(horizontalAlignment = Alignment.End) {
+                    Text(if (arah > 0) "🟢 Bullish" else if (arah < 0) "🔴 Bearish" else "⚪ Netral",
+                        fontWeight = FontWeight.Bold, color = if (arah > 0) BuyColor else if (arah < 0) SellColor else Muted)
+                    if (arah != 0) {
+                        Text("benar ${fmt(r.optDouble("benar_uji"), 0)}% ($uji–kini)", fontWeight = FontWeight.ExtraBold,
+                            color = Gold, style = MaterialTheme.typography.labelLarge)
+                    }
+                }
+            }
+        }
+        Text(
+            "Persentase = saat indikator menunjukkan arah itu, seberapa sering harga benar-benar bergerak ke arah itu " +
+                "dalam $horizon (data ${a.optString("periode")}; urutan: paling sering benar di atas tebakan dasar, " +
+                "bisa berubah). Dasar = tebakan \"selalu naik/turun\". Tidak ada indikator yang konsisten lebih baik " +
+                "dari tebakan dasar — ini status sekarang, BUKAN ramalan.",
+            style = MaterialTheme.typography.labelSmall, color = Muted
+        )
+    }
+}
+
 /** Satu baris kalender: judul, waktu WIB, status, Act (otomatis) / Cons / Prev. */
 @Composable
 private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
@@ -245,6 +312,7 @@ fun NewsTab() {
     var showForm by remember { mutableStateOf(false) }
     var prefill by remember { mutableStateOf<CalEvent?>(null) }
     var calendar by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
+    var tren by remember { mutableStateOf<JSONObject?>(null) }
     var calLoading by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
@@ -253,7 +321,9 @@ fun NewsTab() {
     fun reloadCalendar() {
         calLoading = true
         scope.launch {
-            calendar = withContext(Dispatchers.IO) { ChatClient.calendar() }
+            val (cal, tr) = withContext(Dispatchers.IO) { ChatClient.news() }
+            calendar = cal
+            tren = tr
             calLoading = false
         }
     }
@@ -325,6 +395,7 @@ fun NewsTab() {
                             style = MaterialTheme.typography.labelSmall, color = Muted
                         )
                     }
+                    TrendCard(tren, calLoading)
                     NoteBox(
                         "Saran entry/TP/SL hanya dari sinyal 💰: trading berita sendiri (masuk setelah rilis) sudah " +
                             "diuji 36 cara di data 2012–2026 dan semuanya rugi. Analisa berita = peluang arah historis, " +

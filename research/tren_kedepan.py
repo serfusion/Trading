@@ -24,7 +24,9 @@ DAN uji, ≥ 60% tahun positif, dan t > 2 (dikoreksi tumpang tindih: t / √h).
 """
 from __future__ import annotations
 
+import json
 import math
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -90,10 +92,10 @@ def rsi(c: pd.Series, n: int = 14) -> np.ndarray:
     return (100 - 100 / (1 + up / dn.replace(0, np.nan))).to_numpy()
 
 
-def predictors(name: str, h1: pd.DataFrame, d: pd.DataFrame, ev: pd.DataFrame, macro: dict, cot) -> dict:
+def price_predictors(d: pd.DataFrame) -> dict:
+    """Penduga dari candle harian saja (sama persis dengan cloud/api/_tren.py; diuji di tests/test_cloud_tren.py)."""
     c, h, l = d.close, d.high.to_numpy(), d.low.to_numpy()
     cv = c.to_numpy()
-    t_avail = pd.DatetimeIndex(d.index + pd.Timedelta(days=1))          # close harian terbit akhir hari (UTC)
     P = {}
     for n in (20, 60, 120, 250):
         P[f"momentum {n} hari"] = np.sign(c / c.shift(n) - 1).to_numpy()
@@ -103,10 +105,6 @@ def predictors(name: str, h1: pd.DataFrame, d: pd.DataFrame, ev: pd.DataFrame, m
     P["SMA50 vs SMA200"] = np.sign(sma50 - sma200).to_numpy()
     don = donchian_state(cv, h, l, 55, 20)
     P["Donchian D1 55/20"] = don
-    # Donchian H1 55/20 (set tengah sinyal kita) dibaca di candle H1 terakhir tiap hari
-    hc, hh, hl = h1.close.to_numpy(), h1.high.to_numpy(), h1.low.to_numpy()
-    s_h1 = pd.Series(donchian_state(hc, hh, hl, 55, 20), index=h1.index).resample("1D").last()
-    P["Donchian H1 55/20 (sinyal kita)"] = s_h1.reindex(d.index).fillna(0).to_numpy()
     st = supertrend(d)
     P["Supertrend D1"] = st
     r = rsi(c)
@@ -130,6 +128,16 @@ def predictors(name: str, h1: pd.DataFrame, d: pd.DataFrame, ev: pd.DataFrame, m
     trend5 = np.vstack([P["momentum 60 hari"], P["close vs SMA50"], P["close vs SMA200"], don, st])
     s = np.nansum(trend5, axis=0)
     P["konsensus tren (≥4 dari 5)"] = np.where(s >= 3, 1, np.where(s <= -3, -1, 0))
+    return P
+
+
+def predictors(name: str, h1: pd.DataFrame, d: pd.DataFrame, ev: pd.DataFrame, macro: dict, cot) -> dict:
+    t_avail = pd.DatetimeIndex(d.index + pd.Timedelta(days=1))          # close harian terbit akhir hari (UTC)
+    P = price_predictors(d)
+    # Donchian H1 55/20 (set tengah sinyal kita) dibaca di candle H1 terakhir tiap hari
+    hc, hh, hl = h1.close.to_numpy(), h1.high.to_numpy(), h1.low.to_numpy()
+    s_h1 = pd.Series(donchian_state(hc, hh, hl, 55, 20), index=h1.index).resample("1D").last()
+    P["Donchian H1 55/20 (sinyal kita)"] = s_h1.reindex(d.index).fillna(0).to_numpy()
     # berita AS (bias emas: +1 data lemah / dovish)
     e = ev.dropna(subset=["bias"]).set_index("time").bias.sort_index()
     cs = e.cumsum()
@@ -174,12 +182,39 @@ def evaluate(pred: np.ndarray, fwd: np.ndarray, t: pd.DatetimeIndex, split: pd.T
     return out
 
 
+# penduga yang juga dihitung cloud (cloud/api/_tren.py, library standar) dari candle harian + FRED
+CLOUD_KEYS = ["momentum 20 hari", "momentum 60 hari", "momentum 120 hari", "momentum 250 hari", "close vs SMA50",
+              "close vs SMA200", "SMA50 vs SMA200", "Donchian D1 55/20", "Supertrend D1", "RSI14 ekstrem (berbalik)",
+              "> 3 ATR dari SMA50 (berbalik)", "pindah tren: Donchian D1 baru berbalik",
+              "pindah tren: baru menembus SMA50", "konsensus tren (≥4 dari 5)",
+              "yield riil 10 th 20 hari (naik = bearish)", "dolar (DTWEXBGS) 20 hari (naik = bearish)"]
+STATS_JSON = Path(__file__).resolve().parent.parent / "cloud" / "api" / "tren_stats.json"
+
+
+def direction_stats(pred: np.ndarray, fwd: np.ndarray, t: pd.DatetimeIndex, split: pd.Timestamp) -> dict:
+    """Per arah (+1 bullish / -1 bearish): n, % benar semua periode, % benar periode uji (terbaru)."""
+    out = {}
+    for d in (1, -1):
+        m = (pred == d) & ~np.isnan(fwd)
+        u = m & (t >= split)
+        out[str(d)] = {"n": int(m.sum()), "benar": round(100 * float((np.sign(fwd[m]) == d).mean()), 1) if m.any() else None,
+                       "n_uji": int(u.sum()),
+                       "benar_uji": round(100 * float((np.sign(fwd[u]) == d).mean()), 1) if u.any() else None}
+    return out
+
+
+def export_json(results: dict) -> None:
+    STATS_JSON.write_text(json.dumps(results, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"\nDitulis: {STATS_JSON}")
+
+
 def main() -> None:
     from .eksternal_cot import fetch as cot_fetch
     from .eksternal_makro import fred
     ev = releases(load_calendar(DATA))
     macro = {k: fred(k) for k in ("DFII10", "DTWEXBGS")}
     summary = []
+    export = {"dibuat": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d"), "aset": {}}
     for name in ("XAUUSD", "BTCUSD"):
         a = asset(name)
         h1 = a.b.df
@@ -193,8 +228,15 @@ def main() -> None:
         c = d.close.to_numpy()
         t = pd.DatetimeIndex(d.index)
         print(f"\n=== {name}: harian {t[0]:%Y-%m-%d} .. {t[-1]:%Y-%m-%d} ({len(t)} hari), latih < {SPLIT[name]:%Y} ===")
+        ex = export["aset"][name] = {"periode": f"{t[0]:%Y}–{t[-1]:%Y}", "uji_mulai": f"{SPLIT[name]:%Y}", "jangka": {}}
         for hz_name, hz in HORIZONS[name].items():
             fwd = np.r_[c[hz:] / c[:-hz] - 1, np.full(hz, np.nan)]
+            ok = ~np.isnan(fwd)
+            u = ok & (t >= SPLIT[name])
+            ex["jangka"][hz_name] = {
+                "hari": hz, "naik": round(100 * float((fwd[ok] > 0).mean()), 1),
+                "naik_uji": round(100 * float((fwd[u] > 0).mean()), 1),
+                "indikator": {k: direction_stats(P[k], fwd, t, SPLIT[name]) for k in CLOUD_KEYS if k in P}}
             up_all = np.nanmean(fwd > 0) * 100
             print(f"\n-- {hz_name} ke depan (naik {up_all:.0f}% dari semua periode; tebakan naif = arah yang lebih sering) --")
             print(f"{'Penduga':42s} {'n':>5s} {'benar':>6s} {'latih benar/naif':>17s} {'uji benar/naif':>15s} "
@@ -212,6 +254,7 @@ def main() -> None:
                                    f"{v['uji_naif']:.1f}%, t {v['t']:+.1f})")
         # kondisi terkini (untuk ditampilkan bila ada yang lolos)
         print(f"\nKondisi terakhir {t[-1]:%Y-%m-%d}: " + ", ".join(f"{k}={int(v[-1]):+d}" for k, v in P.items()))
+    export_json(export)
     print("\nLolos semua kriteria:")
     print("\n".join("  " + s for s in summary) or "  tidak ada")
 

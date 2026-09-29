@@ -196,6 +196,11 @@ otomatis dari CSV publik FRED (tanpa API key) untuk NFP, Unemployment Rate, CPI,
 Retail, Core Retail, Core PCE, Claims, GDP — hanya bila periode acuannya sudah dimuat FRED (biasanya menit s/d ±1 jam
 setelah rilis; bisa selisih 0,1 karena pembulatan). Tekan berita → analisa Act/Cons/Prev. Entry/TP/SL berita tidak
 disarankan: `research/news_trade.py` (36 cara, semua rugi).
+Aplikasi 3.9: kartu **Status tren sekarang** di tab News — tiap indikator (momentum, SMA, Donchian, Supertrend,
+RSI, pindah tren, konsensus, yield riil, dolar) dengan arah sekarang dan % seberapa sering arah itu benar
+(1 hari / 1 minggu / 1 bulan; data `cloud/api/tren_stats.json` dari `research/tren_kedepan.py`), diurutkan dari yang
+paling sering benar di atas tebakan dasar. Dihitung `cloud/api/_tren.py` dari candle harian Twelve Data (cache 3 jam
+di baris Supabase `tren`, ±2 kredit) + CSV FRED. Status, bukan ramalan (riset bagian 16: tidak ada yang lolos).
 
 Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
 `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
