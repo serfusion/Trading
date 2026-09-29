@@ -37,17 +37,24 @@ private const val HISTORY_PAGE = 4
 fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings,
                follow: Set<String> = SignalRepository.followed()) {
     // hanya pair yang diikuti (Pengaturan → Pair yang saya ikuti)
-    // dihitung ulang hanya saat pesan / pair diikuti berubah, bukan setiap harga bergerak (hemat baterai)
+    // dihitung ulang hanya saat pesan / pair diikuti / harga berubah (bukan per kartu)
     val events = remember(allEvents, follow) { allEvents.filter { it.pairGroup() in follow } }
+    val signalIds = remember(events) { events.filter { it.type == "signal" }.map { it.id }.toSet() }
+    val primary = remember(events, prices) { SignalRepository.primaryOf(events, prices) }
     val twins = SignalRepository.twinCounts(events)
     // riwayat: sinyal kembar cukup 1 kartu (set utama = harga TUTUP yang dipakai)
-    val history = remember(events) {
-        val signalIds = events.filter { it.type == "signal" }.map { it.id }.toSet()
-        val primary = SignalRepository.primaryOf(events)
+    val history = remember(events, primary) {
         events.filter {
-            (it.type == "signal" && (primary[it.id] ?: it.id) == it.id) || (it.type == "close" && it.id !in signalIds)
+            (primary[it.id] ?: it.id) == it.id && (it.type == "signal" || (it.type == "close" && it.id !in signalIds))
         }
     }
+    // posisi yang masih terbuka di cloud tetapi data sinyalnya tidak ada di HP (mis. aplikasi di-install ulang)
+    val orphans = prices.values.flatMap { SignalRepository.cloudOpen(it) }
+        .filter { x ->
+            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC")) "BTC" else "GAP"
+            x.id !in signalIds && grp in follow
+        }
+        .groupBy { SignalRepository.twinKey(it.id) }.values.toList()
     val missed = events.filter { it.type == "signal" && it.closedByHeartbeat(prices[it.symbol()]) }.map { it.id }.toSet()
     var shown by rememberSaveable { mutableIntStateOf(HISTORY_PAGE) }
     // Sinyal kembar (beberapa set di candle sama: simbol, arah, entry sama) digabung jadi 1 kartu ×N.
@@ -59,8 +66,10 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { TickerCard(prices, connection) }
-        item { SectionTitle("Aktif", trailing = if (open.isEmpty()) null else "${open.size}") }
-        if (open.isEmpty()) {
+        val active = open.size + orphans.size
+        item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
+        items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
+        if (active == 0) {
             item {
                 AppCard {
                     Text("⏳ WAIT — belum ada sinyal 💰", fontWeight = FontWeight.Bold)
@@ -267,6 +276,47 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
                     "Update ${hb?.timeText() ?: "-"}.",
                 style = MaterialTheme.typography.labelSmall, color = Muted
             )
+        }
+    }
+}
+
+/**
+ * Sinyal yang menurut heartbeat cloud masih berjalan, tetapi data sinyalnya tidak ada di HP (mis. aplikasi baru
+ * di-install ulang dan pesan lama sudah lewat 12 jam di ntfy). Menampilkan satu harga TUTUP (set paling lambat).
+ */
+@Composable
+fun CloudOpenCard(group: List<CloudOpen>, hb: SignalEvent?) {
+    val main = group.maxByOrNull { it.bars } ?: return
+    val buy = main.dir == "BUY"
+    val price = hb?.num("price")
+    AppCard(accent = dirColor(main.dir)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Text(main.symbol, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Pill(main.dir, dirColor(main.dir), solid = true)
+            if (group.size > 1) Pill("×${group.size}", Gold)
+        }
+        Text(
+            "Sinyal ini masih berjalan di cloud, tetapi data entry-nya tidak ada di HP (mis. aplikasi di-install ulang). " +
+                "Kalau posisi Anda sudah ditutup, abaikan kartu ini.",
+            style = MaterialTheme.typography.labelSmall, color = Muted
+        )
+        LineDivider()
+        Text("🚪 HARGA TUTUP", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, color = Gold)
+        Row(verticalAlignment = Alignment.Bottom) {
+            Column(Modifier.weight(1f)) {
+                Text("tutup bila close H1 ${if (buy) "di bawah" else "di atas"}",
+                    style = MaterialTheme.typography.labelSmall, color = Muted)
+                Text(priceText(main.symbol, main.level), style = MaterialTheme.typography.headlineSmall,
+                    fontWeight = FontWeight.ExtraBold)
+            }
+            Column(horizontalAlignment = Alignment.End) {
+                Text(main.set, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold)
+                Text(
+                    "${if (buy) "low" else "high"} ${main.bars} candle" +
+                        (price?.let { " • jarak ${fmt((it - main.level) * (if (buy) 1 else -1), 2)}" } ?: ""),
+                    style = MaterialTheme.typography.labelSmall, color = Muted
+                )
+            }
         }
     }
 }

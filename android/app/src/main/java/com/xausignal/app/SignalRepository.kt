@@ -108,6 +108,10 @@ fun SignalEvent.price(key: String): String = priceText(symbol(), num(key))
 fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
 fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)
 
+/** Posisi virtual yang masih terbuka di cloud (dari heartbeat `exits`). */
+data class CloudOpen(val symbol: String, val id: String, val dir: String, val set: String, val level: Double,
+                     val bars: Int)
+
 /** Set "T55/20" -> 20 (candle channel keluar); 0 untuk gap / sinyal tanpa set. */
 fun SignalEvent.exitBars(): Int = str("set").substringAfter('/', "").toIntOrNull() ?: 0
 
@@ -315,9 +319,37 @@ object SignalRepository {
      * Sinyal kembar di-entry sekali dengan SATU harga TUTUP: set paling lambat (candle keluar terbanyak, mis.
      * T80/30), yang juga selalu tutup paling akhir. Riset (research: grup 3 set XAU 2012–2026): keluar di set
      * paling lambat +0,42R/grup vs rata-rata 3 set +0,33R vs TUTUP pertama +0,22R; BTC +0,47 / +0,40 / +0,33R.
-     * id sinyal -> id sinyal utama grupnya.
+     * id sinyal -> id sinyal utama grupnya. Grup dibaca dari id ("T80/30-SELL-<candle>") dan memakai sinyal, TUTUP,
+     * DAN posisi terbuka di heartbeat cloud (`exits`) — tetap benar walau data sinyal lama tidak ada di HP
+     * (mis. aplikasi di-install ulang): TUTUP set cepat tidak dianggap final selama set utama masih terbuka.
      */
-    fun primaryOf(events: List<SignalEvent>): Map<String, String> = index(events).primary
+    fun primaryOf(events: List<SignalEvent>, prices: Map<String, SignalEvent> = _prices.value): Map<String, String> {
+        val ids = events.filter { it.type == "signal" || it.type == "close" }.map { it.id } +
+            prices.values.flatMap { hb -> cloudOpen(hb).map { it.id } }
+        return ids.filter { it.isNotBlank() }.distinct().groupBy { twinKey(it) }.values.flatMap { g ->
+            val p = g.maxByOrNull { exitBarsOf(it) } ?: g.first()
+            g.map { it to p }
+        }.toMap()
+    }
+
+    private val SET_ID = Regex("^(.*?)T\\d+/(\\d+)-(BUY|SELL)-(\\w+)$")
+
+    /** "BTC-T55/20-BUY-202609280100" -> "BTC-BUY-202609280100": sama untuk semua set dari candle & arah yang sama. */
+    fun twinKey(id: String): String =
+        SET_ID.find(id)?.let { it.groupValues[1] + it.groupValues[3] + "-" + it.groupValues[4] } ?: id
+
+    /** Jumlah candle channel keluar dari id ("T80/30-…" -> 30); 0 bila bukan sinyal trend. */
+    fun exitBarsOf(id: String): Int = SET_ID.find(id)?.groupValues?.get(2)?.toIntOrNull() ?: 0
+
+    /** Posisi yang masih terbuka di cloud menurut heartbeat (`exits`): id, arah, set, level TUTUP. */
+    fun cloudOpen(hb: SignalEvent?): List<CloudOpen> {
+        val arr = hb?.json?.optJSONArray("exits") ?: return emptyList()
+        return (0 until arr.length()).mapNotNull { i ->
+            val o = arr.optJSONObject(i) ?: return@mapNotNull null
+            CloudOpen(hb.symbol(), o.optString("id"), o.optString("dir"), o.optString("set"), o.optDouble("level"),
+                o.optInt("bars"))
+        }
+    }
 
     /**
      * Indeks pencarian (TP1, TUTUP, 0,7R, sinyal kembar) untuk satu daftar pesan. Dihitung sekali per daftar lalu
@@ -327,7 +359,6 @@ object SignalRepository {
         val tp1 = HashMap<String, SignalEvent>()
         val close = HashMap<String, SignalEvent>()
         val be07 = HashSet<String>()
-        val primary: Map<String, String>
         val twins: Map<String, Int>
 
         init {
@@ -343,10 +374,6 @@ object SignalRepository {
             }
             val groups = events.filter { it.type == "signal" }
                 .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }.values
-            primary = groups.flatMap { g ->
-                val p = (g.maxByOrNull { it.exitBars() } ?: g.first()).id
-                g.map { it.id to p }
-            }.toMap()
             twins = groups.flatMap { g -> g.map { it.id to g.size } }.toMap()
         }
     }
