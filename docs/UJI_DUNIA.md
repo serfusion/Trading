@@ -54,3 +54,11 @@ Rating: ★ untung di latih & uji; ★★ meyakinkan (t>2) di latih & uji; ★�
 - Satu-satunya ★★★: BTC volatility breakout harian (k 0,6) dieksekusi di M5 — win rate 24%, +0,14R/trade,
   semua tahun uji untung. Ini metode harian, bukan scalping.
 - Tidak ada metode menit/detik ber-win rate tinggi yang untung konsisten.
+
+## Pembaruan 29 Sep 2026: Nasdaq 100 data terbaru (`research/nasdaq_terkini.py`)
+Data Nasdaq futures NQ=F H1 Mei 2024 – Sep 2026 (Yahoo; batas data jam gratis ±2 tahun), latih < Jul 2025,
+spread 2 poin. Keluaran: `docs/eksternal/hasil_nasdaq_terkini.txt`.
+- 30 metode populer: **tidak ada** yang meyakinkan (t>2) di latih dan uji; 10 dari 30 untung di periode uji
+  (seukuran kebetulan). Terbaik di uji: Bollinger fade +0,11R/trade (t 1,1) — tidak signifikan.
+- Sistem sinyal kita (F-ensemble) di Nasdaq: uji −0,06R/sinyal, total 2 tahun −7R → sama dengan uji lama
+  (2008–2020): indeks saham tidak cocok untuk breakout H1 ini.

@@ -39,12 +39,16 @@ object SignalPoller {
                 if (!res.isSuccessful) throw IOException("HTTP ${res.code}")
                 var added = 0
                 val seen = HashSet<String>()           // sinyal kembar (set berbeda, entry sama) = 1 notifikasi
+                val pending = mutableListOf<SignalEvent>()
                 res.body?.string().orEmpty().lineSequence().forEach { line ->
                     val event = parse(line) ?: return@forEach
                     added++
                     val twin = "${event.type}|${event.symbol()}|${event.dir}|${event.price("entry")}"
-                    if (last != null && (event.type != "signal" || seen.add(twin))) notify(context, event)
+                    if (last != null && (event.type != "signal" || seen.add(twin))) pending += event
                 }
+                // notifikasi setelah SEMUA pesan terbaca: heartbeat (posisi terbuka di cloud) datang sesudah TUTUP di
+                // tick yang sama, dan dibutuhkan untuk tahu apakah TUTUP itu final (set utama sinyal kembar)
+                pending.forEach { notify(context, it) }
                 SignalRepository.setConnection("Terhubung")
                 added
             }
