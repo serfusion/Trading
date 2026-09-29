@@ -173,7 +173,7 @@ Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan 
 `X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
 `{"close_all": true}`.
 
-## Tab Tanya (chat berbasis data, tanpa AI)
+## Tab News (kalender + chat berbasis data, tanpa AI)
 
 `POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab dari **data** saja — tanpa AI, tanpa API berbayar,
 hanya library standar:
@@ -190,6 +190,12 @@ hanya library standar:
 - Pertanyaan bebas juga dikenali: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
   ("NFP 45K" → Cons & Prev dari kalender minggu ini), waktu ("sebelum" / "sudah keluar"), "sinyal terbuka",
   "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil otomatis — pengguna mengisi Act.
+
+Aplikasi 3.8: tab **News** = kalender USD high-impact minggu ini (tanggal/jam WIB otomatis dari ForexFactory), Act
+otomatis dari CSV publik FRED (tanpa API key) untuk NFP, Unemployment Rate, CPI, Core CPI, CPI y/y, PPI, Core PPI,
+Retail, Core Retail, Core PCE, Claims, GDP — hanya bila periode acuannya sudah dimuat FRED (biasanya menit s/d ±1 jam
+setelah rilis; bisa selisih 0,1 karena pembulatan). Tekan berita → analisa Act/Cons/Prev. Entry/TP/SL berita tidak
+disarankan: `research/news_trade.py` (36 cara, semua rugi).
 
 Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
 `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya

@@ -381,17 +381,24 @@ def _schedule_line(grp: str, calendar: list[dict], now: datetime) -> str | None:
     return "📅 Minggu ini: " + "; ".join(parts)
 
 
+# research/news_trade.py (29 Sep 2026): entry sendiri setelah rilis (15 menit sesudahnya), ikut/lawan kejutan,
+# SL candle rilis / 3 ATR, TP 1R / 2R / tutup 4 jam, semua / kejutan besar — XAU M15 2012–2026
+NEWS_TRADE = ("• Entry sendiri karena berita (masuk 15 menit setelah rilis, ikut ATAU lawan kejutan, 36 variasi SL/TP) "
+              "diuji di XAU 2012–2026: SEMUA rugi (rata −0,02 s/d −0,43R per trade). Jadi tidak ada entry/TP/SL "
+              "berita yang bisa disarankan — tunggu sinyal 💰.")
+
+
 def _signal_news_lines(pre: bool) -> list[str]:
     s = KB.get("sinyal_berita") or {}
     if not s:
-        return []
+        return [NEWS_TRADE]
     a, b, c = s.get("sesudah", {}), s.get("sebelum", {}), s.get("jauh", {})
     if pre:
         return [f"• Sinyal 💰 XAU yang lahir ≤ 24 jam SEBELUM NFP/CPI/FOMC: WR {b.get('wr')}%, rata "
                 f"{_r(b.get('r', 0))} (n={b.get('n')}) vs jauh dari berita WR {c.get('wr')}%, {_r(c.get('r', 0))}. "
                 "Tidak konsisten tiap periode (2012–18 justru untung), jadi bukan aturan pasti — cukup kecilkan risiko "
-                "untuk sinyal baru menjelang berita. Posisi yang sudah jalan: tetap ikuti SL/TUTUP."]
-    return [f"• Sinyal 💰 XAU yang lahir ≤ 4 jam SESUDAH NFP/CPI/FOMC: WR {a.get('wr')}%, rata {_r(a.get('r', 0))} "
+                "untuk sinyal baru menjelang berita. Posisi yang sudah jalan: tetap ikuti SL/TUTUP.", NEWS_TRADE]
+    return [NEWS_TRADE, f"• Sinyal 💰 XAU yang lahir ≤ 4 jam SESUDAH NFP/CPI/FOMC: WR {a.get('wr')}%, rata {_r(a.get('r', 0))} "
             f"(n={a.get('n')}) — lebih baik dari rata-rata ({_r(c.get('r', 0))}). Berita sering memicu breakout "
             "yang ditangkap sinyal trend; jadi kalau bot mengirim sinyal 💰 setelah berita, itu layak diikuti dengan "
             "SL normal."]
@@ -635,10 +642,104 @@ def answer(messages: list, now: datetime, calendar_rows=None, states: dict | Non
     return {"ok": True, "reply": reply, "sources": [], "model": "data (tanpa AI)"}
 
 
-def calendar_json(calendar_rows) -> list[dict]:
-    """Kalender minggu ini untuk aplikasi (kartu Act/Cons/Prev): judul, grup, waktu WIB, forecast, previous."""
-    return [{"title": c["title"], "group": c["group"], "time": c["time"].isoformat(), "when": _when(c["time"]),
-             "forecast": c["forecast"], "previous": c["previous"]} for c in calendar_rows_for(calendar_rows)]
+# ------------------------------------------------------------------ Act otomatis dari FRED (tanpa API key)
+FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}&cosd={}"
+# judul ForexFactory -> (seri FRED, cara hitung, periode). Periode acuan diperiksa supaya angka bulan/pekan lalu
+# tidak dipakai sebelum FRED memuat rilis baru (biasanya beberapa menit s/d ±1 jam setelah rilis).
+FRED_MAP = {
+    "Non-Farm Employment Change": ("PAYEMS", "diff", "bulan"),
+    "Unemployment Rate": ("UNRATE", "level", "bulan"),
+    "CPI m/m": ("CPIAUCSL", "mom", "bulan"),
+    "Core CPI m/m": ("CPILFESL", "mom", "bulan"),
+    "CPI y/y": ("CPIAUCNS", "yoy", "bulan"),
+    "PPI m/m": ("PPIFIS", "mom", "bulan"),
+    "Core PPI m/m": ("PPIFES", "mom", "bulan"),
+    "Retail Sales m/m": ("RSAFS", "mom", "bulan"),
+    "Core Retail Sales m/m": ("RSFSXMV", "mom", "bulan"),
+    "Core PCE Price Index m/m": ("PCEPILFE", "mom", "bulan"),
+    "Unemployment Claims": ("ICSA", "levelk", "minggu"),
+    "Advance GDP q/q": ("A191RL1Q225SBEA", "level", "kuartal"),
+    "Prelim GDP q/q": ("A191RL1Q225SBEA", "level", "kuartal"),
+    "Final GDP q/q": ("A191RL1Q225SBEA", "level", "kuartal"),
+}
+
+
+def ref_date(t: datetime, period: str):
+    """Periode data yang dirilis pada waktu t: bulan lalu, pekan berakhir Sabtu lalu, atau kuartal lalu."""
+    from datetime import date
+    d = (t - timedelta(hours=5)).date()                      # tanggal New York (kira-kira)
+    if period == "bulan":
+        return date(d.year, d.month - 1, 1) if d.month > 1 else date(d.year - 1, 12, 1)
+    if period == "minggu":
+        return d - timedelta(days=(d.weekday() - 5) % 7)
+    q = (d.month - 1) // 3
+    y, q = (d.year, q - 1) if q > 0 else (d.year - 1, 3)
+    return date(y, 3 * q + 1, 1)
+
+
+def fred_fetch(series: str) -> list:
+    """[(date, nilai)] dari CSV publik FRED (tanpa kunci); [] bila gagal."""
+    from datetime import date
+    since = (datetime.now(timezone.utc) - timedelta(days=800)).date().isoformat()
+    try:
+        req = urllib.request.Request(FRED_CSV.format(series, since), headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=6) as r:
+            lines = r.read().decode("utf-8").splitlines()[1:]
+    except Exception:  # noqa: BLE001 - Act otomatis opsional
+        return []
+    out = []
+    for ln in lines:
+        d, _, v = ln.partition(",")
+        try:
+            out.append((date.fromisoformat(d), float(v)))
+        except ValueError:
+            continue
+    return out
+
+
+def fred_actual(title: str, t: datetime, now: datetime, fetch=fred_fetch, cache: dict | None = None) -> str:
+    """Angka Act format ForexFactory ("143K", "0.3%", "225K") dari FRED, atau "" bila belum rilis / belum dimuat."""
+    spec = FRED_MAP.get(title or "")
+    if not spec or now < t:
+        return ""
+    sid, how, period = spec
+    cache = {} if cache is None else cache
+    if sid not in cache:
+        cache[sid] = dict(fetch(sid))
+    vals = cache[sid]
+    ref = ref_date(t, period)
+    if ref not in vals:
+        return ""
+    dates = sorted(vals)
+    k = dates.index(ref)
+    v = vals[ref]
+    prev = vals[dates[k - 1]] if k > 0 else None
+    if how == "diff" and prev is not None:
+        return f"{v - prev:.0f}K"
+    if how == "mom" and prev:
+        return f"{(v / prev - 1) * 100:.1f}%"
+    if how == "yoy":
+        base = vals.get(ref.replace(year=ref.year - 1))
+        return f"{(v / base - 1) * 100:.1f}%" if base else ""
+    if how == "levelk":
+        return f"{v / 1000:.0f}K"
+    if how == "level":
+        return f"{v:.1f}%"
+    return ""
+
+
+def calendar_json(calendar_rows, now: datetime | None = None, fetch=fred_fetch) -> list[dict]:
+    """Kalender minggu ini untuk tab News: judul, grup, waktu WIB, forecast, previous, dan actual otomatis (FRED)
+    untuk berita yang sudah rilis bila tersedia."""
+    now = now or datetime.now(timezone.utc)
+    cache: dict = {}
+    out = []
+    for c in calendar_rows_for(calendar_rows):
+        act = fred_actual(c["title"], c["time"], now, fetch, cache)
+        out.append({"title": c["title"], "group": c["group"], "time": c["time"].isoformat(), "when": _when(c["time"]),
+                    "forecast": c["forecast"], "previous": c["previous"], "released": now >= c["time"],
+                    "actual": act, "actual_src": "FRED" if act else ""})
+    return out
 
 
 def fetch_calendar() -> list | None:

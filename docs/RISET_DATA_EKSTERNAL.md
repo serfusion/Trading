@@ -385,3 +385,15 @@ paling lambat XAU ±+114R vs rata-rata ±+99R vs TUTUP pertama ±+80R; BTC ±+21
 Dipasang di aplikasi 3.4 (tanpa mengubah cloud): kartu menampilkan satu harga TUTUP (set paling lambat), notifikasi
 TUTUP hanya untuk set itu, riwayat/statistik memakai hasil set itu. Statistik aplikasi: MENANG = TP1 kena,
 KALAH = SL / TUTUP sebelum TP1 (permintaan pengguna).
+
+## 15. Entry/TP/SL karena berita? (permintaan tab News, 29 Sep 2026) — `research/news_trade.py`
+
+Rilis AS high-impact 2010–2026 (NFP, CPI, PPI, Retail, PCE, GDP, ISM, Claims; 1.639 rilis) × XAU M15 2012–2026.
+Entry di open candle 15 menit setelah rilis (+spread 2×), IKUT atau LAWAN kejutan, SL di ekstrem candle rilis atau
+3 ATR, TP 1R / 2R / tutup 4 jam, semua kejutan / kejutan besar / candle rilis searah — 36 varian gabungan + per
+grup NFP/CPI/PPI. Keluaran: `docs/eksternal/hasil_news_trade.txt`.
+
+**Tidak ada yang lolos**: semua varian rata-rata rugi (−0,02 s/d −0,43R per trade), banyak yang rugi di 15 dari 15
+tahun. Reaksi searah kejutan (bagian 1–2 pengetahuan chat) terjadi di candle pertama, sebelum orang bisa masuk;
+sesudahnya ≈ acak dan spread berita membuatnya rugi. Tab News karena itu tidak menyarankan entry/TP/SL berita;
+saran entry tetap hanya dari sinyal 💰 (sinyal yang lahir ≤ 4 jam setelah berita justru lebih baik dari rata-rata).

@@ -1,6 +1,7 @@
 package com.xausignal.app
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -66,8 +68,12 @@ private val EXAMPLES = listOf(
     "SL+ di 0,7R atau TP1?",
 )
 
-/** Berita minggu ini dari cloud (GET /api/chat) untuk mengisi Cons & Prev otomatis. */
-data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String)
+/**
+ * Berita USD high-impact minggu ini dari cloud (GET /api/chat): tanggal & jam WIB otomatis, Cons & Prev dari
+ * ForexFactory, Act otomatis dari data resmi FRED setelah rilis (bila tersedia).
+ */
+data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
+                    val time: String = "", val released: Boolean = false, val actual: String = "")
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -94,7 +100,8 @@ object ChatClient {
                 val arr = JSONObject(res.body?.string().orEmpty()).optJSONArray("calendar") ?: JSONArray()
                 (0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
-                    CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"))
+                    CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
+                        o.optString("time"), o.optBoolean("released"), o.optString("actual"))
                 }
             }
         } catch (e: Exception) {
@@ -145,6 +152,8 @@ fun entryAdvice(events: List<SignalEvent>, prices: Map<String, SignalEvent>, m: 
     if (groups.isEmpty()) {
         out += "▶ Belum ada sinyal 💰 terbuka → jangan entry dulu."
         out += "▶ Tunggu notifikasi 💰: entry di harga sinyal, SL & TP1 sesuai sinyal, lot dari aplikasi."
+        out += "▶ Entry karena berita: diuji 36 cara (masuk setelah rilis, ikut/lawan kejutan, berbagai SL/TP) di " +
+            "XAU 2012–2026 → semua rugi. Jadi tidak ada entry/TP/SL berita yang disarankan."
         out += "Tidak ada entry \"sempurna\". Yang terbukti di data hanya sinyal 💰 (entry saat sinyal, 1 posisi TP1, " +
             "4 posisi running sampai TUTUP); entry manual di luar sinyal tidak diuji."
         return out.joinToString("\n")
@@ -192,15 +201,63 @@ fun entryAdvice(events: List<SignalEvent>, prices: Map<String, SignalEvent>, m: 
     return out.joinToString("\n")
 }
 
+/** "dalam 2 j 15 m" / "sudah rilis" dari waktu ISO kalender. */
+private fun countdown(e: CalEvent): String {
+    if (e.released) return "✓ sudah rilis"
+    return try {
+        val m = java.time.Duration.between(java.time.Instant.now(), java.time.OffsetDateTime.parse(e.time).toInstant())
+            .toMinutes()
+        if (m <= 0) "✓ sudah rilis" else if (m < 60) "⏳ $m menit lagi" else if (m < 24 * 60) "⏳ ${m / 60} j ${m % 60} m lagi"
+        else "⏳ ${m / (24 * 60)} hari lagi"
+    } catch (ex: Exception) {
+        "⏳"
+    }
+}
+
+/** Satu baris kalender: judul, waktu WIB, status, Act (otomatis) / Cons / Prev. */
 @Composable
-fun ChatTab() {
+private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().clickable(onClick = onClick).padding(vertical = 6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(Modifier.weight(1f)) {
+            Text(e.title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
+            Text("${e.whenText} • ${countdown(e)}", style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+        Column(horizontalAlignment = Alignment.End) {
+            if (e.actual.isNotBlank()) {
+                Text("Act ${e.actual}", fontWeight = FontWeight.ExtraBold, color = Gold)
+            } else if (e.released) {
+                Text("Act: isi →", style = MaterialTheme.typography.labelMedium, color = Gold)
+            }
+            Text("Cons ${e.forecast.ifBlank { "-" }} • Prev ${e.previous.ifBlank { "-" }}",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+    }
+}
+
+@Composable
+fun NewsTab() {
     val messages by SignalRepository.chat.collectAsState()
     var input by remember { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
     var showForm by remember { mutableStateOf(false) }
+    var prefill by remember { mutableStateOf<CalEvent?>(null) }
+    var calendar by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
+    var calLoading by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
     val app = LocalContext.current.applicationContext
+
+    fun reloadCalendar() {
+        calLoading = true
+        scope.launch {
+            calendar = withContext(Dispatchers.IO) { ChatClient.calendar() }
+            calLoading = false
+        }
+    }
+    LaunchedEffect(Unit) { reloadCalendar() }
 
     fun send(text: String) {
         val q = text.trim()
@@ -235,15 +292,44 @@ fun ChatTab() {
         ) {
             item {
                 Column(Modifier.padding(top = 12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    NoteBox(
-                        "Tanya soal berita (NFP, CPI, FOMC, …), sinyal terbuka, atau skema SL+/TP. Jawaban dihitung " +
-                            "dari data historis 2012–2026 (bukan AI). Setelah berita keluar, tekan 📝 Act/Cons/Prev " +
-                            "lalu isi angkanya (Cons & Prev terisi otomatis dari kalender), atau ketik mis. " +
-                            "\"NFP Act: 45K Cons: 98K Prev: 162K\". Bukan jaminan profit; chat tidak membuka order."
-                    )
                     if (SignalRepository.cloudUrl().isBlank()) {
                         NoteBox("Isi \"Alamat cloud\" di Pengaturan (alamat Vercel yang sama dengan cron).", SellColor)
                     }
+                    AppCard {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            CardTitle("📅 Kalender ekonomi minggu ini (USD, WIB)", Modifier.weight(1f))
+                            TextButton(onClick = { reloadCalendar() }, enabled = !calLoading) { Text("↻") }
+                        }
+                        when {
+                            calLoading -> Text("Memuat kalender…", color = Muted)
+                            calendar.isEmpty() -> Text("Kalender belum termuat. Cek Alamat cloud, lalu tekan ↻.",
+                                color = Muted)
+                            else -> calendar.forEach { e ->
+                                NewsRow(e) {
+                                    if (e.actual.isNotBlank()) {
+                                        send("${e.title} Act: ${e.actual}" +
+                                            (if (e.forecast.isNotBlank()) " Cons: ${e.forecast}" else "") +
+                                            (if (e.previous.isNotBlank()) " Prev: ${e.previous}" else ""))
+                                    } else {
+                                        prefill = e
+                                        showForm = true
+                                    }
+                                }
+                                LineDivider()
+                            }
+                        }
+                        Text(
+                            "Tanggal & jam menyesuaikan otomatis tiap pekan. Act terisi otomatis dari data resmi (FRED) " +
+                                "beberapa menit s/d ±1 jam setelah rilis (NFP, CPI, PPI, Retail, PCE, Claims, GDP). " +
+                                "Tekan berita → analisa peluang arah emas; bila Act belum ada, isi sendiri.",
+                            style = MaterialTheme.typography.labelSmall, color = Muted
+                        )
+                    }
+                    NoteBox(
+                        "Saran entry/TP/SL hanya dari sinyal 💰: trading berita sendiri (masuk setelah rilis) sudah " +
+                            "diuji 36 cara di data 2012–2026 dan semuanya rugi. Analisa berita = peluang arah historis, " +
+                            "bukan sinyal entry. Bukan jaminan profit; aplikasi tidak membuka order."
+                    )
                     if (messages.isEmpty()) {
                         CardTitle("Contoh pertanyaan")
                         EXAMPLES.forEach { ex ->
@@ -264,12 +350,14 @@ fun ChatTab() {
                 }
             }
         }
-        if (showForm) ReleaseForm(busy) { text -> showForm = false; send(text) }
+        if (showForm) {
+            key(prefill) { ReleaseForm(busy, calendar, prefill) { text -> showForm = false; prefill = null; send(text) } }
+        }
         Row(
             Modifier.fillMaxWidth().padding(vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            TextButton(onClick = { showForm = !showForm }) { Text(if (showForm) "✖" else "📝") }
+            TextButton(onClick = { prefill = null; showForm = !showForm }) { Text(if (showForm) "✖" else "📝") }
             if (messages.isNotEmpty()) {
                 IconButton(onClick = { SignalRepository.clearChat() }, enabled = !busy) {
                     Icon(Icons.Filled.Delete, contentDescription = "Hapus percakapan", tint = Muted)
@@ -277,7 +365,7 @@ fun ChatTab() {
             }
             OutlinedTextField(
                 value = input, onValueChange = { input = it.take(1500) },
-                placeholder = { Text("Tulis pertanyaan…") },
+                placeholder = { Text("Tanya soal berita…") },
                 modifier = Modifier.weight(1f), maxLines = 4,
             )
             IconButton(onClick = { send(input) }, enabled = !busy && input.isNotBlank()) {
@@ -292,14 +380,12 @@ fun ChatTab() {
  * minggu ini. "+ Baris" menambah baris lain (mis. NFP + Unemployment Rate), "Analisa" mengirim semuanya ke chat.
  */
 @Composable
-private fun ReleaseForm(busy: Boolean, onSend: (String) -> Unit) {
-    var events by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
-    var name by remember { mutableStateOf("") }
-    var act by remember { mutableStateOf("") }
-    var cons by remember { mutableStateOf("") }
-    var prev by remember { mutableStateOf("") }
+private fun ReleaseForm(busy: Boolean, events: List<CalEvent>, initial: CalEvent?, onSend: (String) -> Unit) {
+    var name by remember { mutableStateOf(initial?.title ?: "") }
+    var act by remember { mutableStateOf(initial?.actual ?: "") }
+    var cons by remember { mutableStateOf(initial?.forecast ?: "") }
+    var prev by remember { mutableStateOf(initial?.previous ?: "") }
     var rows by remember { mutableStateOf<List<String>>(emptyList()) }
-    LaunchedEffect(Unit) { events = withContext(Dispatchers.IO) { ChatClient.calendar() } }
 
     fun line(): String? = if (name.isBlank() || act.isBlank()) null else
         "${name.trim()} Act: ${act.trim()}" + (if (cons.isNotBlank()) " Cons: ${cons.trim()}" else "") +
@@ -310,7 +396,7 @@ private fun ReleaseForm(busy: Boolean, onSend: (String) -> Unit) {
         Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(6.dp)) {
             if (events.isNotEmpty()) {
                 events.forEach { e ->
-                    AssistChip(onClick = { name = e.title; cons = e.forecast; prev = e.previous; act = "" },
+                    AssistChip(onClick = { name = e.title; cons = e.forecast; prev = e.previous; act = e.actual },
                         label = { Text("${e.title} • ${e.whenText}") })
                 }
             } else {
