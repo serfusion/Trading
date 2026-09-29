@@ -644,6 +644,8 @@ def answer(messages: list, now: datetime, calendar_rows=None, states: dict | Non
 
 # ------------------------------------------------------------------ Act otomatis dari FRED (tanpa API key)
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}&cosd={}"
+# FRED menahan (timeout) permintaan ber-User-Agent peramban; klien biasa dijawab < 1 detik
+FRED_HEADERS = {"User-Agent": "xau-signal/1.0 (python urllib)", "Accept": "text/csv,*/*"}
 # judul ForexFactory -> (seri FRED, cara hitung, periode). Periode acuan diperiksa supaya angka bulan/pekan lalu
 # tidak dipakai sebelum FRED memuat rilis baru (biasanya beberapa menit s/d ±1 jam setelah rilis).
 FRED_MAP = {
@@ -682,7 +684,7 @@ def fred_fetch(series: str) -> list:
     from datetime import date
     since = (datetime.now(timezone.utc) - timedelta(days=800)).date().isoformat()
     try:
-        req = urllib.request.Request(FRED_CSV.format(series, since), headers={"User-Agent": "Mozilla/5.0"})
+        req = urllib.request.Request(FRED_CSV.format(series, since), headers=FRED_HEADERS)
         with urllib.request.urlopen(req, timeout=6) as r:
             lines = r.read().decode("utf-8").splitlines()[1:]
     except Exception:  # noqa: BLE001 - Act otomatis opsional

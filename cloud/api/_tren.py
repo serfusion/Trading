@@ -17,6 +17,8 @@ STATS = json.loads((Path(__file__).resolve().parent / "tren_stats.json").read_te
 NAN = float("nan")
 ASSETS = {"XAU/USD": "XAUUSD", "BTC/USD": "BTCUSD"}
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}&cosd={}"
+# FRED menahan (timeout) permintaan ber-User-Agent peramban; klien biasa dijawab < 1 detik
+FRED_HEADERS = {"User-Agent": "xau-signal/1.0 (python urllib)", "Accept": "text/csv,*/*"}
 MACRO = {"DFII10": "yield riil 10 th 20 hari (naik = bearish)",
          "DTWEXBGS": "dolar (DTWEXBGS) 20 hari (naik = bearish)"}
 
@@ -143,7 +145,7 @@ def macro_states(fetch=None) -> dict:
 def _fred(series: str) -> list:
     since = (datetime.now(timezone.utc) - timedelta(days=200)).date().isoformat()
     try:
-        req = urllib.request.Request(FRED_CSV.format(series, since), headers={"User-Agent": "Mozilla/5.0"})
+        req = urllib.request.Request(FRED_CSV.format(series, since), headers=FRED_HEADERS)
         with urllib.request.urlopen(req, timeout=6) as r:
             rows = r.read().decode("utf-8").splitlines()[1:]
     except Exception:  # noqa: BLE001
