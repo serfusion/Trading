@@ -24,7 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
@@ -128,7 +128,7 @@ private data class TabItem(val title: String, val icon: ImageVector)
 private val TABS = listOf(
     TabItem("Sinyal", Icons.Filled.Notifications),
     TabItem("Statistik", Icons.Filled.DateRange),
-    TabItem("Tanya", Icons.Filled.Email),
+    TabItem("News", Icons.AutoMirrored.Filled.List),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -236,7 +236,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 when (tab) {
                     0 -> SignalsTab(events, prices, connection, money, follow)
                     1 -> StatsTab(events, money)
-                    else -> ChatTab()
+                    else -> NewsTab()
                 }
                 // Indikator hanya digambar saat ditarik / refresh: di Material3 1.2 lingkaran (bayangan) indikator
                 // tetap terlihat sebagai bulatan hitam di tengah atas walau tidak sedang ditarik.
