@@ -397,3 +397,21 @@ grup NFP/CPI/PPI. Keluaran: `docs/eksternal/hasil_news_trade.txt`.
 tahun. Reaksi searah kejutan (bagian 1–2 pengetahuan chat) terjadi di candle pertama, sebelum orang bisa masuk;
 sesudahnya ≈ acak dan spread berita membuatnya rugi. Tab News karena itu tidak menyarankan entry/TP/SL berita;
 saran entry tetap hanya dari sinyal 💰 (sinyal yang lahir ≤ 4 jam setelah berita justru lebih baik dari rata-rata).
+
+## 16. Bisakah arah tren ke depan diperkirakan? (29 Sep 2026) — `research/tren_kedepan.py`
+
+21 penduga × 3 jangka (1 hari / 1 minggu / 1 bulan) × XAU 2012–2026 & BTC 2016–2026: momentum 20–250 hari,
+SMA50/SMA200/golden cross, Donchian D1 & H1 (sinyal kita), Supertrend, RSI & jarak ATR (pembalikan), "pindah tren"
+(Donchian baru berbalik, baru tembus SMA50), konsensus 5 indikator, kejutan berita AS 5/20 hari, yield riil,
+dolar, COT (ekstrem & perubahan). Kriteria: tebakan benar lebih sering dari tebakan naif ("selalu naik", karena
+emas/BTC lebih sering naik) di latih DAN uji, hasil searah > 0, ≥ 60% tahun, t > 2 (dikoreksi tumpang tindih).
+Keluaran: `docs/eksternal/hasil_tren_kedepan.txt`.
+
+**Tidak ada yang lolos.** Tebakan terbaik hanya benar 52–56%, tidak lebih baik dari tebakan "selalu naik"
+(53–60% di periode uji). Penduga "pindah tren" / pembalikan justru lebih sering salah (XAU: Donchian baru
+berbalik → 1 bulan benar 39%; BTC: RSI ekstrem → 35%). Berita AS, yield riil, dolar, COT: ≈ 50%.
+Satu pola yang konsisten dengan sinyal kita: pada BTC, arah tren (momentum/SMA/konsensus) memberi **hasil searah
+positif** (t ≈ 2–3) walau benar hanya ±50% — untungnya datang dari gerak besar saat tren berlanjut, bukan dari
+sering benar. Itu cara kerja sinyal 💰 (rugi kecil saat salah, untung besar saat tren jalan), bukan ramalan arah.
+Kesimpulan: aplikasi tidak menampilkan "prediksi bullish/bearish"; paling jujur hanya status tren sekarang
+(deskriptif) dengan catatan bahwa status itu tidak menebak arah lebih baik dari 50/50.
