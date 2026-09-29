@@ -359,10 +359,6 @@ object SignalRepository {
         val tp1 = HashMap<String, SignalEvent>()
         val close = HashMap<String, SignalEvent>()
         val be07 = HashSet<String>()
-<<<<<<< HEAD
-        val primary: Map<String, String>
-=======
->>>>>>> origin/main
         val twins: Map<String, Int>
 
         init {
@@ -378,13 +374,6 @@ object SignalRepository {
             }
             val groups = events.filter { it.type == "signal" }
                 .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }.values
-<<<<<<< HEAD
-            primary = groups.flatMap { g ->
-                val p = (g.maxByOrNull { it.exitBars() } ?: g.first()).id
-                g.map { it.id to p }
-            }.toMap()
-=======
->>>>>>> origin/main
             twins = groups.flatMap { g -> g.map { it.id to g.size } }.toMap()
         }
     }

@@ -37,25 +37,13 @@ private const val HISTORY_PAGE = 4
 fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, connection: String, money: MoneySettings,
                follow: Set<String> = SignalRepository.followed()) {
     // hanya pair yang diikuti (Pengaturan → Pair yang saya ikuti)
-<<<<<<< HEAD
-    // dihitung ulang hanya saat pesan / pair diikuti / posisi terbuka di cloud berubah (hemat baterai)
-    val events = remember(allEvents, follow) { allEvents.filter { it.pairGroup() in follow } }
-    val signalIds = remember(events) { events.filter { it.type == "signal" }.map { it.id }.toSet() }
-=======
     // dihitung ulang hanya saat pesan / pair diikuti / harga berubah (bukan per kartu)
     val events = remember(allEvents, follow) { allEvents.filter { it.pairGroup() in follow } }
     val signalIds = remember(events) { events.filter { it.type == "signal" }.map { it.id }.toSet() }
     val primary = remember(events, prices) { SignalRepository.primaryOf(events, prices) }
->>>>>>> origin/main
     val twins = SignalRepository.twinCounts(events)
-    val cloudIds = prices.values.flatMap { SignalRepository.cloudOpen(it).map { x -> x.id } }.toSet()
     // riwayat: sinyal kembar cukup 1 kartu (set utama = harga TUTUP yang dipakai)
-<<<<<<< HEAD
-    val history = remember(events, cloudIds) {
-        val primary = SignalRepository.primaryOf(events, prices)
-=======
     val history = remember(events, primary) {
->>>>>>> origin/main
         events.filter {
             (primary[it.id] ?: it.id) == it.id && (it.type == "signal" || (it.type == "close" && it.id !in signalIds))
         }
