@@ -215,6 +215,10 @@ dari entry; terlambat; TP1 sudah kena → jangan entry baru). Tanpa sinyal 💰 
   paling akhir; di data paling untung, `docs/RISET_DATA_EKSTERNAL.md` bagian 14). Notifikasi TUTUP aplikasi hanya
   untuk set itu. Cloud (setelah merge) juga hanya mengirim 1 teks ntfy per sinyal kembar: sinyal dari set pertama, TP1/SL+ dan TUTUP dari set paling lambat; data `-data` tetap per set. Statistik (3.5): PROFIT = TP1 kena, MINUS = SL /
   TUTUP sebelum TP1; uang tetap dari hasil nyata skema. Riwayat: 4 kartu + tombol "Load more".
+- Aplikasi 3.6: APK ditandatangani kunci debug TETAP (`android/app/debug.keystore`), jadi update berikutnya tidak perlu
+  uninstall dan riwayat tidak hilang (sekali lagi uninstall saat pindah dari ≤3.5). Notifikasi TUTUP menunggu semua
+  pesan (termasuk heartbeat) terbaca: TUTUP set cepat tidak dianggap final selama set utama masih terbuka di cloud,
+  walau data sinyalnya tidak ada di HP; posisi cloud tanpa data di HP tampil sebagai kartu Aktif dengan harga TUTUP.
 
 ## Filter BTC dari riset data eksternal
 
