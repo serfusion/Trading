@@ -55,6 +55,8 @@ object SignalPoller {
         } catch (e: Exception) {
             SignalRepository.setConnection("Offline")
             0
+        } finally {
+            SignalRepository.flush()
         }
     }
 
@@ -99,7 +101,7 @@ object PollScheduler {
         )
         // Tetap berjalan saat HP tidur (Doze). Alarm tepat waktu (tidak ditunda sistem sampai belasan menit) bila
         // diizinkan: Android 12 ke atas memakai izin alarm tepat (USE_EXACT_ALARM / SCHEDULE_EXACT_ALARM).
-        val at = nextSlot(System.currentTimeMillis())
+        val at = nextSlot(System.currentTimeMillis() + 60_000L)   // min 1 menit ke depan: alarm tak pernah berulang
         val exact = if (Build.VERSION.SDK_INT >= 31) am.canScheduleExactAlarms() else true
         try {
             if (exact) am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, pi)

@@ -313,10 +313,7 @@ object SignalRepository {
      * Sinyal kembar: beberapa set dengan simbol, arah, entry, dan candle sama. Entry cukup 1×, jadi hasil tiap
      * set dibagi jumlah kembarnya supaya riwayat/statistik = uang yang benar-benar didapat. id -> jumlah set.
      */
-    fun twinCounts(events: List<SignalEvent>): Map<String, Int> =
-        events.filter { it.type == "signal" }
-            .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }
-            .values.flatMap { g -> g.map { it.id to g.size } }.toMap()
+    fun twinCounts(events: List<SignalEvent>): Map<String, Int> = index(events).twins
 
     /**
      * Sinyal kembar di-entry sekali dengan SATU harga TUTUP: set paling lambat (candle keluar terbanyak, mis.
@@ -352,6 +349,49 @@ object SignalRepository {
             CloudOpen(hb.symbol(), o.optString("id"), o.optString("dir"), o.optString("set"), o.optDouble("level"),
                 o.optInt("bars"))
         }
+    }
+
+    /**
+     * Indeks pencarian (TP1, TUTUP, 0,7R, sinyal kembar) untuk satu daftar pesan. Dihitung sekali per daftar lalu
+     * dipakai ulang, bukan dicari ulang di seluruh daftar untuk tiap kartu setiap kali harga bergerak (HP panas).
+     */
+    private class Index(events: List<SignalEvent>) {
+        val tp1 = HashMap<String, SignalEvent>()
+        val close = HashMap<String, SignalEvent>()
+        val be07 = HashSet<String>()
+        val primary: Map<String, String>
+        val twins: Map<String, Int>
+
+        init {
+            events.forEach { e ->
+                when (e.type) {
+                    "close" -> close.putIfAbsent(e.id, e)
+                    "info" -> {
+                        val id = e.str("id")
+                        if (e.str("text").contains("TP1")) tp1.putIfAbsent(id, e)
+                        if (e.str("kind") == "be07") be07.add(id)
+                    }
+                }
+            }
+            val groups = events.filter { it.type == "signal" }
+                .groupBy { listOf(it.symbol(), it.dir, it.price("entry"), it.id.substringAfterLast('-')) }.values
+            primary = groups.flatMap { g ->
+                val p = (g.maxByOrNull { it.exitBars() } ?: g.first()).id
+                g.map { it.id to p }
+            }.toMap()
+            twins = groups.flatMap { g -> g.map { it.id to g.size } }.toMap()
+        }
+    }
+
+    private val indexCache = ArrayList<Pair<List<SignalEvent>, Index>>()
+
+    @Synchronized
+    private fun index(events: List<SignalEvent>): Index {
+        indexCache.firstOrNull { it.first === events }?.let { return it.second }
+        val ix = Index(events)
+        indexCache.add(0, events to ix)
+        while (indexCache.size > 4) indexCache.removeAt(indexCache.size - 1)
+        return ix
     }
 
     /** Menang = TP1 kena (gap: TP kena); kalah = SL atau TUTUP sebelum TP1. */
@@ -401,7 +441,12 @@ object SignalRepository {
         prefs?.edit()?.putBoolean("terms_ok", true)?.apply()
     }
 
-    fun lastMessageId(): String? = prefs?.getString("last_id", null)
+    // Ditulis ke disk sekali per polling lewat flush(), bukan per pesan (hemat CPU, disk, dan baterai).
+    private var lastId: String? = null
+    private val dirtyHb = HashMap<String, String>()
+    private var eventsDirty = false
+
+    fun lastMessageId(): String? = lastId ?: prefs?.getString("last_id", null)
 
     @Synchronized
     fun saveSettings(server: String, topic: String) {
@@ -419,6 +464,9 @@ object SignalRepository {
         _events.value = emptyList()
         _heartbeat.value = null
         _prices.value = emptyMap()
+        lastId = null
+        dirtyHb.clear()
+        eventsDirty = false
         val e = prefs?.edit() ?: return
         prefs?.all?.keys?.filter { it.startsWith("hb_") }?.forEach { e.remove(it) }
         e.remove("last_id").remove("events").remove("heartbeat").apply()
@@ -429,21 +477,37 @@ object SignalRepository {
     fun add(msgId: String, payload: JSONObject): SignalEvent? {
         val type = payload.optString("type", "info")
         val event = SignalEvent(msgId, type, payload)
-        prefs?.edit()?.putString("last_id", msgId)?.apply()
+        lastId = msgId
         if (type == "heartbeat") {
             val sym = payload.optString("symbol", "XAU/USD").ifBlank { "XAU/USD" }
             _prices.value = _prices.value + (sym to event)
-            if (sym.startsWith("XAU")) {
-                _heartbeat.value = event
-                prefs?.edit()?.putString("heartbeat", payload.toString())?.apply()
-            }
-            prefs?.edit()?.putString("hb_$sym", payload.toString())?.apply()
+            if (sym.startsWith("XAU")) _heartbeat.value = event
+            dirtyHb[sym] = payload.toString()
             return event
         }
         if (_events.value.any { it.msgId == msgId }) return null
         _events.value = (listOf(event) + _events.value).take(MAX_EVENTS)
-        persist()
+        eventsDirty = true
         return event
+    }
+
+    /** Simpan pesan & harga terbaru ke disk sekali per polling. */
+    @Synchronized
+    fun flush() {
+        val e = prefs?.edit() ?: return
+        lastId?.let { e.putString("last_id", it) }
+        dirtyHb.forEach { (sym, json) ->
+            e.putString("hb_$sym", json)
+            if (sym.startsWith("XAU")) e.putString("heartbeat", json)
+        }
+        dirtyHb.clear()
+        if (eventsDirty) {
+            val arr = JSONArray()
+            _events.value.forEach { arr.put(JSONObject().put("m", it.msgId).put("p", it.json)) }
+            e.putString("events", arr.toString())
+            eventsDirty = false
+        }
+        e.apply()
     }
 
     /**
@@ -459,27 +523,17 @@ object SignalRepository {
     }
 
     fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean =
-        tp1Event(events, signalId) != null || (money().be07 && events.any {
-            it.type == "info" && it.str("id") == signalId && it.str("kind") == "be07"
-        })
+        tp1Event(events, signalId) != null || (money().be07 && signalId in index(events).be07)
 
     /** Info TP1 kena (lalu SL+) untuk sinyal ini, bila ada. */
-    fun tp1Event(events: List<SignalEvent>, signalId: String): SignalEvent? =
-        events.firstOrNull { it.type == "info" && it.str("id") == signalId && it.str("text").contains("TP1") }
+    fun tp1Event(events: List<SignalEvent>, signalId: String): SignalEvent? = index(events).tp1[signalId]
 
-    fun closeEvent(events: List<SignalEvent>, signalId: String): SignalEvent? =
-        events.firstOrNull { it.type == "close" && it.id == signalId }
+    fun closeEvent(events: List<SignalEvent>, signalId: String): SignalEvent? = index(events).close[signalId]
 
     fun stats(events: List<SignalEvent>): Stats {
         val closes = events.filter { it.type == "close" && it.num("r") != null }
         val rs = closes.mapNotNull { it.num("r") }
         return Stats(rs.size, rs.count { it > 0 }, rs.sum())
-    }
-
-    private fun persist() {
-        val arr = JSONArray()
-        _events.value.forEach { arr.put(JSONObject().put("m", it.msgId).put("p", it.json)) }
-        prefs?.edit()?.putString("events", arr.toString())?.apply()
     }
 
     private fun load() {
