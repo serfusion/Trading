@@ -86,6 +86,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   minimum". BTC Exness: 0 varian lolos. Spread asli per jam: `research.exness.spread_table(sym)` (XAUUSDc $0,16–0,20
   2021–25; BTCUSDm $12–64 → cek ulang biaya riset 💰 BTC yang memakai 0,03%).
 
+## Entry 1 detik SEBELUM rilis (30 Sep 2026 — `docs/NEWS_PRA.md`)
+- `research/news_pra.py`: entry t0−1, tutup 1–3 dtk. Jam feed bersih (t0−5→−1 searah kejutan 50%). Walau kejutan
+  ditebak 100% benar: tutup 1 dtk rugi spread, 2 dtk butuh 95%, 3 dtk butuh 72% (realistis 94%). 16 petunjuk (ULANG,
+  Act→Prev, P1/P7 CPI, drift/lawan, selalu BUY/SELL): 0 lolos. Jangan sarankan entry sebelum rilis.
+
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —

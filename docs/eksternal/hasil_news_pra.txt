@@ -1,0 +1,137 @@
+# Entry 1 detik sebelum rilis, tutup 1-3 detik setelah entry (research/news_pra.py)
+
+== Exness: 1680 rilis (2015-09 .. 2026-09), 1431 dengan kejutan (Act != Cons), spread median di t0-1: $0.26 ==
+Cek jam feed & 'ke mana emas' (% gerak mid searah kejutan; 50% = lempar koin):
+  SEMUA n=1431 | t0-5→-1  50% (diam  1%) | t0+0  49% (diam  8%) | t0+1  65% (diam  1%) | t0+2  75% (diam  0%) | t0+3  78% (diam  0%) | t0+5  79% (diam  0%) | t0+10  80% (diam  0%) | t0+60  77% (diam  0%)
+  LAMA  n= 826 | t0-5→-1  51% (diam  1%) | t0+0  46% (diam 10%) | t0+1  64% (diam  1%) | t0+2  73% (diam  0%) | t0+3  76% (diam  0%) | t0+5  77% (diam  0%) | t0+10  77% (diam  0%) | t0+60  73% (diam  0%)
+  BARU  n= 605 | t0-5→-1  48% (diam  0%) | t0+0  53% (diam  4%) | t0+1  67% (diam  0%) | t0+2  78% (diam  0%) | t0+3  80% (diam  0%) | t0+5  82% (diam  0%) | t0+10  84% (diam  0%) | t0+60  82% (diam  0%)
+  Median |gerak| dari t0-1 ($): t0+0 0.03 | t0+1 0.17 | t0+2 0.50 | t0+3 0.65 | t0+5 0.79 | t0+10 0.91 | t0+60 1.35
+
+ORAKEL (arah kejutan diketahui sempurna sebelum rilis — batas atas) & akurasi minimal agar impas:
+  CEPAT tutup 1s                             n=1431 WR   5.8% rata  -0.32 total   -462.9 t -32.8 | LAMA  -0.42 (n=826) BARU  -0.19 (n=605) | tahun+   0% dari 12 | impas bila tebakan benar >= 696%
+  CEPAT tutup 2s                             n=1431 WR  30.5% rata  +0.04 total    +61.1 t  +1.3 | LAMA  -0.27 (n=826) BARU  +0.48 (n=605) | tahun+  58% dari 12 | impas bila tebakan benar >= 95%
+  CEPAT tutup 3s                             n=1431 WR  46.8% rata  +0.52 total   +738.9 t +10.6 | LAMA  -0.09 (n=826) BARU  +1.34 (n=605) | tahun+  58% dari 12 | impas bila tebakan benar >= 72%
+  CEPAT tutup t0+5s                          n=1431 WR  58.3% rata  +0.97 total  +1393.1 t +15.5 | LAMA  +0.33 (n=826) BARU  +1.85 (n=605) | tahun+ 100% dari 12 | impas bila tebakan benar >= 64%
+  CEPAT tutup t0+10s                         n=1431 WR  63.0% rata  +1.15 total  +1647.1 t +16.7 | LAMA  +0.47 (n=826) BARU  +2.09 (n=605) | tahun+ 100% dari 12 | impas bila tebakan benar >= 62%
+  CEPAT tutup t0+60s                         n=1431 WR  66.6% rata  +1.40 total  +2010.5 t +17.0 | LAMA  +0.62 (n=826) BARU  +2.47 (n=605) | tahun+ 100% dari 12 | impas bila tebakan benar >= 61%
+  REALISTIS tutup 1s                         n=1431 WR  18.7% rata  -0.57 total   -809.9 t -18.0 | LAMA  -0.88 (n=826) BARU  -0.14 (n=605) | tahun+  17% dari 12 | impas bila tebakan benar >= 169%
+  REALISTIS tutup 2s                         n=1431 WR  32.9% rata  -0.09 total   -132.1 t  -1.9 | LAMA  -0.69 (n=826) BARU  +0.72 (n=605) | tahun+  42% dari 12 | impas bila tebakan benar >= 105%
+  REALISTIS tutup 3s                         n=1431 WR  37.6% rata  +0.14 total   +196.4 t  +2.5 | LAMA  -0.45 (n=826) BARU  +0.94 (n=605) | tahun+  58% dari 12 | impas bila tebakan benar >= 94%
+
+== Dukascopy: 1260 rilis (2010-03 .. 2026-09), 993 dengan kejutan (Act != Cons), spread median di t0-1: $0.47 ==
+Cek jam feed & 'ke mana emas' (% gerak mid searah kejutan; 50% = lempar koin):
+  SEMUA n= 993 | t0-5→-1  46% (diam  4%) | t0+0  40% (diam 22%) | t0+1  59% (diam  6%) | t0+2  77% (diam  2%) | t0+3  80% (diam  1%) | t0+5  82% (diam  0%) | t0+10  83% (diam  0%) | t0+60  79% (diam  0%)
+  LAMA  n= 653 | t0-5→-1  46% (diam  6%) | t0+0  34% (diam 29%) | t0+1  57% (diam  8%) | t0+2  75% (diam  3%) | t0+3  79% (diam  2%) | t0+5  80% (diam  0%) | t0+10  80% (diam  0%) | t0+60  77% (diam  0%)
+  BARU  n= 340 | t0-5→-1  47% (diam  1%) | t0+0  51% (diam  7%) | t0+1  61% (diam  0%) | t0+2  82% (diam  0%) | t0+3  82% (diam  0%) | t0+5  85% (diam  0%) | t0+10  88% (diam  0%) | t0+60  83% (diam  0%)
+  Median |gerak| dari t0-1 ($): t0+0 0.04 | t0+1 0.15 | t0+2 0.74 | t0+3 1.00 | t0+5 1.16 | t0+10 1.42 | t0+60 1.82
+
+ORAKEL (arah kejutan diketahui sempurna sebelum rilis — batas atas) & akurasi minimal agar impas:
+  CEPAT tutup 1s                             n= 993 WR   1.6% rata  -0.64 total   -633.6 t -39.2 | LAMA  -0.56 (n=653) BARU  -0.79 (n=340) | tahun+   0% dari 17 | impas bila tebakan benar >= 1921%
+  CEPAT tutup 2s                             n= 993 WR  18.5% rata  -0.39 total   -391.8 t -10.1 | LAMA  -0.35 (n=653) BARU  -0.49 (n=340) | tahun+  12% dari 17 | impas bila tebakan benar >= 164%
+  CEPAT tutup 3s                             n= 993 WR  50.1% rata  +0.64 total   +630.8 t  +8.8 | LAMA  +0.32 (n=653) BARU  +1.23 (n=340) | tahun+  71% dari 17 | impas bila tebakan benar >= 77%
+  CEPAT tutup t0+5s                          n= 993 WR  62.5% rata  +1.23 total  +1220.2 t +13.5 | LAMA  +0.89 (n=653) BARU  +1.89 (n=340) | tahun+  82% dari 17 | impas bila tebakan benar >= 68%
+  CEPAT tutup t0+10s                         n= 993 WR  67.9% rata  +1.53 total  +1519.3 t +15.3 | LAMA  +1.05 (n=653) BARU  +2.46 (n=340) | tahun+  82% dari 17 | impas bila tebakan benar >= 64%
+  CEPAT tutup t0+60s                         n= 993 WR  71.4% rata  +1.75 total  +1738.8 t +15.3 | LAMA  +1.19 (n=653) BARU  +2.83 (n=340) | tahun+ 100% dari 17 | impas bila tebakan benar >= 61%
+  REALISTIS tutup 1s                         n= 993 WR  11.1% rata  -1.01 total  -1000.8 t -25.9 | LAMA  -0.95 (n=653) BARU  -1.11 (n=340) | tahun+   0% dari 17 | impas bila tebakan benar >= 269%
+  REALISTIS tutup 2s                         n= 993 WR  36.2% rata  +0.02 total    +21.9 t  +0.3 | LAMA  -0.28 (n=653) BARU  +0.61 (n=340) | tahun+  41% dari 17 | impas bila tebakan benar >= 99%
+  REALISTIS tutup 3s                         n= 993 WR  44.0% rata  +0.38 total   +379.8 t  +4.7 | LAMA  +0.09 (n=653) BARU  +0.95 (n=340) | tahun+  65% dari 17 | impas bila tebakan benar >= 89%
+
+== Semua petunjuk sebelum rilis (tutup 1-3 dtk; CEPAT & REALISTIS; SEMUA grup dan per grup) ==
+  Exness    ACT->PREV | 1s | SEMUA           n= 873 WR   4.4% rata  -0.39 total   -336.6 t -26.8 | LAMA  -0.49 (n=467) BARU  -0.26 (n=406) | tahun+   0% dari 12 | REALISTIS -0.97
+  Dukascopy ACT->PREV | 1s | SEMUA           n= 757 WR   0.9% rata  -0.72 total   -547.3 t -35.1 | LAMA  -0.62 (n=492) BARU  -0.92 (n=265) | tahun+   0% dari 17 | REALISTIS -1.34
+  Exness    ACT->PREV | 2s | SEMUA           n= 873 WR  22.3% rata  -0.38 total   -330.8 t  -7.9 | LAMA  -0.58 (n=467) BARU  -0.15 (n=406) | tahun+   8% dari 12 | REALISTIS -0.99
+  Dukascopy ACT->PREV | 2s | SEMUA           n= 757 WR  11.0% rata  -0.75 total   -564.7 t -13.7 | LAMA  -0.69 (n=492) BARU  -0.85 (n=265) | tahun+   0% dari 17 | REALISTIS -1.36
+  Exness    ACT->PREV | 3s | SEMUA           n= 873 WR  31.6% rata  -0.40 total   -348.1 t  -5.1 | LAMA  -0.64 (n=467) BARU  -0.12 (n=406) | tahun+  25% dari 12 | REALISTIS -0.98
+  Dukascopy ACT->PREV | 3s | SEMUA           n= 757 WR  28.1% rata  -0.77 total   -580.3 t  -7.1 | LAMA  -0.70 (n=492) BARU  -0.89 (n=265) | tahun+   6% dari 17 | REALISTIS -1.37
+  Exness    DRIFT 10s | 1s | SEMUA           n=1562 WR   5.6% rata  -0.34 total   -532.1 t -39.6 | LAMA  -0.44 (n=851) BARU  -0.22 (n=711) | tahun+   0% dari 12 | REALISTIS -0.94
+  Dukascopy DRIFT 10s | 1s | SEMUA           n=1192 WR   1.5% rata  -0.70 total   -839.1 t -39.7 | LAMA  -0.59 (n=750) BARU  -0.90 (n=442) | tahun+   0% dari 17 | REALISTIS -1.31
+  Exness    DRIFT 10s | 2s | SEMUA           n=1562 WR  20.5% rata  -0.34 total   -528.8 t -10.8 | LAMA  -0.43 (n=851) BARU  -0.22 (n=711) | tahun+   0% dari 12 | REALISTIS -0.95
+  Dukascopy DRIFT 10s | 2s | SEMUA           n=1192 WR  11.9% rata  -0.70 total   -832.8 t -17.1 | LAMA  -0.58 (n=750) BARU  -0.89 (n=442) | tahun+   0% dari 17 | REALISTIS -1.42
+  Exness    DRIFT 10s | 3s | SEMUA           n=1562 WR  29.4% rata  -0.35 total   -540.2 t  -5.8 | LAMA  -0.39 (n=851) BARU  -0.30 (n=711) | tahun+  17% dari 12 | REALISTIS -0.93
+  Dukascopy DRIFT 10s | 3s | SEMUA           n=1192 WR  27.1% rata  -0.82 total   -971.5 t  -9.9 | LAMA  -0.59 (n=750) BARU  -1.20 (n=442) | tahun+   0% dari 17 | REALISTIS -1.46
+  Exness    DRIFT 110s | 1s | SEMUA          n=1646 WR   6.1% rata  -0.35 total   -577.3 t -34.4 | LAMA  -0.46 (n=911) BARU  -0.21 (n=735) | tahun+   0% dari 12 | REALISTIS -1.00
+  Dukascopy DRIFT 110s | 1s | SEMUA          n=1239 WR   1.3% rata  -0.70 total   -865.0 t -40.4 | LAMA  -0.59 (n=791) BARU  -0.89 (n=448) | tahun+   0% dari 17 | REALISTIS -1.37
+  Exness    DRIFT 110s | 2s | SEMUA          n=1646 WR  18.8% rata  -0.40 total   -656.4 t -12.9 | LAMA  -0.48 (n=911) BARU  -0.30 (n=735) | tahun+   8% dari 12 | REALISTIS -1.06
+  Dukascopy DRIFT 110s | 2s | SEMUA          n=1239 WR  11.1% rata  -0.76 total   -944.1 t -18.9 | LAMA  -0.65 (n=791) BARU  -0.96 (n=448) | tahun+   0% dari 17 | REALISTIS -1.48
+  Exness    DRIFT 110s | 3s | SEMUA          n=1646 WR  27.5% rata  -0.45 total   -740.4 t  -7.8 | LAMA  -0.49 (n=911) BARU  -0.39 (n=735) | tahun+   0% dari 12 | REALISTIS -1.05
+  Dukascopy DRIFT 110s | 3s | SEMUA          n=1239 WR  25.7% rata  -0.87 total  -1077.0 t -10.8 | LAMA  -0.73 (n=791) BARU  -1.11 (n=448) | tahun+   0% dari 17 | REALISTIS -1.44
+  Exness    DRIFT 30s | 1s | SEMUA           n=1608 WR   5.8% rata  -0.35 total   -564.0 t -34.0 | LAMA  -0.46 (n=881) BARU  -0.21 (n=727) | tahun+   0% dari 12 | REALISTIS -0.98
+  Dukascopy DRIFT 30s | 1s | SEMUA           n=1223 WR   1.4% rata  -0.70 total   -858.8 t -40.4 | LAMA  -0.59 (n=776) BARU  -0.90 (n=447) | tahun+   0% dari 17 | REALISTIS -1.36
+  Exness    DRIFT 30s | 2s | SEMUA           n=1608 WR  19.6% rata  -0.38 total   -609.7 t -12.0 | LAMA  -0.49 (n=881) BARU  -0.24 (n=727) | tahun+   8% dari 12 | REALISTIS -1.10
+  Dukascopy DRIFT 30s | 2s | SEMUA           n=1223 WR  11.7% rata  -0.75 total   -921.1 t -18.5 | LAMA  -0.64 (n=776) BARU  -0.96 (n=447) | tahun+   0% dari 17 | REALISTIS -1.57
+  Exness    DRIFT 30s | 3s | SEMUA           n=1608 WR  27.7% rata  -0.50 total   -802.1 t  -8.5 | LAMA  -0.51 (n=881) BARU  -0.48 (n=727) | tahun+   0% dari 12 | REALISTIS -1.14
+  Dukascopy DRIFT 30s | 3s | SEMUA           n=1223 WR  25.8% rata  -0.96 total  -1179.8 t -11.7 | LAMA  -0.69 (n=776) BARU  -1.44 (n=447) | tahun+   0% dari 17 | REALISTIS -1.63
+  Exness    DRIFT 60s | 1s | SEMUA           n=1633 WR   5.6% rata  -0.36 total   -581.7 t -35.2 | LAMA  -0.46 (n=901) BARU  -0.23 (n=732) | tahun+   0% dari 12 | REALISTIS -0.99
+  Dukascopy DRIFT 60s | 1s | SEMUA           n=1233 WR   1.3% rata  -0.70 total   -859.9 t -40.3 | LAMA  -0.59 (n=790) BARU  -0.90 (n=443) | tahun+   0% dari 17 | REALISTIS -1.39
+  Exness    DRIFT 60s | 2s | SEMUA           n=1633 WR  19.2% rata  -0.39 total   -632.7 t -12.5 | LAMA  -0.51 (n=901) BARU  -0.24 (n=732) | tahun+   0% dari 12 | REALISTIS -1.07
+  Dukascopy DRIFT 60s | 2s | SEMUA           n=1233 WR  10.4% rata  -0.79 total   -969.4 t -19.7 | LAMA  -0.67 (n=790) BARU  -0.99 (n=443) | tahun+   0% dari 17 | REALISTIS -1.52
+  Exness    DRIFT 60s | 3s | SEMUA           n=1633 WR  27.2% rata  -0.48 total   -776.0 t  -8.4 | LAMA  -0.53 (n=901) BARU  -0.40 (n=732) | tahun+   0% dari 12 | REALISTIS -1.11
+  Dukascopy DRIFT 60s | 3s | SEMUA           n=1233 WR  24.9% rata  -0.91 total  -1123.3 t -11.4 | LAMA  -0.73 (n=790) BARU  -1.24 (n=443) | tahun+   0% dari 17 | REALISTIS -1.54
+  Exness    LAWAN 10s | 1s | SEMUA           n=1562 WR   6.5% rata  -0.35 total   -541.1 t -37.1 | LAMA  -0.46 (n=851) BARU  -0.22 (n=711) | tahun+   0% dari 12 | REALISTIS -1.00
+  Dukascopy LAWAN 10s | 1s | SEMUA           n=1192 WR   0.8% rata  -0.71 total   -846.4 t -41.4 | LAMA  -0.58 (n=750) BARU  -0.93 (n=442) | tahun+   0% dari 17 | REALISTIS -1.42
+  Exness    LAWAN 10s | 2s | SEMUA           n=1562 WR  19.3% rata  -0.40 total   -621.4 t -12.5 | LAMA  -0.53 (n=851) BARU  -0.24 (n=711) | tahun+   0% dari 12 | REALISTIS -1.04
+  Dukascopy LAWAN 10s | 2s | SEMUA           n=1192 WR  10.6% rata  -0.81 total   -971.0 t -19.5 | LAMA  -0.65 (n=750) BARU  -1.10 (n=442) | tahun+   0% dari 17 | REALISTIS -1.39
+  Exness    LAWAN 10s | 3s | SEMUA           n=1562 WR  27.5% rata  -0.44 total   -683.1 t  -7.3 | LAMA  -0.63 (n=851) BARU  -0.20 (n=711) | tahun+   8% dari 12 | REALISTIS -1.04
+  Dukascopy LAWAN 10s | 3s | SEMUA           n=1192 WR  25.8% rata  -0.79 total   -937.8 t  -9.6 | LAMA  -0.68 (n=750) BARU  -0.97 (n=442) | tahun+   0% dari 17 | REALISTIS -1.26
+  Exness    LAWAN 110s | 1s | SEMUA          n=1646 WR   5.8% rata  -0.34 total   -567.3 t -35.0 | LAMA  -0.44 (n=911) BARU  -0.23 (n=735) | tahun+   0% dari 12 | REALISTIS -0.94
+  Dukascopy LAWAN 110s | 1s | SEMUA          n=1239 WR   0.9% rata  -0.69 total   -860.9 t -42.5 | LAMA  -0.57 (n=791) BARU  -0.92 (n=448) | tahun+   0% dari 17 | REALISTIS -1.33
+  Exness    LAWAN 110s | 2s | SEMUA          n=1646 WR  20.8% rata  -0.35 total   -568.2 t -11.1 | LAMA  -0.49 (n=911) BARU  -0.16 (n=735) | tahun+   0% dari 12 | REALISTIS -0.94
+  Dukascopy LAWAN 110s | 2s | SEMUA          n=1239 WR  11.3% rata  -0.73 total   -901.6 t -18.3 | LAMA  -0.57 (n=791) BARU  -1.01 (n=448) | tahun+   0% dari 17 | REALISTIS -1.31
+  Exness    LAWAN 110s | 3s | SEMUA          n=1646 WR  29.3% rata  -0.34 total   -560.1 t  -5.9 | LAMA  -0.53 (n=911) BARU  -0.10 (n=735) | tahun+  25% dari 12 | REALISTIS -0.93
+  Dukascopy LAWAN 110s | 3s | SEMUA          n=1239 WR  27.2% rata  -0.71 total   -878.4 t  -9.0 | LAMA  -0.52 (n=791) BARU  -1.03 (n=448) | tahun+   0% dari 17 | REALISTIS -1.26
+  Exness    LAWAN 30s | 1s | SEMUA           n=1608 WR   6.2% rata  -0.35 total   -555.3 t -34.0 | LAMA  -0.44 (n=881) BARU  -0.23 (n=727) | tahun+   0% dari 12 | REALISTIS -0.96
+  Dukascopy LAWAN 30s | 1s | SEMUA           n=1223 WR   0.8% rata  -0.70 total   -852.3 t -42.1 | LAMA  -0.57 (n=776) BARU  -0.91 (n=447) | tahun+   0% dari 17 | REALISTIS -1.35
+  Exness    LAWAN 30s | 2s | SEMUA           n=1608 WR  20.1% rata  -0.36 total   -586.3 t -11.5 | LAMA  -0.48 (n=881) BARU  -0.22 (n=727) | tahun+   0% dari 12 | REALISTIS -0.89
+  Dukascopy LAWAN 30s | 2s | SEMUA           n=1223 WR  11.0% rata  -0.74 total   -909.5 t -18.5 | LAMA  -0.58 (n=776) BARU  -1.02 (n=447) | tahun+   0% dari 17 | REALISTIS -1.22
+  Exness    LAWAN 30s | 3s | SEMUA           n=1608 WR  29.5% rata  -0.29 total   -467.0 t  -5.0 | LAMA  -0.51 (n=881) BARU  -0.02 (n=727) | tahun+  25% dari 12 | REALISTIS -0.83
+  Dukascopy LAWAN 30s | 3s | SEMUA           n=1223 WR  27.7% rata  -0.62 total   -754.4 t  -7.8 | LAMA  -0.57 (n=776) BARU  -0.70 (n=447) | tahun+   6% dari 17 | REALISTIS -1.08
+  Exness    LAWAN 60s | 1s | SEMUA           n=1633 WR   6.4% rata  -0.34 total   -554.9 t -33.7 | LAMA  -0.44 (n=901) BARU  -0.21 (n=732) | tahun+   0% dari 12 | REALISTIS -0.96
+  Dukascopy LAWAN 60s | 1s | SEMUA           n=1233 WR   0.9% rata  -0.70 total   -857.7 t -42.2 | LAMA  -0.57 (n=790) BARU  -0.92 (n=443) | tahun+   0% dari 17 | REALISTIS -1.31
+  Exness    LAWAN 60s | 2s | SEMUA           n=1633 WR  20.5% rata  -0.36 total   -586.0 t -11.4 | LAMA  -0.47 (n=901) BARU  -0.23 (n=732) | tahun+   0% dari 12 | REALISTIS -0.92
+  Dukascopy LAWAN 60s | 2s | SEMUA           n=1233 WR  11.8% rata  -0.70 total   -867.0 t -17.8 | LAMA  -0.54 (n=790) BARU  -0.99 (n=443) | tahun+   0% dari 17 | REALISTIS -1.27
+  Exness    LAWAN 60s | 3s | SEMUA           n=1633 WR  29.6% rata  -0.32 total   -518.4 t  -5.6 | LAMA  -0.50 (n=901) BARU  -0.09 (n=732) | tahun+  25% dari 12 | REALISTIS -0.87
+  Dukascopy LAWAN 60s | 3s | SEMUA           n=1233 WR  27.8% rata  -0.67 total   -824.5 t  -8.4 | LAMA  -0.53 (n=790) BARU  -0.92 (n=443) | tahun+   6% dari 17 | REALISTIS -1.16
+  Exness    P1 CPI m/m | 1s | SEMUA          n=  68 WR   7.4% rata  -0.27 total    -18.5 t  -3.8 | LAMA  -0.32 (n=35) BARU  -0.22 (n=33) | tahun+  18% dari 11 | REALISTIS -1.00
+  Dukascopy P1 CPI m/m | 1s | SEMUA          n= 100 WR   4.0% rata  -0.56 total    -56.1 t -11.6 | LAMA  -0.46 (n=67) BARU  -0.76 (n=33) | tahun+   0% dari 16 | REALISTIS -1.39
+  Exness    P1 CPI m/m | 2s | SEMUA          n=  68 WR  19.1% rata  -0.36 total    -24.4 t  -1.9 | LAMA  -0.21 (n=35) BARU  -0.51 (n=33) | tahun+  18% dari 11 | REALISTIS -0.70
+  Dukascopy P1 CPI m/m | 2s | SEMUA          n= 100 WR   9.0% rata  -0.74 total    -74.3 t  -4.2 | LAMA  -0.43 (n=67) BARU  -1.38 (n=33) | tahun+   6% dari 16 | REALISTIS -0.91
+  Exness    P1 CPI m/m | 3s | SEMUA          n=  68 WR  41.2% rata  -0.06 total     -3.8 t  -0.1 | LAMA  -0.25 (n=35) BARU  +0.15 (n=33) | tahun+  36% dari 11 | REALISTIS -0.60
+  Dukascopy P1 CPI m/m | 3s | SEMUA          n= 100 WR  41.0% rata  -0.27 total    -26.8 t  -0.7 | LAMA  -0.22 (n=67) BARU  -0.37 (n=33) | tahun+  31% dari 16 | REALISTIS -0.87
+  Exness    P1 CPI y/y | 1s | SEMUA          n=  79 WR   8.9% rata  -0.31 total    -24.7 t  -4.7 | LAMA  -0.35 (n=43) BARU  -0.26 (n=36) | tahun+   9% dari 11 | REALISTIS -0.79
+  Dukascopy P1 CPI y/y | 1s | SEMUA          n= 113 WR   4.4% rata  -0.60 total    -67.3 t -11.9 | LAMA  -0.46 (n=77) BARU  -0.88 (n=36) | tahun+   0% dari 16 | REALISTIS -1.27
+  Exness    P1 CPI y/y | 2s | SEMUA          n=  79 WR  20.3% rata  -0.16 total    -12.3 t  -1.4 | LAMA  -0.14 (n=43) BARU  -0.17 (n=36) | tahun+  18% dari 11 | REALISTIS -0.74
+  Dukascopy P1 CPI y/y | 2s | SEMUA          n= 113 WR  11.5% rata  -0.64 total    -72.1 t  -4.3 | LAMA  -0.39 (n=77) BARU  -1.18 (n=36) | tahun+   6% dari 16 | REALISTIS -1.11
+  Exness    P1 CPI y/y | 3s | SEMUA          n=  79 WR  39.2% rata  -0.10 total     -8.1 t  -0.3 | LAMA  -0.21 (n=43) BARU  +0.02 (n=36) | tahun+  27% dari 11 | REALISTIS -0.88
+  Dukascopy P1 CPI y/y | 3s | SEMUA          n= 113 WR  36.3% rata  -0.47 total    -53.3 t  -1.3 | LAMA  -0.51 (n=77) BARU  -0.38 (n=36) | tahun+  25% dari 16 | REALISTIS -1.18
+  Exness    P1 Core CPI m/m | 1s | SEMUA     n=  72 WR   8.3% rata  -0.31 total    -22.1 t  -5.1 | LAMA  -0.35 (n=40) BARU  -0.25 (n=32) | tahun+   9% dari 11 | REALISTIS -0.95
+  Dukascopy P1 Core CPI m/m | 1s | SEMUA     n= 103 WR   2.9% rata  -0.63 total    -65.2 t -12.3 | LAMA  -0.48 (n=71) BARU  -0.98 (n=32) | tahun+   0% dari 16 | REALISTIS -1.36
+  Exness    P1 Core CPI m/m | 2s | SEMUA     n=  72 WR  15.3% rata  -0.34 total    -24.7 t  -3.0 | LAMA  -0.40 (n=40) BARU  -0.27 (n=32) | tahun+   0% dari 11 | REALISTIS -0.43
+  Dukascopy P1 Core CPI m/m | 2s | SEMUA     n= 103 WR   6.8% rata  -0.75 total    -76.9 t  -4.9 | LAMA  -0.48 (n=71) BARU  -1.33 (n=32) | tahun+   6% dari 16 | REALISTIS -0.91
+  Exness    P1 Core CPI m/m | 3s | SEMUA     n=  72 WR  40.3% rata  +0.18 total    +13.2 t  +0.5 | LAMA  -0.29 (n=40) BARU  +0.77 (n=32) | tahun+  27% dari 11 | REALISTIS -0.51
+  Dukascopy P1 Core CPI m/m | 3s | SEMUA     n= 103 WR  39.8% rata  -0.30 total    -30.5 t  -0.7 | LAMA  -0.24 (n=71) BARU  -0.41 (n=32) | tahun+  25% dari 16 | REALISTIS -0.86
+  Exness    P7 bensin bulan acuan -> CPI m/m | 1s | SEMUA n= 113 WR   5.3% rata  -0.40 total    -45.4 t  -7.9 | LAMA  -0.37 (n=64) BARU  -0.44 (n=49) | tahun+   9% dari 11 | REALISTIS -0.86
+  Dukascopy P7 bensin bulan acuan -> CPI m/m | 1s | SEMUA n= 166 WR   0.6% rata  -0.67 total   -111.9 t -15.6 | LAMA  -0.50 (n=117) BARU  -1.09 (n=49) | tahun+   0% dari 16 | REALISTIS -1.25
+  Exness    P7 bensin bulan acuan -> CPI m/m | 2s | SEMUA n= 113 WR  19.5% rata  -0.28 total    -32.2 t  -2.4 | LAMA  -0.22 (n=64) BARU  -0.37 (n=49) | tahun+  18% dari 11 | REALISTIS -1.09
+  Dukascopy P7 bensin bulan acuan -> CPI m/m | 2s | SEMUA n= 166 WR   8.4% rata  -0.66 total   -110.2 t  -6.1 | LAMA  -0.41 (n=117) BARU  -1.26 (n=49) | tahun+   6% dari 16 | REALISTIS -1.55
+  Exness    P7 bensin bulan acuan -> CPI m/m | 3s | SEMUA n= 113 WR  31.0% rata  -0.51 total    -57.9 t  -1.8 | LAMA  -0.17 (n=64) BARU  -0.96 (n=49) | tahun+  18% dari 11 | REALISTIS -1.19
+  Dukascopy P7 bensin bulan acuan -> CPI m/m | 3s | SEMUA n= 166 WR  30.7% rata  -0.96 total   -159.5 t  -3.3 | LAMA  -0.52 (n=117) BARU  -2.01 (n=49) | tahun+  12% dari 16 | REALISTIS -1.42
+  Exness    SELALU BUY | 1s | SEMUA          n=1680 WR   5.8% rata  -0.35 total   -585.3 t -35.3 | LAMA  -0.46 (n=934) BARU  -0.21 (n=746) | tahun+   0% dari 12 | REALISTIS -1.01
+  Dukascopy SELALU BUY | 1s | SEMUA          n=1260 WR   1.3% rata  -0.68 total   -861.7 t -40.8 | LAMA  -0.57 (n=805) BARU  -0.88 (n=455) | tahun+   0% dari 17 | REALISTIS -1.35
+  Exness    SELALU BUY | 2s | SEMUA          n=1680 WR  19.2% rata  -0.40 total   -670.9 t -13.0 | LAMA  -0.51 (n=934) BARU  -0.26 (n=746) | tahun+   8% dari 12 | REALISTIS -1.07
+  Dukascopy SELALU BUY | 2s | SEMUA          n=1260 WR  11.1% rata  -0.74 total   -926.2 t -18.9 | LAMA  -0.61 (n=805) BARU  -0.95 (n=455) | tahun+   0% dari 17 | REALISTIS -1.45
+  Exness    SELALU BUY | 3s | SEMUA          n=1680 WR  28.2% rata  -0.45 total   -760.9 t  -8.0 | LAMA  -0.55 (n=934) BARU  -0.34 (n=746) | tahun+   8% dari 12 | REALISTIS -1.05
+  Dukascopy SELALU BUY | 3s | SEMUA          n=1260 WR  25.6% rata  -0.83 total  -1049.6 t -10.9 | LAMA  -0.62 (n=805) BARU  -1.21 (n=455) | tahun+   0% dari 17 | REALISTIS -1.37
+  Exness    SELALU SELL | 1s | SEMUA         n=1680 WR   5.8% rata  -0.35 total   -581.5 t -35.3 | LAMA  -0.44 (n=934) BARU  -0.23 (n=746) | tahun+   0% dari 12 | REALISTIS -0.93
+  Dukascopy SELALU SELL | 1s | SEMUA         n=1260 WR   0.9% rata  -0.71 total   -889.1 t -42.8 | LAMA  -0.58 (n=805) BARU  -0.92 (n=455) | tahun+   0% dari 17 | REALISTIS -1.35
+  Exness    SELALU SELL | 2s | SEMUA         n=1680 WR  20.2% rata  -0.34 total   -579.6 t -11.3 | LAMA  -0.46 (n=934) BARU  -0.21 (n=746) | tahun+   0% dari 12 | REALISTIS -0.93
+  Dukascopy SELALU SELL | 2s | SEMUA         n=1260 WR  11.2% rata  -0.75 total   -944.9 t -18.8 | LAMA  -0.60 (n=805) BARU  -1.02 (n=455) | tahun+   0% dari 17 | REALISTIS -1.33
+  Exness    SELALU SELL | 3s | SEMUA         n=1680 WR  28.2% rata  -0.34 total   -565.7 t  -6.0 | LAMA  -0.48 (n=934) BARU  -0.16 (n=746) | tahun+   8% dari 12 | REALISTIS -0.93
+  Dukascopy SELALU SELL | 3s | SEMUA         n=1260 WR  27.5% rata  -0.74 total   -929.0 t  -9.1 | LAMA  -0.63 (n=805) BARU  -0.93 (n=455) | tahun+   0% dari 17 | REALISTIS -1.33
+  Exness    ULANG kejutan sebelumnya | 1s | SEMUA n=1254 WR   3.6% rata  -0.37 total   -466.4 t -33.1 | LAMA  -0.45 (n=753) BARU  -0.25 (n=501) | tahun+   0% dari 12 | REALISTIS -0.98
+  Dukascopy ULANG kejutan sebelumnya | 1s | SEMUA n= 875 WR   0.6% rata  -0.66 total   -581.1 t -36.8 | LAMA  -0.57 (n=589) BARU  -0.86 (n=286) | tahun+   0% dari 17 | REALISTIS -1.31
+  Exness    ULANG kejutan sebelumnya | 2s | SEMUA n=1254 WR  19.1% rata  -0.38 total   -478.6 t -10.7 | LAMA  -0.47 (n=753) BARU  -0.25 (n=501) | tahun+   0% dari 12 | REALISTIS -0.98
+  Dukascopy ULANG kejutan sebelumnya | 2s | SEMUA n= 875 WR  12.0% rata  -0.71 total   -621.0 t -15.5 | LAMA  -0.60 (n=589) BARU  -0.93 (n=286) | tahun+   0% dari 17 | REALISTIS -1.31
+  Exness    ULANG kejutan sebelumnya | 3s | SEMUA n=1254 WR  27.0% rata  -0.38 total   -482.0 t  -6.5 | LAMA  -0.51 (n=753) BARU  -0.19 (n=501) | tahun+   0% dari 12 | REALISTIS -1.00
+  Dukascopy ULANG kejutan sebelumnya | 3s | SEMUA n= 875 WR  28.5% rata  -0.72 total   -626.4 t  -7.5 | LAMA  -0.69 (n=589) BARU  -0.77 (n=286) | tahun+   0% dari 17 | REALISTIS -1.32
+
+LOLOS di kedua feed: 0
