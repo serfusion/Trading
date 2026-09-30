@@ -36,9 +36,12 @@ def _category(a, f, s, i, d) -> str:
     return "konf+⭐" if star and konf else "konf" if konf else "⭐" if star else "biasa"
 
 
-def trades(name: str, pull: tuple[float, int] | None = None, cats: tuple | None = None) -> pd.DataFrame:
-    """Semua trade sinyal 💰 (per set). pull=(x_atr, n_candle) -> entry limit pullback. Kolom: t, t_out, t_tp1,
-    dir, set, cat, R, entry, risk."""
+def trades(name: str, pull: tuple[float, int] | None = None, cats: tuple | None = None,
+           be_at: float | None = None, skip=None) -> pd.DataFrame:
+    """Semua trade sinyal 💰 (per set). pull=(x_atr, n_candle) -> entry limit pullback; be_at=0,7 -> SL semua posisi
+    ke entry+0,1R begitu profit mencapai 0,7R (skema "SL+ 0,7R"); skip(t_keputusan, arah) -> True = sinyal ditolak
+    seperti filter di allow() cloud (set tetap kosong, candle berikutnya boleh masuk lagi). Kolom: t, t_out, t_tp1, dir, set, cat, R, entry,
+    risk, i (candle sinyal)."""
     a = asset(name)
     b = a.b
     f = b.cached("feat", lambda: features(b.df))
@@ -55,7 +58,7 @@ def trades(name: str, pull: tuple[float, int] | None = None, cats: tuple | None 
                 i += 1
                 continue
             cat = _category(a, f, s, i, d)
-            if cat not in ok:
+            if cat not in ok or (skip is not None and skip(t[i + 1], d)):
                 i += 1
                 continue
             out = lo if d > 0 else so
@@ -93,6 +96,10 @@ def trades(name: str, pull: tuple[float, int] | None = None, cats: tuple | None 
                     left -= 1
                     sl = entry + d * 0.1 * risk
                     ktp = k
+                if be_at is not None and k > fk:
+                    fav = (h[k] + adj - entry) if d > 0 else (entry - l[k] - adj)
+                    if fav >= be_at * risk and (sl - entry) * d < 0.1 * risk:
+                        sl = entry + d * 0.1 * risk
                 if out[k]:
                     pnl += (o[k + 1] + (sp[k + 1] if d < 0 else 0.0) - entry) * d * left
                     k += 1
@@ -102,9 +109,9 @@ def trades(name: str, pull: tuple[float, int] | None = None, cats: tuple | None 
             if not done:
                 break
             rows.append((t[fk], t[min(k, n - 1)], t[ktp] if ktp is not None else pd.NaT, d, setk, cat,
-                         pnl / risk / LEGS, entry, risk))
+                         pnl / risk / LEGS, entry, risk, i))
             i = k + 1
-    df = pd.DataFrame(rows, columns=["t", "t_out", "t_tp1", "dir", "set", "cat", "R", "entry", "risk"])
+    df = pd.DataFrame(rows, columns=["t", "t_out", "t_tp1", "dir", "set", "cat", "R", "entry", "risk", "i"])
     return df.sort_values(["t", "set"]).reset_index(drop=True)
 
 

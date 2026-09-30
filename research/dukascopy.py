@@ -21,7 +21,7 @@ import pandas as pd
 from .eksternal import cache_path
 
 URL = "https://datafeed.dukascopy.com/datafeed"
-POINT = {"XAUUSD": 1e-3, "BTCUSD": 1e-1}
+POINT = {"XAUUSD": 1e-3, "BTCUSD": 1e-1, "LIGHTCMDUSD": 1e-3, "BRENTCMDUSD": 1e-3}
 
 
 def _get(url: str, tries: int = 10) -> bytes:
