@@ -129,7 +129,7 @@ class handler(BaseHTTPRequestHandler):
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
-                arsip = {"status": f"gagal: {type(exc).__name__}"}
+                arsip = {"status": f"gagal: {type(exc).__name__}: {str(exc)[:160]}"}
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,

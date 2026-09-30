@@ -74,10 +74,23 @@ def detik(group: str | None, field: str = "teks") -> str:
     return " ".join(parts)
 
 
+def detik_singkat(group: str | None) -> str:
+    """Satu baris: hasil pending ±$1 XAU (Exness) untuk berita ini + label bukti."""
+    d = DETIK.get("XAU_EXNESS") or {}
+    row = d.get(group or "")
+    p1 = (row or {}).get("pending1") or {}
+    if not p1.get("n") or p1.get("n", 0) < 30:
+        return ""
+    avg = p1["avg"]
+    lab = "⚠️ belum terbukti" if avg > 0 else "rugi"
+    return f"Pending ±$1: {'+' if avg >= 0 else '−'}${abs(avg):.2f}/0,01 lot, menang {p1['wr']:.0f}% ({lab})".replace(".", ",")
+
+
 def alarm_texts() -> dict:
     """{grup: {"alarm": teks}} untuk pengingat ⏱️ 1 menit sebelum rilis di aplikasi (NewsAlarm)."""
     groups = {g for _, g in GROUP if g} | {"SEMUA"}
-    return {g: {"alarm": detik(g, "alarm")} for g in sorted(groups) if detik(g, "alarm")}
+    return {g: {"alarm": detik_singkat(g) or detik(g, "alarm")} for g in sorted(groups)
+            if detik_singkat(g) or detik(g, "alarm")}
 
 
 def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -> dict | None:
@@ -98,6 +111,7 @@ def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -
         "kebalikan": bool(st.get("kebalikan")),
         "petunjuk": [_clue_text(c) for c in st.get("petunjuk", [])],
         "detik": detik(group_of(title)),
+        "detik_singkat": detik_singkat(group_of(title)),
     }
 
 
