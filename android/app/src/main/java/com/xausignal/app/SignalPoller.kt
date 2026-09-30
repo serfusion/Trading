@@ -122,8 +122,14 @@ class PollReceiver : BroadcastReceiver() {
         Thread {
             try {
                 SignalPoller.poll(app)
+                try {
+                    NewsAlarm.refreshIfStale(app)          // kalender berita untuk pengingat ⏱️ (tiap 6 jam)
+                } catch (e: Exception) {
+                    // pengingat berita opsional
+                }
             } finally {
                 PollScheduler.schedule(app)
+                NewsAlarm.schedule(app)
                 pending.finish()
             }
         }.start()

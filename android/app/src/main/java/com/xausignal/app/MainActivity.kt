@@ -77,6 +77,7 @@ class MainActivity : ComponentActivity() {
         SignalRepository.init(this)
         Notifications.createChannels(this)
         PollScheduler.schedule(applicationContext)
+        NewsAlarm.schedule(applicationContext)          // ⏱️ pengingat berita (jadwal tersimpan)
         askUnrestrictedBattery()
         setContent {
             XauTheme {

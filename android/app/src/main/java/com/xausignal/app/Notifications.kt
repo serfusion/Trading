@@ -104,6 +104,16 @@ object Notifications {
         post(context, event.id.hashCode() + 1, title, text)
     }
 
+    /** ⏱️ Pengingat 1 menit sebelum rilis berita (NewsAlarm). Informasi saja: aplikasi tidak membuka order. */
+    fun news(context: Context, items: List<NewsAlarm.Item>) {
+        val first = items.minByOrNull { it.at } ?: return
+        val title = "⏱️ 1 menit lagi: ${items.joinToString(" + ") { it.title }}"
+        val info = items.map { it.info }.filter { it.isNotBlank() }.distinct()
+        val text = "Rilis ${first.whenText}." + (if (info.isEmpty()) "" else "\n" + info.joinToString("\n")) +
+            "\nSpread melebar di detik pertama; aplikasi tidak membuka order."
+        post(context, ("news" + first.at).hashCode(), title, text, CH_ACTION)
+    }
+
     private fun post(context: Context, id: Int, title: String, text: String, channel: String = CH_SIGNAL) {
         if (Build.VERSION.SDK_INT >= 33 &&
             context.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED

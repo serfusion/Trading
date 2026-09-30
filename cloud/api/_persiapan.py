@@ -3,8 +3,10 @@
 Permintaan pengguna 30 Sep 2026: kumpulkan data untuk bersiap menghadapi berita dan simpulkan dalam persen.
 Persen dari cloud/api/persiapan.json (research/news_prediksi.py, kalender ForexFactory 2010–2026 + XAU M15):
 peluang hasil di bawah / sesuai / di atas konsensus, % emas naik 1 jam per hasil, % emas naik 1 jam bila hasil
-belum diketahui (= tebakan sebelum rilis), dan petunjuk sebelum rilis yang sudah diuji. INFORMASI saja: tidak
-membuka order dan tidak mengubah sinyal. Hanya library standar Python.
+belum diketahui (= tebakan sebelum rilis), dan petunjuk sebelum rilis yang sudah diuji. Ditambah ⏱️ detik pertama
+setelah rilis (cloud/api/detik.json dari research/news_detik.py, data tick): besar gerak & spread di detik awal dan
+hasil entry "ikut lonjakan" / pending Buy-Sell Stop; teks "alarm" dipakai pengingat 1 menit sebelum rilis di aplikasi.
+INFORMASI saja: tidak membuka order dan tidak mengubah sinyal. Hanya library standar Python.
 """
 from __future__ import annotations
 
@@ -13,6 +15,11 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 STATS = json.loads((Path(__file__).resolve().parent / "persiapan.json").read_text(encoding="utf-8"))
+# ⏱️ detik pertama setelah rilis (research/news_detik.py, data tick): per aset -> per grup berita -> teks & angka
+_DETIK_PATH = Path(__file__).resolve().parent / "detik.json"
+DETIK = json.loads(_DETIK_PATH.read_text(encoding="utf-8")) if _DETIK_PATH.exists() else {}
+GROUP = [("Non-Farm", "NFP"), ("CPI", "CPI"), ("PPI", "PPI"), ("Federal Funds", "FOMC"), ("FOMC", "FOMC"),
+         ("Retail Sales", "RETAIL"), ("PCE", "PCE"), ("GDP", "GDP"), ("ISM", "ISM"), ("Unemployment Claims", "CLAIMS")]
 WIB = timedelta(hours=7)
 HARI = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]
 BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
@@ -50,6 +57,27 @@ def _clue_text(c: dict) -> str:
     return txt
 
 
+def group_of(title: str) -> str | None:
+    return next((g for key, g in GROUP if key in (title or "")), None)
+
+
+def detik(group: str | None, field: str = "teks") -> str:
+    """Teks detik pertama XAU (+ BTC) untuk grup berita; grup tanpa cukup data memakai ringkasan SEMUA."""
+    parts = []
+    for aset in ("XAU", "BTC"):
+        d = DETIK.get(aset) or {}
+        row = d.get(group or "") or d.get("SEMUA")
+        if row and row.get(field):
+            parts.append(row[field])
+    return " ".join(parts)
+
+
+def alarm_texts() -> dict:
+    """{grup: {"alarm": teks}} untuk pengingat ⏱️ 1 menit sebelum rilis di aplikasi (NewsAlarm)."""
+    groups = {g for _, g in GROUP} | {"SEMUA"}
+    return {g: {"alarm": detik(g, "alarm")} for g in sorted(groups) if detik(g, "alarm")}
+
+
 def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -> dict | None:
     st = STATS["dasar"].get(title)
     if not st:
@@ -67,6 +95,7 @@ def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -
         "arah": lean(sebelum.get("naik1j"), sebelum.get("baru_naik1j")),
         "kebalikan": bool(st.get("kebalikan")),
         "petunjuk": [_clue_text(c) for c in st.get("petunjuk", [])],
+        "detik": detik(group_of(title)),
     }
 
 
@@ -87,4 +116,5 @@ def cards(calendar_rows: list | None, now: datetime | None = None) -> dict:
         if c:
             out.append(c)
     out.sort(key=lambda c: c["time"])
-    return {"periode": STATS.get("periode"), "kesimpulan": STATS.get("kesimpulan"), "berita": out}
+    return {"periode": STATS.get("periode"), "kesimpulan": STATS.get("kesimpulan"), "berita": out,
+            "detik": alarm_texts()}

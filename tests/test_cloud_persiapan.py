@@ -51,3 +51,22 @@ def test_statistik_konsisten():
         for per in ("semua", "lama", "baru"):
             assert abs(sum(st[per][k] for k in ("bawah", "sesuai", "atas")) - 100) <= 2, (ev, per)
         assert 0 <= st["emas_sebelum"]["naik1j"] <= 100
+
+
+def test_detik_pertama_per_grup(monkeypatch):
+    fake = {"XAU": {"NFP": {"teks": "Detik pertama (XAU): NFP", "alarm": "XAU NFP"},
+                    "SEMUA": {"teks": "Detik pertama (XAU): semua", "alarm": "XAU semua"}},
+            "BTC": {"SEMUA": {"teks": "BTC semua", "alarm": "BTC semua"}}}
+    monkeypatch.setattr(_persiapan, "DETIK", fake)
+    d = _persiapan.cards(ROWS, NOW)
+    by = {c["title"]: c for c in d["berita"]}
+    assert by["Non-Farm Employment Change"]["detik"] == "Detik pertama (XAU): NFP BTC semua"
+    assert by["Core PCE Price Index m/m"]["detik"] == "Detik pertama (XAU): semua BTC semua"   # PCE -> SEMUA
+    assert d["detik"]["NFP"]["alarm"] == "XAU NFP BTC semua" and d["detik"]["SEMUA"]["alarm"] == "XAU semua BTC semua"
+    assert _persiapan.group_of("Federal Funds Rate") == "FOMC" and _persiapan.group_of("Pidato") is None
+
+
+def test_detik_json_kosong_tidak_merusak_kartu(monkeypatch):
+    monkeypatch.setattr(_persiapan, "DETIK", {})
+    d = _persiapan.cards(ROWS, NOW)
+    assert all(c["detik"] == "" for c in d["berita"]) and d["detik"] == {}

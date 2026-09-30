@@ -31,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -65,7 +66,8 @@ data class ChatMessage(val role: String, val text: String, val sources: List<Str
  * ForexFactory, Act otomatis dari data resmi FRED setelah rilis (bila tersedia).
  */
 data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
-                    val time: String = "", val released: Boolean = false, val actual: String = "")
+                    val time: String = "", val released: Boolean = false, val actual: String = "",
+                    val group: String = "")
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -95,7 +97,7 @@ object ChatClient {
                 Triple((0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
                     CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
-                        o.optString("time"), o.optBoolean("released"), o.optString("actual"))
+                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"))
                 }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
             }
         } catch (e: Exception) {
@@ -301,9 +303,19 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
  * data 2010–2026). Informasi saja: tidak membuka order.
  */
 @Composable
-private fun PersiapanCard(prep: JSONObject?, loading: Boolean) {
+private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean, nextAlarm: NewsAlarm.Item?,
+                          onAlarm: (Boolean) -> Unit) {
     AppCard {
         CardTitle("🎯 Persiapan berita (peluang dari data 2010–2026)")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("⏱️ Ingatkan 1 menit sebelum rilis", fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodySmall)
+                Text(if (!alarmOn) "Mati" else nextAlarm?.let { "Berikutnya: ${it.title} • ${it.whenText}" }
+                    ?: "Menunggu kalender pekan ini", style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+            Switch(checked = alarmOn, onCheckedChange = onAlarm)
+        }
         val list = prep?.optJSONArray("berita")
         if (prep == null || list == null) {
             Text(if (loading) "Memuat…" else prep?.optString("error")?.ifBlank { null }
@@ -330,6 +342,9 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean) {
             Text("Tebakan SEBELUM rilis: emas naik 1 jam ${b.optInt("emas_sebelum")}% (5 th " +
                 "${b.optInt("emas_sebelum_baru")}%) → ${b.optString("arah")}",
                 fontWeight = FontWeight.Bold, color = Gold, style = MaterialTheme.typography.bodySmall)
+            b.optString("detik").ifBlank { null }?.let {
+                Text("⏱️ $it", style = MaterialTheme.typography.bodySmall)
+            }
             val clues = b.optJSONArray("petunjuk") ?: JSONArray()
             for (k in 0 until clues.length()) {
                 Text("• ${clues.optString(k)}", style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -355,6 +370,8 @@ fun NewsTab() {
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
     val app = LocalContext.current.applicationContext
+    var alarmOn by remember { mutableStateOf(NewsAlarm.enabled(app)) }
+    var nextAlarm by remember { mutableStateOf(NewsAlarm.next(app)) }
 
     fun reloadCalendar() {
         calLoading = true
@@ -364,6 +381,8 @@ fun NewsTab() {
             tren = tr
             persiapan = prep
             calLoading = false
+            if (cal.isNotEmpty()) NewsAlarm.update(app, cal, prep)     // jadwalkan pengingat ⏱️
+            nextAlarm = NewsAlarm.next(app)
         }
     }
     LaunchedEffect(Unit) { reloadCalendar() }
@@ -440,7 +459,11 @@ fun NewsTab() {
                             "diuji 36 cara di data 2012–2026 dan semuanya rugi. Analisa berita = peluang arah historis, " +
                             "bukan sinyal entry. Bukan jaminan profit; aplikasi tidak membuka order."
                     )
-                    PersiapanCard(persiapan, calLoading)
+                    PersiapanCard(persiapan, calLoading, alarmOn, nextAlarm) { on ->
+                        alarmOn = on
+                        NewsAlarm.setEnabled(app, on)
+                        nextAlarm = NewsAlarm.next(app)
+                    }
                 }
             }
             items(messages) { m -> Bubble(m) }
