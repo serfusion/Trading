@@ -54,7 +54,7 @@ def _get(path: str, **q) -> dict | None:
             if e.code == 429:
                 time.sleep(min(2 ** k, 30))
                 continue
-            if e.code == 404:
+            if e.code in (400, 404):                  # pasar tanpa riwayat / rentang tidak valid -> lewati
                 return None
             raise
         except (urllib.error.URLError, TimeoutError):

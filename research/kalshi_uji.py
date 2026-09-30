@@ -161,6 +161,65 @@ def consistent(c: dict, r: dict) -> bool:
             and r.get("n", 0) > 0 and r["avg"] > 0)
 
 
+GROUPS = {"SEMUA": None, "CPI": ["KXCPI", "KXCPICORE"], "NFP+PENGANGGURAN": ["KXPAYROLLS", "KXU3"],
+          "PCE": ["KXPCECORE"]}
+
+
+def per_release(df: pd.DataFrame, lab: str, th: float = 0.10) -> list[str]:
+    """Satu baris per rilis: peluang Kalshi, tebakan, kejutan sebenarnya, gerak emas +10 dtk / +1 mnt / +5 mnt."""
+    L = []
+    for t0, g in df.sort_values("t0").groupby("t0"):
+        g = g[g[f"lean {lab}"].abs() >= th]
+        if not len(g):
+            continue
+        cells = []
+        for _, r in g.iterrows():
+            ok = "sama" if r.kejutan == 0 else "BENAR" if np.sign(r[f"lean {lab}"]) == r.kejutan else "SALAH"
+            cells.append(f"{'core' if r.seri.endswith('CORE') else 'head'} atas {r[f'atas {lab}'] * 100:3.0f}% "
+                         f"bawah {r[f'bawah {lab}'] * 100:3.0f}% Cons {r.cons:g} Act {r.act:g} {ok}")
+        cells = " | ".join(cells)
+        emas = -np.sign((np.sign(g[f"lean {lab}"]) * np.where(g.terbalik, -1, 1)).sum())
+        p = prepare(t0, "XAU_EXNESS")
+        move = "" if p is None else " ".join(
+            f"{k} {(p.mid[p.at(s)] - p.mid[p.at(-1)]) * emas:+6.2f}" for k, s in (("+10dtk", 10), ("+1mnt", 60), ("+5mnt", 300)))
+        L.append(f"  {t0:%Y-%m-%d} tebak emas {'NAIK ' if emas > 0 else 'TURUN' if emas < 0 else '-    '} | {cells} | "
+                 f"untung searah tebakan: {move or 'tidak ada tick'}")
+    return L
+
+
+def cpi_reactions() -> pd.DataFrame:
+    """Semua rilis CPI (Dukascopy 2010-2026): arah kejutan untuk emas (bias +1/-1/0) & emas naik di +60 dtk?"""
+    from .news_detik import events
+    ev = events()
+    rows_ = []
+    for r in ev[ev.group == "CPI"].itertuples():
+        if r.bias != r.bias:
+            continue
+        p = prepare(r.time, "XAU")
+        if p is None:
+            continue
+        mv = p.mid[p.at(60)] - p.mid[p.at(-1)]
+        if mv != 0:
+            rows_.append({"t0": r.time, "bias": r.bias, "naik": float(mv > 0)})
+    return pd.DataFrame(rows_)
+
+
+def gold_probability(df: pd.DataFrame, lab: str, reac: pd.DataFrame) -> pd.DataFrame:
+    """Peluang emas NAIK 1 menit = P(bawah)*naik|bawah + P(atas)*naik|atas + P(sama)*naik|sama, dengan tingkat
+    reaksi dari rilis CPI SEBELUM tanggal itu saja (walk-forward). P(...) = rata-rata headline & core."""
+    x = df[df.seri.isin(GROUPS["CPI"])].groupby("t0")[[f"atas {lab}", f"bawah {lab}"]].mean().dropna()
+    out = []
+    for t0, r in x.iterrows():
+        past = reac[reac.t0 < t0]
+        rate = {b: past[past.bias == b].naik.mean() for b in (1.0, -1.0, 0.0)}
+        if any(v != v for v in rate.values()):
+            continue
+        same = max(0.0, 1 - r[f"atas {lab}"] - r[f"bawah {lab}"])
+        p = r[f"bawah {lab}"] * rate[1.0] + r[f"atas {lab}"] * rate[-1.0] + same * rate[0.0]
+        out.append({"t0": t0, "p_naik": p})
+    return pd.DataFrame(out)
+
+
 def fed_table() -> list[str]:
     """Keputusan Fed: peluang Kalshi untuk hasil konsensus FF saat pasar tutup, dan seberapa sering Fed mengejutkan."""
     cal = load_calendar(DATA)
@@ -214,23 +273,61 @@ def report() -> str:
     L.append("== Uji entry t0-1 searah tebakan Kalshi (mesin news_pra2; CEPAT | REALISTIS | STRES) ==")
     times = sorted(df.t0.unique())
     tables = {a: trade_table(times, a) for a in p2.FEEDS}
-    lolos = []
-    for lab in HORIZON:
-        for th in LEAN:
-            dirs = gold_dirs(df, lab, th)
-            for e, ex in enumerate(p2.EXITS):
-                res = {a: [trade_stats(dirs, tables[a], s, e) for s in range(len(p2.SCEN))] for a in p2.FEEDS}
-                if ex in SHOW and th in (0.0, 0.10):
-                    for a, name in p2.FEEDS.items():
-                        c, r, st = res[a]
-                        if c.get("n", 0) >= 10:
-                            L.append(fmt(f"  {name:9} {lab} >={th:.2f} | {ex}", c)
-                                     + f" | 2021-23 {c['awal']:+.2f} 2024-26 {c['akhir']:+.2f}"
-                                     + f" | REAL {r['avg']:+.2f} | STRES {st['avg']:+.2f}")
-                if all(consistent(res[a][0], res[a][1]) for a in p2.FEEDS):
-                    lolos.append(f"{lab} >={th:.2f} | {ex}")
+    lolos, n_uji = [], 0
+    for grp, seri in GROUPS.items():
+        sub = df if seri is None else df[df.seri.isin(seri)]
+        for lab in HORIZON:
+            for th in LEAN:
+                dirs = gold_dirs(sub, lab, th)
+                for e, ex in enumerate(p2.EXITS):
+                    res = {a: [trade_stats(dirs, tables[a], s, e) for s in range(len(p2.SCEN))] for a in p2.FEEDS}
+                    if ex in SHOW and th == 0.10 and lab in ("24 jam", "1 jam"):
+                        for a, name in p2.FEEDS.items():
+                            c, r, st = res[a]
+                            if c.get("n", 0) >= 10:
+                                L.append(fmt(f"  {name:9} {grp} {lab} >={th:.2f} | {ex}", c)
+                                         + f" | 2021-23 {c['awal']:+.2f} 2024-26 {c['akhir']:+.2f}"
+                                         + f" | REAL {r['avg']:+.2f} | STRES {st['avg']:+.2f}")
+                    n_uji += 1
+                    if all(consistent(res[a][0], res[a][1]) for a in p2.FEEDS):
+                        lolos.append(f"{grp} | {lab} >={th:.2f} | {ex}")
     L.append("")
-    L.append(f"LOLOS di kedua feed (n >= 30): {len(lolos)}" + "".join(f"\n  - {x}" for x in lolos))
+    L.append(f"LOLOS di kedua feed (n >= 30): {len(lolos)} dari {n_uji}" + "".join(f"\n  - {x}" for x in lolos))
+    L.append("")
+    L.append("== Peluang emas NAIK 1 menit (Kalshi x reaksi historis, walk-forward) untuk CPI ==")
+    reac = cpi_reactions()
+    for lab in ("24 jam", "1 jam"):
+        gp = gold_probability(df, lab, reac)
+        for a, name in p2.FEEDS.items():
+            got = []
+            for r in gp.itertuples():
+                p = prepare(r.t0, a)
+                if p is not None:
+                    mv = p.mid[p.at(60)] - p.mid[p.at(-1)]
+                    got.append((r.p_naik, float(mv > 0), r.t0))
+            g = pd.DataFrame(got, columns=["p", "naik", "t0"])
+            for lo, hi, arah in ((0.6, 1.01, "NAIK"), (0.0, 0.4, "TURUN")):
+                k = g[(g.p >= lo) & (g.p < hi)]
+                if len(k):
+                    hit = k.naik.mean() if arah == "NAIK" else 1 - k.naik.mean()
+                    L.append(f"  {name:9} {lab:7} peluang {arah} >= 60%: n={len(k):2} -> benar {hit * 100:4.1f}% "
+                             f"(rata peluang {abs((k.p if arah == 'NAIK' else 1 - k.p).mean()) * 100:.0f}%)")
+            k = g[(g.p > 0.4) & (g.p < 0.6)]
+            L.append(f"  {name:9} {lab:7} peluang 40-60% (tidak ditebak): n={len(k)}")
+        sig = gp[(gp.p_naik >= 0.6) | (gp.p_naik <= 0.4)]
+        dirs = pd.Series(np.where(sig.p_naik >= 0.6, 1.0, -1.0), index=sig.t0)
+        for e, ex in enumerate(p2.EXITS):
+            if ex not in SHOW:
+                continue
+            for a, name in p2.FEEDS.items():
+                c, r, st = [trade_stats(dirs, tables[a], s, e) for s in range(len(p2.SCEN))]
+                if c.get("n", 0):
+                    L.append(fmt(f"    entry t0-1 {name:9} {lab} | {ex}", c)
+                             + f" | 2021-23 {c['awal']:+.2f} 2024-26 {c['akhir']:+.2f}"
+                             + f" | REAL {r['avg']:+.2f} | STRES {st['avg']:+.2f}")
+    L.append("")
+    L.append("== CPI per rilis (tebakan 1 jam sebelum, selisih >= 0,10): gerak emas Exness dari t0-1 ==")
+    L += per_release(df[df.seri.isin(GROUPS["CPI"])], "1 jam")
     L.append("")
     L.append("== Keputusan Fed (FOMC): peluang Kalshi untuk hasil konsensus ==")
     L += fed_table()
