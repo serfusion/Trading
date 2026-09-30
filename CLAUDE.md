@@ -41,7 +41,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
   emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
   sintetis RNG (harga acak -> rugi sebesar spread).
-- Twelve Data key masih 401 di sesi 30 Sep; Dukascopy WTI sangat lambat (±1 file/menit).
+- Twelve Data key AKTIF (dicek ulang 30 Sep, paket gratis, 8 kredit/menit): WTI/USD, XBR/USD, BRENT butuh paket
+  berbayar (404); proksi minyak gratis = ETF USO/BNO (harian, jam NYSE saja; `CL` = saham Colgate, BUKAN minyak).
+  XAU/USD tersedia. Dukascopy WTI sangat lambat (±1 file/menit).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
