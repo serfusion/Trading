@@ -79,7 +79,10 @@ object SignalPoller {
             }
             "close" -> Notifications.close(context, event)
             "info" -> when {
-                event.str("kind") == "be07" -> if (SignalRepository.money().be07) Notifications.be07(context, event)
+                event.str("kind") == "be07" ->
+                    if (SignalRepository.money().use07(event.id, SignalRepository.signalTier(event.id))) {
+                        Notifications.be07(context, event)
+                    }
                 event.str("text").contains("TP1") -> Notifications.info(context, event)
             }
         }

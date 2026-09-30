@@ -50,13 +50,32 @@ data class MoneySettings(
     val starLot: Double = legLot,
     val tpLegs: Int = 1,            // posisi yang ditutup di TP1 (1 atau 3)
     val be07: Boolean = false,      // SL+ saat profit 0,7R (bukan menunggu TP1)
-    val modalIdr: Double = 0.0,     // modal (Rp); 0 = pakai lot manual
-    val riskPct: Double = 0.5,      // rugi maks per sinyal saat SL, % modal
+    val modalIdr: Double = 0.0,     // modal (Rp) yang dipakai hitung lot; 0 = pakai lot manual
+    val riskPct: Double = 0.5,      // rugi maks per sinyal saat SL, % modal (🥈/🥉; biasa = setengahnya)
+    val zapRiskPct: Double = 1.0,   // rugi maks sinyal ⚡ kesempatan emas
+    val slAuto: Boolean = true,     // SL+ otomatis: ⚡ & BTC di 0,7R, XAU lainnya setelah TP1
+    val autoModal: Boolean = false, // modal = modal awal + profit/rugi riwayat sejak disimpan
+    val baseModalIdr: Double = modalIdr,
 ) {
     val currency: String get() = if (cent) "USC" else "USD"
 
     /** Kunci hasil skema di event TUTUP cloud (r_by), mis. "3_07". */
     val schemeKey: String get() = "${tpLegs}_${if (be07) "07" else "tp1"}"
+
+    /**
+     * SL+ di 0,7R untuk sinyal ini? Otomatis: ⚡ dan BTC (research/momen.py: ⚡ + SL+ 0,7R WR 63–64%, profit setara;
+     * BTC profit sama dengan WR +8 poin); XAU lainnya menunggu TP1 (profit XAU lebih besar).
+     */
+    fun use07(id: String, tier: String): Boolean = if (slAuto) id.startsWith("BTC-") || tier == "zap" else be07
+
+    fun schemeFor(id: String, tier: String): String = "${tpLegs}_${if (use07(id, tier)) "07" else "tp1"}"
+
+    /** Risiko % per peringkat: ⚡ = zapRiskPct, biasa = setengah riskPct, lainnya riskPct. */
+    fun riskFor(tier: String): Double = when (tier) {
+        "zap" -> zapRiskPct
+        "biasa" -> riskPct / 2
+        else -> riskPct
+    }
 
     /** Lot per posisi: sinyal ⭐ memakai lot ⭐, sinyal biasa memakai lot biasa. */
     fun lotFor(star: Boolean): Double = if (star) starLot else legLot
@@ -68,9 +87,9 @@ data class MoneySettings(
      * Lot per posisi untuk satu sinyal. Modal diisi: dihitung dari jarak SL sinyal supaya rugi semua posisi saat SL
      * ≈ [riskPct]% modal (dibulatkan ke bawah, minimal 0,01). Modal kosong: lot manual.
      */
-    fun lotForSignal(star: Boolean, riskPoints: Double?, pointValue: Double, legs: Int): Double {
+    fun lotForSignal(star: Boolean, riskPoints: Double?, pointValue: Double, legs: Int, tier: String = ""): Double {
         if (modalIdr <= 0.0 || riskPoints == null || riskPoints <= 0.0) return lotFor(star)
-        val hundredths = Math.floor(balance * riskPct / 100.0 / (riskPoints * legs * pointValue) + 1e-9)
+        val hundredths = Math.floor(balance * riskFor(tier) / 100.0 / (riskPoints * legs * pointValue) + 1e-9)
         return (hundredths / 100.0).coerceAtLeast(0.01)
     }
 }
@@ -83,7 +102,24 @@ fun SignalEvent.riskPoints(): Double? = num("risk_points")
 
 /** Lot per posisi yang dimasukkan untuk sinyal ini. */
 fun SignalEvent.entryLot(m: MoneySettings): Double =
-    m.lotForSignal(isStar(), riskPoints(), num("point_value") ?: 1.0, legs())
+    m.lotForSignal(isStar(), riskPoints(), num("point_value") ?: 1.0, legs(), tier())
+
+/** Peringkat dari cloud: zap (⚡ kesempatan emas), silver (🥈), bronze (🥉), biasa; "" = sinyal lama. */
+fun SignalEvent.tier(): String = str("tier")
+
+fun SignalEvent.isZap(): Boolean = tier() == "zap"
+
+/** Label ⚠️ mode perang (minyak melonjak) dari cloud; null bila tidak aktif. */
+fun SignalEvent.warText(): String? =
+    json.optJSONObject("war")?.takeIf { it.optBoolean("on") }?.optString("text")?.ifBlank { null }
+
+fun tierLabel(tier: String): String = when (tier) {
+    "zap" -> "⚡ Emas"
+    "silver" -> "🥈"
+    "bronze" -> "🥉"
+    "biasa" -> "Biasa"
+    else -> ""
+}
 
 /** Rugi semua posisi bila SL kena (mata uang akun, positif). */
 fun SignalEvent.maxLoss(m: MoneySettings): Double? = riskPoints()?.let {
@@ -214,6 +250,7 @@ object SignalRepository {
         prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         load()
         loadChat()
+        refreshAutoModal()
     }
 
     /** Alamat cloud Vercel (mis. https://nama.vercel.app) untuk tab Tanya. */
@@ -273,21 +310,59 @@ object SignalRepository {
         return MoneySettings(
             cent = p?.getBoolean("cent", true) ?: true,
             legLot = roundLot(lot).coerceAtLeast(0.01),
-            idrRate = Math.round((p?.getFloat("idr_rate", 16500f) ?: 16500f).toDouble()).toDouble(),
+            // kurs bawaan Rp17.500 (30 Sep 2026); nilai bawaan lama 16.500 dianggap belum diisi
+            idrRate = Math.round((p?.getFloat("idr_rate", 17500f) ?: 17500f).toDouble()).toDouble()
+                .let { if (it == 16500.0) 17500.0 else it },
             starLot = roundLot(star).coerceAtLeast(0.01),
             tpLegs = 1,                 // skema tetap: 1 posisi TP1 + 4 running, SL+ saat TP1 kena (2.8)
             be07 = false,
-            modalIdr = p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0,
+            modalIdr = (p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0).let {
+                if (it > 0 && p?.getBoolean("auto_modal", false) == true) it + autoPnlIdr else it
+            },
             riskPct = p?.getFloat("risk_pct", 0.5f)?.toDouble() ?: 0.5,
+            zapRiskPct = p?.getFloat("zap_risk_pct", 1.0f)?.toDouble() ?: 1.0,
+            slAuto = p?.getBoolean("sl_auto", true) ?: true,
+            autoModal = p?.getBoolean("auto_modal", false) ?: false,
+            baseModalIdr = p?.getString("modal_idr", null)?.toDoubleOrNull() ?: 0.0,
         )
     }
 
+    /** Profit/rugi (Rp) sinyal yang TUTUP sejak modal disimpan, untuk "Modal otomatis". Dihitung ulang per polling. */
+    @Volatile
+    private var autoPnlIdr = 0.0
+
+    fun autoPnl(): Double = autoPnlIdr
+
+    private fun refreshAutoModal() {
+        val p = prefs ?: return
+        if (!p.getBoolean("auto_modal", false)) {
+            autoPnlIdr = 0.0
+            return
+        }
+        val since = p.getLong("modal_start", 0L)
+        val base = money().copy(autoModal = false).let { it.copy(modalIdr = it.baseModalIdr) }
+        val events = _events.value
+        val primary = primaryOf(events)
+        autoPnlIdr = events.filter {
+            it.type == "close" && !it.isVoid() && (primary[it.id] ?: it.id) == it.id &&
+                (it.instant()?.toEpochMilli() ?: 0L) >= since
+        }.sumOf { e -> amount(e, base)?.let { toIdr(it, base) } ?: 0.0 }
+    }
+
     fun saveMoney(m: MoneySettings) {
+        // hitungan "Modal otomatis" mulai dari nol hanya bila modal awal diubah atau fitur baru dinyalakan
+        val p0 = prefs
+        val reset = p0 != null && (p0.getString("modal_idr", null) != m.baseModalIdr.toLong().toString() ||
+            (m.autoModal && !p0.getBoolean("auto_modal", false)) || !p0.contains("modal_start"))
+        if (reset) p0?.edit()?.putLong("modal_start", System.currentTimeMillis())?.apply()
         prefs?.edit()?.putBoolean("cent", m.cent)?.putString("leg_lot_text", lotText(m.legLot))?.remove("leg_lot")
             ?.putString("star_lot_text", lotText(m.starLot))
             ?.putInt("tp_legs", m.tpLegs)?.putBoolean("be07", m.be07)
-            ?.putString("modal_idr", m.modalIdr.toLong().toString())?.putFloat("risk_pct", m.riskPct.toFloat())
+            ?.putString("modal_idr", m.baseModalIdr.toLong().toString())?.putFloat("risk_pct", m.riskPct.toFloat())
+            ?.putFloat("zap_risk_pct", m.zapRiskPct.toFloat())?.putBoolean("sl_auto", m.slAuto)
+            ?.putBoolean("auto_modal", m.autoModal)
             ?.putFloat("idr_rate", m.idrRate.toFloat())?.apply()
+        refreshAutoModal()
         _moneyVersion.value = _moneyVersion.value + 1
     }
 
@@ -299,13 +374,14 @@ object SignalRepository {
         e.num("pnl")?.let { return it }
         // hasil sesuai skema pilihan (1/3 posisi TP1, SL+ setelah TP1 / di 0,7R); sinyal lama: hasil standar
         val byScheme = e.json.optJSONObject("r_by")
-        val r = if (byScheme != null && byScheme.has(m.schemeKey)) byScheme.optDouble(m.schemeKey) else e.num("r")
+        val key = m.schemeFor(e.id, e.tier())
+        val r = if (byScheme != null && byScheme.has(key)) byScheme.optDouble(key) else e.num("r")
             ?: return null
         val risk = e.num("risk_points") ?: return null
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
         val pointValue = e.num("point_value") ?: 1.0     // forex: nilai 1,0 harga per 0,01 lot
-        val lot = m.lotForSignal(e.isStar(), risk, pointValue, legs.toInt())
+        val lot = m.lotForSignal(e.isStar(), risk, pointValue, legs.toInt(), e.tier())
         return r * risk * legs * Math.round(lot * 100.0) * pointValue
     }
 
@@ -503,6 +579,7 @@ object SignalRepository {
             eventsDirty = false
         }
         e.apply()
+        refreshAutoModal()
     }
 
     /**
@@ -518,7 +595,12 @@ object SignalRepository {
     }
 
     fun slPlusActive(events: List<SignalEvent>, signalId: String): Boolean =
-        tp1Event(events, signalId) != null || (money().be07 && signalId in index(events).be07)
+        tp1Event(events, signalId) != null ||
+            (signalId in index(events).be07 && money().use07(signalId, signalTier(signalId)))
+
+    /** Peringkat sinyal (dari event sinyal di HP) untuk id ini; "" bila tidak ada. */
+    fun signalTier(signalId: String): String =
+        _events.value.firstOrNull { it.type == "signal" && it.id == signalId }?.tier() ?: ""
 
     /** Info TP1 kena (lalu SL+) untuk sinyal ini, bila ada. */
     fun tp1Event(events: List<SignalEvent>, signalId: String): SignalEvent? = index(events).tp1[signalId]

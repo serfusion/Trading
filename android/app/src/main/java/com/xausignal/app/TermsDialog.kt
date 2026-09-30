@@ -43,6 +43,12 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                 Text("• 💰 profit historis: 💰💰💰 ≥+0,25R • 💰💰 ≥+0,12R • 💰 ≥+0,05R")
                 Text("• ★ win rate historis: ★★★ ≥75% • ★★ ≥60% • ★ ≥48%", color = Gold)
                 Text("• Hanya sinyal 💰 yang dikirim. Data 2007–2026, bukan jaminan.")
+                Text("• ⚡ kesempatan emas (XAU konf+⭐ saat volatilitas rendah, BTC ⭐): dengan SL+ 0,7R " +
+                    "WR ±63%, +0,75R/sinyal, untung 13/14 th (XAU) & 11/11 th (BTC). Tetap bisa kalah beruntun.",
+                    color = Gold)
+                Text("• Peringkat: ⚡ Emas > 🥈 > 🥉 > Biasa (lot ikut peringkat bila Modal diisi).")
+                Text("• ⚠️ Mode perang = minyak naik ≥10% dalam 10 hari: sinyal emas historis lemah, pakai lot kecil.",
+                    color = SellColor)
                 Text("• Lot akun Cent, 5 posisi/sinyal, contoh SL \$45:", fontWeight = FontWeight.Bold)
                 TableRow("Modal (XAU)", "Risiko 0,25%", "Risiko 0,5%", header = true)
                 LineDivider()

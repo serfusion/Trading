@@ -49,13 +49,19 @@ object Notifications {
     }
 
     fun signal(context: Context, event: SignalEvent) {
-        val badge = "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
+        val badge = (if (event.isZap()) "⚡" else "") + "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
         val title = "${if (badge.isBlank()) "" else "$badge "}${event.dir} ${event.symbol()} @ ${event.price("entry")}"
+        val m = SignalRepository.money()
+        val s07 = event.json.has("wr07") && m.use07(event.id, event.tier())
         val stats = if (event.json.has("wr")) {
-            "WR ${fmt(event.json.optDouble("wr"), 0)}% • ${signed(event.json.optDouble("avg_r"))}R • "
+            "WR ${fmt(event.json.optDouble(if (s07) "wr07" else "wr"), 0)}% • " +
+                "${signed(event.json.optDouble(if (s07) "avg_r07" else "avg_r"))}R • "
         } else ""
-        val text = stats +
-            "SL ${event.price("sl")} • TP ${event.price("tp1")} • Entry " + legsLot(event, SignalRepository.money())
+        val zap = if (event.isZap()) "⚡ KESEMPATAN EMAS (risiko ${fmt(m.zapRiskPct, 1).replace('.', ',')}%" +
+            (if (m.use07(event.id, event.tier())) ", SL+ saat profit 0,7R" else "") + ") • " else ""
+        val text = zap + stats +
+            "SL ${event.price("sl")} • TP ${event.price("tp1")} • Entry " + legsLot(event, m) +
+            (event.warText()?.let { "\n$it" } ?: "")
         post(context, event.id.hashCode(), title, text)
     }
 

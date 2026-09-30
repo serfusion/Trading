@@ -24,7 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
@@ -128,7 +128,7 @@ private data class TabItem(val title: String, val icon: ImageVector)
 private val TABS = listOf(
     TabItem("Sinyal", Icons.Filled.Notifications),
     TabItem("Statistik", Icons.Filled.DateRange),
-    TabItem("Tanya", Icons.Filled.Email),
+    TabItem("News", Icons.AutoMirrored.Filled.List),
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -236,7 +236,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 when (tab) {
                     0 -> SignalsTab(events, prices, connection, money, follow)
                     1 -> StatsTab(events, money)
-                    else -> ChatTab()
+                    else -> NewsTab()
                 }
                 // Indikator hanya digambar saat ditarik / refresh: di Material3 1.2 lingkaran (bayangan) indikator
                 // tetap terlihat sebagai bulatan hitam di tengah atas walau tidak sedang ditarik.
@@ -278,8 +278,13 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
     var rate by remember { mutableStateOf(fmt(current.idrRate, 0).replace(",", "")) }
     val lotValue = parseLot(lot)
     val starValue = parseLot(starLot)
-    var modal by remember { mutableStateOf(if (current.modalIdr > 0) fmt(current.modalIdr, 0).replace(",", ".") else "") }
+    var modal by remember {
+        mutableStateOf(if (current.baseModalIdr > 0) fmt(current.baseModalIdr, 0).replace(",", ".") else "")
+    }
     var riskPct by remember { mutableStateOf(current.riskPct) }
+    var zapRisk by remember { mutableStateOf(current.zapRiskPct) }
+    var slAuto by remember { mutableStateOf(current.slAuto) }
+    var autoModal by remember { mutableStateOf(current.autoModal) }
     var follow by remember { mutableStateOf(SignalRepository.followed()) }
     val modalValue = modal.replace(".", "").replace(",", "").trim().toDoubleOrNull() ?: 0.0
     AlertDialog(
@@ -337,13 +342,30 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
                 )
                 if (modalValue > 0) {
-                    CardTitle("Rugi maks per sinyal")
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(selected = autoModal, onClick = { autoModal = !autoModal },
+                            label = { Text("Modal otomatis") })
+                    }
+                    Text(
+                        if (autoModal) "Modal = modal di atas + profit/rugi sinyal yang TUTUP sejak disimpan" +
+                            (if (current.autoModal) " (sekarang ≈ ${idrText(current.modalIdr)})." else ".")
+                        else "Nyalakan supaya lot ikut naik/turun sesuai profit/rugi tanpa mengetik ulang modal.",
+                        style = MaterialTheme.typography.bodySmall, color = Muted
+                    )
+                    CardTitle("Rugi maks sinyal ⚡ kesempatan emas")
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FilterChip(selected = zapRisk == 0.5, onClick = { zapRisk = 0.5 }, label = { Text("0,5%") })
+                        FilterChip(selected = zapRisk == 1.0, onClick = { zapRisk = 1.0 }, label = { Text("1%") })
+                    }
+                    CardTitle("Rugi maks sinyal 🥈/🥉")
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         FilterChip(selected = riskPct == 0.25, onClick = { riskPct = 0.25 }, label = { Text("0,25%") })
                         FilterChip(selected = riskPct == 0.5, onClick = { riskPct = 0.5 }, label = { Text("0,5%") })
                     }
                     Text(
-                        "Lot dihitung otomatis dari jarak SL tiap sinyal (min 0.01).",
+                        "Sinyal \"Biasa\" memakai setengahnya. Lot dihitung otomatis dari jarak SL tiap sinyal " +
+                            "(dibulatkan ke bawah, min 0.01). Risiko > 1% per sinyal tidak disarankan: ⚡ pun bisa " +
+                            "kalah 8× beruntun.",
                         style = MaterialTheme.typography.bodySmall, color = Muted
                     )
                 } else {
@@ -352,8 +374,15 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                         color = Muted)
                 }
                 CardTitle("Skema")
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = slAuto, onClick = { slAuto = true }, label = { Text("SL+ otomatis") })
+                    FilterChip(selected = !slAuto, onClick = { slAuto = false }, label = { Text("SL+ setelah TP1") })
+                }
                 Text(
-                    "1 posisi TP1 (1R), 4 posisi running sampai sinyal TUTUP. TP1 kena → SL 4 posisi ke entry (SL+).",
+                    "1 posisi TP1 (1R), 4 posisi running sampai sinyal TUTUP. " +
+                        (if (slAuto) "Otomatis: ⚡ & BTC → SL semua posisi ke entry saat profit 0,7R (WR lebih " +
+                            "tinggi, profit setara); XAU lainnya → SL+ setelah TP1 kena (profit XAU lebih besar)."
+                        else "TP1 kena → SL 4 posisi ke entry (SL+)."),
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
                 OutlinedTextField(value = rate, onValueChange = { rate = it }, label = { Text("Kurs 1 USD (Rp)") },
@@ -367,12 +396,15 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     val m = MoneySettings(
                         cent = cent,
                         legLot = lotValue ?: 0.01,
-                        idrRate = rate.replace(".", "").replace(",", "").toDoubleOrNull() ?: 16500.0,
+                        idrRate = rate.replace(".", "").replace(",", "").toDoubleOrNull() ?: 17500.0,
                         starLot = starValue ?: 0.01,
                         tpLegs = 1,
                         be07 = false,
                         modalIdr = modalValue,
                         riskPct = riskPct,
+                        zapRiskPct = zapRisk,
+                        slAuto = slAuto,
+                        autoModal = autoModal,
                     )
                     SignalRepository.saveFollowed(follow)
                     onSave(server.ifBlank { SignalRepository.DEFAULT_SERVER }, topic, cloud, m)

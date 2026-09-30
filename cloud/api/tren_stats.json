@@ -1,0 +1,1319 @@
+{
+ "dibuat": "2026-09-29",
+ "aset": {
+  "XAUUSD": {
+   "periode": "2012–2026",
+   "uji_mulai": "2019",
+   "jangka": {
+    "1 hari": {
+     "hari": 1,
+     "naik": 52.0,
+     "naik_uji": 53.5,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2288,
+        "benar": 51.4,
+        "n_uji": 1432,
+        "benar_uji": 52.9
+       },
+       "-1": {
+        "n": 1985,
+        "benar": 47.2,
+        "n_uji": 964,
+        "benar_uji": 45.5
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2329,
+        "benar": 52.9,
+        "n_uji": 1555,
+        "benar_uji": 54.3
+       },
+       "-1": {
+        "n": 1904,
+        "benar": 48.9,
+        "n_uji": 841,
+        "benar_uji": 48.0
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2627,
+        "benar": 53.1,
+        "n_uji": 1862,
+        "benar_uji": 54.3
+       },
+       "-1": {
+        "n": 1546,
+        "benar": 49.4,
+        "n_uji": 534,
+        "benar_uji": 49.3
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2517,
+        "benar": 52.6,
+        "n_uji": 1933,
+        "benar_uji": 53.3
+       },
+       "-1": {
+        "n": 1526,
+        "benar": 48.6,
+        "n_uji": 463,
+        "benar_uji": 45.8
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2254,
+        "benar": 51.5,
+        "n_uji": 1448,
+        "benar_uji": 53.0
+       },
+       "-1": {
+        "n": 1990,
+        "benar": 47.2,
+        "n_uji": 948,
+        "benar_uji": 45.8
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2531,
+        "benar": 53.2,
+        "n_uji": 1824,
+        "benar_uji": 54.3
+       },
+       "-1": {
+        "n": 1563,
+        "benar": 49.3,
+        "n_uji": 572,
+        "benar_uji": 49.0
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2544,
+        "benar": 53.3,
+        "n_uji": 1803,
+        "benar_uji": 54.6
+       },
+       "-1": {
+        "n": 1550,
+        "benar": 49.5,
+        "n_uji": 593,
+        "benar_uji": 49.7
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1542,
+        "benar": 52.8,
+        "n_uji": 1132,
+        "benar_uji": 54.3
+       },
+       "-1": {
+        "n": 1068,
+        "benar": 47.8,
+        "n_uji": 421,
+        "benar_uji": 47.5
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2131,
+        "benar": 52.0,
+        "n_uji": 1241,
+        "benar_uji": 53.1
+       },
+       "-1": {
+        "n": 2153,
+        "benar": 47.9,
+        "n_uji": 1155,
+        "benar_uji": 46.1
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 237,
+        "benar": 54.9,
+        "n_uji": 57,
+        "benar_uji": 57.9
+       },
+       "-1": {
+        "n": 384,
+        "benar": 46.4,
+        "n_uji": 291,
+        "benar_uji": 43.0
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 432,
+        "benar": 54.9,
+        "n_uji": 117,
+        "benar_uji": 59.0
+       },
+       "-1": {
+        "n": 766,
+        "benar": 46.2,
+        "n_uji": 555,
+        "benar_uji": 44.7
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 108,
+        "benar": 49.1,
+        "n_uji": 48,
+        "benar_uji": 56.2
+       },
+       "-1": {
+        "n": 108,
+        "benar": 49.1,
+        "n_uji": 48,
+        "benar_uji": 52.1
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 538,
+        "benar": 47.0,
+        "n_uji": 273,
+        "benar_uji": 46.5
+       },
+       "-1": {
+        "n": 593,
+        "benar": 48.9,
+        "n_uji": 322,
+        "benar_uji": 47.8
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1666,
+        "benar": 52.5,
+        "n_uji": 1167,
+        "benar_uji": 53.9
+       },
+       "-1": {
+        "n": 1204,
+        "benar": 48.4,
+        "n_uji": 498,
+        "benar_uji": 48.2
+       }
+      },
+      "yield riil 10 th 20 hari (naik = bearish)": {
+       "1": {
+        "n": 2071,
+        "benar": 51.7,
+        "n_uji": 1199,
+        "benar_uji": 52.8
+       },
+       "-1": {
+        "n": 2136,
+        "benar": 47.8,
+        "n_uji": 1156,
+        "benar_uji": 46.0
+       }
+      },
+      "dolar (DTWEXBGS) 20 hari (naik = bearish)": {
+       "1": {
+        "n": 2006,
+        "benar": 52.8,
+        "n_uji": 1227,
+        "benar_uji": 54.2
+       },
+       "-1": {
+        "n": 2287,
+        "benar": 48.7,
+        "n_uji": 1169,
+        "benar_uji": 47.3
+       }
+      }
+     }
+    },
+    "1 minggu": {
+     "hari": 5,
+     "naik": 53.1,
+     "naik_uji": 56.6,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2288,
+        "benar": 53.2,
+        "n_uji": 1432,
+        "benar_uji": 56.4
+       },
+       "-1": {
+        "n": 1981,
+        "benar": 46.9,
+        "n_uji": 960,
+        "benar_uji": 43.2
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2325,
+        "benar": 55.4,
+        "n_uji": 1551,
+        "benar_uji": 58.4
+       },
+       "-1": {
+        "n": 1904,
+        "benar": 49.3,
+        "n_uji": 841,
+        "benar_uji": 46.8
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2627,
+        "benar": 54.5,
+        "n_uji": 1862,
+        "benar_uji": 57.4
+       },
+       "-1": {
+        "n": 1542,
+        "benar": 48.5,
+        "n_uji": 530,
+        "benar_uji": 46.4
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2513,
+        "benar": 54.2,
+        "n_uji": 1929,
+        "benar_uji": 56.4
+       },
+       "-1": {
+        "n": 1526,
+        "benar": 47.4,
+        "n_uji": 463,
+        "benar_uji": 42.8
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2253,
+        "benar": 54.6,
+        "n_uji": 1447,
+        "benar_uji": 58.0
+       },
+       "-1": {
+        "n": 1987,
+        "benar": 48.3,
+        "n_uji": 945,
+        "benar_uji": 45.6
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2531,
+        "benar": 54.2,
+        "n_uji": 1824,
+        "benar_uji": 57.3
+       },
+       "-1": {
+        "n": 1559,
+        "benar": 47.2,
+        "n_uji": 568,
+        "benar_uji": 45.8
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2544,
+        "benar": 55.0,
+        "n_uji": 1803,
+        "benar_uji": 58.1
+       },
+       "-1": {
+        "n": 1546,
+        "benar": 48.5,
+        "n_uji": 589,
+        "benar_uji": 48.0
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1538,
+        "benar": 56.6,
+        "n_uji": 1128,
+        "benar_uji": 60.0
+       },
+       "-1": {
+        "n": 1068,
+        "benar": 46.7,
+        "n_uji": 421,
+        "benar_uji": 43.9
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2131,
+        "benar": 55.3,
+        "n_uji": 1241,
+        "benar_uji": 58.1
+       },
+       "-1": {
+        "n": 2149,
+        "benar": 49.0,
+        "n_uji": 1151,
+        "benar_uji": 45.1
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 237,
+        "benar": 52.3,
+        "n_uji": 57,
+        "benar_uji": 71.9
+       },
+       "-1": {
+        "n": 384,
+        "benar": 42.4,
+        "n_uji": 291,
+        "benar_uji": 37.8
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 432,
+        "benar": 54.4,
+        "n_uji": 117,
+        "benar_uji": 67.5
+       },
+       "-1": {
+        "n": 766,
+        "benar": 42.2,
+        "n_uji": 555,
+        "benar_uji": 40.9
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 108,
+        "benar": 58.3,
+        "n_uji": 48,
+        "benar_uji": 60.4
+       },
+       "-1": {
+        "n": 108,
+        "benar": 43.5,
+        "n_uji": 48,
+        "benar_uji": 35.4
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 538,
+        "benar": 50.4,
+        "n_uji": 273,
+        "benar_uji": 52.4
+       },
+       "-1": {
+        "n": 590,
+        "benar": 53.1,
+        "n_uji": 319,
+        "benar_uji": 49.8
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1666,
+        "benar": 55.6,
+        "n_uji": 1167,
+        "benar_uji": 59.2
+       },
+       "-1": {
+        "n": 1204,
+        "benar": 48.6,
+        "n_uji": 498,
+        "benar_uji": 47.8
+       }
+      },
+      "yield riil 10 th 20 hari (naik = bearish)": {
+       "1": {
+        "n": 2071,
+        "benar": 55.0,
+        "n_uji": 1199,
+        "benar_uji": 58.6
+       },
+       "-1": {
+        "n": 2132,
+        "benar": 49.0,
+        "n_uji": 1152,
+        "benar_uji": 45.8
+       }
+      },
+      "dolar (DTWEXBGS) 20 hari (naik = bearish)": {
+       "1": {
+        "n": 2002,
+        "benar": 53.4,
+        "n_uji": 1223,
+        "benar_uji": 57.8
+       },
+       "-1": {
+        "n": 2287,
+        "benar": 47.1,
+        "n_uji": 1169,
+        "benar_uji": 44.7
+       }
+      }
+     }
+    },
+    "1 bulan": {
+     "hari": 21,
+     "naik": 53.3,
+     "naik_uji": 59.6,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2278,
+        "benar": 53.2,
+        "n_uji": 1422,
+        "benar_uji": 60.5
+       },
+       "-1": {
+        "n": 1975,
+        "benar": 45.9,
+        "n_uji": 954,
+        "benar_uji": 41.7
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2309,
+        "benar": 55.8,
+        "n_uji": 1535,
+        "benar_uji": 62.7
+       },
+       "-1": {
+        "n": 1904,
+        "benar": 48.9,
+        "n_uji": 841,
+        "benar_uji": 46.1
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2627,
+        "benar": 54.5,
+        "n_uji": 1862,
+        "benar_uji": 59.6
+       },
+       "-1": {
+        "n": 1526,
+        "benar": 46.6,
+        "n_uji": 514,
+        "benar_uji": 40.5
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2497,
+        "benar": 55.1,
+        "n_uji": 1913,
+        "benar_uji": 59.0
+       },
+       "-1": {
+        "n": 1526,
+        "benar": 46.3,
+        "n_uji": 463,
+        "benar_uji": 37.8
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2237,
+        "benar": 57.4,
+        "n_uji": 1431,
+        "benar_uji": 63.3
+       },
+       "-1": {
+        "n": 1987,
+        "benar": 50.7,
+        "n_uji": 945,
+        "benar_uji": 46.0
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2528,
+        "benar": 54.4,
+        "n_uji": 1821,
+        "benar_uji": 59.7
+       },
+       "-1": {
+        "n": 1546,
+        "benar": 44.9,
+        "n_uji": 555,
+        "benar_uji": 40.9
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2544,
+        "benar": 55.0,
+        "n_uji": 1803,
+        "benar_uji": 60.1
+       },
+       "-1": {
+        "n": 1530,
+        "benar": 46.0,
+        "n_uji": 573,
+        "benar_uji": 41.9
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1522,
+        "benar": 58.0,
+        "n_uji": 1112,
+        "benar_uji": 64.9
+       },
+       "-1": {
+        "n": 1068,
+        "benar": 45.4,
+        "n_uji": 421,
+        "benar_uji": 37.5
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2125,
+        "benar": 55.2,
+        "n_uji": 1235,
+        "benar_uji": 60.6
+       },
+       "-1": {
+        "n": 2139,
+        "benar": 48.3,
+        "n_uji": 1141,
+        "benar_uji": 41.5
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 237,
+        "benar": 67.1,
+        "n_uji": 57,
+        "benar_uji": 87.7
+       },
+       "-1": {
+        "n": 383,
+        "benar": 45.4,
+        "n_uji": 290,
+        "benar_uji": 39.0
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 432,
+        "benar": 61.8,
+        "n_uji": 117,
+        "benar_uji": 75.2
+       },
+       "-1": {
+        "n": 763,
+        "benar": 42.2,
+        "n_uji": 552,
+        "benar_uji": 35.5
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 108,
+        "benar": 55.6,
+        "n_uji": 48,
+        "benar_uji": 64.6
+       },
+       "-1": {
+        "n": 108,
+        "benar": 23.1,
+        "n_uji": 48,
+        "benar_uji": 16.7
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 538,
+        "benar": 53.3,
+        "n_uji": 273,
+        "benar_uji": 55.3
+       },
+       "-1": {
+        "n": 590,
+        "benar": 53.2,
+        "n_uji": 319,
+        "benar_uji": 51.1
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1660,
+        "benar": 56.7,
+        "n_uji": 1161,
+        "benar_uji": 64.2
+       },
+       "-1": {
+        "n": 1204,
+        "benar": 48.5,
+        "n_uji": 498,
+        "benar_uji": 41.6
+       }
+      },
+      "yield riil 10 th 20 hari (naik = bearish)": {
+       "1": {
+        "n": 2062,
+        "benar": 56.1,
+        "n_uji": 1190,
+        "benar_uji": 63.9
+       },
+       "-1": {
+        "n": 2126,
+        "benar": 49.6,
+        "n_uji": 1146,
+        "benar_uji": 45.3
+       }
+      },
+      "dolar (DTWEXBGS) 20 hari (naik = bearish)": {
+       "1": {
+        "n": 1986,
+        "benar": 54.3,
+        "n_uji": 1207,
+        "benar_uji": 60.4
+       },
+       "-1": {
+        "n": 2287,
+        "benar": 47.5,
+        "n_uji": 1169,
+        "benar_uji": 41.2
+       }
+      }
+     }
+    }
+   }
+  },
+  "BTCUSD": {
+   "periode": "2016–2026",
+   "uji_mulai": "2021",
+   "jangka": {
+    "1 hari": {
+     "hari": 1,
+     "naik": 52.2,
+     "naik_uji": 49.7,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2198,
+        "benar": 53.5,
+        "n_uji": 1096,
+        "benar_uji": 48.8
+       },
+       "-1": {
+        "n": 1705,
+        "benar": 49.1,
+        "n_uji": 1000,
+        "benar_uji": 49.4
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2265,
+        "benar": 54.4,
+        "n_uji": 1124,
+        "benar_uji": 50.7
+       },
+       "-1": {
+        "n": 1598,
+        "benar": 50.6,
+        "n_uji": 972,
+        "benar_uji": 51.4
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2266,
+        "benar": 53.4,
+        "n_uji": 1101,
+        "benar_uji": 49.7
+       },
+       "-1": {
+        "n": 1537,
+        "benar": 49.8,
+        "n_uji": 995,
+        "benar_uji": 50.3
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2620,
+        "benar": 52.5,
+        "n_uji": 1440,
+        "benar_uji": 50.6
+       },
+       "-1": {
+        "n": 1053,
+        "benar": 49.7,
+        "n_uji": 656,
+        "benar_uji": 52.1
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2217,
+        "benar": 54.0,
+        "n_uji": 1108,
+        "benar_uji": 50.2
+       },
+       "-1": {
+        "n": 1657,
+        "benar": 49.9,
+        "n_uji": 988,
+        "benar_uji": 50.8
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2225,
+        "benar": 53.2,
+        "n_uji": 1152,
+        "benar_uji": 49.9
+       },
+       "-1": {
+        "n": 1499,
+        "benar": 50.1,
+        "n_uji": 944,
+        "benar_uji": 50.5
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2219,
+        "benar": 52.6,
+        "n_uji": 1151,
+        "benar_uji": 49.3
+       },
+       "-1": {
+        "n": 1505,
+        "benar": 49.2,
+        "n_uji": 945,
+        "benar_uji": 49.8
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1654,
+        "benar": 53.4,
+        "n_uji": 844,
+        "benar_uji": 48.9
+       },
+       "-1": {
+        "n": 891,
+        "benar": 50.5,
+        "n_uji": 542,
+        "benar_uji": 50.2
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2153,
+        "benar": 53.5,
+        "n_uji": 1073,
+        "benar_uji": 49.0
+       },
+       "-1": {
+        "n": 1761,
+        "benar": 49.2,
+        "n_uji": 1023,
+        "benar_uji": 49.6
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 140,
+        "benar": 56.4,
+        "n_uji": 78,
+        "benar_uji": 56.4
+       },
+       "-1": {
+        "n": 480,
+        "benar": 44.2,
+        "n_uji": 192,
+        "benar_uji": 50.0
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 384,
+        "benar": 52.9,
+        "n_uji": 230,
+        "benar_uji": 51.3
+       },
+       "-1": {
+        "n": 818,
+        "benar": 44.4,
+        "n_uji": 369,
+        "benar_uji": 50.7
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 96,
+        "benar": 47.9,
+        "n_uji": 60,
+        "benar_uji": 50.0
+       },
+       "-1": {
+        "n": 90,
+        "benar": 57.8,
+        "n_uji": 60,
+        "benar_uji": 56.7
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 394,
+        "benar": 50.5,
+        "n_uji": 231,
+        "benar_uji": 51.1
+       },
+       "-1": {
+        "n": 407,
+        "benar": 50.6,
+        "n_uji": 239,
+        "benar_uji": 51.9
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1678,
+        "benar": 55.1,
+        "n_uji": 820,
+        "benar_uji": 50.2
+       },
+       "-1": {
+        "n": 1042,
+        "benar": 49.6,
+        "n_uji": 652,
+        "benar_uji": 49.8
+       }
+      }
+     }
+    },
+    "1 minggu": {
+     "hari": 7,
+     "naik": 54.3,
+     "naik_uji": 51.7,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2192,
+        "benar": 55.9,
+        "n_uji": 1090,
+        "benar_uji": 51.7
+       },
+       "-1": {
+        "n": 1705,
+        "benar": 47.7,
+        "n_uji": 1000,
+        "benar_uji": 48.3
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2259,
+        "benar": 56.4,
+        "n_uji": 1118,
+        "benar_uji": 52.1
+       },
+       "-1": {
+        "n": 1598,
+        "benar": 48.5,
+        "n_uji": 972,
+        "benar_uji": 48.8
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2260,
+        "benar": 56.5,
+        "n_uji": 1095,
+        "benar_uji": 53.0
+       },
+       "-1": {
+        "n": 1537,
+        "benar": 49.3,
+        "n_uji": 995,
+        "benar_uji": 49.7
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2620,
+        "benar": 55.5,
+        "n_uji": 1440,
+        "benar_uji": 53.4
+       },
+       "-1": {
+        "n": 1047,
+        "benar": 49.1,
+        "n_uji": 650,
+        "benar_uji": 52.2
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2211,
+        "benar": 57.3,
+        "n_uji": 1102,
+        "benar_uji": 54.0
+       },
+       "-1": {
+        "n": 1657,
+        "benar": 49.8,
+        "n_uji": 988,
+        "benar_uji": 50.9
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2219,
+        "benar": 55.7,
+        "n_uji": 1146,
+        "benar_uji": 52.2
+       },
+       "-1": {
+        "n": 1499,
+        "benar": 48.6,
+        "n_uji": 944,
+        "benar_uji": 48.9
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2213,
+        "benar": 55.0,
+        "n_uji": 1145,
+        "benar_uji": 50.6
+       },
+       "-1": {
+        "n": 1505,
+        "benar": 47.4,
+        "n_uji": 945,
+        "benar_uji": 47.0
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1648,
+        "benar": 55.5,
+        "n_uji": 838,
+        "benar_uji": 51.2
+       },
+       "-1": {
+        "n": 891,
+        "benar": 49.5,
+        "n_uji": 542,
+        "benar_uji": 50.2
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2147,
+        "benar": 56.4,
+        "n_uji": 1067,
+        "benar_uji": 51.3
+       },
+       "-1": {
+        "n": 1761,
+        "benar": 48.3,
+        "n_uji": 1023,
+        "benar_uji": 47.9
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 140,
+        "benar": 60.0,
+        "n_uji": 78,
+        "benar_uji": 57.7
+       },
+       "-1": {
+        "n": 479,
+        "benar": 37.0,
+        "n_uji": 191,
+        "benar_uji": 38.7
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 384,
+        "benar": 55.7,
+        "n_uji": 230,
+        "benar_uji": 56.1
+       },
+       "-1": {
+        "n": 812,
+        "benar": 39.2,
+        "n_uji": 363,
+        "benar_uji": 44.6
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 96,
+        "benar": 51.0,
+        "n_uji": 60,
+        "benar_uji": 63.3
+       },
+       "-1": {
+        "n": 90,
+        "benar": 64.4,
+        "n_uji": 60,
+        "benar_uji": 61.7
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 394,
+        "benar": 56.6,
+        "n_uji": 231,
+        "benar_uji": 57.1
+       },
+       "-1": {
+        "n": 407,
+        "benar": 52.6,
+        "n_uji": 239,
+        "benar_uji": 50.6
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1672,
+        "benar": 58.3,
+        "n_uji": 814,
+        "benar_uji": 53.2
+       },
+       "-1": {
+        "n": 1042,
+        "benar": 46.4,
+        "n_uji": 652,
+        "benar_uji": 46.2
+       }
+      }
+     }
+    },
+    "1 bulan": {
+     "hari": 30,
+     "naik": 57.4,
+     "naik_uji": 52.9,
+     "indikator": {
+      "momentum 20 hari": {
+       "1": {
+        "n": 2176,
+        "benar": 58.3,
+        "n_uji": 1074,
+        "benar_uji": 52.7
+       },
+       "-1": {
+        "n": 1698,
+        "benar": 43.3,
+        "n_uji": 993,
+        "benar_uji": 46.8
+       }
+      },
+      "momentum 60 hari": {
+       "1": {
+        "n": 2236,
+        "benar": 58.5,
+        "n_uji": 1095,
+        "benar_uji": 50.9
+       },
+       "-1": {
+        "n": 1598,
+        "benar": 43.9,
+        "n_uji": 972,
+        "benar_uji": 44.8
+       }
+      },
+      "momentum 120 hari": {
+       "1": {
+        "n": 2254,
+        "benar": 59.1,
+        "n_uji": 1089,
+        "benar_uji": 51.1
+       },
+       "-1": {
+        "n": 1520,
+        "benar": 45.9,
+        "n_uji": 978,
+        "benar_uji": 45.0
+       }
+      },
+      "momentum 250 hari": {
+       "1": {
+        "n": 2620,
+        "benar": 58.6,
+        "n_uji": 1440,
+        "benar_uji": 55.4
+       },
+       "-1": {
+        "n": 1024,
+        "benar": 47.9,
+        "n_uji": 627,
+        "benar_uji": 52.8
+       }
+      },
+      "close vs SMA50": {
+       "1": {
+        "n": 2188,
+        "benar": 58.1,
+        "n_uji": 1079,
+        "benar_uji": 51.4
+       },
+       "-1": {
+        "n": 1657,
+        "benar": 43.7,
+        "n_uji": 988,
+        "benar_uji": 45.4
+       }
+      },
+      "close vs SMA200": {
+       "1": {
+        "n": 2196,
+        "benar": 58.2,
+        "n_uji": 1123,
+        "benar_uji": 50.6
+       },
+       "-1": {
+        "n": 1499,
+        "benar": 44.8,
+        "n_uji": 944,
+        "benar_uji": 44.3
+       }
+      },
+      "SMA50 vs SMA200": {
+       "1": {
+        "n": 2199,
+        "benar": 57.3,
+        "n_uji": 1131,
+        "benar_uji": 47.5
+       },
+       "-1": {
+        "n": 1496,
+        "benar": 43.5,
+        "n_uji": 936,
+        "benar_uji": 40.5
+       }
+      },
+      "Donchian D1 55/20": {
+       "1": {
+        "n": 1631,
+        "benar": 57.1,
+        "n_uji": 821,
+        "benar_uji": 49.3
+       },
+       "-1": {
+        "n": 891,
+        "benar": 39.8,
+        "n_uji": 542,
+        "benar_uji": 43.9
+       }
+      },
+      "Supertrend D1": {
+       "1": {
+        "n": 2124,
+        "benar": 57.6,
+        "n_uji": 1044,
+        "benar_uji": 50.0
+       },
+       "-1": {
+        "n": 1761,
+        "benar": 42.5,
+        "n_uji": 1023,
+        "benar_uji": 44.1
+       }
+      },
+      "RSI14 ekstrem (berbalik)": {
+       "1": {
+        "n": 140,
+        "benar": 63.6,
+        "n_uji": 78,
+        "benar_uji": 62.8
+       },
+       "-1": {
+        "n": 476,
+        "benar": 26.7,
+        "n_uji": 188,
+        "benar_uji": 21.3
+       }
+      },
+      "> 3 ATR dari SMA50 (berbalik)": {
+       "1": {
+        "n": 384,
+        "benar": 64.6,
+        "n_uji": 230,
+        "benar_uji": 57.8
+       },
+       "-1": {
+        "n": 797,
+        "benar": 33.1,
+        "n_uji": 348,
+        "benar_uji": 37.1
+       }
+      },
+      "pindah tren: Donchian D1 baru berbalik": {
+       "1": {
+        "n": 96,
+        "benar": 65.6,
+        "n_uji": 60,
+        "benar_uji": 68.3
+       },
+       "-1": {
+        "n": 90,
+        "benar": 54.4,
+        "n_uji": 60,
+        "benar_uji": 63.3
+       }
+      },
+      "pindah tren: baru menembus SMA50": {
+       "1": {
+        "n": 394,
+        "benar": 55.6,
+        "n_uji": 231,
+        "benar_uji": 54.5
+       },
+       "-1": {
+        "n": 407,
+        "benar": 47.7,
+        "n_uji": 239,
+        "benar_uji": 47.7
+       }
+      },
+      "konsensus tren (≥4 dari 5)": {
+       "1": {
+        "n": 1649,
+        "benar": 60.6,
+        "n_uji": 791,
+        "benar_uji": 50.8
+       },
+       "-1": {
+        "n": 1042,
+        "benar": 40.6,
+        "n_uji": 652,
+        "benar_uji": 42.5
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

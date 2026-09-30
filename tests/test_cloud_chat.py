@@ -124,3 +124,36 @@ def test_tanpa_ai():
     root = Path(__file__).resolve().parent.parent / "cloud"
     assert not any("anthropic" in p.read_text() for p in (root / "api").glob("*.py"))
     assert "anthropic" not in (root / "requirements.txt").read_text()
+
+
+def test_act_otomatis_dari_fred():
+    """Act diisi dari FRED hanya bila rilis sudah lewat DAN periode acuannya sudah dimuat FRED."""
+    from datetime import date
+    series = {
+        "PAYEMS": [(date(2026, 7, 1), 158913.0), (date(2026, 8, 1), 159075.0), (date(2026, 9, 1), 159120.0)],
+        "UNRATE": [(date(2026, 8, 1), 4.1), (date(2026, 9, 1), 4.2)],
+        "CPIAUCSL": [(date(2026, 7, 1), 332.813), (date(2026, 8, 1), 334.131)],
+        "ICSA": [(date(2026, 9, 19), 197000.0), (date(2026, 9, 26), 205000.0)],
+    }
+    fetch = lambda sid: series.get(sid, [])  # noqa: E731
+    cal = [{"title": "Non-Farm Employment Change", "country": "USD", "impact": "High",
+            "date": "2026-10-02T08:30:00-04:00", "forecast": "50K", "previous": "162K"},
+           {"title": "Unemployment Rate", "country": "USD", "impact": "High",
+            "date": "2026-10-02T08:30:00-04:00", "forecast": "4.1%", "previous": "4.1%"},
+           {"title": "Unemployment Claims", "country": "USD", "impact": "High",
+            "date": "2026-10-01T08:30:00-04:00", "forecast": "200K", "previous": "197K"},
+           {"title": "CPI m/m", "country": "USD", "impact": "High",
+            "date": "2026-10-14T08:30:00-04:00", "forecast": "0.3%", "previous": "0.4%"}]
+    after = datetime(2026, 10, 2, 13, 30, tzinfo=timezone.utc)
+    c = {x["title"]: x for x in _chat.calendar_json(cal, after, fetch)}
+    assert c["Non-Farm Employment Change"]["actual"] == "45K" and c["Non-Farm Employment Change"]["released"]
+    assert c["Unemployment Rate"]["actual"] == "4.2%" and c["Unemployment Rate"]["actual_src"] == "FRED"
+    assert c["Unemployment Claims"]["actual"] == "205K"                   # pekan berakhir Sabtu 26 Sep
+    assert c["CPI m/m"]["actual"] == "" and not c["CPI m/m"]["released"]  # belum rilis
+    before = datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc)
+    assert all(x["actual"] == "" for x in _chat.calendar_json(cal[:2], before, fetch))
+    stale = {"PAYEMS": series["PAYEMS"][:2]}                              # FRED belum memuat September
+    assert _chat.calendar_json(cal[:1], after, lambda s: stale.get(s, []))[0]["actual"] == ""
+    # angka otomatis langsung bisa dianalisa dengan format Act/Cons/Prev
+    r = ask("Non-Farm Employment Change Act: 45K Cons: 50K Prev: 162K")
+    assert "Scanning" in r and "SEMUA rugi" in r

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -57,6 +59,11 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         .groupBy { SignalRepository.twinKey(it.id) }.values.toList()
     val missed = events.filter { it.type == "signal" && it.closedByHeartbeat(prices[it.symbol()]) }.map { it.id }.toSet()
     var shown by rememberSaveable { mutableIntStateOf(HISTORY_PAGE) }
+    var showLog by rememberSaveable { mutableStateOf(false) }
+    // log notifikasi: sinyal baru, TP1 + SL+, TUTUP, info auto order (terbaru di atas)
+    val log = remember(events) {
+        events.filter { it.type == "signal" || it.type == "close" || (it.type == "info" && it.str("kind") != "be07") }
+    }
     // Sinyal kembar (beberapa set di candle sama: simbol, arah, entry sama) digabung jadi 1 kartu ×N.
     val open = SignalRepository.openSignals(events, prices)
         .groupBy { Triple(it.symbol(), it.dir, it.price("entry")) }.values.toList()
@@ -85,20 +92,66 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
             }
         }
         item { TodayCard(events, money) }
-        if (history.isNotEmpty()) item { SectionTitle("Riwayat", trailing = "${history.size}") }
-        // hanya 4 kartu terbaru; "Load more" menampilkan 4 kartu lebih lama berikutnya
-        items(history.take(shown), key = { it.msgId }) {
-            if (it.type == "signal") SignalResultCard(it, events, money, it.id in missed, twins[it.id] ?: 1)
-            else CloseRow(it, money, events)
+        item {
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                SectionTitle("Riwayat", Modifier.weight(1f))
+                FilterChip(selected = !showLog, onClick = { showLog = false; shown = HISTORY_PAGE },
+                    label = { Text("Hasil (${history.size})") })
+                FilterChip(selected = showLog, onClick = { showLog = true; shown = HISTORY_PAGE },
+                    label = { Text("Notifikasi (${log.size})") })
+            }
         }
-        if (history.size > shown) {
+        // hanya 4 kartu terbaru; "Load more" menampilkan 4 kartu lebih lama berikutnya
+        if (showLog) {
+            items(log.take(shown), key = { "log-" + it.msgId }) { LogRow(it, primary) }
+        } else {
+            items(history.take(shown), key = { it.msgId }) {
+                if (it.type == "signal") SignalResultCard(it, events, money, it.id in missed, twins[it.id] ?: 1)
+                else CloseRow(it, money, events)
+            }
+        }
+        val total = if (showLog) log.size else history.size
+        if (total > shown) {
             item {
                 OutlinedButton(onClick = { shown += HISTORY_PAGE }, modifier = Modifier.fillMaxWidth()) {
-                    Text("Load more (${history.size - shown} lagi)")
+                    Text("Load more (${total - shown} lagi)")
                 }
             }
         }
         item { Footer() }
+    }
+}
+
+/** Satu baris log notifikasi: jenis, pair, keterangan singkat, waktu. */
+@Composable
+fun LogRow(e: SignalEvent, primary: Map<String, String>) {
+    val sym = e.symbol()
+    val (icon, title, detail, color) = when (e.type) {
+        "signal" -> listOf(if (e.dir == "BUY") "🟢" else "🔴", "Sinyal ${e.dir} $sym",
+            "Entry ${e.price("entry")} • SL ${e.price("sl")} • ${if (e.isGap()) "TP" else "TP1"} ${e.price("tp1")}",
+            "dir")
+        "close" -> {
+            val main = (primary[e.id] ?: e.id) == e.id
+            if (e.isVoid()) listOf("⚠️", "BATAL ${e.dir} $sym", "Sinyal dari data saat pasar tutup", "muted")
+            else if (main) listOf("🏁", "TUTUP ${e.dir} $sym • ${if (e.json.optBoolean("tp1_hit")) "PROFIT" else "MINUS"}",
+                "Harga ${e.price("price")} • ${e.str("reason")}", if (e.json.optBoolean("tp1_hit")) "buy" else "sell")
+            else listOf("•", "Set ${e.str("set")} selesai ($sym)", "Bukan TUTUP utama — posisi Anda tetap jalan", "muted")
+        }
+        else -> if (e.str("kind") == "tp1") listOf("🎯", "TP1 kena $sym",
+            "Tutup 1 posisi, SL sisa ke ${if (e.num("sl_plus") != null) e.price("sl_plus") else "entry"}", "gold")
+        else listOf("ℹ️", "Info", e.str("text"), "muted")
+    }
+    AppCard {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text(icon, style = MaterialTheme.typography.titleMedium)
+            Column(Modifier.weight(1f)) {
+                Text(title, fontWeight = FontWeight.Bold, color = when (color) {
+                    "dir" -> dirColor(e.dir); "buy" -> BuyColor; "sell" -> SellColor; "gold" -> Gold; else -> Muted
+                })
+                Text(detail, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+            }
+            Text(e.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
     }
 }
 
@@ -128,6 +181,10 @@ fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
                 )
             }
         }
+        // ⚠️ mode perang (minyak melonjak) dari heartbeat XAU: label saja, sinyal XAU tetap dikirim
+        list.firstOrNull { it.key.startsWith("XAU") }?.value?.warText()?.let {
+            Text(it, style = MaterialTheme.typography.labelMedium, color = SellColor, fontWeight = FontWeight.Bold)
+        }
     }
 }
 
@@ -138,9 +195,13 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
         Text(signal.symbol(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
         Pill(signal.dir, dirColor(signal.dir), solid = true)
         if (count > 1) Pill("×$count", Gold)
+        tierLabel(signal.tier()).takeIf { it.isNotEmpty() && signal.type == "signal" }?.let {
+            Pill(it, if (signal.isZap()) Gold else Muted, solid = signal.isZap())
+        }
         Spacer(Modifier.weight(1f))
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
+    signal.warText()?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor) }
     val m = signal.moneyBadge()
     val st = signal.stars()
     if (signal.type == "signal" && !signal.json.has("money") && !signal.isGap()) {
@@ -150,13 +211,16 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     }
     if (m > 0 || st > 0 || signal.json.has("wr")) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (signal.isZap()) Text("⚡", fontWeight = FontWeight.Bold)
             if (m > 0) Text("💰".repeat(m))
             if (st > 0) Text("★".repeat(st), color = Gold, fontWeight = FontWeight.Bold)
             Spacer(Modifier.weight(1f))
             if (signal.json.has("wr")) {
-                val avg = signal.json.optDouble("avg_r")
+                // ⚡ dengan SL+ 0,7R (otomatis): pakai statistik skema itu (WR lebih tinggi)
+                val s07 = signal.json.has("wr07") && SignalRepository.money().use07(signal.id, signal.tier())
+                val avg = signal.json.optDouble(if (s07) "avg_r07" else "avg_r")
                 Pill("${signed(avg)}R", if (avg > 0) BuyColor else SellColor)
-                Pill("WR ${fmt(signal.json.optDouble("wr"), 0)}%", Gold)
+                Pill("WR ${fmt(signal.json.optDouble(if (s07) "wr07" else "wr"), 0)}%", Gold)
             }
         }
     }

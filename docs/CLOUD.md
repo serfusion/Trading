@@ -101,6 +101,8 @@ di aplikasi.
 | `CHAT_KEY` | (opsional) kunci tab **Tanya**; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
 | `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
 | `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
+| `WAR_MODE` | (opsional) `1` = label ⚠️ mode perang di sinyal XAU & heartbeat saat WTI (FRED, tanpa kunci) naik ≥ 10% dalam 10 hari bursa (default; XAU **tidak** dijeda), `0` = mati |
+| `WAR_BACKUP` | (opsional) `1` = bila FRED gagal/basi (data terbaru > 10 hari; FRED WTI normal terbit mingguan), label mode perang memakai ETF USO dari Twelve Data (default; paling sering tiap 6 jam, cache di baris `perang`), `0` = mati |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -173,7 +175,7 @@ Kontrol juga bisa lewat HTTP: `GET/POST https://DOMAIN_KAMU/api/control` dengan 
 `X-Control-Key: CONTROL_KEY`, body mis. `{"auto": true, "leg_lot": 0.01, "legs": 5}` atau
 `{"close_all": true}`.
 
-## Tab Tanya (chat berbasis data, tanpa AI)
+## Tab News (kalender + chat berbasis data, tanpa AI)
 
 `POST /api/chat` (`cloud/api/chat.py`, `_chat.py`) menjawab dari **data** saja — tanpa AI, tanpa API berbayar,
 hanya library standar:
@@ -190,6 +192,17 @@ hanya library standar:
 - Pertanyaan bebas juga dikenali: nama berita, arah ("lebih tinggi/kecil dari perkiraan", "hawkish"), angka
   ("NFP 45K" → Cons & Prev dari kalender minggu ini), waktu ("sebelum" / "sudah keluar"), "sinyal terbuka",
   "SL+/TP", "BTC funding", "berita minggu ini". Hasil rilis tidak diambil otomatis — pengguna mengisi Act.
+
+Aplikasi 3.8: tab **News** = kalender USD high-impact minggu ini (tanggal/jam WIB otomatis dari ForexFactory), Act
+otomatis dari CSV publik FRED (tanpa API key) untuk NFP, Unemployment Rate, CPI, Core CPI, CPI y/y, PPI, Core PPI,
+Retail, Core Retail, Core PCE, Claims, GDP — hanya bila periode acuannya sudah dimuat FRED (biasanya menit s/d ±1 jam
+setelah rilis; bisa selisih 0,1 karena pembulatan). Tekan berita → analisa Act/Cons/Prev. Entry/TP/SL berita tidak
+disarankan: `research/news_trade.py` (36 cara, semua rugi).
+Aplikasi 3.9: kartu **Status tren sekarang** di tab News — tiap indikator (momentum, SMA, Donchian, Supertrend,
+RSI, pindah tren, konsensus, yield riil, dolar) dengan arah sekarang dan % seberapa sering arah itu benar
+(1 hari / 1 minggu / 1 bulan; data `cloud/api/tren_stats.json` dari `research/tren_kedepan.py`), diurutkan dari yang
+paling sering benar di atas tebakan dasar. Dihitung `cloud/api/_tren.py` dari candle harian Twelve Data (cache 3 jam
+di baris Supabase `tren`, ±2 kredit) + CSV FRED. Status, bukan ramalan (riset bagian 16: tidak ada yang lolos).
 
 Pengaturan: tidak ada environment variable tambahan. Di aplikasi ⚙️ → **Alamat cloud** = domain Vercel (mis.
 `https://signal.domainkamu.com`). Kunci = topik ntfy (atau `CHAT_KEY`). Chat **tidak** membuka order dan jawabannya
@@ -240,3 +253,20 @@ Dari `docs/RISET_DATA_EKSTERNAL.md` (hanya dua filter yang lolos kriteria ketat;
 - Jangan jalankan bot PC (`python -m xau_bot run`) dan versi cloud ke topik yang sama bersamaan,
   kecuali ingin menerima dua sumber sinyal.
 - Kalau `ok: false`, pesan `error` menjelaskan penyebabnya (mis. env belum diisi, API key salah).
+
+## ⚡ kesempatan emas & peringkat (30 Sep 2026)
+
+Setiap sinyal membawa `tier`: `zap` (⚡ Emas), `silver` (🥈), `bronze` (🥉), `biasa`, dan `vol_pct` (XAU:
+persentil ATR14 60 hari). ⚡ = XAU konf+⭐ dengan `vol_pct` < 0,331, atau BTC ⭐. Untuk ⚡, `wr/avg_r` diganti
+statistik kelompok ⚡ sendiri dan ditambah `wr07/avg_r07` (skema SL+ 0,7R). Sumber: `research/momen.py`,
+`docs/MOMEN_PERANG.md`.
+
+| Peringkat | XAU | BTC | Hasil (2012/2016–2021 / 5 tahun terakhir) |
+|---|---|---|---|
+| ⚡ | konf+⭐ & volatilitas rendah | ⭐ | XAU +0,95 / +0,53R, BTC +0,97 / +0,64R |
+| 🥈 | – | konf+⭐ | +0,56 / +0,25R |
+| 🥉 | konf+⭐; konf & volatilitas rendah | – | ±+0,1 / +0,17R |
+| Biasa | konf | konf | XAU −0,13 / +0,13R, BTC +0,62 / ±0R |
+
+Aplikasi 3.11: lot per peringkat (⚡ 1%, 🥈/🥉 0,5%, biasa setengahnya bila Modal diisi), SL+ otomatis (⚡ & BTC di
+0,7R, XAU lainnya setelah TP1), modal otomatis, dan kurs bawaan Rp17.500.
