@@ -52,7 +52,9 @@ def run() -> tuple[int, dict]:
     cfg = {**_core.CFG, "legs": int(env.get("LEGS", _core.CFG["legs"])),
            "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"])),
            "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10)),
-           "star_only": env.get("STAR_ONLY", "0") == "1"}   # 1 = hanya kirim sinyal ⭐
+           "star_only": env.get("STAR_ONLY", "0") == "1",   # 1 = hanya kirim sinyal ⭐
+           # validasi arah H4 EMA50 untuk 💰 XAU (research/alchemist.py; XAU_H4_FILTER=0 untuk mematikan)
+           "h4_filter": env.get("XAU_H4_FILTER", "1") == "1"}
     if env.get("WAR_MODE", "1") == "1":    # ⚠️ mode perang (label saja, XAU tidak dijeda)
         try:
             import _perang
