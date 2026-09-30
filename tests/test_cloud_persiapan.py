@@ -80,3 +80,11 @@ def test_detik_utamakan_exness(monkeypatch):
             "XAU_EXNESS": {"SEMUA": {"teks": "exness", "alarm": "exness"}}}
     monkeypatch.setattr(_persiapan, "DETIK", fake)
     assert _persiapan.detik("NFP") == "exness" and _persiapan.alarm_texts()["NFP"]["alarm"] == "exness"
+
+
+def test_kesimpulan_otomatis_setelah_act_keluar():
+    k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
+    assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"].startswith("🟢")
+    assert _persiapan.kesimpulan("CPI m/m", "", "0.3%") is None
+    assert _persiapan.kesimpulan("Tidak dikenal", "1", "2") is None
+    assert _persiapan.kesimpulan("Non-Farm Employment Change", "250K", "98K")["hasil"] == "atas"

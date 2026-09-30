@@ -76,8 +76,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `python -m research.news_detik XAU` / `BTC` (menulis `cloud/api/detik.json`).
 - Aplikasi 3.13: pengingat ⏱️ 1 menit sebelum rilis (`NewsAlarm.kt`), baris ⏱️ di kartu 🎯, jawaban Tanya
   "detik pertama". Hanya info, tanpa order. Arsip tick Exness (`ticks.ex2archive.com`) diblokir jaringan (403).
-- Hasil (710 rilis XAU): manual (detik ke-5) −$0,65/0,01 lot, pending ±$2 −$0,40; hanya "ikut kejutan Act ≤ 1–2
-  detik" positif (+$0,92) tapi negatif dengan slippage/latensi realistis. BTC: ±0, untung "ikut arah" 61% dari 2022.
+- Hasil (1.260 rilis XAU Dukascopy): manual (detik ke-5) −$0,59/0,01 lot, pending ±$2 −$0,50; hanya "ikut kejutan
+  Act ≤ 1–2 detik" positif (+$0,69) tapi negatif dengan slippage/latensi realistis. BTC: ±0, untung "ikut arah" 61% dari 2022.
   Otomatisasi ≤ 1 detik (feed berbayar) TIDAK dipasang — butuh izin.
 - Tick asli Exness (`ticks.ex2archive.com` DIBUKA pengguna 30 Sep; `research/exness.py`, XAUUSDc & BTCUSDm): pending
   ±$1 NFP +$3,18/0,01 lot di feed Exness tapi −$1,87 di Dukascopy (rilis sama) → "belum terbukti, uji maju lot
