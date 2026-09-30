@@ -90,6 +90,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - `research/news_pra.py`: entry t0−1, tutup 1–3 dtk. Jam feed bersih (t0−5→−1 searah kejutan 50%). Walau kejutan
   ditebak 100% benar: tutup 1 dtk rugi spread, 2 dtk butuh 95%, 3 dtk butuh 72% (realistis 94%). 16 petunjuk (ULANG,
   Act→Prev, P1/P7 CPI, drift/lawan, selalu BUY/SELL): 0 lolos. Jangan sarankan entry sebelum rilis.
+- Lanjutan `research/news_pra2.py` / `docs/NEWS_PRA2.md` (tutup 1 dtk–3 mnt, 28 cara keluar): literatur (anchoring
+  Campbell-Sharpe, drift pra-rilis Kurov, momentum kejutan, ADP besar), model logistik walk-forward, straddle t0−1
+  (+ "perlindungan gap" Exness), hedge: 11.116 kombinasi, 0 lolos di kedua feed. Tebakan terbaik ±53% vs butuh
+  ≥ 59% (sempurna) / ≥ 75% (realistis). Kandidat satu-satunya: straddle ±$1–2 (positif hanya di feed Exness).
 
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
