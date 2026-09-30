@@ -36,8 +36,21 @@
     "tahun": 11.11,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=1190): 5 dtk pertama bergerak ±0,050%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 69%, rata +0,012% per trade (5 th +0,007%; n=255). Pending Buy/Sell Stop ±0,100%: menang 68% tapi rata −0,035% per trade (5 th −0,042%; n=878). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,050%. Ikut lonjakan manual: menang 69%, rata +0,012% per trade (5 th +0,007%; n=255). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 1134,
+    "wr": 68.61,
+    "avg": -0.71,
+    "total": -807.36,
+    "t": -2.24,
+    "lama": -0.99,
+    "n_lama": 399,
+    "baru": -0.56,
+    "n_baru": 735,
+    "tahun": 22.22,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=1190): 5 dtk pertama bergerak ±0,050%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 69% rilis, rata +0,012% per trade (5 th +0,007%; n=255). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 69% rilis tapi rata −0,036% per trade (5 th −0,028%; n=1134). Pending ±0,100%: untung di 68% rilis tapi rata −0,035% per trade (5 th −0,042%; n=878). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,050%. Pending ±0,050%: untung di 69% rilis tapi rata −0,036% per trade (5 th −0,028%; n=1134). Ikut lonjakan manual: untung di 69% rilis, rata +0,012% per trade (5 th +0,007%; n=255). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "ADP": {
    "n": 76,
@@ -75,8 +88,21 @@
     "tahun": 62.5,
     "n_tahun": 8
    },
-   "teks": "BTC (2018–2026, n=76): 5 dtk pertama bergerak ±0,040%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67% tapi rata −0,022% per trade (5 th −0,067%; n=6). Pending Buy/Sell Stop ±0,100%: menang 73%, rata +0,013% per trade (5 th −0,022%; n=49). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,040%. Ikut lonjakan manual: menang 67% tapi rata −0,022% per trade (5 th −0,067%; n=6). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 72,
+    "wr": 79.17,
+    "avg": -0.88,
+    "total": -63.21,
+    "t": -0.57,
+    "lama": -3.22,
+    "n_lama": 23,
+    "baru": 0.22,
+    "n_baru": 49,
+    "tahun": 77.78,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=76): 5 dtk pertama bergerak ±0,040%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis tapi rata −0,022% per trade (5 th −0,067%; n=6). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 79% rilis tapi rata −0,044% per trade (5 th +0,011%; n=72). Pending ±0,100%: untung di 73% rilis, rata +0,013% per trade (5 th −0,022%; n=49). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,040%. Pending ±0,050%: untung di 79% rilis tapi rata −0,044% per trade (5 th +0,011%; n=72). Ikut lonjakan manual: untung di 67% rilis tapi rata −0,022% per trade (5 th −0,067%; n=6). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "CLAIMS": {
    "n": 106,
@@ -114,8 +140,21 @@
     "tahun": 40.0,
     "n_tahun": 5
    },
-   "teks": "BTC (2020–2026, n=106): 5 dtk pertama bergerak ±0,027%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 56% tapi rata −0,148% per trade (5 th −0,148%; n=9). Pending Buy/Sell Stop ±0,100%: menang 57% tapi rata −0,105% per trade (5 th −0,116%; n=60). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,027%. Ikut lonjakan manual: menang 56% tapi rata −0,148% per trade (5 th −0,148%; n=9). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 103,
+    "wr": 65.05,
+    "avg": -0.62,
+    "total": -63.54,
+    "t": -1.55,
+    "lama": -2.39,
+    "n_lama": 7,
+    "baru": -0.49,
+    "n_baru": 96,
+    "tahun": 0.0,
+    "n_tahun": 5
+   },
+   "teks": "BTC (Binance) (2020–2026, n=106): 5 dtk pertama bergerak ±0,027%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 56% rilis tapi rata −0,148% per trade (5 th −0,148%; n=9). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 65% rilis tapi rata −0,031% per trade (5 th −0,025%; n=103). Pending ±0,100%: untung di 57% rilis tapi rata −0,105% per trade (5 th −0,116%; n=60). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,027%. Pending ±0,050%: untung di 65% rilis tapi rata −0,031% per trade (5 th −0,025%; n=103). Ikut lonjakan manual: untung di 56% rilis tapi rata −0,148% per trade (5 th −0,148%; n=9). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "CPI": {
    "n": 106,
@@ -153,8 +192,21 @@
     "tahun": 66.67,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=106): 5 dtk pertama bergerak ±0,242%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 79%, rata +0,248% per trade (5 th +0,249%; n=52). Pending Buy/Sell Stop ±0,100%: menang 75%, rata +0,146% per trade (5 th +0,199%; n=84). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,242%. Ikut lonjakan manual: menang 79%, rata +0,248% per trade (5 th +0,249%; n=52). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 99,
+    "wr": 65.66,
+    "avg": 0.07,
+    "total": 7.13,
+    "t": 0.03,
+    "lama": -0.63,
+    "n_lama": 39,
+    "baru": 0.53,
+    "n_baru": 60,
+    "tahun": 44.44,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=106): 5 dtk pertama bergerak ±0,242%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 79% rilis, rata +0,248% per trade (5 th +0,249%; n=52). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 66% rilis, rata +0,004% per trade (5 th +0,027%; n=99). Pending ±0,100%: untung di 75% rilis, rata +0,146% per trade (5 th +0,199%; n=84). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,242%. Pending ±0,050%: untung di 66% rilis, rata +0,004% per trade (5 th +0,027%; n=99). Ikut lonjakan manual: untung di 79% rilis, rata +0,248% per trade (5 th +0,249%; n=52). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "DURABLE": {
    "n": 21,
@@ -182,8 +234,21 @@
     "tahun": 50.0,
     "n_tahun": 4
    },
-   "teks": "BTC (2018–2024, n=21): 5 dtk pertama bergerak ±0,020%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±0,100%: menang 64% tapi rata −0,020% per trade (5 th +0,011%; n=14). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,020%. Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 20,
+    "wr": 75.0,
+    "avg": 0.29,
+    "total": 5.7,
+    "t": 0.42,
+    "lama": 0.22,
+    "n_lama": 19,
+    "baru": 1.44,
+    "n_baru": 1,
+    "tahun": 75.0,
+    "n_tahun": 4
+   },
+   "teks": "BTC (Binance) (2018–2024, n=21): 5 dtk pertama bergerak ±0,020%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 75% rilis, rata +0,015% per trade (5 th +0,072%; n=20). Pending ±0,100%: untung di 64% rilis tapi rata −0,020% per trade (5 th +0,011%; n=14). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,020%. Pending ±0,050%: untung di 75% rilis, rata +0,015% per trade (5 th +0,072%; n=20). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "FOMC": {
    "n": 71,
@@ -221,8 +286,21 @@
     "tahun": 44.44,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=71): 5 dtk pertama bergerak ±0,103%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 59% tapi rata −0,328% per trade (5 th −0,317%; n=27). Pending Buy/Sell Stop ±0,100%: menang 72% tapi rata −0,011% per trade (5 th −0,059%; n=61). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,103%. Ikut lonjakan manual: menang 59% tapi rata −0,328% per trade (5 th −0,317%; n=27). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 68,
+    "wr": 70.59,
+    "avg": -1.83,
+    "total": -124.49,
+    "t": -0.83,
+    "lama": -1.69,
+    "n_lama": 28,
+    "baru": -1.93,
+    "n_baru": 40,
+    "tahun": 44.44,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=71): 5 dtk pertama bergerak ±0,103%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 59% rilis tapi rata −0,328% per trade (5 th −0,317%; n=27). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 71% rilis tapi rata −0,091% per trade (5 th −0,097%; n=68). Pending ±0,100%: untung di 72% rilis tapi rata −0,011% per trade (5 th −0,059%; n=61). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,103%. Pending ±0,050%: untung di 71% rilis tapi rata −0,091% per trade (5 th −0,097%; n=68). Ikut lonjakan manual: untung di 59% rilis tapi rata −0,328% per trade (5 th −0,317%; n=27). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "GDP": {
    "n": 55,
@@ -260,8 +338,21 @@
     "tahun": 25.0,
     "n_tahun": 8
    },
-   "teks": "BTC (2018–2025, n=55): 5 dtk pertama bergerak ±0,027%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67% tapi rata −0,013% per trade (5 th −0,013%; n=3). Pending Buy/Sell Stop ±0,100%: menang 51% tapi rata −0,147% per trade (5 th −0,122%; n=37). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,027%. Ikut lonjakan manual: menang 67% tapi rata −0,013% per trade (5 th −0,013%; n=3). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 50,
+    "wr": 60.0,
+    "avg": -1.19,
+    "total": -59.6,
+    "t": -1.17,
+    "lama": -1.55,
+    "n_lama": 24,
+    "baru": -0.86,
+    "n_baru": 26,
+    "tahun": 25.0,
+    "n_tahun": 8
+   },
+   "teks": "BTC (Binance) (2018–2025, n=55): 5 dtk pertama bergerak ±0,027%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis tapi rata −0,013% per trade (5 th −0,013%; n=3). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 60% rilis tapi rata −0,059% per trade (5 th −0,043%; n=50). Pending ±0,100%: untung di 51% rilis tapi rata −0,147% per trade (5 th −0,122%; n=37). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,027%. Pending ±0,050%: untung di 60% rilis tapi rata −0,059% per trade (5 th −0,043%; n=50). Ikut lonjakan manual: untung di 67% rilis tapi rata −0,013% per trade (5 th −0,013%; n=3). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "ISM": {
    "n": 177,
@@ -299,8 +390,21 @@
     "tahun": 22.22,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=177): 5 dtk pertama bergerak ±0,058%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 76%, rata +0,046% per trade (5 th +0,030%; n=29). Pending Buy/Sell Stop ±0,100%: menang 72% tapi rata −0,061% per trade (5 th −0,068%; n=138). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,058%. Ikut lonjakan manual: menang 76%, rata +0,046% per trade (5 th +0,030%; n=29). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 171,
+    "wr": 70.18,
+    "avg": -0.8,
+    "total": -137.3,
+    "t": -1.61,
+    "lama": -0.56,
+    "n_lama": 70,
+    "baru": -0.97,
+    "n_baru": 101,
+    "tahun": 33.33,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=177): 5 dtk pertama bergerak ±0,058%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 76% rilis, rata +0,046% per trade (5 th +0,030%; n=29). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 70% rilis tapi rata −0,040% per trade (5 th −0,048%; n=171). Pending ±0,100%: untung di 72% rilis tapi rata −0,061% per trade (5 th −0,068%; n=138). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,058%. Pending ±0,050%: untung di 70% rilis tapi rata −0,040% per trade (5 th −0,048%; n=171). Ikut lonjakan manual: untung di 76% rilis, rata +0,046% per trade (5 th +0,030%; n=29). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "JOLTS": {
    "n": 30,
@@ -338,8 +442,21 @@
     "tahun": 20.0,
     "n_tahun": 5
    },
-   "teks": "BTC (2021–2025, n=30): 5 dtk pertama bergerak ±0,067%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 78%, rata +0,059% per trade (5 th +0,059%; n=9). Pending Buy/Sell Stop ±0,100%: menang 65% tapi rata −0,146% per trade (5 th −0,146%; n=26). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,067%. Ikut lonjakan manual: menang 78%, rata +0,059% per trade (5 th +0,059%; n=9). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 29,
+    "wr": 62.07,
+    "avg": -2.19,
+    "total": -63.56,
+    "t": -1.74,
+    "lama": null,
+    "n_lama": 0,
+    "baru": -2.19,
+    "n_baru": 29,
+    "tahun": 20.0,
+    "n_tahun": 5
+   },
+   "teks": "BTC (Binance) (2021–2025, n=30): 5 dtk pertama bergerak ±0,067%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 78% rilis, rata +0,059% per trade (5 th +0,059%; n=9). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 62% rilis tapi rata −0,110% per trade (5 th −0,110%; n=29). Pending ±0,100%: untung di 65% rilis tapi rata −0,146% per trade (5 th −0,146%; n=26). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,067%. Pending ±0,050%: untung di 62% rilis tapi rata −0,110% per trade (5 th −0,110%; n=29). Ikut lonjakan manual: untung di 78% rilis, rata +0,059% per trade (5 th +0,059%; n=9). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "KONSUMEN": {
    "n": 100,
@@ -377,8 +494,21 @@
     "tahun": 44.44,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=100): 5 dtk pertama bergerak ±0,037%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 64% tapi rata −0,036% per trade (5 th −0,036%; n=11). Pending Buy/Sell Stop ±0,100%: menang 70% tapi rata −0,032% per trade (5 th −0,043%; n=71). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,037%. Ikut lonjakan manual: menang 64% tapi rata −0,036% per trade (5 th −0,036%; n=11). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 98,
+    "wr": 71.43,
+    "avg": -0.65,
+    "total": -63.95,
+    "t": -1.23,
+    "lama": 0.07,
+    "n_lama": 26,
+    "baru": -0.91,
+    "n_baru": 72,
+    "tahun": 66.67,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=100): 5 dtk pertama bergerak ±0,037%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 64% rilis tapi rata −0,036% per trade (5 th −0,036%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 71% rilis tapi rata −0,033% per trade (5 th −0,045%; n=98). Pending ±0,100%: untung di 70% rilis tapi rata −0,032% per trade (5 th −0,043%; n=71). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,037%. Pending ±0,050%: untung di 71% rilis tapi rata −0,033% per trade (5 th −0,045%; n=98). Ikut lonjakan manual: untung di 64% rilis tapi rata −0,036% per trade (5 th −0,036%; n=11). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "MINYAK": {
    "n": 47,
@@ -416,8 +546,21 @@
     "tahun": 0.0,
     "n_tahun": 2
    },
-   "teks": "BTC (2018–2020, n=47): 5 dtk pertama bergerak ±0,017%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 33% tapi rata −0,180% per trade (n=3). Pending Buy/Sell Stop ±0,100%: menang 55% tapi rata −0,071% per trade (n=31). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,017%. Ikut lonjakan manual: menang 33% tapi rata −0,180% per trade (n=3). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 43,
+    "wr": 58.14,
+    "avg": -1.25,
+    "total": -53.65,
+    "t": -1.5,
+    "lama": -1.25,
+    "n_lama": 43,
+    "baru": null,
+    "n_baru": 0,
+    "tahun": 33.33,
+    "n_tahun": 3
+   },
+   "teks": "BTC (Binance) (2018–2020, n=47): 5 dtk pertama bergerak ±0,017%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 33% rilis tapi rata −0,180% per trade (n=3). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 58% rilis tapi rata −0,062% per trade (n=43). Pending ±0,100%: untung di 55% rilis tapi rata −0,071% per trade (n=31). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,017%. Pending ±0,050%: untung di 58% rilis tapi rata −0,062% per trade (n=43). Ikut lonjakan manual: untung di 33% rilis tapi rata −0,180% per trade (n=3). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "NFP": {
    "n": 105,
@@ -455,8 +598,21 @@
     "tahun": 55.56,
     "n_tahun": 9
    },
-   "teks": "BTC (2018–2026, n=105): 5 dtk pertama bergerak ±0,206%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 65% tapi rata −0,027% per trade (5 th −0,069%; n=46). Pending Buy/Sell Stop ±0,100%: menang 66% tapi rata −0,065% per trade (5 th −0,141%; n=89). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,206%. Ikut lonjakan manual: menang 65% tapi rata −0,027% per trade (5 th −0,069%; n=46). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 100,
+    "wr": 71.0,
+    "avg": -0.93,
+    "total": -93.43,
+    "t": -0.79,
+    "lama": -0.53,
+    "n_lama": 41,
+    "baru": -1.22,
+    "n_baru": 59,
+    "tahun": 55.56,
+    "n_tahun": 9
+   },
+   "teks": "BTC (Binance) (2018–2026, n=105): 5 dtk pertama bergerak ±0,206%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 65% rilis tapi rata −0,027% per trade (5 th −0,069%; n=46). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 71% rilis tapi rata −0,046% per trade (5 th −0,061%; n=100). Pending ±0,100%: untung di 66% rilis tapi rata −0,065% per trade (5 th −0,141%; n=89). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,206%. Pending ±0,050%: untung di 71% rilis tapi rata −0,046% per trade (5 th −0,061%; n=100). Ikut lonjakan manual: untung di 65% rilis tapi rata −0,027% per trade (5 th −0,069%; n=46). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "PCE": {
    "n": 53,
@@ -494,8 +650,21 @@
     "tahun": 33.33,
     "n_tahun": 6
    },
-   "teks": "BTC (2021–2026, n=53): 5 dtk pertama bergerak ±0,028%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 73% tapi rata −0,004% per trade (5 th −0,004%; n=11). Pending Buy/Sell Stop ±0,100%: menang 54% tapi rata −0,091% per trade (5 th −0,096%; n=41). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,028%. Ikut lonjakan manual: menang 73% tapi rata −0,004% per trade (5 th −0,004%; n=11). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 51,
+    "wr": 56.86,
+    "avg": -0.68,
+    "total": -34.63,
+    "t": -0.51,
+    "lama": 1.41,
+    "n_lama": 2,
+    "baru": -0.76,
+    "n_baru": 49,
+    "tahun": 50.0,
+    "n_tahun": 6
+   },
+   "teks": "BTC (Binance) (2021–2026, n=53): 5 dtk pertama bergerak ±0,028%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 73% rilis tapi rata −0,004% per trade (5 th −0,004%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 57% rilis tapi rata −0,034% per trade (5 th −0,038%; n=51). Pending ±0,100%: untung di 54% rilis tapi rata −0,091% per trade (5 th −0,096%; n=41). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,028%. Pending ±0,050%: untung di 57% rilis tapi rata −0,034% per trade (5 th −0,038%; n=51). Ikut lonjakan manual: untung di 73% rilis tapi rata −0,004% per trade (5 th −0,004%; n=11). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "PMI": {
    "n": 51,
@@ -533,8 +702,21 @@
     "tahun": 62.5,
     "n_tahun": 8
    },
-   "teks": "BTC (2019–2026, n=51): 5 dtk pertama bergerak ±0,051%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 75%, rata +0,033% per trade (5 th +0,033%; n=8). Pending Buy/Sell Stop ±0,100%: menang 80% tapi rata −0,046% per trade (5 th −0,015%; n=41). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,051%. Ikut lonjakan manual: menang 75%, rata +0,033% per trade (5 th +0,033%; n=8). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 50,
+    "wr": 78.0,
+    "avg": -0.19,
+    "total": -9.31,
+    "t": -0.21,
+    "lama": -4.02,
+    "n_lama": 8,
+    "baru": 0.54,
+    "n_baru": 42,
+    "tahun": 50.0,
+    "n_tahun": 8
+   },
+   "teks": "BTC (Binance) (2019–2026, n=51): 5 dtk pertama bergerak ±0,051%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 75% rilis, rata +0,033% per trade (5 th +0,033%; n=8). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 78% rilis tapi rata −0,009% per trade (5 th +0,027%; n=50). Pending ±0,100%: untung di 80% rilis tapi rata −0,046% per trade (5 th −0,015%; n=41). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,051%. Pending ±0,050%: untung di 78% rilis tapi rata −0,009% per trade (5 th +0,027%; n=50). Ikut lonjakan manual: untung di 75% rilis, rata +0,033% per trade (5 th +0,033%; n=8). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "PPI": {
    "n": 73,
@@ -572,8 +754,21 @@
     "tahun": 75.0,
     "n_tahun": 8
    },
-   "teks": "BTC (2018–2026, n=73): 5 dtk pertama bergerak ±0,105%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 63% tapi rata −0,003% per trade (5 th +0,007%; n=27). Pending Buy/Sell Stop ±0,100%: menang 75%, rata +0,042% per trade (5 th +0,054%; n=57). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,105%. Ikut lonjakan manual: menang 63% tapi rata −0,003% per trade (5 th +0,007%; n=27). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 71,
+    "wr": 73.24,
+    "avg": 0.41,
+    "total": 28.87,
+    "t": 0.39,
+    "lama": 0.07,
+    "n_lama": 20,
+    "baru": 0.54,
+    "n_baru": 51,
+    "tahun": 62.5,
+    "n_tahun": 8
+   },
+   "teks": "BTC (Binance) (2018–2026, n=73): 5 dtk pertama bergerak ±0,105%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 63% rilis tapi rata −0,003% per trade (5 th +0,007%; n=27). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 73% rilis, rata +0,021% per trade (5 th +0,027%; n=71). Pending ±0,100%: untung di 75% rilis, rata +0,042% per trade (5 th +0,054%; n=57). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,105%. Pending ±0,050%: untung di 73% rilis, rata +0,021% per trade (5 th +0,027%; n=71). Ikut lonjakan manual: untung di 63% rilis tapi rata −0,003% per trade (5 th +0,007%; n=27). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   },
   "RETAIL": {
    "n": 81,
@@ -611,8 +806,21 @@
     "tahun": 25.0,
     "n_tahun": 8
    },
-   "teks": "BTC (2018–2025, n=81): 5 dtk pertama bergerak ±0,038%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67%, rata +0,048% per trade (5 th −0,061%; n=12). Pending Buy/Sell Stop ±0,100%: menang 75% tapi rata −0,045% per trade (5 th −0,023%; n=55). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
-   "alarm": "BTC: 5 dtk pertama ±0,038%. Ikut lonjakan manual: menang 67%, rata +0,048% per trade (5 th −0,061%; n=12). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
+   "pending1": {
+    "n": 74,
+    "wr": 60.81,
+    "avg": -1.18,
+    "total": -87.09,
+    "t": -2.0,
+    "lama": -1.43,
+    "n_lama": 38,
+    "baru": -0.91,
+    "n_baru": 36,
+    "tahun": 25.0,
+    "n_tahun": 8
+   },
+   "teks": "BTC (Binance) (2018–2025, n=81): 5 dtk pertama bergerak ±0,038%, spread diasumsikan 0,03%. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis, rata +0,048% per trade (5 th −0,061%; n=12). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 61% rilis tapi rata −0,059% per trade (5 th −0,045%; n=74). Pending ±0,100%: untung di 75% rilis tapi rata −0,045% per trade (5 th −0,023%; n=55). ⚠️ 19 cara lolos uji (9 bisa manual); terbaik yang bisa manual: ikut lonjakan ≥0,100% di detik ke-5, tahan 15 mnt, SL 0,250% → rata +0,116% (dengan slippage & reaksi 2 dtk +0,073%); 61% untungnya dari tahun 2022 (rapuh).",
+   "alarm": "BTC (Binance): 5 dtk pertama ±0,038%. Pending ±0,050%: untung di 61% rilis tapi rata −0,059% per trade (5 th −0,045%; n=74). Ikut lonjakan manual: untung di 67% rilis, rata +0,048% per trade (5 th −0,061%; n=12). ⚠️ 9 cara manual lolos uji, 61% untungnya dari 2022 (rapuh)."
   }
  },
  "dibuat": "2026-09-30",
@@ -666,8 +874,8 @@
     "tahun": 23.53,
     "n_tahun": 17
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=1260): 5 dtk pertama bergerak ±$2,05, spread $0,46→$0,76 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 65% tapi rata −$0,59/0,01 lot (5 th −$0,21; n=450). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 65% tapi rata −$0,71/0,01 lot (5 th −$1,06; n=1143). Pending ±$2: menang 64% tapi rata −$0,50/0,01 lot (5 th −$0,21; n=888). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,05, spread melebar ke ±$0,76. Pending ±$1: menang 65% tapi rata −$0,71/0,01 lot (5 th −$1,06; n=1143). Ikut lonjakan manual: menang 65% tapi rata −$0,59/0,01 lot (5 th −$0,21; n=450). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=1260): 5 dtk pertama bergerak ±$2,05, spread $0,46→$0,76 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 65% rilis tapi rata −$0,59/0,01 lot (5 th −$0,21; n=450). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 65% rilis tapi rata −$0,71/0,01 lot (5 th −$1,06; n=1143). Pending ±$2: untung di 64% rilis tapi rata −$0,50/0,01 lot (5 th −$0,21; n=888). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,05, spread melebar ke ±$0,76. Pending ±$1: untung di 65% rilis tapi rata −$0,71/0,01 lot (5 th −$1,06; n=1143). Ikut lonjakan manual: untung di 65% rilis tapi rata −$0,59/0,01 lot (5 th −$0,21; n=450). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "ADP": {
    "n": 167,
@@ -718,8 +926,8 @@
     "tahun": 35.29,
     "n_tahun": 17
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=167): 5 dtk pertama bergerak ±$1,48, spread $0,42→$0,70 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 60% tapi rata −$1,14/0,01 lot (5 th −$1,25; n=52). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 69% tapi rata −$0,32/0,01 lot (5 th −$1,22; n=152). Pending ±$2: menang 63% tapi rata −$0,90/0,01 lot (5 th −$1,66; n=102). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,48, spread melebar ke ±$0,70. Pending ±$1: menang 69% tapi rata −$0,32/0,01 lot (5 th −$1,22; n=152). Ikut lonjakan manual: menang 60% tapi rata −$1,14/0,01 lot (5 th −$1,25; n=52). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=167): 5 dtk pertama bergerak ±$1,48, spread $0,42→$0,70 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 60% rilis tapi rata −$1,14/0,01 lot (5 th −$1,25; n=52). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 69% rilis tapi rata −$0,32/0,01 lot (5 th −$1,22; n=152). Pending ±$2: untung di 63% rilis tapi rata −$0,90/0,01 lot (5 th −$1,66; n=102). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,48, spread melebar ke ±$0,70. Pending ±$1: untung di 69% rilis tapi rata −$0,32/0,01 lot (5 th −$1,22; n=152). Ikut lonjakan manual: untung di 60% rilis tapi rata −$1,14/0,01 lot (5 th −$1,25; n=52). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "CLAIMS": {
    "n": 78,
@@ -770,8 +978,8 @@
     "tahun": 16.67,
     "n_tahun": 12
    },
-   "teks": "XAU (Dukascopy) (2011–2026, n=78): 5 dtk pertama bergerak ±$1,26, spread $0,45→$0,82 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 50% tapi rata −$0,72/0,01 lot (5 th +$0,55; n=8). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 60% tapi rata −$1,01/0,01 lot (5 th −$1,93; n=62). Pending ±$2: menang 63% tapi rata −$0,64/0,01 lot (5 th −$0,09; n=38). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,26, spread melebar ke ±$0,82. Pending ±$1: menang 60% tapi rata −$1,01/0,01 lot (5 th −$1,93; n=62). Ikut lonjakan manual: menang 50% tapi rata −$0,72/0,01 lot (5 th +$0,55; n=8). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2011–2026, n=78): 5 dtk pertama bergerak ±$1,26, spread $0,45→$0,82 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 50% rilis tapi rata −$0,72/0,01 lot (5 th +$0,55; n=8). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 60% rilis tapi rata −$1,01/0,01 lot (5 th −$1,93; n=62). Pending ±$2: untung di 63% rilis tapi rata −$0,64/0,01 lot (5 th −$0,09; n=38). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,26, spread melebar ke ±$0,82. Pending ±$1: untung di 60% rilis tapi rata −$1,01/0,01 lot (5 th −$1,93; n=62). Ikut lonjakan manual: untung di 50% rilis tapi rata −$0,72/0,01 lot (5 th +$0,55; n=8). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "CPI": {
    "n": 184,
@@ -822,8 +1030,8 @@
     "tahun": 37.5,
     "n_tahun": 16
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=184): 5 dtk pertama bergerak ±$5,74, spread $0,51→$1,01 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 68% tapi rata −$0,61/0,01 lot (5 th −$0,08; n=82). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 61% tapi rata −$0,56/0,01 lot (5 th −$0,41; n=165). Pending ±$2: menang 67%, rata +$0,18/0,01 lot (5 th +$1,13; n=128). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$5,74, spread melebar ke ±$1,01. Pending ±$1: menang 61% tapi rata −$0,56/0,01 lot (5 th −$0,41; n=165). Ikut lonjakan manual: menang 68% tapi rata −$0,61/0,01 lot (5 th −$0,08; n=82). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=184): 5 dtk pertama bergerak ±$5,74, spread $0,51→$1,01 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 68% rilis tapi rata −$0,61/0,01 lot (5 th −$0,08; n=82). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 61% rilis tapi rata −$0,56/0,01 lot (5 th −$0,41; n=165). Pending ±$2: untung di 67% rilis, rata +$0,18/0,01 lot (5 th +$1,13; n=128). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$5,74, spread melebar ke ±$1,01. Pending ±$1: untung di 61% rilis tapi rata −$0,56/0,01 lot (5 th −$0,41; n=165). Ikut lonjakan manual: untung di 68% rilis tapi rata −$0,61/0,01 lot (5 th −$0,08; n=82). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "FOMC": {
    "n": 113,
@@ -874,8 +1082,8 @@
     "tahun": 56.25,
     "n_tahun": 16
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=113): 5 dtk pertama bergerak ±$2,52, spread $0,63→$1,11 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67% tapi rata −$0,52/0,01 lot (5 th +$0,38; n=45). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 70% tapi rata −$0,78/0,01 lot (5 th −$1,86; n=108). Pending ±$2: menang 66% tapi rata −$1,03/0,01 lot (5 th −$2,09; n=101). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,52, spread melebar ke ±$1,11. Pending ±$1: menang 70% tapi rata −$0,78/0,01 lot (5 th −$1,86; n=108). Ikut lonjakan manual: menang 67% tapi rata −$0,52/0,01 lot (5 th +$0,38; n=45). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=113): 5 dtk pertama bergerak ±$2,52, spread $0,63→$1,11 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis tapi rata −$0,52/0,01 lot (5 th +$0,38; n=45). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 70% rilis tapi rata −$0,78/0,01 lot (5 th −$1,86; n=108). Pending ±$2: untung di 66% rilis tapi rata −$1,03/0,01 lot (5 th −$2,09; n=101). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,52, spread melebar ke ±$1,11. Pending ±$1: untung di 70% rilis tapi rata −$0,78/0,01 lot (5 th −$1,86; n=108). Ikut lonjakan manual: untung di 67% rilis tapi rata −$0,52/0,01 lot (5 th +$0,38; n=45). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "GDP": {
    "n": 106,
@@ -926,8 +1134,8 @@
     "tahun": 25.0,
     "n_tahun": 16
    },
-   "teks": "XAU (Dukascopy) (2010–2025, n=106): 5 dtk pertama bergerak ±$0,84, spread $0,42→$0,52 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 56% tapi rata −$0,79/0,01 lot (5 th −$1,60; n=18). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 61% tapi rata −$0,61/0,01 lot (5 th −$0,02; n=95). Pending ±$2: menang 54% tapi rata −$0,75/0,01 lot (5 th −$0,74; n=68). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$0,84, spread melebar ke ±$0,52. Pending ±$1: menang 61% tapi rata −$0,61/0,01 lot (5 th −$0,02; n=95). Ikut lonjakan manual: menang 56% tapi rata −$0,79/0,01 lot (5 th −$1,60; n=18). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2025, n=106): 5 dtk pertama bergerak ±$0,84, spread $0,42→$0,52 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 56% rilis tapi rata −$0,79/0,01 lot (5 th −$1,60; n=18). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 61% rilis tapi rata −$0,61/0,01 lot (5 th −$0,02; n=95). Pending ±$2: untung di 54% rilis tapi rata −$0,75/0,01 lot (5 th −$0,74; n=68). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$0,84, spread melebar ke ±$0,52. Pending ±$1: untung di 61% rilis tapi rata −$0,61/0,01 lot (5 th −$0,02; n=95). Ikut lonjakan manual: untung di 56% rilis tapi rata −$0,79/0,01 lot (5 th −$1,60; n=18). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "ISM": {
    "n": 54,
@@ -978,8 +1186,8 @@
     "tahun": 68.75,
     "n_tahun": 16
    },
-   "teks": "XAU (Dukascopy) (2010–2025, n=54): 5 dtk pertama bergerak ±$2,12, spread $0,44→$0,79 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 88%, rata +$0,10/0,01 lot (5 th −$0,12; n=17). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 78%, rata +$0,61/0,01 lot (5 th +$0,95; n=51). Pending ±$2: menang 81% tapi rata −$0,07/0,01 lot (5 th −$0,17; n=36). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,12, spread melebar ke ±$0,79. Pending ±$1: menang 78%, rata +$0,61/0,01 lot (5 th +$0,95; n=51). Ikut lonjakan manual: menang 88%, rata +$0,10/0,01 lot (5 th −$0,12; n=17). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2025, n=54): 5 dtk pertama bergerak ±$2,12, spread $0,44→$0,79 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 88% rilis, rata +$0,10/0,01 lot (5 th −$0,12; n=17). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 78% rilis, rata +$0,61/0,01 lot (5 th +$0,95; n=51). Pending ±$2: untung di 81% rilis tapi rata −$0,07/0,01 lot (5 th −$0,17; n=36). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,12, spread melebar ke ±$0,79. Pending ±$1: untung di 78% rilis, rata +$0,61/0,01 lot (5 th +$0,95; n=51). Ikut lonjakan manual: untung di 88% rilis, rata +$0,10/0,01 lot (5 th −$0,12; n=17). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "JOLTS": {
    "n": 35,
@@ -1030,8 +1238,8 @@
     "tahun": 33.33,
     "n_tahun": 6
    },
-   "teks": "XAU (Dukascopy) (2014–2025, n=35): 5 dtk pertama bergerak ±$1,65, spread $0,44→$0,51 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 92%, rata +$1,21/0,01 lot (5 th +$1,21; n=12). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 71% tapi rata −$1,02/0,01 lot (5 th −$0,99; n=31). Pending ±$2: menang 68% tapi rata −$1,46/0,01 lot (5 th −$1,46; n=28). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,65, spread melebar ke ±$0,51. Pending ±$1: menang 71% tapi rata −$1,02/0,01 lot (5 th −$0,99; n=31). Ikut lonjakan manual: menang 92%, rata +$1,21/0,01 lot (5 th +$1,21; n=12). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2014–2025, n=35): 5 dtk pertama bergerak ±$1,65, spread $0,44→$0,51 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 92% rilis, rata +$1,21/0,01 lot (5 th +$1,21; n=12). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 71% rilis tapi rata −$1,02/0,01 lot (5 th −$0,99; n=31). Pending ±$2: untung di 68% rilis tapi rata −$1,46/0,01 lot (5 th −$1,46; n=28). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,65, spread melebar ke ±$0,51. Pending ±$1: untung di 71% rilis tapi rata −$1,02/0,01 lot (5 th −$0,99; n=31). Ikut lonjakan manual: untung di 92% rilis, rata +$1,21/0,01 lot (5 th +$1,21; n=12). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "NFP": {
    "n": 171,
@@ -1082,8 +1290,8 @@
     "tahun": 41.18,
     "n_tahun": 17
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=171): 5 dtk pertama bergerak ±$5,53, spread $0,54→$1,14 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 62% tapi rata −$0,50/0,01 lot (5 th +$0,37; n=123). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 65% tapi rata −$1,80/0,01 lot (5 th −$3,92; n=165). Pending ±$2: menang 64%, rata +$0,03/0,01 lot (5 th +$2,97; n=165). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$5,53, spread melebar ke ±$1,14. Pending ±$1: menang 65% tapi rata −$1,80/0,01 lot (5 th −$3,92; n=165). Ikut lonjakan manual: menang 62% tapi rata −$0,50/0,01 lot (5 th +$0,37; n=123). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=171): 5 dtk pertama bergerak ±$5,53, spread $0,54→$1,14 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 62% rilis tapi rata −$0,50/0,01 lot (5 th +$0,37; n=123). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 65% rilis tapi rata −$1,80/0,01 lot (5 th −$3,92; n=165). Pending ±$2: untung di 64% rilis, rata +$0,03/0,01 lot (5 th +$2,97; n=165). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$5,53, spread melebar ke ±$1,14. Pending ±$1: untung di 65% rilis tapi rata −$1,80/0,01 lot (5 th −$3,92; n=165). Ikut lonjakan manual: untung di 62% rilis tapi rata −$0,50/0,01 lot (5 th +$0,37; n=123). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "PCE": {
    "n": 52,
@@ -1134,8 +1342,8 @@
     "tahun": 50.0,
     "n_tahun": 6
    },
-   "teks": "XAU (Dukascopy) (2021–2026, n=52): 5 dtk pertama bergerak ±$0,61, spread $0,44→$0,56 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 44% tapi rata −$0,65/0,01 lot (5 th −$0,65; n=9). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 65% tapi rata −$0,80/0,01 lot (5 th −$0,66; n=52). Pending ±$2: menang 63% tapi rata −$0,49/0,01 lot (5 th −$0,49; n=43). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$0,61, spread melebar ke ±$0,56. Pending ±$1: menang 65% tapi rata −$0,80/0,01 lot (5 th −$0,66; n=52). Ikut lonjakan manual: menang 44% tapi rata −$0,65/0,01 lot (5 th −$0,65; n=9). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2021–2026, n=52): 5 dtk pertama bergerak ±$0,61, spread $0,44→$0,56 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 44% rilis tapi rata −$0,65/0,01 lot (5 th −$0,65; n=9). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 65% rilis tapi rata −$0,80/0,01 lot (5 th −$0,66; n=52). Pending ±$2: untung di 63% rilis tapi rata −$0,49/0,01 lot (5 th −$0,49; n=43). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$0,61, spread melebar ke ±$0,56. Pending ±$1: untung di 65% rilis tapi rata −$0,80/0,01 lot (5 th −$0,66; n=52). Ikut lonjakan manual: untung di 44% rilis tapi rata −$0,65/0,01 lot (5 th −$0,65; n=9). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "PPI": {
    "n": 157,
@@ -1186,8 +1394,8 @@
     "tahun": 25.0,
     "n_tahun": 16
    },
-   "teks": "XAU (Dukascopy) (2010–2026, n=157): 5 dtk pertama bergerak ±$2,20, spread $0,45→$0,59 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 58% tapi rata −$1,12/0,01 lot (5 th −$0,85; n=40). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 61% tapi rata −$0,58/0,01 lot (5 th −$0,30; n=132). Pending ±$2: menang 60% tapi rata −$0,93/0,01 lot (5 th −$0,92; n=84). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,20, spread melebar ke ±$0,59. Pending ±$1: menang 61% tapi rata −$0,58/0,01 lot (5 th −$0,30; n=132). Ikut lonjakan manual: menang 58% tapi rata −$1,12/0,01 lot (5 th −$0,85; n=40). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2026, n=157): 5 dtk pertama bergerak ±$2,20, spread $0,45→$0,59 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 58% rilis tapi rata −$1,12/0,01 lot (5 th −$0,85; n=40). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 61% rilis tapi rata −$0,58/0,01 lot (5 th −$0,30; n=132). Pending ±$2: untung di 60% rilis tapi rata −$0,93/0,01 lot (5 th −$0,92; n=84). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$2,20, spread melebar ke ±$0,59. Pending ±$1: untung di 61% rilis tapi rata −$0,58/0,01 lot (5 th −$0,30; n=132). Ikut lonjakan manual: untung di 58% rilis tapi rata −$1,12/0,01 lot (5 th −$0,85; n=40). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   },
   "RETAIL": {
    "n": 127,
@@ -1238,8 +1446,8 @@
     "tahun": 26.67,
     "n_tahun": 15
    },
-   "teks": "XAU (Dukascopy) (2010–2025, n=127): 5 dtk pertama bergerak ±$1,83, spread $0,43→$0,60 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 73% tapi rata −$0,29/0,01 lot (5 th −$0,97; n=41). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 61% tapi rata −$0,46/0,01 lot (5 th −$0,44; n=117). Pending ±$2: menang 62% tapi rata −$0,64/0,01 lot (5 th −$0,87; n=90). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
-   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,83, spread melebar ke ±$0,60. Pending ±$1: menang 61% tapi rata −$0,46/0,01 lot (5 th −$0,44; n=117). Ikut lonjakan manual: menang 73% tapi rata −$0,29/0,01 lot (5 th −$0,97; n=41). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
+   "teks": "XAU (Dukascopy) (2010–2025, n=127): 5 dtk pertama bergerak ±$1,83, spread $0,43→$0,60 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 73% rilis tapi rata −$0,29/0,01 lot (5 th −$0,97; n=41). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 61% rilis tapi rata −$0,46/0,01 lot (5 th −$0,44; n=117). Pending ±$2: untung di 62% rilis tapi rata −$0,64/0,01 lot (5 th −$0,87; n=90). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1.",
+   "alarm": "XAU (Dukascopy): 5 dtk pertama ±$1,83, spread melebar ke ±$0,60. Pending ±$1: untung di 61% rilis tapi rata −$0,46/0,01 lot (5 th −$0,44; n=117). Ikut lonjakan manual: untung di 73% rilis tapi rata −$0,29/0,01 lot (5 th −$0,97; n=41). ⚠️ 12 cara lolos uji, semuanya butuh angka Act dalam 1–2 detik (feed berita otomatis), tidak bisa manual; 12 di antaranya rugi bila slippage $1."
   }
  },
  "XAU_EXNESS": {
@@ -1290,10 +1498,12 @@
     "baru": 0.85,
     "n_baru": 738,
     "tahun": 50.0,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": -0.74,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=1680): 5 dtk pertama bergerak ±$1,71, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 69% tapi rata −$0,16/0,01 lot (5 th +$0,12; n=472). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 70%, rata +$0,36/0,01 lot (5 th +$0,85; n=1388); feed Dukascopy: −$0,74. Pending ±$2: menang 68%, rata +$0,26/0,01 lot (5 th +$0,76; n=1024). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,71, spread melebar ke ±$0,20. Pending ±$1: menang 70%, rata +$0,36/0,01 lot (5 th +$0,85; n=1388); feed Dukascopy: −$0,74. Ikut lonjakan manual: menang 69% tapi rata −$0,16/0,01 lot (5 th +$0,12; n=472). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=1680): 5 dtk pertama bergerak ±$1,71, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 69% rilis tapi rata −$0,16/0,01 lot (5 th +$0,12; n=472). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 70% rilis, rata +$0,36/0,01 lot (5 th +$0,85; n=1388); feed Dukascopy: −$0,74. Pending ±$2: untung di 68% rilis, rata +$0,26/0,01 lot (5 th +$0,76; n=1024). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,71, spread melebar ke ±$0,20. Pending ±$1: untung di 70% rilis, rata +$0,36/0,01 lot (5 th +$0,85; n=1388); feed Dukascopy: −$0,74. Ikut lonjakan manual: untung di 69% rilis tapi rata −$0,16/0,01 lot (5 th +$0,12; n=472). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "ADP": {
    "n": 105,
@@ -1342,10 +1552,12 @@
     "baru": 0.21,
     "n_baru": 49,
     "tahun": 58.33,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": -0.52,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=105): 5 dtk pertama bergerak ±$1,62, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 55% tapi rata −$1,06/0,01 lot (5 th −$1,31; n=33). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 71%, rata +$0,09/0,01 lot (5 th +$0,21; n=98); feed Dukascopy: −$0,52. Pending ±$2: menang 68% tapi rata −$0,13/0,01 lot (5 th −$0,02; n=69). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,62, spread melebar ke ±$0,20. Pending ±$1: menang 71%, rata +$0,09/0,01 lot (5 th +$0,21; n=98); feed Dukascopy: −$0,52. Ikut lonjakan manual: menang 55% tapi rata −$1,06/0,01 lot (5 th −$1,31; n=33). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=105): 5 dtk pertama bergerak ±$1,62, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 55% rilis tapi rata −$1,06/0,01 lot (5 th −$1,31; n=33). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 71% rilis, rata +$0,09/0,01 lot (5 th +$0,21; n=98); feed Dukascopy: −$0,52. Pending ±$2: untung di 68% rilis tapi rata −$0,13/0,01 lot (5 th −$0,02; n=69). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,62, spread melebar ke ±$0,20. Pending ±$1: untung di 71% rilis, rata +$0,09/0,01 lot (5 th +$0,21; n=98); feed Dukascopy: −$0,52. Ikut lonjakan manual: untung di 55% rilis tapi rata −$1,06/0,01 lot (5 th −$1,31; n=33). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "CLAIMS": {
    "n": 207,
@@ -1394,10 +1606,12 @@
     "baru": -0.52,
     "n_baru": 96,
     "tahun": 12.5,
-    "n_tahun": 8
+    "n_tahun": 8,
+    "x": -1.32,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=207): 5 dtk pertama bergerak ±$1,07, spread $0,18→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 50% tapi rata −$2,09/0,01 lot (5 th −$2,09; n=24). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 64% tapi rata −$0,50/0,01 lot (5 th −$0,52; n=168); feed Dukascopy: −$1,32. Pending ±$2: menang 65% tapi rata −$0,64/0,01 lot (5 th −$0,35; n=99). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,07, spread melebar ke ±$0,20. Pending ±$1: menang 64% tapi rata −$0,50/0,01 lot (5 th −$0,52; n=168); feed Dukascopy: −$1,32. Ikut lonjakan manual: menang 50% tapi rata −$2,09/0,01 lot (5 th −$2,09; n=24). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=207): 5 dtk pertama bergerak ±$1,07, spread $0,18→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 50% rilis tapi rata −$2,09/0,01 lot (5 th −$2,09; n=24). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 64% rilis tapi rata −$0,50/0,01 lot (5 th −$0,52; n=168); feed Dukascopy: −$1,32. Pending ±$2: untung di 65% rilis tapi rata −$0,64/0,01 lot (5 th −$0,35; n=99). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,07, spread melebar ke ±$0,20. Pending ±$1: untung di 64% rilis tapi rata −$0,50/0,01 lot (5 th −$0,52; n=168); feed Dukascopy: −$1,32. Ikut lonjakan manual: untung di 50% rilis tapi rata −$2,09/0,01 lot (5 th −$2,09; n=24). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "CPI": {
    "n": 131,
@@ -1446,10 +1660,12 @@
     "baru": 4.92,
     "n_baru": 60,
     "tahun": 50.0,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": -0.47,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=131): 5 dtk pertama bergerak ±$4,86, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 75%, rata +$0,07/0,01 lot (5 th +$0,50; n=69). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 71%, rata +$2,21/0,01 lot (5 th +$4,92; n=127); feed Dukascopy: −$0,47. Pending ±$2: menang 73%, rata +$1,97/0,01 lot (5 th +$3,85; n=105). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$4,86, spread melebar ke ±$0,24. Pending ±$1: menang 71%, rata +$2,21/0,01 lot (5 th +$4,92; n=127); feed Dukascopy: −$0,47. Ikut lonjakan manual: menang 75%, rata +$0,07/0,01 lot (5 th +$0,50; n=69). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=131): 5 dtk pertama bergerak ±$4,86, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 75% rilis, rata +$0,07/0,01 lot (5 th +$0,50; n=69). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 71% rilis, rata +$2,21/0,01 lot (5 th +$4,92; n=127); feed Dukascopy: −$0,47. Pending ±$2: untung di 73% rilis, rata +$1,97/0,01 lot (5 th +$3,85; n=105). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$4,86, spread melebar ke ±$0,24. Pending ±$1: untung di 71% rilis, rata +$2,21/0,01 lot (5 th +$4,92; n=127); feed Dukascopy: −$0,47. Ikut lonjakan manual: untung di 75% rilis, rata +$0,07/0,01 lot (5 th +$0,50; n=69). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "DURABLE": {
    "n": 34,
@@ -1490,8 +1706,8 @@
     "tahun": 14.29,
     "n_tahun": 7
    },
-   "teks": "XAU (Exness Cent) (2015–2024, n=34): 5 dtk pertama bergerak ±$0,29, spread $0,25→$0,28 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 53% tapi rata −$0,69/0,01 lot (5 th −$2,16; n=15). Pending ±$2: menang 40% tapi rata −$1,94/0,01 lot (5 th −$3,31; n=5). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,29, spread melebar ke ±$0,28. Pending ±$1: menang 53% tapi rata −$0,69/0,01 lot (5 th −$2,16; n=15). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2024, n=34): 5 dtk pertama bergerak ±$0,29, spread $0,25→$0,28 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 53% rilis tapi rata −$0,69/0,01 lot (5 th −$2,16; n=15). Pending ±$2: untung di 40% rilis tapi rata −$1,94/0,01 lot (5 th −$3,31; n=5). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,29, spread melebar ke ±$0,28. Pending ±$1: untung di 53% rilis tapi rata −$0,69/0,01 lot (5 th −$2,16; n=15). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "FOMC": {
    "n": 88,
@@ -1540,10 +1756,12 @@
     "baru": -3.51,
     "n_baru": 40,
     "tahun": 66.67,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": -0.91,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=88): 5 dtk pertama bergerak ±$2,13, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 78%, rata +$1,04/0,01 lot (5 th +$2,49; n=36). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 74% tapi rata −$1,56/0,01 lot (5 th −$3,51; n=85); feed Dukascopy: −$0,91. Pending ±$2: menang 76%, rata +$0,35/0,01 lot (5 th +$0,80; n=80). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,13, spread melebar ke ±$0,20. Pending ±$1: menang 74% tapi rata −$1,56/0,01 lot (5 th −$3,51; n=85); feed Dukascopy: −$0,91. Ikut lonjakan manual: menang 78%, rata +$1,04/0,01 lot (5 th +$2,49; n=36). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=88): 5 dtk pertama bergerak ±$2,13, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 78% rilis, rata +$1,04/0,01 lot (5 th +$2,49; n=36). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 74% rilis tapi rata −$1,56/0,01 lot (5 th −$3,51; n=85); feed Dukascopy: −$0,91. Pending ±$2: untung di 76% rilis, rata +$0,35/0,01 lot (5 th +$0,80; n=80). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,13, spread melebar ke ±$0,20. Pending ±$1: untung di 74% rilis tapi rata −$1,56/0,01 lot (5 th −$3,51; n=85); feed Dukascopy: −$0,91. Ikut lonjakan manual: untung di 78% rilis, rata +$1,04/0,01 lot (5 th +$2,49; n=36). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "GDP": {
    "n": 76,
@@ -1592,10 +1810,12 @@
     "baru": 0.46,
     "n_baru": 26,
     "tahun": 45.45,
-    "n_tahun": 11
+    "n_tahun": 11,
+    "x": -0.56,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2025, n=76): 5 dtk pertama bergerak ±$0,85, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 44% tapi rata −$1,42/0,01 lot (5 th −$1,58; n=9). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 69% tapi rata −$0,29/0,01 lot (5 th +$0,46; n=70); feed Dukascopy: −$0,56. Pending ±$2: menang 62% tapi rata −$0,66/0,01 lot (5 th −$0,27; n=50). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,85, spread melebar ke ±$0,20. Pending ±$1: menang 69% tapi rata −$0,29/0,01 lot (5 th +$0,46; n=70); feed Dukascopy: −$0,56. Ikut lonjakan manual: menang 44% tapi rata −$1,42/0,01 lot (5 th −$1,58; n=9). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2025, n=76): 5 dtk pertama bergerak ±$0,85, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 44% rilis tapi rata −$1,42/0,01 lot (5 th −$1,58; n=9). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 69% rilis tapi rata −$0,29/0,01 lot (5 th +$0,46; n=70); feed Dukascopy: −$0,56. Pending ±$2: untung di 62% rilis tapi rata −$0,66/0,01 lot (5 th −$0,27; n=50). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,85, spread melebar ke ±$0,20. Pending ±$1: untung di 69% rilis tapi rata −$0,29/0,01 lot (5 th +$0,46; n=70); feed Dukascopy: −$0,56. Ikut lonjakan manual: untung di 44% rilis tapi rata −$1,42/0,01 lot (5 th −$1,58; n=9). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "ISM": {
    "n": 231,
@@ -1644,10 +1864,12 @@
     "baru": 1.13,
     "n_baru": 100,
     "tahun": 58.33,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": 0.74,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=231): 5 dtk pertama bergerak ±$2,44, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 71% tapi rata −$0,14/0,01 lot (5 th −$0,24; n=77). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 76%, rata +$0,54/0,01 lot (5 th +$1,13; n=210); feed Dukascopy: +$0,74. Pending ±$2: menang 70% tapi rata −$0,15/0,01 lot (5 th +$0,07; n=162). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,44, spread melebar ke ±$0,20. Pending ±$1: menang 76%, rata +$0,54/0,01 lot (5 th +$1,13; n=210); feed Dukascopy: +$0,74. Ikut lonjakan manual: menang 71% tapi rata −$0,14/0,01 lot (5 th −$0,24; n=77). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=231): 5 dtk pertama bergerak ±$2,44, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 71% rilis tapi rata −$0,14/0,01 lot (5 th −$0,24; n=77). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 76% rilis, rata +$0,54/0,01 lot (5 th +$1,13; n=210); feed Dukascopy: +$0,74. Pending ±$2: untung di 70% rilis tapi rata −$0,15/0,01 lot (5 th +$0,07; n=162). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,44, spread melebar ke ±$0,20. Pending ±$1: untung di 76% rilis, rata +$0,54/0,01 lot (5 th +$1,13; n=210); feed Dukascopy: +$0,74. Ikut lonjakan manual: untung di 71% rilis tapi rata −$0,14/0,01 lot (5 th −$0,24; n=77). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "JOLTS": {
    "n": 30,
@@ -1696,10 +1918,12 @@
     "baru": -0.61,
     "n_baru": 30,
     "tahun": 40.0,
-    "n_tahun": 5
+    "n_tahun": 5,
+    "x": -0.99,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2021–2025, n=30): 5 dtk pertama bergerak ±$1,57, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 100%, rata +$1,81/0,01 lot (5 th +$1,81; n=12). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 77% tapi rata −$0,61/0,01 lot (5 th −$0,61; n=30); feed Dukascopy: −$0,99. Pending ±$2: menang 84%, rata +$0,66/0,01 lot (5 th +$0,66; n=25). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,57, spread melebar ke ±$0,20. Pending ±$1: menang 77% tapi rata −$0,61/0,01 lot (5 th −$0,61; n=30); feed Dukascopy: −$0,99. Ikut lonjakan manual: menang 100%, rata +$1,81/0,01 lot (5 th +$1,81; n=12). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2021–2025, n=30): 5 dtk pertama bergerak ±$1,57, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 100% rilis, rata +$1,81/0,01 lot (5 th +$1,81; n=12). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 77% rilis tapi rata −$0,61/0,01 lot (5 th −$0,61; n=30); feed Dukascopy: −$0,99. Pending ±$2: untung di 84% rilis, rata +$0,66/0,01 lot (5 th +$0,66; n=25). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,57, spread melebar ke ±$0,20. Pending ±$1: untung di 77% rilis tapi rata −$0,61/0,01 lot (5 th −$0,61; n=30); feed Dukascopy: −$0,99. Ikut lonjakan manual: untung di 100% rilis, rata +$1,81/0,01 lot (5 th +$1,81; n=12). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "KONSUMEN": {
    "n": 145,
@@ -1750,8 +1974,8 @@
     "tahun": 27.27,
     "n_tahun": 11
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=145): 5 dtk pertama bergerak ±$1,04, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 59% tapi rata −$1,02/0,01 lot (5 th −$1,02; n=17). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 64% tapi rata −$0,24/0,01 lot (5 th −$0,17; n=115). Pending ±$2: menang 57% tapi rata −$1,19/0,01 lot (5 th −$1,31; n=65). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,04, spread melebar ke ±$0,20. Pending ±$1: menang 64% tapi rata −$0,24/0,01 lot (5 th −$0,17; n=115). Ikut lonjakan manual: menang 59% tapi rata −$1,02/0,01 lot (5 th −$1,02; n=17). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=145): 5 dtk pertama bergerak ±$1,04, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 59% rilis tapi rata −$1,02/0,01 lot (5 th −$1,02; n=17). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 64% rilis tapi rata −$0,24/0,01 lot (5 th −$0,17; n=115). Pending ±$2: untung di 57% rilis tapi rata −$1,19/0,01 lot (5 th −$1,31; n=65). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,04, spread melebar ke ±$0,20. Pending ±$1: untung di 64% rilis tapi rata −$0,24/0,01 lot (5 th −$0,17; n=115). Ikut lonjakan manual: untung di 59% rilis tapi rata −$1,02/0,01 lot (5 th −$1,02; n=17). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "MANUFAKTUR": {
    "n": 20,
@@ -1802,8 +2026,8 @@
     "tahun": 60.0,
     "n_tahun": 5
    },
-   "teks": "XAU (Exness Cent) (2015–2024, n=20): 5 dtk pertama bergerak ±$0,50, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67% tapi rata −$4,78/0,01 lot (5 th −$4,78; n=3). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 63% tapi rata −$0,22/0,01 lot (5 th −$0,02; n=19). Pending ±$2: menang 46% tapi rata −$2,36/0,01 lot (5 th −$2,39; n=13). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,50, spread melebar ke ±$0,20. Pending ±$1: menang 63% tapi rata −$0,22/0,01 lot (5 th −$0,02; n=19). Ikut lonjakan manual: menang 67% tapi rata −$4,78/0,01 lot (5 th −$4,78; n=3). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2024, n=20): 5 dtk pertama bergerak ±$0,50, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis tapi rata −$4,78/0,01 lot (5 th −$4,78; n=3). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 63% rilis tapi rata −$0,22/0,01 lot (5 th −$0,02; n=19). Pending ±$2: untung di 46% rilis tapi rata −$2,36/0,01 lot (5 th −$2,39; n=13). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,50, spread melebar ke ±$0,20. Pending ±$1: untung di 63% rilis tapi rata −$0,22/0,01 lot (5 th −$0,02; n=19). Ikut lonjakan manual: untung di 67% rilis tapi rata −$4,78/0,01 lot (5 th −$4,78; n=3). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "MINYAK": {
    "n": 151,
@@ -1844,8 +2068,8 @@
     "tahun": 0.0,
     "n_tahun": 4
    },
-   "teks": "XAU (Exness Cent) (2016–2020, n=151): 5 dtk pertama bergerak ±$0,09, spread $0,28→$0,31 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 52% tapi rata −$0,46/0,01 lot (n=25). Pending ±$2: menang 43% tapi rata −$0,67/0,01 lot (n=7). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,09, spread melebar ke ±$0,31. Pending ±$1: menang 52% tapi rata −$0,46/0,01 lot (n=25). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2016–2020, n=151): 5 dtk pertama bergerak ±$0,09, spread $0,28→$0,31 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 52% rilis tapi rata −$0,46/0,01 lot (n=25). Pending ±$2: untung di 43% rilis tapi rata −$0,67/0,01 lot (n=7). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,09, spread melebar ke ±$0,31. Pending ±$1: untung di 52% rilis tapi rata −$0,46/0,01 lot (n=25). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "NFP": {
    "n": 130,
@@ -1894,10 +2118,12 @@
     "baru": 6.22,
     "n_baru": 57,
     "tahun": 83.33,
-    "n_tahun": 12
+    "n_tahun": 12,
+    "x": -1.87,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=130): 5 dtk pertama bergerak ±$5,16, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 67%, rata +$0,16/0,01 lot (5 th +$1,86; n=99). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 77%, rata +$3,18/0,01 lot (5 th +$6,22; n=130); feed Dukascopy: −$1,87. Pending ±$2: menang 74%, rata +$2,56/0,01 lot (5 th +$6,25; n=126). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$5,16, spread melebar ke ±$0,24. Pending ±$1: menang 77%, rata +$3,18/0,01 lot (5 th +$6,22; n=130); feed Dukascopy: −$1,87. Ikut lonjakan manual: menang 67%, rata +$0,16/0,01 lot (5 th +$1,86; n=99). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=130): 5 dtk pertama bergerak ±$5,16, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 67% rilis, rata +$0,16/0,01 lot (5 th +$1,86; n=99). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 77% rilis, rata +$3,18/0,01 lot (5 th +$6,22; n=130); feed Dukascopy: −$1,87. Pending ±$2: untung di 74% rilis, rata +$2,56/0,01 lot (5 th +$6,25; n=126). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$5,16, spread melebar ke ±$0,24. Pending ±$1: untung di 77% rilis, rata +$3,18/0,01 lot (5 th +$6,22; n=130); feed Dukascopy: −$1,87. Ikut lonjakan manual: untung di 67% rilis, rata +$0,16/0,01 lot (5 th +$1,86; n=99). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "PCE": {
    "n": 52,
@@ -1946,10 +2172,12 @@
     "baru": 0.14,
     "n_baru": 49,
     "tahun": 66.67,
-    "n_tahun": 6
+    "n_tahun": 6,
+    "x": -0.8,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2021–2026, n=52): 5 dtk pertama bergerak ±$0,60, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 43% tapi rata −$0,37/0,01 lot (5 th −$0,37; n=7). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 71% tapi rata −$0,03/0,01 lot (5 th +$0,14; n=51); feed Dukascopy: −$0,80. Pending ±$2: menang 68% tapi rata −$0,03/0,01 lot (5 th −$0,03; n=40). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,60, spread melebar ke ±$0,20. Pending ±$1: menang 71% tapi rata −$0,03/0,01 lot (5 th +$0,14; n=51); feed Dukascopy: −$0,80. Ikut lonjakan manual: menang 43% tapi rata −$0,37/0,01 lot (5 th −$0,37; n=7). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2021–2026, n=52): 5 dtk pertama bergerak ±$0,60, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 43% rilis tapi rata −$0,37/0,01 lot (5 th −$0,37; n=7). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 71% rilis tapi rata −$0,03/0,01 lot (5 th +$0,14; n=51); feed Dukascopy: −$0,80. Pending ±$2: untung di 68% rilis tapi rata −$0,03/0,01 lot (5 th −$0,03; n=40). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,60, spread melebar ke ±$0,20. Pending ±$1: untung di 71% rilis tapi rata −$0,03/0,01 lot (5 th +$0,14; n=51); feed Dukascopy: −$0,80. Ikut lonjakan manual: untung di 43% rilis tapi rata −$0,37/0,01 lot (5 th −$0,37; n=7). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "PMI": {
    "n": 52,
@@ -2000,8 +2228,8 @@
     "tahun": 75.0,
     "n_tahun": 8
    },
-   "teks": "XAU (Exness Cent) (2019–2026, n=52): 5 dtk pertama bergerak ±$2,04, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 83%, rata +$0,95/0,01 lot (5 th +$0,95; n=24). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 76%, rata +$0,55/0,01 lot (5 th +$0,62; n=50). Pending ±$2: menang 80%, rata +$0,27/0,01 lot (5 th +$0,23; n=41). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,04, spread melebar ke ±$0,24. Pending ±$1: menang 76%, rata +$0,55/0,01 lot (5 th +$0,62; n=50). Ikut lonjakan manual: menang 83%, rata +$0,95/0,01 lot (5 th +$0,95; n=24). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2019–2026, n=52): 5 dtk pertama bergerak ±$2,04, spread $0,20→$0,24 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 83% rilis, rata +$0,95/0,01 lot (5 th +$0,95; n=24). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 76% rilis, rata +$0,55/0,01 lot (5 th +$0,62; n=50). Pending ±$2: untung di 80% rilis, rata +$0,27/0,01 lot (5 th +$0,23; n=41). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,04, spread melebar ke ±$0,24. Pending ±$1: untung di 76% rilis, rata +$0,55/0,01 lot (5 th +$0,62; n=50). Ikut lonjakan manual: untung di 83% rilis, rata +$0,95/0,01 lot (5 th +$0,95; n=24). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "PPI": {
    "n": 99,
@@ -2050,10 +2278,12 @@
     "baru": 0.19,
     "n_baru": 50,
     "tahun": 45.45,
-    "n_tahun": 11
+    "n_tahun": 11,
+    "x": -0.36,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2015–2026, n=99): 5 dtk pertama bergerak ±$2,19, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 64% tapi rata −$0,60/0,01 lot (5 th −$0,64; n=33). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 68% tapi rata −$0,13/0,01 lot (5 th +$0,19; n=87); feed Dukascopy: −$0,36. Pending ±$2: menang 63% tapi rata −$0,35/0,01 lot (5 th −$0,24; n=62). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,19, spread melebar ke ±$0,20. Pending ±$1: menang 68% tapi rata −$0,13/0,01 lot (5 th +$0,19; n=87); feed Dukascopy: −$0,36. Ikut lonjakan manual: menang 64% tapi rata −$0,60/0,01 lot (5 th −$0,64; n=33). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2026, n=99): 5 dtk pertama bergerak ±$2,19, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 64% rilis tapi rata −$0,60/0,01 lot (5 th −$0,64; n=33). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 68% rilis tapi rata −$0,13/0,01 lot (5 th +$0,19; n=87); feed Dukascopy: −$0,36. Pending ±$2: untung di 63% rilis tapi rata −$0,35/0,01 lot (5 th −$0,24; n=62). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$2,19, spread melebar ke ±$0,20. Pending ±$1: untung di 68% rilis tapi rata −$0,13/0,01 lot (5 th +$0,19; n=87); feed Dukascopy: −$0,36. Ikut lonjakan manual: untung di 64% rilis tapi rata −$0,60/0,01 lot (5 th −$0,64; n=33). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "RETAIL": {
    "n": 88,
@@ -2102,10 +2332,12 @@
     "baru": 0.4,
     "n_baru": 41,
     "tahun": 40.0,
-    "n_tahun": 10
+    "n_tahun": 10,
+    "x": -0.45,
+    "x_feed": "Dukascopy"
    },
-   "teks": "XAU (Exness Cent) (2016–2025, n=88): 5 dtk pertama bergerak ±$1,73, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 73% tapi rata −$0,50/0,01 lot (5 th −$0,80; n=26). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 68%, rata +$0,04/0,01 lot (5 th +$0,40; n=85); feed Dukascopy: −$0,45. Pending ±$2: menang 63% tapi rata −$0,59/0,01 lot (5 th −$0,40; n=67). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,73, spread melebar ke ±$0,20. Pending ±$1: menang 68%, rata +$0,04/0,01 lot (5 th +$0,40; n=85); feed Dukascopy: −$0,45. Ikut lonjakan manual: menang 73% tapi rata −$0,50/0,01 lot (5 th −$0,80; n=26). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2016–2025, n=88): 5 dtk pertama bergerak ±$1,73, spread $0,20→$0,20 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 73% rilis tapi rata −$0,50/0,01 lot (5 th −$0,80; n=26). Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 68% rilis, rata +$0,04/0,01 lot (5 th +$0,40; n=85); feed Dukascopy: −$0,45. Pending ±$2: untung di 63% rilis tapi rata −$0,59/0,01 lot (5 th −$0,40; n=67). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$1,73, spread melebar ke ±$0,20. Pending ±$1: untung di 68% rilis, rata +$0,04/0,01 lot (5 th +$0,40; n=85); feed Dukascopy: −$0,45. Ikut lonjakan manual: untung di 73% rilis tapi rata −$0,50/0,01 lot (5 th −$0,80; n=26). ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   },
   "RUMAH": {
    "n": 32,
@@ -2146,8 +2378,8 @@
     "tahun": 0.0,
     "n_tahun": 6
    },
-   "teks": "XAU (Exness Cent) (2015–2024, n=32): 5 dtk pertama bergerak ±$0,19, spread $0,27→$0,36 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): menang 35% tapi rata −$1,31/0,01 lot (5 th −$0,30; n=17). Pending ±$2: menang 25% tapi rata −$0,99/0,01 lot (5 th −$1,27; n=4). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
-   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,19, spread melebar ke ±$0,36. Pending ±$1: menang 35% tapi rata −$1,31/0,01 lot (5 th −$0,30; n=17). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
+   "teks": "XAU (Exness Cent) (2015–2024, n=32): 5 dtk pertama bergerak ±$0,19, spread $0,27→$0,36 di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±$1 (5 dtk sebelum rilis): untung di 35% rilis tapi rata −$1,31/0,01 lot (5 th −$0,30; n=17). Pending ±$2: untung di 25% rilis tapi rata −$0,99/0,01 lot (5 th −$1,27; n=4). ⚠️ 31 cara lolos uji (9 bisa manual); terbaik yang bisa manual: pending Buy/Sell Stop ±$1, tahan 5 mnt, SL $5 → rata +$0,68 (dengan slippage & reaksi 2 dtk +$0,38); 38% untungnya dari tahun 2026 (rapuh); di feed Dukascopy rilis yang sama −$0,66 → belum terbukti, uji maju lot minimum dulu.",
+   "alarm": "XAU (Exness Cent): 5 dtk pertama ±$0,19, spread melebar ke ±$0,36. Pending ±$1: untung di 35% rilis tapi rata −$1,31/0,01 lot (5 th −$0,30; n=17). Ikut lonjakan manual: belum ada data. ⚠️ 9 cara manual lolos uji, 38% untungnya dari 2026 (rapuh) — belum terbukti di feed lain, uji maju dulu."
   }
  },
  "BTC_EXNESS": {
@@ -2198,10 +2430,12 @@
     "baru": -1.11,
     "n_baru": 644,
     "tahun": 30.0,
-    "n_tahun": 10
+    "n_tahun": 10,
+    "x": -0.72,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=1241): 5 dtk pertama bergerak ±0,047%, spread 0,059%→0,063% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 61% tapi rata −0,078% per trade (5 th −0,067%; n=229). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 61% tapi rata −0,062% per trade (5 th −0,056%; n=691); feed Binance: −0,036%. Pending ±0,100%: menang 56% tapi rata −0,075% per trade (5 th −0,028%; n=954). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,047%, spread melebar ke ±0,063%. Pending ±0,050%: menang 61% tapi rata −0,062% per trade (5 th −0,056%; n=691); feed Binance: −0,036%. Ikut lonjakan manual: menang 61% tapi rata −0,078% per trade (5 th −0,067%; n=229). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=1241): 5 dtk pertama bergerak ±0,047%, spread 0,059%→0,063% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 61% rilis tapi rata −0,078% per trade (5 th −0,067%; n=229). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 61% rilis tapi rata −0,062% per trade (5 th −0,056%; n=691); feed Binance: −0,036%. Pending ±0,100%: untung di 56% rilis tapi rata −0,075% per trade (5 th −0,028%; n=954). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,047%, spread melebar ke ±0,063%. Pending ±0,050%: untung di 61% rilis tapi rata −0,062% per trade (5 th −0,056%; n=691); feed Binance: −0,036%. Ikut lonjakan manual: untung di 61% rilis tapi rata −0,078% per trade (5 th −0,067%; n=229). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "ADP": {
    "n": 78,
@@ -2250,10 +2484,12 @@
     "baru": -0.43,
     "n_baru": 44,
     "tahun": 57.14,
-    "n_tahun": 7
+    "n_tahun": 7,
+    "x": -0.89,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=78): 5 dtk pertama bergerak ±0,029%, spread 0,058%→0,061% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 50% tapi rata −0,027% per trade (5 th −0,027%; n=4). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 67% tapi rata −0,027% per trade (5 th −0,021%; n=46); feed Binance: −0,045%. Pending ±0,100%: menang 47% tapi rata −0,069% per trade (5 th −0,061%; n=60). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,029%, spread melebar ke ±0,061%. Pending ±0,050%: menang 67% tapi rata −0,027% per trade (5 th −0,021%; n=46); feed Binance: −0,045%. Ikut lonjakan manual: menang 50% tapi rata −0,027% per trade (5 th −0,027%; n=4). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=78): 5 dtk pertama bergerak ±0,029%, spread 0,058%→0,061% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 50% rilis tapi rata −0,027% per trade (5 th −0,027%; n=4). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 67% rilis tapi rata −0,027% per trade (5 th −0,021%; n=46); feed Binance: −0,045%. Pending ±0,100%: untung di 47% rilis tapi rata −0,069% per trade (5 th −0,061%; n=60). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,029%, spread melebar ke ±0,061%. Pending ±0,050%: untung di 67% rilis tapi rata −0,027% per trade (5 th −0,021%; n=46); feed Binance: −0,045%. Ikut lonjakan manual: untung di 50% rilis tapi rata −0,027% per trade (5 th −0,027%; n=4). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "CLAIMS": {
    "n": 115,
@@ -2302,10 +2538,12 @@
     "baru": -1.82,
     "n_baru": 91,
     "tahun": 0.0,
-    "n_tahun": 5
+    "n_tahun": 5,
+    "x": -0.52,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=115): 5 dtk pertama bergerak ±0,028%, spread 0,045%→0,045% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 75% tapi rata −0,020% per trade (5 th −0,020%; n=8). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 53% tapi rata −0,089% per trade (5 th −0,091%; n=94); feed Binance: −0,026%. Pending ±0,100%: menang 53% tapi rata −0,133% per trade (5 th −0,116%; n=79). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,028%, spread melebar ke ±0,045%. Pending ±0,050%: menang 53% tapi rata −0,089% per trade (5 th −0,091%; n=94); feed Binance: −0,026%. Ikut lonjakan manual: menang 75% tapi rata −0,020% per trade (5 th −0,020%; n=8). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=115): 5 dtk pertama bergerak ±0,028%, spread 0,045%→0,045% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 75% rilis tapi rata −0,020% per trade (5 th −0,020%; n=8). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 53% rilis tapi rata −0,089% per trade (5 th −0,091%; n=94); feed Binance: −0,026%. Pending ±0,100%: untung di 53% rilis tapi rata −0,133% per trade (5 th −0,116%; n=79). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,028%, spread melebar ke ±0,045%. Pending ±0,050%: untung di 53% rilis tapi rata −0,089% per trade (5 th −0,091%; n=94); feed Binance: −0,026%. Ikut lonjakan manual: untung di 75% rilis tapi rata −0,020% per trade (5 th −0,020%; n=8). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "CPI": {
    "n": 108,
@@ -2354,10 +2592,12 @@
     "baru": -1.03,
     "n_baru": 44,
     "tahun": 42.86,
-    "n_tahun": 7
+    "n_tahun": 7,
+    "x": 0.06,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=108): 5 dtk pertama bergerak ±0,177%, spread 0,059%→0,063% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 69% tapi rata −0,075% per trade (5 th −0,075%; n=45). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 65% tapi rata −0,091% per trade (5 th −0,052%; n=49); feed Binance: +0,003%. Pending ±0,100%: menang 58% tapi rata −0,052% per trade (5 th +0,041%; n=92). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,177%, spread melebar ke ±0,063%. Pending ±0,050%: menang 65% tapi rata −0,091% per trade (5 th −0,052%; n=49); feed Binance: +0,003%. Ikut lonjakan manual: menang 69% tapi rata −0,075% per trade (5 th −0,075%; n=45). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=108): 5 dtk pertama bergerak ±0,177%, spread 0,059%→0,063% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 69% rilis tapi rata −0,075% per trade (5 th −0,075%; n=45). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 65% rilis tapi rata −0,091% per trade (5 th −0,052%; n=49); feed Binance: +0,003%. Pending ±0,100%: untung di 58% rilis tapi rata −0,052% per trade (5 th +0,041%; n=92). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,177%, spread melebar ke ±0,063%. Pending ±0,050%: untung di 65% rilis tapi rata −0,091% per trade (5 th −0,052%; n=49); feed Binance: +0,003%. Ikut lonjakan manual: untung di 69% rilis tapi rata −0,075% per trade (5 th −0,075%; n=45). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "DURABLE": {
    "n": 24,
@@ -2396,10 +2636,12 @@
     "baru": -7.03,
     "n_baru": 1,
     "tahun": 33.33,
-    "n_tahun": 3
+    "n_tahun": 3,
+    "x": 0.29,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2024, n=24): 5 dtk pertama bergerak ±0,007%, spread 0,213%→0,222% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 33% tapi rata −0,213% per trade (5 th −0,352%; n=3); feed Binance: +0,014%. Pending ±0,100%: menang 31% tapi rata −0,343% per trade (5 th +0,023%; n=13). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,007%, spread melebar ke ±0,222%. Pending ±0,050%: menang 33% tapi rata −0,213% per trade (5 th −0,352%; n=3); feed Binance: +0,014%. Ikut lonjakan manual: belum ada data. ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2024, n=24): 5 dtk pertama bergerak ±0,007%, spread 0,213%→0,222% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): belum ada data. Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 33% rilis tapi rata −0,213% per trade (5 th −0,352%; n=3); feed Binance: +0,014%. Pending ±0,100%: untung di 31% rilis tapi rata −0,343% per trade (5 th +0,023%; n=13). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,007%, spread melebar ke ±0,222%. Pending ±0,050%: untung di 33% rilis tapi rata −0,213% per trade (5 th −0,352%; n=3); feed Binance: +0,014%. Ikut lonjakan manual: belum ada data. ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "FOMC": {
    "n": 73,
@@ -2448,10 +2690,12 @@
     "baru": -0.88,
     "n_baru": 33,
     "tahun": 62.5,
-    "n_tahun": 8
+    "n_tahun": 8,
+    "x": -1.83,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=73): 5 dtk pertama bergerak ±0,084%, spread 0,053%→0,057% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 62% tapi rata −0,143% per trade (5 th −0,163%; n=21). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 69% tapi rata −0,054% per trade (5 th −0,044%; n=36); feed Binance: −0,092%. Pending ±0,100%: menang 60% tapi rata −0,020% per trade (5 th +0,183%; n=60). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,084%, spread melebar ke ±0,057%. Pending ±0,050%: menang 69% tapi rata −0,054% per trade (5 th −0,044%; n=36); feed Binance: −0,092%. Ikut lonjakan manual: menang 62% tapi rata −0,143% per trade (5 th −0,163%; n=21). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=73): 5 dtk pertama bergerak ±0,084%, spread 0,053%→0,057% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 62% rilis tapi rata −0,143% per trade (5 th −0,163%; n=21). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 69% rilis tapi rata −0,054% per trade (5 th −0,044%; n=36); feed Binance: −0,092%. Pending ±0,100%: untung di 60% rilis tapi rata −0,020% per trade (5 th +0,183%; n=60). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,084%, spread melebar ke ±0,057%. Pending ±0,050%: untung di 69% rilis tapi rata −0,054% per trade (5 th −0,044%; n=36); feed Binance: −0,092%. Ikut lonjakan manual: untung di 62% rilis tapi rata −0,143% per trade (5 th −0,163%; n=21). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "GDP": {
    "n": 58,
@@ -2500,10 +2744,12 @@
     "baru": -1.21,
     "n_baru": 21,
     "tahun": 50.0,
-    "n_tahun": 6
+    "n_tahun": 6,
+    "x": -1.19,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2025, n=58): 5 dtk pertama bergerak ±0,026%, spread 0,075%→0,081% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 40% tapi rata −0,137% per trade (5 th −0,099%; n=5). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 58% tapi rata −0,024% per trade (5 th −0,060%; n=24); feed Binance: −0,060%. Pending ±0,100%: menang 52% tapi rata −0,103% per trade (5 th −0,042%; n=42). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,026%, spread melebar ke ±0,081%. Pending ±0,050%: menang 58% tapi rata −0,024% per trade (5 th −0,060%; n=24); feed Binance: −0,060%. Ikut lonjakan manual: menang 40% tapi rata −0,137% per trade (5 th −0,099%; n=5). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2025, n=58): 5 dtk pertama bergerak ±0,026%, spread 0,075%→0,081% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 40% rilis tapi rata −0,137% per trade (5 th −0,099%; n=5). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 58% rilis tapi rata −0,024% per trade (5 th −0,060%; n=24); feed Binance: −0,060%. Pending ±0,100%: untung di 52% rilis tapi rata −0,103% per trade (5 th −0,042%; n=42). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,026%, spread melebar ke ±0,081%. Pending ±0,050%: untung di 58% rilis tapi rata −0,024% per trade (5 th −0,060%; n=24); feed Binance: −0,060%. Ikut lonjakan manual: untung di 40% rilis tapi rata −0,137% per trade (5 th −0,099%; n=5). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "ISM": {
    "n": 180,
@@ -2552,10 +2798,12 @@
     "baru": -0.94,
     "n_baru": 87,
     "tahun": 25.0,
-    "n_tahun": 8
+    "n_tahun": 8,
+    "x": -0.79,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=180): 5 dtk pertama bergerak ±0,053%, spread 0,065%→0,071% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 62% tapi rata −0,053% per trade (5 th +0,013%; n=26). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 68% tapi rata −0,056% per trade (5 th −0,047%; n=94); feed Binance: −0,040%. Pending ±0,100%: menang 57% tapi rata −0,095% per trade (5 th −0,049%; n=150). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,053%, spread melebar ke ±0,071%. Pending ±0,050%: menang 68% tapi rata −0,056% per trade (5 th −0,047%; n=94); feed Binance: −0,040%. Ikut lonjakan manual: menang 62% tapi rata −0,053% per trade (5 th +0,013%; n=26). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=180): 5 dtk pertama bergerak ±0,053%, spread 0,065%→0,071% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 62% rilis tapi rata −0,053% per trade (5 th +0,013%; n=26). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 68% rilis tapi rata −0,056% per trade (5 th −0,047%; n=94); feed Binance: −0,040%. Pending ±0,100%: untung di 57% rilis tapi rata −0,095% per trade (5 th −0,049%; n=150). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,053%, spread melebar ke ±0,071%. Pending ±0,050%: untung di 68% rilis tapi rata −0,056% per trade (5 th −0,047%; n=94); feed Binance: −0,040%. Ikut lonjakan manual: untung di 62% rilis tapi rata −0,053% per trade (5 th +0,013%; n=26). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "JOLTS": {
    "n": 30,
@@ -2604,10 +2852,12 @@
     "baru": -2.18,
     "n_baru": 29,
     "tahun": 0.0,
-    "n_tahun": 4
+    "n_tahun": 4,
+    "x": -2.19,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2021–2025, n=30): 5 dtk pertama bergerak ±0,069%, spread 0,062%→0,079% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 82%, rata +0,017% per trade (5 th +0,017%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 55% tapi rata −0,109% per trade (5 th −0,109%; n=29); feed Binance: −0,110%. Pending ±0,100%: menang 63% tapi rata −0,096% per trade (5 th −0,096%; n=27). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,069%, spread melebar ke ±0,079%. Pending ±0,050%: menang 55% tapi rata −0,109% per trade (5 th −0,109%; n=29); feed Binance: −0,110%. Ikut lonjakan manual: menang 82%, rata +0,017% per trade (5 th +0,017%; n=11). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2021–2025, n=30): 5 dtk pertama bergerak ±0,069%, spread 0,062%→0,079% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 82% rilis, rata +0,017% per trade (5 th +0,017%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 55% rilis tapi rata −0,109% per trade (5 th −0,109%; n=29); feed Binance: −0,110%. Pending ±0,100%: untung di 63% rilis tapi rata −0,096% per trade (5 th −0,096%; n=27). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,069%, spread melebar ke ±0,079%. Pending ±0,050%: untung di 55% rilis tapi rata −0,109% per trade (5 th −0,109%; n=29); feed Binance: −0,110%. Ikut lonjakan manual: untung di 82% rilis, rata +0,017% per trade (5 th +0,017%; n=11). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "KONSUMEN": {
    "n": 103,
@@ -2656,10 +2906,12 @@
     "baru": -1.63,
     "n_baru": 70,
     "tahun": 57.14,
-    "n_tahun": 7
+    "n_tahun": 7,
+    "x": -0.65,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=103): 5 dtk pertama bergerak ±0,035%, spread 0,063%→0,071% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 58% tapi rata −0,067% per trade (5 th −0,067%; n=12). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 62% tapi rata −0,076% per trade (5 th −0,082%; n=72); feed Binance: −0,033%. Pending ±0,100%: menang 58% tapi rata −0,079% per trade (5 th −0,066%; n=81). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,035%, spread melebar ke ±0,071%. Pending ±0,050%: menang 62% tapi rata −0,076% per trade (5 th −0,082%; n=72); feed Binance: −0,033%. Ikut lonjakan manual: menang 58% tapi rata −0,067% per trade (5 th −0,067%; n=12). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=103): 5 dtk pertama bergerak ±0,035%, spread 0,063%→0,071% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 58% rilis tapi rata −0,067% per trade (5 th −0,067%; n=12). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 62% rilis tapi rata −0,076% per trade (5 th −0,082%; n=72); feed Binance: −0,033%. Pending ±0,100%: untung di 58% rilis tapi rata −0,079% per trade (5 th −0,066%; n=81). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,035%, spread melebar ke ±0,071%. Pending ±0,050%: untung di 62% rilis tapi rata −0,076% per trade (5 th −0,082%; n=72); feed Binance: −0,033%. Ikut lonjakan manual: untung di 58% rilis tapi rata −0,067% per trade (5 th −0,067%; n=12). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "MINYAK": {
    "n": 61,
@@ -2708,10 +2960,12 @@
     "baru": null,
     "n_baru": 0,
     "tahun": 100.0,
-    "n_tahun": 1
+    "n_tahun": 1,
+    "x": -1.25,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2020, n=61): 5 dtk pertama bergerak ±0,006%, spread 0,239%→0,250% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 0% tapi rata −1,268% per trade (n=1). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 100%, rata +0,197% per trade (n=1); feed Binance: −0,062%. Pending ±0,100%: menang 38% tapi rata −0,170% per trade (n=21). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,006%, spread melebar ke ±0,250%. Pending ±0,050%: menang 100%, rata +0,197% per trade (n=1); feed Binance: −0,062%. Ikut lonjakan manual: menang 0% tapi rata −1,268% per trade (n=1). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2020, n=61): 5 dtk pertama bergerak ±0,006%, spread 0,239%→0,250% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 0% rilis tapi rata −1,268% per trade (n=1). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 100% rilis, rata +0,197% per trade (n=1); feed Binance: −0,062%. Pending ±0,100%: untung di 38% rilis tapi rata −0,170% per trade (n=21). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,006%, spread melebar ke ±0,250%. Pending ±0,050%: untung di 100% rilis, rata +0,197% per trade (n=1); feed Binance: −0,062%. Ikut lonjakan manual: untung di 0% rilis tapi rata −1,268% per trade (n=1). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "NFP": {
    "n": 108,
@@ -2760,10 +3014,12 @@
     "baru": -1.21,
     "n_baru": 48,
     "tahun": 22.22,
-    "n_tahun": 9
+    "n_tahun": 9,
+    "x": -0.93,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=108): 5 dtk pertama bergerak ±0,161%, spread 0,055%→0,059% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 65% tapi rata −0,034% per trade (5 th −0,044%; n=40). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 55% tapi rata −0,100% per trade (5 th −0,060%; n=55); feed Binance: −0,047%. Pending ±0,100%: menang 55% tapi rata −0,101% per trade (5 th −0,054%; n=92). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,161%, spread melebar ke ±0,059%. Pending ±0,050%: menang 55% tapi rata −0,100% per trade (5 th −0,060%; n=55); feed Binance: −0,047%. Ikut lonjakan manual: menang 65% tapi rata −0,034% per trade (5 th −0,044%; n=40). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=108): 5 dtk pertama bergerak ±0,161%, spread 0,055%→0,059% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 65% rilis tapi rata −0,034% per trade (5 th −0,044%; n=40). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 55% rilis tapi rata −0,100% per trade (5 th −0,060%; n=55); feed Binance: −0,047%. Pending ±0,100%: untung di 55% rilis tapi rata −0,101% per trade (5 th −0,054%; n=92). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,161%, spread melebar ke ±0,059%. Pending ±0,050%: untung di 55% rilis tapi rata −0,100% per trade (5 th −0,060%; n=55); feed Binance: −0,047%. Ikut lonjakan manual: untung di 65% rilis tapi rata −0,034% per trade (5 th −0,044%; n=40). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "PCE": {
    "n": 53,
@@ -2812,10 +3068,12 @@
     "baru": -0.88,
     "n_baru": 39,
     "tahun": 33.33,
-    "n_tahun": 6
+    "n_tahun": 6,
+    "x": -0.68,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2021–2026, n=53): 5 dtk pertama bergerak ±0,032%, spread 0,065%→0,066% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 45% tapi rata −0,217% per trade (5 th −0,217%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 50% tapi rata −0,046% per trade (5 th −0,044%; n=40); feed Binance: −0,034%. Pending ±0,100%: menang 60%, rata −0,000% per trade (5 th +0,007%; n=48). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,032%, spread melebar ke ±0,066%. Pending ±0,050%: menang 50% tapi rata −0,046% per trade (5 th −0,044%; n=40); feed Binance: −0,034%. Ikut lonjakan manual: menang 45% tapi rata −0,217% per trade (5 th −0,217%; n=11). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2021–2026, n=53): 5 dtk pertama bergerak ±0,032%, spread 0,065%→0,066% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 45% rilis tapi rata −0,217% per trade (5 th −0,217%; n=11). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 50% rilis tapi rata −0,046% per trade (5 th −0,044%; n=40); feed Binance: −0,034%. Pending ±0,100%: untung di 60% rilis, rata −0,000% per trade (5 th +0,007%; n=48). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,032%, spread melebar ke ±0,066%. Pending ±0,050%: untung di 50% rilis tapi rata −0,046% per trade (5 th −0,044%; n=40); feed Binance: −0,034%. Ikut lonjakan manual: untung di 45% rilis tapi rata −0,217% per trade (5 th −0,217%; n=11). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "PMI": {
    "n": 52,
@@ -2864,10 +3122,12 @@
     "baru": -1.77,
     "n_baru": 42,
     "tahun": 16.67,
-    "n_tahun": 6
+    "n_tahun": 6,
+    "x": -0.19,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2019–2026, n=52): 5 dtk pertama bergerak ±0,044%, spread 0,056%→0,059% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 44% tapi rata −0,023% per trade (5 th −0,023%; n=9). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 60% tapi rata −0,100% per trade (5 th −0,089%; n=45); feed Binance: −0,009%. Pending ±0,100%: menang 74% tapi rata −0,062% per trade (5 th −0,036%; n=46). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,044%, spread melebar ke ±0,059%. Pending ±0,050%: menang 60% tapi rata −0,100% per trade (5 th −0,089%; n=45); feed Binance: −0,009%. Ikut lonjakan manual: menang 44% tapi rata −0,023% per trade (5 th −0,023%; n=9). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2019–2026, n=52): 5 dtk pertama bergerak ±0,044%, spread 0,056%→0,059% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 44% rilis tapi rata −0,023% per trade (5 th −0,023%; n=9). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 60% rilis tapi rata −0,100% per trade (5 th −0,089%; n=45); feed Binance: −0,009%. Pending ±0,100%: untung di 74% rilis tapi rata −0,062% per trade (5 th −0,036%; n=46). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,044%, spread melebar ke ±0,059%. Pending ±0,050%: untung di 60% rilis tapi rata −0,100% per trade (5 th −0,089%; n=45); feed Binance: −0,009%. Ikut lonjakan manual: untung di 44% rilis tapi rata −0,023% per trade (5 th −0,023%; n=9). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "PPI": {
    "n": 74,
@@ -2916,10 +3176,12 @@
     "baru": 1.62,
     "n_baru": 39,
     "tahun": 50.0,
-    "n_tahun": 6
+    "n_tahun": 6,
+    "x": 0.16,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2026, n=74): 5 dtk pertama bergerak ±0,077%, spread 0,062%→0,060% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 52% tapi rata −0,145% per trade (5 th −0,135%; n=23). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 70%, rata +0,065% per trade (5 th +0,081%; n=40); feed Binance: +0,008%. Pending ±0,100%: menang 64%, rata +0,009% per trade (5 th +0,009%; n=58). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,077%, spread melebar ke ±0,060%. Pending ±0,050%: menang 70%, rata +0,065% per trade (5 th +0,081%; n=40); feed Binance: +0,008%. Ikut lonjakan manual: menang 52% tapi rata −0,145% per trade (5 th −0,135%; n=23). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2026, n=74): 5 dtk pertama bergerak ±0,077%, spread 0,062%→0,060% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 52% rilis tapi rata −0,145% per trade (5 th −0,135%; n=23). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 70% rilis, rata +0,065% per trade (5 th +0,081%; n=40); feed Binance: +0,008%. Pending ±0,100%: untung di 64% rilis, rata +0,009% per trade (5 th +0,009%; n=58). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,077%, spread melebar ke ±0,060%. Pending ±0,050%: untung di 70% rilis, rata +0,065% per trade (5 th +0,081%; n=40); feed Binance: +0,008%. Ikut lonjakan manual: untung di 52% rilis tapi rata −0,145% per trade (5 th −0,135%; n=23). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   },
   "RETAIL": {
    "n": 83,
@@ -2968,10 +3230,12 @@
     "baru": -0.81,
     "n_baru": 32,
     "tahun": 42.86,
-    "n_tahun": 7
+    "n_tahun": 7,
+    "x": -1.18,
+    "x_feed": "Binance"
    },
-   "teks": "BTC (Exness) (2017–2025, n=83): 5 dtk pertama bergerak ±0,050%, spread 0,065%→0,068% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): menang 58%, rata +0,020% per trade (5 th +0,019%; n=12). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): menang 63% tapi rata −0,031% per trade (5 th −0,041%; n=38); feed Binance: −0,059%. Pending ±0,100%: menang 52% tapi rata −0,043% per trade (5 th −0,017%; n=61). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
-   "alarm": "BTC (Exness): 5 dtk pertama ±0,050%, spread melebar ke ±0,068%. Pending ±0,050%: menang 63% tapi rata −0,031% per trade (5 th −0,041%; n=38); feed Binance: −0,059%. Ikut lonjakan manual: menang 58%, rata +0,020% per trade (5 th +0,019%; n=12). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
+   "teks": "BTC (Exness) (2017–2025, n=83): 5 dtk pertama bergerak ±0,050%, spread 0,065%→0,068% di detik 1. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): untung di 58% rilis, rata +0,020% per trade (5 th +0,019%; n=12). Pending Buy/Sell Stop ±0,050% (5 dtk sebelum rilis): untung di 63% rilis tapi rata −0,031% per trade (5 th −0,041%; n=38); feed Binance: −0,059%. Pending ±0,100%: untung di 52% rilis tapi rata −0,043% per trade (5 th −0,017%; n=61). ❌ tidak ada cara yang untung konsisten setelah spread & slippage.",
+   "alarm": "BTC (Exness): 5 dtk pertama ±0,050%, spread melebar ke ±0,068%. Pending ±0,050%: untung di 63% rilis tapi rata −0,031% per trade (5 th −0,041%; n=38); feed Binance: −0,059%. Ikut lonjakan manual: untung di 58% rilis, rata +0,020% per trade (5 th +0,019%; n=12). ❌ tidak ada cara yang untung konsisten setelah spread & slippage."
   }
  }
 }

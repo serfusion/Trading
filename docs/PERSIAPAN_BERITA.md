@@ -84,6 +84,20 @@ jadi petunjuk ini tidak membedakan arah emas.
 - Aplikasi 3.12: chip "Contoh pertanyaan" dihapus dan diganti kartu 🎯 Persiapan berita. Chat, isian rilis, dan
   kalender tidak berubah. Tidak ada order yang dibuka.
 - Perbarui angka: jalankan `python -m research.news_prediksi` bila data kalender diperbarui.
+- **Aplikasi 3.15 (permintaan pengguna 30 Sep: "singkat, jelas, padat; apa maksud menang?")**: setiap berita
+  ditampilkan seperti kartu Status tren — label kiri, angka besar kanan, bukti kecil di bawah label:
+
+  | Label | Angka besar | Bukti kecil |
+  |---|---|---|
+  | Data < perkiraan | **75% NAIK 🟢** | teruji 2012–2025 (52 rilis) • sejak Okt 2021: 87% naik |
+  | Data > perkiraan | 58% turun ⚪ | lemah • teruji 2012–2025 (43 rilis) • sejak Okt 2021: 72% turun |
+  | ⏱️ Pending ±$1 detik pertama | 77% untung ⚠️ | teruji 2015–2026 (130 rilis, tick Exness) • rata +$3,18/0,01 lot • feed Dukascopy −$1,87 → belum terbukti |
+
+  Angka = arah emas 1 jam setelah angka keluar. Hijau/merah hanya bila ≥ 60% di semua data **dan** arah sama
+  ≥ 55% sejak Okt 2021; selain itu abu-abu ⚪ dengan label "lemah", "≈ lempar koin", atau "tidak konsisten".
+  Kata "menang" diganti "untung di X% rilis" (persen rilis yang ditutup untung); pending dengan rata-rata
+  |< $0,50| ditulis "≈ impas", rata-rata negatif "RUGI 🔴". Setelah Act keluar, baris kalender menampilkan angka
+  besar yang sama (`kesimpulan()`), otomatis tanpa diisi pengguna.
 
 ## 5. Langkah berikutnya (butuh akses jaringan)
 

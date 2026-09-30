@@ -26,6 +26,7 @@ WIB = timedelta(hours=7)
 HARI = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]
 BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
 KEEP_AFTER = timedelta(hours=6)       # berita yang baru lewat masih ditampilkan sebentar
+IMPAS = 0.5                           # |rata $/0,01 lot| < ini (sudah termasuk slippage $0,30) = ≈ impas
 EDGE = 10                             # |% naik - 50| minimal (di semua data DAN 5 tahun) agar disebut "condong"
 
 
@@ -74,16 +75,39 @@ def detik(group: str | None, field: str = "teks") -> str:
     return " ".join(parts)
 
 
+def _usd(x: float) -> str:
+    return f"{'+' if x >= 0 else '−'}${abs(x):.2f}".replace(".", ",")
+
+
+def detik_ringkas(group: str | None) -> dict | None:
+    """Pending Buy/Sell Stop ±$1 XAU (tick Exness) untuk berita ini: satu angka besar + bukti singkat.
+    Rata-rata sudah termasuk slippage $0,30. "% untung" = persen rilis yang ditutup untung."""
+    row = (DETIK.get("XAU_EXNESS") or {}).get(group or "") or {}
+    p1 = row.get("pending1") or {}
+    n = p1.get("n") or 0
+    if n < 30:
+        return None
+    avg, wr = p1["avg"], p1["wr"]
+    bukti = f"teruji {row.get('tahun', '')} ({n} rilis, tick Exness)"
+    if avg >= IMPAS:
+        teks = f"{wr:.0f}% untung ⚠️"
+        x = p1.get("x")
+        bukti += f" • rata {_usd(avg)}/0,01 lot • " + (
+            f"feed {p1.get('x_feed', 'lain')} {_usd(x)} → belum terbukti" if x is not None and x <= 0
+            else "belum diuji maju → belum terbukti")
+    elif avg > -IMPAS:
+        teks = "≈ impas ⚪"
+        bukti += f" • rata {_usd(avg)}/0,01 lot (untung {wr:.0f}% rilis)"
+    else:
+        teks = "RUGI 🔴"
+        bukti += f" • rata {_usd(avg)}/0,01 lot walau untung di {wr:.0f}% rilis (rugi saat kalah lebih besar)"
+    return {"judul": "⏱️ Pending ±$1 detik pertama", "teks": teks, "bukti": bukti}
+
+
 def detik_singkat(group: str | None) -> str:
-    """Satu baris: hasil pending ±$1 XAU (Exness) untuk berita ini + label bukti."""
-    d = DETIK.get("XAU_EXNESS") or {}
-    row = d.get(group or "")
-    p1 = (row or {}).get("pending1") or {}
-    if not p1.get("n") or p1.get("n", 0) < 30:
-        return ""
-    avg = p1["avg"]
-    lab = "⚠️ belum terbukti" if avg > 0 else "rugi"
-    return f"Pending ±$1: {'+' if avg >= 0 else '−'}${abs(avg):.2f}/0,01 lot, menang {p1['wr']:.0f}% ({lab})".replace(".", ",")
+    """Satu baris untuk notifikasi ⏱️: "Pending ±$1: 77% untung ⚠️ • teruji 2015–2026 (130 rilis …) …"."""
+    d = detik_ringkas(group)
+    return "" if d is None else f"Pending ±$1: {d['teks']} • {d['bukti']}"
 
 
 def _num(text: str) -> float | None:
@@ -95,29 +119,55 @@ def _num(text: str) -> float | None:
     return float(m.group(2).replace(",", ".")) * mult
 
 
+LABEL_HASIL = {"bawah": "Data < perkiraan", "atas": "Data > perkiraan", "sesuai": "Data = perkiraan"}
+
+
+def arah_emas(e: dict | None) -> dict | None:
+    """Reaksi emas 1 jam untuk satu hasil (bawah/atas/sesuai) -> angka besar "75% NAIK 🟢" + bukti singkat.
+    Kuat hanya bila >= 60% di semua data DAN arah yang sama >= 55% sejak Okt 2021 (konsisten lama & baru)."""
+    if not e or e.get("naik1j") is None:
+        return None
+    naik, baru, n = int(e["naik1j"]), e.get("baru_naik1j"), int(e.get("n") or 0)
+    up = naik >= 50
+    pct = naik if up else 100 - naik
+    pct_baru = None if baru is None else (baru if up else 100 - baru)
+    kata = "naik" if up else "turun"
+    bukti = f"teruji {e.get('tahun') or '2012–2025'} ({n} rilis)"
+    if pct_baru is not None:
+        bukti += f" • sejak Okt 2021: {pct_baru}% {kata}"
+    kuat = pct >= 60 and (pct_baru is None or pct_baru >= 55)
+    if kuat:
+        teks = f"{pct}% NAIK 🟢" if up else f"{pct}% TURUN 🔴"
+    else:                                         # angka tetap ditampilkan, tapi abu-abu & diberi label
+        teks = f"{pct}% {kata} ⚪"
+        bukti = ("tidak konsisten" if pct >= 60 else "lemah" if pct >= 55 else "≈ lempar koin") + " • " + bukti
+    return {"arah": kata, "persen": pct, "n": n, "kuat": kuat, "teks": teks, "bukti": bukti}
+
+
+def skenario(title: str) -> list[dict]:
+    """Sebelum rilis: arah emas 1 jam bila data di bawah / di atas perkiraan (atau = perkiraan bila hanya itu)."""
+    emas = (STATS["dasar"].get(title) or {}).get("emas") or {}
+    keys = [k for k in ("bawah", "atas") if k in emas] or [k for k in ("sesuai",) if k in emas]
+    out = []
+    for k in keys:
+        a = arah_emas(emas[k])
+        if a:
+            out.append({"hasil": k, "label": LABEL_HASIL[k], **a})
+    return out
+
+
 def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
-    """Setelah Act keluar: arah emas 1 jam dari data historis (satu persentase besar + jumlah bukti).
-    hasil = Act dibanding Cons; persentase = seberapa sering emas naik/turun 1 jam untuk hasil itu."""
+    """Setelah Act keluar: arah emas 1 jam dari data historis untuk hasil itu (Act dibanding Cons)."""
     st = STATS["dasar"].get(title)
     a, f = _num(actual), _num(forecast)
     if not st or a is None or f is None:
         return None
     hasil = "atas" if a > f else "bawah" if a < f else "sesuai"
-    e = (st.get("emas") or {}).get(hasil)
-    if not e or e.get("naik1j") is None:
+    r = arah_emas((st.get("emas") or {}).get(hasil))
+    if not r:
         return None
-    naik = int(e["naik1j"])
-    n = int(e.get("n") or st["semua"]["n"])
-    baru = e.get("baru_naik1j")
-    up = naik >= 50
-    pct = naik if up else 100 - naik
-    kuat = pct >= 60
-    return {"hasil": hasil, "arah": "naik" if up else "turun", "persen": pct, "n": n, "kuat": kuat,
-            "teks": f"{'🟢 Emas naik' if up else '🔴 Emas turun'} 1 jam: {pct}%",
-            "catatan": f"Act {'di atas' if hasil == 'atas' else 'di bawah' if hasil == 'bawah' else 'sama dengan'} "
-                       f"perkiraan • {n} rilis sejak 2010"
-                       + ("" if baru is None else f" • 5 th: {baru if up else 100 - baru}%")
-                       + ("" if kuat else " • lemah (≈ lempar koin)")}
+    return {"hasil": hasil, **r,
+            "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas 1 jam • {r['bukti']}"}
 
 
 def alarm_texts() -> dict:
@@ -146,6 +196,9 @@ def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -
         "petunjuk": [_clue_text(c) for c in st.get("petunjuk", [])],
         "detik": detik(group_of(title)),
         "detik_singkat": detik_singkat(group_of(title)),
+        # tampilan singkat aplikasi 3.15: angka besar + bukti (teruji tahun..tahun, jumlah rilis)
+        "skenario": skenario(title),
+        "detik_ringkas": detik_ringkas(group_of(title)),
     }
 
 

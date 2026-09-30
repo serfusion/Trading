@@ -295,12 +295,19 @@ membacanya lewat `research/news_data.load_calendar()` setelah
 
 - **Token hanya di Vercel, tidak di APK** (APK bisa dibongkar). GitHub → Settings → Developer settings →
   Fine-grained tokens → *Generate*: Repository access = hanya `serfusion/Trading`, Permissions → *Contents: Read and
-  write*. Salin ke Vercel → Environment Variables: `GITHUB_TOKEN` → Redeploy. Opsional: `ARSIP_REPO`
-  (bawaan `serfusion/Trading`), `ARSIP_BRANCH` (bawaan `arsip-berita`, dibuat otomatis).
+  write*. Salin ke Vercel → Environment Variables: **Key** `GITHUB_TOKEN`, **Value** = token (diawali `github_pat_`)
+  → Redeploy. **Token hanya di `GITHUB_TOKEN`.** `ARSIP_REPO` dan `ARSIP_BRANCH` sebaiknya TIDAK dibuat (bawaan
+  `serfusion/Trading` & `arsip-berita`); bila dibuat, isinya nama repo/branch, bukan token. Isi yang salah bentuk
+  diabaikan otomatis, dan status di aplikasi tidak pernah menampilkan token (disensor `•••`).
+- Bila token pernah tampil di layar/tangkapan layar/chat: GitHub → Fine-grained tokens → token itu → **Revoke**,
+  buat token baru, ganti nilai `GITHUB_TOKEN`, Redeploy.
 - **Tidak kena limit**: kalender ForexFactory di-cache di Supabase 10 menit untuk semua pembukaan aplikasi
   (baris `kalender`); GitHub hanya ditulis bila isi berubah, paling sering tiap 15 menit kecuali ada Act baru
   (baris `arsip`). Pemakaian ±beberapa commit per hari, jauh di bawah batas API GitHub (5.000 permintaan/jam).
 - Commit arsip tidak memicu deploy: `cloud/vercel.json` → `ignoreCommand` hanya membangun ulang bila folder `cloud/`
   berubah. CI APK hanya berjalan bila `android/` berubah.
 - Cek: respons `GET /api/chat` berisi `"arsip": {"status": "tersimpan" | "tidak berubah" | "ditunda ..." | "mati
-  (GITHUB_TOKEN belum diisi di Vercel)"}`.
+  (GITHUB_TOKEN belum diisi di Vercel)" | "gagal: ..."}`. Arti "gagal": *GITHUB_TOKEN bukan token GitHub* = nilai
+  bukan token (mis. tertukar dengan nama repo); *ditolak GitHub (HTTP 401)* = token salah/kedaluwarsa/dicabut;
+  *tidak bisa membaca repo (HTTP 404)* = Repository access token tidak memuat repo ini atau Resource owner salah
+  (repo milik organisasi `serfusion` → Resource owner harus `serfusion`); *HTTP 403* = izin Contents masih Read-only.

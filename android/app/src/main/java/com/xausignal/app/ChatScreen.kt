@@ -278,6 +278,28 @@ private fun TrendCard(tren: JSONObject?, loading: Boolean) {
     }
 }
 
+/** Warna angka besar: 🟢 NAIK hijau, 🔴 TURUN/RUGI merah, lemah/⚠️ abu-abu atau emas. */
+@Composable
+private fun arahColor(teks: String, kuat: Boolean) = when {
+    kuat && teks.contains("🟢") -> BuyColor
+    teks.contains("🔴") -> SellColor
+    teks.contains("⚠️") -> Gold
+    else -> Muted
+}
+
+/** Satu baris "label kiri + bukti kecil | angka besar kanan", gaya kartu Status tren. */
+@Composable
+private fun BigRow(label: String, bukti: String, teks: String, kuat: Boolean) {
+    Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+            if (bukti.isNotBlank()) Text(bukti, style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+        Text(teks, fontWeight = FontWeight.ExtraBold, color = arahColor(teks, kuat),
+            style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 8.dp))
+    }
+}
+
 /** Satu baris kalender: judul, waktu WIB, status, Act (otomatis) / Cons / Prev. */
 @Composable
 private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
@@ -289,8 +311,8 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
             Text(e.title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
             Text("${e.whenText} • ${countdown(e)}", style = MaterialTheme.typography.labelSmall, color = Muted)
             if (e.arahTeks.isNotBlank()) {                 // kesimpulan otomatis setelah Act keluar
-                Text(e.arahTeks, fontWeight = FontWeight.ExtraBold,
-                    color = if (e.arahKuat) Gold else Muted, style = MaterialTheme.typography.titleMedium)
+                Text(e.arahTeks, fontWeight = FontWeight.ExtraBold, color = arahColor(e.arahTeks, e.arahKuat),
+                    style = MaterialTheme.typography.headlineSmall)
                 Text(e.arahCatatan, style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
@@ -332,16 +354,25 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             return@AppCard
         }
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
+        if (list.length() > 0) Text("Arah emas 1 jam setelah angka keluar (dari data historis)",
+            style = MaterialTheme.typography.labelSmall, color = Muted)
         for (i in 0 until list.length()) {
             val b = list.getJSONObject(i)
-            val em = b.optJSONObject("emas_jika") ?: JSONObject()
-            fun pct(k: String) = if (em.has(k)) "${em.optInt(k)}%" else "-"
             if (i > 0) LineDivider()
-            Text("${b.optString("title")} • ${b.optString("when")}", fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.bodySmall)
-            // hanya angka yang terbukti: peluang emas naik 1 jam SETELAH angka keluar
-            Text("Emas naik 1 jam: data < perkiraan ${pct("bawah")} • > perkiraan ${pct("atas")}",
-                style = MaterialTheme.typography.bodySmall)
+            Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+            Text(b.optString("when"), style = MaterialTheme.typography.labelSmall, color = Muted)
+            val sk = b.optJSONArray("skenario")
+            if (sk != null) {
+                for (k in 0 until sk.length()) {
+                    val x = sk.getJSONObject(k)
+                    BigRow(x.optString("label"), x.optString("bukti"), x.optString("teks"), x.optBoolean("kuat"))
+                }
+            } else {                                        // cloud lama (tanpa "skenario")
+                val em = b.optJSONObject("emas_jika") ?: JSONObject()
+                fun pct(k: String) = if (em.has(k)) "${em.optInt(k)}%" else "-"
+                Text("Emas naik 1 jam: data < perkiraan ${pct("bawah")} • > perkiraan ${pct("atas")}",
+                    style = MaterialTheme.typography.bodySmall)
+            }
             val arah = b.optString("arah")
             if (arah.startsWith("condong")) Text("Sebelum rilis: $arah", color = Gold,
                 style = MaterialTheme.typography.bodySmall)
@@ -351,8 +382,13 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 if (t.contains("✅")) Text("✅ ${t.substringBefore(":")}", style = MaterialTheme.typography.labelSmall,
                     color = Muted)
             }
-            b.optString("detik_singkat").ifBlank { null }?.let {
-                Text("⏱️ $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+            val d = b.optJSONObject("detik_ringkas")
+            if (d != null) {
+                BigRow(d.optString("judul"), d.optString("bukti"), d.optString("teks"), false)
+            } else {
+                b.optString("detik_singkat").ifBlank { null }?.let {
+                    Text("⏱️ $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+                }
             }
         }
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)

@@ -116,3 +116,34 @@ def test_calendar_cache_10_menit_dan_cadangan():
     assert _arsip.calendar_cached(store, NOW + timedelta(minutes=11), fetch) == ROWS and len(calls) == 2
     assert _arsip.calendar_cached(store, NOW + timedelta(minutes=30), lambda: None) == ROWS   # gagal -> cache lama
     assert _arsip.calendar_cached(None, NOW, fetch) == ROWS                                   # tanpa Supabase
+
+
+TOKEN = "_".join(["github", "pat", "PALSU" + "x" * 20, "c" * 40])     # token palsu, dirakit agar tidak mirip asli
+
+
+def test_arsip_repo_berisi_token_diabaikan_dan_tidak_bocor():
+    repo, branch, warn = _arsip.target({"ARSIP_REPO": TOKEN, "ARSIP_BRANCH": TOKEN})
+    assert (repo, branch) == ("serfusion/Trading", "arsip-berita") and len(warn) == 2
+    assert not any(TOKEN[:15] in w for w in warn)
+    assert _arsip.target({"ARSIP_REPO": " serfusion/Trading "})[:2] == ("serfusion/Trading", "arsip-berita")
+    assert _arsip.target({"ARSIP_REPO": "orang/repo-lain"})[:2] == ("orang/repo-lain", "arsip-berita")
+
+
+def test_status_gagal_tidak_pernah_memuat_token():
+    class Tolak(FakeGH):
+        def req(self, method, path, body=None):
+            if path.endswith("/branches/arsip-berita"):
+                return 404, None
+            if path == "/repos/serfusion/Trading":
+                return 404, None
+            return super().req(method, path, body)
+    out = _arsip.save(ROWS, CAL, NOW, Store(), {"GITHUB_TOKEN": TOKEN, "ARSIP_REPO": TOKEN}, Tolak())
+    st = out["status"]
+    assert st.startswith("gagal: PermissionError") and "serfusion/Trading (HTTP 404)" in st and "ARSIP_REPO salah" in st
+    assert "github_pat_" not in st and "c" * 36 not in st
+    assert _arsip.redact(f"x {TOKEN} ghp_{'a' * 36} y") == "x ••• ••• y"
+
+
+def test_github_token_bukan_token():
+    st = _arsip.save(ROWS, CAL, NOW, Store(), {"GITHUB_TOKEN": "serfusion/Trading", "ARSIP_REPO": TOKEN})["status"]
+    assert st.startswith("gagal: GITHUB_TOKEN bukan token GitHub") and "tertukar" in st and "github_pat_1" not in st

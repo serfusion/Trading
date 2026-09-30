@@ -107,7 +107,7 @@ class handler(BaseHTTPRequestHandler):
         except ValueError as exc:
             self._send(400, {"ok": False, "error": str(exc)})
         except Exception as exc:  # noqa: BLE001
-            self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
+            self._send(500, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
 
     def do_GET(self):
         if not self._authorized():
@@ -118,13 +118,13 @@ class handler(BaseHTTPRequestHandler):
             try:
                 tren = _tren_status(now)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau status tren gagal
-                tren = {"error": f"{type(exc).__name__}: {exc}"}
+                tren = {"error": _arsip.redact(f"{type(exc).__name__}: {exc}")}
             store = _store()
             rows = _calendar(store, now)
             try:
                 persiapan = _persiapan.cards(rows, now)     # 🎯 kartu persiapan berita (pengganti contoh pertanyaan)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau kartu gagal
-                persiapan = {"error": f"{type(exc).__name__}: {exc}"}
+                persiapan = {"error": _arsip.redact(f"{type(exc).__name__}: {exc}")}
             calendar = _chat.calendar_json(rows, now)
             for c in calendar:                                # Act sudah keluar -> kesimpulan arah otomatis
                 if c.get("actual"):
@@ -135,10 +135,10 @@ class handler(BaseHTTPRequestHandler):
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
-                arsip = {"status": f"gagal: {type(exc).__name__}: {str(exc)[:160]}"}
+                arsip = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {str(exc)[:160]}")}
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
                              "arsip": arsip})
         except Exception as exc:  # noqa: BLE001
-            self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
+            self._send(500, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})

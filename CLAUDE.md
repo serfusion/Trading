@@ -58,6 +58,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   menggantikan chip "Contoh pertanyaan"; izin pengguna 30 Sep). 27 petunjuk sebelum rilis diuji: hanya kejutan CPI
   bulan lalu & bensin yang menebak arah CPI (61–67%), tetapi emas naik 1 jam tetap 47–55% → tidak ada keunggulan.
   Butuh kalender: `git clone` spoluan/forex-factory-scraper & ehsanrs2/forexfactory-scraper ke data/research.
+- Format tampilan (aplikasi 3.15, permintaan pengguna): angka besar "75% NAIK 🟢" + bukti kecil "teruji 2012–2025
+  (n rilis) • sejak Okt 2021: X%". JANGAN pakai kata "menang" (tidak jelas) → "untung di X% rilis".
 - Polymarket/Kalshi/Cleveland Fed/CME/BLS DIBLOKIR jaringan sesi (403) → belum diuji; minta pengguna membuka host
   bila ingin diuji.
 
@@ -87,7 +89,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —
-  pengguna yang membuat; jangan pernah taruh token di APK. Riset: `git fetch origin arsip-berita && git checkout
+  pengguna yang membuat; jangan pernah taruh token di APK. 30 Sep: pengguna mengisi token di `ARSIP_REPO` → token
+  tampil di aplikasi; kini ARSIP_REPO salah bentuk diabaikan & status disensor (`_arsip.redact`) — jangan pernah
+  menampilkan nilai env di status/pesan galat. Riset: `git fetch origin arsip-berita && git checkout
   FETCH_HEAD -- data/berita` lalu `load_calendar()` otomatis memakainya.
 
 ## Trading Alchemist (30 Sep 2026 — `docs/TRADING_ALCHEMIST.md`)

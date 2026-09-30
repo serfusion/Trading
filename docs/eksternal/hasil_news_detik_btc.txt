@@ -210,3 +210,24 @@ PMI                                          n=  41 WR  80.5% rata  -0.92 total 
 PPI                                          n=  57 WR  75.4% rata  +0.83 total    +47.2 t  +0.9 | LAMA  -0.34 (n=10) BARU  +1.08 (n=47) | tahun+  75% dari 8
 RETAIL                                       n=  55 WR  74.5% rata  -0.90 total    -49.5 t  -1.2 | LAMA  -1.52 (n=23) BARU  -0.45 (n=32) | tahun+  25% dari 8
 RUMAH                                        n=   7 WR  71.4% rata  -2.11 total    -14.7 t  -1.0 | LAMA  -0.79 (n=4) BARU  -3.86 (n=3) | tahun+   0% dari 2
+
+-- preset aplikasi 'pending1': Buy Stop & Sell Stop $1 dari harga 5 dtk sebelum rilis, tutup menit 1-5 bila profit, maks 15 mnt (slippage $0.30) --
+SEMUA                                        n=1134 WR  68.6% rata  -0.71 total   -807.4 t  -2.2 | LAMA  -0.99 (n=399) BARU  -0.56 (n=735) | tahun+  22% dari 9
+ADP                                          n=  72 WR  79.2% rata  -0.88 total    -63.2 t  -0.6 | LAMA  -3.22 (n=23) BARU  +0.22 (n=49) | tahun+  78% dari 9
+CLAIMS                                       n= 103 WR  65.0% rata  -0.62 total    -63.5 t  -1.6 | LAMA  -2.39 (n=7) BARU  -0.49 (n=96) | tahun+   0% dari 5
+CPI                                          n=  99 WR  65.7% rata  +0.07 total     +7.1 t  +0.0 | LAMA  -0.63 (n=39) BARU  +0.53 (n=60) | tahun+  44% dari 9
+DURABLE                                      n=  20 WR  75.0% rata  +0.29 total     +5.7 t  +0.4 | LAMA  +0.22 (n=19) BARU  +1.44 (n=1) | tahun+  75% dari 4
+ECI                                          n=   5 WR  80.0% rata  +0.17 total     +0.8 t  +0.2 | LAMA   +nan (n=0) BARU  +0.17 (n=5) | tahun+  67% dari 3
+FOMC                                         n=  68 WR  70.6% rata  -1.83 total   -124.5 t  -0.8 | LAMA  -1.69 (n=28) BARU  -1.93 (n=40) | tahun+  44% dari 9
+GDP                                          n=  50 WR  60.0% rata  -1.19 total    -59.6 t  -1.2 | LAMA  -1.55 (n=24) BARU  -0.86 (n=26) | tahun+  25% dari 8
+ISM                                          n= 171 WR  70.2% rata  -0.80 total   -137.3 t  -1.6 | LAMA  -0.56 (n=70) BARU  -0.97 (n=101) | tahun+  33% dari 9
+JOLTS                                        n=  29 WR  62.1% rata  -2.19 total    -63.6 t  -1.7 | LAMA   +nan (n=0) BARU  -2.19 (n=29) | tahun+  20% dari 5
+KONSUMEN                                     n=  98 WR  71.4% rata  -0.65 total    -64.0 t  -1.2 | LAMA  +0.07 (n=26) BARU  -0.91 (n=72) | tahun+  67% dari 9
+MANUFAKTUR                                   n=  19 WR  73.7% rata  -0.06 total     -1.2 t  -0.2 | LAMA  +0.22 (n=4) BARU  -0.14 (n=15) | tahun+  50% dari 4
+MINYAK                                       n=  43 WR  58.1% rata  -1.25 total    -53.7 t  -1.5 | LAMA  -1.25 (n=43) BARU   +nan (n=0) | tahun+  33% dari 3
+NFP                                          n= 100 WR  71.0% rata  -0.93 total    -93.4 t  -0.8 | LAMA  -0.53 (n=41) BARU  -1.22 (n=59) | tahun+  56% dari 9
+PCE                                          n=  51 WR  56.9% rata  -0.68 total    -34.6 t  -0.5 | LAMA  +1.41 (n=2) BARU  -0.76 (n=49) | tahun+  50% dari 6
+PMI                                          n=  50 WR  78.0% rata  -0.19 total     -9.3 t  -0.2 | LAMA  -4.02 (n=8) BARU  +0.54 (n=42) | tahun+  50% dari 8
+PPI                                          n=  71 WR  73.2% rata  +0.41 total    +28.9 t  +0.4 | LAMA  +0.07 (n=20) BARU  +0.54 (n=51) | tahun+  62% dari 8
+RETAIL                                       n=  74 WR  60.8% rata  -1.18 total    -87.1 t  -2.0 | LAMA  -1.43 (n=38) BARU  -0.91 (n=36) | tahun+  25% dari 8
+RUMAH                                        n=  11 WR  81.8% rata  +0.46 total     +5.1 t  +0.4 | LAMA  -0.88 (n=7) BARU  +2.80 (n=4) | tahun+  67% dari 3
