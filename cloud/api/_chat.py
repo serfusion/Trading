@@ -579,7 +579,28 @@ BANTUAN = """Saya menjawab dari DATA historis (bukan AI, bukan ramalan). Contoh 
 • "Sinyal terbuka" → posisi bot sekarang
 • "SL+ / TP / running" → hasil uji skema
 • "BTC funding" / "BTC September" → filter BTC
+• "Entry detik pertama NFP" / "straddle CPI" → hasil uji masuk di detik awal setelah rilis
 Tambahkan "BTC" untuk statistik BTC (FOMC/NFP/CPI)."""
+
+
+# ------------------------------------------------------------------ ⏱️ detik pertama setelah rilis
+DETIK_WORDS = ["detik", "straddle", "buy stop", "sell stop", "pending order", "lonjakan", "spike", "scalping berita",
+               "scalp berita", "news trading", "trading berita", "entry berita", "masuk saat berita"]
+
+
+def detik_answer(grp: str | None) -> str:
+    """Hasil uji entry di detik pertama setelah rilis (cloud/api/detik.json dari research/news_detik.py)."""
+    import _persiapan  # modul lokal (kartu 🎯); impor di sini agar _chat tetap bisa dipakai sendiri
+
+    body = _persiapan.detik(grp)
+    if not body:
+        return "Data uji detik pertama belum tersedia di server ini (cloud/api/detik.json)."
+    return ("⏱️ ENTRY DI DETIK PERTAMA SETELAH RILIS" + (f" — {_nama(grp)}" if grp else "") +
+            " (uji tick bid/ask, spread asli + slippage; satuan $ per 0,01 lot XAU, BTC dalam x0,05% harga)\n" +
+            body + "\nYang untung di detik pertama umumnya pelaku berkecepatan milidetik (feed berita berbayar + server "
+            "dekat bursa). Lonjakan sering terjadi dalam satu loncatan harga, jadi order manual/pending terisi jauh "
+            "dari harga yang terlihat. Pengingat ⏱️ 1 menit sebelum rilis ada di kartu 🎯. Aplikasi tidak membuka "
+            "order.")
 
 
 # ------------------------------------------------------------------ utama
@@ -626,6 +647,8 @@ def answer(messages: list, now: datetime, calendar_rows=None, states: dict | Non
         sched = _schedule_line(rows[0]["group"], calendar, now) if rows[0]["group"] else None
         if sched:
             reply = reply.replace("\n", "\n" + sched + "\n", 1)
+    elif _has(t, DETIK_WORDS):
+        reply = detik_answer(info["group"])
     elif info["group"]:
         reply = event_answer(info, calendar, now)
     elif _has(t, ["sl+", "sl +", "sl plus", "tp1", "tp 1", "tp2", "running", "trailing", "tangga", "0,7", "0.7", "skema"]):

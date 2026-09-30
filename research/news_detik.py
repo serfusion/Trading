@@ -351,6 +351,12 @@ def anatomy(p: Tick) -> dict:
     row["range_pra"] = float(np.ptp(p.mid[quiet])) / u if quiet.any() else np.nan
     g5, g900 = row["gerak_5"], row["gerak_900"]
     row["lanjut"] = float(np.sign(g900 - g5) == np.sign(g5)) if g5 != 0 else np.nan
+    # sisa gerak SEARAH sesudah masuk di detik d (sebelum biaya): tanda(gerak d) x (gerak h - gerak d)
+    for d in (1, 5, 10, 30):
+        gd = float(p.mid[p.at(d)] - ref) / u
+        for h in (60, 900):
+            gh = float(p.mid[p.at(h)] - ref) / u
+            row[f"sisa_{d}_{h}"] = float(np.sign(gd) * (gh - gd)) if gd != 0 else np.nan
     return row
 
 
@@ -478,8 +484,18 @@ def main(aset: str = "XAU") -> None:
                 f"{gg.gerak_60.abs().median():.2f} +15m {gg.gerak_900.abs().median():.2f} | arah +5s berlanjut s.d. "
                 f"15m {gg.lanjut.mean() * 100:.0f}%")
     lines.append("")
+    lines.append("== Sisa gerak searah bila masuk di detik d (rata-rata, SEBELUM spread/slippage) ==")
+    for lab, g in [("SEMUA", an)] + [(k, v) for k, v in an.groupby("group")]:
+        for per, gg in (("LAMA", g[g.time < NEW]), ("BARU", g[g.time >= NEW])):
+            if len(gg) < 5:
+                continue
+            parts = [f"d={d}s: 1m {gg[f'sisa_{d}_60'].mean():+.2f} / 15m {gg[f'sisa_{d}_900'].mean():+.2f}"
+                     for d in (1, 5, 10, 30)]
+            lines.append(f"{lab:7} {per} n={len(gg):4} " + " | ".join(parts))
+    lines.append("")
     base = tr[(tr.slip == 0) & (tr.lat <= 0.5)]
     rob = tr[(tr.slip == 0.3) & ((tr.lat == 2.0) | tr.aturan.str.startswith("STRADDLE"))]
+    stres = tr[(tr.slip == 1.0) & ((tr.lat == 2.0) | tr.aturan.str.startswith("STRADDLE"))]
     rows = []
     for (rule, ex, sl), g in base.groupby(["aturan", "keluar", "sl"]):
         r = rob[(rob.aturan == rule) & (rob.keluar == ex) & (rob.sl == sl)]
@@ -489,7 +505,13 @@ def main(aset: str = "XAU") -> None:
     lolos = [r for r in rows if r[5]]
     lines.append(f"LOLOS kriteria konsisten: {len(lolos)}")
     for rule, ex, sl, s, sr, _ in lolos:
-        lines.append(fmt(f"{rule} | {ex}{' +SL$5' if sl else ''}", s) + f" | kuat {sr['avg']:+.2f}")
+        st = stats(stres[(stres.aturan == rule) & (stres.keluar == ex) & (stres.sl == sl)])
+        g = base[(base.aturan == rule) & (base.keluar == ex) & (base.sl == sl)]
+        yr = g.groupby(g.time.dt.year).pnl.sum()
+        tanpa = g[g.time.dt.year != yr.idxmax()].pnl.mean()
+        lines.append(fmt(f"{rule} | {ex}{' +SL$5' if sl else ''}", s) + f" | kuat {sr['avg']:+.2f} | stres slip 1 "
+                     f"{st.get('avg', np.nan):+.2f} | tanpa {yr.idxmax()} {tanpa:+.2f}"
+                     + (" | LAMA tipis" if s["n_lama"] < 20 else ""))
     lines.append("")
     lines.append("-- aturan pengguna (tutup menit 1-5 bila profit, paksa 15 menit), tanpa SL --")
     for rule, ex, sl, s, sr, _ in sorted(rows, key=lambda r: -r[3].get("avg", -9)):
