@@ -4,6 +4,7 @@ from datetime import date, timedelta
 from pathlib import Path
 
 import numpy as np
+import pytest
 import pandas as pd
 
 from research.strategy_lab import Bars
@@ -70,3 +71,68 @@ def test_tanpa_perang_tanpa_label(monkeypatch):
     assert sig and all(e["tier"] == "bronze" and not e["zap"] and "war" not in e and not e["badge"].startswith("⚡")
                        for e in sig)
     assert np.isclose(sig[0]["avg_r"], 0.309)
+
+
+class FakeStore:
+    def __init__(self, data=None):
+        self.data, self.saved = dict(data or {}), 0
+
+    def get_state(self, row):
+        return self.data.get(row, {})
+
+    def save_state(self, data, row):
+        self.data[row], self.saved = data, self.saved + 1
+
+
+def _uso_response(monkeypatch, closes, start=date(2026, 9, 14)):
+    import io
+    import json
+    calls = []
+    values = [{"datetime": (start + timedelta(days=k)).isoformat(), "close": str(c)} for k, c in enumerate(closes)]
+
+    def fake(url, timeout=0):
+        calls.append(url)
+        return io.BytesIO(json.dumps({"status": "ok", "values": values}).encode())
+    monkeypatch.setattr(_perang.urllib.request, "urlopen", fake)
+    return calls
+
+
+def test_perang_fred_segar_tanpa_cadangan(monkeypatch):
+    from datetime import datetime, timezone
+    now = datetime(2026, 9, 30, 12, tzinfo=timezone.utc)
+    rows = [(date(2026, 9, 15) + timedelta(days=k), 60.0 + k) for k in range(12)]
+    monkeypatch.setattr(_perang, "fred_rows", lambda: rows)
+    st = _perang.current(now, backup=lambda: (_ for _ in ()).throw(AssertionError("cadangan dipanggil")))
+    assert st["src"] == "FRED" and st["on"] and st["wti"] == 71.0 and "WTI" in st["text"]
+
+
+def test_perang_cadangan_uso_saat_fred_gagal_atau_basi(monkeypatch):
+    from datetime import datetime, timezone
+    now = datetime(2026, 9, 26, 22, tzinfo=timezone.utc)
+    calls = _uso_response(monkeypatch, [50.0 + k for k in range(13)])      # 14..26 Sep, 26 Sep sudah final (22:00)
+    store = FakeStore()
+
+    def gagal():
+        raise OSError("timeout")
+    monkeypatch.setattr(_perang, "fred_rows", gagal)
+    st = _perang.current(now, lambda: _perang.uso_rows("k", store, now))
+    assert st["src"] == "USO" and st["on"] and st["wti"] is None and "USO" in st["text"]
+    assert "FRED" in st["fred_error"] and st["date"] == "2026-09-26" and len(calls) == 1 and store.saved == 1
+
+    basi = [(date(2026, 9, 1) + timedelta(days=k), 60.0) for k in range(12)]  # terakhir 12 Sep = 14 hari lalu
+    monkeypatch.setattr(_perang, "fred_rows", lambda: basi)
+    st = _perang.current(now + timedelta(hours=1), lambda: _perang.uso_rows("k", store, now + timedelta(hours=1)))
+    assert st["src"] == "USO" and len(calls) == 1                          # dari cache (< 6 jam), tanpa kredit baru
+
+    with pytest.raises(RuntimeError):
+        _perang.current(now, backup=None)                                    # WAR_BACKUP=0 -> perilaku lama
+
+
+def test_uso_candle_hari_ini_belum_final_dan_refresh(monkeypatch):
+    from datetime import datetime, timezone
+    calls = _uso_response(monkeypatch, [50.0] * 13)
+    store = FakeStore()
+    siang = datetime(2026, 9, 26, 15, tzinfo=timezone.utc)                  # NYSE masih buka
+    assert _perang.uso_rows("k", store, siang)[-1][0] == date(2026, 9, 25)
+    assert _perang.uso_rows("k", store, siang + timedelta(hours=7))[-1][0] == date(2026, 9, 26)
+    assert len(calls) == 2                                                   # >= 6 jam -> unduh ulang

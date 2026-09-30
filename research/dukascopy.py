@@ -2,6 +2,7 @@
 
 python -m research.dukascopy h1 2012-01 2026-09          # file bulanan H1 (2 x ~180 unduhan)
 python -m research.dukascopy m1 2025-01-01 2026-09-25    # file harian M1 (2 x jumlah hari)
+python -m research.dukascopy d1 2012 2026 LIGHTCMDUSD    # candle harian BID (hari UTC), 1 file per tahun
 
 Format .bi5 = LZMA, baris 24 byte big-endian: detik sejak awal file, open, close, low, high (int, x 0,001 untuk
 XAUUSD), volume (float). Bulan di URL dimulai dari 00. Candle datar tanpa volume (akhir pekan/libur) dibuang.
@@ -80,6 +81,40 @@ def fetch(sym: str, kind: str, start: str, end: str, pause: float = 0.3) -> dict
     return out
 
 
+def daily(sym: str, y0: int, y1: int) -> pd.DataFrame:
+    """Candle harian BID (hari UTC 00:00-24:00) -> parquet; tahun berjalan dari H1 (bulan berjalan diunduh ulang)."""
+    raw_dir = cache_path(f"dukascopy/raw_{sym}_d1")
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    frames = []
+    for y in range(y0, y1 + 1):
+        f = raw_dir / f"BID_{y}0101.bi5"
+        if y >= pd.Timestamp.now(tz="UTC").year:
+            continue
+        if not f.exists():
+            f.write_bytes(_get(f"{URL}/{sym}/{y}/BID_candles_day_1.bi5"))
+            print(f"{sym} d1 {y}", flush=True)
+        frames.append(_decode(f.read_bytes(), pd.Timestamp(f"{y}-01-01", tz="UTC"), POINT[sym]))
+    # tahun berjalan: file tahunan belum ada -> candle H1 BID bulanan digabung per hari UTC
+    now = pd.Timestamp.now(tz="UTC")
+    if y1 >= now.year:
+        h1_dir = cache_path(f"dukascopy/raw_{sym}_h1")
+        h1_dir.mkdir(parents=True, exist_ok=True)
+        for p in pd.period_range(f"{now.year}-01", now.strftime("%Y-%m"), freq="M"):
+            t0 = p.to_timestamp().tz_localize("UTC")
+            f = h1_dir / f"BID_{t0:%Y%m%d}.bi5"
+            if not f.exists() or p == now.to_period("M"):
+                f.write_bytes(_get(f"{URL}/{sym}/{t0.year}/{t0.month - 1:02d}/BID_candles_hour_1.bi5"))
+                print(f"{sym} h1 {t0:%Y-%m}", flush=True)
+            h = _decode(f.read_bytes(), t0, POINT[sym])
+            if len(h):
+                frames.append(h.resample("1D").agg({"open": "first", "high": "max", "low": "min", "close": "last",
+                                                    "volume": "sum"}).dropna())
+    df = pd.concat([x for x in frames if len(x)]).sort_index()
+    df = df[~df.index.duplicated()]
+    df.to_parquet(cache_path(f"dukascopy/{sym}_d1_BID.parquet"))
+    return df
+
+
 def load(sym: str, kind: str) -> tuple[pd.DataFrame, pd.DataFrame]:
     """(BID, ASK) dari semua file mentah yang sudah terunduh (boleh sebagian; ASK bisa kosong di tahun tertentu)."""
     raw_dir = cache_path(f"dukascopy/raw_{sym}_{kind}")
@@ -97,6 +132,9 @@ def load(sym: str, kind: str) -> tuple[pd.DataFrame, pd.DataFrame]:
 if __name__ == "__main__":
     kind, a, b = sys.argv[1], sys.argv[2], sys.argv[3]
     sym = sys.argv[4] if len(sys.argv) > 4 else "XAUUSD"
+    if kind == "d1":
+        df = daily(sym, int(a), int(b))
+        raise SystemExit(print(f"{sym} d1 BID: {len(df)} candle {df.index[0]} .. {df.index[-1]}"))
     res = fetch(sym, kind, a, b)
     for side, df in res.items():
         print(f"{sym} {kind} {side}: {len(df)} candle {df.index[0]} .. {df.index[-1]}")

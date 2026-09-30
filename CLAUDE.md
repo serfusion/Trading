@@ -38,10 +38,19 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - DIPASANG 30 Sep (izin pengguna): ⚡/peringkat (`_core.tier`, `vol_pct`), label ⚠️ mode perang tanpa jeda
   (`_perang.py`, env WAR_MODE), aplikasi 3.11 (lot per peringkat ⚡ 1% / 0,5% / biasa ½, SL+ otomatis ⚡ & BTC 0,7R,
   modal otomatis, kurs 17.500). Pengguna MENOLAK risiko 80% modal (diberi batas 1%).
+- Cadangan USO untuk label ⚠️ (izin pengguna 30 Sep): `_perang.current()` pakai FRED; bila FRED gagal/basi
+  (> 10 hari — FRED WTI terbit MINGGUAN, umur normal 5–9 hari) pakai USO Twelve Data (cache baris Supabase
+  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & ini baru aktif setelah PR serfusion/Trading#24 +
+  branch ini di-merge ke branch produksi Vercel.
 - TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
   emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
   sintetis RNG (harga acak -> rugi sebesar spread).
-- Twelve Data key masih 401 di sesi 30 Sep; Dukascopy WTI sangat lambat (±1 file/menit).
+- Twelve Data key AKTIF (dicek ulang 30 Sep, paket gratis, 8 kredit/menit): WTI/USD, XBR/USD, BRENT butuh paket
+  berbayar (404); proksi minyak gratis = ETF USO/BNO (harian, jam NYSE saja; `CL` = saham Colgate, BUKAN minyak).
+  XAU/USD tersedia. Uji ulang mode perang USO/BNO + Dukascopy (`research/perang_uso.py --duka`, MOMEN_PERANG bagian
+  6): arah terkonfirmasi di semua sumber WTI, gabungan TIDAK lebih baik dari FRED → label FRED tetap. Dukascopy
+  harian: `python -m research.dukascopy d1 2011 2026 LIGHTCMDUSD` (1 file/tahun;
+  H1 WTI sangat lambat, ±1 file/menit).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

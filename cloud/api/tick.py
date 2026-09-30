@@ -56,7 +56,11 @@ def run() -> tuple[int, dict]:
     if env.get("WAR_MODE", "1") == "1":    # ⚠️ mode perang (label saja, XAU tidak dijeda)
         try:
             import _perang
-            cfg["war"] = _perang.status()
+            now = datetime.now(timezone.utc)
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            backup = (lambda: _perang.uso_rows(env["TWELVEDATA_API_KEY"], store, now)) \
+                if env.get("WAR_BACKUP", "1") == "1" else None    # cadangan USO bila FRED gagal/basi
+            cfg["war"] = _perang.current(now, backup)
         except Exception as exc:  # noqa: BLE001 - FRED gagal tidak boleh menghentikan sinyal
             cfg["war"] = None
             war_error = str(exc)
