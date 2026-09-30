@@ -48,3 +48,13 @@ def test_arah_emas_dari_tebakan_dan_gabungan_rilis_bersamaan():
     d = gold_dirs(df, "1 jam", 0.1)
     assert d[t] == -1.0          # inflasi di atas perkiraan -> USD kuat -> emas turun
     assert d[u] == 1.0           # pengangguran di atas perkiraan -> USD lemah -> emas naik
+
+
+def test_ekspektasi_kalshi_modus_dan_median():
+    from research.validasi_tahunan import kalshi_expect
+    c = lambda p: [[1, p, p, p, 1]]  # noqa: E731
+    cpi = [m("E-T0.1", c(0.95)), m("E-T0.2", c(0.70)), m("E-T0.3", c(0.15)), m("E-T0.4", c(0.05))]
+    # P(0,2) = 0,95-0,70 = 0,25; P(0,3) = 0,70-0,15 = 0,55 (terbesar); P(0,4) = 0,10
+    assert kalshi_expect(cpi, 0.1) == 0.3
+    nfp = [m("E-T50000", c(0.8)), m("E-T100000", c(0.6)), m("E-T150000", c(0.3))]
+    assert abs(kalshi_expect(nfp, None) - (100000 + 50000 * (0.6 - 0.5) / 0.3)) < 1e-6

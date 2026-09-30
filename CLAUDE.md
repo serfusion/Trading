@@ -103,7 +103,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tebakan: 0 lolos. Kandidat: "peluang emas naik 1 mnt" CPI ≥ 60% (Kalshi × reaksi historis) → n 18, naik 72–78%,
   +$2,8–3,3/0,01 lot tutup 60 dtk di kedua feed, t 1,6–1,9 → BELUM TERBUKTI, perlu uji maju.
 - Aplikasi 3.16: baris 🎲 di kartu 🎯 (`cloud/api/_kalshi.py`, `cloud/api/kalshi.json`, cache Supabase baris `kalshi`).
-  Konsensus Feb–Sep 2026 belum ada (ForexFactory data berhenti Jan 2026).
+  Konsensus Feb–Sep 2026 belum ada (ForexFactory data berhenti Jan 2026; huggingface.co terbuka tetapi file lewat CDN
+  `us.aws.cdn.hf.co` 403 dan datasetnya hanya s.d. Apr 2025; web.archive.org/metalsmine/forexfactory 403).
+- Validasi per tahun (`research/validasi_tahunan.py`): hentakan +5 dtk searah kejutan konsensus 73–93% SETIAP tahun
+  2013–2025; tebakan Kalshi CPI 2022 55%, 2023–2025 78–90%; 2026 belum bisa diuji.
 
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch

@@ -61,3 +61,19 @@ potong 50 bps) dihargai 57% untuk 25 bps. Tidak ada informasi arah tambahan.
   `research/kalshi.py unduh` bulanan. Setelah ±30 sinyal, jalankan ulang uji.
 - Konsensus 2026 (Feb–Sep) belum ada: buka host `huggingface.co` (dataset Ehsanrs2/Forex_Factory_Calendar) atau
   perbaiki arsip GitHub aplikasi, lalu uji ulang dengan 8 rilis CPI 2026 sebagai data di luar sampel.
+
+## 6. Validasi per tahun (pertanyaan pengguna: "valid dalam tahun lampau hingga sekarang?")
+
+`python -m research.validasi_tahunan` → `docs/eksternal/hasil_validasi_tahunan.txt`.
+
+- **Hentakan emas searah kejutan konsensus analis (ForexFactory)**: valid di SETIAP tahun. Exness semua berita
+  bintang 3, +5 dtk: 73–86% per tahun 2016–2025 (semua 79%, n 1.431); CPI +5 dtk 67–100% (semua 91%); Dukascopy
+  2013–2025 +5 dtk 77–93% (2011–2012 lebih lemah, 53–60%). 2026: hanya Jan (data konsensus berhenti).
+- **Tebakan Kalshi atas kejutan CPI/core CPI** (24 jam sebelum): 2022 55% (n 11, pasar masih sepi & strike sedikit),
+  2023 89% (9), 2024 78% (9), 2025 90% (10).
+- **Terhadap ekspektasi Kalshi sendiri** (angka paling mungkin saat pasar tutup) hentakan emas lebih lemah: CPI
+  2022–2024 60–91%, 2025 44–56%, 2026 17–50% (n 6). Artinya emas bereaksi terhadap kejutan dibanding konsensus
+  ANALIS, bukan dibanding harga Kalshi — itulah sebabnya tebakan Kalshi atas kejutan konsensus bisa berguna.
+- **2026 belum bisa divalidasi**: konsensus Feb–Sep 2026 tidak didapat (forexfactory.com, metalsmine.com,
+  web.archive.org, CDN Hugging Face `us.aws.cdn.hf.co` diblokir; dataset Hugging Face sendiri hanya s.d. Apr 2025).
+  Ke depan diisi otomatis oleh arsip berita aplikasi (butuh GITHUB_TOKEN yang benar).
