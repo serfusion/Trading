@@ -1,0 +1,93 @@
+# Persiapan Berita: Bisakah Hasil CPI/NFP/PPI Ditebak Sebelum Rilis? (30 Sep 2026)
+
+Permintaan pengguna: CPI, PPI, dan FOMC terakhir keluar "kompak" lebih rendah, sesuai rumor, polling, dan
+Polymarket. Ada yang meraup untung besar di detik-detik awal rilis. Pengguna meminta semua data untuk bersiap
+menghadapi berita berikutnya, disimpulkan dalam persen, dan ditampilkan sebagai pengganti "Contoh pertanyaan" di
+tab Tanya.
+
+`python -m research.news_prediksi` → `cloud/api/persiapan.json` → kartu **🎯 Persiapan berita** (aplikasi 3.12,
+`cloud/api/_persiapan.py`).
+
+## Data & aturan
+
+- Kalender ForexFactory Jan 2010 – Jan 2026 (actual & forecast; 3.585 rilis bernilai), XAU/USD M15, bensin FRED
+  GASREGW. Setiap petunjuk hanya memakai data yang **sudah terbit sebelum rilis**.
+- **Tidak bisa diuji di sini:** Polymarket, Kalshi, Cleveland Fed nowcast, CME FedWatch, dan BLS. Host-host itu
+  diblokir kebijakan jaringan lingkungan riset (403).
+- Petunjuk dianggap **terbukti** bila tebakan arah kejutan (di atas/di bawah konsensus) benar > 50% di periode LAMA
+  (< Okt 2021) **dan** BARU (5 tahun terakhir), n ≥ 10 di masing-masing, dan p binomial < 0,05. Kasus "sesuai"
+  tidak ikut dihitung sebagai benar/salah.
+
+## 1. Peluang dasar & reaksi emas 1 jam sesudah rilis
+
+| Berita | Di bawah / sesuai / di atas (semua) | 5 th terakhir | Emas naik 1 jam bila di bawah | bila di atas | Tanpa tahu hasil (5 th) |
+|---|---|---|---|---|---|
+| CPI m/m | 36 / 36 / 27% | 31 / 33 / 37% | **75%** (5 th 87%) | 42% (5 th 28%) | 54% (55%) |
+| Core CPI m/m | 36 / 38 / 26% | 31 / 35 / 35% | 71% | 40% | 54% (55%) |
+| PPI m/m | 44 / 15 / 41% | 49 / 14 / 37% | 65% | 37% | 53% (57%) |
+| NFP | 44 / 1 / 55% | 30 / 0 / **70%** | 73% | 46% | 57% (51%) |
+| Core PCE m/m | 28 / 59 / 12% | 20 / 64 / 16% | 67% | 29% | 50% (49%) |
+| Retail Sales m/m | 49 / 7 / 43% | 50 / 0 / 50% | 67% | 32% | 53% (52%) |
+| Klaim pengangguran | 55 / 3 / 42% | 61 / 5 / 34% | 41% | 60% | 48% (48%) |
+| Federal Funds Rate | 1 / **98** / 1% | 3 / 94 / 3% | – | – | 57% (56%) |
+
+- Emas bereaksi **jelas setelah angka keluar**: data AS lebih lemah dari perkiraan → emas cenderung naik, dan
+  sebaliknya.
+- Hanya dari kalender (tanpa tahu hasilnya), peluang emas naik 1 jam setelah rilis **46–62% di 18 jenis berita,
+  praktis lempar koin**. Tidak ada satu pun yang ≥ 60% di semua data sekaligus di 5 tahun terakhir.
+- Keputusan suku bunga FOMC 98% sama dengan perkiraan, karena pasar sudah memperhitungkannya jauh hari. Yang
+  menggerakkan emas saat FOMC adalah pernyataan dan dot plot, bukan angka suku bunganya.
+
+## 2. Petunjuk sebelum rilis (27 diuji)
+
+| Petunjuk | Target | Arah benar (semua) | LAMA | BARU | Hasil |
+|---|---|---|---|---|---|
+| Kejutan bulan lalu | CPI m/m | 61,8% (n=76) | 60,8% | 64,0% | ✅ terbukti |
+| Kejutan bulan lalu | Core CPI m/m | 67,1% (n=70) | 66,7% | 68,4% | ✅ terbukti |
+| Kejutan bulan lalu | CPI y/y | 63,1% (n=84) | 59,6% | 70,4% | ✅ terbukti |
+| Bensin bulan acuan naik/turun | CPI m/m | 60,7% (n=117) | 64,3% | 51,5% | ✅ terbukti (BARU tipis) |
+| CPI keluar lebih dulu | PPI m/m | 72,4% (n=29) | 71,4% (7) | 72,7% (22) | data LAMA kurang |
+| Core CPI lebih dulu | Core PPI m/m | 83,3% (n=18) | 80,0% (5) | 84,6% (13) | data LAMA kurang |
+| PPI lebih dulu | CPI m/m | 62,3% (n=61) | 64,3% | 40,0% (5) | ❌ |
+| ADP | NFP | 50,3% (n=175) | 54,6% | 37,8% | ❌ |
+| Klaim 4 pekan | NFP | 54,3% (n=94) | 52,8% | 59,1% | ❌ |
+| ADP | Unemployment Rate | 56,4% (n=133) | 51,0% | 70,3% | ❌ |
+| Core PPI / Core CPI | Core PCE | 54–62% | 58–65% | 46–50% | ❌ |
+| Kejutan bulan lalu | NFP, PPI, Retail, ISM, JOLTS, ADP, klaim, AHE, PCE | 36–57% | – | – | ❌ semua |
+
+**Petunjuk yang terbukti tidak membuat arah emas lebih pasti.** Jika petunjuk menunjuk "CPI di bawah perkiraan",
+hasil CPI memang lebih sering di bawah (43% vs dasar 36%). Tetapi peluang emas naik 1 jam tetap 47–55%. Alasannya,
+±1/3 CPI keluar "sesuai" dan petunjuknya hanya menggeser peluang sedikit.
+
+Petunjuk CPI → PPI tampak kuat di 5 tahun terakhir (bila CPI di bawah perkiraan, PPI juga di bawah 92%, n=12).
+Namun emas naik 1 jam 75% saat CPI di bawah dan 64% saat CPI di atas. Artinya emas cenderung naik di kedua keadaan,
+jadi petunjuk ini tidak membedakan arah emas.
+
+## 3. Soal "untung besar di detik awal"
+
+- Untung di detik pertama datang dari **tahu angka lebih cepat** (akses data/berita berlatensi rendah, server
+  dekat bursa) atau dari posisi yang sudah dipegang sebelum rilis. Keunggulan itu tidak dimiliki akun ritel lewat
+  MT5/MetaApi.
+- Di akun ritel, saat rilis spread melebar dan order bisa meleset (slippage). Entry sesudah rilis sudah diuji 36
+  cara di XAU 2012–2026, dan semuanya rugi.
+- Beberapa rilis "kompak" searah dengan rumor bisa terjadi secara kebetulan. Di data ini, tebakan terbaik yang bisa
+  diuji pun hanya benar ±62–67% untuk arah CPI, dan tidak memberi keunggulan arah emas.
+
+## 4. Yang dipasang (izin pengguna 30 Sep 2026)
+
+- `cloud/api/_persiapan.py`: GET `/api/chat` menambahkan `persiapan`. Isinya berita USD berdampak tinggi/sedang
+  pekan ini (dari ForexFactory) beserta persen di atas, label arah emas sebelum rilis, petunjuk yang sudah diuji,
+  dan kesimpulan.
+- Label **"condong naik/turun"** hanya muncul bila peluang emas naik 1 jam ≥ 60% atau ≤ 40% di semua data
+  **dan** di 5 tahun terakhir. Saat ini tidak ada berita yang memenuhi syarat itu, jadi semuanya berlabel
+  "≈ lempar koin".
+- Aplikasi 3.12: chip "Contoh pertanyaan" dihapus dan diganti kartu 🎯 Persiapan berita. Chat, isian rilis, dan
+  kalender tidak berubah. Tidak ada order yang dibuka.
+- Perbarui angka: jalankan `python -m research.news_prediksi` bila data kalender diperbarui.
+
+## 5. Langkah berikutnya (butuh akses jaringan)
+
+Kalshi (pasar CPI & keputusan Fed) dan Polymarket menyimpan riwayat harga. Jika host `api.elections.kalshi.com`,
+`gamma-api.polymarket.com`, dan `clob.polymarket.com` diizinkan di pengaturan jaringan environment, bisa diuji:
+apakah peluang pasar prediksi sebelum rilis lebih tepat daripada konsensus ForexFactory, dan apakah itu memberi
+keunggulan arah emas.

@@ -40,8 +40,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   modal otomatis, kurs 17.500). Pengguna MENOLAK risiko 80% modal (diberi batas 1%).
 - Cadangan USO untuk label ⚠️ (izin pengguna 30 Sep): `_perang.current()` pakai FRED; bila FRED gagal/basi
   (> 10 hari — FRED WTI terbit MINGGUAN, umur normal 5–9 hari) pakai USO Twelve Data (cache baris Supabase
-  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & ini baru aktif setelah PR serfusion/Trading#24 +
-  branch ini di-merge ke branch produksi Vercel.
+  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & cadangan USO sudah di main (PR serfusion/Trading#24 &
+  serfusion/Trading#25 di-merge 30 Sep 03:41 UTC). 🎯 Persiapan berita (aplikasi 3.12) di-push SETELAH #25 di-merge →
+  belum di main; digabung ke branch `claude/confident-keller-lj25i3` (aktif setelah branch itu di-merge ke main).
 - TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
   emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
   sintetis RNG (harga acak -> rugi sebesar spread).
@@ -51,6 +52,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   6): arah terkonfirmasi di semua sumber WTI, gabungan TIDAK lebih baik dari FRED → label FRED tetap. Dukascopy
   harian: `python -m research.dukascopy d1 2011 2026 LIGHTCMDUSD` (1 file/tahun;
   H1 WTI sangat lambat, ±1 file/menit).
+
+## Persiapan berita (30 Sep 2026 — `docs/PERSIAPAN_BERITA.md`)
+- `research/news_prediksi.py` → `cloud/api/persiapan.json` → kartu 🎯 Persiapan berita (`_persiapan.py`, aplikasi 3.12,
+  menggantikan chip "Contoh pertanyaan"; izin pengguna 30 Sep). 27 petunjuk sebelum rilis diuji: hanya kejutan CPI
+  bulan lalu & bensin yang menebak arah CPI (61–67%), tetapi emas naik 1 jam tetap 47–55% → tidak ada keunggulan.
+  Butuh kalender: `git clone` spoluan/forex-factory-scraper & ehsanrs2/forexfactory-scraper ke data/research.
+- Polymarket/Kalshi/Cleveland Fed/CME/BLS DIBLOKIR jaringan sesi (403) → belum diuji; minta pengguna membuka host
+  bila ingin diuji.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

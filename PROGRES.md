@@ -117,3 +117,9 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-28: pengguna minta isian "Act: Cons: Prev:" + scanning menyeluruh → kalender historis kini memuat Previous
   (`research/news_data.py`), `pengetahuan.json` + persentil besar kejutan & gabungan Act vs Prev; `_chat.py`
   memindai format ForexFactory (banyak baris); `GET /api/chat` = kalender minggu ini; aplikasi 3.0 kartu 📝.
+- 2026-09-29/30: riset momen entry & mode perang (`docs/MOMEN_PERANG.md`, `docs/REKOMENDASI.md`), ⚡ peringkat, label
+  ⚠️ mode perang + cadangan USO, aplikasi 3.10–3.11 → di main lewat PR serfusion/Trading#24 & serfusion/Trading#25.
+- 2026-09-30: ditemukan 2 commit 🎯 Persiapan berita (aplikasi 3.12, `cloud/api/_persiapan.py`,
+  `docs/PERSIAPAN_BERITA.md`) yang di-push ke `claude/gallant-cannon-93b6rp` 47 menit SETELAH PR #25 di-merge, jadi
+  tidak ikut ke main walau deskripsi PR #25 menyebutnya. Digabung ke `claude/confident-keller-lj25i3` tanpa konflik;
+  165 tes lulus; APK 3.12 sudah lulus build CI (run 57). Menunggu merge ke main.

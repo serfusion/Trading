@@ -16,6 +16,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 import _chat  # noqa: E402
 import _core  # noqa: E402
+import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
 TREN_TTL = timedelta(hours=3)
@@ -101,6 +102,12 @@ class handler(BaseHTTPRequestHandler):
                 tren = _tren_status(now)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau status tren gagal
                 tren = {"error": f"{type(exc).__name__}: {exc}"}
-            self._send(200, {"ok": True, "calendar": _chat.calendar_json(_chat.fetch_calendar(), now), "tren": tren})
+            rows = _chat.fetch_calendar()
+            try:
+                persiapan = _persiapan.cards(rows, now)     # 🎯 kartu persiapan berita (pengganti contoh pertanyaan)
+            except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau kartu gagal
+                persiapan = {"error": f"{type(exc).__name__}: {exc}"}
+            self._send(200, {"ok": True, "calendar": _chat.calendar_json(rows, now), "tren": tren,
+                             "persiapan": persiapan})
         except Exception as exc:  # noqa: BLE001
             self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})

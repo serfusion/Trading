@@ -270,3 +270,7 @@ statistik kelompok ⚡ sendiri dan ditambah `wr07/avg_r07` (skema SL+ 0,7R). Sum
 
 Aplikasi 3.11: lot per peringkat (⚡ 1%, 🥈/🥉 0,5%, biasa setengahnya bila Modal diisi), SL+ otomatis (⚡ & BTC di
 0,7R, XAU lainnya setelah TP1), modal otomatis, dan kurs bawaan Rp17.500.
+
+Aplikasi 3.12: chip "Contoh pertanyaan" di tab Tanya diganti kartu **🎯 Persiapan berita** (GET `/api/chat` →
+`persiapan`, `cloud/api/_persiapan.py`): per berita USD pekan ini, peluang hasil di bawah/sesuai/di atas konsensus,
+% emas naik 1 jam per hasil, dan tebakan arah emas sebelum rilis. Riset & angka: `docs/PERSIAPAN_BERITA.md`.
