@@ -1,0 +1,213 @@
+== BTC_EXNESS == hasil & ambang dalam satuan 0,05% harga BTC (ambang $1/$2/$3 = 0,05/0,10/0,15%)
+Rilis dengan data lengkap: 1241 (2017-09-26 .. 2026-09-16); per grup: {'ISM': 180, 'CLAIMS': 115, 'NFP': 108, 'CPI': 108, 'KONSUMEN': 103, 'RETAIL': 83, 'ADP': 78, 'PPI': 74, 'FOMC': 73, 'MINYAK': 61, 'GDP': 58, 'PCE': 53, 'PMI': 52, 'JOLTS': 30, 'DURABLE': 24, 'MANUFAKTUR': 19, 'RUMAH': 17, 'ECI': 5}
+Cek jam kalender: range 60 dtk sesudah rilis > 3x range menit tenang sebelumnya di 32% rilis
+
+== Anatomi detik pertama (median; satuan 0,05% harga BTC (ambang $1/$2/$3 = 0,05/0,10/0,15%)) ==
+SEMUA   LAMA n= 493 spread pra 3.40 | spread +1s 3.53 +5s 3.50 +60s 3.70 | |gerak| +0,25s 0.00 +1s 0.04 +5s 0.17 +60s 1.19 +15m 3.77 | arah +5s berlanjut s.d. 15m 49%
+SEMUA   BARU n= 748 spread pra 1.19 | spread +1s 1.26 +5s 1.38 +60s 1.26 | |gerak| +0,25s 0.00 +1s 0.20 +5s 0.94 +60s 2.48 +15m 4.83 | arah +5s berlanjut s.d. 15m 52%
+ADP     LAMA n=  28 spread pra 3.21 | spread +1s 3.37 +5s 3.14 +60s 3.42 | |gerak| +0,25s 0.00 +1s 0.06 +5s 0.20 +60s 1.20 +15m 3.58 | arah +5s berlanjut s.d. 15m 67%
+ADP     BARU n=  50 spread pra 1.16 | spread +1s 1.22 +5s 1.35 +60s 1.25 | |gerak| +0,25s 0.00 +1s 0.09 +5s 0.58 +60s 1.63 +15m 2.49 | arah +5s berlanjut s.d. 15m 56%
+CLAIMS  LAMA n=  17 spread pra 3.14 | spread +1s 3.43 +5s 3.22 +60s 3.11 | |gerak| +0,25s 0.00 +1s 0.03 +5s 0.25 +60s 1.12 +15m 7.77 | arah +5s berlanjut s.d. 15m 41%
+CLAIMS  BARU n=  98 spread pra 0.89 | spread +1s 0.90 +5s 0.92 +60s 0.87 | |gerak| +0,25s 0.01 +1s 0.25 +5s 0.55 +60s 1.42 +15m 3.00 | arah +5s berlanjut s.d. 15m 51%
+CPI     LAMA n=  48 spread pra 3.06 | spread +1s 3.17 +5s 3.24 +60s 3.51 | |gerak| +0,25s 0.00 +1s 0.04 +5s 0.15 +60s 1.20 +15m 3.68 | arah +5s berlanjut s.d. 15m 52%
+CPI     BARU n=  60 spread pra 1.19 | spread +1s 1.26 +5s 1.74 +60s 1.38 | |gerak| +0,25s 0.00 +1s 0.28 +5s 3.54 +60s 10.24 +15m 11.04 | arah +5s berlanjut s.d. 15m 57%
+DURABLE LAMA n=  23 spread pra 4.33 | spread +1s 4.52 +5s 4.54 +60s 4.52 | |gerak| +0,25s 0.00 +1s 0.02 +5s 0.16 +60s 1.15 +15m 4.86 | arah +5s berlanjut s.d. 15m 52%
+ECI     BARU n=   5 spread pra 1.14 | spread +1s 1.04 +5s 1.05 +60s 1.00 | |gerak| +0,25s 0.00 +1s 0.43 +5s 1.26 +60s 1.35 +15m 1.63 | arah +5s berlanjut s.d. 15m 60%
+FOMC    LAMA n=  33 spread pra 3.34 | spread +1s 3.38 +5s 3.49 +60s 4.04 | |gerak| +0,25s 0.00 +1s 0.04 +5s 0.19 +60s 1.60 +15m 4.01 | arah +5s berlanjut s.d. 15m 39%
+FOMC    BARU n=  40 spread pra 1.06 | spread +1s 1.15 +5s 1.33 +60s 1.30 | |gerak| +0,25s 0.08 +1s 0.38 +5s 1.69 +60s 6.52 +15m 8.12 | arah +5s berlanjut s.d. 15m 57%
+GDP     LAMA n=  31 spread pra 3.15 | spread +1s 3.29 +5s 3.40 +60s 3.27 | |gerak| +0,25s 0.00 +1s 0.08 +5s 0.16 +60s 1.37 +15m 2.72 | arah +5s berlanjut s.d. 15m 48%
+GDP     BARU n=  27 spread pra 1.51 | spread +1s 1.61 +5s 1.70 +60s 1.69 | |gerak| +0,25s 0.00 +1s 0.14 +5s 0.52 +60s 2.91 +15m 4.33 | arah +5s berlanjut s.d. 15m 56%
+ISM     LAMA n=  79 spread pra 3.26 | spread +1s 3.46 +5s 3.46 +60s 3.41 | |gerak| +0,25s 0.00 +1s 0.03 +5s 0.16 +60s 1.25 +15m 3.32 | arah +5s berlanjut s.d. 15m 43%
+ISM     BARU n= 101 spread pra 1.30 | spread +1s 1.41 +5s 1.60 +60s 1.44 | |gerak| +0,25s 0.00 +1s 0.14 +5s 1.05 +60s 2.22 +15m 5.00 | arah +5s berlanjut s.d. 15m 52%
+JOLTS   BARU n=  30 spread pra 1.25 | spread +1s 1.58 +5s 1.35 +60s 1.36 | |gerak| +0,25s 0.00 +1s 0.27 +5s 1.39 +60s 2.09 +15m 5.33 | arah +5s berlanjut s.d. 15m 40%
+KONSUMEN LAMA n=  31 spread pra 3.72 | spread +1s 3.75 +5s 3.54 +60s 3.71 | |gerak| +0,25s 0.00 +1s 0.02 +5s 0.24 +60s 1.30 +15m 3.77 | arah +5s berlanjut s.d. 15m 55%
+KONSUMEN BARU n=  72 spread pra 1.26 | spread +1s 1.41 +5s 1.48 +60s 1.39 | |gerak| +0,25s 0.00 +1s 0.26 +5s 0.70 +60s 1.84 +15m 3.94 | arah +5s berlanjut s.d. 15m 53%
+MANUFAKTUR BARU n=  15 spread pra 1.22 | spread +1s 1.46 +5s 1.64 +60s 1.51 | |gerak| +0,25s 0.00 +1s 0.19 +5s 0.53 +60s 1.24 +15m 2.79 | arah +5s berlanjut s.d. 15m 67%
+MINYAK  LAMA n=  61 spread pra 4.79 | spread +1s 5.00 +5s 5.00 +60s 5.12 | |gerak| +0,25s 0.00 +1s 0.03 +5s 0.12 +60s 1.22 +15m 3.77 | arah +5s berlanjut s.d. 15m 43%
+NFP     LAMA n=  49 spread pra 3.17 | spread +1s 3.34 +5s 3.45 +60s 3.55 | |gerak| +0,25s 0.00 +1s 0.05 +5s 0.17 +60s 1.24 +15m 3.94 | arah +5s berlanjut s.d. 15m 45%
+NFP     BARU n=  59 spread pra 1.10 | spread +1s 1.17 +5s 1.55 +60s 1.21 | |gerak| +0,25s 0.00 +1s 0.22 +5s 3.22 +60s 5.82 +15m 7.97 | arah +5s berlanjut s.d. 15m 47%
+PCE     BARU n=  51 spread pra 1.29 | spread +1s 1.32 +5s 1.45 +60s 1.37 | |gerak| +0,25s 0.00 +1s 0.15 +5s 0.64 +60s 3.08 +15m 6.98 | arah +5s berlanjut s.d. 15m 51%
+PMI     LAMA n=   9 spread pra 2.68 | spread +1s 2.77 +5s 2.84 +60s 3.15 | |gerak| +0,25s 0.00 +1s 0.01 +5s 0.57 +60s 0.70 +15m 7.87 | arah +5s berlanjut s.d. 15m 44%
+PMI     BARU n=  43 spread pra 1.11 | spread +1s 1.17 +5s 1.18 +60s 0.96 | |gerak| +0,25s 0.00 +1s 0.13 +5s 0.88 +60s 1.74 +15m 4.71 | arah +5s berlanjut s.d. 15m 47%
+PPI     LAMA n=  25 spread pra 3.27 | spread +1s 3.23 +5s 3.47 +60s 3.26 | |gerak| +0,25s 0.00 +1s 0.06 +5s 0.12 +60s 0.84 +15m 2.74 | arah +5s berlanjut s.d. 15m 56%
+PPI     BARU n=  49 spread pra 1.25 | spread +1s 1.21 +5s 1.57 +60s 1.37 | |gerak| +0,25s 0.00 +1s 0.14 +5s 1.54 +60s 2.53 +15m 5.00 | arah +5s berlanjut s.d. 15m 41%
+RETAIL  LAMA n=  42 spread pra 3.39 | spread +1s 3.55 +5s 3.34 +60s 3.39 | |gerak| +0,25s 0.00 +1s 0.08 +5s 0.21 +60s 0.94 +15m 4.33 | arah +5s berlanjut s.d. 15m 52%
+RETAIL  BARU n=  41 spread pra 1.29 | spread +1s 1.35 +5s 1.70 +60s 1.33 | |gerak| +0,25s 0.00 +1s 0.24 +5s 0.99 +60s 2.42 +15m 4.26 | arah +5s berlanjut s.d. 15m 56%
+RUMAH   LAMA n=  11 spread pra 4.07 | spread +1s 4.14 +5s 3.96 +60s 4.36 | |gerak| +0,25s 0.00 +1s 0.03 +5s 0.17 +60s 0.78 +15m 4.21 | arah +5s berlanjut s.d. 15m 64%
+RUMAH   BARU n=   6 spread pra 1.21 | spread +1s 1.20 +5s 1.24 +60s 1.27 | |gerak| +0,25s 0.00 +1s 0.11 +5s 0.54 +60s 1.00 +15m 5.00 | arah +5s berlanjut s.d. 15m 83%
+
+== Sisa gerak searah bila masuk di detik d (rata-rata, SEBELUM spread/slippage) ==
+SEMUA   LAMA n= 493 d=1s: 1m +0.26 / 15m +0.43 | d=5s: 1m +0.17 / 15m +0.34 | d=10s: 1m +0.18 / 15m -0.37 | d=30s: 1m +0.54 / 15m +0.28
+SEMUA   BARU n= 748 d=1s: 1m +0.10 / 15m -0.20 | d=5s: 1m +0.40 / 15m +0.24 | d=10s: 1m +0.46 / 15m +0.59 | d=30s: 1m -0.02 / 15m -0.26
+ADP     LAMA n=  28 d=1s: 1m -0.03 / 15m -0.16 | d=5s: 1m +0.46 / 15m +5.03 | d=10s: 1m +0.97 / 15m -3.45 | d=30s: 1m +0.77 / 15m -2.39
+ADP     BARU n=  50 d=1s: 1m -0.26 / 15m +2.03 | d=5s: 1m +0.39 / 15m +0.03 | d=10s: 1m +0.20 / 15m -1.46 | d=30s: 1m +0.07 / 15m -0.18
+CLAIMS  LAMA n=  17 d=1s: 1m +0.34 / 15m -0.93 | d=5s: 1m +0.03 / 15m -0.70 | d=10s: 1m +0.82 / 15m +0.45 | d=30s: 1m +0.19 / 15m +0.94
+CLAIMS  BARU n=  98 d=1s: 1m +0.30 / 15m +0.35 | d=5s: 1m -0.26 / 15m +0.30 | d=10s: 1m -0.24 / 15m +0.02 | d=30s: 1m -0.27 / 15m -0.45
+CPI     LAMA n=  48 d=1s: 1m +0.14 / 15m -1.27 | d=5s: 1m +0.91 / 15m +0.96 | d=10s: 1m +0.65 / 15m +1.27 | d=30s: 1m +0.79 / 15m +1.41
+CPI     BARU n=  60 d=1s: 1m -1.35 / 15m -2.80 | d=5s: 1m +3.39 / 15m +2.98 | d=10s: 1m +3.41 / 15m +4.85 | d=30s: 1m +1.48 / 15m +3.69
+DURABLE LAMA n=  23 d=1s: 1m -0.84 / 15m +0.30 | d=5s: 1m -0.58 / 15m +0.82 | d=10s: 1m +0.08 / 15m +1.85 | d=30s: 1m +0.73 / 15m +2.04
+ECI     BARU n=   5 d=1s: 1m +0.33 / 15m -0.37 | d=5s: 1m -0.43 / 15m +0.30 | d=10s: 1m +0.54 / 15m +1.46 | d=30s: 1m -0.04 / 15m -0.53
+FOMC    LAMA n=  33 d=1s: 1m +3.55 / 15m +3.34 | d=5s: 1m +1.88 / 15m -1.36 | d=10s: 1m -0.88 / 15m -7.90 | d=30s: 1m +0.88 / 15m +0.73
+FOMC    BARU n=  40 d=1s: 1m -2.48 / 15m -5.32 | d=5s: 1m -0.10 / 15m +0.42 | d=10s: 1m +3.70 / 15m +5.34 | d=30s: 1m -1.28 / 15m -0.21
+GDP     LAMA n=  31 d=1s: 1m +0.00 / 15m +0.97 | d=5s: 1m -0.36 / 15m +1.90 | d=10s: 1m +0.68 / 15m -1.22 | d=30s: 1m +0.21 / 15m -0.50
+GDP     BARU n=  27 d=1s: 1m +1.39 / 15m +1.59 | d=5s: 1m +0.24 / 15m +1.02 | d=10s: 1m -0.63 / 15m +0.33 | d=30s: 1m +0.61 / 15m -1.26
+ISM     LAMA n=  79 d=1s: 1m -0.54 / 15m -0.53 | d=5s: 1m -0.75 / 15m -2.47 | d=10s: 1m -0.49 / 15m -1.82 | d=30s: 1m +0.63 / 15m +1.36
+ISM     BARU n= 101 d=1s: 1m +1.18 / 15m +0.55 | d=5s: 1m +0.66 / 15m +0.25 | d=10s: 1m +0.15 / 15m -0.23 | d=30s: 1m +0.17 / 15m -0.40
+JOLTS   BARU n=  30 d=1s: 1m +0.44 / 15m -1.20 | d=5s: 1m -0.78 / 15m -3.16 | d=10s: 1m -1.14 / 15m -3.44 | d=30s: 1m -0.68 / 15m -3.89
+KONSUMEN LAMA n=  31 d=1s: 1m +0.07 / 15m +2.80 | d=5s: 1m +0.02 / 15m -0.99 | d=10s: 1m -0.07 / 15m +0.27 | d=30s: 1m +0.75 / 15m -1.36
+KONSUMEN BARU n=  72 d=1s: 1m -0.06 / 15m -0.27 | d=5s: 1m +0.36 / 15m +0.49 | d=10s: 1m +0.39 / 15m +1.17 | d=30s: 1m -0.01 / 15m +0.15
+MANUFAKTUR BARU n=  15 d=1s: 1m +0.15 / 15m +0.94 | d=5s: 1m -0.14 / 15m +1.48 | d=10s: 1m -0.15 / 15m +0.37 | d=30s: 1m -0.23 / 15m -0.02
+MINYAK  LAMA n=  61 d=1s: 1m +0.87 / 15m -0.14 | d=5s: 1m +0.35 / 15m -1.37 | d=10s: 1m +0.92 / 15m -0.20 | d=30s: 1m +0.90 / 15m +0.54
+NFP     LAMA n=  49 d=1s: 1m +0.03 / 15m +0.67 | d=5s: 1m -0.06 / 15m +2.63 | d=10s: 1m +0.16 / 15m +2.79 | d=30s: 1m +0.26 / 15m +0.15
+NFP     BARU n=  59 d=1s: 1m +0.45 / 15m -0.28 | d=5s: 1m +1.67 / 15m +0.05 | d=10s: 1m +0.62 / 15m +0.08 | d=30s: 1m +0.54 / 15m -0.51
+PCE     BARU n=  51 d=1s: 1m +0.19 / 15m -0.37 | d=5s: 1m -0.86 / 15m -0.78 | d=10s: 1m -0.63 / 15m +0.01 | d=30s: 1m -0.97 / 15m -0.32
+PMI     LAMA n=   9 d=1s: 1m -1.20 / 15m +3.65 | d=5s: 1m -0.88 / 15m +3.30 | d=10s: 1m +1.00 / 15m +8.63 | d=30s: 1m +0.74 / 15m +4.09
+PMI     BARU n=  43 d=1s: 1m -0.68 / 15m +0.29 | d=5s: 1m -0.40 / 15m -0.08 | d=10s: 1m -0.05 / 15m +0.56 | d=30s: 1m +0.03 / 15m -1.54
+PPI     LAMA n=  25 d=1s: 1m +0.58 / 15m +1.52 | d=5s: 1m +0.85 / 15m +0.79 | d=10s: 1m -0.06 / 15m +0.57 | d=30s: 1m +0.28 / 15m -0.95
+PPI     BARU n=  49 d=1s: 1m +1.14 / 15m +0.65 | d=5s: 1m +0.27 / 15m -1.16 | d=10s: 1m +0.21 / 15m -0.01 | d=30s: 1m -0.47 / 15m -1.09
+RETAIL  LAMA n=  42 d=1s: 1m -0.23 / 15m -0.57 | d=5s: 1m +0.27 / 15m +1.87 | d=10s: 1m -0.39 / 15m +0.08 | d=30s: 1m +0.01 / 15m -0.83
+RETAIL  BARU n=  41 d=1s: 1m +0.67 / 15m +0.71 | d=5s: 1m -0.38 / 15m +0.19 | d=10s: 1m -0.02 / 15m -0.63 | d=30s: 1m +0.06 / 15m -1.04
+RUMAH   LAMA n=  11 d=1s: 1m +0.96 / 15m +1.58 | d=5s: 1m +1.03 / 15m +1.21 | d=10s: 1m +0.79 / 15m +0.16 | d=30s: 1m +0.00 / 15m -0.63
+RUMAH   BARU n=   6 d=1s: 1m +0.07 / 15m +5.85 | d=5s: 1m -0.27 / 15m +4.06 | d=10s: 1m +0.20 / 15m +3.52 | d=30s: 1m -0.45 / 15m +5.33
+
+== 516 varian (slippage 0, latensi 0,5 dtk; kolom 'kuat' = slippage $0,30 + latensi 2 dtk) ==
+LOLOS kriteria konsisten: 0
+
+-- aturan pengguna (tutup menit 1-5 bila profit, paksa 15 menit), tanpa SL --
+LAWAN 1s $3                                  n=  14 WR  64.3% rata  +4.45 total    +62.3 t  +0.6 | LAMA   +nan (n=0) BARU  +4.45 (n=14) | tahun+ 100% dari 4 | kuat +1.19
+LAWAN 2s $3                                  n=  61 WR  70.5% rata  +0.14 total     +8.6 t  +0.1 | LAMA   +nan (n=0) BARU  +0.14 (n=61) | tahun+  40% dari 5 | kuat +0.25
+GERAK 5s $2                                  n= 229 WR  67.7% rata  -0.11 total    -24.6 t  -0.1 | LAMA  -3.30 (n=11) BARU  +0.05 (n=218) | tahun+  40% dari 10 | kuat -1.56
+KEJUTAN BESAR 1s                             n= 220 WR  60.5% rata  -0.60 total   -132.3 t  -0.9 | LAMA  -3.20 (n=100) BARU  +1.56 (n=120) | tahun+  33% dari 9 | kuat -1.23
+GERAK 10s $3                                 n= 204 WR  62.7% rata  -0.69 total   -140.8 t  -0.8 | LAMA  -4.86 (n=12) BARU  -0.43 (n=192) | tahun+  44% dari 9 | kuat -1.14
+GERAK 5s $3                                  n= 148 WR  67.6% rata  -0.72 total   -106.0 t  -0.5 | LAMA  -9.80 (n=3) BARU  -0.53 (n=145) | tahun+  43% dari 7 | kuat -1.91
+KEJUTAN BESAR 2s                             n= 220 WR  58.2% rata  -0.87 total   -190.9 t  -1.3 | LAMA  -3.21 (n=100) BARU  +1.08 (n=120) | tahun+  22% dari 9 | kuat -1.13
+KEJUTAN BESAR 10s                            n= 219 WR  60.3% rata  -0.87 total   -191.0 t  -1.5 | LAMA  -2.82 (n=99) BARU  +0.74 (n=120) | tahun+  22% dari 9 | kuat -1.30
+GERAK 5s $1                                  n= 404 WR  65.6% rata  -0.88 total   -356.6 t  -1.3 | LAMA  -3.67 (n=42) BARU  -0.56 (n=362) | tahun+  40% dari 10 | kuat -1.80
+KEJUTAN BESAR 5s                             n= 220 WR  59.1% rata  -0.94 total   -207.5 t  -1.5 | LAMA  -3.10 (n=100) BARU  +0.86 (n=120) | tahun+  22% dari 9 | kuat -1.25
+STRADDLE $1                                  n= 691 WR  63.5% rata  -0.94 total   -652.2 t  -2.8 | LAMA  -2.85 (n=47) BARU  -0.80 (n=644) | tahun+  30% dari 10 | kuat -1.25
+LAWAN 1s $1                                  n= 106 WR  61.3% rata  -1.07 total   -113.5 t  -0.5 | LAMA  -4.03 (n=4) BARU  -0.95 (n=102) | tahun+  50% dari 8 | kuat -1.85
+GERAK 10s $2                                 n= 305 WR  64.6% rata  -1.12 total   -342.8 t  -1.5 | LAMA  -5.48 (n=37) BARU  -0.52 (n=268) | tahun+  30% dari 10 | kuat -1.46
+STRADDLE $3                                  n= 802 WR  59.1% rata  -1.15 total   -925.6 t  -2.9 | LAMA  -3.30 (n=250) BARU  -0.18 (n=552) | tahun+  30% dari 10 | kuat -1.38
+LAWAN 2s $2                                  n= 105 WR  64.8% rata  -1.18 total   -123.5 t  -0.7 | LAMA  -7.16 (n=3) BARU  -1.00 (n=102) | tahun+  29% dari 7 | kuat -1.12
+LAWAN 2s $1                                  n= 225 WR  64.0% rata  -1.20 total   -269.4 t  -1.2 | LAMA  -9.31 (n=11) BARU  -0.78 (n=214) | tahun+  33% dari 9 | kuat -1.29
+STRADDLE $2                                  n= 954 WR  59.6% rata  -1.20 total  -1143.7 t  -3.4 | LAMA  -3.50 (n=279) BARU  -0.25 (n=675) | tahun+  20% dari 10 | kuat -1.51
+LAWAN 1s $2                                  n=  34 WR  58.8% rata  -1.24 total    -42.3 t  -0.3 | LAMA  +7.80 (n=1) BARU  -1.52 (n=33) | tahun+  67% dari 6 | kuat -2.54
+GERAK 30s $3                                 n= 292 WR  64.0% rata  -1.41 total   -411.0 t  -2.3 | LAMA  -6.40 (n=43) BARU  -0.55 (n=249) | tahun+  10% dari 10 | kuat -1.91
+GERAK 10s $1                                 n= 518 WR  62.4% rata  -1.42 total   -735.8 t  -2.7 | LAMA  -4.21 (n=94) BARU  -0.80 (n=424) | tahun+  10% dari 10 | kuat -1.73
+KEJUTAN 1s                                   n=1026 WR  59.0% rata  -1.46 total  -1496.1 t  -4.7 | LAMA  -4.75 (n=421) BARU  +0.83 (n=605) | tahun+  40% dari 10 | kuat -2.07
+KEJUTAN 2s                                   n=1026 WR  57.6% rata  -1.66 total  -1702.3 t  -5.4 | LAMA  -4.66 (n=421) BARU  +0.43 (n=605) | tahun+  40% dari 10 | kuat -2.12
+KEJUTAN BESAR 30s                            n= 220 WR  55.0% rata  -1.78 total   -392.1 t  -3.2 | LAMA  -3.06 (n=100) BARU  -0.72 (n=120) | tahun+  22% dari 9 | kuat -2.02
+GERAK 30s $2                                 n= 439 WR  62.2% rata  -1.78 total   -782.5 t  -3.8 | LAMA  -4.84 (n=91) BARU  -0.98 (n=348) | tahun+  10% dari 10 | kuat -2.23
+KEJUTAN 5s                                   n=1026 WR  56.5% rata  -1.93 total  -1977.1 t  -6.5 | LAMA  -4.68 (n=421) BARU  -0.01 (n=605) | tahun+  40% dari 10 | kuat -2.32
+KEJUTAN 10s                                  n=1024 WR  56.2% rata  -2.12 total  -2169.6 t  -7.5 | LAMA  -4.53 (n=419) BARU  -0.45 (n=605) | tahun+  30% dari 10 | kuat -2.39
+GERAK 30s $1                                 n= 728 WR  57.0% rata  -2.32 total  -1687.7 t  -6.8 | LAMA  -5.20 (n=197) BARU  -1.25 (n=531) | tahun+   0% dari 10 | kuat -2.67
+KEJUTAN 30s                                  n=1025 WR  54.4% rata  -2.38 total  -2439.0 t  -9.4 | LAMA  -4.45 (n=421) BARU  -0.94 (n=604) | tahun+  20% dari 10 | kuat -2.72
+GERAK 1s $1                                  n= 106 WR  65.1% rata  -2.46 total   -261.2 t  -1.2 | LAMA -19.80 (n=4) BARU  -1.78 (n=102) | tahun+  25% dari 8 | kuat -2.58
+LAWAN 30s $1                                 n= 728 WR  61.8% rata  -2.59 total  -1885.3 t  -6.0 | LAMA  -6.40 (n=197) BARU  -1.17 (n=531) | tahun+  10% dari 10 | kuat -2.75
+GERAK 2s $1                                  n= 225 WR  58.7% rata  -2.71 total   -609.1 t  -2.4 | LAMA -13.77 (n=11) BARU  -2.14 (n=214) | tahun+  11% dari 9 | kuat -3.00
+LAWAN 30s $3                                 n= 292 WR  66.4% rata  -2.76 total   -806.9 t  -3.3 | LAMA  -8.44 (n=43) BARU  -1.78 (n=249) | tahun+  20% dari 10 | kuat -2.86
+LAWAN 30s $2                                 n= 439 WR  65.1% rata  -2.80 total  -1230.5 t  -4.5 | LAMA  -7.98 (n=91) BARU  -1.45 (n=348) | tahun+  20% dari 10 | kuat -2.96
+LAWAN 10s $1                                 n= 518 WR  60.8% rata  -2.90 total  -1503.1 t  -5.5 | LAMA  -6.64 (n=94) BARU  -2.07 (n=424) | tahun+  20% dari 10 | kuat -3.20
+GERAK 2s $2                                  n= 105 WR  58.1% rata  -2.96 total   -310.6 t  -1.5 | LAMA -27.01 (n=3) BARU  -2.25 (n=102) | tahun+  14% dari 7 | kuat -3.43
+LAWAN 5s $1                                  n= 404 WR  58.4% rata  -3.13 total  -1265.4 t  -4.4 | LAMA  -9.58 (n=42) BARU  -2.38 (n=362) | tahun+  10% dari 10 | kuat -2.76
+GERAK 1s $2                                  n=  34 WR  70.6% rata  -3.18 total   -108.2 t  -0.6 | LAMA -35.93 (n=1) BARU  -2.19 (n=33) | tahun+  50% dari 6 | kuat -3.24
+LAWAN 5s $3                                  n= 148 WR  58.8% rata  -3.22 total   -476.1 t  -2.5 | LAMA  -5.85 (n=3) BARU  -3.16 (n=145) | tahun+  29% dari 7 | kuat -2.80
+LAWAN 10s $2                                 n= 305 WR  63.3% rata  -3.25 total   -992.1 t  -4.2 | LAMA  -6.98 (n=37) BARU  -2.74 (n=268) | tahun+  10% dari 10 | kuat -3.57
+GERAK 1s $3                                  n=  14 WR  71.4% rata  -3.35 total    -46.9 t  -0.4 | LAMA   +nan (n=0) BARU  -3.35 (n=14) | tahun+  25% dari 4 | kuat -1.79
+LAWAN 5s $2                                  n= 229 WR  57.2% rata  -3.51 total   -803.8 t  -3.5 | LAMA  -8.16 (n=11) BARU  -3.28 (n=218) | tahun+   0% dari 10 | kuat -2.95
+LAWAN 10s $3                                 n= 204 WR  64.2% rata  -3.94 total   -804.2 t  -3.8 | LAMA  -6.36 (n=12) BARU  -3.79 (n=192) | tahun+  22% dari 9 | kuat -4.24
+GERAK 2s $3                                  n=  61 WR  49.2% rata  -4.04 total   -246.4 t  -1.4 | LAMA   +nan (n=0) BARU  -4.04 (n=61) | tahun+  20% dari 5 | kuat -4.18
+
+-- 15 varian terbaik (rata-rata) semua cara keluar --
+LAWAN 1s $3 | PENGGUNA +SL$5                 n=  14 WR  57.1% rata  +9.61 total   +134.6 t  +1.6 | LAMA   +nan (n=0) BARU  +9.61 (n=14) | tahun+  75% dari 4 | kuat +4.45
+LAWAN 1s $3 | TAHAN 1m +SL$5                 n=  14 WR  42.9% rata  +9.43 total   +132.0 t  +1.5 | LAMA   +nan (n=0) BARU  +9.43 (n=14) | tahun+  75% dari 4 | kuat +4.99
+LAWAN 1s $3 | TAHAN 5m +SL$5                 n=  14 WR  28.6% rata  +8.34 total   +116.8 t  +1.1 | LAMA   +nan (n=0) BARU  +8.34 (n=14) | tahun+  75% dari 4 | kuat +5.24
+LAWAN 1s $3 | TAHAN 15m +SL$5                n=  14 WR  28.6% rata  +7.66 total   +107.3 t  +1.0 | LAMA   +nan (n=0) BARU  +7.66 (n=14) | tahun+  75% dari 4 | kuat +5.45
+LAWAN 1s $2 | TAHAN 15m +SL$5                n=  34 WR  26.5% rata  +4.75 total   +161.4 t  +1.1 | LAMA -19.84 (n=1) BARU  +5.49 (n=33) | tahun+  67% dari 6 | kuat +3.84
+LAWAN 1s $3 | PENGGUNA                       n=  14 WR  64.3% rata  +4.45 total    +62.3 t  +0.6 | LAMA   +nan (n=0) BARU  +4.45 (n=14) | tahun+ 100% dari 4 | kuat +1.19
+GERAK 1s $3 | TAHAN 15m +SL$5                n=  14 WR  35.7% rata  +3.98 total    +55.8 t  +1.0 | LAMA   +nan (n=0) BARU  +3.98 (n=14) | tahun+  75% dari 4 | kuat +3.57
+LAWAN 1s $2 | TAHAN 5m +SL$5                 n=  34 WR  26.5% rata  +3.96 total   +134.7 t  +1.0 | LAMA -19.84 (n=1) BARU  +4.68 (n=33) | tahun+  50% dari 6 | kuat +2.72
+LAWAN 1s $2 | PENGGUNA +SL$5                 n=  34 WR  41.2% rata  +3.76 total   +127.8 t  +1.1 | LAMA -19.84 (n=1) BARU  +4.47 (n=33) | tahun+  50% dari 6 | kuat +1.79
+GERAK 1s $3 | PENGGUNA +SL$5                 n=  14 WR  35.7% rata  +3.66 total    +51.3 t  +0.9 | LAMA   +nan (n=0) BARU  +3.66 (n=14) | tahun+  50% dari 4 | kuat +3.43
+LAWAN 1s $2 | TAHAN 1m +SL$5                 n=  34 WR  29.4% rata  +3.56 total   +121.2 t  +1.1 | LAMA -19.84 (n=1) BARU  +4.27 (n=33) | tahun+  50% dari 6 | kuat +1.86
+LAWAN 2s $3 | TAHAN 15m +SL$5                n=  61 WR  39.3% rata  +3.53 total   +215.6 t  +1.5 | LAMA   +nan (n=0) BARU  +3.53 (n=61) | tahun+  80% dari 5 | kuat +2.34
+GERAK 1s $3 | TAHAN 1m +SL$5                 n=  14 WR  28.6% rata  +3.52 total    +49.3 t  +0.8 | LAMA   +nan (n=0) BARU  +3.52 (n=14) | tahun+  50% dari 4 | kuat +3.43
+GERAK 1s $3 | TAHAN 5m +SL$5                 n=  14 WR  28.6% rata  +3.48 total    +48.7 t  +0.8 | LAMA   +nan (n=0) BARU  +3.48 (n=14) | tahun+  50% dari 4 | kuat +2.99
+LAWAN 2s $3 | TAHAN 5m +SL$5                 n=  61 WR  41.0% rata  +3.12 total   +190.4 t  +1.4 | LAMA   +nan (n=0) BARU  +3.12 (n=61) | tahun+  80% dari 5 | kuat +1.97
+
+-- per grup berita, aturan pengguna tanpa SL, slippage 0 --
+NFP LAWAN 1s $2                              n=   3 WR 100.0% rata +18.72 total    +56.2 t  +4.0 | LAMA   +nan (n=0) BARU +18.72 (n=3) | tahun+ 100% dari 3
+NFP LAWAN 1s $3                              n=   3 WR 100.0% rata +18.72 total    +56.2 t  +4.0 | LAMA   +nan (n=0) BARU +18.72 (n=3) | tahun+ 100% dari 3
+NFP LAWAN 2s $3                              n=  13 WR  92.3% rata  +5.35 total    +69.6 t  +1.9 | LAMA   +nan (n=0) BARU  +5.35 (n=13) | tahun+  75% dari 4
+NFP LAWAN 1s $1                              n=   9 WR  77.8% rata  +4.06 total    +36.6 t  +0.6 | LAMA   +nan (n=0) BARU  +4.06 (n=9) | tahun+  60% dari 5
+NFP LAWAN 2s $2                              n=  16 WR  81.2% rata  +2.88 total    +46.0 t  +1.0 | LAMA   +nan (n=0) BARU  +2.88 (n=16) | tahun+  60% dari 5
+CPI KEJUTAN BESAR 1s                         n=   8 WR  87.5% rata +24.03 total   +192.3 t  +2.3 | LAMA  +1.22 (n=4) BARU +46.85 (n=4) | tahun+  67% dari 3
+CPI KEJUTAN BESAR 2s                         n=   8 WR  87.5% rata +23.18 total   +185.5 t  +2.2 | LAMA  +1.22 (n=4) BARU +45.14 (n=4) | tahun+  67% dari 3
+CPI KEJUTAN BESAR 5s                         n=   8 WR  87.5% rata +20.55 total   +164.4 t  +2.3 | LAMA  +0.57 (n=4) BARU +40.53 (n=4) | tahun+  67% dari 3
+CPI KEJUTAN BESAR 10s                        n=   7 WR 100.0% rata +18.80 total   +131.6 t  +2.1 | LAMA  +1.16 (n=3) BARU +32.02 (n=4) | tahun+ 100% dari 3
+CPI KEJUTAN BESAR 30s                        n=   8 WR  87.5% rata +10.80 total    +86.4 t  +1.6 | LAMA  -0.21 (n=4) BARU +21.81 (n=4) | tahun+  67% dari 3
+FOMC LAWAN 1s $3                             n=   1 WR 100.0% rata +30.01 total    +30.0 t  +nan | LAMA   +nan (n=0) BARU +30.01 (n=1) | tahun+ 100% dari 1
+FOMC KEJUTAN 1s                              n=   2 WR 100.0% rata +21.47 total    +42.9 t  +nan | LAMA   +nan (n=0) BARU +21.47 (n=2) | tahun+ 100% dari 2
+FOMC KEJUTAN 30s                             n=   2 WR 100.0% rata +19.22 total    +38.4 t  +nan | LAMA   +nan (n=0) BARU +19.22 (n=2) | tahun+ 100% dari 2
+FOMC LAWAN 1s $2                             n=   2 WR 100.0% rata +17.79 total    +35.6 t  +nan | LAMA   +nan (n=0) BARU +17.79 (n=2) | tahun+ 100% dari 2
+FOMC KEJUTAN 2s                              n=   2 WR 100.0% rata +16.43 total    +32.9 t  +nan | LAMA   +nan (n=0) BARU +16.43 (n=2) | tahun+ 100% dari 2
+
+-- preset aplikasi 'manual': ikut lonjakan di detik ke-5 (manual, reaksi 2 dtk), tutup menit 1-5 bila profit, maks 15 mnt (slippage $0.30) --
+SEMUA                                        n= 229 WR  61.1% rata  -1.56 total   -356.9 t  -1.6 | LAMA  -6.01 (n=11) BARU  -1.33 (n=218) | tahun+  30% dari 10
+ADP                                          n=   4 WR  50.0% rata  -0.54 total     -2.2 t  -0.3 | LAMA   +nan (n=0) BARU  -0.54 (n=4) | tahun+  33% dari 3
+CLAIMS                                       n=   8 WR  75.0% rata  -0.40 total     -3.2 t  -0.2 | LAMA   +nan (n=0) BARU  -0.40 (n=8) | tahun+  33% dari 3
+CPI                                          n=  45 WR  68.9% rata  -1.50 total    -67.7 t  -0.4 | LAMA   +nan (n=0) BARU  -1.50 (n=45) | tahun+  60% dari 5
+ECI                                          n=   1 WR   0.0% rata  -4.05 total     -4.1 t  +nan | LAMA   +nan (n=0) BARU  -4.05 (n=1) | tahun+   0% dari 1
+FOMC                                         n=  21 WR  61.9% rata  -2.86 total    -60.1 t  -0.9 | LAMA  -0.55 (n=3) BARU  -3.25 (n=18) | tahun+  57% dari 7
+GDP                                          n=   5 WR  40.0% rata  -2.74 total    -13.7 t  -0.9 | LAMA  -5.77 (n=1) BARU  -1.98 (n=4) | tahun+  50% dari 4
+ISM                                          n=  26 WR  61.5% rata  -1.07 total    -27.9 t  -0.4 | LAMA -11.26 (n=3) BARU  +0.26 (n=23) | tahun+  33% dari 6
+JOLTS                                        n=  11 WR  81.8% rata  +0.33 total     +3.7 t  +0.4 | LAMA   +nan (n=0) BARU  +0.33 (n=11) | tahun+  60% dari 5
+KONSUMEN                                     n=  12 WR  58.3% rata  -1.33 total    -15.9 t  -1.1 | LAMA   +nan (n=0) BARU  -1.33 (n=12) | tahun+  33% dari 3
+MINYAK                                       n=   1 WR   0.0% rata -25.36 total    -25.4 t  +nan | LAMA -25.36 (n=1) BARU   +nan (n=0) | tahun+   0% dari 1
+NFP                                          n=  40 WR  65.0% rata  -0.68 total    -27.2 t  -0.5 | LAMA  +7.27 (n=1) BARU  -0.88 (n=39) | tahun+  50% dari 6
+PCE                                          n=  11 WR  45.5% rata  -4.33 total    -47.6 t  -1.3 | LAMA   +nan (n=0) BARU  -4.33 (n=11) | tahun+  33% dari 3
+PMI                                          n=   9 WR  44.4% rata  -0.45 total     -4.1 t  -0.4 | LAMA   +nan (n=0) BARU  -0.45 (n=9) | tahun+  50% dari 4
+PPI                                          n=  23 WR  52.2% rata  -2.89 total    -66.4 t  -1.4 | LAMA  -7.25 (n=1) BARU  -2.69 (n=22) | tahun+  20% dari 5
+RETAIL                                       n=  12 WR  58.3% rata  +0.39 total     +4.6 t  +0.2 | LAMA  +0.46 (n=1) BARU  +0.38 (n=11) | tahun+  75% dari 4
+
+-- preset aplikasi 'pending': Buy Stop & Sell Stop $2 dari harga sebelum rilis, tutup menit 1-5 bila profit, maks 15 mnt (slippage $0.30) --
+SEMUA                                        n= 954 WR  56.4% rata  -1.51 total  -1439.5 t  -4.2 | LAMA  -3.80 (n=279) BARU  -0.56 (n=675) | tahun+  20% dari 10
+ADP                                          n=  60 WR  46.7% rata  -1.38 total    -82.6 t  -2.9 | LAMA  -1.74 (n=17) BARU  -1.23 (n=43) | tahun+  25% dari 8
+CLAIMS                                       n=  79 WR  53.2% rata  -2.66 total   -209.9 t  -4.2 | LAMA  -5.28 (n=9) BARU  -2.32 (n=70) | tahun+  17% dari 6
+CPI                                          n=  92 WR  57.6% rata  -1.04 total    -95.9 t  -0.4 | LAMA  -4.51 (n=32) BARU  +0.81 (n=60) | tahun+  30% dari 10
+DURABLE                                      n=  13 WR  30.8% rata  -6.85 total    -89.0 t  -3.5 | LAMA  -7.45 (n=12) BARU  +0.45 (n=1) | tahun+  20% dari 5
+ECI                                          n=   4 WR  75.0% rata  -0.02 total     -0.1 t  -0.0 | LAMA   +nan (n=0) BARU  -0.02 (n=4) | tahun+  50% dari 2
+FOMC                                         n=  60 WR  60.0% rata  -0.39 total    -23.6 t  -0.2 | LAMA  -8.52 (n=20) BARU  +3.67 (n=40) | tahun+  22% dari 9
+GDP                                          n=  42 WR  52.4% rata  -2.07 total    -86.8 t  -1.7 | LAMA  -3.56 (n=19) BARU  -0.84 (n=23) | tahun+  12% dari 8
+ISM                                          n= 150 WR  56.7% rata  -1.89 total   -284.1 t  -3.2 | LAMA  -3.71 (n=50) BARU  -0.98 (n=100) | tahun+  30% dari 10
+JOLTS                                        n=  27 WR  63.0% rata  -1.91 total    -51.5 t  -1.3 | LAMA   +nan (n=0) BARU  -1.91 (n=27) | tahun+   0% dari 5
+KONSUMEN                                     n=  81 WR  58.0% rata  -1.57 total   -127.2 t  -2.5 | LAMA  -2.57 (n=17) BARU  -1.31 (n=64) | tahun+  40% dari 10
+MANUFAKTUR                                   n=  13 WR  46.2% rata  -2.06 total    -26.7 t  -1.8 | LAMA  -7.75 (n=1) BARU  -1.58 (n=12) | tahun+  25% dari 4
+MINYAK                                       n=  21 WR  38.1% rata  -3.39 total    -71.2 t  -3.1 | LAMA  -3.39 (n=21) BARU   +nan (n=0) | tahun+   0% dari 4
+NFP                                          n=  92 WR  55.4% rata  -2.02 total   -185.8 t  -1.7 | LAMA  -3.68 (n=33) BARU  -1.09 (n=59) | tahun+  30% dari 10
+PCE                                          n=  48 WR  60.4% rata  -0.00 total     -0.2 t  -0.0 | LAMA  -3.28 (n=2) BARU  +0.14 (n=46) | tahun+  50% dari 6
+PMI                                          n=  46 WR  73.9% rata  -1.25 total    -57.4 t  -1.3 | LAMA  -4.14 (n=7) BARU  -0.73 (n=39) | tahun+  71% dari 7
+PPI                                          n=  58 WR  63.8% rata  +0.19 total    +10.8 t  +0.2 | LAMA  +0.26 (n=11) BARU  +0.17 (n=47) | tahun+  44% dari 9
+RETAIL                                       n=  61 WR  52.5% rata  -0.86 total    -52.6 t  -1.1 | LAMA  -1.62 (n=25) BARU  -0.34 (n=36) | tahun+  50% dari 8
+RUMAH                                        n=   7 WR  57.1% rata  -0.80 total     -5.6 t  -0.4 | LAMA  -3.08 (n=3) BARU  +0.90 (n=4) | tahun+  67% dari 3
+
+-- preset aplikasi 'pending1': Buy Stop & Sell Stop $1 dari harga 5 dtk sebelum rilis, tutup menit 1-5 bila profit, maks 15 mnt (slippage $0.30) --
+SEMUA                                        n= 691 WR  61.2% rata  -1.25 total   -866.6 t  -3.8 | LAMA  -3.22 (n=47) BARU  -1.11 (n=644) | tahun+  30% dari 10
+ADP                                          n=  46 WR  67.4% rata  -0.54 total    -24.8 t  -1.1 | LAMA  -2.89 (n=2) BARU  -0.43 (n=44) | tahun+  57% dari 7
+CLAIMS                                       n=  94 WR  53.2% rata  -1.78 total   -166.9 t  -4.0 | LAMA  -0.36 (n=3) BARU  -1.82 (n=91) | tahun+   0% dari 5
+CPI                                          n=  49 WR  65.3% rata  -1.83 total    -89.9 t  -0.6 | LAMA  -8.87 (n=5) BARU  -1.03 (n=44) | tahun+  43% dari 7
+DURABLE                                      n=   3 WR  33.3% rata  -4.25 total    -12.7 t  -1.2 | LAMA  -2.85 (n=2) BARU  -7.03 (n=1) | tahun+  33% dari 3
+ECI                                          n=   5 WR  80.0% rata  +0.21 total     +1.0 t  +0.2 | LAMA   +nan (n=0) BARU  +0.21 (n=5) | tahun+  67% dari 3
+FOMC                                         n=  36 WR  69.4% rata  -1.08 total    -38.9 t  -0.7 | LAMA  -3.26 (n=3) BARU  -0.88 (n=33) | tahun+  62% dari 8
+GDP                                          n=  24 WR  58.3% rata  -0.48 total    -11.5 t  -0.4 | LAMA  +4.63 (n=3) BARU  -1.21 (n=21) | tahun+  50% dari 6
+ISM                                          n=  94 WR  68.1% rata  -1.12 total   -105.2 t  -1.5 | LAMA  -3.33 (n=7) BARU  -0.94 (n=87) | tahun+  25% dari 8
+JOLTS                                        n=  29 WR  55.2% rata  -2.18 total    -63.3 t  -1.8 | LAMA   +nan (n=0) BARU  -2.18 (n=29) | tahun+   0% dari 4
+KONSUMEN                                     n=  72 WR  62.5% rata  -1.52 total   -109.2 t  -2.2 | LAMA  +2.49 (n=2) BARU  -1.63 (n=70) | tahun+  57% dari 7
+MANUFAKTUR                                   n=  15 WR  46.7% rata  -2.80 total    -42.0 t  -2.7 | LAMA   +nan (n=0) BARU  -2.80 (n=15) | tahun+   0% dari 3
+MINYAK                                       n=   1 WR 100.0% rata  +3.94 total     +3.9 t  +nan | LAMA  +3.94 (n=1) BARU   +nan (n=0) | tahun+ 100% dari 1
+NFP                                          n=  55 WR  54.5% rata  -2.01 total   -110.7 t  -1.2 | LAMA  -7.53 (n=7) BARU  -1.21 (n=48) | tahun+  22% dari 9
+PCE                                          n=  40 WR  50.0% rata  -0.93 total    -37.1 t  -0.6 | LAMA  -2.84 (n=1) BARU  -0.88 (n=39) | tahun+  33% dari 6
+PMI                                          n=  45 WR  60.0% rata  -2.00 total    -89.9 t  -2.4 | LAMA  -5.17 (n=3) BARU  -1.77 (n=42) | tahun+  17% dari 6
+PPI                                          n=  40 WR  70.0% rata  +1.29 total    +51.5 t  +1.2 | LAMA -11.58 (n=1) BARU  +1.62 (n=39) | tahun+  50% dari 6
+RETAIL                                       n=  38 WR  63.2% rata  -0.62 total    -23.6 t  -0.9 | LAMA  +0.37 (n=6) BARU  -0.81 (n=32) | tahun+  43% dari 7
+RUMAH                                        n=   5 WR  80.0% rata  +0.50 total     +2.5 t  +0.4 | LAMA  -3.83 (n=1) BARU  +1.58 (n=4) | tahun+  50% dari 2

@@ -479,7 +479,11 @@ PRESET = {
                "label": "ikut lonjakan di detik ke-5 (manual, reaksi 2 dtk), tutup menit 1-5 bila profit, maks 15 mnt"},
     "pending": {"aturan": "STRADDLE $2", "lat": 0.0, "slip": 0.3, "keluar": "PENGGUNA", "sl": False,
                 "label": "Buy Stop & Sell Stop $2 dari harga sebelum rilis, tutup menit 1-5 bila profit, maks 15 mnt"},
+    # ditambah SETELAH melihat hasil Exness (varian manual yang lolos di feed Exness) -> selalu dengan pembanding feed lain
+    "pending1": {"aturan": "STRADDLE $1", "lat": 0.0, "slip": 0.3, "keluar": "PENGGUNA", "sl": False,
+                 "label": "Buy Stop & Sell Stop $1 dari harga 5 dtk sebelum rilis, tutup menit 1-5 bila profit, maks 15 mnt"},
 }
+CROSS = {"XAU_EXNESS": "XAU", "BTC_EXNESS": "BTC"}          # feed pembanding untuk uji silang
 OUT_JSON = Path(__file__).resolve().parent.parent / "cloud" / "api" / "detik.json"
 MIN_N = 20
 
@@ -534,21 +538,40 @@ def describe(rule: str, ex: str, sl: bool, aset: str) -> str:
     return f"{txt}, {keluar}" + (f", SL {money(SL_DARURAT, aset, sign=False)}" if sl else "")
 
 
-def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tuple]) -> dict:
+def _cross_avg(tr_x: pd.DataFrame | None, times, rule: str, ex: str, sl: bool) -> float | None:
+    """Rata-rata varian yang sama (slippage $0,30, reaksi 2 dtk / pending) di feed pembanding, rilis yang sama."""
+    if tr_x is None:
+        return None
+    g = tr_x[(tr_x.aturan == rule) & (tr_x.keluar == ex) & (tr_x.sl == sl) & (tr_x.slip == 0.3) &
+             ((tr_x.lat == 2.0) | tr_x.aturan.str.startswith("STRADDLE")) & tr_x.time.isin(set(times))]
+    return float(g.pnl.mean()) if len(g) >= 10 else None
+
+
+def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tuple],
+                 tr_x: pd.DataFrame | None = None) -> dict:
     """Ringkasan satu aset per grup berita -> dict untuk cloud/api/detik.json (dibaca _persiapan.py).
-    lolos: [(aturan, keluar, sl, stats dasar, stats kuat)] varian yang lolos kriteria konsisten."""
+    lolos: [(aturan, keluar, sl, stats dasar, stats kuat)] varian yang lolos kriteria konsisten.
+    tr_x: hasil feed pembanding (CROSS) -> varian yang lolos di sini tetapi rugi di sana diberi ⚠️ "belum terbukti"."""
     out = {}
+    other = LABEL.get(CROSS.get(aset, ""), "").split(" (")[-1].rstrip(")")
     manual = [r for r in lolos if manual_ok(r[0])]
     best = max(manual, key=lambda r: r[4]["avg"]) if manual else None
+    cross_note = ""
+    if best is not None:
+        cx = _cross_avg(tr_x, tr.time.unique(), *best[:3])
+        if cx is not None:
+            cross_note = (f"; di feed {other} rilis yang sama {money(cx, aset)}" +
+                          (" → belum terbukti, uji maju lot minimum dulu" if cx <= 0 else ""))
     if best:
         g = tr[(tr.aturan == best[0]) & (tr.keluar == best[1]) & (tr.sl == best[2]) & (tr.slip == 0) & (tr.lat <= 0.5)]
         yr = g.groupby(g.time.dt.year).pnl.sum()
         share = yr.max() / yr.sum() * 100 if yr.sum() > 0 else np.nan
-        icon, rapuh = ("⚠️", " (rapuh)") if share >= 50 else ("✅", "")
+        icon, rapuh = ("⚠️", " (rapuh)") if share >= 50 or "belum terbukti" in cross_note else ("✅", "")
         verdict = (f"{icon} {len(lolos)} cara lolos uji ({len(manual)} bisa manual); terbaik yang bisa manual: "
                    f"{describe(*best[:3], aset)} → rata {money(best[3]['avg'], aset)} (dengan slippage & reaksi 2 dtk "
-                   f"{money(best[4]['avg'], aset)}); {share:.0f}% untungnya dari tahun {yr.idxmax()}{rapuh}")
-        short = f"{icon} {len(manual)} cara manual lolos uji, {share:.0f}% untungnya dari {yr.idxmax()}{rapuh}"
+                   f"{money(best[4]['avg'], aset)}); {share:.0f}% untungnya dari tahun {yr.idxmax()}{rapuh}{cross_note}")
+        short = (f"{icon} {len(manual)} cara manual lolos uji, {share:.0f}% untungnya dari {yr.idxmax()}{rapuh}"
+                 + (" — belum terbukti di feed lain, uji maju dulu" if "belum terbukti" in cross_note else ""))
     elif lolos:
         st = tr[(tr.slip == 1.0) & ((tr.lat == 2.0) | tr.aturan.str.startswith("STRADDLE"))]
         rugi = sum(1 for r in lolos if st[(st.aturan == r[0]) & (st.keluar == r[1]) & (st.sl == r[2])].pnl.mean() < 0)
@@ -572,7 +595,9 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
         for key, pr in PRESET.items():
             st = stats(_pick(tg, pr))
             row[key] = {k: _r(v) if isinstance(v, float) else v for k, v in st.items()}
-        m, pn = row["manual"], row["pending"]
+        m, pn, p1 = row["manual"], row["pending"], row["pending1"]
+        cx1 = _cross_avg(tr_x, g.time, "STRADDLE $1", "PENGGUNA", False)
+        x1 = "" if cx1 is None else f"; feed {other}: {money(cx1, aset)}"
 
         def one(st: dict) -> str:
             if not st.get("n"):
@@ -586,10 +611,11 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
                   if aset != "BTC" else "spread diasumsikan 0,03%")
         row["teks"] = (f"{LABEL[aset]} ({row['tahun']}, n={row['n']}): 5 dtk pertama bergerak ±{money(row['gerak5'], aset, False)}"
                        f", {spread}. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): {one(m)}. "
-                       f"Pending Buy/Sell Stop ±{money(2, aset, False)}: {one(pn)}. {verdict}.")
+                       f"Pending Buy/Sell Stop ±{money(1, aset, False)} (5 dtk sebelum rilis): {one(p1)}{x1}. "
+                       f"Pending ±{money(2, aset, False)}: {one(pn)}. {verdict}.")
         row["alarm"] = (f"{LABEL[aset]}: 5 dtk pertama ±{money(row['gerak5'], aset, False)}"
                         + (f", spread melebar ke ±{money(row['spread1'], aset, False)}" if aset != "BTC" else "")
-                        + f". Ikut lonjakan manual: {one(m)}. {short}.")
+                        + f". Pending ±{money(1, aset, False)}: {one(p1)}{x1}. Ikut lonjakan manual: {one(m)}. {short}.")
         out[grp] = row
     return out
 
@@ -670,7 +696,8 @@ def main(aset: str = "XAU") -> None:
     txt = "\n".join(lines)
     print(txt)
     data = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else {}
-    data[aset] = export_group(tr, an, aset, [r[:5] for r in lolos])
+    tr_x = run(CROSS[aset])[0] if aset in CROSS else None       # uji silang di feed lain (rilis yang sama)
+    data[aset] = export_group(tr, an, aset, [r[:5] for r in lolos], tr_x)
     data["dibuat"] = pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d")
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     out = OUT_TXT.with_name(f"hasil_news_detik_{aset.lower()}.txt")

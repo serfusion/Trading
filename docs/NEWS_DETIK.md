@@ -12,6 +12,15 @@ Riset lama (`research/news_trade.py`, `docs/RISET_DATA_EKSTERNAL.md` §15) masuk
 
 ## Ringkasan
 
+> **Pembaruan (tick asli Exness, broker pengguna — bagian 3b):**
+> - Di feed **Exness (XAUUSDc, akun Cent)**, **order pending Buy Stop & Sell Stop ±$1** yang dipasang 5 detik
+>   sebelum rilis, ditambah aturan pengguna, positif untuk **NFP: +$3,18 per 0,01 lot** (slippage $0,30; 130 rilis
+>   2015–2026, 83% tahun positif) dan CPI (+$2,21).
+> - Tetapi di feed **Dukascopy**, cara yang sama pada rilis yang sama **rugi (−$1,87)**, dan untungnya terkumpul
+>   di 2021–2026. Jadi **belum terbukti**. Langkah berikutnya: uji maju dengan lot minimum sambil mencatat harga
+>   terisi nyata.
+> - BTC dengan spread asli Exness: **tidak ada cara yang untung**.
+
 - **Yang benar:** emas memang bergerak besar di detik-detik awal. Median gerak 5 detik pertama ±$3,3 (5 tahun
   terakhir; NFP ±$5,5, CPI ±$5,7). Spread melebar dari ±$0,5 menjadi ±$0,9–1,1 di detik pertama.
 - **Siapa yang untung:** hanya yang tahu angka Act vs Cons **dalam 1 detik** dan langsung masuk searah kejutan.
@@ -116,6 +125,43 @@ masuk setelah lonjakan terlihat rata-rata rugi.
   ada berita yang positif konsisten.
 
 
+## 3b. Uji ulang dengan tick asli Exness (XAUUSDc akun Cent, 1.680 rilis 2015–2026)
+
+Arsip tick Exness (`ticks.ex2archive.com`, dibuka pengguna 30 Sep) → `research/exness.py`: jendela berita tiap
+bulan + tabel spread per jam (`data/research/eksternal/exness/`). Semua rilis bintang 3 ikut diuji, termasuk ISM,
+Claims, dan lainnya.
+
+**Spread asli XAUUSDc** (median per tahun): $0,47 (2015–16), $0,22–0,30 (2017–20), **$0,16–0,20 (2021–25)**,
+$0,26 (2026). Saat berita (5 tahun terakhir) spread hanya $0,20 → $0,24–0,48, jauh lebih sempit dari Dukascopy
+($0,9–1,1).
+
+| Cara (aturan keluar pengguna, slippage $0,30) | n | Menang | Rata-rata /0,01 lot | 5 th | Feed Dukascopy, rilis sama |
+|---|---|---|---|---|---|
+| Preset manual: ikut lonjakan detik ke-5 | 472 | 69% | −$0,16 | +$0,12 | – |
+| Pending ±$2 | 1.024 | 68% | +$0,26 | +$0,76 | – |
+| **Pending ±$1** (5 dtk sebelum rilis), semua berita | 1.388 | 70% | +$0,36 | +$0,85 | **−$0,82** |
+| Pending ±$1, **NFP** | 130 | 77% | **+$3,18** (83% th +) | +$6,22 | **−$1,87** |
+| Pending ±$1, CPI | 127 | – | +$2,21 (50% th +) | +$4,92 | – |
+| Pending ±$1, FOMC | 85 | 74% | **−$1,56** | −$3,51 | −$0,91 |
+
+- 31 varian lolos kriteria di feed Exness, 9 di antaranya bisa manual. Yang terbaik: pending ±$1, tahan 5 menit,
+  SL $5. Rata-rata +$0,68 (0 slippage) / +$0,38 ($0,30), **tetapi −$0,66 di feed Dukascopy**.
+- NFP pending ±$1 per tahun (slippage $0,30):
+  - 2016–2020: −$0,23 s.d. +$0,77;
+  - 2021–2025: +$2,1 s.d. +$4,0;
+  - 2026: +$25 (8 rilis).
+
+  Dengan slippage $1 hasilnya masih +$2,07, tetapi periode LAMA menjadi −$0,33.
+- **Kenapa berbeda antar feed?** Di Exness spread tetap sempit saat berita, jadi pending hanya tersentuh gerak
+  sungguhan. Di Dukascopy spread melebar ±2×, sehingga pending ikut tersentuh oleh pelebaran spread dan terisi di
+  harga buruk. Tick arsip adalah **kutipan**, bukan harga terisi nyata: saat NFP, order stop di akun nyata bisa
+  tergelincir lebih jauh.
+- MT5 tidak punya OCO bawaan. Bila order lawan ikut tersentuh sebelum dihapus, hasilnya lebih buruk dari model.
+- **Kesimpulan:** belum cukup bukti untuk dipakai dengan lot normal. Langkah yang jujur adalah **uji maju** di
+  NFP/CPI berikutnya dengan lot minimum (akun Cent: 0,01 lot XAUUSDc), sambil mencatat harga terisi dan slippage,
+  lalu dibandingkan dengan angka di atas. Aplikasi menampilkan angka ini dengan label ⚠️ "belum terbukti, uji maju
+  dulu".
+
 ## 4. BTC (1.190 rilis 2018–2026)
 
 Detik pertama BTC jauh lebih tenang dari emas. Dalam 5 detik BTC bergerak ±0,02% (LAMA) / ±0,05% (BARU),
@@ -138,8 +184,15 @@ lonjakan" selalu rugi. Yang terbaik: ikut lonjakan ≥ 0,1% di detik ke-5, tahan
 - LAMA sering hanya 8–27 trade, karena sebelum 2021 BTC jarang bergerak ≥ 0,05% dalam 2–10 detik;
 - spread BTC di broker saat berita tidak ada di data ini (spread diasumsikan 0,03%).
 
-**Kesimpulan BTC:** ada kecenderungan "ikut arah" setelah berita AS, terutama CPI, tetapi rapuh. Ditampilkan di
-aplikasi sebagai informasi ⚠️, bukan saran entry.
+**Kesimpulan BTC:** ada kecenderungan "ikut arah" setelah berita AS, terutama CPI, tetapi rapuh.
+
+**Dengan tick asli Exness (BTCUSDm, 1.241 rilis 2017–2026) semuanya hilang:**
+- spread Exness BTC ±0,17% (2017–2021) dan ±0,06% (5 th), jauh di atas asumsi 0,03%;
+- 0 dari 516 varian lolos;
+- preset manual −0,078% per trade, pending −0,076%.
+
+Spread BTCUSDm per tahun: $12–32, dan **$64 di 2021**. Riset sinyal 💰 BTC lain memakai 0,03%, jadi biaya BTC
+tahun 2021 kemungkinan terlalu kecil di riset lama. Perlu dicek ulang (tindak lanjut).
 
 ## 5. Kenapa "banyak orang profit di detik pertama"?
 
@@ -152,22 +205,26 @@ aplikasi sebagai informasi ⚠️, bukan saran entry.
 
 ## 6. Rekomendasi
 
-1. **Jangan entry manual di detik pertama berita** dengan aturan ini. Di XAU rata-rata −$0,65 per 0,01 lot per
-   berita (5 tahun terakhir −$0,15), di BTC ±0.
-2. Pakai pengingat ⏱️ 1 menit sebelum rilis untuk **mengamankan posisi yang sudah terbuka**: spread melebar ±2× di
+1. **Jangan entry manual "ikut lonjakan" di detik pertama berita.** Di XAU Dukascopy rata-rata −$0,65, di Exness
+   −$0,16 per 0,01 lot. Di BTC Exness rugi.
+2. **Pending ±$1 untuk NFP (dan CPI) di Exness**: menjanjikan di feed Exness, rugi di feed lain → **uji maju lot
+   minimum** dulu dan catat harga terisi. Jangan dipakai untuk FOMC (negatif).
+3. Pakai pengingat ⏱️ 1 menit sebelum rilis untuk **mengamankan posisi yang sudah terbuka**: spread melebar ±2× di
    detik pertama dan harga bisa meloncat melewati SL.
-3. Otomatisasi "ikut kejutan ≤ 1 detik" (bot MT5 + feed berita cepat berbayar) adalah satu-satunya jalan yang
+4. Otomatisasi "ikut kejutan ≤ 1 detik" (bot MT5 + feed berita cepat berbayar) adalah satu-satunya jalan yang
    positif di data. Tetapi keunggulannya habis dengan slippage $1, dan broker ritel sering menambah slippage atau
-   menolak order saat berita. **Tidak dipasang**: perlu izin eksplisit, feed berbayar, dan uji dengan data tick
-   Exness (host `ticks.ex2archive.com` harus dibuka dulu di pengaturan jaringan environment).
-4. Sinyal 💰 tetap jalur utama (+0,25R per sinyal XAU, `docs/TRADING_ALCHEMIST.md`).
+   menolak order saat berita. **Tidak dipasang**: perlu izin eksplisit dan feed berbayar. Di feed Exness,
+   "ikut kejutan detik ke-1" dengan slippage $0,30 + eksekusi 2 dtk juga hanya ±$0.
+5. Sinyal 💰 tetap jalur utama (+0,25R per sinyal XAU, `docs/TRADING_ALCHEMIST.md`).
 
 ## 7. Perintah
 
 ```bash
 python -m research.news_detik download_bagian 1,2 0 4 100   # pekerja 0 dari 4 (ulangi k = 1, 2, 3), <= 2 jam
 python -m research.news_detik download_btc                  # BTC 1 detik (cepat)
-python -m research.news_detik XAU && python -m research.news_detik BTC   # hasil + cloud/api/detik.json
+python -m research.exness XAUUSDc 2015-01 2026-09 && python -m research.exness BTCUSDm 2017-01 2026-09
+python -m research.news_detik XAU_EXNESS && python -m research.news_detik BTC_EXNESS   # broker pengguna
+python -m research.news_detik XAU && python -m research.news_detik BTC   # feed pembanding; semua -> detik.json
 git add data cloud/api/detik.json docs/eksternal && git commit -m "..."  # simpan data di repo
 ```
 

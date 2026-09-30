@@ -78,7 +78,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   "detik pertama". Hanya info, tanpa order. Arsip tick Exness (`ticks.ex2archive.com`) diblokir jaringan (403).
 - Hasil (710 rilis XAU): manual (detik ke-5) −$0,65/0,01 lot, pending ±$2 −$0,40; hanya "ikut kejutan Act ≤ 1–2
   detik" positif (+$0,92) tapi negatif dengan slippage/latensi realistis. BTC: ±0, untung "ikut arah" 61% dari 2022.
-  Otomatisasi ≤ 1 detik (feed berbayar) TIDAK dipasang — butuh izin & data tick Exness.
+  Otomatisasi ≤ 1 detik (feed berbayar) TIDAK dipasang — butuh izin.
+- Tick asli Exness (`ticks.ex2archive.com` DIBUKA pengguna 30 Sep; `research/exness.py`, XAUUSDc & BTCUSDm): pending
+  ±$1 NFP +$3,18/0,01 lot di feed Exness tapi −$1,87 di Dukascopy (rilis sama) → "belum terbukti, uji maju lot
+  minimum". BTC Exness: 0 varian lolos. Spread asli per jam: `research.exness.spread_table(sym)` (XAUUSDc $0,16–0,20
+  2021–25; BTCUSDm $12–64 → cek ulang biaya riset 💰 BTC yang memakai 0,03%).
 
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
