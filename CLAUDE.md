@@ -38,6 +38,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - DIPASANG 30 Sep (izin pengguna): ⚡/peringkat (`_core.tier`, `vol_pct`), label ⚠️ mode perang tanpa jeda
   (`_perang.py`, env WAR_MODE), aplikasi 3.11 (lot per peringkat ⚡ 1% / 0,5% / biasa ½, SL+ otomatis ⚡ & BTC 0,7R,
   modal otomatis, kurs 17.500). Pengguna MENOLAK risiko 80% modal (diberi batas 1%).
+- Cadangan USO untuk label ⚠️ (izin pengguna 30 Sep): `_perang.current()` pakai FRED; bila FRED gagal/basi
+  (> 10 hari — FRED WTI terbit MINGGUAN, umur normal 5–9 hari) pakai USO Twelve Data (cache baris Supabase
+  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & ini baru aktif setelah PR serfusion/Trading#24 +
+  branch ini di-merge ke branch produksi Vercel.
 - TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
   emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
   sintetis RNG (harga acak -> rugi sebesar spread).

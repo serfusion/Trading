@@ -102,6 +102,7 @@ di aplikasi.
 | `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
 | `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
 | `WAR_MODE` | (opsional) `1` = label ⚠️ mode perang di sinyal XAU & heartbeat saat WTI (FRED, tanpa kunci) naik ≥ 10% dalam 10 hari bursa (default; XAU **tidak** dijeda), `0` = mati |
+| `WAR_BACKUP` | (opsional) `1` = bila FRED gagal/basi (data terbaru > 10 hari; FRED WTI normal terbit mingguan), label mode perang memakai ETF USO dari Twelve Data (default; paling sering tiap 6 jam, cache di baris `perang`), `0` = mati |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
