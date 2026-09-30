@@ -38,7 +38,7 @@ Dukascopy serupa (60 dtk: 61% / 75%). "Tutup begitu untung" butuh tebakan LEBIH 
 | Kejutan bulan lalu terulang (semua berita) | 48,8% | 49,1% |
 | Gerak harga 10–110 dtk sebelum rilis (ikut / lawan) | 47,7–52,3% | 46,9–53,1% |
 | Kejutan CPI bulan lalu (khusus CPI, n 58–90) | 59,0–63,8% | 55,6–60,7% |
-| MODEL regresi logistik walk-forward (semua fitur di atas) | 52,6% (yakin ≥ 55%: 51,4%) | 52,9% (54,2%) |
+| MODEL regresi logistik walk-forward (semua fitur di atas) | 52,7% (yakin ≥ 55%: 51,3%) | 52,6% (52,6%) |
 
 Semua jauh di bawah 59–94% yang dibutuhkan. Temuan literatur tidak berlaku untuk emas di data ini: bias anchoring
 kecil, dan Campbell & Sharpe sendiri menemukan pasar sudah memperhitungkannya; drift pra-rilis Kurov (futures saham &

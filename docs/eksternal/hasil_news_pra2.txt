@@ -48,14 +48,14 @@ Cek jam: gerak t0-5->t0-1 searah kejutan 46% (50% = tidak bocor); bar M15 rilis 
   Dukascopy DRIFT 60s                          n= 970 benar 47.8% | LAMA 48.9% | BARU 45.8%
   Exness    LAWAN 60s                          n=1387 benar 52.3% | LAMA 51.6% | BARU 53.2%
   Dukascopy LAWAN 60s                          n= 970 benar 52.2% | LAMA 51.1% | BARU 54.2%
-  Exness    DRIFT 110s                         n=1399 benar 48.7% | LAMA 49.2% | BARU 48.0%
-  Dukascopy DRIFT 110s                         n= 974 benar 48.4% | LAMA 48.8% | BARU 47.5%
-  Exness    LAWAN 110s                         n=1399 benar 51.3% | LAMA 50.8% | BARU 52.0%
-  Dukascopy LAWAN 110s                         n= 974 benar 51.6% | LAMA 51.2% | BARU 52.5%
-  Exness    MODEL walk-forward                 n= 978 benar 52.6% | LAMA 49.6% | BARU 54.4%
-  Dukascopy MODEL walk-forward                 n= 736 benar 52.9% | LAMA 53.0% | BARU 52.6%
-  Exness    MODEL YAKIN (>=55%)                n= 554 benar 51.4% | LAMA 44.2% | BARU 56.0%
-  Dukascopy MODEL YAKIN (>=55%)                n= 465 benar 54.2% | LAMA 55.4% | BARU 52.5%
+  Exness    DRIFT 110s                         n=1398 benar 48.6% | LAMA 49.2% | BARU 47.9%
+  Dukascopy DRIFT 110s                         n= 967 benar 48.6% | LAMA 49.1% | BARU 47.6%
+  Exness    LAWAN 110s                         n=1398 benar 51.4% | LAMA 50.8% | BARU 52.1%
+  Dukascopy LAWAN 110s                         n= 967 benar 51.4% | LAMA 50.9% | BARU 52.4%
+  Exness    MODEL walk-forward                 n= 978 benar 52.7% | LAMA 49.6% | BARU 54.5%
+  Dukascopy MODEL walk-forward                 n= 736 benar 52.6% | LAMA 52.3% | BARU 52.9%
+  Exness    MODEL YAKIN (>=55%)                n= 556 benar 51.3% | LAMA 44.2% | BARU 55.7%
+  Dukascopy MODEL YAKIN (>=55%)                n= 475 benar 52.6% | LAMA 54.6% | BARU 50.0%
 
 == ORAKEL (arah kejutan diketahui 100%) dan akurasi tebakan minimal agar impas ==
   Exness    tutup 1s                     CEPAT -0.32 (impas >= 696%) | REALISTIS -0.57 (impas >= 169%) | STRES -1.97 (impas >= 340%)
@@ -530,42 +530,42 @@ Cek jam: gerak t0-5->t0-1 searah kejutan 46% (50% = tidak bocor); bar M15 rilis 
   Dukascopy LAWAN 60s | untung>=$1 maks 180s SL$3 n=1233 WR  49.4% rata  -0.63 total   -778.5 t  -7.7 | LAMA  -0.48 (n=790) BARU  -0.89 (n=443) | tahun+   6% dari 17 | REAL -1.22 | STRES -2.51
   Exness    LAWAN 60s | untung>=$2 maks 180s n=1633 WR  52.1% rata  -0.41 total   -676.8 t  -4.5 | LAMA  -0.29 (n=901) BARU  -0.56 (n=732) | tahun+   8% dari 12 | REAL -0.87 | STRES -2.22
   Dukascopy LAWAN 60s | untung>=$2 maks 180s n=1233 WR  51.0% rata  -0.47 total   -576.9 t  -3.5 | LAMA  -0.29 (n=790) BARU  -0.79 (n=443) | tahun+  12% dari 17 | REAL -0.95 | STRES -2.37
-  Exness    DRIFT 110s | tutup 1s            n=1646 WR   6.1% rata  -0.35 total   -577.3 t -34.4 | LAMA  -0.46 (n=911) BARU  -0.21 (n=735) | tahun+   0% dari 12 | REAL -1.00 | STRES -2.40
-  Dukascopy DRIFT 110s | tutup 1s            n=1239 WR   1.3% rata  -0.70 total   -865.0 t -40.4 | LAMA  -0.59 (n=791) BARU  -0.89 (n=448) | tahun+   0% dari 17 | REAL -1.37 | STRES -2.77
-  Exness    DRIFT 110s | tutup 3s            n=1646 WR  27.5% rata  -0.45 total   -740.4 t  -7.8 | LAMA  -0.49 (n=911) BARU  -0.39 (n=735) | tahun+   0% dari 12 | REAL -1.05 | STRES -2.45
-  Dukascopy DRIFT 110s | tutup 3s            n=1239 WR  25.7% rata  -0.87 total  -1077.0 t -10.8 | LAMA  -0.73 (n=791) BARU  -1.11 (n=448) | tahun+   0% dari 17 | REAL -1.44 | STRES -2.84
-  Exness    DRIFT 110s | tutup 10s           n=1646 WR  34.0% rata  -0.55 total   -911.6 t  -5.2 | LAMA  -0.51 (n=911) BARU  -0.61 (n=735) | tahun+   0% dari 12 | REAL -1.16 | STRES -2.56
-  Dukascopy DRIFT 110s | tutup 10s           n=1239 WR  33.9% rata  -0.94 total  -1170.2 t  -6.6 | LAMA  -0.75 (n=791) BARU  -1.28 (n=448) | tahun+   0% dari 17 | REAL -1.55 | STRES -2.95
-  Exness    DRIFT 110s | tutup 30s           n=1646 WR  38.5% rata  -0.58 total   -955.8 t  -5.0 | LAMA  -0.51 (n=911) BARU  -0.66 (n=735) | tahun+   0% dari 12 | REAL -1.19 | STRES -2.59
-  Dukascopy DRIFT 110s | tutup 30s           n=1239 WR  38.3% rata  -0.95 total  -1179.0 t  -6.1 | LAMA  -0.81 (n=791) BARU  -1.21 (n=448) | tahun+   0% dari 17 | REAL -1.57 | STRES -2.97
-  Exness    DRIFT 110s | tutup 60s           n=1646 WR  39.7% rata  -0.53 total   -876.5 t  -4.1 | LAMA  -0.53 (n=911) BARU  -0.54 (n=735) | tahun+   0% dari 12 | REAL -1.13 | STRES -2.53
-  Dukascopy DRIFT 110s | tutup 60s           n=1239 WR  40.4% rata  -0.88 total  -1084.5 t  -5.0 | LAMA  -0.80 (n=791) BARU  -1.01 (n=448) | tahun+   0% dari 17 | REAL -1.48 | STRES -2.88
-  Exness    DRIFT 110s | tutup 180s          n=1646 WR  39.9% rata  -0.55 total   -911.6 t  -4.0 | LAMA  -0.55 (n=911) BARU  -0.56 (n=735) | tahun+   8% dari 12 | REAL -1.16 | STRES -2.56
-  Dukascopy DRIFT 110s | tutup 180s          n=1239 WR  41.5% rata  -0.88 total  -1089.3 t  -4.7 | LAMA  -0.77 (n=791) BARU  -1.07 (n=448) | tahun+   6% dari 17 | REAL -1.49 | STRES -2.89
-  Exness    DRIFT 110s | untung>=$1 maks 60s n=1646 WR  46.8% rata  -0.82 total  -1347.7 t  -9.0 | LAMA  -0.63 (n=911) BARU  -1.05 (n=735) | tahun+   0% dari 12 | REAL -1.28 | STRES -2.61
-  Dukascopy DRIFT 110s | untung>=$1 maks 60s n=1239 WR  47.6% rata  -1.09 total  -1354.1 t  -8.4 | LAMA  -0.82 (n=791) BARU  -1.58 (n=448) | tahun+   0% dari 17 | REAL -1.60 | STRES -2.97
-  Exness    DRIFT 110s | untung>=$1 maks 180s SL$3 n=1646 WR  47.4% rata  -0.58 total   -954.5 t -11.4 | LAMA  -0.59 (n=911) BARU  -0.57 (n=735) | tahun+   0% dari 12 | REAL -1.12 | STRES -2.38
-  Dukascopy DRIFT 110s | untung>=$1 maks 180s SL$3 n=1239 WR  47.1% rata  -0.89 total  -1103.7 t -11.2 | LAMA  -0.74 (n=791) BARU  -1.16 (n=448) | tahun+   0% dari 17 | REAL -1.49 | STRES -2.77
-  Exness    DRIFT 110s | untung>=$2 maks 180s n=1646 WR  46.2% rata  -0.71 total  -1164.6 t  -6.6 | LAMA  -0.57 (n=911) BARU  -0.88 (n=735) | tahun+   0% dari 12 | REAL -1.22 | STRES -2.60
-  Dukascopy DRIFT 110s | untung>=$2 maks 180s n=1239 WR  47.9% rata  -0.97 total  -1205.3 t  -6.5 | LAMA  -0.75 (n=791) BARU  -1.36 (n=448) | tahun+   6% dari 17 | REAL -1.53 | STRES -2.95
-  Exness    LAWAN 110s | tutup 1s            n=1646 WR   5.8% rata  -0.34 total   -567.3 t -35.0 | LAMA  -0.44 (n=911) BARU  -0.23 (n=735) | tahun+   0% dari 12 | REAL -0.94 | STRES -2.34
-  Dukascopy LAWAN 110s | tutup 1s            n=1239 WR   0.9% rata  -0.69 total   -860.9 t -42.5 | LAMA  -0.57 (n=791) BARU  -0.92 (n=448) | tahun+   0% dari 17 | REAL -1.33 | STRES -2.73
-  Exness    LAWAN 110s | tutup 3s            n=1646 WR  29.3% rata  -0.34 total   -560.1 t  -5.9 | LAMA  -0.53 (n=911) BARU  -0.10 (n=735) | tahun+  25% dari 12 | REAL -0.93 | STRES -2.33
-  Dukascopy LAWAN 110s | tutup 3s            n=1239 WR  27.2% rata  -0.71 total   -878.4 t  -9.0 | LAMA  -0.52 (n=791) BARU  -1.03 (n=448) | tahun+   0% dari 17 | REAL -1.26 | STRES -2.66
-  Exness    LAWAN 110s | tutup 10s           n=1646 WR  37.9% rata  -0.20 total   -327.5 t  -1.9 | LAMA  -0.44 (n=911) BARU  +0.10 (n=735) | tahun+  42% dari 12 | REAL -0.80 | STRES -2.20
-  Dukascopy LAWAN 110s | tutup 10s           n=1239 WR  37.6% rata  -0.39 total   -482.6 t  -2.7 | LAMA  -0.37 (n=791) BARU  -0.43 (n=448) | tahun+  29% dari 17 | REAL -0.99 | STRES -2.39
-  Exness    LAWAN 110s | tutup 30s           n=1646 WR  39.8% rata  -0.17 total   -278.9 t  -1.5 | LAMA  -0.39 (n=911) BARU  +0.10 (n=735) | tahun+  33% dari 12 | REAL -0.76 | STRES -2.16
-  Dukascopy LAWAN 110s | tutup 30s           n=1239 WR  41.9% rata  -0.20 total   -244.0 t  -1.3 | LAMA  -0.18 (n=791) BARU  -0.23 (n=448) | tahun+  35% dari 17 | REAL -0.79 | STRES -2.19
-  Exness    LAWAN 110s | tutup 60s           n=1646 WR  42.2% rata  -0.21 total   -348.3 t  -1.6 | LAMA  -0.34 (n=911) BARU  -0.05 (n=735) | tahun+  42% dari 12 | REAL -0.81 | STRES -2.21
-  Dukascopy LAWAN 110s | tutup 60s           n=1239 WR  45.4% rata  -0.21 total   -261.5 t  -1.2 | LAMA  -0.13 (n=791) BARU  -0.35 (n=448) | tahun+  29% dari 17 | REAL -0.82 | STRES -2.22
-  Exness    LAWAN 110s | tutup 180s          n=1646 WR  45.8% rata  -0.11 total   -175.0 t  -0.8 | LAMA  -0.29 (n=911) BARU  +0.12 (n=735) | tahun+  42% dari 12 | REAL -0.70 | STRES -2.10
-  Dukascopy LAWAN 110s | tutup 180s          n=1239 WR  45.4% rata  -0.17 total   -211.5 t  -0.9 | LAMA  -0.15 (n=791) BARU  -0.21 (n=448) | tahun+  41% dari 17 | REAL -0.77 | STRES -2.17
-  Exness    LAWAN 110s | untung>=$1 maks 60s n=1646 WR  49.4% rata  -0.63 total  -1028.9 t  -7.3 | LAMA  -0.55 (n=911) BARU  -0.72 (n=735) | tahun+   8% dari 12 | REAL -1.06 | STRES -2.40
-  Dukascopy LAWAN 110s | untung>=$1 maks 60s n=1239 WR  51.4% rata  -0.66 total   -819.3 t  -4.9 | LAMA  -0.39 (n=791) BARU  -1.14 (n=448) | tahun+  12% dari 17 | REAL -1.10 | STRES -2.41
-  Exness    LAWAN 110s | untung>=$1 maks 180s SL$3 n=1646 WR  52.2% rata  -0.44 total   -719.0 t  -8.6 | LAMA  -0.51 (n=911) BARU  -0.34 (n=735) | tahun+  17% dari 12 | REAL -0.92 | STRES -2.20
-  Dukascopy LAWAN 110s | untung>=$1 maks 180s SL$3 n=1239 WR  50.0% rata  -0.64 total   -791.5 t  -7.8 | LAMA  -0.45 (n=791) BARU  -0.98 (n=448) | tahun+  12% dari 17 | REAL -1.21 | STRES -2.55
-  Exness    LAWAN 110s | untung>=$2 maks 180s n=1646 WR  51.3% rata  -0.47 total   -776.4 t  -4.8 | LAMA  -0.38 (n=911) BARU  -0.59 (n=735) | tahun+  17% dari 12 | REAL -0.91 | STRES -2.26
-  Dukascopy LAWAN 110s | untung>=$2 maks 180s n=1239 WR  52.1% rata  -0.47 total   -578.8 t  -3.3 | LAMA  -0.24 (n=791) BARU  -0.86 (n=448) | tahun+  18% dari 17 | REAL -0.95 | STRES -2.37
+  Exness    DRIFT 110s | tutup 1s            n=1645 WR   6.1% rata  -0.35 total   -576.7 t -34.4 | LAMA  -0.46 (n=911) BARU  -0.21 (n=734) | tahun+   0% dari 12 | REAL -1.00 | STRES -2.40
+  Dukascopy DRIFT 110s | tutup 1s            n=1231 WR   1.3% rata  -0.70 total   -859.6 t -40.2 | LAMA  -0.59 (n=784) BARU  -0.89 (n=447) | tahun+   0% dari 17 | REAL -1.37 | STRES -2.77
+  Exness    DRIFT 110s | tutup 3s            n=1645 WR  27.5% rata  -0.45 total   -737.1 t  -7.8 | LAMA  -0.49 (n=911) BARU  -0.39 (n=734) | tahun+   0% dari 12 | REAL -1.04 | STRES -2.44
+  Dukascopy DRIFT 110s | tutup 3s            n=1231 WR  25.9% rata  -0.87 total  -1064.9 t -10.7 | LAMA  -0.72 (n=784) BARU  -1.11 (n=447) | tahun+   0% dari 17 | REAL -1.44 | STRES -2.84
+  Exness    DRIFT 110s | tutup 10s           n=1645 WR  34.0% rata  -0.55 total   -908.9 t  -5.2 | LAMA  -0.51 (n=911) BARU  -0.60 (n=734) | tahun+   0% dari 12 | REAL -1.16 | STRES -2.56
+  Dukascopy DRIFT 110s | tutup 10s           n=1231 WR  34.1% rata  -0.94 total  -1156.8 t  -6.6 | LAMA  -0.75 (n=784) BARU  -1.28 (n=447) | tahun+   0% dari 17 | REAL -1.55 | STRES -2.95
+  Exness    DRIFT 110s | tutup 30s           n=1645 WR  38.5% rata  -0.58 total   -951.6 t  -5.0 | LAMA  -0.51 (n=911) BARU  -0.66 (n=734) | tahun+   8% dari 12 | REAL -1.19 | STRES -2.59
+  Dukascopy DRIFT 110s | tutup 30s           n=1231 WR  38.6% rata  -0.95 total  -1163.8 t  -6.0 | LAMA  -0.80 (n=784) BARU  -1.21 (n=447) | tahun+   0% dari 17 | REAL -1.56 | STRES -2.96
+  Exness    DRIFT 110s | tutup 60s           n=1645 WR  39.8% rata  -0.53 total   -873.0 t  -4.0 | LAMA  -0.53 (n=911) BARU  -0.53 (n=734) | tahun+   0% dari 12 | REAL -1.13 | STRES -2.53
+  Dukascopy DRIFT 110s | tutup 60s           n=1231 WR  40.6% rata  -0.87 total  -1066.9 t  -4.9 | LAMA  -0.79 (n=784) BARU  -1.00 (n=447) | tahun+   0% dari 17 | REAL -1.47 | STRES -2.87
+  Exness    DRIFT 110s | tutup 180s          n=1645 WR  39.9% rata  -0.55 total   -911.3 t  -4.0 | LAMA  -0.55 (n=911) BARU  -0.56 (n=734) | tahun+   8% dari 12 | REAL -1.16 | STRES -2.56
+  Dukascopy DRIFT 110s | tutup 180s          n=1231 WR  41.8% rata  -0.86 total  -1059.3 t  -4.6 | LAMA  -0.75 (n=784) BARU  -1.06 (n=447) | tahun+   6% dari 17 | REAL -1.47 | STRES -2.87
+  Exness    DRIFT 110s | untung>=$1 maks 60s n=1645 WR  46.8% rata  -0.82 total  -1344.2 t  -9.0 | LAMA  -0.63 (n=911) BARU  -1.04 (n=734) | tahun+   0% dari 12 | REAL -1.28 | STRES -2.61
+  Dukascopy DRIFT 110s | untung>=$1 maks 60s n=1231 WR  47.9% rata  -1.09 total  -1336.5 t  -8.3 | LAMA  -0.80 (n=784) BARU  -1.58 (n=447) | tahun+   0% dari 17 | REAL -1.59 | STRES -2.97
+  Exness    DRIFT 110s | untung>=$1 maks 180s SL$3 n=1645 WR  47.5% rata  -0.58 total   -951.4 t -11.3 | LAMA  -0.59 (n=911) BARU  -0.57 (n=734) | tahun+   0% dari 12 | REAL -1.12 | STRES -2.38
+  Dukascopy DRIFT 110s | untung>=$1 maks 180s SL$3 n=1231 WR  47.4% rata  -0.88 total  -1084.8 t -11.0 | LAMA  -0.72 (n=784) BARU  -1.16 (n=447) | tahun+   0% dari 17 | REAL -1.48 | STRES -2.76
+  Exness    DRIFT 110s | untung>=$2 maks 180s n=1645 WR  46.2% rata  -0.71 total  -1164.4 t  -6.6 | LAMA  -0.57 (n=911) BARU  -0.88 (n=734) | tahun+   0% dari 12 | REAL -1.22 | STRES -2.60
+  Dukascopy DRIFT 110s | untung>=$2 maks 180s n=1231 WR  48.3% rata  -0.95 total  -1175.3 t  -6.3 | LAMA  -0.73 (n=784) BARU  -1.35 (n=447) | tahun+   6% dari 17 | REAL -1.51 | STRES -2.93
+  Exness    LAWAN 110s | tutup 1s            n=1645 WR   5.7% rata  -0.34 total   -567.5 t -35.1 | LAMA  -0.44 (n=911) BARU  -0.23 (n=734) | tahun+   0% dari 12 | REAL -0.94 | STRES -2.34
+  Dukascopy LAWAN 110s | tutup 1s            n=1231 WR   0.9% rata  -0.70 total   -855.8 t -42.3 | LAMA  -0.57 (n=784) BARU  -0.92 (n=447) | tahun+   0% dari 17 | REAL -1.33 | STRES -2.73
+  Exness    LAWAN 110s | tutup 3s            n=1645 WR  29.2% rata  -0.34 total   -562.9 t  -6.0 | LAMA  -0.53 (n=911) BARU  -0.11 (n=734) | tahun+  25% dari 12 | REAL -0.93 | STRES -2.33
+  Dukascopy LAWAN 110s | tutup 3s            n=1231 WR  27.1% rata  -0.71 total   -878.8 t  -9.0 | LAMA  -0.53 (n=784) BARU  -1.03 (n=447) | tahun+   0% dari 17 | REAL -1.26 | STRES -2.66
+  Exness    LAWAN 110s | tutup 10s           n=1645 WR  37.9% rata  -0.20 total   -329.8 t  -1.9 | LAMA  -0.44 (n=911) BARU  +0.09 (n=734) | tahun+  42% dari 12 | REAL -0.80 | STRES -2.20
+  Dukascopy LAWAN 110s | tutup 10s           n=1231 WR  37.5% rata  -0.39 total   -485.1 t  -2.7 | LAMA  -0.38 (n=784) BARU  -0.43 (n=447) | tahun+  29% dari 17 | REAL -1.00 | STRES -2.40
+  Exness    LAWAN 110s | tutup 30s           n=1645 WR  39.8% rata  -0.17 total   -282.8 t  -1.5 | LAMA  -0.39 (n=911) BARU  +0.10 (n=734) | tahun+  33% dari 12 | REAL -0.77 | STRES -2.17
+  Dukascopy LAWAN 110s | tutup 30s           n=1231 WR  41.7% rata  -0.20 total   -250.1 t  -1.3 | LAMA  -0.18 (n=784) BARU  -0.24 (n=447) | tahun+  35% dari 17 | REAL -0.79 | STRES -2.19
+  Exness    LAWAN 110s | tutup 60s           n=1645 WR  42.1% rata  -0.21 total   -351.3 t  -1.6 | LAMA  -0.34 (n=911) BARU  -0.05 (n=734) | tahun+  42% dari 12 | REAL -0.81 | STRES -2.21
+  Dukascopy LAWAN 110s | tutup 60s           n=1231 WR  45.2% rata  -0.22 total   -270.8 t  -1.2 | LAMA  -0.14 (n=784) BARU  -0.35 (n=447) | tahun+  29% dari 17 | REAL -0.83 | STRES -2.23
+  Exness    LAWAN 110s | tutup 180s          n=1645 WR  45.8% rata  -0.11 total   -174.9 t  -0.8 | LAMA  -0.29 (n=911) BARU  +0.12 (n=734) | tahun+  42% dari 12 | REAL -0.70 | STRES -2.10
+  Dukascopy LAWAN 110s | tutup 180s          n=1231 WR  45.2% rata  -0.19 total   -233.4 t  -1.0 | LAMA  -0.17 (n=784) BARU  -0.22 (n=447) | tahun+  41% dari 17 | REAL -0.79 | STRES -2.19
+  Exness    LAWAN 110s | untung>=$1 maks 60s n=1645 WR  49.4% rata  -0.63 total  -1030.2 t  -7.3 | LAMA  -0.55 (n=911) BARU  -0.72 (n=734) | tahun+   8% dari 12 | REAL -1.06 | STRES -2.41
+  Dukascopy LAWAN 110s | untung>=$1 maks 60s n=1231 WR  51.3% rata  -0.67 total   -825.3 t  -4.9 | LAMA  -0.40 (n=784) BARU  -1.14 (n=447) | tahun+  12% dari 17 | REAL -1.11 | STRES -2.42
+  Exness    LAWAN 110s | untung>=$1 maks 180s SL$3 n=1645 WR  52.2% rata  -0.44 total   -720.3 t  -8.6 | LAMA  -0.51 (n=911) BARU  -0.34 (n=734) | tahun+  17% dari 12 | REAL -0.92 | STRES -2.20
+  Dukascopy LAWAN 110s | untung>=$1 maks 180s SL$3 n=1231 WR  49.8% rata  -0.65 total   -797.9 t  -7.8 | LAMA  -0.46 (n=784) BARU  -0.98 (n=447) | tahun+  12% dari 17 | REAL -1.22 | STRES -2.56
+  Exness    LAWAN 110s | untung>=$2 maks 180s n=1645 WR  51.2% rata  -0.47 total   -778.6 t  -4.8 | LAMA  -0.38 (n=911) BARU  -0.59 (n=734) | tahun+  17% dari 12 | REAL -0.92 | STRES -2.27
+  Dukascopy LAWAN 110s | untung>=$2 maks 180s n=1231 WR  51.9% rata  -0.48 total   -589.5 t  -3.4 | LAMA  -0.26 (n=784) BARU  -0.87 (n=447) | tahun+  18% dari 17 | REAL -0.97 | STRES -2.38
   Exness    ORAKEL (kejutan diketahui) | tutup 1s n=1431 WR   5.8% rata  -0.32 total   -462.9 t -32.8 | LAMA  -0.42 (n=826) BARU  -0.19 (n=605) | tahun+   0% dari 12 | REAL -0.57 | STRES -1.97
   Dukascopy ORAKEL (kejutan diketahui) | tutup 1s n= 993 WR   1.6% rata  -0.64 total   -633.6 t -39.2 | LAMA  -0.56 (n=653) BARU  -0.79 (n=340) | tahun+   0% dari 17 | REAL -1.01 | STRES -2.41
   Exness    ORAKEL (kejutan diketahui) | tutup 3s n=1431 WR  46.8% rata  +0.52 total   +738.9 t +10.6 | LAMA  -0.09 (n=826) BARU  +1.34 (n=605) | tahun+  58% dari 12 | REAL +0.14 | STRES -1.26
@@ -584,42 +584,42 @@ Cek jam: gerak t0-5->t0-1 searah kejutan 46% (50% = tidak bocor); bar M15 rilis 
   Dukascopy ORAKEL (kejutan diketahui) | untung>=$1 maks 180s SL$3 n= 993 WR  77.0% rata  +0.83 total   +827.7 t +12.2 | LAMA  +0.75 (n=653) BARU  +1.00 (n=340) | tahun+  94% dari 17 | REAL +0.49 | STRES -0.91
   Exness    ORAKEL (kejutan diketahui) | untung>=$2 maks 180s n=1431 WR  72.7% rata  +1.04 total  +1485.6 t +21.5 | LAMA  +0.53 (n=826) BARU  +1.73 (n=605) | tahun+ 100% dari 12 | REAL +0.66 | STRES -0.69
   Dukascopy ORAKEL (kejutan diketahui) | untung>=$2 maks 180s n= 993 WR  75.0% rata  +1.40 total  +1387.1 t +19.8 | LAMA  +1.11 (n=653) BARU  +1.96 (n=340) | tahun+  94% dari 17 | REAL +1.02 | STRES -0.34
-  Exness    MODEL walk-forward | tutup 1s    n=1183 WR   8.2% rata  -0.27 total   -322.8 t -22.1 | LAMA  -0.36 (n=437) BARU  -0.22 (n=746) | tahun+   0% dari 9 | REAL -0.85 | STRES -2.25
-  Dukascopy MODEL walk-forward | tutup 1s    n= 958 WR   1.1% rata  -0.68 total   -652.0 t -35.9 | LAMA  -0.48 (n=503) BARU  -0.90 (n=455) | tahun+   0% dari 12 | REAL -1.26 | STRES -2.66
-  Exness    MODEL walk-forward | tutup 3s    n=1183 WR  38.5% rata  -0.14 total   -162.5 t  -1.8 | LAMA  -0.38 (n=437) BARU  +0.00 (n=746) | tahun+  33% dari 9 | REAL -0.69 | STRES -2.09
-  Dukascopy MODEL walk-forward | tutup 3s    n= 958 WR  32.3% rata  -0.56 total   -539.9 t  -5.9 | LAMA  -0.47 (n=503) BARU  -0.66 (n=455) | tahun+   0% dari 12 | REAL -1.01 | STRES -2.41
-  Exness    MODEL walk-forward | tutup 10s   n=1183 WR  44.1% rata  +0.02 total    +28.5 t  +0.2 | LAMA  -0.41 (n=437) BARU  +0.28 (n=746) | tahun+  33% dari 9 | REAL -0.59 | STRES -1.99
-  Dukascopy MODEL walk-forward | tutup 10s   n= 958 WR  43.0% rata  -0.00 total     -3.8 t  -0.0 | LAMA  -0.29 (n=503) BARU  +0.32 (n=455) | tahun+  25% dari 12 | REAL -0.63 | STRES -2.03
-  Exness    MODEL walk-forward | tutup 30s   n=1183 WR  43.9% rata  -0.10 total   -113.9 t  -0.6 | LAMA  -0.44 (n=437) BARU  +0.11 (n=746) | tahun+  33% dari 9 | REAL -0.70 | STRES -2.10
-  Dukascopy MODEL walk-forward | tutup 30s   n= 958 WR  46.1% rata  +0.14 total   +132.8 t  +0.7 | LAMA  -0.14 (n=503) BARU  +0.45 (n=455) | tahun+  42% dari 12 | REAL -0.47 | STRES -1.87
-  Exness    MODEL walk-forward | tutup 60s   n=1183 WR  47.1% rata  -0.06 total    -76.6 t  -0.4 | LAMA  -0.41 (n=437) BARU  +0.14 (n=746) | tahun+  33% dari 9 | REAL -0.67 | STRES -2.07
-  Dukascopy MODEL walk-forward | tutup 60s   n= 958 WR  49.3% rata  +0.22 total   +206.0 t  +1.0 | LAMA  -0.07 (n=503) BARU  +0.53 (n=455) | tahun+  50% dari 12 | REAL -0.40 | STRES -1.80
-  Exness    MODEL walk-forward | tutup 180s  n=1183 WR  48.7% rata  -0.04 total    -45.5 t  -0.2 | LAMA  -0.36 (n=437) BARU  +0.15 (n=746) | tahun+  33% dari 9 | REAL -0.63 | STRES -2.03
-  Dukascopy MODEL walk-forward | tutup 180s  n= 958 WR  49.3% rata  +0.26 total   +245.2 t  +1.1 | LAMA  -0.04 (n=503) BARU  +0.59 (n=455) | tahun+  33% dari 12 | REAL -0.34 | STRES -1.74
-  Exness    MODEL walk-forward | untung>=$1 maks 60s n=1183 WR  55.6% rata  -0.58 total   -691.2 t  -5.6 | LAMA  -0.59 (n=437) BARU  -0.58 (n=746) | tahun+   0% dari 9 | REAL -0.95 | STRES -2.26
-  Dukascopy MODEL walk-forward | untung>=$1 maks 60s n= 958 WR  56.5% rata  -0.40 total   -388.0 t  -2.9 | LAMA  -0.33 (n=503) BARU  -0.48 (n=455) | tahun+  17% dari 12 | REAL -0.84 | STRES -2.18
-  Exness    MODEL walk-forward | untung>=$1 maks 180s SL$3 n=1183 WR  56.6% rata  -0.37 total   -433.4 t  -5.7 | LAMA  -0.51 (n=437) BARU  -0.28 (n=746) | tahun+  11% dari 9 | REAL -0.79 | STRES -2.05
-  Dukascopy MODEL walk-forward | untung>=$1 maks 180s SL$3 n= 958 WR  52.5% rata  -0.57 total   -545.2 t  -6.2 | LAMA  -0.39 (n=503) BARU  -0.77 (n=455) | tahun+   8% dari 12 | REAL -1.14 | STRES -2.48
-  Exness    MODEL walk-forward | untung>=$2 maks 180s n=1183 WR  56.4% rata  -0.42 total   -495.5 t  -3.3 | LAMA  -0.39 (n=437) BARU  -0.44 (n=746) | tahun+   0% dari 9 | REAL -0.80 | STRES -2.17
-  Dukascopy MODEL walk-forward | untung>=$2 maks 180s n= 958 WR  56.2% rata  -0.19 total   -181.5 t  -1.2 | LAMA  -0.14 (n=503) BARU  -0.24 (n=455) | tahun+  17% dari 12 | REAL -0.64 | STRES -2.03
-  Exness    MODEL YAKIN (>=55%) | tutup 1s   n= 675 WR   9.5% rata  -0.28 total   -189.1 t -14.6 | LAMA  -0.38 (n=254) BARU  -0.22 (n=421) | tahun+   0% dari 9 | REAL -0.84 | STRES -2.24
-  Dukascopy MODEL YAKIN (>=55%) | tutup 1s   n= 595 WR   1.2% rata  -0.67 total   -397.2 t -27.9 | LAMA  -0.49 (n=331) BARU  -0.89 (n=264) | tahun+   0% dari 12 | REAL -1.20 | STRES -2.60
-  Exness    MODEL YAKIN (>=55%) | tutup 3s   n= 675 WR  39.1% rata  -0.18 total   -118.7 t  -1.6 | LAMA  -0.48 (n=254) BARU  +0.01 (n=421) | tahun+  33% dari 9 | REAL -0.70 | STRES -2.10
-  Dukascopy MODEL YAKIN (>=55%) | tutup 3s   n= 595 WR  33.3% rata  -0.51 total   -302.7 t  -4.1 | LAMA  -0.40 (n=331) BARU  -0.65 (n=264) | tahun+   8% dari 12 | REAL -0.95 | STRES -2.35
-  Exness    MODEL YAKIN (>=55%) | tutup 10s  n= 675 WR  44.1% rata  +0.08 total    +52.8 t  +0.4 | LAMA  -0.56 (n=254) BARU  +0.46 (n=421) | tahun+  44% dari 9 | REAL -0.53 | STRES -1.93
-  Dukascopy MODEL YAKIN (>=55%) | tutup 10s  n= 595 WR  44.4% rata  +0.22 total   +130.0 t  +0.9 | LAMA  -0.14 (n=331) BARU  +0.67 (n=264) | tahun+  42% dari 12 | REAL -0.41 | STRES -1.81
-  Exness    MODEL YAKIN (>=55%) | tutup 30s  n= 675 WR  45.8% rata  -0.03 total    -18.5 t  -0.1 | LAMA  -0.58 (n=254) BARU  +0.30 (n=421) | tahun+  44% dari 9 | REAL -0.64 | STRES -2.04
-  Dukascopy MODEL YAKIN (>=55%) | tutup 30s  n= 595 WR  47.2% rata  +0.30 total   +181.3 t  +1.1 | LAMA  +0.00 (n=331) BARU  +0.68 (n=264) | tahun+  58% dari 12 | REAL -0.29 | STRES -1.69
-  Exness    MODEL YAKIN (>=55%) | tutup 60s  n= 675 WR  47.6% rata  +0.04 total    +24.7 t  +0.1 | LAMA  -0.55 (n=254) BARU  +0.39 (n=421) | tahun+  33% dari 9 | REAL -0.57 | STRES -1.97
-  Dukascopy MODEL YAKIN (>=55%) | tutup 60s  n= 595 WR  50.6% rata  +0.40 total   +239.0 t  +1.3 | LAMA  +0.08 (n=331) BARU  +0.80 (n=264) | tahun+  58% dari 12 | REAL -0.22 | STRES -1.62
-  Exness    MODEL YAKIN (>=55%) | tutup 180s n= 675 WR  49.0% rata  +0.19 total   +128.1 t  +0.7 | LAMA  -0.47 (n=254) BARU  +0.59 (n=421) | tahun+  44% dari 9 | REAL -0.41 | STRES -1.81
-  Dukascopy MODEL YAKIN (>=55%) | tutup 180s n= 595 WR  48.6% rata  +0.47 total   +276.7 t  +1.5 | LAMA  +0.11 (n=331) BARU  +0.91 (n=264) | tahun+  50% dari 12 | REAL -0.13 | STRES -1.53
-  Exness    MODEL YAKIN (>=55%) | untung>=$1 maks 60s n= 675 WR  56.6% rata  -0.64 total   -433.0 t  -4.3 | LAMA  -0.76 (n=254) BARU  -0.57 (n=421) | tahun+   0% dari 9 | REAL -1.05 | STRES -2.31
-  Dukascopy MODEL YAKIN (>=55%) | untung>=$1 maks 60s n= 595 WR  58.3% rata  -0.33 total   -193.8 t  -1.6 | LAMA  -0.29 (n=331) BARU  -0.37 (n=264) | tahun+  25% dari 12 | REAL -0.76 | STRES -2.09
-  Exness    MODEL YAKIN (>=55%) | untung>=$1 maks 180s SL$3 n= 675 WR  56.0% rata  -0.43 total   -290.2 t  -5.1 | LAMA  -0.71 (n=254) BARU  -0.26 (n=421) | tahun+  22% dari 9 | REAL -0.88 | STRES -2.09
-  Dukascopy MODEL YAKIN (>=55%) | untung>=$1 maks 180s SL$3 n= 595 WR  53.8% rata  -0.47 total   -277.7 t  -3.9 | LAMA  -0.29 (n=331) BARU  -0.69 (n=264) | tahun+  17% dari 12 | REAL -1.08 | STRES -2.43
-  Exness    MODEL YAKIN (>=55%) | untung>=$2 maks 180s n= 675 WR  56.9% rata  -0.41 total   -274.9 t  -2.3 | LAMA  -0.49 (n=254) BARU  -0.36 (n=421) | tahun+  11% dari 9 | REAL -0.74 | STRES -2.10
-  Dukascopy MODEL YAKIN (>=55%) | untung>=$2 maks 180s n= 595 WR  55.8% rata  -0.11 total    -62.6 t  -0.5 | LAMA  -0.11 (n=331) BARU  -0.11 (n=264) | tahun+  33% dari 12 | REAL -0.56 | STRES -1.95
+  Exness    MODEL walk-forward | tutup 1s    n=1183 WR   8.1% rata  -0.27 total   -322.6 t -22.1 | LAMA  -0.36 (n=437) BARU  -0.22 (n=746) | tahun+   0% dari 9 | REAL -0.85 | STRES -2.25
+  Dukascopy MODEL walk-forward | tutup 1s    n= 958 WR   1.0% rata  -0.68 total   -654.0 t -36.2 | LAMA  -0.48 (n=503) BARU  -0.90 (n=455) | tahun+   0% dari 12 | REAL -1.26 | STRES -2.66
+  Exness    MODEL walk-forward | tutup 3s    n=1183 WR  38.6% rata  -0.14 total   -160.2 t  -1.8 | LAMA  -0.38 (n=437) BARU  +0.01 (n=746) | tahun+  33% dari 9 | REAL -0.68 | STRES -2.08
+  Dukascopy MODEL walk-forward | tutup 3s    n= 958 WR  32.2% rata  -0.57 total   -543.5 t  -5.9 | LAMA  -0.49 (n=503) BARU  -0.65 (n=455) | tahun+   0% dari 12 | REAL -1.01 | STRES -2.41
+  Exness    MODEL walk-forward | tutup 10s   n=1183 WR  44.2% rata  +0.04 total    +45.4 t  +0.3 | LAMA  -0.41 (n=437) BARU  +0.30 (n=746) | tahun+  33% dari 9 | REAL -0.57 | STRES -1.97
+  Dukascopy MODEL walk-forward | tutup 10s   n= 958 WR  43.0% rata  +0.01 total     +6.6 t  +0.0 | LAMA  -0.30 (n=503) BARU  +0.35 (n=455) | tahun+  33% dari 12 | REAL -0.62 | STRES -2.02
+  Exness    MODEL walk-forward | tutup 30s   n=1183 WR  44.0% rata  -0.06 total    -68.5 t  -0.4 | LAMA  -0.44 (n=437) BARU  +0.17 (n=746) | tahun+  44% dari 9 | REAL -0.66 | STRES -2.06
+  Dukascopy MODEL walk-forward | tutup 30s   n= 958 WR  46.0% rata  +0.14 total   +129.6 t  +0.7 | LAMA  -0.15 (n=503) BARU  +0.45 (n=455) | tahun+  42% dari 12 | REAL -0.47 | STRES -1.87
+  Exness    MODEL walk-forward | tutup 60s   n=1183 WR  47.3% rata  -0.04 total    -44.4 t  -0.2 | LAMA  -0.41 (n=437) BARU  +0.18 (n=746) | tahun+  44% dari 9 | REAL -0.64 | STRES -2.04
+  Dukascopy MODEL walk-forward | tutup 60s   n= 958 WR  49.2% rata  +0.21 total   +202.0 t  +1.0 | LAMA  -0.09 (n=503) BARU  +0.54 (n=455) | tahun+  50% dari 12 | REAL -0.41 | STRES -1.81
+  Exness    MODEL walk-forward | tutup 180s  n=1183 WR  48.8% rata  -0.01 total     -7.6 t  -0.0 | LAMA  -0.36 (n=437) BARU  +0.20 (n=746) | tahun+  44% dari 9 | REAL -0.60 | STRES -2.00
+  Dukascopy MODEL walk-forward | tutup 180s  n= 958 WR  49.4% rata  +0.27 total   +260.2 t  +1.2 | LAMA  -0.04 (n=503) BARU  +0.62 (n=455) | tahun+  42% dari 12 | REAL -0.32 | STRES -1.72
+  Exness    MODEL walk-forward | untung>=$1 maks 60s n=1183 WR  55.8% rata  -0.57 total   -674.0 t  -5.5 | LAMA  -0.59 (n=437) BARU  -0.56 (n=746) | tahun+   0% dari 9 | REAL -0.93 | STRES -2.24
+  Dukascopy MODEL walk-forward | untung>=$1 maks 60s n= 958 WR  56.3% rata  -0.41 total   -394.0 t  -2.9 | LAMA  -0.35 (n=503) BARU  -0.48 (n=455) | tahun+  17% dari 12 | REAL -0.85 | STRES -2.18
+  Exness    MODEL walk-forward | untung>=$1 maks 180s SL$3 n=1183 WR  56.6% rata  -0.36 total   -428.3 t  -5.7 | LAMA  -0.51 (n=437) BARU  -0.28 (n=746) | tahun+  11% dari 9 | REAL -0.79 | STRES -2.04
+  Dukascopy MODEL walk-forward | untung>=$1 maks 180s SL$3 n= 958 WR  52.3% rata  -0.58 total   -553.8 t  -6.3 | LAMA  -0.40 (n=503) BARU  -0.78 (n=455) | tahun+   8% dari 12 | REAL -1.14 | STRES -2.48
+  Exness    MODEL walk-forward | untung>=$2 maks 180s n=1183 WR  56.5% rata  -0.40 total   -470.5 t  -3.2 | LAMA  -0.39 (n=437) BARU  -0.40 (n=746) | tahun+   0% dari 9 | REAL -0.78 | STRES -2.15
+  Dukascopy MODEL walk-forward | untung>=$2 maks 180s n= 958 WR  56.2% rata  -0.18 total   -174.0 t  -1.2 | LAMA  -0.15 (n=503) BARU  -0.22 (n=455) | tahun+  17% dari 12 | REAL -0.64 | STRES -2.03
+  Exness    MODEL YAKIN (>=55%) | tutup 1s   n= 676 WR   9.3% rata  -0.28 total   -189.4 t -14.7 | LAMA  -0.38 (n=254) BARU  -0.22 (n=422) | tahun+   0% dari 9 | REAL -0.85 | STRES -2.25
+  Dukascopy MODEL YAKIN (>=55%) | tutup 1s   n= 602 WR   1.2% rata  -0.67 total   -404.9 t -28.0 | LAMA  -0.49 (n=335) BARU  -0.90 (n=267) | tahun+   0% dari 12 | REAL -1.22 | STRES -2.62
+  Exness    MODEL YAKIN (>=55%) | tutup 3s   n= 676 WR  38.9% rata  -0.18 total   -121.9 t  -1.6 | LAMA  -0.48 (n=254) BARU  +0.00 (n=422) | tahun+  33% dari 9 | REAL -0.70 | STRES -2.10
+  Dukascopy MODEL YAKIN (>=55%) | tutup 3s   n= 602 WR  32.9% rata  -0.52 total   -313.6 t  -4.2 | LAMA  -0.43 (n=335) BARU  -0.63 (n=267) | tahun+   8% dari 12 | REAL -0.97 | STRES -2.37
+  Exness    MODEL YAKIN (>=55%) | tutup 10s  n= 676 WR  43.9% rata  +0.06 total    +43.3 t  +0.3 | LAMA  -0.56 (n=254) BARU  +0.44 (n=422) | tahun+  44% dari 9 | REAL -0.54 | STRES -1.94
+  Dukascopy MODEL YAKIN (>=55%) | tutup 10s  n= 602 WR  43.5% rata  +0.19 total   +114.6 t  +0.8 | LAMA  -0.21 (n=335) BARU  +0.69 (n=267) | tahun+  25% dari 12 | REAL -0.44 | STRES -1.84
+  Exness    MODEL YAKIN (>=55%) | tutup 30s  n= 676 WR  45.4% rata  -0.04 total    -29.5 t  -0.2 | LAMA  -0.58 (n=254) BARU  +0.28 (n=422) | tahun+  44% dari 9 | REAL -0.66 | STRES -2.06
+  Dukascopy MODEL YAKIN (>=55%) | tutup 30s  n= 602 WR  46.5% rata  +0.28 total   +169.3 t  +1.0 | LAMA  -0.07 (n=335) BARU  +0.72 (n=267) | tahun+  42% dari 12 | REAL -0.32 | STRES -1.72
+  Exness    MODEL YAKIN (>=55%) | tutup 60s  n= 676 WR  47.3% rata  +0.02 total    +14.4 t  +0.1 | LAMA  -0.55 (n=254) BARU  +0.37 (n=422) | tahun+  33% dari 9 | REAL -0.59 | STRES -1.99
+  Dukascopy MODEL YAKIN (>=55%) | tutup 60s  n= 602 WR  50.0% rata  +0.42 total   +254.9 t  +1.4 | LAMA  +0.00 (n=335) BARU  +0.95 (n=267) | tahun+  58% dari 12 | REAL -0.20 | STRES -1.60
+  Exness    MODEL YAKIN (>=55%) | tutup 180s n= 676 WR  49.0% rata  +0.18 total   +121.6 t  +0.6 | LAMA  -0.47 (n=254) BARU  +0.57 (n=422) | tahun+  44% dari 9 | REAL -0.42 | STRES -1.82
+  Dukascopy MODEL YAKIN (>=55%) | tutup 180s n= 602 WR  48.3% rata  +0.42 total   +254.6 t  +1.3 | LAMA  +0.05 (n=335) BARU  +0.89 (n=267) | tahun+  50% dari 12 | REAL -0.17 | STRES -1.57
+  Exness    MODEL YAKIN (>=55%) | untung>=$1 maks 60s n= 676 WR  56.4% rata  -0.65 total   -438.1 t  -4.3 | LAMA  -0.76 (n=254) BARU  -0.58 (n=422) | tahun+   0% dari 9 | REAL -1.06 | STRES -2.33
+  Dukascopy MODEL YAKIN (>=55%) | untung>=$1 maks 60s n= 602 WR  58.0% rata  -0.34 total   -203.8 t  -1.7 | LAMA  -0.32 (n=335) BARU  -0.36 (n=267) | tahun+  17% dari 12 | REAL -0.78 | STRES -2.11
+  Exness    MODEL YAKIN (>=55%) | untung>=$1 maks 180s SL$3 n= 676 WR  55.8% rata  -0.44 total   -295.6 t  -5.2 | LAMA  -0.71 (n=254) BARU  -0.27 (n=422) | tahun+  22% dari 9 | REAL -0.90 | STRES -2.11
+  Dukascopy MODEL YAKIN (>=55%) | untung>=$1 maks 180s SL$3 n= 602 WR  53.2% rata  -0.50 total   -302.6 t  -4.2 | LAMA  -0.32 (n=335) BARU  -0.73 (n=267) | tahun+   8% dari 12 | REAL -1.12 | STRES -2.49
+  Exness    MODEL YAKIN (>=55%) | untung>=$2 maks 180s n= 676 WR  56.5% rata  -0.42 total   -284.0 t  -2.4 | LAMA  -0.49 (n=254) BARU  -0.38 (n=422) | tahun+  11% dari 9 | REAL -0.75 | STRES -2.12
+  Dukascopy MODEL YAKIN (>=55%) | untung>=$2 maks 180s n= 602 WR  55.6% rata  -0.15 total    -87.8 t  -0.7 | LAMA  -0.13 (n=335) BARU  -0.16 (n=267) | tahun+  33% dari 12 | REAL -0.60 | STRES -1.98
   Exness    STRADDLE $0.5 | tutup 1s         n=1570 WR  40.8% rata  +0.13 total   +205.8 t  +3.7 | LAMA  -0.25 (n=824) BARU  +0.55 (n=746) | tahun+  58% dari 12 | REAL -0.41 | STRES -1.81
   Dukascopy STRADDLE $0.5 | tutup 1s         n=1081 WR  22.5% rata  -0.42 total   -452.4 t  -9.9 | LAMA  -0.34 (n=725) BARU  -0.58 (n=356) | tahun+   6% dari 17 | REAL -0.93 | STRES -2.33
   Exness    STRADDLE $0.5 | tutup 3s         n=1570 WR  46.8% rata  +0.29 total   +454.1 t  +4.6 | LAMA  +0.05 (n=824) BARU  +0.55 (n=746) | tahun+  58% dari 12 | REAL -0.28 | STRES -1.68
