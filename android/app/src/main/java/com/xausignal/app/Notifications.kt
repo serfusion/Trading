@@ -112,7 +112,7 @@ object Notifications {
         val own = items.filter { it.specific && it.info.isNotBlank() }
         val info = (own.ifEmpty { items }).map { it.info }.filter { it.isNotBlank() }.distinct()
         val text = "Rilis ${first.whenText}." + (if (info.isEmpty()) "" else "\n" + info.joinToString("\n")) +
-            "\nSpread melebar di detik pertama; aplikasi tidak membuka order."
+            "\nSpread melebar di detik pertama."
         post(context, ("news" + first.at).hashCode(), title, text, CH_ACTION)
     }
 

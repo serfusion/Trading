@@ -67,7 +67,8 @@ data class ChatMessage(val role: String, val text: String, val sources: List<Str
  */
 data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
                     val time: String = "", val released: Boolean = false, val actual: String = "",
-                    val group: String = "")
+                    val group: String = "", val arahTeks: String = "", val arahCatatan: String = "",
+                    val arahKuat: Boolean = false)
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -97,7 +98,10 @@ object ChatClient {
                 Triple((0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
                     CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
-                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"))
+                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"),
+                        o.optJSONObject("arah")?.optString("teks").orEmpty(),
+                        o.optJSONObject("arah")?.optString("catatan").orEmpty(),
+                        o.optJSONObject("arah")?.optBoolean("kuat") ?: false)
                 }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
             }
         } catch (e: Exception) {
@@ -284,12 +288,17 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text(e.title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
             Text("${e.whenText} • ${countdown(e)}", style = MaterialTheme.typography.labelSmall, color = Muted)
+            if (e.arahTeks.isNotBlank()) {                 // kesimpulan otomatis setelah Act keluar
+                Text(e.arahTeks, fontWeight = FontWeight.ExtraBold,
+                    color = if (e.arahKuat) Gold else Muted, style = MaterialTheme.typography.titleMedium)
+                Text(e.arahCatatan, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
         }
         Column(horizontalAlignment = Alignment.End) {
             if (e.actual.isNotBlank()) {
                 Text("Act ${e.actual}", fontWeight = FontWeight.ExtraBold, color = Gold)
             } else if (e.released) {
-                Text("Act: isi →", style = MaterialTheme.typography.labelMedium, color = Gold)
+                Text("Act: menunggu data resmi…", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
             Text("Cons ${e.forecast.ifBlank { "-" }} • Prev ${e.previous.ifBlank { "-" }}",
                 style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -306,7 +315,7 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
 private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean, nextAlarm: NewsAlarm.Item?,
                           onAlarm: (Boolean) -> Unit) {
     AppCard {
-        CardTitle("🎯 Persiapan berita (peluang dari data 2010–2026)")
+        CardTitle("🎯 Persiapan berita")
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
                 Text("⏱️ Ingatkan 1 menit sebelum rilis", fontWeight = FontWeight.Bold,
@@ -325,33 +334,26 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
         for (i in 0 until list.length()) {
             val b = list.getJSONObject(i)
-            val h = b.optJSONObject("hasil") ?: JSONObject()
-            val hb = b.optJSONObject("hasil_baru") ?: JSONObject()
             val em = b.optJSONObject("emas_jika") ?: JSONObject()
-            fun pct(o: JSONObject, k: String) = if (o.has(k)) "${o.optInt(k)}%" else "-"
+            fun pct(k: String) = if (em.has(k)) "${em.optInt(k)}%" else "-"
             if (i > 0) LineDivider()
-            Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
-            Text("${b.optString("when")}${if (b.optBoolean("released")) " • sudah rilis" else ""} • Cons " +
-                "${b.optString("forecast").ifBlank { "-" }} • Prev ${b.optString("previous").ifBlank { "-" }}",
-                style = MaterialTheme.typography.labelSmall, color = Muted)
-            Text("Hasil vs perkiraan: ⬇ di bawah ${pct(h, "bawah")} • = sesuai ${pct(h, "sesuai")} • ⬆ di atas " +
-                "${pct(h, "atas")}  (5 th: ${pct(hb, "bawah")} / ${pct(hb, "sesuai")} / ${pct(hb, "atas")})",
+            Text("${b.optString("title")} • ${b.optString("when")}", fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.bodySmall)
-            Text("Emas naik 1 jam bila hasil: ⬇ ${pct(em, "bawah")} • = ${pct(em, "sesuai")} • ⬆ ${pct(em, "atas")}",
+            // hanya angka yang terbukti: peluang emas naik 1 jam SETELAH angka keluar
+            Text("Emas naik 1 jam: data < perkiraan ${pct("bawah")} • > perkiraan ${pct("atas")}",
                 style = MaterialTheme.typography.bodySmall)
-            Text("Tebakan SEBELUM rilis: emas naik 1 jam ${b.optInt("emas_sebelum")}% (5 th " +
-                "${b.optInt("emas_sebelum_baru")}%) → ${b.optString("arah")}",
-                fontWeight = FontWeight.Bold, color = Gold, style = MaterialTheme.typography.bodySmall)
-            b.optString("detik").ifBlank { null }?.let {
-                Text("⏱️ $it", style = MaterialTheme.typography.bodySmall)
+            val arah = b.optString("arah")
+            if (arah.startsWith("condong")) Text("Sebelum rilis: $arah", color = Gold,
+                style = MaterialTheme.typography.bodySmall)
+            val bukti = b.optJSONArray("petunjuk") ?: JSONArray()
+            for (k in 0 until bukti.length()) {
+                val t = bukti.optString(k)
+                if (t.contains("✅")) Text("✅ ${t.substringBefore(":")}", style = MaterialTheme.typography.labelSmall,
+                    color = Muted)
             }
-            val clues = b.optJSONArray("petunjuk") ?: JSONArray()
-            for (k in 0 until clues.length()) {
-                Text("• ${clues.optString(k)}", style = MaterialTheme.typography.labelSmall, color = Muted)
+            b.optString("detik_singkat").ifBlank { null }?.let {
+                Text("⏱️ $it", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
-        }
-        prep.optString("kesimpulan").ifBlank { null }?.let {
-            Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
         }
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
         prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
@@ -389,7 +391,14 @@ fun NewsTab() {
             nextAlarm = NewsAlarm.next(app)
         }
     }
-    LaunchedEffect(Unit) { reloadCalendar() }
+    LaunchedEffect(Unit) {
+        reloadCalendar()
+        // selama tab terbuka: muat ulang tiap 2 menit bila ada berita yang sudah rilis tapi Act belum keluar
+        while (true) {
+            kotlinx.coroutines.delay(120_000L)
+            if (calendar.any { it.released && it.actual.isBlank() }) reloadCalendar()
+        }
+    }
 
     fun send(text: String) {
         val q = text.trim()
@@ -451,17 +460,13 @@ fun NewsTab() {
                             }
                         }
                         Text(
-                            "Tanggal & jam menyesuaikan otomatis tiap pekan. Act terisi otomatis dari data resmi (FRED) " +
-                                "beberapa menit s/d ±1 jam setelah rilis (NFP, CPI, PPI, Retail, PCE, Claims, GDP). " +
-                                "Tekan berita → analisa peluang arah emas; bila Act belum ada, isi sendiri.",
+                            "Tekan berita → peluang arah emas. Act terisi otomatis setelah rilis.",
                             style = MaterialTheme.typography.labelSmall, color = Muted
                         )
                     }
                     TrendCard(tren, calLoading)
                     NoteBox(
-                        "Saran entry/TP/SL hanya dari sinyal 💰: trading berita sendiri (masuk setelah rilis) sudah " +
-                            "diuji 36 cara di data 2012–2026 dan semuanya rugi. Analisa berita = peluang arah historis, " +
-                            "bukan sinyal entry. Bukan jaminan profit; aplikasi tidak membuka order."
+                        "Entry hanya dari sinyal 💰. Trading berita sendiri: diuji, rata-rata rugi."
                     )
                     PersiapanCard(persiapan, calLoading, alarmOn, nextAlarm) { on ->
                         alarmOn = on

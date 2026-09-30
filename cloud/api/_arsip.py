@@ -99,8 +99,13 @@ class GitHub:
         code, _ = self.req("GET", f"/repos/{self.repo}/branches/{urllib.parse.quote(self.branch)}")
         if code == 200:
             return
-        _, repo = self.req("GET", f"/repos/{self.repo}")
+        code, repo = self.req("GET", f"/repos/{self.repo}")
+        if not repo:
+            raise PermissionError(f"token tidak bisa membaca repo {self.repo} (HTTP {code}): cek Repository access "
+                                  "token & izin Contents read/write")
         _, ref = self.req("GET", f"/repos/{self.repo}/git/ref/heads/{repo['default_branch']}")
+        if not ref:
+            raise PermissionError("branch default tidak terbaca oleh token")
         self.req("POST", f"/repos/{self.repo}/git/refs",
                  {"ref": f"refs/heads/{self.branch}", "sha": ref["object"]["sha"]})
 

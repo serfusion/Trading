@@ -126,10 +126,16 @@ class handler(BaseHTTPRequestHandler):
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau kartu gagal
                 persiapan = {"error": f"{type(exc).__name__}: {exc}"}
             calendar = _chat.calendar_json(rows, now)
+            for c in calendar:                                # Act sudah keluar -> kesimpulan arah otomatis
+                if c.get("actual"):
+                    try:
+                        c["arah"] = _persiapan.kesimpulan(c["title"], c["actual"], c.get("forecast", ""))
+                    except Exception:  # noqa: BLE001
+                        pass
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
-                arsip = {"status": f"gagal: {type(exc).__name__}"}
+                arsip = {"status": f"gagal: {type(exc).__name__}: {str(exc)[:160]}"}
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,

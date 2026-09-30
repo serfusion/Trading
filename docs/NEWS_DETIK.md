@@ -24,12 +24,12 @@ Riset lama (`research/news_trade.py`, `docs/RISET_DATA_EKSTERNAL.md` §15) masuk
 - **Yang benar:** emas memang bergerak besar di detik-detik awal. Median gerak 5 detik pertama ±$3,3 (5 tahun
   terakhir; NFP ±$5,5, CPI ±$5,7). Spread melebar dari ±$0,5 menjadi ±$0,9–1,1 di detik pertama.
 - **Siapa yang untung:** hanya yang tahu angka Act vs Cons **dalam 1 detik** dan langsung masuk searah kejutan.
-  "Ikut kejutan di detik ke-1" + aturan Anda (tutup menit 1–5 bila profit, maks 15 menit): 513 rilis, menang 79%,
-  +$0,92 per 0,01 lot, positif 16/16 tahun. Tetapi dengan slippage $0,30 dan eksekusi 2 detik hasilnya **−$0,17**.
+  "Ikut kejutan di detik ke-1" + aturan Anda (tutup menit 1–5 bila profit, maks 15 menit): 992 rilis, menang 79%,
+  +$0,69 per 0,01 lot, positif 17/17 tahun. Tetapi dengan slippage $0,30 dan eksekusi 2 detik hasilnya **−$0,15**.
   Kecepatan itu hanya dimiliki mesin dengan feed berita berbayar, bukan manusia yang membaca ForexFactory.
 - **Cara manual (aturan Anda)** – ikut lonjakan di detik ke-5, reaksi 2 detik, tutup menit 1–5 bila profit: menang
-  64% tetapi **rata-rata −$0,65 per 0,01 lot** (308 rilis, hanya 20% tahun positif). Order pending Buy/Sell Stop
-  ±$2: −$0,40. Win rate tinggi dari "tutup begitu profit" menutupi kerugian besar saat harga berbalik.
+  65% tetapi **rata-rata −$0,59 per 0,01 lot** (450 rilis, hanya 13% tahun positif). Order pending Buy/Sell Stop
+  ±$2: −$0,50. Win rate tinggi dari "tutup begitu profit" menutupi kerugian besar saat harga berbalik.
 - **BTC:** bergerak jauh lebih pelan (±0,05% dalam 5 detik). Ada kecenderungan "ikut arah" setelah CPI, tetapi
   sebagian besar untungnya dari tahun 2022 (rapuh).
 - **Dipasang di aplikasi 3.13 (informasi, bukan saran entry):** pengingat ⏱️ 1 menit sebelum setiap berita USD
@@ -43,11 +43,11 @@ Riset lama (`research/news_trade.py`, `docs/RISET_DATA_EKSTERNAL.md` §15) masuk
   rilis. Spread di data ini **ikut melebar saat berita**, jadi biaya detik pertama terbayar apa adanya.
   Server Dukascopy membatasi laju (±2–4 file/menit), jadi unduhan bertahap. Status per 30 Sep:
   - NFP, CPI, FOMC: lengkap (638/638 file);
-  - PPI, Retail, GDP, PCE, ADP, JOLTS, ECI: ±30%;
-  - ISM, Claims, dan rilis bintang 3 lain: baru mulai.
+  - PPI, Retail, GDP, PCE, ADP, JOLTS, ECI: lengkap (714/714);
+  - ISM & Claims: 208/1.205 file; rilis bintang 3 lain: baru mulai.
 
-  Uji di bawah memakai **710 rilis**: CPI 184, NFP 171, FOMC 113, ADP 60, PPI 59, Retail 41, GDP 35, PCE 19,
-  JOLTS 13, dan lainnya. Datanya di repo (`data/`); unduhan dilanjutkan di sesi berikutnya.
+  Uji di bawah memakai **1.260 rilis**: CPI 184, NFP 171, ADP 167, PPI 157, Retail 127, FOMC 113, GDP 106,
+  Claims 78, ISM 54, PCE 52, JOLTS 35, dan lainnya. Datanya di repo (`data/`); unduhan dilanjutkan di sesi berikutnya.
 - **BTC**: kline 1 detik BTCUSDT spot Binance (`data.binance.vision`), 2018–2026, **semua** rilis data USD bintang 3
   (1.190 rilis). Tidak ada bid/ask, jadi harga = close tiap detik, dengan spread **diasumsikan** 0,03%
   (asumsi riset BTC lain di repo ini). Melebarnya spread BTC di broker saat berita **tidak** tercermin; untuk itu ada
@@ -80,7 +80,7 @@ Riset lama (`research/news_trade.py`, `docs/RISET_DATA_EKSTERNAL.md` §15) masuk
   - **manual**: ikut lonjakan ≥ $2 di detik ke-5, reaksi 2 detik, lalu aturan pengguna;
   - **pending**: Buy/Sell Stop ±$2, lalu aturan pengguna.
 
-## 3. XAU (710 rilis 2010–2026)
+## 3. XAU Dukascopy (1.260 rilis 2010–2026; tabel 3.1–3.2 dari putaran 710 rilis)
 
 ### 3.1 Anatomi detik pertama (median, $ per ons = $ per 0,01 lot)
 
@@ -110,19 +110,19 @@ masuk setelah lonjakan terlihat rata-rata rugi.
 
 | Cara (aturan keluar pengguna kecuali disebut) | n | Menang | Rata-rata /0,01 lot | Dengan slippage $0,30 & 2 dtk |
 |---|---|---|---|---|
-| Ikut kejutan Act vs Cons, detik ke-1 | 513 | 79% | **+$0,92** (16/16 th +) | **−$0,17** |
-| Ikut kejutan, detik ke-5 | 511 | 71% | −$0,17 | −$0,48 |
-| Ikut kejutan, detik ke-10 | 512 | 70% | −$0,25 | −$0,55 |
-| **Preset manual**: ikut lonjakan ≥ $2 di detik ke-5 | 308 | 64% | −$0,65 (20% th +) | (sudah termasuk) |
-| **Preset pending**: Buy/Sell Stop ±$2 | 546 | 64% | −$0,40 (24% th +) | (sudah termasuk) |
-| Ikut kejutan BESAR (≥ 2× median), detik ke-1, tahan 1 mnt | 88 | 61% | +$1,50 | +$0,49; slippage $1: −$0,21 |
+| Ikut kejutan Act vs Cons, detik ke-1 | 992 | 79% | **+$0,69** (17/17 th +) | **−$0,15** |
+| Ikut kejutan, detik ke-5 | 990 | 73% | −$0,06 | −$0,39 |
+| Ikut kejutan, detik ke-10 | 992 | 72% | −$0,17 | −$0,47 |
+| **Preset manual**: ikut lonjakan ≥ $2 di detik ke-5 | 450 | 65% | −$0,59 (13% th +) | (sudah termasuk) |
+| **Preset pending**: Buy/Sell Stop ±$2 | 888 | 64% | −$0,50 (24% th +) | (sudah termasuk) |
+| Ikut kejutan BESAR (≥ 2× median), detik ke-1, tahan 1 mnt | 185 | 57% | +$0,88 | +$0,13; slippage $1: −$0,57 |
 
-- **11 varian lolos kriteria konsisten**, semuanya "ikut kejutan (BESAR) di detik ke-1–2". Semuanya butuh angka
+- **12 varian lolos kriteria konsisten**, semuanya "ikut kejutan (BESAR) di detik ke-1–2". Semuanya butuh angka
   Act dalam 1–2 detik (feed berita otomatis), dan **semuanya rugi bila slippage $1**.
 - "Lawan lonjakan" (fade) selalu rugi. Aturan keluar "tutup menit 1–5 bila profit" menaikkan win rate ke 60–80%,
   tetapi tidak mengubah tanda rata-rata.
-- Per berita (preset manual): NFP −$0,50, CPI −$0,61, FOMC −$0,52, PPI −$1,58, Retail −$1,35 per 0,01 lot. Tidak
-  ada berita yang positif konsisten.
+- Per berita (preset manual): NFP −$0,50, CPI −$0,61, FOMC −$0,52, PPI −$1,12, ADP −$1,14, Retail −$0,29 per
+  0,01 lot. Tidak ada berita yang positif konsisten.
 
 
 ## 3b. Uji ulang dengan tick asli Exness (XAUUSDc akun Cent, 1.680 rilis 2015–2026)
@@ -205,7 +205,7 @@ tahun 2021 kemungkinan terlalu kecil di riset lama. Perlu dicek ulang (tindak la
 
 ## 6. Rekomendasi
 
-1. **Jangan entry manual "ikut lonjakan" di detik pertama berita.** Di XAU Dukascopy rata-rata −$0,65, di Exness
+1. **Jangan entry manual "ikut lonjakan" di detik pertama berita.** Di XAU Dukascopy rata-rata −$0,59, di Exness
    −$0,16 per 0,01 lot. Di BTC Exness rugi.
 2. **Pending ±$1 untuk NFP (dan CPI) di Exness**: menjanjikan di feed Exness, rugi di feed lain → **uji maju lot
    minimum** dulu dan catat harga terisi. Jangan dipakai untuk FOMC (negatif).
