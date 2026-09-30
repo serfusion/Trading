@@ -67,7 +67,8 @@ data class ChatMessage(val role: String, val text: String, val sources: List<Str
  */
 data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
                     val time: String = "", val released: Boolean = false, val actual: String = "",
-                    val group: String = "")
+                    val group: String = "", val arahTeks: String = "", val arahCatatan: String = "",
+                    val arahKuat: Boolean = false)
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -97,7 +98,10 @@ object ChatClient {
                 Triple((0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
                     CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
-                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"))
+                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"),
+                        o.optJSONObject("arah")?.optString("teks").orEmpty(),
+                        o.optJSONObject("arah")?.optString("catatan").orEmpty(),
+                        o.optJSONObject("arah")?.optBoolean("kuat") ?: false)
                 }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
             }
         } catch (e: Exception) {
@@ -284,12 +288,17 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text(e.title, fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
             Text("${e.whenText} • ${countdown(e)}", style = MaterialTheme.typography.labelSmall, color = Muted)
+            if (e.arahTeks.isNotBlank()) {                 // kesimpulan otomatis setelah Act keluar
+                Text(e.arahTeks, fontWeight = FontWeight.ExtraBold,
+                    color = if (e.arahKuat) Gold else Muted, style = MaterialTheme.typography.titleMedium)
+                Text(e.arahCatatan, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
         }
         Column(horizontalAlignment = Alignment.End) {
             if (e.actual.isNotBlank()) {
                 Text("Act ${e.actual}", fontWeight = FontWeight.ExtraBold, color = Gold)
             } else if (e.released) {
-                Text("Act: isi →", style = MaterialTheme.typography.labelMedium, color = Gold)
+                Text("Act: menunggu data resmi…", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
             Text("Cons ${e.forecast.ifBlank { "-" }} • Prev ${e.previous.ifBlank { "-" }}",
                 style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -382,7 +391,14 @@ fun NewsTab() {
             nextAlarm = NewsAlarm.next(app)
         }
     }
-    LaunchedEffect(Unit) { reloadCalendar() }
+    LaunchedEffect(Unit) {
+        reloadCalendar()
+        // selama tab terbuka: muat ulang tiap 2 menit bila ada berita yang sudah rilis tapi Act belum keluar
+        while (true) {
+            kotlinx.coroutines.delay(120_000L)
+            if (calendar.any { it.released && it.actual.isBlank() }) reloadCalendar()
+        }
+    }
 
     fun send(text: String) {
         val q = text.trim()

@@ -86,6 +86,40 @@ def detik_singkat(group: str | None) -> str:
     return f"Pending ±$1: {'+' if avg >= 0 else '−'}${abs(avg):.2f}/0,01 lot, menang {p1['wr']:.0f}% ({lab})".replace(".", ",")
 
 
+def _num(text: str) -> float | None:
+    import re
+    m = re.match(r"^\s*([<>]?)(-?\d+(?:[.,]\d+)?)\s*([kKmMbBtT%]?)", text or "")
+    if not m:
+        return None
+    mult = {"k": 1e3, "m": 1e6, "b": 1e9, "t": 1e12}.get(m.group(3).lower(), 1.0)
+    return float(m.group(2).replace(",", ".")) * mult
+
+
+def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
+    """Setelah Act keluar: arah emas 1 jam dari data historis (satu persentase besar + jumlah bukti).
+    hasil = Act dibanding Cons; persentase = seberapa sering emas naik/turun 1 jam untuk hasil itu."""
+    st = STATS["dasar"].get(title)
+    a, f = _num(actual), _num(forecast)
+    if not st or a is None or f is None:
+        return None
+    hasil = "atas" if a > f else "bawah" if a < f else "sesuai"
+    e = (st.get("emas") or {}).get(hasil)
+    if not e or e.get("naik1j") is None:
+        return None
+    naik = int(e["naik1j"])
+    n = int(e.get("n") or st["semua"]["n"])
+    baru = e.get("baru_naik1j")
+    up = naik >= 50
+    pct = naik if up else 100 - naik
+    kuat = pct >= 60
+    return {"hasil": hasil, "arah": "naik" if up else "turun", "persen": pct, "n": n, "kuat": kuat,
+            "teks": f"{'🟢 Emas naik' if up else '🔴 Emas turun'} 1 jam: {pct}%",
+            "catatan": f"Act {'di atas' if hasil == 'atas' else 'di bawah' if hasil == 'bawah' else 'sama dengan'} "
+                       f"perkiraan • {n} rilis sejak 2010"
+                       + ("" if baru is None else f" • 5 th: {baru if up else 100 - baru}%")
+                       + ("" if kuat else " • lemah (≈ lempar koin)")}
+
+
 def alarm_texts() -> dict:
     """{grup: {"alarm": teks}} untuk pengingat ⏱️ 1 menit sebelum rilis di aplikasi (NewsAlarm)."""
     groups = {g for _, g in GROUP if g} | {"SEMUA"}
