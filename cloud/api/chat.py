@@ -1,8 +1,9 @@
 """Endpoint tab Tanya untuk aplikasi Android — penjawab berbasis DATA, tanpa AI (lihat _chat.py).
 
 POST /api/chat   {"messages": [{"role": "user", "content": "NFP Act: 45K Cons: 98K Prev: 162K"}, ...]}
-GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren": {...}}: berita USD high-impact
-                 minggu ini (Act otomatis dari FRED setelah rilis) dan status tren per indikator (tab News)
+GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren": {...}, "persiapan": {...},
+                 "arsip": {...}}: berita USD high-impact minggu ini (Act otomatis dari FRED setelah rilis), status tren
+                 per indikator, kartu 🎯, dan status arsip berita ke GitHub (_arsip.py, tiap aplikasi dibuka)
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -14,8 +15,10 @@ from http.server import BaseHTTPRequestHandler
 
 sys.path.insert(0, os.path.dirname(__file__))
 
+import _arsip  # noqa: E402
 import _chat  # noqa: E402
 import _core  # noqa: E402
+import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
 TREN_TTL = timedelta(hours=3)
@@ -38,6 +41,21 @@ def _states() -> tuple[dict, dict]:
         else:
             out[key] = data
     return out, funding
+
+
+def _store():
+    env = os.environ
+    if env.get("SUPABASE_URL") and env.get("SUPABASE_SERVICE_KEY"):
+        return _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+    return None
+
+
+def _calendar(store, now: datetime) -> list | None:
+    """Kalender ForexFactory, cache Supabase 10 menit (hemat & tidak kena limit saat banyak aplikasi dibuka)."""
+    try:
+        return _arsip.calendar_cached(store, now, _chat.fetch_calendar)
+    except Exception:  # noqa: BLE001 - cache opsional
+        return _chat.fetch_calendar()
 
 
 def _tren_status(now: datetime) -> dict:
@@ -84,8 +102,8 @@ class handler(BaseHTTPRequestHandler):
             length = int(self.headers.get("Content-Length") or 0)
             body = json.loads(self.rfile.read(min(length, 200_000)) or b"{}")
             states, funding = _states()
-            self._send(200, _chat.answer(body.get("messages") or [], datetime.now(timezone.utc),
-                                         _chat.fetch_calendar(), states, funding))
+            now = datetime.now(timezone.utc)
+            self._send(200, _chat.answer(body.get("messages") or [], now, _calendar(_store(), now), states, funding))
         except ValueError as exc:
             self._send(400, {"ok": False, "error": str(exc)})
         except Exception as exc:  # noqa: BLE001
@@ -101,6 +119,20 @@ class handler(BaseHTTPRequestHandler):
                 tren = _tren_status(now)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau status tren gagal
                 tren = {"error": f"{type(exc).__name__}: {exc}"}
-            self._send(200, {"ok": True, "calendar": _chat.calendar_json(_chat.fetch_calendar(), now), "tren": tren})
+            store = _store()
+            rows = _calendar(store, now)
+            try:
+                persiapan = _persiapan.cards(rows, now)     # 🎯 kartu persiapan berita (pengganti contoh pertanyaan)
+            except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau kartu gagal
+                persiapan = {"error": f"{type(exc).__name__}: {exc}"}
+            calendar = _chat.calendar_json(rows, now)
+            try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
+                arsip = _arsip.save(rows, calendar, now, store, os.environ)
+            except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
+                arsip = {"status": f"gagal: {type(exc).__name__}"}
+            if isinstance(persiapan, dict):
+                persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
+            self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
+                             "arsip": arsip})
         except Exception as exc:  # noqa: BLE001
             self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})

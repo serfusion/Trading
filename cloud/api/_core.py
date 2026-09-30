@@ -202,6 +202,27 @@ def star_check(closed: list[Bar], direction: str, ema_span: int = 50, h4_n: int 
     return bool(d1_ok and h4_ok), note
 
 
+def h4_ema_check(closed: list[Bar], direction: str, n: int = 50) -> tuple[bool, str]:
+    """Validasi arah H4 (unsur Trading Alchemist yang lolos uji, research/alchemist.py F4): close candle H4 terakhir
+    yang SUDAH TUTUP di atas EMA-n H4 untuk BUY / di bawah untuk SELL. Blok H4 UTC (00/04/08/...), EMA ewm
+    adjust=False seperti riset. Data H4 kurang dari n candle -> tidak memblokir."""
+    if not closed:
+        return True, "data H4 belum cukup"
+    decide = closed[-1].t + timedelta(hours=1)               # waktu keputusan = tutup candle sinyal
+    blocks: dict = {}
+    for b in closed:
+        k = b.t.replace(hour=b.t.hour - b.t.hour % 4, minute=0, second=0, microsecond=0)
+        if k + timedelta(hours=4) <= decide:                  # hanya blok H4 yang sudah tutup
+            blocks[k] = b.c                                  # close terakhir di blok
+    closes = [blocks[k] for k in sorted(blocks)]
+    if len(closes) <= n:
+        return True, "data H4 belum cukup"
+    ema = _ema(closes, n)[-1]
+    last = closes[-1]
+    ok = last > ema if direction == "BUY" else last < ema
+    return ok, f"H4 {last:.2f} {'>' if last > ema else '<'} EMA{n} {ema:.2f}" + ("" if ok else " (lawan arah H4)")
+
+
 def _ema(values: list[float], n: int) -> list[float]:
     a, out = 2 / (n + 1), []
     for v in values:
@@ -646,6 +667,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
                 store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
                 events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
+            elif sig["action"] == "open" and v is None and cfg.get("h4_filter") and not (
+                    h4 := h4_ema_check(closed, sig["dir"]))[0]:
+                # validasi arah H4 EMA50 (research/alchemist.py F4, XAU): sinyal 💰 lawan arah H4 tidak dikirim
+                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": h4[1]})
+                events.append(f"{name} {sig['dir']} dilewati: {h4[1]}")
             elif sig["action"] == "open" and v is None and cfg.get("skip_fn") and (
                     why := cfg["skip_fn"](sig["dir"], now)):
                 # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason

@@ -2,7 +2,25 @@ __pycache__/
 *.pyc
 .env
 config.yaml
-data/
+# data riset DISIMPAN di repo (permintaan pengguna 30 Sep 2026, lihat data/README.md): hanya file data dari folder
+# yang disebut di bawah; kode pihak ketiga (.py dll.) dan folder lain tetap diabaikan
+data/*
+!data/README.md
+!data/research/
+data/research/*
+!data/research/eksternal/
+!data/research/h1/
+!data/research/spoluan_forex-factory-scraper/
+!data/research/ehsanrs2_forexfactory-scraper/
+!data/research/ejtraderLabs_historical-data/
+!data/research/dineshelumalai007_xauusd-5m/
+!data/research/ilahuerta-IA_backtrader-pullback-window-xauusd/
+!data/research/Sai310421_xauusd-data/
+!data/research/ff137_bitstamp-btcusd-minute-data/
+data/research/**/*.py
+data/research/**/*.xml
+data/research/**/*.txt
+data/research/**/.gitignore
 *.sqlite
 *.db
 logs/

@@ -77,6 +77,7 @@ class MainActivity : ComponentActivity() {
         SignalRepository.init(this)
         Notifications.createChannels(this)
         PollScheduler.schedule(applicationContext)
+        NewsAlarm.schedule(applicationContext)          // ⏱️ pengingat berita (jadwal tersimpan)
         askUnrestrictedBattery()
         setContent {
             XauTheme {
@@ -107,7 +108,16 @@ class MainActivity : ComponentActivity() {
     /** Muat harga & sinyal terbaru saat aplikasi dibuka. */
     private fun refresh() {
         val app = applicationContext
-        Thread { SignalPoller.poll(app) }.start()
+        Thread {
+            SignalPoller.poll(app)
+            // tiap aplikasi dibuka (maks tiap 15 menit): ambil kalender dari cloud -> pengingat ⏱️ diperbarui dan cloud
+            // mengarsipkan hasil berita (Act/Cons/Prev) ke GitHub (cloud/api/_arsip.py; token hanya di cloud)
+            try {
+                NewsAlarm.refreshIfStale(app, NewsAlarm.OPEN_REFRESH)
+            } catch (e: Exception) {
+                // arsip/pengingat opsional
+            }
+        }.start()
     }
 }
 
