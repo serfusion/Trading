@@ -53,6 +53,13 @@ def run() -> tuple[int, dict]:
            "leg_lot": float(env.get("LEG_LOT", _core.CFG["leg_lot"])),
            "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10)),
            "star_only": env.get("STAR_ONLY", "0") == "1"}   # 1 = hanya kirim sinyal ⭐
+    if env.get("WAR_MODE", "1") == "1":    # ⚠️ mode perang (label saja, XAU tidak dijeda)
+        try:
+            import _perang
+            cfg["war"] = _perang.status()
+        except Exception as exc:  # noqa: BLE001 - FRED gagal tidak boleh menghentikan sinyal
+            cfg["war"] = None
+            war_error = str(exc)
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
@@ -62,6 +69,9 @@ def run() -> tuple[int, dict]:
         symbol=env.get("SYMBOL", "XAU/USD"),
         executor=executor_from_env(),
     )
+    result["war"] = cfg.get("war")
+    if "war_error" in locals():
+        result["war_error"] = war_error
     try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
         if env.get("BTC_SIGNALS", "1") == "1":
             now = datetime.now(timezone.utc)

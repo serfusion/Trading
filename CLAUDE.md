@@ -35,9 +35,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
 
 ## Momen entry & mode perang (30 Sep 2026 — `docs/MOMEN_PERANG.md`, `docs/REKOMENDASI.md`)
 - Selalu laporkan periode LAMA (< Okt 2021) dan BARU (5 tahun terakhir) — permintaan pengguna.
-- Menunggu izin pengguna: (a) mode perang XAU (jeda 💰 XAU saat WTI FRED naik >= 10%/10 hari; konsisten, sampel
-  kecil), (b) tanda ⚡ momen emas XAU (ATR persentil 60 hari < 33%; lot penuh ⚡ / setengah lainnya), (c) SL+ per pair
-  (XAU bawaan, BTC 0,7R). WTI Turtle TIDAK disarankan (hanya untung di data OANDA 2005–2020).
+- DIPASANG 30 Sep (izin pengguna): ⚡/peringkat (`_core.tier`, `vol_pct`), label ⚠️ mode perang tanpa jeda
+  (`_perang.py`, env WAR_MODE), aplikasi 3.11 (lot per peringkat ⚡ 1% / 0,5% / biasa ½, SL+ otomatis ⚡ & BTC 0,7R,
+  modal otomatis, kurs 17.500). Pengguna MENOLAK risiko 80% modal (diberi batas 1%).
+- TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
+  emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
+  sintetis RNG (harga acak -> rugi sebesar spread).
 - Twelve Data key masih 401 di sesi 30 Sep; Dukascopy WTI sangat lambat (±1 file/menit).
 
 ## Keamanan (wajib)

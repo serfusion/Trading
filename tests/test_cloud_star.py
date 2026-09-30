@@ -84,5 +84,7 @@ def test_profit_only_sends_only_money_categories():
         _core.tick(now, prices, store, pub, _core.CFG)            # default: hanya sinyal 💰
         now += timedelta(minutes=30)
     sig = [e for e in pub.events if e["type"] == "signal"]
-    assert sig and all(e["cat"] in ("XAU konf+⭐", "XAU konf") and e["badge"].startswith("💰") for e in sig)
+    assert sig and all(e["cat"] in ("XAU konf+⭐", "XAU konf") and e["badge"].lstrip("⚡").startswith("💰")
+                       for e in sig)
+    assert all(e["badge"].startswith("⚡") == (e["tier"] == "zap") for e in sig)
     assert any(p["why"] == "XAU biasa" for k, p in store.logs if k == "skip")

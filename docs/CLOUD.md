@@ -101,6 +101,7 @@ di aplikasi.
 | `CHAT_KEY` | (opsional) kunci tab **Tanya**; kosong = memakai `NTFY_TOPIC` (aplikasi mengirim topiknya) |
 | `BTC_FUNDING_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 saat funding Binance ramai (default), `0` = mati |
 | `BTC_SEPT_FILTER` | (opsional) `1` = lewati sinyal BTC 💰 di bulan September (default), `0` = mati |
+| `WAR_MODE` | (opsional) `1` = label ⚠️ mode perang di sinyal XAU & heartbeat saat WTI (FRED, tanpa kunci) naik ≥ 10% dalam 10 hari bursa (default; XAU **tidak** dijeda), `0` = mati |
 
 4. **Deploy**. Lalu **Settings → Domains** → tambah subdomain, mis. `signal.domainkamu.com`, dan
    ikuti instruksi DNS dari Vercel.
@@ -251,3 +252,20 @@ Dari `docs/RISET_DATA_EKSTERNAL.md` (hanya dua filter yang lolos kriteria ketat;
 - Jangan jalankan bot PC (`python -m xau_bot run`) dan versi cloud ke topik yang sama bersamaan,
   kecuali ingin menerima dua sumber sinyal.
 - Kalau `ok: false`, pesan `error` menjelaskan penyebabnya (mis. env belum diisi, API key salah).
+
+## ⚡ kesempatan emas & peringkat (30 Sep 2026)
+
+Setiap sinyal membawa `tier`: `zap` (⚡ Emas), `silver` (🥈), `bronze` (🥉), `biasa`, dan `vol_pct` (XAU:
+persentil ATR14 60 hari). ⚡ = XAU konf+⭐ dengan `vol_pct` < 0,331, atau BTC ⭐. Untuk ⚡, `wr/avg_r` diganti
+statistik kelompok ⚡ sendiri dan ditambah `wr07/avg_r07` (skema SL+ 0,7R). Sumber: `research/momen.py`,
+`docs/MOMEN_PERANG.md`.
+
+| Peringkat | XAU | BTC | Hasil (2012/2016–2021 / 5 tahun terakhir) |
+|---|---|---|---|
+| ⚡ | konf+⭐ & volatilitas rendah | ⭐ | XAU +0,95 / +0,53R, BTC +0,97 / +0,64R |
+| 🥈 | – | konf+⭐ | +0,56 / +0,25R |
+| 🥉 | konf+⭐; konf & volatilitas rendah | – | ±+0,1 / +0,17R |
+| Biasa | konf | konf | XAU −0,13 / +0,13R, BTC +0,62 / ±0R |
+
+Aplikasi 3.11: lot per peringkat (⚡ 1%, 🥈/🥉 0,5%, biasa setengahnya bila Modal diisi), SL+ otomatis (⚡ & BTC di
+0,7R, XAU lainnya setelah TP1), modal otomatis, dan kurs bawaan Rp17.500.

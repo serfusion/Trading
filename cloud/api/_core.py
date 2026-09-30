@@ -263,6 +263,41 @@ STATS = {
 }
 
 
+# ⚡ kesempatan emas (research/momen.py, docs/MOMEN_PERANG.md): XAU konf+⭐ saat volatilitas rendah (persentil ATR14
+# 60 hari < 0,331 = batas tertil bawah periode 2012–2021) dan BTC ⭐. Sinyal kembar = 1 entry. Kolom: (WR bawaan,
+# R bawaan, WR SL+0,7R, R SL+0,7R, n, periode). Dua periode: XAU ⚡ +0,95R (2012–2021) / +0,53R (5 th terakhir),
+# BTC ⚡ +0,97R / +0,64R.
+ZAP_VOL = 0.331
+TIER_STATS = {
+    "XAU": (54.3, 0.799, 63.3, 0.773, 138, "2013–2026"),
+    "BTC": (54.0, 0.810, 64.4, 0.747, 200, "2016–2026"),
+}
+
+
+def vol_pct(closed: list[Bar], n: int = 14, window: int = 1440) -> float | None:
+    """Persentil ATR14 (Wilder) candle terakhir di antara `window` candle terakhir (research: rolling rank pct)."""
+    if len(closed) < 500:
+        return None
+    a, vals = None, []
+    for i, b in enumerate(closed):
+        prev = closed[i - 1].c if i else b.c
+        tr = max(b.h - b.l, abs(b.h - prev), abs(b.l - prev))
+        a = tr if a is None else a + (tr - a) / n
+        vals.append(a)
+    w = vals[-window:]
+    return sum(1 for v in w if v <= w[-1]) / len(w)
+
+
+def tier(asset: str, cat: str, vp: float | None) -> str:
+    """Peringkat sinyal: zap (⚡ emas) > silver (🥈) > bronze (🥉) > biasa. cat tanpa awalan aset (mis. 'konf+⭐')."""
+    low = vp is not None and vp < ZAP_VOL
+    if asset == "BTC":
+        return {"⭐": "zap", "konf+⭐": "silver"}.get(cat, "biasa")
+    if cat == "konf+⭐":
+        return "zap" if low else "bronze"
+    return "bronze" if cat == "konf" and low else "biasa"
+
+
 def badges(cat: str) -> dict:
     """💰 = profit/sinyal (≥0,25R 💰💰💰, ≥0,12R 💰💰, ≥0,05R 💰), ⭐ = win rate (≥75% ⭐⭐⭐, ≥60% ⭐⭐, ≥48% ⭐).
     Profit didahulukan: badge = 💰 lalu ⭐."""
@@ -517,7 +552,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
-              "cat": v.get("cat", ""), "point_value": cfg.get("point_value", 1.0),
+              "cat": v.get("cat", ""), "tier": v.get("tier", ""), "point_value": cfg.get("point_value", 1.0),
               "tp1_time": v.get("be_bar"), "reason": why,
               "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
                                                                      cfg["be_offset"]), 3)
@@ -619,6 +654,16 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             elif sig["action"] == "open" and v is None:
                 d = sig["dir"]
                 meta, star_note = category(closed, d, cfg)
+                asset = cfg.get("asset", "XAU")
+                vp = vol_pct(closed) if asset == "XAU" else None
+                meta["tier"] = tier(asset, meta["cat"].split(" ", 1)[-1], vp)
+                meta["vol_pct"] = None if vp is None else round(vp, 3)
+                meta["zap"] = meta["tier"] == "zap"
+                if meta["zap"]:        # ⚡: statistik kelompok ⚡ sendiri (lebih tinggi dari kategori induknya)
+                    wr, ar, wr7, ar7, n_z, per_z = TIER_STATS[asset]
+                    meta.update(badge="⚡" + meta["badge"], wr=wr, avg_r=ar, wr07=wr7, avg_r07=ar7, n_hist=n_z,
+                                period=per_z)
+                war = cfg.get("war") if asset == "XAU" else None
                 sign = 1 if d == "BUY" else -1
                 risk = cfg["stop_atr"] * sig["atr"]
                 sl = price - sign * risk
@@ -631,12 +676,19 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                       "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
                       "warning": "Harga dari data feed; cek harga broker sebelum entry.",
                       "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
+                if war and war.get("on"):
+                    ev["war"] = war
                 text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
                         f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
                         f"{meta['n_hist']} sinyal)\n"
                         f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                         f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
                         f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
+                if meta["zap"]:
+                    text = (f"⚡ KESEMPATAN EMAS (WR {meta['wr07']:.0f}% dengan SL+ 0,7R, +{meta['avg_r07']:.2f}R/sinyal)\n"
+                            + text)
+                if war and war.get("on"):
+                    text += "\n" + war["text"]
                 # sinyal kembar (set lain sudah membuka sinyal di candle & arah yang sama): cukup 1 teks ntfy
                 first = not twins_open(name, {"bar_close": iso(closed[-1].t + tf), "dir": d})
                 pub.publish(ev, text if first else None, f"{d} {symbol}", 5,
@@ -645,6 +697,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 events.append(f"{name} SINYAL {d} @ {price:.2f}")
                 v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
                      "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
+                     "tier": meta["tier"],
                      "bar_close": iso(closed[-1].t + tf)}
                 existing = live_positions(magic) if live else []
                 if live and existing != []:
@@ -701,6 +754,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
           "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
           "exits": exits}
+    if cfg.get("asset", "XAU") == "XAU" and cfg.get("war") is not None:
+        hb["war"] = cfg["war"]
     if executor is not None:
         try:
             acc = executor.account()

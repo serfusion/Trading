@@ -181,6 +181,10 @@ fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
                 )
             }
         }
+        // ⚠️ mode perang (minyak melonjak) dari heartbeat XAU: label saja, sinyal XAU tetap dikirim
+        list.firstOrNull { it.key.startsWith("XAU") }?.value?.warText()?.let {
+            Text(it, style = MaterialTheme.typography.labelMedium, color = SellColor, fontWeight = FontWeight.Bold)
+        }
     }
 }
 
@@ -191,9 +195,13 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
         Text(signal.symbol(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
         Pill(signal.dir, dirColor(signal.dir), solid = true)
         if (count > 1) Pill("×$count", Gold)
+        tierLabel(signal.tier()).takeIf { it.isNotEmpty() && signal.type == "signal" }?.let {
+            Pill(it, if (signal.isZap()) Gold else Muted, solid = signal.isZap())
+        }
         Spacer(Modifier.weight(1f))
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
+    signal.warText()?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor) }
     val m = signal.moneyBadge()
     val st = signal.stars()
     if (signal.type == "signal" && !signal.json.has("money") && !signal.isGap()) {
@@ -203,13 +211,16 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     }
     if (m > 0 || st > 0 || signal.json.has("wr")) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (signal.isZap()) Text("⚡", fontWeight = FontWeight.Bold)
             if (m > 0) Text("💰".repeat(m))
             if (st > 0) Text("★".repeat(st), color = Gold, fontWeight = FontWeight.Bold)
             Spacer(Modifier.weight(1f))
             if (signal.json.has("wr")) {
-                val avg = signal.json.optDouble("avg_r")
+                // ⚡ dengan SL+ 0,7R (otomatis): pakai statistik skema itu (WR lebih tinggi)
+                val s07 = signal.json.has("wr07") && SignalRepository.money().use07(signal.id, signal.tier())
+                val avg = signal.json.optDouble(if (s07) "avg_r07" else "avg_r")
                 Pill("${signed(avg)}R", if (avg > 0) BuyColor else SellColor)
-                Pill("WR ${fmt(signal.json.optDouble("wr"), 0)}%", Gold)
+                Pill("WR ${fmt(signal.json.optDouble(if (s07) "wr07" else "wr"), 0)}%", Gold)
             }
         }
     }
