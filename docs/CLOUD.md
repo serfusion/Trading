@@ -311,3 +311,11 @@ membacanya lewat `research/news_data.load_calendar()` setelah
   bukan token (mis. tertukar dengan nama repo); *ditolak GitHub (HTTP 401)* = token salah/kedaluwarsa/dicabut;
   *tidak bisa membaca repo (HTTP 404)* = Repository access token tidak memuat repo ini atau Resource owner salah
   (repo milik organisasi `serfusion` → Resource owner harus `serfusion`); *HTTP 403* = izin Contents masih Read-only.
+
+## 🎲 Kalshi di kartu 🎯 (30 Sep 2026, aplikasi 3.16)
+
+`GET /api/chat` → `persiapan.berita[].kalshi` untuk CPI, core CPI, NFP, pengangguran, dan core PCE pekan ini: peluang
+angka di atas / sama / di bawah konsensus dari pasar Kalshi (API publik, tanpa kunci), dan khusus CPI peluang emas naik
+1 menit (`cloud/api/kalshi.json` dari `research/kalshi_uji.py`). Kalshi dibaca paling sering tiap 15 menit untuk semua
+pengguna (baris Supabase `kalshi`); bila Kalshi gagal, data terakhir dipakai dan kartu tetap tampil tanpa baris 🎲.
+Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.

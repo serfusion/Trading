@@ -95,6 +95,16 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (+ "perlindungan gap" Exness), hedge: 11.116 kombinasi, 0 lolos di kedua feed. Tebakan terbaik ±53% vs butuh
   ≥ 59% (sempurna) / ≥ 75% (realistis). Kandidat satu-satunya: straddle ±$1–2 (positif hanya di feed Exness).
 
+## Kalshi / pasar prediksi (30 Sep 2026 — `docs/KALSHI.md`)
+- Host dibuka pengguna: `api.elections.kalshi.com`, `gamma-api.polymarket.com`, `clob.polymarket.com` (Cleveland Fed,
+  BLS, CME, Hugging Face tetap 403). `python -m research.kalshi unduh|uji` (data di `data/research/eksternal/kalshi`,
+  API membatasi laju → jeda 0,35 dtk + backoff 429; pasar lama di `/historical/...`).
+- Hasil: Kalshi menebak arah kejutan CPI/core CPI 76–78% (2022–2025), NFP/pengangguran ±50–57%. Entry emas ikut
+  tebakan: 0 lolos. Kandidat: "peluang emas naik 1 mnt" CPI ≥ 60% (Kalshi × reaksi historis) → n 18, naik 72–78%,
+  +$2,8–3,3/0,01 lot tutup 60 dtk di kedua feed, t 1,6–1,9 → BELUM TERBUKTI, perlu uji maju.
+- Aplikasi 3.16: baris 🎲 di kartu 🎯 (`cloud/api/_kalshi.py`, `cloud/api/kalshi.json`, cache Supabase baris `kalshi`).
+  Konsensus Feb–Sep 2026 belum ada (ForexFactory data berhenti Jan 2026).
+
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —

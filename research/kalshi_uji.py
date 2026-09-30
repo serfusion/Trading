@@ -245,6 +245,11 @@ def fed_table() -> list[str]:
     return L
 
 
+OUT_JSON = Path(__file__).resolve().parent.parent / "cloud" / "api" / "kalshi.json"
+# angka untuk kartu Kalshi di aplikasi (cloud/api/_kalshi.py), diisi oleh report()
+EKSPOR: dict = {"dibuat": "research/kalshi_uji.py", "akurasi": {}, "sinyal": {}, "ambang": 0.6}
+
+
 def report() -> str:
     df = rows()
     L = ["# Kalshi: peluang hasil berita sebelum rilis vs kejutan & arah emas (research/kalshi_uji.py)", ""]
@@ -296,6 +301,15 @@ def report() -> str:
     L.append("")
     L.append("== Peluang emas NAIK 1 menit (Kalshi x reaksi historis, walk-forward) untuk CPI ==")
     reac = cpi_reactions()
+    EKSPOR["reaksi_cpi"] = {k: {"naik": round(float(reac[reac.bias == b].naik.mean()), 3),
+                               "n": int((reac.bias == b).sum())} for k, b in (("bawah", 1.0), ("atas", -1.0),
+                                                                              ("sama", 0.0))}
+    EKSPOR["reaksi_cpi"]["tahun"] = f"{reac.t0.min():%Y}–{reac.t0.max():%Y}"
+    for series in sorted(df.seri.unique()):
+        a = accuracy(df[df.seri == series], "24 jam", 0.10)
+        s = df[df.seri == series]
+        EKSPOR["akurasi"][series] = {"n": a["n"], "benar": round(a["benar"], 1), "sama": round(a["sama"], 1),
+                                     "tahun": f"{s.t0.min():%Y}–{s.t0.max():%Y}"}
     for lab in ("24 jam", "1 jam"):
         gp = gold_probability(df, lab, reac)
         for a, name in p2.FEEDS.items():
@@ -325,6 +339,13 @@ def report() -> str:
                     L.append(fmt(f"    entry t0-1 {name:9} {lab} | {ex}", c)
                              + f" | 2021-23 {c['awal']:+.2f} 2024-26 {c['akhir']:+.2f}"
                              + f" | REAL {r['avg']:+.2f} | STRES {st['avg']:+.2f}")
+                    if lab == "24 jam" and ex == "tutup 60s":
+                        hit = [float(np.sign(p.mid[p.at(60)] - p.mid[p.at(-1)]) == d)
+                               for t, d in dirs.items() if (p := prepare(t, a)) is not None]
+                        EKSPOR["sinyal"][name] = {"n": c["n"], "benar": round(100 * float(np.mean(hit)), 1),
+                                                  "rata60": round(c["avg"], 2), "real": round(r["avg"], 2),
+                                                  "t": round(c["t"], 1),
+                                                  "tahun": f"{min(dirs.index):%Y}–{max(dirs.index):%Y}"}
     L.append("")
     L.append("== CPI per rilis (tebakan 1 jam sebelum, selisih >= 0,10): gerak emas Exness dari t0-1 ==")
     L += per_release(df[df.seri.isin(GROUPS["CPI"])], "1 jam")
@@ -337,5 +358,6 @@ def report() -> str:
 def main() -> None:
     txt = report()
     OUT.write_text(txt, encoding="utf-8")
+    OUT_JSON.write_text(json.dumps(EKSPOR, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(txt)
-    print(f"ditulis {OUT}")
+    print(f"ditulis {OUT} dan {OUT_JSON}")

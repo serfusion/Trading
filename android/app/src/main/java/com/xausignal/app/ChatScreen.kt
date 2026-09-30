@@ -373,6 +373,10 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 Text("Emas naik 1 jam: data < perkiraan ${pct("bawah")} • > perkiraan ${pct("atas")}",
                     style = MaterialTheme.typography.bodySmall)
             }
+            // 🎲 peluang pasar prediksi Kalshi (cloud/api/_kalshi.py): diperbarui tiap 15 menit sebelum rilis
+            b.optJSONObject("kalshi")?.let { k ->
+                BigRow(k.optString("label"), k.optString("bukti"), k.optString("teks"), k.optBoolean("kuat"))
+            }
             val arah = b.optString("arah")
             if (arah.startsWith("condong")) Text("Sebelum rilis: $arah", color = Gold,
                 style = MaterialTheme.typography.bodySmall)
@@ -390,6 +394,10 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                     Text("⏱️ $it", style = MaterialTheme.typography.labelSmall, color = Muted)
                 }
             }
+        }
+        prep.optString("kalshi_waktu").ifBlank { null }?.let {
+            Text("🎲 Peluang Kalshi diambil $it (pasar prediksi, bukan kepastian)",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
         }
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
         prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
