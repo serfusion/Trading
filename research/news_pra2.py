@@ -216,6 +216,12 @@ def all_clues(ev: pd.DataFrame, bars: pd.DataFrame) -> dict[str, pd.Series]:
     return cl
 
 
+def drift(p, m1: float, n: int) -> float:
+    """Gerak mid n dtk terakhir sebelum t0-1; NaN bila belum ada tick (p.at = -1 akan menunjuk tick TERAKHIR)."""
+    j = p.at(-1 - n)
+    return float(m1 - p.mid[j]) if j >= 0 else np.nan
+
+
 # ---------------------------------------------------------------- walk-forward
 FEATS = ["ULANG kejutan sebelumnya", "ACT->PREV", "MOMENTUM KEJUTAN 30 hari", "ADP BESAR -> NFP", "bar15m", "bar30m",
          "bar60m", "tren1h", "tick10", "tick30", "tick60", "tick110"]
@@ -257,7 +263,7 @@ def collect(aset: str, ev: pd.DataFrame, cl: dict[str, pd.Series], bars: pd.Data
         strd.append(straddle(p))
         hedg.append(hedge(p))
         m1 = p.mid[p.at(-1)]
-        x = {f"tick{n}": float(m1 - p.mid[p.at(-1 - n)]) for n in TICK_DRIFT}
+        x = {f"tick{n}": drift(p, m1, n) for n in TICK_DRIFT}
         x["target"] = float(p.mid[p.at(30)] - m1)
         x["cek_t0-5"] = float(m1 - p.mid[p.at(-5)])
         extra.append(x)

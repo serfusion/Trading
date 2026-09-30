@@ -48,6 +48,14 @@ def test_hedge_tutup_sisi_rugi_lalu_tahan_sisi_untung():
     assert np.allclose(flat[d3, S["CEPAT"]], -0.8)                 # tidak bergerak -> dua spread
 
 
+def test_drift_tanpa_tick_lama_tidak_membaca_tick_terakhir():
+    from research.news_pra2 import drift
+    p = tick([(s, 2000.0 + s) for s in np.arange(-30, 900, 1.0)])     # tick baru mulai t0-30
+    m1 = p.mid[p.at(-1)]
+    assert drift(p, m1, 10) == 10.0
+    assert np.isnan(drift(p, m1, 110))                                 # dulu: mid[-1] = harga +15 menit (bocor)
+
+
 def test_momentum_hanya_kejutan_sebelum_t0():
     t = pd.Timestamp("2024-03-08 13:30", tz="UTC")
     cal = pd.DataFrame({"time": [t - pd.Timedelta(days=40), t - pd.Timedelta(days=10), t - pd.Timedelta(days=3), t],

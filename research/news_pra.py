@@ -115,7 +115,10 @@ def run(aset: str, ev: pd.DataFrame, cl: dict[str, pd.Series]) -> tuple[pd.DataF
             dirs["ORAKEL (kejutan diketahui)"] = r.bias
             dirs["ORAKEL SALAH (kebalikan)"] = -r.bias
         for n in DRIFT:
-            mv = m1 - p.mid[p.at(-1 - n)]
+            j = p.at(-1 - n)
+            if j < 0:                                  # belum ada tick (indeks -1 = tick TERAKHIR -> bocor)
+                continue
+            mv = m1 - p.mid[j]
             if abs(mv) >= 0.01:
                 dirs[f"DRIFT {n}s"] = float(np.sign(mv))
                 dirs[f"LAWAN {n}s"] = -float(np.sign(mv))
