@@ -308,11 +308,22 @@ class Tick:
         return k if k < len(self.T) and self.T[k] <= sec + 10 else None
 
 
+# sumber tick per aset: XAU/BTC (Dukascopy/Binance), XAU_EXNESS/BTC_EXNESS (tick asli Exness, research/exness.py)
+EXNESS = {"XAU_EXNESS": ("XAUUSDc", pd.Timestamp("2015-01-01", tz="UTC")),
+          "BTC_EXNESS": ("BTCUSDm", pd.Timestamp("2017-01-01", tz="UTC"))}
+LABEL = {"XAU": "XAU (Dukascopy)", "BTC": "BTC (Binance)", "XAU_EXNESS": "XAU (Exness Cent)",
+         "BTC_EXNESS": "BTC (Exness)"}
+
+
 def prepare(t0: pd.Timestamp, aset: str = "XAU") -> Tick | None:
-    df = ticks_around(t0) if aset == "XAU" else btc_around(t0)
+    if aset in EXNESS:
+        from .exness import ticks_around as ex_ticks
+        df = ex_ticks(EXNESS[aset][0], t0)
+    else:
+        df = ticks_around(t0) if aset == "XAU" else btc_around(t0)
     if df is None:
         return None
-    p = Tick(t0, df, 1.0 if aset == "XAU" else float(df.bid.iloc[0]) * BTC_UNIT)
+    p = Tick(t0, df, 1.0 if aset.startswith("XAU") else float(df.bid.iloc[0]) * BTC_UNIT)
     pre = (p.T >= -60) & (p.T < 0)
     if not pre.any() or not ((p.T >= 0) & (p.T < 5)).any() or p.T[-1] < 14.5 * 60:
         return None                                   # pasar tutup / data bolong
@@ -417,6 +428,8 @@ def run(aset: str = "XAU") -> tuple[pd.DataFrame, pd.DataFrame]:
     ev = events()
     if aset == "BTC":
         ev = ev[ev.time >= BTC_START]
+    if aset in EXNESS:
+        ev = ev[ev.time >= EXNESS[aset][1]]
     tr, an = [], []
     for e in ev.itertuples():
         p = prepare(e.time, aset)
@@ -484,7 +497,7 @@ def money(x: float | None, aset: str, sign: bool = True) -> str:
     """Angka untuk pengguna: XAU dalam $ per 0,01 lot (= $/ons), BTC dalam % harga (1 satuan = 0,05%)."""
     if x is None or x != x:
         return "-"
-    if aset == "XAU":
+    if aset.startswith("XAU"):
         t = f"{abs(x):.2f}".replace(".", ",").removesuffix(",00")
         return ("−$" if x < 0 else "+$") + t if sign else "$" + t
     t = f"{x * BTC_UNIT * 100:+.3f}%" if sign else f"{x * BTC_UNIT * 100:.3f}%"
@@ -566,16 +579,16 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
                 return "belum ada data"
             txt = f"menang {st['wr']:.0f}% tapi rata {money(st['avg'], aset)}" if st["avg"] < 0 else \
                 f"menang {st['wr']:.0f}%, rata {money(st['avg'], aset)}"
-            txt += "/0,01 lot" if aset == "XAU" else " per trade"
+            txt += "/0,01 lot" if aset.startswith("XAU") else " per trade"
             return txt + (f" (5 th {money(st['baru'], aset)}; n={st['n']})" if st.get("baru") is not None
                           else f" (n={st['n']})")
         spread = (f"spread {money(row['spread_pra'], aset, False)}→{money(row['spread1'], aset, False)} di detik 1"
-                  if aset == "XAU" else "spread diasumsikan 0,03%")
-        row["teks"] = (f"{aset} ({row['tahun']}, n={row['n']}): 5 dtk pertama bergerak ±{money(row['gerak5'], aset, False)}"
+                  if aset != "BTC" else "spread diasumsikan 0,03%")
+        row["teks"] = (f"{LABEL[aset]} ({row['tahun']}, n={row['n']}): 5 dtk pertama bergerak ±{money(row['gerak5'], aset, False)}"
                        f", {spread}. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): {one(m)}. "
                        f"Pending Buy/Sell Stop ±{money(2, aset, False)}: {one(pn)}. {verdict}.")
-        row["alarm"] = (f"{aset}: 5 dtk pertama ±{money(row['gerak5'], aset, False)}"
-                        + (f", spread melebar ke ±{money(row['spread1'], aset, False)}" if aset == "XAU" else "")
+        row["alarm"] = (f"{LABEL[aset]}: 5 dtk pertama ±{money(row['gerak5'], aset, False)}"
+                        + (f", spread melebar ke ±{money(row['spread1'], aset, False)}" if aset != "BTC" else "")
                         + f". Ikut lonjakan manual: {one(m)}. {short}.")
         out[grp] = row
     return out
@@ -583,7 +596,7 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
 
 def main(aset: str = "XAU") -> None:
     tr, an = run(aset)
-    satuan = "$ per ons" if aset == "XAU" else "satuan 0,05% harga BTC (ambang $1/$2/$3 = 0,05/0,10/0,15%)"
+    satuan = "$ per ons" if aset.startswith("XAU") else "satuan 0,05% harga BTC (ambang $1/$2/$3 = 0,05/0,10/0,15%)"
     lines = [f"== {aset} == hasil & ambang dalam {satuan}",
              f"Rilis dengan data lengkap: {len(an)} ({an.time.min():%Y-%m-%d} .. {an.time.max():%Y-%m-%d}); "
              f"per grup: {an.group.value_counts().to_dict()}"]

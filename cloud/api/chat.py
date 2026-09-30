@@ -130,6 +130,8 @@ class handler(BaseHTTPRequestHandler):
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
                 arsip = {"status": f"gagal: {type(exc).__name__}"}
+            if isinstance(persiapan, dict):
+                persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
                              "arsip": arsip})
         except Exception as exc:  # noqa: BLE001

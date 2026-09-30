@@ -353,6 +353,10 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
         prep.optString("kesimpulan").ifBlank { null }?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
         }
+        // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
+        prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
+            Text("🗄️ Arsip berita GitHub: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
     }
 }
 

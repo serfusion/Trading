@@ -67,7 +67,7 @@ def detik(group: str | None, field: str = "teks") -> str:
     """Teks detik pertama XAU (+ BTC) untuk grup berita; grup tanpa cukup data memakai ringkasan SEMUA."""
     parts = []
     for aset in ("XAU", "BTC"):
-        d = DETIK.get(aset) or {}
+        d = DETIK.get(f"{aset}_EXNESS") or DETIK.get(aset) or {}       # utamakan tick asli broker (Exness)
         row = d.get(group or "") or d.get("SEMUA")
         if row and row.get(field):
             parts.append(row[field])

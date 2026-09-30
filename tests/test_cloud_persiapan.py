@@ -73,3 +73,10 @@ def test_detik_json_kosong_tidak_merusak_kartu(monkeypatch):
     monkeypatch.setattr(_persiapan, "DETIK", {})
     d = _persiapan.cards(ROWS, NOW)
     assert all(c["detik"] == "" for c in d["berita"]) and d["detik"] == {}
+
+
+def test_detik_utamakan_exness(monkeypatch):
+    fake = {"XAU": {"SEMUA": {"teks": "duka", "alarm": "duka"}},
+            "XAU_EXNESS": {"SEMUA": {"teks": "exness", "alarm": "exness"}}}
+    monkeypatch.setattr(_persiapan, "DETIK", fake)
+    assert _persiapan.detik("NFP") == "exness" and _persiapan.alarm_texts()["NFP"]["alarm"] == "exness"
