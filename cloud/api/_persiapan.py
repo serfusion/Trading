@@ -18,8 +18,10 @@ STATS = json.loads((Path(__file__).resolve().parent / "persiapan.json").read_tex
 # ⏱️ detik pertama setelah rilis (research/news_detik.py, data tick): per aset -> per grup berita -> teks & angka
 _DETIK_PATH = Path(__file__).resolve().parent / "detik.json"
 DETIK = json.loads(_DETIK_PATH.read_text(encoding="utf-8")) if _DETIK_PATH.exists() else {}
-GROUP = [("Non-Farm", "NFP"), ("CPI", "CPI"), ("PPI", "PPI"), ("Federal Funds", "FOMC"), ("FOMC", "FOMC"),
-         ("Retail Sales", "RETAIL"), ("PCE", "PCE"), ("GDP", "GDP"), ("ISM", "ISM"), ("Unemployment Claims", "CLAIMS")]
+# judul -> grup (dicek berurutan). ADP rilis terpisah (Rabu) -> bukan NFP; UR & AHE rilis bersamaan dengan NFP.
+GROUP = [("ADP", None), ("Non-Farm", "NFP"), ("Unemployment Rate", "NFP"), ("Average Hourly Earnings", "NFP"),
+         ("CPI", "CPI"), ("PPI", "PPI"), ("Federal Funds", "FOMC"), ("FOMC", "FOMC"), ("Retail Sales", "RETAIL"),
+         ("PCE", "PCE"), ("GDP", "GDP"), ("ISM", "ISM"), ("Unemployment Claims", "CLAIMS")]
 WIB = timedelta(hours=7)
 HARI = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"]
 BULAN = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"]
@@ -74,7 +76,7 @@ def detik(group: str | None, field: str = "teks") -> str:
 
 def alarm_texts() -> dict:
     """{grup: {"alarm": teks}} untuk pengingat ⏱️ 1 menit sebelum rilis di aplikasi (NewsAlarm)."""
-    groups = {g for _, g in GROUP} | {"SEMUA"}
+    groups = {g for _, g in GROUP if g} | {"SEMUA"}
     return {g: {"alarm": detik(g, "alarm")} for g in sorted(groups) if detik(g, "alarm")}
 
 

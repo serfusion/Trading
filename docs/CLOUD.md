@@ -274,3 +274,13 @@ Aplikasi 3.11: lot per peringkat (⚡ 1%, 🥈/🥉 0,5%, biasa setengahnya bila
 Aplikasi 3.12: chip "Contoh pertanyaan" di tab Tanya diganti kartu **🎯 Persiapan berita** (GET `/api/chat` →
 `persiapan`, `cloud/api/_persiapan.py`): per berita USD pekan ini, peluang hasil di bawah/sesuai/di atas konsensus,
 % emas naik 1 jam per hasil, dan tebakan arah emas sebelum rilis. Riset & angka: `docs/PERSIAPAN_BERITA.md`.
+
+Aplikasi 3.13: **⏱️ detik pertama setelah berita** (`docs/NEWS_DETIK.md`).
+- Pengingat: alarm tepat **1 menit sebelum** tiap berita USD berdampak tinggi pekan ini (kalender GET `/api/chat`,
+  diambil ulang poller tiap 6 jam; `NewsAlarm.kt`). Bisa dimatikan lewat sakelar di kartu 🎯. Isi notifikasi = angka
+  uji detik pertama untuk grup berita itu (`persiapan.detik.<grup>.alarm`).
+- Kartu 🎯: tiap berita menampilkan baris ⏱️ (besar gerak 5 detik pertama, spread, hasil "ikut lonjakan" manual dan
+  pending Buy/Sell Stop, dan apakah ada cara yang lolos uji). Sumber: `cloud/api/detik.json` dari
+  `python -m research.news_detik XAU` dan `... BTC`.
+- Tab Tanya: pertanyaan berisi "detik", "straddle", "buy stop", "lonjakan", dan sejenisnya dijawab dari data yang sama.
+- Informasi saja; aplikasi dan cloud **tidak** membuka order.

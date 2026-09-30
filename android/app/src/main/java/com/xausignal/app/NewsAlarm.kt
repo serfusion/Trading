@@ -20,7 +20,9 @@ object NewsAlarm {
     private const val LEAD = 60_000L                  // bunyi 1 menit sebelum rilis
     private const val REFRESH = 6 * 3_600_000L        // kalender diambil ulang dari poller tiap 6 jam
 
-    data class Item(val at: Long, val title: String, val whenText: String, val info: String)
+    /** specific = teks riset khusus grup berita ini (bukan ringkasan SEMUA). */
+    data class Item(val at: Long, val title: String, val whenText: String, val info: String,
+                    val specific: Boolean = false)
 
     private fun prefs(context: Context) = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
 
@@ -41,8 +43,10 @@ object NewsAlarm {
             } catch (x: Exception) {
                 return@forEach
             }
-            val info = (detik?.optJSONObject(e.group) ?: detik?.optJSONObject("SEMUA"))?.optString("alarm").orEmpty()
-            arr.put(JSONObject().put("at", at).put("title", e.title).put("when", e.whenText).put("info", info))
+            val own = detik?.optJSONObject(e.group)
+            val info = (own ?: detik?.optJSONObject("SEMUA"))?.optString("alarm").orEmpty()
+            arr.put(JSONObject().put("at", at).put("title", e.title).put("when", e.whenText).put("info", info)
+                .put("specific", own != null))
         }
         prefs(context).edit().putString("items", arr.toString()).putLong("fetched", System.currentTimeMillis()).apply()
         schedule(context)
@@ -60,7 +64,8 @@ object NewsAlarm {
         val arr = JSONArray(prefs(context).getString("items", "[]") ?: "[]")
         (0 until arr.length()).map { i ->
             val o = arr.getJSONObject(i)
-            Item(o.optLong("at"), o.optString("title"), o.optString("when"), o.optString("info"))
+            Item(o.optLong("at"), o.optString("title"), o.optString("when"), o.optString("info"),
+                o.optBoolean("specific"))
         }
     } catch (e: Exception) {
         emptyList()

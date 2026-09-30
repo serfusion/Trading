@@ -2,6 +2,7 @@
 
 python -m research.news_detik download [maks_file]     # unduh tick Dukascopy jam rilis (lambat, bisa dilanjutkan)
 python -m research.news_detik download_mundur          # pekerja ke-2: NFP/CPI/FOMC dari ujung daftar
+python -m research.news_detik download_acak            # pekerja ke-3: NFP/CPI/FOMC urutan acak lain
 python -m research.news_detik download_btc             # kline 1 detik BTCUSDT Binance di sekitar rilis
 python -m research.news_detik                          # uji semua aturan pada tick yang sudah terunduh
 
@@ -105,11 +106,15 @@ def _raw(t0: pd.Timestamp):
     return d / f"{t0:%Y%m%d_%H}.bi5"
 
 
-def download(limit: int | None = None, ok_pause: float = 3.0, reverse_tier1: bool = False) -> None:
+def download(limit: int | None = None, ok_pause: float = 3.0, mode: str = "maju") -> None:
     """Unduh berurutan dengan jeda adaptif (server membatasi laju: 503 / koneksi diputus).
-    reverse_tier1: pekerja kedua, mengunduh NFP/CPI/FOMC dari ujung daftar (bertemu pekerja pertama di tengah)."""
+    mode "mundur" / "acak": pekerja tambahan untuk NFP/CPI/FOMC (dari ujung daftar / urutan acak lain)."""
     ev = events()
-    hs = hours_needed(ev[ev.group.isin(TIER[0])])[::-1] if reverse_tier1 else hours_needed(ev)
+    hs = hours_needed(ev) if mode == "maju" else hours_needed(ev[ev.group.isin(TIER[0])])
+    if mode == "mundur":
+        hs = hs[::-1]
+    elif mode.startswith("acak"):
+        random.Random(11 + len(mode)).shuffle(hs)            # "acak" / "acak2": urutan berbeda per pekerja
     todo = [h for h in hs if not _raw(h).exists()]
     if limit:
         todo = todo[:limit]
@@ -427,16 +432,74 @@ def _r(x: float, nd: int = 2):
     return None if x is None or x != x else round(float(x), nd)
 
 
-def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[str]) -> dict:
-    """Ringkasan satu aset per grup berita -> dict untuk cloud/api/detik.json (dibaca _persiapan.py)."""
+def money(x: float | None, aset: str, sign: bool = True) -> str:
+    """Angka untuk pengguna: XAU dalam $ per 0,01 lot (= $/ons), BTC dalam % harga (1 satuan = 0,05%)."""
+    if x is None or x != x:
+        return "-"
+    if aset == "XAU":
+        t = f"{abs(x):.2f}".replace(".", ",").removesuffix(",00")
+        return ("−$" if x < 0 else "+$") + t if sign else "$" + t
+    t = f"{x * BTC_UNIT * 100:+.3f}%" if sign else f"{x * BTC_UNIT * 100:.3f}%"
+    return t.replace("-", "−").replace(".", ",")
+
+
+def manual_ok(rule: str) -> bool:
+    """Bisa dilakukan manusia: keputusan >= detik ke-5 (ditambah reaksi 2 dtk), atau pending dipasang sebelum rilis."""
+    if rule.startswith("STRADDLE"):
+        return True
+    d = next(int(t.rstrip("s")) for t in rule.split() if t.endswith("s") and t[:-1].isdigit())
+    return d >= 5
+
+
+def describe(rule: str, ex: str, sl: bool, aset: str) -> str:
+    """Kode varian -> kalimat singkat bahasa Indonesia."""
+    parts = rule.split()
+    def lvl(tok: str) -> str:
+        k = float(tok.strip("$"))
+        return money(k, aset, sign=False)
+    if parts[0] == "KEJUTAN":
+        big = parts[1] == "BESAR"
+        d = parts[-1].rstrip("s")
+        txt = f"ikut kejutan{' BESAR' if big else ''} Act vs Cons, masuk detik ke-{d}"
+    elif parts[0] in ("GERAK", "LAWAN"):
+        d = parts[1].rstrip("s")
+        txt = f"{'ikut' if parts[0] == 'GERAK' else 'lawan'} lonjakan ≥{lvl(parts[2])} di detik ke-{d}"
+    else:
+        txt = f"pending Buy/Sell Stop ±{lvl(parts[1])}"
+    keluar = {"PENGGUNA": "tutup menit 1–5 bila profit (maks 15 mnt)", "TAHAN 1m": "tahan 1 mnt",
+              "TAHAN 5m": "tahan 5 mnt", "TAHAN 15m": "tahan 15 mnt"}.get(ex)
+    if keluar is None:                                    # "TP $x"
+        keluar = f"TP {lvl(ex.split()[1])}"
+    return f"{txt}, {keluar}" + (f", SL {money(SL_DARURAT, aset, sign=False)}" if sl else "")
+
+
+def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tuple]) -> dict:
+    """Ringkasan satu aset per grup berita -> dict untuk cloud/api/detik.json (dibaca _persiapan.py).
+    lolos: [(aturan, keluar, sl, stats dasar, stats kuat)] varian yang lolos kriteria konsisten."""
     out = {}
-    unit = "$" if aset == "XAU" else "x0,05%"
+    manual = [r for r in lolos if manual_ok(r[0])]
+    best = max(manual, key=lambda r: r[4]["avg"]) if manual else None
+    if best:
+        g = tr[(tr.aturan == best[0]) & (tr.keluar == best[1]) & (tr.sl == best[2]) & (tr.slip == 0) & (tr.lat <= 0.5)]
+        yr = g.groupby(g.time.dt.year).pnl.sum()
+        share = yr.max() / yr.sum() * 100 if yr.sum() > 0 else np.nan
+        icon, rapuh = ("⚠️", " (rapuh)") if share >= 50 else ("✅", "")
+        verdict = (f"{icon} {len(lolos)} cara lolos uji ({len(manual)} bisa manual); terbaik yang bisa manual: "
+                   f"{describe(*best[:3], aset)} → rata {money(best[3]['avg'], aset)} (dengan slippage & reaksi 2 dtk "
+                   f"{money(best[4]['avg'], aset)}); {share:.0f}% untungnya dari tahun {yr.idxmax()}{rapuh}")
+        short = f"{icon} {len(manual)} cara manual lolos uji, {share:.0f}% untungnya dari {yr.idxmax()}{rapuh}"
+    elif lolos:
+        verdict = (f"⚠️ {len(lolos)} cara lolos uji, semuanya butuh reaksi < 5 detik (feed berita otomatis), "
+                   "tidak bisa manual")
+        short = verdict
+    else:
+        verdict = short = "❌ tidak ada cara yang untung konsisten setelah spread & slippage"
     for grp, g in [("SEMUA", an)] + list(an.groupby("group")):
         if len(g) < MIN_N:
             continue
         baru = g[g.time >= NEW]
         ref = baru if len(baru) >= MIN_N else g
-        row = {"n": len(g), "n_baru": len(baru),
+        row = {"n": len(g), "n_baru": len(baru), "tahun": f"{g.time.min():%Y}–{g.time.max():%Y}",
                "gerak5": _r(ref.gerak_5.abs().median()), "gerak60": _r(ref.gerak_60.abs().median()),
                "gerak900": _r(ref.gerak_900.abs().median()), "spread_pra": _r(ref.spread_pra.median()),
                "spread1": _r(ref.spread_1.median()), "lanjut": _r(ref.lanjut.mean() * 100, 0)}
@@ -444,20 +507,24 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[str]
         for key, pr in PRESET.items():
             st = stats(_pick(tg, pr))
             row[key] = {k: _r(v) if isinstance(v, float) else v for k, v in st.items()}
-        m, pd_ = row["manual"], row["pending"]
+        m, pn = row["manual"], row["pending"]
 
         def one(st: dict) -> str:
             if not st.get("n"):
                 return "belum ada data"
-            return (f"rata {st['avg']:+.2f}{unit}/0,01 lot, menang {st['wr']:.0f}% (n={st['n']}; "
-                    f"5 th {st['baru']:+.2f})" if st.get("baru") is not None else
-                    f"rata {st['avg']:+.2f}{unit}/0,01 lot, menang {st['wr']:.0f}% (n={st['n']})")
-        verdict = ("✅ ada cara yang lolos uji: " + ", ".join(lolos)) if lolos else "❌ tidak ada cara yang untung konsisten"
-        row["teks"] = (f"Detik pertama ({aset}, tick {g.time.min():%Y}–{g.time.max():%Y}): gerak 5 dtk ±{row['gerak5']}"
-                       f"{unit}, spread {row['spread_pra']}→{row['spread1']}{unit} di detik 1. Ikut lonjakan (manual): "
-                       f"{one(m)}. Pending ±$2: {one(pd_)}. {verdict}.")
-        row["alarm"] = (f"{aset}: 5 dtk pertama biasanya ±{row['gerak5']}{unit}, spread melebar ke ±{row['spread1']}"
-                        f"{unit}. Ikut lonjakan dulu-dulu: {one(m)}. {verdict}.")
+            txt = f"menang {st['wr']:.0f}% tapi rata {money(st['avg'], aset)}" if st["avg"] < 0 else \
+                f"menang {st['wr']:.0f}%, rata {money(st['avg'], aset)}"
+            txt += "/0,01 lot" if aset == "XAU" else " per trade"
+            return txt + (f" (5 th {money(st['baru'], aset)}; n={st['n']})" if st.get("baru") is not None
+                          else f" (n={st['n']})")
+        spread = (f"spread {money(row['spread_pra'], aset, False)}→{money(row['spread1'], aset, False)} di detik 1"
+                  if aset == "XAU" else "spread diasumsikan 0,03%")
+        row["teks"] = (f"{aset} ({row['tahun']}, n={row['n']}): 5 dtk pertama bergerak ±{money(row['gerak5'], aset, False)}"
+                       f", {spread}. Ikut lonjakan manual (detik ke-5, tutup menit 1–5 bila profit): {one(m)}. "
+                       f"Pending Buy/Sell Stop ±{money(2, aset, False)}: {one(pn)}. {verdict}.")
+        row["alarm"] = (f"{aset}: 5 dtk pertama ±{money(row['gerak5'], aset, False)}"
+                        + (f", spread melebar ke ±{money(row['spread1'], aset, False)}" if aset == "XAU" else "")
+                        + f". Ikut lonjakan manual: {one(m)}. {short}.")
         out[grp] = row
     return out
 
@@ -471,7 +538,7 @@ def main(aset: str = "XAU") -> None:
     ok = (an.range_pasca > 3 * an.range_pra.clip(lower=0.05)).mean() * 100
     lines.append(f"Cek jam kalender: range 60 dtk sesudah rilis > 3x range menit tenang sebelumnya di {ok:.0f}% rilis")
     lines.append("")
-    lines.append("== Anatomi detik pertama (median; $ per ons) ==")
+    lines.append(f"== Anatomi detik pertama (median; {satuan}) ==")
     for lab, g in [("SEMUA", an)] + [(k, v) for k, v in an.groupby("group")]:
         for per, gg in (("LAMA", g[g.time < NEW]), ("BARU", g[g.time >= NEW])):
             if len(gg) < 5:
@@ -538,7 +605,7 @@ def main(aset: str = "XAU") -> None:
     txt = "\n".join(lines)
     print(txt)
     data = json.loads(OUT_JSON.read_text(encoding="utf-8")) if OUT_JSON.exists() else {}
-    data[aset] = export_group(tr, an, aset, [f"{r[0]} | {r[1]}{' +SL$5' if r[2] else ''}" for r in lolos])
+    data[aset] = export_group(tr, an, aset, [r[:5] for r in lolos])
     data["dibuat"] = pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d")
     OUT_JSON.write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     out = OUT_TXT.with_name(f"hasil_news_detik_{aset.lower()}.txt")
@@ -547,8 +614,8 @@ def main(aset: str = "XAU") -> None:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] in ("download", "download_mundur"):
-        download(int(sys.argv[2]) if len(sys.argv) > 2 else None, reverse_tier1=sys.argv[1] == "download_mundur")
+    if len(sys.argv) > 1 and sys.argv[1] in ("download", "download_mundur", "download_acak", "download_acak2"):
+        download(int(sys.argv[2]) if len(sys.argv) > 2 else None, mode=sys.argv[1].partition("_")[2] or "maju")
     elif len(sys.argv) > 1 and sys.argv[1] == "download_btc":
         download_btc()
     else:

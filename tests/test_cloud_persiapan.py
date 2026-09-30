@@ -64,6 +64,9 @@ def test_detik_pertama_per_grup(monkeypatch):
     assert by["Core PCE Price Index m/m"]["detik"] == "Detik pertama (XAU): semua BTC semua"   # PCE -> SEMUA
     assert d["detik"]["NFP"]["alarm"] == "XAU NFP BTC semua" and d["detik"]["SEMUA"]["alarm"] == "XAU semua BTC semua"
     assert _persiapan.group_of("Federal Funds Rate") == "FOMC" and _persiapan.group_of("Pidato") is None
+    assert _persiapan.group_of("Unemployment Rate") == "NFP" and _persiapan.group_of("Average Hourly Earnings m/m") == "NFP"
+    assert _persiapan.group_of("ADP Non-Farm Employment Change") is None
+    assert _persiapan.group_of("Unemployment Claims") == "CLAIMS"
 
 
 def test_detik_json_kosong_tidak_merusak_kartu(monkeypatch):
