@@ -16,6 +16,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,6 +25,33 @@ from datetime import datetime, timedelta, timezone
 MIN_GAP = timedelta(minutes=15)
 FF_TTL = timedelta(minutes=10)
 API = "https://api.github.com"
+DEFAULT_REPO, DEFAULT_BRANCH = "serfusion/Trading", "arsip-berita"
+_REPO_RE = re.compile(r"^[A-Za-z0-9_.-]{1,100}/[A-Za-z0-9_.-]{1,100}$")
+TOKEN_PREFIX = ("github_pat_", "ghp_", "ghs_", "gho_", "ghu_")
+_BRANCH_RE = re.compile(r"^[A-Za-z0-9_./-]{1,100}$")
+# pola token/rahasia yang tidak boleh ikut tampil di status aplikasi (30 Sep: token pernah terisi di ARSIP_REPO)
+_SECRET_RE = re.compile(r"(github_pat_|gh[pousr]_)[A-Za-z0-9_]+|[A-Za-z0-9_]{36,}")
+
+
+def redact(text: str) -> str:
+    """Sensor apa pun yang mirip token sebelum teks dikirim ke aplikasi."""
+    return _SECRET_RE.sub("•••", text or "")
+
+
+def target(env: dict) -> tuple[str, str, list[str]]:
+    """(repo, branch, peringatan). ARSIP_REPO/ARSIP_BRANCH yang bentuknya salah (mis. berisi token) diabaikan dan
+    diganti bawaan; nilainya TIDAK pernah disebut di peringatan."""
+    warn = []
+    repo = (env.get("ARSIP_REPO") or "").strip() or DEFAULT_REPO
+    if not _REPO_RE.match(repo) or repo.lower().startswith(("github_pat_", "ghp_")):
+        repo = DEFAULT_REPO
+        warn.append("ARSIP_REPO salah isi (harus pemilik/repo) → dipakai serfusion/Trading; hapus variabel itu "
+                    "di Vercel, dan bila isinya token: cabut token itu")
+    branch = (env.get("ARSIP_BRANCH") or "").strip() or DEFAULT_BRANCH
+    if not _BRANCH_RE.match(branch) or len(branch) >= 36:
+        branch = DEFAULT_BRANCH
+        warn.append("ARSIP_BRANCH salah isi → dipakai arsip-berita")
+    return repo, branch, warn
 
 
 def _utc(date: str) -> str | None:
@@ -101,8 +129,9 @@ class GitHub:
             return
         code, repo = self.req("GET", f"/repos/{self.repo}")
         if not repo:
-            raise PermissionError(f"token tidak bisa membaca repo {self.repo} (HTTP {code}): cek Repository access "
-                                  "token & izin Contents read/write")
+            raise PermissionError(f"GITHUB_TOKEN tidak bisa membaca repo {self.repo} (HTTP {code}): token harus "
+                                  "fine-grained, Resource owner = pemilik repo, Repository access memuat repo ini, "
+                                  "Contents = Read and write")
         _, ref = self.req("GET", f"/repos/{self.repo}/git/ref/heads/{repo['default_branch']}")
         if not ref:
             raise PermissionError("branch default tidak terbaca oleh token")
@@ -126,9 +155,25 @@ class GitHub:
 
 def save(rows: list | None, calendar: list | None, now: datetime, store, env: dict, gh: GitHub | None = None) -> dict:
     """Simpan kalender pekan ini ke GitHub bila berubah. Return status singkat (ikut di respons GET /api/chat)."""
-    token = env.get("GITHUB_TOKEN", "")
+    token = (env.get("GITHUB_TOKEN") or "").strip()
     if not token and gh is None:
         return {"status": "mati (GITHUB_TOKEN belum diisi di Vercel)"}
+    if gh is None and not token.startswith(TOKEN_PREFIX):
+        hint = " (berisi nama repo → tertukar dengan ARSIP_REPO?)" if _REPO_RE.match(token) else ""
+        return {"status": f"gagal: GITHUB_TOKEN bukan token GitHub{hint}; isi dengan token fine-grained "
+                          "(diawali github_pat_) lalu Redeploy"}
+    repo, branch, warn = target(env)
+    try:
+        out = _save(rows, calendar, now, store, token, repo, branch, gh)
+    except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
+        out = {"status": f"gagal: {type(exc).__name__}: {str(exc)[:220]}"}
+    if warn:
+        out["status"] += " • ⚠️ " + "; ".join(warn)
+    out["status"] = redact(out["status"])
+    return out
+
+
+def _save(rows, calendar, now: datetime, store, token: str, repo: str, branch: str, gh: GitHub | None) -> dict:
     recs = records(rows, calendar)
     if not recs:
         return {"status": "kalender kosong"}
@@ -145,8 +190,12 @@ def save(rows: list | None, calendar: list | None, now: datetime, store, env: di
     last = state.get("t")
     if last and now - datetime.fromisoformat(last) < MIN_GAP and n_act <= state.get("n_actual", 0):
         return {"status": "ditunda (maks 1x per 15 menit bila tidak ada Act baru)", "path": state.get("path")}
-    gh = gh or GitHub(token, env.get("ARSIP_REPO", "serfusion/Trading"), env.get("ARSIP_BRANCH", "arsip-berita"))
-    gh.ensure_branch()
+    gh = gh or GitHub(token, repo, branch)
+    try:
+        gh.ensure_branch()
+    except urllib.error.HTTPError as e:
+        raise PermissionError(f"GITHUB_TOKEN ditolak GitHub (HTTP {e.code}): token salah/kedaluwarsa/dicabut, "
+                              "buat token baru") from None
     path = week_path(recs)
     old, sha = gh.get_json(path)
     merged = merge((old or {}).get("berita", []), recs, now)

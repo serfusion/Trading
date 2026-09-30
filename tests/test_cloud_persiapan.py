@@ -1,4 +1,5 @@
 """🎯 Persiapan berita (cloud/api/_persiapan.py) — pengganti contoh pertanyaan di tab Tanya."""
+import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -84,7 +85,31 @@ def test_detik_utamakan_exness(monkeypatch):
 
 def test_kesimpulan_otomatis_setelah_act_keluar():
     k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
-    assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"].startswith("🟢")
+    assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"] == f"{k['persen']}% NAIK 🟢"
+    assert k["catatan"].startswith("Act < perkiraan → emas 1 jam • teruji 20") and "rilis)" in k["catatan"]
     assert _persiapan.kesimpulan("CPI m/m", "", "0.3%") is None
     assert _persiapan.kesimpulan("Tidak dikenal", "1", "2") is None
     assert _persiapan.kesimpulan("Non-Farm Employment Change", "250K", "98K")["hasil"] == "atas"
+
+
+def test_skenario_angka_besar_dan_bukti_tahun():
+    sk = {x["hasil"]: x for x in _persiapan.skenario("CPI m/m")}
+    assert set(sk) == {"bawah", "atas"} and sk["bawah"]["label"] == "Data < perkiraan"
+    assert sk["bawah"]["teks"].endswith("% NAIK 🟢") and sk["bawah"]["bukti"].startswith("teruji 2012–")
+    assert "menang" not in json.dumps(sk, ensure_ascii=False)
+    # lemah / tidak konsisten: persen tetap tampil, abu-abu, diberi label
+    assert _persiapan.arah_emas({"naik1j": 51, "baru_naik1j": 45, "n": 70, "tahun": "2012–2025"})["teks"] == "51% naik ⚪"
+    tk = _persiapan.arah_emas({"naik1j": 34, "baru_naik1j": 55, "n": 82, "tahun": "2012–2025"})
+    assert not tk["kuat"] and tk["bukti"].startswith("tidak konsisten")
+    assert [x["hasil"] for x in _persiapan.skenario("Federal Funds Rate")] == ["sesuai"]
+
+
+def test_detik_ringkas_tanpa_kata_menang(monkeypatch):
+    def row(avg, wr=77.0, x=-1.87):
+        return {"tahun": "2015–2026", "pending1": {"n": 130, "wr": wr, "avg": avg, "x": x, "x_feed": "Dukascopy"}}
+    monkeypatch.setattr(_persiapan, "DETIK", {"XAU_EXNESS": {"NFP": row(3.18), "PPI": row(-0.13), "FOMC": row(-1.56)}})
+    d = _persiapan.detik_ringkas("NFP")
+    assert d["teks"] == "77% untung ⚠️" and "teruji 2015–2026 (130 rilis" in d["bukti"] and "belum terbukti" in d["bukti"]
+    assert _persiapan.detik_ringkas("PPI")["teks"] == "≈ impas ⚪"
+    assert _persiapan.detik_ringkas("FOMC")["teks"] == "RUGI 🔴" and _persiapan.detik_ringkas("GDP") is None
+    assert "menang" not in _persiapan.detik_singkat("NFP") and _persiapan.detik_singkat("NFP").startswith("Pending ±$1: 77%")

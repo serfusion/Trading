@@ -132,3 +132,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-30: pengguna minta data unduhan disimpan di repo → `data/` (±300 MB, `data/README.md`).
 - 2026-09-30: Trading Alchemist (Rizki Aditama) → `docs/TRADING_ALCHEMIST.md`: Momentum Candle rugi (48 varian);
   validasi H4 EMA50 untuk 💰 XAU lolos kriteria → dipasang di cloud (env XAU_H4_FILTER).
+- 2026-09-30: arsip GitHub gagal karena `ARSIP_REPO` di Vercel berisi token (token ikut tampil di aplikasi) →
+  `_arsip.py` mengabaikan ARSIP_REPO/ARSIP_BRANCH yang salah bentuk, memeriksa format GITHUB_TOKEN, dan menyensor
+  semua teks mirip token (`redact`). Pengguna diminta mencabut token lama. Aplikasi 3.15: persen berita besar
+  ("75% NAIK 🟢") + bukti "teruji 2012–2025 (n rilis)", kata "menang" diganti "untung di X% rilis".
+- 2026-09-30: pengguna ingin entry 1 detik sebelum rilis dan tutup 1–3 detik → `research/news_pra.py`,
+  `docs/NEWS_PRA.md`: tebakan kejutan harus benar ≥ 72–95% (tersedia ≤ 61–67%, hanya CPI); 16 petunjuk, 0 lolos.
+- 2026-09-30: lanjutan (tutup 1 dtk–3 menit, semua cara) → `research/news_pra2.py`, `docs/NEWS_PRA2.md`: 11.116
+  kombinasi, 0 lolos di kedua feed; straddle ±$1–2 hanya positif di tick Exness → saran uji maju lot minimum.
+- 2026-09-30: pengguna membuka host Kalshi/Polymarket → `research/kalshi.py` (unduh 2021–2026) & `kalshi_uji.py`,
+  `docs/KALSHI.md`: tebakan kejutan CPI 76–78%; sinyal emas CPI ≥ 60% n 18 (positif di kedua feed, t < 2 → kandidat);
+  aplikasi 3.16 baris 🎲 Kalshi di kartu 🎯 (`cloud/api/_kalshi.py`).

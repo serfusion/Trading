@@ -176,7 +176,8 @@ def base_rates(cal: pd.DataFrame) -> dict:
                            "naik1j": round(100 * float((x.x1j > 0).mean())),
                            "rata1j": round(float(x.x1j.mean()), 3),
                            "baru_naik1j": round(100 * float((x[x.time >= NEW].x1j > 0).mean()))
-                           if (x.time >= NEW).sum() >= 5 else None}
+                           if (x.time >= NEW).sum() >= 5 else None,
+                           "tahun": f"{x.time.min():%Y}–{x.time.max():%Y}"}
         cell["emas"] = rx
         x = g[g.x1j.notna()]                      # tanpa tahu hasil = tebakan sebelum rilis
         cell["emas_sebelum"] = {"n": int(len(x)), "naik1j": round(100 * float((x.x1j > 0).mean())),

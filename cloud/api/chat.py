@@ -3,7 +3,8 @@
 POST /api/chat   {"messages": [{"role": "user", "content": "NFP Act: 45K Cons: 98K Prev: 162K"}, ...]}
 GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren": {...}, "persiapan": {...},
                  "arsip": {...}}: berita USD high-impact minggu ini (Act otomatis dari FRED setelah rilis), status tren
-                 per indikator, kartu 🎯, dan status arsip berita ke GitHub (_arsip.py, tiap aplikasi dibuka)
+                 per indikator, kartu 🎯 (+ 🎲 peluang Kalshi, _kalshi.py), dan status arsip berita ke GitHub (_arsip.py,
+                 tiap aplikasi dibuka)
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -18,6 +19,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 import _arsip  # noqa: E402
 import _chat  # noqa: E402
 import _core  # noqa: E402
+import _kalshi  # noqa: E402
 import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
@@ -107,7 +109,7 @@ class handler(BaseHTTPRequestHandler):
         except ValueError as exc:
             self._send(400, {"ok": False, "error": str(exc)})
         except Exception as exc:  # noqa: BLE001
-            self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
+            self._send(500, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
 
     def do_GET(self):
         if not self._authorized():
@@ -118,13 +120,18 @@ class handler(BaseHTTPRequestHandler):
             try:
                 tren = _tren_status(now)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau status tren gagal
-                tren = {"error": f"{type(exc).__name__}: {exc}"}
+                tren = {"error": _arsip.redact(f"{type(exc).__name__}: {exc}")}
             store = _store()
             rows = _calendar(store, now)
             try:
                 persiapan = _persiapan.cards(rows, now)     # 🎯 kartu persiapan berita (pengganti contoh pertanyaan)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau kartu gagal
-                persiapan = {"error": f"{type(exc).__name__}: {exc}"}
+                persiapan = {"error": _arsip.redact(f"{type(exc).__name__}: {exc}")}
+            if isinstance(persiapan, dict) and persiapan.get("berita"):
+                try:                                          # 🎲 peluang Kalshi per berita (cache 15 menit)
+                    _kalshi.attach(persiapan, store, now)
+                except Exception:  # noqa: BLE001 - Kalshi opsional
+                    pass
             calendar = _chat.calendar_json(rows, now)
             for c in calendar:                                # Act sudah keluar -> kesimpulan arah otomatis
                 if c.get("actual"):
@@ -135,10 +142,10 @@ class handler(BaseHTTPRequestHandler):
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
-                arsip = {"status": f"gagal: {type(exc).__name__}: {str(exc)[:160]}"}
+                arsip = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {str(exc)[:160]}")}
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
                              "arsip": arsip})
         except Exception as exc:  # noqa: BLE001
-            self._send(500, {"ok": False, "error": f"{type(exc).__name__}: {exc}"})
+            self._send(500, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
