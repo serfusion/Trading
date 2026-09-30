@@ -1,5 +1,8 @@
 {
   "functions": {
-    "api/*.py": { "maxDuration": 60 }
-  }
+    "api/*.py": {
+      "maxDuration": 60
+    }
+  },
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- . || exit 1"
 }

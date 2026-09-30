@@ -284,3 +284,23 @@ Aplikasi 3.13: **⏱️ detik pertama setelah berita** (`docs/NEWS_DETIK.md`).
   `python -m research.news_detik XAU` dan `... BTC`.
 - Tab Tanya: pertanyaan berisi "detik", "straddle", "buy stop", "lonjakan", dan sejenisnya dijawab dari data yang sama.
 - Informasi saja; aplikasi dan cloud **tidak** membuka order.
+
+## Arsip berita otomatis ke GitHub (30 Sep 2026)
+
+Setiap aplikasi dibuka (paling sering tiap 15 menit per HP), aplikasi memanggil `GET /api/chat`. Cloud lalu menyimpan
+**semua berita pekan ini** (semua negara & dampak: judul, waktu, dampak, Cons, Prev, dan Act FRED untuk berita USD
+utama setelah rilis) ke `data/berita/<tahun>/ff_<tanggal awal pekan>.json` di branch **`arsip-berita`**. Riset
+membacanya lewat `research/news_data.load_calendar()` setelah
+`git fetch origin arsip-berita && git checkout FETCH_HEAD -- data/berita`.
+
+- **Token hanya di Vercel, tidak di APK** (APK bisa dibongkar). GitHub → Settings → Developer settings →
+  Fine-grained tokens → *Generate*: Repository access = hanya `serfusion/Trading`, Permissions → *Contents: Read and
+  write*. Salin ke Vercel → Environment Variables: `GITHUB_TOKEN` → Redeploy. Opsional: `ARSIP_REPO`
+  (bawaan `serfusion/Trading`), `ARSIP_BRANCH` (bawaan `arsip-berita`, dibuat otomatis).
+- **Tidak kena limit**: kalender ForexFactory di-cache di Supabase 10 menit untuk semua pembukaan aplikasi
+  (baris `kalender`); GitHub hanya ditulis bila isi berubah, paling sering tiap 15 menit kecuali ada Act baru
+  (baris `arsip`). Pemakaian ±beberapa commit per hari, jauh di bawah batas API GitHub (5.000 permintaan/jam).
+- Commit arsip tidak memicu deploy: `cloud/vercel.json` → `ignoreCommand` hanya membangun ulang bila folder `cloud/`
+  berubah. CI APK hanya berjalan bila `android/` berubah.
+- Cek: respons `GET /api/chat` berisi `"arsip": {"status": "tersimpan" | "tidak berubah" | "ditunda ..." | "mati
+  (GITHUB_TOKEN belum diisi di Vercel)"}`.

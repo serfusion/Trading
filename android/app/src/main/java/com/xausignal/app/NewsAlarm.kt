@@ -19,6 +19,7 @@ object NewsAlarm {
     private const val PREFS = "news_alarm"
     private const val LEAD = 60_000L                  // bunyi 1 menit sebelum rilis
     private const val REFRESH = 6 * 3_600_000L        // kalender diambil ulang dari poller tiap 6 jam
+    const val OPEN_REFRESH = 15 * 60_000L             // saat aplikasi dibuka: maks tiap 15 menit (juga memicu arsip)
 
     /** specific = teks riset khusus grup berita ini (bukan ringkasan SEMUA). */
     data class Item(val at: Long, val title: String, val whenText: String, val info: String,
@@ -52,10 +53,10 @@ object NewsAlarm {
         schedule(context)
     }
 
-    /** Dipanggil poller latar belakang: ambil ulang kalender bila data sudah > 6 jam (atau belum pernah). */
-    fun refreshIfStale(context: Context) {
-        if (!enabled(context)) return
-        if (System.currentTimeMillis() - prefs(context).getLong("fetched", 0L) < REFRESH) return
+    /** Ambil ulang kalender bila data lebih tua dari maxAge (poller: 6 jam; aplikasi dibuka: 15 menit). Tetap
+     *  jalan walau pengingat dimatikan: GET /api/chat juga memicu arsip berita di cloud. */
+    fun refreshIfStale(context: Context, maxAge: Long = REFRESH) {
+        if (System.currentTimeMillis() - prefs(context).getLong("fetched", 0L) < maxAge) return
         val (cal, _, prep) = ChatClient.news()
         if (cal.isNotEmpty()) update(context, cal, prep)
     }

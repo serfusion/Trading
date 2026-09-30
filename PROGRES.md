@@ -123,3 +123,12 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   `docs/PERSIAPAN_BERITA.md`) yang di-push ke `claude/gallant-cannon-93b6rp` 47 menit SETELAH PR #25 di-merge, jadi
   tidak ikut ke main walau deskripsi PR #25 menyebutnya. Digabung ke `claude/confident-keller-lj25i3` tanpa konflik;
   165 tes lulus; APK 3.12 sudah lulus build CI (run 57). Menunggu merge ke main.
+- 2026-09-30: permintaan pengguna "detik pertama setelah news" → `research/news_detik.py` (tick Dukascopy XAU & 1 detik
+  BTC, 516 varian: ikut kejutan / ikut-lawan lonjakan / pending Buy-Sell Stop; aturan pengguna "tutup menit 1–5 bila
+  profit, maks 15 menit"), laporan `docs/NEWS_DETIK.md`, aplikasi 3.13 (pengingat ⏱️ 1 menit sebelum rilis, baris ⏱️
+  di kartu 🎯, jawaban Tanya). Hasil: keunggulan hanya untuk yang tahu angka Act ≤ 1 detik; cara manual ±0 / rugi.
+- 2026-09-30: pengguna minta semua berita bintang 3 (PPI, ADP, GDP, PCE, dll.) → daftar rilis diperluas (4 tier);
+  unduhan tick bertahap (lihat CLAUDE.md "Detik pertama"). Status unduhan per tier dicatat di `docs/NEWS_DETIK.md`.
+- 2026-09-30: pengguna minta data unduhan disimpan di repo → `data/` (±300 MB, `data/README.md`).
+- 2026-09-30: Trading Alchemist (Rizki Aditama) → `docs/TRADING_ALCHEMIST.md`: Momentum Candle rugi (48 varian);
+  validasi H4 EMA50 untuk 💰 XAU lolos kriteria → dipasang di cloud (env XAU_H4_FILTER).

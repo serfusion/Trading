@@ -3,6 +3,7 @@
 python -m research.news_detik download [maks_file]     # unduh tick Dukascopy jam rilis (lambat, bisa dilanjutkan)
 python -m research.news_detik download_mundur          # pekerja ke-2: NFP/CPI/FOMC dari ujung daftar
 python -m research.news_detik download_acak            # pekerja ke-3: NFP/CPI/FOMC urutan acak lain
+python -m research.news_detik download_bagian 1,2 0 4 100   # pekerja 0 dari 4, tier 1-2, maks 100 file
 python -m research.news_detik download_btc             # kline 1 detik BTCUSDT Binance di sekitar rilis
 python -m research.news_detik                          # uji semua aturan pada tick yang sudah terunduh
 
@@ -58,18 +59,47 @@ from .dukascopy import POINT, URL, _decode_ticks
 from .eksternal import cache_path
 from .event_stats import releases
 from .eksternal_berita import FF_END, FOMC_2026, FRED_RELEASE, _fred_dates, _ny
-from .news_data import load_calendar
+from .news_data import _num, load_calendar
 from .run_scan import DATA
 
 SYM = "XAUUSD"
 NEW = pd.Timestamp("2021-10-01", tz="UTC")
-TIER = [["NFP", "CPI", "FOMC"], ["PPI", "RETAIL", "GDP", "PCE"], ["ISM"], ["CLAIMS"]]
+TIER = [["NFP", "CPI", "FOMC"], ["PPI", "RETAIL", "GDP", "PCE", "ADP", "JOLTS", "ECI"], ["ISM", "CLAIMS"],
+        ["KONSUMEN", "DURABLE", "RUMAH", "MANUFAKTUR", "PMI", "NERACA", "MINYAK", "TIC"]]
+# rilis data USD berdampak tinggi (bintang 3) lain di kalender -> grup (dicek berurutan). Pidato/testimoni tidak ikut:
+# tidak ada detik rilis angka yang pasti. UR & AHE rilis bersamaan dengan NFP (sudah tercakup jam NFP).
+EXTRA_GROUP = [("ADP Non-Farm", "ADP"), ("JOLTS", "JOLTS"), ("Employment Cost Index", "ECI"), ("Prelim GDP", "GDP"),
+               ("Final GDP", "GDP"), ("Consumer Confidence", "KONSUMEN"), ("UoM Consumer Sentiment", "KONSUMEN"),
+               ("Durable Goods", "DURABLE"), ("Building Permits", "RUMAH"), ("Home Sales", "RUMAH"),
+               ("Housing Starts", "RUMAH"), ("Philly Fed", "MANUFAKTUR"), ("Empire State", "MANUFAKTUR"),
+               ("Chicago PMI", "MANUFAKTUR"), ("Flash Manufacturing PMI", "PMI"), ("Flash Services PMI", "PMI"),
+               ("Trade Balance", "NERACA"), ("Crude Oil Inventories", "MINYAK"), ("TIC Long-Term", "TIC")]
+
+
+def _extra(cal: pd.DataFrame) -> pd.DataFrame:
+    """Rilis bintang 3 di luar grup utama: satu baris per waktu (event pertama yang punya grup), bias & besar."""
+    cal = cal.copy()
+    cal["grp2"] = cal.event.map(lambda e: next((g for key, g in EXTRA_GROUP if key in str(e)), None))
+    cal = cal[cal.grp2.notna()]
+    cal["surp"] = cal.actual.map(_num) - cal.forecast.map(_num)
+    med = cal.groupby("event").surp.transform(lambda v: v.abs().replace(0, np.nan).median())
+    cal["besar"] = cal.surp.abs() >= 2 * med
+    rows = []
+    for t, g in cal.groupby("time"):
+        e = g.iloc[0]
+        b = g.gold_bias.dropna()
+        rows.append({"time": t, "group": e.grp2, "event": e.event, "bias": float(np.sign(b.sum())) if len(b) else np.nan,
+                     "besar": bool(e.besar), "surp": e.surp, "actual": e.actual, "forecast": e.forecast})
+    return pd.DataFrame(rows)
 
 
 def events() -> pd.DataFrame:
-    """Satu baris per waktu rilis: time, group, bias (+1 = kejutan bagus untuk emas, NaN bila tak ada), besar."""
-    ev = releases(load_calendar(DATA))
+    """Satu baris per waktu rilis: time, group, bias (+1 = kejutan bagus untuk emas, NaN bila tak ada), besar.
+    Bila beberapa berita rilis di detik yang sama, grup utama (NFP, CPI, ...) yang dipakai."""
+    cal = load_calendar(DATA)
+    ev = releases(cal)
     ev = ev[(ev.group != "FOMC") | ev.time.dt.minute.isin([0, 15, 30])]     # menit ganjil FOMC = salah scraping
+    ev = pd.concat([ev, _extra(cal)], ignore_index=True)
     extra = []
     for g, rid in FRED_RELEASE.items():
         for d in _fred_dates(rid):
@@ -116,8 +146,19 @@ def download(limit: int | None = None, ok_pause: float = 3.0, mode: str = "maju"
     elif mode.startswith("acak"):
         random.Random(11 + len(mode)).shuffle(hs)            # "acak" / "acak2": urutan berbeda per pekerja
     todo = [h for h in hs if not _raw(h).exists()]
-    if limit:
-        todo = todo[:limit]
+    _fetch(todo[:limit] if limit else todo, ok_pause)
+
+
+def download_part(tiers: list[int], k: int, n: int, limit: int, ok_pause: float = 3.0) -> None:
+    """Pekerja ke-k dari n untuk tier tertentu (file ke-i dengan i % n == k), paling banyak `limit` file, supaya
+    satu proses selesai < 2 jam (batas proses latar di lingkungan riset). Jalankan ulang untuk bagian berikutnya."""
+    ev = events()
+    groups = [g for i in tiers for g in TIER[i]]
+    hs = [h for h in hours_needed(ev[ev.group.isin(groups)]) if not _raw(h).exists()]
+    _fetch(hs[k::n][:limit], ok_pause)
+
+
+def _fetch(todo: list[pd.Timestamp], ok_pause: float = 3.0) -> None:
     print(f"{len(todo)} file tick belum ada", flush=True)
     wait, t_start, done, err = 15.0, time.time(), 0, "-"
     for h in todo:
@@ -182,11 +223,16 @@ def _btc_file(t: pd.Timestamp):
 
 
 def download_btc() -> None:
+    """Semua tier; satu zip harian dipakai untuk semua rilis di hari (UTC) yang sama."""
     ev = events()
-    ev = ev[(ev.time >= BTC_START) & ev.group.isin(TIER[0] + TIER[1])]
+    ev = ev[(ev.time >= BTC_START) & ev.group.isin([g for t in TIER for g in t])]
     todo = [t for t in ev.time if not _btc_file(t).exists()]
     print(f"BTC: {len(todo)} jendela rilis belum ada", flush=True)
-    for n, t in enumerate(todo, 1):
+    by_day: dict = {}
+    for t in todo:
+        by_day.setdefault(t.normalize(), []).append(t)
+    for n, (day, ts) in enumerate(sorted(by_day.items()), 1):
+        t = ts[0]
         url = f"{BINANCE}/BTCUSDT-1s-{t:%Y-%m-%d}.zip"
         raw, missing = None, False
         for k in range(8):
@@ -203,7 +249,8 @@ def download_btc() -> None:
                 time.sleep(2 ** k)
         if raw is None:
             if missing:                                   # file memang tidak ada -> tandai kosong
-                pd.DataFrame({"close": []}).to_parquet(_btc_file(t))
+                for t in ts:
+                    pd.DataFrame({"close": []}).to_parquet(_btc_file(t))
             print(f"BTC {t:%Y-%m-%d}: {'tidak ada' if missing else 'gagal, dicoba lagi saat dijalankan ulang'}",
                   flush=True)
             continue
@@ -212,10 +259,11 @@ def download_btc() -> None:
         k.columns = ["open_time", "close"]
         unit = "us" if k.open_time.iloc[0] > 1e14 else "ms"          # mulai 2025 dalam mikrodetik
         k.index = pd.to_datetime(k.open_time, unit=unit, utc=True) + pd.Timedelta(seconds=1)
-        k = k.loc[(k.index >= t - pd.Timedelta(minutes=2)) & (k.index <= t + pd.Timedelta(minutes=16)), ["close"]]
-        k.to_parquet(_btc_file(t))
+        for t in ts:
+            w = k.loc[(k.index >= t - pd.Timedelta(minutes=2)) & (k.index <= t + pd.Timedelta(minutes=16)), ["close"]]
+            w.to_parquet(_btc_file(t))
         if n % 25 == 0:
-            print(f"BTC {n}/{len(todo)} ({t:%Y-%m-%d})", flush=True)
+            print(f"BTC hari {n}/{len(by_day)} ({t:%Y-%m-%d})", flush=True)
 
 
 def btc_around(t: pd.Timestamp) -> pd.DataFrame | None:
@@ -616,6 +664,8 @@ def main(aset: str = "XAU") -> None:
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] in ("download", "download_mundur", "download_acak", "download_acak2"):
         download(int(sys.argv[2]) if len(sys.argv) > 2 else None, mode=sys.argv[1].partition("_")[2] or "maju")
+    elif len(sys.argv) > 1 and sys.argv[1] == "download_bagian":            # tier(s) k n limit, mis. "1,2" 0 4 100
+        download_part([int(x) for x in sys.argv[2].split(",")], int(sys.argv[3]), int(sys.argv[4]), int(sys.argv[5]))
     elif len(sys.argv) > 1 and sys.argv[1] == "download_btc":
         download_btc()
     else:
