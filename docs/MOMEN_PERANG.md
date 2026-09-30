@@ -119,3 +119,44 @@ Data FRED menunjukkan guncangan minyak besar tahun ini. OVX (volatilitas minyak)
 3. **SL+**: XAU pakai bawaan (profit maksimal). BTC boleh 0,7R (profit sama, WR lebih tinggi). Butuh pengaturan
    per pair di aplikasi.
 4. **Tidak dipakai**: WTI, hari/jam, ADX, kembar, dan 9 ciri lain.
+
+## 6. Uji ulang dengan sumber minyak lain: Twelve Data (USO/BNO) + Dukascopy
+
+`python -m research.perang_uso --duka` (30 Sep 2026). WTI/Brent di Twelve Data hanya tersedia di paket berbayar,
+jadi dipakai ETF **USO** (≈ WTI) dan **BNO** (≈ Brent), harian, dianggap terbit 21:15 UTC. Dukascopy
+**LIGHTCMDUSD/BRENTCMDUSD**: candle harian BID (hari UTC, data s.d. 31 Agu 2026). Aturan sama dengan bagian 3
+(naik ≥ 10% dalam 10 hari bursa, jeda sinyal 💰 XAU selama aktif). Dukascopy WTI cocok dengan FRED: median selisih
+harga 0,4%, status "≥ 10%/10 hari" sama di 98,7% hari.
+
+**Uji nyata XAU 💰 (total R; tanpa filter: LAMA +93,9 / BARU +69,0):**
+
+| Sumber pemicu | LAMA | BARU (5 th) | Tahun membaik / memburuk |
+|---|---|---|---|
+| FRED WTI (sumber label ⚠️ di cloud) | +95,6 | **+78,6** | 7 / 2 |
+| Twelve Data USO | **+105,0** | +71,0 | 9 / 3 |
+| Twelve Data BNO | +101,1 | +71,7 | 6 / 3 |
+| Dukascopy WTI | +101,2 | +69,2 | 8 / 3 |
+| Dukascopy Brent | +93,2 | +68,8 | 4 / 6 (memburuk) |
+| Gabungan: WTI salah satu (FRED/USO/Duka) | +98,8 | +77,3 | 9 / 3 |
+| Gabungan: WTI ≥ 2 dari 3 | +104,4 | +68,7 | 7 / 4 |
+| Gabungan: USO atau Duka WTI (tanpa FRED) | +104,2 | +71,3 | 9 / 3 |
+| Gabungan: 5 sumber, salah satu | +99,4 | +75,1 | 8 / 4 |
+
+- **Positif (arah terkonfirmasi):** di ketiga sumber WTI, sinyal 💰 XAU saat minyak melonjak rata-rata ≤ 0R di LAMA
+  dan BARU, sedangkan sinyal normal di atas rata-rata. Kisi 12 kombinasi: USO konsisten 4, BNO 2, Duka WTI 1,
+  Duka Brent 0. Efeknya paling jelas pada **WTI**; Brent tidak mengonfirmasi.
+- **Tetapi besarnya di 5 tahun terakhir jauh lebih kecil** di sumber lain: tambahan BARU hanya +0,2R sampai +2,7R,
+  bukan +9,6R seperti FRED. Keunggulan besar FRED di BARU sebagian karena kebetulan waktu (FRED terbit 1–2 hari
+  lebih lambat, sehingga sinyal yang ditandai berbeda). Tumpang tindih sinyal yang ditandai FRED dan USO hanya ±50%.
+- **Gabungan tidak mengalahkan FRED saja di kedua periode.** Yang paling seimbang "WTI salah satu" (+4,9R LAMA,
+  +8,3R BARU dibanding tanpa filter), setara dengan FRED (+1,7 / +9,6), tetapi butuh tiga sumber data.
+- **Peluang trade minyak/emas setelah lonjakan (USO/BNO/XAU):** 0 kandidat dari 24 kombinasi (biaya 0,05%). Hasil
+  bagian 3 tetap: jangan trade minyak saat mode perang.
+- Banyak kombinasi yang diuji (24 kisi + 7 gabungan) dan sampel kecil (±50 sinyal) → perlakukan sebagai konfirmasi
+  arah, bukan angka pasti.
+
+**Kesimpulan:** label ⚠️ mode perang (FRED WTI) **tetap dipakai apa adanya**. Sumber lain mengonfirmasi arahnya,
+tetapi tidak ada gabungan yang lebih baik. Tidak ada perubahan cloud/aplikasi. Bila FRED suatu saat gagal diakses,
+USO (Twelve Data, 1 kredit/hari) atau Dukascopy WTI layak jadi cadangan (hasil setara di LAMA, sedikit di bawah
+FRED di BARU). Catatan data: file Dukascopy bulan berjalan belum tersedia sebagai H1 bulanan (September 2026
+kosong), jadi untuk pemakaian live perlu file per hari.

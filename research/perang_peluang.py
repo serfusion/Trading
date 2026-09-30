@@ -63,7 +63,9 @@ def baseline(df: pd.DataFrame, h: int) -> float:
     return float(r[df.open > 0].mean())
 
 
-def trade(df: pd.DataFrame, days: pd.DatetimeIndex, d: int, tp_r: float, hold: int = 10) -> pd.Series:
+def trade(df: pd.DataFrame, days: pd.DatetimeIndex, d: int, tp_r: float, hold: int = 10,
+          cost: float = 0.0) -> pd.Series:
+    """R per episode; cost = biaya per trade sebagai pecahan harga entry (0 = tanpa biaya)."""
     o, h, l, c = (df[k].to_numpy(float) for k in ("open", "high", "low", "close"))
     pc = np.r_[c[0], c[:-1]]
     atr = pd.Series(np.maximum(h - l, np.maximum(abs(h - pc), abs(l - pc)))).rolling(20).mean().to_numpy()
@@ -84,7 +86,7 @@ def trade(df: pd.DataFrame, days: pd.DatetimeIndex, d: int, tp_r: float, hold: i
                 break
         if r is None:
             r = (c[min(j + hold, len(c)) - 1] - e) * d / risk
-        out[day] = r
+        out[day] = r - cost * e / risk
     return pd.Series(out, dtype=float)
 
 

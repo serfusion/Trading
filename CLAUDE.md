@@ -43,7 +43,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   sintetis RNG (harga acak -> rugi sebesar spread).
 - Twelve Data key AKTIF (dicek ulang 30 Sep, paket gratis, 8 kredit/menit): WTI/USD, XBR/USD, BRENT butuh paket
   berbayar (404); proksi minyak gratis = ETF USO/BNO (harian, jam NYSE saja; `CL` = saham Colgate, BUKAN minyak).
-  XAU/USD tersedia. Dukascopy WTI sangat lambat (±1 file/menit).
+  XAU/USD tersedia. Uji ulang mode perang USO/BNO + Dukascopy (`research/perang_uso.py --duka`, MOMEN_PERANG bagian
+  6): arah terkonfirmasi di semua sumber WTI, gabungan TIDAK lebih baik dari FRED → label FRED tetap. Dukascopy
+  harian: `python -m research.dukascopy d1 2011 2026 LIGHTCMDUSD` (1 file/tahun;
+  H1 WTI sangat lambat, ±1 file/menit).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
