@@ -36,5 +36,10 @@
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
+
+        <!-- ⏱️ Pengingat berita 1 menit sebelum rilis (dijadwalkan ulang saat poller / tab Tanya memuat kalender) -->
+        <receiver
+            android:name=".NewsAlarmReceiver"
+            android:exported="false" />
     </application>
 </manifest>

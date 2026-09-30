@@ -15,6 +15,8 @@ OUT = DATA / "h1"
 
 
 def sparse(paths):
+    if not (REPO / ".git").is_dir():   # tanpa .git, perintah git akan naik ke repo Trading -> jangan dijalankan
+        raise SystemExit(f"{REPO} bukan klon git: jalankan dulu bash research/download_data.sh")
     subprocess.run(["git", "sparse-checkout", "set", "--no-cone", *paths], cwd=REPO, check=True)
     subprocess.run(["git", "checkout", "-q", "HEAD"], cwd=REPO, check=True)
 

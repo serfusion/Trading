@@ -31,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -60,21 +61,13 @@ import java.util.concurrent.TimeUnit
 /** Satu pesan chat. role = "user" / "assistant"; sources = baris "judul — url". */
 data class ChatMessage(val role: String, val text: String, val sources: List<String> = emptyList())
 
-private val EXAMPLES = listOf(
-    "NFP Act: 45K Cons: 98K Prev: 162K",
-    "CPI lebih tinggi dari perkiraan",
-    "Sebelum FOMC suku bunga naik, apa yang harus saya lakukan?",
-    "Berita apa saja minggu ini?",
-    "Sinyal terbuka sekarang",
-    "SL+ di 0,7R atau TP1?",
-)
-
 /**
  * Berita USD high-impact minggu ini dari cloud (GET /api/chat): tanggal & jam WIB otomatis, Cons & Prev dari
  * ForexFactory, Act otomatis dari data resmi FRED setelah rilis (bila tersedia).
  */
 data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
-                    val time: String = "", val released: Boolean = false, val actual: String = "")
+                    val time: String = "", val released: Boolean = false, val actual: String = "",
+                    val group: String = "")
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -91,24 +84,24 @@ object ChatClient {
         .callTimeout(40, TimeUnit.SECONDS)
         .build()
 
-    /** Kalender pekan ini + status tren per indikator (GET /api/chat). */
-    fun news(): Pair<List<CalEvent>, JSONObject?> {
+    /** Kalender pekan ini + status tren per indikator + 🎯 persiapan berita (GET /api/chat). */
+    fun news(): Triple<List<CalEvent>, JSONObject?, JSONObject?> {
         val base = SignalRepository.cloudUrl()
-        if (base.isBlank()) return emptyList<CalEvent>() to null
+        if (base.isBlank()) return Triple(emptyList(), null, null)
         val request = Request.Builder().url("$base/api/chat").get()
             .header("X-Chat-Key", SignalRepository.topic()).build()
         return try {
             client.newCall(request).execute().use { res ->
                 val obj = JSONObject(res.body?.string().orEmpty())
                 val arr = obj.optJSONArray("calendar") ?: JSONArray()
-                (0 until arr.length()).map { i ->
+                Triple((0 until arr.length()).map { i ->
                     val o = arr.getJSONObject(i)
                     CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
-                        o.optString("time"), o.optBoolean("released"), o.optString("actual"))
-                } to obj.optJSONObject("tren")
+                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"))
+                }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
             }
         } catch (e: Exception) {
-            emptyList<CalEvent>() to null
+            Triple(emptyList(), null, null)
         }
     }
 
@@ -304,6 +297,69 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
     }
 }
 
+/**
+ * 🎯 Persiapan berita (pengganti "Contoh pertanyaan"): per berita USD pekan ini, peluang hasil di bawah / sesuai /
+ * di atas konsensus, % emas naik 1 jam per hasil, dan tebakan arah emas SEBELUM rilis (research/news_prediksi.py,
+ * data 2010–2026). Informasi saja: tidak membuka order.
+ */
+@Composable
+private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean, nextAlarm: NewsAlarm.Item?,
+                          onAlarm: (Boolean) -> Unit) {
+    AppCard {
+        CardTitle("🎯 Persiapan berita (peluang dari data 2010–2026)")
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text("⏱️ Ingatkan 1 menit sebelum rilis", fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.bodySmall)
+                Text(if (!alarmOn) "Mati" else nextAlarm?.let { "Berikutnya: ${it.title} • ${it.whenText}" }
+                    ?: "Menunggu kalender pekan ini", style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+            Switch(checked = alarmOn, onCheckedChange = onAlarm)
+        }
+        val list = prep?.optJSONArray("berita")
+        if (prep == null || list == null) {
+            Text(if (loading) "Memuat…" else prep?.optString("error")?.ifBlank { null }
+                ?: "Belum tersedia (butuh cloud terbaru).", color = Muted)
+            return@AppCard
+        }
+        if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
+        for (i in 0 until list.length()) {
+            val b = list.getJSONObject(i)
+            val h = b.optJSONObject("hasil") ?: JSONObject()
+            val hb = b.optJSONObject("hasil_baru") ?: JSONObject()
+            val em = b.optJSONObject("emas_jika") ?: JSONObject()
+            fun pct(o: JSONObject, k: String) = if (o.has(k)) "${o.optInt(k)}%" else "-"
+            if (i > 0) LineDivider()
+            Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
+            Text("${b.optString("when")}${if (b.optBoolean("released")) " • sudah rilis" else ""} • Cons " +
+                "${b.optString("forecast").ifBlank { "-" }} • Prev ${b.optString("previous").ifBlank { "-" }}",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
+            Text("Hasil vs perkiraan: ⬇ di bawah ${pct(h, "bawah")} • = sesuai ${pct(h, "sesuai")} • ⬆ di atas " +
+                "${pct(h, "atas")}  (5 th: ${pct(hb, "bawah")} / ${pct(hb, "sesuai")} / ${pct(hb, "atas")})",
+                style = MaterialTheme.typography.bodySmall)
+            Text("Emas naik 1 jam bila hasil: ⬇ ${pct(em, "bawah")} • = ${pct(em, "sesuai")} • ⬆ ${pct(em, "atas")}",
+                style = MaterialTheme.typography.bodySmall)
+            Text("Tebakan SEBELUM rilis: emas naik 1 jam ${b.optInt("emas_sebelum")}% (5 th " +
+                "${b.optInt("emas_sebelum_baru")}%) → ${b.optString("arah")}",
+                fontWeight = FontWeight.Bold, color = Gold, style = MaterialTheme.typography.bodySmall)
+            b.optString("detik").ifBlank { null }?.let {
+                Text("⏱️ $it", style = MaterialTheme.typography.bodySmall)
+            }
+            val clues = b.optJSONArray("petunjuk") ?: JSONArray()
+            for (k in 0 until clues.length()) {
+                Text("• ${clues.optString(k)}", style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+        }
+        prep.optString("kesimpulan").ifBlank { null }?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+        // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
+        prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
+            Text("🗄️ Arsip berita GitHub: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+    }
+}
+
 @Composable
 fun NewsTab() {
     val messages by SignalRepository.chat.collectAsState()
@@ -313,18 +369,24 @@ fun NewsTab() {
     var prefill by remember { mutableStateOf<CalEvent?>(null) }
     var calendar by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
     var tren by remember { mutableStateOf<JSONObject?>(null) }
+    var persiapan by remember { mutableStateOf<JSONObject?>(null) }
     var calLoading by remember { mutableStateOf(true) }
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
     val app = LocalContext.current.applicationContext
+    var alarmOn by remember { mutableStateOf(NewsAlarm.enabled(app)) }
+    var nextAlarm by remember { mutableStateOf(NewsAlarm.next(app)) }
 
     fun reloadCalendar() {
         calLoading = true
         scope.launch {
-            val (cal, tr) = withContext(Dispatchers.IO) { ChatClient.news() }
+            val (cal, tr, prep) = withContext(Dispatchers.IO) { ChatClient.news() }
             calendar = cal
             tren = tr
+            persiapan = prep
             calLoading = false
+            if (cal.isNotEmpty()) NewsAlarm.update(app, cal, prep)     // jadwalkan pengingat ⏱️
+            nextAlarm = NewsAlarm.next(app)
         }
     }
     LaunchedEffect(Unit) { reloadCalendar() }
@@ -401,11 +463,10 @@ fun NewsTab() {
                             "diuji 36 cara di data 2012–2026 dan semuanya rugi. Analisa berita = peluang arah historis, " +
                             "bukan sinyal entry. Bukan jaminan profit; aplikasi tidak membuka order."
                     )
-                    if (messages.isEmpty()) {
-                        CardTitle("Contoh pertanyaan")
-                        EXAMPLES.forEach { ex ->
-                            AssistChip(onClick = { send(ex) }, label = { Text(ex) })
-                        }
+                    PersiapanCard(persiapan, calLoading, alarmOn, nextAlarm) { on ->
+                        alarmOn = on
+                        NewsAlarm.setEnabled(app, on)
+                        nextAlarm = NewsAlarm.next(app)
                     }
                 }
             }

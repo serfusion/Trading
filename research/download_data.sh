@@ -6,6 +6,9 @@ mkdir -p "$DIR" && cd "$DIR"
 fetch() {  # repo  path...
   local repo=$1; shift
   local name=${repo//\//_}
+  # data sudah ada di repo kita (di-commit tanpa .git, lihat data/README.md) -> jangan unduh / jangan jalankan git di
+  # dalamnya (git akan naik ke repo Trading dan mengubah sparse-checkout repo utama)
+  if [ -d "$name" ] && [ ! -d "$name/.git" ]; then echo "$name: sudah ada di repo, dilewati"; return; fi
   [ -d "$name" ] || git clone -q --filter=blob:none --no-checkout --depth 1 "https://github.com/$repo" "$name"
   (cd "$name" && git sparse-checkout set --no-cone "$@" && git checkout -q HEAD)
 }

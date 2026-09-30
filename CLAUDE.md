@@ -40,8 +40,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   modal otomatis, kurs 17.500). Pengguna MENOLAK risiko 80% modal (diberi batas 1%).
 - Cadangan USO untuk label ⚠️ (izin pengguna 30 Sep): `_perang.current()` pakai FRED; bila FRED gagal/basi
   (> 10 hari — FRED WTI terbit MINGGUAN, umur normal 5–9 hari) pakai USO Twelve Data (cache baris Supabase
-  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & ini baru aktif setelah PR serfusion/Trading#24 +
-  branch ini di-merge ke branch produksi Vercel.
+  `perang`, maks tiap 6 jam), env WAR_BACKUP. Label perang & cadangan USO sudah di main (PR serfusion/Trading#24 &
+  serfusion/Trading#25 di-merge 30 Sep 03:41 UTC). 🎯 Persiapan berita (aplikasi 3.12) di-push SETELAH #25 di-merge →
+  belum di main; digabung ke branch `claude/confident-keller-lj25i3` (aktif setelah branch itu di-merge ke main).
 - TIDAK disarankan (sudah diuji): WTI Turtle, setup minyak/pair saat mode perang (`research/perang_peluang.py`:
   emas tidak turun & minyak tidak lanjut naik secara konsisten), DXY/yield/USOIL sebagai filter, VOL_80 & indeks
   sintetis RNG (harga acak -> rugi sebesar spread).
@@ -51,6 +52,47 @@ alarm tepat waktu) hanya menyentuh `android/`].
   6): arah terkonfirmasi di semua sumber WTI, gabungan TIDAK lebih baik dari FRED → label FRED tetap. Dukascopy
   harian: `python -m research.dukascopy d1 2011 2026 LIGHTCMDUSD` (1 file/tahun;
   H1 WTI sangat lambat, ±1 file/menit).
+
+## Persiapan berita (30 Sep 2026 — `docs/PERSIAPAN_BERITA.md`)
+- `research/news_prediksi.py` → `cloud/api/persiapan.json` → kartu 🎯 Persiapan berita (`_persiapan.py`, aplikasi 3.12,
+  menggantikan chip "Contoh pertanyaan"; izin pengguna 30 Sep). 27 petunjuk sebelum rilis diuji: hanya kejutan CPI
+  bulan lalu & bensin yang menebak arah CPI (61–67%), tetapi emas naik 1 jam tetap 47–55% → tidak ada keunggulan.
+  Butuh kalender: `git clone` spoluan/forex-factory-scraper & ehsanrs2/forexfactory-scraper ke data/research.
+- Polymarket/Kalshi/Cleveland Fed/CME/BLS DIBLOKIR jaringan sesi (403) → belum diuji; minta pengguna membuka host
+  bila ingin diuji.
+
+## Data di repo (30 Sep 2026 — `data/README.md`)
+- Permintaan pengguna: data unduhan DISIMPAN di repo (privat) supaya tidak diunduh ulang. `.gitignore` membuka
+  `data/research/{eksternal,h1,<klon data>}`; kode pihak ketiga (.py/.xml/.txt) & `.git` klon tidak di-commit.
+  Batas GitHub 100 MB/file. Setelah mengunduh data baru: `git add data` lalu commit.
+- JANGAN jalankan perintah git di folder data tanpa `.git` (git naik ke repo utama). `download_data.sh` &
+  `fetch_multi.py` sudah dijaga; FutureSharks_financial-data sengaja tidak di-commit (klon dibuat ulang saat perlu).
+
+## Detik pertama setelah berita (30 Sep 2026 — `docs/NEWS_DETIK.md`)
+- `research/news_detik.py`: tick BID/ASK Dukascopy XAU (jam rilis, `data/research/eksternal/dukascopy/raw_XAUUSD_ticks`)
+  + kline 1 dtk BTC Binance; semua rilis data USD bintang 3 (TIER 0: NFP/CPI/FOMC, 1: PPI/Retail/GDP/PCE/ADP/JOLTS/ECI,
+  2: ISM/Claims, 3: lainnya). Dukascopy ±4 file/menit total (maks ±4 pekerja); satu proses latar dibatasi 2 jam →
+  `download_bagian <tier> <k> <n> <maks 100>`. Lanjutkan tier yang belum lengkap, commit data, jalankan ulang
+  `python -m research.news_detik XAU` / `BTC` (menulis `cloud/api/detik.json`).
+- Aplikasi 3.13: pengingat ⏱️ 1 menit sebelum rilis (`NewsAlarm.kt`), baris ⏱️ di kartu 🎯, jawaban Tanya
+  "detik pertama". Hanya info, tanpa order. Arsip tick Exness (`ticks.ex2archive.com`) diblokir jaringan (403).
+- Hasil (710 rilis XAU): manual (detik ke-5) −$0,65/0,01 lot, pending ±$2 −$0,40; hanya "ikut kejutan Act ≤ 1–2
+  detik" positif (+$0,92) tapi negatif dengan slippage/latensi realistis. BTC: ±0, untung "ikut arah" 61% dari 2022.
+  Otomatisasi ≤ 1 detik (feed berbayar) TIDAK dipasang — butuh izin.
+- Tick asli Exness (`ticks.ex2archive.com` DIBUKA pengguna 30 Sep; `research/exness.py`, XAUUSDc & BTCUSDm): pending
+  ±$1 NFP +$3,18/0,01 lot di feed Exness tapi −$1,87 di Dukascopy (rilis sama) → "belum terbukti, uji maju lot
+  minimum". BTC Exness: 0 varian lolos. Spread asli per jam: `research.exness.spread_table(sym)` (XAUUSDc $0,16–0,20
+  2021–25; BTCUSDm $12–64 → cek ulang biaya riset 💰 BTC yang memakai 0,03%).
+
+## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
+- Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
+  `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —
+  pengguna yang membuat; jangan pernah taruh token di APK. Riset: `git fetch origin arsip-berita && git checkout
+  FETCH_HEAD -- data/berita` lalu `load_calendar()` otomatis memakainya.
+
+## Trading Alchemist (30 Sep 2026 — `docs/TRADING_ALCHEMIST.md`)
+- Momentum Candle (M5/M15) rugi di semua 48 varian; sinyal 💰 lebih baik. Satu unsur lolos: validasi arah H4
+  EMA50 untuk 💰 XAU → DIPASANG (izin pengguna "terapkan yang baik"): `_core.h4_ema_check`, env XAU_H4_FILTER.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

@@ -7,6 +7,7 @@ Sumber:
 from __future__ import annotations
 
 import glob
+import json
 import re
 from pathlib import Path
 
@@ -60,6 +61,17 @@ def load_calendar(root: Path) -> pd.DataFrame:
     e = e[e["Currency"] == "USD"]
     new = pd.DataFrame({"time": pd.to_datetime(e["DateTime"], utc=True), "event": e["Event"],
                         "actual": e["Actual"], "forecast": e["Forecast"], "previous": e["Previous"]})
+    # arsip cloud (cloud/api/_arsip.py, branch arsip-berita -> data/berita/<tahun>/ff_*.json): lanjutan setelah
+    # data ehsanrs2 berakhir; ambil dengan: git fetch origin arsip-berita && git checkout FETCH_HEAD -- data/berita
+    arsip = []
+    for f in sorted(glob.glob(str(root.parent / "berita" / "*" / "ff_*.json"))):
+        for r in json.loads(Path(f).read_text(encoding="utf-8")).get("berita", []):
+            if r.get("country") == "USD" and r.get("impact") == "High":
+                arsip.append({"time": pd.Timestamp(r["time_utc"]), "event": r.get("title"), "actual": r.get("actual"),
+                              "forecast": r.get("forecast") or None, "previous": r.get("previous") or None})
+    if arsip:
+        a = pd.DataFrame(arsip)
+        new = pd.concat([new, a[a.time > new.time.max()]])
     cal = pd.concat([old, new]).dropna(subset=["time"]).sort_values("time")
     cal = cal.drop_duplicates(["time", "event"])
     cal["group"] = cal["event"].map(_group)

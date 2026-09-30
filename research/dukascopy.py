@@ -3,9 +3,11 @@
 python -m research.dukascopy h1 2012-01 2026-09          # file bulanan H1 (2 x ~180 unduhan)
 python -m research.dukascopy m1 2025-01-01 2026-09-25    # file harian M1 (2 x jumlah hari)
 python -m research.dukascopy d1 2012 2026 LIGHTCMDUSD    # candle harian BID (hari UTC), 1 file per tahun
+tick_hour("XAUUSD", t0)                                   # tick BID/ASK satu jam (dipakai research/news_detik.py)
 
 Format .bi5 = LZMA, baris 24 byte big-endian: detik sejak awal file, open, close, low, high (int, x 0,001 untuk
 XAUUSD), volume (float). Bulan di URL dimulai dari 00. Candle datar tanpa volume (akhir pekan/libur) dibuang.
+File tick {HH}h_ticks.bi5 = baris 20 byte: milidetik sejak awal jam, ask, bid (int, x POINT), volume ask & bid (float).
 Server membatasi laju -> jeda antar-unduhan + ulang dengan backoff.
 """
 from __future__ import annotations
@@ -113,6 +115,30 @@ def daily(sym: str, y0: int, y1: int) -> pd.DataFrame:
     df = df[~df.index.duplicated()]
     df.to_parquet(cache_path(f"dukascopy/{sym}_d1_BID.parquet"))
     return df
+
+
+def _decode_ticks(raw: bytes, start: pd.Timestamp, point: float) -> pd.DataFrame:
+    if not raw:
+        return pd.DataFrame(columns=["bid", "ask"], dtype=float)
+    a = np.frombuffer(lzma.decompress(raw), dtype=">u4").reshape(-1, 5)
+    idx = start + pd.to_timedelta(a[:, 0].astype(np.int64), unit="ms")
+    return pd.DataFrame({"bid": a[:, 2] * point, "ask": a[:, 1] * point}, index=idx)
+
+
+def tick_hour(sym: str, t0: pd.Timestamp, pause: float = 1.0) -> pd.DataFrame:
+    """Tick BID/ASK satu jam UTC mulai t0 (file mentah disimpan; file rusak diunduh ulang)."""
+    raw_dir = cache_path(f"dukascopy/raw_{sym}_ticks")
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    f = raw_dir / f"{t0:%Y%m%d_%H}.bi5"
+    for _ in range(3):
+        if not f.exists():
+            f.write_bytes(_get(f"{URL}/{sym}/{t0.year}/{t0.month - 1:02d}/{t0.day:02d}/{t0.hour:02d}h_ticks.bi5"))
+            time.sleep(pause)
+        try:
+            return _decode_ticks(f.read_bytes(), t0, POINT[sym])
+        except (lzma.LZMAError, ValueError):
+            f.unlink()
+    raise RuntimeError(f"file tick rusak: {f}")
 
 
 def load(sym: str, kind: str) -> tuple[pd.DataFrame, pd.DataFrame]:

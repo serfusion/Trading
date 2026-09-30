@@ -1,0 +1,1887 @@
+{
+ "dibuat": "research/news_prediksi.py",
+ "periode": "2010-01 .. 2026-01",
+ "kesimpulan": "Diuji 27 petunjuk yang sudah ada SEBELUM rilis (kejutan bulan lalu, ADP, klaim, PPI↔CPI, bensin) di data 2010–2026: 4 terbukti, semuanya untuk CPI (arah benar 61–67%). Tetapi peluang emas naik 1 jam sesudah rilis tetap 47–55% (≈ lempar koin), karena ±1/3 CPI keluar sesuai perkiraan. Emas baru bereaksi jelas SETELAH angka keluar (CPI di bawah perkiraan → emas naik 1 jam 75%, di atas → 42%), dan entry sesudah rilis sudah diuji 36 cara dan rugi (spread & slippage). Polymarket/Kalshi belum diuji.",
+ "dasar": {
+  "CPI m/m": {
+   "semua": {
+    "n": 184,
+    "bawah": 36,
+    "sesuai": 36,
+    "atas": 27
+   },
+   "lama": {
+    "n": 135,
+    "bawah": 39,
+    "sesuai": 38,
+    "atas": 24
+   },
+   "baru": {
+    "n": 49,
+    "bawah": 31,
+    "sesuai": 33,
+    "atas": 37
+   },
+   "emas": {
+    "bawah": {
+     "n": 52,
+     "naik15m": 79,
+     "naik1j": 75,
+     "rata1j": 0.279,
+     "baru_naik1j": 87
+    },
+    "atas": {
+     "n": 43,
+     "naik15m": 44,
+     "naik1j": 42,
+     "rata1j": -0.087,
+     "baru_naik1j": 28
+    },
+    "sesuai": {
+     "n": 59,
+     "naik15m": 63,
+     "naik1j": 44,
+     "rata1j": -0.057,
+     "baru_naik1j": 56
+    }
+   },
+   "emas_sebelum": {
+    "n": 154,
+    "naik1j": 54,
+    "baru_naik1j": 55
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 61.8,
+     "lama": 60.8,
+     "baru": 64.0,
+     "n": 76,
+     "terbukti": true,
+     "emas_naik1j": [
+      52,
+      54
+     ]
+    },
+    {
+     "nama": "PPI -> CPI",
+     "benar": 62.3,
+     "lama": 64.3,
+     "baru": 40.0,
+     "n": 61,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "bensin bulan acuan -> CPI m/m",
+     "benar": 60.7,
+     "lama": 64.3,
+     "baru": 51.5,
+     "n": 117,
+     "terbukti": true,
+     "emas_naik1j": [
+      53,
+      55
+     ]
+    }
+   ]
+  },
+  "Core CPI m/m": {
+   "semua": {
+    "n": 183,
+    "bawah": 36,
+    "sesuai": 38,
+    "atas": 26
+   },
+   "lama": {
+    "n": 134,
+    "bawah": 38,
+    "sesuai": 39,
+    "atas": 23
+   },
+   "baru": {
+    "n": 49,
+    "bawah": 31,
+    "sesuai": 35,
+    "atas": 35
+   },
+   "emas": {
+    "bawah": {
+     "n": 55,
+     "naik15m": 73,
+     "naik1j": 71,
+     "rata1j": 0.273,
+     "baru_naik1j": 80
+    },
+    "atas": {
+     "n": 42,
+     "naik15m": 45,
+     "naik1j": 40,
+     "rata1j": -0.131,
+     "baru_naik1j": 41
+    },
+    "sesuai": {
+     "n": 56,
+     "naik15m": 66,
+     "naik1j": 46,
+     "rata1j": -0.042,
+     "baru_naik1j": 47
+    }
+   },
+   "emas_sebelum": {
+    "n": 153,
+    "naik1j": 54,
+    "baru_naik1j": 55
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 67.1,
+     "lama": 66.7,
+     "baru": 68.4,
+     "n": 70,
+     "terbukti": true,
+     "emas_naik1j": [
+      47,
+      49
+     ]
+    },
+    {
+     "nama": "PPI -> Core CPI",
+     "benar": 51.9,
+     "lama": 51.0,
+     "baru": 66.7,
+     "n": 54,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "Core PPI -> Core CPI",
+     "benar": 51.2,
+     "lama": 51.2,
+     "baru": 50.0,
+     "n": 43,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "CPI y/y": {
+   "semua": {
+    "n": 191,
+    "bawah": 32,
+    "sesuai": 35,
+    "atas": 32
+   },
+   "lama": {
+    "n": 141,
+    "bawah": 30,
+    "sesuai": 39,
+    "atas": 30
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 38,
+    "sesuai": 24,
+    "atas": 38
+   },
+   "emas": {
+    "bawah": {
+     "n": 51,
+     "naik15m": 76,
+     "naik1j": 67,
+     "rata1j": 0.214,
+     "baru_naik1j": 79
+    },
+    "atas": {
+     "n": 52,
+     "naik15m": 46,
+     "naik1j": 44,
+     "rata1j": -0.09,
+     "baru_naik1j": 26
+    },
+    "sesuai": {
+     "n": 58,
+     "naik15m": 67,
+     "naik1j": 50,
+     "rata1j": 0.013,
+     "baru_naik1j": 67
+    }
+   },
+   "emas_sebelum": {
+    "n": 161,
+    "naik1j": 53,
+    "baru_naik1j": 56
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 63.1,
+     "lama": 59.6,
+     "baru": 70.4,
+     "n": 84,
+     "terbukti": true,
+     "emas_naik1j": [
+      47,
+      53
+     ]
+    }
+   ]
+  },
+  "PPI m/m": {
+   "semua": {
+    "n": 173,
+    "bawah": 44,
+    "sesuai": 15,
+    "atas": 41
+   },
+   "lama": {
+    "n": 124,
+    "bawah": 42,
+    "sesuai": 15,
+    "atas": 43
+   },
+   "baru": {
+    "n": 49,
+    "bawah": 49,
+    "sesuai": 14,
+    "atas": 37
+   },
+   "emas": {
+    "bawah": {
+     "n": 63,
+     "naik15m": 71,
+     "naik1j": 65,
+     "rata1j": 0.126,
+     "baru_naik1j": 75
+    },
+    "atas": {
+     "n": 57,
+     "naik15m": 44,
+     "naik1j": 37,
+     "rata1j": -0.075,
+     "baru_naik1j": 28
+    },
+    "sesuai": {
+     "n": 24,
+     "naik15m": 62,
+     "naik1j": 58,
+     "rata1j": -0.019,
+     "baru_naik1j": 71
+    }
+   },
+   "emas_sebelum": {
+    "n": 144,
+    "naik1j": 53,
+    "baru_naik1j": 57
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 43.9,
+     "lama": 50.0,
+     "baru": 29.7,
+     "n": 123,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "CPI -> PPI",
+     "benar": 72.4,
+     "lama": 71.4,
+     "baru": 72.7,
+     "n": 29,
+     "terbukti": false,
+     "emas_naik1j": [
+      71,
+      71
+     ]
+    }
+   ]
+  },
+  "Core PPI m/m": {
+   "semua": {
+    "n": 155,
+    "bawah": 35,
+    "sesuai": 28,
+    "atas": 37
+   },
+   "lama": {
+    "n": 120,
+    "bawah": 32,
+    "sesuai": 28,
+    "atas": 39
+   },
+   "baru": {
+    "n": 35,
+    "bawah": 46,
+    "sesuai": 26,
+    "atas": 29
+   },
+   "emas": {
+    "bawah": {
+     "n": 50,
+     "naik15m": 68,
+     "naik1j": 60,
+     "rata1j": 0.098,
+     "baru_naik1j": 75
+    },
+    "atas": {
+     "n": 44,
+     "naik15m": 39,
+     "naik1j": 34,
+     "rata1j": -0.083,
+     "baru_naik1j": 30
+    },
+    "sesuai": {
+     "n": 32,
+     "naik15m": 69,
+     "naik1j": 62,
+     "rata1j": 0.079,
+     "baru_naik1j": 56
+    }
+   },
+   "emas_sebelum": {
+    "n": 126,
+    "naik1j": 52,
+    "baru_naik1j": 57
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 40.0,
+     "lama": 38.7,
+     "baru": 44.4,
+     "n": 80,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "Core CPI -> Core PPI",
+     "benar": 83.3,
+     "lama": 80.0,
+     "baru": 84.6,
+     "n": 18,
+     "terbukti": false,
+     "emas_naik1j": [
+      58,
+      73
+     ]
+    }
+   ]
+  },
+  "Non-Farm Employment Change": {
+   "semua": {
+    "n": 195,
+    "bawah": 44,
+    "sesuai": 1,
+    "atas": 55
+   },
+   "lama": {
+    "n": 145,
+    "bawah": 48,
+    "sesuai": 1,
+    "atas": 50
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 30,
+    "sesuai": 0,
+    "atas": 70
+   },
+   "emas": {
+    "bawah": {
+     "n": 67,
+     "naik15m": 75,
+     "naik1j": 73,
+     "rata1j": 0.394,
+     "baru_naik1j": 80
+    },
+    "atas": {
+     "n": 92,
+     "naik15m": 30,
+     "naik1j": 46,
+     "rata1j": -0.216,
+     "baru_naik1j": 38
+    }
+   },
+   "emas_sebelum": {
+    "n": 161,
+    "naik1j": 57,
+    "baru_naik1j": 51
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 48.9,
+     "lama": 43.9,
+     "baru": 63.3,
+     "n": 188,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "ADP -> NFP (searah)",
+     "benar": 50.3,
+     "lama": 54.6,
+     "baru": 37.8,
+     "n": 175,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "klaim 4 pekan -> NFP (terbalik)",
+     "benar": 54.3,
+     "lama": 52.8,
+     "baru": 59.1,
+     "n": 94,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Unemployment Rate": {
+   "semua": {
+    "n": 195,
+    "bawah": 46,
+    "sesuai": 24,
+    "atas": 30
+   },
+   "lama": {
+    "n": 145,
+    "bawah": 48,
+    "sesuai": 26,
+    "atas": 26
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 42,
+    "sesuai": 18,
+    "atas": 40
+   },
+   "emas": {
+    "bawah": {
+     "n": 70,
+     "naik15m": 44,
+     "naik1j": 51,
+     "rata1j": 0.008,
+     "baru_naik1j": 45
+    },
+    "atas": {
+     "n": 52,
+     "naik15m": 58,
+     "naik1j": 60,
+     "rata1j": 0.047,
+     "baru_naik1j": 60
+    },
+    "sesuai": {
+     "n": 39,
+     "naik15m": 46,
+     "naik1j": 62,
+     "rata1j": 0.086,
+     "baru_naik1j": 44
+    }
+   },
+   "emas_sebelum": {
+    "n": 161,
+    "naik1j": 57,
+    "baru_naik1j": 51
+   },
+   "kebalikan": true,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 56.9,
+     "lama": 59.2,
+     "baru": 51.5,
+     "n": 109,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "ADP -> Unemployment Rate (terbalik)",
+     "benar": 56.4,
+     "lama": 51.0,
+     "baru": 70.3,
+     "n": 133,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Average Hourly Earnings m/m": {
+   "semua": {
+    "n": 195,
+    "bawah": 43,
+    "sesuai": 26,
+    "atas": 31
+   },
+   "lama": {
+    "n": 145,
+    "bawah": 46,
+    "sesuai": 26,
+    "atas": 29
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 34,
+    "sesuai": 28,
+    "atas": 38
+   },
+   "emas": {
+    "bawah": {
+     "n": 67,
+     "naik15m": 60,
+     "naik1j": 70,
+     "rata1j": 0.188,
+     "baru_naik1j": 71
+    },
+    "atas": {
+     "n": 53,
+     "naik15m": 32,
+     "naik1j": 32,
+     "rata1j": -0.27,
+     "baru_naik1j": 37
+    },
+    "sesuai": {
+     "n": 41,
+     "naik15m": 54,
+     "naik1j": 66,
+     "rata1j": 0.197,
+     "baru_naik1j": 46
+    }
+   },
+   "emas_sebelum": {
+    "n": 161,
+    "naik1j": 57,
+    "baru_naik1j": 51
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 38.5,
+     "lama": 33.8,
+     "baru": 54.2,
+     "n": 104,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "ADP Non-Farm Employment Change": {
+   "semua": {
+    "n": 187,
+    "bawah": 45,
+    "sesuai": 1,
+    "atas": 53
+   },
+   "lama": {
+    "n": 137,
+    "bawah": 42,
+    "sesuai": 1,
+    "atas": 57
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 54,
+    "sesuai": 2,
+    "atas": 44
+   },
+   "emas": {
+    "bawah": {
+     "n": 72,
+     "naik15m": 74,
+     "naik1j": 64,
+     "rata1j": 0.096,
+     "baru_naik1j": 74
+    },
+    "atas": {
+     "n": 82,
+     "naik15m": 26,
+     "naik1j": 34,
+     "rata1j": -0.118,
+     "baru_naik1j": 55
+    }
+   },
+   "emas_sebelum": {
+    "n": 156,
+    "naik1j": 48,
+    "baru_naik1j": 64
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 51.7,
+     "lama": 53.4,
+     "baru": 46.8,
+     "n": 178,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Unemployment Claims": {
+   "semua": {
+    "n": 675,
+    "bawah": 55,
+    "sesuai": 3,
+    "atas": 42
+   },
+   "lama": {
+    "n": 536,
+    "bawah": 53,
+    "sesuai": 2,
+    "atas": 45
+   },
+   "baru": {
+    "n": 139,
+    "bawah": 61,
+    "sesuai": 5,
+    "atas": 34
+   },
+   "emas": {
+    "bawah": {
+     "n": 311,
+     "naik15m": 38,
+     "naik1j": 41,
+     "rata1j": -0.068,
+     "baru_naik1j": 41
+    },
+    "atas": {
+     "n": 220,
+     "naik15m": 64,
+     "naik1j": 60,
+     "rata1j": 0.047,
+     "baru_naik1j": 60
+    },
+    "sesuai": {
+     "n": 18,
+     "naik15m": 33,
+     "naik1j": 39,
+     "rata1j": -0.061,
+     "baru_naik1j": 57
+    }
+   },
+   "emas_sebelum": {
+    "n": 549,
+    "naik1j": 48,
+    "baru_naik1j": 48
+   },
+   "kebalikan": true,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 52.7,
+     "lama": 51.3,
+     "baru": 58.7,
+     "n": 630,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Retail Sales m/m": {
+   "semua": {
+    "n": 190,
+    "bawah": 49,
+    "sesuai": 7,
+    "atas": 43
+   },
+   "lama": {
+    "n": 140,
+    "bawah": 49,
+    "sesuai": 10,
+    "atas": 41
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 50,
+    "sesuai": 0,
+    "atas": 50
+   },
+   "emas": {
+    "bawah": {
+     "n": 82,
+     "naik15m": 68,
+     "naik1j": 67,
+     "rata1j": 0.164,
+     "baru_naik1j": 68
+    },
+    "atas": {
+     "n": 68,
+     "naik15m": 34,
+     "naik1j": 32,
+     "rata1j": -0.111,
+     "baru_naik1j": 36
+    },
+    "sesuai": {
+     "n": 11,
+     "naik15m": 64,
+     "naik1j": 82,
+     "rata1j": 0.111,
+     "baru_naik1j": null
+    }
+   },
+   "emas_sebelum": {
+    "n": 161,
+    "naik1j": 53,
+    "baru_naik1j": 52
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 50.3,
+     "lama": 50.0,
+     "baru": 51.0,
+     "n": 159,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Core Retail Sales m/m": {
+   "semua": {
+    "n": 191,
+    "bawah": 46,
+    "sesuai": 12,
+    "atas": 43
+   },
+   "lama": {
+    "n": 141,
+    "bawah": 48,
+    "sesuai": 11,
+    "atas": 41
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 40,
+    "sesuai": 12,
+    "atas": 48
+   },
+   "emas": {
+    "bawah": {
+     "n": 75,
+     "naik15m": 67,
+     "naik1j": 64,
+     "rata1j": 0.163,
+     "baru_naik1j": 60
+    },
+    "atas": {
+     "n": 70,
+     "naik15m": 39,
+     "naik1j": 44,
+     "rata1j": -0.074,
+     "baru_naik1j": 42
+    },
+    "sesuai": {
+     "n": 17,
+     "naik15m": 53,
+     "naik1j": 47,
+     "rata1j": 0.002,
+     "baru_naik1j": 67
+    }
+   },
+   "emas_sebelum": {
+    "n": 162,
+    "naik1j": 54,
+    "baru_naik1j": 52
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 44.6,
+     "lama": 42.7,
+     "baru": 50.0,
+     "n": 148,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Core PCE Price Index m/m": {
+   "semua": {
+    "n": 172,
+    "bawah": 28,
+    "sesuai": 59,
+    "atas": 12
+   },
+   "lama": {
+    "n": 122,
+    "bawah": 32,
+    "sesuai": 57,
+    "atas": 11
+   },
+   "baru": {
+    "n": 50,
+    "bawah": 20,
+    "sesuai": 64,
+    "atas": 16
+   },
+   "emas": {
+    "bawah": {
+     "n": 39,
+     "naik15m": 62,
+     "naik1j": 67,
+     "rata1j": 0.158,
+     "baru_naik1j": 100
+    },
+    "atas": {
+     "n": 17,
+     "naik15m": 35,
+     "naik1j": 29,
+     "rata1j": -0.127,
+     "baru_naik1j": 25
+    },
+    "sesuai": {
+     "n": 85,
+     "naik15m": 53,
+     "naik1j": 47,
+     "rata1j": 0.004,
+     "baru_naik1j": 39
+    }
+   },
+   "emas_sebelum": {
+    "n": 141,
+    "naik1j": 50,
+    "baru_naik1j": 49
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 50.0,
+     "lama": 60.0,
+     "baru": 0.0,
+     "n": 30,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "Core CPI -> Core PCE",
+     "benar": 54.3,
+     "lama": 57.6,
+     "baru": 46.2,
+     "n": 46,
+     "terbukti": false,
+     "emas_naik1j": null
+    },
+    {
+     "nama": "Core PPI -> Core PCE",
+     "benar": 61.9,
+     "lama": 64.7,
+     "baru": 50.0,
+     "n": 42,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "ISM Manufacturing PMI": {
+   "semua": {
+    "n": 193,
+    "bawah": 49,
+    "sesuai": 2,
+    "atas": 50
+   },
+   "lama": {
+    "n": 141,
+    "bawah": 44,
+    "sesuai": 2,
+    "atas": 54
+   },
+   "baru": {
+    "n": 52,
+    "bawah": 62,
+    "sesuai": 0,
+    "atas": 38
+   },
+   "emas": {
+    "bawah": {
+     "n": 85,
+     "naik15m": 62,
+     "naik1j": 56,
+     "rata1j": 0.099,
+     "baru_naik1j": 59
+    },
+    "atas": {
+     "n": 74,
+     "naik15m": 30,
+     "naik1j": 38,
+     "rata1j": -0.073,
+     "baru_naik1j": 25
+    }
+   },
+   "emas_sebelum": {
+    "n": 160,
+    "naik1j": 48,
+    "baru_naik1j": 46
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 49.5,
+     "lama": 48.5,
+     "baru": 51.9,
+     "n": 184,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "ISM Services PMI": {
+   "semua": {
+    "n": 187,
+    "bawah": 44,
+    "sesuai": 2,
+    "atas": 55
+   },
+   "lama": {
+    "n": 138,
+    "bawah": 45,
+    "sesuai": 1,
+    "atas": 54
+   },
+   "baru": {
+    "n": 49,
+    "bawah": 41,
+    "sesuai": 2,
+    "atas": 57
+   },
+   "emas": {
+    "bawah": {
+     "n": 66,
+     "naik15m": 67,
+     "naik1j": 64,
+     "rata1j": 0.127,
+     "baru_naik1j": 65
+    },
+    "atas": {
+     "n": 87,
+     "naik15m": 34,
+     "naik1j": 43,
+     "rata1j": -0.096,
+     "baru_naik1j": 46
+    }
+   },
+   "emas_sebelum": {
+    "n": 155,
+    "naik1j": 51,
+    "baru_naik1j": 53
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 35.6,
+     "lama": 37.4,
+     "baru": 30.4,
+     "n": 177,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "JOLTS Job Openings": {
+   "semua": {
+    "n": 140,
+    "bawah": 45,
+    "sesuai": 3,
+    "atas": 52
+   },
+   "lama": {
+    "n": 91,
+    "bawah": 47,
+    "sesuai": 3,
+    "atas": 49
+   },
+   "baru": {
+    "n": 49,
+    "bawah": 41,
+    "sesuai": 2,
+    "atas": 57
+   },
+   "emas": {
+    "bawah": {
+     "n": 63,
+     "naik15m": 56,
+     "naik1j": 52,
+     "rata1j": 0.056,
+     "baru_naik1j": 60
+    },
+    "atas": {
+     "n": 73,
+     "naik15m": 33,
+     "naik1j": 41,
+     "rata1j": -0.043,
+     "baru_naik1j": 46
+    }
+   },
+   "emas_sebelum": {
+    "n": 140,
+    "naik1j": 46,
+    "baru_naik1j": 51
+   },
+   "kebalikan": false,
+   "petunjuk": [
+    {
+     "nama": "kejutan rilis sebelumnya",
+     "benar": 41.9,
+     "lama": 39.3,
+     "baru": 46.7,
+     "n": 129,
+     "terbukti": false,
+     "emas_naik1j": null
+    }
+   ]
+  },
+  "Advance GDP q/q": {
+   "semua": {
+    "n": 63,
+    "bawah": 56,
+    "sesuai": 3,
+    "atas": 41
+   },
+   "lama": {
+    "n": 47,
+    "bawah": 57,
+    "sesuai": 4,
+    "atas": 38
+   },
+   "baru": {
+    "n": 16,
+    "bawah": 50,
+    "sesuai": 0,
+    "atas": 50
+   },
+   "emas": {
+    "bawah": {
+     "n": 27,
+     "naik15m": 70,
+     "naik1j": 70,
+     "rata1j": 0.118,
+     "baru_naik1j": 75
+    },
+    "atas": {
+     "n": 24,
+     "naik15m": 25,
+     "naik1j": 54,
+     "rata1j": -0.035,
+     "baru_naik1j": 25
+    }
+   },
+   "emas_sebelum": {
+    "n": 53,
+    "naik1j": 62,
+    "baru_naik1j": 50
+   },
+   "kebalikan": false
+  },
+  "Federal Funds Rate": {
+   "semua": {
+    "n": 116,
+    "bawah": 1,
+    "sesuai": 98,
+    "atas": 1
+   },
+   "lama": {
+    "n": 82,
+    "bawah": 0,
+    "sesuai": 100,
+    "atas": 0
+   },
+   "baru": {
+    "n": 34,
+    "bawah": 3,
+    "sesuai": 94,
+    "atas": 3
+   },
+   "emas": {
+    "sesuai": {
+     "n": 95,
+     "naik15m": 60,
+     "naik1j": 56,
+     "rata1j": 0.182,
+     "baru_naik1j": 53
+    }
+   },
+   "emas_sebelum": {
+    "n": 97,
+    "naik1j": 57,
+    "baru_naik1j": 56
+   },
+   "kebalikan": false
+  }
+ },
+ "petunjuk": {
+  "P1 CPI m/m: kejutan rilis sebelumnya": {
+   "target": "CPI m/m",
+   "n": 76,
+   "lama": {
+    "n": 51,
+    "benar": 60.8
+   },
+   "baru": {
+    "n": 25,
+    "benar": 64.0
+   },
+   "benar": 61.8,
+   "p": 0.0252,
+   "terbukti": true,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 65,
+      "bawah": 43,
+      "sesuai": 35,
+      "atas": 22,
+      "emas_naik1j": 52,
+      "n_emas": 52
+     },
+     "lama": {
+      "n": 50,
+      "bawah": 42,
+      "sesuai": 36,
+      "atas": 22,
+      "emas_naik1j": 51,
+      "n_emas": 37
+     },
+     "baru": {
+      "n": 15,
+      "bawah": 47,
+      "sesuai": 33,
+      "atas": 20,
+      "emas_naik1j": 53,
+      "n_emas": 15
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 49,
+      "bawah": 31,
+      "sesuai": 31,
+      "atas": 39,
+      "emas_naik1j": 54,
+      "n_emas": 41
+     },
+     "lama": {
+      "n": 31,
+      "bawah": 29,
+      "sesuai": 39,
+      "atas": 32,
+      "emas_naik1j": 57,
+      "n_emas": 23
+     },
+     "baru": {
+      "n": 18,
+      "bawah": 33,
+      "sesuai": 17,
+      "atas": 50,
+      "emas_naik1j": 50,
+      "n_emas": 18
+     }
+    }
+   }
+  },
+  "P1 Core CPI m/m: kejutan rilis sebelumnya": {
+   "target": "Core CPI m/m",
+   "n": 70,
+   "lama": {
+    "n": 51,
+    "benar": 66.7
+   },
+   "baru": {
+    "n": 19,
+    "benar": 68.4
+   },
+   "benar": 67.1,
+   "p": 0.0028,
+   "terbukti": true,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 64,
+      "bawah": 44,
+      "sesuai": 38,
+      "atas": 19,
+      "emas_naik1j": 47,
+      "n_emas": 55
+     },
+     "lama": {
+      "n": 49,
+      "bawah": 45,
+      "sesuai": 37,
+      "atas": 18,
+      "emas_naik1j": 48,
+      "n_emas": 40
+     },
+     "baru": {
+      "n": 15,
+      "bawah": 40,
+      "sesuai": 40,
+      "atas": 20,
+      "emas_naik1j": 47,
+      "n_emas": 15
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 47,
+      "bawah": 23,
+      "sesuai": 36,
+      "atas": 40,
+      "emas_naik1j": 49,
+      "n_emas": 41
+     },
+     "lama": {
+      "n": 30,
+      "bawah": 27,
+      "sesuai": 33,
+      "atas": 40,
+      "emas_naik1j": 50,
+      "n_emas": 24
+     },
+     "baru": {
+      "n": 17,
+      "bawah": 18,
+      "sesuai": 41,
+      "atas": 41,
+      "emas_naik1j": 47,
+      "n_emas": 17
+     }
+    }
+   }
+  },
+  "P1 CPI y/y: kejutan rilis sebelumnya": {
+   "target": "CPI y/y",
+   "n": 84,
+   "lama": {
+    "n": 57,
+    "benar": 59.6
+   },
+   "baru": {
+    "n": 27,
+    "benar": 70.4
+   },
+   "benar": 63.1,
+   "p": 0.0107,
+   "terbukti": true,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 60,
+      "bawah": 47,
+      "sesuai": 30,
+      "atas": 23,
+      "emas_naik1j": 47,
+      "n_emas": 51
+     },
+     "lama": {
+      "n": 43,
+      "bawah": 42,
+      "sesuai": 33,
+      "atas": 26,
+      "emas_naik1j": 44,
+      "n_emas": 34
+     },
+     "baru": {
+      "n": 17,
+      "bawah": 59,
+      "sesuai": 24,
+      "atas": 18,
+      "emas_naik1j": 53,
+      "n_emas": 17
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 62,
+      "bawah": 27,
+      "sesuai": 32,
+      "atas": 40,
+      "emas_naik1j": 53,
+      "n_emas": 51
+     },
+     "lama": {
+      "n": 43,
+      "bawah": 28,
+      "sesuai": 35,
+      "atas": 37,
+      "emas_naik1j": 56,
+      "n_emas": 32
+     },
+     "baru": {
+      "n": 19,
+      "bawah": 26,
+      "sesuai": 26,
+      "atas": 47,
+      "emas_naik1j": 47,
+      "n_emas": 19
+     }
+    }
+   }
+  },
+  "P1 PPI m/m: kejutan rilis sebelumnya": {
+   "target": "PPI m/m",
+   "n": 123,
+   "lama": {
+    "n": 86,
+    "benar": 50.0
+   },
+   "baru": {
+    "n": 37,
+    "benar": 29.7
+   },
+   "benar": 43.9,
+   "p": 0.9256,
+   "terbukti": false
+  },
+  "P1 Core PPI m/m: kejutan rilis sebelumnya": {
+   "target": "Core PPI m/m",
+   "n": 80,
+   "lama": {
+    "n": 62,
+    "benar": 38.7
+   },
+   "baru": {
+    "n": 18,
+    "benar": 44.4
+   },
+   "benar": 40.0,
+   "p": 0.9717,
+   "terbukti": false
+  },
+  "P1 Non-Farm Employment Change: kejutan rilis sebelumnya": {
+   "target": "Non-Farm Employment Change",
+   "n": 188,
+   "lama": {
+    "n": 139,
+    "benar": 43.9
+   },
+   "baru": {
+    "n": 49,
+    "benar": 63.3
+   },
+   "benar": 48.9,
+   "p": 0.6423,
+   "terbukti": false
+  },
+  "P1 Unemployment Rate: kejutan rilis sebelumnya": {
+   "target": "Unemployment Rate",
+   "n": 109,
+   "lama": {
+    "n": 76,
+    "benar": 59.2
+   },
+   "baru": {
+    "n": 33,
+    "benar": 51.5
+   },
+   "benar": 56.9,
+   "p": 0.0898,
+   "terbukti": false
+  },
+  "P1 Average Hourly Earnings m/m: kejutan rilis sebelumnya": {
+   "target": "Average Hourly Earnings m/m",
+   "n": 104,
+   "lama": {
+    "n": 80,
+    "benar": 33.8
+   },
+   "baru": {
+    "n": 24,
+    "benar": 54.2
+   },
+   "benar": 38.5,
+   "p": 0.9931,
+   "terbukti": false
+  },
+  "P1 ADP Non-Farm Employment Change: kejutan rilis sebelumnya": {
+   "target": "ADP Non-Farm Employment Change",
+   "n": 178,
+   "lama": {
+    "n": 131,
+    "benar": 53.4
+   },
+   "baru": {
+    "n": 47,
+    "benar": 46.8
+   },
+   "benar": 51.7,
+   "p": 0.354,
+   "terbukti": false
+  },
+  "P1 Unemployment Claims: kejutan rilis sebelumnya": {
+   "target": "Unemployment Claims",
+   "n": 630,
+   "lama": {
+    "n": 509,
+    "benar": 51.3
+   },
+   "baru": {
+    "n": 121,
+    "benar": 58.7
+   },
+   "benar": 52.7,
+   "p": 0.0943,
+   "terbukti": false
+  },
+  "P1 Retail Sales m/m: kejutan rilis sebelumnya": {
+   "target": "Retail Sales m/m",
+   "n": 159,
+   "lama": {
+    "n": 110,
+    "benar": 50.0
+   },
+   "baru": {
+    "n": 49,
+    "benar": 51.0
+   },
+   "benar": 50.3,
+   "p": 0.5,
+   "terbukti": false
+  },
+  "P1 Core Retail Sales m/m: kejutan rilis sebelumnya": {
+   "target": "Core Retail Sales m/m",
+   "n": 148,
+   "lama": {
+    "n": 110,
+    "benar": 42.7
+   },
+   "baru": {
+    "n": 38,
+    "benar": 50.0
+   },
+   "benar": 44.6,
+   "p": 0.919,
+   "terbukti": false
+  },
+  "P1 Core PCE Price Index m/m: kejutan rilis sebelumnya": {
+   "target": "Core PCE Price Index m/m",
+   "n": 30,
+   "lama": {
+    "n": 25,
+    "benar": 60.0
+   },
+   "baru": {
+    "n": 5,
+    "benar": 0.0
+   },
+   "benar": 50.0,
+   "p": 0.5722,
+   "terbukti": false
+  },
+  "P1 ISM Manufacturing PMI: kejutan rilis sebelumnya": {
+   "target": "ISM Manufacturing PMI",
+   "n": 184,
+   "lama": {
+    "n": 132,
+    "benar": 48.5
+   },
+   "baru": {
+    "n": 52,
+    "benar": 51.9
+   },
+   "benar": 49.5,
+   "p": 0.5875,
+   "terbukti": false
+  },
+  "P1 ISM Services PMI: kejutan rilis sebelumnya": {
+   "target": "ISM Services PMI",
+   "n": 177,
+   "lama": {
+    "n": 131,
+    "benar": 37.4
+   },
+   "baru": {
+    "n": 46,
+    "benar": 30.4
+   },
+   "benar": 35.6,
+   "p": 1.0,
+   "terbukti": false
+  },
+  "P1 JOLTS Job Openings: kejutan rilis sebelumnya": {
+   "target": "JOLTS Job Openings",
+   "n": 129,
+   "lama": {
+    "n": 84,
+    "benar": 39.3
+   },
+   "baru": {
+    "n": 45,
+    "benar": 46.7
+   },
+   "benar": 41.9,
+   "p": 0.9738,
+   "terbukti": false
+  },
+  "P1 Advance GDP q/q: kejutan rilis sebelumnya": {
+   "target": "Advance GDP q/q",
+   "n": 0,
+   "lama": {
+    "n": 0,
+    "benar": null
+   },
+   "baru": {
+    "n": 0,
+    "benar": null
+   },
+   "benar": null,
+   "p": 1.0,
+   "terbukti": false
+  },
+  "P1 Federal Funds Rate: kejutan rilis sebelumnya": {
+   "target": "Federal Funds Rate",
+   "n": 0,
+   "lama": {
+    "n": 0,
+    "benar": null
+   },
+   "baru": {
+    "n": 0,
+    "benar": null
+   },
+   "benar": null,
+   "p": 1.0,
+   "terbukti": false
+  },
+  "P2 ADP -> NFP (searah)": {
+   "target": "Non-Farm Employment Change",
+   "n": 175,
+   "lama": {
+    "n": 130,
+    "benar": 54.6
+   },
+   "baru": {
+    "n": 45,
+    "benar": 37.8
+   },
+   "benar": 50.3,
+   "p": 0.5,
+   "terbukti": false
+  },
+  "P2 ADP -> Unemployment Rate (terbalik)": {
+   "target": "Unemployment Rate",
+   "n": 133,
+   "lama": {
+    "n": 96,
+    "benar": 51.0
+   },
+   "baru": {
+    "n": 37,
+    "benar": 70.3
+   },
+   "benar": 56.4,
+   "p": 0.0825,
+   "terbukti": false
+  },
+  "P3 klaim 4 pekan -> NFP (terbalik)": {
+   "target": "Non-Farm Employment Change",
+   "n": 94,
+   "lama": {
+    "n": 72,
+    "benar": 52.8
+   },
+   "baru": {
+    "n": 22,
+    "benar": 59.1
+   },
+   "benar": 54.3,
+   "p": 0.2352,
+   "terbukti": false
+  },
+  "P4 PPI -> CPI": {
+   "target": "CPI m/m",
+   "n": 61,
+   "lama": {
+    "n": 56,
+    "benar": 64.3
+   },
+   "baru": {
+    "n": 5,
+    "benar": 40.0
+   },
+   "benar": 62.3,
+   "p": 0.0361,
+   "terbukti": false
+  },
+  "P4 PPI -> Core CPI": {
+   "target": "Core CPI m/m",
+   "n": 54,
+   "lama": {
+    "n": 51,
+    "benar": 51.0
+   },
+   "baru": {
+    "n": 3,
+    "benar": 66.7
+   },
+   "benar": 51.9,
+   "p": 0.446,
+   "terbukti": false
+  },
+  "P4 Core PPI -> Core CPI": {
+   "target": "Core CPI m/m",
+   "n": 43,
+   "lama": {
+    "n": 41,
+    "benar": 51.2
+   },
+   "baru": {
+    "n": 2,
+    "benar": 50.0
+   },
+   "benar": 51.2,
+   "p": 0.5,
+   "terbukti": false
+  },
+  "P5 CPI -> PPI": {
+   "target": "PPI m/m",
+   "n": 29,
+   "lama": {
+    "n": 7,
+    "benar": 71.4
+   },
+   "baru": {
+    "n": 22,
+    "benar": 72.7
+   },
+   "benar": 72.4,
+   "p": 0.0121,
+   "terbukti": false,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 15,
+      "bawah": 80,
+      "sesuai": 7,
+      "atas": 13,
+      "emas_naik1j": 71,
+      "n_emas": 14
+     },
+     "lama": {
+      "n": 3,
+      "bawah": 33,
+      "sesuai": 33,
+      "atas": 33,
+      "emas_naik1j": 50,
+      "n_emas": 2
+     },
+     "baru": {
+      "n": 12,
+      "bawah": 92,
+      "sesuai": 0,
+      "atas": 8,
+      "emas_naik1j": 75,
+      "n_emas": 12
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 22,
+      "bawah": 27,
+      "sesuai": 32,
+      "atas": 41,
+      "emas_naik1j": 71,
+      "n_emas": 21
+     },
+     "lama": {
+      "n": 8,
+      "bawah": 12,
+      "sesuai": 38,
+      "atas": 50,
+      "emas_naik1j": 86,
+      "n_emas": 7
+     },
+     "baru": {
+      "n": 14,
+      "bawah": 36,
+      "sesuai": 29,
+      "atas": 36,
+      "emas_naik1j": 64,
+      "n_emas": 14
+     }
+    }
+   }
+  },
+  "P5 Core CPI -> Core PPI": {
+   "target": "Core PPI m/m",
+   "n": 18,
+   "lama": {
+    "n": 5,
+    "benar": 80.0
+   },
+   "baru": {
+    "n": 13,
+    "benar": 84.6
+   },
+   "benar": 83.3,
+   "p": 0.0038,
+   "terbukti": false,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 12,
+      "bawah": 75,
+      "sesuai": 8,
+      "atas": 17,
+      "emas_naik1j": 73,
+      "n_emas": 11
+     },
+     "lama": {
+      "n": 3,
+      "bawah": 33,
+      "sesuai": 33,
+      "atas": 33,
+      "emas_naik1j": 50,
+      "n_emas": 2
+     },
+     "baru": {
+      "n": 9,
+      "bawah": 89,
+      "sesuai": 0,
+      "atas": 11,
+      "emas_naik1j": 78,
+      "n_emas": 9
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 12,
+      "bawah": 8,
+      "sesuai": 42,
+      "atas": 50,
+      "emas_naik1j": 58,
+      "n_emas": 12
+     },
+     "lama": {
+      "n": 3,
+      "bawah": 0,
+      "sesuai": 0,
+      "atas": 100,
+      "emas_naik1j": 100,
+      "n_emas": 3
+     },
+     "baru": {
+      "n": 9,
+      "bawah": 11,
+      "sesuai": 56,
+      "atas": 33,
+      "emas_naik1j": 44,
+      "n_emas": 9
+     }
+    }
+   }
+  },
+  "P6 Core CPI -> Core PCE": {
+   "target": "Core PCE Price Index m/m",
+   "n": 46,
+   "lama": {
+    "n": 33,
+    "benar": 57.6
+   },
+   "baru": {
+    "n": 13,
+    "benar": 46.2
+   },
+   "benar": 54.3,
+   "p": 0.3294,
+   "terbukti": false
+  },
+  "P6 Core PPI -> Core PCE": {
+   "target": "Core PCE Price Index m/m",
+   "n": 42,
+   "lama": {
+    "n": 34,
+    "benar": 64.7
+   },
+   "baru": {
+    "n": 8,
+    "benar": 50.0
+   },
+   "benar": 61.9,
+   "p": 0.0821,
+   "terbukti": false
+  },
+  "P7 bensin bulan acuan -> CPI m/m": {
+   "target": "CPI m/m",
+   "n": 117,
+   "lama": {
+    "n": 84,
+    "benar": 64.3
+   },
+   "baru": {
+    "n": 33,
+    "benar": 51.5
+   },
+   "benar": 60.7,
+   "p": 0.013,
+   "terbukti": true,
+   "kondisi": {
+    "bawah": {
+     "semua": {
+      "n": 88,
+      "bawah": 47,
+      "sesuai": 31,
+      "atas": 23,
+      "emas_naik1j": 53,
+      "n_emas": 74
+     },
+     "lama": {
+      "n": 65,
+      "bawah": 51,
+      "sesuai": 32,
+      "atas": 17,
+      "emas_naik1j": 49,
+      "n_emas": 51
+     },
+     "baru": {
+      "n": 23,
+      "bawah": 35,
+      "sesuai": 26,
+      "atas": 39,
+      "emas_naik1j": 61,
+      "n_emas": 23
+     }
+    },
+    "atas": {
+     "semua": {
+      "n": 96,
+      "bawah": 27,
+      "sesuai": 42,
+      "atas": 31,
+      "emas_naik1j": 55,
+      "n_emas": 80
+     },
+     "lama": {
+      "n": 70,
+      "bawah": 27,
+      "sesuai": 43,
+      "atas": 30,
+      "emas_naik1j": 57,
+      "n_emas": 54
+     },
+     "baru": {
+      "n": 26,
+      "bawah": 27,
+      "sesuai": 38,
+      "atas": 35,
+      "emas_naik1j": 50,
+      "n_emas": 26
+     }
+    }
+   }
+  }
+ }
+}

@@ -157,3 +157,18 @@ def test_act_otomatis_dari_fred():
     # angka otomatis langsung bisa dianalisa dengan format Act/Cons/Prev
     r = ask("Non-Farm Employment Change Act: 45K Cons: 50K Prev: 162K")
     assert "Scanning" in r and "SEMUA rugi" in r
+
+
+def test_detik_pertama_dari_detik_json(monkeypatch):
+    import _persiapan
+    fake = {"XAU": {"NFP": {"teks": "XAU NFP: ikut lonjakan rata -0,30", "alarm": "a"},
+                    "SEMUA": {"teks": "XAU semua", "alarm": "b"}}}
+    monkeypatch.setattr(_persiapan, "DETIK", fake)
+    r = ask("Entry detik pertama setelah NFP keluar gimana?")
+    assert r.startswith("⏱️ ENTRY DI DETIK PERTAMA") and "XAU NFP: ikut lonjakan rata -0,30" in r
+    assert "tidak membuka" in r
+    assert "XAU semua" in ask("straddle buy stop sell stop saat berita")
+    # angka Act/Cons tetap dijawab dengan pemindai, bukan kartu detik
+    assert "DETIK PERTAMA" not in ask("NFP Act: 45K Cons: 98K Prev: 162K, entry detik pertama?")
+    monkeypatch.setattr(_persiapan, "DETIK", {})
+    assert "belum tersedia" in ask("detik pertama CPI")

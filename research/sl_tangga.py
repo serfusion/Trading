@@ -48,10 +48,12 @@ VARIANTS = {
 }
 
 
-def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl_atr=3.0, be_at=None):
-    """Satu set. Return list (t_entry, t_exit, R rata-rata per posisi, dir, R maksimum yang dicapai)."""
+def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl_atr=3.0, be_at=None, bos=None):
+    """Satu set. Return list (t_entry, t_exit, R rata-rata per posisi, dir, R maksimum yang dicapai).
+    bos=f: SL+ (entry+0,1R) setelah minor BOS — swing high/low fraktal f candle yang terbentuk SETELAH entry lalu
+    ditembus close candle H1 (Trading Alchemist: "BE hanya setelah minor BOS")."""
     trades, i, n = [], 0, b.n
-    o, h, l, sp, a = b.o, b.h, b.l, b.sp, b.atr
+    o, h, l, c, sp, a = b.o, b.h, b.l, b.c, b.sp, b.atr
     legs = len(tps)
     while i < n - 2:
         d = 1 if li[i] else (-1 if si[i] else 0)
@@ -64,6 +66,7 @@ def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl
         sl = entry - d * risk
         open_legs = [k for k in range(legs)]
         pnl, k, tp1_hit, best, max_r = 0.0, j, False, entry, 0.0
+        piv, bos_hit = None, False
         out = lo if d > 0 else so
         done = False
         while k < n - 1 and not done:
@@ -101,6 +104,18 @@ def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl
                 new.append(0.1)
             if be_at is not None and max_r >= be_at:          # SL+ lebih awal (mis. saat profit 0,7R)
                 new.append(0.1)
+            if bos is not None and k > j:
+                pv = k - bos                                   # fraktal di pv baru terkonfirmasi di close k
+                if pv > j and pv - bos >= j:
+                    win_h, win_l = h[pv - bos:k + 1], l[pv - bos:k + 1]
+                    if d > 0 and h[pv] >= win_h.max():
+                        piv = h[pv]
+                    elif d < 0 and l[pv] <= win_l.min():
+                        piv = l[pv]
+                if piv is not None and ((c[k] > piv) if d > 0 else (c[k] < piv)):
+                    bos_hit = True
+                if bos_hit:
+                    new.append(0.1)
             if ladder is not None and k > j:
                 s, g = ladder
                 lvl = math.floor(max_r / s + 1e-9) * s
