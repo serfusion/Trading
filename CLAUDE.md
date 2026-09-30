@@ -76,6 +76,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `python -m research.news_detik XAU` / `BTC` (menulis `cloud/api/detik.json`).
 - Aplikasi 3.13: pengingat ⏱️ 1 menit sebelum rilis (`NewsAlarm.kt`), baris ⏱️ di kartu 🎯, jawaban Tanya
   "detik pertama". Hanya info, tanpa order. Arsip tick Exness (`ticks.ex2archive.com`) diblokir jaringan (403).
+- Hasil (710 rilis XAU): manual (detik ke-5) −$0,65/0,01 lot, pending ±$2 −$0,40; hanya "ikut kejutan Act ≤ 1–2
+  detik" positif (+$0,92) tapi negatif dengan slippage/latensi realistis. BTC: ±0, untung "ikut arah" 61% dari 2022.
+  Otomatisasi ≤ 1 detik (feed berbayar) TIDAK dipasang — butuh izin & data tick Exness.
 
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch

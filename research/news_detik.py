@@ -537,8 +537,12 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
                    f"{money(best[4]['avg'], aset)}); {share:.0f}% untungnya dari tahun {yr.idxmax()}{rapuh}")
         short = f"{icon} {len(manual)} cara manual lolos uji, {share:.0f}% untungnya dari {yr.idxmax()}{rapuh}"
     elif lolos:
-        verdict = (f"⚠️ {len(lolos)} cara lolos uji, semuanya butuh reaksi < 5 detik (feed berita otomatis), "
-                   "tidak bisa manual")
+        st = tr[(tr.slip == 1.0) & ((tr.lat == 2.0) | tr.aturan.str.startswith("STRADDLE"))]
+        rugi = sum(1 for r in lolos if st[(st.aturan == r[0]) & (st.keluar == r[1]) & (st.sl == r[2])].pnl.mean() < 0)
+        butuh = ("angka Act dalam 1–2 detik (feed berita otomatis)" if all(r[0].startswith("KEJUTAN") for r in lolos)
+                 else "reaksi < 5 detik (otomatis)")
+        verdict = (f"⚠️ {len(lolos)} cara lolos uji, semuanya butuh {butuh}, tidak bisa manual"
+                   + (f"; {rugi} di antaranya rugi bila slippage $1" if rugi else ""))
         short = verdict
     else:
         verdict = short = "❌ tidak ada cara yang untung konsisten setelah spread & slippage"
