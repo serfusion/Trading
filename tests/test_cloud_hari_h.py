@@ -94,3 +94,15 @@ def test_polymarket_fed_berikutnya_dan_baris_kartu():
     line = _hari_h.fed_line(f, NOW)
     assert line["teks"] == "74% TETAP" and line["label"] == "🏦 Keputusan Fed 28 Okt"
     assert "naik 25 bps 26%" in line["bukti"] and "21.8 jt" in line["bukti"]
+
+
+def test_uji_sampel_kecil_dan_buruk_tetap_abu_abu(monkeypatch):
+    monkeypatch.setattr(_hari_h, "REAKSI", REAKSI)
+    key = f"{NFP['title']}|{T0}"
+    for v, kata in (({"n": 7, "benar": 86.0, "tahun": "2023–2025"}, "sampel kecil"),
+                    ({"n": 14, "benar": 50.0, "tahun": "2024–2025"}, "tidak lebih baik")):
+        monkeypatch.setattr(_hari_h, "VALID", {NFP["title"]: {"Kalshi": v}})
+        pers = {"berita": [dict(NFP)]}
+        _hari_h.attach(pers, [], None, NOW, {key: {"atas": 0.1, "bawah": 0.9}}, {})
+        h = pers["berita"][0]["hari_h"]
+        assert h["teks"].endswith("⚪") and not h["kuat"] and kata in h["bukti"]

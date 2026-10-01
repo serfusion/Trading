@@ -1,0 +1,30 @@
+# Validasi perkiraan hari H (research/hari_h_uji.py)
+
+Rilis: Kalshi 171, Polymarket 28, keduanya 28; sinyal = peluang >= 60% atau <= 40%
+
+  Kalshi     CPI m/m                      24 jam  semua n= 38 brier 0.224 (0,25 = lempar koin) | sinyal n=  7 benar  85.7% | 2023-2025
+  Kalshi     CPI m/m                      1 jam   semua n= 39 brier 0.225 (0,25 = lempar koin) | sinyal n= 11 benar  72.7% | 2022-2025
+  Kalshi     Core CPI m/m                 24 jam  semua n= 36 brier 0.232 (0,25 = lempar koin) | sinyal n= 10 benar  70.0% | 2022-2025
+  Kalshi     Core CPI m/m                 1 jam   semua n= 39 brier 0.242 (0,25 = lempar koin) | sinyal n= 10 benar  50.0% | 2022-2025
+  Kalshi     Core PCE Price Index m/m     24 jam  semua n=  9 brier 0.206 (0,25 = lempar koin) | sinyal n=  5 benar  80.0% | 2024-2025
+  Kalshi     Core PCE Price Index m/m     1 jam   semua n= 12 brier 0.306 (0,25 = lempar koin) | sinyal n=  6 benar  50.0% | 2022-2025
+  Kalshi     Non-Farm Employment Change   24 jam  semua n= 29 brier 0.260 (0,25 = lempar koin) | sinyal n=  6 benar  33.3% | 2023-2025
+  Kalshi     Non-Farm Employment Change   1 jam   semua n= 30 brier 0.271 (0,25 = lempar koin) | sinyal n=  8 benar  37.5% | 2023-2025
+  Kalshi     Unemployment Rate            24 jam  semua n= 42 brier 0.251 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+  Kalshi     Unemployment Rate            1 jam   semua n= 42 brier 0.252 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+  Polymarket Non-Farm Employment Change   24 jam  semua n= 17 brier 0.319 (0,25 = lempar koin) | sinyal n= 17 benar  52.9% | 2024-2025
+  Polymarket Non-Farm Employment Change   1 jam   semua n= 17 brier 0.319 (0,25 = lempar koin) | sinyal n= 17 benar  52.9% | 2024-2025
+  Polymarket Unemployment Rate            24 jam  semua n= 10 brier 0.253 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+  Polymarket Unemployment Rate            1 jam   semua n= 10 brier 0.252 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+  gabungan   Non-Farm Employment Change   24 jam  semua n= 18 brier 0.261 (0,25 = lempar koin) | sinyal n= 14 benar  50.0% | 2024-2025
+  gabungan   Non-Farm Employment Change   1 jam   semua n= 18 brier 0.270 (0,25 = lempar koin) | sinyal n= 12 benar  58.3% | 2024-2025
+  gabungan   Unemployment Rate            24 jam  semua n= 10 brier 0.254 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+  gabungan   Unemployment Rate            1 jam   semua n= 10 brier 0.253 (0,25 = lempar koin) | sinyal n=  0 benar   nan%
+
+== Entry t0-1 searah sinyal (tutup 60 dtk; CEPAT | REALISTIS), semua judul ==
+  Kalshi     24 jam  n= 25 untung di 52.0% rilis | rata -0.30/0,01 lot (t -0.2) | realistis -0.62
+  Kalshi     1 jam   n= 32 untung di 43.8% rilis | rata -1.81/0,01 lot (t -1.4) | realistis -2.18
+  Polymarket 24 jam  n= 17 untung di 47.1% rilis | rata -1.01/0,01 lot (t -0.4) | realistis -1.61
+  Polymarket 1 jam   n= 17 untung di 47.1% rilis | rata -1.01/0,01 lot (t -0.4) | realistis -1.61
+  gabungan   24 jam  n= 14 untung di 42.9% rilis | rata -2.25/0,01 lot (t -0.7) | realistis -2.81
+  gabungan   1 jam   n= 12 untung di 50.0% rilis | rata -1.45/0,01 lot (t -0.4) | realistis -1.95

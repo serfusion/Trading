@@ -48,9 +48,10 @@ def _pct(x: float) -> int:
 
 
 def _valid(title: str, sources: list[str]) -> dict:
+    """Hasil uji untuk kombinasi sumber yang benar-benar dipakai (gabungan bila keduanya ada)."""
     v = VALID.get(title) or {}
     for name in (["gabungan"] if len(sources) > 1 else []) + sources:
-        if (v.get(name) or {}).get("n", 0) >= 10:
+        if (v.get(name) or {}).get("n", 0) >= 1:
             return {**v[name], "sumber": name}
     return {}
 
@@ -94,8 +95,9 @@ def forecast(card: dict, kalshi: dict, poly: dict, state: dict, now: datetime) -
         teks, kuat = f"{pct}% {'naik' if up else 'turun'} ⚪", False
     pasar = " • ".join(f"{k}: di atas {_pct(x['atas'])}% / di bawah {_pct(x['bawah'])}%" for k, x in src.items())
     if v.get("benar") is not None:
-        uji = (f"teruji {v['tahun']} ({v['sumber']}): sinyal ≥ 60% benar {v['benar']:.0f}% ({v['n']} rilis)"
-               + ("" if teruji else " → belum terbukti"))
+        catatan = "" if teruji else (" → sampel kecil, belum terbukti" if v["benar"] >= 60
+                                     else " → tidak lebih baik dari lempar koin")
+        uji = f"teruji {v['tahun']} ({v['sumber']}): sinyal ≥ 60% benar {v['benar']:.0f}% ({v['n']} rilis){catatan}"
     else:
         uji = "belum ada uji untuk berita ini → anggap ≈ lempar koin"
     ago = _ago(state[key], now)

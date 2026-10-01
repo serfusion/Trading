@@ -109,15 +109,15 @@ def report() -> tuple[str, dict]:
         for h in HOR:
             s = g[g[h].notna() & ((g[h] - 0.5).abs() >= TH)].drop_duplicates("t0")
             rec = {sc: [] for sc in p2.SCEN}
-            for row in s.itertuples(index=False):
-                if row.t0 not in mv:
+            for row in s.to_dict("records"):
+                if row["t0"] not in mv:
                     continue
-                d = p2.directional(mv[row.t0][1])
+                d = p2.directional(mv[row["t0"]][1])
                 if d is None:
                     continue
-                side = 0 if getattr(row, h.replace(" ", "_")) > 0.5 else 1
+                side = 0 if row[h] > 0.5 else 1
                 for i, sc in enumerate(p2.SCEN):
-                    rec[sc].append({"time": row.t0, "pnl": d[i, side, e]})
+                    rec[sc].append({"time": row["t0"], "pnl": d[i, side, e]})
             c, r = (stats(pd.DataFrame(rec[k])) if rec[k] else {"n": 0} for k in ("CEPAT", "REALISTIS"))
             if c.get("n"):
                 L.append(f"  {sumber:10} {h:7} n={c['n']:3} untung di {c['wr']:4.1f}% rilis | rata {c['avg']:+.2f}/0,01 "
