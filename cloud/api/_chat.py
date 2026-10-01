@@ -682,6 +682,10 @@ FRED_MAP = {
     "Retail Sales m/m": ("RSAFS", "mom", "bulan"),
     "Core Retail Sales m/m": ("RSFSXMV", "mom", "bulan"),
     "Core PCE Price Index m/m": ("PCEPILFE", "mom", "bulan"),
+    "PCE Price Index m/m": ("PCEPI", "mom", "bulan"),
+    "Average Hourly Earnings m/m": ("CES0500000003", "mom", "bulan"),
+    "ADP Non-Farm Employment Change": ("ADPMNUSNERSA", "diffp", "bulan"),
+    "JOLTS Job Openings": ("JTSJOL", "levelm", "bulan2"),
     "Unemployment Claims": ("ICSA", "levelk", "minggu"),
     "Advance GDP q/q": ("A191RL1Q225SBEA", "level", "kuartal"),
     "Prelim GDP q/q": ("A191RL1Q225SBEA", "level", "kuartal"),
@@ -693,8 +697,9 @@ def ref_date(t: datetime, period: str):
     """Periode data yang dirilis pada waktu t: bulan lalu, pekan berakhir Sabtu lalu, atau kuartal lalu."""
     from datetime import date
     d = (t - timedelta(hours=5)).date()                      # tanggal New York (kira-kira)
-    if period == "bulan":
-        return date(d.year, d.month - 1, 1) if d.month > 1 else date(d.year - 1, 12, 1)
+    if period in ("bulan", "bulan2"):                        # bulan2 = dua bulan lalu (JOLTS)
+        m = d.year * 12 + d.month - 1 - (2 if period == "bulan2" else 1)
+        return date(m // 12, m % 12 + 1, 1)
     if period == "minggu":
         return d - timedelta(days=(d.weekday() - 5) % 7)
     q = (d.month - 1) // 3
@@ -741,6 +746,10 @@ def fred_actual(title: str, t: datetime, now: datetime, fetch=fred_fetch, cache:
     prev = vals[dates[k - 1]] if k > 0 else None
     if how == "diff" and prev is not None:
         return f"{v - prev:.0f}K"
+    if how == "diffp" and prev is not None:                  # seri dalam orang (ADP) -> ribu
+        return f"{(v - prev) / 1000:.0f}K"
+    if how == "levelm":                                       # ribu -> juta (JOLTS "7.23M")
+        return f"{v / 1000:.2f}M"
     if how == "mom" and prev:
         return f"{(v / prev - 1) * 100:.1f}%"
     if how == "yoy":

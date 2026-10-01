@@ -16,6 +16,9 @@ from pathlib import Path
 
 STATS = json.loads((Path(__file__).resolve().parent / "persiapan.json").read_text(encoding="utf-8"))
 # ⏱️ detik pertama setelah rilis (research/news_detik.py, data tick): per aset -> per grup berita -> teks & angka
+# reaksi emas 1 MENIT per judul & hasil (research/reaksi_menit.py, tick) -> dipakai lebih dulu daripada 1 jam (STATS)
+_REAKSI_PATH = Path(__file__).resolve().parent / "reaksi.json"
+REAKSI = (json.loads(_REAKSI_PATH.read_text(encoding="utf-8")).get("judul") or {}) if _REAKSI_PATH.exists() else {}
 _DETIK_PATH = Path(__file__).resolve().parent / "detik.json"
 DETIK = json.loads(_DETIK_PATH.read_text(encoding="utf-8")) if _DETIK_PATH.exists() else {}
 # judul -> grup (dicek berurutan). ADP rilis terpisah (Rabu) -> bukan NFP; UR & AHE rilis bersamaan dengan NFP.
@@ -144,9 +147,23 @@ def arah_emas(e: dict | None) -> dict | None:
     return {"arah": kata, "persen": pct, "n": n, "kuat": kuat, "teks": teks, "bukti": bukti}
 
 
+def _emas(title: str) -> tuple[dict, str]:
+    """({hasil: {naik1j, baru_naik1j, n, tahun}}, jangka) — reaksi 1 menit (tick) bila ada, selain itu 1 jam."""
+    r = REAKSI.get(title)
+    if r:
+        out = {}
+        for k, src in (("bawah", "bawah"), ("atas", "atas"), ("sesuai", "sama")):
+            if src in r:
+                b = r[src].get("baru_naik60")
+                out[k] = {"naik1j": round(r[src]["naik60"] * 100), "n": r[src]["n"], "tahun": r.get("tahun"),
+                          "baru_naik1j": None if b is None else round(b * 100)}
+        return out, "1 menit"
+    return (STATS["dasar"].get(title) or {}).get("emas") or {}, "1 jam"
+
+
 def skenario(title: str) -> list[dict]:
-    """Sebelum rilis: arah emas 1 jam bila data di bawah / di atas perkiraan (atau = perkiraan bila hanya itu)."""
-    emas = (STATS["dasar"].get(title) or {}).get("emas") or {}
+    """Sebelum rilis: arah emas 1 menit (cadangan 1 jam) bila data di bawah / di atas perkiraan (atau = perkiraan)."""
+    emas, _ = _emas(title)
     keys = [k for k in ("bawah", "atas") if k in emas] or [k for k in ("sesuai",) if k in emas]
     out = []
     for k in keys:
@@ -157,17 +174,17 @@ def skenario(title: str) -> list[dict]:
 
 
 def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
-    """Setelah Act keluar: arah emas 1 jam dari data historis untuk hasil itu (Act dibanding Cons)."""
-    st = STATS["dasar"].get(title)
+    """Setelah Act keluar: arah emas 1 menit (cadangan 1 jam) dari data historis untuk hasil itu (Act vs Cons)."""
+    emas, jangka = _emas(title)
     a, f = _num(actual), _num(forecast)
-    if not st or a is None or f is None:
+    if not emas or a is None or f is None:
         return None
     hasil = "atas" if a > f else "bawah" if a < f else "sesuai"
-    r = arah_emas((st.get("emas") or {}).get(hasil))
+    r = arah_emas(emas.get(hasil))
     if not r:
         return None
     return {"hasil": hasil, **r,
-            "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas 1 jam • {r['bukti']}"}
+            "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas {jangka} • {r['bukti']}"}
 
 
 def alarm_texts() -> dict:

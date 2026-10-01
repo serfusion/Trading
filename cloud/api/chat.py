@@ -3,8 +3,8 @@
 POST /api/chat   {"messages": [{"role": "user", "content": "NFP Act: 45K Cons: 98K Prev: 162K"}, ...]}
 GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren": {...}, "persiapan": {...},
                  "arsip": {...}}: berita USD high-impact minggu ini (Act otomatis dari FRED setelah rilis), status tren
-                 per indikator, kartu 🎯 (+ 🎲 peluang Kalshi, _kalshi.py), dan status arsip berita ke GitHub (_arsip.py,
-                 tiap aplikasi dibuka)
+                 per indikator, kartu 🎯 (perkiraan hari H dari Kalshi+Polymarket / hasil setelah Act, _hari_h.py; Fed
+                 berikutnya), Act berlapis (_aktual.py), dan status arsip berita ke GitHub (_arsip.py)
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -16,10 +16,13 @@ from http.server import BaseHTTPRequestHandler
 
 sys.path.insert(0, os.path.dirname(__file__))
 
+import _aktual  # noqa: E402
 import _arsip  # noqa: E402
 import _chat  # noqa: E402
 import _core  # noqa: E402
+import _hari_h  # noqa: E402
 import _kalshi  # noqa: E402
+import _polymarket  # noqa: E402
 import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
@@ -132,13 +135,25 @@ class handler(BaseHTTPRequestHandler):
                     _kalshi.attach(persiapan, store, now)
                 except Exception:  # noqa: BLE001 - Kalshi opsional
                     pass
-            calendar = _chat.calendar_json(rows, now)
+            calendar = _chat.calendar_json(rows, now, fetch=lambda s: [])
+            try:                                              # Act berlapis: BLS -> FRED API -> FRED CSV (_aktual.py)
+                aktual = _aktual.fill(calendar, store, now, os.environ)
+            except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim
+                aktual = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {exc}"[:200])}
             for c in calendar:                                # Act sudah keluar -> kesimpulan arah otomatis
                 if c.get("actual"):
                     try:
                         c["arah"] = _persiapan.kesimpulan(c["title"], c["actual"], c.get("forecast", ""))
                     except Exception:  # noqa: BLE001
                         pass
+            if isinstance(persiapan, dict) and persiapan.get("berita") is not None:
+                try:                                          # 🎯 perkiraan hari H / ✅ hasil + 🏦 Fed (Polymarket)
+                    berita = persiapan["berita"]
+                    ks = _kalshi.cached_snapshot(berita, store, now)[0] if berita else {}
+                    ps = _polymarket.cached_snapshot(berita, store, now)[0] if berita else {}
+                    _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
                 arsip = _arsip.save(rows, calendar, now, store, os.environ)
             except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
@@ -146,6 +161,6 @@ class handler(BaseHTTPRequestHandler):
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
-                             "arsip": arsip})
+                             "arsip": arsip, "aktual": aktual})
         except Exception as exc:  # noqa: BLE001
             self._send(500, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})

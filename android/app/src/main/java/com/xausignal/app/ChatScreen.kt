@@ -68,7 +68,7 @@ data class ChatMessage(val role: String, val text: String, val sources: List<Str
 data class CalEvent(val title: String, val whenText: String, val forecast: String, val previous: String,
                     val time: String = "", val released: Boolean = false, val actual: String = "",
                     val group: String = "", val arahTeks: String = "", val arahCatatan: String = "",
-                    val arahKuat: Boolean = false)
+                    val arahKuat: Boolean = false, val actualInfo: String = "")
 
 /** Pilihan cepat bila kalender minggu ini belum termuat. */
 private val DEFAULT_EVENTS = listOf(
@@ -101,7 +101,7 @@ object ChatClient {
                         o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"),
                         o.optJSONObject("arah")?.optString("teks").orEmpty(),
                         o.optJSONObject("arah")?.optString("catatan").orEmpty(),
-                        o.optJSONObject("arah")?.optBoolean("kuat") ?: false)
+                        o.optJSONObject("arah")?.optBoolean("kuat") ?: false, o.optString("actual_info"))
                 }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
             }
         } catch (e: Exception) {
@@ -199,6 +199,13 @@ fun entryAdvice(events: List<SignalEvent>, prices: Map<String, SignalEvent>, m: 
         }
     }
     return out.joinToString("\n")
+}
+
+/** Menit sampai waktu ISO (negatif bila sudah lewat; sangat besar bila tidak terbaca). */
+private fun minutesUntil(iso: String): Long = try {
+    java.time.Duration.between(java.time.Instant.now(), java.time.OffsetDateTime.parse(iso).toInstant()).toMinutes()
+} catch (ex: Exception) {
+    Long.MAX_VALUE
 }
 
 /** "dalam 2 j 15 m" / "sudah rilis" dari waktu ISO kalender. */
@@ -321,6 +328,8 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
                 Text("Act ${e.actual}", fontWeight = FontWeight.ExtraBold, color = Gold)
             } else if (e.released) {
                 Text("Act: menunggu data resmi…", style = MaterialTheme.typography.labelSmall, color = Muted)
+                if (e.actualInfo.isNotBlank()) Text(e.actualInfo, style = MaterialTheme.typography.labelSmall,
+                    color = Muted)
             }
             Text("Cons ${e.forecast.ifBlank { "-" }} • Prev ${e.previous.ifBlank { "-" }}",
                 style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -353,14 +362,25 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 ?: "Belum tersedia (butuh cloud terbaru).", color = Muted)
             return@AppCard
         }
+        // 🏦 keputusan Fed berikutnya (Polymarket), tampil walau bukan pekan ini
+        prep.optJSONObject("fed")?.let { f ->
+            BigRow(f.optString("label"), f.optString("bukti"), f.optString("teks"), f.optBoolean("kuat"))
+            LineDivider()
+        }
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
-        if (list.length() > 0) Text("Arah emas 1 jam setelah angka keluar (dari data historis)",
+        if (list.length() > 0) Text("🎯 = perkiraan sebelum rilis (berubah tiap 15 menit) • ✅ = hasil setelah angka " +
+            "keluar • baris lain = arah emas 1 menit bila data di bawah/di atas perkiraan",
             style = MaterialTheme.typography.labelSmall, color = Muted)
         for (i in 0 until list.length()) {
             val b = list.getJSONObject(i)
             if (i > 0) LineDivider()
             Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
             Text(b.optString("when"), style = MaterialTheme.typography.labelSmall, color = Muted)
+            val hasil = b.optJSONObject("hasil_rilis")
+            val hariH = b.optJSONObject("hari_h")
+            (hasil ?: hariH)?.let { h ->
+                BigRow(h.optString("label"), h.optString("bukti"), h.optString("teks"), h.optBoolean("kuat"))
+            }
             val sk = b.optJSONArray("skenario")
             if (sk != null) {
                 for (k in 0 until sk.length()) {
@@ -374,7 +394,7 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                     style = MaterialTheme.typography.bodySmall)
             }
             // 🎲 peluang pasar prediksi Kalshi (cloud/api/_kalshi.py): diperbarui tiap 15 menit sebelum rilis
-            b.optJSONObject("kalshi")?.let { k ->
+            if (hariH == null && hasil == null) b.optJSONObject("kalshi")?.let { k ->   // cloud lama
                 BigRow(k.optString("label"), k.optString("bukti"), k.optString("teks"), k.optBoolean("kuat"))
             }
             val arah = b.optString("arah")
@@ -395,10 +415,9 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 }
             }
         }
-        prep.optString("kalshi_waktu").ifBlank { null }?.let {
-            Text("🎲 Peluang Kalshi diambil $it (pasar prediksi, bukan kepastian)",
-                style = MaterialTheme.typography.labelSmall, color = Muted)
-        }
+        Text("Peluang dari pasar prediksi Kalshi & Polymarket (uang sungguhan, bukan kepastian). Hasil pasti baru " +
+            "diketahui saat angka keluar; aplikasi memuat ulang otomatis.",
+            style = MaterialTheme.typography.labelSmall, color = Muted)
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
         prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
             Text("🗄️ Arsip berita GitHub: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -437,10 +456,14 @@ fun NewsTab() {
     }
     LaunchedEffect(Unit) {
         reloadCalendar()
-        // selama tab terbuka: muat ulang tiap 2 menit bila ada berita yang sudah rilis tapi Act belum keluar
+        // selama tab terbuka: perkiraan hari H diperbarui tiap 10 menit; tiap 2 menit bila rilis <= 30 menit lagi
+        // atau berita sudah rilis tapi Act belum keluar
+        var tick = 0
         while (true) {
             kotlinx.coroutines.delay(120_000L)
-            if (calendar.any { it.released && it.actual.isBlank() }) reloadCalendar()
+            tick++
+            val soon = calendar.any { !it.released && minutesUntil(it.time) in 0..30 }
+            if (soon || tick % 5 == 0 || calendar.any { it.released && it.actual.isBlank() }) reloadCalendar()
         }
     }
 
