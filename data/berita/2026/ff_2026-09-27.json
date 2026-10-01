@@ -947,6 +947,24 @@
    "first_seen": "2026-10-01T05:50:43.074857+00:00"
   },
   {
+   "title": "Spanish 10-y Bond Auction",
+   "country": "EUR",
+   "time_utc": "2026-10-01T08:42:00+00:00",
+   "date": "2026-10-01T04:42:00-04:00",
+   "impact": "Low",
+   "previous": "3.96|1.7",
+   "first_seen": "2026-10-01T10:31:45.774148+00:00"
+  },
+  {
+   "title": "French 10-y Bond Auction",
+   "country": "EUR",
+   "time_utc": "2026-10-01T08:57:00+00:00",
+   "date": "2026-10-01T04:57:00-04:00",
+   "impact": "Low",
+   "previous": "4.23|2.3",
+   "first_seen": "2026-10-01T10:31:45.774148+00:00"
+  },
+  {
    "title": "Unemployment Rate",
    "country": "EUR",
    "time_utc": "2026-10-01T09:00:00+00:00",
@@ -1309,5 +1327,5 @@
    "first_seen": "2026-10-01T05:50:43.074857+00:00"
   }
  ],
- "diperbarui": "2026-10-01T05:50:43.074857+00:00"
+ "diperbarui": "2026-10-01T10:31:45.774148+00:00"
 }
