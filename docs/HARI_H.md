@@ -64,3 +64,21 @@ Jawaban jujur: **sebelum angka keluar tidak ada yang tahu pasti.** Yang bisa dik
 Kartu 🎯: 🏦 Fed berikutnya; per berita baris besar 🎯 Perkiraan hari H (sebelum rilis) atau ✅ Hasil (setelah Act);
 skenario 1 menit; ⏱️ detik pertama. Kalender: alasan bila Act belum terisi. Tab News memuat ulang otomatis tiap
 10 menit (2 menit bila rilis ≤ 30 menit lagi atau Act belum keluar). Informasi saja, tanpa order.
+
+## 5. Tanda hijau: Mars di MC oposisi Pluto di IC (2 Okt 2026)
+
+Pengguna melingkari Mars 2°34' Leo (dekat MC 29°32' Cancer) dan Pluto R 3°06' Aquarius (dekat IC) → "NFP akan turun
+seturun-turunnya". Posisi terverifikasi (oposisi ±0,5°, Mars ±3° dari MC). Uji `research/astrologi_nfp.py`
+(`docs/eksternal/hasil_astrologi_nfp.txt`), NFP 2010–2025 (193 rilis dengan kejutan) + 2.051 rilis bintang 3:
+
+| Pola | NFP di bawah konsensus | Emas naik 1 menit | Besar gerak emas |
+|---|---|---|---|
+| Tanpa pola (dasar) | 44–45% | 49% | 1,00x |
+| Mars–Pluto oposisi (7 NFP) | 43% | 44% (79 rilis) | 0,99x |
+| Mars–Pluto aspek keras (23 NFP) | 35% | 48% | 1,00x |
+| Mars dekat MC/IC (27 NFP) | 41% | 48% | 0,98x |
+| Pola persis chart ini: aspek keras + Mars di MC/IC (3 NFP: 2014-06, 2015-12, 2022-07) | **0%** (ketiganya di ATAS konsensus) | 47% | 1,07x |
+
+Tidak ada yang bermakna (p terkecil 0,11; batas Bonferroni 0,003). Tiga kejadian pola yang persis sama malah
+berakhir NFP di atas konsensus — sampel terlalu kecil untuk berarti apa pun. → Tidak dipakai. Catatan: NFP di BAWAH
+konsensus ("turun") justru membuat emas NAIK (81%), bukan turun.

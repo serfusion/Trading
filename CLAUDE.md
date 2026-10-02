@@ -117,7 +117,7 @@ alarm tepat waktu) hanya menyentuh `android/`].
   → `cloud/api/hari_h.json`: CPI 86% (n 7), core 70% (10), NFP 33–58%, entry ikut sinyal rugi → semua abu-abu.
 - Polymarket (`research/polymarket.py`, `cloud/api/_polymarket.py`): NFP 41% benar (Kalshi 64%), Fed 9/9 sesuai
   konsensus (90–99%) → info saja; baris 🏦 Fed berikutnya. Riwayat harga CLOB lama: pakai startTs/endTs ≤ 7 hari.
-- Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang.
+- Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang. Mars–Pluto/MC (`research/astrologi_nfp.py`): 0 bermakna; 3 NFP dengan pola sama semuanya di ATAS konsensus.
 - Skenario/kesimpulan kartu & kalender kini reaksi 1 MENIT (cadangan 1 jam). Aplikasi 3.17.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
