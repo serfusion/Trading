@@ -173,6 +173,14 @@ def skenario(title: str) -> list[dict]:
     return out
 
 
+def skenario_hentakan(title: str, forecast: str) -> list[dict]:
+    """Skenario dengan label jelas: "⚡ Hentakan 1 menit bila Act < 89K" (permintaan pengguna 2 Okt 2026)."""
+    _, jangka = _emas(title)
+    f = forecast or "perkiraan"
+    op = {"bawah": "<", "atas": ">", "sesuai": "="}
+    return [dict(x, label=f"⚡ Hentakan {jangka} bila Act {op[x['hasil']]} {f}") for x in skenario(title)]
+
+
 def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
     """Setelah Act keluar: arah emas 1 menit (cadangan 1 jam) dari data historis untuk hasil itu (Act vs Cons)."""
     emas, jangka = _emas(title)
@@ -214,7 +222,7 @@ def card(title: str, t: datetime, forecast: str, previous: str, now: datetime) -
         "detik": detik(group_of(title)),
         "detik_singkat": detik_singkat(group_of(title)),
         # tampilan singkat aplikasi 3.15: angka besar + bukti (teruji tahun..tahun, jumlah rilis)
-        "skenario": skenario(title),
+        "skenario": skenario_hentakan(title, forecast),
         "detik_ringkas": detik_ringkas(group_of(title)),
     }
 
