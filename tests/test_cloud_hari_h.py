@@ -38,14 +38,15 @@ def test_perkiraan_gabungan_sumber_dan_riwayat(monkeypatch):
     _hari_h.attach(pers, [], store, NOW, k, p)
     h = pers["berita"][0]["hari_h"]
     # rata-rata: atas 0,30 bawah 0,70 -> 0,7x0,8 + 0,3x0,2 = 0,62
-    assert h["teks"] == "62% NAIK 🟢" and h["kuat"] and abs(h["p_naik"] - 0.62) < 1e-9
-    assert "Kalshi: di atas 25% / di bawah 75%" in h["bukti"] and "benar 70%" in h["bukti"]
+    assert h["teks"] == "EMAS 62% NAIK 🟢" and h["kuat"] and abs(h["p_naik"] - 0.62) < 1e-9
+    assert "Kalshi: angka di atas perkiraan 25% / di bawah 75%" in h["bukti"] and "benar 70%" in h["bukti"]
+    assert h["bukti"].startswith("KUNCI: Act < 89K → emas NAIK 80% • Act > 89K → emas TURUN 80%")
     # 6 jam kemudian pasar berubah -> angka & riwayat berubah
     later = NOW + timedelta(hours=6)
     pers2 = {"berita": [dict(NFP)]}
     _hari_h.attach(pers2, [], store, later, {key: {"atas": 0.5, "bawah": 0.5}}, {})
     h2 = pers2["berita"][0]["hari_h"]
-    assert h2["teks"] == "50% naik ⚪" and not h2["kuat"] and "6 jam lalu 62%" in h2["bukti"]
+    assert h2["teks"] == "EMAS ≈ 50:50 ⚪" and not h2["kuat"] and "6 jam lalu 62%" in h2["bukti"]
     assert h2["riwayat"] == [0.62, 0.5]
 
 
