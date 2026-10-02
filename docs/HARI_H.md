@@ -144,3 +144,19 @@ dibedakan).
 | Klaim > perkiraan | 70% naik | 86% naik | $0,9 → $2,0 |
 
   Retail Sales & sisi lain: hampir sama. Dipakai di ✅ hasil (sel 1 mnt & label "kejutan BESAR (109K ≥ 84K)").
+
+## 9. NFP 2 Okt 2026: benar di menit awal, berbalik setelah 30 menit
+
+Hasil: NFP **29K** (perkiraan 89K), pengangguran **4,2%** (4,1%), upah per jam **+0,1%** (0,3%); Agustus direvisi
+162K → 133K — semua lemah untuk USD → emas diharapkan naik. Harga (Twelve Data 1 menit, UTC):
+
+| | Sebelum (12:29) | +1 mnt | +2 mnt | Puncak | 15:18–15:20 |
+|---|---|---|---|---|---|
+| XAU | 4.182 | 4.200 (+$18) | 4.222 (+$40) | 4.226 (13:03) | 4.140 (−$42 dari awal) |
+| BTC | 86.616 | 86.951 | 86.860 | 87.220 (12:31) | 85.366–85.500 |
+
+Arah 1 detik–1 menit di kartu 🎯 BENAR. Angka itu hanya untuk menit awal. Riwayat (`research/nfp_berbalik.py`,
+XAU M15 2012–2025, NFP di bawah perkiraan): searah 15 mnt 75% → 3 jam 70% → 6 jam 69%; **5 tahun terakhir 93% → 67%
+→ 53%**, dan 5 dari 14 kenaikan 15 menit berbalik ke bawah harga awal dalam 3 jam (36%). Hari ini termasuk kelompok
+itu. Penyebab pasti tidak bisa dipastikan dari data kita (setelahnya: bursa AS buka 13:30 UTC, pidato Fed Logan 14:00
+UTC). Riset `docs/NEWS_MENIT.md`: ikut arah kejutan setelah menit pertama tidak untung.
