@@ -608,7 +608,10 @@
    "impact": "High",
    "forecast": "0.3%",
    "previous": "0.2%",
-   "first_seen": "2026-10-01T05:50:43.074857+00:00"
+   "first_seen": "2026-10-01T05:50:43.074857+00:00",
+   "actual": "0.2%",
+   "actual_src": "FRED",
+   "actual_saved": "2026-10-02T00:19:13.274550+00:00"
   },
   {
    "title": "Final GDP Price Index q/q",
@@ -628,7 +631,10 @@
    "impact": "High",
    "forecast": "1.5%",
    "previous": "1.5%",
-   "first_seen": "2026-10-01T05:50:43.074857+00:00"
+   "first_seen": "2026-10-01T05:50:43.074857+00:00",
+   "actual": "2.2%",
+   "actual_src": "FRED",
+   "actual_saved": "2026-10-02T00:19:13.274550+00:00"
   },
   {
    "title": "Goods Trade Balance",
@@ -1193,6 +1199,14 @@
    "first_seen": "2026-10-01T05:50:43.074857+00:00"
   },
   {
+   "title": "FOMC Member Logan Speaks",
+   "country": "USD",
+   "time_utc": "2026-10-01T23:20:00+00:00",
+   "date": "2026-10-01T19:20:00-04:00",
+   "impact": "Low",
+   "first_seen": "2026-10-02T00:19:13.274550+00:00"
+  },
+  {
    "title": "Tokyo Core CPI y/y",
    "country": "JPY",
    "time_utc": "2026-10-01T23:30:00+00:00",
@@ -1327,5 +1341,5 @@
    "first_seen": "2026-10-01T05:50:43.074857+00:00"
   }
  ],
- "diperbarui": "2026-10-01T10:31:45.774148+00:00"
+ "diperbarui": "2026-10-02T00:19:13.274550+00:00"
 }
