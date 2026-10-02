@@ -15,7 +15,8 @@ Varian (mesin = research/sl_tangga.backtest seperti cloud: H1, SL 3xATR, 5 posis
 Ukuran: sinyal/bulan, WR, R per sinyal, total R, DD (urut waktu keluar), rata LAMA/BARU, tahun positif, sinyal
 terbuka bersamaan (maks & rata-rata, risiko awal per sinyal = 1R x lot). LOLOS (ditetapkan sebelum melihat hasil):
 total R lebih besar dari bawaan, R/sinyal >= 80% bawaan dan > 0 di LAMA & BARU, lebih baik di >= 60% tahun,
-DD tidak lebih buruk dari 1,5x bawaan.
+DD tidak lebih buruk dari 1,5x bawaan. Tambahan (setelah putaran 1: lapis setelah TP1 menambah sinyal tetapi DD 2x):
+batas lapisan per set & lot ½ untuk lapisan; dibandingkan juga total/DD (hasil per satuan risiko) di semua data & BARU.
 """
 from __future__ import annotations
 
@@ -42,6 +43,9 @@ VARIANTS = {
     "kategori + ⭐": {"extra_cat": ("⭐",)},
     "kategori semua (+ biasa)": {"extra_cat": ("⭐", "biasa")},
     "lapis setelah TP1 + tambah set": {"overlap": "tp1", "sets": BASE_SETS + ((20, 10), (30, 15))},
+    "lapis setelah TP1, maks 2 per set": {"overlap": "tp1", "max_layers": 2},
+    "lapis setelah TP1, lapisan lot ½": {"overlap": "tp1", "half": True},
+    "lapis setelah TP1, maks 2, lot ½": {"overlap": "tp1", "max_layers": 2, "half": True},
 }
 
 
@@ -64,9 +68,14 @@ def run(name: str, v: dict) -> pd.DataFrame:
     for n_in, n_out in v.get("sets", BASE_SETS):
         hi, lo = rolling_max(b.h, n_in), rolling_min(b.l, n_in)
         hx, lx = rolling_max(b.h, n_out), rolling_min(b.l, n_out)
-        tr += backtest(b, b.c > hi, b.c < lo, b.c < lx, b.c > hx, allow, tps=[1.0, None, None, None, None],
-                       overlap=v.get("overlap"), fresh=v.get("fresh", False))
-    return pd.DataFrame(sorted(tr), columns=["t", "t_out", "R", "dir", "max_r"])
+        one = backtest(b, b.c > hi, b.c < lo, b.c < lx, b.c > hx, allow, tps=[1.0, None, None, None, None],
+                       overlap=v.get("overlap"), fresh=v.get("fresh", False), max_layers=v.get("max_layers"))
+        last_out = None
+        for t, t_out, r, d, mr in one:             # lapisan = dibuka saat sinyal sebelumnya di set ini masih terbuka
+            lay = last_out is not None and t < last_out
+            tr.append((t, t_out, r * (0.5 if lay and v.get("half") else 1.0), d, mr, lay))
+            last_out = t_out if last_out is None else max(last_out, t_out)
+    return pd.DataFrame(sorted(tr), columns=["t", "t_out", "R", "dir", "max_r", "lapis"])
 
 
 def concurrent(df: pd.DataFrame) -> tuple[int, float]:
@@ -89,7 +98,13 @@ def summary(df: pd.DataFrame, split: pd.Timestamp) -> dict:
     yr = df.groupby(df.t.dt.year).R.sum()
     months = max((df.t.max() - df.t.min()).days / 30.44, 1)
     mx, avg_c = concurrent(df)
-    return {"n": len(df), "bln": len(df) / months, "wr": 100 * (df.R > 0).mean(), "avg": df.R.mean(),
+    base_new = df[df.t >= split].sort_values("t_out").R.to_numpy()
+    eqn = np.cumsum(base_new)
+    dd_new = float((eqn - np.maximum.accumulate(np.r_[0, eqn])[1:]).min()) if len(eqn) else 0.0
+    return {"rasio": df.R.sum() / -dd if dd < 0 else np.nan, "dd_baru": dd_new,
+            "tot_baru": df.R[df.t >= split].sum(), "n_lapis": int(df.lapis.sum()),
+            "avg_lapis": df.R[df.lapis].mean() if df.lapis.any() else np.nan,
+            "n": len(df), "bln": len(df) / months, "wr": 100 * (df.R > 0).mean(), "avg": df.R.mean(),
             "tot": df.R.sum(), "dd": dd, "lama": df.R[df.t < split].mean(), "baru": df.R[df.t >= split].mean(),
             "yr": yr, "tahun": f"{(yr > 0).sum()}/{len(yr)}", "maxc": mx, "avgc": avg_c}
 
@@ -118,6 +133,13 @@ def report() -> str:
             L.append(f"  {vname:36} {s['n']:6d} {s['bln']:5.1f} {s['wr']:5.1f}% {s['avg']:+7.3f} {s['tot']:+7.1f} "
                      f"{s['dd']:+6.1f} {s['lama']:+7.3f} {s['baru']:+7.3f} {s['tahun']:>6} {s['maxc']:3d} / {s['avgc']:.1f}"
                      f" | {verdict}")
+        L.append(f"  {'risiko vs hasil':36} {'total/DD':>9} {'BARU: total':>12} {'DD BARU':>8} {'total/DD BARU':>14} "
+                 f"{'lapisan n':>9} {'R/lapisan':>9}")
+        for vname, v in VARIANTS.items():
+            s = summary(run(name, v), split)
+            r_new = s["tot_baru"] / -s["dd_baru"] if s["dd_baru"] < 0 else float("nan")
+            L.append(f"  {vname:36} {s['rasio']:9.1f} {s['tot_baru']:+12.1f} {s['dd_baru']:+8.1f} {r_new:14.1f} "
+                     f"{s['n_lapis']:9d} {s['avg_lapis']:+9.3f}")
         L.append("")
     return "\n".join(L) + "\n"
 
