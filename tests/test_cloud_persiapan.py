@@ -166,3 +166,11 @@ def test_reaksi_json_berisi_detik_dari_dua_feed():
     for hasil in ("bawah", "atas"):
         c = nfp[hasil]["cepat"]
         assert set(c) == {"1", "2", "3"} and all({"naik", "n", "gerak", "ex", "baru"} <= set(x) for x in c.values())
+
+
+def test_kejutan_besar_kecil_mengubah_persen():
+    kecil = _persiapan.kesimpulan("Non-Farm Employment Change", "60K", "89K")
+    besar = _persiapan.kesimpulan("Non-Farm Employment Change", "-20K", "89K")
+    assert kecil["kejutan"]["ukuran"] == "kecil" and besar["kejutan"]["ukuran"] == "besar"
+    assert "kejutan BESAR (109K ≥ 84K)" in besar["catatan"] and "$" in besar["kejutan"]["bukti"]
+    assert besar["tahap"][-1]["persen"] == besar["persen"]                 # sel 1 mnt ikut kejutan

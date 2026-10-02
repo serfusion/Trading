@@ -193,6 +193,35 @@ def tahap(title: str, hasil: str) -> list[dict]:
     return out
 
 
+def _fmt(x: float) -> str:
+    return f"{x / 1e6:g}M" if x >= 1e6 else f"{x / 1e3:g}K" if x >= 1e3 else f"{x:g}"
+
+
+def kejutan(title: str, hasil: str, z: float, stages: list[dict]) -> dict | None:
+    """Besar kejutan (|Act - perkiraan| vs ambang 1,5x median riwayat): persen 1 menit khusus kejutan BESAR / kecil
+    (research/reaksi_menit.besar_kecil). Sel "1 mnt" di `stages` ikut diganti. None bila data tidak cukup."""
+    r = REAKSI.get(title) or {}
+    amb = r.get("ambang")
+    if amb is None or hasil not in ("bawah", "atas"):
+        return None
+    nama = "besar" if z >= amb else "kecil"
+    x = (r.get(hasil) or {}).get(nama)
+    if not x:
+        return None
+    b = x.get("baru_naik60")
+    a = arah_emas({"naik1j": round(x["naik60"] * 100), "n": x["n"], "baru_naik1j": None if b is None else round(b * 100)})
+    if not a:
+        return None
+    for c in stages:
+        if c["dtk"] == "1 mnt":
+            c.update(teks=a["teks"], angka=a["teks"].split(" ", 1)[0], kata=a["teks"].split(" ", 1)[1], kuat=a["kuat"],
+                     persen=a["persen"], arah=a["arah"], n=a["n"])
+    label = f"kejutan {'BESAR' if nama == 'besar' else 'kecil'} ({_fmt(z)} {'≥' if nama == 'besar' else '<'} {_fmt(amb)})"
+    return {"ukuran": nama, "label": label, **{k: a[k] for k in ("teks", "kuat", "persen", "arah")},
+            "bukti": f"{label}: emas 1 mnt {a['persen']}% {a['arah']} ({x['n']} rilis, gerak ±"
+                     + f"${x['gerak60']:.2f})".replace(".", ",")}
+
+
 def tahap_teks(stages: list[dict]) -> str:
     """"1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK (±$2,68) • 3 dtk 91% NAIK • 1 mnt 81% NAIK" (tanpa emoji)."""
     parts = []
@@ -262,8 +291,12 @@ def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
     if not r:
         return None
     st = tahap(title, hasil)
+    kej = kejutan(title, hasil, abs(a - f), st)
+    if kej:
+        r = dict(r, teks=kej["teks"], kuat=kej["kuat"], persen=kej["persen"], arah=kej["arah"],
+                 bukti=kej["bukti"] + " • " + r["bukti"])
     detik_txt = tahap_teks(st) + " • " if any(s["dtk"].endswith("dtk") for s in st) else ""
-    return {"hasil": hasil, **r, "tahap": st,
+    return {"hasil": hasil, **r, "tahap": st, "kejutan": kej,
             "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas {detik_txt or jangka + ' • '}{r['bukti']}"}
 
 

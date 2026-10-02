@@ -36,6 +36,20 @@
       "ex": 0.896,
       "ex_n": 48
      }
+    },
+    "besar": {
+     "naik60": 0.952,
+     "n": 21,
+     "baru_naik60": 0.923,
+     "naik2": 0.81,
+     "gerak60": 3.1
+    },
+    "kecil": {
+     "naik60": 0.815,
+     "n": 54,
+     "baru_naik60": 1.0,
+     "naik2": 0.82,
+     "gerak60": 1.4
     }
    },
    "atas": {
@@ -71,9 +85,24 @@
       "ex": 0.127,
       "ex_n": 55
      }
+    },
+    "besar": {
+     "naik60": 0.176,
+     "n": 34,
+     "baru_naik60": 0.0,
+     "naik2": 0.206,
+     "gerak60": 2.12
+    },
+    "kecil": {
+     "naik60": 0.143,
+     "n": 56,
+     "baru_naik60": 0.182,
+     "naik2": 0.164,
+     "gerak60": 1.3
     }
    },
-   "tahun": "2010–2026"
+   "tahun": "2010–2026",
+   "ambang": 49500.0
   },
   "Advance GDP q/q": {
    "bawah": {
@@ -109,6 +138,20 @@
       "ex": 0.65,
       "ex_n": 20
      }
+    },
+    "besar": {
+     "naik60": 0.692,
+     "n": 13,
+     "baru_naik60": 0.6,
+     "naik2": 0.462,
+     "gerak60": 2.09
+    },
+    "kecil": {
+     "naik60": 0.579,
+     "n": 19,
+     "baru_naik60": null,
+     "naik2": 0.706,
+     "gerak60": 1.72
     }
    },
    "atas": {
@@ -144,9 +187,24 @@
       "ex": 0.158,
       "ex_n": 19
      }
+    },
+    "besar": {
+     "naik60": 0.1,
+     "n": 10,
+     "baru_naik60": null,
+     "naik2": 0.4,
+     "gerak60": 2.06
+    },
+    "kecil": {
+     "naik60": 0.143,
+     "n": 14,
+     "baru_naik60": null,
+     "naik2": 0.214,
+     "gerak60": 1.86
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.6
   },
   "Average Hourly Earnings m/m": {
    "bawah": {
@@ -182,6 +240,20 @@
       "ex": 0.521,
       "ex_n": 48
      }
+    },
+    "besar": {
+     "naik60": 0.519,
+     "n": 27,
+     "baru_naik60": null,
+     "naik2": 0.519,
+     "gerak60": 3.21
+    },
+    "kecil": {
+     "naik60": 0.537,
+     "n": 41,
+     "baru_naik60": 0.733,
+     "naik2": 0.634,
+     "gerak60": 4.62
     }
    },
    "sama": {
@@ -252,9 +324,24 @@
       "ex": 0.409,
       "ex_n": 44
      }
+    },
+    "besar": {
+     "naik60": 0.308,
+     "n": 26,
+     "baru_naik60": 0.25,
+     "naik2": 0.5,
+     "gerak60": 5.32
+    },
+    "kecil": {
+     "naik60": 0.448,
+     "n": 29,
+     "baru_naik60": 0.455,
+     "naik2": 0.345,
+     "gerak60": 5.06
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.15
   },
   "CPI m/m": {
    "bawah": {
@@ -290,6 +377,20 @@
       "ex": 0.857,
       "ex_n": 35
      }
+    },
+    "besar": {
+     "naik60": 0.8,
+     "n": 10,
+     "baru_naik60": 1.0,
+     "naik2": 0.9,
+     "gerak60": 4.93
+    },
+    "kecil": {
+     "naik60": 0.812,
+     "n": 48,
+     "baru_naik60": 1.0,
+     "naik2": 0.787,
+     "gerak60": 1.17
     }
    },
    "sama": {
@@ -360,9 +461,24 @@
       "ex": 0.2,
       "ex_n": 35
      }
+    },
+    "besar": {
+     "naik60": 0.176,
+     "n": 17,
+     "baru_naik60": 0.0,
+     "naik2": 0.176,
+     "gerak60": 4.22
+    },
+    "kecil": {
+     "naik60": 0.31,
+     "n": 29,
+     "baru_naik60": 0.455,
+     "naik2": 0.259,
+     "gerak60": 1.68
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.15
   },
   "CPI y/y": {
    "bawah": {
@@ -398,6 +514,20 @@
       "ex": 0.868,
       "ex_n": 38
      }
+    },
+    "besar": {
+     "naik60": 0.818,
+     "n": 11,
+     "baru_naik60": null,
+     "naik2": 0.818,
+     "gerak60": 2.14
+    },
+    "kecil": {
+     "naik60": 0.857,
+     "n": 42,
+     "baru_naik60": 1.0,
+     "naik2": 0.833,
+     "gerak60": 2.07
     }
    },
    "sama": {
@@ -468,9 +598,24 @@
       "ex": 0.19,
       "ex_n": 42
      }
+    },
+    "besar": {
+     "naik60": 0.176,
+     "n": 17,
+     "baru_naik60": 0.0,
+     "naik2": 0.118,
+     "gerak60": 4.87
+    },
+    "kecil": {
+     "naik60": 0.293,
+     "n": 41,
+     "baru_naik60": 0.4,
+     "naik2": 0.256,
+     "gerak60": 1.68
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.15
   },
   "Core CPI m/m": {
    "bawah": {
@@ -506,6 +651,20 @@
       "ex": 0.9,
       "ex_n": 40
      }
+    },
+    "besar": {
+     "naik60": 1.0,
+     "n": 8,
+     "baru_naik60": 1.0,
+     "naik2": 1.0,
+     "gerak60": 5.31
+    },
+    "kecil": {
+     "naik60": 0.846,
+     "n": 52,
+     "baru_naik60": 1.0,
+     "naik2": 0.86,
+     "gerak60": 1.7
     }
    },
    "sama": {
@@ -576,9 +735,24 @@
       "ex": 0.091,
       "ex_n": 33
      }
+    },
+    "besar": {
+     "naik60": 0.0,
+     "n": 8,
+     "baru_naik60": 0.0,
+     "naik2": 0.0,
+     "gerak60": 6.49
+    },
+    "kecil": {
+     "naik60": 0.314,
+     "n": 35,
+     "baru_naik60": 0.25,
+     "naik2": 0.059,
+     "gerak60": 2.92
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.15
   },
   "Core PCE Price Index m/m": {
    "bawah": {
@@ -614,6 +788,13 @@
       "ex": 0.143,
       "ex_n": 14
      }
+    },
+    "kecil": {
+     "naik60": 0.846,
+     "n": 13,
+     "baru_naik60": 0.8,
+     "naik2": 0.385,
+     "gerak60": 3.24
     }
    },
    "sama": {
@@ -684,9 +865,17 @@
       "ex": 0.375,
       "ex_n": 8
      }
+    },
+    "kecil": {
+     "naik60": 0.286,
+     "n": 7,
+     "baru_naik60": 0.286,
+     "naik2": 0.286,
+     "gerak60": 1.79
     }
    },
-   "tahun": "2012–2025"
+   "tahun": "2012–2025",
+   "ambang": 0.15
   },
   "Core PPI m/m": {
    "bawah": {
@@ -722,6 +911,20 @@
       "ex": 0.875,
       "ex_n": 32
      }
+    },
+    "besar": {
+     "naik60": 1.0,
+     "n": 19,
+     "baru_naik60": 1.0,
+     "naik2": 1.0,
+     "gerak60": 1.06
+    },
+    "kecil": {
+     "naik60": 0.833,
+     "n": 30,
+     "baru_naik60": 1.0,
+     "naik2": 0.8,
+     "gerak60": 1.56
     }
    },
    "sama": {
@@ -792,9 +995,24 @@
       "ex": 0.156,
       "ex_n": 32
      }
+    },
+    "besar": {
+     "naik60": 0.167,
+     "n": 6,
+     "baru_naik60": null,
+     "naik2": 0.0,
+     "gerak60": 1.56
+    },
+    "kecil": {
+     "naik60": 0.2,
+     "n": 45,
+     "baru_naik60": 0.0,
+     "naik2": 0.159,
+     "gerak60": 0.96
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.3
   },
   "Core Retail Sales m/m": {
    "bawah": {
@@ -830,6 +1048,20 @@
       "ex": 0.818,
       "ex_n": 55
      }
+    },
+    "besar": {
+     "naik60": 0.839,
+     "n": 31,
+     "baru_naik60": 0.714,
+     "naik2": 0.839,
+     "gerak60": 2.2
+    },
+    "kecil": {
+     "naik60": 0.7,
+     "n": 50,
+     "baru_naik60": 0.692,
+     "naik2": 0.78,
+     "gerak60": 1.79
     }
    },
    "sama": {
@@ -900,9 +1132,24 @@
       "ex": 0.13,
       "ex_n": 54
      }
+    },
+    "besar": {
+     "naik60": 0.2,
+     "n": 20,
+     "baru_naik60": 0.143,
+     "naik2": 0.05,
+     "gerak60": 2.01
+    },
+    "kecil": {
+     "naik60": 0.228,
+     "n": 57,
+     "baru_naik60": 0.176,
+     "naik2": 0.298,
+     "gerak60": 1.86
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.45
   },
   "Federal Funds Rate": {
    "sama": {
@@ -976,6 +1223,13 @@
       "ex": 0.892,
       "ex_n": 65
      }
+    },
+    "kecil": {
+     "naik60": 0.688,
+     "n": 16,
+     "baru_naik60": 0.75,
+     "naik2": 0.812,
+     "gerak60": 2.32
     }
    },
    "atas": {
@@ -1011,9 +1265,24 @@
       "ex": 0.167,
       "ex_n": 54
      }
+    },
+    "besar": {
+     "naik60": 0.0,
+     "n": 5,
+     "baru_naik60": null,
+     "naik2": 0.0,
+     "gerak60": 1.34
+    },
+    "kecil": {
+     "naik60": 0.375,
+     "n": 8,
+     "baru_naik60": null,
+     "naik2": 0.125,
+     "gerak60": 1.02
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 1.725
   },
   "ISM Services PMI": {
    "bawah": {
@@ -1049,6 +1318,13 @@
       "ex": 0.959,
       "ex_n": 49
      }
+    },
+    "kecil": {
+     "naik60": 0.875,
+     "n": 8,
+     "baru_naik60": null,
+     "naik2": 1.0,
+     "gerak60": 1.45
     }
    },
    "atas": {
@@ -1084,9 +1360,17 @@
       "ex": 0.131,
       "ex_n": 61
      }
+    },
+    "kecil": {
+     "naik60": 0.2,
+     "n": 10,
+     "baru_naik60": 0.4,
+     "naik2": 0.0,
+     "gerak60": 1.08
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 2.85
   },
   "JOLTS Job Openings": {
    "bawah": {
@@ -1122,6 +1406,13 @@
       "ex": 0.783,
       "ex_n": 23
      }
+    },
+    "kecil": {
+     "naik60": 0.818,
+     "n": 11,
+     "baru_naik60": 0.875,
+     "naik2": 0.909,
+     "gerak60": 2.57
     }
    },
    "atas": {
@@ -1157,9 +1448,24 @@
       "ex": 0.103,
       "ex_n": 29
      }
+    },
+    "besar": {
+     "naik60": 0.143,
+     "n": 7,
+     "baru_naik60": 0.143,
+     "naik2": 0.143,
+     "gerak60": 3.83
+    },
+    "kecil": {
+     "naik60": 0.235,
+     "n": 17,
+     "baru_naik60": 0.133,
+     "naik2": 0.125,
+     "gerak60": 1.79
     }
    },
-   "tahun": "2014–2025"
+   "tahun": "2014–2025",
+   "ambang": 427500.0
   },
   "Non-Farm Employment Change": {
    "bawah": {
@@ -1195,6 +1501,20 @@
       "ex": 0.878,
       "ex_n": 49
      }
+    },
+    "besar": {
+     "naik60": 0.842,
+     "n": 19,
+     "baru_naik60": null,
+     "naik2": 0.842,
+     "gerak60": 5.99
+    },
+    "kecil": {
+     "naik60": 0.792,
+     "n": 48,
+     "baru_naik60": 0.818,
+     "naik2": 0.854,
+     "gerak60": 4.28
     }
    },
    "atas": {
@@ -1230,9 +1550,24 @@
       "ex": 0.194,
       "ex_n": 72
      }
+    },
+    "besar": {
+     "naik60": 0.188,
+     "n": 32,
+     "baru_naik60": 0.214,
+     "naik2": 0.188,
+     "gerak60": 5.03
+    },
+    "kecil": {
+     "naik60": 0.194,
+     "n": 62,
+     "baru_naik60": 0.4,
+     "naik2": 0.29,
+     "gerak60": 4.03
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 84000.0
   },
   "PPI m/m": {
    "bawah": {
@@ -1268,6 +1603,20 @@
       "ex": 0.875,
       "ex_n": 40
      }
+    },
+    "besar": {
+     "naik60": 0.923,
+     "n": 26,
+     "baru_naik60": 0.889,
+     "naik2": 0.962,
+     "gerak60": 0.74
+    },
+    "kecil": {
+     "naik60": 0.773,
+     "n": 44,
+     "baru_naik60": 0.933,
+     "naik2": 0.69,
+     "gerak60": 1.55
     }
    },
    "sama": {
@@ -1338,9 +1687,24 @@
       "ex": 0.293,
       "ex_n": 41
      }
+    },
+    "besar": {
+     "naik60": 0.429,
+     "n": 21,
+     "baru_naik60": null,
+     "naik2": 0.4,
+     "gerak60": 1.09
+    },
+    "kecil": {
+     "naik60": 0.244,
+     "n": 41,
+     "baru_naik60": 0.143,
+     "naik2": 0.275,
+     "gerak60": 1.24
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.3
   },
   "Retail Sales m/m": {
    "bawah": {
@@ -1376,6 +1740,20 @@
       "ex": 0.817,
       "ex_n": 60
      }
+    },
+    "besar": {
+     "naik60": 0.75,
+     "n": 24,
+     "baru_naik60": 0.8,
+     "naik2": 0.833,
+     "gerak60": 1.53
+    },
+    "kecil": {
+     "naik60": 0.703,
+     "n": 64,
+     "baru_naik60": 0.65,
+     "naik2": 0.762,
+     "gerak60": 1.97
     }
    },
    "sama": {
@@ -1446,9 +1824,24 @@
       "ex": 0.111,
       "ex_n": 54
      }
+    },
+    "besar": {
+     "naik60": 0.19,
+     "n": 21,
+     "baru_naik60": 0.143,
+     "naik2": 0.143,
+     "gerak60": 2.39
+    },
+    "kecil": {
+     "naik60": 0.222,
+     "n": 54,
+     "baru_naik60": 0.278,
+     "naik2": 0.185,
+     "gerak60": 1.68
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.45
   },
   "Unemployment Claims": {
    "bawah": {
@@ -1484,6 +1877,20 @@
       "ex": 0.374,
       "ex_n": 174
      }
+    },
+    "besar": {
+     "naik60": 0.235,
+     "n": 34,
+     "baru_naik60": 0.273,
+     "naik2": 0.25,
+     "gerak60": 2.07
+    },
+    "kecil": {
+     "naik60": 0.329,
+     "n": 76,
+     "baru_naik60": 0.241,
+     "naik2": 0.44,
+     "gerak60": 1.41
     }
    },
    "sama": {
@@ -1554,9 +1961,24 @@
       "ex": 0.667,
       "ex_n": 114
      }
+    },
+    "besar": {
+     "naik60": 0.839,
+     "n": 31,
+     "baru_naik60": 0.875,
+     "naik2": 0.7,
+     "gerak60": 2.0
+    },
+    "kecil": {
+     "naik60": 0.71,
+     "n": 62,
+     "baru_naik60": 0.727,
+     "naik2": 0.613,
+     "gerak60": 0.88
     }
    },
-   "tahun": "2010–2026"
+   "tahun": "2010–2026",
+   "ambang": 13500.0
   },
   "Unemployment Rate": {
    "bawah": {
@@ -1592,6 +2014,20 @@
       "ex": 0.449,
       "ex_n": 49
      }
+    },
+    "besar": {
+     "naik60": 0.286,
+     "n": 35,
+     "baru_naik60": 0.444,
+     "naik2": 0.486,
+     "gerak60": 4.84
+    },
+    "kecil": {
+     "naik60": 0.5,
+     "n": 34,
+     "baru_naik60": 0.182,
+     "naik2": 0.529,
+     "gerak60": 4.24
     }
    },
    "sama": {
@@ -1662,9 +2098,24 @@
       "ex": 0.463,
       "ex_n": 41
      }
+    },
+    "besar": {
+     "naik60": 0.615,
+     "n": 13,
+     "baru_naik60": 0.833,
+     "naik2": 0.769,
+     "gerak60": 3.56
+    },
+    "kecil": {
+     "naik60": 0.513,
+     "n": 39,
+     "baru_naik60": 0.571,
+     "naik2": 0.436,
+     "gerak60": 4.05
     }
    },
-   "tahun": "2010–2025"
+   "tahun": "2010–2025",
+   "ambang": 0.15
   }
  }
 }

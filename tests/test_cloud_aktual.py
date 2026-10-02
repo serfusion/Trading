@@ -127,3 +127,20 @@ def test_act_manual_investing_dan_menimpa_otomatis():
     assert not _aktual.save_manual(store, "x", "y", "abc", now)["ok"]
     _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "", now)
     assert CAL[0]["title"] + "|" + CAL[0]["time"] not in store.rows["aktual"]["found"]
+
+
+def test_act_manual_salah_direvisi_otomatis_oleh_angka_resmi():
+    store = Store()
+    _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "54K", NOW)      # salah ketik (resmi 45K)
+    c = cal()[:1]
+    f = _aktual.Fetcher({}, {"PAYEMS"}, opener([]), csv=lambda s: [])
+    _aktual.fill(c, store, NOW, {}, f)
+    assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "BLS" and "direvisi otomatis" in c[0]["actual_info"]
+    c2 = cal()[:1]                                                                 # pembukaan berikutnya
+    _aktual.fill(c2, store, NOW + timedelta(minutes=5), {}, _aktual.Fetcher({}, set(), opener([])))
+    assert c2[0]["actual"] == "45K" and "54K → resmi 45K" in c2[0]["actual_info"]
+    store2 = Store()
+    _aktual.save_manual(store2, CAL[0]["title"], CAL[0]["time"], "45k", NOW)
+    c3 = cal()[:1]
+    _aktual.fill(c3, store2, NOW, {}, _aktual.Fetcher({}, {"PAYEMS"}, opener([]), csv=lambda s: []))
+    assert "cocok" in c3[0]["actual_info"]

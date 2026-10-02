@@ -133,7 +133,8 @@ def result(card: dict, actual: str) -> dict:
            "bukti": f"Act {actual} vs perkiraan {f} • {k['catatan']}"}
     if any(x["dtk"].endswith("dtk") for x in k.get("tahap") or []):
         # aplikasi 3.18: "✅ Act 45K < 89K → arah emas" + deretan 1 dtk / 2 dtk / 3 dtk / 1 mnt (permintaan 2 Okt 2026)
-        out.update(tahap=k["tahap"], judul_tahap=f"✅ Act {actual} {_persiapan.OP[k['hasil']]} {f} → arah emas",
+        out.update(tahap=k["tahap"], judul_tahap=f"✅ Act {actual} {_persiapan.OP[k['hasil']]} {f} → arah emas"
+                   + (f" • {k['kejutan']['label']}" if k.get("kejutan") else ""),
                    bukti_tahap=k["bukti"] + " • detik 1–3 dicek di tick Exness • angka ini RIWAYAT reaksi; Act "
                                             "baru sampai di aplikasi beberapa detik–menit setelah rilis")
     return out

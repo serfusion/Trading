@@ -125,3 +125,22 @@ mengambil angka pertama (jam & isi kurung dibuang) sebagai Act, menyimpannya di 
 `manual`, menimpa Act otomatis), lalu ✅ hasil & sel 1/2/3 dtk + 1 mnt dihitung ulang dari Act itu. Kosongkan → Hapus →
 kembali ke Act otomatis BLS/FRED. Persen berubah sesuai Act di bawah / sama / di atas perkiraan (besar kejutan belum
 dibedakan).
+
+## 8. Revisi otomatis Act manual & besar kejutan (aplikasi 3.20, 2 Okt 2026)
+
+- **Revisi otomatis**: Act manual tetap dicek ke BLS/FRED. Bila angka resmi berbeda (mis. salah ketik 54K, resmi 45K),
+  Act diganti angka resmi dan muncul "direvisi otomatis: isian manual 54K → resmi 45K"; bila sama: "cocok ✓". Berita
+  yang tidak ada di BLS/FRED (mis. ISM) tidak bisa dicek otomatis.
+- **Besar kejutan** (`research/reaksi_menit.besar_kecil`): BESAR = |Act − perkiraan| ≥ 1,5× median riwayat (NFP 84K).
+  Kejutan besar umumnya lebih searah & geraknya lebih besar, sampel kecil (5–36 rilis):
+
+| Hasil | kecil: emas 1 mnt | BESAR: emas 1 mnt | gerak 1 mnt kecil → besar |
+|---|---|---|---|
+| NFP < perkiraan | 78% naik | 86% naik | $4,2 → $6,7 |
+| NFP > perkiraan | 79% turun | 83% turun | $4,0 → $5,4 |
+| CPI m/m > perkiraan | 71% turun | 82% turun | $1,7 → $4,2 |
+| Core CPI m/m > | 69% turun | 100% turun (n 9) | $2,9 → $6,5 |
+| Core PPI m/m < | 84% naik | 96% naik | ≈ sama |
+| Klaim > perkiraan | 70% naik | 86% naik | $0,9 → $2,0 |
+
+  Retail Sales & sisi lain: hampir sama. Dipakai di ✅ hasil (sel 1 mnt & label "kejutan BESAR (109K ≥ 84K)").

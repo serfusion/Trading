@@ -396,6 +396,8 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
         Column(horizontalAlignment = Alignment.End) {
             if (e.actual.isNotBlank()) {
                 Text("Act ${e.actual}", fontWeight = FontWeight.ExtraBold, color = Gold)
+                if (e.actualInfo.isNotBlank()) Text(e.actualInfo, style = MaterialTheme.typography.labelSmall,
+                    color = Muted)                         // isian manual dicek / direvisi otomatis
             } else if (e.released) {
                 Text("Act: menunggu data resmi…", style = MaterialTheme.typography.labelSmall, color = Muted)
                 if (e.actualInfo.isNotBlank()) Text(e.actualInfo, style = MaterialTheme.typography.labelSmall,

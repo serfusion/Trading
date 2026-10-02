@@ -56,7 +56,7 @@ def build() -> pd.DataFrame:
             m1 = p.mid[p.at(-1)]
             ticks[(t, lab)] = tuple(float(p.mid[p.at(k)] - m1) for k in SECS)
     for r in cal.itertuples():
-        row = {"time": r.time, "event": r.event, "s": r.s}
+        row = {"time": r.time, "event": r.event, "s": r.s, "z": abs(r.a - r.f)}
         for lab in FEEDS.values():
             g = ticks.get((r.time, lab)) or (np.nan,) * len(SECS)
             row.update({f"{lab}_{k}": v for k, v in zip(SECS, g)})
@@ -92,10 +92,38 @@ def rates(df: pd.DataFrame, before: pd.Timestamp | None = None, feed: str = "duk
     return out
 
 
+BESAR = 1.5          # kejutan BESAR = |Act - perkiraan| >= 1,5x median |kejutan| judul itu (uji 2 Okt 2026)
+
+
+def besar_kecil(df: pd.DataFrame, out: dict, feed: str = "duka") -> None:
+    """Tambah out[judul]["ambang"] dan out[judul][hasil]["besar"/"kecil"]: reaksi emas per besar kejutan."""
+    x = df[df[f"{feed}_60"].notna() & (df[f"{feed}_60"] != 0) & (df.s != 0) & df.z.notna()]
+    for ev, g in x.groupby("event"):
+        if ev not in out or len(g) < 20:
+            continue
+        amb = float(BESAR * g.z.median())
+        out[ev]["ambang"] = round(amb, 6)
+        for s, lab in ((-1.0, "bawah"), (1.0, "atas")):
+            if lab not in out[ev]:
+                continue
+            for nama, k in (("besar", g[(g.s == s) & (g.z >= amb)]), ("kecil", g[(g.s == s) & (g.z < amb)])):
+                if len(k) < 5:
+                    continue
+                kb = k[k.time >= NEW]
+                v2 = k[f"{feed}_2"].dropna()
+                v2 = v2[v2 != 0]
+                out[ev][lab][nama] = {
+                    "naik60": round(float((k[f"{feed}_60"] > 0).mean()), 3), "n": int(len(k)),
+                    "baru_naik60": round(float((kb[f"{feed}_60"] > 0).mean()), 3) if len(kb) >= 5 else None,
+                    "naik2": round(float((v2 > 0).mean()), 3) if len(v2) >= 5 else None,
+                    "gerak60": round(float(k[f"{feed}_60"].abs().median()), 2)}
+
+
 def main() -> None:
     df = build()
     df.to_csv(OUT_CSV, index=False)
     out = rates(df)
+    besar_kecil(df, out)
     ex = rates(df, feed="exness")
     for ev, c in out.items():                     # cek feed kedua (tick asli Exness) untuk arah 1-3 detik
         for lab in ("bawah", "sama", "atas"):
