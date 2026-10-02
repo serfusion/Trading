@@ -120,6 +120,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang.
 - Skenario/kesimpulan kartu & kalender kini reaksi 1 MENIT (cadangan 1 jam). Aplikasi 3.17.
 
+## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
+- `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
+  setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
+  −0,5R/−0,7R & batas 12/24/48 jam lebih buruk. TP1 median 11–12 jam, 90% ≤ 42 jam. Skema bawaan tetap.
+
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —

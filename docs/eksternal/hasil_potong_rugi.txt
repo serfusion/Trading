@@ -1,0 +1,54 @@
+# Sinyal 💰: potong rugi & batas waktu (research/potong_rugi.py)
+
+== BTCUSD: 2097 sinyal 💰 (2016-01..2026-09); LAMA < 2021 ==
+A. Setelah sempat rugi (sebelum TP1), apa yang terjadi bila ditahan:
+  sempat rugi >= 0.3R (74.8% sinyal): semua n=1569 TP1 31.4% | SL 47.9% | rata R akhir +0.035 || LAMA n= 666 TP1 37.8% | SL 43.2% | rata R akhir +0.343 || BARU n= 903 TP1 26.7% | SL 51.4% | rata R akhir -0.192  → potong di −0.3R = -0.30R: MENAHAN lebih baik
+  sempat rugi >= 0.5R (61.8% sinyal): semua n=1295 TP1 21.2% | SL 58.1% | rata R akhir -0.299 || LAMA n= 516 TP1 24.6% | SL 55.8% | rata R akhir -0.182 || BARU n= 779 TP1 19.0% | SL 59.6% | rata R akhir -0.376  → potong di −0.5R = -0.50R: MENAHAN lebih baik
+  sempat rugi >= 0.7R (50.5% sinyal): semua n=1060 TP1 12.0% | SL 70.9% | rata R akhir -0.565 || LAMA n= 405 TP1 11.9% | SL 71.1% | rata R akhir -0.555 || BARU n= 655 TP1 12.1% | SL 70.8% | rata R akhir -0.571  → potong di −0.7R = -0.70R: MENAHAN lebih baik
+  sempat rugi >= 0.9R (40.5% sinyal): semua n= 849 TP1  4.6% | SL 88.6% | rata R akhir -0.816 || LAMA n= 319 TP1  4.4% | SL 90.3% | rata R akhir -0.774 || BARU n= 530 TP1  4.7% | SL 87.5% | rata R akhir -0.842  → potong di −0.9R = -0.90R: MENAHAN lebih baik
+B. Waktu:
+  TP1 kena di 992/2097 sinyal (47.3%); jam sampai TP1: median 11, 75% dalam 21 jam, 90% dalam 42 jam
+  belum TP1 & masih terbuka setelah   4 jam: n=1733 → akhirnya TP1 44.7%, rata R akhir +0.307
+  belum TP1 & masih terbuka setelah   8 jam: n=1440 → akhirnya TP1 41.6%, rata R akhir +0.287
+  belum TP1 & masih terbuka setelah  12 jam: n=1180 → akhirnya TP1 38.4%, rata R akhir +0.299
+  belum TP1 & masih terbuka setelah  24 jam: n= 567 → akhirnya TP1 36.7%, rata R akhir +0.402
+  belum TP1 & masih terbuka setelah  48 jam: n= 147 → akhirnya TP1 44.2%, rata R akhir +0.319
+  belum TP1 & masih terbuka setelah  96 jam: n=  11 → akhirnya TP1 54.5%, rata R akhir +0.153
+  −0,5R pertama tersentuh: median 5 jam setelah entry (n=1295)
+C. Uji nyata (R per sinyal = rata-rata 5 posisi):
+  skema                                        n     WR  R/sinyal    total      DD    LAMA    BARU tahun+ | vs bawaan
+  bawaan (TP1 + 4 jalan sampai TUTUP)       2097  48.2%    +0.365   +765.7   -55.8  +0.655  +0.144   9/11 | 
+  potong semua di −0,5R sebelum TP1         2547  35.3%    +0.257   +654.4   -39.9  +0.485  +0.083   9/11 | lebih baik 3/11 th
+  potong semua di −0,7R sebelum TP1         2269  42.6%    +0.295   +669.8   -47.0  +0.565  +0.093   9/11 | lebih baik 2/11 th
+  batas 12 jam bila TP1 belum kena          2829  50.7%    +0.270   +765.0   -46.3  +0.447  +0.123   9/11 | lebih baik 6/11 th
+  batas 24 jam bila TP1 belum kena          2361  51.6%    +0.334   +789.1   -62.8  +0.600  +0.126   9/11 | lebih baik 7/11 th
+  batas 48 jam bila TP1 belum kena          2168  48.4%    +0.352   +763.9   -57.9  +0.634  +0.136   9/11 | lebih baik 5/11 th
+  batas 24 jam, hanya bila sedang rugi      2215  44.0%    +0.360   +798.1   -48.5  +0.625  +0.153   9/11 | lebih baik 8/11 th
+  batas 48 jam, hanya bila sedang rugi      2138  46.5%    +0.353   +754.9   -57.2  +0.637  +0.136   9/11 | lebih baik 5/11 th
+
+== XAUUSD: 1554 sinyal 💰 (2013-01..2026-08); LAMA < 2019 ==
+A. Setelah sempat rugi (sebelum TP1), apa yang terjadi bila ditahan:
+  sempat rugi >= 0.3R (73.6% sinyal): semua n=1144 TP1 30.1% | SL 48.8% | rata R akhir -0.117 || LAMA n= 472 TP1 28.0% | SL 50.8% | rata R akhir -0.133 || BARU n= 672 TP1 31.5% | SL 47.3% | rata R akhir -0.105  → potong di −0.3R = -0.30R: MENAHAN lebih baik
+  sempat rugi >= 0.5R (61.2% sinyal): semua n= 951 TP1 20.8% | SL 58.7% | rata R akhir -0.405 || LAMA n= 393 TP1 18.1% | SL 61.1% | rata R akhir -0.457 || BARU n= 558 TP1 22.8% | SL 57.0% | rata R akhir -0.368  → potong di −0.5R = -0.50R: MENAHAN lebih baik
+  sempat rugi >= 0.7R (50.9% sinyal): semua n= 791 TP1 13.8% | SL 70.5% | rata R akhir -0.612 || LAMA n= 330 TP1 10.6% | SL 72.7% | rata R akhir -0.670 || BARU n= 461 TP1 16.1% | SL 69.0% | rata R akhir -0.571  → potong di −0.7R = -0.70R: MENAHAN lebih baik
+  sempat rugi >= 0.9R (40.5% sinyal): semua n= 630 TP1  3.3% | SL 88.6% | rata R akhir -0.919 || LAMA n= 266 TP1  1.9% | SL 90.2% | rata R akhir -0.942 || BARU n= 364 TP1  4.4% | SL 87.4% | rata R akhir -0.901  → potong di −0.9R = -0.90R: MEMOTONG lebih baik
+B. Waktu:
+  TP1 kena di 737/1554 sinyal (47.4%); jam sampai TP1: median 12, 75% dalam 23 jam, 90% dalam 38 jam
+  belum TP1 & masih terbuka setelah   4 jam: n=1263 → akhirnya TP1 47.1%, rata R akhir +0.209
+  belum TP1 & masih terbuka setelah   8 jam: n=1011 → akhirnya TP1 47.5%, rata R akhir +0.238
+  belum TP1 & masih terbuka setelah  12 jam: n= 828 → akhirnya TP1 43.2%, rata R akhir +0.196
+  belum TP1 & masih terbuka setelah  24 jam: n= 368 → akhirnya TP1 43.5%, rata R akhir +0.361
+  belum TP1 & masih terbuka setelah  48 jam: n=  61 → akhirnya TP1 52.5%, rata R akhir +0.438
+  belum TP1 & masih terbuka setelah  96 jam: n=   6 → akhirnya TP1 33.3%, rata R akhir -0.099
+  −0,5R pertama tersentuh: median 5 jam setelah entry (n=951)
+C. Uji nyata (R per sinyal = rata-rata 5 posisi):
+  skema                                        n     WR  R/sinyal    total      DD    LAMA    BARU tahun+ | vs bawaan
+  bawaan (TP1 + 4 jalan sampai TUTUP)       1554  48.3%    +0.208   +323.8   -43.6  +0.191  +0.221  10/14 | 
+  potong semua di −0,5R sebelum TP1         1880  35.2%    +0.113   +213.0   -62.6  +0.136  +0.098   8/14 | lebih baik 2/14 th
+  potong semua di −0,7R sebelum TP1         1698  41.6%    +0.128   +217.4   -68.4  +0.139  +0.121   9/14 | lebih baik 1/14 th
+  batas 12 jam bila TP1 belum kena          2141  49.8%    +0.127   +271.6   -60.3  +0.152  +0.110   8/14 | lebih baik 6/14 th
+  batas 24 jam bila TP1 belum kena          1759  51.1%    +0.173   +304.7   -56.4  +0.182  +0.167   9/14 | lebih baik 6/14 th
+  batas 48 jam bila TP1 belum kena          1586  48.7%    +0.199   +315.4   -46.1  +0.185  +0.209  11/14 | lebih baik 6/14 th
+  batas 24 jam, hanya bila sedang rugi      1650  43.9%    +0.186   +306.6   -54.9  +0.157  +0.208  10/14 | lebih baik 6/14 th
+  batas 48 jam, hanya bila sedang rugi      1568  47.8%    +0.209   +327.4   -43.0  +0.190  +0.222  11/14 | lebih baik 7/14 th
+

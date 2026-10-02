@@ -146,3 +146,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-10-01: Act kalender kosong (CSV FRED tidak menjawab dari Vercel) → `_aktual.py` BLS/FRED API/CSV + Supabase;
   perkiraan hari H hidup (Kalshi+Polymarket × reaksi 1 menit) + hasil setelah Act; Polymarket diuji (NFP 41%, Fed
   9/9 sesuai konsensus); astrologi diuji (0 signifikan). Aplikasi 3.17. Laporan `docs/HARI_H.md`.
+- 2026-10-02: "sinyal 💰 hanya beberapa jam / setelah turun separuh pasti ke SL?" → `research/potong_rugi.py`,
+  `docs/POTONG_RUGI.md`: 58% memang ke SL, tetapi menahan tetap lebih baik (−0,30/−0,41R vs −0,5R); potong & batas
+  waktu tidak lolos; skema bawaan tetap.
