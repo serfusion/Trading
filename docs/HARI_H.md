@@ -194,5 +194,5 @@ Logan 2 Okt (10:00 ET, sambutan workshop migrasi) tidak bisa dipastikan → tida
 
 **Dipasang** (`cloud/api/_pudar.py`, `pudar.json`, env `FADE_WARNING`): 30 menit – 6 jam setelah rilis, kartu 🎯 menampilkan
 baris "📉/📈 Lonjakan NAIK 19:30 WIB: sisa X% di menit 60" + angka besar. Replay 2 Okt: menit 30 "86% tetap NAIK";
-**menit 60 (20:30 WIB) "93% BALIK ke bawah 4181 🔴"** — harga memang kembali ke bawah 4.181 pukul ±21:50 WIB.
+**menit 60 (20:30 WIB) "93% BALIK ke bawah 4181 🔴"** — harga memang kembali ke bawah 4.181 pukul 20:56 WIB (26 menit setelah peringatan).
 Harga Twelve Data XAU/USD 5 menit + ATR harian (2 kredit, cache Supabase `pudar` 2 menit).
