@@ -10,7 +10,6 @@ from test_cloud import ONE_SET, run_ticks
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cloud" / "api"))
 import _berita_sinyal  # noqa: E402
-import _core  # noqa: E402
 
 TP1_MODE = {**ONE_SET, "layer": {"mode": "tp1", "max": 10, "lot": 0.5,
                                  "stats": {"teks": "Riwayat lapisan: WR 51% • +0,28R/lapisan"}}}
