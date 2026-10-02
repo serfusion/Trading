@@ -125,6 +125,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   pertama NFP/CPI/PPI belum bergerak (±$0,17 ≈ spread, 50:50); hentakan di detik 1→2, searah hasil 82–91% di detik 2–3.
   Act dicek tiap 30 dtk di 10 menit pertama setelah rilis (`_aktual.RETRY_FAST`; BLS tanpa kunci 25/hari).
 
+## Entry beberapa menit setelah berita (2 Okt 2026 — `docs/NEWS_MENIT.md`)
+- `research/news_menit.py`: keputusan menit 0,5–5 (Act diketahui), tahan 1–10 mnt / TP-SL $3–5, 6 aturan arah,
+  2.280 kombinasi → 0 lolos. Ikut kejutan setelah menit pertama rugi (WR 34–51%). Pola "spike melawan kejutan lalu
+  berbalik" NFP hanya 7–17% rilis, n 14–17 → belum terbukti. Sinyal 💰 per set tidak muncul lagi sampai sinyal itu
+  ditutup cloud (TUTUP/SL/SL+), close manual di MT5 tidak diketahui cloud (by design, `_core` manage/evaluate).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

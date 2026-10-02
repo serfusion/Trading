@@ -1,0 +1,113 @@
+# Entry beberapa menit setelah berita (research/news_menit.py)
+
+Satuan $ per 0,01 lot XAU (sen di akun Cent). REALISTIS = masuk 2 dtk setelah keputusan + slippage $0,30.
+
+Kombinasi diuji (grup x keputusan x arah x tahan x keluar): 2280; LOLOS di kedua feed: 0
+
+
+== WR tertinggi (REALISTIS, n >= 30 di kedua feed, rata-rata WR dua feed) ==
+NFP          +120s KONFIRMASI $4   tahan 5 mnt TP5/SL5  | Duka WR   59% rata +0.13 | Exness WR   57% rata -0.01 | tidak
+NFP          +180s PULLBACK        tahan 3 mnt tahan    | Duka WR   57% rata -0.22 | Exness WR   58% rata -0.06 | tidak
+NFP          +120s GERAK $4        tahan 5 mnt TP5/SL5  | Duka WR   58% rata +0.10 | Exness WR   57% rata +0.10 | tidak
+NFP          +120s KONFIRMASI $4   tahan 5 mnt tahan    | Duka WR   59% rata +0.27 | Exness WR   56% rata +0.11 | tidak
+SEMUA        +60s SPIKE-BALIK $2  tahan 5 mnt TP3/SL3  | Duka WR   62% rata +0.33 | Exness WR   50% rata -0.13 | tidak
+NFP          +120s GERAK $4        tahan 5 mnt tahan    | Duka WR   57% rata +0.58 | Exness WR   54% rata +0.78 | tidak
+NFP          +180s PULLBACK        tahan 3 mnt TP5/SL5  | Duka WR   56% rata -0.35 | Exness WR   54% rata -0.31 | tidak
+NFP+CPI+PPI  +120s KONFIRMASI $4   tahan 5 mnt tahan    | Duka WR   56% rata -0.09 | Exness WR   52% rata -0.14 | tidak
+NFP+CPI+PPI  +180s SPIKE-BALIK $2  tahan 10 mnt TP5/SL5  | Duka WR   53% rata -0.43 | Exness WR   55% rata -0.11 | tidak
+NFP          +300s PULLBACK        tahan 5 mnt tahan    | Duka WR   55% rata -0.35 | Exness WR   52% rata -0.34 | tidak
+NFP          +120s KONFIRMASI $2   tahan 5 mnt TP5/SL5  | Duka WR   55% rata -0.20 | Exness WR   52% rata -0.41 | tidak
+NFP+CPI+PPI  +120s KONFIRMASI $4   tahan 5 mnt TP5/SL5  | Duka WR   55% rata -0.23 | Exness WR   51% rata -0.42 | tidak
+NFP+CPI+PPI  +180s SPIKE-BALIK $2  tahan 5 mnt TP5/SL5  | Duka WR   51% rata -0.17 | Exness WR   55% rata +0.45 | tidak
+NFP+CPI+PPI  +180s SPIKE-BALIK $2  tahan 10 mnt tahan    | Duka WR   51% rata -0.04 | Exness WR   55% rata -0.03 | tidak
+NFP          +120s KONFIRMASI $4   tahan 5 mnt TP3/SL3  | Duka WR   50% rata -0.16 | Exness WR   56% rata +0.06 | tidak
+
+== Pola pengguna: NFP spike MELAWAN kejutan -> masuk searah kejutan (REALISTIS) ==
+  XAU        +30s SPIKE-BALIK $2  tahan 1 mnt: n=  12 WR  41.7% rata  -0.90 t  -0.7 LAMA  -1.65 BARU  -0.37 (n 7) th+  33%
+  XAU        +30s SPIKE-BALIK $2  tahan 3 mnt: n=  12 WR  50.0% rata  +0.02 t  +0.0 LAMA  +0.69 BARU  -0.45 (n 7) th+  44%
+  XAU        +30s SPIKE-BALIK $2  tahan 5 mnt: n=  12 WR  50.0% rata  -0.12 t  -0.1 LAMA  -0.39 BARU  +0.07 (n 7) th+  44%
+  XAU        +30s SPIKE-BALIK $2  tahan 10 mnt: n=  12 WR  41.7% rata  +0.72 t  +0.3 LAMA  -0.24 BARU  +1.40 (n 7) th+  56%
+  XAU        +30s SPIKE-BALIK $4  tahan 1 mnt: n=   4 WR  50.0% rata  +1.22 t  +0.8 LAMA   +nan BARU  +1.22 (n 4) th+  67%
+  XAU        +30s SPIKE-BALIK $4  tahan 3 mnt: n=   4 WR  75.0% rata  +1.55 t  +2.5 LAMA   +nan BARU  +1.55 (n 4) th+ 100%
+  XAU        +30s SPIKE-BALIK $4  tahan 5 mnt: n=   4 WR  75.0% rata  +1.71 t  +1.6 LAMA   +nan BARU  +1.71 (n 4) th+  67%
+  XAU        +30s SPIKE-BALIK $4  tahan 10 mnt: n=   4 WR  50.0% rata  +4.37 t  +0.9 LAMA   +nan BARU  +4.37 (n 4) th+  67%
+  XAU        +60s SPIKE-BALIK $2  tahan 1 mnt: n=  13 WR  30.8% rata  -0.93 t  -0.9 LAMA  -1.53 BARU  -0.42 (n 7) th+  25%
+  XAU        +60s SPIKE-BALIK $2  tahan 3 mnt: n=  13 WR  46.2% rata  -1.55 t  -2.3 LAMA  -2.05 BARU  -1.13 (n 7) th+  25%
+  XAU        +60s SPIKE-BALIK $2  tahan 5 mnt: n=  13 WR  46.2% rata  -1.41 t  -1.4 LAMA  -2.69 BARU  -0.31 (n 7) th+  50%
+  XAU        +60s SPIKE-BALIK $2  tahan 10 mnt: n=  13 WR  30.8% rata  -2.75 t  -2.3 LAMA  -2.15 BARU  -3.26 (n 7) th+  25%
+  XAU        +60s SPIKE-BALIK $4  tahan 1 mnt: n=   8 WR  25.0% rata  -1.92 t  -1.3 LAMA  -1.60 BARU  -2.11 (n 5) th+  33%
+  XAU        +60s SPIKE-BALIK $4  tahan 3 mnt: n=   8 WR  37.5% rata  -2.15 t  -2.1 LAMA  -3.02 BARU  -1.62 (n 5) th+  33%
+  XAU        +60s SPIKE-BALIK $4  tahan 5 mnt: n=   8 WR  50.0% rata  -2.32 t  -1.5 LAMA  -5.11 BARU  -0.64 (n 5) th+  50%
+  XAU        +60s SPIKE-BALIK $4  tahan 10 mnt: n=   8 WR  37.5% rata  -3.56 t  -1.9 LAMA  -3.66 BARU  -3.51 (n 5) th+  33%
+  XAU        +120s SPIKE-BALIK $2  tahan 1 mnt: n=  17 WR  41.2% rata  -0.61 t  -0.8 LAMA  -0.14 BARU  -1.28 (n 7) th+  44%
+  XAU        +120s SPIKE-BALIK $2  tahan 3 mnt: n=  17 WR  58.8% rata  +0.23 t  +0.4 LAMA  -0.11 BARU  +0.72 (n 7) th+  67%
+  XAU        +120s SPIKE-BALIK $2  tahan 5 mnt: n=  17 WR  58.8% rata  +0.95 t  +1.4 LAMA  +0.36 BARU  +1.80 (n 7) th+  78%
+  XAU        +120s SPIKE-BALIK $2  tahan 10 mnt: n=  17 WR  58.8% rata  +0.52 t  +0.7 LAMA  +0.15 BARU  +1.04 (n 7) th+  44%
+  XAU        +120s SPIKE-BALIK $4  tahan 1 mnt: n=   9 WR  44.4% rata  -0.76 t  -0.7 LAMA  -0.61 BARU  -0.88 (n 5) th+  43%
+  XAU        +120s SPIKE-BALIK $4  tahan 3 mnt: n=   9 WR  66.7% rata  -0.25 t  -0.3 LAMA  -1.68 BARU  +0.90 (n 5) th+  57%
+  XAU        +120s SPIKE-BALIK $4  tahan 5 mnt: n=   9 WR  66.7% rata  +0.79 t  +0.9 LAMA  -1.18 BARU  +2.37 (n 5) th+  57%
+  XAU        +120s SPIKE-BALIK $4  tahan 10 mnt: n=   9 WR  44.4% rata  -0.31 t  -0.3 LAMA  -0.52 BARU  -0.14 (n 5) th+  43%
+  XAU        +180s SPIKE-BALIK $2  tahan 1 mnt: n=  21 WR  42.9% rata  -0.58 t  -1.6 LAMA  -0.91 BARU  -0.15 (n 9) th+  20%
+  XAU        +180s SPIKE-BALIK $2  tahan 3 mnt: n=  21 WR  42.9% rata  -0.01 t  -0.0 LAMA  -0.85 BARU  +1.12 (n 9) th+  50%
+  XAU        +180s SPIKE-BALIK $2  tahan 5 mnt: n=  21 WR  42.9% rata  +0.01 t  +0.0 LAMA  -0.38 BARU  +0.53 (n 9) th+  60%
+  XAU        +180s SPIKE-BALIK $2  tahan 10 mnt: n=  21 WR  52.4% rata  -0.52 t  -0.5 LAMA  -0.69 BARU  -0.28 (n 9) th+  40%
+  XAU        +180s SPIKE-BALIK $4  tahan 1 mnt: n=  13 WR  53.8% rata  -0.06 t  -0.2 LAMA  -0.64 BARU  +0.43 (n 7) th+  33%
+  XAU        +180s SPIKE-BALIK $4  tahan 3 mnt: n=  13 WR  38.5% rata  +0.15 t  +0.1 LAMA  -1.75 BARU  +1.78 (n 7) th+  44%
+  XAU        +180s SPIKE-BALIK $4  tahan 5 mnt: n=  13 WR  38.5% rata  +0.67 t  +0.6 LAMA  -0.36 BARU  +1.55 (n 7) th+  44%
+  XAU        +180s SPIKE-BALIK $4  tahan 10 mnt: n=  13 WR  69.2% rata  +0.65 t  +0.5 LAMA  +0.16 BARU  +1.06 (n 7) th+  56%
+  XAU        +300s SPIKE-BALIK $2  tahan 1 mnt: n=  25 WR  36.0% rata  -0.64 t  -1.9 LAMA  -0.81 BARU  -0.36 (n 9) th+  25%
+  XAU        +300s SPIKE-BALIK $2  tahan 3 mnt: n=  25 WR  52.0% rata  -0.39 t  -1.1 LAMA  -0.15 BARU  -0.80 (n 9) th+  42%
+  XAU        +300s SPIKE-BALIK $2  tahan 5 mnt: n=  25 WR  40.0% rata  -0.10 t  -0.2 LAMA  -0.49 BARU  +0.59 (n 9) th+  42%
+  XAU        +300s SPIKE-BALIK $4  tahan 1 mnt: n=  12 WR  33.3% rata  -1.25 t  -2.4 LAMA  -2.14 BARU  -0.37 (n 6) th+  11%
+  XAU        +300s SPIKE-BALIK $4  tahan 3 mnt: n=  12 WR  41.7% rata  -0.86 t  -1.6 LAMA  -0.35 BARU  -1.37 (n 6) th+  33%
+  XAU        +300s SPIKE-BALIK $4  tahan 5 mnt: n=  12 WR  33.3% rata  -0.07 t  -0.1 LAMA  +0.57 BARU  -0.71 (n 6) th+  33%
+  XAU_EXNESS +30s SPIKE-BALIK $2  tahan 1 mnt: n=   8 WR  25.0% rata  -0.49 t  -0.4 LAMA  -1.78 BARU  -0.31 (n 7) th+  20%
+  XAU_EXNESS +30s SPIKE-BALIK $2  tahan 3 mnt: n=   8 WR  50.0% rata  -0.47 t  -0.4 LAMA  -0.81 BARU  -0.42 (n 7) th+  40%
+  XAU_EXNESS +30s SPIKE-BALIK $2  tahan 5 mnt: n=   8 WR  25.0% rata  +0.17 t  +0.2 LAMA  -0.02 BARU  +0.20 (n 7) th+  40%
+  XAU_EXNESS +30s SPIKE-BALIK $2  tahan 10 mnt: n=   8 WR  37.5% rata  +1.28 t  +0.5 LAMA  +0.36 BARU  +1.41 (n 7) th+  60%
+  XAU_EXNESS +30s SPIKE-BALIK $4  tahan 1 mnt: n=   3 WR  33.3% rata  +0.60 t  +0.2 LAMA   +nan BARU  +0.60 (n 3) th+  50%
+  XAU_EXNESS +30s SPIKE-BALIK $4  tahan 3 mnt: n=   3 WR  66.7% rata  +0.98 t  +1.2 LAMA   +nan BARU  +0.98 (n 3) th+ 100%
+  XAU_EXNESS +30s SPIKE-BALIK $4  tahan 5 mnt: n=   3 WR  33.3% rata  +1.27 t  +0.8 LAMA   +nan BARU  +1.27 (n 3) th+  50%
+  XAU_EXNESS +30s SPIKE-BALIK $4  tahan 10 mnt: n=   3 WR  33.3% rata  -0.46 t  -0.9 LAMA   +nan BARU  -0.46 (n 3) th+  50%
+  XAU_EXNESS +60s SPIKE-BALIK $2  tahan 1 mnt: n=  10 WR  40.0% rata  -0.96 t  -0.8 LAMA  -3.22 BARU  -0.40 (n 8) th+  17%
+  XAU_EXNESS +60s SPIKE-BALIK $2  tahan 3 mnt: n=  10 WR  30.0% rata  -1.62 t  -2.1 LAMA  -2.54 BARU  -1.39 (n 8) th+  17%
+  XAU_EXNESS +60s SPIKE-BALIK $2  tahan 5 mnt: n=  10 WR  40.0% rata  -1.82 t  -1.4 LAMA  -5.87 BARU  -0.80 (n 8) th+  17%
+  XAU_EXNESS +60s SPIKE-BALIK $2  tahan 10 mnt: n=  10 WR   0.0% rata  -4.22 t  -3.1 LAMA  -5.99 BARU  -3.77 (n 8) th+   0%
+  XAU_EXNESS +60s SPIKE-BALIK $4  tahan 1 mnt: n=   6 WR  16.7% rata  -2.89 t  -1.9 LAMA  -5.35 BARU  -2.40 (n 5) th+  20%
+  XAU_EXNESS +60s SPIKE-BALIK $4  tahan 3 mnt: n=   6 WR  16.7% rata  -2.55 t  -2.3 LAMA  -5.26 BARU  -2.01 (n 5) th+  20%
+  XAU_EXNESS +60s SPIKE-BALIK $4  tahan 5 mnt: n=   6 WR  50.0% rata  -2.45 t  -1.2 LAMA -10.45 BARU  -0.85 (n 5) th+  40%
+  XAU_EXNESS +60s SPIKE-BALIK $4  tahan 10 mnt: n=   6 WR   0.0% rata  -5.13 t  -2.4 LAMA -11.98 BARU  -3.76 (n 5) th+   0%
+  XAU_EXNESS +120s SPIKE-BALIK $2  tahan 1 mnt: n=  14 WR  42.9% rata  -0.95 t  -1.2 LAMA  -0.74 BARU  -1.16 (n 7) th+  29%
+  XAU_EXNESS +120s SPIKE-BALIK $2  tahan 3 mnt: n=  14 WR  64.3% rata  +0.54 t  +0.9 LAMA  +0.18 BARU  +0.89 (n 7) th+  71%
+  XAU_EXNESS +120s SPIKE-BALIK $2  tahan 5 mnt: n=  14 WR  71.4% rata  +1.21 t  +1.8 LAMA  +0.47 BARU  +1.96 (n 7) th+  71%
+  XAU_EXNESS +120s SPIKE-BALIK $2  tahan 10 mnt: n=  14 WR  64.3% rata  +0.44 t  +0.5 LAMA  -0.30 BARU  +1.17 (n 7) th+  43%
+  XAU_EXNESS +120s SPIKE-BALIK $4  tahan 1 mnt: n=   6 WR  50.0% rata  -0.94 t  -0.6 LAMA  -2.00 BARU  -0.73 (n 5) th+  50%
+  XAU_EXNESS +120s SPIKE-BALIK $4  tahan 3 mnt: n=   6 WR  83.3% rata  +0.32 t  +0.4 LAMA  -3.72 BARU  +1.13 (n 5) th+  75%
+  XAU_EXNESS +120s SPIKE-BALIK $4  tahan 5 mnt: n=   6 WR  83.3% rata  +1.75 t  +1.7 LAMA  -2.24 BARU  +2.55 (n 5) th+  75%
+  XAU_EXNESS +120s SPIKE-BALIK $4  tahan 10 mnt: n=   6 WR  50.0% rata  -0.70 t  -0.4 LAMA  -4.33 BARU  +0.03 (n 5) th+  25%
+  XAU_EXNESS +180s SPIKE-BALIK $2  tahan 1 mnt: n=  18 WR  50.0% rata  -0.25 t  -0.7 LAMA  -0.59 BARU  +0.02 (n 10) th+  25%
+  XAU_EXNESS +180s SPIKE-BALIK $2  tahan 3 mnt: n=  18 WR  55.6% rata  +0.70 t  +0.8 LAMA  -0.32 BARU  +1.52 (n 10) th+  75%
+  XAU_EXNESS +180s SPIKE-BALIK $2  tahan 5 mnt: n=  18 WR  44.4% rata  +0.73 t  +0.8 LAMA  +0.18 BARU  +1.18 (n 10) th+  75%
+  XAU_EXNESS +180s SPIKE-BALIK $2  tahan 10 mnt: n=  18 WR  55.6% rata  +0.06 t  +0.1 LAMA  -0.43 BARU  +0.46 (n 10) th+  50%
+  XAU_EXNESS +180s SPIKE-BALIK $4  tahan 1 mnt: n=  13 WR  53.8% rata  -0.01 t  -0.0 LAMA  -0.74 BARU  +0.61 (n 7) th+  38%
+  XAU_EXNESS +180s SPIKE-BALIK $4  tahan 3 mnt: n=  13 WR  46.2% rata  +0.53 t  +0.5 LAMA  -1.19 BARU  +2.01 (n 7) th+  50%
+  XAU_EXNESS +180s SPIKE-BALIK $4  tahan 5 mnt: n=  13 WR  38.5% rata  +0.70 t  +0.6 LAMA  -0.56 BARU  +1.78 (n 7) th+  50%
+  XAU_EXNESS +180s SPIKE-BALIK $4  tahan 10 mnt: n=  13 WR  53.8% rata  +0.17 t  +0.1 LAMA  -1.08 BARU  +1.24 (n 7) th+  50%
+  XAU_EXNESS +300s SPIKE-BALIK $2  tahan 1 mnt: n=  20 WR  40.0% rata  -0.62 t  -1.5 LAMA  -1.07 BARU  -0.06 (n 9) th+  22%
+  XAU_EXNESS +300s SPIKE-BALIK $2  tahan 3 mnt: n=  20 WR  50.0% rata  -0.35 t  -1.0 LAMA  -0.23 BARU  -0.50 (n 9) th+  44%
+  XAU_EXNESS +300s SPIKE-BALIK $2  tahan 5 mnt: n=  20 WR  45.0% rata  -0.06 t  -0.1 LAMA  -0.72 BARU  +0.75 (n 9) th+  56%
+  XAU_EXNESS +300s SPIKE-BALIK $4  tahan 1 mnt: n=   9 WR  44.4% rata  -1.03 t  -1.4 LAMA  -3.28 BARU  +0.10 (n 6) th+  29%
+  XAU_EXNESS +300s SPIKE-BALIK $4  tahan 3 mnt: n=   9 WR  44.4% rata  -0.36 t  -0.5 LAMA  -0.00 BARU  -0.54 (n 6) th+  43%
+  XAU_EXNESS +300s SPIKE-BALIK $4  tahan 5 mnt: n=   9 WR  55.6% rata  +0.64 t  +0.7 LAMA  +0.65 BARU  +0.63 (n 6) th+  71%
+
+== NFP: seberapa sering gerak menit awal MELAWAN kejutan? ==
+  XAU        +30s: spike >= $2 melawan kejutan di 12/161 rilis (7%)
+  XAU        +60s: spike >= $2 melawan kejutan di 13/161 rilis (8%)
+  XAU        +120s: spike >= $2 melawan kejutan di 17/161 rilis (11%)
+  XAU        +180s: spike >= $2 melawan kejutan di 21/161 rilis (13%)
+  XAU        +300s: spike >= $2 melawan kejutan di 25/161 rilis (16%)
+  XAU_EXNESS +30s: spike >= $2 melawan kejutan di 8/121 rilis (7%)
+  XAU_EXNESS +60s: spike >= $2 melawan kejutan di 10/121 rilis (8%)
+  XAU_EXNESS +120s: spike >= $2 melawan kejutan di 14/121 rilis (12%)
+  XAU_EXNESS +180s: spike >= $2 melawan kejutan di 18/121 rilis (15%)
+  XAU_EXNESS +300s: spike >= $2 melawan kejutan di 20/121 rilis (17%)
