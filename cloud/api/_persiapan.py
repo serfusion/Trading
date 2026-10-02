@@ -190,6 +190,20 @@ def tahap(title: str, hasil: str) -> list[dict]:
             out.append({"dtk": "1 mnt", "teks": a["teks"], "angka": a["teks"].split(" ", 1)[0],
                         "kata": a["teks"].split(" ", 1)[1], "kuat": a["kuat"], "persen": a["persen"],
                         "arah": a["arah"], "gerak": None, "n": a["n"], "exness": None})
+    # 3 & 6 JAM (XAU M15; permintaan 2 Okt 2026 setelah NFP naik $40 lalu berbalik): angka "53–69%" bila semua tahun
+    # dan sejak Okt 2021 beda >= 10 poin -> terlihat bahwa arah berita melemah seiring waktu
+    for h, x in sorted((r.get("jam") or {}).items(), key=lambda kv: int(kv[0])):
+        b = x.get("baru")
+        a = arah_emas({"naik1j": round(x["naik"] * 100), "n": x["n"], "baru_naik1j": None if b is None else round(b * 100)})
+        if not a:
+            continue
+        angka, kata = a["teks"].split(" ", 1)
+        pb = None if b is None else int(round(100 * (b if a["arah"] == "naik" else 1 - b)))
+        if pb is not None and abs(pb - a["persen"]) >= 10:
+            angka = f"{min(pb, a['persen'])}–{max(pb, a['persen'])}%"
+        out.append({"dtk": f"{h} jam", "teks": a["teks"], "angka": angka, "kata": kata, "kuat": a["kuat"],
+                    "persen": a["persen"], "arah": a["arah"], "gerak": None, "n": a["n"], "exness": None,
+                    "baru": pb})
     return out
 
 
@@ -226,7 +240,8 @@ def tahap_teks(stages: list[dict]) -> str:
     """"1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK (±$2,68) • 3 dtk 91% NAIK • 1 mnt 81% NAIK" (tanpa emoji)."""
     parts = []
     for x in stages:
-        t = x["teks"].replace(" 🟢", "").replace(" 🔴", "").replace(" ⚪", "")
+        t = x["teks"] if not x["dtk"].endswith("jam") else f"{x['angka']} {x['kata']}"
+        t = t.replace(" 🟢", "").replace(" 🔴", "").replace(" ⚪", "")
         if x.get("gerak") is not None and x["dtk"] in ("1 dtk", "2 dtk"):
             t += f" (±${x['gerak']:.2f})".replace(".", ",")
         parts.append(f"{x['dtk']} {t}")
@@ -274,7 +289,8 @@ def skenario_hentakan(title: str, forecast: str) -> list[dict]:
         st = tahap(title, x["hasil"])
         if any(s["dtk"].endswith("dtk") for s in st):
             row.update(tahap=st, label_tahap=f"⚡ Bila Act {OP[x['hasil']]} {f} → arah emas",
-                       bukti_tahap=x["bukti"] + " • detik 1–3 dicek di tick Exness",
+                       bukti_tahap=x["bukti"] + " • detik 1–3 dicek di tick Exness • 3–6 jam: XAU M15, "
+                                                 "a–b% = semua tahun vs sejak Okt 2021",
                        bukti=tahap_teks(st) + " • " + x["bukti"])
         out.append(row)
     return out

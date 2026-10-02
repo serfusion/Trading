@@ -119,11 +119,54 @@ def besar_kecil(df: pd.DataFrame, out: dict, feed: str = "duka") -> None:
                     "gerak60": round(float(k[f"{feed}_60"].abs().median()), 2)}
 
 
+JAM = (3, 6)          # arah emas beberapa JAM setelah rilis (XAU M15), permintaan pengguna 2 Okt 2026 (NFP berbalik)
+
+
+def jam_stats(out: dict) -> None:
+    """Tambah out[judul][hasil]["jam"] = {"3": {naik, n, baru}, "6": ...}: % emas di atas harga open candle M15 rilis
+    setelah 3 / 6 jam (research/nfp_berbalik.py untuk NFP). Persen dari rilis yang harganya berubah."""
+    from .event_stats import xau_m15
+    m = xau_m15()
+    idx = m.index
+    cal = calendar()
+    cal = cal[cal.event.isin(list(out))]
+    rows = []
+    for r in cal.itertuples():
+        t = pd.Timestamp(r.time)
+        k = idx.searchsorted(t)
+        if k >= len(idx) or idx[k] != t:
+            continue
+        o = m.open.iloc[k]
+        row = {"time": t, "event": r.event, "s": r.s}
+        for h in JAM:
+            j = idx.searchsorted(t + pd.Timedelta(hours=h)) - 1
+            row[f"j{h}"] = float(m.close.iloc[j] - o) if 0 <= j < len(idx) and idx[j] >= t else np.nan
+        rows.append(row)
+    df = pd.DataFrame(rows)
+    for ev, g in df.groupby("event"):
+        for s, lab in HASIL.items():
+            k = g[g.s == s]
+            if lab not in out[ev] or len(k) < 5:
+                continue
+            cell = {}
+            for h in JAM:
+                v = k[f"j{h}"].dropna()
+                v = v[v != 0]
+                vb = k[k.time >= NEW][f"j{h}"].dropna()
+                vb = vb[vb != 0]
+                if len(v) >= 5:
+                    cell[str(h)] = {"naik": round(float((v > 0).mean()), 3), "n": int(len(v)),
+                                    "baru": round(float((vb > 0).mean()), 3) if len(vb) >= 5 else None}
+            if cell:
+                out[ev][lab]["jam"] = cell
+
+
 def main() -> None:
     df = build()
     df.to_csv(OUT_CSV, index=False)
     out = rates(df)
     besar_kecil(df, out)
+    jam_stats(out)
     ex = rates(df, feed="exness")
     for ev, c in out.items():                     # cek feed kedua (tick asli Exness) untuk arah 1-3 detik
         for lab in ("bawah", "sama", "atas"):
@@ -132,7 +175,7 @@ def main() -> None:
                 if sec in e:
                     x["ex"], x["ex_n"] = e[sec]["naik"], e[sec]["n"]
     OUT_JSON.write_text(json.dumps({"dibuat": "research/reaksi_menit.py",
-                                    "feed": "Dukascopy (mid t0-1 dtk -> +1/2/3/60 dtk); cepat.*.ex = tick Exness",
+                                    "feed": "Dukascopy (mid t0-1 dtk -> +1/2/3/60 dtk); cepat.*.ex = tick Exness; jam = XAU M15 3/6 jam",
                                     "judul": out}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{len(df)} rilis; ditulis {OUT_CSV} dan {OUT_JSON}\n")
     for ev, c in out.items():

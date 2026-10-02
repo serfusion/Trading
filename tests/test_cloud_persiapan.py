@@ -173,4 +173,20 @@ def test_kejutan_besar_kecil_mengubah_persen():
     besar = _persiapan.kesimpulan("Non-Farm Employment Change", "-20K", "89K")
     assert kecil["kejutan"]["ukuran"] == "kecil" and besar["kejutan"]["ukuran"] == "besar"
     assert "kejutan BESAR (109K ≥ 84K)" in besar["catatan"] and "$" in besar["kejutan"]["bukti"]
-    assert besar["tahap"][-1]["persen"] == besar["persen"]                 # sel 1 mnt ikut kejutan
+    assert next(x for x in besar["tahap"] if x["dtk"] == "1 mnt")["persen"] == besar["persen"]   # sel 1 mnt ikut kejutan
+
+
+def test_sel_3_dan_6_jam_melemah(monkeypatch):
+    """2 Okt 2026: NFP naik $40 di menit awal lalu berbalik -> tampilkan juga 3 & 6 jam (XAU M15)."""
+    cel = {k: dict(v) for k, v in CEPAT["Non-Farm Employment Change"].items() if isinstance(v, dict)}
+    cel["bawah"]["jam"] = {"3": {"naik": 0.70, "n": 67, "baru": 0.667}, "6": {"naik": 0.687, "n": 67, "baru": 0.533}}
+    monkeypatch.setattr(_persiapan, "REAKSI", {"Non-Farm Employment Change": {**cel, "tahun": "2010–2025"}})
+    st = {x["dtk"]: x for x in _persiapan.tahap("Non-Farm Employment Change", "bawah")}
+    assert st["3 jam"]["angka"] == "70%" and st["3 jam"]["kata"] == "NAIK 🟢"
+    assert st["6 jam"]["angka"] == "53–69%" and st["6 jam"]["kata"] == "naik ⚪" and not st["6 jam"]["kuat"]
+    assert _persiapan.tahap_teks(list(st.values())).endswith("3 jam 70% NAIK • 6 jam 53–69% naik")
+
+
+def test_reaksi_json_berisi_3_dan_6_jam():
+    j = _persiapan.REAKSI["Non-Farm Employment Change"]["bawah"]["jam"]
+    assert set(j) == {"3", "6"} and j["6"]["n"] >= 30
