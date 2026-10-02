@@ -1284,7 +1284,10 @@
    "impact": "High",
    "forecast": "0.3%",
    "previous": "0.3%",
-   "first_seen": "2026-10-01T05:50:43.074857+00:00"
+   "first_seen": "2026-10-01T05:50:43.074857+00:00",
+   "actual": "0.1%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-02T12:32:32.370206+00:00"
   },
   {
    "title": "Non-Farm Employment Change",
@@ -1294,7 +1297,10 @@
    "impact": "High",
    "forecast": "89K",
    "previous": "162K",
-   "first_seen": "2026-10-01T05:50:43.074857+00:00"
+   "first_seen": "2026-10-01T05:50:43.074857+00:00",
+   "actual": "29K",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-02T12:32:32.370206+00:00"
   },
   {
    "title": "Unemployment Rate",
@@ -1304,7 +1310,10 @@
    "impact": "High",
    "forecast": "4.1%",
    "previous": "4.1%",
-   "first_seen": "2026-10-01T05:50:43.074857+00:00"
+   "first_seen": "2026-10-01T05:50:43.074857+00:00",
+   "actual": "4.2%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-02T12:32:32.370206+00:00"
   },
   {
    "title": "FOMC Member Logan Speaks",
@@ -1341,5 +1350,5 @@
    "first_seen": "2026-10-01T05:50:43.074857+00:00"
   }
  ],
- "diperbarui": "2026-10-02T00:19:13.274550+00:00"
+ "diperbarui": "2026-10-02T12:32:32.370206+00:00"
 }
