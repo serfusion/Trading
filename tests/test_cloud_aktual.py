@@ -84,10 +84,21 @@ def test_semua_sumber_gagal_alasan_tanpa_kunci_dan_ditunda():
     assert c[0]["actual"] == "" and c[0]["actual_info"].startswith("sumber gagal")
     assert "rahasia123" not in json.dumps([c, out, store.rows])
     assert out["sumber"]["BLS"] == "gagal (timeout)"
-    # < 2 menit kemudian: tidak mencoba lagi (hemat batas BLS 25/hari)
+    # 10 menit pertama setelah rilis: dicoba lagi paling cepat tiap 30 detik (hemat batas BLS 25/hari)
     c3 = cal()[:1]
-    assert _aktual.fill(c3, store, NOW + timedelta(minutes=1), env)["status"] == "ditunda"
+    assert _aktual.fill(c3, store, NOW + timedelta(seconds=20), env)["status"] == "ditunda"
     assert c3[0]["actual_info"] == c[0]["actual_info"]
+
+
+def test_berita_lama_dicoba_ulang_tiap_2_menit():
+    store = Store()
+    old = [dict(CAL[1])]                                          # Core PCE, rilis 2 hari lalu
+    f = _aktual.Fetcher({}, {"PCEPILFE"}, opener([], bls_ok=False, fred_ok=False), csv=lambda s: [])
+    _aktual.fill(old, store, NOW, {}, f)
+    assert _aktual.fill([dict(CAL[1])], store, NOW + timedelta(minutes=1), {})["status"] == "ditunda"
+    calls = []
+    f2 = _aktual.Fetcher({}, {"PCEPILFE"}, opener(calls, bls_ok=False, fred_ok=False), csv=lambda s: [])
+    assert _aktual.fill([dict(CAL[1])], store, NOW + timedelta(minutes=3), {}, f2)["status"] == "dicek"
 
 
 def test_jolts_dua_bulan_lalu_dan_adp_dalam_orang():

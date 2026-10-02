@@ -82,3 +82,37 @@ seturun-turunnya". Posisi terverifikasi (oposisi ±0,5°, Mars ±3° dari MC). U
 Tidak ada yang bermakna (p terkecil 0,11; batas Bonferroni 0,003). Tiga kejadian pola yang persis sama malah
 berakhir NFP di atas konsensus — sampel terlalu kecil untuk berarti apa pun. → Tidak dipakai. Catatan: NFP di BAWAH
 konsensus ("turun") justru membuat emas NAIK (81%), bukan turun.
+
+## 6. Arah emas 1, 2, 3 detik setelah rilis (aplikasi 3.18, 2 Okt 2026)
+
+Permintaan pengguna: "tuliskan hasilnya dan persentase akan ke mana setelah 1 detik news release di APK".
+`research/reaksi_menit.py` sekarang juga mencatat gerak mid tick t0−1 dtk → t0+1 / +2 / +3 dtk (Dukascopy 2010–2025,
+dicek tick asli Exness 2015–2026). % searah = dari rilis yang harganya sudah bergerak di detik itu; ±$ = median besar
+gerak. Format sel: Dukascopy / Exness.
+
+| Hasil | Arah emas | 1 dtk | 2 dtk | 3 dtk | 1 mnt | n |
+|---|---|---|---|---|---|---|
+| NFP < perkiraan | naik | 57% / 59% (±$0,17) | 85% / 82% (±$2,68) | 91% / 88% (±$3,14) | 81% | 67 |
+| NFP > perkiraan | turun | 51% / 57% (±$0,19) | 74% / 78% (±$2,26) | 76% / 81% (±$3,69) | 81% | 94 |
+| Pengangguran < perkiraan | turun | 52% / 53% | 49% / 55% | 48% / 55% | 61% | 69 |
+| CPI m/m < perkiraan | naik | 57% / 53% (±$0,14) | 81% / 74% (±$1,35) | 84% / 86% | 81% | 58 |
+| CPI m/m > perkiraan | turun | 49% / 60% (±$0,14) | 77% / 74% (±$2,08) | 80% / 80% | 74% | 46 |
+| Core CPI m/m > perkiraan | turun | 57% / 59% (±$0,19) | 95% / 84% (±$3,48) | 93% / 91% | 74% | 43 |
+| Core PPI m/m < perkiraan | naik | 71% / 62% (±$0,10) | 88% / 84% (±$0,69) | 90% / 88% | 90% | 49 |
+| Retail Sales m/m > perkiraan | turun | 81% / 83% (±$0,72) | 83% / 89% (±$1,03) | 81% / 89% | 79% | 75 |
+| ISM Manufaktur < perkiraan | naik | 88% / 89% (±$1,22) | 82% / 89% | 88% / 89% | 71% | 17 |
+| Klaim pengangguran > perkiraan | naik | 55% / 57% (±$0,10) | 64% / 64% | 65% / 67% | 75% | 93 |
+
+Kesimpulan:
+- **Detik pertama NFP/CPI/PPI: harga praktis belum bergerak** (±$0,10–0,20, sama dengan spread Exness $0,16–0,20) dan
+  arahnya ≈ 50:50. **Hentakan muncul antara detik ke-1 dan ke-2** (±$1,3–2,7), lalu searah hasil 82–91% di detik
+  ke-2–3, konsisten di kedua feed dan sejak Okt 2021. Retail Sales & ISM sudah bergerak di detik pertama.
+- Ini menjelaskan hasil `docs/NEWS_PRA.md`: entry t0−1 lalu tutup 1 detik selalu rugi spread karena harga belum bergerak.
+- Angka ini **RIWAYAT reaksi**, bukan sinyal: Act baru sampai di aplikasi beberapa detik–menit setelah rilis (BLS/FRED
+  dicek tiap 30 detik di 10 menit pertama), jadi saat baris ✅ tampil, hentakan 1–3 detik sudah lewat.
+
+Tampilan: kartu 🎯 → per hasil "⚡ Bila Act < 89K → arah emas" dengan sel 1 dtk / 2 dtk / 3 dtk / 1 mnt; setelah Act keluar
+"✅ Act 45K < 89K → arah emas" dengan sel yang sama (`_persiapan.tahap`, `_hari_h.result`). Hijau/merah hanya bila ≥ 60%
+di Dukascopy, arah sama ≥ 55% di Exness dan sejak Okt 2021, serta gerak median ≥ $0,30 (di bawah itu "belum gerak").
+Aplikasi lama (≤ 3.17) membaca ringkasannya di teks kecil ("1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK …"). Tab Tanya
+("detik pertama NFP") ikut menampilkan deretan ini. Kalender News: catatan di bawah Act juga memuatnya.

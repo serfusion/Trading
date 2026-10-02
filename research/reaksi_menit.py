@@ -1,9 +1,12 @@
-"""Reaksi emas 5 dtk & 1 menit setelah rilis, per judul berita dan per hasil (di bawah / sama / di atas konsensus).
+"""Reaksi emas 1 dtk, 5 dtk & 1 menit setelah rilis, per judul berita dan per hasil (di bawah / sama / di atas konsensus).
 
 python -m research.reaksi_menit     # -> data/research/eksternal/reaksi_menit.csv + cloud/api/reaksi.json
 
 Dipakai "perkiraan hari H" di kartu 🎯 (cloud/api/_hari_h.py): peluang pasar prediksi (Kalshi/Polymarket) untuk tiap
-hasil x seberapa sering emas naik 1 menit setelah hasil itu. Gerak = mid tick dari t0-1 dtk ke t0+5 / t0+60 dtk.
+hasil x seberapa sering emas naik 1 menit setelah hasil itu. Gerak = mid tick dari t0-1 dtk ke t0+1 / +5 / +60 dtk.
+Arah 1 DETIK (permintaan pengguna 2 Okt 2026: "tuliskan hasilnya dan persentase akan ke mana setelah 1 detik news
+release") dihitung dari rilis yang harganya sudah bergerak di detik itu ("diam" = mid belum berubah, dilaporkan terpisah)
+dan dicek di dua feed: Dukascopy dan tick asli Exness (broker pengguna).
 Konsensus & Act: kalender ForexFactory (research/news_prediksi.calendar(), s.d. Jan 2026). Tick: Dukascopy 2010-2026
 (utama) dan Exness Cent 2015-2026 (cek). Periode LAMA (< Okt 2021) dan BARU dilaporkan.
 """
@@ -23,6 +26,22 @@ OUT_CSV = cache_path("reaksi_menit.csv")
 OUT_JSON = Path(__file__).resolve().parent.parent / "cloud" / "api" / "reaksi.json"
 FEEDS = {"XAU": "duka", "XAU_EXNESS": "exness"}
 HASIL = {-1.0: "bawah", 0.0: "sama", 1.0: "atas"}
+SECS = (1, 2, 3, 5, 60)
+CEPAT = (1, 2, 3)                     # detik pertama yang ditampilkan di aplikasi (cloud/api/_persiapan.tahap)
+
+
+def cepat(k: pd.DataFrame, feed: str, sec: int) -> dict:
+    """Arah emas `sec` detik setelah rilis: % naik dari rilis yang harganya sudah bergerak, % masih diam,
+    median |gerak| ($/ons) dari yang bergerak."""
+    col = f"{feed}_{sec}"
+    if col not in k:
+        return {}
+    v = k[col].dropna()
+    mv = v[v != 0]
+    if len(mv) < 5:
+        return {}
+    return {"naik": round(float((mv > 0).mean()), 3), "n": int(len(mv)), "diam": round(float((v == 0).mean()), 3),
+            "gerak": round(float(mv.abs().median()), 2)}
 
 
 def build() -> pd.DataFrame:
@@ -35,12 +54,12 @@ def build() -> pd.DataFrame:
             if p is None or p.at(-1) < 0:
                 continue
             m1 = p.mid[p.at(-1)]
-            ticks[(t, lab)] = (float(p.mid[p.at(5)] - m1), float(p.mid[p.at(60)] - m1))
+            ticks[(t, lab)] = tuple(float(p.mid[p.at(k)] - m1) for k in SECS)
     for r in cal.itertuples():
         row = {"time": r.time, "event": r.event, "s": r.s}
         for lab in FEEDS.values():
-            g = ticks.get((r.time, lab))
-            row[f"{lab}_5"], row[f"{lab}_60"] = g if g else (np.nan, np.nan)
+            g = ticks.get((r.time, lab)) or (np.nan,) * len(SECS)
+            row.update({f"{lab}_{k}": v for k, v in zip(SECS, g)})
         rows.append(row)
     df = pd.DataFrame(rows)
     return df[df.duka_60.notna() | df.exness_60.notna()].reset_index(drop=True)
@@ -60,6 +79,13 @@ def rates(df: pd.DataFrame, before: pd.Timestamp | None = None, feed: str = "duk
                 cell[lab] = {"naik60": round(float((k[f"{feed}_60"] > 0).mean()), 3),
                              "naik5": round(float((k[f"{feed}_5"] > 0).mean()), 3), "n": int(len(k)),
                              "baru_naik60": round(float((kb[f"{feed}_60"] > 0).mean()), 3) if len(kb) >= 5 else None}
+                fast = {}
+                for sec in CEPAT:
+                    c, b = cepat(k, feed, sec), cepat(kb, feed, sec)
+                    if c:
+                        fast[str(sec)] = dict(c, baru=b.get("naik"))
+                if fast:
+                    cell[lab]["cepat"] = fast
         if cell:
             cell["tahun"] = f"{g.time.min():%Y}–{g.time.max():%Y}"
             out[ev] = cell
@@ -70,7 +96,15 @@ def main() -> None:
     df = build()
     df.to_csv(OUT_CSV, index=False)
     out = rates(df)
-    OUT_JSON.write_text(json.dumps({"dibuat": "research/reaksi_menit.py", "feed": "Dukascopy (mid t0-1 dtk -> +60 dtk)",
+    ex = rates(df, feed="exness")
+    for ev, c in out.items():                     # cek feed kedua (tick asli Exness) untuk arah 1-3 detik
+        for lab in ("bawah", "sama", "atas"):
+            e = ((ex.get(ev) or {}).get(lab) or {}).get("cepat") or {}
+            for sec, x in ((c.get(lab) or {}).get("cepat") or {}).items():
+                if sec in e:
+                    x["ex"], x["ex_n"] = e[sec]["naik"], e[sec]["n"]
+    OUT_JSON.write_text(json.dumps({"dibuat": "research/reaksi_menit.py",
+                                    "feed": "Dukascopy (mid t0-1 dtk -> +1/2/3/60 dtk); cepat.*.ex = tick Exness",
                                     "judul": out}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(f"{len(df)} rilis; ditulis {OUT_CSV} dan {OUT_JSON}\n")
     for ev, c in out.items():
@@ -80,9 +114,12 @@ def main() -> None:
                 g = df[(df.event == ev) & (df.s == {"bawah": -1, "sama": 0, "atas": 1}[lab]) & df.duka_60.notna()]
                 old, new = g[g.time < NEW], g[g.time >= NEW]
                 ex = df[(df.event == ev) & (df.s == {"bawah": -1, "sama": 0, "atas": 1}[lab]) & df.exness_60.notna()]
+                d1 = "".join(f"; {sec}d naik {x['naik'] * 100:3.0f}% (n={x['n']}, diam {x['diam'] * 100:.0f}%, BARU "
+                             f"{(x.get('baru') or 0) * 100:.0f}%, Exness {(x.get('ex') or 0) * 100:.0f}%, "
+                             f"|gerak| ${x['gerak']:.2f})" for sec, x in (c[lab].get("cepat") or {}).items())
                 cells.append(f"{lab} naik1m {c[lab]['naik60'] * 100:3.0f}% (n={c[lab]['n']:3}; LAMA "
                              f"{(old.duka_60 > 0).mean() * 100:3.0f}% BARU {(new.duka_60 > 0).mean() * 100:3.0f}%; "
-                             f"Exness {(ex.exness_60 > 0).mean() * 100:3.0f}%)")
+                             f"Exness {(ex.exness_60 > 0).mean() * 100:3.0f}%){d1}")
         print(f"- {ev} ({c['tahun']}): " + " | ".join(cells))
 
 

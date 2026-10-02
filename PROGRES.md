@@ -149,3 +149,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-10-02: "sinyal 💰 hanya beberapa jam / setelah turun separuh pasti ke SL?" → `research/potong_rugi.py`,
   `docs/POTONG_RUGI.md`: 58% memang ke SL, tetapi menahan tetap lebih baik (−0,30/−0,41R vs −0,5R); potong & batas
   waktu tidak lolos; skema bawaan tetap.
+- 2026-10-02: "tuliskan hasil & persentase arah 1 detik setelah rilis di APK" → `research/reaksi_menit.py` + 1/2/3 dtk
+  (Dukascopy + Exness), `docs/HARI_H.md` bagian 6: detik pertama NFP/CPI/PPI belum bergerak (±$0,17, 50:50), hentakan
+  di detik 1→2, searah hasil 82–91% di detik 2–3. Aplikasi 3.18: sel 1 dtk / 2 dtk / 3 dtk / 1 mnt di kartu 🎯 (⚡ & ✅),
+  Act dicek tiap 30 detik di 10 menit pertama.

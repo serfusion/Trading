@@ -147,6 +147,63 @@ def arah_emas(e: dict | None) -> dict | None:
     return {"arah": kata, "persen": pct, "n": n, "kuat": kuat, "teks": teks, "bukti": bukti}
 
 
+MIN_GERAK = 0.30      # $/ons: gerak median lebih kecil dari ini (±1,5–2x spread Exness $0,16–0,20) = "belum gerak"
+_KEY = {"sesuai": "sama"}
+
+
+def tahap(title: str, hasil: str) -> list[dict]:
+    """Arah emas 1, 2, 3 DETIK dan 1 MENIT setelah rilis untuk satu hasil (bawah / atas / sesuai).
+
+    Permintaan pengguna 2 Okt 2026: "tuliskan hasilnya dan persentase akan ke mana setelah 1 detik news release".
+    Dari tick (research/reaksi_menit.py): % naik dihitung dari rilis yang harganya sudah bergerak; "belum gerak" bila
+    gerak median < MIN_GERAK (detik pertama NFP/CPI/PPI: ±$0,10–0,20 ≈ spread, arah ≈ 50:50). Kuat (hijau/merah)
+    hanya bila >= 60% di Dukascopy, arah sama >= 55% di tick Exness dan sejak Okt 2021."""
+    r = (REAKSI.get(title) or {}).get(_KEY.get(hasil, hasil)) or {}
+    out = []
+    for sec, x in sorted((r.get("cepat") or {}).items(), key=lambda kv: int(kv[0])):
+        up = x["naik"] >= 0.5
+        pct = int(round(100 * (x["naik"] if up else 1 - x["naik"])))
+        kata = "naik" if up else "turun"
+
+        def same(v):
+            return v is None or (v if up else 1 - v) >= 0.55
+        kuat = False
+        if x["gerak"] < MIN_GERAK:
+            teks, angka, kecil = "belum gerak ⚪", f"±${x['gerak']:.2f}".replace(".", ","), "belum gerak ⚪"
+        elif pct < 55:
+            teks, angka, kecil = "≈ 50:50 ⚪", "50:50", "acak ⚪"
+        else:
+            kuat = pct >= 60 and same(x.get("ex")) and same(x.get("baru"))
+            teks = (f"{pct}% NAIK 🟢" if up else f"{pct}% TURUN 🔴") if kuat else f"{pct}% {kata} ⚪"
+            angka, kecil = teks.split(" ", 1)
+        ex = x.get("ex")
+        # angka/kata: sel aplikasi 3.18 (angka besar di atas, kata kecil di bawah)
+        out.append({"dtk": f"{sec} dtk", "teks": teks, "angka": angka, "kata": kecil, "kuat": kuat, "persen": pct,
+                    "arah": kata,
+                    "gerak": x["gerak"], "n": x["n"],
+                    "exness": None if ex is None else int(round(100 * (ex if up else 1 - ex)))})
+    if r.get("naik60") is not None:
+        b = r.get("baru_naik60")
+        a = arah_emas({"naik1j": round(r["naik60"] * 100), "n": r.get("n"),
+                       "baru_naik1j": None if b is None else round(b * 100)})
+        if a:
+            out.append({"dtk": "1 mnt", "teks": a["teks"], "angka": a["teks"].split(" ", 1)[0],
+                        "kata": a["teks"].split(" ", 1)[1], "kuat": a["kuat"], "persen": a["persen"],
+                        "arah": a["arah"], "gerak": None, "n": a["n"], "exness": None})
+    return out
+
+
+def tahap_teks(stages: list[dict]) -> str:
+    """"1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK (±$2,68) • 3 dtk 91% NAIK • 1 mnt 81% NAIK" (tanpa emoji)."""
+    parts = []
+    for x in stages:
+        t = x["teks"].replace(" 🟢", "").replace(" 🔴", "").replace(" ⚪", "")
+        if x.get("gerak") is not None and x["dtk"] in ("1 dtk", "2 dtk"):
+            t += f" (±${x['gerak']:.2f})".replace(".", ",")
+        parts.append(f"{x['dtk']} {t}")
+    return " • ".join(parts)
+
+
 def _emas(title: str) -> tuple[dict, str]:
     """({hasil: {naik1j, baru_naik1j, n, tahun}}, jangka) — reaksi 1 menit (tick) bila ada, selain itu 1 jam."""
     r = REAKSI.get(title)
@@ -173,12 +230,25 @@ def skenario(title: str) -> list[dict]:
     return out
 
 
+OP = {"bawah": "<", "atas": ">", "sesuai": "="}
+
+
 def skenario_hentakan(title: str, forecast: str) -> list[dict]:
-    """Skenario dengan label jelas: "⚡ Hentakan 1 menit bila Act < 89K" (permintaan pengguna 2 Okt 2026)."""
+    """Skenario dengan label jelas: "⚡ Hentakan 1 menit bila Act < 89K" (permintaan pengguna 2 Okt 2026), ditambah
+    tahap detik 1-2-3 & 1 menit ("tahap"; aplikasi 3.18 menampilkannya sebagai deretan angka, aplikasi lama membaca
+    ringkasannya di awal "bukti")."""
     _, jangka = _emas(title)
     f = forecast or "perkiraan"
-    op = {"bawah": "<", "atas": ">", "sesuai": "="}
-    return [dict(x, label=f"⚡ Hentakan {jangka} bila Act {op[x['hasil']]} {f}") for x in skenario(title)]
+    out = []
+    for x in skenario(title):
+        row = dict(x, label=f"⚡ Hentakan {jangka} bila Act {OP[x['hasil']]} {f}")
+        st = tahap(title, x["hasil"])
+        if any(s["dtk"].endswith("dtk") for s in st):
+            row.update(tahap=st, label_tahap=f"⚡ Bila Act {OP[x['hasil']]} {f} → arah emas",
+                       bukti_tahap=x["bukti"] + " • detik 1–3 dicek di tick Exness",
+                       bukti=tahap_teks(st) + " • " + x["bukti"])
+        out.append(row)
+    return out
 
 
 def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
@@ -191,8 +261,10 @@ def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
     r = arah_emas(emas.get(hasil))
     if not r:
         return None
-    return {"hasil": hasil, **r,
-            "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas {jangka} • {r['bukti']}"}
+    st = tahap(title, hasil)
+    detik_txt = tahap_teks(st) + " • " if any(s["dtk"].endswith("dtk") for s in st) else ""
+    return {"hasil": hasil, **r, "tahap": st,
+            "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas {detik_txt or jangka + ' • '}{r['bukti']}"}
 
 
 def alarm_texts() -> dict:

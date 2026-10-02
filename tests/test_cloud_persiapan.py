@@ -86,7 +86,7 @@ def test_detik_utamakan_exness(monkeypatch):
 def test_kesimpulan_otomatis_setelah_act_keluar():
     k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
     assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"] == f"{k['persen']}% NAIK 🟢"
-    assert k["catatan"].startswith("Act < perkiraan → emas 1 menit • teruji 20") and "rilis)" in k["catatan"]
+    assert k["catatan"].startswith("Act < perkiraan → emas 1 dtk ") and "1 mnt" in k["catatan"] and "rilis)" in k["catatan"]
     assert _persiapan.kesimpulan("CPI m/m", "", "0.3%") is None
     assert _persiapan.kesimpulan("Tidak dikenal", "1", "2") is None
     assert _persiapan.kesimpulan("Non-Farm Employment Change", "250K", "98K")["hasil"] == "atas"
@@ -123,3 +123,46 @@ def test_reaksi_1_menit_diutamakan_cadangan_1_jam(monkeypatch):
                                                            "tahun": "2010–2025"}})
     k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
     assert k["teks"] == "90% NAIK 🟢" and "emas 1 menit" in k["catatan"] and "sejak Okt 2021: 95% naik" in k["catatan"]
+
+
+CEPAT = {"Non-Farm Employment Change": {
+    "bawah": {"naik60": 0.81, "n": 67, "baru_naik60": 0.87,
+              "cepat": {"1": {"naik": 0.57, "n": 65, "gerak": 0.17, "ex": 0.59, "baru": 0.47},
+                        "2": {"naik": 0.85, "n": 67, "gerak": 2.68, "ex": 0.82, "baru": 0.87},
+                        "3": {"naik": 0.58, "n": 67, "gerak": 3.1, "ex": 0.4, "baru": 0.6}}},
+    "atas": {"naik60": 0.19, "n": 94, "baru_naik60": 0.32,
+             "cepat": {"2": {"naik": 0.26, "n": 94, "gerak": 2.26, "ex": 0.22, "baru": 0.26}}},
+    "tahun": "2010–2025"}}
+
+
+def test_tahap_detik_1_2_3_dan_1_menit(monkeypatch):
+    """Permintaan 2 Okt 2026: persentase arah emas 1 detik setelah rilis (plus 2-3 detik & 1 menit)."""
+    monkeypatch.setattr(_persiapan, "REAKSI", CEPAT)
+    st = _persiapan.tahap("Non-Farm Employment Change", "bawah")
+    assert [x["dtk"] for x in st] == ["1 dtk", "2 dtk", "3 dtk", "1 mnt"]
+    assert st[0]["teks"] == "belum gerak ⚪" and not st[0]["kuat"]          # ±$0,17 ≈ spread
+    assert (st[0]["angka"], st[0]["kata"], st[1]["angka"], st[1]["kata"]) == ("±$0,17", "belum gerak ⚪", "85%", "NAIK 🟢")
+    assert st[1]["teks"] == "85% NAIK 🟢" and st[1]["kuat"] and st[1]["exness"] == 82
+    assert st[2]["teks"] == "58% naik ⚪" and not st[2]["kuat"]             # Exness berlawanan -> abu-abu
+    assert st[3]["teks"] == "81% NAIK 🟢"
+    assert _persiapan.tahap_teks(st) == ("1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK (±$2,68) • 3 dtk 58% naik • "
+                                         "1 mnt 81% NAIK")
+    assert _persiapan.tahap("Non-Farm Employment Change", "atas")[0]["teks"] == "74% TURUN 🔴"
+    sk = {x["hasil"]: x for x in _persiapan.skenario_hentakan("Non-Farm Employment Change", "89K")}
+    assert sk["bawah"]["label"] == "⚡ Hentakan 1 menit bila Act < 89K" and sk["bawah"]["teks"] == "81% NAIK 🟢"
+    assert sk["bawah"]["label_tahap"] == "⚡ Bila Act < 89K → arah emas" and len(sk["bawah"]["tahap"]) == 4
+    assert sk["bawah"]["bukti"].startswith("1 dtk belum gerak") and "detik 1–3" not in sk["bawah"]["bukti"]
+    assert "detik 1–3 dicek di tick Exness" in sk["bawah"]["bukti_tahap"]
+    k = _persiapan.kesimpulan("Non-Farm Employment Change", "45K", "89K")
+    assert k["catatan"].startswith("Act < perkiraan → emas 1 dtk belum gerak") and k["tahap"][1]["teks"] == "85% NAIK 🟢"
+    # tanpa data detik (reaksi lama): tetap seperti sebelumnya
+    monkeypatch.setattr(_persiapan, "REAKSI", {"CPI m/m": {"bawah": {"naik60": 0.9, "n": 50}, "tahun": "2010–2025"}})
+    assert "tahap" not in _persiapan.skenario_hentakan("CPI m/m", "0.3%")[0]
+    assert _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")["catatan"].startswith("Act < perkiraan → emas 1 menit •")
+
+
+def test_reaksi_json_berisi_detik_dari_dua_feed():
+    nfp = _persiapan.REAKSI["Non-Farm Employment Change"]
+    for hasil in ("bawah", "atas"):
+        c = nfp[hasil]["cepat"]
+        assert set(c) == {"1", "2", "3"} and all({"naik", "n", "gerak", "ex", "baru"} <= set(x) for x in c.values())

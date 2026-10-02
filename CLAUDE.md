@@ -119,6 +119,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   konsensus (90–99%) → info saja; baris 🏦 Fed berikutnya. Riwayat harga CLOB lama: pakai startTs/endTs ≤ 7 hari.
 - Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang. Mars–Pluto/MC (`research/astrologi_nfp.py`): 0 bermakna; 3 NFP dengan pola sama semuanya di ATAS konsensus.
 - Skenario/kesimpulan kartu & kalender kini reaksi 1 MENIT (cadangan 1 jam). Aplikasi 3.17.
+- Aplikasi 3.18 (HARI_H bagian 6): sel arah emas 1/2/3 dtk + 1 mnt (`_persiapan.tahap`, reaksi.json "cepat"). Detik
+  pertama NFP/CPI/PPI belum bergerak (±$0,17 ≈ spread, 50:50); hentakan di detik 1→2, searah hasil 82–91% di detik 2–3.
+  Act dicek tiap 30 dtk di 10 menit pertama setelah rilis (`_aktual.RETRY_FAST`; BLS tanpa kunci 25/hari).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

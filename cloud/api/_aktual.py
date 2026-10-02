@@ -7,7 +7,8 @@ padahal dari jaringan riset menjawab < 1 detik. Sekarang dicoba berurutan, dan y
 2. FRED API (api.stlouisfed.org) bila env FRED_API_KEY diisi di Vercel — semua seri termasuk PCE, GDP, klaim.
 3. CSV publik FRED (cara lama).
 Act yang sudah ditemukan disimpan di Supabase (baris "aktual") sehingga tidak diambil ulang dan tidak hilang; pengambilan
-untuk berita yang belum ber-Act paling sering tiap RETRY. Bila tetap kosong, alasannya dikirim ke aplikasi
+untuk berita yang belum ber-Act paling sering tiap RETRY (tiap RETRY_FAST di 10 menit pertama setelah rilis; BLS tanpa
+kunci dibatasi 25 permintaan/hari, jadi paling banyak ±20 di satu jam rilis). Bila tetap kosong, alasannya dikirim ke aplikasi
 (calendar[].actual_info). Hanya library standar Python.
 """
 from __future__ import annotations
@@ -27,6 +28,8 @@ BLS = {"CPIAUCSL": "CUSR0000SA0", "CPILFESL": "CUSR0000SA0L1E", "CPIAUCNS": "CUU
 FRED_API = ("https://api.stlouisfed.org/fred/series/observations?series_id={}&api_key={}&file_type=json"
             "&observation_start={}")
 RETRY = timedelta(minutes=2)
+RETRY_FAST = timedelta(seconds=30)  # 10 menit pertama setelah rilis: hasil & arah emas cepat tampil (2 Okt 2026)
+FAST_FOR = timedelta(minutes=10)
 WINDOW = timedelta(days=4)          # berita yang lebih lama dari ini tidak dicari lagi
 KEEP = timedelta(days=21)           # Act tersimpan dibuang setelah 3 pekan
 TIMEOUT = 8
@@ -140,9 +143,10 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
     if not missing:
         return {"status": "lengkap"}
     last = state.get("coba")
-    if fetcher is None and last and now - datetime.fromisoformat(last) < RETRY:
+    fast = any(now - datetime.fromisoformat(c["time"]) <= FAST_FOR for c in missing)
+    if fetcher is None and last and now - datetime.fromisoformat(last) < (RETRY_FAST if fast else RETRY):
         for c in missing:
-            c["actual_info"] = state.get("info") or "dicek ulang tiap 2 menit"
+            c["actual_info"] = state.get("info") or ("dicek ulang tiap 30 detik" if fast else "dicek ulang tiap 2 menit")
         return {"status": "ditunda", "sumber": state.get("sumber") or {}}
     fetcher = fetcher or Fetcher(env, {_chat.FRED_MAP[c["title"]][0] for c in missing})
     cache: dict = {}
