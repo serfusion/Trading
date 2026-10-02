@@ -160,3 +160,8 @@ XAU M15 2012–2025, NFP di bawah perkiraan): searah 15 mnt 75% → 3 jam 70% �
 → 53%**, dan 5 dari 14 kenaikan 15 menit berbalik ke bawah harga awal dalam 3 jam (36%). Hari ini termasuk kelompok
 itu. Penyebab pasti tidak bisa dipastikan dari data kita (setelahnya: bursa AS buka 13:30 UTC, pidato Fed Logan 14:00
 UTC). Riset `docs/NEWS_MENIT.md`: ikut arah kejutan setelah menit pertama tidak untung.
+
+Dipasang (aplikasi 3.22, permintaan pengguna "ya pasang"): sel **3 jam** & **6 jam** di baris ⚡/✅ (`reaksi_menit.jam_stats`
+→ reaksi.json `jam`, `_persiapan.tahap`). Angka "53–69%" = semua tahun vs sejak Okt 2021 bila beda ≥ 10 poin.
+Contoh: NFP < perkiraan → 1 mnt 81% NAIK • 3 jam 70% NAIK • 6 jam 53–69% naik ⚪; CPI > perkiraan → 1 mnt 74% TURUN
+tetapi 3 jam 63% NAIK (berbalik).

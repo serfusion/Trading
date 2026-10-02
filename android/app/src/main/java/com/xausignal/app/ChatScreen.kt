@@ -334,6 +334,8 @@ private fun BigRow(label: String, bukti: String, teks: String, kuat: Boolean) {
 private fun TahapBlock(judul: String, tahap: JSONArray, bukti: String) {
     Text(judul, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium,
         modifier = Modifier.padding(top = 6.dp))
+    // 6 sel (1/2/3 dtk, 1 mnt, 3/6 jam; aplikasi 3.22) -> huruf angka sedikit lebih kecil agar muat di layar HP
+    val big = if (tahap.length() > 4) MaterialTheme.typography.titleSmall else MaterialTheme.typography.titleMedium
     Row(Modifier.fillMaxWidth().padding(top = 2.dp)) {
         for (i in 0 until tahap.length()) {
             val x = tahap.getJSONObject(i)
@@ -342,7 +344,7 @@ private fun TahapBlock(judul: String, tahap: JSONArray, bukti: String) {
             Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(x.optString("dtk"), style = MaterialTheme.typography.labelSmall, color = Muted)
                 Text(x.optString("angka").ifBlank { teks }, fontWeight = FontWeight.ExtraBold, color = warna,
-                    style = MaterialTheme.typography.titleMedium)
+                    style = big)
                 Text(x.optString("kata"), style = MaterialTheme.typography.labelSmall, color = warna,
                     fontWeight = FontWeight.Bold)
             }
@@ -442,8 +444,8 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
         }
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
         if (list.length() > 0) Text("🎯 = perkiraan sebelum rilis (berubah tiap 15 menit) • ✅ = hasil setelah angka " +
-            "keluar • ⚡ = arah emas 1, 2, 3 detik & 1 menit bila data di bawah/di atas perkiraan (detik pertama " +
-            "biasanya belum bergerak)", style = MaterialTheme.typography.labelSmall, color = Muted)
+            "keluar • ⚡ = arah emas 1, 2, 3 detik, 1 menit, 3 & 6 jam bila data di bawah/di atas perkiraan (detik " +
+            "pertama biasanya belum bergerak; makin lama makin lemah — tutup posisi berita dalam hitungan menit)", style = MaterialTheme.typography.labelSmall, color = Muted)
         for (i in 0 until list.length()) {
             val b = list.getJSONObject(i)
             if (i > 0) LineDivider()

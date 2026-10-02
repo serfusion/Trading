@@ -71,7 +71,7 @@ def test_bls_untuk_nfp_fred_api_untuk_pce_dan_disimpan():
     # pembukaan berikutnya: dari Supabase, tanpa jaringan sama sekali
     c2, calls2 = cal(), []
     assert _aktual.fill(c2, store, NOW + timedelta(minutes=5), {},
-                        _aktual.Fetcher({}, set(), opener(calls2)))["status"] == "lengkap"
+                        _aktual.Fetcher({}, set(), opener(calls2), csv=lambda s: []))["status"] == "lengkap"
     assert c2[0]["actual"] == "45K" and c2[1]["actual"] == "0.2%" and calls2 == []
 
 
@@ -122,7 +122,7 @@ def test_act_manual_investing_dan_menimpa_otomatis():
     assert _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "Nonfarm Payrolls (Sep) 45K 89K", now)["ok"]
     c = cal()
     c[0]["actual"] = "50K"                                       # otomatis -> manual menang
-    _aktual.fill(c[:1], store, now, {}, _aktual.Fetcher({}, set(), opener([])))
+    _aktual.fill(c[:1], store, now, {}, _aktual.Fetcher({}, set(), opener([]), csv=lambda s: []))
     assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "manual"
     assert not _aktual.save_manual(store, "x", "y", "abc", now)["ok"]
     _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "", now)
@@ -137,7 +137,7 @@ def test_act_manual_salah_direvisi_otomatis_oleh_angka_resmi():
     _aktual.fill(c, store, NOW, {}, f)
     assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "BLS" and "direvisi otomatis" in c[0]["actual_info"]
     c2 = cal()[:1]                                                                 # pembukaan berikutnya
-    _aktual.fill(c2, store, NOW + timedelta(minutes=5), {}, _aktual.Fetcher({}, set(), opener([])))
+    _aktual.fill(c2, store, NOW + timedelta(minutes=5), {}, _aktual.Fetcher({}, set(), opener([]), csv=lambda s: []))
     assert c2[0]["actual"] == "45K" and "54K → resmi 45K" in c2[0]["actual_info"]
     store2 = Store()
     _aktual.save_manual(store2, CAL[0]["title"], CAL[0]["time"], "45k", NOW)
