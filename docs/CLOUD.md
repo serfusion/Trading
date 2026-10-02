@@ -319,3 +319,12 @@ angka di atas / sama / di bawah konsensus dari pasar Kalshi (API publik, tanpa k
 1 menit (`cloud/api/kalshi.json` dari `research/kalshi_uji.py`). Kalshi dibaca paling sering tiap 15 menit untuk semua
 pengguna (baris Supabase `kalshi`); bila Kalshi gagal, data terakhir dipakai dan kartu tetap tampil tanpa baris 🎲.
 Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.
+
+## Act otomatis berlapis & perkiraan hari H (1 Okt 2026, aplikasi 3.17)
+
+- `cloud/api/_aktual.py`: Act diambil dari BLS API (tanpa kunci; opsional `BLS_API_KEY`) → FRED API (**disarankan**:
+  env `FRED_API_KEY`) → CSV FRED; hasil disimpan di Supabase (baris `aktual`). Respons `GET /api/chat` memuat
+  `"aktual": {"status", "sumber"}` dan `calendar[].actual_info` (alasan bila kosong).
+- `cloud/api/_hari_h.py` + `_polymarket.py`: `persiapan.berita[].hari_h` (sebelum rilis), `.hasil_rilis` (setelah
+  Act), `persiapan.fed` (keputusan Fed berikutnya). Cache Supabase: `kalshi`, `polymarket`, `polymarket_fed`,
+  `hari_h` (riwayat peluang). Detail & bukti: `docs/HARI_H.md`.

@@ -143,3 +143,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-30: pengguna membuka host Kalshi/Polymarket → `research/kalshi.py` (unduh 2021–2026) & `kalshi_uji.py`,
   `docs/KALSHI.md`: tebakan kejutan CPI 76–78%; sinyal emas CPI ≥ 60% n 18 (positif di kedua feed, t < 2 → kandidat);
   aplikasi 3.16 baris 🎲 Kalshi di kartu 🎯 (`cloud/api/_kalshi.py`).
+- 2026-10-01: Act kalender kosong (CSV FRED tidak menjawab dari Vercel) → `_aktual.py` BLS/FRED API/CSV + Supabase;
+  perkiraan hari H hidup (Kalshi+Polymarket × reaksi 1 menit) + hasil setelah Act; Polymarket diuji (NFP 41%, Fed
+  9/9 sesuai konsensus); astrologi diuji (0 signifikan). Aplikasi 3.17. Laporan `docs/HARI_H.md`.

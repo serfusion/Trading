@@ -1,0 +1,336 @@
+{
+ "dibuat": "research/reaksi_menit.py",
+ "feed": "Dukascopy (mid t0-1 dtk -> +60 dtk)",
+ "judul": {
+  "ADP Non-Farm Employment Change": {
+   "bawah": {
+    "naik60": 0.853,
+    "naik5": 0.827,
+    "n": 75,
+    "baru_naik60": 0.963
+   },
+   "atas": {
+    "naik60": 0.156,
+    "naik5": 0.078,
+    "n": 90,
+    "baru_naik60": 0.091
+   },
+   "tahun": "2010–2026"
+  },
+  "Advance GDP q/q": {
+   "bawah": {
+    "naik60": 0.625,
+    "naik5": 0.781,
+    "n": 32,
+    "baru_naik60": 0.5
+   },
+   "atas": {
+    "naik60": 0.125,
+    "naik5": 0.167,
+    "n": 24,
+    "baru_naik60": 0.125
+   },
+   "tahun": "2010–2025"
+  },
+  "Average Hourly Earnings m/m": {
+   "bawah": {
+    "naik60": 0.529,
+    "naik5": 0.603,
+    "n": 68,
+    "baru_naik60": 0.765
+   },
+   "sama": {
+    "naik60": 0.4,
+    "naik5": 0.475,
+    "n": 40,
+    "baru_naik60": 0.308
+   },
+   "atas": {
+    "naik60": 0.382,
+    "naik5": 0.418,
+    "n": 55,
+    "baru_naik60": 0.368
+   },
+   "tahun": "2010–2025"
+  },
+  "CPI m/m": {
+   "bawah": {
+    "naik60": 0.81,
+    "naik5": 0.845,
+    "n": 58,
+    "baru_naik60": 1.0
+   },
+   "sama": {
+    "naik60": 0.597,
+    "naik5": 0.532,
+    "n": 62,
+    "baru_naik60": 0.688
+   },
+   "atas": {
+    "naik60": 0.261,
+    "naik5": 0.196,
+    "n": 46,
+    "baru_naik60": 0.278
+   },
+   "tahun": "2010–2025"
+  },
+  "CPI y/y": {
+   "bawah": {
+    "naik60": 0.849,
+    "naik5": 0.83,
+    "n": 53,
+    "baru_naik60": 1.0
+   },
+   "sama": {
+    "naik60": 0.677,
+    "naik5": 0.597,
+    "n": 62,
+    "baru_naik60": 0.75
+   },
+   "atas": {
+    "naik60": 0.259,
+    "naik5": 0.224,
+    "n": 58,
+    "baru_naik60": 0.211
+   },
+   "tahun": "2010–2025"
+  },
+  "Core CPI m/m": {
+   "bawah": {
+    "naik60": 0.867,
+    "naik5": 0.9,
+    "n": 60,
+    "baru_naik60": 1.0
+   },
+   "sama": {
+    "naik60": 0.516,
+    "naik5": 0.516,
+    "n": 62,
+    "baru_naik60": 0.765
+   },
+   "atas": {
+    "naik60": 0.256,
+    "naik5": 0.093,
+    "n": 43,
+    "baru_naik60": 0.176
+   },
+   "tahun": "2010–2025"
+  },
+  "Core PCE Price Index m/m": {
+   "bawah": {
+    "naik60": 0.786,
+    "naik5": 0.571,
+    "n": 14,
+    "baru_naik60": 0.8
+   },
+   "sama": {
+    "naik60": 0.629,
+    "naik5": 0.514,
+    "n": 35,
+    "baru_naik60": 0.645
+   },
+   "atas": {
+    "naik60": 0.25,
+    "naik5": 0.25,
+    "n": 8,
+    "baru_naik60": 0.25
+   },
+   "tahun": "2012–2025"
+  },
+  "Core PPI m/m": {
+   "bawah": {
+    "naik60": 0.898,
+    "naik5": 0.898,
+    "n": 49,
+    "baru_naik60": 1.0
+   },
+   "sama": {
+    "naik60": 0.622,
+    "naik5": 0.676,
+    "n": 37,
+    "baru_naik60": 0.667
+   },
+   "atas": {
+    "naik60": 0.196,
+    "naik5": 0.196,
+    "n": 51,
+    "baru_naik60": 0.0
+   },
+   "tahun": "2010–2025"
+  },
+  "Core Retail Sales m/m": {
+   "bawah": {
+    "naik60": 0.753,
+    "naik5": 0.79,
+    "n": 81,
+    "baru_naik60": 0.7
+   },
+   "sama": {
+    "naik60": 0.474,
+    "naik5": 0.474,
+    "n": 19,
+    "baru_naik60": 0.833
+   },
+   "atas": {
+    "naik60": 0.221,
+    "naik5": 0.221,
+    "n": 77,
+    "baru_naik60": 0.167
+   },
+   "tahun": "2010–2025"
+  },
+  "Federal Funds Rate": {
+   "sama": {
+    "naik60": 0.484,
+    "naik5": 0.538,
+    "n": 93,
+    "baru_naik60": 0.5
+   },
+   "tahun": "2010–2025"
+  },
+  "ISM Manufacturing PMI": {
+   "bawah": {
+    "naik60": 0.706,
+    "naik5": 0.882,
+    "n": 17,
+    "baru_naik60": 0.75
+   },
+   "atas": {
+    "naik60": 0.231,
+    "naik5": 0.231,
+    "n": 13,
+    "baru_naik60": null
+   },
+   "tahun": "2010–2025"
+  },
+  "ISM Services PMI": {
+   "bawah": {
+    "naik60": 0.909,
+    "naik5": 1.0,
+    "n": 11,
+    "baru_naik60": 1.0
+   },
+   "atas": {
+    "naik60": 0.167,
+    "naik5": 0.0,
+    "n": 12,
+    "baru_naik60": 0.333
+   },
+   "tahun": "2010–2025"
+  },
+  "JOLTS Job Openings": {
+   "bawah": {
+    "naik60": 0.857,
+    "naik5": 0.929,
+    "n": 14,
+    "baru_naik60": 0.909
+   },
+   "atas": {
+    "naik60": 0.208,
+    "naik5": 0.125,
+    "n": 24,
+    "baru_naik60": 0.136
+   },
+   "tahun": "2014–2025"
+  },
+  "Non-Farm Employment Change": {
+   "bawah": {
+    "naik60": 0.806,
+    "naik5": 0.896,
+    "n": 67,
+    "baru_naik60": 0.867
+   },
+   "atas": {
+    "naik60": 0.191,
+    "naik5": 0.245,
+    "n": 94,
+    "baru_naik60": 0.324
+   },
+   "tahun": "2010–2025"
+  },
+  "PPI m/m": {
+   "bawah": {
+    "naik60": 0.829,
+    "naik5": 0.8,
+    "n": 70,
+    "baru_naik60": 0.917
+   },
+   "sama": {
+    "naik60": 0.435,
+    "naik5": 0.478,
+    "n": 23,
+    "baru_naik60": 0.714
+   },
+   "atas": {
+    "naik60": 0.306,
+    "naik5": 0.355,
+    "n": 62,
+    "baru_naik60": 0.167
+   },
+   "tahun": "2010–2025"
+  },
+  "Retail Sales m/m": {
+   "bawah": {
+    "naik60": 0.716,
+    "naik5": 0.784,
+    "n": 88,
+    "baru_naik60": 0.68
+   },
+   "sama": {
+    "naik60": 0.462,
+    "naik5": 0.615,
+    "n": 13,
+    "baru_naik60": null
+   },
+   "atas": {
+    "naik60": 0.213,
+    "naik5": 0.147,
+    "n": 75,
+    "baru_naik60": 0.24
+   },
+   "tahun": "2010–2025"
+  },
+  "Unemployment Claims": {
+   "bawah": {
+    "naik60": 0.3,
+    "naik5": 0.382,
+    "n": 110,
+    "baru_naik60": 0.25
+   },
+   "sama": {
+    "naik60": 0.5,
+    "naik5": 0.5,
+    "n": 8,
+    "baru_naik60": null
+   },
+   "atas": {
+    "naik60": 0.753,
+    "naik5": 0.634,
+    "n": 93,
+    "baru_naik60": 0.789
+   },
+   "tahun": "2010–2026"
+  },
+  "Unemployment Rate": {
+   "bawah": {
+    "naik60": 0.391,
+    "naik5": 0.522,
+    "n": 69,
+    "baru_naik60": 0.3
+   },
+   "sama": {
+    "naik60": 0.429,
+    "naik5": 0.548,
+    "n": 42,
+    "baru_naik60": 0.556
+   },
+   "atas": {
+    "naik60": 0.538,
+    "naik5": 0.462,
+    "n": 52,
+    "baru_naik60": 0.65
+   },
+   "tahun": "2010–2025"
+  }
+ }
+}

@@ -108,6 +108,18 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Validasi per tahun (`research/validasi_tahunan.py`): hentakan +5 dtk searah kejutan konsensus 73–93% SETIAP tahun
   2013–2025; tebakan Kalshi CPI 2022 55%, 2023–2025 78–90%; 2026 belum bisa diuji.
 
+## Hari H berita (1 Okt 2026 — `docs/HARI_H.md`)
+- Act otomatis berlapis `cloud/api/_aktual.py`: BLS (tanpa kunci) → FRED API (env Vercel `FRED_API_KEY`, minta
+  pengguna mengisi sendiri) → CSV FRED; CSV FRED TIDAK menjawab dari Vercel (arsip 1 Okt "0 Act"). Disimpan Supabase
+  baris `aktual`. Dari sesi ini api.bls.gov 403 (tidak bisa dites langsung; format v1/v2 dites dengan respons palsu).
+- Perkiraan hari H `cloud/api/_hari_h.py` = peluang Kalshi+Polymarket × reaksi emas 1 menit (`cloud/api/reaksi.json`
+  dari `research/reaksi_menit.py`); riwayat Supabase `hari_h`; hasil setelah Act. Validasi `research/hari_h_uji.py`
+  → `cloud/api/hari_h.json`: CPI 86% (n 7), core 70% (10), NFP 33–58%, entry ikut sinyal rugi → semua abu-abu.
+- Polymarket (`research/polymarket.py`, `cloud/api/_polymarket.py`): NFP 41% benar (Kalshi 64%), Fed 9/9 sesuai
+  konsensus (90–99%) → info saja; baris 🏦 Fed berikutnya. Riwayat harga CLOB lama: pakai startTs/endTs ≤ 7 hari.
+- Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang.
+- Skenario/kesimpulan kartu & kalender kini reaksi 1 MENIT (cadangan 1 jam). Aplikasi 3.17.
+
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —

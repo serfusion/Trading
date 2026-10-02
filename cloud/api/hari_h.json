@@ -1,0 +1,79 @@
+{
+ "dibuat": "research/hari_h_uji.py",
+ "ambang": 0.6,
+ "validasi": {
+  "CPI m/m": {
+   "Kalshi": {
+    "n": 7,
+    "benar": 85.7,
+    "brier": 0.224,
+    "n_semua": 38,
+    "tahun": "2022–2025"
+   }
+  },
+  "Core CPI m/m": {
+   "Kalshi": {
+    "n": 10,
+    "benar": 70.0,
+    "brier": 0.232,
+    "n_semua": 36,
+    "tahun": "2022–2025"
+   }
+  },
+  "Core PCE Price Index m/m": {
+   "Kalshi": {
+    "n": 5,
+    "benar": 80.0,
+    "brier": 0.206,
+    "n_semua": 9,
+    "tahun": "2024–2025"
+   }
+  },
+  "Non-Farm Employment Change": {
+   "Kalshi": {
+    "n": 6,
+    "benar": 33.3,
+    "brier": 0.26,
+    "n_semua": 29,
+    "tahun": "2023–2025"
+   },
+   "Polymarket": {
+    "n": 17,
+    "benar": 52.9,
+    "brier": 0.319,
+    "n_semua": 17,
+    "tahun": "2024–2025"
+   },
+   "gabungan": {
+    "n": 14,
+    "benar": 50.0,
+    "brier": 0.261,
+    "n_semua": 18,
+    "tahun": "2024–2025"
+   }
+  },
+  "Unemployment Rate": {
+   "Kalshi": {
+    "n": 0,
+    "benar": null,
+    "brier": 0.251,
+    "n_semua": 42,
+    "tahun": "2022–2025"
+   },
+   "Polymarket": {
+    "n": 0,
+    "benar": null,
+    "brier": 0.253,
+    "n_semua": 10,
+    "tahun": "2024–2025"
+   },
+   "gabungan": {
+    "n": 0,
+    "benar": null,
+    "brier": 0.254,
+    "n_semua": 10,
+    "tahun": "2024–2025"
+   }
+  }
+ }
+}

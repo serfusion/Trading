@@ -1,0 +1,32 @@
+# Polymarket: peluang hasil berita sebelum rilis (research/polymarket_uji.py)
+
+Rilis cocok dengan konsensus FF: 28 (2024-03..2025-12); per jenis {'Non-Farm Employment Change': 18, 'Unemployment Rate': 10}; volume median $108,018
+
+== Akurasi menebak arah kejutan (rilis dengan kejutan; selisih peluang >= 10 poin) ==
+  SEMUA                        24 jam     ditebak  27 | kejutan n= 23 benar  47.8% | sama dengan Cons 14.8%
+  SEMUA                        6 jam      ditebak  27 | kejutan n= 23 benar  43.5% | sama dengan Cons 14.8%
+  SEMUA                        1 jam      ditebak  27 | kejutan n= 23 benar  43.5% | sama dengan Cons 14.8%
+  SEMUA                        saat tutup ditebak  25 | kejutan n= 22 benar  45.5% | sama dengan Cons 12.0%
+  Non-Farm Employment Change   24 jam     ditebak  17 | kejutan n= 17 benar  41.2% | sama dengan Cons  0.0%
+  Non-Farm Employment Change   6 jam      ditebak  17 | kejutan n= 17 benar  41.2% | sama dengan Cons  0.0%
+  Non-Farm Employment Change   1 jam      ditebak  17 | kejutan n= 17 benar  41.2% | sama dengan Cons  0.0%
+  Non-Farm Employment Change   saat tutup ditebak  17 | kejutan n= 17 benar  41.2% | sama dengan Cons  0.0%
+  Unemployment Rate            24 jam     ditebak  10 | kejutan n=  6 benar  66.7% | sama dengan Cons 40.0%
+  Unemployment Rate            6 jam      ditebak  10 | kejutan n=  6 benar  50.0% | sama dengan Cons 40.0%
+  Unemployment Rate            1 jam      ditebak  10 | kejutan n=  6 benar  50.0% | sama dengan Cons 40.0%
+  Unemployment Rate            saat tutup ditebak   8 | kejutan n=  5 benar  60.0% | sama dengan Cons 37.5%
+
+== Polymarket vs Kalshi pada rilis yang SAMA (24 jam sebelum, selisih >= 10 poin) ==
+  Non-Farm Employment Change   poly benar 41.2% (n=17) | kalshi benar 64.3% (n=14) | keduanya sepakat benar 50.0% (n=2)
+  Unemployment Rate            poly benar 66.7% (n=6) | kalshi benar 60.0% (n=5) | keduanya sepakat benar 60.0% (n=5)
+
+== Keputusan Fed: peluang Polymarket untuk hasil konsensus ==
+  2024-12-18 konsensus 25 bps decrease  peluang Polymarket 1 jam sebelum 97% | hasil SESUAI | volume $58,771,669
+  2025-01-29 konsensus no change        peluang Polymarket 1 jam sebelum 98% | hasil SESUAI | volume $190,915,049
+  2025-03-19 konsensus no change        peluang Polymarket 1 jam sebelum 99% | hasil SESUAI | volume $78,037,951
+  2025-05-07 konsensus no change        peluang Polymarket 1 jam sebelum 98% | hasil SESUAI | volume $88,372,825
+  2025-06-18 konsensus no change        peluang Polymarket 1 jam sebelum 99% | hasil SESUAI | volume $106,895,986
+  2025-07-30 konsensus no change        peluang Polymarket 1 jam sebelum 99% | hasil SESUAI | volume $136,613,627
+  2025-09-17 konsensus 25 bps decrease  peluang Polymarket 1 jam sebelum 90% | hasil SESUAI | volume $220,591,461
+  2025-10-29 konsensus 25 bps decrease  peluang Polymarket 1 jam sebelum 98% | hasil SESUAI | volume $252,485,550
+  2025-12-10 konsensus 25 bps decrease  peluang Polymarket 1 jam sebelum 97% | hasil SESUAI | volume $393,905,949

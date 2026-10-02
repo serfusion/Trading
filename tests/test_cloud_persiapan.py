@@ -86,7 +86,7 @@ def test_detik_utamakan_exness(monkeypatch):
 def test_kesimpulan_otomatis_setelah_act_keluar():
     k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
     assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"] == f"{k['persen']}% NAIK 🟢"
-    assert k["catatan"].startswith("Act < perkiraan → emas 1 jam • teruji 20") and "rilis)" in k["catatan"]
+    assert k["catatan"].startswith("Act < perkiraan → emas 1 menit • teruji 20") and "rilis)" in k["catatan"]
     assert _persiapan.kesimpulan("CPI m/m", "", "0.3%") is None
     assert _persiapan.kesimpulan("Tidak dikenal", "1", "2") is None
     assert _persiapan.kesimpulan("Non-Farm Employment Change", "250K", "98K")["hasil"] == "atas"
@@ -95,7 +95,7 @@ def test_kesimpulan_otomatis_setelah_act_keluar():
 def test_skenario_angka_besar_dan_bukti_tahun():
     sk = {x["hasil"]: x for x in _persiapan.skenario("CPI m/m")}
     assert set(sk) == {"bawah", "atas"} and sk["bawah"]["label"] == "Data < perkiraan"
-    assert sk["bawah"]["teks"].endswith("% NAIK 🟢") and sk["bawah"]["bukti"].startswith("teruji 2012–")
+    assert sk["bawah"]["teks"].endswith("% NAIK 🟢") and sk["bawah"]["bukti"].startswith("teruji 2010–")
     assert "menang" not in json.dumps(sk, ensure_ascii=False)
     # lemah / tidak konsisten: persen tetap tampil, abu-abu, diberi label
     assert _persiapan.arah_emas({"naik1j": 51, "baru_naik1j": 45, "n": 70, "tahun": "2012–2025"})["teks"] == "51% naik ⚪"
@@ -113,3 +113,13 @@ def test_detik_ringkas_tanpa_kata_menang(monkeypatch):
     assert _persiapan.detik_ringkas("PPI")["teks"] == "≈ impas ⚪"
     assert _persiapan.detik_ringkas("FOMC")["teks"] == "RUGI 🔴" and _persiapan.detik_ringkas("GDP") is None
     assert "menang" not in _persiapan.detik_singkat("NFP") and _persiapan.detik_singkat("NFP").startswith("Pending ±$1: 77%")
+
+
+def test_reaksi_1_menit_diutamakan_cadangan_1_jam(monkeypatch):
+    monkeypatch.setattr(_persiapan, "REAKSI", {})
+    k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
+    assert "emas 1 jam" in k["catatan"] and k["catatan"].count("teruji 2012–") == 1
+    monkeypatch.setattr(_persiapan, "REAKSI", {"CPI m/m": {"bawah": {"naik60": 0.9, "n": 50, "baru_naik60": 0.95},
+                                                           "tahun": "2010–2025"}})
+    k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
+    assert k["teks"] == "90% NAIK 🟢" and "emas 1 menit" in k["catatan"] and "sejak Okt 2021: 95% naik" in k["catatan"]
