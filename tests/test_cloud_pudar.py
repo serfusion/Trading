@@ -24,18 +24,20 @@ def test_nfp_2_okt_naik_lalu_dikembalikan_peringatan_balik():
     bars = path(pts)
     m = _pudar.measure(bars, T0, T0 + timedelta(minutes=61), 58.0)
     assert m["mins"] == 60 and m["s"] == 1 and 0.2 < m["keep"] < 0.35
-    r = _pudar.row(m, "Non-Farm Employment Change", T0)
-    assert "BALIK ke bawah 4181" in r["teks"] and r["kuat"] and "NFP" in r["bukti"]
-    assert r["label"].startswith("📉 Lonjakan NAIK 19:30 WIB: sisa")
-    # menit 30: lonjakan masih utuh -> tetap naik
-    m30 = _pudar.measure(bars[:6], T0, T0 + timedelta(minutes=31), 58.0)
-    assert m30["mins"] == 30 and "tetap NAIK" in _pudar.row(m30, "Non-Farm Employment Change", T0)["teks"]
+    r = _pudar.row(m, "Non-Farm Employment Change", T0, T0 + timedelta(minutes=61))
+    assert "BALIK ke bawah 4.181" in r["teks"] and r["kuat"] and "NFP" in r["bukti"]
+    assert r["label"].startswith("📉 Emas 19:30 WIB:") and "% lonjakan sudah kembali di menit 60" in r["label"]
+    assert "lalu turun lagi" in r["bukti"] and "sisa" not in r["label"]
+    # sebelum menit 60: hitung mundur otomatis
+    m30 = _pudar.measure(bars[:7], T0, T0 + timedelta(minutes=37), 58.0)
+    r30 = _pudar.row(m30, "Non-Farm Employment Change", T0, T0 + timedelta(minutes=37))
+    assert r30["teks"] == "23 menit lagi" and r30["label"].startswith("⏳ Lonjakan Emas 19:30 WIB")
 
 
 def test_lonjakan_kecil_atau_terlalu_awal_tidak_ditampilkan():
     flat = path([4181.5, 4182, 4181.8, 4182.2, 4182, 4181.9, 4182, 4182.1, 4182, 4182, 4182, 4182])
     assert _pudar.measure(flat, T0, T0 + timedelta(minutes=61), 58.0)["kecil"]
-    assert _pudar.measure(flat, T0, T0 + timedelta(minutes=20), 58.0) is None
+    assert _pudar.measure(flat, T0, T0 + timedelta(minutes=10), 58.0) is None
 
 
 class Store:
@@ -65,3 +67,16 @@ def test_attach_satu_baris_per_waktu_rilis_dan_cache():
     assert nfp["skenario"][0]["pudar"] and "pudar" not in ur
     _pudar.attach({"berita": [dict(nfp, skenario=[])]}, store, T0 + timedelta(minutes=71), fetch)
     assert len(calls) == 1                                  # cache 2 menit
+
+
+def test_btc_memakai_statistik_btc_dan_ambang_persen():
+    assert _pudar.STATS.get("btc", {}).get("60")
+    base = 86616.0
+    pts = [base * (1 + x) for x in (0.002, 0.004, 0.006, 0.007, 0.0072, 0.0074, 0.006, 0.004, 0.003, 0.002, 0.0015,
+                                     0.0015, 0.001)]
+    bars = path(pts, base)
+    m = _pudar.measure(bars, T0, T0 + timedelta(minutes=61), None, 0.0015)
+    r = _pudar.row(m, "Non-Farm Employment Change", T0, T0 + timedelta(minutes=61), "BTC")
+    assert r["label"].startswith("📉 BTC 19:30 WIB") and "berita BTC" in r["bukti"] and "BALIK ke bawah 86.616" in r["teks"]
+    kecil = path([base * 1.0003] * 13, base)
+    assert _pudar.measure(kecil, T0, T0 + timedelta(minutes=61), None, 0.0015)["kecil"]

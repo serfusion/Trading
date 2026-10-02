@@ -166,7 +166,9 @@ class handler(BaseHTTPRequestHandler):
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1":
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)
-                    _pudar.attach(persiapan, store, now, _pudar.fetch_twelvedata(os.environ["TWELVEDATA_API_KEY"]))
+                    key = os.environ["TWELVEDATA_API_KEY"]
+                    _pudar.attach(persiapan, store, now, _pudar.fetch_twelvedata(key),
+                                  _pudar.fetch_twelvedata(key, "BTC/USD"))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)

@@ -196,3 +196,12 @@ Logan 2 Okt (10:00 ET, sambutan workshop migrasi) tidak bisa dipastikan → tida
 baris "📉/📈 Lonjakan NAIK 19:30 WIB: sisa X% di menit 60" + angka besar. Replay 2 Okt: menit 30 "86% tetap NAIK";
 **menit 60 (20:30 WIB) "93% BALIK ke bawah 4181 🔴"** — harga memang kembali ke bawah 4.181 pukul 20:56 WIB (26 menit setelah peringatan).
 Harga Twelve Data XAU/USD 5 menit + ATR harian (2 kredit, cache Supabase `pudar` 2 menit).
+
+**Pembaruan (permintaan "apa maksud sisa? hitung mundur saja, uji juga BTC")**:
+- Teks kini: "Emas naik $44 (puncak menit 30), lalu turun lagi $32 = 72% kembali". Menit 15–60: "⏳ Lonjakan Emas
+  19:30 WIB: penentuan di menit 60 — 23 menit lagi" (hitung mundur otomatis, aplikasi memuat ulang tiap 30 detik).
+  Menit 60: "📉 Emas 19:30 WIB: 72% lonjakan sudah kembali di menit 60 — 93% BALIK ke bawah 4.181".
+- BTC (`research/berita_tren_btc.py`, kline 1 menit Binance 2018–2026, 621 lonjakan ≥ 0,15%): menit 60 ≥ 70% kembali →
+  94% balik lewat harga rilis ≤ 6 jam (LAMA 94%, BARU 95%); bertahan (< 40% kembali) → 75% searah 6 jam. Baris "BTC"
+  memakai statistik BTC (Twelve Data BTC/USD 5 menit, cache `pudar_btc`). 2 Okt: lonjakan BTC 15 menit < 0,15% →
+  tidak ditampilkan.
