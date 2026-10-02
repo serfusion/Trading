@@ -77,6 +77,18 @@ def _ago(h: list, now: datetime) -> str:
     return f"{mins} menit lalu {_pct(first[1])}%" if mins >= 15 else ""
 
 
+def key_rule(card: dict) -> str:
+    """"KUNCI: Act < 89K → emas NAIK 81% • Act > 89K → emas TURUN 81%" (penentu arah saat angka keluar)."""
+    r = REAKSI.get(card["title"]) or {}
+    f = card.get("forecast") or "perkiraan"
+    parts = []
+    for k, op in (("bawah", "<"), ("atas", ">")):
+        if k in r:
+            n = r[k]["naik60"]
+            parts.append(f"Act {op} {f} → emas {'NAIK' if n >= 0.5 else 'TURUN'} {_pct(max(n, 1 - n))}%")
+    return ("KUNCI: " + " • ".join(parts)) if parts else ""
+
+
 def forecast(card: dict, kalshi: dict, poly: dict, state: dict, now: datetime) -> dict | None:
     key = f"{card['title']}|{card['time']}"
     src = {"Kalshi": kalshi.get(key), "Polymarket": poly.get(key)}
@@ -90,10 +102,12 @@ def forecast(card: dict, kalshi: dict, poly: dict, state: dict, now: datetime) -
     up = p >= 0.5
     pct = _pct(p if up else 1 - p)
     if abs(p - 0.5) >= TH and teruji:
-        teks, kuat = (f"{pct}% NAIK 🟢" if up else f"{pct}% TURUN 🔴"), True
+        teks, kuat = (f"EMAS {pct}% NAIK 🟢" if up else f"EMAS {pct}% TURUN 🔴"), True
     else:
-        teks, kuat = f"{pct}% {'naik' if up else 'turun'} ⚪", False
-    pasar = " • ".join(f"{k}: di atas {_pct(x['atas'])}% / di bawah {_pct(x['bawah'])}%" for k, x in src.items())
+        teks, kuat = ("EMAS ≈ 50:50 ⚪" if abs(p - 0.5) < TH else f"EMAS {pct}% {'naik' if up else 'turun'} ⚪"), False
+    pasar = " • ".join(f"{k}: angka di atas perkiraan {_pct(x['atas'])}% / di bawah {_pct(x['bawah'])}%"
+                       for k, x in src.items())
+    kunci = key_rule(card)
     if v.get("benar") is not None:
         catatan = "" if teruji else (" → sampel kecil, belum terbukti" if v["benar"] >= 60
                                      else " → tidak lebih baik dari lempar koin")
@@ -102,8 +116,9 @@ def forecast(card: dict, kalshi: dict, poly: dict, state: dict, now: datetime) -
         uji = "belum ada uji untuk berita ini → anggap ≈ lempar koin"
     ago = _ago(state[key], now)
     w = now + WIB
-    bukti = " • ".join(x for x in (pasar, uji, f"diperbarui {w:%H:%M} WIB" + (f" • {ago}" if ago else "")) if x)
-    return {"label": "🎯 Perkiraan hari H • emas 1 menit setelah rilis", "teks": teks, "kuat": kuat,
+    bukti = " • ".join(x for x in (kunci, pasar, uji, f"diperbarui {w:%H:%M} WIB" + (f" • {ago}" if ago else ""))
+                       if x)
+    return {"label": "🎯 Perkiraan hari H • arah EMAS 1 menit setelah rilis", "teks": teks, "kuat": kuat,
             "bukti": bukti, "p_naik": round(p, 3),
             "riwayat": [x[1] for x in state[key][-24:]], "pasar": avg}
 
