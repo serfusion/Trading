@@ -110,3 +110,20 @@ def test_jolts_dua_bulan_lalu_dan_adp_dalam_orang():
     assert _chat.fred_actual("JOLTS Job Openings", t, t, lambda s: vals[s]) == "7.23M"
     t2 = datetime(2026, 10, 1, 12, 15, tzinfo=timezone.utc)
     assert _chat.fred_actual("ADP Non-Farm Employment Change", t2, t2, lambda s: vals[s]) == "45K"
+
+
+def test_act_manual_investing_dan_menimpa_otomatis():
+    p = _aktual.parse_manual
+    assert p("08:30 USD Nonfarm Payrolls (Sep) 45K 89K 162K") == "45K"
+    assert p("Unemployment Rate (Sep)\t4.4%\t4.3%\t4.3%") == "4.4%"
+    assert p("Core CPI (MoM) (Sep) 0.2% 0.3% 0.3%") == "0.2%"
+    assert p("-12k") == "-12K" and p("Actual: 0,2%") == "0.2%" and p("tidak ada angka") is None
+    store, now = Store(), NOW
+    assert _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "Nonfarm Payrolls (Sep) 45K 89K", now)["ok"]
+    c = cal()
+    c[0]["actual"] = "50K"                                       # otomatis -> manual menang
+    _aktual.fill(c[:1], store, now, {}, _aktual.Fetcher({}, set(), opener([])))
+    assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "manual"
+    assert not _aktual.save_manual(store, "x", "y", "abc", now)["ok"]
+    _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "", now)
+    assert CAL[0]["title"] + "|" + CAL[0]["time"] not in store.rows["aktual"]["found"]

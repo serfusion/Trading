@@ -116,3 +116,12 @@ Tampilan: kartu 🎯 → per hasil "⚡ Bila Act < 89K → arah emas" dengan sel
 di Dukascopy, arah sama ≥ 55% di Exness dan sejak Okt 2021, serta gerak median ≥ $0,30 (di bawah itu "belum gerak").
 Aplikasi lama (≤ 3.17) membaca ringkasannya di teks kecil ("1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK …"). Tab Tanya
 ("detik pertama NFP") ikut menampilkan deretan ini. Kalender News: catatan di bawah Act juga memuatnya.
+
+## 7. Act manual (aplikasi 3.19, 2 Okt 2026)
+
+Kartu 🎯 → kolom "Act manual" (muncul 5 menit sebelum rilis): tempel baris investing.com (mis. `Nonfarm Payrolls (Sep)
+45K 89K 162K`) atau ketik `45K` → Simpan. Cloud (`_aktual.parse_manual/save_manual`, POST /api/chat `{"manual": …}`)
+mengambil angka pertama (jam & isi kurung dibuang) sebagai Act, menyimpannya di Supabase baris `aktual` (src
+`manual`, menimpa Act otomatis), lalu ✅ hasil & sel 1/2/3 dtk + 1 mnt dihitung ulang dari Act itu. Kosongkan → Hapus →
+kembali ke Act otomatis BLS/FRED. Persen berubah sesuai Act di bawah / sama / di atas perkiraan (besar kejutan belum
+dibedakan).

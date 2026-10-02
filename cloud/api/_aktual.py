@@ -14,6 +14,7 @@ kunci dibatasi 25 permintaan/hari, jadi paling banyak ±20 di satu jam rilis). B
 from __future__ import annotations
 
 import json
+import re
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
@@ -121,6 +122,41 @@ class Fetcher:
         return self.cache[sid]
 
 
+_TIME = re.compile(r"\b\d{1,2}:\d{2}(?::\d{2})?\b")
+_PAREN = re.compile(r"\([^)]*\)")
+_NUM = re.compile(r"(?<![\w.])[<>]?-?\d+(?:[.,]\d+)?\s?[KMBT%]?(?![\w])", re.I)
+
+
+def parse_manual(text: str) -> str | None:
+    """Act dari teks yang ditempel pengguna (mis. baris investing.com "08:30 USD Nonfarm Payrolls (Sep) 45K 89K
+    162K" -> "45K", atau cukup "45K" / "Actual: 0,2%"). Angka PERTAMA setelah jam & isi kurung dibuang = Act."""
+    t = _PAREN.sub(" ", _TIME.sub(" ", text or ""))
+    t = re.sub(r"(?i)\b(19|20)\d{2}\b", " ", t)                 # tahun
+    m = _NUM.search(t)
+    if not m:
+        return None
+    v = m.group(0).replace(" ", "").replace(",", ".")
+    return v[:-1] + v[-1].upper() if v[-1].isalpha() else v
+
+
+def save_manual(store, title: str, time: str, text: str, now: datetime) -> dict:
+    """Simpan Act isian manual (src "manual"; menimpa Act otomatis). Teks kosong = hapus isian manual."""
+    state = store.get_state("aktual") or {}
+    found = dict(state.get("found") or {})
+    key = f"{title}|{time}"
+    if not (text or "").strip():
+        if (found.get(key) or {}).get("src") == "manual":
+            found.pop(key)
+        act = None
+    else:
+        act = parse_manual(text)
+        if act is None:
+            return {"ok": False, "error": "angka Act tidak terbaca (contoh: 45K, 0.2%, 4.3%)"}
+        found[key] = {"actual": act, "src": "manual", "t": now.isoformat()}
+    store.save_state(dict(state, found=found), "aktual")
+    return {"ok": True, "actual": act}
+
+
 def _key(c: dict) -> str:
     return f"{c['title']}|{c['time']}"
 
@@ -136,7 +172,7 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
     found = dict(state.get("found") or {})
     for c in calendar:
         f = found.get(_key(c))
-        if f and not c.get("actual"):
+        if f and (not c.get("actual") or f.get("src") == "manual"):
             c["actual"], c["actual_src"] = f["actual"], f["src"]
     missing = [c for c in calendar if c.get("released") and not c.get("actual") and c["title"] in _chat.FRED_MAP
                and now - datetime.fromisoformat(c["time"]) <= WINDOW]

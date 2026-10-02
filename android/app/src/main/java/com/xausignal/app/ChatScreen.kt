@@ -109,6 +109,25 @@ object ChatClient {
         }
     }
 
+    /** Act isian manual (mis. tempel baris investing.com); teks kosong = hapus. Hasil: null bila sukses, atau galat. */
+    fun saveActual(title: String, time: String, text: String): String? {
+        val base = SignalRepository.cloudUrl()
+        if (base.isBlank()) return "Isi alamat cloud dulu"
+        val m = JSONObject().put("title", title).put("time", time).put("actual", text)
+        val body = JSONObject().put("manual", m).toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaType())
+        val request = Request.Builder().url("$base/api/chat").post(body)
+            .header("X-Chat-Key", SignalRepository.topic()).build()
+        return try {
+            client.newCall(request).execute().use { res ->
+                val obj = try { JSONObject(res.body?.string().orEmpty()) } catch (e: Exception) { JSONObject() }
+                if (obj.optBoolean("ok")) null else obj.optString("error").ifBlank { "HTTP ${res.code}" }
+            }
+        } catch (e: Exception) {
+            e.message ?: e.javaClass.simpleName
+        }
+    }
+
     fun ask(history: List<ChatMessage>): ChatMessage {
         val base = SignalRepository.cloudUrl()
         if (base.isBlank()) return ChatMessage("assistant", "⚠️ Isi \"Alamat cloud\" di Pengaturan dulu (mis. https://nama-proyek.vercel.app).")
@@ -332,6 +351,32 @@ private fun TahapBlock(judul: String, tahap: JSONArray, bukti: String) {
     if (bukti.isNotBlank()) Text(bukti, style = MaterialTheme.typography.labelSmall, color = Muted)
 }
 
+/**
+ * Isi Act manual (2 Okt 2026): tempel baris investing.com ("Nonfarm Payrolls (Sep) 45K 89K 162K") atau ketik "45K".
+ * Cloud mengambil angka pertama sebagai Act, menimpa Act otomatis, lalu arah emas 1-2-3 dtk / 1 mnt dihitung ulang.
+ * Bila tidak diisi, Act otomatis (BLS/FRED) tetap dipakai. Tampil mulai 5 menit sebelum rilis.
+ */
+@Composable
+private fun ManualAct(b: JSONObject, onManual: (String, String, String, (String?) -> Unit) -> Unit) {
+    val time = b.optString("time")
+    if (!b.optBoolean("released") && minutesUntil(time) > 5) return
+    var text by remember(b.optString("title"), time) { mutableStateOf("") }
+    var info by remember(b.optString("title"), time) { mutableStateOf("") }
+    Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        OutlinedTextField(text, { text = it }, Modifier.weight(1f), singleLine = true,
+            label = { Text("Act manual (tempel dari investing.com)") },
+            textStyle = MaterialTheme.typography.bodySmall)
+        TextButton(onClick = {
+            info = "Menyimpan…"
+            onManual(b.optString("title"), time, text) { err ->
+                info = err?.let { "⚠️ $it" } ?: if (text.isBlank()) "Isian manual dihapus" else "Tersimpan ✓"
+            }
+        }) { Text(if (text.isBlank()) "Hapus" else "Simpan") }
+    }
+    Text(info.ifBlank { "Kosongkan = pakai Act otomatis (BLS/FRED)" }, style = MaterialTheme.typography.labelSmall,
+        color = Muted)
+}
+
 /** Satu baris kalender: judul, waktu WIB, status, Act (otomatis) / Cons / Prev. */
 @Composable
 private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
@@ -369,6 +414,7 @@ private fun NewsRow(e: CalEvent, onClick: () -> Unit) {
  */
 @Composable
 private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean, nextAlarm: NewsAlarm.Item?,
+                          onManual: (String, String, String, (String?) -> Unit) -> Unit = { _, _, _, _ -> },
                           onAlarm: (Boolean) -> Unit) {
     AppCard {
         CardTitle("🎯 Persiapan berita")
@@ -411,6 +457,7 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                     BigRow(h.optString("label"), h.optString("bukti"), h.optString("teks"), h.optBoolean("kuat"))
                 }
             }
+            ManualAct(b, onManual)
             val sk = b.optJSONArray("skenario")
             if (sk != null) {
                 for (k in 0 until sk.length()) {
@@ -574,7 +621,13 @@ fun NewsTab() {
                     NoteBox(
                         "Entry hanya dari sinyal 💰. Trading berita sendiri: diuji, rata-rata rugi."
                     )
-                    PersiapanCard(persiapan, calLoading, alarmOn, nextAlarm) { on ->
+                    PersiapanCard(persiapan, calLoading, alarmOn, nextAlarm, onManual = { t, tm, txt, done ->
+                        scope.launch {
+                            val err = withContext(Dispatchers.IO) { ChatClient.saveActual(t, tm, txt) }
+                            done(err)
+                            if (err == null) reloadCalendar()
+                        }
+                    }) { on ->
                         alarmOn = on
                         NewsAlarm.setEnabled(app, on)
                         nextAlarm = NewsAlarm.next(app)
