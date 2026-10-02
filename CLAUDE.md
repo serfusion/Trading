@@ -122,6 +122,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Aplikasi 3.19–3.20: Act manual (tempel investing.com, HARI_H 7), direvisi otomatis bila angka resmi BLS/FRED beda;
   persen 1 mnt per besar kejutan (≥ 1,5× median, HARI_H 8).
 - Aplikasi 3.22: + sel 3 & 6 jam (XAU M15, HARI_H 9; NFP 2 Okt naik $40 lalu berbalik).
+- HARI_H 10 (`research/berita_tren.py`, `_pudar.py`, env FADE_WARNING): tren besar TIDAK memprediksi pudar (diuji);
+  SISA LONJAKAN menit 60 memprediksi (≥ 60% → 88% searah 6 jam; < 30% → 92–93% balik lewat harga rilis). Baris 📉/📈
+  di kartu 🎯 30 mnt–6 jam setelah rilis (Twelve Data 5 mnt, cache `pudar`). Konteks 2026: Fed menaikkan bunga.
 - Aplikasi 3.18 (HARI_H bagian 6): sel arah emas 1/2/3 dtk + 1 mnt (`_persiapan.tahap`, reaksi.json "cepat"). Detik
   pertama NFP/CPI/PPI belum bergerak (±$0,17 ≈ spread, 50:50); hentakan di detik 1→2, searah hasil 82–91% di detik 2–3.
   Act dicek tiap 30 dtk di 10 menit pertama setelah rilis (`_aktual.RETRY_FAST`; BLS tanpa kunci 25/hari).

@@ -344,15 +344,16 @@ class TwelveData:
     def __init__(self, api_key: str, symbol: str = "XAU/USD"):
         self.api_key, self.symbol = api_key, symbol
 
-    def candles(self, n: int) -> list[Bar]:
-        q = urllib.parse.urlencode({"symbol": self.symbol, "interval": "1h", "outputsize": n,
+    def candles(self, n: int, interval: str = "1h") -> list[Bar]:
+        q = urllib.parse.urlencode({"symbol": self.symbol, "interval": interval, "outputsize": n,
                                     "timezone": "UTC", "order": "ASC", "apikey": self.api_key})
         data = http("GET", "https://api.twelvedata.com/time_series?" + q)
         if not data or data.get("status") != "ok":
             raise RuntimeError(f"Twelve Data: {(data or {}).get('message', 'tidak ada data')}")
         bars = []
         for v in data["values"]:
-            t = datetime.strptime(v["datetime"], "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)
+            fmt = "%Y-%m-%d %H:%M:%S" if len(v["datetime"]) > 10 else "%Y-%m-%d"     # candle harian tanpa jam
+            t = datetime.strptime(v["datetime"], fmt).replace(tzinfo=timezone.utc)
             bars.append(Bar(t, float(v["open"]), float(v["high"]), float(v["low"]), float(v["close"])))
         return sorted(bars, key=lambda b: b.t)
 

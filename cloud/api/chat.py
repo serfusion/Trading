@@ -23,6 +23,7 @@ import _core  # noqa: E402
 import _hari_h  # noqa: E402
 import _kalshi  # noqa: E402
 import _polymarket  # noqa: E402
+import _pudar  # noqa: E402
 import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
@@ -160,6 +161,14 @@ class handler(BaseHTTPRequestHandler):
                     ks = _kalshi.cached_snapshot(berita, store, now)[0] if berita else {}
                     ps = _polymarket.cached_snapshot(berita, store, now)[0] if berita else {}
                     _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
+                    and os.environ.get("FADE_WARNING", "1") == "1":
+                try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)
+                    key = os.environ["TWELVEDATA_API_KEY"]
+                    _pudar.attach(persiapan, store, now, _pudar.fetch_twelvedata(key),
+                                  _pudar.fetch_twelvedata(key, "BTC/USD"))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
