@@ -165,3 +165,34 @@ Dipasang (aplikasi 3.22, permintaan pengguna "ya pasang"): sel **3 jam** & **6 j
 → reaksi.json `jam`, `_persiapan.tahap`). Angka "53–69%" = semua tahun vs sejak Okt 2021 bila beda ≥ 10 poin.
 Contoh: NFP < perkiraan → 1 mnt 81% NAIK • 3 jam 70% NAIK • 6 jam 53–69% naik ⚪; CPI > perkiraan → 1 mnt 74% TURUN
 tetapi 3 jam 63% NAIK (berbalik).
+
+## 10. Kenapa NFP 2 Okt berbalik? Analisa lintas pasar + peringatan "lonjakan memudar" (aplikasi: tanpa APK baru)
+
+**Konteks 2026** (pencarian web): Fed sedang MENAIKKAN bunga (September +25 bps ke 3,75–4,00%); Logan (Dallas Fed,
+1 Okt) meminta kenaikan "50 bps atau lebih"; yield AS 10 tahun sempat tertinggi sejak 2002; emas turun ±2% sepekan.
+
+**Lintas pasar 2 Okt (Twelve Data 5 menit, UTC)** — emas turun setelah 13:00 SAAT EUR/USD masih naik (dolar melemah):
+
+| UTC | XAU | BTC | EUR/USD | USD/JPY | SPY | TLT (obligasi) |
+|---|---|---|---|---|---|---|
+| 12:25 | 4.179 | 86.652 | 1,1225 | 157,64 | – | – |
+| 13:00 | 4.219 | 86.810 | 1,1259 | 157,12 | – | – |
+| 14:15 | 4.188 | 86.299 | 1,1280 | 157,49 | 771,9 | 78,29 |
+| 15:20 | 4.143 | 85.500 | 1,1260 | 157,75 | 767,4 | 77,64 |
+
+Polymarket "Fed naik 25 bps Oktober": 24,5% (sebelum NFP) → **13,5%** (12:35) → 17,5% (13:00) → 15,5% (14:00) →
+**18,5%** (16:00): pasar menarik kembali sebagian besar efek NFP. Setelah 14:15 obligasi (TLT) turun = yield naik,
+saham (SPY), BTC & emas ikut turun → penurunan emas sejalan dengan yield naik & risiko turun, bukan dolar. Isi pidato
+Logan 2 Okt (10:00 ET, sambutan workshop migrasi) tidak bisa dipastikan → tidak diklaim sebagai penyebab.
+
+**Uji hipotesis** (`research/berita_tren.py`, 1.035 lonjakan berita XAU M15 2012–2026):
+1. "Lonjakan melawan tren besar memudar" → **SALAH** (melawan tren D1: 6 jam 70% searah vs searah tren 72%; NFP
+   melawan tren 74% vs 69%).
+2. "Sisa lonjakan di menit 30/60 (diketahui saat itu)" → **KUAT & konsisten LAMA/BARU**: menit 60 sisa ≥ 60% → 88%
+   masih searah 6 jam (berbalik lewat harga rilis 29%); sisa < 30% → 56% (NFP 50%) dan 92% (NFP 93%) kembali melewati
+   harga rilis ≤ 6 jam; sudah berbalik → 30%.
+
+**Dipasang** (`cloud/api/_pudar.py`, `pudar.json`, env `FADE_WARNING`): 30 menit – 6 jam setelah rilis, kartu 🎯 menampilkan
+baris "📉/📈 Lonjakan NAIK 19:30 WIB: sisa X% di menit 60" + angka besar. Replay 2 Okt: menit 30 "86% tetap NAIK";
+**menit 60 (20:30 WIB) "93% BALIK ke bawah 4181 🔴"** — harga memang kembali ke bawah 4.181 pukul ±21:50 WIB.
+Harga Twelve Data XAU/USD 5 menit + ATR harian (2 kredit, cache Supabase `pudar` 2 menit).

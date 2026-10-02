@@ -1,0 +1,82 @@
+# Lonjakan berita searah vs melawan tren besar (research/berita_tren.py)
+
+1035 rilis dengan lonjakan 15 menit ≥ $1 dan ≥ 0,1 ATR harian, 2012–2026.
+
+== tren D1 (close vs EMA50) ==
+ [semua]
+  lonjakan SEARAH tren                             n= 518 masih searah lonjakan: 1 jam  83% • 3 jam  77% • 6 jam  72% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  59% | rata 6 jam  +5.6$
+  lonjakan MELAWAN tren                            n= 517 masih searah lonjakan: 1 jam  84% • 3 jam  74% • 6 jam  70% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  55% | rata 6 jam  +5.1$
+ [LAMA < Okt 2021]
+  lonjakan SEARAH tren                             n= 329 masih searah lonjakan: 1 jam  84% • 3 jam  78% • 6 jam  72% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  56% | rata 6 jam  +3.9$
+  lonjakan MELAWAN tren                            n= 361 masih searah lonjakan: 1 jam  86% • 3 jam  75% • 6 jam  72% • akhir hari  72% | berbalik lewat harga awal ≤ 6 jam  54% | rata 6 jam  +4.6$
+ [BARU]
+  lonjakan SEARAH tren                             n= 189 masih searah lonjakan: 1 jam  83% • 3 jam  74% • 6 jam  74% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  64% | rata 6 jam  +8.5$
+  lonjakan MELAWAN tren                            n= 156 masih searah lonjakan: 1 jam  81% • 3 jam  73% • 6 jam  66% • akhir hari  67% | berbalik lewat harga awal ≤ 6 jam  59% | rata 6 jam  +6.3$
+
+== tren 20 hari ==
+ [semua]
+  lonjakan SEARAH tren                             n= 528 masih searah lonjakan: 1 jam  84% • 3 jam  76% • 6 jam  72% • akhir hari  70% | berbalik lewat harga awal ≤ 6 jam  58% | rata 6 jam  +5.6$
+  lonjakan MELAWAN tren                            n= 507 masih searah lonjakan: 1 jam  84% • 3 jam  75% • 6 jam  71% • akhir hari  72% | berbalik lewat harga awal ≤ 6 jam  56% | rata 6 jam  +5.0$
+ [LAMA < Okt 2021]
+  lonjakan SEARAH tren                             n= 347 masih searah lonjakan: 1 jam  84% • 3 jam  77% • 6 jam  72% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  54% | rata 6 jam  +4.2$
+  lonjakan MELAWAN tren                            n= 343 masih searah lonjakan: 1 jam  85% • 3 jam  76% • 6 jam  71% • akhir hari  72% | berbalik lewat harga awal ≤ 6 jam  56% | rata 6 jam  +4.3$
+ [BARU]
+  lonjakan SEARAH tren                             n= 181 masih searah lonjakan: 1 jam  82% • 3 jam  73% • 6 jam  71% • akhir hari  69% | berbalik lewat harga awal ≤ 6 jam  66% | rata 6 jam  +8.4$
+  lonjakan MELAWAN tren                            n= 164 masih searah lonjakan: 1 jam  82% • 3 jam  74% • 6 jam  70% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  57% | rata 6 jam  +6.4$
+
+== D1 & 20 hari sepakat ==
+ [semua]
+  lonjakan SEARAH tren                             n= 432 masih searah lonjakan: 1 jam  83% • 3 jam  75% • 6 jam  71% • akhir hari  69% | berbalik lewat harga awal ≤ 6 jam  61% | rata 6 jam  +5.3$
+  lonjakan MELAWAN tren                            n= 421 masih searah lonjakan: 1 jam  84% • 3 jam  74% • 6 jam  69% • akhir hari  70% | berbalik lewat harga awal ≤ 6 jam  57% | rata 6 jam  +4.6$
+ [LAMA < Okt 2021]
+  lonjakan SEARAH tren                             n= 272 masih searah lonjakan: 1 jam  83% • 3 jam  77% • 6 jam  70% • akhir hari  70% | berbalik lewat harga awal ≤ 6 jam  57% | rata 6 jam  +3.7$
+  lonjakan MELAWAN tren                            n= 286 masih searah lonjakan: 1 jam  85% • 3 jam  74% • 6 jam  70% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  57% | rata 6 jam  +4.3$
+ [BARU]
+  lonjakan SEARAH tren                             n= 160 masih searah lonjakan: 1 jam  81% • 3 jam  72% • 6 jam  71% • akhir hari  69% | berbalik lewat harga awal ≤ 6 jam  67% | rata 6 jam  +8.0$
+  lonjakan MELAWAN tren                            n= 135 masih searah lonjakan: 1 jam  80% • 3 jam  73% • 6 jam  66% • akhir hari  67% | berbalik lewat harga awal ≤ 6 jam  59% | rata 6 jam  +5.5$
+
+== Petunjuk dini: sisa lonjakan di menit ke-30 (harga sekarang - open) / puncak lonjakan ==
+ [semua]
+  sudah berbalik (< 0%)                            n=  61 masih searah lonjakan: 1 jam  26% • 3 jam  39% • 6 jam  34% • akhir hari  34% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -2.8$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n= 120 masih searah lonjakan: 1 jam  66% • 3 jam  67% • 6 jam  60% • akhir hari  61% | berbalik lewat harga awal ≤ 6 jam  88% | rata 6 jam  +1.4$
+  sisa 30–60%                                      n= 259 masih searah lonjakan: 1 jam  81% • 3 jam  69% • 6 jam  65% • akhir hari  66% | berbalik lewat harga awal ≤ 6 jam  69% | rata 6 jam  +2.5$
+  sisa ≥ 60% (bertahan)                            n= 595 masih searah lonjakan: 1 jam  95% • 3 jam  84% • 6 jam  80% • akhir hari  79% | berbalik lewat harga awal ≤ 6 jam  41% | rata 6 jam  +8.2$
+ [LAMA < Okt 2021]
+  sudah berbalik (< 0%)                            n=  40 masih searah lonjakan: 1 jam  28% • 3 jam  42% • 6 jam  35% • akhir hari  35% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -1.7$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n=  77 masih searah lonjakan: 1 jam  66% • 3 jam  66% • 6 jam  58% • akhir hari  61% | berbalik lewat harga awal ≤ 6 jam  87% | rata 6 jam  +0.7$
+  sisa 30–60%                                      n= 180 masih searah lonjakan: 1 jam  83% • 3 jam  70% • 6 jam  67% • akhir hari  67% | berbalik lewat harga awal ≤ 6 jam  66% | rata 6 jam  +2.3$
+  sisa ≥ 60% (bertahan)                            n= 393 masih searah lonjakan: 1 jam  95% • 3 jam  85% • 6 jam  80% • akhir hari  80% | berbalik lewat harga awal ≤ 6 jam  39% | rata 6 jam  +6.5$
+ [BARU]
+  sudah berbalik (< 0%)                            n=  21 masih searah lonjakan: 1 jam  24% • 3 jam  33% • 6 jam  33% • akhir hari  33% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -4.8$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n=  43 masih searah lonjakan: 1 jam  65% • 3 jam  67% • 6 jam  63% • akhir hari  60% | berbalik lewat harga awal ≤ 6 jam  91% | rata 6 jam  +2.6$
+  sisa 30–60%                                      n=  79 masih searah lonjakan: 1 jam  76% • 3 jam  68% • 6 jam  59% • akhir hari  63% | berbalik lewat harga awal ≤ 6 jam  76% | rata 6 jam  +2.9$
+  sisa ≥ 60% (bertahan)                            n= 202 masih searah lonjakan: 1 jam  94% • 3 jam  81% • 6 jam  80% • akhir hari  78% | berbalik lewat harga awal ≤ 6 jam  46% | rata 6 jam +11.6$
+
+== Petunjuk dini: sisa lonjakan di menit ke-60 (harga sekarang - open) / puncak lonjakan ==
+ [semua]
+  sudah berbalik (< 0%)                            n= 167 masih searah lonjakan: 1 jam   0% • 3 jam  37% • 6 jam  30% • akhir hari  31% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -2.9$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n= 135 masih searah lonjakan: 1 jam 100% • 3 jam  60% • 6 jam  56% • akhir hari  55% | berbalik lewat harga awal ≤ 6 jam  92% | rata 6 jam  +0.5$
+  sisa 30–60%                                      n= 246 masih searah lonjakan: 1 jam 100% • 3 jam  78% • 6 jam  74% • akhir hari  74% | berbalik lewat harga awal ≤ 6 jam  65% | rata 6 jam  +3.5$
+  sisa ≥ 60% (bertahan)                            n= 487 masih searah lonjakan: 1 jam 100% • 3 jam  92% • 6 jam  88% • akhir hari  88% | berbalik lewat harga awal ≤ 6 jam  29% | rata 6 jam +10.4$
+ [LAMA < Okt 2021]
+  sudah berbalik (< 0%)                            n= 104 masih searah lonjakan: 1 jam   0% • 3 jam  38% • 6 jam  28% • akhir hari  28% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -2.8$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n=  89 masih searah lonjakan: 1 jam 100% • 3 jam  62% • 6 jam  54% • akhir hari  55% | berbalik lewat harga awal ≤ 6 jam  91% | rata 6 jam  +0.5$
+  sisa 30–60%                                      n= 171 masih searah lonjakan: 1 jam 100% • 3 jam  79% • 6 jam  77% • akhir hari  78% | berbalik lewat harga awal ≤ 6 jam  62% | rata 6 jam  +3.5$
+  sisa ≥ 60% (bertahan)                            n= 326 masih searah lonjakan: 1 jam 100% • 3 jam  92% • 6 jam  88% • akhir hari  87% | berbalik lewat harga awal ≤ 6 jam  27% | rata 6 jam  +7.9$
+ [BARU]
+  sudah berbalik (< 0%)                            n=  63 masih searah lonjakan: 1 jam   0% • 3 jam  37% • 6 jam  33% • akhir hari  37% | berbalik lewat harga awal ≤ 6 jam 100% | rata 6 jam  -3.0$
+  sisa 0–30% (dikembalikan ≥ 70%)                  n=  46 masih searah lonjakan: 1 jam 100% • 3 jam  57% • 6 jam  61% • akhir hari  54% | berbalik lewat harga awal ≤ 6 jam  93% | rata 6 jam  +0.5$
+  sisa 30–60%                                      n=  75 masih searah lonjakan: 1 jam 100% • 3 jam  75% • 6 jam  69% • akhir hari  67% | berbalik lewat harga awal ≤ 6 jam  71% | rata 6 jam  +3.6$
+  sisa ≥ 60% (bertahan)                            n= 161 masih searah lonjakan: 1 jam 100% • 3 jam  93% • 6 jam  88% • akhir hari  88% | berbalik lewat harga awal ≤ 6 jam  34% | rata 6 jam +15.4$
+
+== Khusus NFP (tren D1) ==
+  lonjakan SEARAH tren                             n=  96 masih searah lonjakan: 1 jam  82% • 3 jam  74% • 6 jam  69% • akhir hari  70% | berbalik lewat harga awal ≤ 6 jam  62% | rata 6 jam  +4.8$
+  lonjakan MELAWAN tren                            n= 112 masih searah lonjakan: 1 jam  88% • 3 jam  80% • 6 jam  74% • akhir hari  78% | berbalik lewat harga awal ≤ 6 jam  44% | rata 6 jam  +9.8$
+
+== Khusus NFP: sisa lonjakan di menit ke-60 ==
+  sisa < 30% (dikembalikan ≥ 70%)                  n=  61 masih searah lonjakan: 1 jam  49% • 3 jam  44% • 6 jam  38% • akhir hari  44% | berbalik lewat harga awal ≤ 6 jam  97% | rata 6 jam  -1.2$
+  sisa ≥ 30%                                       n= 147 masih searah lonjakan: 1 jam 100% • 3 jam  91% • 6 jam  86% • akhir hari  86% | berbalik lewat harga awal ≤ 6 jam  34% | rata 6 jam +11.1$
+
+== Lonjakan NAIK saat tren D1 TURUN (kasus 2 Okt 2026) ==
+  semua berita                                     n= 243 masih searah lonjakan: 1 jam  87% • 3 jam  77% • 6 jam  74% • akhir hari  74% | berbalik lewat harga awal ≤ 6 jam  49% | rata 6 jam  +5.9$
+  bandingkan: lonjakan naik saat tren naik         n= 305 masih searah lonjakan: 1 jam  84% • 3 jam  78% • 6 jam  72% • akhir hari  71% | berbalik lewat harga awal ≤ 6 jam  60% | rata 6 jam  +6.5$
