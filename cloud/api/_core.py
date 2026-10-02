@@ -550,6 +550,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     def twins_open(name: str, v: dict) -> list[str]:
         """Set lain dengan sinyal kembar (arah & candle sinyal sama) yang masih punya posisi virtual. Set yang sudah
         diproses di tick ini memakai state terbarunya (systems diperbarui di akhir tiap set)."""
+        if v.get("lapis"):                       # lapisan di-entry terpisah (lot ½), bukan kembar sinyal dasar
+            return []
         return [n for n, s in systems.items() if n != name and s.get("virtual")
                 and s["virtual"].get("bar_close") == v.get("bar_close") and s["virtual"].get("dir") == v.get("dir")]
 
@@ -565,7 +567,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         dikirim untuk semua set."""
         return all(exit_of(n) < exit_of(name) for n in twins_open(name, v))
 
-    def close_virtual(name: str, v: dict, exit_price: float, why: str) -> None:
+    def close_virtual(name: str, v: dict, exit_price: float, why: str, quiet: bool = False) -> None:
         sign = 1 if v["dir"] == "BUY" else -1
         points = (exit_price - v["entry"]) * sign
         r = f_result(v["legs"], v["entry"], v["risk"], sign, v.get("tp1_hit", False), exit_price, cfg["tp1_r"])
@@ -574,7 +576,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
               "cat": v.get("cat", ""), "tier": v.get("tier", ""), "point_value": cfg.get("point_value", 1.0),
-              "tp1_time": v.get("be_bar"), "reason": why,
+              "tp1_time": v.get("be_bar"), "reason": why, **({"lapis": True} if v.get("lapis") else {}),
               "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
                                                                      cfg["be_offset"]), 3)
                        for n in (1, 3) for e in (False, True)}}
@@ -582,7 +584,9 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 f"Entry {v['entry']:.2f} -> {points:+.2f} poin | {'PROFIT (TP1 kena)' if v.get('tp1_hit') else 'MINUS'}"
                 f"\nAlasan: {why}")
         # sinyal kembar: hanya set terakhir yang masih terbuka mengirim teks (set lebih cepat tutup diam-diam)
-        pub.publish(ev, None if twins_open(name, v) else text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
+        if v.get("lapis"):
+            text = "🔁 LAPISAN " + text
+        pub.publish(ev, None if quiet or twins_open(name, v) else text, "Sinyal TUTUP posisi", 5, ["checkered_flag"])
         store.log("close", ev)
         events.append(f"{name} TUTUP {v['dir']} {r:+.2f}R")
 
@@ -638,6 +642,152 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                     return None
         return v
 
+    def try_open(name: str, idx: int, magic: int, entry_p: int, exit_p: int, s: dict, sig: dict,
+                 layer: bool = False, opens_now: list | None = None) -> dict | None:
+        """Filter sinyal (ATR, buka pekan, ⭐, 💰, H4, filter eksternal) lalu buat & kirim sinyal. Dipakai sinyal dasar
+        dan lapisan (layer=True: sinyal baru saat sinyal lain di set ini masih berjalan, lot ½, tanpa auto order)."""
+        opens_now = opens_now or []
+        if sig["atr"] < 0.4 * atr_last(closed, 120):
+            # ATR(20) jauh di bawah normal (mis. candle datar) -> SL terlalu sempit, sinyal tidak wajar
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "ATR tidak wajar"})
+            events.append(f"{name} {sig['dir']} dilewati: ATR {sig['atr']:.2f} terlalu kecil")
+            return None
+        if since_week_open(closed) < cfg.get("skip_open_bars", 0):
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "gap buka pekan"})
+            events.append(f"{name} {sig['dir']} dilewati: {since_week_open(closed) + 1} candle pertama setelah buka")
+            return None
+        if cfg.get("star_only") and not (
+                star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})
+            events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
+            return None
+        if cfg.get("profit_only", True) and not (cat := category(closed, sig["dir"], cfg))[0]["star"]:
+            # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
+            events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
+            return None
+        if cfg.get("h4_filter") and not (h4 := h4_ema_check(closed, sig["dir"]))[0]:
+            # validasi arah H4 EMA50 (research/alchemist.py F4, XAU): sinyal 💰 lawan arah H4 tidak dikirim
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": h4[1]})
+            events.append(f"{name} {sig['dir']} dilewati: {h4[1]}")
+            return None
+        if cfg.get("skip_fn") and (why := cfg["skip_fn"](sig["dir"], now)):
+            # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": why})
+            events.append(f"{name} {sig['dir']} dilewati: {why}")
+            return None
+        d = sig["dir"]
+        meta, star_note = category(closed, d, cfg)
+        asset = cfg.get("asset", "XAU")
+        vp = vol_pct(closed) if asset == "XAU" else None
+        meta["tier"] = tier(asset, meta["cat"].split(" ", 1)[-1], vp)
+        meta["vol_pct"] = None if vp is None else round(vp, 3)
+        meta["zap"] = meta["tier"] == "zap"
+        if meta["zap"]:        # ⚡: statistik kelompok ⚡ sendiri (lebih tinggi dari kategori induknya)
+            wr, ar, wr7, ar7, n_z, per_z = TIER_STATS[asset]
+            meta.update(badge="⚡" + meta["badge"], wr=wr, avg_r=ar, wr07=wr7, avg_r07=ar7, n_hist=n_z,
+                        period=per_z)
+        war = cfg.get("war") if asset == "XAU" else None
+        sign = 1 if d == "BUY" else -1
+        risk = cfg["stop_atr"] * sig["atr"]
+        sl = price - sign * risk
+        tp1 = price + sign * cfg["tp1_r"] * risk
+        key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}" + ("L" if layer else "")
+        ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
+              "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
+              "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
+              "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
+              "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
+              "warning": "Harga dari data feed; cek harga broker sebelum entry.",
+              "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
+        if war and war.get("on"):
+            ev["war"] = war
+        text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
+                f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
+                f"{meta['n_hist']} sinyal)\n"
+                f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
+                f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
+                f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
+        if meta["zap"]:
+            text = (f"⚡ KESEMPATAN EMAS (WR {meta['wr07']:.0f}% dengan SL+ 0,7R, +{meta['avg_r07']:.2f}R/sinyal)\n"
+                    + text)
+        if war and war.get("on"):
+            text += "\n" + war["text"]
+        news = None
+        if cfg.get("news_fn"):
+            try:                    # 📰 sinyal lahir <= 4 jam setelah berita AS besar (research/sinyal_berita.py)
+                news = cfg["news_fn"](d, now)
+            except Exception as exc:  # noqa: BLE001 - tanda berita opsional
+                events.append(f"{name} tanda berita gagal: {exc}")
+        if news:
+            ev["news"] = news
+            text = news["judul"] + "\n" + text + "\n" + news["teks"]
+        if layer:
+            lay = cfg.get("layer") or {}
+            n_open = len(opens_now)
+            ev.update(lapis=True, lot_mult=lay.get("lot", 0.5), lapis_ke=n_open)
+            if lay.get("stats"):
+                ev["lapis_stats"] = lay["stats"]
+            text = (f"🔁 LAPISAN ke-{n_open} (lot ½) — {n_open} sinyal sebelumnya di set ini masih berjalan"
+                    + (f"\n{lay['stats']['teks']}" if lay.get("stats") else "") + "\n" + text
+                    + "\nPakai ½ lot dari biasanya. Auto order tidak dipakai untuk lapisan.")
+        # sinyal kembar (set lain sudah membuka sinyal di candle & arah yang sama): cukup 1 teks ntfy
+        first = layer or not twins_open(name, {"bar_close": iso(closed[-1].t + tf), "dir": d})
+        pub.publish(ev, text if first else None, f"{d} {symbol}", 5,
+                    ["green_circle" if d == "BUY" else "red_circle"])
+        store.log("signal", ev)
+        events.append(f"{name} SINYAL {d} @ {price:.2f}")
+        v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
+             "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
+             "tier": meta["tier"],
+             "bar_close": iso(closed[-1].t + tf), **({"lapis": True} if layer else {})}
+        existing = live_positions(magic) if live and not layer else []
+        if layer:
+            pass                    # lapisan: sinyal saja (posisi lama satu magic per set; auto order hanya sinyal dasar)
+        elif live and existing != []:
+            why = "MetaApi tidak bisa dihubungi" if existing is None else f"masih ada {len(existing)} posisi lama"
+            info = f"⚠️ Auto order {name} dilewati: {why}. Sinyal tetap berlaku (manual)."
+            pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
+                        info, "Auto order", 4, ["warning"])
+            events.append(info)
+        elif live:
+            # simpan dulu SEBELUM kirim order -> tidak mungkin dobel walau fungsi terputus
+            s["virtual"] = v
+            systems[name] = s
+            state["systems"] = systems
+            store.save_state(state)
+            opened = 0
+            for i in range(legs_n):
+                res = executor.market(d, leg_lot, sl, tp1 if (i == 0 and legs_n >= 2) else None, magic,
+                                      f"F{entry_p}L{i + 1}", f"{closed[-1].t:%m%d%H}{idx}{i}")
+                if not res["ok"]:
+                    events.append(f"{name} LIVE leg {i + 1} GAGAL: {res.get('message') or res.get('stringCode')}")
+                    break
+                opened += 1
+            v["live_legs"] = opened
+            info = f"🤖 Auto order {name}: {opened}/{legs_n} posisi {d} {leg_lot} lot terbuka"
+            pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
+                        info, "Auto order", 4, ["robot"])
+            store.log("live_open", {"id": key, "opened": opened, "lot": leg_lot})
+            events.append(info)
+        return v
+
+    def layer_ok(opens: list, sc: dict) -> bool:
+        """Boleh sinyal lapisan? (research/sinyal_lapis.py & sinyal_berita.py) cfg["layer"]:
+        mode "tp1" = sinyal terakhir di set ini sudah TP1 (sisa posisi SL+); mode "any" = kapan saja, asal breakout
+        BARU (candle sebelumnya belum di luar channel); "max" = batas sinyal terbuka bersamaan per set."""
+        lay = cfg.get("layer")
+        if not lay or len(opens) >= lay.get("max", 10):
+            return False
+        if lay.get("mode") == "tp1":
+            last = max(opens, key=lambda x: x["bar_close"])
+            # seperti backtest: keputusan lapisan di candle SESUDAH candle tempat TP1 kena
+            return bool(last.get("tp1_hit")) and parse_iso(last["be_bar"]) < closed[-1].t
+        if lay.get("mode") == "any":
+            prev = evaluate(closed[:-1], None, sc)
+            return not (prev["action"] == "open" and prev["dir"] == opens[0]["dir"])
+        return False
+
     trends = []
     for idx, (entry_p, exit_p) in enumerate(cfg["sets"]):
         name = f"T{entry_p}/{exit_p}"
@@ -645,119 +795,31 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         sc = {**cfg, "entry": entry_p, "exit": exit_p}
         s = dict(systems.get(name) or {})
         v = manage(name, s.get("virtual"))
+        layers = [x for x in (manage(name, x) for x in (s.get("layers") or [])) if x]
         if closed and s.get("last_bar") != iso(closed[-1].t):
             s["last_bar"] = iso(closed[-1].t)
-            sig = evaluate(closed, v["dir"] if v else None, sc)
-            if sig["action"] == "close" and v:
-                close_virtual(name, v, price, sig["note"])
-                v = None
-            elif sig["action"] == "open" and v is None and sig["atr"] < 0.4 * atr_last(closed, 120):
-                # ATR(20) jauh di bawah normal (mis. candle datar) -> SL terlalu sempit, sinyal tidak wajar
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "ATR tidak wajar"})
-                events.append(f"{name} {sig['dir']} dilewati: ATR {sig['atr']:.2f} terlalu kecil")
-            elif sig["action"] == "open" and v is None and since_week_open(closed) < cfg.get("skip_open_bars", 0):
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": "gap buka pekan"})
-                events.append(f"{name} {sig['dir']} dilewati: {since_week_open(closed) + 1} candle pertama setelah buka")
-            elif sig["action"] == "open" and v is None and cfg.get("star_only") and not (
-                    star := star_check(closed, sig["dir"], cfg.get("star_ema", 50), cfg.get("star_h4", 20)))[0]:
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": star[1]})
-                events.append(f"{name} {sig['dir']} bukan ⭐ ({star[1]})")
-            elif sig["action"] == "open" and v is None and cfg.get("profit_only", True) and not (
-                    cat := category(closed, sig["dir"], cfg))[0]["star"]:
-                # hanya kirim sinyal yang terbukti untung (punya 💰); sinyal biasa tidak worth it
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
-                events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
-            elif sig["action"] == "open" and v is None and cfg.get("h4_filter") and not (
-                    h4 := h4_ema_check(closed, sig["dir"]))[0]:
-                # validasi arah H4 EMA50 (research/alchemist.py F4, XAU): sinyal 💰 lawan arah H4 tidak dikirim
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": h4[1]})
-                events.append(f"{name} {sig['dir']} dilewati: {h4[1]}")
-            elif sig["action"] == "open" and v is None and cfg.get("skip_fn") and (
-                    why := cfg["skip_fn"](sig["dir"], now)):
-                # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason
-                store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": why})
-                events.append(f"{name} {sig['dir']} dilewati: {why}")
-            elif sig["action"] == "open" and v is None:
-                d = sig["dir"]
-                meta, star_note = category(closed, d, cfg)
-                asset = cfg.get("asset", "XAU")
-                vp = vol_pct(closed) if asset == "XAU" else None
-                meta["tier"] = tier(asset, meta["cat"].split(" ", 1)[-1], vp)
-                meta["vol_pct"] = None if vp is None else round(vp, 3)
-                meta["zap"] = meta["tier"] == "zap"
-                if meta["zap"]:        # ⚡: statistik kelompok ⚡ sendiri (lebih tinggi dari kategori induknya)
-                    wr, ar, wr7, ar7, n_z, per_z = TIER_STATS[asset]
-                    meta.update(badge="⚡" + meta["badge"], wr=wr, avg_r=ar, wr07=wr7, avg_r07=ar7, n_hist=n_z,
-                                period=per_z)
-                war = cfg.get("war") if asset == "XAU" else None
-                sign = 1 if d == "BUY" else -1
-                risk = cfg["stop_atr"] * sig["atr"]
-                sl = price - sign * risk
-                tp1 = price + sign * cfg["tp1_r"] * risk
-                key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}"
-                ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
-                      "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
-                      "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
-                      "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
-                      "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
-                      "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-                      "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
-                if war and war.get("on"):
-                    ev["war"] = war
-                text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
-                        f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
-                        f"{meta['n_hist']} sinyal)\n"
-                        f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
-                        f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
-                        f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
-                if meta["zap"]:
-                    text = (f"⚡ KESEMPATAN EMAS (WR {meta['wr07']:.0f}% dengan SL+ 0,7R, +{meta['avg_r07']:.2f}R/sinyal)\n"
-                            + text)
-                if war and war.get("on"):
-                    text += "\n" + war["text"]
-                # sinyal kembar (set lain sudah membuka sinyal di candle & arah yang sama): cukup 1 teks ntfy
-                first = not twins_open(name, {"bar_close": iso(closed[-1].t + tf), "dir": d})
-                pub.publish(ev, text if first else None, f"{d} {symbol}", 5,
-                            ["green_circle" if d == "BUY" else "red_circle"])
-                store.log("signal", ev)
-                events.append(f"{name} SINYAL {d} @ {price:.2f}")
-                v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
-                     "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
-                     "tier": meta["tier"],
-                     "bar_close": iso(closed[-1].t + tf)}
-                existing = live_positions(magic) if live else []
-                if live and existing != []:
-                    why = "MetaApi tidak bisa dihubungi" if existing is None else f"masih ada {len(existing)} posisi lama"
-                    info = f"⚠️ Auto order {name} dilewati: {why}. Sinyal tetap berlaku (manual)."
-                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
-                                info, "Auto order", 4, ["warning"])
-                    events.append(info)
-                elif live:
-                    # simpan dulu SEBELUM kirim order -> tidak mungkin dobel walau fungsi terputus
-                    s["virtual"] = v
-                    systems[name] = s
-                    state["systems"] = systems
-                    store.save_state(state)
-                    opened = 0
-                    for i in range(legs_n):
-                        res = executor.market(d, leg_lot, sl, tp1 if (i == 0 and legs_n >= 2) else None, magic,
-                                              f"F{entry_p}L{i + 1}", f"{closed[-1].t:%m%d%H}{idx}{i}")
-                        if not res["ok"]:
-                            events.append(f"{name} LIVE leg {i + 1} GAGAL: {res.get('message') or res.get('stringCode')}")
-                            break
-                        opened += 1
-                    v["live_legs"] = opened
-                    info = f"🤖 Auto order {name}: {opened}/{legs_n} posisi {d} {leg_lot} lot terbuka"
-                    pub.publish({"type": "info", "time": iso(now), "set": name, "id": key, "text": info},
-                                info, "Auto order", 4, ["robot"])
-                    store.log("live_open", {"id": key, "opened": opened, "lot": leg_lot})
-                    events.append(info)
+            opens = ([v] if v else []) + layers
+            pos = opens[0]["dir"] if opens else None
+            sig = evaluate(closed, pos, sc)
+            if sig["action"] == "close" and opens:
+                for k, x in enumerate(opens):          # TUTUP berlaku untuk semua sinyal (dasar & lapisan) di set ini
+                    close_virtual(name, x, price, sig["note"], quiet=k > 0)
+                v, layers = None, []
+            elif sig["action"] == "open" and not opens:
+                v = try_open(name, idx, magic, entry_p, exit_p, s, sig)
+            elif opens and layer_ok(opens, sc):
+                sig2 = evaluate(closed, None, sc)
+                if sig2["action"] == "open" and sig2["dir"] == pos:
+                    nv = try_open(name, idx, magic, entry_p, exit_p, s, sig2, layer=True, opens_now=opens)
+                    if nv:
+                        layers.append(nv)
             s["trend"] = sig["state"]
         try:
             v = live_sync(name, magic, v)
         except Exception as exc:  # noqa: BLE001 - kegagalan MetaApi tidak boleh menghentikan sinyal
             events.append(f"{name} LIVE sync error: {exc}")
         s["virtual"] = v
+        s["layers"] = layers
         systems[name] = s
         trends.append(f"{name}: {s.get('trend', '-')}")
 
@@ -771,12 +833,13 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     # tutup (SELL: close > high N candle) — sama dengan evaluate() di tick berikutnya. Ditampilkan di kartu sinyal.
     exits = []
     for entry_p, exit_p in cfg["sets"]:
-        v = (systems.get(f"T{entry_p}/{exit_p}") or {}).get("virtual")
-        if v and len(closed) >= exit_p:
-            window = closed[-exit_p:]
-            level = min(b.l for b in window) if v["dir"] == "BUY" else max(b.h for b in window)
-            exits.append({"id": v["id"], "set": f"T{entry_p}/{exit_p}", "dir": v["dir"], "level": round(level, 3),
-                          "bars": exit_p})
+        sysd = systems.get(f"T{entry_p}/{exit_p}") or {}
+        for v in [x for x in [sysd.get("virtual")] + list(sysd.get("layers") or []) if x]:   # dasar + lapisan
+            if len(closed) >= exit_p:
+                window = closed[-exit_p:]
+                level = min(b.l for b in window) if v["dir"] == "BUY" else max(b.h for b in window)
+                exits.append({"id": v["id"], "set": f"T{entry_p}/{exit_p}", "dir": v["dir"],
+                              "level": round(level, 3), "bars": exit_p, **({"lapis": True} if v.get("lapis") else {})})
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
           "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
           "exits": exits}
@@ -795,6 +858,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     pub.publish(hb)
     return {"ok": True, "price": price, "auto": live, "last_closed_bar": iso(closed[-1].t) if closed else None,
             "open": {k: v["virtual"] for k, v in systems.items() if v.get("virtual")},
+            "layers": {k: v["layers"] for k, v in systems.items() if v.get("layers")},
             "events": events, "trend": trend_text}
 
 

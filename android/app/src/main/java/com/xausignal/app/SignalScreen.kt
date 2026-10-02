@@ -202,6 +202,19 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
     signal.warText()?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor) }
+    if (signal.type == "signal" && (signal.isLayer() || signal.newsTag() != null)) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            if (signal.isLayer()) Pill("🔁 Lapisan • lot ½", Gold)
+            signal.newsTag()?.let { Pill("📰 Setelah ${it.optString("berita").ifBlank { "berita" }}", Gold) }
+        }
+        signal.json.optJSONObject("lapis_stats")?.optString("teks")?.ifBlank { null }?.let {
+            Text(it.replace(".", ","), style = MaterialTheme.typography.labelSmall,
+                color = Muted)
+        }
+        signal.newsTag()?.let { n ->
+            Text(n.optString("teks"), style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+    }
     val m = signal.moneyBadge()
     val st = signal.stars()
     if (signal.type == "signal" && !signal.json.has("money") && !signal.isGap()) {

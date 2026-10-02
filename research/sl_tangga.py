@@ -49,20 +49,33 @@ VARIANTS = {
 
 
 def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl_atr=3.0, be_at=None, bos=None,
-             cut_at=None, time_stop=None, time_stop_loss=False, rec=None):
+             cut_at=None, time_stop=None, time_stop_loss=False, rec=None, overlap=None, fresh=False,
+             max_layers=None, fresh_layers=False):
     """Satu set. Return list (t_entry, t_exit, R rata-rata per posisi, dir, R maksimum yang dicapai).
     cut_at=x: sebelum TP1, tutup SEMUA posisi begitu harga merugi x R (dicek setelah SL, sebelum TP; gap -> open).
     time_stop=N: bila TP1 belum kena setelah N candle H1, tutup semua di open candle berikutnya
     (time_stop_loss=True: hanya bila close candle itu sedang rugi). rec=list: dicatat per sinyal (MAE sebelum TP1,
     candle saat -0,5R pertama tersentuh, candle TP1, R akhir) untuk analisis "setelah turun separuh".
     bos=f: SL+ (entry+0,1R) setelah minor BOS — swing high/low fraktal f candle yang terbentuk SETELAH entry lalu
-    ditembus close candle H1 (Trading Alchemist: "BE hanya setelah minor BOS")."""
+    ditembus close candle H1 (Trading Alchemist: "BE hanya setelah minor BOS").
+    overlap: sinyal berlapis di set yang sama (research/sinyal_lapis.py) — "tp1": sinyal baru boleh setelah TP1 sinyal
+    sebelumnya kena (sisa posisi sudah SL+); "any": boleh kapan saja (mulai candle setelah entry). fresh=True: entry
+    hanya pada breakout BARU (candle sebelumnya belum di luar channel). max_layers=L: paling banyak L sinyal terbuka
+    bersamaan di set ini. fresh_layers=True: syarat breakout BARU hanya untuk lapisan (sinyal pertama tetap seperti
+    bawaan)."""
     trades, i, n = [], 0, b.n
+    exits: list[int] = []
     o, h, l, c, sp, a = b.o, b.h, b.l, b.c, b.sp, b.atr
     legs = len(tps)
     while i < n - 2:
         d = 1 if li[i] else (-1 if si[i] else 0)
+        if (fresh or (fresh_layers and any(e >= i for e in exits))) and d != 0 and i > 0 and (
+                li[i - 1] if d > 0 else si[i - 1]):
+            d = 0
         if d == 0 or not a[i] > 0 or (allow is not None and not allow(i, d)):
+            i += 1
+            continue
+        if max_layers is not None and sum(e >= i for e in exits) >= max_layers:
             i += 1
             continue
         j = i + 1
@@ -155,10 +168,16 @@ def backtest(b, li, si, lo, so, allow, tps, be=True, ladder=None, chand=None, sl
         if not done:
             break
         trades.append((b.t[j], b.t[min(k, n - 1)], pnl / risk / legs, d, max_r))
+        exits.append(k)
         if rec is not None:
             rec.append({"t": b.t[j], "R": pnl / risk / legs, "dir": d, "mae": mae, "k_half": k_half,
                         "k_tp1": k_tp1, "bars": k - j, "tp1": tp1_hit, "why": why, "max_r": max_r})
-        i = k + 1
+        if overlap == "any":
+            i = j + 1
+        elif overlap == "tp1" and tp1_hit:
+            i = j + k_tp1 + 1
+        else:
+            i = k + 1
     return trades
 
 

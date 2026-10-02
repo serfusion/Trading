@@ -100,9 +100,21 @@ fun SignalEvent.legs(): Int = num("legs")?.toInt() ?: 5
 fun SignalEvent.riskPoints(): Double? = num("risk_points")
     ?: num("entry")?.let { e -> num("sl")?.let { Math.abs(e - it) } }
 
-/** Lot per posisi yang dimasukkan untuk sinyal ini. */
+/** Lot per posisi yang dimasukkan untuk sinyal ini (sinyal 🔁 lapisan: × lot_mult, mis. ½). */
 fun SignalEvent.entryLot(m: MoneySettings): Double =
-    m.lotForSignal(isStar(), riskPoints(), num("point_value") ?: 1.0, legs(), tier())
+    withLotMult(m.lotForSignal(isStar(), riskPoints(), num("point_value") ?: 1.0, legs(), tier()), lotMult())
+
+/** 🔁 Sinyal lapisan (cloud 2 Okt 2026): sinyal baru saat sinyal lain di set yang sama masih berjalan, lot ½. */
+fun SignalEvent.isLayer(): Boolean = json.optBoolean("lapis", false)
+
+fun SignalEvent.lotMult(): Double = num("lot_mult") ?: 1.0
+
+/** Lot × pengali, dibulatkan ke bawah ke 0,01 (minimal 0,01). */
+fun withLotMult(lot: Double, mult: Double): Double =
+    if (mult >= 1.0) lot else (Math.floor(lot * mult * 100.0 + 1e-9) / 100.0).coerceAtLeast(0.01)
+
+/** 📰 Sinyal setelah berita besar AS (≤ 4 jam): judul & teks riwayat dari cloud; null bila bukan. */
+fun SignalEvent.newsTag(): JSONObject? = json.optJSONObject("news")
 
 /** Peringkat dari cloud: zap (⚡ kesempatan emas), silver (🥈), bronze (🥉), biasa; "" = sinyal lama. */
 fun SignalEvent.tier(): String = str("tier")
@@ -381,7 +393,9 @@ object SignalRepository {
         val legs = e.num("legs") ?: 5.0
         // 0,01 lot = 1 oz -> 1 unit mata uang akun per 1 poin harga (USD untuk akun USD, USC untuk Cent)
         val pointValue = e.num("point_value") ?: 1.0     // forex: nilai 1,0 harga per 0,01 lot
-        val lot = m.lotForSignal(e.isStar(), risk, pointValue, legs.toInt(), e.tier())
+        // sinyal 🔁 lapisan: event TUTUP membawa "lapis"; lot ½ dari sinyal biasa
+        val lot = withLotMult(m.lotForSignal(e.isStar(), risk, pointValue, legs.toInt(), e.tier()),
+            if (e.json.optBoolean("lapis", false)) 0.5 else 1.0)
         return r * risk * legs * Math.round(lot * 100.0) * pointValue
     }
 
