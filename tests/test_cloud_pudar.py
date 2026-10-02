@@ -25,8 +25,9 @@ def test_nfp_2_okt_naik_lalu_dikembalikan_peringatan_balik():
     m = _pudar.measure(bars, T0, T0 + timedelta(minutes=61), 58.0)
     assert m["mins"] == 60 and m["s"] == 1 and 0.2 < m["keep"] < 0.35
     r = _pudar.row(m, "Non-Farm Employment Change", T0, T0 + timedelta(minutes=61))
-    assert "BALIK ke bawah 4.181" in r["teks"] and r["kuat"] and "NFP" in r["bukti"]
-    assert r["label"].startswith("📉 Emas 19:30 WIB:") and "% lonjakan sudah kembali di menit 60" in r["label"]
+    assert r["teks"] == "93% BALIK 🔴" or r["teks"].endswith("% BALIK 🔴")
+    assert "ke bawah harga rilis 4.181" in r["label"] and r["kuat"] and "NFP" in r["bukti"]
+    assert r["label"].startswith("📉 Emas 19:30 WIB:") and "% lonjakan kembali di menit 60" in r["label"]
     assert "lalu turun lagi" in r["bukti"] and "sisa" not in r["label"]
     # sebelum menit 60: hitung mundur otomatis
     m30 = _pudar.measure(bars[:7], T0, T0 + timedelta(minutes=37), 58.0)
@@ -77,6 +78,6 @@ def test_btc_memakai_statistik_btc_dan_ambang_persen():
     bars = path(pts, base)
     m = _pudar.measure(bars, T0, T0 + timedelta(minutes=61), None, 0.0015)
     r = _pudar.row(m, "Non-Farm Employment Change", T0, T0 + timedelta(minutes=61), "BTC")
-    assert r["label"].startswith("📉 BTC 19:30 WIB") and "berita BTC" in r["bukti"] and "BALIK ke bawah 86.616" in r["teks"]
+    assert r["label"].startswith("📉 BTC 19:30 WIB") and "berita BTC" in r["bukti"] and r["teks"].endswith("BALIK 🔴") and "86.616" in r["label"]
     kecil = path([base * 1.0003] * 13, base)
     assert _pudar.measure(kecil, T0, T0 + timedelta(minutes=61), None, 0.0015)["kecil"]

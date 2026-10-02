@@ -316,13 +316,22 @@ private fun arahColor(teks: String, kuat: Boolean) = when {
 /** Satu baris "label kiri + bukti kecil | angka besar kanan", gaya kartu Status tren. */
 @Composable
 private fun BigRow(label: String, bukti: String, teks: String, kuat: Boolean) {
+    if (teks.length > 14) {                 // teks besar panjang: susun ke bawah agar keterangan tidak terhimpit
+        Column(Modifier.fillMaxWidth().padding(top = 4.dp)) {
+            Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+            Text(teks, fontWeight = FontWeight.ExtraBold, color = arahColor(teks, kuat),
+                style = MaterialTheme.typography.titleLarge)
+            if (bukti.isNotBlank()) Text(bukti, style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+        return
+    }
     Row(Modifier.fillMaxWidth().padding(top = 4.dp), verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text(label, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
             if (bukti.isNotBlank()) Text(bukti, style = MaterialTheme.typography.labelSmall, color = Muted)
         }
         Text(teks, fontWeight = FontWeight.ExtraBold, color = arahColor(teks, kuat),
-            style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 8.dp))
+            style = MaterialTheme.typography.titleLarge, modifier = Modifier.padding(start = 8.dp).widthIn(max = 140.dp))
     }
 }
 
