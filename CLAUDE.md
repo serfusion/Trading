@@ -131,6 +131,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   berbalik" NFP hanya 7–17% rilis, n 14–17 → belum terbukti. Sinyal 💰 per set tidak muncul lagi sampai sinyal itu
   ditutup cloud (TUTUP/SL/SL+), close manual di MT5 tidak diketahui cloud (by design, `_core` manage/evaluate).
 
+## Sinyal berlapis (2 Okt 2026 — `docs/SINYAL_LAPIS.md`)
+- `research/sinyal_lapis.py`: lapis setelah TP1 + lot ½ untuk lapisan LOLOS (XAU 9,6→15,1 sinyal/bln, total +38%, DD
+  +39%; BTC 16,3→26,6, +36%, DD +50%); total/DD sama/sedikit turun. BELUM dipasang — menunggu izin pengguna.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
