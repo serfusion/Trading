@@ -69,7 +69,8 @@ def run(name: str, v: dict) -> pd.DataFrame:
         hi, lo = rolling_max(b.h, n_in), rolling_min(b.l, n_in)
         hx, lx = rolling_max(b.h, n_out), rolling_min(b.l, n_out)
         one = backtest(b, b.c > hi, b.c < lo, b.c < lx, b.c > hx, allow, tps=[1.0, None, None, None, None],
-                       overlap=v.get("overlap"), fresh=v.get("fresh", False), max_layers=v.get("max_layers"))
+                       overlap=v.get("overlap"), fresh=v.get("fresh", False), max_layers=v.get("max_layers"),
+                       fresh_layers=v.get("fresh_layers", False))
         last_out = None
         for t, t_out, r, d, mr in one:             # lapisan = dibuka saat sinyal sebelumnya di set ini masih terbuka
             lay = last_out is not None and t < last_out

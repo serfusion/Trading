@@ -132,8 +132,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   ditutup cloud (TUTUP/SL/SL+), close manual di MT5 tidak diketahui cloud (by design, `_core` manage/evaluate).
 
 ## Sinyal berlapis (2 Okt 2026 — `docs/SINYAL_LAPIS.md`)
-- `research/sinyal_lapis.py`: lapis setelah TP1 + lot ½ untuk lapisan LOLOS (XAU 9,6→15,1 sinyal/bln, total +38%, DD
-  +39%; BTC 16,3→26,6, +36%, DD +50%); total/DD sama/sedikit turun. BELUM dipasang — menunggu izin pengguna.
+- `research/sinyal_lapis.py` & `sinyal_berita.py`: DIPASANG 2 Okt (izin pengguna) — XAU lapisan setelah TP1, BTC
+  lapisan kapan saja pada breakout baru maks 2/set, lot ½, tanpa auto order (`_core.try_open/layer_ok`, state
+  `layers`, `sinyal_lapis.json`, env LAYER_SIGNALS). Tanda 📰 sinyal 💰 ≤ 4 jam setelah berita besar (`_berita_sinyal`,
+  `sinyal_berita.json`, env NEWS_TAG): XAU +0,45R vs +0,21R, BTC +0,61R vs +0,37R. Aplikasi 3.21.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

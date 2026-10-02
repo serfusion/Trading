@@ -43,6 +43,27 @@ def btc_skip_fn(store, now: datetime, result: dict):
                                                      env.get("BTC_SEPT_FILTER", "1") == "1", _core.new_york)
 
 
+def signal_extras(asset: str, store) -> dict:
+    """Sinyal berlapis (cloud/api/sinyal_lapis.json, env LAYER_SIGNALS=0 untuk mematikan) & tanda 📰 sinyal setelah
+    berita (env NEWS_TAG=0 untuk mematikan) — research/sinyal_lapis.py & sinyal_berita.py, izin pengguna 2 Okt 2026."""
+    import _berita_sinyal
+    env = os.environ
+    out = {}
+    path = os.path.join(os.path.dirname(__file__), "sinyal_lapis.json")
+    if env.get("LAYER_SIGNALS", "1") == "1" and os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            lay = json.load(f).get(asset)
+        if lay:
+            out["layer"] = lay
+    if env.get("NEWS_TAG", "1") == "1":
+        def rows():
+            import _arsip
+            import _chat
+            return _arsip.calendar_cached(store, datetime.now(timezone.utc), _chat.fetch_calendar)
+        out["news_fn"] = _berita_sinyal.news_fn(asset, store, rows)
+    return out
+
+
 def run() -> tuple[int, dict]:
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
@@ -66,16 +87,23 @@ def run() -> tuple[int, dict]:
         except Exception as exc:  # noqa: BLE001 - FRED gagal tidak boleh menghentikan sinyal
             cfg["war"] = None
             war_error = str(exc)
+    main_store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+    try:
+        cfg.update(signal_extras("XAU", main_store))
+    except Exception as exc:  # noqa: BLE001 - tambahan opsional tidak boleh menghentikan sinyal
+        result_extra_error = str(exc)
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
-        _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"]),
+        main_store,
         _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
         cfg,
         symbol=env.get("SYMBOL", "XAU/USD"),
         executor=executor_from_env(),
     )
     result["war"] = cfg.get("war")
+    if "result_extra_error" in locals():
+        result["extra_error"] = result_extra_error
     if "war_error" in locals():
         result["war_error"] = war_error
     try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
@@ -85,7 +113,8 @@ def run() -> tuple[int, dict]:
             btc = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
                              _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result)}, symbol="BTC/USD")
+                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result),
+                              **signal_extras("BTC", store)}, symbol="BTC/USD")
             result["btc"] = {k: btc.get(k) for k in ("ok", "price", "events", "error")}
     except Exception as exc:  # noqa: BLE001 - BTC tidak boleh mengganggu sinyal XAU
         result["btc_error"] = str(exc)

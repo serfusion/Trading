@@ -155,3 +155,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   Act dicek tiap 30 detik di 10 menit pertama.
 - 2026-10-02: Act manual (3.19) + revisi otomatis & besar kejutan (3.20). "Sinyal berita beberapa menit, WR tinggi?" →
   `research/news_menit.py`, `docs/NEWS_MENIT.md`: 2.280 kombinasi, 0 lolos; ikut kejutan setelah menit 1 rugi.
+- 2026-10-02: sinyal lebih sering → `research/sinyal_lapis.py`, `sinyal_berita.py`, `docs/SINYAL_LAPIS.md`: DIPASANG
+  lapisan (XAU setelah TP1, BTC breakout baru maks 2/set, lot ½) + tanda 📰 sinyal setelah berita; aplikasi 3.21.

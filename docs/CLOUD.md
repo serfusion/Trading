@@ -328,3 +328,11 @@ Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.
 - `cloud/api/_hari_h.py` + `_polymarket.py`: `persiapan.berita[].hari_h` (sebelum rilis), `.hasil_rilis` (setelah
   Act), `persiapan.fed` (keputusan Fed berikutnya). Cache Supabase: `kalshi`, `polymarket`, `polymarket_fed`,
   `hari_h` (riwayat peluang). Detail & bukti: `docs/HARI_H.md`.
+
+## Sinyal berlapis & tanda 📰 (2 Okt 2026 — `docs/SINYAL_LAPIS.md`)
+
+- Lapisan: sinyal 💰 baru di set yang sama selagi sinyal lama masih berjalan (XAU: setelah TP1 sinyal terakhir; BTC:
+  breakout baru, maks 2 per set). Lot ½, hanya sinyal (auto order tetap untuk sinyal dasar). Matikan: env
+  `LAYER_SIGNALS=0`.
+- 📰: sinyal 💰 yang lahir ≤ 4 jam setelah berita AS besar diberi tanda + statistik riwayat; kalender dari cache
+  Supabase `kalender`, Act dari baris `aktual`. Matikan: env `NEWS_TAG=0`.

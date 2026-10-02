@@ -1,0 +1,27 @@
+{
+ "dibuat": "research/sinyal_berita.py",
+ "XAU": {
+  "mode": "tp1",
+  "max": 10,
+  "lot": 0.5,
+  "stats": {
+   "n": 907,
+   "wr": 51.5,
+   "avg_r": 0.275,
+   "periode": "2013–2026",
+   "teks": "Riwayat lapisan: WR 51% • +0,28R/lapisan (907 lapisan 2013–2026)"
+  }
+ },
+ "BTC": {
+  "mode": "any",
+  "max": 2,
+  "lot": 0.5,
+  "stats": {
+   "n": 1293,
+   "wr": 49.3,
+   "avg_r": 0.488,
+   "periode": "2016–2026",
+   "teks": "Riwayat lapisan: WR 49% • +0,49R/lapisan (1293 lapisan 2016–2026)"
+  }
+ }
+}
