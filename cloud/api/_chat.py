@@ -595,6 +595,17 @@ def detik_answer(grp: str | None) -> str:
     body = _persiapan.detik(grp)
     if not body:
         return "Data uji detik pertama belum tersedia di server ini (cloud/api/detik.json)."
+    arah = []                     # arah emas 1-2-3 detik & 1 menit per hasil (cloud/api/reaksi.json, 2 Okt 2026)
+    for title in _persiapan.REAKSI:
+        if _persiapan.group_of(title) != (grp or "NFP"):
+            continue
+        for hasil in ("bawah", "atas"):
+            st = _persiapan.tahap(title, hasil)
+            if any(x["dtk"].endswith("dtk") for x in st):
+                arah.append(f"• {title} {_persiapan.OP[hasil]} perkiraan: {_persiapan.tahap_teks(st)}")
+    if arah:
+        body = ("ARAH EMAS SETELAH RILIS (riwayat tick; detik pertama biasanya belum bergerak, hentakan baru jelas di "
+                "detik ke-2–3):\n" + "\n".join(arah) + "\n\n" + body)
     return ("⏱️ ENTRY DI DETIK PERTAMA SETELAH RILIS" + (f" — {_nama(grp)}" if grp else "") +
             " (uji tick bid/ask, spread asli + slippage; satuan $ per 0,01 lot XAU, BTC dalam x0,05% harga)\n" +
             body + "\nYang untung di detik pertama umumnya pelaku berkecepatan milidetik (feed berita berbayar + server "

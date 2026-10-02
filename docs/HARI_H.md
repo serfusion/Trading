@@ -64,3 +64,83 @@ Jawaban jujur: **sebelum angka keluar tidak ada yang tahu pasti.** Yang bisa dik
 Kartu 🎯: 🏦 Fed berikutnya; per berita baris besar 🎯 Perkiraan hari H (sebelum rilis) atau ✅ Hasil (setelah Act);
 skenario 1 menit; ⏱️ detik pertama. Kalender: alasan bila Act belum terisi. Tab News memuat ulang otomatis tiap
 10 menit (2 menit bila rilis ≤ 30 menit lagi atau Act belum keluar). Informasi saja, tanpa order.
+
+## 5. Tanda hijau: Mars di MC oposisi Pluto di IC (2 Okt 2026)
+
+Pengguna melingkari Mars 2°34' Leo (dekat MC 29°32' Cancer) dan Pluto R 3°06' Aquarius (dekat IC) → "NFP akan turun
+seturun-turunnya". Posisi terverifikasi (oposisi ±0,5°, Mars ±3° dari MC). Uji `research/astrologi_nfp.py`
+(`docs/eksternal/hasil_astrologi_nfp.txt`), NFP 2010–2025 (193 rilis dengan kejutan) + 2.051 rilis bintang 3:
+
+| Pola | NFP di bawah konsensus | Emas naik 1 menit | Besar gerak emas |
+|---|---|---|---|
+| Tanpa pola (dasar) | 44–45% | 49% | 1,00x |
+| Mars–Pluto oposisi (7 NFP) | 43% | 44% (79 rilis) | 0,99x |
+| Mars–Pluto aspek keras (23 NFP) | 35% | 48% | 1,00x |
+| Mars dekat MC/IC (27 NFP) | 41% | 48% | 0,98x |
+| Pola persis chart ini: aspek keras + Mars di MC/IC (3 NFP: 2014-06, 2015-12, 2022-07) | **0%** (ketiganya di ATAS konsensus) | 47% | 1,07x |
+
+Tidak ada yang bermakna (p terkecil 0,11; batas Bonferroni 0,003). Tiga kejadian pola yang persis sama malah
+berakhir NFP di atas konsensus — sampel terlalu kecil untuk berarti apa pun. → Tidak dipakai. Catatan: NFP di BAWAH
+konsensus ("turun") justru membuat emas NAIK (81%), bukan turun.
+
+## 6. Arah emas 1, 2, 3 detik setelah rilis (aplikasi 3.18, 2 Okt 2026)
+
+Permintaan pengguna: "tuliskan hasilnya dan persentase akan ke mana setelah 1 detik news release di APK".
+`research/reaksi_menit.py` sekarang juga mencatat gerak mid tick t0−1 dtk → t0+1 / +2 / +3 dtk (Dukascopy 2010–2025,
+dicek tick asli Exness 2015–2026). % searah = dari rilis yang harganya sudah bergerak di detik itu; ±$ = median besar
+gerak. Format sel: Dukascopy / Exness.
+
+| Hasil | Arah emas | 1 dtk | 2 dtk | 3 dtk | 1 mnt | n |
+|---|---|---|---|---|---|---|
+| NFP < perkiraan | naik | 57% / 59% (±$0,17) | 85% / 82% (±$2,68) | 91% / 88% (±$3,14) | 81% | 67 |
+| NFP > perkiraan | turun | 51% / 57% (±$0,19) | 74% / 78% (±$2,26) | 76% / 81% (±$3,69) | 81% | 94 |
+| Pengangguran < perkiraan | turun | 52% / 53% | 49% / 55% | 48% / 55% | 61% | 69 |
+| CPI m/m < perkiraan | naik | 57% / 53% (±$0,14) | 81% / 74% (±$1,35) | 84% / 86% | 81% | 58 |
+| CPI m/m > perkiraan | turun | 49% / 60% (±$0,14) | 77% / 74% (±$2,08) | 80% / 80% | 74% | 46 |
+| Core CPI m/m > perkiraan | turun | 57% / 59% (±$0,19) | 95% / 84% (±$3,48) | 93% / 91% | 74% | 43 |
+| Core PPI m/m < perkiraan | naik | 71% / 62% (±$0,10) | 88% / 84% (±$0,69) | 90% / 88% | 90% | 49 |
+| Retail Sales m/m > perkiraan | turun | 81% / 83% (±$0,72) | 83% / 89% (±$1,03) | 81% / 89% | 79% | 75 |
+| ISM Manufaktur < perkiraan | naik | 88% / 89% (±$1,22) | 82% / 89% | 88% / 89% | 71% | 17 |
+| Klaim pengangguran > perkiraan | naik | 55% / 57% (±$0,10) | 64% / 64% | 65% / 67% | 75% | 93 |
+
+Kesimpulan:
+- **Detik pertama NFP/CPI/PPI: harga praktis belum bergerak** (±$0,10–0,20, sama dengan spread Exness $0,16–0,20) dan
+  arahnya ≈ 50:50. **Hentakan muncul antara detik ke-1 dan ke-2** (±$1,3–2,7), lalu searah hasil 82–91% di detik
+  ke-2–3, konsisten di kedua feed dan sejak Okt 2021. Retail Sales & ISM sudah bergerak di detik pertama.
+- Ini menjelaskan hasil `docs/NEWS_PRA.md`: entry t0−1 lalu tutup 1 detik selalu rugi spread karena harga belum bergerak.
+- Angka ini **RIWAYAT reaksi**, bukan sinyal: Act baru sampai di aplikasi beberapa detik–menit setelah rilis (BLS/FRED
+  dicek tiap 30 detik di 10 menit pertama), jadi saat baris ✅ tampil, hentakan 1–3 detik sudah lewat.
+
+Tampilan: kartu 🎯 → per hasil "⚡ Bila Act < 89K → arah emas" dengan sel 1 dtk / 2 dtk / 3 dtk / 1 mnt; setelah Act keluar
+"✅ Act 45K < 89K → arah emas" dengan sel yang sama (`_persiapan.tahap`, `_hari_h.result`). Hijau/merah hanya bila ≥ 60%
+di Dukascopy, arah sama ≥ 55% di Exness dan sejak Okt 2021, serta gerak median ≥ $0,30 (di bawah itu "belum gerak").
+Aplikasi lama (≤ 3.17) membaca ringkasannya di teks kecil ("1 dtk belum gerak (±$0,17) • 2 dtk 85% NAIK …"). Tab Tanya
+("detik pertama NFP") ikut menampilkan deretan ini. Kalender News: catatan di bawah Act juga memuatnya.
+
+## 7. Act manual (aplikasi 3.19, 2 Okt 2026)
+
+Kartu 🎯 → kolom "Act manual" (muncul 5 menit sebelum rilis): tempel baris investing.com (mis. `Nonfarm Payrolls (Sep)
+45K 89K 162K`) atau ketik `45K` → Simpan. Cloud (`_aktual.parse_manual/save_manual`, POST /api/chat `{"manual": …}`)
+mengambil angka pertama (jam & isi kurung dibuang) sebagai Act, menyimpannya di Supabase baris `aktual` (src
+`manual`, menimpa Act otomatis), lalu ✅ hasil & sel 1/2/3 dtk + 1 mnt dihitung ulang dari Act itu. Kosongkan → Hapus →
+kembali ke Act otomatis BLS/FRED. Persen berubah sesuai Act di bawah / sama / di atas perkiraan (besar kejutan belum
+dibedakan).
+
+## 8. Revisi otomatis Act manual & besar kejutan (aplikasi 3.20, 2 Okt 2026)
+
+- **Revisi otomatis**: Act manual tetap dicek ke BLS/FRED. Bila angka resmi berbeda (mis. salah ketik 54K, resmi 45K),
+  Act diganti angka resmi dan muncul "direvisi otomatis: isian manual 54K → resmi 45K"; bila sama: "cocok ✓". Berita
+  yang tidak ada di BLS/FRED (mis. ISM) tidak bisa dicek otomatis.
+- **Besar kejutan** (`research/reaksi_menit.besar_kecil`): BESAR = |Act − perkiraan| ≥ 1,5× median riwayat (NFP 84K).
+  Kejutan besar umumnya lebih searah & geraknya lebih besar, sampel kecil (5–36 rilis):
+
+| Hasil | kecil: emas 1 mnt | BESAR: emas 1 mnt | gerak 1 mnt kecil → besar |
+|---|---|---|---|
+| NFP < perkiraan | 78% naik | 86% naik | $4,2 → $6,7 |
+| NFP > perkiraan | 79% turun | 83% turun | $4,0 → $5,4 |
+| CPI m/m > perkiraan | 71% turun | 82% turun | $1,7 → $4,2 |
+| Core CPI m/m > | 69% turun | 100% turun (n 9) | $2,9 → $6,5 |
+| Core PPI m/m < | 84% naik | 96% naik | ≈ sama |
+| Klaim > perkiraan | 70% naik | 86% naik | $0,9 → $2,0 |
+
+  Retail Sales & sisi lain: hampir sama. Dipakai di ✅ hasil (sel 1 mnt & label "kejutan BESAR (109K ≥ 84K)").

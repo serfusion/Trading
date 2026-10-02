@@ -7,12 +7,14 @@ padahal dari jaringan riset menjawab < 1 detik. Sekarang dicoba berurutan, dan y
 2. FRED API (api.stlouisfed.org) bila env FRED_API_KEY diisi di Vercel — semua seri termasuk PCE, GDP, klaim.
 3. CSV publik FRED (cara lama).
 Act yang sudah ditemukan disimpan di Supabase (baris "aktual") sehingga tidak diambil ulang dan tidak hilang; pengambilan
-untuk berita yang belum ber-Act paling sering tiap RETRY. Bila tetap kosong, alasannya dikirim ke aplikasi
+untuk berita yang belum ber-Act paling sering tiap RETRY (tiap RETRY_FAST di 10 menit pertama setelah rilis; BLS tanpa
+kunci dibatasi 25 permintaan/hari, jadi paling banyak ±20 di satu jam rilis). Bila tetap kosong, alasannya dikirim ke aplikasi
 (calendar[].actual_info). Hanya library standar Python.
 """
 from __future__ import annotations
 
 import json
+import re
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 
@@ -27,6 +29,8 @@ BLS = {"CPIAUCSL": "CUSR0000SA0", "CPILFESL": "CUSR0000SA0L1E", "CPIAUCNS": "CUU
 FRED_API = ("https://api.stlouisfed.org/fred/series/observations?series_id={}&api_key={}&file_type=json"
             "&observation_start={}")
 RETRY = timedelta(minutes=2)
+RETRY_FAST = timedelta(seconds=30)  # 10 menit pertama setelah rilis: hasil & arah emas cepat tampil (2 Okt 2026)
+FAST_FOR = timedelta(minutes=10)
 WINDOW = timedelta(days=4)          # berita yang lebih lama dari ini tidak dicari lagi
 KEEP = timedelta(days=21)           # Act tersimpan dibuang setelah 3 pekan
 TIMEOUT = 8
@@ -118,6 +122,46 @@ class Fetcher:
         return self.cache[sid]
 
 
+_TIME = re.compile(r"\b\d{1,2}:\d{2}(?::\d{2})?\b")
+_PAREN = re.compile(r"\([^)]*\)")
+_NUM = re.compile(r"(?<![\w.])[<>]?-?\d+(?:[.,]\d+)?\s?[KMBT%]?(?![\w])", re.I)
+
+
+def parse_manual(text: str) -> str | None:
+    """Act dari teks yang ditempel pengguna (mis. baris investing.com "08:30 USD Nonfarm Payrolls (Sep) 45K 89K
+    162K" -> "45K", atau cukup "45K" / "Actual: 0,2%"). Angka PERTAMA setelah jam & isi kurung dibuang = Act."""
+    t = _PAREN.sub(" ", _TIME.sub(" ", text or ""))
+    t = re.sub(r"(?i)\b(19|20)\d{2}\b", " ", t)                 # tahun
+    m = _NUM.search(t)
+    if not m:
+        return None
+    v = m.group(0).replace(" ", "").replace(",", ".")
+    return v[:-1] + v[-1].upper() if v[-1].isalpha() else v
+
+
+def _num(v: str) -> float | None:
+    m = re.match(r"^[<>]?(-?\d+(?:\.\d+)?)([KMBT]?)", (v or "").replace(",", ".").upper())
+    return None if not m else round(float(m.group(1)) * {"K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(m.group(2), 1), 6)
+
+
+def save_manual(store, title: str, time: str, text: str, now: datetime) -> dict:
+    """Simpan Act isian manual (src "manual"; menimpa Act otomatis). Teks kosong = hapus isian manual."""
+    state = store.get_state("aktual") or {}
+    found = dict(state.get("found") or {})
+    key = f"{title}|{time}"
+    if not (text or "").strip():
+        if (found.get(key) or {}).get("src") == "manual":
+            found.pop(key)
+        act = None
+    else:
+        act = parse_manual(text)
+        if act is None:
+            return {"ok": False, "error": "angka Act tidak terbaca (contoh: 45K, 0.2%, 4.3%)"}
+        found[key] = {"actual": act, "src": "manual", "t": now.isoformat()}
+    store.save_state(dict(state, found=found), "aktual")
+    return {"ok": True, "actual": act}
+
+
 def _key(c: dict) -> str:
     return f"{c['title']}|{c['time']}"
 
@@ -133,16 +177,24 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
     found = dict(state.get("found") or {})
     for c in calendar:
         f = found.get(_key(c))
-        if f and not c.get("actual"):
+        if f and f.get("info"):
+            c["actual_info"] = f["info"]
+        if f and (not c.get("actual") or f.get("src") == "manual"):
             c["actual"], c["actual_src"] = f["actual"], f["src"]
-    missing = [c for c in calendar if c.get("released") and not c.get("actual") and c["title"] in _chat.FRED_MAP
+    # Act manual tetap dicek ke sumber resmi: bila angka resmi berbeda, otomatis direvisi (permintaan 2 Okt 2026)
+    missing = [c for c in calendar if c.get("released") and (not c.get("actual") or c.get("actual_src") == "manual")
+               and c["title"] in _chat.FRED_MAP
                and now - datetime.fromisoformat(c["time"]) <= WINDOW]
     if not missing:
         return {"status": "lengkap"}
     last = state.get("coba")
-    if fetcher is None and last and now - datetime.fromisoformat(last) < RETRY:
+    fast = any(now - datetime.fromisoformat(c["time"]) <= FAST_FOR for c in missing)
+    if fetcher is None and last and now - datetime.fromisoformat(last) < (RETRY_FAST if fast else RETRY):
         for c in missing:
-            c["actual_info"] = state.get("info") or "dicek ulang tiap 2 menit"
+            if c.get("actual_src") == "manual":
+                c["actual_info"] = "isian manual • menunggu angka resmi untuk dicek (direvisi otomatis bila beda)"
+                continue
+            c["actual_info"] = state.get("info") or ("dicek ulang tiap 30 detik" if fast else "dicek ulang tiap 2 menit")
         return {"status": "ditunda", "sumber": state.get("sumber") or {}}
     fetcher = fetcher or Fetcher(env, {_chat.FRED_MAP[c["title"]][0] for c in missing})
     cache: dict = {}
@@ -150,14 +202,22 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
         act = _chat.fred_actual(c["title"], datetime.fromisoformat(c["time"]), now, fetcher, cache)
         if act:
             src = "BLS" if _chat.FRED_MAP[c["title"]][0] in (fetcher.bls or {}) else "FRED"
+            manual = c.get("actual") if c.get("actual_src") == "manual" else None
+            if manual is not None and _num(manual) != _num(act):
+                c["actual_info"] = f"direvisi otomatis: isian manual {manual} → resmi {act} ({src})"
+            elif manual is not None:
+                c["actual_info"] = f"isian manual {manual} cocok dengan angka resmi ({src}) ✓"
             c["actual"], c["actual_src"] = act, src
-            found[_key(c)] = {"actual": act, "src": src, "t": now.isoformat()}
+            found[_key(c)] = {"actual": act, "src": src, "t": now.isoformat(),
+                              **({"info": c["actual_info"]} if manual is not None else {})}
     gagal = [k for k, v in fetcher.status.items() if not v.startswith("ok")]
     info = ("sumber gagal: " + ", ".join(f"{k} {fetcher.status[k]}" for k in gagal)) if gagal and \
         not any(v.startswith("ok") for v in fetcher.status.values()) else "sumber resmi belum memuat angka baru"
     for c in calendar:
         if c in missing and not c.get("actual"):
             c["actual_info"] = info
+        elif c in missing and c.get("actual_src") == "manual":
+            c["actual_info"] = "isian manual • menunggu angka resmi untuk dicek (direvisi otomatis bila beda)"
     found = {k: v for k, v in found.items() if now - datetime.fromisoformat(v["t"]) <= KEEP}
     if store is not None:
         try:

@@ -62,6 +62,9 @@ def test_tanpa_uji_abu_abu_dan_hasil_setelah_act(monkeypatch):
     _hari_h.attach(pers, [{"title": NFP["title"], "time": T0, "actual": "45K"}], None, NOW + timedelta(days=1), {}, {})
     r = pers["berita"][0]["hasil_rilis"]
     assert r["teks"].endswith("NAIK 🟢") and r["bukti"].startswith("Act 45K vs perkiraan 89K") and "hari_h" not in rel
+    # detik 1-3 (reaksi.json asli): judul & deretan untuk aplikasi 3.18, ringkasan di bukti untuk aplikasi lama
+    assert r["judul_tahap"].startswith("✅ Act 45K < 89K → arah emas • kejutan kecil") and [x["dtk"] for x in r["tahap"]][:3] == \
+        ["1 dtk", "2 dtk", "3 dtk"] and "1 dtk " in r["bukti"] and "RIWAYAT" in r["bukti_tahap"]
     pers = {"berita": [dict(rel)]}
     _hari_h.attach(pers, [], None, NOW + timedelta(days=1), {}, {})
     assert pers["berita"][0]["hasil_rilis"]["teks"] == "menunggu Act…"

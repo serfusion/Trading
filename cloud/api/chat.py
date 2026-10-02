@@ -106,6 +106,14 @@ class handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length") or 0)
             body = json.loads(self.rfile.read(min(length, 200_000)) or b"{}")
+            if isinstance(body.get("manual"), dict):          # Act isian manual dari kartu 🎯 (2 Okt 2026)
+                m, store = body["manual"], _store()
+                if store is None:
+                    self._send(200, {"ok": False, "error": "Supabase belum diatur"})
+                    return
+                self._send(200, _aktual.save_manual(store, str(m.get("title", "")), str(m.get("time", "")),
+                                                    str(m.get("actual", ""))[:300], datetime.now(timezone.utc)))
+                return
             states, funding = _states()
             now = datetime.now(timezone.utc)
             self._send(200, _chat.answer(body.get("messages") or [], now, _calendar(_store(), now), states, funding))

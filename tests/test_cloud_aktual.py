@@ -84,10 +84,21 @@ def test_semua_sumber_gagal_alasan_tanpa_kunci_dan_ditunda():
     assert c[0]["actual"] == "" and c[0]["actual_info"].startswith("sumber gagal")
     assert "rahasia123" not in json.dumps([c, out, store.rows])
     assert out["sumber"]["BLS"] == "gagal (timeout)"
-    # < 2 menit kemudian: tidak mencoba lagi (hemat batas BLS 25/hari)
+    # 10 menit pertama setelah rilis: dicoba lagi paling cepat tiap 30 detik (hemat batas BLS 25/hari)
     c3 = cal()[:1]
-    assert _aktual.fill(c3, store, NOW + timedelta(minutes=1), env)["status"] == "ditunda"
+    assert _aktual.fill(c3, store, NOW + timedelta(seconds=20), env)["status"] == "ditunda"
     assert c3[0]["actual_info"] == c[0]["actual_info"]
+
+
+def test_berita_lama_dicoba_ulang_tiap_2_menit():
+    store = Store()
+    old = [dict(CAL[1])]                                          # Core PCE, rilis 2 hari lalu
+    f = _aktual.Fetcher({}, {"PCEPILFE"}, opener([], bls_ok=False, fred_ok=False), csv=lambda s: [])
+    _aktual.fill(old, store, NOW, {}, f)
+    assert _aktual.fill([dict(CAL[1])], store, NOW + timedelta(minutes=1), {})["status"] == "ditunda"
+    calls = []
+    f2 = _aktual.Fetcher({}, {"PCEPILFE"}, opener(calls, bls_ok=False, fred_ok=False), csv=lambda s: [])
+    assert _aktual.fill([dict(CAL[1])], store, NOW + timedelta(minutes=3), {}, f2)["status"] == "dicek"
 
 
 def test_jolts_dua_bulan_lalu_dan_adp_dalam_orang():
@@ -99,3 +110,37 @@ def test_jolts_dua_bulan_lalu_dan_adp_dalam_orang():
     assert _chat.fred_actual("JOLTS Job Openings", t, t, lambda s: vals[s]) == "7.23M"
     t2 = datetime(2026, 10, 1, 12, 15, tzinfo=timezone.utc)
     assert _chat.fred_actual("ADP Non-Farm Employment Change", t2, t2, lambda s: vals[s]) == "45K"
+
+
+def test_act_manual_investing_dan_menimpa_otomatis():
+    p = _aktual.parse_manual
+    assert p("08:30 USD Nonfarm Payrolls (Sep) 45K 89K 162K") == "45K"
+    assert p("Unemployment Rate (Sep)\t4.4%\t4.3%\t4.3%") == "4.4%"
+    assert p("Core CPI (MoM) (Sep) 0.2% 0.3% 0.3%") == "0.2%"
+    assert p("-12k") == "-12K" and p("Actual: 0,2%") == "0.2%" and p("tidak ada angka") is None
+    store, now = Store(), NOW
+    assert _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "Nonfarm Payrolls (Sep) 45K 89K", now)["ok"]
+    c = cal()
+    c[0]["actual"] = "50K"                                       # otomatis -> manual menang
+    _aktual.fill(c[:1], store, now, {}, _aktual.Fetcher({}, set(), opener([])))
+    assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "manual"
+    assert not _aktual.save_manual(store, "x", "y", "abc", now)["ok"]
+    _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "", now)
+    assert CAL[0]["title"] + "|" + CAL[0]["time"] not in store.rows["aktual"]["found"]
+
+
+def test_act_manual_salah_direvisi_otomatis_oleh_angka_resmi():
+    store = Store()
+    _aktual.save_manual(store, CAL[0]["title"], CAL[0]["time"], "54K", NOW)      # salah ketik (resmi 45K)
+    c = cal()[:1]
+    f = _aktual.Fetcher({}, {"PAYEMS"}, opener([]), csv=lambda s: [])
+    _aktual.fill(c, store, NOW, {}, f)
+    assert c[0]["actual"] == "45K" and c[0]["actual_src"] == "BLS" and "direvisi otomatis" in c[0]["actual_info"]
+    c2 = cal()[:1]                                                                 # pembukaan berikutnya
+    _aktual.fill(c2, store, NOW + timedelta(minutes=5), {}, _aktual.Fetcher({}, set(), opener([])))
+    assert c2[0]["actual"] == "45K" and "54K → resmi 45K" in c2[0]["actual_info"]
+    store2 = Store()
+    _aktual.save_manual(store2, CAL[0]["title"], CAL[0]["time"], "45k", NOW)
+    c3 = cal()[:1]
+    _aktual.fill(c3, store2, NOW, {}, _aktual.Fetcher({}, {"PAYEMS"}, opener([]), csv=lambda s: []))
+    assert "cocok" in c3[0]["actual_info"]
