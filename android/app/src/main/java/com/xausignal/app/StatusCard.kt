@@ -89,7 +89,7 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
         val l = levels.getJSONObject(i)
         buyLvl = minOf(buyLvl, l.optDouble("buy"))
         sellLvl = maxOf(sellLvl, l.optDouble("sell"))
-        if (!l.isNull("open")) running = "sinyal ${l.optString("open")} masih berjalan"
+        if (!l.isNull("open")) running = "${l.optString("open")} berjalan"
     }
     AppCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -97,21 +97,19 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
             Spacer(Modifier.weight(1f))
             Text(arah, fontWeight = FontWeight.ExtraBold, color = warna, style = MaterialTheme.typography.titleMedium)
         }
-        Text("Tren D1 ${if (d1 == "BUY") "naik" else if (d1 == "SELL") "turun" else "-"} • H4 " +
-            "${if (h4 == "BUY") "naik" else "turun"} (harga vs EMA50). Keterangan saja, bukan sinyal entry.",
-            style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("D1 ${if (d1 == "BUY") "naik" else if (d1 == "SELL") "turun" else "-"} • H4 " +
+            if (h4 == "BUY") "naik" else "turun", style = MaterialTheme.typography.labelSmall, color = Muted)
         // ⏱ hitung mundur cek sinyal (tutup candle H1)
         instantOf(st.optString("next_check"))?.let { t ->
             val left = Duration.between(Instant.ofEpochMilli(now), t).toMillis()
-            Text(if (left > 0) "⏱ Cek sinyal berikutnya (tutup candle H1): ${clock(left)}"
-                else "⏱ Candle H1 sudah tutup — menunggu cloud mengecek (±10 menit)",
+            Text(if (left > 0) "⏱ Cek sinyal: ${clock(left)}" else "⏱ Cloud sedang mengecek…",
                 style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 4.dp))
         }
         if (buyLvl < Double.MAX_VALUE && sellLvl > -Double.MAX_VALUE) {
             val toBuy = buyLvl - price
             val toSell = price - sellLvl
-            Text("Sinyal BUY bila H1 tutup > ${px(buyLvl, btc)} (${if (btc) "+%,.0f".format(toBuy) else "+$%.2f".format(toBuy)})" +
-                " • SELL bila < ${px(sellLvl, btc)} (${if (btc) "−%,.0f".format(toSell) else "−$%.2f".format(toSell)})" +
+            Text("BUY > ${px(buyLvl, btc)} (${if (btc) "+%,.0f".format(toBuy) else "+$%.2f".format(toBuy)})" +
+                " • SELL < ${px(sellLvl, btc)} (${if (btc) "−%,.0f".format(toSell) else "−$%.2f".format(toSell)})" +
                 if (running.isNotBlank()) " • $running" else "",
                 style = MaterialTheme.typography.labelSmall, color = Muted)
         }
@@ -141,10 +139,9 @@ private fun NewsLine(prep: JSONObject?, btc: Boolean, now: Long) {
     }
     next?.let { (title, t) ->
         val left = Duration.between(nowI, t).toMillis()
-        if (left in 1..24 * 3600_000L) Text("📰 $title dalam ${clock(left)}" +
-            if (left < 15 * 60_000L) " — hentakan detik 1 biasanya belum bergerak, detik 2–3 searah hasil" else "",
+        if (left in 1..24 * 3600_000L) Text("📰 $title dalam ${clock(left)}",
             style = MaterialTheme.typography.bodySmall, color = Gold, modifier = Modifier.padding(top = 4.dp))
     }
-    if (after == null && next == null) Text("📰 Tidak ada berita USD penting tersisa pekan ini",
+    if (after == null && next == null) Text("📰 Tidak ada berita penting pekan ini",
         style = MaterialTheme.typography.labelSmall, color = Muted, modifier = Modifier.padding(top = 4.dp))
 }
