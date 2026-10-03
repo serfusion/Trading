@@ -301,6 +301,20 @@ def main() -> None:
             a = go(KEY[n], None)
         js[n]["kat_semua"] = {c: {"baru": cell(g[g.t >= SPLIT].R), "tahun_ini": cell(g[g.t >= Y26].R),
                                   "dikirim": c in DIKIRIM[n]} for c, g in a.groupby("cat")}
+    eth_p = VER / "cloud_ETH.csv"              # ETH (research/tambahan_cloud.py), spread 0,05%
+    if eth_p.exists():
+        e = pd.read_csv(eth_p, parse_dates=["t_signal", "t_close"])
+        e["R"] = e.r - e.entry * 0.0005 / e.risk
+        b = e[~e.lapis]
+        js["ETH"] = {"sampai": f"{b.t_signal.max():%Y-%m-%d}", "baru": cell(b[b.t_signal >= SPLIT].R),
+                     "semua": cell(b.R),
+                     "kat": {c: {"baru": cell(g[g.t_signal >= SPLIT].R), "tahun_ini": cell(g[g.t_signal >= Y26].R),
+                                 "semua": cell(g.R), "dikirim": True} for c, g in b.groupby("cat")}}
+    gap_p = VER / "cloud_GAP.csv"              # gap pekan forex (research/verifikasi_gap.py)
+    if gap_p.exists():
+        g = pd.read_csv(gap_p, parse_dates=["t_signal"])
+        js["GAP"] = {p: {"baru": cell(x[x.t_signal >= SPLIT].R), "semua": cell(x.R),
+                         "baru_spread3": cell(x[x.t_signal >= SPLIT].R3)} for p, x in g.groupby("pair")}
     L.append("\n## 6. Angka yang tampil di aplikasi/notifikasi vs replay kode cloud (spread asli)")
     bagian6(L, js)
     txt = "\n".join(L) + "\n"
