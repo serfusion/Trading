@@ -166,6 +166,7 @@ def bagian2(name: str, L: list, js: dict) -> pd.DataFrame:
         "90h": cell(base[base.t_signal > end - pd.Timedelta(days=90)].R),
         "365h": cell(base[base.t_signal > end - pd.Timedelta(days=365)].R),
         "semua": cell(base.R),
+        "risk_med": round(float(base[base.t_signal > end - pd.Timedelta(days=365)].risk.median()), 2),
         "lama": cell(base[base.t_signal < SPLIT].R),
         "baru": cell(base[base.t_signal >= SPLIT].R),
         "kat": {c: {"baru": cell(g[g.t_signal >= SPLIT].R), "tahun_ini": cell(g[g.t_signal >= Y26].R),

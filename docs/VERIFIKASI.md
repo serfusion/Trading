@@ -58,3 +58,15 @@ R = hasil rata-rata 5 posisi per sinyal (1R = rugi bila SL kena). LAMA = sebelum
   - XAU: terbukti lebih baik dari sinyal biasa (p-acak 0,001 di BARU).
   - BTC: tidak signifikan di BARU (p 0,15), dan di 2026 sinyal biasa BTC malah lebih baik. Sinyal BTC 💰 tetap positif secara keseluruhan.
 - **Tidak ada perubahan logika sinyal live.** Yang berubah hanya tampilan aplikasi (3.26) dan sumber angka kartu 📜.
+
+## Tanpa kategori konf (3 Okt 2026, `research/tanpa_konf.py`, izin "pasang")
+| | BARU R/sinyal (total, DD) | LAMA total | 2026 |
+|---|---|---|---|
+| BTC live | +0,27 (+225R, DD −41) | +345R | +43R |
+| **BTC tanpa konf** | **+0,33 (+236R, DD −32)** | +300R | +40R |
+| XAU live | +0,21 (+131R, DD −42) | +134R | +56R |
+| XAU tanpa konf | +0,19 (+105R, DD −69) | +172R | +57R |
+
+BTC tanpa konf lebih baik di periode BARU (untung sedikit lebih besar dengan sinyal lebih sedikit, DD lebih kecil) →
+disarankan dimatikan. XAU campur (BARU memburuk) → XAU konf tetap. Pemasangan di cloud butuh perubahan kode
+`cloud/` yang diblokir pengaman sesi → menunggu izin pengguna.
