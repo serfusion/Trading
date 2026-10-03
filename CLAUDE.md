@@ -150,6 +150,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - `research/martingale.py`: M1 antar sinyal 1/3/5x = lot rata-rata 3,1x, total/DD tidak lebih baik, DD 4x; M2 grid
   1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
   TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
+- EA grid trader (screenshot 3 akun Cent, `research/martingale_ea.py`, MARTINGALE bagian akhir): lot ×1,2 bukan ×2,
+  profit $114–126/akun; ×2 20 layer mustahil di $430; ×1,2 habis ±layer 17; 1 dari 13–165 keranjang menghabiskan akun,
+  nilai harapan/keranjang negatif di semua varian. Twelve Data XAU memuat bar akhir pekan → buang sebelum simulasi.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
