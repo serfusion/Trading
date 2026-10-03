@@ -1,0 +1,123 @@
+# Badge 💰 vs sinyal yang dikirim (research/kategori_badge.py)
+
+== XAUUSD (data s.d. 2026-09-16) ==
+ A: semua sinyal diberi label (dasar badge)
+   LAMA: semua n2159 WR 46% +0.083R/sin total +179R DD -62
+         biasa    n1207 WR 46% +0.007R/sin total +9R DD -38
+         konf     n198 WR 44% +0.032R/sin total +6R DD -19
+         konf+⭐   n514 WR 48% +0.355R/sin total +182R DD -37
+         ⭐        n240 WR 42% -0.076R/sin total -18R DD -54
+   BARU: semua n1257 WR 45% +0.066R/sin total +83R DD -69
+         biasa    n668 WR 40% -0.028R/sin total -18R DD -45
+         konf     n137 WR 54% +0.180R/sin total +25R DD -15
+         konf+⭐   n336 WR 51% +0.240R/sin total +81R DD -44
+         ⭐        n116 WR 45% -0.033R/sin total -4R DD -20
+   2026: semua n156 WR 51% +0.316R/sin total +49R DD -12
+         biasa    n87 WR 46% +0.182R/sin total +16R DD -14
+         konf     n22 WR 50% -0.017R/sin total -0R DD -5
+         konf+⭐   n29 WR 79% +1.451R/sin total +42R DD -5
+         ⭐        n18 WR 33% -0.457R/sin total -8R DD -9
+   total R per tahun BARU: {2021: -17, 2022: -16, 2023: 11, 2024: 21, 2025: 35, 2026: 49}
+ B: hanya konf+⭐ + konf dikirim (bawaan cloud)
+   LAMA: semua n943 WR 46% +0.209R/sin total +197R DD -44
+         konf     n262 WR 40% -0.090R/sin total -24R DD -38
+         konf+⭐   n681 WR 48% +0.323R/sin total +220R DD -33
+   BARU: semua n611 WR 52% +0.208R/sin total +127R DD -41
+         konf     n151 WR 58% +0.179R/sin total +27R DD -14
+         konf+⭐   n460 WR 50% +0.218R/sin total +100R DD -54
+   2026: semua n61 WR 72% +0.816R/sin total +50R DD -9
+         konf     n20 WR 45% -0.186R/sin total -4R DD -5
+         konf+⭐   n41 WR 85% +1.305R/sin total +54R DD -5
+   total R per tahun BARU: {2021: -1, 2022: 0, 2023: -11, 2024: 29, 2025: 60, 2026: 50}
+   konf+⭐: sinyal tambahan yang hanya muncul di B: n229 WR 46% +0.225R/sin total +51R DD -22
+   konf: sinyal tambahan yang hanya muncul di B: n73 WR 42% -0.267R/sin total -20R DD -24
+ B: hanya konf+⭐ dikirim
+   LAMA: semua n806 WR 47% +0.279R/sin total +225R DD -31
+         konf+⭐   n806 WR 47% +0.279R/sin total +225R DD -31
+   BARU: semua n545 WR 50% +0.188R/sin total +102R DD -66
+         konf+⭐   n545 WR 50% +0.188R/sin total +102R DD -66
+   2026: semua n51 WR 76% +0.982R/sin total +50R DD -9
+         konf+⭐   n51 WR 76% +0.982R/sin total +50R DD -9
+   total R per tahun BARU: {2021: 0, 2022: -22, 2023: -12, 2024: 38, 2025: 48, 2026: 50}
+ B: hanya konf+⭐ + konf + ⭐ + biasa dikirim
+   LAMA: semua n2159 WR 46% +0.083R/sin total +179R DD -62
+         biasa    n1207 WR 46% +0.007R/sin total +9R DD -38
+         konf     n198 WR 44% +0.032R/sin total +6R DD -19
+         konf+⭐   n514 WR 48% +0.355R/sin total +182R DD -37
+         ⭐        n240 WR 42% -0.076R/sin total -18R DD -54
+   BARU: semua n1257 WR 45% +0.066R/sin total +83R DD -69
+         biasa    n668 WR 40% -0.028R/sin total -18R DD -45
+         konf     n137 WR 54% +0.180R/sin total +25R DD -15
+         konf+⭐   n336 WR 51% +0.240R/sin total +81R DD -44
+         ⭐        n116 WR 45% -0.033R/sin total -4R DD -20
+   2026: semua n156 WR 51% +0.316R/sin total +49R DD -12
+         biasa    n87 WR 46% +0.182R/sin total +16R DD -14
+         konf     n22 WR 50% -0.017R/sin total -0R DD -5
+         konf+⭐   n29 WR 79% +1.451R/sin total +42R DD -5
+         ⭐        n18 WR 33% -0.457R/sin total -8R DD -9
+   total R per tahun BARU: {2021: -17, 2022: -16, 2023: 11, 2024: 21, 2025: 35, 2026: 49}
+
+== BTCUSD (data s.d. 2026-09-28) ==
+ A: semua sinyal diberi label (dasar badge)
+   LAMA: semua n1877 WR 47% +0.303R/sin total +568R DD -65
+         biasa    n1035 WR 42% +0.083R/sin total +86R DD -48
+         konf     n215 WR 55% +0.518R/sin total +111R DD -26
+         konf+⭐   n438 WR 53% +0.475R/sin total +208R DD -22
+         ⭐        n189 WR 48% +0.859R/sin total +162R DD -15
+   BARU: semua n1909 WR 44% +0.101R/sin total +193R DD -46
+         biasa    n1127 WR 44% +0.061R/sin total +69R DD -52
+         konf     n216 WR 41% -0.070R/sin total -15R DD -35
+         konf+⭐   n373 WR 41% +0.115R/sin total +43R DD -30
+         ⭐        n193 WR 51% +0.500R/sin total +97R DD -15
+   2026: semua n287 WR 46% +0.225R/sin total +65R DD -36
+         biasa    n185 WR 46% +0.357R/sin total +66R DD -32
+         konf     n38 WR 50% -0.167R/sin total -6R DD -11
+         konf+⭐   n50 WR 38% +0.040R/sin total +2R DD -18
+         ⭐        n14 WR 50% +0.205R/sin total +3R DD -3
+   total R per tahun BARU: {2021: -11, 2022: -4, 2023: 72, 2024: 52, 2025: 20, 2026: 65}
+ B: hanya konf+⭐ + konf + ⭐ dikirim (bawaan cloud)
+   LAMA: semua n1065 WR 52% +0.533R/sin total +568R DD -27
+         konf     n268 WR 54% +0.534R/sin total +143R DD -21
+         konf+⭐   n454 WR 53% +0.437R/sin total +199R DD -26
+         ⭐        n343 WR 50% +0.660R/sin total +226R DD -24
+   BARU: semua n1032 WR 44% +0.192R/sin total +198R DD -47
+         konf     n264 WR 44% +0.043R/sin total +11R DD -24
+         konf+⭐   n441 WR 41% +0.161R/sin total +71R DD -46
+         ⭐        n327 WR 48% +0.353R/sin total +115R DD -25
+   2026: semua n149 WR 40% +0.298R/sin total +44R DD -17
+         konf     n46 WR 50% -0.151R/sin total -7R DD -12
+         konf+⭐   n57 WR 39% +0.668R/sin total +38R DD -17
+         ⭐        n46 WR 30% +0.289R/sin total +13R DD -12
+   total R per tahun BARU: {2021: 7, 2022: -32, 2023: 93, 2024: 45, 2025: 40, 2026: 44}
+   konf+⭐: sinyal tambahan yang hanya muncul di B: n45 WR 47% +0.523R/sin total +24R DD -17
+   konf: sinyal tambahan yang hanya muncul di B: n95 WR 47% +0.390R/sin total +37R DD -10
+   ⭐: sinyal tambahan yang hanya muncul di B: n158 WR 41% +0.043R/sin total +7R DD -29
+ B: hanya konf+⭐ + ⭐ dikirim
+   LAMA: semua n969 WR 51% +0.510R/sin total +494R DD -32
+         konf+⭐   n626 WR 51% +0.428R/sin total +268R DD -31
+         ⭐        n343 WR 50% +0.660R/sin total +226R DD -24
+   BARU: semua n869 WR 44% +0.234R/sin total +203R DD -38
+         konf+⭐   n542 WR 41% +0.162R/sin total +88R DD -47
+         ⭐        n327 WR 48% +0.353R/sin total +115R DD -25
+   2026: semua n126 WR 31% +0.301R/sin total +38R DD -27
+         konf+⭐   n80 WR 31% +0.307R/sin total +25R DD -29
+         ⭐        n46 WR 30% +0.289R/sin total +13R DD -12
+   total R per tahun BARU: {2021: 8, 2022: -26, 2023: 99, 2024: 48, 2025: 36, 2026: 38}
+ B: hanya konf+⭐ + konf + ⭐ + biasa dikirim
+   LAMA: semua n1877 WR 47% +0.303R/sin total +568R DD -65
+         biasa    n1035 WR 42% +0.083R/sin total +86R DD -48
+         konf     n215 WR 55% +0.518R/sin total +111R DD -26
+         konf+⭐   n438 WR 53% +0.475R/sin total +208R DD -22
+         ⭐        n189 WR 48% +0.859R/sin total +162R DD -15
+   BARU: semua n1909 WR 44% +0.101R/sin total +193R DD -46
+         biasa    n1127 WR 44% +0.061R/sin total +69R DD -52
+         konf     n216 WR 41% -0.070R/sin total -15R DD -35
+         konf+⭐   n373 WR 41% +0.115R/sin total +43R DD -30
+         ⭐        n193 WR 51% +0.500R/sin total +97R DD -15
+   2026: semua n287 WR 46% +0.225R/sin total +65R DD -36
+         biasa    n185 WR 46% +0.357R/sin total +66R DD -32
+         konf     n38 WR 50% -0.167R/sin total -6R DD -11
+         konf+⭐   n50 WR 38% +0.040R/sin total +2R DD -18
+         ⭐        n14 WR 50% +0.205R/sin total +3R DD -3
+   total R per tahun BARU: {2021: -11, 2022: -4, 2023: 72, 2024: 52, 2025: 20, 2026: 65}
+

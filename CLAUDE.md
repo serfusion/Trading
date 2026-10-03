@@ -158,6 +158,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   10 pair lain tidak. Pembanding XAU +0,22R / BTC +0,14R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
   ditemukan setelah lihat BARU → belum terbukti). TIDAK dipasang (tunggu "pasang").
 
+## Badge 💰 vs sinyal yang dikirim (3 Okt 2026 — `docs/KATEGORI_BADGE.md`)
+- `research/kategori_badge.py`: badge (`_core.STATS`) dihitung dengan "semua sinyal diberi label" (cara A) dan seluruh
+  periode; yang dikirim hanya 💰 (cara B) → XAU konf badge +0,09 vs dikirim +0,01 (73 sinyal tambahan −0,27R); BTC
+  konf melemah sejak Okt 2021. XAU 💰 tetap > biasa (2026 +50R, konf+⭐ +1,45R/sin); BTC 2026 biasa +66R > 💰 (5 th:
+  3–3, per sinyal 💰 2×). Saran "hentikan XAU konf" DICABUT (DD −41 → −66). Usulan badge cara B + angka sejak Okt
+  2021/tahun ini — menunggu "pasang". Selalu sebut cara hitung (A/B) saat melaporkan per kategori.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

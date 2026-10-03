@@ -162,3 +162,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-10-03: "uji juga pair tambahan" → `research/pair_data.py`, `research/pair_tambahan.py`, `docs/PAIR_TAMBAHAN.md`:
   11 forex + ETH, kategori 💰 dipilih dari LAMA. Lolos tipis ETH (+0,06R BARU) & USD/JPY (+0,07R, hanya 2022, gagal
   spread ×2); 10 lainnya tidak. Tidak dipasang (menunggu "pasang").
+- 2026-10-03: "katanya 💰 bagus, sekarang biasa profit & 💰⭐ konf tidak untung?" → `research/kategori_badge.py`,
+  `docs/KATEGORI_BADGE.md`: badge dihitung cara A (semua sinyal diberi label) vs yang dikirim cara B → XAU konf
+  terlalu tinggi di badge; BTC 2026 biasa memang > 💰; saran hentikan XAU konf dicabut. Usulan badge cara B menunggu "pasang".
