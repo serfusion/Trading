@@ -177,6 +177,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (kebalikan martingale, layer searah tren H4+D1, stop ikut naik): 3 lolos LAMA & positif BARU; terbaik jarak 3 ATR/stop
   2 ATR/maks 6: +0,13R/+0,18R, 12/15 tahun +, menang 25%, risiko 0,5% ≈ +$5–7/bln per $400 (DD 21–30%), swap belum.
   `ea/PiramidaTren.mq5` (belum di-compile). Kait sim baru: izin/step_arr/tp_arr/lot_arr/sl_lapis/bulat/tutup_arr.
+- Blueprint 10 strategi non-martingale (unggahan, `docs/BLUEPRINT10.md`, `research/blueprint10.py`, `gabung_bp.py`): 79
+  kombinasi → 0 lolos; TP 0,5R WR 61–68% tetapi −0,08…+0,02R; terdekat #9 ATR breakout + tren2 (+0,06/+0,11R). Sebagai pemicu
+  piramida tidak lebih baik di BARU; aturan risiko 2%/5%/4 kalah hampir tak aktif. WR tinggi + untung = 💰 TP1 0,7R.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

@@ -41,7 +41,8 @@ def arah(f: dict, nama: str) -> np.ndarray:
     return np.where(ok, z, 0).astype(int)
 
 
-def jalankan(cfg: tuple, spread: float = SPREAD, detail: bool = False):
+def jalankan(cfg: tuple, spread: float = SPREAD, detail: bool = False, gate: list | None = None):
+    """gate (opsional): arah sinyal pemicu per bar (+1/−1/0); keranjang hanya dibuka bila gate[i] == arah tren."""
     nama, sk, slk, maks, mult = cfg
     df, f = _G["df"], _G["f"]
     o, h, l, c = arrays(df)
@@ -66,7 +67,7 @@ def jalankan(cfg: tuple, spread: float = SPREAD, detail: bool = False):
             d = st["d"]
             if blk or z[i] != d or d * o[i] <= st["stop"]:   # akhir pekan / tren berbalik / gap lewat stop
                 tutup(i, d * o[i])
-        if not st["n"] and not blk and z[i]:
+        if not st["n"] and not blk and z[i] and (gate is None or gate[i] == z[i]):
             d = z[i]
             a = atr[i]
             lot0 = R_USD / (slk * a + SPREAD_)
