@@ -56,6 +56,8 @@ def test_tick_xau_melewati_sinyal_lawan_h4(monkeypatch):
         calls.append(out[0])
         return out
     monkeypatch.setattr(_core, "h4_ema_check", spy)
+    # kartu status tren (heartbeat, 3.24) juga membaca arah H4 untuk tampilan; yang diuji di sini hanya filter sinyal
+    monkeypatch.setattr(_core, "trend_status", lambda *a, **k: {})
 
     def run(h4):
         prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()

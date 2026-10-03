@@ -159,3 +159,12 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   lapisan (XAU setelah TP1, BTC breakout baru maks 2/set, lot ½) + tanda 📰 sinyal setelah berita; aplikasi 3.21.
 - 2026-10-02: NFP berbalik → `research/nfp_berbalik.py`, `berita_tren.py`, `docs/HARI_H.md` 9–10: sel 3/6 jam (3.22) &
   peringatan 📉 "sisa lonjakan" menit 30/60 (`cloud/api/_pudar.py`); analisa lintas pasar + Polymarket Fed.
+- 2026-10-03: "uji juga pair tambahan" → `research/pair_data.py`, `research/pair_tambahan.py`, `docs/PAIR_TAMBAHAN.md`:
+  11 forex + ETH, kategori 💰 dipilih dari LAMA. Lolos tipis ETH (+0,06R BARU) & USD/JPY (+0,07R, hanya 2022, gagal
+  spread ×2); 10 lainnya tidak. Tidak dipasang (menunggu "pasang").
+- 2026-10-03: "katanya 💰 bagus, sekarang biasa profit & 💰⭐ konf tidak untung?" → `research/kategori_badge.py`,
+  `docs/KATEGORI_BADGE.md`: badge dihitung cara A (semua sinyal diberi label) vs yang dikirim cara B → XAU konf
+  terlalu tinggi di badge; BTC 2026 biasa memang > 💰; saran hentikan XAU konf dicabut. Usulan badge cara B menunggu "pasang".
+- 2026-10-03: "CEK, VERIFIKASI, UJI menyeluruh lalu rombak apk simple" → `research/verifikasi_cloud.py`,
+  `research/verifikasi.py`, `docs/VERIFIKASI.md`: kode cloud asli diputar ulang 2012–2026 (cocok 96–98% dengan riset),
+  tanpa look-ahead, spread asli Exness; XAU 💰 +0,21R & BTC 💰 +0,27R sejak Okt 2021. Aplikasi 3.26 ringkas.

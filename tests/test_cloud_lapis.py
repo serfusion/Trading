@@ -111,7 +111,26 @@ def test_setelan_tick_xau_tp1_btc_breakout_baru(monkeypatch):
     monkeypatch.delenv("LAYER_SIGNALS", raising=False)
     monkeypatch.setenv("NEWS_TAG", "0")
     x, b = tick.signal_extras("XAU", None), tick.signal_extras("BTC", None)
-    assert x["layer"]["mode"] == "tp1" and x["layer"]["lot"] == 0.5 and "news_fn" not in x
+    assert x["layer"]["mode"] == "any" and x["layer"]["max"] == 6 and x["layer"]["lot"] == 0.5 and "news_fn" not in x
     assert b["layer"]["mode"] == "any" and b["layer"]["max"] == 2 and "WR" in b["layer"]["stats"]["teks"]
     monkeypatch.setenv("LAYER_SIGNALS", "0")
     assert "layer" not in tick.signal_extras("XAU", None)
+
+
+def test_heartbeat_status_tren_dan_level_breakout():
+    _, pub = run_ticks(trend_df(), cfg=ONE_SET)
+    hb = [e for e in pub.events if e["type"] == "heartbeat" and e.get("status")][-1]
+    st = hb["status"]
+    assert st["h4"] in ("BUY", "SELL") and st["levels"][0]["set"] == "T55/20"
+    lv = st["levels"][0]
+    assert lv["buy"] >= lv["sell"] and "next_check" in st and st["last_close"] > 0
+
+
+def test_skip_cats_btc_konf(monkeypatch):
+    """BTC konf dimatikan lewat cfg skip_cats (izin pengguna 3 Okt 2026)."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cloud" / "api"))
+    import tick
+    src = Path(tick.__file__).read_text(encoding="utf-8")
+    assert '"skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1"' in src

@@ -168,7 +168,7 @@ fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
 /** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, atau GAP (forex gap pekan). */
 fun SignalEvent.pairGroup(): String = symbol().let {
-    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC")) "BTC" else "GAP"
+    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC") || it.startsWith("ETH")) "BTC" else "GAP"
 }
 
 /** Waktu event (UTC), null bila tidak terbaca. */
@@ -480,8 +480,11 @@ object SignalRepository {
     }
 
     /** Menang = TP1 kena (gap: TP kena); kalah = SL atau TUTUP sebelum TP1. */
+    /** PROFIT = hasil uang > 0 (skema pilihan, 3.26); data lama tanpa R: TP1 kena. Dulu TP1 kena = PROFIT, padahal
+     *  TUTUP sebelum TP1 bisa untung dan TP1 lalu SL+ hanya ±impas. */
     fun isWin(close: SignalEvent, events: List<SignalEvent>): Boolean =
-        close.json.optBoolean("tp1_hit", false) || tp1Event(events, close.id) != null
+        amount(close, money())?.let { it > 0 }
+            ?: (close.json.optBoolean("tp1_hit", false) || tp1Event(events, close.id) != null)
 
     fun toIdr(amount: Double, m: MoneySettings): Double =
         if (m.cent) amount / 100.0 * m.idrRate else amount * m.idrRate
@@ -504,7 +507,7 @@ object SignalRepository {
         }.forEach { e ->
             val t = zoned(e) ?: return@forEach
             val a = amount(e, m) ?: return@forEach
-            groups.getOrPut(keyOf(t)) { mutableListOf() }.add(isWin(e, events) to a)
+            groups.getOrPut(keyOf(t)) { mutableListOf() }.add((a > 0) to a)
         }
         return groups.entries.sortedByDescending { it.key }.map { (k, v) ->
             PeriodStats(labelOf(k), v.count { it.first }, v.count { !it.first },

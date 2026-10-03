@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
-       "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
+       "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 0.7, "be_offset": 0.10,
        "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20,
        "market_hours": True, "skip_open_bars": 3}
 
@@ -223,6 +223,31 @@ def h4_ema_check(closed: list[Bar], direction: str, n: int = 50) -> tuple[bool, 
     return ok, f"H4 {last:.2f} {'>' if last > ema else '<'} EMA{n} {ema:.2f}" + ("" if ok else " (lawan arah H4)")
 
 
+def trend_status(closed: list[Bar], systems: dict, cfg: dict, tf: timedelta) -> dict:
+    """Kartu "Status tren & hitung mundur" (aplikasi, tab Sinyal; permintaan 3 Okt 2026). Hanya keterangan:
+    arah D1 (close kemarin vs EMA50 harian) & H4 (close H4 tutup vs EMA50 H4), level breakout tiap set untuk candle H1
+    berikutnya (BUY bila close > high N candle terakhir, SELL bila < low N), dan waktu cek sinyal berikutnya."""
+    if len(closed) < 90:
+        return {}
+    daily: dict = {}
+    for b in closed:
+        if b.t.date() < closed[-1].t.date():
+            daily[b.t.date()] = b.c                           # close harian s.d. kemarin (sama dengan star_check)
+    dc = [daily[k] for k in sorted(daily)]
+    d1 = None if len(dc) < 20 else ("BUY" if dc[-1] > _ema(dc, cfg.get("star_ema", 50))[-1] else "SELL")
+    h4 = "BUY" if h4_ema_check(closed, "BUY")[0] else "SELL"
+    levels = []
+    for entry_p, exit_p in cfg["sets"]:
+        name = f"T{entry_p}/{exit_p}"
+        win = closed[-entry_p:]
+        sysd = systems.get(name) or {}
+        open_ = [x["dir"] for x in [sysd.get("virtual")] + list(sysd.get("layers") or []) if x]
+        levels.append({"set": name, "buy": round(max(b.h for b in win), 3), "sell": round(min(b.l for b in win), 3),
+                       "open": open_[0] if open_ else None, "n_open": len(open_)})
+    return {"d1": d1, "h4": h4, "levels": levels, "next_check": iso(closed[-1].t + 2 * tf),
+            "last_close": round(closed[-1].c, 3)}
+
+
 def _ema(values: list[float], n: int) -> list[float]:
     a, out = 2 / (n + 1), []
     for v in values:
@@ -268,14 +293,21 @@ def konf_check(closed: list[Bar], direction: str) -> bool:
 
 # Statistik historis per kategori (research/badge_stats.py & research/gap_years.py): (WR %, R/sinyal, n, periode)
 STATS = {
-    "XAU konf+⭐": (49.2, 0.309, 850, "2012–2026"),
-    "XAU konf": (48.1, 0.093, 335, "2012–2026"),
-    "XAU ⭐": (42.7, -0.062, 356, "2012–2026"),
-    "XAU biasa": (43.5, -0.005, 1875, "2012–2026"),
-    "BTC konf+⭐": (47.8, 0.310, 811, "2016–2026"),
-    "BTC konf": (48.1, 0.226, 430, "2016–2026"),
-    "BTC ⭐": (49.5, 0.678, 382, "2016–2026"),
-    "BTC biasa": (43.0, 0.073, 2159, "2016–2026"),
+    # sejak 3 Okt 2026: hasil replay kode cloud (TP1 0,7R, filter live, spread asli Exness) periode Okt 2021–2026
+    # (research/verifikasi.py; dikirim = cara B, tidak dikirim = semua kategori dikirim). Bisa dikirim/tidak tetap sama.
+    "XAU konf+⭐": (61.9, 0.206, 506, "Okt 2021–2026"),
+    "XAU konf": (66.7, 0.188, 153, "Okt 2021–2026"),
+    "XAU ⭐": (41.7, -0.072, 132, "Okt 2021–2026"),
+    "XAU biasa": (40.7, 0.002, 501, "Okt 2021–2026"),
+    "BTC konf+⭐": (55.1, 0.276, 457, "Okt 2021–2026"),
+    "BTC konf": (41.6, -0.188, 221, "Okt 2021–2026"),
+    "BTC ⭐": (58.6, 0.421, 278, "Okt 2021–2026"),
+    "BTC biasa": (45.3, 0.104, 1139, "Okt 2021–2026"),
+    # ETH (research/sinyal_tambahan.py + tambahan_cloud.py): hanya ⭐/konf+⭐ dan hanya saat 💰 BTC searah terbuka
+    "ETH konf+⭐": (56.0, 0.245, 530, "Okt 2021–2026"),
+    "ETH ⭐": (56.0, 0.245, 530, "Okt 2021–2026"),
+    "ETH konf": (0.0, -0.01, 0, "-"),
+    "ETH biasa": (0.0, -0.01, 0, "-"),
     "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
     "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
     "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),
@@ -289,9 +321,9 @@ STATS = {
 # R bawaan, WR SL+0,7R, R SL+0,7R, n, periode). Dua periode: XAU ⚡ +0,95R (2012–2021) / +0,53R (5 th terakhir),
 # BTC ⚡ +0,97R / +0,64R.
 ZAP_VOL = 0.331
-TIER_STATS = {
-    "XAU": (54.3, 0.799, 63.3, 0.773, 138, "2013–2026"),
-    "BTC": (54.0, 0.810, 64.4, 0.747, 200, "2016–2026"),
+TIER_STATS = {   # ⚡ replay kode cloud Okt 2021–2026, TP1 0,7R (SL+ 0,7R = sama), spread asli
+    "XAU": (54.3, 0.346, 54.3, 0.346, 127, "Okt 2021–2026"),
+    "BTC": (58.6, 0.421, 58.6, 0.421, 278, "Okt 2021–2026"),
 }
 
 
@@ -667,6 +699,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
             events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
             return None
+        if (c0 := category(closed, sig["dir"], cfg)[0]["cat"].split(" ", 1)[-1]) in (cfg.get("skip_cats") or ()):
+            # kategori dimatikan (BTC konf: research/tanpa_konf.py, izin pengguna 3 Okt 2026 "matikan btc konf")
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": c0})
+            events.append(f"{name} {sig['dir']} dilewati: kategori {c0} dimatikan")
+            return None
         if cfg.get("h4_filter") and not (h4 := h4_ema_check(closed, sig["dir"]))[0]:
             # validasi arah H4 EMA50 (research/alchemist.py F4, XAU): sinyal 💰 lawan arah H4 tidak dikirim
             store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": h4[1]})
@@ -693,10 +730,12 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         risk = cfg["stop_atr"] * sig["atr"]
         sl = price - sign * risk
         tp1 = price + sign * cfg["tp1_r"] * risk
+        tp2, tp3 = price + sign * 1.5 * risk, price + sign * 3.0 * risk     # patokan, posisi tetap ditahan s.d. TUTUP
         key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}" + ("L" if layer else "")
         ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
               "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
-              "tp1": round(tp1, 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
+              "tp1": round(tp1, 3), "tp2": round(tp2, 3), "tp3": round(tp3, 3),
+              "sl_plus": round(price + sign * cfg["be_offset"], 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
               "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
               "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
               "warning": "Harga dari data feed; cek harga broker sebelum entry.",
@@ -708,6 +747,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 f"{meta['n_hist']} sinyal)\n"
                 f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
                 f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
+                f"Patokan: TP2 {tp2:.2f} (1,5R) • TP3 {tp3:.2f} (3R) — tetap tahan sampai TUTUP\n"
                 f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
         if meta["zap"]:
             text = (f"⚡ KESEMPATAN EMAS (WR {meta['wr07']:.0f}% dengan SL+ 0,7R, +{meta['avg_r07']:.2f}R/sinyal)\n"
@@ -843,7 +883,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                               "level": round(level, 3), "bars": exit_p, **({"lapis": True} if v.get("lapis") else {})})
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
           "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
-          "exits": exits}
+          "exits": exits, "status": trend_status(closed, systems, cfg, tf)}
     if cfg.get("asset", "XAU") == "XAU" and cfg.get("war") is not None:
         hb["war"] = cfg["war"]
     if executor is not None:

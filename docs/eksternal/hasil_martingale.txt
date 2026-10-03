@@ -1,0 +1,26 @@
+# Martingale pendek + sinyal 💰 (research/martingale.py)
+
+R dasar = rugi 1 bagian (0,01 x5) bila SL awal sinyal kena. Semua angka tanpa bunga berbunga.
+
+== XAUUSD (1554 sinyal 💰, LAMA < 2019) ==
+  bawaan (lot tetap 1 bagian, skema TP1 + 4 jalan)     n=1554 WR  48.3% total   +323.8R DD   -43.6R rugi terbesar 1 sinyal  -1.4R | LAMA  +124.6 BARU  +199.2 th+ 10/14 | DD -22% modal (1R = 0,5%)
+  M1 antar sinyal 1x / 3x / 5x setelah kalah           n=1554 WR  48.3% total  +1210.0R DD  -173.0R rugi terbesar 1 sinyal  -5.0R | LAMA  +524.3 BARU  +685.8 th+ 9/14 | DD -86% modal (1R = 0,5%)
+    (sinyal dengan lot 5x: 47%; rata-rata pengali 3.09)
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.1R        n=1554 WR  91.1% total   -352.5R DD  -375.9R rugi terbesar 1 sinyal  -6.8R | LAMA  -109.1 BARU  -243.4 th+ 2/14 | DD -188% modal (1R = 0,5%) | level 3 terisi 31% | SL 9%
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.2R        n=1554 WR  87.3% total   -154.4R DD  -217.0R rugi terbesar 1 sinyal  -6.8R | LAMA   -45.2 BARU  -109.2 th+ 4/14 | DD -108% modal (1R = 0,5%) | level 3 terisi 37% | SL 12%
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.3R        n=1554 WR  82.8% total    -78.0R DD  -216.4R rugi terbesar 1 sinyal  -6.8R | LAMA   -18.1 BARU   -59.8 th+ 6/14 | DD -108% modal (1R = 0,5%) | level 3 terisi 41% | SL 16%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.1R       n=1554 WR  91.5% total   -278.0R DD  -289.6R rugi terbesar 1 sinyal  -5.1R | LAMA  -104.8 BARU  -173.3 th+ 2/14 | DD -145% modal (1R = 0,5%) | level 3 terisi 17% | SL 8%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.2R       n=1554 WR  89.3% total    -14.1R DD  -105.2R rugi terbesar 1 sinyal  -5.1R | LAMA    +1.5 BARU   -15.6 th+ 6/14 | DD -53% modal (1R = 0,5%) | level 3 terisi 22% | SL 10%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.3R       n=1554 WR  83.8% total    -42.1R DD  -165.5R rugi terbesar 1 sinyal  -5.1R | LAMA   -45.2 BARU    +3.1 th+ 9/14 | DD -83% modal (1R = 0,5%) | level 3 terisi 28% | SL 15%
+
+== BTCUSD (2097 sinyal 💰, LAMA < 2021) ==
+  bawaan (lot tetap 1 bagian, skema TP1 + 4 jalan)     n=2097 WR  48.2% total   +765.7R DD   -55.8R rugi terbesar 1 sinyal  -1.0R | LAMA  +594.3 BARU  +171.4 th+ 9/11 | DD -28% modal (1R = 0,5%)
+  M1 antar sinyal 1x / 3x / 5x setelah kalah           n=2097 WR  48.2% total  +2569.7R DD  -183.1R rugi terbesar 1 sinyal  -5.0R | LAMA +1787.1 BARU  +782.6 th+ 9/11 | DD -92% modal (1R = 0,5%)
+    (sinyal dengan lot 5x: 49%; rata-rata pengali 3.13)
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.1R        n=2097 WR  92.4% total   -256.1R DD  -444.8R rugi terbesar 1 sinyal  -6.8R | LAMA    +2.3 BARU  -258.4 th+ 4/11 | DD -222% modal (1R = 0,5%) | level 3 terisi 30% | SL 8%
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.2R        n=2097 WR  87.9% total    -25.4R DD  -371.3R rugi terbesar 1 sinyal  -6.8R | LAMA  +123.5 BARU  -148.9 th+ 6/11 | DD -186% modal (1R = 0,5%) | level 3 terisi 38% | SL 12%
+  M2 grid 1/3/5, jarak 0.2R, TP keranjang +0.3R        n=2097 WR  82.5% total    +66.5R DD  -445.3R rugi terbesar 1 sinyal  -6.8R | LAMA  +264.3 BARU  -197.8 th+ 7/11 | DD -223% modal (1R = 0,5%) | level 3 terisi 45% | SL 16%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.1R       n=2097 WR  93.8% total   -106.1R DD  -195.2R rugi terbesar 1 sinyal  -5.1R | LAMA    -5.4 BARU  -100.7 th+ 5/11 | DD -98% modal (1R = 0,5%) | level 3 terisi 13% | SL 6%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.2R       n=2097 WR  90.4% total   +186.5R DD   -97.9R rugi terbesar 1 sinyal  -5.1R | LAMA  +119.8 BARU   +66.8 th+ 9/11 | DD -49% modal (1R = 0,5%) | level 3 terisi 20% | SL 9%
+  M2 grid 1/3/5, jarak 0.33R, TP keranjang +0.3R       n=2097 WR  84.3% total   +113.1R DD  -214.3R rugi terbesar 1 sinyal  -5.1R | LAMA  +164.5 BARU   -51.5 th+ 7/11 | DD -107% modal (1R = 0,5%) | level 3 terisi 26% | SL 14%
+

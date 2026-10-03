@@ -389,7 +389,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     FilterChip(selected = !slAuto, onClick = { slAuto = false }, label = { Text("SL+ setelah TP1") })
                 }
                 Text(
-                    "1 posisi TP1 (1R), 4 posisi running sampai sinyal TUTUP. " +
+                    "1 posisi TP1 (0,7R), 4 posisi running sampai sinyal TUTUP. " +
                         (if (slAuto) "Otomatis: ⚡ & BTC → SL semua posisi ke entry saat profit 0,7R (WR lebih " +
                             "tinggi, profit setara); XAU lainnya → SL+ setelah TP1 kena (profit XAU lebih besar)."
                         else "TP1 kena → SL 4 posisi ke entry (SL+)."),

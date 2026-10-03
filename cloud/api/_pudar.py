@@ -103,7 +103,7 @@ def row(m: dict, title: str, t0: datetime, now: datetime | None = None, asset: s
     if fade >= 0.8 and m["keep"] < 0.6:
         # peringatan utama: harga hampir selalu kembali melewati harga rilis (2 Okt 2026: NFP 93%, terjadi)
         sisi = "ke bawah" if m["s"] > 0 else "ke atas"
-        teks, kuat = f"{_pct(fade)}% BALIK {sisi} {m['open']:,.0f} {'🔴' if m['s'] > 0 else '🟢'}".replace(",", "."), True
+        teks, kuat = f"{_pct(fade)}% BALIK {'🔴' if m['s'] > 0 else '🟢'}", True     # pendek: muat di kanan kartu
     elif p6 >= 0.6:
         teks, kuat = f"{_pct(p6)}% tetap {arah} {'🟢' if arah == 'NAIK' else '🔴'}", pb is None or pb >= 0.55
         if not kuat:
@@ -114,8 +114,9 @@ def row(m: dict, title: str, t0: datetime, now: datetime | None = None, asset: s
             teks = f"{_pct(1 - p6)}% berbalik {balik.lower()} ⚪"
     else:
         teks, kuat = f"≈ 50:50 ⚪ ({_pct(p6)}% tetap {arah.lower()})", False
-    label = (f"{'📈' if m['keep'] >= 0.6 else '📉'} {nama} {w:%H:%M} WIB: {pct_kembali}% lonjakan sudah kembali di "
-             f"menit 60")
+    label = (f"{'📈' if m['keep'] >= 0.6 else '📉'} {nama} {w:%H:%M} WIB: {pct_kembali}% lonjakan kembali di menit 60"
+             + (f" → peluang balik {'ke bawah' if m['s'] > 0 else 'ke atas'} harga rilis "
+                f"{m['open']:,.0f}".replace(",", ".") if fade >= 0.8 and m["keep"] < 0.6 else ""))
     kel = {"sudah berbalik": "sudah melewati harga rilis", "sisa < 30%": "≥ 70% kembali",
            "sisa 30–60%": "40–70% kembali", "sisa ≥ 60%": "< 40% kembali"}.get(c["label"], c["label"])
     per = STATS.get("btc_periode" if btc else "periode", "")

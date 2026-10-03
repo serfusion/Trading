@@ -1,0 +1,36 @@
+# Skema WR tinggi: TP pendek + 1-2 posisi berjalan (research/skema_wr.py)
+
+WR = sinyal dengan hasil bersih > 0. R per sinyal = rata-rata 5 posisi. DD = penurunan terdalam (R).
+
+== XAUUSD (LAMA < 2019) ==
+  skema                                            sinyal     WR   R/sin   total     DD    LAMA    BARU tahun+ | vs bawaan
+  bawaan: 1 TP 1R + 4 jalan (SL+ setelah TP1)        1554  48.3%  +0.208  +323.8  -43.6  +0.191  +0.221  10/14 |  | kalah beruntun maks 25
+  3 TP pendek 0,3/0,5/0,7R + 2 jalan                 2164  71.6%  +0.060  +130.3  -46.8  +0.054  +0.064   9/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  3 TP 0,5/0,7/1R + 2 jalan                          1856  65.1%  +0.088  +162.7  -46.5  +0.083  +0.091  10/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  3 TP 0,5/1/1,5R + 2 jalan                          1856  64.9%  +0.098  +182.5  -50.0  +0.090  +0.104  10/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  4 TP 0,3/0,5/0,7/1R + 1 jalan                      2164  71.6%  +0.036   +77.1  -59.0  +0.025  +0.043   9/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  4 TP 0,5/0,7/1/1,5R + 1 jalan                      1856  65.1%  +0.069  +127.8  -45.1  +0.056  +0.078  11/14 | lebih baik 4/14 th → tidak | kalah beruntun maks 12
+  2 TP 0,5/1R + 3 jalan                              1856  64.9%  +0.117  +217.5  -51.3  +0.117  +0.117  10/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  3 TP 0,5R semua + 2 jalan                          1856  65.6%  +0.077  +143.0  -46.3  +0.070  +0.082  10/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 12
+  3 TP 1R semua + 2 jalan                            1554  48.3%  +0.120  +186.1  -44.3  +0.101  +0.133  11/14 | lebih baik 3/14 th → tidak | kalah beruntun maks 25
+  5 TP pendek 0,3/0,5/0,7/1/1,5R (tanpa jalan)       2702  71.9%  +0.019   +50.2  -71.1  +0.002  +0.029   8/14 | lebih baik 2/14 th → tidak | kalah beruntun maks 12
+  5 TP 0,5R semua (WR maksimal)                      3114  65.8%  +0.008   +24.1 -103.3  -0.029  +0.032   7/14 | lebih baik 2/14 th → tidak | kalah beruntun maks 14
+  3 TP 0,5/0,7/1R + 2 jalan, SL+ setelah TP ke-2     1690  59.3%  +0.109  +183.4  -36.8  +0.105  +0.111  11/14 | lebih baik 5/14 th → tidak | kalah beruntun maks 15
+  3 TP 0,5/1/1,5R + 2 jalan, SL+ setelah 1R          1554  49.3%  +0.130  +202.0  -38.3  +0.113  +0.143  11/14 | lebih baik 4/14 th → tidak | kalah beruntun maks 25
+
+== BTCUSD (LAMA < 2021) ==
+  skema                                            sinyal     WR   R/sin   total     DD    LAMA    BARU tahun+ | vs bawaan
+  bawaan: 1 TP 1R + 4 jalan (SL+ setelah TP1)        2097  48.2%  +0.365  +765.7  -55.8  +0.655  +0.144   9/11 |  | kalah beruntun maks 22
+  3 TP pendek 0,3/0,5/0,7R + 2 jalan                 2938  68.8%  +0.078  +228.7  -74.0  +0.151  +0.015   7/11 | lebih baik 0/11 th → tidak | kalah beruntun maks 17
+  3 TP 0,5/0,7/1R + 2 jalan                          2517  62.2%  +0.121  +303.8  -63.1  +0.234  +0.029   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 19
+  3 TP 0,5/1/1,5R + 2 jalan                          2517  62.1%  +0.134  +338.4  -59.2  +0.253  +0.039   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 19
+  4 TP 0,3/0,5/0,7/1R + 1 jalan                      2938  68.8%  +0.029   +85.2  -77.4  +0.080  -0.015   7/11 | lebih baik 0/11 th → tidak | kalah beruntun maks 17
+  4 TP 0,5/0,7/1/1,5R + 1 jalan                      2517  62.2%  +0.063  +158.7  -67.5  +0.144  -0.002   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 19
+  2 TP 0,5/1R + 3 jalan                              2517  62.1%  +0.192  +483.5  -54.8  +0.342  +0.070   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 19
+  3 TP 0,5R semua + 2 jalan                          2517  62.6%  +0.111  +280.6  -64.1  +0.222  +0.022   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 19
+  3 TP 1R semua + 2 jalan                            2097  48.4%  +0.196  +411.7  -62.5  +0.396  +0.044   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 22
+  5 TP pendek 0,3/0,5/0,7/1/1,5R (tanpa jalan)       3822  69.0%  -0.009   -35.3  -97.1  +0.019  -0.036   5/11 | lebih baik 0/11 th → tidak | kalah beruntun maks 17
+  5 TP 0,5R semua (WR maksimal)                      4186  64.7%  -0.006   -26.4 -118.4  +0.038  -0.050   4/11 | lebih baik 0/11 th → tidak | kalah beruntun maks 20
+  3 TP 0,5/0,7/1R + 2 jalan, SL+ setelah TP ke-2     2270  56.6%  +0.159  +361.6  -61.4  +0.307  +0.044   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 22
+  3 TP 0,5/1/1,5R + 2 jalan, SL+ setelah 1R          2100  49.1%  +0.193  +405.5  -58.3  +0.385  +0.047   9/11 | lebih baik 1/11 th → tidak | kalah beruntun maks 22
+

@@ -141,6 +141,52 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `layers`, `sinyal_lapis.json`, env LAYER_SIGNALS). Tanda 📰 sinyal 💰 ≤ 4 jam setelah berita besar (`_berita_sinyal`,
   `sinyal_berita.json`, env NEWS_TAG): XAU +0,45R vs +0,21R, BTC +0,61R vs +0,37R. Aplikasi 3.21.
 
+## Skema WR tinggi (3 Okt 2026 — `docs/SKEMA_WR.md`)
+- `research/skema_wr.py`: 12 skema TP pendek (0,3–1,5R) + 1–2 jalan: WR 62–72% tetapi R/sinyal −45–95%; 0 lolos.
+  Terbaik kompromi "2 TP 0,5/1R + 3 jalan" (XAU +0,12R vs +0,21R, BTC +0,19R vs +0,37R, kalah beruntun 12 vs 25).
+  BELUM dipasang — menunggu pilihan pengguna.
+
+## Martingale (3 Okt 2026 — `docs/MARTINGALE.md`)
+- `research/martingale.py`: M1 antar sinyal 1/3/5x = lot rata-rata 3,1x, total/DD tidak lebih baik, DD 4x; M2 grid
+  1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
+  TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
+
+## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
+- `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
+  `data/research/eksternal/pair_h1/`) & `research/pair_tambahan.py` (kategori 💰 dipilih dari LAMA, diuji di BARU).
+  Lolos tipis: ETH (+0,06R BARU, 90% tahun +) & USD/JPY (+0,07R, tapi hampir semua dari 2022, gagal spread ×2);
+  10 pair lain tidak. Pembanding sejak Okt 2021: XAU +0,21R / BTC +0,19R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
+  ditemukan setelah lihat BARU → belum terbukti). TIDAK dipasang (tunggu "pasang").
+
+## Badge 💰 vs sinyal yang dikirim (3 Okt 2026 — `docs/KATEGORI_BADGE.md`)
+- `research/kategori_badge.py`: badge (`_core.STATS`) dihitung dengan "semua sinyal diberi label" (cara A) dan seluruh
+  periode; yang dikirim hanya 💰 (cara B) → XAU konf badge +0,09 vs dikirim +0,01 (73 sinyal tambahan −0,27R); BTC
+  konf melemah sejak Okt 2021. XAU 💰 tetap > biasa (2026 +50R, konf+⭐ +1,45R/sin); BTC 2026 biasa +66R > 💰 (5 th:
+  3–3, per sinyal 💰 2×). Saran "hentikan XAU konf" DICABUT (DD −41 → −66). Usulan badge cara B + angka sejak Okt
+  2021/tahun ini — menunggu "pasang". Selalu sebut cara hitung (A/B) saat melaporkan per kategori.
+
+## Verifikasi menyeluruh (3 Okt 2026 — `docs/VERIFIKASI.md`)
+- `research/verifikasi_cloud.py` memutar ulang kode cloud ASLI (`_core.tick`, konfigurasi live: H4 XAU, funding &
+  September BTC, lapisan; `--mentah` tanpa itu; `--td` data Twelve Data) candle demi candle →
+  `data/research/eksternal/verifikasi/`. `research/verifikasi.py` membandingkan dengan riset (96–98% sinyal sama,
+  kategori 99,7–99,9%), cek look-ahead (300/300), spread ASLI Exness per jam (BTC asli > asumsi 0,03%), bootstrap,
+  p-acak, sumber data; menulis `cloud/api/riwayat.json` (kartu 📜 & baris "teruji" aplikasi 3.26).
+- Hasil live + spread asli, sejak Okt 2021: XAU 💰 +0,21R/sin (2026 +56R), BTC 💰 +0,27R (2026 +43R); XAU konf &
+  BTC konf lemah (tidak diubah tanpa izin). `research/riwayat_uang.py` kini hanya pembanding (docs/eksternal).
+- BTC konf DIMATIKAN 3 Okt (izin "matikan btc konf"; `research/tanpa_konf.py`: BARU +0,33 vs +0,27R/sin, DD −32 vs −41):
+  cfg `skip_cats`, env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi. XAU konf tetap (tanpa konf BARU memburuk).
+- TP1 = 0,7R DIPASANG 3 Okt (izin pengguna "0,7": WR tinggi, 1 posisi TP, 4 jalan): replay cloud WR XAU 53→63%, BTC 50→56%
+  sejak 2021 dengan profit sama; LAMA profit lebih kecil. `_core.CFG["tp1_r"]` (docs/VERIFIKASI.md bagian akhir).
+- 3 Okt (izin "pasang"): `_core.STATS`/`TIER_STATS` = replay cloud Okt 2021–2026 TP1 0,7R (kategori yang dikirim tidak
+  berubah), sinyal_lapis.json teruji (lapisan XAU kini +0,04R — lemah), 📰 BTC mati (env NEWS_TAG_BTC=1), event sinyal
+  + tp2 1,5R / tp3 3R (patokan) / sl_plus; aplikasi 3.31 angka besar Entry/SL/TP1/TP2/TP3/SL+/TUTUP.
+- Sinyal tambahan DIPASANG 3 Okt (izin "pasang semua"; `research/sinyal_tambahan.py` 99 sumber, `tambahan_cloud.py`
+  replay): XAU set 100/40 & 120/50 (env XAU_EXTRA_SETS) + lapisan XAU mode any maks 6 (BARU +359R vs +144R); ETH ⭐/konf+⭐
+  hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
+  Kripto lain (`research/pair_kripto.py`, 25 koin): DOGE/ADA/XLM lolos riset saat 💰 BTC searah, tetapi pengguna memilih
+  "ETH saja" (3 Okt) → TIDAK dipasang. Forex baru & XAG tidak bisa diuji (Twelve Data gratis: data lama/berbayar).
+- Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
