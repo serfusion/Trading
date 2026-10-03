@@ -31,9 +31,11 @@ akhir pekan; spread $0,20; swap diabaikan).
 **Isi screenshot (akun Exness Cent, angka USC ÷ 100 = dolar):**
 - 3 riwayat, saldo masing-masing ±$430; profit tertutup $114 / $121 / $126 (bukan $150), sudah seluruh riwayat
   (Deposit − Withdrawal + Profit = Balance). Total: setor bersih ±$929, profit ±$360, saldo yang dipertaruhkan ±$1.290.
-- Keranjang 2 Okt: BUY 1,03 / 1,24 / 1,49 / 1,79 lot = pengali **1,2 (bukan 2)**; cocok 0,5 × 1,2^4..7 → 8 layer mulai
-  0,5 lot, jarak $1,35–2,1, ditutup bersama ±02:05 UTC di 4.154 (Twelve Data: emas turun dari 4.182 jam 00:00 ke
-  ±4.135–4.145 jam 01:10 lalu memantul). Posisi 17 Sep: 1 layer 0,5 lot TP +$8,5.
+- Keranjang 2 Okt: BUY 1,03 / 1,24 / 1,49 / 1,79 lot = pengali **1,2 (bukan 2)**, jarak $1,35–2,1, ditutup bersama
+  ±02:05 UTC di 4.154 (Twelve Data: emas turun dari 4.182 jam 00:00 ke ±4.135–4.145 jam 01:10 lalu memantul).
+  KOREKSI (bukti tambahan, `docs/SIGNAL_STRIKE.md`): itu L14–L17 dari rantai 0,10 × 1,2 (17 layer sejak 00:05, layer
+  minus tersembunyi karena urutan Profit ▲), bukan "8 layer mulai 0,5 lot"; 0,5 lot 17 Sep = L10 keranjang lain.
+  Varian A–G di bawah tetap berlaku sebagai pembanding; aturan hasil rekonstruksi diuji di SIGNAL_STRIKE.
 - Tab History hanya posisi tertutup (keranjang yang sedang mengambang tidak terlihat) dan diurutkan Profit ▲ (baris
   paling atas tidak terlihat). Status bar menunjukkan 2 Okt 13:00; 3 jam kemudian emas turun $100 (4.225 → 4.126).
 

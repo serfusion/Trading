@@ -3,8 +3,8 @@
 Pertanyaan pengguna: seorang trader XAU/USD mengaku dapat ±$150 per akun dari EA martingale "x2 sampai 20 layer
 lebih" dan mau membuka akun ke-3 di VPS — masuk akal? Screenshot: 3 akun Exness Cent (XAUUSDc), saldo masing-masing
 ±43.000 USC ($430), profit tertutup 11.420–12.616 USC ($114–126). Keranjang 2 Okt: BUY 1,03 / 1,24 / 1,49 / 1,79 lot
-(pengali 1,2 — bukan 2), jarak ±$1,35–2,1, ditutup bersama ±02:05 di 4.154; posisi pertama 17 Sep 0,5 lot TP +$8,5.
-0,5 x 1,2^4..7 = 1,04 / 1,24 / 1,49 / 1,79 → keranjang itu kemungkinan 8 layer mulai 0,5 lot.
+(pengali 1,2 — bukan 2), jarak ±$1,35–2,1, ditutup bersama ±02:05 di 4.154. Koreksi (research/signal_strike.py): itu
+L14–L17 rantai 0,10 x 1,2 (17 layer), bukan 8 layer mulai 0,5 lot; varian A–G tetap dipakai sebagai pembanding.
 
 Simulasi (aturan ditulis ulang, bukan kode EA): buka layer 1 seketika; tiap harga melawan `step` dari layer terakhir
 tambah layer (lot x `mult`, dibulatkan 0,01, maks `maxlay`, ditolak bila free margin kurang, leverage 1:2000);
@@ -73,21 +73,33 @@ def arrays(df: pd.DataFrame) -> tuple:
     return _ARR[id(df)]
 
 
+def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float]:
+    """rek=True: lot berikut = round(lot sebelumnya x mult, 2) — cocok dengan deal Signal Strike (0,07 → 1,24 di L17)."""
+    if not rek:
+        return [round(lot0 * mult ** i, 2) for i in range(n)]
+    out = [lot0]
+    while len(out) < n:
+        out.append(round(out[-1] * mult + 1e-9, 2))
+    return out
+
+
 def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: float, maxlay: int,
-        i0: int = 1, i1: int | None = None, stop: bool = False, one: bool = False):
+        modal: float = MODAL, rek: bool = False, i0: int = 1, i1: int | None = None, stop: bool = False,
+        one: bool = False, info: list | None = None):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
-    one=True hanya satu keranjang (TP atau akun habis)."""
+    one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
+    (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis)."""
     o, h, l, c = arrays(df)
     t = df.index
-    lots_tab = [round(lot0 * mult ** i, 2) for i in range(maxlay)]
+    lots_tab = lot_table(lot0, mult, maxlay, rek)
     closes, ruins, depth = [], [], []      # (indeks bar, profit USC) / indeks bar / layer per keranjang
-    st = dict(bal=MODAL, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False)
+    st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[])
 
     def open_basket(p: float, i: int) -> None:
         d = side if side else (1 if c[i - 1] >= o[i - 1] else -1)
         x = d * p
         st.update(d=d, n=1, sl=lots_tab[0], sc=lots_tab[0] * (x + SPREAD), last=x,
-                  used=lots_tab[0] * USC * p / LEV)
+                  used=lots_tab[0] * USC * p / LEV, mineq=st["bal"], ent=[x + SPREAD])
 
     def seg(a: float, b: float, i: int, gap: bool) -> None:
         while not st["done"]:
@@ -106,13 +118,18 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                     st["sc"] += lot * (lvl + SPREAD)
                     st["used"] += need
                     st["last"] = lvl
+                    st["ent"].append(lvl + SPREAD)
                     if gap:
                         break
-                if st["bal"] + USC * (st["sl"] * xb - st["sc"]) <= 0:
+                eq = st["bal"] + USC * (st["sl"] * xb - st["sc"])
+                st["mineq"] = min(st["mineq"], eq)
+                if eq <= 0:
                     ruins.append(i)
                     depth.append(st["n"])
+                    if info is not None:
+                        info.append((i, st["n"], st["mineq"], -st["bal"], None))
                     st["done"] = one
-                    st["bal"] = MODAL
+                    st["bal"] = modal
                     open_basket(b, i)
                 return
             tpx = st["sc"] / st["sl"] + tp
@@ -120,11 +137,14 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                 return
             px = xb if gap else tpx
             st["bal"] += USC * (st["sl"] * px - st["sc"])
-            gain = st["bal"] - MODAL
+            gain = st["bal"] - modal
             closes.append((i, gain))
             depth.append(st["n"])
+            if info is not None:
+                info.append((i, st["n"], st["mineq"], gain,
+                             [lots_tab[k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
             st["done"] = one
-            st["bal"] = MODAL                             # kelebihan ditarik (bisa negatif kecil karena spread)
+            st["bal"] = modal                             # kelebihan ditarik (bisa negatif kecil karena spread)
             a = d * px
             open_basket(a, i)
             if gap:
@@ -154,9 +174,10 @@ def keranjang(df: pd.DataFrame, v: tuple, starts: pd.DatetimeIndex, cap_days: in
         cl, ruins, depth, _ = sim(df, *v[1:], i0=int(i0), i1=i1, one=True)
         hasil = "habis" if len(ruins) else ("tp" if len(cl) else "terbuka")
         end = ruins[0] if len(ruins) else (cl.t.iloc[0] if len(cl) else t[min(i1, len(t)) - 1])
+        modal = v[7] if len(v) > 7 else MODAL
         rows.append(dict(t=t[i0], hasil=hasil, jam=(end - t[i0]).total_seconds() / 3600,
-                         usd=cl.usc.sum() / 100 if len(cl) else (-430.0 if len(ruins) else 0.0),
-                         layer=int(depth[0]) if len(depth) else 0, akhir=end))
+                         usd=cl.usc.sum() / 100 if len(cl) else (-modal / 100 if len(ruins) else 0.0),
+                         layer=int(depth[0]) if len(depth) else 0, akhir=end, modal=modal / 100))
     return pd.DataFrame(rows)
 
 
@@ -165,7 +186,7 @@ def ringkas_keranjang(k: pd.DataFrame, lab: str) -> str:
         return f"  {lab}: -"
     p = (k.hasil == "habis").mean()
     win = k[k.hasil == "tp"]
-    ev = (1 - p) * win.usd.mean() - p * 430
+    ev = (1 - p) * win.usd.mean() - p * k.modal.iloc[0]
     satu = f"1 dari {1 / p:5.0f}" if p else "tidak ada"
     return (f"  {lab:26s} n {len(k):5d} | akun habis {100 * p:4.1f}% ({satu} keranjang) | untung rata ${win.usd.mean():5.1f}"
             f" | durasi median {k.jam.median():4.1f} jam | layer ≥10: {100 * (k.layer >= 10).mean():4.1f}% | nilai "
@@ -196,7 +217,7 @@ def mulai(df: pd.DataFrame, v: tuple, starts: pd.DatetimeIndex, cap_days: int = 
         cl, ruins, _, _ = sim(df, *v[1:], i0=i0, i1=i1, stop=True)
         end = ruins[0] if len(ruins) else t[min(i1, len(t)) - 1]
         rows.append(dict(t=t[i0], habis=len(ruins) > 0, hari=(end - t[i0]).total_seconds() / 86400,
-                         tarik=cl.usc.sum() / 100))
+                         tarik=cl.usc.sum() / 100, modal=(v[7] if len(v) > 7 else MODAL) / 100))
     return pd.DataFrame(rows)
 
 
@@ -204,7 +225,7 @@ def ringkas_mulai(m: pd.DataFrame, lab: str) -> str:
     if m.empty:
         return f"  {lab}: -"
     pct = lambda d: 100 * ((m.hari <= d) & m.habis).mean()  # noqa: E731
-    bersih = m.tarik - 430 * m.habis
+    bersih = m.tarik - m.modal * m.habis
     return (f"  {lab:24s} n {len(m):3d} | habis ≤30 hari {pct(30):3.0f}% ≤90 hari {pct(90):3.0f}% ≤1 th {pct(365):3.0f}% | "
             f"umur median {m.hari.median():5.0f} hari | ditarik median ${m.tarik.median():6,.0f} | bersih rata ${bersih.mean():+6,.0f} (median "
             f"${bersih.median():+5,.0f})")

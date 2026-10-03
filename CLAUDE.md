@@ -153,6 +153,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - EA grid trader (screenshot 3 akun Cent, `research/martingale_ea.py`, MARTINGALE bagian akhir): lot ×1,2 bukan ×2,
   profit $114–126/akun; ×2 20 layer mustahil di $430; ×1,2 habis ±layer 17; 1 dari 13–165 keranjang menghabiskan akun,
   nilai harapan/keranjang negatif di semua varian. Twelve Data XAU memuat bar akhir pekan → buang sebelum simulasi.
+- Signal Strike EA (bukti Telegram + 17 deal + laporan MT5, `research/signal_strike.py`, `docs/SIGNAL_STRIKE.md`):
+  keranjang 2 Okt direkonstruksi persis (L1 0,07 @4.177,890 → −159,64; lot ×1,2 dibulatkan per layer, L17 1,24, TP rata-rata
+  +$1,9, floating −16…−26% untuk +$12,75). Laporan MT5 riwayat = DD SALDO saja (2.937,30 = 14 layer minus satu Close All).
+  Aturan rekonstruksi: harapan/keranjang negatif semua varian; NFP 2 Okt → akun $524 habis 15:45 UTC bila selalu aktif.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
