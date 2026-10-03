@@ -295,12 +295,55 @@ membacanya lewat `research/news_data.load_calendar()` setelah
 
 - **Token hanya di Vercel, tidak di APK** (APK bisa dibongkar). GitHub → Settings → Developer settings →
   Fine-grained tokens → *Generate*: Repository access = hanya `serfusion/Trading`, Permissions → *Contents: Read and
-  write*. Salin ke Vercel → Environment Variables: `GITHUB_TOKEN` → Redeploy. Opsional: `ARSIP_REPO`
-  (bawaan `serfusion/Trading`), `ARSIP_BRANCH` (bawaan `arsip-berita`, dibuat otomatis).
+  write*. Salin ke Vercel → Environment Variables: **Key** `GITHUB_TOKEN`, **Value** = token (diawali `github_pat_`)
+  → Redeploy. **Token hanya di `GITHUB_TOKEN`.** `ARSIP_REPO` dan `ARSIP_BRANCH` sebaiknya TIDAK dibuat (bawaan
+  `serfusion/Trading` & `arsip-berita`); bila dibuat, isinya nama repo/branch, bukan token. Isi yang salah bentuk
+  diabaikan otomatis, dan status di aplikasi tidak pernah menampilkan token (disensor `•••`).
+- Bila token pernah tampil di layar/tangkapan layar/chat: GitHub → Fine-grained tokens → token itu → **Revoke**,
+  buat token baru, ganti nilai `GITHUB_TOKEN`, Redeploy.
 - **Tidak kena limit**: kalender ForexFactory di-cache di Supabase 10 menit untuk semua pembukaan aplikasi
   (baris `kalender`); GitHub hanya ditulis bila isi berubah, paling sering tiap 15 menit kecuali ada Act baru
   (baris `arsip`). Pemakaian ±beberapa commit per hari, jauh di bawah batas API GitHub (5.000 permintaan/jam).
 - Commit arsip tidak memicu deploy: `cloud/vercel.json` → `ignoreCommand` hanya membangun ulang bila folder `cloud/`
   berubah. CI APK hanya berjalan bila `android/` berubah.
 - Cek: respons `GET /api/chat` berisi `"arsip": {"status": "tersimpan" | "tidak berubah" | "ditunda ..." | "mati
-  (GITHUB_TOKEN belum diisi di Vercel)"}`.
+  (GITHUB_TOKEN belum diisi di Vercel)" | "gagal: ..."}`. Arti "gagal": *GITHUB_TOKEN bukan token GitHub* = nilai
+  bukan token (mis. tertukar dengan nama repo); *ditolak GitHub (HTTP 401)* = token salah/kedaluwarsa/dicabut;
+  *tidak bisa membaca repo (HTTP 404)* = Repository access token tidak memuat repo ini atau Resource owner salah
+  (repo milik organisasi `serfusion` → Resource owner harus `serfusion`); *HTTP 403* = izin Contents masih Read-only.
+
+## 🎲 Kalshi di kartu 🎯 (30 Sep 2026, aplikasi 3.16)
+
+`GET /api/chat` → `persiapan.berita[].kalshi` untuk CPI, core CPI, NFP, pengangguran, dan core PCE pekan ini: peluang
+angka di atas / sama / di bawah konsensus dari pasar Kalshi (API publik, tanpa kunci), dan khusus CPI peluang emas naik
+1 menit (`cloud/api/kalshi.json` dari `research/kalshi_uji.py`). Kalshi dibaca paling sering tiap 15 menit untuk semua
+pengguna (baris Supabase `kalshi`); bila Kalshi gagal, data terakhir dipakai dan kartu tetap tampil tanpa baris 🎲.
+Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.
+
+## Act otomatis berlapis & perkiraan hari H (1 Okt 2026, aplikasi 3.17)
+
+- `cloud/api/_aktual.py`: Act diambil dari BLS API (tanpa kunci; opsional `BLS_API_KEY`) → FRED API (**disarankan**:
+  env `FRED_API_KEY`) → CSV FRED; hasil disimpan di Supabase (baris `aktual`). Respons `GET /api/chat` memuat
+  `"aktual": {"status", "sumber"}` dan `calendar[].actual_info` (alasan bila kosong).
+- `cloud/api/_hari_h.py` + `_polymarket.py`: `persiapan.berita[].hari_h` (sebelum rilis), `.hasil_rilis` (setelah
+  Act), `persiapan.fed` (keputusan Fed berikutnya). Cache Supabase: `kalshi`, `polymarket`, `polymarket_fed`,
+  `hari_h` (riwayat peluang). Detail & bukti: `docs/HARI_H.md`.
+
+## Sinyal berlapis & tanda 📰 (2 Okt 2026 — `docs/SINYAL_LAPIS.md`)
+
+- Lapisan: sinyal 💰 baru di set yang sama selagi sinyal lama masih berjalan (XAU: setelah TP1 sinyal terakhir; BTC:
+  breakout baru, maks 2 per set). Lot ½, hanya sinyal (auto order tetap untuk sinyal dasar). Matikan: env
+  `LAYER_SIGNALS=0`.
+- 📰: sinyal 💰 yang lahir ≤ 4 jam setelah berita AS besar diberi tanda + statistik riwayat; kalender dari cache
+  Supabase `kalender`, Act dari baris `aktual`. Matikan: env `NEWS_TAG=0`.
+- 🎯 WR tinggi (3 Okt 2026, `docs/SINYAL_TENANG.md`): sinyal 🔁 lapisan BTC saat ATR14 H1 ≥ 1,5 × median ATR14 480 candle
+  (`_core.vol_rel`) diberi field `wr_tinggi` {wr 76, wr_lama 78, avg_r 0,46, n 121, vol_rel} + baris teks ntfy. Hanya label;
+  sinyal, lot, auto order tidak berubah. Matikan: env `WR_TINGGI=0`. Aplikasi 3.34: pill & notifikasi 🎯.
+
+## 📊 Status tren & hitung mundur (3 Okt 2026, aplikasi 3.24)
+
+Heartbeat cloud memuat `status` (`_core.trend_status`): arah D1 (close kemarin vs EMA50 harian) & H4 (close H4 vs
+EMA50), level breakout tiap set untuk candle H1 berikutnya, waktu cek sinyal berikutnya. Aplikasi (tab Sinyal,
+`StatusCard.kt`) menampilkan per pair: 🟢 BULLISH / 🔴 BEARISH / ⚪ CAMPURAN, hitung mundur detik ke tutup candle H1,
+jarak ke level BUY/SELL, hitung mundur ke berita berikutnya (≤ 24 jam), dan setelah rilis baris "lonjakan memudar"
+(`_pudar`, XAU & BTC). Keterangan saja — bukan sinyal entry.

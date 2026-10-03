@@ -1,0 +1,86 @@
+Sinyal 💰 replay kode cloud (TP1 0,7R, spread asli). Kolom: n (% dari semua), WR, R/sinyal, total R.
+
+XAU dasar (cloud_XAU.csv)
+  semua (sekarang)                   LAMA n 1422 (100%) WR  60% +0.140R total   +198R | BARU n  948 (100%) WR  63% +0.172R total   +163R
+  lewati berita                      LAMA n 1095 ( 77%) WR  59% +0.131R total   +144R | BARU n  726 ( 77%) WR  63% +0.230R total   +167R
+  lewati crash                       LAMA n  777 ( 55%) WR  59% +0.194R total   +151R | BARU n  605 ( 64%) WR  60% +0.165R total   +100R
+  hanya volatilitas rendah (≤ median) LAMA n  689 ( 48%) WR  60% +0.238R total   +164R | BARU n  505 ( 53%) WR  59% +0.158R total    +80R
+  TENANG penuh (3 syarat)            LAMA n  379 ( 27%) WR  61% +0.383R total   +145R | BARU n  307 ( 32%) WR  57% +0.229R total    +70R
+  kebalikan: hanya volatil (> median) LAMA n  733 ( 52%) WR  61% +0.047R total    +35R | BARU n  443 ( 47%) WR  67% +0.188R total    +83R
+  hanya sangat volatil (≥ 1,5× median) LAMA n  108 (  8%) WR  59% +0.252R total    +27R | BARU n   61 (  6%) WR  80% +0.480R total    +29R
+  hanya saat/sesudah berita          LAMA n  327 ( 23%) WR  65% +0.168R total    +55R | BARU n  222 ( 23%) WR  62% -0.017R total     -4R
+  per tingkat volatilitas (ATR H1 / median 20 hari):
+                n         WR           R      
+    per      BARU LAMA  BARU  LAMA  BARU  LAMA
+    vb                                        
+    <0.75     153  188  0.59  0.62  0.28  0.92
+    0.75-1    352  501  0.59  0.59  0.11 -0.02
+    1-1.25    260  420  0.64  0.65  0.18  0.00
+    1.25-1.5  122  205  0.66  0.53  0.05  0.04
+    1.5-2      47   86  0.83  0.60  0.44  0.21
+    >2         14   22  0.71  0.55  0.61  0.41
+  volatilitas ≥ 1,5×, WR per tahun: 2013:100%(n8) 2014:50%(n10) 2015:44%(n9) 2016:79%(n14) 2017:0%(n2) 2018:65%(n26) 2019:71%(n17) 2020:17%(n12) 2021:50%(n10) 2022:60%(n15) 2023:85%(n26) 2024:100%(n3) 2025:83%(n12) 2026:100%(n5)
+
+XAU lapisan (cloud_XAU.csv)
+  semua (sekarang)                   LAMA n 2236 (100%) WR  59% +0.203R total   +454R | BARU n 1859 (100%) WR  62% +0.234R total   +434R
+  lewati berita                      LAMA n 1865 ( 83%) WR  59% +0.235R total   +438R | BARU n 1625 ( 87%) WR  62% +0.179R total   +290R
+  lewati crash                       LAMA n 1630 ( 73%) WR  56% +0.195R total   +317R | BARU n 1556 ( 84%) WR  63% +0.201R total   +313R
+  hanya volatilitas rendah (≤ median) LAMA n  931 ( 42%) WR  56% +0.300R total   +279R | BARU n  759 ( 41%) WR  57% +0.332R total   +252R
+  TENANG penuh (3 syarat)            LAMA n  653 ( 29%) WR  51% +0.316R total   +207R | BARU n  600 ( 32%) WR  58% +0.316R total   +190R
+  kebalikan: hanya volatil (> median) LAMA n 1305 ( 58%) WR  62% +0.135R total   +176R | BARU n 1100 ( 59%) WR  66% +0.166R total   +182R
+  hanya sangat volatil (≥ 1,5× median) LAMA n  281 ( 13%) WR  60% +0.232R total    +65R | BARU n  213 ( 11%) WR  67% +0.193R total    +41R
+  hanya saat/sesudah berita          LAMA n  371 ( 17%) WR  58% +0.044R total    +16R | BARU n  234 ( 13%) WR  63% +0.616R total   +144R
+  per tingkat volatilitas (ATR H1 / median 20 hari):
+                n         WR           R      
+    per      BARU LAMA  BARU  LAMA  BARU  LAMA
+    vb                                        
+    <0.75     197  267  0.56  0.64  0.48  1.16
+    0.75-1    562  664  0.58  0.53  0.28 -0.05
+    1-1.25    535  627  0.64  0.60  0.21  0.03
+    1.25-1.5  352  397  0.67  0.65  0.08  0.23
+    1.5-2     166  229  0.73  0.54  0.33  0.16
+    >2         47   52  0.47  0.87 -0.29  0.57
+  volatilitas ≥ 1,5×, WR per tahun: 2013:69%(n32) 2014:46%(n24) 2015:86%(n7) 2016:66%(n61) 2017:54%(n28) 2018:64%(n28) 2019:56%(n45) 2020:65%(n48) 2021:0%(n8) 2022:68%(n60) 2023:52%(n46) 2024:72%(n74) 2025:73%(n30) 2026:100%(n3)
+
+BTC dasar (cloud_BTC.csv)
+  semua (sekarang)                   LAMA n  818 (100%) WR  60% +0.691R total   +565R | BARU n  735 (100%) WR  57% +0.363R total   +267R
+  lewati berita                      LAMA n  738 ( 90%) WR  59% +0.643R total   +474R | BARU n  667 ( 91%) WR  56% +0.336R total   +224R
+  lewati crash                       LAMA n  509 ( 62%) WR  57% +0.743R total   +378R | BARU n  430 ( 59%) WR  58% +0.381R total   +164R
+  hanya volatilitas rendah (≤ median) LAMA n  440 ( 54%) WR  66% +1.089R total   +479R | BARU n  292 ( 40%) WR  56% +0.114R total    +33R
+  TENANG penuh (3 syarat)            LAMA n  250 ( 31%) WR  67% +1.314R total   +329R | BARU n  144 ( 20%) WR  58% +0.261R total    +38R
+  kebalikan: hanya volatil (> median) LAMA n  378 ( 46%) WR  53% +0.227R total    +86R | BARU n  443 ( 60%) WR  58% +0.527R total   +234R
+  hanya sangat volatil (≥ 1,5× median) LAMA n  108 ( 13%) WR  63% +0.555R total    +60R | BARU n   92 ( 13%) WR  45% +0.285R total    +26R
+  hanya saat/sesudah berita          LAMA n   80 ( 10%) WR  76% +1.133R total    +91R | BARU n   68 (  9%) WR  68% +0.627R total    +43R
+  per tingkat volatilitas (ATR H1 / median 20 hari):
+                n         WR           R      
+    per      BARU LAMA  BARU  LAMA  BARU  LAMA
+    vb                                        
+    <0.75     101  187  0.53  0.69 -0.04  1.46
+    0.75-1    191  253  0.57  0.64  0.20  0.82
+    1-1.25    226  181  0.56  0.56  0.51  0.26
+    1.25-1.5  125   89  0.70  0.35  0.73 -0.24
+    1.5-2      67   71  0.42  0.65  0.30  0.60
+    >2         25   37  0.52  0.59  0.26  0.47
+  volatilitas ≥ 1,5×, WR per tahun: 2016:100%(n9) 2017:73%(n11) 2018:64%(n22) 2019:50%(n28) 2020:70%(n20) 2021:43%(n21) 2022:17%(n18) 2023:84%(n19) 2024:36%(n14) 2025:45%(n33) 2026:40%(n5)
+
+BTC lapisan (cloud_BTC.csv)
+  semua (sekarang)                   LAMA n  559 (100%) WR  65% +0.839R total   +469R | BARU n  471 (100%) WR  61% +0.404R total   +190R
+  lewati berita                      LAMA n  517 ( 92%) WR  65% +0.904R total   +467R | BARU n  427 ( 91%) WR  60% +0.413R total   +176R
+  lewati crash                       LAMA n  443 ( 79%) WR  65% +0.996R total   +441R | BARU n  308 ( 65%) WR  61% +0.240R total    +74R
+  hanya volatilitas rendah (≤ median) LAMA n  253 ( 45%) WR  62% +1.141R total   +289R | BARU n  163 ( 35%) WR  52% +0.360R total    +59R
+  TENANG penuh (3 syarat)            LAMA n  192 ( 34%) WR  62% +1.477R total   +284R | BARU n   76 ( 16%) WR  54% +0.522R total    +40R
+  kebalikan: hanya volatil (> median) LAMA n  306 ( 55%) WR  68% +0.589R total   +180R | BARU n  308 ( 65%) WR  66% +0.426R total   +131R
+  hanya sangat volatil (≥ 1,5× median) LAMA n  110 ( 20%) WR  78% +0.531R total    +58R | BARU n  121 ( 26%) WR  76% +0.464R total    +56R
+  hanya saat/sesudah berita          LAMA n   42 (  8%) WR  74% +0.035R total     +1R | BARU n   44 (  9%) WR  66% +0.313R total    +14R
+  per tingkat volatilitas (ATR H1 / median 20 hari):
+                n         WR           R      
+    per      BARU LAMA  BARU  LAMA  BARU  LAMA
+    vb                                        
+    <0.75      43   98  0.60  0.60  0.11  1.45
+    0.75-1    120  155  0.48  0.63  0.45  0.95
+    1-1.25    122  140  0.61  0.64  0.43  0.88
+    1.25-1.5   65   56  0.57  0.61  0.34 -0.02
+    1.5-2      84   69  0.73  0.81  0.31  0.46
+    >2         37   41  0.84  0.73  0.81  0.65
+  volatilitas ≥ 1,5×, WR per tahun: 2016:100%(n22) 2017:84%(n19) 2018:100%(n12) 2019:47%(n15) 2020:70%(n33) 2021:75%(n12) 2022:56%(n27) 2023:89%(n28) 2024:88%(n25) 2025:69%(n36) 2026:100%(n2)
+

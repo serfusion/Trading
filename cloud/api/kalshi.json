@@ -1,0 +1,69 @@
+{
+ "dibuat": "research/kalshi_uji.py",
+ "akurasi": {
+  "KXCPI": {
+   "n": 21,
+   "benar": 76.2,
+   "sama": 30.0,
+   "tahun": "2022–2025"
+  },
+  "KXCPICORE": {
+   "n": 18,
+   "benar": 77.8,
+   "sama": 30.8,
+   "tahun": "2022–2025"
+  },
+  "KXPAYROLLS": {
+   "n": 23,
+   "benar": 56.5,
+   "sama": 0.0,
+   "tahun": "2023–2025"
+  },
+  "KXPCECORE": {
+   "n": 3,
+   "benar": 100.0,
+   "sama": 62.5,
+   "tahun": "2022–2025"
+  },
+  "KXU3": {
+   "n": 22,
+   "benar": 50.0,
+   "sama": 26.7,
+   "tahun": "2022–2025"
+  }
+ },
+ "sinyal": {
+  "Exness": {
+   "n": 18,
+   "benar": 72.2,
+   "rata60": 3.28,
+   "real": 2.68,
+   "t": 1.9,
+   "tahun": "2023–2025"
+  },
+  "Dukascopy": {
+   "n": 18,
+   "benar": 77.8,
+   "rata60": 2.77,
+   "real": 2.11,
+   "t": 1.6,
+   "tahun": "2023–2025"
+  }
+ },
+ "ambang": 0.6,
+ "reaksi_cpi": {
+  "bawah": {
+   "naik": 0.845,
+   "n": 71
+  },
+  "atas": {
+   "naik": 0.266,
+   "n": 64
+  },
+  "sama": {
+   "naik": 0.675,
+   "n": 40
+  },
+  "tahun": "2010–2025"
+ }
+}

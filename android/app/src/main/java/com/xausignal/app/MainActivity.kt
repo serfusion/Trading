@@ -150,6 +150,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     val moneyVersion by SignalRepository.moneyVersion.collectAsState()
     var showSettings by remember { mutableStateOf(SignalRepository.topic().isBlank()) }
     var showTerms by remember { mutableStateOf(!SignalRepository.termsAccepted()) }
+    var showInfo by remember { mutableStateOf(false) }      // ⓘ: urutan sinyal + saran entry (3.33)
     var tab by remember { mutableIntStateOf(0) }
     val money = remember(moneyVersion) { SignalRepository.money() }
     val follow = remember(moneyVersion) { SignalRepository.followed() }
@@ -190,8 +191,8 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                     }
                 },
                 actions = {
-                    IconButton(onClick = { showTerms = true }) {
-                        Icon(Icons.Filled.Info, contentDescription = "Syarat & Ketentuan")
+                    IconButton(onClick = { showInfo = true }) {
+                        Icon(Icons.Filled.Info, contentDescription = "Info sinyal")
                     }
                     IconButton(onClick = { showSettings = true }) {
                         Icon(Icons.Filled.Settings, contentDescription = "Pengaturan")
@@ -273,7 +274,23 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
                 onSettingsSaved()
             }
         )
+    } else if (showInfo) {
+        InfoDialog(money, onTerms = { showInfo = false; showTerms = true }) { showInfo = false }
     }
+}
+
+/** ⓘ Info (aplikasi 3.33, permintaan pengguna): urutan sinyal terbaik + saran entry modal & lot, lalu S&K. */
+@Composable
+fun InfoDialog(money: MoneySettings, onTerms: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Info sinyal", fontWeight = FontWeight.Bold) },
+        text = {
+            Column(Modifier.verticalScroll(androidx.compose.foundation.rememberScrollState())) { RankCard(money) }
+        },
+        confirmButton = { TextButton(onClick = onDismiss) { Text("Tutup") } },
+        dismissButton = { TextButton(onClick = onTerms) { Text("Syarat & Ketentuan") } },
+    )
 }
 
 @Composable
@@ -389,7 +406,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                     FilterChip(selected = !slAuto, onClick = { slAuto = false }, label = { Text("SL+ setelah TP1") })
                 }
                 Text(
-                    "1 posisi TP1 (1R), 4 posisi running sampai sinyal TUTUP. " +
+                    "1 posisi TP1 (0,7R), 4 posisi running sampai sinyal TUTUP. " +
                         (if (slAuto) "Otomatis: ⚡ & BTC → SL semua posisi ke entry saat profit 0,7R (WR lebih " +
                             "tinggi, profit setara); XAU lainnya → SL+ setelah TP1 kena (profit XAU lebih besar)."
                         else "TP1 kena → SL 4 posisi ke entry (SL+)."),

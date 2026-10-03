@@ -53,7 +53,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
     // posisi yang masih terbuka di cloud tetapi data sinyalnya tidak ada di HP (mis. aplikasi di-install ulang)
     val orphans = prices.values.flatMap { SignalRepository.cloudOpen(it) }
         .filter { x ->
-            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC")) "BTC" else "GAP"
+            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC") || x.symbol.startsWith("ETH")) "BTC" else "GAP"
             x.id !in signalIds && grp in follow
         }
         .groupBy { SignalRepository.twinKey(it.id) }.values.toList()
@@ -67,21 +67,22 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
     // Sinyal kembar (beberapa set di candle sama: simbol, arah, entry sama) digabung jadi 1 kartu ×N.
     val open = SignalRepository.openSignals(events, prices)
         .groupBy { Triple(it.symbol(), it.dir, it.price("entry")) }.values.toList()
+    androidx.compose.runtime.LaunchedEffect(Unit) { Verified.load() }       // angka teruji untuk baris kartu sinyal
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { TickerCard(prices, connection) }
+        item { StatusCards(prices, follow) }      // 📊 status tren & hitung mundur (3.24)
         val active = open.size + orphans.size
         item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
         items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
         if (active == 0) {
             item {
                 AppCard {
-                    Text("⏳ WAIT — belum ada sinyal 💰", fontWeight = FontWeight.Bold)
-                    Text("Jangan entry manual. Cloud mengecek pasar tiap 10 menit; cek berikutnya ${nextCheckText()}.",
-                        style = MaterialTheme.typography.labelSmall, color = Muted)
+                    Text("⏳ Belum ada sinyal", fontWeight = FontWeight.Bold)
+                    Text("Cek berikutnya ${nextCheckText()}", style = MaterialTheme.typography.labelSmall, color = Muted)
                 }
             }
         } else {
@@ -202,27 +203,43 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
     signal.warText()?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor) }
-    val m = signal.moneyBadge()
-    val st = signal.stars()
-    if (signal.type == "signal" && !signal.json.has("money") && !signal.isGap()) {
-        // dikirim cloud versi lama (sebelum 28 Sep 10:02 WIB): semua sinyal dikirim, ★ = searah tren H4/EMA, belum ada 💰
-        Text("Sinyal format lama (sebelum ada 💰): ★ = searah tren H4, bukan win rate. Belum tentu termasuk sinyal 💰.",
-            style = MaterialTheme.typography.labelSmall, color = Muted)
-    }
-    if (m > 0 || st > 0 || signal.json.has("wr")) {
+    if (signal.type == "signal" && (signal.isLayer() || signal.newsTag() != null || signal.wrTinggi() != null)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-            if (signal.isZap()) Text("⚡", fontWeight = FontWeight.Bold)
-            if (m > 0) Text("💰".repeat(m))
-            if (st > 0) Text("★".repeat(st), color = Gold, fontWeight = FontWeight.Bold)
-            Spacer(Modifier.weight(1f))
-            if (signal.json.has("wr")) {
-                // ⚡ dengan SL+ 0,7R (otomatis): pakai statistik skema itu (WR lebih tinggi)
-                val s07 = signal.json.has("wr07") && SignalRepository.money().use07(signal.id, signal.tier())
-                val avg = signal.json.optDouble(if (s07) "avg_r07" else "avg_r")
-                Pill("${signed(avg)}R", if (avg > 0) BuyColor else SellColor)
-                Pill("WR ${fmt(signal.json.optDouble(if (s07) "wr07" else "wr"), 0)}%", Gold)
-            }
+            signal.wrTinggi()?.let { Pill("🎯 WR tinggi ${fmt(it.optDouble("wr"), 0)}%", BuyColor, solid = true) }
+            if (signal.isLayer()) Pill("🔁 Lapisan • lot ½", Gold)
+            signal.newsTag()?.let { Pill("📰 Setelah ${it.optString("berita").ifBlank { "berita" }}", Gold) }
         }
+    }
+    if (signal.type == "signal" && !signal.isGap()) TestedLine(signal)
+}
+
+/**
+ * Satu baris "teruji": hasil kategori sinyal ini dari replay kode cloud asli 2012–2026 dengan spread asli Exness
+ * (research/verifikasi.py -> cloud/api/riwayat.json "kat"), periode sejak Okt 2021 + tahun ini (aplikasi 3.26).
+ * Cloud lama / belum dimuat: angka badge bawaan sinyal.
+ */
+@Composable
+private fun TestedLine(signal: SignalEvent) {
+    val asset = if (signal.symbol().startsWith("BTC")) "BTC" else "XAU"
+    val cat = signal.str("cat").substringAfter(" ").ifBlank { null }
+    val k = cat?.let { Verified.data?.optJSONObject(asset)?.optJSONObject("kat")?.optJSONObject(it) }
+    val baru = k?.optJSONObject("baru")
+    val text: String
+    val avg: Double
+    if (baru != null && baru.optInt("n") > 0) {
+        avg = baru.optDouble("avg")
+        val ini = k?.optJSONObject("tahun_ini")
+        text = "Teruji sejak 2021: WR ${fmt(baru.optDouble("wr"), 0)}% • ${signed(avg)}R/sinyal" +
+            (ini?.takeIf { it.optInt("n") > 0 }?.let { " • 2026 ${signed(it.optDouble("avg"))}R" } ?: "")
+    } else if (signal.json.has("wr")) {
+        avg = signal.json.optDouble("avg_r")
+        text = "WR ${fmt(signal.json.optDouble("wr"), 0)}% • ${signed(avg)}R/sinyal"
+    } else return
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        if (signal.isZap()) Text("⚡", fontWeight = FontWeight.Bold)
+        if (signal.moneyBadge() > 0) Text("💰".repeat(signal.moneyBadge()))
+        Text(text.replace('.', ','), style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold,
+            color = if (avg > 0.05) BuyColor else if (avg < 0) SellColor else Gold)
     }
 }
 
@@ -259,9 +276,13 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
                 }
             }
         }
-        MetricRow {
-            Metric("SL", signal.price("sl"), SellColor, compact = true)
-            Metric(if (signal.isGap()) "TP" else "TP1", signal.price("tp1"), BuyColor, compact = true)
+        if (signal.isGap()) {
+            MetricRow {
+                Metric("SL", signal.price("sl"), SellColor, compact = true)
+                Metric("TP", signal.price("tp1"), BuyColor, compact = true)
+            }
+        } else {
+            LevelTable(signal, exitLevels(hb, ids).firstOrNull()?.level, slPlus)
         }
         LineDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -269,33 +290,21 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
             Text(legsLot(signal, money), style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold, color = Gold)
         }
-        Text(lossLine(signal, money) + if (count > 1) " • $count set sama, entry 1× saja" else "",
+        Text(lossLine(signal, money) + if (count > 1) " • entry 1× saja" else "",
             style = MaterialTheme.typography.labelSmall, color = Muted)
         if (slPlus) Text("🛡️ SL+ aktif", color = BuyColor, fontWeight = FontWeight.Bold)
         val sl = signal.num("sl")
         if (floating != null && slPlus && !signal.isGap() && floating < 0) {
-            NoteBox(
-                "⚠️ Harga sudah melewati SL+ (≈ entry). Bila SL 4 posisi sudah digeser ke SL+, posisi itu sudah " +
-                    "tertutup ≈ impas. Bila di MT5 masih terbuka dan minus, SL belum digeser: tutup atau pasang SL sekarang.",
-                SellColor
-            )
+            NoteBox("⚠️ Harga lewat SL+. Masih terbuka di MT5? Tutup sekarang.", SellColor)
         } else if (price != null && sl != null && !slPlus && (price - sl) * sign <= 0) {
-            NoteBox(
-                "⚠️ Harga sudah melewati SL. Posisi seharusnya tertutup di SL; bila di MT5 masih terbuka, SL belum " +
-                    "terpasang — tutup sekarang. Konfirmasi TUTUP dari cloud menyusul (cek tiap 10 menit).",
-                SellColor
-            )
+            NoteBox("⚠️ Harga lewat SL. Masih terbuka di MT5? Tutup sekarang.", SellColor)
         }
         val exits = exitLevels(hb, ids)
         if (exits.isNotEmpty()) {
             val buy = signal.dir == "BUY"
             LineDivider()
-            Text("🚪 HARGA TUTUP — 4 posisi running", style = MaterialTheme.typography.titleSmall,
+            Text("🚪 HARGA TUTUP", style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.ExtraBold, color = Gold)
-            if (count > 1) {
-                Text("$count set sama, entry 1× → cukup 1 harga TUTUP ini (set paling lambat; di data paling untung).",
-                    style = MaterialTheme.typography.labelSmall, color = Muted)
-            }
             exits.forEach { x ->
                 val gap = price?.let { (it - x.level) * sign }
                 Row(verticalAlignment = Alignment.Bottom) {
@@ -333,13 +342,8 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
                     )
                 }
             }
-            Text(
-                "Harga TUTUP berubah tiap jam, umumnya mengikuti harga ke arah profit (seperti trailing stop); " +
-                    "bisa bergeser menjauh bila ada ekor candle melewatinya tanpa close. Dicek saat candle H1 tutup, " +
-                    "jadi hasil bisa sedikit lebih jelek dari angkanya. " +
-                    "Update ${hb?.timeText() ?: "-"}.",
-                style = MaterialTheme.typography.labelSmall, color = Muted
-            )
+            Text("Berubah tiap jam • update ${hb?.timeText() ?: "-"}", style = MaterialTheme.typography.labelSmall,
+                color = Muted)
         }
     }
 }
@@ -359,11 +363,8 @@ fun CloudOpenCard(group: List<CloudOpen>, hb: SignalEvent?) {
             Pill(main.dir, dirColor(main.dir), solid = true)
             if (group.size > 1) Pill("×${group.size}", Gold)
         }
-        Text(
-            "Sinyal ini masih berjalan di cloud, tetapi data entry-nya tidak ada di HP (mis. aplikasi di-install ulang). " +
-                "Kalau posisi Anda sudah ditutup, abaikan kartu ini.",
-            style = MaterialTheme.typography.labelSmall, color = Muted
-        )
+        Text("Masih berjalan di cloud (data entry tidak ada di HP).", style = MaterialTheme.typography.labelSmall,
+            color = Muted)
         LineDivider()
         Text("🚪 HARGA TUTUP", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, color = Gold)
         Row(verticalAlignment = Alignment.Bottom) {
@@ -498,7 +499,7 @@ fun SignalResultCard(signal: SignalEvent, events: List<SignalEvent>, money: Mone
     val close = SignalRepository.closeEvent(events, signal.id)
     // kartu ini = set utama (harga TUTUP yang dipakai); sinyal kembar entry 1× -> hasil tidak dibagi
     val amount = close?.let { SignalRepository.amount(it, money) }
-    val win = close != null && SignalRepository.isWin(close, events)   // menang = TP1 kena
+    val win = amount?.let { it > 0 } ?: (close != null && SignalRepository.isWin(close, events))   // untung = uang > 0
     val result = if (close == null) Gold else if (win) BuyColor else SellColor
     AppCard(accent = result) {
         SignalHeader(signal, count)
@@ -540,7 +541,7 @@ fun CloseRow(event: SignalEvent, money: MoneySettings, events: List<SignalEvent>
         return
     }
     val amount = SignalRepository.amount(event, money)
-    val win = SignalRepository.isWin(event, events)       // menang = TP1 kena, kalah = SL / TUTUP sebelum TP1
+    val win = amount?.let { it > 0 } ?: SignalRepository.isWin(event, events)       // untung = uang > 0
     val result = if (win) BuyColor else SellColor
     AppCard(accent = result) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -554,6 +555,38 @@ fun CloseRow(event: SignalEvent, money: MoneySettings, events: List<SignalEvent>
         if (amount != null) {
             Text(moneyMain(amount, money), fontWeight = FontWeight.Bold, color = result,
                 modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.End)
+        }
+    }
+}
+
+
+/**
+ * Angka besar sinyal (aplikasi 3.31, permintaan pengguna 3 Okt 2026): Entry, SL, TP1 (0,7R, tutup 1 posisi), TP2 1,5R &
+ * TP3 3R (patokan saja — 4 posisi tetap ditahan sampai TUTUP), SL+ (setelah TP1), dan harga TUTUP candle ini.
+ * TP2/TP3 dihitung dari entry & risk bila cloud lama belum mengirimnya.
+ */
+@Composable
+private fun LevelTable(signal: SignalEvent, exit: Double?, slPlus: Boolean) {
+    val entry = signal.num("entry") ?: return
+    val risk = signal.num("risk_points") ?: ((signal.num("sl") ?: entry) - entry).let { Math.abs(it) }
+    val sign = if (signal.dir == "BUY") 1 else -1
+    val sym = signal.symbol()
+    fun lv(k: String, r: Double) = signal.num(k) ?: (entry + sign * r * risk)
+    val tp1R = if (risk > 0) Math.abs((signal.num("tp1") ?: entry) - entry) / risk else 0.7
+    val rows = listOf(
+        Triple("Entry", priceText(sym, entry), Gold),
+        Triple("SL", priceText(sym, signal.num("sl") ?: (entry - sign * risk)), SellColor),
+        Triple("TP1 (${fmt(tp1R, 1).replace('.', ',')}R) • tutup 1 posisi", priceText(sym, lv("tp1", 0.7)), BuyColor),
+        Triple("TP2 (1,5R) • patokan", priceText(sym, lv("tp2", 1.5)), BuyColor),
+        Triple("TP3 (3R) • patokan", priceText(sym, lv("tp3", 3.0)), BuyColor),
+        Triple("SL+ setelah TP1" + if (slPlus) " ✓" else "", priceText(sym, signal.num("sl_plus") ?: (entry + sign * 0.10)),
+            if (slPlus) BuyColor else Muted),
+        Triple("TUTUP (close H1 lewat)", exit?.let { priceText(sym, it) } ?: "—", Gold),
+    )
+    rows.forEach { (label, value, color) ->
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(label, color = Muted, style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
+            Text(value, color = color, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleLarge)
         }
     }
 }

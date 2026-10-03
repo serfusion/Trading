@@ -132,3 +132,39 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-09-30: pengguna minta data unduhan disimpan di repo → `data/` (±300 MB, `data/README.md`).
 - 2026-09-30: Trading Alchemist (Rizki Aditama) → `docs/TRADING_ALCHEMIST.md`: Momentum Candle rugi (48 varian);
   validasi H4 EMA50 untuk 💰 XAU lolos kriteria → dipasang di cloud (env XAU_H4_FILTER).
+- 2026-09-30: arsip GitHub gagal karena `ARSIP_REPO` di Vercel berisi token (token ikut tampil di aplikasi) →
+  `_arsip.py` mengabaikan ARSIP_REPO/ARSIP_BRANCH yang salah bentuk, memeriksa format GITHUB_TOKEN, dan menyensor
+  semua teks mirip token (`redact`). Pengguna diminta mencabut token lama. Aplikasi 3.15: persen berita besar
+  ("75% NAIK 🟢") + bukti "teruji 2012–2025 (n rilis)", kata "menang" diganti "untung di X% rilis".
+- 2026-09-30: pengguna ingin entry 1 detik sebelum rilis dan tutup 1–3 detik → `research/news_pra.py`,
+  `docs/NEWS_PRA.md`: tebakan kejutan harus benar ≥ 72–95% (tersedia ≤ 61–67%, hanya CPI); 16 petunjuk, 0 lolos.
+- 2026-09-30: lanjutan (tutup 1 dtk–3 menit, semua cara) → `research/news_pra2.py`, `docs/NEWS_PRA2.md`: 11.116
+  kombinasi, 0 lolos di kedua feed; straddle ±$1–2 hanya positif di tick Exness → saran uji maju lot minimum.
+- 2026-09-30: pengguna membuka host Kalshi/Polymarket → `research/kalshi.py` (unduh 2021–2026) & `kalshi_uji.py`,
+  `docs/KALSHI.md`: tebakan kejutan CPI 76–78%; sinyal emas CPI ≥ 60% n 18 (positif di kedua feed, t < 2 → kandidat);
+  aplikasi 3.16 baris 🎲 Kalshi di kartu 🎯 (`cloud/api/_kalshi.py`).
+- 2026-10-01: Act kalender kosong (CSV FRED tidak menjawab dari Vercel) → `_aktual.py` BLS/FRED API/CSV + Supabase;
+  perkiraan hari H hidup (Kalshi+Polymarket × reaksi 1 menit) + hasil setelah Act; Polymarket diuji (NFP 41%, Fed
+  9/9 sesuai konsensus); astrologi diuji (0 signifikan). Aplikasi 3.17. Laporan `docs/HARI_H.md`.
+- 2026-10-02: "sinyal 💰 hanya beberapa jam / setelah turun separuh pasti ke SL?" → `research/potong_rugi.py`,
+  `docs/POTONG_RUGI.md`: 58% memang ke SL, tetapi menahan tetap lebih baik (−0,30/−0,41R vs −0,5R); potong & batas
+  waktu tidak lolos; skema bawaan tetap.
+- 2026-10-02: "tuliskan hasil & persentase arah 1 detik setelah rilis di APK" → `research/reaksi_menit.py` + 1/2/3 dtk
+  (Dukascopy + Exness), `docs/HARI_H.md` bagian 6: detik pertama NFP/CPI/PPI belum bergerak (±$0,17, 50:50), hentakan
+  di detik 1→2, searah hasil 82–91% di detik 2–3. Aplikasi 3.18: sel 1 dtk / 2 dtk / 3 dtk / 1 mnt di kartu 🎯 (⚡ & ✅),
+  Act dicek tiap 30 detik di 10 menit pertama.
+- 2026-10-02: Act manual (3.19) + revisi otomatis & besar kejutan (3.20). "Sinyal berita beberapa menit, WR tinggi?" →
+  `research/news_menit.py`, `docs/NEWS_MENIT.md`: 2.280 kombinasi, 0 lolos; ikut kejutan setelah menit 1 rugi.
+- 2026-10-02: sinyal lebih sering → `research/sinyal_lapis.py`, `sinyal_berita.py`, `docs/SINYAL_LAPIS.md`: DIPASANG
+  lapisan (XAU setelah TP1, BTC breakout baru maks 2/set, lot ½) + tanda 📰 sinyal setelah berita; aplikasi 3.21.
+- 2026-10-02: NFP berbalik → `research/nfp_berbalik.py`, `berita_tren.py`, `docs/HARI_H.md` 9–10: sel 3/6 jam (3.22) &
+  peringatan 📉 "sisa lonjakan" menit 30/60 (`cloud/api/_pudar.py`); analisa lintas pasar + Polymarket Fed.
+- 2026-10-03: "uji juga pair tambahan" → `research/pair_data.py`, `research/pair_tambahan.py`, `docs/PAIR_TAMBAHAN.md`:
+  11 forex + ETH, kategori 💰 dipilih dari LAMA. Lolos tipis ETH (+0,06R BARU) & USD/JPY (+0,07R, hanya 2022, gagal
+  spread ×2); 10 lainnya tidak. Tidak dipasang (menunggu "pasang").
+- 2026-10-03: "katanya 💰 bagus, sekarang biasa profit & 💰⭐ konf tidak untung?" → `research/kategori_badge.py`,
+  `docs/KATEGORI_BADGE.md`: badge dihitung cara A (semua sinyal diberi label) vs yang dikirim cara B → XAU konf
+  terlalu tinggi di badge; BTC 2026 biasa memang > 💰; saran hentikan XAU konf dicabut. Usulan badge cara B menunggu "pasang".
+- 2026-10-03: "CEK, VERIFIKASI, UJI menyeluruh lalu rombak apk simple" → `research/verifikasi_cloud.py`,
+  `research/verifikasi.py`, `docs/VERIFIKASI.md`: kode cloud asli diputar ulang 2012–2026 (cocok 96–98% dengan riset),
+  tanpa look-ahead, spread asli Exness; XAU 💰 +0,21R & BTC 💰 +0,27R sejak Okt 2021. Aplikasi 3.26 ringkas.

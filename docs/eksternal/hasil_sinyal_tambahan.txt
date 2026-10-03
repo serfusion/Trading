@@ -1,0 +1,117 @@
+# ±100 sumber sinyal tambahan (research/sinyal_tambahan.py)
+
+TP1 0,7R. WR = sinyal dengan hasil bersih > 0. LAMA < Okt 2021, BARU sejak Okt 2021.
+
+kel sumber                                                         n   nB  WR L  WR B    R L    R B  th+  hasil
+A   XAU lapisan setelah TP1, maks 1                              665  305    59    58  +0.30  +0.06   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, maks 2                              924  419    59    55  +0.32  +0.05   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, maks 3                             1029  467    60    57  +0.32  +0.06   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, maks 5                             1108  504    60    58  +0.30  +0.05   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, maks 10                            1114  505    60    58  +0.29  +0.05   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, breakout baru, maks 1               617  280    52    57  +0.20  +0.05   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, breakout baru, maks 2               822  365    55    57  +0.23  +0.07   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, breakout baru, maks 3               904  402    55    58  +0.22  +0.07   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, breakout baru, maks 5               936  419    56    59  +0.23  +0.07   57  WR tinggi (BARU saja)
+A   XAU lapisan setelah TP1, breakout baru, maks 10              938  419    56    59  +0.23  +0.07   57  WR tinggi (BARU saja)
+A   XAU lapisan kapan saja, maks 1                              1175  510    54    59  +0.30  +0.14   64  WR tinggi (BARU saja)
+A   XAU lapisan kapan saja, maks 2                              1943  856    55    61  +0.28  +0.13   64  LOLOS
+A   XAU lapisan kapan saja, maks 3                              2421 1082    56    60  +0.29  +0.13   64  LOLOS
+A   XAU lapisan kapan saja, maks 5                              2955 1330    56    60  +0.29  +0.13   71  LOLOS
+A   XAU lapisan kapan saja, maks 10                             3338 1543    56    59  +0.27  +0.12   71  LOLOS
+A   XAU lapisan kapan saja, breakout baru, maks 1               1157  508    53    59  +0.27  +0.12   64  WR tinggi (BARU saja)
+A   XAU lapisan kapan saja, breakout baru, maks 2               1830  802    54    61  +0.26  +0.14   64  WR tinggi (BARU saja)
+A   XAU lapisan kapan saja, breakout baru, maks 3               2236  990    55    61  +0.27  +0.14   64  WR tinggi (BARU saja)
+A   XAU lapisan kapan saja, breakout baru, maks 5               2659 1180    56    60  +0.25  +0.13   71  LOLOS
+A   XAU lapisan kapan saja, breakout baru, maks 10              2882 1303    55    60  +0.25  +0.11   71  LOLOS
+A   BTC lapisan setelah TP1, maks 1                              705  355    59    57  +0.22  +0.23   64  LOLOS
+A   BTC lapisan setelah TP1, maks 2                              945  473    58    57  +0.24  +0.23   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, maks 3                             1046  515    58    57  +0.23  +0.24   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, maks 5                             1112  535    58    57  +0.19  +0.23   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, maks 10                            1116  535    57    57  +0.19  +0.23   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, breakout baru, maks 1               624  304    55    62  +0.19  +0.30   73  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, breakout baru, maks 2               818  400    53    60  +0.19  +0.29   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, breakout baru, maks 3               896  441    53    60  +0.21  +0.26   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, breakout baru, maks 5               941  450    54    60  +0.19  +0.25   55  WR tinggi (BARU saja)
+A   BTC lapisan setelah TP1, breakout baru, maks 10              941  450    54    60  +0.19  +0.25   55  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, maks 1                              1191  554    53    59  +0.34  +0.33   64  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, maks 2                              1944  903    54    59  +0.26  +0.30   73  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, maks 3                              2416 1115    53    59  +0.25  +0.29   73  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, maks 5                              2891 1323    55    58  +0.27  +0.26   64  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, maks 10                             3194 1408    54    59  +0.24  +0.26   64  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, breakout baru, maks 1               1162  530    53    60  +0.33  +0.36   64  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, breakout baru, maks 2               1853  847    53    60  +0.27  +0.33   73  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, breakout baru, maks 3               2253 1026    54    59  +0.26  +0.32   73  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, breakout baru, maks 5               2619 1180    54    58  +0.28  +0.29   64  WR tinggi (BARU saja)
+A   BTC lapisan kapan saja, breakout baru, maks 10              2806 1229    55    58  +0.28  +0.30   64  WR tinggi (BARU saja)
+B   XAU set tambahan 20/10                                       870  329    50    56  +0.09  +0.13   64  WR tinggi (BARU saja)
+B   XAU set tambahan 30/15                                       695  274    54    62  +0.16  +0.14   79  WR tinggi (BARU saja)
+B   XAU set tambahan 100/40                                      454  177    62    64  +0.22  +0.24   71  LOLOS
+B   XAU set tambahan 120/50                                      418  163    62    63  +0.21  +0.22   79  LOLOS
+B   BTC set tambahan 20/10                                       935  349    27    50  -0.35  +0.16   55  tidak
+B   BTC set tambahan 30/15                                       888  325    29    52  -0.36  +0.20   55  tidak
+B   BTC set tambahan 100/40                                      746  264    30    53  -0.30  +0.25   64  tidak
+B   BTC set tambahan 120/50                                      677  232    29    56  -0.30  +0.32   55  WR tinggi (BARU saja)
+C   XAU ⭐ sendiri                                                712  253    54    53  +0.01  -0.04   47  tidak
+C   XAU ⭐ saat 💰 XAU searah terbuka                                6    0    50   nan  +0.21   +nan   50  tidak
+C   XAU ⭐ saat 💰 BTC searah terbuka                               76   33    42    55  +0.03  -0.22   38  tidak
+C   XAU biasa sendiri                                           2003  716    55    49  -0.01  -0.04   47  tidak
+C   XAU biasa saat 💰 XAU searah terbuka                        n=0
+C   XAU biasa saat 💰 BTC searah terbuka                          233   92    63    50  -0.07  -0.09   36  tidak
+C   BTC biasa sendiri                                           2433 1187    36    52  -0.27  +0.03   45  tidak
+C   BTC biasa saat 💰 BTC searah terbuka                            6    3    33   100  +2.26  +6.86   60  tidak
+C   BTC biasa saat 💰 XAU searah terbuka                          456  242    40    46  -0.23  +0.16   45  tidak
+C   BTC konf sendiri                                             579  275    41    51  +0.02  -0.03   45  tidak
+C   BTC konf saat 💰 BTC searah terbuka                            41   16    56    50  +0.44  +0.17   45  tidak
+C   BTC konf saat 💰 XAU searah terbuka                           106   42    42    45  +0.24  -0.17   55  tidak
+D   ETHUSD semua                                                3379 1932    59    53  +0.23  +0.06  100  tidak
+D   ETHUSD konf+⭐                                               1223  717    65    54  +0.45  +0.10   90  tidak
+D   ETHUSD konf+⭐ & ⭐                                           1671  953    67    55  +0.43  +0.11  100  tidak
+E   ETH semua saat 💰 BTC searah terbuka                         1311  724    63    53  +0.31  +0.19   90  tidak
+E   ETH konf+⭐ saat 💰 BTC searah terbuka                         822  472    63    55  +0.34  +0.17   90  tidak
+E   ETH konf+⭐ & ⭐ saat 💰 BTC searah terbuka                    1062  590    68    56  +0.38  +0.18   90  LOLOS
+D   EURUSD semua                                                4296 1630    52    49  -0.05  -0.10   27  tidak
+D   EURUSD konf+⭐                                               1581  547    50    50  -0.04  -0.08   36  tidak
+D   EURUSD konf+⭐ & ⭐                                           2218  804    51    50  -0.05  -0.07   40  tidak
+D   GBPUSD semua                                                4457 1692    54    50  -0.01  -0.08   27  tidak
+D   GBPUSD konf+⭐                                               1611  585    55    52  +0.05  -0.01   57  tidak
+D   GBPUSD konf+⭐ & ⭐                                           2300  823    56    55  +0.01  -0.00   53  tidak
+D   USDJPY semua                                                4164 1559    58    57  +0.06  +0.06   67  LOLOS
+D   USDJPY konf+⭐                                               1636  621    56    60  +0.06  +0.15   57  WR tinggi (BARU saja)
+D   USDJPY konf+⭐ & ⭐                                           2238  818    56    60  +0.02  +0.10   53  WR tinggi (BARU saja)
+D   AUDUSD semua                                                4447 1682    50    50  -0.08  -0.14   20  tidak
+D   AUDUSD konf+⭐                                               1706  684    53    48  -0.04  -0.21   29  tidak
+D   AUDUSD konf+⭐ & ⭐                                           2379  942    53    45  -0.05  -0.21   33  tidak
+D   USDCAD semua                                                4277 1605    52    51  -0.03  -0.07   27  tidak
+D   USDCAD konf+⭐                                               1628  596    54    50  -0.02  -0.12   21  tidak
+D   USDCAD konf+⭐ & ⭐                                           2374  912    52    49  -0.03  -0.11   27  tidak
+D   USDCHF semua                                                4185 1566    52    54  -0.03  -0.03   40  tidak
+D   USDCHF konf+⭐                                               1593  594    50    57  -0.07  +0.03   50  WR tinggi (BARU saja)
+D   USDCHF konf+⭐ & ⭐                                           2216  787    51    56  -0.06  +0.02   60  WR tinggi (BARU saja)
+D   EURJPY semua                                                4121 1584    56    53  +0.03  -0.07   47  tidak
+D   EURJPY konf+⭐                                               1498  582    57    54  +0.04  -0.05   50  tidak
+D   EURJPY konf+⭐ & ⭐                                           2107  796    58    54  +0.08  -0.02   60  tidak
+D   GBPJPY semua                                                4180 1575    55    53  +0.04  -0.01   60  tidak
+D   GBPJPY konf+⭐                                               1551  563    59    49  +0.09  -0.02   64  tidak
+D   GBPJPY konf+⭐ & ⭐                                           2170  782    57    52  +0.06  +0.03   73  tidak
+D   AUDJPY semua                                                4089 1568    52    54  +0.01  -0.02   47  tidak
+D   AUDJPY konf+⭐                                               1545  561    53    61  +0.00  +0.13   57  WR tinggi (BARU saja)
+D   AUDJPY konf+⭐ & ⭐                                           2138  799    54    56  +0.06  +0.05   67  WR tinggi (BARU saja)
+D   EURGBP semua                                                4241 1521    52    45  -0.07  -0.22    7  tidak
+D   EURGBP konf+⭐                                               1635  576    50    41  -0.18  -0.31    7  tidak
+D   EURGBP konf+⭐ & ⭐                                           2265  791    51    41  -0.14  -0.27   13  tidak
+D   EURCHF semua                                                3997 1436    44    45  -0.20  -0.21    0  tidak
+D   EURCHF konf+⭐                                               1544  608    42    50  -0.16  -0.24   14  tidak
+D   EURCHF konf+⭐ & ⭐                                           2109  789    43    48  -0.20  -0.21    0  tidak
+
+Diuji 99 sumber. LOLOS 11, WR tinggi hanya di BARU 42.
+  LOLOS: XAU set tambahan 100/40 — WR 62%/64%, R +0.22/+0.24, n BARU 177
+  LOLOS: BTC lapisan setelah TP1, maks 1 — WR 59%/57%, R +0.22/+0.23, n BARU 355
+  LOLOS: XAU set tambahan 120/50 — WR 62%/63%, R +0.21/+0.22, n BARU 163
+  LOLOS: ETH konf+⭐ & ⭐ saat 💰 BTC searah terbuka — WR 68%/56%, R +0.38/+0.18, n BARU 590
+  LOLOS: XAU lapisan kapan saja, breakout baru, maks 5 — WR 56%/60%, R +0.25/+0.13, n BARU 1180
+  LOLOS: XAU lapisan kapan saja, maks 2 — WR 55%/61%, R +0.28/+0.13, n BARU 856
+  LOLOS: XAU lapisan kapan saja, maks 5 — WR 56%/60%, R +0.29/+0.13, n BARU 1330
+  LOLOS: XAU lapisan kapan saja, maks 3 — WR 56%/60%, R +0.29/+0.13, n BARU 1082
+  LOLOS: XAU lapisan kapan saja, maks 10 — WR 56%/59%, R +0.27/+0.12, n BARU 1543
+  LOLOS: XAU lapisan kapan saja, breakout baru, maks 10 — WR 55%/60%, R +0.25/+0.11, n BARU 1303
+  LOLOS: USDJPY semua — WR 58%/57%, R +0.06/+0.06, n BARU 1559

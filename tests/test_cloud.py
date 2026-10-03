@@ -195,7 +195,10 @@ def test_scheme_r_matches_standard_and_variants():
             assert rb["3_tp1"] <= rb["1_tp1"] + 1e-9 or c["points"] <= c["risk_points"]
     infos = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "be07"]
     tp1 = [e for e in pub.events if e["type"] == "info" and e.get("kind") == "tp1"]
-    assert tp1 and infos and all("TP1" not in e["text"] for e in infos)
+    # sejak 3 Okt 2026 TP1 = 0,7R: SL+ 0,7R terjadi bersamaan dengan TP1, jadi info be07 terpisah tidak dikirim
+    assert tp1 and all("TP1" not in e["text"] for e in infos)
+    if _core.CFG["tp1_r"] > 0.7:
+        assert infos
 
 
 def test_heartbeat_level_tutup_sama_dengan_aturan_keluar():

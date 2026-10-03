@@ -49,7 +49,9 @@ object Notifications {
     }
 
     fun signal(context: Context, event: SignalEvent) {
-        val badge = (if (event.isZap()) "⚡" else "") + "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
+        val badge = (if (event.wrTinggi() != null) "🎯" else "") +
+            (if (event.newsTag() != null) "📰" else "") + (if (event.isLayer()) "🔁" else "") +
+            (if (event.isZap()) "⚡" else "") + "💰".repeat(event.moneyBadge()) + "⭐".repeat(event.stars())
         val title = "${if (badge.isBlank()) "" else "$badge "}${event.dir} ${event.symbol()} @ ${event.price("entry")}"
         val m = SignalRepository.money()
         val s07 = event.json.has("wr07") && m.use07(event.id, event.tier())
@@ -59,7 +61,11 @@ object Notifications {
         } else ""
         val zap = if (event.isZap()) "⚡ KESEMPATAN EMAS (risiko ${fmt(m.zapRiskPct, 1).replace('.', ',')}%" +
             (if (m.use07(event.id, event.tier())) ", SL+ saat profit 0,7R" else "") + ") • " else ""
-        val text = zap + stats +
+        val extra = (event.wrTinggi()?.let {
+            "🎯 WR TINGGI ${fmt(it.optDouble("wr"), 0)}% (volatilitas ${fmt(it.optDouble("vol_rel"), 1).replace('.', ',')}× normal) • "
+        } ?: "") + (if (event.isLayer()) "🔁 LAPISAN (lot ½) • " else "") +
+            (event.newsTag()?.let { "📰 setelah ${it.optString("berita")} • " } ?: "")
+        val text = extra + zap + stats +
             "SL ${event.price("sl")} • TP ${event.price("tp1")} • Entry " + legsLot(event, m) +
             (event.warText()?.let { "\n$it" } ?: "")
         post(context, event.id.hashCode(), title, text)
@@ -96,7 +102,7 @@ object Notifications {
         if ((SignalRepository.primaryOf(events)[event.id] ?: event.id) != event.id) return
         val m = SignalRepository.money()
         val win = SignalRepository.isWin(event, events)
-        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT (TP1 kena)" else "MINUS"}"
+        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT" else "MINUS"}"
         val amount = SignalRepository.amount(event, m)
         val text = "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
             (event.str("reason").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +

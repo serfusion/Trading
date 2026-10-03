@@ -1,0 +1,19 @@
+Cek 3 pengaturan piramida yang lolos (python -m research.piramida cek):
+('tren2', 1.0, 2.0, 6, 1.0): n 4255, tahan median 5.8 jam, ≥ 1 malam 33%, menang 19%, spread x2: LAMA +0.151R BARU +0.229R
+  R per tahun: 2012:+51 2013:+245 2014:+71 2015:+42 2016:+92 2017:+136 2018:-41 2019:+15 2020:+78 2021:-57 2022:-35 2023:+165 2024:+160 2025:+211 2026:-46
+  risiko 0.5%/keranjang ($2) LAMA: total $+1,323 = $+11.8/bulan, DD terdalam $308 (77% modal)
+  risiko 0.5%/keranjang ($2) BARU: total $+849 = $+14.2/bulan, DD terdalam $162 (41% modal)
+  risiko 1.0%/keranjang ($4) LAMA: total $+2,646 = $+23.5/bulan, DD terdalam $616 (154% modal)
+  risiko 1.0%/keranjang ($4) BARU: total $+1,698 = $+28.4/bulan, DD terdalam $325 (81% modal)
+('tren2', 2.0, 2.0, 6, 1.0): n 3961, tahan median 6.5 jam, ≥ 1 malam 36%, menang 22%, spread x2: LAMA +0.098R BARU +0.073R
+  R per tahun: 2012:+45 2013:+125 2014:+19 2015:+12 2016:+28 2017:+76 2018:-24 2019:+25 2020:+109 2021:-39 2022:-32 2023:+53 2024:+50 2025:+121 2026:-12
+  risiko 0.5%/keranjang ($2) LAMA: total $+800 = $+7.1/bulan, DD terdalam $137 (34% modal)
+  risiko 0.5%/keranjang ($2) BARU: total $+315 = $+5.3/bulan, DD terdalam $204 (51% modal)
+  risiko 1.0%/keranjang ($4) LAMA: total $+1,600 = $+14.2/bulan, DD terdalam $273 (68% modal)
+  risiko 1.0%/keranjang ($4) BARU: total $+629 = $+10.5/bulan, DD terdalam $409 (102% modal)
+('tren2', 3.0, 2.0, 6, 1.0): n 3513, tahan median 7.0 jam, ≥ 1 malam 37%, menang 25%, spread x2: LAMA +0.082R BARU +0.146R
+  R per tahun: 2012:+46 2013:+126 2014:+16 2015:+27 2016:+5 2017:+10 2018:+2 2019:+1 2020:+68 2021:-11 2022:-5 2023:+64 2024:+73 2025:+103 2026:-2
+  risiko 0.5%/keranjang ($2) LAMA: total $+605 = $+5.4/bulan, DD terdalam $121 (30% modal)
+  risiko 0.5%/keranjang ($2) BARU: total $+441 = $+7.4/bulan, DD terdalam $86 (21% modal)
+  risiko 1.0%/keranjang ($4) LAMA: total $+1,210 = $+10.8/bulan, DD terdalam $242 (60% modal)
+  risiko 1.0%/keranjang ($4) BARU: total $+881 = $+14.7/bulan, DD terdalam $172 (43% modal)

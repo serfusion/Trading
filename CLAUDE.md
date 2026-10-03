@@ -58,6 +58,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   menggantikan chip "Contoh pertanyaan"; izin pengguna 30 Sep). 27 petunjuk sebelum rilis diuji: hanya kejutan CPI
   bulan lalu & bensin yang menebak arah CPI (61–67%), tetapi emas naik 1 jam tetap 47–55% → tidak ada keunggulan.
   Butuh kalender: `git clone` spoluan/forex-factory-scraper & ehsanrs2/forexfactory-scraper ke data/research.
+- Format tampilan (aplikasi 3.15, permintaan pengguna): angka besar "75% NAIK 🟢" + bukti kecil "teruji 2012–2025
+  (n rilis) • sejak Okt 2021: X%". JANGAN pakai kata "menang" (tidak jelas) → "untung di X% rilis".
 - Polymarket/Kalshi/Cleveland Fed/CME/BLS DIBLOKIR jaringan sesi (403) → belum diuji; minta pengguna membuka host
   bila ingin diuji.
 
@@ -84,10 +86,161 @@ alarm tepat waktu) hanya menyentuh `android/`].
   minimum". BTC Exness: 0 varian lolos. Spread asli per jam: `research.exness.spread_table(sym)` (XAUUSDc $0,16–0,20
   2021–25; BTCUSDm $12–64 → cek ulang biaya riset 💰 BTC yang memakai 0,03%).
 
+## Entry 1 detik SEBELUM rilis (30 Sep 2026 — `docs/NEWS_PRA.md`)
+- `research/news_pra.py`: entry t0−1, tutup 1–3 dtk. Jam feed bersih (t0−5→−1 searah kejutan 50%). Walau kejutan
+  ditebak 100% benar: tutup 1 dtk rugi spread, 2 dtk butuh 95%, 3 dtk butuh 72% (realistis 94%). 16 petunjuk (ULANG,
+  Act→Prev, P1/P7 CPI, drift/lawan, selalu BUY/SELL): 0 lolos. Jangan sarankan entry sebelum rilis.
+- Lanjutan `research/news_pra2.py` / `docs/NEWS_PRA2.md` (tutup 1 dtk–3 mnt, 28 cara keluar): literatur (anchoring
+  Campbell-Sharpe, drift pra-rilis Kurov, momentum kejutan, ADP besar), model logistik walk-forward, straddle t0−1
+  (+ "perlindungan gap" Exness), hedge: 11.116 kombinasi, 0 lolos di kedua feed. Tebakan terbaik ±53% vs butuh
+  ≥ 59% (sempurna) / ≥ 75% (realistis). Kandidat satu-satunya: straddle ±$1–2 (positif hanya di feed Exness).
+
+## Kalshi / pasar prediksi (30 Sep 2026 — `docs/KALSHI.md`)
+- Host dibuka pengguna: `api.elections.kalshi.com`, `gamma-api.polymarket.com`, `clob.polymarket.com` (Cleveland Fed,
+  BLS, CME, Hugging Face tetap 403). `python -m research.kalshi unduh|uji` (data di `data/research/eksternal/kalshi`,
+  API membatasi laju → jeda 0,35 dtk + backoff 429; pasar lama di `/historical/...`).
+- Hasil: Kalshi menebak arah kejutan CPI/core CPI 76–78% (2022–2025), NFP/pengangguran ±50–57%. Entry emas ikut
+  tebakan: 0 lolos. Kandidat: "peluang emas naik 1 mnt" CPI ≥ 60% (Kalshi × reaksi historis) → n 18, naik 72–78%,
+  +$2,8–3,3/0,01 lot tutup 60 dtk di kedua feed, t 1,6–1,9 → BELUM TERBUKTI, perlu uji maju.
+- Aplikasi 3.16: baris 🎲 di kartu 🎯 (`cloud/api/_kalshi.py`, `cloud/api/kalshi.json`, cache Supabase baris `kalshi`).
+  Konsensus Feb–Sep 2026 belum ada (ForexFactory data berhenti Jan 2026; huggingface.co terbuka tetapi file lewat CDN
+  `us.aws.cdn.hf.co` 403 dan datasetnya hanya s.d. Apr 2025; web.archive.org/metalsmine/forexfactory 403).
+- Validasi per tahun (`research/validasi_tahunan.py`): hentakan +5 dtk searah kejutan konsensus 73–93% SETIAP tahun
+  2013–2025; tebakan Kalshi CPI 2022 55%, 2023–2025 78–90%; 2026 belum bisa diuji.
+
+## Hari H berita (1 Okt 2026 — `docs/HARI_H.md`)
+- Act otomatis berlapis `cloud/api/_aktual.py`: BLS (tanpa kunci) → FRED API (env Vercel `FRED_API_KEY`, minta
+  pengguna mengisi sendiri) → CSV FRED; CSV FRED TIDAK menjawab dari Vercel (arsip 1 Okt "0 Act"). Disimpan Supabase
+  baris `aktual`. Dari sesi ini api.bls.gov 403 (tidak bisa dites langsung; format v1/v2 dites dengan respons palsu).
+- Perkiraan hari H `cloud/api/_hari_h.py` = peluang Kalshi+Polymarket × reaksi emas 1 menit (`cloud/api/reaksi.json`
+  dari `research/reaksi_menit.py`); riwayat Supabase `hari_h`; hasil setelah Act. Validasi `research/hari_h_uji.py`
+  → `cloud/api/hari_h.json`: CPI 86% (n 7), core 70% (10), NFP 33–58%, entry ikut sinyal rugi → semua abu-abu.
+- Polymarket (`research/polymarket.py`, `cloud/api/_polymarket.py`): NFP 41% benar (Kalshi 64%), Fed 9/9 sesuai
+  konsensus (90–99%) → info saja; baris 🏦 Fed berikutnya. Riwayat harga CLOB lama: pakai startTs/endTs ≤ 7 hari.
+- Astrologi (`research/astrologi.py`, PyEphem): 8 fitur, 0 signifikan → tidak dipasang. Mars–Pluto/MC (`research/astrologi_nfp.py`): 0 bermakna; 3 NFP dengan pola sama semuanya di ATAS konsensus.
+- Skenario/kesimpulan kartu & kalender kini reaksi 1 MENIT (cadangan 1 jam). Aplikasi 3.17.
+- Aplikasi 3.19–3.20: Act manual (tempel investing.com, HARI_H 7), direvisi otomatis bila angka resmi BLS/FRED beda;
+  persen 1 mnt per besar kejutan (≥ 1,5× median, HARI_H 8).
+- Aplikasi 3.22: + sel 3 & 6 jam (XAU M15, HARI_H 9; NFP 2 Okt naik $40 lalu berbalik).
+- HARI_H 10 (`research/berita_tren.py`, `_pudar.py`, env FADE_WARNING): tren besar TIDAK memprediksi pudar (diuji);
+  SISA LONJAKAN menit 60 memprediksi (≥ 60% → 88% searah 6 jam; < 30% → 92–93% balik lewat harga rilis). Baris 📉/📈
+  di kartu 🎯 30 mnt–6 jam setelah rilis (Twelve Data 5 mnt, cache `pudar`). Konteks 2026: Fed menaikkan bunga.
+- Aplikasi 3.18 (HARI_H bagian 6): sel arah emas 1/2/3 dtk + 1 mnt (`_persiapan.tahap`, reaksi.json "cepat"). Detik
+  pertama NFP/CPI/PPI belum bergerak (±$0,17 ≈ spread, 50:50); hentakan di detik 1→2, searah hasil 82–91% di detik 2–3.
+  Act dicek tiap 30 dtk di 10 menit pertama setelah rilis (`_aktual.RETRY_FAST`; BLS tanpa kunci 25/hari).
+
+## Entry beberapa menit setelah berita (2 Okt 2026 — `docs/NEWS_MENIT.md`)
+- `research/news_menit.py`: keputusan menit 0,5–5 (Act diketahui), tahan 1–10 mnt / TP-SL $3–5, 6 aturan arah,
+  2.280 kombinasi → 0 lolos. Ikut kejutan setelah menit pertama rugi (WR 34–51%). Pola "spike melawan kejutan lalu
+  berbalik" NFP hanya 7–17% rilis, n 14–17 → belum terbukti. Sinyal 💰 per set tidak muncul lagi sampai sinyal itu
+  ditutup cloud (TUTUP/SL/SL+), close manual di MT5 tidak diketahui cloud (by design, `_core` manage/evaluate).
+
+## Sinyal berlapis (2 Okt 2026 — `docs/SINYAL_LAPIS.md`)
+- `research/sinyal_lapis.py` & `sinyal_berita.py`: DIPASANG 2 Okt (izin pengguna) — XAU lapisan setelah TP1, BTC
+  lapisan kapan saja pada breakout baru maks 2/set, lot ½, tanpa auto order (`_core.try_open/layer_ok`, state
+  `layers`, `sinyal_lapis.json`, env LAYER_SIGNALS). Tanda 📰 sinyal 💰 ≤ 4 jam setelah berita besar (`_berita_sinyal`,
+  `sinyal_berita.json`, env NEWS_TAG): XAU +0,45R vs +0,21R, BTC +0,61R vs +0,37R. Aplikasi 3.21.
+
+## Skema WR tinggi (3 Okt 2026 — `docs/SKEMA_WR.md`)
+- `research/skema_wr.py`: 12 skema TP pendek (0,3–1,5R) + 1–2 jalan: WR 62–72% tetapi R/sinyal −45–95%; 0 lolos.
+  Terbaik kompromi "2 TP 0,5/1R + 3 jalan" (XAU +0,12R vs +0,21R, BTC +0,19R vs +0,37R, kalah beruntun 12 vs 25).
+  BELUM dipasang — menunggu pilihan pengguna.
+
+## Martingale (3 Okt 2026 — `docs/MARTINGALE.md`)
+- `research/martingale.py`: M1 antar sinyal 1/3/5x = lot rata-rata 3,1x, total/DD tidak lebih baik, DD 4x; M2 grid
+  1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
+  TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
+- EA grid trader (screenshot 3 akun Cent, `research/martingale_ea.py`, MARTINGALE bagian akhir): lot ×1,2 bukan ×2,
+  profit $114–126/akun; ×2 20 layer mustahil di $430; ×1,2 habis ±layer 17; 1 dari 13–165 keranjang menghabiskan akun,
+  nilai harapan/keranjang negatif di semua varian. Twelve Data XAU memuat bar akhir pekan → buang sebelum simulasi.
+- Signal Strike EA (bukti Telegram + 17 deal + laporan MT5, `research/signal_strike.py`, `docs/SIGNAL_STRIKE.md`):
+  keranjang 2 Okt direkonstruksi persis (L1 0,07 @4.177,890 → −159,64; lot ×1,2 dibulatkan per layer, L17 1,24, TP rata-rata
+  +$1,9, floating −16…−26% untuk +$12,75). Laporan MT5 riwayat = DD SALDO saja (2.937,30 = 14 layer minus satu Close All).
+  Aturan rekonstruksi: harapan/keranjang negatif semua varian; NFP 2 Okt → akun $524 habis 15:45 UTC bila selalu aktif.
+  Tiru $150/bln (`research/tiru_150.py`, SIGNAL_STRIKE 5): jeda 30–45 mnt antar keranjang meniru September (1.400–1.900
+  trade, +$451–656 vs laporan 1.792, +$426). Skala median $150 → modal $749–1.572; BARU 22–37% bulan akun habis, rata-rata
+  −$59…−$107/bln, 1 akun bertahan 12 bln 0–8%. `martingale_ea.sim(jeda_menit=…)` = opsi jeda (bawaan 0, hasil lama sama).
+  Klaim 6 bulan (`research/klaim_6bulan.py`, SIGNAL_STRIKE 6): mulai tiap hari 15 Mar–15 Apr 2026 → 0/32 bertahan s/d
+  2 Okt di 5 pengaturan (12 Apr gap pembukaan mingguan, 28 Mei, 30 Jun, 26 Jul, 28 Sep — dicek Twelve Data H1); bertahan
+  182 hari mulai 2025–2026: 0%. Bukti trader hanya ±3 pekan (setoran 2026.09.1x) + laporan 1 bulan.
+- EA buatan (permintaan "tiru martingale x2", 3 Okt): `ea/GridMartingale.mq5` (TERPISAH dari bot, BELUM di-compile di
+  sesi — pengguna compile di MetaEditor & uji demo), panduan `docs/EA_MARTINGALE.md`, uji `research/ea_400.py` (modal $400):
+  11 pengaturan ×2/×1,2 ± pengaman (batas rugi ekuitas dicek per level, tutup akhir pekan) → semua rata-rata negatif BARU;
+  bawaan X2f −$15/bln, 0% bulan ≥ $150; tanpa pengaman X2a 30% bulan ≥ $150 tetapi 43% bulan akun habis.
+  `sim(stop_pct=…, akhir_pekan=…)` = opsi baru (bawaan mati, hasil lama sama).
+- Filter "MARKET CRASH DETECTED" bot trader (`research/krisis_filter.py`, SIGNAL_STRIKE 7): detektor turun ≥ $30 dari
+  tertinggi 60 mnt menyala 2 Okt 13:15 & 14:30 UTC = notifikasi 20:13 & 21:30 WIB. "Tahan keranjang baru" saja = tanpa efek;
+  "beku" (tanpa layer baru) BARU −$35 vs −$65/bln; Q1 $400 ×1,2 + beku + akhir pekan: 8/12 bulan terakhir $160–250, 4/12 habis
+  (penurunan pelan $8–15/jam lolos filter). EA v1.10 punya `InpKrisisMode`; `sim(krisis=(usd, mnt, jeda, mode))`.
+- Pencarian grid yang untung (`docs/GRID_CARI.md`, 3 Okt): `research/grid_cari.py` 936 pengaturan (ATR, ADX, RSI, BB, sesi,
+  vol, tren; risiko R=5%/keranjang, seleksi LAMA → uji BARU) → 0 berarti (1 lolos ≈ $4/tahun). `research/piramida.py`
+  (kebalikan martingale, layer searah tren H4+D1, stop ikut naik): 3 lolos LAMA & positif BARU; terbaik jarak 3 ATR/stop
+  2 ATR/maks 6: +0,13R/+0,18R, 12/15 tahun +, menang 25%, risiko 0,5% ≈ +$5–7/bln per $400 (DD 21–30%), swap belum.
+  `ea/PiramidaTren.mq5` (belum di-compile). Kait sim baru: izin/step_arr/tp_arr/lot_arr/sl_lapis/bulat/tutup_arr.
+- Blueprint 10 strategi non-martingale (unggahan, `docs/BLUEPRINT10.md`, `research/blueprint10.py`, `gabung_bp.py`): 79
+  kombinasi → 0 lolos; TP 0,5R WR 61–68% tetapi −0,08…+0,02R; terdekat #9 ATR breakout + tren2 (+0,06/+0,11R). Sebagai pemicu
+  piramida tidak lebih baik di BARU; aturan risiko 2%/5%/4 kalah hampir tak aktif. WR tinggi + untung = 💰 TP1 0,7R.
+- Cek data & filter TENANG (`docs/TENANG.md`, `research/tenang.py`): data vs Twelve Data H1 selisih median $0,19, korelasi
+  0,944, arah 98,6%. Tenang = tanpa berita USD 60/120 mnt (FF + tanggal rilis FRED 2026 + FOMC), tanpa crash 3×ATR/60 mnt
+  4 jam, ATR ≤ median 20 hari (43% waktu). Blueprint: 1 lolos LAMA gagal BARU; grid + tenang + lindung + akhir pekan: habis
+  37%→8% bln (trader) tetapi rata-rata BARU −$19; ×2 jarak $5 +$4/bln tetapi sensitivitas = kantong kebetulan; piramida
+  tenang R/keranjang naik, $/bln sama. Kalender FRED: data/research/eksternal/fred_release_{10,50,46,53,54,9}.json.
+- Filter tenang pada sinyal 💰 (`docs/SINYAL_TENANG.md`, `research/sinyal_tenang.py`, replay cloud TP1 0,7R): TIDAK naikkan
+  WR (XAU BARU 63%→57%) & total turun (+163R→+70R) → jangan dipasang. Kandidat LABEL "🎯 WR tinggi": lapisan BTC saat ATR H1 ≥
+  1,5× median 20 hari: WR 78%/76% (n 110/121), 9/11 tahun ≥ 69% — ditemukan setelah lihat BARU. DIPASANG 3 Okt (izin "kalau
+  cocok dan bagus pasang saja") sebagai LABEL saja: `_core.WR_TINGGI`/`vol_rel`, field `wr_tinggi` pada event lapisan BTC,
+  env WR_TINGGI=0 mematikan, aplikasi 3.34 (pill & notifikasi 🎯). Filter tenang TIDAK dipasang.
+
+## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
+- `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
+  `data/research/eksternal/pair_h1/`) & `research/pair_tambahan.py` (kategori 💰 dipilih dari LAMA, diuji di BARU).
+  Lolos tipis: ETH (+0,06R BARU, 90% tahun +) & USD/JPY (+0,07R, tapi hampir semua dari 2022, gagal spread ×2);
+  10 pair lain tidak. Pembanding sejak Okt 2021: XAU +0,21R / BTC +0,19R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
+  ditemukan setelah lihat BARU → belum terbukti). TIDAK dipasang (tunggu "pasang").
+
+## Badge 💰 vs sinyal yang dikirim (3 Okt 2026 — `docs/KATEGORI_BADGE.md`)
+- `research/kategori_badge.py`: badge (`_core.STATS`) dihitung dengan "semua sinyal diberi label" (cara A) dan seluruh
+  periode; yang dikirim hanya 💰 (cara B) → XAU konf badge +0,09 vs dikirim +0,01 (73 sinyal tambahan −0,27R); BTC
+  konf melemah sejak Okt 2021. XAU 💰 tetap > biasa (2026 +50R, konf+⭐ +1,45R/sin); BTC 2026 biasa +66R > 💰 (5 th:
+  3–3, per sinyal 💰 2×). Saran "hentikan XAU konf" DICABUT (DD −41 → −66). Usulan badge cara B + angka sejak Okt
+  2021/tahun ini — menunggu "pasang". Selalu sebut cara hitung (A/B) saat melaporkan per kategori.
+
+## Verifikasi menyeluruh (3 Okt 2026 — `docs/VERIFIKASI.md`)
+- `research/verifikasi_cloud.py` memutar ulang kode cloud ASLI (`_core.tick`, konfigurasi live: H4 XAU, funding &
+  September BTC, lapisan; `--mentah` tanpa itu; `--td` data Twelve Data) candle demi candle →
+  `data/research/eksternal/verifikasi/`. `research/verifikasi.py` membandingkan dengan riset (96–98% sinyal sama,
+  kategori 99,7–99,9%), cek look-ahead (300/300), spread ASLI Exness per jam (BTC asli > asumsi 0,03%), bootstrap,
+  p-acak, sumber data; menulis `cloud/api/riwayat.json` (kartu 📜 & baris "teruji" aplikasi 3.26).
+- Hasil live + spread asli, sejak Okt 2021: XAU 💰 +0,21R/sin (2026 +56R), BTC 💰 +0,27R (2026 +43R); XAU konf &
+  BTC konf lemah (tidak diubah tanpa izin). `research/riwayat_uang.py` kini hanya pembanding (docs/eksternal).
+- BTC konf DIMATIKAN 3 Okt (izin "matikan btc konf"; `research/tanpa_konf.py`: BARU +0,33 vs +0,27R/sin, DD −32 vs −41):
+  cfg `skip_cats`, env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi. XAU konf tetap (tanpa konf BARU memburuk).
+- TP1 = 0,7R DIPASANG 3 Okt (izin pengguna "0,7": WR tinggi, 1 posisi TP, 4 jalan): replay cloud WR XAU 53→63%, BTC 50→56%
+  sejak 2021 dengan profit sama; LAMA profit lebih kecil. `_core.CFG["tp1_r"]` (docs/VERIFIKASI.md bagian akhir).
+- 3 Okt (izin "pasang"): `_core.STATS`/`TIER_STATS` = replay cloud Okt 2021–2026 TP1 0,7R (kategori yang dikirim tidak
+  berubah), sinyal_lapis.json teruji (lapisan XAU kini +0,04R — lemah), 📰 BTC mati (env NEWS_TAG_BTC=1), event sinyal
+  + tp2 1,5R / tp3 3R (patokan) / sl_plus; aplikasi 3.31 angka besar Entry/SL/TP1/TP2/TP3/SL+/TUTUP.
+- Sinyal tambahan DIPASANG 3 Okt (izin "pasang semua"; `research/sinyal_tambahan.py` 99 sumber, `tambahan_cloud.py`
+  replay): XAU set 100/40 & 120/50 (env XAU_EXTRA_SETS) + lapisan XAU mode any maks 6 (BARU +359R vs +144R); ETH ⭐/konf+⭐
+  hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
+  Kripto lain (`research/pair_kripto.py`, 25 koin): DOGE/ADA/XLM lolos riset saat 💰 BTC searah, tetapi pengguna memilih
+  "ETH saja" (3 Okt) → TIDAK dipasang. Forex baru & XAG tidak bisa diuji (Twelve Data gratis: data lama/berbayar).
+- Gap forex diverifikasi (`research/verifikasi_gap.py`, replay `_gap.gap_tick`): WR 72–83% sebelum 2021, sejak 2021 hanya
+  4–9 sinyal/pair (USD/JPY 1 dari 4). Aplikasi 3.33: kartu 🏆 + saran entry pindah ke tombol ⓘ (InfoDialog) dan memuat
+  ETH, lapisan, gap; tab Sinyal hanya kartu status tren 🐂/🐻 (+ETH).
+- Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
+
+## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
+- `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
+  setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
+  −0,5R/−0,7R & batas 12/24/48 jam lebih buruk. TP1 median 11–12 jam, 90% ≤ 42 jam. Skema bawaan tetap.
+
 ## Arsip berita otomatis (30 Sep 2026 — `docs/CLOUD.md` bagian terakhir)
 - Aplikasi dibuka → GET /api/chat → `cloud/api/_arsip.py` menyimpan kalender pekan ini (+Act FRED) ke branch
   `arsip-berita` (`data/berita/<th>/ff_<tgl>.json`). Butuh env Vercel `GITHUB_TOKEN` (fine-grained, Contents RW) —
-  pengguna yang membuat; jangan pernah taruh token di APK. Riset: `git fetch origin arsip-berita && git checkout
+  pengguna yang membuat; jangan pernah taruh token di APK. 30 Sep: pengguna mengisi token di `ARSIP_REPO` → token
+  tampil di aplikasi; kini ARSIP_REPO salah bentuk diabaikan & status disensor (`_arsip.redact`) — jangan pernah
+  menampilkan nilai env di status/pesan galat. Riset: `git fetch origin arsip-berita && git checkout
   FETCH_HEAD -- data/berita` lalu `load_calendar()` otomatis memakainya.
 
 ## Trading Alchemist (30 Sep 2026 — `docs/TRADING_ALCHEMIST.md`)

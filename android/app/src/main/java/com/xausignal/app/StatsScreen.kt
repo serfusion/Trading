@@ -69,6 +69,7 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
             item { AppCard { Text("Belum ada sinyal selesai", color = Muted) } }
         }
         items(stats, key = { it.label }) { PeriodCard(it, money) }
+        item { RiwayatCard() }          // 📜 riwayat sinyal 💰 per tahun (uji data, aplikasi 3.25)
         item { Footer() }
     }
 }
@@ -167,5 +168,63 @@ private fun PeriodCard(s: PeriodStats, money: MoneySettings) {
             Metric("Total profit", moneyMain(s.profit, money), BuyColor)
             Metric("Total minus", moneyMain(s.loss, money), SellColor)
         }
+    }
+}
+
+
+/** Angka teruji (cloud/api/riwayat.json lewat GET /api/chat?riwayat=1), dimuat sekali per sesi aplikasi. */
+object Verified {
+    var data by androidx.compose.runtime.mutableStateOf<org.json.JSONObject?>(null)
+    suspend fun load() {
+        if (data == null) data = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { ChatClient.riwayat() }
+    }
+}
+
+/**
+ * 📜 Hasil teruji sinyal 💰 (aplikasi 3.26): replay kode cloud asli 2012–2026 dengan filter & spread asli Exness
+ * (research/verifikasi.py). Ringkas: tahun ini, 365 hari, sejak Okt 2021, sebelum Okt 2021, per kategori.
+ */
+@Composable
+private fun RiwayatCard() {
+    androidx.compose.runtime.LaunchedEffect(Unit) { Verified.load() }
+    AppCard {
+        Text("📜 Hasil teruji sinyal 💰", fontWeight = FontWeight.Bold)
+        val d = Verified.data
+        if (d == null) {
+            Text("Memuat… (butuh cloud terbaru)", color = Muted, style = MaterialTheme.typography.labelSmall)
+            return@AppCard
+        }
+        Text("Kode cloud diuji ulang di data lama, spread asli Exness. +10R ≈ +5% modal (lot aplikasi).",
+            style = MaterialTheme.typography.labelSmall, color = Muted)
+        for (key in listOf("XAU", "BTC")) {
+            val a = d.optJSONObject(key) ?: continue
+            Text("$key/USD", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.padding(top = 8.dp))
+            val year = a.optString("sampai").take(4)
+            RiwayatRow(year, a.optJSONObject("tahun")?.optJSONObject(year))
+            RiwayatRow("365 hari", a.optJSONObject("365h"))
+            RiwayatRow("Sejak Okt 2021", a.optJSONObject("baru"))
+            RiwayatRow("Sebelum 2021", a.optJSONObject("lama"))
+            val kat = a.optJSONObject("kat") ?: continue
+            val cats = kat.keys().asSequence().toList()
+                .sortedByDescending { kat.optJSONObject(it)?.optJSONObject("baru")?.optInt("n") ?: 0 }
+            for (c in cats) RiwayatRow("• $c", kat.optJSONObject(c)?.optJSONObject("baru"))
+        }
+    }
+}
+
+@Composable
+private fun RiwayatRow(label: String, c: org.json.JSONObject?) {
+    if (c == null || c.optInt("n") == 0) return
+    val tot = c.optDouble("tot")
+    Row(Modifier.fillMaxWidth()) {
+        Text(label, Modifier.weight(1.3f), style = MaterialTheme.typography.labelSmall)
+        Text("${c.optInt("n")}×", Modifier.weight(0.6f), style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("WR %.0f%%".format(c.optDouble("wr")), Modifier.weight(0.8f), style = MaterialTheme.typography.labelSmall)
+        Text("%+.2fR".format(c.optDouble("avg")).replace('.', ','), Modifier.weight(0.8f),
+            style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("%+.0fR".format(tot), Modifier.weight(0.7f), textAlign = TextAlign.End,
+            fontWeight = FontWeight.Bold, color = if (tot >= 0) BuyColor else SellColor,
+            style = MaterialTheme.typography.labelSmall)
     }
 }

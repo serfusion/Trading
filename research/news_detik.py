@@ -598,12 +598,14 @@ def export_group(tr: pd.DataFrame, an: pd.DataFrame, aset: str, lolos: list[tupl
         m, pn, p1 = row["manual"], row["pending"], row["pending1"]
         cx1 = _cross_avg(tr_x, g.time, "STRADDLE $1", "PENGGUNA", False)
         x1 = "" if cx1 is None else f"; feed {other}: {money(cx1, aset)}"
+        if cx1 is not None:                          # angka pembanding untuk kartu singkat aplikasi (_persiapan.py)
+            p1["x"], p1["x_feed"] = _r(cx1), other
 
         def one(st: dict) -> str:
             if not st.get("n"):
                 return "belum ada data"
-            txt = f"menang {st['wr']:.0f}% tapi rata {money(st['avg'], aset)}" if st["avg"] < 0 else \
-                f"menang {st['wr']:.0f}%, rata {money(st['avg'], aset)}"
+            txt = f"untung di {st['wr']:.0f}% rilis tapi rata {money(st['avg'], aset)}" if st["avg"] < 0 else \
+                f"untung di {st['wr']:.0f}% rilis, rata {money(st['avg'], aset)}"
             txt += "/0,01 lot" if aset.startswith("XAU") else " per trade"
             return txt + (f" (5 th {money(st['baru'], aset)}; n={st['n']})" if st.get("baru") is not None
                           else f" (n={st['n']})")

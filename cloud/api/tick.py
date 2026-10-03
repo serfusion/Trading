@@ -43,6 +43,31 @@ def btc_skip_fn(store, now: datetime, result: dict):
                                                      env.get("BTC_SEPT_FILTER", "1") == "1", _core.new_york)
 
 
+def signal_extras(asset: str, store) -> dict:
+    """Sinyal berlapis (cloud/api/sinyal_lapis.json, env LAYER_SIGNALS=0 untuk mematikan) & tanda 📰 sinyal setelah
+    berita (env NEWS_TAG=0 untuk mematikan) — research/sinyal_lapis.py & sinyal_berita.py, izin pengguna 2 Okt 2026."""
+    import _berita_sinyal
+    env = os.environ
+    out = {}
+    path = os.path.join(os.path.dirname(__file__), "sinyal_lapis.json")
+    if env.get("LAYER_SIGNALS", "1") == "1" and os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            lay = json.load(f).get(asset)
+        if lay:
+            out["layer"] = lay
+    # 🎯 label WR tinggi pada lapisan BTC saat volatilitas ≥ 1,5× normal (izin pengguna 3 Okt 2026); WR_TINGGI=0 mematikan
+    if env.get("WR_TINGGI", "1") == "1" and asset in _core.WR_TINGGI:
+        out["wr_tinggi"] = _core.WR_TINGGI[asset]
+    # 📰 BTC dimatikan 3 Okt 2026 (replay: sejak 2021 −0,06R/sin, tidak lebih baik); NEWS_TAG_BTC=1 menyalakan lagi
+    if env.get("NEWS_TAG", "1") == "1" and (asset != "BTC" or env.get("NEWS_TAG_BTC", "0") == "1"):
+        def rows():
+            import _arsip
+            import _chat
+            return _arsip.calendar_cached(store, datetime.now(timezone.utc), _chat.fetch_calendar)
+        out["news_fn"] = _berita_sinyal.news_fn(asset, store, rows)
+    return out
+
+
 def run() -> tuple[int, dict]:
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
@@ -55,6 +80,8 @@ def run() -> tuple[int, dict]:
            "star_only": env.get("STAR_ONLY", "0") == "1",   # 1 = hanya kirim sinyal ⭐
            # validasi arah H4 EMA50 untuk 💰 XAU (research/alchemist.py; XAU_H4_FILTER=0 untuk mematikan)
            "h4_filter": env.get("XAU_H4_FILTER", "1") == "1"}
+    if env.get("XAU_EXTRA_SETS", "1") == "1":   # set 100/40 & 120/50 (research/sinyal_tambahan.py, izin 3 Okt 2026)
+        cfg["sets"] = list(_core.CFG["sets"]) + [(100, 40), (120, 50)]
     if env.get("WAR_MODE", "1") == "1":    # ⚠️ mode perang (label saja, XAU tidak dijeda)
         try:
             import _perang
@@ -66,16 +93,23 @@ def run() -> tuple[int, dict]:
         except Exception as exc:  # noqa: BLE001 - FRED gagal tidak boleh menghentikan sinyal
             cfg["war"] = None
             war_error = str(exc)
+    main_store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+    try:
+        cfg.update(signal_extras("XAU", main_store))
+    except Exception as exc:  # noqa: BLE001 - tambahan opsional tidak boleh menghentikan sinyal
+        result_extra_error = str(exc)
     result = _core.tick(
         datetime.now(timezone.utc),
         _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
-        _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"]),
+        main_store,
         _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
         cfg,
         symbol=env.get("SYMBOL", "XAU/USD"),
         executor=executor_from_env(),
     )
     result["war"] = cfg.get("war")
+    if "result_extra_error" in locals():
+        result["extra_error"] = result_extra_error
     if "war_error" in locals():
         result["war_error"] = war_error
     try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
@@ -85,10 +119,29 @@ def run() -> tuple[int, dict]:
             btc = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
                              _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result)}, symbol="BTC/USD")
+                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result),
+                              # BTC konf dimatikan (research/tanpa_konf.py); BTC_SKIP_KONF=0 untuk menyalakan lagi
+                              "skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1" else (),
+                              **signal_extras("BTC", store)}, symbol="BTC/USD")
             result["btc"] = {k: btc.get(k) for k in ("ok", "price", "events", "error")}
     except Exception as exc:  # noqa: BLE001 - BTC tidak boleh mengganggu sinyal XAU
         result["btc_error"] = str(exc)
+    try:                                   # sinyal ETH/USD: hanya saat sinyal 💰 BTC searah sedang terbuka (izin 3 Okt)
+        if env.get("ETH_SIGNALS", "1") == "1":
+            now = datetime.now(timezone.utc)
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            bstate = _core.RowStore(store, "btc").get_state() or {}
+            btc_dirs = {x["dir"] for s_ in (bstate.get("systems") or {}).values()
+                        for x in [s_.get("virtual")] + list(s_.get("layers") or []) if x}
+            eth = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "ETH/USD"),
+                             _core.RowStore(store, "eth"),
+                             _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
+                             {**_core.BTC_CFG, "asset": "ETH", "id_prefix": "ETH-", "skip_cats": ("konf", "biasa"),
+                              "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
+                             symbol="ETH/USD")
+            result["eth"] = {k: eth.get(k) for k in ("ok", "price", "events", "error")}
+    except Exception as exc:  # noqa: BLE001 - ETH tidak boleh mengganggu sinyal lain
+        result["eth_error"] = str(exc)
     try:                                   # sinyal gap pekan forex (hanya ambil data saat perlu)
         import _gap
         now = datetime.now(timezone.utc)

@@ -1,0 +1,42 @@
+# Astrologi finansial vs arah emas setelah rilis (research/astrologi.py)
+
+Cek posisi chart pengguna (2 Okt 2026 08:30 ET, Washington): Matahari Libra 9.34°, Bulan Gemini 25.61°, Merkurius Scorpio 2.67°, Mars Leo 2.57°, Saturnus Aries 11.45°, ASC Libra 25.51°
+Fitur chart itu: elemen Bulan = udara, fase Bulan = berkurang, Merkurius retro = tidak, tanda Bulan = Gemini, Bulan keras Mars/Saturnus = tidak, Matahari keras Saturnus = ya, elemen Ascendant = udara, elemen Mars = api
+
+Rilis dengan tick: 2051 (2010-03..2026-09); dasar emas naik 1 menit 49.0%; uji = 8 fitur x 2 target -> Bonferroni x16
+
+== Target: emas naik 1 menit ==
+  elemen Bulan               p=0.387 (Bonferroni 1.00) | air 51.0% (n=461.0) | api 48.2% (n=550.0) | tanah 50.9% (n=493.0) | udara 46.4% (n=547.0)
+                             aturan dari LAMA: terbaik 'air' -> BARU 51.8% naik; terburuk 'udara' -> BARU 47.5% (dasar BARU 49.5%)
+  fase Bulan                 p=0.535 (Bonferroni 1.00) | berkurang 49.8% (n=1003.0) | bertambah 48.3% (n=1048.0)
+                             aturan dari LAMA: terbaik 'berkurang' -> BARU 50.8% naik; terburuk 'bertambah' -> BARU 48.3% (dasar BARU 49.5%)
+  Merkurius retro            p=0.017 (Bonferroni 0.27) | tidak 50.3% (n=1666.0) | ya 43.4% (n=385.0)
+                             aturan dari LAMA: terbaik 'tidak' -> BARU 50.2% naik; terburuk 'ya' -> BARU 46.3% (dasar BARU 49.5%)
+  tanda Bulan                p=0.121 (Bonferroni 1.00) | Aquarius 48.8% (n=164.0) | Aries 51.5% (n=167.0) | Cancer 50.0% (n=172.0) | Capricorn 54.0% (n=161.0) | Gemini 51.1% (n=188.0) | Leo 42.5% (n=186.0) | Libra 40.0% (n=195.0) | Pisces 46.2% (n=143.0) | Sagittarius 50.8% (n=197.0) | Scorpio 56.8% (n=146.0) | Taurus 47.9% (n=167.0) | Virgo 50.9% (n=165.0)
+                             aturan dari LAMA: terbaik 'Scorpio' -> BARU 53.6% naik; terburuk 'Libra' -> BARU 40.2% (dasar BARU 49.5%)
+  Bulan keras Mars/Saturnus  p=0.215 (Bonferroni 1.00) | tidak 48.2% (n=1530.0) | ya 51.4% (n=521.0)
+                             aturan dari LAMA: terbaik 'ya' -> BARU 55.2% naik; terburuk 'tidak' -> BARU 47.7% (dasar BARU 49.5%)
+  Matahari keras Saturnus    p=0.219 (Bonferroni 1.00) | tidak 49.6% (n=1765.0) | ya 45.5% (n=286.0)
+                             aturan dari LAMA: terbaik 'tidak' -> BARU 50.3% naik; terburuk 'ya' -> BARU 45.0% (dasar BARU 49.5%)
+  elemen Ascendant           p=0.444 (Bonferroni 1.00) | air 49.6% (n=502.0) | api 46.0% (n=520.0) | tanah 50.6% (n=522.0) | udara 49.9% (n=507.0)
+                             aturan dari LAMA: terbaik 'udara' -> BARU 47.0% naik; terburuk 'api' -> BARU 48.6% (dasar BARU 49.5%)
+  elemen Mars                p=0.962 (Bonferroni 1.00) | air 49.7% (n=501.0) | api 49.1% (n=497.0) | tanah 49.2% (n=465.0) | udara 48.1% (n=588.0)
+                             aturan dari LAMA: terbaik 'air' -> BARU 50.0% naik; terburuk 'udara' -> BARU 49.1% (dasar BARU 49.5%)
+
+== Target: kejutan bagus untuk emas ==
+  elemen Bulan               p=0.428 (Bonferroni 1.00) | air 51.3% (n=386.0) | api 47.5% (n=463.0) | tanah 50.1% (n=431.0) | udara 46.2% (n=465.0)
+                             aturan dari LAMA: terbaik 'air' -> BARU 44.5% naik; terburuk 'udara' -> BARU 48.3% (dasar BARU 47.0%)
+  fase Bulan                 p=0.348 (Bonferroni 1.00) | berkurang 49.9% (n=838.0) | bertambah 47.5% (n=907.0)
+                             aturan dari LAMA: terbaik 'berkurang' -> BARU 48.6% naik; terburuk 'bertambah' -> BARU 45.7% (dasar BARU 47.0%)
+  Merkurius retro            p=0.495 (Bonferroni 1.00) | tidak 49.1% (n=1416.0) | ya 46.8% (n=329.0)
+                             aturan dari LAMA: terbaik 'tidak' -> BARU 48.0% naik; terburuk 'ya' -> BARU 42.3% (dasar BARU 47.0%)
+  tanda Bulan                p=0.525 (Bonferroni 1.00) | Aquarius 45.0% (n=140.0) | Aries 47.1% (n=136.0) | Cancer 50.7% (n=144.0) | Capricorn 50.0% (n=140.0) | Gemini 53.2% (n=158.0) | Leo 44.1% (n=161.0) | Libra 40.7% (n=167.0) | Pisces 50.0% (n=120.0) | Sagittarius 51.2% (n=166.0) | Scorpio 53.3% (n=122.0) | Taurus 49.0% (n=149.0) | Virgo 51.4% (n=142.0)
+                             aturan dari LAMA: terbaik 'Scorpio' -> BARU 40.4% naik; terburuk 'Libra' -> BARU 43.1% (dasar BARU 47.0%)
+  Bulan keras Mars/Saturnus  p=0.153 (Bonferroni 1.00) | tidak 47.6% (n=1296.0) | ya 51.7% (n=449.0)
+                             aturan dari LAMA: terbaik 'ya' -> BARU 52.9% naik; terburuk 'tidak' -> BARU 45.0% (dasar BARU 47.0%)
+  Matahari keras Saturnus    p=0.436 (Bonferroni 1.00) | tidak 49.1% (n=1498.0) | ya 46.2% (n=247.0)
+                             aturan dari LAMA: terbaik 'tidak' -> BARU 47.4% naik; terburuk 'ya' -> BARU 45.3% (dasar BARU 47.0%)
+  elemen Ascendant           p=0.358 (Bonferroni 1.00) | air 50.2% (n=422.0) | api 45.5% (n=448.0) | tanah 48.0% (n=450.0) | udara 51.1% (n=425.0)
+                             aturan dari LAMA: terbaik 'udara' -> BARU 45.5% naik; terburuk 'api' -> BARU 49.0% (dasar BARU 47.0%)
+  elemen Mars                p=0.028 (Bonferroni 0.45) | air 52.2% (n=433.0) | api 44.1% (n=417.0) | tanah 52.5% (n=402.0) | udara 46.2% (n=493.0)
+                             aturan dari LAMA: terbaik 'tanah' -> BARU 43.1% naik; terburuk 'api' -> BARU 46.8% (dasar BARU 47.0%)
