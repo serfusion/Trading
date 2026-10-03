@@ -151,6 +151,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
   TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
 
+## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
+- `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
+  `data/research/eksternal/pair_h1/`) & `research/pair_tambahan.py` (kategori 💰 dipilih dari LAMA, diuji di BARU).
+  Lolos tipis: ETH (+0,06R BARU, 90% tahun +) & USD/JPY (+0,07R, tapi hampir semua dari 2022, gagal spread ×2);
+  10 pair lain tidak. Pembanding XAU +0,22R / BTC +0,14R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
+  ditemukan setelah lihat BARU → belum terbukti). TIDAK dipasang (tunggu "pasang").
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

@@ -159,3 +159,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   lapisan (XAU setelah TP1, BTC breakout baru maks 2/set, lot ½) + tanda 📰 sinyal setelah berita; aplikasi 3.21.
 - 2026-10-02: NFP berbalik → `research/nfp_berbalik.py`, `berita_tren.py`, `docs/HARI_H.md` 9–10: sel 3/6 jam (3.22) &
   peringatan 📉 "sisa lonjakan" menit 30/60 (`cloud/api/_pudar.py`); analisa lintas pasar + Polymarket Fed.
+- 2026-10-03: "uji juga pair tambahan" → `research/pair_data.py`, `research/pair_tambahan.py`, `docs/PAIR_TAMBAHAN.md`:
+  11 forex + ETH, kategori 💰 dipilih dari LAMA. Lolos tipis ETH (+0,06R BARU) & USD/JPY (+0,07R, hanya 2022, gagal
+  spread ×2); 10 lainnya tidak. Tidak dipasang (menunggu "pasang").
