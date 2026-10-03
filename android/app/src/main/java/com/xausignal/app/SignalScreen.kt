@@ -75,6 +75,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
     ) {
         item { TickerCard(prices, connection) }
         item { StatusCards(prices, follow) }      // 📊 status tren & hitung mundur (3.24)
+        item { RankCard(money) }                  // 🏆 urutan kategori + saran entry (3.27)
         val active = open.size + orphans.size
         item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
         items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
