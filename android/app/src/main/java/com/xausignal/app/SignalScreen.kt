@@ -276,9 +276,13 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
                 }
             }
         }
-        MetricRow {
-            Metric("SL", signal.price("sl"), SellColor, compact = true)
-            Metric(if (signal.isGap()) "TP" else "TP1", signal.price("tp1"), BuyColor, compact = true)
+        if (signal.isGap()) {
+            MetricRow {
+                Metric("SL", signal.price("sl"), SellColor, compact = true)
+                Metric("TP", signal.price("tp1"), BuyColor, compact = true)
+            }
+        } else {
+            LevelTable(signal, exitLevels(hb, ids).firstOrNull()?.level, slPlus)
         }
         LineDivider()
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -551,6 +555,38 @@ fun CloseRow(event: SignalEvent, money: MoneySettings, events: List<SignalEvent>
         if (amount != null) {
             Text(moneyMain(amount, money), fontWeight = FontWeight.Bold, color = result,
                 modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.End)
+        }
+    }
+}
+
+
+/**
+ * Angka besar sinyal (aplikasi 3.31, permintaan pengguna 3 Okt 2026): Entry, SL, TP1 (0,7R, tutup 1 posisi), TP2 1,5R &
+ * TP3 3R (patokan saja — 4 posisi tetap ditahan sampai TUTUP), SL+ (setelah TP1), dan harga TUTUP candle ini.
+ * TP2/TP3 dihitung dari entry & risk bila cloud lama belum mengirimnya.
+ */
+@Composable
+private fun LevelTable(signal: SignalEvent, exit: Double?, slPlus: Boolean) {
+    val entry = signal.num("entry") ?: return
+    val risk = signal.num("risk_points") ?: ((signal.num("sl") ?: entry) - entry).let { Math.abs(it) }
+    val sign = if (signal.dir == "BUY") 1 else -1
+    val sym = signal.symbol()
+    fun lv(k: String, r: Double) = signal.num(k) ?: (entry + sign * r * risk)
+    val tp1R = if (risk > 0) Math.abs((signal.num("tp1") ?: entry) - entry) / risk else 0.7
+    val rows = listOf(
+        Triple("Entry", priceText(sym, entry), Gold),
+        Triple("SL", priceText(sym, signal.num("sl") ?: (entry - sign * risk)), SellColor),
+        Triple("TP1 (${fmt(tp1R, 1).replace('.', ',')}R) • tutup 1 posisi", priceText(sym, lv("tp1", 0.7)), BuyColor),
+        Triple("TP2 (1,5R) • patokan", priceText(sym, lv("tp2", 1.5)), BuyColor),
+        Triple("TP3 (3R) • patokan", priceText(sym, lv("tp3", 3.0)), BuyColor),
+        Triple("SL+ setelah TP1" + if (slPlus) " ✓" else "", priceText(sym, signal.num("sl_plus") ?: (entry + sign * 0.10)),
+            if (slPlus) BuyColor else Muted),
+        Triple("TUTUP (close H1 lewat)", exit?.let { priceText(sym, it) } ?: "—", Gold),
+    )
+    rows.forEach { (label, value, color) ->
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(label, color = Muted, style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
+            Text(value, color = color, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleLarge)
         }
     }
 }

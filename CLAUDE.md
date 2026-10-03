@@ -177,6 +177,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   cfg `skip_cats`, env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi. XAU konf tetap (tanpa konf BARU memburuk).
 - TP1 = 0,7R DIPASANG 3 Okt (izin pengguna "0,7": WR tinggi, 1 posisi TP, 4 jalan): replay cloud WR XAU 53→63%, BTC 50→56%
   sejak 2021 dengan profit sama; LAMA profit lebih kecil. `_core.CFG["tp1_r"]` (docs/VERIFIKASI.md bagian akhir).
+- 3 Okt (izin "pasang"): `_core.STATS`/`TIER_STATS` = replay cloud Okt 2021–2026 TP1 0,7R (kategori yang dikirim tidak
+  berubah), sinyal_lapis.json teruji (lapisan XAU kini +0,04R — lemah), 📰 BTC mati (env NEWS_TAG_BTC=1), event sinyal
+  + tp2 1,5R / tp3 3R (patokan) / sl_plus; aplikasi 3.31 angka besar Entry/SL/TP1/TP2/TP3/SL+/TUTUP.
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

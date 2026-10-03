@@ -53,7 +53,7 @@ def test_sinyal_zap_dan_label_perang(monkeypatch):
     cfg = {**_core.CFG, "star_only": False, "market_hours": False, "skip_open_bars": 0, "war": war}
     store, pub = run_ticks(market(days=90, seed=11), cfg=cfg)
     sig = [e for e in pub.events if e["type"] == "signal"]
-    assert sig and all(e["tier"] == "zap" and e["zap"] and e["badge"].startswith("⚡💰💰💰") and e["wr07"] > 60
+    assert sig and all(e["tier"] == "zap" and e["zap"] and e["badge"].startswith("⚡💰") and e["wr07"] == _core.TIER_STATS["XAU"][2]
                        and e["war"]["on"] for e in sig)
     hb = [e for e in pub.events if e["type"] == "heartbeat"]
     assert hb and hb[-1]["war"]["on"]
@@ -70,7 +70,7 @@ def test_tanpa_perang_tanpa_label(monkeypatch):
     sig = [e for e in pub.events if e["type"] == "signal"]
     assert sig and all(e["tier"] == "bronze" and not e["zap"] and "war" not in e and not e["badge"].startswith("⚡")
                        for e in sig)
-    assert np.isclose(sig[0]["avg_r"], 0.309)
+    assert np.isclose(sig[0]["avg_r"], _core.STATS["XAU konf+⭐"][1])
 
 
 class FakeStore:
