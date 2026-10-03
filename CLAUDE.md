@@ -175,6 +175,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   BTC konf lemah (tidak diubah tanpa izin). `research/riwayat_uang.py` kini hanya pembanding (docs/eksternal).
 - BTC konf DIMATIKAN 3 Okt (izin "matikan btc konf"; `research/tanpa_konf.py`: BARU +0,33 vs +0,27R/sin, DD −32 vs −41):
   cfg `skip_cats`, env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi. XAU konf tetap (tanpa konf BARU memburuk).
+- TP1 = 0,7R DIPASANG 3 Okt (izin pengguna "0,7": WR tinggi, 1 posisi TP, 4 jalan): replay cloud WR XAU 53→63%, BTC 50→56%
+  sejak 2021 dengan profit sama; LAMA profit lebih kecil. `_core.CFG["tp1_r"]` (docs/VERIFIKASI.md bagian akhir).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

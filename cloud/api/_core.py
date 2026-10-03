@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 
 CFG = {"entry": 55, "exit": 20, "atr": 20, "stop_atr": 3.0, "bars": 3000, "tf_minutes": 60,
-       "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 1.0, "be_offset": 0.10,
+       "sets": [(40, 15), (55, 20), (80, 30)], "legs": 5, "tp1_r": 0.7, "be_offset": 0.10,
        "leg_lot": 0.01, "star_only": False, "star_ema": 50, "star_h4": 20,
        "market_hours": True, "skip_open_bars": 3}
 

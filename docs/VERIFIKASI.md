@@ -102,3 +102,16 @@ Replay kode cloud + spread asli Exness. "Klaim" = angka yang sekarang tampil.
 WR di sini = sinyal dengan hasil bersih > 0 setelah spread. SL+ di cloud = entry ± 0,10, sehingga keluar di SL+ ≈ 0
 lalu minus spread → dihitung kalah; klaim lama memakai SL+ entry + 0,1R (riset), itu sebabnya WR klaim lebih tinggi.
 Perbaikan teks (cloud) & pengaturan SL+ 0,7R (aplikasi) menunggu izin pengguna.
+
+## TP1 0,7R (DIPASANG 3 Okt 2026, permintaan pengguna "WR tinggi, 1 posisi TP, sisanya dibiarkan")
+Replay kode cloud asli + spread asli, sinyal dasar (`cloud_<aset>.csv` kini TP1 0,7R; versi 1R = `cloud_<aset>_tp1r.csv`):
+
+| | WR LAMA → BARU → 2026 | R/sinyal BARU | Total BARU | Total LAMA |
+|---|---|---|---|---|
+| XAU TP1 1R | 49% → 53% → 72% | +0,21 | +131R | +134R |
+| **XAU TP1 0,7R** | **59% → 63% → 76%** | +0,20 | +133R | +119R |
+| BTC TP1 1R | 45% → 50% → 39% | +0,33 | +236R | +300R |
+| **BTC TP1 0,7R** | **47% → 56% → 57%** | +0,33 | +243R | +237R |
+
+WR naik 6–18 poin, profit sejak 2021 sama; sebelum 2021 profit lebih kecil (XAU −11%, BTC −21%). `_core.CFG["tp1_r"]`
+0,7 (BTC ikut). SL+ 0,7R terpisah jadi tidak berpengaruh (TP1 sudah di 0,7R).
