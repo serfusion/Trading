@@ -90,3 +90,29 @@ aktif mulai tiap awal bulan, maks 1 tahun.
   TP +$5 = S7); bar M5/M15 (uji M1 vs M5 Feb–Mei 2026 mirip); feed Twelve Data ≠ Exness (low 2 Okt lebih dalam: ulang
   keranjang 00:05 → TP 01:30, 20 layer, +$23,86, floating −$155).
 - TIDAK dipasang di bot (martingale tetap menunggu "pasang" dari pengguna).
+
+## 5. Bisa ditiru dengan target $150/bulan? (`research/tiru_150.py` → `docs/eksternal/hasil_tiru_150.txt`)
+
+- Kalibrasi: aturan rekonstruksi + **jeda 30–45 menit antar keranjang** (EA asli lebih selektif; entry tetap acak)
+  menghasilkan September 2026 dengan 1.401–1.886 trade dan profit tertutup $451–656 di modal $524 (laporan asli 1.792
+  trade, +$426,55) → EA itu **bisa ditiru** cukup dekat. Jeda 30 mnt: 3× habis di September; 45 mnt: 0× (peka waktu).
+- Per bulan kalender Jun 2012 – Sep 2026: akun baru tiap awal bulan, hasil = profit tertutup + floating akhir bulan,
+  atau −modal bila habis. Lot awal & modal diskalakan bersama supaya median bulan selamat BARU ≈ $150.
+
+| Pengaturan | Lot awal / modal | Bulan akun habis LAMA / BARU / 12 bln | Bulan ≥ $150 BARU | Rata-rata bersih/bulan LAMA / BARU | 1 akun selamat 12 bln LAMA / BARU (umur median) | Bersih median 1 akun BARU |
+|---|---|---|---|---|---|---|
+| Rasio trader (0,07/$524), jeda 30 | 0,10 / $749 | 15% / 37% / 75% | 38% | −$27 / −$59 | 15% / 0% (4,1 / 2,1 bln) | −$414 (ditarik $334) |
+| Rasio trader, jeda 45 | 0,10 / $749 | 12% / 35% / 67% | 32% | −$5 / −$78 | 20% / 0% (5,3 / 2,1 bln) | −$387 (ditarik $361) |
+| Rasio klaim 0,03/$524, jeda 30 | 0,07 / $1.223 | 7% / 25% / 50% | 35% | −$18 / −$107 | 33% / 8% (7,6 / 3,2 bln) | −$598 (ditarik $625) |
+| Rasio klaim 0,03/$524, jeda 45 | 0,09 / $1.572 | 5% / 22% / 33% | 43% | +$1 / −$93 | 38% / 4% (8,7 / 3,5 bln) | −$799 (ditarik $773) |
+| Selalu aktif (pembanding) | 0,06 / $449 | 16% / 52% / 100% | 27% | −$2 / −$69 | 15% / 0% (4,0 / 1,2 bln) | −$246 (ditarik $203) |
+
+- Bulan yang selamat hampir tidak pernah rugi (0–7%) dan 12 bulan terakhir median bulan selamat $579–791 (emas sangat
+  volatil) — inilah yang terlihat di laporan trader. Tetapi 22–37% bulan (BARU) berakhir dengan akun habis, sehingga
+  rata-rata bersih per bulan negatif (−$59 s/d −$107); LAMA sekitar nol (−$27 s/d +$1). Satu-satunya angka positif:
+  rasio klaim + jeda 45, 12 bulan terakhir +$71/bulan (4 dari 12 bulan tetap habis); total 2012–2026 varian itu −$5.428.
+- Satu akun yang dijalankan terus: BARU hanya 0–8% bertahan 12 bulan (umur median 2–3,5 bulan); sempat menarik
+  $334–773, lalu modal habis → bersih median −$387 s/d −$799.
+- Jawaban: **bisa ditiru dan bisa menghasilkan ≥ $150 di sebagian bulan (32–43%), tetapi bukan $150 setiap bulan**;
+  nilai harapannya negatif. Batasan: indikator asli tidak diketahui (jeda acak sebagai pendekatan); indikator yang
+  benar-benar punya keunggulan bisa mengubah hasil, tetapi belum ada buktinya (laporan hanya 1 bulan, DD saldo saja).

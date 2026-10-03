@@ -157,6 +157,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   keranjang 2 Okt direkonstruksi persis (L1 0,07 @4.177,890 → −159,64; lot ×1,2 dibulatkan per layer, L17 1,24, TP rata-rata
   +$1,9, floating −16…−26% untuk +$12,75). Laporan MT5 riwayat = DD SALDO saja (2.937,30 = 14 layer minus satu Close All).
   Aturan rekonstruksi: harapan/keranjang negatif semua varian; NFP 2 Okt → akun $524 habis 15:45 UTC bila selalu aktif.
+  Tiru $150/bln (`research/tiru_150.py`, SIGNAL_STRIKE 5): jeda 30–45 mnt antar keranjang meniru September (1.400–1.900
+  trade, +$451–656 vs laporan 1.792, +$426). Skala median $150 → modal $749–1.572; BARU 22–37% bulan akun habis, rata-rata
+  −$59…−$107/bln, 1 akun bertahan 12 bln 0–8%. `martingale_ea.sim(jeda_menit=…)` = opsi jeda (bawaan 0, hasil lama sama).
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

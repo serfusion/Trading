@@ -85,15 +85,18 @@ def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float
 
 def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: float, maxlay: int,
         modal: float = MODAL, rek: bool = False, i0: int = 1, i1: int | None = None, stop: bool = False,
-        one: bool = False, info: list | None = None):
+        one: bool = False, info: list | None = None, jeda_menit: float = 0.0):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
     one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
-    (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis)."""
+    (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis).
+    jeda_menit > 0: keranjang baru baru dibuka di bar pertama setelah jeda (EA lebih selektif; entry tetap acak)."""
     o, h, l, c = arrays(df)
     t = df.index
     lots_tab = lot_table(lot0, mult, maxlay, rek)
     closes, ruins, depth = [], [], []      # (indeks bar, profit USC) / indeks bar / layer per keranjang
-    st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[])
+    st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[], idle=0)
+    tn = t.asi8 if jeda_menit else None
+    jeda_ns = int(jeda_menit * 60e9)
 
     def open_basket(p: float, i: int) -> None:
         d = side if side else (1 if c[i - 1] >= o[i - 1] else -1)
@@ -102,7 +105,7 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                   used=lots_tab[0] * USC * p / LEV, mineq=st["bal"], ent=[x + SPREAD])
 
     def seg(a: float, b: float, i: int, gap: bool) -> None:
-        while not st["done"]:
+        while not st["done"] and st["n"]:
             d = st["d"]
             xa, xb = d * a, d * b
             if xb < xa:                                   # melawan posisi
@@ -130,7 +133,10 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                         info.append((i, st["n"], st["mineq"], -st["bal"], None))
                     st["done"] = one
                     st["bal"] = modal
-                    open_basket(b, i)
+                    if jeda_ns:
+                        st.update(n=0, idle=tn[i] + jeda_ns)
+                    else:
+                        open_basket(b, i)
                 return
             tpx = st["sc"] / st["sl"] + tp
             if xb < tpx:
@@ -146,12 +152,17 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             st["done"] = one
             st["bal"] = modal                             # kelebihan ditarik (bisa negatif kecil karena spread)
             a = d * px
+            if jeda_ns:
+                st.update(n=0, idle=tn[i] + jeda_ns)
+                return
             open_basket(a, i)
             if gap:
                 return
 
     open_basket(o[i0], i0)
     for i in range(i0, i1 or len(o)):
+        if jeda_ns and not st["n"] and not st["done"] and tn[i] >= st["idle"]:
+            open_basket(o[i], i)
         if i > i0:
             seg(c[i - 1], o[i], i, True)
         pts = (o[i], l[i], h[i], c[i]) if c[i] >= o[i] else (o[i], h[i], l[i], c[i])
