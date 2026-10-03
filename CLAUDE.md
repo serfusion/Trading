@@ -141,6 +141,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `layers`, `sinyal_lapis.json`, env LAYER_SIGNALS). Tanda 📰 sinyal 💰 ≤ 4 jam setelah berita besar (`_berita_sinyal`,
   `sinyal_berita.json`, env NEWS_TAG): XAU +0,45R vs +0,21R, BTC +0,61R vs +0,37R. Aplikasi 3.21.
 
+## Skema WR tinggi (3 Okt 2026 — `docs/SKEMA_WR.md`)
+- `research/skema_wr.py`: 12 skema TP pendek (0,3–1,5R) + 1–2 jalan: WR 62–72% tetapi R/sinyal −45–95%; 0 lolos.
+  Terbaik kompromi "2 TP 0,5/1R + 3 jalan" (XAU +0,12R vs +0,21R, BTC +0,19R vs +0,37R, kalah beruntun 12 vs 25).
+  BELUM dipasang — menunggu pilihan pengguna.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
