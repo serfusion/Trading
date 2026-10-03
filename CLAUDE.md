@@ -150,6 +150,46 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - `research/martingale.py`: M1 antar sinyal 1/3/5x = lot rata-rata 3,1x, total/DD tidak lebih baik, DD 4x; M2 grid
   1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
   TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
+- EA grid trader (screenshot 3 akun Cent, `research/martingale_ea.py`, MARTINGALE bagian akhir): lot ×1,2 bukan ×2,
+  profit $114–126/akun; ×2 20 layer mustahil di $430; ×1,2 habis ±layer 17; 1 dari 13–165 keranjang menghabiskan akun,
+  nilai harapan/keranjang negatif di semua varian. Twelve Data XAU memuat bar akhir pekan → buang sebelum simulasi.
+- Signal Strike EA (bukti Telegram + 17 deal + laporan MT5, `research/signal_strike.py`, `docs/SIGNAL_STRIKE.md`):
+  keranjang 2 Okt direkonstruksi persis (L1 0,07 @4.177,890 → −159,64; lot ×1,2 dibulatkan per layer, L17 1,24, TP rata-rata
+  +$1,9, floating −16…−26% untuk +$12,75). Laporan MT5 riwayat = DD SALDO saja (2.937,30 = 14 layer minus satu Close All).
+  Aturan rekonstruksi: harapan/keranjang negatif semua varian; NFP 2 Okt → akun $524 habis 15:45 UTC bila selalu aktif.
+  Tiru $150/bln (`research/tiru_150.py`, SIGNAL_STRIKE 5): jeda 30–45 mnt antar keranjang meniru September (1.400–1.900
+  trade, +$451–656 vs laporan 1.792, +$426). Skala median $150 → modal $749–1.572; BARU 22–37% bulan akun habis, rata-rata
+  −$59…−$107/bln, 1 akun bertahan 12 bln 0–8%. `martingale_ea.sim(jeda_menit=…)` = opsi jeda (bawaan 0, hasil lama sama).
+  Klaim 6 bulan (`research/klaim_6bulan.py`, SIGNAL_STRIKE 6): mulai tiap hari 15 Mar–15 Apr 2026 → 0/32 bertahan s/d
+  2 Okt di 5 pengaturan (12 Apr gap pembukaan mingguan, 28 Mei, 30 Jun, 26 Jul, 28 Sep — dicek Twelve Data H1); bertahan
+  182 hari mulai 2025–2026: 0%. Bukti trader hanya ±3 pekan (setoran 2026.09.1x) + laporan 1 bulan.
+- EA buatan (permintaan "tiru martingale x2", 3 Okt): `ea/GridMartingale.mq5` (TERPISAH dari bot, BELUM di-compile di
+  sesi — pengguna compile di MetaEditor & uji demo), panduan `docs/EA_MARTINGALE.md`, uji `research/ea_400.py` (modal $400):
+  11 pengaturan ×2/×1,2 ± pengaman (batas rugi ekuitas dicek per level, tutup akhir pekan) → semua rata-rata negatif BARU;
+  bawaan X2f −$15/bln, 0% bulan ≥ $150; tanpa pengaman X2a 30% bulan ≥ $150 tetapi 43% bulan akun habis.
+  `sim(stop_pct=…, akhir_pekan=…)` = opsi baru (bawaan mati, hasil lama sama).
+- Filter "MARKET CRASH DETECTED" bot trader (`research/krisis_filter.py`, SIGNAL_STRIKE 7): detektor turun ≥ $30 dari
+  tertinggi 60 mnt menyala 2 Okt 13:15 & 14:30 UTC = notifikasi 20:13 & 21:30 WIB. "Tahan keranjang baru" saja = tanpa efek;
+  "beku" (tanpa layer baru) BARU −$35 vs −$65/bln; Q1 $400 ×1,2 + beku + akhir pekan: 8/12 bulan terakhir $160–250, 4/12 habis
+  (penurunan pelan $8–15/jam lolos filter). EA v1.10 punya `InpKrisisMode`; `sim(krisis=(usd, mnt, jeda, mode))`.
+- Pencarian grid yang untung (`docs/GRID_CARI.md`, 3 Okt): `research/grid_cari.py` 936 pengaturan (ATR, ADX, RSI, BB, sesi,
+  vol, tren; risiko R=5%/keranjang, seleksi LAMA → uji BARU) → 0 berarti (1 lolos ≈ $4/tahun). `research/piramida.py`
+  (kebalikan martingale, layer searah tren H4+D1, stop ikut naik): 3 lolos LAMA & positif BARU; terbaik jarak 3 ATR/stop
+  2 ATR/maks 6: +0,13R/+0,18R, 12/15 tahun +, menang 25%, risiko 0,5% ≈ +$5–7/bln per $400 (DD 21–30%), swap belum.
+  `ea/PiramidaTren.mq5` (belum di-compile). Kait sim baru: izin/step_arr/tp_arr/lot_arr/sl_lapis/bulat/tutup_arr.
+- Blueprint 10 strategi non-martingale (unggahan, `docs/BLUEPRINT10.md`, `research/blueprint10.py`, `gabung_bp.py`): 79
+  kombinasi → 0 lolos; TP 0,5R WR 61–68% tetapi −0,08…+0,02R; terdekat #9 ATR breakout + tren2 (+0,06/+0,11R). Sebagai pemicu
+  piramida tidak lebih baik di BARU; aturan risiko 2%/5%/4 kalah hampir tak aktif. WR tinggi + untung = 💰 TP1 0,7R.
+- Cek data & filter TENANG (`docs/TENANG.md`, `research/tenang.py`): data vs Twelve Data H1 selisih median $0,19, korelasi
+  0,944, arah 98,6%. Tenang = tanpa berita USD 60/120 mnt (FF + tanggal rilis FRED 2026 + FOMC), tanpa crash 3×ATR/60 mnt
+  4 jam, ATR ≤ median 20 hari (43% waktu). Blueprint: 1 lolos LAMA gagal BARU; grid + tenang + lindung + akhir pekan: habis
+  37%→8% bln (trader) tetapi rata-rata BARU −$19; ×2 jarak $5 +$4/bln tetapi sensitivitas = kantong kebetulan; piramida
+  tenang R/keranjang naik, $/bln sama. Kalender FRED: data/research/eksternal/fred_release_{10,50,46,53,54,9}.json.
+- Filter tenang pada sinyal 💰 (`docs/SINYAL_TENANG.md`, `research/sinyal_tenang.py`, replay cloud TP1 0,7R): TIDAK naikkan
+  WR (XAU BARU 63%→57%) & total turun (+163R→+70R) → jangan dipasang. Kandidat LABEL "🎯 WR tinggi": lapisan BTC saat ATR H1 ≥
+  1,5× median 20 hari: WR 78%/76% (n 110/121), 9/11 tahun ≥ 69% — ditemukan setelah lihat BARU. DIPASANG 3 Okt (izin "kalau
+  cocok dan bagus pasang saja") sebagai LABEL saja: `_core.WR_TINGGI`/`vol_rel`, field `wr_tinggi` pada event lapisan BTC,
+  env WR_TINGGI=0 mematikan, aplikasi 3.34 (pill & notifikasi 🎯). Filter tenang TIDAK dipasang.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import json
 import secrets
+import statistics
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
@@ -325,6 +326,27 @@ TIER_STATS = {   # ⚡ replay kode cloud Okt 2021–2026, TP1 0,7R (SL+ 0,7R = s
     "XAU": (54.3, 0.346, 54.3, 0.346, 127, "Okt 2021–2026"),
     "BTC": (58.6, 0.421, 58.6, 0.421, 278, "Okt 2021–2026"),
 }
+
+
+# 🎯 WR tinggi (research/sinyal_tenang.py, docs/SINYAL_TENANG.md; izin pengguna 3 Okt 2026 "kalau cocok dan bagus pasang"):
+# LABEL info pada sinyal 🔁 lapisan BTC saat volatilitas tinggi = ATR14 H1 (rata-rata TR) ≥ 1,5 × median ATR14 480 candle
+# terakhir. Replay kode cloud TP1 0,7R + spread asli: WR 78% (2016–Sep 2021, 110 lapisan, +0,53R) / 76% (Okt 2021–2026,
+# 121 lapisan, +0,46R); 9 dari 11 tahun ≥ 69%. Tidak mengubah sinyal, lot, maupun auto order. Env WR_TINGGI=0 mematikan.
+WR_TINGGI = {"BTC": {"vol": 1.5, "wr": 76.0, "wr_lama": 78.0, "avg_r": 0.46, "n": 121, "periode": "Okt 2021–2026",
+                     "teks": "🎯 WR TINGGI: lapisan BTC saat volatilitas ≥ 1,5× normal — riwayat WR 76% (121 lapisan "
+                             "Okt 2021–2026; 78% di 2016–2021) • +0,46R/lapisan"}}
+
+
+def vol_rel(closed: list[Bar], n: int = 14, window: int = 480) -> float | None:
+    """ATR14 (rata-rata TR sederhana) candle terakhir dibagi median ATR14 `window` candle terakhir (research/tenang)."""
+    need = window + n
+    if len(closed) < need + 1:
+        return None
+    seg = closed[-(need + 1):]
+    tr = [max(b.h - b.l, abs(b.h - seg[i].c), abs(b.l - seg[i].c)) for i, b in enumerate(seg[1:])]
+    atr = [sum(tr[i - n + 1:i + 1]) / n for i in range(n - 1, len(tr))][-window:]
+    med = statistics.median(atr)
+    return atr[-1] / med if med > 0 else None
 
 
 def vol_pct(closed: list[Bar], n: int = 14, window: int = 1440) -> float | None:
@@ -772,6 +794,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             text = (f"🔁 LAPISAN ke-{n_open} (lot ½) — {n_open} sinyal sebelumnya di set ini masih berjalan"
                     + (f"\n{lay['stats']['teks']}" if lay.get("stats") else "") + "\n" + text
                     + "\nPakai ½ lot dari biasanya. Auto order tidak dipakai untuk lapisan.")
+            wt = cfg.get("wr_tinggi")
+            if wt and (vr := vol_rel(closed)) is not None and vr >= wt["vol"]:
+                ev["wr_tinggi"] = {**{k: v for k, v in wt.items() if k != "teks"}, "vol_rel": round(vr, 2)}
+                text = f"{wt['teks']} (volatilitas sekarang {vr:.1f}× normal)\n" + text
         # sinyal kembar (set lain sudah membuka sinyal di candle & arah yang sama): cukup 1 teks ntfy
         first = layer or not twins_open(name, {"bar_close": iso(closed[-1].t + tf), "dir": d})
         pub.publish(ev, text if first else None, f"{d} {symbol}", 5,

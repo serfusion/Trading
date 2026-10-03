@@ -134,3 +134,48 @@ def test_skip_cats_btc_konf(monkeypatch):
     import tick
     src = Path(tick.__file__).read_text(encoding="utf-8")
     assert '"skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1"' in src
+
+
+def test_vol_rel_atr_dibanding_median():
+    import _core
+    t0 = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    bars = [_core.Bar(t0 + timedelta(hours=i), 100, 101, 99, 100) for i in range(600)]       # range 2
+    assert _core.vol_rel(bars[:400]) is None                                                  # data kurang
+    assert abs(_core.vol_rel(bars) - 1.0) < 1e-9
+    big = bars + [_core.Bar(t0 + timedelta(hours=600 + i), 100, 103, 97, 100) for i in range(14)]   # range 6
+    assert abs(_core.vol_rel(big) - 3.0) < 1e-9
+
+
+def long_pullback_df(n_flat=520, amp=2.0):
+    flat = [4300 + amp * np.sin(i / 2) for i in range(n_flat)]
+    up1 = list(np.linspace(flat[-1] + 4, flat[-1] + 60, 20))
+    back = list(np.linspace(up1[-1], up1[-1] - 12, 5))
+    up2 = list(np.linspace(back[-1], back[-1] + 80, 20))
+    drop = list(np.linspace(up2[-1], up2[-1] - 120, 8))
+    return bars_from_path(flat + up1 + back + up2 + drop + [drop[-1]] * 10, start="2026-08-01 00:00", freq="1h",
+                          wick=0.5)
+
+
+def test_label_wr_tinggi_pada_lapisan_saat_volatil(monkeypatch):
+    import _core
+    import tick
+    wt = {**_core.WR_TINGGI["BTC"]}
+    cfg = {**ONE_SET, "layer": {"mode": "any", "max": 2, "lot": 0.5}, "wr_tinggi": wt}
+    _, pub = run_ticks(long_pullback_df(), cfg=cfg)
+    sig = [e for e in pub.events if e["type"] == "signal"]
+    assert len(sig) == 2 and sig[1]["lapis"]
+    lab = sig[1].get("wr_tinggi")
+    assert lab and lab["wr"] == 76.0 and lab["vol_rel"] >= 1.5 and "teks" not in lab   # tren tajam setelah pasar datar
+    assert "wr_tinggi" not in sig[0]                                                    # sinyal dasar tidak diberi label
+    # volatilitas tidak setinggi ambang -> tanpa label; sinyal & lot tetap sama
+    _, pub2 = run_ticks(long_pullback_df(), cfg={**cfg, "wr_tinggi": {**wt, "vol": 99.0}})
+    sig2 = [e for e in pub2.events if e["type"] == "signal"]
+    assert [e["id"] for e in sig2] == [e["id"] for e in sig] and all("wr_tinggi" not in e for e in sig2)
+    assert sig2[1]["lot_mult"] == sig[1]["lot_mult"]
+    # setelan tick: hanya BTC, bisa dimatikan
+    monkeypatch.setenv("NEWS_TAG", "0")
+    monkeypatch.delenv("WR_TINGGI", raising=False)
+    assert tick.signal_extras("BTC", None)["wr_tinggi"]["vol"] == 1.5
+    assert "wr_tinggi" not in tick.signal_extras("XAU", None)
+    monkeypatch.setenv("WR_TINGGI", "0")
+    assert "wr_tinggi" not in tick.signal_extras("BTC", None)

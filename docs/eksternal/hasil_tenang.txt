@@ -1,0 +1,75 @@
+1. Cek data XAU H1 vs Twelve Data (independen), 2020-06 → 2026-10, 36,594 jam: selisih close median $0.19, P95 $4.06; korelasi return per jam 0.944; arah candle sama 98.6% (gerak > 0,05%). Per tahun selisih median: 2020:$0.19 2021:$0.18 2022:$0.19 2023:$0.17 2024:$0.19 2025:$0.37 2026:$0.70
+   Bar janggal (range > 15× median 1 hari): 145 dari 626,270; duplikat waktu: 0.
+   Kalender berita USD: 3,735 rilis 2012–2026 (2026: 35).
+2. Waktu 'tenang' 43% bar (volatilitas ≤ median 51%, jeda crash 12%, jendela berita 9%).
+
+3a. 10 strategi blueprint — R per trade LAMA / BARU (WR BARU); kolom: tanpa filter | tenang | tenang + tren2
+  1 tren+pullback        2R   -0.05/-0.00 (33%, n 1510/832) | -0.02/+0.06 (35%, n 793/389) | +0.03/+0.21 (40%, n 440/218)
+  1 tren+pullback        1R   -0.06/-0.03 (48%, n 1819/972) | -0.02/+0.00 (50%, n 862/423) | -0.02/+0.05 (53%, n 466/238)
+  1 tren+pullback        0,5R -0.06/-0.04 (64%, n 2190/1179) | -0.04/-0.03 (65%, n 985/499) | -0.02/-0.02 (66%, n 541/273)
+  1 tren+pullback        F    -0.04/-0.02 (48%, n 1667/905) | -0.01/-0.00 (50%, n 832/409) | +0.00/+0.07 (53%, n 456/229)
+  2 breakout+retest      2R   -0.09/-0.01 (33%, n 1594/869) | -0.01/-0.05 (32%, n 584/355) | -0.03/-0.08 (31%, n 251/193)
+  2 breakout+retest      1R   -0.08/-0.03 (49%, n 1837/1020) | -0.06/-0.02 (49%, n 637/400) | -0.11/-0.02 (49%, n 274/221)
+  2 breakout+retest      0,5R -0.08/-0.05 (64%, n 1927/1091) | -0.06/-0.03 (65%, n 658/419) | -0.06/+0.01 (67%, n 289/235)
+  2 breakout+retest      F    -0.06/-0.04 (48%, n 1676/920) | -0.04/-0.04 (49%, n 601/368) | -0.07/-0.05 (48%, n 255/202)
+  3 sweep+MSS            2R   -0.00/-0.11 (31%, n 511/261) | -0.05/-0.14 (29%, n 219/140) | -0.02/-0.00 (33%, n 52/36)
+  3 sweep+MSS            1R   -0.01/-0.04 (48%, n 611/312) | -0.11/-0.10 (45%, n 232/146) | -0.16/-0.06 (47%, n 52/36)
+  3 sweep+MSS            0,5R -0.03/-0.02 (65%, n 730/361) | -0.06/-0.13 (58%, n 249/153) | -0.01/-0.11 (59%, n 52/37)
+  3 sweep+MSS            F    -0.02/-0.02 (49%, n 553/282) | -0.12/-0.06 (46%, n 225/142) | -0.12/+0.01 (47%, n 52/36)
+  4 mean reversion BB    2R   +0.13/+0.09 (36%, n 45/44) | -1.00/-0.40 (20%, n 12/10) | -1.00/+0.00 (0%, n 2/0)
+  4 mean reversion BB    1R   -0.11/+0.00 (50%, n 45/44) | -0.83/+0.00 (50%, n 12/10) | -1.00/+0.00 (0%, n 2/0)
+  4 mean reversion BB    0,5R -0.13/+0.03 (69%, n 45/45) | -0.63/+0.05 (70%, n 12/10) | -0.25/+0.00 (0%, n 2/0)
+  4 mean reversion BB    F    -0.05/+0.05 (50%, n 45/44) | -0.88/-0.05 (50%, n 12/10) | -1.00/+0.00 (0%, n 2/0)
+  5 momentum expansion   2R   +0.00/+0.04 (35%, n 1052/542) | +0.12/+0.03 (34%, n 376/201) | +0.24/+0.13 (38%, n 126/69)
+  5 momentum expansion   1R   -0.01/-0.03 (49%, n 1189/612) | +0.06/-0.08 (46%, n 400/218) | +0.16/-0.11 (45%, n 135/74)
+  5 momentum expansion   0,5R -0.03/-0.05 (64%, n 1333/684) | +0.02/-0.07 (62%, n 444/241) | +0.07/-0.04 (64%, n 149/80)
+  5 momentum expansion   F    +0.01/-0.00 (49%, n 1089/562) | +0.07/-0.07 (47%, n 380/206) | +0.21/-0.06 (46%, n 127/70)
+  6 sesi London          2R   -0.03/-0.03 (32%, n 1349/711) | -0.03/-0.07 (31%, n 1058/563) | +0.07/-0.09 (30%, n 362/211)
+  6 sesi London          1R   -0.05/-0.06 (47%, n 1429/755) | -0.05/-0.08 (46%, n 1098/588) | +0.05/-0.13 (43%, n 367/214)
+  6 sesi London          0,5R -0.07/-0.03 (65%, n 1458/765) | -0.07/-0.03 (65%, n 1107/596) | -0.03/-0.06 (63%, n 368/214)
+  6 sesi London          F    -0.04/-0.05 (47%, n 1401/738) | -0.03/-0.08 (46%, n 1086/581) | +0.03/-0.11 (44%, n 364/213)
+  7 VWAP reversion       2R   -0.37/-0.21 (26%, n 339/155) | -0.17/+0.03 (34%, n 36/29) | -1.00/-1.00 (0%, n 2/1)
+  7 VWAP reversion       1R   -0.24/-0.26 (37%, n 341/155) | +0.17/-0.03 (48%, n 36/29) | -1.00/+1.00 (100%, n 2/1)
+  7 VWAP reversion       0,5R -0.15/-0.02 (65%, n 351/166) | +0.14/+0.00 (67%, n 37/30) | -0.25/+0.50 (100%, n 2/1)
+  7 VWAP reversion       F    -0.31/-0.24 (37%, n 341/155) | -0.01/+0.03 (48%, n 36/29) | -1.00/+0.50 (100%, n 2/1)
+  8 MTF struktur         2R   -0.10/-0.02 (33%, n 1245/651) | -0.13/-0.08 (31%, n 615/352) | -0.08/-0.10 (30%, n 217/103)
+  8 MTF struktur         1R   -0.10/-0.01 (50%, n 1367/722) | -0.09/-0.04 (48%, n 649/365) | -0.02/-0.03 (49%, n 221/105)
+  8 MTF struktur         0,5R -0.11/-0.02 (65%, n 1530/826) | -0.09/-0.05 (64%, n 684/401) | -0.01/-0.02 (65%, n 230/109)
+  8 MTF struktur         F    -0.09/+0.00 (51%, n 1313/691) | -0.10/-0.05 (48%, n 634/360) | -0.01/-0.05 (49%, n 221/105)
+  9 ATR breakout         2R   +0.02/-0.03 (33%, n 3103/1721) | +0.04/-0.05 (32%, n 1124/673) | +0.01/+0.03 (34%, n 431/257)
+  9 ATR breakout         1R   -0.01/-0.04 (48%, n 4491/2466) | -0.01/-0.05 (48%, n 1341/816) | +0.01/-0.06 (47%, n 500/305)
+  9 ATR breakout         0,5R -0.03/-0.04 (64%, n 5237/2872) | -0.02/-0.05 (63%, n 1491/911) | -0.00/-0.05 (63%, n 540/328)
+  9 ATR breakout         F    -0.01/-0.00 (49%, n 3604/1989) | -0.01/-0.05 (48%, n 1201/730) | +0.01/-0.07 (46%, n 445/277)
+  Lolos seleksi LAMA (n ≥ 100, > 0, t ≥ 2, ≥ 70% tahun +) dengan filter tenang: 1
+    5 momentum expansion F tenang+tren2: LAMA +0.21 (t 2.2) → BARU -0.06 (t -0.4, WR 46%)
+  WR ≥ 60% di LAMA & BARU dengan filter tenang: 13 kombinasi, rata-rata R LAMA -0.013 / BARU -0.034; yang positif di keduanya: 1
+
+3b. Grid/martingale (akun baru tiap bulan): tanpa filter / hanya buka saat tenang / + tutup sebelum berita & saat crash / + tutup akhir pekan
+  G1 rekonstruksi Signal Strike 0,07/$524 x1,2
+    tanpa filter                   LAMA    -3$/bln habis  12% ≥$150   6% | BARU   -65$/bln habis  37% ≥$150  22% | 12bln  -123$/bln habis  67% ≥$150  33%
+    buka saat tenang               LAMA    -9$/bln habis   7% ≥$150   1% | BARU   -68$/bln habis  23% ≥$150   3% | 12bln  -145$/bln habis  50% ≥$150  17%
+    tenang + lindung               LAMA    +1$/bln habis   0% ≥$150   0% | BARU   -35$/bln habis  12% ≥$150   2% | 12bln  -137$/bln habis  42% ≥$150   8%
+    tenang + lindung + akhir pekan LAMA    +0$/bln habis   0% ≥$150   0% | BARU   -19$/bln habis   8% ≥$150   3% | 12bln   -49$/bln habis  25% ≥$150  17%
+  G2 $400 x2 0,01 jarak $2,25
+    tanpa filter                   LAMA   -44$/bln habis  31% ≥$150  12% | BARU   -33$/bln habis  43% ≥$150  30% | 12bln  -279$/bln habis 100% ≥$150   0%
+    buka saat tenang               LAMA   -41$/bln habis  20% ≥$150   3% | BARU   -40$/bln habis  27% ≥$150   7% | 12bln  -255$/bln habis  83% ≥$150   0%
+    tenang + lindung               LAMA    -0$/bln habis   2% ≥$150   1% | BARU   -44$/bln habis  20% ≥$150   3% | 12bln  -259$/bln habis  83% ≥$150   0%
+    tenang + lindung + akhir pekan LAMA    -2$/bln habis   2% ≥$150   1% | BARU   -45$/bln habis  20% ≥$150   3% | 12bln  -253$/bln habis  83% ≥$150   0%
+  G3 $400 x2 0,01 jarak $5
+    tanpa filter                   LAMA    -9$/bln habis   5% ≥$150   0% | BARU   -13$/bln habis  13% ≥$150   3% | 12bln   -74$/bln habis  42% ≥$150  17%
+    buka saat tenang               LAMA    -6$/bln habis   4% ≥$150   0% | BARU   -11$/bln habis   7% ≥$150   0% | 12bln   -68$/bln habis  25% ≥$150   0%
+    tenang + lindung               LAMA    +0$/bln habis   0% ≥$150   0% | BARU   -10$/bln habis   3% ≥$150   0% | 12bln   -60$/bln habis  17% ≥$150   0%
+    tenang + lindung + akhir pekan LAMA    +0$/bln habis   0% ≥$150   0% | BARU    +4$/bln habis   0% ≥$150   0% | 12bln   +11$/bln habis   0% ≥$150   0%
+  G4 $400 x1,2 0,05 jarak $2,25
+    tanpa filter                   LAMA    -4$/bln habis  12% ≥$150   4% | BARU   -40$/bln habis  35% ≥$150  12% | 12bln   -63$/bln habis  67% ≥$150  33%
+    buka saat tenang               LAMA    -9$/bln habis   7% ≥$150   0% | BARU   -44$/bln habis  22% ≥$150   2% | 12bln   -63$/bln habis  42% ≥$150   8%
+    tenang + lindung               LAMA    +1$/bln habis   0% ≥$150   0% | BARU   -19$/bln habis  10% ≥$150   2% | 12bln   -68$/bln habis  33% ≥$150   8%
+    tenang + lindung + akhir pekan LAMA    +0$/bln habis   0% ≥$150   0% | BARU   -15$/bln habis   8% ≥$150   3% | 12bln   -38$/bln habis  25% ≥$150  17%
+
+3c. Piramida (tren2, stop 2 ATR, maks 6): R per keranjang LAMA / BARU, $/bln pada risiko 0,5% ($400)
+  jarak 1 ATR biasa                    LAMA n 2749 +0.241R (t 2.2, WR 19%) $+11.8/bln | BARU n 1506 +0.282R (t 2.0, WR 20%) $+14.2/bln
+  jarak 1 ATR hanya buka saat tenang   LAMA n 1751 +0.301R (t 2.0, WR 18%) $+9.5/bln | BARU n 963 +0.487R (t 2.2, WR 17%) $+15.7/bln
+  jarak 2 ATR biasa                    LAMA n 2498 +0.160R (t 2.1, WR 21%) $+7.1/bln | BARU n 1463 +0.108R (t 1.5, WR 22%) $+5.3/bln
+  jarak 2 ATR hanya buka saat tenang   LAMA n 1629 +0.277R (t 2.4, WR 18%) $+8.1/bln | BARU n 937 +0.101R (t 0.9, WR 17%) $+3.2/bln
+  jarak 3 ATR biasa                    LAMA n 2259 +0.134R (t 2.0, WR 25%) $+5.4/bln | BARU n 1254 +0.176R (t 2.2, WR 25%) $+7.4/bln
+  jarak 3 ATR hanya buka saat tenang   LAMA n 1468 +0.219R (t 2.3, WR 22%) $+5.8/bln | BARU n 827 +0.250R (t 2.1, WR 22%) $+6.9/bln
