@@ -7,7 +7,7 @@ kategori_badge) adalah kode terpisah dari cloud. Skrip ini menjalankan fungsi cl
 (evaluate, kategori, filter, manage SL/TP1/SL+, TUTUP) pada data riset, satu tick per candle (2 menit setelah candle
 berikutnya dibuka; harga entry/TUTUP = open candle berikutnya, seperti cron cloud).
 Konfigurasi LIVE (bawaan): XAU filter H4 EMA50 + lapisan; BTC filter funding (proksi premium Binance, terlambat
-seperti cloud) + lewati September + lapisan. --mentah: tanpa filter H4/funding/September/lapisan (sebanding dengan
+seperti cloud) + lewati September + lapisan + tanpa kategori konf (sejak 3 Okt 2026). --mentah: tanpa filter H4/funding/September/lapisan (sebanding dengan
 riset "hanya 💰 dikirim"). Tanda 📰/⚡/perang hanya label -> tidak dipakai.
 Catatan cloud: R virtual TANPA spread, SL+ = entry ± 0,10 (riset: entry + 0,1R), SL tanpa celah harga, ATR(20)
 rata-rata sederhana (riset: ATR14 Wilder), dan sinyal dilewati bila ATR20 < 0,4 x ATR120.
@@ -112,6 +112,7 @@ def replay(name: str, mentah: bool = False, td: bool = False) -> pd.DataFrame:
     if lay and not mentah:
         cfg["layer"] = lay
     if name == "BTC" and not mentah:
+        cfg["skip_cats"] = ("konf",)        # seperti tick.py sejak 3 Okt 2026 (BTC konf dimatikan, BTC_SKIP_KONF)
         f, avail = funding_series()
 
         def skip(direction, now):

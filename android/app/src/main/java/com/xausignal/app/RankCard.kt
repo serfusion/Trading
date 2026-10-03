@@ -27,10 +27,14 @@ fun RankCard(money: MoneySettings) {
         val names = ((live?.keys()?.asSequence()?.toList() ?: emptyList()) +
             (all?.keys()?.asSequence()?.toList() ?: emptyList())).distinct()
         for (c in names) {
-            val k = live?.optJSONObject(c) ?: all?.optJSONObject(c) ?: continue
+            // penanda "dikirim" dari cloud (BTC konf dimatikan 3 Okt 2026); data lama tanpa penanda: ada di replay live
+            val flag = all?.optJSONObject(c)?.takeIf { it.has("dikirim") }?.optBoolean("dikirim")
+                ?: live?.optJSONObject(c)?.takeIf { it.has("dikirim") }?.optBoolean("dikirim")
+            val sent = flag ?: (live?.has(c) == true)
+            val k = (if (sent) live?.optJSONObject(c) else null) ?: all?.optJSONObject(c) ?: live?.optJSONObject(c)
+                ?: continue
             val b = k.optJSONObject("baru") ?: continue
             if (b.optInt("n") == 0) continue
-            val sent = live?.has(c) == true || all?.optJSONObject(c)?.optBoolean("dikirim") == true
             val ini = k.optJSONObject("tahun_ini")?.takeIf { it.optInt("n") > 0 }?.optDouble("avg")
             rows += Row3(a, c, b.optInt("n"), b.optDouble("wr"), b.optDouble("avg"), ini, sent)
         }

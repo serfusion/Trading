@@ -40,6 +40,8 @@ Y26 = pd.Timestamp("2026-01-01", tz="UTC")
 KEY = {"XAU": "XAUUSD", "BTC": "BTCUSD"}
 EXN = {"XAU": "XAUUSDc", "BTC": "BTCUSDm"}
 SETS = ("T40/15", "T55/20", "T80/30")
+# kategori yang dikirim cloud SEKARANG (BTC konf dimatikan 3 Okt 2026, tick.py BTC_SKIP_KONF)
+DIKIRIM = {"XAU": ("konf+⭐", "konf"), "BTC": ("konf+⭐", "⭐")}
 rng = np.random.default_rng(11)
 
 
@@ -170,7 +172,7 @@ def bagian2(name: str, L: list, js: dict) -> pd.DataFrame:
         "lama": cell(base[base.t_signal < SPLIT].R),
         "baru": cell(base[base.t_signal >= SPLIT].R),
         "kat": {c: {"baru": cell(g[g.t_signal >= SPLIT].R), "tahun_ini": cell(g[g.t_signal >= Y26].R),
-                    "semua": cell(g.R)} for c, g in base.groupby("cat")},
+                    "semua": cell(g.R), "dikirim": c in DIKIRIM[name]} for c, g in base.groupby("cat")},
         "lapis": {"baru": cell(lay[lay.t_signal >= SPLIT].R), "semua": cell(lay.R)} if len(lay) else None,
     }
     return base
@@ -247,7 +249,7 @@ def main() -> None:
     for n in ("XAU", "BTC"):                 # semua kategori (termasuk yang tidak dikirim) untuk kartu 🏆 aplikasi
         a = go(KEY[n], None)
         js[n]["kat_semua"] = {c: {"baru": cell(g[g.t >= SPLIT].R), "tahun_ini": cell(g[g.t >= Y26].R),
-                                  "dikirim": c in MONEY[KEY[n]]} for c, g in a.groupby("cat")}
+                                  "dikirim": c in DIKIRIM[n]} for c, g in a.groupby("cat")}
     txt = "\n".join(L) + "\n"
     OUT.write_text(txt, encoding="utf-8")
     JSON_OUT.write_text(json.dumps(js, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

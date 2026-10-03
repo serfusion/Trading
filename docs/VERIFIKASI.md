@@ -70,3 +70,13 @@ R = hasil rata-rata 5 posisi per sinyal (1R = rugi bila SL kena). LAMA = sebelum
 BTC tanpa konf lebih baik di periode BARU (untung sedikit lebih besar dengan sinyal lebih sedikit, DD lebih kecil) →
 disarankan dimatikan. XAU campur (BARU memburuk) → XAU konf tetap. Pemasangan di cloud butuh perubahan kode
 `cloud/` yang diblokir pengaman sesi → menunggu izin pengguna.
+
+### Koreksi: efek "menghalangi" kecil karena ada lapisan
+Pengguna benar: dengan sinyal berlapis 🔁, sinyal tetap bisa masuk walau sinyal lain masih berjalan (BTC: breakout baru,
+maks 2 lapisan per set, lot ½). Ukuran ulang (BTC sejak Okt 2021, spread asli):
+- Setelah konf dimatikan muncul 71 sinyal dasar baru (+0,36R/sin). 44 di antaranya SUDAH masuk sebagai lapisan lot ½
+  saat konf masih ada; 27 sisanya memang tidak masuk, dan rata-ratanya justru −0,42R.
+- Sinyal konf sendiri: 198 sinyal, +0,07R/sin (+14R total, belum pasti positif).
+- Gabungan (lapisan dihitung ½ lot): dengan konf +323R, tanpa konf +341R (+18R dalam 5 tahun, ±5%); 2026: +62R vs +60R.
+Jadi alasan "menghalangi sinyal bagus" yang dulu saya pakai terlalu dibesar-besarkan. Selisihnya kecil; mematikan atau
+menyalakan BTC konf hampir sama hasilnya (env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi).
