@@ -15,6 +15,11 @@ bot kita** (tidak menyentuh `xau_bot/` atau `cloud/`, tidak memakai sinyal 💰)
    buka lagi Senin ≥ `InpJamBukaSenin`; berita USD high impact (kalender MT5, `InpMenitSebelum`/`InpMenitSesudah`) →
    tidak membuka keranjang baru (layer keranjang yang berjalan tetap ditambah). Kalender MT5 tidak tersedia di
    Strategy Tester, jadi jeda berita hanya bekerja di akun live/demo.
+5. Filter krisis (v1.10, meniru "MARKET CRASH DETECTED" bot trader): harga melawan ≥ `InpKrisisUSD` (bawaan $30) dari
+   tertinggi/terendah M1 `InpKrisisMenit` (60) menit terakhir → jeda `InpKrisisJeda` (60) menit, diperpanjang selama
+   kondisi berlanjut. `InpKrisisMode`: tahan keranjang baru saja / **tahan keranjang + layer baru (bawaan)** / tutup
+   keranjang. Uji: "tahan keranjang baru saja" tidak berpengaruh; "tahan layer" dan "tutup" membantu sebagian
+   (`docs/SIGNAL_STRIKE.md` bagian 7).
 
 ## Hasil uji modal $400 (`research/ea_400.py` → `docs/eksternal/hasil_ea_400.txt`)
 
@@ -34,6 +39,12 @@ Batas rugi dicek di setiap level harga (seperti tick demi tick di MT5).
 | R1c | ×1,2 0,05 + batas rugi 30% + akhir pekan | −6 (−12) | 3% | 0% | 40% | −$1.779 |
 | R1d | ×1,2 0,03 + batas rugi 50% + akhir pekan | −23 (−13) | 7% | 0% | 35% | −$2.792 |
 | R1e | ×1,2 0,05 jarak $3 + batas rugi 50% + akhir pekan | −22 (−7) | 7% | 0% | 33% | −$2.077 |
+| **Q4** | **bawaan EA v1.10 = X2f + filter krisis "beku"** | **−19 (−7)** | **0%** | **0%** | — | **−$1.866** |
+| Q1 | ×1,2 0,05 jarak $2,25 + filter krisis "beku" + akhir pekan (tanpa batas rugi) | −22 (−7) | 15% | 27% | — | −$2.052 |
+
+Q1 = paling mirip bot trader (×1,2, filter krisis): 12 bulan terakhir 8 bulan +$162…+$247, 4 bulan akun habis
+(Mar, Mei, Jun, Jul 2026); rata-rata 12 bulan +$45/bulan, 5 tahun −$22/bulan. Filter krisis di bawaan ×2 tidak
+membantu (−$19 vs −$15/bulan) karena batas rugi 30% sudah memotong lebih dulu.
 
 - **Tidak ada pengaturan dengan rata-rata positif** (BARU semua negatif; LAMA terbaik ±$0).
 - Tanpa pengaman, $150/bulan memang bisa muncul (X2a: 30% bulan BARU; 2024 seluruh tahun +$2.679, 2016 +$943), tetapi
@@ -48,9 +59,10 @@ Batas rugi dicek di setiap level harga (seperti tick demi tick di MT5).
 
 | Preset | Pengali | Lot awal | Jarak | Batas rugi | Catatan |
 |---|---|---|---|---|---|
-| Bawaan (permintaan ×2) | 2,0 | 0,01 | 5,0 | 30% | X2f: −$15/bulan BARU, tidak pernah habis total |
+| Bawaan (permintaan ×2) | 2,0 | 0,01 | 5,0 | 30% + krisis "beku" | Q4: −$19/bulan BARU, tidak pernah habis total |
 | Seperti trader + pengaman | 1,2 | 0,05 | 2,25 | 30% | R1c: −$6/bulan BARU, paling ringan ruginya |
 | Seperti trader persis | 1,2 | 0,05 | 2,25 | 0 (mati), akhir pekan mati, berita mati | R1a: 35% bulan akun habis |
+| Seperti bot trader (filter krisis) | 1,2 | 0,05 | 2,25 | 0 (mati), krisis "beku", akhir pekan nyala | Q1: 8/12 bulan terakhir $160–250, 4/12 akun habis |
 
 ## Cara memasang (uji)
 

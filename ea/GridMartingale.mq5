@@ -5,10 +5,10 @@
 //| di semua pengaturan (docs/EA_MARTINGALE.md). Bukan saran profit. |
 //+------------------------------------------------------------------+
 #property copyright "serfusion/Trading - riset"
-#property version   "1.00"
+#property version   "1.10"
 #property description "Grid martingale: layer baru tiap harga melawan sejauh Jarak, lot x Pengali,"
 #property description "semua layer ditutup saat harga = rata-rata entry +/- TP. Pengaman: batas rugi,"
-#property description "tutup sebelum akhir pekan, jeda berita USD penting, jeda antar keranjang."
+#property description "tutup sebelum akhir pekan, jeda berita USD penting, filter krisis, jeda antar keranjang."
 
 #include <Trade\Trade.mqh>
 
@@ -17,6 +17,14 @@ enum ENUM_ARAH
    ARAH_BUY = 0,      // BUY saja (seperti trader)
    ARAH_SELL = 1,     // SELL saja
    ARAH_CANDLE = 2    // Ikut candle M5 terakhir
+  };
+
+enum ENUM_KRISIS
+  {
+   KRISIS_MATI = 0,   // Mati
+   KRISIS_BARU = 1,   // Tahan keranjang baru saja
+   KRISIS_BEKU = 2,   // Tahan keranjang baru + layer baru
+   KRISIS_TUTUP = 3   // Tutup keranjang + tahan keranjang baru
   };
 
 input group "Grid"
@@ -37,6 +45,10 @@ input bool      InpJedaBerita      = true;  // Tidak buka keranjang baru di seki
 input int       InpMenitSebelum    = 30;    // Menit sebelum berita
 input int       InpMenitSesudah    = 60;    // Menit sesudah berita
 input double    InpMaksSpread      = 0.50;  // Maksimal spread (USD) untuk membuka/menambah layer
+input ENUM_KRISIS InpKrisisMode    = KRISIS_BEKU; // Filter "market crash" (harga bergerak cepat melawan)
+input double    InpKrisisUSD       = 30.0;  // Krisis: harga melawan >= USD dari tertinggi/terendah ...
+input int       InpKrisisMenit     = 60;    // ... dalam sekian menit terakhir
+input int       InpKrisisJeda      = 60;    // Lama jeda setelah krisis terdeteksi (menit)
 
 input group "Lain-lain"
 input ulong     InpMagic       = 7712026;   // Magic number
@@ -47,6 +59,7 @@ datetime g_lastClose = 0;
 datetime g_newsCheck = 0;
 bool     g_newsBlock = false;
 string   g_gvName    = "";
+datetime g_krisisUntil = 0;
 
 struct Basket
   {
@@ -186,6 +199,33 @@ bool NewsBlock()
   }
 
 //+------------------------------------------------------------------+
+//| Krisis: BUY -> turun >= InpKrisisUSD dari tertinggi M1 terakhir; |
+//| SELL -> naik >= InpKrisisUSD dari terendah. Jeda diperpanjang    |
+//| selama kondisi masih terpenuhi.                                  |
+//+------------------------------------------------------------------+
+bool KrisisAktif(const int dir)
+  {
+   if(InpKrisisMode == KRISIS_MATI)
+      return(false);
+   datetime now = TimeCurrent();
+   int ih = iHighest(_Symbol, PERIOD_M1, MODE_HIGH, InpKrisisMenit, 0);
+   int il = iLowest(_Symbol, PERIOD_M1, MODE_LOW, InpKrisisMenit, 0);
+   if(ih >= 0 && il >= 0)
+     {
+      double gerak = (dir > 0) ? iHigh(_Symbol, PERIOD_M1, ih) - SymbolInfoDouble(_Symbol, SYMBOL_BID)
+                               : SymbolInfoDouble(_Symbol, SYMBOL_ASK) - iLow(_Symbol, PERIOD_M1, il);
+      if(gerak >= InpKrisisUSD)
+        {
+         if(now >= g_krisisUntil)
+            PrintFormat("KRISIS: harga %s $%.1f dalam %d menit, jeda %d menit", dir > 0 ? "turun" : "naik", gerak,
+                        InpKrisisMenit, InpKrisisJeda);
+         g_krisisUntil = now + InpKrisisJeda * 60;
+        }
+     }
+   return(now < g_krisisUntil);
+  }
+
+//+------------------------------------------------------------------+
 int CountMine()
   {
    int n = 0;
@@ -276,6 +316,12 @@ void OnTick()
          CloseAll("akhir pekan");
          return;
         }
+      bool krisis = KrisisAktif(b.dir);
+      if(krisis && InpKrisisMode == KRISIS_TUTUP)
+        {
+         CloseAll("krisis");
+         return;
+        }
       double tp = b.avg + b.dir * InpTP;
       if((b.dir > 0 && bid >= tp) || (b.dir < 0 && ask <= tp))
         {
@@ -283,30 +329,35 @@ void OnTick()
          return;
         }
       double next = b.lastPrice - b.dir * InpJarak;
-      if(b.n < InpMaksLayer && spread <= InpMaksSpread &&
+      if(b.n < InpMaksLayer && spread <= InpMaksSpread && !(krisis && InpKrisisMode == KRISIS_BEKU) &&
          ((b.dir > 0 && ask <= next) || (b.dir < 0 && bid >= next)))
          OpenLayer(b.dir, NormLot(b.lastLot * InpPengali), "L" + IntegerToString(b.n + 1));
       info = StringFormat("%s %d layer | %.2f lot | rata-rata %.3f | TP %.3f | layer berikut %.3f\n"
-                          "Floating %.2f (%.1f%% saldo) | batas rugi %.0f%%",
+                          "Floating %.2f (%.1f%% saldo) | batas rugi %.0f%%%s",
                           b.dir > 0 ? "BUY" : "SELL", b.n, b.lots, b.avg, tp, next,
-                          b.profit, bal > 0 ? 100.0 * b.profit / bal : 0.0, InpBatasRugiPersen);
+                          b.profit, bal > 0 ? 100.0 * b.profit / bal : 0.0, InpBatasRugiPersen,
+                          krisis ? " | KRISIS: layer ditahan" : "");
      }
    else
      {
       bool wk = WeekendBlock();
       bool news = NewsBlock();
+      int  dir = NewDir();
+      bool krisis = KrisisAktif(dir);
       long wait = (long)InpJedaMenit * 60 - (long)(TimeCurrent() - g_lastClose);
       if(wk)
          info = "Menunggu: akhir pekan";
       else if(news)
          info = "Menunggu: berita USD penting";
+      else if(krisis)
+         info = "Menunggu: krisis (harga bergerak cepat)";
       else if(spread > InpMaksSpread)
          info = StringFormat("Menunggu: spread %.2f > %.2f", spread, InpMaksSpread);
       else if(wait > 0)
          info = StringFormat("Menunggu: jeda %d menit lagi", (int)(wait / 60) + 1);
       else
         {
-         OpenLayer(NewDir(), NormLot(InpLotAwal), "L1");
+         OpenLayer(dir, NormLot(InpLotAwal), "L1");
          info = "Membuka layer 1";
         }
      }

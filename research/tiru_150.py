@@ -39,6 +39,8 @@ def jalan(df: pd.DataFrame, v: tuple, a: pd.Timestamp, b: pd.Timestamp, stop: bo
     c = arrays(df)[3]
     i0, i1 = max(int(t.searchsorted(a)), 1), int(t.searchsorted(b))
     kw = dict(jeda_menit=v[9]) if len(v) <= 10 else dict(jeda_menit=v[9], stop_pct=v[10], akhir_pekan=v[11])
+    if len(v) > 12:
+        kw["krisis"] = v[12]
     cl, ruins, _, st = sim(df, *v[1:9], i0=i0, i1=i1, stop=stop, **kw)
     flo = 0.0
     if not (stop and len(ruins)) and st["n"]:

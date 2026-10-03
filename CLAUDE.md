@@ -168,6 +168,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   11 pengaturan ×2/×1,2 ± pengaman (batas rugi ekuitas dicek per level, tutup akhir pekan) → semua rata-rata negatif BARU;
   bawaan X2f −$15/bln, 0% bulan ≥ $150; tanpa pengaman X2a 30% bulan ≥ $150 tetapi 43% bulan akun habis.
   `sim(stop_pct=…, akhir_pekan=…)` = opsi baru (bawaan mati, hasil lama sama).
+- Filter "MARKET CRASH DETECTED" bot trader (`research/krisis_filter.py`, SIGNAL_STRIKE 7): detektor turun ≥ $30 dari
+  tertinggi 60 mnt menyala 2 Okt 13:15 & 14:30 UTC = notifikasi 20:13 & 21:30 WIB. "Tahan keranjang baru" saja = tanpa efek;
+  "beku" (tanpa layer baru) BARU −$35 vs −$65/bln; Q1 $400 ×1,2 + beku + akhir pekan: 8/12 bulan terakhir $160–250, 4/12 habis
+  (penurunan pelan $8–15/jam lolos filter). EA v1.10 punya `InpKrisisMode`; `sim(krisis=(usd, mnt, jeda, mode))`.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

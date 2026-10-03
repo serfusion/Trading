@@ -86,13 +86,16 @@ def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float
 def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: float, maxlay: int,
         modal: float = MODAL, rek: bool = False, i0: int = 1, i1: int | None = None, stop: bool = False,
         one: bool = False, info: list | None = None, jeda_menit: float = 0.0, stop_pct: float = 0.0,
-        akhir_pekan: bool = False):
+        akhir_pekan: bool = False, krisis: tuple | None = None):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
     one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
     (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis).
     jeda_menit > 0: keranjang baru baru dibuka di bar pertama setelah jeda (EA lebih selektif; entry tetap acak).
     stop_pct > 0: tutup semua layer bila ekuitas turun ke modal x (1 − stop_pct) (dicatat sebagai close negatif).
-    akhir_pekan: tutup keranjang Jumat ≥ 20:00 UTC, tanpa keranjang baru sampai Senin 00:00 UTC."""
+    akhir_pekan: tutup keranjang Jumat ≥ 20:00 UTC, tanpa keranjang baru sampai Senin 00:00 UTC.
+    krisis=(turun $, jendela mnt, jeda mnt, mode): "MARKET CRASH DETECTED" ala bot trader — bila harga turun ≥ $ dari
+    tertinggi jendela, sejak bar berikutnya selama jeda: mode "baru" = tanpa keranjang baru; "beku" = juga tanpa layer
+    baru; "tutup" = keranjang berjalan ditutup + tanpa keranjang baru."""
     o, h, l, c = arrays(df)
     t = df.index
     lots_tab = lot_table(lot0, mult, maxlay, rek)
@@ -100,6 +103,13 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[], idle=0)
     tn = t.asi8 if jeda_menit else None
     jeda_ns = int(jeda_menit * 60e9)
+    kris = krisis_until(df, *krisis[:3]) if krisis else None
+    kmode = krisis[3] if krisis else ""
+
+    def krisis_aktif(i: int) -> bool:
+        return kris is not None and i > 0 and kris[i - 1] > kris_t[i]
+
+    kris_t = t.asi8.tolist() if krisis else None
     if akhir_pekan:
         wd, hr = t.dayofweek.tolist(), t.hour.tolist()
 
@@ -123,7 +133,7 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
         if jeda_ns:
             st.update(n=0, idle=tn[i] + jeda_ns)
             return False
-        if blocked(i):
+        if blocked(i) or krisis_aktif(i):
             st.update(n=0)
             return False
         open_basket(p, i)
@@ -142,7 +152,8 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             if xb < xa:                                   # melawan posisi
                 kena = penuh = False
                 while True:
-                    bisa = not penuh and st["n"] < maxlay and st["last"] - step >= xb
+                    bisa = (not penuh and st["n"] < maxlay and st["last"] - step >= xb
+                            and not (kmode == "beku" and krisis_aktif(i)))
                     lvl = (xb if gap else st["last"] - step) if bisa else xb
                     if stop_pct:                          # batas rugi dicek sebelum tiap layer baru (tick demi tick)
                         xs = ((modal * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
@@ -194,16 +205,16 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             if st["done"] or not lanjut(i, a) or gap:
                 return
 
-    if not blocked(i0):
+    if not blocked(i0) and not krisis_aktif(i0):
         open_basket(o[i0], i0)
     for i in range(i0, i1 or len(o)):
-        blk = blocked(i)
+        blk = blocked(i) or krisis_aktif(i)
         if not st["n"] and not st["done"] and not blk and (not jeda_ns or tn[i] >= st["idle"]):
             open_basket(o[i], i)
         if i > i0:
             seg(c[i - 1], o[i], i, True)
-        if blk and st["n"] and not st["done"]:
-            tutup(i, st["d"] * o[i])                      # tutup sebelum akhir pekan
+        if st["n"] and not st["done"] and (blocked(i) or (kmode == "tutup" and krisis_aktif(i))):
+            tutup(i, st["d"] * o[i])                      # tutup sebelum akhir pekan / saat krisis (mode tutup)
             st.update(n=0)
         pts = (o[i], l[i], h[i], c[i]) if c[i] >= o[i] else (o[i], h[i], l[i], c[i])
         for k in range(3):
@@ -213,6 +224,21 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     cl = pd.DataFrame(closes, columns=["i", "usc"]).astype({"i": int, "usc": float})
     cl["t"] = t[cl.i]
     return cl, t[ruins], np.array(depth), st
+
+
+_KRIS: dict = {}
+
+
+def krisis_until(df: pd.DataFrame, turun: float, jendela: float, jeda: float) -> list:
+    """Per bar: waktu (ns) berakhirnya jeda krisis terakhir yang terdeteksi s/d bar itu (0 bila belum pernah)."""
+    key = (id(df), turun, jendela, jeda)
+    if key not in _KRIS:
+        rm = df.high.rolling(f"{int(jendela)}min").max()
+        det = ((rm - df.low) >= turun).to_numpy()
+        tn = df.index.asi8
+        _KRIS.clear()
+        _KRIS[key] = np.maximum.accumulate(np.where(det, tn + int(jeda * 60e9), 0)).tolist()
+    return _KRIS[key]
 
 
 def keranjang(df: pd.DataFrame, v: tuple, starts: pd.DatetimeIndex, cap_days: int = 60) -> pd.DataFrame:

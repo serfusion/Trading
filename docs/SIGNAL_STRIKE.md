@@ -138,3 +138,35 @@ aktif mulai tiap awal bulan, maks 1 tahun.
   atau memang menghindari penurunan di atas (belum terbukti); (c) "6 bulan" = umur EA, bukan satu akun — akun yang
   habis diganti/disetor ulang (akun ke-2 di screenshot: setor $3.237, tarik $2.929); (d) beruntung. Bukti yang
   membedakan: statement lengkap 6 bulan per akun (semua setoran/penarikan) + grafik ekuitas (Myfxbook/FXBlue).
+
+## 7. Filter "MARKET CRASH DETECTED" (`research/krisis_filter.py` → `docs/eksternal/hasil_krisis_filter.txt`)
+
+- Bukti: notifikasi bot "Drop: $30.0 dalam 1 jam — Bot SKIP entry baru sampai volatilitas turun — cooldown sampai 21:05"
+  pukul 20:13 dan 21:30 WIB. Detektor tulis-ulang (tertinggi 60 mnt − low ≥ $30) menyala **2 Okt 2026 13:15 dan 14:30
+  UTC = 20:15 dan 21:30 WIB** (selisih 2 menit karena bar M5) → hari NFP, cocok.
+- Diuji pada aturan rekonstruksi (0,07 lot/$524, ×1,2, jarak $2,25, TP +$1,9, jeda 45 mnt), jeda krisis 60 mnt mulai
+  bar berikutnya:
+
+| Kode | Pengaturan | BARU $/bln | BARU bulan akun habis | BARU bulan ≥ $150 | LAMA $/bln | 12 bln akhir $/bln |
+|---|---|---|---|---|---|---|
+| T0 | tanpa filter | −65 | 37% | 22% | −3 | −123 |
+| T1 | filter "baru" (hanya tahan keranjang baru — sesuai teks notifikasi) | −69 | 37% | 22% | −3 | −143 |
+| T2 | filter "beku" (juga tanpa layer baru) | −35 | 32% | 27% | −10 | +24 |
+| T3 | filter "tutup" (keranjang ditutup saat krisis) | −18 | 18% | 15% | −5 | −97 |
+| T4 | "beku" + tutup akhir pekan | −29 | 28% | 23% | −19 | +80 |
+| Q1 | modal $400, ×1,2 0,05 lot, "beku" + akhir pekan | −22 | 27% | 15% | −7 | +45 |
+
+- **Filter "tahan keranjang baru" saja tidak mengubah apa pun** (T1 ≈ T0): bahaya datang dari keranjang yang SUDAH
+  terbuka saat penurunan mulai. Menahan layer baru (beku) atau menutup keranjang membantu, tetapi rata-rata 5 tahun
+  tetap negatif.
+- 12 bulan terakhir dengan "beku" + akhir pekan (Q1, $400): Okt–Feb +$247/+191/+205/+210/+162, Mar HABIS, Apr +205,
+  Mei–Jul HABIS, Agu +218, Sep +237 → **8 dari 12 bulan $160–250 (cocok dengan klaim $150/bulan), 4 bulan akun habis**.
+  Mulai 1 Agu / 1 Sep 2026 masih hidup sampai 2 Okt (+$477 / +$260) — persis seperti akun trader yang disetor
+  September. Mulai 15 Mar–15 Apr 2026: tetap 0/32 bertahan sampai 2 Okt (habis 26 Mar / 27 Mei).
+- Yang tetap menghabiskan akun meski ada filter (Q1, 2026): 26 Mar (−$91 dalam 6,8 jam), 27 Mei (−$92 dalam 11,7 jam),
+  1 Jul (−$77 dalam 5,2 jam) = **penurunan pelan $8–15/jam yang tidak pernah memicu "$30 dalam 1 jam"**; 17 Jun (−$66
+  dalam 30 mnt) = cepat (di MT5 tick demi tick filter menyala lebih awal daripada bar M5 di simulasi, jadi kejadian
+  ini mungkin selamat di akun nyata).
+- Kesimpulan: filter krisis membuat EA lebih awet di pasar yang meledak cepat dan menjelaskan mengapa akun trader bisa
+  untung beberapa bulan; tetapi grid martingale tetap kalah oleh tren turun yang pelan dan panjang. Rata-rata 5 tahun
+  negatif di semua tafsiran.
