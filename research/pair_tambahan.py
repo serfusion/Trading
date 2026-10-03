@@ -120,7 +120,7 @@ def report() -> str:
         L.append(f"  {sym}: 💰 = {', '.join(pick)} | {fmt(s)}")
     if not lolos:
         L.append("  (tidak ada)")
-    L.append("\nPembanding (sama, research/riwayat_uang.py): XAU 💰 BARU ±+0,22R/sinyal, BTC 💰 BARU ±+0,14R/sinyal.")
+    L.append("\nPembanding (mesin sama, research/kategori_badge.py, sejak Okt 2021): XAU 💰 +0,21R/sinyal, BTC 💰 +0,19R/sinyal.")
     return "\n".join(L) + "\n"
 
 

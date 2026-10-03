@@ -155,7 +155,7 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
   `data/research/eksternal/pair_h1/`) & `research/pair_tambahan.py` (kategori 💰 dipilih dari LAMA, diuji di BARU).
   Lolos tipis: ETH (+0,06R BARU, 90% tahun +) & USD/JPY (+0,07R, tapi hampir semua dari 2022, gagal spread ×2);
-  10 pair lain tidak. Pembanding XAU +0,22R / BTC +0,14R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
+  10 pair lain tidak. Pembanding sejak Okt 2021: XAU +0,21R / BTC +0,19R. Kandidat: ETH hanya saat 💰 BTC searah terbuka (+0,15R,
   ditemukan setelah lihat BARU → belum terbukti). TIDAK dipasang (tunggu "pasang").
 
 ## Badge 💰 vs sinyal yang dikirim (3 Okt 2026 — `docs/KATEGORI_BADGE.md`)

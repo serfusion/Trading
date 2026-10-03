@@ -37,8 +37,8 @@ berbeda**, bukan set yang sama. Laporan mentah: `docs/eksternal/hasil_pair_tamba
 | USD/CAD | konf+⭐, ⭐ | −0,03 | −0,09 (852) | 33% | −0,7 | tidak |
 | EUR/USD, AUD/USD, EUR/GBP, EUR/CHF | — (tidak ada kategori positif di LAMA) | −0,05 s/d −0,20 | — | 7–20% | negatif | tidak |
 
-Pembanding dari mesin yang sama: **XAU 💰 BARU ±+0,22R** per sinyal, **BTC 💰 BARU ±+0,14R** per sinyal.
-Kedua pair yang lolos hanya sepertiga sampai seperempat dari angka itu.
+Pembanding dari mesin yang sama, periode BARU yang sama (sejak Okt 2021, `docs/KATEGORI_BADGE.md`): **XAU 💰
++0,21R** dan **BTC 💰 +0,19R** per sinyal. Kedua pair yang lolos hanya sekitar sepertiga dari angka itu.
 
 ## Uji ketahanan (setelah lolos)
 
