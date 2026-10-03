@@ -175,6 +175,68 @@
     "avg": 0.18,
     "tot": 169.0
    }
+  },
+  "kat_semua": {
+   "biasa": {
+    "baru": {
+     "n": 668,
+     "wr": 39.5,
+     "avg": -0.028,
+     "tot": -18.5
+    },
+    "tahun_ini": {
+     "n": 87,
+     "wr": 46.0,
+     "avg": 0.182,
+     "tot": 15.8
+    },
+    "dikirim": false
+   },
+   "konf": {
+    "baru": {
+     "n": 137,
+     "wr": 54.0,
+     "avg": 0.18,
+     "tot": 24.6
+    },
+    "tahun_ini": {
+     "n": 22,
+     "wr": 50.0,
+     "avg": -0.017,
+     "tot": -0.4
+    },
+    "dikirim": true
+   },
+   "konf+⭐": {
+    "baru": {
+     "n": 336,
+     "wr": 50.9,
+     "avg": 0.24,
+     "tot": 80.6
+    },
+    "tahun_ini": {
+     "n": 29,
+     "wr": 79.3,
+     "avg": 1.451,
+     "tot": 42.1
+    },
+    "dikirim": true
+   },
+   "⭐": {
+    "baru": {
+     "n": 116,
+     "wr": 44.8,
+     "avg": -0.033,
+     "tot": -3.8
+    },
+    "tahun_ini": {
+     "n": 18,
+     "wr": 33.3,
+     "avg": -0.457,
+     "tot": -8.2
+    },
+    "dikirim": false
+   }
   }
  },
  "BTC": {
@@ -352,6 +414,68 @@
     "wr": 48.4,
     "avg": 0.429,
     "tot": 471.4
+   }
+  },
+  "kat_semua": {
+   "biasa": {
+    "baru": {
+     "n": 1127,
+     "wr": 44.2,
+     "avg": 0.061,
+     "tot": 69.1
+    },
+    "tahun_ini": {
+     "n": 185,
+     "wr": 46.5,
+     "avg": 0.357,
+     "tot": 66.1
+    },
+    "dikirim": false
+   },
+   "konf": {
+    "baru": {
+     "n": 216,
+     "wr": 40.7,
+     "avg": -0.07,
+     "tot": -15.2
+    },
+    "tahun_ini": {
+     "n": 38,
+     "wr": 50.0,
+     "avg": -0.167,
+     "tot": -6.3
+    },
+    "dikirim": true
+   },
+   "konf+⭐": {
+    "baru": {
+     "n": 373,
+     "wr": 41.3,
+     "avg": 0.115,
+     "tot": 43.1
+    },
+    "tahun_ini": {
+     "n": 50,
+     "wr": 38.0,
+     "avg": 0.04,
+     "tot": 2.0
+    },
+    "dikirim": true
+   },
+   "⭐": {
+    "baru": {
+     "n": 193,
+     "wr": 50.8,
+     "avg": 0.5,
+     "tot": 96.5
+    },
+    "tahun_ini": {
+     "n": 14,
+     "wr": 50.0,
+     "avg": 0.205,
+     "tot": 2.9
+    },
+    "dikirim": true
    }
   }
  }

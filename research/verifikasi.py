@@ -244,6 +244,10 @@ def main() -> None:
         bagian4(n, L)
     L.append("\n## 5. Apakah pilihan kategori 💰 menambah nilai? (semua sinyal diberi label, spread riset)")
     bagian5(L)
+    for n in ("XAU", "BTC"):                 # semua kategori (termasuk yang tidak dikirim) untuk kartu 🏆 aplikasi
+        a = go(KEY[n], None)
+        js[n]["kat_semua"] = {c: {"baru": cell(g[g.t >= SPLIT].R), "tahun_ini": cell(g[g.t >= Y26].R),
+                                  "dikirim": c in MONEY[KEY[n]]} for c, g in a.groupby("cat")}
     txt = "\n".join(L) + "\n"
     OUT.write_text(txt, encoding="utf-8")
     JSON_OUT.write_text(json.dumps(js, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

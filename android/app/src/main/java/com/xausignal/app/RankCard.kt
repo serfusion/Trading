@@ -17,33 +17,43 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun RankCard(money: MoneySettings) {
     val d = Verified.data ?: return
-    data class Row3(val asset: String, val cat: String, val n: Int, val wr: Double, val avg: Double, val ini: Double?)
+    data class Row3(val asset: String, val cat: String, val n: Int, val wr: Double, val avg: Double, val ini: Double?,
+                    val sent: Boolean)
     val rows = mutableListOf<Row3>()
     for (a in listOf("XAU", "BTC")) {
-        val kat = d.optJSONObject(a)?.optJSONObject("kat") ?: continue
-        for (c in kat.keys()) {
-            val k = kat.optJSONObject(c) ?: continue
+        val obj = d.optJSONObject(a) ?: continue
+        val live = obj.optJSONObject("kat")             // kategori yang dikirim: hasil replay live
+        val all = obj.optJSONObject("kat_semua")        // semua kategori (termasuk tidak dikirim)
+        val names = ((live?.keys()?.asSequence()?.toList() ?: emptyList()) +
+            (all?.keys()?.asSequence()?.toList() ?: emptyList())).distinct()
+        for (c in names) {
+            val k = live?.optJSONObject(c) ?: all?.optJSONObject(c) ?: continue
             val b = k.optJSONObject("baru") ?: continue
             if (b.optInt("n") == 0) continue
+            val sent = live?.has(c) == true || all?.optJSONObject(c)?.optBoolean("dikirim") == true
             val ini = k.optJSONObject("tahun_ini")?.takeIf { it.optInt("n") > 0 }?.optDouble("avg")
-            rows += Row3(a, c, b.optInt("n"), b.optDouble("wr"), b.optDouble("avg"), ini)
+            rows += Row3(a, c, b.optInt("n"), b.optDouble("wr"), b.optDouble("avg"), ini, sent)
         }
     }
     if (rows.isEmpty()) return
+    fun bags(avg: Double) = if (avg >= 0.245) 3 else if (avg >= 0.12) 2 else if (avg >= 0.05) 1 else 0
     AppCard {
         Text("🏆 Urutan sinyal terbaik (teruji sejak 2021)", fontWeight = FontWeight.Bold)
         rows.sortedByDescending { it.avg }.forEachIndexed { i, r ->
-            val weak = r.avg < 0.1
+            val m = bags(r.avg)
             Row(Modifier.padding(top = 2.dp)) {
-                Text("${i + 1}. ${r.asset} ${r.cat}", Modifier.weight(1.4f), fontWeight = FontWeight.Medium,
+                Text("${i + 1}. ${r.asset} ${r.cat}", Modifier.weight(1.3f), fontWeight = FontWeight.Medium,
                     style = MaterialTheme.typography.bodySmall)
-                Text("WR ${fmt(r.wr, 0)}%", Modifier.weight(0.8f), style = MaterialTheme.typography.labelSmall)
-                Text("${signed(r.avg)}R".replace('.', ','), Modifier.weight(0.8f), fontWeight = FontWeight.Bold,
-                    color = if (weak) SellColor else BuyColor, style = MaterialTheme.typography.labelSmall)
-                Text(if (weak) "lemah" else r.ini?.let { "2026 ${signed(it)}R".replace('.', ',') } ?: "",
-                    Modifier.weight(1f), color = Muted, style = MaterialTheme.typography.labelSmall)
+                Text(if (m > 0) "💰".repeat(m) else "—", Modifier.weight(0.8f), style = MaterialTheme.typography.labelSmall)
+                Text("${signed(r.avg)}R".replace('.', ','), Modifier.weight(0.7f), fontWeight = FontWeight.Bold,
+                    color = if (r.avg < 0.05) SellColor else BuyColor, style = MaterialTheme.typography.labelSmall)
+                Text("WR ${fmt(r.wr, 0)}%", Modifier.weight(0.7f), style = MaterialTheme.typography.labelSmall)
+                Text(if (r.sent) "dikirim" else "tidak dikirim", Modifier.weight(0.9f),
+                    color = if (r.sent) Gold else Muted, style = MaterialTheme.typography.labelSmall)
             }
         }
+        Text("💰 = untung per sinyal (≥0,05R 💰, ≥0,12R 💰💰, ≥0,25R 💰💰💰). — = tidak menguntungkan.",
+            color = Muted, style = MaterialTheme.typography.labelSmall)
         LineDivider()
         Text("💼 Saran entry", fontWeight = FontWeight.Bold)
         if (money.modalIdr <= 0) {
