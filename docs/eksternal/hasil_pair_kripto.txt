@@ -1,0 +1,136 @@
+# Pair kripto tambahan (research/pair_kripto.py)
+
+TP1 0,7R, spread 0,10%. LAMA < Okt 2021.
+
+koin   varian                                 n   nB  WR L  WR B    R L    R B  th+  hasil
+SOL    semua                               2528 2015    53    51  -0.06  +0.02   43  tidak
+SOL    semua saat 💰 BTC searah              862  721    62    53  +0.14  +0.11   57  tidak
+SOL    konf+⭐                               922  736    62    53  +0.22  +0.07   57  tidak
+SOL    konf+⭐ saat 💰 BTC searah             517  463    78    52  +0.54  +0.05   50  tidak
+SOL    konf+⭐ & ⭐                          1255  974    56    54  +0.01  +0.10   43  tidak
+SOL    konf+⭐ & ⭐ saat 💰 BTC searah         669  582    69    53  +0.23  +0.08   43  tidak
+BNB    semua                               3548 2034    58    53  +0.14  -0.01   80  tidak
+BNB    semua saat 💰 BTC searah             1237  731    58    52  +0.34  -0.02   80  tidak
+BNB    konf+⭐                              1280  738    65    49  +0.28  -0.01   67  tidak
+BNB    konf+⭐ saat 💰 BTC searah             742  451    64    51  +0.38  -0.04   56  tidak
+BNB    konf+⭐ & ⭐                          1763 1006    63    52  +0.28  +0.01   80  tidak
+BNB    konf+⭐ & ⭐ saat 💰 BTC searah         949  549    62    53  +0.34  +0.04   80  tidak
+XRP    semua                               3102 1922    55    54  +0.10  +0.07   56  tidak
+XRP    semua saat 💰 BTC searah             1108  659    59    53  +0.14  +0.24   56  tidak
+XRP    konf+⭐                               972  650    58    51  +0.45  +0.02   56  tidak
+XRP    konf+⭐ saat 💰 BTC searah             564  368    60    52  +0.47  +0.19   67  tidak
+XRP    konf+⭐ & ⭐                          1405  895    60    53  +0.34  +0.03   56  tidak
+XRP    konf+⭐ & ⭐ saat 💰 BTC searah         787  484    59    52  +0.31  +0.15   56  tidak
+ADA    semua                               3229 1984    57    55  +0.16  +0.02   78  LOLOS
+ADA    semua saat 💰 BTC searah             1169  685    59    59  +0.22  +0.11   89  LOLOS
+ADA    konf+⭐                              1169  745    60    60  +0.34  -0.00   78  tidak
+ADA    konf+⭐ saat 💰 BTC searah             730  458    60    55  +0.24  -0.03   44  tidak
+ADA    konf+⭐ & ⭐                          1662  994    60    60  +0.28  +0.03   89  LOLOS
+ADA    konf+⭐ & ⭐ saat 💰 BTC searah         934  537    60    55  +0.22  +0.01   44  WR tinggi (BARU saja)
+DOGE   semua                               2613 1883    57    54  +0.30  +0.05   75  tidak
+DOGE   semua saat 💰 BTC searah              927  667    61    58  +0.60  +0.21   75  LOLOS
+DOGE   konf+⭐                               805  603    64    54  +0.68  +0.01   62  tidak
+DOGE   konf+⭐ saat 💰 BTC searah             495  374    68    59  +1.27  +0.01   50  WR tinggi (BARU saja)
+DOGE   konf+⭐ & ⭐                          1199  868    66    52  +0.64  +0.07   62  tidak
+DOGE   konf+⭐ & ⭐ saat 💰 BTC searah         655  479    65    58  +0.88  +0.19   62  LOLOS
+LTC    semua                               3372 1978    55    51  +0.06  -0.08   30  tidak
+LTC    semua saat 💰 BTC searah             1231  669    58    49  +0.06  -0.07   40  tidak
+LTC    konf+⭐                              1158  678    63    48  +0.15  -0.17   33  tidak
+LTC    konf+⭐ saat 💰 BTC searah             748  413    60    50  +0.09  -0.15   44  tidak
+LTC    konf+⭐ & ⭐                          1685  966    59    47  +0.09  -0.17   30  tidak
+LTC    konf+⭐ & ⭐ saat 💰 BTC searah         967  504    57    47  +0.04  -0.14   33  tidak
+LINK   semua                               3085 2007    57    55  +0.01  +0.02   50  WR tinggi (BARU saja)
+LINK   semua saat 💰 BTC searah             1044  676    61    52  -0.03  +0.05   50  tidak
+LINK   konf+⭐                              1101  718    58    53  -0.07  +0.00   50  tidak
+LINK   konf+⭐ saat 💰 BTC searah             627  419    56    54  -0.17  +0.03   38  tidak
+LINK   konf+⭐ & ⭐                          1590 1029    60    53  -0.08  -0.01   38  tidak
+LINK   konf+⭐ & ⭐ saat 💰 BTC searah         795  527    60    54  -0.12  +0.05   62  tidak
+DOT    semua                               2551 2088    56    53  +0.00  -0.04   43  tidak
+DOT    semua saat 💰 BTC searah              884  729    65    54  +0.12  -0.05   29  tidak
+DOT    konf+⭐                               922  747    61    53  +0.04  -0.04   29  tidak
+DOT    konf+⭐ saat 💰 BTC searah             537  435    56    51  -0.02  -0.12   14  tidak
+DOT    konf+⭐ & ⭐                          1308 1058    59    53  +0.00  -0.06   14  tidak
+DOT    konf+⭐ & ⭐ saat 💰 BTC searah         682  550    60    54  -0.02  -0.10   14  tidak
+AVAX   semua                               2381 1952    55    57  -0.09  +0.06   71  WR tinggi (BARU saja)
+AVAX   semua saat 💰 BTC searah              809  650    59    57  -0.15  +0.13   71  WR tinggi (BARU saja)
+AVAX   konf+⭐                               863  714    54    61  +0.10  +0.08   57  WR tinggi (BARU saja)
+AVAX   konf+⭐ saat 💰 BTC searah             481  390    52    63  -0.22  +0.13   67  WR tinggi (BARU saja)
+AVAX   konf+⭐ & ⭐                          1189  985    58    60  +0.09  +0.08   71  LOLOS
+AVAX   konf+⭐ & ⭐ saat 💰 BTC searah         607  495    61    60  -0.12  +0.11   43  WR tinggi (BARU saja)
+TRX    semua                               3319 2096    56    55  +0.09  +0.04   67  LOLOS
+TRX    semua saat 💰 BTC searah             1054  591    58    59  +0.07  +0.06   67  LOLOS
+TRX    konf+⭐                              1205  772    54    56  +0.02  +0.08   44  WR tinggi (BARU saja)
+TRX    konf+⭐ saat 💰 BTC searah             558  315    60    59  -0.06  +0.04   67  WR tinggi (BARU saja)
+TRX    konf+⭐ & ⭐                          1783 1138    53    55  +0.07  +0.05   56  tidak
+TRX    konf+⭐ & ⭐ saat 💰 BTC searah         775  448    61    59  +0.05  +0.01   56  WR tinggi (BARU saja)
+BCH    semua                               2613 1922    59    52  -0.00  +0.02   62  tidak
+BCH    semua saat 💰 BTC searah              942  656    63    53  +0.06  +0.18   75  tidak
+BCH    konf+⭐                               815  602    55    55  -0.11  +0.08   43  WR tinggi (BARU saja)
+BCH    konf+⭐ saat 💰 BTC searah             488  346    52    52  -0.13  +0.11   57  tidak
+BCH    konf+⭐ & ⭐                          1265  909    56    52  -0.01  -0.02   62  tidak
+BCH    konf+⭐ & ⭐ saat 💰 BTC searah         711  487    52    52  -0.03  +0.04   62  tidak
+XLM    semua                               3223 1928    56    53  +0.06  +0.10   67  tidak
+XLM    semua saat 💰 BTC searah             1098  663    55    55  +0.05  +0.31   67  LOLOS
+XLM    konf+⭐                              1055  622    57    58  +0.03  +0.16   44  WR tinggi (BARU saja)
+XLM    konf+⭐ saat 💰 BTC searah             623  375    57    56  +0.05  +0.23   33  WR tinggi (BARU saja)
+XLM    konf+⭐ & ⭐                          1574  917    55    57  +0.01  +0.18   44  WR tinggi (BARU saja)
+XLM    konf+⭐ & ⭐ saat 💰 BTC searah         838  505    56    55  +0.02  +0.18   56  WR tinggi (BARU saja)
+ATOM   semua                               3064 2077    56    54  -0.04  -0.02   25  tidak
+ATOM   semua saat 💰 BTC searah              990  675    59    50  -0.05  -0.13   12  tidak
+ATOM   konf+⭐                              1135  764    58    52  +0.00  -0.08   38  tidak
+ATOM   konf+⭐ saat 💰 BTC searah             493  345    61    51  +0.00  -0.18   38  tidak
+ATOM   konf+⭐ & ⭐                          1541 1043    59    54  +0.01  -0.05   25  tidak
+ATOM   konf+⭐ & ⭐ saat 💰 BTC searah         662  460    62    50  -0.01  -0.19    0  tidak
+ETC    semua                               3042 1905    55    52  +0.18  +0.01   67  tidak
+ETC    semua saat 💰 BTC searah             1080  629    58    53  +0.42  +0.12   78  tidak
+ETC    konf+⭐                              1043  645    53    50  +0.35  -0.01   44  tidak
+ETC    konf+⭐ saat 💰 BTC searah             622  356    51    55  +0.46  +0.01   56  tidak
+ETC    konf+⭐ & ⭐                          1454  884    54    50  +0.33  +0.00   44  tidak
+ETC    konf+⭐ & ⭐ saat 💰 BTC searah         804  446    53    53  +0.41  +0.01   67  tidak
+UNI    semua                               2459 2029    60    54  -0.00  -0.02   71  tidak
+UNI    semua saat 💰 BTC searah              783  645    71    54  +0.02  +0.00   43  tidak
+UNI    konf+⭐                               841  699    56    51  +0.03  -0.06   29  tidak
+UNI    konf+⭐ saat 💰 BTC searah             443  362    56    48  -0.20  -0.17   43  tidak
+UNI    konf+⭐ & ⭐                          1185  950    61    53  +0.03  -0.03   29  tidak
+UNI    konf+⭐ & ⭐ saat 💰 BTC searah         579  475    67    50  -0.06  -0.14   43  tidak
+FIL    data kurang (perlu mulai < Okt 2020)
+NEAR   data kurang (perlu mulai < Okt 2020)
+MATIC  semua                               2124 1207    61    55  +0.14  +0.02  100  tidak
+MATIC  semua saat 💰 BTC searah              686  393    62    52  +0.32  -0.07   50  tidak
+MATIC  konf+⭐                               742  472    60    52  +0.20  -0.12   17  tidak
+MATIC  konf+⭐ saat 💰 BTC searah             343  220    51    51  +0.04  -0.09   33  tidak
+MATIC  konf+⭐ & ⭐                          1122  628    58    51  +0.08  -0.06   17  tidak
+MATIC  konf+⭐ & ⭐ saat 💰 BTC searah         476  282    56    50  +0.11  -0.12   50  tidak
+AAVE   data kurang (perlu mulai < Okt 2020)
+XMR    semua                               1961  948    56    48  -0.04  -0.18   17  tidak
+XMR    semua saat 💰 BTC searah              651  266    56    50  +0.00  -0.06   50  tidak
+XMR    konf+⭐                               652  278    54    53  -0.05  -0.16   17  tidak
+XMR    konf+⭐ saat 💰 BTC searah             388  159    54    49  +0.05  -0.07   50  tidak
+XMR    konf+⭐ & ⭐                           971  429    53    51  -0.09  -0.14    0  tidak
+XMR    konf+⭐ & ⭐ saat 💰 BTC searah         515  198    51    45  -0.05  -0.10   33  tidak
+EOS    semua                               2512 1371    56    51  +0.09  -0.01   50  tidak
+EOS    semua saat 💰 BTC searah              961  475    62    54  +0.04  +0.13   75  tidak
+EOS    konf+⭐                               829  472    61    53  +0.23  -0.06   75  tidak
+EOS    konf+⭐ saat 💰 BTC searah             509  261    61    52  +0.06  +0.07   62  tidak
+EOS    konf+⭐ & ⭐                          1175  636    63    54  +0.25  +0.05   75  tidak
+EOS    konf+⭐ & ⭐ saat 💰 BTC searah         661  322    64    50  +0.13  +0.12   75  tidak
+ALGO   semua                               2943 2016    57    56  -0.09  +0.02   62  WR tinggi (BARU saja)
+ALGO   semua saat 💰 BTC searah              981  684    56    52  -0.14  -0.02   38  tidak
+ALGO   konf+⭐                              1054  710    58    59  -0.10  +0.02   50  WR tinggi (BARU saja)
+ALGO   konf+⭐ saat 💰 BTC searah             538  388    50    51  -0.25  -0.11   38  tidak
+ALGO   konf+⭐ & ⭐                          1445  975    57    60  -0.07  +0.07   62  WR tinggi (BARU saja)
+ALGO   konf+⭐ & ⭐ saat 💰 BTC searah         716  521    54    52  -0.13  -0.04   38  tidak
+SHIB   data kurang (perlu mulai < Okt 2020)
+TON    data kurang (perlu mulai < Okt 2020)
+SUI    data kurang (perlu mulai < Okt 2020)
+
+Diuji 114 varian. LOLOS 9.
+  LOLOS: XLM semua saat 💰 BTC searah — WR 55%/55%, R +0.05/+0.31, n BARU 663
+  LOLOS: DOGE semua saat 💰 BTC searah — WR 61%/58%, R +0.60/+0.21, n BARU 667
+  LOLOS: DOGE konf+⭐ & ⭐ saat 💰 BTC searah — WR 65%/58%, R +0.88/+0.19, n BARU 479
+  LOLOS: ADA semua saat 💰 BTC searah — WR 59%/59%, R +0.22/+0.11, n BARU 685
+  LOLOS: AVAX konf+⭐ & ⭐ — WR 58%/60%, R +0.09/+0.08, n BARU 985
+  LOLOS: TRX semua saat 💰 BTC searah — WR 58%/59%, R +0.07/+0.06, n BARU 591
+  LOLOS: TRX semua — WR 56%/55%, R +0.09/+0.04, n BARU 2096
+  LOLOS: ADA konf+⭐ & ⭐ — WR 60%/60%, R +0.28/+0.03, n BARU 994
+  LOLOS: ADA semua — WR 57%/55%, R +0.16/+0.02, n BARU 1984
