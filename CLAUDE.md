@@ -160,6 +160,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Tiru $150/bln (`research/tiru_150.py`, SIGNAL_STRIKE 5): jeda 30–45 mnt antar keranjang meniru September (1.400–1.900
   trade, +$451–656 vs laporan 1.792, +$426). Skala median $150 → modal $749–1.572; BARU 22–37% bulan akun habis, rata-rata
   −$59…−$107/bln, 1 akun bertahan 12 bln 0–8%. `martingale_ea.sim(jeda_menit=…)` = opsi jeda (bawaan 0, hasil lama sama).
+  Klaim 6 bulan (`research/klaim_6bulan.py`, SIGNAL_STRIKE 6): mulai tiap hari 15 Mar–15 Apr 2026 → 0/32 bertahan s/d
+  2 Okt di 5 pengaturan (12 Apr gap pembukaan mingguan, 28 Mei, 30 Jun, 26 Jul, 28 Sep — dicek Twelve Data H1); bertahan
+  182 hari mulai 2025–2026: 0%. Bukti trader hanya ±3 pekan (setoran 2026.09.1x) + laporan 1 bulan.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

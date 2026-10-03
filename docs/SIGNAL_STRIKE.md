@@ -116,3 +116,25 @@ aktif mulai tiap awal bulan, maks 1 tahun.
 - Jawaban: **bisa ditiru dan bisa menghasilkan ≥ $150 di sebagian bulan (32–43%), tetapi bukan $150 setiap bulan**;
   nilai harapannya negatif. Batasan: indikator asli tidak diketahui (jeda acak sebagai pendekatan); indikator yang
   benar-benar punya keunggulan bisa mengubah hasil, tetapi belum ada buktinya (laporan hanya 1 bulan, DD saldo saja).
+
+## 6. Klaim "sudah jalan 6 bulan" (`research/klaim_6bulan.py` → `docs/eksternal/hasil_klaim_6bulan.txt`)
+
+- Bukti yang ditunjukkan belum mencakup 6 bulan: setoran di screenshot pertama bertanggal 2026.09.1x (akun ±3 pekan),
+  laporan MT5 "bulan lalu" 1 bulan (sumbu grafik = nomor trade), Telegram 1 keranjang.
+- EA tiruan (5 pengaturan: rasio trader 0,07/$524 & rasio klaim 0,03/$524, jeda 30/45 mnt, + paling awet jarak $3)
+  dimulai dari **setiap hari 15 Mar – 15 Apr 2026** sampai 2 Okt: **0 dari 32 tanggal mulai bertahan, di kelima
+  pengaturan**. Habis pertama median 12 Apr (2 Apr untuk satu pengaturan), sempat menarik median $81–188.
+- Kejadian yang menghabiskan akun Apr–Sep 2026 (dicek ulang di Twelve Data H1, sumber terpisah — semuanya nyata):
+  12 Apr pembukaan mingguan (Jumat ±4.750 → jam pertama Minggu malam 4.644, data M5 4.585), 28 Mei (4.466 → 4.367
+  dalam 5 jam), 10 & 19 Jun, 30 Jun (4.021 → 3.949 dalam 3 jam), 1 & 22 Jul, 26 Jul (lonjakan $104 di jam pembukaan
+  mingguan), 14 Sep, 28 Sep (4.287 → 4.192 dalam 5 jam), 30 Sep. Pengaturan paling awet tetap kena 3 (12 Apr, 28 Mei,
+  28 Sep); rasio trader 8–9.
+- Jalan terus 1 Apr–2 Okt dengan setor ulang setiap habis: profit tertutup $907–3.530 tetapi setoran hilang
+  $1.572–4.717 → **semua pengaturan negatif** (−$201 s/d −$1.187).
+- Peluang bertahan 182 hari dari tiap Senin: LAMA 37–66%, BARU 4–44%; mulai tahun 2025 dan 2026: **0% di semua
+  pengaturan** (2024: 0–40%).
+- Kemungkinan penjelasan bila EA trader benar-benar jalan 6 bulan: (a) pengaturan lebih longgar/berbeda sebelum
+  September (lot lebih kecil, jarak lebih lebar, tutup sebelum akhir pekan, jeda berita); (b) indikatornya kebetulan
+  atau memang menghindari penurunan di atas (belum terbukti); (c) "6 bulan" = umur EA, bukan satu akun — akun yang
+  habis diganti/disetor ulang (akun ke-2 di screenshot: setor $3.237, tarik $2.929); (d) beruntung. Bukti yang
+  membedakan: statement lengkap 6 bulan per akun (semua setoran/penarikan) + grafik ekuitas (Myfxbook/FXBlue).
