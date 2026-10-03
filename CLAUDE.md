@@ -172,6 +172,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tertinggi 60 mnt menyala 2 Okt 13:15 & 14:30 UTC = notifikasi 20:13 & 21:30 WIB. "Tahan keranjang baru" saja = tanpa efek;
   "beku" (tanpa layer baru) BARU −$35 vs −$65/bln; Q1 $400 ×1,2 + beku + akhir pekan: 8/12 bulan terakhir $160–250, 4/12 habis
   (penurunan pelan $8–15/jam lolos filter). EA v1.10 punya `InpKrisisMode`; `sim(krisis=(usd, mnt, jeda, mode))`.
+- Pencarian grid yang untung (`docs/GRID_CARI.md`, 3 Okt): `research/grid_cari.py` 936 pengaturan (ATR, ADX, RSI, BB, sesi,
+  vol, tren; risiko R=5%/keranjang, seleksi LAMA → uji BARU) → 0 berarti (1 lolos ≈ $4/tahun). `research/piramida.py`
+  (kebalikan martingale, layer searah tren H4+D1, stop ikut naik): 3 lolos LAMA & positif BARU; terbaik jarak 3 ATR/stop
+  2 ATR/maks 6: +0,13R/+0,18R, 12/15 tahun +, menang 25%, risiko 0,5% ≈ +$5–7/bln per $400 (DD 21–30%), swap belum.
+  `ea/PiramidaTren.mq5` (belum di-compile). Kait sim baru: izin/step_arr/tp_arr/lot_arr/sl_lapis/bulat/tutup_arr.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

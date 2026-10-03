@@ -71,3 +71,7 @@ membantu (−$19 vs −$15/bulan) karena batas rugi 30% sudah memotong lebih dul
 2. Strategy Tester: simbol XAUUSDc, model "Every tick based on real ticks", 2024–2026, deposit 40.000 (USC).
    Perhatikan **Equity Drawdown Maximal**, bukan hanya Balance Drawdown.
 3. Akun demo minimal 1–3 bulan sebelum uang sungguhan; hanya uang yang siap hilang.
+
+## Lanjutan: pencarian versi yang untung (`docs/GRID_CARI.md`)
+
+936 pengaturan grid/martingale (ATR, ADX, RSI, Bollinger, sesi, volatilitas, tren) → 0 dengan keunggulan berarti. Yang positif di data lama dan baru adalah kebalikannya: piramida searah tren (`ea/PiramidaTren.mq5`), kecil (+$5–7/bulan per $400 pada risiko 0,5%).

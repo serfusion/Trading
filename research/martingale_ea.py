@@ -73,8 +73,11 @@ def arrays(df: pd.DataFrame) -> tuple:
     return _ARR[id(df)]
 
 
-def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float]:
-    """rek=True: lot berikut = round(lot sebelumnya x mult, 2) — cocok dengan deal Signal Strike (0,07 → 1,24 di L17)."""
+def lot_table(lot0: float, mult: float, n: int, rek: bool = False, bulat: bool = True) -> list[float]:
+    """rek=True: lot berikut = round(lot sebelumnya x mult, 2) — cocok dengan deal Signal Strike (0,07 → 1,24 di L17).
+    bulat=False: tanpa pembulatan (riset, lot pecahan)."""
+    if not bulat:
+        return [lot0 * mult ** i for i in range(n)]
     if not rek:
         return [round(lot0 * mult ** i, 2) for i in range(n)]
     out = [lot0]
@@ -86,7 +89,9 @@ def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float
 def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: float, maxlay: int,
         modal: float = MODAL, rek: bool = False, i0: int = 1, i1: int | None = None, stop: bool = False,
         one: bool = False, info: list | None = None, jeda_menit: float = 0.0, stop_pct: float = 0.0,
-        akhir_pekan: bool = False, krisis: tuple | None = None):
+        akhir_pekan: bool = False, krisis: tuple | None = None, izin: list | None = None,
+        step_arr: list | None = None, tp_arr: list | None = None, lot_arr: list | None = None,
+        sl_lapis: bool = False, bulat: bool = True, tutup_arr: list | None = None):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
     one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
     (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis).
@@ -95,12 +100,16 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     akhir_pekan: tutup keranjang Jumat ≥ 20:00 UTC, tanpa keranjang baru sampai Senin 00:00 UTC.
     krisis=(turun $, jendela mnt, jeda mnt, mode): "MARKET CRASH DETECTED" ala bot trader — bila harga turun ≥ $ dari
     tertinggi jendela, sejak bar berikutnya selama jeda: mode "baru" = tanpa keranjang baru; "beku" = juga tanpa layer
-    baru; "tutup" = keranjang berjalan ditutup + tanpa keranjang baru."""
+    baru; "tutup" = keranjang berjalan ditutup + tanpa keranjang baru.
+    Kait riset (research/grid_cari.py), semuanya per bar & hanya memakai info sebelum bar itu: izin = arah keranjang baru
+    (+1/−1, 0 = tidak boleh); step_arr/tp_arr/lot_arr = jarak/TP/lot awal saat keranjang dibuka (mis. kelipatan ATR);
+    sl_lapis = tutup keranjang di level berikutnya setelah layer maksimum; tutup_arr = tutup keranjang di harga buka bar."""
     o, h, l, c = arrays(df)
     t = df.index
-    lots_tab = lot_table(lot0, mult, maxlay, rek)
+    lots_tab = lot_table(lot0, mult, maxlay, rek, bulat)
     closes, ruins, depth = [], [], []      # (indeks bar, profit USC) / indeks bar / layer per keranjang
-    st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[], idle=0)
+    st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[], idle=0,
+              step=step, tp=tp, lots=lots_tab)
     tn = t.asi8 if jeda_menit else None
     jeda_ns = int(jeda_menit * 60e9)
     kris = krisis_until(df, *krisis[:3]) if krisis else None
@@ -124,7 +133,7 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
         depth.append(st["n"])
         if info is not None:
             info.append((i, st["n"], st["mineq"], gain,
-                         [lots_tab[k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
+                         [st["lots"][k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
         st["done"] = one
         st["bal"] = modal
 
@@ -133,17 +142,22 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
         if jeda_ns:
             st.update(n=0, idle=tn[i] + jeda_ns)
             return False
-        if blocked(i) or krisis_aktif(i):
+        if blocked(i) or krisis_aktif(i) or (izin is not None and not izin[i]):
             st.update(n=0)
             return False
         open_basket(p, i)
         return True
 
     def open_basket(p: float, i: int) -> None:
-        d = side if side else (1 if c[i - 1] >= o[i - 1] else -1)
+        if izin is not None:
+            d = izin[i]
+        else:
+            d = side if side else (1 if c[i - 1] >= o[i - 1] else -1)
+        lots = lot_table(lot_arr[i], mult, maxlay, rek, bulat) if lot_arr is not None else lots_tab
         x = d * p
-        st.update(d=d, n=1, sl=lots_tab[0], sc=lots_tab[0] * (x + SPREAD), last=x,
-                  used=lots_tab[0] * USC * p / LEV, mineq=st["bal"], ent=[x + SPREAD])
+        st.update(d=d, n=1, sl=lots[0], sc=lots[0] * (x + SPREAD), last=x, lots=lots,
+                  used=lots[0] * USC * p / LEV, mineq=st["bal"], ent=[x + SPREAD],
+                  step=step_arr[i] if step_arr is not None else step, tp=tp_arr[i] if tp_arr is not None else tp)
 
     def seg(a: float, b: float, i: int, gap: bool) -> None:
         while not st["done"] and st["n"]:
@@ -152,18 +166,23 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             if xb < xa:                                   # melawan posisi
                 kena = penuh = False
                 while True:
-                    bisa = (not penuh and st["n"] < maxlay and st["last"] - step >= xb
+                    stp = st["step"]
+                    bisa = (not penuh and st["n"] < maxlay and st["last"] - stp >= xb
                             and not (kmode == "beku" and krisis_aktif(i)))
-                    lvl = (xb if gap else st["last"] - step) if bisa else xb
-                    if stop_pct:                          # batas rugi dicek sebelum tiap layer baru (tick demi tick)
-                        xs = ((modal * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
-                        if xs >= lvl:
-                            kena = True
-                            px = xb if gap else min(xs, xa)
-                            break
+                    lvl = (xb if gap else st["last"] - stp) if bisa else xb
+                    xk = None                             # titik keluar paksa (dicek sebelum tiap layer baru)
+                    if stop_pct:                          # batas rugi ekuitas
+                        xk = ((modal * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
+                    if sl_lapis and st["n"] >= maxlay:    # SL di level berikutnya setelah layer maksimum
+                        xl = st["last"] - stp
+                        xk = xl if xk is None else max(xk, xl)
+                    if xk is not None and xk >= lvl:
+                        kena = True
+                        px = xb if gap else min(xk, xa)
+                        break
                     if not bisa:
                         break
-                    lot = lots_tab[st["n"]]
+                    lot = st["lots"][st["n"]]
                     eq = st["bal"] + USC * (st["sl"] * lvl - st["sc"])
                     need = lot * USC * abs(lvl) / LEV
                     if eq - st["used"] < need:
@@ -196,7 +215,7 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                     lanjut(i, b)
                     return
                 return
-            tpx = st["sc"] / st["sl"] + tp
+            tpx = st["sc"] / st["sl"] + st["tp"]
             if xb < tpx:
                 return
             px = xb if gap else tpx
@@ -205,15 +224,16 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             if st["done"] or not lanjut(i, a) or gap:
                 return
 
-    if not blocked(i0) and not krisis_aktif(i0):
+    if not blocked(i0) and not krisis_aktif(i0) and (izin is None or izin[i0]):
         open_basket(o[i0], i0)
     for i in range(i0, i1 or len(o)):
-        blk = blocked(i) or krisis_aktif(i)
+        blk = blocked(i) or krisis_aktif(i) or (izin is not None and not izin[i])
         if not st["n"] and not st["done"] and not blk and (not jeda_ns or tn[i] >= st["idle"]):
             open_basket(o[i], i)
         if i > i0:
             seg(c[i - 1], o[i], i, True)
-        if st["n"] and not st["done"] and (blocked(i) or (kmode == "tutup" and krisis_aktif(i))):
+        if st["n"] and not st["done"] and (blocked(i) or (kmode == "tutup" and krisis_aktif(i))
+                                           or (tutup_arr is not None and tutup_arr[i])):
             tutup(i, st["d"] * o[i])                      # tutup sebelum akhir pekan / saat krisis (mode tutup)
             st.update(n=0)
         pts = (o[i], l[i], h[i], c[i]) if c[i] >= o[i] else (o[i], h[i], l[i], c[i])
