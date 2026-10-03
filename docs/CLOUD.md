@@ -336,3 +336,11 @@ Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.
   `LAYER_SIGNALS=0`.
 - 📰: sinyal 💰 yang lahir ≤ 4 jam setelah berita AS besar diberi tanda + statistik riwayat; kalender dari cache
   Supabase `kalender`, Act dari baris `aktual`. Matikan: env `NEWS_TAG=0`.
+
+## 📊 Status tren & hitung mundur (3 Okt 2026, aplikasi 3.24)
+
+Heartbeat cloud memuat `status` (`_core.trend_status`): arah D1 (close kemarin vs EMA50 harian) & H4 (close H4 vs
+EMA50), level breakout tiap set untuk candle H1 berikutnya, waktu cek sinyal berikutnya. Aplikasi (tab Sinyal,
+`StatusCard.kt`) menampilkan per pair: 🟢 BULLISH / 🔴 BEARISH / ⚪ CAMPURAN, hitung mundur detik ke tutup candle H1,
+jarak ke level BUY/SELL, hitung mundur ke berita berikutnya (≤ 24 jam), dan setelah rilis baris "lonjakan memudar"
+(`_pudar`, XAU & BTC). Keterangan saja — bukan sinyal entry.

@@ -115,3 +115,12 @@ def test_setelan_tick_xau_tp1_btc_breakout_baru(monkeypatch):
     assert b["layer"]["mode"] == "any" and b["layer"]["max"] == 2 and "WR" in b["layer"]["stats"]["teks"]
     monkeypatch.setenv("LAYER_SIGNALS", "0")
     assert "layer" not in tick.signal_extras("XAU", None)
+
+
+def test_heartbeat_status_tren_dan_level_breakout():
+    _, pub = run_ticks(trend_df(), cfg=ONE_SET)
+    hb = [e for e in pub.events if e["type"] == "heartbeat" and e.get("status")][-1]
+    st = hb["status"]
+    assert st["h4"] in ("BUY", "SELL") and st["levels"][0]["set"] == "T55/20"
+    lv = st["levels"][0]
+    assert lv["buy"] >= lv["sell"] and "next_check" in st and st["last_close"] > 0

@@ -223,6 +223,31 @@ def h4_ema_check(closed: list[Bar], direction: str, n: int = 50) -> tuple[bool, 
     return ok, f"H4 {last:.2f} {'>' if last > ema else '<'} EMA{n} {ema:.2f}" + ("" if ok else " (lawan arah H4)")
 
 
+def trend_status(closed: list[Bar], systems: dict, cfg: dict, tf: timedelta) -> dict:
+    """Kartu "Status tren & hitung mundur" (aplikasi, tab Sinyal; permintaan 3 Okt 2026). Hanya keterangan:
+    arah D1 (close kemarin vs EMA50 harian) & H4 (close H4 tutup vs EMA50 H4), level breakout tiap set untuk candle H1
+    berikutnya (BUY bila close > high N candle terakhir, SELL bila < low N), dan waktu cek sinyal berikutnya."""
+    if len(closed) < 90:
+        return {}
+    daily: dict = {}
+    for b in closed:
+        if b.t.date() < closed[-1].t.date():
+            daily[b.t.date()] = b.c                           # close harian s.d. kemarin (sama dengan star_check)
+    dc = [daily[k] for k in sorted(daily)]
+    d1 = None if len(dc) < 20 else ("BUY" if dc[-1] > _ema(dc, cfg.get("star_ema", 50))[-1] else "SELL")
+    h4 = "BUY" if h4_ema_check(closed, "BUY")[0] else "SELL"
+    levels = []
+    for entry_p, exit_p in cfg["sets"]:
+        name = f"T{entry_p}/{exit_p}"
+        win = closed[-entry_p:]
+        sysd = systems.get(name) or {}
+        open_ = [x["dir"] for x in [sysd.get("virtual")] + list(sysd.get("layers") or []) if x]
+        levels.append({"set": name, "buy": round(max(b.h for b in win), 3), "sell": round(min(b.l for b in win), 3),
+                       "open": open_[0] if open_ else None, "n_open": len(open_)})
+    return {"d1": d1, "h4": h4, "levels": levels, "next_check": iso(closed[-1].t + 2 * tf),
+            "last_close": round(closed[-1].c, 3)}
+
+
 def _ema(values: list[float], n: int) -> list[float]:
     a, out = 2 / (n + 1), []
     for v in values:
@@ -843,7 +868,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                               "level": round(level, 3), "bars": exit_p, **({"lapis": True} if v.get("lapis") else {})})
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
           "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
-          "exits": exits}
+          "exits": exits, "status": trend_status(closed, systems, cfg, tf)}
     if cfg.get("asset", "XAU") == "XAU" and cfg.get("war") is not None:
         hb["war"] = cfg["war"]
     if executor is not None:
