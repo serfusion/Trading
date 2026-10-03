@@ -336,6 +336,9 @@ Informasi saja, tanpa order. Detail & bukti: `docs/KALSHI.md`.
   `LAYER_SIGNALS=0`.
 - 📰: sinyal 💰 yang lahir ≤ 4 jam setelah berita AS besar diberi tanda + statistik riwayat; kalender dari cache
   Supabase `kalender`, Act dari baris `aktual`. Matikan: env `NEWS_TAG=0`.
+- 🎯 WR tinggi (3 Okt 2026, `docs/SINYAL_TENANG.md`): sinyal 🔁 lapisan BTC saat ATR14 H1 ≥ 1,5 × median ATR14 480 candle
+  (`_core.vol_rel`) diberi field `wr_tinggi` {wr 76, wr_lama 78, avg_r 0,46, n 121, vol_rel} + baris teks ntfy. Hanya label;
+  sinyal, lot, auto order tidak berubah. Matikan: env `WR_TINGGI=0`. Aplikasi 3.34: pill & notifikasi 🎯.
 
 ## 📊 Status tren & hitung mundur (3 Okt 2026, aplikasi 3.24)
 

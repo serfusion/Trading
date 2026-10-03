@@ -187,7 +187,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tenang R/keranjang naik, $/bln sama. Kalender FRED: data/research/eksternal/fred_release_{10,50,46,53,54,9}.json.
 - Filter tenang pada sinyal 💰 (`docs/SINYAL_TENANG.md`, `research/sinyal_tenang.py`, replay cloud TP1 0,7R): TIDAK naikkan
   WR (XAU BARU 63%→57%) & total turun (+163R→+70R) → jangan dipasang. Kandidat LABEL "🎯 WR tinggi": lapisan BTC saat ATR H1 ≥
-  1,5× median 20 hari: WR 78%/76% (n 110/121), 9/11 tahun ≥ 69% — ditemukan setelah lihat BARU, belum dipasang (tunggu izin).
+  1,5× median 20 hari: WR 78%/76% (n 110/121), 9/11 tahun ≥ 69% — ditemukan setelah lihat BARU. DIPASANG 3 Okt (izin "kalau
+  cocok dan bagus pasang saja") sebagai LABEL saja: `_core.WR_TINGGI`/`vol_rel`, field `wr_tinggi` pada event lapisan BTC,
+  env WR_TINGGI=0 mematikan, aplikasi 3.34 (pill & notifikasi 🎯). Filter tenang TIDAK dipasang.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache

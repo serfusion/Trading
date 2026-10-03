@@ -35,11 +35,14 @@ sinyal (info sebelum bar sinyal, `research/tenang.py`): berita USD high-impact 6
 3. **Kandidat label WR tinggi: lapisan BTC saat volatilitas ≥ 1,5 × median** — WR 78% (LAMA, n 110) / 76% (BARU, n 121),
    1,5–2×: 81% / 73%, > 2×: 73% / 84%; 9 dari 11 tahun ≥ 69% (2019 47%, 2022 56%); R +0,53 / +0,46 per sinyal (rata-rata
    lapisan BTC +0,84 / +0,40). Ditemukan setelah melihat 32 sel (kedua periode) → belum terbukti; cocok sebagai LABEL
-   info "🎯 WR tinggi" di aplikasi, bukan filter (sinyal lain juga untung). Belum dipasang — menunggu izin.
+   info "🎯 WR tinggi" di aplikasi, bukan filter (sinyal lain juga untung). **DIPASANG 3 Okt 2026** (izin "kalau cocok
+   dan bagus pasang saja"): `_core.WR_TINGGI` + `_core.vol_rel` (cocok persis dengan riset, selisih 0 pada 40 sinyal acak),
+   `tick.signal_extras` (env `WR_TINGGI=0` mematikan), aplikasi 3.34 (pill 🎯 WR tinggi & notifikasi). Label saja — sinyal,
+   lot, auto order tidak berubah. Filter tenang TIDAK dipasang (menurunkan WR & profit).
 - Kategori/peringkat yang ada (konf, konf+⭐, ⭐, ⚡, bronze, silver) tidak ada yang WR ≥ 70% di kedua periode.
 
 ## Kesimpulan
 
 Menerapkan filter "tenang" ke sinyal 💰 tidak menaikkan WR maupun profit total — jangan dipasang. WR tinggi yang tetap
 untung sudah dipasang (TP1 0,7R); satu kandidat label tambahan (lapisan BTC saat sangat volatil, WR ±76–78%) bisa
-dipasang bila pengguna mengizinkan.
+dipasang 3 Okt 2026 sebagai label (aplikasi 3.34).
