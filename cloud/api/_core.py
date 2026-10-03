@@ -692,6 +692,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": cat[0]["cat"]})
             events.append(f"{name} {sig['dir']} dilewati: {cat[0]['cat']} tanpa 💰")
             return None
+        if (c0 := category(closed, sig["dir"], cfg)[0]["cat"].split(" ", 1)[-1]) in (cfg.get("skip_cats") or ()):
+            # kategori dimatikan (BTC konf: research/tanpa_konf.py, izin pengguna 3 Okt 2026 "matikan btc konf")
+            store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": c0})
+            events.append(f"{name} {sig['dir']} dilewati: kategori {c0} dimatikan")
+            return None
         if cfg.get("h4_filter") and not (h4 := h4_ema_check(closed, sig["dir"]))[0]:
             # validasi arah H4 EMA50 (research/alchemist.py F4, XAU): sinyal 💰 lawan arah H4 tidak dikirim
             store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": h4[1]})

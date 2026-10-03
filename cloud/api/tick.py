@@ -114,6 +114,8 @@ def run() -> tuple[int, dict]:
                              _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result),
+                              # BTC konf dimatikan (research/tanpa_konf.py); BTC_SKIP_KONF=0 untuk menyalakan lagi
+                              "skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1" else (),
                               **signal_extras("BTC", store)}, symbol="BTC/USD")
             result["btc"] = {k: btc.get(k) for k in ("ok", "price", "events", "error")}
     except Exception as exc:  # noqa: BLE001 - BTC tidak boleh mengganggu sinyal XAU

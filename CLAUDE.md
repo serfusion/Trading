@@ -173,6 +173,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   p-acak, sumber data; menulis `cloud/api/riwayat.json` (kartu 📜 & baris "teruji" aplikasi 3.26).
 - Hasil live + spread asli, sejak Okt 2021: XAU 💰 +0,21R/sin (2026 +56R), BTC 💰 +0,27R (2026 +43R); XAU konf &
   BTC konf lemah (tidak diubah tanpa izin). `research/riwayat_uang.py` kini hanya pembanding (docs/eksternal).
+- BTC konf DIMATIKAN 3 Okt (izin "matikan btc konf"; `research/tanpa_konf.py`: BARU +0,33 vs +0,27R/sin, DD −32 vs −41):
+  cfg `skip_cats`, env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi. XAU konf tetap (tanpa konf BARU memburuk).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

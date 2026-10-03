@@ -124,3 +124,13 @@ def test_heartbeat_status_tren_dan_level_breakout():
     assert st["h4"] in ("BUY", "SELL") and st["levels"][0]["set"] == "T55/20"
     lv = st["levels"][0]
     assert lv["buy"] >= lv["sell"] and "next_check" in st and st["last_close"] > 0
+
+
+def test_skip_cats_btc_konf(monkeypatch):
+    """BTC konf dimatikan lewat cfg skip_cats (izin pengguna 3 Okt 2026)."""
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "cloud" / "api"))
+    import tick
+    src = Path(tick.__file__).read_text(encoding="utf-8")
+    assert '"skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1"' in src
