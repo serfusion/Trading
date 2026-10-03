@@ -128,6 +128,21 @@ object ChatClient {
         }
     }
 
+    /** 📜 Riwayat sinyal 💰 per tahun & 90/365 hari (GET /api/chat?riwayat=1); null bila gagal. */
+    fun riwayat(): JSONObject? {
+        val base = SignalRepository.cloudUrl()
+        if (base.isBlank()) return null
+        val request = Request.Builder().url("$base/api/chat?riwayat=1").get()
+            .header("X-Chat-Key", SignalRepository.topic()).build()
+        return try {
+            client.newCall(request).execute().use { res ->
+                JSONObject(res.body?.string().orEmpty()).optJSONObject("riwayat")
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     fun ask(history: List<ChatMessage>): ChatMessage {
         val base = SignalRepository.cloudUrl()
         if (base.isBlank()) return ChatMessage("assistant", "⚠️ Isi \"Alamat cloud\" di Pengaturan dulu (mis. https://nama-proyek.vercel.app).")

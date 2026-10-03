@@ -69,6 +69,7 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
             item { AppCard { Text("Belum ada sinyal selesai", color = Muted) } }
         }
         items(stats, key = { it.label }) { PeriodCard(it, money) }
+        item { RiwayatCard() }          // 📜 riwayat sinyal 💰 per tahun (uji data, aplikasi 3.25)
         item { Footer() }
     }
 }
@@ -167,5 +168,53 @@ private fun PeriodCard(s: PeriodStats, money: MoneySettings) {
             Metric("Total profit", moneyMain(s.profit, money), BuyColor)
             Metric("Total minus", moneyMain(s.loss, money), SellColor)
         }
+    }
+}
+
+
+/**
+ * 📜 Riwayat sinyal 💰 (uji data historis, mesin sama dengan cloud): per tahun, 365 & 90 hari terakhir, XAU & BTC.
+ * Permintaan pengguna 3 Okt 2026 ("apakah 💰 masih akurat?"). R = hasil per sinyal dibanding rugi bila SL kena.
+ */
+@Composable
+private fun RiwayatCard() {
+    var data by remember { androidx.compose.runtime.mutableStateOf<org.json.JSONObject?>(null) }
+    androidx.compose.runtime.LaunchedEffect(Unit) {
+        data = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { ChatClient.riwayat() }
+    }
+    AppCard {
+        Text("📜 Riwayat sinyal 💰 (uji data)", fontWeight = FontWeight.Bold)
+        val d = data
+        if (d == null) {
+            Text("Memuat… (butuh cloud terbaru)", color = Muted, style = MaterialTheme.typography.labelSmall)
+            return@AppCard
+        }
+        Text("WR = sinyal yang untung • R = hasil dibanding rugi bila SL kena (lot aplikasi ±0,5% modal → +10R ≈ +5% " +
+            "modal). Kalah beruntun panjang tetap terjadi.", style = MaterialTheme.typography.labelSmall, color = Muted)
+        for (key in listOf("XAU", "BTC")) {
+            val a = d.optJSONObject(key) ?: continue
+            Text("$key/USD • data s.d. ${a.optString("sampai")}", fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 8.dp))
+            RiwayatRow("90 hari", a.optJSONObject("90h"))
+            RiwayatRow("365 hari", a.optJSONObject("365h"))
+            val years = a.optJSONObject("tahun")
+            val keys = years?.keys()?.asSequence()?.toList()?.sortedDescending() ?: emptyList()
+            for (y in keys) RiwayatRow(y, years?.optJSONObject(y))
+            RiwayatRow("Semua", a.optJSONObject("semua"))
+        }
+    }
+}
+
+@Composable
+private fun RiwayatRow(label: String, c: org.json.JSONObject?) {
+    if (c == null) return
+    val tot = c.optDouble("tot")
+    Row(Modifier.fillMaxWidth()) {
+        Text(label, Modifier.weight(1.2f), style = MaterialTheme.typography.labelSmall)
+        Text("${c.optInt("n")} sinyal", Modifier.weight(1f), style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("WR %.0f%%".format(c.optDouble("wr")), Modifier.weight(0.9f), style = MaterialTheme.typography.labelSmall)
+        Text("%+.1fR".format(tot).replace('.', ','), Modifier.weight(0.9f), textAlign = TextAlign.End,
+            fontWeight = FontWeight.Bold, color = if (tot >= 0) BuyColor else SellColor,
+            style = MaterialTheme.typography.labelSmall)
     }
 }

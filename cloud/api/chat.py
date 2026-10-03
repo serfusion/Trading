@@ -127,6 +127,14 @@ class handler(BaseHTTPRequestHandler):
         if not self._authorized():
             self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
             return
+        if "riwayat=1" in (self.path or ""):            # 📜 kartu riwayat 💰 (tab Statistik) — ringan, tanpa kalender
+            path = os.path.join(os.path.dirname(__file__), "riwayat.json")
+            try:
+                with open(path, encoding="utf-8") as f:
+                    self._send(200, {"ok": True, "riwayat": json.load(f)})
+            except Exception as exc:  # noqa: BLE001
+                self._send(200, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
+            return
         try:
             now = datetime.now(timezone.utc)
             try:
