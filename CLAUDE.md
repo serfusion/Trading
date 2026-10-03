@@ -183,6 +183,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Sinyal tambahan DIPASANG 3 Okt (izin "pasang semua"; `research/sinyal_tambahan.py` 99 sumber, `tambahan_cloud.py`
   replay): XAU set 100/40 & 120/50 (env XAU_EXTRA_SETS) + lapisan XAU mode any maks 6 (BARU +359R vs +144R); ETH ⭐/konf+⭐
   hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
+  Kripto lain (`research/pair_kripto.py`, 25 koin): DOGE/ADA/XLM lolos riset saat 💰 BTC searah, tetapi pengguna memilih
+  "ETH saja" (3 Okt) → TIDAK dipasang. Forex baru & XAG tidak bisa diuji (Twelve Data gratis: data lama/berbayar).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
