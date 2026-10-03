@@ -76,9 +76,9 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
     val d1 = st.optString("d1")
     val h4 = st.optString("h4")
     val (arah, warna) = when {
-        d1 == "BUY" && h4 == "BUY" -> "🐂 BULLISH" to BuyColor
-        d1 == "SELL" && h4 == "SELL" -> "🐻 BEARISH" to SellColor
-        else -> "⚖️ CAMPURAN" to Muted
+        d1 == "BUY" && h4 == "BUY" -> "BULLISH" to BuyColor
+        d1 == "SELL" && h4 == "SELL" -> "BEARISH" to SellColor
+        else -> "CAMPURAN" to Muted
     }
     val price = hb.num("price") ?: st.optDouble("last_close")
     val levels = st.optJSONArray("levels")
@@ -102,7 +102,12 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
         // ⏱ hitung mundur cek sinyal (tutup candle H1)
         instantOf(st.optString("next_check"))?.let { t ->
             val left = Duration.between(Instant.ofEpochMilli(now), t).toMillis()
-            Text(if (left > 0) "⏱ Cek sinyal: ${clock(left)}" else "⏱ Cloud sedang mengecek…",
+            // lewat > 20 menit tanpa candle baru = pasar tutup (XAU akhir pekan / libur), bukan sedang dicek
+            Text(when {
+                left > 0 -> "⏱ Cek sinyal: ${clock(left)}"
+                left > -20 * 60_000L -> "⏱ Cloud sedang mengecek…"
+                else -> "⏸ Pasar tutup — cek lagi saat pasar buka"
+            },
                 style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(top = 4.dp))
         }
         if (buyLvl < Double.MAX_VALUE && sellLvl > -Double.MAX_VALUE) {
