@@ -146,6 +146,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Terbaik kompromi "2 TP 0,5/1R + 3 jalan" (XAU +0,12R vs +0,21R, BTC +0,19R vs +0,37R, kalah beruntun 12 vs 25).
   BELUM dipasang — menunggu pilihan pengguna.
 
+## Martingale (3 Okt 2026 — `docs/MARTINGALE.md`)
+- `research/martingale.py`: M1 antar sinyal 1/3/5x = lot rata-rata 3,1x, total/DD tidak lebih baik, DD 4x; M2 grid
+  1/3/5 dalam sinyal (seperti EA video pengguna) WR 82–94% tetapi total ≤ bawaan / negatif, rugi 1 sinyal −5..−6,8R.
+  TIDAK dipasang. Pengguna minta: pasang hanya setelah ia bilang "pasang" (jangan asal pasang).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
