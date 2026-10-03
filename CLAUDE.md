@@ -185,6 +185,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
   Kripto lain (`research/pair_kripto.py`, 25 koin): DOGE/ADA/XLM lolos riset saat 💰 BTC searah, tetapi pengguna memilih
   "ETH saja" (3 Okt) → TIDAK dipasang. Forex baru & XAG tidak bisa diuji (Twelve Data gratis: data lama/berbayar).
+- Gap forex diverifikasi (`research/verifikasi_gap.py`, replay `_gap.gap_tick`): WR 72–83% sebelum 2021, sejak 2021 hanya
+  4–9 sinyal/pair (USD/JPY 1 dari 4). Aplikasi 3.33: kartu 🏆 + saran entry pindah ke tombol ⓘ (InfoDialog) dan memuat
+  ETH, lapisan, gap; tab Sinyal hanya kartu status tren 🐂/🐻 (+ETH).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

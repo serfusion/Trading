@@ -46,7 +46,7 @@ fun StatusCards(prices: Map<String, SignalEvent>, follow: Set<String>) {
             delay(60_000L)
         }
     }
-    for ((grp, sym) in listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD")) {
+    for ((grp, sym) in listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "BTC" to "ETH/USD")) {
         if (grp !in follow) continue
         val hb = prices.values.firstOrNull { it.symbol() == sym } ?: continue
         val st = hb.json.optJSONObject("status") ?: continue
@@ -76,9 +76,9 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
     val d1 = st.optString("d1")
     val h4 = st.optString("h4")
     val (arah, warna) = when {
-        d1 == "BUY" && h4 == "BUY" -> "🟢 BULLISH" to BuyColor
-        d1 == "SELL" && h4 == "SELL" -> "🔴 BEARISH" to SellColor
-        else -> "⚪ CAMPURAN" to Muted
+        d1 == "BUY" && h4 == "BUY" -> "🐂 BULLISH" to BuyColor
+        d1 == "SELL" && h4 == "SELL" -> "🐻 BEARISH" to SellColor
+        else -> "⚖️ CAMPURAN" to Muted
     }
     val price = hb.num("price") ?: st.optDouble("last_close")
     val levels = st.optJSONArray("levels")
@@ -95,7 +95,7 @@ private fun StatusCard(sym: String, btc: Boolean, hb: SignalEvent, st: JSONObjec
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text("📊 $sym", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
             Spacer(Modifier.weight(1f))
-            Text(arah, fontWeight = FontWeight.ExtraBold, color = warna, style = MaterialTheme.typography.titleMedium)
+            Text(arah, fontWeight = FontWeight.ExtraBold, color = warna, style = MaterialTheme.typography.titleLarge)
         }
         Text("D1 ${if (d1 == "BUY") "naik" else if (d1 == "SELL") "turun" else "-"} • H4 " +
             if (h4 == "BUY") "naik" else "turun", style = MaterialTheme.typography.labelSmall, color = Muted)

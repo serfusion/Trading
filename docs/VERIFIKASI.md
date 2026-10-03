@@ -128,3 +128,18 @@ Replay kode cloud asli, TP1 0,7R, spread asli (ETH 0,05%). Total BARU = dasar + 
 
 Catatan risiko: XAU kini jauh lebih banyak sinyal bersamaan (lapisan BARU 1.859 vs 550) — pakai lot ½ untuk lapisan.
 Env Vercel: XAU_EXTRA_SETS=0, ETH_SIGNALS=0, LAYER_SIGNALS=0 untuk mematikan.
+
+## Gap pekan forex (cek 3 Okt 2026, `research/verifikasi_gap.py`)
+Kode cloud asli `_gap.gap_tick` diputar ulang per jam 2012–2026 (184 sinyal), spread akun Standard (×3 = perkiraan
+spread buka pekan yang melebar).
+
+| Pair | Sebelum Okt 2021: n, WR, R/sinyal | Sejak Okt 2021: n, WR, R/sinyal | Spread ×3 sejak 2021 |
+|---|---|---|---|
+| USD/JPY | 30, 83%, +0,27 | **4**, 25%, −0,74 | −0,77 |
+| AUD/USD | 17, 82%, +0,20 | 6, 83%, +0,10 | +0,06 |
+| AUD/JPY | 37, 73%, +0,05 | 9, 89%, +0,19 | +0,13 |
+| EUR/JPY | 27, 78%, +0,15 | 9, 67%, −0,21 | −0,26 |
+| EUR/CHF | 36, 72%, +0,10 | 9, 56%, +0,01 | −0,11 |
+
+WR gap memang tinggi (72–83% sebelum 2021), tetapi untung per sinyal kecil dan sejak 2021 sinyalnya sangat sedikit
+(4–9 per pair) → belum bisa dipastikan. Tidak diubah (tetap jalan); tampil di kartu 🏆 dengan jumlah sinyalnya.
