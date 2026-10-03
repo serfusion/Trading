@@ -12,7 +12,8 @@ riset "hanya 💰 dikirim"). Tanda 📰/⚡/perang hanya label -> tidak dipakai.
 Catatan cloud: R virtual TANPA spread, SL+ = entry ± 0,10 (riset: entry + 0,1R), SL tanpa celah harga, ATR(20)
 rata-rata sederhana (riset: ATR14 Wilder), dan sinyal dilewati bila ATR20 < 0,4 x ATR120.
 --td: data Twelve Data (feed yang dipakai cloud live, data/research/eksternal/twelvedata_h1, 2018–2026) sebagai
-pengganti data riset -> cek apakah sumber data mengubah hasil.
+pengganti data riset -> cek apakah sumber data mengubah hasil. --semua: semua kategori dikirim (filter live tetap,
+tanpa lapisan) -> angka kategori yang TIDAK dikirim (kartu 🏆).
 Hasil: data/research/eksternal/verifikasi/cloud_<aset>[_mentah][_td].csv (satu baris per sinyal yang sudah tutup).
 """
 from __future__ import annotations
@@ -93,7 +94,7 @@ def funding_series() -> tuple[list, list]:
     return f, avail
 
 
-def replay(name: str, mentah: bool = False, td: bool = False) -> pd.DataFrame:
+def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = False) -> pd.DataFrame:
     key = {"XAU": "XAUUSD", "BTC": "BTCUSD"}[name]
     if td:
         df = pd.read_parquet(EXT / "twelvedata_h1" / f"{key}.parquet")
@@ -109,9 +110,11 @@ def replay(name: str, mentah: bool = False, td: bool = False) -> pd.DataFrame:
     else:
         cfg = dict(_core.BTC_CFG)
     lay = json.loads((ROOT / "cloud" / "api" / "sinyal_lapis.json").read_text(encoding="utf-8")).get(name)
-    if lay and not mentah:
+    if lay and not mentah and not semua:
         cfg["layer"] = lay
-    if name == "BTC" and not mentah:
+    if semua:                                # semua kategori dikirim (pembanding kategori yang tidak dikirim)
+        cfg["profit_only"] = False
+    if name == "BTC" and not mentah and not semua:
         cfg["skip_cats"] = ("konf",)        # seperti tick.py sejak 3 Okt 2026 (BTC konf dimatikan, BTC_SKIP_KONF)
         f, avail = funding_series()
 
@@ -133,7 +136,8 @@ def replay(name: str, mentah: bool = False, td: bool = False) -> pd.DataFrame:
         rows.append({"id": ev["id"], "set": ev["set"], "dir": ev["dir"], "cat": s.get("cat", "").split(" ", 1)[-1],
                      "t_signal": s.get("time"), "t_close": ev["time"], "entry": ev["entry"], "exit": ev["price"],
                      "risk": ev["risk_points"], "r": ev["r"], "tp1": ev["tp1_hit"], "lapis": bool(ev.get("lapis")),
-                     "reason": ev["reason"]})
+                     "reason": ev["reason"], "tier": s.get("tier", ""),
+                     "r07": (ev.get("r_by") or {}).get("1_07", ev["r"])})     # skema SL+ 0,7R (aplikasi: BTC & ⚡)
     out = pd.DataFrame(rows)
     out["t_signal"] = pd.to_datetime(out.t_signal, utc=True)
     out["t_close"] = pd.to_datetime(out.t_close, utc=True)
@@ -142,10 +146,10 @@ def replay(name: str, mentah: bool = False, td: bool = False) -> pd.DataFrame:
 
 def main() -> None:
     name = sys.argv[1] if len(sys.argv) > 1 else "XAU"
-    mentah, td = "--mentah" in sys.argv, "--td" in sys.argv
-    out = replay(name, mentah, td)
+    mentah, td, semua = "--mentah" in sys.argv, "--td" in sys.argv, "--semua" in sys.argv
+    out = replay(name, mentah, td, semua)
     OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"cloud_{name}{'_mentah' if mentah else ''}{'_td' if td else ''}.csv"
+    path = OUT / f"cloud_{name}{'_mentah' if mentah else ''}{'_td' if td else ''}{'_semua' if semua else ''}.csv"
     out.to_csv(path, index=False)
     print(f"{len(out)} sinyal tutup -> {path}")
     for lap, g in out.groupby("lapis"):

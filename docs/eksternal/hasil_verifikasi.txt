@@ -75,3 +75,31 @@
   BTCUSD LAMA: 💰 +0.572 (n842) vs bukan-💰 +0.083 (n1035) p-acak 0.000
   BTCUSD BARU: 💰 +0.159 (n782) vs bukan-💰 +0.061 (n1127) p-acak 0.149
   BTCUSD 2026: 💰 -0.014 (n102) vs bukan-💰 +0.357 (n185) p-acak 0.861
+
+## 6. Angka yang tampil di aplikasi/notifikasi vs replay kode cloud (spread asli)
+ XAU
+  a) badge di teks notifikasi (_core.STATS, semua periode, 'semua sinyal diberi label'):
+       konf: KLAIM WR 48% +0.09R (n 335) | REPLAY semua WR 48% -0.02R (n 399) | sejak Okt 2021 WR 58% +0.15R (n 151)
+       konf+⭐: KLAIM WR 49% +0.31R (n 850) | REPLAY semua WR 52% +0.24R (n 1148) | sejak Okt 2021 WR 51% +0.23R (n 468)
+  b) ⚡ kesempatan emas (_core.TIER_STATS):
+       skema bawaan: KLAIM WR 54% +0.80R (n 138) | REPLAY semua WR 52% +0.59R (n 324) | sejak Okt 2021 WR 42% +0.40R (n 116)
+       SL+ 0,7R: KLAIM WR 63% +0.77R (n 138) | REPLAY semua WR 42% +0.41R (n 324) | sejak Okt 2021 WR 34% +0.24R (n 116)
+  d) lapisan 🔁 (sinyal_lapis.json):
+       lapisan: KLAIM WR 52% +0.28R (n 907) | REPLAY semua WR 50% +0.18R (n 941) | sejak Okt 2021 WR 51% +0.08R (n 440)
+  e) tanda 📰 ≤ 4 jam setelah berita (sinyal_berita.json):
+       setelah berita: KLAIM WR 46% +0.45R (n 186) | REPLAY semua WR 53% +0.52R (n 179) | sejak Okt 2021 WR 48% +0.28R (n 87)
+       tanpa berita: KLAIM WR 48% +0.21R | REPLAY semua WR 51% +0.13R (n 1368) | sejak Okt 2021 WR 54% +0.20R (n 532)
+ BTC
+  a) badge di teks notifikasi (_core.STATS, semua periode, 'semua sinyal diberi label'):
+       konf+⭐: KLAIM WR 48% +0.31R (n 811) | REPLAY semua WR 45% +0.20R (n 950) | sejak Okt 2021 WR 47% +0.27R (n 436)
+       ⭐: KLAIM WR 50% +0.68R (n 382) | REPLAY semua WR 52% +0.64R (n 540) | sejak Okt 2021 WR 54% +0.42R (n 278)
+  b) ⚡ kesempatan emas (_core.TIER_STATS):
+       skema bawaan: KLAIM WR 54% +0.81R (n 200) | REPLAY semua WR 52% +0.64R (n 540) | sejak Okt 2021 WR 54% +0.42R (n 278)
+       SL+ 0,7R: KLAIM WR 64% +0.75R (n 200) | REPLAY semua WR 48% +0.66R (n 540) | sejak Okt 2021 WR 52% +0.44R (n 278)
+  c) BTC dengan skema aplikasi (SL+ otomatis 0,7R) — semua sinyal dasar:
+       SL+ 0,7R vs bawaan: KLAIM WR 48% +0.36R | REPLAY semua WR 42% +0.35R (n 1490) | sejak Okt 2021 WR 45% +0.35R (n 714)
+  d) lapisan 🔁 (sinyal_lapis.json):
+       lapisan: KLAIM WR 49% +0.49R (n 1293) | REPLAY semua WR 49% +0.48R (n 962) | sejak Okt 2021 WR 54% +0.48R (n 441)
+  e) tanda 📰 ≤ 4 jam setelah berita (sinyal_berita.json):
+       setelah berita: KLAIM WR 51% +0.61R (n 72) | REPLAY semua WR 47% +0.38R (n 51) | sejak Okt 2021 WR 48% -0.06R (n 33)
+       tanpa berita: KLAIM WR 48% +0.36R | REPLAY semua WR 48% +0.36R (n 1439) | sejak Okt 2021 WR 50% +0.35R (n 681)

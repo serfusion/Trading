@@ -223,6 +223,54 @@ def bagian5(L: list) -> None:
                      f"(n{(~keep).sum()}) p-acak {perm_p(r, keep):.3f}")
 
 
+def klaim(L: list, label: str, x: pd.DataFrame, col: str, wr_k, avg_k, n_k=None) -> None:
+    """Satu baris: klaim (WR, R/sinyal) vs hasil replay (semua periode & sejak Okt 2021)."""
+    if len(x) == 0:
+        L.append(f"  {label}: tidak ada sinyal di replay")
+        return
+    b = x[x.t_signal >= SPLIT]
+    L.append(f"  {label}: KLAIM WR {wr_k:.0f}% {avg_k:+.2f}R" + (f" (n {n_k})" if n_k else "") +
+             f" | REPLAY semua WR {(x[col] > 0).mean() * 100:.0f}% {x[col].mean():+.2f}R (n {len(x)})"
+             f" | sejak Okt 2021 WR {(b[col] > 0).mean() * 100:.0f}% {b[col].mean():+.2f}R (n {len(b)})")
+
+
+def bagian6(L: list, js: dict) -> None:
+    from . import verifikasi_cloud as vc
+    from .eksternal_berita import MAIN, calendar
+    from .sinyal_berita import tag
+    core = vc._core
+    lap = json.loads((ROOT / "cloud" / "api" / "sinyal_lapis.json").read_text(encoding="utf-8"))
+    ber = json.loads((ROOT / "cloud" / "api" / "sinyal_berita.json").read_text(encoding="utf-8"))
+    cal = calendar()
+    for n in ("XAU", "BTC"):
+        df = net(n, load(n))
+        df["R07"] = df.r07 - df.spread / df.risk
+        base, lay = df[~df.lapis], df[df.lapis]
+        L.append(f" {n}")
+        L.append("  a) badge di teks notifikasi (_core.STATS, semua periode, 'semua sinyal diberi label'):")
+        for c, g in base.groupby("cat"):
+            wr, avg, nn, per = core.STATS[f"{n} {c}"]
+            klaim(L, f"     {c}", g, "R", wr, avg, nn)
+        zap = base[base.tier == "zap"]
+        t = core.TIER_STATS[n]
+        L.append("  b) ⚡ kesempatan emas (_core.TIER_STATS):")
+        klaim(L, "     skema bawaan", zap, "R", t[0], t[1], t[4])
+        klaim(L, "     SL+ 0,7R", zap, "R07", t[2], t[3], t[4])
+        if n == "BTC":
+            L.append("  c) BTC dengan skema aplikasi (SL+ otomatis 0,7R) — semua sinyal dasar:")
+            klaim(L, "     SL+ 0,7R vs bawaan", base, "R07", (base.R > 0).mean() * 100, base.R.mean())
+        st_ = lap[n]["stats"]
+        L.append("  d) lapisan 🔁 (sinyal_lapis.json):")
+        klaim(L, "     lapisan", lay, "R", st_["wr"], st_["avg_r"], st_["n"])
+        sig = base.rename(columns={"t_signal": "t"}).assign(dir=np.where(base.dir == "BUY", 1, -1))
+        after, _ = tag(sig, cal, MAIN, 4)
+        b = ber[n]
+        L.append("  e) tanda 📰 ≤ 4 jam setelah berita (sinyal_berita.json):")
+        klaim(L, "     setelah berita", base[after], "R", b["setelah"]["wr"], b["setelah"]["avg"], b["setelah"]["n"])
+        klaim(L, "     tanpa berita", base[~after], "R", b["dasar"]["wr"], b["dasar"]["avg"])
+        js[n]["skema07"] = {"baru": cell(base[base.t_signal >= SPLIT].R07), "semua": cell(base.R07)}
+
+
 def main() -> None:
     cepat = "--cepat" in sys.argv
     L = ["# Verifikasi menyeluruh sinyal 💰 (research/verifikasi.py)", ""]
@@ -247,9 +295,14 @@ def main() -> None:
     L.append("\n## 5. Apakah pilihan kategori 💰 menambah nilai? (semua sinyal diberi label, spread riset)")
     bagian5(L)
     for n in ("XAU", "BTC"):                 # semua kategori (termasuk yang tidak dikirim) untuk kartu 🏆 aplikasi
-        a = go(KEY[n], None)
+        if (VER / f"cloud_{n}_semua.csv").exists():      # replay kode cloud, semua kategori dikirim, spread asli
+            a = net(n, load(n, "_semua")).rename(columns={"t_signal": "t"})
+        else:                                            # cadangan: mesin riset (spread riset)
+            a = go(KEY[n], None)
         js[n]["kat_semua"] = {c: {"baru": cell(g[g.t >= SPLIT].R), "tahun_ini": cell(g[g.t >= Y26].R),
                                   "dikirim": c in DIKIRIM[n]} for c, g in a.groupby("cat")}
+    L.append("\n## 6. Angka yang tampil di aplikasi/notifikasi vs replay kode cloud (spread asli)")
+    bagian6(L, js)
     txt = "\n".join(L) + "\n"
     OUT.write_text(txt, encoding="utf-8")
     JSON_OUT.write_text(json.dumps(js, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")

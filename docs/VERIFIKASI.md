@@ -80,3 +80,25 @@ maks 2 lapisan per set, lot ½). Ukuran ulang (BTC sejak Okt 2021, spread asli):
 - Gabungan (lapisan dihitung ½ lot): dengan konf +323R, tanpa konf +341R (+18R dalam 5 tahun, ±5%); 2026: +62R vs +60R.
 Jadi alasan "menghalangi sinyal bagus" yang dulu saya pakai terlalu dibesar-besarkan. Selisihnya kecil; mematikan atau
 menyalakan BTC konf hampir sama hasilnya (env Vercel BTC_SKIP_KONF=0 untuk menyalakan lagi).
+
+## Angka lain yang tampil di aplikasi/notifikasi (cek 3 Okt 2026, laporan mentah bagian 6)
+Replay kode cloud + spread asli Exness. "Klaim" = angka yang sekarang tampil.
+
+| Angka | Klaim | Replay (semua) | Replay sejak Okt 2021 | Status |
+|---|---|---|---|---|
+| Kartu "Teruji", 🏆, 📜 | — | — | sumbernya replay ini | ✅ |
+| Badge teks notifikasi XAU konf | WR 48%, +0,09R | −0,02R | +0,15R | ❌ |
+| Badge XAU konf+⭐ / BTC konf+⭐ | +0,31R / +0,31R | +0,24R / +0,20R | +0,23R / +0,27R | ⚠️ terlalu tinggi |
+| Badge BTC ⭐ | +0,68R | +0,64R | +0,42R | ⚠️ |
+| ⚡ XAU (skema bawaan) | WR 54%, +0,80R | WR 52%, +0,59R | WR 42%, +0,40R | ❌ |
+| ⚡ XAU dengan SL+ 0,7R (otomatis di aplikasi) | WR 63%, +0,77R | WR 42%, +0,41R | WR 34%, +0,24R | ❌ (lebih buruk dari bawaan) |
+| ⚡ BTC (SL+ 0,7R) | WR 64%, +0,75R | WR 48%, +0,66R | WR 52%, +0,44R | ❌ WR terlalu tinggi |
+| BTC SL+ 0,7R ("WR +8 poin, profit sama") | — | +0,35R, WR 42% (bawaan +0,36R, WR 48%) | +0,35R | ⚠️ profit sama, WR tidak naik |
+| Lapisan XAU | WR 52%, +0,28R | +0,18R | +0,08R | ❌ |
+| Lapisan BTC | WR 49%, +0,49R | +0,48R | +0,48R | ✅ |
+| 📰 XAU setelah berita | +0,45R vs +0,21R | +0,52R vs +0,13R | +0,28R vs +0,20R | ✅ (selisih mengecil) |
+| 📰 BTC setelah berita | +0,61R vs +0,36R | +0,38R vs +0,36R | −0,06R (n 33) vs +0,35R | ❌ |
+
+WR di sini = sinyal dengan hasil bersih > 0 setelah spread. SL+ di cloud = entry ± 0,10, sehingga keluar di SL+ ≈ 0
+lalu minus spread → dihitung kalah; klaim lama memakai SL+ entry + 0,1R (riset), itu sebabnya WR klaim lebih tinggi.
+Perbaikan teks (cloud) & pengaturan SL+ 0,7R (aplikasi) menunggu izin pengguna.
