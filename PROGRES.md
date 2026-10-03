@@ -165,3 +165,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-10-03: "katanya 💰 bagus, sekarang biasa profit & 💰⭐ konf tidak untung?" → `research/kategori_badge.py`,
   `docs/KATEGORI_BADGE.md`: badge dihitung cara A (semua sinyal diberi label) vs yang dikirim cara B → XAU konf
   terlalu tinggi di badge; BTC 2026 biasa memang > 💰; saran hentikan XAU konf dicabut. Usulan badge cara B menunggu "pasang".
+- 2026-10-03: "CEK, VERIFIKASI, UJI menyeluruh lalu rombak apk simple" → `research/verifikasi_cloud.py`,
+  `research/verifikasi.py`, `docs/VERIFIKASI.md`: kode cloud asli diputar ulang 2012–2026 (cocok 96–98% dengan riset),
+  tanpa look-ahead, spread asli Exness; XAU 💰 +0,21R & BTC 💰 +0,27R sejak Okt 2021. Aplikasi 3.26 ringkas.

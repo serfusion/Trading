@@ -165,6 +165,16 @@ alarm tepat waktu) hanya menyentuh `android/`].
   3–3, per sinyal 💰 2×). Saran "hentikan XAU konf" DICABUT (DD −41 → −66). Usulan badge cara B + angka sejak Okt
   2021/tahun ini — menunggu "pasang". Selalu sebut cara hitung (A/B) saat melaporkan per kategori.
 
+## Verifikasi menyeluruh (3 Okt 2026 — `docs/VERIFIKASI.md`)
+- `research/verifikasi_cloud.py` memutar ulang kode cloud ASLI (`_core.tick`, konfigurasi live: H4 XAU, funding &
+  September BTC, lapisan; `--mentah` tanpa itu; `--td` data Twelve Data) candle demi candle →
+  `data/research/eksternal/verifikasi/`. `research/verifikasi.py` membandingkan dengan riset (96–98% sinyal sama,
+  kategori 99,7–99,9%), cek look-ahead (300/300), spread ASLI Exness per jam (BTC asli > asumsi 0,03%), bootstrap,
+  p-acak, sumber data; menulis `cloud/api/riwayat.json` (kartu 📜 & baris "teruji" aplikasi 3.26).
+- Hasil live + spread asli, sejak Okt 2021: XAU 💰 +0,21R/sin (2026 +56R), BTC 💰 +0,27R (2026 +43R); XAU konf &
+  BTC konf lemah (tidak diubah tanpa izin). `research/riwayat_uang.py` kini hanya pembanding (docs/eksternal).
+- Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

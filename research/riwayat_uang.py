@@ -5,6 +5,8 @@ python -m research.riwayat_uang
 Permintaan pengguna (3 Okt 2026): "pasang riwayat 💰" setelah bertanya apakah sinyal 💰 masih akurat. Mesin = cloud
 (research/sl_tangga.run, skema bawaan TP1 1R + 4 jalan). WR = sinyal dengan hasil bersih > 0; R = rata-rata 5 posisi
 (1R = rugi bila SL awal kena). Jalankan ulang bila data harga diperbarui.
+Sejak aplikasi 3.26 cloud/api/riwayat.json dibuat research/verifikasi.py (replay kode cloud asli, filter live, spread
+asli Exness); skrip ini menulis versi mesin riset ke docs/eksternal/riwayat_riset.json sebagai pembanding.
 """
 from __future__ import annotations
 
@@ -15,7 +17,7 @@ import pandas as pd
 
 from .sl_tangga import run
 
-OUT = Path(__file__).resolve().parent.parent / "cloud" / "api" / "riwayat.json"
+OUT = Path(__file__).resolve().parent.parent / "docs" / "eksternal" / "riwayat_riset.json"
 
 
 def cell(r: pd.Series) -> dict:

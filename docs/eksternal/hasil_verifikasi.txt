@@ -1,0 +1,81 @@
+# Verifikasi menyeluruh sinyal 💰 (research/verifikasi.py)
+
+## 1. Kode cloud asli (replay) vs mesin riset — tanpa filter tambahan, tanpa lapisan
+ XAU
+  sinyal cloud 1560 | riset 1525 | sama persis (set+arah+candle) 1497 (96% cloud, 98% riset)
+  kategori sama pada sinyal yang cocok: 99.9%
+  R sinyal yang cocok: korelasi 0.908, tanda sama 96%, rata-rata cloud (tanpa spread) +0.155 vs riset (dengan spread) +0.176
+  hanya di cloud: n63 R/sin +1.108 | hanya di riset: n28 R/sin +0.041
+  LAMA: cloud mentah +0.175R/sin (n938, tanpa spread) | riset +0.151R/sin (n914, spread riset)
+  BARU: cloud mentah +0.220R/sin (n622, tanpa spread) | riset +0.208R/sin (n611, spread riset)
+ BTC
+  sinyal cloud 2074 | riset 2033 | sama persis (set+arah+candle) 1968 (95% cloud, 97% riset)
+  kategori sama pada sinyal yang cocok: 99.7%
+  R sinyal yang cocok: korelasi 0.954, tanda sama 95%, rata-rata cloud (tanpa spread) +0.393 vs riset (dengan spread) +0.367
+  hanya di cloud: n106 R/sin +0.657 | hanya di riset: n65 R/sin +0.386
+  LAMA: cloud mentah +0.646R/sin (n999, tanpa spread) | riset +0.550R/sin (n1001, spread riset)
+  BARU: cloud mentah +0.185R/sin (n1075, tanpa spread) | riset +0.192R/sin (n1032, spread riset)
+
+## 2. Konfigurasi LIVE (filter + lapisan), R bersih setelah spread asli Exness
+ XAU
+  spread asli rata-rata: 0.303 (= 0.028R per posisi)
+  sinyal dasar (yang Anda terima, lot penuh)
+    LAMA: n  928 WR 49.4% +0.145R/sin [CI95 +0.03..+0.27] t  2.4 total  +134.5R DD  -40.8
+    BARU: n  619 WR 52.8% +0.212R/sin [CI95 +0.08..+0.35] t  3.2 total  +131.3R DD  -42.0
+    2026: n   61 WR 72.1% +0.919R/sin [CI95 +0.39..+1.60] t  3.0 total   +56.0R DD   -9.4
+  kategori konf
+    LAMA: n  248 WR 41.9% -0.131R/sin [CI95 -0.28..+0.03] t -1.6 total   -32.5R DD  -47.4
+    BARU: n  151 WR 57.6% +0.151R/sin [CI95 -0.05..+0.37] t  1.4 total   +22.8R DD  -18.0
+    2026: n   20 WR 45.0% -0.221R/sin [CI95 -0.48..+0.06] t -1.6 total    -4.4R DD   -5.4
+  kategori konf+⭐
+    LAMA: n  680 WR 52.1% +0.246R/sin [CI95 +0.10..+0.40] t  3.3 total  +167.0R DD  -35.6
+    BARU: n  468 WR 51.3% +0.232R/sin [CI95 +0.08..+0.40] t  2.9 total  +108.4R DD  -59.4
+    2026: n   41 WR 85.4% +1.475R/sin [CI95 +0.74..+2.38] t  3.5 total   +60.5R DD   -5.0
+  lapisan 🔁 (lot ½)
+    LAMA: n  501 WR 49.5% +0.263R/sin [CI95 +0.09..+0.46] t  2.8 total  +131.8R DD  -99.9
+    BARU: n  440 WR 50.7% +0.085R/sin [CI95 -0.06..+0.25] t  1.1 total   +37.2R DD  -61.2
+    2026: n   57 WR 57.9% +0.353R/sin [CI95 -0.14..+0.96] t  1.2 total   +20.1R DD  -12.5
+  total R per tahun (dasar): 2013: +30 (57), 2014: +31 (90), 2015: -27 (122), 2016: +42 (110), 2017: +5 (118), 2018: -27 (137), 2019: +13 (107), 2020: +56 (102), 2021: +8 (112), 2022: -1 (139), 2023: -13 (138), 2024: +26 (127), 2025: +68 (127), 2026: +56 (61)
+ BTC
+  spread asli rata-rata: 29.252 (= 0.220R per posisi)
+  sinyal dasar (yang Anda terima, lot penuh)
+    LAMA: n  858 WR 47.8% +0.403R/sin [CI95 +0.21..+0.60] t  3.9 total  +345.4R DD -128.5
+    BARU: n  842 WR 49.5% +0.267R/sin [CI95 +0.12..+0.42] t  3.5 total  +224.6R DD  -40.6
+    2026: n  134 WR 44.8% +0.320R/sin [CI95 -0.09..+0.79] t  1.4 total   +42.9R DD  -21.7
+  kategori konf
+    LAMA: n  239 WR 47.7% +0.242R/sin [CI95 -0.04..+0.55] t  1.6 total   +57.8R DD  -44.8
+    BARU: n  198 WR 48.5% +0.073R/sin [CI95 -0.13..+0.30] t  0.7 total   +14.4R DD  -21.2
+    2026: n   36 WR 50.0% -0.126R/sin [CI95 -0.37..+0.14] t -0.9 total    -4.5R DD   -9.4
+  kategori konf+⭐
+    LAMA: n  357 WR 45.9% +0.166R/sin [CI95 -0.12..+0.49] t  1.1 total   +59.2R DD  -83.2
+    BARU: n  366 WR 46.4% +0.257R/sin [CI95 +0.02..+0.53] t  2.0 total   +93.9R DD  -25.1
+    2026: n   52 WR 36.5% +0.724R/sin [CI95 -0.17..+1.90] t  1.4 total   +37.6R DD  -20.4
+  kategori ⭐
+    LAMA: n  262 WR 50.4% +0.872R/sin [CI95 +0.44..+1.35] t  3.8 total  +228.4R DD  -22.4
+    BARU: n  278 WR 54.3% +0.418R/sin [CI95 +0.16..+0.69] t  3.1 total  +116.3R DD  -20.8
+    2026: n   46 WR 50.0% +0.212R/sin [CI95 -0.32..+0.87] t  0.7 total    +9.8R DD  -13.9
+  lapisan 🔁 (lot ½)
+    LAMA: n  594 WR 46.0% +0.462R/sin [CI95 +0.20..+0.75] t  3.4 total  +274.6R DD -117.0
+    BARU: n  504 WR 51.2% +0.390R/sin [CI95 +0.20..+0.59] t  3.9 total  +196.8R DD  -37.9
+    2026: n   71 WR 31.0% +0.536R/sin [CI95 -0.19..+1.46] t  1.3 total   +38.1R DD  -21.1
+  total R per tahun (dasar): 2016: -52 (95), 2017: +177 (153), 2018: +36 (183), 2019: +89 (159), 2020: +117 (156), 2021: -16 (167), 2022: -4 (184), 2023: +106 (130), 2024: +34 (159), 2025: +39 (180), 2026: +43 (134)
+
+## 3. Look-ahead
+  XAUUSD: kategori dengan data dipotong di candle sinyal = data penuh pada 150/150 sinyal acak
+  BTCUSD: kategori dengan data dipotong di candle sinyal = data penuh pada 150/150 sinyal acak
+
+## 4. Sumber data: Twelve Data (feed cloud) vs data riset, replay live
+  XAU 2021-02..2026-08: Twelve Data n  676 WR 51.5% +0.216R/sin [CI95 +0.10..+0.34] t  3.4 total  +145.9R DD  -49.1
+  XAU 2021-02..2026-08: data riset  n  695 WR 52.7% +0.206R/sin [CI95 +0.08..+0.34] t  3.3 total  +142.8R DD  -42.0
+  sinyal sama di kedua sumber: 575 (85% dari Twelve Data)
+  BTC 2020-06..2026-08: Twelve Data n 1063 WR 46.6% +0.208R/sin [CI95 +0.08..+0.33] t  3.1 total  +220.6R DD  -50.2
+  BTC 2020-06..2026-08: data riset  n 1044 WR 49.2% +0.260R/sin [CI95 +0.13..+0.40] t  3.8 total  +271.3R DD  -45.0
+  sinyal sama di kedua sumber: 890 (84% dari Twelve Data)
+
+## 5. Apakah pilihan kategori 💰 menambah nilai? (semua sinyal diberi label, spread riset)
+  XAUUSD LAMA: 💰 +0.265 (n712) vs bukan-💰 -0.007 (n1447) p-acak 0.000
+  XAUUSD BARU: 💰 +0.223 (n473) vs bukan-💰 -0.028 (n784) p-acak 0.001
+  XAUUSD 2026: 💰 +0.818 (n51) vs bukan-💰 +0.072 (n105) p-acak 0.010
+  BTCUSD LAMA: 💰 +0.572 (n842) vs bukan-💰 +0.083 (n1035) p-acak 0.000
+  BTCUSD BARU: 💰 +0.159 (n782) vs bukan-💰 +0.061 (n1127) p-acak 0.149
+  BTCUSD 2026: 💰 -0.014 (n102) vs bukan-💰 +0.357 (n185) p-acak 0.861
