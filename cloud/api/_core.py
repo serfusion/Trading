@@ -303,6 +303,11 @@ STATS = {
     "BTC konf": (41.6, -0.188, 221, "Okt 2021–2026"),
     "BTC ⭐": (58.6, 0.421, 278, "Okt 2021–2026"),
     "BTC biasa": (45.3, 0.104, 1139, "Okt 2021–2026"),
+    # ETH (research/sinyal_tambahan.py + tambahan_cloud.py): hanya ⭐/konf+⭐ dan hanya saat 💰 BTC searah terbuka
+    "ETH konf+⭐": (56.0, 0.245, 530, "Okt 2021–2026"),
+    "ETH ⭐": (56.0, 0.245, 530, "Okt 2021–2026"),
+    "ETH konf": (0.0, -0.01, 0, "-"),
+    "ETH biasa": (0.0, -0.01, 0, "-"),
     "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
     "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
     "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),

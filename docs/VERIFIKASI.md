@@ -115,3 +115,16 @@ Replay kode cloud asli + spread asli, sinyal dasar (`cloud_<aset>.csv` kini TP1 
 
 WR naik 6–18 poin, profit sejak 2021 sama; sebelum 2021 profit lebih kecil (XAU −11%, BTC −21%). `_core.CFG["tp1_r"]`
 0,7 (BTC ikut). SL+ 0,7R terpisah jadi tidak berpengaruh (TP1 sudah di 0,7R).
+
+## Sinyal tambahan (DIPASANG 3 Okt 2026, izin "pasang semua") — `research/sinyal_tambahan.py` (99 sumber) + `research/tambahan_cloud.py`
+Replay kode cloud asli, TP1 0,7R, spread asli (ETH 0,05%). Total BARU = dasar + lapisan × ½ lot.
+
+| | WR LAMA / BARU | R/sinyal BARU | Total BARU | Keputusan |
+|---|---|---|---|---|
+| XAU sekarang (3 set, lapisan setelah TP1) | 59% / 63%, lapisan 61% | +0,20 / lapisan +0,04 | +144R | — |
+| **XAU + set 100/40 & 120/50 + lapisan kapan saja (breakout baru) maks 5** | 60% / 63%, lapisan **62%** | +0,16 / lapisan **+0,22** | **+359R** | ✅ dipasang |
+| BTC lapisan setelah TP1 maks 1 (pengganti) | 48% / 56% | +0,32 / lapisan +0,39 | +302R vs +332R sekarang | ❌ BTC tetap |
+| **ETH ⭐ & konf+⭐ hanya saat 💰 BTC searah terbuka** | **70% / 56%** | **+0,25** | +130R | ✅ dipasang |
+
+Catatan risiko: XAU kini jauh lebih banyak sinyal bersamaan (lapisan BARU 1.859 vs 550) — pakai lot ½ untuk lapisan.
+Env Vercel: XAU_EXTRA_SETS=0, ETH_SIGNALS=0, LAYER_SIGNALS=0 untuk mematikan.

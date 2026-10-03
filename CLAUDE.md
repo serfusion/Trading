@@ -180,6 +180,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - 3 Okt (izin "pasang"): `_core.STATS`/`TIER_STATS` = replay cloud Okt 2021–2026 TP1 0,7R (kategori yang dikirim tidak
   berubah), sinyal_lapis.json teruji (lapisan XAU kini +0,04R — lemah), 📰 BTC mati (env NEWS_TAG_BTC=1), event sinyal
   + tp2 1,5R / tp3 3R (patokan) / sl_plus; aplikasi 3.31 angka besar Entry/SL/TP1/TP2/TP3/SL+/TUTUP.
+- Sinyal tambahan DIPASANG 3 Okt (izin "pasang semua"; `research/sinyal_tambahan.py` 99 sumber, `tambahan_cloud.py`
+  replay): XAU set 100/40 & 120/50 (env XAU_EXTRA_SETS) + lapisan XAU mode any maks 6 (BARU +359R vs +144R); ETH ⭐/konf+⭐
+  hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

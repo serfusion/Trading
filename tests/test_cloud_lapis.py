@@ -111,7 +111,7 @@ def test_setelan_tick_xau_tp1_btc_breakout_baru(monkeypatch):
     monkeypatch.delenv("LAYER_SIGNALS", raising=False)
     monkeypatch.setenv("NEWS_TAG", "0")
     x, b = tick.signal_extras("XAU", None), tick.signal_extras("BTC", None)
-    assert x["layer"]["mode"] == "tp1" and x["layer"]["lot"] == 0.5 and "news_fn" not in x
+    assert x["layer"]["mode"] == "any" and x["layer"]["max"] == 6 and x["layer"]["lot"] == 0.5 and "news_fn" not in x
     assert b["layer"]["mode"] == "any" and b["layer"]["max"] == 2 and "WR" in b["layer"]["stats"]["teks"]
     monkeypatch.setenv("LAYER_SIGNALS", "0")
     assert "layer" not in tick.signal_extras("XAU", None)

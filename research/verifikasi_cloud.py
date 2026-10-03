@@ -94,9 +94,13 @@ def funding_series() -> tuple[list, list]:
     return f, avail
 
 
-def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = False) -> pd.DataFrame:
-    key = {"XAU": "XAUUSD", "BTC": "BTCUSD"}[name]
-    if td:
+def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = False, extra: dict | None = None,
+           data: pd.DataFrame | None = None) -> pd.DataFrame:
+    """extra: kunci cfg tambahan (mis. sets, layer, skip_fn) — dipakai research/tambahan_cloud.py; data: candle H1 lain."""
+    key = {"XAU": "XAUUSD", "BTC": "BTCUSD"}.get(name, name)
+    if data is not None:
+        df = data[data.high > data.low]
+    elif td:
         df = pd.read_parquet(EXT / "twelvedata_h1" / f"{key}.parquet")
         df = df[df.high > df.low]
     else:
@@ -107,10 +111,12 @@ def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = Fals
     _core.trend_status = lambda *a, **k: {}                                         # kartu status: bukan sinyal
     if name == "XAU":
         cfg = {**_core.CFG, "h4_filter": not mentah}
+        if not mentah:                       # seperti tick.py sejak 3 Okt 2026 (XAU_EXTRA_SETS)
+            cfg["sets"] = list(_core.CFG["sets"]) + [(100, 40), (120, 50)]
     else:
         cfg = dict(_core.BTC_CFG)
     lay = json.loads((ROOT / "cloud" / "api" / "sinyal_lapis.json").read_text(encoding="utf-8")).get(name)
-    if lay and not mentah and not semua:
+    if lay and not mentah and not semua:  # XAU sejak 3 Okt: kapan saja, maks 6 (sinyal_lapis.json)
         cfg["layer"] = lay
     if semua:                                # semua kategori dikirim (pembanding kategori yang tidak dikirim)
         cfg["profit_only"] = False
@@ -123,6 +129,7 @@ def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = Fals
             cache = {"f": f[max(0, k - _funding.KEEP):k]}
             return _funding.skip_reason(direction, now, cache, True, True, _core.new_york)
         cfg["skip_fn"] = skip
+    cfg.update(extra or {})
     prices, store, pub = Prices(bars), Store(), Pub()
     for i in range(WARM, len(bars) - 1):
         prices.i = i

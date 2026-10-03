@@ -53,7 +53,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
     // posisi yang masih terbuka di cloud tetapi data sinyalnya tidak ada di HP (mis. aplikasi di-install ulang)
     val orphans = prices.values.flatMap { SignalRepository.cloudOpen(it) }
         .filter { x ->
-            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC")) "BTC" else "GAP"
+            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC") || x.symbol.startsWith("ETH")) "BTC" else "GAP"
             x.id !in signalIds && grp in follow
         }
         .groupBy { SignalRepository.twinKey(it.id) }.values.toList()

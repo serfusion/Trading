@@ -168,7 +168,7 @@ fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
 /** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, atau GAP (forex gap pekan). */
 fun SignalEvent.pairGroup(): String = symbol().let {
-    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC")) "BTC" else "GAP"
+    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC") || it.startsWith("ETH")) "BTC" else "GAP"
 }
 
 /** Waktu event (UTC), null bila tidak terbaca. */
