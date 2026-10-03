@@ -180,6 +180,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Blueprint 10 strategi non-martingale (unggahan, `docs/BLUEPRINT10.md`, `research/blueprint10.py`, `gabung_bp.py`): 79
   kombinasi → 0 lolos; TP 0,5R WR 61–68% tetapi −0,08…+0,02R; terdekat #9 ATR breakout + tren2 (+0,06/+0,11R). Sebagai pemicu
   piramida tidak lebih baik di BARU; aturan risiko 2%/5%/4 kalah hampir tak aktif. WR tinggi + untung = 💰 TP1 0,7R.
+- Cek data & filter TENANG (`docs/TENANG.md`, `research/tenang.py`): data vs Twelve Data H1 selisih median $0,19, korelasi
+  0,944, arah 98,6%. Tenang = tanpa berita USD 60/120 mnt (FF + tanggal rilis FRED 2026 + FOMC), tanpa crash 3×ATR/60 mnt
+  4 jam, ATR ≤ median 20 hari (43% waktu). Blueprint: 1 lolos LAMA gagal BARU; grid + tenang + lindung + akhir pekan: habis
+  37%→8% bln (trader) tetapi rata-rata BARU −$19; ×2 jarak $5 +$4/bln tetapi sensitivitas = kantong kebetulan; piramida
+  tenang R/keranjang naik, $/bln sama. Kalender FRED: data/research/eksternal/fred_release_{10,50,46,53,54,9}.json.
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
