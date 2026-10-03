@@ -38,7 +38,8 @@ def jalan(df: pd.DataFrame, v: tuple, a: pd.Timestamp, b: pd.Timestamp, stop: bo
     t = df.index
     c = arrays(df)[3]
     i0, i1 = max(int(t.searchsorted(a)), 1), int(t.searchsorted(b))
-    cl, ruins, _, st = sim(df, *v[1:9], i0=i0, i1=i1, stop=stop, jeda_menit=v[9])
+    kw = dict(jeda_menit=v[9]) if len(v) <= 10 else dict(jeda_menit=v[9], stop_pct=v[10], akhir_pekan=v[11])
+    cl, ruins, _, st = sim(df, *v[1:9], i0=i0, i1=i1, stop=stop, **kw)
     flo = 0.0
     if not (stop and len(ruins)) and st["n"]:
         flo = USC * (st["sl"] * st["d"] * c[i1 - 1] - st["sc"]) + st["bal"] - v[7]

@@ -1,0 +1,113 @@
+Modal $400, data 2012-05-15 s/d 2026-10-02. BUY, TP rata-rata +$1,9, jeda 45 mnt. 'Akun habis' = ekuitas 0; batas rugi dicatat sebagai bulan rugi (modal diisi lagi ke $400).
+
+X2a  x2 0,01 lot jarak $2,25
+  LAMA <Okt21  112 bln | akun habis 31.2% bulan | bulan selamat: median $    56, rugi   0% | ≥ $150  12% bulan | rata-rata bersih semua bulan $   -44 (modal $400)
+  BARU Okt21+   60 bln | akun habis 43.3% bulan | bulan selamat: median $   167, rugi   0% | ≥ $150  30% bulan | rata-rata bersih semua bulan $   -33 (modal $400)
+  12 bln akhir  12 bln | akun habis 100.0% bulan | bulan selamat: median      -, rugi   0% | ≥ $150   0% bulan | rata-rata bersih semua bulan $  -279 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:3/-745 2013:5/-717 2014:6/-1,475 2015:3/-494 2016:1/+943 2017:1/+7 2018:3/-686 2019:3/-697 2020:6/-529 2021:5/-631 2022:3/-59 2023:6/-1,356 2024:0/+2,679 2025:7/-768 2026:9/-2,462
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln   4% | umur median  2.0 bln | ditarik sebelum habis/12 bln median $   169 | hasil bersih median $   -231, rata-rata $    -94 | negatif  76%
+  BARU Okt21+   49 awal | selamat 12 bln  10% | umur median  1.9 bln | ditarik sebelum habis/12 bln median $   319 | hasil bersih median $    -81, rata-rata $   +469 | negatif  53%
+
+X2b  x2 0,01 lot jarak $5
+  LAMA <Okt21  112 bln | akun habis  5.4% bulan | bulan selamat: median $     8, rugi   2% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    -9 (modal $400)
+  BARU Okt21+   60 bln | akun habis 13.3% bulan | bulan selamat: median $    20, rugi   0% | ≥ $150   3% bulan | rata-rata bersih semua bulan $   -13 (modal $400)
+  12 bln akhir  12 bln | akun habis 41.7% bulan | bulan selamat: median $   122, rugi   0% | ≥ $150  17% bulan | rata-rata bersih semua bulan $   -74 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+115 2013:1/-164 2014:1/-361 2015:1/-246 2016:0/+163 2017:0/+46 2018:0/+56 2019:0/+117 2020:2/-593 2021:1/-100 2022:0/+246 2023:2/-574 2024:1/+30 2025:0/+821 2026:5/-1,292
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln  29% | umur median  7.2 bln | ditarik sebelum habis/12 bln median $    69 | hasil bersih median $   -281, rata-rata $   -195 | negatif  71%
+  BARU Okt21+   49 awal | selamat 12 bln  27% | umur median  7.1 bln | ditarik sebelum habis/12 bln median $   179 | hasil bersih median $   -221, rata-rata $    +37 | negatif  57%
+
+X2c  x2 0,02 lot jarak $5
+  LAMA <Okt21  112 bln | akun habis  8.0% bulan | bulan selamat: median $    15, rugi   1% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    -9 (modal $400)
+  BARU Okt21+   60 bln | akun habis 25.0% bulan | bulan selamat: median $    37, rugi   0% | ≥ $150   5% bulan | rata-rata bersih semua bulan $   -44 (modal $400)
+  12 bln akhir  12 bln | akun habis 75.0% bulan | bulan selamat: median $   131, rugi   0% | ≥ $150   8% bulan | rata-rata bersih semua bulan $  -199 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+230 2013:1/+71 2014:2/-618 2015:2/-658 2016:0/+327 2017:0/+93 2018:0/+112 2019:0/+234 2020:2/-386 2021:2/-414 2022:0/+491 2023:2/-347 2024:3/-676 2025:3/-319 2026:7/-1,827
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln  28% | umur median  6.5 bln | ditarik sebelum habis/12 bln median $   135 | hasil bersih median $   -209, rata-rata $   -139 | negatif  72%
+  BARU Okt21+   49 awal | selamat 12 bln   0% | umur median  3.4 bln | ditarik sebelum habis/12 bln median $   154 | hasil bersih median $   -246, rata-rata $   -233 | negatif  98%
+
+X2d  x2 0,01 lot jarak $5 + batas rugi 50% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $     6, rugi  12% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    +0 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    10, rugi  25% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -23 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $  -104, rugi  58% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -70 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+107 2013:0/+96 2014:0/-96 2015:0/-377 2016:0/+142 2017:0/+41 2018:0/+33 2019:0/+89 2020:0/-122 2021:0/+140 2022:0/+7 2023:0/-188 2024:0/-531 2025:0/-313 2026:0/-397
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $    41 | hasil bersih median $    +41, rata-rata $     +1 | negatif  33%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -225 | hasil bersih median $   -225, rata-rata $   -321 | negatif  84%
+
+X2e  x2 0,02 lot jarak $5 + batas rugi 50% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $     9, rugi  18% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    -8 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    17, rugi  32% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -36 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $  -113, rugi  75% | ≥ $150   0% bulan | rata-rata bersih semua bulan $  -110 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/-64 2013:0/-164 2014:0/-269 2015:0/-353 2016:0/+6 2017:0/+82 2018:0/+66 2019:0/-61 2020:0/-120 2021:0/+1 2022:0/+216 2023:0/-810 2024:0/-749 2025:0/+172 2026:0/-1,041
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $   -69 | hasil bersih median $    -69, rata-rata $    -82 | negatif  64%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -453 | hasil bersih median $   -453, rata-rata $   -450 | negatif  82%
+
+X2f  BAWAAN EA: x2 0,01 lot jarak $5 maks 15 + batas rugi 30% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $     5, rugi  16% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    -4 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $     9, rugi  28% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -15 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $   -65, rugi  67% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -54 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+107 2013:0/-142 2014:0/-175 2015:0/-217 2016:0/-17 2017:0/+41 2018:0/+33 2019:0/+89 2020:0/-120 2021:0/-19 2022:0/+88 2023:0/-187 2024:0/-370 2025:0/+6 2026:0/-442
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $   -26 | hasil bersih median $    -26, rata-rata $    -47 | negatif  61%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -155 | hasil bersih median $   -155, rata-rata $   -184 | negatif  86%
+
+R1a  x1,2 0,05 lot (rasio trader) jarak $2,25
+  LAMA <Okt21  112 bln | akun habis 11.6% bulan | bulan selamat: median $    39, rugi   5% | ≥ $150   4% bulan | rata-rata bersih semua bulan $    -4 (modal $400)
+  BARU Okt21+   60 bln | akun habis 35.0% bulan | bulan selamat: median $    72, rugi   0% | ≥ $150  12% bulan | rata-rata bersih semua bulan $   -40 (modal $400)
+  12 bln akhir  12 bln | akun habis 66.7% bulan | bulan selamat: median $   297, rugi   0% | ≥ $150  33% bulan | rata-rata bersih semua bulan $   -63 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+361 2013:4/-866 2014:2/-561 2015:2/-607 2016:1/+72 2017:0/+268 2018:1/-223 2019:0/+351 2020:2/+408 2021:2/+31 2022:3/-482 2023:2/-147 2024:4/-654 2025:5/-435 2026:6/-421
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln  21% | umur median  5.1 bln | ditarik sebelum habis/12 bln median $   238 | hasil bersih median $   -162, rata-rata $    -27 | negatif  66%
+  BARU Okt21+   49 awal | selamat 12 bln   0% | umur median  2.1 bln | ditarik sebelum habis/12 bln median $   179 | hasil bersih median $   -221, rata-rata $   -196 | negatif  84%
+
+R1b  x1,2 0,05 lot + batas rugi 50% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $    13, rugi  34% | ≥ $150   1% bulan | rata-rata bersih semua bulan $   -19 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    34, rugi  37% | ≥ $150   3% bulan | rata-rata bersih semua bulan $   -24 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $   -89, rugi  58% | ≥ $150  17% bulan | rata-rata bersih semua bulan $   -59 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+131 2013:0/-1,286 2014:0/-324 2015:0/-315 2016:0/+80 2017:0/+3 2018:0/-154 2019:0/+248 2020:0/-421 2021:0/-34 2022:0/-69 2023:0/-74 2024:0/-815 2025:0/-202 2026:0/-327
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -140 | hasil bersih median $   -144, rata-rata $   -222 | negatif  73%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -207 | hasil bersih median $   -207, rata-rata $   -302 | negatif  80%
+
+R1c  x1,2 0,05 lot + batas rugi 30% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $    12, rugi  38% | ≥ $150   1% bulan | rata-rata bersih semua bulan $   -12 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    29, rugi  40% | ≥ $150   3% bulan | rata-rata bersih semua bulan $    -6 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $    51, rugi  42% | ≥ $150  17% bulan | rata-rata bersih semua bulan $    +4 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+15 2013:0/-858 2014:0/-437 2015:0/-155 2016:0/+161 2017:0/+3 2018:0/-74 2019:0/+99 2020:0/-5 2021:0/-85 2022:0/+115 2023:0/-271 2024:0/-345 2025:0/+26 2026:0/+32
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $   -59 | hasil bersih median $    -60, rata-rata $   -128 | negatif  61%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -116 | hasil bersih median $   -116, rata-rata $   -122 | negatif  67%
+
+R1d  x1,2 0,03 lot + batas rugi 50% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $    13, rugi  28% | ≥ $150   0% bulan | rata-rata bersih semua bulan $   -13 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    28, rugi  35% | ≥ $150   7% bulan | rata-rata bersih semua bulan $   -23 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $    25, rugi  50% | ≥ $150  33% bulan | rata-rata bersih semua bulan $   -22 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+88 2013:0/-763 2014:0/-344 2015:0/-340 2016:0/-12 2017:0/+22 2018:0/+54 2019:0/+186 2020:0/-517 2021:0/+243 2022:0/-287 2023:0/-20 2024:0/-628 2025:0/-565 2026:0/+90
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $   -78 | hasil bersih median $    -81, rata-rata $   -146 | negatif  60%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -296 | hasil bersih median $   -296, rata-rata $   -308 | negatif  86%
+
+R1e  x1,2 0,05 lot jarak $3 + batas rugi 50% + tutup akhir pekan
+  LAMA <Okt21  112 bln | akun habis  0.0% bulan | bulan selamat: median $    10, rugi  34% | ≥ $150   0% bulan | rata-rata bersih semua bulan $    -7 (modal $400)
+  BARU Okt21+   60 bln | akun habis  0.0% bulan | bulan selamat: median $    28, rugi  33% | ≥ $150   7% bulan | rata-rata bersih semua bulan $   -22 (modal $400)
+  12 bln akhir  12 bln | akun habis  0.0% bulan | bulan selamat: median $    22, rugi  50% | ≥ $150  33% bulan | rata-rata bersih semua bulan $   -46 (modal $400)
+  per tahun (bulan habis / bersih $): 2012:0/+109 2013:0/-460 2014:0/-131 2015:0/-10 2016:0/-222 2017:0/-11 2018:0/+31 2019:0/+137 2020:0/-127 2021:0/-224 2022:0/-233 2023:0/+146 2024:0/-709 2025:0/-368 2026:0/-6
+  Satu akun 12 bln (berhenti di habis pertama; batas rugi = rugi sebagian, lanjut):
+  LAMA <Okt21  112 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $   -69 | hasil bersih median $    -70, rata-rata $    -83 | negatif  57%
+  BARU Okt21+   49 awal | selamat 12 bln 100% | umur median 12.0 bln | ditarik sebelum habis/12 bln median $  -366 | hasil bersih median $   -366, rata-rata $   -284 | negatif  73%
+
+Ringkas BARU (Okt 2021+): kode | rata-rata $/bln | bulan ≥ $150 | bulan akun habis | bulan rugi | LAMA $/bln | total 2012–2026
+  X2a  |    -33 |  30% |  43% |  43% |   -44 |   -6,989
+  X2b  |    -13 |   3% |  13% |  13% |    -9 |   -1,735
+  X2c  |    -44 |   5% |  25% |  25% |    -9 |   -3,686
+  X2d  |    -23 |   0% |   0% |  25% |    +0 |   -1,369
+  X2e  |    -36 |   0% |   0% |  32% |    -8 |   -3,087
+  X2f  |    -15 |   0% |   0% |  28% |    -4 |   -1,325
+  R1a  |    -40 |  12% |  35% |  33% |    -4 |   -2,906
+  R1b  |    -24 |   3% |   0% |  37% |   -19 |   -3,559
+  R1c  |     -6 |   3% |   0% |  40% |   -12 |   -1,779
+  R1d  |    -23 |   7% |   0% |  35% |   -13 |   -2,792
+  R1e  |    -22 |   7% |   0% |  33% |    -7 |   -2,077

@@ -85,11 +85,14 @@ def lot_table(lot0: float, mult: float, n: int, rek: bool = False) -> list[float
 
 def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: float, maxlay: int,
         modal: float = MODAL, rek: bool = False, i0: int = 1, i1: int | None = None, stop: bool = False,
-        one: bool = False, info: list | None = None, jeda_menit: float = 0.0):
+        one: bool = False, info: list | None = None, jeda_menit: float = 0.0, stop_pct: float = 0.0,
+        akhir_pekan: bool = False):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
     one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
     (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis).
-    jeda_menit > 0: keranjang baru baru dibuka di bar pertama setelah jeda (EA lebih selektif; entry tetap acak)."""
+    jeda_menit > 0: keranjang baru baru dibuka di bar pertama setelah jeda (EA lebih selektif; entry tetap acak).
+    stop_pct > 0: tutup semua layer bila ekuitas turun ke modal x (1 − stop_pct) (dicatat sebagai close negatif).
+    akhir_pekan: tutup keranjang Jumat ≥ 20:00 UTC, tanpa keranjang baru sampai Senin 00:00 UTC."""
     o, h, l, c = arrays(df)
     t = df.index
     lots_tab = lot_table(lot0, mult, maxlay, rek)
@@ -97,6 +100,34 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     st = dict(bal=modal, d=1, n=0, sl=0.0, sc=0.0, last=0.0, used=0.0, done=False, mineq=modal, ent=[], idle=0)
     tn = t.asi8 if jeda_menit else None
     jeda_ns = int(jeda_menit * 60e9)
+    if akhir_pekan:
+        wd, hr = t.dayofweek.tolist(), t.hour.tolist()
+
+    def blocked(i: int) -> bool:
+        return akhir_pekan and (wd[i] == 5 or wd[i] == 6 or (wd[i] == 4 and hr[i] >= 20))
+
+    def tutup(i: int, px: float) -> None:
+        """Tutup semua layer di harga px (ruang x); hasil dicatat, saldo kembali ke modal."""
+        st["bal"] += USC * (st["sl"] * px - st["sc"])
+        gain = st["bal"] - modal
+        closes.append((i, gain))
+        depth.append(st["n"])
+        if info is not None:
+            info.append((i, st["n"], st["mineq"], gain,
+                         [lots_tab[k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
+        st["done"] = one
+        st["bal"] = modal
+
+    def lanjut(i: int, p: float) -> bool:
+        """Sesudah keranjang tutup: buka keranjang baru di harga p, atau istirahat (jeda/akhir pekan)."""
+        if jeda_ns:
+            st.update(n=0, idle=tn[i] + jeda_ns)
+            return False
+        if blocked(i):
+            st.update(n=0)
+            return False
+        open_basket(p, i)
+        return True
 
     def open_basket(p: float, i: int) -> None:
         d = side if side else (1 if c[i - 1] >= o[i - 1] else -1)
@@ -109,13 +140,24 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
             d = st["d"]
             xa, xb = d * a, d * b
             if xb < xa:                                   # melawan posisi
-                while st["n"] < maxlay and st["last"] - step >= xb:
-                    lvl = xb if gap else st["last"] - step
+                kena = penuh = False
+                while True:
+                    bisa = not penuh and st["n"] < maxlay and st["last"] - step >= xb
+                    lvl = (xb if gap else st["last"] - step) if bisa else xb
+                    if stop_pct:                          # batas rugi dicek sebelum tiap layer baru (tick demi tick)
+                        xs = ((modal * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
+                        if xs >= lvl:
+                            kena = True
+                            px = xb if gap else min(xs, xa)
+                            break
+                    if not bisa:
+                        break
                     lot = lots_tab[st["n"]]
                     eq = st["bal"] + USC * (st["sl"] * lvl - st["sc"])
                     need = lot * USC * abs(lvl) / LEV
                     if eq - st["used"] < need:
-                        break                             # free margin kurang → layer ditolak
+                        penuh = True                      # free margin kurang → layer ditolak
+                        continue
                     st["n"] += 1
                     st["sl"] += lot
                     st["sc"] += lot * (lvl + SPREAD)
@@ -123,7 +165,14 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                     st["last"] = lvl
                     st["ent"].append(lvl + SPREAD)
                     if gap:
-                        break
+                        penuh = True                      # gap: satu layer di harga buka
+                if kena:
+                    st["mineq"] = min(st["mineq"], st["bal"] + USC * (st["sl"] * px - st["sc"]))
+                    tutup(i, px)
+                    if not st["done"] and lanjut(i, d * px) and not gap:
+                        a = d * px
+                        continue
+                    return
                 eq = st["bal"] + USC * (st["sl"] * xb - st["sc"])
                 st["mineq"] = min(st["mineq"], eq)
                 if eq <= 0:
@@ -133,38 +182,29 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                         info.append((i, st["n"], st["mineq"], -st["bal"], None))
                     st["done"] = one
                     st["bal"] = modal
-                    if jeda_ns:
-                        st.update(n=0, idle=tn[i] + jeda_ns)
-                    else:
-                        open_basket(b, i)
+                    lanjut(i, b)
+                    return
                 return
             tpx = st["sc"] / st["sl"] + tp
             if xb < tpx:
                 return
             px = xb if gap else tpx
-            st["bal"] += USC * (st["sl"] * px - st["sc"])
-            gain = st["bal"] - modal
-            closes.append((i, gain))
-            depth.append(st["n"])
-            if info is not None:
-                info.append((i, st["n"], st["mineq"], gain,
-                             [lots_tab[k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
-            st["done"] = one
-            st["bal"] = modal                             # kelebihan ditarik (bisa negatif kecil karena spread)
+            tutup(i, px)                                  # kelebihan ditarik (saldo kembali ke modal)
             a = d * px
-            if jeda_ns:
-                st.update(n=0, idle=tn[i] + jeda_ns)
-                return
-            open_basket(a, i)
-            if gap:
+            if st["done"] or not lanjut(i, a) or gap:
                 return
 
-    open_basket(o[i0], i0)
+    if not blocked(i0):
+        open_basket(o[i0], i0)
     for i in range(i0, i1 or len(o)):
-        if jeda_ns and not st["n"] and not st["done"] and tn[i] >= st["idle"]:
+        blk = blocked(i)
+        if not st["n"] and not st["done"] and not blk and (not jeda_ns or tn[i] >= st["idle"]):
             open_basket(o[i], i)
         if i > i0:
             seg(c[i - 1], o[i], i, True)
+        if blk and st["n"] and not st["done"]:
+            tutup(i, st["d"] * o[i])                      # tutup sebelum akhir pekan
+            st.update(n=0)
         pts = (o[i], l[i], h[i], c[i]) if c[i] >= o[i] else (o[i], h[i], l[i], c[i])
         for k in range(3):
             seg(pts[k], pts[k + 1], i, False)

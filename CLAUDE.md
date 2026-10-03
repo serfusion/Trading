@@ -163,6 +163,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Klaim 6 bulan (`research/klaim_6bulan.py`, SIGNAL_STRIKE 6): mulai tiap hari 15 Mar–15 Apr 2026 → 0/32 bertahan s/d
   2 Okt di 5 pengaturan (12 Apr gap pembukaan mingguan, 28 Mei, 30 Jun, 26 Jul, 28 Sep — dicek Twelve Data H1); bertahan
   182 hari mulai 2025–2026: 0%. Bukti trader hanya ±3 pekan (setoran 2026.09.1x) + laporan 1 bulan.
+- EA buatan (permintaan "tiru martingale x2", 3 Okt): `ea/GridMartingale.mq5` (TERPISAH dari bot, BELUM di-compile di
+  sesi — pengguna compile di MetaEditor & uji demo), panduan `docs/EA_MARTINGALE.md`, uji `research/ea_400.py` (modal $400):
+  11 pengaturan ×2/×1,2 ± pengaman (batas rugi ekuitas dicek per level, tutup akhir pekan) → semua rata-rata negatif BARU;
+  bawaan X2f −$15/bln, 0% bulan ≥ $150; tanpa pengaman X2a 30% bulan ≥ $150 tetapi 43% bulan akun habis.
+  `sim(stop_pct=…, akhir_pekan=…)` = opsi baru (bawaan mati, hasil lama sama).
 
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
