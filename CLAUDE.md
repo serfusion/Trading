@@ -191,6 +191,17 @@ alarm tepat waktu) hanya menyentuh `android/`].
   cocok dan bagus pasang saja") sebagai LABEL saja: `_core.WR_TINGGI`/`vol_rel`, field `wr_tinggi` pada event lapisan BTC,
   env WR_TINGGI=0 mematikan, aplikasi 3.34 (pill & notifikasi 🎯). Filter tenang TIDAK dipasang.
 
+## Tarik-setor & EA SinyalCloud (4 Okt 2026 — `docs/TARIK_SETOR.md`)
+- Permintaan "EA harus profit, pakai deposit & tarik dana untuk setor ulang saat MC": `research/tarik_setor.py`
+  (`sim(tarik=None|k|"D"/"W"/"M", tarikan=[])`, bawaan tidak berubah — dicek identik). Martingale × 7 cara tarik: 0/56
+  positif di LAMA & BARU. Sinyal 💰 (replay cloud, spread asli) risiko tetap $: tarik/tanpa tarik $/bln sama (≤ 3%);
+  XAU+BTC 1%/sinyal $400 → BARU +$47/bln, LAMA +$27, 0–1× habis; 5% → +$237/+$140 tetapi 2–36× habis, cadangan ±$1.200.
+  Posisi bersamaan XAU s.d. 17,5 (XAU+BTC 22) → batas 10 sinyal: total R ≈ sama, DD 85R/68R.
+- `ea/SinyalCloud.mq5` (BELUM di-compile di sesi): baca topik ntfy `<topik>-data` (event cloud asli) → buka 💰
+  XAU/BTC/ETH risiko % modal dasar, 5 posisi (TP1 0,7R #1), SL+ 0,7R, tutup saat event TUTUP / channel H1 lokal; Brankas
+  (riwayat setor/tarik, notifikasi tarik & akun habis; EA tidak bisa memindah uang). Akun Standard $400 terlalu kecil
+  untuk lot minimum XAU (SL ±$18/0,01 lot) → akun Cent. Jangan dobel dengan auto order MetaApi (magic 250936+).
+
 ## Pair tambahan (3 Okt 2026 — `docs/PAIR_TAMBAHAN.md`)
 - `research/pair_data.py` (H1 forex ejtrader+Twelve Data 180 hari/permintaan, ETH Binance; cache
   `data/research/eksternal/pair_h1/`) & `research/pair_tambahan.py` (kategori 💰 dipilih dari LAMA, diuji di BARU).

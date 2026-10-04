@@ -1,0 +1,201 @@
+Skema TARIK-SETOR: tarik profit rutin, setor ulang dari uang tarikan saat akun habis (4 Okt 2026)
+
+Data 2012-05-15 s/d 2026-10-02. Kolom: bersih dompet $/bulan | setoran (awal + setor ulang) | uang keluar maks (yang harus disiapkan) | bulan dompet + | jendela 6 / 12 bulan + | keranjang | habis.
+
+A. EA grid/martingale
+X2f BAWAAN EA v1.00: x2 0,01 lot jarak $5 maks 15 + batas rugi 30% + akhir pekan
+  LAMA tiap keranjang  $   -3.8/bln (total $    -427) | setor 360x | keluar maks $    870 | bln +  83% | 6 bln +  47% | 12 bln +  40% | keranjang 11,195 habis   0
+  BARU tiap keranjang  $  -14.4/bln (total $    -865) | setor 170x | keluar maks $  1,367 | bln +  70% | 6 bln +  27% | 12 bln +  12% | keranjang 15,408 habis   0
+  LAMA harian          $   -1.8/bln (total $    -204) | setor   1x | keluar maks $    400 | bln +   9% | 6 bln +   9% | 12 bln +  10% | keranjang 11,211 habis   0
+  BARU harian          $   -8.8/bln (total $    -530) | setor   3x | keluar maks $    941 | bln +  20% | 6 bln +  22% | 12 bln +  22% | keranjang 16,116 habis   2
+  LAMA pekanan         $   -1.9/bln (total $    -209) | setor   1x | keluar maks $    400 | bln +   9% | 6 bln +   9% | 12 bln +  10% | keranjang 11,211 habis   0
+  BARU pekanan         $   -8.9/bln (total $    -533) | setor   3x | keluar maks $    943 | bln +  20% | 6 bln +  22% | 12 bln +  22% | keranjang 16,116 habis   2
+  LAMA bulanan         $   -1.9/bln (total $    -216) | setor   1x | keluar maks $    400 | bln +   9% | 6 bln +   9% | 12 bln +  10% | keranjang 11,211 habis   0
+  BARU bulanan         $   -9.4/bln (total $    -566) | setor   3x | keluar maks $    977 | bln +  20% | 6 bln +  22% | 12 bln +  22% | keranjang 16,116 habis   2
+  LAMA saldo ≥ 1,5x    $   -3.3/bln (total $    -372) | setor   1x | keluar maks $    400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,212 habis   0
+  BARU saldo ≥ 1,5x    $  -13.2/bln (total $    -790) | setor   3x | keluar maks $  1,200 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 16,115 habis   2
+  LAMA saldo ≥ 2x      $   -3.3/bln (total $    -372) | setor   1x | keluar maks $    400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,212 habis   0
+  BARU saldo ≥ 2x      $  -13.2/bln (total $    -790) | setor   3x | keluar maks $  1,200 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 16,115 habis   2
+  LAMA tidak ditarik   $   -3.3/bln (total $    -372) | setor   1x | keluar maks $    400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,212 habis   0
+  BARU tidak ditarik   $  -13.2/bln (total $    -790) | setor   3x | keluar maks $  1,200 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 16,115 habis   2
+  BARU terbaik: harian $-8.8/bln; per tahun: 2021:-372 2022:+103 2025:-272 2026:-391
+
+X2a x2 0,01 lot jarak $2,25 tanpa pengaman, modal $400
+  LAMA tiap keranjang  $  -60.3/bln (total $  -6,755) | setor  47x | keluar maks $  7,195 | bln +  71% | 6 bln +  42% | 12 bln +  30% | keranjang 15,547 habis  46
+  BARU tiap keranjang  $ -203.5/bln (total $ -12,216) | setor  75x | keluar maks $ 12,670 | bln +  60% | 6 bln +  51% | 12 bln +  51% | keranjang 18,766 habis  74
+  LAMA harian          $  -44.3/bln (total $  -4,960) | setor  44x | keluar maks $  5,911 | bln +  71% | 6 bln +  45% | 12 bln +  35% | keranjang 15,551 habis  43
+  BARU harian          $ -212.1/bln (total $ -12,730) | setor  75x | keluar maks $ 13,185 | bln +  62% | 6 bln +  51% | 12 bln +  51% | keranjang 18,766 habis  74
+  LAMA pekanan         $  -48.3/bln (total $  -5,411) | setor  44x | keluar maks $  6,309 | bln +  71% | 6 bln +  45% | 12 bln +  35% | keranjang 15,551 habis  43
+  BARU pekanan         $ -242.4/bln (total $ -14,551) | setor  72x | keluar maks $ 15,006 | bln +  57% | 6 bln +  49% | 12 bln +  43% | keranjang 18,769 habis  71
+  LAMA bulanan         $  -44.5/bln (total $  -4,986) | setor  42x | keluar maks $  6,562 | bln +  71% | 6 bln +  44% | 12 bln +  36% | keranjang 15,551 habis  41
+  BARU bulanan         $ -248.1/bln (total $ -14,890) | setor  66x | keluar maks $ 15,344 | bln +  62% | 6 bln +  51% | 12 bln +  51% | keranjang 18,775 habis  65
+  LAMA saldo ≥ 1,5x    $  -46.2/bln (total $  -5,175) | setor  41x | keluar maks $  6,333 | bln +  30% | 6 bln +  47% | 12 bln +  42% | keranjang 15,549 habis  40
+  BARU saldo ≥ 1,5x    $ -202.1/bln (total $ -12,131) | setor  69x | keluar maks $ 12,585 | bln +  45% | 6 bln +  55% | 12 bln +  51% | keranjang 18,776 habis  68
+  LAMA saldo ≥ 2x      $  -67.4/bln (total $  -7,552) | setor  41x | keluar maks $  8,102 | bln +  16% | 6 bln +  42% | 12 bln +  37% | keranjang 15,551 habis  40
+  BARU saldo ≥ 2x      $ -195.2/bln (total $ -11,714) | setor  65x | keluar maks $ 12,169 | bln +  35% | 6 bln +  60% | 12 bln +  57% | keranjang 18,780 habis  64
+  LAMA tidak ditarik   $ -113.9/bln (total $ -12,760) | setor  33x | keluar maks $ 13,200 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 15,547 habis  32
+  BARU tidak ditarik   $ -405.6/bln (total $ -24,346) | setor  62x | keluar maks $ 24,800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 18,787 habis  61
+  BARU terbaik: saldo ≥ 2x $-195.2/bln; per tahun: 2021:-800 2022:+1,074 2023:-892 2024:+2,889 2025:-1,453 2026:-12,986
+
+X2a sama, modal $200
+  LAMA tiap keranjang  $  -19.7/bln (total $  -2,208) | setor  59x | keluar maks $  2,835 | bln +  66% | 6 bln +  43% | 12 bln +  44% | keranjang 15,546 habis  58
+  BARU tiap keranjang  $ -117.3/bln (total $  -7,039) | setor 101x | keluar maks $  7,397 | bln +  53% | 6 bln +  47% | 12 bln +  47% | keranjang 18,749 habis 100
+  LAMA harian          $  -21.1/bln (total $  -2,363) | setor  59x | keluar maks $  2,897 | bln +  66% | 6 bln +  44% | 12 bln +  44% | keranjang 15,546 habis  58
+  BARU harian          $ -116.1/bln (total $  -6,966) | setor  99x | keluar maks $  7,300 | bln +  55% | 6 bln +  47% | 12 bln +  49% | keranjang 18,750 habis  98
+  LAMA pekanan         $  -23.3/bln (total $  -2,607) | setor  58x | keluar maks $  2,884 | bln +  65% | 6 bln +  41% | 12 bln +  40% | keranjang 15,545 habis  57
+  BARU pekanan         $ -132.1/bln (total $  -7,927) | setor  94x | keluar maks $  8,224 | bln +  55% | 6 bln +  47% | 12 bln +  47% | keranjang 18,754 habis  93
+  LAMA bulanan         $  -30.8/bln (total $  -3,446) | setor  57x | keluar maks $  3,686 | bln +  64% | 6 bln +  37% | 12 bln +  36% | keranjang 15,542 habis  56
+  BARU bulanan         $ -149.0/bln (total $  -8,941) | setor  86x | keluar maks $  9,195 | bln +  58% | 6 bln +  53% | 12 bln +  53% | keranjang 18,759 habis  85
+  LAMA saldo ≥ 1,5x    $  -35.2/bln (total $  -3,938) | setor  58x | keluar maks $  4,178 | bln +  36% | 6 bln +  40% | 12 bln +  33% | keranjang 15,541 habis  57
+  BARU saldo ≥ 1,5x    $ -111.5/bln (total $  -6,691) | setor  91x | keluar maks $  6,955 | bln +  53% | 6 bln +  58% | 12 bln +  63% | keranjang 18,754 habis  90
+  LAMA saldo ≥ 2x      $  -34.4/bln (total $  -3,852) | setor  55x | keluar maks $  4,092 | bln +  25% | 6 bln +  43% | 12 bln +  36% | keranjang 15,538 habis  54
+  BARU saldo ≥ 2x      $  -99.6/bln (total $  -5,975) | setor  84x | keluar maks $  6,262 | bln +  47% | 6 bln +  56% | 12 bln +  55% | keranjang 18,760 habis  83
+  LAMA tidak ditarik   $  -85.4/bln (total $  -9,560) | setor  49x | keluar maks $  9,800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 15,539 habis  48
+  BARU tidak ditarik   $ -259.0/bln (total $ -15,546) | setor  79x | keluar maks $ 15,800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 18,767 habis  78
+  BARU terbaik: saldo ≥ 2x $-99.6/bln; per tahun: 2021:-132 2022:+964 2023:-584 2024:+1,418 2025:-231 2026:-7,664
+
+X2a sama, modal $100
+  LAMA tiap keranjang  $  -18.2/bln (total $  -2,033) | setor  90x | keluar maks $  2,180 | bln +  56% | 6 bln +  39% | 12 bln +  37% | keranjang 15,527 habis  89
+  BARU tiap keranjang  $  -71.2/bln (total $  -4,276) | setor 141x | keluar maks $  4,523 | bln +  45% | 6 bln +  42% | 12 bln +  39% | keranjang 18,727 habis 140
+  LAMA harian          $  -18.4/bln (total $  -2,064) | setor  89x | keluar maks $  2,211 | bln +  56% | 6 bln +  37% | 12 bln +  39% | keranjang 15,527 habis  88
+  BARU harian          $  -65.0/bln (total $  -3,903) | setor 135x | keluar maks $  4,238 | bln +  50% | 6 bln +  44% | 12 bln +  43% | keranjang 18,730 habis 134
+  LAMA pekanan         $  -16.5/bln (total $  -1,848) | setor  84x | keluar maks $  2,046 | bln +  57% | 6 bln +  40% | 12 bln +  45% | keranjang 15,527 habis  83
+  BARU pekanan         $  -81.5/bln (total $  -4,892) | setor 127x | keluar maks $  5,184 | bln +  47% | 6 bln +  42% | 12 bln +  41% | keranjang 18,742 habis 126
+  LAMA bulanan         $  -17.9/bln (total $  -2,004) | setor  80x | keluar maks $  2,172 | bln +  58% | 6 bln +  43% | 12 bln +  39% | keranjang 15,535 habis  79
+  BARU bulanan         $  -89.8/bln (total $  -5,389) | setor 116x | keluar maks $  5,544 | bln +  47% | 6 bln +  45% | 12 bln +  49% | keranjang 18,745 habis 115
+  LAMA saldo ≥ 1,5x    $  -17.3/bln (total $  -1,941) | setor  82x | keluar maks $  2,187 | bln +  46% | 6 bln +  39% | 12 bln +  42% | keranjang 15,536 habis  81
+  BARU saldo ≥ 1,5x    $  -84.4/bln (total $  -5,064) | setor 132x | keluar maks $  5,220 | bln +  47% | 6 bln +  42% | 12 bln +  41% | keranjang 18,733 habis 131
+  LAMA saldo ≥ 2x      $  -15.6/bln (total $  -1,748) | setor  76x | keluar maks $  2,463 | bln +  35% | 6 bln +  44% | 12 bln +  40% | keranjang 15,541 habis  75
+  BARU saldo ≥ 2x      $  -83.5/bln (total $  -5,010) | setor 122x | keluar maks $  5,270 | bln +  43% | 6 bln +  40% | 12 bln +  39% | keranjang 18,741 habis 121
+  LAMA tidak ditarik   $  -54.0/bln (total $  -6,053) | setor  62x | keluar maks $  6,200 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 15,539 habis  61
+  BARU tidak ditarik   $ -169.0/bln (total $ -10,146) | setor 103x | keluar maks $ 10,300 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 18,757 habis 102
+  BARU terbaik: harian $-65.0/bln; per tahun: 2021:-262 2022:+184 2023:-743 2024:+707 2025:+102 2026:-3,994
+
+R1a x1,2 0,05 lot jarak $2,25 (rasio trader), modal $400
+  LAMA tiap keranjang  $  -12.5/bln (total $  -1,402) | setor  19x | keluar maks $  3,035 | bln +  87% | 6 bln +  50% | 12 bln +  48% | keranjang 11,129 habis  18
+  BARU tiap keranjang  $  -40.1/bln (total $  -2,409) | setor  27x | keluar maks $  3,454 | bln +  62% | 6 bln +  25% | 12 bln +  22% | keranjang 15,991 habis  26
+  LAMA harian          $  -13.0/bln (total $  -1,451) | setor  19x | keluar maks $  3,081 | bln +  87% | 6 bln +  50% | 12 bln +  48% | keranjang 11,129 habis  18
+  BARU harian          $  -34.1/bln (total $  -2,047) | setor  26x | keluar maks $  3,092 | bln +  62% | 6 bln +  27% | 12 bln +  22% | keranjang 15,991 habis  25
+  LAMA pekanan         $  -13.4/bln (total $  -1,501) | setor  19x | keluar maks $  3,122 | bln +  87% | 6 bln +  50% | 12 bln +  48% | keranjang 11,126 habis  18
+  BARU pekanan         $  -25.5/bln (total $  -1,531) | setor  24x | keluar maks $  2,685 | bln +  65% | 6 bln +  38% | 12 bln +  31% | keranjang 15,992 habis  23
+  LAMA bulanan         $   -7.3/bln (total $    -813) | setor  17x | keluar maks $  2,252 | bln +  88% | 6 bln +  52% | 12 bln +  48% | keranjang 11,127 habis  16
+  BARU bulanan         $   -8.3/bln (total $    -498) | setor  20x | keluar maks $  1,967 | bln +  70% | 6 bln +  38% | 12 bln +  41% | keranjang 15,982 habis  19
+  LAMA saldo ≥ 1,5x    $   -8.4/bln (total $    -944) | setor  16x | keluar maks $  2,132 | bln +  19% | 6 bln +  49% | 12 bln +  48% | keranjang 11,121 habis  15
+  BARU saldo ≥ 1,5x    $   -9.3/bln (total $    -556) | setor  20x | keluar maks $  1,775 | bln +  33% | 6 bln +  56% | 12 bln +  55% | keranjang 15,981 habis  19
+  LAMA saldo ≥ 2x      $   -8.3/bln (total $    -932) | setor  14x | keluar maks $  2,338 | bln +   9% | 6 bln +  40% | 12 bln +  52% | keranjang 11,118 habis  13
+  BARU saldo ≥ 2x      $  -34.3/bln (total $  -2,058) | setor  20x | keluar maks $  3,103 | bln +  20% | 6 bln +  55% | 12 bln +  41% | keranjang 15,979 habis  19
+  LAMA tidak ditarik   $  -16.8/bln (total $  -1,876) | setor   6x | keluar maks $  2,400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,085 habis   5
+  BARU tidak ditarik   $  -42.6/bln (total $  -2,554) | setor   9x | keluar maks $  3,600 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 15,978 habis   8
+  BARU terbaik: bulanan $-8.3/bln; per tahun: 2021:-734 2022:-411 2023:-128 2024:-515 2025:+31 2026:+831
+
+S1 rekonstruksi trader 0,07 lot/$524, jeda 30 mnt
+  LAMA tiap keranjang  $  -28.3/bln (total $  -3,175) | setor  24x | keluar maks $  3,742 | bln +  83% | 6 bln +  44% | 12 bln +  38% | keranjang 12,460 habis  23
+  BARU tiap keranjang  $ -128.6/bln (total $  -7,716) | setor  43x | keluar maks $  8,290 | bln +  63% | 6 bln +  36% | 12 bln +  27% | keranjang 19,987 habis  42
+  LAMA harian          $  -28.6/bln (total $  -3,203) | setor  24x | keluar maks $  3,771 | bln +  83% | 6 bln +  44% | 12 bln +  38% | keranjang 12,460 habis  23
+  BARU harian          $ -123.4/bln (total $  -7,404) | setor  42x | keluar maks $  8,342 | bln +  63% | 6 bln +  36% | 12 bln +  27% | keranjang 19,986 habis  41
+  LAMA pekanan         $  -29.5/bln (total $  -3,307) | setor  24x | keluar maks $  3,874 | bln +  83% | 6 bln +  44% | 12 bln +  38% | keranjang 12,461 habis  23
+  BARU pekanan         $  -85.5/bln (total $  -5,133) | setor  36x | keluar maks $  5,835 | bln +  63% | 6 bln +  35% | 12 bln +  24% | keranjang 19,985 habis  35
+  LAMA bulanan         $  -19.7/bln (total $  -2,210) | setor  21x | keluar maks $  3,255 | bln +  84% | 6 bln +  46% | 12 bln +  42% | keranjang 12,462 habis  20
+  BARU bulanan         $ -119.9/bln (total $  -7,197) | setor  35x | keluar maks $  7,771 | bln +  63% | 6 bln +  29% | 12 bln +  27% | keranjang 19,991 habis  34
+  LAMA saldo ≥ 1,5x    $  -27.9/bln (total $  -3,127) | setor  21x | keluar maks $  3,695 | bln +  21% | 6 bln +  45% | 12 bln +  45% | keranjang 12,441 habis  20
+  BARU saldo ≥ 1,5x    $ -133.7/bln (total $  -8,023) | setor  36x | keluar maks $  8,612 | bln +  33% | 6 bln +  38% | 12 bln +  20% | keranjang 19,983 habis  35
+  LAMA saldo ≥ 2x      $  -35.8/bln (total $  -4,014) | setor  20x | keluar maks $  4,581 | bln +  10% | 6 bln +  40% | 12 bln +  44% | keranjang 12,442 habis  19
+  BARU saldo ≥ 2x      $ -140.5/bln (total $  -8,434) | setor  34x | keluar maks $  9,023 | bln +  22% | 6 bln +  33% | 12 bln +  20% | keranjang 19,979 habis  33
+  LAMA tidak ditarik   $  -32.4/bln (total $  -3,625) | setor   8x | keluar maks $  4,193 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 12,404 habis   7
+  BARU tidak ditarik   $ -104.0/bln (total $  -6,239) | setor  13x | keluar maks $  6,813 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 19,976 habis  12
+  BARU terbaik: pekanan $-85.5/bln; per tahun: 2021:-317 2022:-761 2023:+136 2024:-1,918 2025:-9 2026:-2,837
+
+Q1 $400 x1,2 0,05 + filter 'beku' + akhir pekan
+  LAMA tiap keranjang  $  -17.8/bln (total $  -1,994) | setor 343x | keluar maks $  3,097 | bln +  76% | 6 bln +  56% | 12 bln +  44% | keranjang 11,624 habis  13
+  BARU tiap keranjang  $  -15.8/bln (total $    -946) | setor 166x | keluar maks $  2,580 | bln +  70% | 6 bln +  31% | 12 bln +  33% | keranjang 14,876 habis  17
+  LAMA harian          $  -15.2/bln (total $  -1,699) | setor  14x | keluar maks $  2,800 | bln +  58% | 6 bln +  54% | 12 bln +  47% | keranjang 11,628 habis  13
+  BARU harian          $  -15.2/bln (total $    -914) | setor  18x | keluar maks $  2,534 | bln +  70% | 6 bln +  31% | 12 bln +  35% | keranjang 14,876 habis  17
+  LAMA pekanan         $  -15.5/bln (total $  -1,731) | setor  14x | keluar maks $  2,830 | bln +  61% | 6 bln +  54% | 12 bln +  46% | keranjang 11,628 habis  13
+  BARU pekanan         $  -18.6/bln (total $  -1,118) | setor  18x | keluar maks $  2,637 | bln +  70% | 6 bln +  25% | 12 bln +  33% | keranjang 14,876 habis  17
+  LAMA bulanan         $  -17.0/bln (total $  -1,902) | setor  14x | keluar maks $  2,914 | bln +  63% | 6 bln +  54% | 12 bln +  44% | keranjang 11,624 habis  13
+  BARU bulanan         $   -6.1/bln (total $    -365) | setor  15x | keluar maks $  1,586 | bln +  75% | 6 bln +  44% | 12 bln +  55% | keranjang 14,867 habis  14
+  LAMA saldo ≥ 1,5x    $   -8.7/bln (total $    -978) | setor  11x | keluar maks $  1,800 | bln +  12% | 6 bln +  37% | 12 bln +  42% | keranjang 11,625 habis  10
+  BARU saldo ≥ 1,5x    $  -20.2/bln (total $  -1,212) | setor  16x | keluar maks $  2,545 | bln +  27% | 6 bln +  36% | 12 bln +  41% | keranjang 14,871 habis  15
+  LAMA saldo ≥ 2x      $   -9.6/bln (total $  -1,073) | setor   9x | keluar maks $  1,598 | bln +   4% | 6 bln +  21% | 12 bln +  18% | keranjang 11,619 habis   8
+  BARU saldo ≥ 2x      $  -34.4/bln (total $  -2,067) | setor  16x | keluar maks $  3,163 | bln +  15% | 6 bln +  35% | 12 bln +  43% | keranjang 14,872 habis  15
+  LAMA tidak ditarik   $  -18.8/bln (total $  -2,102) | setor   6x | keluar maks $  2,400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,614 habis   5
+  BARU tidak ditarik   $  -48.4/bln (total $  -2,908) | setor  10x | keluar maks $  4,000 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 14,863 habis   9
+  BARU terbaik: bulanan $-6.1/bln; per tahun: 2021:-334 2022:-964 2023:+219 2024:-168 2025:+557 2026:-97
+
+Q4 BAWAAN EA v1.10: $400 x2 0,01 jarak $5 maks 15 + batas rugi 30% + akhir pekan + filter 'beku'
+  LAMA tiap keranjang  $   -6.5/bln (total $    -733) | setor 361x | keluar maks $  1,176 | bln +  81% | 6 bln +  49% | 12 bln +  35% | keranjang 11,148 habis   0
+  BARU tiap keranjang  $  -18.4/bln (total $  -1,104) | setor 166x | keluar maks $  1,607 | bln +  75% | 6 bln +  24% | 12 bln +  10% | keranjang 14,336 habis   0
+  LAMA harian          $   -4.8/bln (total $    -532) | setor   2x | keluar maks $    610 | bln +  12% | 6 bln +  16% | 12 bln +  16% | keranjang 11,251 habis   1
+  BARU harian          $   -8.2/bln (total $    -492) | setor   2x | keluar maks $    680 | bln +  22% | 6 bln +  24% | 12 bln +  27% | keranjang 14,627 habis   1
+  LAMA pekanan         $   -4.8/bln (total $    -537) | setor   2x | keluar maks $    612 | bln +  12% | 6 bln +  15% | 12 bln +  15% | keranjang 11,251 habis   1
+  BARU pekanan         $   -8.3/bln (total $    -496) | setor   2x | keluar maks $    682 | bln +  22% | 6 bln +  24% | 12 bln +  27% | keranjang 14,627 habis   1
+  LAMA bulanan         $   -4.8/bln (total $    -539) | setor   2x | keluar maks $    614 | bln +  13% | 6 bln +  16% | 12 bln +  16% | keranjang 11,251 habis   1
+  BARU bulanan         $   -8.3/bln (total $    -499) | setor   2x | keluar maks $    682 | bln +  22% | 6 bln +  24% | 12 bln +  27% | keranjang 14,627 habis   1
+  LAMA saldo ≥ 1,5x    $   -1.6/bln (total $    -179) | setor   1x | keluar maks $    400 | bln +   1% | 6 bln +   6% | 12 bln +  12% | keranjang 11,170 habis   0
+  BARU saldo ≥ 1,5x    $  -13.3/bln (total $    -800) | setor   2x | keluar maks $    800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 14,619 habis   1
+  LAMA saldo ≥ 2x      $   -3.4/bln (total $    -377) | setor   1x | keluar maks $    400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,159 habis   0
+  BARU saldo ≥ 2x      $  -13.3/bln (total $    -800) | setor   2x | keluar maks $    800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 14,619 habis   1
+  LAMA tidak ditarik   $   -3.4/bln (total $    -377) | setor   1x | keluar maks $    400 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 11,159 habis   0
+  BARU tidak ditarik   $  -13.3/bln (total $    -800) | setor   2x | keluar maks $    800 | bln +   0% | 6 bln +   0% | 12 bln +   0% | keranjang 14,619 habis   1
+  BARU terbaik: harian $-8.2/bln; per tahun: 2021:-372 2022:+91 2025:-211
+
+Ringkas BARU: 56 kombinasi EA x cara tarik, positif 0, terbaik $-6.1/bln, rata-rata $-83.8/bln. LAMA positif 0 dari 56.
+
+B. Strategi dengan keunggulan, akun $400, risiko tetap per sinyal (lapisan ½), urut waktu tutup (posisi bersamaan tidak dinilai floating → hasil sebenarnya sedikit lebih buruk). R piramida = $20 dasar riset, diskalakan.
+
+💰 XAU
+  LAMA: n 3658, WR 60%, total +321R, DD terdalam 152R (akun $400 aman bila DD x risiko < $400)
+  LAMA risiko  0.5% ($2): DD $303 | tarik tiap trade: $   +6.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 12% | tarik bulanan: $   +6.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 11% | tanpa tarik: $   +6.4/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  1.0% ($4): DD $607 | tarik tiap trade: $  +12.8/bln, habis 1x, uang keluar maks $400, bulan dompet + 15% | tarik bulanan: $  +12.9/bln, habis 1x, uang keluar maks $400, bulan dompet + 14% | tanpa tarik: $  +12.8/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  2.0% ($8): DD $1,214 | tarik tiap trade: $  +25.8/bln, habis 4x, uang keluar maks $400, bulan dompet + 22% | tarik bulanan: $  +25.8/bln, habis 4x, uang keluar maks $400, bulan dompet + 20% | tanpa tarik: $  +25.7/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  5.0% ($20): DD $3,035 | tarik tiap trade: $  +66.1/bln, habis 21x, uang keluar maks $400, bulan dompet + 36% | tarik bulanan: $  +65.3/bln, habis 17x, uang keluar maks $400, bulan dompet + 29% | tanpa tarik: $  +64.2/bln, habis 0x, uang keluar maks $400
+  LAMA risiko 10.0% ($40): DD $6,070 | tarik tiap trade: $ +136.4/bln, habis 55x, uang keluar maks $400, bulan dompet + 38% | tarik bulanan: $ +134.0/bln, habis 46x, uang keluar maks $400, bulan dompet + 31% | tanpa tarik: $ +128.4/bln, habis 0x, uang keluar maks $400
+  BARU: n 2807, WR 62%, total +359R, DD terdalam 145R (akun $400 aman bila DD x risiko < $400)
+  BARU risiko  0.5% ($2): DD $290 | tarik tiap trade: $  +12.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 39% | tarik bulanan: $  +12.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 25% | tanpa tarik: $  +12.3/bln, habis 0x, uang keluar maks $400
+  BARU risiko  1.0% ($4): DD $580 | tarik tiap trade: $  +24.7/bln, habis 1x, uang keluar maks $765, bulan dompet + 44% | tarik bulanan: $  +24.7/bln, habis 1x, uang keluar maks $766, bulan dompet + 30% | tanpa tarik: $  +24.7/bln, habis 1x, uang keluar maks $800
+  BARU risiko  2.0% ($8): DD $1,160 | tarik tiap trade: $  +49.5/bln, habis 3x, uang keluar maks $1,124, bulan dompet + 44% | tarik bulanan: $  +49.5/bln, habis 2x, uang keluar maks $1,133, bulan dompet + 30% | tanpa tarik: $  +49.5/bln, habis 2x, uang keluar maks $1,200
+  BARU risiko  5.0% ($20): DD $2,900 | tarik tiap trade: $ +125.3/bln, habis 13x, uang keluar maks $2,968, bulan dompet + 49% | tarik bulanan: $ +126.1/bln, habis 13x, uang keluar maks $3,028, bulan dompet + 32% | tanpa tarik: $ +124.4/bln, habis 6x, uang keluar maks $2,800
+  BARU risiko 10.0% ($40): DD $5,800 | tarik tiap trade: $ +255.2/bln, habis 32x, uang keluar maks $5,401, bulan dompet + 47% | tarik bulanan: $ +254.1/bln, habis 29x, uang keluar maks $5,618, bulan dompet + 40% | tanpa tarik: $ +248.9/bln, habis 13x, uang keluar maks $5,600
+
+💰 BTC
+  LAMA: n 1377, WR 48%, total +361R, DD terdalam 180R (akun $400 aman bila DD x risiko < $400)
+  LAMA risiko  0.5% ($2): DD $359 | tarik tiap trade: $  +11.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 29% | tarik bulanan: $  +11.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 32% | tanpa tarik: $  +11.3/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  1.0% ($4): DD $719 | tarik tiap trade: $  +22.9/bln, habis 1x, uang keluar maks $491, bulan dompet + 37% | tarik bulanan: $  +22.8/bln, habis 1x, uang keluar maks $495, bulan dompet + 39% | tanpa tarik: $  +22.8/bln, habis 1x, uang keluar maks $800
+  LAMA risiko  2.0% ($8): DD $1,437 | tarik tiap trade: $  +46.0/bln, habis 3x, uang keluar maks $983, bulan dompet + 39% | tarik bulanan: $  +45.9/bln, habis 3x, uang keluar maks $989, bulan dompet + 44% | tanpa tarik: $  +45.7/bln, habis 2x, uang keluar maks $1,200
+  LAMA risiko  5.0% ($20): DD $3,593 | tarik tiap trade: $ +118.4/bln, habis 13x, uang keluar maks $1,877, bulan dompet + 44% | tarik bulanan: $ +119.3/bln, habis 13x, uang keluar maks $1,917, bulan dompet + 48% | tanpa tarik: $ +116.0/bln, habis 4x, uang keluar maks $2,000
+  LAMA risiko 10.0% ($40): DD $7,187 | tarik tiap trade: $ +250.8/bln, habis 38x, uang keluar maks $3,008, bulan dompet + 48% | tarik bulanan: $ +248.6/bln, habis 32x, uang keluar maks $3,119, bulan dompet + 63% | tanpa tarik: $ +235.1/bln, habis 8x, uang keluar maks $3,600
+  BARU: n 1206, WR 58%, total +332R, DD terdalam 40R (akun $400 aman bila DD x risiko < $400)
+  BARU risiko  0.5% ($2): DD $81 | tarik tiap trade: $  +11.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 42% | tarik bulanan: $  +11.3/bln, habis 0x, uang keluar maks $400, bulan dompet + 40% | tanpa tarik: $  +11.3/bln, habis 0x, uang keluar maks $400
+  BARU risiko  1.0% ($4): DD $162 | tarik tiap trade: $  +22.6/bln, habis 0x, uang keluar maks $400, bulan dompet + 42% | tarik bulanan: $  +22.6/bln, habis 0x, uang keluar maks $400, bulan dompet + 40% | tanpa tarik: $  +22.6/bln, habis 0x, uang keluar maks $400
+  BARU risiko  2.0% ($8): DD $324 | tarik tiap trade: $  +45.2/bln, habis 0x, uang keluar maks $400, bulan dompet + 42% | tarik bulanan: $  +45.2/bln, habis 0x, uang keluar maks $400, bulan dompet + 40% | tanpa tarik: $  +45.2/bln, habis 0x, uang keluar maks $400
+  BARU risiko  5.0% ($20): DD $810 | tarik tiap trade: $ +113.4/bln, habis 4x, uang keluar maks $400, bulan dompet + 46% | tarik bulanan: $ +113.4/bln, habis 3x, uang keluar maks $400, bulan dompet + 42% | tanpa tarik: $ +113.1/bln, habis 0x, uang keluar maks $400
+  BARU risiko 10.0% ($40): DD $1,620 | tarik tiap trade: $ +231.0/bln, habis 16x, uang keluar maks $593, bulan dompet + 53% | tarik bulanan: $ +230.4/bln, habis 13x, uang keluar maks $634, bulan dompet + 51% | tanpa tarik: $ +226.2/bln, habis 0x, uang keluar maks $400
+
+piramida 3 ATR
+  LAMA: n 2244, WR 25%, total +304R, DD terdalam 60R (akun $400 aman bila DD x risiko < $400)
+  LAMA risiko  0.5% ($2): DD $121 | tarik tiap trade: $   +5.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 23% | tarik bulanan: $   +5.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 23% | tanpa tarik: $   +5.4/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  1.0% ($4): DD $242 | tarik tiap trade: $  +10.9/bln, habis 0x, uang keluar maks $400, bulan dompet + 23% | tarik bulanan: $  +10.9/bln, habis 0x, uang keluar maks $400, bulan dompet + 23% | tanpa tarik: $  +10.9/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  2.0% ($8): DD $483 | tarik tiap trade: $  +21.8/bln, habis 1x, uang keluar maks $400, bulan dompet + 29% | tarik bulanan: $  +21.8/bln, habis 1x, uang keluar maks $400, bulan dompet + 27% | tanpa tarik: $  +21.7/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  5.0% ($20): DD $1,208 | tarik tiap trade: $  +55.4/bln, habis 16x, uang keluar maks $400, bulan dompet + 42% | tarik bulanan: $  +55.3/bln, habis 11x, uang keluar maks $400, bulan dompet + 40% | tanpa tarik: $  +54.4/bln, habis 0x, uang keluar maks $400
+  LAMA risiko 10.0% ($40): DD $2,415 | tarik tiap trade: $ +116.1/bln, habis 52x, uang keluar maks $783, bulan dompet + 55% | tarik bulanan: $ +112.8/bln, habis 34x, uang keluar maks $800, bulan dompet + 45% | tanpa tarik: $ +108.7/bln, habis 1x, uang keluar maks $800
+  BARU: n 1254, WR 25%, total +220R, DD terdalam 43R (akun $400 aman bila DD x risiko < $400)
+  BARU risiko  0.5% ($2): DD $86 | tarik tiap trade: $   +7.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 39% | tarik bulanan: $   +7.4/bln, habis 0x, uang keluar maks $400, bulan dompet + 34% | tanpa tarik: $   +7.4/bln, habis 0x, uang keluar maks $400
+  BARU risiko  1.0% ($4): DD $172 | tarik tiap trade: $  +14.7/bln, habis 0x, uang keluar maks $400, bulan dompet + 39% | tarik bulanan: $  +14.7/bln, habis 0x, uang keluar maks $400, bulan dompet + 34% | tanpa tarik: $  +14.7/bln, habis 0x, uang keluar maks $400
+  BARU risiko  2.0% ($8): DD $344 | tarik tiap trade: $  +29.5/bln, habis 0x, uang keluar maks $400, bulan dompet + 39% | tarik bulanan: $  +29.5/bln, habis 0x, uang keluar maks $400, bulan dompet + 34% | tanpa tarik: $  +29.5/bln, habis 0x, uang keluar maks $400
+  BARU risiko  5.0% ($20): DD $859 | tarik tiap trade: $  +74.1/bln, habis 5x, uang keluar maks $800, bulan dompet + 46% | tarik bulanan: $  +74.2/bln, habis 4x, uang keluar maks $841, bulan dompet + 44% | tanpa tarik: $  +73.7/bln, habis 1x, uang keluar maks $800
+  BARU risiko 10.0% ($40): DD $1,719 | tarik tiap trade: $ +152.6/bln, habis 25x, uang keluar maks $1,583, bulan dompet + 59% | tarik bulanan: $ +151.2/bln, habis 14x, uang keluar maks $1,604, bulan dompet + 53% | tanpa tarik: $ +148.3/bln, habis 3x, uang keluar maks $1,600
+
+💰 XAU + BTC (EA mengikuti keduanya)
+  LAMA: n 5035, WR 56%, total +683R, DD terdalam 121R (akun $400 aman bila DD x risiko < $400)
+  LAMA risiko  0.5% ($2): DD $242 | tarik tiap trade: $  +13.6/bln, habis 0x, uang keluar maks $400, bulan dompet + 25% | tarik bulanan: $  +13.6/bln, habis 0x, uang keluar maks $400, bulan dompet + 23% | tanpa tarik: $  +13.6/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  1.0% ($4): DD $484 | tarik tiap trade: $  +27.3/bln, habis 1x, uang keluar maks $400, bulan dompet + 30% | tarik bulanan: $  +27.3/bln, habis 1x, uang keluar maks $400, bulan dompet + 29% | tanpa tarik: $  +27.3/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  2.0% ($8): DD $968 | tarik tiap trade: $  +55.1/bln, habis 5x, uang keluar maks $400, bulan dompet + 32% | tarik bulanan: $  +55.1/bln, habis 5x, uang keluar maks $400, bulan dompet + 31% | tanpa tarik: $  +54.6/bln, habis 0x, uang keluar maks $400
+  LAMA risiko  5.0% ($20): DD $2,420 | tarik tiap trade: $ +140.1/bln, habis 36x, uang keluar maks $400, bulan dompet + 45% | tarik bulanan: $ +139.9/bln, habis 27x, uang keluar maks $400, bulan dompet + 42% | tanpa tarik: $ +136.4/bln, habis 0x, uang keluar maks $400
+  LAMA risiko 10.0% ($40): DD $4,841 | tarik tiap trade: $ +297.0/bln, habis 92x, uang keluar maks $400, bulan dompet + 45% | tarik bulanan: $ +288.7/bln, habis 65x, uang keluar maks $400, bulan dompet + 43% | tanpa tarik: $ +272.8/bln, habis 0x, uang keluar maks $400
+  BARU: n 4013, WR 61%, total +691R, DD terdalam 91R (akun $400 aman bila DD x risiko < $400)
+  BARU risiko  0.5% ($2): DD $182 | tarik tiap trade: $  +23.5/bln, habis 0x, uang keluar maks $400, bulan dompet + 35% | tarik bulanan: $  +23.5/bln, habis 0x, uang keluar maks $400, bulan dompet + 37% | tanpa tarik: $  +23.5/bln, habis 0x, uang keluar maks $400
+  BARU risiko  1.0% ($4): DD $364 | tarik tiap trade: $  +47.0/bln, habis 0x, uang keluar maks $400, bulan dompet + 35% | tarik bulanan: $  +47.0/bln, habis 0x, uang keluar maks $400, bulan dompet + 37% | tanpa tarik: $  +47.0/bln, habis 0x, uang keluar maks $400
+  BARU risiko  2.0% ($8): DD $728 | tarik tiap trade: $  +94.1/bln, habis 2x, uang keluar maks $501, bulan dompet + 39% | tarik bulanan: $  +94.2/bln, habis 1x, uang keluar maks $493, bulan dompet + 44% | tanpa tarik: $  +94.1/bln, habis 0x, uang keluar maks $400
+  BARU risiko  5.0% ($20): DD $1,821 | tarik tiap trade: $ +238.0/bln, habis 18x, uang keluar maks $1,080, bulan dompet + 54% | tarik bulanan: $ +237.4/bln, habis 14x, uang keluar maks $1,224, bulan dompet + 60% | tanpa tarik: $ +235.5/bln, habis 2x, uang keluar maks $1,200
+  BARU risiko 10.0% ($40): DD $3,641 | tarik tiap trade: $ +484.0/bln, habis 51x, uang keluar maks $1,623, bulan dompet + 56% | tarik bulanan: $ +480.6/bln, habis 36x, uang keluar maks $1,878, bulan dompet + 61% | tanpa tarik: $ +471.6/bln, habis 4x, uang keluar maks $2,000
+

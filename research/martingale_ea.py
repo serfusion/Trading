@@ -91,7 +91,8 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
         one: bool = False, info: list | None = None, jeda_menit: float = 0.0, stop_pct: float = 0.0,
         akhir_pekan: bool = False, krisis: tuple | None = None, izin: list | None = None,
         step_arr: list | None = None, tp_arr: list | None = None, lot_arr: list | None = None,
-        sl_lapis: bool = False, bulat: bool = True, tutup_arr: list | None = None):
+        sl_lapis: bool = False, bulat: bool = True, tutup_arr: list | None = None,
+        tarik: float | str | None = None, tarikan: list | None = None):
     """Jalankan EA dari bar i0 s/d i1; stop=True berhenti di akun habis pertama (uji tanggal mulai);
     one=True hanya satu keranjang (TP atau akun habis). info (opsional) diisi per keranjang:
     (indeks bar, layer, ekuitas terendah USC, hasil USC, profit tiap layer terbaru→terlama atau None bila habis).
@@ -103,7 +104,12 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     baru; "tutup" = keranjang berjalan ditutup + tanpa keranjang baru.
     Kait riset (research/grid_cari.py), semuanya per bar & hanya memakai info sebelum bar itu: izin = arah keranjang baru
     (+1/−1, 0 = tidak boleh); step_arr/tp_arr/lot_arr = jarak/TP/lot awal saat keranjang dibuka (mis. kelipatan ATR);
-    sl_lapis = tutup keranjang di level berikutnya setelah layer maksimum; tutup_arr = tutup keranjang di harga buka bar."""
+    sl_lapis = tutup keranjang di level berikutnya setelah layer maksimum; tutup_arr = tutup keranjang di harga buka bar.
+    tarik (skema tarik-setor, research/tarik_setor.py): None = bawaan (saldo dijaga = modal: kelebihan ditarik dan
+    kekurangan ditambal setiap keranjang tutup); angka k ≥ 1 = tarik kelebihan di atas modal hanya bila saldo ≥ k x modal
+    (inf = tidak pernah); "D"/"W"/"M" = tarik kelebihan pada keranjang tutup pertama di hari/pekan/bulan baru. Di mode
+    ini closes = hasil per keranjang, tarikan diisi (indeks bar, USC ditarik); akun habis = saldo saat itu hilang, setor
+    ulang modal."""
     o, h, l, c = arrays(df)
     t = df.index
     lots_tab = lot_table(lot0, mult, maxlay, rek, bulat)
@@ -125,17 +131,31 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
     def blocked(i: int) -> bool:
         return akhir_pekan and (wd[i] == 5 or wd[i] == 6 or (wd[i] == 4 and hr[i] >= 20))
 
+    per = None
+    if isinstance(tarik, str):
+        per = {"D": t.normalize(), "W": (t - pd.to_timedelta(t.dayofweek, unit="D")).normalize(),
+               "M": t.tz_localize(None).to_period("M").start_time}[tarik].asi8.tolist()
+    st["per"] = per[i0] if per else 0
+
     def tutup(i: int, px: float) -> None:
-        """Tutup semua layer di harga px (ruang x); hasil dicatat, saldo kembali ke modal."""
-        st["bal"] += USC * (st["sl"] * px - st["sc"])
-        gain = st["bal"] - modal
+        """Tutup semua layer di harga px (ruang x); hasil dicatat, saldo kembali ke modal (bawaan) / aturan tarik."""
+        pnl = USC * (st["sl"] * px - st["sc"])
+        st["bal"] += pnl
+        gain = st["bal"] - modal if tarik is None else pnl
         closes.append((i, gain))
         depth.append(st["n"])
         if info is not None:
             info.append((i, st["n"], st["mineq"], gain,
                          [st["lots"][k] * USC * (px - e) for k, e in reversed(list(enumerate(st["ent"])))]))
         st["done"] = one
-        st["bal"] = modal
+        if tarik is None:
+            st["bal"] = modal
+        elif st["bal"] > modal and (st["bal"] >= tarik * modal if per is None else per[i] != st["per"]):
+            if tarikan is not None:
+                tarikan.append((i, st["bal"] - modal))
+            st["bal"] = modal
+            if per is not None:
+                st["per"] = per[i]
 
     def lanjut(i: int, p: float) -> bool:
         """Sesudah keranjang tutup: buka keranjang baru di harga p, atau istirahat (jeda/akhir pekan)."""
@@ -172,7 +192,7 @@ def sim(df: pd.DataFrame, side: int, lot0: float, mult: float, step: float, tp: 
                     lvl = (xb if gap else st["last"] - stp) if bisa else xb
                     xk = None                             # titik keluar paksa (dicek sebelum tiap layer baru)
                     if stop_pct:                          # batas rugi ekuitas
-                        xk = ((modal * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
+                        xk = ((st["bal"] * (1 - stop_pct) - st["bal"]) / USC + st["sc"]) / st["sl"]
                     if sl_lapis and st["n"] >= maxlay:    # SL di level berikutnya setelah layer maksimum
                         xl = st["last"] - stp
                         xk = xl if xk is None else max(xk, xl)
