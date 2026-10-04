@@ -190,6 +190,22 @@ alarm tepat waktu) hanya menyentuh `android/`].
   ETH, lapisan, gap; tab Sinyal hanya kartu status tren 🐂/🐻 (+ETH).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
+## Aplikasi 4.0 tampilan baru (4 Okt 2026, permintaan pengguna "URGENT ... estetik, kotak, grid, circle")
+- `Theme.kt`: kartu gradien (`AppCard`/`HeroCard`), koin aset bulat (`AssetCoin`), `Ring`/`WinGauge` (WR & hitung
+  mundur), `TileGrid` (angka sinyal), `PriceTrack` (SL→Entry→TP1→TP2→TP3 + harga sekarang), navigasi bawah kapsul.
+  🎨 Tampilan (`Appearance.kt`, `UiPrefs`, SharedPreferences "tampilan"): bentuk kotak/bulat/kapsul, grid/daftar,
+  lingkaran/bar, aksen Emas/Safir/Ametis/Toska, tema gelap/terang/ikut HP. Logika sinyal TIDAK berubah.
+- Cek kompilasi lokal tanpa Android SDK: proyek Compose Desktop (CMP 1.6.11, Maven Central) + stub Android, lihat
+  catatan di PROGRES.md. Render gambar pratinjau TIDAK bisa (runtime androidx.collection hanya di Google Maven, diblokir).
+
+## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
+- `research/spot_dip.py` (704 kombinasi, 21 koin hidup) & `spot_dip2.py` (+ koin ambruk/delisting, portofolio slot,
+  pilih dari LAMA). WR per trade 80–95% tetapi kalah rata −13..−25% (terburuk −55..−100%); portofolio BARU terbaik
+  ±+5–7%/th DD −13..−24% (BTC beli-tahan +12%/th DD −77%). Kandidat: 3 merah ≥10% +SMA200, TP 5%, maks 10 hari,
+  10% modal/sinyal. BELUM dipasang (tunggu "pasang"; info saja, tanpa order).
+- Robot berita auto-order cepat berbayar: feed institusional (AlphaFlash dsb.) + colocation + broker DMA, tidak
+  tersedia untuk akun retail Exness MT5; riset detik pertama menunjukkan rugi dengan latensi retail (docs/NEWS_DETIK.md).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

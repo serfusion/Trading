@@ -168,3 +168,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 2026-10-03: "CEK, VERIFIKASI, UJI menyeluruh lalu rombak apk simple" → `research/verifikasi_cloud.py`,
   `research/verifikasi.py`, `docs/VERIFIKASI.md`: kode cloud asli diputar ulang 2012–2026 (cocok 96–98% dengan riset),
   tanpa look-ahead, spread asli Exness; XAU 💰 +0,21R & BTC 💰 +0,27R sejak Okt 2021. Aplikasi 3.26 ringkas.
+
+### 4 Okt 2026 — aplikasi 4.0 & sinyal spot
+- Aplikasi 4.0 (tampilan baru + 🎨 Tampilan) di-push, CI sukses, APK di Release android-latest.
+- Cek kompilasi Compose tanpa Android SDK: proyek Gradle Compose Desktop di scratchpad (`kotlin("jvm") 1.9.24`,
+  `org.jetbrains.compose 1.6.11`, `jvmToolchain(21)`, deps compose.material3 + org.json + okhttp), salin file UI
+  (Theme, Appearance, SignalScreen, StatusCard, StatsScreen, RankCard, SignalRepository, TermsDialog, ChatScreen,
+  MainActivity tanpa kelas Activity) + stub `android.content.Context/SharedPreferences`, NewsAlarm, SignalPoller,
+  PollScheduler, LocalContext, R, painterResource, Build, Manifest, launcher, Lifecycle. `gradle compileKotlin` lolos.
+- Riset spot "sudah turun jauh": docs/SPOT_DIP.md. Unduhan 50 koin lama/delisting berjalan (16 selesai saat laporan);
+  jalankan ulang `python -m research.spot_dip2` setelah lengkap.
+
