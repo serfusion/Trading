@@ -401,7 +401,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 )
                 CardTitle("Pair yang saya ikuti")
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap").forEach { (k, label) ->
+                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap", "SPOT" to "💎 Spot").forEach { (k, label) ->
                         FilterChip(
                             selected = k in follow,
                             onClick = { follow = if (k !in follow) follow + k else if (follow.size > 1) follow - k else follow },
@@ -411,7 +411,8 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 }
                 Text(
                     "Sinyal, notifikasi, dan ringkasan \"Hari ini\" hanya untuk pair yang dipilih. Forex gap = USD/JPY, " +
-                        "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB).",
+                        "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB). 💎 Spot = beli spot Binance " +
+                        "saat peluang naik lagi tinggi (dipindai harian 07:05 WIB).",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
                 OutlinedTextField(

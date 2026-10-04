@@ -1,0 +1,122 @@
+# Peluang naik lagi koin spot (research/spot_peluang.py)
+Walk-forward per tahun (2019–2026), biaya 0,30%, tanpa SL. LAMA = 2019–Sep 2021, BARU = Okt 2021–Agu 2026.
+
+## TP +3% dalam 10 hari  (baris 107989, koin 48)
+Peluang dasar (semua hari): LAMA 85% | BARU 77%
+Kalibrasi walk-forward (peluang tebakan -> kenyataan naik, n hari):
+   0.00-0.60: LAMA  82.7% (n   329)  BARU  75.9% (n   108)
+   0.60-0.70: LAMA  84.9% (n  1429)  BARU  69.5% (n  4241)
+   0.70-0.80: LAMA  86.3% (n  6798)  BARU  73.5% (n 33120)
+   0.80-0.85: LAMA  87.1% (n  5807)  BARU  79.8% (n 24088)
+   0.85-0.90: LAMA  86.2% (n  5029)  BARU  84.9% (n 11150)
+   0.90-0.95: LAMA  91.2% (n  2528)  BARU  85.8% (n  2775)
+   0.95-1.00: LAMA  94.9% (n  1446)  BARU  89.2% (n   434)
+   logistik p≥0.85 semua koin  : LAMA n3949 WR 89% rata +0.25% kalah -19.5% | BARU n6497 WR 86% rata +0.26% kalah -15.3% | 2025+ n1083 WR 84% rata -0.12% kalah -15.4% | terburuk -62%
+   logistik p≥0.85 20 koin live: LAMA n1292 WR 88% rata +0.23% kalah -18.7% | BARU n2334 WR 86% rata +0.40% kalah -14.2% | 2025+ n322 WR 85% rata +0.15% kalah -14.4% | terburuk -62%
+        portofolio 10 slot LAMA: CAGR -0.6%/th DD -53% (diambil 1037/1292) per tahun 2020:-6% 2021:+5%
+        portofolio 10 slot BARU: CAGR +10.1%/th DD -47% (diambil 2046/2334) per tahun 2021:+13% 2022:-22% 2023:+39% 2024:+26% 2025:+6% 2026:-2%
+        pembanding acak       : LAMA n1102 WR 87% rata +0.33% kalah -15.4% | BARU n4010 WR 78% rata -0.54% kalah -11.9% | 2025+ n1323 WR 76% rata -0.71% kalah -11.6% | terburuk -62%
+   logistik p≥0.90 semua koin  : LAMA n2009 WR 91% rata +0.76% kalah -19.7% | BARU n1564 WR 88% rata +0.24% kalah -17.8% | 2025+ n284 WR 87% rata -0.26% kalah -19.4% | terburuk -55%
+   logistik p≥0.90 20 koin live: LAMA n650 WR 91% rata +0.86% kalah -18.2% | BARU n415 WR 90% rata +0.88% kalah -14.9% | 2025+ n35 WR 80% rata -1.54% kalah -18.5% | terburuk -43%
+        portofolio 10 slot LAMA: CAGR +23.5%/th DD -24% (diambil 560/650) per tahun 2020:+2% 2021:+40%
+        portofolio 10 slot BARU: CAGR +7.7%/th DD -11% (diambil 415/415) per tahun 2021:+5% 2022:-3% 2023:+11% 2024:+31% 2025:-7% 2026:+1%
+        pembanding acak       : LAMA n364 WR 88% rata +0.26% kalah -17.0% | BARU n1431 WR 78% rata -0.45% kalah -11.5% | 2025+ n482 WR 77% rata -0.67% kalah -11.7% | terburuk -47%
+   logistik p≥0.93 semua koin  : LAMA n1164 WR 93% rata +1.17% kalah -19.0% | BARU n535 WR 88% rata -0.20% kalah -21.2% | 2025+ n116 WR 83% rata -1.45% kalah -21.4% | terburuk -49%
+   logistik p≥0.93 20 koin live: LAMA n387 WR 93% rata +1.30% kalah -16.7% | BARU n113 WR 88% rata +0.30% kalah -18.1% | 2025+ n13 WR 69% rata -5.13% kalah -22.8% | terburuk -37%
+        portofolio 10 slot LAMA: CAGR +27.3%/th DD -21% (diambil 337/387) per tahun 2020:+12% 2021:+34%
+        portofolio 10 slot BARU: CAGR +0.7%/th DD -11% (diambil 113/113) per tahun 2021:+0% 2022:+1% 2023:+2% 2024:+7% 2025:-8% 2026:+1%
+        pembanding acak       : LAMA n203 WR 87% rata +0.55% kalah -14.1% | BARU n713 WR 77% rata -0.37% kalah -10.8% | 2025+ n255 WR 76% rata -0.50% kalah -10.4% | terburuk -43%
+   logistik p≥0.95 semua koin  : LAMA n798 WR 93% rata +1.37% kalah -17.7% | BARU n233 WR 91% rata +0.27% kalah -24.2% | 2025+ n52 WR 83% rata -2.28% kalah -26.1% | terburuk -45%
+   logistik p≥0.95 20 koin live: LAMA n260 WR 93% rata +1.40% kalah -16.1% | BARU n34 WR 85% rata -1.14% kalah -23.4% | 2025+ n6 WR 67% rata -6.87% kalah -26.0% | terburuk -35%
+        portofolio 10 slot LAMA: CAGR +20.3%/th DD -21% (diambil 223/260) per tahun 2020:+14% 2021:+16%
+        portofolio 10 slot BARU: CAGR -1.2%/th DD -5% (diambil 34/34) per tahun 2022:-4% 2023:+1% 2024:+3% 2025:-4%
+        pembanding acak       : LAMA n132 WR 87% rata +0.54% kalah -13.8% | BARU n406 WR 74% rata -0.97% kalah -11.4% | 2025+ n129 WR 72% rata -1.52% kalah -12.2% | terburuk -36%
+   boosting p≥0.85 semua koin  : LAMA n5308 WR 90% rata +0.61% kalah -17.3% | BARU n10065 WR 85% rata +0.14% kalah -14.3% | 2025+ n1874 WR 82% rata -0.21% kalah -13.8% | terburuk -63%
+   boosting p≥0.85 20 koin live: LAMA n1974 WR 89% rata +0.67% kalah -15.3% | BARU n4210 WR 84% rata +0.22% kalah -13.1% | 2025+ n718 WR 80% rata -0.32% kalah -12.6% | terburuk -61%
+   boosting p≥0.90 semua koin  : LAMA n2854 WR 90% rata +0.58% kalah -19.4% | BARU n4029 WR 89% rata +0.62% kalah -15.5% | 2025+ n604 WR 88% rata +0.60% kalah -15.4% | terburuk -63%
+   boosting p≥0.90 20 koin live: LAMA n1032 WR 90% rata +0.71% kalah -17.5% | BARU n1549 WR 89% rata +0.75% kalah -14.9% | 2025+ n215 WR 89% rata +0.79% kalah -14.4% | terburuk -57%
+   boosting p≥0.93 semua koin  : LAMA n1645 WR 91% rata +0.56% kalah -21.0% | BARU n1538 WR 91% rata +1.05% kalah -15.9% | 2025+ n175 WR 90% rata +0.69% kalah -18.0% | terburuk -54%
+   boosting p≥0.93 20 koin live: LAMA n562 WR 91% rata +0.74% kalah -19.3% | BARU n546 WR 92% rata +1.23% kalah -15.5% | 2025+ n64 WR 91% rata +0.99% kalah -15.5% | terburuk -46%
+   boosting p≥0.95 semua koin  : LAMA n1106 WR 94% rata +1.13% kalah -22.2% | BARU n804 WR 91% rata +1.04% kalah -16.7% | 2025+ n40 WR 95% rata +1.51% kalah -21.0% | terburuk -54%
+   boosting p≥0.95 20 koin live: LAMA n391 WR 95% rata +1.57% kalah -21.9% | BARU n288 WR 92% rata +0.98% kalah -18.9% | 2025+ n13 WR 100% rata +2.70% kalah +0.0% | terburuk -46%
+   aturan 3 merah ≥10% +SMA200 (20 koin live): LAMA n194 WR 94% rata +1.74% kalah -14.3% | BARU n272 WR 90% rata +1.19% kalah -12.0% | 2025+ n81 WR 96% rata +2.37% kalah -6.1% | terburuk -58%
+
+## TP +5% dalam 10 hari  (baris 107989, koin 48)
+Peluang dasar (semua hari): LAMA 76% | BARU 65%
+Kalibrasi walk-forward (peluang tebakan -> kenyataan naik, n hari):
+   0.00-0.60: LAMA  73.5% (n  3109)  BARU  54.4% (n 10727)
+   0.60-0.70: LAMA  78.5% (n  7088)  BARU  60.8% (n 30992)
+   0.70-0.80: LAMA  79.9% (n  8263)  BARU  70.1% (n 28287)
+   0.80-0.85: LAMA  80.1% (n  2377)  BARU  76.8% (n  3964)
+   0.85-0.90: LAMA  87.9% (n  1198)  BARU  77.2% (n  1426)
+   0.90-0.95: LAMA  89.6% (n   855)  BARU  77.4% (n   425)
+   0.95-1.00: LAMA  93.9% (n   476)  BARU  86.3% (n    95)
+   logistik p≥0.85 semua koin  : LAMA n1038 WR 88% rata +2.08% kalah -17.0% | BARU n766 WR 81% rata +0.37% kalah -18.5% | 2025+ n153 WR 78% rata -0.72% kalah -20.2% | terburuk -55%
+   logistik p≥0.85 20 koin live: LAMA n344 WR 88% rata +2.06% kalah -17.4% | BARU n178 WR 83% rata +1.21% kalah -15.8% | 2025+ n15 WR 73% rata -2.97% kalah -23.0% | terburuk -43%
+        portofolio 10 slot LAMA: CAGR +33.1%/th DD -28% (diambil 290/344) per tahun 2020:+19% 2021:+36%
+        portofolio 10 slot BARU: CAGR +4.7%/th DD -9% (diambil 178/178) per tahun 2021:+1% 2022:-0% 2023:+5% 2024:+21% 2025:-6% 2026:+2%
+        pembanding acak       : LAMA n242 WR 76% rata -0.16% kalah -15.0% | BARU n893 WR 66% rata -0.76% kalah -10.8% | 2025+ n307 WR 64% rata -0.86% kalah -10.3% | terburuk -57%
+   logistik p≥0.90 semua koin  : LAMA n608 WR 89% rata +2.58% kalah -15.4% | BARU n221 WR 84% rata +0.14% kalah -23.3% | 2025+ n56 WR 79% rata -1.70% kalah -25.1% | terburuk -45%
+   logistik p≥0.90 20 koin live: LAMA n186 WR 88% rata +2.29% kalah -14.8% | BARU n33 WR 73% rata -1.85% kalah -19.3% | 2025+ n6 WR 50% rata -7.15% kalah -19.0% | terburuk -43%
+        portofolio 10 slot LAMA: CAGR +22.0%/th DD -25% (diambil 159/186) per tahun 2020:+15% 2021:+18%
+        portofolio 10 slot BARU: CAGR -1.9%/th DD -8% (diambil 33/33) per tahun 2022:-5% 2023:+1% 2024:+1% 2025:-4%
+        pembanding acak       : LAMA n102 WR 75% rata +0.42% kalah -11.9% | BARU n391 WR 68% rata -0.26% kalah -10.1% | 2025+ n124 WR 64% rata -0.78% kalah -10.0% | terburuk -39%
+   logistik p≥0.93 semua koin  : LAMA n401 WR 92% rata +3.15% kalah -14.2% | BARU n92 WR 85% rata +0.11% kalah -25.5% | 2025+ n29 WR 83% rata -0.70% kalah -26.6% | terburuk -45%
+   logistik p≥0.93 20 koin live: LAMA n122 WR 92% rata +2.88% kalah -17.5% | BARU n14 WR 71% rata -1.68% kalah -17.6% | 2025+ n3 WR 67% rata -5.80% kalah -26.8% | terburuk -43%
+        portofolio 10 slot LAMA: CAGR +22.5%/th DD -13% (diambil 113/122) per tahun 2020:+14% 2021:+18%
+        portofolio 10 slot BARU: CAGR -0.8%/th DD -4% (diambil 14/14) per tahun 2022:-1% 2023:+0% 2024:-0% 2025:-2%
+        pembanding acak       : LAMA n64 WR 84% rata +1.78% kalah -13.1% | BARU n217 WR 63% rata -0.15% kalah -8.1% | 2025+ n70 WR 61% rata -0.55% kalah -8.7% | terburuk -29%
+   logistik p≥0.95 semua koin  : LAMA n265 WR 94% rata +3.53% kalah -15.8% | BARU n54 WR 89% rata +2.31% kalah -16.8% | 2025+ n18 WR 78% rata -0.17% kalah -17.2% | terburuk -43%
+   logistik p≥0.95 20 koin live: LAMA n80 WR 94% rata +3.02% kalah -22.2% | BARU n12 WR 92% rata +3.06% kalah -14.9% | 2025+ n6 WR 83% rata +1.43% kalah -14.9% | terburuk -43%
+        portofolio 10 slot LAMA: CAGR +21.8%/th DD -8% (diambil 80/80) per tahun 2020:+13% 2021:+12%
+        portofolio 10 slot BARU: CAGR +3.7%/th DD -1% (diambil 12/12) per tahun 2024:+3% 2025:+1%
+        pembanding acak       : LAMA n35 WR 71% rata -0.16% kalah -11.6% | BARU n116 WR 66% rata +0.17% kalah -8.4% | 2025+ n39 WR 64% rata +0.45% kalah -6.6% | terburuk -33%
+   boosting p≥0.85 semua koin  : LAMA n1580 WR 86% rata +1.57% kalah -18.0% | BARU n2126 WR 80% rata +0.89% kalah -14.6% | 2025+ n304 WR 84% rata +1.67% kalah -14.2% | terburuk -57%
+   boosting p≥0.85 20 koin live: LAMA n568 WR 86% rata +1.65% kalah -17.5% | BARU n776 WR 79% rata +0.89% kalah -13.4% | 2025+ n104 WR 82% rata +1.89% kalah -10.1% | terburuk -52%
+   boosting p≥0.90 semua koin  : LAMA n820 WR 89% rata +1.88% kalah -19.9% | BARU n676 WR 82% rata +1.21% kalah -15.1% | 2025+ n57 WR 82% rata +1.33% kalah -13.6% | terburuk -57%
+   boosting p≥0.90 20 koin live: LAMA n288 WR 90% rata +2.13% kalah -21.8% | BARU n231 WR 80% rata +0.73% kalah -14.6% | 2025+ n18 WR 89% rata +2.42% kalah -11.4% | terburuk -52%
+   boosting p≥0.93 semua koin  : LAMA n527 WR 90% rata +2.25% kalah -19.2% | BARU n372 WR 83% rata +1.36% kalah -15.0% | 2025+ n15 WR 80% rata +0.69% kalah -15.4% | terburuk -57%
+   boosting p≥0.93 20 koin live: LAMA n176 WR 91% rata +2.72% kalah -17.1% | BARU n131 WR 82% rata +1.04% kalah -16.1% | 2025+ n4 WR 100% rata +4.70% kalah +0.0% | terburuk -46%
+   boosting p≥0.95 semua koin  : LAMA n374 WR 91% rata +2.60% kalah -19.8% | BARU n261 WR 87% rata +1.86% kalah -17.1% | 2025+ n2 WR 50% rata -6.40% kalah -17.5% | terburuk -57%
+   boosting p≥0.95 20 koin live: LAMA n115 WR 90% rata +2.62% kalah -17.1% | BARU n99 WR 87% rata +1.83% kalah -17.2% | terburuk -28%
+   aturan 3 merah ≥10% +SMA200 (20 koin live): LAMA n174 WR 92% rata +3.20% kalah -13.9% | BARU n258 WR 82% rata +1.85% kalah -11.1% | 2025+ n80 WR 89% rata +3.09% kalah -9.6% | terburuk -58%
+
+## TP +5% dalam 20 hari  (baris 107489, koin 48)
+Peluang dasar (semua hari): LAMA 84% | BARU 74%
+Kalibrasi walk-forward (peluang tebakan -> kenyataan naik, n hari):
+   0.00-0.60: LAMA  86.8% (n   704)  BARU  74.6% (n   283)
+   0.60-0.70: LAMA  86.4% (n  2544)  BARU  69.8% (n  6673)
+   0.70-0.80: LAMA  85.4% (n  8983)  BARU  71.2% (n 39389)
+   0.80-0.85: LAMA  89.0% (n  5298)  BARU  77.3% (n 19825)
+   0.85-0.90: LAMA  87.0% (n  3418)  BARU  79.2% (n  7648)
+   0.90-0.95: LAMA  91.8% (n  1566)  BARU  80.3% (n  1337)
+   0.95-1.00: LAMA  94.3% (n   853)  BARU  81.2% (n   261)
+   logistik p≥0.85 semua koin  : LAMA n1825 WR 91% rata +1.92% kalah -25.3% | BARU n2976 WR 82% rata -0.05% kalah -21.4% | 2025+ n324 WR 83% rata -0.16% kalah -23.4% | terburuk -68%
+   logistik p≥0.85 20 koin live: LAMA n662 WR 90% rata +1.94% kalah -22.1% | BARU n1079 WR 80% rata +0.00% kalah -19.1% | 2025+ n55 WR 82% rata +0.31% kalah -19.4% | terburuk -62%
+        portofolio 10 slot LAMA: CAGR +71.6%/th DD -47% (diambil 520/662) per tahun 2020:+22% 2021:+113%
+        portofolio 10 slot BARU: CAGR +4.3%/th DD -37% (diambil 900/1079) per tahun 2021:+13% 2022:-31% 2023:+30% 2024:+17% 2025:+1% 2026:+2%
+        pembanding acak       : LAMA n619 WR 85% rata +0.78% kalah -21.0% | BARU n2163 WR 75% rata -0.44% kalah -15.9% | 2025+ n672 WR 71% rata -1.23% kalah -15.6% | terburuk -58%
+   logistik p≥0.90 semua koin  : LAMA n863 WR 92% rata +2.11% kalah -27.3% | BARU n554 WR 84% rata -0.33% kalah -26.9% | 2025+ n89 WR 82% rata -1.72% kalah -31.0% | terburuk -73%
+   logistik p≥0.90 20 koin live: LAMA n277 WR 91% rata +1.98% kalah -25.4% | BARU n159 WR 86% rata +0.75% kalah -22.6% | 2025+ n11 WR 82% rata -2.73% kalah -36.2% | terburuk -47%
+        portofolio 10 slot LAMA: CAGR +27.4%/th DD -27% (diambil 235/277) per tahun 2020:+22% 2021:+22%
+        portofolio 10 slot BARU: CAGR +2.3%/th DD -13% (diambil 159/159) per tahun 2021:+1% 2022:-5% 2023:+6% 2024:+13% 2025:-5% 2026:+2%
+        pembanding acak       : LAMA n211 WR 87% rata +1.52% kalah -20.0% | BARU n797 WR 75% rata -0.42% kalah -15.5% | 2025+ n251 WR 72% rata -0.51% kalah -13.9% | terburuk -57%
+   logistik p≥0.93 semua koin  : LAMA n545 WR 93% rata +2.46% kalah -27.5% | BARU n194 WR 85% rata -0.46% kalah -28.7% | 2025+ n47 WR 81% rata -2.77% kalah -34.3% | terburuk -73%
+   logistik p≥0.93 20 koin live: LAMA n168 WR 92% rata +2.47% kalah -24.1% | BARU n44 WR 82% rata -0.28% kalah -22.7% | 2025+ n6 WR 83% rata -1.19% kalah -30.6% | terburuk -47%
+        portofolio 10 slot LAMA: CAGR +23.8%/th DD -22% (diambil 137/168) per tahun 2020:+16% 2021:+20%
+        portofolio 10 slot BARU: CAGR -0.5%/th DD -10% (diambil 44/44) per tahun 2022:-2% 2023:+2% 2024:-1% 2025:-1%
+        pembanding acak       : LAMA n123 WR 80% rata -1.29% kalah -24.8% | BARU n384 WR 74% rata -0.27% kalah -14.6% | 2025+ n132 WR 73% rata -0.62% kalah -14.3% | terburuk -60%
+   logistik p≥0.95 semua koin  : LAMA n405 WR 93% rata +2.55% kalah -27.4% | BARU n123 WR 87% rata +0.34% kalah -28.8% | 2025+ n39 WR 87% rata +0.47% kalah -28.3% | terburuk -59%
+   logistik p≥0.95 20 koin live: LAMA n126 WR 95% rata +3.08% kalah -28.8% | BARU n20 WR 80% rata -0.86% kalah -23.1% | 2025+ n6 WR 83% rata -0.18% kalah -24.6% | terburuk -47%
+        portofolio 10 slot LAMA: CAGR +23.0%/th DD -13% (diambil 115/126) per tahun 2020:+14% 2021:+21%
+        portofolio 10 slot BARU: CAGR -0.6%/th DD -7% (diambil 20/20) per tahun 2022:+0% 2023:+0% 2024:-3% 2025:-0%
+        pembanding acak       : LAMA n69 WR 84% rata +1.15% kalah -17.5% | BARU n216 WR 77% rata +0.19% kalah -14.7% | 2025+ n82 WR 78% rata +0.45% kalah -14.4% | terburuk -49%
+   boosting p≥0.85 semua koin  : LAMA n2651 WR 90% rata +1.82% kalah -23.8% | BARU n5355 WR 81% rata -0.04% kalah -19.6% | 2025+ n851 WR 79% rata -0.61% kalah -20.3% | terburuk -71%
+   boosting p≥0.85 20 koin live: LAMA n1020 WR 88% rata +1.69% kalah -20.0% | BARU n2230 WR 80% rata +0.12% kalah -18.2% | 2025+ n300 WR 76% rata -0.93% kalah -18.4% | terburuk -62%
+   boosting p≥0.90 semua koin  : LAMA n1268 WR 90% rata +1.89% kalah -24.3% | BARU n2271 WR 84% rata +0.75% kalah -19.2% | 2025+ n251 WR 87% rata +1.75% kalah -18.4% | terburuk -62%
+   boosting p≥0.90 20 koin live: LAMA n476 WR 88% rata +1.73% kalah -20.5% | BARU n852 WR 83% rata +0.65% kalah -18.3% | 2025+ n78 WR 85% rata +1.65% kalah -15.1% | terburuk -52%
+   boosting p≥0.93 semua koin  : LAMA n759 WR 90% rata +1.60% kalah -25.0% | BARU n952 WR 86% rata +1.25% kalah -20.0% | 2025+ n86 WR 87% rata +1.22% kalah -22.5% | terburuk -66%
+   boosting p≥0.93 20 koin live: LAMA n264 WR 89% rata +1.62% kalah -22.3% | BARU n323 WR 82% rata +0.34% kalah -19.9% | 2025+ n24 WR 88% rata +2.85% kalah -10.1% | terburuk -48%
+   boosting p≥0.95 semua koin  : LAMA n566 WR 88% rata +1.34% kalah -24.1% | BARU n450 WR 90% rata +2.35% kalah -18.8% | 2025+ n25 WR 96% rata +3.39% kalah -28.1% | terburuk -66%
+   boosting p≥0.95 20 koin live: LAMA n206 WR 88% rata +1.52% kalah -22.6% | BARU n145 WR 87% rata +1.43% kalah -20.3% | 2025+ n9 WR 100% rata +4.70% kalah +0.0% | terburuk -46%
+   aturan 3 merah ≥10% +SMA200 (20 koin live): LAMA n171 WR 96% rata +3.15% kalah -33.2% | BARU n253 WR 87% rata +1.71% kalah -17.4% | 2025+ n79 WR 92% rata +3.21% kalah -14.9% | terburuk -59%

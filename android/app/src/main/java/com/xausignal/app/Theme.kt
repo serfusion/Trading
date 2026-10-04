@@ -410,7 +410,9 @@ fun PulseDot(color: Color, size: Dp = 10.dp) {
     }
 }
 
-/** Koin bulat bergradien per aset: Au (emas), ₿, Ξ, FX. */
+private val FIAT = setOf("USD", "EUR", "GBP", "JPY", "AUD", "CHF", "CAD", "NZD")
+
+/** Koin bulat bergradien per aset: Au (emas), ₿, Ξ, FX (forex), atau 3 huruf koin spot (SOL, ADA, ...). */
 @Composable
 fun AssetCoin(symbol: String, size: Dp = 40.dp) {
     val s = symbol.uppercase(Locale.US)
@@ -418,7 +420,8 @@ fun AssetCoin(symbol: String, size: Dp = 40.dp) {
         s.startsWith("XAU") -> Triple("Au", Color(0xFFFFE6A0), Color(0xFFC88A16))
         s.startsWith("BTC") -> Triple("₿", Color(0xFFFFC46B), Color(0xFFE8710F))
         s.startsWith("ETH") -> Triple("Ξ", Color(0xFFC9BCFF), Color(0xFF6552D8))
-        else -> Triple("FX", Color(0xFF9AD0FF), Color(0xFF2E6BDB))
+        s.substringBefore("/") in FIAT -> Triple("FX", Color(0xFF9AD0FF), Color(0xFF2E6BDB))
+        else -> Triple(s.substringBefore("/").take(3), Color(0xFF8CF0D6), Color(0xFF15A39A))   // koin spot lain
     }
     Box(
         Modifier
@@ -429,8 +432,8 @@ fun AssetCoin(symbol: String, size: Dp = 40.dp) {
                 CircleShape),
         contentAlignment = Alignment.Center
     ) {
-        Text(glyph, color = Color(0xFF1B1204), fontWeight = FontWeight.Black, fontSize = (size.value * 0.4f).sp,
-            maxLines = 1)
+        Text(glyph, color = Color(0xFF1B1204), fontWeight = FontWeight.Black,
+            fontSize = (size.value * (if (glyph.length > 2) 0.3f else 0.4f)).sp, maxLines = 1)
     }
 }
 

@@ -344,3 +344,10 @@ EMA50), level breakout tiap set untuk candle H1 berikutnya, waktu cek sinyal ber
 `StatusCard.kt`) menampilkan per pair: 🟢 BULLISH / 🔴 BEARISH / ⚪ CAMPURAN, hitung mundur detik ke tutup candle H1,
 jarak ke level BUY/SELL, hitung mundur ke berita berikutnya (≤ 24 jam), dan setelah rilis baris "lonjakan memudar"
 (`_pudar`, XAU & BTC). Keterangan saja — bukan sinyal entry.
+
+## 💎 Sinyal spot Binance (4 Okt 2026, aplikasi 4.1 — `docs/SPOT_PELUANG.md`)
+- `_spot.spot_tick` dipanggil di akhir /api/tick: pindai 20 koin sekali sehari (≥ 00:05 UTC = 07:05 WIB), cek posisi
+  tiap jam (TP +3% tersentuh / 10 hari habis). State baris Supabase `spot`. Pesan ntfy `spot_signal` & `spot_close`
+  (dengan notifikasi) dan `spot_status` (ringkasan kartu 💎, tiap perubahan / 2 jam bila ada posisi).
+- Env: `SPOT_SIGNALS=0` mematikan, `SPOT_MAX` maks posisi (bawaan 10). Data: data-api.binance.vision → api.binance.us
+  → Twelve Data. Model diperbarui dengan `python -m research.spot_peluang --final` (menulis `spot_model.json`).

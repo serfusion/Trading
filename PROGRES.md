@@ -178,4 +178,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   PollScheduler, LocalContext, R, painterResource, Build, Manifest, launcher, Lifecycle. `gradle compileKotlin` lolos.
 - Riset spot "sudah turun jauh": docs/SPOT_DIP.md. Unduhan 50 koin lama/delisting berjalan (16 selesai saat laporan);
   jalankan ulang `python -m research.spot_dip2` setelah lengkap.
+- 💎 Spot dipasang (izin pengguna): docs/SPOT_PELUANG.md, aplikasi 4.1. GBM pakai random_state=0 (tanpa itu early
+  stopping acak -> angka berubah tiap putaran). Sumber data live belum bisa dites dari sesi (host Binance diblokir).
 

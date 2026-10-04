@@ -1,0 +1,56 @@
+# Model akhir peluang naik spot (gradient boosting, walk-forward per tahun)
+TP +3% dalam 10 hari, ambang p ≥ 0.93, 20 koin live. Biaya 0,30%, tanpa SL.
+Gabungan = peluang model ≥ ambang ATAU aturan 3 merah ≥10% di atas SMA200 (yang dipasang di cloud).
+Peluang dasar 20 koin: LAMA 82% | BARU 76%
+Kalibrasi (tebakan -> kenyataan):
+   0.00-0.80 LAMA: naik  82.2% (n 3346)
+   0.00-0.80 BARU: naik  71.2% (n 20226)
+   0.80-0.85 LAMA: naik  85.0% (n 2082)
+   0.80-0.85 BARU: naik  79.3% (n 6919)
+   0.85-0.90 LAMA: naik  87.4% (n 2218)
+   0.85-0.90 BARU: naik  81.5% (n 6004)
+   0.90-0.93 LAMA: naik  88.0% (n 827)
+   0.90-0.93 BARU: naik  88.2% (n 1706)
+   0.93-0.95 LAMA: naik  86.9% (n 367)
+   0.93-0.95 BARU: naik  91.3% (n 414)
+   0.95-1.00 LAMA: naik  94.7% (n 513)
+   0.95-1.00 BARU: naik  92.0% (n 461)
+
+## gabungan
+   per trade: LAMA n642 WR 91% rata +0.86% kalah -18.4% | BARU n799 WR 91% rata +1.16% kalah -14.1% | 2025+ n132 WR 92% rata +1.57% kalah -12.2% | terburuk -58%
+   BARU: median tahan 1 hari, sinyal/bulan 13.5
+   per tahun: 2020:n105 WR84% -1.0% 2021:n595 WR92% +1.2% 2022:n378 WR90% +0.8% 2023:n50 WR92% +1.9% 2024:n181 WR92% +1.6% 2025:n102 WR93% +1.8% 2026:n30 WR90% +0.8%
+   portofolio 5 slot LAMA: CAGR +11.6%/th DD -49% (diambil 388/642) 2020:-27% 2021:+66%
+   portofolio 10 slot LAMA: CAGR +16.0%/th DD -33% (diambil 547/642) 2020:-13% 2021:+49%
+   portofolio 5 slot BARU: CAGR +17.8%/th DD -27% (diambil 519/799) 2021:+1% 2022:+4% 2023:+18% 2024:+45% 2025:+23% 2026:+1%
+   portofolio 10 slot BARU: CAGR +14.1%/th DD -19% (diambil 693/799) 2021:+4% 2022:+10% 2023:+10% 2024:+27% 2025:+18% 2026:+2%
+
+## boosting p≥0.93
+   per trade: LAMA n523 WR 91% rata +0.79% kalah -19.1% | BARU n582 WR 92% rata +1.18% kalah -15.7% | 2025+ n57 WR 88% rata +0.55% kalah -14.8% | terburuk -46%
+   BARU: median tahan 1 hari, sinyal/bulan 9.9
+   per tahun: 2020:n70 WR80% -1.3% 2021:n493 WR93% +1.1% 2022:n368 WR90% +0.8% 2023:n17 WR100% +2.7% 2024:n100 WR97% +2.4% 2025:n34 WR88% +0.7% 2026:n23 WR87% +0.3%
+   portofolio 5 slot LAMA: CAGR +8.1%/th DD -45% (diambil 308/523) 2020:-23% 2021:+48%
+   portofolio 10 slot LAMA: CAGR +9.9%/th DD -33% (diambil 440/523) 2020:-12% 2021:+33%
+   portofolio 5 slot BARU: CAGR +12.5%/th DD -27% (diambil 369/582) 2021:+7% 2022:+5% 2023:+9% 2024:+47% 2025:+1% 2026:-3%
+   portofolio 10 slot BARU: CAGR +10.1%/th DD -16% (diambil 496/582) 2021:+5% 2022:+13% 2023:+5% 2024:+26% 2025:+2% 2026:-0%
+
+## boosting p≥0.95
+   per trade: LAMA n320 WR 94% rata +1.24% kalah -21.9% | BARU n306 WR 92% rata +1.16% kalah -17.7% | 2025+ n14 WR 100% rata +2.70% kalah +0.0% | terburuk -46%
+   BARU: median tahan 1 hari, sinyal/bulan 5.2
+   per tahun: 2020:n42 WR88% -0.1% 2021:n297 WR95% +1.4% 2022:n249 WR91% +0.9% 2023:n2 WR100% +2.7% 2024:n22 WR100% +2.7% 2025:n8 WR100% +2.7% 2026:n6 WR100% +2.7%
+   portofolio 5 slot LAMA: CAGR +1.9%/th DD -37% (diambil 170/320) 2020:-13% 2021:+18%
+   portofolio 10 slot LAMA: CAGR +13.5%/th DD -27% (diambil 259/320) 2020:-2% 2021:+24%
+   portofolio 5 slot BARU: CAGR +4.8%/th DD -20% (diambil 169/306) 2021:+3% 2022:+2% 2023:+1% 2024:+10% 2025:+4% 2026:+3%
+   portofolio 10 slot BARU: CAGR +3.9%/th DD -14% (diambil 249/306) 2021:+3% 2022:+5% 2023:+1% 2024:+6% 2025:+2% 2026:+2%
+
+## aturan 3 merah ≥10% +SMA200
+   per trade: LAMA n194 WR 94% rata +1.74% kalah -14.3% | BARU n272 WR 90% rata +1.19% kalah -12.0% | 2025+ n81 WR 96% rata +2.37% kalah -6.1% | terburuk -58%
+   BARU: median tahan 1 hari, sinyal/bulan 4.6
+   per tahun: 2020:n42 WR90% +0.1% 2021:n177 WR94% +1.9% 2022:n28 WR75% -1.5% 2023:n34 WR88% +1.6% 2024:n104 WR89% +1.1% 2025:n72 WR96% +2.3% 2026:n9 WR100% +2.7%
+   portofolio 5 slot LAMA: CAGR +29.9%/th DD -16% (diambil 156/194) 2020:-3% 2021:+60%
+   portofolio 10 slot LAMA: CAGR +20.5%/th DD -8% (diambil 189/194) 2020:+0% 2021:+37%
+   portofolio 5 slot BARU: CAGR +9.1%/th DD -16% (diambil 223/272) 2021:+0% 2022:-8% 2023:+8% 2024:+14% 2025:+28% 2026:+5%
+   portofolio 10 slot BARU: CAGR +6.1%/th DD -8% (diambil 263/272) 2021:+0% 2022:-4% 2023:+5% 2024:+10% 2025:+18% 2026:+2%
+
+Ekspor pohon: selisih maks vs sklearn 2.22e-16 (harus ~0)
+Model -> /home/user/Trading/cloud/api/spot_model.json (122 KB)
