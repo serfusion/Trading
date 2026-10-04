@@ -2,6 +2,7 @@
 import json
 import os
 import sys
+import time
 import traceback
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler
@@ -66,6 +67,7 @@ def signal_extras(asset: str, store) -> dict:
 
 
 def run() -> tuple[int, dict]:
+    started = time.monotonic()           # batas Vercel 60 dtk (vercel.json): spot memakai sisa waktu saja
     env = os.environ
     missing = [k for k in ("TWELVEDATA_API_KEY", "SUPABASE_URL", "SUPABASE_SERVICE_KEY", "NTFY_TOPIC")
                if not env.get(k)]
@@ -157,7 +159,8 @@ def run() -> tuple[int, dict]:
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
             result["spot"] = _spot.spot_tick(datetime.now(timezone.utc), _core.RowStore(store, "spot"),
                                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "10")))
+                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "10")),
+                                             deadline_s=max(3.0, 45.0 - (time.monotonic() - started)))
     except Exception as exc:  # noqa: BLE001 - spot tidak boleh mengganggu sinyal lain
         result["spot_error"] = str(exc)
     return 200, result
