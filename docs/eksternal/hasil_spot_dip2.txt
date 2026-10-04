@@ -1,0 +1,101 @@
+# Uji ketahanan sinyal spot 'sudah turun jauh' (research/spot_dip2.py)
+
+Koin hidup (24): BTC, ETH, BNB, XRP, ADA, DOGE, LTC, LINK, TRX, BCH, XLM, ATOM, ETC, MATIC, EOS, ALGO, XMR, SOL, DOT, AVAX, UNI, FIL, NEAR, AAVE
+Koin ambruk/delisting/lama (16): LUNA, LUNC, FTT, SRM, UST, WAVES, XEM, BTT, MITH, ICX, ZEC, DASH, IOTA, NEO, QTUM, OMG
+Biaya 0,30% pulang-pergi. hari = jumlah hari berbeda (sinyal bergerombol). LAMA < Okt 2021.
+
+## 1. Per trade: koin hidup saja vs + koin ambruk
+MERAH3_15+tren TP5% 20h
+   hidup : LAMA n149 hari65 WR 92% rata +2.11% kalah-rata -27.5% | BARU n113 hari50 WR 90% rata +2.24% kalah-rata -20.2% | 2025+ n25 hari11 WR 88% rata +1.59% kalah-rata -21.2% | terburuk -57% (ATOM)
+   semua : LAMA n237 hari83 WR 94% rata +2.83% kalah-rata -27.0% | BARU n207 hari94 WR 89% rata +1.68% kalah-rata -23.5% | 2025+ n48 hari26 WR 88% rata +0.95% kalah-rata -25.3% | terburuk -57% (ATOM)
+MERAH3_10+tren TP3% 10h
+   hidup : LAMA n271 hari119 WR 94% rata +1.35% kalah-rata -20.1% | BARU n291 hari134 WR 90% rata +1.24% kalah-rata -12.5% | 2025+ n86 hari39 WR 98% rata +2.52% kalah-rata -5.2% | terburuk -59% (ALGO)
+   semua : LAMA n419 hari146 WR 95% rata +1.71% kalah-rata -18.0% | BARU n436 hari192 WR 90% rata +0.86% kalah-rata -16.0% | 2025+ n121 hari57 WR 94% rata +1.57% kalah-rata -16.8% | terburuk -59% (ALGO)
+MERAH3_10+tren TP5% 10h
+   hidup : LAMA n264 hari116 WR 89% rata +2.37% kalah-rata -15.7% | BARU n287 hari132 WR 82% rata +1.77% kalah-rata -11.3% | 2025+ n85 hari38 WR 91% rata +3.28% kalah-rata -9.9% | terburuk -59% (ALGO)
+   semua : LAMA n410 hari143 WR 90% rata +2.83% kalah-rata -14.4% | BARU n427 hari191 WR 81% rata +1.34% kalah-rata -13.1% | 2025+ n119 hari56 WR 87% rata +2.31% kalah-rata -14.0% | terburuk -59% (ALGO)
+DD20_30 TP5% 20h
+   hidup : LAMA n741 hari330 WR 88% rata +0.95% kalah-rata -26.5% | BARU n687 hari269 WR 87% rata +1.63% kalah-rata -19.2% | 2025+ n176 hari78 WR 84% rata +1.54% kalah-rata -15.2% | terburuk -59% (ATOM)
+   semua : LAMA n1272 hari452 WR 88% rata +0.64% kalah-rata -28.0% | BARU n1297 hari490 WR 87% rata +1.16% kalah-rata -21.8% | 2025+ n324 hari153 WR 82% rata +0.64% kalah-rata -17.6% | terburuk -100% (LUNA#0)
+DD20_30 TP10% 10h
+   hidup : LAMA n638 hari300 WR 73% rata +2.38% kalah-rata -15.5% | BARU n615 hari245 WR 68% rata +2.52% kalah-rata -11.3% | 2025+ n153 hari69 WR 61% rata +1.24% kalah-rata -10.8% | terburuk -59% (ALGO)
+   semua : LAMA n1111 hari433 WR 71% rata +1.75% kalah-rata -16.3% | BARU n1184 hari458 WR 68% rata +2.00% kalah-rata -12.8% | 2025+ n294 hari142 WR 62% rata +0.86% kalah-rata -12.2% | terburuk -100% (LUNA#0)
+DD20_30+tren TP5% 20h
+   hidup : LAMA n360 hari167 WR 91% rata +1.49% kalah-rata -30.3% | BARU n166 hari102 WR 86% rata +1.60% kalah-rata -17.7% | 2025+ n30 hari21 WR 73% rata -1.94% kalah-rata -20.2% | terburuk -56% (ALGO)
+   semua : LAMA n616 hari228 WR 89% rata +0.87% kalah-rata -31.6% | BARU n318 hari191 WR 84% rata +0.40% kalah-rata -21.6% | 2025+ n72 hari52 WR 76% rata -2.40% kalah-rata -25.4% | terburuk -56% (ALGO)
+RSI30 TP10% 20h
+   hidup : LAMA n221 hari104 WR 75% rata +2.60% kalah-rata -18.6% | BARU n382 hari122 WR 71% rata +2.96% kalah-rata -12.4% | 2025+ n121 hari48 WR 62% rata +1.36% kalah-rata -11.9% | terburuk -63% (EOS)
+   semua : LAMA n336 hari133 WR 76% rata +2.62% kalah-rata -20.1% | BARU n612 hari179 WR 74% rata +3.35% kalah-rata -14.0% | 2025+ n191 hari66 WR 71% rata +3.08% kalah-rata -12.3% | terburuk -76% (UST)
+RSI25 balik SMA20 20h
+   hidup : LAMA n88 hari53 WR 64% rata +5.25% kalah-rata -20.0% | BARU n145 hari55 WR 68% rata +4.49% kalah-rata -10.3% | 2025+ n46 hari21 WR 50% rata +0.62% kalah-rata -10.7% | terburuk -58% (ALGO)
+   semua : LAMA n129 hari68 WR 64% rata +6.17% kalah-rata -20.2% | BARU n243 hari83 WR 68% rata +3.61% kalah-rata -15.1% | 2025+ n71 hari31 WR 56% rata +3.32% kalah-rata -10.9% | terburuk -100% (LUNA#0)
+BB2.5+tren TP5% 10h
+   hidup : LAMA n48 hari25 WR 92% rata +3.28% kalah-rata -11.3% | BARU n69 hari43 WR 72% rata +1.90% kalah-rata -5.0% | 2025+ n16 hari11 WR 69% rata +0.77% kalah-rata -6.9% | terburuk -20% (ETC)
+   semua : LAMA n70 hari32 WR 91% rata +3.21% kalah-rata -12.1% | BARU n83 hari47 WR 72% rata +1.65% kalah-rata -5.9% | 2025+ n18 hari12 WR 72% rata +1.21% kalah-rata -6.9% | terburuk -24% (LUNA#0)
+MERAH3_10+tren TP5% 10h SL15
+   hidup : LAMA n275 hari119 WR 85% rata +1.87% kalah-rata -14.3% | BARU n292 hari133 WR 76% rata +0.40% kalah-rata -13.0% | 2025+ n87 hari39 WR 83% rata +1.81% kalah-rata -12.1% | terburuk -15% (LINK)
+   semua : LAMA n423 hari147 WR 86% rata +1.98% kalah-rata -14.5% | BARU n442 hari198 WR 74% rata -0.15% kalah-rata -13.6% | 2025+ n125 hari59 WR 80% rata +1.09% kalah-rata -13.4% | terburuk -15% (LINK)
+
+## 2. Portofolio (modal dibagi slot, 1/slot ekuitas per posisi, semua koin termasuk yang ambruk)
+-- LAMA 2018–Sep 2021: pembanding BTC beli-tahan CAGR +37%/th, DD -81%
+   MERAH3_15+tren TP5% 20h          slot  5: CAGR  +20.0%/th  DD  -24.3%  diambil 156/229
+   MERAH3_15+tren TP5% 20h          slot 10: CAGR  +15.8%/th  DD  -11.6%  diambil 204/229
+   MERAH3_10+tren TP3% 10h          slot  5: CAGR  +21.6%/th  DD  -17.2%  diambil 285/409
+   MERAH3_10+tren TP3% 10h          slot 10: CAGR  +17.4%/th  DD   -8.6%  diambil 372/409
+   MERAH3_10+tren TP5% 10h          slot  5: CAGR  +39.8%/th  DD  -21.4%  diambil 266/402
+   MERAH3_10+tren TP5% 10h          slot 10: CAGR  +29.2%/th  DD  -13.7%  diambil 356/402
+   DD20_30 TP5% 20h                 slot  5: CAGR  -18.9%/th  DD  -83.5%  diambil 519/1263
+   DD20_30 TP5% 20h                 slot 10: CAGR   -4.5%/th  DD  -63.9%  diambil 792/1263
+   DD20_30 TP10% 10h                slot  5: CAGR  +20.4%/th  DD  -73.5%  diambil 497/1102
+   DD20_30 TP10% 10h                slot 10: CAGR  +17.1%/th  DD  -61.2%  diambil 708/1102
+   DD20_30+tren TP5% 20h            slot  5: CAGR   -5.2%/th  DD  -67.2%  diambil 267/612
+   DD20_30+tren TP5% 20h            slot 10: CAGR   +0.5%/th  DD  -51.8%  diambil 420/612
+   RSI30 TP10% 20h                  slot  5: CAGR  -11.3%/th  DD  -61.8%  diambil 151/325
+   RSI30 TP10% 20h                  slot 10: CAGR   +2.0%/th  DD  -48.6%  diambil 248/325
+   RSI25 balik SMA20 20h            slot  5: CAGR  +15.1%/th  DD  -47.8%  diambil 82/124
+   RSI25 balik SMA20 20h            slot 10: CAGR  +11.4%/th  DD  -43.3%  diambil 110/124
+   BB2.5+tren TP5% 10h              slot  5: CAGR  +10.3%/th  DD  -14.2%  diambil 46/66
+   BB2.5+tren TP5% 10h              slot 10: CAGR   +7.3%/th  DD   -7.2%  diambil 57/66
+   MERAH3_10+tren TP5% 10h SL15     slot  5: CAGR  +22.2%/th  DD  -28.4%  diambil 290/414
+   MERAH3_10+tren TP5% 10h SL15     slot 10: CAGR  +19.0%/th  DD  -16.2%  diambil 376/414
+-- BARU Okt 2021–2026: pembanding BTC beli-tahan CAGR +12%/th, DD -77%
+   MERAH3_15+tren TP5% 20h          slot  5: CAGR   +4.8%/th  DD  -23.1%  diambil 145/207
+   MERAH3_15+tren TP5% 20h          slot 10: CAGR   +4.9%/th  DD  -12.8%  diambil 183/207
+   MERAH3_10+tren TP3% 10h          slot  5: CAGR   +3.4%/th  DD  -27.4%  diambil 303/436
+   MERAH3_10+tren TP3% 10h          slot 10: CAGR   +4.3%/th  DD  -12.2%  diambil 377/436
+   MERAH3_10+tren TP5% 10h          slot  5: CAGR   +7.2%/th  DD  -37.0%  diambil 281/427
+   MERAH3_10+tren TP5% 10h          slot 10: CAGR   +6.7%/th  DD  -23.5%  diambil 357/427
+   DD20_30 TP5% 20h                 slot  5: CAGR  -18.7%/th  DD  -71.8%  diambil 523/1297
+   DD20_30 TP5% 20h                 slot 10: CAGR   -5.5%/th  DD  -58.3%  diambil 787/1297
+   DD20_30 TP10% 10h                slot  5: CAGR   -8.9%/th  DD  -66.9%  diambil 518/1184
+   DD20_30 TP10% 10h                slot 10: CAGR   +4.5%/th  DD  -54.4%  diambil 765/1184
+   DD20_30+tren TP5% 20h            slot  5: CAGR   -9.0%/th  DD  -50.0%  diambil 209/318
+   DD20_30+tren TP5% 20h            slot 10: CAGR   -1.4%/th  DD  -27.1%  diambil 278/318
+   RSI30 TP10% 20h                  slot  5: CAGR   -6.7%/th  DD  -68.0%  diambil 212/612
+   RSI30 TP10% 20h                  slot 10: CAGR  +11.3%/th  DD  -35.2%  diambil 369/612
+   RSI25 balik SMA20 20h            slot  5: CAGR   -2.6%/th  DD  -52.0%  diambil 124/243
+   RSI25 balik SMA20 20h            slot 10: CAGR   +3.9%/th  DD  -29.7%  diambil 173/243
+   BB2.5+tren TP5% 10h              slot  5: CAGR   +4.6%/th  DD  -15.0%  diambil 75/83
+   BB2.5+tren TP5% 10h              slot 10: CAGR   +2.5%/th  DD  -12.0%  diambil 80/83
+   MERAH3_10+tren TP5% 10h SL15     slot  5: CAGR   -9.8%/th  DD  -53.8%  diambil 318/442
+   MERAH3_10+tren TP5% 10h SL15     slot 10: CAGR   -3.9%/th  DD  -30.8%  diambil 385/442
+
+## 3. Pilih dari LAMA saja, lihat BARU (semua koin)
+   RSI25 balik SMA20 20h            LAMA rata +6.17% -> BARU rata +3.61% WR 68% (n 243)
+   BB2.5+tren TP5% 10h              LAMA rata +3.21% -> BARU rata +1.65% WR 72% (n 83)
+   MERAH3_10+tren TP5% 10h          LAMA rata +2.83% -> BARU rata +1.34% WR 81% (n 427)
+   MERAH3_15+tren TP5% 20h          LAMA rata +2.83% -> BARU rata +1.68% WR 89% (n 207)
+   RSI30 TP10% 20h                  LAMA rata +2.62% -> BARU rata +3.35% WR 74% (n 612)
+   MERAH3_10+tren TP5% 10h SL15     LAMA rata +1.98% -> BARU rata -0.15% WR 74% (n 442)
+   DD20_30 TP10% 10h                LAMA rata +1.75% -> BARU rata +2.00% WR 68% (n 1184)
+   MERAH3_10+tren TP3% 10h          LAMA rata +1.71% -> BARU rata +0.86% WR 90% (n 436)
+   DD20_30+tren TP5% 20h            LAMA rata +0.87% -> BARU rata +0.40% WR 84% (n 318)
+   DD20_30 TP5% 20h                 LAMA rata +0.64% -> BARU rata +1.16% WR 87% (n 1297)
+
+Per tahun (BARU, slot 5) aturan terbaik LAMA 'RSI25 balik SMA20 20h':
+   2021: +13%
+   2022: -48%
+   2023: +16%
+   2024: +20%
+   2025: +55%
+   2026: -31%

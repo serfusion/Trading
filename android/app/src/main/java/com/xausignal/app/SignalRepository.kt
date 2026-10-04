@@ -169,8 +169,8 @@ fun SignalEvent.exitBars(): Int = str("set").substringAfter('/', "").toIntOrNull
 /** Sinyal gap pekan forex (1 posisi, TP & SL, tutup otomatis 24 jam). */
 fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
-/** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, atau GAP (forex gap pekan). */
-fun SignalEvent.pairGroup(): String = symbol().let {
+/** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, GAP (forex gap pekan), atau SPOT (💎 spot Binance). */
+fun SignalEvent.pairGroup(): String = if (type.startsWith("spot")) "SPOT" else symbol().let {
     if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC") || it.startsWith("ETH")) "BTC" else "GAP"
 }
 
@@ -249,6 +249,11 @@ object SignalRepository {
     /** Harga terakhir per simbol (XAU/USD, BTC/USD, ...). */
     private val _prices = MutableStateFlow<Map<String, SignalEvent>>(emptyMap())
     val prices: StateFlow<Map<String, SignalEvent>> = _prices
+
+    /** 💎 Ringkasan sinyal spot terbaru dari cloud (spot_status: posisi terbuka, close terakhir, hasil teruji). */
+    private val _spot = MutableStateFlow<JSONObject?>(null)
+    val spot: StateFlow<JSONObject?> = _spot
+    private var spotDirty: String? = null
 
     private val _connection = MutableStateFlow("Memuat...")
     val connection: StateFlow<String> = _connection
@@ -520,8 +525,16 @@ object SignalRepository {
     fun topic(): String = prefs?.getString("topic", "") ?: ""
 
     /** Pair yang diikuti (XAU, BTC, GAP): sinyal, notifikasi, dan ringkasan di tab Sinyal. Bawaan: semua. */
-    fun followed(): Set<String> =
-        (prefs?.getString("follow", null) ?: "XAU,BTC,GAP").split(",").filter { it.isNotBlank() }.toSet()
+    fun followed(): Set<String> {
+        val p = prefs
+        val set = (p?.getString("follow", null) ?: "XAU,BTC,GAP,SPOT").split(",").filter { it.isNotBlank() }.toSet()
+        // 💎 Spot (4.1) menyala sekali untuk pengguna lama; setelah itu mengikuti pilihan di Pengaturan
+        if (p != null && !p.getBoolean("spot_mig", false)) {
+            p.edit().putBoolean("spot_mig", true).putString("follow", (set + "SPOT").joinToString(",")).apply()
+            return set + "SPOT"
+        }
+        return set
+    }
 
     fun saveFollowed(groups: Set<String>) {
         prefs?.edit()?.putString("follow", groups.joinToString(","))?.apply()
@@ -569,6 +582,11 @@ object SignalRepository {
         val type = payload.optString("type", "info")
         val event = SignalEvent(msgId, type, payload)
         lastId = msgId
+        if (type == "spot_status") {                  // ringkasan, bukan riwayat: tidak memenuhi daftar 300 pesan
+            _spot.value = payload
+            spotDirty = payload.toString()
+            return event
+        }
         if (type == "heartbeat") {
             val sym = payload.optString("symbol", "XAU/USD").ifBlank { "XAU/USD" }
             _prices.value = _prices.value + (sym to event)
@@ -592,6 +610,8 @@ object SignalRepository {
             if (sym.startsWith("XAU")) e.putString("heartbeat", json)
         }
         dirtyHb.clear()
+        spotDirty?.let { e.putString("spot_status", it) }
+        spotDirty = null
         if (eventsDirty) {
             val arr = JSONArray()
             _events.value.forEach { arr.put(JSONObject().put("m", it.msgId).put("p", it.json)) }
@@ -648,6 +668,7 @@ object SignalRepository {
                 val hb = JSONObject(it)
                 _heartbeat.value = SignalEvent("hb", "heartbeat", hb)
             }
+            p.getString("spot_status", null)?.let { _spot.value = JSONObject(it) }
             _prices.value = p.all.keys.filter { it.startsWith("hb_") }.associate { k ->
                 k.removePrefix("hb_") to SignalEvent("hb", "heartbeat", JSONObject(p.getString(k, "{}") ?: "{}"))
             }

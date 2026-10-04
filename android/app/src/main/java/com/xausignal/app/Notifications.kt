@@ -110,6 +110,25 @@ object Notifications {
         post(context, event.id.hashCode() + 1, title, text)
     }
 
+    /** 💎 BELI SPOT (cloud/api/_spot.py): beli di Binance spot lalu pasang limit jual di TP. Info saja. */
+    fun spotSignal(context: Context, event: SignalEvent) {
+        val coin = event.str("coin")
+        val title = "💎 BELI SPOT $coin/USDT • peluang naik ${fmt(event.num("p"), 0)}%"
+        val text = "Beli ±${spotPx(event.num("entry"))} lalu pasang limit jual ${spotPx(event.num("tp"))} " +
+            "(+${fmt(event.num("tp_pct"), 0)}%). Belum kena sampai ${formatTime(event.str("deadline"))} → jual. " +
+            "Maks 10% modal spot per sinyal."
+        post(context, event.id.hashCode(), title, text)
+    }
+
+    fun spotClose(context: Context, event: SignalEvent) {
+        val r = event.num("r") ?: 0.0
+        val title = "🏁 CLOSE SPOT ${event.str("coin")}/USDT • ${if (r > 0) "PROFIT" else "MINUS"} ${spotPct(r)}"
+        val text = (if (event.str("reason").contains("TP")) "Limit jual terisi di ${spotPx(event.num("exit"))}."
+            else "${event.str("reason")}: jual sekarang (patokan ${spotPx(event.num("exit"))}).") +
+            " Hasil ${spotPct(r)} setelah biaya."
+        post(context, event.id.hashCode() + 1, title, text)
+    }
+
     /** ⏱️ Pengingat 1 menit sebelum rilis berita (NewsAlarm). Informasi saja: aplikasi tidak membuka order. */
     fun news(context: Context, items: List<NewsAlarm.Item>) {
         val first = items.minByOrNull { it.at } ?: return
