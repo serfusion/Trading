@@ -56,6 +56,9 @@ def signal_extras(asset: str, store) -> dict:
             lay = json.load(f).get(asset)
         if lay:
             out["layer"] = lay
+    # 🎯 label WR tinggi pada lapisan BTC saat volatilitas ≥ 1,5× normal (izin pengguna 3 Okt 2026); WR_TINGGI=0 mematikan
+    if env.get("WR_TINGGI", "1") == "1" and asset in _core.WR_TINGGI:
+        out["wr_tinggi"] = _core.WR_TINGGI[asset]
     # 📰 BTC dimatikan 3 Okt 2026 (replay: sejak 2021 −0,06R/sin, tidak lebih baik); NEWS_TAG_BTC=1 menyalakan lagi
     if env.get("NEWS_TAG", "1") == "1" and (asset != "BTC" or env.get("NEWS_TAG_BTC", "0") == "1"):
         def rows():

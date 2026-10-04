@@ -1,0 +1,123 @@
+Data 2012-05-15 s/d 2026-10-02 20:55 UTC, 626,270 bar. Modal $430 dijaga, spread $0.2.
+Hitungan klaim 'x2 sampai 20 layer' (lot XAUUSDc; 1 lot = $1 per $1 gerak):
+  mulai 0.01 lot jarak $1.5: layer 20 =  5,242.88 lot, total 10,485.75 lot ($10,486 per $1), rugi mengambang saat layer 20 terisi $15,728, margin 1:2000 ±$21,758
+  mulai 0.01 lot jarak $3.0: layer 20 =  5,242.88 lot, total 10,485.75 lot ($10,486 per $1), rugi mengambang saat layer 20 terisi $31,457, margin 1:2000 ±$21,758
+  mulai 0.05 lot jarak $1.5: layer 20 = 26,214.40 lot, total 52,428.75 lot ($52,429 per $1), rugi mengambang saat layer 20 terisi $78,642, margin 1:2000 ±$108,790
+  mulai 0.05 lot jarak $3.0: layer 20 = 26,214.40 lot, total 52,428.75 lot ($52,429 per $1), rugi mengambang saat layer 20 terisi $157,283, margin 1:2000 ±$108,790
+  mulai 0.50 lot jarak $1.5: layer 20 = 262,144.00 lot, total 524,287.50 lot ($524,288 per $1), rugi mengambang saat layer 20 terisi $786,416, margin 1:2000 ±$1,087,897
+  mulai 0.50 lot jarak $3.0: layer 20 = 262,144.00 lot, total 524,287.50 lot ($524,288 per $1), rugi mengambang saat layer 20 terisi $1,572,832, margin 1:2000 ±$1,087,897
+  x1,2 mulai 0,5 lot jarak $1,5, 8 layer: total   8.24 lot, rentang $10.5, rugi mengambang $32; tiap $1 turun lagi −$8.24
+  x1,2 mulai 0,5 lot jarak $1,5, 20 layer: total  93.33 lot, rentang $28.5, rugi mengambang $625; tiap $1 turun lagi −$93.33
+  x1,2 mulai 0,5 lot jarak $1,5, 30 layer: total 590.93 lot, rentang $43.5, rugi mengambang $4,319; tiap $1 turun lagi −$590.93
+
+A screenshot: BUY 0,5 lot x1,2 jarak $1,5 TP +$5 maks 20
+  LAMA <Okt21  ditarik +$  176,413 | akun habis  425x (−$  182,750) | bersih $    -6,337
+  BARU Okt21+  ditarik +$  659,012 | akun habis 2009x (−$  863,870) | bersih $  -204,858
+  SEMUA        ditarik +$  835,424 | akun habis 2434x (−$1,046,620) | bersih $  -211,196
+  keranjang 34,279, layer maks terpakai 17, akun habis terakhir: 2026-10-02, 2026-10-02, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:12,894/32 2013:24,869/86 2014:13,715/28 2015:11,162/29 2016:15,980/38 2017:7,101/14 2018:6,479/16 2019:12,910/20 2020:51,436/107 2021:25,500/66 2022:30,871/80 2023:24,715/62 2024:49,119/110 2025:168,324/386 2026:380,349/1360
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  89% ≤90 hari 100% ≤1 th 100% | umur median     8 hari | ditarik median $   303 | bersih rata $   +49 (median $ -127)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     2 hari | ditarik median $   219 | bersih rata $   -79 (median $ -211)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     0 hari | ditarik median $   193 | bersih rata $   -96 (median $ -237)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  7.6% (1 dari    13 keranjang) | untung rata $ 28.4 | durasi median  9.2 jam | layer ≥10: 19.6% | nilai harapan/keranjang $ -6.23 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  6.6% (1 dari    15 keranjang) | untung rata $ 28.0 | durasi median  2.0 jam | layer ≥10: 19.0% | nilai harapan/keranjang $ -2.11 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  7.1% (1 dari    14 keranjang) | untung rata $ 32.4 | durasi median  0.2 jam | layer ≥10: 22.0% | nilai harapan/keranjang $ -0.42 | masih terbuka 0.0%
+  Keranjang BUY yang dibuka tiap jam pada 2 Okt 2026 (NFP 12:30 UTC):
+    00→habis 00:55/16L/$-430  01→tp 01:25/16L/$+219  02→tp 02:05/3L/$+9  03→tp 03:00/2L/$+6  04→tp 04:00/1L/$+2  05→tp 05:05/1L/$+2
+    06→tp 06:00/1L/$+2  07→tp 07:10/1L/$+2  08→tp 08:05/5L/$+19  09→tp 09:55/4L/$+13  10→tp 10:35/13L/$+121  11→tp 11:05/1L/$+2
+    12→tp 12:30/12L/$+99  13→tp 13:00/1L/$+2  14→tp 14:00/4L/$+13  15→tp 15:35/15L/$+180  16→tp 16:05/1L/$+2  17→tp 17:35/7L/$+32
+    18→tp 18:10/1L/$+2  19→tp 19:30/1L/$+2  20→terbuka/0L/$+0
+  EA selalu aktif sejak 17 Sep 2026 (setor ulang tiap habis): ditarik $11,100, akun habis 39x: 17/09 02:05, 17/09 09:30, 17/09 19:35, 18/09 12:25, 18/09 14:20, 21/09 00:00, 21/09 04:55, 21/09 14:00, 22/09 05:35, 22/09 07:50, 22/09 11:10, 22/09 14:40, 23/09 01:55, 23/09 07:35, 23/09 11:35, 23/09 13:45, 24/09 01:55, 24/09 09:00, 24/09 14:30, 25/09 04:55, 25/09 13:25, 25/09 14:05, 27/09 22:00, 28/09 00:30, 28/09 01:35, 28/09 05:20, 28/09 06:55, 28/09 12:40, 28/09 14:40, 28/09 20:05, 29/09 16:45, 30/09 13:35, 30/09 15:25, 01/10 07:20, 01/10 14:00, 02/10 00:55, 02/10 13:15, 02/10 14:50, 02/10 15:25
+
+B sama, maks 30 layer
+  LAMA <Okt21  ditarik +$  176,413 | akun habis  425x (−$  182,750) | bersih $    -6,337
+  BARU Okt21+  ditarik +$  659,012 | akun habis 2009x (−$  863,870) | bersih $  -204,858
+  SEMUA        ditarik +$  835,424 | akun habis 2434x (−$1,046,620) | bersih $  -211,196
+  keranjang 34,279, layer maks terpakai 17, akun habis terakhir: 2026-10-02, 2026-10-02, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:12,894/32 2013:24,869/86 2014:13,715/28 2015:11,162/29 2016:15,980/38 2017:7,101/14 2018:6,479/16 2019:12,910/20 2020:51,436/107 2021:25,500/66 2022:30,871/80 2023:24,715/62 2024:49,119/110 2025:168,324/386 2026:380,349/1360
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  89% ≤90 hari 100% ≤1 th 100% | umur median     8 hari | ditarik median $   303 | bersih rata $   +49 (median $ -127)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     2 hari | ditarik median $   219 | bersih rata $   -79 (median $ -211)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     0 hari | ditarik median $   193 | bersih rata $   -96 (median $ -237)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  7.6% (1 dari    13 keranjang) | untung rata $ 28.4 | durasi median  9.2 jam | layer ≥10: 19.6% | nilai harapan/keranjang $ -6.23 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  6.6% (1 dari    15 keranjang) | untung rata $ 28.0 | durasi median  2.0 jam | layer ≥10: 19.0% | nilai harapan/keranjang $ -2.11 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  7.1% (1 dari    14 keranjang) | untung rata $ 32.4 | durasi median  0.2 jam | layer ≥10: 22.0% | nilai harapan/keranjang $ -0.42 | masih terbuka 0.0%
+
+C sama, dua arah
+  LAMA <Okt21  ditarik +$  177,959 | akun habis  441x (−$  189,630) | bersih $   -11,671
+  BARU Okt21+  ditarik +$  698,144 | akun habis 2174x (−$  934,820) | bersih $  -236,676
+  SEMUA        ditarik +$  876,103 | akun habis 2615x (−$1,124,450) | bersih $  -248,347
+  keranjang 31,794, layer maks terpakai 17, akun habis terakhir: 2026-10-02, 2026-10-02, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:12,610/35 2013:26,899/76 2014:11,668/39 2015:11,472/28 2016:16,737/35 2017:6,978/17 2018:6,480/16 2019:11,931/32 2020:52,707/112 2021:25,313/61 2022:30,397/84 2023:24,790/68 2024:47,878/133 2025:170,666/457 2026:419,577/1422
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  94% ≤90 hari 100% ≤1 th 100% | umur median     7 hari | ditarik median $   228 | bersih rata $   -26 (median $ -202)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     1 hari | ditarik median $   190 | bersih rata $   -96 (median $ -240)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     0 hari | ditarik median $   124 | bersih rata $  -182 (median $ -306)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  7.1% (1 dari    14 keranjang) | untung rata $ 27.0 | durasi median  9.2 jam | layer ≥10: 18.7% | nilai harapan/keranjang $ -5.64 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  6.6% (1 dari    15 keranjang) | untung rata $ 28.6 | durasi median  2.0 jam | layer ≥10: 19.4% | nilai harapan/keranjang $ -1.78 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  7.4% (1 dari    14 keranjang) | untung rata $ 32.9 | durasi median  0.2 jam | layer ≥10: 22.2% | nilai harapan/keranjang $ -1.24 | masih terbuka 0.0%
+
+D x1,2 jarak $3 TP +$5 maks 20
+  LAMA <Okt21  ditarik +$   63,315 | akun habis  151x (−$   64,930) | bersih $    -1,615
+  BARU Okt21+  ditarik +$  265,420 | akun habis  759x (−$  326,370) | bersih $   -60,950
+  SEMUA        ditarik +$  328,735 | akun habis  910x (−$  391,300) | bersih $   -62,565
+  keranjang 26,137, layer maks terpakai 14, akun habis terakhir: 2026-09-30, 2026-10-02, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:4,574/10 2013:9,721/35 2014:4,508/10 2015:4,041/10 2016:5,812/12 2017:2,438/6 2018:2,457/5 2019:4,151/7 2020:18,108/38 2021:9,644/20 2022:11,904/24 2023:8,689/21 2024:17,580/38 2025:61,254/147 2026:163,854/527
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  61% ≤90 hari  95% ≤1 th 100% | umur median    20 hari | ditarik median $   275 | bersih rata $   -39 (median $ -155)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari  87% ≤90 hari 100% ≤1 th 100% | umur median     6 hari | ditarik median $   347 | bersih rata $   +99 (median $  -83)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     0 hari | ditarik median $   208 | bersih rata $  -134 (median $ -222)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  4.1% (1 dari    25 keranjang) | untung rata $ 14.2 | durasi median 12.0 jam | layer ≥10:  8.9% | nilai harapan/keranjang $ -3.76 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  3.3% (1 dari    30 keranjang) | untung rata $ 13.5 | durasi median  2.2 jam | layer ≥10:  7.9% | nilai harapan/keranjang $ -1.30 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  4.2% (1 dari    24 keranjang) | untung rata $ 14.0 | durasi median  0.2 jam | layer ≥10:  8.5% | nilai harapan/keranjang $ -4.81 | masih terbuka 0.0%
+
+E klaim x2: 0,05 lot jarak $1,5 TP +$3 maks 20
+  LAMA <Okt21  ditarik +$  243,114 | akun habis  640x (−$  275,200) | bersih $   -32,086
+  BARU Okt21+  ditarik +$  837,001 | akun habis 3292x (−$1,415,560) | bersih $  -578,559
+  SEMUA        ditarik +$1,080,115 | akun habis 3932x (−$1,690,760) | bersih $  -610,645
+  keranjang 90,242, layer maks terpakai 11, akun habis terakhir: 2026-10-02, 2026-10-02, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:15,044/50 2013:35,735/123 2014:18,246/44 2015:18,164/39 2016:23,827/55 2017:9,768/22 2018:11,485/19 2019:16,229/33 2020:67,353/172 2021:35,232/96 2022:38,095/125 2023:33,316/87 2024:65,450/166 2025:213,969/690 2026:478,212/2211
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  98% ≤90 hari 100% ≤1 th 100% | umur median     5 hari | ditarik median $   161 | bersih rata $   -83 (median $ -269)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     1 hari | ditarik median $   229 | bersih rata $  -109 (median $ -201)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     0 hari | ditarik median $   143 | bersih rata $   -86 (median $ -287)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  3.8% (1 dari    27 keranjang) | untung rata $ 12.3 | durasi median  3.2 jam | layer ≥10:  6.7% | nilai harapan/keranjang $ -4.34 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  3.6% (1 dari    28 keranjang) | untung rata $ 13.0 | durasi median  0.8 jam | layer ≥10:  7.2% | nilai harapan/keranjang $ -2.99 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  5.7% (1 dari    17 keranjang) | untung rata $ 15.2 | durasi median  0.0 jam | layer ≥10: 10.1% | nilai harapan/keranjang $-10.25 | masih terbuka 0.0%
+
+F x2: 0,05 lot jarak $3 TP +$3 maks 20
+  LAMA <Okt21  ditarik +$   51,163 | akun habis  137x (−$   58,910) | bersih $    -7,747
+  BARU Okt21+  ditarik +$  205,591 | akun habis  799x (−$  343,570) | bersih $  -137,979
+  SEMUA        ditarik +$  256,754 | akun habis  936x (−$  402,480) | bersih $  -145,726
+  keranjang 69,287, layer maks terpakai 11, akun habis terakhir: 2026-10-01, 2026-10-01, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:3,881/9 2013:9,849/29 2014:3,895/11 2015:3,141/9 2016:4,769/11 2017:2,112/3 2018:1,516/7 2019:2,899/7 2020:13,994/30 2021:6,416/25 2022:9,908/21 2023:6,817/17 2024:11,582/31 2025:43,310/143 2026:132,664/583
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  54% ≤90 hari  88% ≤1 th 100% | umur median    27 hari | ditarik median $   245 | bersih rata $   -56 (median $ -185)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari  89% ≤90 hari 100% ≤1 th 100% | umur median     5 hari | ditarik median $   209 | bersih rata $  -106 (median $ -221)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     1 hari | ditarik median $   246 | bersih rata $  -116 (median $ -184)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  1.3% (1 dari    75 keranjang) | untung rata $  4.0 | durasi median  4.8 jam | layer ≥10:  2.2% | nilai harapan/keranjang $ -1.79 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  1.2% (1 dari    85 keranjang) | untung rata $  3.3 | durasi median  1.0 jam | layer ≥10:  1.8% | nilai harapan/keranjang $ -1.78 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  1.9% (1 dari    52 keranjang) | untung rata $  4.6 | durasi median  0.1 jam | layer ≥10:  3.0% | nilai harapan/keranjang $ -3.83 | masih terbuka 0.0%
+
+G x2: 0,01 lot jarak $3 TP +$3 maks 20
+  LAMA <Okt21  ditarik +$   19,270 | akun habis   58x (−$   24,940) | bersih $    -5,670
+  BARU Okt21+  ditarik +$   90,316 | akun habis  416x (−$  178,880) | bersih $   -88,564
+  SEMUA        ditarik +$  109,585 | akun habis  474x (−$  203,820) | bersih $   -94,235
+  keranjang 68,809, layer maks terpakai 13, akun habis terakhir: 2026-09-28, 2026-09-30, 2026-10-02, 2026-10-02
+  per tahun (ditarik $ / habis x): 2012:1,234/4 2013:3,505/13 2014:1,602/4 2015:1,065/5 2016:1,599/3 2017:605/1 2018:910/2 2019:1,138/2 2020:5,019/15 2021:3,437/9 2022:4,029/7 2023:2,428/6 2024:4,802/14 2025:19,601/65 2026:58,611/324
+  Akun baru tiap awal bulan (maks 1 tahun):
+  mulai LAMA <Okt21        n 112 | habis ≤30 hari  31% ≤90 hari  62% ≤1 th  96% | umur median    61 hari | ditarik median $   241 | bersih rata $   -64 (median $ -189)
+  mulai BARU Okt21+        n  61 | habis ≤30 hari  61% ≤90 hari  93% ≤1 th 100% | umur median    19 hari | ditarik median $   291 | bersih rata $   -53 (median $ -139)
+  tiap Senin 12 bln terakhir n  52 | habis ≤30 hari 100% ≤90 hari 100% ≤1 th 100% | umur median     1 hari | ditarik median $   195 | bersih rata $  -169 (median $ -235)
+  Satu keranjang tiap 6 jam (tidak bergantung aturan entry EA):
+  LAMA <Okt21                n 10143 | akun habis  0.6% (1 dari   156 keranjang) | untung rata $  1.7 | durasi median  4.8 jam | layer ≥10:  2.2% | nilai harapan/keranjang $ -1.05 | masih terbuka 0.0%
+  BARU Okt21+                n  5429 | akun habis  0.6% (1 dari   165 keranjang) | untung rata $  1.3 | durasi median  1.0 jam | layer ≥10:  1.8% | nilai harapan/keranjang $ -1.28 | masih terbuka 0.0%
+  12 bln terakhir            n  1084 | akun habis  1.3% (1 dari    77 keranjang) | untung rata $  1.7 | durasi median  0.1 jam | layer ≥10:  3.0% | nilai harapan/keranjang $ -3.83 | masih terbuka 0.0%
+

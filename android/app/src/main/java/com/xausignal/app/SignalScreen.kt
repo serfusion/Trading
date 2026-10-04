@@ -256,8 +256,9 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
         Text(signal.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
     signal.warText()?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor) }
-    if (signal.type == "signal" && (signal.isLayer() || signal.newsTag() != null)) {
+    if (signal.type == "signal" && (signal.isLayer() || signal.newsTag() != null || signal.wrTinggi() != null)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            signal.wrTinggi()?.let { Pill("🎯 WR tinggi ${fmt(it.optDouble("wr"), 0)}%", BuyColor, solid = true) }
             if (signal.isLayer()) Pill("🔁 Lapisan • lot ½", Gold)
             signal.newsTag()?.let { Pill("📰 Setelah ${it.optString("berita").ifBlank { "berita" }}", Gold) }
         }

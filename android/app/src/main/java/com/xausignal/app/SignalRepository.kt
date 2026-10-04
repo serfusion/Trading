@@ -116,6 +116,9 @@ fun withLotMult(lot: Double, mult: Double): Double =
 /** 📰 Sinyal setelah berita besar AS (≤ 4 jam): judul & teks riwayat dari cloud; null bila bukan. */
 fun SignalEvent.newsTag(): JSONObject? = json.optJSONObject("news")
 
+/** 🎯 WR tinggi (cloud 3 Okt 2026): lapisan BTC saat volatilitas ≥ 1,5× normal — riwayat WR 76–78%; null bila bukan. */
+fun SignalEvent.wrTinggi(): JSONObject? = json.optJSONObject("wr_tinggi")
+
 /** Peringkat dari cloud: zap (⚡ kesempatan emas), silver (🥈), bronze (🥉), biasa; "" = sinyal lama. */
 fun SignalEvent.tier(): String = str("tier")
 
