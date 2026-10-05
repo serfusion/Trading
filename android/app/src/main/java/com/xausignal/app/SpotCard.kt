@@ -51,7 +51,8 @@ private fun objects(arr: JSONArray?): List<JSONObject> =
 
 /**
  * 💎 Spot Binance (aplikasi 4.1, permintaan pengguna 4 Okt 2026): koin dengan peluang tinggi naik lagi +3% dalam 10 hari
- * (cloud/api/_spot.py, research/spot_peluang.py). Kartu BELI (harga beli, limit jual TP, harga sekarang, batas waktu)
+ * (cloud/api/_spot.py, research/spot_peluang.py). Aplikasi 4.2: cloud memindai tiap 10 menit ±100 koin volume terbesar
+ * (research/spot_pindai.py), jeda saat BTC di bawah SMA200. Kartu BELI (harga beli, limit jual TP, harga sekarang, batas waktu)
  * dan CLOSE terakhir. Data: spot_status cloud; cadangan: pesan spot_signal / spot_close di HP. Info saja, tanpa order.
  */
 @Composable
@@ -80,23 +81,50 @@ fun SpotSection(events: List<SignalEvent>) {
                 ) { Text("💎", style = MaterialTheme.typography.titleLarge) }
                 Column {
                     Text("Belum ada koin berpeluang tinggi", fontWeight = FontWeight.ExtraBold)
-                    Text("Dipindai tiap hari 07:05 WIB • 20 koin" +
-                        (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: ""),
-                        style = MaterialTheme.typography.labelMedium, color = Muted)
+                    ScanLine(st)
                 }
             }
         }
+    } else ScanLine(st)
+    if (st?.optBoolean("btc_filter", false) == true && st.has("btc_up") && !st.isNull("btc_up") &&
+        !st.optBoolean("btc_up")) {
+        NoteBox("⏸ BTC di bawah rata-rata 200 hari: sinyal spot dijeda. Teruji: membeli koin saat BTC turun tren lebih " +
+            "sering rugi besar (2022). Posisi yang sudah ada tetap dipantau sampai close.", SellColor)
     }
     open.forEach { SpotOpenCard(it, st) }
     if (closed.isNotEmpty()) SpotClosedCard(closed.take(5))
-    st?.optJSONObject("teruji")?.optJSONObject("baru")?.let { b ->
+    st?.optJSONObject("teruji")?.let { t ->
+        val b = t.optJSONObject("baru") ?: return@let
+        val lama = t.optJSONObject("lama")
         Text(
-            "Teruji Okt 2021–2026: naik +${fmt(st.optDouble("tp_pct", 3.0), 0)}% di ${fmt(b.optDouble("wr"), 0)}% " +
-                "sinyal • rata ${spotPct(b.optDouble("avg"))} • rugi rata ${spotPct(b.optDouble("kalah"))} • " +
-                "terburuk ${spotPct(b.optDouble("terburuk"))}",
+            "Teruji Okt 2021–Agu 2026 (${t.optString("skema").ifBlank { "20 koin, harian" }}): naik " +
+                "+${fmt(st.optDouble("tp_pct", 3.0), 0)}% di ${fmt(b.optDouble("wr"), 0)}% sinyal • rata " +
+                "${spotPct(b.optDouble("avg"))} • rugi rata ${spotPct(b.optDouble("kalah"))} • terburuk " +
+                spotPct(b.optDouble("terburuk")) +
+                (if (b.has("per_bulan")) " • ±${fmt(b.optDouble("per_bulan"), 0)} sinyal/bulan" else "") +
+                (if (b.has("cagr")) " • portofolio ${spotPct(b.optDouble("cagr"))}/th (DD ${spotPct(b.optDouble("dd"))})"
+                else "") +
+                (lama?.takeIf { it.has("cagr") }?.let {
+                    " • sebelum Okt 2021: naik ${fmt(it.optDouble("wr"), 0)}%, portofolio ${spotPct(it.optDouble("cagr"))}/th " +
+                        "(DD ${spotPct(it.optDouble("dd"))})"
+                } ?: ""),
             style = MaterialTheme.typography.labelSmall, color = Muted
         )
     }
+}
+
+/** "Dipindai tiap 10 menit • 100 koin • terakhir 14:32 WIB" (cloud spot_status). */
+@Composable
+private fun ScanLine(st: JSONObject?) {
+    val every = st?.optInt("every_min", 0) ?: 0
+    val text = if (every > 0) {
+        "Dipindai tiap $every menit • ${st?.optInt("coins") ?: 0} koin" +
+            (st?.optString("scan_at")?.takeIf { it.isNotBlank() }?.let { " • terakhir ${formatTime(it)}" } ?: "")
+    } else {                                   // cloud lama (pindai harian)
+        "Dipindai tiap hari 07:05 WIB • 20 koin" +
+            (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: "")
+    }
+    Text(text, style = MaterialTheme.typography.labelMedium, color = Muted)
 }
 
 @Composable

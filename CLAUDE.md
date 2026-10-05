@@ -238,12 +238,25 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Cek kompilasi lokal tanpa Android SDK: proyek Compose Desktop (CMP 1.6.11, Maven Central) + stub Android, lihat
   catatan di PROGRES.md. Render gambar pratinjau TIDAK bisa (runtime androidx.collection hanya di Google Maven, diblokir).
 
+## Aplikasi 4.2 (5 Okt 2026, permintaan pengguna)
+- Tab Sinyal: XAU • BTC • ETH dalam SATU baris (kotak sepertiga: arah D1+H4, level ▲ BUY / ▼ SELL, 🔁/⏸) di satu kartu.
+  Hitung mundur "cek" candle H1 DIHAPUS (pengguna: tidak perlu) → lingkaran ⏱ = berita USD penting ≤ 24 jam, bila tidak
+  ada = sesi pasar berikutnya (London/New York buka 08:00 lokal, emas tutup Jumat 17:00 / buka Minggu 18:00 New York).
+  `StatusCard.kt`. Pratinjau desktop: proyek CMP 1.5.12 + Kotlin 1.9.21 (runtime hanya Maven Central; CMP 1.6 butuh
+  Google Maven yang diblokir) dengan file minimal + stub, `ImageComposeScene` → PNG.
+
 ## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
 - DIPASANG 4 Okt (permintaan pengguna "infokan di apk mulai dari sinyal dan close spot", semua koin):
   `research/spot_peluang.py --final` (gradient boosting walk-forward, 20 koin live + koin ambruk) → `cloud/api/
   spot_model.json` + `_spot.py` (harian 07:05 WIB, cek tiap jam, baris Supabase `spot`, env SPOT_SIGNALS/SPOT_MAX) →
   aplikasi 4.1 kartu 💎 (`SpotCard.kt`, pair diikuti "SPOT"). Sinyal = p ≥ 93% ATAU 3 merah ≥10% +SMA200; TP +3%/10 hari:
   BARU naik 91% (acak 76%), +1,16%/sinyal, rugi rata −14%, portofolio 10 slot +14%/th DD −19% (docs/SPOT_PELUANG.md).
+- 5 Okt 2026 (permintaan pengguna URGENT "dipindai beberapa menit, koin bukan hanya 20"; `docs/SPOT_PINDAI.md`,
+  `research/spot_pindai.py`): cloud memindai TIAP TICK (10 mnt) ±100 pair USDT volume terbesar (env SPOT_COINS,
+  SPOT_MIN_VOL), candle harian berjalan = candle terakhir, + filter BTC > SMA200 (env SPOT_BTC_FILTER), maks 20 posisi
+  (SPOT_MAX), TP dicek candle 15 mnt setelah entry. Teruji BARU 54 koin: 52 sinyal/bln, naik 91%, +1,16%/sin, 20 slot
+  +13%/th DD −20% (tanpa filter BTC: DD −42%). Model tidak berubah; setelah `spot_peluang --final` WAJIB jalankan
+  `python -m research.spot_pindai --simpan` (angka teruji skema terpasang). Aplikasi 4.2.
 - `research/spot_dip.py` (704 kombinasi, 21 koin hidup) & `spot_dip2.py` (+ koin ambruk/delisting, portofolio slot,
   pilih dari LAMA). WR per trade 80–95% tetapi kalah rata −13..−25% (terburuk −55..−100%); portofolio BARU terbaik
   ±+5–7%/th DD −13..−24% (BTC beli-tahan +12%/th DD −77%). Kandidat: 3 merah ≥10% +SMA200, TP 5%, maks 10 hari,

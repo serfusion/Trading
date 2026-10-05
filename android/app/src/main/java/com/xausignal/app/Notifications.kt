@@ -116,7 +116,7 @@ object Notifications {
         val title = "💎 BELI SPOT $coin/USDT • peluang naik ${fmt(event.num("p"), 0)}%"
         val text = "Beli ±${spotPx(event.num("entry"))} lalu pasang limit jual ${spotPx(event.num("tp"))} " +
             "(+${fmt(event.num("tp_pct"), 0)}%). Belum kena sampai ${formatTime(event.str("deadline"))} → jual. " +
-            "Maks 10% modal spot per sinyal."
+            "Maks ${100 / maxOf(event.json.optInt("max_open", 10), 1)}% modal spot per sinyal."
         post(context, event.id.hashCode(), title, text)
     }
 

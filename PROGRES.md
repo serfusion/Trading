@@ -181,3 +181,11 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 💎 Spot dipasang (izin pengguna): docs/SPOT_PELUANG.md, aplikasi 4.1. GBM pakai random_state=0 (tanpa itu early
   stopping acak -> angka berubah tiap putaran). Sumber data live belum bisa dites dari sesi (host Binance diblokir).
 
+### 5 Okt 2026 — aplikasi 4.2 & spot tiap 10 menit
+- Permintaan pengguna: XAU/BTC/ETH satu baris, ganti hitung mundur "cek", spot dipindai beberapa menit & koin lebih
+  banyak (URGENT). `StatusCard.kt` dirombak (3 kotak sebaris + ⏱ berita/sesi), `SpotCard.kt` (baris pindai, ⏸ BTC).
+- `research/spot_pindai.py` → `docs/SPOT_PINDAI.md`: pindai tiap jam saja +0,88%/sin (harian +1,26%); 54 koin tanpa
+  filter DD −42%; + BTC > SMA200: 52 sinyal/bln, naik 91%, +1,16%/sin, 20 slot +13%/th DD −20% (LAMA +27%, DD −43%) →
+  DIPASANG di `cloud/api/_spot.py` (izin = permintaan eksplisit pengguna). 13 tes spot (`tests/test_cloud_spot.py`).
+- Kompilasi Kotlin dicek (Compose Desktop 1.6.11 + stub); pratinjau PNG dengan CMP 1.5.12. Binance tetap diblokir dari
+  sesi → sumber live dicek setelah redeploy (`/api/tick` → `spot`).
