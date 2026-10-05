@@ -136,8 +136,9 @@ def walk_forward(df: pd.DataFrame, target: str, n: int) -> np.ndarray:
     return p
 
 
-def take(df: pd.DataFrame, mask: np.ndarray, i: int) -> pd.DataFrame:
-    sel = df[mask]
+def take(df: pd.DataFrame, mask: np.ndarray, i: int, p: np.ndarray) -> pd.DataFrame:
+    df = df.assign(p=p)
+    sel = df[mask & df[f"out{i}"].notna().to_numpy()]
     out = []
     for coin, g in sel.groupby("coin"):
         free = None
@@ -146,7 +147,7 @@ def take(df: pd.DataFrame, mask: np.ndarray, i: int) -> pd.DataFrame:
                 continue
             slip = 0.002 if row.liq_rank > 50 else 0.0
             out.append({"coin": coin, "t": row.t_in, "t_out": row[f"out{i}"], "e": row.e, "r": row[f"r{i}_"] - slip,
-                        "small": row.liq_rank > 50})
+                        "small": row.liq_rank > 50, "p": row.p})
             free = row[f"out{i}"]
     return pd.DataFrame(out).sort_values("t") if out else pd.DataFrame()
 
@@ -156,7 +157,7 @@ def portfolio(tr: pd.DataFrame, closes: dict[str, pd.Series], slots: int, start,
     if tr.empty:
         return {}
     days = pd.date_range(tr.t.min().normalize(), tr.t_out.max().normalize(), freq="D", tz="UTC")
-    by = {t: g for t, g in tr.groupby(tr.t.dt.normalize())}
+    by = {t: g.sort_values("p", ascending=False) for t, g in tr.groupby(tr.t.dt.normalize())}
     cash, pos, eq, prev = 1.0, [], [], None
 
     def val(when):
@@ -216,7 +217,7 @@ def main() -> None:
             m = liq & (p >= thr)
             if m.sum() < 30:
                 continue
-            tr = take(df, m, i)
+            tr = take(df, m, i, p)
             pl, pb = portfolio(tr, closes, 10, s0, s1), portfolio(tr, closes, 10, s1, s2)
             L.append(f"   p≥{thr}: {line(tr)} | kecil {tr.small.mean() * 100:.0f}%")
             if pl and pb:
