@@ -156,14 +156,18 @@ def run() -> tuple[int, dict]:
                                           usdchf)
     except Exception as exc:  # noqa: BLE001 - gap tidak boleh mengganggu sinyal XAU
         result["gap_error"] = str(exc)
-    try:                                   # 💎 sinyal spot Binance harian (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
-        if env.get("SPOT_SIGNALS", "1") == "1":
+    try:                                   # 💎 sinyal spot Binance (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
+        if env.get("SPOT_SIGNALS", "1") == "1":   # 5 Okt: tiap tick, 100 koin, BTC > SMA200, filter kualitas
             import _spot
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
             result["spot"] = _spot.spot_tick(datetime.now(timezone.utc), _core.RowStore(store, "spot"),
                                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "10")),
-                                             deadline_s=max(3.0, 45.0 - (time.monotonic() - started)))
+                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "20")),
+                                             deadline_s=max(4.0, 48.0 - (time.monotonic() - started)),
+                                             btc_filter=env.get("SPOT_BTC_FILTER", "1") == "1",
+                                             top=int(env.get("SPOT_COINS", "100")),
+                                             min_vol=float(env.get("SPOT_MIN_VOL", "5000000")),
+                                             use_quality=env.get("SPOT_QUALITY", "1") == "1")
     except Exception as exc:  # noqa: BLE001 - spot tidak boleh mengganggu sinyal lain
         result["spot_error"] = str(exc)
     return 200, result

@@ -82,7 +82,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item { TickerCard(prices, connection) }
-        item { StatusCards(prices, follow) }      // 📊 status tren & hitung mundur (3.24)
+        item { StatusCards(prices, follow) }      // 📊 XAU • BTC • ETH satu baris + ⏱ berita/sesi berikutnya (4.2)
         val active = open.size + orphans.size
         item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
         items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
@@ -97,7 +97,8 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
                         ) { Text("⏳", style = MaterialTheme.typography.titleLarge) }
                         Column {
                             Text("Belum ada sinyal", fontWeight = FontWeight.ExtraBold)
-                            Text("Cek berikutnya ${nextCheckText()}", style = MaterialTheme.typography.labelMedium, color = Muted)
+                            Text("Cloud memantau tiap 10 menit • notifikasi otomatis saat ada sinyal",
+                                style = MaterialTheme.typography.labelMedium, color = Muted)
                         }
                     }
                 }
@@ -451,15 +452,6 @@ fun CloudOpenCard(group: List<CloudOpen>, hb: SignalEvent?) {
             }
         }
     }
-}
-
-/** Jam cek cloud berikutnya (menit :02, :12, … :52), WIB. */
-fun nextCheckText(): String {
-    val now = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
-    val m = now.minute
-    val next = ((m - 2).floorDiv(10) + 1) * 10 + 2
-    val t = now.withSecond(0).withNano(0).withMinute(0).plusMinutes(next.toLong())
-    return String.format(java.util.Locale.US, "%02d:%02d WIB", t.hour, t.minute)
 }
 
 /** Level TUTUP (channel keluar) untuk candle H1 yang sedang berjalan, dari heartbeat cloud (`exits`). */

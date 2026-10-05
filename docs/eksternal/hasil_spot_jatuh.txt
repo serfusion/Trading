@@ -1,0 +1,60 @@
+# Spot: semua koin Binance + deteksi turun jauh (research/spot_jatuh.py)
+Koin dengan data: 575; semesta harian = 100 volume terbesar (7 hari s.d. kemarin), riwayat >= 201 hari.
+Sinyal model terpasang (walk-forward) + BTC > SMA200, pindai harian (pindai tiap 10 menit: lihat SPOT_PINDAI).
+
+## Dasar (yang terpasang)
+   per trade: LAMA n2731 naik 93.9% rata +1.14% jatuh≥10% 33% | BARU n4864 naik 89.9% rata +0.64% jatuh≥10% 29% | terburuk -59%
+   portofolio 20 slot: LAMA +44.8%/th DD -45% | BARU +10.8%/th DD -37%
+   BARU per bulan 81.1; rata kalah -17.7%; per tahun: 2020:n606 90% +0.8% 2021:n2835 94% +1.0% 2023:n1236 91% +0.8% 2024:n1882 89% +0.6% 2025:n954 90% +0.4% 2026:n82 98% +2.5%
+   sempat turun >= 10% dari beli: LAMA 33% posisi, tetap kena TP 82%, rata akhir -2.1%
+   sempat turun >= 10% dari beli: BARU 29% posisi, tetap kena TP 66%, rata akhir -4.4%
+   sempat turun >= 20% dari beli: LAMA 12% posisi, tetap kena TP 57%, rata akhir -9.5%
+   sempat turun >= 20% dari beli: BARU 12% posisi, tetap kena TP 35%, rata akhir -12.4%
+
+## A. Aturan sederhana (dilewati bila ...): LAMA -> BARU
+   koin umur < 365 hari                   dilewati 18.7% | sisa LAMA n1867 naik 93.9% rata +1.16% jatuh≥10% 32% | BARU n4305 naik 90.2% rata +0.70% jatuh≥10% 28% | terburuk -59% | LAMA rata +0.02% | pf LAMA +31.6%/th DD -44% | BARU +12.9%/th DD -33%
+   koin umur < 730 hari                   dilewati 50.0% | sisa LAMA n621 naik 93.7% rata +1.03% jatuh≥10% 30% | BARU n3173 naik 90.5% rata +0.80% jatuh≥10% 29% | terburuk -59% | LAMA rata -0.11% | pf LAMA +12.4%/th DD -41% | BARU +13.9%/th DD -30%
+   ambruk >= 80% dari puncak 1 th         dilewati  8.9% | sisa LAMA n2660 naik 93.9% rata +1.16% jatuh≥10% 32% | BARU n4262 naik 90.1% rata +0.70% jatuh≥10% 29% | terburuk -59% | LAMA rata +0.02% | pf LAMA +45.6%/th DD -43% | BARU +11.5%/th DD -36%
+   ambruk >= 60% dari puncak 1 th         dilewati 29.9% | sisa LAMA n2303 naik 94.0% rata +1.14% jatuh≥10% 33% | BARU n3023 naik 89.7% rata +0.59% jatuh≥10% 30% | terburuk -59% | LAMA rata +0.00% | pf LAMA +36.9%/th DD -45% | BARU +7.7%/th DD -33%
+   volume panik >= 3x                     dilewati  9.1% | sisa LAMA n2548 naik 93.9% rata +1.17% jatuh≥10% 32% | BARU n4354 naik 90.2% rata +0.77% jatuh≥10% 27% | terburuk -59% | LAMA rata +0.03% | pf LAMA +43.8%/th DD -44% | BARU +14.8%/th DD -32%
+   volume panik >= 2x                     dilewati 16.9% | sisa LAMA n2337 naik 93.8% rata +1.13% jatuh≥10% 31% | BARU n3971 naik 90.1% rata +0.75% jatuh≥10% 27% | terburuk -59% | LAMA rata -0.01% | pf LAMA +31.0%/th DD -44% | BARU +13.3%/th DD -31%
+   pasar crash (median koin <= -5%)       dilewati 35.9% | sisa LAMA n1541 naik 92.1% rata +0.54% jatuh≥10% 37% | BARU n3325 naik 89.4% rata +0.41% jatuh≥10% 27% | terburuk -59% | LAMA rata -0.60% | pf LAMA +27.8%/th DD -47% | BARU +7.6%/th DD -34%
+   pasar crash (median koin <= -3%)       dilewati 49.8% | sisa LAMA n1282 naik 91.0% rata +0.21% jatuh≥10% 39% | BARU n2531 naik 89.8% rata +0.50% jatuh≥10% 28% | terburuk -55% | LAMA rata -0.93% | pf LAMA +13.0%/th DD -48% | BARU +10.2%/th DD -24%
+   >= 70% koin di bawah SMA50             dilewati 25.4% | sisa LAMA n2427 naik 94.0% rata +1.12% jatuh≥10% 32% | BARU n3239 naik 89.2% rata +0.45% jatuh≥10% 30% | terburuk -59% | LAMA rata -0.02% | pf LAMA +41.2%/th DD -45% | BARU +6.1%/th DD -36%
+   >= 10 sinyal bersamaan                 dilewati 71.4% | sisa LAMA n591 naik 89.8% rata +0.52% jatuh≥10% 33% | BARU n1580 naik 88.6% rata +0.06% jatuh≥10% 29% | terburuk -59% | LAMA rata -0.62% | pf LAMA +9.3%/th DD -11% | BARU +0.3%/th DD -32%
+   >= 5 sinyal bersamaan                  dilewati 87.3% | sisa LAMA n271 naik 87.1% rata -0.10% jatuh≥10% 37% | BARU n690 naik 84.2% rata -1.09% jatuh≥10% 30% | terburuk -59% | LAMA rata -1.24% | pf LAMA -1.1%/th DD -9% | BARU -7.6%/th DD -42%
+   BTC turun >= 5% 3 hari                 dilewati 32.7% | sisa LAMA n1384 naik 92.4% rata +1.01% jatuh≥10% 31% | BARU n3724 naik 88.2% rata +0.31% jatuh≥10% 31% | terburuk -59% | LAMA rata -0.13% | pf LAMA +34.9%/th DD -21% | BARU +5.7%/th DD -42%
+   BTC -10% dari high 20 hari             dilewati 46.1% | sisa LAMA n1054 naik 91.3% rata +0.77% jatuh≥10% 30% | BARU n3037 naik 88.5% rata +0.32% jatuh≥10% 31% | terburuk -59% | LAMA rata -0.37% | pf LAMA +25.2%/th DD -21% | BARU +6.4%/th DD -38%
+   volatilitas koin tinggi (vol14 >= 8%)  dilewati 57.4% | sisa LAMA n1010 naik 94.4% rata +1.55% jatuh≥10% 28% | BARU n2222 naik 89.6% rata +0.80% jatuh≥10% 25% | terburuk -58% | LAMA rata +0.41% | pf LAMA +43.9%/th DD -14% | BARU +5.5%/th DD -32%
+   rank volume 51-100                     dilewati 42.7% | sisa LAMA n1574 naik 94.0% rata +1.14% jatuh≥10% 31% | BARU n2781 naik 90.3% rata +0.54% jatuh≥10% 29% | terburuk -59% | LAMA rata -0.00% | pf LAMA +37.7%/th DD -44% | BARU +9.1%/th DD -27%
+   turun 30 hari >= 30%                   dilewati 12.5% | sisa LAMA n2498 naik 94.0% rata +1.17% jatuh≥10% 32% | BARU n4145 naik 90.2% rata +0.66% jatuh≥10% 29% | terburuk -59% | LAMA rata +0.03% | pf LAMA +40.2%/th DD -45% | BARU +13.1%/th DD -36%
+
+## B. Model risiko jatuh (walk-forward, dilatih dari sinyal tahun-tahun sebelumnya)
+   AUC LAMA: 0.577 (0,5 = tebak acak) n 2125
+   AUC BARU: 0.534 (0,5 = tebak acak) n 4864
+   lewati risiko >= persentil 90 LAMA (0.60): dilewati 4% | sisa LAMA n2518 naik 94.2% rata +1.29% jatuh≥10% 31% | BARU n4756 naik 89.8% rata +0.63% jatuh≥10% 28% | terburuk -59% | pf LAMA +37.8%/th DD -49% | BARU +9.4%/th DD -37%
+      yang dilewati BARU: n108 naik 94% rata +0.83%
+   lewati risiko >= persentil 80 LAMA (0.49): dilewati 9% | sisa LAMA n2306 naik 94.4% rata +1.41% jatuh≥10% 30% | BARU n4600 naik 89.8% rata +0.68% jatuh≥10% 28% | terburuk -59% | pf LAMA +48.1%/th DD -35% | BARU +10.4%/th DD -35%
+      yang dilewati BARU: n264 naik 92% rata -0.07%
+   lewati risiko >= persentil 70 LAMA (0.40): dilewati 16% | sisa LAMA n2093 naik 94.4% rata +1.48% jatuh≥10% 29% | BARU n4259 naik 89.5% rata +0.66% jatuh≥10% 28% | terburuk -59% | pf LAMA +55.1%/th DD -21% | BARU +9.8%/th DD -34%
+      yang dilewati BARU: n605 naik 93% rata +0.49%
+
+## D. Varian sinyal (dipilih bila LAMA dan BARU sama-sama lebih baik)
+   p>=0.95 + 3 merah                             : LAMA n1896 naik 94.3% rata +1.36% jatuh≥10% 32% | BARU n3037 naik 90.5% rata +0.78% jatuh≥10% 28% | terburuk -59% | pf LAMA +31.5%/th DD -45% | BARU +7.1%/th DD -31%
+   p>=0.97 + 3 merah                             : LAMA n1439 naik 94.2% rata +1.49% jatuh≥10% 31% | BARU n2407 naik 90.3% rata +0.83% jatuh≥10% 27% | terburuk -59% | pf LAMA +40.5%/th DD -29% | BARU +8.4%/th DD -27%
+   p>=0.93 tanpa 3 merah                         : LAMA n2015 naik 94.9% rata +1.23% jatuh≥10% 36% | BARU n3501 naik 90.3% rata +0.62% jatuh≥10% 31% | terburuk -59% | pf LAMA +40.6%/th DD -43% | BARU +9.2%/th DD -25%
+   hanya 3 merah                                 : LAMA n1114 naik 93.5% rata +1.44% jatuh≥10% 26% | BARU n2140 naik 89.7% rata +0.70% jatuh≥10% 27% | terburuk -59% | pf LAMA +39.8%/th DD -20% | BARU +6.3%/th DD -27%
+   model dilatih 100 koin teratas                : LAMA n3268 naik 93.4% rata +1.01% jatuh≥10% 32% | BARU n4728 naik 89.8% rata +0.73% jatuh≥10% 28% | terburuk -63% | pf LAMA +63.7%/th DD -40% | BARU +12.7%/th DD -34%
+   umur>=1th, tanpa volume panik, tanpa ambruk 80%: LAMA n1777 naik 94.1% rata +1.25% jatuh≥10% 31% | BARU n3580 naik 90.3% rata +0.77% jatuh≥10% 27% | terburuk -58% | pf LAMA +34.0%/th DD -45% | BARU +11.1%/th DD -30%
+      teruji -> spot_model.json: {"skema": "semua koin Binance (100 volume terbesar), BTC > SMA200, filter kualitas, maks 20 posisi", "baru": {"n": 3580, "wr": 90.3, "avg": 0.77, "kalah": -17.2, "terburuk": -48.2, "per_bulan": 59.7, "cagr": 11.1, "dd": -30.0}, "lama": {"n": 1777, "wr": 94.1, "avg": 1.25, "cagr": 34.0, "dd": -45.3}, "jatuh": {"10": {"porsi": 27.3, "tetap_tp": 65.6, "akhir": -4.3}, "20": {"porsi": 11.4, "tetap_tp": 35.9, "akhir": -11.9}}, "tahun": {"2020": {"n": 362, "wr": 90.3, "avg": 0.99}, "2021": {"n": 1940, "wr": 93.7, "avg": 1.01}, "2023": {"n": 919, "wr": 90.8, "avg": 0.9}, "2024": {"n": 1519, "wr": 89.5, "avg": 0.83}, "2025": {"n": 589, "wr": 91.9, "avg": 0.89}, "2026": {"n": 28, "wr": 96.4, "avg": 2.59}}}
+     + p>=0.95                                   : LAMA n1272 naik 94.5% rata +1.38% jatuh≥10% 30% | BARU n2411 naik 90.5% rata +0.80% jatuh≥10% 27% | terburuk -58% | pf LAMA +28.1%/th DD -47% | BARU +6.6%/th DD -29%
+   semesta 50 koin teratas                       : LAMA n1589 naik 94.0% rata +1.15% jatuh≥10% 31% | BARU n2840 naik 90.3% rata +0.55% jatuh≥10% 29% | terburuk -59% | pf LAMA +38.0%/th DD -44% | BARU +8.8%/th DD -27%
+   semesta 200 koin teratas                      : LAMA n3404 naik 93.7% rata +1.00% jatuh≥10% 35% | BARU n7686 naik 89.7% rata +0.69% jatuh≥10% 29% | terburuk -80% | pf LAMA +45.6%/th DD -47% | BARU +12.7%/th DD -48%
+
+## C. Keluar lebih awal saat pasar/koin jatuh (dicek tiap close harian, jual di open besok)
+   pasar crash (median koin <= -5%)  : LAMA n2731 naik 86.3% rata +0.31% jatuh≥10% 33% | BARU n4864 naik 83.9% rata +0.33% jatuh≥10% 29% | terburuk -50% | pf LAMA -3.1%/th DD -36% | BARU +10.9%/th DD -24%
+   BTC turun ke bawah SMA200         : LAMA n2731 naik 92.7% rata +0.94% jatuh≥10% 33% | BARU n4864 naik 88.9% rata +0.56% jatuh≥10% 29% | terburuk -59% | pf LAMA +39.3%/th DD -34% | BARU +9.7%/th DD -35%
+   BTC turun >= 5% sehari            : LAMA n2731 naik 91.2% rata +0.95% jatuh≥10% 33% | BARU n4864 naik 87.6% rata +0.43% jatuh≥10% 29% | terburuk -59% | pf LAMA +26.8%/th DD -36% | BARU +7.2%/th DD -40%
+   koin turun >= 10% dari beli (close): LAMA n2731 naik 88.5% rata +0.29% jatuh≥10% 33% | BARU n4864 naik 84.8% rata +0.28% jatuh≥10% 29% | terburuk -49% | pf LAMA +6.2%/th DD -34% | BARU +7.9%/th DD -29%
+   koin turun >= 15% dari beli (close): LAMA n2731 naik 91.6% rata +0.58% jatuh≥10% 33% | BARU n4864 naik 88.0% rata +0.39% jatuh≥10% 29% | terburuk -50% | pf LAMA +22.3%/th DD -32% | BARU +8.8%/th DD -37%
+   koin turun >= 20% dari beli (close): LAMA n2731 naik 93.0% rata +0.73% jatuh≥10% 33% | BARU n4864 naik 89.3% rata +0.52% jatuh≥10% 29% | terburuk -60% | pf LAMA +29.4%/th DD -34% | BARU +10.2%/th DD -38%

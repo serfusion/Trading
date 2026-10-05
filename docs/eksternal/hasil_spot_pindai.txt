@@ -1,0 +1,167 @@
+# Pindai spot tiap jam & lebih banyak koin (research/spot_pindai.py)
+Model terpasang (gradient boosting, ambang 0.93, + aturan 3 merah), walk-forward per tahun. TP +3% / 10 hari, biaya 0,30%. LAMA < Okt 2021, BARU >= Okt 2021. Data s.d. 31 Agu 2026.
+Grup: 20 koin lama (20): AAVE, ADA, ATOM, AVAX, BCH, BNB, BTC, DOGE, DOT, ETC, ETH, FIL, LINK, LTC, NEAR, SOL, TRX, UNI, XLM, XRP; koin lain masih hidup (34): ALGO, ANKR, AXS, BAT, CHZ, COMP, CRV, DASH, EGLD, ENJ, FTT, HOT, ICX, IOTA, KAVA, LUNA, LUNC, MANA, NEO, ONT, QTUM, RUNE, SAND, SHIB, SNX, SUI, SUSHI, THETA, VET, WIN, XTZ, YFI, ZEC, ZIL;   di antaranya tidak pernah dilatih (3): ALGO, SHIB, SUI; koin delisting (22): BCC, BTT, COCOS, DENT, EOS, FTM, HC, KEY, MATIC, MITH, MKR, NANO, NPXS, OMG, SRM, STRAT, TOMO, TON, UST, WAVES, XEM, XMR
+Cek fitur jam terakhir = fitur harian riset: selisih relatif maks median 4.8e-10, maks 1.5e-05 (koin dengan celah data)
+
+## Pindai harian
+   20 koin lama                        : LAMA n630 naik 93% rata +1.23% kalah -18.3% | BARU n856 naik 91% rata +1.26% kalah -13.3% | 2025+ n171 naik 92% rata +1.83% kalah -8.7% | terburuk -57%
+   koin lain masih hidup               : LAMA n1183 naik 93% rata +1.08% kalah -19.8% | BARU n1852 naik 90% rata +0.83% kalah -15.6% | 2025+ n308 naik 90% rata +1.03% kalah -14.4% | terburuk -59%
+     di antaranya tidak pernah dilatih : LAMA n54 naik 94% rata +1.13% kalah -25.6% | BARU n126 naik 89% rata +1.06% kalah -11.9% | 2025+ n25 naik 96% rata +2.04% kalah -13.9% | terburuk -59%
+   koin delisting                      : LAMA n726 naik 93% rata +0.80% kalah -23.8% | BARU n676 naik 91% rata +0.83% kalah -18.6% | 2025+ n31 naik 100% rata +2.72% kalah +0.0% | terburuk -62%
+   20 koin lama: sinyal BARU per bulan 14.5; per tahun 2016:n1 100% +2.7% 2017:n10 100% +2.7% 2018:n5 80% -2.0% 2019:n60 93% +2.0% 2020:n111 93% +0.8% 2021:n505 93% +1.2% 2022:n374 90% +0.7% 2023:n52 88% +1.2% 2024:n197 93% +1.7% 2025:n118 93% +2.0% 2026:n53 91% +1.4%
+      portofolio 10 slot LAMA: +19.9%/th DD -42% (diambil 521/614) 2019:+12% 2020:+7% 2021:+36%
+      portofolio 10 slot BARU: +15.8%/th DD -21% (diambil 733/856) 2021:+8% 2022:+5% 2023:+6% 2024:+32% 2025:+23% 2026:+5%
+      portofolio 20 slot LAMA: +13.9%/th DD -27% (diambil 614/614) 2019:+6% 2020:+4% 2021:+29%
+      portofolio 20 slot BARU: +11.2%/th DD -10% (diambil 856/856) 2021:+4% 2022:+14% 2023:+3% 2024:+18% 2025:+13% 2026:+4%
+   semua koin hidup: sinyal BARU per bulan 45.9; per tahun 2016:n1 100% +2.7% 2017:n10 100% +2.7% 2018:n5 80% -2.0% 2019:n101 92% +1.7% 2020:n347 93% +1.0% 2021:n1591 93% +1.0% 2022:n1149 89% +0.6% 2023:n185 90% +1.1% 2024:n653 92% +1.5% 2025:n333 94% +1.7% 2026:n146 85% +0.5%
+      portofolio 10 slot LAMA: +27.6%/th DD -46% (diambil 944/1797) 2019:+19% 2020:+1% 2021:+63%
+      portofolio 10 slot BARU: +5.9%/th DD -50% (diambil 1458/2708) 2021:-1% 2022:-32% 2023:+15% 2024:+27% 2025:+39% 2026:-3%
+      portofolio 20 slot LAMA: +21.0%/th DD -46% (diambil 1341/1797) 2019:+9% 2020:+12% 2021:+38%
+      portofolio 20 slot BARU: +11.9%/th DD -24% (diambil 2016/2708) 2021:+1% 2022:-2% 2023:+10% 2024:+28% 2025:+26% 2026:-1%
+
+## Pindai tiap jam
+   20 koin lama                        : LAMA n1461 naik 92% rata +0.91% kalah -18.8% | BARU n1743 naik 89% rata +0.88% kalah -13.8% | 2025+ n382 naik 92% rata +1.60% kalah -11.7% | terburuk -59%
+   koin lain masih hidup               : LAMA n2698 naik 91% rata +0.77% kalah -19.9% | BARU n3662 naik 89% rata +0.68% kalah -16.2% | 2025+ n843 naik 93% rata +1.43% kalah -16.8% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n123 naik 95% rata +1.32% kalah -25.7% | BARU n275 naik 90% rata +1.09% kalah -13.7% | 2025+ n58 naik 93% rata +1.47% kalah -15.1% | terburuk -60%
+   koin delisting                      : LAMA n1545 naik 91% rata +0.56% kalah -22.1% | BARU n1303 naik 89% rata +0.34% kalah -18.2% | 2025+ n84 naik 95% rata +2.15% kalah -8.8% | terburuk -63%
+   20 koin lama: sinyal BARU per bulan 29.5; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n159 91% +1.5% 2020:n249 89% +0.3% 2021:n1161 92% +0.9% 2022:n601 86% -0.1% 2023:n141 86% +1.1% 2024:n473 91% +1.6% 2025:n263 92% +1.7% 2026:n119 92% +1.5%
+      portofolio 10 slot LAMA: +8.1%/th DD -46% (diambil 782/1423) 2019:+17% 2020:-9% 2021:+16%
+      portofolio 10 slot BARU: +13.4%/th DD -29% (diambil 1047/1743) 2021:-0% 2022:-8% 2023:+10% 2024:+35% 2025:+27% 2026:+8%
+      portofolio 20 slot LAMA: +8.0%/th DD -28% (diambil 853/1423) 2019:+8% 2020:-3% 2021:+18%
+      portofolio 20 slot BARU: +9.8%/th DD -14% (diambil 1194/1743) 2021:+1% 2022:-1% 2023:+5% 2024:+23% 2025:+16% 2026:+6%
+   semua koin hidup: sinyal BARU per bulan 91.6; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n273 89% +1.2% 2020:n839 90% +0.6% 2021:n3523 92% +0.8% 2022:n1779 86% -0.0% 2023:n443 85% +0.7% 2024:n1444 91% +1.3% 2025:n852 94% +1.6% 2026:n373 92% +1.3%
+      portofolio 10 slot LAMA: +30.8%/th DD -48% (diambil 1433/4121) 2019:+22% 2020:+2% 2021:+68%
+      portofolio 10 slot BARU: +11.6%/th DD -51% (diambil 2046/5405) 2021:-10% 2022:-26% 2023:+13% 2024:+40% 2025:+50% 2026:+9%
+      portofolio 20 slot LAMA: +13.6%/th DD -46% (diambil 1996/4121) 2019:+12% 2020:-8% 2021:+38%
+      portofolio 20 slot BARU: +13.7%/th DD -42% (diambil 2860/5405) 2021:+3% 2022:-15% 2023:+8% 2024:+36% 2025:+31% 2026:+12%
+   BARU semua koin hidup per jam sinyal (UTC): 0:89%/+0.6% 4:90%/+0.9% 8:91%/+0.8% 12:87%/+0.0% 16:89%/+0.8% 20:91%/+1.2%
+
+## Pindai tiap jam p≥0.95
+   20 koin lama                        : LAMA n1052 naik 93% rata +1.23% kalah -18.7% | BARU n1088 naik 88% rata +0.82% kalah -13.4% | 2025+ n225 naik 92% rata +1.50% kalah -13.0% | terburuk -59%
+   koin lain masih hidup               : LAMA n1969 naik 93% rata +1.05% kalah -20.1% | BARU n2236 naik 89% rata +0.70% kalah -16.1% | 2025+ n470 naik 93% rata +1.21% kalah -18.5% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n97 naik 96% rata +1.39% kalah -29.1% | BARU n178 naik 91% rata +1.33% kalah -12.6% | 2025+ n41 naik 98% rata +2.20% kalah -17.9% | terburuk -60%
+   koin delisting                      : LAMA n1184 naik 93% rata +1.05% kalah -21.7% | BARU n874 naik 90% rata +0.45% kalah -19.2% | 2025+ n45 naik 93% rata +1.81% kalah -10.6% | terburuk -58%
+   20 koin lama: sinyal BARU per bulan 18.4; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n84 90% +1.5% 2020:n186 90% +0.7% 2021:n854 94% +1.3% 2022:n389 86% +0.0% 2023:n86 83% +1.2% 2024:n278 88% +1.2% 2025:n184 92% +1.4% 2026:n41 95% +1.8%
+      portofolio 10 slot LAMA: +15.6%/th DD -39% (diambil 565/1014) 2019:+9% 2020:-4% 2021:+42%
+      portofolio 10 slot BARU: +10.1%/th DD -18% (diambil 695/1088) 2021:+11% 2022:-5% 2023:+6% 2024:+12% 2025:+19% 2026:+9%
+      portofolio 20 slot LAMA: +9.2%/th DD -24% (diambil 613/1014) 2019:+5% 2020:-1% 2021:+23%
+      portofolio 20 slot BARU: +6.4%/th DD -8% (diambil 787/1088) 2021:+6% 2022:-2% 2023:+3% 2024:+10% 2025:+11% 2026:+4%
+   semua koin hidup: sinyal BARU per bulan 56.3; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n150 87% +0.9% 2020:n569 90% +0.6% 2021:n2621 94% +1.2% 2022:n1149 88% +0.2% 2023:n270 83% +1.0% 2024:n853 89% +1.1% 2025:n548 93% +1.3% 2026:n147 94% +1.3%
+      portofolio 10 slot LAMA: +29.0%/th DD -47% (diambil 1053/2983) 2019:+4% 2020:+7% 2021:+80%
+      portofolio 10 slot BARU: +13.9%/th DD -39% (diambil 1380/3324) 2021:+11% 2022:-15% 2023:+15% 2024:+14% 2025:+35% 2026:+13%
+      portofolio 20 slot LAMA: +23.6%/th DD -43% (diambil 1493/2983) 2019:+3% 2020:-1% 2021:+75%
+      portofolio 20 slot BARU: +10.3%/th DD -27% (diambil 1811/3324) 2021:+5% 2022:-3% 2023:+8% 2024:+11% 2025:+21% 2026:+8%
+
+## Pindai tiap jam bertahan 2 jam
+   20 koin lama                        : LAMA n1191 naik 92% rata +0.91% kalah -19.5% | BARU n1461 naik 90% rata +0.93% kalah -14.3% | 2025+ n328 naik 92% rata +1.59% kalah -11.8% | terburuk -58%
+   koin lain masih hidup               : LAMA n2155 naik 91% rata +0.65% kalah -20.3% | BARU n3103 naik 90% rata +0.73% kalah -16.1% | 2025+ n677 naik 93% rata +1.38% kalah -15.6% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n104 naik 95% rata +1.28% kalah -26.8% | BARU n241 naik 91% rata +1.24% kalah -14.0% | 2025+ n59 naik 97% rata +2.03% kalah -17.1% | terburuk -60%
+   koin delisting                      : LAMA n1298 naik 91% rata +0.54% kalah -22.6% | BARU n1133 naik 89% rata +0.35% kalah -18.4% | 2025+ n68 naik 96% rata +2.20% kalah -8.6% | terburuk -62%
+   20 koin lama: sinyal BARU per bulan 24.8; per tahun 2016:n1 100% +2.7% 2017:n23 100% +2.7% 2018:n11 73% -3.0% 2019:n124 91% +1.5% 2020:n196 89% +0.1% 2021:n954 92% +0.9% 2022:n512 87% +0.2% 2023:n101 85% +1.2% 2024:n402 92% +1.5% 2025:n228 93% +1.7% 2026:n100 91% +1.4%
+      portofolio 10 slot LAMA: +6.0%/th DD -42% (diambil 656/1156) 2019:+13% 2020:-15% 2021:+22%
+      portofolio 10 slot BARU: +14.3%/th DD -29% (diambil 922/1461) 2021:-2% 2022:-9% 2023:+5% 2024:+39% 2025:+34% 2026:+10%
+      portofolio 20 slot LAMA: +6.5%/th DD -25% (diambil 705/1156) 2019:+6% 2020:-6% 2021:+19%
+      portofolio 20 slot BARU: +9.4%/th DD -13% (diambil 1030/1461) 2021:-0% 2022:+0% 2023:+3% 2024:+21% 2025:+17% 2026:+6%
+   semua koin hidup: sinyal BARU per bulan 77.4; per tahun 2016:n1 100% +2.7% 2017:n23 100% +2.7% 2018:n11 73% -3.0% 2019:n223 90% +1.3% 2020:n648 90% +0.3% 2021:n2899 92% +0.7% 2022:n1531 87% +0.1% 2023:n338 86% +0.8% 2024:n1231 91% +1.3% 2025:n710 94% +1.6% 2026:n295 91% +1.1%
+      portofolio 10 slot LAMA: +12.6%/th DD -51% (diambil 1174/3311) 2019:+22% 2020:-4% 2021:+19%
+      portofolio 10 slot BARU: +13.9%/th DD -53% (diambil 1828/4564) 2021:-2% 2022:-37% 2023:+26% 2024:+35% 2025:+66% 2026:+9%
+      portofolio 20 slot LAMA: +9.7%/th DD -45% (diambil 1666/3311) 2019:+11% 2020:-9% 2021:+29%
+      portofolio 20 slot BARU: +16.6%/th DD -37% (diambil 2546/4564) 2021:+2% 2022:-16% 2023:+13% 2024:+38% 2025:+44% 2026:+11%
+
+## Pindai tiap jam bertahan 3 jam
+   20 koin lama                        : LAMA n1008 naik 92% rata +0.84% kalah -19.8% | BARU n1246 naik 89% rata +0.94% kalah -13.7% | 2025+ n285 naik 92% rata +1.56% kalah -10.8% | terburuk -59%
+   koin lain masih hidup               : LAMA n1870 naik 91% rata +0.66% kalah -20.0% | BARU n2699 naik 89% rata +0.67% kalah -16.4% | 2025+ n561 naik 93% rata +1.29% kalah -16.5% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n88 naik 97% rata +1.44% kalah -34.2% | BARU n211 naik 91% rata +1.23% kalah -14.4% | 2025+ n56 naik 96% rata +1.98% kalah -17.6% | terburuk -60%
+   koin delisting                      : LAMA n1153 naik 91% rata +0.43% kalah -22.4% | BARU n1008 naik 89% rata +0.29% kalah -18.8% | 2025+ n54 naik 94% rata +2.13% kalah -7.6% | terburuk -58%
+   20 koin lama: sinyal BARU per bulan 21.1; per tahun 2016:n1 100% +2.7% 2017:n18 94% +1.2% 2018:n9 67% -4.7% 2019:n98 91% +1.4% 2020:n170 89% +0.1% 2021:n811 92% +0.9% 2022:n444 86% +0.0% 2023:n86 87% +1.7% 2024:n332 93% +1.7% 2025:n196 92% +1.6% 2026:n89 91% +1.5%
+      portofolio 10 slot LAMA: +5.9%/th DD -43% (diambil 561/980) 2019:+9% 2020:-13% 2021:+23%
+      portofolio 10 slot BARU: +8.8%/th DD -31% (diambil 785/1246) 2021:+1% 2022:-17% 2023:+9% 2024:+30% 2025:+21% 2026:+6%
+      portofolio 20 slot LAMA: +4.8%/th DD -27% (diambil 605/980) 2019:+5% 2020:-5% 2021:+15%
+      portofolio 20 slot BARU: +6.8%/th DD -18% (diambil 880/1246) 2021:+1% 2022:-5% 2023:+5% 2024:+18% 2025:+12% 2026:+4%
+   semua koin hidup: sinyal BARU per bulan 66.9; per tahun 2016:n1 100% +2.7% 2017:n18 94% +1.2% 2018:n9 67% -4.7% 2019:n167 87% +1.0% 2020:n579 91% +0.6% 2021:n2491 91% +0.7% 2022:n1405 87% +0.2% 2023:n273 85% +0.8% 2024:n1034 92% +1.2% 2025:n575 93% +1.4% 2026:n271 91% +1.2%
+      portofolio 10 slot LAMA: +13.3%/th DD -53% (diambil 1053/2850) 2019:+11% 2020:+9% 2021:+16%
+      portofolio 10 slot BARU: +6.1%/th DD -50% (diambil 1615/3945) 2021:-1% 2022:-31% 2023:+15% 2024:+25% 2025:+30% 2026:+6%
+      portofolio 20 slot LAMA: +7.2%/th DD -44% (diambil 1437/2850) 2019:+6% 2020:+1% 2021:+14%
+      portofolio 20 slot BARU: +7.5%/th DD -39% (diambil 2170/3945) 2021:-0% 2022:-17% 2023:+7% 2024:+23% 2025:+21% 2026:+9%
+
+## Pindai tiap jam BTC > SMA200
+   20 koin lama                        : LAMA n1046 naik 93% rata +1.18% kalah -20.4% | BARU n986 naik 91% rata +1.43% kalah -11.5% | 2025+ n265 naik 94% rata +1.98% kalah -9.9% | terburuk -59%
+   koin lain masih hidup               : LAMA n1812 naik 93% rata +1.05% kalah -19.4% | BARU n2077 naik 91% rata +1.03% kalah -15.3% | 2025+ n530 naik 96% rata +1.88% kalah -16.3% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n82 naik 93% rata +0.62% kalah -25.7% | BARU n188 naik 93% rata +1.46% kalah -14.0% | 2025+ n42 naik 95% rata +1.72% kalah -18.0% | terburuk -60%
+   koin delisting                      : LAMA n1095 naik 93% rata +0.99% kalah -20.5% | BARU n601 naik 89% rata +0.57% kalah -15.9% | 2025+ n45 naik 98% rata +2.60% kalah -1.6% | terburuk -57%
+   20 koin lama: sinyal BARU per bulan 16.7; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n8 62% -5.2% 2019:n144 92% +1.6% 2020:n205 93% +1.5% 2021:n805 93% +0.9% 2023:n137 88% +1.3% 2024:n444 91% +1.5% 2025:n214 94% +1.9% 2026:n51 94% +2.1%
+      portofolio 10 slot LAMA: +26.4%/th DD -44% (diambil 583/1014) 2019:+16% 2020:+21% 2021:+28%
+      portofolio 10 slot BARU: +12.9%/th DD -18% (diambil 592/986) 2021:-2% 2022:-2% 2023:+11% 2024:+29% 2025:+26% 2026:+4%
+      portofolio 20 slot LAMA: +13.1%/th DD -27% (diambil 618/1014) 2019:+8% 2020:+10% 2021:+15%
+      portofolio 20 slot BARU: +8.6%/th DD -8% (diambil 676/986) 2021:+1% 2022:-1% 2023:+6% 2024:+21% 2025:+15% 2026:+3%
+   semua koin hidup: sinyal BARU per bulan 51.9; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n8 62% -5.2% 2019:n240 90% +1.3% 2020:n645 91% +1.3% 2021:n2418 93% +0.9% 2023:n433 86% +0.7% 2024:n1358 91% +1.2% 2025:n669 95% +1.8% 2026:n126 96% +2.3%
+      portofolio 10 slot LAMA: +40.6%/th DD -46% (diambil 1078/2826) 2019:+19% 2020:+34% 2021:+47%
+      portofolio 10 slot BARU: +13.9%/th DD -26% (diambil 1176/3063) 2021:-14% 2022:-1% 2023:+13% 2024:+29% 2025:+46% 2026:+4%
+      portofolio 20 slot LAMA: +27.3%/th DD -43% (diambil 1441/2826) 2019:+10% 2020:+26% 2021:+32%
+      portofolio 20 slot BARU: +13.1%/th DD -20% (diambil 1592/3063) 2021:-0% 2022:-0% 2023:+8% 2024:+29% 2025:+28% 2026:+3%
+
+## Pindai harian BTC > SMA200
+   20 koin lama                        : LAMA n364 naik 93% rata +0.98% kalah -20.5% | BARU n390 naik 93% rata +1.74% kalah -10.6% | 2025+ n104 naik 95% rata +2.36% kalah -4.3% | terburuk -57%
+   koin lain masih hidup               : LAMA n641 naik 93% rata +1.18% kalah -20.0% | BARU n898 naik 92% rata +1.21% kalah -15.3% | 2025+ n169 naik 96% rata +1.92% kalah -16.2% | terburuk -59%
+     di antaranya tidak pernah dilatih : LAMA n33 naik 91% rata +0.13% kalah -25.6% | BARU n72 naik 90% rata +1.36% kalah -10.8% | 2025+ n17 naik 100% rata +2.70% kalah +0.0% | terburuk -59%
+   koin delisting                      : LAMA n405 naik 94% rata +1.24% kalah -22.9% | BARU n264 naik 93% rata +1.10% kalah -19.3% | 2025+ n13 naik 100% rata +2.70% kalah +0.0% | terburuk -45%
+   20 koin lama: sinyal BARU per bulan 6.6; per tahun 2016:n1 100% +2.7% 2017:n10 100% +2.7% 2018:n4 75% -3.2% 2019:n55 93% +1.9% 2020:n69 93% +0.9% 2021:n280 92% +0.8% 2023:n46 91% +1.4% 2024:n185 92% +1.6% 2025:n88 95% +2.4% 2026:n16 94% +2.4%
+      portofolio 10 slot LAMA: +12.1%/th DD -42% (diambil 332/349) 2019:+11% 2020:+6% 2021:+13%
+      portofolio 10 slot BARU: +12.5%/th DD -9% (diambil 357/390) 2021:+6% 2022:+0% 2023:+6% 2024:+28% 2025:+21% 2026:+3%
+      portofolio 20 slot LAMA: +6.5%/th DD -23% (diambil 349/349) 2019:+5% 2020:+3% 2021:+8%
+      portofolio 20 slot BARU: +7.1%/th DD -4% (diambil 390/390) 2021:+3% 2022:+0% 2023:+3% 2024:+16% 2025:+11% 2026:+2%
+   semua koin hidup: sinyal BARU per bulan 21.8; per tahun 2016:n1 100% +2.7% 2017:n10 100% +2.7% 2018:n4 75% -3.2% 2019:n88 92% +1.7% 2020:n228 92% +1.1% 2021:n887 92% +0.8% 2023:n176 91% +1.2% 2024:n626 92% +1.5% 2025:n233 96% +2.1% 2026:n40 92% +2.2%
+      portofolio 10 slot LAMA: +29.0%/th DD -46% (diambil 644/990) 2019:+16% 2020:+13% 2021:+42%
+      portofolio 10 slot BARU: +13.5%/th DD -26% (diambil 750/1288) 2021:-6% 2022:+0% 2023:+15% 2024:+24% 2025:+35% 2026:+3%
+      portofolio 20 slot LAMA: +17.4%/th DD -46% (diambil 856/990) 2019:+8% 2020:+12% 2021:+23%
+      portofolio 20 slot BARU: +11.7%/th DD -15% (diambil 1004/1288) 2021:-2% 2022:+0% 2023:+11% 2024:+27% 2025:+23% 2026:+2%
+
+## Pindai tiap jam maks 2 baru/hari
+   20 koin lama                        : LAMA n320 naik 91% rata +1.07% kalah -15.3% | BARU n380 naik 87% rata +0.52% kalah -14.2% | 2025+ n93 naik 92% rata +1.20% kalah -16.9% | terburuk -40%
+   koin lain masih hidup               : LAMA n437 naik 91% rata +0.83% kalah -17.6% | BARU n794 naik 85% rata +0.04% kalah -15.4% | 2025+ n213 naik 87% rata +0.31% kalah -15.5% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n38 naik 95% rata +0.37% kalah -41.5% | BARU n52 naik 85% rata +0.77% kalah -9.8% | 2025+ n10 naik 90% rata +0.64% kalah -17.9% | terburuk -60%
+   koin delisting                      : LAMA n296 naik 91% rata +0.38% kalah -21.8% | BARU n321 naik 89% rata +0.52% kalah -16.8% | 2025+ n29 naik 90% rata +1.32% kalah -10.6% | terburuk -63%
+   20 koin lama: sinyal BARU per bulan 6.4; per tahun 2016:n1 100% +2.7% 2017:n22 95% +1.7% 2018:n12 83% -1.3% 2019:n90 89% +1.1% 2020:n75 91% +1.1% 2021:n147 90% +0.6% 2022:n117 84% -0.5% 2023:n51 84% +0.7% 2024:n92 89% +1.6% 2025:n67 93% +1.3% 2026:n26 92% +0.9%
+      portofolio 10 slot LAMA: +11.1%/th DD -12% (diambil 255/285) 2019:+9% 2020:+8% 2021:+13%
+      portofolio 10 slot BARU: +3.9%/th DD -18% (diambil 351/380) 2021:-1% 2022:-10% 2023:+2% 2024:+17% 2025:+11% 2026:+2%
+      portofolio 20 slot LAMA: +5.5%/th DD -6% (diambil 255/285) 2019:+5% 2020:+4% 2021:+6%
+      portofolio 20 slot BARU: +2.0%/th DD -9% (diambil 351/380) 2021:-0% 2022:-5% 2023:+1% 2024:+8% 2025:+6% 2026:+1%
+   semua koin hidup: sinyal BARU per bulan 19.9; per tahun 2016:n1 100% +2.7% 2017:n22 95% +1.7% 2018:n12 83% -1.3% 2019:n136 88% +1.2% 2020:n249 90% +0.8% 2021:n443 91% +0.6% 2022:n322 84% -0.4% 2023:n170 84% +0.3% 2024:n270 87% +0.6% 2025:n204 90% +0.8% 2026:n102 86% +0.2%
+      portofolio 10 slot LAMA: +23.9%/th DD -25% (diambil 649/722) 2019:+15% 2020:+13% 2021:+39%
+      portofolio 10 slot BARU: +2.3%/th DD -32% (diambil 1057/1174) 2021:-1% 2022:-22% 2023:+1% 2024:+21% 2025:+19% 2026:-0%
+      portofolio 20 slot LAMA: +11.7%/th DD -13% (diambil 649/722) 2019:+7% 2020:+7% 2021:+18%
+      portofolio 20 slot BARU: +1.4%/th DD -17% (diambil 1057/1174) 2021:-0% 2022:-11% 2023:+0% 2024:+10% 2025:+9% 2026:-0%
+
+## Pindai tiap jam maks 3 baru/hari
+   20 koin lama                        : LAMA n415 naik 91% rata +1.02% kalah -15.7% | BARU n506 naik 88% rata +0.53% kalah -14.7% | 2025+ n125 naik 92% rata +1.26% kalah -15.0% | terburuk -40%
+   koin lain masih hidup               : LAMA n591 naik 90% rata +0.77% kalah -16.6% | BARU n1054 naik 86% rata +0.01% kalah -15.9% | 2025+ n272 naik 88% rata +0.36% kalah -16.0% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n45 naik 93% rata +0.59% kalah -28.9% | BARU n76 naik 88% rata +1.10% kalah -10.8% | 2025+ n18 naik 94% rata +1.55% kalah -17.9% | terburuk -60%
+   koin delisting                      : LAMA n413 naik 90% rata +0.42% kalah -20.2% | BARU n415 naik 89% rata +0.50% kalah -17.2% | 2025+ n33 naik 91% rata +1.49% kalah -10.6% | terburuk -63%
+   20 koin lama: sinyal BARU per bulan 8.6; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n107 88% +0.9% 2020:n95 89% +0.6% 2021:n216 92% +1.1% 2022:n158 85% -0.6% 2023:n63 86% +0.9% 2024:n119 88% +1.3% 2025:n89 92% +1.5% 2026:n36 92% +0.8%
+      portofolio 10 slot LAMA: +13.5%/th DD -15% (diambil 325/377) 2019:+10% 2020:+4% 2021:+23%
+      portofolio 10 slot BARU: +4.0%/th DD -21% (diambil 456/506) 2021:+1% 2022:-15% 2023:+4% 2024:+17% 2025:+14% 2026:+2%
+      portofolio 20 slot LAMA: +6.7%/th DD -8% (diambil 325/377) 2019:+5% 2020:+2% 2021:+11%
+      portofolio 20 slot BARU: +2.1%/th DD -11% (diambil 456/506) 2021:+1% 2022:-8% 2023:+2% 2024:+8% 2025:+7% 2026:+1%
+   semua koin hidup: sinyal BARU per bulan 26.4; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n167 87% +1.0% 2020:n317 90% +0.7% 2021:n638 91% +0.8% 2022:n437 84% -0.7% 2023:n214 84% +0.6% 2024:n358 86% +0.4% 2025:n268 90% +0.9% 2026:n129 87% +0.2%
+      portofolio 10 slot LAMA: +28.5%/th DD -32% (diambil 841/968) 2019:+16% 2020:+11% 2021:+53%
+      portofolio 10 slot BARU: +1.1%/th DD -48% (diambil 1353/1560) 2021:+5% 2022:-38% 2023:+7% 2024:+22% 2025:+26% 2026:-1%
+      portofolio 20 slot LAMA: +14.1%/th DD -16% (diambil 841/968) 2019:+8% 2020:+7% 2021:+25%
+      portofolio 20 slot BARU: +1.3%/th DD -27% (diambil 1361/1560) 2021:+2% 2022:-20% 2023:+4% 2024:+11% 2025:+12% 2026:-0%
+
+## Pindai tiap jam maks 5 baru/hari
+   20 koin lama                        : LAMA n555 naik 90% rata +0.82% kalah -17.0% | BARU n687 naik 88% rata +0.62% kalah -14.9% | 2025+ n167 naik 92% rata +1.35% kalah -14.5% | terburuk -59%
+   koin lain masih hidup               : LAMA n869 naik 89% rata +0.58% kalah -16.9% | BARU n1429 naik 86% rata -0.01% kalah -16.9% | 2025+ n345 naik 88% rata +0.46% kalah -16.6% | terburuk -60%
+     di antaranya tidak pernah dilatih : LAMA n57 naik 95% rata +1.04% kalah -28.9% | BARU n98 naik 90% rata +1.37% kalah -10.4% | 2025+ n26 naik 96% rata +1.91% kalah -17.9% | terburuk -60%
+   koin delisting                      : LAMA n592 naik 89% rata +0.03% kalah -22.0% | BARU n569 naik 89% rata +0.58% kalah -17.4% | 2025+ n42 naik 93% rata +1.75% kalah -10.6% | terburuk -63%
+   20 koin lama: sinyal BARU per bulan 11.6; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n128 89% +1.1% 2020:n126 89% -0.0% 2021:n320 90% +0.7% 2022:n214 86% -0.2% 2023:n84 86% +0.8% 2024:n165 90% +1.4% 2025:n119 92% +1.5% 2026:n48 92% +0.9%
+      portofolio 10 slot LAMA: +9.5%/th DD -20% (diambil 423/517) 2019:+12% 2020:-4% 2021:+19%
+      portofolio 10 slot BARU: +6.3%/th DD -24% (diambil 597/687) 2021:-2% 2022:-14% 2023:+4% 2024:+24% 2025:+18% 2026:+4%
+      portofolio 20 slot LAMA: +4.9%/th DD -10% (diambil 423/517) 2019:+6% 2020:-2% 2021:+10%
+      portofolio 20 slot BARU: +3.2%/th DD -13% (diambil 597/687) 2021:-1% 2022:-7% 2023:+2% 2024:+12% 2025:+9% 2026:+2%
+   semua koin hidup: sinyal BARU per bulan 35.9; per tahun 2016:n1 100% +2.7% 2017:n23 96% +1.7% 2018:n14 79% -1.8% 2019:n208 87% +0.9% 2020:n420 89% +0.3% 2021:n980 90% +0.6% 2022:n609 85% -0.5% 2023:n270 85% +0.5% 2024:n503 87% +0.5% 2025:n354 90% +0.9% 2026:n158 88% +0.3%
+      portofolio 10 slot LAMA: +18.1%/th DD -46% (diambil 1086/1386) 2019:+16% 2020:-6% 2021:+44%
+      portofolio 10 slot BARU: +0.3%/th DD -52% (diambil 1657/2116) 2021:-4% 2022:-39% 2023:+7% 2024:+16% 2025:+33% 2026:+5%
+      portofolio 20 slot LAMA: +12.0%/th DD -23% (diambil 1138/1386) 2019:+8% 2020:+1% 2021:+25%
+      portofolio 20 slot BARU: +3.3%/th DD -27% (diambil 1768/2116) 2021:-0% 2022:-17% 2023:+4% 2024:+14% 2025:+15% 2026:+3%
+
+teruji -> spot_model.json: {"skema": "pindai tiap 10 menit, 54 koin uji, BTC > SMA200, maks 20 posisi", "baru": {"n": 3063, "wr": 90.9, "avg": 1.16, "kalah": -14.1, "terburuk": -60.0, "tahan": 0.3, "per_bulan": 51.9, "cagr": 13.1, "dd": -20.3}, "lama": {"n": 2858, "wr": 92.9, "avg": 1.1, "cagr": 27.3, "dd": -43.3}, "dasar_baru": 77.7, "tahun": {"2016": {"n": 1, "wr": 100.0, "avg": 2.7}, "2017": {"n": 23, "wr": 95.7, "avg": 1.73}, "2018": {"n": 8, "wr": 62.5, "avg": -5.23}, "2019": {"n": 240, "wr": 90.4, "avg": 1.25}, "2020": {"n": 645, "wr": 91.3, "avg": 1.26}, "2021": {"n": 2418, "wr": 92.8, "avg": 0.86}, "2023": {"n": 433, "wr": 85.7, "avg": 0.71}, "2024": {"n": 1358, "wr": 90.7, "avg": 1.22}, "2025": {"n": 669, "wr": 95.1, "avg": 1.84}, "2026": {"n": 126, "wr": 96.0, "avg": 2.27}}}

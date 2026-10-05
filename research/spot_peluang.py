@@ -338,7 +338,10 @@ def final(tp: float = 0.03, n: int = 10, thr: float = 0.93) -> None:
     diff = max(abs(gbm_prob(model, list(r)) - p) for r, p in zip(xs.to_numpy(), m.predict_proba(xs)[:, 1]))
     L.append(f"\nEkspor pohon: selisih maks vs sklearn {diff:.2e} (harus ~0)")
     obj = {"dibuat": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d"), "data_sampai": str(df.index.max().date()),
-           "tp": tp, "hari": n, "ambang": thr, "aturan_merah": True, "biaya": COST, "fitur": FEATS, "coins": LIVE, "teruji": stats, **model}
+           "tp": tp, "hari": n, "ambang": thr, "aturan_merah": True, "biaya": COST, "fitur": FEATS, "coins": LIVE, "teruji": stats,
+           "btc_filter": True, **model}
+    # angka 'teruji' di atas = skema lama (20 koin, pindai harian). Skema terpasang sejak 5 Okt 2026 (tiap 10 menit,
+    # semua koin, BTC > SMA200): jalankan `python -m research.spot_pindai --simpan` SETELAH ini.
     MODEL.write_text(json.dumps(obj, separators=(",", ":")), encoding="utf-8")
     L.append(f"Model -> {MODEL} ({MODEL.stat().st_size / 1024:.0f} KB)")
     (ROOT / "docs" / "eksternal" / "hasil_spot_model.txt").write_text("\n".join(L) + "\n", encoding="utf-8")

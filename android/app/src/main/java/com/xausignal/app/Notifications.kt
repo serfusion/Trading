@@ -116,7 +116,7 @@ object Notifications {
         val title = "💎 BELI SPOT $coin/USDT • peluang naik ${fmt(event.num("p"), 0)}%"
         val text = "Beli ±${spotPx(event.num("entry"))} lalu pasang limit jual ${spotPx(event.num("tp"))} " +
             "(+${fmt(event.num("tp_pct"), 0)}%). Belum kena sampai ${formatTime(event.str("deadline"))} → jual. " +
-            "Maks 10% modal spot per sinyal."
+            "Maks ${100 / maxOf(event.json.optInt("max_open", 10), 1)}% modal spot per sinyal."
         post(context, event.id.hashCode(), title, text)
     }
 
@@ -127,6 +127,15 @@ object Notifications {
             else "${event.str("reason")}: jual sekarang (patokan ${spotPx(event.num("exit"))}).") +
             " Hasil ${spotPct(r)} setelah biaya."
         post(context, event.id.hashCode() + 1, title, text)
+    }
+
+    /** ⚠️ Posisi spot turun >= 10% / 20% dari harga beli (cloud _spot.py, sekali per level). Info saja. */
+    fun spotWarn(context: Context, event: SignalEvent) {
+        val title = "⚠️ SPOT ${event.str("coin")}/USDT turun ${fmt(-(event.num("drop") ?: 0.0), 0)}%"
+        val tp = event.num("tetap_tp")
+        val text = (if (tp != null) "Teruji: ${fmt(tp, 0)}% posisi seperti ini tetap kena TP. " else "") +
+            "Limit jual TP tetap dipasang."
+        post(context, event.id.hashCode(), title, text)
     }
 
     /** ⏱️ Pengingat 1 menit sebelum rilis berita (NewsAlarm). Informasi saja: aplikasi tidak membuka order. */

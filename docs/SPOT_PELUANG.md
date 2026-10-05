@@ -1,5 +1,8 @@
 # 💎 Sinyal spot Binance: peluang naik lagi (4 Okt 2026, aplikasi 4.1)
 
+> **Pembaruan 5 Okt 2026:** cloud kini memindai tiap 10 menit ±100 koin dengan filter BTC > SMA200 — lihat
+> `docs/SPOT_PINDAI.md`. Angka di bawah = skema awal (20 koin, pindai harian).
+
 Permintaan pengguna: "bukan hanya koin jatuh — BTC, ETH, BNB, semuanya; bila kemungkinan sangat tinggi koin itu naik
 lagi, infokan di aplikasi mulai dari sinyal sampai close spot". Kode riset: `research/spot_peluang.py`
 (`--final` = model yang dipasang). Cloud: `cloud/api/_spot.py` + `cloud/api/spot_model.json`. Aplikasi: `SpotCard.kt`.

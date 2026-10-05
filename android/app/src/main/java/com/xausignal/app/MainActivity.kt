@@ -412,7 +412,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 Text(
                     "Sinyal, notifikasi, dan ringkasan \"Hari ini\" hanya untuk pair yang dipilih. Forex gap = USD/JPY, " +
                         "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB). 💎 Spot = beli spot Binance " +
-                        "saat peluang naik lagi tinggi (dipindai harian 07:05 WIB).",
+                        "saat peluang naik lagi tinggi (±100 koin dipindai tiap 10 menit, jeda saat BTC di bawah SMA200).",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
                 OutlinedTextField(
