@@ -85,14 +85,6 @@ private fun instantOf(iso: String): Instant? = try {
     null
 }
 
-private fun clock(ms: Long): String {
-    val s = (ms / 1000).coerceAtLeast(0)
-    val h = s / 3600
-    val m = (s % 3600) / 60
-    val sec = s % 60
-    return if (h > 0) "%d j %02d m %02d d".format(h, m, sec) else "%02d:%02d".format(m, sec)
-}
-
 /** Isi lingkaran: "3:20" + "jam" (≥ 1 jam) atau "42:10" + "menit" (< 1 jam). */
 private fun clockShort(ms: Long): Pair<String, String> {
     val s = (ms / 1000).coerceAtLeast(0)
@@ -146,22 +138,15 @@ private fun RowScope.TrendTile(sym: String, btc: Boolean, hb: SignalEvent, st: J
         }
         Text(arah, color = warna, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.labelMedium,
             maxLines = 1)
-        Text("D1 ${arrow(d1)} • H4 ${arrow(h4)}", style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
         if (buyLvl < Double.MAX_VALUE && sellLvl > -Double.MAX_VALUE && !price.isNaN()) {
             LevelLine("▲", px(buyLvl, btc), BuyColor)
             LevelLine("▼", px(sellLvl, btc), SellColor)
         }
         when {
-            paused -> Text("⏸ pasar tutup", style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
-            running -> Text("🔁 sinyal jalan", style = MaterialTheme.typography.labelSmall, color = Gold, maxLines = 1)
+            paused -> Text("⏸ tutup", style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
+            running -> Text("🔁 jalan", style = MaterialTheme.typography.labelSmall, color = Gold, maxLines = 1)
         }
     }
-}
-
-private fun arrow(d: String) = when (d) {
-    "BUY" -> "↑"
-    "SELL" -> "↓"
-    else -> "-"
 }
 
 /** "▲ 3.950,00" = BUY bila candle H1 tutup di atas level ini; "▼" = SELL di bawah level. */
@@ -213,11 +198,11 @@ private fun nextSession(nowMs: Long): Upcoming {
     val now = Instant.ofEpochMilli(nowMs).atZone(NY)
     val open = nextNy(now, DayOfWeek.SUNDAY, LocalTime.of(18, 0))
     val close = nextNy(now, DayOfWeek.FRIDAY, LocalTime.of(17, 0))
-    if (open.isBefore(close)) return Upcoming("🔔", "Pasar emas buka pekan", open, Duration.ofHours(49))
+    if (open.isBefore(close)) return Upcoming("🔔", "Emas buka", open, Duration.ofHours(49))
     val list = listOf(
-        Upcoming("🇬🇧", "Sesi London buka", nextWeekday(now, LONDON, LocalTime.of(8, 0)), Duration.ofHours(24)),
-        Upcoming("🇺🇸", "Sesi New York buka", nextWeekday(now, NY, LocalTime.of(8, 0)), Duration.ofHours(24)),
-        Upcoming("🔕", "Pasar emas tutup pekan", close, Duration.ofHours(24)),
+        Upcoming("🇬🇧", "London buka", nextWeekday(now, LONDON, LocalTime.of(8, 0)), Duration.ofHours(24)),
+        Upcoming("🇺🇸", "New York buka", nextWeekday(now, NY, LocalTime.of(8, 0)), Duration.ofHours(24)),
+        Upcoming("🔕", "Emas tutup", close, Duration.ofHours(24)),
     )
     return list.minBy { it.at }
 }
@@ -259,14 +244,11 @@ private fun CountdownRow(prep: JSONObject?, now: Long, xau: Boolean, btc: Boolea
             if (news != null) {
                 Text("📰 ${news.title}", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.labelMedium,
                     color = Gold, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                Text("${wibText(news.at)} • dalam ${clock(Duration.between(Instant.ofEpochMilli(now), news.at).toMillis())}",
-                    style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
-            } else if (prep?.optJSONArray("berita") != null) {
-                Text("📰 Tidak ada berita USD penting ≤ 24 jam", style = MaterialTheme.typography.labelSmall,
-                    color = Muted, maxLines = 1)
+                Text(wibText(news.at), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
             }
-            Text("${session.icon} ${session.title} ${wibText(session.at)} • " +
-                clockHm(Duration.between(Instant.ofEpochMilli(now), session.at).toMillis()),
+            Text("${session.icon} ${session.title} ${wibText(session.at)}" +
+                (if (main === session) "" else " • " +
+                    clockHm(Duration.between(Instant.ofEpochMilli(now), session.at).toMillis())),
                 style = MaterialTheme.typography.labelSmall,
                 fontWeight = if (main === session) FontWeight.Bold else FontWeight.Normal,
                 color = if (main === session) MaterialTheme.colorScheme.onSurface else Muted,
@@ -292,9 +274,9 @@ private fun AfterNews(prep: JSONObject?, now: Long, xau: Boolean, btc: Boolean) 
         }
         after?.let { p ->
             val teks = p.optString("teks")
-            Text("${if (key == "pudar") "XAU" else "BTC"} ${p.optString("label")}: $teks", fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.labelSmall,
-                color = if (teks.contains("🔴")) SellColor else if (teks.contains("🟢")) BuyColor else Gold, maxLines = 2)
+            Text("${if (key == "pudar") "XAU" else "BTC"}: $teks", fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.labelSmall, overflow = TextOverflow.Ellipsis,
+                color = if (teks.contains("🔴")) SellColor else if (teks.contains("🟢")) BuyColor else Gold, maxLines = 1)
         }
     }
 }

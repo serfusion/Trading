@@ -80,7 +80,7 @@ fun SpotSection(events: List<SignalEvent>) {
                     contentAlignment = Alignment.Center
                 ) { Text("💎", style = MaterialTheme.typography.titleLarge) }
                 Column {
-                    Text("Belum ada koin berpeluang tinggi", fontWeight = FontWeight.ExtraBold)
+                    Text("Belum ada sinyal", fontWeight = FontWeight.ExtraBold)
                     ScanLine(st)
                 }
             }
@@ -88,28 +88,13 @@ fun SpotSection(events: List<SignalEvent>) {
     } else ScanLine(st)
     if (st?.optBoolean("btc_filter", false) == true && st.has("btc_up") && !st.isNull("btc_up") &&
         !st.optBoolean("btc_up")) {
-        NoteBox("⏸ BTC di bawah rata-rata 200 hari: sinyal spot dijeda. Teruji: membeli koin saat BTC turun tren lebih " +
-            "sering rugi besar (2022). Posisi yang sudah ada tetap dipantau sampai close.", SellColor)
+        NoteBox("⏸ Dijeda: BTC di bawah MA200", SellColor)
     }
     open.forEach { SpotOpenCard(it, st) }
     if (closed.isNotEmpty()) SpotClosedCard(closed.take(5))
-    st?.optJSONObject("teruji")?.let { t ->
-        val b = t.optJSONObject("baru") ?: return@let
-        val lama = t.optJSONObject("lama")
-        Text(
-            "Teruji Okt 2021–Agu 2026 (${t.optString("skema").ifBlank { "20 koin, harian" }}): naik " +
-                "+${fmt(st.optDouble("tp_pct", 3.0), 0)}% di ${fmt(b.optDouble("wr"), 0)}% sinyal • rata " +
-                "${spotPct(b.optDouble("avg"))} • rugi rata ${spotPct(b.optDouble("kalah"))} • terburuk " +
-                spotPct(b.optDouble("terburuk")) +
-                (if (b.has("per_bulan")) " • ±${fmt(b.optDouble("per_bulan"), 0)} sinyal/bulan" else "") +
-                (if (b.has("cagr")) " • portofolio ${spotPct(b.optDouble("cagr"))}/th (DD ${spotPct(b.optDouble("dd"))})"
-                else "") +
-                (lama?.takeIf { it.has("cagr") }?.let {
-                    " • sebelum Okt 2021: naik ${fmt(it.optDouble("wr"), 0)}%, portofolio ${spotPct(it.optDouble("cagr"))}/th " +
-                        "(DD ${spotPct(it.optDouble("dd"))})"
-                } ?: ""),
-            style = MaterialTheme.typography.labelSmall, color = Muted
-        )
+    st?.optJSONObject("teruji")?.optJSONObject("baru")?.let { b ->
+        Text("Teruji sejak 2021: naik ${fmt(b.optDouble("wr"), 0)}% • rata ${spotPct(b.optDouble("avg"))} • " +
+            "rugi rata ${spotPct(b.optDouble("kalah"))}", style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }
 
@@ -118,8 +103,7 @@ fun SpotSection(events: List<SignalEvent>) {
 private fun ScanLine(st: JSONObject?) {
     val every = st?.optInt("every_min", 0) ?: 0
     val text = if (every > 0) {
-        "Dipindai tiap $every menit • ${st?.optInt("coins") ?: 0} koin" +
-            (st?.optString("scan_at")?.takeIf { it.isNotBlank() }?.let { " • terakhir ${formatTime(it)}" } ?: "")
+        "Dipindai tiap $every menit • ${st?.optInt("coins") ?: 0} koin"
     } else {                                   // cloud lama (pindai harian)
         "Dipindai tiap hari 07:05 WIB • 20 koin" +
             (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: "")

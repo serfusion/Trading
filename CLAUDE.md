@@ -243,7 +243,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Hitung mundur "cek" candle H1 DIHAPUS (pengguna: tidak perlu) → lingkaran ⏱ = berita USD penting ≤ 24 jam, bila tidak
   ada = sesi pasar berikutnya (London/New York buka 08:00 lokal, emas tutup Jumat 17:00 / buka Minggu 18:00 New York).
   `StatusCard.kt`. Pratinjau desktop: proyek CMP 1.5.12 + Kotlin 1.9.21 (runtime hanya Maven Central; CMP 1.6 butuh
-  Google Maven yang diblokir) dengan file minimal + stub, `ImageComposeScene` → PNG.
+  Google Maven yang diblokir) dengan file minimal + stub, `ImageComposeScene` → PNG. Pengguna: "jangan terlalu banyak
+  tulisannya, simple saja" → teks kartu dipangkas (tanpa baris D1/H4, tanpa "dalam …", catatan spot 1 baris).
 
 ## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
 - DIPASANG 4 Okt (permintaan pengguna "infokan di apk mulai dari sinyal dan close spot", semua koin):
