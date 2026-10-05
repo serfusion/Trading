@@ -1,5 +1,8 @@
 # 💎 Spot Binance: dipindai tiap 10 menit & ±100 koin (5 Okt 2026, aplikasi 4.2)
 
+> Lanjutan: uji SEMUA koin Binance (tanpa bias penyintas), filter kualitas & peringatan turun jauh → `docs/SPOT_JATUH.md`.
+> Angka 54 koin di bawah terlalu optimistis.
+
 Permintaan pengguna (URGENT): "Spot Binance seharusnya dipindai beberapa menit, bukan per hari, dan koinnya bukan hanya
 20 — masih banyak koin lain". Kode riset: `research/spot_pindai.py` (`--simpan` = angka teruji di aplikasi). Cloud:
 `cloud/api/_spot.py`. Hasil mentah: `docs/eksternal/hasil_spot_pindai.txt`. Model & ambang **tidak berubah**

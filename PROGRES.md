@@ -189,3 +189,9 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   DIPASANG di `cloud/api/_spot.py` (izin = permintaan eksplisit pengguna). 13 tes spot (`tests/test_cloud_spot.py`).
 - Kompilasi Kotlin dicek (Compose Desktop 1.6.11 + stub); pratinjau PNG dengan CMP 1.5.12. Binance tetap diblokir dari
   sesi → sumber live dicek setelah redeploy (`/api/tick` → `spot`).
+- Lanjutan 5 Okt ("cek seluruhnya, WR & profit tinggi, deteksi turun jauh"): jaringan baru membuka data.binance.vision →
+  653 pair USDT harian (`research/spot_semua.py`, data `spot_1d/`), `research/spot_jatuh.py` → `docs/SPOT_JATUH.md`.
+  Semua koin: +0,64%/sin (bukan +1,16%). Filter kualitas DIPASANG (+0,77%/sin, DD −30%). Deteksi turun jauh per sinyal
+  tidak bisa (AUC ≈ 0,55); jual saat turun lebih buruk → peringatan ⚠️ saja. Aplikasi 4.3. 16 tes spot lulus.
+- Alat `tools/compose_check/` (kompilasi + pratinjau PNG UI tanpa Android SDK) disimpan untuk sesi lain.
+

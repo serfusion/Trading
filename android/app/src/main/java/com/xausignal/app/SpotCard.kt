@@ -157,10 +157,15 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
                 Text("Menuju TP: ${fmt(prog * 100.0, 0)}%", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
+        // ⚠️ deteksi turun jauh: posisi turun >= 10% / 20% (angka teruji: berapa yang tetap kena TP)
+        if (chg != null && chg <= -10) {
+            val j = st?.optJSONObject("teruji")?.optJSONObject("jatuh")?.optJSONObject(if (chg <= -20) "20" else "10")
+            NoteBox("⚠️ Turun ${fmt(-chg, 0)}%" + (j?.let { " • teruji ${fmt(it.optDouble("tetap_tp"), 0)}% tetap kena TP" }
+                ?: ""), SellColor)
+        }
         val b = st?.optJSONObject("teruji")?.optJSONObject("baru")
-        NoteBox("Maks ${100 / maxOf(st?.optInt("max_open", 10) ?: 10, 1)}% modal spot per koin. Tanpa SL: sesekali " +
-            "rugi besar" + (b?.let { " (rata ${spotPct(it.optDouble("kalah"))}, terburuk ${spotPct(it.optDouble("terburuk"))})" }
-            ?: "") + ".", Gold)
+        NoteBox("Maks ${100 / maxOf(st?.optInt("max_open", 10) ?: 10, 1)}% modal per koin • tanpa SL" +
+            (b?.let { " • rugi rata ${spotPct(it.optDouble("kalah"))}" } ?: ""), Gold)
     }
 }
 

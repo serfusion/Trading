@@ -17,6 +17,14 @@ di-merge 28 Sep 07:21 UTC; aplikasi 3.1–3.2 (blok 🎯 REKOMENDASI ENTRY di Ta
 alarm tepat waktu) hanya menyentuh `android/`].
   Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
 
+## Lanjutkan di sesi lain (permintaan pengguna 5 Okt 2026: "simpan semua tes untuk diuji & dikembangkan lagi")
+- Semua uji tersimpan di repo: kode `research/`, tes otomatis `tests/` (`python -m pytest -q`, ±17 mnt; spot:
+  `tests/test_cloud_spot.py`), hasil mentah `docs/eksternal/hasil_*.txt`, laporan `docs/*.md`, data `data/research/`.
+- Jaringan sesi 5 Okt: terbuka data.binance.vision, api.twelvedata.com, Maven Central, Gradle; DIBLOKIR
+  data-api.binance.vision, api.binance.us, fapi.binance.com, ntfy.sh, coingecko, FRED. Kunci API (TWELVEDATA/FRED)
+  tidak terbaca di sesi itu (secret environment baru terbaca di sesi baru). Cek: `curl -sS "$HTTPS_PROXY/__agentproxy/status"`.
+- UI Android: `bash tools/compose_check/run.sh compile` lalu `preview` (PNG) sebelum push; CI APK = pemeriksa akhir.
+
 ## Riset data eksternal (berjalan sejak 28 Sep 2026 — laporan `docs/RISET_DATA_EKSTERNAL.md`)
 - Akses jaringan sudah dibuka (api.binance.com tetap 451 dari AS → pakai data.binance.vision; Dukascopy membatasi
   laju, ±15 detik/file). Cek: `curl -sS -o /dev/null -w "%{http_code}" https://<host>/`.
@@ -242,8 +250,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Tab Sinyal: XAU • BTC • ETH dalam SATU baris (kotak sepertiga: arah D1+H4, level ▲ BUY / ▼ SELL, 🔁/⏸) di satu kartu.
   Hitung mundur "cek" candle H1 DIHAPUS (pengguna: tidak perlu) → lingkaran ⏱ = berita USD penting ≤ 24 jam, bila tidak
   ada = sesi pasar berikutnya (London/New York buka 08:00 lokal, emas tutup Jumat 17:00 / buka Minggu 18:00 New York).
-  `StatusCard.kt`. Pratinjau desktop: proyek CMP 1.5.12 + Kotlin 1.9.21 (runtime hanya Maven Central; CMP 1.6 butuh
-  Google Maven yang diblokir) dengan file minimal + stub, `ImageComposeScene` → PNG. Pengguna: "jangan terlalu banyak
+  `StatusCard.kt`. Cek kompilasi & pratinjau PNG tanpa Android SDK: `bash tools/compose_check/run.sh compile|preview`
+  (lihat `tools/compose_check/README.md`; SIMPAN & pakai alat ini di sesi lain, permintaan pengguna 5 Okt). Pengguna: "jangan terlalu banyak
   tulisannya, simple saja" → teks kartu dipangkas (tanpa baris D1/H4, tanpa "dalam …", catatan spot 1 baris).
 
 ## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
@@ -252,6 +260,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   spot_model.json` + `_spot.py` (harian 07:05 WIB, cek tiap jam, baris Supabase `spot`, env SPOT_SIGNALS/SPOT_MAX) →
   aplikasi 4.1 kartu 💎 (`SpotCard.kt`, pair diikuti "SPOT"). Sinyal = p ≥ 93% ATAU 3 merah ≥10% +SMA200; TP +3%/10 hari:
   BARU naik 91% (acak 76%), +1,16%/sinyal, rugi rata −14%, portofolio 10 slot +14%/th DD −19% (docs/SPOT_PELUANG.md).
+- 5 Okt 2026 (lanjutan, "cek seluruhnya, WR & profit tinggi, deteksi turun jauh"; `docs/SPOT_JATUH.md`): uji SEMUA
+  pair USDT Binance termasuk yang dihapus (`research/spot_semua.py unduh` → `data/research/eksternal/spot_1d/`,
+  `research/spot_jatuh.py --simpan`). Jujur: rata/sinyal +0,64% (bukan +1,16% versi 54 koin penyintas). DIPASANG filter
+  kualitas `_spot.quality()` (umur ≥ 1 th, bukan volume panik ≥ 3×, belum ambruk ≥ 80%; env SPOT_QUALITY) → BARU naik
+  90,3%, +0,77%/sin, 20 slot +11%/th DD −30%. Menebak sinyal yang akan turun jauh TIDAK bisa (AUC 0,53–0,58); jual saat
+  turun lebih buruk → hanya peringatan ⚠️ `spot_warn` (turun ≥ 10%/20%: 66%/36% tetap kena TP). Aplikasi 4.3.
+  Urutan bila model dilatih ulang: `spot_peluang --final` → `spot_pindai --simpan` → `spot_jatuh --simpan` (terakhir =
+  angka teruji & `kualitas` di aplikasi).
 - 5 Okt 2026 (permintaan pengguna URGENT "dipindai beberapa menit, koin bukan hanya 20"; `docs/SPOT_PINDAI.md`,
   `research/spot_pindai.py`): cloud memindai TIAP TICK (10 mnt) ±100 pair USDT volume terbesar (env SPOT_COINS,
   SPOT_MIN_VOL), candle harian berjalan = candle terakhir, + filter BTC > SMA200 (env SPOT_BTC_FILTER), maks 20 posisi

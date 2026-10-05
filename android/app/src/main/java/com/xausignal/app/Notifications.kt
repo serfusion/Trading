@@ -129,6 +129,15 @@ object Notifications {
         post(context, event.id.hashCode() + 1, title, text)
     }
 
+    /** ⚠️ Posisi spot turun >= 10% / 20% dari harga beli (cloud _spot.py, sekali per level). Info saja. */
+    fun spotWarn(context: Context, event: SignalEvent) {
+        val title = "⚠️ SPOT ${event.str("coin")}/USDT turun ${fmt(-(event.num("drop") ?: 0.0), 0)}%"
+        val tp = event.num("tetap_tp")
+        val text = (if (tp != null) "Teruji: ${fmt(tp, 0)}% posisi seperti ini tetap kena TP. " else "") +
+            "Limit jual TP tetap dipasang."
+        post(context, event.id.hashCode(), title, text)
+    }
+
     /** ⏱️ Pengingat 1 menit sebelum rilis berita (NewsAlarm). Informasi saja: aplikasi tidak membuka order. */
     fun news(context: Context, items: List<NewsAlarm.Item>) {
         val first = items.minByOrNull { it.at } ?: return

@@ -304,3 +304,57 @@ def test_aturan_3_merah_memberi_sinyal_walau_peluang_model_rendah(fake_model, mo
     store2, pub2 = Store(), Pub()
     run(store2, pub2, btc[-1].t + timedelta(minutes=6), {"BTC": btc, "ETH": btc})
     assert not [e for e in pub2.events if e["type"] == "spot_signal"]
+
+
+def vbars(n=420, seed=20, qv=1e6, last_qv=None):
+    out = [_spot.VBar(b.t, b.o, b.h, b.l, b.c, qv) for b in daily(n=n, seed=seed)]
+    if last_qv is not None:
+        b = out[-1]
+        out[-1] = _spot.VBar(b.t, b.o, b.h, b.l, b.c, last_qv)
+    return out
+
+
+def test_filter_kualitas_koin_berisiko_turun_jauh(monkeypatch):
+    monkeypatch.setitem(_spot.MODEL, "kualitas", {"umur_min": 365, "vol_panik": 3.0, "ambruk": -0.80})
+    bars = vbars()
+    now = bars[-1].t + DAY                                   # candle terakhir sudah penuh
+    assert _spot.quality(bars, now) in (None, "ambruk dari puncak 1 tahun")
+    assert _spot.quality(bars[-300:], now) == "koin < 1 tahun"
+    crash = bars[:-1] + [_core.Bar(bars[-1].t, bars[-1].o, bars[-1].o, 0.01, max(b.h for b in bars[-365:]) * 0.15)]
+    assert _spot.quality(crash, now) == "ambruk dari puncak 1 tahun"
+    flat = [_spot.VBar(b.t, 100, 101, 99, 100, 1e6) for b in bars]
+    assert _spot.quality(flat, now) is None
+    panic = flat[:-1] + [_spot.VBar(flat[-1].t, 100, 101, 99, 100, 3.5e6)]
+    assert _spot.quality(panic, now) == "volume panik"
+    # pagi hari (1 jam berjalan): volume 24 jam ≈ hari ini + sisa kemarin, tidak dianggap panik
+    early = flat[:-1] + [_spot.VBar(flat[-1].t, 100, 101, 99, 100, 0.2e6)]
+    assert _spot.quality(early, flat[-1].t + timedelta(hours=1)) is None
+
+
+def test_peringatan_turun_jauh_sekali_per_level(fake_model, monkeypatch):
+    fake_model["teruji"]["jatuh"] = {"10": {"tetap_tp": 66.0, "akhir": -4.3}, "20": {"tetap_tp": 35.0, "akhir": -12.4}}
+    monkeypatch.setattr(_spot, "prob", lambda x: 0.99)
+    store, pub = Store(), Pub()
+    btc = daily(seed=21)
+    now = btc[-1].t + timedelta(hours=2)
+    run(store, pub, now, {"BTC": btc}, coins=("BTC",))
+    e = store.s["open"]["BTC"]["entry"]
+    monkeypatch.setattr(_spot, "prob", lambda x: 0.1)
+    for i, px in enumerate((e * 0.88, e * 0.87, e * 0.79, e * 0.78)):
+        f15 = lambda coin, start, px=px: m15(start, [px])     # noqa: E731
+        run(store, pub, now + timedelta(minutes=10 * (i + 1)), {"BTC": btc}, coins=("BTC",), f15=f15)
+    w = [x for x in pub.events if x["type"] == "spot_warn"]
+    assert [x["lvl"] for x in w] == [10, 20] and w[0]["tetap_tp"] == 66.0 and "BTC" in store.s["open"]
+
+
+def test_kualitas_dipakai_saat_pindai(fake_model, monkeypatch):
+    fake_model["kualitas"] = {"umur_min": 365, "vol_panik": 3.0, "ambruk": -0.80}
+    monkeypatch.setattr(_spot, "prob", lambda x: 0.99)
+    store, pub = Store(), Pub()
+    young = daily(seed=22, n=300)                            # < 1 tahun
+    r = run(store, pub, young[-1].t + timedelta(hours=1), {"BTC": young, "ETH": young})
+    st = [x for x in pub.events if x["type"] == "spot_status"][-1]
+    assert r["open"] == 0 and st["skipped"] == {"koin < 1 tahun": 2}
+    store2, pub2 = Store(), Pub()
+    run(store2, pub2, young[-1].t + timedelta(hours=1), {"BTC": young, "ETH": young}, use_quality=False)
+    assert len(store2.s["open"]) == 2

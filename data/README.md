@@ -10,6 +10,8 @@ membaca dari `data/research/...`; pengunduh melewati file yang sudah ada.
 | `research/eksternal/exness/<SIMBOL>/` | tick asli Exness (XAUUSDc akun Cent 2015–, BTCUSDm 2017–) di jendela berita (`<th>-<bln>.parquet`, int x1000/x100, zstd) + spread per jam UTC (`spread_<th>-<bln>.csv`) | `python -m research.exness XAUUSDc 2015-01 2026-09` |
 | `research/eksternal/binance_1s/` | kline 1 detik BTCUSDT (close) 2 menit sebelum s.d. 16 menit sesudah rilis | `python -m research.news_detik download_btc` |
 | `research/spoluan_forex-factory-scraper/datasets/`, `research/ehsanrs2_forexfactory-scraper/` | kalender ForexFactory 2010 – Jan 2026 (actual/forecast/previous) | klon GitHub (tanpa `.git`) |
+| `research/eksternal/spot_1d/` | candle harian 653 pair USDT Binance (termasuk yang sudah dihapus), kolom open/high/low/close/qv (volume USDT) | `python -m research.spot_semua unduh` (data.binance.vision) |
+| `research/eksternal/pair_h1/` | candle 1 jam kripto (±76 koin) & forex | `python -m research.pair_kripto unduh`, `research.pair_data` |
 | folder `research/<pemilik>_<repo>/` lain | data harga XAU/BTC dari repo GitHub publik (`research/download_data.sh`) | `bash research/download_data.sh` (folder yang sudah ada dilewati) |
 
 Batas GitHub: 100 MB per file. File lebih besar tidak di-commit (dicatat di tabel "tidak di repo" di bawah) dan

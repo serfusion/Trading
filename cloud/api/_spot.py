@@ -7,6 +7,8 @@ berjalan dipakai sebagai candle terakhir (harga sekarang = close) -> fitur -> pe
 dari model gradient boosting (spot_model.json: pohon diekspor, dievaluasi tanpa pustaka). Sinyal = peluang >= ambang
 ATAU aturan 3 merah, dan BTC di atas SMA200 (filter teruji; BTC di bawah SMA200 -> spot dijeda). Posisi dicek tiap tick
 dengan candle 15 menit SETELAH entry: high menyentuh TP -> CLOSE (limit jual terisi); N hari lewat -> CLOSE.
+Filter kualitas (research/spot_jatuh.py): lewati koin < 1 tahun, ambruk >= 80% dari puncak 1 tahun, volume panik.
+Posisi turun >= 10% / 20% -> peringatan ⚠️ spot_warn (bukan jual: menjual saat turun teruji lebih buruk).
 Hanya informasi: cloud TIDAK membuka order spot.
 
 Data: data-api.binance.vision -> api.binance.us -> Twelve Data (hanya candle harian, maks 4 kredit per tick; Vercel di
@@ -21,6 +23,7 @@ import threading
 import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor, wait
+from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -33,7 +36,8 @@ M15 = timedelta(minutes=15)
 KEEP_CLOSED = 30
 STATUS_EVERY = timedelta(minutes=30)
 COOLDOWN = timedelta(hours=1)           # setelah CLOSE: koin yang sama paling cepat 1 jam lagi (riset: jam berikutnya)
-BARS = 260                              # SMA200 + RSI stabil
+BARS = 400                              # SMA200 + RSI stabil + umur koin & puncak 1 tahun (filter kualitas)
+WARN_LEVELS = (10, 20)                  # ⚠️ peringatan posisi turun >= 10% / 20% dari harga beli
 WORKERS = 16
 UNIVERSE_EVERY = timedelta(hours=6)
 BINANCE = ("https://data-api.binance.vision", "https://api.binance.us")
@@ -46,9 +50,14 @@ _LOCK = threading.Lock()
 
 
 # ------------------------------------------------------------------ data
+@dataclass
+class VBar(_core.Bar):
+    qv: float = 0.0                     # volume USDT (quote) candle ini; 0 = tidak tersedia (Twelve Data)
+
+
 def _bars(rows) -> list[_core.Bar]:
-    return [_core.Bar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]), float(r[3]),
-                      float(r[4])) for r in rows or []]
+    return [VBar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]), float(r[3]),
+                 float(r[4]), float(r[7]) if len(r) > 7 else 0.0) for r in rows or []]
 
 
 def _binance(base: str, coin: str, n: int, interval: str = "1d", start: datetime | None = None) -> list[_core.Bar]:
@@ -247,6 +256,26 @@ def _pct(v: float) -> str:
     return f"{v:+.1f}%".replace(".", ",")
 
 
+def quality(bars: list[_core.Bar], now: datetime) -> str | None:
+    """Koin berisiko turun jauh (research/spot_jatuh.py, filter kualitas teruji semua koin Binance) -> alasan dilewati.
+    Umur < 1 tahun, sudah ambruk >= 80% dari puncak 1 tahun, atau volume 24 jam >= 3x rata-rata 30 hari (panik)."""
+    k = MODEL.get("kualitas")
+    if not k:
+        return None
+    if len(bars) < k["umur_min"] + 1:
+        return "koin < 1 tahun"
+    if bars[-1].c / max(b.h for b in bars[-365:]) - 1 <= k["ambruk"]:
+        return "ambruk dari puncak 1 tahun"
+    qv = [getattr(b, "qv", 0.0) for b in bars]
+    base = qv[-31:-1]
+    if all(base):
+        frac = min(max((now - bars[-1].t) / DAY, 1 / 24), 1.0)
+        q24 = qv[-1] + qv[-2] * (1 - frac)              # perkiraan volume 24 jam terakhir
+        if q24 / (sum(base) / len(base)) >= k["vol_panik"]:
+            return "volume panik"
+    return None
+
+
 # ------------------------------------------------------------------ putaran
 def _check(pos: dict, now: datetime, bars15: list[_core.Bar] | None, daily: list[_core.Bar] | None,
            price: float | None) -> tuple[str | None, float | None]:
@@ -273,7 +302,7 @@ def _check(pos: dict, now: datetime, bars15: list[_core.Bar] | None, daily: list
 
 def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: int = 20, fetch=None,
               deadline_s: float = 20.0, coins_fn=None, fetch_15m=None, btc_filter: bool = True,
-              top: int = 100, min_vol: float = 5e6) -> dict:
+              top: int = 100, min_vol: float = 5e6, use_quality: bool = True) -> dict:
     """Dipanggil tiap tick cloud (10 menit): pindai semua koin dengan candle harian berjalan + cek posisi. Idempoten.
     coins_fn() -> (daftar koin, sumber); fetch(coin, n, key, budget) -> (candle harian, sumber);
     fetch_15m(coin, start) -> candle 15 menit (disuntik di tes)."""
@@ -359,9 +388,31 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
         events.append(f"spot close {coin} {_pct(r)}")
         changed = True
 
+    # 3b) ⚠️ deteksi turun jauh: posisi turun >= 10% / 20% dari harga beli -> peringatan sekali per level
+    st_j = MODEL.get("teruji", {}).get("jatuh", {})
+    for coin, pos in open_.items():
+        px = prices.get(coin)
+        if not px:
+            continue
+        drop = (px / pos["entry"] - 1) * 100
+        for lvl in WARN_LEVELS:
+            if drop <= -lvl and lvl not in (pos.get("warn") or []):
+                pos["warn"] = (pos.get("warn") or []) + [lvl]
+                j = st_j.get(str(lvl), {})
+                ev = {"type": "spot_warn", "id": f"{pos['id']}-W{lvl}", "symbol": f"{coin}/USDT", "coin": coin,
+                      "entry": pos["entry"], "price": px, "drop": round(drop, 1), "lvl": lvl, "time": _core.iso(now),
+                      "tetap_tp": j.get("tetap_tp"), "akhir": j.get("akhir")}
+                text = (f"Turun {_pct(drop)} dari beli {_px(pos['entry'])}. " +
+                        (f"Teruji: {j['tetap_tp']:.0f}% posisi seperti ini tetap kena TP, rata akhir {_pct(j['akhir'])}"
+                         f" (jual sekarang rata-rata lebih buruk). " if j else "") + "Limit jual TP tetap dipasang.")
+                pub.publish(ev, text, f"⚠️ SPOT {coin}/USDT turun {abs(drop):.0f}%", 4, ["warning"])
+                events.append(f"spot warn {coin} {_pct(drop)}")
+                changed = True
+
     # 4) pindai: candle hari ini yang masih berjalan = candle terakhir (fitur "seandainya hari tutup sekarang")
     btc = daily.get("BTC")
     found = []
+    skipped: dict[str, int] = {}
     btc_up = None
     if btc:
         xb = features(btc, btc)
@@ -378,6 +429,10 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
                 continue
             if use_btc and btc_up is False:
                 continue                                     # BTC di bawah SMA200: spot dijeda (teruji)
+            why = quality(bars, now) if use_quality else None
+            if why:
+                skipped[why] = skipped.get(why, 0) + 1
+                continue
             last_close = next((c_ for c_ in closed if c_["coin"] == coin), None)
             if coin in open_ or len(open_) >= max_open or (
                     last_close and now - _core.parse_iso(last_close["time"]) < COOLDOWN):
@@ -416,7 +471,7 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             {**p, "price": prices.get(c)} for c, p in open_.items()], "closed": closed[:20],
             "scan_at": _core.iso(now), "scan_day": now.strftime("%Y-%m-%d"), "every_min": 10,
             "coins": len(coins), "scanned": len(scanned), "found": len(found), "btc_up": btc_up,
-            "btc_filter": use_btc, "source": state.get("source"),
+            "btc_filter": use_btc, "source": state.get("source"), "skipped": skipped,
             "tp_pct": round(tp * 100, 1), "days": days, "ambang": round(thr * 100), "max_open": max_open,
             "teruji": MODEL.get("teruji", {}), "error": state["error"]})
         state["status_at"] = _core.iso(now)
