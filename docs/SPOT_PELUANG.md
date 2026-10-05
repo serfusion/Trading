@@ -59,3 +59,16 @@ Permintaan pengguna: lebih banyak koin, lewati volatilitas tinggi atau manfaatka
 | Ikut tren saat volatil (sinyal baru) | 84% | +0%/th, DD −41% | +13%/th |
 Kesimpulan: menambah koin memperburuk (koin kecil ambruk bersamaan); ikut tren saat volatil rugi sejak 2021. Dipasang:
 lewati koin bila volatilitas 14 hari > 90% kondisi 365 hari terakhirnya (`_spot.vol_rank`, `skip_vol` di spot_model.json).
+
+## Uji 5 Okt 2026: deteksi "akan naik" di SEMUA koin (`research/spot_naik.py`, `research/spot_semua.py`)
+679 pair USDT Binance (termasuk delisting), volume ≥ $2 juta/hari, fitur + volume/breakout/squeeze/umur koin,
+gradient boosting walk-forward, 6 aturan keluar. Hasil lengkap `docs/eksternal/hasil_spot_naik.txt`. Terbaik per aturan:
+| Aturan keluar | WR BARU | Rata/sinyal BARU | Portofolio 10 slot BARU | LAMA |
+|---|---|---|---|---|
+| TP +3% / 10 hari, p≥0,9 | 89% | +0,39% | −2%/th, DD −86% | +84%/th DD −53% |
+| TP +15% / SL −10% / 20 hari, p≥0,7 | 46% | +1,12% | +15%/th, DD −39% | +17%/th DD −47% |
+| TP +10% / SL −8% / 15 hari, p≥0,6 | 47% | +0,08% | +9%/th, DD −61% | +29%/th DD −60% |
+| TP +25% / SL −12% / 30 hari | 35–38% | +0,4–1% | −19..+3%/th | |
+| **💎 terpasang (20 koin besar, lewati vol > P90)** | **92%** | **+1,37%** | **+15%/th, DD −14%** | +22%/th DD −32% |
+Kesimpulan: koin kecil/volatil menambah kerugian besar (kegagalan rata −17%, jatuh bersamaan saat pasar turun);
+TP lebar + SL memberi WR < 50% dengan DD 2–3× lebih dalam. Tidak ada varian semua-koin yang lebih baik → TIDAK dipasang.
