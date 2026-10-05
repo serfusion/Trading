@@ -128,6 +128,21 @@ def features(bars: list[_core.Bar], btc: list[_core.Bar]) -> list[float] | None:
     return [f[k] for k in MODEL.get("fitur", list(f))]
 
 
+def vol_rank(bars: list[_core.Bar], window: int = 365) -> float | None:
+    """Peringkat volatilitas 14 hari sekarang dibanding 365 hari terakhir koin itu (0..1, seperti pandas rank pct)."""
+    c = [b.c for b in bars]
+    if len(c) < 15 + 120:
+        return None
+    lr = [math.log(c[i] / c[i - 1]) for i in range(1, len(c))]
+    vols = [_std(lr[i - 14:i]) for i in range(14, len(lr) + 1)][-window:]
+    if len(vols) < 120:
+        return None
+    cur = vols[-1]
+    less = sum(1 for v in vols if v < cur)
+    eq = sum(1 for v in vols if v == cur)
+    return (less + (eq + 1) / 2) / len(vols)
+
+
 def red_rule(x: list[float]) -> bool:
     """Aturan cadangan yang ikut teruji: 3 hari merah beruntun, turun ≥ 10% dalam 3 hari, harga di atas SMA200."""
     if not MODEL.get("aturan_merah"):
@@ -231,7 +246,7 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
         if scan.get("day") != day_key:
             scan = {"day": day_key, "todo": list(MODEL["coins"]), "found": 0}
         try:
-            btc_bars, src = fetch("BTC", 300, td_key, budget)
+            btc_bars, src = fetch("BTC", 420, td_key, budget)
             btc_closed = [b for b in btc_bars if b.t + DAY <= now]
             state["source"] = src
         except Exception as exc:  # noqa: BLE001
@@ -240,7 +255,7 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
         while btc_closed and scan["todo"] and time.monotonic() - started < deadline_s:
             coin = scan["todo"][0]
             try:
-                bars = btc_bars if coin == "BTC" else fetch(coin, 300, td_key, budget)[0]
+                bars = btc_bars if coin == "BTC" else fetch(coin, 420, td_key, budget)[0]
             except Exception as exc:  # noqa: BLE001
                 errors.append(str(exc)[:120])
                 if "jatah habis" in str(exc):
@@ -254,6 +269,9 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             x = features(cl, btc_closed)
             if x is None:
                 continue
+            vr = vol_rank(cl)
+            if vr is not None and vr > MODEL.get("skip_vol", 1.1):
+                continue                      # volatilitas terlalu tinggi: lewati (research/spot_vol.py)
             p = prob(x)
             rule = red_rule(x)
             closed_today = any(x["coin"] == coin and x["time"][:10] == day_key for x in closed)

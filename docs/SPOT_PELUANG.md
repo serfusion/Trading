@@ -46,3 +46,16 @@ Kalibrasi sejak Okt 2021: tebakan 93–95% → kenyataan 91%; ≥ 95% → 92%. A
   Twelve Data (maks 4 kredit per tick). Belum bisa dites langsung dari sesi riset (host diblokir jaringan sesi);
   lihat `spot.source` / `spot_error` di respons /api/tick setelah redeploy.
 - Hanya informasi: cloud tidak membuka order spot. Env Vercel: `SPOT_SIGNALS=0` mematikan, `SPOT_MAX` (bawaan 10).
+
+## Perbaikan 5 Okt 2026: filter volatilitas (`research/spot_vol.py`, hasil `docs/eksternal/hasil_spot_vol.txt`)
+Permintaan pengguna: lebih banyak koin, lewati volatilitas tinggi atau manfaatkan alurnya. Diuji (portofolio 10 slot):
+| Varian | Naik +3% (BARU) | Portofolio BARU | Portofolio LAMA |
+|---|---|---|---|
+| Terpasang sebelumnya (20 koin) | 91% | +15%/th, DD −21% | +32%/th, DD −40% |
+| 54 koin yang masih diperdagangkan | 90% | +4%/th, DD −51% | +62%/th, DD −40% |
+| **20 koin, lewati volatilitas > P90 (DIPASANG)** | **92%** | **+15%/th, DD −14%** | +22%/th, DD −32% |
+| 20 koin, lewati volatilitas > P70 | 91% | +10%/th, DD −10% | +19%/th, DD −14% |
+| TP +5% saat volatil | 86% | +16%/th, DD −21% | +45%/th, DD −40% |
+| Ikut tren saat volatil (sinyal baru) | 84% | +0%/th, DD −41% | +13%/th |
+Kesimpulan: menambah koin memperburuk (koin kecil ambruk bersamaan); ikut tren saat volatil rugi sejak 2021. Dipasang:
+lewati koin bila volatilitas 14 hari > 90% kondisi 365 hari terakhirnya (`_spot.vol_rank`, `skip_vol` di spot_model.json).

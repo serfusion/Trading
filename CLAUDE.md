@@ -243,7 +243,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `research/spot_peluang.py --final` (gradient boosting walk-forward, 20 koin live + koin ambruk) → `cloud/api/
   spot_model.json` + `_spot.py` (harian 07:05 WIB, cek tiap jam, baris Supabase `spot`, env SPOT_SIGNALS/SPOT_MAX) →
   aplikasi 4.1 kartu 💎 (`SpotCard.kt`, pair diikuti "SPOT"). Sinyal = p ≥ 93% ATAU 3 merah ≥10% +SMA200; TP +3%/10 hari:
-  BARU naik 91% (acak 76%), +1,16%/sinyal, rugi rata −14%, portofolio 10 slot +14%/th DD −19% (docs/SPOT_PELUANG.md).
+  BARU naik 91% (acak 76%). 5 Okt: + lewati volatilitas > P90 (spot_vol.py): naik 92%, portofolio BARU +15%/th DD −14%;
+  54 koin & "ikut tren saat volatil" memperburuk → tidak dipasang (docs/SPOT_PELUANG.md).
 - `research/spot_dip.py` (704 kombinasi, 21 koin hidup) & `spot_dip2.py` (+ koin ambruk/delisting, portofolio slot,
   pilih dari LAMA). WR per trade 80–95% tetapi kalah rata −13..−25% (terburuk −55..−100%); portofolio BARU terbaik
   ±+5–7%/th DD −13..−24% (BTC beli-tahan +12%/th DD −77%). Kandidat: 3 merah ≥10% +SMA200, TP 5%, maks 10 hari,

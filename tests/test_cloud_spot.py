@@ -162,3 +162,11 @@ def test_aturan_3_merah_memberi_sinyal_walau_peluang_model_rendah(fake_model, mo
     store2, pub2 = Store(), Pub()
     _spot.spot_tick(btc[-1].t + timedelta(minutes=6), store2, pub2, fetch=make_fetch({"BTC": btc, "ETH": btc}))
     assert not [e for e in pub2.events if e["type"] == "spot_signal"]
+
+
+def test_vol_rank_sama_dengan_pandas():
+    bars = daily(n=420, seed=11)
+    c = pd.Series([b.c for b in bars])
+    v = np.log(c).diff().rolling(14).std()
+    want = v.rolling(365, min_periods=120).rank(pct=True).iloc[-1]
+    assert _spot.vol_rank(bars) == pytest.approx(want, rel=1e-9)
