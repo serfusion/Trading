@@ -401,7 +401,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 )
                 CardTitle("Pair yang saya ikuti")
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap", "SPOT" to "💎 Spot").forEach { (k, label) ->
+                    listOf("XAU" to "XAU/USD", "BTC" to "Kripto (BTC·ETH·DOGE·ADA)", "GAP" to "Forex gap", "SPOT" to "💎 Spot").forEach { (k, label) ->
                         FilterChip(
                             selected = k in follow,
                             onClick = { follow = if (k !in follow) follow + k else if (follow.size > 1) follow - k else follow },

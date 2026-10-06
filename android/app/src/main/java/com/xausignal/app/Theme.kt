@@ -420,6 +420,8 @@ fun AssetCoin(symbol: String, size: Dp = 40.dp) {
         s.startsWith("XAU") -> Triple("Au", Color(0xFFFFE6A0), Color(0xFFC88A16))
         s.startsWith("BTC") -> Triple("₿", Color(0xFFFFC46B), Color(0xFFE8710F))
         s.startsWith("ETH") -> Triple("Ξ", Color(0xFFC9BCFF), Color(0xFF6552D8))
+        s.startsWith("DOGE") -> Triple("Ð", Color(0xFFF3DE8A), Color(0xFFBA9F33))
+        s.startsWith("ADA") -> Triple("₳", Color(0xFF9EC1FF), Color(0xFF0033AD))
         s.substringBefore("/") in FIAT -> Triple("FX", Color(0xFF9AD0FF), Color(0xFF2E6BDB))
         else -> Triple(s.substringBefore("/").take(3), Color(0xFF8CF0D6), Color(0xFF15A39A))   // koin spot lain
     }

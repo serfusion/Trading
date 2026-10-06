@@ -225,6 +225,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   hanya saat 💰 BTC searah terbuka (env ETH_SIGNALS, baris Supabase `eth`); BTC lapisan tetap (pengganti lebih buruk).
   Kripto lain (`research/pair_kripto.py`, 25 koin): DOGE/ADA/XLM lolos riset saat 💰 BTC searah, tetapi pengguna memilih
   "ETH saja" (3 Okt) → TIDAK dipasang. Forex baru & XAG tidak bisa diuji (Twelve Data gratis: data lama/berbayar).
+  6 Okt (izin "pasang semua WR dan profit tinggi yang belum dipasang"): DOGE & ADA DIPASANG (semua kategori saat 💰 BTC
+  searah; replay cloud DOGE BARU WR 60% +0,17R, ADA 60% +0,13R; `_core.KRIPTO_CFG` 6 desimal/SL+ ≈ entry/ukuran KOIN,
+  feed Binance 1 jam `tick.KlineFeed`, env KRIPTO_SIGNALS/KRIPTO_COINS, baris `doge`/`ada`; docs/PAIR_TAMBAHAN.md akhir).
+  `_core.dg/td` = desimal harga event/teks per cfg (bawaan 3/2, XAU/BTC tidak berubah). Kandidat lain sengaja tidak
+  dipasang (WR atau profit tidak tinggi) — daftar di docs/PAIR_TAMBAHAN.md.
 - Gap forex diverifikasi (`research/verifikasi_gap.py`, replay `_gap.gap_tick`): WR 72–83% sebelum 2021, sejak 2021 hanya
   4–9 sinyal/pair (USD/JPY 1 dari 4). Aplikasi 3.33: kartu 🏆 + saran entry pindah ke tombol ⓘ (InfoDialog) dan memuat
   ETH, lapisan, gap; tab Sinyal hanya kartu status tren 🐂/🐻 (+ETH).

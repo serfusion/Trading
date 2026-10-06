@@ -169,10 +169,18 @@ fun SignalEvent.exitBars(): Int = str("set").substringAfter('/', "").toIntOrNull
 /** Sinyal gap pekan forex (1 posisi, TP & SL, tutup otomatis 24 jam). */
 fun SignalEvent.isGap(): Boolean = str("mode") == "gap"
 
+/** Kripto sinyal tren (BTC + ETH/DOGE/ADA yang hanya muncul saat 💰 BTC searah) — satu kelompok "BTC". */
+val CRYPTO = listOf("BTC", "ETH", "DOGE", "ADA")
+
+/** Kelompok simbol: XAU, BTC (semua kripto sinyal tren), atau GAP (forex gap pekan). */
+fun groupOf(symbol: String): String =
+    if (symbol.startsWith("XAU")) "XAU" else if (CRYPTO.any { symbol.startsWith(it) }) "BTC" else "GAP"
+
 /** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, GAP (forex gap pekan), atau SPOT (💎 spot Binance). */
-fun SignalEvent.pairGroup(): String = if (type.startsWith("spot")) "SPOT" else symbol().let {
-    if (it.startsWith("XAU")) "XAU" else if (it.startsWith("BTC") || it.startsWith("ETH")) "BTC" else "GAP"
-}
+fun SignalEvent.pairGroup(): String = if (type.startsWith("spot")) "SPOT" else groupOf(symbol())
+
+/** Sinyal yang ukurannya dalam KOIN (DOGE/ADA; ukuran kontrak tiap broker berbeda) — cloud field "satuan". */
+fun SignalEvent.coinUnits(): Boolean = str("satuan") == "koin"
 
 /** Waktu event (UTC), null bila tidak terbaca. */
 fun SignalEvent.instant(): java.time.Instant? = try {
