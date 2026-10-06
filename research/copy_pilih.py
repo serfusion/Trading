@@ -1,0 +1,232 @@
+"""👥 Pilih copy trader teruji (Binance Copy Trading + MQL5 Signals) → cloud/api/copytrader.json
+
+python -m research.copy_pilih [--segar]     (--segar: unduh ulang daftar; dipakai GitHub Actions mingguan)
+python -m research.copy_pilih uji           (uji maju aturan ini → docs/eksternal/hasil_copy_pilih.txt; angka "uji" di JSON)
+Izin pengguna 6 Okt 2026 ("pasang copy trader dengan WR dan profit tinggi yang sudah teruji"). Aturan dari uji
+research/copy_trade.py, binance_copy.py, mql5_signals.py — memilih WR/ROI tertinggi saja TIDAK bertahan; yang paling
+tahan: umur ≥ 12 bulan, untung di DUA paruh tahun (konsisten), drawdown kecil, WR ≥ 60–65%, pengikut nyata.
+  Binance: umur ≥ 365 hari, ROI 365 hari > 0 dan positif di paruh 1 & 2 grafik, MDD ≤ 20%, WR ≥ 60%, PnL pengikut > 0,
+           ≥ 30 pengikut, masih aktif (grafik berubah ≥ 30% hari dalam 30 hari terakhir). Peringkat: ROI / MDD.
+           WR ≥ 95% diberi tanda ⚠️ (biasanya posisi rugi ditahan/floating, bukan keahlian).
+  MQL5   : akun real, ≥ 52 minggu, DD ≤ 20%, win ≥ 65%, ≥ 100 trade, riwayat ≥ 12 bulan, tiap 6 bulan terakhir positif,
+           bulan terburuk > −10%, max deposit load ≤ 30% (anti grid/martingale), ≥ 5 pelanggan, saldo ≥ $1.000, growth
+           12 bulan ≤ 300% (lebih dari itu = akun kecil sangat agresif). Peringkat: growth 12 bulan / DD.
+Info saja: aplikasi menampilkan nama + angka + link langganan; tidak ada order otomatis.
+"""
+from __future__ import annotations
+
+import gzip
+import json
+import re
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+from . import binance_copy as B
+from . import mql5_signals as M
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT = ROOT / "cloud" / "api" / "copytrader.json"
+NOW = pd.Timestamp.now(tz="UTC")
+
+
+def binance(segar: bool) -> list[dict]:
+    f = B.DIR / "list_365D.json"
+    if segar or not (f.exists() or f.with_suffix(".json.gz").exists()):
+        B.DIR.mkdir(parents=True, exist_ok=True)
+        rows, n = [], 1
+        while True:
+            lst = B.page(n, "365D").get("list") or []
+            if not lst:
+                break
+            rows += lst
+            n += 1
+            time.sleep(0.4)
+        if not rows:
+            raise RuntimeError("daftar Binance kosong (diblokir/galat jaringan)")
+        f.write_text(json.dumps(rows))
+    rows = json.loads(f.read_text() if f.exists() else gzip.decompress(f.with_suffix(".json.gz").read_bytes()))
+    out = []
+    for r in rows:
+        c = np.array([x["value"] for x in r.get("chartItems") or []], float)
+        start = pd.Timestamp(r.get("startTime") or 0, unit="ms", tz="UTC")
+        if len(c) < 360 or (NOW - start).days < 365:
+            continue
+        eq = np.clip(1 + c / 100, 1e-3, None)
+        h1, h2 = float(eq[180] / eq[0] - 1), float(eq[-1] / eq[180] - 1)
+        aktif = float((np.diff(eq)[-30:] != 0).mean())          # masih berdagang 30 hari terakhir
+        ok = (r["roi"] > 0 and h1 > 0 and h2 > 0 and (r["mdd"] or 99) <= 20 and (r["winRate"] or 0) >= 60
+              and (r["copierPnl"] or 0) > 0 and (r["currentCopyCount"] or 0) >= 30 and aktif >= 0.3)
+        if not ok:
+            continue
+        out.append({"platform": "Binance", "id": r["leadPortfolioId"], "name": r["nickname"],
+                    "url": f"https://www.binance.com/en/copy-trading/lead-details/{r['leadPortfolioId']}",
+                    "roi": round(r["roi"], 1), "mdd": round(r["mdd"], 1), "wr": round(r["winRate"], 1),
+                    "pengikut": int(r["currentCopyCount"]), "penuh": r["currentCopyCount"] >= (r.get("maxCopyCount") or 1e9),
+                    "pnl_pengikut": round(r["copierPnl"]), "paruh": [round(h1 * 100, 1), round(h2 * 100, 1)],
+                    "r90": round(float(eq[-1] / eq[-91] - 1) * 100, 1),
+                    "wr_curiga": r["winRate"] >= 95,     # WR ≈ 100% biasanya = posisi rugi ditahan (floating)
+                    "aset": "kripto futures", "skor": r["roi"] / max(r["mdd"], 3)})
+    return sorted(out, key=lambda x: -x["skor"])
+
+
+def mql5(segar: bool) -> list[dict]:
+    if segar or not list(M.DIR.glob("list_*.csv")):
+        M.unduh()                                   # galat bila daftar kosong (DataFrame tanpa kolom id)
+    lst = pd.concat([pd.read_csv(f) for f in M.DIR.glob("list_*.csv")]).drop_duplicates("id")
+    cand = lst[lst.real & (lst.weeks >= 52) & (lst.dd <= 20) & (lst.win >= 65) & (lst.trades >= 100) & (lst.growth > 0)
+               & (lst.subs >= 5) & (lst.balance >= 1000)]
+    d = M.DIR / "detail"
+    d.mkdir(parents=True, exist_ok=True)
+    out = []
+    for _, r in cand.iterrows():
+        f = d / f"{int(r.id)}.json"
+        if segar or not f.exists():
+            html = M.get(f"{M.BASE}/en/signals/{int(r.id)}")
+            if not html:
+                continue
+            f.write_text(json.dumps(M.parse_detail(html)))
+            time.sleep(1.0)
+        j = json.loads(f.read_text())
+        mo = pd.Series(j.get("months") or {}).sort_index()
+        if len(mo) < 12:
+            continue
+        last = mo.iloc[-13:-1] if len(mo) >= 13 else mo.iloc[-12:]       # 12 bulan penuh terakhir
+        h1, h2 = float((1 + last.iloc[:6]).prod() - 1), float((1 + last.iloc[6:]).prod() - 1)
+        load = M.pct(j.get("Max deposit load"))
+        g12 = float((1 + last).prod() - 1)
+        if h1 <= 0 or h2 <= 0 or last.min() <= -0.10 or load is None or load > 30 or g12 > 3.0:
+            continue
+        sym = (j.get("symbols") or [["", 0]])[0][0]
+        out.append({"platform": "MQL5 " + r.mt.upper(), "id": int(r.id), "name": r["name"],
+                    "url": f"https://www.mql5.com/en/signals/{int(r.id)}", "roi": round(g12 * 100, 1),
+                    "mdd": float(r.dd), "wr": float(r.win), "pengikut": int(r.subs or 0), "harga": float(r.price or 0),
+                    "minggu": int(r.weeks), "paruh": [round(h1 * 100, 1), round(h2 * 100, 1)],
+                    "bulan_terburuk": round(float(last.min()) * 100, 1), "beban": load,
+                    "r90": round(float((1 + last.iloc[-3:]).prod() - 1) * 100, 1), "wr_curiga": float(r.win) >= 95,
+                    "aset": re.sub(r"[._].*$", "", sym) or "-", "emas": "XAU" in sym.upper(),
+                    "skor": g12 / max(float(r.dd), 3) * 100})
+    return sorted(out, key=lambda x: -x["skor"])
+
+
+def _mdd(e: np.ndarray) -> float:
+    return float((e / np.maximum.accumulate(e) - 1).min())
+
+
+def uji() -> None:
+    """Uji maju aturan pemilih: Binance pilih dengan hari 1–180 grafik ROI → ukur hari 181–365; MQL5 tiap bulan M pilih
+    dengan 12 bulan → ukur 6 bulan. WR/pengikut/DD daftar hanya angka SEKARANG (tidak dipakai saat memilih, hindari
+    look-ahead); max deposit load MQL5 = angka sekarang (sedikit look-ahead). Bias penyintas di kedua sumber."""
+    L = ["# 👥 Uji maju aturan pemilih copy trader (research/copy_pilih.py uji)", ""]
+    rows = json.loads(gzip.decompress((B.DIR / "list_365D.json.gz").read_bytes()))
+    R = []
+    for r in rows:
+        c = np.array([x["value"] for x in r.get("chartItems") or []], float)
+        if len(c) < 360:
+            continue
+        eq = np.clip(1 + c / 100, 1e-3, None)
+        a, b = eq[:181], eq[180:]
+        da = np.diff(a)
+        if (da != 0).mean() < 0.3:
+            continue
+        R.append({"past": a[-1] / a[0] - 1, "h1": a[90] / a[0] - 1, "h2": a[-1] / a[90] - 1, "pm": _mdd(a),
+                  "act30": (da[-30:] != 0).mean(), "up": (da > 0).sum() / max((da != 0).sum(), 1),
+                  "fut": b[-1] / b[0] - 1, "fm": _mdd(b)})
+    p = pd.DataFrame(R)
+    rule = p[(p.past > 0) & (p.h1 > 0) & (p.h2 > 0) & (p.pm >= -0.20) & (p.act30 >= 0.3)]
+    sc = rule.past / rule.pm.abs().clip(lower=0.03)
+    L += [f"## Binance (pilih hari 1–180, ukur hari 181–365; {len(p)} portfolio aktif yang MASIH publik)",
+          "| Pilihan | n | Median 185 hari | Rata-rata | Rugi | Hancur < −50% | DD median |", "|---|---|---|---|---|---|---|"]
+    for lab, x in (("semua", p), ("lolos aturan", rule), ("aturan, 20 teratas ROI/DD", rule.loc[sc.nlargest(20).index]),
+                   ("aturan, 6 teratas ROI/DD", rule.loc[sc.nlargest(6).index]), ("ROI tertinggi 20", p.nlargest(20, "past")),
+                   ("% hari naik tertinggi 20 (proksi WR)", p.nlargest(20, "up"))):
+        L.append(f"| {lab} | {len(x)} | {x.fut.median() * 100:+.1f}% | {x.fut.mean() * 100:+.1f}% | {(x.fut < 0).mean() * 100:.0f}% | "
+                 f"{(x.fut < -0.5).mean() * 100:.0f}% | {x.fm.median() * 100:.0f}% |")
+    det = {}
+    for f in (M.DIR / "detail").glob("*.json"):
+        j = json.loads(f.read_text())
+        if len(j.get("months", {})) >= 18:
+            det[int(f.stem)] = j
+    lst = pd.concat([pd.read_csv(f) for f in M.DIR.glob("list_*.csv")]).drop_duplicates("id").set_index("id")
+    Rm = pd.DataFrame({i: pd.Series(j["months"]) for i, j in det.items()}).sort_index()
+    Rm.index = pd.PeriodIndex(Rm.index, freq="M")
+    load = pd.Series({i: M.pct(j.get("Max deposit load")) for i, j in det.items()}, dtype=float)
+    real = lst.real.reindex(Rm.columns).fillna(False).astype(bool)
+    res = {k: [] for k in ("semua", "lolos aturan", "aturan, 6 teratas", "growth 12 bln tertinggi 6")}
+    for m in Rm.index[12:-6]:
+        past, fut = Rm.loc[m - 11:m], Rm.loc[m + 1:m + 6]
+        ok = (past.notna().sum() >= 12) & (fut.notna().sum() >= 1)
+        ids = ok[ok].index
+        if len(ids) < 15:
+            continue
+        g = (1 + past[ids]).prod() - 1
+        h1, h2 = (1 + past[ids].iloc[:6]).prod() - 1, (1 + past[ids].iloc[6:]).prod() - 1
+        worst, f = past[ids].min(), (1 + fut[ids].fillna(0)).prod() - 1
+        mask = (h1 > 0) & (h2 > 0) & (worst > -0.10) & (g <= 3.0) & (load.reindex(ids).fillna(100) <= 30) & real.reindex(ids)
+        rule_m = ids[mask.values]
+        sc_m = g[rule_m] / worst[rule_m].abs().clip(lower=0.01)
+        for k, sel in (("semua", ids), ("lolos aturan", rule_m), ("aturan, 6 teratas", sc_m.nlargest(6).index),
+                       ("growth 12 bln tertinggi 6", g.nlargest(6).index)):
+            if len(sel):
+                res[k].append({"m": str(m), "fut": f[sel].median(), "neg": (f[sel] < 0).mean(), "bad": (f[sel] < -0.3).mean(),
+                               "n": len(sel)})
+    x0 = pd.DataFrame(res["semua"])
+    L += ["", f"## MQL5 (tiap bulan pilih dengan 12 bulan, ukur 6 bulan; {len(x0)} periode {x0.m.iloc[0]}–{x0.m.iloc[-1]}, "
+          f"{Rm.shape[1]} sinyal yang MASIH aktif)",
+          "| Pilihan | n rata | Median 6 bln | Rugi | < −30% |", "|---|---|---|---|---|"]
+    for k, v in res.items():
+        x = pd.DataFrame(v)
+        L.append(f"| {k} | {x.n.mean():.0f} | {x.fut.median() * 100:+.1f}% | {x.neg.mean() * 100:.0f}% | {x.bad.mean() * 100:.0f}% |")
+    L += ["", "Kesimpulan: aturan ini terutama MENGURANGI risiko (rugi & hancur), bukan menjamin profit lebih besar. "
+          "Bias penyintas: penyedia yang sudah tutup/dihapus tidak ada di data → angka nyata lebih rendah."]
+    out = ROOT / "docs" / "eksternal" / "hasil_copy_pilih.txt"
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
+    print("\n".join(L))
+
+
+def main() -> None:
+    if "uji" in sys.argv:
+        uji()
+        return
+    segar = "--segar" in sys.argv
+    lama = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
+    hasil, galat = {}, {}
+    for key, fn in (("binance", binance), ("mql5", mql5)):
+        try:
+            hasil[key] = fn(segar)
+        except Exception as exc:  # noqa: BLE001 - satu sumber gagal → pakai daftar minggu lalu, sumber lain tetap
+            galat[key] = f"{type(exc).__name__}: {str(exc)[:120]}"
+            hasil[key] = None
+            print(f"{key} gagal ({galat[key]}) → daftar lama dipakai", flush=True)
+    if all(v is None for v in hasil.values()):
+        sys.exit("semua sumber gagal — copytrader.json tidak diubah")
+    b, m = hasil["binance"], hasil["mql5"]
+    for x in (b or []) + (m or []):
+        x.pop("skor", None)
+    obj = {"dibuat": NOW.strftime("%Y-%m-%d"),
+           "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
+           # angka dari `python -m research.copy_pilih uji` (docs/eksternal/hasil_copy_pilih.txt, 6 Okt 2026)
+           "uji": {"binance": "pilih dgn 180 hr → 185 hr berikutnya: 20 teratas median +9%, 25% rugi, DD 13%, 0% hancur "
+                              "• semua penyedia +6%, 38% rugi, DD 34%, 10% hancur (1 periode)",
+                   "mql5": "72 periode 2020–2026, pilih dgn 12 bln → 6 bln: 6 teratas median +19%, 4% rugi "
+                           "• semua +12%, 19% rugi (bias penyintas: nyata lebih rendah)"},
+           "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. Jangan pilih "
+                         "karena WR; mulai modal kecil.",
+           "binance": b[:6] if b is not None else lama.get("binance", []),
+           "mql5": m[:6] if m is not None else lama.get("mql5", []),
+           "n": {"binance": len(b) if b is not None else (lama.get("n") or {}).get("binance", 0),
+                 "mql5": len(m) if m is not None else (lama.get("n") or {}).get("mql5", 0)}}
+    if galat:
+        obj["basi"] = sorted(galat)                 # sumber yang memakai daftar lama (aplikasi menandai)
+    OUT.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"Binance lolos {obj['n']['binance']}, MQL5 lolos {obj['n']['mql5']}")
+    for x in obj["binance"] + obj["mql5"]:
+        print(f"  {x['platform']:8} {x['name'][:24]:24} ROI {x['roi']:+.0f}% DD {x['mdd']:.0f}% WR {x['wr']:.0f}% "
+              f"pengikut {x['pengikut']} paruh {x['paruh']}")
+
+
+if __name__ == "__main__":
+    main()

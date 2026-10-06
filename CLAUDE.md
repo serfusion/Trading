@@ -279,6 +279,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tertinggi ≈ 0 & 32% meledak; DD ≤ 20% ≈ impas, 7% meledak. Saran: jangan pilih berdasarkan WR; pakai saringan umur/DD/anti-grid.
 - Aplikasi 4.5: tab Sinyal = satu kartu `MarketStrip` (1 baris XAU·BTC·ETH, ketuk = level BUY/SELL), TickerCard/StatusCards
   tidak dipakai lagi di tab Sinyal.
+- Data nyata (host dibuka 6 Okt): `research/mql5_signals.py` (4.402 sinyal) & `research/binance_copy.py` (9.267 lead,
+  PnL pengikut positif 15%, WR tidak berhubungan dengan untung pengikut). DIPASANG 6 Okt (izin "pasang copy trader ... teruji"):
+  `research/copy_pilih.py` → `cloud/api/copytrader.json` → `GET /api/chat?copytrader=1` → kartu 👥 `CopyTraderCard.kt`
+  (aplikasi 4.7, info + link, TANPA salin order). Workflow `.github/workflows/copytrader.yml` Senin 00:41 UTC (jalan dari
+  main). Uji maju (`copy_pilih uji`): saringan mengurangi rugi/hancur/DD, bukan profit (Binance 20 teratas +9%/185 hr,
+  25% rugi vs semua +6%, 38%); bias penyintas. WR ≥ 95% diberi ⚠️.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

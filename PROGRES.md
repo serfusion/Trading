@@ -185,3 +185,10 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - docs/PISAU.md: menangkap pisau tidak menguntungkan; ikut arus konsisten (kandidat, belum dipasang).
 - data/research/eksternal/pisau_scan.parquet = semua kombinasi (kolom L_*/B_* = LAMA/BARU, acakL/acakB = pembanding).
 
+
+### 6 Okt 2026 — copy trade & 👥 copy trader teruji
+- Riset copy trade (docs/COPY_TRADE.md): pasar tiruan + data nyata MQL5 (4.402 sinyal) & Binance (9.267 lead).
+- 👥 dipasang (aplikasi 4.7): `research/copy_pilih.py` (+ `uji`), `cloud/api/copytrader.json`, `GET /api/chat?copytrader=1`,
+  `.github/workflows/copytrader.yml` (mingguan, perlu ada di main agar jadwal jalan). binance_copy/mql5_signals tidak lagi
+  mengimpor research.eksternal (berat) supaya jalan di Actions dengan pandas/numpy saja.
+- Daftar Binance mentah 210 MB: hanya `list_365D.json.gz` yang di-commit (json di-gitignore).

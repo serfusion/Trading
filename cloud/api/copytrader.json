@@ -1,0 +1,175 @@
+{
+ "dibuat": "2026-10-06",
+ "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
+ "uji": {
+  "binance": "pilih dgn 180 hr → 185 hr berikutnya: 20 teratas median +9%, 25% rugi, DD 13%, 0% hancur • semua penyedia +6%, 38% rugi, DD 34%, 10% hancur (1 periode)",
+  "mql5": "72 periode 2020–2026, pilih dgn 12 bln → 6 bln: 6 teratas median +19%, 4% rugi • semua +12%, 19% rugi (bias penyintas: nyata lebih rendah)"
+ },
+ "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. Jangan pilih karena WR; mulai modal kecil.",
+ "binance": [
+  {
+   "platform": "Binance",
+   "id": "4662628079386208001",
+   "name": "五路财神的小公主",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4662628079386208001",
+   "roi": 140.4,
+   "mdd": 9.1,
+   "wr": 99.9,
+   "pengikut": 119,
+   "penuh": false,
+   "pnl_pengikut": 18128,
+   "paruh": [
+    84.9,
+    31.1
+   ],
+   "r90": 8.1,
+   "wr_curiga": true,
+   "aset": "kripto futures"
+  },
+  {
+   "platform": "Binance",
+   "id": "4566696155639181057",
+   "name": "Eenis的绝对盘感",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4566696155639181057",
+   "roi": 168.5,
+   "mdd": 14.9,
+   "wr": 78.0,
+   "pengikut": 80,
+   "penuh": false,
+   "pnl_pengikut": 641692,
+   "paruh": [
+    119.4,
+    11.2
+   ],
+   "r90": 0.9,
+   "wr_curiga": false,
+   "aset": "kripto futures"
+  },
+  {
+   "platform": "Binance",
+   "id": "4235245655188894209",
+   "name": "MoneyBoxTM",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4235245655188894209",
+   "roi": 124.4,
+   "mdd": 12.6,
+   "wr": 88.3,
+   "pengikut": 136,
+   "penuh": false,
+   "pnl_pengikut": 55345,
+   "paruh": [
+    81.9,
+    23.3
+   ],
+   "r90": 7.5,
+   "wr_curiga": false,
+   "aset": "kripto futures"
+  },
+  {
+   "platform": "Binance",
+   "id": "4300516091842181632",
+   "name": "Diamond-Hamsters",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4300516091842181632",
+   "roi": 135.4,
+   "mdd": 14.7,
+   "wr": 95.5,
+   "pengikut": 149,
+   "penuh": false,
+   "pnl_pengikut": 37633,
+   "paruh": [
+    95.5,
+    20.4
+   ],
+   "r90": 9.4,
+   "wr_curiga": true,
+   "aset": "kripto futures"
+  },
+  {
+   "platform": "Binance",
+   "id": "4423799055974246144",
+   "name": "THT_TRADING",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4423799055974246144",
+   "roi": 77.9,
+   "mdd": 9.7,
+   "wr": 78.6,
+   "pengikut": 75,
+   "penuh": false,
+   "pnl_pengikut": 6250,
+   "paruh": [
+    71.8,
+    2.5
+   ],
+   "r90": 6.5,
+   "wr_curiga": false,
+   "aset": "kripto futures"
+  },
+  {
+   "platform": "Binance",
+   "id": "4480185549170733825",
+   "name": "Carlson_555",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4480185549170733825",
+   "roi": 88.3,
+   "mdd": 12.2,
+   "wr": 89.0,
+   "pengikut": 115,
+   "penuh": false,
+   "pnl_pengikut": 11963,
+   "paruh": [
+    81.4,
+    3.8
+   ],
+   "r90": 1.6,
+   "wr_curiga": false,
+   "aset": "kripto futures"
+  }
+ ],
+ "mql5": [
+  {
+   "platform": "MQL5 MT5",
+   "id": 2356441,
+   "name": "FXtrading",
+   "url": "https://www.mql5.com/en/signals/2356441",
+   "roi": 242.9,
+   "mdd": 14.0,
+   "wr": 73.0,
+   "pengikut": 11,
+   "harga": 30.0,
+   "minggu": 72,
+   "paruh": [
+    135.5,
+    45.6
+   ],
+   "bulan_terburuk": 2.7,
+   "beban": 2.81,
+   "r90": 21.4,
+   "wr_curiga": false,
+   "aset": "NZDCAD",
+   "emas": false
+  },
+  {
+   "platform": "MQL5 MT5",
+   "id": 2265877,
+   "name": "Gold Reaper New V2 2",
+   "url": "https://www.mql5.com/en/signals/2265877",
+   "roi": 106.9,
+   "mdd": 17.0,
+   "wr": 72.0,
+   "pengikut": 67,
+   "harga": 35.0,
+   "minggu": 102,
+   "paruh": [
+    42.1,
+    45.5
+   ],
+   "bulan_terburuk": -4.2,
+   "beban": 4.77,
+   "r90": 23.8,
+   "wr_curiga": false,
+   "aset": "XAUUSD",
+   "emas": true
+  }
+ ],
+ "n": {
+  "binance": 9,
+  "mql5": 2
+ }
+}

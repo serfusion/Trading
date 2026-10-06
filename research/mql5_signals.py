@@ -20,7 +20,13 @@ from pathlib import Path
 
 import pandas as pd
 
-from .eksternal import cache_path
+
+def cache_path(name: str) -> Path:
+    """data/research/eksternal/<name> (tanpa mengimpor research.eksternal yang berat; dipakai GitHub Actions)."""
+    d = Path(__file__).resolve().parent.parent / "data" / "research" / "eksternal"
+    d.mkdir(parents=True, exist_ok=True)
+    return d / name
+
 
 BASE = "https://www.mql5.com"
 DIR = cache_path("mql5")

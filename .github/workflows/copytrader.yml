@@ -1,0 +1,45 @@
+name: Copy trader teruji (mingguan)
+
+# 👥 Perbarui cloud/api/copytrader.json tiap Senin 07:41 WIB: unduh ulang daftar Binance Copy Trading & MQL5 Signals,
+# saring dengan aturan research/copy_pilih.py, commit bila berubah (Vercel ikut redeploy). Satu sumber gagal → daftar
+# minggu lalu dipakai untuk sumber itu (ditandai "basi"); semua gagal → file tidak diubah.
+on:
+  schedule:
+    - cron: "41 0 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: copytrader
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Pasang pandas & numpy
+        run: pip install "pandas>=2.0" "numpy>=1.24"
+
+      - name: Pilih copy trader
+        run: python -m research.copy_pilih --segar
+
+      - name: Commit bila berubah
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cloud/api/copytrader.json
+          if git diff --cached --quiet; then
+            echo "tidak ada perubahan"
+          else
+            git commit -m "Copy trader teruji: pembaruan mingguan $(date -u +%Y-%m-%d)"
+            git push
+          fi

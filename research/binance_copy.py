@@ -16,7 +16,13 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from .eksternal import cache_path
+
+def cache_path(name: str) -> Path:
+    """data/research/eksternal/<name> (tanpa mengimpor research.eksternal yang berat; dipakai GitHub Actions)."""
+    d = Path(__file__).resolve().parent.parent / "data" / "research" / "eksternal"
+    d.mkdir(parents=True, exist_ok=True)
+    return d / name
+
 
 URL = "https://www.binance.com/bapi/futures/v1/friendly/future/copy-trade/home-page/query-list"
 DIR = cache_path("binance_copy")
