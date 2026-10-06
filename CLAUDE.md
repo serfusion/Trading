@@ -297,6 +297,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (dulu "basi"). Uji: saringan menekan rugi/DD, profit tidak lebih tinggi; Bitget ROI tertinggi 10 → −17%, 40% hancur.
   PR serfusion/Trading#52 di-merge ke main 6 Okt. DEFAULT BRANCH repo GitHub = `claude/bold-davinci-ykgq8j` (bukan main) →
   jadwal/dispatch workflow hanya terdaftar dari default branch; workflow checkout & push ke `main` (Vercel production).
+  Default branch sudah diganti ke main (6 Okt). Aplikasi 4.11: `assets/copytrader.json` cadangan bila cloud gagal ("offline",
+  alasan di baris "Cloud: …"). 4.12: ketuk trader = `CopyDetail.kt` (HP langsung ke situs, tanpa cloud): posisi terbuka —
+  eToro entry/TP/SL, Hyperliquid entry + TP/SL order pemicu, OKX/Binance/Bitget entry & leverage bila tidak disembunyikan.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

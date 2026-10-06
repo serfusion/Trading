@@ -22,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,7 +56,7 @@ object CopyTraders {
 /**
  * 👥 Copy trader terbaik (aplikasi 4.7–4.9; research/copy_pilih.py, docs/COPY_TRADE.md): gabungan OKX, Bitget,
  * Hyperliquid, eToro, Binance, MQL5 yang lolos saringan teruji (untung di 2 paruh, DD ≤ 20%, WR ≥ 60%, pengikut nyata),
- * diperbarui mingguan oleh GitHub Actions. Ketuk = buka halaman salin. Info saja — aplikasi tidak menyalin order.
+ * diperbarui mingguan oleh GitHub Actions. Ketuk = jendela detail (CopyDetail.kt). Info saja — aplikasi tidak menyalin order.
  */
 @Composable
 fun CopyTraderSection() {
@@ -82,9 +81,11 @@ fun CopyTraderSection() {
     }
     if (all.isEmpty()) return
     var open by rememberSaveable { mutableStateOf(false) }
+    var sel by androidx.compose.runtime.remember { mutableStateOf<JSONObject?>(null) }
+    sel?.let { CopyDetailDialog(it) { sel = null } }        // ketuk = detail di aplikasi (posisi, entry/TP/SL), 4.12
     SectionTitle("👥 Copy trader terbaik", trailing = "${all.size}")
     AppCard {
-        (if (open) all else all.take(5)).forEach { CopyRow(it) }
+        (if (open) all else all.take(5)).forEach { x -> CopyRow(x) { sel = x } }
         Row(
             Modifier.fillMaxWidth().clickable { open = !open }.padding(top = 2.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -123,16 +124,13 @@ private fun badgeOf(platform: String): Badge = when (platform) {
 }
 
 @Composable
-private fun CopyRow(x: JSONObject) {
-    val uri = LocalUriHandler.current
+private fun CopyRow(x: JSONObject, onClick: () -> Unit) {
     val platform = x.optString("platform")
     val b = badgeOf(platform)
     val roi = x.optDouble("roi")
     val wrWarn = x.optBoolean("wr_curiga")
     Row(
-        Modifier.fillMaxWidth().clickable {
-            x.optString("url").takeIf { it.startsWith("https://") }?.let { runCatching { uri.openUri(it) } }
-        },
+        Modifier.fillMaxWidth().clickable(onClick = onClick),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
