@@ -303,6 +303,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   4.13 (pengguna: "rangkum sebelum dikirim ke apk"; binance.com diblokir operator Indonesia): CLOUD `_copyposisi.py`
   (GET /api/chat?copyposisi=<situs>|<id>, cache 3 mnt) merangkum posisi + 10 trade terakhir (entry→tutup, gerak harga %,
   TP/SL Bitget/eToro) + 1 kalimat ringkasan; HP hanya menampilkan. Production Vercel = branch bold-davinci (sudah digabung main).
+- Aplikasi 4.14 (pengguna: "prediksi news/NFP tidak ada di apk"): kalender FF hanya PEKAN INI → 📅 `research/jadwal_berita.py`
+  (FRED release/dates + FOMC 2026, butuh FRED_API_KEY; jalankan ulang bila jadwal habis, kini s.d. 23 Des 2026) →
+  `cloud/api/jadwal.json` → `_jadwal.attach` (persiapan["mendatang"], NFP/CPI/Fed/JOLTS selalu ikut) → kartu 🎯 bagian
+  "📅 Berita besar berikutnya" + baris 🎯 di MarketStrip. Baris 📉/📈 lonjakan memudar (hilang sejak 4.5) dikembalikan ke MarketStrip.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
