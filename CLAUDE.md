@@ -295,6 +295,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   public-lead-traders/public-pnl/public-stats, Bitget traderView+cycleData 180 hr, Hyperliquid vault termasuk yang tutup)
   → `copy_pilih` field `gabungan` (WR ≥ 60, profit > 0, ≥ 30 pengikut, maks 4/situs) + `singkat`; sumber gagal = `invalid`
   (dulu "basi"). Uji: saringan menekan rugi/DD, profit tidak lebih tinggi; Bitget ROI tertinggi 10 → −17%, 40% hancur.
+  PR serfusion/Trading#52 di-merge ke main 6 Okt. DEFAULT BRANCH repo GitHub = `claude/bold-davinci-ykgq8j` (bukan main) →
+  jadwal/dispatch workflow hanya terdaftar dari default branch; workflow checkout & push ke `main` (Vercel production).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

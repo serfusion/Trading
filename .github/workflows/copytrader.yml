@@ -20,7 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
+      # Selalu perbarui main (Vercel production), walau default branch repo berbeda.
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -41,5 +44,5 @@ jobs:
             echo "tidak ada perubahan"
           else
             git commit -m "Copy trader teruji: pembaruan mingguan $(date -u +%Y-%m-%d)"
-            git push
+            git push origin HEAD:main
           fi
