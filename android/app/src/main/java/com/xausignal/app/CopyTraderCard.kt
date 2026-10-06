@@ -34,6 +34,7 @@ import org.json.JSONObject
 /** cloud/api/copytrader.json lewat GET /api/chat?copytrader=1, dimuat sekali per sesi aplikasi. */
 object CopyTraders {
     var data by mutableStateOf<JSONObject?>(null)
+    var retry by mutableStateOf(0)
     suspend fun load() {
         if (data != null) return
         data = withContext(Dispatchers.IO) { ChatClient.copytrader() }
@@ -47,8 +48,17 @@ object CopyTraders {
  */
 @Composable
 fun CopyTraderSection() {
-    LaunchedEffect(Unit) { CopyTraders.load() }
-    val d = CopyTraders.data ?: return              // cloud lama / gagal → kartu tidak tampil
+    LaunchedEffect(CopyTraders.retry) { CopyTraders.load() }
+    val d = CopyTraders.data
+    if (d == null) {                                // belum termuat / cloud gagal → tetap tampil + coba lagi
+        SectionTitle("👥 Copy trader terbaik")
+        AppCard {
+            Row(Modifier.fillMaxWidth().clickable { CopyTraders.retry++ }, verticalAlignment = Alignment.CenterVertically) {
+                Text("Memuat… ketuk untuk coba lagi", Modifier.weight(1f), style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+        }
+        return
+    }
     val gab = d.optJSONArray("gabungan")
     val all = if (gab != null) (0 until gab.length()).mapNotNull { gab.optJSONObject(it) }
     else listOf("etoro", "binance", "mql5").flatMap { k ->       // cloud sebelum 4.9
