@@ -14,7 +14,7 @@
  "n": {
   "okx": 3,
   "bitget": 1,
-  "hyperliquid": 9,
+  "hyperliquid": 5,
   "etoro": 114,
   "binance": 9,
   "mql5": 2
@@ -48,7 +48,7 @@
    "periode": "1 th",
    "mdd": 10.8,
    "wr": 61.1,
-   "pengikut": 580,
+   "pengikut": 579,
    "paruh": [
     16.3,
     79.2
@@ -84,14 +84,14 @@
    "id": "b1b447768db03153a49c",
    "name": "sunrise-e",
    "url": "https://www.bitget.com/copy-trading/trader/b1b447768db03153a49c/futures",
-   "roi": 57.8,
+   "roi": 58.0,
    "periode": "6 bln",
    "mdd": 6.0,
    "wr": 92.3,
    "pengikut": 30,
    "paruh": [
     27.6,
-    21.1
+    21.2
    ],
    "wr_curiga": false,
    "aset": "kripto futures",
@@ -100,25 +100,6 @@
   }
  ],
  "hyperliquid": [
-  {
-   "platform": "Hyperliquid",
-   "id": "0xbe421ec5af0be9ea2b2a53b38a089ee352c9f325",
-   "name": "Super Moon",
-   "url": "https://app.hyperliquid.xyz/vaults/0xbe421ec5af0be9ea2b2a53b38a089ee352c9f325",
-   "roi": 10.6,
-   "periode": "1 th",
-   "mdd": 2.9,
-   "wr": 61.8,
-   "pengikut": 33,
-   "paruh": [
-    6.3,
-    4.0
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 362,
-   "wr_proksi": true
-  },
   {
    "platform": "Hyperliquid",
    "id": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
@@ -140,36 +121,17 @@
   },
   {
    "platform": "Hyperliquid",
-   "id": "0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
-   "name": "BitRocket",
-   "url": "https://app.hyperliquid.xyz/vaults/0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
-   "roi": 27.2,
-   "periode": "1 th",
-   "mdd": 3.7,
-   "wr": 84.9,
-   "pengikut": 31,
-   "paruh": [
-    17.0,
-    8.4
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 362,
-   "wr_proksi": true
-  },
-  {
-   "platform": "Hyperliquid",
    "id": "0xd57c9295947b5a616a3933344ef03a1ad67318ea",
    "name": "LowRiskCryptoGainer",
    "url": "https://app.hyperliquid.xyz/vaults/0xd57c9295947b5a616a3933344ef03a1ad67318ea",
-   "roi": 20.3,
+   "roi": 20.2,
    "periode": "1 th",
    "mdd": 4.7,
    "wr": 75.9,
    "pengikut": 100,
    "paruh": [
     12.2,
-    6.7
+    6.6
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
@@ -181,14 +143,14 @@
    "id": "0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
    "name": "PF1",
    "url": "https://app.hyperliquid.xyz/vaults/0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
-   "roi": 48.5,
+   "roi": 48.4,
    "periode": "1 th",
    "mdd": 7.3,
    "wr": 76.8,
    "pengikut": 90,
    "paruh": [
     25.4,
-    18.3
+    18.2
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
@@ -197,21 +159,40 @@
   },
   {
    "platform": "Hyperliquid",
-   "id": "0x490af7d4a048a81db0f677517ed6373565b42349",
-   "name": "Passivbot Canon",
-   "url": "https://app.hyperliquid.xyz/vaults/0x490af7d4a048a81db0f677517ed6373565b42349",
-   "roi": 35.5,
+   "id": "0x1e37a337ed460039d1b15bd3bc489de789768d5e",
+   "name": "Growi HF",
+   "url": "https://app.hyperliquid.xyz/vaults/0x1e37a337ed460039d1b15bd3bc489de789768d5e",
+   "roi": 54.9,
    "periode": "1 th",
-   "mdd": 9.0,
-   "wr": 71.4,
-   "pengikut": 35,
+   "mdd": 12.3,
+   "wr": 75.0,
+   "pengikut": 100,
    "paruh": [
-    9.2,
-    23.0
+    34.4,
+    13.8
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
+   "wr_proksi": true
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xba939edf38c0ae0cc689c98b492e0535f43e4550",
+   "name": "22Cap",
+   "url": "https://app.hyperliquid.xyz/vaults/0xba939edf38c0ae0cc689c98b492e0535f43e4550",
+   "roi": 15.4,
+   "periode": "1 th",
+   "mdd": 10.7,
+   "wr": 71.4,
+   "pengikut": 100,
+   "paruh": [
+    3.1,
+    10.4
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 355,
    "wr_proksi": true
   }
  ],
@@ -324,7 +305,7 @@
    "roi": 60.0,
    "mdd": 12.9,
    "wr": 71.0,
-   "pengikut": 915,
+   "pengikut": 916,
    "risiko": 4,
    "paruh": [
     54.4,
@@ -348,7 +329,7 @@
    "wr": 99.9,
    "pengikut": 119,
    "penuh": false,
-   "pnl_pengikut": 18128,
+   "pnl_pengikut": 18132,
    "paruh": [
     84.9,
     31.1
@@ -384,7 +365,7 @@
    "roi": 124.4,
    "mdd": 12.6,
    "wr": 88.3,
-   "pengikut": 136,
+   "pengikut": 135,
    "penuh": false,
    "pnl_pengikut": 55345,
    "paruh": [
@@ -421,10 +402,10 @@
    "url": "https://www.binance.com/en/copy-trading/lead-details/4423799055974246144",
    "roi": 77.9,
    "mdd": 9.7,
-   "wr": 78.6,
+   "wr": 78.7,
    "pengikut": 75,
    "penuh": false,
-   "pnl_pengikut": 6250,
+   "pnl_pengikut": 6245,
    "paruh": [
     71.8,
     2.5
@@ -461,7 +442,7 @@
    "url": "https://www.mql5.com/en/signals/2356441",
    "roi": 242.9,
    "mdd": 14.0,
-   "wr": 73.0,
+   "wr": 72.0,
    "pengikut": 11,
    "harga": 30.0,
    "minggu": 72,
@@ -470,7 +451,7 @@
     45.6
    ],
    "bulan_terburuk": 2.7,
-   "beban": 2.81,
+   "beban": 2.89,
    "r90": 21.4,
    "wr_curiga": false,
    "aset": "NZDCAD",
@@ -484,7 +465,7 @@
    "roi": 106.9,
    "mdd": 17.0,
    "wr": 72.0,
-   "pengikut": 67,
+   "pengikut": 66,
    "harga": 35.0,
    "minggu": 102,
    "paruh": [
@@ -510,7 +491,7 @@
    "wr": 99.9,
    "pengikut": 119,
    "penuh": false,
-   "pnl_pengikut": 18128,
+   "pnl_pengikut": 18132,
    "paruh": [
     84.9,
     31.1
@@ -551,7 +532,7 @@
    "periode": "1 th",
    "mdd": 10.8,
    "wr": 61.1,
-   "pengikut": 580,
+   "pengikut": 579,
    "paruh": [
     16.3,
     79.2
@@ -570,7 +551,7 @@
    "roi": 124.4,
    "mdd": 12.6,
    "wr": 88.3,
-   "pengikut": 136,
+   "pengikut": 135,
    "penuh": false,
    "pnl_pengikut": 55345,
    "paruh": [
@@ -608,14 +589,14 @@
    "id": "b1b447768db03153a49c",
    "name": "sunrise-e",
    "url": "https://www.bitget.com/copy-trading/trader/b1b447768db03153a49c/futures",
-   "roi": 57.8,
+   "roi": 58.0,
    "periode": "6 bln",
    "mdd": 6.0,
    "wr": 92.3,
    "pengikut": 30,
    "paruh": [
     27.6,
-    21.1
+    21.2
    ],
    "wr_curiga": false,
    "aset": "kripto futures",
@@ -646,37 +627,17 @@
   },
   {
    "platform": "Hyperliquid",
-   "id": "0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
-   "name": "BitRocket",
-   "url": "https://app.hyperliquid.xyz/vaults/0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
-   "roi": 27.2,
-   "periode": "1 th",
-   "mdd": 3.7,
-   "wr": 84.9,
-   "pengikut": 31,
-   "paruh": [
-    17.0,
-    8.4
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 362,
-   "wr_proksi": true,
-   "sumber": "hyperliquid"
-  },
-  {
-   "platform": "Hyperliquid",
    "id": "0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
    "name": "PF1",
    "url": "https://app.hyperliquid.xyz/vaults/0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
-   "roi": 48.5,
+   "roi": 48.4,
    "periode": "1 th",
    "mdd": 7.3,
    "wr": 76.8,
    "pengikut": 90,
    "paruh": [
     25.4,
-    18.3
+    18.2
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
@@ -692,7 +653,7 @@
    "roi": 106.9,
    "mdd": 17.0,
    "wr": 72.0,
-   "pengikut": 67,
+   "pengikut": 66,
    "harga": 35.0,
    "minggu": 102,
    "paruh": [
@@ -738,7 +699,7 @@
    "roi": 60.0,
    "mdd": 12.9,
    "wr": 71.0,
-   "pengikut": 915,
+   "pengikut": 916,
    "risiko": 4,
    "paruh": [
     54.4,
@@ -775,6 +736,26 @@
    "periode": "1 th"
   },
   {
+   "platform": "Hyperliquid",
+   "id": "0x1e37a337ed460039d1b15bd3bc489de789768d5e",
+   "name": "Growi HF",
+   "url": "https://app.hyperliquid.xyz/vaults/0x1e37a337ed460039d1b15bd3bc489de789768d5e",
+   "roi": 54.9,
+   "periode": "1 th",
+   "mdd": 12.3,
+   "wr": 75.0,
+   "pengikut": 100,
+   "paruh": [
+    34.4,
+    13.8
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "sumber": "hyperliquid"
+  },
+  {
    "platform": "eToro",
    "id": 30511646,
    "name": "momoinvestin",
@@ -801,34 +782,14 @@
    "id": "0xd57c9295947b5a616a3933344ef03a1ad67318ea",
    "name": "LowRiskCryptoGainer",
    "url": "https://app.hyperliquid.xyz/vaults/0xd57c9295947b5a616a3933344ef03a1ad67318ea",
-   "roi": 20.3,
+   "roi": 20.2,
    "periode": "1 th",
    "mdd": 4.7,
    "wr": 75.9,
    "pengikut": 100,
    "paruh": [
     12.2,
-    6.7
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 362,
-   "wr_proksi": true,
-   "sumber": "hyperliquid"
-  },
-  {
-   "platform": "Hyperliquid",
-   "id": "0x490af7d4a048a81db0f677517ed6373565b42349",
-   "name": "Passivbot Canon",
-   "url": "https://app.hyperliquid.xyz/vaults/0x490af7d4a048a81db0f677517ed6373565b42349",
-   "roi": 35.5,
-   "periode": "1 th",
-   "mdd": 9.0,
-   "wr": 71.4,
-   "pengikut": 35,
-   "paruh": [
-    9.2,
-    23.0
+    6.6
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
@@ -855,6 +816,26 @@
    "hari": 365,
    "penuh": false,
    "sumber": "okx"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
+   "name": "Hyperliquidity Provider (HLP)",
+   "url": "https://app.hyperliquid.xyz/vaults/0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
+   "roi": 7.4,
+   "periode": "1 th",
+   "mdd": 0.8,
+   "wr": 84.6,
+   "pengikut": 100,
+   "paruh": [
+    6.9,
+    1.0
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 355,
+   "wr_proksi": true,
+   "sumber": "hyperliquid"
   }
  ]
 }
