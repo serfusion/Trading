@@ -1,0 +1,148 @@
+# Tangkap pisau jatuh — XAU, BTC, ETH (CFD dua arah) & 20 koin spot (BUY saja) (research/pisau.py)
+H1, keputusan di close, entry ≥ open berikutnya. R = kelipatan SL. LAMA < Okt 2021, BARU ≥ Okt 2021.
+Biaya: XAU $0,50 pulang-pergi, BTC/ETH 0,06%, koin spot 0,30%.
+
+## XAU (2012–2026-09)
+Kombinasi diuji: 131152
+Lolos LAMA (n≥30, rata ≥ +0,10R, t ≥ 2, > acak +0,08R): 27 | tetap positif BARU: 17 | kuat di BARU (≥ +0,10R, > acak +0,05R, ≥70% tahun +): 8
+   jatuh → BUY: rata semua kombinasi LAMA -0.163R | BARU -0.050R | acak LAMA -0.141R BARU -0.057R
+   jatuh → SELL: rata semua kombinasi LAMA -0.127R | BARU -0.109R | acak LAMA -0.114R BARU -0.121R
+   lonjak → BUY: rata semua kombinasi LAMA -0.127R | BARU -0.068R | acak LAMA -0.139R BARU -0.054R
+   lonjak → SELL: rata semua kombinasi LAMA -0.165R | BARU -0.158R | acak LAMA -0.114R BARU -0.122R
+15 teratas LAMA (dipilih tanpa melihat BARU):
+   XAU jatuh N3 k6 l_mkt SELL tren:semua SL3.0 TPr38 H48 | LAMA n31 WR 74% +0.40R (acak -0.07) | BARU n15 WR 53% -0.01R (acak -0.08) | thn+ 69%
+   XAU jatuh N3 k6 l_mkt SELL tren:semua SL3.0 TPr38 H24 | LAMA n31 WR 74% +0.37R (acak -0.08) | BARU n15 WR 60% +0.00R (acak -0.08) | thn+ 69%
+   XAU jatuh N3 k6 l_mkt SELL tren:semua SL3.0 TP2.0 H48 | LAMA n31 WR 74% +0.32R (acak -0.06) | BARU n15 WR 53% -0.07R (acak -0.08) | thn+ 62%
+   XAU lonjak N3 k3 l_mkt BUY tren:searah SL3.0 TP2.0 H24 | LAMA n343 WR 64% +0.11R (acak -0.05) | BARU n265 WR 58% +0.00R (acak +0.04) | thn+ 71%
+   XAU jatuh N3 k6 l_mkt SELL tren:semua SL3.0 TP2.0 H24 | LAMA n31 WR 74% +0.31R (acak -0.06) | BARU n15 WR 60% -0.02R (acak -0.08) | thn+ 69%
+   XAU jatuh N6 k6 l_brk SELL tren:semua SL3.0 TPr50 H12 | LAMA n45 WR 64% +0.24R (acak -0.08) | BARU n28 WR 50% +0.12R (acak -0.07) | thn+ 64%
+   XAU lonjak N3 k4 l_brk BUY tren:searah SL3.0 TP2.0 H48 | LAMA n93 WR 72% +0.20R (acak -0.05) | BARU n71 WR 69% +0.16R (acak +0.04) | thn+ 93%
+   XAU jatuh N6 k6 l_brk SELL tren:semua SL3.0 TP3.0 H12 | LAMA n45 WR 58% +0.25R (acak -0.07) | BARU n28 WR 50% +0.13R (acak -0.07) | thn+ 71%
+   XAU jatuh N6 k6 l_brk SELL tren:searah SL3.0 TPr50 H12 | LAMA n38 WR 66% +0.25R (acak -0.07) | BARU n14 WR 64% +0.37R (acak -0.08) | thn+ 77%
+   XAU jatuh N12 k6 l_brk SELL tren:semua SL3.0 TP3.0 H12 | LAMA n104 WR 53% +0.16R (acak -0.07) | BARU n61 WR 44% -0.01R (acak -0.07) | thn+ 57%
+   XAU jatuh N6 k6 l_brk SELL tren:searah SL3.0 TP3.0 H12 | LAMA n38 WR 61% +0.26R (acak -0.05) | BARU n14 WR 64% +0.33R (acak -0.09) | thn+ 77%
+   XAU lonjak N48 k8 l_pb0.25 BUY tren:semua SL2.0 TPr50 H48 | LAMA n81 WR 42% +0.46R (acak -0.13) | BARU n51 WR 41% +0.56R (acak -0.05) | thn+ 79%
+   XAU jatuh N3 k6 l_mkt SELL tren:semua SL3.0 TP3.0 H48 | LAMA n31 WR 65% +0.36R (acak -0.04) | BARU n15 WR 40% -0.15R (acak -0.09) | thn+ 54%
+   XAU jatuh N48 k5 b_lim1.5 BUY tren:melawan SL3.0 TPr50 H48 | LAMA n153 WR 55% +0.20R (acak -0.09) | BARU n54 WR 52% +0.12R (acak -0.06) | thn+ 71%
+   XAU jatuh N6 k6 l_brk SELL tren:semua SL3.0 TP2.0 H12 | LAMA n45 WR 60% +0.18R (acak -0.07) | BARU n28 WR 50% +0.05R (acak -0.06) | thn+ 57%
+Kandidat kuat (urut BARU − acak), tetangga = % parameter sekitar yang positif di dua periode:
+   XAU lonjak N3 k4 l_brk BUY tren:searah SL3.0 TP2.0 H48 | LAMA n93 WR 72% +0.20R | BARU n71 WR 69% +0.16R (acak +0.04) | thn+ 93% | tetangga 100%
+   XAU lonjak N3 k4 l_brk BUY tren:searah SL3.0 TP3.0 H48 | LAMA n93 WR 59% +0.21R | BARU n71 WR 58% +0.16R (acak +0.08) | thn+ 79% | tetangga 100%
+   XAU lonjak N3 k4 l_brk BUY tren:searah SL3.0 TP2.0 H24 | LAMA n93 WR 66% +0.15R | BARU n71 WR 68% +0.15R (acak +0.04) | thn+ 93% | tetangga 80%
+   XAU lonjak N6 k6 l_mkt BUY tren:searah SL3.0 TPr38 H48 | LAMA n47 WR 70% +0.26R | BARU n34 WR 65% +0.21R (acak -0.01) | thn+ 79% | tetangga 67%
+   XAU lonjak N48 k8 l_pb0.25 BUY tren:semua SL3.0 TPr50 H48 | LAMA n81 WR 51% +0.31R | BARU n51 WR 51% +0.40R (acak -0.03) | thn+ 86% | tetangga 33%
+   XAU jatuh N6 k6 l_brk SELL tren:semua SL3.0 TP3.0 H12 | LAMA n45 WR 58% +0.25R | BARU n28 WR 50% +0.13R (acak -0.07) | thn+ 71% | tetangga 33%
+   XAU jatuh N48 k5 b_lim1.5 BUY tren:melawan SL3.0 TPr50 H48 | LAMA n153 WR 55% +0.20R | BARU n54 WR 52% +0.12R (acak -0.06) | thn+ 71% | tetangga 20%
+   XAU lonjak N48 k8 l_pb0.25 BUY tren:semua SL2.0 TPr50 H48 | LAMA n81 WR 42% +0.46R | BARU n51 WR 41% +0.56R (acak -0.05) | thn+ 79% | tetangga 0%
+
+## BTC (2016–2026-09)
+Kombinasi diuji: 133728
+Lolos LAMA (n≥30, rata ≥ +0,10R, t ≥ 2, > acak +0,08R): 2318 | tetap positif BARU: 575 | kuat di BARU (≥ +0,10R, > acak +0,05R, ≥70% tahun +): 84
+   jatuh → BUY: rata semua kombinasi LAMA -0.106R | BARU -0.119R | acak LAMA -0.059R BARU -0.084R
+   jatuh → SELL: rata semua kombinasi LAMA -0.102R | BARU -0.137R | acak LAMA -0.076R BARU -0.087R
+   lonjak → BUY: rata semua kombinasi LAMA -0.030R | BARU -0.119R | acak LAMA -0.058R BARU -0.083R
+   lonjak → SELL: rata semua kombinasi LAMA -0.178R | BARU -0.161R | acak LAMA -0.077R BARU -0.088R
+15 teratas LAMA (dipilih tanpa melihat BARU):
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL3.0 TP1.0 H48 | LAMA n38 WR 97% +0.30R (acak -0.01) | BARU n54 WR 74% +0.00R (acak -0.04) | thn+ 82%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP1.0 H6 | LAMA n38 WR 92% +0.39R (acak -0.04) | BARU n54 WR 69% +0.08R (acak -0.07) | thn+ 73%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP1.0 H48 | LAMA n38 WR 95% +0.42R (acak -0.03) | BARU n54 WR 69% +0.03R (acak -0.05) | thn+ 73%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP1.0 H24 | LAMA n38 WR 95% +0.41R (acak -0.03) | BARU n54 WR 69% +0.03R (acak -0.06) | thn+ 73%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP1.0 H12 | LAMA n38 WR 95% +0.41R (acak -0.04) | BARU n54 WR 67% +0.02R (acak -0.06) | thn+ 73%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL3.0 TP1.0 H12 | LAMA n38 WR 95% +0.27R (acak -0.02) | BARU n54 WR 69% -0.00R (acak -0.04) | thn+ 73%
+   BTC jatuh N6 k4 l_pb0.5 SELL tren:melawan SL3.0 TP0.5 H48 | LAMA n56 WR 98% +0.15R (acak -0.08) | BARU n37 WR 81% -0.05R (acak -0.08) | thn+ 82%
+   BTC jatuh N6 k4 l_pb0.5 SELL tren:melawan SL3.0 TP0.5 H24 | LAMA n56 WR 98% +0.15R (acak -0.08) | BARU n37 WR 81% -0.05R (acak -0.08) | thn+ 82%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL3.0 TP1.0 H24 | LAMA n38 WR 95% +0.27R (acak -0.01) | BARU n54 WR 74% +0.00R (acak -0.04) | thn+ 73%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL3.0 TP1.0 H6 | LAMA n38 WR 92% +0.25R (acak -0.02) | BARU n54 WR 70% +0.09R (acak -0.05) | thn+ 82%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP0.5 H6 | LAMA n38 WR 95% +0.20R (acak -0.06) | BARU n54 WR 72% -0.04R (acak -0.09) | thn+ 82%
+   BTC jatuh N48 k8 b_mkt BUY tren:searah SL3.0 TP0.5 H48 | LAMA n48 WR 98% +0.14R (acak -0.03) | BARU n64 WR 83% -0.03R (acak -0.06) | thn+ 64%
+   BTC jatuh N48 k8 b_lim1.0 BUY tren:searah SL2.0 TP1.5 H6 | LAMA n31 WR 87% +0.50R (acak -0.03) | BARU n41 WR 61% +0.13R (acak -0.06) | thn+ 82%
+   BTC jatuh N48 k8 b_lim1.0 BUY tren:searah SL2.0 TP2.0 H6 | LAMA n31 WR 87% +0.59R (acak -0.02) | BARU n41 WR 56% +0.12R (acak -0.05) | thn+ 82%
+   BTC jatuh N48 k8 b_lim0.5 BUY tren:searah SL2.0 TP1.5 H6 | LAMA n38 WR 84% +0.43R (acak -0.03) | BARU n54 WR 61% +0.07R (acak -0.06) | thn+ 73%
+Kandidat kuat (urut BARU − acak), tetangga = % parameter sekitar yang positif di dua periode:
+   BTC jatuh N3 k3 l_mkt SELL tren:searah SL1.5 TP3.0 H12 | LAMA n222 WR 46% +0.17R | BARU n336 WR 43% +0.14R (acak -0.06) | thn+ 73% | tetangga 100%
+   BTC jatuh N3 k3 l_mkt SELL tren:searah SL1.5 TP3.0 H24 | LAMA n222 WR 45% +0.24R | BARU n336 WR 40% +0.15R (acak -0.06) | thn+ 73% | tetangga 100%
+   BTC jatuh N3 k3 l_mkt SELL tren:searah SL2.0 TP3.0 H12 | LAMA n222 WR 49% +0.14R | BARU n336 WR 49% +0.13R (acak -0.05) | thn+ 82% | tetangga 100%
+   BTC jatuh N3 k3 l_mkt SELL tren:searah SL2.0 TP3.0 H24 | LAMA n222 WR 51% +0.20R | BARU n336 WR 46% +0.12R (acak -0.05) | thn+ 91% | tetangga 100%
+   BTC jatuh N3 k3 l_mkt SELL tren:searah SL2.0 TP3.0 H48 | LAMA n222 WR 49% +0.19R | BARU n336 WR 45% +0.11R (acak -0.06) | thn+ 82% | tetangga 100%
+   BTC jatuh N12 k5 l_mkt SELL tren:searah SL2.0 TP3.0 H12 | LAMA n126 WR 56% +0.21R | BARU n197 WR 48% +0.10R (acak -0.05) | thn+ 82% | tetangga 88%
+   BTC lonjak N12 k6 l_mkt BUY tren:semua SL3.0 TPr50 H12 | LAMA n160 WR 53% +0.14R | BARU n185 WR 55% +0.16R (acak -0.05) | thn+ 91% | tetangga 88%
+   BTC lonjak N12 k6 l_mkt BUY tren:semua SL3.0 TPr50 H24 | LAMA n160 WR 56% +0.19R | BARU n185 WR 56% +0.13R (acak -0.05) | thn+ 100% | tetangga 88%
+   BTC lonjak N12 k6 l_mkt BUY tren:semua SL3.0 TP3.0 H24 | LAMA n160 WR 56% +0.16R | BARU n185 WR 57% +0.12R (acak -0.05) | thn+ 91% | tetangga 88%
+   BTC lonjak N12 k6 l_mkt BUY tren:semua SL3.0 TP3.0 H12 | LAMA n160 WR 53% +0.12R | BARU n185 WR 55% +0.16R (acak -0.04) | thn+ 91% | tetangga 88%
+   BTC lonjak N12 k6 l_mkt BUY tren:melawan SL3.0 TP3.0 H48 | LAMA n40 WR 62% +0.29R | BARU n60 WR 55% +0.13R (acak -0.06) | thn+ 73% | tetangga 86%
+   BTC lonjak N3 k4 l_mkt BUY tren:melawan SL2.0 TP3.0 H6 | LAMA n58 WR 59% +0.22R | BARU n89 WR 54% +0.13R (acak -0.05) | thn+ 100% | tetangga 80%
+   BTC lonjak N3 k4 l_mkt BUY tren:melawan SL1.5 TP3.0 H6 | LAMA n58 WR 59% +0.30R | BARU n89 WR 49% +0.13R (acak -0.06) | thn+ 82% | tetangga 80%
+   BTC lonjak N3 k4 l_mkt BUY tren:melawan SL2.0 TP3.0 H48 | LAMA n58 WR 57% +0.40R | BARU n89 WR 46% +0.13R (acak -0.09) | thn+ 82% | tetangga 80%
+   BTC lonjak N3 k4 l_mkt BUY tren:melawan SL2.0 TP3.0 H24 | LAMA n58 WR 57% +0.31R | BARU n89 WR 48% +0.15R (acak -0.07) | thn+ 82% | tetangga 80%
+   BTC lonjak N6 k4 l_mkt BUY tren:melawan SL1.5 TP2.0 H6 | LAMA n92 WR 54% +0.19R | BARU n157 WR 51% +0.14R (acak -0.07) | thn+ 91% | tetangga 75%
+   BTC lonjak N6 k4 l_mkt BUY tren:melawan SL2.0 TP3.0 H6 | LAMA n92 WR 54% +0.19R | BARU n157 WR 51% +0.14R (acak -0.05) | thn+ 100% | tetangga 75%
+   BTC lonjak N6 k4 l_mkt BUY tren:melawan SL2.0 TP3.0 H24 | LAMA n92 WR 54% +0.28R | BARU n157 WR 49% +0.14R (acak -0.07) | thn+ 91% | tetangga 75%
+   BTC lonjak N6 k4 l_mkt BUY tren:melawan SL1.5 TP3.0 H48 | LAMA n92 WR 45% +0.36R | BARU n157 WR 41% +0.18R (acak -0.09) | thn+ 82% | tetangga 75%
+   BTC lonjak N6 k4 l_mkt BUY tren:melawan SL1.5 TP3.0 H6 | LAMA n92 WR 54% +0.27R | BARU n157 WR 48% +0.14R (acak -0.06) | thn+ 91% | tetangga 75%
+
+## ETH (2017–2026-08)
+Kombinasi diuji: 128800
+Lolos LAMA (n≥30, rata ≥ +0,10R, t ≥ 2, > acak +0,08R): 3520 | tetap positif BARU: 1055 | kuat di BARU (≥ +0,10R, > acak +0,05R, ≥70% tahun +): 220
+   jatuh → BUY: rata semua kombinasi LAMA -0.161R | BARU -0.137R | acak LAMA -0.053R BARU -0.071R
+   jatuh → SELL: rata semua kombinasi LAMA -0.009R | BARU -0.077R | acak LAMA -0.055R BARU -0.065R
+   lonjak → BUY: rata semua kombinasi LAMA -0.008R | BARU -0.080R | acak LAMA -0.050R BARU -0.070R
+   lonjak → SELL: rata semua kombinasi LAMA -0.171R | BARU -0.121R | acak LAMA -0.059R BARU -0.066R
+15 teratas LAMA (dipilih tanpa melihat BARU):
+   ETH jatuh N6 k5 l_pb0.25 SELL tren:semua SL3.0 TP0.5 H6 | LAMA n39 WR 95% +0.15R (acak -0.04) | BARU n55 WR 82% +0.03R (acak -0.06) | thn+ 78%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL3.0 TP0.5 H6 | LAMA n33 WR 94% +0.14R (acak -0.03) | BARU n60 WR 68% -0.12R (acak -0.05) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP0.5 H6 | LAMA n33 WR 94% +0.22R (acak -0.04) | BARU n60 WR 63% -0.18R (acak -0.06) | thn+ 50%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL3.0 TP0.5 H12 | LAMA n33 WR 97% +0.15R (acak -0.03) | BARU n60 WR 72% -0.15R (acak -0.05) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP0.5 H12 | LAMA n33 WR 97% +0.22R (acak -0.04) | BARU n60 WR 63% -0.21R (acak -0.06) | thn+ 50%
+   ETH jatuh N6 k5 l_pb0.25 SELL tren:semua SL3.0 TP0.5 H12 | LAMA n39 WR 97% +0.15R (acak -0.05) | BARU n55 WR 87% +0.04R (acak -0.06) | thn+ 67%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL3.0 TP1.0 H6 | LAMA n33 WR 82% +0.24R (acak -0.01) | BARU n60 WR 58% -0.12R (acak -0.03) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP1.0 H6 | LAMA n33 WR 82% +0.36R (acak -0.01) | BARU n60 WR 53% -0.17R (acak -0.04) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP1.5 H6 | LAMA n33 WR 79% +0.46R (acak -0.01) | BARU n60 WR 50% -0.14R (acak -0.03) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL3.0 TP1.5 H6 | LAMA n33 WR 79% +0.31R (acak -0.01) | BARU n60 WR 53% -0.11R (acak -0.03) | thn+ 60%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL3.0 TP2.0 H6 | LAMA n33 WR 76% +0.37R (acak -0.01) | BARU n60 WR 53% -0.10R (acak -0.03) | thn+ 50%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP0.5 H48 | LAMA n33 WR 97% +0.21R (acak -0.04) | BARU n60 WR 63% -0.21R (acak -0.07) | thn+ 50%
+   ETH jatuh N3 k4 l_pb0.25 SELL tren:searah SL2.0 TP0.5 H24 | LAMA n33 WR 97% +0.21R (acak -0.04) | BARU n60 WR 63% -0.21R (acak -0.07) | thn+ 50%
+   ETH jatuh N12 k5 l_pb0.25 SELL tren:searah SL3.0 TP2.0 H6 | LAMA n46 WR 80% +0.33R (acak -0.01) | BARU n90 WR 54% -0.04R (acak -0.03) | thn+ 70%
+   ETH jatuh N12 k5 l_pb0.25 SELL tren:searah SL3.0 TP1.5 H6 | LAMA n46 WR 80% +0.26R (acak -0.01) | BARU n90 WR 57% -0.04R (acak -0.03) | thn+ 70%
+Kandidat kuat (urut BARU − acak), tetangga = % parameter sekitar yang positif di dua periode:
+   ETH jatuh N3 k3 l_mkt SELL tren:searah SL1.5 TP3.0 H12 | LAMA n154 WR 46% +0.23R | BARU n301 WR 43% +0.17R (acak -0.05) | thn+ 70% | tetangga 100%
+   ETH jatuh N3 k3 l_mkt SELL tren:searah SL1.5 TP3.0 H48 | LAMA n154 WR 42% +0.24R | BARU n301 WR 41% +0.22R (acak -0.03) | thn+ 70% | tetangga 100%
+   ETH jatuh N3 k3 l_mkt SELL tren:searah SL2.0 TP3.0 H12 | LAMA n154 WR 53% +0.23R | BARU n301 WR 46% +0.11R (acak -0.04) | thn+ 70% | tetangga 100%
+   ETH jatuh N3 k4 l_mkt SELL tren:searah SL2.0 TP2.0 H12 | LAMA n57 WR 63% +0.26R | BARU n108 WR 56% +0.13R (acak -0.04) | thn+ 80% | tetangga 100%
+   ETH jatuh N12 k5 l_mkt SELL tren:searah SL1.5 TP3.0 H24 | LAMA n101 WR 46% +0.34R | BARU n190 WR 38% +0.13R (acak -0.04) | thn+ 90% | tetangga 100%
+   ETH jatuh N12 k5 l_mkt SELL tren:semua SL2.0 TP3.0 H12 | LAMA n155 WR 50% +0.17R | BARU n262 WR 48% +0.12R (acak -0.03) | thn+ 100% | tetangga 100%
+   ETH jatuh N6 k6 l_mkt SELL tren:semua SL3.0 TPr50 H48 | LAMA n35 WR 69% +0.35R | BARU n55 WR 58% +0.20R (acak -0.03) | thn+ 70% | tetangga 100%
+   ETH jatuh N6 k6 l_mkt SELL tren:semua SL3.0 TPr50 H24 | LAMA n35 WR 60% +0.32R | BARU n55 WR 53% +0.13R (acak -0.03) | thn+ 70% | tetangga 100%
+   ETH jatuh N24 k8 l_mkt SELL tren:semua SL3.0 TPr50 H24 | LAMA n39 WR 64% +0.50R | BARU n76 WR 49% +0.12R (acak -0.03) | thn+ 78% | tetangga 100%
+   ETH jatuh N24 k8 l_mkt SELL tren:semua SL3.0 TPr38 H24 | LAMA n39 WR 64% +0.39R | BARU n76 WR 51% +0.10R (acak -0.03) | thn+ 78% | tetangga 100%
+   ETH jatuh N24 k8 l_mkt SELL tren:semua SL3.0 TP3.0 H24 | LAMA n39 WR 64% +0.37R | BARU n76 WR 54% +0.11R (acak -0.03) | thn+ 78% | tetangga 100%
+   ETH jatuh N24 k8 l_mkt SELL tren:semua SL1.5 TPr50 H48 | LAMA n39 WR 51% +0.76R | BARU n76 WR 33% +0.19R (acak -0.08) | thn+ 78% | tetangga 100%
+   ETH jatuh N24 k8 l_mkt SELL tren:semua SL1.5 TPr50 H24 | LAMA n39 WR 51% +0.72R | BARU n76 WR 34% +0.13R (acak -0.07) | thn+ 78% | tetangga 100%
+   ETH lonjak N24 k6 l_mkt BUY tren:searah SL3.0 TP3.0 H12 | LAMA n152 WR 56% +0.14R | BARU n168 WR 55% +0.10R (acak -0.03) | thn+ 100% | tetangga 100%
+   ETH lonjak N24 k8 l_mkt BUY tren:searah SL3.0 TPr50 H12 | LAMA n48 WR 69% +0.28R | BARU n73 WR 51% +0.17R (acak -0.04) | thn+ 80% | tetangga 100%
+   ETH lonjak N24 k8 l_mkt BUY tren:searah SL3.0 TPr38 H12 | LAMA n48 WR 69% +0.24R | BARU n73 WR 52% +0.15R (acak -0.04) | thn+ 80% | tetangga 100%
+   ETH lonjak N24 k8 l_brk BUY tren:searah SL3.0 TP3.0 H12 | LAMA n40 WR 62% +0.26R | BARU n59 WR 54% +0.13R (acak -0.03) | thn+ 70% | tetangga 100%
+   ETH lonjak N3 k5 l_mkt BUY tren:semua SL3.0 TPr50 H48 | LAMA n38 WR 71% +0.39R | BARU n61 WR 56% +0.11R (acak -0.04) | thn+ 90% | tetangga 100%
+   ETH lonjak N3 k5 l_mkt BUY tren:semua SL3.0 TPr50 H12 | LAMA n38 WR 66% +0.27R | BARU n61 WR 49% +0.13R (acak -0.04) | thn+ 80% | tetangga 100%
+   ETH lonjak N24 k8 l_brk BUY tren:searah SL3.0 TPr50 H12 | LAMA n40 WR 62% +0.31R | BARU n59 WR 53% +0.17R (acak -0.04) | thn+ 70% | tetangga 100%
+
+## 20 koin spot BUY saja (gabungan, 20 koin)
+Kombinasi diuji: 67984
+Lolos LAMA (n≥30, rata ≥ +0,10R, t ≥ 2, > acak +0,08R): 1308 | tetap positif BARU: 0 | kuat di BARU (≥ +0,10R, > acak +0,05R, ≥70% tahun +): 0
+   jatuh → BUY: rata semua kombinasi LAMA -0.175R | BARU -0.240R | acak LAMA -0.149R BARU -0.234R
+   lonjak → BUY: rata semua kombinasi LAMA -0.148R | BARU -0.251R | acak LAMA -0.146R BARU -0.226R
+15 teratas LAMA (dipilih tanpa melihat BARU):
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:semua SL3.0 TPr50 H12 | LAMA n1533 WR 56% +0.16R (acak -0.07) | BARU n3048 WR 43% -0.08R (acak -0.12) | thn+ 50%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:semua SL3.0 TPr38 H12 | LAMA n1533 WR 57% +0.15R (acak -0.07) | BARU n3048 WR 44% -0.08R (acak -0.12) | thn+ 47%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL3.0 TP1.0 H48 | LAMA n56 WR 93% +0.24R (acak -0.10) | BARU n115 WR 63% -0.15R (acak -0.14) | thn+ 59%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL2.0 TP1.0 H24 | LAMA n56 WR 89% +0.34R (acak -0.15) | BARU n115 WR 57% -0.14R (acak -0.20) | thn+ 54%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL2.0 TP1.0 H48 | LAMA n56 WR 89% +0.34R (acak -0.15) | BARU n115 WR 57% -0.14R (acak -0.20) | thn+ 54%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL3.0 TP1.0 H24 | LAMA n56 WR 91% +0.22R (acak -0.10) | BARU n115 WR 59% -0.16R (acak -0.14) | thn+ 57%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:searah SL3.0 TPr50 H12 | LAMA n1059 WR 58% +0.20R (acak -0.06) | BARU n1723 WR 43% -0.07R (acak -0.11) | thn+ 49%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL2.0 TP1.0 H12 | LAMA n56 WR 86% +0.32R (acak -0.14) | BARU n115 WR 54% -0.13R (acak -0.20) | thn+ 57%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL3.0 TP1.0 H12 | LAMA n56 WR 86% +0.22R (acak -0.10) | BARU n115 WR 57% -0.13R (acak -0.13) | thn+ 63%
+   KOIN20 lonjak N24 k8 l_pb0.5 BUY tren:semua SL3.0 TP1.5 H48 | LAMA n34 WR 85% +0.27R (acak -0.09) | BARU n45 WR 56% -0.17R (acak -0.16) | thn+ 64%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:searah SL3.0 TPr38 H12 | LAMA n1059 WR 59% +0.18R (acak -0.06) | BARU n1723 WR 44% -0.07R (acak -0.11) | thn+ 48%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:semua SL3.0 TPr50 H48 | LAMA n1533 WR 53% +0.17R (acak -0.07) | BARU n3048 WR 41% -0.10R (acak -0.13) | thn+ 48%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:semua SL3.0 TP3.0 H12 | LAMA n1533 WR 57% +0.14R (acak -0.05) | BARU n3048 WR 44% -0.09R (acak -0.12) | thn+ 46%
+   KOIN20 lonjak N12 k5 l_pb0.25 BUY tren:searah SL3.0 TPr38 H48 | LAMA n1059 WR 58% +0.20R (acak -0.06) | BARU n1723 WR 43% -0.11R (acak -0.12) | thn+ 48%
+   KOIN20 lonjak N24 k8 l_pb0.25 BUY tren:melawan SL3.0 TP1.0 H6 | LAMA n56 WR 80% +0.20R (acak -0.09) | BARU n115 WR 48% -0.13R (acak -0.13) | thn+ 56%

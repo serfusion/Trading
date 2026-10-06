@@ -252,6 +252,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Robot berita auto-order cepat berbayar: feed institusional (AlphaFlash dsb.) + colocation + broker DMA, tidak
   tersedia untuk akun retail Exness MT5; riset detik pertama menunjukkan rugi dengan latensi retail (docs/NEWS_DETIK.md).
 
+## Tangkap pisau jatuh (6 Okt 2026 — `docs/PISAU.md`)
+- `research/pisau.py` (H1, jatuh/lonjak k×ATR dalam N jam, balik vs ikut arus, ±131 ribu kombinasi/aset, pilih LAMA →
+  BARU, pembanding acak) & `pisau_cek.py` (per tahun, biaya ×2/×3, telat 1 jam, M15/M5, tumpang tindih 💰).
+  BUY tepat setelah jatuh RUGI: XAU −0,03R (WR 64%), BTC −0,13R; BTC/ETH lebih buruk dari acak; 20 koin spot 0/1.308 lolos.
+  Konsisten = IKUT ARUS: XAU lonjak 4 ATR/3 jam tren naik → BUY tembus high (WR 69%, +0,16R BARU, 12/14 th +), BTC/ETH
+  SELL setelah jatuh & BUY setelah lonjak (+0,10–0,13R, ±45% sama dengan 💰). TIDAK dipasang — tunggu "pasang".
+- Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

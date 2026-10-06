@@ -181,3 +181,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 💎 Spot dipasang (izin pengguna): docs/SPOT_PELUANG.md, aplikasi 4.1. GBM pakai random_state=0 (tanpa itu early
   stopping acak -> angka berubah tiap putaran). Sumber data live belum bisa dites dari sesi (host Binance diblokir).
 
+### 6 Okt 2026 — tangkap pisau jatuh
+- docs/PISAU.md: menangkap pisau tidak menguntungkan; ikut arus konsisten (kandidat, belum dipasang).
+- data/research/eksternal/pisau_scan.parquet = semua kombinasi (kolom L_*/B_* = LAMA/BARU, acakL/acakB = pembanding).
+
