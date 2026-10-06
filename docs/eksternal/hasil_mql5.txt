@@ -1,0 +1,20 @@
+# Copy trade MQL5: apakah penyedia terbaik tetap terbaik? (research/mql5_signals.py)
+Daftar: 4402 sinyal aktif (MT5+MT4). Dengan riwayat bulanan ≥ 18 bulan: 1043. Bias penyintas: sinyal yang sudah mati/dihapus tidak ada di daftar → hasil nyata lebih buruk.
+
+## Profil daftar
+   semua: n 4402 | median win 67% | median DD 28% | median growth 30% | median pelanggan 0
+   akun real: n 4402 | median win 67% | median DD 28% | median growth 30% | median pelanggan 0
+   ≥ 52 minggu: n 1431 | median win 69% | median DD 40% | median growth 97% | median pelanggan 0
+   korelasi win% vs DD: -0.06; win ≥ 90%: median DD 22% vs win < 60%: 30%
+
+## Persistensi (pilih dengan 12 bulan lalu, ukur 6 bulan berikutnya, rata-rata 10 penyedia)
+| Cara memilih | Return 12 bln lalu | Return 6 bln ke depan (median periode) | Penyedia rugi 6 bln ke depan | Periode |
+|---|---|---|---|---|
+| growth 12 bln tertinggi | +427% | +55.3% | 15% | 72 |
+| win% tertinggi | +55% | +16.7% | 7% | 72 |
+| profit/rugi-bulan terburuk | +323% | +45.2% | 9% | 72 |
+| aman | +182% | +31.7% | 8% | 72 |
+| semua | +64% | +20.4% | 19% | 72 |
+
+## Tanda grid/martingale di penyedia win% ≥ 90% dengan detail
+   n 47 | bulan rugi > −20% pernah terjadi pada 13% | median max deposit load 10.5
