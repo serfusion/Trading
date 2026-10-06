@@ -6,6 +6,7 @@ GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren"
                  per indikator, kartu 🎯 (perkiraan hari H dari Kalshi+Polymarket / hasil setelah Act, _hari_h.py; Fed
                  berikutnya), Act berlapis (_aktual.py), dan status arsip berita ke GitHub (_arsip.py)
 GET  /api/chat?riwayat=1 / ?copytrader=1 -> isi riwayat.json (📜) / copytrader.json (👥 copy trader teruji) saja
+GET  /api/chat?copyposisi=<situs>|<id> -> rangkuman posisi terbuka & 10 trade terakhir trader itu (_copyposisi.py)
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -127,6 +128,16 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._authorized():
             self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
+            return
+        if "copyposisi=" in (self.path or ""):          # 👥 rangkuman posisi & riwayat 1 copy trader (_copyposisi.py)
+            from urllib.parse import parse_qs, urlparse
+            import _copyposisi
+            v = (parse_qs(urlparse(self.path).query).get("copyposisi") or [""])[0]
+            platform, _, id_ = v.partition("|")
+            if not platform or not id_ or len(v) > 120:
+                self._send(200, {"ok": False, "catatan": "parameter copyposisi=<situs>|<id>"})
+                return
+            self._send(200, _copyposisi.copyposisi(platform, id_))
             return
         for q, name in (("riwayat=1", "riwayat"), ("copytrader=1", "copytrader")):
             if q not in (self.path or ""):              # 📜 riwayat 💰 (tab Statistik) / 👥 copy trader teruji (tab Sinyal,
