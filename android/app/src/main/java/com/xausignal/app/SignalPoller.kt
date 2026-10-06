@@ -81,7 +81,6 @@ object SignalPoller {
             "spot_signal" -> Notifications.spotSignal(context, event)
             "arus_signal", "arus_fill", "arus_close", "arus_cancel" -> Notifications.arus(context, event)
             "spot_close" -> Notifications.spotClose(context, event)
-            "spot_warn" -> Notifications.spotWarn(context, event)
             "info" -> when {
                 event.str("kind") == "be07" ->
                     if (SignalRepository.money().use07(event.id, SignalRepository.signalTier(event.id))) {
