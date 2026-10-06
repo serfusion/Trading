@@ -311,7 +311,7 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             {**p, "price": prices.get(c)} for c, p in open_.items()], "closed": closed[:20],
             "scan_day": scan.get("day"), "found": scan.get("found", 0), "scan_left": len(scan.get("todo") or []), "source": state.get("source"),
             "tp_pct": round(tp * 100, 1), "days": days, "ambang": round(thr * 100), "max_open": max_open,
-            "teruji": MODEL.get("teruji", {}), "error": state["error"]})
+            "teruji": MODEL.get("teruji", {}), "coins": MODEL.get("coins", []), "error": state["error"]})
         state["status_at"] = _core.iso(now)
     store.save_state(state)
     return {"ok": not errors, "open": len(open_), "events": events, "errors": errors[:5],

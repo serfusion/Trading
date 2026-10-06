@@ -30,6 +30,10 @@ import java.time.Instant
 import java.time.OffsetDateTime
 import java.util.Locale
 
+/** 20 koin besar yang dipindai 💎 (sama dengan cloud/api/spot_model.json "coins"). */
+val SPOT_COINS = listOf("BTC", "ETH", "BNB", "SOL", "XRP", "ADA", "DOGE", "TRX", "LINK", "AVAX", "DOT", "LTC", "BCH",
+    "XLM", "ATOM", "ETC", "UNI", "NEAR", "AAVE", "FIL")
+
 /** Harga spot: 2 desimal ≥ 100, 4 desimal ≥ 1, selain itu 6 desimal. */
 fun spotPx(v: Double?): String = when {
     v == null -> "-"
@@ -69,6 +73,9 @@ fun SpotSection(events: List<SignalEvent>) {
         closed = events.filter { it.type == "spot_close" }.map { it.json }
     }
     if (st == null && open.isEmpty() && closed.isEmpty()) return
+    // daftar koin yang dipindai cloud (spot_model.json); cadangan = 20 koin bawaan
+    val coins = st?.optJSONArray("coins")?.let { arr -> (0 until arr.length()).map { arr.optString(it) } }
+        ?.filter { it.isNotBlank() }?.ifEmpty { null } ?: SPOT_COINS
     SectionTitle("💎 Spot Binance", trailing = if (open.isEmpty()) null else "${open.size} aktif")
     if (open.isEmpty()) {
         AppCard {
@@ -80,11 +87,13 @@ fun SpotSection(events: List<SignalEvent>) {
                 ) { Text("💎", style = MaterialTheme.typography.titleLarge) }
                 Column {
                     Text("Belum ada koin berpeluang tinggi", fontWeight = FontWeight.ExtraBold)
-                    Text("Dipindai tiap hari 07:05 WIB • 20 koin" +
+                    Text("Dipindai tiap hari 07:05 WIB • ${coins.size} koin" +
                         (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: ""),
                         style = MaterialTheme.typography.labelMedium, color = Muted)
                 }
             }
+            Text("${coins.size} koin dipantau: ${coins.joinToString(" • ")}",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
         }
     }
     open.forEach { SpotOpenCard(it, st) }
