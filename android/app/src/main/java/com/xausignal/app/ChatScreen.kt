@@ -131,8 +131,27 @@ object ChatClient {
     /** 📜 Riwayat sinyal 💰 per tahun & 90/365 hari (GET /api/chat?riwayat=1); null bila gagal. */
     fun riwayat(): JSONObject? = light("riwayat")
 
-    /** 👥 Copy trader teruji (GET /api/chat?copytrader=1, cloud/api/copytrader.json); null bila gagal. */
-    fun copytrader(): JSONObject? = light("copytrader")
+    /** 👥 Copy trader teruji (GET /api/chat?copytrader=1, cloud/api/copytrader.json): (data, alasan bila gagal). */
+    fun copytrader(): Pair<JSONObject?, String> {
+        val base = SignalRepository.cloudUrl()
+        if (base.isBlank()) return null to "alamat cloud belum diisi"
+        val request = Request.Builder().url("$base/api/chat?copytrader=1").get()
+            .header("X-Chat-Key", SignalRepository.topic()).build()
+        return try {
+            client.newCall(request).execute().use { res ->
+                val j = JSONObject(res.body?.string().orEmpty())
+                val d = j.optJSONObject("copytrader")
+                when {
+                    d != null -> d to ""
+                    j.has("info") -> null to "kunci/topik ditolak cloud"
+                    j.has("error") -> null to j.optString("error").take(80)
+                    else -> null to "cloud belum versi terbaru (HTTP ${res.code})"
+                }
+            }
+        } catch (e: Exception) {
+            null to (e.message ?: e.javaClass.simpleName).take(80)
+        }
+    }
 
     /** File JSON statis dari cloud (ringan, tanpa kalender): GET /api/chat?<name>=1 → field <name>. */
     private fun light(name: String): JSONObject? {
