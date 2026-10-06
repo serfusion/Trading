@@ -550,6 +550,25 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 }
             }
         }
+        // 📅 berita besar setelah pekan ini (cloud/api/_jadwal.py, aplikasi 4.14): NFP, CPI, Fed, JOLTS selalu ada
+        val next = prep.optJSONArray("mendatang")
+        if (next != null && next.length() > 0) {
+            LineDivider()
+            Text("📅 Berita besar berikutnya", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+            for (i in 0 until next.length()) {
+                val b = next.getJSONObject(i)
+                if (i > 0) LineDivider()
+                Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
+                Text("${b.optString("when")} • ${b.optString("dalam")}", style = MaterialTheme.typography.labelSmall,
+                    color = Muted)
+                val sk = b.optJSONArray("skenario") ?: continue
+                for (k in 0 until sk.length()) {
+                    val x = sk.getJSONObject(k)
+                    BigRow(x.optString("label"), if (detail) x.optString("bukti") else "", x.optString("teks"),
+                        x.optBoolean("kuat"))
+                }
+            }
+        }
         Text("Peluang pasar prediksi, bukan kepastian.", style = MaterialTheme.typography.labelSmall, color = Muted)
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
         prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {

@@ -185,6 +185,12 @@ class handler(BaseHTTPRequestHandler):
                     _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+            if isinstance(persiapan, dict):
+                try:                                          # 📅 NFP/CPI/Fed dst. setelah pekan ini (_jadwal.py)
+                    import _jadwal
+                    _jadwal.attach(persiapan, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
                 try:                                          # 📊 peluang emas sebelum NFP/JOLTS/Fed (_prarilis.py)
                     import _prarilis

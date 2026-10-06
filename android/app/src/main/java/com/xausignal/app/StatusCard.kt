@@ -108,6 +108,8 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             }
         }
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
+        StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
+        StripPrediksi(prep)                      // 🎯 berita besar berikutnya + skenario emas (4.14)
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
@@ -194,6 +196,50 @@ private fun headerCountdown(prep: JSONObject?, now: Long): Pair<String, Long> {
         if (t.isAfter(nowI)) return name to Duration.between(nowI, t).toMillis()
     }
     return "" to 0L
+}
+
+/** 📉/📈 status "lonjakan memudar" XAU & BTC (cloud _pudar.py) ≤ 6 jam setelah rilis; tanpa teks bila tidak ada. */
+@Composable
+private fun StripPudar(prep: JSONObject?, now: Long) {
+    val list = prep?.optJSONArray("berita") ?: return
+    val nowI = Instant.ofEpochMilli(now)
+    for (key in listOf("pudar", "pudar_btc")) {
+        var p: JSONObject? = null
+        for (i in 0 until list.length()) {
+            val b = list.getJSONObject(i)
+            val t = instantOf(b.optString("time")) ?: continue
+            val x = b.optJSONObject(key) ?: continue
+            if (!t.isAfter(nowI) && Duration.between(t, nowI).toHours() < 6) p = x
+        }
+        p?.let {
+            val teks = it.optString("teks")
+            Text("${if (key == "pudar") "XAU" else "BTC"} ${it.optString("label")}: $teks", maxLines = 2,
+                style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold,
+                color = if (teks.contains("🔴")) SellColor else if (teks.contains("🟢")) BuyColor else Gold)
+        }
+    }
+}
+
+/** 🎯 Satu baris: berita besar berikutnya (pekan ini atau 📅 mendatang) + skenario emas terkuat. */
+@Composable
+private fun StripPrediksi(prep: JSONObject?) {
+    val now = Instant.now()
+    val cand = mutableListOf<JSONObject>()
+    prep?.optJSONArray("berita")?.let { l ->
+        for (i in 0 until l.length()) l.getJSONObject(i).takeIf { instantOf(it.optString("time"))?.isAfter(now) == true }?.let(cand::add)
+    }
+    prep?.optJSONArray("mendatang")?.let { l -> for (i in 0 until l.length()) cand.add(l.getJSONObject(i)) }
+    val utama = listOf("Non-Farm", "CPI", "Federal Funds", "JOLTS")
+    val b = cand.filter { c -> utama.any { c.optString("title").contains(it) } }
+        .minByOrNull { instantOf(it.optString("time")) ?: Instant.MAX } ?: return
+    val sk = b.optJSONArray("skenario")
+    val tanda = mapOf("bawah" to "Act<", "atas" to "Act>", "sesuai" to "Act=")
+    val rows = (0 until (sk?.length() ?: 0)).map { sk!!.getJSONObject(it) }
+        .joinToString("  ") { "${tanda[it.optString("hasil")] ?: ""} ${it.optString("teks")}".trim() }
+    val dalam = b.optString("dalam").ifBlank { b.optString("when") }
+    Text("🎯 ${b.optString("title").replace("Non-Farm Employment Change", "NFP")} • $dalam", maxLines = 1,
+        style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
+    if (rows.isNotBlank()) Text("Emas 1 mnt: $rows", maxLines = 2, style = MaterialTheme.typography.labelSmall, color = Muted)
 }
 
 /** Satu baris: berita berikutnya ≤ 24 jam (atau status lonjakan setelah rilis), tanpa teks bila tidak ada. */
