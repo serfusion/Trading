@@ -1,11 +1,21 @@
 package com.xausignal.app
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -63,15 +73,17 @@ fun RankCard(money: MoneySettings) {
         Text("🏆 Urutan sinyal terbaik (teruji sejak Okt 2021)", fontWeight = FontWeight.Bold)
         rows.sortedByDescending { it.avg }.forEachIndexed { i, r ->
             val m = bags(r.avg)
-            Row(Modifier.padding(top = 2.dp)) {
-                Text("${i + 1}. ${r.asset} ${r.cat}", Modifier.weight(1.3f), fontWeight = FontWeight.Medium,
-                    style = MaterialTheme.typography.bodySmall)
-                Text(if (m > 0) "💰".repeat(m) else "—", Modifier.weight(0.8f), style = MaterialTheme.typography.labelSmall)
-                Text("${signed(r.avg)}R".replace('.', ','), Modifier.weight(0.7f), fontWeight = FontWeight.Bold,
-                    color = if (r.avg < 0.05) SellColor else BuyColor, style = MaterialTheme.typography.labelSmall)
-                Text("WR ${fmt(r.wr, 0)}%", Modifier.weight(0.7f), style = MaterialTheme.typography.labelSmall)
-                Text(if (r.sent) "dikirim" else "tidak dikirim", Modifier.weight(0.9f),
-                    color = if (r.sent) Gold else Muted, style = MaterialTheme.typography.labelSmall)
+            Row(Modifier.padding(top = 2.dp), verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                RankBadge(i + 1)
+                Column(Modifier.weight(1f)) {
+                    Text("${r.asset} ${r.cat}", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodySmall)
+                    Text((if (m > 0) "💰".repeat(m) + "  " else "") + "WR ${fmt(r.wr, 0)}% • " +
+                        if (r.sent) "dikirim" else "tidak dikirim",
+                        color = if (r.sent) Muted else Muted.copy(alpha = 0.6f), style = MaterialTheme.typography.labelSmall)
+                }
+                Text("${signed(r.avg)}R".replace('.', ','), fontWeight = FontWeight.ExtraBold,
+                    color = if (r.avg < 0.05) SellColor else BuyColor, style = MaterialTheme.typography.labelLarge)
             }
         }
         Text("💰 = untung per sinyal (≥0,05R 💰, ≥0,12R 💰💰, ≥0,25R 💰💰💰). — = tidak menguntungkan. Gap: (n×) = " +
@@ -96,5 +108,24 @@ fun RankCard(money: MoneySettings) {
         }
         Text("Lot pasti tampil di kartu sinyal (SL tiap sinyal berbeda). Lemah = jangan entry / lot kecil.",
             color = Muted, style = MaterialTheme.typography.labelSmall)
+    }
+}
+
+/** Nomor urut dalam lingkaran: 1 emas, 2 perak, 3 perunggu. */
+@Composable
+private fun RankBadge(n: Int) {
+    val (c1, c2) = when (n) {
+        1 -> Color(0xFFFFE08A) to Color(0xFFD39A1E)
+        2 -> Color(0xFFF1F4F8) to Color(0xFF9AA3AF)
+        3 -> Color(0xFFF6C29A) to Color(0xFFB0662E)
+        else -> CardHigh to CardHigh
+    }
+    Box(
+        Modifier.size(28.dp).background(Brush.linearGradient(listOf(c1, c2)), CircleShape)
+            .border(1.dp, if (n > 3) LineColor else Color.White.copy(alpha = 0.4f), CircleShape),
+        contentAlignment = Alignment.Center
+    ) {
+        Text("$n", fontWeight = FontWeight.Black, style = MaterialTheme.typography.labelMedium,
+            color = if (n > 3) Muted else Color(0xFF1B1204))
     }
 }

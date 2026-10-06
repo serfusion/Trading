@@ -1,0 +1,46 @@
+# Perbaikan sinyal 💎 spot: semesta koin & volatilitas (research/spot_vol.py)
+Semua koin data: 77; masih diperdagangkan: 54 (BTC, AAVE, ADA, ALGO, ANKR, ATOM, AVAX, AXS, BAT, BCH, BNB, CHZ, COMP, CRV, DASH, DOGE, DOT, EGLD, ENJ, ETC, ETH, FIL, FTT, HOT, ICX, IOTA, KAVA, LINK, LTC, LUNA, LUNC, MANA, NEAR, NEO, ONT, QTUM, RUNE, SAND, SHIB, SNX, SOL, SUI, SUSHI, THETA, TRX, UNI, VET, WIN, XLM, XRP, XTZ, YFI, ZEC, ZIL)
+TP +3%/10 hari kecuali disebut. Biaya 0,30%. Portofolio 10 slot. LAMA 2019–Sep 2021, BARU Okt 2021–2026.
+
+0. TERPASANG: 20 koin live
+   LAMA n681 WR 94% rata +1.45% kalah -19.7% | BARU n872 WR 91% rata +1.20% kalah -13.4% | 2025+ n160 WR 94% rata +2.04% kalah -7.8% | terburuk -58%
+   portofolio: LAMA +32.4%/th DD -40% | BARU +15.2%/th DD -21% | 2021:+7% 2022:+1% 2023:+8% 2024:+28% 2025:+26% 2026:+6%
+A. semua koin yang masih diperdagangkan
+   LAMA n1953 WR 94% rata +1.29% kalah -20.4% | BARU n2771 WR 90% rata +0.88% kalah -15.0% | 2025+ n486 WR 92% rata +1.44% kalah -13.8% | terburuk -59%
+   portofolio: LAMA +61.8%/th DD -40% | BARU +4.4%/th DD -51% | 2021:+2% 2022:-34% 2023:+14% 2024:+16% 2025:+45% 2026:-4%
+A2. koin tambahan saja (di luar 20)
+   LAMA n1272 WR 94% rata +1.21% kalah -20.7% | BARU n1899 WR 89% rata +0.73% kalah -15.7% | 2025+ n326 WR 92% rata +1.15% kalah -16.1% | terburuk -59%
+   portofolio: LAMA +35.4%/th DD -51% | BARU +1.0%/th DD -43% | 2021:-1% 2022:-28% 2023:+11% 2024:+8% 2025:+34% 2026:-9%
+B. 20 koin, lewati vol koin > P70
+   LAMA n287 WR 93% rata +1.74% kalah -11.7% | BARU n354 WR 91% rata +1.30% kalah -12.4% | 2025+ n55 WR 96% rata +2.50% kalah -2.7% | terburuk -32%
+   portofolio: LAMA +18.8%/th DD -14% | BARU +9.5%/th DD -10% | 2021:+7% 2022:+15% 2023:+5% 2024:+5% 2025:+13% 2026:+2%
+B. semua koin, lewati vol koin > P70
+   LAMA n826 WR 93% rata +1.14% kalah -19.1% | BARU n1203 WR 90% rata +0.93% kalah -14.7% | 2025+ n161 WR 93% rata +1.79% kalah -9.4% | terburuk -59%
+   portofolio: LAMA +24.8%/th DD -28% | BARU +7.9%/th DD -30% | 2021:-0% 2022:-3% 2023:+10% 2024:+10% 2025:+29% 2026:-3%
+B. 20 koin, lewati vol koin > P80
+   LAMA n376 WR 94% rata +1.78% kalah -13.0% | BARU n448 WR 90% rata +1.12% kalah -13.7% | 2025+ n84 WR 95% rata +2.24% kalah -7.0% | terburuk -36%
+   portofolio: LAMA +24.3%/th DD -18% | BARU +9.6%/th DD -13% | 2021:+7% 2022:+10% 2023:+6% 2024:+6% 2025:+17% 2026:+1%
+B. semua koin, lewati vol koin > P80
+   LAMA n1061 WR 93% rata +1.27% kalah -18.7% | BARU n1515 WR 90% rata +0.82% kalah -15.5% | 2025+ n247 WR 92% rata +1.50% kalah -12.1% | terburuk -59%
+   portofolio: LAMA +36.4%/th DD -37% | BARU +4.2%/th DD -41% | 2021:-1% 2022:-18% 2023:+10% 2024:+12% 2025:+35% 2026:-9%
+B. 20 koin, lewati vol koin > P90
+   LAMA n484 WR 94% rata +1.44% kalah -18.3% | BARU n603 WR 92% rata +1.37% kalah -13.3% | 2025+ n113 WR 96% rata +2.36% kalah -7.0% | terburuk -58%
+   portofolio: LAMA +22.3%/th DD -32% | BARU +15.2%/th DD -14% | 2021:+7% 2022:+19% 2023:+7% 2024:+15% 2025:+22% 2026:+4%
+B. semua koin, lewati vol koin > P90
+   LAMA n1358 WR 94% rata +1.26% kalah -19.8% | BARU n1985 WR 90% rata +1.01% kalah -14.9% | 2025+ n336 WR 93% rata +1.73% kalah -11.5% | terburuk -59%
+   portofolio: LAMA +44.1%/th DD -43% | BARU +8.1%/th DD -45% | 2021:-3% 2022:-23% 2023:+14% 2024:+22% 2025:+49% 2026:-6%
+B. 20 koin, lewati vol BTC > P80
+   LAMA n302 WR 95% rata +1.86% kalah -15.3% | BARU n521 WR 89% rata +0.99% kalah -13.5% | 2025+ n111 WR 96% rata +2.34% kalah -7.2% | terburuk -58%
+   portofolio: LAMA +20.8%/th DD -9% | BARU +10.0%/th DD -18% | 2021:+7% 2022:+6% 2023:+7% 2024:+2% 2025:+21% 2026:+5%
+B. 20 koin, HANYA vol koin > P80 (kebalikan)
+   LAMA n316 WR 95% rata +1.10% kalah -28.9% | BARU n467 WR 91% rata +1.29% kalah -13.0% | 2025+ n81 WR 93% rata +1.89% kalah -8.3% | terburuk -58%
+   portofolio: LAMA +10.9%/th DD -41% | BARU +9.3%/th DD -18% | 2021:+1% 2022:+2% 2023:+2% 2024:+24% 2025:+9% 2026:+8%
+C1. 20 koin, TP +5% saat vol koin > P80
+   LAMA n641 WR 93% rata +1.98% kalah -18.3% | BARU n794 WR 86% rata +1.37% kalah -12.2% | 2025+ n148 WR 88% rata +1.96% kalah -8.6% | terburuk -58%
+   portofolio: LAMA +45.4%/th DD -40% | BARU +15.9%/th DD -21% | 2021:+7% 2022:+3% 2023:+10% 2024:+33% 2025:+22% 2026:+5%
+C2. ikut tren saat volatil (vol>P80, di atas SMA50, naik 7 hari) — sinyal sendiri, 20 koin
+   LAMA n692 WR 89% rata +0.55% kalah -16.6% | BARU n1058 WR 84% rata +0.08% kalah -13.3% | 2025+ n167 WR 77% rata -1.40% kalah -14.8% | terburuk -62%
+   portofolio: LAMA +13.3%/th DD -19% | BARU +0.3%/th DD -41% | 2021:-0% 2022:+3% 2023:+34% 2024:-7% 2025:-14% 2026:-9%
+C3. terpasang + C2
+   LAMA n1197 WR 91% rata +0.98% kalah -16.8% | BARU n1744 WR 86% rata +0.47% kalah -13.5% | 2025+ n295 WR 84% rata +0.10% kalah -13.6% | terburuk -62%
+   portofolio: LAMA +38.3%/th DD -43% | BARU +8.7%/th DD -27% | 2021:+7% 2022:+0% 2023:+43% 2024:+0% 2025:+5% 2026:-6%

@@ -9,6 +9,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,12 +22,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
@@ -36,9 +38,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -53,6 +52,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -75,13 +77,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SignalRepository.init(this)
+        UiPrefs.init(this)                              // 🎨 tampilan (4.0)
         Notifications.createChannels(this)
         PollScheduler.schedule(applicationContext)
         NewsAlarm.schedule(applicationContext)          // ⏱️ pengingat berita (jadwal tersimpan)
         askUnrestrictedBattery()
         setContent {
             XauTheme {
-                AppScreen(onSettingsSaved = { refresh() })
+                AppBackground { AppScreen(onSettingsSaved = { refresh() }) }
             }
         }
     }
@@ -151,6 +154,7 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     var showSettings by remember { mutableStateOf(SignalRepository.topic().isBlank()) }
     var showTerms by remember { mutableStateOf(!SignalRepository.termsAccepted()) }
     var showInfo by remember { mutableStateOf(false) }      // ⓘ: urutan sinyal + saran entry (3.33)
+    var showLook by remember { mutableStateOf(false) }      // 🎨 tampilan (4.0)
     var tab by remember { mutableIntStateOf(0) }
     val money = remember(moneyVersion) { SignalRepository.money() }
     val follow = remember(moneyVersion) { SignalRepository.followed() }
@@ -172,65 +176,43 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
     }
 
     Scaffold(
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
+        contentColor = MaterialTheme.colorScheme.onBackground,
         topBar = {
             TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background),
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Image(
-                            painterResource(R.drawable.logo),
-                            contentDescription = null,
-                            modifier = Modifier.size(40.dp)
-                        )
+                        Box(
+                            Modifier
+                                .size(44.dp)
+                                .background(Brush.linearGradient(listOf(Gold, Gold2.copy(alpha = 0.3f))), CircleShape)
+                                .padding(2.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.background),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Image(painterResource(R.drawable.logo), contentDescription = null, modifier = Modifier.size(36.dp))
+                        }
                         Column(Modifier.padding(start = 12.dp)) {
-                            Text(APP_NAME, fontWeight = FontWeight.Bold, color = Gold,
+                            Text(greeting(), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
+                            Text(APP_NAME, fontWeight = FontWeight.ExtraBold, color = Gold,
                                 style = MaterialTheme.typography.titleMedium, maxLines = 1)
-                            Text(BRAND, style = MaterialTheme.typography.labelSmall, color = Muted)
                         }
                     }
                 },
                 actions = {
-                    IconButton(onClick = { showInfo = true }) {
-                        Icon(Icons.Filled.Info, contentDescription = "Info sinyal")
-                    }
+                    TopAction("🎨") { showLook = true }
+                    TopAction("ⓘ") { showInfo = true }
                     IconButton(onClick = { showSettings = true }) {
-                        Icon(Icons.Filled.Settings, contentDescription = "Pengaturan")
+                        Icon(Icons.Filled.Settings, contentDescription = "Pengaturan", tint = Muted)
                     }
                 }
             )
-        }
+        },
+        bottomBar = { BottomNav(tab) { tab = it } }
     ) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
-            TabRow(
-                selectedTabIndex = tab,
-                containerColor = MaterialTheme.colorScheme.background,
-                contentColor = Gold,
-                indicator = { positions ->
-                    Box(
-                        Modifier
-                            .tabIndicatorOffset(positions[tab])
-                            .padding(horizontal = 20.dp)
-                            .height(3.dp)
-                            .background(Gold, RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
-                    )
-                },
-                divider = { LineDivider() }
-            ) {
-                TABS.forEachIndexed { i, t ->
-                    Tab(
-                        selected = tab == i,
-                        onClick = { tab = i },
-                        selectedContentColor = Gold,
-                        unselectedContentColor = Muted,
-                        icon = { Icon(t.icon, contentDescription = null) },
-                        text = {
-                            Text(t.title, fontWeight = if (tab == i) FontWeight.Bold else FontWeight.Medium,
-                                maxLines = 1)
-                        }
-                    )
-                }
-            }
             // Tarik ke bawah: ambil pesan & harga terbaru dari server sekarang juga.
             val pull = rememberPullToRefreshState()
             if (pull.isRefreshing) {
@@ -276,6 +258,76 @@ fun AppScreen(onSettingsSaved: () -> Unit) {
         )
     } else if (showInfo) {
         InfoDialog(money, onTerms = { showInfo = false; showTerms = true }) { showInfo = false }
+    } else if (showLook) {
+        AppearanceDialog { showLook = false }
+    }
+}
+
+/** Sapaan sesuai jam WIB di atas nama aplikasi. */
+private fun greeting(): String {
+    val h = java.time.ZonedDateTime.now(java.time.ZoneId.of("Asia/Jakarta")).hour
+    return when (h) {
+        in 4..10 -> "Selamat pagi 👋"
+        in 11..14 -> "Selamat siang 👋"
+        in 15..17 -> "Selamat sore 👋"
+        else -> "Selamat malam 👋"
+    }
+}
+
+/** Tombol bulat kecil di kanan atas (🎨, ⓘ). */
+@Composable
+private fun TopAction(symbol: String, onClick: () -> Unit) {
+    Box(
+        Modifier
+            .padding(horizontal = 3.dp)
+            .size(38.dp)
+            .clip(CircleShape)
+            .background(CardHigh)
+            .border(1.dp, LineColor, CircleShape)
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(symbol, style = MaterialTheme.typography.titleMedium, color = Gold, fontWeight = FontWeight.Bold)
+    }
+}
+
+/** Navigasi bawah mengambang: kapsul, tab aktif bergradien aksen (aplikasi 4.0). */
+@Composable
+private fun BottomNav(tab: Int, onTab: (Int) -> Unit) {
+    val shape = RoundedCornerShape(30.dp)
+    Box(Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 12.dp)) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .shadow(18.dp, shape, ambientColor = Gold.copy(alpha = 0.35f), spotColor = Gold.copy(alpha = 0.5f))
+                .clip(shape)
+                .background(Brush.verticalGradient(listOf(CardHigh, CardColor)))
+                .border(1.dp, Brush.linearGradient(listOf(Gold.copy(alpha = 0.6f), LineColor, LineColor)), shape)
+                .padding(6.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            TABS.forEachIndexed { i, t ->
+                val on = i == tab
+                Row(
+                    Modifier
+                        .weight(if (on) 1.5f else 1f)
+                        .clip(RoundedCornerShape(24.dp))
+                        .background(if (on) Brush.horizontalGradient(listOf(Gold, Gold2))
+                            else Brush.horizontalGradient(listOf(Color.Transparent, Color.Transparent)))
+                        .clickable { onTab(i) }
+                        .padding(vertical = 11.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(t.icon, contentDescription = t.title, tint = if (on) onColor(Gold) else Muted,
+                        modifier = Modifier.size(20.dp))
+                    if (on) {
+                        Text(t.title, color = onColor(Gold), fontWeight = FontWeight.ExtraBold, maxLines = 1,
+                            style = MaterialTheme.typography.labelLarge, modifier = Modifier.padding(start = 6.dp))
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -349,7 +401,7 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 )
                 CardTitle("Pair yang saya ikuti")
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap").forEach { (k, label) ->
+                    listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "GAP" to "Forex gap", "SPOT" to "💎 Spot").forEach { (k, label) ->
                         FilterChip(
                             selected = k in follow,
                             onClick = { follow = if (k !in follow) follow + k else if (follow.size > 1) follow - k else follow },
@@ -359,7 +411,8 @@ fun SettingsDialog(onDismiss: () -> Unit, onSave: (String, String, String, Money
                 }
                 Text(
                     "Sinyal, notifikasi, dan ringkasan \"Hari ini\" hanya untuk pair yang dipilih. Forex gap = USD/JPY, " +
-                        "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB).",
+                        "EUR/JPY, AUD/JPY, AUD/USD, EUR/CHF (hanya saat buka pekan, Senin pagi WIB). 💎 Spot = beli spot Binance " +
+                        "saat peluang naik lagi tinggi (dipindai harian 07:05 WIB).",
                     style = MaterialTheme.typography.bodySmall, color = Muted
                 )
                 OutlinedTextField(

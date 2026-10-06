@@ -1,7 +1,7 @@
 package com.xausignal.app
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -90,28 +90,20 @@ private fun SymbolChips(options: List<String>, selected: Int, onSelect: (Int) ->
     }
 }
 
-/** Pemilih periode bergaya segmented control. */
+/** Pemilih periode bergaya segmented control (sudut ikut 🎨 Tampilan). */
 @Composable
 private fun Selector(options: List<String>, selected: Int, onSelect: (Int) -> Unit) {
     Row(
         Modifier
             .fillMaxWidth()
-            .background(CardColor, RoundedCornerShape(14.dp))
-            .padding(4.dp)
+            .clip(CardShape)
+            .background(CardColor)
+            .border(1.dp, LineColor, CardShape)
+            .padding(5.dp),
+        horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
         options.forEachIndexed { i, name ->
-            val on = selected == i
-            Text(
-                name,
-                textAlign = TextAlign.Center,
-                fontWeight = if (on) FontWeight.Bold else FontWeight.Medium,
-                color = if (on) MaterialTheme.colorScheme.onPrimary else Muted,
-                modifier = Modifier
-                    .weight(1f)
-                    .background(if (on) Gold else CardColor, RoundedCornerShape(10.dp))
-                    .clickable { onSelect(i) }
-                    .padding(vertical = 10.dp)
-            )
+            Choice(name, selected == i, Modifier.weight(1f)) { onSelect(i) }
         }
     }
 }
@@ -119,18 +111,19 @@ private fun Selector(options: List<String>, selected: Int, onSelect: (Int) -> Un
 @Composable
 private fun TotalCard(s: PeriodStats, money: MoneySettings) {
     val rate = if (s.total > 0) s.wins * 100 / s.total else 0
-    AppCard(accent = Gold) {
-        CardTitle("Total")
-        Column {
-            Text("Hasil bersih", style = MaterialTheme.typography.labelMedium, color = Muted)
-            Text(
-                moneyMain(s.net, money),
-                style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold,
-                color = if (s.net >= 0) BuyColor else SellColor
-            )
-            Text(idrLine(s.net, money), style = MaterialTheme.typography.bodyMedium, color = Muted)
+    HeroCard(color = if (s.net >= 0) BuyColor else SellColor) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+            WinGauge(s.wins, s.losses, 92.dp)
+            Column(Modifier.weight(1f)) {
+                CardTitle("Hasil bersih")
+                Text(
+                    moneyMain(s.net, money),
+                    style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.ExtraBold,
+                    color = if (s.net >= 0) BuyColor else SellColor, maxLines = 1
+                )
+                Text(idrLine(s.net, money), style = MaterialTheme.typography.bodyMedium, color = Muted)
+            }
         }
-        WinBar(s.wins, s.losses)
         MetricRow {
             Metric("Sinyal", "${s.total}", compact = true)
             Metric("Profit", "${s.wins}", BuyColor, compact = true)
@@ -144,29 +137,28 @@ private fun TotalCard(s: PeriodStats, money: MoneySettings) {
 
 @Composable
 private fun PeriodCard(s: PeriodStats, money: MoneySettings) {
-    val rate = if (s.total > 0) s.wins * 100 / s.total else 0
     AppCard {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            WinGauge(s.wins, s.losses, 50.dp)
             Column(Modifier.weight(1f)) {
-                Text(s.label, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text(s.label, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold)
                 Text(
-                    "${s.total} sinyal • ${s.wins} profit • ${s.losses} minus • WR $rate%",
-                    style = MaterialTheme.typography.bodySmall, color = Muted
+                    "${s.total} sinyal • ${s.wins} profit • ${s.losses} minus",
+                    style = MaterialTheme.typography.labelSmall, color = Muted
                 )
             }
             Column(horizontalAlignment = Alignment.End) {
                 Text(
-                    moneyMain(s.net, money), fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.titleMedium,
+                    moneyMain(s.net, money), fontWeight = FontWeight.ExtraBold,
+                    style = MaterialTheme.typography.titleSmall,
                     color = if (s.net >= 0) BuyColor else SellColor
                 )
-                Text(idrLine(s.net, money), style = MaterialTheme.typography.bodySmall, color = Muted)
+                Text(idrLine(s.net, money), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
-        WinBar(s.wins, s.losses)
         MetricRow {
-            Metric("Total profit", moneyMain(s.profit, money), BuyColor)
-            Metric("Total minus", moneyMain(s.loss, money), SellColor)
+            Metric("Total profit", moneyMain(s.profit, money), BuyColor, compact = true)
+            Metric("Total minus", moneyMain(s.loss, money), SellColor, compact = true)
         }
     }
 }

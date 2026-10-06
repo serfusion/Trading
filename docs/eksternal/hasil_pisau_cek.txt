@@ -1,0 +1,94 @@
+# Uji ketahanan kandidat tangkap pisau (research/pisau_cek.py)
+R = kelipatan SL; biaya sudah dipotong (XAU $0,50, BTC/ETH 0,06% pulang-pergi). LAMA < Okt 2021.
+
+## X0 XAU tangkap pisau sederhana (pembanding)
+   aturan: N12 k5 b_mkt tren:semua SL 2.0 ATR TP 1.0 batas 24 jam
+   LAMA : n 343 WR 59% rata -0.11R total -38.9R DD -39.4R kalah beruntun 5
+   BARU : n 187 WR 64% rata -0.03R total -5.4R DD -12.6R kalah beruntun 5
+   sinyal/bulan 3.3 | median lama posisi 2 jam
+   per tahun: 2013:46/-0.24R/50% 2014:40/-0.10R/60% 2015:36/-0.12R/58% 2016:37/-0.20R/51% 2017:40/-0.05R/62% 2018:34/+0.01R/68% 2019:46/-0.04R/63% 2020:32/-0.16R/56% 2021:44/-0.07R/61% 2022:44/-0.09R/59% 2023:43/+0.05R/70% 2024:36/-0.13R/58% 2025:32/-0.02R/66% 2026:20/+0.05R/70%
+   biaya ×2: LAMA -0.19R | BARU -0.08R
+   biaya ×3: LAMA -0.25R | BARU -0.11R
+   entry telat 1 jam: LAMA -0.14R | BARU -0.05R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 2%
+   cek candle M15/M5: LAMA -0.09R (n 343) | BARU -0.03R (n 185)
+## X1 XAU jatuh → BUY limit 1,5 ATR, tren turun
+   aturan: N48 k5 b_lim1.5 tren:melawan SL 3.0 ATR TP r50 batas 48 jam
+   LAMA : n 153 WR 55% rata +0.20R total +30.7R DD -6.7R kalah beruntun 6
+   BARU : n 54 WR 52% rata +0.12R total +6.4R DD -4.6R kalah beruntun 5
+   sinyal/bulan 1.3 | median lama posisi 22 jam
+   per tahun: 2013:23/-0.23R/35% 2014:26/+0.39R/58% 2015:30/+0.08R/50% 2016:12/-0.02R/42% 2017:8/+0.15R/62% 2018:20/+0.24R/60% 2019:8/+0.61R/75% 2020:8/+0.39R/75% 2021:22/+0.45R/64% 2022:22/+0.07R/50% 2023:9/-0.37R/33% 2024:5/+1.00R/80% 2025:3/+1.35R/100% 2026:11/-0.09R/45%
+   biaya ×2: LAMA +0.15R | BARU +0.10R
+   biaya ×3: LAMA +0.07R | BARU +0.02R
+   entry telat 1 jam: LAMA +0.08R | BARU +0.10R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 0%
+## X2 XAU jatuh → SELL tembus low
+   aturan: N6 k6 l_brk tren:semua SL 3.0 ATR TP 3.0 batas 12 jam
+   LAMA : n 45 WR 58% rata +0.25R total +11.2R DD -1.5R kalah beruntun 5
+   BARU : n 28 WR 50% rata +0.13R total +3.5R DD -2.2R kalah beruntun 3
+   sinyal/bulan 0.4 | median lama posisi 12 jam
+   per tahun: 2013:8/+0.72R/88% 2014:5/+0.08R/60% 2015:5/+0.15R/40% 2016:5/+0.45R/80% 2017:1/-0.65R/0% 2018:6/+0.13R/50% 2019:7/-0.12R/29% 2020:4/+0.58R/75% 2021:5/+0.03R/40% 2022:4/-0.07R/25% 2023:7/+0.21R/57% 2024:10/+0.10R/50% 2025:2/-0.67R/0% 2026:4/+0.72R/100%
+   biaya ×2: LAMA +0.19R | BARU +0.07R
+   biaya ×3: LAMA +0.14R | BARU +0.05R
+   entry telat 1 jam: LAMA +0.15R | BARU +0.01R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 32%
+   cek candle M15/M5: LAMA +0.26R (n 45) | BARU +0.14R (n 28)
+## X3 XAU lonjak → BUY tembus high, tren naik
+   aturan: N3 k4 l_brk tren:searah SL 3.0 ATR TP 2.0 batas 48 jam
+   LAMA : n 93 WR 72% rata +0.20R total +18.7R DD -2.3R kalah beruntun 2
+   BARU : n 71 WR 69% rata +0.16R total +11.7R DD -3.0R kalah beruntun 3
+   sinyal/bulan 1.0 | median lama posisi 14 jam
+   per tahun: 2013:3/+0.67R/100% 2014:8/-0.17R/50% 2015:10/+0.33R/80% 2016:9/+0.11R/67% 2017:18/+0.11R/67% 2018:8/+0.04R/62% 2019:14/+0.31R/79% 2020:12/+0.39R/83% 2021:16/+0.25R/75% 2022:9/+0.30R/78% 2023:21/+0.24R/71% 2024:17/+0.08R/65% 2025:13/+0.03R/62% 2026:6/+0.11R/67%
+   biaya ×2: LAMA +0.13R | BARU +0.16R
+   biaya ×3: LAMA +0.07R | BARU +0.14R
+   entry telat 1 jam: LAMA +0.05R | BARU +0.02R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 41%
+   cek candle M15/M5: LAMA +0.22R (n 93) | BARU +0.19R (n 71)
+## B1 BTC jatuh → SELL pasar, tren turun
+   aturan: N3 k3 l_mkt tren:searah SL 2.0 ATR TP 3.0 batas 24 jam
+   LAMA : n 222 WR 51% rata +0.20R total +45.1R DD -9.2R kalah beruntun 6
+   BARU : n 336 WR 46% rata +0.12R total +40.7R DD -9.1R kalah beruntun 9
+   sinyal/bulan 4.4 | median lama posisi 8 jam
+   per tahun: 2016:9/+0.38R/56% 2017:11/+0.21R/45% 2018:86/+0.23R/55% 2019:56/+0.28R/54% 2020:30/+0.06R/43% 2021:39/+0.11R/46% 2022:88/+0.26R/52% 2023:49/+0.00R/39% 2024:56/+0.11R/46% 2025:82/-0.05R/37% 2026:52/+0.25R/54%
+   biaya ×2: LAMA +0.18R | BARU +0.06R
+   biaya ×3: LAMA +0.14R | BARU +0.00R
+   entry telat 1 jam: LAMA +0.09R | BARU +0.11R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 43%
+## B2 BTC lonjak → BUY pasar
+   aturan: N12 k6 l_mkt tren:semua SL 3.0 ATR TP r50 batas 24 jam
+   LAMA : n 160 WR 56% rata +0.19R total +30.1R DD -7.0R kalah beruntun 6
+   BARU : n 185 WR 56% rata +0.13R total +24.2R DD -7.3R kalah beruntun 5
+   sinyal/bulan 2.7 | median lama posisi 12 jam
+   per tahun: 2016:23/+0.23R/65% 2017:33/+0.15R/55% 2018:17/+0.32R/53% 2019:34/+0.31R/53% 2020:37/+0.08R/57% 2021:24/+0.14R/62% 2022:26/+0.12R/54% 2023:49/+0.18R/57% 2024:39/+0.11R/56% 2025:38/+0.12R/55% 2026:25/+0.01R/52%
+   biaya ×2: LAMA +0.16R | BARU +0.06R
+   biaya ×3: LAMA +0.12R | BARU +0.02R
+   entry telat 1 jam: LAMA +0.18R | BARU +0.06R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 48%
+## B0 BTC tangkap pisau sederhana (pembanding)
+   aturan: N12 k5 b_mkt tren:semua SL 2.0 ATR TP 1.0 batas 24 jam
+   LAMA : n 223 WR 53% rata -0.19R total -42.5R DD -46.1R kalah beruntun 8
+   BARU : n 305 WR 57% rata -0.13R total -39.3R DD -40.4R kalah beruntun 5
+   sinyal/bulan 4.2 | median lama posisi 2 jam
+   per tahun: 2016:23/-0.11R/61% 2017:38/+0.14R/76% 2018:51/-0.32R/45% 2019:46/-0.38R/39% 2020:34/-0.27R/47% 2021:40/-0.14R/57% 2022:68/-0.20R/53% 2023:50/-0.08R/60% 2024:61/-0.08R/61% 2025:71/-0.17R/55% 2026:46/-0.03R/63%
+   biaya ×2: LAMA -0.23R | BARU -0.17R
+   biaya ×3: LAMA -0.28R | BARU -0.21R
+   entry telat 1 jam: LAMA -0.13R | BARU -0.09R
+   tumpang tindih dengan sinyal 💰 searah yang terbuka: 2%
+## E1 ETH jatuh → SELL pasar
+   aturan: N12 k5 l_mkt tren:semua SL 2.0 ATR TP 3.0 batas 12 jam
+   LAMA : n 155 WR 50% rata +0.17R total +26.9R DD -8.3R kalah beruntun 7
+   BARU : n 262 WR 48% rata +0.12R total +32.0R DD -5.7R kalah beruntun 6
+   sinyal/bulan 4.0 | median lama posisi 8 jam
+   per tahun: 2017:4/+0.25R/50% 2018:50/+0.33R/62% 2019:42/+0.11R/52% 2020:35/+0.07R/34% 2021:35/+0.11R/46% 2022:67/+0.15R/52% 2023:39/+0.19R/46% 2024:55/+0.02R/44% 2025:52/+0.17R/48% 2026:38/+0.09R/47%
+   biaya ×2: LAMA +0.13R | BARU +0.07R
+   biaya ×3: LAMA +0.10R | BARU +0.04R
+   entry telat 1 jam: LAMA +0.25R | BARU +0.10R
+## E2 ETH lonjak → BUY pasar, tren naik
+   aturan: N24 k6 l_mkt tren:searah SL 3.0 ATR TP 3.0 batas 12 jam
+   LAMA : n 152 WR 56% rata +0.14R total +20.7R DD -4.5R kalah beruntun 6
+   BARU : n 168 WR 55% rata +0.10R total +16.9R DD -6.0R kalah beruntun 6
+   sinyal/bulan 3.0 | median lama posisi 11 jam
+   per tahun: 2017:8/+0.31R/62% 2018:14/+0.08R/64% 2019:31/+0.12R/52% 2020:59/+0.14R/56% 2021:54/+0.13R/56% 2022:16/+0.16R/50% 2023:49/+0.00R/43% 2024:41/+0.19R/68% 2025:31/+0.11R/58% 2026:17/+0.04R/59%
+   biaya ×2: LAMA +0.13R | BARU +0.08R
+   biaya ×3: LAMA +0.12R | BARU +0.04R
+   entry telat 1 jam: LAMA +0.21R | BARU +0.09R

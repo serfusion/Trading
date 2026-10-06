@@ -1,6 +1,9 @@
 package com.xausignal.app
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -8,6 +11,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.FilterChip
@@ -23,9 +28,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.ZoneId
@@ -81,8 +89,17 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         if (active == 0) {
             item {
                 AppCard {
-                    Text("⏳ Belum ada sinyal", fontWeight = FontWeight.Bold)
-                    Text("Cek berikutnya ${nextCheckText()}", style = MaterialTheme.typography.labelSmall, color = Muted)
+                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                        Box(
+                            Modifier.size(48.dp).background(Gold.copy(alpha = 0.14f), CircleShape)
+                                .border(1.dp, Gold.copy(alpha = 0.4f), CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) { Text("⏳", style = MaterialTheme.typography.titleLarge) }
+                        Column {
+                            Text("Belum ada sinyal", fontWeight = FontWeight.ExtraBold)
+                            Text("Cek berikutnya ${nextCheckText()}", style = MaterialTheme.typography.labelMedium, color = Muted)
+                        }
+                    }
                 }
             }
         } else {
@@ -92,6 +109,8 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
                     g.map { it.id })
             }
         }
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { ArusSection(events) } }
+        if ("SPOT" in follow) item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { SpotSection(events) } }
         item { TodayCard(events, money) }
         item {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -142,13 +161,18 @@ fun LogRow(e: SignalEvent, primary: Map<String, String>) {
             "Tutup 1 posisi, SL sisa ke ${if (e.num("sl_plus") != null) e.price("sl_plus") else "entry"}", "gold")
         else listOf("ℹ️", "Info", e.str("text"), "muted")
     }
+    val tint = when (color) {
+        "dir" -> dirColor(e.dir); "buy" -> BuyColor; "sell" -> SellColor; "gold" -> Gold; else -> Muted
+    }
     AppCard {
-        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            Text(icon, style = MaterialTheme.typography.titleMedium)
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            Box(
+                Modifier.size(40.dp).background(tint.copy(alpha = 0.14f), CircleShape)
+                    .border(1.dp, tint.copy(alpha = 0.35f), CircleShape),
+                contentAlignment = Alignment.Center
+            ) { Text(icon, style = MaterialTheme.typography.titleMedium) }
             Column(Modifier.weight(1f)) {
-                Text(title, fontWeight = FontWeight.Bold, color = when (color) {
-                    "dir" -> dirColor(e.dir); "buy" -> BuyColor; "sell" -> SellColor; "gold" -> Gold; else -> Muted
-                })
+                Text(title, fontWeight = FontWeight.Bold, color = tint)
                 Text(detail, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
             }
             Text(e.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -156,30 +180,39 @@ fun LogRow(e: SignalEvent, primary: Map<String, String>) {
     }
 }
 
-/** Harga terakhir tiap pair dalam satu kartu ringkas. */
+/** Harga terakhir tiap pair: kartu utama dengan koin bulat per aset (grid 2 kolom atau daftar, 🎨 Tampilan). */
 @Composable
 fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
     val online = connection == "Terhubung"
     val list = prices.entries.sortedBy { (k, _) -> if (k.startsWith("XAU")) "0" else if (k.startsWith("BTC")) "1" else k }
-    AppCard {
+    HeroCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            StatusDot(if (online) BuyColor else SellColor)
+            PulseDot(if (online) BuyColor else SellColor, 7.dp)
             Text(
-                if (online) "Live" else connection, style = MaterialTheme.typography.labelMedium,
-                color = if (online) Muted else SellColor, modifier = Modifier.padding(start = 8.dp).weight(1f)
+                if (online) "LIVE" else connection, style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp,
+                color = if (online) BuyColor else SellColor, modifier = Modifier.padding(start = 4.dp).weight(1f)
             )
             list.maxByOrNull { it.value.str("time") }?.let {
                 Text(it.value.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
         if (list.isEmpty()) Text("-", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        list.forEach { (sym, hb) ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(sym, color = Muted, modifier = Modifier.weight(1f))
-                Text(
-                    priceText(sym, hb.num("price")), style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
+        if (UiPrefs.grid) {
+            list.chunked(2).forEach { row ->
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                    row.forEach { (sym, hb) -> PriceTile(sym, hb, Modifier.weight(1f)) }
+                    if (row.size == 1) Box(Modifier.weight(1f))
+                }
+            }
+        } else {
+            list.forEach { (sym, hb) ->
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                    AssetCoin(sym, 34.dp)
+                    Text(sym, color = Muted, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                    Text(priceText(sym, hb.num("price")), style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.ExtraBold)
+                }
             }
         }
         // ⚠️ mode perang (minyak melonjak) dari heartbeat XAU: label saja, sinyal XAU tetap dikirim
@@ -189,11 +222,32 @@ fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
     }
 }
 
+@Composable
+private fun PriceTile(sym: String, hb: SignalEvent, modifier: Modifier) {
+    val shape = TileShape
+    Column(
+        modifier
+            .clip(shape)
+            .background(CardHigh.copy(alpha = 0.85f))
+            .border(1.dp, LineColor, shape)
+            .padding(12.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            AssetCoin(sym, 28.dp)
+            Text(sym, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, color = Muted, maxLines = 1)
+        }
+        Text(priceText(sym, hb.num("price")), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.ExtraBold,
+            maxLines = 1)
+    }
+}
+
 /** Simbol + arah + waktu, lalu 💰 (profit) ★ (win rate) dan chip WR / R historis. */
 @Composable
 private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
     Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(signal.symbol(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+        AssetCoin(signal.symbol(), 34.dp)
+        Text(signal.symbol(), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.ExtraBold)
         Pill(signal.dir, dirColor(signal.dir), solid = true)
         if (count > 1) Pill("×$count", Gold)
         tierLabel(signal.tier()).takeIf { it.isNotEmpty() && signal.type == "signal" }?.let {
@@ -257,23 +311,33 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
     val floatMoney = floating?.let { it * legsOpen * cents * pv }
     AppCard(accent = dirColor(signal.dir)) {
         SignalHeader(signal, count)
-        Row(verticalAlignment = Alignment.Bottom) {
-            Text(
-                signal.price("entry"), style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f)
-            )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                CardTitle("Entry")
+                Text(signal.price("entry"), style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.ExtraBold)
+            }
             if (floating != null && floatMoney != null) {
                 val digits = if (signal.symbol().contains("JPY")) 3 else if ((entry ?: 0.0) < 20) 5 else 2
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        moneyMain(floatMoney, money), style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold, color = if (floating >= 0) BuyColor else SellColor
-                    )
-                    Text(
-                        "${idrLine(floatMoney, money)} • ${signed(floating, digits)} poin × $legsOpen posisi",
-                        style = MaterialTheme.typography.labelSmall, color = Muted
-                    )
+                val fc = if (floating >= 0) BuyColor else SellColor
+                Column(
+                    Modifier.clip(TileShape).background(fc.copy(alpha = 0.14f)).border(1.dp, fc.copy(alpha = 0.4f), TileShape)
+                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    Text(moneyMain(floatMoney, money), style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.ExtraBold, color = fc)
+                    Text(idrLine(floatMoney, money), style = MaterialTheme.typography.labelSmall, color = Muted)
+                    Text("${signed(floating, digits)} poin × $legsOpen", style = MaterialTheme.typography.labelSmall,
+                        color = Muted)
                 }
+            }
+        }
+        if (!signal.isGap() && entry != null) {
+            val risk = signal.num("risk_points") ?: Math.abs((signal.num("sl") ?: entry) - entry)
+            if (risk > 0) {
+                fun lv(k: String, r: Double) = signal.num(k) ?: (entry + sign * r * risk)
+                PriceTrack(signal.num("sl") ?: (entry - sign * risk), entry, lv("tp1", 0.7), lv("tp2", 1.5),
+                    lv("tp3", 3.0), price)
             }
         }
         if (signal.isGap()) {
@@ -284,11 +348,15 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         } else {
             LevelTable(signal, exitLevels(hb, ids).firstOrNull()?.level, slPlus)
         }
-        LineDivider()
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("Entry", color = Muted, modifier = Modifier.weight(1f))
+        Row(
+            Modifier.fillMaxWidth().clip(TileShape)
+                .background(Brush.horizontalGradient(listOf(Gold.copy(alpha = 0.18f), Gold.copy(alpha = 0.05f))))
+                .border(1.dp, Gold.copy(alpha = 0.35f), TileShape).padding(horizontal = 12.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text("💼 Entry", color = Muted, fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             Text(legsLot(signal, money), style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold, color = Gold)
+                fontWeight = FontWeight.ExtraBold, color = Gold)
         }
         Text(lossLine(signal, money) + if (count > 1) " • entry 1× saja" else "",
             style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -433,23 +501,47 @@ fun TodayCard(events: List<SignalEvent>, money: MoneySettings) {
             .firstOrNull { it.label == today.toString().substring(0, 7) }
     }
     AppCard {
-        SummaryLine("Hari ini", day, money)
+        CardTitle("Ringkasan")
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            PeriodTile("Hari ini", day, money, Modifier.weight(1f))
+            PeriodTile("Minggu ini", week, money, Modifier.weight(1f))
+            PeriodTile("Bulan ini", month, money, Modifier.weight(1f))
+        }
         if (perPair.size > 1 || perPair.any { !it.first.startsWith("XAU") }) {
             perPair.forEach { (sym, s) ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("• $sym  ${s.wins} Profit • ${s.losses} Minus", style = MaterialTheme.typography.labelSmall,
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    AssetCoin(sym, 22.dp)
+                    Text("$sym  ${s.wins} Profit • ${s.losses} Minus", style = MaterialTheme.typography.labelSmall,
                         color = Muted, modifier = Modifier.weight(1f))
-                    Text(moneyMain(s.net, money), style = MaterialTheme.typography.labelSmall,
+                    Text(moneyMain(s.net, money), style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.Bold, color = if (s.net >= 0) BuyColor else SellColor)
                 }
             }
         }
-        LineDivider()
-        SummaryLine("Minggu ini", week, money)
-        LineDivider()
-        SummaryLine("Bulan ini", month, money)
     }
 }
+
+/** Satu periode: lingkaran win rate + hasil bersih. */
+@Composable
+private fun PeriodTile(label: String, s: PeriodStats?, money: MoneySettings, modifier: Modifier) {
+    val shape = TileShape
+    val net = s?.net ?: 0.0
+    Column(
+        modifier.clip(shape).background(CardHigh).border(1.dp, LineColor, shape).padding(vertical = 12.dp, horizontal = 6.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        WinGauge(s?.wins ?: 0, s?.losses ?: 0, 54.dp)
+        Text(label, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
+        Text(if (s == null) "–" else compactMoney(net, money), style = MaterialTheme.typography.labelLarge,
+            fontWeight = FontWeight.ExtraBold, maxLines = 1,
+            color = if (s == null) Muted else if (net >= 0) BuyColor else SellColor)
+    }
+}
+
+/** Uang ringkas untuk kotak kecil: tanpa desimal bila ≥ 100. */
+fun compactMoney(v: Double, m: MoneySettings): String =
+    "${signed(v, if (Math.abs(v) >= 100) 0 else 2)} ${m.currency}"
 
 @Composable
 fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
@@ -545,7 +637,8 @@ fun CloseRow(event: SignalEvent, money: MoneySettings, events: List<SignalEvent>
     val result = if (win) BuyColor else SellColor
     AppCard(accent = result) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Text(event.symbol(), fontWeight = FontWeight.Bold)
+            AssetCoin(event.symbol(), 30.dp)
+            Text(event.symbol(), fontWeight = FontWeight.ExtraBold)
             Pill(if (win) "PROFIT" else "MINUS", result, solid = true)
             Text(
                 event.timeText(), style = MaterialTheme.typography.labelSmall, color = Muted,
@@ -573,20 +666,14 @@ private fun LevelTable(signal: SignalEvent, exit: Double?, slPlus: Boolean) {
     val sym = signal.symbol()
     fun lv(k: String, r: Double) = signal.num(k) ?: (entry + sign * r * risk)
     val tp1R = if (risk > 0) Math.abs((signal.num("tp1") ?: entry) - entry) / risk else 0.7
-    val rows = listOf(
-        Triple("Entry", priceText(sym, entry), Gold),
-        Triple("SL", priceText(sym, signal.num("sl") ?: (entry - sign * risk)), SellColor),
-        Triple("TP1 (${fmt(tp1R, 1).replace('.', ',')}R) • tutup 1 posisi", priceText(sym, lv("tp1", 0.7)), BuyColor),
-        Triple("TP2 (1,5R) • patokan", priceText(sym, lv("tp2", 1.5)), BuyColor),
-        Triple("TP3 (3R) • patokan", priceText(sym, lv("tp3", 3.0)), BuyColor),
-        Triple("SL+ setelah TP1" + if (slPlus) " ✓" else "", priceText(sym, signal.num("sl_plus") ?: (entry + sign * 0.10)),
-            if (slPlus) BuyColor else Muted),
-        Triple("TUTUP (close H1 lewat)", exit?.let { priceText(sym, it) } ?: "—", Gold),
-    )
-    rows.forEach { (label, value, color) ->
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(label, color = Muted, style = MaterialTheme.typography.labelMedium, modifier = Modifier.weight(1f))
-            Text(value, color = color, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleLarge)
-        }
-    }
+    TileGrid(listOf(
+        TileData("SL", priceText(sym, signal.num("sl") ?: (entry - sign * risk)), SellColor, "rugi maks"),
+        TileData("TP1 • ${fmt(tp1R, 1).replace('.', ',')}R", priceText(sym, lv("tp1", 0.7)), BuyColor, "tutup 1 posisi",
+            done = slPlus),
+        TileData("TP2 • 1,5R", priceText(sym, lv("tp2", 1.5)), BuyColor, "patokan"),
+        TileData("TP3 • 3R", priceText(sym, lv("tp3", 3.0)), BuyColor, "patokan"),
+        TileData("SL+", priceText(sym, signal.num("sl_plus") ?: (entry + sign * 0.10)), if (slPlus) BuyColor else Muted,
+            "setelah TP1", done = slPlus),
+        TileData("TUTUP", exit?.let { priceText(sym, it) } ?: "—", Gold, "close H1 lewat"),
+    ))
 }

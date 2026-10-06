@@ -1,0 +1,66 @@
+# Sinyal spot 'sudah turun jauh' (research/spot_dip.py)
+
+Koin: BTC, ETH, BNB, XRP, ADA, DOGE, LTC, LINK, TRX, BCH, XLM, ATOM, ETC, MATIC, EOS, ALGO, XMR, SOL, DOT, AVAX, UNI (harian, 2017–2026). Biaya pulang-pergi 0,30%. Hasil = % per trade bersih.
+Diuji 704 kombinasi. LOLOS 68.
+
+aturan                                                             n   nB  WR L  WR B  avg L  avg B acak L acak B  th+ terburuk
+RSI25 | balik SMA20 maks 20h | SL tanpa                          205  125    66    67  +6.24  +3.91  -0.71  -0.76   64    -57.9  LOLOS
+RSI30 | TP 10% maks 20h | SL tanpa                               538  330    76    72  +2.85  +3.08  +1.37  -0.58   73    -62.8  LOLOS
+DD20_30 | TP 10% maks 10h | SL tanpa                            1061  468    73    69  +2.26  +2.95  +1.50  -0.53   80    -58.6  LOLOS
+MERAH3_15 +tren | TP 5% maks 20h | SL tanpa                      230   88    92    91  +1.98  +2.83  -0.66  -0.63   82    -56.8  LOLOS
+MERAH3_15 +tren | TP 10% maks 10h | SL tanpa                     223   86    77    66  +3.63  +2.79  +3.51  -0.27   73    -50.9  LOLOS
+DD20_30 | balik SMA20 maks 20h | SL tanpa                        716  303    66    66  +3.70  +2.71  -0.31  -0.39   80    -55.9  LOLOS
+DD20_30 +tren | TP 10% maks 20h | SL tanpa                       326   89    79    70  +1.85  +2.68  +1.60  -0.26   60    -55.9  LOLOS
+MERAH3_15 +tren | TP 5% maks 10h | SL tanpa                      230   88    89    86  +2.43  +2.54  +0.42  -0.38   82    -50.9  LOLOS
+MERAH3_15 +tren | TP 10% maks 5h | SL tanpa                      230   89    74    65  +3.07  +2.49  +0.22  -0.91   73    -53.4  LOLOS
+DD20_30 +tren | TP 10% maks 10h | SL tanpa                       378  106    74    64  +2.65  +2.49  +0.17  -0.20   60    -58.6  LOLOS
+BB2.5 +tren | TP 5% maks 10h | SL tanpa                          110   63    91    76  +3.25  +2.46  +1.52  +1.27   78    -19.6  LOLOS
+RSI30 | TP 10% maks 10h | SL tanpa                               613  371    70    64  +1.67  +2.35  +0.52  -0.12   73    -48.0  LOLOS
+MERAH3_15 | TP 10% maks 20h | SL tanpa                           597  286    80    70  +2.67  +2.33  +0.89  -0.61   64    -56.8  LOLOS
+MERAH3_15 +tren | TP 5% maks 5h | SL tanpa                       233   89    86    83  +1.98  +2.32  -0.82  +0.38   82    -49.6  LOLOS
+DD20_30 | TP 10% maks 5h | SL tanpa                             1333  574    67    66  +1.48  +2.06  +0.66  -0.11   90    -55.1  LOLOS
+DD20_30 +tren | TP 10% maks 5h | SL tanpa                        451  130    67    67  +1.54  +2.05  +0.08  -0.13   70    -55.1  LOLOS
+DD20_30 | TP 5% maks 20h | SL tanpa                             1216  534    88    89  +0.85  +2.04  +0.56  -0.57   80    -58.9  LOLOS
+DD20_30 +tren | TP 5% maks 20h | SL tanpa                        470  130    91    87  +1.59  +2.02  +0.32  -0.30   70    -55.9  LOLOS
+MERAH3_10 +tren | TP 5% maks 10h | SL tanpa                      492  238    89    82  +2.35  +1.93  +0.92  -0.58   82    -58.6  LOLOS
+BB2.5 +tren | TP 10% maks 20h | SL tanpa                         107   61    80    64  +4.74  +1.87  +1.00  -2.57   67    -43.0  LOLOS
+MERAH3_10 +tren | TP 5% maks 20h | SL tanpa                      485  233    93    86  +2.54  +1.87  +1.18  +0.09   64    -56.8  LOLOS
+DD20_30 +tren | TP 5% maks 10h | SL tanpa                        507  139    88    82  +1.93  +1.80  +0.22  -0.60   90    -58.6  LOLOS
+RSI30 | balik SMA20 maks 20h | SL tanpa                          466  300    63    64  +6.01  +1.80  +0.02  -0.46   73    -62.8  LOLOS
+MERAH3_10 +tren | TP 5% maks 5h | SL tanpa                       499  240    86    75  +2.05  +1.79  -1.14  -0.75   73    -55.1  LOLOS
+RSI30 | TP 10% maks 5h | SL tanpa                                716  439    64    64  +1.03  +1.78  +0.71  -0.50   64    -37.5  LOLOS
+BB2.5 | TP 10% maks 20h | SL tanpa                               515  342    76    65  +2.61  +1.63  +0.11  -0.65   82    -54.4  LOLOS
+DD20_30 | TP 5% maks 10h | SL tanpa                             1400  598    85    83  +1.32  +1.59  +0.18  -0.52   90    -58.6  LOLOS
+MERAH3_15 | TP 5% maks 20h | SL tanpa                            632  296    91    86  +1.76  +1.55  +1.10  -1.02   73    -56.8  LOLOS
+BB2.5 +tren | TP 3% maks 10h | SL tanpa                          111   63    96    87  +2.12  +1.54  -0.58  +0.01   89    -16.1  LOLOS
+MERAH3_15 +tren | TP 3% maks 20h | SL tanpa                      236   89    97    94  +1.34  +1.42  -0.33  -0.22   91    -56.8  LOLOS
+MERAH3_15 | TP 10% maks 10h | SL tanpa                           624  292    76    62  +3.55  +1.42  +0.72  +0.17   73    -50.9  LOLOS
+MERAH3_10 +tren | TP 3% maks 10h | SL tanpa                      502  241    94    91  +1.30  +1.41  +0.43  -0.71   82    -58.6  LOLOS
+MERAH3_10 +tren | TP 10% maks 10h | SL tanpa                     456  218    75    62  +3.18  +1.36  +0.86  +0.59   64    -58.6  LOLOS
+MERAH3_15 +tren | TP 3% maks 10h | SL tanpa                      236   89    95    91  +1.71  +1.35  -0.40  -1.04   91    -50.9  LOLOS
+BB2.5 +tren | balik SMA20 maks 20h | SL tanpa                    108   61    68    64  +8.52  +1.27  -0.30  -0.21   67    -43.0  LOLOS
+BB2.5 +tren | TP 5% maks 5h | SL tanpa                           110   63    91    67  +3.25  +1.23  +0.39  +0.93   67    -25.0  LOLOS
+MERAH3_10 +tren | TP 3% maks 20h | SL tanpa                      496  236    96    93  +1.23  +1.23  +0.93  +0.14   73    -56.8  LOLOS
+MERAH3_10 +tren | TP 3% maks 5h | SL tanpa                       506  242    93    86  +1.32  +1.19  -0.35  -0.14   73    -55.1  LOLOS
+DD20_30 | TP 5% maks 5h | SL tanpa                              1632  706    79    77  +0.74  +1.16  +0.16  -0.47   70    -55.1  LOLOS
+BB2.5 +tren | TP 5% maks 20h | SL tanpa                          109   62    89    77  +2.54  +1.14  +1.10  -1.56   67    -32.9  LOLOS
+DD20_30 +tren | TP 3% maks 10h | SL tanpa                        598  169    92    89  +0.79  +1.14  -0.13  -0.74   90    -58.6  LOLOS
+DD20_30 +tren | TP 5% maks 5h | SL tanpa                         557  159    82    74  +1.20  +1.02  -0.03  -0.62   60    -55.1  LOLOS
+BB2.5 | TP 5% maks 20h | SL tanpa                                533  354    85    80  +1.12  +1.01  +0.68  +0.10   64    -54.4  LOLOS
+MERAH3_15 +tren | TP 3% maks 5h | SL tanpa                       236   89    95    87  +1.92  +1.01  -0.85  +0.07  100    -44.6  LOLOS
+DD20_30 | TP 3% maks 20h | SL tanpa                             1525  653    92    93  +0.38  +0.98  -0.21  -0.53   70    -58.9  LOLOS
+BB2.5 | TP 5% maks 10h | SL tanpa                                542  363    82    71  +1.49  +0.93  +0.60  -0.44   64    -41.2  LOLOS
+MERAH3_15 | TP 5% maks 10h | SL tanpa                            644  299    88    78  +2.02  +0.90  +0.68  -0.33   73    -50.9  LOLOS
+DD20_30 | TP 3% maks 10h | SL tanpa                             1706  717    91    89  +0.68  +0.89  -0.09  -0.46   70    -58.6  LOLOS
+BB2.0 +tren | TP 5% maks 10h | SL tanpa                          315  178    85    70  +1.95  +0.84  -0.64  -0.29   64    -50.9  LOLOS
+Z2 +tren | TP 5% maks 10h | SL tanpa                             315  178    85    70  +1.95  +0.84  -0.07  -0.08   64    -50.9  LOLOS
+BB2.5 +tren | TP 3% maks 20h | SL tanpa                          110   62    96    89  +2.14  +0.78  -0.33  +0.30   67    -22.6  LOLOS
+MERAH3_15 | TP 10% maks 5h | SL tanpa                            644  298    71    61  +2.68  +0.66  +0.04  +0.43   73    -53.4  LOLOS
+DD20_30 | TP 3% maks 5h | SL tanpa                              1920  824    86    84  +0.18  +0.62  -0.58  -0.57   70    -55.1  LOLOS
+BB2.5 | TP 3% maks 20h | SL tanpa                                551  369    90    88  +0.22  +0.55  -0.21  +0.26   64    -54.4  LOLOS
+MERAH3_10 +tren | TP 5% maks 10h | SL -15%                       508  243    85    76  +1.84  +0.51  -1.15  -0.82   73    -15.3  LOLOS
+BB2.0 +tren | TP 3% maks 10h | SL tanpa                          343  188    95    79  +1.63  +0.51  -0.63  -0.49   64    -50.9  LOLOS
+Z2 +tren | TP 3% maks 10h | SL tanpa                             343  188    95    79  +1.63  +0.51  -0.54  -0.57   64    -50.9  LOLOS
+BB2.5 | TP 3% maks 10h | SL tanpa                                556  374    87    81  +0.39  +0.50  -1.00  -0.03   64    -41.2  LOLOS
+MERAH3_10 +tren | TP 5% maks 20h | SL -15%                       507  242    85    78  +1.72  +0.46  -0.91  -0.86   64    -15.3  LOLOS
+BB2.5 +tren | TP 3% maks 5h | SL tanpa                           111   63    96    71  +2.11  +0.39  -0.93  -0.58   67    -25.0  LOLOS

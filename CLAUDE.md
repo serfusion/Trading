@@ -230,6 +230,49 @@ alarm tepat waktu) hanya menyentuh `android/`].
   ETH, lapisan, gap; tab Sinyal hanya kartu status tren 🐂/🐻 (+ETH).
 - Aplikasi 3.26 (izin "rombak apk ... simple"): teks dipangkas, PROFIT = uang > 0, 🎯 bukti di balik "Detail".
 
+## Aplikasi 4.0 tampilan baru (4 Okt 2026, permintaan pengguna "URGENT ... estetik, kotak, grid, circle")
+- `Theme.kt`: kartu gradien (`AppCard`/`HeroCard`), koin aset bulat (`AssetCoin`), `Ring`/`WinGauge` (WR & hitung
+  mundur), `TileGrid` (angka sinyal), `PriceTrack` (SL→Entry→TP1→TP2→TP3 + harga sekarang), navigasi bawah kapsul.
+  🎨 Tampilan (`Appearance.kt`, `UiPrefs`, SharedPreferences "tampilan"): bentuk kotak/bulat/kapsul, grid/daftar,
+  lingkaran/bar, aksen Emas/Safir/Ametis/Toska, tema gelap/terang/ikut HP. Logika sinyal TIDAK berubah.
+- Cek kompilasi lokal tanpa Android SDK: proyek Compose Desktop (CMP 1.6.11, Maven Central) + stub Android, lihat
+  catatan di PROGRES.md. Render gambar pratinjau TIDAK bisa (runtime androidx.collection hanya di Google Maven, diblokir).
+
+## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
+- DIPASANG 4 Okt (permintaan pengguna "infokan di apk mulai dari sinyal dan close spot", semua koin):
+  `research/spot_peluang.py --final` (gradient boosting walk-forward, 20 koin live + koin ambruk) → `cloud/api/
+  spot_model.json` + `_spot.py` (harian 07:05 WIB, cek tiap jam, baris Supabase `spot`, env SPOT_SIGNALS/SPOT_MAX) →
+  aplikasi 4.1 kartu 💎 (`SpotCard.kt`, pair diikuti "SPOT"). Sinyal = p ≥ 93% ATAU 3 merah ≥10% +SMA200; TP +3%/10 hari:
+  BARU naik 91% (acak 76%). 5 Okt: + lewati volatilitas > P90 (spot_vol.py): naik 92%, portofolio BARU +15%/th DD −14%;
+  54 koin & "ikut tren saat volatil" memperburuk. 679 koin + deteksi naik (spot_naik.py): tidak lebih baik → tidak dipasang.
+- `research/spot_dip.py` (704 kombinasi, 21 koin hidup) & `spot_dip2.py` (+ koin ambruk/delisting, portofolio slot,
+  pilih dari LAMA). WR per trade 80–95% tetapi kalah rata −13..−25% (terburuk −55..−100%); portofolio BARU terbaik
+  ±+5–7%/th DD −13..−24% (BTC beli-tahan +12%/th DD −77%). Kandidat: 3 merah ≥10% +SMA200, TP 5%, maks 10 hari,
+  10% modal/sinyal. BELUM dipasang (tunggu "pasang"; info saja, tanpa order).
+- Robot berita auto-order cepat berbayar: feed institusional (AlphaFlash dsb.) + colocation + broker DMA, tidak
+  tersedia untuk akun retail Exness MT5; riset detik pertama menunjukkan rugi dengan latensi retail (docs/NEWS_DETIK.md).
+
+## Tangkap pisau jatuh (6 Okt 2026 — `docs/PISAU.md`)
+- `research/pisau.py` (H1, jatuh/lonjak k×ATR dalam N jam, balik vs ikut arus, ±131 ribu kombinasi/aset, pilih LAMA →
+  BARU, pembanding acak) & `pisau_cek.py` (per tahun, biaya ×2/×3, telat 1 jam, M15/M5, tumpang tindih 💰).
+  BUY tepat setelah jatuh RUGI: XAU −0,03R (WR 64%), BTC −0,13R; BTC/ETH lebih buruk dari acak; 20 koin spot 0/1.308 lolos.
+  Konsisten = IKUT ARUS: XAU lonjak 4 ATR/3 jam tren naik → BUY tembus high (WR 69%, +0,16R BARU, 12/14 th +), BTC/ETH
+  SELL setelah jatuh & BUY setelah lonjak (+0,10–0,13R, ±45% sama dengan 💰). TIDAK dipasang — tunggu "pasang".
+- DIPASANG 6 Okt (izin "ikuti arus dengan catatan WR dan profit tinggi"): 🌊 `cloud/api/_arus.py` (XAU lonjak→BUY STOP,
+  BTC lonjak→BUY, ETH jatuh→SELL; WR ≥ 62% dua periode), env ARUS_SIGNALS, baris Supabase `arus`, aplikasi 4.3 `ArusCard.kt`.
+  Replay `research/arus_replay.py` 2025–26 = riset (19/63/41 trade). Entry pasar = open candle berjalan (cron :02).
+- NFP mean reversion (`docs/NFP_MEAN.md`, `research/nfp_mean.py`, vintage ALFRED 2001–2026): pelemahan → rebound 59–67%
+  (baseline 47%); pelemahan + pendahulu memburuk → hanya 31% (deterioration lanjutan); gagal 2008–09; walk-forward 60–63%.
+  Untuk emas TIDAK ada keunggulan sebelum rilis (konsensus sudah memperhitungkan; emas digerakkan kejutan). Tidak dipasang.
+- Semua berita USD sebelum rilis (`research/news_semua.py`, `docs/eksternal/hasil_news_semua.txt`, 18 judul, 216 aturan +
+  logistik walk-forward): 1 aturan konsisten (NFP: rilis lalu di atas konsensus → emas naik 1 jam 72%/61%); model NFP 62%
+  (p 0,01), JOLTS 61% (p 0,02), Fed 62% (p 0,05), sisanya 42–57% ≈ acak; banyak uji → bisa kebetulan. Tidak dipasang.
+- DIPASANG 6 Okt (izin "pasang info sebelum news NFP, JOLTS & Fed"): `research/prarilis.py` → `cloud/api/prarilis.json`
+  (logistik 5 fitur live: prev_s, exp_up, g4, g24, gema; walk-forward NFP 62%/BARU 55%, JOLTS 65%/58%, Fed 60%/62%) →
+  `_prarilis.attach` di GET /api/chat (memori kejutan baris Supabase `prarilis`, seed NFP Sep 2026 di bawah konsensus,
+  emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
+- Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
