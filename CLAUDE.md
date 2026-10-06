@@ -300,6 +300,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Default branch sudah diganti ke main (6 Okt). Aplikasi 4.11: `assets/copytrader.json` cadangan bila cloud gagal ("offline",
   alasan di baris "Cloud: …"). 4.12: ketuk trader = `CopyDetail.kt` (HP langsung ke situs, tanpa cloud): posisi terbuka —
   eToro entry/TP/SL, Hyperliquid entry + TP/SL order pemicu, OKX/Binance/Bitget entry & leverage bila tidak disembunyikan.
+  4.13 (pengguna: "rangkum sebelum dikirim ke apk"; binance.com diblokir operator Indonesia): CLOUD `_copyposisi.py`
+  (GET /api/chat?copyposisi=<situs>|<id>, cache 3 mnt) merangkum posisi + 10 trade terakhir (entry→tutup, gerak harga %,
+  TP/SL Bitget/eToro) + 1 kalimat ringkasan; HP hanya menampilkan. Production Vercel = branch bold-davinci (sudah digabung main).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
