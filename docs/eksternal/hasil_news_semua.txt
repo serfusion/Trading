@@ -1,0 +1,61 @@
+# Prediksi arah emas SEBELUM rilis — semua berita USD besar (research/news_semua.py)
+Target: emas naik 1 jam setelah rilis (close M15 sebelum rilis → +60 mnt). LAMA < Okt 2021, BARU ≥ Okt 2021.
+Aturan dianggap berguna bila searah & ≥ 58% di LAMA DAN BARU dengan n ≥ 30 masing-masing.
+
+## ADP Non-Farm Employment Change (n 155; dasar naik 1 jam LAMA 42% / BARU 63%)
+   model walk-forward 2015–2025: tebakan benar 53% (n 123, p 0.29) | saat yakin (p≥60%/≤40%): 56% (n 77)
+   tidak ada aturan yang konsisten di dua periode
+## Advance GDP q/q (n 52; dasar naik 1 jam LAMA 69% / BARU 50%)
+   model walk-forward 2015–2025: tebakan benar 55% (n 22, p 0.42) | saat yakin (p≥60%/≤40%): 50% (n 14)
+   tidak ada aturan yang konsisten di dua periode
+## Average Hourly Earnings m/m (n 161; dasar naik 1 jam LAMA 57% / BARU 53%)
+   model walk-forward 2015–2025: tebakan benar 55% (n 130, p 0.17) | saat yakin (p≥60%/≤40%): 64% (n 67)
+   tidak ada aturan yang konsisten di dua periode
+## CPI m/m (n 153; dasar naik 1 jam LAMA 53% / BARU 57%)
+   model walk-forward 2015–2025: tebakan benar 52% (n 122, p 0.33) | saat yakin (p≥60%/≤40%): 56% (n 59)
+   tidak ada aturan yang konsisten di dua periode
+## CPI y/y (n 160; dasar naik 1 jam LAMA 52% / BARU 58%)
+   model walk-forward 2015–2025: tebakan benar 51% (n 129, p 0.43) | saat yakin (p≥60%/≤40%): 53% (n 57)
+   tidak ada aturan yang konsisten di dua periode
+## Core CPI m/m (n 152; dasar naik 1 jam LAMA 52% / BARU 57%)
+   model walk-forward 2015–2025: tebakan benar 50% (n 121, p 0.50) | saat yakin (p≥60%/≤40%): 53% (n 53)
+   tidak ada aturan yang konsisten di dua periode
+## Core PCE Price Index m/m (n 140; dasar naik 1 jam LAMA 52% / BARU 49%)
+   model walk-forward 2015–2025: tebakan benar 42% (n 110, p 0.97) | saat yakin (p≥60%/≤40%): 40% (n 35)
+   tidak ada aturan yang konsisten di dua periode
+## Core PPI m/m (n 126; dasar naik 1 jam LAMA 49% / BARU 57%)
+   model walk-forward 2015–2025: tebakan benar 54% (n 95, p 0.27) | saat yakin (p≥60%/≤40%): 57% (n 53)
+   tidak ada aturan yang konsisten di dua periode
+## Core Retail Sales m/m (n 160; dasar naik 1 jam LAMA 54% / BARU 52%)
+   model walk-forward 2015–2025: tebakan benar 57% (n 129, p 0.08) | saat yakin (p≥60%/≤40%): 55% (n 66)
+   tidak ada aturan yang konsisten di dua periode
+## Federal Funds Rate (n 95; dasar naik 1 jam LAMA 59% / BARU 56%)
+   model walk-forward 2015–2025: tebakan benar 62% (n 60, p 0.05) | saat yakin (p≥60%/≤40%): 62% (n 29)
+   tidak ada aturan yang konsisten di dua periode
+## ISM Manufacturing PMI (n 160; dasar naik 1 jam LAMA 50% / BARU 46%)
+   model walk-forward 2015–2025: tebakan benar 45% (n 128, p 0.91) | saat yakin (p≥60%/≤40%): 49% (n 70)
+   tidak ada aturan yang konsisten di dua periode
+## ISM Services PMI (n 154; dasar naik 1 jam LAMA 46% / BARU 49%)
+   model walk-forward 2015–2025: tebakan benar 52% (n 123, p 0.36) | saat yakin (p≥60%/≤40%): 38% (n 50)
+   tidak ada aturan yang konsisten di dua periode
+## JOLTS Job Openings (n 134; dasar naik 1 jam LAMA 44% / BARU 51%)
+   model walk-forward 2015–2025: tebakan benar 61% (n 95, p 0.02) | saat yakin (p≥60%/≤40%): 61% (n 51)
+   tidak ada aturan yang konsisten di dua periode
+## Non-Farm Employment Change (n 161; dasar naik 1 jam LAMA 57% / BARU 53%)
+   model walk-forward 2015–2025: tebakan benar 62% (n 130, p 0.01) | saat yakin (p≥60%/≤40%): 63% (n 94)
+   ✔ prev_s=+1: naik LAMA 72% (n 57) | BARU 61% (n 33)
+## PPI m/m (n 144; dasar naik 1 jam LAMA 51% / BARU 57%)
+   model walk-forward 2015–2025: tebakan benar 56% (n 113, p 0.13) | saat yakin (p≥60%/≤40%): 47% (n 58)
+   tidak ada aturan yang konsisten di dua periode
+## Retail Sales m/m (n 160; dasar naik 1 jam LAMA 53% / BARU 52%)
+   model walk-forward 2015–2025: tebakan benar 53% (n 129, p 0.24) | saat yakin (p≥60%/≤40%): 56% (n 70)
+   tidak ada aturan yang konsisten di dua periode
+## Unemployment Claims (n 548; dasar naik 1 jam LAMA 48% / BARU 49%)
+   model walk-forward 2015–2025: tebakan benar 50% (n 408, p 0.48) | saat yakin (p≥60%/≤40%): 49% (n 78)
+   tidak ada aturan yang konsisten di dua periode
+## Unemployment Rate (n 161; dasar naik 1 jam LAMA 57% / BARU 53%)
+   model walk-forward 2015–2025: tebakan benar 49% (n 130, p 0.60) | saat yakin (p≥60%/≤40%): 61% (n 62)
+   tidak ada aturan yang konsisten di dua periode
+
+## Ringkasan: 1 aturan konsisten dari ±216 yang dicoba (≈ 11 diharapkan muncul karena kebetulan).
+   Non-Farm Employment Change | prev_s +1 | LAMA 72% (n 57) | BARU 61% (n 33)

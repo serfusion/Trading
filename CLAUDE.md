@@ -264,6 +264,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - NFP mean reversion (`docs/NFP_MEAN.md`, `research/nfp_mean.py`, vintage ALFRED 2001–2026): pelemahan → rebound 59–67%
   (baseline 47%); pelemahan + pendahulu memburuk → hanya 31% (deterioration lanjutan); gagal 2008–09; walk-forward 60–63%.
   Untuk emas TIDAK ada keunggulan sebelum rilis (konsensus sudah memperhitungkan; emas digerakkan kejutan). Tidak dipasang.
+- Semua berita USD sebelum rilis (`research/news_semua.py`, `docs/eksternal/hasil_news_semua.txt`, 18 judul, 216 aturan +
+  logistik walk-forward): 1 aturan konsisten (NFP: rilis lalu di atas konsensus → emas naik 1 jam 72%/61%); model NFP 62%
+  (p 0,01), JOLTS 61% (p 0,02), Fed 62% (p 0,05), sisanya 42–57% ≈ acak; banyak uji → bisa kebetulan. Tidak dipasang.
 - Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
