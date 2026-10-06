@@ -79,6 +79,7 @@ object SignalPoller {
             }
             "close" -> Notifications.close(context, event)
             "spot_signal" -> Notifications.spotSignal(context, event)
+            "arus_signal", "arus_fill", "arus_close", "arus_cancel" -> Notifications.arus(context, event)
             "spot_close" -> Notifications.spotClose(context, event)
             "spot_warn" -> Notifications.spotWarn(context, event)
             "info" -> when {

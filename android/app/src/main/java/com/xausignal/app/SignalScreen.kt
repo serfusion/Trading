@@ -81,8 +81,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { TickerCard(prices, connection) }
-        item { StatusCards(prices, follow) }      // 📊 XAU • BTC • ETH satu baris + ⏱ berita/sesi berikutnya (4.2)
+        item { MarketStrip(prices, connection, follow) }   // 1 baris XAU · BTC · ETH (4.5); ketuk = level BUY/SELL
         val active = open.size + orphans.size
         item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
         items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
@@ -97,8 +96,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
                         ) { Text("⏳", style = MaterialTheme.typography.titleLarge) }
                         Column {
                             Text("Belum ada sinyal", fontWeight = FontWeight.ExtraBold)
-                            Text("Cloud memantau tiap 10 menit • notifikasi otomatis saat ada sinyal",
-                                style = MaterialTheme.typography.labelMedium, color = Muted)
+                            Text("Cek berikutnya ${nextCheckText()}", style = MaterialTheme.typography.labelMedium, color = Muted)
                         }
                     }
                 }
@@ -110,6 +108,8 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
                     g.map { it.id })
             }
         }
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { CopyTraderSection() } }   // 👥 (4.7)
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { ArusSection(events) } }
         if ("SPOT" in follow) item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { SpotSection(events) } }
         item { TodayCard(events, money) }
         item {
@@ -452,6 +452,15 @@ fun CloudOpenCard(group: List<CloudOpen>, hb: SignalEvent?) {
             }
         }
     }
+}
+
+/** Jam cek cloud berikutnya (menit :02, :12, … :52), WIB. */
+fun nextCheckText(): String {
+    val now = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"))
+    val m = now.minute
+    val next = ((m - 2).floorDiv(10) + 1) * 10 + 2
+    val t = now.withSecond(0).withNano(0).withMinute(0).plusMinutes(next.toLong())
+    return String.format(java.util.Locale.US, "%02d:%02d WIB", t.hour, t.minute)
 }
 
 /** Level TUTUP (channel keluar) untuk candle H1 yang sedang berjalan, dari heartbeat cloud (`exits`). */

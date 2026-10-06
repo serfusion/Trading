@@ -17,14 +17,6 @@ di-merge 28 Sep 07:21 UTC; aplikasi 3.1–3.2 (blok 🎯 REKOMENDASI ENTRY di Ta
 alarm tepat waktu) hanya menyentuh `android/`].
   Push bundle mentah pernah **diblokir pengaman sesi** — jangan dicoba lagi tanpa izin eksplisit pengguna.
 
-## Lanjutkan di sesi lain (permintaan pengguna 5 Okt 2026: "simpan semua tes untuk diuji & dikembangkan lagi")
-- Semua uji tersimpan di repo: kode `research/`, tes otomatis `tests/` (`python -m pytest -q`, ±17 mnt; spot:
-  `tests/test_cloud_spot.py`), hasil mentah `docs/eksternal/hasil_*.txt`, laporan `docs/*.md`, data `data/research/`.
-- Jaringan sesi 5 Okt: terbuka data.binance.vision, api.twelvedata.com, Maven Central, Gradle; DIBLOKIR
-  data-api.binance.vision, api.binance.us, fapi.binance.com, ntfy.sh, coingecko, FRED. Kunci API (TWELVEDATA/FRED)
-  tidak terbaca di sesi itu (secret environment baru terbaca di sesi baru). Cek: `curl -sS "$HTTPS_PROXY/__agentproxy/status"`.
-- UI Android: `bash tools/compose_check/run.sh compile` lalu `preview` (PNG) sebelum push; CI APK = pemeriksa akhir.
-
 ## Riset data eksternal (berjalan sejak 28 Sep 2026 — laporan `docs/RISET_DATA_EKSTERNAL.md`)
 - Akses jaringan sudah dibuka (api.binance.com tetap 451 dari AS → pakai data.binance.vision; Dukascopy membatasi
   laju, ±15 detik/file). Cek: `curl -sS -o /dev/null -w "%{http_code}" https://<host>/`.
@@ -246,40 +238,68 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Cek kompilasi lokal tanpa Android SDK: proyek Compose Desktop (CMP 1.6.11, Maven Central) + stub Android, lihat
   catatan di PROGRES.md. Render gambar pratinjau TIDAK bisa (runtime androidx.collection hanya di Google Maven, diblokir).
 
-## Aplikasi 4.2 (5 Okt 2026, permintaan pengguna)
-- Tab Sinyal: XAU • BTC • ETH dalam SATU baris (kotak sepertiga: arah D1+H4, level ▲ BUY / ▼ SELL, 🔁/⏸) di satu kartu.
-  Hitung mundur "cek" candle H1 DIHAPUS (pengguna: tidak perlu) → lingkaran ⏱ = berita USD penting ≤ 24 jam, bila tidak
-  ada = sesi pasar berikutnya (London/New York buka 08:00 lokal, emas tutup Jumat 17:00 / buka Minggu 18:00 New York).
-  `StatusCard.kt`. Cek kompilasi & pratinjau PNG tanpa Android SDK: `bash tools/compose_check/run.sh compile|preview`
-  (lihat `tools/compose_check/README.md`; SIMPAN & pakai alat ini di sesi lain, permintaan pengguna 5 Okt). Pengguna: "jangan terlalu banyak
-  tulisannya, simple saja" → teks kartu dipangkas (tanpa baris D1/H4, tanpa "dalam …", catatan spot 1 baris).
-
 ## Sinyal spot Binance "sudah turun jauh" (4 Okt 2026 — `docs/SPOT_DIP.md`)
 - DIPASANG 4 Okt (permintaan pengguna "infokan di apk mulai dari sinyal dan close spot", semua koin):
   `research/spot_peluang.py --final` (gradient boosting walk-forward, 20 koin live + koin ambruk) → `cloud/api/
   spot_model.json` + `_spot.py` (harian 07:05 WIB, cek tiap jam, baris Supabase `spot`, env SPOT_SIGNALS/SPOT_MAX) →
   aplikasi 4.1 kartu 💎 (`SpotCard.kt`, pair diikuti "SPOT"). Sinyal = p ≥ 93% ATAU 3 merah ≥10% +SMA200; TP +3%/10 hari:
-  BARU naik 91% (acak 76%), +1,16%/sinyal, rugi rata −14%, portofolio 10 slot +14%/th DD −19% (docs/SPOT_PELUANG.md).
-- 5 Okt 2026 (lanjutan, "cek seluruhnya, WR & profit tinggi, deteksi turun jauh"; `docs/SPOT_JATUH.md`): uji SEMUA
-  pair USDT Binance termasuk yang dihapus (`research/spot_semua.py unduh` → `data/research/eksternal/spot_1d/`,
-  `research/spot_jatuh.py --simpan`). Jujur: rata/sinyal +0,64% (bukan +1,16% versi 54 koin penyintas). DIPASANG filter
-  kualitas `_spot.quality()` (umur ≥ 1 th, bukan volume panik ≥ 3×, belum ambruk ≥ 80%; env SPOT_QUALITY) → BARU naik
-  90,3%, +0,77%/sin, 20 slot +11%/th DD −30%. Menebak sinyal yang akan turun jauh TIDAK bisa (AUC 0,53–0,58); jual saat
-  turun lebih buruk → hanya peringatan ⚠️ `spot_warn` (turun ≥ 10%/20%: 66%/36% tetap kena TP). Aplikasi 4.3.
-  Urutan bila model dilatih ulang: `spot_peluang --final` → `spot_pindai --simpan` → `spot_jatuh --simpan` (terakhir =
-  angka teruji & `kualitas` di aplikasi).
-- 5 Okt 2026 (permintaan pengguna URGENT "dipindai beberapa menit, koin bukan hanya 20"; `docs/SPOT_PINDAI.md`,
-  `research/spot_pindai.py`): cloud memindai TIAP TICK (10 mnt) ±100 pair USDT volume terbesar (env SPOT_COINS,
-  SPOT_MIN_VOL), candle harian berjalan = candle terakhir, + filter BTC > SMA200 (env SPOT_BTC_FILTER), maks 20 posisi
-  (SPOT_MAX), TP dicek candle 15 mnt setelah entry. Teruji BARU 54 koin: 52 sinyal/bln, naik 91%, +1,16%/sin, 20 slot
-  +13%/th DD −20% (tanpa filter BTC: DD −42%). Model tidak berubah; setelah `spot_peluang --final` WAJIB jalankan
-  `python -m research.spot_pindai --simpan` (angka teruji skema terpasang). Aplikasi 4.2.
+  BARU naik 91% (acak 76%). 5 Okt: + lewati volatilitas > P90 (spot_vol.py): naik 92%, portofolio BARU +15%/th DD −14%;
+  54 koin & "ikut tren saat volatil" memperburuk. 679 koin + deteksi naik (spot_naik.py): tidak lebih baik → tidak dipasang.
 - `research/spot_dip.py` (704 kombinasi, 21 koin hidup) & `spot_dip2.py` (+ koin ambruk/delisting, portofolio slot,
   pilih dari LAMA). WR per trade 80–95% tetapi kalah rata −13..−25% (terburuk −55..−100%); portofolio BARU terbaik
   ±+5–7%/th DD −13..−24% (BTC beli-tahan +12%/th DD −77%). Kandidat: 3 merah ≥10% +SMA200, TP 5%, maks 10 hari,
   10% modal/sinyal. BELUM dipasang (tunggu "pasang"; info saja, tanpa order).
 - Robot berita auto-order cepat berbayar: feed institusional (AlphaFlash dsb.) + colocation + broker DMA, tidak
   tersedia untuk akun retail Exness MT5; riset detik pertama menunjukkan rugi dengan latensi retail (docs/NEWS_DETIK.md).
+
+## Tangkap pisau jatuh (6 Okt 2026 — `docs/PISAU.md`)
+- `research/pisau.py` (H1, jatuh/lonjak k×ATR dalam N jam, balik vs ikut arus, ±131 ribu kombinasi/aset, pilih LAMA →
+  BARU, pembanding acak) & `pisau_cek.py` (per tahun, biaya ×2/×3, telat 1 jam, M15/M5, tumpang tindih 💰).
+  BUY tepat setelah jatuh RUGI: XAU −0,03R (WR 64%), BTC −0,13R; BTC/ETH lebih buruk dari acak; 20 koin spot 0/1.308 lolos.
+  Konsisten = IKUT ARUS: XAU lonjak 4 ATR/3 jam tren naik → BUY tembus high (WR 69%, +0,16R BARU, 12/14 th +), BTC/ETH
+  SELL setelah jatuh & BUY setelah lonjak (+0,10–0,13R, ±45% sama dengan 💰). TIDAK dipasang — tunggu "pasang".
+- DIPASANG 6 Okt (izin "ikuti arus dengan catatan WR dan profit tinggi"): 🌊 `cloud/api/_arus.py` (XAU lonjak→BUY STOP,
+  BTC lonjak→BUY, ETH jatuh→SELL; WR ≥ 62% dua periode), env ARUS_SIGNALS, baris Supabase `arus`, aplikasi 4.3 `ArusCard.kt`.
+  Replay `research/arus_replay.py` 2025–26 = riset (19/63/41 trade). Entry pasar = open candle berjalan (cron :02).
+- NFP mean reversion (`docs/NFP_MEAN.md`, `research/nfp_mean.py`, vintage ALFRED 2001–2026): pelemahan → rebound 59–67%
+  (baseline 47%); pelemahan + pendahulu memburuk → hanya 31% (deterioration lanjutan); gagal 2008–09; walk-forward 60–63%.
+  Untuk emas TIDAK ada keunggulan sebelum rilis (konsensus sudah memperhitungkan; emas digerakkan kejutan). Tidak dipasang.
+- Semua berita USD sebelum rilis (`research/news_semua.py`, `docs/eksternal/hasil_news_semua.txt`, 18 judul, 216 aturan +
+  logistik walk-forward): 1 aturan konsisten (NFP: rilis lalu di atas konsensus → emas naik 1 jam 72%/61%); model NFP 62%
+  (p 0,01), JOLTS 61% (p 0,02), Fed 62% (p 0,05), sisanya 42–57% ≈ acak; banyak uji → bisa kebetulan. Tidak dipasang.
+- DIPASANG 6 Okt (izin "pasang info sebelum news NFP, JOLTS & Fed"): `research/prarilis.py` → `cloud/api/prarilis.json`
+  (logistik 5 fitur live: prev_s, exp_up, g4, g24, gema; walk-forward NFP 62%/BARU 55%, JOLTS 65%/58%, Fed 60%/62%) →
+  `_prarilis.attach` di GET /api/chat (memori kejutan baris Supabase `prarilis`, seed NFP Sep 2026 di bawah konsensus,
+  emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
+- Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
+
+## Copy trade (6 Okt 2026 — `docs/COPY_TRADE.md`)
+- Platform copy trade diblokir jaringan sesi. `research/copy_trade.py`: pasar tiruan 263 penyedia XAU (tren/balik/scalper/grid
+  per tahun lahir), papan 12 bln → salin 5 teratas 6 bln: WR tertinggi −6,6% & 43% periode meledak (scalper+grid); profit
+  tertinggi ≈ 0 & 32% meledak; DD ≤ 20% ≈ impas, 7% meledak. Saran: jangan pilih berdasarkan WR; pakai saringan umur/DD/anti-grid.
+- Aplikasi 4.5: tab Sinyal = satu kartu `MarketStrip` (1 baris XAU·BTC·ETH, ketuk = level BUY/SELL), TickerCard/StatusCards
+  tidak dipakai lagi di tab Sinyal.
+- Data nyata (host dibuka 6 Okt): `research/mql5_signals.py` (4.402 sinyal) & `research/binance_copy.py` (9.267 lead,
+  PnL pengikut positif 15%, WR tidak berhubungan dengan untung pengikut). DIPASANG 6 Okt (izin "pasang copy trader ... teruji"):
+  `research/copy_pilih.py` → `cloud/api/copytrader.json` → `GET /api/chat?copytrader=1` → kartu 👥 `CopyTraderCard.kt`
+  (aplikasi 4.7, info + link, TANPA salin order). Workflow `.github/workflows/copytrader.yml` Senin 00:41 UTC (jalan dari
+  main). Uji maju (`copy_pilih uji`): saringan mengurangi rugi/hancur/DD, bukan profit (Binance 20 teratas +9%/185 hr,
+  25% rugi vs semua +6%, 38%); bias penyintas. WR ≥ 95% diberi ⚠️.
+- eToro ditambahkan 6 Okt (host `www.etoro.com` dibuka; `research/etoro_copy.py`, 7.711 investor, return bulanan 2013–2026,
+  API rankings maks 1.500 baris/query → `rankings_all` memecah rentang gain; `CopiersGain` = perubahan JUMLAH penyalin).
+  Uji maju 159 periode: lolos aturan +5%/6 bln (34% rugi) vs beli S&P 500 +8% (21%) → kalah dari indeks; tetap dipasang
+  (aplikasi 4.8) dengan angka pembanding. Pembanding lain: Binance vs BTC beli-tahan +21%, MQL5 vs emas +6%.
+  `www.crypto.com`/`www.robinhood.com` mengalihkan ke domain utama yang masih DIBLOKIR; Robinhood Social = salin manual,
+  beta AS, tanpa data publik; Coinbase/Kraken tanpa copy trading.
+- Network penuh (6 Okt, aplikasi 4.9, izin "gabungkan semuanya ... merge"): `research/copy_multi.py` (OKX API resmi
+  public-lead-traders/public-pnl/public-stats, Bitget traderView+cycleData 180 hr, Hyperliquid vault termasuk yang tutup)
+  → `copy_pilih` field `gabungan` (WR ≥ 60, profit > 0, ≥ 30 pengikut, maks 4/situs) + `singkat`; sumber gagal = `invalid`
+  (dulu "basi"). Uji: saringan menekan rugi/DD, profit tidak lebih tinggi; Bitget ROI tertinggi 10 → −17%, 40% hancur.
+  PR serfusion/Trading#52 di-merge ke main 6 Okt. DEFAULT BRANCH repo GitHub = `claude/bold-davinci-ykgq8j` (bukan main) →
+  jadwal/dispatch workflow hanya terdaftar dari default branch; workflow checkout & push ke `main` (Vercel production).
+  Default branch sudah diganti ke main (6 Okt). Aplikasi 4.11: `assets/copytrader.json` cadangan bila cloud gagal ("offline",
+  alasan di baris "Cloud: …"). 4.12: ketuk trader = `CopyDetail.kt` (HP langsung ke situs, tanpa cloud): posisi terbuka —
+  eToro entry/TP/SL, Hyperliquid entry + TP/SL order pemicu, OKX/Binance/Bitget entry & leverage bila tidak disembunyikan.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

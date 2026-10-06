@@ -5,6 +5,7 @@ GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren"
                  "arsip": {...}}: berita USD high-impact minggu ini (Act otomatis dari FRED setelah rilis), status tren
                  per indikator, kartu 🎯 (perkiraan hari H dari Kalshi+Polymarket / hasil setelah Act, _hari_h.py; Fed
                  berikutnya), Act berlapis (_aktual.py), dan status arsip berita ke GitHub (_arsip.py)
+GET  /api/chat?riwayat=1 / ?copytrader=1 -> isi riwayat.json (📜) / copytrader.json (👥 copy trader teruji) saja
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -127,11 +128,13 @@ class handler(BaseHTTPRequestHandler):
         if not self._authorized():
             self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
             return
-        if "riwayat=1" in (self.path or ""):            # 📜 kartu riwayat 💰 (tab Statistik) — ringan, tanpa kalender
-            path = os.path.join(os.path.dirname(__file__), "riwayat.json")
+        for q, name in (("riwayat=1", "riwayat"), ("copytrader=1", "copytrader")):
+            if q not in (self.path or ""):              # 📜 riwayat 💰 (tab Statistik) / 👥 copy trader teruji (tab Sinyal,
+                continue                                # research/copy_pilih.py, diperbarui GitHub Actions mingguan) — ringan
+            path = os.path.join(os.path.dirname(__file__), f"{name}.json")
             try:
                 with open(path, encoding="utf-8") as f:
-                    self._send(200, {"ok": True, "riwayat": json.load(f)})
+                    self._send(200, {"ok": True, name: json.load(f)})
             except Exception as exc:  # noqa: BLE001
                 self._send(200, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
             return
@@ -169,6 +172,14 @@ class handler(BaseHTTPRequestHandler):
                     ks = _kalshi.cached_snapshot(berita, store, now)[0] if berita else {}
                     ps = _polymarket.cached_snapshot(berita, store, now)[0] if berita else {}
                     _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
+                try:                                          # 📊 peluang emas sebelum NFP/JOLTS/Fed (_prarilis.py)
+                    import _prarilis
+                    key = os.environ.get("TWELVEDATA_API_KEY", "")
+                    _prarilis.attach(persiapan, calendar, store, now,
+                                     lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \

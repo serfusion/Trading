@@ -1,0 +1,35 @@
+# 👥 Copy trader OKX, Bitget, Hyperliquid: apakah yang terbaik tetap terbaik? (research/copy_multi.py)
+
+## OKX (217 lead trader ≥ 180 hari): pilih s.d. 2026-04-08, ukur 2026-04-08–2026-10-05 (131 penyedia aktif)
+| Pilihan | n | Median | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 131 | +6.3% | +29.6% | 28% | 2% | -18% |
+| lolos aturan | 24 | +7.6% | +13.4% | 25% | 0% | -11% |
+| aturan, 10 teratas ROI/DD | 10 | +1.9% | +0.7% | 30% | 0% | -8% |
+| ROI tertinggi 10 | 10 | +25.8% | +59.1% | 30% | 0% | -31% |
+| % hari untung tertinggi 10 (proksi WR) | 10 | +4.3% | +14.3% | 30% | 0% | -10% |
+| beli-tahan BTC | 1 | +16.5% | +16.5% | - | - | -29% |
+
+## Bitget (457 trader yang ditampilkan, riwayat 180 hari): pilih s.d. 2026-07-08, ukur 2026-07-08–2026-10-05 (362 penyedia aktif)
+| Pilihan | n | Median | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 362 | +20.4% | +553.3% | 35% | 19% | -19% |
+| lolos aturan | 16 | +0.9% | +0.9% | 44% | 0% | -9% |
+| aturan, 10 teratas ROI/DD | 10 | +2.0% | +3.9% | 40% | 0% | -9% |
+| ROI tertinggi 10 | 10 | -17.1% | -32.8% | 70% | 40% | -47% |
+| % hari untung tertinggi 10 (proksi WR) | 10 | +12.1% | +53.3% | 40% | 10% | -14% |
+| beli-tahan BTC | 1 | +32.3% | +32.3% | - | - | -7% |
+
+   Bitget: untung penyalin 180 hari positif pada 12% trader (total -0.56 jt USDT)
+
+## Hyperliquid vault (2529 vault, 1395 sudah tutup — ikut dihitung): pilih s.d. 2026-04-09, ukur 2026-04-09–2026-10-06 (979 penyedia aktif)
+| Pilihan | n | Median | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 979 | +0.0% | +8.7% | 24% | 8% | 0% |
+| lolos aturan | 30 | +1.5% | +5.4% | 27% | 7% | -4% |
+| aturan, 10 teratas ROI/DD | 10 | +0.9% | -4.7% | 20% | 10% | -2% |
+| ROI tertinggi 10 | 10 | +5.8% | -2.6% | 30% | 10% | -2% |
+| % hari untung tertinggi 10 (proksi WR) | 10 | +0.6% | +5.1% | 0% | 0% | -0% |
+| beli-tahan BTC | 1 | +14.6% | +14.6% | - | - | -29% |
+
+Bias penyintas: OKX/Bitget hanya memuat trader yang masih tampil; Hyperliquid memuat vault yang sudah tutup.

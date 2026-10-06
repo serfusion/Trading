@@ -30,6 +30,10 @@ import java.time.Instant
 import java.time.OffsetDateTime
 import java.util.Locale
 
+/** 20 koin besar yang dipindai 💎 (sama dengan cloud/api/spot_model.json "coins"). */
+val SPOT_COINS = listOf("BTC", "ETH", "BNB", "SOL", "XRP", "ADA", "DOGE", "TRX", "LINK", "AVAX", "DOT", "LTC", "BCH",
+    "XLM", "ATOM", "ETC", "UNI", "NEAR", "AAVE", "FIL")
+
 /** Harga spot: 2 desimal ≥ 100, 4 desimal ≥ 1, selain itu 6 desimal. */
 fun spotPx(v: Double?): String = when {
     v == null -> "-"
@@ -51,8 +55,7 @@ private fun objects(arr: JSONArray?): List<JSONObject> =
 
 /**
  * 💎 Spot Binance (aplikasi 4.1, permintaan pengguna 4 Okt 2026): koin dengan peluang tinggi naik lagi +3% dalam 10 hari
- * (cloud/api/_spot.py, research/spot_peluang.py). Aplikasi 4.2: cloud memindai tiap 10 menit ±100 koin volume terbesar
- * (research/spot_pindai.py), jeda saat BTC di bawah SMA200. Kartu BELI (harga beli, limit jual TP, harga sekarang, batas waktu)
+ * (cloud/api/_spot.py, research/spot_peluang.py). Kartu BELI (harga beli, limit jual TP, harga sekarang, batas waktu)
  * dan CLOSE terakhir. Data: spot_status cloud; cadangan: pesan spot_signal / spot_close di HP. Info saja, tanpa order.
  */
 @Composable
@@ -70,6 +73,9 @@ fun SpotSection(events: List<SignalEvent>) {
         closed = events.filter { it.type == "spot_close" }.map { it.json }
     }
     if (st == null && open.isEmpty() && closed.isEmpty()) return
+    // daftar koin yang dipindai cloud (spot_model.json); cadangan = 20 koin bawaan
+    val coins = st?.optJSONArray("coins")?.let { arr -> (0 until arr.length()).map { arr.optString(it) } }
+        ?.filter { it.isNotBlank() }?.ifEmpty { null } ?: SPOT_COINS
     SectionTitle("💎 Spot Binance", trailing = if (open.isEmpty()) null else "${open.size} aktif")
     if (open.isEmpty()) {
         AppCard {
@@ -80,35 +86,26 @@ fun SpotSection(events: List<SignalEvent>) {
                     contentAlignment = Alignment.Center
                 ) { Text("💎", style = MaterialTheme.typography.titleLarge) }
                 Column {
-                    Text("Belum ada sinyal", fontWeight = FontWeight.ExtraBold)
-                    ScanLine(st)
+                    Text("Belum ada koin berpeluang tinggi", fontWeight = FontWeight.ExtraBold)
+                    Text("Dipindai tiap hari 07:05 WIB • ${coins.size} koin" +
+                        (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: ""),
+                        style = MaterialTheme.typography.labelMedium, color = Muted)
                 }
             }
+            Text("${coins.size} koin dipantau: ${coins.joinToString(" • ")}",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
         }
-    } else ScanLine(st)
-    if (st?.optBoolean("btc_filter", false) == true && st.has("btc_up") && !st.isNull("btc_up") &&
-        !st.optBoolean("btc_up")) {
-        NoteBox("⏸ Dijeda: BTC di bawah MA200", SellColor)
     }
     open.forEach { SpotOpenCard(it, st) }
     if (closed.isNotEmpty()) SpotClosedCard(closed.take(5))
     st?.optJSONObject("teruji")?.optJSONObject("baru")?.let { b ->
-        Text("Teruji sejak 2021: naik ${fmt(b.optDouble("wr"), 0)}% • rata ${spotPct(b.optDouble("avg"))} • " +
-            "rugi rata ${spotPct(b.optDouble("kalah"))}", style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text(
+            "Teruji Okt 2021–2026: naik +${fmt(st.optDouble("tp_pct", 3.0), 0)}% di ${fmt(b.optDouble("wr"), 0)}% " +
+                "sinyal • rata ${spotPct(b.optDouble("avg"))} • rugi rata ${spotPct(b.optDouble("kalah"))} • " +
+                "terburuk ${spotPct(b.optDouble("terburuk"))}",
+            style = MaterialTheme.typography.labelSmall, color = Muted
+        )
     }
-}
-
-/** "Dipindai tiap 10 menit • 100 koin • terakhir 14:32 WIB" (cloud spot_status). */
-@Composable
-private fun ScanLine(st: JSONObject?) {
-    val every = st?.optInt("every_min", 0) ?: 0
-    val text = if (every > 0) {
-        "Dipindai tiap $every menit • ${st?.optInt("coins") ?: 0} koin"
-    } else {                                   // cloud lama (pindai harian)
-        "Dipindai tiap hari 07:05 WIB • 20 koin" +
-            (st?.optString("scan_day")?.takeIf { it.isNotBlank() }?.let { " • terakhir $it" } ?: "")
-    }
-    Text(text, style = MaterialTheme.typography.labelMedium, color = Muted)
 }
 
 @Composable
@@ -157,15 +154,10 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
                 Text("Menuju TP: ${fmt(prog * 100.0, 0)}%", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
-        // ⚠️ deteksi turun jauh: posisi turun >= 10% / 20% (angka teruji: berapa yang tetap kena TP)
-        if (chg != null && chg <= -10) {
-            val j = st?.optJSONObject("teruji")?.optJSONObject("jatuh")?.optJSONObject(if (chg <= -20) "20" else "10")
-            NoteBox("⚠️ Turun ${fmt(-chg, 0)}%" + (j?.let { " • teruji ${fmt(it.optDouble("tetap_tp"), 0)}% tetap kena TP" }
-                ?: ""), SellColor)
-        }
         val b = st?.optJSONObject("teruji")?.optJSONObject("baru")
-        NoteBox("Maks ${100 / maxOf(st?.optInt("max_open", 10) ?: 10, 1)}% modal per koin • tanpa SL" +
-            (b?.let { " • rugi rata ${spotPct(it.optDouble("kalah"))}" } ?: ""), Gold)
+        NoteBox("Maks ${100 / maxOf(st?.optInt("max_open", 10) ?: 10, 1)}% modal spot per koin. Tanpa SL: sesekali " +
+            "rugi besar" + (b?.let { " (rata ${spotPct(it.optDouble("kalah"))}, terburuk ${spotPct(it.optDouble("terburuk"))})" }
+            ?: "") + ".", Gold)
     }
 }
 

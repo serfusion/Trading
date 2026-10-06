@@ -1,0 +1,26 @@
+# eToro CopyTrader: siapa yang layak disalin & apakah bertahan? (research/etoro_copy.py)
+7711 investor yang bisa disalin (Popular Investor atau punya penyalin), riwayat bulanan ≥ 18 bulan: 7439. Data 2026-10-06. Bias penyintas: akun tutup/tanpa penyalin tidak tercatat.
+
+## Profil 12 bulan terakhir (angka eToro)
+   semua: n 7711 | median gain +7% | median DD -18% | median WR 59% | % bulan untung 54% | penyalin bertambah 3%
+   Popular Investor: n 5233 | median gain +9% | median DD -16% | median WR 61% | % bulan untung 54% | penyalin bertambah 5%
+   ≥ 100 penyalin: n 385 | median gain +8% | median DD -15% | median WR 62% | % bulan untung 54% | penyalin bertambah 21%
+   WR ≥ 80%: n 875 | median gain +19% | median DD -14% | median WR 86% | % bulan untung 62% | penyalin bertambah 4%
+   Gain ≥ 50%: n 279 | median gain +61% | median DD -20% | median WR 67% | % bulan untung 62% | penyalin bertambah 17%
+   risk score ≤ 4: n 4928 | median gain +10% | median DD -14% | median WR 62% | % bulan untung 62% | penyalin bertambah 3%
+   DD (peak-to-valley) ≥ −15%: n 3002 | median gain +13% | median DD -11% | median WR 64% | % bulan untung 62% | penyalin bertambah 4%
+   korelasi peringkat: WR vs gain +0.51, WR vs DD +0.35, risk score vs DD -0.63
+   aset utama: saham 73%, ETF 13%, kripto 10%, komoditas 2%, indeks 2%, forex 1%, lain 0%
+
+## Persistensi (tiap bulan pilih dengan 12 bulan, ukur sesudahnya; median per periode)
+aturan = untung di 2 paruh, bulan terburuk > −10%, DD 12 bln > −20%, growth ≤ 300%; ketat = + bulan terburuk > −6%, ≥ 60% bulan untung, DD > −12%; peringkat growth/DD.
+| Cara memilih | n rata | 6 bln ke depan | 12 bln ke depan | Rugi 6 bln | < −30% | DD 6 bln | LAMA 6 bln (rugi) | BARU 6 bln (rugi) |
+|---|---|---|---|---|---|---|---|---|
+| semua | 2483 | +0.0% | +0.0% | 38% | 12% | -7% | +0.0% (39%) | +7.4% (36%) |
+| growth 12 bln tertinggi 10 | 10 | +0.3% | -0.6% | 48% | 20% | -15% | +0.0% (49%) | +0.7% (48%) |
+| WR proksi (% bulan untung) tertinggi 10 | 10 | +4.5% | +5.3% | 37% | 7% | -6% | +3.3% (41%) | +5.3% (29%) |
+| aturan | 821 | +5.0% | +8.8% | 34% | 4% | -5% | +4.9% (37%) | +5.3% (30%) |
+| aturan, 10 teratas | 9 | +4.4% | +8.4% | 39% | 6% | -7% | +4.2% (41%) | +5.0% (37%) |
+| aturan ketat, 10 teratas | 8 | +2.8% | +6.2% | 41% | 6% | -7% | +3.3% (41%) | +2.5% (40%) |
+| S&P 500 (pembanding, FRED) | 1 | +8.2% | +14.8% | 21% | 0% | nan% | +8.3% (18%) | +7.8% (24%) |
+   159 periode 2013-01–2026-03; LAMA = pilih ≤ Sep 2021, BARU = sesudahnya.

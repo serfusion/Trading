@@ -1,67 +1,47 @@
-"""Semua pair USDT Binance (termasuk yang sudah delisting) — python -m research.spot_semua [unduh]
+"""Data harian SEMUA pair USDT Binance spot (termasuk yang sudah delisting) — python -m research.spot_semua unduh
 
-Permintaan pengguna (5 Okt 2026): "cek seluruhnya, supaya WR dan profit tinggi dan bisa deteksi apabila ingin turun jauh".
-Data candle harian data.binance.vision (735 pair USDT, daftar dari listing S3; termasuk koin yang sudah dihapus →
-tanpa bias penyintas) disimpan di data/research/eksternal/spot_1d/<KOIN>.parquet (open, high, low, close, qv = volume
-USDT). Analisis: research/spot_jatuh.py.
+Permintaan pengguna (5 Okt 2026): uji semua koin, bukan beberapa saja. Sumber data.binance.vision (S3, daftar file per
+simbol -> hanya bulan yang ada). Candle 1d + volume quote (USDT). Disimpan data/research/eksternal/spot_1d/<SYM>.parquet.
+Dikecualikan: stablecoin/fiat (USDC, FDUSD, TUSD, BUSD, DAI, EUR, ...) dan token leverage (UP/DOWN/BULL/BEAR).
 """
 from __future__ import annotations
 
 import io
 import re
 import sys
-import time
-import urllib.error
 import urllib.request
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 
 import pandas as pd
 
-from .eksternal import cache_path
-
+ROOT = Path(__file__).resolve().parent.parent
+DIR = ROOT / "data" / "research" / "eksternal" / "spot_1d"
 S3 = "https://s3-ap-northeast-1.amazonaws.com/data.binance.vision"
-SKIP = {"USDT", "USDC", "FDUSD", "TUSD", "USDP", "DAI", "BUSD", "USDE", "PYUSD", "RLUSD", "USD1", "BFUSD", "XUSD",
-        "USDS", "FRAX", "LUSD", "GUSD", "UST", "USTC", "USDD", "SUSD", "USDJ", "EURC", "EUR", "EURI", "AEUR", "GBP",
-        "TRY", "BRL", "AUD", "JPY", "ARS", "MXN", "ZAR", "PLN", "RON", "UAH", "IDRT", "BIDR", "BVND", "PAXG", "XAUT",
-        "WBTC", "WBETH", "BETH", "STETH", "WSTETH", "BNSOL", "CBETH", "RETH", "WETH", "PAX", "USDSB", "BKRW", "NGN",
-        "RUB", "BCHSV", "BCHABC"}
+DL = "https://data.binance.vision/"
+STABLE = {"USDC", "BUSD", "TUSD", "FDUSD", "DAI", "USDP", "PAX", "USDS", "UST", "SUSD", "EUR", "GBP", "AUD", "TRY",
+          "BRL", "AEUR", "EURI", "USD1", "BKRW", "BIDR", "IDRT", "RUB", "UAH", "NGN", "ZAR", "XUSD", "USDE", "PAXG",
+          "WBTC", "WBETH", "BFUSD", "RLUSD"}
 
 
-def _dir():
-    d = cache_path("spot_1d")
-    d.mkdir(parents=True, exist_ok=True)
-    return d
-
-
-def _get(url: str, tries: int = 5) -> bytes:
-    for i in range(tries):
-        try:
-            with urllib.request.urlopen(url, timeout=60) as r:
-                return r.read()
-        except urllib.error.HTTPError as exc:
-            if exc.code == 404:
-                raise
-            err = exc
-        except Exception as exc:  # noqa: BLE001 - koneksi putus: coba lagi
-            err = exc
-        time.sleep(2 ** i)
-    raise err
+def _get(url: str) -> bytes:
+    with urllib.request.urlopen(url, timeout=60) as r:
+        return r.read()
 
 
 def _list(prefix: str) -> tuple[list[str], list[str]]:
-    """(sub-prefix, file key) di bawah prefix S3 (semua halaman)."""
-    pre, keys, marker = [], [], None
+    """(sub-prefix, kunci file) di bawah prefix, semua halaman."""
+    pre, keys, marker = [], [], ""
     while True:
-        q = f"{S3}?delimiter=/&prefix={prefix}" + (f"&marker={marker}" if marker else "")
-        x = _get(q).decode()
-        p = re.findall(r"<Prefix>([^<]+)</Prefix>", x)[1:]
-        k = re.findall(r"<Key>([^<]+)</Key>", x)
+        x = _get(f"{S3}?delimiter=/&prefix={prefix}&marker={marker}").decode()
+        p = re.findall(r"<Prefix>([^<]*)</Prefix>", x)[1:]
+        k = re.findall(r"<Key>([^<]*)</Key>", x)
         pre += p
         keys += k
-        if "<IsTruncated>true</IsTruncated>" not in x or not (p or k):
+        if "<IsTruncated>true" not in x:
             return pre, keys
-        marker = (k or p)[-1]
+        marker = (p or k)[-1]
 
 
 def symbols() -> list[str]:
@@ -72,66 +52,54 @@ def symbols() -> list[str]:
         if not s.endswith("USDT"):
             continue
         base = s[:-4]
-        if not base.isascii() or base in SKIP or re.search(r"(UP|DOWN|BULL|BEAR)$", base) and len(base) > 4:
+        if base in STABLE or re.search(r"(UP|DOWN|BULL|BEAR)$", base) and len(base) > 4:
             continue
-        out.append(base)
-    return sorted(set(out))
+        out.append(s)
+    return out
 
 
-def coin(base: str) -> pd.DataFrame | None:
-    f = _dir() / f"{base}.parquet"
+def one(sym: str) -> str:
+    f = DIR / f"{sym[:-4]}.parquet"
     if f.exists():
-        return pd.read_parquet(f)
+        return f"{sym}: ada"
     try:
-        _, keys = _list(f"data/spot/monthly/klines/{base}USDT/1d/")
-    except Exception as exc:  # noqa: BLE001 - lewati sekarang, ulangi lain kali (tanpa file kosong)
-        print(base, "gagal daftar:", str(exc)[:80], flush=True)
-        return None
-
-    def one(k):
-        try:
-            z = zipfile.ZipFile(io.BytesIO(_get(f"https://data.binance.vision/{k}")))
-        except Exception:  # noqa: BLE001
-            return None
-        raw = pd.read_csv(z.open(z.namelist()[0]), header=None, usecols=[0, 1, 2, 3, 4, 7])
-        raw.columns = ["t", "open", "high", "low", "close", "qv"]
-        raw = raw[pd.to_numeric(raw.t, errors="coerce").notna()]
-        t = raw.t.astype("int64")
-        raw.index = pd.to_datetime(t.where(t < 1e14, t // 1000), unit="ms", utc=True)   # 2025+: mikrodetik
-        return raw[["open", "high", "low", "close", "qv"]].astype(float)
-    with ThreadPoolExecutor(8) as ex:
-        parts = [p for p in ex.map(one, [k for k in keys if k.endswith(".zip")]) if p is not None]
-    if not parts:
-        pd.DataFrame(columns=["open", "high", "low", "close", "qv"]).to_parquet(f)
-        return None
-    df = pd.concat(parts).sort_index()
-    df = df[~df.index.duplicated()]
-    df.index = df.index.floor("D")
-    df.to_parquet(f)
-    return df
+        _, keys = _list(f"data/spot/monthly/klines/{sym}/1d/")
+        parts = []
+        for k in keys:
+            if not k.endswith(".zip"):
+                continue
+            z = zipfile.ZipFile(io.BytesIO(_get(DL + k)))
+            raw = pd.read_csv(z.open(z.namelist()[0]), header=None, usecols=[0, 1, 2, 3, 4, 7])
+            raw.columns = ["t", "open", "high", "low", "close", "qvol"]
+            raw = raw[pd.to_numeric(raw.t, errors="coerce").notna()]
+            t = raw.t.astype("int64")
+            raw.index = pd.to_datetime(t, unit="us" if t.iloc[0] > 1e14 else "ms", utc=True)
+            parts.append(raw[["open", "high", "low", "close", "qvol"]].astype(float))
+        if not parts:
+            return f"{sym}: kosong"
+        df = pd.concat(parts).sort_index()
+        df = df[~df.index.duplicated()]
+        df.to_parquet(f)
+        return f"{sym}: {len(df)} hari {df.index[0]:%Y-%m}..{df.index[-1]:%Y-%m}"
+    except Exception as exc:  # noqa: BLE001
+        return f"{sym}: gagal {exc}"
 
 
-def load_all(min_days: int = 120) -> dict[str, pd.DataFrame]:
+def load_all(min_days: int = 260) -> dict[str, pd.DataFrame]:
     out = {}
-    for f in sorted(_dir().glob("*.parquet")):
+    for f in sorted(DIR.glob("*.parquet")):
         d = pd.read_parquet(f)
         if len(d) >= min_days:
             out[f.stem] = d
     return out
 
 
-def main() -> None:
-    if "unduh" in sys.argv:
-        syms = symbols()
-        print(f"{len(syms)} koin USDT", flush=True)
-        with ThreadPoolExecutor(8) as ex:
-            for i, (s, d) in enumerate(zip(syms, ex.map(coin, syms))):
-                if i % 50 == 0:
-                    print(i, s, None if d is None else len(d), flush=True)
-        return
-    data = load_all()
-    print(len(data), "koin dengan >= 120 hari")
-
-
 if __name__ == "__main__":
-    main()
+    if "unduh" in sys.argv:
+        DIR.mkdir(parents=True, exist_ok=True)
+        syms = symbols()
+        print(len(syms), "simbol", flush=True)
+        with ThreadPoolExecutor(12) as ex:
+            for msg in ex.map(one, syms):
+                print(msg, flush=True)
+        print("SELESAI", flush=True)

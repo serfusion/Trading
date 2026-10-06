@@ -1,0 +1,38 @@
+# Binance Copy Trading: lead trader terbaik & persistensi (research/binance_copy.py)
+9267 lead portfolio publik (data 2026-10-06). Bias penyintas: portfolio yang sudah ditutup tidak tercatat.
+
+## Profil 365 hari
+   semua: n 9267 | median ROI +0% | median MDD 30% | median WR 59% | PnL pengikut positif 15% | total PnL pengikut +3.3 jt USDT
+   ≥ 50 pengikut: n 184 | median ROI +129% | median MDD 26% | median WR 80% | PnL pengikut positif 67% | total PnL pengikut +9.7 jt USDT
+   WR ≥ 80%: n 2333 | median ROI +9% | median MDD 26% | median WR 90% | PnL pengikut positif 25% | total PnL pengikut +3.4 jt USDT
+   ROI ≥ 100%: n 788 | median ROI +200% | median MDD 37% | median WR 71% | PnL pengikut positif 43% | total PnL pengikut +9.2 jt USDT
+   MDD ≤ 20%: n 3777 | median ROI +2% | median MDD 5% | median WR 55% | PnL pengikut positif 19% | total PnL pengikut +4.8 jt USDT
+   korelasi WR vs MDD +0.10; WR vs PnL pengikut (rank) +0.01; ROI vs PnL pengikut (rank) +0.26
+
+## Persistensi: pilih dengan hari 1–180, ukur hari 181–365 (n 1782 portfolio aktif penuh 365 hari)
+| Cara memilih (20 teratas) | Return 180 hari lalu | Return 185 hari berikutnya (median / rata) | Rugi ke depan | MDD ke depan (median) |
+|---|---|---|---|---|
+| ROI tertinggi | +528% | +29.7% / +53.4% | 25% | -35% |
+| % hari naik tertinggi (proksi WR) | +63% | +16.9% / +28.0% | 20% | -24% |
+| ROI / MDD | +428% | +10.2% / +34.4% | 25% | -13% |
+| aman: ROI > 0, MDD ≤ 15% | +99% | +15.8% / +32.8% | 20% | -14% |
+| semua (rata-rata) | -16% | +5.9% / +17.7% | 38% | -34% |
+   Desil ROI 180 hari pertama → median return berikutnya: D1:+0% D2:+33% D3:+23% D4:+13% D5:+8% D6:+3% D7:+1% D8:+2% D9:+4% D10:+9%
+   korelasi rank return lalu vs berikutnya: -0.10; % hari naik lalu vs return berikutnya: -0.10
+
+## Kandidat sekarang (365 hari: MDD ≤ 20%, ROI > 0, PnL pengikut > 0, ≥ 20 pengikut): 90
+   DAmorné (5219911688676500225) ROI +4557% MDD 2% WR 87% pengikut 350 PnL pengikut +7,676
+   Pokémoment (5137430378342777089) ROI +6530% MDD 6% WR 90% pengikut 270 PnL pengikut +49,689
+   BTC小春老师 (5234633312840898816) ROI +2267% MDD 0% WR 73% pengikut 69 PnL pengikut +393
+   乾坤策略量化 (5229164046792448257) ROI +3604% MDD 6% WR 86% pengikut 800 PnL pengikut +142,114
+   泥笼高高手 (5225754548407547393) ROI +1514% MDD 0% WR 91% pengikut 115 PnL pengikut +1,154
+   Crystal 느낌 (5244704109606163456) ROI +1393% MDD 0% WR 95% pengikut 21 PnL pengikut +2,098
+   百辉财经 (5218493701996013313) ROI +4788% MDD 18% WR 82% pengikut 811 PnL pengikut +268,973
+   BTC拖拉机 (5217743622504837633) ROI +4069% MDD 16% WR 84% pengikut 719 PnL pengikut +132,886
+   婉莹 (5217435168656764160) ROI +1923% MDD 9% WR 95% pengikut 133 PnL pengikut +2,228
+   li鸿 (5238494823895792640) ROI +575% MDD 0% WR 98% pengikut 363 PnL pengikut +2,832
+   Dreamtraveler (5229398322835072001) ROI +2783% MDD 20% WR 92% pengikut 400 PnL pengikut +12,463
+   Alpha猎手2026 (5152672783936404993) ROI +805% MDD 8% WR 85% pengikut 25 PnL pengikut +3,174
+   玄冥二老 (4908633203782592768) ROI +1217% MDD 14% WR 96% pengikut 800 PnL pengikut +70,528
+   舌尖上的美食 (5222799106786113024) ROI +189% MDD 2% WR 97% pengikut 29 PnL pengikut +4,077
+   有我这样的老公_你几点回家 (5244869183259476481) ROI +180% MDD 0% WR 81% pengikut 173 PnL pengikut +21,949

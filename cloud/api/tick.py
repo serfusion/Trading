@@ -69,6 +69,19 @@ def signal_extras(asset: str, store) -> dict:
     return out
 
 
+class Keep:
+    """Pembungkus feed: simpan candle terakhir supaya 🌊 ikut arus memakai ulang data (tanpa kredit Twelve Data lagi)."""
+
+    def __init__(self, feed):
+        self.feed, self.bars = feed, None
+
+    def candles(self, n, interval="1h"):
+        out = self.feed.candles(n, interval)
+        if interval == "1h":
+            self.bars = out
+        return out
+
+
 def run() -> tuple[int, dict]:
     started = time.monotonic()           # batas Vercel 60 dtk (vercel.json): spot memakai sisa waktu saja
     env = os.environ
@@ -100,9 +113,12 @@ def run() -> tuple[int, dict]:
         cfg.update(signal_extras("XAU", main_store))
     except Exception as exc:  # noqa: BLE001 - tambahan opsional tidak boleh menghentikan sinyal
         result_extra_error = str(exc)
+    feeds = {"XAU": Keep(_core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD"))),
+             "BTC": Keep(_core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD")),
+             "ETH": Keep(_core.TwelveData(env["TWELVEDATA_API_KEY"], "ETH/USD"))}
     result = _core.tick(
         datetime.now(timezone.utc),
-        _core.TwelveData(env["TWELVEDATA_API_KEY"], env.get("SYMBOL", "XAU/USD")),
+        feeds["XAU"],
         main_store,
         _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
         cfg,
@@ -118,7 +134,7 @@ def run() -> tuple[int, dict]:
         if env.get("BTC_SIGNALS", "1") == "1":
             now = datetime.now(timezone.utc)
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
-            btc = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "BTC/USD"),
+            btc = _core.tick(now, feeds["BTC"],
                              _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result),
@@ -135,7 +151,7 @@ def run() -> tuple[int, dict]:
             bstate = _core.RowStore(store, "btc").get_state() or {}
             btc_dirs = {x["dir"] for s_ in (bstate.get("systems") or {}).values()
                         for x in [s_.get("virtual")] + list(s_.get("layers") or []) if x}
-            eth = _core.tick(now, _core.TwelveData(env["TWELVEDATA_API_KEY"], "ETH/USD"),
+            eth = _core.tick(now, feeds["ETH"],
                              _core.RowStore(store, "eth"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "asset": "ETH", "id_prefix": "ETH-", "skip_cats": ("konf", "biasa"),
@@ -156,18 +172,24 @@ def run() -> tuple[int, dict]:
                                           usdchf)
     except Exception as exc:  # noqa: BLE001 - gap tidak boleh mengganggu sinyal XAU
         result["gap_error"] = str(exc)
-    try:                                   # 💎 sinyal spot Binance (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
-        if env.get("SPOT_SIGNALS", "1") == "1":   # 5 Okt: tiap tick, 100 koin, BTC > SMA200, filter kualitas
+    try:                                   # 🌊 ikut arus (izin pengguna 6 Okt 2026; ARUS_SIGNALS=0 mati)
+        if env.get("ARUS_SIGNALS", "1") == "1":
+            import _arus
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            result["arus"] = _arus.arus_tick(datetime.now(timezone.utc),
+                                             {k: f.bars for k, f in feeds.items() if f.bars},
+                                             _core.RowStore(store, "arus"),
+                                             _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")))
+    except Exception as exc:  # noqa: BLE001 - ikut arus tidak boleh mengganggu sinyal lain
+        result["arus_error"] = str(exc)
+    try:                                   # 💎 sinyal spot Binance harian (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
+        if env.get("SPOT_SIGNALS", "1") == "1":
             import _spot
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
             result["spot"] = _spot.spot_tick(datetime.now(timezone.utc), _core.RowStore(store, "spot"),
                                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "20")),
-                                             deadline_s=max(4.0, 48.0 - (time.monotonic() - started)),
-                                             btc_filter=env.get("SPOT_BTC_FILTER", "1") == "1",
-                                             top=int(env.get("SPOT_COINS", "100")),
-                                             min_vol=float(env.get("SPOT_MIN_VOL", "5000000")),
-                                             use_quality=env.get("SPOT_QUALITY", "1") == "1")
+                                             env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "10")),
+                                             deadline_s=max(3.0, 45.0 - (time.monotonic() - started)))
     except Exception as exc:  # noqa: BLE001 - spot tidak boleh mengganggu sinyal lain
         result["spot_error"] = str(exc)
     return 200, result

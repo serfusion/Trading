@@ -1,29 +1,19 @@
-"""💎 Sinyal SPOT Binance: peluang naik lagi (research/spot_peluang.py; pindai tiap tick: research/spot_pindai.py).
+"""💎 Sinyal SPOT Binance: peluang naik lagi (research/spot_peluang.py, permintaan pengguna 4 Okt 2026).
 
-Permintaan pengguna 4 Okt 2026 (sinyal & close spot) dan 5 Okt 2026 (URGENT: "dipindai beberapa menit, bukan per hari,
-koinnya bukan hanya 20"). Tiap tick cloud (10 menit): ambil daftar koin USDT Binance dengan volume 24 jam terbesar
-(bawaan 100 koin, tanpa stablecoin/token pembungkus), candle harian tiap koin (paralel); candle hari ini yang masih
-berjalan dipakai sebagai candle terakhir (harga sekarang = close) -> fitur -> peluang "harga menyentuh +TP% dalam N hari"
-dari model gradient boosting (spot_model.json: pohon diekspor, dievaluasi tanpa pustaka). Sinyal = peluang >= ambang
-ATAU aturan 3 merah, dan BTC di atas SMA200 (filter teruji; BTC di bawah SMA200 -> spot dijeda). Posisi dicek tiap tick
-dengan candle 15 menit SETELAH entry: high menyentuh TP -> CLOSE (limit jual terisi); N hari lewat -> CLOSE.
-Filter kualitas (research/spot_jatuh.py): lewati koin < 1 tahun, ambruk >= 80% dari puncak 1 tahun, volume panik.
-Posisi turun >= 10% / 20% -> peringatan ⚠️ spot_warn (bukan jual: menjual saat turun teruji lebih buruk).
-Hanya informasi: cloud TIDAK membuka order spot.
+Sekali sehari setelah candle harian UTC tutup (± 07:05 WIB): hitung fitur 20 koin besar dan peluang "harga menyentuh
++TP% dalam N hari" dari model gradient boosting (spot_model.json: pohon diekspor, dievaluasi tanpa pustaka). Peluang ≥
+ambang dan koin belum terbuka -> pesan BELI SPOT. Posisi dicek tiap jam: high harian menyentuh TP -> CLOSE (limit jual
+terisi); N hari lewat -> CLOSE di close candle terakhir. Hanya informasi: cloud TIDAK membuka order spot.
 
-Data: data-api.binance.vision -> api.binance.us -> Twelve Data (hanya candle harian, maks 4 kredit per tick; Vercel di
-AS, api.binance.com menolak AS 451). State: baris Supabase 'spot'. Pesan ntfy: spot_signal, spot_close (notifikasi),
-spot_status (kartu 💎).
+Data harian: data-api.binance.vision -> api.binance.us -> Twelve Data (Vercel di AS; api.binance.com menolak AS, 451).
+State: baris Supabase 'spot'. Pesan ntfy: spot_signal, spot_close (dengan notifikasi), spot_status (kartu 💎).
 """
 from __future__ import annotations
 
 import json
 import math
-import threading
 import time
 import urllib.parse
-from concurrent.futures import ThreadPoolExecutor, wait
-from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -32,44 +22,22 @@ import _core
 _PATH = Path(__file__).resolve().parent / "spot_model.json"
 MODEL = json.loads(_PATH.read_text(encoding="utf-8")) if _PATH.exists() else {}
 DAY = timedelta(days=1)
-M15 = timedelta(minutes=15)
+SCAN_AFTER = timedelta(minutes=5)       # tunggu candle harian benar-benar tutup
 KEEP_CLOSED = 30
-STATUS_EVERY = timedelta(minutes=30)
-COOLDOWN = timedelta(hours=1)           # setelah CLOSE: koin yang sama paling cepat 1 jam lagi (riset: jam berikutnya)
-BARS = 400                              # SMA200 + RSI stabil + umur koin & puncak 1 tahun (filter kualitas)
-WARN_LEVELS = (10, 20)                  # ⚠️ peringatan posisi turun >= 10% / 20% dari harga beli
-WORKERS = 16
-UNIVERSE_EVERY = timedelta(hours=6)
-BINANCE = ("https://data-api.binance.vision", "https://api.binance.us")
-# bukan koin kripto bergerak bebas: stablecoin, fiat, emas tokenisasi, token pembungkus/staking
-SKIP = {"USDT", "USDC", "FDUSD", "TUSD", "USDP", "DAI", "BUSD", "USDE", "PYUSD", "RLUSD", "USD1", "BFUSD", "XUSD",
-        "USDS", "FRAX", "LUSD", "GUSD", "UST", "USTC", "USDD", "SUSD", "USDJ", "EURC", "EUR", "EURI", "AEUR", "GBP",
-        "TRY", "BRL", "AUD", "JPY", "ARS", "MXN", "ZAR", "PLN", "RON", "UAH", "IDRT", "BIDR", "BVND", "PAXG", "XAUT",
-        "WBTC", "WBETH", "BETH", "STETH", "WSTETH", "BNSOL", "CBETH", "RETH", "WETH"}
-_LOCK = threading.Lock()
+STATUS_EVERY = timedelta(hours=2)
 
 
 # ------------------------------------------------------------------ data
-@dataclass
-class VBar(_core.Bar):
-    qv: float = 0.0                     # volume USDT (quote) candle ini; 0 = tidak tersedia (Twelve Data)
-
-
-def _bars(rows) -> list[_core.Bar]:
-    return [VBar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]), float(r[3]),
-                 float(r[4]), float(r[7]) if len(r) > 7 else 0.0) for r in rows or []]
-
-
-def _binance(base: str, coin: str, n: int, interval: str = "1d", start: datetime | None = None) -> list[_core.Bar]:
-    q = {"symbol": f"{coin}USDT", "interval": interval, "limit": n}
-    if start is not None:
-        q["startTime"] = int(start.timestamp() * 1000)
-    return _bars(_core.http("GET", f"{base}/api/v3/klines?{urllib.parse.urlencode(q)}", timeout=10))
+def _binance(base: str, coin: str, n: int) -> list[_core.Bar]:
+    q = urllib.parse.urlencode({"symbol": f"{coin}USDT", "interval": "1d", "limit": n})
+    rows = _core.http("GET", f"{base}/api/v3/klines?{q}", timeout=10) or []
+    return [_core.Bar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]), float(r[3]),
+                      float(r[4])) for r in rows]
 
 
 SOURCES = (
-    ("binance", lambda coin, n, key: _binance(BINANCE[0], coin, n)),
-    ("binance.us", lambda coin, n, key: _binance(BINANCE[1], coin, n)),
+    ("binance", lambda coin, n, key: _binance("https://data-api.binance.vision", coin, n)),
+    ("binance.us", lambda coin, n, key: _binance("https://api.binance.us", coin, n)),
     ("twelvedata", lambda coin, n, key: _core.TwelveData(key, f"{coin}/USD").candles(n, "1day") if key else []),
 )
 
@@ -79,13 +47,10 @@ def klines(coin: str, n: int, td_key: str | None, budget: dict) -> tuple[list[_c
     errors = []
     for name, fn in SOURCES:
         if name == "twelvedata":
-            with _LOCK:                       # dipanggil paralel: jatah Twelve Data dibagi aman antar-thread
-                ok = budget.get("td", 0) > 0
-                if ok:
-                    budget["td"] -= 1
-            if not ok:
+            if budget.get("td", 0) <= 0:
                 errors.append("twelvedata: jatah habis")
                 continue
+            budget["td"] -= 1
         try:
             bars = fn(coin, n, td_key)
             if len(bars) >= 2:
@@ -94,59 +59,6 @@ def klines(coin: str, n: int, td_key: str | None, budget: dict) -> tuple[list[_c
         except Exception as exc:  # noqa: BLE001 - coba sumber berikutnya
             errors.append(f"{name}: {str(exc)[:60]}")
     raise RuntimeError(f"{coin}: " + "; ".join(errors))
-
-
-def klines_15m(coin: str, start: datetime) -> list[_core.Bar]:
-    """Candle 15 menit sejak [start] (maks 1000 = 10,4 hari) untuk cek TP setelah entry."""
-    errors = []
-    for base in BINANCE:
-        try:
-            bars = _binance(base, coin, 1000, "15m", start)
-            if bars:
-                return bars
-            errors.append(f"{base[8:]}: kosong")
-        except Exception as exc:  # noqa: BLE001
-            errors.append(f"{base[8:]}: {str(exc)[:60]}")
-    raise RuntimeError(f"{coin} 15m: " + "; ".join(errors))
-
-
-def pick_coins(rows: list[dict], top: int, min_vol: float) -> list[str]:
-    """Pair USDT dengan volume 24 jam (USDT) terbesar, tanpa stablecoin/fiat/token pembungkus/token leverage."""
-    vol = {}
-    for r in rows:
-        sym = str(r.get("symbol", ""))
-        if not sym.endswith("USDT"):
-            continue
-        base = sym[:-4]
-        try:
-            v = float(r.get("quoteVolume") or 0)
-        except (TypeError, ValueError):
-            continue
-        if base and base not in SKIP and v >= min_vol:
-            vol[base] = v
-    for base in list(vol):                   # token leverage lama: BTCUP, ETHDOWN, ... (JUP tetap: J bukan koin)
-        for suf in ("UP", "DOWN", "BULL", "BEAR"):
-            if base.endswith(suf) and base[:-len(suf)] in vol:
-                vol.pop(base, None)
-    out = sorted(vol, key=lambda b: -vol[b])[:top]
-    return (["BTC"] if "BTC" not in out else []) + out
-
-
-def universe(top: int, min_vol: float) -> tuple[list[str], str]:
-    """Daftar koin dari ticker 24 jam Binance (sekali panggil untuk semua pair)."""
-    errors = []
-    for base in BINANCE:
-        for q in ("?type=MINI", ""):
-            try:
-                rows = _core.http("GET", f"{base}/api/v3/ticker/24hr{q}", timeout=15) or []
-                coins = pick_coins(rows, top, min_vol)
-                if len(coins) >= 5:
-                    return coins, base[8:]
-                errors.append(f"{base[8:]}: hanya {len(coins)} koin")
-                break
-            except Exception as exc:  # noqa: BLE001
-                errors.append(f"{base[8:]}{q}: {str(exc)[:60]}")
-    raise RuntimeError("daftar koin: " + "; ".join(errors))
 
 
 # ------------------------------------------------------------------ fitur (sama dengan research/spot_peluang.features)
@@ -173,8 +85,7 @@ def _rsi(closes: list[float], n: int) -> float | None:
 
 
 def features(bars: list[_core.Bar], btc: list[_core.Bar]) -> list[float] | None:
-    """Fitur di close candle harian TERAKHIR. bars & btc urut waktu; candle terakhir boleh candle hari ini yang masih
-    berjalan (close = harga sekarang) — diuji di research/spot_pindai.py."""
+    """Fitur di close candle harian TERAKHIR yang sudah tutup. bars & btc = candle tutup, urut waktu."""
     if len(bars) < 201 or len(btc) < 201:
         return None
     c = [b.c for b in bars]
@@ -217,6 +128,21 @@ def features(bars: list[_core.Bar], btc: list[_core.Bar]) -> list[float] | None:
     return [f[k] for k in MODEL.get("fitur", list(f))]
 
 
+def vol_rank(bars: list[_core.Bar], window: int = 365) -> float | None:
+    """Peringkat volatilitas 14 hari sekarang dibanding 365 hari terakhir koin itu (0..1, seperti pandas rank pct)."""
+    c = [b.c for b in bars]
+    if len(c) < 15 + 120:
+        return None
+    lr = [math.log(c[i] / c[i - 1]) for i in range(1, len(c))]
+    vols = [_std(lr[i - 14:i]) for i in range(14, len(lr) + 1)][-window:]
+    if len(vols) < 120:
+        return None
+    cur = vols[-1]
+    less = sum(1 for v in vols if v < cur)
+    eq = sum(1 for v in vols if v == cur)
+    return (less + (eq + 1) / 2) / len(vols)
+
+
 def red_rule(x: list[float]) -> bool:
     """Aturan cadangan yang ikut teruji: 3 hari merah beruntun, turun ≥ 10% dalam 3 hari, harga di atas SMA200."""
     if not MODEL.get("aturan_merah"):
@@ -256,225 +182,137 @@ def _pct(v: float) -> str:
     return f"{v:+.1f}%".replace(".", ",")
 
 
-def quality(bars: list[_core.Bar], now: datetime) -> str | None:
-    """Koin berisiko turun jauh (research/spot_jatuh.py, filter kualitas teruji semua koin Binance) -> alasan dilewati.
-    Umur < 1 tahun, sudah ambruk >= 80% dari puncak 1 tahun, atau volume 24 jam >= 3x rata-rata 30 hari (panik)."""
-    k = MODEL.get("kualitas")
-    if not k:
-        return None
-    if len(bars) < k["umur_min"] + 1:
-        return "koin < 1 tahun"
-    if bars[-1].c / max(b.h for b in bars[-365:]) - 1 <= k["ambruk"]:
-        return "ambruk dari puncak 1 tahun"
-    qv = [getattr(b, "qv", 0.0) for b in bars]
-    base = qv[-31:-1]
-    if all(base):
-        frac = min(max((now - bars[-1].t) / DAY, 1 / 24), 1.0)
-        q24 = qv[-1] + qv[-2] * (1 - frac)              # perkiraan volume 24 jam terakhir
-        if q24 / (sum(base) / len(base)) >= k["vol_panik"]:
-            return "volume panik"
-    return None
-
-
 # ------------------------------------------------------------------ putaran
-def _check(pos: dict, now: datetime, bars15: list[_core.Bar] | None, daily: list[_core.Bar] | None,
-           price: float | None) -> tuple[str | None, float | None]:
-    """(alasan, harga keluar) bila posisi selesai: TP tersentuh SETELAH entry atau batas waktu habis."""
-    tp_px, entry_t, dl = pos["tp"], _core.parse_iso(pos["time"]), _core.parse_iso(pos["deadline"])
-    tp_pct = MODEL["tp"] * 100
-    if bars15:
-        after = [b for b in bars15 if b.t >= entry_t and b.t < dl]   # candle yang mulai setelah entry
-        hit = next((b for b in after if b.h >= tp_px), None)
-        if hit is not None:
-            return f"TP +{tp_pct:.0f}% kena", max(hit.o, tp_px)
-        if now >= dl:
-            last = [b for b in bars15 if b.t + M15 <= dl] or bars15
-            return f"{int(MODEL['hari'])} hari habis", last[-1].c
-        return None, None
-    # cadangan tanpa candle 15 menit: high harian SETELAH hari entry, atau harga sekarang
-    later = [b for b in daily or [] if b.t.date() > entry_t.date() and b.t < dl]
-    if any(b.h >= tp_px for b in later) or (price is not None and price >= tp_px):
-        return f"TP +{tp_pct:.0f}% kena", tp_px
-    if now >= dl and price is not None:
-        return f"{int(MODEL['hari'])} hari habis", price
-    return None, None
-
-
-def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: int = 20, fetch=None,
-              deadline_s: float = 20.0, coins_fn=None, fetch_15m=None, btc_filter: bool = True,
-              top: int = 100, min_vol: float = 5e6, use_quality: bool = True) -> dict:
-    """Dipanggil tiap tick cloud (10 menit): pindai semua koin dengan candle harian berjalan + cek posisi. Idempoten.
-    coins_fn() -> (daftar koin, sumber); fetch(coin, n, key, budget) -> (candle harian, sumber);
-    fetch_15m(coin, start) -> candle 15 menit (disuntik di tes)."""
+def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: int = 10, fetch=None,
+              deadline_s: float = 20.0) -> dict:
+    """Dipanggil tiap tick cloud (10 menit). Pindai sekali sehari, cek posisi sekali per jam. Idempoten."""
     if not MODEL:
         return {"ok": False, "error": "spot_model.json tidak ada"}
     fetch = fetch or klines
-    fetch_15m = fetch_15m or klines_15m
-    coins_fn = coins_fn or (lambda: universe(top, min_vol))
     started = time.monotonic()
     state = store.get_state() or {}
     open_ = state.get("open") or {}
     closed = state.get("closed") or []
     tp, days, thr, cost = MODEL["tp"], int(MODEL["hari"]), MODEL["ambang"], MODEL.get("biaya", 0.003)
-    use_btc = btc_filter and MODEL.get("btc_filter", True)
     budget = {"td": 4}
     events, errors, changed = [], [], False
+    today = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    hour_key = now.strftime("%Y-%m-%dT%H")
     prices = state.get("prices") or {}
 
-    # 1) daftar koin (volume 24 jam terbesar), diperbarui tiap 6 jam; gagal -> daftar lama / 20 koin model
-    coins = state.get("coins") or []
-    if not coins or not state.get("coins_at") or now - _core.parse_iso(state["coins_at"]) >= UNIVERSE_EVERY:
+    # 1) cek posisi terbuka (sekali per jam): TP tersentuh atau batas waktu habis
+    if open_ and state.get("hour") != hour_key:
+        for coin, pos in list(open_.items()):
+            try:
+                bars, _src = fetch(coin, days + 5, td_key, budget)
+            except Exception as exc:  # noqa: BLE001
+                errors.append(str(exc)[:120])
+                continue
+            day0 = _core.parse_iso(pos["day"])
+            dl = _core.parse_iso(pos["deadline"])
+            prices[coin] = bars[-1].c
+            hit = next((b for b in bars if day0 <= b.t < dl and b.h >= pos["tp"]), None)
+            reason = exit_px = None
+            if hit is not None:
+                exit_px = max(hit.o, pos["tp"]) if hit.t > day0 else pos["tp"]
+                reason = f"TP +{tp * 100:.0f}% kena"
+            elif now >= dl:
+                last = [b for b in bars if b.t + DAY <= dl] or [b for b in bars if b.t + DAY <= now]
+                exit_px = last[-1].c if last else bars[-1].c
+                reason = f"{days} hari habis"
+            if reason:
+                r = (exit_px / pos["entry"] - 1 - cost) * 100
+                ev = {"type": "spot_close", "id": pos["id"], "symbol": f"{coin}/USDT", "coin": coin,
+                      "entry": pos["entry"], "exit": round(exit_px, 8), "r": round(r, 2), "reason": reason,
+                      "time_open": pos["time"], "time": _core.iso(now), "win": r > 0}
+                head = "PROFIT" if r > 0 else "MINUS"
+                text = (f"Limit jual terisi di {_px(exit_px)}." if hit is not None else
+                        f"Belum kena TP setelah {days} hari: jual sekarang (patokan {_px(exit_px)}).") + \
+                    f" Hasil {_pct(r)} setelah biaya. Beli {_px(pos['entry'])}."
+                pub.publish(ev, text, f"🏁 CLOSE SPOT {coin}/USDT • {head} {_pct(r)}", 4, ["checkered_flag"])
+                closed = ([{k: ev[k] for k in ("id", "coin", "entry", "exit", "r", "reason", "time_open", "time")}]
+                          + closed)[:KEEP_CLOSED]
+                del open_[coin]
+                events.append(f"spot close {coin} {_pct(r)}")
+                changed = True
+            if time.monotonic() - started > deadline_s:
+                break
+        state["hour"] = hour_key
+
+    # 2) pindai sekali sehari setelah candle harian tutup (bisa bertahap bila waktu/jatah habis)
+    scan = state.get("scan") or {}
+    day_key = today.strftime("%Y-%m-%d")
+    if (now - today >= SCAN_AFTER and scan.get("day") != day_key) or (scan.get("day") == day_key and scan.get("todo")):
+        if scan.get("day") != day_key:
+            scan = {"day": day_key, "todo": list(MODEL["coins"]), "found": 0}
         try:
-            coins, src = coins_fn()
-            state.update({"coins": coins, "coins_at": _core.iso(now), "coins_src": src})
+            btc_bars, src = fetch("BTC", 420, td_key, budget)
+            btc_closed = [b for b in btc_bars if b.t + DAY <= now]
+            state["source"] = src
         except Exception as exc:  # noqa: BLE001
             errors.append(str(exc)[:120])
-            coins = coins or list(MODEL.get("coins") or [])
-    coins = ["BTC"] + [c for c in coins if c != "BTC"]
-    # koin yang tidak terpindai tick lalu (waktu habis) didahulukan
-    rot = state.get("rot", 0) % max(len(coins) - 1, 1)
-    order = ["BTC"] + coins[1:][rot:] + coins[1:][:rot] + [c for c in open_ if c not in coins]
-
-    # 2) candle harian semua koin + candle 15 menit posisi terbuka, paralel dengan batas waktu
-    daily: dict[str, list[_core.Bar]] = {}
-    m15: dict[str, list[_core.Bar]] = {}
-    pool = ThreadPoolExecutor(max_workers=WORKERS)
-    futs = {pool.submit(fetch, c, BARS, td_key, budget): ("d", c) for c in order}
-    for c, pos in open_.items():
-        futs[pool.submit(fetch_15m, c, _core.parse_iso(pos["time"]))] = ("m", c)
-    done, _pending = wait(futs, timeout=max(1.0, deadline_s - (time.monotonic() - started)))
-    pool.shutdown(wait=False, cancel_futures=True)
-    srcs = {}
-    for f in done:
-        kind, c = futs[f]
-        try:
-            res = f.result()
-        except Exception as exc:  # noqa: BLE001
-            if kind == "d" and len(errors) < 8:
+            btc_closed = None
+        while btc_closed and scan["todo"] and time.monotonic() - started < deadline_s:
+            coin = scan["todo"][0]
+            try:
+                bars = btc_bars if coin == "BTC" else fetch(coin, 420, td_key, budget)[0]
+            except Exception as exc:  # noqa: BLE001
                 errors.append(str(exc)[:120])
-            continue
-        if kind == "d":
-            daily[c], src = res
-            srcs[src] = srcs.get(src, 0) + 1
-            prices[c] = daily[c][-1].c
-        else:
-            m15[c] = res
-            if res:
-                prices[c] = res[-1].c
-    scanned = [c for c in order if c in daily]
-    state["rot"] = rot + max(len([c for c in coins[1:] if c in daily]), 1)
-    if srcs:
-        state["source"] = max(srcs, key=srcs.get)
-
-    # 3) posisi terbuka: TP tersentuh setelah entry atau batas waktu habis
-    for coin, pos in list(open_.items()):
-        if coin not in m15 and coin not in daily:
-            continue
-        reason, exit_px = _check(pos, now, m15.get(coin), daily.get(coin), prices.get(coin))
-        if not reason:
-            continue
-        r = (exit_px / pos["entry"] - 1 - cost) * 100
-        ev = {"type": "spot_close", "id": pos["id"], "symbol": f"{coin}/USDT", "coin": coin, "entry": pos["entry"],
-              "exit": round(exit_px, 8), "r": round(r, 2), "reason": reason, "time_open": pos["time"],
-              "time": _core.iso(now), "win": r > 0}
-        head = "PROFIT" if r > 0 else "MINUS"
-        text = (f"Limit jual terisi di {_px(exit_px)}." if reason.startswith("TP") else
-                f"Belum kena TP setelah {days} hari: jual sekarang (patokan {_px(exit_px)}).") + \
-            f" Hasil {_pct(r)} setelah biaya. Beli {_px(pos['entry'])}."
-        pub.publish(ev, text, f"🏁 CLOSE SPOT {coin}/USDT • {head} {_pct(r)}", 4, ["checkered_flag"])
-        closed = ([{k: ev[k] for k in ("id", "coin", "entry", "exit", "r", "reason", "time_open", "time")}]
-                  + closed)[:KEEP_CLOSED]
-        del open_[coin]
-        events.append(f"spot close {coin} {_pct(r)}")
-        changed = True
-
-    # 3b) ⚠️ deteksi turun jauh: posisi turun >= 10% / 20% dari harga beli -> peringatan sekali per level
-    st_j = MODEL.get("teruji", {}).get("jatuh", {})
-    for coin, pos in open_.items():
-        px = prices.get(coin)
-        if not px:
-            continue
-        drop = (px / pos["entry"] - 1) * 100
-        for lvl in WARN_LEVELS:
-            if drop <= -lvl and lvl not in (pos.get("warn") or []):
-                pos["warn"] = (pos.get("warn") or []) + [lvl]
-                j = st_j.get(str(lvl), {})
-                ev = {"type": "spot_warn", "id": f"{pos['id']}-W{lvl}", "symbol": f"{coin}/USDT", "coin": coin,
-                      "entry": pos["entry"], "price": px, "drop": round(drop, 1), "lvl": lvl, "time": _core.iso(now),
-                      "tetap_tp": j.get("tetap_tp"), "akhir": j.get("akhir")}
-                text = (f"Turun {_pct(drop)} dari beli {_px(pos['entry'])}. " +
-                        (f"Teruji: {j['tetap_tp']:.0f}% posisi seperti ini tetap kena TP, rata akhir {_pct(j['akhir'])}"
-                         f" (jual sekarang rata-rata lebih buruk). " if j else "") + "Limit jual TP tetap dipasang.")
-                pub.publish(ev, text, f"⚠️ SPOT {coin}/USDT turun {abs(drop):.0f}%", 4, ["warning"])
-                events.append(f"spot warn {coin} {_pct(drop)}")
-                changed = True
-
-    # 4) pindai: candle hari ini yang masih berjalan = candle terakhir (fitur "seandainya hari tutup sekarang")
-    btc = daily.get("BTC")
-    found = []
-    skipped: dict[str, int] = {}
-    btc_up = None
-    if btc:
-        xb = features(btc, btc)
-        if xb is not None and "btc_up" in MODEL.get("fitur", []):
-            btc_up = xb[MODEL["fitur"].index("btc_up")] >= 1.0      # harga BTC sekarang > SMA200 harian
-        for coin in scanned:
-            bars = daily[coin]
-            x = features(bars, btc)
+                if "jatah habis" in str(exc):
+                    break                     # Binance gagal & jatah Twelve Data tick ini habis: lanjut tick berikutnya
+                scan["todo"].pop(0)           # koin ini dilewati hari ini
+                continue
+            scan["todo"].pop(0)
+            cl = [b for b in bars if b.t + DAY <= now]
+            price = bars[-1].c
+            prices[coin] = price
+            x = features(cl, btc_closed)
             if x is None:
                 continue
+            vr = vol_rank(cl)
+            if vr is not None and vr > MODEL.get("skip_vol", 1.1):
+                continue                      # volatilitas terlalu tinggi: lewati (research/spot_vol.py)
             p = prob(x)
             rule = red_rule(x)
-            if p < thr and not rule:
+            closed_today = any(x["coin"] == coin and x["time"][:10] == day_key for x in closed)
+            if (p < thr and not rule) or coin in open_ or closed_today or len(open_) >= max_open:
                 continue
-            if use_btc and btc_up is False:
-                continue                                     # BTC di bawah SMA200: spot dijeda (teruji)
-            why = quality(bars, now) if use_quality else None
-            if why:
-                skipped[why] = skipped.get(why, 0) + 1
-                continue
-            last_close = next((c_ for c_ in closed if c_["coin"] == coin), None)
-            if coin in open_ or len(open_) >= max_open or (
-                    last_close and now - _core.parse_iso(last_close["time"]) < COOLDOWN):
-                continue
-            price = bars[-1].c
-            dl = now + days * DAY
-            sid = f"SPOT-{coin}-{now:%Y%m%d%H%M}"
+            dl = today + days * DAY
+            sid = f"SPOT-{coin}-{day_key.replace('-', '')}"
             pos = {"id": sid, "coin": coin, "entry": price, "tp": round(price * (1 + tp), 8), "p": round(p * 100, 1),
-                   "time": _core.iso(now), "deadline": _core.iso(dl),
+                   "time": _core.iso(now), "day": _core.iso(today), "deadline": _core.iso(dl),
                    "alasan": "model + 3 merah" if p >= thr and rule else "model" if p >= thr else "3 merah"}
             open_[coin] = pos
             st = MODEL.get("teruji", {}).get("baru", {})
             ev = {"type": "spot_signal", "id": sid, "symbol": f"{coin}/USDT", "coin": coin, "entry": price,
                   "tp": pos["tp"], "tp_pct": round(tp * 100, 1), "p": pos["p"], "days": days,
                   "deadline": pos["deadline"], "time": pos["time"], "alasan": pos["alasan"], "teruji": st,
-                  "max_open": max_open, "source": state.get("source")}
+                  "source": state.get("source")}
             text = (f"Alasan: {pos['alasan']}. Beli spot ±{_px(price)}, lalu pasang limit jual {_px(pos['tp'])} "
                     f"(+{tp * 100:.0f}%). "
                     f"Belum kena sampai {_wib(dl)} → jual. Maks {100 // max(max_open, 1)}% modal spot. "
-                    + (f"Teruji sejak Okt 2021: naik {st.get('wr', 0):.0f}% sinyal, rata {_pct(st.get('avg', 0))}, "
+                    + (f"Teruji sejak 2021: naik {st.get('wr', 0):.0f}% sinyal, rata {_pct(st.get('avg', 0))}, "
                        f"rugi rata {_pct(st.get('kalah', 0))}." if st else ""))
             pub.publish(ev, text, f"💎 BELI SPOT {coin}/USDT • peluang naik {p * 100:.0f}%", 4, ["gem"])
             events.append(f"spot BELI {coin} p {p * 100:.0f}%")
-            found.append(coin)
+            scan["found"] = scan.get("found", 0) + 1
             changed = True
-    elif "BTC" not in daily:
-        errors.insert(0, "BTC: candle harian gagal (fitur rezim BTC butuh BTC)")
+        if not scan["todo"]:
+            changed = True                   # pindai selesai -> kirim ringkasan
+        state["scan"] = scan
 
-    # 5) ringkasan untuk kartu 💎 di aplikasi (tiap 30 menit, atau segera bila ada BELI/CLOSE)
-    state.update({"open": open_, "closed": closed, "prices": {c: v for c, v in prices.items() if c in open_},
-                  "error": "; ".join(errors)[:300] if errors else None, "scan_at": _core.iso(now),
-                  "scanned": len(scanned), "btc_up": btc_up})
+    # 3) ringkasan untuk kartu 💎 di aplikasi
     last_status = state.get("status_at")
-    if changed or not last_status or now - _core.parse_iso(last_status) >= STATUS_EVERY:
+    due = open_ and (not last_status or now - _core.parse_iso(last_status) >= STATUS_EVERY)
+    state.update({"open": open_, "closed": closed, "prices": prices,
+                  "error": "; ".join(errors)[:300] if errors else None})
+    if changed or due:
         pub.publish({"type": "spot_status", "time": _core.iso(now), "open": [
             {**p, "price": prices.get(c)} for c, p in open_.items()], "closed": closed[:20],
-            "scan_at": _core.iso(now), "scan_day": now.strftime("%Y-%m-%d"), "every_min": 10,
-            "coins": len(coins), "scanned": len(scanned), "found": len(found), "btc_up": btc_up,
-            "btc_filter": use_btc, "source": state.get("source"), "skipped": skipped,
+            "scan_day": scan.get("day"), "found": scan.get("found", 0), "scan_left": len(scan.get("todo") or []), "source": state.get("source"),
             "tp_pct": round(tp * 100, 1), "days": days, "ambang": round(thr * 100), "max_open": max_open,
-            "teruji": MODEL.get("teruji", {}), "error": state["error"]})
+            "teruji": MODEL.get("teruji", {}), "coins": MODEL.get("coins", []), "error": state["error"]})
         state["status_at"] = _core.iso(now)
     store.save_state(state)
-    return {"ok": not errors, "open": len(open_), "events": events, "errors": errors[:5], "coins": len(coins),
-            "scanned": len(scanned), "btc_up": btc_up, "s": round(time.monotonic() - started, 1)}
+    return {"ok": not errors, "open": len(open_), "events": events, "errors": errors[:5],
+            "scan_left": len(scan.get("todo") or [])}

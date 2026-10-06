@@ -129,14 +129,39 @@ object ChatClient {
     }
 
     /** 📜 Riwayat sinyal 💰 per tahun & 90/365 hari (GET /api/chat?riwayat=1); null bila gagal. */
-    fun riwayat(): JSONObject? {
+    fun riwayat(): JSONObject? = light("riwayat")
+
+    /** 👥 Copy trader teruji (GET /api/chat?copytrader=1, cloud/api/copytrader.json): (data, alasan bila gagal). */
+    fun copytrader(): Pair<JSONObject?, String> {
         val base = SignalRepository.cloudUrl()
-        if (base.isBlank()) return null
-        val request = Request.Builder().url("$base/api/chat?riwayat=1").get()
+        if (base.isBlank()) return null to "alamat cloud belum diisi"
+        val request = Request.Builder().url("$base/api/chat?copytrader=1").get()
             .header("X-Chat-Key", SignalRepository.topic()).build()
         return try {
             client.newCall(request).execute().use { res ->
-                JSONObject(res.body?.string().orEmpty()).optJSONObject("riwayat")
+                val j = JSONObject(res.body?.string().orEmpty())
+                val d = j.optJSONObject("copytrader")
+                when {
+                    d != null -> d to ""
+                    j.has("info") -> null to "kunci/topik ditolak cloud"
+                    j.has("error") -> null to j.optString("error").take(80)
+                    else -> null to "cloud belum versi terbaru (HTTP ${res.code})"
+                }
+            }
+        } catch (e: Exception) {
+            null to (e.message ?: e.javaClass.simpleName).take(80)
+        }
+    }
+
+    /** File JSON statis dari cloud (ringan, tanpa kalender): GET /api/chat?<name>=1 → field <name>. */
+    private fun light(name: String): JSONObject? {
+        val base = SignalRepository.cloudUrl()
+        if (base.isBlank()) return null
+        val request = Request.Builder().url("$base/api/chat?$name=1").get()
+            .header("X-Chat-Key", SignalRepository.topic()).build()
+        return try {
+            client.newCall(request).execute().use { res ->
+                JSONObject(res.body?.string().orEmpty()).optJSONObject(name)
             }
         } catch (e: Exception) {
             null
@@ -475,6 +500,11 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                     BigRow(h.optString("label"), if (detail) h.optString("bukti") else "", h.optString("teks"),
                         h.optBoolean("kuat"))
                 }
+            }
+            // 📊 peluang emas 1 jam SEBELUM rilis NFP/JOLTS/Fed (cloud/api/_prarilis.py, aplikasi 4.4)
+            if (hasil == null) b.optJSONObject("prarilis")?.let { p ->
+                BigRow("Sebelum rilis", if (detail) p.optString("bukti") else "teruji ±60–65%, belum pasti",
+                    p.optString("teks"), p.optBoolean("kuat"))
             }
             ManualAct(b, onManual)
             val sk = b.optJSONArray("skenario")

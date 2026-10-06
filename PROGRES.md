@@ -181,17 +181,16 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 💎 Spot dipasang (izin pengguna): docs/SPOT_PELUANG.md, aplikasi 4.1. GBM pakai random_state=0 (tanpa itu early
   stopping acak -> angka berubah tiap putaran). Sumber data live belum bisa dites dari sesi (host Binance diblokir).
 
-### 5 Okt 2026 — aplikasi 4.2 & spot tiap 10 menit
-- Permintaan pengguna: XAU/BTC/ETH satu baris, ganti hitung mundur "cek", spot dipindai beberapa menit & koin lebih
-  banyak (URGENT). `StatusCard.kt` dirombak (3 kotak sebaris + ⏱ berita/sesi), `SpotCard.kt` (baris pindai, ⏸ BTC).
-- `research/spot_pindai.py` → `docs/SPOT_PINDAI.md`: pindai tiap jam saja +0,88%/sin (harian +1,26%); 54 koin tanpa
-  filter DD −42%; + BTC > SMA200: 52 sinyal/bln, naik 91%, +1,16%/sin, 20 slot +13%/th DD −20% (LAMA +27%, DD −43%) →
-  DIPASANG di `cloud/api/_spot.py` (izin = permintaan eksplisit pengguna). 13 tes spot (`tests/test_cloud_spot.py`).
-- Kompilasi Kotlin dicek (Compose Desktop 1.6.11 + stub); pratinjau PNG dengan CMP 1.5.12. Binance tetap diblokir dari
-  sesi → sumber live dicek setelah redeploy (`/api/tick` → `spot`).
-- Lanjutan 5 Okt ("cek seluruhnya, WR & profit tinggi, deteksi turun jauh"): jaringan baru membuka data.binance.vision →
-  653 pair USDT harian (`research/spot_semua.py`, data `spot_1d/`), `research/spot_jatuh.py` → `docs/SPOT_JATUH.md`.
-  Semua koin: +0,64%/sin (bukan +1,16%). Filter kualitas DIPASANG (+0,77%/sin, DD −30%). Deteksi turun jauh per sinyal
-  tidak bisa (AUC ≈ 0,55); jual saat turun lebih buruk → peringatan ⚠️ saja. Aplikasi 4.3. 16 tes spot lulus.
-- Alat `tools/compose_check/` (kompilasi + pratinjau PNG UI tanpa Android SDK) disimpan untuk sesi lain.
+### 6 Okt 2026 — tangkap pisau jatuh
+- docs/PISAU.md: menangkap pisau tidak menguntungkan; ikut arus konsisten (kandidat, belum dipasang).
+- data/research/eksternal/pisau_scan.parquet = semua kombinasi (kolom L_*/B_* = LAMA/BARU, acakL/acakB = pembanding).
 
+
+### 6 Okt 2026 — copy trade & 👥 copy trader teruji
+- Riset copy trade (docs/COPY_TRADE.md): pasar tiruan + data nyata MQL5 (4.402 sinyal) & Binance (9.267 lead).
+- 👥 dipasang (aplikasi 4.7): `research/copy_pilih.py` (+ `uji`), `cloud/api/copytrader.json`, `GET /api/chat?copytrader=1`,
+  `.github/workflows/copytrader.yml` (mingguan, perlu ada di main agar jadwal jalan). binance_copy/mql5_signals tidak lagi
+  mengimpor research.eksternal (berat) supaya jalan di Actions dengan pandas/numpy saja.
+- Daftar Binance mentah 210 MB: hanya `list_365D.json.gz` yang di-commit (json di-gitignore).
+- eToro (aplikasi 4.8): `research/etoro_copy.py unduh|uji|pack` (data `data/research/eksternal/etoro/`, riwayat
+  disatukan di `hist.json.gz`, folder `hist/` di-gitignore). Hasil: kalah dari beli indeks S&P 500.
