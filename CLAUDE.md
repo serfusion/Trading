@@ -273,6 +273,29 @@ alarm tepat waktu) hanya menyentuh `android/`].
   emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
 - Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
 
+## Copy trade (6 Okt 2026 — `docs/COPY_TRADE.md`)
+- Platform copy trade diblokir jaringan sesi. `research/copy_trade.py`: pasar tiruan 263 penyedia XAU (tren/balik/scalper/grid
+  per tahun lahir), papan 12 bln → salin 5 teratas 6 bln: WR tertinggi −6,6% & 43% periode meledak (scalper+grid); profit
+  tertinggi ≈ 0 & 32% meledak; DD ≤ 20% ≈ impas, 7% meledak. Saran: jangan pilih berdasarkan WR; pakai saringan umur/DD/anti-grid.
+- Aplikasi 4.5: tab Sinyal = satu kartu `MarketStrip` (1 baris XAU·BTC·ETH, ketuk = level BUY/SELL), TickerCard/StatusCards
+  tidak dipakai lagi di tab Sinyal.
+- Data nyata (host dibuka 6 Okt): `research/mql5_signals.py` (4.402 sinyal) & `research/binance_copy.py` (9.267 lead,
+  PnL pengikut positif 15%, WR tidak berhubungan dengan untung pengikut). DIPASANG 6 Okt (izin "pasang copy trader ... teruji"):
+  `research/copy_pilih.py` → `cloud/api/copytrader.json` → `GET /api/chat?copytrader=1` → kartu 👥 `CopyTraderCard.kt`
+  (aplikasi 4.7, info + link, TANPA salin order). Workflow `.github/workflows/copytrader.yml` Senin 00:41 UTC (jalan dari
+  main). Uji maju (`copy_pilih uji`): saringan mengurangi rugi/hancur/DD, bukan profit (Binance 20 teratas +9%/185 hr,
+  25% rugi vs semua +6%, 38%); bias penyintas. WR ≥ 95% diberi ⚠️.
+- eToro ditambahkan 6 Okt (host `www.etoro.com` dibuka; `research/etoro_copy.py`, 7.711 investor, return bulanan 2013–2026,
+  API rankings maks 1.500 baris/query → `rankings_all` memecah rentang gain; `CopiersGain` = perubahan JUMLAH penyalin).
+  Uji maju 159 periode: lolos aturan +5%/6 bln (34% rugi) vs beli S&P 500 +8% (21%) → kalah dari indeks; tetap dipasang
+  (aplikasi 4.8) dengan angka pembanding. Pembanding lain: Binance vs BTC beli-tahan +21%, MQL5 vs emas +6%.
+  `www.crypto.com`/`www.robinhood.com` mengalihkan ke domain utama yang masih DIBLOKIR; Robinhood Social = salin manual,
+  beta AS, tanpa data publik; Coinbase/Kraken tanpa copy trading.
+- Network penuh (6 Okt, aplikasi 4.9, izin "gabungkan semuanya ... merge"): `research/copy_multi.py` (OKX API resmi
+  public-lead-traders/public-pnl/public-stats, Bitget traderView+cycleData 180 hr, Hyperliquid vault termasuk yang tutup)
+  → `copy_pilih` field `gabungan` (WR ≥ 60, profit > 0, ≥ 30 pengikut, maks 4/situs) + `singkat`; sumber gagal = `invalid`
+  (dulu "basi"). Uji: saringan menekan rugi/DD, profit tidak lebih tinggi; Bitget ROI tertinggi 10 → −17%, 40% hancur.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

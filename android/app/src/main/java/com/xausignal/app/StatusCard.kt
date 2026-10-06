@@ -1,6 +1,11 @@
 package com.xausignal.app
 
 import androidx.compose.foundation.background
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -57,6 +62,155 @@ fun StatusCards(prices: Map<String, SignalEvent>, follow: Set<String>) {
         val hb = prices.values.firstOrNull { it.symbol() == sym } ?: continue
         val st = hb.json.optJSONObject("status") ?: continue
         StatusCard(sym, grp == "BTC", hb, st, prep, now)
+    }
+}
+
+/**
+ * Pasar ringkas (aplikasi 4.5, permintaan pengguna 6 Okt 2026 "1 baris XAU, BTC, ETH, elegan, jangan banyak tulisan"):
+ * satu kartu — header LIVE + hitung mundur cek sinyal, satu baris 3 kotak (koin, harga, warna tren D1+H4). Ketuk kotak
+ * untuk melihat level BUY/SELL berikutnya. Berita ≤ 24 jam: satu baris. Hanya keterangan, bukan sinyal entry.
+ */
+@Composable
+fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Set<String>) {
+    var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
+    var prep by remember { mutableStateOf<JSONObject?>(null) }
+    var open by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            now = System.currentTimeMillis()
+            delay(1_000L)
+        }
+    }
+    LaunchedEffect(Unit) {
+        while (true) {
+            prep = withContext(Dispatchers.IO) { ChatClient.news().third } ?: prep
+            delay(60_000L)
+        }
+    }
+    val online = connection == "Terhubung"
+    val assets = listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "BTC" to "ETH/USD")
+        .filter { (g, _) -> g in follow }
+        .mapNotNull { (_, sym) -> prices.values.firstOrNull { it.symbol() == sym }?.let { sym to it } }
+    HeroCard {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            PulseDot(if (online) BuyColor else SellColor, 7.dp)
+            Text(if (online) "LIVE" else connection, style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.ExtraBold, color = if (online) BuyColor else SellColor,
+                modifier = Modifier.padding(start = 4.dp).weight(1f))
+            val (label, ms) = headerCountdown(prep, now)
+            Text("$label ${clockShort(ms)}", style = MaterialTheme.typography.labelMedium, color = Gold,
+                fontWeight = FontWeight.Bold, maxLines = 1)
+        }
+        if (assets.isEmpty()) Text("Menunggu data cloud", style = MaterialTheme.typography.labelMedium, color = Muted)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            assets.forEach { (sym, hb) ->
+                MiniTile(sym, hb, open == sym, Modifier.weight(1f)) { open = if (open == sym) null else sym }
+            }
+        }
+        assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
+        assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
+        }
+    }
+}
+
+@Composable
+private fun trendOf(hb: SignalEvent): Pair<String, Color> {
+    val st = hb.json.optJSONObject("status")
+    val d1 = st?.optString("d1") ?: ""
+    val h4 = st?.optString("h4") ?: ""
+    return when {
+        d1 == "BUY" && h4 == "BUY" -> "▲" to BuyColor
+        d1 == "SELL" && h4 == "SELL" -> "▼" to SellColor
+        else -> "◆" to Muted
+    }
+}
+
+@Composable
+private fun MiniTile(sym: String, hb: SignalEvent, selected: Boolean, modifier: Modifier, onClick: () -> Unit) {
+    val (arrow, color) = trendOf(hb)
+    val btc = !sym.startsWith("XAU")
+    val price = hb.num("price")
+    Column(
+        modifier.clip(TileShape)
+            .background(if (selected) color.copy(alpha = 0.16f) else CardHigh.copy(alpha = 0.85f))
+            .border(1.dp, if (selected) color.copy(alpha = 0.6f) else LineColor, TileShape)
+            .clickable(onClick = onClick).padding(vertical = 10.dp, horizontal = 6.dp),
+        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            AssetCoin(sym, 22.dp)
+            Text(arrow, color = color, fontWeight = FontWeight.Black, fontSize = 12.sp)
+        }
+        Text(if (price == null) "–" else px(price, btc), fontWeight = FontWeight.ExtraBold, maxLines = 1,
+            style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
+        Text(sym.substringBefore("/"), style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
+}
+
+@Composable
+private fun TileDetail(sym: String, hb: SignalEvent) {
+    val st = hb.json.optJSONObject("status") ?: return
+    val btc = !sym.startsWith("XAU")
+    val price = hb.num("price") ?: st.optDouble("last_close")
+    val levels = st.optJSONArray("levels") ?: return
+    var buyLvl = Double.MAX_VALUE
+    var sellLvl = -Double.MAX_VALUE
+    for (i in 0 until levels.length()) {
+        val l = levels.getJSONObject(i)
+        buyLvl = minOf(buyLvl, l.optDouble("buy"))
+        sellLvl = maxOf(sellLvl, l.optDouble("sell"))
+    }
+    if (buyLvl == Double.MAX_VALUE || sellLvl == -Double.MAX_VALUE) return
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Box(Modifier.weight(1f)) {
+            LevelChip("BUY >", px(buyLvl, btc), if (btc) "+%,.0f".format(buyLvl - price) else "+$%.2f".format(buyLvl - price), BuyColor)
+        }
+        Box(Modifier.weight(1f)) {
+            LevelChip("SELL <", px(sellLvl, btc), if (btc) "−%,.0f".format(price - sellLvl) else "−$%.2f".format(price - sellLvl), SellColor)
+        }
+    }
+}
+
+/** Hitung mundur header: berita USD berikutnya ≤ 24 jam, selain itu pembukaan sesi berikutnya (WIB: Asia 07:00,
+ *  Eropa 14:00, Amerika 20:00 = 00:00 / 07:00 / 13:00 UTC). */
+private fun headerCountdown(prep: JSONObject?, now: Long): Pair<String, Long> {
+    val nowI = Instant.ofEpochMilli(now)
+    val list = prep?.optJSONArray("berita")
+    var best: Pair<String, Instant>? = null
+    if (list != null) for (i in 0 until list.length()) {
+        val b = list.getJSONObject(i)
+        val t = instantOf(b.optString("time")) ?: continue
+        if (t.isAfter(nowI) && (best == null || t.isBefore(best.second))) best = b.optString("title") to t
+    }
+    best?.let { (title, t) ->
+        val left = Duration.between(nowI, t).toMillis()
+        if (left <= 24 * 3600_000L) return "📰 ${title.take(18)}" to left
+    }
+    val day = nowI.truncatedTo(java.time.temporal.ChronoUnit.DAYS)
+    val sesi = listOf("🌏 Asia" to 0L, "🇪🇺 Eropa" to 7L, "🇺🇸 Amerika" to 13L)
+    for (d in 0..1) for ((name, h) in sesi) {
+        val t = day.plus(Duration.ofDays(d.toLong())).plus(Duration.ofHours(h))
+        if (t.isAfter(nowI)) return name to Duration.between(nowI, t).toMillis()
+    }
+    return "" to 0L
+}
+
+/** Satu baris: berita berikutnya ≤ 24 jam (atau status lonjakan setelah rilis), tanpa teks bila tidak ada. */
+@Composable
+private fun StripNews(prep: JSONObject?, now: Long) {
+    val list = prep?.optJSONArray("berita") ?: return
+    val nowI = Instant.ofEpochMilli(now)
+    var next: Pair<String, Instant>? = null
+    for (i in 0 until list.length()) {
+        val b = list.getJSONObject(i)
+        val t = instantOf(b.optString("time")) ?: continue
+        if (t.isAfter(nowI) && (next == null || t.isBefore(next.second))) next = b.optString("title") to t
+    }
+    next?.let { (title, t) ->
+        val left = Duration.between(nowI, t).toMillis()
+        if (left in 1..24 * 3600_000L) Text("📰 $title • ${clockShort(left)}", maxLines = 1,
+            style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
     }
 }
 

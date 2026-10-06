@@ -1,0 +1,23 @@
+# 👥 Uji maju aturan pemilih copy trader (research/copy_pilih.py uji)
+
+## Binance (pilih hari 1–180, ukur hari 181–365; 1790 portfolio aktif yang MASIH publik)
+| Pilihan | n | Median 185 hari | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 1790 | +5.7% | +16.3% | 38% | 10% | -34% |
+| lolos aturan | 140 | +2.5% | +6.9% | 41% | 6% | -14% |
+| aturan, 20 teratas ROI/DD | 20 | +9.4% | +23.3% | 25% | 0% | -13% |
+| aturan, 6 teratas ROI/DD | 6 | +27.0% | +53.8% | 0% | 0% | -11% |
+| ROI tertinggi 20 | 20 | +26.5% | +51.9% | 25% | 0% | -35% |
+| % hari naik tertinggi 20 (proksi WR) | 20 | +16.8% | +27.3% | 20% | 0% | -24% |
+| beli-tahan BTC spot (2026-04-05–2026-09-30) | 1 | +21.1% | +21.1% | - | - | -29% |
+
+## MQL5 (tiap bulan pilih dengan 12 bulan, ukur 6 bulan; 72 periode 2020-05–2026-04, 1043 sinyal yang MASIH aktif)
+| Pilihan | n rata | Median 6 bln | Rugi | < −30% |
+|---|---|---|---|---|
+| semua | 248 | +12.1% | 19% | 4% |
+| lolos aturan | 88 | +12.4% | 10% | 1% |
+| aturan, 6 teratas | 6 | +18.6% | 4% | 1% |
+| growth 12 bln tertinggi 6 | 6 | +38.6% | 15% | 6% |
+| beli-tahan emas (pembanding) | 1 | +6.4% | 29% | 0% |
+
+Kesimpulan: aturan ini terutama MENGURANGI risiko (rugi & hancur), bukan menjamin profit lebih besar. Bias penyintas: penyedia yang sudah tutup/dihapus tidak ada di data → angka nyata lebih rendah.

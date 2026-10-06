@@ -81,8 +81,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        item { TickerCard(prices, connection) }
-        item { StatusCards(prices, follow) }      // 📊 status tren & hitung mundur (3.24)
+        item { MarketStrip(prices, connection, follow) }   // 1 baris XAU · BTC · ETH (4.5); ketuk = level BUY/SELL
         val active = open.size + orphans.size
         item { SectionTitle("Aktif", trailing = if (active == 0) null else "$active") }
         items(orphans, key = { "cloud-" + it.first().id }) { g -> CloudOpenCard(g, prices[g.first().symbol]) }
@@ -112,6 +111,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { ArusSection(events) } }
         if ("SPOT" in follow) item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { SpotSection(events) } }
         item { TodayCard(events, money) }
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { CopyTraderSection() } }   // 👥 (4.7)
         item {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 SectionTitle("Riwayat", Modifier.weight(1f))
