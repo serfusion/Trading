@@ -293,10 +293,20 @@
   {
    "title": "ADP Weekly Employment Change",
    "country": "USD",
+   "time_utc": "2026-10-06T12:14:00+00:00",
+   "date": "2026-10-06T08:14:00-04:00",
+   "impact": "Low",
+   "previous": "20.0K",
+   "first_seen": "2026-10-06T13:31:57.700479+00:00"
+  },
+  {
+   "title": "ADP Weekly Employment Change",
+   "country": "USD",
    "time_utc": "2026-10-06T12:15:00+00:00",
    "date": "2026-10-06T08:15:00-04:00",
    "impact": "Low",
-   "first_seen": "2026-10-04T06:35:05.915317+00:00"
+   "first_seen": "2026-10-04T06:35:05.915317+00:00",
+   "previous": "22.5K"
   },
   {
    "title": "ADP Weekly Employment Change",
@@ -754,5 +764,5 @@
    "first_seen": "2026-10-04T06:35:05.915317+00:00"
   }
  ],
- "diperbarui": "2026-10-05T23:20:29.579612+00:00"
+ "diperbarui": "2026-10-06T13:31:57.700479+00:00"
 }
