@@ -26,3 +26,4 @@ data/research/**/.gitignore
 logs/
 .pytest_cache/
 .venv/
+data/research/eksternal/binance_copy/*.json
