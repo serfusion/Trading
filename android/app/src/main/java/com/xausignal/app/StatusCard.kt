@@ -91,22 +91,15 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
     val assets = listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "BTC" to "ETH/USD")
         .filter { (g, _) -> g in follow }
         .mapNotNull { (_, sym) -> prices.values.firstOrNull { it.symbol() == sym }?.let { sym to it } }
-    val next = assets.firstNotNullOfOrNull { (_, hb) ->
-        hb.json.optJSONObject("status")?.optString("next_check")?.let { instantOf(it) }
-    }
-    val left = next?.let { Duration.between(Instant.ofEpochMilli(now), it).toMillis() }
     HeroCard {
         Row(verticalAlignment = Alignment.CenterVertically) {
             PulseDot(if (online) BuyColor else SellColor, 7.dp)
             Text(if (online) "LIVE" else connection, style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.ExtraBold, color = if (online) BuyColor else SellColor,
                 modifier = Modifier.padding(start = 4.dp).weight(1f))
-            Text(when {
-                left == null -> ""
-                left > 0 -> "cek ${clockShort(left)}"
-                left > -20 * 60_000L -> "mengecek…"
-                else -> "pasar tutup"
-            }, style = MaterialTheme.typography.labelMedium, color = Muted, fontWeight = FontWeight.Bold)
+            val (label, ms) = headerCountdown(prep, now)
+            Text("$label ${clockShort(ms)}", style = MaterialTheme.typography.labelMedium, color = Gold,
+                fontWeight = FontWeight.Bold, maxLines = 1)
         }
         if (assets.isEmpty()) Text("Menunggu data cloud", style = MaterialTheme.typography.labelMedium, color = Muted)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -115,7 +108,6 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             }
         }
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
-        StripNews(prep, now)
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
@@ -178,6 +170,30 @@ private fun TileDetail(sym: String, hb: SignalEvent) {
             LevelChip("SELL <", px(sellLvl, btc), if (btc) "−%,.0f".format(price - sellLvl) else "−$%.2f".format(price - sellLvl), SellColor)
         }
     }
+}
+
+/** Hitung mundur header: berita USD berikutnya ≤ 24 jam, selain itu pembukaan sesi berikutnya (WIB: Asia 07:00,
+ *  Eropa 14:00, Amerika 20:00 = 00:00 / 07:00 / 13:00 UTC). */
+private fun headerCountdown(prep: JSONObject?, now: Long): Pair<String, Long> {
+    val nowI = Instant.ofEpochMilli(now)
+    val list = prep?.optJSONArray("berita")
+    var best: Pair<String, Instant>? = null
+    if (list != null) for (i in 0 until list.length()) {
+        val b = list.getJSONObject(i)
+        val t = instantOf(b.optString("time")) ?: continue
+        if (t.isAfter(nowI) && (best == null || t.isBefore(best.second))) best = b.optString("title") to t
+    }
+    best?.let { (title, t) ->
+        val left = Duration.between(nowI, t).toMillis()
+        if (left <= 24 * 3600_000L) return "📰 ${title.take(18)}" to left
+    }
+    val day = nowI.truncatedTo(java.time.temporal.ChronoUnit.DAYS)
+    val sesi = listOf("🌏 Asia" to 0L, "🇪🇺 Eropa" to 7L, "🇺🇸 Amerika" to 13L)
+    for (d in 0..1) for ((name, h) in sesi) {
+        val t = day.plus(Duration.ofDays(d.toLong())).plus(Duration.ofHours(h))
+        if (t.isAfter(nowI)) return name to Duration.between(nowI, t).toMillis()
+    }
+    return "" to 0L
 }
 
 /** Satu baris: berita berikutnya ≤ 24 jam (atau status lonjakan setelah rilis), tanpa teks bila tidak ada. */
