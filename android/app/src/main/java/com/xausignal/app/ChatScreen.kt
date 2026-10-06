@@ -476,6 +476,11 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                         h.optBoolean("kuat"))
                 }
             }
+            // 📊 peluang emas 1 jam SEBELUM rilis NFP/JOLTS/Fed (cloud/api/_prarilis.py, aplikasi 4.4)
+            if (hasil == null) b.optJSONObject("prarilis")?.let { p ->
+                BigRow("Sebelum rilis", if (detail) p.optString("bukti") else "teruji ±60–65%, belum pasti",
+                    p.optString("teks"), p.optBoolean("kuat"))
+            }
             ManualAct(b, onManual)
             val sk = b.optJSONArray("skenario")
             if (sk != null) {

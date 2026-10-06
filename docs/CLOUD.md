@@ -359,3 +359,7 @@ jarak ke level BUY/SELL, hitung mundur ke berita berikutnya (≤ 24 jam), dan se
 - `_arus.arus_tick` di akhir /api/tick memakai candle H1 XAU/BTC/ETH yang sudah diambil (`tick.Keep`). State baris
   Supabase `arus`. Pesan ntfy: `arus_signal`, `arus_fill`, `arus_close`, `arus_cancel`. Env `ARUS_SIGNALS=0` mematikan.
 
+## 📊 Peluang emas sebelum NFP/JOLTS/Fed (6 Okt 2026, aplikasi 4.4)
+- `_prarilis.attach` (GET /api/chat): field `prarilis` {naik, arah, kuat, teks, bukti} pada kartu 🎯 NFP/JOLTS/Fed yang
+  belum rilis. Model `prarilis.json` dari `python -m research.prarilis`. Env `PRARILIS=0` mematikan.
+

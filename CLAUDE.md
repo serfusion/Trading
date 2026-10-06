@@ -267,6 +267,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Semua berita USD sebelum rilis (`research/news_semua.py`, `docs/eksternal/hasil_news_semua.txt`, 18 judul, 216 aturan +
   logistik walk-forward): 1 aturan konsisten (NFP: rilis lalu di atas konsensus → emas naik 1 jam 72%/61%); model NFP 62%
   (p 0,01), JOLTS 61% (p 0,02), Fed 62% (p 0,05), sisanya 42–57% ≈ acak; banyak uji → bisa kebetulan. Tidak dipasang.
+- DIPASANG 6 Okt (izin "pasang info sebelum news NFP, JOLTS & Fed"): `research/prarilis.py` → `cloud/api/prarilis.json`
+  (logistik 5 fitur live: prev_s, exp_up, g4, g24, gema; walk-forward NFP 62%/BARU 55%, JOLTS 65%/58%, Fed 60%/62%) →
+  `_prarilis.attach` di GET /api/chat (memori kejutan baris Supabase `prarilis`, seed NFP Sep 2026 di bawah konsensus,
+  emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
 - Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

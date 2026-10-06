@@ -171,6 +171,14 @@ class handler(BaseHTTPRequestHandler):
                     _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+            if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
+                try:                                          # 📊 peluang emas sebelum NFP/JOLTS/Fed (_prarilis.py)
+                    import _prarilis
+                    key = os.environ.get("TWELVEDATA_API_KEY", "")
+                    _prarilis.attach(persiapan, calendar, store, now,
+                                     lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1":
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)
