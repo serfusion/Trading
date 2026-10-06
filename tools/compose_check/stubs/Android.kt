@@ -2,8 +2,10 @@ package android.content
 open class Context {
     open fun getSharedPreferences(name: String, mode: Int): SharedPreferences = TODO()
     open val applicationContext: Context get() = this
+    open val assets: AssetManager get() = AssetManager()
     companion object { const val MODE_PRIVATE = 0 }
 }
+class AssetManager { fun open(name: String): java.io.InputStream = java.io.ByteArrayInputStream(ByteArray(0)) }
 interface SharedPreferences {
     fun getString(k: String, d: String?): String?
     fun getBoolean(k: String, d: Boolean): Boolean

@@ -61,7 +61,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
     // posisi yang masih terbuka di cloud tetapi data sinyalnya tidak ada di HP (mis. aplikasi di-install ulang)
     val orphans = prices.values.flatMap { SignalRepository.cloudOpen(it) }
         .filter { x ->
-            val grp = if (x.symbol.startsWith("XAU")) "XAU" else if (x.symbol.startsWith("BTC") || x.symbol.startsWith("ETH")) "BTC" else "GAP"
+            val grp = groupOf(x.symbol)
             x.id !in signalIds && grp in follow
         }
         .groupBy { SignalRepository.twinKey(it.id) }.values.toList()
@@ -274,7 +274,7 @@ private fun SignalHeader(signal: SignalEvent, count: Int = 1) {
  */
 @Composable
 private fun TestedLine(signal: SignalEvent) {
-    val asset = if (signal.symbol().startsWith("BTC")) "BTC" else "XAU"
+    val asset = signal.symbol().substringBefore("/")     // riwayat.json hanya XAU & BTC; lainnya pakai badge sinyal
     val cat = signal.str("cat").substringAfter(" ").ifBlank { null }
     val k = cat?.let { Verified.data?.optJSONObject(asset)?.optJSONObject("kat")?.optJSONObject(it) }
     val baru = k?.optJSONObject("baru")
@@ -564,9 +564,12 @@ fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
     }
 }
 
-/** "5 posisi × 0.02 lot": yang dimasukkan di MT5. Sinyal kembar ×N tetap entry 1×. */
-fun legsLot(signal: SignalEvent, money: MoneySettings): String =
-    "${signal.legs()} posisi × ${lotText(signal.entryLot(money))} lot"
+/** "5 posisi × 0.02 lot": yang dimasukkan di MT5. Sinyal kembar ×N tetap entry 1×. DOGE/ADA: ukuran dalam koin
+ *  (cloud point_value 0,01 = 1 koin/lot), karena ukuran kontrak tiap broker berbeda — sesuaikan di broker. */
+fun legsLot(signal: SignalEvent, money: MoneySettings): String = if (signal.coinUnits()) {
+    if (money.modalIdr <= 0) "${signal.legs()} posisi • isi modal di ⚙️ untuk ukuran koin"
+    else "${signal.legs()} posisi × ${fmt(signal.entryLot(money), 0)} ${signal.symbol().substringBefore("/")} (sesuaikan ke lot broker)"
+} else "${signal.legs()} posisi × ${lotText(signal.entryLot(money))} lot"
 
 /** "Rugi maks di SL −450 USC (≈ −Rp74.250, 0,45% modal)". */
 fun lossLine(signal: SignalEvent, money: MoneySettings): String {

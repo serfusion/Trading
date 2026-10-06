@@ -82,6 +82,35 @@ class Keep:
         return out
 
 
+class KlineFeed:
+    """Candle 1 jam koin dari Binance (data-api.binance.vision → api.binance.us; tanpa kredit Twelve Data, sumber sama
+    dengan riset research/pair_kripto.py), cadangan Twelve Data. Candle terakhir = yang masih berjalan (seperti TD)."""
+
+    def __init__(self, coin: str, td_key: str):
+        self.coin, self.td_key = coin, td_key
+
+    def candles(self, n, interval="1h"):
+        for base in ("https://data-api.binance.vision", "https://api.binance.us"):
+            try:
+                out, end = [], None
+                while len(out) < n:
+                    q = f"symbol={self.coin}USDT&interval=1h&limit={min(1000, n - len(out))}"
+                    rows = _core.http("GET", f"{base}/api/v3/klines?{q}" + (f"&endTime={end}" if end else ""),
+                                      timeout=10) or []
+                    if not rows:
+                        break
+                    out = [_core.Bar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]),
+                                     float(r[3]), float(r[4])) for r in rows] + out
+                    end = int(rows[0][0]) - 1
+                    if len(rows) < 1000:
+                        break
+                if len(out) >= 500:
+                    return out
+            except Exception:  # noqa: BLE001 - coba sumber berikutnya
+                pass
+        return _core.TwelveData(self.td_key, f"{self.coin}/USD").candles(n, interval)
+
+
 def run() -> tuple[int, dict]:
     started = time.monotonic()           # batas Vercel 60 dtk (vercel.json): spot memakai sisa waktu saja
     env = os.environ
@@ -160,14 +189,31 @@ def run() -> tuple[int, dict]:
             result["eth"] = {k: eth.get(k) for k in ("ok", "price", "events", "error")}
     except Exception as exc:  # noqa: BLE001 - ETH tidak boleh mengganggu sinyal lain
         result["eth_error"] = str(exc)
+    try:                                   # sinyal DOGE/ADA: semua kategori, hanya saat 💰 BTC searah terbuka
+        if env.get("KRIPTO_SIGNALS", "1") == "1":     # (izin "pasang semua WR & profit tinggi" 6 Okt 2026)
+            now = datetime.now(timezone.utc)
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            bstate = _core.RowStore(store, "btc").get_state() or {}
+            btc_dirs = {x["dir"] for s_ in (bstate.get("systems") or {}).values()
+                        for x in [s_.get("virtual")] + list(s_.get("layers") or []) if x}
+            for sym in [c.strip() for c in env.get("KRIPTO_COINS", "DOGE,ADA").split(",") if c.strip()]:
+                feeds[sym] = Keep(KlineFeed(sym, env["TWELVEDATA_API_KEY"]))
+                kr = _core.tick(now, feeds[sym], _core.RowStore(store, sym.lower()),
+                                _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
+                                {**_core.KRIPTO_CFG, "asset": sym, "id_prefix": f"{sym}-",
+                                 "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
+                                symbol=f"{sym}/USD")
+                result[sym.lower()] = {k: kr.get(k) for k in ("ok", "price", "events", "error")}
+    except Exception as exc:  # noqa: BLE001 - DOGE/ADA tidak boleh mengganggu sinyal lain
+        result["kripto_error"] = str(exc)
     try:                                   # sinyal gap pekan forex (hanya ambil data saat perlu)
         import _gap
         now = datetime.now(timezone.utc)
         store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
         if env.get("GAP_SIGNALS", "1") == "1" and _gap.needs_data(now, store):
-            feeds = {p: _core.TwelveData(env["TWELVEDATA_API_KEY"], p) for p in _gap.PAIRS}
+            gap_feeds = {p: _core.TwelveData(env["TWELVEDATA_API_KEY"], p) for p in _gap.PAIRS}   # jangan timpa feeds
             usdchf = lambda: _core.TwelveData(env["TWELVEDATA_API_KEY"], "USD/CHF").candles(2)[-1].c  # noqa: E731
-            result["gap"] = _gap.gap_tick(now, feeds, store,
+            result["gap"] = _gap.gap_tick(now, gap_feeds, store,
                                           _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                                           usdchf)
     except Exception as exc:  # noqa: BLE001 - gap tidak boleh mengganggu sinyal XAU

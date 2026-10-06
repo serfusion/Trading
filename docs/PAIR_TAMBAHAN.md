@@ -81,3 +81,23 @@ maju. Di LAMA, keunggulan sinyal yang searah hanya tipis.
     (kandidat, belum terbukti).
   - Ingat juga bahwa ETH menambah risiko kripto yang sama dengan BTC.
 - **Tidak ada yang dipasang.** Pengguna minta: pasang hanya setelah ia bilang "pasang".
+
+## DIPASANG 6 Okt 2026: DOGE & ADA (izin "pasang semua WR dan profit tinggi yang belum dipasang")
+Dari `research/pair_kripto.py` (114 varian, 9 lolos) dipilih varian dengan WR ≥ 58% di kedua periode dan profit
+jelas positif: **DOGE** dan **ADA** "semua kategori, hanya saat 💰 BTC searah terbuka". Diverifikasi dengan replay
+kode cloud asli (`python -m research.tambahan_cloud DOGE|ADA`, `docs/eksternal/hasil_kripto_cloud.txt`):
+
+| Koin | LAMA (< Okt 2021) | BARU (sejak Okt 2021) | Tahun + | Pembanding BTC 💰 BARU |
+|---|---|---|---|---|
+| DOGE | n 219, WR 62%, +0,50R/sin | n 579, WR 60%, **+0,17R/sin**, DD −63R | 7/8 | +0,27R |
+| ADA | n 369, WR 61%, +0,23R/sin | n 592, WR 60%, **+0,13R/sin**, DD −33R | 7/9 | |
+
+Cloud (`tick.py`, env `KRIPTO_SIGNALS=0` mati, `KRIPTO_COINS=DOGE,ADA`): candle 1 jam Binance data-api (tanpa kredit
+Twelve Data, cadangan TD), `_core.KRIPTO_CFG` (6 desimal, SL+ ≈ entry — `be_offset` 0,10 milik emas terlalu besar
+untuk harga ±0,1, ukuran dalam KOIN karena ukuran kontrak broker berbeda), baris Supabase `doge`/`ada`, peringkat
+selalu "biasa" (lot ½). Aplikasi 4.15: kelompok "Kripto (BTC·ETH·DOGE·ADA)", koin Ð/₳, ukuran "N DOGE".
+Catatan jujur: DD BARU DOGE besar (−63R); 114 varian diuji → sebagian bisa kebetulan; tanpa auto order.
+
+Tidak dipasang (sengaja): XLM (WR 55%), TRX/AVAX (≤ +0,08R), skema WR tinggi 2 TP (WR naik tetapi profit turun,
+docs/SKEMA_WR.md), USD/JPY (gagal spread ×2), piramida (WR 25%), martingale/grid (negatif), spot "3 merah ≥10% TP 5%"
+(tidak lebih baik dari 💎 yang sudah dipasang), 🌊 BTC jatuh→SELL (WR 46%) & ETH lonjak→BUY (+0,10R, WR < 62%).

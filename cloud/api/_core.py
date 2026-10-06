@@ -129,6 +129,16 @@ def http(method: str, url: str, headers: dict | None = None, body=None, timeout:
 
 
 # ------------------------------------------------------------------ strategi
+def dg(cfg: dict) -> int:
+    """Desimal harga di event (bawaan 3); koin harga kecil (DOGE/ADA) memakai cfg 'digits'."""
+    return cfg.get("digits", 3)
+
+
+def td(cfg: dict) -> int:
+    """Desimal harga di teks notifikasi (bawaan 2); koin harga kecil memakai cfg 'text_digits'."""
+    return cfg.get("text_digits", 2)
+
+
 def atr_last(bars: list[Bar], n: int) -> float:
     trs = []
     for i, b in enumerate(bars):
@@ -149,17 +159,17 @@ def evaluate(closed: list[Bar], position: str | None, cfg: dict = CFG) -> dict:
     hi_e, lo_e = max(b.h for b in prev_e), min(b.l for b in prev_e)
     hi_x, lo_x = max(b.h for b in prev_x), min(b.l for b in prev_x)
     last = closed[-1].c
-    state = (f"close {last:.2f} | channel {cfg['entry']}: {lo_e:.2f}-{hi_e:.2f} | "
-             f"exit {cfg['exit']}: {lo_x:.2f}-{hi_x:.2f} | ATR {a:.2f}")
+    state = (f"close {last:.{td(cfg)}f} | channel {cfg['entry']}: {lo_e:.{td(cfg)}f}-{hi_e:.{td(cfg)}f} | "
+             f"exit {cfg['exit']}: {lo_x:.{td(cfg)}f}-{hi_x:.{td(cfg)}f} | ATR {a:.{td(cfg)}f}")
     out = {"action": "none", "dir": position, "atr": a, "note": "Tidak ada sinyal", "state": state}
     if position == "BUY" and last < lo_x:
-        out.update(action="close", note=f"Close {last:.2f} < low {cfg['exit']} bar {lo_x:.2f}")
+        out.update(action="close", note=f"Close {last:.{td(cfg)}f} < low {cfg['exit']} bar {lo_x:.{td(cfg)}f}")
     elif position == "SELL" and last > hi_x:
-        out.update(action="close", note=f"Close {last:.2f} > high {cfg['exit']} bar {hi_x:.2f}")
+        out.update(action="close", note=f"Close {last:.{td(cfg)}f} > high {cfg['exit']} bar {hi_x:.{td(cfg)}f}")
     elif position is None and last > hi_e:
-        out.update(action="open", dir="BUY", note=f"Breakout H1: close {last:.2f} > high {cfg['entry']} bar {hi_e:.2f}")
+        out.update(action="open", dir="BUY", note=f"Breakout H1: close {last:.{td(cfg)}f} > high {cfg['entry']} bar {hi_e:.{td(cfg)}f}")
     elif position is None and last < lo_e:
-        out.update(action="open", dir="SELL", note=f"Breakdown H1: close {last:.2f} < low {cfg['entry']} bar {lo_e:.2f}")
+        out.update(action="open", dir="SELL", note=f"Breakdown H1: close {last:.{td(cfg)}f} < low {cfg['entry']} bar {lo_e:.{td(cfg)}f}")
     return out
 
 
@@ -243,10 +253,10 @@ def trend_status(closed: list[Bar], systems: dict, cfg: dict, tf: timedelta) -> 
         win = closed[-entry_p:]
         sysd = systems.get(name) or {}
         open_ = [x["dir"] for x in [sysd.get("virtual")] + list(sysd.get("layers") or []) if x]
-        levels.append({"set": name, "buy": round(max(b.h for b in win), 3), "sell": round(min(b.l for b in win), 3),
+        levels.append({"set": name, "buy": round(max(b.h for b in win), dg(cfg)), "sell": round(min(b.l for b in win), dg(cfg)),
                        "open": open_[0] if open_ else None, "n_open": len(open_)})
     return {"d1": d1, "h4": h4, "levels": levels, "next_check": iso(closed[-1].t + 2 * tf),
-            "last_close": round(closed[-1].c, 3)}
+            "last_close": round(closed[-1].c, dg(cfg))}
 
 
 def _ema(values: list[float], n: int) -> list[float]:
@@ -309,6 +319,10 @@ STATS = {
     "ETH ⭐": (56.0, 0.245, 530, "Okt 2021–2026"),
     "ETH konf": (0.0, -0.01, 0, "-"),
     "ETH biasa": (0.0, -0.01, 0, "-"),
+    # DOGE/ADA (research/tambahan_cloud.py: replay kode cloud, semua kategori saat 💰 BTC searah, spread 0,10%):
+    # angka gabungan semua kategori (yang diuji & dipasang), sejak Okt 2021 — per kategori terlalu sedikit/berisik
+    **{f"DOGE {c}": (59.6, 0.169, 579, "Okt 2021–2026") for c in ("konf+⭐", "konf", "⭐", "biasa")},
+    **{f"ADA {c}": (60.5, 0.125, 592, "Okt 2021–2026") for c in ("konf+⭐", "konf", "⭐", "biasa")},
     "GAP USD/JPY": (82.4, 0.256, 34, "2012–2020"),
     "GAP EUR/JPY": (83.9, 0.137, 31, "2007–2022"),
     "GAP AUD/JPY": (85.7, 0.096, 42, "2008–2022"),
@@ -366,6 +380,8 @@ def vol_pct(closed: list[Bar], n: int = 14, window: int = 1440) -> float | None:
 def tier(asset: str, cat: str, vp: float | None) -> str:
     """Peringkat sinyal: zap (⚡ emas) > silver (🥈) > bronze (🥉) > biasa. cat tanpa awalan aset (mis. 'konf+⭐')."""
     low = vp is not None and vp < ZAP_VOL
+    if asset in ("DOGE", "ADA"):            # koin alt: selalu "biasa" (lot ½ di aplikasi), tanpa ⚡/🥈/🥉
+        return "biasa"
     if asset == "BTC":
         return {"⭐": "zap", "konf+⭐": "silver"}.get(cat, "biasa")
     if cat == "konf+⭐":
@@ -464,6 +480,11 @@ class RowStore:
 
 BTC_CFG = {**CFG, "asset": "BTC", "id_prefix": "BTC-", "market_hours": False, "skip_open_bars": 0,
            "point_value": 0.01}          # BTCUSD(c): kontrak 1 BTC/lot -> 0,01 lot = 0,01 per $1
+# DOGE/ADA (research/pair_kripto.py + tambahan_cloud.py, izin "pasang semua WR & profit tinggi" 6 Okt 2026): semua
+# kategori, hanya saat 💰 BTC searah terbuka (skip_fn di tick.py). Harga kecil → SL+ hampir tepat di entry, 6 desimal;
+# ukuran ditampilkan dalam KOIN (point_value 0,01 = anggap 1 koin/lot; ukuran kontrak broker berbeda-beda).
+KRIPTO_CFG = {**BTC_CFG, "be_offset": 0.00001, "digits": 6, "text_digits": 5, "satuan": "koin",
+              "profit_only": False, "skip_cats": ()}
 
 
 OK_CODES = {"ERR_NO_ERROR", "TRADE_RETCODE_PLACED", "TRADE_RETCODE_DONE", "TRADE_RETCODE_DONE_PARTIAL",
@@ -558,7 +579,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
     live = executor is not None and bool(control.get("auto")) and not control.get("paused")
     legs_n = max(1, min(int(control.get("legs") or cfg["legs"]), 10))
     leg_lot = min(float(control.get("leg_lot") or cfg["leg_lot"]), float(cfg.get("max_leg_lot", 0.10)))
-    lot_text = f"{legs_n} x {leg_lot}"
+    lot_text = f"{legs_n} x {leg_lot}" if not cfg.get("satuan") else f"{legs_n} posisi (ukuran {cfg['satuan']}: lihat aplikasi)"
 
     def live_close_all(name: str, magic: int, why: str) -> None:
         for p in executor.positions(magic):
@@ -627,16 +648,16 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         points = (exit_price - v["entry"]) * sign
         r = f_result(v["legs"], v["entry"], v["risk"], sign, v.get("tp1_hit", False), exit_price, cfg["tp1_r"])
         ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name,
-              "dir": v["dir"], "entry": round(v["entry"], 3), "price": round(exit_price, 3),
-              "points": round(points, 3), "r": round(r, 3), "risk_points": round(v["risk"], 3),
+              "dir": v["dir"], "entry": round(v["entry"], dg(cfg)), "price": round(exit_price, dg(cfg)),
+              "points": round(points, dg(cfg)), "r": round(r, 3), "risk_points": round(v["risk"], dg(cfg)),
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
               "cat": v.get("cat", ""), "tier": v.get("tier", ""), "point_value": cfg.get("point_value", 1.0),
               "tp1_time": v.get("be_bar"), "reason": why, **({"lapis": True} if v.get("lapis") else {}),
               "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
                                                                      cfg["be_offset"]), 3)
                        for n in (1, 3) for e in (False, True)}}
-        text = (f"🏁 TUTUP {v['dir']} {symbol} @ {exit_price:.2f} — tutup SEMUA posisi sinyal ini\n"
-                f"Entry {v['entry']:.2f} -> {points:+.2f} poin | {'PROFIT (TP1 kena)' if v.get('tp1_hit') else 'MINUS'}"
+        text = (f"🏁 TUTUP {v['dir']} {symbol} @ {exit_price:.{td(cfg)}f} — tutup SEMUA posisi sinyal ini\n"
+                f"Entry {v['entry']:.{td(cfg)}f} -> {points:+.{td(cfg)}f} poin | {'PROFIT (TP1 kena)' if v.get('tp1_hit') else 'MINUS'}"
                 f"\nAlasan: {why}")
         # sinyal kembar: hanya set terakhir yang masih terbuka mengirim teks (set lebih cepat tutup diam-diam)
         if v.get("lapis"):
@@ -652,11 +673,11 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         if cfg.get("market_hours", True) and weekend_closed(parse_iso(v["bar_close"]) - tf):
             # sinyal lama yang lahir dari candle saat pasar tutup -> batalkan, tidak dihitung menang/kalah
             ev = {"type": "close", "id": v["id"], "time": iso(now), "mode": "trend", "set": name, "dir": v["dir"],
-                  "entry": round(v["entry"], 3), "price": round(price, 3), "points": 0.0, "r": 0.0,
-                  "risk_points": round(v["risk"], 3), "legs": v["legs"], "tp1_hit": False,
+                  "entry": round(v["entry"], dg(cfg)), "price": round(price, dg(cfg)), "points": 0.0, "r": 0.0,
+                  "risk_points": round(v["risk"], dg(cfg)), "legs": v["legs"], "tp1_hit": False,
                   "star": v.get("star", False), "void": True,
                   "reason": "Dibatalkan: sinyal dari data saat pasar tutup"}
-            text = f"⚠️ BATAL {v['dir']} [{name}] @ {v['entry']:.2f}: sinyal dari data saat pasar tutup, abaikan."
+            text = f"⚠️ BATAL {v['dir']} [{name}] @ {v['entry']:.{td(cfg)}f}: sinyal dari data saat pasar tutup, abaikan."
             pub.publish(ev, text, "Sinyal dibatalkan", 4, ["warning"])
             store.log("void", ev)
             events.append(f"{name} BATAL {v['dir']} (data pasar tutup)")
@@ -670,10 +691,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 if (b.h >= v["tp1"]) if buy else (b.l <= v["tp1"]):
                     v.update(be_done=True, tp1_hit=True, be_bar=iso(b.t),
                              sl=v["entry"] + (1 if buy else -1) * cfg["be_offset"])
-                    text = (f"🎯 [{name}] TP1 {v['tp1']:.2f} kena ({v['dir']})\n"
-                            f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.2f} (SL+)")
+                    text = (f"🎯 [{name}] TP1 {v['tp1']:.{td(cfg)}f} kena ({v['dir']})\n"
+                            f"➡️ Tutup posisi #1, pindahkan SL posisi lain ke {v['sl']:.{td(cfg)}f} (SL+)")
                     pub.publish({"type": "info", "kind": "tp1", "time": iso(now), "set": name, "id": v["id"],
-                                 "symbol": symbol, "sl_plus": round(v["sl"], 3), "text": text},
+                                 "symbol": symbol, "sl_plus": round(v["sl"], dg(cfg)), "text": text},
                                 text if is_primary(name, v) else None, "TP1 + SL+", 5, ["dart"])
                     store.log("tp1", {"id": v["id"], "set": name, "sl": v["sl"]})
                     events.append(f"{name} TP1 -> SL+")
@@ -684,10 +705,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             if fav >= 0.7 * v["risk"]:
                 v["n07"] = True
                 sl_plus = v["entry"] + (1 if buy else -1) * cfg["be_offset"]
-                text = (f"🛡️ [{name}] {v['dir']} {symbol}: profit 0,7R tercapai → SL+ ke {sl_plus:.2f}"
+                text = (f"🛡️ [{name}] {v['dir']} {symbol}: profit 0,7R tercapai → SL+ ke {sl_plus:.{td(cfg)}f}"
                         " (bila memakai SL+ 0,7R)")
                 pub.publish({"type": "info", "kind": "be07", "time": iso(now), "set": name, "id": v["id"],
-                             "symbol": symbol, "sl_plus": round(sl_plus, 3), "text": text},
+                             "symbol": symbol, "sl_plus": round(sl_plus, dg(cfg)), "text": text},
                             text if is_primary(name, v) else None, "SL+ sekarang", 5, ["shield"])
                 events.append(f"{name} 0,7R")
         if v.get("be_done"):
@@ -755,21 +776,22 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         tp2, tp3 = price + sign * 1.5 * risk, price + sign * 3.0 * risk     # patokan, posisi tetap ditahan s.d. TUTUP
         key = f"{cfg.get('id_prefix', '')}{name}-{d}-{closed[-1].t:%Y%m%d%H%M}" + ("L" if layer else "")
         ev = {"type": "signal", "id": key, "time": iso(now), "mode": "trend", "set": name, "dir": d,
-              "symbol": symbol, "entry": round(price, 3), "sl": round(sl, 3), "tp": round(tp1, 3),
-              "tp1": round(tp1, 3), "tp2": round(tp2, 3), "tp3": round(tp3, 3),
-              "sl_plus": round(price + sign * cfg["be_offset"], 3), "atr": round(sig["atr"], 3), "risk_points": round(risk, 3),
+              "symbol": symbol, "entry": round(price, dg(cfg)), "sl": round(sl, dg(cfg)), "tp": round(tp1, dg(cfg)),
+              "tp1": round(tp1, dg(cfg)), "tp2": round(tp2, dg(cfg)), "tp3": round(tp3, dg(cfg)),
+              "sl_plus": round(price + sign * cfg["be_offset"], dg(cfg)), "atr": round(sig["atr"], dg(cfg)), "risk_points": round(risk, dg(cfg)),
               "legs": legs_n, "lot": lot_text, "timeframe": "H1", "status": "signal",
               "exit_rule": f"close H1 menembus channel {exit_p} bar", "reason": sig["note"],
               "warning": "Harga dari data feed; cek harga broker sebelum entry.",
-              "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta}
+              "star_note": star_note, "point_value": cfg.get("point_value", 1.0), **meta,
+              **({"satuan": cfg["satuan"]} if cfg.get("satuan") else {})}
         if war and war.get("on"):
             ev["war"] = war
         text = (f"{meta['badge'] + ' ' if meta['badge'] else ''}{'🟢' if d == 'BUY' else '🔴'} {d} {symbol} [{name}]\n"
                 f"WR {meta['wr']:.0f}% • rata-rata {meta['avg_r']:+.2f}R/sinyal ({meta['period']}, "
                 f"{meta['n_hist']} sinyal)\n"
-                f"Entry: {price:.2f} | SL: {sl:.2f} ({cfg['stop_atr']}x ATR {sig['atr']:.2f})\n"
-                f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.2f} ({cfg['tp1_r']}R), sisanya hold\n"
-                f"Patokan: TP2 {tp2:.2f} (1,5R) • TP3 {tp3:.2f} (3R) — tetap tahan sampai TUTUP\n"
+                f"Entry: {price:.{td(cfg)}f} | SL: {sl:.{td(cfg)}f} ({cfg['stop_atr']}x ATR {sig['atr']:.{td(cfg)}f})\n"
+                f"Lot: {lot_text} -> posisi #1 TP1 {tp1:.{td(cfg)}f} ({cfg['tp1_r']}R), sisanya hold\n"
+                f"Patokan: TP2 {tp2:.{td(cfg)}f} (1,5R) • TP3 {tp3:.{td(cfg)}f} (3R) — tetap tahan sampai TUTUP\n"
                 f"TP1 kena -> SL sisa ke entry (SL+). Tunggu sinyal TUTUP.\nAlasan: {sig['note']}")
         if meta["zap"]:
             text = (f"⚡ KESEMPATAN EMAS (WR {meta['wr07']:.0f}% dengan SL+ 0,7R, +{meta['avg_r07']:.2f}R/sinyal)\n"
@@ -803,7 +825,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         pub.publish(ev, text if first else None, f"{d} {symbol}", 5,
                     ["green_circle" if d == "BUY" else "red_circle"])
         store.log("signal", ev)
-        events.append(f"{name} SINYAL {d} @ {price:.2f}")
+        events.append(f"{name} SINYAL {d} @ {price:.{td(cfg)}f}")
         v = {"id": key, "dir": d, "entry": price, "sl": sl, "risk": risk, "tp1": tp1,
              "legs": legs_n, "be_done": False, "tp1_hit": False, "star": meta["star"], "cat": meta["cat"],
              "tier": meta["tier"],
@@ -906,7 +928,7 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
                 window = closed[-exit_p:]
                 level = min(b.l for b in window) if v["dir"] == "BUY" else max(b.h for b in window)
                 exits.append({"id": v["id"], "set": f"T{entry_p}/{exit_p}", "dir": v["dir"],
-                              "level": round(level, 3), "bars": exit_p, **({"lapis": True} if v.get("lapis") else {})})
+                              "level": round(level, dg(cfg)), "bars": exit_p, **({"lapis": True} if v.get("lapis") else {})})
     hb = {"type": "heartbeat", "time": iso(now), "symbol": symbol, "price": price, "mode": mode,
           "trend": trend_text, "session": "cloud", "block": "", "news": "-", "currency": "", "positions": [],
           "exits": exits, "status": trend_status(closed, systems, cfg, tf)}

@@ -43,7 +43,8 @@ G
 SRC="$WORK/src/main/kotlin"
 cp "$HERE/stubs/"*.kt "$SRC/"
 if [ "$MODE" = compile ]; then
-    for f in Theme Appearance StatusCard SpotCard SignalScreen SignalRepository ChatScreen StatsScreen RankCard TermsDialog; do
+    for f in Theme Appearance StatusCard SpotCard SignalScreen SignalRepository ChatScreen StatsScreen RankCard TermsDialog \
+             ArusCard CopyTraderCard CopyDetail; do
         cp "$APP/$f.kt" "$SRC/"
     done
     (cd "$WORK" && gradle compileKotlin --console=plain -q)
