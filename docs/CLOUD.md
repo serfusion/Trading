@@ -354,3 +354,8 @@ jarak ke level BUY/SELL, hitung mundur ke berita berikutnya (≤ 24 jam), dan se
   (dengan notifikasi) dan `spot_status` (ringkasan kartu 💎, tiap perubahan / 2 jam bila ada posisi).
 - Env: `SPOT_SIGNALS=0` mematikan, `SPOT_MAX` maks posisi (bawaan 10). Data: data-api.binance.vision → api.binance.us
   → Twelve Data. Model diperbarui dengan `python -m research.spot_peluang --final` (menulis `spot_model.json`).
+
+## 🌊 Ikut arus (6 Okt 2026, aplikasi 4.3 — `docs/PISAU.md`)
+- `_arus.arus_tick` di akhir /api/tick memakai candle H1 XAU/BTC/ETH yang sudah diambil (`tick.Keep`). State baris
+  Supabase `arus`. Pesan ntfy: `arus_signal`, `arus_fill`, `arus_close`, `arus_cancel`. Env `ARUS_SIGNALS=0` mematikan.
+

@@ -1,0 +1,63 @@
+# NFP mean reversion vs deterioration lanjutan (research/nfp_mean.py)
+Data vintage ALFRED, bulan 2001-03 s.d. 2026-08 (306 rilis).
+Baseline: NFP pertama bulan berikutnya > bulan ini di 47.1% rilis.
+
+## Uji 1–2: peluang rebound (NFP m+1 > m) setelah pelemahan
+model | n | naik | +25K | +50K | +75K | uplift vs baseline | p binomial>50% | CI95 bootstrap | p Mann-Whitney
+A z24 ≤ −1,0 | 57 | 65% | 60% | 53% | 47% | +18 pp | 0.017 | 53–77% | 0.000
+A z24 ≤ −1,25 | 47 | 62% | 57% | 49% | 45% | +15 pp | 0.072 | 47–74% | 0.003
+A z24 ≤ −1,5 | 37 | 59% | 54% | 49% | 46% | +12 pp | 0.162 | 43–76% | 0.009
+A z24 ≤ −1,75 | 28 | 64% | 57% | 57% | 54% | +17 pp | 0.092 | 46–82% | 0.002
+A z24 ≤ −2,0 | 23 | 61% | 57% | 57% | 52% | +14 pp | 0.202 | 39–78% | 0.011
+A z12 ≤ −1,5 | 32 | 72% | 69% | 62% | 59% | +25 pp | 0.010 | 56–88% | 0.000
+A z36 ≤ −1,5 | 32 | 56% | 50% | 50% | 47% | +9 pp | 0.298 | 38–72% | 0.007
+B turun 2 bulan | 68 | 57% | 46% | 38% | 35% | +10 pp | 0.137 | 46–69% | 0.012
+C turun 3 bulan & < rata-rata | 46 | 67% | 50% | 41% | 37% | +20 pp | 0.013 | 54–80% | 0.003
+D Δ2 ≤ persentil 20 | 53 | 66% | 58% | 55% | 47% | +19 pp | 0.014 | 53–79% | 0.000
+Normal (tidak satu pun) | 196 | 40% | 33% | 26% | 18% | -7 pp | 0.997 | 34–47% | 1.000
+
+## Uji 3: pelemahan + skor indikator pendahulu (klaim, ADP, pengangguran, JOLTS) sebelum rilis berikutnya
+   pelemahan + pendahulu membaik (skor ≥ +2): n  31 | naik 68% | +50K 58% | rata perubahan +56K
+   normal    + pendahulu membaik (skor ≥ +2): n  67 | naik 51% | +50K 36% | rata perubahan +0K
+   pelemahan + pendahulu netral (−1..+1)   : n  50 | naik 70% | +50K 52% | rata perubahan +518K
+   normal    + pendahulu netral (−1..+1)   : n  98 | naik 39% | +50K 24% | rata perubahan -41K
+   pelemahan + pendahulu memburuk (≤ −2)   : n  29 | naik 31% | +50K 17% | rata perubahan -719K
+   normal    + pendahulu memburuk (≤ −2)   : n  31 | naik 23% | +50K 10% | rata perubahan -85K
+
+## Uji 4: revisi bulan sebelumnya
+   revisi turun ≤ −20K : n  70 | NFP berikutnya naik 54% | rata +368K
+   revisi kecil        : n 125 | NFP berikutnya naik 44% | rata -163K
+   revisi naik ≥ +20K  : n 111 | NFP berikutnya naik 46% | rata -47K
+
+## Uji 5: regresi logistik walk-forward (latih s.d. tahun sebelumnya, uji tiap tahun)
+   hanya NFP: n 248 akurasi 60% (baseline selalu 'naik' 48%) | p ≥ 0,65: n 33 naik 48%
+   NFP + klaim + pengangguran + revisi + skor: n 238 akurasi 61% (baseline selalu 'naik' 47%) | p ≥ 0,65: n 63 naik 63%
+   + ADP + JOLTS (2011+): n 110 akurasi 63% (baseline selalu 'naik' 48%) | p ≥ 0,65: n 40 naik 70%
+
+## Regime (model A z24 ≤ −1,0 dan C)
+   2003–2007: baseline 45% (n 60) | A n 5 naik 80% | C n 8 naik 62%
+   2008–2009: baseline 42% (n 24) | A n 17 naik 35% | C n 9 naik 44%
+   2010–2019: baseline 52% (n 120) | A n 12 naik 92% | C n 14 naik 79%
+   2020–2021: baseline 46% (n 24) | A n 2 naik 50% | C n 1 naik 100%
+   2022–2024: baseline 44% (n 36) | A n 7 naik 86% | C n 7 naik 57%
+   2025–2026: baseline 45% (n 20) | A n 7 naik 71% | C n 3 naik 100%
+
+## Uji 6: apakah pelemahan + pendahulu memprediksi KEJUTAN vs konsensus? (ForexFactory, n 192)
+   Konsensus sendiri memperkirakan rebound (f > NFP bulan ini) di 43% rilis; kenyataan naik 49%.
+   Semua rilis: aktual > konsensus 55%.
+   pelemahan: n 60 | NFP naik 67% | konsensus sudah memperkirakan naik 65% | aktual > konsensus 60%
+   pelemahan + pendahulu membaik: n 22 | NFP naik 64% | konsensus sudah memperkirakan naik 77% | aktual > konsensus 50%
+   pelemahan + pendahulu memburuk: n 9 | NFP naik 56% | konsensus sudah memperkirakan naik 33% | aktual > konsensus 78%
+
+## Uji 6b: emas setelah NFP (XAU M15, n 160) — naik % per kelompok
+   aktual > konsensus: n 92 | naik 15 mnt 32% | 1 jam 46% | 6 jam 47% | rata 1 jam -3.0$
+   aktual < konsensus: n 66 | naik 15 mnt 74% | 1 jam 73% | 6 jam 68% | rata 1 jam +6.5$
+   setelah pelemahan (semua): n 54 | emas naik 1 jam 41% | 6 jam 39% | rata 1 jam -1.3$
+   pelemahan + pendahulu membaik: n 20 | emas naik 1 jam 50% | 6 jam 50% | rata 1 jam +1.8$
+   pelemahan + pendahulu memburuk: n 8 | emas naik 1 jam 38% | 6 jam 12% | rata 1 jam -4.2$
+
+## Uji 8: whipsaw (arah 15 mnt ≠ arah 1 jam)
+   semua 22% | kejutan kecil 22% | kejutan besar 21%
+
+## Kondisi terbaru (data ALFRED)
+   NFP Aug 2026 = +162K (z24 +0.53); berikutnya (bulan Sep 2026) sudah rilis +29K

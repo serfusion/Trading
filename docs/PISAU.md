@@ -58,3 +58,17 @@ ETH 1.055 dari 3.520 (hampir semuanya varian "ikut arus"), koin spot 0 dari 1.30
    candle H1 tutup di bawah channel (±4.125,92).
 4. Belum ada yang dipasang di cloud/aplikasi — menunggu kata "pasang" dari pengguna. Kandidat yang layak dipasang
    sebagai info: XAU "melonjak → BUY tembus high" dan "ikut arus" BTC/ETH.
+
+## 🌊 Ikut arus DIPASANG (6 Okt 2026, izin "ikuti arus dengan catatan WR dan profit tinggi")
+Hanya varian WR ≥ 62% di LAMA & BARU, ≥ 79% tahun positif (dipilih dari tabel riset; ambang WR ditentukan setelah
+melihat kedua periode → anggap sebagai kandidat yang perlu dipantau maju):
+| Aset | Aturan | LAMA | BARU |
+|---|---|---|---|
+| XAU | melonjak ≥ 4 ATR/3 jam, di atas EMA H1 1200 → BUY STOP 0,1 ATR di atas high (6 jam), SL 3 / TP 2 ATR, maks 48 jam | n 93, WR 72%, +0,20R | n 71, WR 69%, +0,16R |
+| BTC | melonjak ≥ 6 ATR/12 jam → BUY pasar, SL 3 ATR, TP 38% gerakan, maks 48 jam | n 160, WR 63%, +0,16R | n 185, WR 62%, +0,12R |
+| ETH | jatuh ≥ 5 ATR/6 jam, di bawah EMA → SELL pasar, SL 3 / TP 2 ATR, maks 12 jam | n 50, WR 64%, +0,18R | n 94, WR 64%, +0,19R |
+Replay kode cloud ASLI `_arus.py` jam demi jam 2025–2026 (`research/arus_replay.py`): XAU 19/19 trade (WR 58% vs
+riset 63%), BTC 63/63 (WR 59% = riset), ETH 41/41 (WR 63% = riset). 2025–2026 lebih lemah: XAU +0,06R, BTC +0,09R.
+Cloud `cloud/api/_arus.py` (memakai candle yang sudah diambil, tanpa kredit Twelve Data tambahan), env ARUS_SIGNALS=0
+mematikan; aplikasi 4.3 kartu 🌊 + notifikasi (sinyal, stop terisi, tutup, batal). Info saja, tanpa order.
+

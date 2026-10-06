@@ -109,6 +109,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
                     g.map { it.id })
             }
         }
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { ArusSection(events) } }
         if ("SPOT" in follow) item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { SpotSection(events) } }
         item { TodayCard(events, money) }
         item {
