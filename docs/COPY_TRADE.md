@@ -53,7 +53,7 @@ LAMA (< Okt 2021) vs BARU: WR tertinggi −1,8% → −12,9%; profit tertinggi +
 (`CopyTraderCard.kt`): 1 teratas per platform (eToro, Binance, MQL5), "Semua & bukti" = 6 per platform + hasil uji. Ketuk nama = buka
 halaman salin di Binance/MQL5. **Info saja — aplikasi tidak menyalin order** (salin dilakukan pengguna di platform itu).
 Diperbarui otomatis tiap Senin 07:41 WIB (`.github/workflows/copytrader.yml`, hanya pandas/numpy); satu sumber gagal →
-daftar minggu lalu dipakai dan ditandai "basi".
+daftar minggu lalu dipakai dan ditandai "invalid".
 
 Saringan (dipilih dari uji di atas, bukan dari WR/ROI tertinggi):
 - Binance: umur ≥ 365 hari, ROI 365 hari > 0 dan positif di paruh 1 & 2, MDD ≤ 20%, WR ≥ 60%, PnL pengikut > 0,
@@ -123,4 +123,21 @@ yang sama; MQL5 6 teratas +19% vs **beli-tahan emas +6%** (MQL5 bias penyintas b
 Pemilih eToro di `research/copy_pilih.py`: terverifikasi, ≥ 30 penyalin, bukan fund, ≥ 52 minggu, gain 12 bln > 0,
 DD ≤ 20%, WR ≥ 60%, risk score ≤ 6, 12 bulan penuh terakhir positif di kedua paruh, bulan terburuk > −10%, DD bulanan
 > −20%, growth ≤ 300%. 6 Okt: 114 lolos (6 teratas tampil). Aplikasi 4.8: baris eToro (huruf "e" hijau, aset, penyalin,
-risiko/10). Workflow mingguan ikut mengambil eToro (bila Cloudflare memblokir runner GitHub → daftar lama, "basi").
+risiko/10). Workflow mingguan ikut mengambil eToro (bila Cloudflare memblokir runner GitHub → daftar lama, "invalid").
+
+## Gabungan semua situs (aplikasi 4.9, 6 Okt 2026 — network penuh)
+`research/copy_multi.py` (OKX API resmi, Bitget, Hyperliquid vault) + pemilih `research/copy_pilih.py` →
+`copytrader.json` field `gabungan` (maks 20, maks 4 per situs, peringkat profit/DD; syarat WR ≥ 60%, profit > 0,
+≥ 30 pengikut, untung di 2 paruh, DD ≤ 20%). Sumber gagal diunduh → `invalid` (daftar minggu lalu).
+Kartu 👥 4.9: 5 teratas + "Semua", satu baris keterangan.
+
+Uji maju (`docs/eksternal/hasil_copy_multi.txt`; pilih dengan paruh 1, ukur paruh 2):
+| Situs | Lolos aturan | Semua | ROI tertinggi 10 | Beli-tahan BTC |
+|---|---|---|---|---|
+| OKX (217, 6 bln) | +7,6%, rugi 25%, DD 11% | +6,3%, rugi 28%, DD 18% | +25,8%, rugi 30%, DD 31% | +16,5% |
+| Bitget (457, 90 hr) | +0,9%, rugi 44%, hancur 0% | +20,4%, hancur 19% | **−17,1%, hancur 40%** | +32,3% |
+| Hyperliquid (2.529 vault, 1.395 tutup) | +1,5%, rugi 27% | +0,0%, rugi 24% | +5,8% | +14,6% |
+Bitget: untung penyalin 180 hari positif hanya di 12% trader. Kesimpulan sama di semua situs: saringan menekan rugi,
+hancur & DD, tetapi profit tidak lebih tinggi dan biasanya kalah dari beli-tahan BTC/indeks.
+Tidak bisa: Bybit (Akamai menolak IP AS), Exness Social Trading & Myfxbook (403), BingX (butuh tanda tangan waktu);
+ZuluTrade terbaca (`zulutrade-gateway/api/providers/performance/search`) tetapi tanpa riwayat → belum diuji, tidak dipasang.

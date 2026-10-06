@@ -34,119 +34,97 @@ import org.json.JSONObject
 /** cloud/api/copytrader.json lewat GET /api/chat?copytrader=1, dimuat sekali per sesi aplikasi. */
 object CopyTraders {
     var data by mutableStateOf<JSONObject?>(null)
-    var tried by mutableStateOf(false)
     suspend fun load() {
         if (data != null) return
         data = withContext(Dispatchers.IO) { ChatClient.copytrader() }
-        tried = true
     }
 }
 
 /**
- * 👥 Copy trader teruji (aplikasi 4.7–4.8, permintaan pengguna 6 Okt 2026; research/copy_pilih.py, docs/COPY_TRADE.md).
- * Penyedia eToro CopyTrader, Binance Copy Trading & MQL5 Signals yang lolos saringan (umur ≥ 12 bln, untung di 2 paruh
- * tahun, DD ≤ 20%, WR ≥ 60–65%, pengikut nyata, tanpa grid), diperbarui mingguan oleh GitHub Actions. Ketuk = buka
- * halaman salin. Info saja — aplikasi tidak menyalin order.
+ * 👥 Copy trader terbaik (aplikasi 4.7–4.9; research/copy_pilih.py, docs/COPY_TRADE.md): gabungan OKX, Bitget,
+ * Hyperliquid, eToro, Binance, MQL5 yang lolos saringan teruji (untung di 2 paruh, DD ≤ 20%, WR ≥ 60%, pengikut nyata),
+ * diperbarui mingguan oleh GitHub Actions. Ketuk = buka halaman salin. Info saja — aplikasi tidak menyalin order.
  */
 @Composable
 fun CopyTraderSection() {
     LaunchedEffect(Unit) { CopyTraders.load() }
     val d = CopyTraders.data ?: return              // cloud lama / gagal → kartu tidak tampil
-    val keys = listOf("etoro", "binance", "mql5")
-    val lists = keys.map { k ->
+    val gab = d.optJSONArray("gabungan")
+    val all = if (gab != null) (0 until gab.length()).mapNotNull { gab.optJSONObject(it) }
+    else listOf("etoro", "binance", "mql5").flatMap { k ->       // cloud sebelum 4.9
         val a = d.optJSONArray(k)
         (0 until (a?.length() ?: 0)).mapNotNull { a?.optJSONObject(it) }
     }
-    val all = lists.flatten()
     if (all.isEmpty()) return
     var open by rememberSaveable { mutableStateOf(false) }
-    // ringkas: 1 teratas per platform (eToro, Binance, MQL5); buka = semua + bukti uji
-    val shown = if (open) all else lists.mapNotNull { it.firstOrNull() }
-    val n = d.optJSONObject("n")
-    SectionTitle("👥 Copy trader teruji", trailing = "${keys.sumOf { n?.optInt(it) ?: 0 }} lolos")
+    SectionTitle("👥 Copy trader terbaik", trailing = "${all.size}")
     AppCard {
-        Text("Profit 1 tahun • DD maks • WR", Modifier.fillMaxWidth(), textAlign = TextAlign.End,
-            style = MaterialTheme.typography.labelSmall, color = Muted)
-        shown.forEach { CopyRow(it) }
+        (if (open) all else all.take(5)).forEach { CopyRow(it) }
         Row(
             Modifier.fillMaxWidth().clickable { open = !open }.padding(top = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                "Diperbarui ${d.optString("dibuat")} • ketuk nama = buka halaman salin",
-                Modifier.weight(1f), style = MaterialTheme.typography.labelSmall, color = Muted
-            )
-            Text(if (open) "Tutup ▴" else "Semua & bukti ▾", style = MaterialTheme.typography.labelMedium,
+            Text("Diperbarui ${d.optString("dibuat")}", Modifier.weight(1f),
+                style = MaterialTheme.typography.labelSmall, color = Muted)
+            Text(if (open) "Tutup ▴" else "Semua ▾", style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold, color = Gold)
         }
         if (open) {
-            val uji = d.optJSONObject("uji")
-            Text("Saringan: ${d.optString("aturan")}", style = MaterialTheme.typography.labelSmall, color = Muted)
-            for ((k, label) in listOf("etoro" to "eToro", "binance" to "Binance", "mql5" to "MQL5")) {
-                uji?.optString(k)?.takeIf { it.isNotBlank() }?.let {
-                    Text("Uji $label: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
-                }
-            }
-            val basi = d.optJSONArray("basi")
-            if (basi != null && basi.length() > 0) {
-                Text("Daftar ${(0 until basi.length()).joinToString { basi.optString(it) }} dari minggu lalu (unduh gagal).",
+            val invalid = d.optJSONArray("invalid")
+            if (invalid != null && invalid.length() > 0) {
+                Text("Invalid: ${(0 until invalid.length()).joinToString { invalid.optString(it) }} (data minggu lalu)",
                     style = MaterialTheme.typography.labelSmall, color = SellColor)
             }
-            if (all.any { it.optBoolean("wr_curiga") }) {
-                Text("⚠️ WR ≈ 100% biasanya karena posisi rugi ditahan (floating), bukan keahlian — cek posisi terbuka " +
-                    "sebelum menyalin.", style = MaterialTheme.typography.labelSmall, color = SellColor)
-            }
-            NoteBox(d.optString("kesimpulan").ifBlank { "Hasil lalu tidak menjamin hasil depan. Mulai modal kecil." })
+            Text(d.optString("singkat").ifBlank { d.optString("kesimpulan") },
+                style = MaterialTheme.typography.labelSmall, color = Muted)
         }
     }
+}
+
+private data class Badge(val text: String, val color: Color)
+
+private fun badgeOf(platform: String): Badge = when (platform) {
+    "Binance" -> Badge("B", Color(0xFFF0B90B))
+    "eToro" -> Badge("e", Color(0xFF13C636))
+    "OKX" -> Badge("O", Color(0xFFB0B7C3))
+    "Bitget" -> Badge("Bg", Color(0xFF00C2CC))
+    "Hyperliquid" -> Badge("H", Color(0xFF50D2C1))
+    else -> Badge(platform.removePrefix("MQL5 ").take(3), Color(0xFF2E7BE6))
 }
 
 @Composable
 private fun CopyRow(x: JSONObject) {
     val uri = LocalUriHandler.current
     val platform = x.optString("platform")
-    val binance = platform == "Binance"
-    val etoro = platform == "eToro"
-    val badge = when {
-        binance -> Color(0xFFF0B90B)
-        etoro -> Color(0xFF13C636)
-        else -> Color(0xFF2E7BE6)
-    }
+    val b = badgeOf(platform)
     val roi = x.optDouble("roi")
     val wrWarn = x.optBoolean("wr_curiga")
     Row(
-        Modifier.fillMaxWidth().clickable { x.optString("url").takeIf { it.startsWith("https://") }?.let { runCatching { uri.openUri(it) } } },
+        Modifier.fillMaxWidth().clickable {
+            x.optString("url").takeIf { it.startsWith("https://") }?.let { runCatching { uri.openUri(it) } }
+        },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Box(
-            Modifier.size(34.dp).background(badge.copy(alpha = 0.16f), CircleShape)
-                .border(1.dp, badge.copy(alpha = 0.55f), CircleShape),
+            Modifier.size(34.dp).background(b.color.copy(alpha = 0.16f), CircleShape)
+                .border(1.dp, b.color.copy(alpha = 0.55f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            Text(if (binance) "B" else if (etoro) "e" else platform.removePrefix("MQL5 ").take(3), color = badge,
-                fontWeight = FontWeight.ExtraBold,
-                style = MaterialTheme.typography.labelMedium)
+            Text(b.text, color = b.color, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.labelMedium)
         }
         Column(Modifier.weight(1f)) {
-            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                Text(x.optString("name"), Modifier.weight(1f, fill = false), fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.bodyMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
-                if (x.optBoolean("penuh")) Pill("PENUH", Muted)
-            }
-            val harga = x.optDouble("harga", 0.0)
-            val sub = buildList {
-                add(x.optString("aset"))
-                add("${x.optInt("pengikut")} ${if (binance) "pengikut" else if (etoro) "penyalin" else "pelanggan"}")
-                if (etoro) add("risiko ${x.optInt("risiko")}/10")
-                else if (!binance) add(if (harga > 0) "$${harga.toInt()}/bln" else "gratis")
-            }.joinToString(" • ")
-            Text(sub, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(x.optString("name"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium,
+                maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text("${if (platform.startsWith("MQL5")) "MQL5" else platform} • ${x.optInt("pengikut")} pengikut" +
+                if (x.optBoolean("penuh")) " • penuh" else "",
+                style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
         Column(horizontalAlignment = Alignment.End) {
             Text("${signed(roi, 0)}%", fontWeight = FontWeight.ExtraBold, color = if (roi >= 0) BuyColor else SellColor,
                 style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.End)
-            Text("DD ${x.optDouble("mdd").toInt()}% • WR ${x.optDouble("wr").toInt()}%${if (wrWarn) "⚠️" else ""}",
+            Text("${x.optString("periode", "1 th")} • DD ${x.optDouble("mdd").toInt()}% • WR ${x.optDouble("wr").toInt()}%" +
+                if (wrWarn) "⚠️" else "",
                 style = MaterialTheme.typography.labelSmall, color = if (wrWarn) SellColor else Muted)
         }
     }

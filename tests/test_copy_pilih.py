@@ -40,14 +40,20 @@ def test_file_cloud_untuk_aplikasi():
     d = json.loads((ROOT / "cloud" / "api" / "copytrader.json").read_text(encoding="utf-8"))
     pd.Timestamp(d["dibuat"])
     assert d["uji"]["binance"] and d["uji"]["mql5"] and d["kesimpulan"]
-    semua = d.get("etoro", []) + d["binance"] + d["mql5"]
-    assert semua
+    semua = sum((d.get(k, []) for k in ("okx", "bitget", "hyperliquid", "etoro", "binance", "mql5", "gabungan")), [])
+    assert semua and d["gabungan"] and d["singkat"]
     for x in semua:
-        assert x["url"].startswith(("https://www.etoro.com/people/", "https://www.binance.com/", "https://www.mql5.com/"))
+        assert x["url"].startswith(("https://www.etoro.com/people/", "https://www.binance.com/", "https://www.mql5.com/",
+                                    "https://www.okx.com/", "https://www.bitget.com/", "https://app.hyperliquid.xyz/"))
         assert x["mdd"] <= 20 and x["wr"] >= 60 and x["paruh"][0] > 0 and x["paruh"][1] > 0
         for k in ("name", "roi", "pengikut", "aset", "platform"):
             assert k in x
     assert "skor" not in json.dumps(d)
+    g = d["gabungan"]
+    assert all(x["pengikut"] >= 30 for x in g)
+    sk = [x["roi"] / max(x["mdd"], 3) for x in g]
+    assert sk == sorted(sk, reverse=True)
+    assert max(sum(1 for x in g if x["sumber"] == s) for s in {x["sumber"] for x in g}) <= 4
 
 
 def test_etoro_saringan(tmp_path, monkeypatch):
@@ -75,3 +81,14 @@ def test_etoro_saringan(tmp_path, monkeypatch):
     x = out[0]
     assert x["url"] == "https://www.etoro.com/people/bagus" and x["aset"] == "saham" and x["risiko"] == 4
     assert abs(x["roi"] - ((1.015 ** 12) - 1) * 100) < 0.2
+
+
+def test_kurva_lolos():
+    t = pd.date_range("2025-10-01", periods=366, freq="D")
+    naik = pd.Series(np.linspace(1, 1.4, 366) + np.sin(np.arange(366)) * 0.002, index=t)
+    k = C._kurva(naik)
+    assert k["hari"] == 365 and k["roi"] > 0.3 and k["h1"] > 0 and k["h2"] > 0 and C._lolos(k, 300)
+    jatuh = naik.copy()
+    jatuh.iloc[200:] *= 0.7                                             # DD 30% → gagal
+    assert not C._lolos(C._kurva(jatuh), 300)
+    assert not C._lolos(k, 400)                                         # riwayat kurang panjang

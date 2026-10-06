@@ -29,6 +29,7 @@ import numpy as np
 import pandas as pd
 
 from . import binance_copy as B
+from . import copy_multi as CM
 from . import etoro_copy as E
 from . import mql5_signals as M
 
@@ -167,6 +168,126 @@ def etoro(segar: bool) -> list[dict]:
     return sorted(out, key=lambda x: -x["skor"])
 
 
+def _kurva(c: pd.Series) -> dict | None:
+    """Ringkas kurva ekuitas (indeks waktu): ROI, ROI 2 paruh, DD, aktif 30 hari, % periode untung."""
+    c = c.dropna()
+    if len(c) < 8:
+        return None
+    mid = c.index[0] + (c.index[-1] - c.index[0]) / 2
+    a, b = c[c.index <= mid], c[c.index >= mid]
+    d = np.diff(c.values)
+    last30 = c.iloc[-max(4, int((c.index >= c.index[-1] - pd.Timedelta(days=30)).sum())):]   # kurva jarang: ≥ 4 titik
+    return {"roi": float(c.iloc[-1] / c.iloc[0] - 1), "h1": float(a.iloc[-1] / a.iloc[0] - 1),
+            "h2": float(b.iloc[-1] / b.iloc[0] - 1), "dd": _mdd(c.values),
+            "aktif": float((np.diff(last30.values) != 0).mean()) if len(last30) > 2 else 0.0,
+            "up": float((d > 0).sum() / max((d != 0).sum(), 1)), "hari": int((c.index[-1] - c.index[0]).days)}
+
+
+def _lolos(k: dict | None, min_hari: int) -> bool:
+    return bool(k and k["hari"] >= min_hari and k["roi"] > 0 and k["h1"] > 0 and k["h2"] > 0 and k["dd"] >= -0.20
+                and k["aktif"] >= 0.3)
+
+
+def _row(platform: str, id_, name: str, url: str, k: dict, wr: float, pengikut: int, aset: str, **extra) -> dict:
+    return {"platform": platform, "id": id_, "name": name, "url": url, "roi": round(k["roi"] * 100, 1),
+            "periode": "1 th" if k["hari"] >= 300 else f"{round(k['hari'] / 30)} bln", "mdd": round(abs(k["dd"]) * 100, 1),
+            "wr": round(wr, 1), "pengikut": int(pengikut), "paruh": [round(k["h1"] * 100, 1), round(k["h2"] * 100, 1)],
+            "wr_curiga": wr >= 95, "aset": aset, "hari": k["hari"], **extra,
+            "skor": (1 + k["roi"]) ** (365 / max(k["hari"], 180)) / max(abs(k["dd"]), 0.03)}
+
+
+def okx(segar: bool) -> list[dict]:
+    if segar:
+        rows = CM.okx_list()
+        if not rows:
+            raise RuntimeError("daftar OKX kosong")
+        det = {r["uniqueCode"]: CM.okx_detail(r["uniqueCode"]) for r in rows
+               if int(r.get("leadDays") or 0) >= 365 and int(r.get("copyTraderNum") or 0) >= 30}
+        CM._save("okx_pilih", {"list": rows, "detail": det})
+        data = {"list": rows, "detail": det}
+    else:
+        data = CM.load("okx_pilih" if (CM.DIR / "okx_pilih.json.gz").exists() else "okx")
+    out = []
+    for r in data["list"]:
+        d = data["detail"].get(r["uniqueCode"])
+        if not d or int(r.get("leadDays") or 0) < 365 or int(r.get("copyTraderNum") or 0) < 30:
+            continue
+        k = _kurva(CM.curve_okx(d))
+        st = d.get("stats") or {}
+        wr = float(st.get("winRatio") or r.get("winRatio") or 0) * 100
+        if not _lolos(k, 300) or wr < 60 or float(st.get("curCopyTraderPnl") or 0) <= 0:
+            continue
+        out.append(_row("OKX", r["uniqueCode"], r["nickName"],
+                        f"https://www.okx.com/copy-trading/account/{r['uniqueCode']}?tab=swap", k, wr,
+                        int(r["copyTraderNum"]), "kripto futures", penuh=r.get("copyTraderNum") == r.get("maxCopyTraderNum")))
+    return sorted(out, key=lambda x: -x["skor"])
+
+
+def bitget(segar: bool) -> list[dict]:
+    if segar:
+        rows = CM.bitget_list()
+        if not rows:
+            raise RuntimeError("daftar Bitget kosong")
+        det = {r["uid"]: CM.bitget_detail(r["uid"]) for r in rows
+               if int(r.get("days") or 0) >= 180 and int(r.get("follow") or 0) >= 30}
+        CM._save("bitget_pilih", {"list": rows, "detail": det})
+        data = {"list": rows, "detail": det}
+    else:
+        data = CM.load("bitget_pilih" if (CM.DIR / "bitget_pilih.json.gz").exists() else "bitget")
+    out = []
+    for r in data["list"]:
+        d = data["detail"].get(r["uid"])
+        if not d or int(r.get("days") or 0) < 180 or int(r.get("follow") or 0) < 30:
+            continue
+        k = _kurva(CM.curve_bitget(d))
+        st = d.get("stats") or {}
+        wr = float(st.get("winningRate") or 0)
+        if not _lolos(k, 170) or wr < 60 or float(st.get("totalFollowProfit") or 0) <= 0:
+            continue
+        out.append(_row("Bitget", r["uid"], r["name"], f"https://www.bitget.com/copy-trading/trader/{r['uid']}/futures",
+                        k, wr, int(r["follow"]), "kripto futures",
+                        penuh=bool(r.get("max_follow")) and r.get("follow") == r.get("max_follow")))
+    return sorted(out, key=lambda x: -x["skor"])
+
+
+def hyperliquid(segar: bool) -> list[dict]:
+    if segar:
+        vs = CM.req(CM.HL_LIST) or []
+        if not vs:
+            raise RuntimeError("daftar Hyperliquid kosong")
+        now = time.time() * 1000
+        det = {}
+        for v in vs:
+            sm = v["summary"]
+            if sm.get("isClosed") or float(sm.get("tvl") or 0) < 50_000 or \
+                    (now - (sm.get("createTimeMillis") or now)) / 86_400_000 < 365:
+                continue
+            x = CM.req(CM.HL_INFO, {"type": "vaultDetails", "vaultAddress": sm["vaultAddress"]})
+            time.sleep(0.3)
+            if x:
+                pf = dict(x.get("portfolio") or []).get("allTime") or {}
+                det[sm["vaultAddress"]] = {"name": x.get("name"), "closed": x.get("isClosed"),
+                                           "deposits": x.get("allowDeposits"), "followers": len(x.get("followers") or []),
+                                           "av": pf.get("accountValueHistory"), "pnl": pf.get("pnlHistory"),
+                                           "tvl": float(sm.get("tvl") or 0)}
+        CM._save("hyperliquid_pilih", {"detail": det})
+    else:
+        f = "hyperliquid_pilih" if (CM.DIR / "hyperliquid_pilih.json.gz").exists() else "hyperliquid"
+        det = CM.load(f)["detail"]
+    out = []
+    for a, d in det.items():
+        if d.get("closed") or d.get("deposits") is False or (d.get("followers") or 0) < 30:
+            continue
+        c = CM.curve_hl(d)
+        c = c[c.index >= c.index[-1] - pd.Timedelta(days=365)] if len(c) else c
+        k = _kurva(c)
+        if not _lolos(k, 300) or k["up"] < 0.6:
+            continue
+        out.append(_row("Hyperliquid", a, d.get("name") or a[:10], f"https://app.hyperliquid.xyz/vaults/{a}", k,
+                        k["up"] * 100, int(d.get("followers") or 0), "vault kripto", wr_proksi=True))
+    return sorted(out, key=lambda x: -x["skor"])
+
+
 def _mdd(e: np.ndarray) -> float:
     return float((e / np.maximum.accumulate(e) - 1).min())
 
@@ -267,13 +388,14 @@ def main() -> None:
     segar = "--segar" in sys.argv
     lama = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
     hasil, galat = {}, {}
-    for key, fn in (("etoro", etoro), ("binance", binance), ("mql5", mql5)):
+    for key, fn in (("okx", okx), ("bitget", bitget), ("hyperliquid", hyperliquid), ("etoro", etoro),
+                    ("binance", binance), ("mql5", mql5)):
         try:
             hasil[key] = fn(segar)
         except Exception as exc:  # noqa: BLE001 - satu sumber gagal → pakai daftar minggu lalu, sumber lain tetap
             galat[key] = f"{type(exc).__name__}: {str(exc)[:120]}"
             hasil[key] = None
-            print(f"{key} gagal ({galat[key]}) → daftar lama dipakai", flush=True)
+            print(f"{key} gagal ({galat[key]}) → daftar lama dipakai (invalid)", flush=True)
     if all(v is None for v in hasil.values()):
         sys.exit("semua sumber gagal — copytrader.json tidak diubah")
     for v in hasil.values():
@@ -283,7 +405,12 @@ def main() -> None:
            "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
            # angka dari `python -m research.copy_pilih uji` (docs/eksternal/hasil_copy_pilih.txt) & `research.etoro_copy uji`
            # (docs/eksternal/hasil_etoro.txt), 6 Okt 2026
-           "uji": {"etoro": "159 periode 2013–2026, pilih dgn 12 bln → 6 bln: 10 teratas median +4%, 39% rugi • lolos aturan "
+           "uji": {"okx": "pilih dgn Okt–Apr → Apr–Okt 2026: lolos aturan median +8%, 25% rugi, DD 11% • semua +6%, 28% rugi, "
+                          "DD 18% • beli-tahan BTC +17%",
+                   "bitget": "pilih dgn 90 hr → 90 hr: lolos aturan +1%, 44% rugi, 0% hancur • ROI tertinggi 10: −17%, 40% "
+                             "hancur • untung penyalin positif hanya 12% trader",
+                   "hyperliquid": "termasuk 1.395 vault tutup; lolos aturan +1,5%/6 bln, 27% rugi • beli-tahan BTC +15%",
+                   "etoro": "159 periode 2013–2026, pilih dgn 12 bln → 6 bln: 10 teratas median +4%, 39% rugi • lolos aturan "
                             "+5%, 34% rugi • semua +0%, 38% rugi • beli indeks S&P 500 +8%, 21% rugi (lebih baik)",
                    "binance": "pilih dgn 180 hr → 185 hr berikutnya: 20 teratas median +9%, 25% rugi, DD 13%, 0% hancur "
                               "• semua penyedia +6%, 38% rugi, DD 34%, 10% hancur • beli-tahan BTC +21%, DD 29% (1 periode)",
@@ -292,17 +419,33 @@ def main() -> None:
            "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. eToro kalah dari "
                          "beli indeks S&P 500; Binance kalah dari beli-tahan BTC tetapi DD jauh lebih kecil. Jangan pilih "
                          "karena WR; mulai modal kecil.",
+           "singkat": "Saringan: untung di 2 paruh, DD ≤ 20%, WR ≥ 60%, ≥ 30 pengikut. Teruji menekan rugi & hancur, "
+                      "profit tidak dijamin (sering kalah dari beli-tahan BTC/indeks). Mulai modal kecil.",
            "n": {}}
     for key, v in hasil.items():
         obj[key] = v[:6] if v is not None else lama.get(key, [])
         obj["n"][key] = len(v) if v is not None else (lama.get("n") or {}).get(key, 0)
+    # 👥 gabungan semua situs: WR ≥ 60%, profit > 0, ≥ 30 pengikut (sudah disaring per situs); peringkat profit / DD
+    # (profit periode apa adanya, tanpa disetahunkan → riwayat 6 bulan Bitget tidak dibesar-besarkan)
+    gab = []
+    for key in hasil:
+        for x in obj[key]:
+            if x["wr"] >= 60 and x["roi"] > 0 and x.get("pengikut", 0) >= 30:
+                gab.append(dict(x, sumber=key, periode=x.get("periode", "1 th"), skor_gab=x["roi"] / max(x["mdd"], 3)))
+    gab.sort(key=lambda x: -x["skor_gab"])
+    per, top = {}, []
+    for x in gab:                                   # maks 4 per situs supaya daftar benar-benar gabungan
+        if per.get(x["sumber"], 0) < 4:
+            per[x["sumber"]] = per.get(x["sumber"], 0) + 1
+            top.append({k: v for k, v in x.items() if k != "skor_gab"})
+    obj["gabungan"] = top[:20]
     if galat:
-        obj["basi"] = sorted(galat)                 # sumber yang memakai daftar lama (aplikasi menandai)
+        obj["invalid"] = sorted(galat)              # sumber yang gagal diunduh → daftar minggu lalu (aplikasi menandai)
     OUT.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
     print(", ".join(f"{k} lolos {v}" for k, v in obj["n"].items()))
-    for x in obj["etoro"] + obj["binance"] + obj["mql5"]:
-        print(f"  {x['platform']:8} {x['name'][:24]:24} ROI {x['roi']:+.0f}% DD {x['mdd']:.0f}% WR {x['wr']:.0f}% "
-              f"pengikut {x['pengikut']} paruh {x['paruh']}")
+    for x in obj["gabungan"]:
+        print(f"  {x['platform']:11} {x['name'][:24]:24} ROI {x['roi']:+.0f}% ({x.get('periode', '1 th')}) DD {x['mdd']:.0f}% "
+              f"WR {x['wr']:.0f}% pengikut {x['pengikut']} paruh {x['paruh']}")
 
 
 if __name__ == "__main__":

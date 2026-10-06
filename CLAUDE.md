@@ -291,6 +291,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (aplikasi 4.8) dengan angka pembanding. Pembanding lain: Binance vs BTC beli-tahan +21%, MQL5 vs emas +6%.
   `www.crypto.com`/`www.robinhood.com` mengalihkan ke domain utama yang masih DIBLOKIR; Robinhood Social = salin manual,
   beta AS, tanpa data publik; Coinbase/Kraken tanpa copy trading.
+- Network penuh (6 Okt, aplikasi 4.9, izin "gabungkan semuanya ... merge"): `research/copy_multi.py` (OKX API resmi
+  public-lead-traders/public-pnl/public-stats, Bitget traderView+cycleData 180 hr, Hyperliquid vault termasuk yang tutup)
+  → `copy_pilih` field `gabungan` (WR ≥ 60, profit > 0, ≥ 30 pengikut, maks 4/situs) + `singkat`; sumber gagal = `invalid`
+  (dulu "basi"). Uji: saringan menekan rugi/DD, profit tidak lebih tinggi; Bitget ROI tertinggi 10 → −17%, 40% hancur.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
