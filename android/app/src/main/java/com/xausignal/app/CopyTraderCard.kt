@@ -34,10 +34,23 @@ import org.json.JSONObject
 /** cloud/api/copytrader.json lewat GET /api/chat?copytrader=1, dimuat sekali per sesi aplikasi. */
 object CopyTraders {
     var data by mutableStateOf<JSONObject?>(null)
+    var fromCloud by mutableStateOf(false)
+    var reason by mutableStateOf("")
     var retry by mutableStateOf(0)
-    suspend fun load() {
-        if (data != null) return
-        data = withContext(Dispatchers.IO) { ChatClient.copytrader() }
+    suspend fun load(context: android.content.Context) {
+        if (fromCloud) return
+        val (d, why) = withContext(Dispatchers.IO) { ChatClient.copytrader() }
+        if (d != null) {
+            data = d; fromCloud = true; reason = ""
+            return
+        }
+        reason = why
+        if (data == null) {                         // cadangan: salinan yang dibundel di APK (assets/copytrader.json)
+            data = withContext(Dispatchers.IO) {
+                runCatching { JSONObject(context.assets.open("copytrader.json").bufferedReader().use { it.readText() }) }
+                    .getOrNull()
+            }
+        }
     }
 }
 
@@ -48,13 +61,15 @@ object CopyTraders {
  */
 @Composable
 fun CopyTraderSection() {
-    LaunchedEffect(CopyTraders.retry) { CopyTraders.load() }
+    val context = androidx.compose.ui.platform.LocalContext.current
+    LaunchedEffect(CopyTraders.retry) { CopyTraders.load(context) }
     val d = CopyTraders.data
     if (d == null) {                                // belum termuat / cloud gagal → tetap tampil + coba lagi
         SectionTitle("👥 Copy trader terbaik")
         AppCard {
             Row(Modifier.fillMaxWidth().clickable { CopyTraders.retry++ }, verticalAlignment = Alignment.CenterVertically) {
-                Text("Memuat… ketuk untuk coba lagi", Modifier.weight(1f), style = MaterialTheme.typography.labelSmall, color = Muted)
+                Text(if (CopyTraders.reason.isBlank()) "Memuat…" else "Gagal: ${CopyTraders.reason} • ketuk untuk coba lagi",
+                    Modifier.weight(1f), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
         return
@@ -74,12 +89,17 @@ fun CopyTraderSection() {
             Modifier.fillMaxWidth().clickable { open = !open }.padding(top = 2.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Diperbarui ${d.optString("dibuat")}", Modifier.weight(1f),
+            Text("Diperbarui ${d.optString("dibuat")}" + if (CopyTraders.fromCloud) "" else " (offline)",
+                Modifier.weight(1f).clickable { if (!CopyTraders.fromCloud) CopyTraders.retry++ },
                 style = MaterialTheme.typography.labelSmall, color = Muted)
             Text(if (open) "Tutup ▴" else "Semua ▾", style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.Bold, color = Gold)
         }
         if (open) {
+            if (!CopyTraders.fromCloud && CopyTraders.reason.isNotBlank()) {
+                Text("Cloud: ${CopyTraders.reason} — memakai data bawaan APK", style = MaterialTheme.typography.labelSmall,
+                    color = SellColor)
+            }
             val invalid = d.optJSONArray("invalid")
             if (invalid != null && invalid.length() > 0) {
                 Text("Invalid: ${(0 until invalid.length()).joinToString { invalid.optString(it) }} (data minggu lalu)",
