@@ -192,3 +192,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   `.github/workflows/copytrader.yml` (mingguan, perlu ada di main agar jadwal jalan). binance_copy/mql5_signals tidak lagi
   mengimpor research.eksternal (berat) supaya jalan di Actions dengan pandas/numpy saja.
 - Daftar Binance mentah 210 MB: hanya `list_365D.json.gz` yang di-commit (json di-gitignore).
+- eToro (aplikasi 4.8): `research/etoro_copy.py unduh|uji|pack` (data `data/research/eksternal/etoro/`, riwayat
+  disatukan di `hist.json.gz`, folder `hist/` di-gitignore). Hasil: kalah dari beli indeks S&P 500.

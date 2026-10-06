@@ -285,6 +285,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (aplikasi 4.7, info + link, TANPA salin order). Workflow `.github/workflows/copytrader.yml` Senin 00:41 UTC (jalan dari
   main). Uji maju (`copy_pilih uji`): saringan mengurangi rugi/hancur/DD, bukan profit (Binance 20 teratas +9%/185 hr,
   25% rugi vs semua +6%, 38%); bias penyintas. WR ≥ 95% diberi ⚠️.
+- eToro ditambahkan 6 Okt (host `www.etoro.com` dibuka; `research/etoro_copy.py`, 7.711 investor, return bulanan 2013–2026,
+  API rankings maks 1.500 baris/query → `rankings_all` memecah rentang gain; `CopiersGain` = perubahan JUMLAH penyalin).
+  Uji maju 159 periode: lolos aturan +5%/6 bln (34% rugi) vs beli S&P 500 +8% (21%) → kalah dari indeks; tetap dipasang
+  (aplikasi 4.8) dengan angka pembanding. Pembanding lain: Binance vs BTC beli-tahan +21%, MQL5 vs emas +6%.
+  `www.crypto.com`/`www.robinhood.com` mengalihkan ke domain utama yang masih DIBLOKIR; Robinhood Social = salin manual,
+  beta AS, tanpa data publik; Coinbase/Kraken tanpa copy trading.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

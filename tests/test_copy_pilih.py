@@ -40,10 +40,38 @@ def test_file_cloud_untuk_aplikasi():
     d = json.loads((ROOT / "cloud" / "api" / "copytrader.json").read_text(encoding="utf-8"))
     pd.Timestamp(d["dibuat"])
     assert d["uji"]["binance"] and d["uji"]["mql5"] and d["kesimpulan"]
-    assert d["binance"] or d["mql5"]
-    for x in d["binance"] + d["mql5"]:
-        assert x["url"].startswith(("https://www.binance.com/", "https://www.mql5.com/"))
+    semua = d.get("etoro", []) + d["binance"] + d["mql5"]
+    assert semua
+    for x in semua:
+        assert x["url"].startswith(("https://www.etoro.com/people/", "https://www.binance.com/", "https://www.mql5.com/"))
         assert x["mdd"] <= 20 and x["wr"] >= 60 and x["paruh"][0] > 0 and x["paruh"][1] > 0
         for k in ("name", "roi", "pengikut", "aset", "platform"):
             assert k in x
     assert "skor" not in json.dumps(d)
+
+
+def test_etoro_saringan(tmp_path, monkeypatch):
+    monkeypatch.setattr(C.E, "DIR", tmp_path)
+    (tmp_path / "hist").mkdir()
+    now = C.NOW.tz_localize(None).to_period("M")
+    months = [now - i for i in range(24, 0, -1)]                         # 24 bulan penuh sebelum bulan ini
+
+    def hist(cid, gains):
+        (tmp_path / "hist" / f"{cid}.json").write_text(json.dumps(
+            {"monthly": [{"start": f"{m.start_time:%Y-%m-%d}T00:00:00Z", "gain": g, "isSimulation": False}
+                         for m, g in zip(months, gains)]}))
+
+    base = {"Verified": True, "IsFund": False, "Copiers": 50, "WeeksSinceRegistration": 200, "Gain": 20.0,
+            "PeakToValley": -8.0, "WinRatio": 70.0, "RiskScore": 4, "TopTradedAssetClassId": 5}
+    rows = [dict(base, CustomerId=1, UserName="Bagus"), dict(base, CustomerId=2, UserName="Rugi_Paruh2"),
+            dict(base, CustomerId=3, UserName="Risiko_Tinggi", RiskScore=8), dict(base, CustomerId=4, UserName="Anjlok")]
+    hist(1, [1.5] * 24)
+    hist(2, [3.0] * 18 + [-1.0] * 6)
+    hist(3, [1.5] * 24)
+    hist(4, [2.0] * 20 + [-12.0] + [2.0] * 3)
+    (tmp_path / "pilih_rankings.json").write_text(json.dumps(rows))
+    out = C.etoro(segar=False)
+    assert [x["name"] for x in out] == ["Bagus"]
+    x = out[0]
+    assert x["url"] == "https://www.etoro.com/people/bagus" and x["aset"] == "saham" and x["risiko"] == 4
+    assert abs(x["roi"] - ((1.015 ** 12) - 1) * 100) < 0.2

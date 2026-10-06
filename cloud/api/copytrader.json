@@ -2,10 +2,138 @@
  "dibuat": "2026-10-06",
  "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
  "uji": {
-  "binance": "pilih dgn 180 hr → 185 hr berikutnya: 20 teratas median +9%, 25% rugi, DD 13%, 0% hancur • semua penyedia +6%, 38% rugi, DD 34%, 10% hancur (1 periode)",
-  "mql5": "72 periode 2020–2026, pilih dgn 12 bln → 6 bln: 6 teratas median +19%, 4% rugi • semua +12%, 19% rugi (bias penyintas: nyata lebih rendah)"
+  "etoro": "159 periode 2013–2026, pilih dgn 12 bln → 6 bln: 10 teratas median +4%, 39% rugi • lolos aturan +5%, 34% rugi • semua +0%, 38% rugi • beli indeks S&P 500 +8%, 21% rugi (lebih baik)",
+  "binance": "pilih dgn 180 hr → 185 hr berikutnya: 20 teratas median +9%, 25% rugi, DD 13%, 0% hancur • semua penyedia +6%, 38% rugi, DD 34%, 10% hancur • beli-tahan BTC +21%, DD 29% (1 periode)",
+  "mql5": "72 periode 2020–2026, pilih dgn 12 bln → 6 bln: 6 teratas median +19%, 4% rugi • semua +12%, 19% rugi • beli-tahan emas +6% (bias penyintas besar: nyata lebih rendah)"
  },
- "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. Jangan pilih karena WR; mulai modal kecil.",
+ "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. eToro kalah dari beli indeks S&P 500; Binance kalah dari beli-tahan BTC tetapi DD jauh lebih kecil. Jangan pilih karena WR; mulai modal kecil.",
+ "n": {
+  "etoro": 114,
+  "binance": 9,
+  "mql5": 2
+ },
+ "etoro": [
+  {
+   "platform": "eToro",
+   "id": 5575024,
+   "name": "Rammiyatharshan",
+   "url": "https://www.etoro.com/people/rammiyatharshan",
+   "roi": 58.5,
+   "mdd": 9.6,
+   "wr": 66.2,
+   "pengikut": 95,
+   "risiko": 5,
+   "paruh": [
+    13.7,
+    39.4
+   ],
+   "bulan_terburuk": -3.7,
+   "r90": 8.2,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 10.3
+  },
+  {
+   "platform": "eToro",
+   "id": 30511646,
+   "name": "momoinvestin",
+   "url": "https://www.etoro.com/people/momoinvestin",
+   "roi": 75.3,
+   "mdd": 17.0,
+   "wr": 71.9,
+   "pengikut": 30,
+   "risiko": 3,
+   "paruh": [
+    15.1,
+    52.4
+   ],
+   "bulan_terburuk": -5.0,
+   "r90": 9.4,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 4.3
+  },
+  {
+   "platform": "eToro",
+   "id": 15176786,
+   "name": "lstadler",
+   "url": "https://www.etoro.com/people/lstadler",
+   "roi": 61.0,
+   "mdd": 13.2,
+   "wr": 65.5,
+   "pengikut": 60,
+   "risiko": 5,
+   "paruh": [
+    53.7,
+    4.7
+   ],
+   "bulan_terburuk": -4.9,
+   "r90": -0.1,
+   "wr_curiga": false,
+   "aset": "ETF",
+   "tahun": 6.2
+  },
+  {
+   "platform": "eToro",
+   "id": 13242386,
+   "name": "NatMoney",
+   "url": "https://www.etoro.com/people/natmoney",
+   "roi": 59.4,
+   "mdd": 13.6,
+   "wr": 78.4,
+   "pengikut": 38,
+   "risiko": 3,
+   "paruh": [
+    4.9,
+    52.0
+   ],
+   "bulan_terburuk": -6.4,
+   "r90": -2.2,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 6.6
+  },
+  {
+   "platform": "eToro",
+   "id": 5979377,
+   "name": "NuclearNicDev",
+   "url": "https://www.etoro.com/people/nuclearnicdev",
+   "roi": 47.9,
+   "mdd": 12.4,
+   "wr": 74.2,
+   "pengikut": 61,
+   "risiko": 4,
+   "paruh": [
+    4.8,
+    41.1
+   ],
+   "bulan_terburuk": -3.6,
+   "r90": 7.5,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 9.8
+  },
+  {
+   "platform": "eToro",
+   "id": 39885523,
+   "name": "Dividend_Diva",
+   "url": "https://www.etoro.com/people/dividend_diva",
+   "roi": 60.0,
+   "mdd": 12.9,
+   "wr": 71.0,
+   "pengikut": 915,
+   "risiko": 4,
+   "paruh": [
+    54.4,
+    3.7
+   ],
+   "bulan_terburuk": -6.6,
+   "r90": -5.3,
+   "wr_curiga": false,
+   "aset": "ETF",
+   "tahun": 2.3
+  }
+ ],
  "binance": [
   {
    "platform": "Binance",
@@ -167,9 +295,5 @@
    "aset": "XAUUSD",
    "emas": true
   }
- ],
- "n": {
-  "binance": 9,
-  "mql5": 2
- }
+ ]
 }

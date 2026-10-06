@@ -43,28 +43,27 @@ object CopyTraders {
 }
 
 /**
- * 👥 Copy trader teruji (aplikasi 4.7, permintaan pengguna 6 Okt 2026; research/copy_pilih.py, docs/COPY_TRADE.md).
- * Penyedia Binance Copy Trading & MQL5 Signals yang lolos saringan (umur ≥ 12 bln, untung di 2 paruh tahun, DD ≤ 20%,
- * WR ≥ 60–65%, pengikut nyata, tanpa grid), diperbarui mingguan oleh GitHub Actions. Ketuk = buka halaman langganan.
- * Info saja — aplikasi tidak menyalin order.
+ * 👥 Copy trader teruji (aplikasi 4.7–4.8, permintaan pengguna 6 Okt 2026; research/copy_pilih.py, docs/COPY_TRADE.md).
+ * Penyedia eToro CopyTrader, Binance Copy Trading & MQL5 Signals yang lolos saringan (umur ≥ 12 bln, untung di 2 paruh
+ * tahun, DD ≤ 20%, WR ≥ 60–65%, pengikut nyata, tanpa grid), diperbarui mingguan oleh GitHub Actions. Ketuk = buka
+ * halaman salin. Info saja — aplikasi tidak menyalin order.
  */
 @Composable
 fun CopyTraderSection() {
     LaunchedEffect(Unit) { CopyTraders.load() }
     val d = CopyTraders.data ?: return              // cloud lama / gagal → kartu tidak tampil
-    val bin = d.optJSONArray("binance")
-    val mq = d.optJSONArray("mql5")
-    val all = buildList {
-        for (i in 0 until (bin?.length() ?: 0)) bin?.optJSONObject(i)?.let { add(it) }
-        for (i in 0 until (mq?.length() ?: 0)) mq?.optJSONObject(i)?.let { add(it) }
+    val keys = listOf("etoro", "binance", "mql5")
+    val lists = keys.map { k ->
+        val a = d.optJSONArray(k)
+        (0 until (a?.length() ?: 0)).mapNotNull { a?.optJSONObject(it) }
     }
+    val all = lists.flatten()
     if (all.isEmpty()) return
     var open by rememberSaveable { mutableStateOf(false) }
-    // ringkas: 2 Binance teratas + 1 MQL5 teratas; buka = semua + bukti uji
-    val shown = if (open) all else all.filter { it.optString("platform") == "Binance" }.take(2) +
-        all.filter { it.optString("platform").startsWith("MQL5") }.take(1)
+    // ringkas: 1 teratas per platform (eToro, Binance, MQL5); buka = semua + bukti uji
+    val shown = if (open) all else lists.mapNotNull { it.firstOrNull() }
     val n = d.optJSONObject("n")
-    SectionTitle("👥 Copy trader teruji", trailing = "${(n?.optInt("binance") ?: 0) + (n?.optInt("mql5") ?: 0)} lolos")
+    SectionTitle("👥 Copy trader teruji", trailing = "${keys.sumOf { n?.optInt(it) ?: 0 }} lolos")
     AppCard {
         Text("Profit 1 tahun • DD maks • WR", Modifier.fillMaxWidth(), textAlign = TextAlign.End,
             style = MaterialTheme.typography.labelSmall, color = Muted)
@@ -83,11 +82,10 @@ fun CopyTraderSection() {
         if (open) {
             val uji = d.optJSONObject("uji")
             Text("Saringan: ${d.optString("aturan")}", style = MaterialTheme.typography.labelSmall, color = Muted)
-            uji?.optString("binance")?.takeIf { it.isNotBlank() }?.let {
-                Text("Uji Binance: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
-            }
-            uji?.optString("mql5")?.takeIf { it.isNotBlank() }?.let {
-                Text("Uji MQL5: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+            for ((k, label) in listOf("etoro" to "eToro", "binance" to "Binance", "mql5" to "MQL5")) {
+                uji?.optString(k)?.takeIf { it.isNotBlank() }?.let {
+                    Text("Uji $label: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
+                }
             }
             val basi = d.optJSONArray("basi")
             if (basi != null && basi.length() > 0) {
@@ -108,7 +106,12 @@ private fun CopyRow(x: JSONObject) {
     val uri = LocalUriHandler.current
     val platform = x.optString("platform")
     val binance = platform == "Binance"
-    val badge = if (binance) Color(0xFFF0B90B) else Color(0xFF2E7BE6)
+    val etoro = platform == "eToro"
+    val badge = when {
+        binance -> Color(0xFFF0B90B)
+        etoro -> Color(0xFF13C636)
+        else -> Color(0xFF2E7BE6)
+    }
     val roi = x.optDouble("roi")
     val wrWarn = x.optBoolean("wr_curiga")
     Row(
@@ -121,7 +124,8 @@ private fun CopyRow(x: JSONObject) {
                 .border(1.dp, badge.copy(alpha = 0.55f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            Text(if (binance) "B" else platform.removePrefix("MQL5 ").take(3), color = badge, fontWeight = FontWeight.ExtraBold,
+            Text(if (binance) "B" else if (etoro) "e" else platform.removePrefix("MQL5 ").take(3), color = badge,
+                fontWeight = FontWeight.ExtraBold,
                 style = MaterialTheme.typography.labelMedium)
         }
         Column(Modifier.weight(1f)) {
@@ -133,8 +137,9 @@ private fun CopyRow(x: JSONObject) {
             val harga = x.optDouble("harga", 0.0)
             val sub = buildList {
                 add(x.optString("aset"))
-                add("${x.optInt("pengikut")} ${if (binance) "pengikut" else "pelanggan"}")
-                if (!binance) add(if (harga > 0) "$${harga.toInt()}/bln" else "gratis")
+                add("${x.optInt("pengikut")} ${if (binance) "pengikut" else if (etoro) "penyalin" else "pelanggan"}")
+                if (etoro) add("risiko ${x.optInt("risiko")}/10")
+                else if (!binance) add(if (harga > 0) "$${harga.toInt()}/bln" else "gratis")
             }.joinToString(" • ")
             Text(sub, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }

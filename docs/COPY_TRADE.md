@@ -50,7 +50,7 @@ LAMA (< Okt 2021) vs BARU: WR tertinggi −1,8% → −12,9%; profit tertinggi +
 
 ## DIPASANG: 👥 Copy trader teruji (aplikasi 4.7, permintaan pengguna 6 Okt 2026)
 `research/copy_pilih.py` → `cloud/api/copytrader.json` → `GET /api/chat?copytrader=1` → kartu 👥 di tab Sinyal
-(`CopyTraderCard.kt`): 2 Binance + 1 MQL5 teratas, "Semua & bukti" = 6 per platform + hasil uji. Ketuk nama = buka
+(`CopyTraderCard.kt`): 1 teratas per platform (eToro, Binance, MQL5), "Semua & bukti" = 6 per platform + hasil uji. Ketuk nama = buka
 halaman salin di Binance/MQL5. **Info saja — aplikasi tidak menyalin order** (salin dilakukan pengguna di platform itu).
 Diperbarui otomatis tiap Senin 07:41 WIB (`.github/workflows/copytrader.yml`, hanya pandas/numpy); satu sumber gagal →
 daftar minggu lalu dipakai dan ditandai "basi".
@@ -88,3 +88,39 @@ Arti jujurnya:
    dibanding paruh pertama (contoh +85% → +31%) — wajar (regresi ke rata-rata), jangan harapkan ROI setahun terulang.
 5. Saran: modal kecil, sebar ke 2–3 penyedia, batasi rugi di pengaturan salin (Binance: stop loss / batas per posisi;
    MQL5: persentase dana & batas DD). Pembanding sinyal 💰 sendiri: XAU +0,21R / BTC +0,27R per sinyal sejak Okt 2021.
+
+## Platform lain (6 Okt 2026, setelah pengguna membuka host baru)
+Host yang benar-benar bisa dijangkau dari sesi: `www.etoro.com`, `www.binance.com`, `www.mql5.com`, `www.kraken.com`;
+`www.crypto.com` dan `www.robinhood.com` hanya mengalihkan ke `crypto.com` / `robinhood.com` yang **masih diblokir**;
+`www.coinbase.com` menjawab 403 (proteksi bot). Bybit, OKX, Bitget, BingX, MEXC, KuCoin, ZuluTrade, Myfxbook dll. diblokir.
+- **eToro CopyTrader** — DIUJI & DIPASANG (bagian berikut). Platform copy trade terbesar (saham, ETF, kripto, komoditas).
+- **Robinhood Social** — bukan salin otomatis: pengguna melihat trade trader terverifikasi lalu menyalin manual; beta
+  terbatas sejak 18 Mar 2026, di dalam aplikasi (butuh akun AS), tanpa data publik → tidak bisa diuji/dipasang.
+- **Crypto.com** — tidak ditemukan fitur copy trader dengan papan peringkat publik (ada trading bot); domain diblokir.
+- **Coinbase, Kraken** — tidak punya fitur copy trading.
+
+## eToro CopyTrader: data nyata 7.711 investor (`research/etoro_copy.py`, `docs/eksternal/hasil_etoro.txt`)
+Endpoint situs `www.etoro.com/sapi/rankings` (dibatasi 1.500 baris per query → dipecah per rentang gain) +
+`/sapi/userstats/gain/cid/<id>/history` (return bulanan sejak 2013, tanpa bulan simulasi). Catatan: kolom `CopiersGain`
+= perubahan JUMLAH penyalin, bukan untung penyalin. 73% investor berdagang saham, 13% ETF, 10% kripto.
+
+| eToro: tiap bulan pilih dengan 12 bln → ukur 6 bln (159 periode 2013–2026) | n rata | Median 6 bln | 12 bln | Rugi 6 bln | < −30% | LAMA (rugi) | BARU (rugi) |
+|---|---|---|---|---|---|---|---|
+| semua | 2.483 | +0,0% | +0,0% | 38% | 12% | +0,0% (39%) | +7,4% (36%) |
+| growth 12 bln tertinggi 10 | 10 | +0,3% | −0,6% | 48% | 20% | +0,0% (49%) | +0,7% (48%) |
+| % bulan untung tertinggi 10 (proksi WR) | 10 | +4,5% | +5,3% | 37% | 7% | +3,3% (41%) | +5,3% (29%) |
+| lolos aturan | 821 | +5,0% | +8,8% | 34% | 4% | +4,9% (37%) | +5,3% (30%) |
+| aturan, 10 teratas | 9 | +4,4% | +8,4% | 39% | 6% | +4,2% (41%) | +5,0% (37%) |
+| **beli indeks S&P 500 (FRED)** | – | **+8,2%** | **+14,8%** | **21%** | 0% | +8,3% (18%) | +7,8% (24%) |
+
+Arti: memilih investor eToro berdasarkan profit tertinggi = impas dengan 1 dari 5 hancur; saringan aturan mengurangi
+rugi & hancur, tetapi **tetap kalah dari sekadar membeli indeks S&P 500** (LAMA maupun BARU). Untuk eToro, ETF indeks
+lebih masuk akal daripada menyalin. Tetap dipasang di kartu 👥 (izin "pasang copy trader") dengan angka pembanding ini.
+
+Pembanding tambahan (`copy_pilih uji`): Binance 20 teratas +9% vs **beli-tahan BTC +21%** (DD 13% vs 29%) di jendela
+yang sama; MQL5 6 teratas +19% vs **beli-tahan emas +6%** (MQL5 bias penyintas besar — sinyal mati dihapus).
+
+Pemilih eToro di `research/copy_pilih.py`: terverifikasi, ≥ 30 penyalin, bukan fund, ≥ 52 minggu, gain 12 bln > 0,
+DD ≤ 20%, WR ≥ 60%, risk score ≤ 6, 12 bulan penuh terakhir positif di kedua paruh, bulan terburuk > −10%, DD bulanan
+> −20%, growth ≤ 300%. 6 Okt: 114 lolos (6 teratas tampil). Aplikasi 4.8: baris eToro (huruf "e" hijau, aset, penyalin,
+risiko/10). Workflow mingguan ikut mengambil eToro (bila Cloudflare memblokir runner GitHub → daftar lama, "basi").
