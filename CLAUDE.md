@@ -273,6 +273,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
 - Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
 
+## Copy trade (6 Okt 2026 — `docs/COPY_TRADE.md`)
+- Platform copy trade diblokir jaringan sesi. `research/copy_trade.py`: pasar tiruan 263 penyedia XAU (tren/balik/scalper/grid
+  per tahun lahir), papan 12 bln → salin 5 teratas 6 bln: WR tertinggi −6,6% & 43% periode meledak (scalper+grid); profit
+  tertinggi ≈ 0 & 32% meledak; DD ≤ 20% ≈ impas, 7% meledak. Saran: jangan pilih berdasarkan WR; pakai saringan umur/DD/anti-grid.
+- Aplikasi 4.5: tab Sinyal = satu kartu `MarketStrip` (1 baris XAU·BTC·ETH, ketuk = level BUY/SELL), TickerCard/StatusCards
+  tidak dipakai lagi di tab Sinyal.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

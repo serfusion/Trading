@@ -1,0 +1,18 @@
+# Copy trade: memilih penyedia dengan WR / profit tertinggi (research/copy_trade.py)
+Pasar tiruan: 263 penyedia XAU H1 (balik 9, grid 208, scalper 36, tren 10), bulan 2013-01–2026-09. Papan peringkat 12 bulan, salin 5 teratas, tahan 6 bulan.
+
+Penyedia yang akun-nya habis sampai akhir: balik 0/9, grid 208/208, scalper 0/36, tren 0/10
+Umur penyedia grid: median 3 bulan, 16% bertahan ≥ 12 bulan, 3% ≥ 36 bulan
+
+| Cara memilih | Return 6 bln (median / rata) | % periode rugi | % periode ada penyedia meledak | WR 12 bln lalu → 6 bln ke depan | Gaya yang terpilih |
+|---|---|---|---|---|---|
+| WR tertinggi | -6.6% / -5.9% | 78% | 43% | 95% → 93% | scalper 56%, grid 44% |
+| profit tertinggi | -0.2% / +0.1% | 50% | 32% | 62% → 61% | tren 51%, grid 38%, balik 7%, scalper 4% |
+| profit/DD | +1.2% / +0.4% | 49% | 26% | 60% → 58% | tren 56%, grid 31%, balik 7%, scalper 6% |
+| profit, DD ≤ 20% | -1.1% / -1.6% | 55% | 7% | 46% → 48% | tren 71%, scalper 13%, balik 9%, grid 6% |
+| acak | -6.8% / -7.0% | 87% | 7% | nan% → 71% | scalper 60%, tren 18%, balik 16%, grid 5% |
+   WR tertinggi: LAMA rata -1.8% (meledak 42%) | BARU rata -12.9% (meledak 44%)
+   profit tertinggi: LAMA rata +1.7% (meledak 29%) | BARU rata -2.7% (meledak 37%)
+   profit/DD: LAMA rata +2.1% (meledak 19%) | BARU rata -2.5% (meledak 37%)
+   profit, DD ≤ 20%: LAMA rata -3.5% (meledak 6%) | BARU rata +1.8% (meledak 7%)
+   acak: LAMA rata -6.9% (meledak 9%) | BARU rata -7.1% (meledak 6%)
