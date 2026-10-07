@@ -96,7 +96,7 @@ def attach(persiapan: dict, calendar: list, store, now: datetime, fetch_gold) ->
                 "teks": f"📊 Emas 1 jam setelah {key}: {max(naik, 100 - naik)}% {'NAIK 🟢' if naik >= 50 else 'TURUN 🔴'}",
                 "bukti": f"tebakan model teruji benar {u['benar']:.0f}% ({u['n']} rilis 2015–2025) • sejak Okt 2021 "
                          f"{u['baru']:.0f}% • belum pasti, dihitung {now:%H:%M} UTC",
-                "dihitung": _core.iso(now)}
+                "dihitung": _core.iso(now), "uji": u}
     if changed:
         state["mem"] = mem
         store.save_state(state, "prarilis")

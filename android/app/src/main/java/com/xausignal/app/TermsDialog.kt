@@ -47,6 +47,12 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                     "WR ±63%, +0,75R/sinyal, untung 13/14 th (XAU) & 11/11 th (BTC). Tetap bisa kalah beruntun.",
                     color = Gold)
                 Text("• Peringkat: ⚡ Emas > 🥈 > 🥉 > Biasa (lot ikut peringkat bila Modal diisi).")
+                Text("• Prediksi berita (urutan terbaik → biasa):", fontWeight = FontWeight.Bold)
+                Text("  ⚡ Sangat kuat: peluang ≥ 60% & teruji ≥ 60% di dua periode (NFP setelah rilis lalu di atas " +
+                    "perkiraan: emas naik 1 jam 72% s.d. 2021 / 61% sejak Okt 2021)", color = Gold)
+                Text("  🥈 Kuat: model sebelum rilis NFP/JOLTS/Fed (benar 60–65% saat diuji), peluang ≥ 60%")
+                Text("  🥉 Lemah: model, peluang 55–59%")
+                Text("  Biasa: dasar historis 50–57% (≈ lempar koin)")
                 Text("• ⚠️ Mode perang = minyak naik ≥10% dalam 10 hari: sinyal emas historis lemah, pakai lot kecil.",
                     color = SellColor)
                 Text("• Lot akun Cent, 5 posisi/sinyal, contoh SL \$45:", fontWeight = FontWeight.Bold)

@@ -35,3 +35,13 @@ def test_attach_berita_dan_mendatang():
     assert prep["berita"][0]["prediksi"]["teks"] == "JOLTS: peluang emas naik 1 jam 66%"
     assert prep["mendatang"][0]["prediksi"]["sumber"] == "aturan"
     assert prep["mendatang"][1]["prediksi"]["teks"].startswith("Fed: peluang emas")
+
+
+def test_peringkat_kilat():
+    prep = {"mendatang": [{"title": "Non-Farm Employment Change"}, {"title": "CPI m/m"}]}
+    P.attach(prep, Store({"prarilis": {"mem": {"Non-Farm Employment Change": {"s": 1, "time": "t"}}}}))
+    nfp, cpi = (c["prediksi"] for c in prep["mendatang"])
+    assert nfp["teks"].startswith("⚡ NFP:") and nfp["peringkat"] == 1
+    assert cpi["peringkat"] == 4 and not cpi["teks"].startswith("⚡")
+    m = P.untuk({"title": "JOLTS Job Openings", "prarilis": {"naik": 66, "uji": {"lama": 72, "baru": 58}}})
+    assert P.peringkat(m, {"prarilis": {"uji": {"lama": 72, "baru": 58}}}) == 2
