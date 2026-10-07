@@ -1,7 +1,8 @@
 {
- "dibuat": "2026-10-06",
+ "dibuat": "2026-10-07",
  "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
  "uji": {
+  "hl_trader": "pilih s.d. 9 Jul → ukur 9 Jul–7 Okt 2026 (research/hl_trader.py uji): 1.000 akun terbesar: lolos aturan median +9%, 26% rugi, DD 6% • 10 teratas profit/DD +25%, 10% rugi, DD 4% • semua +36% (bias: akun yang kini besar = pemenang terbaru) • 400 akun acak: median 0%, 30% rugi, 16% hancur • beli-tahan BTC +30%, DD 7%",
   "okx": "pilih dgn Okt–Apr → Apr–Okt 2026: lolos aturan median +8%, 25% rugi, DD 11% • semua +6%, 28% rugi, DD 18% • beli-tahan BTC +17%",
   "bitget": "pilih dgn 90 hr → 90 hr: lolos aturan +1%, 44% rugi, 0% hancur • ROI tertinggi 10: −17%, 40% hancur • untung penyalin positif hanya 12% trader",
   "hyperliquid": "termasuk 1.395 vault tutup; lolos aturan +1,5%/6 bln, 27% rugi • beli-tahan BTC +15%",
@@ -12,13 +13,208 @@
  "kesimpulan": "Saringan ini terutama MENGURANGI risiko rugi & hancur, bukan menjamin profit. eToro kalah dari beli indeks S&P 500; Binance kalah dari beli-tahan BTC tetapi DD jauh lebih kecil. Jangan pilih karena WR; mulai modal kecil.",
  "singkat": "Saringan: untung di 2 paruh, DD ≤ 20%, WR ≥ 60%, ≥ 30 pengikut. Teruji menekan rugi & hancur, profit tidak dijamin (sering kalah dari beli-tahan BTC/indeks). Mulai modal kecil.",
  "n": {
+  "hl_trader": 13,
   "okx": 3,
   "bitget": 1,
-  "hyperliquid": 5,
+  "hyperliquid": 9,
   "etoro": 114,
   "binance": 9,
   "mql5": 2
  },
+ "hl_trader": [
+  {
+   "platform": "Hyperliquid",
+   "id": "0xf5a523b171032c060d49c39fbf2e9bec473e1286",
+   "name": "0xf5a5…1286",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xf5a523b171032c060d49c39fbf2e9bec473e1286",
+   "roi": 204.2,
+   "periode": "1 th",
+   "mdd": 4.6,
+   "wr": 69.6,
+   "pengikut": 0,
+   "paruh": [
+    159.6,
+    16.5
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 3527160,
+   "transaksi": 881,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x885989fd94d30c150e6eaf897090509bce4f6aa8",
+   "name": "frikendelbroodjes",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x885989fd94d30c150e6eaf897090509bce4f6aa8",
+   "roi": 101.7,
+   "periode": "1 th",
+   "mdd": 1.3,
+   "wr": 98.8,
+   "pengikut": 0,
+   "paruh": [
+    33.9,
+    50.7
+   ],
+   "wr_curiga": true,
+   "aset": "kripto perp",
+   "hari": 363,
+   "modal": 1666714,
+   "transaksi": 252,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 2
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xa5fd942d4badbab4fe84a9e10f565dd40d5f15ff",
+   "name": "0xa5fd…15ff",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xa5fd942d4badbab4fe84a9e10f565dd40d5f15ff",
+   "roi": 291.5,
+   "periode": "1 th",
+   "mdd": 7.6,
+   "wr": 97.5,
+   "pengikut": 0,
+   "paruh": [
+    116.8,
+    65.5
+   ],
+   "wr_curiga": true,
+   "aset": "kripto perp",
+   "hari": 363,
+   "modal": 2636898,
+   "transaksi": 356,
+   "posisi_buka": 31,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 2
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x6bf7adc30d071f426193a56dad0947176fac84ba",
+   "name": "0x6bf7…84ba",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x6bf7adc30d071f426193a56dad0947176fac84ba",
+   "roi": 76.4,
+   "periode": "8 bln",
+   "mdd": 6.2,
+   "wr": 93.7,
+   "pengikut": 0,
+   "paruh": [
+    52.0,
+    10.8
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 230,
+   "modal": 1454808,
+   "transaksi": 207,
+   "posisi_buka": 2,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xab5e6f394951c28ab1873007e373202689cdbec3",
+   "name": "0xab5e…bec3",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xab5e6f394951c28ab1873007e373202689cdbec3",
+   "roi": 208.0,
+   "periode": "1 th",
+   "mdd": 8.3,
+   "wr": 70.1,
+   "pengikut": 0,
+   "paruh": [
+    182.3,
+    9.4
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 4160365,
+   "transaksi": 785,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xf299943c201aae7b840a228aaf3e3792ad73f4b5",
+   "name": "0xf299…f4b5",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xf299943c201aae7b840a228aaf3e3792ad73f4b5",
+   "roi": 8.5,
+   "periode": "8 bln",
+   "mdd": 1.0,
+   "wr": 91.5,
+   "pengikut": 0,
+   "paruh": [
+    0.2,
+    8.3
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 244,
+   "modal": 6231758,
+   "transaksi": 234,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 2
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x71cfa5e263e866f7961091e01ebc5a2d11616c20",
+   "name": "0x71cf…6c20",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x71cfa5e263e866f7961091e01ebc5a2d11616c20",
+   "roi": 90.2,
+   "periode": "1 th",
+   "mdd": 5.7,
+   "wr": 67.5,
+   "pengikut": 0,
+   "paruh": [
+    69.0,
+    12.2
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 1854235,
+   "transaksi": 1263,
+   "posisi_buka": 1,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x96c9487af21d18ac5f4c841af44a011968445709",
+   "name": "0x96c9…5709",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x96c9487af21d18ac5f4c841af44a011968445709",
+   "roi": 165.4,
+   "periode": "7 bln",
+   "mdd": 18.4,
+   "wr": 62.0,
+   "pengikut": 0,
+   "paruh": [
+    152.4,
+    9.6
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 216,
+   "modal": 2629003,
+   "transaksi": 329,
+   "posisi_buka": 1,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1
+  }
+ ],
  "okx": [
   {
    "platform": "OKX",
@@ -37,7 +233,9 @@
    "wr_curiga": false,
    "aset": "kripto futures",
    "hari": 365,
-   "penuh": false
+   "penuh": false,
+   "terlihat": false,
+   "tier": 2
   },
   {
    "platform": "OKX",
@@ -48,7 +246,7 @@
    "periode": "1 th",
    "mdd": 10.8,
    "wr": 61.1,
-   "pengikut": 579,
+   "pengikut": 580,
    "paruh": [
     16.3,
     79.2
@@ -56,7 +254,9 @@
    "wr_curiga": false,
    "aset": "kripto futures",
    "hari": 365,
-   "penuh": false
+   "penuh": false,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "OKX",
@@ -75,7 +275,9 @@
    "wr_curiga": false,
    "aset": "kripto futures",
    "hari": 365,
-   "penuh": false
+   "penuh": false,
+   "terlihat": true,
+   "tier": 2
   }
  ],
  "bitget": [
@@ -84,22 +286,45 @@
    "id": "b1b447768db03153a49c",
    "name": "sunrise-e",
    "url": "https://www.bitget.com/copy-trading/trader/b1b447768db03153a49c/futures",
-   "roi": 58.0,
+   "roi": 57.8,
    "periode": "6 bln",
    "mdd": 6.0,
    "wr": 92.3,
    "pengikut": 30,
    "paruh": [
     27.6,
-    21.2
+    21.1
    ],
    "wr_curiga": false,
    "aset": "kripto futures",
    "hari": 179,
-   "penuh": false
+   "penuh": false,
+   "terlihat": true,
+   "tier": 1
   }
  ],
  "hyperliquid": [
+  {
+   "platform": "Hyperliquid",
+   "id": "0xbe421ec5af0be9ea2b2a53b38a089ee352c9f325",
+   "name": "Super Moon",
+   "url": "https://app.hyperliquid.xyz/vaults/0xbe421ec5af0be9ea2b2a53b38a089ee352c9f325",
+   "roi": 10.6,
+   "periode": "1 th",
+   "mdd": 2.9,
+   "wr": 61.8,
+   "pengikut": 33,
+   "paruh": [
+    6.3,
+    4.0
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 2
+  },
   {
    "platform": "Hyperliquid",
    "id": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
@@ -117,83 +342,135 @@
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 355,
-   "wr_proksi": true
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 2
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
+   "name": "BitRocket",
+   "url": "https://app.hyperliquid.xyz/vaults/0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
+   "roi": 27.2,
+   "periode": "1 th",
+   "mdd": 3.7,
+   "wr": 84.9,
+   "pengikut": 31,
+   "paruh": [
+    17.0,
+    8.4
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "Hyperliquid",
    "id": "0xd57c9295947b5a616a3933344ef03a1ad67318ea",
    "name": "LowRiskCryptoGainer",
    "url": "https://app.hyperliquid.xyz/vaults/0xd57c9295947b5a616a3933344ef03a1ad67318ea",
-   "roi": 20.2,
+   "roi": 20.3,
    "periode": "1 th",
    "mdd": 4.7,
    "wr": 75.9,
    "pengikut": 100,
    "paruh": [
     12.2,
-    6.6
+    6.7
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
-   "wr_proksi": true
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "Hyperliquid",
    "id": "0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
    "name": "PF1",
    "url": "https://app.hyperliquid.xyz/vaults/0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
-   "roi": 48.4,
+   "roi": 48.5,
    "periode": "1 th",
    "mdd": 7.3,
    "wr": 76.8,
    "pengikut": 90,
    "paruh": [
     25.4,
-    18.2
+    18.3
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
-   "wr_proksi": true
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x490af7d4a048a81db0f677517ed6373565b42349",
+   "name": "Passivbot Canon",
+   "url": "https://app.hyperliquid.xyz/vaults/0x490af7d4a048a81db0f677517ed6373565b42349",
+   "roi": 35.5,
+   "periode": "1 th",
+   "mdd": 9.0,
+   "wr": 71.4,
+   "pengikut": 35,
+   "paruh": [
+    9.2,
+    23.0
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 2
   },
   {
    "platform": "Hyperliquid",
    "id": "0x1e37a337ed460039d1b15bd3bc489de789768d5e",
    "name": "Growi HF",
    "url": "https://app.hyperliquid.xyz/vaults/0x1e37a337ed460039d1b15bd3bc489de789768d5e",
-   "roi": 54.9,
+   "roi": 54.8,
    "periode": "1 th",
    "mdd": 12.3,
    "wr": 75.0,
    "pengikut": 100,
    "paruh": [
     34.4,
-    13.8
+    13.7
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
-   "wr_proksi": true
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "Hyperliquid",
-   "id": "0xba939edf38c0ae0cc689c98b492e0535f43e4550",
-   "name": "22Cap",
-   "url": "https://app.hyperliquid.xyz/vaults/0xba939edf38c0ae0cc689c98b492e0535f43e4550",
-   "roi": 15.4,
+   "id": "0xc16e0bf84ea8c2b85457010602cb6fa030bc1fd4",
+   "name": "HYPErQuantum4",
+   "url": "https://app.hyperliquid.xyz/vaults/0xc16e0bf84ea8c2b85457010602cb6fa030bc1fd4",
+   "roi": 85.2,
    "periode": "1 th",
-   "mdd": 10.7,
-   "wr": 71.4,
-   "pengikut": 100,
+   "mdd": 15.9,
+   "wr": 78.2,
+   "pengikut": 42,
    "paruh": [
-    3.1,
-    10.4
+    37.8,
+    33.2
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
-   "hari": 355,
-   "wr_proksi": true
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1
   }
  ],
  "etoro": [
@@ -215,7 +492,9 @@
    "r90": 8.2,
    "wr_curiga": false,
    "aset": "saham",
-   "tahun": 10.3
+   "tahun": 10.3,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "eToro",
@@ -235,7 +514,9 @@
    "r90": 9.4,
    "wr_curiga": false,
    "aset": "saham",
-   "tahun": 4.3
+   "tahun": 4.3,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "eToro",
@@ -255,7 +536,9 @@
    "r90": -0.1,
    "wr_curiga": false,
    "aset": "ETF",
-   "tahun": 6.2
+   "tahun": 6.2,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "eToro",
@@ -275,7 +558,9 @@
    "r90": -2.2,
    "wr_curiga": false,
    "aset": "saham",
-   "tahun": 6.6
+   "tahun": 6.6,
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "eToro",
@@ -295,7 +580,9 @@
    "r90": 7.5,
    "wr_curiga": false,
    "aset": "saham",
-   "tahun": 9.8
+   "tahun": 9.8,
+   "terlihat": true,
+   "tier": 2
   },
   {
    "platform": "eToro",
@@ -305,7 +592,7 @@
    "roi": 60.0,
    "mdd": 12.9,
    "wr": 71.0,
-   "pengikut": 916,
+   "pengikut": 915,
    "risiko": 4,
    "paruh": [
     54.4,
@@ -315,7 +602,53 @@
    "r90": -5.3,
    "wr_curiga": false,
    "aset": "ETF",
-   "tahun": 2.3
+   "tahun": 2.3,
+   "terlihat": true,
+   "tier": 1
+  },
+  {
+   "platform": "eToro",
+   "id": 36275099,
+   "name": "ThomasMead97",
+   "url": "https://www.etoro.com/people/thomasmead97",
+   "roi": 52.5,
+   "mdd": 15.9,
+   "wr": 65.4,
+   "pengikut": 37,
+   "risiko": 4,
+   "paruh": [
+    6.0,
+    43.9
+   ],
+   "bulan_terburuk": -5.8,
+   "r90": -0.4,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 2.7,
+   "terlihat": true,
+   "tier": 2
+  },
+  {
+   "platform": "eToro",
+   "id": 13412279,
+   "name": "taherkamari",
+   "url": "https://www.etoro.com/people/taherkamari",
+   "roi": 67.9,
+   "mdd": 13.6,
+   "wr": 75.7,
+   "pengikut": 135,
+   "risiko": 4,
+   "paruh": [
+    19.8,
+    40.2
+   ],
+   "bulan_terburuk": -7.9,
+   "r90": 2.8,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 6.6,
+   "terlihat": true,
+   "tier": 1
   }
  ],
  "binance": [
@@ -329,14 +662,16 @@
    "wr": 99.9,
    "pengikut": 119,
    "penuh": false,
-   "pnl_pengikut": 18132,
+   "pnl_pengikut": 18128,
    "paruh": [
     84.9,
     31.1
    ],
    "r90": 8.1,
    "wr_curiga": true,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2
   },
   {
    "platform": "Binance",
@@ -355,7 +690,9 @@
    ],
    "r90": 0.9,
    "wr_curiga": false,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2
   },
   {
    "platform": "Binance",
@@ -365,7 +702,7 @@
    "roi": 124.4,
    "mdd": 12.6,
    "wr": 88.3,
-   "pengikut": 135,
+   "pengikut": 136,
    "penuh": false,
    "pnl_pengikut": 55345,
    "paruh": [
@@ -374,7 +711,9 @@
    ],
    "r90": 7.5,
    "wr_curiga": false,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 1
   },
   {
    "platform": "Binance",
@@ -393,7 +732,9 @@
    ],
    "r90": 9.4,
    "wr_curiga": true,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 2
   },
   {
    "platform": "Binance",
@@ -402,17 +743,19 @@
    "url": "https://www.binance.com/en/copy-trading/lead-details/4423799055974246144",
    "roi": 77.9,
    "mdd": 9.7,
-   "wr": 78.7,
+   "wr": 78.6,
    "pengikut": 75,
    "penuh": false,
-   "pnl_pengikut": 6245,
+   "pnl_pengikut": 6250,
    "paruh": [
     71.8,
     2.5
    ],
    "r90": 6.5,
    "wr_curiga": false,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2
   },
   {
    "platform": "Binance",
@@ -431,7 +774,51 @@
    ],
    "r90": 1.6,
    "wr_curiga": false,
-   "aset": "kripto futures"
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 1
+  },
+  {
+   "platform": "Binance",
+   "id": "4456447855719904768",
+   "name": "羊汤资本-阿汤哥",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4456447855719904768",
+   "roi": 49.2,
+   "mdd": 8.8,
+   "wr": 80.0,
+   "pengikut": 204,
+   "penuh": false,
+   "pnl_pengikut": 1042226,
+   "paruh": [
+    13.5,
+    31.4
+   ],
+   "r90": 28.2,
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2
+  },
+  {
+   "platform": "Binance",
+   "id": "4520644381136785152",
+   "name": "CuanBot",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4520644381136785152",
+   "roi": 60.5,
+   "mdd": 12.5,
+   "wr": 99.8,
+   "pengikut": 91,
+   "penuh": false,
+   "pnl_pengikut": 3488,
+   "paruh": [
+    36.0,
+    18.1
+   ],
+   "r90": 8.0,
+   "wr_curiga": true,
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 2
   }
  ],
  "mql5": [
@@ -442,7 +829,7 @@
    "url": "https://www.mql5.com/en/signals/2356441",
    "roi": 242.9,
    "mdd": 14.0,
-   "wr": 72.0,
+   "wr": 73.0,
    "pengikut": 11,
    "harga": 30.0,
    "minggu": 72,
@@ -451,11 +838,13 @@
     45.6
    ],
    "bulan_terburuk": 2.7,
-   "beban": 2.89,
+   "beban": 2.81,
    "r90": 21.4,
    "wr_curiga": false,
    "aset": "NZDCAD",
-   "emas": false
+   "emas": false,
+   "terlihat": false,
+   "tier": 2
   },
   {
    "platform": "MQL5 MT5",
@@ -465,195 +854,7 @@
    "roi": 106.9,
    "mdd": 17.0,
    "wr": 72.0,
-   "pengikut": 66,
-   "harga": 35.0,
-   "minggu": 102,
-   "paruh": [
-    42.1,
-    45.5
-   ],
-   "bulan_terburuk": -4.2,
-   "beban": 4.77,
-   "r90": 23.8,
-   "wr_curiga": false,
-   "aset": "XAUUSD",
-   "emas": true
-  }
- ],
- "gabungan": [
-  {
-   "platform": "Binance",
-   "id": "4662628079386208001",
-   "name": "五路财神的小公主",
-   "url": "https://www.binance.com/en/copy-trading/lead-details/4662628079386208001",
-   "roi": 140.4,
-   "mdd": 9.1,
-   "wr": 99.9,
-   "pengikut": 119,
-   "penuh": false,
-   "pnl_pengikut": 18132,
-   "paruh": [
-    84.9,
-    31.1
-   ],
-   "r90": 8.1,
-   "wr_curiga": true,
-   "aset": "kripto futures",
-   "sumber": "binance",
-   "periode": "1 th"
-  },
-  {
-   "platform": "Binance",
-   "id": "4566696155639181057",
-   "name": "Eenis的绝对盘感",
-   "url": "https://www.binance.com/en/copy-trading/lead-details/4566696155639181057",
-   "roi": 168.5,
-   "mdd": 14.9,
-   "wr": 78.0,
-   "pengikut": 80,
-   "penuh": false,
-   "pnl_pengikut": 641692,
-   "paruh": [
-    119.4,
-    11.2
-   ],
-   "r90": 0.9,
-   "wr_curiga": false,
-   "aset": "kripto futures",
-   "sumber": "binance",
-   "periode": "1 th"
-  },
-  {
-   "platform": "OKX",
-   "id": "94FC2CF4A047C10E",
-   "name": "Xiaoyao Lee",
-   "url": "https://www.okx.com/copy-trading/account/94FC2CF4A047C10E?tab=swap",
-   "roi": 108.4,
-   "periode": "1 th",
-   "mdd": 10.8,
-   "wr": 61.1,
-   "pengikut": 579,
-   "paruh": [
-    16.3,
-    79.2
-   ],
-   "wr_curiga": false,
-   "aset": "kripto futures",
-   "hari": 365,
-   "penuh": false,
-   "sumber": "okx"
-  },
-  {
-   "platform": "Binance",
-   "id": "4235245655188894209",
-   "name": "MoneyBoxTM",
-   "url": "https://www.binance.com/en/copy-trading/lead-details/4235245655188894209",
-   "roi": 124.4,
-   "mdd": 12.6,
-   "wr": 88.3,
-   "pengikut": 135,
-   "penuh": false,
-   "pnl_pengikut": 55345,
-   "paruh": [
-    81.9,
-    23.3
-   ],
-   "r90": 7.5,
-   "wr_curiga": false,
-   "aset": "kripto futures",
-   "sumber": "binance",
-   "periode": "1 th"
-  },
-  {
-   "platform": "OKX",
-   "id": "823664FB73B79E41",
-   "name": "Jungle law",
-   "url": "https://www.okx.com/copy-trading/account/823664FB73B79E41?tab=swap",
-   "roi": 30.4,
-   "periode": "1 th",
-   "mdd": 3.1,
-   "wr": 61.6,
-   "pengikut": 348,
-   "paruh": [
-    18.4,
-    9.9
-   ],
-   "wr_curiga": false,
-   "aset": "kripto futures",
-   "hari": 365,
-   "penuh": false,
-   "sumber": "okx"
-  },
-  {
-   "platform": "Bitget",
-   "id": "b1b447768db03153a49c",
-   "name": "sunrise-e",
-   "url": "https://www.bitget.com/copy-trading/trader/b1b447768db03153a49c/futures",
-   "roi": 58.0,
-   "periode": "6 bln",
-   "mdd": 6.0,
-   "wr": 92.3,
-   "pengikut": 30,
-   "paruh": [
-    27.6,
-    21.2
-   ],
-   "wr_curiga": false,
-   "aset": "kripto futures",
-   "hari": 179,
-   "penuh": false,
-   "sumber": "bitget"
-  },
-  {
-   "platform": "Binance",
-   "id": "4300516091842181632",
-   "name": "Diamond-Hamsters",
-   "url": "https://www.binance.com/en/copy-trading/lead-details/4300516091842181632",
-   "roi": 135.4,
-   "mdd": 14.7,
-   "wr": 95.5,
-   "pengikut": 149,
-   "penuh": false,
-   "pnl_pengikut": 37633,
-   "paruh": [
-    95.5,
-    20.4
-   ],
-   "r90": 9.4,
-   "wr_curiga": true,
-   "aset": "kripto futures",
-   "sumber": "binance",
-   "periode": "1 th"
-  },
-  {
-   "platform": "Hyperliquid",
-   "id": "0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
-   "name": "PF1",
-   "url": "https://app.hyperliquid.xyz/vaults/0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
-   "roi": 48.4,
-   "periode": "1 th",
-   "mdd": 7.3,
-   "wr": 76.8,
-   "pengikut": 90,
-   "paruh": [
-    25.4,
-    18.2
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 362,
-   "wr_proksi": true,
-   "sumber": "hyperliquid"
-  },
-  {
-   "platform": "MQL5 MT5",
-   "id": 2265877,
-   "name": "Gold Reaper New V2 2",
-   "url": "https://www.mql5.com/en/signals/2265877",
-   "roi": 106.9,
-   "mdd": 17.0,
-   "wr": 72.0,
-   "pengikut": 66,
+   "pengikut": 67,
    "harga": 35.0,
    "minggu": 102,
    "paruh": [
@@ -666,8 +867,269 @@
    "wr_curiga": false,
    "aset": "XAUUSD",
    "emas": true,
-   "sumber": "mql5",
+   "terlihat": false,
+   "tier": 2
+  }
+ ],
+ "gabungan": [
+  {
+   "platform": "Hyperliquid",
+   "id": "0xf5a523b171032c060d49c39fbf2e9bec473e1286",
+   "name": "0xf5a5…1286",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xf5a523b171032c060d49c39fbf2e9bec473e1286",
+   "roi": 204.2,
+   "periode": "1 th",
+   "mdd": 4.6,
+   "wr": 69.6,
+   "pengikut": 0,
+   "paruh": [
+    159.6,
+    16.5
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 3527160,
+   "transaksi": 881,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xab5e6f394951c28ab1873007e373202689cdbec3",
+   "name": "0xab5e…bec3",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xab5e6f394951c28ab1873007e373202689cdbec3",
+   "roi": 208.0,
+   "periode": "1 th",
+   "mdd": 8.3,
+   "wr": 70.1,
+   "pengikut": 0,
+   "paruh": [
+    182.3,
+    9.4
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 4160365,
+   "transaksi": 785,
+   "posisi_buka": 0,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x71cfa5e263e866f7961091e01ebc5a2d11616c20",
+   "name": "0x71cf…6c20",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x71cfa5e263e866f7961091e01ebc5a2d11616c20",
+   "roi": 90.2,
+   "periode": "1 th",
+   "mdd": 5.7,
+   "wr": 67.5,
+   "pengikut": 0,
+   "paruh": [
+    69.0,
+    12.2
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 349,
+   "modal": 1854235,
+   "transaksi": 1263,
+   "posisi_buka": 1,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x6bf7adc30d071f426193a56dad0947176fac84ba",
+   "name": "0x6bf7…84ba",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x6bf7adc30d071f426193a56dad0947176fac84ba",
+   "roi": 76.4,
+   "periode": "8 bln",
+   "mdd": 6.2,
+   "wr": 93.7,
+   "pengikut": 0,
+   "paruh": [
+    52.0,
+    10.8
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 230,
+   "modal": 1454808,
+   "transaksi": 207,
+   "posisi_buka": 2,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "OKX",
+   "id": "94FC2CF4A047C10E",
+   "name": "Xiaoyao Lee",
+   "url": "https://www.okx.com/copy-trading/account/94FC2CF4A047C10E?tab=swap",
+   "roi": 108.4,
+   "periode": "1 th",
+   "mdd": 10.8,
+   "wr": 61.1,
+   "pengikut": 580,
+   "paruh": [
+    16.3,
+    79.2
+   ],
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "hari": 365,
+   "penuh": false,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "okx"
+  },
+  {
+   "platform": "Binance",
+   "id": "4235245655188894209",
+   "name": "MoneyBoxTM",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4235245655188894209",
+   "roi": 124.4,
+   "mdd": 12.6,
+   "wr": 88.3,
+   "pengikut": 136,
+   "penuh": false,
+   "pnl_pengikut": 55345,
+   "paruh": [
+    81.9,
+    23.3
+   ],
+   "r90": 7.5,
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "binance",
    "periode": "1 th"
+  },
+  {
+   "platform": "Bitget",
+   "id": "b1b447768db03153a49c",
+   "name": "sunrise-e",
+   "url": "https://www.bitget.com/copy-trading/trader/b1b447768db03153a49c/futures",
+   "roi": 57.8,
+   "periode": "6 bln",
+   "mdd": 6.0,
+   "wr": 92.3,
+   "pengikut": 30,
+   "paruh": [
+    27.6,
+    21.1
+   ],
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "hari": 179,
+   "penuh": false,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "bitget"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x96c9487af21d18ac5f4c841af44a011968445709",
+   "name": "0x96c9…5709",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0x96c9487af21d18ac5f4c841af44a011968445709",
+   "roi": 165.4,
+   "periode": "7 bln",
+   "mdd": 18.4,
+   "wr": 62.0,
+   "pengikut": 0,
+   "paruh": [
+    152.4,
+    9.6
+   ],
+   "wr_curiga": false,
+   "aset": "kripto perp",
+   "hari": 216,
+   "modal": 2629003,
+   "transaksi": 329,
+   "posisi_buka": 1,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 1,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
+   "name": "BitRocket",
+   "url": "https://app.hyperliquid.xyz/vaults/0xa415c4ded17cac76a1d81a54d9f4aeb48ffd4dd0",
+   "roi": 27.2,
+   "periode": "1 th",
+   "mdd": 3.7,
+   "wr": 84.9,
+   "pengikut": 31,
+   "paruh": [
+    17.0,
+    8.4
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "hyperliquid"
+  },
+  {
+   "platform": "Binance",
+   "id": "4480185549170733825",
+   "name": "Carlson_555",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4480185549170733825",
+   "roi": 88.3,
+   "mdd": 12.2,
+   "wr": 89.0,
+   "pengikut": 115,
+   "penuh": false,
+   "pnl_pengikut": 11963,
+   "paruh": [
+    81.4,
+    3.8
+   ],
+   "r90": 1.6,
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "binance",
+   "periode": "1 th"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
+   "name": "PF1",
+   "url": "https://app.hyperliquid.xyz/vaults/0xa1b6d8efbcb2fb750a84dbc05649fa4968034f04",
+   "roi": 48.5,
+   "periode": "1 th",
+   "mdd": 7.3,
+   "wr": 76.8,
+   "pengikut": 90,
+   "paruh": [
+    25.4,
+    18.3
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "hyperliquid"
   },
   {
    "platform": "eToro",
@@ -688,6 +1150,54 @@
    "wr_curiga": false,
    "aset": "saham",
    "tahun": 10.3,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "etoro",
+   "periode": "1 th"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xc16e0bf84ea8c2b85457010602cb6fa030bc1fd4",
+   "name": "HYPErQuantum4",
+   "url": "https://app.hyperliquid.xyz/vaults/0xc16e0bf84ea8c2b85457010602cb6fa030bc1fd4",
+   "roi": 85.2,
+   "periode": "1 th",
+   "mdd": 15.9,
+   "wr": 78.2,
+   "pengikut": 42,
+   "paruh": [
+    37.8,
+    33.2
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "hyperliquid"
+  },
+  {
+   "platform": "eToro",
+   "id": 13412279,
+   "name": "taherkamari",
+   "url": "https://www.etoro.com/people/taherkamari",
+   "roi": 67.9,
+   "mdd": 13.6,
+   "wr": 75.7,
+   "pengikut": 135,
+   "risiko": 4,
+   "paruh": [
+    19.8,
+    40.2
+   ],
+   "bulan_terburuk": -7.9,
+   "r90": 2.8,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 6.6,
+   "terlihat": true,
+   "tier": 1,
    "sumber": "etoro",
    "periode": "1 th"
   },
@@ -699,7 +1209,7 @@
    "roi": 60.0,
    "mdd": 12.9,
    "wr": 71.0,
-   "pengikut": 916,
+   "pengikut": 915,
    "risiko": 4,
    "paruh": [
     54.4,
@@ -710,6 +1220,8 @@
    "wr_curiga": false,
    "aset": "ETF",
    "tahun": 2.3,
+   "terlihat": true,
+   "tier": 1,
    "sumber": "etoro",
    "periode": "1 th"
   },
@@ -732,6 +1244,8 @@
    "wr_curiga": false,
    "aset": "ETF",
    "tahun": 6.2,
+   "terlihat": true,
+   "tier": 1,
    "sumber": "etoro",
    "periode": "1 th"
   },
@@ -740,19 +1254,21 @@
    "id": "0x1e37a337ed460039d1b15bd3bc489de789768d5e",
    "name": "Growi HF",
    "url": "https://app.hyperliquid.xyz/vaults/0x1e37a337ed460039d1b15bd3bc489de789768d5e",
-   "roi": 54.9,
+   "roi": 54.8,
    "periode": "1 th",
    "mdd": 12.3,
    "wr": 75.0,
    "pengikut": 100,
    "paruh": [
     34.4,
-    13.8
+    13.7
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
    "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1,
    "sumber": "hyperliquid"
   },
   {
@@ -774,6 +1290,32 @@
    "wr_curiga": false,
    "aset": "saham",
    "tahun": 4.3,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "etoro",
+   "periode": "1 th"
+  },
+  {
+   "platform": "eToro",
+   "id": 13242386,
+   "name": "NatMoney",
+   "url": "https://www.etoro.com/people/natmoney",
+   "roi": 59.4,
+   "mdd": 13.6,
+   "wr": 78.4,
+   "pengikut": 38,
+   "risiko": 3,
+   "paruh": [
+    4.9,
+    52.0
+   ],
+   "bulan_terburuk": -6.4,
+   "r90": -2.2,
+   "wr_curiga": false,
+   "aset": "saham",
+   "tahun": 6.6,
+   "terlihat": true,
+   "tier": 1,
    "sumber": "etoro",
    "periode": "1 th"
   },
@@ -782,19 +1324,208 @@
    "id": "0xd57c9295947b5a616a3933344ef03a1ad67318ea",
    "name": "LowRiskCryptoGainer",
    "url": "https://app.hyperliquid.xyz/vaults/0xd57c9295947b5a616a3933344ef03a1ad67318ea",
-   "roi": 20.2,
+   "roi": 20.3,
    "periode": "1 th",
    "mdd": 4.7,
    "wr": 75.9,
    "pengikut": 100,
    "paruh": [
     12.2,
-    6.6
+    6.7
    ],
    "wr_curiga": false,
    "aset": "vault kripto",
    "hari": 362,
    "wr_proksi": true,
+   "terlihat": true,
+   "tier": 1,
+   "sumber": "hyperliquid"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0xa5fd942d4badbab4fe84a9e10f565dd40d5f15ff",
+   "name": "0xa5fd…15ff",
+   "url": "https://app.hyperliquid.xyz/explorer/address/0xa5fd942d4badbab4fe84a9e10f565dd40d5f15ff",
+   "roi": 291.5,
+   "periode": "1 th",
+   "mdd": 7.6,
+   "wr": 97.5,
+   "pengikut": 0,
+   "paruh": [
+    116.8,
+    65.5
+   ],
+   "wr_curiga": true,
+   "aset": "kripto perp",
+   "hari": 363,
+   "modal": 2636898,
+   "transaksi": 356,
+   "posisi_buka": 31,
+   "terlihat": true,
+   "jenis": "trader",
+   "tier": 2,
+   "sumber": "hl_trader"
+  },
+  {
+   "platform": "Binance",
+   "id": "4662628079386208001",
+   "name": "五路财神的小公主",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4662628079386208001",
+   "roi": 140.4,
+   "mdd": 9.1,
+   "wr": 99.9,
+   "pengikut": 119,
+   "penuh": false,
+   "pnl_pengikut": 18128,
+   "paruh": [
+    84.9,
+    31.1
+   ],
+   "r90": 8.1,
+   "wr_curiga": true,
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2,
+   "sumber": "binance",
+   "periode": "1 th"
+  },
+  {
+   "platform": "Binance",
+   "id": "4566696155639181057",
+   "name": "Eenis的绝对盘感",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4566696155639181057",
+   "roi": 168.5,
+   "mdd": 14.9,
+   "wr": 78.0,
+   "pengikut": 80,
+   "penuh": false,
+   "pnl_pengikut": 641692,
+   "paruh": [
+    119.4,
+    11.2
+   ],
+   "r90": 0.9,
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2,
+   "sumber": "binance",
+   "periode": "1 th"
+  },
+  {
+   "platform": "OKX",
+   "id": "823664FB73B79E41",
+   "name": "Jungle law",
+   "url": "https://www.okx.com/copy-trading/account/823664FB73B79E41?tab=swap",
+   "roi": 30.4,
+   "periode": "1 th",
+   "mdd": 3.1,
+   "wr": 61.6,
+   "pengikut": 348,
+   "paruh": [
+    18.4,
+    9.9
+   ],
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "hari": 365,
+   "penuh": false,
+   "terlihat": false,
+   "tier": 2,
+   "sumber": "okx"
+  },
+  {
+   "platform": "Binance",
+   "id": "4300516091842181632",
+   "name": "Diamond-Hamsters",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4300516091842181632",
+   "roi": 135.4,
+   "mdd": 14.7,
+   "wr": 95.5,
+   "pengikut": 149,
+   "penuh": false,
+   "pnl_pengikut": 37633,
+   "paruh": [
+    95.5,
+    20.4
+   ],
+   "r90": 9.4,
+   "wr_curiga": true,
+   "aset": "kripto futures",
+   "terlihat": true,
+   "tier": 2,
+   "sumber": "binance",
+   "periode": "1 th"
+  },
+  {
+   "platform": "Binance",
+   "id": "4423799055974246144",
+   "name": "THT_TRADING",
+   "url": "https://www.binance.com/en/copy-trading/lead-details/4423799055974246144",
+   "roi": 77.9,
+   "mdd": 9.7,
+   "wr": 78.6,
+   "pengikut": 75,
+   "penuh": false,
+   "pnl_pengikut": 6250,
+   "paruh": [
+    71.8,
+    2.5
+   ],
+   "r90": 6.5,
+   "wr_curiga": false,
+   "aset": "kripto futures",
+   "terlihat": false,
+   "tier": 2,
+   "sumber": "binance",
+   "periode": "1 th"
+  },
+  {
+   "platform": "MQL5 MT5",
+   "id": 2265877,
+   "name": "Gold Reaper New V2 2",
+   "url": "https://www.mql5.com/en/signals/2265877",
+   "roi": 106.9,
+   "mdd": 17.0,
+   "wr": 72.0,
+   "pengikut": 67,
+   "harga": 35.0,
+   "minggu": 102,
+   "paruh": [
+    42.1,
+    45.5
+   ],
+   "bulan_terburuk": -4.2,
+   "beban": 4.77,
+   "r90": 23.8,
+   "wr_curiga": false,
+   "aset": "XAUUSD",
+   "emas": true,
+   "terlihat": false,
+   "tier": 2,
+   "sumber": "mql5",
+   "periode": "1 th"
+  },
+  {
+   "platform": "Hyperliquid",
+   "id": "0x490af7d4a048a81db0f677517ed6373565b42349",
+   "name": "Passivbot Canon",
+   "url": "https://app.hyperliquid.xyz/vaults/0x490af7d4a048a81db0f677517ed6373565b42349",
+   "roi": 35.5,
+   "periode": "1 th",
+   "mdd": 9.0,
+   "wr": 71.4,
+   "pengikut": 35,
+   "paruh": [
+    9.2,
+    23.0
+   ],
+   "wr_curiga": false,
+   "aset": "vault kripto",
+   "hari": 362,
+   "wr_proksi": true,
+   "terlihat": true,
+   "tier": 2,
    "sumber": "hyperliquid"
   },
   {
@@ -815,27 +1546,9 @@
    "aset": "kripto futures",
    "hari": 365,
    "penuh": false,
+   "terlihat": true,
+   "tier": 2,
    "sumber": "okx"
-  },
-  {
-   "platform": "Hyperliquid",
-   "id": "0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
-   "name": "Hyperliquidity Provider (HLP)",
-   "url": "https://app.hyperliquid.xyz/vaults/0xdfc24b077bc1425ad1dea75bcb6f8158e10df303",
-   "roi": 7.4,
-   "periode": "1 th",
-   "mdd": 0.8,
-   "wr": 84.6,
-   "pengikut": 100,
-   "paruh": [
-    6.9,
-    1.0
-   ],
-   "wr_curiga": false,
-   "aset": "vault kripto",
-   "hari": 355,
-   "wr_proksi": true,
-   "sumber": "hyperliquid"
   }
  ]
 }

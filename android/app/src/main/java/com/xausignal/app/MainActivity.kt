@@ -111,6 +111,7 @@ class MainActivity : ComponentActivity() {
     /** Muat harga & sinyal terbaru saat aplikasi dibuka. */
     private fun refresh() {
         val app = applicationContext
+        CopyStreamControl.sync(app)                        // ⚡ pemantau copy trader yang di-follow (4.16)
         Thread {
             SignalPoller.poll(app)
             // tiap aplikasi dibuka (maks tiap 15 menit): ambil kalender dari cloud -> pengingat ⏱️ diperbarui dan cloud

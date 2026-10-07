@@ -33,6 +33,15 @@ import org.json.JSONObject
 /** cloud/api/copytrader.json lewat GET /api/chat?copytrader=1, dimuat sekali per sesi aplikasi. */
 object CopyTraders {
     var data by mutableStateOf<JSONObject?>(null)
+
+    /** Trader lengkap (ROI, DD, WR) dari daftar teruji menurut kunci "platform|id"; null bila tidak ada. */
+    fun find(key: String): JSONObject? {
+        val d = data ?: return null
+        return listOf("gabungan", "hyperliquid", "okx", "bitget", "etoro", "binance", "mql5").firstNotNullOfOrNull { k ->
+            val a = d.optJSONArray(k) ?: return@firstNotNullOfOrNull null
+            (0 until a.length()).mapNotNull { a.optJSONObject(it) }.firstOrNull { CopyFollow.key(it) == key }
+        }
+    }
     var fromCloud by mutableStateOf(false)
     var reason by mutableStateOf("")
     var retry by mutableStateOf(0)
@@ -83,9 +92,19 @@ fun CopyTraderSection() {
     var open by rememberSaveable { mutableStateOf(false) }
     var sel by androidx.compose.runtime.remember { mutableStateOf<JSONObject?>(null) }
     sel?.let { CopyDetailDialog(it) { sel = null } }        // ketuk = detail di aplikasi (posisi, entry/TP/SL), 4.12
+    CopyFollowSection { t -> sel = CopyTraders.find(CopyFollow.key(t)) ?: t }    // 👁 trader yang di-follow (4.16)
     SectionTitle("👥 Copy trader terbaik", trailing = "${all.size}")
     AppCard {
-        (if (open) all else all.take(5)).forEach { x -> CopyRow(x) { sel = x } }
+        var lastTier = ""
+        (if (open) all else all.take(6)).forEach { x ->
+            val t = tierLabel(x) ?: ""
+            if (t.isNotEmpty() && t != lastTier) {               // urut Terbaik → Baik → Lumayan baik
+                Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.ExtraBold, color = Gold,
+                    modifier = Modifier.padding(top = 4.dp))
+                lastTier = t
+            }
+            CopyRow(x) { sel = x }
+        }
         Row(
             Modifier.fillMaxWidth().clickable { open = !open }.padding(top = 2.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -110,6 +129,24 @@ fun CopyTraderSection() {
                 style = MaterialTheme.typography.labelSmall, color = Muted)
         }
     }
+}
+
+/** "119 pengikut", atau untuk trader Hyperliquid individual (tanpa fitur pengikut) "modal $1,2 jt". */
+fun followersText(x: JSONObject): String {
+    val m = x.optDouble("modal", 0.0)
+    return when {
+        x.optInt("pengikut") > 0 || m <= 0 -> "${x.optInt("pengikut")} pengikut"
+        m >= 1e6 -> "modal \$${fmt(m / 1e6, 1)} jt"
+        else -> "modal \$${fmt(m / 1e3, 0)} rb"
+    }
+}
+
+/** Peringkat dari cloud (research/copy_pilih.py, field "tier": 1 Terbaik, 2 Baik, 3 Lumayan baik). */
+fun tierLabel(x: JSONObject): String? = when (x.optInt("tier", 0)) {
+    1 -> "🥇 Terbaik"
+    2 -> "🥈 Baik"
+    3 -> "🥉 Lumayan baik"
+    else -> null
 }
 
 private data class Badge(val text: String, val color: Color)
@@ -144,7 +181,8 @@ private fun CopyRow(x: JSONObject, onClick: () -> Unit) {
         Column(Modifier.weight(1f)) {
             Text(x.optString("name"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium,
                 maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text("${if (platform.startsWith("MQL5")) "MQL5" else platform} • ${x.optInt("pengikut")} pengikut" +
+            Text((if (CopyFollow.isFollowed(x)) "✓ diikuti • " else "") + (if (x.optBoolean("terlihat")) "👁 " else "") +
+                "${if (platform.startsWith("MQL5")) "MQL5" else platform} • ${followersText(x)}" +
                 if (x.optBoolean("penuh")) " • penuh" else "",
                 style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }

@@ -313,6 +313,18 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `cloud/api/jadwal.json` → `_jadwal.attach` (persiapan["mendatang"], NFP/CPI/Fed/JOLTS selalu ikut) → kartu 🎯 bagian
   "📅 Berita besar berikutnya" + baris 🎯 di MarketStrip. Baris 📉/📈 lonjakan memudar (hilang sejak 4.5) dikembalikan ke MarketStrip.
 
+## Follow copy trader (7 Okt 2026 — `docs/COPY_TRADE.md` bagian 👁 Follow)
+- Permintaan pengguna "follow/unfollow, data buka & tutup posisi langsung ke apk, sort terbaik → lumayan, cari seluruh
+  market terutama yang posisinya terlihat". API situs tanpa push → cloud `cloud/api/_ikuti.py` (GET `/api/ikuti?key=
+  CRON_SECRET`, **pg_cron tiap 15 dtk** — SQL di docs; pengguna yang memasang) membandingkan posisi dengan potret
+  (baris Supabase `ikuti` = daftar dari aplikasi, `ikuti_snap` = potret+log), kirim 1 pesan ntfy topik `<NTFY_TOPIC>-copy`
+  (copy_open/copy_close/copy_follow). POST /api/chat {"ikuti"} / GET ?ikuti=1. Env COPY_FOLLOW=0 mati. Info saja, tanpa order.
+- Aplikasi 4.16: `CopyFollow.kt` (tombol FOLLOW di detail, bagian 👁 Trader diikuti, label 🥇/🥈/🥉, ikon 👁 terlihat),
+  `CopyStream.kt` (layanan ⚡ foreground remoteMessaging = stream ntfy terus; poll cadangan di SignalPoller).
+- Posisi terlihat: Hyperliquid selalu (on-chain), eToro ya, OKX/Bitget kecuali disembunyikan, Binance hanya positionShow,
+  MQL5 tidak. `research/hl_trader.py` = trader Hyperliquid individual (leaderboard 47 rb akun → 1.000 terbesar tanpa
+  melihat kinerja → aturan kurva + WR fill ≥ 60%); `copy_pilih` sumber `hl_trader`, `cek_terlihat`, `tier()`.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

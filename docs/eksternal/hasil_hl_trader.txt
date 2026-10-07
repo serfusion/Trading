@@ -1,0 +1,25 @@
+# 👁 Trader Hyperliquid (posisi selalu terlihat) — uji maju
+
+Aturan sama dengan copy_pilih: untung di kedua paruh, DD ≤ 20%, aktif. Dua kumpulan kandidat:
+- **besar** = 1.000 akun terbesar HARI INI (≥ $20 rb, bukan market maker) — bias ke pemenang terbaru (akun yang tumbuh besar karena untung 90 hari terakhir ikut terpilih) → angka 'semua' terlalu bagus;
+- **acak** = 400 akun acak dengan volume seumur hidup ≥ $5 jt berapa pun modalnya sekarang (akun meledak ikut) → pembanding yang lebih jujur.
+
+## Hyperliquid trader — kumpulan besar: pilih s.d. 2026-07-09, ukur 2026-07-09–2026-10-07 (740 penyedia aktif)
+| Pilihan | n | Median | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 740 | +36.1% | +55.9% | 20% | 8% | -19% |
+| lolos aturan | 31 | +9.0% | +16.0% | 26% | 3% | -6% |
+| aturan, 10 teratas ROI/DD | 10 | +25.3% | +32.5% | 10% | 0% | -4% |
+| ROI tertinggi 10 | 10 | +36.6% | +39.2% | 10% | 0% | -18% |
+| % hari untung tertinggi 10 (proksi WR) | 10 | +20.3% | +153.6% | 0% | 0% | -3% |
+| beli-tahan BTC | 1 | +30.3% | +30.3% | - | - | -7% |
+
+## Hyperliquid trader — kumpulan acak: pilih s.d. 2026-07-09, ukur 2026-07-09–2026-10-07 (287 penyedia aktif)
+| Pilihan | n | Median | Rata-rata | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| semua | 287 | +0.0% | +31.7% | 30% | 16% | -3% |
+| lolos aturan | 3 | -12.3% | +12.1% | 67% | 0% | -39% |
+| aturan, 10 teratas ROI/DD | 3 | -12.3% | +12.1% | 67% | 0% | -39% |
+| ROI tertinggi 10 | 10 | +38.9% | +18.9% | 20% | 10% | -18% |
+| % hari untung tertinggi 10 (proksi WR) | 10 | +0.0% | +2.1% | 30% | 0% | -9% |
+| beli-tahan BTC | 1 | +30.3% | +30.3% | - | - | -7% |

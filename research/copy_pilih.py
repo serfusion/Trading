@@ -288,6 +288,61 @@ def hyperliquid(segar: bool) -> list[dict]:
     return sorted(out, key=lambda x: -x["skor"])
 
 
+def hl_trader(segar: bool) -> list[dict]:
+    """👁 Trader Hyperliquid individual (bukan vault): posisi & TP/SL selalu publik → paling cocok untuk follow.
+    Kandidat 1.000 akun terbesar dipilih tanpa melihat kinerja (research/hl_trader.py); aturan kurva sama dengan vault +
+    WR transaksi tutup ≥ 60% (≥ 20 transaksi), aktif ≤ 14 hari, modal ≥ $100 rb (pengganti 'pengikut nyata'), profit ≤ 300%.
+    Catatan: titik kurva Hyperliquid ±mingguan → DD di antara titik tidak terlihat (DD sebenarnya bisa lebih besar)."""
+    from . import hl_trader as HT
+    if segar:
+        HT.unduh()
+        rows = HT.pilih()
+    else:
+        rows = CM.load("hl_trader_pilih")
+    # profit ≤ 300%/th seperti aturan MQL5/eToro (lebih dari itu = akun kecil sangat agresif yang kebetulan tumbuh besar)
+    out = [dict(x) for x in rows if x.get("wr", 0) >= 60 and x.get("modal", 0) >= 100_000 and not x.get("wr", 0) >= 99
+           and x.get("roi", 0) <= 300]
+    for x in out:
+        x.setdefault("skor", x["roi"] / max(x["mdd"], 3))
+    return sorted(out, key=lambda x: -x["skor"])
+
+
+def cek_terlihat(x: dict) -> bool | None:
+    """Apakah posisi terbuka trader ini publik (bisa di-follow)? Hyperliquid & eToro selalu; MQL5 tidak pernah;
+    Binance menurut positionShow; OKX/Bitget: posisi ada & koin tidak disembunyikan / perlindungan posisi mati."""
+    p = x.get("platform", "")
+    if p in ("Hyperliquid", "eToro"):
+        return True
+    if p.startswith("MQL5"):
+        return False
+    try:
+        if p == "Binance":
+            d = CM.req("https://www.binance.com/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/detail"
+                       f"?portfolioId={x['id']}") or {}
+            return bool((d.get("data") or {}).get("positionShow"))
+        if p == "OKX":
+            d = CM.req("https://www.okx.com/api/v5/copytrading/public-current-subpositions?instType=SWAP"
+                       f"&uniqueCode={x['id']}&limit=20") or {}
+            pos = d.get("data") or []
+            return all(q.get("instId") for q in pos) if pos else True
+        if p == "Bitget":
+            d = CM.req("https://www.bitget.com/v1/trigger/trace/public/traderPosition",
+                       {"languageType": 0, "traderUid": x["id"]}) or {}
+            pos = [q for q in d.get("data") or [] if isinstance(q, dict)]
+            return not any(q.get("positionProtect") for q in pos)
+    except Exception:  # noqa: BLE001
+        return None
+    return None
+
+
+def tier(x: dict) -> int:
+    """1 🥇 Terbaik: posisi terlihat, WR ≥ 60%, profit/DD ≥ 4 • 2 🥈 Baik: profit/DD ≥ 2 • 3 🥉 Lumayan baik: lolos saringan."""
+    r = x["roi"] / max(x["mdd"], 3)
+    if x.get("terlihat") and x.get("wr", 0) >= 60 and r >= 4 and not x.get("wr_curiga"):
+        return 1
+    return 2 if r >= 2 else 3
+
+
 def _mdd(e: np.ndarray) -> float:
     return float((e / np.maximum.accumulate(e) - 1).min())
 
@@ -388,8 +443,8 @@ def main() -> None:
     segar = "--segar" in sys.argv
     lama = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
     hasil, galat = {}, {}
-    for key, fn in (("okx", okx), ("bitget", bitget), ("hyperliquid", hyperliquid), ("etoro", etoro),
-                    ("binance", binance), ("mql5", mql5)):
+    for key, fn in (("hl_trader", hl_trader), ("okx", okx), ("bitget", bitget), ("hyperliquid", hyperliquid),
+                    ("etoro", etoro), ("binance", binance), ("mql5", mql5)):
         try:
             hasil[key] = fn(segar)
         except Exception as exc:  # noqa: BLE001 - satu sumber gagal → pakai daftar minggu lalu, sumber lain tetap
@@ -405,7 +460,11 @@ def main() -> None:
            "aturan": "umur ≥ 12 bln • untung di 2 paruh tahun • DD ≤ 20% • WR ≥ 60–65% • pengikut nyata • tanpa grid",
            # angka dari `python -m research.copy_pilih uji` (docs/eksternal/hasil_copy_pilih.txt) & `research.etoro_copy uji`
            # (docs/eksternal/hasil_etoro.txt), 6 Okt 2026
-           "uji": {"okx": "pilih dgn Okt–Apr → Apr–Okt 2026: lolos aturan median +8%, 25% rugi, DD 11% • semua +6%, 28% rugi, "
+           "uji": {"hl_trader": "pilih s.d. 9 Jul → ukur 9 Jul–7 Okt 2026 (research/hl_trader.py uji): 1.000 akun terbesar: "
+                                "lolos aturan median +9%, 26% rugi, DD 6% • 10 teratas profit/DD +25%, 10% rugi, DD 4% • "
+                                "semua +36% (bias: akun yang kini besar = pemenang terbaru) • 400 akun acak: median 0%, "
+                                "30% rugi, 16% hancur • beli-tahan BTC +30%, DD 7%",
+                   "okx": "pilih dgn Okt–Apr → Apr–Okt 2026: lolos aturan median +8%, 25% rugi, DD 11% • semua +6%, 28% rugi, "
                           "DD 18% • beli-tahan BTC +17%",
                    "bitget": "pilih dgn 90 hr → 90 hr: lolos aturan +1%, 44% rugi, 0% hancur • ROI tertinggi 10: −17%, 40% "
                              "hancur • untung penyalin positif hanya 12% trader",
@@ -423,29 +482,40 @@ def main() -> None:
                       "profit tidak dijamin (sering kalah dari beli-tahan BTC/indeks). Mulai modal kecil.",
            "n": {}}
     for key, v in hasil.items():
-        obj[key] = v[:6] if v is not None else lama.get(key, [])
+        obj[key] = v[:8] if v is not None else lama.get(key, [])
         obj["n"][key] = len(v) if v is not None else (lama.get("n") or {}).get(key, 0)
+    seen: dict[str, bool | None] = {}
+    for key in hasil:                               # 👁 posisi terbuka publik? (fitur follow, 7 Okt 2026) + peringkat
+        for x in obj[key]:
+            k = f"{x['platform']}|{x['id']}"
+            if k not in seen:
+                seen[k] = cek_terlihat(x)
+                time.sleep(0.3)
+            if seen[k] is not None:
+                x["terlihat"] = seen[k]
+            x["tier"] = tier(x)
     # 👥 gabungan semua situs: WR ≥ 60%, profit > 0, ≥ 30 pengikut (sudah disaring per situs); peringkat profit / DD
     # (profit periode apa adanya, tanpa disetahunkan → riwayat 6 bulan Bitget tidak dibesar-besarkan)
+    # urutan: 🥇 Terbaik → 🥈 Baik → 🥉 Lumayan baik, lalu profit/DD; trader Hyperliquid tanpa pengikut → modal ≥ $100 rb
     gab = []
     for key in hasil:
         for x in obj[key]:
-            if x["wr"] >= 60 and x["roi"] > 0 and x.get("pengikut", 0) >= 30:
+            if x["wr"] >= 60 and x["roi"] > 0 and (x.get("pengikut", 0) >= 30 or x.get("modal", 0) >= 100_000):
                 gab.append(dict(x, sumber=key, periode=x.get("periode", "1 th"), skor_gab=x["roi"] / max(x["mdd"], 3)))
-    gab.sort(key=lambda x: -x["skor_gab"])
+    gab.sort(key=lambda x: (x["tier"], -x["skor_gab"]))
     per, top = {}, []
-    for x in gab:                                   # maks 4 per situs supaya daftar benar-benar gabungan
-        if per.get(x["sumber"], 0) < 4:
+    for x in gab:                                   # maks 6 per sumber supaya daftar benar-benar gabungan
+        if per.get(x["sumber"], 0) < 6:
             per[x["sumber"]] = per.get(x["sumber"], 0) + 1
             top.append({k: v for k, v in x.items() if k != "skor_gab"})
-    obj["gabungan"] = top[:20]
+    obj["gabungan"] = top[:30]
     if galat:
         obj["invalid"] = sorted(galat)              # sumber yang gagal diunduh → daftar minggu lalu (aplikasi menandai)
     OUT.write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8")
     print(", ".join(f"{k} lolos {v}" for k, v in obj["n"].items()))
     for x in obj["gabungan"]:
-        print(f"  {x['platform']:11} {x['name'][:24]:24} ROI {x['roi']:+.0f}% ({x.get('periode', '1 th')}) DD {x['mdd']:.0f}% "
-              f"WR {x['wr']:.0f}% pengikut {x['pengikut']} paruh {x['paruh']}")
+        print(f"  T{x['tier']} {'👁' if x.get('terlihat') else '  '} {x['platform']:11} {x['name'][:22]:22} ROI {x['roi']:+.0f}% "
+              f"({x.get('periode', '1 th')}) DD {x['mdd']:.0f}% WR {x['wr']:.0f}% pengikut {x['pengikut']} paruh {x['paruh']}")
 
 
 if __name__ == "__main__":
