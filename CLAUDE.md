@@ -66,6 +66,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Aplikasi 4.17 (7 Okt, permintaan pengguna): kartu 🎯 / 📅 / MarketStrip = SATU baris per berita "NFP: peluang emas naik
   1 jam X% (teruji, belum pasti)" dari `cloud/api/_prediksi.py` (model prarilis → aturan NFP prev_s +1 61% → dasar
   historis). JANGAN tampilkan lagi skenario "Act < / Act >" di aplikasi; teks hasil pakai kata ("di bawah perkiraan").
+- Aplikasi 4.18: baris utama TANPA catatan; ketuk = show/hide detail (`prediksi.detail`: dasar angka, 🔄 titik balik NFP
+  mean reversion `cloud/api/_nfp_titik.py` + `nfp_titik.json` dari `research/nfp_titik.py`, FRED live cache `nfp_titik`,
+  🏦 Fed). Titik balik = info ekonomi, terpisah dari arah emas (framework pengguna bagian 14).
 
 ## Data di repo (30 Sep 2026 — `data/README.md`)
 - Permintaan pengguna: data unduhan DISIMPAN di repo (privat) supaya tidak diunduh ulang. `.gitignore` membuka
@@ -272,7 +275,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Replay `research/arus_replay.py` 2025–26 = riset (19/63/41 trade). Entry pasar = open candle berjalan (cron :02).
 - NFP mean reversion (`docs/NFP_MEAN.md`, `research/nfp_mean.py`, vintage ALFRED 2001–2026): pelemahan → rebound 59–67%
   (baseline 47%); pelemahan + pendahulu memburuk → hanya 31% (deterioration lanjutan); gagal 2008–09; walk-forward 60–63%.
-  Untuk emas TIDAK ada keunggulan sebelum rilis (konsensus sudah memperhitungkan; emas digerakkan kejutan). Tidak dipasang.
+  Untuk emas TIDAK ada keunggulan sebelum rilis (konsensus sudah memperhitungkan; emas digerakkan kejutan). 7 Okt: DIPASANG
+  sebagai detail 🔄 titik balik ekonomi (bukan arah emas) di balik baris NFP — aplikasi 4.18.
 - Semua berita USD sebelum rilis (`research/news_semua.py`, `docs/eksternal/hasil_news_semua.txt`, 18 judul, 216 aturan +
   logistik walk-forward): 1 aturan konsisten (NFP: rilis lalu di atas konsensus → emas naik 1 jam 72%/61%); model NFP 62%
   (p 0,01), JOLTS 61% (p 0,02), Fed 62% (p 0,05), sisanya 42–57% ≈ acak; banyak uji → bisa kebetulan. Tidak dipasang.

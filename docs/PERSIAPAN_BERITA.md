@@ -116,3 +116,6 @@ mengisi field `prediksi` di setiap berita pekan ini & 📅 berikutnya; aplikasi 
 3. dasar historis: % emas naik 1 jam setelah rilis itu (2010–2026, mis. CPI 54%, NFP 57%) — mendekati lempar koin.
 Angka besar = arah yang lebih sering. Bukti di tombol Detail. Setelah rilis tetap tampil ✅ hasil (kini "Act 45K di bawah
 perkiraan 89K", tanpa simbol). Fed/Kalshi/perkiraan hari H hanya di Detail.
+- Aplikasi 4.18: baris cukup "NFP: peluang emas naik 1 jam 61%" + waktu; ketuk = show/hide detail (dasar angka "teruji,
+  belum pasti", 🔄 titik balik ekonomi NFP — docs/NFP_MEAN.md bagian akhir —, 🏦 keputusan Fed Polymarket, Kalshi /
+  perkiraan hari H, detik pertama). Tombol "Detail" kartu dihapus (diganti show/hide per baris).

@@ -219,7 +219,7 @@ class handler(BaseHTTPRequestHandler):
             if isinstance(persiapan, dict):
                 try:                                          # 🎯 satu baris "NFP: peluang emas naik 1 jam 61%" (_prediksi.py)
                     import _prediksi
-                    _prediksi.attach(persiapan, store)
+                    _prediksi.attach(persiapan, store, now, os.environ)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \

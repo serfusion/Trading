@@ -45,3 +45,14 @@ Kesimpulan: model berguna untuk MEMAHAMI arah ekonomi, tetapi belum memberi entr
 - NFP Sep 2026 = **+29K** (Agu +162K, Jul −23K, Jun +57K); z24 −0,83 → BELUM termasuk "pelemahan ekstrem" (A/B/C/D tidak menyala).
 - Pendahulu: klaim −3,6% (membaik), pengangguran 3 bulan tetap, JOLTS −6% (memburuk); ADP Okt belum rilis → skor +1 (netral).
 - Model logistik: peluang NFP Okt > +29K ≈ **57%** (lemah, hampir lempar koin).
+
+## DIPASANG sebagai DETAIL (aplikasi 4.18, 7 Okt 2026 — izin pengguna "terapkan dan sesuaikan")
+- Baris utama tetap "NFP: peluang emas naik 1 jam X%" (`cloud/api/_prediksi.py`). Ketuk baris = show/hide detail, berisi
+  blok **🔄 Titik balik ekonomi (mean reversion)**: "Peluang NFP berikutnya lebih tinggi dari +29K (Sep 2026): 57%",
+  kondisi (pelemahan ekstrem? + pendahulu membaik/netral/memburuk), rincian pendahulu (klaim 4 mgg, pengangguran 3 bln,
+  JOLTS, revisi bulan lalu) dan bukti uji (68% / 70% / 31%, dasar 47%, walk-forward 61%).
+- Model: `research/nfp_titik.py` → `cloud/api/nfp_titik.json` (logistik "NFP + klaim + pengangguran + revisi + skor"
+  dilatih di semua data 2001–2026). Live: `cloud/api/_nfp_titik.py` menghitung fitur dari FRED API (env Vercel
+  `FRED_API_KEY`, 4 permintaan paralel, cache Supabase baris `nfp_titik` 12 jam); tanpa kunci → potret riset terakhir.
+  Fitur cloud = riset untuk Sep 2026 (NFP +29K, z −0,83, revisi −29K).
+- Sesuai framework bagian 14: info ekonomi DIPISAH dari arah emas (tidak mengubah angka emas), teks tanpa simbol < / >.
