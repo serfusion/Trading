@@ -113,6 +113,10 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
+        // ⏸️ jeda pra-berita (4.20): sinyal XAU baru tidak dikirim ≤ 36 jam sebelum NFP/CPI/Fed
+        assets.firstOrNull { it.first.startsWith("XAU") }?.second?.jedaText()?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold)
+        }
     }
 }
 

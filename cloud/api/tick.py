@@ -138,6 +138,16 @@ def run() -> tuple[int, dict]:
             cfg["war"] = None
             war_error = str(exc)
     main_store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+    if env.get("XAU_NEWS_SKIP", "1") == "1":   # ⏸️ jeda ≤ 36 jam sebelum NFP/CPI/Fed (research/muse_uji.py, izin 7 Okt 2026)
+        try:
+            import _arsip
+            import _chat
+            import _jeda_berita
+            now = datetime.now(timezone.utc)
+            cfg["skip_fn"], cfg["jeda"] = _jeda_berita.siapkan(
+                lambda: _arsip.calendar_cached(main_store, now, _chat.fetch_calendar), now, env)
+        except Exception as exc:  # noqa: BLE001 - jadwal gagal tidak boleh menghentikan sinyal
+            jeda_error = str(exc)
     try:
         cfg.update(signal_extras("XAU", main_store))
     except Exception as exc:  # noqa: BLE001 - tambahan opsional tidak boleh menghentikan sinyal
@@ -159,6 +169,9 @@ def run() -> tuple[int, dict]:
         result["extra_error"] = result_extra_error
     if "war_error" in locals():
         result["war_error"] = war_error
+    result["jeda"] = cfg.get("jeda")
+    if "jeda_error" in locals():
+        result["jeda_error"] = jeda_error
     try:                                   # sinyal BTC/USD (24 jam, state di baris 'btc', tanpa auto order)
         if env.get("BTC_SIGNALS", "1") == "1":
             now = datetime.now(timezone.utc)

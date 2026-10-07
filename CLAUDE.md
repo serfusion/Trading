@@ -338,6 +338,16 @@ alarm tepat waktu) hanya menyentuh `android/`].
   MQL5 tidak. `research/hl_trader.py` = trader Hyperliquid individual (leaderboard 47 rb akun → 1.000 terbesar tanpa
   melihat kinerja → aturan kurva + WR fill ≥ 60%); `copy_pilih` sumber `hl_trader`, `cek_terlihat`, `tier()`.
 
+## Sistem Muse / repo moritakaaz/trading-alert (7 Okt 2026 — `docs/MUSE.md`)
+- `research/muse_uji.py filter|m5|berita|paxg|replay|jendela|replika` (repo mereka hanya DIBACA di /home/user/moritakaaz,
+  aturan ditulis ulang). Tiruan v1.1–1.3 (Donchian 48 H1 + M5, SL 1,5 ATR, BE, TP 2R) hampir impas setelah spread
+  (PF 1,00–1,07; 2026 1,23). EMA20/50, entry M5, jeda setelah SL (pada sinyal kita), PAXG cadangan: TIDAK dipasang.
+- DIPASANG 7 Okt (izin "terapkan apabila dapat menambah wr dan profit"): ⏸️ jeda sinyal XAU baru ≤ 36 jam sebelum
+  NFP/CPI/Fed (`cloud/api/_jeda_berita.py`, skip_fn tick XAU, heartbeat `jeda`, env XAU_NEWS_SKIP/XAU_NEWS_SKIP_JAM,
+  aplikasi 4.20). Replay penuh: LAMA +653→+753R PF 1,47→1,66; BARU +597→+734R WR 62,4→65,0% PF 1,60→1,90; 12/14 tahun;
+  semua jendela 6–72 jam & NFP/CPI/Fed masing-masing konsisten; BTC memburuk → XAU saja. `jadwal.json` (FOMC s.d. 2027)
+  diperbarui workflow arsip_data tiap jam. `verifikasi_cloud.replay("XAU")` memakai jeda; STATS/riwayat belum dihitung ulang.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

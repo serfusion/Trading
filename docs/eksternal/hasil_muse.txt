@@ -1,0 +1,317 @@
+# Uji sistem Muse (research/muse_uji.py)
+
+## Uji 1 — filter EMA 20/50 pada sinyal yang DIKIRIM cloud (replay kode cloud asli, TP1 0,7R, spread asli)
+(pasca-saring: sinyal yang tidak lolos dibuang; efek 'slot kosong' diuji terpisah di replay penuh bila lolos)
+
+### XAU — sinyal utama
+  LAMA bawaan            : n 1422 | WR 60.3% | +0.140R | total  +198.4R | PF 1.38 | DD  -48.8R | tahun + 67%
+  LAMA + h1_ema         : n 1381 | WR 60.4% | +0.146R | total  +202.3R | PF 1.39 | DD  -47.7R | tahun + 67%
+  LAMA   dibuang h1_ema   : n   41 | WR 58.5% | -0.096R | total    -3.9R | PF 0.75 | DD   -6.6R | tahun + 38%
+  LAMA + h4_ema         : n 1326 | WR 61.8% | +0.171R | total  +226.9R | PF 1.48 | DD  -53.2R | tahun + 67%
+  LAMA   dibuang h4_ema   : n   96 | WR 39.6% | -0.297R | total   -28.5R | PF 0.45 | DD  -28.5R | tahun + 33%
+  LAMA + h1h4_ema       : n 1285 | WR 61.9% | +0.180R | total  +230.8R | PF 1.50 | DD  -52.1R | tahun + 67%
+  LAMA   dibuang h1h4_ema : n  137 | WR 45.3% | -0.237R | total   -32.4R | PF 0.52 | DD  -32.4R | tahun + 33%
+  LAMA + h1_harga       : n 1422 | WR 60.3% | +0.140R | total  +198.4R | PF 1.38 | DD  -48.8R | tahun + 67%
+  LAMA   dibuang h1_harga : n 0
+  LAMA + h4_harga       : n 1382 | WR 59.8% | +0.140R | total  +192.8R | PF 1.37 | DD  -50.9R | tahun + 67%
+  LAMA   dibuang h4_harga : n   40 | WR 80.0% | +0.139R | total    +5.6R | PF 1.69 | DD   -4.0R | tahun + 67%
+  BARU bawaan            : n  948 | WR 62.6% | +0.172R | total  +163.0R | PF 1.49 | DD  -71.0R | tahun + 83%
+  BARU + h1_ema         : n  935 | WR 62.5% | +0.171R | total  +160.3R | PF 1.49 | DD  -69.8R | tahun + 83%
+  BARU   dibuang h1_ema   : n   13 | WR 69.2% | +0.206R | total    +2.7R | PF 1.72 | DD   -3.0R | tahun + 20%
+  BARU + h4_ema         : n  852 | WR 61.4% | +0.158R | total  +135.0R | PF 1.44 | DD  -61.8R | tahun + 50%
+  BARU   dibuang h4_ema   : n   96 | WR 72.9% | +0.292R | total   +28.0R | PF 2.18 | DD  -11.4R | tahun + 100%
+  BARU + h1h4_ema       : n  839 | WR 61.3% | +0.158R | total  +132.3R | PF 1.43 | DD  -61.5R | tahun + 67%
+  BARU   dibuang h1h4_ema : n  109 | WR 72.5% | +0.282R | total   +30.7R | PF 2.12 | DD  -13.6R | tahun + 83%
+  BARU + h1_harga       : n  948 | WR 62.6% | +0.172R | total  +163.0R | PF 1.49 | DD  -71.0R | tahun + 83%
+  BARU   dibuang h1_harga : n 0
+  BARU + h4_harga       : n  911 | WR 61.4% | +0.169R | total  +153.8R | PF 1.47 | DD  -71.6R | tahun + 83%
+  BARU   dibuang h4_harga : n   37 | WR 91.9% | +0.249R | total    +9.2R | PF 4.23 | DD   -1.0R | tahun + 75%
+
+### XAU — sinyal lapisan
+  LAMA bawaan            : n 2236 | WR 59.2% | +0.203R | total  +454.4R | PF 1.53 | DD -192.4R | tahun + 56%
+  LAMA + h1_ema         : n 2234 | WR 59.1% | +0.203R | total  +453.8R | PF 1.53 | DD -192.4R | tahun + 56%
+  LAMA   dibuang h1_ema   : n    2 | WR 100.0% | +0.342R | total    +0.7R | PF inf | DD   +0.0R | tahun + 100%
+  LAMA + h4_ema         : n 2223 | WR 59.2% | +0.203R | total  +450.3R | PF 1.53 | DD -196.5R | tahun + 56%
+  LAMA   dibuang h4_ema   : n   13 | WR 61.5% | +0.320R | total    +4.2R | PF 1.83 | DD   -5.0R | tahun + 50%
+  LAMA + h1h4_ema       : n 2221 | WR 59.1% | +0.202R | total  +449.6R | PF 1.53 | DD -195.5R | tahun + 56%
+  LAMA   dibuang h1h4_ema : n   15 | WR 66.7% | +0.323R | total    +4.8R | PF 1.97 | DD   -5.0R | tahun + 75%
+  LAMA + h1_harga       : n 2236 | WR 59.2% | +0.203R | total  +454.4R | PF 1.53 | DD -192.4R | tahun + 56%
+  LAMA   dibuang h1_harga : n 0
+  LAMA + h4_harga       : n 2229 | WR 59.1% | +0.200R | total  +446.0R | PF 1.52 | DD -192.7R | tahun + 56%
+  LAMA   dibuang h4_harga : n    7 | WR 85.7% | +1.204R | total    +8.4R | PF 9.43 | DD   -1.0R | tahun + 67%
+  BARU bawaan            : n 1859 | WR 62.3% | +0.234R | total  +434.3R | PF 1.65 | DD -179.2R | tahun + 67%
+  BARU + h1_ema         : n 1859 | WR 62.3% | +0.234R | total  +434.3R | PF 1.65 | DD -179.2R | tahun + 67%
+  BARU   dibuang h1_ema   : n 0
+  BARU + h4_ema         : n 1835 | WR 62.8% | +0.244R | total  +447.9R | PF 1.69 | DD -178.9R | tahun + 67%
+  BARU   dibuang h4_ema   : n   24 | WR 20.8% | -0.565R | total   -13.6R | PF 0.24 | DD  -17.9R | tahun + 0%
+  BARU + h1h4_ema       : n 1835 | WR 62.8% | +0.244R | total  +447.9R | PF 1.69 | DD -178.9R | tahun + 67%
+  BARU   dibuang h1h4_ema : n   24 | WR 20.8% | -0.565R | total   -13.6R | PF 0.24 | DD  -17.9R | tahun + 0%
+  BARU + h1_harga       : n 1859 | WR 62.3% | +0.234R | total  +434.3R | PF 1.65 | DD -179.2R | tahun + 67%
+  BARU   dibuang h1_harga : n 0
+  BARU + h4_harga       : n 1859 | WR 62.3% | +0.234R | total  +434.3R | PF 1.65 | DD -179.2R | tahun + 67%
+  BARU   dibuang h4_harga : n 0
+
+### BTC — sinyal utama
+  LAMA bawaan            : n  818 | WR 60.3% | +0.691R | total  +565.1R | PF 2.89 | DD  -19.6R | tahun + 83%
+  LAMA + h1_ema         : n  800 | WR 60.1% | +0.710R | total  +567.7R | PF 2.93 | DD  -19.6R | tahun + 83%
+  LAMA   dibuang h1_ema   : n   18 | WR 66.7% | -0.144R | total    -2.6R | PF 0.39 | DD   -4.3R | tahun + 50%
+  LAMA + h4_ema         : n  657 | WR 59.1% | +0.504R | total  +331.0R | PF 2.32 | DD  -25.8R | tahun + 83%
+  LAMA   dibuang h4_ema   : n  161 | WR 65.2% | +1.454R | total  +234.1R | PF 5.95 | DD   -7.1R | tahun + 100%
+  LAMA + h1h4_ema       : n  645 | WR 58.3% | +0.511R | total  +329.4R | PF 2.31 | DD  -25.8R | tahun + 83%
+  LAMA   dibuang h1h4_ema : n  173 | WR 67.6% | +1.363R | total  +235.8R | PF 5.99 | DD   -7.1R | tahun + 100%
+  LAMA + h1_harga       : n  818 | WR 60.3% | +0.691R | total  +565.1R | PF 2.89 | DD  -19.6R | tahun + 83%
+  LAMA   dibuang h1_harga : n 0
+  LAMA + h4_harga       : n  752 | WR 58.5% | +0.564R | total  +424.0R | PF 2.47 | DD  -31.3R | tahun + 83%
+  LAMA   dibuang h4_harga : n   66 | WR 80.3% | +2.138R | total  +141.1R | PF 13.48 | DD   -3.0R | tahun + 100%
+  BARU bawaan            : n  735 | WR 56.9% | +0.363R | total  +266.9R | PF 1.93 | DD  -27.7R | tahun + 100%
+  BARU + h1_ema         : n  726 | WR 57.2% | +0.350R | total  +253.9R | PF 1.90 | DD  -27.7R | tahun + 83%
+  BARU   dibuang h1_ema   : n    9 | WR 33.3% | +1.443R | total   +13.0R | PF 3.16 | DD   -6.0R | tahun + 33%
+  BARU + h4_ema         : n  605 | WR 56.5% | +0.405R | total  +245.1R | PF 2.01 | DD  -24.7R | tahun + 100%
+  BARU   dibuang h4_ema   : n  130 | WR 58.5% | +0.167R | total   +21.7R | PF 1.47 | DD  -11.3R | tahun + 50%
+  BARU + h1h4_ema       : n  596 | WR 56.9% | +0.390R | total  +232.2R | PF 1.98 | DD  -24.7R | tahun + 83%
+  BARU   dibuang h1h4_ema : n  139 | WR 56.8% | +0.250R | total   +34.7R | PF 1.66 | DD  -12.1R | tahun + 67%
+  BARU + h1_harga       : n  735 | WR 56.9% | +0.363R | total  +266.9R | PF 1.93 | DD  -27.7R | tahun + 100%
+  BARU   dibuang h1_harga : n 0
+  BARU + h4_harga       : n  693 | WR 56.0% | +0.357R | total  +247.4R | PF 1.89 | DD  -27.7R | tahun + 100%
+  BARU   dibuang h4_harga : n   42 | WR 71.4% | +0.465R | total   +19.5R | PF 2.71 | DD   -3.6R | tahun + 60%
+
+### BTC — sinyal lapisan
+  LAMA bawaan            : n  559 | WR 65.5% | +0.839R | total  +468.9R | PF 3.76 | DD  -21.5R | tahun + 83%
+  LAMA + h1_ema         : n  559 | WR 65.5% | +0.839R | total  +468.9R | PF 3.76 | DD  -21.5R | tahun + 83%
+  LAMA   dibuang h1_ema   : n 0
+  LAMA + h4_ema         : n  487 | WR 64.1% | +0.702R | total  +342.1R | PF 3.18 | DD  -22.4R | tahun + 83%
+  LAMA   dibuang h4_ema   : n   72 | WR 75.0% | +1.762R | total  +126.9R | PF 10.74 | DD   -4.9R | tahun + 67%
+  LAMA + h1h4_ema       : n  487 | WR 64.1% | +0.702R | total  +342.1R | PF 3.18 | DD  -22.4R | tahun + 83%
+  LAMA   dibuang h1h4_ema : n   72 | WR 75.0% | +1.762R | total  +126.9R | PF 10.74 | DD   -4.9R | tahun + 67%
+  LAMA + h1_harga       : n  559 | WR 65.5% | +0.839R | total  +468.9R | PF 3.76 | DD  -21.5R | tahun + 83%
+  LAMA   dibuang h1_harga : n 0
+  LAMA + h4_harga       : n  556 | WR 65.8% | +0.845R | total  +469.9R | PF 3.78 | DD  -21.5R | tahun + 83%
+  LAMA   dibuang h4_harga : n    3 | WR  0.0% | -0.335R | total    -1.0R | PF 0.00 | DD   -1.0R | tahun + 0%
+  BARU bawaan            : n  471 | WR 60.9% | +0.404R | total  +190.1R | PF 2.13 | DD  -28.9R | tahun + 83%
+  BARU + h1_ema         : n  471 | WR 60.9% | +0.404R | total  +190.1R | PF 2.13 | DD  -28.9R | tahun + 83%
+  BARU   dibuang h1_ema   : n 0
+  BARU + h4_ema         : n  391 | WR 62.1% | +0.475R | total  +185.7R | PF 2.39 | DD  -22.6R | tahun + 100%
+  BARU   dibuang h4_ema   : n   80 | WR 55.0% | +0.055R | total    +4.4R | PF 1.13 | DD  -18.9R | tahun + 50%
+  BARU + h1h4_ema       : n  391 | WR 62.1% | +0.475R | total  +185.7R | PF 2.39 | DD  -22.6R | tahun + 100%
+  BARU   dibuang h1h4_ema : n   80 | WR 55.0% | +0.055R | total    +4.4R | PF 1.13 | DD  -18.9R | tahun + 50%
+  BARU + h1_harga       : n  471 | WR 60.9% | +0.404R | total  +190.1R | PF 2.13 | DD  -28.9R | tahun + 83%
+  BARU   dibuang h1_harga : n 0
+  BARU + h4_harga       : n  465 | WR 61.1% | +0.414R | total  +192.7R | PF 2.17 | DD  -27.6R | tahun + 83%
+  BARU   dibuang h4_harga : n    6 | WR 50.0% | -0.430R | total    -2.6R | PF 0.14 | DD   -3.0R | tahun + 0%
+
+## Uji 2 — entry M5 (lebih awal, saat candle M5/M15 menutup di luar channel H1)
+Sinyal utama XAU yang dikirim: 2370; breakout terkonfirmasi saat set kosong: 13390; rasio dikirim 0.18
+Breakout palsu (M5 tembus, H1 kembali ke dalam): 5345 → perkiraan ikut terkirim 946
+
+  LAMA: sinyal 1393 | entry lebih awal rata +0.086R (median +0.027R) | R sinyal sama: +174.2R → +201.6R
+        breakout palsu 2790 × 0.18 ≈ 494 trade, rata -0.226R (WR palsu 0%) → total M5 ≈ +90.2R vs bawaan +174.2R | WR 60.2% → ≈43.0%
+        sumber M15: n 1233 | gain +0.079R | +159.3R → +185.8R
+        sumber M5: n 160 | gain +0.137R | +14.9R → +15.8R
+  BARU: sinyal 931 | entry lebih awal rata +0.130R (median +0.064R) | R sinyal sama: +161.4R → +185.9R
+        breakout palsu 2555 × 0.18 ≈ 452 trade, rata -0.206R (WR palsu 0%) → total M5 ≈ +92.6R vs bawaan +161.4R | WR 62.0% → ≈42.0%
+        sumber M5: n 931 | gain +0.130R | +161.4R → +185.9R
+  per tahun (selisih R, M5 − bawaan, termasuk palsu): 2012:-1 2013:-9 2014:-8 2015:-5 2016:-3 2017:-9 2018:-6 2019:-9 2020:-21 2021:-17 2022:-13 2023:-7 2024:-16 2025:-16 2026:-14
+
+## Uji 3 — hindari sinyal di sekitar berita USD besar (pengganti peringatan berita Finnhub)
+Kalender ForexFactory 2010–Jan 2026, 3585 rilis; sinyal sampai Jan 2026.
+
+### XAU — utama NFP/CPI/Fed (utama + lapisan)
+  LAMA ≤ 2 jam SEBELUM rilis      kena n   24 | WR 75.0% | +1.076R | total   +25.8R | PF 5.30 | DD   -5.8R | tahun + 67%
+  LAMA   → sisanya (dilewati)          n 3634 | WR 59.5% | +0.173R | total  +627.0R | PF 1.46 | DD -211.9R | tahun + 56%
+  BARU ≤ 2 jam SEBELUM rilis      kena n   10 | WR  0.0% | -1.000R | total   -10.0R | PF 0.00 | DD  -10.0R | tahun + 0%
+  BARU   → sisanya (dilewati)          n 2491 | WR 60.9% | +0.171R | total  +426.6R | PF 1.46 | DD -205.8R | tahun + 50%
+  LAMA ≤ 6 jam sebelum            kena n  110 | WR 39.1% | -0.242R | total   -26.6R | PF 0.58 | DD  -59.6R | tahun + 25%
+  LAMA   → sisanya (dilewati)          n 3548 | WR 60.3% | +0.191R | total  +679.4R | PF 1.51 | DD -195.1R | tahun + 56%
+  BARU ≤ 6 jam sebelum            kena n   29 | WR 37.9% | -0.565R | total   -16.4R | PF 0.09 | DD  -17.1R | tahun + 25%
+  BARU   → sisanya (dilewati)          n 2472 | WR 61.0% | +0.175R | total  +433.0R | PF 1.47 | DD -206.3R | tahun + 50%
+  LAMA ≤ 2 jam SESUDAH rilis      kena n  124 | WR 68.5% | +0.686R | total   +85.0R | PF 3.31 | DD  -20.6R | tahun + 75%
+  LAMA   → sisanya (dilewati)          n 3534 | WR 59.3% | +0.161R | total  +567.8R | PF 1.42 | DD -221.4R | tahun + 56%
+  BARU ≤ 2 jam SESUDAH rilis      kena n   85 | WR 64.7% | -0.141R | total   -11.9R | PF 0.60 | DD  -21.9R | tahun + 60%
+  BARU   → sisanya (dilewati)          n 2416 | WR 60.6% | +0.177R | total  +428.5R | PF 1.47 | DD -206.8R | tahun + 50%
+  LAMA ≤ 4 jam sesudah            kena n  183 | WR 65.0% | +0.449R | total   +82.1R | PF 2.36 | DD  -24.8R | tahun + 67%
+  LAMA   → sisanya (dilewati)          n 3475 | WR 59.3% | +0.164R | total  +570.7R | PF 1.43 | DD -221.4R | tahun + 56%
+  BARU ≤ 4 jam sesudah            kena n  121 | WR 62.8% | +0.072R | total    +8.8R | PF 1.21 | DD  -22.5R | tahun + 60%
+  BARU   → sisanya (dilewati)          n 2380 | WR 60.6% | +0.171R | total  +407.8R | PF 1.46 | DD -200.2R | tahun + 50%
+  LAMA −2…+2 jam (Finnhub-style)  kena n  148 | WR 69.6% | +0.749R | total  +110.8R | PF 3.59 | DD  -26.5R | tahun + 78%
+  LAMA   → sisanya (dilewati)          n 3510 | WR 59.2% | +0.154R | total  +542.0R | PF 1.40 | DD -221.3R | tahun + 56%
+  BARU −2…+2 jam (Finnhub-style)  kena n   95 | WR 57.9% | -0.231R | total   -21.9R | PF 0.45 | DD  -31.9R | tahun + 60%
+  BARU   → sisanya (dilewati)          n 2406 | WR 60.8% | +0.182R | total  +438.5R | PF 1.49 | DD -197.0R | tahun + 50%
+  bawaan LAMA n 3658 | WR 59.6% | +0.178R | total  +652.8R | PF 1.47 | DD -211.9R | tahun + 56%
+  bawaan BARU n 2501 | WR 60.7% | +0.167R | total  +416.6R | PF 1.45 | DD -215.8R | tahun + 50%
+
+### BTC — utama NFP/CPI/Fed (utama + lapisan)
+  LAMA ≤ 2 jam SEBELUM rilis      kena n    9 | WR 33.3% | -0.160R | total    -1.4R | PF 0.72 | DD   -3.0R | tahun + 33%
+  LAMA   → sisanya (dilewati)          n 1368 | WR 62.6% | +0.757R | total +1035.5R | PF 3.23 | DD  -40.7R | tahun + 83%
+  BARU ≤ 2 jam SEBELUM rilis      kena n    9 | WR 66.7% | -0.240R | total    -2.2R | PF 0.28 | DD   -3.0R | tahun + 50%
+  BARU   → sisanya (dilewati)          n 1026 | WR 59.9% | +0.356R | total  +365.4R | PF 1.97 | DD  -46.0R | tahun + 83%
+  LAMA ≤ 6 jam sebelum            kena n   29 | WR 62.1% | +0.677R | total   +19.6R | PF 2.96 | DD   -5.8R | tahun + 75%
+  LAMA   → sisanya (dilewati)          n 1348 | WR 62.4% | +0.753R | total +1014.4R | PF 3.21 | DD  -40.7R | tahun + 83%
+  BARU ≤ 6 jam sebelum            kena n   13 | WR 46.2% | -0.440R | total    -5.7R | PF 0.13 | DD   -6.1R | tahun + 0%
+  BARU   → sisanya (dilewati)          n 1022 | WR 60.2% | +0.361R | total  +369.0R | PF 1.99 | DD  -46.0R | tahun + 83%
+  LAMA ≤ 2 jam SESUDAH rilis      kena n   10 | WR 80.0% | +1.386R | total   +13.9R | PF 10.93 | DD   -1.4R | tahun + 67%
+  LAMA   → sisanya (dilewati)          n 1367 | WR 62.3% | +0.746R | total +1020.2R | PF 3.18 | DD  -39.9R | tahun + 83%
+  BARU ≤ 2 jam SESUDAH rilis      kena n   18 | WR 33.3% | -0.620R | total   -11.2R | PF 0.07 | DD  -12.0R | tahun + 25%
+  BARU   → sisanya (dilewati)          n 1017 | WR 60.5% | +0.368R | total  +374.4R | PF 2.02 | DD  -42.6R | tahun + 83%
+  LAMA ≤ 4 jam sesudah            kena n   28 | WR 82.1% | +1.834R | total   +51.4R | PF 12.68 | DD   -3.0R | tahun + 100%
+  LAMA   → sisanya (dilewati)          n 1349 | WR 62.0% | +0.728R | total  +982.7R | PF 3.11 | DD  -41.9R | tahun + 83%
+  BARU ≤ 4 jam sesudah            kena n   32 | WR 34.4% | -0.365R | total   -11.7R | PF 0.44 | DD  -20.6R | tahun + 20%
+  BARU   → sisanya (dilewati)          n 1003 | WR 60.8% | +0.374R | total  +375.0R | PF 2.05 | DD  -39.6R | tahun + 83%
+  LAMA −2…+2 jam (Finnhub-style)  kena n   19 | WR 57.9% | +0.654R | total   +12.4R | PF 2.88 | DD   -4.4R | tahun + 25%
+  LAMA   → sisanya (dilewati)          n 1358 | WR 62.4% | +0.752R | total +1021.6R | PF 3.21 | DD  -39.9R | tahun + 83%
+  BARU −2…+2 jam (Finnhub-style)  kena n   27 | WR 44.4% | -0.493R | total   -13.3R | PF 0.11 | DD  -14.6R | tahun + 25%
+  BARU   → sisanya (dilewati)          n 1008 | WR 60.4% | +0.374R | total  +376.6R | PF 2.04 | DD  -40.0R | tahun + 83%
+  bawaan LAMA n 1377 | WR 62.4% | +0.751R | total +1034.1R | PF 3.20 | DD  -40.7R | tahun + 83%
+  bawaan BARU n 1035 | WR 60.0% | +0.351R | total  +363.3R | PF 1.96 | DD  -48.6R | tahun + 83%
+
+### XAU — semua berita besar (utama + lapisan)
+  LAMA ≤ 2 jam SEBELUM rilis      kena n  197 | WR 56.9% | -0.003R | total    -0.7R | PF 0.99 | DD  -37.7R | tahun + 33%
+  LAMA   → sisanya (dilewati)          n 3461 | WR 59.8% | +0.189R | total  +653.5R | PF 1.50 | DD -196.8R | tahun + 56%
+  BARU ≤ 2 jam SEBELUM rilis      kena n  127 | WR 68.5% | +0.530R | total   +67.3R | PF 2.70 | DD  -29.9R | tahun + 60%
+  BARU   → sisanya (dilewati)          n 2374 | WR 60.3% | +0.147R | total  +349.3R | PF 1.39 | DD -190.7R | tahun + 50%
+  LAMA ≤ 6 jam sebelum            kena n  570 | WR 53.5% | -0.091R | total   -51.9R | PF 0.79 | DD -106.4R | tahun + 44%
+  LAMA   → sisanya (dilewati)          n 3088 | WR 60.8% | +0.228R | total  +704.8R | PF 1.62 | DD -180.2R | tahun + 56%
+  BARU ≤ 6 jam sebelum            kena n  301 | WR 65.1% | +0.569R | total  +171.3R | PF 2.64 | DD  -49.9R | tahun + 40%
+  BARU   → sisanya (dilewati)          n 2200 | WR 60.1% | +0.112R | total  +245.3R | PF 1.30 | DD -184.6R | tahun + 50%
+  LAMA ≤ 2 jam SESUDAH rilis      kena n  437 | WR 58.6% | +0.140R | total   +61.0R | PF 1.36 | DD  -54.3R | tahun + 44%
+  LAMA   → sisanya (dilewati)          n 3221 | WR 59.8% | +0.184R | total  +591.8R | PF 1.49 | DD -174.8R | tahun + 44%
+  BARU ≤ 2 jam SESUDAH rilis      kena n  266 | WR 57.5% | +0.212R | total   +56.5R | PF 1.51 | DD  -64.3R | tahun + 50%
+  BARU   → sisanya (dilewati)          n 2235 | WR 61.1% | +0.161R | total  +360.1R | PF 1.44 | DD -183.3R | tahun + 50%
+  LAMA ≤ 4 jam sesudah            kena n  673 | WR 63.3% | +0.139R | total   +93.2R | PF 1.41 | DD  -53.3R | tahun + 56%
+  LAMA   → sisanya (dilewati)          n 2985 | WR 58.8% | +0.187R | total  +559.6R | PF 1.48 | DD -169.9R | tahun + 44%
+  BARU ≤ 4 jam sesudah            kena n  397 | WR 57.2% | +0.289R | total  +114.6R | PF 1.71 | DD  -74.1R | tahun + 50%
+  BARU   → sisanya (dilewati)          n 2104 | WR 61.4% | +0.144R | total  +301.9R | PF 1.39 | DD -171.3R | tahun + 50%
+  LAMA −2…+2 jam (Finnhub-style)  kena n  612 | WR 58.5% | +0.114R | total   +69.7R | PF 1.29 | DD  -84.7R | tahun + 44%
+  LAMA   → sisanya (dilewati)          n 3046 | WR 59.8% | +0.191R | total  +583.1R | PF 1.51 | DD -164.2R | tahun + 56%
+  BARU −2…+2 jam (Finnhub-style)  kena n  373 | WR 62.2% | +0.361R | total  +134.6R | PF 1.98 | DD  -81.1R | tahun + 50%
+  BARU   → sisanya (dilewati)          n 2128 | WR 60.4% | +0.133R | total  +282.0R | PF 1.35 | DD -168.3R | tahun + 50%
+  bawaan LAMA n 3658 | WR 59.6% | +0.178R | total  +652.8R | PF 1.47 | DD -211.9R | tahun + 56%
+  bawaan BARU n 2501 | WR 60.7% | +0.167R | total  +416.6R | PF 1.45 | DD -215.8R | tahun + 50%
+
+### BTC — semua berita besar (utama + lapisan)
+  LAMA ≤ 2 jam SEBELUM rilis      kena n   56 | WR 67.9% | +0.057R | total    +3.2R | PF 1.20 | DD   -4.8R | tahun + 50%
+  LAMA   → sisanya (dilewati)          n 1321 | WR 62.1% | +0.780R | total +1030.9R | PF 3.27 | DD  -37.7R | tahun + 83%
+  BARU ≤ 2 jam SEBELUM rilis      kena n   36 | WR 75.0% | +0.309R | total   +11.1R | PF 2.29 | DD   -5.6R | tahun + 50%
+  BARU   → sisanya (dilewati)          n  999 | WR 59.5% | +0.352R | total  +352.1R | PF 1.95 | DD  -46.0R | tahun + 83%
+  LAMA ≤ 6 jam sebelum            kena n  128 | WR 68.8% | +0.326R | total   +41.7R | PF 2.16 | DD   -8.5R | tahun + 83%
+  LAMA   → sisanya (dilewati)          n 1249 | WR 61.7% | +0.795R | total  +992.4R | PF 3.29 | DD  -34.7R | tahun + 83%
+  BARU ≤ 6 jam sebelum            kena n   68 | WR 73.5% | +0.763R | total   +51.9R | PF 4.13 | DD   -8.2R | tahun + 60%
+  BARU   → sisanya (dilewati)          n  967 | WR 59.0% | +0.322R | total  +311.4R | PF 1.86 | DD  -46.0R | tahun + 83%
+  LAMA ≤ 2 jam SESUDAH rilis      kena n   40 | WR 75.0% | +1.029R | total   +41.2R | PF 6.67 | DD   -4.3R | tahun + 67%
+  LAMA   → sisanya (dilewati)          n 1337 | WR 62.0% | +0.743R | total  +992.9R | PF 3.15 | DD  -38.4R | tahun + 83%
+  BARU ≤ 2 jam SESUDAH rilis      kena n   42 | WR 57.1% | +0.177R | total    +7.4R | PF 1.43 | DD  -12.0R | tahun + 40%
+  BARU   → sisanya (dilewati)          n  993 | WR 60.1% | +0.358R | total  +355.9R | PF 1.99 | DD  -42.6R | tahun + 83%
+  LAMA ≤ 4 jam sesudah            kena n   97 | WR 68.0% | +0.727R | total   +70.5R | PF 3.73 | DD  -11.4R | tahun + 67%
+  LAMA   → sisanya (dilewati)          n 1280 | WR 62.0% | +0.753R | total  +963.5R | PF 3.17 | DD  -40.5R | tahun + 83%
+  BARU ≤ 4 jam sesudah            kena n   77 | WR 57.1% | +0.190R | total   +14.7R | PF 1.46 | DD  -14.6R | tahun + 50%
+  BARU   → sisanya (dilewati)          n  958 | WR 60.2% | +0.364R | total  +348.6R | PF 2.01 | DD  -42.8R | tahun + 83%
+  LAMA −2…+2 jam (Finnhub-style)  kena n   94 | WR 70.2% | +0.443R | total   +41.7R | PF 2.81 | DD   -5.2R | tahun + 33%
+  LAMA   → sisanya (dilewati)          n 1283 | WR 61.8% | +0.774R | total  +992.4R | PF 3.23 | DD  -35.4R | tahun + 83%
+  BARU −2…+2 jam (Finnhub-style)  kena n   75 | WR 64.0% | +0.242R | total   +18.1R | PF 1.70 | DD  -14.2R | tahun + 80%
+  BARU   → sisanya (dilewati)          n  960 | WR 59.7% | +0.360R | total  +345.1R | PF 1.98 | DD  -40.0R | tahun + 83%
+  bawaan LAMA n 1377 | WR 62.4% | +0.751R | total +1034.1R | PF 3.20 | DD  -40.7R | tahun + 83%
+  bawaan BARU n 1035 | WR 60.0% | +0.351R | total  +363.3R | PF 1.96 | DD  -48.6R | tahun + 83%
+
+
+## Uji 4 — PAXG (Binance/Kraken) sebagai cadangan feed XAU
+Binance PAXGUSDT 1 jam 2020-08–2026-09; jam sama dengan XAU: 35643
+  korelasi return 1 jam 0.709 | arah sama 67.8% | selisih harga median +0.10% (P5 -1.07%, P95 +0.85%)
+  breakout Donchian 40: XAU 2673 | PAXG sama jam 47% | ±1 jam 60% | PAXG tambahan (tidak ada di XAU) 612
+  breakout Donchian 55: XAU 2244 | PAXG sama jam 46% | ±1 jam 59% | PAXG tambahan (tidak ada di XAU) 526
+  breakout Donchian 80: XAU 1858 | PAXG sama jam 46% | ±1 jam 59% | PAXG tambahan (tidak ada di XAU) 422
+  Kraken vs Binance PAXG (720 jam terakhir): selisih close median 0.036%
+
+## Uji 3b — replay PENUH kode cloud XAU + lewati sinyal ≤ 36 jam sebelum NFP/CPI/Fed (efek slot dihitung)
+  utama   LAMA bawaan : n 1422 | WR 60.3% | +0.140R | total  +198.4R | PF 1.38 | DD  -48.8R | tahun + 67%
+  utama   LAMA + filter: n 1252 | WR 62.1% | +0.183R | total  +229.0R | PF 1.52 | DD  -39.6R | tahun + 89%
+  utama   BARU bawaan : n  948 | WR 62.6% | +0.172R | total  +163.0R | PF 1.49 | DD  -71.0R | tahun + 83%
+  utama   BARU + filter: n  821 | WR 66.1% | +0.268R | total  +220.2R | PF 1.86 | DD  -52.4R | tahun + 83%
+  utama   2026 bawaan : n   98 | WR 72.4% | +0.744R | total   +72.9R | PF 4.08 | DD  -10.7R | tahun + 100%
+  utama   2026 + filter: n   80 | WR 76.2% | +0.965R | total   +77.2R | PF 5.93 | DD   -6.2R | tahun + 100%
+  lapisan LAMA bawaan : n 2236 | WR 59.2% | +0.203R | total  +454.4R | PF 1.53 | DD -192.4R | tahun + 56%
+  lapisan LAMA + filter: n 1881 | WR 60.0% | +0.278R | total  +523.6R | PF 1.74 | DD -140.3R | tahun + 67%
+  lapisan BARU bawaan : n 1859 | WR 62.3% | +0.234R | total  +434.3R | PF 1.65 | DD -179.2R | tahun + 67%
+  lapisan BARU + filter: n 1653 | WR 64.5% | +0.311R | total  +514.0R | PF 1.92 | DD -138.8R | tahun + 67%
+  lapisan 2026 bawaan : n  220 | WR 75.0% | +0.451R | total   +99.2R | PF 2.87 | DD  -16.4R | tahun + 100%
+  lapisan 2026 + filter: n  174 | WR 75.3% | +0.584R | total  +101.6R | PF 3.44 | DD  -15.2R | tahun + 100%
+  semua   LAMA bawaan : n 3658 | WR 59.6% | +0.178R | total  +652.8R | PF 1.47 | DD -211.9R | tahun + 56%
+  semua   LAMA + filter: n 3133 | WR 60.8% | +0.240R | total  +752.6R | PF 1.66 | DD -152.0R | tahun + 67%
+  semua   BARU bawaan : n 2807 | WR 62.4% | +0.213R | total  +597.3R | PF 1.60 | DD -215.6R | tahun + 67%
+  semua   BARU + filter: n 2474 | WR 65.0% | +0.297R | total  +734.2R | PF 1.90 | DD -166.9R | tahun + 67%
+  semua   2026 bawaan : n  318 | WR 74.2% | +0.541R | total  +172.2R | PF 3.24 | DD  -22.4R | tahun + 100%
+  semua   2026 + filter: n  254 | WR 75.6% | +0.704R | total  +178.8R | PF 4.12 | DD  -12.8R | tahun + 100%
+  per tahun (filter − bawaan, R): 2013:-4 2014:+16 2015:+17 2016:+23 2017:+9 2018:+33 2019:+31 2020:+10 2021:-48 2022:+28 2023:+38 2024:+46 2025:+30 2026:+7
+
+## Uji 5 — tiruan sistem repo moritakaaz/trading-alert v1.3 di data XAU kita 2012–2026 (spread $0,20)
+M15 sebagai pemicu s.d. Agu 2020, M5 sesudahnya. R per trade = model mereka (−1 / 0 BE / +2 / 48 jam).
+
+### v1.1 (H4 saja) — spread $0.00
+  LAMA               n 2284 | WR 28.4% | +0.052R | total  +119.6R | PF 1.11 | DD  -40.7R | tahun + 80%
+  BARU               n 1539 | WR 27.9% | +0.038R | total   +58.5R | PF 1.08 | DD  -97.9R | tahun + 50%
+  9 bln Jan–Okt 2026 n  206 | WR 31.1% | +0.086R | total   +17.8R | PF 1.18 | DD  -11.5R | tahun + 100%
+  per tahun R: 2012:+3 2013:+11 2014:-5 2015:+47 2016:+25 2017:-11 2018:+0 2019:+8 2020:+21 2021:+16 2022:-54 2023:-7 2024:+44 2025:+63 2026:+18
+### v1.1 (H4 saja) — spread $0.20
+  LAMA               n 2284 | WR 28.3% | +0.003R | total    +7.8R | PF 1.01 | DD  -72.8R | tahun + 60%
+  BARU               n 1539 | WR 27.9% | +0.013R | total   +20.2R | PF 1.03 | DD -116.7R | tahun + 50%
+  9 bln Jan–Okt 2026 n  206 | WR 31.1% | +0.080R | total   +16.5R | PF 1.16 | DD  -12.0R | tahun + 100%
+  per tahun R: 2012:+2 2013:+3 2014:-18 2015:+35 2016:+13 2017:-29 2018:-17 2019:-7 2020:+13 2021:+7 2022:-64 2023:-19 2024:+36 2025:+58 2026:+16
+### v1.2/1.3 (+EMA20/50 H1) — spread $0.00
+  LAMA               n 2101 | WR 28.4% | +0.051R | total  +107.5R | PF 1.11 | DD  -42.0R | tahun + 60%
+  BARU               n 1451 | WR 28.3% | +0.048R | total   +70.0R | PF 1.10 | DD  -94.9R | tahun + 50%
+  9 bln Jan–Okt 2026 n  196 | WR 32.1% | +0.117R | total   +22.9R | PF 1.25 | DD  -10.3R | tahun + 100%
+  per tahun R: 2012:+0 2013:+18 2014:-18 2015:+47 2016:+23 2017:+0 2018:-4 2019:-1 2020:+19 2021:+21 2022:-56 2023:-1 2024:+47 2025:+60 2026:+23
+### v1.2/1.3 (+EMA20/50 H1) — spread $0.20
+  LAMA               n 2101 | WR 28.3% | +0.002R | total    +4.5R | PF 1.00 | DD  -64.6R | tahun + 50%
+  BARU               n 1451 | WR 28.3% | +0.023R | total   +33.8R | PF 1.05 | DD -113.3R | tahun + 50%
+  9 bln Jan–Okt 2026 n  196 | WR 32.1% | +0.110R | total   +21.6R | PF 1.23 | DD  -10.4R | tahun + 100%
+  per tahun R: 2012:-1 2013:+10 2014:-29 2015:+35 2016:+12 2017:-17 2018:-20 2019:-15 2020:+12 2021:+12 2022:-65 2023:-12 2024:+39 2025:+55 2026:+22
+### v1.3 + jeda 12 jam setelah SL — spread $0.00
+  LAMA               n 1814 | WR 28.9% | +0.068R | total  +123.0R | PF 1.14 | DD  -49.8R | tahun + 80%
+  BARU               n 1198 | WR 28.3% | +0.058R | total   +69.6R | PF 1.13 | DD  -74.9R | tahun + 50%
+  9 bln Jan–Okt 2026 n  161 | WR 29.8% | +0.084R | total   +13.5R | PF 1.17 | DD  -15.0R | tahun + 100%
+  per tahun R: 2012:+2 2013:+5 2014:-19 2015:+48 2016:+22 2017:+9 2018:+7 2019:-2 2020:+28 2021:+21 2022:-31 2023:-3 2024:+44 2025:+49 2026:+13
+### v1.3 + jeda 12 jam setelah SL — spread $0.20
+  LAMA               n 1814 | WR 28.9% | +0.018R | total   +32.6R | PF 1.04 | DD  -61.7R | tahun + 50%
+  BARU               n 1198 | WR 28.3% | +0.033R | total   +39.9R | PF 1.07 | DD  -89.5R | tahun + 50%
+  9 bln Jan–Okt 2026 n  161 | WR 29.8% | +0.077R | total   +12.4R | PF 1.16 | DD  -15.1R | tahun + 100%
+  per tahun R: 2012:+1 2013:-2 2014:-29 2015:+37 2016:+13 2017:-6 2018:-7 2019:-15 2020:+21 2021:+13 2022:-38 2023:-12 2024:+38 2025:+45 2026:+12
+### tanpa filter — spread $0.00
+  LAMA               n 2434 | WR 28.8% | +0.060R | total  +146.2R | PF 1.13 | DD  -36.2R | tahun + 80%
+  BARU               n 1639 | WR 28.6% | +0.052R | total   +85.1R | PF 1.11 | DD  -85.7R | tahun + 67%
+  9 bln Jan–Okt 2026 n  225 | WR 32.0% | +0.105R | total   +23.7R | PF 1.22 | DD  -12.2R | tahun + 100%
+  per tahun R: 2012:+3 2013:+10 2014:-1 2015:+51 2016:+28 2017:-5 2018:+8 2019:+8 2020:+28 2021:+10 2022:-45 2023:+5 2024:+50 2025:+57 2026:+24
+### tanpa filter — spread $0.20
+  LAMA               n 2434 | WR 28.7% | +0.011R | total   +26.7R | PF 1.02 | DD  -55.4R | tahun + 60%
+  BARU               n 1639 | WR 28.6% | +0.027R | total   +44.3R | PF 1.06 | DD -104.5R | tahun + 50%
+  9 bln Jan–Okt 2026 n  225 | WR 32.0% | +0.099R | total   +22.2R | PF 1.20 | DD  -12.8R | tahun + 100%
+  per tahun R: 2012:+2 2013:+1 2014:-14 2015:+38 2016:+16 2017:-25 2018:-10 2019:-9 2020:+20 2021:-0 2022:-56 2023:-7 2024:+42 2025:+52 2026:+22
+
+### Pembanding: sinyal 💰 XAU kita (replay cloud, spread asli, R = risiko SL 3×ATR20)
+  LAMA               semua   n 3658 | WR 59.6% | +0.178R | total  +652.8R | PF 1.47 | DD -211.9R | tahun + 56%
+  LAMA               utama   n 1422 | WR 60.3% | +0.140R | total  +198.4R | PF 1.38 | DD  -48.8R | tahun + 67%
+  BARU               semua   n 2807 | WR 62.4% | +0.213R | total  +597.3R | PF 1.60 | DD -215.6R | tahun + 67%
+  BARU               utama   n  948 | WR 62.6% | +0.172R | total  +163.0R | PF 1.49 | DD  -71.0R | tahun + 83%
+  9 bln Jan–Okt 2026 semua   n  318 | WR 74.2% | +0.541R | total  +172.2R | PF 3.24 | DD  -22.4R | tahun + 100%
+  9 bln Jan–Okt 2026 utama   n   98 | WR 72.4% | +0.744R | total   +72.9R | PF 4.08 | DD  -10.7R | tahun + 100%
+
+## Uji 3c — sensitivitas jendela jeda sebelum NFP/CPI/Fed (pasca-saring sinyal XAU, utama + lapisan)
+jam | LAMA dilewati n / total R / sisa PF | BARU dilewati n / total R / sisa PF
+    6 jam | LAMA  110 /   -26.6R / PF 1.51 | BARU   54 /   -24.3R / PF 1.64
+   12 jam | LAMA  162 /   -49.4R / PF 1.55 | BARU   80 /   -41.5R / PF 1.67
+   18 jam | LAMA  252 /   -71.3R / PF 1.58 | BARU  129 /   -66.2R / PF 1.72
+   24 jam | LAMA  367 /   -81.1R / PF 1.61 | BARU  234 /  -110.0R / PF 1.83
+   30 jam | LAMA  460 /   -92.3R / PF 1.64 | BARU  296 /  -127.9R / PF 1.87
+   36 jam | LAMA  540 /   -94.3R / PF 1.65 | BARU  348 /  -140.4R / PF 1.91
+   42 jam | LAMA  578 /   -91.9R / PF 1.65 | BARU  403 /  -154.2R / PF 1.95
+   48 jam | LAMA  670 /   -70.7R / PF 1.65 | BARU  480 /  -161.0R / PF 1.99
+   60 jam | LAMA  787 /  -138.1R / PF 1.77 | BARU  600 /  -140.6R / PF 2.01
+   72 jam | LAMA  906 /  -119.2R / PF 1.79 | BARU  666 /   -99.0R / PF 1.97
+  per jenis (36 jam, hanya rilis jenis itu):
+    NFP LAMA dilewati n  261 | WR 54.4% | -0.118R | total   -30.9R | PF 0.73 | DD  -69.3R | tahun + 33%
+    NFP BARU dilewati n   79 | WR 38.0% | -0.542R | total   -42.8R | PF 0.12 | DD  -43.5R | tahun + 0%
+    CPI LAMA dilewati n  203 | WR 49.3% | -0.266R | total   -53.9R | PF 0.45 | DD  -77.5R | tahun + 29%
+    CPI BARU dilewati n  133 | WR 35.3% | -0.411R | total   -54.6R | PF 0.32 | DD  -67.7R | tahun + 25%
+    Fed LAMA dilewati n   84 | WR 64.3% | -0.102R | total    -8.5R | PF 0.70 | DD  -20.7R | tahun + 43%
+    Fed BARU dilewati n   85 | WR 51.8% | -0.379R | total   -32.2R | PF 0.22 | DD  -33.2R | tahun + 17%
+  36 jam LAMA: dilewati 540 sinyal total -94.3R vs subset acak sama besar rata-rata +96.2R → p (acak ≤ nyata) = 0.0000
+  36 jam BARU: dilewati 348 sinyal total -140.4R vs subset acak sama besar rata-rata +74.2R → p (acak ≤ nyata) = 0.0000
+  36 jam, R sinyal yang dilewati per tahun: 2013:+4 2014:-16 2015:-18 2016:-23 2017:-9 2018:-33 2019:-31 2020:-5 2021:+48 2022:-28 2023:-38 2024:-45 2025:-30 2026:-11

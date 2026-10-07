@@ -201,3 +201,12 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Aplikasi `CopyFollow.kt` (dicek tools/compose_check) & `CopyStream.kt` (layanan ⚡, dicek CI Android).
 - `research/hl_trader.py unduh|uji|pilih`: data `data/research/eksternal/copy_multi/hl_{leaderboard,portfolio,trader_pilih}.json.gz`
   (portofolio di-cache 3 hari). `copy_pilih` kini memanggil `cek_terlihat` (jaringan) untuk tiap trader terpilih.
+
+### 7 Okt 2026 — sistem Muse / trading-alert & ⏸️ jeda pra-berita XAU (aplikasi 4.20)
+- `research/muse_uji.py` (hasil `docs/eksternal/hasil_muse.txt`, ringkasan docs/MUSE.md). Repo pihak ketiga diklon ke
+  /home/user/moritakaaz/trading-alert hanya untuk DIBACA (tidak dijalankan). Data baru: Binance PAXGUSDT 1 jam
+  (`data/research/eksternal/paxg_1h/`, 74 zip) + Kraken PAXG (`kraken_paxg.json`); replay penuh dengan jeda
+  `data/research/eksternal/verifikasi/cloud_XAU_berita36.csv`.
+- Dipasang: `cloud/api/_jeda_berita.py` (+ tests/test_cloud_jeda.py), tick.py (XAU_NEWS_SKIP), heartbeat `jeda`, aplikasi
+  4.20 (baris ⏸️ di kartu sinyal + S&K), `jadwal.json` FOMC 2027 + pembaruan tiap jam di workflow arsip_data.
+- Belum: hitung ulang `_core.STATS`/`riwayat.json` dengan jeda (perlu replay ulang XAU ±40 mnt + `research.verifikasi`).

@@ -21,7 +21,9 @@ ET = ZoneInfo("America/New_York")
 RILIS = ((50, "Non-Farm Employment Change", "08:30"), (10, "CPI m/m", "08:30"), (10, "Core CPI m/m", "08:30"),
          (192, "JOLTS Job Openings", "10:00"), (46, "PPI m/m", "08:30"), (9, "Retail Sales m/m", "08:30"),
          (54, "Core PCE Price Index m/m", "08:30"))
-FOMC = ("2026-01-28", "2026-03-18", "2026-04-29", "2026-06-17", "2026-07-29", "2026-09-16", "2026-10-28", "2026-12-09")
+FOMC = ("2026-01-28", "2026-03-18", "2026-04-29", "2026-06-17", "2026-07-29", "2026-09-16", "2026-10-28", "2026-12-09",
+        # 2027 (federalreserve.gov/monetarypolicy/fomccalendars.htm, dicek 7 Okt 2026): hari kedua rapat
+        "2027-01-27", "2027-03-17", "2027-04-28", "2027-06-09", "2027-07-28", "2027-09-15", "2027-10-27", "2027-12-08")
 
 
 def utc(d: str, hm: str) -> str:
@@ -45,6 +47,12 @@ def main() -> None:
         out += [{"title": title, "time": utc(d, hm)} for d in cache[rid] if d >= today]
     out += [{"title": "Federal Funds Rate", "time": utc(d, "14:00")} for d in FOMC if d >= today]
     out.sort(key=lambda x: x["time"])
+    try:                                  # dijalankan tiap jam oleh workflow arsip_data → tulis hanya bila jadwal berubah
+        if json.loads(OUT.read_text(encoding="utf-8")).get("berita") == out:
+            print(len(out), "berita, tidak berubah")
+            return
+    except (OSError, ValueError):
+        pass
     OUT.write_text(json.dumps({"dibuat": today, "sumber": "FRED release/dates + jadwal FOMC", "berita": out},
                               ensure_ascii=False, indent=1), encoding="utf-8")
     print(len(out), "berita s.d.", out[-1]["time"][:10] if out else "-")
