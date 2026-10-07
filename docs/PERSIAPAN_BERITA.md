@@ -134,3 +134,15 @@ BTC/ETH/DOGE/ADA (Binance) + XAU/USD (Twelve Data), kalender ForexFactory pekan 
 copy trader (OKX, vault & 300 trader Hyperliquid), Kalshi harian, log. Butuh secret GitHub Actions TWELVEDATA_API_KEY &
 FRED_API_KEY (tanpa itu XAU & FRED dilewati). Ambil: `git fetch origin arsip-data && git worktree add ../arsip arsip-data`.
 Kandidat NFP (pendahulu membaik / kejutan tenaga kerja) dicek ulang dari arsip ini tiap NFP baru.
+
+## 📈 Uji maju otomatis (7 Okt 2026, "pasang semuanya" setelah secret GitHub diisi)
+- `research/arsip_data.py` kini juga menyimpan XAU 5 menit, potret harian 🔄 titik balik NFP (`nfp_titik/`), dan baris
+  prediksi PERSIS seperti di aplikasi (`prediksi/<pekan>.json`, pipa cloud yang sama: _persiapan → _jadwal → _prarilis →
+  _prediksi, memori aturan NFP dari arsip ForexFactory) — versi terakhir SEBELUM rilis.
+- `research/validasi_maju.py` (tiap jam setelah arsip): untuk tiap rilis sejak 7 Okt 2026 menilai arah emas 1 jam (close
+  5 mnt sebelum rilis → +60 mnt) vs arah yang ditampilkan → `cloud/api/validasi_maju.json` (per peringkat, semua,
+  kandidat NFP, 15 terakhir). Workflow mengirim file itu ke main + branch produksi Vercel bila berubah.
+- Detail tiap baris prediksi: blok "📈 Uji maju sejak 2026-10-07: <peringkat> benar x dari y". Kandidat NFP (pendahulu
+  membaik) otomatis naik ke 🥈 dan baris NFP menjadi "peluang emas naik 1 jam 66%" bila bukti sejak Okt 2021 (8/10 riset +
+  uji maju) mencapai n ≥ 30 dan ≥ 58% (`_prediksi.kandidat_lolos`).
+- Workflow copytrader mingguan kini juga memperbarui branch produksi Vercel.

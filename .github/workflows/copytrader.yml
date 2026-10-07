@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -47,4 +48,9 @@ jobs:
           else
             git commit -m "Copy trader teruji: pembaruan mingguan $(date -u +%Y-%m-%d)"
             git push origin HEAD:main
+            # Vercel production = branch claude/bold-davinci-ykgq8j (ikut diperbarui supaya aplikasi langsung dapat data baru)
+            git fetch -q origin claude/bold-davinci-ykgq8j
+            git push origin HEAD:claude/bold-davinci-ykgq8j || {
+              git checkout -q -B prod origin/claude/bold-davinci-ykgq8j && git merge -q --no-edit main
+              git push origin prod:claude/bold-davinci-ykgq8j; }
           fi

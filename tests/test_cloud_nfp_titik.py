@@ -86,6 +86,6 @@ def test_prediksi_detail_nfp_dan_fed(monkeypatch):
             "mendatang": [{"title": "Non-Farm Employment Change"}, {"title": "Federal Funds Rate"}, {"title": "CPI m/m"}]}
     P.attach(prep)
     nfp, fed, cpi = (c["prediksi"] for c in prep["mendatang"])
-    assert nfp["teks"].startswith("NFP: peluang emas") and [d["judul"] for d in nfp["detail"]] == \
-        ["Dasar angka", "🔄 Titik balik ekonomi (mean reversion)"]
-    assert fed["detail"][-1]["teks"] == "95% TETAP" and len(cpi["detail"]) == 1
+    judul = [d["judul"] for d in nfp["detail"]]
+    assert nfp["teks"].startswith("NFP: peluang emas") and judul[:2] == ["Dasar angka", "🔄 Titik balik ekonomi (mean reversion)"]
+    assert fed["detail"][-1]["teks"] == "95% TETAP" and "🔄" not in "".join(d["judul"] for d in cpi["detail"])
