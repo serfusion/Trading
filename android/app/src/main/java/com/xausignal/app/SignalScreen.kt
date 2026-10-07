@@ -219,7 +219,7 @@ fun TickerCard(prices: Map<String, SignalEvent>, connection: String) {
         list.firstOrNull { it.key.startsWith("XAU") }?.value?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelMedium, color = SellColor, fontWeight = FontWeight.Bold)
         }
-        // ⏸️ jeda pra-berita: sinyal XAU baru dijeda ≤ 36 jam sebelum NFP/CPI/Fed (posisi terbuka tetap dikelola)
+        // ⏸️ jeda pra-berita: sinyal XAU baru dijeda ≤ 60 jam sebelum NFP/CPI/Fed (posisi terbuka tetap dikelola)
         list.firstOrNull { it.key.startsWith("XAU") }?.value?.jedaText()?.let {
             Text(it, style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
         }

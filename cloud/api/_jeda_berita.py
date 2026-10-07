@@ -1,4 +1,4 @@
-"""⏸️ Jeda sinyal 💰 XAU baru ≤ 36 jam sebelum NFP / CPI / keputusan Fed (izin pengguna 7 Okt 2026: "terapkan apabila
+"""⏸️ Jeda sinyal 💰 XAU baru ≤ 60 jam (awal 36 jam, 60 jam sejak 7 Okt 2026 atas izin pengguna) sebelum NFP / CPI / keputusan Fed (izin pengguna 7 Okt 2026: "terapkan apabila
 dapat menambah wr dan profit" — sistem Muse/trading-alert memakai peringatan berita NFP/CPI/FOMC).
 
 Riset research/muse_uji.py (docs/MUSE.md), replay PENUH kode cloud XAU 2012–2026 (konfigurasi live, spread asli):
@@ -7,7 +7,7 @@ Riset research/muse_uji.py (docs/MUSE.md), replay PENUH kode cloud XAU 2012–20
   12 dari 14 tahun membaik; sinyal yang dilewati rugi di NFP, CPI, dan Fed masing-masing (kedua periode).
 BTC justru memburuk → hanya XAU. Posisi yang sudah terbuka tetap dikelola seperti biasa (SL/TP/TUTUP).
 Jadwal: kalender ForexFactory pekan ini (cache Supabase 'kalender') + cloud/api/jadwal.json (FRED + FOMC).
-Tanpa jadwal sama sekali → tidak ada jeda (sinyal tetap jalan). Env XAU_NEWS_SKIP=0 mematikan, XAU_NEWS_SKIP_JAM=36.
+Tanpa jadwal sama sekali → tidak ada jeda (sinyal tetap jalan). Env XAU_NEWS_SKIP=0 mematikan, XAU_NEWS_SKIP_JAM=60.
 Hanya library standar Python.
 """
 from __future__ import annotations
@@ -17,7 +17,7 @@ import json
 import os
 from datetime import datetime, timedelta, timezone
 
-JAM = 36.0
+JAM = 60.0
 NAMA = {"Non-Farm Employment Change": "NFP", "CPI m/m": "CPI", "Core CPI m/m": "CPI", "Federal Funds Rate": "Fed"}
 _PATH = os.path.join(os.path.dirname(__file__), "jadwal.json")
 WIB = timedelta(hours=7)

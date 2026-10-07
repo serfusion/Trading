@@ -138,7 +138,7 @@ def run() -> tuple[int, dict]:
             cfg["war"] = None
             war_error = str(exc)
     main_store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
-    if env.get("XAU_NEWS_SKIP", "1") == "1":   # ⏸️ jeda ≤ 36 jam sebelum NFP/CPI/Fed (research/muse_uji.py, izin 7 Okt 2026)
+    if env.get("XAU_NEWS_SKIP", "1") == "1":   # ⏸️ jeda ≤ 60 jam sebelum NFP/CPI/Fed (research/muse_uji.py, izin 7 Okt 2026)
         try:
             import _arsip
             import _chat

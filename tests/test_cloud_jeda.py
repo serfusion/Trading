@@ -1,4 +1,4 @@
-"""⏸️ Jeda sinyal XAU ≤ 36 jam sebelum NFP/CPI/Fed (cloud/api/_jeda_berita.py) — tanpa jaringan."""
+"""⏸️ Jeda sinyal XAU ≤ 60 jam sebelum NFP/CPI/Fed (cloud/api/_jeda_berita.py) — tanpa jaringan."""
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -27,12 +27,14 @@ def test_waktu_gabung_ff_usd_dan_jadwal():
     assert jb.waktu(rows, berita) == [(NFP, "NFP"), (datetime(2026, 11, 10, 13, 30, tzinfo=UTC), "CPI")]
 
 
-def test_batas_36_jam_sama_dengan_riset():
+def test_batas_60_jam_sama_dengan_riset():
     times = [(NFP, "NFP")]
     f = jb.skip_fn(times)
-    assert f("BUY", NFP - timedelta(hours=36)) == "jeda 36 jam sebelum NFP Jum 6 Nov 20.30 WIB"
+    assert jb.JAM == 60
+    assert f("BUY", NFP - timedelta(hours=60)) == "jeda 60 jam sebelum NFP Jum 6 Nov 20.30 WIB"
     assert f("SELL", NFP - timedelta(minutes=1)) is not None
-    assert f("BUY", NFP - timedelta(hours=36, minutes=1)) is None
+    assert f("BUY", NFP - timedelta(hours=60, minutes=1)) is None
+    assert jb.skip_fn(times, 36)("BUY", NFP - timedelta(hours=37)) is None
     assert f("BUY", NFP) is None                       # rilis sudah keluar → sinyal jalan lagi
     assert f("BUY", NFP + timedelta(hours=1)) is None
     assert jb.skip_fn(times, 6)("BUY", NFP - timedelta(hours=7)) is None
@@ -54,7 +56,7 @@ def test_siapkan_kalender_gagal_pakai_jadwal_json(monkeypatch):
         raise OSError("ForexFactory mati")
     fn, lab = jb.siapkan(rusak, datetime(2026, 11, 9, 13, tzinfo=UTC), {})
     assert lab["on"] and lab["berita"] == "CPI"
-    assert fn("BUY", datetime(2026, 11, 9, 13, tzinfo=UTC)).startswith("jeda 36 jam sebelum CPI")
+    assert fn("BUY", datetime(2026, 11, 9, 13, tzinfo=UTC)).startswith("jeda 60 jam sebelum CPI")
     fn, lab = jb.siapkan(lambda: [], datetime(2026, 11, 9, 13, tzinfo=UTC), {"XAU_NEWS_SKIP_JAM": "12"})
     assert not lab["on"] and fn("BUY", datetime(2026, 11, 9, 13, tzinfo=UTC)) is None
 
@@ -73,8 +75,8 @@ def test_tick_xau_melewati_sinyal_saat_jeda_dan_heartbeat():
     c = 2000 + np.cumsum(rng.standard_t(4, len(idx)) * 4 + 0.3)
     o = np.r_[c[0], c[:-1]]
     df = pd.DataFrame({"open": o, "high": np.maximum(o, c) + 2, "low": np.minimum(o, c) - 2, "close": c}, index=idx)
-    # rilis "besar" tiap 2 hari → jeda menutup ±75% waktu
-    times = [(t.to_pydatetime(), "NFP") for t in pd.date_range(idx[0], idx[-1] + pd.Timedelta(days=3), freq="48h")]
+    # rilis "besar" tiap 4 hari → jeda 60 jam menutup ±60% waktu
+    times = [(t.to_pydatetime(), "NFP") for t in pd.date_range(idx[0], idx[-1] + pd.Timedelta(days=3), freq="96h")]
 
     def run(jeda):
         prices, store, pub = FakePrices(to_bars(df)), FakeStore(), FakePub()
@@ -92,8 +94,8 @@ def test_tick_xau_melewati_sinyal_saat_jeda_dan_heartbeat():
     pub, ev = run(True)
     sig = lambda xs: [e for e in xs if e["type"] == "signal"]  # noqa: E731
     assert len(sig(pub)) < len(sig(base))
-    assert any("dilewati: jeda 36 jam sebelum NFP" in e for e in ev)
-    for e in sig(pub):                                   # sinyal yang lolos memang di luar jendela 36 jam
+    assert any("dilewati: jeda 60 jam sebelum NFP" in e for e in ev)
+    for e in sig(pub):                                   # sinyal yang lolos memang di luar jendela 60 jam
         t = datetime.fromisoformat(e["time"])
         assert jb.berikut(t, times) is None
     hb = [e for e in pub if e["type"] == "heartbeat"]
@@ -107,6 +109,6 @@ def test_sama_dengan_skip_riset_bila_data_ada():
         times = jadwal_cloud()
     except Exception as exc:  # noqa: BLE001 - data kalender riset tidak ada di CI
         pytest.skip(f"data riset tidak ada: {exc}")
-    f_cloud, f_res = jb.skip_fn(times), skip_berita(36)
+    f_cloud, f_res = jb.skip_fn(times), skip_berita(jb.JAM)
     for t in pd.date_range("2019-01-01", "2026-09-30", freq="7h", tz="UTC") + pd.Timedelta(minutes=2):
         assert (f_cloud("BUY", t.to_pydatetime()) is None) == (f_res("BUY", t) is None), t
