@@ -70,6 +70,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   TWELVEDATA_API_KEY & FRED_API_KEY sudah diisi pengguna) + uji maju otomatis `research/validasi_maju.py` →
   `cloud/api/validasi_maju.json` (dikirim workflow ke main & bold-davinci) → blok 📈 di detail; kandidat NFP naik 🥈 otomatis
   bila n ≥ 30 & ≥ 58% (`_prediksi.kandidat_lolos`).
+- Aplikasi 4.22 (7 Okt, keluhan "masih ada bukan prediksinya"): hitung mundur di atas tile XAU·BTC·ETH, baris ⏱️ "Berikutnya"
+  & kartu 🎯 menampilkan prediksi (`prediksiTeks`/`prediksiUntuk` di SignalRepository), nama berita hanya bila cloud gagal.
 - Aplikasi 4.19: peringkat prediksi (`_prediksi.peringkat`: ⚡ Sangat kuat / 🥈 / 🥉 / Biasa, ⚡ di depan baris) + urutan di S&K.
 - Aplikasi 4.18: baris utama TANPA catatan; ketuk = show/hide detail (`prediksi.detail`: dasar angka, 🔄 titik balik NFP
   mean reversion `cloud/api/_nfp_titik.py` + `nfp_titik.json` dari `research/nfp_titik.py`, FRED live cache `nfp_titik`,
