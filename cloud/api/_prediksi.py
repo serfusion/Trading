@@ -7,6 +7,8 @@ untuk berita pekan ini (persiapan["berita"]) dan berita besar berikutnya (persia
               satu-satunya aturan yang konsisten dari ±216 yang diuji (research/news_semua.py)
   3. dasar  : frekuensi historis emas naik 1 jam setelah rilis itu (research/news_prediksi.py, semua tahun)
 Angka besar = arah yang lebih sering (naik/turun). Info saja — bukan kepastian, tidak membuka order.
+Aplikasi 4.18: baris utama saja ("NFP: peluang emas naik 1 jam 61%"); "detail" = blok show/hide (dasar angka,
+🔄 titik balik ekonomi NFP dari _nfp_titik.py, 🏦 keputusan Fed).
 """
 from __future__ import annotations
 
@@ -54,10 +56,32 @@ def untuk(card: dict, mem: dict | None = None) -> dict | None:
     return baris(title, int(seb["naik1j"]), bukti, "dasar")
 
 
-def attach(persiapan: dict, store=None) -> None:
-    """Isi field "prediksi" di setiap kartu berita pekan ini & berita besar berikutnya."""
+def detail(card: dict, pr: dict, persiapan: dict, titik: dict | None) -> list[dict]:
+    """Blok di balik show/hide: dasar angka, 🔄 titik balik ekonomi (NFP), 🏦 keputusan Fed (Polymarket)."""
+    out = [{"judul": "Dasar angka", "teks": pr["catatan"], "catatan": pr["bukti"]}]
+    title = card.get("title")
+    if title == NFP and titik and not card.get("released"):
+        out.append({"judul": titik["judul"], "teks": titik["teks"],
+                    "catatan": "\n".join((titik["kondisi"], titik["pendahulu"], titik["bukti"]))})
+    fed = persiapan.get("fed") if isinstance(persiapan.get("fed"), dict) else None
+    if title == "Federal Funds Rate" and fed and fed.get("teks"):
+        out.append({"judul": fed.get("label") or "🏦 Keputusan Fed", "teks": fed["teks"], "catatan": fed.get("bukti", "")})
+    return out
+
+
+def attach(persiapan: dict, store=None, now=None, env: dict | None = None) -> None:
+    """Isi field "prediksi" (+ "detail" untuk show/hide) di setiap kartu berita pekan ini & berita besar berikutnya."""
     if not isinstance(persiapan, dict):
         return
+    titik = None
+    kartu = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)]
+    if any(c.get("title") == NFP and not c.get("released") for c in kartu):
+        try:                                            # 🔄 mean reversion NFP + pendahulu (_nfp_titik.py)
+            import _nfp_titik
+            from datetime import datetime, timezone
+            titik = _nfp_titik.kondisi(now or datetime.now(timezone.utc), store, env or {})
+        except Exception:  # noqa: BLE001 - detail opsional
+            titik = None
     mem = {}
     if store is not None:
         try:
@@ -65,9 +89,8 @@ def attach(persiapan: dict, store=None) -> None:
             mem = {**_prarilis.SEED, **((store.get_state("prarilis") or {}).get("mem") or {})}
         except Exception:  # noqa: BLE001 - tanpa memori kejutan: pakai model/dasar
             mem = {}
-    for key in ("berita", "mendatang"):
-        for c in persiapan.get(key) or []:
-            if isinstance(c, dict):
-                pr = untuk(c, mem)
-                if pr:
-                    c["prediksi"] = pr
+    for c in kartu:
+        pr = untuk(c, mem)
+        if pr:
+            pr["detail"] = detail(c, pr, persiapan, titik)
+            c["prediksi"] = pr

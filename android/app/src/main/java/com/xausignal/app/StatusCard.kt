@@ -232,13 +232,28 @@ private fun StripPrediksi(prep: JSONObject?) {
     val utama = listOf("Non-Farm", "CPI", "Federal Funds", "JOLTS")
     val b = cand.filter { c -> utama.any { c.optString("title").contains(it) } }
         .minByOrNull { instantOf(it.optString("time")) ?: Instant.MAX } ?: return
-    // 4.17: satu baris "NFP: peluang emas naik 1 jam 61% (teruji, belum pasti)" — tanpa skenario Act < / Act >
-    val teks = b.optJSONObject("prediksi")?.optString("teks")?.ifBlank { null }
-        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
+    // 4.18: cukup "NFP: peluang emas naik 1 jam 61%"; ketuk = show/hide detail (dasar angka, 🔄 titik balik NFP, 🏦 Fed)
+    val p = b.optJSONObject("prediksi")
+    val teks = p?.optString("teks")?.ifBlank { null } ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
     val dalam = b.optString("dalam").ifBlank { b.optString("when") }
-    Text("🎯 ${teks ?: b.optString("title").replace("Non-Farm Employment Change", "NFP")}", maxLines = 2,
-        style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
-    Text("(teruji, belum pasti) • $dalam", maxLines = 1, style = MaterialTheme.typography.labelSmall, color = Muted)
+    var open by remember(b.optString("title") + b.optString("time")) { mutableStateOf(false) }
+    Column(Modifier.fillMaxWidth().clickable { open = !open }) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text("🎯 ${teks ?: b.optString("title").replace("Non-Farm Employment Change", "NFP")}", Modifier.weight(1f),
+                maxLines = 2, style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
+            Text(if (open) "▴" else "▾", color = Muted, style = MaterialTheme.typography.labelMedium)
+        }
+        Text(dalam, maxLines = 1, style = MaterialTheme.typography.labelSmall, color = Muted)
+        val det = p?.optJSONArray("detail")
+        if (open && det != null) for (k in 0 until det.length()) {
+            val d = det.optJSONObject(k) ?: continue
+            Text("${d.optString("judul")}: ${d.optString("teks")}", style = MaterialTheme.typography.labelSmall,
+                fontWeight = FontWeight.Bold)
+            d.optString("catatan").ifBlank { null }?.let {
+                Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+        }
+    }
 }
 
 /** Satu baris: berita berikutnya ≤ 24 jam (atau status lonjakan setelah rilis), tanpa teks bila tidak ada. */
