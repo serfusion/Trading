@@ -78,11 +78,11 @@ def _ago(h: list, now: datetime) -> str:
 
 
 def key_rule(card: dict) -> str:
-    """"KUNCI: Act < 89K → emas NAIK 81% • Act > 89K → emas TURUN 81%" (penentu arah saat angka keluar)."""
+    """"KUNCI: Act di bawah 89K → emas NAIK 81% • Act di atas 89K → emas TURUN 81%" (penentu arah saat angka keluar)."""
     r = REAKSI.get(card["title"]) or {}
     f = card.get("forecast") or "perkiraan"
     parts = []
-    for k, op in (("bawah", "<"), ("atas", ">")):
+    for k, op in (("bawah", "di bawah"), ("atas", "di atas")):
         if k in r:
             n = r[k]["naik60"]
             parts.append(f"Act {op} {f} → emas {'NAIK' if n >= 0.5 else 'TURUN'} {_pct(max(n, 1 - n))}%")
@@ -133,7 +133,7 @@ def result(card: dict, actual: str) -> dict:
            "bukti": f"Act {actual} vs perkiraan {f} • {k['catatan']}"}
     if any(x["dtk"].endswith("dtk") for x in k.get("tahap") or []):
         # aplikasi 3.18: "✅ Act 45K < 89K → arah emas" + deretan 1 dtk / 2 dtk / 3 dtk / 1 mnt (permintaan 2 Okt 2026)
-        out.update(tahap=k["tahap"], judul_tahap=f"✅ Act {actual} {_persiapan.OP[k['hasil']]} {f} → arah emas"
+        out.update(tahap=k["tahap"], judul_tahap=f"✅ Act {actual} {_persiapan.KATA[k['hasil']]} perkiraan {f} → arah emas"
                    + (f" • {k['kejutan']['label']}" if k.get("kejutan") else ""),
                    bukti_tahap=k["bukti"] + " • detik 1–3 dicek di tick Exness • 3–6 jam: arah berita makin lemah "
                                             "(a–b% = semua tahun vs sejak Okt 2021) • angka ini RIWAYAT reaksi; Act "

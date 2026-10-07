@@ -86,7 +86,7 @@ def test_detik_utamakan_exness(monkeypatch):
 def test_kesimpulan_otomatis_setelah_act_keluar():
     k = _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")
     assert k["arah"] == "naik" and k["persen"] >= 60 and k["kuat"] and k["teks"] == f"{k['persen']}% NAIK 🟢"
-    assert k["catatan"].startswith("Act < perkiraan → emas 1 dtk ") and "1 mnt" in k["catatan"] and "rilis)" in k["catatan"]
+    assert k["catatan"].startswith("Act di bawah perkiraan → emas 1 dtk ") and "1 mnt" in k["catatan"] and "rilis)" in k["catatan"]
     assert _persiapan.kesimpulan("CPI m/m", "", "0.3%") is None
     assert _persiapan.kesimpulan("Tidak dikenal", "1", "2") is None
     assert _persiapan.kesimpulan("Non-Farm Employment Change", "250K", "98K")["hasil"] == "atas"
@@ -94,7 +94,7 @@ def test_kesimpulan_otomatis_setelah_act_keluar():
 
 def test_skenario_angka_besar_dan_bukti_tahun():
     sk = {x["hasil"]: x for x in _persiapan.skenario("CPI m/m")}
-    assert set(sk) == {"bawah", "atas"} and sk["bawah"]["label"] == "Data < perkiraan"
+    assert set(sk) == {"bawah", "atas"} and sk["bawah"]["label"] == "Data di bawah perkiraan"
     assert sk["bawah"]["teks"].endswith("% NAIK 🟢") and sk["bawah"]["bukti"].startswith("teruji 2010–")
     assert "menang" not in json.dumps(sk, ensure_ascii=False)
     # lemah / tidak konsisten: persen tetap tampil, abu-abu, diberi label
@@ -154,11 +154,11 @@ def test_tahap_detik_1_2_3_dan_1_menit(monkeypatch):
     assert sk["bawah"]["bukti"].startswith("1 dtk belum gerak") and "detik 1–3" not in sk["bawah"]["bukti"]
     assert "detik 1–3 dicek di tick Exness" in sk["bawah"]["bukti_tahap"]
     k = _persiapan.kesimpulan("Non-Farm Employment Change", "45K", "89K")
-    assert k["catatan"].startswith("Act < perkiraan → emas 1 dtk belum gerak") and k["tahap"][1]["teks"] == "85% NAIK 🟢"
+    assert k["catatan"].startswith("Act di bawah perkiraan → emas 1 dtk belum gerak") and k["tahap"][1]["teks"] == "85% NAIK 🟢"
     # tanpa data detik (reaksi lama): tetap seperti sebelumnya
     monkeypatch.setattr(_persiapan, "REAKSI", {"CPI m/m": {"bawah": {"naik60": 0.9, "n": 50}, "tahun": "2010–2025"}})
     assert "tahap" not in _persiapan.skenario_hentakan("CPI m/m", "0.3%")[0]
-    assert _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")["catatan"].startswith("Act < perkiraan → emas 1 menit •")
+    assert _persiapan.kesimpulan("CPI m/m", "0.2%", "0.3%")["catatan"].startswith("Act di bawah perkiraan → emas 1 menit •")
 
 
 def test_reaksi_json_berisi_detik_dari_dua_feed():

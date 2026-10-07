@@ -216,6 +216,12 @@ class handler(BaseHTTPRequestHandler):
                                      lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+            if isinstance(persiapan, dict):
+                try:                                          # 🎯 satu baris "NFP: peluang emas naik 1 jam 61%" (_prediksi.py)
+                    import _prediksi
+                    _prediksi.attach(persiapan, store)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1":
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)

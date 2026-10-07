@@ -105,3 +105,14 @@ Kalshi (pasar CPI & keputusan Fed) dan Polymarket menyimpan riwayat harga. Jika 
 `gamma-api.polymarket.com`, dan `clob.polymarket.com` diizinkan di pengaturan jaringan environment, bisa diuji:
 apakah peluang pasar prediksi sebelum rilis lebih tepat daripada konsensus ForexFactory, dan apakah itu memberi
 keunggulan arah emas.
+
+## Aplikasi 4.17 — satu baris per berita (7 Okt 2026, permintaan pengguna)
+Pengguna: "cukup `NFP: peluang emas naik 1 jam 61% (teruji, belum pasti)`, bukan `<` / `>`". Cloud `cloud/api/_prediksi.py`
+mengisi field `prediksi` di setiap berita pekan ini & 📅 berikutnya; aplikasi hanya menampilkan baris itu (skenario
+"⚡ Hentakan … bila Act < / >" tidak tampil lagi; data skenario tetap ada di cloud untuk tab Tanya). Sumber berurutan:
+1. model sebelum rilis NFP/JOLTS/Fed (`_prarilis`, walk-forward benar 60–65%) — hanya pekan rilisnya;
+2. aturan teruji NFP: rilis lalu di atas perkiraan → emas naik 1 jam 72% / 61% sejak Okt 2021 (satu-satunya aturan
+   konsisten dari ±216, `research/news_semua.py`);
+3. dasar historis: % emas naik 1 jam setelah rilis itu (2010–2026, mis. CPI 54%, NFP 57%) — mendekati lempar koin.
+Angka besar = arah yang lebih sering. Bukti di tombol Detail. Setelah rilis tetap tampil ✅ hasil (kini "Act 45K di bawah
+perkiraan 89K", tanpa simbol). Fed/Kalshi/perkiraan hari H hanya di Detail.

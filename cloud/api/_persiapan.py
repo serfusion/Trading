@@ -122,7 +122,7 @@ def _num(text: str) -> float | None:
     return float(m.group(2).replace(",", ".")) * mult
 
 
-LABEL_HASIL = {"bawah": "Data < perkiraan", "atas": "Data > perkiraan", "sesuai": "Data = perkiraan"}
+LABEL_HASIL = {"bawah": "Data di bawah perkiraan", "atas": "Data di atas perkiraan", "sesuai": "Data sama dengan perkiraan"}
 
 
 def arah_emas(e: dict | None) -> dict | None:
@@ -275,6 +275,7 @@ def skenario(title: str) -> list[dict]:
 
 
 OP = {"bawah": "<", "atas": ">", "sesuai": "="}
+KATA = {"bawah": "di bawah", "atas": "di atas", "sesuai": "sama dengan"}   # teks untuk pengguna (tanpa simbol, 7 Okt 2026)
 
 
 def skenario_hentakan(title: str, forecast: str) -> list[dict]:
