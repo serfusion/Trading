@@ -209,4 +209,4 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   `data/research/eksternal/verifikasi/cloud_XAU_berita36.csv`.
 - Dipasang: `cloud/api/_jeda_berita.py` (+ tests/test_cloud_jeda.py), tick.py (XAU_NEWS_SKIP), heartbeat `jeda`, aplikasi
   4.20 (baris ⏸️ di kartu sinyal + S&K), `jadwal.json` FOMC 2027 + pembaruan tiap jam di workflow arsip_data.
-- Belum: hitung ulang `_core.STATS`/`riwayat.json` dengan jeda (perlu replay ulang XAU ±40 mnt + `research.verifikasi`).
+- 7 Okt sore: jeda 60 jam + angka badge/riwayat dihitung ulang dari replay penuh (docs/MUSE.md bagian 60 jam), aplikasi 4.21.
