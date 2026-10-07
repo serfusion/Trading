@@ -80,6 +80,11 @@ def detail(card: dict, pr: dict, persiapan: dict, titik: dict | None) -> list[di
     if title == NFP and titik and not card.get("released"):
         out.append({"judul": titik["judul"], "teks": titik["teks"],
                     "catatan": "\n".join((titik["kondisi"], titik["pendahulu"], titik["bukti"]))})
+        if titik.get("lead", 0) >= 2:                   # 🧪 kandidat research/news_gabung.py (belum lolos syarat ⚡)
+            out.append({"judul": "🧪 Kandidat (belum terbukti)",
+                        "teks": "Pendahulu membaik → emas naik 1 jam 66% setelah NFP",
+                        "catatan": "2012–2021: 63% (n 46) • sejak Okt 2021: 80% (n 10, terlalu sedikit) • per tahun naik-turun "
+                                   "• dicek ulang tiap NFP dari arsip data; belum mengubah peringkat"})
     fed = persiapan.get("fed") if isinstance(persiapan.get("fed"), dict) else None
     if title == "Federal Funds Rate" and fed and fed.get("teks"):
         out.append({"judul": fed.get("label") or "🏦 Keputusan Fed", "teks": fed["teks"], "catatan": fed.get("bukti", "")})

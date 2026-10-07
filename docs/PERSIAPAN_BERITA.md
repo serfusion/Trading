@@ -127,3 +127,10 @@ perkiraan 89K", tanpa simbol). Fed/Kalshi/perkiraan hari H hanya di Detail.
 - NFP vs mean reversion: pendahulu membaik (≥ +2) → emas naik 1 jam 66% (LAMA 63% n 46, BARU 80% n 10, tahun naik-turun
   0–100%); kejutan tenaga kerja 30 hari ≤ −2 → 63% (LAMA 68%, BARU 53%); keduanya 78%/67% tetapi n 18/6. Dasar NFP 56%.
   Menarik tetapi BARU terlalu sedikit / tidak konsisten per tahun → kandidat, belum dipasang; dicek ulang tiap NFP.
+
+## 🗄️ Arsip data otomatis (7 Okt 2026, permintaan pengguna)
+`.github/workflows/arsip_data.yml` tiap jam menjalankan `research/arsip_data.py` → branch `arsip-data`: candle 1 jam
+BTC/ETH/DOGE/ADA (Binance) + XAU/USD (Twelve Data), kalender ForexFactory pekan ini + Act, Act resmi FRED, potret harian
+copy trader (OKX, vault & 300 trader Hyperliquid), Kalshi harian, log. Butuh secret GitHub Actions TWELVEDATA_API_KEY &
+FRED_API_KEY (tanpa itu XAU & FRED dilewati). Ambil: `git fetch origin arsip-data && git worktree add ../arsip arsip-data`.
+Kandidat NFP (pendahulu membaik / kejutan tenaga kerja) dicek ulang dari arsip ini tiap NFP baru.

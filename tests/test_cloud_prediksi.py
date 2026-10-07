@@ -45,3 +45,11 @@ def test_peringkat_kilat():
     assert cpi["peringkat"] == 4 and not cpi["teks"].startswith("⚡")
     m = P.untuk({"title": "JOLTS Job Openings", "prarilis": {"naik": 66, "uji": {"lama": 72, "baru": 58}}})
     assert P.peringkat(m, {"prarilis": {"uji": {"lama": 72, "baru": 58}}}) == 2
+
+
+def test_kandidat_nfp_saat_pendahulu_membaik(monkeypatch):
+    import _nfp_titik as N
+    monkeypatch.setattr(N, "kondisi", lambda now, store, env: dict(N.ringkas(N.CFG["kondisi"]), lead=2))
+    prep = {"mendatang": [{"title": "Non-Farm Employment Change"}]}
+    P.attach(prep)
+    assert prep["mendatang"][0]["prediksi"]["detail"][-1]["judul"].startswith("🧪 Kandidat")
