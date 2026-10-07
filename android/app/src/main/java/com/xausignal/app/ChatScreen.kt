@@ -342,6 +342,24 @@ private fun arahColor(teks: String, kuat: Boolean) = when {
 }
 
 /** Satu baris "label kiri + bukti kecil | angka besar kanan", gaya kartu Status tren. */
+/** "NFP: peluang emas naik 1 jam 61%" (besar) + "teruji, belum pasti" (kecil); bukti di mode Detail (cloud _prediksi.py). */
+@Composable
+private fun PrediksiLine(b: JSONObject, detail: Boolean, extra: String = "") {
+    val p = b.optJSONObject("prediksi")
+    val teks = p?.optString("teks")?.ifBlank { null }
+        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
+        ?: if (extra.isNotBlank()) b.optString("title") else return                        // cloud lama
+    Column(Modifier.fillMaxWidth().padding(top = 4.dp)) {
+        Text(teks, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleMedium,
+            color = if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
+            else MaterialTheme.colorScheme.onSurface)
+        val bukti = (p?.optString("bukti") ?: b.optJSONObject("prarilis")?.optString("bukti")).orEmpty()
+        Text("(${p?.optString("catatan")?.ifBlank { null } ?: "teruji, belum pasti"})" +
+            (if (extra.isNotBlank()) " • $extra" else "") + (if (detail && bukti.isNotBlank()) " • $bukti" else ""),
+            style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
+}
+
 @Composable
 private fun BigRow(label: String, bukti: String, teks: String, kuat: Boolean) {
     if (teks.length > 14) {                 // teks besar panjang: susun ke bawah agar keterangan tidak terhimpit
@@ -479,9 +497,8 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             return@AppCard
         }
         // 🏦 keputusan Fed berikutnya (Polymarket), tampil walau bukan pekan ini
-        prep.optJSONObject("fed")?.let { f ->
-            BigRow(f.optString("label"), if (detail) f.optString("bukti") else "", f.optString("teks"),
-                f.optBoolean("kuat"))
+        if (detail) prep.optJSONObject("fed")?.let { f ->     // 4.17: ringkas = satu baris prediksi per berita saja
+            BigRow(f.optString("label"), f.optString("bukti"), f.optString("teks"), f.optBoolean("kuat"))
             LineDivider()
         }
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
@@ -492,46 +509,24 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             Text(b.optString("when"), style = MaterialTheme.typography.labelSmall, color = Muted)
             val hasil = b.optJSONObject("hasil_rilis")
             val hariH = b.optJSONObject("hari_h")
-            (hasil ?: hariH)?.let { h ->
+            // 🎯 4.17 (permintaan pengguna 7 Okt 2026): sebelum rilis cukup SATU baris
+            // "NFP: peluang emas naik 1 jam 61% (teruji, belum pasti)" — tanpa skenario "Act < / Act >"
+            if (hasil == null) PrediksiLine(b, detail)
+            (hasil ?: hariH.takeIf { detail })?.let { h ->
                 val tahap = h.optJSONArray("tahap")
-                if (tahap != null && tahap.length() > 0) {          // ✅ Act 45K < 89K → 1 dtk / 2 dtk / 3 dtk / 1 mnt
+                if (tahap != null && tahap.length() > 0) {          // ✅ Act 45K di bawah perkiraan 89K → 1/2/3 dtk, 1 mnt
                     TahapBlock(h.optString("judul_tahap"), tahap, if (detail) h.optString("bukti_tahap") else "")
                 } else {
                     BigRow(h.optString("label"), if (detail) h.optString("bukti") else "", h.optString("teks"),
                         h.optBoolean("kuat"))
                 }
             }
-            // 📊 peluang emas 1 jam SEBELUM rilis NFP/JOLTS/Fed (cloud/api/_prarilis.py, aplikasi 4.4)
-            if (hasil == null) b.optJSONObject("prarilis")?.let { p ->
-                BigRow("Sebelum rilis", if (detail) p.optString("bukti") else "teruji ±60–65%, belum pasti",
-                    p.optString("teks"), p.optBoolean("kuat"))
-            }
             ManualAct(b, onManual)
-            val sk = b.optJSONArray("skenario")
-            if (sk != null) {
-                for (k in 0 until sk.length()) {
-                    val x = sk.getJSONObject(k)
-                    val tahap = x.optJSONArray("tahap")
-                    if (hasil != null && tahap != null) continue    // hasil sudah keluar: cukup baris ✅ di atas
-                    if (tahap != null && tahap.length() > 0) {
-                        TahapBlock(x.optString("label_tahap"), tahap, if (detail) x.optString("bukti_tahap") else "")
-                    } else {
-                        BigRow(x.optString("label"), if (detail) x.optString("bukti") else "", x.optString("teks"),
-                            x.optBoolean("kuat"))
-                    }
-                }
-            } else {                                        // cloud lama (tanpa "skenario")
-                val em = b.optJSONObject("emas_jika") ?: JSONObject()
-                fun pct(k: String) = if (em.has(k)) "${em.optInt(k)}%" else "-"
-                Text("Emas naik 1 jam: data < perkiraan ${pct("bawah")} • > perkiraan ${pct("atas")}",
-                    style = MaterialTheme.typography.bodySmall)
-            }
-            // 🎲 peluang pasar prediksi Kalshi (cloud/api/_kalshi.py): diperbarui tiap 15 menit sebelum rilis
-            if (hariH == null && hasil == null) b.optJSONObject("kalshi")?.let { k ->   // cloud lama
-                BigRow(k.optString("label"), if (detail) k.optString("bukti") else "", k.optString("teks"),
-                    k.optBoolean("kuat"))
-            }
             if (!detail) continue
+            // 🎲 peluang pasar prediksi Kalshi (cloud/api/_kalshi.py) — hanya di Detail
+            if (hariH == null && hasil == null) b.optJSONObject("kalshi")?.let { k ->
+                BigRow(k.optString("label"), k.optString("bukti"), k.optString("teks"), k.optBoolean("kuat"))
+            }
             val arah = b.optString("arah")
             if (arah.startsWith("condong")) Text("Sebelum rilis: $arah", color = Gold,
                 style = MaterialTheme.typography.bodySmall)
@@ -558,18 +553,11 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             for (i in 0 until next.length()) {
                 val b = next.getJSONObject(i)
                 if (i > 0) LineDivider()
-                Text(b.optString("title"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
-                Text("${b.optString("when")} • ${b.optString("dalam")}", style = MaterialTheme.typography.labelSmall,
-                    color = Muted)
-                val sk = b.optJSONArray("skenario") ?: continue
-                for (k in 0 until sk.length()) {
-                    val x = sk.getJSONObject(k)
-                    BigRow(x.optString("label"), if (detail) x.optString("bukti") else "", x.optString("teks"),
-                        x.optBoolean("kuat"))
-                }
+                PrediksiLine(b, detail, "${b.optString("when")} • ${b.optString("dalam")}")
             }
         }
-        Text("Peluang pasar prediksi, bukan kepastian.", style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text("Peluang dari data historis, bukan kepastian. Tidak membuka order.", style = MaterialTheme.typography.labelSmall,
+            color = Muted)
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
         prep.optJSONObject("arsip")?.optString("status")?.ifBlank { null }?.let {
             Text("🗄️ Arsip berita GitHub: $it", style = MaterialTheme.typography.labelSmall, color = Muted)

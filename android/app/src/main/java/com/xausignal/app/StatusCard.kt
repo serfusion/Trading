@@ -109,7 +109,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
         }
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
-        StripPrediksi(prep)                      // 🎯 berita besar berikutnya + skenario emas (4.14)
+        StripPrediksi(prep)                      // 🎯 berita besar berikutnya + peluang emas 1 jam (4.17)
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
@@ -220,7 +220,7 @@ private fun StripPudar(prep: JSONObject?, now: Long) {
     }
 }
 
-/** 🎯 Satu baris: berita besar berikutnya (pekan ini atau 📅 mendatang) + skenario emas terkuat. */
+/** 🎯 Berita besar berikutnya (pekan ini atau 📅 mendatang): "NFP: peluang emas naik 1 jam X%" (4.17). */
 @Composable
 private fun StripPrediksi(prep: JSONObject?) {
     val now = Instant.now()
@@ -232,14 +232,13 @@ private fun StripPrediksi(prep: JSONObject?) {
     val utama = listOf("Non-Farm", "CPI", "Federal Funds", "JOLTS")
     val b = cand.filter { c -> utama.any { c.optString("title").contains(it) } }
         .minByOrNull { instantOf(it.optString("time")) ?: Instant.MAX } ?: return
-    val sk = b.optJSONArray("skenario")
-    val tanda = mapOf("bawah" to "Act<", "atas" to "Act>", "sesuai" to "Act=")
-    val rows = (0 until (sk?.length() ?: 0)).map { sk!!.getJSONObject(it) }
-        .joinToString("  ") { "${tanda[it.optString("hasil")] ?: ""} ${it.optString("teks")}".trim() }
+    // 4.17: satu baris "NFP: peluang emas naik 1 jam 61% (teruji, belum pasti)" — tanpa skenario Act < / Act >
+    val teks = b.optJSONObject("prediksi")?.optString("teks")?.ifBlank { null }
+        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
     val dalam = b.optString("dalam").ifBlank { b.optString("when") }
-    Text("🎯 ${b.optString("title").replace("Non-Farm Employment Change", "NFP")} • $dalam", maxLines = 1,
+    Text("🎯 ${teks ?: b.optString("title").replace("Non-Farm Employment Change", "NFP")}", maxLines = 2,
         style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
-    if (rows.isNotBlank()) Text("Emas 1 mnt: $rows", maxLines = 2, style = MaterialTheme.typography.labelSmall, color = Muted)
+    Text("(teruji, belum pasti) • $dalam", maxLines = 1, style = MaterialTheme.typography.labelSmall, color = Muted)
 }
 
 /** Satu baris: berita berikutnya ≤ 24 jam (atau status lonjakan setelah rilis), tanpa teks bila tidak ada. */

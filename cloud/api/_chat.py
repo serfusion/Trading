@@ -602,7 +602,7 @@ def detik_answer(grp: str | None) -> str:
         for hasil in ("bawah", "atas"):
             st = _persiapan.tahap(title, hasil)
             if any(x["dtk"].endswith("dtk") for x in st):
-                arah.append(f"• {title} {_persiapan.OP[hasil]} perkiraan: {_persiapan.tahap_teks(st)}")
+                arah.append(f"• {title} {_persiapan.KATA[hasil]} perkiraan: {_persiapan.tahap_teks(st)}")
     if arah:
         body = ("ARAH EMAS SETELAH RILIS (riwayat tick; detik pertama biasanya belum bergerak, hentakan baru jelas di "
                 "detik ke-2–3):\n" + "\n".join(arah) + "\n\n" + body)

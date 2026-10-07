@@ -63,6 +63,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Polymarket/Kalshi/Cleveland Fed/CME/BLS DIBLOKIR jaringan sesi (403) → belum diuji; minta pengguna membuka host
   bila ingin diuji.
 
+- Aplikasi 4.17 (7 Okt, permintaan pengguna): kartu 🎯 / 📅 / MarketStrip = SATU baris per berita "NFP: peluang emas naik
+  1 jam X% (teruji, belum pasti)" dari `cloud/api/_prediksi.py` (model prarilis → aturan NFP prev_s +1 61% → dasar
+  historis). JANGAN tampilkan lagi skenario "Act < / Act >" di aplikasi; teks hasil pakai kata ("di bawah perkiraan").
+
 ## Data di repo (30 Sep 2026 — `data/README.md`)
 - Permintaan pengguna: data unduhan DISIMPAN di repo (privat) supaya tidak diunduh ulang. `.gitignore` membuka
   `data/research/{eksternal,h1,<klon data>}`; kode pihak ketiga (.py/.xml/.txt) & `.git` klon tidak di-commit.
