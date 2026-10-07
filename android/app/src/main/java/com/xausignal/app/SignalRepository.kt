@@ -133,6 +133,26 @@ fun SignalEvent.warText(): String? =
 fun SignalEvent.jedaText(): String? =
     json.optJSONObject("jeda")?.takeIf { it.optBoolean("on") }?.optString("text")?.ifBlank { null }
 
+/** 4.22: teks prediksi berita dari cloud ("NFP: peluang emas naik 1 jam 61%"), null bila belum ada. `pendek` =
+ *  versi ringkas untuk tempat sempit ("NFP: emas naik 61%"). */
+fun prediksiTeks(b: JSONObject?, pendek: Boolean = false): String? {
+    val t = b?.optJSONObject("prediksi")?.optString("teks")?.ifBlank { null }
+        ?: b?.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null } ?: return null
+    return if (pendek) t.replace("peluang emas ", "emas ").replace(" 1 jam", "") else t
+}
+
+/** Prediksi untuk berita berjudul `title` (kartu pekan ini atau berita besar berikutnya), null bila tidak ada. */
+fun prediksiUntuk(prep: JSONObject?, title: String, pendek: Boolean = false): String? {
+    for (k in listOf("berita", "mendatang")) {
+        val l = prep?.optJSONArray(k) ?: continue
+        for (i in 0 until l.length()) {
+            val b = l.optJSONObject(i) ?: continue
+            if (b.optString("title") == title) prediksiTeks(b, pendek)?.let { return it }
+        }
+    }
+    return null
+}
+
 fun tierLabel(tier: String): String = when (tier) {
     "zap" -> "⚡ Emas"
     "silver" -> "🥈"

@@ -187,11 +187,13 @@ private fun headerCountdown(prep: JSONObject?, now: Long): Pair<String, Long> {
     if (list != null) for (i in 0 until list.length()) {
         val b = list.getJSONObject(i)
         val t = instantOf(b.optString("time")) ?: continue
-        if (t.isAfter(nowI) && (best == null || t.isBefore(best.second))) best = b.optString("title") to t
+        // 4.22: tampilkan prediksi ("CPI: emas naik 54%"), bukan sekadar nama berita
+        val label = prediksiTeks(b, pendek = true)?.let { "🎯 $it" } ?: "📰 ${b.optString("title").take(18)}"
+        if (t.isAfter(nowI) && (best == null || t.isBefore(best.second))) best = label to t
     }
-    best?.let { (title, t) ->
+    best?.let { (label, t) ->
         val left = Duration.between(nowI, t).toMillis()
-        if (left <= 24 * 3600_000L) return "📰 ${title.take(18)}" to left
+        if (left <= 24 * 3600_000L) return label to left
     }
     val day = nowI.truncatedTo(java.time.temporal.ChronoUnit.DAYS)
     val sesi = listOf("🌏 Asia" to 0L, "🇪🇺 Eropa" to 7L, "🇺🇸 Amerika" to 13L)
@@ -243,7 +245,7 @@ private fun StripPrediksi(prep: JSONObject?) {
     var open by remember(b.optString("title") + b.optString("time")) { mutableStateOf(false) }
     Column(Modifier.fillMaxWidth().clickable { open = !open }) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Text("🎯 ${teks ?: b.optString("title").replace("Non-Farm Employment Change", "NFP")}", Modifier.weight(1f),
+            Text(teks?.let { "🎯 $it" } ?: "🎯 ${b.optString("title").replace("Non-Farm Employment Change", "NFP")} (prediksi memuat…)", Modifier.weight(1f),
                 maxLines = 2, style = MaterialTheme.typography.labelMedium, color = Gold, fontWeight = FontWeight.Bold)
             Text(if (open) "▴" else "▾", color = Muted, style = MaterialTheme.typography.labelMedium)
         }

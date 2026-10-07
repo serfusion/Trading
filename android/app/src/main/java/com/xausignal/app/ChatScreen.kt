@@ -347,7 +347,8 @@ private fun arahColor(teks: String, kuat: Boolean) = when {
 private fun PrediksiLine(b: JSONObject, open: Boolean, waktu: String, onToggle: () -> Unit) {
     val p = b.optJSONObject("prediksi")
     val teks = p?.optString("teks")?.ifBlank { null }
-        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null } ?: b.optString("title")   // cloud lama
+        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
+        ?: "${b.optString("title")} (prediksi memuat…)"   // cloud lama / gagal
     Row(Modifier.fillMaxWidth().clickable(onClick = onToggle).padding(top = 4.dp),
         verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
@@ -483,7 +484,7 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             Column(Modifier.weight(1f)) {
                 Text("⏱️ Ingatkan 1 menit sebelum rilis", fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.bodySmall)
-                Text(if (!alarmOn) "Mati" else nextAlarm?.let { "Berikutnya: ${it.title} • ${it.whenText}" }
+                Text(if (!alarmOn) "Mati" else nextAlarm?.let { "Berikutnya: ${prediksiUntuk(prep, it.title) ?: it.title} • ${it.whenText}" }
                     ?: "Menunggu kalender pekan ini", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
             Switch(checked = alarmOn, onCheckedChange = onAlarm)
