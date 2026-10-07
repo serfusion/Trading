@@ -86,7 +86,8 @@ fun CopyDetailDialog(x: JSONObject, onDismiss: () -> Unit) {
         title = {
             Column {
                 Text(x.optString("name"), fontWeight = FontWeight.ExtraBold, maxLines = 1)
-                Text("$platform" + (if (x.has("pengikut")) " • ${x.optInt("pengikut")} pengikut" else "") +
+                Text("$platform" + (if (x.has("pengikut")) " • ${followersText(x)}" else "") +
+                    (if (x.optBoolean("terlihat")) " • 👁 posisi terlihat" else "") +
                     (tierLabel(x)?.let { " • $it" } ?: ""), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         },

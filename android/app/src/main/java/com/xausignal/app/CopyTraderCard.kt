@@ -131,6 +131,16 @@ fun CopyTraderSection() {
     }
 }
 
+/** "119 pengikut", atau untuk trader Hyperliquid individual (tanpa fitur pengikut) "modal $1,2 jt". */
+fun followersText(x: JSONObject): String {
+    val m = x.optDouble("modal", 0.0)
+    return when {
+        x.optInt("pengikut") > 0 || m <= 0 -> "${x.optInt("pengikut")} pengikut"
+        m >= 1e6 -> "modal \$${fmt(m / 1e6, 1)} jt"
+        else -> "modal \$${fmt(m / 1e3, 0)} rb"
+    }
+}
+
 /** Peringkat dari cloud (research/copy_pilih.py, field "tier": 1 Terbaik, 2 Baik, 3 Lumayan baik). */
 fun tierLabel(x: JSONObject): String? = when (x.optInt("tier", 0)) {
     1 -> "🥇 Terbaik"
@@ -172,7 +182,7 @@ private fun CopyRow(x: JSONObject, onClick: () -> Unit) {
             Text(x.optString("name"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium,
                 maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text((if (CopyFollow.isFollowed(x)) "✓ diikuti • " else "") + (if (x.optBoolean("terlihat")) "👁 " else "") +
-                "${if (platform.startsWith("MQL5")) "MQL5" else platform} • ${x.optInt("pengikut")} pengikut" +
+                "${if (platform.startsWith("MQL5")) "MQL5" else platform} • ${followersText(x)}" +
                 if (x.optBoolean("penuh")) " • penuh" else "",
                 style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1, overflow = TextOverflow.Ellipsis)
         }

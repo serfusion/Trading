@@ -40,7 +40,8 @@ def test_file_cloud_untuk_aplikasi():
     d = json.loads((ROOT / "cloud" / "api" / "copytrader.json").read_text(encoding="utf-8"))
     pd.Timestamp(d["dibuat"])
     assert d["uji"]["binance"] and d["uji"]["mql5"] and d["kesimpulan"]
-    semua = sum((d.get(k, []) for k in ("okx", "bitget", "hyperliquid", "etoro", "binance", "mql5", "gabungan")), [])
+    semua = sum((d.get(k, []) for k in ("hl_trader", "okx", "bitget", "hyperliquid", "etoro", "binance", "mql5",
+                                        "gabungan")), [])
     assert semua and d["gabungan"] and d["singkat"]
     for x in semua:
         assert x["url"].startswith(("https://www.etoro.com/people/", "https://www.binance.com/", "https://www.mql5.com/",
@@ -50,10 +51,10 @@ def test_file_cloud_untuk_aplikasi():
             assert k in x
     assert "skor" not in json.dumps(d)
     g = d["gabungan"]
-    assert all(x["pengikut"] >= 30 for x in g)
-    sk = [x["roi"] / max(x["mdd"], 3) for x in g]
-    assert sk == sorted(sk, reverse=True)
-    assert max(sum(1 for x in g if x["sumber"] == s) for s in {x["sumber"] for x in g}) <= 4
+    assert all(x["pengikut"] >= 30 or x.get("modal", 0) >= 100_000 for x in g)
+    sk = [(x.get("tier", 3), -x["roi"] / max(x["mdd"], 3)) for x in g]     # 🥇 → 🥈 → 🥉, lalu profit/DD
+    assert sk == sorted(sk)
+    assert max(sum(1 for x in g if x["sumber"] == s) for s in {x["sumber"] for x in g}) <= 6
 
 
 def test_etoro_saringan(tmp_path, monkeypatch):
@@ -92,3 +93,33 @@ def test_kurva_lolos():
     jatuh.iloc[200:] *= 0.7                                             # DD 30% → gagal
     assert not C._lolos(C._kurva(jatuh), 300)
     assert not C._lolos(k, 400)                                         # riwayat kurang panjang
+
+
+def test_tier_dan_terlihat(monkeypatch):
+    base = {"roi": 40.0, "mdd": 8.0, "wr": 70.0}
+    assert C.tier(dict(base, terlihat=True)) == 1                         # 40/8 = 5 ≥ 4, terlihat
+    assert C.tier(dict(base, terlihat=False)) == 2                        # tidak terlihat → maks 🥈
+    assert C.tier(dict(base, terlihat=True, wr_curiga=True)) == 2
+    assert C.tier({"roi": 10.0, "mdd": 8.0, "wr": 70.0, "terlihat": True}) == 3
+    assert C.cek_terlihat({"platform": "Hyperliquid", "id": "0x1"}) is True
+    assert C.cek_terlihat({"platform": "MQL5 MT5", "id": "1"}) is False
+    monkeypatch.setattr(C.CM, "req", lambda url, body=None, tries=4: {"data": {"positionShow": False}})
+    assert C.cek_terlihat({"platform": "Binance", "id": "9"}) is False
+    monkeypatch.setattr(C.CM, "req", lambda url, body=None, tries=4: {"data": [{"instId": ""}]})
+    assert C.cek_terlihat({"platform": "OKX", "id": "A"}) is False
+
+
+def test_hl_trader_wr_fills():
+    from research import hl_trader as H
+    fills = [{"coin": "BTC", "time": 1, "dir": "Close Long", "closedPnl": "10", "fee": "1"},
+             {"coin": "BTC", "time": 1, "dir": "Close Long", "closedPnl": "-2", "fee": "0"},   # satu transaksi (+7)
+             {"coin": "ETH", "time": 2, "dir": "Close Short", "closedPnl": "1", "fee": "2"},   # rugi setelah biaya
+             {"coin": "ETH", "time": 3, "dir": "Open Long", "closedPnl": "0", "fee": "1"}]
+    assert H.wr_fills(fills) == (50.0, 2, 3)
+    rows = [{"ethAddress": "a", "accountValue": "5e6", "windowPerformances": [["month", {"vlm": "1e8"}],
+                                                                          ["allTime", {"vlm": "1e9"}]]},
+            {"ethAddress": "mm", "accountValue": "5e6", "windowPerformances": [["month", {"vlm": "1e10"}],
+                                                                           ["allTime", {"vlm": "1e11"}]]},
+            {"ethAddress": "kecil", "accountValue": "500", "windowPerformances": [["month", {"vlm": "1e3"}],
+                                                                              ["allTime", {"vlm": "1e4"}]]}]
+    assert [r["ethAddress"] for r in H.kandidat(rows)] == ["a"]

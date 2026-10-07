@@ -141,3 +141,76 @@ Bitget: untung penyalin 180 hari positif hanya di 12% trader. Kesimpulan sama di
 hancur & DD, tetapi profit tidak lebih tinggi dan biasanya kalah dari beli-tahan BTC/indeks.
 Tidak bisa: Bybit (Akamai menolak IP AS), Exness Social Trading & Myfxbook (403), BingX (butuh tanda tangan waktu);
 ZuluTrade terbaca (`zulutrade-gateway/api/providers/performance/search`) tetapi tanpa riwayat → belum diuji, tidak dipasang.
+
+## 👁 Follow / unfollow trader (aplikasi 4.16, permintaan pengguna 7 Okt 2026)
+
+Permintaan: "klik follow → otomatis dapat data saat trader open & tutup posisi di detik itu juga, langsung ke apk; sort
+dari yang terbaik hingga lumayan baik; cari di seluruh market/broker dunia, terutama yang terlihat open posisinya".
+
+**Cara kerja (jujur soal "detik itu juga")** — API publik situs copy trade TIDAK punya push/webhook, jadi:
+1. Aplikasi: tombol **➕ FOLLOW** di jendela detail trader → POST `/api/chat {"ikuti": {...}}` → baris Supabase `ikuti`
+   (maks 20 trader; daftar di cloud, jadi sama di semua HP dengan topik yang sama).
+2. Cloud `cloud/api/_ikuti.py` (GET `/api/ikuti?key=CRON_SECRET`, dipanggil **pg_cron tiap 15 detik**) membaca posisi
+   terbuka setiap trader yang diikuti, membandingkan dengan potret sebelumnya (baris `ikuti_snap`), lalu mengirim SATU
+   pesan ntfy ke topik `<NTFY_TOPIC>-copy` berisi kejadian putaran itu:
+   `copy_open` (posisi baru: koin, arah, entry, TP/SL bila dibuka situsnya, leverage), `copy_close` (posisi hilang:
+   harga tutup dari riwayat situs, gerak harga %), `copy_follow` (potret pertama setelah follow).
+3. Aplikasi: layanan **⚡ Instan** (`CopyStream.kt`, foreground "remoteMessaging", notifikasi kecil diam wajib Android)
+   mendengarkan topik itu terus → notifikasi tiba ±1–2 detik setelah cloud mendeteksi. Poll cadangan tiap 10 menit
+   (dan saat aplikasi dibuka) mengambil kejadian yang terlewat bila layanan dimatikan sistem / ⚡ OFF.
+   Total jeda ≈ **0–15 detik (jadwal cek) + jeda situs** memperbarui datanya. Hyperliquid on-chain ≈ seketika;
+   Binance/OKX/Bitget umumnya beberapa detik; eToro bisa lebih lambat (cache halaman publik).
+4. Perlindungan: gagal baca situs → potret lama dipertahankan (tanpa TUTUP palsu); daftar mendadak kosong → tunggu
+   1 putaran lagi; pesan kembar dari layanan & poll diabaikan (id pesan); notifikasi kembar memakai id yang sama.
+5. **Info saja — tidak ada order** di akun Anda. Tutup/buka posisi tetap keputusan Anda.
+
+**Aktifkan di Supabase (sekali)** — SQL Editor (butuh ekstensi pg_cron & pg_net yang sudah dipakai `/api/tick`):
+```sql
+select cron.schedule('copy-ikuti', '15 seconds', $$ select net.http_get(
+  url := 'https://DOMAIN_KAMU/api/ikuti?key=CRON_SECRET_KAMU', timeout_milliseconds := 30000); $$);
+-- berhenti: select cron.unschedule('copy-ikuti');
+```
+Biaya: ±5.760 panggilan Vercel/hari (±173 rb/bulan; Hobby 1 juta) — tiap panggilan ±1–2 detik saat 5–10 trader
+diikuti. Bila pemakaian Vercel mendekati batas, ganti ke `'30 seconds'`. ntfy hanya dikirim bila ada kejadian.
+`COPY_FOLLOW=0` (env Vercel) mematikan pemantau. Status di aplikasi: "Dicek N dtk lalu" / "⚠️ jadwal pg_cron mati?".
+
+**Posisi terlihat per situs** (field `terlihat`, ikon 👁 di daftar):
+
+| Situs | Posisi terbuka publik? | TP/SL | Bisa di-follow |
+|---|---|---|---|
+| Hyperliquid (trader & vault) | selalu (on-chain, tidak bisa disembunyikan) | ya (order pemicu) | ✅ terbaik |
+| eToro | ya (portofolio publik) | ya | ✅ (lebih lambat) |
+| OKX | ya, kecuali koin disembunyikan | tidak | ✅ |
+| Bitget | ya, kecuali "perlindungan posisi" | riwayat saja | ✅ |
+| Binance | hanya bila trader mengaktifkan positionShow | tidak | ⚠️ sebagian besar disembunyikan |
+| MQL5 | tidak (hanya pelanggan berbayar) | - | ❌ |
+
+Situs lain yang dicek 7 Okt 2026 dari jaringan sesi: Bybit, BingX, MEXC, Gate, BitMart, Pionex, Myfxbook, AsterDEX
+403/diblokir; dYdX indexer GEOBLOCKED (AS); KuCoin, Phemex, Toobit, WEEX, CoinEx, LBank, Bitunix, BYDFi: halaman
+terbuka tetapi endpoint copy trade publik tidak ditemukan/butuh login; Copin (agregator DEX) API publik hanya statistik
+seumur hidup GMX v1/Kwenta/dYdX (sebagian besar protokol lama/tidak aktif) → tidak dipasang.
+
+**Peringkat** (`research/copy_pilih.py` `tier()`, urutan daftar = 🥇 → 🥈 → 🥉 lalu profit/DD):
+🥇 Terbaik = posisi terlihat + WR ≥ 60% + profit/DD ≥ 4 (tanpa ⚠️ WR ≈ 100%); 🥈 Baik = profit/DD ≥ 2;
+🥉 Lumayan baik = lolos saringan teruji. Gabungan kini maks 30 trader, maks 6 per sumber.
+
+**Trader Hyperliquid individual** (`research/hl_trader.py`, `docs/eksternal/hasil_hl_trader.txt`): leaderboard 47.407 akun.
+Kandidat dipilih tanpa melihat kinerja: 1.000 akun terbesar (≥ $20 rb, volume bulanan ≤ 150× modal = bukan market maker)
++ 400 akun ACAK dengan volume seumur hidup ≥ $5 jt berapa pun modalnya sekarang (akun yang meledak ikut). Pilih dengan
+data s.d. 9 Jul 2026 → ukur 9 Jul–7 Okt 2026:
+
+| Kumpulan | Pilihan | n | Median | Rugi | Hancur < −50% | DD median |
+|---|---|---|---|---|---|---|
+| 1.000 terbesar | semua | 740 | +36% | 20% | 8% | −19% |
+| 1.000 terbesar | lolos aturan | 31 | +9% | 26% | 3% | −6% |
+| 1.000 terbesar | aturan, 10 teratas profit/DD | 10 | +25% | 10% | 0% | −4% |
+| 400 acak | semua | 287 | 0% | 30% | 16% | −3% |
+| 400 acak | lolos aturan | 3 | −12% | 67% | 0% | −39% |
+| - | beli-tahan BTC | 1 | +30% | - | - | −7% |
+
+Bacaan jujur: angka "1.000 terbesar" terlalu bagus (akun yang besar HARI INI sebagian besar karena untung 90 hari terakhir
+— bias penyintas); di kumpulan acak trader biasa median 0% dan 16% hancur dalam 90 hari. Saringan teruji kembali MENEKAN
+DD & hancur, bukan menaikkan profit; 10 teratas profit/DD +25% (DD 4%) masih di bawah beli-tahan BTC +30% (DD 7%) pada
+periode BTC naik ini. Satu periode 90 hari saja → bukti lemah. Kelebihan Hyperliquid untuk fitur follow: SEMUA posisi,
+TP/SL, dan riwayat terlihat on-chain (tidak bisa disembunyikan). Daftar sekarang: aturan kurva 365 hari + WR transaksi
+tutup ≥ 60% (≥ 20 transaksi dari 2.000 fill terakhir) + aktif ≤ 14 hari + modal ≥ $100 rb → sumber `hl_trader`.

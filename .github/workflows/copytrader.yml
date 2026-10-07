@@ -1,6 +1,7 @@
 name: Copy trader teruji (mingguan)
 
-# 👥 Perbarui cloud/api/copytrader.json tiap Senin 07:41 WIB: unduh ulang daftar eToro, Binance Copy Trading & MQL5 Signals,
+# 👥 Perbarui cloud/api/copytrader.json tiap Senin 07:41 WIB: unduh ulang daftar eToro, Binance, OKX, Bitget, MQL5, vault &
+# trader Hyperliquid (±30 menit: 1.400 portofolio, research/hl_trader.py), cek posisi terlihat (👁) & peringkat 🥇/🥈/🥉,
 # saring dengan aturan research/copy_pilih.py, commit bila berubah (Vercel ikut redeploy). Satu sumber gagal → daftar
 # minggu lalu dipakai untuk sumber itu (ditandai "invalid"); semua gagal → file tidak diubah.
 on:

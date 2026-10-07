@@ -18,6 +18,7 @@ import time
 import urllib.request
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 from research import copy_multi as CM
@@ -56,11 +57,27 @@ def kandidat(rows: list[dict], n: int = 1000, min_av: float = 20_000, max_turn: 
     return sorted(out, key=lambda r: -float(r["accountValue"]))[:n]
 
 
-def unduh(n: int = 1000, jeda: float = 1.05) -> None:
+def kandidat_acak(rows: list[dict], n: int = 400, min_vlm: float = 5e6, seed: int = 7) -> list[dict]:
+    """Pembanding yang lebih jujur: acak dari akun dengan volume seumur hidup ≥ min_vlm, BERAPA PUN modalnya sekarang
+    (akun yang sudah meledak/ditarik ikut) — 1.000 terbesar hari ini bias ke pemenang terbaru."""
+    pool = []
+    for r in rows:
+        w, av = _wp(r), float(r.get("accountValue") or 0)
+        vm = (w.get("month") or {}).get("vlm", 0)
+        if (w.get("allTime") or {}).get("vlm", 0) >= min_vlm and not (vm > 1e9 and vm > 150 * max(av, 1.0)):
+            pool.append(r)
+    rng = np.random.default_rng(seed)
+    idx = rng.choice(len(pool), size=min(n, len(pool)), replace=False)
+    return [pool[i] for i in sorted(idx)]
+
+
+def unduh(n: int = 1000, jeda: float = 0.35, n_acak: int = 400) -> None:
     with urllib.request.urlopen(urllib.request.Request(LB, headers={"User-Agent": "Mozilla/5.0"}), timeout=120) as f:
         rows = json.load(f)["leaderboardRows"]
     CM._save("hl_leaderboard", rows)
-    cand = kandidat(rows, n)
+    besar, acak = kandidat(rows, n), kandidat_acak(rows, n_acak)
+    CM._save("hl_pool", {"besar": [r["ethAddress"] for r in besar], "acak": [r["ethAddress"] for r in acak]})
+    cand = besar + [r for r in acak if r["ethAddress"] not in {b["ethAddress"] for b in besar}]
     old = CM.load("hl_portfolio") if (DIR / "hl_portfolio.json.gz").exists() else {}
     port = dict(old)
     print(f"leaderboard {len(rows)} akun → kandidat {len(cand)}", flush=True)
@@ -100,12 +117,18 @@ def curves() -> dict[str, pd.Series]:
 
 def uji() -> list[str]:
     cs = curves()
-    p, mid, end = CM.split_test(cs, 180)
+    pool = CM.load("hl_pool") if (DIR / "hl_pool.json.gz").exists() else {"besar": list(cs), "acak": []}
     L = ["# 👁 Trader Hyperliquid (posisi selalu terlihat) — uji maju", "",
-         f"Kandidat {len(cs)} akun terbesar (≥ $20 rb, bukan market maker) dipilih tanpa melihat kinerja. "
-         "Aturan sama dengan copy_pilih: untung di kedua paruh, DD ≤ 20%, aktif.", ""]
-    if len(p):
-        L += CM.table("Hyperliquid trader", p, mid, end)
+         "Aturan sama dengan copy_pilih: untung di kedua paruh, DD ≤ 20%, aktif. Dua kumpulan kandidat:",
+         "- **besar** = 1.000 akun terbesar HARI INI (≥ $20 rb, bukan market maker) — bias ke pemenang terbaru "
+         "(akun yang tumbuh besar karena untung 90 hari terakhir ikut terpilih) → angka 'semua' terlalu bagus;",
+         "- **acak** = 400 akun acak dengan volume seumur hidup ≥ $5 jt berapa pun modalnya sekarang (akun meledak ikut) "
+         "→ pembanding yang lebih jujur.", ""]
+    for lab, ids in (("besar", pool.get("besar") or []), ("acak", pool.get("acak") or [])):
+        sub = {a: cs[a] for a in ids if a in cs and len(cs[a])}
+        p, mid, end = CM.split_test(sub, 180)
+        if len(p):
+            L += CM.table(f"Hyperliquid trader — kumpulan {lab}", p, mid, end)
     out = ROOT / "docs" / "eksternal" / "hasil_hl_trader.txt"
     out.write_text("\n".join(L), encoding="utf-8")
     print("\n".join(L))

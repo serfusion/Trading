@@ -194,3 +194,10 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Daftar Binance mentah 210 MB: hanya `list_365D.json.gz` yang di-commit (json di-gitignore).
 - eToro (aplikasi 4.8): `research/etoro_copy.py unduh|uji|pack` (data `data/research/eksternal/etoro/`, riwayat
   disatukan di `hist.json.gz`, folder `hist/` di-gitignore). Hasil: kalah dari beli indeks S&P 500.
+
+### 7 Okt 2026 — 👁 follow copy trader (aplikasi 4.16)
+- Cloud `cloud/api/_ikuti.py` + `cloud/api/ikuti.py` (pg_cron 15 dtk, SQL di docs/COPY_TRADE.md — PENGGUNA harus memasang),
+  POST/GET follow di chat.py; tes `tests/test_cloud_ikuti.py`. OKX mode net: arah dari subPos (perbaikan juga di detail).
+- Aplikasi `CopyFollow.kt` (dicek tools/compose_check) & `CopyStream.kt` (layanan ⚡, dicek CI Android).
+- `research/hl_trader.py unduh|uji|pilih`: data `data/research/eksternal/copy_multi/hl_{leaderboard,portfolio,trader_pilih}.json.gz`
+  (portofolio di-cache 3 hari). `copy_pilih` kini memanggil `cek_terlihat` (jaringan) untuk tiap trader terpilih.

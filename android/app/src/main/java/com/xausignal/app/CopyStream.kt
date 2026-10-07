@@ -58,9 +58,20 @@ object CopyEvents {
         val arr = obj.optJSONArray("events") ?: return
         val events = (0 until arr.length()).mapNotNull { arr.optJSONObject(it) }
         CopyFollow.addLog(events)
+        if (ageMs(obj.optString("time")) > STALE_MS) return     // kejadian lama (HP mati/offline): cukup masuk log
         events.forEach { e ->
             if ("${e.optString("platform")}|${e.optString("trader")}" in CopyFollow.keys) Notifications.copy(context, e)
         }
+    }
+
+    private const val STALE_MS = 15 * 60_000L
+
+    private fun ageMs(iso: String): Long = try {
+        val f = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", java.util.Locale.US)
+            .apply { timeZone = java.util.TimeZone.getTimeZone("UTC") }
+        System.currentTimeMillis() - (f.parse(iso)?.time ?: 0L)
+    } catch (e: Exception) {
+        0L
     }
 
     private val client = OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS).readTimeout(20, TimeUnit.SECONDS).build()
