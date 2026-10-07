@@ -45,6 +45,9 @@ Angka badge yang dihitung ulang (Okt 2021–2026, hanya sinyal yang dikirim, `re
 | ⚡ XAU (`TIER_STATS`) | WR 54,3%, +0,346R, n 127 | WR **65,8%**, **+0,466R**, n 146 |
 | Lapisan XAU (`sinyal_lapis.json`) | WR 62,3%, +0,224R, n 1.859 | WR **64,2%**, **+0,347R**, n 1.473 |
 
+Akibatnya badge notifikasi XAU konf+⭐ naik dari 💰💰⭐⭐ ke **💰💰💰⭐⭐** (+0,261R ≥ batas +0,25R). Kategori yang dikirim
+tidak berubah.
+
 Angka "sebelum" untuk konf+⭐/konf/⚡ masih berasal dari replay lama (tanpa set 100/40 & 120/50). Kartu 📜/"teruji"
 (`cloud/api/riwayat.json`) dibuat ulang dengan `python -m research.verifikasi --cepat`: XAU sejak Okt 2021 WR 62,6% →
 66,8%, +0,159R → +0,267R per sinyal. XAU ⭐/biasa (tidak dikirim) dan BTC tidak berubah. Replay tanpa jeda disimpan di
