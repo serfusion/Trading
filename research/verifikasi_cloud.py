@@ -129,6 +129,12 @@ def replay(name: str, mentah: bool = False, td: bool = False, semua: bool = Fals
             cache = {"f": f[max(0, k - _funding.KEEP):k]}
             return _funding.skip_reason(direction, now, cache, True, True, _core.new_york)
         cfg["skip_fn"] = skip
+    if name == "XAU" and not mentah and not semua:
+        # seperti tick.py sejak 7 Okt 2026 (XAU_NEWS_SKIP): jeda ≤ 36 jam sebelum NFP/CPI/Fed (research/muse_uji.py)
+        import _jeda_berita
+
+        from .muse_uji import jadwal_cloud
+        cfg["skip_fn"] = _jeda_berita.skip_fn(jadwal_cloud())
     cfg.update(extra or {})
     prices, store, pub = Prices(bars), Store(), Pub()
     for i in range(WARM, len(bars) - 1):

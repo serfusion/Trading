@@ -753,7 +753,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             events.append(f"{name} {sig['dir']} dilewati: {h4[1]}")
             return None
         if cfg.get("skip_fn") and (why := cfg["skip_fn"](sig["dir"], now)):
-            # filter riset data eksternal (BTC: funding ramai, September) — _funding.skip_reason
+            # filter riset data eksternal (BTC: funding ramai, September — _funding.skip_reason;
+            # XAU: jeda ≤ 36 jam sebelum NFP/CPI/Fed — _jeda_berita)
             store.log("skip", {"set": name, "dir": sig["dir"], "bar": iso(closed[-1].t), "why": why})
             events.append(f"{name} {sig['dir']} dilewati: {why}")
             return None
@@ -934,6 +935,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
           "exits": exits, "status": trend_status(closed, systems, cfg, tf)}
     if cfg.get("asset", "XAU") == "XAU" and cfg.get("war") is not None:
         hb["war"] = cfg["war"]
+    if cfg.get("asset", "XAU") == "XAU" and cfg.get("jeda"):     # ⏸️ jeda pra-berita (_jeda_berita, 7 Okt 2026)
+        hb["jeda"] = cfg["jeda"]
     if executor is not None:
         try:
             acc = executor.account()
