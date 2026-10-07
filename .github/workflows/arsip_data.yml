@@ -1,0 +1,48 @@
+name: Arsip data (tiap jam)
+
+# 🗄️ Simpan setiap data yang keluar (candle, berita + Act, copy trader, Kalshi) ke branch `arsip-data` untuk uji validasi
+# ke depan (research/arsip_data.py). Branch terpisah → Vercel & APK tidak ikut build. Secret opsional (Settings → Secrets
+# and variables → Actions): TWELVEDATA_API_KEY (candle XAU), FRED_API_KEY (Act resmi). Tanpa secret, sumber publik tetap jalan.
+on:
+  schedule:
+    - cron: "7 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arsip-data
+  cancel-in-progress: false
+
+jobs:
+  arsip:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: kode
+      - name: Siapkan branch arsip-data
+        run: |
+          git clone --depth 1 --branch arsip-data "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" arsip \
+            || (mkdir arsip && cd arsip && git init -b arsip-data && git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git")
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Kumpulkan data
+        env:
+          TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: cd kode && python -m research.arsip_data ../arsip
+      - name: Commit bila berubah
+        run: |
+          cd arsip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "tidak ada perubahan"; else
+            git commit -q -m "Arsip data $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin HEAD:arsip-data
+          fi

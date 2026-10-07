@@ -1,0 +1,16 @@
+# Gabungan kejutan semua berita terbaru → emas 1 jam (research/news_gabung.py)
+Lolos = searah & ≥ 58% di LAMA dan BARU, n ≥ 30 masing-masing. Skor + = kejutan pro-emas.
+
+Dicoba 432 aturan; diharapkan lolos karena kebetulan ±9–22.
+LOLOS: 0
+
+## Tanda skor 30 hari (semua berita) → arah emas, per periode & tahun
+   semua: 47% (n 2721) | LAMA 46% | BARU 50%
+   per tahun: 2012:59% 2013:43% 2014:50% 2015:43% 2016:42% 2017:44% 2018:40% 2019:52% 2020:42% 2021:44% 2022:49% 2023:50% 2024:50% 2025:50% 2026:75%
+
+## NFP: gabungan kejutan vs mean reversion (nfp_mean.csv)
+   pendahulu membaik (≥+2): n 56 | emas naik 1 jam 66% | NFP berikutnya naik 54%
+   pendahulu memburuk (≤−2): n 25 | emas naik 1 jam 40% | NFP berikutnya naik 40%
+   skor kerja30 ≥ +2: n 21 | emas naik 1 jam 24% | NFP berikutnya naik 52%
+   skor kerja30 ≤ −2: n 57 | emas naik 1 jam 63% | NFP berikutnya naik 53%
+   korelasi skor kerja30 vs skor pendahulu: -0.30
