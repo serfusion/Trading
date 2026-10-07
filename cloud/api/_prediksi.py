@@ -37,6 +37,23 @@ def baris(title: str, naik: int, bukti: str, sumber: str) -> dict:
             "catatan": CATATAN, "bukti": bukti, "naik": int(naik), "kuat": abs(naik - 50) >= 10, "sumber": sumber}
 
 
+PERINGKAT = {1: "⚡ Sangat kuat", 2: "🥈 Kuat", 3: "🥉 Lemah", 4: "Biasa"}
+
+
+def peringkat(pr: dict, card: dict) -> int:
+    """1 ⚡ = peluang ≥ 60% DAN teruji ≥ 60% di periode lama & baru; 2 = model teruji, peluang ≥ 60%;
+    3 = model, peluang 55–59%; 4 = dasar historis (≈ lempar koin)."""
+    pct = max(pr["naik"], 100 - pr["naik"])
+    if pr["sumber"] == "aturan":
+        return 1 if pct >= 60 else 3
+    if pr["sumber"] == "model":
+        u = (card.get("prarilis") or {}).get("uji") or {}
+        if pct >= 60 and u.get("lama", 0) >= 60 and u.get("baru", 0) >= 60:
+            return 1
+        return 2 if pct >= 60 else 3 if pct >= 55 else 4
+    return 4
+
+
 def untuk(card: dict, mem: dict | None = None) -> dict | None:
     title = card.get("title") or ""
     p = card.get("prarilis")
@@ -92,5 +109,10 @@ def attach(persiapan: dict, store=None, now=None, env: dict | None = None) -> No
     for c in kartu:
         pr = untuk(c, mem)
         if pr:
+            r = peringkat(pr, c)
+            pr["peringkat"], pr["peringkat_teks"] = r, PERINGKAT[r]
+            if r == 1:
+                pr["teks"] = "⚡ " + pr["teks"]
+            pr["catatan"] = f"{PERINGKAT[r]} • {pr['catatan']}"
             pr["detail"] = detail(c, pr, persiapan, titik)
             c["prediksi"] = pr

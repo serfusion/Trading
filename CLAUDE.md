@@ -66,6 +66,7 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Aplikasi 4.17 (7 Okt, permintaan pengguna): kartu 🎯 / 📅 / MarketStrip = SATU baris per berita "NFP: peluang emas naik
   1 jam X% (teruji, belum pasti)" dari `cloud/api/_prediksi.py` (model prarilis → aturan NFP prev_s +1 61% → dasar
   historis). JANGAN tampilkan lagi skenario "Act < / Act >" di aplikasi; teks hasil pakai kata ("di bawah perkiraan").
+- Aplikasi 4.19: peringkat prediksi (`_prediksi.peringkat`: ⚡ Sangat kuat / 🥈 / 🥉 / Biasa, ⚡ di depan baris) + urutan di S&K.
 - Aplikasi 4.18: baris utama TANPA catatan; ketuk = show/hide detail (`prediksi.detail`: dasar angka, 🔄 titik balik NFP
   mean reversion `cloud/api/_nfp_titik.py` + `nfp_titik.json` dari `research/nfp_titik.py`, FRED live cache `nfp_titik`,
   🏦 Fed). Titik balik = info ekonomi, terpisah dari arah emas (framework pengguna bagian 14).
