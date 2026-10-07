@@ -12,7 +12,27 @@ Aplikasi 4.18: baris utama saja ("NFP: peluang emas naik 1 jam 61%"); "detail" =
 """
 from __future__ import annotations
 
+import json
+from pathlib import Path
+
 import _persiapan
+
+_MAJU = Path(__file__).resolve().parent / "validasi_maju.json"   # 📈 uji maju otomatis (research/validasi_maju.py)
+KANDIDAT_BARU = (8, 10)          # kandidat NFP "pendahulu membaik → emas naik": naik/n sejak Okt 2021 (news_gabung.py)
+
+
+def maju() -> dict:
+    try:
+        return json.loads(_MAJU.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def kandidat_lolos(m: dict) -> tuple[bool, int, int]:
+    """Kandidat naik ke 🥈 bila bukti sejak Okt 2021 (riset + uji maju) mencapai n ≥ 30 dan ≥ 58% emas naik."""
+    k = m.get("kandidat_nfp") or {}
+    naik, n = KANDIDAT_BARU[0] + int(k.get("naik", 0)), KANDIDAT_BARU[1] + int(k.get("n", 0))
+    return n >= 30 and naik / n >= 0.58, naik, n
 
 NAMA = {"Non-Farm Employment Change": "NFP", "CPI m/m": "CPI", "Core CPI m/m": "Core CPI", "CPI y/y": "CPI tahunan",
         "PPI m/m": "PPI", "Core PPI m/m": "Core PPI", "Unemployment Rate": "Pengangguran",
@@ -41,6 +61,8 @@ PERINGKAT = {1: "⚡ Sangat kuat", 2: "🥈 Kuat", 3: "🥉 Lemah", 4: "Biasa"}
 
 
 def peringkat(pr: dict, card: dict) -> int:
+    if pr["sumber"] == "kandidat":                     # kandidat NFP yang lolos uji maju otomatis
+        return 2
     """1 ⚡ = peluang ≥ 60% DAN teruji ≥ 60% di periode lama & baru; 2 = model teruji, peluang ≥ 60%;
     3 = model, peluang 55–59%; 4 = dasar historis (≈ lempar koin)."""
     pct = max(pr["naik"], 100 - pr["naik"])
@@ -80,11 +102,21 @@ def detail(card: dict, pr: dict, persiapan: dict, titik: dict | None) -> list[di
     if title == NFP and titik and not card.get("released"):
         out.append({"judul": titik["judul"], "teks": titik["teks"],
                     "catatan": "\n".join((titik["kondisi"], titik["pendahulu"], titik["bukti"]))})
-        if titik.get("lead", 0) >= 2:                   # 🧪 kandidat research/news_gabung.py (belum lolos syarat ⚡)
-            out.append({"judul": "🧪 Kandidat (belum terbukti)",
+        if titik.get("lead", 0) >= 2:                   # 🧪 kandidat research/news_gabung.py
+            lolos, naik, n = kandidat_lolos(maju())
+            out.append({"judul": "🧪 Kandidat" + (" (lolos → 🥈)" if lolos else " (belum terbukti)"),
                         "teks": "Pendahulu membaik → emas naik 1 jam 66% setelah NFP",
-                        "catatan": "2012–2021: 63% (n 46) • sejak Okt 2021: 80% (n 10, terlalu sedikit) • per tahun naik-turun "
-                                   "• dicek ulang tiap NFP dari arsip data; belum mengubah peringkat"})
+                        "catatan": f"2012–2021: 63% (n 46) • sejak Okt 2021 + uji maju: {naik}/{n} naik "
+                                   f"• naik ke 🥈 bila n ≥ 30 dan ≥ 58% (dicek otomatis tiap NFP dari arsip data)"})
+    m = maju()
+    g = (m.get("per_peringkat") or {}).get(str(pr.get("peringkat")), {})
+    sm = m.get("semua") or {}
+    if m:
+        out.append({"judul": f"📈 Uji maju sejak {m.get('mulai', '7 Okt 2026')}",
+                    "teks": (f"{pr.get('peringkat_teks', '')}: benar {g.get('benar', 0)} dari {g.get('n', 0)} rilis"
+                             if g.get("n") else f"{pr.get('peringkat_teks', '')}: belum ada rilis yang dinilai"),
+                    "catatan": f"Semua prediksi: benar {sm.get('benar', 0)} dari {sm.get('n', 0)} • dinilai otomatis tiap "
+                               f"jam dari arsip (emas 5 menit, 1 jam setelah rilis) • diperbarui {m.get('diperbarui', '-')}"})
     fed = persiapan.get("fed") if isinstance(persiapan.get("fed"), dict) else None
     if title == "Federal Funds Rate" and fed and fed.get("teks"):
         out.append({"judul": fed.get("label") or "🏦 Keputusan Fed", "teks": fed["teks"], "catatan": fed.get("bukti", "")})
@@ -111,8 +143,11 @@ def attach(persiapan: dict, store=None, now=None, env: dict | None = None) -> No
             mem = {**_prarilis.SEED, **((store.get_state("prarilis") or {}).get("mem") or {})}
         except Exception:  # noqa: BLE001 - tanpa memori kejutan: pakai model/dasar
             mem = {}
+    promo = bool(titik and titik.get("lead", 0) >= 2 and kandidat_lolos(maju())[0])
     for c in kartu:
         pr = untuk(c, mem)
+        if pr and promo and c.get("title") == NFP and not c.get("released") and pr["sumber"] == "dasar":
+            pr = baris(NFP, 66, "kandidat lolos uji maju: pendahulu membaik → emas naik 1 jam 66% (2012–2025)", "kandidat")
         if pr:
             r = peringkat(pr, c)
             pr["peringkat"], pr["peringkat_teks"] = r, PERINGKAT[r]

@@ -18,12 +18,13 @@ concurrency:
 jobs:
   arsip:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           path: kode
+          fetch-depth: 0
       - name: Siapkan branch arsip-data
         run: |
           git clone --depth 1 --branch arsip-data "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" arsip \
@@ -36,7 +37,7 @@ jobs:
           TWELVEDATA_API_KEY: ${{ secrets.TWELVEDATA_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: cd kode && python -m research.arsip_data ../arsip
-      - name: Commit bila berubah
+      - name: Commit arsip bila berubah
         run: |
           cd arsip
           git config user.name "github-actions[bot]"
@@ -46,3 +47,19 @@ jobs:
             git commit -q -m "Arsip data $(date -u +%Y-%m-%dT%H:%MZ)"
             git push origin HEAD:arsip-data
           fi
+      - name: Uji maju prediksi berita (research/validasi_maju.py)
+        run: cd kode && python -m research.validasi_maju ../arsip
+      - name: Kirim hasil uji maju ke main & produksi Vercel bila berubah
+        run: |
+          cd kode
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cloud/api/validasi_maju.json
+          if git diff --cached --quiet; then echo "uji maju tidak berubah"; exit 0; fi
+          git commit -q -m "Uji maju prediksi berita: pembaruan otomatis $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push origin HEAD:main
+          # Vercel production = branch claude/bold-davinci-ykgq8j: maju cepat bila bisa, selain itu gabung main
+          git fetch -q origin claude/bold-davinci-ykgq8j
+          git push origin HEAD:claude/bold-davinci-ykgq8j || {
+            git checkout -q -B prod origin/claude/bold-davinci-ykgq8j && git merge -q --no-edit main
+            git push origin prod:claude/bold-davinci-ykgq8j; }

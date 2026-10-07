@@ -5,6 +5,9 @@ to date". Dijalankan GitHub Actions tiap jam (.github/workflows/arsip_data.yml) 
 (terpisah dari main supaya Vercel & APK tidak ikut build). Setiap pengumpul berdiri sendiri: satu gagal, lainnya jalan.
 Data ditambahkan (append + buang duplikat), tidak pernah ditimpa:
   candle/<SIMBOL>_1h.csv      XAU/USD (Twelve Data, butuh secret TWELVEDATA_API_KEY), BTC/ETH/DOGE/ADA (Binance publik)
+  candle/XAUUSD_5min.csv      XAU/USD 5 menit (untuk menilai reaksi emas 1 jam setelah tiap berita)
+  prediksi/<pekan>.json       baris prediksi berita PERSIS seperti di aplikasi (pipa cloud yang sama), terakhir sebelum rilis
+  nfp_titik/<tgl>.json        potret harian 🔄 titik balik NFP (FRED live)
   berita/ff_<pekan>.json      kalender ForexFactory pekan ini (Act/Cons/Prev, diperbarui tiap jam)
   berita/aktual.jsonl         Act resmi FRED (NFP, CPI, PPI, Retail, klaim, JOLTS, PCE; butuh secret FRED_API_KEY)
   copytrader/<tgl>.json.gz    potret harian OKX/Bitget/Hyperliquid (vault + 300 trader leaderboard teratas)
@@ -24,7 +27,10 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-UA = {"User-Agent": "Mozilla/5.0 (arsip-data)", "Accept": "application/json", "Content-Type": "application/json"}
+UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 "
+                    "Safari/537.36", "Accept": "application/json", "Content-Type": "application/json"}
+ROOT = Path(__file__).resolve().parent.parent
+MULAI = "2026-10-07"                       # awal uji maju (validasi ke depan) prediksi berita
 
 
 def get(url: str, body: dict | None = None, timeout: int = 30):
@@ -75,15 +81,17 @@ def candle_xau(root: Path, now: datetime) -> str:
     if not key:
         return "dilewati (secret TWELVEDATA_API_KEY belum ada)"
     out = []
-    for sym in ("XAU/USD",):
+    for interval, lebar, nama in (("1h", timedelta(hours=1), "1h"), ("5min", timedelta(minutes=5), "5min")):
         d = get("https://api.twelvedata.com/time_series?" + urllib.parse.urlencode(
-            {"symbol": sym, "interval": "1h", "outputsize": 500, "timezone": "UTC", "apikey": key}))
+            {"symbol": "XAU/USD", "interval": interval, "outputsize": 500, "timezone": "UTC", "apikey": key}))
+        if d.get("status") == "error":
+            raise RuntimeError(str(d.get("message"))[:80])
         vals = d.get("values") or []
-        n = append_csv(root / "candle" / f"{sym.replace('/', '')}_1h.csv",
+        n = append_csv(root / "candle" / f"XAUUSD_{nama}.csv",
                        [[v["datetime"][:16], v["open"], v["high"], v["low"], v["close"]] for v in vals
-                        if datetime.fromisoformat(v["datetime"]).replace(tzinfo=timezone.utc) + timedelta(hours=1) <= now],
+                        if datetime.fromisoformat(v["datetime"]).replace(tzinfo=timezone.utc) + lebar <= now],
                        ["time_utc", "open", "high", "low", "close"])
-        out.append(f"{sym}+{n}")
+        out.append(f"{nama}+{n}")
     return " ".join(out)
 
 
@@ -141,7 +149,7 @@ def copytrader(root: Path, now: datetime) -> str:
     for lab, fn in (("okx", lambda: get("https://www.okx.com/api/v5/copytrading/public-lead-traders?instType=SWAP"
                                         "&sortType=overview&limit=20&page=1")),
                     ("bitget", lambda: get("https://www.bitget.com/v1/trigger/trace/public/traderView",
-                                           {"languageType": 0, "pageNo": 1, "pageSize": 50, "sortRule": "profit"})),
+                                           {"languageType": 0, "pageNo": 1, "pageSize": 50})),
                     ("hl_vault", lambda: get("https://stats-data.hyperliquid.xyz/Mainnet/vaults", timeout=60)),
                     ("hl_leaderboard", lambda: sorted(get("https://stats-data.hyperliquid.xyz/Mainnet/leaderboard",
                                                           timeout=120)["leaderboardRows"],
@@ -170,15 +178,106 @@ def kalshi(root: Path, now: datetime) -> str:
     return f"{sum(1 for k in out if not k.endswith('_galat'))} seri"
 
 
+def _cloud():
+    sys.path.insert(0, str(ROOT / "cloud" / "api"))
+
+
+def mem_nfp(root: Path) -> dict:
+    """Kejutan NFP terakhir (Act vs perkiraan) dari arsip ForexFactory → memori aturan NFP (seperti baris 'prarilis')."""
+    _cloud()
+    import _prarilis
+    mem = dict(_prarilis.SEED)
+    rows = []
+    for f in sorted((root / "berita").glob("ff_*.json")):
+        rows += json.loads(f.read_text())
+    for r in sorted(rows, key=lambda r: r.get("date", "")):
+        t = r.get("title")
+        if t in _prarilis.TITLES and r.get("country") == "USD":
+            a, f_ = _prarilis.num(r.get("actual")), _prarilis.num(r.get("forecast"))
+            if a is not None and f_ is not None:
+                mem[t] = {"s": (a > f_) - (a < f_), "time": r.get("date")}
+    return mem
+
+
+class _Store:
+    def __init__(self, d: dict):
+        self.d = d
+
+    def get_state(self, row: str) -> dict:
+        return self.d.get(row, {})
+
+    def save_state(self, data: dict, row: str) -> None:
+        self.d[row] = data
+
+
+def prediksi(root: Path, now: datetime) -> str:
+    """Hitung baris prediksi dengan pipa cloud yang sama dengan GET /api/chat, simpan versi terakhir SEBELUM rilis."""
+    _cloud()
+    import _chat
+    import _core
+    import _jadwal
+    import _persiapan
+    import _prarilis
+    import _prediksi
+    senin = (now - timedelta(days=now.weekday())).strftime("%Y-%m-%d")
+    ff = root / "berita" / f"ff_{senin}.json"
+    rows = json.loads(ff.read_text()) if ff.exists() else get("https://nfs.faireconomy.media/ff_calendar_thisweek.json")
+    prep = _persiapan.cards(rows, now)
+    calendar = _chat.calendar_json(rows, now, fetch=lambda s: [])
+    _jadwal.attach(prep, now)
+    store = _Store({"prarilis": {"mem": mem_nfp(root)}})
+    key = os.environ.get("TWELVEDATA_API_KEY", "")
+    if key:
+        try:
+            _prarilis.attach(prep, calendar, store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
+        except Exception:  # noqa: BLE001 - tanpa model prarilis: aturan/dasar
+            pass
+    _prediksi.attach(prep, store, now, os.environ)
+    p = root / "prediksi" / f"{senin}.json"
+    old = json.loads(p.read_text()) if p.exists() else {}
+    n = 0
+    for c in (prep.get("berita") or []) + (prep.get("mendatang") or []):
+        pr = c.get("prediksi")
+        t = datetime.fromisoformat(c["time"]).astimezone(timezone.utc)
+        if not pr or t <= now or t - now > timedelta(days=8):
+            continue                                    # hanya prediksi yang masih berlaku sebelum rilis
+        titik = next((d for d in pr.get("detail") or [] if d.get("judul", "").startswith("🔄")), None)
+        old[f"{c['title']}|{c['time']}"] = {"title": c["title"], "time": c["time"], "teks": pr["teks"], "naik": pr["naik"],
+                                            "peringkat": pr.get("peringkat"), "sumber": pr.get("sumber"),
+                                            "kandidat": any(d.get("judul", "").startswith("🧪") for d in pr.get("detail") or []),
+                                            "titik": titik.get("teks") if titik else None, "dicatat": now.isoformat()}
+        n += 1
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(old, ensure_ascii=False, indent=1))
+    return f"{n} prediksi aktif"
+
+
+def nfp_titik(root: Path, now: datetime) -> str:
+    key = os.environ.get("FRED_API_KEY", "")
+    if not key:
+        return "dilewati (secret FRED_API_KEY belum ada)"
+    p = root / "nfp_titik" / f"{now:%Y-%m-%d}.json"
+    if p.exists():
+        return "sudah ada hari ini"
+    _cloud()
+    import _nfp_titik
+    f = _nfp_titik.fitur(key, now)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps({**f, "ringkas": _nfp_titik.ringkas(f)}, ensure_ascii=False, indent=1))
+    return f"lead {f['lead']:+d}, peluang {_nfp_titik.ringkas(f)['peluang']}%"
+
+
 def main(root: Path) -> None:
     now = datetime.now(timezone.utc)
     hasil = {"waktu": now.strftime("%Y-%m-%dT%H:%MZ")}
     for lab, fn in (("candle_kripto", candle_binance), ("candle_xau", candle_xau), ("berita_ff", berita_ff),
-                    ("berita_fred", berita_fred), ("copytrader", copytrader), ("kalshi", kalshi)):
+                    ("berita_fred", berita_fred), ("copytrader", copytrader), ("kalshi", kalshi),
+                    ("nfp_titik", nfp_titik), ("prediksi", prediksi)):
         try:
             hasil[lab] = fn(root, now)
         except Exception as e:  # noqa: BLE001 - satu sumber gagal, lainnya tetap
             hasil[lab] = f"GAGAL {type(e).__name__}: {str(e)[:80]}"
+    root.mkdir(parents=True, exist_ok=True)
     with (root / "log.jsonl").open("a") as f:
         f.write(json.dumps(hasil, ensure_ascii=False) + "\n")
     print(json.dumps(hasil, ensure_ascii=False, indent=1))
