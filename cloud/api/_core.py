@@ -306,8 +306,8 @@ def konf_check(closed: list[Bar], direction: str) -> bool:
 STATS = {
     # sejak 3 Okt 2026: hasil replay kode cloud (TP1 0,7R, filter live, spread asli Exness) periode Okt 2021–2026
     # (research/verifikasi.py; dikirim = cara B, tidak dikirim = semua kategori dikirim). Bisa dikirim/tidak tetap sama.
-    "XAU konf+⭐": (61.9, 0.206, 506, "Okt 2021–2026"),
-    "XAU konf": (66.7, 0.188, 153, "Okt 2021–2026"),
+    "XAU konf+⭐": (66.1, 0.261, 623, "Okt 2021–2026"),   # 7 Okt: + set 100/40,120/50 + ⏸️ jeda 60 jam
+    "XAU konf": (70.3, 0.296, 128, "Okt 2021–2026"),
     "XAU ⭐": (41.7, -0.072, 132, "Okt 2021–2026"),
     "XAU biasa": (40.7, 0.002, 501, "Okt 2021–2026"),
     "BTC konf+⭐": (55.1, 0.276, 457, "Okt 2021–2026"),
@@ -337,7 +337,7 @@ STATS = {
 # BTC ⚡ +0,97R / +0,64R.
 ZAP_VOL = 0.331
 TIER_STATS = {   # ⚡ replay kode cloud Okt 2021–2026, TP1 0,7R (SL+ 0,7R = sama), spread asli
-    "XAU": (54.3, 0.346, 54.3, 0.346, 127, "Okt 2021–2026"),
+    "XAU": (65.8, 0.466, 65.8, 0.466, 146, "Okt 2021–2026"),   # 7 Okt: konfigurasi live + ⏸️ jeda 60 jam
     "BTC": (58.6, 0.421, 58.6, 0.421, 278, "Okt 2021–2026"),
 }
 

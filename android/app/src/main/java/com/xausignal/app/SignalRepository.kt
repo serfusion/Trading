@@ -128,7 +128,7 @@ fun SignalEvent.isZap(): Boolean = tier() == "zap"
 fun SignalEvent.warText(): String? =
     json.optJSONObject("war")?.takeIf { it.optBoolean("on") }?.optString("text")?.ifBlank { null }
 
-/** ⏸️ Jeda pra-berita dari heartbeat XAU (cloud 7 Okt 2026): sinyal XAU baru tidak dikirim ≤ 36 jam sebelum
+/** ⏸️ Jeda pra-berita dari heartbeat XAU (cloud 7 Okt 2026): sinyal XAU baru tidak dikirim ≤ 60 jam sebelum
  *  NFP/CPI/Fed; posisi terbuka tetap dikelola. null bila tidak sedang dijeda. */
 fun SignalEvent.jedaText(): String? =
     json.optJSONObject("jeda")?.takeIf { it.optBoolean("on") }?.optString("text")?.ifBlank { null }

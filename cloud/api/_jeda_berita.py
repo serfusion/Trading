@@ -1,13 +1,15 @@
-"""⏸️ Jeda sinyal 💰 XAU baru ≤ 36 jam sebelum NFP / CPI / keputusan Fed (izin pengguna 7 Okt 2026: "terapkan apabila
-dapat menambah wr dan profit" — sistem Muse/trading-alert memakai peringatan berita NFP/CPI/FOMC).
+"""⏸️ Jeda sinyal 💰 XAU baru ≤ 60 jam sebelum NFP / CPI / keputusan Fed. Dipasang 7 Okt 2026 dengan 36 jam (izin
+pengguna "terapkan apabila dapat menambah wr dan profit" — sistem Muse/trading-alert), diperpanjang ke 60 jam hari yang
+sama (izin "pasang keduanya").
 
-Riset research/muse_uji.py (docs/MUSE.md), replay PENUH kode cloud XAU 2012–2026 (konfigurasi live, spread asli):
-  LAMA (< Okt 2021) +653R → +753R, WR 59,6% → 60,8%, PF 1,47 → 1,66, DD −212R → −152R
-  BARU (Okt 2021–2026) +597R → +734R, WR 62,4% → 65,0%, PF 1,60 → 1,90, DD −216R → −167R
-  12 dari 14 tahun membaik; sinyal yang dilewati rugi di NFP, CPI, dan Fed masing-masing (kedua periode).
+Riset research/muse_uji.py (docs/MUSE.md), replay PENUH kode cloud XAU 2012–2026 (konfigurasi live, R bersih spread asli
+Exness, utama + lapisan), tanpa jeda → 36 jam → 60 jam:
+  LAMA (< Okt 2021)    +504R → +625R → +674R, WR 59,6 → 60,8 → 61,6%, PF 1,35 → 1,52 → 1,62, DD −264 → −195 → −145R
+  BARU (Okt 2021–2026) +567R → +708R → +711R, WR 62,4 → 65,0 → 65,1%, PF 1,56 → 1,86 → 1,96, DD −230 → −180 → −169R
+  60 jam: 11 dari 14 tahun membaik (2013, 2015, 2021 memburuk); sinyal sebelum NFP, CPI, Fed masing-masing rugi.
 BTC justru memburuk → hanya XAU. Posisi yang sudah terbuka tetap dikelola seperti biasa (SL/TP/TUTUP).
 Jadwal: kalender ForexFactory pekan ini (cache Supabase 'kalender') + cloud/api/jadwal.json (FRED + FOMC).
-Tanpa jadwal sama sekali → tidak ada jeda (sinyal tetap jalan). Env XAU_NEWS_SKIP=0 mematikan, XAU_NEWS_SKIP_JAM=36.
+Tanpa jadwal sama sekali → tidak ada jeda (sinyal tetap jalan). Env XAU_NEWS_SKIP=0 mematikan, XAU_NEWS_SKIP_JAM=60.
 Hanya library standar Python.
 """
 from __future__ import annotations
@@ -17,7 +19,7 @@ import json
 import os
 from datetime import datetime, timedelta, timezone
 
-JAM = 36.0
+JAM = 60.0
 NAMA = {"Non-Farm Employment Change": "NFP", "CPI m/m": "CPI", "Core CPI m/m": "CPI", "Federal Funds Rate": "Fed"}
 _PATH = os.path.join(os.path.dirname(__file__), "jadwal.json")
 WIB = timedelta(hours=7)

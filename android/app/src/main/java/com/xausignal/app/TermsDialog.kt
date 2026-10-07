@@ -55,8 +55,9 @@ fun TermsDialog(rate: Double, onDismiss: () -> Unit) {
                 Text("  Biasa: dasar historis 50–57% (≈ lempar koin)")
                 Text("• ⚠️ Mode perang = minyak naik ≥10% dalam 10 hari: sinyal emas historis lemah, pakai lot kecil.",
                     color = SellColor)
-                Text("• ⏸️ Jeda pra-berita: sinyal XAU baru tidak dikirim ≤ 36 jam sebelum NFP/CPI/Fed (teruji 2012–2026: " +
-                    "WR 62→65%, PF 1,60→1,90 sejak Okt 2021; 12/14 tahun membaik). Posisi terbuka tetap dikelola.",
+                Text("• ⏸️ Jeda pra-berita: sinyal XAU baru tidak dikirim ≤ 60 jam sebelum NFP/CPI/Fed (teruji 2012–2026: " +
+                    "sejak Okt 2021 WR 62→65%, PF 1,56→1,96; s.d. 2021 PF 1,35→1,62; 11/14 tahun membaik). " +
+                    "Posisi terbuka tetap dikelola.",
                     color = Gold)
                 Text("• Lot akun Cent, 5 posisi/sinyal, contoh SL \$45:", fontWeight = FontWeight.Bold)
                 TableRow("Modal (XAU)", "Risiko 0,25%", "Risiko 0,5%", header = true)

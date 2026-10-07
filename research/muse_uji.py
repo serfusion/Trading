@@ -526,10 +526,30 @@ def uji_replika() -> list[str]:
     return L
 
 
+def angka() -> list[str]:
+    """Angka badge cloud (cara B, Okt 2021–2026, R bersih spread asli) dari replay live cloud_XAU.csv dengan jeda,
+    dibanding cloud_XAU_tanpajeda.csv — untuk _core.STATS (konf+⭐, konf), TIER_STATS XAU, sinyal_lapis.json XAU."""
+    from .verifikasi import load as vload, net
+    L = ["## Angka badge XAU (Okt 2021–2026, cara B = hanya yang dikirim, R bersih spread asli)"]
+    for lab, suf in (("tanpa jeda", "_tanpajeda"), ("dengan jeda", "")):
+        df = net("XAU", vload("XAU", suf))
+        df["R07"] = df.r07 - df.spread / df.risk
+        b = df[df.t_signal >= SPLIT]
+        base, lay, zap = b[~b.lapis], b[b.lapis], b[~b.lapis & (b.tier == "zap")]
+        L.append(f"  {lab}:")
+        for c in ("konf+⭐", "konf"):
+            g = base[base.cat == c]
+            L.append(f"    XAU {c}: ({(g.R > 0).mean() * 100:.1f}, {g.R.mean():.3f}, {len(g)})")
+        L.append(f"    ⚡ XAU: ({(zap.R > 0).mean() * 100:.1f}, {zap.R.mean():.3f}, {(zap.R07 > 0).mean() * 100:.1f}, "
+                 f"{zap.R07.mean():.3f}, {len(zap)})")
+        L.append(f"    lapisan XAU: WR {(lay.R > 0).mean() * 100:.1f} avg {lay.R.mean():.3f} n {len(lay)}")
+    return L
+
+
 def main() -> None:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "filter"
-    if cmd in ("replika", "jendela"):
-        L = uji_replika() if cmd == "replika" else uji_jendela()
+    if cmd in ("replika", "jendela", "angka"):
+        L = {"replika": uji_replika, "jendela": uji_jendela, "angka": angka}[cmd]()
         print("\n".join(L))
         with OUT.open("a", encoding="utf-8") as f:
             f.write("\n" + "\n".join(L) + "\n")

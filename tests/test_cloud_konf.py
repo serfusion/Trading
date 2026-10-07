@@ -32,8 +32,8 @@ def test_badges():
     assert b["stars"] == 3 and b["money"] == 3 and b["badge"] == "💰💰💰⭐⭐⭐" and b["star"]
     b = _core.badges("XAU biasa")
     assert b["stars"] == 0 and b["money"] == 0 and not b["star"]
-    # angka teruji Okt 2021–2026 (replay kode cloud, TP1 0,7R): konf+⭐ & konf tetap 💰 (tetap dikirim)
-    assert _core.badges("XAU konf+⭐")["badge"] == "💰💰⭐⭐" and _core.badges("XAU konf+⭐")["star"]
+    # angka teruji Okt 2021–2026 (replay kode cloud, TP1 0,7R, sejak 7 Okt + jeda 60 jam): konf+⭐ +0,261R → 💰💰💰
+    assert _core.badges("XAU konf+⭐")["badge"] == "💰💰💰⭐⭐" and _core.badges("XAU konf+⭐")["star"]
     assert np.isclose(_core.badges("XAU konf")["avg_r"], _core.STATS["XAU konf"][1])
     assert _core.badges("XAU konf")["money"] > 0 and _core.badges("BTC konf")["money"] == 0
 

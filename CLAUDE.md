@@ -346,7 +346,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   NFP/CPI/Fed (`cloud/api/_jeda_berita.py`, skip_fn tick XAU, heartbeat `jeda`, env XAU_NEWS_SKIP/XAU_NEWS_SKIP_JAM,
   aplikasi 4.20). Replay penuh: LAMA +653→+753R PF 1,47→1,66; BARU +597→+734R WR 62,4→65,0% PF 1,60→1,90; 12/14 tahun;
   semua jendela 6–72 jam & NFP/CPI/Fed masing-masing konsisten; BTC memburuk → XAU saja. `jadwal.json` (FOMC s.d. 2027)
-  diperbarui workflow arsip_data tiap jam. `verifikasi_cloud.replay("XAU")` memakai jeda; STATS/riwayat belum dihitung ulang.
+  diperbarui workflow arsip_data tiap jam. `verifikasi_cloud.replay("XAU")` memakai jeda.
+- 7 Okt sore (izin "pasang keduanya"): jeda 36 → **60 jam** (`_jeda_berita.JAM`; replay R bersih: LAMA +625→+674R PF 1,52→1,62,
+  BARU +708→+711R PF 1,86→1,96, 11/14 tahun vs tanpa jeda) + angka badge dihitung ulang (`muse_uji angka`: XAU konf+⭐
+  66,1%/+0,261R, konf 70,3%/+0,296R, ⚡ 65,8%/+0,466R, lapisan 64,2%/+0,347R; `research.verifikasi --cepat` → riwayat.json).
+  `cloud_XAU.csv` kini = replay live dengan jeda 60 jam; tanpa jeda = `cloud_XAU_tanpajeda.csv`. Aplikasi 4.21.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
