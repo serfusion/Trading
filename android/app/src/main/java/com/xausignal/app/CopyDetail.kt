@@ -86,14 +86,16 @@ fun CopyDetailDialog(x: JSONObject, onDismiss: () -> Unit) {
         title = {
             Column {
                 Text(x.optString("name"), fontWeight = FontWeight.ExtraBold, maxLines = 1)
-                Text("$platform • ${x.optInt("pengikut")} pengikut", style = MaterialTheme.typography.labelSmall, color = Muted)
+                Text("$platform" + (if (x.has("pengikut")) " • ${x.optInt("pengikut")} pengikut" else "") +
+                    (tierLabel(x)?.let { " • $it" } ?: ""), style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         },
         text = {
             Column(Modifier.heightIn(max = 520.dp).verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                FollowButton(x)                              // 👁 follow / unfollow (4.16)
                 val paruh = x.optJSONArray("paruh")
-                TileGrid(listOf(
+                if (x.has("roi")) TileGrid(listOf(
                     TileData("Profit ${x.optString("periode", "1 th")}", "${signed(x.optDouble("roi"), 0)}%", BuyColor),
                     TileData("DD maks", "${x.optDouble("mdd").toInt()}%", SellColor),
                     TileData("WR", "${x.optDouble("wr").toInt()}%", Gold, if (x.optBoolean("wr_curiga")) "⚠️ hampir 100%" else null),

@@ -8,6 +8,9 @@
     <!-- Alarm cek sinyal tepat waktu (tiap 10 menit, tidak ditunda Doze). APK dipasang dari GitHub, bukan Play Store. -->
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- ⚡ Notifikasi instan copy trader yang di-follow (4.16): satu koneksi ntfy terus-menerus selama ada yang di-follow -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING" />
 
     <application
         android:allowBackup="true"
@@ -41,5 +44,11 @@
         <receiver
             android:name=".NewsAlarmReceiver"
             android:exported="false" />
+
+        <!-- 👁 ⚡ Pemantau copy trader yang di-follow (CopyStream.kt) -->
+        <service
+            android:name=".CopyStreamService"
+            android:exported="false"
+            android:foregroundServiceType="remoteMessaging" />
     </application>
 </manifest>

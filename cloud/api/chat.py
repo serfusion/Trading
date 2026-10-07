@@ -7,6 +7,8 @@ GET  /api/chat   (dengan header kunci) -> {"ok": true, "calendar": [...], "tren"
                  berikutnya), Act berlapis (_aktual.py), dan status arsip berita ke GitHub (_arsip.py)
 GET  /api/chat?riwayat=1 / ?copytrader=1 -> isi riwayat.json (📜) / copytrader.json (👥 copy trader teruji) saja
 GET  /api/chat?copyposisi=<situs>|<id> -> rangkuman posisi terbuka & 10 trade terakhir trader itu (_copyposisi.py)
+GET  /api/chat?ikuti=1 -> trader yang diikuti + posisi terbuka + kejadian BUKA/TUTUP terbaru (_ikuti.py)
+POST /api/chat {"ikuti": {"platform", "id", "name", "url", "on": true|false}} -> follow / unfollow (maks 20)
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
@@ -109,6 +111,12 @@ class handler(BaseHTTPRequestHandler):
         try:
             length = int(self.headers.get("Content-Length") or 0)
             body = json.loads(self.rfile.read(min(length, 200_000)) or b"{}")
+            if isinstance(body.get("ikuti"), dict):           # 👥 follow / unfollow copy trader (7 Okt 2026)
+                import _ikuti
+                store = _store()
+                self._send(200, _ikuti.atur(store, body["ikuti"]) if store is not None
+                           else {"ok": False, "error": "Supabase belum diatur"})
+                return
             if isinstance(body.get("manual"), dict):          # Act isian manual dari kartu 🎯 (2 Okt 2026)
                 m, store = body["manual"], _store()
                 if store is None:
@@ -128,6 +136,15 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._authorized():
             self._send(200, {"ok": True, "info": "POST {messages: [...]} dengan header X-Chat-Key"})
+            return
+        if "ikuti=1" in (self.path or ""):              # 👥 status follow copy trader (_ikuti.py)
+            import _ikuti
+            store = _store()
+            try:
+                self._send(200, _ikuti.status(store) if store is not None
+                           else {"ok": False, "error": "Supabase belum diatur"})
+            except Exception as exc:  # noqa: BLE001
+                self._send(200, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
             return
         if "copyposisi=" in (self.path or ""):          # 👥 rangkuman posisi & riwayat 1 copy trader (_copyposisi.py)
             from urllib.parse import parse_qs, urlparse

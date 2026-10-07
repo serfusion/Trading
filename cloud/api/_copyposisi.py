@@ -92,17 +92,25 @@ def binance(pid: str) -> tuple[list, list, str]:
     return pos, hist, note
 
 
+def okx_side(p: dict) -> bool | None:
+    """Arah posisi OKX: posSide long/short; mode 'net' → tanda subPos (positif = BUY)."""
+    side = p.get("posSide")
+    if side in ("long", "short"):
+        return side == "long"
+    v = _f(p.get("subPos")) or _f(p.get("pos"))
+    return None if v is None else v > 0
+
+
 def okx(code: str) -> tuple[list, list, str]:
     base = "https://www.okx.com/api/v5/copytrading"
     with ThreadPoolExecutor(2) as ex:
         fp = ex.submit(_req, f"{base}/public-current-subpositions?instType=SWAP&uniqueCode={code}&limit=20")
         fh = ex.submit(_req, f"{base}/public-subpositions-history?instType=SWAP&uniqueCode={code}&limit=10")
         pos_raw, hist_raw = fp.result().get("data") or [], fh.result().get("data") or []
-    side = {"long": True, "short": False}
-    pos = [_pos((p.get("instId") or "(disembunyikan)").replace("-SWAP", ""), side.get(p.get("posSide")),
+    pos = [_pos((p.get("instId") or "(disembunyikan)").replace("-SWAP", ""), okx_side(p),
                 _f(p.get("openAvgPx")), _f(p.get("markPx")), lev=p.get("lever"),
                 pnl=(_f(p.get("uplRatio")) or 0) * 100) for p in pos_raw[:10]]
-    hist = [_trade((h.get("instId") or "?").replace("-SWAP", ""), side.get(h.get("posSide")), _f(h.get("openAvgPx")),
+    hist = [_trade((h.get("instId") or "?").replace("-SWAP", ""), okx_side(h), _f(h.get("openAvgPx")),
                    _f(h.get("closeAvgPx")), h.get("openTime"), h.get("closeTime") or None, lev=h.get("lever"))
             for h in hist_raw]
     hidden = any(not p.get("instId") for p in pos_raw)

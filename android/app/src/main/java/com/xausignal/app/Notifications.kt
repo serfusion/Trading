@@ -16,6 +16,7 @@ import androidx.core.app.NotificationManagerCompat
 object Notifications {
     private const val CH_SIGNAL = "signals"
     private const val CH_ACTION = "action_loud"   // TP1 / SL+: suara alarm (lebih keras) agar tidak terlewat
+    private const val CH_COPY = "copy_follow"     // 👁 trader yang di-follow buka/tutup posisi (4.16)
 
     fun createChannels(context: Context) {
         val nm = context.getSystemService(NotificationManager::class.java)
@@ -36,6 +37,11 @@ object Notifications {
                         .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                         .build()
                 )
+            }
+        )
+        nm.createNotificationChannel(
+            NotificationChannel(CH_COPY, "👁 Trader diikuti buka/tutup", NotificationManager.IMPORTANCE_HIGH).apply {
+                enableVibration(true)
             }
         )
         nm.deleteNotificationChannel("service")   // notifikasi "menunggu sinyal" versi lama
@@ -130,6 +136,13 @@ object Notifications {
             else -> ("🌊 BATAL $sym" to "Hapus pending STOP: ${event.str("reason")}")
         }
         post(context, (event.id + event.type).hashCode(), title, text)
+    }
+
+    /** 👁 Trader yang di-follow BUKA / TUTUP posisi (cloud/api/_ikuti.py → topik -copy). Info saja, tanpa order. */
+    fun copy(context: Context, e: org.json.JSONObject) {
+        createChannels(context)
+        val (title, text) = copyEventText(e)
+        post(context, (e.optString("id") + e.optString("type")).hashCode(), title, text, CH_COPY)
     }
 
     /** 💎 BELI SPOT (cloud/api/_spot.py): beli di Binance spot lalu pasang limit jual di TP. Info saja. */

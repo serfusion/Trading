@@ -57,6 +57,11 @@ object SignalPoller {
             0
         } finally {
             SignalRepository.flush()
+            try {
+                CopyEvents.poll(context)               // 👁 cadangan kejadian copy trader (bila layanan ⚡ mati)
+            } catch (e: Exception) {
+                // opsional
+            }
         }
     }
 
@@ -131,6 +136,7 @@ class PollReceiver : BroadcastReceiver() {
                     // pengingat berita opsional
                 }
             } finally {
+                CopyStreamControl.sync(app)                // ⚡ hidupkan lagi pemantau copy trader bila dimatikan sistem
                 PollScheduler.schedule(app)
                 NewsAlarm.schedule(app)
                 pending.finish()

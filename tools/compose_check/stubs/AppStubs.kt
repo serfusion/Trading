@@ -23,3 +23,5 @@ object NewsAlarm {
 }
 
 object SignalPoller { fun poll(context: Context): Int = 0 }
+
+object CopyStreamControl { fun sync(context: Context) {} }
