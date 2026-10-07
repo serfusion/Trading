@@ -119,3 +119,11 @@ perkiraan 89K", tanpa simbol). Fed/Kalshi/perkiraan hari H hanya di Detail.
 - Aplikasi 4.18: baris cukup "NFP: peluang emas naik 1 jam 61%" + waktu; ketuk = show/hide detail (dasar angka "teruji,
   belum pasti", 🔄 titik balik ekonomi NFP — docs/NFP_MEAN.md bagian akhir —, 🏦 keputusan Fed Polymarket, Kalshi /
   perkiraan hari H, detik pertama). Tombol "Detail" kartu dihapus (diganti show/hide per baris).
+
+## Uji gabungan kejutan semua berita terbaru (7 Okt 2026 — `research/news_gabung.py`, `docs/eksternal/hasil_news_gabung.txt`)
+- Skor = jumlah kejutan pro-emas berita LAIN dalam 7/30 hari (semua, inflasi, tenaga kerja); 432 aturan (18 berita).
+  Lolos (≥ 58% LAMA & BARU, n ≥ 30): **0** (kebetulan saja diharapkan ±9–22). Tanda skor 30 hari: 47% (LAMA 46%, BARU 50%),
+  per tahun 40–59% (2026 75% n kecil) → lempar koin. Peringkat TIDAK diubah.
+- NFP vs mean reversion: pendahulu membaik (≥ +2) → emas naik 1 jam 66% (LAMA 63% n 46, BARU 80% n 10, tahun naik-turun
+  0–100%); kejutan tenaga kerja 30 hari ≤ −2 → 63% (LAMA 68%, BARU 53%); keduanya 78%/67% tetapi n 18/6. Dasar NFP 56%.
+  Menarik tetapi BARU terlalu sedikit / tidak konsisten per tahun → kandidat, belum dipasang; dicek ulang tiap NFP.
