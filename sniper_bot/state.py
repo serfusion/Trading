@@ -20,6 +20,9 @@ KOSONG = {
     "hari": {"tgl": None, "pnl": 0.0, "trade": 0, "jeda_rugi": False},
     "telegram_offset": 0,
     "id_berikut": 1,
+    "pending": {},         # clientOrderId -> order yang statusnya belum pasti (bot dijeda sampai /beres)
+    "mode": None,          # kertas | live (dicatat saat start; posisi tidak boleh pindah mode)
+    "bursa": None,
 }
 
 
@@ -43,10 +46,29 @@ class Store:
                 self.path.rename(bak)
         return json.loads(json.dumps(KOSONG))
 
+    def kunci(self) -> None:
+        """Kunci eksklusif data_dir: hanya SATU bot boleh memakai state ini (mencegah order ganda dua proses)."""
+        self._fkunci = open(self.dir / "bot.lock", "a+")
+        try:
+            if os.name == "nt":
+                import msvcrt
+                self._fkunci.seek(0)
+                msvcrt.locking(self._fkunci.fileno(), msvcrt.LK_NBLCK, 1)
+            else:
+                import fcntl
+                fcntl.flock(self._fkunci.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as e:
+            self._fkunci.close()
+            raise RuntimeError(f"bot lain sedang memakai {self.dir} (bot.lock). Matikan dulu proses itu.") from e
+
     def simpan(self) -> None:
         with self.lock:
             tmp = self.path.with_suffix(".tmp")
             tmp.write_text(json.dumps(self.s, indent=1, ensure_ascii=False), encoding="utf-8")
+            try:
+                os.chmod(tmp, 0o600)
+            except OSError:
+                pass
             os.replace(tmp, self.path)
 
     def id_baru(self, awalan: str) -> str:

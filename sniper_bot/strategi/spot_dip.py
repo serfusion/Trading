@@ -1,9 +1,13 @@
 """💎 Spot dip: koin besar yang peluang naik +3% dalam 10 hari tinggi (model gradient boosting walk-forward).
 
 PORT dari cloud/api/_spot.py (versi terpasang di main) agar bot Telegram berdiri sendiri. Fungsi fitur/model DISALIN
-persis (tes paritas tests/test_sniper_bot.py membandingkan dengan cloud/api/_spot.py). Model: spot_model.json (salinan).
-Teruji (docs/SPOT_PELUANG.md, SPOT_PINDAI.md, SPOT_JATUH.md): 20 koin, sejak Okt 2021 naik +3% di 91-92% sinyal,
-rata +1,2..1,4%/sinyal, rugi saat gagal rata -13..-14% (terburuk -58%). Tanpa SL (SL memperburuk hasil, sudah diuji).
+persis (tes paritas tests/test_sniper_bot.py & tests/test_spot_paritas.py). Model: spot_model.json (salinan identik).
+
+Angka teruji JUJUR (docs/eksternal/spek_spot_dip_bot.txt, research/spot_paritas.py, model walk-forward, biaya 0,30%):
+varian D = semesta 20 pair volume terbesar SAAT ITU + lewati vol > P90 + BTC > SMA200, 10 slot x 10%:
+  BARU (Okt 2021-Sep 2026): TP +3% tercapai 90,9%, +0,80%/sinyal, portofolio +8,5%/th DD -15% (biaya x2 +5,0%/th)
+  LAMA (2019-Sep 2021):     portofolio +23,4%/th DD -21%
+  Gagal: rugi rata -18%, terburuk -55%. Acak (semesta sama) BARU -5,4%/th. Tanpa SL (SL memperburuk, sudah diuji).
 """
 from __future__ import annotations
 
@@ -126,15 +130,14 @@ def prob(x: list[float], model: dict = MODEL) -> float:
 
 
 def kualitas(bars: list[Bar]) -> str | None:
-    """Filter kualitas (docs/SPOT_JATUH.md): lewati koin < 1 tahun, sudah ambruk >= 80% dari puncak 1 tahun,
-    atau volume quote hari terakhir >= 3x rata-rata 30 hari (panik)."""
-    if len(bars) < 365:
+    """Filter kualitas = research/spot_paritas.kualitas_riset: lewati koin < 1 tahun (sejak bar pertama), sudah ambruk
+    >= 80% dari puncak 365 hari, atau volume quote hari t >= 3x rata-rata 30 hari TERMASUK hari t (panik)."""
+    if (bars[-1].t - bars[0].t) / HARI < 365:
         return "umur < 1 tahun"
-    puncak = max(b.h for b in bars[-365:])
-    if bars[-1].c <= puncak * 0.2:
+    if len(bars) >= 200 and bars[-1].c / max(b.h for b in bars[-365:]) - 1 <= -0.80:
         return "ambruk ≥ 80% dari puncak 1 tahun"
-    q30 = [b.q for b in bars[-31:-1]]
-    if q30 and bars[-1].q >= 3 * _mean(q30) > 0:
+    q30 = [b.q for b in bars[-30:]]
+    if len(q30) == 30 and _mean(q30) > 0 and bars[-1].q / _mean(q30) >= 3:
         return "volume panik ≥ 3× rata-rata 30 hari"
     return None
 
@@ -164,6 +167,41 @@ def sinyal(bars: list[Bar], btc: list[Bar], filter_btc: bool = True, filter_kual
     return False, p, "peluang < ambang"
 
 
+# ====================================================================== semesta
+# bukan koin bergerak bebas (= research/spot_paritas.SKIP)
+SKIP = {"USDT", "USDC", "FDUSD", "TUSD", "USDP", "DAI", "BUSD", "USDE", "PYUSD", "RLUSD", "USD1", "BFUSD", "XUSD",
+        "USDS", "FRAX", "LUSD", "GUSD", "UST", "USTC", "USDD", "SUSD", "USDJ", "EURC", "EUR", "EURI", "AEUR", "GBP",
+        "TRY", "BRL", "AUD", "JPY", "ARS", "MXN", "ZAR", "PLN", "RON", "UAH", "IDRT", "BIDR", "BVND", "PAXG", "XAUT",
+        "WBTC", "WBETH", "BETH", "STETH", "WSTETH", "BNSOL", "CBETH", "RETH", "WETH", "PAX", "BKRW", "RUB", "NGN",
+        "USDSOLD", "U", "KGST", "BNCB"}
+URUTAN = {c: i for i, c in enumerate(MODEL["coins"])}
+
+
+def bukan_koin(base: str) -> bool:
+    return base in SKIP or (len(base) > 4 and base.endswith(("UP", "DOWN", "BULL", "BEAR")))
+
+
+def qv7(bars: list[Bar]) -> float | None:
+    """Rata-rata volume quote 7 hari SEBELUM candle tutup terakhir (= riset: qv.shift(1).rolling(7).mean())."""
+    if len(bars) < 8:
+        return None
+    return _mean([b.q for b in bars[-8:-1]])
+
+
+def pilih_volume20(data: dict[str, list[Bar]], btc: list[Bar], n: int = 20, model: dict = MODEL) -> list[str]:
+    """Varian D: dari koin yang fiturnya bisa dihitung (>= 201 hari), ambil n dengan qv7 terbesar; urutan pindai =
+    urutan koin model lalu abjad (sama dengan portofolio riset)."""
+    nilai = []
+    for coin, bars in data.items():
+        if bukan_koin(coin) or features(bars, btc, model) is None:
+            continue
+        q = qv7(bars)
+        if q is not None:
+            nilai.append((q, coin))
+    top = [c for _q, c in sorted(nilai, key=lambda x: (-x[0], x[1]))[:n]]
+    return sorted(top, key=lambda c: (URUTAN.get(c, 999), c))
+
+
 # ====================================================================== bagian live (dipakai mesin)
 class SpotDipMesin:
     nama = "spot_dip"
@@ -173,73 +211,133 @@ class SpotDipMesin:
         self.m = mesin
         self.cfg = mesin.cfg["spot_dip"]
 
-    def koin(self) -> list[str]:
-        k = self.cfg.get("koin")
-        if k:
-            return [x.upper() for x in k]
-        return list(MODEL["coins"])
+    @property
+    def sp(self) -> dict:
+        sp = self.m.s["spot"]
+        sp.setdefault("hari_beli", {})
+        return sp
 
     def tick_harga(self) -> None:
         return None
-
-    def tick_jadwal(self) -> None:
-        now = self.m.now()
-        hari_ini = math.floor(now / HARI) * HARI
-        sp = self.m.s["spot"]
-        # pindai sekali sehari, >= 5 menit setelah candle harian UTC tutup (07:05 WIB) dan masih di jendela teruji
-        # (entry riset = awal hari; makin siang makin jauh dari yang diuji). /pindai memaksa (dengan catatan).
-        paksa = self.m.s.get("spot_paksa", False)
-        jendela = float(self.cfg.get("jendela_jam", 6)) * 3600
-        if not paksa and (now - hari_ini < 300 or now - hari_ini > jendela or sp.get("pindai") == hari_ini):
-            return
-        if paksa:
-            self.m.s["spot_paksa"] = False
-            if now - hari_ini > jendela:
-                self.m.kabar(f"🔎 💎 dipindai di luar jendela teruji (00:05–{self.cfg.get('jendela_jam', 6):g}:00 UTC): "
-                             "entry lebih siang dari riset.")
-        self.m.jadwal["spot"] = now
-        self.pindai(now, hari_ini)
-        sp["pindai"] = hari_ini
 
     def _bars(self, coin: str, now: float) -> list[Bar]:
         b = self.m.pasar.kline(f"{coin}USDT", "1d", limit=420)
         return [x for x in b if x.t + HARI <= now]              # hanya candle yang sudah tutup
 
-    def pindai(self, now: float, hari_ini: float) -> None:
-        btc = self._bars("BTC", now)
-        tp, hari = float(MODEL["tp"]), float(MODEL["hari"])
-        terbuka = {p["base"] for p in self.m.s["posisi"].values() if p["strategi"] == self.nama}
-        maks = int(self.cfg["maks_posisi"])
-        ditemukan = []
-        for coin in self.koin():
-            if coin in terbuka:
-                continue
-            terakhir = self.m.s["spot"]["terakhir"].get(coin)
-            if terakhir and now - terakhir < float(self.cfg["jeda_ulang_jam"]) * 3600:
+    def semesta(self, now: float, btc: list[Bar]) -> tuple[list[str], dict[str, list[Bar]]]:
+        koin = [x.upper() for x in self.cfg.get("koin") or []]
+        if koin:
+            return koin, {}
+        if self.cfg.get("semesta", "volume20") == "tetap20":
+            return list(MODEL["coins"]), {}
+        t24 = self.m.pasar.ticker24()
+        cand = sorted(((v.get("q") or 0.0, k[:-4]) for k, v in t24.items()
+                       if k.endswith("USDT") and not bukan_koin(k[:-4])), reverse=True)
+        data: dict[str, list[Bar]] = {"BTC": btc}
+        for _q, coin in cand[: int(self.cfg.get("pra_pilih", 60))]:
+            if coin in data:
                 continue
             try:
-                bars = btc if coin == "BTC" else self._bars(coin, now)
+                data[coin] = self._bars(coin, now)
+            except Exception as e:  # noqa: BLE001
+                self.m.galat(f"spot {coin}", e)
+        return pilih_volume20(data, btc), data
+
+    def tick_jadwal(self) -> None:
+        now = self.m.now()
+        hari_ini = math.floor(now / HARI) * HARI
+        sp = self.sp
+        jendela = float(self.cfg.get("jendela_jam", 1)) * 3600
+        di_jendela = 300 <= now - hari_ini <= jendela
+        if self.m.s.pop("spot_paksa", False) and not (di_jendela and sp.get("pindai") != hari_ini):
+            self.pindai(now, hari_ini, beli=False)              # /pindai di luar jendela / sudah dipindai: lihat saja
+            return
+        if now - hari_ini > jendela and sp.get("pindai") != hari_ini and sp.get("terlewat") != hari_ini:
+            sp["terlewat"] = hari_ini
+            self.m.kabar(f"⚠️ Pindai 💎 hari ini terlewat (bot tidak aktif/gagal data 07:05–"
+                         f"{7 + float(self.cfg.get('jendela_jam', 1)):02.0f}:00 WIB). Tidak membeli di luar jendela teruji; "
+                         f"/pindai untuk melihat sinyal saja.")
+            return
+        if not di_jendela or sp.get("pindai") == hari_ini or now - sp.get("coba_t", 0) < 300:
+            return
+        sp["coba_t"] = now
+        if self.pindai(now, hari_ini, beli=True):
+            sp["pindai"] = hari_ini
+
+    def _tutup_hari_ini(self, coin: str, hari_ini: float) -> bool:
+        return any(t.get("strategi") == self.nama and t.get("base") == coin and t.get("t_tutup", 0) >= hari_ini
+                   for t in self.m.s["riwayat"][:200])
+
+    def pindai(self, now: float, hari_ini: float, beli: bool = True) -> bool:
+        """Pindai candle harian tutup. True bila selesai (hari ditandai); False = coba lagi 5 menit."""
+        from ..mesin import pct, usd
+        from ..telegram import esc
+        try:
+            btc = self._bars("BTC", now)
+            koin, data = self.semesta(now, btc)
+        except Exception as e:  # noqa: BLE001
+            self.m.galat("spot data", e)
+            return False
+        if beli and self.m.kas() is None:
+            return False                                        # saldo gagal dibaca (galat sudah dikabarkan)
+        tp, hari = float(MODEL["tp"]), float(MODEL["hari"])
+        maks = int(self.cfg["maks_posisi"])
+        hasil = {"t": now, "beli": [], "sinyal": [], "lewat": [], "koin": len(koin)}
+        for coin in koin:
+            try:
+                bars = data.get(coin) or (btc if coin == "BTC" else self._bars(coin, now))
             except Exception as e:  # noqa: BLE001
                 self.m.galat(f"spot {coin}", e)
                 continue
-            beli, p, alasan = sinyal(bars, btc, bool(self.cfg["filter_btc_sma200"]), bool(self.cfg["filter_kualitas"]))
+            ok, p, alasan = sinyal(bars, btc, bool(self.cfg["filter_btc_sma200"]), bool(self.cfg["filter_kualitas"]))
+            if not ok:
+                if alasan == "BTC di bawah SMA200":
+                    hasil["btc_bawah"] = True
+                continue
+            hasil["sinyal"].append(f"{coin} {p * 100:.0f}% ({alasan})")
             if not beli:
                 continue
-            if sum(1 for x in self.m.s["posisi"].values() if x["strategi"] == self.nama) >= maks:
-                break
+            terbuka = [x for x in self.m.s["posisi"].values() if x["strategi"] == self.nama]
+            if any(x["base"] == coin for x in terbuka):
+                continue
+            if self.sp["hari_beli"].get(coin) == hari_ini or self._tutup_hari_ini(coin, hari_ini):
+                continue
+            if len(terbuka) >= maks:
+                hasil["lewat"].append(f"{coin}: {maks} slot penuh")
+                continue
+            u, target = self.m.ukuran(float(self.cfg["persen_modal"]))
+            if u < 5 or u < float(self.cfg.get("min_persen_target", 0.5)) * target:
+                hasil["lewat"].append(f"{coin}: ukuran {usd(u)} < 50% target {usd(target)}")
+                continue
             sym = f"{coin}USDT"
             harga = self.m.harga.get(sym) or bars[-1].c
-            usd_ = self.m.ukuran(float(self.cfg["persen_modal"]))
             sisa_hari = (hari_ini + hari * HARI - now) / HARI
-            pos = self.m.buka(self.nama, sym, coin, harga, usd_, tp, None, sisa_hari,
-                              info={"peluang": p, "alasan": alasan}, label=f"{self.label} peluang {p * 100:.0f}% ({alasan})")
+            pos = self.m.buka(self.nama, sym, coin, harga, u, tp, None, sisa_hari,
+                              info={"peluang": p, "alasan": alasan},
+                              label=f"{self.label} peluang {p * 100:.0f}% ({alasan})")
+            if pos or self.m.gagal_terakhir == "tidak pasti":
+                self.sp["hari_beli"][coin] = hari_ini              # satu sinyal = satu percobaan
             if pos:
-                self.m.s["spot"]["terakhir"][coin] = now
-                ditemukan.append(coin)
-        self.m.s["spot"]["hasil"] = {"t": now, "beli": ditemukan}
+                hasil["beli"].append(coin)
+            else:
+                hasil["lewat"].append(f"{coin}: {self.m.gagal_terakhir}")
+        self.sp["hasil"] = hasil
+        teks = (f"💎 <b>Pindai {'(lihat saja, tanpa beli)' if not beli else 'harian'}</b> {len(koin)} koin "
+                f"({esc(self.cfg.get('semesta', 'volume20')) if not self.cfg.get('koin') else 'daftar sendiri'})\n")
+        if hasil.get("btc_bawah"):
+            teks += "BTC di bawah SMA200 → filter menahan semua sinyal (teruji menurunkan DD).\n"
+        teks += ("Sinyal: " + ", ".join(esc(x) for x in hasil["sinyal"]) if hasil["sinyal"] else "Tidak ada sinyal.")
+        if hasil["beli"]:
+            teks += f"\nDibeli: {', '.join(hasil['beli'])} (TP {pct(tp)}, maks {hari:g} hari, tanpa SL)"
+        if hasil["lewat"]:
+            teks += "\nDilewati: " + "; ".join(esc(x) for x in hasil["lewat"][:10])
+        if hasil["sinyal"] or not beli:
+            self.m.kabar(teks)
+        return True
 
     def status_teks(self) -> str:
-        sp = self.m.s["spot"]
         from ..mesin import jam
-        t = (sp.get("hasil") or {}).get("t")
-        return f"{self.label}: {len(self.koin())} koin, pindai terakhir {jam(t) if t else '-'}"
+        h = self.sp.get("hasil") or {}
+        sem = "daftar sendiri" if self.cfg.get("koin") else self.cfg.get("semesta", "volume20")
+        return (f"{self.label}: semesta {sem}, pindai terakhir {jam(h['t']) if h.get('t') else '-'}"
+                f" ({len(h.get('sinyal', []))} sinyal, {len(h.get('beli', []))} dibeli)")

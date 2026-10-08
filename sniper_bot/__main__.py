@@ -1,7 +1,7 @@
 """Sniper bot Telegram — python -m sniper_bot <perintah> [--config sniper_bot/config.yaml]
 
   jalan          jalankan bot (loop 24 jam; Telegram + strategi). Mode kertas/live dari config.yaml
-  cek            satu putaran tanpa Telegram (pesan dicetak ke layar) — uji koneksi data & strategi
+  cek            satu putaran SIMULASI tanpa Telegram (salinan state sementara, tanpa order) — uji data & strategi
   chat-id        tampilkan chat_id dari pesan terakhir yang dikirim ke bot (langkah setelan)
   uji-telegram   kirim pesan uji ke chat_id di .env
   uji-bursa      cek kunci API bursa: saldo & pasar (TANPA order)
@@ -10,8 +10,11 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 import sys
+import tempfile
 import time
+from pathlib import Path
 
 from . import config as konfig
 from .broker import KertasBroker, LiveBroker
@@ -21,12 +24,40 @@ from .state import Store
 from .telegram import Telegram, TelegramMati
 
 
-def buat_broker(cfg: dict, store: Store):
+def dir_state(cfg: dict) -> Path:
+    """State kertas & live TERPISAH: posisi simulasi tidak boleh terbawa ke akun nyata (dan sebaliknya)."""
+    return Path(cfg["data_dir"]) / cfg["mode"]
+
+
+def buat_live(cfg: dict) -> LiveBroker:
     b = cfg["bursa"]
-    if cfg["mode"] == "live":
-        return LiveBroker(b["ccxt_id"], konfig.rahasia("BURSA_API_KEY"), konfig.rahasia("BURSA_API_SECRET"),
-                          konfig.rahasia("BURSA_API_PASSWORD"), b.get("quote", "USDT"))
+    return LiveBroker(b["ccxt_id"], konfig.rahasia("BURSA_API_KEY"), konfig.rahasia("BURSA_API_SECRET"),
+                      konfig.rahasia("BURSA_API_PASSWORD"), b.get("quote", "USDT"))
+
+
+def buat_broker(cfg: dict, store: Store, paksa_kertas: bool = False):
+    b = cfg["bursa"]
+    if cfg["mode"] == "live" and not paksa_kertas:
+        return buat_live(cfg)
     return KertasBroker(store, float(cfg["modal_kertas_usd"]), float(b["slippage_kertas"]), float(b["biaya_kertas"]))
+
+
+def cek_kunci_api(lb: LiveBroker, tolak: bool = True) -> str:
+    """Binance: tolak jalan bila kunci API boleh MENARIK dana. Bursa lain: pengingat cek manual."""
+    try:
+        iz = lb.cek_izin()
+    except Exception as e:  # noqa: BLE001
+        return f"⚠️ izin kunci API tidak bisa dicek ({type(e).__name__}); pastikan manual: withdraw MATI."
+    if iz is None:
+        return "ℹ️ Cek manual di web bursa: kunci API hanya izin trading spot, withdraw MATI, whitelist IP."
+    if iz["tarik"] or iz["transfer"]:
+        pesan = ("⛔ Kunci API ini boleh MENARIK/TRANSFER dana. Buat kunci baru tanpa izin withdraw & transfer "
+                 "(tutorial langkah 7).")
+        if tolak:
+            raise SystemExit(pesan)
+        return pesan
+    return ("✅ Kunci API: withdraw mati" + ("" if iz["ip"] else " — ⚠️ belum dibatasi IP (disarankan)") +
+            ("" if iz["spot"] else " — ⛔ izin trading spot BELUM aktif"))
 
 
 def buat_telegram(cfg: dict, paksa_mati: bool = False):
@@ -38,9 +69,19 @@ def buat_telegram(cfg: dict, paksa_mati: bool = False):
     return Telegram(konfig.rahasia("TELEGRAM_TOKEN"), ids, int(cfg["telegram"].get("interval_poll", 25)))
 
 
-def buat_mesin(cfg: dict, tg_mati: bool = False) -> Mesin:
-    store = Store(cfg["data_dir"])
-    m = Mesin(cfg, store, Binance(), buat_broker(cfg, store), buat_telegram(cfg, tg_mati))
+def buat_mesin(cfg: dict, tg_mati: bool = False, store: Store | None = None, paksa_kertas: bool = False) -> Mesin:
+    store = store or Store(str(dir_state(cfg)))
+    broker = buat_broker(cfg, store, paksa_kertas)
+    s = store.s
+    for p in s["posisi"].values():
+        if bool(p.get("live")) != bool(broker.live):
+            raise SystemExit(f"State {store.dir} berisi posisi {'LIVE' if p.get('live') else 'KERTAS'} {p['id']} — "
+                             f"tidak cocok dengan mode sekarang. Jangan memindah state antar mode.")
+    if s.get("bursa") and s["bursa"] != broker.nama and s["posisi"]:
+        raise SystemExit(f"State {store.dir} berisi posisi di bursa {s['bursa']}, sekarang {broker.nama}. Tutup posisi "
+                         f"lama dulu atau pakai data_dir lain.")
+    s["mode"], s["bursa"] = ("live" if broker.live else "kertas"), broker.nama
+    m = Mesin(cfg, store, Binance(), broker, buat_telegram(cfg, tg_mati))
     from .strategi.listing_dip import ListingDipMesin
     from .strategi.spot_dip import SpotDipMesin
     if cfg["listing_dip"].get("aktif"):
@@ -73,18 +114,18 @@ def cmd_chat_id() -> None:
 
 
 def cmd_uji_bursa(cfg: dict) -> None:
-    b = cfg["bursa"]
-    lb = LiveBroker(b["ccxt_id"], konfig.rahasia("BURSA_API_KEY"), konfig.rahasia("BURSA_API_SECRET"),
-                    konfig.rahasia("BURSA_API_PASSWORD"), b.get("quote", "USDT"))
+    lb = buat_live(cfg)
     print(f"Terhubung ke {lb.nama}: {len(lb.ex.markets)} pasar")
     print(f"Saldo {lb.quote} bebas ≈ ${lb.saldo_usd():,.2f}")
-    for base in ("BTC", "ETH", "SOL"):
-        print(f"  {base}/{lb.quote}: {'ada' if lb.punya_pasar(base) else 'TIDAK ada'}")
-    print("Tidak ada order yang dikirim. Pastikan kunci API TANPA izin penarikan (withdraw).")
+    print(cek_kunci_api(lb, tolak=False))
+    from .strategi.spot_dip import MODEL
+    tidak = [c for c in MODEL["coins"] if not lb.punya_pasar(c)]
+    print(f"Pasar {lb.quote}: {len(MODEL['coins']) - len(tidak)}/{len(MODEL['coins'])} koin 💎 tetap20 tersedia"
+          + (f" (tidak ada: {', '.join(tidak)})" if tidak else ""))
+    print("Tidak ada order yang dikirim.")
 
 
 def cmd_replay() -> None:
-    from pathlib import Path
 
     import pandas as pd
 
@@ -138,7 +179,16 @@ def main(argv=None) -> None:
     elif a.perintah == "replay":
         cmd_replay()
     elif a.perintah == "cek":
-        m = buat_mesin(cfg, tg_mati=True)
+        # selalu simulasi di salinan state sementara: tidak mengirim order & tidak menimpa state bot yang sedang jalan
+        tmp = Path(tempfile.mkdtemp(prefix="sniper_cek_"))
+        asli = dir_state(cfg) / "state.json"
+        if asli.exists():
+            shutil.copy(asli, tmp / "state.json")
+        store = Store(str(tmp))
+        store.s["posisi"], store.s["pending"], store.s["kas_kertas"] = {}, {}, None
+        if cfg["mode"] == "live":
+            print("Mode live di config — `cek` tetap SIMULASI (kertas, tanpa order).")
+        m = buat_mesin(cfg, tg_mati=True, store=store, paksa_kertas=True)
         t0 = time.time()
         m.satu_putaran()
         import re
@@ -147,8 +197,16 @@ def main(argv=None) -> None:
         print(re.sub(r"<[^>]+>", "", teks_status(m)))
         print(re.sub(r"<[^>]+>", "", teks_listing(m)))
         print(f"selesai {time.time() - t0:.0f} dtk")
+        shutil.rmtree(tmp, ignore_errors=True)
     else:
-        m = buat_mesin(cfg)
+        store = Store(str(dir_state(cfg)))
+        try:
+            store.kunci()
+        except RuntimeError as e:
+            raise SystemExit(str(e)) from e
+        m = buat_mesin(cfg, store=store)
+        if m.broker.live:
+            print(cek_kunci_api(m.broker, tolak=True))
         try:
             m.jalan(a.putaran)
         except KeyboardInterrupt:

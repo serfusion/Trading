@@ -68,5 +68,80 @@ BEDA KECIL: volume panik bot = volume hari t / rata-rata 30 hari SEBELUM t (rise
             ambang setara riset ~3,22x rata-rata 29 hari sebelumnya). Umur bot = jumlah bar (maks 420) >= 365, riset =
             hari sejak bar pertama koin. Entry bot = harga isi market order (bukan open), TP = isi x 1,03 tanpa pembulatan
             -> broker harus membulatkan ke tickSize (PEPE tick 1e-8 = 0,1% harga).
-RSI       : bergantung panjang riwayat (EMA dari bar pertama); 400 vs semua bar: selisih fitur <= ~1e-11, tidak ada
+RSI       : bergantung panjang riwayat (EMA dari bar pertama); 400 vs semua bar (462 titik, 5 koin): selisih fitur maks 2,3e-12, tidak ada
             keputusan berubah (lihat baris terakhir hasil_spot_paritas.txt). Live: ambil 420 bar seperti cloud.
+
+## 3. Angka teruji JUJUR (research/spot_paritas.py uji; model walk-forward; biaya 0,30%; detail per tahun & acak di
+##    hasil_spot_paritas.txt). LAMA = 2019–Sep 2021, BARU = Okt 2021–Sep 2026. "naik" = limit +3% terisi <= 10 hari.
+| Varian | BARU naik | BARU rata/sinyal | BARU portofolio | biaya x2 BARU | LAMA portofolio |
+|---|---|---|---|---|---|
+| A. terpasang cloud: 20 koin TETAP, vol>P90 (bias penyintas) | 92,1% | +1,46% | +16,9%/th DD -10% | +13,0%/th | +33,8%/th DD -23% |
+| B. bawaan bot: A + BTC>SMA200 (bias penyintas)           | 94,2% | +1,82% | +9,7%/th DD -9%   | +8,0%/th  | +15,1%/th DD -22% |
+| C. B + kualitas (bias penyintas)                          | 94,9% | +1,98% | +9,3%/th DD -6%   | +7,8%/th  | +10,4%/th DD -19% |
+| D. JUJUR: 20 koin volume terbesar saat itu + vol + BTC    | 90,9% | +0,80% | +8,5%/th DD -15%  | +5,0%/th  | +23,4%/th DD -21% |
+| D2. D + kualitas                                          | 91,2% | +0,94% | +7,2%/th DD -17%  | +4,7%/th  | +20,3%/th DD -18% |
+| E. JUJUR tanpa filter BTC (= A tanpa bias)                | 89,4% | +0,51% | +8,5%/th DD -38%  | +1,9%/th  | +44,4%/th DD -22% |
+| F. 870aed1c: 100 koin + BTC + kualitas, 20 slot           | 90,4% | +0,78% | +11,6%/th DD -30% | +3,1%/th  | +31,4%/th DD -49% |
+| G. F + vol>P90, 20 slot                                   | 89,8% | +0,72% | +6,5%/th DD -31%  | +1,5%/th  | +39,1%/th DD -35% |
+Pembanding: ACAK (jumlah sinyal/bulan sama, semesta D) BARU naik 81,9%, rata -0,36%/sinyal, portofolio -5,4%/th DD -35%
+(p95 keberuntungan +1,4%/th); semua hari semesta D BARU naik 79,2% rata -0,43%. BTC beli-tahan BARU +11,1%/th DD -77%,
+LAMA +143,7%/th DD -63%.
+D per tahun (portofolio): 2021 -2%, 2022 -2%, 2023 +19%, 2024 +11%, 2025 +16%, 2026 (s.d. Sep) +2%.
+D per sinyal: 2020 89% +0,5%; 2021 93% +0,9%; 2022 tidak ada sinyal (BTC < SMA200); 2023 94% +1,5%; 2024 89% +0,8%;
+2025 93% +0,8%; 2026 95% +1,1%. Gagal: rugi rata -18%, terburuk -55%. 25% posisi sempat turun >= 10% (63% tetap kena TP).
+F mereproduksi docs/SPOT_JATUH.md (dokumen: 90,3% / +0,77% / +11,1%/th DD -30%) -> pipeline uji tervalidasi.
+
+Kesimpulan jujur:
+- Angka 92–95% & +1,5–2%/sinyal (A/B/C) memakai 20 koin yang DIPILIH HARI INI (penyintas). Harapan wajar untuk 5 tahun
+  ke depan = varian D: naik ±91%, +0,8%/sinyal, portofolio ±+8%/th, DD ±-15% (biaya x2 ±+5%/th).
+- Tetap jauh di atas acak (acak -5%/th), konsisten LAMA & BARU (keduanya positif per sinyal & portofolio).
+- Filter BTC > SMA200: BARU DD -38% -> -15% & +0,51 -> +0,80%/sinyal, tetapi LAMA +44% -> +23%/th (DD sama) = filter
+  pengurang risiko (terutama melewati 2022), bukan penambah profit di semua periode.
+- Filter kualitas (D2): per sinyal sedikit lebih baik, portofolio sedikit lebih rendah -> netral; boleh dimatikan/dinyalakan.
+- Lebih banyak koin (F/G 100 koin) tidak lebih baik per risiko; vol>P90 di 100 koin malah memperburuk BARU.
+
+## 4. ATURAN FINAL yang disarankan untuk bot mandiri (= spesifikasi cloud + filter BTC; angka harapan = varian D)
+1. Semesta: 20 koin spot_model.json (paritas cloud). Alternatif teruji (D): 20 pair USDT dengan rata-rata volume quote 7
+   hari s.d. kemarin terbesar (tanpa stablecoin/emas token/token pembungkus/leverage, riwayat >= 201 hari).
+2. Sekali sehari 00:05 UTC (07:05 WIB), hanya candle 1d TUTUP (420 bar dari /api/v3/klines interval=1d limit=420; buang
+   candle berjalan). BTC 420 bar.
+3. Hitung 15 fitur & prob persis seperti bagian 1 (salin fungsi; uji dengan tests/data/spot_dip_paritas.json).
+4. Lewati bila fitur None, vol_rank > 0,90, atau close BTC tutup terakhir <= rata-rata 200 close BTC (filter BTC).
+5. BELI bila prob >= 0,93 ATAU (red >= 3 & r3 <= -10% & d200 > 0); koin belum terbuka; koin tidak CLOSE hari UTC ini;
+   posisi terbuka < 10. Urutan koin = urutan daftar. Opsional: filter kualitas (umur >= 365 hari, close > 20% puncak 365
+   hari, volume quote hari t < 3x rata-rata 30 hari termasuk t).
+6. Ukuran: 10% ekuitas per posisi (maks 10). Beli market (atau limit di ask) segera setelah 00:05 UTC.
+7. Langsung pasang LIMIT SELL GTC di isi x 1,03 dibulatkan ke ATAS ke tickSize (PRICE_FILTER) & qty ke bawah stepSize
+   (LOT_SIZE), cek minNotional (NOTIONAL). Simpan id order.
+8. Batas: 00:00 UTC hari entry + 10 hari. Bila limit belum terisi saat batas: batalkan limit, jual market (≈ close hari
+   ke-10). TANPA stop loss (diuji memperburuk). Peringatan (bukan jual) saat turun >= 10% / 20%.
+9. Biaya riset 0,30% pulang-pergi; fee taker Binance 0,1%/sisi (0,075% dengan BNB) — hasil di atas sudah termasuk.
+
+## 5. Langkah implementasi mandiri (tanpa Vercel/Supabase/aplikasi)
+- Data publik tanpa kunci (sudah dicek dari sesi 8 Okt: HTTP 200):
+  GET https://data-api.binance.vision/api/v3/klines?symbol=ETHUSDT&interval=1d&limit=420
+      baris: [open_time_ms, open, high, low, close, vol_base, close_time_ms, vol_quote, trades, ...] (string -> float)
+  GET https://data-api.binance.vision/api/v3/ticker/24hr?type=MINI  (semua pair: quoteVolume 24 jam, untuk semesta D)
+  GET https://data-api.binance.vision/api/v3/exchangeInfo?symbol=PEPEUSDT  (tickSize/stepSize/minNotional, status)
+  GET https://data-api.binance.vision/api/v3/ticker/price?symbol=ETHUSDT (harga sekarang untuk pantau)
+  Cadangan: api.binance.com (ditolak dari AS, 451). Arsip historis: data.binance.vision (zip; sejak 2025 stempel waktu
+  dalam MIKRODETIK, bukan milidetik).
+- Penjadwal: loop 60 dtk; pindai bila jam UTC >= 00:05 dan belum dipindai hari ini (simpan tanggal di state.json).
+  Bila bot mati saat 00:05, pindai saat hidup lagi HANYA sampai jendela (mis. 06:00 UTC) — makin siang makin jauh dari
+  entry yang diuji (open hari itu).
+- State lokal (JSON, tulis atomik): posisi {koin, qty, entry, tp, order_id, deadline, peringatan}, closed hari ini,
+  tanggal pindai terakhir.
+- Pantau: tiap 1–5 menit cek status order limit (terisi -> CLOSE "TP"), harga (peringatan -10/-20%), batas waktu.
+- Eksekusi order HANYA lewat kunci API pengguna (bot sniper: ccxt). Mode kertas dulu; uji paritas sebelum live.
+- Telegram: hanya chat_id pemilik; kirim BELI / CLOSE / peringatan / ringkasan harian.
+
+## 6. Risiko (jujur)
+- 1 dari ±10 sinyal gagal, rugi rata -17..-18% (terburuk -55%) -> ukuran 10%/koin wajib; tanpa batas itu satu kegagalan
+  menghapus ±6 kemenangan (+2,7% bersih per kemenangan).
+- Kegagalan datang bersamaan saat pasar ambruk (2022 tanpa filter BTC: -14%). Filter BTC menurunkan DD, tidak menghapus.
+- Portofolio BARU hanya ±+8%/th (biaya x2 ±+5%/th) — di bawah BTC beli-tahan +11%/th (tetapi DD BTC -77% vs -15%).
+- Model live dilatih s.d. Sep 2026; angka di atas walk-forward. Pola bisa berubah; hasil masa lalu tidak menjamin.
+- Limit di +3% dianggap terisi saat high menyentuh TP; 1,8% TP BARU hanya tersentuh < 0,1% di atas TP (antrian order bisa
+  tidak terisi). Gap open di atas TP praktis tidak ada (pasar 24 jam).
+- Bot harus hidup 24 jam untuk batas waktu & peringatan (limit TP tetap di bursa walau bot mati).
+- Data/eksekusi: bursa lain (bukan Binance) = harga & fee berbeda; koin bisa di-delist (contoh LUNA, FTT).

@@ -515,11 +515,7 @@ def portfolio(tr: pd.DataFrame, data: dict, slots: int, start, end, extra_cost: 
         for si, d in enumerate(ss):
             name = f"{coin}#{si}" if len(ss) > 1 else coin
             d2[name] = d
-    names = set(x.coin_asli)
-    data2 = {}
-    for full, nm in zip(x.coin, x.coin_asli):
-        data2[full] = [d2[nm]]
-    _ = names
+    data2 = {full: [d2[nm]] for full, nm in zip(x.coin, x.coin_asli)}
     return pf0(x.drop(columns=["coin_asli"]), data2, slots, start, end)
 
 
