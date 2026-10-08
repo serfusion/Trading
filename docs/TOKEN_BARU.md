@@ -36,36 +36,75 @@ Hasil mentah: `docs/eksternal/hasil_chain_arc.txt`, `docs/eksternal/hasil_chain_
   dalam L detik (perkiraan ATAS: pesaing juga bisa mempercepat diri).
 
 ## Hasil Arc (mainnet 16 Sep 2026)
-Pool v4 yang kedua tokennya dari daftar: 378 (222 pernah ada swap), 125.181 swap. Untung penukar (sebelum gas):
+Pool v4 yang kedua tokennya dari daftar: 378 (222 pernah ada swap), 125.181 swap. Untung **per aksi** (semua swap satu
+transaksi & pengirim dijumlah), sebelum gas:
 
 | Periode sejak mainnet | Token resmi (USDC, EURC, cirBTC, WETH jembatan) | CRCL Arc (penerbit tidak jelas, dinilai vs NYSE) |
 |---|---|---|
-| sebelum publik (Mei–15 Sep, izin terbatas) | ±$12 | $82 ribu (harga uji coba, selisih median 53%) |
-| hari pertama (16 Sep) | **$4,6 ribu** | **$23,7 ribu** |
-| hari 1–3 | $3,5 ribu | $7,1 ribu |
-| hari 3–7 | $555 | $429 |
-| hari 7–14 | $186 | $1,9 ribu |
-| hari 14–30 | $283 | $699 |
+| sebelum publik (Mei–15 Sep, izin terbatas) | ±$12 | $82 ribu (harga uji coba, selisih median 53%, rugi penukar −$93 ribu) |
+| hari pertama (16 Sep) | **$3,9 ribu** | **$15,0 ribu** |
+| hari 1–3 | $3,2 ribu | $5,6 ribu |
+| hari 3–7 | $544 | $422 |
+| hari 7–14 | $177 | $1,9 ribu |
+| hari 14–30 | $278 | $676 |
 
 - Selisih harga pool vs acuan (median |selisih| sebelum swap): token resmi 0,09–0,18%, CRCL 0,7–1,6% (CRCL hanya
   dinilai saat NYSE buka). Swap dengan selisih > 5%: ≤ 0,5% dari semua swap setelah hari pertama.
-- **Jackpot setelah publik**: pool "USDC/USDC" (USDC asli vs antarmuka ERC-20, seharusnya 1:1) dibuat salah harga →
-  satu swap $1.034 untung **$998** (17 Sep, peluang terbuka 0,5 detik = bot). CRCL hari pertama dijual 4% di atas NYSE
-  oleh beberapa alamat (untung $200–655 per swap, peluang terbuka 0–330 detik). Kasus "0,45 WETH seharga $6" TIDAK
-  ditemukan di pool WETH Arc yang resmi.
-- **Siapa cepat dia dapat**: hari pertama total $28,2 ribu; yang peluangnya terbuka ≥ 2 dtk $19 ribu, ≥ 10 dtk $13 ribu,
-  ≥ 60 dtk $4,7 ribu. Hari 3–7: total $984 (≥ 10 dtk $487). Hari 14–30: $982 (≥ 10 dtk $434).
-- **Aturan bot** (ambil swap untung bila |selisih| ≥ b dan peluang terbuka ≥ 10 dtk): hari pertama b 1% → ±1.400
-  peluang/hari, median untung **$1,5** per peluang (notional median $100), total ±$12 ribu/hari DIBAGI semua pemain;
-  hari 1–3 ±$2,2 ribu/hari; hari 3–7 **$39/hari**; hari 14–30 **$29/hari**.
-- Slippage swap yang untung: median 0,03–0,10%, P90 0,20–0,36% (pool cukup dalam; untung datang dari selisih harga,
-  bukan dari ukuran besar).
-- Token TIRUAN (WETH/EURC/cirBTC `_a`): 123 swap besar ($0,7–5,7 juta) oleh SATU alamat `0xb3681811…` pada 3–7 Okt,
-  "untung" $1,28 juta bila tiruan dinilai seharga aslinya — itu ilusi (tiruan diperdagangkan 10–18% di bawah aslinya
-  karena memang bukan aset yang sama). Contoh nyata bahaya token beralamat mirip.
+- **Jackpot setelah publik**: pool "USDC/USDC" (USDC asli vs antarmuka ERC-20, seharusnya 1:1) diisi pada harga salah
+  → penukar pertama rugi $1.008, satu aksi bot 0,5 detik kemudian untung **$998** (17 Sep). CRCL hari pertama dijual
+  ±4% di atas NYSE oleh beberapa kontrak (untung $150–1.512 per aksi, peluang terbuka 0–1.156 detik). Kasus "0,45 WETH
+  seharga $6" TIDAK ditemukan di pool WETH Arc yang resmi.
+- **Siapa cepat dia dapat** (untung aksi yang peluangnya terbuka ≥ L detik): hari pertama total $18,9 ribu; ≥ 2 dtk
+  $14,4 ribu, ≥ 10 dtk $8,7 ribu, ≥ 60 dtk $3,0 ribu. Hari 1–3 $8,9 ribu (≥ 10 dtk $4,5 ribu). Hari 3–7 $966 (≥ 10 dtk
+  $492). Hari 14–30 $955 (≥ 10 dtk $418).
+- **Aturan bot** (selisih ≥ b, peluang terbuka ≥ 10 dtk; perkiraan ATAS = bila memenangkan SEMUA peluang): hari
+  pertama b 1% → ±1.000 peluang/hari, median untung **$0,63** per aksi (notional median $56), ±$7,1 ribu/hari DIBAGI
+  semua pemain; hari 1–3 ±$1,7 ribu/hari; hari 3–7 **$39/hari**; hari 14–30 **$28/hari**.
+- Slippage aksi satu-swap yang untung: median 0,02–0,10%, P90 0,16–0,33% (untung datang dari selisih harga, bukan dari
+  ukuran besar).
+- Token TIRUAN (WETH/EURC/cirBTC `_a`): 123 swap besar ($0,7–5,7 juta) oleh SATU kontrak `0xb3681811…` pada 3–7 Okt.
+  Per swap tampak "untung" $1,28 juta, tetapi per aksi bersihnya **$0,13** → perdagangan bolak-balik (wash) untuk
+  memoles volume/likuiditas di GeckoTerminal. Tiruan dihargai 10–18% di bawah aslinya. Contoh nyata bahaya token
+  beralamat mirip.
 
 ## Hasil Robinhood Chain (mainnet 1 Jul 2026)
-(ISI_RH)
+3.846 pool resmi-resmi (v4 3.737, v3 109), **19,3 juta swap** (pool saham: seluruh riwayat; pool ETH/WETH/USDG: hari
+pertama tiap pool). Dinilai 6,1 juta swap (sisanya saham di luar jam NYSE). Untung dihitung **per aksi** = semua swap
+satu (transaksi, pengirim) dijumlah — tanpa itu, manuver bot "pinjam 50 WETH → jatuhkan harga → swap balik" tampak
+sebagai jackpot ±$83 ribu padahal bersihnya +$317.
+
+| Periode sejak mainnet 1 Jul | Untung aksi (kotor, sebelum gas) | Rugi penukar (aksi rugi > 5%) | |selisih| median |
+|---|---|---|---|
+| hari pertama | $13,2 ribu (pool ETH/USDG/WETH baru) | −$11,6 ribu | 1,6% |
+| hari 1–3 | $1,7 ribu | −$4,2 ribu | 0,5% |
+| hari 3–7 | $31 | −$418 | — |
+| hari 7–14 (token saham mulai ramai) | $25 ribu | −$19,8 ribu | 0,16% |
+| hari 14–30 | $266 ribu | −$284 ribu | 0,25% |
+| hari 30–60 | $587 ribu | −$648 ribu | 0,10% |
+| > 60 hari (s/d 8 Okt) | $1,25 juta | −$61 ribu | 0,13% |
+
+- Untung kotor naik seiring volume, tetapi itu **dibagi ribuan bot dan hampir sama besar dengan kerugian penukar
+  lain**. Untung BERSIH semua pelaku (aksi + dan −) = **−$1,25 juta** (fee LP). Dari 7.022 kontrak pengirim hanya
+  **79 yang bersih > $1.000**; terbesar +$117 ribu dari 336 ribu aksi (rata-rata **$0,35/aksi**) = bot profesional.
+- **Jackpot = kejadian, bukan rutinitas.** Hari terbaik per token (untung aksi dengan selisih ≥ 1%): HIMS 28 Agu
+  **$226 ribu**, GME 23 Jul $90 ribu, MSTR 24 Jul $76 ribu, COIN 22 Jul $6,8 ribu, NVDA 27 Jul $5,5 ribu, CRCL 14 Sep
+  (pekan mainnet Arc) $3,8 ribu. Selisih −40…−75% (pool tertinggal dari harga bursa). Median "jeda" 100 aksi teratas
+  per token **0,1–3 detik** → direbut bot, bukan manusia.
+- **CRCL** (Robinhood, jam NYSE): pekan pertama (20–26 Jul) selisih median **5,5%**; Agustus ±0,5%; untung aksi
+  selisih ≥ 1% memuncak pekan 14–20 Sep (mainnet Arc) $6,4 ribu, lalu turun ke $356 (5–8 Okt). Sejak September selisih
+  median **0,3% = setara fee pool 0,3%** → scalping/arbitrase vs harga Robinhood tidak tersisa. **Cocok dengan
+  pengalaman pengguna.** "2–5x per trade" tidak terlihat di pool resmi saat NYSE buka (mungkin terjadi di luar jam
+  bursa, di pool kecil, atau berupa akumulasi banyak trade); hati-hati pool "USDC/CRCL" dengan USDC PALSU.
+- Kasus "0,45 WETH seharga $6" juga tidak ditemukan di pool WETH/ETH resmi Robinhood (hari pertama tiap pool); kasus
+  sejenis yang ada: pool USDC/USDC Arc salah harga (+$998 dalam 0,5 dtk), ETH/USDG 27 Agu (+$99,7 ribu satu aksi,
+  selisih −100%, jeda 0,1 dtk).
+- **Pelajaran slippage**: aksi paling rugi = menukar tanpa batas slippage di pool yang sedang dijatuhkan (contoh
+  WETH→NVDA $7.749 jadi ±$0; kontrak yang menukar 0,163 WETH dapat NVDA senilai sen saat bot memanipulasi harga).
+- Slippage aksi satu-swap yang untung: median 0,02%, P90 0,10% setelah 30 hari; di hari pertama median 1,5–2,9%
+  (pool baru tipis).
+- Aturan bot (selisih ≥ b, peluang terbuka ≥ 10 dtk, perkiraan ATAS bila menang semua): hari pertama b 1% → $4,8
+  ribu/hari, median $2,3/aksi; hari 14–60 b 2% → $680–920/hari (median $0,3–0,5/aksi); > 60 hari b 2% → **$171/hari**
+  untuk SEMUA pelaku, median **$0,07/aksi**.
 
 ## Listing baru Binance 2017–2026 (588 token, termasuk yang sudah delisting)
 Harga acuan P0 = VWAP 60 menit pertama (open candle pertama Binance sering harga lelang aneh, mis. ARB 0,5).
@@ -107,7 +146,17 @@ EIGEN, ME, BERA, KAITO, LINEA, MEGA), harga relatif terhadap P0:
   dapat airdrop, **jual sebagian besar di jam pertama** lebih baik daripada menahan (median).
 
 ## Jawaban untuk angka XXX dan X%
-(ISI_JAWAB)
+Pengguna meminta "beli di bawah XXX, jual di atas XXX, slippage tidak lebih dari X%". Dari data di atas:
+
+| Situasi | Beli bila (XXX) | Jual bila (XXX) | Slippage maks (X%) | Kapan |
+|---|---|---|---|---|
+| DEX chain baru, token yang punya harga acuan (ETH, BTC, saham, stablecoin) | harga eksekusi ≤ acuan × **0,99** (≥ 1% lebih murah SETELAH fee pool + slippage + gas) | harga eksekusi ≥ acuan × 1,01, atau kembali ke acuan, TP +2% / SL −4% | **0,5%** (swap untung median 0,02–0,1%, P90 0,1–0,36%) | hari 0–3 setelah mainnet, saat pool/token BARU dibuat, saat harga bursa bergerak besar (berita) |
+| Sama, tetapi > 1 pekan setelah mainnet | sedikit: peluang ≥ 1% yang terbuka ≥ 10 dtk bernilai Arc ±$28/hari, Robinhood ±$950/hari (≥ 2%: $171/hari) untuk SEMUA pelaku, median $0,02–0,20 per aksi | — | — | biarkan bot memantau `baru` saja |
+| Listing CEX (Binance) | harga ≤ **0,40 ×** VWAP 60 menit pertama (turun ≥ 60%) dalam 30 hari pertama | **+20%** dari harga beli; SL −50%; maks 90 hari | pasar besar, ±0,1% | kandidat — belum terbukti |
+| Dapat airdrop | — | jual sebagian besar di **jam pertama** listing (median +31% di 5 menit, −64% setelah 1 tahun) | — | — |
+
+Saham tokenisasi: hanya saat bursa AS buka (di luar jam itu tidak ada harga wajar; risiko gap Senin pagi).
+Selisih < 1% tidak sepadan: fee pool 0,05–1%, derau acuan, dan bot ber-jeda < 1 detik mengambilnya lebih dulu.
 
 ## Bot `token_bot/` (dibuat sesi ini)
 Pasang: `pip install eth-abi eth-utils pyyaml` (+ `eth-account` hanya untuk mode live). Salin
@@ -135,7 +184,23 @@ python -m token_bot cari --jaringan robinhood --pool <poolId v4 | alamat pool v3
 - Diuji: `tests/test_token_bot.py` (11 tes luring: poolId v4 dihitung ulang = id pool CRCL asli, slippage, honeypot,
   jam bursa, TP); `cek` dijalankan baca-saja pada pool asli Robinhood 8 Okt 13:05 UTC (pra-pasar): CRCL v4 $200 →
   slippage 0,16%, CRCL v3 0,30%, NVDA v3 0,05%, WETH v3 0,01%; kuotasi CRCL/USDG v4: $1.000 → 0,22%, $10.000 → 0,8%,
-  $50.000 → 3,4% dari spot.
+  $50.000 → 3,4% dari spot. Saat NYSE BUKA (8 Okt ±14:30 UTC) selisih pool vs bursa: CRCL −0,01…−0,09%, NVDA +0,02%,
+  SPY +0,03%, META −0,07%, MSTR −0,32%, ETH ±0,07% → semua TUNGGU (selisih < fee + slippage), sesuai temuan riset.
 
 ## Kesimpulan jujur
-(ISI_KESIMPULAN)
+1. **Pengalaman pengguna terbukti oleh data**: peluang besar di chain baru ada di **hari-hari pertama** (Arc: hari
+   pertama ±$19 ribu, hari 1–3 ±$9 ribu, sesudah pekan pertama ±$1–2 ribu per PEKAN dibagi semua pelaku) dan saat
+   pool/token baru dibuat atau saham bergerak besar. Sesudah itu selisih harga ≈ fee pool (CRCL 0,3%) → tidak bisa
+   scalping, arbitrase sama dengan harga Robinhood.
+2. **Yang mengambil jackpot adalah bot ber-jeda < 1–3 detik**, bukan manusia. Script yang memantau tiap beberapa
+   detik hanya kebagian sisa (perkiraan atas: ratusan dolar per hari untuk SEMUA pelaku, median beberapa sen–$2 per
+   aksi). Untung bersih seluruh pelaku negatif; hanya ±1% kontrak yang untung bersih > $1.000.
+3. **WR tinggi dan untung tinggi sekaligus tidak ditemukan** untuk trading token baru setelah fase peluncuran.
+   Satu-satunya aturan statistik yang lolos dua periode: beli listing Binance yang sudah turun ≥ 60% dari harga
+   listing, TP +20% (WR 77–90%, +7…+13%/trade, BARU n 99) — kandidat, perlu uji maju; kerugian sesekali −50%.
+4. **Jackpot ala ARB = airdrop**, hadiah bagi pemakai awal, bukan hasil trading; tidak ada kepastian Arc/Robinhood
+   membagi token. Sejarah 21 airdrop: jual cepat lebih baik daripada menahan.
+5. **Bahaya terbesar**: token tiruan beralamat mirip (cirBTC/EURC/WETH/USDG/NVDA palsu, pool "USDC" palsu), swap tanpa
+   batas slippage (dijatuhkan bot sandwich), hook v4 berpajak/honeypot. Bot `token_bot` menolak ketiganya.
+6. Tidak ada yang dipasang ke bot live XAU / cloud / aplikasi. `token_bot` berdiri sendiri, bawaan hanya sinyal; mode
+   live butuh izin & pengaturan pengguna sendiri dan belum pernah diuji dengan dana nyata.

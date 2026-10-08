@@ -123,4 +123,4 @@ class Dompet:
         return self.swap_v3(cfg, pool, token_in, amount_in, min_out)
 
 
-__all__ = ["Dompet", "NOL"]
+__all__ = ["NOL", "Dompet"]

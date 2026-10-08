@@ -22,7 +22,7 @@ from pathlib import Path
 import yaml
 
 from . import acuan
-from .dex import Pool, cari_v3, cari_v4, decimals, quote, sqrtp_harga, symbol, T_INIT
+from .dex import T_INIT, Pool, cari_v3, cari_v4, decimals, quote, sqrtp_harga, symbol
 from .rpc import Rpc
 from .strategi import Pasangan, evaluasi
 
@@ -96,8 +96,8 @@ def _ntfy(cfg: dict, msg: str) -> None:
         return
     try:
         urllib.request.urlopen(urllib.request.Request(f"https://ntfy.sh/{topic}", data=msg.encode()), timeout=10)
-    except Exception:  # noqa: BLE001
-        pass
+    except Exception as e:  # noqa: BLE001 — notifikasi opsional, jangan hentikan pemantauan
+        print(f"(ntfy gagal: {e})")
 
 
 def _log(r: dict) -> None:

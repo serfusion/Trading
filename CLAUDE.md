@@ -362,6 +362,30 @@ alarm tepat waktu) hanya menyentuh `android/`].
   posisi terbuka trader terpilih WR 18–36%, −4…−8%; gabungan futures vs pilihan acak p 0,14; hanya Binance p 0,03 (1 periode =
   kandidat). Opsi bila pengguna bilang "pasang": uji maju otomatis kandidat Binance atau ⚠️ "rugi ditahan" di kartu 👥.
 
+## Token baru & chain baru: Arc, Robinhood Chain, listing, airdrop + `token_bot/` (8 Okt 2026 — `docs/TOKEN_BARU.md`)
+- Permintaan: script trade token baru di "blockchain X" (beli di bawah/jual di atas XXX, slippage ≤ X%), pengalaman pengguna
+  WETH $6 → 0,45 ETH & CRCL sampai mainnet Arc lalu harga normal; "jackpot ala ARB". Gambar catatan (com.miui.notes) tak terbuka.
+- Robinhood Chain: mainnet 1 Jul 2026, chain 4663, RPC `rpc.mainnet.chain.robinhood.com` (getLogs 100 rb blok bila topik
+  berisi daftar; tanpa archive state). Arc: mainnet 16 Sep 2026 (chain jalan sejak Mei), chain 5042, RPC `rpc.mainnet.arc.io`
+  (< 10 rb blok/getLogs; `rpc.arc.io` & `arcscan.app` diblokir proxy). Uniswap v4 PoolManager/Quoter/StateView & v3 dari
+  halaman resmi developers.uniswap.org; USDC/EURC/cirBTC Arc dari developers.circle.com — "cirBTC" `0x560f…` & "EURC" `0x834d…`
+  (volume GeckoTerminal terbesar) = TIRUAN; token beralamat mirip juga di Robinhood (USDG/NVDA/WETH palsu).
+- Riset: `research/chain_baru.py` (GeckoTerminal + acuan 1 mnt Binance/Twelve Data), `research/chain_onchain.py` (event
+  Initialize/Swap/ModifyLiquidity v4 + v3, unduh per jendela blok, bagian di `*_swap_parts/` bisa dilanjutkan; Robinhood
+  19,3 jt swap ±40 mnt), `research/chain_baru_uji.py` (untung per AKSI = per (tx, pengirim); per swap menyesatkan karena
+  manuver bot pinjam-jatuhkan-balik), `research/listing_baru.py` (588 listing Binance + 21 airdrop).
+- Hasil: untung penukar terpusat di hari 0–3 setelah mainnet & saat token/pool baru/berita (HIMS 28 Agu $226 rb, GME 23 Jul
+  $90 rb dalam sehari), direbut bot jeda 0,1–3 dtk; > 1 pekan: peluang ≥1% terbuka ≥10 dtk Arc ±$28/hari, Robinhood ±$950/hari
+  untuk SEMUA pelaku; bersih semua pelaku Robinhood −$1,25 jt, 79/7.022 kontrak bersih > $1 rb. CRCL Robinhood selisih median
+  5,5% pekan pertama → 0,3% sejak Sep (= fee) — cocok dengan pengalaman pengguna. Listing Binance: beli saat listing rugi
+  (BARU 90 hr median −52%); kandidat beli turun ≥60% dari VWAP 60 mnt, TP +20%, SL −50% (BARU WR 77%, +7,1%) belum terbukti.
+  Airdrop: median +31% di 5 mnt, −64% setelah 1 th → jual cepat.
+- `token_bot/` (BARU, terpisah dari bot XAU): `python -m token_bot cek|pantau|baru|cari`, kuotasi Quoter resmi, ukuran
+  diperkecil sampai slippage ≤ max, cek jual-balik (honeypot), daftar putih alamat, saham hanya jam NYSE. Mode live bawaan MATI
+  (`live.aktif` + `--live` + env TOKEN_BOT_PK) dan BELUM pernah diuji dengan dana nyata — sesi tidak boleh bertransaksi
+  (permintaan baca log sempat ditolak pengaman "Real-World Transactions"); jangan jalankan live dari sesi. Tes
+  `tests/test_token_bot.py`. Data besar (swap mentah Robinhood, *_nilai penuh) di-gitignore; yang di-commit *_nilai_ringkas.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

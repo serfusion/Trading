@@ -5,11 +5,11 @@ import pytest
 
 pytest.importorskip("eth_abi")
 
-from eth_abi import decode  # noqa: E402
+from eth_abi import decode
 
-from token_bot import acuan, strategi  # noqa: E402
-from token_bot.dex import Pool, sqrtp_harga  # noqa: E402
-from token_bot.eksekusi import S_UR_EXEC  # noqa: E402
+from token_bot import acuan, strategi
+from token_bot.dex import Pool, sqrtp_harga
+from token_bot.eksekusi import S_UR_EXEC
 
 USDG = "0x5fc5360d0400a0fd4f2af552add042d716f1d168"
 CRCL = "0xdf0992e440dd0be65bd8439b609d6d4366bf1cb5"

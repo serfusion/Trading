@@ -130,11 +130,11 @@ def metrik() -> pd.DataFrame:
         if len(after) < 24:
             continue
 
-        def ret(days):
+        def ret(days, after=after, t_list=t_list, p0=p0):
             x = after[after.index <= t_list + pd.Timedelta(days=days)]
             return float(x.close.iloc[-1] / p0 - 1) if len(x) and x.index[-1] >= t_list + pd.Timedelta(days=days * .9) else np.nan
 
-        def win(days):
+        def win(days, after=after, t_list=t_list):
             return after[after.index <= t_list + pd.Timedelta(days=days)]
 
         d1 = h[h.index < t_list + pd.Timedelta(days=1)]
@@ -149,49 +149,6 @@ def metrik() -> pd.DataFrame:
     df = pd.DataFrame(rows)
     df["periode"] = np.where(df.t < POTONG, "LAMA", "BARU")
     return df
-
-
-def sim(h: pd.DataFrame, t_list: pd.Timestamp, p0: float, mode: str, b: float, s: float, l: float | None,
-        W: float, T: float, biaya: float, ref_hi: float | None = None, start: pd.Timestamp | None = None):
-    """Satu trade di data 1 jam. mode 'dip': limit beli p0*(1-b) dalam W hari; 'tembus': stop beli ref_hi*(1+b);
-    'pasar': beli open candle pertama setelah `start`. Keluar TP s / SL l (SL dulu bila satu candle) / batas T hari.
-    Return bersih (biaya pulang-pergi) atau None bila tidak terisi."""
-    st = start if start is not None else t_list + pd.Timedelta(hours=1)
-    x = h[(h.index >= st) & (h.index < st + pd.Timedelta(days=W))]
-    if not len(x):
-        return None
-    o, hi, lo, c = x.open.values, x.high.values, x.low.values, x.close.values
-    idx = None
-    if mode == "pasar":
-        idx, e = 0, o[0]
-    elif mode == "dip":
-        lim = p0 * (1 - b)
-        hit = np.nonzero(lo <= lim)[0]
-        if not len(hit):
-            return None
-        idx = int(hit[0])
-        e = min(o[idx], lim)
-    elif mode == "tembus":
-        lim = ref_hi * (1 + b)
-        hit = np.nonzero(hi >= lim)[0]
-        if not len(hit):
-            return None
-        idx = int(hit[0])
-        e = max(o[idx], lim)
-    t_e = x.index[idx]
-    y = h[(h.index > t_e) & (h.index <= t_e + pd.Timedelta(days=T))]
-    if not len(y):
-        return None
-    tp, sl = e * (1 + s), (e * (1 - l) if l else -1)
-    yo, yh, yl, yc = y.open.values, y.high.values, y.low.values, y.close.values
-    for i in range(len(y)):
-        if l and yl[i] <= sl:
-            ex = min(yo[i], sl)
-            return ex / e - 1 - biaya
-        if yh[i] >= tp:
-            ex = max(yo[i], tp)
-            return ex / e - 1 - biaya
-    return yc[-1] / e - 1 - biaya
 
 
 def _keluar(yh, yl, yc, yo, e, s, l, biaya):
@@ -295,7 +252,7 @@ def laporan() -> str:
     g = pd.read_parquet(DIR / "grid.parquet") if (DIR / "grid.parquet").exists() else grid(m)
     L = []
     p = L.append
-    med = lambda x: f"{np.nanmedian(x) * 100:+.0f}%"  # noqa: E731
+    med = lambda x: f"{np.nanmedian(x) * 100:+.0f}%"
     p(f"=== Listing baru Binance spot (USDT), {len(m)} token 2017-09..2026-09 (termasuk yang sudah delisting)")
     p("P0 = VWAP 60 menit pertama. Angka median kecuali disebut.\n")
     t = m.groupby("tahun").agg(n=("sym", "size"), lonjak_5mnt=("pump5m", med), puncak_hari1=("high_h1", med),

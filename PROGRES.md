@@ -216,3 +216,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - `research/sinyal_trader.py`: unduhan Hyperliquid dihentikan di 1.225/1.386 akun (lanjutkan `unduh`, resumable);
   4 platform lengkap; potret posisi terbuka 8 Okt. Hasil docs/SINYAL_TRADER.md + docs/eksternal/hasil_sinyal_trader.txt.
 
+
+### 8 Okt 2026 — token baru & chain baru (Arc, Robinhood Chain), listing Binance, airdrop, `token_bot/`
+- Laporan docs/TOKEN_BARU.md; hasil mentah docs/eksternal/hasil_{chain_arc,chain_robinhood,listing_baru}.txt.
+- Data: data/research/eksternal/chain_baru/ (pools GeckoTerminal, acuan 1 mnt ETH/BTC/EUR Binance + 16 saham Twelve Data,
+  onchain/ Arc lengkap; Robinhood pools/init/liq/blok + robinhood_nilai_ringkas.parquet), data/research/eksternal/listing/
+  (1 jam 120 hari + 1 menit 2 hari pertama 590 listing, metrik/grid/ringkas parquet).
+- Membuat ulang swap mentah Robinhood (gitignore, ±700 MB): `python -m research.chain_onchain robinhood` (lanjut otomatis
+  dari *_swap_parts), lalu `python -m research.chain_baru_uji robinhood` (butuh ±6 GB RAM).
+- token_bot: diuji baca-saja di pool asli Robinhood + 11 tes luring; mode live belum pernah dijalankan.
+- Belum: Arc v3/Aerodrome/Archery tidak dicakup on-chain (hanya v4); saham di luar jam NYSE tidak dinilai (Robinhood 24 jam
+  market tidak ada datanya); kandidat listing (turun ≥60% → TP 20%) perlu uji maju.

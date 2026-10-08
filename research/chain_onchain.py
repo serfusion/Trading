@@ -12,12 +12,12 @@ Data: data/research/eksternal/chain_baru/onchain/<net>_{init,swap,liq,blok}.parq
 """
 from __future__ import annotations
 
+import http.client
 import json
 import sys
 import time
 import urllib.error
 import urllib.request
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -72,7 +72,8 @@ def rpc(net: str, method: str, params: list, tries: int = 8):
                     continue
                 raise RuntimeError(msg)
             return d["result"]
-        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:  # noqa: PERF203
+        except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException,
+                json.JSONDecodeError) as e:
             if isinstance(e, urllib.error.HTTPError) and e.code not in (429, 500, 502, 503, 504):
                 raise
             time.sleep(2 * (k + 1))
@@ -284,17 +285,36 @@ def swaps(net: str, pools: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame(liq, columns=["id", "blok", "li", "tickL", "tickU", "dL"]).to_parquet(fl, compression="zstd")
         print(f"  swap {net}: jendela {min(k + BATCH, len(wins)):,}/{len(wins):,} (+{len(d):,} swap) aktif {na} "
               f"{time.time() - t0:.0f} dtk", flush=True)
-    fee3 = pools.set_index("id").fee
-    cols = ["id", "blok", "li", "sender", "a0", "a1", "sqrtp", "L", "fee"]
-    df = pd.concat([pd.read_parquet(f, columns=cols) for f in sorted(parts.glob("swap_*.parquet"))], ignore_index=True)
-    df["id"] = df.id.astype("category")
-    df["sender"] = df.sender.astype("category")
-    df = df.sort_values(["blok", "li"]).reset_index(drop=True)
-    m3 = df.fee < 0
-    df.loc[m3, "fee"] = df.loc[m3, "id"].astype(str).map(fee3).fillna(0).astype(int)
-    df.to_parquet(f, compression="zstd")
+    df = gabung(net, pools)
     lq = pd.concat([pd.read_parquet(f) for f in sorted(parts.glob("liq_*.parquet"))], ignore_index=True)
     lq.to_parquet(OUT / f"{net}_liq.parquet")
+    return df
+
+
+def gabung(net: str, pools: pd.DataFrame | None = None) -> pd.DataFrame:
+    """Satukan file bagian swap -> <net>_swap.parquet tanpa kolom tx; id/sender sebagai kamus (hemat memori)."""
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+
+    pools = pools if pools is not None else pd.read_parquet(OUT / f"{net}_pools.parquet")
+    parts = OUT / f"{net}_swap_parts"
+    cols = ["id", "blok", "li", "tx", "sender", "a0", "a1", "sqrtp", "L", "fee"]
+    tabs = []
+    for f in sorted(parts.glob("swap_*.parquet")):
+        t = pq.read_table(f, columns=cols, read_dictionary=["id", "sender"])
+        # tx 66 karakter -> bilangan 60 bit (cukup untuk mengelompokkan swap per transaksi, hemat memori)
+        txh = pa.array([int(x[2:17], 16) for x in t.column("tx").to_pylist()], type=pa.int64())
+        tabs.append(t.drop_columns(["tx"]).append_column("txh", txh))
+    t = pa.concat_tables(tabs).unify_dictionaries()
+    del tabs
+    df = t.to_pandas()
+    del t
+    df = df.sort_values(["blok", "li"], kind="stable").reset_index(drop=True)
+    m3 = (df.fee < 0).to_numpy()
+    if m3.any():
+        fee3 = pools.set_index("id").fee
+        df.loc[m3, "fee"] = df.loc[m3, "id"].astype(str).map(fee3).fillna(0).astype(int).to_numpy()
+    df.to_parquet(OUT / f"{net}_swap.parquet", compression="zstd")
     return df
 
 
