@@ -90,6 +90,170 @@ def unduh(jeda: float = 1.0, ulang_hari: float = 7) -> None:
     print("selesai", flush=True)
 
 
+# ------------------------------------------------------------------ platform lain (permintaan 8 Okt: "cari seluruh broker")
+# Riwayat posisi TUTUP per trader dari API publik yang sama dengan cloud/api/_copyposisi.py. Kandidat dipilih TANPA
+# melihat kinerja: semua lead trader OKX & Bitget yang tercatat, Binance & eToro = sampel acak + paling banyak disalin.
+# Biaya salin (masuk+keluar+jeda): futures 0,15%; eToro kripto 1% (spread), aset lain 0,2%.
+TRADES = CM.DIR / "trades"
+
+
+def _get(url: str, body: dict | None = None, tries: int = 4):
+    sys.path.insert(0, str(ROOT / "cloud" / "api"))
+    import _copyposisi as C
+    for i in range(tries):
+        try:
+            return C._req(url, body, timeout=20)
+        except Exception as exc:  # noqa: BLE001
+            if i == tries - 1:
+                raise
+            time.sleep(10 * (i + 1) if "429" in str(exc) else 3)
+
+
+def _f(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def riwayat_okx(code: str, maks: int = 10) -> list[dict]:
+    out, after = [], None
+    for _ in range(maks):
+        u = ("https://www.okx.com/api/v5/copytrading/public-subpositions-history?instType=SWAP"
+             f"&uniqueCode={code}&limit=100" + (f"&after={after}" if after else ""))
+        d = (_get(u) or {}).get("data") or []
+        for h in d:
+            side = h.get("posSide")
+            buy = side == "long" if side in ("long", "short") else (_f(h.get("subPos")) or 0) > 0
+            out.append({"sym": (h.get("instId") or "").replace("-SWAP", ""), "dir": 1 if buy else -1,
+                        "t0": int(h.get("openTime") or 0), "t1": int(h.get("closeTime") or 0),
+                        "p_in": _f(h.get("openAvgPx")), "p_out": _f(h.get("closeAvgPx")), "lev": _f(h.get("lever"))})
+        if len(d) < 100:
+            break
+        after = d[-1].get("subPosId")
+        time.sleep(0.4)
+    return out
+
+
+def riwayat_bitget(uid: str, maks: int = 10) -> list[dict]:
+    out = []
+    for page in range(1, maks + 1):
+        body = {"languageType": 0, "traderUid": uid, "triggerUserId": uid, "pageNo": page, "pageSize": 50}
+        d = (_get("https://www.bitget.com/v1/trigger/trace/order/newHistoryList", body) or {}).get("data") or {}
+        for h in d.get("rows") or []:
+            out.append({"sym": h.get("symbolDisplayName"), "dir": 1 if h.get("position") == 1 else -1,
+                        "t0": int(h.get("openTime") or 0), "t1": int(h.get("closeTime") or 0),
+                        "p_in": _f(h.get("openAvgPrice")), "p_out": _f(h.get("closeAvgPrice")),
+                        "lev": _f(h.get("openLevel"))})
+        if not d.get("nextFlag"):
+            break
+        time.sleep(0.4)
+    return out
+
+
+def riwayat_binance(pid: str, maks: int = 10) -> list[dict]:
+    out = []
+    for page in range(1, maks + 1):
+        body = {"pageNumber": page, "pageSize": 100, "portfolioId": str(pid)}
+        d = (_get("https://www.binance.com/bapi/futures/v1/friendly/future/copy-trade/lead-portfolio/position-history",
+                  body) or {}).get("data") or {}
+        rows = d.get("list") or []
+        for h in rows:
+            out.append({"sym": h.get("symbol"), "dir": 1 if h.get("side") == "Long" else -1,
+                        "t0": int(h.get("opened") or 0), "t1": int(h.get("closed") or 0),
+                        "p_in": _f(h.get("avgCost")), "p_out": _f(h.get("avgClosePrice")), "lev": _f(h.get("leverage"))})
+        if len(rows) < 100 or page * 100 >= int(d.get("total") or 0):
+            break
+        time.sleep(0.4)
+    return out
+
+
+def riwayat_etoro(cid: str, hari: int = 400, maks: int = 10) -> list[dict]:
+    start = pd.Timestamp.now("UTC") - pd.Timedelta(days=hari)
+    out = []
+    for page in range(1, maks + 1):
+        u = ("https://www.etoro.com/sapi/trade-data-real/history/public/credit/flat?"
+             f"CID={cid}&ItemsPerPage=100&PageNumber={page}&StartTime={start:%Y-%m-%dT00:00:00.000Z}")
+        rows = (_get(u) or {}).get("PublicHistoryPositions") or []
+        for h in rows:
+            out.append({"sym": str(h.get("InstrumentID")), "dir": 1 if h.get("IsBuy") else -1,
+                        "t0": int(pd.Timestamp(h["OpenDateTime"]).timestamp() * 1000),
+                        "t1": int(pd.Timestamp(h["CloseDateTime"]).timestamp() * 1000),
+                        "p_in": _f(h.get("OpenRate")), "p_out": _f(h.get("CloseRate")), "lev": _f(h.get("Leverage")),
+                        "kripto": int(h.get("InstrumentID") or 0) >= 100000, "induk": h.get("ParentCID") or 0})
+        if len(rows) < 100:
+            break
+        time.sleep(0.4)
+    return out
+
+
+def kandidat_platform(nama: str, n_acak: int = 500, n_atas: int = 200) -> list[str]:
+    rng = np.random.default_rng(11)
+    if nama == "okx":
+        return [x["uniqueCode"] for x in CM.load("okx")["list"] if x.get("uniqueCode")]
+    if nama == "bitget":
+        return [x["uid"] for x in CM.load("bitget")["list"] if x.get("uid")]
+    if nama == "binance":
+        rows = json.loads((CM.DIR.parent / "binance_copy" / "list_365D.json").read_text())
+        ids = [str(r["leadPortfolioId"]) for r in rows]
+        atas = [str(r["leadPortfolioId"]) for r in sorted(rows, key=lambda r: -float(r.get("currentCopyCount") or 0))[:n_atas]]
+        return list(dict.fromkeys(atas + list(rng.choice(ids, size=min(n_acak, len(ids)), replace=False))))
+    if nama == "etoro":
+        e = pd.read_csv(CM.DIR.parent / "etoro" / "rankings_1y.csv")
+        e = e[e.Trades >= 20]
+        atas = e.sort_values("Copiers", ascending=False).CustomerId.astype(str).head(n_atas).tolist()
+        acak = rng.choice(e.CustomerId.astype(str).to_numpy(), size=min(n_acak, len(e)), replace=False).tolist()
+        return list(dict.fromkeys(atas + acak))
+    raise ValueError(nama)
+
+
+AMBIL = {"okx": riwayat_okx, "bitget": riwayat_bitget, "binance": riwayat_binance, "etoro": riwayat_etoro}
+
+
+def unduh_platform(nama: str, jeda: float = 0.6, ulang_hari: float = 7) -> None:
+    d = TRADES / nama
+    d.mkdir(parents=True, exist_ok=True)
+    ids = kandidat_platform(nama)
+    print(f"{nama}: {len(ids)} kandidat", flush=True)
+    baru = 0
+    for i, x in enumerate(ids):
+        p = d / f"{x}.json.gz"
+        if p.exists():
+            try:
+                if json.loads(gzip.decompress(p.read_bytes()))["t"] > time.time() - ulang_hari * 86400:
+                    continue
+            except Exception:  # noqa: BLE001
+                pass
+        try:
+            rows = AMBIL[nama](x)
+        except Exception as exc:  # noqa: BLE001
+            print(nama, "gagal", x, str(exc)[:120], flush=True)
+            time.sleep(20)
+            continue
+        p.write_bytes(gzip.compress(json.dumps({"t": time.time(), "trades": rows}, separators=(",", ":")).encode()))
+        baru += 1
+        if baru % 25 == 0:
+            print(f"{nama} {i + 1}/{len(ids)}", flush=True)
+        time.sleep(jeda)
+    print(nama, "selesai", flush=True)
+
+
+def episode_platform(nama: str) -> pd.DataFrame:
+    rows = []
+    for p in sorted((TRADES / nama).glob("*.json.gz")):
+        a = p.name.split(".")[0]
+        for t in json.loads(gzip.decompress(p.read_bytes()))["trades"]:
+            if not (t.get("p_in") and t.get("p_out") and t.get("t0") and t.get("t1")) or t["t1"] < t["t0"]:
+                continue
+            if t.get("induk"):                         # eToro: posisi hasil menyalin orang lain → bukan keputusan sendiri
+                continue
+            biaya = (0.01 if t.get("kripto") else 0.002) if nama == "etoro" else BIAYA
+            rows.append({"akun": f"{nama}:{a}", "platform": nama, "coin": t.get("sym"), "dir": t["dir"],
+                         "t0": t["t0"], "t1": t["t1"], "salin": t["dir"] * (t["p_out"] / t["p_in"] - 1) - biaya,
+                         "acak": True})
+    return pd.DataFrame(rows)
+
+
 # ------------------------------------------------------------------ episode
 def episodes(fills: list[dict]) -> list[dict]:
     """Posisi per koin dari 0 → buka → 0 (atau berbalik). Return salin & trader dalam pecahan (0,01 = 1%)."""
@@ -143,7 +307,23 @@ def episodes(fills: list[dict]) -> list[dict]:
     return out
 
 
-def semua_episode() -> pd.DataFrame:
+def semua_episode(platform: tuple = ("hyperliquid", "okx", "bitget", "binance", "etoro")) -> pd.DataFrame:
+    frames = []
+    if "hyperliquid" in platform:
+        frames.append(_episode_hl())
+    for nama in platform:
+        if nama != "hyperliquid" and (TRADES / nama).exists():
+            frames.append(episode_platform(nama))
+    df = pd.concat([f for f in frames if len(f)], ignore_index=True) if any(len(f) for f in frames) else pd.DataFrame()
+    if df.empty:
+        return df
+    df["t0"] = pd.to_datetime(df.t0, unit="ms", utc=True)
+    df["t1"] = pd.to_datetime(df.t1, unit="ms", utc=True)
+    df["jam"] = (df.t1 - df.t0).dt.total_seconds() / 3600
+    return df
+
+
+def _episode_hl() -> pd.DataFrame:
     rows = []
     pool = CM.load("hl_pool")
     acak = {a.lower() for a in pool["acak"]}
@@ -153,16 +333,11 @@ def semua_episode() -> pd.DataFrame:
         if d.get("bot"):
             continue
         for e in episodes(d["fills"]):
-            e["akun"] = a
+            e["akun"] = f"hyperliquid:{a}"
+            e["platform"] = "hyperliquid"
             e["acak"] = a in acak
             rows.append(e)
-    df = pd.DataFrame(rows)
-    if df.empty:
-        return df
-    df["t0"] = pd.to_datetime(df.t0, unit="ms", utc=True)
-    df["t1"] = pd.to_datetime(df.t1, unit="ms", utc=True)
-    df["jam"] = (df.t1 - df.t0).dt.total_seconds() / 3600
-    return df
+    return pd.DataFrame(rows)
 
 
 # ------------------------------------------------------------------ uji
@@ -193,45 +368,78 @@ ATURAN = {
 }
 
 
-def uji(hari_hist: int = 180) -> list[str]:
+def uji_kumpulan(sub: pd.DataFrame, aturan: dict, hari_hist: int, langkah: int, akhir, rng) -> dict:
+    """Uji maju bergulir: tiap 'langkah' hari pilih trader dari episode TUTUP dalam 'hari_hist' hari sebelumnya, ukur
+    episode yang mereka BUKA dalam 'langkah' hari berikutnya. Jendela uji harus selesai ≥ 14 hari sebelum data berakhir
+    (posisi rugi yang masih ditahan tidak membuat hasil terlalu bagus)."""
+    sel, base, rnd, per, draws = [], [], [], [], []
+    mulai = sub.t1.min().normalize() + pd.Timedelta(days=hari_hist)
+    batas = akhir - pd.Timedelta(days=14)
+    m = mulai
+    while m + pd.Timedelta(days=langkah) <= batas:
+        m1 = m + pd.Timedelta(days=langkah)
+        hist = sub[(sub.t1 < m) & (sub.t1 >= m - pd.Timedelta(days=hari_hist))]
+        nxt = sub[(sub.t0 >= m) & (sub.t0 < m1) & (sub.t1 <= akhir)]
+        m = m1
+        if nxt.empty or hist.empty:
+            continue
+        ids = pilih_trader(hist, aturan)
+        aktif = list(set(hist.akun) & set(nxt.akun))
+        s_ = nxt[nxt.akun.isin(ids)]
+        r_ids = rng.choice(aktif, size=min(len(set(ids) & set(aktif)), len(aktif)), replace=False) if aktif else []
+        sel.append(s_.salin)
+        base.append(nxt[nxt.akun.isin(aktif)].salin)
+        rnd.append(nxt[nxt.akun.isin(r_ids)].salin)
+        k = len(set(ids) & set(aktif))
+        if k:                                          # 200 undian trader acak (jumlah sama) → p-acak
+            g = nxt[nxt.akun.isin(aktif)].groupby("akun").salin
+            sums, cnts = g.sum(), g.size()
+            idx = np.array([rng.choice(len(sums), size=k, replace=False) for _ in range(200)])
+            draws.append((sums.to_numpy()[idx].sum(1), cnts.to_numpy()[idx].sum(1)))
+        if len(s_):
+            per.append((m1 - pd.Timedelta(days=langkah), len(set(s_.akun)), len(s_), s_.salin.mean()))
+    cat = lambda xs: pd.concat(xs) if xs else pd.Series(dtype=float)  # noqa: E731
+    p_acak = None
+    if draws:
+        tot = sum(d[0] for d in draws)
+        cnt = sum(d[1] for d in draws)
+        acak_mean = tot / np.maximum(cnt, 1)
+        p_acak = float((acak_mean >= cat(sel).mean()).mean()) if len(cat(sel)) else None
+    return {"terpilih": cat(sel), "acak": cat(rnd), "semua": cat(base), "per": per, "p_acak": p_acak}
+
+
+def uji(hari_hist: int = 90, langkah: int = 14) -> list[str]:
     df = semua_episode()
-    L = ["# 🧪 Sinyal trader Hyperliquid — uji maju bulanan (research/sinyal_trader.py)", "",
-         f"Episode tertutup: {len(df)} dari {df.akun.nunique()} akun (bukan bot), "
-         f"{df.t0.min():%Y-%m-%d} s.d. {df.t1.max():%Y-%m-%d}.",
-         "Return salin = arah × (keluar rata-rata trader / harga fill pertama − 1) − 0,14% biaya & jeda; tanpa leverage.",
-         "Bisa disalin = tahan ≥ 1 jam (posisi lebih singkat mustahil disalin manual / notifikasi 15 detik).", ""]
+    L = ["# 🧪 Sinyal trader — uji maju bergulir semua platform (research/sinyal_trader.py)", "",
+         f"Pilih trader dari posisi TUTUP {hari_hist} hari terakhir, ukur posisi yang mereka BUKA {langkah} hari "
+         "berikutnya (tanpa melihat masa depan). Return salin = arah × (harga tutup / harga buka − 1) − biaya "
+         "(futures 0,14–0,15%, eToro kripto 1%, eToro lain 0,2%); TANPA leverage (leverage memperbesar untung & rugi).",
+         "Bisa disalin = tahan ≥ 1 jam. Pembanding: 'acak' = trader acak aktif sejumlah sama, 'semua' = semua trader aktif.",
+         ""]
     df = df[df.jam >= 1].copy()
     akhir = df.t1.max()
-    bulan = pd.date_range(df.t0.min().normalize() + pd.Timedelta(days=hari_hist), akhir, freq="MS", tz="UTC")
+    for plat, g in df.groupby("platform"):
+        L.append(f"- {plat}: {len(g)} posisi dari {g.akun.nunique()} trader, {g.t0.min():%Y-%m-%d} s.d. {g.t1.max():%Y-%m-%d}")
+    L.append("")
     rng = np.random.default_rng(0)
+    kump = [(p, df[df.platform == p]) for p in sorted(df.platform.unique())]
+    kump.append(("gabungan futures (tanpa eToro)", df[df.platform != "etoro"]))
+    ringkasan = {}
     for nama, aturan in ATURAN.items():
-        for kump, sub in (("semua", df), ("acak", df[df.acak])):
-            sel, base, rnd, per_bulan = [], [], [], []
-            for m in bulan:
-                m1 = m + pd.offsets.MonthBegin(1)
-                hist = sub[(sub.t1 < m) & (sub.t1 >= m - pd.Timedelta(days=hari_hist))]
-                nxt = sub[(sub.t0 >= m) & (sub.t0 < m1) & (sub.t1 <= akhir)]
-                if nxt.empty:
-                    continue
-                ids = pilih_trader(hist, aturan)
-                s = nxt[nxt.akun.isin(ids)]
-                aktif = list(set(hist.akun) & set(nxt.akun))
-                r_ids = rng.choice(aktif, size=min(len(ids), len(aktif)), replace=False) if ids and aktif else []
-                sel.append(s.salin)
-                base.append(nxt[nxt.akun.isin(aktif)].salin)
-                rnd.append(nxt[nxt.akun.isin(r_ids)].salin)
-                if len(s):
-                    per_bulan.append((m, len(ids), len(s), s.salin.mean()))
-            s_all = pd.concat(sel) if sel else pd.Series(dtype=float)
-            L.append(f"## {nama} — kumpulan {kump}")
-            L.append(f"  terpilih : {ringkas(s_all)}")
-            L.append(f"  acak     : {ringkas(pd.concat(rnd) if rnd else pd.Series(dtype=float))}")
-            L.append(f"  semua    : {ringkas(pd.concat(base) if base else pd.Series(dtype=float))}")
-            if per_bulan:
-                pos = sum(1 for x in per_bulan if x[3] > 0)
-                L.append(f"  bulan untung {pos}/{len(per_bulan)}: " + " ".join(
-                    f"{m:%y-%m}:{n_t}t/{n_e}e/{avg * 100:+.2f}%" for m, n_t, n_e, avg in per_bulan))
-            L.append("")
+        L.append(f"## Aturan {nama}")
+        for k, sub in kump:
+            if sub.empty:
+                continue
+            r = uji_kumpulan(sub, aturan, hari_hist, langkah, akhir, rng)
+            per = r["per"]
+            pos = sum(1 for x in per if x[3] > 0)
+            L.append(f"  {k}")
+            p_ = "" if r["p_acak"] is None else f" | p-acak {r['p_acak']:.3f}"
+            L.append(f"    terpilih : {ringkas(r['terpilih'])} | periode untung {pos}/{len(per)}{p_}")
+            L.append(f"    acak     : {ringkas(r['acak'])}")
+            L.append(f"    semua    : {ringkas(r['semua'])}")
+            ringkasan[(nama, k)] = r
+        L.append("")
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L))
     return L
@@ -239,4 +447,7 @@ def uji(hari_hist: int = 180) -> list[str]:
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "uji"
-    {"unduh": unduh, "uji": uji}[cmd]()
+    if cmd == "unduh" and len(sys.argv) > 2:
+        unduh_platform(sys.argv[2])
+    else:
+        {"unduh": unduh, "uji": uji}[cmd]()
