@@ -1,14 +1,30 @@
 {
  "mulai": "2026-10-07",
- "diperbarui": "2026-10-07T04:46Z",
+ "diperbarui": "2026-10-08T19:51Z",
  "semua": {
-  "benar": 0,
-  "n": 0
+  "benar": 1,
+  "n": 1
  },
- "per_peringkat": {},
+ "per_peringkat": {
+  "4": {
+   "nama": "Biasa",
+   "benar": 1,
+   "n": 1
+  }
+ },
  "kandidat_nfp": {
   "naik": 0,
   "n": 0
  },
- "terakhir": []
+ "terakhir": [
+  {
+   "judul": "Klaim pengangguran: peluang emas turun 1 jam 52%",
+   "title": "Unemployment Claims",
+   "waktu": "2026-10-08T12:30:00+00:00",
+   "peringkat": 4,
+   "kandidat": false,
+   "gerak": -9.77,
+   "benar": true
+  }
+ ]
 }
