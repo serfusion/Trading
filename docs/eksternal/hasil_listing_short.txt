@@ -1,0 +1,200 @@
+SHORT token baru di Binance USD-M perpetual — research/listing_short.py (dibuat 8 Okt 2026)
+==============================================================================================================
+Biaya: taker 0,05% + slippage 0,1% per sisi (x2 diuji), funding NYATA per calc_time, leverage 1x, rugi maks -100%.
+LAMA = perp listing < Okt 2021, BARU = >= Okt 2021. Return = % terhadap margin per trade.
+Aturan & grid ditetapkan sebelum melihat hasil (lihat docstring). Satu trade per token per aturan.
+
+Perp USDT di data.binance.vision: 884; dibuang bukan kripto (TradFi saham/ETF/komoditas/pra-IPO, indeks, FX; dari exchangeInfo): 209; listing sebelum 2020 / data < 2 hari dibuang juga.
+Perp USDT listing 2020-2026 yang dipakai: 672  (tipe 'baru' = belum ada di Binance spot >= 30 hari sebelum perp: 456, 'lama' = koin lama diberi perp: 216)
+Per tahun listing (baru/lama): 2020: 27/50, 2021: 17/41, 2022: 9/15, 2023: 38/60, 2024: 93/38, 2025: 226/12, 2026: 46/0
+LAMA 126 perp, BARU 546 perp.
+
+Trade tersimulasi: 82503 baris (288 aturan). Funding tidak lengkap (bulan berjalan belum terbit): 0.4% baris.
+
+RINGKASAN GRID (288 aturan): rata-rata net per trade
+  LAMA: aturan positif 186/288, median aturan +2.29%, terbaik +50.41% (B100c_TP50_SL100_T60), terburuk -9.34%
+  BARU: aturan positif 133/288, median aturan -0.57%, terbaik +6.32% (C_TP50_SL50_T60), terburuk -12.37%
+  positif di KEDUA periode: 104/288
+
+Per entry (rata-rata semua 36 aturan keluar; n = token yang terpicu):
+  A      LAMA n 126  +3.48% | BARU n 546  +1.99%
+  B100c  LAMA n   5 +22.02% | BARU n  64  +0.15%
+  B100v  LAMA n   7 +13.63% | BARU n  65  -0.39%
+  B20c   LAMA n  40  -2.75% | BARU n 272  -1.99%
+  B20v   LAMA n  40  -2.62% | BARU n 274  -1.18%
+  B50c   LAMA n  15  +2.81% | BARU n 124  -6.35%
+  B50v   LAMA n  15  +4.48% | BARU n 128  -5.31%
+  C      LAMA n 115  +0.80% | BARU n 456  +3.39%
+
+Pembanding: short di jam ACAK 30 hari pertama (semua token, 40 draw/token) — rata-rata 36 aturan keluar: LAMA +3.47% (terbaik +6.86%), BARU +1.91% (terbaik +3.55%)
+
+SELEKSI DARI LAMA (n >= 30, urut t = rata/se). 10 teratas dan hasilnya di BARU:
+  aturan                   LAMA n    rata     t | BARU n    rata    WR biaya x2
+  A_TP50_SL20_T7              126  +5.49%  2.67 |    546  +2.58%   47%   +2.29%
+  A_TP20_SL20_T7              126  +4.14%  2.64 |    546  +1.24%   55%   +0.95%
+  A_TP30_SL20_T7              126  +4.33%  2.44 |    546  +2.13%   50%   +1.84%
+  A_TP20_SL30_T7              126  +4.20%  2.33 |    546  +0.93%   62%   +0.63%
+  A_TP50_SL30_T7              126  +5.26%  2.31 |    546  +2.77%   55%   +2.48%
+  A_TP30_SL20_T60             126  +4.83%  2.17 |    546  +2.84%   47%   +2.54%
+  A_TP30_SL30_T7              126  +4.16%  2.07 |    546  +2.28%   58%   +1.98%
+  A_TP50_SL20_T60             126  +5.72%  1.97 |    546  +4.19%   39%   +3.90%
+  A_TP50_SL50_T7              126  +4.94%  1.95 |    546  +3.15%   62%   +2.86%
+  A_TP30_SL20_T30             126  +4.25%  1.94 |    546  +2.77%   48%   +2.47%
+
+WALK-FORWARD per tahun (aturan dipilih dari SEMUA tahun sebelumnya, n >= 30, t terbesar; diuji di tahun itu):
+  2021: pilih C_TP50_SL20_T30          (latih n 71, +8.73%) -> n   53 WR  30.2% rata  -1.65% med -19.78% CI90 [ -7.99,  +4.96] PF 0.88 SL 69.8% fund +0.84%
+  2022: pilih A_TP50_SL20_T7           (latih n 135, +5.62%) -> n   24 WR  41.7% rata  +1.48% med  -4.01% CI90 [ -5.86,  +9.51] PF 1.16 SL 41.7% fund -0.47%
+  2023: pilih C_TP20_SL30_T60          (latih n 144, +5.41%) -> n   87 WR  66.7% rata  +2.84% med +19.46% CI90 [ -1.38,  +7.00] PF 1.28 SL 33.3% fund +0.16%
+  2024: pilih C_TP20_SL30_T60          (latih n 231, +4.44%) -> n  108 WR  70.4% rata  +5.51% med +19.82% CI90 [ +2.04,  +9.03] PF 1.64 SL 28.7% fund +0.51%
+  2025: pilih C_TP20_SL30_T60          (latih n 339, +4.78%) -> n  195 WR  65.6% rata  +2.30% med +19.51% CI90 [ -0.37,  +5.04] PF 1.22 SL 33.8% fund -0.38%
+  2026: pilih C_TP20_SL30_T60          (latih n 534, +3.88%) -> n   37 WR  75.7% rata  +6.80% med +19.01% CI90 [ +0.80, +12.12] PF 1.99 SL 21.6% fund -1.14%
+  gabungan OOS LAMA: n   44 WR  27.3% rata  -3.32% med -19.97% CI90 [-10.27,  +3.94] PF 0.77 SL 72.7% fund +0.91%
+  gabungan OOS BARU: n  460 WR  66.1% rata  +3.56% med +19.52% CI90 [ +1.73,  +5.34] PF 1.37 SL 32.4% fund -0.12%
+  gabungan OOS semua: n  504 WR  62.7% rata  +2.96% med +19.45% CI90 [ +1.10,  +4.77] PF 1.30 SL 35.9% fund -0.03%  biaya x2 rata +2.66%
+
+--------------------------------------------------------------------------------------------------------------
+ATURAN A_TP50_SL20_T7 — TERPILIH dari LAMA
+  LAMA: n  126 WR  57.1% rata  +5.49% med  +4.38% CI90 [ +2.14,  +8.79] PF 1.77 SL 31.7% fund +0.41%
+        CI90 klaster-bulan [-0.09, +10.73]  biaya x2 rata +5.20%  acak token sama +1.19% (p acak >= aturan 0.006)  tanpa funding-kurang +4.97%
+  BARU: n  546 WR  46.7% rata  +2.58% med -13.39% CI90 [ +0.78,  +4.47] PF 1.25 SL 50.0% fund -0.49%
+        CI90 klaster-bulan [+0.73, +4.53]  biaya x2 rata +2.29%  acak token sama +0.96% (p acak >= aturan 0.015)  tanpa funding-kurang +2.62%
+  tipe baru: LAMA n   42 WR  64.3% rata +14.70% med +16.65% CI90 [ +7.26, +21.80] PF 3.25 SL 31.0% fund -0.14%
+             BARU n  414 WR  44.2% rata  +2.76% med -19.95% CI90 [ +0.45,  +4.98] PF 1.25 SL 53.6% fund -0.40%
+  tipe lama: LAMA n   84 WR  53.6% rata  +0.89% med  +2.44% CI90 [ -2.26,  +4.21] PF 1.12 SL 32.1% fund +0.69%
+             BARU n  132 WR  54.5% rata  +2.01% med  +6.85% CI90 [ -0.94,  +4.95] PF 1.24 SL 38.6% fund -0.78%
+  per tahun listing:
+    2020: n   77 WR  55.8% rata  +6.03% med  +5.56% CI90 [ +1.78, +10.50] PF 1.87 SL 28.6% fund +0.28%  x2  +5.74%
+    2021: n   58 WR  60.3% rata  +5.09% med  +6.75% CI90 [ +0.05,  +9.94] PF 1.71 SL 34.5% fund +0.58%  x2  +4.80%
+    2022: n   24 WR  41.7% rata  +1.48% med  -4.01% CI90 [ -5.86,  +9.51] PF 1.16 SL 41.7% fund -0.47%  x2  +1.19%
+    2023: n   98 WR  53.1% rata  +0.77% med  +2.37% CI90 [ -2.79,  +4.25] PF 1.09 SL 42.9% fund -0.52%  x2  +0.48%
+    2024: n  131 WR  47.3% rata  +1.51% med  -4.80% CI90 [ -2.08,  +4.90] PF 1.15 SL 48.1% fund +0.04%  x2  +1.22%
+    2025: n  238 WR  44.1% rata  +3.63% med -20.02% CI90 [ +0.49,  +6.68] PF 1.32 SL 54.6% fund -0.67%  x2  +3.34%
+    2026: n   46 WR  43.5% rata  +3.65% med -20.15% CI90 [ -3.37, +11.03] PF 1.31 SL 56.5% fund -1.20%  x2  +3.36%
+  tahun positif: 7/7
+  keluar: SL 313, WAKTU 288, TP 71; rugi -100% (likuidasi 1x): 0; SL tembus gap (isi > level SL): 0
+  5 trade terburuk: GPSUSDT 2025-02 -33% (fund -12.8%); FUNUSDT 2025-03 -32% (fund -11.4%); XVGUSDT 2023-07 -28% (fund -7.9%); FRAXUSDT 2026-01 -27% (fund -7.0%); RAREUSDT 2024-08 -26% (fund -5.6%)
+  funding: rata -0.32%, terburuk -14.94%, terbaik +4.31%
+  portofolio SEMUA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +31.3%/th, max DD -31.4%, akhir 6.19x, trade 672 (lewat 0)
+    per tahun kalender: 2020: +51.6%, 2021: +30.4%, 2022: +4.4%, 2023: +3.0%, 2024: +16.7%, 2025: +113.5%, 2026: +16.9%
+  portofolio BARU (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +27.4%/th, max DD -31.4%, akhir 3.29x, trade 546 (lewat 0)
+  portofolio LAMA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +43.7%/th, max DD -13.8%, akhir 1.88x, trade 126 (lewat 0)
+--------------------------------------------------------------------------------------------------------------
+ATURAN C_TP20_SL20_T60 — terbaik di BARU (MELIHAT HASIL -> bukan bukti)
+  LAMA: n  115 WR  51.3% rata  +0.49% med +17.02% CI90 [ -2.66,  +3.64] PF 1.05 SL 48.7% fund +0.26%
+        CI90 klaster-bulan [-4.89, +5.00]  biaya x2 rata +0.19%  acak token sama +3.29% (p acak >= aturan 0.956)  tanpa funding-kurang +0.50%
+  BARU: n  456 WR  60.5% rata  +3.75% med +19.43% CI90 [ +2.17,  +5.14] PF 1.47 SL 39.0% fund -0.14%
+        CI90 klaster-bulan [+2.24, +5.41]  biaya x2 rata +3.46%  acak token sama +2.90% (p acak >= aturan 0.139)  tanpa funding-kurang +3.75%
+  tipe baru: LAMA n   41 WR  53.7% rata  +0.95% med +18.75% CI90 [ -4.16,  +5.96] PF 1.10 SL 46.3% fund -0.22%
+             BARU n  337 WR  59.9% rata  +3.51% med +19.37% CI90 [ +1.76,  +5.26] PF 1.43 SL 39.8% fund -0.19%
+  tipe lama: LAMA n   74 WR  50.0% rata  +0.23% med  +0.08% CI90 [ -3.63,  +3.99] PF 1.02 SL 50.0% fund +0.53%
+             BARU n  119 WR  62.2% rata  +4.45% med +19.46% CI90 [ +1.49,  +7.32] PF 1.59 SL 37.0% fund -0.01%
+  per tahun listing:
+    2020: n   71 WR  63.4% rata  +5.24% med +19.73% CI90 [ +1.29,  +8.98] PF 1.71 SL 36.6% fund +0.18%  x2  +4.95%
+    2021: n   53 WR  37.7% rata  -4.80% med -19.67% CI90 [ -8.86,  -0.42] PF 0.61 SL 62.3% fund +0.41%  x2  -5.11%
+    2022: n   20 WR  80.0% rata +11.67% med +19.72% CI90 [ +5.61, +17.65] PF 3.86 SL 20.0% fund -0.05%  x2 +11.38%
+    2023: n   87 WR  59.8% rata  +3.32% med +19.32% CI90 [ -0.14,  +6.80] PF 1.41 SL 40.2% fund +0.07%  x2  +3.03%
+    2024: n  108 WR  62.0% rata  +4.83% med +19.78% CI90 [ +1.84,  +7.91] PF 1.63 SL 38.0% fund +0.36%  x2  +4.54%
+    2025: n  195 WR  56.9% rata  +2.22% med +18.82% CI90 [ +0.04,  +4.65] PF 1.25 SL 42.6% fund -0.37%  x2  +1.92%
+    2026: n   37 WR  64.9% rata  +4.69% med +18.05% CI90 [ -0.42,  +9.51] PF 1.68 SL 32.4% fund -1.08%  x2  +4.40%
+  tahun positif: 6/7
+  keluar: TP 331, SL 234, WAKTU 6; rugi -100% (likuidasi 1x): 0; SL tembus gap (isi > level SL): 0
+  5 trade terburuk: FRAXUSDT 2026-01 -29% (fund -9.1%); FUSDT 2025-06 -29% (fund -8.2%); FILUSDT 2020-10 -25% (fund -5.0%); HIVEUSDT 2024-12 -23% (fund -3.1%); STRAXUSDT 2023-10 -23% (fund -2.7%)
+  funding: rata -0.06%, terburuk -13.12%, terbaik +4.67%
+  portofolio SEMUA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +25.4%/th, max DD -36.3%, akhir 4.51x, trade 569 (lewat 2)
+    per tahun kalender: 2020: +42.3%, 2021: -27.9%, 2022: +30.8%, 2023: +23.8%, 2024: +47.5%, 2025: +69.3%, 2026: +8.8%
+  portofolio BARU (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +36.0%/th, max DD -32.6%, akhir 4.48x, trade 454 (lewat 2)
+  portofolio LAMA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR +0.3%/th, max DD -34.9%, akhir 1.01x, trade 115 (lewat 0)
+--------------------------------------------------------------------------------------------------------------
+ATURAN A_TP50_SL100_T60 — acuan sederhana: short jam ke-2, tahan 60 hari
+  LAMA: n  126 WR  65.9% rata  +2.92% med +32.24% CI90 [ -6.37, +11.47] PF 1.11 SL  0.0% fund +4.25%
+        CI90 klaster-bulan [-18.17, +18.62]  biaya x2 rata +3.82%  acak token sama +2.33% (p acak >= aturan 0.434)  tanpa funding-kurang +2.41%
+  BARU: n  546 WR  68.9% rata  +2.47% med +31.05% CI90 [ -1.84,  +6.83] PF 1.10 SL  0.0% fund -1.38%
+        CI90 klaster-bulan [-3.17, +8.25]  biaya x2 rata +2.46%  acak token sama +3.00% (p acak >= aturan 0.636)  tanpa funding-kurang +2.57%
+  tipe baru: LAMA n   42 WR  73.8% rata +11.99% med +46.56% CI90 [ -2.43, +25.54] PF 1.61 SL  0.0% fund +1.40%
+             BARU n  414 WR  67.9% rata  +1.28% med +41.28% CI90 [ -4.29,  +6.30] PF 1.05 SL  0.0% fund -1.14%
+  tipe lama: LAMA n   84 WR  61.9% rata  -1.61% med +27.53% CI90 [-13.18, +10.18] PF 0.94 SL  0.0% fund +5.68%
+             BARU n  132 WR  72.0% rata  +6.22% med +22.33% CI90 [ -1.05, +12.85] PF 1.37 SL  0.0% fund -2.13%
+  per tahun listing:
+    2020: n   77 WR  68.8% rata  +7.33% med +43.56% CI90 [ -4.32, +18.09] PF 1.33 SL  0.0% fund +2.76%  x2  +7.91%
+    2021: n   58 WR  65.5% rata  +0.68% med +35.10% CI90 [-14.28, +14.47] PF 1.02 SL  0.0% fund +5.67%  x2  +1.84%
+    2022: n   24 WR  83.3% rata +16.46% med +46.57% CI90 [ -2.88, +33.27] PF 1.99 SL  0.0% fund -1.47%  x2 +16.26%
+    2023: n   98 WR  71.4% rata  +4.47% med +19.93% CI90 [ -3.69, +12.80] PF 1.25 SL  0.0% fund +0.06%  x2  +4.36%
+    2024: n  131 WR  62.6% rata  -4.15% med +24.02% CI90 [-13.55,  +5.11] PF 0.86 SL  0.0% fund +0.81%  x2  -3.92%
+    2025: n  238 WR  68.5% rata  +2.70% med +46.11% CI90 [ -4.37,  +9.51] PF 1.10 SL  0.0% fund -2.50%  x2  +2.64%
+    2026: n   46 WR  71.7% rata  +3.99% med +35.21% CI90 [-11.44, +17.28] PF 1.16 SL  0.0% fund -5.30%  x2  +3.80%
+  tahun positif: 6/7
+  keluar: TP 309, WAKTU 208, LIKUIDASI 154, DELIST 1; rugi -100% (likuidasi 1x): 154; SL tembus gap (isi > level SL): 0
+  5 trade terburuk: 0GUSDT 2025-09 -100% (fund +0.0%); 1000000MOGUSDT 2024-11 -100% (fund +6.1%); 1000BONKUSDT 2023-11 -100% (fund +4.3%); 1000CATUSDT 2024-10 -100% (fund +9.2%); 1MBABYDOGEUSDT 2024-09 -100% (fund -4.3%)
+  funding: rata -0.33%, terburuk -90.73%, terbaik +24.03%
+  portofolio SEMUA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR -29.6%/th, max DD -95.8%, akhir 0.09x, trade 444 (lewat 228)
+    per tahun kalender: 2020: -14.7%, 2021: -62.3%, 2022: +64.5%, 2023: -5.7%, 2024: -68.4%, 2025: -34.1%, 2026: -9.2%
+  portofolio BARU (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR -20.8%/th, max DD -93.8%, akhir 0.31x, trade 350 (lewat 196)
+  portofolio LAMA (10% ekuitas/trade, maks 10 posisi, mark-to-market per jam): CAGR -47.2%/th, max DD -88.2%, akhir 0.30x, trade 94 (lewat 32)
+
+--------------------------------------------------------------------------------------------------------------
+UJI KETAHANAN A_TP50_SL20_T7
+  tetangga entry A (rata % / WR %), baris = T hari & SL, kolom = TP:
+   LAMA:            TP20            TP30            TP50
+     T7   SL20        +4.14/ 63%      +4.33/ 59%      +5.49/ 57%
+     T7   SL30        +4.20/ 68%      +4.16/ 63%      +5.26/ 62%
+     T7   SL50        +4.03/ 71%      +3.75/ 66%      +4.94/ 64%
+     T7   SL100       +2.98/ 74%      +2.83/ 68%      +3.94/ 67%
+     T30  SL20        +3.30/ 57%      +4.25/ 48%      +4.64/ 40%
+     T30  SL30        +3.72/ 66%      +4.10/ 56%      +3.61/ 48%
+     T30  SL50        +3.65/ 73%      +2.90/ 63%      +3.33/ 56%
+     T30  SL100       +1.41/ 77%      -1.50/ 68%      -0.43/ 61%
+     T60  SL20        +3.30/ 57%      +4.83/ 48%      +5.72/ 38%
+     T60  SL30        +3.64/ 66%      +4.51/ 56%      +4.45/ 45%
+     T60  SL50        +3.48/ 75%      +3.69/ 65%      +3.68/ 55%
+     T60  SL100       +1.39/ 81%      +0.49/ 73%      +2.92/ 66%
+   BARU:            TP20            TP30            TP50
+     T7   SL20        +1.24/ 55%      +2.13/ 50%      +2.58/ 47%
+     T7   SL30        +0.93/ 62%      +2.28/ 58%      +2.77/ 55%
+     T7   SL50        +1.29/ 68%      +2.58/ 64%      +3.15/ 62%
+     T7   SL100       -0.94/ 70%      +0.23/ 66%      +0.60/ 64%
+     T30  SL20        +1.45/ 55%      +2.77/ 48%      +3.73/ 42%
+     T30  SL30        +0.75/ 63%      +2.43/ 57%      +3.47/ 50%
+     T30  SL50        +1.78/ 74%      +3.33/ 68%      +4.62/ 62%
+     T30  SL100       -1.64/ 78%      -0.05/ 73%      +1.63/ 67%
+     T60  SL20        +1.59/ 55%      +2.84/ 47%      +4.19/ 39%
+     T60  SL30        +1.05/ 63%      +2.63/ 56%      +4.00/ 47%
+     T60  SL50        +2.17/ 75%      +3.63/ 68%      +5.36/ 60%
+     T60  SL100       -1.36/ 81%      +0.09/ 75%      +2.47/ 69%
+  aturan keluar positif untuk entry A: LAMA 34/36, BARU 32/36
+  telat masuk (open candle ke-d sejak listing, keluar sama) — rata % (n) LAMA | BARU:
+    d=  1 jam: LAMA  +5.49% (n 126) | BARU  +2.58% (n 546)
+    d=  2 jam: LAMA  +4.46% (n 126) | BARU  +2.43% (n 546)
+    d=  3 jam: LAMA  +4.27% (n 126) | BARU  +2.29% (n 546)
+    d=  4 jam: LAMA  +4.71% (n 126) | BARU  +2.58% (n 546)
+    d=  6 jam: LAMA  +3.32% (n 126) | BARU  +2.65% (n 546)
+    d= 12 jam: LAMA  +4.30% (n 126) | BARU  +2.85% (n 546)
+    d= 24 jam: LAMA  +6.03% (n 126) | BARU  +2.10% (n 546)
+    d= 48 jam: LAMA  +4.16% (n 126) | BARU  +0.72% (n 546)
+    d= 72 jam: LAMA  +0.11% (n 126) | BARU  +1.58% (n 546)
+    d=168 jam: LAMA  -1.37% (n 126) | BARU  +0.85% (n 546)
+  stres isi terburuk (short di LOW jam ke-2, SL dicek dengan high jam itu): LAMA +1.75% | BARU -5.35%
+  volume USDT candle jam ke-2 (BARU): median 13.6 jt, P10 2.52 jt, P1 0.42 jt -> posisi $1.000 = 0.040% volume jam itu (P10)
+  LAMA: tanpa tahun terbaik (2020) +4.65%; tanpa 5% trade terbaik +2.87%; median +4.38%
+  BARU: tanpa tahun terbaik (2025) +1.77%; tanpa 5% trade terbaik -0.01%; median -13.39%
+  per bulan listing (jumlah %, 10% margin/trade -> x0,1 = % modal): bulan positif 43/76, terburuk -112.9% (2025-11), terbaik +448.9% (2020-09)
+  kalah beruntun terpanjang (urut waktu entry): 9
+  leverage: return per trade x leverage (SL 20% -> rugi ~-20%/-40%/-60% margin di 1x/2x/3x; likuidasi 3x ~ +31% jadi SL 20% masih di depan kecuali gap). Angka di atas = 1x.
+--------------------------------------------------------------------------------------------------------------
+RISIKO EKOR (entry A = open jam ke-2):
+  squeeze terbesar (naik maks dari open jam ke-2 dalam 60 hari): COAIUSDT 2025-09 +5451%; CHZUSDT 2021-01 +4259%; AIAUSDT 2025-09 +3734%; MYXUSDT 2025-06 +3087%; BEATUSDT 2025-11 +1850%; BSBUSDT 2026-03 +1839%; LUNAUSDT 2021-01 +1575%; MMTUSDT 2025-11 +1395%; ANKRUSDT 2021-01 +1349%; AVNTUSDT 2025-09 +1287%; GMTUSDT 2022-03 +1234%; BASUSDT 2025-08 +1204%
+  token yang sempat naik >= 50% di atas harga short: 41.1% (LAMA 41.3%, BARU 41.0%)
+  token yang sempat naik >= 100% di atas harga short: 25.1% (LAMA 23.8%, BARU 25.5%)
+  token yang sempat naik >= 200% di atas harga short: 10.6% (LAMA 9.5%, BARU 10.8%)
+  funding 30 hari pertama — rate terendah (short MEMBAYAR): LOOMUSDT -3.00%/periode; CYBERUSDT -2.50%/periode; HIFIUSDT -2.50%/periode; YGGUSDT -2.50%/periode; XVGUSDT -2.34%/periode; 0GUSDT -2.00%/periode; AIAUSDT -2.00%/periode; AUCTIONUSDT -2.00%/periode
+  jumlah funding 30 hari terburuk bagi short: COAIUSDT -149.8%; FUNUSDT -60.6%; HUSDT -48.1%; LOOMUSDT -46.9%; HIVEUSDT -43.4%; ESPUSDT -39.7%; MUSDT -38.3%; ZKPUSDT -36.7%
+  median jumlah funding 30 hari: +0.63% (positif = short menerima); token dengan jumlah < -5%: 121 dari 669
+
+--------------------------------------------------------------------------------------------------------------
+VONIS A_TP50_SL20_T7: LOLOS
+  [x] LAMA positif
+  [x] BARU positif (CI90 klaster-bulan > 0)
+  [x] mayoritas tahun positif (7/7)
+  [x] mengalahkan acak token sama (p 0.015 <= 0,10)
+  [x] biaya x2 tetap positif LAMA & BARU
+  Catatan jujur: WR BARU 47%, median -13.4%; tanpa 5% trade terbaik BARU -0.01%; tahun 2025 menyumbang 61% jumlah return BARU. Keunggulan bergantung pada sedikit trade TP besar.
+

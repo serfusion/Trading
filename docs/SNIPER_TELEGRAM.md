@@ -127,4 +127,22 @@ Aturan keamanan WAJIB:
 | `/tutup P12` | jual posisi P12 sekarang (konfirmasi tombol) |
 | `/saldo` | saldo bursa (live) atau kertas |
 
-(ISI_FAQ)
+## Masalah umum (FAQ)
+| Gejala | Penyebab & solusi |
+|---|---|
+| `HTTP 451` / "Service unavailable from a restricted location" | VPS di Amerika Serikat. Pindah ke region Singapura/Jepang/Eropa. |
+| Bot tidak membalas di Telegram | Token/`TELEGRAM_CHAT_ID` salah → `python -m sniper_bot chat-id`; pastikan proses jalan (`systemctl status sniper-bot`). Bot hanya menjawab chat_id pemilik; orang lain hanya diberi tahu chat_id-nya sendiri. |
+| `TELEGRAM_CHAT_ID kosong` | Kirim `/start` ke bot dulu, lalu `python -m sniper_bot chat-id`. |
+| `uji-bursa` gagal "Invalid API-key, IP, or permissions" | Whitelist IP salah / izin Spot Trading belum dicentang / kunci baru belum aktif (tunggu 1–5 menit). |
+| "⏭ ... dilewati: XYZ/USDT tidak ada di bursa" | Koin belum/tidak terdaftar di bursa pilihanmu (sering terjadi di bursa lokal untuk listing baru). |
+| "nilai ... < minimum" | Ukuran order di bawah minimum bursa (umumnya $5–10). Naikkan `maks_usd_per_trade` atau modal. |
+| Posisi tidak tertutup saat bot mati | TP limit tetap di bursa; SL & batas waktu dijalankan bot → hidupkan lagi, bot melanjutkan dari `state.json`. |
+| Ingin mulai dari nol (kertas) | Hentikan bot, hapus `sniper_bot/data/state.json` (HANYA bila tidak ada posisi live), jalankan lagi. |
+| Ganti bursa | Pastikan tidak ada posisi terbuka, ubah `bursa.ccxt_id` & kunci API, restart. |
+
+## Keamanan & risiko (baca sebelum live)
+- Bot tidak pernah memanggil penarikan dana; tetap gunakan kunci API **tanpa izin withdraw** + whitelist IP.
+- `sniper_bot/.env`, `config.yaml`, `data/` tidak masuk git (`.gitignore`). Jangan kirim isi `.env` ke siapa pun.
+- Semua angka di dokumen ini adalah **hasil uji masa lalu**, bukan janji. Rugi besar sesekali tetap terjadi (💎: 1 dari
+  ±10 sinyal rugi rata −13%; terburuk −58%). Pakai modal yang siap hilang, mulai kecil.
+- Bot ini terpisah dari aplikasi Android & cloud: mematikan/menghapusnya tidak mengganggu sinyal XAU/BTC di aplikasi.

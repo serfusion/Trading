@@ -1,0 +1,424 @@
+=== Validasi: beli listing baru Binance setelah turun >= 60% dari P0, TP +20%, SL -50%, maks 90 hari
+Universe: 588 listing pair USDT Binance spot 2017-09..2026-09 (termasuk yang sudah delisting).
+P0 = VWAP 60 menit pertama (1m); limit beli P0 x 0,4 berlaku untuk candle 1 jam yang DIMULAI >= t+60 mnt s/d t+30 hari.
+Biaya: fee 0.1%/sisi (pulang-pergi 0.2%); order pasar (SL, batas waktu, entry telat) + setengah spread 0.1% + dampak 1 x sigma_harian x sqrt(ukuran/volume 24 jam); order limit (entry, TP) tanpa slippage.
+Urutan dalam candle: candle entry -> SL (low <= SL) pasti SETELAH terisi (harga turun melewati limit) jadi dihitung; TP hanya bila close >= TP (pasti setelah terisi). Candle berikutnya: SL dulu bila TP & SL di candle sama.
+LAMA = listing < Okt 2021, BARU = >= Okt 2021. 'modal 1' = tanpa dampak ukuran; $1.000/$10.000 = dengan dampak & batas 0,5% volume 24 jam.
+
+--- 0. Cek look-ahead & reproduksi angka lama
+  P0 dihitung ulang dari 60 menit pertama saja: beda 0/169
+  entry dihitung ulang dari data yang dipotong di candle entry: beda 0/169
+  candle entry yang dimulai sebelum P0 selesai (t+60 mnt): 0
+  volume 24 jam saat entry dihitung ulang dari candle < candle entry: beda 0/169; sigma memakai return 1 jam yang sudah tutup (lr[i-73..i-2])
+  LAMA: listing_baru._keluar (candle entry diabaikan, biaya 0,4%) pada entry yang sama: n 70, rata +13.19% (grid.parquet +13.19%, n 70) -> dengan candle entry dihitung: +12.35%
+  BARU: listing_baru._keluar (candle entry diabaikan, biaya 0,4%) pada entry yang sama: n 99, rata +7.06% (grid.parquet +7.06%, n 99) -> dengan candle entry dihitung: -0.72%
+  trade yang selesai di candle entry: 15 (SL 8, TP 7); SL di candle entry: FORTH 2021-05-19 12:30, ERA 2025-08-02 07:30, BARD 2025-10-10 21:30, HEMI 2025-10-10 21:30, PUMP 2025-10-10 21:30, NOM 2025-10-10 21:30, WAL 2025-10-10 21:30, AVNT 2025-10-10 21:30
+  -> angka lama (+7,1% BARU) terlalu optimistis: 6 dari 8 SL candle entry terjadi saat flash crash 10 Okt 2025 21:00 UTC (harga menembus limit lalu terus jatuh > 50% dalam jam yang sama, lalu pulih).
+
+--- 1. Per trade (aturan 0,6 / 0,2 / 0,5 / 90)
+  [SL = order stop di bursa (dasar)]
+    modal 1 (tanpa dampak)         LAMA: n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -50%  CI90 rata [+7.9%, +16.3%]
+    modal 1 (tanpa dampak)         BARU: n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 rata [-6.4%, +4.2%]
+    $1.000 x 10% = $100/trade      LAMA: n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -50%  CI90 rata [+7.9%, +16.3%]
+    $1.000 x 10% = $100/trade      BARU: n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 rata [-6.4%, +4.2%]
+    $10.000 x 10% = $1.000/trade   LAMA: n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -51%  CI90 rata [+7.9%, +16.3%]
+    $10.000 x 10% = $1.000/trade   BARU: n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 rata [-6.4%, +4.2%]
+    LAMA cara keluar: TP 62, SL 7, WAKTU 1; lama tahan median 1.5 hari (TP 1.4, SL 3.8)
+    BARU cara keluar: TP 70, SL 29; lama tahan median 3.0 hari (TP 2.0, SL 11.2)
+    per tahun listing (modal 1):
+            n     wr   rata  median  terburuk  jumlah
+    tahun                                            
+    2018    3  1.000  0.198   0.198     0.198   0.593
+    2019   12  0.833  0.081   0.198    -0.501   0.973
+    2020   36  0.889  0.131   0.198    -0.501   4.721
+    2021   35  0.829  0.078   0.198    -0.501   2.721
+    2022   18  0.833  0.081   0.198    -0.501   1.460
+    2023    4  1.000  0.198   0.198     0.198   0.790
+    2024   10  0.900  0.128   0.198    -0.501   1.277
+    2025   46  0.565 -0.106   0.198    -0.501  -4.892
+    2026    5  0.800  0.058   0.198    -0.501   0.289
+  [SL dicek di close 1 jam (jual pasar)]
+    modal 1 (tanpa dampak)         LAMA: n  70  WR  90%  rata +13.3%  median +19.8%  terburuk  -53%  CI90 rata [+9.1%, +16.9%]
+    modal 1 (tanpa dampak)         BARU: n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 rata [-1.6%, +8.3%]
+    $1.000 x 10% = $100/trade      LAMA: n  70  WR  90%  rata +13.2%  median +19.8%  terburuk  -53%  CI90 rata [+9.1%, +16.9%]
+    $1.000 x 10% = $100/trade      BARU: n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 rata [-1.6%, +8.3%]
+    $10.000 x 10% = $1.000/trade   LAMA: n  70  WR  90%  rata +13.2%  median +19.8%  terburuk  -53%  CI90 rata [+9.1%, +16.9%]
+    $10.000 x 10% = $1.000/trade   BARU: n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 rata [-1.6%, +8.3%]
+    LAMA cara keluar: TP 63, SL 6, WAKTU 1; lama tahan median 1.5 hari (TP 1.4, SL 13.5)
+    BARU cara keluar: TP 76, SL 22, WAKTU 1; lama tahan median 3.8 hari (TP 1.8, SL 22.6)
+    per tahun listing (modal 1):
+            n     wr   rata  median  terburuk  jumlah
+    tahun                                            
+    2018    3  1.000  0.198   0.198     0.198   0.593
+    2019   12  0.833  0.081   0.198    -0.503   0.972
+    2020   36  0.889  0.130   0.198    -0.529   4.679
+    2021   35  0.857  0.096   0.198    -0.524   3.372
+    2022   18  0.833  0.080   0.198    -0.522   1.434
+    2023    4  1.000  0.198   0.198     0.198   0.790
+    2024   10  0.900  0.124   0.198    -0.543   1.236
+    2025   46  0.696 -0.014   0.198    -0.516  -0.621
+    2026    5  0.800  0.056   0.198    -0.512   0.279
+  bulan dengan entry terbanyak (kluster crash): 2020-09 13, 2025-10 13, 2021-12 9, 2021-05 8, 2022-05 6, 2025-09 6
+  [intra] 5 trade terbaik menyumbang 12% dari jumlah return; tanpa 5 terbaik: rata LAMA +11.8%, BARU -0.7%
+  [tutup] 5 trade terbaik menyumbang 8% dari jumlah return; tanpa 5 terbaik: rata LAMA +12.8%, BARU +3.5%
+
+  Kapasitas: volume quote 24 jam SEBELUM entry (USDT):
+    LAMA: median $4,599,876, P10 $290,218, P90 $59,198,692, minimum $55,884
+    BARU: median $15,623,261, P10 $2,615,982, P90 $130,167,471, minimum $109,425
+    posisi > 0,5% vol 24 jam (modal $1,000 x alokasi, tanpa compounding): 5% LAMA 0/70; 5% BARU 0/99; 10% LAMA 0/70; 10% BARU 0/99; 20% LAMA 0/70; 20% BARU 0/99
+    posisi > 0,5% vol 24 jam (modal $10,000 x alokasi, tanpa compounding): 5% LAMA 2/70; 5% BARU 0/99; 10% LAMA 6/70; 10% BARU 1/99; 20% LAMA 12/70; 20% BARU 1/99
+    posisi > 0,5% vol 24 jam (modal $100,000 x alokasi, tanpa compounding): 5% LAMA 20/70; 5% BARU 1/99; 10% LAMA 27/70; 10% BARU 8/99; 20% LAMA 35/70; 20% BARU 21/99
+    perkiraan slippage SL untuk posisi $100: median 0.12%, P90 0.15% (sigma harian median saat SL 9%)
+    perkiraan slippage SL untuk posisi $1,000: median 0.16%, P90 0.26% (sigma harian median saat SL 9%)
+    perkiraan slippage SL untuk posisi $10,000: median 0.30%, P90 0.60% (sigma harian median saat SL 9%)
+
+--- 2. Portofolio (urut waktu, maks 10 posisi, alokasi % dari ekuitas nilai pasar, kurva harian)
+
+  ===== SL = order stop di bursa (dasar)
+  [LAMA] 70 sinyal
+  alokasi 5%, modal 1: akhir x1.53, CAGR +10.9%, DD maks -5.4%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 5.0%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +23% (32 tr), 2021 +18% (23 tr)
+  alokasi 5%, $1,000: akhir x1.53, CAGR +10.9%, DD maks -5.4%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 5.0%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +23% (32 tr), 2021 +18% (23 tr)
+  alokasi 5%, $10,000: akhir x1.53, CAGR +11.0%, DD maks -5.4%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 2; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 4.9%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +23% (32 tr), 2021 +18% (23 tr)
+  alokasi 10%, modal 1: akhir x2.28, CAGR +22.4%, DD maks -10.6%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 10.0%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +5% (12 tr), 2020 +48% (32 tr), 2021 +39% (23 tr)
+  alokasi 10%, $1,000: akhir x2.28, CAGR +22.4%, DD maks -10.6%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 10.0%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +5% (12 tr), 2020 +48% (32 tr), 2021 +39% (23 tr)
+  alokasi 10%, $10,000: akhir x2.27, CAGR +22.3%, DD maks -10.7%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 6; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 9.6%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +2% (12 tr), 2020 +51% (32 tr), 2021 +39% (23 tr)
+  alokasi 20%, modal 1: akhir x4.82, CAGR +47.2%, DD maks -20.9%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 20.0%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +9% (12 tr), 2020 +110% (32 tr), 2021 +88% (23 tr)
+  alokasi 20%, $1,000: akhir x4.82, CAGR +47.1%, DD maks -20.9%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -50%; porsi ekuitas rata 20.0%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +9% (12 tr), 2020 +110% (32 tr), 2021 +88% (23 tr)
+  alokasi 20%, $10,000: akhir x4.47, CAGR +44.4%, DD maks -21.0%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 15; posisi bersamaan maks 4)
+      per trade: WR 89%, rata +12.3%, median +19.8%, terburuk -51%; porsi ekuitas rata 17.6%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +8% (12 tr), 2020 +106% (32 tr), 2021 +79% (23 tr)
+  BTC beli-tahan 2017-09-01..2021-09-28: x8.49, CAGR +69.0%, DD maks -83.2%
+  [BARU] 99 sinyal
+  alokasi 5%, modal 1: akhir x0.97, CAGR -0.7%, DD maks -24.0%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 +0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -21% (46 tr), 2026 +1% (5 tr)
+  alokasi 5%, $1,000: akhir x0.97, CAGR -0.7%, DD maks -24.0%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 +0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -21% (46 tr), 2026 +1% (5 tr)
+  alokasi 5%, $10,000: akhir x0.97, CAGR -0.7%, DD maks -24.1%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 +0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -21% (46 tr), 2026 +1% (5 tr)
+  alokasi 10%, modal 1: akhir x0.89, CAGR -2.4%, DD maks -44.8%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 10.0%
+      per tahun: 2021 +12% (13 tr), 2022 -0% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -40% (46 tr), 2026 +1% (5 tr)
+  alokasi 10%, $1,000: akhir x0.89, CAGR -2.4%, DD maks -44.8%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 10.0%
+      per tahun: 2021 +12% (13 tr), 2022 -0% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -40% (46 tr), 2026 +1% (5 tr)
+  alokasi 10%, $10,000: akhir x0.88, CAGR -2.6%, DD maks -44.8%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 1; posisi bersamaan maks 10)
+      per trade: WR 71%, rata -0.2%, median +19.8%, terburuk -50%; porsi ekuitas rata 9.9%
+      per tahun: 2021 +12% (13 tr), 2022 -1% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -40% (46 tr), 2026 +1% (5 tr)
+  alokasi 20%, modal 1: akhir x0.97, CAGR -0.7%, DD maks -60.9%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 6)
+      per trade: WR 73%, rata +0.8%, median +19.8%, terburuk -50%; porsi ekuitas rata 19.9%
+      per tahun: 2021 +24% (13 tr), 2022 -3% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -54% (40 tr), 2026 +2% (5 tr)
+  alokasi 20%, $1,000: akhir x0.97, CAGR -0.7%, DD maks -60.9%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 6)
+      per trade: WR 73%, rata +0.8%, median +19.8%, terburuk -50%; porsi ekuitas rata 19.9%
+      per tahun: 2021 +24% (13 tr), 2022 -3% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -54% (40 tr), 2026 +2% (5 tr)
+  alokasi 20%, $10,000: akhir x0.94, CAGR -1.3%, DD maks -61.0%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 1; posisi bersamaan maks 6)
+      per trade: WR 73%, rata +0.7%, median +19.8%, terburuk -50%; porsi ekuitas rata 19.7%
+      per tahun: 2021 +24% (13 tr), 2022 -6% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -54% (40 tr), 2026 +2% (5 tr)
+  BTC beli-tahan 2021-10-01..2026-09-30: x1.74, CAGR +11.7%, DD maks -76.6%
+
+  ===== SL dicek di close 1 jam (jual pasar)
+  [LAMA] 70 sinyal
+  alokasi 5%, modal 1: akhir x1.57, CAGR +11.8%, DD maks -5.2%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.3%, median +19.8%, terburuk -53%; porsi ekuitas rata 5.0%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +22% (32 tr), 2021 +22% (23 tr)
+  alokasi 5%, $1,000: akhir x1.57, CAGR +11.8%, DD maks -5.2%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 5.0%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +22% (32 tr), 2021 +22% (23 tr)
+  alokasi 5%, $10,000: akhir x1.58, CAGR +11.8%, DD maks -4.9%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 2; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 4.9%
+      per tahun: 2017 +0% (0 tr), 2018 +3% (3 tr), 2019 +2% (12 tr), 2020 +23% (32 tr), 2021 +22% (23 tr)
+  alokasi 10%, modal 1: akhir x2.43, CAGR +24.4%, DD maks -10.4%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.3%, median +19.8%, terburuk -53%; porsi ekuitas rata 10.0%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +5% (12 tr), 2020 +48% (32 tr), 2021 +48% (23 tr)
+  alokasi 10%, $1,000: akhir x2.43, CAGR +24.4%, DD maks -10.4%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 10.0%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +5% (12 tr), 2020 +48% (32 tr), 2021 +48% (23 tr)
+  alokasi 10%, $10,000: akhir x2.42, CAGR +24.3%, DD maks -9.6%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 6; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 9.6%
+      per tahun: 2017 +0% (0 tr), 2018 +6% (3 tr), 2019 +2% (12 tr), 2020 +50% (32 tr), 2021 +48% (23 tr)
+  alokasi 20%, modal 1: akhir x5.49, CAGR +51.9%, DD maks -20.5%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.3%, median +19.8%, terburuk -53%; porsi ekuitas rata 20.0%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +9% (12 tr), 2020 +108% (32 tr), 2021 +116% (23 tr)
+  alokasi 20%, $1,000: akhir x5.48, CAGR +51.8%, DD maks -20.6%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 20.0%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +9% (12 tr), 2020 +108% (32 tr), 2021 +116% (23 tr)
+  alokasi 20%, $10,000: akhir x5.10, CAGR +49.2%, DD maks -18.3%, trade 70 (lewat: posisi penuh 0, kas kurang 0, < $5 0; dipotong batas 0,5% vol 15; posisi bersamaan maks 4)
+      per trade: WR 90%, rata +13.2%, median +19.8%, terburuk -53%; porsi ekuitas rata 17.6%
+      per tahun: 2017 +0% (0 tr), 2018 +12% (3 tr), 2019 +8% (12 tr), 2020 +104% (32 tr), 2021 +106% (23 tr)
+  BTC beli-tahan 2017-09-01..2021-09-28: x8.49, CAGR +69.0%, DD maks -83.2%
+  [BARU] 99 sinyal
+  alokasi 5%, modal 1: akhir x1.16, CAGR +3.1%, DD maks -13.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 -0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -5% (46 tr), 2026 +1% (5 tr)
+  alokasi 5%, $1,000: akhir x1.16, CAGR +3.1%, DD maks -13.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 -0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -5% (46 tr), 2026 +1% (5 tr)
+  alokasi 5%, $10,000: akhir x1.16, CAGR +3.1%, DD maks -13.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 5.0%
+      per tahun: 2021 +6% (13 tr), 2022 -0% (21 tr), 2023 +5% (2 tr), 2024 +9% (11 tr), 2025 -5% (46 tr), 2026 +1% (5 tr)
+  alokasi 10%, modal 1: akhir x1.32, CAGR +5.7%, DD maks -25.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 10.0%
+      per tahun: 2021 +12% (13 tr), 2022 -1% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -11% (46 tr), 2026 +2% (5 tr)
+  alokasi 10%, $1,000: akhir x1.32, CAGR +5.7%, DD maks -25.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 10.0%
+      per tahun: 2021 +12% (13 tr), 2022 -1% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -11% (46 tr), 2026 +2% (5 tr)
+  alokasi 10%, $10,000: akhir x1.31, CAGR +5.5%, DD maks -25.6%, trade 98 (lewat: posisi penuh 1, kas kurang 0, < $5 0; dipotong batas 0,5% vol 1; posisi bersamaan maks 10)
+      per trade: WR 77%, rata +3.3%, median +19.8%, terburuk -54%; porsi ekuitas rata 9.9%
+      per tahun: 2021 +12% (13 tr), 2022 -2% (21 tr), 2023 +10% (2 tr), 2024 +19% (11 tr), 2025 -11% (46 tr), 2026 +2% (5 tr)
+  alokasi 20%, modal 1: akhir x1.44, CAGR +7.6%, DD maks -44.9%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 6)
+      per trade: WR 76%, rata +3.0%, median +19.8%, terburuk -54%; porsi ekuitas rata 19.9%
+      per tahun: 2021 +23% (13 tr), 2022 -3% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -32% (40 tr), 2026 +4% (5 tr)
+  alokasi 20%, $1,000: akhir x1.44, CAGR +7.6%, DD maks -45.0%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 0; posisi bersamaan maks 6)
+      per trade: WR 76%, rata +3.0%, median +19.8%, terburuk -54%; porsi ekuitas rata 19.9%
+      per tahun: 2021 +23% (13 tr), 2022 -3% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -32% (40 tr), 2026 +4% (5 tr)
+  alokasi 20%, $10,000: akhir x1.40, CAGR +6.9%, DD maks -45.0%, trade 92 (lewat: posisi penuh 0, kas kurang 7, < $5 0; dipotong batas 0,5% vol 1; posisi bersamaan maks 6)
+      per trade: WR 76%, rata +3.0%, median +19.8%, terburuk -54%; porsi ekuitas rata 19.7%
+      per tahun: 2021 +23% (13 tr), 2022 -6% (21 tr), 2023 +22% (2 tr), 2024 +40% (11 tr), 2025 -32% (40 tr), 2026 +4% (5 tr)
+  BTC beli-tahan 2021-10-01..2026-09-30: x1.74, CAGR +11.7%, DD maks -76.6%
+
+  Catatan: periode LAMA dari 2017-09-01 s/d exit trade LAMA terakhir (2021-09-28); BARU 2021-10-01 s/d 2026-10-07; tahun tanpa trade = 0% (kas menganggur, tanpa bunga).
+
+--- 3. Walk-forward (pilih b,s,l dari trade yang SELESAI sebelum 1 Jan tahun uji; T 90; modal 1)
+
+  ===== SL = order stop di bursa (dasar)
+  kriteria 'rata' (n latih >= 15; tahun 2019 = latih 2017-2018):
+   tahun  pilihan(b,s,l)    n    rata    WR  | tetap 0,6/0,2/0,5:  n    rata    WR
+   2019   (0.6, 0.2, 0.5)   12   +8.1%  83%  |                    12   +8.1%  83%
+   2020   (0.5, 0.3, 0)     48  +12.1%  75%  |                    36  +13.1%  89%
+   2021   (0.6, 0.3, 0)     35  +11.1%  80%  |                    35   +7.8%  83%
+   2022   (0.6, 0.3, 0)     18   +7.0%  72%  |                    18   +8.1%  83%
+   2023   (0.6, 0.3, 0)      4  +29.7% 100%  |                     4  +19.8% 100%
+   2024   (0.6, 0.3, 0)     10   -6.2%  60%  |                    10  +12.8%  90%
+   2025   (0.6, 0.3, 0)     46   -4.9%  61%  |                    46  -10.6%  57%
+   2026   (0.7, 0.3, 0)      1  -37.1%   0%  |                     5   +5.8%  80%
+   total LAMA: walk-forward n 79, WR 78%, rata +12.1%, jumlah +9.59
+   total BARU: walk-forward n 95, WR 66%, rata +0.3%, jumlah +0.30
+   portofolio 10% LAMA: walk-forward x2.14 CAGR +29.5% DD -39.1%
+   portofolio 10% BARU: walk-forward x0.65 CAGR -8.1% DD -61.0%
+  kriteria 'rata-1SE' (n latih >= 15; tahun 2019 = latih 2017-2018):
+   tahun  pilihan(b,s,l)    n    rata    WR  | tetap 0,6/0,2/0,5:  n    rata    WR
+   2019   (0.6, 0.2, 0.5)   12   +8.1%  83%  |                    12   +8.1%  83%
+   2020   (0.5, 0.2, 0)     48   +9.6%  85%  |                    36  +13.1%  89%
+   2021   (0.6, 0.3, 0)     35  +11.1%  80%  |                    35   +7.8%  83%
+   2022   (0.6, 0.3, 0)     18   +7.0%  72%  |                    18   +8.1%  83%
+   2023   (0.6, 0.3, 0)      4  +29.7% 100%  |                     4  +19.8% 100%
+   2024   (0.6, 0.3, 0)     10   -6.2%  60%  |                    10  +12.8%  90%
+   2025   (0.6, 0.3, 0)     46   -4.9%  61%  |                    46  -10.6%  57%
+   2026   (0.7, 0.3, 0)      1  -37.1%   0%  |                     5   +5.8%  80%
+   total LAMA: walk-forward n 79, WR 85%, rata +10.6%, jumlah +8.37
+   total BARU: walk-forward n 95, WR 66%, rata +0.3%, jumlah +0.30
+   portofolio 10% LAMA: walk-forward x2.17 CAGR +30.2% DD -23.1%
+   portofolio 10% BARU: walk-forward x0.65 CAGR -8.1% DD -61.0%
+   pembanding aturan tetap LAMA (tahun uji 2019+): n 67, WR 88%, rata +12.0%, jumlah +8.05; portofolio 10% x2.15 CAGR +32.3% DD -10.6%
+   pembanding aturan tetap BARU (tahun uji 2019+): n 99, WR 71%, rata -0.7%, jumlah -0.71; portofolio 10% x0.89 CAGR -2.4% DD -44.8%
+  Peta 27 kombinasi (rata %/trade, modal 1) LAMA | BARU:
+   b 0.5 s 0.1 l 0: LAMA n 103 WR  90%  +3.3% | BARU n 147 WR  84%  -1.6%
+   b 0.5 s 0.1 l 0.3: LAMA n 103 WR  73%  -1.1% | BARU n 147 WR  70%  -2.2%
+   b 0.5 s 0.1 l 0.5: LAMA n 103 WR  84%  +0.5% | BARU n 147 WR  75%  -5.2%
+   b 0.5 s 0.2 l 0: LAMA n 103 WR  84%  +7.9% | BARU n 147 WR  73%  -1.9%
+   b 0.5 s 0.2 l 0.3: LAMA n 103 WR  63%  +1.3% | BARU n 147 WR  56%  -2.3%
+   b 0.5 s 0.2 l 0.5: LAMA n 103 WR  77%  +3.8% | BARU n 147 WR  63%  -5.8%
+   b 0.5 s 0.3 l 0: LAMA n 103 WR  78% +12.1% | BARU n 147 WR  62%  -2.9%
+   b 0.5 s 0.3 l 0.3: LAMA n 103 WR  52%  +1.3% | BARU n 147 WR  46%  -2.8%
+   b 0.5 s 0.3 l 0.5: LAMA n 103 WR  66%  +3.5% | BARU n 147 WR  53%  -7.0%
+   b 0.6 s 0.1 l 0: LAMA n  70 WR  96%  +7.4% | BARU n  99 WR  86%  -0.2%
+   b 0.6 s 0.1 l 0.3: LAMA n  70 WR  77%  +0.6% | BARU n  99 WR  70%  -2.3%
+   b 0.6 s 0.1 l 0.5: LAMA n  70 WR  90%  +4.4% | BARU n  99 WR  78%  -3.5%
+   b 0.6 s 0.2 l 0: LAMA n  70 WR  93% +14.2% | BARU n  99 WR  80%  +3.5%
+   b 0.6 s 0.2 l 0.3: LAMA n  70 WR  73%  +6.2% | BARU n  99 WR  61%  +0.1%
+   b 0.6 s 0.2 l 0.5: LAMA n  70 WR  89% +12.3% | BARU n  99 WR  71%  -0.7%
+   b 0.6 s 0.3 l 0: LAMA n  70 WR  83% +15.2% | BARU n  99 WR  68%  +1.3%
+   b 0.6 s 0.3 l 0.3: LAMA n  70 WR  57%  +4.0% | BARU n  99 WR  45%  -3.0%
+   b 0.6 s 0.3 l 0.5: LAMA n  70 WR  74%  +9.8% | BARU n  99 WR  58%  -4.2%
+   b 0.7 s 0.1 l 0: LAMA n  37 WR  89%  +2.6% | BARU n  56 WR  89%  +2.2%
+   b 0.7 s 0.1 l 0.3: LAMA n  37 WR  73%  -1.0% | BARU n  56 WR  64%  -4.5%
+   b 0.7 s 0.1 l 0.5: LAMA n  37 WR  84%  +0.1% | BARU n  56 WR  82%  -0.9%
+   b 0.7 s 0.2 l 0: LAMA n  37 WR  84%  +6.2% | BARU n  56 WR  80%  +5.5%
+   b 0.7 s 0.2 l 0.3: LAMA n  37 WR  59%  -0.5% | BARU n  56 WR  54%  -3.4%
+   b 0.7 s 0.2 l 0.5: LAMA n  37 WR  76%  +2.8% | BARU n  56 WR  71%  -0.2%
+   b 0.7 s 0.3 l 0: LAMA n  37 WR  81% +13.5% | BARU n  56 WR  68%  +4.2%
+   b 0.7 s 0.3 l 0.3: LAMA n  37 WR  54%  +2.2% | BARU n  56 WR  43%  -4.5%
+   b 0.7 s 0.3 l 0.5: LAMA n  37 WR  73%  +9.3% | BARU n  56 WR  59%  -2.7%
+  kombinasi positif di KEDUA periode: 6/27: (0.6, 0.2, 0), (0.6, 0.2, 0.3), (0.6, 0.3, 0), (0.7, 0.1, 0), (0.7, 0.2, 0), (0.7, 0.3, 0)
+
+  ===== SL dicek di close 1 jam (jual pasar)
+  kriteria 'rata' (n latih >= 15; tahun 2019 = latih 2017-2018):
+   tahun  pilihan(b,s,l)    n    rata    WR  | tetap 0,6/0,2/0,5:  n    rata    WR
+   2019   (0.6, 0.2, 0.5)   12   +8.1%  83%  |                    12   +8.1%  83%
+   2020   (0.5, 0.3, 0)     48  +12.1%  75%  |                    36  +13.0%  89%
+   2021   (0.6, 0.3, 0)     35  +11.1%  80%  |                    35   +9.6%  86%
+   2022   (0.6, 0.3, 0)     18   +7.0%  72%  |                    18   +8.0%  83%
+   2023   (0.6, 0.3, 0)      4  +29.7% 100%  |                     4  +19.8% 100%
+   2024   (0.6, 0.3, 0)     10   -6.2%  60%  |                    10  +12.4%  90%
+   2025   (0.6, 0.3, 0)     46   -4.9%  61%  |                    46   -1.4%  70%
+   2026   (0.7, 0.3, 0)      1  -37.1%   0%  |                     5   +5.6%  80%
+   total LAMA: walk-forward n 79, WR 78%, rata +12.1%, jumlah +9.59
+   total BARU: walk-forward n 95, WR 66%, rata +0.3%, jumlah +0.30
+   portofolio 10% LAMA: walk-forward x2.14 CAGR +29.5% DD -39.1%
+   portofolio 10% BARU: walk-forward x0.65 CAGR -8.1% DD -61.0%
+  kriteria 'rata-1SE' (n latih >= 15; tahun 2019 = latih 2017-2018):
+   tahun  pilihan(b,s,l)    n    rata    WR  | tetap 0,6/0,2/0,5:  n    rata    WR
+   2019   (0.6, 0.2, 0.5)   12   +8.1%  83%  |                    12   +8.1%  83%
+   2020   (0.5, 0.2, 0)     48   +9.6%  85%  |                    36  +13.0%  89%
+   2021   (0.6, 0.3, 0)     35  +11.1%  80%  |                    35   +9.6%  86%
+   2022   (0.6, 0.3, 0)     18   +7.0%  72%  |                    18   +8.0%  83%
+   2023   (0.6, 0.3, 0)      4  +29.7% 100%  |                     4  +19.8% 100%
+   2024   (0.6, 0.3, 0)     10   -6.2%  60%  |                    10  +12.4%  90%
+   2025   (0.6, 0.3, 0)     46   -4.9%  61%  |                    46   -1.4%  70%
+   2026   (0.7, 0.3, 0)      1  -37.1%   0%  |                     5   +5.6%  80%
+   total LAMA: walk-forward n 79, WR 85%, rata +10.6%, jumlah +8.37
+   total BARU: walk-forward n 95, WR 66%, rata +0.3%, jumlah +0.30
+   portofolio 10% LAMA: walk-forward x2.17 CAGR +30.2% DD -23.1%
+   portofolio 10% BARU: walk-forward x0.65 CAGR -8.1% DD -61.0%
+   pembanding aturan tetap LAMA (tahun uji 2019+): n 67, WR 90%, rata +13.0%, jumlah +8.68; portofolio 10% x2.29 CAGR +35.4% DD -10.4%
+   pembanding aturan tetap BARU (tahun uji 2019+): n 99, WR 77%, rata +3.5%, jumlah +3.46; portofolio 10% x1.32 CAGR +5.7% DD -25.6%
+  Peta 27 kombinasi (rata %/trade, modal 1) LAMA | BARU:
+   b 0.5 s 0.1 l 0: LAMA n 103 WR  90%  +3.3% | BARU n 147 WR  84%  -1.6%
+   b 0.5 s 0.1 l 0.3: LAMA n 103 WR  76%  -0.5% | BARU n 147 WR  76%  -0.1%
+   b 0.5 s 0.1 l 0.5: LAMA n 103 WR  87%  +2.2% | BARU n 147 WR  81%  -1.9%
+   b 0.5 s 0.2 l 0: LAMA n 103 WR  84%  +7.9% | BARU n 147 WR  73%  -1.9%
+   b 0.5 s 0.2 l 0.3: LAMA n 103 WR  67%  +2.7% | BARU n 147 WR  62%  +0.3%
+   b 0.5 s 0.2 l 0.5: LAMA n 103 WR  79%  +4.9% | BARU n 147 WR  69%  -2.1%
+   b 0.5 s 0.3 l 0: LAMA n 103 WR  78% +12.1% | BARU n 147 WR  62%  -2.9%
+   b 0.5 s 0.3 l 0.3: LAMA n 103 WR  57%  +3.5% | BARU n 147 WR  52%  +0.2%
+   b 0.5 s 0.3 l 0.5: LAMA n 103 WR  69%  +6.2% | BARU n 147 WR  59%  -2.5%
+   b 0.6 s 0.1 l 0: LAMA n  70 WR  96%  +7.4% | BARU n  99 WR  86%  -0.2%
+   b 0.6 s 0.1 l 0.3: LAMA n  70 WR  84%  +3.3% | BARU n  99 WR  77%  +0.1%
+   b 0.6 s 0.1 l 0.5: LAMA n  70 WR  93%  +6.0% | BARU n  99 WR  84%  +0.2%
+   b 0.6 s 0.2 l 0: LAMA n  70 WR  93% +14.2% | BARU n  99 WR  80%  +3.5%
+   b 0.6 s 0.2 l 0.3: LAMA n  70 WR  81% +10.3% | BARU n  99 WR  68%  +2.8%
+   b 0.6 s 0.2 l 0.5: LAMA n  70 WR  90% +13.3% | BARU n  99 WR  77%  +3.5%
+   b 0.6 s 0.3 l 0: LAMA n  70 WR  83% +15.2% | BARU n  99 WR  68%  +1.3%
+   b 0.6 s 0.3 l 0.3: LAMA n  70 WR  66%  +8.5% | BARU n  99 WR  53%  +0.2%
+   b 0.6 s 0.3 l 0.5: LAMA n  70 WR  77% +11.8% | BARU n  99 WR  64%  +0.6%
+   b 0.7 s 0.1 l 0: LAMA n  37 WR  89%  +2.6% | BARU n  56 WR  89%  +2.2%
+   b 0.7 s 0.1 l 0.3: LAMA n  37 WR  78%  +0.3% | BARU n  56 WR  82%  +2.2%
+   b 0.7 s 0.1 l 0.5: LAMA n  37 WR  89%  +3.1% | BARU n  56 WR  89%  +3.1%
+   b 0.7 s 0.2 l 0: LAMA n  37 WR  84%  +6.2% | BARU n  56 WR  80%  +5.5%
+   b 0.7 s 0.2 l 0.3: LAMA n  37 WR  68%  +2.6% | BARU n  56 WR  71%  +4.8%
+   b 0.7 s 0.2 l 0.5: LAMA n  37 WR  81%  +6.2% | BARU n  56 WR  80%  +5.6%
+   b 0.7 s 0.3 l 0: LAMA n  37 WR  81% +13.5% | BARU n  56 WR  68%  +4.2%
+   b 0.7 s 0.3 l 0.3: LAMA n  37 WR  59%  +4.3% | BARU n  56 WR  61%  +5.3%
+   b 0.7 s 0.3 l 0.5: LAMA n  37 WR  78% +13.3% | BARU n  56 WR  68%  +4.6%
+  kombinasi positif di KEDUA periode: 19/27: (0.5, 0.2, 0.3), (0.5, 0.3, 0.3), (0.6, 0.1, 0.3), (0.6, 0.1, 0.5), (0.6, 0.2, 0), (0.6, 0.2, 0.3), (0.6, 0.2, 0.5), (0.6, 0.3, 0), (0.6, 0.3, 0.3), (0.6, 0.3, 0.5), (0.7, 0.1, 0), (0.7, 0.1, 0.3), (0.7, 0.1, 0.5), (0.7, 0.2, 0), (0.7, 0.2, 0.3), (0.7, 0.2, 0.5), (0.7, 0.3, 0), (0.7, 0.3, 0.3), (0.7, 0.3, 0.5)
+
+--- 4. Ketahanan (per trade modal 1 | portofolio 10% modal 1 BARU)
+
+  ===== SL = order stop di bursa (dasar)
+  dasar (limit, P0 60 mnt)                 LAMA n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -50%
+                                           BARU n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 [-6.4%, +4.2%]  porto CAGR -2.4% DD -44.8%
+  entry telat 1 jam (pasar di open)        LAMA n  70  WR  84%  rata  +9.2%  median +19.6%  terburuk  -50%
+                                           BARU n  99  WR  72%  rata  -0.0%  median +19.6%  terburuk  -50%  CI90 [-5.5%, +5.5%]  porto CAGR -1.2% DD -27.4%
+  biaya x2                                 LAMA n  70  WR  89%  rata +12.1%  median +19.5%  terburuk  -50%
+                                           BARU n  99  WR  71%  rata  -0.9%  median +19.5%  terburuk  -50%  CI90 [-6.6%, +4.0%]  porto CAGR -2.8% DD -45.3%
+  biaya x3                                 LAMA n  70  WR  89%  rata +11.9%  median +19.3%  terburuk  -50%
+                                           BARU n  99  WR  71%  rata  -1.1%  median +19.3%  terburuk  -50%  CI90 [-6.8%, +3.8%]  porto CAGR -3.2% DD -45.9%
+  telat 1 jam + biaya x2                   LAMA n  70  WR  84%  rata  +8.9%  median +19.3%  terburuk  -50%
+                                           BARU n  99  WR  72%  rata  -0.3%  median +19.3%  terburuk  -50%  CI90 [-5.8%, +5.2%]  porto CAGR -1.8% DD -28.5%
+  P0 = VWAP 30 menit                       LAMA n  68  WR  88%  rata +11.5%  median +19.8%  terburuk  -50%
+                                           BARU n  99  WR  70%  rata  -1.4%  median +19.8%  terburuk  -50%  CI90 [-7.1%, +3.5%]  porto CAGR -5.9% DD -58.0%
+  P0 = VWAP 120 menit                      LAMA n  71  WR  85%  rata  +9.1%  median +19.8%  terburuk  -50%
+                                           BARU n  98  WR  69%  rata  -1.6%  median +19.8%  terburuk  -50%  CI90 [-7.3%, +3.4%]  porto CAGR -1.6% DD -40.7%
+  $1.000 x10% ($100) + slippage            LAMA n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -50%
+                                           BARU n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 [-6.4%, +4.2%]  porto CAGR -2.4% DD -44.8%
+  $10.000 x10% ($1.000) + slippage         LAMA n  70  WR  89%  rata +12.3%  median +19.8%  terburuk  -51%
+                                           BARU n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 [-6.4%, +4.2%]  porto CAGR -2.4% DD -44.8%
+  hanya listing token sungguhan            LAMA n  64  WR  89%  rata +12.7%  median +19.8%  terburuk  -50%
+                                           BARU n  96  WR  70%  rata  -1.4%  median +19.8%  terburuk  -50%  CI90 [-7.2%, +3.7%]  porto CAGR -3.5% DD -44.8%
+  entry pada hari crash besar (12-13 Mar 2020, 19 Mei 2021, 13 Jun 2022, 9 Nov 2022, 10-11 Okt 2025): 15 trade, rata -17.5%
+  tanpa hari crash besar                   LAMA n  65  WR  89%  rata +12.9%  median +19.8%  terburuk  -50%
+                                           BARU n  89  WR  75%  rata  +2.5%  median +19.8%  terburuk  -50%  CI90 [-2.3%, +7.2%]  porto CAGR +3.6% DD -24.0%
+  hanya volume 24j sebelum entry >= $100,000 LAMA n  68  WR  90%  rata +13.2%  median +19.8%  terburuk  -50%
+                                           BARU n  99  WR  71%  rata  -0.7%  median +19.8%  terburuk  -50%  CI90 [-6.4%, +4.2%]  porto CAGR -2.4% DD -44.8%
+  hanya volume 24j sebelum entry >= $1,000,000 LAMA n  50  WR  92%  rata +14.2%  median +19.8%  terburuk  -50%
+                                           BARU n  98  WR  70%  rata  -0.9%  median +19.8%  terburuk  -50%  CI90 [-5.9%, +4.1%]  porto CAGR -2.8% DD -44.8%
+
+  ===== SL dicek di close 1 jam (jual pasar)
+  dasar (limit, P0 60 mnt)                 LAMA n  70  WR  90%  rata +13.3%  median +19.8%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 [-1.6%, +8.3%]  porto CAGR +5.7% DD -25.6%
+  entry telat 1 jam (pasar di open)        LAMA n  70  WR  86%  rata  +9.9%  median +19.6%  terburuk  -59%
+                                           BARU n  99  WR  72%  rata  -0.1%  median +19.6%  terburuk  -56%  CI90 [-5.6%, +5.3%]  porto CAGR -1.5% DD -28.8%
+  biaya x2                                 LAMA n  70  WR  90%  rata +13.0%  median +19.5%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.3%  median +19.5%  terburuk  -54%  CI90 [-1.8%, +8.1%]  porto CAGR +5.3% DD -25.8%
+  biaya x3                                 LAMA n  70  WR  90%  rata +12.8%  median +19.3%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.1%  median +19.3%  terburuk  -55%  CI90 [-2.0%, +7.9%]  porto CAGR +4.8% DD -25.9%
+  telat 1 jam + biaya x2                   LAMA n  70  WR  86%  rata  +9.6%  median +19.3%  terburuk  -59%
+                                           BARU n  99  WR  72%  rata  -0.5%  median +19.3%  terburuk  -56%  CI90 [-5.9%, +4.9%]  porto CAGR -2.1% DD -29.8%
+  P0 = VWAP 30 menit                       LAMA n  68  WR  91%  rata +13.4%  median +19.8%  terburuk  -53%
+                                           BARU n  99  WR  76%  rata  +2.8%  median +19.8%  terburuk  -53%  CI90 [-2.3%, +7.6%]  porto CAGR +4.0% DD -31.1%
+  P0 = VWAP 120 menit                      LAMA n  71  WR  86%  rata  +9.9%  median +19.8%  terburuk  -55%
+                                           BARU n  98  WR  76%  rata  +2.3%  median +19.8%  terburuk  -58%  CI90 [-2.8%, +7.2%]  porto CAGR +2.3% DD -29.0%
+  $1.000 x10% ($100) + slippage            LAMA n  70  WR  90%  rata +13.2%  median +19.8%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 [-1.6%, +8.3%]  porto CAGR +5.7% DD -25.6%
+  $10.000 x10% ($1.000) + slippage         LAMA n  70  WR  90%  rata +13.2%  median +19.8%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 [-1.6%, +8.3%]  porto CAGR +5.7% DD -25.6%
+  hanya listing token sungguhan            LAMA n  64  WR  91%  rata +13.7%  median +19.8%  terburuk  -53%
+                                           BARU n  96  WR  76%  rata  +3.0%  median +19.8%  terburuk  -54%  CI90 [-2.2%, +8.0%]  porto CAGR +4.5% DD -25.6%
+  entry pada hari crash besar (12-13 Mar 2020, 19 Mei 2021, 13 Jun 2022, 9 Nov 2022, 10-11 Okt 2025): 15 trade, rata +10.4%
+  tanpa hari crash besar                   LAMA n  65  WR  89%  rata +12.8%  median +19.8%  terburuk  -53%
+                                           BARU n  89  WR  76%  rata  +3.2%  median +19.8%  terburuk  -54%  CI90 [-1.9%, +8.1%]  porto CAGR +5.1% DD -22.9%
+  hanya volume 24j sebelum entry >= $100,000 LAMA n  68  WR  91%  rata +14.1%  median +19.8%  terburuk  -53%
+                                           BARU n  99  WR  77%  rata  +3.5%  median +19.8%  terburuk  -54%  CI90 [-1.6%, +8.3%]  porto CAGR +5.7% DD -25.6%
+  hanya volume 24j sebelum entry >= $1,000,000 LAMA n  50  WR  94%  rata +15.5%  median +19.8%  terburuk  -52%
+                                           BARU n  98  WR  77%  rata  +3.3%  median +19.8%  terburuk  -54%  CI90 [-1.6%, +8.2%]  porto CAGR +5.3% DD -25.6%
+  SL stop terisi di LOW candle (terburuk)  LAMA n  70  WR  89%  rata +12.1%  median +19.8%  terburuk  -54%
+                                           BARU n  99  WR  71%  rata  -2.3%  median +19.8%  terburuk  -82%  CI90 [-8.2%, +3.3%]  porto CAGR -6.2% DD -54.0%
+  tanpa SL (l = 0), maks 90 hari           LAMA n  70  WR  93%  rata +14.2%  median +19.8%  terburuk  -81%
+                                           BARU n  99  WR  80%  rata  +3.5%  median +19.8%  terburuk  -85%  CI90 [-2.2%, +8.7%]  porto CAGR +4.7% DD -39.2%
+
+  Pair USDT baru untuk koin yang SUDAH listing di Binance (pair BTC/BNB > 7 hari lebih dulu): 123 dari 588 listing (LAMA 93, BARU 30); di antara sinyal: 9
+
+--- 5. Pembanding ACAK (token yang SAMA dengan sinyal, beli pasar di open jam acak dalam 30 hari, TP/SL/T sama)
+  ===== SL = order stop di bursa (dasar)
+  LAMA: sinyal rata +12.3% vs acak rata -7.5% (P5..P95 -13.3%..-0.9%); p-acak 0.000 (200 undian)
+        portofolio 10%: sinyal CAGR +22.4% DD -10.6% vs acak (20 undian) CAGR median -11.2% [-26.1%..-2.8%], DD median -50.7%
+  BARU: sinyal rata -0.7% vs acak rata -15.7% (P5..P95 -21.1%..-10.8%); p-acak 0.000 (200 undian)
+        portofolio 10%: sinyal CAGR -2.4% DD -44.8% vs acak (20 undian) CAGR median -27.5% [-37.1%..-17.8%], DD median -82.2%
+  LAMA: acak dari SEMUA listing (273 token, 20 undian): rata +1.0%
+  BARU: acak dari SEMUA listing (315 token, 20 undian): rata -5.6%
+  t-stat rata vs 0: LAMA 4.85, BARU -0.22
+  ===== SL dicek di close 1 jam (jual pasar)
+  LAMA: sinyal rata +13.3% vs acak rata -6.7% (P5..P95 -12.4%..-0.8%); p-acak 0.000 (200 undian)
+        portofolio 10%: sinyal CAGR +24.4% DD -10.4% vs acak (20 undian) CAGR median -10.8% [-23.6%..-1.9%], DD median -50.9%
+  BARU: sinyal rata +3.5% vs acak rata -15.3% (P5..P95 -20.5%..-10.5%); p-acak 0.000 (200 undian)
+        portofolio 10%: sinyal CAGR +5.7% DD -25.6% vs acak (20 undian) CAGR median -27.7% [-35.9%..-18.7%], DD median -82.0%
+  LAMA: acak dari SEMUA listing (273 token, 20 undian): rata +1.4%
+  BARU: acak dari SEMUA listing (315 token, 20 undian): rata -5.3%
+  t-stat rata vs 0: LAMA 5.49, BARU 1.17
+
+--- 6. Listing baru Sep-Okt 2026 (data-api.binance.vision exchangeInfo + klines, data pasar publik)
+pair USDT TRADING di exchangeInfo: 506; belum ada di data harian bulanan: 21
+  di antaranya hari pertama < Agu 2026 (bukan listing baru / pair stablecoin/fiat dsb.): 15 (contoh TUSDUSDT, USDCUSDT, EURUSDT, PAXGUSDT, WBTCUSDT, WBETHUSDT, FDUSDUSDT, EURIUSDT)
+  listing pertama >= Agu 2026: 4
+  [token saham, dikecualikan] USDEBUSDT      listing 2026-10-07 12:00 UTC, P0 13.8361, limit 60% 5.53444, terendah sejak jam ke-2 (30 hari) -11%, sekarang -9%, umur 1 hari -> masih dipantau
+  [token saham, dikecualikan] SECZBUSDT      listing 2026-10-07 12:00 UTC, P0 12.3895, limit 60% 4.95579, terendah sejak jam ke-2 (30 hari) -12%, sekarang +2%, umur 1 hari -> masih dipantau
+  [token saham, dikecualikan] LLYBUSDT       listing 2026-10-07 12:00 UTC, P0 1168.22, limit 60% 467.289, terendah sejak jam ke-2 (30 hari) -3%, sekarang -2%, umur 1 hari -> masih dipantau
+  [token saham, dikecualikan] JPMBUSDT       listing 2026-10-07 12:00 UTC, P0 328.498, limit 60% 131.399, terendah sejak jam ke-2 (30 hari) -1%, sekarang -0%, umur 1 hari -> masih dipantau
+  MARSCOINUSDT   listing 2026-09-04 13:00 UTC, P0 0.170294, limit 60% 0.0681175, terendah sejak jam ke-2 (30 hari) -52%, sekarang -35%, umur 34 hari -> jendela 30 hari habis
+  HYPEUSDT       listing 2026-09-24 11:00 UTC, P0 91.377, limit 60% 36.5508, terendah sejak jam ke-2 (30 hari) -7%, sekarang -6%, umur 14 hari -> masih dipantau
+
+--- 7. Kesimpulan
+  * Angka lama BARU +7,1%/trade TIDAK bertahan: dengan SL & TP di candle entry dihitung benar, aturan dasar (SL order stop) BARU -0.7%/trade (t -0.22), portofolio 10% CAGR -2.4% DD -44.8%. LAMA tetap kuat +12.3% (t 4.85), CAGR +22.4% DD -10.6%.
+  * Varian SL dicek di close 1 jam (dipilih SETELAH melihat flash crash 10 Okt 2025 -> belum terbukti): LAMA +13.3% (t 5.49), BARU +3.5% (t 1.17, CI90 mencakup 0); portofolio 10% BARU CAGR +5.7% DD -25.6% (LAMA CAGR +24.4%).
+  * Walk-forward TIDAK lebih baik dari aturan tetap (memilih tanpa SL / TP 30% yang gagal di 2024-2025).
+  * Mengalahkan beli ACAK pada token yang sama (p < 0,005) karena listing baru cenderung terus turun; tetapi nilai absolut BARU ~0 s/d +3,5%/trade dan portofolio BARU kalah dari BTC beli-tahan (CAGR +11,7%, walau DD BTC -77%).
+  * Rapuh terhadap eksekusi: entry telat 1 jam (cek per jam, beli pasar) -> BARU ~0%. 2025 (46 sinyal, kluster Sep-Okt) negatif. Kapasitas bukan masalah untuk modal $1.000-$10.000.
+  => TIDAK LOLOS untuk uang nyata (BARU tidak signifikan). Bila dipasang di bot: mode KERTAS/uji maju dengan aturan tetap 0,6/0,2/0,5/90 + SL di close 1 jam, alokasi <= 5%.

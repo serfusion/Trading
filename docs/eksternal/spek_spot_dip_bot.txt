@@ -1,0 +1,72 @@
+# 💎 Spot dip -> bot Telegram mandiri: SPESIFIKASI versi terpasang + catatan port (8 Okt 2026)
+Dibuat oleh research/spot_paritas.py (fixture & uji). Angka uji: docs/eksternal/hasil_spot_paritas.txt.
+Fixture paritas: tests/data/spot_dip_paritas.json (39 contoh), tes: tests/test_spot_paritas.py (cloud & sniper_bot).
+
+## 0. TEMUAN PENTING: dokumen != kode
+docs/SPOT_PINDAI.md dan docs/SPOT_JATUH.md menyebut versi "terpasang" = 100 koin volume terbesar, pindai tiap 10 menit
+dengan candle berjalan, filter BTC > SMA200, quality() (umur/ambruk/volume panik), maks 20 posisi, cooldown 1 jam,
+cek TP dengan candle 15 menit, peringatan ⚠️ spot_warn. Kode itu ADA di commit 870aed1c (5 Okt) dan sempat di main
+(merge 093643ed), tetapi TERTIMPA oleh merge a2fea806 (PR #51 dari confident-keller, 6 Okt 07:22 UTC): branch itu
+membawa _spot.py lama (3f3792d8 lewati vol > P90 + 596c0990 daftar 20 koin). Akibatnya di branch ini, main, dan
+production (bold-davinci = main):
+  - cloud/api/_spot.py = 318 baris: 20 koin tetap, pindai SEKALI SEHARI, lewati vol > P90, maks 10 (SPOT_MAX).
+  - TIDAK ADA: quality(), filter BTC > SMA200, semesta 100 koin dinamis (pick_coins/universe), cek TP 15 menit,
+    COOLDOWN 1 jam, spot_warn. spot_model.json juga tidak punya kunci "kualitas"/"btc_filter"; "teruji" = angka
+    20 koin (spot_vol), bukan angka semua koin (spot_jatuh).
+  - cloud/api/tick.py memanggil spot_tick(max_open=SPOT_MAX bawaan 10) tanpa btc_filter/top/min_vol/use_quality.
+  - Aplikasi android tidak lagi menangani spot_warn (grep kosong). CLAUDE.md hanya menyebut skema spot_vol.
+  => Untuk bot mandiri, "versi terpasang" yang diport = versi 318 baris di bawah. Filter BTC/kualitas = opsi tambahan
+     (diuji ulang di hasil_spot_paritas.txt), bukan bagian kode cloud sekarang.
+
+## 1. Spesifikasi PERSIS cloud/api/_spot.py branch ini (sha256 spot_model.json 991bdf9a…975b)
+Semesta   : 20 koin tetap spot_model.json "coins": BTC ETH BNB SOL XRP ADA DOGE TRX LINK AVAX DOT LTC BCH XLM ATOM ETC
+            UNI NEAR AAVE FIL (pair <KOIN>USDT). Urutan pindai = urutan daftar (BTC dulu). Tanpa daftar dinamis.
+Data      : kline 1d Binance spot, limit 420 (termasuk candle hari ini yang masih berjalan) dari
+            data-api.binance.vision -> api.binance.us -> Twelve Data (maks 4 kredit/tick). Fitur HANYA dari candle
+            TUTUP (open_time + 1 hari <= sekarang). BTC diambil sekali per pindai (420 bar).
+Waktu     : tick cloud tiap 10 menit; pindai sekali per hari UTC begitu sekarang >= 00:05 UTC (07:05 WIB). Bila waktu
+            tick habis, sisa koin (state scan.todo) dilanjutkan tick berikutnya di hari yang sama.
+Fitur (15, urutan model "fitur"; c = close, h = high, semua dari candle tutup, indeks -1 = candle tutup terakhir):
+  dd20 = c[-1]/max(h[-20:]) - 1        dd60 = c[-1]/max(h[-60:]) - 1
+  rsi14, rsi2 = RSI Wilder/100: up/dn = EMA alpha 1/n mulai dari selisih PERTAMA seluruh riwayat (tanpa SMA awal);
+                None bila dn == 0 (fitur None -> koin dilewati)
+  red = jumlah candle merah beruntun (close < open) dihitung mundur dari candle terakhir, dipotong 6
+  r1, r3, r7, r30 = c[-1]/c[-1-k] - 1 (posisi bar, bukan tanggal)
+  z20 = (c[-1] - mean(c[-20:])) / std_sampel(c[-20:]) (0 bila std 0)
+  d50 = c[-1]/mean(c[-50:]) - 1         d200 = c[-1]/mean(c[-200:]) - 1
+  vol14 = std_sampel(ln(c[i]/c[i-1]) untuk 14 return terakhir)
+  btc_up = 1 bila close BTC (tanggal <= tanggal candle koin terakhir) > mean 200 close BTC terakhir, else 0
+  btc_r7 = bcl[-1]/bcl[-8] - 1
+  Syarat: >= 201 candle koin & >= 201 tanggal BTC <= tanggal terakhir koin, else None.
+Model     : 200 pohon gradient boosting (HistGradientBoosting diekspor). node = [daun?, fitur, ambang, nan_ke_kiri, kiri,
+            kanan, nilai]; ke kiri bila x <= ambang (NaN -> nan_ke_kiri). prob = 1/(1+exp(-(base + jumlah nilai daun))),
+            base 1,3775335121074086. Ambang 0,93. Model dilatih s.d. data 19 Sep 2026 (in-sample untuk masa lalu).
+Aturan 3 merah (aturan_merah = true): red >= 3 DAN r3 <= -10% DAN d200 > 0.
+Filter vol: vol_rank = peringkat vol14 sekarang di antara vol14 365 hari terakhir koin itu sendiri (termasuk sekarang,
+            ties rata-rata: (lebih_kecil + (sama+1)/2)/n); butuh >= 135 close dan >= 120 nilai, else None.
+            vol_rank > skip_vol 0,90 -> LEWATI. None -> TIDAK dilewati.
+Sinyal BELI: fitur ada DAN lolos vol DAN (p >= 0,93 ATAU 3 merah) DAN koin belum terbuka DAN koin belum CLOSE pada
+            tanggal UTC yang sama DAN posisi terbuka < SPOT_MAX (bawaan 10). Alasan: "model + 3 merah" / "model" /
+            "3 merah".
+            TIDAK ADA filter BTC > SMA200 (btc_up hanya fitur model), TIDAK ADA filter kualitas, TIDAK ADA cooldown jam.
+Entry     : harga = close candle berjalan saat pindai (± open hari itu pada 00:05 UTC). TP = round(entry*1,03; 8 desimal).
+            Batas waktu = 00:00 UTC hari pindai + 10 hari.
+Keluar    : dicek sekali per jam dengan 15 candle 1d. Candle pertama dengan hari_entry <= open_time < batas dan high >= TP
+            -> CLOSE di max(open candle itu, TP) (TP saja bila candle hari entry). Bila tidak dan sekarang >= batas ->
+            CLOSE di close candle terakhir yang tutup sebelum batas (hari ke-10). TANPA stop loss (SL -15% memperburuk).
+Hasil     : r = exit/entry - 1 - 0,30% (biaya pulang-pergi: fee 0,1%/sisi + slippage).
+Alokasi   : hanya teks "Maks 10% modal spot" (100 // SPOT_MAX). Cloud tidak membuka order (info saja).
+Status    : spot_status tiap 2 jam bila ada posisi / segera saat BELI/CLOSE; simpan 30 CLOSE terakhir.
+
+## 2. Bot mandiri (sniper_bot/strategi/spot_dip.py) dibanding spesifikasi (diperiksa dengan fixture: 39/39 cocok)
+SAMA      : fitur, pohon & prob, 3 merah, vol_rank & skip_vol, alasan, TP +3%, batas 00:00 UTC + 10 hari, tanpa SL,
+            spot_model.json identik (sha256 sama).
+TAMBAHAN  : filter_btc_sma200 (bawaan true), filter_kualitas (config.py bawaan TRUE, config.example.yaml FALSE ->
+            samakan!), jeda_ulang_jam 1 (dihitung dari waktu ENTRY, cloud: "belum CLOSE hari yang sama"), jendela pindai
+            00:05-06:00 UTC, ukuran nyata 10% modal x 10 slot, TP sebagai order limit di bursa.
+BEDA KECIL: volume panik bot = volume hari t / rata-rata 30 hari SEBELUM t (riset: rata-rata 30 hari TERMASUK t;
+            ambang setara riset ~3,22x rata-rata 29 hari sebelumnya). Umur bot = jumlah bar (maks 420) >= 365, riset =
+            hari sejak bar pertama koin. Entry bot = harga isi market order (bukan open), TP = isi x 1,03 tanpa pembulatan
+            -> broker harus membulatkan ke tickSize (PEPE tick 1e-8 = 0,1% harga).
+RSI       : bergantung panjang riwayat (EMA dari bar pertama); 400 vs semua bar: selisih fitur <= ~1e-11, tidak ada
+            keputusan berubah (lihat baris terakhir hasil_spot_paritas.txt). Live: ambil 420 bar seperti cloud.
