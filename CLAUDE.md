@@ -354,6 +354,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   66,1%/+0,261R, konf 70,3%/+0,296R, ⚡ 65,8%/+0,466R, lapisan 64,2%/+0,347R; `research.verifikasi --cepat` → riwayat.json).
   `cloud_XAU.csv` kini = replay live dengan jeda 60 jam; tanpa jeda = `cloud_XAU_tanpajeda.csv`. Aplikasi 4.21.
 
+## Peringkat semua sinyal & 🧪 sinyal trader (8 Okt 2026 — `docs/SINYAL_TRADER.md`)
+- DIPASANG (aplikasi 4.23): `research/peringkat.py` → `cloud/api/peringkat.json` (ikut GET /api/chat?riwayat=1) → kartu 🏆
+  di ⓘ: grup sinyal (R/sinyal setelah spread, replay live), spot (%), info (akurasi), filter. Jalankan ulang setelah riset baru.
+- 🧪 sinyal trader TIDAK LOLOS (tidak dipasang): `research/sinyal_trader.py` (Hyperliquid fill + riwayat OKX/Bitget/Binance/eToro
+  + potret posisi terbuka, data `data/research/eksternal/copy_multi/{hl_fills,trades,trades_buka}`). WR tinggi = rugi ditahan:
+  posisi terbuka trader terpilih WR 18–36%, −4…−8%; gabungan futures vs pilihan acak p 0,14; hanya Binance p 0,03 (1 periode =
+  kandidat). Opsi bila pengguna bilang "pasang": uji maju otomatis kandidat Binance atau ⚠️ "rugi ditahan" di kartu 👥.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

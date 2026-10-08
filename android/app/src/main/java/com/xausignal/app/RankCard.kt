@@ -147,6 +147,7 @@ private fun PeringkatList(daftar: org.json.JSONArray, keterangan: String) {
             }
             when (r.optString("status")) {
                 "label" -> append(" • label"); "kandidat" -> append(" • kandidat, belum terbukti")
+                "tidak lolos" -> append(" • TIDAK LOLOS uji (tidak dipasang)")
                 "info" -> if (g != "info") append(" • info")
             }
         }

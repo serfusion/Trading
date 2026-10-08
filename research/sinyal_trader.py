@@ -659,8 +659,32 @@ def uji(hari_hist: int = 90, langkah: int = 14) -> list[str]:
         L.append("")
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
     (CM.DIR / "sinyal_trader_uji.json").write_text(json.dumps(ringkas_json, ensure_ascii=False, indent=1), encoding="utf-8")
+    ringkas_peringkat(ringkas_json)
     print("\n".join(L))
     return L
+
+
+def _k(x: float, d: int = 2, tanda: bool = True) -> str:
+    """Angka gaya Indonesia: +0,65."""
+    return (f"{x:+.{d}f}" if tanda else f"{x:.{d}f}").replace(".", ",")
+
+
+def ringkas_peringkat(u: dict | None = None) -> dict:
+    """Baris 🧪 untuk research/peringkat.py (sinyal_trader_ringkas.json). Lolos hanya bila gabungan futures unggul atas
+    pilihan acak (p < 0,05) di uji bergulir DAN uji potret (posisi terbuka ikut) untuk aturan B."""
+    u = u or json.loads((CM.DIR / "sinyal_trader_uji.json").read_text(encoding="utf-8"))
+    nama = "B WR≥65 n≥30 PF≥1,5"
+    a, b = u[f"A|{nama}|gabungan futures (tanpa eToro)"], u[f"B|{nama}|gabungan futures (tanpa eToro)"]
+    bn = u.get(f"B|{nama}|binance") or {}
+    lolos = (a.get("p") or 1) < 0.05 and (b.get("p") or 1) < 0.05
+    out = {"n": b["n"], "wr": round(b["wr"], 1), "avg": round(b["avg"], 2), "periode": "30 hari terakhir (potret)",
+           "status": "dikirim" if lolos else "tidak lolos",
+           "catatan": (f"4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: "
+                       f"rata-rata {_k(b['avg'])}% vs semua trader {_k(b['semua_avg'])}%, p-acak {_k(b['p'], 2, False)} "
+                       "(tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi "
+                       f"ditahan). Binance saja {_k(bn.get('avg', 0))}% p {_k(bn.get('p', 1), 2, False)} (1 periode → kandidat).")}
+    (CM.DIR / "sinyal_trader_ringkas.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    return out
 
 
 if __name__ == "__main__":

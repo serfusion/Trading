@@ -150,7 +150,7 @@ def info() -> list[dict]:
     st = _sinyal_trader()
     if st:
         rows.append(st)
-    rows.sort(key=lambda r: -r["wr"])
+    rows.sort(key=lambda r: (r["status"] == "tidak lolos", -r["wr"]))    # yang tidak lolos di akhir grup
     return rows
 
 
@@ -160,7 +160,7 @@ def _sinyal_trader() -> dict | None:
     if not p.exists():
         return None
     d = json.loads(p.read_text(encoding="utf-8"))
-    return _row("info" if d.get("status") != "dikirim" else "sinyal", "🧪 Sinyal trader (posisi baru trader teruji)",
+    return _row("info" if d.get("status") != "dikirim" else "sinyal", "🧪 Sinyal trader (copy trader WR tinggi, 4 platform)",
                 {"n": d["n"], "wr": d["wr"], "avg": d["avg"], "periode": d["periode"]}, satuan="%",
                 status=d.get("status", "kandidat"), catatan=d.get("catatan", ""))
 

@@ -210,3 +210,9 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Dipasang: `cloud/api/_jeda_berita.py` (+ tests/test_cloud_jeda.py), tick.py (XAU_NEWS_SKIP), heartbeat `jeda`, aplikasi
   4.20 (baris ⏸️ di kartu sinyal + S&K), `jadwal.json` FOMC 2027 + pembaruan tiap jam di workflow arsip_data.
 - 7 Okt sore: jeda 60 jam + angka badge/riwayat dihitung ulang dari replay penuh (docs/MUSE.md bagian 60 jam), aplikasi 4.21.
+
+### 8 Okt 2026 — 📊 peringkat semua sinyal (aplikasi 4.23) & riset 🧪 sinyal trader (tidak lolos)
+- `research/peringkat.py` → `cloud/api/peringkat.json`; tes `tests/test_cloud_peringkat.py`; RankCard.kt `PeringkatList`.
+- `research/sinyal_trader.py`: unduhan Hyperliquid dihentikan di 1.225/1.386 akun (lanjutkan `unduh`, resumable);
+  4 platform lengkap; potret posisi terbuka 8 Okt. Hasil docs/SINYAL_TRADER.md + docs/eksternal/hasil_sinyal_trader.txt.
+

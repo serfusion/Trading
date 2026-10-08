@@ -361,6 +361,18 @@
    "peringkat": 23
   },
   {
+   "grup": "info",
+   "label": "🧪 Sinyal trader (copy trader WR tinggi, 4 platform)",
+   "n": 12180,
+   "wr": 75.7,
+   "avg": 0.65,
+   "satuan": "%",
+   "status": "tidak lolos",
+   "periode": "30 hari terakhir (potret)",
+   "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
+   "peringkat": 24
+  },
+  {
    "grup": "filter",
    "label": "⏸️ Jeda XAU 60 jam sebelum NFP/CPI/Fed",
    "status": "dikirim",
