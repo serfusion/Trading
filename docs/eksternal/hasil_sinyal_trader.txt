@@ -3,139 +3,139 @@
 Pilih trader dari posisi TUTUP 90 hari terakhir, ukur posisi yang mereka BUKA 14 hari berikutnya (tanpa melihat masa depan). Return salin = arah × (harga tutup / harga buka − 1) − biaya (futures 0,14–0,15%, eToro kripto 1%, eToro lain 0,2%); TANPA leverage (leverage memperbesar untung & rugi).
 Bisa disalin = tahan ≥ 1 jam. Pembanding: 'acak' = trader acak aktif sejumlah sama, 'semua' = semua trader aktif.
 
-- binance: 1402 posisi dari 12 trader, 2026-05-26 s.d. 2026-10-08
-- bitget: 544 posisi dari 8 trader, 2026-01-06 s.d. 2026-10-08
-- etoro: 3565 posisi dari 6 trader, 2020-08-10 s.d. 2026-10-06
-- hyperliquid: 27837 posisi dari 217 trader, 2025-09-03 s.d. 2026-10-08
-- okx: 1313 posisi dari 7 trader, 2026-07-07 s.d. 2026-10-08
+- binance: 61009 posisi dari 582 trader, 2025-08-23 s.d. 2026-10-08
+- bitget: 23224 posisi dari 342 trader, 2024-11-10 s.d. 2026-10-08
+- etoro: 103263 posisi dari 644 trader, 2013-09-18 s.d. 2026-10-08
+- hyperliquid: 49424 posisi dari 628 trader, 2025-09-03 s.d. 2026-10-08
+- okx: 24498 posisi dari 110 trader, 2026-07-07 s.d. 2026-10-08
 
 ## Aturan A WR≥60 n≥30 untung
   binance
-    terpilih : n   272 | WR  61.0% | rata  +1.11% | median  +0.58% | PF 2.03 | periode untung 1/1
-    acak     : n   261 | WR  62.1% | rata  +0.01% | median  +0.58% | PF 1.00
-    semua    : n   277 | WR  61.4% | rata  +0.12% | median  +0.58% | PF 1.06
+    terpilih : n  4412 | WR  78.6% | rata  +0.86% | median  +0.88% | PF 2.46 | periode untung 1/1 | p-acak 0.055
+    acak     : n  3175 | WR  74.4% | rata  +0.80% | median  +0.76% | PF 1.67
+    semua    : n 10017 | WR  64.3% | rata  +0.44% | median  +0.65% | PF 1.30
   bitget
-    terpilih : n 0 | periode untung 0/0
-    acak     : n 0
-    semua    : n 0
+    terpilih : n  1236 | WR  71.8% | rata  +1.61% | median  +1.08% | PF 1.69 | periode untung 3/4 | p-acak 0.125
+    acak     : n   801 | WR  59.7% | rata  -0.27% | median  +0.57% | PF 0.89
+    semua    : n  8525 | WR  57.6% | rata  +0.76% | median  +0.31% | PF 1.42
   etoro
-    terpilih : n  1133 | WR  64.0% | rata  +6.68% | median  +5.74% | PF 2.94 | periode untung 11/14
-    acak     : n   817 | WR  42.8% | rata  -0.63% | median  -1.61% | PF 0.88
-    semua    : n  2243 | WR  57.3% | rata  +4.44% | median  +1.93% | PF 2.19
+    terpilih : n 18990 | WR  72.6% | rata  +4.55% | median  +2.30% | PF 2.90 | periode untung 18/18 | p-acak 0.010
+    acak     : n 14042 | WR  59.9% | rata  +3.28% | median  +1.00% | PF 2.03
+    semua    : n 46608 | WR  59.9% | rata  +3.70% | median  +1.09% | PF 2.13
   hyperliquid
-    terpilih : n   478 | WR  50.8% | rata  +0.13% | median  +0.03% | PF 1.08 | periode untung 9/19
-    acak     : n   683 | WR  44.8% | rata  -0.70% | median  -0.24% | PF 0.63
-    semua    : n 20461 | WR  45.2% | rata  +0.63% | median  -0.13% | PF 1.32
+    terpilih : n  1537 | WR  59.0% | rata  +0.63% | median  +0.49% | PF 1.27 | periode untung 16/21 | p-acak 0.150
+    acak     : n  1596 | WR  45.1% | rata  +0.17% | median  -0.15% | PF 1.11
+    semua    : n 34990 | WR  47.7% | rata  +0.45% | median  -0.07% | PF 1.19
   okx
     terpilih : n 0 | periode untung 0/0
     acak     : n 0
     semua    : n 0
   gabungan futures (tanpa eToro)
-    terpilih : n  1209 | WR  61.8% | rata  +0.81% | median  +0.54% | PF 1.65 | periode untung 10/19
-    acak     : n   980 | WR  45.1% | rata  -0.16% | median  -0.14% | PF 0.91
-    semua    : n 22073 | WR  46.7% | rata  +0.67% | median  -0.09% | PF 1.35
+    terpilih : n 20451 | WR  75.6% | rata  +1.02% | median  +0.90% | PF 1.94 | periode untung 18/21 | p-acak 0.050
+    acak     : n 12822 | WR  60.4% | rata  +0.57% | median  +0.47% | PF 1.34
+    semua    : n 96041 | WR  57.6% | rata  +0.58% | median  +0.30% | PF 1.31
 
 ## Aturan B WR≥65 n≥30 PF≥1,5
   binance
-    terpilih : n   272 | WR  61.0% | rata  +1.11% | median  +0.58% | PF 2.03 | periode untung 1/1
-    acak     : n   208 | WR  57.7% | rata  -0.60% | median  +0.39% | PF 0.75
-    semua    : n   277 | WR  61.4% | rata  +0.12% | median  +0.58% | PF 1.06
+    terpilih : n  3836 | WR  80.7% | rata  +0.93% | median  +0.89% | PF 2.92 | periode untung 1/1 | p-acak 0.040
+    acak     : n  2565 | WR  63.5% | rata  +0.26% | median  +0.61% | PF 1.17
+    semua    : n 10017 | WR  64.3% | rata  +0.44% | median  +0.65% | PF 1.30
   bitget
-    terpilih : n 0 | periode untung 0/0
-    acak     : n 0
-    semua    : n 0
+    terpilih : n   954 | WR  71.8% | rata  +1.43% | median  +1.16% | PF 1.58 | periode untung 3/4 | p-acak 0.240
+    acak     : n   425 | WR  64.9% | rata  +0.71% | median  +0.90% | PF 1.33
+    semua    : n  8525 | WR  57.6% | rata  +0.76% | median  +0.31% | PF 1.42
   etoro
-    terpilih : n   897 | WR  71.5% | rata  +9.66% | median  +9.35% | PF 4.80 | periode untung 11/14
-    acak     : n   729 | WR  49.1% | rata  +1.31% | median  -0.07% | PF 1.33
-    semua    : n  2243 | WR  57.3% | rata  +4.44% | median  +1.93% | PF 2.19
+    terpilih : n 14800 | WR  75.9% | rata  +5.11% | median  +2.55% | PF 3.38 | periode untung 18/18 | p-acak 0.000
+    acak     : n 11416 | WR  59.7% | rata  +3.53% | median  +1.07% | PF 2.09
+    semua    : n 46608 | WR  59.9% | rata  +3.70% | median  +1.09% | PF 2.13
   hyperliquid
-    terpilih : n    95 | WR  53.7% | rata  -0.28% | median  +0.16% | PF 0.87 | periode untung 4/10
-    acak     : n   118 | WR  50.0% | rata  +0.19% | median  +0.00% | PF 1.20
-    semua    : n 20461 | WR  45.2% | rata  +0.63% | median  -0.13% | PF 1.32
+    terpilih : n   522 | WR  60.9% | rata  +1.26% | median  +0.73% | PF 1.46 | periode untung 16/20 | p-acak 0.085
+    acak     : n   459 | WR  51.2% | rata  +0.59% | median  +0.03% | PF 1.15
+    semua    : n 34990 | WR  47.7% | rata  +0.45% | median  -0.07% | PF 1.19
   okx
     terpilih : n 0 | periode untung 0/0
     acak     : n 0
     semua    : n 0
   gabungan futures (tanpa eToro)
-    terpilih : n   742 | WR  66.7% | rata  +1.00% | median  +0.81% | PF 1.81 | periode untung 7/12
-    acak     : n   388 | WR  51.5% | rata  +0.38% | median  +0.05% | PF 1.23
-    semua    : n 22073 | WR  46.7% | rata  +0.67% | median  -0.09% | PF 1.35
+    terpilih : n 15832 | WR  79.0% | rata  +1.13% | median  +0.91% | PF 2.24 | periode untung 18/20 | p-acak 0.025
+    acak     : n  9125 | WR  60.4% | rata  +0.42% | median  +0.47% | PF 1.24
+    semua    : n 96041 | WR  57.6% | rata  +0.58% | median  +0.30% | PF 1.31
 
 ## Aturan C WR≥70 n≥20 untung
   binance
-    terpilih : n    91 | WR  74.7% | rata  +1.62% | median  +1.33% | PF 2.75 | periode untung 1/1
-    acak     : n    16 | WR  50.0% | rata  +1.98% | median  +0.28% | PF 3.22
-    semua    : n   277 | WR  61.4% | rata  +0.12% | median  +0.58% | PF 1.06
+    terpilih : n  3972 | WR  82.2% | rata  +0.94% | median  +0.90% | PF 2.86 | periode untung 1/1 | p-acak 0.035
+    acak     : n  3617 | WR  59.6% | rata  +0.20% | median  +0.50% | PF 1.11
+    semua    : n 10017 | WR  64.3% | rata  +0.44% | median  +0.65% | PF 1.30
   bitget
-    terpilih : n 0 | periode untung 0/0
-    acak     : n 0
-    semua    : n 0
+    terpilih : n  1166 | WR  72.1% | rata  +1.16% | median  +1.00% | PF 1.43 | periode untung 4/4 | p-acak 0.325
+    acak     : n   546 | WR  58.8% | rata  -0.25% | median  +0.24% | PF 0.86
+    semua    : n  8525 | WR  57.6% | rata  +0.76% | median  +0.31% | PF 1.42
   etoro
-    terpilih : n   917 | WR  70.9% | rata  +9.42% | median  +9.24% | PF 4.66 | periode untung 10/14
-    acak     : n   750 | WR  41.6% | rata  -2.54% | median  -2.25% | PF 0.63
-    semua    : n  2243 | WR  57.3% | rata  +4.44% | median  +1.93% | PF 2.19
+    terpilih : n 14694 | WR  78.2% | rata  +5.80% | median  +2.96% | PF 3.90 | periode untung 18/18 | p-acak 0.000
+    acak     : n 13088 | WR  62.5% | rata  +4.18% | median  +1.41% | PF 2.43
+    semua    : n 46608 | WR  59.9% | rata  +3.70% | median  +1.09% | PF 2.13
   hyperliquid
-    terpilih : n   101 | WR  54.5% | rata  -0.55% | median  +0.22% | PF 0.81 | periode untung 4/11
-    acak     : n   277 | WR  44.4% | rata  -2.05% | median  -0.19% | PF 0.33
-    semua    : n 20461 | WR  45.2% | rata  +0.63% | median  -0.13% | PF 1.32
+    terpilih : n   681 | WR  68.6% | rata  +0.73% | median  +1.41% | PF 1.31 | periode untung 15/21 | p-acak 0.170
+    acak     : n   801 | WR  44.9% | rata  -0.03% | median  -0.13% | PF 0.98
+    semua    : n 34990 | WR  47.7% | rata  +0.45% | median  -0.07% | PF 1.19
   okx
     terpilih : n 0 | periode untung 0/0
     acak     : n 0
     semua    : n 0
   gabungan futures (tanpa eToro)
-    terpilih : n   630 | WR  71.1% | rata  +1.10% | median  +1.04% | PF 1.83 | periode untung 7/12
-    acak     : n   501 | WR  49.1% | rata  +2.09% | median  -0.04% | PF 2.11
-    semua    : n 22073 | WR  46.7% | rata  +0.67% | median  -0.09% | PF 1.35
+    terpilih : n 17468 | WR  80.8% | rata  +1.07% | median  +0.92% | PF 2.17 | periode untung 15/21 | p-acak 0.035
+    acak     : n 10686 | WR  60.3% | rata  +0.62% | median  +0.51% | PF 1.35
+    semua    : n 96041 | WR  57.6% | rata  +0.58% | median  +0.30% | PF 1.31
 
 ## Aturan D PF≥2 n≥30 (tanpa WR)
   binance
-    terpilih : n   272 | WR  61.0% | rata  +1.11% | median  +0.58% | PF 2.03 | periode untung 1/1
-    acak     : n   236 | WR  60.2% | rata  +1.23% | median  +0.56% | PF 2.06
-    semua    : n   277 | WR  61.4% | rata  +0.12% | median  +0.58% | PF 1.06
+    terpilih : n  3995 | WR  79.1% | rata  +1.02% | median  +0.89% | PF 2.99 | periode untung 1/1 | p-acak 0.015
+    acak     : n  2975 | WR  60.8% | rata  +0.21% | median  +0.59% | PF 1.13
+    semua    : n 10017 | WR  64.3% | rata  +0.44% | median  +0.65% | PF 1.30
   bitget
-    terpilih : n 0 | periode untung 0/0
-    acak     : n 0
-    semua    : n 0
+    terpilih : n  1098 | WR  67.8% | rata  +1.63% | median  +1.00% | PF 1.71 | periode untung 3/4 | p-acak 0.135
+    acak     : n   445 | WR  55.1% | rata  +1.72% | median  +0.31% | PF 1.87
+    semua    : n  8525 | WR  57.6% | rata  +0.76% | median  +0.31% | PF 1.42
   etoro
-    terpilih : n  1334 | WR  59.0% | rata  +5.76% | median  +4.21% | PF 2.56 | periode untung 12/17
-    acak     : n  1216 | WR  55.8% | rata  +3.20% | median  +1.30% | PF 1.70
-    semua    : n  2243 | WR  57.3% | rata  +4.44% | median  +1.93% | PF 2.19
+    terpilih : n 21260 | WR  65.5% | rata  +3.76% | median  +1.63% | PF 2.33 | periode untung 18/18 | p-acak 0.245
+    acak     : n 15619 | WR  60.9% | rata  +3.25% | median  +1.06% | PF 2.03
+    semua    : n 46608 | WR  59.9% | rata  +3.70% | median  +1.09% | PF 2.13
   hyperliquid
-    terpilih : n   664 | WR  50.5% | rata  +0.59% | median  +0.02% | PF 1.27 | periode untung 13/19
-    acak     : n   683 | WR  43.8% | rata  +0.15% | median  -0.10% | PF 1.11
-    semua    : n 20461 | WR  45.2% | rata  +0.63% | median  -0.13% | PF 1.32
+    terpilih : n  1452 | WR  52.8% | rata  +0.86% | median  +0.09% | PF 1.40 | periode untung 15/21 | p-acak 0.115
+    acak     : n  1367 | WR  47.7% | rata  +0.32% | median  -0.11% | PF 1.10
+    semua    : n 34990 | WR  47.7% | rata  +0.45% | median  -0.07% | PF 1.19
   okx
     terpilih : n 0 | periode untung 0/0
     acak     : n 0
     semua    : n 0
   gabungan futures (tanpa eToro)
-    terpilih : n  1328 | WR  58.4% | rata  +0.85% | median  +0.33% | PF 1.51 | periode untung 14/19
-    acak     : n   820 | WR  51.8% | rata  +1.53% | median  +0.04% | PF 1.82
-    semua    : n 22073 | WR  46.7% | rata  +0.67% | median  -0.09% | PF 1.35
+    terpilih : n 18098 | WR  75.2% | rata  +1.23% | median  +0.90% | PF 2.33 | periode untung 18/21 | p-acak 0.060
+    acak     : n 11811 | WR  59.4% | rata  +0.69% | median  +0.43% | PF 1.38
+    semua    : n 96041 | WR  57.6% | rata  +0.58% | median  +0.30% | PF 1.31
 
 ## Aturan E WR≥55 n≥50 rata ≥0,3%
   binance
-    terpilih : n   272 | WR  61.0% | rata  +1.11% | median  +0.58% | PF 2.03 | periode untung 1/1
-    acak     : n   219 | WR  56.6% | rata  +0.80% | median  +0.37% | PF 1.77
-    semua    : n   277 | WR  61.4% | rata  +0.12% | median  +0.58% | PF 1.06
+    terpilih : n  4214 | WR  77.0% | rata  +0.85% | median  +0.89% | PF 2.21 | periode untung 1/1 | p-acak 0.085
+    acak     : n  2480 | WR  72.4% | rata  +0.70% | median  +0.86% | PF 1.88
+    semua    : n 10017 | WR  64.3% | rata  +0.44% | median  +0.65% | PF 1.30
   bitget
-    terpilih : n 0 | periode untung 0/0
-    acak     : n 0
-    semua    : n 0
+    terpilih : n   625 | WR  68.2% | rata  +1.60% | median  +1.14% | PF 1.63 | periode untung 3/3 | p-acak 0.230
+    acak     : n   421 | WR  61.8% | rata  +1.18% | median  +0.70% | PF 2.06
+    semua    : n  8525 | WR  57.6% | rata  +0.76% | median  +0.31% | PF 1.42
   etoro
-    terpilih : n  1245 | WR  62.3% | rata  +5.99% | median  +4.94% | PF 2.78 | periode untung 11/15
-    acak     : n  1287 | WR  61.9% | rata  +6.01% | median  +4.32% | PF 2.76
-    semua    : n  2243 | WR  57.3% | rata  +4.44% | median  +1.93% | PF 2.19
+    terpilih : n 19228 | WR  69.8% | rata  +4.22% | median  +2.03% | PF 2.69 | periode untung 18/18 | p-acak 0.060
+    acak     : n 11348 | WR  60.8% | rata  +3.51% | median  +1.11% | PF 2.06
+    semua    : n 46608 | WR  59.9% | rata  +3.70% | median  +1.09% | PF 2.13
   hyperliquid
-    terpilih : n   460 | WR  51.7% | rata  -0.94% | median  +0.03% | PF 0.63 | periode untung 9/14
-    acak     : n   277 | WR  52.0% | rata  -0.32% | median  +0.06% | PF 0.73
-    semua    : n 20461 | WR  45.2% | rata  +0.63% | median  -0.13% | PF 1.32
+    terpilih : n  1315 | WR  54.9% | rata  -0.13% | median  +0.13% | PF 0.94 | periode untung 15/21 | p-acak 0.665
+    acak     : n   983 | WR  44.3% | rata  -0.63% | median  -0.14% | PF 0.65
+    semua    : n 34990 | WR  47.7% | rata  +0.45% | median  -0.07% | PF 1.19
   okx
     terpilih : n 0 | periode untung 0/0
     acak     : n 0
     semua    : n 0
   gabungan futures (tanpa eToro)
-    terpilih : n  1233 | WR  61.6% | rata  +0.50% | median  +0.38% | PF 1.31 | periode untung 11/15
-    acak     : n  1022 | WR  42.6% | rata  +0.39% | median  -0.16% | PF 1.33
-    semua    : n 22073 | WR  46.7% | rata  +0.67% | median  -0.09% | PF 1.35
+    terpilih : n 18279 | WR  72.9% | rata  +0.91% | median  +0.90% | PF 1.71 | periode untung 17/21 | p-acak 0.070
+    acak     : n  8915 | WR  63.8% | rata  +0.70% | median  +0.55% | PF 1.54
+    semua    : n 96041 | WR  57.6% | rata  +0.58% | median  +0.30% | PF 1.31
 
