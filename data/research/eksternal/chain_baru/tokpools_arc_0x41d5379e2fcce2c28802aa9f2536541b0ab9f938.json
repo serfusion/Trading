@@ -1,0 +1,34 @@
+{
+ "pools": [
+  {
+   "id": "arc_0x664a0988cda725d6f843d95e62d129d6125015cb2f8741eabc063a30b309ff6a",
+   "address": "0x664a0988cda725d6f843d95e62d129d6125015cb2f8741eabc063a30b309ff6a",
+   "name": "WETH / USDC",
+   "created": "2026-10-03T15:07:06Z",
+   "dex": "uniswap-v4-arc",
+   "base": "0x41d5379e2fcce2c28802aa9f2536541b0ab9f938",
+   "quote": "0x3600000000000000000000000000000000000000",
+   "base_usd": 2555.1962095582,
+   "quote_usd": 0.999674,
+   "liq": 3940785.7638,
+   "vol24": 8153095.53135093,
+   "fdv": 15271306.6940092
+  }
+ ],
+ "tokens": {
+  "0x41d5379e2fcce2c28802aa9f2536541b0ab9f938": {
+   "address": "0x41d5379e2fcce2c28802aa9f2536541b0ab9f938",
+   "name": "Wrapped Ether",
+   "symbol": "WETH",
+   "decimals": 18,
+   "cg": null
+  },
+  "0x3600000000000000000000000000000000000000": {
+   "address": "0x3600000000000000000000000000000000000000",
+   "name": "USDC",
+   "symbol": "USDC",
+   "decimals": 6,
+   "cg": "usd-coin"
+  }
+ }
+}

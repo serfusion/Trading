@@ -30,3 +30,14 @@ data/research/eksternal/binance_copy/*.json
 
 # eToro: riwayat per investor disatukan di hist.json.gz (research/etoro_copy.py pack)
 data/research/eksternal/etoro/hist/
+
+# chain baru (research/chain_onchain.py): swap mentah Robinhood > 100 MB/file -> dibuat ulang dengan
+# `python -m research.chain_onchain robinhood` (±40 mnt); yang di-commit: pools/init/liq/blok + *_nilai_ringkas.parquet
+data/research/eksternal/chain_baru/onchain/*_swap_parts/
+data/research/eksternal/chain_baru/onchain/robinhood_swap.parquet
+data/research/eksternal/chain_baru/onchain/robinhood_nilai.parquet
+# token_bot: konfigurasi pribadi, log, posisi, cache
+token_bot/config.yaml
+token_bot/log/
+token_bot/posisi.json
+token_bot/cache_pool.json

@@ -1,0 +1,34 @@
+{
+ "pools": [
+  {
+   "id": "arc_0x5f79a55bba4969504218456033ce8add1415478a0a2e6905c91258332755ef8f",
+   "address": "0x5f79a55bba4969504218456033ce8add1415478a0a2e6905c91258332755ef8f",
+   "name": "CRCL / USDC",
+   "created": "2026-10-03T01:17:42Z",
+   "dex": "uniswap-v4-arc",
+   "base": "0xe071fdec0289fc1dfbc39552e5b5f67b4dd3bbfc",
+   "quote": "0x3600000000000000000000000000000000000000",
+   "base_usd": 77.1338694796,
+   "quote_usd": 0.999657,
+   "liq": 1111254.5242,
+   "vol24": 361797.194340658,
+   "fdv": 3654033.56324193
+  }
+ ],
+ "tokens": {
+  "0xe071fdec0289fc1dfbc39552e5b5f67b4dd3bbfc": {
+   "address": "0xe071fdec0289fc1dfbc39552e5b5f67b4dd3bbfc",
+   "name": "Circle Internet Group \u2022 Arc Token",
+   "symbol": "CRCL",
+   "decimals": 18,
+   "cg": null
+  },
+  "0x3600000000000000000000000000000000000000": {
+   "address": "0x3600000000000000000000000000000000000000",
+   "name": "USDC",
+   "symbol": "USDC",
+   "decimals": 6,
+   "cg": "usd-coin"
+  }
+ }
+}

@@ -1,0 +1,76 @@
+# Konfigurasi bot token — salin ke token_bot/config.yaml lalu ubah. Angka bawaan dari riset docs/TOKEN_BARU.md.
+# Alamat kontrak Uniswap: halaman resmi developers.uniswap.org (v3/v4 deployments), dicek 8 Okt 2026.
+# Token: alamat RESMI saja (banyak token TIRUAN beralamat mirip: awal & akhir sama, mis. USDG/NVDA/WETH palsu).
+
+ntfy_topic: ""          # isi nama topik ntfy.sh bila ingin notifikasi HP (opsional)
+
+live:                   # transaksi nyata — BAWAAN MATI. Perlu: live.aktif true + --live + env TOKEN_BOT_PK
+  aktif: false
+  maks_usd_per_trade: 25
+  maks_total_usd: 100
+  maks_trade_per_hari: 5
+
+bawaan:                 # dipakai bila pasangan tidak menulis sendiri
+  ukuran_usd: 200       # ukuran awal; diperkecil otomatis sampai slippage <= max_slippage
+  min_usd: 10
+  beli_bawah: 0.01      # beli hanya bila harga eksekusi >= 1% di bawah acuan (setelah fee+slippage+gas)
+  jual_atas: 0.01
+  max_slippage: 0.005   # 0,5% dari harga spot pool (termasuk fee pool)
+  tp: 0.02
+  sl: 0.04
+  biaya_gas_usd: 0.02
+  luar_jam: false       # saham: jangan transaksi saat bursa AS tutup (acuan basi)
+
+jaringan:
+  robinhood:
+    rpc: https://rpc.mainnet.chain.robinhood.com
+    chain_id: 4663
+    pool_manager: "0x8366a39cc670b4001a1121b8f6a443a643e40951"
+    v4_quoter: "0x8dc178efb8111bb0973dd9d722ebeff267c98f94"
+    state_view: "0xf3334192d15450cdd385c8b70e03f9a6bd9e673b"
+    universal_router: "0x8876789976decbfcbbbe364623c63652db8c0904"
+    permit2: "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+    v3_quoter: "0x33e885ed0ec9bf04ecfb19341582aadcb4c8a9e7"
+    swap_router02: "0xcaf681a66d020601342297493863e78c959e5cb2"
+    blok_awal: 1
+    span_log: 100000000   # filter satu nilai per posisi -> rentang besar diizinkan
+  arc:
+    rpc: https://rpc.mainnet.arc.io
+    chain_id: 5042
+    pool_manager: "0x8366a39CC670B4001A1121B8F6A443A643e40951"
+    v4_quoter: "0x8Dc178eFB8111BB0973Dd9d722ebeFF267c98F94"
+    state_view: "0xF3334192D15450CdD385c8B70e03f9A6bD9E673b"
+    universal_router: "0x4fcA4a51Ab4F23A7447b3284fBd7D73289A89Fb1"
+    permit2: "0x000000000022D473030F116dDEE9F6B43aC78BA3"
+    v3_quoter: ""         # tidak ada di halaman resmi
+    swap_router02: ""
+    blok_awal: 1948056
+    span_log: 5000        # RPC Arc menolak rentang >= 10.000 blok
+
+token:
+  robinhood:
+    USDG: {alamat: "0x5fc5360d0400a0fd4f2af552add042d716f1d168", acuan: "tetap:1"}
+    WETH: {alamat: "0x0bd7d308f8e1639fab988df18a8011f41eacad73", acuan: "binance:ETHUSDT"}
+    ETH:  {alamat: "0x0000000000000000000000000000000000000000", acuan: "binance:ETHUSDT"}
+    CRCL: {alamat: "0xdf0992e440dd0be65bd8439b609d6d4366bf1cb5", acuan: "saham:CRCL"}
+    NVDA: {alamat: "0xd0601ce157db5bdc3162bbac2a2c8af5320d9eec", acuan: "saham:NVDA"}
+    SPY:  {alamat: "0x117cc2133c37b721f49de2a7a74833232b3b4c0c", acuan: "saham:SPY"}
+    TSLA: {alamat: "0x322f0929c4625ed5bad873c95208d54e1c003b2d", acuan: "saham:TSLA"}
+    META: {alamat: "0xc0d6457c16cc70d6790dd43521c899c87ce02f35", acuan: "saham:META"}
+    MSTR: {alamat: "0xec262a75e413fafd0df80480274532c79d42da09", acuan: "saham:MSTR"}
+  arc:   # USDC/EURC/cirBTC = alamat RESMI dokumen Circle (developers.circle.com, dicek 8 Okt 2026).
+         # TIRUAN bervolume besar di GeckoTerminal: "cirBTC" 0x560f6b48..., "EURC" 0x834dcdca... -> JANGAN dipakai.
+    USDC: {alamat: "0x3600000000000000000000000000000000000000", acuan: "tetap:1"}
+    cirBTC: {alamat: "0x171a4217b86a807a64eb94757db6849fb4bdbaa0", acuan: "binance:BTCUSDT"}
+    EURC: {alamat: "0xbef5f6d51cb62b58e6a8f77868681825c6fe21c1", acuan: "binance:EURUSDT"}
+    WETH: {alamat: "0x128cc466b61f542da60c70e3aa11c10e19b84edb", acuan: "binance:ETHUSDT"}  # WETH jembatan (CoinGecko), bukan Circle — cek sendiri
+
+pasangan:
+  - {nama: "CRCL/USDG v3 0.3%", jaringan: robinhood, ver: 3, pool: "0x654e4143e82a5824445ade0824351c2a9acd95a8", token: CRCL, quote: USDG}
+  - {nama: "CRCL/USDG v4", jaringan: robinhood, ver: 4, pool: "0xdb9c34002d173981250969293af6f43f42a26f2110f19893bbe2ad373375e9e6", token: CRCL, quote: USDG}
+  - {nama: "NVDA/USDG v3 0.05%", jaringan: robinhood, ver: 3, pool: "0xd4eb21209c4d6093f80b5b84f5c45cc093ea14a3", token: NVDA, quote: USDG}
+  - {nama: "SPY/USDG v4 0.3%", jaringan: robinhood, ver: 4, pool: "0xfe2a80bb5618fd14984b92ca6d45bf5ba67443ddb1435e28b2e48df2fc1526cd", token: SPY, quote: USDG}
+  - {nama: "META/USDG v4 0.3%", jaringan: robinhood, ver: 4, pool: "0x5875d407a42965b0e768c8925cea290e06fa50603ef34fc99eb92a1050e6ae36", token: META, quote: USDG}
+  - {nama: "MSTR/USDG v4 0.25%", jaringan: robinhood, ver: 4, pool: "0x319bac87e616a89e241c10aeb8afd4892a852cdd8b373cd9765ecddc40b87cfe", token: MSTR, quote: USDG}
+  - {nama: "WETH/USDG v3 0.01%", jaringan: robinhood, ver: 3, pool: "0x52e65b17fb6e5ba00ed806f37afcd2daa50271ca", token: WETH, quote: USDG}
+  - {nama: "ETH/USDG v4", jaringan: robinhood, ver: 4, pool: "0xbac3aa3b91584a53a579b3c999a56756e954e59247e497bad1d25a4334bde551", token: ETH, quote: USDG}

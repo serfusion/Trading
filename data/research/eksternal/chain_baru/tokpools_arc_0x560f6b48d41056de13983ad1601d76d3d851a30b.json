@@ -1,0 +1,34 @@
+{
+ "pools": [
+  {
+   "id": "arc_0xf04cf7eb237dde531e1944612dde85a120e8cf4af58ac691ef5055e15b0e4f8c",
+   "address": "0xf04cf7eb237dde531e1944612dde85a120e8cf4af58ac691ef5055e15b0e4f8c",
+   "name": "cirBTC / USDC",
+   "created": "2026-10-03T15:07:27Z",
+   "dex": "uniswap-v4-arc",
+   "base": "0x560f6b48d41056de13983ad1601d76d3d851a30b",
+   "quote": "0x3600000000000000000000000000000000000000",
+   "base_usd": 83255.6232855228,
+   "quote_usd": 0.999641,
+   "liq": 38973310.8519,
+   "vol24": 14995476.9298688,
+   "fdv": 958125382.080639
+  }
+ ],
+ "tokens": {
+  "0x560f6b48d41056de13983ad1601d76d3d851a30b": {
+   "address": "0x560f6b48d41056de13983ad1601d76d3d851a30b",
+   "name": "Circle Wrapped Bitcoin",
+   "symbol": "cirBTC",
+   "decimals": 8,
+   "cg": null
+  },
+  "0x3600000000000000000000000000000000000000": {
+   "address": "0x3600000000000000000000000000000000000000",
+   "name": "USDC",
+   "symbol": "USDC",
+   "decimals": 6,
+   "cg": "usd-coin"
+  }
+ }
+}
