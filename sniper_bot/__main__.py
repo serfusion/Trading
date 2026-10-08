@@ -93,15 +93,23 @@ def cmd_replay() -> None:
     root = Path(__file__).resolve().parent.parent / "data" / "research" / "eksternal" / "listing"
     m = pd.read_parquet(root / "metrik.parquet")
     cfg = konfig.BAWAAN["listing_dip"]
-    rows = []
+    data = {}
     for r in m.itertuples():
         h = pd.read_parquet(root / "1h" / f"{r.sym}.parquet")
-        bars = [Bar(t.timestamp(), o, hh, lo, c) for t, o, hh, lo, c in zip(h.index, h.open, h.high, h.low, h.close)]
-        tr = simulasi(bars, r.t.timestamp(), r.p0, cfg)
-        if tr:
-            rows.append({"sym": r.sym, "tahun": r.t.year, "periode": r.periode, **tr})
-    d = pd.DataFrame(rows)
-    print(f"🎯 listing_dip (kode bot) pada {len(m)} listing Binance 2017-2026: {len(d)} trade")
+        data[r.sym] = [Bar(t.timestamp(), o, hh, lo, c) for t, o, hh, lo, c in
+                       zip(h.index, h.open, h.high, h.low, h.close)]
+    for mode in ("stop", "tutup"):
+        rows = []
+        for r in m.itertuples():
+            tr = simulasi(data[r.sym], r.t.timestamp(), r.p0, cfg, sl_mode=mode)
+            if tr:
+                rows.append({"sym": r.sym, "tahun": r.t.year, "periode": r.periode, **tr})
+        _laporan_replay(pd.DataFrame(rows), len(m), mode, cfg)
+
+
+def _laporan_replay(d, n_listing: int, mode: str, cfg: dict) -> None:
+    judul = {"stop": "SL order stop", "tutup": "SL dicek di close 1 jam (dipakai bot live)"}[mode]
+    print(f"\n🎯 listing_dip (kode bot), {judul}, {n_listing} listing Binance 2017-2026: {len(d)} trade")
     for per in ("LAMA", "BARU"):
         x = d[d.periode == per]
         print(f"  {per}: n {len(x)}, menang {(x.ret > 0).mean():.0%}, rata {x.ret.mean():+.1%}, median "
@@ -109,6 +117,7 @@ def cmd_replay() -> None:
     t = d.groupby("tahun").ret.agg(n="size", rata="mean", menang=lambda v: (v > 0).mean())
     print(t.round(3).to_string())
     print("Alasan keluar:", d.alasan.value_counts().to_dict())
+    print("Portofolio (nilai pasar per jam, research/listing_dip_porto.py): lihat docs/eksternal/hasil_listing_dip_porto.txt")
 
 
 def main(argv=None) -> None:

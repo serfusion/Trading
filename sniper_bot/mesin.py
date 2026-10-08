@@ -203,6 +203,22 @@ class Mesin:
                    f"{(self.now() - pos['t_buka']) / 86400:.1f} hari • ID {pos['id']}")
         return tutup
 
+    def _close_jam(self, pos: dict) -> float | None:
+        """Close candle 1 jam TERAKHIR yang sudah tutup (dicek sekali per jam per posisi), atau None."""
+        jam_ini = int(self.now() // 3600)
+        if pos.get("jam_cek") == jam_ini:
+            return None
+        try:
+            b = self.pasar.kline(pos["simbol"], "1h", limit=2)
+        except Exception as e:  # noqa: BLE001
+            self.galat(f"kline 1h {pos['simbol']}", e)
+            return None
+        tutup = [x for x in b if x.t + 3600 <= self.now()]
+        if not tutup:
+            return None
+        pos["jam_cek"] = jam_ini
+        return tutup[-1].c if tutup[-1].t >= pos["t_buka"] - 3600 else None
+
     def _cek_tp(self, pos: dict) -> dict | None:
         try:
             return self.broker.cek_order(pos["base"], pos["tp_order"])
@@ -247,10 +263,16 @@ class Mesin:
                     else:
                         self.tutup(pos, p, "TP", self.broker.isi_tp(pos["base"], pos["qty"], pos["tp_px"]))
                     continue
-            # 2) SL
-            if pos.get("sl_px") and p <= pos["sl_px"]:
-                self.tutup(pos, p, "SL")
-                continue
+            # 2) SL — harga menit, atau (listing dip) hanya di close candle 1 jam agar tidak tersapu wick flash crash
+            if pos.get("sl_px"):
+                if (pos.get("info") or {}).get("sl_close_jam"):
+                    c = self._close_jam(pos)
+                    if c is not None and c <= pos["sl_px"]:
+                        self.tutup(pos, p, "SL")
+                        continue
+                elif p <= pos["sl_px"]:
+                    self.tutup(pos, p, "SL")
+                    continue
             # 3) batas waktu
             if pos.get("deadline") and t >= pos["deadline"]:
                 self.tutup(pos, p, "WAKTU")

@@ -50,29 +50,55 @@ def kecualikan(simbol: str, base: str, t_listing: float) -> str | None:
     return None
 
 
-def simulasi(bars_1h: list[Bar], t_listing: float, p0: float, cfg: dict, biaya: float = 0.004) -> dict | None:
-    """Satu listing, candle 1 jam (riset). Kembalikan trade {masuk, keluar, ret, alasan, t_masuk, t_keluar} atau None."""
-    turun, tp, sl = cfg["turun"], cfg["tp"], cfg["sl"]
+def simulasi(bars_1h: list[Bar], t_listing: float, p0: float, cfg: dict, biaya: float = 0.004,
+             sl_mode: str = "stop") -> dict | None:
+    """Satu listing, candle 1 jam — semantik research/listing_dip_porto.trade (koreksi 8 Okt 2026).
+
+    Candle ENTRY ikut diperiksa (simulator lama melewatkannya -> BARU tampak +7,1%, sebenarnya -0,7%):
+      sl_mode "stop":  SL = order stop; di candle entry low <= SL pasti SETELAH terisi -> SL; lalu close >= TP -> TP.
+                       Candle berikutnya: SL dulu bila TP & SL di candle yang sama (konservatif).
+      sl_mode "tutup": SL hanya dicek di CLOSE candle 1 jam (jual pasar di close); TP limit lebih dulu.
+    Kembalikan trade {masuk, keluar, ret (bersih biaya), alasan, t_masuk, t_keluar} atau None."""
+    turun, tp_, sl_ = cfg["turun"], cfg["tp"], cfg["sl"]
     w_akhir = t_listing + 3600 + cfg["hari_jendela"] * HARI     # jendela dihitung dari akhir jam pertama (riset)
     lim = harga_limit(p0, turun)
     bars = [b for b in bars_1h if b.t >= t_listing + 3600]
+
+    def hasil(x, alasan, b0, b1):
+        return {"masuk": e, "keluar": x, "ret": x / e - 1 - biaya, "alasan": alasan, "t_masuk": b0.t, "t_keluar": b1.t}
+
     for i, b in enumerate(bars):
         if b.t >= w_akhir:
             return None
         e = isi_limit(lim, b)
         if e is None:
             continue
+        tp, sl = e * (1 + tp_), (e * (1 - sl_) if sl_ else -1.0)
+        if sl_mode == "tutup":
+            if b.c >= tp:
+                return hasil(tp, "TP", b, b)
+            if sl_ and b.c <= sl:
+                return hasil(b.c, "SL", b, b)
+        else:
+            if sl_ and b.l <= sl:
+                return hasil(sl, "SL", b, b)
+            if b.c >= tp:
+                return hasil(tp, "TP", b, b)
         akhir = b.t + cfg["hari_maks"] * HARI
         sisa = [x for x in bars[i + 1:] if x.t < akhir]
-        if not sisa:
-            return None
         for x in sisa:
-            k = keluar_bar(e, tp, sl, x)
-            if k:
-                return {"masuk": e, "keluar": k[0], "ret": k[0] / e - 1 - biaya, "alasan": k[1], "t_masuk": b.t,
-                        "t_keluar": x.t}
-        return {"masuk": e, "keluar": sisa[-1].c, "ret": sisa[-1].c / e - 1 - biaya, "alasan": "WAKTU",
-                "t_masuk": b.t, "t_keluar": sisa[-1].t}
+            if sl_mode == "tutup":
+                if x.h >= tp:
+                    return hasil(max(x.o, tp), "TP", b, x)
+                if sl_ and x.c <= sl:
+                    return hasil(x.c, "SL", b, x)
+            else:
+                k = keluar_bar(e, tp_, sl_, x)
+                if k:
+                    return hasil(k[0], k[1], b, x)
+        if not sisa:
+            return hasil(b.c, "WAKTU", b, b)
+        return hasil(sisa[-1].c, "WAKTU", b, sisa[-1])
     return None
 
 
@@ -180,8 +206,17 @@ class ListingDipMesin:
             if usd_ < 5:
                 d["catatan"] = "ukuran < $5 (volume/modal)"
                 continue
+            if self.m.broker.live and not self.cfg.get("izinkan_live", False):
+                d.update(status="sinyal", catatan="live: hanya kabar (strategi belum lolos uji BARU)")
+                from ..mesin import px
+                self.m.kabar(f"🎯 <b>SINYAL {sym}</b> harga {px(p)} ≤ {px(d['limit'])} (−{self.cfg['turun'] * 100:.0f}% dari P0). "
+                             f"TIDAK dieksekusi: listing dip belum lolos uji sejak 2021 (lihat tutorial). "
+                             f"Untuk mengizinkan: listing_dip.izinkan_live: true (risiko sendiri).")
+                continue
             pos = self.m.buka(self.nama, sym, d["base"], p, usd_, self.cfg["tp"], self.cfg["sl"],
-                              self.cfg["hari_maks"], limit=d["limit"], info={"p0": d["p0"]}, label=self.label)
+                              self.cfg["hari_maks"], limit=d["limit"],
+                              info={"p0": d["p0"], "sl_close_jam": bool(self.cfg.get("sl_close_jam", True))},
+                              label=self.label)
             if pos:
                 d["status"] = "dibeli"
             elif (self.m.gagal_terakhir or "").startswith("bursa:"):
@@ -191,4 +226,6 @@ class ListingDipMesin:
         n = {}
         for d in self.L.values():
             n[d["status"]] = n.get(d["status"], 0) + 1
-        return f"{self.label}: pantau {n.get('pantau', 0)}, tunggu P0 {n.get('menunggu_p0', 0)}, dibeli {n.get('dibeli', 0)}"
+        live = " (live: hanya kabar)" if self.m.broker.live and not self.cfg.get("izinkan_live") else ""
+        return (f"{self.label}{live}: pantau {n.get('pantau', 0)}, tunggu P0 {n.get('menunggu_p0', 0)}, "
+                f"dibeli {n.get('dibeli', 0)}, sinyal {n.get('sinyal', 0)}")

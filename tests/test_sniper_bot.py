@@ -337,3 +337,50 @@ def test_config_periksa(tmp_path):
     p.write_text("mode: nyata\n")
     with pytest.raises(ValueError):
         konfig.muat(str(p))
+
+
+def test_listing_live_hanya_kabar(tmp_path):
+    """Mode live: listing dip (belum lolos uji BARU) hanya mengabari, tidak membuka order."""
+    m, jam = _mesin(tmp_path)
+    m.broker.live = True                               # broker kertas berpura-pura live (tanpa jaringan)
+    m.satu_putaran()
+    m.pasar.simbol["NEWUSDT"] = {"base": "NEW", "status": "TRADING"}
+    m.pasar.listing["NEWUSDT"] = jam.t + 60
+    m.pasar.k1m["NEWUSDT"] = [Bar(jam.t + 60 + 60 * i, 10, 10, 10, 10, 1, 1000) for i in range(60)]
+    m.pasar.harga["NEWUSDT"] = 10.0
+    jam.t += 4200
+    m.satu_putaran()
+    jam.t += 400
+    m.satu_putaran()
+    m.pasar.harga["NEWUSDT"] = 3.0
+    jam.t += 61
+    m.satu_putaran()
+    assert not m.s["posisi"] and m.s["listing"]["NEWUSDT"]["status"] == "sinyal"
+    assert any("TIDAK dieksekusi" in p for p in m.tg.pesan)
+
+
+def test_sl_close_jam_abaikan_wick(tmp_path):
+    """SL listing dip dicek di close 1 jam: wick menit di bawah SL tidak menjual bila close jam di atas SL."""
+    m, jam = _mesin(tmp_path)
+    m.harga = {"XUSDT": 10.0}
+    pos = m.buka("listing_dip", "XUSDT", "X", 10.0, 20.0, 0.2, 0.5, 90, info={"sl_close_jam": True})
+    jam.t = (int(jam.t // 3600) + 1) * 3600 + 10      # jam baru dimulai
+    m.pasar.k1m["XUSDT"] = [Bar(jam.t - 7200, 10, 10, 3, 6), Bar(jam.t - 3600, 6, 7, 4.0, 6.0)]
+    m.harga["XUSDT"] = 4.5                             # harga menit di bawah SL 5
+    m.kelola()
+    assert pos["id"] in m.s["posisi"]                  # close jam 6.0 > SL 5 -> tahan
+    jam.t += 3600
+    m.pasar.k1m["XUSDT"] = [Bar(jam.t - 7200, 6, 7, 4.0, 6.0), Bar(jam.t - 3600, 6, 6, 4.0, 4.8)]
+    m.kelola()
+    assert pos["id"] not in m.s["posisi"] and m.s["riwayat"][0]["alasan"] == "SL"
+
+
+def test_simulasi_candle_entry_dicek():
+    """Koreksi 8 Okt: candle tempat limit terisi lalu jatuh > 50% di jam yang sama = SL (simulator lama melewatkannya)."""
+    cfg = dict(turun=0.6, tp=0.2, sl=0.5, hari_jendela=30, hari_maks=90)
+    jam = [Bar(T0 + 3600 * i, 10, 10, 9, 9.5) for i in range(1, 5)]
+    jam += [Bar(T0 + 3600 * 5, 5, 5, 1.5, 3.9), Bar(T0 + 3600 * 6, 3.9, 6.0, 3.8, 5.9)]
+    stop = ld.simulasi(jam, T0, 10.0, cfg, sl_mode="stop")
+    assert stop["alasan"] == "SL" and stop["keluar"] == pytest.approx(2.0)
+    tutup = ld.simulasi(jam, T0, 10.0, cfg, sl_mode="tutup")
+    assert tutup["alasan"] == "TP"                     # close 3.9 > SL 2 -> tahan; jam berikut high 6 >= TP 4.8

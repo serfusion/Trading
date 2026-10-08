@@ -38,6 +38,10 @@ BAWAAN: dict = {
         "maks_persen_volume": 0.005,     # ukuran <= 0,5% volume 24 jam koin itu
         "menit_p0": 60,
         "kabari_listing_baru": True,
+        # Uji ulang terkoreksi (docs/SNIPER_TELEGRAM.md): BARU (sejak Okt 2021) TIDAK lolos (SL stop -0,9%/trade;
+        # SL di close 1 jam +3,3% tapi dipilih setelah melihat data). Di mode live strategi ini hanya MENGABARI.
+        "izinkan_live": False,
+        "sl_close_jam": True,            # SL dicek di close candle 1 jam (bukan order stop / harga menit: flash crash)
     },
     "spot_dip": {
         "aktif": True,
