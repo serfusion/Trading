@@ -6,43 +6,43 @@
 
 # kertas = simulasi (uang tidak bergerak, saldo awal modal_kertas_usd). live = order sungguhan di bursa.
 # Mulailah dengan kertas minimal 2-4 pekan, bandingkan hasilnya dengan angka teruji di tutorial.
+# State kertas & live disimpan TERPISAH (sniper_bot/data/kertas/ dan sniper_bot/data/live/).
 mode: kertas
-modal_kertas_usd: 1000
+modal_kertas_usd: 500
 
 telegram:
   aktif: true
 
 bursa:
-  # binance (global) | tokocrypto | indodax | bybit | okx | gate | mexc  (id pustaka ccxt)
-  ccxt_id: binance
-  quote: USDT          # indodax: IDR (nilai USD dikonversi kurs USDT/IDR bursa)
+  # tokocrypto (terdaftar & diawasi OJK, disarankan untuk pengguna Indonesia) | binance | bybit | okx | kucoin | gate | mexc
+  ccxt_id: tokocrypto
+  quote: USDT          # hanya USDT/USDC/FDUSD (sinyal memakai harga Binance USDT; pair IDR tidak didukung)
 
-risiko:                # batas KERAS yang tidak bisa dilanggar strategi mana pun
-  maks_usd_per_trade: 50
-  maks_total_usd: 300          # jumlah nilai semua posisi terbuka
-  maks_posisi: 15
-  stop_rugi_harian_usd: 60     # rugi tertutup + mengambang hari ini; tercapai -> entry baru dijeda s/d 07:00 WIB
+risiko:                # batas KERAS yang tidak bisa dilanggar strategi mana pun — sesuaikan dengan modal
+  maks_usd_per_trade: 50       # ≈ 10% modal
+  maks_total_usd: 500          # ≈ modal; jumlah nilai semua posisi terbuka
+  maks_posisi: 12
+  stop_rugi_harian_usd: 60     # rugi tertutup + perubahan nilai posisi sejak 07:00 WIB; tercapai -> entry baru dijeda
   maks_trade_per_hari: 20
 
-listing_dip:           # 🎯 token baru Binance yang sudah turun >= 60% dari harga 60 menit pertama
+spot_dip:              # 💎 strategi UTAMA: koin besar yang turun, target +3% dalam 10 hari, tanpa SL (teruji 2019-2026)
   aktif: true
+  semesta: volume20            # volume20 = 20 koin volume terbesar saat itu (angka JUJUR) | tetap20 = 20 koin cloud
+  koin: []                     # isi daftar sendiri hanya bila tahu risikonya (belum diuji)
+  filter_btc_sma200: true      # hanya saat BTC di atas rata-rata 200 hari: DD BARU -38% -> -15%
+  filter_kualitas: false       # teruji netral
+  persen_modal: 0.10           # portofolio teruji: 10 slot x 10% ekuitas
+  maks_posisi: 10
+  jendela_jam: 1               # beli otomatis hanya 07:05-08:00 WIB (dekat open harian yang diuji)
+
+listing_dip:           # 🎯 token BARU Binance yang turun >= 60% dari harga 60 menit pertama
+  aktif: true                  # di mode live HANYA mengabari (belum lolos uji sejak Okt 2021)
+  izinkan_live: false          # true = ikut membeli di live. TIDAK disarankan (BARU -0,9%/trade)
   turun: 0.60
   tp: 0.20
   sl: 0.50
-  hari_jendela: 30
-  hari_maks: 90
-  persen_modal: 0.10           # 10% modal per trade (tetap dibatasi risiko.maks_usd_per_trade)
-  maks_persen_volume: 0.005    # ukuran posisi <= 0,5% volume 24 jam koin itu
+  persen_modal: 0.05
   kabari_listing_baru: true
-
-spot_dip:              # 💎 koin besar, peluang naik +3% dalam 10 hari (model teruji)
-  aktif: true
-  koin: []                     # kosong = 20 koin teruji (BTC ETH BNB SOL XRP ADA DOGE TRX LINK AVAX DOT LTC BCH XLM ATOM ETC UNI NEAR AAVE FIL)
-  filter_btc_sma200: true      # hanya saat BTC di atas rata-rata 200 hari (teruji memperbaiki DD)
-  filter_kualitas: false
-  persen_modal: 0.10           # portofolio teruji: 10 slot x 10%
-  maks_posisi: 10
-  jendela_jam: 6               # pindai otomatis 07:05-13:00 WIB (setelah candle harian tutup)
 
 dex:                   # 🦄 peringatan DEX lewat token_bot (butuh token_bot/config.yaml). HANYA info, tanpa order.
   aktif: false

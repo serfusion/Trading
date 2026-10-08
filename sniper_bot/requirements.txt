@@ -1,3 +1,4 @@
-# Bot sniper Telegram (python 3.10+). Modul DEX opsional butuh juga: eth-abi eth-utils
-pyyaml>=6.0
-ccxt>=4.3
+# Bot sniper Telegram (python 3.10+). Versi dipin = versi yang diuji (tests/test_sniper_bot.py).
+# Modul DEX opsional butuh juga: eth-abi eth-utils
+pyyaml==6.0.1
+ccxt==4.5.85

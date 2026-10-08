@@ -227,3 +227,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - token_bot: diuji baca-saja di pool asli Robinhood + 11 tes luring; mode live belum pernah dijalankan.
 - Belum: Arc v3/Aerodrome/Archery tidak dicakup on-chain (hanya v4); saham di luar jam NYSE tidak dinilai (Robinhood 24 jam
   market tidak ada datanya); kandidat listing (turun ≥60% → TP 20%) perlu uji maju.
+
+### 8 Okt 2026 — 🤖 sniper bot Telegram (`sniper_bot/`, tutorial docs/SNIPER_TELEGRAM.md)
+- Riset (workflow): `research/listing_dip_porto.py` (koreksi candle entry: listing dip BARU −0,7% → tidak lolos),
+  `research/listing_short.py` (short futures token baru, WR 47%, tidak dipasang; data `futures_listing/` 125 MB sudah
+  di-commit, semua file < 50 MB), `research/spot_paritas.py` (fixture 39 contoh + 8 varian; D jujur dipakai bot).
+- Bot: pasar (data publik Binance), broker kertas/live ccxt (TidakBisa vs TidakPasti, clientOrderId, IOC, qty dari selisih
+  saldo, TP dibulatkan ke atas), mesin (risiko, rugi harian sejak 00:00 UTC, isi sebagian, SL close 1 jam), Telegram
+  (chat pribadi, tombol konfirmasi), strategi 💎/🎯/🦄. `cek` nyata 8 Okt 16:02 UTC: OK (±8 mnt pertama kali, 2 listing dipantau).
+- Agen riset bursa/VPS & latensi DEX gagal (batas sesi) → bagian bursa ditulis dari ccxt + pencarian web (Tokocrypto OJK,
+  Binance pernah diblokir Kominfo 2023). Belum: uji maju kertas 2–4 pekan oleh pengguna sebelum live.
+

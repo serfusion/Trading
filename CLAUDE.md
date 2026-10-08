@@ -378,13 +378,27 @@ alarm tepat waktu) hanya menyentuh `android/`].
   $90 rb dalam sehari), direbut bot jeda 0,1–3 dtk; > 1 pekan: peluang ≥1% terbuka ≥10 dtk Arc ±$28/hari, Robinhood ±$950/hari
   untuk SEMUA pelaku; bersih semua pelaku Robinhood −$1,25 jt, 79/7.022 kontrak bersih > $1 rb. CRCL Robinhood selisih median
   5,5% pekan pertama → 0,3% sejak Sep (= fee) — cocok dengan pengalaman pengguna. Listing Binance: beli saat listing rugi
-  (BARU 90 hr median −52%); kandidat beli turun ≥60% dari VWAP 60 mnt, TP +20%, SL −50% (BARU WR 77%, +7,1%) belum terbukti.
+  (BARU 90 hr median −52%); kandidat beli turun ≥60% dari VWAP 60 mnt, TP +20%, SL −50% — DIKOREKSI 8 Okt (candle entry dicek): BARU −0,7%/trade → tidak lolos.
   Airdrop: median +31% di 5 mnt, −64% setelah 1 th → jual cepat.
 - `token_bot/` (BARU, terpisah dari bot XAU): `python -m token_bot cek|pantau|baru|cari`, kuotasi Quoter resmi, ukuran
   diperkecil sampai slippage ≤ max, cek jual-balik (honeypot), daftar putih alamat, saham hanya jam NYSE. Mode live bawaan MATI
   (`live.aktif` + `--live` + env TOKEN_BOT_PK) dan BELUM pernah diuji dengan dana nyata — sesi tidak boleh bertransaksi
   (permintaan baca log sempat ditolak pengaman "Real-World Transactions"); jangan jalankan live dari sesi. Tes
   `tests/test_token_bot.py`. Data besar (swap mentah Robinhood, *_nilai penuh) di-gitignore; yang di-commit *_nilai_ringkas.
+
+## Sniper bot Telegram `sniper_bot/` (8 Okt 2026 — `docs/SNIPER_TELEGRAM.md`)
+- Permintaan: bot otomatis ala sniper Telegram dengan strategi teruji bertahun-tahun, TERPISAH dari APK/cloud, + tutorial live.
+  `python -m sniper_bot jalan|cek|chat-id|uji-telegram|uji-bursa|replay`; tes `tests/test_sniper_bot.py`, `test_spot_paritas.py`.
+- Strategi utama 💎 spot dip (port `cloud/api/_spot.py`, paritas 1e-12) + filter BTC > SMA200, semesta bawaan `volume20` =
+  varian JUJUR D (`research/spot_paritas.py`, `docs/eksternal/spek_spot_dip_bot.txt`): BARU TP 90,9%, +0,80%/sinyal,
+  portofolio +8,5%/th DD −15%; LAMA +23,4%/th. Beli hanya 07:05–08:00 WIB, 10 slot × 10%, TP +3% limit, maks 10 hari, tanpa SL.
+- 🎯 listing dip: simulator terkoreksi (candle entry) BARU −0,7%/trade → live HANYA kabar (`izinkan_live` bawaan false); replay
+  kode bot = `research/listing_dip_porto` 169/169. Short listing futures (`research/listing_short.py`): WR 47%, tidak dipasang.
+- Keselamatan (review adversarial 8 Okt, 40 temuan diperbaiki): order tidak pasti (TidakPasti/galat) → bot dijeda + 🚨, tidak
+  beli ulang (`/beres`, `/hapus`); state per mode `sniper_bot/data/{kertas,live}/`; kunci `bot.lock`; perintah hanya chat
+  pribadi from.id = TELEGRAM_CHAT_ID; galat disensor (`telegram.sensor`); Binance menolak jalan bila kunci API boleh withdraw.
+- Bursa saran untuk Indonesia: Tokocrypto (`ccxt_id: tokocrypto`, pair USDT, OJK); IDR/Indodax tidak didukung. Sesi TIDAK boleh
+  menjalankan mode live/order nyata. Belum: uji maju kertas oleh pengguna; reconcile otomatis order tidak pasti.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

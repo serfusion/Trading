@@ -131,6 +131,10 @@ Aturan beli/jual (792 kombinasi dengan n ≥ 30 di kedua periode, biaya 0,4% pul
   masih +6,3%. Pembanding token yang SAMA dibeli di jam acak 30 hari pertama (TP/SL sama): **−11,8%** vs +9,6%.
   Tetangga parameter konsisten hanya untuk turun ≥ 60–70% (turun 10–50% → BARU negatif). Ditemukan dari 792
   kombinasi → **belum terbukti**, perlu uji maju; ±10–46 sinyal per tahun, untung kecil per trade, kalah −50% sesekali.
+- **KOREKSI 8 Okt 2026** (`research/listing_dip_porto.py`, `docs/eksternal/hasil_listing_dip_porto.txt`): simulator di atas
+  melewatkan candle tempat limit terisi. Dengan candle entry dicek, BARU menjadi **WR 71%, −0,7%/trade** (CI90 −6,4…+4,2%;
+  6 dari 8 SL di candle entry = flash crash 10 Okt 2025), portofolio BARU −2,4%/th DD −45%; SL di close 1 jam +3,5%/trade
+  (dipilih setelah melihat data). LAMA tetap +12,3%/trade. → kandidat **TIDAK lolos**; di `sniper_bot/` hanya kabar saat live.
 
 ## Airdrop "jackpot" ala ARB
 21 token airdrop yang listing Binance saat TGE (UNI, 1INCH, DYDX, ENS, OP, APT, ARB, TIA, JTO, JUP, STRK, ENA, W, ZK, ZRO,
