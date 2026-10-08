@@ -1,0 +1,56 @@
+# ============================================================================================
+# Sniper bot Telegram — salin file ini menjadi sniper_bot/config.yaml lalu ubah seperlunya.
+# Rahasia (token Telegram, kunci API bursa) TIDAK ditulis di sini, tetapi di sniper_bot/.env
+# Tutorial lengkap: docs/SNIPER_TELEGRAM.md
+# ============================================================================================
+
+# kertas = simulasi (uang tidak bergerak, saldo awal modal_kertas_usd). live = order sungguhan di bursa.
+# Mulailah dengan kertas minimal 2-4 pekan, bandingkan hasilnya dengan angka teruji di tutorial.
+mode: kertas
+modal_kertas_usd: 1000
+
+telegram:
+  aktif: true
+
+bursa:
+  # binance (global) | tokocrypto | indodax | bybit | okx | gate | mexc  (id pustaka ccxt)
+  ccxt_id: binance
+  quote: USDT          # indodax: IDR (nilai USD dikonversi kurs USDT/IDR bursa)
+
+risiko:                # batas KERAS yang tidak bisa dilanggar strategi mana pun
+  maks_usd_per_trade: 50
+  maks_total_usd: 300          # jumlah nilai semua posisi terbuka
+  maks_posisi: 15
+  stop_rugi_harian_usd: 60     # rugi tertutup + mengambang hari ini; tercapai -> entry baru dijeda s/d 07:00 WIB
+  maks_trade_per_hari: 20
+
+listing_dip:           # 🎯 token baru Binance yang sudah turun >= 60% dari harga 60 menit pertama
+  aktif: true
+  turun: 0.60
+  tp: 0.20
+  sl: 0.50
+  hari_jendela: 30
+  hari_maks: 90
+  persen_modal: 0.10           # 10% modal per trade (tetap dibatasi risiko.maks_usd_per_trade)
+  maks_persen_volume: 0.005    # ukuran posisi <= 0,5% volume 24 jam koin itu
+  kabari_listing_baru: true
+
+spot_dip:              # 💎 koin besar, peluang naik +3% dalam 10 hari (model teruji)
+  aktif: true
+  koin: []                     # kosong = 20 koin teruji (BTC ETH BNB SOL XRP ADA DOGE TRX LINK AVAX DOT LTC BCH XLM ATOM ETC UNI NEAR AAVE FIL)
+  filter_btc_sma200: true      # hanya saat BTC di atas rata-rata 200 hari (teruji memperbaiki DD)
+  filter_kualitas: false
+  persen_modal: 0.10           # portofolio teruji: 10 slot x 10%
+  maks_posisi: 10
+  jendela_jam: 6               # pindai otomatis 07:05-13:00 WIB (setelah candle harian tutup)
+
+dex:                   # 🦄 peringatan DEX lewat token_bot (butuh token_bot/config.yaml). HANYA info, tanpa order.
+  aktif: false
+  config: token_bot/config.yaml
+  interval_dtk: 15
+  pool_baru: [robinhood]
+
+jadwal:
+  harga_dtk: 60                # cek harga & posisi tiap 60 detik
+  listing_menit: 5             # cek listing baru tiap 5 menit
+  ringkasan_jam_utc: 1         # ringkasan harian 08:00 WIB

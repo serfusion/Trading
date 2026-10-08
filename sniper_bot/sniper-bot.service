@@ -1,0 +1,15 @@
+# systemd (Linux VPS): sudo cp sniper_bot/sniper-bot.service /etc/systemd/system/ ; ubah User & path di bawah
+[Unit]
+Description=Sniper bot Telegram
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/Trading
+ExecStart=/home/ubuntu/Trading/.venv/bin/python -m sniper_bot jalan
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
