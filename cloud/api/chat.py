@@ -162,7 +162,14 @@ class handler(BaseHTTPRequestHandler):
             path = os.path.join(os.path.dirname(__file__), f"{name}.json")
             try:
                 with open(path, encoding="utf-8") as f:
-                    self._send(200, {"ok": True, name: json.load(f)})
+                    data = json.load(f)
+                if name == "riwayat":                   # 📊 peringkat semua sinyal & label (research/peringkat.py)
+                    try:
+                        with open(os.path.join(os.path.dirname(__file__), "peringkat.json"), encoding="utf-8") as f:
+                            data["peringkat"] = json.load(f)
+                    except (OSError, ValueError):
+                        pass
+                self._send(200, {"ok": True, name: data})
             except Exception as exc:  # noqa: BLE001
                 self._send(200, {"ok": False, "error": _arsip.redact(f"{type(exc).__name__}: {exc}")})
             return

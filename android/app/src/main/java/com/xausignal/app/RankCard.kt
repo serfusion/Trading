@@ -67,11 +67,15 @@ fun RankCard(money: MoneySettings) {
                 b.optDouble("avg"), null, true)
         }
     }
-    if (rows.isEmpty()) return
+    val peringkat = d.optJSONObject("peringkat")
+    val daftar = peringkat?.optJSONArray("daftar")
+    if (rows.isEmpty() && daftar == null) return
     fun bags(avg: Double) = if (avg >= 0.245) 3 else if (avg >= 0.12) 2 else if (avg >= 0.05) 1 else 0
     AppCard {
-        Text("🏆 Urutan sinyal terbaik (teruji sejak Okt 2021)", fontWeight = FontWeight.Bold)
-        rows.sortedByDescending { it.avg }.forEachIndexed { i, r ->
+        // 4.23: peringkat SEMUA sinyal & label (⚡🥈🥉🔁🎯🌊💎📰🔄🧪 …) dari research/peringkat.py; cadangan: per kategori
+        if (daftar != null && daftar.length() > 0) PeringkatList(daftar, peringkat.optString("keterangan"))
+        else Text("🏆 Urutan sinyal terbaik (teruji sejak Okt 2021)", fontWeight = FontWeight.Bold)
+        if (daftar == null || daftar.length() == 0) rows.sortedByDescending { it.avg }.forEachIndexed { i, r ->
             val m = bags(r.avg)
             Row(Modifier.padding(top = 2.dp), verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -86,8 +90,9 @@ fun RankCard(money: MoneySettings) {
                     color = if (r.avg < 0.05) SellColor else BuyColor, style = MaterialTheme.typography.labelLarge)
             }
         }
-        Text("💰 = untung per sinyal (≥0,05R 💰, ≥0,12R 💰💰, ≥0,25R 💰💰💰). — = tidak menguntungkan. Gap: (n×) = " +
-            "jumlah sinyal sejak 2021, masih sedikit.", color = Muted, style = MaterialTheme.typography.labelSmall)
+        if (daftar == null || daftar.length() == 0)
+            Text("💰 = untung per sinyal (≥0,05R 💰, ≥0,12R 💰💰, ≥0,25R 💰💰💰). — = tidak menguntungkan. Gap: (n×) = " +
+                "jumlah sinyal sejak 2021, masih sedikit.", color = Muted, style = MaterialTheme.typography.labelSmall)
         LineDivider()
         Text("💼 Saran entry", fontWeight = FontWeight.Bold)
         if (money.modalIdr <= 0) {
@@ -109,6 +114,66 @@ fun RankCard(money: MoneySettings) {
         Text("Lot pasti tampil di kartu sinyal (SL tiap sinyal berbeda). Lemah = jangan entry / lot kecil.",
             color = Muted, style = MaterialTheme.typography.labelSmall)
     }
+}
+
+/**
+ * 📊 Peringkat semua sinyal & label (cloud/api/peringkat.json): grup sinyal (profit R per sinyal, lalu WR), spot (% per
+ * trade), info & prediksi (akurasi tebakan, bukan profit), lalu filter aktif tanpa nomor.
+ */
+@Composable
+private fun PeringkatList(daftar: org.json.JSONArray, keterangan: String) {
+    val judul = mapOf("sinyal" to "📈 Sinyal (profit rata-rata per sinyal)", "spot" to "💎 Spot",
+        "info" to "🎯 Info & prediksi (akurasi tebakan, bukan profit)", "filter" to "🛡️ Filter yang aktif")
+    Text("🏆 Peringkat semua sinyal & label (teruji)", fontWeight = FontWeight.Bold)
+    var grup = ""
+    for (i in 0 until daftar.length()) {
+        val r = daftar.optJSONObject(i) ?: continue
+        val g = r.optString("grup")
+        if (g != grup) {
+            grup = g
+            Text(judul[g] ?: g, fontWeight = FontWeight.Bold, color = Gold, style = MaterialTheme.typography.labelMedium,
+                modifier = Modifier.padding(top = 6.dp))
+        }
+        val satuan = r.optString("satuan")
+        val avg = if (r.isNull("avg")) null else r.optDouble("avg")
+        val wr = if (r.has("wr")) r.optDouble("wr") else null
+        val n = if (r.isNull("n")) null else r.optInt("n")
+        val sub = buildString {
+            if (wr != null) append(if (satuan == "akurasi") "benar ${fmt(wr, 0)}%" else "WR ${fmt(wr, 0)}%")
+            if (n != null && n > 0) append(" • n $n")
+            r.optJSONObject("lama")?.let { l ->
+                if (l.has("wr")) append(" • s.d. 2021: ${fmt(l.optDouble("wr"), 0)}%")
+                if (l.has("avg") && satuan == "R") append(" ${signed(l.optDouble("avg"))}R".replace('.', ','))
+            }
+            when (r.optString("status")) {
+                "label" -> append(" • label"); "kandidat" -> append(" • kandidat, belum terbukti")
+                "tidak lolos" -> append(" • TIDAK LOLOS uji (tidak dipasang)")
+                "info" -> if (g != "info") append(" • info")
+            }
+        }
+        Row(Modifier.padding(top = 2.dp), verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            if (r.has("peringkat")) RankBadge(r.optInt("peringkat")) else Text("•", color = Muted)
+            Column(Modifier.weight(1f)) {
+                Text(r.optString("label"), fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodySmall)
+                if (sub.isNotBlank()) Text(sub.trimStart(' ', '•'), color = Muted, style = MaterialTheme.typography.labelSmall)
+                r.optString("catatan").ifBlank { null }?.let {
+                    Text(it, color = Muted.copy(alpha = 0.8f), style = MaterialTheme.typography.labelSmall)
+                }
+            }
+            if (avg != null && !avg.isNaN()) {
+                val txt = if (satuan == "%") "${signed(avg)}%" else "${signed(avg)}R"
+                Text(txt.replace('.', ','), fontWeight = FontWeight.ExtraBold,
+                    color = if (avg < (if (satuan == "%") 0.0 else 0.05)) SellColor else BuyColor,
+                    style = MaterialTheme.typography.labelLarge)
+            } else if (wr != null && satuan == "akurasi") {
+                Text("${fmt(wr, 0)}%", fontWeight = FontWeight.ExtraBold, color = Gold,
+                    style = MaterialTheme.typography.labelLarge)
+            }
+        }
+    }
+    if (keterangan.isNotBlank()) Text(keterangan, color = Muted, style = MaterialTheme.typography.labelSmall,
+        modifier = Modifier.padding(top = 4.dp))
 }
 
 /** Nomor urut dalam lingkaran: 1 emas, 2 perak, 3 perunggu. */

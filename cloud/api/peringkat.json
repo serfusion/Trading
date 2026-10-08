@@ -1,0 +1,394 @@
+{
+ "dibuat": "2026-10-08",
+ "keterangan": "Sinyal: profit rata-rata per sinyal dalam R (1R = jarak SL) setelah spread, urut profit lalu WR. Spot: % per trade. Info: akurasi tebakan (bukan profit). Periode BARU = Okt 2021–2026, 'lama' = sebelum Okt 2021. Hasil historis, bukan jaminan.",
+ "daftar": [
+  {
+   "grup": "sinyal",
+   "label": "XAU ⚡ (konf+⭐)",
+   "n": 146,
+   "wr": 65.8,
+   "avg": 0.466,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 276,
+    "wr": 65.2,
+    "avg": 0.523
+   },
+   "catatan": "⚡ = kesempatan emas; lot lebih besar di aplikasi",
+   "peringkat": 1
+  },
+  {
+   "grup": "sinyal",
+   "label": "BTC 🎯 WR tinggi (lapisan saat volatil)",
+   "n": 121,
+   "wr": 76.0,
+   "avg": 0.46,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "wr": 78.0
+   },
+   "catatan": "label pada lapisan BTC",
+   "peringkat": 2
+  },
+  {
+   "grup": "sinyal",
+   "label": "BTC ⚡ (⭐)",
+   "n": 278,
+   "wr": 58.6,
+   "avg": 0.421,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 266,
+    "wr": 54.9,
+    "avg": 0.85
+   },
+   "catatan": "⚡ = kesempatan emas; lot lebih besar di aplikasi",
+   "peringkat": 3
+  },
+  {
+   "grup": "sinyal",
+   "label": "BTC 🔁 lapisan (lot ½)",
+   "n": 471,
+   "wr": 60.9,
+   "avg": 0.376,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 559,
+    "wr": 50.1,
+    "avg": 0.445
+   },
+   "peringkat": 4
+  },
+  {
+   "grup": "sinyal",
+   "label": "XAU 🔁 lapisan (lot ½)",
+   "n": 1473,
+   "wr": 64.2,
+   "avg": 0.347,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 1733,
+    "wr": 60.5,
+    "avg": 0.265
+   },
+   "peringkat": 5
+  },
+  {
+   "grup": "sinyal",
+   "label": "XAU 💰 konf",
+   "n": 78,
+   "wr": 66.7,
+   "avg": 0.285,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 139,
+    "wr": 42.4,
+    "avg": -0.336
+   },
+   "peringkat": 6
+  },
+  {
+   "grup": "sinyal",
+   "label": "BTC 🥈 (konf+⭐)",
+   "n": 457,
+   "wr": 55.1,
+   "avg": 0.276,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 552,
+    "wr": 42.9,
+    "avg": 0.02
+   },
+   "peringkat": 7
+  },
+  {
+   "grup": "sinyal",
+   "label": "ETH ⭐/konf+⭐ (saat 💰 BTC searah)",
+   "n": 530,
+   "wr": 55.7,
+   "avg": 0.245,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "peringkat": 8
+  },
+  {
+   "grup": "sinyal",
+   "label": "XAU 📰 sinyal ≤ 4 jam setelah berita besar",
+   "n": 139,
+   "wr": 61.9,
+   "avg": 0.239,
+   "satuan": "R",
+   "status": "label",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 188,
+    "wr": 58.5,
+    "avg": 0.201
+   },
+   "catatan": "tanda pada sinyal 💰 XAU (bukan sinyal terpisah)",
+   "peringkat": 9
+  },
+  {
+   "grup": "sinyal",
+   "label": "XAU 🥉 (konf, konf+⭐)",
+   "n": 527,
+   "wr": 67.2,
+   "avg": 0.209,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 749,
+    "wr": 66.5,
+    "avg": 0.156
+   },
+   "peringkat": 10
+  },
+  {
+   "grup": "sinyal",
+   "label": "DOGE (saat 💰 BTC searah)",
+   "n": 579,
+   "wr": 59.6,
+   "avg": 0.2,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 219,
+    "wr": 62.1,
+    "avg": 0.526
+   },
+   "catatan": "R riset (spread tetap), lot ½",
+   "peringkat": 11
+  },
+  {
+   "grup": "sinyal",
+   "label": "ETH 🌊 ikut arus",
+   "n": 94,
+   "wr": 64,
+   "avg": 0.19,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 50,
+    "wr": 64,
+    "avg": 0.18
+   },
+   "catatan": "8/9 tahun +",
+   "peringkat": 12
+  },
+  {
+   "grup": "sinyal",
+   "label": "XAU 🌊 ikut arus",
+   "n": 71,
+   "wr": 69,
+   "avg": 0.16,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 93,
+    "wr": 72,
+    "avg": 0.2
+   },
+   "catatan": "13/14 tahun +",
+   "peringkat": 13
+  },
+  {
+   "grup": "sinyal",
+   "label": "ADA (saat 💰 BTC searah)",
+   "n": 592,
+   "wr": 60.5,
+   "avg": 0.155,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 369,
+    "wr": 60.7,
+    "avg": 0.253
+   },
+   "catatan": "R riset (spread tetap), lot ½",
+   "peringkat": 14
+  },
+  {
+   "grup": "sinyal",
+   "label": "BTC 🌊 ikut arus",
+   "n": 185,
+   "wr": 62,
+   "avg": 0.12,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 160,
+    "wr": 63,
+    "avg": 0.16
+   },
+   "catatan": "11/11 tahun +",
+   "peringkat": 15
+  },
+  {
+   "grup": "sinyal",
+   "label": "Gap pekan forex (5 pair)",
+   "n": 37,
+   "wr": 67.6,
+   "avg": -0.067,
+   "satuan": "R",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "catatan": "sampel kecil sejak 2021",
+   "peringkat": 16
+  },
+  {
+   "grup": "spot",
+   "label": "💎 Spot Binance (peluang naik +3% ≤ 10 hari; 3 merah / model)",
+   "n": 603,
+   "wr": 92.0,
+   "avg": 1.37,
+   "satuan": "%",
+   "status": "dikirim",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 484,
+    "wr": 94.0,
+    "avg": 1.44
+   },
+   "catatan": "masuk acak 75.8% • kalah rata-rata -13.3%, terburuk -58.0%",
+   "peringkat": 17
+  },
+  {
+   "grup": "info",
+   "label": "🧪 Kandidat NFP: pendahulu membaik → emas naik 1 jam",
+   "n": 46,
+   "wr": 63.0,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "kandidat",
+   "periode": "2012–2021",
+   "catatan": "uji maju sejak 7 Okt 2026: 0/0 naik; lolos bila n ≥ 30 & ≥ 58%",
+   "peringkat": 18
+  },
+  {
+   "grup": "info",
+   "label": "🎯 Prediksi Fed: arah emas 1 jam (model sebelum rilis)",
+   "n": 34,
+   "wr": 61.8,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 26,
+    "wr": 57.7
+   },
+   "catatan": "dasar naik 57.9%",
+   "peringkat": 19
+  },
+  {
+   "grup": "info",
+   "label": "🎯 NFP: rilis lalu di atas perkiraan → emas naik 1 jam",
+   "n": null,
+   "wr": 61.0,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "wr": 72.0
+   },
+   "catatan": "aturan ⚡ sangat kuat (72% s.d. 2021 / 61% sejak Okt 2021)",
+   "peringkat": 20
+  },
+  {
+   "grup": "info",
+   "label": "🔄 Titik balik NFP (angka NFP pulih bulan depan)",
+   "n": 238,
+   "wr": 61.0,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "2001–2026",
+   "catatan": "info ekonomi, bukan arah emas; dasar 47%",
+   "peringkat": 21
+  },
+  {
+   "grup": "info",
+   "label": "🎯 Prediksi JOLTS: arah emas 1 jam (model sebelum rilis)",
+   "n": 48,
+   "wr": 58.3,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 47,
+    "wr": 72.3
+   },
+   "catatan": "dasar naik 46.3%",
+   "peringkat": 22
+  },
+  {
+   "grup": "info",
+   "label": "🎯 Prediksi NFP: arah emas 1 jam (model sebelum rilis)",
+   "n": 49,
+   "wr": 55.1,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 81,
+    "wr": 65.4
+   },
+   "catatan": "dasar naik 55.9%",
+   "peringkat": 23
+  },
+  {
+   "grup": "info",
+   "label": "🧪 Sinyal trader (copy trader WR tinggi, 4 platform)",
+   "n": 12180,
+   "wr": 75.7,
+   "avg": 0.65,
+   "satuan": "%",
+   "status": "tidak lolos",
+   "periode": "30 hari terakhir (potret)",
+   "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
+   "peringkat": 24
+  },
+  {
+   "grup": "filter",
+   "label": "⏸️ Jeda XAU 60 jam sebelum NFP/CPI/Fed",
+   "status": "dikirim",
+   "catatan": "sejak Okt 2021 PF 1,56 → 1,96, WR 62,4 → 65,1%; s.d. 2021 PF 1,35 → 1,62"
+  },
+  {
+   "grup": "filter",
+   "label": "BTC: lewati funding ramai & September, konf dimatikan",
+   "status": "dikirim",
+   "catatan": "konsisten di kedua periode (docs/RISET_DATA_EKSTERNAL.md, VERIFIKASI.md)"
+  },
+  {
+   "grup": "filter",
+   "label": "👥 Saringan copy trader",
+   "status": "info",
+   "catatan": "menekan rugi/akun hancur/DD; profit tidak lebih tinggi dari indeks"
+  }
+ ]
+}
