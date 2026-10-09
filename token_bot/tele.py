@@ -18,7 +18,14 @@ import urllib.request
 API = "https://api.telegram.org"
 # tombol persis gaya screenshot (wetharb/circarb): Saldo · Harga · Log · BUY ON/OFF · STOP · RESTART · Tx
 MENU = [["💰 Saldo", "📈 Harga"], ["📄 Log", "🧾 Tx"], ["🅰 BUY ON/OFF", "⏹ STOP", "🔄 RESTART"], ["❓ Bantuan"]]
-RAHASIA_ENV = ("TELEGRAM_TOKEN", "TOKEN_BOT_PK", "TWELVEDATA_API_KEY")
+RAHASIA_ENV = ("TELEGRAM_TOKEN", "TWELVEDATA_API_KEY")
+_URL_RAHASIA: dict[str, str] = {}     # URL RPC dari config -> nama host saja (URL bisa memuat kunci API di path)
+
+
+def rahasia_url(url: str) -> None:
+    from urllib.parse import urlsplit
+    if url and len(url) >= 8:
+        _URL_RAHASIA[url] = f"{urlsplit(url).scheme}://{urlsplit(url).hostname or '?'}/…"
 
 
 def esc(s) -> str:
@@ -27,6 +34,8 @@ def esc(s) -> str:
 
 def sensor(teks) -> str:
     s = str(teks)
+    for u, aman in sorted(_URL_RAHASIA.items(), key=lambda x: -len(x[0])):
+        s = s.replace(u, aman)
     s = re.sub(r"(https?://[^\s?'\"]+)\?[^\s'\"]*", r"\1?…", s)
     s = re.sub(r"/bot\d+:[A-Za-z0-9_-]+", "/bot…", s)
     s = re.sub(r"(/v[1-3]/)[A-Za-z0-9_-]{16,}", r"\1…", s)

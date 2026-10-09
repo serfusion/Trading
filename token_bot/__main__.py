@@ -1,14 +1,15 @@
 """Bot token DEX chain baru (Robinhood Chain, Arc, chain EVM lain dengan Uniswap v3/v4).
 
   python -m token_bot cek    [--config token_bot/config.yaml]           # satu kali: tabel harga, slippage, keputusan
-  python -m token_bot pantau [--config ...] [--interval 3] [--live]     # loop; tanpa --live = hanya sinyal (BAWAAN)
+  python -m token_bot pantau [--config ...] [--interval 3]              # loop; hanya sinyal (tabel + ntfy)
   python -m token_bot baru   [--config ...] --jaringan robinhood        # pantau pool BARU token daftar putih
   python -m token_bot cari   --jaringan arc --pool <poolId|alamat v3> [--blok N]
   python -m token_bot bot    [--config ...]                             # bot kontrol Telegram gaya screenshot (docs/ARB_BOT.md)
   python -m token_bot chat-id                                           # tampilkan chat_id Telegram (setelah /start)
 
 Tidak ada janji profit: riset docs/TOKEN_BARU.md menunjukkan selisih harga besar hanya ada di hari-hari pertama chain
-dan diambil bot dalam hitungan detik. Mode live hanya bila --live DAN live.aktif: true DAN env TOKEN_BOT_PK.
+dan diambil bot dalam hitungan detik. token_bot TIDAK mengirim transaksi (tanpa private key): hanya sinyal & simulasi
+kertas; eksekusi dilakukan pengguna sendiri di dompetnya (docs/ARB_BOT.md).
 """
 from __future__ import annotations
 
@@ -25,9 +26,10 @@ from pathlib import Path
 import yaml
 
 from . import acuan
-from .dex import T_INIT, Pool, cari_v3, cari_v4, decimals, quote, sqrtp_harga, symbol
+from .dex import T_INIT, Pool, cari_v3, cari_v4, decimals, sqrtp_harga, symbol
 from .rpc import Rpc
 from .strategi import Pasangan, evaluasi
+from .tele import sensor
 
 HERE = Path(__file__).resolve().parent
 CACHE = HERE / "cache_pool.json"
@@ -48,7 +50,6 @@ def muat_env(path: Path) -> None:
             k, _, v = line.partition("=")
             os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 LOG = HERE / "log"
-POSISI = HERE / "posisi.json"
 
 
 def muat_cfg(path: str) -> dict:
@@ -91,12 +92,16 @@ def pasangan(cfg: dict, rpcs: dict) -> list[tuple[str, Pasangan]]:
             if a.lower() not in (pool.c0.lower(), pool.c1.lower()):
                 raise SystemExit(f"{x['nama']}: token {a} tidak ada di pool {x['pool']} (alamat tiruan?)")
         kw = {k: x.get(k, d.get(k)) for k in ("ukuran_usd", "min_usd", "beli_bawah", "jual_atas", "max_slippage", "tp",
-                                              "sl", "biaya_gas_usd", "luar_jam") if x.get(k, d.get(k)) is not None}
+                                              "sl", "biaya_gas_usd", "luar_jam", "tebus_manual", "biaya_tebus")
+              if x.get(k, d.get(k)) is not None}
         out.append((net, Pasangan(x["nama"], pool, t["alamat"], q["alamat"], t["acuan"], q["acuan"], **kw)))
     return out
 
 
 def _rpcs(cfg: dict, nets: set[str]) -> dict[str, Rpc]:
+    from .tele import rahasia_url
+    for n in nets:
+        rahasia_url(cfg["jaringan"][n]["rpc"])     # URL RPC bisa memuat kunci API -> disensor dari pesan galat
     return {n: Rpc(cfg["jaringan"][n]["rpc"], cfg["jaringan"][n]["chain_id"]) for n in nets}
 
 
@@ -105,7 +110,8 @@ def _fmt(r: dict) -> str:
         v = r.get(k)
         return f.format(v) if isinstance(v, (int, float)) else "-"
     return (f"{r['pasangan']:<22} wajar {r['wajar']:.6g}  spot {p('selisih_spot')}  ukuran ${r.get('ukuran_usd', 0):,.0f}"
-            f"  slip {p('slippage_beli', '{:.2%}')}  beli {p('untung_beli')}  jual {p('untung_jual')}"
+            f"  slip {p('slippage_beli', '{:.2%}')}  diskon {p('untung_beli')}  bersih {p('untung_bersih')}"
+            f"  jual {p('untung_jual')}"
             f"  pp {p('rugi_pulang_pergi', '{:.2%}')}  -> {r['aksi']} {r['alasan']}")
 
 
@@ -124,7 +130,7 @@ def _log(r: dict) -> None:
     f = LOG / f"{datetime.now(timezone.utc):%Y-%m-%d}.csv"
     baru = not f.exists()
     keys = ["waktu", "pasangan", "aksi", "wajar", "spot", "selisih_spot", "ukuran_usd", "harga_beli", "slippage_beli",
-            "untung_beli", "harga_jual", "untung_jual", "rugi_pulang_pergi", "acuan_hidup", "alasan"]
+            "untung_beli", "untung_bersih", "harga_jual", "untung_jual", "rugi_pulang_pergi", "acuan_hidup", "alasan"]
     with f.open("a", newline="") as fh:
         w = csv.DictWriter(fh, keys, extrasaction="ignore")
         if baru:
@@ -132,73 +138,27 @@ def _log(r: dict) -> None:
         w.writerow({"waktu": datetime.now(timezone.utc).isoformat(timespec="seconds"), **r})
 
 
-def cmd_cek(cfg: dict, live: bool = False, loop: float | None = None) -> None:
+def cmd_cek(cfg: dict, loop: float | None = None) -> None:
+    """Tabel keputusan (sekali / loop). Hanya sinyal: tidak ada posisi & tidak ada transaksi."""
     nets = {x["jaringan"] for x in cfg["pasangan"]}
     rpcs = _rpcs(cfg, nets)
     prs = pasangan(cfg, rpcs)
-    dompet = None
-    if live:
-        if not cfg.get("live", {}).get("aktif"):
-            raise SystemExit("--live ditolak: set live.aktif: true di konfigurasi dulu (baca peringatan docs)")
-        from .eksekusi import Dompet
-        if len(nets) != 1:
-            raise SystemExit("mode live: satu jaringan per proses")
-        net = next(iter(nets))
-        dompet = Dompet(rpcs[net], cfg["jaringan"][net]["chain_id"])
-        print(f"LIVE dompet {dompet.addr} di {net}")
-    pos = json.loads(POSISI.read_text()) if POSISI.exists() else {}
-    hari, n_trade = None, 0
     while True:
         for net, p in prs:
             ncfg = cfg["jaringan"][net]
             try:
                 r = evaluasi(rpcs[net], p, ncfg["v4_quoter"] if p.pool.ver == 4 else ncfg["v3_quoter"],
-                             ncfg.get("state_view"), pos.get(p.nama))
+                             ncfg.get("state_view"))
             except Exception as e:  # noqa: BLE001
-                print(f"{p.nama}: galat {e}")
+                print(f"{p.nama}: galat {sensor(e)}")
                 continue
             print(_fmt(r), flush=True)
             _log(r)
-            if r["aksi"] in ("BELI", "JUAL"):
+            if r["aksi"] == "BELI":
                 _ntfy(cfg, _fmt(r))
-            if dompet and r["aksi"] in ("BELI", "JUAL"):
-                today = datetime.now(timezone.utc).date()
-                if today != hari:
-                    hari, n_trade = today, 0
-                lv = cfg["live"]
-                if n_trade >= lv.get("maks_trade_per_hari", 5):
-                    print("  batas trade harian tercapai")
-                    continue
-                n_trade += 1
-                _eksekusi(rpcs[net], cfg, ncfg, dompet, p, r, pos)
-                POSISI.write_text(json.dumps(pos, indent=1))
         if loop is None:
             return
         time.sleep(loop)
-
-
-def _eksekusi(rpc, cfg, ncfg, dompet, p: Pasangan, r: dict, pos: dict) -> None:
-    lv = cfg["live"]
-    q = ncfg["v4_quoter"] if p.pool.ver == 4 else ncfg["v3_quoter"]
-    dq = p.pool.d0 if p.quote.lower() == p.pool.c0.lower() else p.pool.d1
-    dt = p.pool.d1 if dq == p.pool.d0 else p.pool.d0
-    if r["aksi"] == "BELI":
-        usd = min(r["ukuran_usd"], lv.get("maks_usd_per_trade", 50))
-        if sum(v["usd"] for v in pos.values()) + usd > lv.get("maks_total_usd", 200):
-            print("  batas total posisi tercapai")
-            return
-        amt = int(usd / acuan.harga(p.acuan_quote) * 10 ** dq)
-        got = quote(rpc, p.pool, p.quote, amt, q)
-        h = dompet.swap(ncfg, p.pool, p.quote, amt, int(got * (1 - p.max_slippage)))
-        pos[p.nama] = {"token": got, "harga": (amt / 10 ** dq) / (got / 10 ** dt), "usd": usd, "tx": h,
-                       "waktu": datetime.now(timezone.utc).isoformat()}
-        print(f"  BELI terkirim {h}")
-    elif r["aksi"] == "JUAL" and p.nama in pos:
-        n = int(pos[p.nama]["token"])
-        got = quote(rpc, p.pool, p.token, n, q)
-        h = dompet.swap(ncfg, p.pool, p.token, n, int(got * (1 - p.max_slippage)))
-        print(f"  JUAL terkirim {h}: {(got / 10 ** dq):.4f} vs modal {pos[p.nama]['usd']:.2f}")
-        pos.pop(p.nama)
 
 
 def cmd_baru(cfg: dict, net: str, interval: float = 2.0) -> None:
@@ -261,7 +221,6 @@ def main(argv=None) -> None:
     ap.add_argument("perintah", choices=["cek", "pantau", "baru", "cari", "bot", "chat-id"])
     ap.add_argument("--config", default=str(HERE / "config.yaml"))
     ap.add_argument("--interval", type=float, default=3.0)
-    ap.add_argument("--live", action="store_true")
     ap.add_argument("--jaringan")
     ap.add_argument("--pool")
     ap.add_argument("--blok", type=int)
@@ -279,7 +238,7 @@ def main(argv=None) -> None:
     if a.perintah == "cek":
         cmd_cek(cfg)
     elif a.perintah == "pantau":
-        cmd_cek(cfg, live=a.live, loop=a.interval)
+        cmd_cek(cfg, loop=a.interval)
     elif a.perintah == "baru":
         cmd_baru(cfg, a.jaringan or "robinhood", a.interval)
     else:

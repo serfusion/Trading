@@ -8,6 +8,11 @@ Aturan (angka bawaan dari riset docs/TOKEN_BARU.md — ubah di konfigurasi):
   ukuran diperkecil (bagi dua) sampai muat; bila tetap tidak muat -> lewati (likuiditas tipis).
   Cek jual-balik: token yang dibeli dikuotasi dijual kembali; rugi pulang-pergi jauh di atas fee x2 + slippage x2
   -> tanda hook/pajak/honeypot -> lewati.
+  untung_beli  = DISKON SATU ARAH (acuan / harga beli - 1 - gas): belum termasuk biaya keluar.
+  untung_bersih = perkiraan setelah keluar: jual balik di DEX (acuan x (1 - biaya jual pool saat ini)) atau, untuk token
+                  jembatan (tebus_manual), tebus 1:1 dikurangi biaya_tebus. Keputusan BELI memakai untung_bersih.
+  tebus_manual: token jembatan kustodian (mis. WETH/CRCL/NVDA•Arc, docs/ARB_BOT.md) — keluar lewat TEBUS manual, jadi
+                bot tidak memberi sinyal JUAL DEX untuk posisinya (jual DEX di pool tipis = diskon yang sama).
 """
 from __future__ import annotations
 
@@ -34,6 +39,8 @@ class Pasangan:
     sl: float = 0.05
     biaya_gas_usd: float = 0.05
     luar_jam: bool = False  # izinkan transaksi saat acuan saham tutup (TIDAK disarankan)
+    tebus_manual: bool = False  # token jembatan: keluar lewat tebus 1:1 manual, bukan jual DEX
+    biaya_tebus: float = 0.01   # biaya jembatan (Arc<->Robinhood 1%, docs/eksternal/hasil_arb_cari.txt A3)
 
 
 def _dec(p: Pasangan, tok: str) -> int:
@@ -53,7 +60,7 @@ def evaluasi(rpc, p: Pasangan, quoter: str, state_view: str | None = None, posis
     s = harga_spot_token(rpc, p, state_view)
     dq, dt = _dec(p, p.quote), _dec(p, p.token)
     out = {"pasangan": p.nama, "wajar": wajar, "spot": s, "selisih_spot": s / wajar - 1, "acuan_hidup": hidup,
-           "aksi": "TUNGGU", "alasan": ""}
+           "quote_usd": ref_q, "aksi": "TUNGGU", "alasan": ""}
 
     # ---- sisi beli: kecilkan ukuran sampai slippage muat
     usd = p.ukuran_usd
@@ -81,9 +88,15 @@ def evaluasi(rpc, p: Pasangan, quoter: str, state_view: str | None = None, posis
     try:
         back = quote(rpc, p.pool, p.token, got, quoter)
         rt = 1 - (back / 10 ** dq) / (amt_in / 10 ** dq)
+        biaya_keluar = max(0.0, 1 - ((back / 10 ** dq) / (got / 10 ** dt)) / s)   # fee + dampak sisi jual vs spot
     except Exception:  # noqa: BLE001
-        rt = 1.0
+        rt, biaya_keluar = 1.0, 1.0
     out["rugi_pulang_pergi"] = rt
+    keluar = wajar * (1 - p.biaya_tebus) if p.tebus_manual else wajar * (1 - biaya_keluar)
+    out["untung_bersih"] = keluar / e_buy - 1 - 2 * p.biaya_gas_usd / usd
+    out["tebus_manual"] = p.tebus_manual
+    if p.tebus_manual:
+        out["nilai_tebus"] = wajar * (1 - p.biaya_tebus)
     batas_rt = 2 * slip + 0.03
     # ---- sisi jual (pakai jumlah token posisi bila ada, kalau tidak setara ukuran)
     n_tok = (posisi or {}).get("token") or got
@@ -95,6 +108,9 @@ def evaluasi(rpc, p: Pasangan, quoter: str, state_view: str | None = None, posis
         e_sell = None
 
     if posisi:
+        if p.tebus_manual:
+            out["alasan"] = "posisi token jembatan: keluar lewat TEBUS manual (bukan jual DEX)"
+            return out
         masuk = posisi["harga"]
         if e_sell is not None and e_sell >= masuk * (1 + p.tp):
             out.update(aksi="JUAL", alasan=f"TP: jual {e_sell:.6g} >= masuk {masuk:.6g} +{p.tp:.1%}")
@@ -109,8 +125,11 @@ def evaluasi(rpc, p: Pasangan, quoter: str, state_view: str | None = None, posis
     if rt > batas_rt:
         out["alasan"] = f"jual-balik rugi {rt:.1%} > {batas_rt:.1%}: hook/pajak/honeypot? LEWATI"
         return out
-    if edge_buy >= p.beli_bawah:
-        out.update(aksi="BELI", alasan=f"harga beli {e_buy:.6g} = acuan {edge_buy:+.2%} lebih murah, slippage {slip:.2%}")
+    if out["untung_bersih"] >= p.beli_bawah:
+        jalan = "tebus manual" if p.tebus_manual else "jual DEX"
+        out.update(aksi="BELI", alasan=f"harga beli {e_buy:.6g}: diskon {edge_buy:+.2%}, bersih ±{out['untung_bersih']:+.2%} "
+                                       f"setelah keluar ({jalan}), slippage {slip:.2%}")
     elif e_sell is not None and out["untung_jual"] >= p.jual_atas:
-        out.update(aksi="JUAL_ARBITRASE", alasan=f"pool {out['untung_jual']:+.2%} di atas acuan (perlu stok token)")
+        # hanya informasi: menjual di atas acuan butuh stok token (bot tidak short / tidak meminjam)
+        out.update(aksi="INFO_PREMI", alasan=f"pool {out['untung_jual']:+.2%} di atas acuan — info saja (butuh stok token)")
     return out

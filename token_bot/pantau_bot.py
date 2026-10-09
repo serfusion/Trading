@@ -5,17 +5,15 @@ saat di atas (lihat token_bot/strategi.evaluasi: kuotasi NYATA Quoter, ukuran di
 cek jual-balik honeypot). Dikendalikan lewat Telegram dengan tombol persis screenshot:
   💰 Saldo · 📈 Harga · 📄 Log · 🧾 Tx · 🅰 BUY ON/OFF · ⏹ STOP · 🔄 RESTART · ❓ Bantuan
 
-Tiga mode (config `mode`):
-  pantau  (bawaan) — hanya MENGABARI peluang, tidak ada transaksi (paling aman).
-  kertas            — simulasi: saldo & posisi palsu diisi di harga kuotasi, tanpa menyentuh dana.
-  live              — transaksi NYATA lewat token_bot/eksekusi.Dompet. BAWAAN MATI; perlu live.aktif + env TOKEN_BOT_PK.
-                      Auto-beli hanya aktif setelah 🅰 BUY ON (diarmкан sekali dengan konfirmasi). Batas keras
-                      (maks $/trade, total, trade/hari) tetap berlaku.
+Dua mode (config `mode`) — bot TIDAK pernah mengirim transaksi (tidak memakai private key):
+  pantau  (bawaan) — hanya MENGABARI peluang. Eksekusi kamu lakukan sendiri di dompetmu.
+  kertas            — simulasi: saldo & posisi palsu diisi di harga kuotasi, tanpa menyentuh dana (🅰 BUY ON).
+                      Pasangan `tebus_manual` (token jembatan) disimulasikan keluar lewat tebus 1:1 - biaya_tebus.
 
 PENTING (hasil riset docs/eksternal/hasil_arb_cari.txt & hasil_arb_latensi.txt): strategi "beli diskon lalu tebus 1:1
 lewat jembatan" hanya menghasilkan di JENDELA PELUNCURAN chain/jembatan BARU (pra-publik); setelah publik sisa peluang
 ±$20-65/HARI untuk SEMUA pelaku dan direbut bot < 1 detik. Bot ini TIDAK menebus lewat jembatan (kustodial, berisiko) —
-hanya arbitrase DEX; leg tebus dilakukan manual. Jalankan di mode pantau/kertas dulu. Tidak ada janji profit.
+leg tebus dilakukan manual. Tidak ada janji profit.
 """
 from __future__ import annotations
 
@@ -25,8 +23,6 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from . import acuan
-from .dex import quote
 from .strategi import evaluasi
 from .tele import Telegram, TelegramMati, esc, sensor
 
@@ -49,7 +45,7 @@ def jam(t: float) -> str:
 
 class Store:
     KOSONG = {"mode": None, "buy_on": False, "stop": False, "posisi": {}, "kas_kertas": None, "log": [], "tx": [],
-              "hari": None, "n_trade": 0, "offset": 0, "pending": None}
+              "hari": None, "n_trade": 0, "offset": 0}
 
     def __init__(self, data_dir: Path):
         self.dir = data_dir
@@ -87,13 +83,16 @@ class Store:
 
 
 class Bot:
-    def __init__(self, cfg: dict, store: Store, rpcs: dict, prs: list, tg, dompet=None, sekarang=time.time):
+    MODE = ("pantau", "kertas")
+
+    def __init__(self, cfg: dict, store: Store, rpcs: dict, prs: list, tg, sekarang=time.time):
         self.cfg, self.store, self.rpcs, self.prs, self.tg = cfg, store, rpcs, prs, tg
-        self.dompet, self.now = dompet, sekarang
+        self.now = sekarang
         self.mode = cfg.get("mode", "pantau")
-        self.lv = cfg.get("live", {})
+        if self.mode not in self.MODE:
+            raise SystemExit(f"mode {self.mode!r} tidak ada. Pilih pantau atau kertas — bot ini tidak mengirim "
+                             f"transaksi nyata (eksekusi manual di dompetmu, docs/ARB_BOT.md).")
         self.jadwal: dict[str, float] = {}
-        self.konfirmasi: dict[str, tuple] = {}
         self.galat_t: dict[str, float] = {}
         s = store.s
         if s["mode"] and s["mode"] != self.mode and s["posisi"]:
@@ -178,134 +177,73 @@ class Bot:
         if not pos and r["aksi"] == "BELI":
             self.catat("sinyal", f"{p.nama}: {r['alasan']}")
             if self.mode == "pantau":
-                self.kabar(f"🅰 <b>PELUANG BELI {esc(p.nama)}</b>\nHarga {r['harga_beli']:.6g} = {_pct(r['untung_beli'])} "
-                           f"di bawah wajar {r['wajar']:.6g}, ukuran {_usd(r.get('ukuran_usd'))}, slippage "
-                           f"{_pct(r.get('slippage_beli'))}. Mode pantau: tidak dibeli. (Leg tebus jembatan manual.)")
+                if self.jatuh_tempo(f"kabar {p.nama}", float(self.cfg.get("jeda_kabar", 60))):
+                    self.kabar(self.teks_peluang(p, r))
             elif self.s["buy_on"]:
                 self.beli(net, p, r)
-            # kertas/live tanpa BUY ON: diam (sudah dicatat di log)
+            # kertas tanpa BUY ON: diam (sudah dicatat di log)
 
-    # ------------------------------------------------------------------ batas risiko
+    def teks_peluang(self, p, r: dict) -> str:
+        keluar = (f"tebus manual ≈ {r['nilai_tebus']:.6g}/token (setelah biaya jembatan)" if r.get("tebus_manual")
+                  else "jual balik di DEX")
+        return (f"🅰 <b>PELUANG BELI {esc(p.nama)}</b>\nHarga beli {r['harga_beli']:.6g} vs wajar {r['wajar']:.6g}: "
+                f"diskon {_pct(r['untung_beli'])}, perkiraan bersih {_pct(r.get('untung_bersih'))} bila keluar lewat "
+                f"{keluar}. Ukuran {_usd(r.get('ukuran_usd'))}, slippage {_pct(r.get('slippage_beli'))}.\n"
+                f"Bot tidak membeli — eksekusi manual di dompetmu bila setuju (peluang biasanya hilang < 1 detik).")
+
+    # ------------------------------------------------------------------ batas simulasi
     def boleh(self, usd: float) -> str | None:
-        if self.s.get("pending"):
-            return "ada transaksi tidak pasti — cek dompet lalu /beres"
         self._hari()
-        maks_tr = self.lv.get("maks_trade_per_hari", 5) if self.mode == "live" else 50
+        maks_tr = int(self.cfg.get("maks_trade_per_hari", 50))
         if self.s["n_trade"] >= maks_tr:
             return f"batas {maks_tr} trade/hari"
-        maks1 = self.lv.get("maks_usd_per_trade", 25) if self.mode == "live" else 1e9
-        if usd > maks1 + 1e-9:
-            return f"ukuran > batas {_usd(maks1)}/trade"
-        maks_t = self.lv.get("maks_total_usd", 100) if self.mode == "live" else 1e9
-        if sum(v["usd"] for v in self.s["posisi"].values()) + usd > maks_t + 1e-9:
-            return f"total posisi akan > {_usd(maks_t)}"
+        if usd > (self.s["kas_kertas"] or 0) + 1e-9:
+            return "kas kertas kurang"
         return None
 
     # ------------------------------------------------------------------ beli / tutup
     def beli(self, net: str, p, r: dict) -> None:
-        usd = min(r["ukuran_usd"], self.lv.get("maks_usd_per_trade", 25) if self.mode == "live" else r["ukuran_usd"])
+        usd = r["ukuran_usd"]
         alasan = self.boleh(usd)
         if alasan:
             self.catat("lewat", f"{p.nama}: {alasan}")
             return
-        if self.mode == "kertas":
-            if usd > (self.s["kas_kertas"] or 0):
-                self.catat("lewat", f"{p.nama}: kas kertas kurang")
-                return
-            self.s["kas_kertas"] -= usd
-            tok = usd / r["harga_beli"]
-            self.s["posisi"][p.nama] = {"net": net, "token": tok, "harga": r["harga_beli"], "usd": usd,
-                                        "t": self.now()}
-            self.s["n_trade"] += 1
-            self.catat("beli", f"{p.nama} {usd:.2f} @ {r['harga_beli']:.6g}")
-            self.kabar(f"🟢 <b>BELI (kertas) {esc(p.nama)}</b> {_usd(usd)} @ {r['harga_beli']:.6g} "
-                       f"({_pct(r['untung_beli'])} di bawah wajar)")
-            return
-        # live
-        self._beli_live(net, p, r, usd)
-
-    def _beli_live(self, net: str, p, r: dict, usd: float) -> None:
-        ncfg = self.cfg["jaringan"][net]
-        q = ncfg["v4_quoter"] if p.pool.ver == 4 else ncfg["v3_quoter"]
-        dq = p.pool.d0 if p.quote.lower() == p.pool.c0.lower() else p.pool.d1
-        dt = p.pool.d1 if dq == p.pool.d0 else p.pool.d0
-        try:
-            amt = int(usd / acuan.harga(p.acuan_quote) * 10 ** dq)
-            got = quote(self.rpcs[net], p.pool, p.quote, amt, q)
-        except Exception as e:  # noqa: BLE001 — belum kirim transaksi
-            self.galat(f"kuotasi {p.nama}", e)
-            return
-        self.s["pending"] = {"nama": p.nama, "usd": usd, "t": self.now()}
-        self.store.simpan()                    # catat SEBELUM kirim
-        try:
-            h = self.dompet.swap(ncfg, p.pool, p.quote, amt, int(got * (1 - p.max_slippage)))
-        except Exception as e:  # noqa: BLE001 — transaksi mungkin terkirim: JEDA, jangan ulang
-            self.darurat(f"BELI {p.nama} {_usd(usd)} status tidak pasti", e)
-            return
-        self.s["pending"] = None
-        self.s["posisi"][p.nama] = {"net": net, "token": got, "harga": (amt / 10 ** dq) / (got / 10 ** dt),
-                                    "usd": usd, "t": self.now(), "tx": h}
+        self.s["kas_kertas"] -= usd
+        qusd = float(r.get("quote_usd") or 1.0)          # harga 1 quote (USDG/USDC/WETH) dalam USD
+        tok = usd / (r["harga_beli"] * qusd)
         self.s["n_trade"] += 1
-        self.catat("beli", f"{p.nama} {usd:.2f} @ {r['harga_beli']:.6g}", tx=h)
-        self.store.simpan()
-        self.kabar(f"🟢 <b>BELI (live) {esc(p.nama)}</b> {_usd(usd)} @ {r['harga_beli']:.6g}\ntx {esc(h)}")
+        self.catat("beli", f"{p.nama} {usd:.2f} @ {r['harga_beli']:.6g}", tx="kertas")
+        if r.get("tebus_manual"):
+            # token jembatan: keluar = tebus 1:1 - biaya (manual, ±2 mnt). Simulasi menganggap tebus BERHASIL penuh —
+            # kenyataannya bergantung satu operator kustodian (bisa pause/berhenti membayar).
+            nilai = tok * r["nilai_tebus"] * qusd
+            self.s["kas_kertas"] += nilai
+            self.catat("tebus", f"{p.nama} {nilai - usd:+.2f} (simulasi tebus)", tx="kertas")
+            self.kabar(f"🟢 <b>BELI + TEBUS (kertas) {esc(p.nama)}</b> {_usd(usd)} @ {r['harga_beli']:.6g} → tebus "
+                       f"{_usd(nilai)} ({_usd(nilai - usd)}). Simulasi menganggap jembatan membayar penuh.")
+            return
+        self.s["posisi"][p.nama] = {"net": net, "token": tok, "harga": r["harga_beli"], "usd": usd, "t": self.now(),
+                                    "quote_usd": qusd}
+        self.kabar(f"🟢 <b>BELI (kertas) {esc(p.nama)}</b> {_usd(usd)} @ {r['harga_beli']:.6g} "
+                   f"(diskon {_pct(r['untung_beli'])}, perkiraan bersih {_pct(r.get('untung_bersih'))})")
 
     def tutup(self, net: str, p, r: dict) -> None:
         pos = self.s["posisi"][p.nama]
-        if self.mode in ("pantau", "kertas"):
-            keluar = r.get("harga_jual") or r.get("wajar")
-            hasil = pos["token"] * keluar - pos["usd"]
-            if self.mode == "kertas":
-                self.s["kas_kertas"] += pos["token"] * keluar
-            self.s["posisi"].pop(p.nama)
-            self.catat("jual", f"{p.nama} {('%+.2f' % hasil)} ({r['alasan']})")
-            self.kabar(f"💰 <b>JUAL ({self.mode}) {esc(p.nama)}</b> {_usd(hasil)} ({r['alasan']})")
-            return
-        ncfg = self.cfg["jaringan"][net]
-        q = ncfg["v4_quoter"] if p.pool.ver == 4 else ncfg["v3_quoter"]
-        dq = p.pool.d0 if p.quote.lower() == p.pool.c0.lower() else p.pool.d1
-        n = int(pos["token"])
-        try:
-            got = quote(self.rpcs[net], p.pool, p.token, n, q)
-        except Exception as e:  # noqa: BLE001
-            self.galat(f"kuotasi jual {p.nama}", e)
-            return
-        self.s["pending"] = {"nama": p.nama, "jual": True, "t": self.now()}
-        self.store.simpan()
-        try:
-            h = self.dompet.swap(ncfg, p.pool, p.token, n, int(got * (1 - p.max_slippage)))
-        except Exception as e:  # noqa: BLE001
-            self.darurat(f"JUAL {p.nama} status tidak pasti", e)
-            return
-        self.s["pending"] = None
-        hasil = got / 10 ** dq - pos["usd"]
+        keluar = r.get("harga_jual") or r.get("wajar")
+        nilai = pos["token"] * keluar * float(r.get("quote_usd") or pos.get("quote_usd") or 1.0)
+        hasil = nilai - pos["usd"]
+        self.s["kas_kertas"] += nilai
         self.s["posisi"].pop(p.nama)
-        self.catat("jual", f"{p.nama} {('%+.2f' % hasil)} ({r['alasan']})", tx=h)
-        self.store.simpan()
-        self.kabar(f"💰 <b>JUAL (live) {esc(p.nama)}</b> {_usd(hasil)} ({r['alasan']})\ntx {esc(h)}")
-
-    def darurat(self, judul: str, e) -> None:
-        self.s["stop"] = True
-        self.s["buy_on"] = False
-        self.store.simpan()
-        print(f"[darurat] {judul}: {sensor(e)}", flush=True)
-        self.kabar(f"🚨 <b>{esc(judul)}</b>\n{esc(sensor(e)[:400])}\nBot DISTOP & BUY OFF. Cek dompet/explorer: apakah "
-                   f"transaksi terkirim? Lalu /beres dan 🔄 RESTART.")
+        self.catat("jual", f"{p.nama} {hasil:+.2f} ({r['alasan']})", tx="kertas")
+        self.kabar(f"💰 <b>JUAL (kertas) {esc(p.nama)}</b> {_usd(hasil)} ({esc(r['alasan'])})")
 
     # ------------------------------------------------------------------ perintah Telegram
     TOMBOL = {"💰 saldo": "/saldo", "📈 harga": "/harga", "📄 log": "/log", "🧾 tx": "/tx",
               "🅰 buy on/off": "/buy", "⏹ stop": "/stop", "🔄 restart": "/restart", "❓ bantuan": "/bantuan"}
 
     def perintah(self, cid: int, teks: str, cbid: str | None) -> None:
-        if cbid:
-            jenis, _, tok = teks.partition(":")
-            t, fn, cid0 = self.konfirmasi.pop(tok, (0, None, None))
-            if not fn or cid0 != cid or self.now() - t > 60:
-                self.tg.jawab_tombol(cbid, "Kedaluwarsa.")
-                return
-            self.tg.jawab_tombol(cbid, "OK" if jenis == "ya" else "Batal")
-            if jenis == "ya":
-                fn()
+        if cbid:                                   # tidak ada tombol inline di bot ini
+            self.tg.jawab_tombol(cbid, "Tidak dipakai.")
             return
         t = teks.strip()
         t = self.TOMBOL.get(t.lower(), t)
@@ -326,66 +264,39 @@ class Bot:
             self.kabar("⏹ <b>STOP</b> — pemantauan & auto-beli berhenti. 🔄 RESTART untuk mulai lagi. Posisi terbuka "
                        "TIDAK ditutup otomatis saat stop.", chat_id=cid)
         elif cmd == "/restart":
-            if self.s.get("pending"):
-                self.kabar("🚨 Masih ada transaksi tidak pasti. /beres dulu.", chat_id=cid)
-                return
             self.s["stop"] = False
             self.jadwal.pop("pindai", None)
             self.kabar("🔄 <b>RESTART</b> — pemantauan jalan lagi.", chat_id=cid)
         elif cmd == "/buy":
             self.cmd_buy(cid)
-        elif cmd == "/beres":
-            if not self.s.get("pending"):
-                self.kabar("Tidak ada transaksi tidak pasti.", chat_id=cid)
-                return
-            pend = self.s["pending"]
-            self.s["pending"] = None
-            self.store.simpan()
-            self.kabar(f"✅ Tanda tidak pasti dihapus ({esc(pend.get('nama', ''))}). Bila transaksi ternyata terjadi, "
-                       f"koin/USDC ada di dompet tetapi TIDAK tercatat bot — sesuaikan manual. Bot masih STOP: 🔄 RESTART.",
-                       chat_id=cid)
         else:
             self.kabar("Perintah tidak dikenal. ❓ Bantuan", chat_id=cid)
 
     def cmd_buy(self, cid: int) -> None:
         if self.mode == "pantau":
-            self.kabar("Mode <b>pantau</b>: bot hanya mengabari, tidak membeli. Ubah `mode: kertas` atau `live` di "
-                       "config untuk mengaktifkan auto-beli.", chat_id=cid)
+            self.kabar("Mode <b>pantau</b>: bot hanya mengabari, tidak membeli. Ubah `mode: kertas` di config untuk "
+                       "simulasi auto-beli. Transaksi nyata tidak didukung (eksekusi manual di dompetmu).", chat_id=cid)
             return
+        self.s["buy_on"] = not self.s["buy_on"]
         if self.s["buy_on"]:
-            self.s["buy_on"] = False
-            self.kabar("🅰 <b>BUY OFF</b> — auto-beli dimatikan (posisi terbuka tetap dikelola).", chat_id=cid)
-            return
-        if self.mode == "live":
-            import secrets
-            tok = secrets.token_hex(4)
-
-            def arm():
-                self.s["buy_on"] = True
-                self.kabar("🅰 <b>BUY ON (LIVE)</b> — bot akan membeli OTOMATIS saat ada peluang, dalam batas "
-                           f"{_usd(self.lv.get('maks_usd_per_trade', 25))}/trade, total {_usd(self.lv.get('maks_total_usd', 100))}, "
-                           f"{self.lv.get('maks_trade_per_hari', 5)} trade/hari.")
-            self.konfirmasi[tok] = (self.now(), arm, cid)
-            self.kabar(f"⚠️ Aktifkan AUTO-BELI dengan <b>uang sungguhan</b> di dompet {esc(getattr(self.dompet, 'addr', '?'))}? "
-                       f"Tombol berlaku 60 detik.", chat_id=cid,
-                       tombol=[[{"text": "✅ Ya, BUY ON", "callback_data": f"ya:{tok}"},
-                                {"text": "❌ Batal", "callback_data": f"tidak:{tok}"}]])
-            return
-        self.s["buy_on"] = True
-        self.kabar("🅰 <b>BUY ON (kertas)</b> — simulasi auto-beli aktif.", chat_id=cid)
+            self.kabar("🅰 <b>BUY ON (kertas)</b> — simulasi auto-beli aktif (uang palsu).", chat_id=cid)
+        else:
+            self.kabar("🅰 <b>BUY OFF</b> — simulasi auto-beli dimatikan (posisi kertas tetap dikelola).", chat_id=cid)
 
     # ------------------------------------------------------------------ teks
     def bantuan(self) -> str:
         return ("<b>Bot token (arbitrase token baru)</b>\n"
                 f"Mode: <b>{esc(self.mode)}</b> • pasangan dipantau: {len(self.prs)}\n"
                 "💰 Saldo · 📈 Harga · 📄 Log · 🧾 Tx · 🅰 BUY ON/OFF · ⏹ STOP · 🔄 RESTART\n"
-                "BELI saat harga pool jauh di bawah acuan, JUAL saat di atas / TP / SL (kuotasi nyata, cek honeypot).\n"
+                "Mengabari bila harga pool jauh di bawah acuan (kuotasi nyata, cek honeypot, untung BERSIH setelah "
+                "biaya keluar). Bot TIDAK mengirim transaksi: mode pantau = kabar, kertas = simulasi uang palsu. "
+                "Token jembatan (tebus_manual): keluar lewat tebus manual, bukan jual DEX.\n"
                 "⚠️ Teruji: menguntungkan hanya di jendela peluncuran chain/jembatan BARU (pra-publik). Setelah publik "
-                "peluang receh & diperebutkan bot < 1 dtk. Bot tidak menebus lewat jembatan (manual). Bukan janji profit.")
+                "peluang receh & diperebutkan bot < 1 dtk. Bukan janji profit.")
 
     def teks_saldo(self) -> str:
-        if self.mode == "live" and self.dompet:
-            return f"Mode LIVE • dompet {esc(self.dompet.addr)}\nPosisi tercatat: {len(self.s['posisi'])}"
+        if self.mode == "pantau":
+            return "Mode <b>pantau</b> — tidak ada saldo (bot hanya mengabari). Cek saldo dompetmu sendiri."
         kas = self.s.get("kas_kertas")
         eks = sum(v["usd"] for v in self.s["posisi"].values())
         return (f"Mode <b>{esc(self.mode)}</b>\nKas kertas {_usd(kas)} • posisi {len(self.s['posisi'])} senilai {_usd(eks)}"
@@ -396,8 +307,8 @@ class Bot:
         for net, p in self.prs[:20]:
             try:
                 r = self._eval(net, p)
-                out.append(f"{esc(p.nama)}: spot {_pct(r.get('selisih_spot'))} vs wajar • beli {_pct(r.get('untung_beli'))}"
-                           f" • {esc(r['aksi'])}")
+                out.append(f"{esc(p.nama)}: spot {_pct(r.get('selisih_spot'))} vs wajar • diskon {_pct(r.get('untung_beli'))}"
+                           f" • bersih {_pct(r.get('untung_bersih'))} • {esc(r['aksi'])}")
             except Exception as e:  # noqa: BLE001
                 out.append(f"{esc(p.nama)}: galat {esc(sensor(e)[:40])}")
         return "\n".join(out)
@@ -409,7 +320,7 @@ class Bot:
 
     def teks_tx(self) -> str:
         if not self.s["tx"]:
-            return "Belum ada transaksi."
+            return "Belum ada transaksi (kertas). Bot tidak mengirim transaksi nyata."
         return "\n".join(f"{jam(x['t'])} {esc(x['teks'])}\n{esc(x['tx'])}" for x in self.s["tx"][:15])
 
     # ------------------------------------------------------------------ loop
@@ -417,8 +328,6 @@ class Bot:
         self.tg.mulai_polling(int(self.s.get("offset") or 0))
         self.kabar(f"🤖 <b>Bot token aktif</b> — mode {esc(self.mode)}, {len(self.prs)} pasangan.\n{self.bantuan()}",
                    menu=True)
-        if self.s.get("pending"):
-            self.kabar("🚨 Ada transaksi tidak pasti dari sesi lalu — /beres sebelum RESTART.")
         n = 0
         try:
             while putaran is None or n < putaran:
@@ -434,19 +343,12 @@ class Bot:
 def buat(cfg: dict, tg_mati: bool = False, store: Store | None = None):
     from .__main__ import _rpcs, pasangan
     mode = cfg.get("mode", "pantau")
+    if mode not in Bot.MODE:
+        raise SystemExit(f"mode {mode!r} tidak ada (pantau | kertas). Bot ini tidak mengirim transaksi nyata.")
     store = store or Store(DATA / mode)
     nets = {x["jaringan"] for x in cfg["pasangan"]}
     rpcs = _rpcs(cfg, nets)
     prs = pasangan(cfg, rpcs)
-    dompet = None
-    if mode == "live":
-        if not cfg.get("live", {}).get("aktif"):
-            raise SystemExit("mode live: set live.aktif: true di config (baca peringatan docs/ARB_BOT.md)")
-        if len(nets) != 1:
-            raise SystemExit("mode live: satu jaringan per proses")
-        from .eksekusi import Dompet
-        net = next(iter(nets))
-        dompet = Dompet(rpcs[net], cfg["jaringan"][net]["chain_id"])
     if tg_mati or not cfg.get("telegram", {}).get("aktif", True):
         tg = TelegramMati()
     else:
@@ -454,4 +356,4 @@ def buat(cfg: dict, tg_mati: bool = False, store: Store | None = None):
         if not ids:
             raise SystemExit("TELEGRAM_CHAT_ID kosong (token_bot/.env)")
         tg = Telegram(os.environ.get("TELEGRAM_TOKEN", ""), ids, int(cfg.get("telegram", {}).get("interval_poll", 25)))
-    return Bot(cfg, store, rpcs, prs, tg, dompet)
+    return Bot(cfg, store, rpcs, prs, tg)

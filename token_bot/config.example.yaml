@@ -5,30 +5,31 @@
 ntfy_topic: ""          # isi nama topik ntfy.sh bila ingin notifikasi HP (opsional)
 
 # Bot kontrol Telegram (python -m token_bot bot, docs/ARB_BOT.md). Rahasia di token_bot/.env (TELEGRAM_TOKEN,
-# TELEGRAM_CHAT_ID, TOKEN_BOT_PK) — JANGAN di-commit. State per mode di token_bot/data/<mode>/.
-mode: pantau            # pantau (hanya kabar, bawaan & paling aman) | kertas (simulasi) | live (uang sungguhan)
+# TELEGRAM_CHAT_ID) — JANGAN di-commit. State per mode di token_bot/data/<mode>/.
+# Bot TIDAK mengirim transaksi nyata (tanpa private key): eksekusi kamu lakukan sendiri di dompetmu.
+mode: pantau            # pantau (hanya kabar, bawaan) | kertas (simulasi uang palsu, 🅰 BUY ON)
 modal_kertas_usd: 500   # saldo awal mode kertas
+maks_trade_per_hari: 50 # batas simulasi kertas
 interval: 5             # detik antar pindai
+jeda_kabar: 60          # detik minimal antar kabar peluang untuk pasangan yang sama (anti-spam)
 telegram:
   aktif: true
   interval_poll: 25
 
-live:                   # transaksi nyata — BAWAAN MATI. Perlu: live.aktif true + --live + env TOKEN_BOT_PK
-  aktif: false
-  maks_usd_per_trade: 25
-  maks_total_usd: 100
-  maks_trade_per_hari: 5
-
 bawaan:                 # dipakai bila pasangan tidak menulis sendiri
   ukuran_usd: 200       # ukuran awal; diperkecil otomatis sampai slippage <= max_slippage
   min_usd: 10
-  beli_bawah: 0.01      # beli hanya bila harga eksekusi >= 1% di bawah acuan (setelah fee+slippage+gas)
+  beli_bawah: 0.01      # sinyal hanya bila untung BERSIH >= 1%: diskon beli (fee+slippage+gas) dikurangi biaya keluar
+                        # (jual balik di DEX, atau tebus jembatan untuk tebus_manual)
   jual_atas: 0.01
   max_slippage: 0.005   # 0,5% dari harga spot pool (termasuk fee pool)
   tp: 0.02
   sl: 0.04
   biaya_gas_usd: 0.02
   luar_jam: false       # saham: jangan transaksi saat bursa AS tutup (acuan basi)
+  tebus_manual: false   # true untuk TOKEN JEMBATAN (mis. WETH/CRCL/NVDA•Arc): keluar lewat tebus 1:1 manual, bukan jual
+                        # DEX (jual di pool tipis = diskon yang sama). Bot tidak memberi sinyal JUAL untuk posisinya.
+  biaya_tebus: 0.01     # biaya jembatan Arc<->Robinhood 1% (docs/eksternal/hasil_arb_cari.txt A3)
 
 jaringan:
   robinhood:
@@ -72,7 +73,11 @@ token:
     USDC: {alamat: "0x3600000000000000000000000000000000000000", acuan: "tetap:1"}
     cirBTC: {alamat: "0x171a4217b86a807a64eb94757db6849fb4bdbaa0", acuan: "binance:BTCUSDT"}
     EURC: {alamat: "0xbef5f6d51cb62b58e6a8f77868681825c6fe21c1", acuan: "binance:EURUSDT"}
-    WETH: {alamat: "0x128cc466b61f542da60c70e3aa11c10e19b84edb", acuan: "binance:ETHUSDT"}  # WETH jembatan (CoinGecko), bukan Circle — cek sendiri
+    WETH: {alamat: "0x128cc466b61f542da60c70e3aa11c10e19b84edb", acuan: "binance:ETHUSDT"}  # WETH lain (CoinGecko), bukan Circle — cek sendiri
+    # Token JEMBATAN kustodian Robinhood<->Arc yang dipakai bot screenshot (tebus 1:1 - 1%, docs/ARB_BOT.md).
+    # Pakai dengan tebus_manual: true. Pool-nya v3-fork (pabrik 0xf0db7b58), bukan Uniswap resmi -> isi sendiri bila perlu.
+    WETH_ARC_JEMBATAN: {alamat: "0xd02d2b38d9ccf08044f0a493350a2339fe8d708b", acuan: "binance:ETHUSDT"}
+    CRCL_ARC_JEMBATAN: {alamat: "0x2ba0f44bdfc17fba30eda9cdbecb908ca45b043b", acuan: "saham:CRCL"}
 
 pasangan:
   - {nama: "CRCL/USDG v3 0.3%", jaringan: robinhood, ver: 3, pool: "0x654e4143e82a5824445ade0824351c2a9acd95a8", token: CRCL, quote: USDG}

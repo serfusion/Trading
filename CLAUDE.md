@@ -389,9 +389,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (BARU 90 hr median −52%); kandidat beli turun ≥60% dari VWAP 60 mnt, TP +20%, SL −50% — DIKOREKSI 8 Okt (candle entry dicek): BARU −0,7%/trade → tidak lolos.
   Airdrop: median +31% di 5 mnt, −64% setelah 1 th → jual cepat.
 - `token_bot/` (BARU, terpisah dari bot XAU): `python -m token_bot cek|pantau|baru|cari`, kuotasi Quoter resmi, ukuran
-  diperkecil sampai slippage ≤ max, cek jual-balik (honeypot), daftar putih alamat, saham hanya jam NYSE. Mode live bawaan MATI
-  (`live.aktif` + `--live` + env TOKEN_BOT_PK) dan BELUM pernah diuji dengan dana nyata — sesi tidak boleh bertransaksi
-  (permintaan baca log sempat ditolak pengaman "Real-World Transactions"); jangan jalankan live dari sesi. Tes
+  diperkecil sampai slippage ≤ max, cek jual-balik (honeypot), daftar putih alamat, saham hanya jam NYSE. Mode live/`--live`/
+  `eksekusi.py` DIHAPUS 9 Okt (review: bisa kirim ganda; pengguna dijanjikan bot tanpa transaksi nyata) — sesi tidak boleh
+  bertransaksi; JANGAN menambah kode penandatangan/pengirim transaksi lagi. Tes
   `tests/test_token_bot.py`. Data besar (swap mentah Robinhood, *_nilai penuh) di-gitignore; yang di-commit *_nilai_ringkas.
 
 ## Bot arbitrase token baru gaya screenshot (9 Okt 2026 — `docs/ARB_BOT.md`, `docs/eksternal/hasil_arb_cari*.txt`)
@@ -403,11 +403,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   ±$20-65/hari SEMUA pelaku (sejak 1 Okt $21), direbut bot <1 dtk; Robinhood TIDAK ada pola ini (pool dalam, ditutup
   <0,1 dtk). Latensi (model pembuang bersih): pra-publik 12-15 Sep batas atas ±$282rb@3dtk, 2 pekan terakhir Arc ±$338.
 - Bot: `token_bot/` (pantau_bot.py + tele.py; `python -m token_bot bot|chat-id`). Tombol persis screenshot (Saldo/Harga/
-  Log/Tx/BUY ON-OFF/STOP/RESTART). Mode pantau (bawaan, hanya kabar)/kertas/live. Live bawaan MATI (live.aktif + BUY ON
-  + konfirmasi + batas keras + TOKEN_BOT_PK); order tidak pasti -> STOP+/beres (tidak ulang); state per mode + bot.lock;
-  from.id chat pribadi; rahasia disensor. Bot TIDAK menebus lewat jembatan (manual). Daftar putih token per ALAMAT
-  (5.327 token tiruan bersimbol sama di RH). Tes tests/test_token_bot.py (18). KESIMPULAN jujur: hanya untung di jendela
-  peluncuran chain/jembatan BARU pra-publik; sekarang receh. Sesi TIDAK boleh menjalankan live/transaksi.
+  Log/Tx/BUY ON-OFF/STOP/RESTART). HANYA mode pantau (bawaan, kabar) & kertas (simulasi) — live ditolak, tanpa private
+  key. Keputusan pakai `untung_bersih` (diskon − biaya keluar: jual DEX atau tebus 1:1 − biaya_tebus); pasangan
+  `tebus_manual` (token jembatan WETH/CRCL•Arc) tanpa sinyal JUAL DEX, kertas = langsung "ditebus"; premi = INFO_PREMI.
+  State per mode + bot.lock; from.id chat pribadi; rahasia + URL RPC disensor (galat RPC hanya host). Daftar putih token
+  per ALAMAT (5.327 token tiruan bersimbol sama di RH). Tes tests/test_token_bot.py (24). KESIMPULAN jujur: hanya untung
+  di jendela peluncuran chain/jembatan BARU pra-publik; jalur DEX saja RH 3 dtk −$377; sekarang receh.
 - Data riset di data/research/eksternal/arb/ (file > 45 MB & *_parts di-gitignore; dibuat ulang `python -m research.arb_cari`).
 
 ## Sniper bot Telegram `sniper_bot/` (8 Okt 2026 — `docs/SNIPER_TELEGRAM.md`)

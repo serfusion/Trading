@@ -163,7 +163,7 @@ Saham tokenisasi: hanya saat bursa AS buka (di luar jam itu tidak ada harga waja
 Selisih < 1% tidak sepadan: fee pool 0,05–1%, derau acuan, dan bot ber-jeda < 1 detik mengambilnya lebih dulu.
 
 ## Bot `token_bot/` (dibuat sesi ini)
-Pasang: `pip install eth-abi eth-utils pyyaml` (+ `eth-account` hanya untuk mode live). Salin
+Pasang: `pip install eth-abi eth-utils pyyaml`. Salin
 `token_bot/config.example.yaml` → `token_bot/config.yaml`.
 
 ```bash
@@ -180,11 +180,9 @@ python -m token_bot cari --jaringan robinhood --pool <poolId v4 | alamat pool v3
   hook pajak/honeypot → dilewati.
 - **Daftar putih alamat**: pool yang tokennya bukan alamat resmi persis → bot berhenti dengan pesan "alamat tiruan?".
 - **Saham**: di luar jam reguler NYSE tidak ada harga wajar → tidak transaksi (bawaan `luar_jam: false`).
-- **Live** (BAWAAN MATI): butuh `live.aktif: true` + `--live` + env `TOKEN_BOT_PK` (dompet khusus bersaldo kecil).
-  Batas $/trade, total, trade per hari. Sebelum kirim: simulasi `eth_call` transaksi persis (batal bila revert) dan
-  `amountOutMinimum` = kuotasi × (1 − max_slippage). v4 lewat Universal Router (V4_SWAP), v3 lewat SwapRouter02.
-  **Belum pernah dijalankan dengan dana nyata** (sesi riset tidak punya dompet dan tidak boleh bertransaksi) → wajib
-  uji nominal kecil dulu.
+- **Tanpa transaksi nyata** (diubah 9 Okt): mode live/`--live`/`eksekusi.py` DIHAPUS setelah review (jalur itu bisa
+  mengirim order dua kali saat status tidak pasti). `token_bot` hanya sinyal + simulasi kertas (`bot`); eksekusi
+  manual di dompet pengguna. Keputusan memakai untung **bersih** setelah biaya keluar (lihat docs/ARB_BOT.md).
 - Diuji: `tests/test_token_bot.py` (11 tes luring: poolId v4 dihitung ulang = id pool CRCL asli, slippage, honeypot,
   jam bursa, TP); `cek` dijalankan baca-saja pada pool asli Robinhood 8 Okt 13:05 UTC (pra-pasar): CRCL v4 $200 →
   slippage 0,16%, CRCL v3 0,30%, NVDA v3 0,05%, WETH v3 0,01%; kuotasi CRCL/USDG v4: $1.000 → 0,22%, $10.000 → 0,8%,
@@ -206,5 +204,5 @@ python -m token_bot cari --jaringan robinhood --pool <poolId v4 | alamat pool v3
    membagi token. Sejarah 21 airdrop: jual cepat lebih baik daripada menahan.
 5. **Bahaya terbesar**: token tiruan beralamat mirip (cirBTC/EURC/WETH/USDG/NVDA palsu, pool "USDC" palsu), swap tanpa
    batas slippage (dijatuhkan bot sandwich), hook v4 berpajak/honeypot. Bot `token_bot` menolak ketiganya.
-6. Tidak ada yang dipasang ke bot live XAU / cloud / aplikasi. `token_bot` berdiri sendiri, bawaan hanya sinyal; mode
-   live butuh izin & pengaturan pengguna sendiri dan belum pernah diuji dengan dana nyata.
+6. Tidak ada yang dipasang ke bot live XAU / cloud / aplikasi. `token_bot` berdiri sendiri dan hanya memberi sinyal /
+   simulasi kertas — tidak mengirim transaksi (9 Okt).

@@ -243,9 +243,15 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   docs/eksternal/hasil_arb_cari.txt (Arc), hasil_arb_cari_robinhood.txt, hasil_arb_latensi.txt. Bot screenshot =
   Arc pra-publik 12-13 Sep (jembatan kustodian RH<->Arc, tebus 1:1); jendela tutup setelah mainnet publik. Data di
   data/research/eksternal/arb/ (>45 MB & *_parts di-gitignore).
-- Bot token kontrol Telegram token_bot/pantau_bot.py + tele.py (mode pantau/kertas/live; live bawaan mati; tombol gaya
-  screenshot). docs/ARB_BOT.md. Tes tests/test_token_bot.py (18, lulus). Sesi tidak menjalankan live.
+- Bot token kontrol Telegram token_bot/pantau_bot.py + tele.py (tombol gaya screenshot). docs/ARB_BOT.md.
+- Review adversarial (workflow) → perbaikan: mode live, `pantau --live` & token_bot/eksekusi.py DIHAPUS (bisa kirim
+  ganda saat status tidak pasti; pengguna dijanjikan bot tanpa transaksi nyata) → hanya pantau + kertas, tanpa private
+  key. Keputusan pakai untung BERSIH (diskon − biaya keluar DEX / tebus 1:1 − 1%); opsi `tebus_manual` untuk token
+  jembatan (tanpa sinyal JUAL DEX); premi = INFO_PREMI (info saja); URL RPC disensor (galat RPC hanya host); kabar
+  pantau dijeda per pasangan (`jeda_kabar`); ukuran kertas dikonversi harga quote. ARB_BOT.md: klaim "selisih
+  antar-pool" diganti angka jujur (jalur DEX saja RH 3 dtk −$377). Tes tests/test_token_bot.py 24 lulus.
 - 💎 aplikasi 4.24: angka teruji jujur + label ⚡ Dip ringan (research/spot_apk.py, cloud/api/spot_teruji.json,
   cloud/api/_spot.py, SpotCard.kt, Notifications.kt, research/peringkat.py). spot_model.json tidak diubah. Tes
-  tests/test_cloud_spot.py (angka jujur + tier). Belum: kompilasi Kotlin dicek di workflow; cloud tayang setelah merge.
+  tests/test_cloud_spot.py (angka jujur + tier). Review Kotlin bersih; CI Android APK run 164 (ed42b118) SUKSES.
+  Cloud tayang setelah branch di-merge ke main.
 

@@ -5,6 +5,7 @@ import json
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 
 
 class RpcError(RuntimeError):
@@ -14,6 +15,7 @@ class RpcError(RuntimeError):
 class Rpc:
     def __init__(self, url: str, chain_id: int | None = None, timeout: float = 30):
         self.url, self.timeout = url, timeout
+        self.host = urlsplit(url).hostname or "?"     # galat hanya menyebut host (URL bisa memuat kunci API)
         if chain_id is not None:
             got = int(self.call("eth_chainId", []), 16)
             if got != chain_id:
@@ -33,7 +35,7 @@ class Rpc:
                 if e.code in (429, 500, 502, 503, 504):
                     time.sleep(0.5 * (k + 1))
                     continue
-                raise RpcError(f"HTTP {e.code} {self.url}") from e
+                raise RpcError(f"HTTP {e.code} {self.host}") from e
             except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 err = e
                 time.sleep(0.5 * (k + 1))
@@ -41,7 +43,7 @@ class Rpc:
             if "error" in d:
                 raise RpcError(str(d["error"].get("message", d["error"])))
             return d["result"]
-        raise RpcError(f"gagal {method}: {err}")
+        raise RpcError(f"gagal {method} di {self.host}: {str(err).replace(self.url, self.host)[:120]}")
 
     def eth_call(self, to: str, data: bytes | str, block: str = "latest", sender: str | None = None,
                  value: int = 0) -> bytes:
