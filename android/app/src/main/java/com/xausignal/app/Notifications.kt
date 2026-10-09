@@ -138,6 +138,24 @@ object Notifications {
         post(context, (event.id + event.type).hashCode(), title, text)
     }
 
+    /** 🔗 Emas pulih → beli keranjang kripto spot, jual setelah 48 jam (cloud/api/_pulih.py). Info saja. */
+    fun pulih(context: Context, event: SignalEvent) {
+        val (title, text) = if (event.type == "pulih_signal") {
+            val koin = pulihKoin(event)
+            val b = event.json.optJSONObject("teruji")?.optJSONArray("baru")
+            ("🔗 EMAS PULIH → BELI KRIPTO • tahan ${event.num("hold_h")?.toInt() ?: 48} jam" to
+                "Beli spot bagi rata: " + koin.joinToString(", ") { "${it.first} ${spotPx(it.second)}" } +
+                ". Jual semua ${formatTime(event.str("deadline"))}." +
+                (b?.let { " Teruji: naik ${it.optInt(1)}% kejadian, rata ${spotPct(it.optDouble(2))} per 48 jam; belum pasti." } ?: ""))
+        } else {
+            val r = event.num("r_pct") ?: 0.0
+            ("🔗 JUAL keranjang kripto • ${if (r > 0) "PROFIT" else "MINUS"} ${spotPct(r)}" to
+                "48 jam selesai: jual semua koin keranjang 🔗. ${event.num("naik")?.toInt() ?: 0}/" +
+                "${event.num("n")?.toInt() ?: 0} koin naik (setelah biaya 0,2%).")
+        }
+        post(context, (event.id + event.type).hashCode(), title, text)
+    }
+
     /** 👁 Trader yang di-follow BUKA / TUTUP posisi (cloud/api/_ikuti.py → topik -copy). Info saja, tanpa order. */
     fun copy(context: Context, e: org.json.JSONObject) {
         createChannels(context)

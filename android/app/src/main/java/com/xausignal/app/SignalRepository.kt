@@ -214,8 +214,10 @@ val CRYPTO = listOf("BTC", "ETH", "DOGE", "ADA")
 fun groupOf(symbol: String): String =
     if (symbol.startsWith("XAU")) "XAU" else if (CRYPTO.any { symbol.startsWith(it) }) "BTC" else "GAP"
 
-/** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, GAP (forex gap pekan), atau SPOT (💎 spot Binance). */
-fun SignalEvent.pairGroup(): String = if (type.startsWith("spot")) "SPOT" else groupOf(symbol())
+/** Kelompok pair untuk "Pair yang saya ikuti": XAU, BTC, GAP (forex gap pekan), atau SPOT (💎 spot Binance & 🔗
+ *  keranjang kripto spot setelah emas pulih). */
+fun SignalEvent.pairGroup(): String =
+    if (type.startsWith("spot") || type.startsWith("pulih")) "SPOT" else groupOf(symbol())
 
 /** Sinyal yang ukurannya dalam KOIN (DOGE/ADA; ukuran kontrak tiap broker berbeda) — cloud field "satuan". */
 fun SignalEvent.coinUnits(): Boolean = str("satuan") == "koin"
