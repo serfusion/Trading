@@ -1,0 +1,68 @@
+Mesin latensi bot screenshot ('beli diskon, tebus penuh') — research/arb_latensi.py, 9 Okt 2026
+Model menggantikan pengambil: bot kita (latensi L dtk) mengambil sebuah peluang hanya bila tiba SEBELUM pengambil
+asli (L < waktu reaksinya sejak kejadian sebelumnya di pool). Untung = qty x acuan x 0,99 (fee tebus jembatan 1%)
+- USDC - gas $0.003. Perkiraan ATAS: bot lain bisa ikut mempercepat diri; antrean & revert tidak dihitung.
+Acuan: ETH = Binance 1 mnt; CRCL/NVDA = NYSE 1 mnt (di luar jam bursa = close terakhir, 'basi').
+
+1. PILIH AMBANG DISKON k DI PARUH 1 PRA-PUBLIK (6-11 Sep), latensi 3 dtk:
+   k 5%: n 2403  WR  99.9%  untung $   48,819  per beli $20.32
+   k 10%: n 2331  WR  99.9%  untung $   48,440  per beli $20.78
+   k 20%: n 2086  WR  99.9%  untung $   45,512  per beli $21.82
+   k 30%: n 1762  WR  99.9%  untung $   39,318  per beli $22.31
+   k 40%: n 1131  WR  99.9%  untung $   22,433  per beli $19.83
+   -> dipilih k = 5% (untung terbesar di paruh 1), diuji di periode lain di bawah.
+
+2. UNTUNG YANG BISA DIAMBIL BOT KITA (k = 5%) per periode & latensi L (semua 3 token jembatan Arc):
+   periode                                         L= 0.5s     L=   1s     L=   2s     L=   3s     L=   5s     L=  10s     L=  30s     L=  60s
+   pra-publik paruh 1 (s.d. 11 Sep)                $83,001     $73,031     $54,713     $48,819     $42,403     $32,506     $23,811     $18,022
+   pra-publik paruh 2 (12-15 Sep)               $1,257,935    $975,395    $740,833    $628,328    $509,817    $357,544    $149,270     $72,104
+   peralihan (15 Sep 22:00 - 16 Sep 06:00)         $45,388     $26,169     $12,514      $9,904      $6,632      $3,619      $1,577        $713
+   pasca-publik 16 Sep 06:00 - 24 Sep               $1,885      $1,245      $1,072        $942        $791        $464        $125         $47
+   2 pekan terakhir (25 Sep - 9 Okt)                  $652        $445        $415        $338        $324        $144         $62         $39
+   WR (beli yang untung setelah biaya) di periode yang sama:
+   pra-publik paruh 1 (s.d. 11 Sep)             100% n3996  100% n3460  100% n2784  100% n2403  100% n1921  100% n1339   100% n811   100% n590
+   pra-publik paruh 2 (12-15 Sep)              100% n16593 100% n13596 100% n10567  100% n8852  100% n7021  100% n4853  100% n2390  100% n1385
+   peralihan (15 Sep 22:00 - 16 Sep 06:00)       99% n2701   99% n1918   99% n1336   99% n1117    99% n795    99% n423    97% n154     96% n83
+   pasca-publik 16 Sep 06:00 - 24 Sep             99% n449    99% n363    99% n332    99% n287    99% n229    98% n156     97% n67     96% n47
+   2 pekan terakhir (25 Sep - 9 Okt)             100% n139    100% n90    100% n81    100% n75    100% n72    100% n52    100% n36    100% n27
+
+3. WAKTU REAKSI PENGAMBIL ASLI (beli di diskon >= k, detik sejak kejadian sebelumnya di pool):
+   pra-publik paruh 1 (s.d. 11 Sep)            n  4957  P10     0.0  median     2.5  P90     85.8 dtk  bagian grup screenshot 4%
+   pra-publik paruh 2 (12-15 Sep)              n 20554  P10     0.0  median     2.0  P90     36.5 dtk  bagian grup screenshot 2%
+   peralihan (15 Sep 22:00 - 16 Sep 06:00)     n  3684  P10     0.0  median     1.0  P90     11.7 dtk  bagian grup screenshot 1%
+   pasca-publik 16 Sep 06:00 - 24 Sep          n   502  P10     0.4  median     4.0  P90     48.1 dtk  bagian grup screenshot 0%
+   2 pekan terakhir (25 Sep - 9 Okt)           n   199  P10     0.0  median     0.5  P90    101.8 dtk  bagian grup screenshot 0%
+
+4. PER TOKEN (pra-publik 6-15 Sep, k terpilih):
+   WETH•Arc (jembatan RH)     L=1s   $29,746  L=3s   $11,226  L=10s    $8,166  L=30s    $6,030
+   CRCL•Arc (jembatan RH)     L=1s  $983,087  L=3s  $637,535  L=10s  $361,716  L=30s  $152,575
+   NVDA•Arc (jembatan RH)     L=1s   $35,594  L=3s   $28,386  L=10s   $20,169  L=30s   $14,476
+
+5. ROBINHOOD (episode diskon >= 5% di pool aset bernilai, tanpa pool ber-hook; untung per aksi semua pelaku):
+   1 Jul - 24 Sep                                   $1,518        $810        $269       $-377       $-979     $-1,174     $-1,346     $-1,316
+   2 pekan terakhir (25 Sep - 9 Okt)                   $25         $25         $11         $11         $11         $11         $11         $11
+
+6. MODEL UTAMA 'PEMBUANG BERSIH' (pra-publik Arc s.d. 16 Sep 06:00; peluang = jualan pelaku yang bersih MENJUAL,
+   ditangkap bila bot kita tiba sebelum pembeli pertama berikutnya; dikurangi fee 2 kaki & gas):
+   Pembanding nyata (dinilai pada nilai tebus): untung pembeli bersih WETH•Arc $22,664, CRCL•Arc $447,992, NVDA•Arc $26,609; terbesar satu pelaku $89,872; grup screenshot ±$7 rb.
+   periode                                         L= 0.5s     L=   1s     L=   2s     L=   3s     L=   5s     L=  10s     L=  30s     L=  60s
+   pra-publik paruh 1 (s.d. 11 Sep)                $53,275     $50,662     $34,046     $29,317     $25,163     $19,449     $12,144      $9,595
+   pra-publik paruh 2 (12-15 Sep)                 $751,476    $544,655    $374,477    $282,381    $224,565    $155,333     $70,693     $36,093
+   peralihan (15 Sep 22:00 - 16 Sep 06:00)          $2,833      $1,319        $151         $62         $59         $21         $12          $7
+   WETH•Arc (jembatan RH)                          $23,768     $18,551     $13,026      $2,823      $2,563      $2,079      $1,599      $1,304
+   CRCL•Arc (jembatan RH)                         $762,604    $558,137    $378,773    $295,997    $235,976    $163,561     $73,940     $38,363
+   NVDA•Arc (jembatan RH)                          $21,211     $19,947     $16,876     $12,941     $11,249      $9,163      $7,309      $6,028
+   Reaksi pembeli pertama setelah jualan (12-15 Sep): P10 0.5 / median 5.2 / P90 83.1 dtk.
+   Catatan: modal yang dibutuhkan besar & harus diputar lewat jembatan (tebus median 2 mnt, p90 1,5 jam; kembali ke Arc
+   butuh jembatan USDC) -> hasil nyata jauh di bawah batas atas ini; CRCL dinilai pada close NYSE (akhir pekan basi).
+
+VONIS:
+  - Jendela pra-publik Arc (12-15 Sep, model pembuang bersih): batas atas yang bisa ditangkap bot latensi 3 dtk ±$282,381,
+    10 dtk ±$155,333, 30 dtk ±$70,693 (hampir semuanya CRCL; WR per beli ±100% BILA bisa ditebus).
+    Ada karena (a) token jembatan bisa ditebus 1:1 dan (b) chain belum publik sehingga pesaing sedikit. Hasil nyata
+    dibatasi modal & kecepatan memutar modal lewat jembatan (grup screenshot: ±$7 rb; pemain terbesar ±$90 rb).
+  - 2 pekan terakhir (25 Sep - 9 Okt): Arc latensi 3 dtk ±$338 (n 75), Robinhood ±$11 untuk seluruh periode itu
+    -> TIDAK layak untuk bot otomatis sekarang (receh, diambil bot < 1 dtk).
+  - Bot seperti screenshot hanya berguna di JENDELA PELUNCURAN berikutnya (chain/jembatan baru, pra-publik) — kejadian
+    langka yang tidak bisa dijadwalkan, dengan risiko kustodian jembatan (satu EOA), tebusan dihentikan, token tiruan.
+  Hasil masa lalu bukan jaminan.

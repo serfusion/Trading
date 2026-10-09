@@ -1,0 +1,222 @@
+=== ROBINHOOD CHAIN (TUGAS B): MULAI ===
+Robinhood Chain (L2 Arbitrum, chain 4663, mainnet publik 1 Jul 2026, gas ETH, blok ±0,1 dtk) — dibuat 9 Okt 2026 oleh
+research/arb_robinhood.py (lanjutan arb_cari.py; `python -m research.arb_robinhood <tahap>`).
+Data: swap s.d. blok 83.844.608 (9 Okt 03:33 UTC 9 Okt) + potret eth_call 9 Okt 08:50-09:35 UTC. Acuan: ETH = Binance
+ETHUSDT 1 mnt; saham = Twelve Data 1 mnt jam bursa AS (toleransi 3 mnt). Semua USD = USDG resmi 0x5fc5360d.
+Hanya baca RPC (eth_getLogs/eth_call/getBlock/getTransaction/receipt/getCode) + API publik — tanpa transaksi.
+
+B1. UNDUHAN SWAP POOL KANDIDAT — SELESAI
+    robinhood_swap_parts/: 417 file, 5.668.348 swap (s.d. blok 83.844.608 = 9 Okt 03:33 UTC 2026):
+      WETH/CRCL kandidat (v3/v2/Algebra/LB/...)   4.057.061
+      saham lain (DEX lain + v4 baru)             1.135.305
+      v4 PoolManager (tugas 1-6)                    419.919
+      pabrik oracle 0x831880bd                       56.063
+    Semua 17 tugas lanjutan (12 tugas WETH/CRCL + 5 tugas saham di DEX lain) lengkap; tidak ada sub-jendela hilang.
+    Kenapa agen sebelumnya berhenti & '0 swap' di tugas 6/15:
+      - '0 swap' BUKAN galat RPC: tugas 6/15 = 3 pool v4 milik PoolManager KEDUA 0xf5b06ef9… (bukan Uniswap
+        resmi). Pindai penuh semua log alamat itu (blok 55,0 jt - head): 46 Initialize, hanya 2 Swap seumur hidup
+        (bukan di 3 pool itu) -> memang tidak pernah diperdagangkan. 18 pool v4 resmi baru (8 Okt) juga hanya 2 swap.
+      - Yang menghentikan proses: tugas 7/15 menampung ±1 juta swap pool WETH/USDG (diarbitrase bot tiap blok) di
+        memori (3,7 GB). Perbaikan: per 20 jendela x 100 rb blok, file <= 400 rb baris, bisa dilanjutkan; pool
+        'berat' (> 20 rb swap) berhenti diunduh setelah umur 7 hari (yang dicari = jendela peluncuran).
+      - Swap pabrik 0x831880bd (13 pool, 56 rb swap) memakai event Swap non-standar; harga eksekusinya = harga pasar
+        (oracle/PMM). Rasio cadangan getReserves menyesatkan (MSTR tampak -37%, NVDA -27%, SPY -40%, padahal
+        swap terakhir dieksekusi ±0% dari NYSE/Binance) -> dikeluarkan dari potret.
+    Data lama (riset 8 Okt): 19.309.938 swap pool resmi-resmi (16 saham seluruh riwayat; pool ETH/WETH/USDG hanya
+      hari PERTAMA tiap pool) s.d. blok 83.365.924 (8 Okt 13:57 UTC).
+    BARU (sesi ini): token saham resmi ternyata 192, bukan 16 (lihat B3). Pool 175 token tambahan x USDG/WETH/ETH
+      yang dibuat <= 7 hari setelah mint pertama token: 822 pool, 87.682 swap dalam 72 jam pertama
+      (robinhood_peluncuran_parts/).
+    Batasan: pool ETH/WETH/USDG resmi lama hanya 24 jam pertama; acuan saham hanya jam bursa AS (±3 mnt),
+      di luar jam bursa swap saham TIDAK dinilai; acuan ETH = Binance ETHUSDT 1 mnt (24 jam).
+
+B2. POLA SCREENSHOT DI ROBINHOOD (beli pecahan kecil sampai batas, seperti wetharb) + JEJAK GRUP E1/E2
+    Cocokkan jumlah PERSIS 21 baris screenshot di SEMUA swap Robinhood (5,67 jt baru + 19,3 jt lama): 0 cocok
+      -> screenshot BUKAN dari Robinhood (sudah terbukti di Arc, lihat hasil_arb_cari.txt bagian A1).
+    Pola 'pecahan' (pengirim sama, pool sama, input quote PERSIS sama >= 5x, <= $250, >= 3 blok) di pool bernilai
+      (kedua token resmi, dinilai per swap thd acuan): 27.577 kelompok; median selisih eksekusi 0,13% (P10 -0,06%, P90 0,60%).
+      Yang membeli <= -5% di bawah acuan: 19 kelompok, untung total $705. Bukan bot pecahan:
+      sebagian besar = SATU tx yang menyapu banyak 'bin' pool Liquidity Book WETH/USDG 0xcc8e5ada (4 Sep 16:30-16:32
+      UTC; tiap bin = 1 event Swap berjumlah sama ±1,05-1,12 USDG). Kejadiannya: 0x8f10b468 menjual WETH senilai
+      ±$14 rb ke pool LB tipis (harga turun s/d -35%, ia rugi ±$1,2 rb); 3 kontrak bot (0x0b8c2b82, 0xd526fb7b,
+      0x2b5f704a) membeli balik dalam 1-3 detik, untung ±$1,1 rb. Sisanya: META/WETH v2 18 Sep (5 beli, +$222).
+      Pembeli 'pecahan' terbanyak justru membayar DI ATAS acuan (+0,15…+0,19%): mis. 0x65050a9b 26 rb x 0,0099 WETH
+      ke SPY/WETH, 0xcaf681a6 SPY/WETH & NVDA/WETH x 0,099 WETH = router/pembuat pasar, bukan pemburu diskon.
+    Semua pool kandidat (termasuk quote tiruan): 6.096 kelompok; WETH/ETH ber-quote USDG resmi 5.564 kelompok,
+      median selisih per swap -0,01%; <= -5%: 13 kelompok (input $2.131) —
+      lagi-lagi sapuan bin LB 4 Sep + 0x7a31dd32 (v2 0x8803c117, 1-2 Jul, 6 x 226 USDG di -5%, +$87).
+      526 kelompok ber-quote token TIRUAN (USDG/USDC/USDT palsu) tidak bisa dinilai (quote tak bernilai).
+    => TIDAK ada bot gaya wetharb/circarb di Robinhood. Bedanya dengan Arc: di Robinhood token resmi dicetak
+       langsung oleh penerbit (bukan jembatan dengan pasokan tipis) dan pool utamanya dalam (ETH/USDG ±$2,5-5 jt per
+       2% gerak), sehingga diskon besar hanya muncul sesaat di pool kecil dan langsung ditutup bot.
+    Jejak grup di Robinhood: E1 0x673250c6 nonce 5, saldo 0,0 ETH; E2 0x7cff8a2b nonce 1, saldo 0,000549 ETH;
+      tidak ada kontrak hasil CREATE dari nonce mereka. Seluruh Transfer ERC-20 E1/E2 sejak blok 1:
+      14 Sep 14:01 UTC  CRCL        0,010922  vault jembatan CRCL -> E1
+      15 Sep 02:20 UTC  mShare      1,000000  0x707dd1d5 -> E1
+      15 Sep 23:47 UTC  CRCL        3,635818  vault jembatan CRCL -> E2
+      16 Sep 05:03 UTC  CRCL        0,010922  E1 -> induk 0x7821f1d9
+      16 Sep 05:04 UTC  CRCL        3,635818  E2 -> induk 0x7821f1d9
+      (ETH asli 0,4455 dari vault WETH ke E1 14 Sep tidak muncul sebagai Transfer — lihat A3). E1/E2 TIDAK pernah
+      berdagang di DEX Robinhood; Robinhood hanya tempat tebus & kirim hasil ke dompet induk.
+    Dompet induk 0x7821f1d9 di Robinhood: EOA dengan delegasi EIP-7702 (kode 23 byte), 453 Transfer ERC-20
+      11 Jul-7 Okt 2026: USDG masuk $2.511 / keluar $2.511; NVDA/CRCL resmi bolak-balik ke vault jembatan
+      (0x3943a8a8 NVDA, 0xaeb17c34 CRCL) = setoran ke Arc; WETH resmi hanya receh (<= 0,006); sisanya puluhan token
+      meme (FARTCLUB, BEAV, XHAMSTER, ...). Tidak ada pola beli-diskon berulang di Robinhood.
+
+B3. POTRET SEKARANG (9 Okt 2026, ±08:50-09:35 UTC = bursa AS TUTUP, harga token saham diam) — hanya eth_call
+    Gas 1 swap: median 166.300 gas x 0,0200 gwei x ETH ±$2.503 = $0,0083 (2 swap ±$0,017) — gas BUKAN penghalang.
+    Kualitas token: token saham RESMI = 192 (bukan 16): nama '... • Robinhood Token', kode proxy identik dengan
+      CRCL resmi, dan tx mint pertamanya dikirim minter yang SAMA 0x2b94105f… (EOA penerbit). 16 token daftar putih lama
+      hanya sebagian; 176 lainnya (DJT, AMC, RDDT, GLD, SGOV, NFLX, SNDK, MU, INTC, ...) juga resmi. Dari 196
+      kontrak berkode sama, 4 belum pernah mint. Tiruan: 375 token lain bernama '• Robinhood Token'
+      dengan kode berbeda; 5.327 token memakai simbol 16 saham lama/WETH/USDG tetapi alamat lain: GME 1.224, COIN 860, USDG 418, NVDA 388, AAPL 343, META 291, TSLA 278, AMD 274 (dengan 192 simbol: 13.798,
+      sebagian simbol umum seperti BULL/FLY/ON).
+      => daftar putih HARUS berdasarkan alamat (atau minter 0x2b94105f), bukan simbol/nama.
+    (a) Aset resmi (192 saham + WETH/ETH) ber-quote USDG resmi: 1.615 pool hidup di 191 aset;
+        1.022 pool menyimpang >= 0,5% dari pool terdalam asetnya (median |selisih| 11,5%).
+        Untung pulang-pergi dihitung PERSIS dua kaki (V4Quoter resmi / simulasi v3 lintas tick dengan fee & tickSpacing
+        dibaca dari kontrak / v2), dikurangi gas 2 swap: positif hanya 4 pool:
+          ETH    v4   hook fee  0,00% selisih  -0,94%  $3 ->   0,01  $25 ->   0,20  $100 ->   0,85  $300 ->   2,59
+          META   v4   hook fee  0,00% selisih   1,07%  $3 ->   0,01  $25 ->   0,17  $100 ->   0,75  $300 ->   2,27
+          ETH    v4   hook fee  0,00% selisih  -1,02%  $3 ->   0,01  $25 ->   0,16  $100 ->  -0,12  $300 ->  -4,48
+          ETH    v4   hook fee  0,00% selisih  -1,58%  $3 ->   0,02  $25 ->   0,04  $100 ->   -100  $300 ->   -300
+        Untung maks $2,59 per transaksi (modal $300) = receh; antre dengan bot lain.
+        'Selisih semu': 119 pool (71 aset) kaki keduanya = 0 / revert. 5 di antaranya tampak untung bila dinilai
+        di harga MID pool utama (cara lama): FICO -22%, FICO -18%, SMR -14%, APP -7%, APP -4%. Pool utama token baru
+        hanya berisi TOKEN (dinding jual satu sisi, tanpa USDG untuk membeli balik) -> tidak bisa diarbitrase.
+    (b) Semua aset (termasuk meme) dengan >= 2 pool ber-quote USDG resmi (08:56 UTC): 158.609 pool,
+        33.194 aset; 400 selisih terbesar dikuotasi; positif 2: STONKBROKER & ROBIN (token meme).
+        Dicek ulang dengan fee/tickSpacing asli kontrak Slipstream (0,25%/1%, bukan angka event): kaki jual STONKBROKER
+        = 0 (likuiditas satu sisi) -> untung semu. Tidak ada peluang nyata.
+    (c) WETH/ETH vs ETH Binance (08:54 UTC, ETH $2.503): 4.060 pool token bersimbol WETH/ETH ber-quote 'USD'.
+        WETH/ETH resmi x USDG resmi (kedalaman > $1 per 2%): 87 pool, median selisih -0,19%;
+        <= -5%: 3 pool, kedalaman $2,66-9,71 per 2% (mis. Slipstream 0x2ab9f3b0 -28%:
+        harga di TEPI rentang likuiditas — WETH sudah habis terjual; 8 Okt 17:24 UTC ada yang menjual 0,0011 WETH di
+        -28% dan bot 0x0970ca94 membeli balik 0,2 dtk kemudian).
+        WETH resmi x stablecoin TIRUAN tampak -16…-60% di 19 pool 'dalam' — kedalamannya dalam token palsu (USDT/
+        USDC/DAI/USDe/PYUSD tiruan), bukan uang. Jebakan bagi bot yang memfilter simbol.
+
+B4. JENDELA PELUNCURAN SEJAK 1 JUL 2026 — episode diskon >= 5% vs acuan di pool BARU beraset bernilai
+    Definisi: episode = deret swap berurutan satu pool dengan harga pool SEBELUM swap <= acuan x 0,95 (ETH Binance;
+    saham = Twelve Data 1 mnt, hanya jam bursa). 'lama' = sejak kejadian yang membuka diskon (swap/likuiditas
+    sebelumnya) sampai harga kembali > -5% (ditutup swap) atau acuan bergeser. 'reaksi' = blok antara kejadian
+    pembuka dan beli pertama di diskon (1 blok = 0,1 dtk). Untung = per AKSI: SEMUA swap pool bernilai dalam tx yang
+    sama dijumlahkan & dinilai acuan (jual-lalu-beli-balik sendiri = 0; arbitrase 2 pool = untung sebenarnya).
+    Pool v4 ber-hook dipisah: event Swap v4 tidak memuat delta hook -> angka bisa menyimpang (dicek lewat receipt).
+
+    (1) 16 saham lama + WETH/ETH/USDG (pool kedua token bernilai; ETH/WETH/USDG resmi lama hanya 24 jam pertama).
+        Per pekan PEMBUATAN pool, diskon dalam 72 jam pertama pool:
+        pekan (mulai)    pool  swap diskon  ep  lama med   lama p90  reaksi med  <=1 blok  beli<-5% USD  untung(tanpa hook)  untung hook  kap med  pengambil
+         -7 (13/05)         1     1      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+         -3 (10/06)         3     3      1   1   60,2 jam   60,2 jam   1278 blok        0%          2,11                0,18         0,00     0,00          1
+         -2 (17/06)         2     2      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          0 (01/07)       117    67      7  52    9,3 dtk   10,3 mnt      2 blok       35%        10.380                 264         0,00     25,6         10
+          1 (08/07)       138   105     22  52    0,4 dtk   86,1 mnt      2 blok       34%        11.322               1.014         0,00     1,74         14
+          2 (15/07)       196   102     10  11   15,1 jam   75,0 jam  95931 blok       36%           204                4,96         0,00     2,13         11
+          3 (22/07)       386   233     20 224    0,2 dtk    7,3 dtk      1 blok       61%        90.864                 860         0,00     61,0         24
+          4 (29/07)       118    88      4   7  114,9 dtk   69,7 jam     83 blok       29%          1,33                0,48        1.728      245          5
+          5 (05/08)       119    64      2   3   28,1 mnt    4,7 jam      1 blok       67%         1.837                65,4         0,00      507          3
+          6 (12/08)       118    72      2   3    0,0 dtk    0,2 dtk      0 blok       67%          1,52                0,21        -0,49     65,5          2
+          7 (19/08)       478   307      3   4  115,3 mnt   37,2 jam  68910 blok        0%          0,00                0,00         0,10    1.121          2
+          8 (26/08)       763   451     32  62    2,7 mnt    6,3 jam   1110 blok       25%           127                15,2       99.896     0,71         21
+          9 (02/09)       970   611     29  36    2,1 jam   25,0 jam  30078 blok       21%         3.973                85,7         -868     21,4         19
+         10 (09/09)       337   193     10  28    0,0 dtk    0,6 dtk      0 blok       88%           256                10,4        5.078      142          9
+         11 (16/09)       330   246      7  11    3,4 mnt    2,7 jam     35 blok       44%         1.666                15,0         0,02     15,8          6
+         12 (23/09)       197    96      3   4    2,9 dtk   11,3 mnt     28 blok       50%          0,39                26,9         0,00     0,05          4
+         13 (30/09)       129    58      1   1    0,1 dtk    0,1 dtk      1 blok      100%          56,0                2,59         0,00     24,1          1
+         14 (07/10)        36    13      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+        Total 72 jam pertama: 499 episode di 153 dari 4.438 pool baru; untung semua pelaku $2.364 (tanpa hook) + $105.832 (pool ber-hook).
+        Semua umur pool (tidak hanya 72 jam), per umur saat episode:
+          umur pool      ep  untung tanpa hook  untung hook  aksi untung>$1  reaksi med (blok)  <=1 blok
+          0-1 jam        59              1.389      104.733              27                  1       93%
+          1-24 jam      341                742          988             113                  1       59%
+          1-3 hari       98                234          112              41                  1       80%
+          3-7 hari      148                518         17,1              48                  1       77%
+          7-30 hari    1383             21.752        -63,8             529                  1       84%
+          > 30 hari    1242             10.836         0,02             538                  1       68%
+        Per bulan (semua umur, tanpa hook): Jun 17 ep $911; Jul 913 ep $5.922; Agu 1047 ep $3.472; Sep 1044 ep $24.562; Okt 151 ep $604
+        Reaksi (episode untung > $1, tanpa hook, n 1270): median 1 blok, 76% diambil <= 1 blok (0,1 dtk), 89% <= 10 blok (1 dtk).
+        Lama diskon (episode tertutup dgn pembeli, n 2694): median 0,9 dtk, P75 5,0 mnt, P90 8,9 jam.
+        Pengambil (pengirim swap = kontrak pemanggil pool): 370 alamat = 336 kontrak + 34 EOA ber-delegasi EIP-7702,
+        0 EOA biasa; 5 teratas = 28% untung positif. Tidak ada satu pemain dominan.
+        Episode terbesar (tanpa hook):
+          17 Sep 19:19 META/WETH  v2   umur   241.0 j  dev -100%  beli $   0,00  untung $ 1.794  reaksi 1 blok  0x419c0117
+          1 Sep 20:41 WETH/USDG  v2   umur  1478.8 j  dev  -93%  beli $   86,6  untung $ 1.123  reaksi 0 blok  0x84d871e1
+          18 Sep 17:34 META/WETH  v2   umur   263.2 j  dev  -96%  beli $   29,0  untung $   680  reaksi 0 blok  0x6eab39b9
+          9 Jul 15:34 GOOGL/USDG v4   umur     0.9 j  dev  -40%  beli $  1.192  untung $   607  reaksi 1 blok  0x00000000
+          18 Sep 16:08 META/WETH  v2   umur   261.8 j  dev  -98%  beli $   15,2  untung $   583  reaksi 0 blok  0x1f08a3b3
+          2 Sep 14:22 AMD/USDG   v3   umur   786.8 j  dev  -98%  beli $    162  untung $   531  reaksi 0 blok  0x877b85f7
+          17 Sep 18:36 META/WETH  v2   umur   240.3 j  dev  -99%  beli $   0,02  untung $   460  reaksi 1 blok  0x1521027b
+          16 Sep 16:19 WETH/USDG  v3   umur   368.3 j  dev -100%  beli $   23,1  untung $   420  reaksi 0 blok  0x35b2147c
+        Pool ber-hook (dicek receipt):
+          27 Agu 10:25 ETH/USDG  event $ 99.726 -> receipt $ 99.726  tx 0xdfde6830d2ad…
+          11 Sep 09:49 ETH/USDG  event $  4.993 -> receipt $  2.896  tx 0xd0f7396e2fc0…
+          30 Jul 22:37 ETH/USDG  event $    283 -> receipt $   -675  tx 0x3c8a5e7e45ec…
+          Total 40 aksi hook |untung| >= $20: event $105.548, receipt $95.530 (receipt = arus ERC-20 sisi pedagang; ETH asli tak terlihat).
+          Terbesar = 27 Agu 10:25 UTC pool ETH/USDG ber-hook 0x19d4c7dd (umur 44 mnt): 1 blok setelah LP menaruh
+          likuiditas di rentang harga ~0, bot (EOA 0x6113eece, nonce 93.891) mengambil 39,65 ETH (±$99,7 rb) dengan
+          1e-6 USDG; WETH berakhir di EOA 0x33eabd63. = KESALAHAN KONFIGURASI LP/hook yang 'dipanen' dalam 0,1 dtk,
+          bukan pola yang bisa diulang. 11 Sep 17:16-20:44: 12 'beli $50-450 rb di -5%' di pool hook 0xd986deca
+          ternyata jual-lalu-beli-balik dalam SATU tx (180 ETH bolak-balik, tanpa Transfer ERC-20) -> untung 0.
+
+    (2) GELOMBANG PELUNCURAN 175 token saham resmi TAMBAHAN (di luar 16) — pool x USDG/WETH/ETH yang dibuat <= 7 hari
+        setelah mint pertama token, swap 72 jam pertama tiap pool. Mint pertama per hari: 11 Jun 11, 30 Jun 65, 13 Agu 72, 14 Agu 22 (+ beberapa tunggal).
+        822 pool, 87.682 swap, acuan Twelve Data 1 mnt untuk 174 ticker; swap yang punya acuan:
+        jam bursa saja 17% (volume 26% dari yang ternilai versi 'basi');
+        versi 'basi' (di luar jam bursa pakai close terakhir) 100%.
+        [jam bursa] per pekan pembuatan pool:
+        pekan (mulai)    pool  swap diskon  ep  lama med   lama p90  reaksi med  <=1 blok  beli<-5% USD  untung(tanpa hook)  untung hook  kap med  pengambil
+         -2 (17/06)        67     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          0 (01/07)       103    73      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          1 (08/07)         9     3      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          2 (15/07)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          3 (22/07)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          5 (05/08)        96    11      3   5   29,7 dtk   45,0 dtk    296 blok       20%           428                0,43         0,00     0,00          4
+          6 (12/08)       379   159      7   8   17,9 dtk   12,9 jam    178 blok       43%         1.508                37,6         0,00     0,00          6
+          7 (19/08)       165    79      1   2    3,4 jam    4,6 jam  79384 blok        0%           324                4,82         0,00     0,00          2
+          9 (02/09)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+        [jam bursa] total: 16 episode di 12 pool; beli di bawah -5% $2.260, untung semua pelaku $42,9 (tanpa hook) + $0,00 (hook); episode untung > $1: 7, reaksi median 26238 blok.
+          17 Agu 14:14 DJT/USDG   v4   umur  17.3 j  dev   -5%  beli $  1.000  untung $  31,2  reaksi 178 blok
+          18 Agu 22:02 AMC/USDG   v4   umur  43.6 j  dev   -6%  beli $    350  untung $  3,47  reaksi 570389 blok
+          13 Agu 19:05 FIG/USDG   v3   umur  68.3 j  dev   -6%  beli $   50,0  untung $  3,23  reaksi 26238 blok
+          13 Agu 16:27 AMC/USDG   v3   umur  65.1 j  dev   -9%  beli $    106  untung $  3,19  reaksi 1 blok
+          20 Agu 11:51 AMC/USDG   v4   umur   1.7 j  dev   -7%  beli $    174  untung $  2,97  reaksi 60252 blok
+        [acuan basi] per pekan pembuatan pool:
+        pekan (mulai)    pool  swap diskon  ep  lama med   lama p90  reaksi med  <=1 blok  beli<-5% USD  untung(tanpa hook)  untung hook  kap med  pengambil
+         -2 (17/06)        67     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          0 (01/07)       103    73      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          1 (08/07)         9     3      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          2 (15/07)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          3 (22/07)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+          5 (05/08)        96    11      5   9   29,7 dtk    8,4 mnt    265 blok       22%           986                90,1         0,00     0,00          6
+          6 (12/08)       379   159     14  18   35,7 mnt   31,1 jam   1102 blok       29%         3.166                 817         0,00     0,00         13
+          7 (19/08)       165    79     31  94    3,9 mnt    5,1 jam   1300 blok        8%        24.693                 260         0,00     0,00         26
+          9 (02/09)         1     0      0   0          -          -           -         -          0,00                0,00         0,00        -          0
+        [acuan basi] total: 125 episode di 54 pool; beli di bawah -5% $28.845, untung semua pelaku $1.168 (tanpa hook) + $0,00 (hook); episode untung > $1: 40, reaksi median 192 blok.
+          19 Agu 22:42 GLD/WETH   v3   umur  46.2 j  dev   -6%  beli $    511  untung $   797  reaksi 1 blok
+          19 Agu 13:40 MRNA/USDG  v4   umur   0.5 j  dev   -7%  beli $  5.199  untung $   148  reaksi 13 blok
+          19 Agu 13:42 MRNA/USDG  v4   umur   0.1 j  dev   -6%  beli $  3.134  untung $  62,6  reaksi 2014 blok
+          19 Agu 13:43 MRNA/USDG  v4   umur   0.1 j  dev   -6%  beli $  2.300  untung $  62,4  reaksi 1300 blok
+          13 Agu 20:21 GLXY/USDG  v3   umur  69.0 j  dev   -9%  beli $   85,4  untung $  57,3  reaksi 0 blok
+
+KESIMPULAN ROBINHOOD (periode: pra-mainnet Mei-Jun, mainnet publik 1 Jul s.d. 9 Okt 2026; semua angka = SEMUA pelaku):
+  1. Pola screenshot (wetharb/circarb) TIDAK ada di Robinhood: 0/21 jumlah cocok, tidak ada pembeli pecahan tetap yang
+     berulang di bawah acuan. Grup E1/E2 hanya memakai Robinhood untuk menebus token jembatan Arc (0,4455 ETH, 3,64 CRCL).
+  2. Jendela peluncuran pool baru beraset bernilai (16 saham lama + ETH/WETH/USDG, 72 jam pertama): 499 episode diskon
+     >= 5% dalam ±14 pekan; untung SEMUA pelaku $2.364 tanpa pool ber-hook (±$166/pekan).
+     Diskon tertutup cepat: median 0,9 dtk; 76% episode yang menguntungkan diambil dalam
+     <= 1 blok (0,1 dtk) oleh ±370 kontrak/akun bot. Bot ritel dengan polling RPC (±1-3 dtk) praktis selalu kalah.
+  3. Gelombang 175 token saham tambahan (30 Jun, 13-14 Agu): untung diskon >= 5% dalam 72 jam pertama $42,9 (jam bursa)
+     / $1.168 (acuan basi di luar jam bursa) untuk semua pelaku — pool token baru umumnya likuiditas SATU SISI
+     (dinding jual), jadi 'murah' tidak bisa dijual balik di DEX.
+  4. Uang besar di Robinhood datang dari KESALAHAN LP, bukan selisih harga normal: pool ETH/USDG ber-hook terkuras 39,65
+     ETH (±$99,7 rb, 27 Agu, 1 blok setelah likuiditas ditaruh di harga ~0), pool v2 META/WETH & WETH/USDG yang dibuat
+     dengan harga salah (-93…-100%, $0,5-1,8 rb per tx). Semuanya diambil bot dalam 0-1 blok; tidak bisa direncanakan.
+  5. Potret 9 Okt: dari 1.022 pool aset resmi yang menyimpang >= 0,5%, hanya 4 untung setelah fee & gas, maks $2,59 per $300. Gas ($0,008/swap) bukan penghalang;
+     penghalangnya kecepatan bot, likuiditas satu sisi, pool ber-hook, dan token/stablecoin TIRUAN (diskon palsu -16…-60%).
+  6. Beda dengan Arc: untung grup di Arc (±$7,6 rb) berasal dari token JEMBATAN pra-publik yang bisa ditebus 1:1 di
+     Robinhood. Robinhood sendiri tidak punya mekanisme itu (token dicetak langsung penerbit 0x2b94105f), jadi tidak ada
+     'jendela pra-publik' serupa sejak 1 Jul.
+  Jujur soal risiko: angka di atas adalah untung KOTOR seluruh pemenang lomba (sebelum biaya gagal/revert, gas prioritas,
+  dan risiko kustodian/token). Tidak ada jaminan pola ini berulang; sebagian besar sudah hilang setelah pekan pertama.
+=== ROBINHOOD CHAIN (TUGAS B): SELESAI ===
