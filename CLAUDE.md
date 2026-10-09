@@ -292,6 +292,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `_prarilis.attach` di GET /api/chat (memori kejutan baris Supabase `prarilis`, seed NFP Sep 2026 di bawah konsensus,
   emas Twelve Data H1 cache 30 mnt, env PRARILIS=0 mati) → aplikasi 4.4 baris "Sebelum rilis" di kartu 🎯.
 - Aplikasi 4.2: kartu 💎 menampilkan daftar 20 koin (pengguna melihat "80"; teks itu tidak ada di kode → daftar eksplisit).
+- 💎 APLIKASI 4.24 (9 Okt, izin "spot dip ... wr dan profit yg memungkinkan tambah saja di apk"): angka "teruji" diganti
+  JUJUR (research/spot_apk.py, cloud/api/spot_teruji.json: 20 koin volume terbesar SAAT ITU + delisting; BARU untung di
+  89% sinyal, +0,41%/sinyal, terburuk -100% LUNA, portofolio +6,9%/th DD -40%, biaya x2 ≈ impas) + LABEL ⚡ Dip ringan
+  (dd20 > -15%: BARU 92,3%/+1,59%, LAMA 96,8%/+2,20% vs biasa 88,4%/+0,15%; label SAJA, sinyal lain tetap dikirim, perlu
+  uji maju - arah dipilih setelah lihat data). cloud/api/_spot.py (tier(), teruji(), env SPOT_TIER=0 mati), SpotCard.kt
+  (pill ⚡, cincin untung% teruji bukan "peluang"), Notifications.kt judul per tier, research/peringkat.py. FILTER lain
+  (BTC>SMA200, kualitas, top-30/50/100) TIDAK lolos (tidak menaikkan WR+profit di LAMA&BARU). Diverifikasi (bias
+  penyintas ekor delisting diperbaiki). spot_model.json TIDAK diubah (sha256 dikunci tests/test_spot_paritas.py).
 
 ## Copy trade (6 Okt 2026 — `docs/COPY_TRADE.md`)
 - Platform copy trade diblokir jaringan sesi. `research/copy_trade.py`: pasar tiruan 263 penyedia XAU (tren/balik/scalper/grid
@@ -385,6 +393,22 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (`live.aktif` + `--live` + env TOKEN_BOT_PK) dan BELUM pernah diuji dengan dana nyata — sesi tidak boleh bertransaksi
   (permintaan baca log sempat ditolak pengaman "Real-World Transactions"); jangan jalankan live dari sesi. Tes
   `tests/test_token_bot.py`. Data besar (swap mentah Robinhood, *_nilai penuh) di-gitignore; yang di-commit *_nilai_ringkas.
+
+## Bot arbitrase token baru gaya screenshot (9 Okt 2026 — `docs/ARB_BOT.md`, `docs/eksternal/hasil_arb_cari*.txt`)
+- Pengguna kirim 2 screenshot bot Telegram (wetharb/circarb) minta ditiru. Dilacak on-chain (research/arb_cari.py,
+  arb_arc.py, arb_robinhood.py, arb_latensi.py): keduanya di **Arc 12-13 Sep 2026 (pra-publik)**, 21/21 swap cocok.
+  Token WETH/CRCL/NVDA Arc = JEMBATAN kustodian RH<->Arc (tebus 1:1 fee 1%). Beli diskon 30-97% di pool tipis lalu tebus
+  penuh; grup untung ±$7,6rb/10 hari (modal $40-180/bot). Bukti cerita "0,45 ETH dari $6": beli 0,441 WETH@3 USDC ->
+  tebus 0,4455 ETH ($1.107). Pesaing terbesar +$90rb. SETELAH mainnet publik (15-16 Sep) peluang hilang: Arc sisa
+  ±$20-65/hari SEMUA pelaku (sejak 1 Okt $21), direbut bot <1 dtk; Robinhood TIDAK ada pola ini (pool dalam, ditutup
+  <0,1 dtk). Latensi (model pembuang bersih): pra-publik 12-15 Sep batas atas ±$282rb@3dtk, 2 pekan terakhir Arc ±$338.
+- Bot: `token_bot/` (pantau_bot.py + tele.py; `python -m token_bot bot|chat-id`). Tombol persis screenshot (Saldo/Harga/
+  Log/Tx/BUY ON-OFF/STOP/RESTART). Mode pantau (bawaan, hanya kabar)/kertas/live. Live bawaan MATI (live.aktif + BUY ON
+  + konfirmasi + batas keras + TOKEN_BOT_PK); order tidak pasti -> STOP+/beres (tidak ulang); state per mode + bot.lock;
+  from.id chat pribadi; rahasia disensor. Bot TIDAK menebus lewat jembatan (manual). Daftar putih token per ALAMAT
+  (5.327 token tiruan bersimbol sama di RH). Tes tests/test_token_bot.py (18). KESIMPULAN jujur: hanya untung di jendela
+  peluncuran chain/jembatan BARU pra-publik; sekarang receh. Sesi TIDAK boleh menjalankan live/transaksi.
+- Data riset di data/research/eksternal/arb/ (file > 45 MB & *_parts di-gitignore; dibuat ulang `python -m research.arb_cari`).
 
 ## Sniper bot Telegram `sniper_bot/` (8 Okt 2026 — `docs/SNIPER_TELEGRAM.md`)
 - Permintaan: bot otomatis ala sniper Telegram dengan strategi teruji bertahun-tahun, TERPISAH dari APK/cloud, + tutorial live.

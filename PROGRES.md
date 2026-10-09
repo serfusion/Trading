@@ -238,3 +238,14 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Agen riset bursa/VPS & latensi DEX gagal (batas sesi) → bagian bursa ditulis dari ccxt + pencarian web (Tokocrypto OJK,
   Binance pernah diblokir Kominfo 2023). Belum: uji maju kertas 2–4 pekan oleh pengguna sebelum live.
 
+### 9 Okt 2026 — bot arbitrase token baru (screenshot) + 💎 aplikasi 4.24
+- Riset on-chain lanjutan (workflow): research/arb_cari.py, arb_arc.py, arb_robinhood.py, arb_latensi.py; laporan
+  docs/eksternal/hasil_arb_cari.txt (Arc), hasil_arb_cari_robinhood.txt, hasil_arb_latensi.txt. Bot screenshot =
+  Arc pra-publik 12-13 Sep (jembatan kustodian RH<->Arc, tebus 1:1); jendela tutup setelah mainnet publik. Data di
+  data/research/eksternal/arb/ (>45 MB & *_parts di-gitignore).
+- Bot token kontrol Telegram token_bot/pantau_bot.py + tele.py (mode pantau/kertas/live; live bawaan mati; tombol gaya
+  screenshot). docs/ARB_BOT.md. Tes tests/test_token_bot.py (18, lulus). Sesi tidak menjalankan live.
+- 💎 aplikasi 4.24: angka teruji jujur + label ⚡ Dip ringan (research/spot_apk.py, cloud/api/spot_teruji.json,
+  cloud/api/_spot.py, SpotCard.kt, Notifications.kt, research/peringkat.py). spot_model.json tidak diubah. Tes
+  tests/test_cloud_spot.py (angka jujur + tier). Belum: kompilasi Kotlin dicek di workflow; cloud tayang setelah merge.
+
