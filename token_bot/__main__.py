@@ -4,6 +4,8 @@
   python -m token_bot pantau [--config ...] [--interval 3] [--live]     # loop; tanpa --live = hanya sinyal (BAWAAN)
   python -m token_bot baru   [--config ...] --jaringan robinhood        # pantau pool BARU token daftar putih
   python -m token_bot cari   --jaringan arc --pool <poolId|alamat v3> [--blok N]
+  python -m token_bot bot    [--config ...]                             # bot kontrol Telegram gaya screenshot (docs/ARB_BOT.md)
+  python -m token_bot chat-id                                           # tampilkan chat_id Telegram (setelah /start)
 
 Tidak ada janji profit: riset docs/TOKEN_BARU.md menunjukkan selisih harga besar hanya ada di hari-hari pertama chain
 dan diambil bot dalam hitungan detik. Mode live hanya bila --live DAN live.aktif: true DAN env TOKEN_BOT_PK.
@@ -13,6 +15,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import sys
 import time
 import urllib.request
@@ -28,6 +31,22 @@ from .strategi import Pasangan, evaluasi
 
 HERE = Path(__file__).resolve().parent
 CACHE = HERE / "cache_pool.json"
+
+
+def muat_env(path: Path) -> None:
+    if not path.exists():
+        return
+    import os
+    try:
+        if os.name != "nt" and path.stat().st_mode & 0o077:
+            print(f"⚠️ {path} bisa dibaca pengguna lain. Jalankan: chmod 600 {path}", flush=True)
+    except OSError:
+        pass
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, _, v = line.partition("=")
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
 LOG = HERE / "log"
 POSISI = HERE / "posisi.json"
 
@@ -211,6 +230,24 @@ def cmd_baru(cfg: dict, net: str, interval: float = 2.0) -> None:
         time.sleep(interval)
 
 
+def cmd_chat_id() -> None:
+    import urllib.request
+    tok = os.environ.get("TELEGRAM_TOKEN", "")
+    if not tok:
+        raise SystemExit("isi TELEGRAM_TOKEN di token_bot/.env dulu")
+    with urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/getUpdates", timeout=30) as r:
+        d = json.loads(r.read())
+    seen = {}
+    for u in d.get("result", []):
+        c = (u.get("message") or {}).get("chat") or {}
+        if c.get("type") == "private":
+            seen[c["id"]] = c.get("username") or c.get("first_name")
+    if not seen:
+        print("Kirim /start ke bot dulu, lalu jalankan lagi.")
+    for cid, nama in seen.items():
+        print(f"chat_id {cid} ({nama}) -> token_bot/.env: TELEGRAM_CHAT_ID={cid}")
+
+
 def cmd_cari(cfg: dict, net: str, pid: str, blok: int | None) -> None:
     ncfg = cfg["jaringan"][net]
     rpc = Rpc(ncfg["rpc"], ncfg["chain_id"])
@@ -221,7 +258,7 @@ def cmd_cari(cfg: dict, net: str, pid: str, blok: int | None) -> None:
 
 def main(argv=None) -> None:
     ap = argparse.ArgumentParser(prog="token_bot")
-    ap.add_argument("perintah", choices=["cek", "pantau", "baru", "cari"])
+    ap.add_argument("perintah", choices=["cek", "pantau", "baru", "cari", "bot", "chat-id"])
     ap.add_argument("--config", default=str(HERE / "config.yaml"))
     ap.add_argument("--interval", type=float, default=3.0)
     ap.add_argument("--live", action="store_true")
@@ -229,7 +266,16 @@ def main(argv=None) -> None:
     ap.add_argument("--pool")
     ap.add_argument("--blok", type=int)
     a = ap.parse_args(argv)
+    muat_env(HERE / ".env")
+    if a.perintah == "chat-id":
+        return cmd_chat_id()
     cfg = muat_cfg(a.config)
+    if a.perintah == "bot":
+        from .pantau_bot import Store, buat
+        store = Store((HERE / "data") / cfg.get("mode", "pantau"))
+        store.kunci()
+        buat(cfg, store=store).jalan()
+        return
     if a.perintah == "cek":
         cmd_cek(cfg)
     elif a.perintah == "pantau":

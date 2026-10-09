@@ -4,6 +4,15 @@
 
 ntfy_topic: ""          # isi nama topik ntfy.sh bila ingin notifikasi HP (opsional)
 
+# Bot kontrol Telegram (python -m token_bot bot, docs/ARB_BOT.md). Rahasia di token_bot/.env (TELEGRAM_TOKEN,
+# TELEGRAM_CHAT_ID, TOKEN_BOT_PK) — JANGAN di-commit. State per mode di token_bot/data/<mode>/.
+mode: pantau            # pantau (hanya kabar, bawaan & paling aman) | kertas (simulasi) | live (uang sungguhan)
+modal_kertas_usd: 500   # saldo awal mode kertas
+interval: 5             # detik antar pindai
+telegram:
+  aktif: true
+  interval_poll: 25
+
 live:                   # transaksi nyata — BAWAAN MATI. Perlu: live.aktif true + --live + env TOKEN_BOT_PK
   aktif: false
   maks_usd_per_trade: 25

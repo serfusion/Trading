@@ -41,6 +41,8 @@ token_bot/config.yaml
 token_bot/log/
 token_bot/posisi.json
 token_bot/cache_pool.json
+token_bot/.env
+token_bot/data/
 # sniper_bot: rahasia, konfigurasi pribadi, status
 sniper_bot/.env
 sniper_bot/config.yaml

@@ -114,3 +114,124 @@ def test_kalkulasi_v4_swap_encode():
     (k,) = decode(["((address,address,uint24,int24,address),bool,uint128,uint128,bytes)"], prm)
     assert k[0][2] == 3000 and k[2] == 10 ** 6
     assert bytes([A_SWAP_EXACT_IN_SINGLE, A_SETTLE_ALL, A_TAKE_ALL]) == b"\x06\x0c\x0f"
+
+
+# ------------------------------------------------------------------ bot kontrol Telegram (pantau_bot), tanpa jaringan
+from token_bot.pantau_bot import Bot, Store      # noqa: E402
+
+
+class TgPalsu:
+    chat_ids = [1]
+
+    def __init__(self):
+        self.pesan, self.tombol, self.antri = [], [], []
+
+    def kirim(self, teks, chat_id=None, menu=False, tombol=None):
+        self.pesan.append(teks)
+        if tombol:
+            self.tombol.append(tombol)
+
+    def jawab_tombol(self, *a, **k):
+        pass
+
+    def mulai_polling(self, offset):
+        pass
+
+    def berhenti(self):
+        pass
+
+    def ambil(self):
+        out, self.antri = self.antri, []
+        return out
+
+
+class Jam:
+    def __init__(self, t):
+        self.t = t
+
+    def __call__(self):
+        return self.t
+
+
+def _bot(tmp_path, mode="kertas", r=None, monkeypatch=None):
+    cfg = {"mode": mode, "modal_kertas_usd": 500, "interval": 5, "live": {"maks_usd_per_trade": 25,
+           "maks_total_usd": 100, "maks_trade_per_hari": 5}, "jaringan": {"x": {"v4_quoter": "q", "v3_quoter": "q"}},
+           "pasangan": [{"jaringan": "x"}]}
+    p = _pas()
+    store = Store(tmp_path / mode)
+    jam = Jam(1_790_000_000.0)
+    b = Bot(cfg, store, {"x": None}, [("x", p)], TgPalsu(), dompet=None, sekarang=jam)
+    if r is not None:
+        b._eval = lambda net, pas: dict(r)
+    return b, jam
+
+
+def test_bot_pantau_hanya_kabar(tmp_path):
+    b, jam = _bot(tmp_path, "pantau", r={"aksi": "BELI", "alasan": "murah", "harga_beli": 78.0, "wajar": 80.0,
+                                         "untung_beli": 0.025, "ukuran_usd": 100, "slippage_beli": 0.003})
+    b.putaran()
+    assert not b.s["posisi"] and any("PELUANG BELI" in x for x in b.tg.pesan)
+
+
+def test_bot_kertas_beli_lalu_jual(tmp_path):
+    rbeli = {"aksi": "BELI", "alasan": "murah", "harga_beli": 78.0, "wajar": 80.0, "untung_beli": 0.025,
+             "ukuran_usd": 100, "slippage_beli": 0.003}
+    b, jam = _bot(tmp_path, "kertas", r=rbeli)
+    b.s["buy_on"] = True
+    b.putaran()                                     # putaran pertama: pindai jalan (jadwal kosong) -> beli
+    pos = b.s["posisi"]["CRCL/USDG"]
+    assert pos["usd"] == 100 and b.s["kas_kertas"] == 400
+    assert pos["token"] == pytest.approx(100 / 78.0)
+    # sekarang JUAL di 82
+    b._eval = lambda net, p: {"aksi": "JUAL", "alasan": "TP", "harga_jual": 82.0, "wajar": 80.0}
+    b.jadwal.pop("pindai", None)
+    b.putaran()
+    assert "CRCL/USDG" not in b.s["posisi"]
+    assert b.s["kas_kertas"] == pytest.approx(400 + 100 / 78.0 * 82.0)
+
+
+def test_bot_stop_menahan_pindai(tmp_path):
+    b, jam = _bot(tmp_path, "kertas", r={"aksi": "BELI", "alasan": "m", "harga_beli": 78.0, "wajar": 80.0,
+                                         "untung_beli": 0.02, "ukuran_usd": 100, "slippage_beli": 0.003})
+    b.s["buy_on"] = True
+    b.perintah(1, "⏹ STOP", None)
+    assert b.s["stop"] and not b.s["buy_on"]
+    b.putaran()
+    assert not b.s["posisi"]
+
+
+def test_bot_buy_on_live_minta_konfirmasi(tmp_path):
+    b, jam = _bot(tmp_path, "pantau")
+    b.mode = "live"
+    b.dompet = type("D", (), {"addr": "0xabc"})()
+    b.perintah(1, "🅰 BUY ON/OFF", None)
+    assert not b.s["buy_on"] and b.tg.tombol          # minta konfirmasi, belum ON
+    tok = b.tg.tombol[-1][0][0]["callback_data"]
+    b.perintah(1, tok, cbid="cb")
+    assert b.s["buy_on"]
+
+
+def test_bot_batas_total_kertas(tmp_path):
+    b, jam = _bot(tmp_path, "live")
+    # mode live tanpa dompet: cek boleh() batas total
+    b.s["posisi"] = {"a": {"usd": 90}}
+    assert b.boleh(25) is not None and "total" in b.boleh(25)
+    assert b.boleh(10) is None
+
+
+def test_bot_pending_memblokir(tmp_path):
+    b, jam = _bot(tmp_path, "kertas")
+    b.s["pending"] = {"nama": "x", "t": jam.t}
+    assert b.boleh(10) is not None
+    b.perintah(1, "/beres", None)
+    assert not b.s["pending"]
+
+
+def test_bot_mode_kertas_tidak_terbawa_live(tmp_path):
+    s = Store(tmp_path / "live")
+    s.s["mode"] = "kertas"
+    s.s["posisi"] = {"x": {"usd": 10}}
+    s.simpan()
+    cfg = {"mode": "live", "live": {}, "jaringan": {}, "pasangan": []}
+    with pytest.raises(RuntimeError):
+        Bot(cfg, s, {}, [], TgPalsu())
