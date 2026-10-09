@@ -375,9 +375,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (lead 1 jam +0,03). Tanpa syarat korelasi pantulan emas gagal di BARU. Kandidat: jatuh ≥ 5 ATR24/24 jam + pantul 38,2% +
   korelasi 60 hari ≥ 0,2 → keranjang kripto 48 jam: BARU n 111 naik 64% +1,1% (dasar −0,2%, p 0,001), LAMA +1,3% vs dasar
   +0,9% (p 0,29); 2025 −0,5%; terburuk −20%; ditemukan setelah lihat 2026. Bukan "serempak" (56–62% koin naik bersama).
-- `cloud/api/_pulih.py` + tes + replay (`research/pulih_replay.py`, 143/144 sama) SIAP, BELUM disambung ke tick.py
-  (pengaman sesi menolak tanpa izin) → tunggu "pasang": env PULIH_SIGNALS, baris `pulih`, ntfy pulih_signal/pulih_close,
-  kartu 🔗 aplikasi 4.25, baris peringkat.
+- DIPASANG 9 Okt (izin "WR dan profit tinggi? Jika tinggi pasang"; naik 63–65% dua periode = syarat 🌊): `cloud/api/_pulih.py`
+  dipanggil tick.py setelah 🌊 (env PULIH_SIGNALS, baris Supabase `pulih`, 1 keranjang 9 koin sekaligus, ntfy pulih_signal/
+  pulih_close), replay `research/pulih_replay.py` 143/144 = riset, aplikasi 4.25 `PulihCard.kt` (pair "SPOT"), baris 🔗 di
+  peringkat.json. Twelve Data ATR ±9% < data riset → ±20% kejadian tambahan di batas 5 ATR (dicatat, aturan tidak diubah).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

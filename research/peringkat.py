@@ -9,7 +9,7 @@ Sumber angka (periode BARU = Okt 2021–2026 kecuali disebut lain):
   cloud_XAU.csv dengan ⏸️ jeda 60 jam, cloud_BTC.csv), R bersih setelah spread asli Exness (research.verifikasi.net).
 - ETH: cloud/api/riwayat.json; DOGE/ADA: cloud_DOGE_tambahan.csv / cloud_ADA_tambahan.csv (replay, R riset).
 - 🎯 WR tinggi (lapisan BTC volatil): _core.WR_TINGGI; 🌊 ikut arus: _arus.RULES; 📰 sinyal setelah berita:
-  sinyal_berita.json; Gap pekan forex: riwayat.json "GAP"; 💎 spot: spot_model.json "teruji".
+  sinyal_berita.json; Gap pekan forex: riwayat.json "GAP"; 💎 spot: spot_model.json "teruji"; 🔗 _pulih.TERUJI.
 - Prediksi/info: prarilis.json (model NFP/JOLTS/Fed), _prediksi.ATURAN_NFP, nfp_titik.json (🔄), uji maju
   validasi_maju.json, 🧪 sinyal trader: docs/eksternal/hasil_sinyal_trader.txt (research/sinyal_trader.py).
 Urutan: grup "sinyal" (bisa ditradingkan, satuan R per sinyal) menurut profit lalu WR; grup "spot" (% per trade);
@@ -123,7 +123,20 @@ def spot() -> list[dict]:
     return [_row("spot", "💎 Spot Binance (peluang naik +3% ≤ 10 hari; 3 merah / model)",
                  {"n": b["n"], "wr": b["wr"], "avg": b["avg"]}, satuan="%",
                  lama={"n": t["lama"]["n"], "wr": t["lama"]["wr"], "avg": t["lama"]["avg"]},
-                 catatan=f"masuk acak {t['dasar_baru']}% • kalah rata-rata {b['kalah']}%, terburuk {b['terburuk']}%")]
+                 catatan=f"masuk acak {t['dasar_baru']}% • kalah rata-rata {b['kalah']}%, terburuk {b['terburuk']}%"),
+            _pulih_row()]
+
+
+def _pulih_row() -> dict:
+    """🔗 emas jatuh dalam lalu pulih → keranjang kripto 48 jam (cloud/api/_pulih.py, docs/XAU_KRIPTO.md)."""
+    sys.path.insert(0, str(API))
+    import _pulih
+    t = _pulih.TERUJI
+    return _row("spot", "🔗 Emas pulih → beli keranjang kripto, tahan 48 jam",
+                {"n": t["baru"][0], "wr": float(t["baru"][1]), "avg": t["baru"][2]}, satuan="%",
+                lama={"n": t["lama"][0], "wr": float(t["lama"][1]), "avg": t["lama"][2]},
+                catatan=f"beli acak saat emas & BTC searah {t['dasar_baru'][1]:+.1f}% • terburuk {t['terburuk']:.0f}% • "
+                        "2025 −0,5% • aturan korelasi ditemukan setelah melihat 2026")
 
 
 def info() -> list[dict]:

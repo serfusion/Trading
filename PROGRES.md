@@ -222,5 +222,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   ringkasan docs/XAU_KRIPTO.md. Kandidat: XAU jatuh ≥ 5 ATR24 dalam 24 jam, pantul 38,2%, korelasi harian XAU–BTC 60 hari
   ≥ 0,2 → beli keranjang koin, tahan 48 jam (BARU 111 kejadian, naik 64%, +1,1%; LAMA +1,3% tetapi p 0,29).
 - Modul cloud `cloud/api/_pulih.py` + tes `tests/test_cloud_pulih.py` + replay `research/pulih_replay.py` (143/144 sinyal
-  = riset). Penyambungan ke `cloud/api/tick.py` DITOLAK pengaman sesi (aturan logika cloud live butuh izin eksplisit) →
-  menunggu "pasang"; lalu kartu 🔗 aplikasi (4.25) + baris peringkat.
+  = riset). Penyambungan ke tick.py sempat ditolak pengaman sesi (belum ada izin) → pengguna: "Jika tinggi pasang" →
+  DIPASANG: tick.py (PULIH_SIGNALS), aplikasi 4.25 (`PulihCard.kt`, `Notifications.pulih`, pair SPOT), peringkat.json.

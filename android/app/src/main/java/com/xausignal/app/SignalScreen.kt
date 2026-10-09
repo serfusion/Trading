@@ -110,6 +110,7 @@ fun SignalsTab(allEvents: List<SignalEvent>, prices: Map<String, SignalEvent>, c
         }
         item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { CopyTraderSection() } }   // 👥 (4.7)
         item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { ArusSection(events) } }
+        item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { PulihSection(events) } }   // 🔗 (4.25)
         if ("SPOT" in follow) item { Column(verticalArrangement = Arrangement.spacedBy(12.dp)) { SpotSection(events) } }
         item { TodayCard(events, money) }
         item {

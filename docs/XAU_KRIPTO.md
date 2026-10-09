@@ -5,7 +5,7 @@ kembali mulai dari xau, btc, koin lainnya ikut naik … saya mencoba membeli beb
 
 Skrip: `research/xau_kripto.py` (uji 1–4) dan `python -m research.xau_kripto rezim` (uji 5), replay kode cloud
 `research/pulih_replay.py`. Hasil mentah: `docs/eksternal/hasil_xau_kripto.txt`, `hasil_xau_kripto_rezim.txt`,
-`hasil_pulih_replay.txt`. Modul cloud (BELUM disambung ke tick live): `cloud/api/_pulih.py`, tes `tests/test_cloud_pulih.py`.
+`hasil_pulih_replay.txt`. Modul cloud: `cloud/api/_pulih.py` (DIPASANG 9 Okt 2026), tes `tests/test_cloud_pulih.py`.
 
 Data: XAU H1 2018–Sep 2026, BTC H1, 19 koin Binance (ETH, BNB, SOL, XRP, ADA, DOGE, TRX, LINK, AVAX, DOT, LTC, BCH, XLM,
 ATOM, ETC, UNI, NEAR, AAVE, FIL). Beli spot di close jam pantulan, jual H jam kemudian, biaya 0,2% pulang-pergi.
@@ -29,7 +29,8 @@ ATOM, ETC, UNI, NEAR, AAVE, FIL). Beli spot di close jam pantulan, jual H jam ke
 - Untung kecil, rugi bisa besar: median +1,3% per 48 jam, tetapi 5% kejadian terburuk ≤ −6% dan satu kali −20%
   (keranjang alt), BTC terburuk −10%. 2025 negatif (−0,5%).
 - Pemisah korelasi **ditemukan setelah melihat data 2026** (korelasi tinggi tahun ini) → belum terbukti seperti aturan
-  yang dipilih murni dari LAMA. Status: **kandidat, BELUM dipasang** (menunggu "pasang").
+  yang dipilih murni dari LAMA. Status: **DIPASANG 9 Okt 2026** sebagai sinyal info (pengguna: "WR dan profit tinggi? Jika
+  tinggi pasang" — peluang naik 63–65% di kedua periode, setara syarat 🌊 WR ≥ 62% dua periode), tanpa order otomatis.
 
 ## 1. Mekanisme: apakah emas & BTC benar-benar bergerak bersama?
 
@@ -117,11 +118,19 @@ tahun per $100, dengan kemungkinan satu sinyal −$10 s.d. −$20.
 4. Tidak "serempak" seperti kesan pengguna: separuh kejadian hanya sebagian koin naik.
 5. Data koin = Binance spot; spread/biaya bursa lain bisa lebih besar dari 0,2%.
 
-## 6. Rencana bila pengguna bilang "pasang"
+## 6. Terpasang (9 Okt 2026, aplikasi 4.25)
 
-- Cloud: sambungkan `_pulih.pulih_tick` di `cloud/api/tick.py` setelah 🌊 (memakai candle XAU yang sudah diambil, tanpa
-  kredit Twelve Data tambahan; BTC harian & harga koin dari data-api.binance.vision), env `PULIH_SIGNALS` (0 = mati),
-  baris Supabase `pulih`, 1 keranjang terbuka sekaligus, pesan ntfy `pulih_signal` (🔗 EMAS PULIH → BELI KRIPTO • tahan
-  48 jam, daftar harga entry 9 koin) & `pulih_close` (hasil per koin setelah 48 jam).
-- Aplikasi: kartu 🔗 (seperti 🌊) dengan daftar koin + harga beli + hitung mundur 48 jam, notifikasi buka/tutup, baris
-  di 🏆 peringkat (ⓘ). Info saja, tanpa order otomatis.
+Keputusan: pengguna "WR dan profit tinggi? Jika tinggi pasang". Penilaian: peluang naik 63–65% di LAMA dan BARU (replay
+cloud 65% / 63%), rata-rata positif di kedua periode (+1,5% / +1,35% per 48 jam) dan 6 dari 7 tahun → setara syarat
+🌊 (WR ≥ 62% di dua periode) → dipasang sebagai info. Profit per sinyal kecil dan rugi ekor besar (lihat bagian 5).
+
+- Cloud: `cloud/api/tick.py` memanggil `_pulih.pulih_tick` setelah 🌊 (memakai candle XAU yang sudah diambil — tanpa
+  kredit Twelve Data tambahan; BTC harian 250 hari & harga koin dari data-api.binance.vision), env `PULIH_SIGNALS` (0 = mati),
+  baris Supabase `pulih`, 1 keranjang terbuka sekaligus, ntfy `pulih_signal` (🔗 EMAS PULIH → BELI KRIPTO • tahan 48 jam,
+  harga beli 9 koin) & `pulih_close` (rata-rata & per koin setelah biaya 0,2%).
+- Aplikasi 4.25: kartu 🔗 (`PulihCard.kt`: koin + harga beli dalam 📋 isi order, jam jual, angka teruji), notifikasi
+  buka/jual (`Notifications.pulih`), ikut pilihan pair "SPOT", baris di 🏆 peringkat (ⓘ, `research/peringkat.py`).
+- Feed live = Twelve Data. Dibanding data riset (Jul–Sep 2026) candle Twelve Data ±8% lebih kecil sehingga ATR ±9% lebih
+  rendah → kejadian ±20% lebih banyak (12 vs 10 dalam 2,5 bulan; kejadian besar sama jamnya, tambahan = jatuh ±5,2–5,4
+  ATR di batas bawah). Aturan tidak diubah (sampel tumpang tindih terlalu pendek untuk kalibrasi); dicatat untuk uji maju.
+- Cek 9 Okt 2026 (Twelve Data 3000 candle): korelasi 60 hari XAU–BTC 0,51 (sinyal aktif bila ada pantulan), 5 ATR ≈ $70.

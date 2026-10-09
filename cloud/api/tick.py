@@ -241,6 +241,15 @@ def run() -> tuple[int, dict]:
                                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")))
     except Exception as exc:  # noqa: BLE001 - ikut arus tidak boleh mengganggu sinyal lain
         result["arus_error"] = str(exc)
+    try:                                   # 🔗 emas pulih → kripto ikut naik (izin pengguna 9 Okt 2026; PULIH_SIGNALS=0 mati)
+        if env.get("PULIH_SIGNALS", "1") == "1":
+            import _pulih
+            store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+            result["pulih"] = _pulih.pulih_tick(datetime.now(timezone.utc), feeds["XAU"].bars or [],
+                                                _core.RowStore(store, "pulih"),
+                                                _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")))
+    except Exception as exc:  # noqa: BLE001 - pulih tidak boleh mengganggu sinyal lain
+        result["pulih_error"] = str(exc)
     try:                                   # 💎 sinyal spot Binance harian (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
         if env.get("SPOT_SIGNALS", "1") == "1":
             import _spot

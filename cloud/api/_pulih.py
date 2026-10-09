@@ -9,7 +9,7 @@ Teruji (keranjang 19 koin, biaya 0,2%): sejak Okt 2021 111 kejadian, naik 64%, r
 pada kondisi korelasi sama: naik 46%, −0,2%); per pekan p-acak < 0,001; sebelum Okt 2021 51 kejadian, naik 63%, +1,3%
 (dasar +0,9% → per kejadian p 0,29, tidak signifikan); 6 dari 7 tahun positif (2025 −0,5%). Rugi terburuk keranjang
 −20% (BTC −10%). Ditemukan setelah melihat data 2026 (korelasi tinggi) → tetap info, bukan jaminan. Tanpa order
-otomatis. BELUM disambung ke tick.py (menunggu "pasang"). State: baris Supabase 'pulih'.
+otomatis. DIPASANG 9 Okt 2026 (izin "jika tinggi pasang"; env PULIH_SIGNALS=0 mati). State: baris Supabase 'pulih'.
 Pesan ntfy: pulih_signal, pulih_close. Hanya library standar Python.
 """
 from __future__ import annotations
@@ -91,8 +91,8 @@ def korelasi(xau: list[_core.Bar], btc_daily: dict, hari: str) -> float | None:
     return sxy / (sx * sy) if sx > 0 and sy > 0 else None
 
 
-def btc_harian(n: int = 100) -> dict:
-    """Close harian BTC/USDT Binance (tanggal UTC → close)."""
+def btc_harian(n: int = 250) -> dict:
+    """Close harian BTC/USDT Binance (tanggal UTC → close); 60 baris korelasi butuh ±110 hari kalender."""
     u = f"https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1d&limit={n}"
     rows = _core.http("GET", u, timeout=10) or []
     return {datetime.fromtimestamp(r[0] / 1000, timezone.utc).strftime("%Y-%m-%d"): float(r[4]) for r in rows}
