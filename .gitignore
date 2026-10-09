@@ -45,3 +45,11 @@ token_bot/cache_pool.json
 sniper_bot/.env
 sniper_bot/config.yaml
 sniper_bot/data/
+
+# riset arbitrase (research/arb_cari.py): file > 45 MB & bagian unduhan sementara dibuat ulang dengan
+# `python -m research.arb_cari pabrik|token|kandidat|swap <net>` (lihat docs/eksternal/hasil_arb_cari*.txt)
+data/research/eksternal/arb/*_parts/
+data/research/eksternal/arb/robinhood_semua_pool.parquet
+data/research/eksternal/arb/robinhood_kandidat.parquet
+data/research/eksternal/arb/robinhood_token.parquet
+data/research/eksternal/arb/arc_semua_pool.parquet
