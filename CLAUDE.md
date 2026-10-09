@@ -370,6 +370,15 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - 9 Okt: sinyal XLM 💎 & 🌊 SELL ETH sama-sama kena anjlok-pantul kripto 8 Okt 15:00 UTC (bukan kode terbalik — replay
   cloud cocok). Potong 🌊 lebih awal (jam 3/6, ≤ −0,3/−0,5R) diuji: tidak lebih baik → tidak diubah.
 
+## 🔗 Emas pulih → kripto ikut naik (9 Okt 2026 — `docs/XAU_KRIPTO.md`)
+- `research/xau_kripto.py` (+ `rezim`): korelasi XAU–BTC lemah kecuali 2020/2026 (2026 harian +0,43), emas TIDAK memimpin
+  (lead 1 jam +0,03). Tanpa syarat korelasi pantulan emas gagal di BARU. Kandidat: jatuh ≥ 5 ATR24/24 jam + pantul 38,2% +
+  korelasi 60 hari ≥ 0,2 → keranjang kripto 48 jam: BARU n 111 naik 64% +1,1% (dasar −0,2%, p 0,001), LAMA +1,3% vs dasar
+  +0,9% (p 0,29); 2025 −0,5%; terburuk −20%; ditemukan setelah lihat 2026. Bukan "serempak" (56–62% koin naik bersama).
+- `cloud/api/_pulih.py` + tes + replay (`research/pulih_replay.py`, 143/144 sama) SIAP, BELUM disambung ke tick.py
+  (pengaman sesi menolak tanpa izin) → tunggu "pasang": env PULIH_SIGNALS, baris `pulih`, ntfy pulih_signal/pulih_close,
+  kartu 🔗 aplikasi 4.25, baris peringkat.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

@@ -1,0 +1,64 @@
+# 🔗 XAU jatuh dalam lalu memantul → kripto ikut naik? (research/xau_kripto.py)
+
+Data: XAU H1 2017-12 s.d. 2026-09-17, kripto BTC, ETH, BNB, SOL, XRP, ADA, DOGE, TRX, LINK, AVAX, DOT, LTC, BCH, XLM, ATOM, ETC, UNI, NEAR, AAVE, FIL.
+Return = close jam pantulan XAU → close H jam kemudian, spot, biaya 0,2% pulang-pergi. ALT = rata-rata koin selain BTC. Dasar = semua jam XAU (beli kapan saja). LAMA s.d. Sep 2021, BARU Okt 2021–2026.
+
+## 1. Mekanisme: XAU vs BTC bergerak bersama? (return 1 jam saat XAU buka & return harian)
+  2018: korelasi 1 jam -0.01 | harian +0.01 (n hari 256)
+  2019: korelasi 1 jam +0.03 | harian +0.12 (n hari 256)
+  2020: korelasi 1 jam +0.11 | harian +0.34 (n hari 258)
+  2021: korelasi 1 jam +0.06 | harian -0.00 (n hari 258)
+  2022: korelasi 1 jam +0.15 | harian +0.13 (n hari 258)
+  2023: korelasi 1 jam +0.11 | harian +0.12 (n hari 257)
+  2024: korelasi 1 jam +0.11 | harian +0.15 (n hari 260)
+  2025: korelasi 1 jam +0.08 | harian +0.07 (n hari 259)
+  2026: korelasi 1 jam +0.26 | harian +0.43 (n hari 184)
+  Lead-lag (korelasi return XAU jam t dengan return BTC jam t+k, 2018–2026):
+    k=0: +0.090
+    k=1: +0.027
+    k=2: -0.001
+    k=3: +0.008
+    k=4: -0.001
+    k=5: -0.007
+    k=6: +0.001
+
+## 2. Dasar (beli di jam XAU mana saja)
+  12 jam LAMA: BTC n 22065 | naik  46.5% | rata  -0.07% | median  -0.12% | ALT n 21963 | naik  50.8% | rata  -0.05% | median  +0.04%
+  12 jam BARU: BTC n 29212 | naik  43.6% | rata  -0.17% | median  -0.21% | ALT n 28944 | naik  47.5% | rata  -0.17% | median  -0.12%
+  24 jam LAMA: BTC n 22065 | naik  49.5% | rata  +0.05% | median  -0.02% | ALT n 21949 | naik  53.3% | rata  +0.17% | median  +0.30%
+  24 jam BARU: BTC n 29202 | naik  45.5% | rata  -0.16% | median  -0.20% | ALT n 28932 | naik  48.5% | rata  -0.13% | median  -0.10%
+  48 jam LAMA: BTC n 22064 | naik  51.3% | rata  +0.22% | median  +0.10% | ALT n 21929 | naik  54.2% | rata  +0.59% | median  +0.56%
+  48 jam BARU: BTC n 29180 | naik  47.0% | rata  -0.15% | median  -0.18% | ALT n 28927 | naik  50.0% | rata  -0.03% | median  +0.00%
+  72 jam LAMA: BTC n 22064 | naik  52.0% | rata  +0.39% | median  +0.21% | ALT n 21923 | naik  56.2% | rata  +0.95% | median  +0.97%
+  72 jam BARU: BTC n 29158 | naik  47.3% | rata  -0.15% | median  -0.21% | ALT n 28927 | naik  49.7% | rata  -0.02% | median  -0.03%
+
+## 3. 336 kombinasi (N jam jatuh × kedalaman × pantulan r × tahan H)
+  8 terbaik dipilih dari LAMA (BTC, excess vs dasar), lalu BARU:
+    N 6 d1.5% r0.382 H72: LAMA n  40 excess +3.23% naik   62% | BARU n  95 excess -1.10% naik   40%
+    N12    k5 r0.5   H72: LAMA n  69 excess +2.63% naik   64% | BARU n  79 excess +0.49% naik   57%
+    N12 d1.5% r0.5   H72: LAMA n  48 excess +2.58% naik   58% | BARU n 124 excess -0.59% naik   44%
+    N 6 d1.5% r0.382 H48: LAMA n  40 excess +2.40% naik   65% | BARU n  95 excess -0.22% naik   47%
+    N 6    k5 r0.382 H72: LAMA n  48 excess +2.31% naik   60% | BARU n  53 excess +0.45% naik   57%
+    N 6    k5 r0.382 H48: LAMA n  48 excess +2.31% naik   69% | BARU n  53 excess +0.78% naik   53%
+    N12    k5 r0.5   H48: LAMA n  69 excess +2.10% naik   67% | BARU n  79 excess +0.57% naik   56%
+    N 6    k4 r0.5   H72: LAMA n  65 excess +2.08% naik   66% | BARU n  94 excess +0.52% naik   49%
+  BTC: kombinasi dengan excess > 0 di KEDUA periode: 61% (kebetulan murni ≈ 25%); rata-rata excess LAMA +0.81% BARU +0.07%
+  8 terbaik dipilih dari LAMA (ALT, excess vs dasar), lalu BARU:
+    N12 d1.5% r0.5   H72: LAMA n  48 excess +2.50% naik   69% | BARU n 124 excess -0.76% naik   44%
+    N12    k5 r0.5   H72: LAMA n  69 excess +2.25% naik   68% | BARU n  79 excess +0.25% naik   53%
+    N48   d2% r0.382 H72: LAMA n  52 excess +2.21% naik   71% | BARU n 106 excess -0.33% naik   45%
+    N 6 d1.5% r0.382 H72: LAMA n  40 excess +2.20% naik   60% | BARU n  95 excess -1.55% naik   34%
+    N 6    k5 r0.382 H48: LAMA n  48 excess +2.07% naik   62% | BARU n  53 excess +0.81% naik   57%
+    N12    k5 r0.382 H72: LAMA n 103 excess +1.90% naik   66% | BARU n 135 excess +0.37% naik   52%
+    N 6    k5 r0.382 H72: LAMA n  48 excess +1.83% naik   65% | BARU n  53 excess +0.63% naik   49%
+    N 6    k4 r0.5   H24: LAMA n  65 excess +1.75% naik   69% | BARU n  94 excess +0.30% naik   52%
+  ALT: kombinasi dengan excess > 0 di KEDUA periode: 47% (kebetulan murni ≈ 25%); rata-rata excess LAMA +0.92% BARU -0.01%
+
+## 4. Rincian aturan terbaik LAMA: XAU jatuh d1.5% dalam 12 jam, pantul 0.5 → tahan 72 jam
+  LAMA: BTC n   48 | naik  58.3% | rata  +2.97% | median  +1.77% | ALT n   48 | naik  68.8% | rata  +3.46% | median  +4.66% | p-acak ALT 0.017
+  BARU: BTC n  124 | naik  44.4% | rata  -0.74% | median  -0.47% | ALT n  121 | naik  45.5% | rata  -0.78% | median  -0.53% | p-acak ALT 0.913
+  BTC ikut jatuh (serempak): BTC n  164 | naik  48.8% | rata  +0.24% | median  -0.12% | ALT n  161 | naik  50.9% | rata  +0.22% | median  +0.25%
+  BTC tidak ikut jatuh: BTC n    8 | naik  37.5% | rata  +1.37% | median  -0.54% | ALT n    8 | naik  75.0% | rata  +4.50% | median  +4.76%
+  per tahun (rata ALT / BTC): 2018:+4.7/-0.0%(2.0) 2019:+2.8/+4.1%(6.0) 2020:+2.2/+2.3%(32.0) 2021:+6.3/+3.8%(10.0) 2022:-1.1/-1.3%(9.0) 2023:+4.4/+3.9%(3.0) 2024:+2.4/+2.1%(13.0) 2025:-1.1/-0.7%(29.0) 2026:-1.4/-1.3%(68.0)
+  per koin (rata semua periode): BNB:+1.2% LINK:+0.9% DOT:+0.8% SOL:+0.8% ATOM:+0.7% AAVE:+0.6% BCH:+0.6% TRX:+0.6% ETH:+0.4% BTC:+0.3% AVAX:+0.3% LTC:+0.2% FIL:-0.0% ADA:-0.1% DOGE:-0.1% XRP:-0.2% ETC:-0.2% NEAR:-0.3% XLM:-0.3% UNI:-0.6%
+

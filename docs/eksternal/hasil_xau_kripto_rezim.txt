@@ -1,0 +1,97 @@
+# 🔗 Rezim korelasi: jatuh dalam XAU lalu pantul, dipisah korelasi harian XAU–BTC (research/xau_kripto.py rezim)
+Return ALT = rata-rata 19 koin selain BTC, biaya 0,2%. Dasar = semua jam XAU pada rezim korelasi yang sama.
+
+## 5a. Korelasi 60 hari ≥ 0,2 vs < 0,2 (tahan 48 jam)
+  N 6 k5 r0.382 korelasi ≥ 0,2 : | LAMA n  13 ALT naik  77% rata +4.02% BTC +3.87% | BARU n  26 ALT naik  65% rata +1.49% BTC +1.28%
+  N 6 k5 r0.382 korelasi < 0,2 : | LAMA n  34 ALT naik  56% rata +2.14% BTC +2.06% | BARU n  27 ALT naik  48% rata +0.09% BTC +0.02%
+  N12 k5 r0.382 korelasi ≥ 0,2 : | LAMA n  29 ALT naik  66% rata +2.24% BTC +2.05% | BARU n  68 ALT naik  56% rata +0.61% BTC +1.06%
+  N12 k5 r0.382 korelasi < 0,2 : | LAMA n  69 ALT naik  67% rata +2.08% BTC +1.70% | BARU n  67 ALT naik  51% rata -0.02% BTC -0.15%
+  N12 k5 r0.5   korelasi ≥ 0,2 : | LAMA n  16 ALT naik  62% rata +2.37% BTC +2.79% | BARU n  39 ALT naik  59% rata +1.19% BTC +1.33%
+  N12 k5 r0.5   korelasi < 0,2 : | LAMA n  48 ALT naik  65% rata +2.26% BTC +2.01% | BARU n  40 ALT naik  50% rata -0.58% BTC -0.45%
+  N24 k5 r0.382 korelasi ≥ 0,2 : | LAMA n  51 ALT naik  63% rata +1.34% BTC +1.46% | BARU n 111 ALT naik  64% rata +1.11% BTC +1.00%
+  N24 k5 r0.382 korelasi < 0,2 : | LAMA n 122 ALT naik  61% rata +1.36% BTC +0.92% | BARU n 135 ALT naik  50% rata +0.28% BTC -0.02%
+  N24 k5 r0.5   korelasi ≥ 0,2 : | LAMA n  26 ALT naik  54% rata +1.63% BTC +2.53% | BARU n  91 ALT naik  63% rata +1.30% BTC +1.12%
+  N24 k5 r0.5   korelasi < 0,2 : | LAMA n  80 ALT naik  60% rata +1.53% BTC +1.38% | BARU n  91 ALT naik  48% rata +0.22% BTC -0.14%
+  N24 k4 r0.5   korelasi ≥ 0,2 : | LAMA n  49 ALT naik  55% rata +1.25% BTC +1.72% | BARU n 151 ALT naik  53% rata +0.45% BTC +0.39%
+  N24 k4 r0.5   korelasi < 0,2 : | LAMA n 138 ALT naik  55% rata +0.65% BTC +0.51% | BARU n 164 ALT naik  54% rata +0.47% BTC -0.02%
+  dasar korelasi ≥ 0,2: LAMA ALT +0.91% naik 58% | BARU ALT -0.23% naik 46%
+  dasar korelasi < 0,2: LAMA ALT +0.40% naik 53% | BARU ALT +0.12% naik 52%
+  porsi hari korelasi ≥ 0,2 per tahun: 2018:0% 2019:34% 2020:83% 2021:0% 2022:43% 2023:46% 2024:41% 2025:24% 2026:96%
+
+## 5b. Kepekaan: jendela korelasi × ambang × aturan (p-acak ALT vs dasar rezim sama, 1000 undian)
+  corr30 ≥0.1 N24 k5 r0.382 H48: LAMA n101 naik  63% +1.25% (dasar +0.40%) p 0.095 th+ 3/4 || BARU n139 naik  62% +1.28% (dasar -0.17%) p 0.000 th+ 5/6
+  corr30 ≥0.1 N24 k5 r0.5 H48: LAMA n 57 naik  56% +0.95% (dasar +0.40%) p 0.269 th+ 3/4 || BARU n114 naik  59% +1.19% (dasar -0.17%) p 0.000 th+ 5/6
+  corr30 ≥0.1 N12 k5 r0.382 H48: LAMA n 59 naik  69% +2.96% (dasar +0.40%) p 0.001 th+ 4/4 || BARU n 82 naik  61% +1.34% (dasar -0.17%) p 0.004 th+ 4/5
+  corr30 ≥0.1 N24 k4 r0.382 H48: LAMA n145 naik  61% +1.16% (dasar +0.40%) p 0.071 th+ 3/4 || BARU n224 naik  54% +0.32% (dasar -0.17%) p 0.048 th+ 5/6
+  corr30 ≥0.1 N24 k6 r0.382 H48: LAMA n 58 naik  60% +1.20% (dasar +0.40%) p 0.183 th+ 3/4 || BARU n 83 naik  57% +0.74% (dasar -0.17%) p 0.037 th+ 2/6
+  corr30 ≥0.1 N24 k5 r0.382 H24: LAMA n101 naik  53% +0.85% (dasar +0.21%) p 0.094 th+ 3/4 || BARU n139 naik  58% +0.54% (dasar -0.22%) p 0.007 th+ 4/6
+  corr30 ≥0.1 N24 k5 r0.382 H72: LAMA n101 naik  63% +1.77% (dasar +0.51%) p 0.040 th+ 3/4 || BARU n138 naik  58% +1.29% (dasar -0.18%) p 0.003 th+ 5/6
+  corr30 ≥0.2 N24 k5 r0.382 H48: LAMA n 66 naik  61% +0.98% (dasar +0.63%) p 0.329 th+ 3/4 || BARU n114 naik  65% +1.67% (dasar -0.01%) p 0.000 th+ 5/5
+  corr30 ≥0.2 N24 k5 r0.5 H48: LAMA n 37 naik  51% +1.11% (dasar +0.63%) p 0.325 th+ 3/4 || BARU n 93 naik  60% +1.45% (dasar -0.01%) p 0.000 th+ 5/5
+  corr30 ≥0.2 N12 k5 r0.382 H48: LAMA n 38 naik  68% +2.48% (dasar +0.63%) p 0.044 th+ 4/4 || BARU n 68 naik  62% +1.50% (dasar -0.01%) p 0.004 th+ 4/5
+  corr30 ≥0.2 N24 k4 r0.382 H48: LAMA n100 naik  59% +1.23% (dasar +0.63%) p 0.165 th+ 3/4 || BARU n180 naik  57% +0.87% (dasar -0.01%) p 0.004 th+ 6/6
+  corr30 ≥0.2 N24 k6 r0.382 H48: LAMA n 35 naik  54% +0.49% (dasar +0.63%) p 0.544 th+ 2/4 || BARU n 68 naik  60% +1.04% (dasar -0.01%) p 0.028 th+ 4/5
+  corr30 ≥0.2 N24 k5 r0.382 H24: LAMA n 66 naik  55% +0.73% (dasar +0.35%) p 0.258 th+ 3/4 || BARU n114 naik  64% +0.98% (dasar -0.12%) p 0.001 th+ 4/5
+  corr30 ≥0.2 N24 k5 r0.382 H72: LAMA n 66 naik  64% +1.67% (dasar +0.85%) p 0.175 th+ 3/4 || BARU n113 naik  62% +2.05% (dasar +0.06%) p 0.000 th+ 5/5
+  corr30 ≥0.3 N24 k5 r0.382 H48: LAMA n 43 naik  63% +0.74% (dasar +0.61%) p 0.412 th+ 2/4 || BARU n 83 naik  65% +1.70% (dasar +0.06%) p 0.001 th+ 4/5
+  corr30 ≥0.3 N24 k5 r0.5 H48: LAMA n 24 naik  58% +1.44% (dasar +0.61%) p 0.228 th+ 2/4 || BARU n 68 naik  62% +1.37% (dasar +0.06%) p 0.013 th+ 3/5
+  corr30 ≥0.3 N12 k5 r0.382 H48: LAMA n 25 naik  72% +2.58% (dasar +0.61%) p 0.043 th+ 3/4 || BARU n 49 naik  63% +1.81% (dasar +0.06%) p 0.006 th+ 4/5
+  corr30 ≥0.3 N24 k4 r0.382 H48: LAMA n 66 naik  61% +0.94% (dasar +0.61%) p 0.328 th+ 2/4 || BARU n114 naik  57% +0.94% (dasar +0.06%) p 0.026 th+ 4/5
+  corr30 ≥0.3 N24 k6 r0.382 H48: LAMA n 22 naik  59% +0.91% (dasar +0.61%) p 0.409 th+ 1/3 || BARU n 49 naik  61% +1.19% (dasar +0.06%) p 0.046 th+ 4/5
+  corr30 ≥0.3 N24 k5 r0.382 H24: LAMA n 43 naik  56% +0.23% (dasar +0.31%) p 0.546 th+ 1/4 || BARU n 83 naik  63% +1.09% (dasar -0.08%) p 0.001 th+ 4/5
+  corr30 ≥0.3 N24 k5 r0.382 H72: LAMA n 43 naik  67% +2.31% (dasar +0.99%) p 0.103 th+ 2/4 || BARU n 82 naik  59% +1.89% (dasar +0.22%) p 0.002 th+ 4/5
+  corr60 ≥0.1 N24 k5 r0.382 H48: LAMA n 86 naik  62% +1.32% (dasar +0.48%) p 0.134 th+ 4/4 || BARU n157 naik  60% +0.93% (dasar -0.13%) p 0.002 th+ 4/6
+  corr60 ≥0.1 N24 k5 r0.5 H48: LAMA n 49 naik  55% +1.26% (dasar +0.48%) p 0.185 th+ 4/4 || BARU n129 naik  58% +1.01% (dasar -0.13%) p 0.004 th+ 5/6
+  corr60 ≥0.1 N12 k5 r0.382 H48: LAMA n 49 naik  65% +2.17% (dasar +0.48%) p 0.036 th+ 4/4 || BARU n 99 naik  54% +0.45% (dasar -0.13%) p 0.115 th+ 4/6
+  corr60 ≥0.1 N24 k4 r0.382 H48: LAMA n131 naik  62% +1.34% (dasar +0.48%) p 0.071 th+ 4/4 || BARU n252 naik  54% +0.55% (dasar -0.13%) p 0.010 th+ 5/6
+  corr60 ≥0.1 N24 k6 r0.382 H48: LAMA n 51 naik  61% +1.23% (dasar +0.48%) p 0.213 th+ 4/4 || BARU n 95 naik  57% +0.38% (dasar -0.13%) p 0.129 th+ 2/6
+  corr60 ≥0.1 N24 k5 r0.382 H24: LAMA n 86 naik  56% +0.98% (dasar +0.22%) p 0.075 th+ 3/4 || BARU n157 naik  57% +0.32% (dasar -0.18%) p 0.037 th+ 4/6
+  corr60 ≥0.1 N24 k5 r0.382 H72: LAMA n 86 naik  69% +2.43% (dasar +0.70%) p 0.020 th+ 4/4 || BARU n156 naik  55% +1.00% (dasar -0.12%) p 0.008 th+ 4/6
+  corr60 ≥0.2 N24 k5 r0.382 H48: LAMA n 51 naik  63% +1.34% (dasar +0.91%) p 0.290 th+ 2/2 || BARU n111 naik  64% +1.11% (dasar -0.23%) p 0.001 th+ 4/5
+  corr60 ≥0.2 N24 k5 r0.5 H48: LAMA n 26 naik  54% +1.63% (dasar +0.91%) p 0.260 th+ 2/2 || BARU n 91 naik  63% +1.30% (dasar -0.23%) p 0.003 th+ 5/5
+  corr60 ≥0.2 N12 k5 r0.382 H48: LAMA n 29 naik  66% +2.24% (dasar +0.91%) p 0.099 th+ 2/2 || BARU n 68 naik  56% +0.61% (dasar -0.23%) p 0.068 th+ 3/5
+  corr60 ≥0.2 N24 k4 r0.382 H48: LAMA n 82 naik  62% +1.57% (dasar +0.91%) p 0.148 th+ 2/2 || BARU n177 naik  54% +0.45% (dasar -0.23%) p 0.034 th+ 4/5
+  corr60 ≥0.2 N24 k6 r0.382 H48: LAMA n 28 naik  61% +1.70% (dasar +0.91%) p 0.225 th+ 2/2 || BARU n 65 naik  60% +0.44% (dasar -0.23%) p 0.113 th+ 3/5
+  corr60 ≥0.2 N24 k5 r0.382 H24: LAMA n 51 naik  61% +0.88% (dasar +0.43%) p 0.213 th+ 2/2 || BARU n111 naik  62% +0.70% (dasar -0.22%) p 0.001 th+ 4/5
+  corr60 ≥0.2 N24 k5 r0.382 H72: LAMA n 51 naik  71% +2.62% (dasar +1.34%) p 0.068 th+ 2/2 || BARU n110 naik  58% +1.35% (dasar -0.34%) p 0.001 th+ 5/5
+  corr60 ≥0.3 N24 k5 r0.382 H48: LAMA n 40 naik  70% +1.56% (dasar +1.00%) p 0.222 th+ 2/2 || BARU n 52 naik  69% +2.12% (dasar -0.06%) p 0.000 th+ 5/5
+  corr60 ≥0.3 N24 k5 r0.5 H48: LAMA n 20 naik  65% +1.94% (dasar +1.00%) p 0.214 th+ 1/2 || BARU n 41 naik  71% +2.06% (dasar -0.06%) p 0.000 th+ 5/5
+  corr60 ≥0.3 N12 k5 r0.382 H48: LAMA n 25 naik  72% +2.85% (dasar +1.00%) p 0.044 th+ 2/2 || BARU n 35 naik  63% +1.70% (dasar -0.06%) p 0.009 th+ 2/4
+  corr60 ≥0.3 N24 k4 r0.382 H48: LAMA n 59 naik  66% +1.53% (dasar +1.00%) p 0.204 th+ 2/2 || BARU n 86 naik  55% +0.55% (dasar -0.06%) p 0.110 th+ 4/5
+  corr60 ≥0.3 N24 k6 r0.382 H48: LAMA n 21 naik  67% +1.37% (dasar +1.00%) p 0.371 th+ 1/2 || BARU n 30 naik  70% +1.39% (dasar -0.06%) p 0.040 th+ 4/5
+  corr60 ≥0.3 N24 k5 r0.382 H24: LAMA n 40 naik  65% +0.94% (dasar +0.50%) p 0.234 th+ 2/2 || BARU n 52 naik  63% +1.20% (dasar -0.09%) p 0.003 th+ 5/5
+  corr60 ≥0.3 N24 k5 r0.382 H72: LAMA n 40 naik  75% +2.92% (dasar +1.53%) p 0.072 th+ 2/2 || BARU n 51 naik  61% +2.35% (dasar -0.11%) p 0.001 th+ 5/5
+  corr90 ≥0.1 N24 k5 r0.382 H48: LAMA n 75 naik  64% +0.96% (dasar +0.54%) p 0.266 th+ 3/3 || BARU n136 naik  62% +1.22% (dasar -0.07%) p 0.000 th+ 4/6
+  corr90 ≥0.1 N24 k5 r0.5 H48: LAMA n 42 naik  55% +0.80% (dasar +0.54%) p 0.403 th+ 2/3 || BARU n115 naik  60% +1.07% (dasar -0.07%) p 0.004 th+ 4/6
+  corr90 ≥0.1 N12 k5 r0.382 H48: LAMA n 46 naik  65% +1.47% (dasar +0.54%) p 0.152 th+ 3/3 || BARU n 80 naik  59% +0.63% (dasar -0.07%) p 0.113 th+ 3/5
+  corr90 ≥0.1 N24 k4 r0.382 H48: LAMA n112 naik  64% +1.12% (dasar +0.54%) p 0.150 th+ 3/3 || BARU n215 naik  54% +0.56% (dasar -0.07%) p 0.031 th+ 4/6
+  corr90 ≥0.1 N24 k6 r0.382 H48: LAMA n 45 naik  64% +1.17% (dasar +0.54%) p 0.252 th+ 3/3 || BARU n 81 naik  60% +0.87% (dasar -0.07%) p 0.027 th+ 4/6
+  corr90 ≥0.1 N24 k5 r0.382 H24: LAMA n 75 naik  57% +0.48% (dasar +0.22%) p 0.301 th+ 2/3 || BARU n136 naik  59% +0.64% (dasar -0.17%) p 0.005 th+ 4/6
+  corr90 ≥0.1 N24 k5 r0.382 H72: LAMA n 75 naik  68% +2.19% (dasar +0.86%) p 0.066 th+ 3/3 || BARU n135 naik  58% +1.26% (dasar -0.07%) p 0.003 th+ 5/6
+  corr90 ≥0.2 N24 k5 r0.382 H48: LAMA n 50 naik  66% +1.01% (dasar +1.12%) p 0.550 th+ 3/3 || BARU n 99 naik  67% +1.69% (dasar -0.10%) p 0.000 th+ 5/5
+  corr90 ≥0.2 N24 k5 r0.5 H48: LAMA n 26 naik  58% +1.17% (dasar +1.12%) p 0.475 th+ 1/2 || BARU n 81 naik  67% +1.78% (dasar -0.10%) p 0.000 th+ 5/5
+  corr90 ≥0.2 N12 k5 r0.382 H48: LAMA n 31 naik  68% +2.15% (dasar +1.12%) p 0.146 th+ 3/3 || BARU n 56 naik  62% +1.46% (dasar -0.10%) p 0.008 th+ 3/5
+  corr90 ≥0.2 N24 k4 r0.382 H48: LAMA n 77 naik  66% +1.39% (dasar +1.12%) p 0.326 th+ 3/3 || BARU n158 naik  56% +0.70% (dasar -0.10%) p 0.009 th+ 5/5
+  corr90 ≥0.2 N24 k6 r0.382 H48: LAMA n 29 naik  62% +0.86% (dasar +1.12%) p 0.590 th+ 3/3 || BARU n 58 naik  62% +0.97% (dasar -0.10%) p 0.032 th+ 3/5
+  corr90 ≥0.2 N24 k5 r0.382 H24: LAMA n 50 naik  62% +0.68% (dasar +0.51%) p 0.383 th+ 2/3 || BARU n 99 naik  66% +1.05% (dasar -0.14%) p 0.000 th+ 5/5
+  corr90 ≥0.2 N24 k5 r0.382 H72: LAMA n 50 naik  74% +2.51% (dasar +1.66%) p 0.163 th+ 3/3 || BARU n 98 naik  60% +1.82% (dasar -0.12%) p 0.000 th+ 5/5
+  corr90 ≥0.3 N24 k5 r0.382 H48: LAMA n 36 naik  69% +1.51% (dasar +0.83%) p 0.248 th+ 1/1 || BARU n 49 naik  69% +2.40% (dasar +0.16%) p 0.001 th+ 3/3
+  corr90 ≥0.3 N24 k5 r0.5 H48: LAMA n 19 naik  63% +2.08% (dasar +0.83%) p 0.168 th+ 1/2 || BARU n 39 naik  69% +2.36% (dasar +0.16%) p 0.002 th+ 3/3
+  corr90 ≥0.3 N12 k5 r0.382 H48: LAMA n 23 naik  74% +2.69% (dasar +0.83%) p 0.056 th+ 1/1 || BARU n 35 naik  66% +2.24% (dasar +0.16%) p 0.002 th+ 2/3
+  corr90 ≥0.3 N24 k4 r0.382 H48: LAMA n 55 naik  67% +1.56% (dasar +0.83%) p 0.153 th+ 1/1 || BARU n 79 naik  59% +1.07% (dasar +0.16%) p 0.036 th+ 3/3
+  corr90 ≥0.3 N24 k6 r0.382 H48: LAMA n 18 naik  67% +1.72% (dasar +0.83%) p 0.224 th+ 1/1 || BARU n 30 naik  73% +2.03% (dasar +0.16%) p 0.015 th+ 3/3
+  corr90 ≥0.3 N24 k5 r0.382 H24: LAMA n 36 naik  61% +0.98% (dasar +0.39%) p 0.181 th+ 1/1 || BARU n 49 naik  63% +1.46% (dasar -0.02%) p 0.002 th+ 3/3
+  corr90 ≥0.3 N24 k5 r0.382 H72: LAMA n 36 naik  75% +2.79% (dasar +1.36%) p 0.082 th+ 1/1 || BARU n 48 naik  62% +2.61% (dasar +0.24%) p 0.002 th+ 3/3
+
+## 5c. Aturan terpasang di cloud (_pulih.py): N24 k5 r0.382 H48 + korelasi 60 hari ≥ 0,2
+  kejadian 162 | per tahun: 2019:11 2020:40 2022:17 2023:28 2024:19 2025:14 2026:33
+  LAMA: BTC n   51 | naik  68.6% | rata  +1.46% | median  +0.80% | ALT n   51 | naik  62.7% | rata  +1.34% | median  +2.42%
+  BARU: BTC n  111 | naik  55.9% | rata  +1.00% | median  +0.55% | ALT n  107 | naik  66.4% | rata  +1.11% | median  +1.32%
+  LAMA: 41 pekan berbeda, rata per pekan +1.68% vs pekan acak +0.90% → p 0.006; pekan naik 71%
+  BARU: 85 pekan berbeda, rata per pekan +1.09% vs pekan acak -0.22% → p 0.000; pekan naik 65%
+  LAMA: rata 62% koin naik bersamaan; kejadian ≥ 80% koin naik: 51%
+  BARU: rata 56% koin naik bersamaan; kejadian ≥ 80% koin naik: 41%
+  BTC BARU: P5 -4.7% P25 -0.7% median +0.6% P75 +2.6% P95 +7.6% terburuk -10.0%
+  ALT BARU: P5 -6.0% P25 -1.5% median +1.3% P75 +3.2% P95 +8.7% terburuk -20.0%
+  per tahun ALT: 2019:+0.3%(11) 2020:+1.6%(40) 2022:+1.5%(17) 2023:+0.6%(28) 2024:+1.1%(19) 2025:-0.5%(14) 2026:+2.1%(33)
+  per koin BARU: DOGE:+1.7% ETH:+1.6% UNI:+1.5% FIL:+1.4% AAVE:+1.4% AVAX:+1.3% SOL:+1.3% ETC:+1.3% LINK:+1.2% NEAR:+1.2% XLM:+1.1% ADA:+1.1% BCH:+1.0% BTC:+1.0% BNB:+0.9% XRP:+0.9% ATOM:+0.8% LTC:+0.8% DOT:+0.8% TRX:-0.0%

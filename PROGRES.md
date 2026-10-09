@@ -216,3 +216,11 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - `research/sinyal_trader.py`: unduhan Hyperliquid dihentikan di 1.225/1.386 akun (lanjutkan `unduh`, resumable);
   4 platform lengkap; potret posisi terbuka 8 Okt. Hasil docs/SINYAL_TRADER.md + docs/eksternal/hasil_sinyal_trader.txt.
 
+
+### 9 Okt 2026 — 🔗 emas jatuh dalam lalu pulih → kripto ikut naik? (riset; BELUM dipasang)
+- `research/xau_kripto.py` (uji 1–4) & `python -m research.xau_kripto rezim` (uji 5) → docs/eksternal/hasil_xau_kripto*.txt,
+  ringkasan docs/XAU_KRIPTO.md. Kandidat: XAU jatuh ≥ 5 ATR24 dalam 24 jam, pantul 38,2%, korelasi harian XAU–BTC 60 hari
+  ≥ 0,2 → beli keranjang koin, tahan 48 jam (BARU 111 kejadian, naik 64%, +1,1%; LAMA +1,3% tetapi p 0,29).
+- Modul cloud `cloud/api/_pulih.py` + tes `tests/test_cloud_pulih.py` + replay `research/pulih_replay.py` (143/144 sinyal
+  = riset). Penyambungan ke `cloud/api/tick.py` DITOLAK pengaman sesi (aturan logika cloud live butuh izin eksplisit) →
+  menunggu "pasang"; lalu kartu 🔗 aplikasi (4.25) + baris peringkat.
