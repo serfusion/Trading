@@ -170,3 +170,82 @@ def test_vol_rank_sama_dengan_pandas():
     v = np.log(c).diff().rolling(14).std()
     want = v.rolling(365, min_periods=120).rank(pct=True).iloc[-1]
     assert _spot.vol_rank(bars) == pytest.approx(want, rel=1e-9)
+
+
+# ------------------------------------------------------------------ 9 Okt 2026: angka jujur + label ⚡ Dip ringan
+class PubJudul(Pub):
+    def __init__(self):
+        super().__init__()
+        self.judul = []
+
+    def publish(self, ev, text=None, title=None, *a, **k):
+        self.events.append(ev)
+        self.judul.append((ev.get("type"), ev.get("coin"), title, text))
+
+
+@pytest.fixture
+def model_dd20(monkeypatch):
+    model = {"tp": 0.03, "hari": 10, "ambang": 0.93, "biaya": 0.003, "coins": ["BTC", "ETH"], "fitur": ["dd20"],
+             "teruji": {"baru": {"wr": 92, "avg": 1.37, "kalah": -13, "terburuk": -58}}, "base": 0, "trees": []}
+    monkeypatch.setattr(_spot, "MODEL", model)
+    monkeypatch.setattr(_spot, "prob", lambda x: 0.95)
+    return model
+
+
+def test_label_dip_ringan_dan_angka_jujur(model_dd20, monkeypatch):
+    btc, eth = daily(seed=11), daily(seed=12)
+    # ETH masih dekat puncak 20 hari (-5%) -> ⚡; BTC turun dalam (-30%) -> biasa
+    monkeypatch.setattr(_spot, "features", lambda bars, b: [-0.05] if bars[-1].c == eth[-2].c else [-0.30])
+    store, pub = Store(), PubJudul()
+    now = btc[-1].t + timedelta(minutes=7)
+    _spot.spot_tick(now, store, pub, fetch=make_fetch({"BTC": btc, "ETH": eth}))
+    sig = {e["coin"]: e for e in pub.events if e["type"] == "spot_signal"}
+    assert sig["ETH"]["tier"] == "kilat" and sig["BTC"]["tier"] == "biasa"
+    assert sig["ETH"]["dd20"] == -5.0 and sig["ETH"]["tier_nama"] == "⚡ Dip ringan"
+    assert sig["ETH"]["teruji_tier"]["baru"]["wr"] > sig["BTC"]["teruji_tier"]["baru"]["wr"]
+    judul = {c: t for typ, c, t, _x in pub.judul if typ == "spot_signal"}
+    assert judul["ETH"].endswith("⚡ Dip ringan") and judul["BTC"].endswith("biasa") and "peluang" not in judul["ETH"]
+    teks = {c: x for typ, c, _t, x in pub.judul if typ == "spot_signal"}
+    assert "untung di 92% sinyal" in teks["ETH"] and "menang" not in teks["ETH"]
+    st = [e for e in pub.events if e["type"] == "spot_status"][-1]
+    assert st["teruji"]["baru"]["wr"] == _spot.TERUJI["teruji"]["baru"]["wr"] < 92      # angka jujur, bukan penyintas
+    assert st["tier"]["dd20_min"] == -0.15 and st["open"][0].get("tier")
+    # CLOSE membawa label
+    pos = store.s["open"]["ETH"]
+    eth2 = eth + [_core.Bar(eth[-1].t + DAY, pos["entry"], pos["tp"] * 1.01, pos["entry"] * 0.99, pos["entry"])]
+    btc2 = btc + [_core.Bar(btc[-1].t + DAY, btc[-1].c, btc[-1].c * 1.001, btc[-1].c * 0.99, btc[-1].c)]
+    monkeypatch.setattr(_spot, "prob", lambda x: 0.1)
+    _spot.spot_tick(btc[-1].t + DAY + timedelta(hours=2), store, pub, fetch=make_fetch({"BTC": btc2, "ETH": eth2}))
+    cl = [e for e in pub.events if e["type"] == "spot_close"]
+    assert cl and cl[0]["tier"] == "kilat" and store.s["closed"][0]["tier"] == "kilat"
+
+
+def test_label_bisa_dimatikan(model_dd20, monkeypatch):
+    monkeypatch.setenv("SPOT_TIER", "0")
+    monkeypatch.setattr(_spot, "features", lambda bars, b: [-0.05])
+    store, pub = Store(), PubJudul()
+    btc = daily(seed=13)
+    _spot.spot_tick(btc[-1].t + timedelta(minutes=7), store, pub, fetch=make_fetch({"BTC": btc, "ETH": btc}))
+    sig = [e for e in pub.events if e["type"] == "spot_signal"]
+    assert sig and all("tier" not in e for e in sig)
+    assert [e for e in pub.events if e["type"] == "spot_status"][-1]["tier"] is None
+
+
+def test_tanpa_file_teruji_tetap_jalan(model_dd20, monkeypatch):
+    monkeypatch.setattr(_spot, "TERUJI", {})
+    monkeypatch.setattr(_spot, "features", lambda bars, b: [-0.05])
+    store, pub = Store(), PubJudul()
+    btc = daily(seed=14)
+    _spot.spot_tick(btc[-1].t + timedelta(minutes=7), store, pub, fetch=make_fetch({"BTC": btc, "ETH": btc}))
+    sig = [e for e in pub.events if e["type"] == "spot_signal"]
+    assert sig and "tier" not in sig[0] and sig[0]["teruji"]["wr"] == 92
+
+
+def test_file_teruji_konsisten():
+    t = _spot.TERUJI
+    assert t, "cloud/api/spot_teruji.json harus ada"
+    for per in ("lama", "baru"):
+        k, b = t["tier"]["kilat"][per], t["tier"]["biasa"][per]
+        assert k["n"] + b["n"] == t["teruji"][per]["n"]
+        assert k["wr"] > b["wr"] and k["avg"] > b["avg"]          # label lolos di LAMA & BARU
+    assert t["teruji"]["baru"]["terburuk"] <= -100

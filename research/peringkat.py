@@ -9,7 +9,8 @@ Sumber angka (periode BARU = Okt 2021–2026 kecuali disebut lain):
   cloud_XAU.csv dengan ⏸️ jeda 60 jam, cloud_BTC.csv), R bersih setelah spread asli Exness (research.verifikasi.net).
 - ETH: cloud/api/riwayat.json; DOGE/ADA: cloud_DOGE_tambahan.csv / cloud_ADA_tambahan.csv (replay, R riset).
 - 🎯 WR tinggi (lapisan BTC volatil): _core.WR_TINGGI; 🌊 ikut arus: _arus.RULES; 📰 sinyal setelah berita:
-  sinyal_berita.json; Gap pekan forex: riwayat.json "GAP"; 💎 spot: spot_model.json "teruji".
+  sinyal_berita.json; Gap pekan forex: riwayat.json "GAP"; 💎 spot: spot_teruji.json (angka JUJUR research/spot_apk.py,
+  9 Okt 2026; cadangan spot_model.json "teruji") + label ⚡ Dip ringan.
 - Prediksi/info: prarilis.json (model NFP/JOLTS/Fed), _prediksi.ATURAN_NFP, nfp_titik.json (🔄), uji maju
   validasi_maju.json, 🧪 sinyal trader: docs/eksternal/hasil_sinyal_trader.txt (research/sinyal_trader.py).
 Urutan: grup "sinyal" (bisa ditradingkan, satuan R per sinyal) menurut profit lalu WR; grup "spot" (% per trade);
@@ -118,12 +119,24 @@ def sinyal() -> list[dict]:
 
 
 def spot() -> list[dict]:
-    t = _j("spot_model.json")["teruji"]
+    jujur = API / "spot_teruji.json"
+    tj = _j("spot_teruji.json") if jujur.exists() else {}
+    t = tj.get("teruji") or _j("spot_model.json")["teruji"]
     b = t["baru"]
-    return [_row("spot", "💎 Spot Binance (peluang naik +3% ≤ 10 hari; 3 merah / model)",
+    rows = [_row("spot", "💎 Spot Binance (naik +3% ≤ 10 hari; 3 merah / model; semua sinyal)",
                  {"n": b["n"], "wr": b["wr"], "avg": b["avg"]}, satuan="%",
                  lama={"n": t["lama"]["n"], "wr": t["lama"]["wr"], "avg": t["lama"]["avg"]},
-                 catatan=f"masuk acak {t['dasar_baru']}% • kalah rata-rata {b['kalah']}%, terburuk {b['terburuk']}%")]
+                 catatan=f"angka jujur (koin volume terbesar saat itu, termasuk delisting) • masuk acak "
+                         f"{t['dasar_baru']}% • kalah rata-rata {b['kalah']}%, terburuk {b['terburuk']}%")]
+    k = (tj.get("tier") or {}).get("kilat")
+    if k:
+        kb, kl = k["baru"], k["lama"]
+        rows.insert(0, _row("spot", f"💎 {k['nama']} (label: harga ≤ 15% di bawah puncak 20 hari)",
+                            {"n": kb["n"], "wr": kb["wr"], "avg": kb["avg"]}, satuan="%", status="label",
+                            lama={"n": kl["n"], "wr": kl["wr"], "avg": kl["avg"]},
+                            catatan="label saja (sinyal lain tetap dikirim); arah ditemukan setelah melihat data "
+                                    "2021–2026 → perlu uji maju; rugi ≥ 20% di ±1 dari 100 sinyal"))
+    return rows
 
 
 def info() -> list[dict]:

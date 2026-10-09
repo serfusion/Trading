@@ -390,8 +390,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Permintaan: bot otomatis ala sniper Telegram dengan strategi teruji bertahun-tahun, TERPISAH dari APK/cloud, + tutorial live.
   `python -m sniper_bot jalan|cek|chat-id|uji-telegram|uji-bursa|replay`; tes `tests/test_sniper_bot.py`, `test_spot_paritas.py`.
 - Strategi utama 💎 spot dip (port `cloud/api/_spot.py`, paritas 1e-12) + filter BTC > SMA200, semesta bawaan `volume20` =
-  varian JUJUR D (`research/spot_paritas.py`, `docs/eksternal/spek_spot_dip_bot.txt`): BARU TP 90,9%, +0,80%/sinyal,
-  portofolio +8,5%/th DD −15%; LAMA +23,4%/th. Beli hanya 07:05–08:00 WIB, 10 slot × 10%, TP +3% limit, maks 10 hari, tanpa SL.
+  varian JUJUR D (`research/spot_paritas.py`, `docs/eksternal/spek_spot_dip_bot.txt`): BARU TP 90,6%, +0,73%/sinyal,
+  portofolio +7,7%/th DD −14%; LAMA +23,4%/th (dikoreksi 9 Okt, spot_apk). Beli hanya 07:05–08:00 WIB, 10 slot × 10%, TP +3% limit, maks 10 hari, tanpa SL.
 - 🎯 listing dip: simulator terkoreksi (candle entry) BARU −0,7%/trade → live HANYA kabar (`izinkan_live` bawaan false); replay
   kode bot = `research/listing_dip_porto` 169/169. Short listing futures (`research/listing_short.py`): WR 47%, tidak dipasang.
 - Keselamatan (review adversarial 8 Okt, 40 temuan diperbaiki): order tidak pasti (TidakPasti/galat) → bot dijeda + 🚨, tidak

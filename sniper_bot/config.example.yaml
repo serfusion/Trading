@@ -29,7 +29,7 @@ spot_dip:              # 💎 strategi UTAMA: koin besar yang turun, target +3% 
   aktif: true
   semesta: volume20            # volume20 = 20 koin volume terbesar saat itu (angka JUJUR) | tetap20 = 20 koin cloud
   koin: []                     # isi daftar sendiri hanya bila tahu risikonya (belum diuji)
-  filter_btc_sma200: true      # hanya saat BTC di atas rata-rata 200 hari: DD BARU -38% -> -15%
+  filter_btc_sma200: true      # hanya saat BTC di atas rata-rata 200 hari: DD BARU -40% -> -14%
   filter_kualitas: false       # teruji netral
   persen_modal: 0.10           # portofolio teruji: 10 slot x 10% ekuitas
   maks_posisi: 10

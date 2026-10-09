@@ -47,12 +47,12 @@ BAWAAN: dict = {
     "spot_dip": {
         "aktif": True,
         # volume20 = 20 pair USDT dengan rata-rata volume 7 hari terbesar SAAT ITU (varian JUJUR D, tanpa bias
-        # penyintas: BARU naik 90,9%, +0,8%/sinyal, portofolio +8,5%/th DD -15%). tetap20 = 20 koin spot_model.json
+        # penyintas, dikoreksi 9 Okt: BARU naik 90,6%, +0,73%/sinyal, portofolio +7,7%/th DD -14%). tetap20 = 20 koin spot_model.json
         # (= cloud; angka uji lebih tinggi karena koin dipilih hari ini). koin: [..] = daftar sendiri (belum diuji).
         "semesta": "volume20",
         "koin": [],
         "pra_pilih": 60,                 # volume20: ambil kline 1d hanya untuk 60 pair volume 24 jam terbesar
-        "filter_btc_sma200": True,       # teruji: DD BARU -38% -> -15% (tanpa filter LAMA lebih untung)
+        "filter_btc_sma200": True,       # teruji: DD BARU -40% -> -14% (tanpa filter LAMA lebih untung)
         "filter_kualitas": False,        # teruji netral (D2); boleh dinyalakan
         "persen_modal": 0.10,            # 10% ekuitas per koin (portofolio teruji 10 slot)
         "min_persen_target": 0.5,

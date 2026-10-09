@@ -1,0 +1,347 @@
+{
+ "E": {
+  "LAMA": {
+   "n": 504,
+   "wr": 94.25,
+   "avg": 1.31,
+   "kalah": -21.44,
+   "terburuk": -59.11,
+   "tp": 94.25,
+   "pf_th": 44.4,
+   "dd": -22.3
+  },
+  "BARU": {
+   "n": 1047,
+   "wr": 89.11,
+   "avg": 0.41,
+   "kalah": -18.37,
+   "terburuk": -100.3,
+   "tp": 89.11,
+   "pf_th": 6.9,
+   "dd": -39.9
+  }
+ },
+ "D": {
+  "LAMA": {
+   "n": 315,
+   "wr": 93.65,
+   "avg": 1.14,
+   "kalah": -21.88,
+   "terburuk": -59.11,
+   "tp": 93.65,
+   "pf_th": 23.4,
+   "dd": -20.7
+  },
+  "BARU": {
+   "n": 543,
+   "wr": 90.61,
+   "avg": 0.73,
+   "kalah": -18.23,
+   "terburuk": -55.03,
+   "tp": 90.61,
+   "pf_th": 7.7,
+   "dd": -13.6
+  }
+ },
+ "b": {
+  "LAMA": {
+   "n": 385,
+   "wr": 94.81,
+   "avg": 1.45,
+   "kalah": -21.35,
+   "terburuk": -57.64,
+   "tp": 94.81,
+   "pf_th": 39.4,
+   "dd": -19.6
+  },
+  "BARU": {
+   "n": 685,
+   "wr": 89.2,
+   "avg": 0.41,
+   "kalah": -18.45,
+   "terburuk": -100.3,
+   "tp": 89.2,
+   "pf_th": 4.8,
+   "dd": -26.8
+  }
+ },
+ "D2": {
+  "LAMA": {
+   "n": 253,
+   "wr": 94.07,
+   "avg": 1.23,
+   "kalah": -22.1,
+   "terburuk": -57.64,
+   "tp": 94.07,
+   "pf_th": 20.3,
+   "dd": -18.0
+  },
+  "BARU": {
+   "n": 395,
+   "wr": 91.14,
+   "avg": 0.92,
+   "kalah": -17.41,
+   "terburuk": -35.68,
+   "tp": 91.14,
+   "pf_th": 7.2,
+   "dd": -17.1
+  }
+ },
+ "tier_dip_ringan_E": {
+  "⚡ dip ringan": {
+   "LAMA": {
+    "n": 95,
+    "wr": 96.84,
+    "avg": 2.2,
+    "kalah": -13.0,
+    "terburuk": -30.9,
+    "tp": 96.84,
+    "tahan_median_hari": 1.0,
+    "per_bulan": 4.53,
+    "turun10": 24.21,
+    "rugi20": 1.05
+   },
+   "BARU": {
+    "n": 183,
+    "wr": 92.35,
+    "avg": 1.59,
+    "kalah": -11.79,
+    "terburuk": -24.0,
+    "tp": 92.35,
+    "tahan_median_hari": 1.0,
+    "per_bulan": 3.05,
+    "turun10": 19.67,
+    "rugi20": 1.09
+   }
+  },
+  "biasa": {
+   "LAMA": {
+    "n": 409,
+    "wr": 93.64,
+    "avg": 1.1,
+    "kalah": -22.41,
+    "terburuk": -59.11,
+    "tp": 93.64,
+    "tahan_median_hari": 1.0,
+    "per_bulan": 19.48,
+    "turun10": 24.94,
+    "rugi20": 3.18
+   },
+   "BARU": {
+    "n": 864,
+    "wr": 88.43,
+    "avg": 0.15,
+    "kalah": -19.29,
+    "terburuk": -100.3,
+    "tp": 88.43,
+    "tahan_median_hari": 1.0,
+    "per_bulan": 14.4,
+    "turun10": 28.59,
+    "rugi20": 4.63
+   }
+  },
+  "pf semua 10% (terpasang)": [
+   "LAMA +44.4%/th DD -22% (x2 +32.3%) n 504 94.2% +1.31%",
+   "BARU +6.9%/th DD -40% (x2 +0.3%) n 1047 89.1% +0.41%"
+  ],
+  "pf ⚡ 10% / biasa 5%": [
+   "LAMA +28.3%/th DD -11% (x2 +21.8%) n 504 94.2% +1.31%",
+   "BARU +6.9%/th DD -20% (x2 +3.0%) n 1047 89.1% +0.41%"
+  ],
+  "pf hanya ⚡ (= filter)": [
+   "LAMA +13.2%/th DD -2% (x2 +11.3%) n 95 96.8% +2.20%",
+   "BARU +6.0%/th DD -3% (x2 +4.8%) n 183 92.3% +1.59%"
+  ],
+  "_ekstra": {
+   "boot": {
+    "LAMA": {
+     "avg": [
+      1.12,
+      0.0,
+      2.24,
+      2.5
+     ],
+     "wr": [
+      3.35,
+      -1.32,
+      7.51,
+      8.1
+     ]
+    },
+    "BARU": {
+     "avg": [
+      1.41,
+      0.51,
+      2.24,
+      0.0
+     ],
+     "wr": [
+      3.92,
+      -0.78,
+      8.07,
+      4.9
+     ]
+    }
+   },
+   "dasar": {
+    "LAMA": [
+     86.41,
+     87.48
+    ],
+    "BARU": [
+     76.61,
+     83.27
+    ]
+   },
+   "pf": {
+    "semua 10% (terpasang)": {
+     "LAMA": [
+      44.38,
+      -22.31,
+      32.29
+     ],
+     "BARU": [
+      6.87,
+      -39.88,
+      0.34
+     ]
+    },
+    "⚡ 10% / biasa 5%": {
+     "LAMA": [
+      28.27,
+      -11.1,
+      21.75
+     ],
+     "BARU": [
+      6.93,
+      -20.3,
+      3.04
+     ]
+    },
+    "hanya ⚡ (= filter)": {
+     "LAMA": [
+      13.24,
+      -2.27,
+      11.34
+     ],
+     "BARU": [
+      6.01,
+      -3.14,
+      4.84
+     ]
+    }
+   },
+   "2325": [
+    {
+     "n": 75,
+     "wr": 89.33,
+     "avg": 1.21,
+     "kalah": -11.3,
+     "terburuk": -24.0,
+     "tp": 89.33
+    },
+    {
+     "n": 417,
+     "wr": 92.09,
+     "avg": 1.11,
+     "kalah": -17.41,
+     "terburuk": -55.03,
+     "tp": 92.09
+    }
+   ]
+  }
+ },
+ "acak_E": {
+  "LAMA": {
+   "median": [
+    86.55,
+    0.04,
+    -2.99,
+    -39.66
+   ],
+   "p95": [
+    88.05,
+    0.4,
+    11.26,
+    -31.31
+   ]
+  },
+  "BARU": {
+   "median": [
+    79.71,
+    -0.97,
+    -24.06,
+    -77.89
+   ],
+   "p95": [
+    81.09,
+    -0.74,
+    -19.53,
+    -71.32
+   ]
+  }
+ },
+ "usulan_spot_model": {
+  "teruji_metode": "20 koin volume USDT terbesar SAAT ITU (rata 7 hari), termasuk delisting (10 hari terakhir sebelum delisting ikut dinilai, keluar di close terakhir); model walk-forward; biaya 0,30%; sinyal masuk slot 10; LAMA Jan 2020–Sep 2021, BARU Okt 2021–Sep 2026; research/spot_apk.py",
+  "teruji": {
+   "baru": {
+    "n": 1047,
+    "wr": 89.11,
+    "avg": 0.41,
+    "kalah": -18.37,
+    "terburuk": -100.3,
+    "pf_th": 6.87,
+    "dd": -39.88
+   },
+   "lama": {
+    "n": 504,
+    "wr": 94.25,
+    "avg": 1.31,
+    "kalah": -21.44,
+    "terburuk": -59.11,
+    "pf_th": 44.38,
+    "dd": -22.31
+   },
+   "dasar_baru": 79.71,
+   "catatan": "angka jujur tanpa bias penyintas (bukan 20 koin yang dipilih hari ini)"
+  },
+  "tier": {
+   "dd20_min": -0.15,
+   "kilat": {
+    "nama": "⚡ Dip ringan",
+    "syarat": "harga <= 15% di bawah high 20 hari",
+    "lama": {
+     "n": 95,
+     "wr": 96.84,
+     "avg": 2.2,
+     "kalah": -13.0,
+     "terburuk": -30.9
+    },
+    "baru": {
+     "n": 183,
+     "wr": 92.35,
+     "avg": 1.59,
+     "kalah": -11.79,
+     "terburuk": -24.0
+    }
+   },
+   "biasa": {
+    "nama": "Biasa",
+    "lama": {
+     "n": 409,
+     "wr": 93.64,
+     "avg": 1.1,
+     "kalah": -22.41,
+     "terburuk": -59.11
+    },
+    "baru": {
+     "n": 864,
+     "wr": 88.43,
+     "avg": 0.15,
+     "kalah": -19.29,
+     "terburuk": -100.3
+    }
+   }
+  }
+ }
+}

@@ -15,8 +15,9 @@ Riset pendukung: `docs/eksternal/spek_spot_dip_bot.txt`, `docs/eksternal/hasil_s
   tinggi DAN untung di periode lama maupun 5 tahun terakhir: 💎 Spot dip** (beli koin besar yang sedang turun, jual +3%
   dalam 10 hari). Itulah mesin utama bot ini.
 - Angka yang dipakai adalah versi **JUJUR** (varian D): koin dipilih menurut volume pada SAAT ITU, bukan 20 koin yang
-  kita tahu hari ini masih hidup. Sejak Okt 2021: **TP tercapai 90,9%**, rata **+0,8% per sinyal**, portofolio
-  **±+8,5%/tahun, DD −15%** (biaya ×2: +5%/th). Periode lama (2019–Sep 2021): +23,4%/th, DD −21%.
+  kita tahu hari ini masih hidup. Sejak Okt 2021: **TP tercapai 90,6%**, rata **+0,7% per sinyal**, portofolio
+  **±+7,7%/tahun, DD −14%**. Periode lama (Jan 2020–Sep 2021): +23,4%/th, DD −21%. (Dikoreksi 9 Okt: uji
+  ulang kini ikut menilai 10 hari terakhir sebelum koin delisting — `research/spot_apk.py`.)
 - Itu **bukan "jackpot"**: 1 dari ±11 sinyal gagal dengan rugi rata **−18% (terburuk −55%)**; tahun 2021 & 2022 portofolio
   −2%. BTC beli-tahan sejak Okt 2021 +11%/th tetapi DD −77%. Keunggulan 💎 = WR tinggi & DD kecil, bukan profit besar.
 - 🎯 **Listing dip** (token baru turun ≥ 60%) untung sebelum 2021 tetapi **TIDAK lolos** sejak Okt 2021 (−0,7%/trade;
@@ -30,7 +31,7 @@ Riset pendukung: `docs/eksternal/spek_spot_dip_bot.txt`, `docs/eksternal/hasil_s
 ## Strategi di dalam bot
 | Strategi | Aturan | Periode LAMA | Sejak Okt 2021 (BARU) | Status di bot |
 |---|---|---|---|---|
-| 💎 `spot_dip` | Tiap hari 07:05–08:00 WIB: 20 koin volume terbesar, peluang model ≥ 93% ATAU 3 hari merah turun ≥ 10% di atas SMA200; lewati volatilitas > P90 & saat BTC < SMA200. Beli 10% ekuitas, **TP +3% (limit di bursa), maks 10 hari, tanpa SL**, maks 10 posisi | TP 93,5%, +1,15%/sinyal, portofolio +23,4%/th DD −21% | TP **90,9%**, **+0,80%**/sinyal, portofolio **+8,5%/th DD −15%**; acak −5,4%/th | **Otomatis** (kertas & live) |
+| 💎 `spot_dip` | Tiap hari 07:05–08:00 WIB: 20 koin volume terbesar, peluang model ≥ 93% ATAU 3 hari merah turun ≥ 10% di atas SMA200; lewati volatilitas > P90 & saat BTC < SMA200. Beli 10% ekuitas, **TP +3% (limit di bursa), maks 10 hari, tanpa SL**, maks 10 posisi | TP 93,7%, +1,14%/sinyal, portofolio +23,4%/th DD −21% | TP **90,6%**, **+0,73%**/sinyal, portofolio **+7,7%/th DD −14%**; acak ±−24%/th | **Otomatis** (kertas & live) |
 | 🎯 `listing_dip` | Token baru Binance: P0 = VWAP 60 menit pertama; beli bila ≤ P0 × 0,4 dalam 30 hari; TP +20%, SL −50% (close 1 jam), maks 90 hari, 5% ekuitas | WR 89%, +12,3%/trade, porto +32%/th | WR 71%, **−0,7%**/trade (SL close 1 jam +3,5%, dipilih setelah melihat data) | Kertas: otomatis • Live: **hanya kabar** |
 | 🦄 `dex` | Pool baru / selisih harga DEX (butuh `token_bot/`) | — | peluang ≥1% hilang < 3 dtk | Hanya peringatan |
 | ✋ manual | `/beli SOL 20 5 10` (limit ≤ harga tampil +1%, konfirmasi tombol) | — | — | Atas keputusanmu |
@@ -39,6 +40,8 @@ Per tahun 💎 (portofolio varian D): 2021 −2%, 2022 −2% (hampir tanpa sinya
 2025 +16%, 2026 (s.d. Sep) +2%. Per sinyal: 2020 89% +0,5%, 2021 93% +0,9%, 2023 94% +1,5%, 2024 89% +0,8%,
 2025 93% +0,8%, 2026 95% +1,1%. 25% posisi sempat turun ≥ 10% (63% di antaranya tetap kena TP, rata akhir −5%); 11% sempat
 turun ≥ 20% (39% tetap TP, rata akhir −12%). Menjual saat turun sudah diuji **memperburuk** hasil → bot menahan.
+Label **⚡ Dip ringan** (harga masih ≤ 15% di bawah puncak 20 hari, sama dengan aplikasi 4.24): di varian D BARU
+91,7% / +1,35% per sinyal vs lainnya 90,3% / +0,58% (label saja; arahnya ditemukan setelah melihat data → uji maju).
 
 Pilihan semesta 💎 (`spot_dip.semesta`): `volume20` (bawaan, angka jujur di atas) atau `tetap20` (= 20 koin aplikasi/cloud;
 uji BARU 92–94% dan +9,7–16,9%/th tetapi koinnya dipilih hari ini → terlalu optimistis).

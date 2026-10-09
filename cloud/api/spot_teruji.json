@@ -1,0 +1,64 @@
+{
+ "_catatan": "Angka uji JUJUR 💎 (research/spot_apk.py, docs/eksternal/hasil_spot_apk.txt, diverifikasi 9 Okt 2026). File terpisah dari spot_model.json (sha256 dikunci tests/test_spot_paritas.py). Dibaca cloud/api/_spot.py & research/peringkat.py; menimpa spot_model.json 'teruji'.",
+ "teruji_metode": "20 koin volume USDT terbesar SAAT ITU (rata 7 hari), termasuk delisting (10 hari terakhir sebelum delisting ikut dinilai, keluar di close terakhir); model walk-forward; biaya 0,30%; sinyal masuk slot 10; LAMA Jan 2020–Sep 2021, BARU Okt 2021–Sep 2026; research/spot_apk.py",
+ "teruji": {
+  "baru": {
+   "n": 1047,
+   "wr": 89.11,
+   "avg": 0.41,
+   "kalah": -18.37,
+   "terburuk": -100.3,
+   "pf_th": 6.87,
+   "dd": -39.88
+  },
+  "lama": {
+   "n": 504,
+   "wr": 94.25,
+   "avg": 1.31,
+   "kalah": -21.44,
+   "terburuk": -59.11,
+   "pf_th": 44.38,
+   "dd": -22.31
+  },
+  "dasar_baru": 79.71,
+  "catatan": "angka jujur tanpa bias penyintas (bukan 20 koin yang dipilih hari ini)"
+ },
+ "tier": {
+  "dd20_min": -0.15,
+  "kilat": {
+   "nama": "⚡ Dip ringan",
+   "syarat": "harga <= 15% di bawah high 20 hari",
+   "lama": {
+    "n": 95,
+    "wr": 96.84,
+    "avg": 2.2,
+    "kalah": -13.0,
+    "terburuk": -30.9
+   },
+   "baru": {
+    "n": 183,
+    "wr": 92.35,
+    "avg": 1.59,
+    "kalah": -11.79,
+    "terburuk": -24.0
+   }
+  },
+  "biasa": {
+   "nama": "Biasa",
+   "lama": {
+    "n": 409,
+    "wr": 93.64,
+    "avg": 1.1,
+    "kalah": -22.41,
+    "terburuk": -59.11
+   },
+   "baru": {
+    "n": 864,
+    "wr": 88.43,
+    "avg": 0.15,
+    "kalah": -19.29,
+    "terburuk": -100.3
+   }
+  }
+ }
+}

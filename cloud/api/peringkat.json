@@ -1,5 +1,5 @@
 {
- "dibuat": "2026-10-08",
+ "dibuat": "2026-10-09",
  "keterangan": "Sinyal: profit rata-rata per sinyal dalam R (1R = jarak SL) setelah spread, urut profit lalu WR. Spot: % per trade. Info: akurasi tebakan (bukan profit). Periode BARU = Okt 2021–2026, 'lama' = sebelum Okt 2021. Hasil historis, bukan jaminan.",
  "daftar": [
   {
@@ -258,20 +258,37 @@
   },
   {
    "grup": "spot",
-   "label": "💎 Spot Binance (peluang naik +3% ≤ 10 hari; 3 merah / model)",
-   "n": 603,
-   "wr": 92.0,
-   "avg": 1.37,
+   "label": "💎 ⚡ Dip ringan (label: harga ≤ 15% di bawah puncak 20 hari)",
+   "n": 183,
+   "wr": 92.35,
+   "avg": 1.59,
+   "satuan": "%",
+   "status": "label",
+   "periode": "Okt 2021–2026",
+   "lama": {
+    "n": 95,
+    "wr": 96.84,
+    "avg": 2.2
+   },
+   "catatan": "label saja (sinyal lain tetap dikirim); arah ditemukan setelah melihat data 2021–2026 → perlu uji maju; rugi ≥ 20% di ±1 dari 100 sinyal",
+   "peringkat": 17
+  },
+  {
+   "grup": "spot",
+   "label": "💎 Spot Binance (naik +3% ≤ 10 hari; 3 merah / model; semua sinyal)",
+   "n": 1047,
+   "wr": 89.11,
+   "avg": 0.41,
    "satuan": "%",
    "status": "dikirim",
    "periode": "Okt 2021–2026",
    "lama": {
-    "n": 484,
-    "wr": 94.0,
-    "avg": 1.44
+    "n": 504,
+    "wr": 94.25,
+    "avg": 1.31
    },
-   "catatan": "masuk acak 75.8% • kalah rata-rata -13.3%, terburuk -58.0%",
-   "peringkat": 17
+   "catatan": "angka jujur (koin volume terbesar saat itu, termasuk delisting) • masuk acak 79.71% • kalah rata-rata -18.37%, terburuk -100.3%",
+   "peringkat": 18
   },
   {
    "grup": "info",
@@ -283,7 +300,7 @@
    "status": "kandidat",
    "periode": "2012–2021",
    "catatan": "uji maju sejak 7 Okt 2026: 0/0 naik; lolos bila n ≥ 30 & ≥ 58%",
-   "peringkat": 18
+   "peringkat": 19
   },
   {
    "grup": "info",
@@ -299,7 +316,7 @@
     "wr": 57.7
    },
    "catatan": "dasar naik 57.9%",
-   "peringkat": 19
+   "peringkat": 20
   },
   {
    "grup": "info",
@@ -314,7 +331,7 @@
     "wr": 72.0
    },
    "catatan": "aturan ⚡ sangat kuat (72% s.d. 2021 / 61% sejak Okt 2021)",
-   "peringkat": 20
+   "peringkat": 21
   },
   {
    "grup": "info",
@@ -326,7 +343,7 @@
    "status": "info",
    "periode": "2001–2026",
    "catatan": "info ekonomi, bukan arah emas; dasar 47%",
-   "peringkat": 21
+   "peringkat": 22
   },
   {
    "grup": "info",
@@ -342,7 +359,7 @@
     "wr": 72.3
    },
    "catatan": "dasar naik 46.3%",
-   "peringkat": 22
+   "peringkat": 23
   },
   {
    "grup": "info",
@@ -358,7 +375,7 @@
     "wr": 65.4
    },
    "catatan": "dasar naik 55.9%",
-   "peringkat": 23
+   "peringkat": 24
   },
   {
    "grup": "info",
@@ -370,7 +387,7 @@
    "status": "tidak lolos",
    "periode": "30 hari terakhir (potret)",
    "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
-   "peringkat": 24
+   "peringkat": 25
   },
   {
    "grup": "filter",

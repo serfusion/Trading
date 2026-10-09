@@ -5,8 +5,9 @@ persis (tes paritas tests/test_sniper_bot.py & tests/test_spot_paritas.py). Mode
 
 Angka teruji JUJUR (docs/eksternal/spek_spot_dip_bot.txt, research/spot_paritas.py, model walk-forward, biaya 0,30%):
 varian D = semesta 20 pair volume terbesar SAAT ITU + lewati vol > P90 + BTC > SMA200, 10 slot x 10%:
-  BARU (Okt 2021-Sep 2026): TP +3% tercapai 90,9%, +0,80%/sinyal, portofolio +8,5%/th DD -15% (biaya x2 +5,0%/th)
-  LAMA (2019-Sep 2021):     portofolio +23,4%/th DD -21%
+  BARU (Okt 2021-Sep 2026): TP +3% tercapai 90,6%, +0,73%/sinyal, portofolio +7,7%/th DD -14%
+  LAMA (Jan 2020-Sep 2021): 93,7%, +1,14%/sinyal, portofolio +23,4%/th DD -21%
+  (dikoreksi 9 Okt 2026 di research/spot_apk.py: 10 hari terakhir sebelum delisting ikut dinilai)
   Gagal: rugi rata -18%, terburuk -55%. Acak (semesta sama) BARU -5,4%/th. Tanpa SL (SL memperburuk, sudah diuji).
 """
 from __future__ import annotations
@@ -294,7 +295,8 @@ class SpotDipMesin:
                 if alasan == "BTC di bawah SMA200":
                     hasil["btc_bawah"] = True
                 continue
-            hasil["sinyal"].append(f"{coin} {p * 100:.0f}% ({alasan})")
+            hasil["sinyal"].append(f"{coin}{' ⚡' if bars[-1].c / max(b.h for b in bars[-20:]) > 0.85 else ''} "
+                                   f"skor {p * 100:.0f} ({alasan})")
             if not beli:
                 continue
             terbuka = [x for x in self.m.s["posisi"].values() if x["strategi"] == self.nama]
@@ -312,9 +314,11 @@ class SpotDipMesin:
             sym = f"{coin}USDT"
             harga = self.m.harga.get(sym) or bars[-1].c
             sisa_hari = (hari_ini + hari * HARI - now) / HARI
+            dd20 = bars[-1].c / max(b.h for b in bars[-20:]) - 1
+            kilat = dd20 > -0.15             # label ⚡ Dip ringan (research/spot_apk.py; label saja, sama dengan APK 4.24)
             pos = self.m.buka(self.nama, sym, coin, harga, u, tp, None, sisa_hari,
-                              info={"peluang": p, "alasan": alasan},
-                              label=f"{self.label} peluang {p * 100:.0f}% ({alasan})")
+                              info={"peluang": p, "alasan": alasan, "dd20": dd20, "tier": "kilat" if kilat else "biasa"},
+                              label=f"{self.label}{' ⚡ Dip ringan' if kilat else ''} skor {p * 100:.0f} ({alasan})")
             if pos or self.m.gagal_terakhir == "tidak pasti":
                 self.sp["hari_beli"][coin] = hari_ini              # satu sinyal = satu percobaan
             if pos:

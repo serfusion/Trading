@@ -1,0 +1,464 @@
+# 💎 Spot dip untuk APK: uji JUJUR kandidat tambahan (research/spot_apk.py, 8 Okt 2026)
+Data: kline 1d Binance 555 pair USDT (termasuk delisting) s.d. 2026-09-19. LAMA = 2020-01-01 – Sep 2021, BARU = Okt 2021 – Sep 2026.
+Sinyal: p >= 0,93 ATAU 3 merah (red>=3, r3<=-10%, di atas SMA200) di close hari t; beli open t+1; limit jual +3%; maks 10 hari; biaya 0,30% pulang-pergi (x2 = 0,60%); satu posisi per koin; sinyal saat slot penuh tidak dikirim.
+Model gradient boosting WALK-FORWARD per tahun. M1 = resep riset lama (dilatih 20 koin hari ini + koin ambruk); M2 = dilatih 30 koin volume terbesar SAAT ITU (lebih jujur).
+Semesta jujur = N koin volume USDT terbesar (rata-rata 7 hari s.d. kemarin) di antara koin yang punya >= 200 hari riwayat, termasuk yang kemudian delisting. Urutan pindai = peringkat volume.
+Aturan: FILTER lolos hanya bila untung%, rata/sinyal, dan portofolio %/th naik di LAMA DAN BARU serta di atas acak p95. LABEL lolos bila tier atas lebih baik di kedua periode (dipilih dari LAMA).
+Waktu jalan 26 dtk.
+
+# RINGKASAN & KEPUTUSAN (angka = sinyal yang masuk slot; LAMA Jan 2020–Sep 2021 / BARU Okt 2021–Sep 2026)
+   (Versi setelah VERIFIKASI 8 Okt: baris 10 hari terakhir sebelum koin DELISTING kini ikut dinilai, LAMA
+   efektif mulai 2020 karena model 2019 tidak ada. Lihat bagian VERIFIKASI di akhir file.)
+1. Angka 'teruji' di aplikasi sekarang (spot_model.json: 'naik 92% sinyal, rata +1,37%, rugi rata -13,3%,
+   terburuk -58%', dasar acak 75,8%) berasal dari 20 koin yang DIPILIH HARI INI (research/spot_vol.py, bias
+   penyintas). Di mesin ini 20 koin tetap itu: BARU 92,0% / +1,41%/sinyal, portofolio +17,3%/th.
+   Angka JUJUR (E: 20 koin volume terbesar SAAT ITU, termasuk yang kemudian delisting, model walk-forward):
+   LAMA untung di 94,2% sinyal, rata +1,31%, rugi rata -21,4%, terburuk -59%, portofolio +44,4%/th DD -22%;
+   BARU untung di 89,1% sinyal, rata +0,41%, rugi rata -18,4%, terburuk -100%, portofolio +6,9%/th DD -40% (biaya x2 +0,3%/th).
+   Sinyal tepat sebelum delisting yang masuk slot: LUNA masuk 09 May 2022 -100%, COCOS masuk 25 May 2023 +3%, UNFI masuk 30 Oct 2024 +3%, FTM masuk 08 Jan 2025 +3%.
+   Acak di semesta sama BARU: untung 79,7%, rata -0,97%, portofolio -24,1%/th -> sinyal tetap jauh di atas acak.
+   Model dilatih semesta jujur (M2): BARU 88,6% / +0,37%/sinyal, +5,0%/th DD -38% (LAMA +0,91%/sinyal). TP harus tembus 0,1%: +0,30%/sinyal, +4,6%/th.
+   Portofolio sensitif terhadap detail kecil (urutan koin saat slot penuh, cara memilih semesta): BARU E +6,9%/th (urutan volume) vs +7,6%/th (urutan daftar model, bagian 0), semesta volume 24 jam +10,1%/th. Angka per sinyal lebih stabil.
+2. FILTER tambahan (harus naik untung%, rata, DAN portofolio di LAMA & BARU, di atas acak): TIDAK ADA yang lolos.
+   a) BTC>SMA200: BARU 90,6% / +0,73% / +7,7%/th DD -14% (risiko turun), tetapi LAMA +23,4%/th vs +44,4%/th dan untung%/rata LAMA turun. Sebagai LABEL juga tidak konsisten (LAMA: sinyal saat BTC di bawah SMA200 justru lebih baik; BARU kebalikannya).
+   b) kualitas: portofolio LAMA +39,4, BARU +4,8%/th (E +44,4 / +6,9) -> lihat KEPUTUSAN di bagian 1.
+   c) top-30/50/100 (10/20 slot): untung% & rata/sinyal LEBIH RENDAH di LAMA dan BARU; DD lebih dalam (top-100 20 slot BARU DD -56%). 'Semua koin Binance' tidak menaikkan WR/profit.
+   e) ambang 0,95/0,97, lewati vol > P70: tidak lolos. Kalibrasi BARU datar: p 0,97–0,99 hanya 86,7% untung ->
+      angka 'peluang 9x%' di cincin aplikasi BUKAN peluang nyata.
+3. LABEL yang lolos: '⚡ Dip ringan' = harga saat sinyal masih <= 15% di bawah high 20 hari (fitur dd20 > -0,15,
+   sudah dihitung cloud). Sinyal TIDAK dibuang; hanya diberi label & angka teruji per label.
+   ⚡  LAMA n 95 untung 96,8% rata +2,20% rugi rata -13,0% terburuk -31% | BARU n 183 untung 92,3% rata +1,59% rugi rata -11,8% terburuk -24% (±3,1/bln; rugi >= 20%: 1,1% sinyal)
+   biasa LAMA n 409 untung 93,6% rata +1,10% rugi rata -22,4% terburuk -59% | BARU n 864 untung 88,4% rata +0,15% rugi rata -19,3% terburuk -100% (rugi >= 20%: 4,6% sinyal)
+   Bukti tambahan (bagian 4b): bootstrap blok bulan selisih rata ⚡-biasa BARU +1,41 poin [CI95 +0,51..+2,24], LAMA +1,12 [+0,00..+2,24]; selisih untung% BARU +3,9 [-0,8..+8,1] (CI melewati 0 = belum signifikan);
+   ambang -10/-12/-15/-18% searah di kedua periode (-25% berbalik di LAMA); searah di model M2, semesta volume
+   24 jam, tanpa filter vol, TP ketat, BTC naik & turun; angka dasar hari 'dekat high' tanpa sinyal justru
+   lebih buruk (BARU 76,6% vs 83,3%).
+   JUJUR: (i) arah 'ringan' baru dipertimbangkan setelah melihat BARU (daftar awal memuat 'jatuh dalam'; dari
+   20 kriteria dua arah hanya ini yang lebih baik di kedua periode); (ii) keunggulan terutama di tahun turun/datar
+   (2020, 2022, 2026); 2023–2025 untung% ⚡ 89,3% vs biasa 92,1% (rata +1,21% vs +1,11%); (iii) di koin peringkat 21–100 hanya terlihat di BARU. -> pasang sebagai LABEL + uji maju, bukan filter.
+   Ukuran opsional (BUKAN bawaan): ⚡ 10% modal / biasa 5% -> BARU +6,9%/th DD -20% (biaya x2 +3,0%) vs semua 10% +6,9%/th DD -40% (x2 +0,3%); LAMA +28,3% vs +44,4%/th -> mengurangi risiko, bukan menambah profit LAMA.
+
+# USULAN IMPLEMENTASI (JANGAN dipasang tanpa izin; file cloud/ & android/ tidak diubah riset ini)
+A. Angka teruji + label (isi lengkap di docs/eksternal/spot_apk_teruji.json 'usulan_spot_model'):
+   - JANGAN tulis ke cloud/api/spot_model.json: tests/test_spot_paritas.py mengunci sha256 file itu (sama dengan
+     sniper_bot/strategi/spot_model.json & fixture). Taruh di file baru cloud/api/spot_teruji.json (dibaca _spot.py,
+     menimpa MODEL['teruji'] bila ada), ATAU buat ulang fixture + salinan sniper_bot sekaligus.
+   - 'teruji' DIGANTI angka jujur E (bukan 20 koin penyintas); kunci baru wr/avg/kalah/terburuk tetap (SpotCard &
+     research/peringkat.py membaca kunci itu + 'lama' + 'dasar_baru'); tambah 'teruji_metode'.
+   - 'tier': {'dd20_min': -0.15, 'kilat': {nama '⚡ Dip ringan', lama, baru}, 'biasa': {nama 'Biasa', lama, baru}}.
+B. cloud/api/_spot.py (label saja; keputusan BELI/CLOSE TIDAK berubah, tanpa panggilan data tambahan):
+   - tier = 'kilat' bila dict(zip(MODEL['fitur'], x))['dd20'] > tier['dd20_min'] else 'biasa' (tier tidak ada ->
+     tanpa label, jangan KeyError); env SPOT_TIER (bawaan '1'; '0' = tanpa label, event tetap seperti sekarang).
+   - pos & event spot_signal: + 'tier', 'tier_nama', 'dd20' (persen, 1 desimal), 'teruji_tier' {lama, baru};
+     spot_close & closed[]: + 'tier'; spot_status: 'teruji' jujur + 'tier' (angka per label).
+   - Judul ntfy: '💎 BELI SPOT {KOIN}/USDT • ⚡ Dip ringan' / '💎 BELI SPOT {KOIN}/USDT • biasa' (ganti 'peluang naik p%').
+   - Teks: '⚡ Dip ringan: harga masih ≤15% di bawah puncak 20 hari. Teruji Okt 2021–2026: untung di 92% sinyal,
+     rata +1,6%, rugi terburuk -24%.' / biasa: 'Teruji Okt 2021–2026: untung di 88% sinyal, rata +0,2%
+     (hampir impas setelah biaya), rugi terburuk -100% (koin bisa delisting).' (angka dari file teruji, dibulatkan).
+   - tests/test_cloud_spot.py: tier kilat/biasa dari dd20, SPOT_TIER=0, tanpa blok tier, angka teruji dibaca dari file.
+C. android SpotCard.kt + Notifications.kt (aplikasi 4.24):
+   - Pill '⚡ Dip ringan' (Gold) di samping 'BELI SPOT' bila tier = kilat; tanpa pill untuk biasa.
+   - Cincin: ganti 'p% peluang' -> untung% teruji label (mis. '92%' + 'teruji'); p model kecil 'skor model 95'.
+   - Baris bawah kartu: 'Teruji Okt 2021–2026 (20 koin volume terbesar saat itu, termasuk delisting): ⚡ untung di 92% sinyal,
+     rata +1,6% • biasa 88%, +0,2% • rugi terburuk -100% • acak 80%'.
+   - NoteBox: 'Maks 10% modal per koin. Tanpa SL: sesekali rugi besar (⚡ terburuk -24%, biasa -100%).'
+   - Close terakhir: tampilkan ⚡ di depan koin bila tier kilat. SignalRepository tidak berubah (spot_status apa adanya).
+D. research/peringkat.py: baris 💎 memakai angka jujur + baris '💎 ⚡ Dip ringan (label)' (status 'label').
+E. Semesta (opsional, BUKAN penambah WR/profit, hanya menyamakan dengan uji jujur): env SPOT_SEMESTA=volume (bawaan
+   'tetap' = 20 koin sekarang). Cara pindai: 1x GET data-api.binance.vision/api/v3/ticker/24hr?type=MINI (semua
+   pair) -> 40 pair USDT volume 24 jam terbesar (tanpa stablecoin/emas/token pembungkus/leverage/token saham
+   '...B') -> kline 1d 420 bar (field quote volume r[7]) -> rata-rata volume 7 hari s.d. kemarin -> 20 teratas yang
+   punya >= 201 candle tutup; daftar hari itu DISIMPAN di state (scan.todo) agar tick lanjutan tidak menghitung
+   ulang. Top-40 24 jam memuat 98% top-20 rata-rata 7 hari (bagian 6). Panggilan 1 + 40 (sekarang 20): pakai
+   batas waktu tick (deadline_s 20 dtk) + lanjut tick berikutnya. Posisi terbuka tetap dipantau walau keluar daftar.
+
+# 0a. Baris ekor delisting (10 hari terakhir sebelum koin berhenti diperdagangkan, dulu dibuang): 1920 baris; sinyal E (sebelum batas slot) di ekor: LUNA 2022-05-08 r -100%, COCOS 2023-05-24 r +3%, UNFI 2024-10-29 r +3%, FTM 2025-01-07 r +3%
+
+# 0. Cek mesin: portofolio cepat vs spot_dip2.portfolio (spot_paritas varian D & E, urutan koin model)
+   D LAMA: cepat +23.39%/th DD -20.7% | lama +23.39%/th DD -20.7% | semua sinyal n 323 untung 93.5% rata +1.15% kalah rata -21.2% terburuk -59%
+   D BARU: cepat +8.56%/th DD -14.6% | lama +8.56%/th DD -14.6% | semua sinyal n 563 untung 90.9% rata +0.80% kalah rata -18.2% terburuk -55%
+   E LAMA: cepat +44.38%/th DD -22.3% | lama +44.38%/th DD -22.3% | semua sinyal n 534 untung 94.4% rata +1.37% kalah rata -21.0% terburuk -59%
+   E BARU: cepat +7.59%/th DD -41.1% | lama +7.59%/th DD -41.1% | semua sinyal n 1113 untung 89.4% rata +0.47% kalah rata -18.3% terburuk -100%
+
+# 1. Varian (statistik per sinyal = sinyal MASUK SLOT; portofolio = tiap posisi 1/slot modal)
+## A. TERPASANG (20 koin TETAP hari ini, vol>P90, tanpa BTC) — BIAS PENYINTAS  (10 slot)
+   LAMA: masuk slot n 360 untung 94.4% rata +1.44% kalah rata -19.9% terburuk -58% (17.1/bln) | portofolio +33.8%/th DD -23%
+         semua sinyal n 396 untung 94.9% rata +1.56% kalah rata -19.9% terburuk -58% | biaya x2: untung 94.4% rata +1.14% pf +25.6%/th
+   BARU: masuk slot n 573 untung 92.0% rata +1.41% kalah rata -13.3% terburuk -35% (9.6/bln) | portofolio +17.3%/th DD -10%
+         semua sinyal n 610 untung 92.1% rata +1.46% kalah rata -13.1% terburuk -35% | biaya x2: untung 92.0% rata +1.11% pf +13.3%/th
+   portofolio per tahun: 2020L:+1% 2021L:+62% 2021:+9% 2022:+30% 2023:+4% 2024:+17% 2025:+22% 2026:+4%
+   per sinyal per tahun: 2020:n46 91% +0.3% 2021:n379 94% +1.6% 2022:n253 91% +1.1% 2023:n36 89% +1.2% 2024:n104 92% +1.6% 2025:n77 97% +2.6% 2026:n38 89% +1.0%
+
+## E. DASAR JUJUR: 20 koin volume terbesar SAAT ITU, vol>P90, tanpa BTC (= terpasang tanpa bias)  (10 slot)
+   LAMA: masuk slot n 504 untung 94.2% rata +1.31% kalah rata -21.4% terburuk -59% (24.0/bln) | portofolio +44.4%/th DD -22%
+         semua sinyal n 534 untung 94.4% rata +1.37% kalah rata -21.0% terburuk -59% | biaya x2: untung 94.2% rata +1.01% pf +32.3%/th
+   BARU: masuk slot n 1047 untung 89.1% rata +0.41% kalah rata -18.4% terburuk -100% (17.5/bln) | portofolio +6.9%/th DD -40%
+         semua sinyal n 1113 untung 89.4% rata +0.47% kalah rata -18.3% terburuk -100% | biaya x2: untung 89.1% rata +0.11% pf +0.3%/th
+   portofolio per tahun: 2020L:+10% 2021L:+71% 2021:+1% 2022:-17% 2023:+22% 2024:+19% 2025:+18% 2026:-2%
+   per sinyal per tahun: 2020:n116 91% +0.9% 2021:n493 94% +1.1% 2022:n381 87% -0.3% 2023:n137 93% +1.5% 2024:n205 90% +1.0% 2025:n150 93% +1.0% 2026:n69 86% -0.2%
+   ACAK median: LAMA untung 86.5% rata +0.04% pf -3.0%/th DD -40% | BARU untung 79.7% rata -0.97% pf -24.1%/th DD -78%
+   ACAK p95: LAMA rata +0.40% pf +11.3%/th | BARU rata -0.74% pf -19.5%/th
+
+## a1. FILTER BTC>SMA200 (= E + BTC)  (10 slot)
+   LAMA: masuk slot n 315 untung 93.7% rata +1.14% kalah rata -21.9% terburuk -59% (15.0/bln) | portofolio +23.4%/th DD -21%
+         semua sinyal n 323 untung 93.5% rata +1.15% kalah rata -21.2% terburuk -59% | biaya x2: untung 93.7% rata +0.84% pf +16.3%/th
+   BARU: masuk slot n 543 untung 90.6% rata +0.73% kalah rata -18.2% terburuk -55% (9.1/bln) | portofolio +7.7%/th DD -14%
+         semua sinyal n 563 untung 90.9% rata +0.80% kalah rata -18.2% terburuk -55% | biaya x2: untung 90.6% rata +0.43% pf +4.2%/th
+   portofolio per tahun: 2020L:+5% 2021L:+33% 2021:-2% 2022:-2% 2023:+19% 2024:+11% 2025:+11% 2026:+2%
+   per sinyal per tahun: 2020:n100 90% +0.6% 2021:n311 93% +0.9% 2023:n123 93% +1.5% 2024:n180 89% +0.8% 2025:n122 93% +0.7% 2026:n22 95% +1.1%
+   ACAK median: LAMA untung 88.4% rata +0.28% pf +4.5%/th DD -20% | BARU untung 81.6% rata -0.33% pf -5.1%/th DD -37%
+   ACAK p95: LAMA rata +1.10% pf +27.6%/th | BARU rata +0.05% pf -0.1%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA untung% 93.65 <= 94.25; LAMA rata 1.14 <= 1.31; LAMA pf 23.39 <= 44.38; LAMA tidak > acak p95)
+
+## b1. FILTER kualitas (= E + kualitas)  (10 slot)
+   LAMA: masuk slot n 385 untung 94.8% rata +1.45% kalah rata -21.4% terburuk -58% (18.3/bln) | portofolio +39.4%/th DD -20%
+         semua sinyal n 391 untung 94.9% rata +1.47% kalah rata -21.4% terburuk -58% | biaya x2: untung 94.8% rata +1.15% pf +29.9%/th
+   BARU: masuk slot n 685 untung 89.2% rata +0.41% kalah rata -18.5% terburuk -100% (11.4/bln) | portofolio +4.8%/th DD -27%
+         semua sinyal n 701 untung 89.2% rata +0.41% kalah rata -18.4% terburuk -100% | biaya x2: untung 89.2% rata +0.11% pf +0.6%/th
+   portofolio per tahun: 2020L:+11% 2021L:+54% 2021:+6% 2022:-16% 2023:+14% 2024:+2% 2025:+30% 2026:-6%
+   per sinyal per tahun: 2020:n89 93% +1.2% 2021:n389 94% +1.3% 2022:n204 86% -0.6% 2023:n108 92% +1.3% 2024:n133 88% +0.3% 2025:n108 97% +2.2% 2026:n39 77% -1.4%
+   ACAK median: LAMA untung 85.8% rata -0.14% pf -5.8%/th DD -38% | BARU untung 78.4% rata -1.10% pf -17.6%/th DD -66%
+   ACAK p95: LAMA rata +0.26% pf +4.8%/th | BARU rata -0.73% pf -12.3%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA pf 39.38 <= 44.38; BARU pf 4.85 <= 6.87)
+
+## b2. BTC + kualitas (= E + BTC + kualitas)  (10 slot)
+   LAMA: masuk slot n 253 untung 94.1% rata +1.23% kalah rata -22.1% terburuk -58% (12.1/bln) | portofolio +20.3%/th DD -18%
+         semua sinyal n 255 untung 94.1% rata +1.24% kalah rata -22.1% terburuk -58% | biaya x2: untung 94.1% rata +0.93% pf +14.8%/th
+   BARU: masuk slot n 395 untung 91.1% rata +0.92% kalah rata -17.4% terburuk -36% (6.6/bln) | portofolio +7.2%/th DD -17%
+         semua sinyal n 400 untung 91.2% rata +0.94% kalah rata -17.4% terburuk -36% | biaya x2: untung 91.1% rata +0.62% pf +4.7%/th
+   portofolio per tahun: 2020L:+9% 2021L:+23% 2021:+4% 2022:-2% 2023:+12% 2024:-2% 2025:+25% 2026:+1%
+   per sinyal per tahun: 2020:n83 93% +1.1% 2021:n254 93% +0.9% 2023:n94 93% +1.2% 2024:n119 87% +0.0% 2025:n91 98% +2.2% 2026:n7 86% +2.0%
+   ACAK median: LAMA untung 88.6% rata +0.43% pf +6.8%/th DD -18% | BARU untung 79.4% rata -0.55% pf -5.5%/th DD -36%
+   ACAK p95: LAMA rata +1.09% pf +20.6%/th | BARU rata -0.21% pf -2.4%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA untung% 94.07 <= 94.25; LAMA rata 1.23 <= 1.31; LAMA pf 20.32 <= 44.38; LAMA tidak > acak p95)
+
+# 2. Semesta lebih luas (dibanding E: top-20, 10 slot)
+## c. top-20, 20 slot  (20 slot)
+   LAMA: masuk slot n 534 untung 94.4% rata +1.37% kalah rata -21.0% terburuk -59% (25.4/bln) | portofolio +23.2%/th DD -11%
+   BARU: masuk slot n 1113 untung 89.4% rata +0.47% kalah rata -18.3% terburuk -100% (18.6/bln) | portofolio +4.9%/th DD -21%
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA pf 23.21 <= 44.38; BARU pf 4.92 <= 6.87)
+
+## c. top-30 volume saat itu, vol>P90, tanpa BTC, 10 slot  (10 slot)
+   LAMA: masuk slot n 700 untung 93.1% rata +1.02% kalah rata -21.7% terburuk -59% (33.3/bln) | portofolio +45.5%/th DD -34%
+         semua sinyal n 847 untung 94.0% rata +1.27% kalah rata -21.1% terburuk -59% | biaya x2: untung 93.1% rata +0.72% pf +28.8%/th
+   BARU: masuk slot n 1513 untung 88.3% rata +0.23% kalah rata -18.4% terburuk -100% (25.2/bln) | portofolio +3.9%/th DD -52%
+         semua sinyal n 1825 untung 89.3% rata +0.44% kalah rata -18.5% terburuk -100% | biaya x2: untung 88.3% rata -0.07% pf -5.2%/th
+   portofolio per tahun: 2020L:+25% 2021L:+51% 2021:+5% 2022:-28% 2023:+43% 2024:-0% 2025:+18% 2026:-5%
+   per sinyal per tahun: 2020:n186 92% +1.3% 2021:n663 93% +0.8% 2022:n547 86% -0.4% 2023:n233 93% +1.6% 2024:n264 86% +0.1% 2025:n214 92% +0.8% 2026:n106 85% -0.5%
+   ACAK median: LAMA untung 87.4% rata +0.01% pf -7.1%/th DD -51% | BARU untung 80.6% rata -0.81% pf -31.3%/th DD -88%
+   ACAK p95: LAMA rata +0.21% pf +4.5%/th | BARU rata -0.66% pf -26.2%/th
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 93.14 <= 94.25; LAMA rata 1.02 <= 1.31; BARU untung% 88.30 <= 89.11; BARU rata 0.23 <= 0.41; BARU pf 3.92 <= 6.87)
+
+## c. top-30 + BTC>SMA200, 10 slot  (10 slot)
+   LAMA: masuk slot n 459 untung 93.5% rata +1.13% kalah rata -21.3% terburuk -59% (21.9/bln) | portofolio +33.6%/th DD -31%
+   BARU: masuk slot n 756 untung 89.7% rata +0.51% kalah rata -18.5% terburuk -55% (12.6/bln) | portofolio +6.9%/th DD -27%
+
+## c. top-30 volume saat itu, vol>P90, tanpa BTC, 20 slot  (20 slot)
+   LAMA: masuk slot n 831 untung 93.9% rata +1.24% kalah rata -21.1% terburuk -59% (39.6/bln) | portofolio +33.4%/th DD -17%
+   BARU: masuk slot n 1800 untung 89.4% rata +0.44% kalah rata -18.6% terburuk -100% (30.0/bln) | portofolio +7.2%/th DD -29%
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 93.86 <= 94.25; LAMA rata 1.24 <= 1.31; LAMA pf 33.39 <= 44.38)
+
+## c. top-30 + BTC>SMA200, 20 slot  (20 slot)
+   LAMA: masuk slot n 516 untung 94.0% rata +1.29% kalah rata -20.8% terburuk -59% (24.6/bln) | portofolio +21.6%/th DD -16%
+   BARU: masuk slot n 863 untung 90.5% rata +0.68% kalah rata -18.5% terburuk -55% (14.4/bln) | portofolio +5.8%/th DD -14%
+
+## c. top-50 volume saat itu, vol>P90, tanpa BTC, 10 slot  (10 slot)
+   LAMA: masuk slot n 986 untung 91.7% rata +0.74% kalah rata -20.9% terburuk -59% (47.0/bln) | portofolio +41.3%/th DD -52%
+         semua sinyal n 1536 untung 94.0% rata +1.29% kalah rata -20.8% terburuk -59% | biaya x2: untung 91.7% rata +0.44% pf +19.0%/th
+   BARU: masuk slot n 2149 untung 87.8% rata -0.01% kalah rata -19.5% terburuk -100% (35.8/bln) | portofolio -6.7%/th DD -70%
+         semua sinyal n 3232 untung 89.3% rata +0.41% kalah rata -18.7% terburuk -100% | biaya x2: untung 87.8% rata -0.31% pf -18.1%/th
+   portofolio per tahun: 2020L:+18% 2021L:+54% 2021:+4% 2022:-53% 2023:+34% 2024:-9% 2025:+16% 2026:+3%
+   per sinyal per tahun: 2020:n301 90% +0.6% 2021:n877 92% +0.7% 2022:n720 86% -0.8% 2023:n366 90% +0.8% 2024:n387 86% -0.1% 2025:n313 91% +0.5% 2026:n171 88% +0.2%
+   ACAK median: LAMA untung 88.1% rata +0.15% pf -2.6%/th DD -57% | BARU untung 81.3% rata -0.71% pf -39.0%/th DD -94%
+   ACAK p95: LAMA rata +0.46% pf +27.3%/th | BARU rata -0.60% pf -34.3%/th
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 91.68 <= 94.25; LAMA rata 0.74 <= 1.31; LAMA pf 41.25 <= 44.38; BARU untung% 87.81 <= 89.11; BARU rata -0.01 <= 0.41; BARU pf -6.71 <= 6.87)
+
+## c. top-50 + BTC>SMA200, 10 slot  (10 slot)
+   LAMA: masuk slot n 658 untung 91.9% rata +0.84% kalah rata -20.4% terburuk -59% (31.3/bln) | portofolio +32.6%/th DD -41%
+   BARU: masuk slot n 1111 untung 88.6% rata +0.18% kalah rata -19.3% terburuk -55% (18.5/bln) | portofolio +1.5%/th DD -38%
+
+## c. top-50 volume saat itu, vol>P90, tanpa BTC, 20 slot  (20 slot)
+   LAMA: masuk slot n 1370 untung 93.4% rata +1.13% kalah rata -20.9% terburuk -59% (65.3/bln) | portofolio +52.2%/th DD -28%
+   BARU: masuk slot n 2804 untung 88.4% rata +0.19% kalah rata -19.0% terburuk -100% (46.7/bln) | portofolio +2.6%/th DD -48%
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 93.36 <= 94.25; LAMA rata 1.13 <= 1.31; BARU untung% 88.41 <= 89.11; BARU rata 0.19 <= 0.41; BARU pf 2.63 <= 6.87)
+
+## c. top-50 + BTC>SMA200, 20 slot  (20 slot)
+   LAMA: masuk slot n 879 untung 93.3% rata +1.12% kalah rata -20.8% terburuk -59% (41.9/bln) | portofolio +32.4%/th DD -28%
+   BARU: masuk slot n 1383 untung 89.3% rata +0.40% kalah rata -18.8% terburuk -55% (23.1/bln) | portofolio +4.8%/th DD -22%
+
+## c. top-100 volume saat itu, vol>P90, tanpa BTC, 10 slot  (10 slot)
+   LAMA: masuk slot n 1250 untung 91.5% rata +0.77% kalah rata -20.0% terburuk -59% (59.5/bln) | portofolio +57.9%/th DD -56%
+         semua sinyal n 3054 untung 93.8% rata +1.25% kalah rata -20.7% terburuk -59% | biaya x2: untung 91.5% rata +0.47% pf +27.1%/th
+   BARU: masuk slot n 2968 untung 88.0% rata +0.16% kalah rata -18.6% terburuk -100% (49.5/bln) | portofolio +0.9%/th DD -70%
+         semua sinyal n 6287 untung 89.3% rata +0.55% kalah rata -17.3% terburuk -100% | biaya x2: untung 88.0% rata -0.14% pf -15.7%/th
+   portofolio per tahun: 2020L:+23% 2021L:+79% 2021:+19% 2022:-54% 2023:+40% 2024:+2% 2025:+20% 2026:+10%
+   per sinyal per tahun: 2020:n401 89% +0.6% 2021:n1096 93% +0.8% 2022:n904 86% -0.6% 2023:n494 89% +0.7% 2024:n570 87% +0.2% 2025:n458 89% +0.4% 2026:n295 89% +0.4%
+   ACAK median: LAMA untung 89.2% rata +0.43% pf +26.5%/th DD -59% | BARU untung 81.6% rata -0.63% pf -46.4%/th DD -97%
+   ACAK p95: LAMA rata +0.63% pf +58.3%/th | BARU rata -0.46% pf -38.8%/th
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 91.52 <= 94.25; LAMA rata 0.77 <= 1.31; LAMA tidak > acak p95; BARU untung% 88.04 <= 89.11; BARU rata 0.16 <= 0.41; BARU pf 0.88 <= 6.87)
+
+## c. top-100 + BTC>SMA200, 10 slot  (10 slot)
+   LAMA: masuk slot n 852 untung 91.5% rata +0.84% kalah rata -19.3% terburuk -59% (40.6/bln) | portofolio +45.4%/th DD -42%
+   BARU: masuk slot n 1562 untung 88.4% rata +0.32% kalah rata -17.8% terburuk -55% (26.0/bln) | portofolio +7.1%/th DD -47%
+
+## c. top-100 volume saat itu, vol>P90, tanpa BTC, 20 slot  (20 slot)
+   LAMA: masuk slot n 1914 untung 92.4% rata +0.93% kalah rata -20.5% terburuk -59% (91.2/bln) | portofolio +57.6%/th DD -45%
+         semua sinyal n 3054 untung 93.8% rata +1.25% kalah rata -20.7% terburuk -59% | biaya x2: untung 92.4% rata +0.63% pf +33.5%/th
+   BARU: masuk slot n 4223 untung 88.5% rata +0.29% kalah rata -18.3% terburuk -100% (70.4/bln) | portofolio +8.0%/th DD -56%
+         semua sinyal n 6287 untung 89.3% rata +0.55% kalah rata -17.3% terburuk -100% | biaya x2: untung 88.5% rata -0.01% pf -4.9%/th
+   portofolio per tahun: 2020L:+19% 2021L:+85% 2021:+3% 2022:-27% 2023:+23% 2024:+12% 2025:+30% 2026:+9%
+   per sinyal per tahun: 2020:n529 90% +0.7% 2021:n1734 93% +0.9% 2022:n1466 87% -0.2% 2023:n618 89% +0.7% 2024:n814 87% +0.4% 2025:n616 91% +0.8% 2026:n360 89% +0.5%
+   KEPUTUSAN vs E: TIDAK LOLOS (LAMA untung% 92.37 <= 94.25; LAMA rata 0.93 <= 1.31; BARU untung% 88.54 <= 89.11; BARU rata 0.29 <= 0.41)
+
+## c. top-100 + BTC>SMA200, 20 slot  (20 slot)
+   LAMA: masuk slot n 1247 untung 92.8% rata +1.07% kalah rata -19.9% terburuk -59% (59.4/bln) | portofolio +45.0%/th DD -37%
+   BARU: masuk slot n 2097 untung 88.9% rata +0.42% kalah rata -17.8% terburuk -55% (35.0/bln) | portofolio +7.3%/th DD -29%
+
+# 3. Lain dari riset lama (dibanding E)
+## e1. ambang 0,95 (filter)  (10 slot)
+   LAMA: masuk slot n 335 untung 94.0% rata +1.35% kalah rata -19.8% terburuk -59% (16.0/bln) | portofolio +29.1%/th DD -12%
+         semua sinyal n 354 untung 94.1% rata +1.40% kalah rata -19.2% terburuk -59% | biaya x2: untung 94.0% rata +1.05% pf +21.8%/th
+   BARU: masuk slot n 718 untung 89.7% rata +0.64% kalah rata -17.3% terburuk -54% (12.0/bln) | portofolio +8.6%/th DD -24%
+         semua sinyal n 747 untung 90.0% rata +0.70% kalah rata -17.2% terburuk -54% | biaya x2: untung 89.7% rata +0.34% pf +4.0%/th
+   portofolio per tahun: 2020L:+1% 2021L:+54% 2021:-6% 2022:+2% 2023:+15% 2024:+9% 2025:+29% 2026:-2%
+   per sinyal per tahun: 2020:n83 88% +0.1% 2021:n319 94% +1.2% 2022:n251 88% +0.2% 2023:n92 92% +1.5% 2024:n135 90% +0.8% 2025:n126 96% +1.9% 2026:n47 83% -0.4%
+   ACAK median: LAMA untung 86.2% rata -0.05% pf -4.1%/th DD -33% | BARU untung 78.6% rata -1.17% pf -20.1%/th DD -71%
+   ACAK p95: LAMA rata +0.40% pf +8.3%/th | BARU rata -0.88% pf -16.3%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA untung% 94.03 <= 94.25; LAMA pf 29.13 <= 44.38)
+
+## e2. ambang 0,97 (filter)  (10 slot)
+   LAMA: masuk slot n 253 untung 93.7% rata +1.41% kalah rata -17.6% terburuk -59% (12.1/bln) | portofolio +22.5%/th DD -9%
+         semua sinyal n 266 untung 93.6% rata +1.44% kalah rata -17.0% terburuk -59% | biaya x2: untung 93.7% rata +1.11% pf +17.2%/th
+   BARU: masuk slot n 570 untung 89.6% rata +0.59% kalah rata -17.7% terburuk -54% (9.5/bln) | portofolio +6.2%/th DD -19%
+         semua sinyal n 582 untung 89.9% rata +0.63% kalah rata -17.7% terburuk -54% | biaya x2: untung 89.6% rata +0.29% pf +2.6%/th
+   portofolio per tahun: 2020L:-0% 2021L:+41% 2021:-6% 2022:+0% 2023:+14% 2024:+6% 2025:+19% 2026:-0%
+   per sinyal per tahun: 2020:n81 88% +0.1% 2021:n226 94% +1.3% 2022:n186 88% +0.1% 2023:n84 93% +1.6% 2024:n116 89% +0.7% 2025:n98 95% +1.6% 2026:n32 88% +0.0%
+   ACAK median: LAMA untung 84.9% rata -0.17% pf -4.3%/th DD -27% | BARU untung 77.9% rata -1.22% pf -16.5%/th DD -63%
+   ACAK p95: LAMA rata +0.82% pf +15.4%/th | BARU rata -0.91% pf -13.0%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA untung% 93.68 <= 94.25; LAMA pf 22.47 <= 44.38; BARU pf 6.21 <= 6.87)
+
+## e3. lewati vol > P70 (filter)  (10 slot)
+   LAMA: masuk slot n 192 untung 93.8% rata +1.69% kalah rata -13.5% terburuk -34% (9.1/bln) | portofolio +20.7%/th DD -9%
+         semua sinyal n 192 untung 93.8% rata +1.69% kalah rata -13.5% terburuk -34% | biaya x2: untung 93.8% rata +1.39% pf +16.7%/th
+   BARU: masuk slot n 636 untung 89.6% rata +0.49% kalah rata -18.6% terburuk -100% (10.6/bln) | portofolio +5.5%/th DD -24%
+         semua sinyal n 653 untung 89.7% rata +0.52% kalah rata -18.5% terburuk -100% | biaya x2: untung 89.6% rata +0.19% pf +1.5%/th
+   portofolio per tahun: 2020L:+11% 2021L:+24% 2021:+1% 2022:-1% 2023:+13% 2024:+5% 2025:+7% 2026:+3%
+   per sinyal per tahun: 2020:n48 94% +2.2% 2021:n224 92% +1.0% 2022:n255 89% +0.2% 2023:n69 93% +1.8% 2024:n104 89% +0.6% 2025:n96 92% +0.7% 2026:n32 88% +0.9%
+   ACAK median: LAMA untung 85.3% rata -0.04% pf -1.3%/th DD -21% | BARU untung 80.7% rata -0.82% pf -13.1%/th DD -56%
+   ACAK p95: LAMA rata +0.64% pf +8.1%/th | BARU rata -0.56% pf -9.6%/th
+   KEPUTUSAN filter vs E: TIDAK LOLOS (LAMA untung% 93.75 <= 94.25; LAMA pf 20.67 <= 44.38; BARU pf 5.51 <= 6.87)
+
+## e4. TANPA filter vol (cek filter terpasang)  (10 slot)
+   LAMA: masuk slot n 815 untung 94.1% rata +1.22% kalah rata -22.4% terburuk -59% (38.8/bln) | portofolio +70.3%/th DD -41%
+         semua sinyal n 1004 untung 94.9% rata +1.46% kalah rata -21.8% terburuk -59% | biaya x2: untung 94.1% rata +0.92% pf +47.9%/th
+   BARU: masuk slot n 2028 untung 89.2% rata +0.18% kalah rata -20.5% terburuk -100% (33.8/bln) | portofolio +3.8%/th DD -44%
+         semua sinyal n 2269 untung 89.4% rata +0.28% kalah rata -20.1% terburuk -100% | biaya x2: untung 89.2% rata -0.12% pf -8.1%/th
+   portofolio per tahun: 2020L:+36% 2021L:+84% 2021:+3% 2022:-28% 2023:+20% 2024:+36% 2025:+2% 2026:-2%
+   per sinyal per tahun: 2020:n211 94% +1.5% 2021:n749 93% +0.9% 2022:n593 88% -0.4% 2023:n366 90% +0.5% 2024:n407 90% +0.9% 2025:n299 89% +0.1% 2026:n218 90% +0.0%
+   ACAK median: LAMA untung 86.6% rata -0.23% pf -22.2%/th DD -55% | BARU untung 79.8% rata -0.79% pf -34.6%/th DD -90%
+   ACAK p95: LAMA rata +0.09% pf -6.1%/th | BARU rata -0.37% pf -20.6%/th
+   KEPUTUSAN filter vol terpasang (E vs tanpa vol): TIDAK LOLOS (LAMA pf 44.38 <= 70.29; BARU untung% 89.11 <= 89.15)
+
+## e5. model dilatih semesta jujur (top-30 saat itu), selain itu = E  (10 slot)
+   LAMA: masuk slot n 539 untung 91.8% rata +0.91% kalah rata -19.2% terburuk -59% (25.7/bln) | portofolio +29.9%/th DD -21%
+         semua sinyal n 569 untung 92.1% rata +0.99% kalah rata -18.9% terburuk -59% | biaya x2: untung 91.8% rata +0.61% pf +18.5%/th
+   BARU: masuk slot n 854 untung 88.6% rata +0.37% kalah rata -17.8% terburuk -54% (14.2/bln) | portofolio +5.0%/th DD -38%
+         semua sinyal n 906 untung 89.3% rata +0.50% kalah rata -17.8% terburuk -54% | biaya x2: untung 88.6% rata +0.07% pf -0.3%/th
+   portofolio per tahun: 2020L:+14% 2021L:+39% 2021:-3% 2022:-22% 2023:+19% 2024:+16% 2025:+20% 2026:+1%
+   per sinyal per tahun: 2020:n168 90% +0.8% 2021:n455 91% +0.7% 2022:n302 85% -0.6% 2023:n112 93% +1.5% 2024:n165 91% +1.1% 2025:n139 93% +1.2% 2026:n52 85% +0.2%
+   ACAK median: LAMA untung 86.7% rata +0.06% pf -1.2%/th DD -42% | BARU untung 79.3% rata -1.08% pf -22.2%/th DD -74%
+   ACAK p95: LAMA rata +0.54% pf +18.3%/th | BARU rata -0.91% pf -19.3%/th
+
+## e6. semesta dari volume 24 jam terakhir (1 panggilan ticker), selain itu = E  (10 slot)
+   LAMA: masuk slot n 492 untung 93.3% rata +1.00% kalah rata -22.7% terburuk -59% (23.4/bln) | portofolio +30.6%/th DD -23%
+         semua sinyal n 533 untung 93.8% rata +1.13% kalah rata -22.7% terburuk -59% | biaya x2: untung 93.3% rata +0.70% pf +19.8%/th
+   BARU: masuk slot n 1057 untung 89.4% rata +0.54% kalah rata -17.7% terburuk -100% (17.6/bln) | portofolio +10.1%/th DD -37%
+         semua sinyal n 1139 untung 89.6% rata +0.56% kalah rata -17.8% terburuk -100% | biaya x2: untung 89.4% rata +0.24% pf +3.3%/th
+   portofolio per tahun: 2020L:+7% 2021L:+48% 2021:+0% 2022:-9% 2023:+25% 2024:+12% 2025:+17% 2026:+7%
+   per sinyal per tahun: 2020:n111 91% +0.7% 2021:n478 93% +0.9% 2022:n429 88% -0.0% 2023:n130 93% +1.7% 2024:n193 87% +0.7% 2025:n138 94% +1.1% 2026:n70 89% +1.0%
+
+## e7. E dengan TP harus tembus +0,1% di atas limit (antrian order)  (10 slot)
+   LAMA: masuk slot n 504 untung 94.0% rata +1.21% kalah rata -22.3% terburuk -59% (24.0/bln) | portofolio +39.3%/th DD -27%
+         semua sinyal n 534 untung 94.2% rata +1.27% kalah rata -21.9% terburuk -59% | biaya x2: untung 94.0% rata +0.91% pf +27.6%/th
+   BARU: masuk slot n 1047 untung 88.7% rata +0.30% kalah rata -18.6% terburuk -100% (17.5/bln) | portofolio +4.6%/th DD -44%
+         semua sinyal n 1113 untung 89.0% rata +0.38% kalah rata -18.5% terburuk -100% | biaya x2: untung 88.7% rata +0.00% pf -1.8%/th
+   portofolio per tahun: 2020L:+10% 2021L:+61% 2021:+1% 2022:-25% 2023:+20% 2024:+19% 2025:+18% 2026:-2%
+   per sinyal per tahun: 2020:n116 91% +0.9% 2021:n493 93% +1.0% 2022:n381 86% -0.5% 2023:n137 92% +1.4% 2024:n205 90% +1.0% 2025:n150 93% +1.0% 2026:n69 86% -0.2%
+
+## e8. model M2 + BTC (= a1 dengan model jujur)  (10 slot)
+   LAMA: masuk slot n 331 untung 92.1% rata +0.95% kalah rata -19.6% terburuk -59% (15.8/bln) | portofolio +20.2%/th DD -16%
+         semua sinyal n 336 untung 92.0% rata +0.95% kalah rata -19.1% terburuk -59% | biaya x2: untung 92.1% rata +0.65% pf +13.0%/th
+   BARU: masuk slot n 446 untung 90.4% rata +0.83% kalah rata -16.7% terburuk -37% (7.4/bln) | portofolio +7.2%/th DD -16%
+         semua sinyal n 459 untung 90.6% rata +0.88% kalah rata -16.7% terburuk -37% | biaya x2: untung 90.4% rata +0.53% pf +4.3%/th
+   portofolio per tahun: 2020L:+6% 2021L:+27% 2021:-6% 2022:+0% 2023:+17% 2024:+9% 2025:+14% 2026:+4%
+   per sinyal per tahun: 2020:n135 88% +0.5% 2021:n269 92% +0.7% 2023:n100 94% +1.6% 2024:n139 89% +0.8% 2025:n117 92% +1.0% 2026:n17 94% +2.4%
+
+# 4. LABEL pada sinyal E yang masuk slot (sinyal tidak dibuang). ya = memenuhi kriteria.
+   Format sel: n, untung%, rata/sinyal. 'tahun ya>tidak' = tahun (n>=3 di tiap sisi) rata 'ya' > 'tidak'.
+   kriteria                         | LAMA ya            | LAMA tidak         | BARU ya            | BARU tidak         | tahun ya>tidak
+   BTC > SMA200                     | n 315  93.7% +1.14% | n 189  95.2% +1.60% | n 543  90.6% +0.73% | n 504  87.5% +0.05% | 2/6
+   p >= 0,97                        | n  41 100.0% +2.70% | n 463  93.7% +1.19% | n  76  88.2% -0.17% | n 971  89.2% +0.45% | 2/3
+   p >= 0,95                        | n 125  97.6% +1.91% | n 379  93.1% +1.11% | n 235  89.8% +0.23% | n 812  88.9% +0.46% | 5/6
+   model + 3 merah                  | n  21 100.0% +2.70% | n 483  94.0% +1.25% | n  35  94.3% +0.17% | n1012  88.9% +0.41% | 4/6
+   hanya 3 merah (p < 0,93)         | n 171  90.6% +0.80% | n 333  96.1% +1.58% | n 356  88.2% +0.54% | n 691  89.6% +0.34% | 2/7
+   vol rendah (vr <= 0,5)           | n  86  94.2% +1.92% | n 418  94.3% +1.19% | n 306  88.6% +0.30% | n 741  89.3% +0.45% | 5/7
+   koin 10 terbesar (rank <= 10)    | n 222  94.1% +1.24% | n 282  94.3% +1.37% | n 429  90.4% +0.62% | n 618  88.2% +0.26% | 4/7
+   jatuh dalam (dd20 <= -15%)       | n 409  93.6% +1.10% | n  95  96.8% +2.20% | n 864  88.4% +0.15% | n 183  92.3% +1.59% | 0/7
+   kualitas lolos                   | n 366  94.5% +1.39% | n 138  93.5% +1.11% | n 660  89.1% +0.34% | n 387  89.1% +0.51% | 3/7
+   di atas SMA200 koin (d200 > 0)   | n 403  93.3% +1.06% | n 101  98.0% +2.30% | n 638  89.2% +0.53% | n 409  89.0% +0.22% | 2/7
+   Dipilih dari LAMA (selisih rata terbesar, n >= 30): ['p >= 0,97', 'p >= 0,95'] (selisih [1.51, 0.8])
+   Tier dari kriteria LAMA: ⚡ = memenuhi semua, 🥈 = sebagian, biasa = tidak ada
+   LAMA: ⚡ n 41 untung 100.0% rata +2.70% kalah rata +0.0% terburuk +3% | 🥈 n 84 untung 96.4% rata +1.53% kalah rata -30.2% terburuk -34% | biasa n 379 untung 93.1% rata +1.11% kalah rata -20.4% terburuk -59%
+   BARU: ⚡ n 76 untung 88.2% rata -0.17% kalah rata -21.5% terburuk -52% | 🥈 n 159 untung 90.6% rata +0.42% kalah rata -21.4% terburuk -54% | biasa n 812 untung 88.9% rata +0.46% kalah rata -17.5% terburuk -100%
+   per tahun: 2021: ⚡ +2.7% vs biasa +1.0% | 2022: ⚡ -0.6% vs biasa -0.4% | 2023: ⚡ +2.7% vs biasa +1.3%
+   Kalibrasi peluang model (sinyal E masuk slot): ember p -> untung% LAMA | BARU
+     p 0.00-0.93: LAMA n 171 untung 90.6% rata +0.80% kalah rata -17.6% terburuk -59% | BARU n 356 untung 88.2% rata +0.54% kalah rata -15.6% terburuk -36%
+     p 0.93-0.95: LAMA n 208 untung 95.2% rata +1.37% kalah rata -24.9% terburuk -36% | BARU n 456 untung 89.5% rata +0.39% kalah rata -19.2% terburuk -100%
+     p 0.95-0.97: LAMA n 84 untung 96.4% rata +1.53% kalah rata -30.2% terburuk -34% | BARU n 159 untung 90.6% rata +0.42% kalah rata -21.4% terburuk -54%
+     p 0.97-0.99: LAMA n 31 untung 100.0% rata +2.70% kalah rata +0.0% terburuk +3% | BARU n 60 untung 86.7% rata -0.74% kalah rata -23.1% terburuk -52%
+     p 0.99-1.00: LAMA n 10 untung 100.0% rata +2.70% kalah rata +0.0% terburuk +3% | BARU n 16 untung 93.8% rata +1.98% kalah rata -8.8% terburuk -9%
+   Peringkat LAMA dua arah (kebalikan ikut dihitung; DITAMBAHKAN setelah melihat BARU): p >= 0,97 +1.51, BUKAN di atas SMA200 koin (d200 > 0) +1.23, BUKAN jatuh dalam (dd20 <= -15%) +1.10, p >= 0,95 +0.80, BUKAN hanya 3 merah (p < 0,93) +0.78
+
+# 4b. Uji mendalam label '⚡ dip ringan' = dd20 > -15% (harga <= 15% di bawah high 20 hari)
+   Ember dd20 (sinyal E masuk slot):
+     dd20 -100%..-30%: LAMA n 211 untung 97.2% rata +1.69% kalah rata -32.7% terburuk -59% | BARU n 478 untung 88.1% rata -0.22% kalah rata -21.8% terburuk -100%
+     dd20 -30%..-20%: LAMA n 153 untung 90.2% rata +0.51% kalah rata -19.6% terburuk -58% | BARU n 244 untung 86.9% rata +0.34% kalah rata -15.3% terburuk -54%
+     dd20 -20%..-15%: LAMA n 45 untung 88.9% rata +0.35% kalah rata -18.5% terburuk -35% | BARU n 142 untung 92.3% rata +1.11% kalah rata -17.8% terburuk -35%
+     dd20 -15%..-10%: LAMA n 31 untung 93.5% rata +2.26% kalah rata -4.0% terburuk -5% | BARU n 91 untung 94.5% rata +1.86% kalah rata -12.7% terburuk -23%
+     dd20 -10%..0%: LAMA n 64 untung 98.4% rata +2.18% kalah rata -30.9% terburuk -31% | BARU n 92 untung 90.2% rata +1.33% kalah rata -11.3% terburuk -24%
+   Ambang lain (ya = dd20 > ambang):
+     -10%: LAMA ya n64 98.4% +2.18% / tidak n440 93.6% +1.19% | BARU ya n92 90.2% +1.33% / tidak n955 89.0% +0.32%
+     -12%: LAMA ya n72 98.6% +2.23% / tidak n432 93.5% +1.16% | BARU ya n115 90.4% +1.22% / tidak n932 88.9% +0.31%
+     -15%: LAMA ya n95 96.8% +2.20% / tidak n409 93.6% +1.10% | BARU ya n183 92.3% +1.59% / tidak n864 88.4% +0.15%
+     -20%: LAMA ya n140 94.3% +1.61% / tidak n364 94.2% +1.20% | BARU ya n325 92.3% +1.38% / tidak n722 87.7% -0.03%
+     -25%: LAMA ya n221 91.4% +0.89% / tidak n283 96.5% +1.64% | BARU ya n446 90.4% +1.00% / tidak n601 88.2% -0.03%
+   Per tahun (E): 4/7 tahun ya lebih baik (untung% & rata) | 2020: 28 96% +2.4% vs 88 90% +0.4% ; 2021: 91 96% +1.8% vs 402 93% +1.0% ; 2022: 71 94% +2.0% vs 310 85% -0.8% ; 2023: 22 91% +1.5% vs 115 93% +1.5% ; 2024: 45 89% +1.0% vs 160 91% +1.0% ; 2025: 8 88% +1.4% vs 142 93% +1.0% ; 2026: 13 100% +2.7% vs 56 82% -0.9%
+   Set lain (ya = dip ringan):
+     E semua sinyal (sebelum batas slot): LAMA ya n95 96.8% +2.20% / tidak n439 93.8% +1.19% | BARU ya n185 92.4% +1.60% / tidak n928 88.8% +0.25%
+        4/7 tahun ya lebih baik (untung% & rata)
+     a1 E + BTC>SMA200: LAMA ya n67 95.5% +2.00% / tidak n248 93.1% +0.91% | BARU ya n109 91.7% +1.35% / tidak n434 90.3% +0.58%
+        4/6 tahun ya lebih baik (untung% & rata)
+     e5 model M2 (dilatih semesta jujur): LAMA ya n140 94.3% +1.61% / tidak n399 91.0% +0.67% | BARU ya n114 93.0% +2.00% / tidak n740 88.0% +0.12%
+        5/7 tahun ya lebih baik (untung% & rata)
+     e7 TP harus tembus 0,1%: LAMA ya n95 95.8% +1.67% / tidak n409 93.6% +1.10% | BARU ya n183 91.3% +1.20% / tidak n864 88.2% +0.12%
+        4/7 tahun ya lebih baik (untung% & rata)
+     e4 tanpa filter vol: LAMA ya n124 95.2% +1.40% / tidak n691 93.9% +1.19% | BARU ya n241 92.5% +1.29% / tidak n1787 88.7% +0.03%
+        6/7 tahun ya lebih baik (untung% & rata)
+     KOIN LAIN: peringkat 21-100 (top-100, semua sinyal): LAMA ya n288 93.4% +1.19% / tidak n2238 93.7% +1.22% | BARU ya n617 91.2% +1.04% / tidak n4588 88.9% +0.50%
+        5/7 tahun ya lebih baik (untung% & rata)
+     KOIN LAIN: peringkat 21-50 (semua sinyal): LAMA ya n123 93.5% +1.12% / tidak n872 93.8% +1.25% | BARU ya n254 91.7% +0.97% / tidak n1822 88.6% +0.27%
+        5/7 tahun ya lebih baik (untung% & rata)
+     e6 semesta volume 24 jam: LAMA ya n112 96.4% +1.62% / tidak n380 92.4% +0.81% | BARU ya n217 93.5% +1.86% / tidak n840 88.3% +0.19%
+        7/7 tahun ya lebih baik (untung% & rata)
+   BARU TANPA 2022 (tahun turun): ya n 112 untung 91.1% rata +1.33% kalah rata -12.7% terburuk -24% | tidak n 554 untung 90.3% rata +0.70% kalah rata -17.8% terburuk -55%
+   Hanya 2023-2025 (pasar naik): ya n 75 untung 89.3% rata +1.21% kalah rata -11.3% terburuk -24% | tidak n 417 untung 92.1% rata +1.11% kalah rata -17.4% terburuk -55%
+   Angka dasar semua hari top-20 LAMA: dd20 > -15% n 6724 untung 86.4% rata +0.76% | dd20 <= -15% n 6056 untung 87.5% rata -0.06%
+   Angka dasar semua hari top-20 BARU: dd20 > -15% n 18410 untung 76.6% rata -0.50% | dd20 <= -15% n 17890 untung 83.3% rata -0.39%
+   BTC atas SMA200: LAMA ya n67 95.5% +2.00% / tidak n248 93.1% +0.91% | BARU ya n109 91.7% +1.35% / tidak n434 90.3% +0.58%
+   BTC bawah SMA200: LAMA ya n28 100.0% +2.70% / tidak n161 94.4% +1.41% | BARU ya n74 93.2% +1.94% / tidak n430 86.5% -0.27%
+   Bootstrap blok bulan LAMA (2000x): selisih rata +1.12 poin [CI95 +0.00..+2.24], P(<=0) 2.5% | selisih untung% +3.3 [-1.3..+7.5]
+   Bootstrap blok bulan BARU (2000x): selisih rata +1.41 poin [CI95 +0.51..+2.24], P(<=0) 0.0% | selisih untung% +3.9 [-0.8..+8.1]
+   Angka tampilan per tier (E, sinyal masuk slot):
+     ⚡ dip ringan LAMA: n 95 untung 96.8% rata +2.20% kalah rata -13.0% terburuk -31% | 4.5/bln | tahan median 1 hari | sempat turun >= 10%: 24% | rugi >= 20%: 1.1%
+     ⚡ dip ringan BARU: n 183 untung 92.3% rata +1.59% kalah rata -11.8% terburuk -24% | 3.1/bln | tahan median 1 hari | sempat turun >= 10%: 20% | rugi >= 20%: 1.1%
+       alasan: model 84% | model + 3 merah 0% | 3 merah 16%
+     biasa LAMA: n 409 untung 93.6% rata +1.10% kalah rata -22.4% terburuk -59% | 19.5/bln | tahan median 1 hari | sempat turun >= 10%: 25% | rugi >= 20%: 3.2%
+     biasa BARU: n 864 untung 88.4% rata +0.15% kalah rata -19.3% terburuk -100% | 14.4/bln | tahan median 1 hari | sempat turun >= 10%: 29% | rugi >= 20%: 4.6%
+       alasan: model 58% | model + 3 merah 4% | 3 merah 38%
+   (Pembanding bias penyintas) A 20 koin tetap: LAMA ya n78 98.7% +2.63% / tidak n282 93.3% +1.12% | BARU ya n145 95.2% +2.15% / tidak n428 90.9% +1.16%
+   Portofolio 10 slot, semua 10% (terpasang): LAMA +44.4%/th DD -22% (x2 +32.3%) n 504 94.2% +1.31% | BARU +6.9%/th DD -40% (x2 +0.3%) n 1047 89.1% +0.41%
+   Portofolio 10 slot, ⚡ 10% / biasa 5%: LAMA +28.3%/th DD -11% (x2 +21.8%) n 504 94.2% +1.31% | BARU +6.9%/th DD -20% (x2 +3.0%) n 1047 89.1% +0.41%
+   Portofolio 10 slot, hanya ⚡ (= filter): LAMA +13.2%/th DD -2% (x2 +11.3%) n 95 96.8% +2.20% | BARU +6.0%/th DD -3% (x2 +4.8%) n 183 92.3% +1.59%
+
+# 5. BTC>SMA200 sebagai LABEL (E): statistik per rezim, per tahun
+   2020: BTC atas n 100 untung 90.0% rata +0.58% kalah rata -18.5% terburuk -59% | BTC bawah n 16 untung 100.0% rata +2.70% kalah rata +0.0% terburuk +3%
+   2021: BTC atas n 311 untung 92.6% rata +0.87% kalah rata -22.0% terburuk -37% | BTC bawah n 182 untung 95.1% rata +1.55% kalah rata -20.5% terburuk -53%
+   2022: BTC atas n 0 | BTC bawah n 381 untung 86.9% rata -0.29% kalah rata -20.1% terburuk -100%
+   2023: BTC atas n 123 untung 93.5% rata +1.48% kalah rata -16.1% terburuk -36% | BTC bawah n 14 untung 85.7% rata +1.43% kalah rata -6.2% terburuk -8%
+   2024: BTC atas n 180 untung 88.9% rata +0.75% kalah rata -14.8% terburuk -31% | BTC bawah n 25 untung 100.0% rata +2.70% kalah rata +0.0% terburuk +3%
+   2025: BTC atas n 122 untung 92.6% rata +0.71% kalah rata -24.3% terburuk -55% | BTC bawah n 28 untung 92.9% rata +2.18% kalah rata -4.6% terburuk -5%
+   2026: BTC atas n 22 untung 95.5% rata +1.07% kalah rata -33.1% terburuk -33% | BTC bawah n 47 untung 80.9% rata -0.77% kalah rata -15.4% terburuk -30%
+
+BTC beli-tahan LAMA: +181.2%/th DD -54%
+BTC beli-tahan BARU: +11.7%/th DD -77%
+Semua hari semesta top-20 LAMA: untung 86.9% rata +0.37% (TP kena 86.5%)
+Semua hari semesta top-20 BARU: untung 79.9% rata -0.44% (TP kena 79.2%)
+Top-20 volume (rata 7 hari) per 2026-09-19: BTC ETH ZEC SOL XRP NEAR BNB UNI LSK DOGE SUI REZ ARB THE ENA ADA TRX WLD PEPE LINK
+   sama dengan daftar aplikasi: 11/20; tidak ada di aplikasi: ['ARB', 'ENA', 'LSK', 'PEPE', 'REZ', 'SUI', 'THE', 'WLD', 'ZEC']; di aplikasi tetapi bukan top-20: ['AAVE', 'ATOM', 'AVAX', 'BCH', 'DOT', 'ETC', 'FIL', 'LTC', 'XLM']
+   cara pindai cloud: top-20 (rata 7 hari) yang juga masuk top-20 volume 24 jam (ticker): 82.0%
+   cara pindai cloud: top-20 (rata 7 hari) yang juga masuk top-30 volume 24 jam (ticker): 94.8%
+   cara pindai cloud: top-20 (rata 7 hari) yang juga masuk top-40 volume 24 jam (ticker): 97.7%
+   cara pindai cloud: top-20 (rata 7 hari) yang juga masuk top-60 volume 24 jam (ticker): 99.1%
+   porsi koin aplikasi di top-20 historis per tahun: 2020:54% 2021:60% 2022:62% 2023:52% 2024:48% 2025:59% 2026:57%
+
+
+# VERIFIKASI (verifikator adversarial, 8 Okt 2026) — vonis: DIKOREKSI
+Skrip verifikasi di scratchpad sesi (tidak di-commit): ulang dari nol, baris ekor delisting, bootstrap per koin, subkelompok.
+Semua angka di atas SUDAH versi terkoreksi (research/spot_apk.py diperbaiki lalu dijalankan ulang dari nol, 62 dtk).
+
+V1. Reproduksi: kode ASLI agen dijalankan ulang TANPA cache -> hasil_spot_apk.txt, spot_apk_teruji.json dan
+    spot_apk_sinyal.parquet IDENTIK dengan versi agen. Prediksi cache = model dilatih ulang (selisih maks 3e-8).
+V2. Walk-forward: data latih tiap tahun uji berakhir (t_out label) paling lambat 29 Des tahun sebelumnya
+    (2020: 2019-12-29 ... 2026: 2025-12-29) -> label 10 hari tidak bocor. Fitur di close hari t, volume peringkat
+    rata-rata 7 hari s.d. KEMARIN, vol_rank memakai hari t, beli open t+1, batas waktu close hari ke-10 (= deadline
+    cloud). Tidak ditemukan look-ahead di fitur/label/volume.
+V3. BIAS PENYINTAS DITEMUKAN (DIPERBAIKI): build() membuang baris yang labelnya tidak lengkap, termasuk 10 hari
+    terakhir sebelum koin DELISTING / berhenti diperdagangkan (1.920 baris, 187 koin). Sinyal yang hilang:
+    LUNA 8 Mei 2022 (p 0,94, vol_rank 0,28 -> lolos filter vol, peringkat volume 4) -> beli 9 Mei di 64,27 ->
+    perdagangan berhenti 13 Mei di 0,00005 = -100%. Kini baris ekor dinilai dengan label terpotong (keluar di close
+    terakhir yang ada); model tetap dilatih TANPA ekor (= resep model live). Dampak E:
+      BARU sebelum: n 1050 untung 89,0% rata +0,44% rugi rata -18,0% terburuk -55% pf +7,8%/th DD -37% (x2 +1,1%)
+      BARU sesudah: n 1047 untung 89,1% rata +0,41% rugi rata -18,4% terburuk -100% pf +6,9%/th DD -40% (x2 +0,3%)
+      LAMA tidak berubah (94,2% / +1,31% / +44,4%/th DD -22%). Biasa BARU: terburuk -55% -> -100%, rata +0,19 -> +0,15%.
+    Catatan baik: filter vol > P90 MENYELAMATKAN sinyal ambruk lain di ekor (FTT 8–14 Nov 2022 p 0,99 peringkat 3–16,
+    LUNA 9–12 Mei, BAKE/HIFI/NFP/HFT 2025–26: semua vol_rank >= 0,99) -> filter vol jangan dicabut.
+V4. LAMA salah label: model 2019 TIDAK ada (data latih 2018 hanya 1.474 baris < 2.000) -> tidak ada sinyal 2019 sama
+    sekali; LAMA efektif Jan 2020 – Sep 2021 (21 bln, pasar naik besar). Dulu dibagi 33 bln -> angka '/bln' LAMA
+    terlalu kecil: E 15,3 -> 24,0/bln, ⚡ 2,9 -> 4,5/bln. BTC beli-tahan LAMA (periode sama) +181%/th DD -54%.
+    DIPERBAIKI (START = 2020-01-01; angka per sinyal & portofolio tidak berubah).
+V5. Model M1 (dipakai E) dilatih 20 koin pilihan HARI INI + daftar koin ambruk yang disusun dengan pengetahuan
+    sekarang -> pemilihan data latihnya memakai pengetahuan masa depan. M2 (dilatih 30 koin volume terbesar saat
+    itu) lebih jujur: BARU 88,6% / +0,37%/sinyal / +5,0%/th DD -38% (x2 ±0). Angka M2 peka: versi agen +0,30% /
+    +3,8%/th, versi model lama + ekor +0,37% / +5,3%/th. Rentang jujur BARU: +0,3…+0,4%/sinyal, +4…+7%/th, DD
+    -38…-40%, biaya x2 ≈ impas. Di bawah BTC beli-tahan BARU (+11,7%/th, DD -77%).
+V6. Portofolio: mesin cepat = spot_dip2.portfolio (bagian 0, sama sampai 0,01%). take() menyaring per koin sebelum
+    batas slot (beda dengan cloud); tanpa saring-dulu (seperti cloud): BARU +7,4%/th DD -39%, LAMA +42,7%/th ->
+    efek kecil. Urutan koin: +6,9 (volume) vs +7,6%/th (daftar model) -> ketelitian portofolio ±1–3%/th.
+V7. Pembanding acak (20 ulangan, semesta sama): BARU untung 79,7%, rata -0,97%, -24,1%/th -> sinyal tetap jauh di
+    atas acak per sinyal; p95 acak rata BARU < 0.
+V8. Label ⚡ Dip ringan (dd20 > -15%) — dikonfirmasi SEBAGAI LABEL, dengan catatan:
+    - Angka hampir tidak berubah oleh perbaikan: BARU n 183 untung 92,3% rata +1,59% rugi rata -11,8%; biasa n 864
+      88,4% +0,15%; LAMA ⚡ 96,8% +2,20% vs biasa 93,6% +1,10%.
+    - Data snooping nyata: kriteria yang DIPILIH DARI LAMA (p >= 0,97 / 0,95) gagal di BARU; dari 20 kriteria dua
+      arah hanya 'BUKAN jatuh dalam' yang lebih baik untung% & rata di kedua periode, dan arahnya dipilih setelah
+      melihat BARU. Ambang peka: -5%/-8% tidak menaikkan untung% BARU (89,1 vs 89,1; 88,6 vs 89,2), -25% berbalik di
+      LAMA, ember -20..-15% LAMA justru buruk (88,9% +0,35%).
+    - Bukti yang tetap ada: selisih rata ⚡-biasa positif di subkelompok 'model saja' (LAMA 98,8% +2,29 vs 94,8% +1,22;
+      BARU 92,1% +1,47 vs 88,5% +0,01) dan '3 merah' (rata kedua periode; untung% LAMA n 13 lebih rendah);
+      bootstrap per KOIN BARU +1,44 poin [+0,47..+2,40] P<=0 0,2%, LAMA +1,12 [-0,06..+2,00] P<=0 2,9%;
+      tanpa 3 koin ⚡ terbanyak (SOL/FTM/NEAR) BARU 91,8% +1,54% vs 88,7% +0,16%.
+    - Selisih UNTUNG% belum signifikan (blok bulan BARU +3,9 poin [-0,8..+8,1], LAMA [-1,3..+7,5]); 2023–2025 untung% ⚡
+      89,3% < biasa 92,1% -> di tahun naik label TIDAK menaikkan WR, keunggulan dari rugi yang lebih kecil.
+    - 'Terburuk -24%' ⚡ dari 183 sinyal: perbandingan adil (sampel biasa seukuran ⚡, 2000x) terburuk median -54%,
+      P(>= -24%) 0% di BARU -> ekor rugi ⚡ memang lebih kecil di BARU; di LAMA P 13% (belum pasti). Porsi rugi >= 20%:
+      ⚡ 1,1% vs biasa 4,6% (BARU). JANGAN tampilkan 'terburuk -24%' sebagai batas: koin dekat puncak pun bisa ambruk.
+    - Hanya ⚡ (= filter): BARU +6,0%/th DD -3% (x2 +4,8%) vs semua +6,9%/th DD -40% (x2 +0,3%); LAMA +13,2 vs +44,4%/th
+      -> gagal aturan filter (LAMA), tetapi risiko jauh lebih kecil. Ukuran ⚡ 10%/biasa 5%: BARU +6,9%/th DD -20%
+      (x2 +3,0%) = profit sama dengan DD separuh; LAMA +28,3%/th.
+V9. Usulan implementasi — perlu dikoreksi sebelum dipasang (cloud/ & android/ TIDAK diubah verifikator):
+    - cloud/api/spot_model.json DIKUNCI sha256 oleh tests/test_spot_paritas.py (sama dengan fixture dan
+      sniper_bot/strategi/spot_model.json): menulis 'teruji'/'tier' ke sana membuat tes gagal dan salinan bot beda.
+      Simpan di file baru (mis. cloud/api/spot_teruji.json) atau buat ulang fixture + salinan bot sekaligus. File
+      terpisah juga mencegah research/spot_peluang --simpan / spot_jatuh / spot_pindai menimpa angka jujur.
+    - Kunci teruji.baru/lama {n, wr, avg, kalah, terburuk} + dasar_baru dipakai SpotCard.kt & research/peringkat.py
+      -> usulan kompatibel; 'tier' harus dibaca dengan .get (tanpa blok tier = tanpa label, bukan KeyError).
+    - dd20 = x[MODEL['fitur'].index('dd20')] sudah dihitung _spot.features dari candle tutup -> label tanpa panggilan
+      data tambahan, sama dengan riset (paritas fitur 1e-12 di tests/test_spot_paritas.py).
+    - Teks usulan lama 'biasa ... rugi terburuk -55%' SALAH -> -100% (LUNA). Teks ⚡ sebaiknya 'rugi >= 20% di ±1 dari
+      100 sinyal; koin bisa ambruk/delisting' daripada 'terburuk -24%'. Judul 'peluang naik p%' & cincin 'peluang'
+      harus diganti (kalibrasi BARU p 0,97–0,99 hanya 86,7% untung).
+    - Semesta dinamis (opsional): kecualikan juga token saham/ETF Binance berakhiran B (AAPLB, NVDAB, SQQQB, SOXSB, ...
+      ada di data 2026) dan simpan daftar hari itu di state; jangan cabut filter vol (V3).
+V10. Belum diuji: jeda entry setelah 07:05 WIB (data 1d saja), biaya/slippage Tokocrypto, data Okt 2026, screenshot
+    pengguna. Kesimpulan tetap: TIDAK ada filter baru yang lolos; ⚡ hanya label + uji maju; angka 'teruji' di
+    aplikasi (92% / +1,37% / terburuk -58%) wajib diganti angka jujur (89% / +0,4% / terburuk -100%).

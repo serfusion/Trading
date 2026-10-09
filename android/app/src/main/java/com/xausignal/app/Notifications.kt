@@ -148,10 +148,19 @@ object Notifications {
     /** 💎 BELI SPOT (cloud/api/_spot.py): beli di Binance spot lalu pasang limit jual di TP. Info saja. */
     fun spotSignal(context: Context, event: SignalEvent) {
         val coin = event.str("coin")
-        val title = "💎 BELI SPOT $coin/USDT • peluang naik ${fmt(event.num("p"), 0)}%"
+        val tier = event.str("tier")
+        val title = when (tier) {
+            "kilat" -> "💎 BELI SPOT $coin/USDT • ${event.str("tier_nama").ifBlank { "⚡ Dip ringan" }}"
+            "biasa" -> "💎 BELI SPOT $coin/USDT • biasa"
+            else -> "💎 BELI SPOT $coin/USDT • skor model ${fmt(event.num("p"), 0)}"
+        }
+        val uji = event.json.optJSONObject("teruji_tier")?.optJSONObject("baru")
+            ?: event.json.optJSONObject("teruji")
         val text = "Beli ±${spotPx(event.num("entry"))} lalu pasang limit jual ${spotPx(event.num("tp"))} " +
             "(+${fmt(event.num("tp_pct"), 0)}%). Belum kena sampai ${formatTime(event.str("deadline"))} → jual. " +
-            "Maks 10% modal spot per sinyal."
+            "Maks 10% modal spot per sinyal." +
+            (uji?.let { " Teruji Okt 2021–2026: untung di ${fmt(it.optDouble("wr"), 0)}% sinyal, rata " +
+                "${spotPct(it.optDouble("avg"))}." } ?: "")
         post(context, event.id.hashCode(), title, text)
     }
 

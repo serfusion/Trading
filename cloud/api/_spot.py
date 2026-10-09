@@ -7,11 +7,17 @@ terisi); N hari lewat -> CLOSE di close candle terakhir. Hanya informasi: cloud 
 
 Data harian: data-api.binance.vision -> api.binance.us -> Twelve Data (Vercel di AS; api.binance.com menolak AS, 451).
 State: baris Supabase 'spot'. Pesan ntfy: spot_signal, spot_close (dengan notifikasi), spot_status (kartu 💎).
+
+9 Okt 2026 (izin pengguna "spot dip ... dengan wr dan profit yg memungkinkan tambah saja di apk"): angka "teruji" diganti
+angka JUJUR dari spot_teruji.json (research/spot_apk.py: 20 koin volume terbesar SAAT ITU termasuk delisting, BARU
+untung di 89% sinyal, rata +0,4%, terburuk -100%) + LABEL "⚡ Dip ringan" (harga <= 15% di bawah high 20 hari: BARU 92%
+/ +1,6%, LAMA 97% / +2,2%). Label saja: keputusan BELI/CLOSE tidak berubah. Env SPOT_TIER=0 mematikan label.
 """
 from __future__ import annotations
 
 import json
 import math
+import os
 import time
 import urllib.parse
 from datetime import datetime, timedelta, timezone
@@ -21,6 +27,8 @@ import _core
 
 _PATH = Path(__file__).resolve().parent / "spot_model.json"
 MODEL = json.loads(_PATH.read_text(encoding="utf-8")) if _PATH.exists() else {}
+_TERUJI_PATH = Path(__file__).resolve().parent / "spot_teruji.json"
+TERUJI = json.loads(_TERUJI_PATH.read_text(encoding="utf-8")) if _TERUJI_PATH.exists() else {}
 DAY = timedelta(days=1)
 SCAN_AFTER = timedelta(minutes=5)       # tunggu candle harian benar-benar tutup
 KEEP_CLOSED = 30
@@ -166,6 +174,45 @@ def prob(x: list[float], model: dict | None = None) -> float:
     return 1 / (1 + math.exp(-s))
 
 
+def teruji() -> dict:
+    """Angka uji yang ditampilkan: versi jujur (spot_teruji.json) bila ada, selain itu spot_model.json."""
+    return TERUJI.get("teruji") or MODEL.get("teruji", {})
+
+
+def tier_info() -> dict | None:
+    """Blok label (None = label mati: env SPOT_TIER=0 atau file tanpa blok tier)."""
+    if os.environ.get("SPOT_TIER", "1").strip() == "0":
+        return None
+    t = TERUJI.get("tier")
+    return t if isinstance(t, dict) and "dd20_min" in t else None
+
+
+def tier(x: list[float]) -> str | None:
+    """'kilat' (⚡ Dip ringan: harga masih <= 15% di bawah high 20 hari) atau 'biasa'. Fitur dd20 dari candle tutup."""
+    t = tier_info()
+    if t is None:
+        return None
+    dd20 = dict(zip(MODEL.get("fitur", []), x)).get("dd20")
+    if dd20 is None:
+        return None
+    return "kilat" if dd20 > t["dd20_min"] else "biasa"
+
+
+def _teks_tier(tr: str | None) -> str:
+    t = tier_info()
+    if not tr or t is None:
+        st = teruji().get("baru", {})
+        return (f"Teruji Okt 2021–2026: untung di {st.get('wr', 0):.0f}% sinyal, rata {_pct(st.get('avg', 0))}, "
+                f"rugi terburuk {_pct(st.get('terburuk', 0))}." if st else "")
+    b = (t.get(tr) or {}).get("baru", {})
+    if tr == "kilat":
+        return (f"⚡ Dip ringan: harga masih ≤{abs(t['dd20_min']) * 100:.0f}% di bawah puncak 20 hari. Teruji Okt "
+                f"2021–2026: untung di {b.get('wr', 0):.0f}% sinyal, rata {_pct(b.get('avg', 0))}; koin tetap bisa "
+                f"ambruk/delisting.")
+    return (f"Teruji Okt 2021–2026: untung di {b.get('wr', 0):.0f}% sinyal, rata {_pct(b.get('avg', 0))} (hampir impas "
+            f"setelah biaya), rugi terburuk {_pct(b.get('terburuk', 0))} (koin bisa delisting).")
+
+
 # ------------------------------------------------------------------ teks
 def _px(v: float) -> str:
     d = 2 if v >= 100 else 4 if v >= 1 else 6
@@ -225,13 +272,15 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
                 ev = {"type": "spot_close", "id": pos["id"], "symbol": f"{coin}/USDT", "coin": coin,
                       "entry": pos["entry"], "exit": round(exit_px, 8), "r": round(r, 2), "reason": reason,
                       "time_open": pos["time"], "time": _core.iso(now), "win": r > 0}
+                if pos.get("tier"):
+                    ev["tier"] = pos["tier"]
                 head = "PROFIT" if r > 0 else "MINUS"
                 text = (f"Limit jual terisi di {_px(exit_px)}." if hit is not None else
                         f"Belum kena TP setelah {days} hari: jual sekarang (patokan {_px(exit_px)}).") + \
                     f" Hasil {_pct(r)} setelah biaya. Beli {_px(pos['entry'])}."
                 pub.publish(ev, text, f"🏁 CLOSE SPOT {coin}/USDT • {head} {_pct(r)}", 4, ["checkered_flag"])
-                closed = ([{k: ev[k] for k in ("id", "coin", "entry", "exit", "r", "reason", "time_open", "time")}]
-                          + closed)[:KEEP_CLOSED]
+                closed = ([{k: ev[k] for k in ("id", "coin", "entry", "exit", "r", "reason", "time_open", "time", "tier")
+                            if k in ev}] + closed)[:KEEP_CLOSED]
                 del open_[coin]
                 events.append(f"spot close {coin} {_pct(r)}")
                 changed = True
@@ -282,18 +331,27 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             pos = {"id": sid, "coin": coin, "entry": price, "tp": round(price * (1 + tp), 8), "p": round(p * 100, 1),
                    "time": _core.iso(now), "day": _core.iso(today), "deadline": _core.iso(dl),
                    "alasan": "model + 3 merah" if p >= thr and rule else "model" if p >= thr else "3 merah"}
+            tr = tier(x)
+            ti = tier_info()
+            if tr:
+                pos.update({"tier": tr, "tier_nama": ti[tr]["nama"],
+                            "dd20": round(dict(zip(MODEL["fitur"], x))["dd20"] * 100, 1)})
             open_[coin] = pos
-            st = MODEL.get("teruji", {}).get("baru", {})
+            st = teruji().get("baru", {})
             ev = {"type": "spot_signal", "id": sid, "symbol": f"{coin}/USDT", "coin": coin, "entry": price,
                   "tp": pos["tp"], "tp_pct": round(tp * 100, 1), "p": pos["p"], "days": days,
                   "deadline": pos["deadline"], "time": pos["time"], "alasan": pos["alasan"], "teruji": st,
                   "source": state.get("source")}
+            if tr:
+                ev.update({"tier": tr, "tier_nama": pos["tier_nama"], "dd20": pos["dd20"],
+                           "teruji_tier": {k: ti[tr].get(k) for k in ("lama", "baru")}})
             text = (f"Alasan: {pos['alasan']}. Beli spot ±{_px(price)}, lalu pasang limit jual {_px(pos['tp'])} "
                     f"(+{tp * 100:.0f}%). "
                     f"Belum kena sampai {_wib(dl)} → jual. Maks {100 // max(max_open, 1)}% modal spot. "
-                    + (f"Teruji sejak 2021: naik {st.get('wr', 0):.0f}% sinyal, rata {_pct(st.get('avg', 0))}, "
-                       f"rugi rata {_pct(st.get('kalah', 0))}." if st else ""))
-            pub.publish(ev, text, f"💎 BELI SPOT {coin}/USDT • peluang naik {p * 100:.0f}%", 4, ["gem"])
+                    + _teks_tier(tr))
+            judul = (f"💎 BELI SPOT {coin}/USDT • {pos['tier_nama'] if tr == 'kilat' else 'biasa'}" if tr else
+                     f"💎 BELI SPOT {coin}/USDT • peluang naik {p * 100:.0f}%")
+            pub.publish(ev, text, judul, 4, ["gem"])
             events.append(f"spot BELI {coin} p {p * 100:.0f}%")
             scan["found"] = scan.get("found", 0) + 1
             changed = True
@@ -311,7 +369,8 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             {**p, "price": prices.get(c)} for c, p in open_.items()], "closed": closed[:20],
             "scan_day": scan.get("day"), "found": scan.get("found", 0), "scan_left": len(scan.get("todo") or []), "source": state.get("source"),
             "tp_pct": round(tp * 100, 1), "days": days, "ambang": round(thr * 100), "max_open": max_open,
-            "teruji": MODEL.get("teruji", {}), "coins": MODEL.get("coins", []), "error": state["error"]})
+            "teruji": teruji(), "teruji_metode": TERUJI.get("teruji_metode"), "tier": tier_info(),
+            "coins": MODEL.get("coins", []), "error": state["error"]})
         state["status_at"] = _core.iso(now)
     store.save_state(state)
     return {"ok": not errors, "open": len(open_), "events": events, "errors": errors[:5],

@@ -53,10 +53,20 @@ private fun instantOf(iso: String): Instant? = try {
 private fun objects(arr: JSONArray?): List<JSONObject> =
     if (arr == null) emptyList() else (0 until arr.length()).mapNotNull { arr.optJSONObject(it) }
 
+/** Statistik BARU (Okt 2021–2026) untuk label "kilat"/"biasa" dari spot_status "tier", atau null. */
+private fun tierBaru(st: JSONObject?, tier: String): JSONObject? =
+    st?.optJSONObject("tier")?.optJSONObject(tier)?.optJSONObject("baru")
+
+private fun pctBulat(v: Double): String = fmt(v, 0) + "%"
+
 /**
  * 💎 Spot Binance (aplikasi 4.1, permintaan pengguna 4 Okt 2026): koin dengan peluang tinggi naik lagi +3% dalam 10 hari
  * (cloud/api/_spot.py, research/spot_peluang.py). Kartu BELI (harga beli, limit jual TP, harga sekarang, batas waktu)
  * dan CLOSE terakhir. Data: spot_status cloud; cadangan: pesan spot_signal / spot_close di HP. Info saja, tanpa order.
+ *
+ * Aplikasi 4.24 (9 Okt 2026): angka "teruji" = versi JUJUR (cloud/api/spot_teruji.json, research/spot_apk.py: koin volume
+ * terbesar saat itu termasuk delisting) + label ⚡ Dip ringan (tier "kilat": harga masih ≤ 15% di bawah puncak 20 hari).
+ * Cincin = untung% teruji label itu (bukan "peluang": skor model tidak terkalibrasi sejak 2021).
  */
 @Composable
 fun SpotSection(events: List<SignalEvent>) {
@@ -99,10 +109,19 @@ fun SpotSection(events: List<SignalEvent>) {
     open.forEach { SpotOpenCard(it, st) }
     if (closed.isNotEmpty()) SpotClosedCard(closed.take(5))
     st?.optJSONObject("teruji")?.optJSONObject("baru")?.let { b ->
+        val k = tierBaru(st, "kilat")
+        val bi = tierBaru(st, "biasa")
+        val dasar = st.optJSONObject("teruji")?.optDouble("dasar_baru")?.takeIf { !it.isNaN() }
         Text(
-            "Teruji Okt 2021–2026: naik +${fmt(st.optDouble("tp_pct", 3.0), 0)}% di ${fmt(b.optDouble("wr"), 0)}% " +
-                "sinyal • rata ${spotPct(b.optDouble("avg"))} • rugi rata ${spotPct(b.optDouble("kalah"))} • " +
-                "terburuk ${spotPct(b.optDouble("terburuk"))}",
+            if (k != null && bi != null)
+                "Teruji Okt 2021–2026 (20 koin volume terbesar saat itu, termasuk delisting): ⚡ untung di " +
+                    "${pctBulat(k.optDouble("wr"))} sinyal, rata ${spotPct(k.optDouble("avg"))} • biasa " +
+                    "${pctBulat(bi.optDouble("wr"))}, ${spotPct(bi.optDouble("avg"))} • rugi terburuk " +
+                    spotPct(b.optDouble("terburuk")) + (dasar?.let { " • acak ${pctBulat(it)}" } ?: "")
+            else
+                "Teruji Okt 2021–2026: untung di ${pctBulat(b.optDouble("wr"))} sinyal (target " +
+                    "+${fmt(st.optDouble("tp_pct", 3.0), 0)}%) • rata ${spotPct(b.optDouble("avg"))} • rugi rata " +
+                    "${spotPct(b.optDouble("kalah"))} • terburuk ${spotPct(b.optDouble("terburuk"))}",
             style = MaterialTheme.typography.labelSmall, color = Muted
         )
     }
@@ -119,22 +138,40 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
     val days = st?.optInt("days", 10) ?: 10
     val chg = price?.let { (it / entry - 1) * 100 }
     val left = instantOf(o.optString("deadline"))?.let { Duration.between(Instant.now(), it) }
+    val tier = o.optString("tier")
+    val kilat = tier == "kilat"
+    val tierWr = tier.takeIf { it.isNotBlank() }?.let { tierBaru(st, it)?.optDouble("wr") }?.takeIf { !it.isNaN() }
     AppCard(accent = BuyColor) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             AssetCoin(coin, 38.dp)
             Column(Modifier.weight(1f)) {
                 Text("$coin/USDT", fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleMedium)
-                Pill("BELI SPOT", BuyColor, solid = true)
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Pill("BELI SPOT", BuyColor, solid = true)
+                    if (kilat) Pill(o.optString("tier_nama").ifBlank { "⚡ Dip ringan" }, Gold)
+                }
             }
-            Ring((p / 100).toFloat(), Gold, size = 60.dp, stroke = 6.dp) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("${fmt(p, 0)}%", fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleSmall)
-                    Text("peluang", style = MaterialTheme.typography.labelSmall, color = Muted)
+            if (tierWr != null) {
+                Ring((tierWr / 100).toFloat(), Gold, size = 60.dp, stroke = 6.dp) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(pctBulat(tierWr), fontWeight = FontWeight.ExtraBold,
+                            style = MaterialTheme.typography.titleSmall)
+                        Text("teruji", style = MaterialTheme.typography.labelSmall, color = Muted)
+                    }
+                }
+            } else {
+                Ring((p / 100).toFloat(), Gold, size = 60.dp, stroke = 6.dp) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("${fmt(p, 0)}", fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleSmall)
+                        Text("skor", style = MaterialTheme.typography.labelSmall, color = Muted)
+                    }
                 }
             }
         }
-        Text("Peluang naik +${fmt(tpPct, 0)}% dalam $days hari" +
-            (o.optString("alasan").takeIf { it.isNotBlank() }?.let { " • $it" } ?: ""),
+        Text("Target +${fmt(tpPct, 0)}% dalam $days hari" +
+            (o.optString("alasan").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +
+            (if (tierWr != null && !p.isNaN()) " • skor model ${fmt(p, 0)}" else "") +
+            (if (kilat) " • masih ${spotPct(o.optDouble("dd20"))} dari puncak 20 hari" else ""),
             style = MaterialTheme.typography.labelMedium, color = Muted)
         TileGrid(listOf(
             TileData("Beli", spotPx(entry), Gold, "± harga sinyal"),
@@ -156,8 +193,8 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
         }
         val b = st?.optJSONObject("teruji")?.optJSONObject("baru")
         NoteBox("Maks ${100 / maxOf(st?.optInt("max_open", 10) ?: 10, 1)}% modal spot per koin. Tanpa SL: sesekali " +
-            "rugi besar" + (b?.let { " (rata ${spotPct(it.optDouble("kalah"))}, terburuk ${spotPct(it.optDouble("terburuk"))})" }
-            ?: "") + ".", Gold)
+            "rugi besar" + (b?.let { " (rata ${spotPct(it.optDouble("kalah"))}, terburuk ${spotPct(it.optDouble("terburuk"))}" +
+            " — koin bisa ambruk/delisting)" } ?: "") + ".", Gold)
     }
 }
 
@@ -170,8 +207,8 @@ private fun SpotClosedCard(list: List<JSONObject>) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                 AssetCoin(c.optString("coin"), 28.dp)
                 Column(Modifier.weight(1f)) {
-                    Text("${c.optString("coin")}/USDT", fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.bodyMedium)
+                    Text((if (c.optString("tier") == "kilat") "⚡ " else "") + "${c.optString("coin")}/USDT",
+                        fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodyMedium)
                     Text("${c.optString("reason")} • ${formatTime(c.optString("time"))}",
                         style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
                 }
