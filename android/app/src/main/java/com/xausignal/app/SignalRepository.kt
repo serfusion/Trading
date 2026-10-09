@@ -180,6 +180,19 @@ fun priceText(symbol: String, v: Double?): String {
 
 fun SignalEvent.price(key: String): String = priceText(symbol(), num(key))
 
+/** Harga untuk ditempel di form order bursa/MT5: titik desimal, tanpa pemisah ribuan (aplikasi 4.24). */
+fun rawPrice(symbol: String, v: Double): String {
+    val digits = if (symbol.contains("JPY")) 3 else if (Math.abs(v) < 20) 5 else 2
+    return String.format(Locale.US, "%.${digits}f", v)
+}
+
+/** SL Limit di bursa: sedikit MELEWATI pemicu supaya order pasti terisi saat harga bergerak cepat — koin alt 0,5%,
+ *  BTC/ETH 0,2%. Posisi BUY ditutup dengan jual (limit di bawah pemicu), SELL dengan beli (limit di atas). */
+fun slLimit(trigger: Double, buy: Boolean, alt: Boolean): Double {
+    val b = if (alt) 0.005 else 0.002
+    return if (buy) trigger * (1 - b) else trigger * (1 + b)
+}
+
 /** Jumlah ★ (win rate historis) dan 💰 (profit historis). Sinyal lama: ★ = tanda kuat lama. */
 fun SignalEvent.stars(): Int = if (json.has("stars")) json.optInt("stars") else if (isStar()) 1 else 0
 fun SignalEvent.moneyBadge(): Int = json.optInt("money", 0)

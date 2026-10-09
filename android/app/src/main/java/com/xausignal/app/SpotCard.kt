@@ -144,6 +144,11 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
             TileData("Batas waktu", formatTime(o.optString("deadline")).removeSuffix(" WIB"), Muted,
                 left?.let { if (it.isNegative) "lewat → jual" else "sisa ${it.toDays()} h ${it.toHours() % 24} j" }),
         ))
+        // 📋 isi order spot (4.24): limit jual TP; strategi ini TANPA SL (teruji: jual saat batas waktu)
+        OrderLine(listOf("TP Limit" to spotPx(tp), "Pemicu SL" to "— (tanpa SL)", "Jumlah" to "maks 10% modal spot"),
+            "TP Limit ${String.format(java.util.Locale.US, if (tp >= 1) "%.4f" else "%.6f", tp)} / Pemicu SL - / " +
+                "Jumlah maks 10% modal spot",
+            "Spot 💎 teruji TANPA stop loss: belum kena TP sampai batas waktu → jual di harga pasar.")
         if (price != null && tp > entry) {
             val prog = ((price - entry) / (tp - entry)).coerceIn(0.0, 1.0).toFloat()
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
