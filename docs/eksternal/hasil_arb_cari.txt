@@ -1,0 +1,185 @@
+=== ARC (TUGAS A): MULAI ===
+Bot screenshot 'wetharb' & 'circarb' di Arc — dibuat 9 Okt 2026 oleh research/arb_arc.py (lanjutan arb_cari.py)
+Periode data: blok Arc s.d. 25.007.986 (±9 Okt 2026 03:30 UTC); acuan ETH/BTC/EUR = Binance 1 mnt s.d. 8 Okt;
+CRCL/NVDA = NYSE 1 mnt (Twelve Data) s.d. 7 Okt, di luar jam bursa dipakai close terakhir (ditandai 'basi').
+Pembagian waktu: PRA-PUBLIK (1-15 Sep 2026, Arc masih izin terbatas) vs PASCA-PUBLIK (16 Sep - 8 Okt).
+Semua angka USD = USDC. Hanya baca RPC (eth_getLogs/eth_call/getBlock/receipt) — tanpa transaksi.
+
+A1. PENCOCOKAN SCREENSHOT — 21/21 baris cocok PERSIS (jumlah USDC 4 desimal + aset 8/6 digit), 20/21 menit sama;
+    1 baris (SELL 0,573879 CRCL) on-chain 19:16:40 WIB vs layar 19:17 (notifikasi Telegram terkirim setelah blok).
+    => circarb = SABTU 12 Sep 2026 (19:16-19:23 WIB = 12:16-12:23 UTC); wetharb = MINGGU 13 Sep 2026 (19:08-19:15 WIB). Keduanya 3-4 hari SEBELUM mainnet publik.
+    Pool: WETH = v3-fork 0x7a5de3ed…5d8c (USDC/WETH•Arc, fee 1%, pabrik 0xf0db7b58); CRCL = 0x2e8180fa…ba (CRCL•Arc/USDC,
+    fee 1%). Kontrak bot: wetharb 0xa25790ec…62b1 (owner E1 0x673250c6…6886), circarb 0xcdfe8dab…8551 (owner E2
+    0x7cff8a2b…87db). Fungsi bot: buy(usdcIn,minOut) 0xd6febde8 / sell(amountIn,minUsdcOut) 0xd79875eb langsung ke pool.
+    Acuan: ETH Binance menit yg sama; CRCL = close NYSE Jumat 11 Sep $90,63 (akhir pekan, bursa tutup).
+    tgl   WIB      UTC      bot     arah     USDC        aset    harga    acuan     vs    batas tx
+    12-09 19:16:40 12:16:40 circarb SELL  39,4181    0,573879    68,69    90,63   -24%     65,3 0x8cf6690598c0…
+    12-09 19:17:29 12:17:29 circarb SELL  23,8194    0,399409    59,64    90,63   -34%     56,7 0xb5387a0c9a8a…
+    12-09 19:20:50 12:20:50 circarb BUY   25,0000    1,250481    19,99    90,63   -78%     40,0 0xb29e7aff8251…
+    12-09 19:21:08 12:21:08 circarb SELL  38,6142    0,648057    59,58    90,63   -34%     56,6 0xf56867f51e38…
+    12-09 19:21:35 12:21:35 circarb BUY   25,0000    0,806017    31,02    90,63   -66%     40,0 0x2fd855189381…
+    12-09 19:21:44 12:21:44 circarb BUY   12,5000    0,313612    39,86    90,63   -56%     40,0 0x917fac6952aa…
+    12-09 19:21:57 12:21:57 circarb SELL  39,3559    0,368462   106,81    90,63    18%    101,9 0x09c335665e48…
+    12-09 19:22:02 12:22:02 circarb SELL  38,4092    0,570559    67,32    90,63   -26%     65,6 0x62bb1282460b…
+    12-09 19:22:12 12:22:12 circarb BUY   25,0000    0,865127    28,90    90,63   -68%     40,0 0x971e1828c6c4…
+    12-09 19:22:18 12:22:18 circarb SELL  42,7415    0,712878    59,96    90,63   -34%     55,2 0x9ca92415f949…
+    12-09 19:22:23 12:22:23 circarb SELL  38,5639    0,590954    65,26    90,63   -28%     63,2 0x8f71ae845654…
+    12-09 19:23:33 12:23:33 circarb SELL  23,3361    0,344325    67,77    90,63   -25%     64,4 0x4780c4c61df8…
+    13-09 19:08:30 12:08:30 wetharb BUY    3,0000  0,00321553   932,97 2.479,10   -62%    948,5 0xc31050f8908f…
+    13-09 19:08:42 12:08:42 wetharb BUY    3,0000  0,00307713   974,93 2.479,10   -61%    991,6 0x35668c63e149…
+    13-09 19:08:52 12:08:52 wetharb BUY    0,3750  0,00037535   999,07 2.479,10   -60%  1.000,0 0x69f1f911532c…
+    13-09 19:09:15 12:09:15 wetharb BUY    3,0000  0,00335627   893,85 2.479,05   -64%    908,3 0x3f9c53bfd451…
+    13-09 19:09:26 12:09:26 wetharb BUY    3,0000  0,00320879   934,93 2.479,05   -62%    950,5 0x7d659686defe…
+    13-09 19:09:35 12:09:35 wetharb BUY    3,0000  0,00307082   976,94 2.479,05   -61%    993,7 0xc5c22dffed1c…
+    13-09 19:15:06 12:15:06 wetharb BUY    3,0000  0,00323409   927,62 2.482,96   -63%    943,0 0x71beb51966b9…
+    13-09 19:15:17 12:15:17 wetharb BUY    3,0000  0,00309451   969,46 2.482,96   -61%    986,0 0x2b30e5e1d4f6…
+    13-09 19:15:28 12:15:28 wetharb BUY    0,7500  0,00075287   996,19 2.482,96   -60%  1.000,0 0x191d395ae718…
+    'batas' = harga maksimum (BUY, dari minOut) / minimum (SELL, dari minUsdcOut) yang dikirim bot pada tx itu.
+
+A2. UNTUNG-RUGI GRUP (E1 + E2 + 8 kontrak bot), 6-16 Sep 2026 — SELURUHNYA PRA-PUBLIK; 0 trade token ini sejak
+    16 Sep 00:52 UTC. Putaran = satu tx jual dipasangkan FIFO dengan beli terdahulu bot yang sama (USDC).
+    bot               token     beli jual putaran    WR untung FIFO  sisa qty biaya sisa nilai sisa* modal maks beli vs acuan jual vs acuan aktif (UTC)
+    bot CRCL E1       CRCL•Arc    28   37      31   26%           3    2,5758         57         206        170          -53%          -56% 08/09 23:06-14/09 10:30
+    bot CRCL E1 awal  CRCL•Arc     0    6       0     -           0    0,0000          0           0          0             -           12% 08/09 15:33-08/09 15:36
+    bot E2 #3         WETH•Arc    32    2       2  100%          60    0,0456         52         112         42          -49%           23% 09/09 13:41-10/09 10:06
+    bot NVDA E1       NVDA•Arc   103  239     100  100%       1.043    1,1410        109         268          0          -49%            1% 07/09 06:32-14/09 08:14
+    bot NVDA E1 awal  NVDA•Arc    26   23       3  100%           1    0,0235          1           6          0          -83%           -3% 06/09 14:32-07/09 05:46
+    bot NVDA E2       NVDA•Arc   123   75      75   89%         857    4,8706        398       1.145        106          -55%          -17% 09/09 10:23-15/09 22:55
+    circarb CRCL[B]   CRCL•Arc   165   84      78   95%       1.100   18,6468        820       1.492         96          -52%          -34% 09/09 03:10-15/09 23:00
+    wetharb           WETH•Arc   137    8       8  100%          92    0,9417        274       2.309        181          -69%          -22% 13/09 12:08-16/09 00:52
+    * nilai sisa = sisa lot FIFO x acuan 8 Okt x 0,99 (biaya tebus 1%). Sisa itu TIDAK disimpan: lihat buku besar.
+    Total untung FIFO (putaran tertutup): $3.155; WR putaran gabungan 88%; modal USDC per bot maks $181 (jumlah semua bot $595).
+    Dompet induk 0x7821f1d9 (EOA; nonce Arc 602, Base 2.509, BSC 963, Robinhood 654, Ethereum 110) mendanai E1 (blok
+    19.447.015: 4 USDC + 0,045 NVDA) lalu E2 (lewat E1). Kemungkinan satu operator; cerita pengguna (0,45 ETH, $1.100) cocok
+    persis dengan E1 — tetapi kepemilikan dompet TIDAK bisa dibuktikan dari data chain.
+    Bot NVDA menjual stok NVDA•Arc yang DIKIRIM dompet induk 0x7821f1d9 (hasil deposit jembatan) — 'jual tanpa beli'
+    14,13 token = $3.195, dihitung di buku besar pada nilai acuan.
+
+    Buku besar per token (seluruh grup; transfer antar-anggota diabaikan; token dinilai acuan saat kejadian):
+    token      kas pool  kas LP masuk luar keluar luar ditebus net saldo 8/10   UNTUNG
+    WETH•Arc       -173       0         -0         110       2.316          0    2.253
+    CRCL•Arc        473       0     -1.026       2.314         315          0    2.077
+    NVDA•Arc      4.339      98     -4.189       3.022          -0          0    3.271
+    TOTAL grup ≈ $7.601 dalam 10 hari aktif (6-16 Sep) ≈ $760/hari; kas USDC murni $4.738.
+    masuk luar = token diterima dari luar grup (hampir semua dari 0x7821f1d9) dinilai acuan/0,99 (biaya jembatan);
+    keluar luar = dikirim ke luar grup (ke 0x7821f1d9) dinilai acuan x 0,99; ditebus = redeem x acuan x 0,99.
+    Cek jumlah token: pool + LP + masuk - keluar - ditebus - saldo = 0 (selisih < 0,003 token).
+    Harian (USD, kumulatif): 6 Sep -162 | 7 Sep -108 | 8 Sep +917 | 9 Sep +1.085 | 10 Sep +994 | 11 Sep +1.878 | 12 Sep +2.399
+    | 13 Sep +3.059 | 14 Sep +6.624 (tebus 0,45+0,275 WETH) | 15 Sep +7.196 | 16 Sep +7.502 (+LP $98 = total di atas).
+    Mulai untung: bot NVDA E1 awal 6 Sep 15:17 UTC; wetharb 13 Sep 12:46; puncak & berhenti 15-16 Sep. Setelah 16 Sep
+    tidak ada trade lagi (lihat A5). Junk token E1 (DUM, ARCT, bunfi; bikin/tarik LP sendiri) ±$52 — diabaikan.
+
+A3. JALUR KELUAR = JEMBATAN KUSTODIAN ROBINHOOD CHAIN <-> ARC (TERBUKTI on-chain)
+    Token 'WETH' 0xd02d2b38, 'CRCL • Arc Token' 0x2ba0f44b, 'NVIDIA • Arc Token' 0x65055065: kode identik, owner EOA
+    0xb053c334…dfd8, keeper EOA 0x0d8e72ec…671a (nonce Arc 13.468, Robinhood 10.870). Fungsi: mint(address,uint256,
+    bytes32) hanya keeper; redeem(uint256 jumlah, address tujuan) oleh pemegang = BAKAR + event Redeemed(id, dari, tujuan,
+    jumlah); maxSupply, pause. Pasangannya di Robinhood: vault per token (CRCL 0xaeb17c34…, WETH 0xf24b3e38…, NVDA
+    0x3943a8a8…; owner & keeper SAMA) — deposit(uint256) token resmi Robinhood -> event Deposit(id, user, net, fee 1%)
+    -> keeper mint di Arc dengan id yang sama; redeem di Arc -> keeper memanggil release(tujuan, jumlah, id) di vault ->
+    event Release(id, tujuan, net, fee 1%) dan token resmi Robinhood (CRCL 0xdf0992e4, NVDA 0xd0601ce1, WETH->ETH) dikirim.
+    arah                 token      n Arc cocok RH     jumlah     fee  fee% jeda med      p90 alamat
+    mint<-deposit RH     CRCL•Arc    8724     8724  82.782,79  836,19  1,0%     24 s  4.926 s 4142
+    mint<-deposit RH     NVDA•Arc    1552     1552   2.254,03   22,77  1,0%     13 s    124 s 581
+    mint<-deposit RH     WETH•Arc    1540     1540     226,93    2,29  1,0%     18 s    341 s 1238
+    redeem->release RH   CRCL•Arc    6147     6147  78.129,46  781,29  1,0%    127 s  5.362 s 1946
+    redeem->release RH   NVDA•Arc    1115     1115   2.126,78   21,27  1,0%     76 s    259 s 309
+    redeem->release RH   WETH•Arc    1608     1608     197,08    1,97  1,0%    109 s  1.855 s 519
+    100% event Arc punya pasangan di Robinhood (id sama). Jadi token ini DAPAT DITEBUS 1:1 dikurangi 1% (+gas, ±2 mnt).
+    Bukti grup: E1 redeem 0,45 WETH•Arc 14 Sep 00:48:55 UTC (Arc blok 20.737.658, id 0x4849670c…) -> Robinhood blok
+    62.395.685 00:51:03 UTC: vault 0xf24b3e38 release 0,4455 ETH (+fee 0,0045) ke E1 (tx 0x58f93cbf…; WETH dibakar/unwrap,
+    ETH asli dikirim). ETH saat itu $2.484,91 -> 0,4455 ETH ≈ $1.107 = COCOK dengan cerita pengguna 'WETH modal $6 dapat
+    0,45 ETH (untung $1.100)'. Sumbernya: 14 Sep 00:34:32 UTC (07:34 WIB) wetharb membeli 0,441213 WETH•Arc seharga 3 USDC
+    (tx 0x1c691152…, harga $6,80/WETH = -99,7% vs ETH), 1 blok (0,5 dtk) setelah 0xed65d422 menjual 0,999 WETH•Arc seharga
+    $76,56. Total tebusan E1: 6x = 0,94168 WETH -> 0,93226 ETH di Robinhood; E2 1x 3,6725 CRCL•Arc -> 3,6358 CRCL Robinhood
+    (15 Sep 23:24 UTC, release 23 mnt kemudian). Dompet induk 0x7821f1d9 (pendana E1/E2) juga memakai jembatan: 20x deposit
+    NVDA/CRCL/WETH ke Arc (stok yang dijual bot NVDA) dan 13x tebus. Saldo token Robinhood E1/E2 kini 0 (sudah dipindah;
+    tujuan akhir tidak bisa dilacak: RPC Robinhood tanpa arsip, tanpa indeks alamat). Ethereum/Base/Arbitrum/OP: E1/E2 nonce
+    0 (Base E1 2) — tidak ada jejak jembatan ke sana. RISIKO: kustodian satu EOA (owner/keeper) — bisa pause/tidak membayar.
+
+A4. PIHAK LAWAN (pra-publik, 3 pool bot; pelaku dari log Transfer token pada tx yang sama)
+    Penjual tepat SEBELUM beli grup (<= 120 blok): 344 jualan, rugi mereka vs nilai tebus (qty x acuan x 0,99 - USDC):
+      CRCL•Arc (jembatan RH)    142 jualan, rugi $36.956, jeda median 4 blok, 49% lewat router/agregator (pelaku asli tak terlihat)
+      NVDA•Arc (jembatan RH)    118 jualan, rugi $7.958, jeda median 9 blok, 38% lewat router/agregator (pelaku asli tak terlihat)
+      WETH•Arc (jembatan RH)     84 jualan, rugi $12.642, jeda median 8 blok, 8% lewat router/agregator (pelaku asli tak terlihat)
+    Contoh (WETH): 0xed65d422 (EOA, deposit 4,5 WETH lewat jembatan) jual 0,999 WETH = $76,56 (-96,9%); 0x69c4deaa jual
+    1,26 WETH = $110,86 (-96,5%); 0xa144ca08 (deposit 1,782 WETH) jual 1,782 WETH = $120,25 (-97,2%) 16 Sep 00:50 UTC.
+    Penjual bersih terbesar (bukan router), rugi vs tebus:
+      0x47ae7042… CRCL•Arc jual bersih 1.145,65 token -> $46.551; rugi $61.537; mint jembatan sendiri 0,0
+      0x38a006cc… CRCL•Arc jual bersih 359,53 token -> $17.629; rugi $14.590; mint jembatan sendiri 0,0
+      0x3dd1afd3… CRCL•Arc jual bersih 243,36 token -> $8.353; rugi $13.512; mint jembatan sendiri 0,0
+      0x5140bccc… CRCL•Arc jual bersih 161,49 token -> $5.916; rugi $8.596; mint jembatan sendiri 0,0
+      0x50cb023f… CRCL•Arc jual bersih 140,53 token -> $5.739; rugi $7.823; mint jembatan sendiri 0,0
+      0x7686d127… CRCL•Arc jual bersih 100,59 token -> $2.224; rugi $6.802; mint jembatan sendiri 68,0
+      0xb2e42cee… CRCL•Arc jual bersih 141,19 token -> $6.772; rugi $5.892; mint jembatan sendiri 293,9
+      0xc39e8e4f… CRCL•Arc jual bersih 101,69 token -> $4.332; rugi $5.482; mint jembatan sendiri 1.693,3
+    Pemenang terbesar (pesaing grup — beli murah lalu redeem):
+      0x4663f735… CRCL•Arc beli bersih 542,7 token, untung vs tebus $89.872, ditebus 1.495,9
+      0x5d110223… CRCL•Arc beli bersih 336,3 token, untung vs tebus $19.663, ditebus 548,8
+      0x600574c1… CRCL•Arc beli bersih 343,1 token, untung vs tebus $18.658, ditebus 404,2
+      0x2d631f41… CRCL•Arc beli bersih 221,3 token, untung vs tebus $11.608, ditebus 230,8
+      0x466c34b6… CRCL•Arc beli bersih 149,9 token, untung vs tebus $8.338, ditebus 139,3
+    Bagian grup di pasar pra-publik ±$7.025 (vs tebus) dari volume CRCL $2,54 jt / NVDA $165 rb / WETH $29 rb —
+    grup KECIL; pemain terbesar 0x4663f735 (EOA, +$90 rb vs tebus, 1.496 CRCL ditebus).
+    POLA: (1) penjual 'naif' yang menjembatani WETH/CRCL dari Robinhood lalu market-sell sekaligus di pool tipis (USDC
+    ±$1-100 per 2% gerak) -> rugi 50-97%; (2) dompet distributor: 0x5107a9bc deposit 3.241 CRCL, kirim 1.539 ke 0x47ae7042
+    yang menjual 1.146 CRCL @ ±$40 (-58%, rugi ±$61 rb); (3) banyak alamat kecil (4.142 penerima mint CRCL, mint 0,0099)
+    = pola pemburu airdrop/aktivitas pra-publik yang butuh USDC (gas Arc = USDC). Tidak ada bukti faucet/airdrop token
+    dari penerbit: semua pasokan = mint jembatan yang dibayar deposit token asli di Robinhood.
+
+A5. STRATEGI PERSIS (dari argumen tx bot + jejak swap)
+    Inti: 'beli diskon, tebus penuh' — beli token jembatan di pool Arc saat harga jauh di bawah acuan, tebus 1:1 (-1%)
+    ke Robinhood (aset asli bernilai penuh); sisi lain: jual stok (hasil deposit jembatan) saat harga Arc ≈/di atas acuan.
+    wetharb (E1): BUY 3 USDC per tx; bila 3 USDC berikutnya melewati batas, pecahan DIBAGI DUA (1,5 / 0,75 / 0,375) supaya
+    berhenti tepat di batas. Batas beli median $795/WETH (5-95%: $562-1.000; tertinggi $1.000 ≈ 40% harga ETH), slippage
+    ±1,7% dari kuotasi. SELL kecil (8x) hanya bila harga ≥ $1.500-2.000 (≈ 61-81% ETH). 137 beli, jeda dalam burst ±11 dtk.
+    circarb (E2): BUY 20 USDC (juga 25/30/10/12,5), batas $40-45/CRCL (≈ 44-50% NYSE), 27 beli TANPA batas (minOut 0);
+    SELL ≥ $52-65 (median $59 ≈ 65% NYSE), ukuran ±0,3-0,7 CRCL. 165 beli / 84 jual, jeda dalam burst ±6 dtk.
+    Bot lain: NVDA E1/E2 beli 10 USDC (5/15) di -49…-55% dan jual stok di ≈ acuan (median +1% / -17%); CRCL E1 10 USDC;
+    E2 #3 WETH 2,5 USDC. Semua swap langsung ke pool v3 (callback), tanpa router; owner EOA memanggil buy/sell.
+    Kenapa berhenti 16 Sep: mainnet publik dibuka ±15 Sep 22:00 UTC; per jam volume CRCL naik $1-20 rb -> $230-600 rb,
+    pelaku 5-10 -> 100+; harga melonjak dari -50% ke premi (+40% CRCL, +135% NVDA jam 00 UTC 16 Sep) lalu ±3% dari acuan
+    sejak ±05:00 UTC. Sejak 16 Sep 06:00 hanya 5 swap WETH ($58) & 5 swap CRCL ($0,02) yang di bawah batas beli bot; NVDA 0
+    -> aturan bot tidak pernah terpicu lagi; E1 menebus sisa WETH 16 Sep 00:55.
+
+A6. JENDELA LAIN DI ARC SEJAK PUBLIK (16 Sep - 8 Okt): swap BELI yang tereksekusi ≥ 5% di bawah acuan (harga eksekusi,
+    sudah termasuk fee pool), untung kasar = qty x acuan x (1 - biaya tebus 1% utk token jembatan) - USDC dibayar.
+    Aset: WETH•Arc/CRCL•Arc/NVDA•Arc (jembatan), WETH_b (penerbit tdk jelas), cirBTC & EURC resmi Circle.
+    Hasil per periode (n swap, USDC, untung kasar SEMUA pelaku):
+      sejak 16 Sep 00:00: WETH•Arc 1.534 / $28,3 rb / $15,3 rb; NVDA•Arc 435 / $10,6 rb / $6,0 rb; CRCL•Arc 259 / $16,2 rb
+                          / $1,8 rb (acuan saham BASI di luar jam bursa); cirBTC 3 / $2,5 / $0,6; WETH_b 3 / $10 / $22.
+      sejak 17 Sep:       WETH•Arc 305 / $5,4 rb / $769; CRCL 81 / $9,4 rb / $552 (25 Sep 23:27 UTC, setelah bursa tutup);
+                          NVDA 30 / $1,3 rb / $109.
+      sejak 20 Sep:       WETH•Arc 111 / $958 / $391 (11 hari); NVDA 30 / $1,3 rb / $109; CRCL ≈ $551 (episode 25 Sep).
+      sejak 1 Okt:        WETH•Arc 36 / $134 / $62; NVDA 28 / $1,2 rb / $103 (2 Okt 16:15 UTC jam bursa, 26 swap $1.005 -> $65).
+    Hari pertama publik saja (16 Sep) = 70-98% dari seluruh peluang pasca-publik (WETH 95%, NVDA 98%, CRCL 70%);
+    diambil oleh ≥ 45-60 alamat penerima per token (sebagian router) — persaingan bot sangat ramai.
+    Arah sebaliknya (JUAL ≥ 5% DI ATAS acuan; deposit jembatan lalu jual): 16 Sep 00-06 UTC CRCL $840 rb (untung vs acuan
+    basi ±$151 rb), NVDA $179 rb (±$52 rb) — FOMO pembukaan; setelah 16 Sep 06:00: CRCL $1,1 rb (+$85), NVDA $75 rb (+$9 rb,
+    hampir semua 16 Sep), sejak 17 Sep ≈ $0-0,1 rb.
+    Pool masih aktif (≥ 10 swap sejak 16 Sep, swap terakhir ≥ 1 Okt) dengan harga MID ≤ -5% paling lama. Pool WETH•Arc
+    utama 0x7a5de3 memang sering diskon, tetapi kedalamannya ±$1 per 2% gerak harga (potret 8 Okt, arc_potret_weth) ->
+    hanya receh yang bisa diambil. Pool fee tinggi/dinamis tidak bisa diarbitrase. (Pool yang tidak di-swap lagi,
+    mis. cirBTC sejak 16 Sep, tampak 'diskon' hanya karena harga mid basi -> diabaikan.) Angka swap/untung di bawah =
+    sejak 16 Sep 00:00, sebagian besar terjadi di hari pembukaan.
+      WETH•Arc (jembatan RH)     0x7a5de3edaa… fee 1,00% menit diskon 10.176 / 32.461, swap beli diskon 1023 = $18.905 (untung $9.487)
+      WETH_b (penerbit tdk jelas 0x5f88a6a482… fee 0,90% menit diskon 2.650 / 25.534, swap beli diskon 2 = $0 (untung $17)
+      NVDA•Arc (jembatan RH)     0x34c24c63cf… fee dinamis menit diskon 2.604 / 20.950, swap beli diskon 0 = $-0 (untung $0)
+      CRCL•Arc (jembatan RH)     0xd817d0875d… fee 10,00% menit diskon 1.455 / 32.461, swap beli diskon 53 = $4.624 (untung $669)
+      CRCL•Arc (jembatan RH)     0x64d77c65a5… fee 0,30% menit diskon 241 / 32.461, swap beli diskon 30 = $2.594 (untung $160)
+    Episode terbesar sejak 17 Sep (durasi, untung kasar semua pelaku):
+      CRCL•Arc (jembatan RH) 25/09 23:27-25/09 23:29 UTC 2 mnt, beli diskon 10 = $3.716, untung $194 (dev median -6%)
+      WETH•Arc (jembatan RH) 26/09 11:47-08/10 13:01 UTC 17354 mnt, beli diskon 12 = $139, untung $80 (dev median -48%)
+      WETH•Arc (jembatan RH) 04/10 16:13-08/10 13:01 UTC 5568 mnt, beli diskon 35 = $128, untung $62 (dev median -13%)
+      WETH•Arc (jembatan RH) 17/09 13:40-19/09 10:03 UTC 2663 mnt, beli diskon 41 = $854, untung $61 (dev median -13%)
+      CRCL•Arc (jembatan RH) 25/09 23:27-25/09 23:29 UTC 2 mnt, beli diskon 7 = $1.196, untung $59 (dev median -6%)
+    Harian median selisih eksekusi vs acuan (semua pool): WETH•Arc -1,6…-9,5% (pool kecil fee tinggi), CRCL/NVDA ±2%,
+    cirBTC/EURC/WETH_b ±0,2%. Tidak ada pool aset bernilai yang diperdagangkan dengan diskon ≥ 5% DAN likuid sejak 17 Sep.
+
+KESIMPULAN ARC: screenshot = 12-13 Sep 2026 (pra-publik). Untung grup ±$7,6 rb (dinilai acuan) / 10 hari dengan modal USDC
+±$40-180 per bot + stok NVDA/CRCL ±$5 rb dari dompet induk; sumber untung = token jembatan dijual 50-97% di bawah nilai
+tebus oleh penjual naif di pool sangat tipis + tebus 1:1 lewat jembatan kustodian. Jendela itu TUTUP saat mainnet publik
+(±15 Sep 22:00 UTC - 16 Sep 05:00 UTC); sesudahnya sisa peluang ≈ $20-65/hari untuk SEMUA pelaku (17 Sep-8 Okt $65/hari,
+sejak 1 Okt $21/hari), dibagi banyak bot. Mengulang strategi ini
+hanya masuk akal di chain/jembatan BARU yang masih pra-publik — dengan risiko kustodian (EOA tunggal), tebusan bisa dihentikan,
+pool tanpa likuiditas, dan persaingan bot (pesaing terbesar mengambil ±13x untung grup).
+=== ARC (TUGAS A): SELESAI ===
