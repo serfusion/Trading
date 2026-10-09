@@ -352,6 +352,7 @@ fun OpenSignalCard(signal: SignalEvent, hb: SignalEvent?, slPlus: Boolean, money
         } else {
             LevelTable(signal, exitLevels(hb, ids).firstOrNull()?.level, slPlus)
         }
+        SignalOrderLine(signal, slPlus, money)          // 📋 TP / SL siap tempel di form order (4.24)
         Row(
             Modifier.fillMaxWidth().clip(TileShape)
                 .background(Brush.horizontalGradient(listOf(Gold.copy(alpha = 0.18f), Gold.copy(alpha = 0.05f))))
@@ -566,6 +567,47 @@ fun SummaryLine(label: String, s: PeriodStats?, money: MoneySettings) {
             }
         }
     }
+}
+
+/**
+ * 📋 Isi order sinyal 💰 (aplikasi 4.24): kripto = urutan form bursa "TP Limit / Pemicu SL / SL Limit / Jumlah";
+ * XAU & gap forex (MT5) = "TP / SL / Lot". TP = TP1 (tutup 1 posisi); setelah TP1 kena, pemicu SL = SL+.
+ */
+@Composable
+private fun SignalOrderLine(signal: SignalEvent, slPlus: Boolean, money: MoneySettings) {
+    val sym = signal.symbol()
+    val entry = signal.num("entry") ?: return
+    val buy = signal.dir == "BUY"
+    val sign = if (buy) 1 else -1
+    val sl0 = signal.num("sl") ?: return
+    val risk = signal.num("risk_points") ?: Math.abs(sl0 - entry)
+    val tp = signal.num("tp1") ?: (entry + sign * 0.7 * risk)
+    val sl = if (slPlus && !signal.isGap()) signal.num("sl_plus") ?: (entry + sign * 0.10) else sl0
+    val coin = sym.substringBefore("/")
+    if (sym.startsWith("XAU") || signal.isGap()) {
+        val lot = "${signal.legs()} × ${lotText(signal.entryLot(money))}"
+        OrderLine(listOf("TP" to priceText(sym, tp), "SL" to priceText(sym, sl), "Lot" to lot),
+            "TP ${rawPrice(sym, tp)} / SL ${rawPrice(sym, sl)} / Lot $lot",
+            if (signal.isGap()) "MT5: isi TP & SL." else
+                (if (slPlus) "SL = SL+ (TP1 sudah kena). " else "") +
+                    "MT5: TP hanya di posisi #1 (TP1); posisi lain tanpa TP, tutup saat TUTUP.")
+        return
+    }
+    val alt = signal.coinUnits() || entry < 20
+    val lim = slLimit(sl, buy, alt)
+    val jumlah = when {
+        signal.coinUnits() && money.modalIdr > 0 -> "${fmt(signal.entryLot(money), 0)} $coin × ${signal.legs()} posisi"
+        signal.coinUnits() -> "isi modal di ⚙️"
+        else -> "${signal.legs()} × ${lotText(signal.entryLot(money))} lot"
+    }
+    OrderLine(
+        listOf("TP Limit" to priceText(sym, tp), "Pemicu SL" to priceText(sym, sl), "SL Limit" to priceText(sym, lim),
+            "Jumlah" to jumlah),
+        "TP Limit ${rawPrice(sym, tp)} / Pemicu SL ${rawPrice(sym, sl)} / SL Limit ${rawPrice(sym, lim)} / Jumlah $jumlah",
+        (if (slPlus) "Pemicu SL = SL+ (TP1 sudah kena). " else "") +
+            "TP Limit = TP1 untuk posisi #1; posisi lain tanpa TP (tutup saat TUTUP). SL Limit " +
+            (if (alt) "0,5%" else "0,2%") + " melewati pemicu supaya pasti terisi."
+    )
 }
 
 /** "5 posisi × 0.02 lot": yang dimasukkan di MT5. Sinyal kembar ×N tetap entry 1×. DOGE/ADA: ukuran dalam koin

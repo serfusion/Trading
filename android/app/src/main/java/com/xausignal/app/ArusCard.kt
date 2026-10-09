@@ -44,6 +44,25 @@ fun ArusSection(events: List<SignalEvent>) {
                 TileData("Tutup paling lambat", "${s.num("hold_h")?.toInt() ?: 0} jam", Muted,
                     if (stop && fill == null) "stop berlaku 6 jam" else null),
             ))
+            // 📋 isi order (4.24): XAU = MT5 (stop/TP/SL), kripto = form bursa TP Limit / Pemicu SL / SL Limit
+            val sym = s.symbol()
+            val tp = e.num("tp")
+            val sl = e.num("sl")
+            val en = e.num("entry")
+            if (tp != null && sl != null && en != null) {
+                if (sym.startsWith("XAU")) {
+                    val head = if (stop && fill == null) listOf("${s.dir} STOP" to priceText(sym, en)) else emptyList()
+                    OrderLine(head + listOf("TP" to priceText(sym, tp), "SL" to priceText(sym, sl)),
+                        (if (stop && fill == null) "${s.dir} STOP ${rawPrice(sym, en)} / " else "") +
+                            "TP ${rawPrice(sym, tp)} / SL ${rawPrice(sym, sl)}", "MT5: isi TP & SL.")
+                } else {
+                    val lim = slLimit(sl, buy, en < 20)
+                    OrderLine(listOf("TP Limit" to priceText(sym, tp), "Pemicu SL" to priceText(sym, sl),
+                        "SL Limit" to priceText(sym, lim)),
+                        "TP Limit ${rawPrice(sym, tp)} / Pemicu SL ${rawPrice(sym, sl)} / SL Limit ${rawPrice(sym, lim)}",
+                        "SL Limit ${if (en < 20) "0,5%" else "0,2%"} melewati pemicu supaya pasti terisi. Jumlah: risiko kecil (mis. 0,5% modal).")
+                }
+            }
             s.json.optJSONObject("teruji")?.let { t ->
                 val l = t.optJSONArray("lama")
                 val b = t.optJSONArray("baru")

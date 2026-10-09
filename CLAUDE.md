@@ -362,6 +362,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   posisi terbuka trader terpilih WR 18–36%, −4…−8%; gabungan futures vs pilihan acak p 0,14; hanya Binance p 0,03 (1 periode =
   kandidat). Opsi bila pengguna bilang "pasang": uji maju otomatis kandidat Binance atau ⚠️ "rugi ditahan" di kartu 👥.
 
+## 📋 Isi order siap tempel (9 Okt 2026, aplikasi 4.24 — permintaan "pasang tanda / dan sesuaikan TP & SL")
+- `Theme.OrderLine` (ketuk = salin) di kartu sinyal 💰 (`SignalScreen.SignalOrderLine`), 🌊 (`ArusCard`), 💎 (`SpotCard`):
+  kripto = urutan form bursa "TP Limit / Pemicu SL / SL Limit / Jumlah" (TP = TP1, pemicu SL → SL+ setelah TP1, SL Limit
+  melewati pemicu 0,5% koin alt / 0,2% BTC·ETH — `slLimit`), XAU & gap = MT5 "TP / SL / Lot", spot = TP Limit tanpa SL.
+  Teks salin pakai titik desimal tanpa pemisah ribuan (`rawPrice`). Logika sinyal tidak berubah.
+- 9 Okt: sinyal XLM 💎 & 🌊 SELL ETH sama-sama kena anjlok-pantul kripto 8 Okt 15:00 UTC (bukan kode terbalik — replay
+  cloud cocok). Potong 🌊 lebih awal (jam 3/6, ≤ −0,3/−0,5R) diuji: tidak lebih baik → tidak diubah.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

@@ -836,3 +836,25 @@ private fun StepButton(symbol: String, enabled: Boolean, onClick: () -> Unit) {
         Text(symbol, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
     }
 }
+
+
+/**
+ * 📋 Isian form order dipisah "/" (aplikasi 4.24, permintaan pengguna 9 Okt 2026, contoh form bursa "TP Limit (USDT) /
+ * Pemicu SL (USDT) / SL Limit / Jumlah"): tampil berurutan seperti kolom di bursa, ketuk = salin ke clipboard.
+ */
+@Composable
+fun OrderLine(parts: List<Pair<String, String>>, copy: String, note: String? = null) {
+    val clip = androidx.compose.ui.platform.LocalClipboardManager.current
+    var copied by androidx.compose.runtime.remember(copy) { mutableStateOf(false) }
+    Column(
+        Modifier.fillMaxWidth().clip(TileShape).background(CardHigh)
+            .clickable { clip.setText(androidx.compose.ui.text.AnnotatedString(copy)); copied = true }
+            .padding(horizontal = 12.dp, vertical = 8.dp)
+    ) {
+        Text(if (copied) "📋 Disalin ✓ — tempel di form order" else "📋 Isi order (ketuk = salin)",
+            style = MaterialTheme.typography.labelSmall, color = if (copied) BuyColor else Muted)
+        Text(parts.joinToString("  /  ") { "${it.first} ${it.second}" }, fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.bodySmall)
+        note?.let { Text(it, style = MaterialTheme.typography.labelSmall, color = Muted) }
+    }
+}
