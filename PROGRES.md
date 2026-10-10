@@ -266,3 +266,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Pengguna: "cari sampai dalam, seluruh dunia, statement orang penting" → `research/pernyataan_uji.py`: 59.849 unggahan Trump
   (Twitter 2017–2021 + Truth Social 2022–2026, 2022–2024 sebagai pembanding) & 1.344 pidato Fed → arah emas 48–58%, tidak
   stabil; nowcast Cleveland + kejutan lalu (CPI) 67% n 21 tidak stabil. Tidak ada yang dipasang (docs/XAU_DETIK.md bagian F).
+- "Cari lagi di seluruh alam semesta": `research/pra_xau_global.py` (momentum kejutan ekonomi, COT, tren dolar EUR/USD,
+  dolar & emas searah, Kalshi core PCE) → BARU 47–55%, lolos 1 vs kebetulan 2,9 (docs/XAU_DETIK.md bagian G). Tidak dipasang.

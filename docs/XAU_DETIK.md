@@ -133,6 +133,19 @@ sampai detik rilis (hanya Presiden/CEA menerimanya sehari sebelumnya, dan petunj
 konsensus pasar sudah memuat informasi publik. Yang stabil > 65% tetap hanya ISM Jasa + tren searah (69%) dan, SETELAH
 entry, kepastian detik 2 (gerak ≥ $0,50 → arah sama di detik 10 pada 92% rilis).
 
+## G. Metode global tambahan (10 Okt sore — `research/pra_xau_global.py`)
+| Metode (≤ t0−1 dtk) | Semua | LAMA | BARU |
+|---|---|---|---|
+| Momentum kejutan ekonomi AS 30 / 60 hari (seperti Citi Surprise Index) | 50–52% | 51–52% | 49–52% |
+| Momentum kejutan jenis berita yang sama (90 hari) | 50% | 49% | 52% |
+| Posisi spekulan emas CFTC (ekstrem ≥ 80% / ≤ 20%; perubahan 4 pekan) | 50–51% | 48% | 52–55% |
+| Tren dolar EUR/USD 4 / 24 jam | 51–52% | 53–55% | 47% |
+| Dolar & emas searah 4 jam | 56% | 59% | 51% |
+| Petunjuk berita & tren dolar searah | 57% | 62% | 49% |
+| Kalshi core PCE | 60–80% | – | n 10 (terlalu sedikit) |
+Lolos 1 dari 9 metode, padahal kebetulan saja rata-rata 2,9 → tidak ada yang nyata. Untuk perbandingan, petunjuk berita
+teruji (KEJ) tetap 57% / lama 57% / baru 58% di semua berita, dan 63–67% bila searah tren emas 4 jam.
+
 ## Di aplikasi 4.30 — daftar berita mendatang di bawah XAU
 Satu baris per berita (maks 5, ≤ 31 hari): "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi" (sisa waktu dihitung di HP).
 Persen = ketepatan aturan yang dipakai (rata-rata detik 2/3/5/10): petunjuk teruji (`xau_arah`), hari NFP = kalender

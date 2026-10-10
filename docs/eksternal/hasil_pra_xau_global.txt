@@ -1,0 +1,162 @@
+# 🌐 Metode global tambahan → arah XAU 1–10 dtk setelah rilis
+python -m research.pra_xau_global          → docs/eksternal/hasil_pra_xau_global.txt
+
+Terisi: ESI30 1842, ESI60 1891, ESIG 984, COT 1053, COT4 2051, USD4 1888, USD24 1897, USD&EMAS 1121, KEJ&USD 178
+
+## SEMUA (2051 rilis)
+   ESI30 1dtk lanjut LAMA 52% (n 1129) → BARU Exness 50% (n 647, p 0.469) Duka 52% • thn 5/12 | 3dtk lanjut LAMA 52% (n 1177) → BARU Exness 51% (n 647, p 0.319) Duka 54% • thn 7/12 | 10dtk lanjut LAMA 53% (n 1191) → BARU Exness 53% (n 647, p 0.068) Duka 54% • thn 9/12
+   ESI60 1dtk lanjut LAMA 50% (n 1133) → BARU Exness 49% (n 693, p 0.703) Duka 48% • thn 6/12 | 3dtk lanjut LAMA 51% (n 1184) → BARU Exness 50% (n 693, p 0.590) Duka 52% • thn 4/12 | 10dtk lanjut LAMA 51% (n 1195) → BARU Exness 49% (n 693, p 0.619) Duka 51% • thn 6/12
+   ESIG  1dtk balik LAMA 53% (n 584) → BARU Exness 47% (n 365, p 0.852) Duka 41% • thn 4/12 | 3dtk balik LAMA 50% (n 613) → BARU Exness 49% (n 365, p 0.662) Duka 48% • thn 5/12 | 10dtk balik LAMA 51% (n 617) → BARU Exness 50% (n 365, p 0.500) Duka 49% • thn 6/12
+   COT   1dtk balik LAMA 53% (n 614) → BARU Exness 47% (n 410, p 0.872) Duka 47% • thn 5/9 | 3dtk balik LAMA 53% (n 639) → BARU Exness 45% (n 410, p 0.973) Duka 44% • thn 5/9 | 10dtk balik LAMA 51% (n 639) → BARU Exness 43% (n 410, p 0.997) Duka 44% • thn 2/9
+   COT4  1dtk balik LAMA 51% (n 1236) → BARU Exness 49% (n 746, p 0.757) Duka 50% • thn 6/12 | 3dtk balik LAMA 53% (n 1286) → BARU Exness 48% (n 746, p 0.872) Duka 48% • thn 5/12 | 10dtk balik LAMA 51% (n 1301) → BARU Exness 47% (n 746, p 0.942) Duka 48% • thn 5/12
+   USD4  1dtk lanjut LAMA 53% (n 1120) → BARU Exness 52% (n 738, p 0.199) Duka 51% • thn 11/12 | 3dtk lanjut LAMA 55% (n 1142) → BARU Exness 47% (n 738, p 0.924) Duka 46% • thn 7/12 | 10dtk lanjut LAMA 54% (n 1148) → BARU Exness 46% (n 738, p 0.982) Duka 45% • thn 5/12
+   USD24 1dtk lanjut LAMA 54% (n 1122) → BARU Exness 49% (n 745, p 0.696) Duka 48% • thn 7/12 | 3dtk lanjut LAMA 54% (n 1144) → BARU Exness 47% (n 745, p 0.929) Duka 49% • thn 8/12 | 10dtk lanjut LAMA 53% (n 1150) → BARU Exness 48% (n 745, p 0.906) Duka 47% • thn 9/12
+   USD&EMAS 1dtk lanjut LAMA 56% (n 686) → BARU Exness 53% (n 414, p 0.092) Duka 51% • thn 10/12 | 3dtk lanjut LAMA 59% (n 703) → BARU Exness 50% (n 414, p 0.520) Duka 51% • thn 8/12 | 10dtk lanjut LAMA 58% (n 706) → BARU Exness 50% (n 414, p 0.520) Duka 50% • thn 8/12
+   KEJ&USD 1dtk lanjut LAMA 60% (n 103) → BARU Exness 56% (n 70, p 0.201) Duka 58% • thn 6/10 | 3dtk lanjut LAMA 64% (n 107) → BARU Exness 50% (n 70, p 0.548) Duka 53% • thn 7/10 | 10dtk lanjut LAMA 58% (n 107) → BARU Exness 47% (n 70, p 0.725) Duka 51% • thn 6/10
+
+## NFP (171 rilis)
+   ESI30 1dtk balik LAMA 50% (n 103) → BARU Exness 35% (n 46, p 0.987) Duka 46% • thn 2/10 | 3dtk balik LAMA 57% (n 107) → BARU Exness 50% (n 46, p 0.559) Duka 48% • thn 5/10 | 10dtk balik LAMA 56% (n 107) → BARU Exness 43% (n 46, p 0.849) Duka 46% • thn 2/10
+   ESI60 1dtk lanjut LAMA 56% (n 98) → BARU Exness 59% (n 51, p 0.131) Duka 47% • thn 4/10 | 3dtk balik LAMA 51% (n 102) → BARU Exness 49% (n 51, p 0.610) Duka 47% • thn 4/10 | 10dtk balik LAMA 52% (n 102) → BARU Exness 45% (n 51, p 0.799) Duka 47% • thn 3/10
+   ESIG  1dtk balik LAMA 54% (n 61) → BARU Exness 44% (n 34, p 0.804) Duka 47% • thn 5/10 | 3dtk balik LAMA 57% (n 63) → BARU Exness 53% (n 34, p 0.432) Duka 56% • thn 5/10 | 10dtk balik LAMA 59% (n 63) → BARU Exness 53% (n 34, p 0.432) Duka 53% • thn 4/10
+   COT   1dtk balik LAMA 59% (n 49) → BARU Exness 48% (n 29, p 0.644) Duka 62% • thn 3/6 | 3dtk balik LAMA 53% (n 51) → BARU Exness 55% (n 29, p 0.356) Duka 55% • thn 2/6 | 10dtk balik LAMA 57% (n 51) → BARU Exness 52% (n 29, p 0.500) Duka 55% • thn 3/6
+   COT4  1dtk balik LAMA 62% (n 110) → BARU Exness 53% (n 57, p 0.396) Duka 51% • thn 9/11 | 3dtk balik LAMA 53% (n 114) → BARU Exness 60% (n 57, p 0.092) Duka 56% • thn 6/11 | 10dtk balik LAMA 54% (n 114) → BARU Exness 54% (n 57, p 0.298) Duka 56% • thn 7/11
+   USD4  1dtk lanjut LAMA 51% (n 93) → BARU Exness 54% (n 57, p 0.298) Duka 53% • thn 5/11 | 3dtk lanjut LAMA 59% (n 94) → BARU Exness 51% (n 57, p 0.500) Duka 51% • thn 6/11 | 10dtk lanjut LAMA 62% (n 94) → BARU Exness 53% (n 57, p 0.396) Duka 54% • thn 6/11
+   USD24 1dtk balik LAMA 51% (n 93) → BARU Exness 49% (n 57, p 0.604) Duka 51% • thn 5/11 | 3dtk balik LAMA 51% (n 94) → BARU Exness 49% (n 57, p 0.604) Duka 49% • thn 6/11 | 10dtk balik LAMA 52% (n 94) → BARU Exness 51% (n 57, p 0.500) Duka 53% • thn 5/11
+   USD&EMAS 1dtk lanjut LAMA 53% (n 47) → BARU Exness 52% (n 33, p 0.500) Duka 45% • thn 4/10 | 3dtk lanjut LAMA 64% (n 47) → BARU Exness 55% (n 33, p 0.364) Duka 52% • thn 8/10 | 10dtk lanjut LAMA 68% (n 47) → BARU Exness 58% (n 33, p 0.243) Duka 61% • thn 8/10
+
+## CPI (185 rilis)
+   ESI30 1dtk lanjut LAMA 55% (n 105) → BARU Exness 41% (n 46, p 0.908) Duka 46% • thn 4/10 | 3dtk lanjut LAMA 54% (n 112) → BARU Exness 57% (n 46, p 0.231) Duka 57% • thn 6/10 | 10dtk lanjut LAMA 57% (n 113) → BARU Exness 59% (n 46, p 0.151) Duka 61% • thn 7/10
+   ESI60 1dtk lanjut LAMA 54% (n 105) → BARU Exness 56% (n 50, p 0.240) Duka 56% • thn 5/10 | 3dtk lanjut LAMA 55% (n 111) → BARU Exness 62% (n 50, p 0.059) Duka 64% • thn 6/10 | 10dtk lanjut LAMA 58% (n 113) → BARU Exness 62% (n 50, p 0.059) Duka 64% • thn 7/10
+   ESIG  1dtk balik LAMA 54% (n 102) → BARU Exness 46% (n 46, p 0.769) Duka 37% • thn 5/10 | 3dtk lanjut LAMA 52% (n 107) → BARU Exness 54% (n 46, p 0.329) Duka 57% • thn 4/10 | 10dtk balik LAMA 51% (n 108) → BARU Exness 50% (n 46, p 0.559) Duka 48% • thn 3/10
+   COT   1dtk lanjut LAMA 52% (n 56) → BARU Exness 56% (n 32, p 0.298) Duka 66% • thn 3/6 | 3dtk balik LAMA 51% (n 57) → BARU Exness 38% (n 32, p 0.945) Duka 34% • thn 2/6 | 10dtk balik LAMA 55% (n 58) → BARU Exness 38% (n 32, p 0.945) Duka 41% • thn 3/6
+   COT4  1dtk lanjut LAMA 51% (n 117) → BARU Exness 42% (n 60, p 0.922) Duka 42% • thn 3/11 | 3dtk balik LAMA 56% (n 123) → BARU Exness 52% (n 60, p 0.449) Duka 52% • thn 9/11 | 10dtk balik LAMA 52% (n 125) → BARU Exness 52% (n 60, p 0.449) Duka 53% • thn 6/11
+   USD4  1dtk lanjut LAMA 55% (n 100) → BARU Exness 56% (n 57, p 0.214) Duka 60% • thn 6/11 | 3dtk lanjut LAMA 57% (n 104) → BARU Exness 42% (n 57, p 0.908) Duka 42% • thn 6/11 | 10dtk lanjut LAMA 54% (n 104) → BARU Exness 39% (n 57, p 0.969) Duka 40% • thn 6/11
+   USD24 1dtk lanjut LAMA 51% (n 100) → BARU Exness 47% (n 60, p 0.741) Duka 53% • thn 4/11 | 3dtk lanjut LAMA 54% (n 104) → BARU Exness 43% (n 60, p 0.877) Duka 43% • thn 5/11 | 10dtk lanjut LAMA 59% (n 104) → BARU Exness 43% (n 60, p 0.877) Duka 45% • thn 6/11
+   USD&EMAS 1dtk lanjut LAMA 56% (n 59) → BARU Exness 49% (n 35, p 0.632) Duka 43% • thn 6/11 | 3dtk lanjut LAMA 56% (n 63) → BARU Exness 46% (n 35, p 0.750) Duka 46% • thn 6/11 | 10dtk lanjut LAMA 56% (n 63) → BARU Exness 43% (n 35, p 0.845) Duka 43% • thn 5/11
+   KEJ&USD 1dtk lanjut LAMA 62% (n 45) → BARU Exness 56% (n 27, p 0.351) Duka 63% • thn 7/9 | 3dtk lanjut LAMA 65% (n 48) → BARU Exness 44% (n 27, p 0.779) Duka 48% • thn 6/9 | 10dtk lanjut LAMA 62% (n 48) → BARU Exness 44% (n 27, p 0.779) Duka 44% • thn 6/9
+
+## PPI (157 rilis)
+   ESI30 1dtk balik LAMA 56% (n 85) → BARU Exness 44% (n 45, p 0.814) Duka 33% • thn 5/9 | 3dtk lanjut LAMA 51% (n 95) → BARU Exness 42% (n 45, p 0.884) Duka 48% • thn 2/9 | 10dtk lanjut LAMA 55% (n 99) → BARU Exness 42% (n 45, p 0.884) Duka 46% • thn 3/9
+   ESI60 1dtk balik LAMA 55% (n 83) → BARU Exness 50% (n 48, p 0.557) Duka 44% • thn 5/9 | 3dtk lanjut LAMA 54% (n 95) → BARU Exness 46% (n 48, p 0.765) Duka 50% • thn 4/9 | 10dtk lanjut LAMA 54% (n 98) → BARU Exness 48% (n 48, p 0.667) Duka 50% • thn 3/9
+   ESIG  1dtk balik LAMA 51% (n 61) → BARU Exness 43% (n 37, p 0.838) Duka 29% • thn 4/8 | 3dtk lanjut LAMA 53% (n 72) → BARU Exness 43% (n 37, p 0.838) Duka 47% • thn 2/8 | 10dtk lanjut LAMA 55% (n 75) → BARU Exness 49% (n 37, p 0.629) Duka 50% • thn 4/8
+   COT   1dtk lanjut LAMA 52% (n 42) → BARU Exness 39% (n 28, p 0.908) Duka 52% • thn 0/5 | 3dtk balik LAMA 51% (n 51) → BARU Exness 46% (n 28, p 0.714) Duka 41% • thn 2/5 | 10dtk lanjut LAMA 51% (n 51) → BARU Exness 57% (n 28, p 0.286) Duka 55% • thn 2/5
+   COT4  1dtk lanjut LAMA 52% (n 90) → BARU Exness 56% (n 50, p 0.240) Duka 51% • thn 5/9 | 3dtk lanjut LAMA 54% (n 102) → BARU Exness 56% (n 50, p 0.240) Duka 57% • thn 4/9 | 10dtk lanjut LAMA 58% (n 106) → BARU Exness 54% (n 50, p 0.336) Duka 53% • thn 5/9
+   USD4  1dtk balik LAMA 51% (n 74) → BARU Exness 58% (n 50, p 0.161) Duka 55% • thn 5/9 | 3dtk lanjut LAMA 57% (n 80) → BARU Exness 38% (n 50, p 0.968) Duka 39% • thn 2/9 | 10dtk lanjut LAMA 60% (n 81) → BARU Exness 28% (n 50, p 1.000) Duka 31% • thn 2/9
+   USD24 1dtk lanjut LAMA 55% (n 74) → BARU Exness 45% (n 49, p 0.804) Duka 44% • thn 4/9 | 3dtk lanjut LAMA 50% (n 80) → BARU Exness 43% (n 49, p 0.874) Duka 48% • thn 3/9 | 10dtk lanjut LAMA 56% (n 81) → BARU Exness 49% (n 49, p 0.612) Duka 52% • thn 5/9
+   USD&EMAS 1dtk lanjut LAMA 50% (n 42) → BARU Exness 57% (n 23, p 0.339) Duka 62% • thn 4/6 | 3dtk lanjut LAMA 56% (n 48) → BARU Exness 48% (n 23, p 0.661) Duka 50% • thn 2/6 | 10dtk lanjut LAMA 60% (n 48) → BARU Exness 30% (n 23, p 0.983) Duka 33% • thn 1/6
+   KEJ&USD 1dtk lanjut LAMA 50% (n 6) → BARU Exness 58% (n 19, p 0.324) Duka 55% • thn 1/3 | 3dtk lanjut LAMA 50% (n 6) → BARU Exness 42% (n 19, p 0.820) Duka 45% • thn 0/3 | 10dtk lanjut LAMA 50% (n 6) → BARU Exness 37% (n 19, p 0.916) Duka 45% • thn 1/3
+
+## RETAIL (127 rilis)
+   ESI30 1dtk balik LAMA 55% (n 69) → BARU Exness 44% (n 39, p 0.832) Duka 49% • thn 3/8 | 3dtk lanjut LAMA 51% (n 75) → BARU Exness 56% (n 39, p 0.261) Duka 56% • thn 4/8 | 10dtk lanjut LAMA 51% (n 75) → BARU Exness 59% (n 39, p 0.168) Duka 59% • thn 4/8
+   ESI60 1dtk lanjut LAMA 53% (n 68) → BARU Exness 54% (n 39, p 0.375) Duka 49% • thn 6/8 | 3dtk lanjut LAMA 55% (n 73) → BARU Exness 59% (n 39, p 0.168) Duka 59% • thn 6/8 | 10dtk lanjut LAMA 53% (n 73) → BARU Exness 54% (n 39, p 0.375) Duka 54% • thn 5/8
+   ESIG  1dtk balik LAMA 56% (n 59) → BARU Exness 43% (n 30, p 0.819) Duka 43% • thn 5/8 | 3dtk balik LAMA 56% (n 63) → BARU Exness 50% (n 30, p 0.572) Duka 50% • thn 6/8 | 10dtk balik LAMA 57% (n 63) → BARU Exness 47% (n 30, p 0.708) Duka 47% • thn 4/8
+   COT   1dtk balik LAMA 64% (n 33) → BARU Exness 44% (n 25, p 0.788) Duka 44% • thn 1/4 | 3dtk balik LAMA 58% (n 38) → BARU Exness 40% (n 25, p 0.885) Duka 40% • thn 1/4 | 10dtk balik LAMA 57% (n 37) → BARU Exness 40% (n 25, p 0.885) Duka 40% • thn 1/4
+   COT4  1dtk balik LAMA 56% (n 79) → BARU Exness 51% (n 41, p 0.500) Duka 51% • thn 2/8 | 3dtk balik LAMA 65% (n 85) → BARU Exness 41% (n 41, p 0.894) Duka 41% • thn 3/8 | 10dtk balik LAMA 67% (n 85) → BARU Exness 46% (n 41, p 0.734) Duka 46% • thn 4/8
+   USD4  1dtk balik LAMA 51% (n 70) → BARU Exness 65% (n 40, p 0.040) Duka 65% • thn 6/8 | 3dtk lanjut LAMA 59% (n 73) → BARU Exness 35% (n 40, p 0.981) Duka 35% • thn 3/8 | 10dtk lanjut LAMA 63% (n 73) → BARU Exness 35% (n 40, p 0.981) Duka 35% • thn 2/8
+   USD24 1dtk lanjut LAMA 59% (n 70) → BARU Exness 54% (n 41, p 0.378) Duka 54% • thn 6/8 | 3dtk lanjut LAMA 56% (n 73) → BARU Exness 49% (n 41, p 0.622) Duka 49% • thn 5/8 | 10dtk lanjut LAMA 52% (n 73) → BARU Exness 54% (n 41, p 0.378) Duka 54% • thn 5/8
+   USD&EMAS 1dtk lanjut LAMA 55% (n 40) → BARU Exness 38% (n 21, p 0.905) Duka 33% • thn 2/6 | 3dtk lanjut LAMA 62% (n 42) → BARU Exness 38% (n 21, p 0.905) Duka 38% • thn 2/6 | 10dtk lanjut LAMA 64% (n 42) → BARU Exness 43% (n 21, p 0.808) Duka 43% • thn 3/6
+
+## PCE (52 rilis)
+   ESI30 1dtk balik LAMA 100% (n 2) → BARU Exness 51% (n 43, p 0.500) Duka 49% • thn 3/5 | 3dtk balik LAMA 100% (n 2) → BARU Exness 37% (n 43, p 0.967) Duka 33% • thn 1/5 | 10dtk balik LAMA 100% (n 2) → BARU Exness 49% (n 43, p 0.620) Duka 51% • thn 2/5
+   ESI60 1dtk lanjut LAMA 50% (n 2) → BARU Exness 47% (n 45, p 0.724) Duka 44% • thn 2/5 | 3dtk lanjut LAMA 50% (n 2) → BARU Exness 56% (n 45, p 0.276) Duka 60% • thn 3/5 | 10dtk lanjut LAMA 50% (n 2) → BARU Exness 40% (n 45, p 0.932) Duka 38% • thn 1/5
+   ESIG  1dtk balik LAMA 100% (n 1) → BARU Exness 53% (n 30, p 0.428) Duka 53% • thn 1/4 | 3dtk balik LAMA 100% (n 1) → BARU Exness 47% (n 30, p 0.708) Duka 43% • thn 2/4 | 10dtk balik LAMA 100% (n 1) → BARU Exness 57% (n 30, p 0.292) Duka 60% • thn 2/4
+   COT   1dtk lanjut LAMA nan% (n 0) → BARU Exness 65% (n 26, p 0.084) Duka 65% • thn 2/3 | 3dtk lanjut LAMA nan% (n 0) → BARU Exness 65% (n 26, p 0.084) Duka 69% • thn 2/3 | 10dtk lanjut LAMA nan% (n 0) → BARU Exness 58% (n 26, p 0.279) Duka 54% • thn 3/3
+   COT4  1dtk lanjut LAMA 100% (n 2) → BARU Exness 56% (n 50, p 0.240) Duka 66% • thn 3/5 | 3dtk lanjut LAMA 100% (n 2) → BARU Exness 46% (n 50, p 0.760) Duka 50% • thn 2/5 | 10dtk lanjut LAMA 100% (n 2) → BARU Exness 56% (n 50, p 0.240) Duka 58% • thn 3/5
+   USD4  1dtk balik LAMA 100% (n 2) → BARU Exness 42% (n 50, p 0.899) Duka 52% • thn 1/5 | 3dtk balik LAMA 100% (n 2) → BARU Exness 40% (n 50, p 0.941) Duka 44% • thn 2/5 | 10dtk balik LAMA 100% (n 2) → BARU Exness 46% (n 50, p 0.760) Duka 48% • thn 1/5
+   USD24 1dtk lanjut LAMA 100% (n 2) → BARU Exness 50% (n 50, p 0.556) Duka 48% • thn 2/5 | 3dtk lanjut LAMA 100% (n 2) → BARU Exness 44% (n 50, p 0.839) Duka 44% • thn 2/5 | 10dtk lanjut LAMA 100% (n 2) → BARU Exness 50% (n 50, p 0.556) Duka 48% • thn 2/5
+   USD&EMAS 1dtk balik LAMA 100% (n 1) → BARU Exness 38% (n 32, p 0.945) Duka 47% • thn 0/4 | 3dtk balik LAMA 100% (n 1) → BARU Exness 34% (n 32, p 0.975) Duka 41% • thn 0/4 | 10dtk balik LAMA 100% (n 1) → BARU Exness 38% (n 32, p 0.945) Duka 41% • thn 1/4
+
+## GDP (107 rilis)
+   ESI30 1dtk lanjut LAMA 65% (n 69) → BARU Exness 26% (n 23, p 0.995) Duka 30% • thn 4/8 | 3dtk lanjut LAMA 71% (n 72) → BARU Exness 39% (n 23, p 0.895) Duka 39% • thn 4/9 | 10dtk lanjut LAMA 62% (n 73) → BARU Exness 48% (n 23, p 0.661) Duka 52% • thn 4/9
+   ESI60 1dtk lanjut LAMA 64% (n 75) → BARU Exness 29% (n 24, p 0.989) Duka 33% • thn 3/8 | 3dtk lanjut LAMA 68% (n 78) → BARU Exness 42% (n 24, p 0.846) Duka 42% • thn 5/9 | 10dtk lanjut LAMA 57% (n 79) → BARU Exness 54% (n 24, p 0.419) Duka 58% • thn 4/9
+   ESIG  1dtk balik LAMA 63% (n 43) → BARU Exness 55% (n 11, p 0.500) Duka 55% • thn 4/4 | 3dtk balik LAMA 52% (n 44) → BARU Exness 64% (n 11, p 0.274) Duka 64% • thn 2/4 | 10dtk lanjut LAMA 59% (n 44) → BARU Exness 45% (n 11, p 0.726) Duka 45% • thn 3/4
+   COT   1dtk balik LAMA 54% (n 39) → BARU Exness 54% (n 13, p 0.500) Duka 62% • thn 3/3 | 3dtk lanjut LAMA 52% (n 40) → BARU Exness 31% (n 13, p 0.954) Duka 31% • thn 1/3 | 10dtk lanjut LAMA 62% (n 40) → BARU Exness 62% (n 13, p 0.291) Duka 62% • thn 2/3
+   COT4  1dtk balik LAMA 54% (n 76) → BARU Exness 59% (n 27, p 0.221) Duka 56% • thn 5/8 | 3dtk lanjut LAMA 51% (n 79) → BARU Exness 56% (n 27, p 0.351) Duka 56% • thn 4/9 | 10dtk balik LAMA 54% (n 80) → BARU Exness 44% (n 27, p 0.779) Duka 48% • thn 3/9
+   USD4  1dtk lanjut LAMA 54% (n 68) → BARU Exness 52% (n 27, p 0.500) Duka 48% • thn 4/8 | 3dtk lanjut LAMA 59% (n 69) → BARU Exness 52% (n 27, p 0.500) Duka 52% • thn 5/9 | 10dtk lanjut LAMA 59% (n 69) → BARU Exness 44% (n 27, p 0.779) Duka 48% • thn 6/9
+   USD24 1dtk balik LAMA 53% (n 68) → BARU Exness 52% (n 27, p 0.500) Duka 56% • thn 5/8 | 3dtk lanjut LAMA 55% (n 69) → BARU Exness 56% (n 27, p 0.351) Duka 56% • thn 6/9 | 10dtk lanjut LAMA 61% (n 69) → BARU Exness 41% (n 27, p 0.876) Duka 44% • thn 6/9
+   USD&EMAS 1dtk lanjut LAMA 59% (n 44) → BARU Exness 45% (n 11, p 0.726) Duka 45% • thn 3/4 | 3dtk lanjut LAMA 64% (n 44) → BARU Exness 55% (n 11, p 0.500) Duka 55% • thn 3/4 | 10dtk lanjut LAMA 64% (n 44) → BARU Exness 45% (n 11, p 0.726) Duka 55% • thn 3/4
+   KEJ&USD 1dtk balik LAMA 53% (n 19) → BARU Exness 62% (n 8, p 0.363) Duka 62% • thn 0/0 | 3dtk lanjut LAMA 55% (n 20) → BARU Exness 75% (n 8, p 0.145) Duka 75% • thn 0/0 | 10dtk lanjut LAMA 60% (n 20) → BARU Exness 75% (n 8, p 0.145) Duka 75% • thn 0/0
+
+## FOMC (113 rilis)
+   ESI30 1dtk lanjut LAMA 53% (n 62) → BARU Exness 52% (n 29, p 0.500) Duka 69% • thn 6/10 | 3dtk lanjut LAMA 58% (n 66) → BARU Exness 66% (n 29, p 0.068) Duka 66% • thn 6/10 | 10dtk lanjut LAMA 58% (n 67) → BARU Exness 62% (n 29, p 0.132) Duka 59% • thn 6/10
+   ESI60 1dtk lanjut LAMA 52% (n 60) → BARU Exness 42% (n 31, p 0.859) Duka 52% • thn 4/10 | 3dtk lanjut LAMA 55% (n 64) → BARU Exness 55% (n 31, p 0.360) Duka 52% • thn 5/10 | 10dtk lanjut LAMA 53% (n 64) → BARU Exness 52% (n 31, p 0.500) Duka 45% • thn 6/10
+   ESIG  1dtk lanjut LAMA nan% (n 0) → BARU Exness 50% (n 2, p 0.750) Duka 50% • thn 0/0 | 3dtk lanjut LAMA nan% (n 0) → BARU Exness 50% (n 2, p 0.750) Duka 0% • thn 0/0 | 10dtk lanjut LAMA nan% (n 0) → BARU Exness 50% (n 2, p 0.750) Duka 50% • thn 0/0
+   COT   1dtk balik LAMA 59% (n 32) → BARU Exness 53% (n 17, p 0.500) Duka 41% • thn 2/4 | 3dtk lanjut LAMA 51% (n 35) → BARU Exness 53% (n 17, p 0.500) Duka 59% • thn 2/4 | 10dtk balik LAMA 56% (n 34) → BARU Exness 47% (n 17, p 0.685) Duka 35% • thn 1/4
+   COT4  1dtk lanjut LAMA 55% (n 67) → BARU Exness 55% (n 40, p 0.318) Duka 50% • thn 4/11 | 3dtk lanjut LAMA 51% (n 71) → BARU Exness 45% (n 40, p 0.785) Duka 42% • thn 3/11 | 10dtk balik LAMA 51% (n 72) → BARU Exness 65% (n 40, p 0.040) Duka 57% • thn 6/11
+   USD4  1dtk lanjut LAMA 53% (n 66) → BARU Exness 40% (n 40, p 0.923) Duka 60% • thn 3/11 | 3dtk lanjut LAMA 58% (n 67) → BARU Exness 50% (n 40, p 0.563) Duka 57% • thn 3/11 | 10dtk lanjut LAMA 59% (n 66) → BARU Exness 55% (n 40, p 0.318) Duka 57% • thn 5/11
+   USD24 1dtk lanjut LAMA 53% (n 66) → BARU Exness 40% (n 40, p 0.923) Duka 45% • thn 4/11 | 3dtk lanjut LAMA 54% (n 67) → BARU Exness 60% (n 40, p 0.134) Duka 62% • thn 6/11 | 10dtk lanjut LAMA 50% (n 66) → BARU Exness 55% (n 40, p 0.318) Duka 52% • thn 3/11
+   USD&EMAS 1dtk lanjut LAMA 59% (n 39) → BARU Exness 48% (n 23, p 0.661) Duka 61% • thn 3/5 | 3dtk lanjut LAMA 65% (n 40) → BARU Exness 57% (n 23, p 0.339) Duka 65% • thn 4/5 | 10dtk lanjut LAMA 57% (n 40) → BARU Exness 61% (n 23, p 0.202) Duka 61% • thn 2/5
+
+## ISM (246 rilis)
+   ESI30 1dtk lanjut LAMA 55% (n 128) → BARU Exness 51% (n 90, p 0.458) Duka 44% • thn 6/11 | 3dtk lanjut LAMA 53% (n 129) → BARU Exness 50% (n 90, p 0.542) Duka 39% • thn 5/11 | 10dtk lanjut LAMA 57% (n 129) → BARU Exness 51% (n 90, p 0.458) Duka 44% • thn 5/11
+   ESI60 1dtk balik LAMA 52% (n 132) → BARU Exness 51% (n 97, p 0.500) Duka 65% • thn 5/11 | 3dtk balik LAMA 55% (n 134) → BARU Exness 55% (n 97, p 0.208) Duka 70% • thn 8/11 | 10dtk lanjut LAMA 50% (n 134) → BARU Exness 49% (n 97, p 0.580) Duka 43% • thn 5/11
+   ESIG  1dtk balik LAMA 55% (n 128) → BARU Exness 55% (n 86, p 0.225) Duka 43% • thn 8/11 | 3dtk balik LAMA 53% (n 130) → BARU Exness 52% (n 86, p 0.373) Duka 48% • thn 5/11 | 10dtk balik LAMA 55% (n 130) → BARU Exness 56% (n 86, p 0.166) Duka 52% • thn 9/11
+   COT   1dtk balik LAMA 59% (n 68) → BARU Exness 38% (n 53, p 0.973) Duka 36% • thn 3/9 | 3dtk balik LAMA 59% (n 69) → BARU Exness 32% (n 53, p 0.997) Duka 29% • thn 6/9 | 10dtk balik LAMA 57% (n 69) → BARU Exness 36% (n 53, p 0.986) Duka 43% • thn 6/9
+   COT4  1dtk balik LAMA 52% (n 143) → BARU Exness 43% (n 101, p 0.945) Duka 35% • thn 5/11 | 3dtk balik LAMA 54% (n 145) → BARU Exness 44% (n 101, p 0.918) Duka 39% • thn 8/11 | 10dtk lanjut LAMA 50% (n 145) → BARU Exness 55% (n 101, p 0.160) Duka 57% • thn 6/11
+   USD4  1dtk lanjut LAMA 56% (n 135) → BARU Exness 49% (n 101, p 0.655) Duka 65% • thn 7/11 | 3dtk lanjut LAMA 59% (n 136) → BARU Exness 44% (n 101, p 0.918) Duka 61% • thn 6/11 | 10dtk lanjut LAMA 52% (n 136) → BARU Exness 47% (n 101, p 0.787) Duka 57% • thn 5/11
+   USD24 1dtk lanjut LAMA 56% (n 134) → BARU Exness 49% (n 101, p 0.655) Duka 43% • thn 8/11 | 3dtk lanjut LAMA 57% (n 135) → BARU Exness 44% (n 101, p 0.918) Duka 39% • thn 7/11 | 10dtk lanjut LAMA 56% (n 135) → BARU Exness 45% (n 101, p 0.884) Duka 43% • thn 5/11
+   USD&EMAS 1dtk lanjut LAMA 59% (n 90) → BARU Exness 53% (n 60, p 0.349) Duka 67% • thn 8/10 | 3dtk lanjut LAMA 62% (n 91) → BARU Exness 47% (n 60, p 0.741) Duka 67% • thn 6/10 | 10dtk lanjut LAMA 54% (n 91) → BARU Exness 53% (n 60, p 0.349) Duka 67% • thn 6/10
+   KEJ&USD 1dtk lanjut LAMA 67% (n 33) → BARU Exness 62% (n 16, p 0.227) Duka 100% • thn 3/4 | 3dtk lanjut LAMA 70% (n 33) → BARU Exness 56% (n 16, p 0.402) Duka 100% • thn 3/4 | 10dtk lanjut LAMA 52% (n 33) → BARU Exness 50% (n 16, p 0.598) Duka 100% • thn 2/4
+
+## ADP (167 rilis)
+   ESI30 1dtk lanjut LAMA 54% (n 96) → BARU Exness 56% (n 43, p 0.271) Duka 52% • thn 4/9 | 3dtk lanjut LAMA 51% (n 102) → BARU Exness 60% (n 43, p 0.111) Duka 53% • thn 5/9 | 10dtk lanjut LAMA 54% (n 104) → BARU Exness 56% (n 43, p 0.271) Duka 56% • thn 6/9
+   ESI60 1dtk lanjut LAMA 57% (n 97) → BARU Exness 51% (n 47, p 0.500) Duka 52% • thn 4/9 | 3dtk lanjut LAMA 54% (n 103) → BARU Exness 57% (n 47, p 0.191) Duka 49% • thn 8/10 | 10dtk lanjut LAMA 53% (n 105) → BARU Exness 49% (n 47, p 0.615) Duka 49% • thn 7/10
+   COT   1dtk lanjut LAMA 58% (n 55) → BARU Exness 43% (n 28, p 0.828) Duka 39% • thn 1/5 | 3dtk lanjut LAMA 54% (n 56) → BARU Exness 50% (n 28, p 0.575) Duka 46% • thn 1/5 | 10dtk lanjut LAMA 54% (n 56) → BARU Exness 46% (n 28, p 0.714) Duka 46% • thn 1/5
+   COT4  1dtk balik LAMA 58% (n 108) → BARU Exness 60% (n 50, p 0.101) Duka 55% • thn 9/10 | 3dtk balik LAMA 55% (n 114) → BARU Exness 52% (n 50, p 0.444) Duka 48% • thn 6/10 | 10dtk balik LAMA 53% (n 116) → BARU Exness 44% (n 50, p 0.839) Duka 44% • thn 5/10
+   USD4  1dtk balik LAMA 52% (n 85) → BARU Exness 44% (n 48, p 0.844) Duka 51% • thn 6/9 | 3dtk lanjut LAMA 52% (n 86) → BARU Exness 42% (n 48, p 0.903) Duka 38% • thn 3/10 | 10dtk lanjut LAMA 59% (n 87) → BARU Exness 35% (n 48, p 0.985) Duka 35% • thn 4/10
+   USD24 1dtk lanjut LAMA 59% (n 87) → BARU Exness 60% (n 50, p 0.101) Duka 53% • thn 6/10 | 3dtk lanjut LAMA 62% (n 88) → BARU Exness 44% (n 50, p 0.839) Duka 52% • thn 3/10 | 10dtk lanjut LAMA 61% (n 89) → BARU Exness 44% (n 50, p 0.839) Duka 44% • thn 4/10
+   USD&EMAS 1dtk lanjut LAMA 55% (n 51) → BARU Exness 55% (n 29, p 0.356) Duka 45% • thn 4/8 | 3dtk lanjut LAMA 61% (n 51) → BARU Exness 41% (n 29, p 0.868) Duka 41% • thn 3/8 | 10dtk lanjut LAMA 59% (n 51) → BARU Exness 41% (n 29, p 0.868) Duka 41% • thn 4/8
+
+## CLAIMS (242 rilis)
+   ESI30 1dtk lanjut LAMA 51% (n 127) → BARU Exness 51% (n 86, p 0.457) Duka 47% • thn 2/7 | 3dtk lanjut LAMA 52% (n 132) → BARU Exness 55% (n 86, p 0.225) Duka 53% • thn 3/7 | 10dtk lanjut LAMA 52% (n 132) → BARU Exness 57% (n 86, p 0.118) Duka 63% • thn 3/7
+   ESI60 1dtk balik LAMA 53% (n 131) → BARU Exness 57% (n 91, p 0.104) Duka 67% • thn 4/6 | 3dtk balik LAMA 55% (n 136) → BARU Exness 53% (n 91, p 0.338) Duka 72% • thn 4/6 | 10dtk balik LAMA 57% (n 136) → BARU Exness 52% (n 91, p 0.417) Duka 50% • thn 3/6
+   ESIG  1dtk lanjut LAMA 56% (n 129) → BARU Exness 57% (n 89, p 0.102) Duka 70% • thn 5/7 | 3dtk lanjut LAMA 56% (n 133) → BARU Exness 58% (n 89, p 0.069) Duka 75% • thn 5/7 | 10dtk lanjut LAMA 54% (n 133) → BARU Exness 58% (n 89, p 0.069) Duka 75% • thn 5/7
+   COT   1dtk balik LAMA 56% (n 82) → BARU Exness 55% (n 53, p 0.292) Duka 62% • thn 6/6 | 3dtk balik LAMA 60% (n 83) → BARU Exness 43% (n 53, p 0.864) Duka 62% • thn 2/6 | 10dtk balik LAMA 54% (n 83) → BARU Exness 36% (n 53, p 0.986) Duka 25% • thn 2/6
+   COT4  1dtk balik LAMA 53% (n 139) → BARU Exness 45% (n 98, p 0.867) Duka 48% • thn 2/7 | 3dtk balik LAMA 51% (n 144) → BARU Exness 42% (n 98, p 0.957) Duka 33% • thn 3/7 | 10dtk balik LAMA 52% (n 144) → BARU Exness 39% (n 98, p 0.990) Duka 29% • thn 3/7
+   USD4  1dtk lanjut LAMA 55% (n 123) → BARU Exness 47% (n 97, p 0.729) Duka 55% • thn 4/7 | 3dtk balik LAMA 50% (n 125) → BARU Exness 52% (n 97, p 0.420) Duka 50% • thn 4/7 | 10dtk balik LAMA 52% (n 125) → BARU Exness 46% (n 97, p 0.792) Duka 45% • thn 4/7
+   USD24 1dtk lanjut LAMA 52% (n 123) → BARU Exness 47% (n 98, p 0.760) Duka 43% • thn 4/7 | 3dtk balik LAMA 55% (n 125) → BARU Exness 54% (n 98, p 0.240) Duka 52% • thn 3/7 | 10dtk balik LAMA 57% (n 125) → BARU Exness 57% (n 98, p 0.094) Duka 67% • thn 7/7
+   USD&EMAS 1dtk lanjut LAMA 51% (n 68) → BARU Exness 46% (n 52, p 0.756) Duka 70% • thn 2/6 | 3dtk lanjut LAMA 55% (n 69) → BARU Exness 46% (n 52, p 0.756) Duka 60% • thn 2/6 | 10dtk lanjut LAMA 58% (n 69) → BARU Exness 54% (n 52, p 0.339) Duka 70% • thn 4/6
+
+## KONSUMEN (147 rilis)
+   ESI30 1dtk lanjut LAMA 53% (n 66) → BARU Exness 49% (n 70, p 0.640) Duka 33% • thn 4/10 | 3dtk lanjut LAMA 52% (n 66) → BARU Exness 49% (n 70, p 0.640) Duka 67% • thn 3/10 | 10dtk balik LAMA 55% (n 66) → BARU Exness 46% (n 70, p 0.799) Duka 33% • thn 3/10
+   ESI60 1dtk lanjut LAMA 50% (n 66) → BARU Exness 47% (n 74, p 0.719) Duka 33% • thn 2/9 | 3dtk lanjut LAMA 50% (n 66) → BARU Exness 50% (n 74, p 0.546) Duka 67% • thn 4/9 | 10dtk balik LAMA 53% (n 66) → BARU Exness 53% (n 74, p 0.364) Duka 33% • thn 5/9
+   COT   1dtk lanjut LAMA 51% (n 39) → BARU Exness 60% (n 48, p 0.097) Duka 100% • thn 5/7 | 3dtk lanjut LAMA 56% (n 39) → BARU Exness 52% (n 48, p 0.443) Duka 100% • thn 5/7 | 10dtk lanjut LAMA 64% (n 39) → BARU Exness 54% (n 48, p 0.333) Duka 100% • thn 6/7
+   COT4  1dtk lanjut LAMA 59% (n 73) → BARU Exness 47% (n 74, p 0.719) Duka 0% • thn 5/10 | 3dtk lanjut LAMA 51% (n 73) → BARU Exness 50% (n 74, p 0.546) Duka 33% • thn 5/10 | 10dtk lanjut LAMA 58% (n 73) → BARU Exness 53% (n 74, p 0.364) Duka 33% • thn 5/10
+   USD4  1dtk ✅lanjut LAMA 53% (n 73) → BARU Exness 61% (n 74, p 0.040) Duka 67% • thn 7/10 | 3dtk lanjut LAMA 51% (n 73) → BARU Exness 55% (n 74, p 0.208) Duka 33% • thn 5/10 | 10dtk balik LAMA 51% (n 73) → BARU Exness 50% (n 74, p 0.546) Duka 67% • thn 4/10
+   USD24 1dtk lanjut LAMA 52% (n 73) → BARU Exness 49% (n 74, p 0.636) Duka 33% • thn 5/10 | 3dtk balik LAMA 51% (n 73) → BARU Exness 54% (n 74, p 0.281) Duka 100% • thn 5/10 | 10dtk lanjut LAMA 51% (n 73) → BARU Exness 49% (n 74, p 0.636) Duka 0% • thn 2/10
+   USD&EMAS 1dtk lanjut LAMA 63% (n 49) → BARU Exness 63% (n 43, p 0.063) Duka 100% • thn 5/7 | 3dtk lanjut LAMA 55% (n 49) → BARU Exness 56% (n 43, p 0.271) Duka 50% • thn 3/7 | 10dtk lanjut LAMA 55% (n 49) → BARU Exness 49% (n 43, p 0.620) Duka 50% • thn 3/7
+
+## MINYAK (151 rilis)
+   ESI30 1dtk balik LAMA 55% (n 137) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 3dtk balik LAMA 56% (n 137) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 10dtk balik LAMA 51% (n 141) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 2/4
+   ESI60 1dtk balik LAMA 60% (n 137) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 4/4 | 3dtk balik LAMA 59% (n 139) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 10dtk balik LAMA 53% (n 141) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 2/4
+   COT   1dtk lanjut LAMA 51% (n 79) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 1/4 | 3dtk lanjut LAMA 51% (n 79) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 1/4 | 10dtk lanjut LAMA 54% (n 80) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4
+   COT4  1dtk lanjut LAMA 50% (n 147) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 1/4 | 3dtk balik LAMA 56% (n 147) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 4/4 | 10dtk balik LAMA 50% (n 151) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4
+   USD4  1dtk lanjut LAMA 56% (n 146) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 3dtk lanjut LAMA 55% (n 146) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 10dtk lanjut LAMA 51% (n 150) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 2/4
+   USD24 1dtk lanjut LAMA 56% (n 147) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 4/4 | 3dtk lanjut LAMA 56% (n 147) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 10dtk lanjut LAMA 54% (n 151) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4
+   USD&EMAS 1dtk lanjut LAMA 57% (n 106) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 3dtk lanjut LAMA 59% (n 107) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4 | 10dtk lanjut LAMA 55% (n 109) → BARU Exness nan% (n 0, p 1.000) Duka nan% • thn 3/4
+
+## PMI (52 rilis)
+   ESI30 1dtk lanjut LAMA 62% (n 8) → BARU Exness 40% (n 35, p 0.912) Duka nan% • thn 2/5 | 3dtk lanjut LAMA 50% (n 8) → BARU Exness 31% (n 35, p 0.992) Duka nan% • thn 1/5 | 10dtk lanjut LAMA 62% (n 8) → BARU Exness 34% (n 35, p 0.980) Duka nan% • thn 1/5
+   ESI60 1dtk balik LAMA 56% (n 9) → BARU Exness 53% (n 43, p 0.380) Duka nan% • thn 1/5 | 3dtk lanjut LAMA 56% (n 9) → BARU Exness 37% (n 43, p 0.967) Duka nan% • thn 1/5 | 10dtk balik LAMA 56% (n 9) → BARU Exness 58% (n 43, p 0.180) Duka nan% • thn 3/5
+   COT   1dtk lanjut LAMA nan% (n 0) → BARU Exness 35% (n 23, p 0.953) Duka nan% • thn 0/3 | 3dtk lanjut LAMA nan% (n 0) → BARU Exness 35% (n 23, p 0.953) Duka nan% • thn 0/3 | 10dtk lanjut LAMA nan% (n 0) → BARU Exness 30% (n 23, p 0.983) Duka nan% • thn 0/3
+   COT4  1dtk lanjut LAMA 67% (n 9) → BARU Exness 49% (n 43, p 0.620) Duka nan% • thn 2/5 | 3dtk lanjut LAMA 56% (n 9) → BARU Exness 53% (n 43, p 0.380) Duka nan% • thn 2/5 | 10dtk lanjut LAMA 67% (n 9) → BARU Exness 53% (n 43, p 0.380) Duka nan% • thn 2/5
+   USD4  1dtk lanjut LAMA 78% (n 9) → BARU Exness 56% (n 43, p 0.271) Duka nan% • thn 4/5 | 3dtk lanjut LAMA 67% (n 9) → BARU Exness 51% (n 43, p 0.500) Duka nan% • thn 4/5 | 10dtk lanjut LAMA 78% (n 9) → BARU Exness 56% (n 43, p 0.271) Duka nan% • thn 4/5
+   USD24 1dtk lanjut LAMA 56% (n 9) → BARU Exness 58% (n 43, p 0.180) Duka nan% • thn 2/5 | 3dtk lanjut LAMA 67% (n 9) → BARU Exness 53% (n 43, p 0.380) Duka nan% • thn 1/5 | 10dtk lanjut LAMA 56% (n 9) → BARU Exness 58% (n 43, p 0.180) Duka nan% • thn 1/5
+   USD&EMAS 1dtk lanjut LAMA 100% (n 7) → BARU Exness 61% (n 18, p 0.240) Duka nan% • thn 1/2 | 3dtk lanjut LAMA 86% (n 7) → BARU Exness 56% (n 18, p 0.407) Duka nan% • thn 1/2 | 10dtk lanjut LAMA 100% (n 7) → BARU Exness 61% (n 18, p 0.240) Duka nan% • thn 1/2
+
+## LOLOS
+   KONSUMEN • USD4 (lanjut) • 1 dtk: BARU Exness 60.8% (n 74, p 0.040), Duka 66.7%, semua 57.1%, tahun > 50%: 7/10
+
+## UJI ACAK (permutasi 100×): kebetulan rata-rata 2.9, 95% ≤ 7; sungguhan 1 → peluang kebetulan ≥ 1: 87%
+
+## Ringkas SEMUA berita (orientasi teori: + = arah fitur) — rata-rata detik 2/3/5/10, Exness (cadangan Duka)
+   ESI30      52.0% (n 1841) • LAMA  52.1% • BARU  51.9%
+   ESI60      50.4% (n 1889) • LAMA  51.0% • BARU  49.4%
+   ESIG       50.1% (n 983) • LAMA  49.3% • BARU  51.5%
+   COT        50.8% (n 1052) • LAMA  48.0% • BARU  55.1%
+   COT4       49.5% (n 2049) • LAMA  47.9% • BARU  52.2%
+   USD4       52.1% (n 1887) • LAMA  55.3% • BARU  47.2%
+   USD24      51.0% (n 1896) • LAMA  53.3% • BARU  47.4%
+   USD&EMAS   56.0% (n 1121) • LAMA  59.2% • BARU  50.6%
+   KEJ&USD    56.7% (n 178) • LAMA  61.9% • BARU  48.9%
+   KEJ        57.3% (n 333) • LAMA  56.9% • BARU  57.8%
