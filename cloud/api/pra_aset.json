@@ -1,0 +1,4354 @@
+{
+ "dibuat": "research/pra_aset.py",
+ "satuan": {
+  "XAU": "$ per 0,01 lot",
+  "BTC": "% harga",
+  "ETH": "% harga"
+ },
+ "berita": {
+  "NFP": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 95,
+     "wr": 43.2,
+     "avg": -1.1055,
+     "t": -1.84,
+     "n_lama": 50,
+     "lama": -0.8808,
+     "wr_lama": 42.0,
+     "n_baru": 45,
+     "baru": -1.3552,
+     "wr_baru": 44.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 129,
+       "wr": 41.1,
+       "avg": -1.4806
+      },
+      "XAU_EXNESS": {
+       "n": 95,
+       "wr": 43.2,
+       "avg": -1.1055
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 95,
+     "wr": 53.7,
+     "avg": -0.4249,
+     "t": -0.55,
+     "n_lama": 50,
+     "lama": 0.107,
+     "wr_lama": 56.0,
+     "n_baru": 45,
+     "baru": -1.0158,
+     "wr_baru": 51.1,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 129,
+       "wr": 51.2,
+       "avg": -0.615
+      },
+      "XAU_EXNESS": {
+       "n": 95,
+       "wr": 53.7,
+       "avg": -0.4249
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 130,
+     "wr": 40.8,
+     "avg": -1.5231,
+     "t": -2.34,
+     "n_lama": 73,
+     "lama": -0.8637,
+     "wr_lama": 43.8,
+     "n_baru": 57,
+     "baru": -2.3677,
+     "wr_baru": 36.8,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 171,
+       "wr": 39.8,
+       "avg": -1.6401
+      },
+      "XAU_EXNESS": {
+       "n": 130,
+       "wr": 40.8,
+       "avg": -1.5231
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 130,
+     "wr": 44.6,
+     "avg": -1.0603,
+     "t": -0.89,
+     "n_lama": 73,
+     "lama": -0.8585,
+     "wr_lama": 42.5,
+     "n_baru": 57,
+     "baru": -1.3187,
+     "wr_baru": 47.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 171,
+       "wr": 45.0,
+       "avg": -1.1922
+      },
+      "XAU_EXNESS": {
+       "n": 130,
+       "wr": 44.6,
+       "avg": -1.0603
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 130,
+     "wr": 38.5,
+     "avg": -0.2975,
+     "t": -0.61,
+     "n_lama": 73,
+     "lama": -1.2495,
+     "wr_lama": 26.0,
+     "n_baru": 57,
+     "baru": 0.9217,
+     "wr_baru": 54.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 171,
+       "wr": 36.3,
+       "avg": -1.4705
+      },
+      "XAU_EXNESS": {
+       "n": 130,
+       "wr": 38.5,
+       "avg": -0.2975
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 130,
+     "wr": 46.9,
+     "avg": -1.3062,
+     "t": -1.09,
+     "n_lama": 73,
+     "lama": -1.1156,
+     "wr_lama": 46.6,
+     "n_baru": 57,
+     "baru": -1.5504,
+     "wr_baru": 47.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 171,
+       "wr": 45.6,
+       "avg": -1.6964
+      },
+      "XAU_EXNESS": {
+       "n": 130,
+       "wr": 46.9,
+       "avg": -1.3062
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 83,
+     "wr": 10.8,
+     "avg": -0.1691,
+     "t": -9.13,
+     "n_lama": 37,
+     "lama": -0.2351,
+     "wr_lama": 0.0,
+     "n_baru": 46,
+     "baru": -0.116,
+     "wr_baru": 19.6,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 80,
+       "wr": 25.0,
+       "avg": -0.0602
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 10.8,
+       "avg": -0.1691
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 83,
+     "wr": 34.9,
+     "avg": -0.1408,
+     "t": -2.78,
+     "n_lama": 37,
+     "lama": -0.2536,
+     "wr_lama": 8.1,
+     "n_baru": 46,
+     "baru": -0.0501,
+     "wr_baru": 56.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 80,
+       "wr": 42.5,
+       "avg": -0.0305
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 34.9,
+       "avg": -0.1408
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 108,
+     "wr": 7.4,
+     "avg": -0.1747,
+     "t": -12.65,
+     "n_lama": 49,
+     "lama": -0.2494,
+     "wr_lama": 0.0,
+     "n_baru": 59,
+     "baru": -0.1125,
+     "wr_baru": 13.6,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 105,
+       "wr": 3.8,
+       "avg": -0.0744
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 7.4,
+       "avg": -0.1747
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 108,
+     "wr": 32.4,
+     "avg": -0.1689,
+     "t": -3.64,
+     "n_lama": 49,
+     "lama": -0.1822,
+     "wr_lama": 22.4,
+     "n_baru": 59,
+     "baru": -0.1579,
+     "wr_baru": 40.7,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 105,
+       "wr": 42.9,
+       "avg": -0.0705
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 32.4,
+       "avg": -0.1689
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 108,
+     "wr": 7.4,
+     "avg": -0.1849,
+     "t": -11.36,
+     "n_lama": 49,
+     "lama": -0.2475,
+     "wr_lama": 0.0,
+     "n_baru": 59,
+     "baru": -0.133,
+     "wr_baru": 13.6,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 105,
+       "wr": 18.1,
+       "avg": -0.0727
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 7.4,
+       "avg": -0.1849
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 108,
+     "wr": 26.9,
+     "avg": -0.1594,
+     "t": -3.68,
+     "n_lama": 49,
+     "lama": -0.2646,
+     "wr_lama": 6.1,
+     "n_baru": 59,
+     "baru": -0.072,
+     "wr_baru": 44.1,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 105,
+       "wr": 35.2,
+       "avg": -0.0684
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 26.9,
+       "avg": -0.1594
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 80,
+     "wr": 26.2,
+     "avg": -0.0653,
+     "t": -1.82,
+     "n_lama": 34,
+     "lama": -0.0844,
+     "wr_lama": 2.9,
+     "n_baru": 46,
+     "baru": -0.0512,
+     "wr_baru": 43.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 80,
+       "wr": 26.2,
+       "avg": -0.0653
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 80,
+     "wr": 41.2,
+     "avg": -0.0827,
+     "t": -1.23,
+     "n_lama": 34,
+     "lama": -0.0582,
+     "wr_lama": 32.4,
+     "n_baru": 46,
+     "baru": -0.1008,
+     "wr_baru": 47.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 80,
+       "wr": 41.2,
+       "avg": -0.0827
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 106,
+     "wr": 23.6,
+     "avg": -0.0866,
+     "t": -4.03,
+     "n_lama": 46,
+     "lama": -0.0767,
+     "wr_lama": 4.3,
+     "n_baru": 60,
+     "baru": -0.0941,
+     "wr_baru": 38.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 23.6,
+       "avg": -0.0866
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 106,
+     "wr": 38.7,
+     "avg": -0.0835,
+     "t": -1.75,
+     "n_lama": 46,
+     "lama": -0.0336,
+     "wr_lama": 32.6,
+     "n_baru": 60,
+     "baru": -0.1216,
+     "wr_baru": 43.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 38.7,
+       "avg": -0.0835
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 106,
+     "wr": 18.9,
+     "avg": -0.0995,
+     "t": -3.83,
+     "n_lama": 46,
+     "lama": -0.0966,
+     "wr_lama": 2.2,
+     "n_baru": 60,
+     "baru": -0.1017,
+     "wr_baru": 31.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 18.9,
+       "avg": -0.0995
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 106,
+     "wr": 37.7,
+     "avg": -0.0522,
+     "t": -0.8,
+     "n_lama": 46,
+     "lama": -0.1143,
+     "wr_lama": 28.3,
+     "n_baru": 60,
+     "baru": -0.0046,
+     "wr_baru": 45.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 37.7,
+       "avg": -0.0522
+      }
+     }
+    }
+   }
+  },
+  "CPI": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 94,
+     "wr": 38.3,
+     "avg": -1.2046,
+     "t": -2.33,
+     "n_lama": 52,
+     "lama": -0.7361,
+     "wr_lama": 28.8,
+     "n_baru": 42,
+     "baru": -1.7846,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 136,
+       "wr": 29.4,
+       "avg": -1.4396
+      },
+      "XAU_EXNESS": {
+       "n": 94,
+       "wr": 38.3,
+       "avg": -1.2046
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 94,
+     "wr": 42.6,
+     "avg": -1.1803,
+     "t": -1.68,
+     "n_lama": 52,
+     "lama": -0.7046,
+     "wr_lama": 36.5,
+     "n_baru": 42,
+     "baru": -1.7693,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 136,
+       "wr": 36.8,
+       "avg": -1.1678
+      },
+      "XAU_EXNESS": {
+       "n": 94,
+       "wr": 42.6,
+       "avg": -1.1803
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 131,
+     "wr": 21.4,
+     "avg": -0.6348,
+     "t": -2.57,
+     "n_lama": 71,
+     "lama": -1.1409,
+     "wr_lama": 4.2,
+     "n_baru": 60,
+     "baru": -0.036,
+     "wr_baru": 41.7,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 184,
+       "wr": 17.4,
+       "avg": -1.2958
+      },
+      "XAU_EXNESS": {
+       "n": 131,
+       "wr": 21.4,
+       "avg": -0.6348
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 131,
+     "wr": 51.1,
+     "avg": 1.3515,
+     "t": 1.6,
+     "n_lama": 71,
+     "lama": -0.4646,
+     "wr_lama": 45.1,
+     "n_baru": 60,
+     "baru": 3.5005,
+     "wr_baru": 58.3,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 184,
+       "wr": 45.1,
+       "avg": 0.4966
+      },
+      "XAU_EXNESS": {
+       "n": 131,
+       "wr": 51.1,
+       "avg": 1.3515
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 131,
+     "wr": 24.4,
+     "avg": -1.3291,
+     "t": -3.77,
+     "n_lama": 71,
+     "lama": -0.9622,
+     "wr_lama": 16.9,
+     "n_baru": 60,
+     "baru": -1.7632,
+     "wr_baru": 33.3,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 184,
+       "wr": 25.0,
+       "avg": -1.822
+      },
+      "XAU_EXNESS": {
+       "n": 131,
+       "wr": 24.4,
+       "avg": -1.3291
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 131,
+     "wr": 32.1,
+     "avg": -2.595,
+     "t": -2.95,
+     "n_lama": 71,
+     "lama": -0.9417,
+     "wr_lama": 29.6,
+     "n_baru": 60,
+     "baru": -4.5514,
+     "wr_baru": 35.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 184,
+       "wr": 29.9,
+       "avg": -2.28
+      },
+      "XAU_EXNESS": {
+       "n": 131,
+       "wr": 32.1,
+       "avg": -2.595
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 74,
+     "wr": 9.5,
+     "avg": -0.175,
+     "t": -9.7,
+     "n_lama": 32,
+     "lama": -0.2611,
+     "wr_lama": 0.0,
+     "n_baru": 42,
+     "baru": -0.1095,
+     "wr_baru": 16.7,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 15.1,
+       "avg": -0.047
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 9.5,
+       "avg": -0.175
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 74,
+     "wr": 29.7,
+     "avg": -0.2652,
+     "t": -1.92,
+     "n_lama": 32,
+     "lama": -0.2186,
+     "wr_lama": 15.6,
+     "n_baru": 42,
+     "baru": -0.3007,
+     "wr_baru": 40.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 43.8,
+       "avg": -0.1302
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 29.7,
+       "avg": -0.2652
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 108,
+     "wr": 13.9,
+     "avg": -0.172,
+     "t": -10.13,
+     "n_lama": 48,
+     "lama": -0.2538,
+     "wr_lama": 0.0,
+     "n_baru": 60,
+     "baru": -0.1065,
+     "wr_baru": 25.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 9.4,
+       "avg": -0.0678
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 13.9,
+       "avg": -0.172
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 108,
+     "wr": 40.7,
+     "avg": -0.0674,
+     "t": -0.68,
+     "n_lama": 48,
+     "lama": -0.2069,
+     "wr_lama": 20.8,
+     "n_baru": 60,
+     "baru": 0.0441,
+     "wr_baru": 56.7,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 50.9,
+       "avg": 0.046
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 40.7,
+       "avg": -0.0674
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 108,
+     "wr": 2.8,
+     "avg": -0.1936,
+     "t": -13.94,
+     "n_lama": 48,
+     "lama": -0.2562,
+     "wr_lama": 0.0,
+     "n_baru": 60,
+     "baru": -0.1436,
+     "wr_baru": 5.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 7.5,
+       "avg": -0.0722
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 2.8,
+       "avg": -0.1936
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 108,
+     "wr": 21.3,
+     "avg": -0.2799,
+     "t": -3.61,
+     "n_lama": 48,
+     "lama": -0.2856,
+     "wr_lama": 4.2,
+     "n_baru": 60,
+     "baru": -0.2753,
+     "wr_baru": 35.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 23.6,
+       "avg": -0.1655
+      },
+      "BTC_EXNESS": {
+       "n": 108,
+       "wr": 21.3,
+       "avg": -0.2799
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 73,
+     "wr": 23.3,
+     "avg": -0.0781,
+     "t": -1.32,
+     "n_lama": 31,
+     "lama": -0.0839,
+     "wr_lama": 6.5,
+     "n_baru": 42,
+     "baru": -0.0738,
+     "wr_baru": 35.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 23.3,
+       "avg": -0.0781
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 73,
+     "wr": 37.0,
+     "avg": -0.1085,
+     "t": -0.58,
+     "n_lama": 31,
+     "lama": -0.0013,
+     "wr_lama": 32.3,
+     "n_baru": 42,
+     "baru": -0.1876,
+     "wr_baru": 40.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 37.0,
+       "avg": -0.1085
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 106,
+     "wr": 25.5,
+     "avg": -0.037,
+     "t": -0.87,
+     "n_lama": 46,
+     "lama": -0.0874,
+     "wr_lama": 2.2,
+     "n_baru": 60,
+     "baru": 0.0017,
+     "wr_baru": 43.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 25.5,
+       "avg": -0.037
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 106,
+     "wr": 41.5,
+     "avg": 0.0459,
+     "t": 0.34,
+     "n_lama": 46,
+     "lama": -0.0168,
+     "wr_lama": 23.9,
+     "n_baru": 60,
+     "baru": 0.094,
+     "wr_baru": 55.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 41.5,
+       "avg": 0.0459
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 106,
+     "wr": 9.4,
+     "avg": -0.0942,
+     "t": -6.89,
+     "n_lama": 46,
+     "lama": -0.0886,
+     "wr_lama": 4.3,
+     "n_baru": 60,
+     "baru": -0.0984,
+     "wr_baru": 13.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 9.4,
+       "avg": -0.0942
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 106,
+     "wr": 24.5,
+     "avg": -0.1935,
+     "t": -1.74,
+     "n_lama": 46,
+     "lama": -0.1196,
+     "wr_lama": 10.9,
+     "n_baru": 60,
+     "baru": -0.2501,
+     "wr_baru": 35.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 24.5,
+       "avg": -0.1935
+      }
+     }
+    }
+   }
+  },
+  "PPI": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 61,
+     "wr": 31.1,
+     "avg": -0.4974,
+     "t": -1.49,
+     "n_lama": 38,
+     "lama": -0.8594,
+     "wr_lama": 23.7,
+     "n_baru": 23,
+     "baru": 0.1008,
+     "wr_baru": 43.5,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 97,
+       "wr": 23.7,
+       "avg": -0.9368
+      },
+      "XAU_EXNESS": {
+       "n": 61,
+       "wr": 31.1,
+       "avg": -0.4974
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 61,
+     "wr": 36.1,
+     "avg": -0.3059,
+     "t": -0.75,
+     "n_lama": 38,
+     "lama": -0.8328,
+     "wr_lama": 23.7,
+     "n_baru": 23,
+     "baru": 0.5647,
+     "wr_baru": 56.5,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 97,
+       "wr": 29.9,
+       "avg": -0.6845
+      },
+      "XAU_EXNESS": {
+       "n": 61,
+       "wr": 36.1,
+       "avg": -0.3059
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 99,
+     "wr": 34.3,
+     "avg": -0.5615,
+     "t": -2.33,
+     "n_lama": 49,
+     "lama": -0.6827,
+     "wr_lama": 18.4,
+     "n_baru": 50,
+     "baru": -0.4427,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 157,
+       "wr": 22.3,
+       "avg": -0.899
+      },
+      "XAU_EXNESS": {
+       "n": 99,
+       "wr": 34.3,
+       "avg": -0.5615
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 99,
+     "wr": 40.4,
+     "avg": -0.3987,
+     "t": -1.3,
+     "n_lama": 49,
+     "lama": -0.3727,
+     "wr_lama": 30.6,
+     "n_baru": 50,
+     "baru": -0.4242,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 157,
+       "wr": 33.8,
+       "avg": -0.6784
+      },
+      "XAU_EXNESS": {
+       "n": 99,
+       "wr": 40.4,
+       "avg": -0.3987
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 99,
+     "wr": 9.1,
+     "avg": -1.2711,
+     "t": -8.56,
+     "n_lama": 49,
+     "lama": -1.2561,
+     "wr_lama": 2.0,
+     "n_baru": 50,
+     "baru": -1.2857,
+     "wr_baru": 16.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 157,
+       "wr": 5.7,
+       "avg": -1.4845
+      },
+      "XAU_EXNESS": {
+       "n": 99,
+       "wr": 9.1,
+       "avg": -1.2711
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 99,
+     "wr": 27.3,
+     "avg": -1.2882,
+     "t": -3.83,
+     "n_lama": 49,
+     "lama": -1.4147,
+     "wr_lama": 18.4,
+     "n_baru": 50,
+     "baru": -1.1642,
+     "wr_baru": 36.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 157,
+       "wr": 24.2,
+       "avg": -1.3777
+      },
+      "XAU_EXNESS": {
+       "n": 99,
+       "wr": 27.3,
+       "avg": -1.2882
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 39,
+     "wr": 0.0,
+     "avg": -0.2108,
+     "t": -6.98,
+     "n_lama": 17,
+     "lama": -0.3537,
+     "wr_lama": 0.0,
+     "n_baru": 22,
+     "baru": -0.1004,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 38,
+       "wr": 2.6,
+       "avg": -0.0664
+      },
+      "BTC_EXNESS": {
+       "n": 39,
+       "wr": 0.0,
+       "avg": -0.2108
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 39,
+     "wr": 28.2,
+     "avg": -0.1381,
+     "t": -2.3,
+     "n_lama": 17,
+     "lama": -0.3479,
+     "wr_lama": 5.9,
+     "n_baru": 22,
+     "baru": 0.0241,
+     "wr_baru": 45.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 38,
+       "wr": 39.5,
+       "avg": 0.0296
+      },
+      "BTC_EXNESS": {
+       "n": 39,
+       "wr": 28.2,
+       "avg": -0.1381
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 74,
+     "wr": 0.0,
+     "avg": -0.1844,
+     "t": -10.26,
+     "n_lama": 25,
+     "lama": -0.3054,
+     "wr_lama": 0.0,
+     "n_baru": 49,
+     "baru": -0.1227,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 2.7,
+       "avg": -0.0772
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 0.0,
+       "avg": -0.1844
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 74,
+     "wr": 27.0,
+     "avg": -0.1451,
+     "t": -2.88,
+     "n_lama": 25,
+     "lama": -0.2787,
+     "wr_lama": 4.0,
+     "n_baru": 49,
+     "baru": -0.077,
+     "wr_baru": 38.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 42.5,
+       "avg": -0.0137
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 27.0,
+       "avg": -0.1451
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 74,
+     "wr": 10.8,
+     "avg": -0.2202,
+     "t": -8.57,
+     "n_lama": 25,
+     "lama": -0.3003,
+     "wr_lama": 4.0,
+     "n_baru": 49,
+     "baru": -0.1793,
+     "wr_baru": 14.3,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 15.1,
+       "avg": -0.1031
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 10.8,
+       "avg": -0.2202
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 74,
+     "wr": 29.7,
+     "avg": -0.2189,
+     "t": -4.45,
+     "n_lama": 25,
+     "lama": -0.3039,
+     "wr_lama": 8.0,
+     "n_baru": 49,
+     "baru": -0.1755,
+     "wr_baru": 40.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 73,
+       "wr": 39.7,
+       "avg": -0.1336
+      },
+      "BTC_EXNESS": {
+       "n": 74,
+       "wr": 29.7,
+       "avg": -0.2189
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 38,
+     "wr": 31.6,
+     "avg": -0.0623,
+     "t": -1.88,
+     "n_lama": 14,
+     "lama": -0.0774,
+     "wr_lama": 7.1,
+     "n_baru": 24,
+     "baru": -0.0535,
+     "wr_baru": 45.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 38,
+       "wr": 31.6,
+       "avg": -0.0623
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 38,
+     "wr": 31.6,
+     "avg": -0.0044,
+     "t": -0.08,
+     "n_lama": 14,
+     "lama": -0.109,
+     "wr_lama": 7.1,
+     "n_baru": 24,
+     "baru": 0.0566,
+     "wr_baru": 45.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 38,
+       "wr": 31.6,
+       "avg": -0.0044
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 73,
+     "wr": 1.4,
+     "avg": -0.097,
+     "t": -18.0,
+     "n_lama": 22,
+     "lama": -0.0955,
+     "wr_lama": 0.0,
+     "n_baru": 51,
+     "baru": -0.0977,
+     "wr_baru": 2.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 1.4,
+       "avg": -0.097
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 73,
+     "wr": 43.8,
+     "avg": -0.0131,
+     "t": -0.18,
+     "n_lama": 22,
+     "lama": -0.0316,
+     "wr_lama": 45.5,
+     "n_baru": 51,
+     "baru": -0.0052,
+     "wr_baru": 43.1,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 43.8,
+       "avg": -0.0131
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 73,
+     "wr": 13.7,
+     "avg": -0.1162,
+     "t": -6.0,
+     "n_lama": 22,
+     "lama": -0.073,
+     "wr_lama": 9.1,
+     "n_baru": 51,
+     "baru": -0.1348,
+     "wr_baru": 15.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 13.7,
+       "avg": -0.1162
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 73,
+     "wr": 28.8,
+     "avg": -0.1333,
+     "t": -3.01,
+     "n_lama": 22,
+     "lama": -0.0781,
+     "wr_lama": 27.3,
+     "n_baru": 51,
+     "baru": -0.1571,
+     "wr_baru": 29.4,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 73,
+       "wr": 28.8,
+       "avg": -0.1333
+      }
+     }
+    }
+   }
+  },
+  "RETAIL": {
+   "XAU": {
+    "BUY|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 88,
+     "wr": 18.2,
+     "avg": -1.3915,
+     "t": -6.75,
+     "n_lama": 47,
+     "lama": -1.2026,
+     "wr_lama": 10.6,
+     "n_baru": 41,
+     "baru": -1.6082,
+     "wr_baru": 26.8,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 127,
+       "wr": 15.0,
+       "avg": -1.4996
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 18.2,
+       "avg": -1.3915
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 88,
+     "wr": 26.1,
+     "avg": -2.0315,
+     "t": -6.18,
+     "n_lama": 47,
+     "lama": -1.567,
+     "wr_lama": 25.5,
+     "n_baru": 41,
+     "baru": -2.564,
+     "wr_baru": 26.8,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 127,
+       "wr": 26.0,
+       "avg": -1.799
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 26.1,
+       "avg": -2.0315
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 88,
+     "wr": 35.2,
+     "avg": -0.4617,
+     "t": -2.04,
+     "n_lama": 47,
+     "lama": -0.7542,
+     "wr_lama": 23.4,
+     "n_baru": 41,
+     "baru": -0.1263,
+     "wr_baru": 48.8,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 127,
+       "wr": 29.9,
+       "avg": -1.0249
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 35.2,
+       "avg": -0.4617
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 88,
+     "wr": 55.7,
+     "avg": 0.34,
+     "t": 1.07,
+     "n_lama": 47,
+     "lama": -0.072,
+     "wr_lama": 48.9,
+     "n_baru": 41,
+     "baru": 0.8123,
+     "wr_baru": 63.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 127,
+       "wr": 47.2,
+       "avg": -0.3476
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 55.7,
+       "avg": 0.34
+      }
+     }
+    }
+   },
+   "BTC": {
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 83,
+     "wr": 6.0,
+     "avg": -0.1928,
+     "t": -10.86,
+     "n_lama": 42,
+     "lama": -0.2679,
+     "wr_lama": 0.0,
+     "n_baru": 41,
+     "baru": -0.1159,
+     "wr_baru": 12.2,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 81,
+       "wr": 9.9,
+       "avg": -0.0714
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 6.0,
+       "avg": -0.1928
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 83,
+     "wr": 24.1,
+     "avg": -0.1757,
+     "t": -5.61,
+     "n_lama": 42,
+     "lama": -0.2452,
+     "wr_lama": 14.3,
+     "n_baru": 41,
+     "baru": -0.1045,
+     "wr_baru": 34.1,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 81,
+       "wr": 38.3,
+       "avg": -0.0498
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 24.1,
+       "avg": -0.1757
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 83,
+     "wr": 3.6,
+     "avg": -0.1978,
+     "t": -11.71,
+     "n_lama": 42,
+     "lama": -0.2731,
+     "wr_lama": 0.0,
+     "n_baru": 41,
+     "baru": -0.1205,
+     "wr_baru": 7.3,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 81,
+       "wr": 8.6,
+       "avg": -0.0682
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 3.6,
+       "avg": -0.1978
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 83,
+     "wr": 19.3,
+     "avg": -0.1742,
+     "t": -5.6,
+     "n_lama": 42,
+     "lama": -0.2666,
+     "wr_lama": 11.9,
+     "n_baru": 41,
+     "baru": -0.0796,
+     "wr_baru": 26.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 81,
+       "wr": 35.8,
+       "avg": -0.0535
+      },
+      "BTC_EXNESS": {
+       "n": 83,
+       "wr": 19.3,
+       "avg": -0.1742
+      }
+     }
+    }
+   },
+   "ETH": {
+    "BUY|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 81,
+     "wr": 12.3,
+     "avg": -0.079,
+     "t": -8.72,
+     "n_lama": 40,
+     "lama": -0.0818,
+     "wr_lama": 5.0,
+     "n_baru": 41,
+     "baru": -0.0762,
+     "wr_baru": 19.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 81,
+       "wr": 12.3,
+       "avg": -0.079
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 81,
+     "wr": 38.3,
+     "avg": -0.0455,
+     "t": -1.41,
+     "n_lama": 40,
+     "lama": -0.0597,
+     "wr_lama": 40.0,
+     "n_baru": 41,
+     "baru": -0.0317,
+     "wr_baru": 36.6,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 81,
+       "wr": 38.3,
+       "avg": -0.0455
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 81,
+     "wr": 7.4,
+     "avg": -0.0917,
+     "t": -10.24,
+     "n_lama": 40,
+     "lama": -0.0886,
+     "wr_lama": 2.5,
+     "n_baru": 41,
+     "baru": -0.0948,
+     "wr_baru": 12.2,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 81,
+       "wr": 7.4,
+       "avg": -0.0917
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 81,
+     "wr": 24.7,
+     "avg": -0.1253,
+     "t": -4.52,
+     "n_lama": 40,
+     "lama": -0.0972,
+     "wr_lama": 15.0,
+     "n_baru": 41,
+     "baru": -0.1527,
+     "wr_baru": 34.1,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 81,
+       "wr": 24.7,
+       "avg": -0.1253
+      }
+     }
+    }
+   }
+  },
+  "PCE": {
+   "XAU": {
+    "BUY|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 52,
+     "wr": 19.2,
+     "avg": -0.9336,
+     "t": -5.42,
+     "n_lama": 2,
+     "lama": -0.9135,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -0.9344,
+     "wr_baru": 20.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 52,
+       "wr": 13.5,
+       "avg": -1.3978
+      },
+      "XAU_EXNESS": {
+       "n": 52,
+       "wr": 19.2,
+       "avg": -0.9336
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 52,
+     "wr": 55.8,
+     "avg": -0.2069,
+     "t": -0.43,
+     "n_lama": 2,
+     "lama": -0.499,
+     "wr_lama": 50.0,
+     "n_baru": 50,
+     "baru": -0.1952,
+     "wr_baru": 56.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 52,
+       "wr": 50.0,
+       "avg": -0.5019
+      },
+      "XAU_EXNESS": {
+       "n": 52,
+       "wr": 55.8,
+       "avg": -0.2069
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 52,
+     "wr": 21.2,
+     "avg": -0.5246,
+     "t": -4.02,
+     "n_lama": 2,
+     "lama": -0.886,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -0.5101,
+     "wr_baru": 22.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 52,
+       "wr": 13.5,
+       "avg": -1.0283
+      },
+      "XAU_EXNESS": {
+       "n": 52,
+       "wr": 21.2,
+       "avg": -0.5246
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 52,
+     "wr": 30.8,
+     "avg": -1.0376,
+     "t": -2.13,
+     "n_lama": 2,
+     "lama": -0.5155,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -1.0585,
+     "wr_baru": 32.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 52,
+       "wr": 28.8,
+       "avg": -1.3631
+      },
+      "XAU_EXNESS": {
+       "n": 52,
+       "wr": 30.8,
+       "avg": -1.0376
+      }
+     }
+    }
+   },
+   "BTC": {
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 53,
+     "wr": 0.0,
+     "avg": -0.1257,
+     "t": -13.14,
+     "n_lama": 2,
+     "lama": -0.1357,
+     "wr_lama": 0.0,
+     "n_baru": 51,
+     "baru": -0.1253,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 53,
+       "wr": 1.9,
+       "avg": -0.0752
+      },
+      "BTC_EXNESS": {
+       "n": 53,
+       "wr": 0.0,
+       "avg": -0.1257
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 53,
+     "wr": 47.2,
+     "avg": 0.035,
+     "t": 0.57,
+     "n_lama": 2,
+     "lama": -0.0405,
+     "wr_lama": 0.0,
+     "n_baru": 51,
+     "baru": 0.0379,
+     "wr_baru": 49.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 53,
+       "wr": 50.9,
+       "avg": 0.0826
+      },
+      "BTC_EXNESS": {
+       "n": 53,
+       "wr": 47.2,
+       "avg": 0.035
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 53,
+     "wr": 7.5,
+     "avg": -0.1042,
+     "t": -7.74,
+     "n_lama": 2,
+     "lama": -0.148,
+     "wr_lama": 0.0,
+     "n_baru": 51,
+     "baru": -0.1024,
+     "wr_baru": 7.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 53,
+       "wr": 13.2,
+       "avg": -0.0618
+      },
+      "BTC_EXNESS": {
+       "n": 53,
+       "wr": 7.5,
+       "avg": -0.1042
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 53,
+     "wr": 24.5,
+     "avg": -0.2352,
+     "t": -4.56,
+     "n_lama": 2,
+     "lama": -0.0293,
+     "wr_lama": 0.0,
+     "n_baru": 51,
+     "baru": -0.2433,
+     "wr_baru": 25.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 53,
+       "wr": 32.1,
+       "avg": -0.1817
+      },
+      "BTC_EXNESS": {
+       "n": 53,
+       "wr": 24.5,
+       "avg": -0.2352
+      }
+     }
+    }
+   },
+   "ETH": {
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 54,
+     "wr": 3.7,
+     "avg": -0.0941,
+     "t": -10.41,
+     "n_lama": 2,
+     "lama": -0.1017,
+     "wr_lama": 0.0,
+     "n_baru": 52,
+     "baru": -0.0938,
+     "wr_baru": 3.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 54,
+       "wr": 3.7,
+       "avg": -0.0941
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 54,
+     "wr": 48.1,
+     "avg": 0.1569,
+     "t": 1.96,
+     "n_lama": 2,
+     "lama": -0.0301,
+     "wr_lama": 0.0,
+     "n_baru": 52,
+     "baru": 0.1641,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 54,
+       "wr": 48.1,
+       "avg": 0.1569
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 54,
+     "wr": 16.7,
+     "avg": -0.0699,
+     "t": -4.35,
+     "n_lama": 2,
+     "lama": -0.062,
+     "wr_lama": 0.0,
+     "n_baru": 52,
+     "baru": -0.0702,
+     "wr_baru": 17.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 54,
+       "wr": 16.7,
+       "avg": -0.0699
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 54,
+     "wr": 27.8,
+     "avg": -0.2701,
+     "t": -3.9,
+     "n_lama": 2,
+     "lama": -0.0015,
+     "wr_lama": 50.0,
+     "n_baru": 52,
+     "baru": -0.2805,
+     "wr_baru": 26.9,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 54,
+       "wr": 27.8,
+       "avg": -0.2701
+      }
+     }
+    }
+   }
+  },
+  "GDP": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 35,
+     "wr": 28.6,
+     "avg": -0.6212,
+     "t": -1.81,
+     "n_lama": 20,
+     "lama": -0.8716,
+     "wr_lama": 20.0,
+     "n_baru": 15,
+     "baru": -0.2873,
+     "wr_baru": 40.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 46,
+       "wr": 30.4,
+       "avg": -0.7943
+      },
+      "XAU_EXNESS": {
+       "n": 35,
+       "wr": 28.6,
+       "avg": -0.6212
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 35,
+     "wr": 31.4,
+     "avg": -0.4386,
+     "t": -1.02,
+     "n_lama": 20,
+     "lama": -0.9845,
+     "wr_lama": 25.0,
+     "n_baru": 15,
+     "baru": 0.2893,
+     "wr_baru": 40.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 46,
+       "wr": 32.6,
+       "avg": -0.5848
+      },
+      "XAU_EXNESS": {
+       "n": 35,
+       "wr": 31.4,
+       "avg": -0.4386
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 77,
+     "wr": 3.9,
+     "avg": -1.0817,
+     "t": -11.55,
+     "n_lama": 50,
+     "lama": -1.092,
+     "wr_lama": 0.0,
+     "n_baru": 27,
+     "baru": -1.0624,
+     "wr_baru": 11.1,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 106,
+       "wr": 3.8,
+       "avg": -1.1568
+      },
+      "XAU_EXNESS": {
+       "n": 77,
+       "wr": 3.9,
+       "avg": -1.0817
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 77,
+     "wr": 32.5,
+     "avg": -1.2747,
+     "t": -3.91,
+     "n_lama": 50,
+     "lama": -0.956,
+     "wr_lama": 34.0,
+     "n_baru": 27,
+     "baru": -1.8648,
+     "wr_baru": 29.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 106,
+       "wr": 33.0,
+       "avg": -1.2004
+      },
+      "XAU_EXNESS": {
+       "n": 77,
+       "wr": 32.5,
+       "avg": -1.2747
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 77,
+     "wr": 22.1,
+     "avg": -0.6296,
+     "t": -3.7,
+     "n_lama": 50,
+     "lama": -0.9374,
+     "wr_lama": 16.0,
+     "n_baru": 27,
+     "baru": -0.0597,
+     "wr_baru": 33.3,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 106,
+       "wr": 20.8,
+       "avg": -0.8988
+      },
+      "XAU_EXNESS": {
+       "n": 77,
+       "wr": 22.1,
+       "avg": -0.6296
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 77,
+     "wr": 35.1,
+     "avg": -0.6806,
+     "t": -2.94,
+     "n_lama": 50,
+     "lama": -0.8601,
+     "wr_lama": 28.0,
+     "n_baru": 27,
+     "baru": -0.3481,
+     "wr_baru": 48.1,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 106,
+       "wr": 33.0,
+       "avg": -0.8585
+      },
+      "XAU_EXNESS": {
+       "n": 77,
+       "wr": 35.1,
+       "avg": -0.6806
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 28,
+     "wr": 7.1,
+     "avg": -0.183,
+     "t": -5.28,
+     "n_lama": 13,
+     "lama": -0.2812,
+     "wr_lama": 0.0,
+     "n_baru": 15,
+     "baru": -0.0978,
+     "wr_baru": 13.3,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 28,
+       "wr": 10.7,
+       "avg": -0.0559
+      },
+      "BTC_EXNESS": {
+       "n": 28,
+       "wr": 7.1,
+       "avg": -0.183
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 28,
+     "wr": 10.7,
+     "avg": -0.2824,
+     "t": -4.72,
+     "n_lama": 13,
+     "lama": -0.2865,
+     "wr_lama": 7.7,
+     "n_baru": 15,
+     "baru": -0.2788,
+     "wr_baru": 13.3,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 28,
+       "wr": 21.4,
+       "avg": -0.1561
+      },
+      "BTC_EXNESS": {
+       "n": 28,
+       "wr": 10.7,
+       "avg": -0.2824
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 59,
+     "wr": 0.0,
+     "avg": -0.2219,
+     "t": -9.29,
+     "n_lama": 32,
+     "lama": -0.2922,
+     "wr_lama": 0.0,
+     "n_baru": 27,
+     "baru": -0.1384,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 56,
+       "wr": 3.6,
+       "avg": -0.0765
+      },
+      "BTC_EXNESS": {
+       "n": 59,
+       "wr": 0.0,
+       "avg": -0.2219
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 59,
+     "wr": 16.9,
+     "avg": -0.233,
+     "t": -5.6,
+     "n_lama": 32,
+     "lama": -0.2569,
+     "wr_lama": 12.5,
+     "n_baru": 27,
+     "baru": -0.2047,
+     "wr_baru": 22.2,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 56,
+       "wr": 23.2,
+       "avg": -0.096
+      },
+      "BTC_EXNESS": {
+       "n": 59,
+       "wr": 16.9,
+       "avg": -0.233
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 59,
+     "wr": 0.0,
+     "avg": -0.2141,
+     "t": -9.89,
+     "n_lama": 32,
+     "lama": -0.2882,
+     "wr_lama": 0.0,
+     "n_baru": 27,
+     "baru": -0.1263,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 56,
+       "wr": 0.0,
+       "avg": -0.0728
+      },
+      "BTC_EXNESS": {
+       "n": 59,
+       "wr": 0.0,
+       "avg": -0.2141
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 59,
+     "wr": 28.8,
+     "avg": -0.1623,
+     "t": -4.05,
+     "n_lama": 32,
+     "lama": -0.283,
+     "wr_lama": 15.6,
+     "n_baru": 27,
+     "baru": -0.0193,
+     "wr_baru": 44.4,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 56,
+       "wr": 46.4,
+       "avg": -0.0121
+      },
+      "BTC_EXNESS": {
+       "n": 59,
+       "wr": 28.8,
+       "avg": -0.1623
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 28,
+     "wr": 7.1,
+     "avg": -0.0864,
+     "t": -6.86,
+     "n_lama": 13,
+     "lama": -0.076,
+     "wr_lama": 7.7,
+     "n_baru": 15,
+     "baru": -0.0955,
+     "wr_baru": 6.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 28,
+       "wr": 7.1,
+       "avg": -0.0864
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 28,
+     "wr": 28.6,
+     "avg": -0.1808,
+     "t": -2.18,
+     "n_lama": 13,
+     "lama": -0.0762,
+     "wr_lama": 30.8,
+     "n_baru": 15,
+     "baru": -0.2716,
+     "wr_baru": 26.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 28,
+       "wr": 28.6,
+       "avg": -0.1808
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 56,
+     "wr": 3.6,
+     "avg": -0.0872,
+     "t": -12.77,
+     "n_lama": 29,
+     "lama": -0.0992,
+     "wr_lama": 0.0,
+     "n_baru": 27,
+     "baru": -0.0743,
+     "wr_baru": 7.4,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 56,
+       "wr": 3.6,
+       "avg": -0.0872
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 56,
+     "wr": 23.2,
+     "avg": -0.1252,
+     "t": -2.84,
+     "n_lama": 29,
+     "lama": -0.0825,
+     "wr_lama": 20.7,
+     "n_baru": 27,
+     "baru": -0.1712,
+     "wr_baru": 25.9,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 56,
+       "wr": 23.2,
+       "avg": -0.1252
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 56,
+     "wr": 3.6,
+     "avg": -0.0888,
+     "t": -12.11,
+     "n_lama": 29,
+     "lama": -0.0786,
+     "wr_lama": 6.9,
+     "n_baru": 27,
+     "baru": -0.0997,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 56,
+       "wr": 3.6,
+       "avg": -0.0888
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 56,
+     "wr": 42.9,
+     "avg": -0.0242,
+     "t": -0.7,
+     "n_lama": 29,
+     "lama": -0.0382,
+     "wr_lama": 44.8,
+     "n_baru": 27,
+     "baru": -0.0091,
+     "wr_baru": 40.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 56,
+       "wr": 42.9,
+       "avg": -0.0242
+      }
+     }
+    }
+   }
+  },
+  "FOMC": {
+   "XAU": {
+    "BUY|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 88,
+     "wr": 14.8,
+     "avg": -1.3198,
+     "t": -4.19,
+     "n_lama": 48,
+     "lama": -1.4305,
+     "wr_lama": 12.5,
+     "n_baru": 40,
+     "baru": -1.1868,
+     "wr_baru": 17.5,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 113,
+       "wr": 16.8,
+       "avg": -2.077
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 14.8,
+       "avg": -1.3198
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 88,
+     "wr": 43.2,
+     "avg": -1.0416,
+     "t": -0.95,
+     "n_lama": 48,
+     "lama": -0.5251,
+     "wr_lama": 41.7,
+     "n_baru": 40,
+     "baru": -1.6615,
+     "wr_baru": 45.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 113,
+       "wr": 44.2,
+       "avg": -1.1538
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 43.2,
+       "avg": -1.0416
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 88,
+     "wr": 31.8,
+     "avg": -0.7412,
+     "t": -1.18,
+     "n_lama": 48,
+     "lama": -0.9412,
+     "wr_lama": 22.9,
+     "n_baru": 40,
+     "baru": -0.5012,
+     "wr_baru": 42.5,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 113,
+       "wr": 25.7,
+       "avg": -1.1732
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 31.8,
+       "avg": -0.7412
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 88,
+     "wr": 40.9,
+     "avg": -0.7881,
+     "t": -0.83,
+     "n_lama": 48,
+     "lama": -1.0359,
+     "wr_lama": 33.3,
+     "n_baru": 40,
+     "baru": -0.4908,
+     "wr_baru": 50.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 113,
+       "wr": 40.7,
+       "avg": -1.3656
+      },
+      "XAU_EXNESS": {
+       "n": 88,
+       "wr": 40.9,
+       "avg": -0.7881
+      }
+     }
+    }
+   },
+   "BTC": {
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 73,
+     "wr": 2.7,
+     "avg": -0.198,
+     "t": -9.88,
+     "n_lama": 33,
+     "lama": -0.2972,
+     "wr_lama": 0.0,
+     "n_baru": 40,
+     "baru": -0.1162,
+     "wr_baru": 5.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 71,
+       "wr": 9.9,
+       "avg": -0.0675
+      },
+      "BTC_EXNESS": {
+       "n": 73,
+       "wr": 2.7,
+       "avg": -0.198
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 73,
+     "wr": 31.5,
+     "avg": -0.1834,
+     "t": -1.81,
+     "n_lama": 33,
+     "lama": -0.1286,
+     "wr_lama": 27.3,
+     "n_baru": 40,
+     "baru": -0.2286,
+     "wr_baru": 35.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 71,
+       "wr": 42.3,
+       "avg": -0.0443
+      },
+      "BTC_EXNESS": {
+       "n": 73,
+       "wr": 31.5,
+       "avg": -0.1834
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 73,
+     "wr": 4.1,
+     "avg": -0.2054,
+     "t": -10.09,
+     "n_lama": 33,
+     "lama": -0.2923,
+     "wr_lama": 0.0,
+     "n_baru": 40,
+     "baru": -0.1336,
+     "wr_baru": 7.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 71,
+       "wr": 15.5,
+       "avg": -0.0638
+      },
+      "BTC_EXNESS": {
+       "n": 73,
+       "wr": 4.1,
+       "avg": -0.2054
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 73,
+     "wr": 26.0,
+     "avg": -0.1664,
+     "t": -1.74,
+     "n_lama": 33,
+     "lama": -0.3369,
+     "wr_lama": 12.1,
+     "n_baru": 40,
+     "baru": -0.0258,
+     "wr_baru": 37.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 71,
+       "wr": 39.4,
+       "avg": 0.0012
+      },
+      "BTC_EXNESS": {
+       "n": 73,
+       "wr": 26.0,
+       "avg": -0.1664
+      }
+     }
+    }
+   },
+   "ETH": {
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 71,
+     "wr": 5.6,
+     "avg": -0.0906,
+     "t": -7.12,
+     "n_lama": 31,
+     "lama": -0.0876,
+     "wr_lama": 0.0,
+     "n_baru": 40,
+     "baru": -0.093,
+     "wr_baru": 10.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 71,
+       "wr": 5.6,
+       "avg": -0.0906
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 71,
+     "wr": 42.3,
+     "avg": 0.036,
+     "t": 0.28,
+     "n_lama": 31,
+     "lama": 0.0983,
+     "wr_lama": 38.7,
+     "n_baru": 40,
+     "baru": -0.0122,
+     "wr_baru": 45.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 71,
+       "wr": 42.3,
+       "avg": 0.036
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 71,
+     "wr": 18.3,
+     "avg": -0.0672,
+     "t": -3.82,
+     "n_lama": 31,
+     "lama": -0.0771,
+     "wr_lama": 9.7,
+     "n_baru": 40,
+     "baru": -0.0596,
+     "wr_baru": 25.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 71,
+       "wr": 18.3,
+       "avg": -0.0672
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 71,
+     "wr": 39.4,
+     "avg": -0.0977,
+     "t": -1.1,
+     "n_lama": 31,
+     "lama": -0.116,
+     "wr_lama": 35.5,
+     "n_baru": 40,
+     "baru": -0.0835,
+     "wr_baru": 42.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 71,
+       "wr": 39.4,
+       "avg": -0.0977
+      }
+     }
+    }
+   }
+  },
+  "JOLTS": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 25,
+     "wr": 40.0,
+     "avg": -0.3122,
+     "t": -0.56,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": -0.3122,
+     "wr_baru": 40.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 30,
+       "wr": 23.3,
+       "avg": -0.943
+      },
+      "XAU_EXNESS": {
+       "n": 25,
+       "wr": 40.0,
+       "avg": -0.3122
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 25,
+     "wr": 56.0,
+     "avg": 0.8542,
+     "t": 0.88,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": 0.8542,
+     "wr_baru": 56.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 30,
+       "wr": 50.0,
+       "avg": 0.316
+      },
+      "XAU_EXNESS": {
+       "n": 25,
+       "wr": 56.0,
+       "avg": 0.8542
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 27,
+     "wr": 29.6,
+     "avg": -0.8746,
+     "t": -1.57,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.8746,
+     "wr_baru": 29.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 32,
+       "wr": 21.9,
+       "avg": -1.2804
+      },
+      "XAU_EXNESS": {
+       "n": 27,
+       "wr": 29.6,
+       "avg": -0.8746
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 27,
+     "wr": 51.9,
+     "avg": -0.3519,
+     "t": -0.36,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.3519,
+     "wr_baru": 51.9,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 32,
+       "wr": 46.9,
+       "avg": -0.6107
+      },
+      "XAU_EXNESS": {
+       "n": 27,
+       "wr": 51.9,
+       "avg": -0.3519
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 27,
+     "wr": 37.0,
+     "avg": -0.6424,
+     "t": -1.14,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.6424,
+     "wr_baru": 37.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 32,
+       "wr": 21.9,
+       "avg": -1.2618
+      },
+      "XAU_EXNESS": {
+       "n": 27,
+       "wr": 37.0,
+       "avg": -0.6424
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 27,
+     "wr": 48.1,
+     "avg": -0.6319,
+     "t": -0.57,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.6319,
+     "wr_baru": 48.1,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 32,
+       "wr": 40.6,
+       "avg": -1.0681
+      },
+      "XAU_EXNESS": {
+       "n": 27,
+       "wr": 48.1,
+       "avg": -0.6319
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 25,
+     "wr": 20.0,
+     "avg": -0.0916,
+     "t": -3.42,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": -0.0916,
+     "wr_baru": 20.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 25,
+       "wr": 32.0,
+       "avg": -0.063
+      },
+      "BTC_EXNESS": {
+       "n": 25,
+       "wr": 20.0,
+       "avg": -0.0916
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 25,
+     "wr": 40.0,
+     "avg": -0.0599,
+     "t": -1.15,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": -0.0599,
+     "wr_baru": 40.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 25,
+       "wr": 44.0,
+       "avg": -0.0377
+      },
+      "BTC_EXNESS": {
+       "n": 25,
+       "wr": 40.0,
+       "avg": -0.0599
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 27,
+     "wr": 0.0,
+     "avg": -0.0989,
+     "t": -10.28,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.0989,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 27,
+       "wr": 3.7,
+       "avg": -0.0673
+      },
+      "BTC_EXNESS": {
+       "n": 27,
+       "wr": 0.0,
+       "avg": -0.0989
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 27,
+     "wr": 33.3,
+     "avg": -0.0588,
+     "t": -1.0,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.0588,
+     "wr_baru": 33.3,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 27,
+       "wr": 48.1,
+       "avg": -0.0231
+      },
+      "BTC_EXNESS": {
+       "n": 27,
+       "wr": 33.3,
+       "avg": -0.0588
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 27,
+     "wr": 14.8,
+     "avg": -0.1006,
+     "t": -3.66,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.1006,
+     "wr_baru": 14.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 27,
+       "wr": 22.2,
+       "avg": -0.0601
+      },
+      "BTC_EXNESS": {
+       "n": 27,
+       "wr": 14.8,
+       "avg": -0.1006
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 27,
+     "wr": 37.0,
+     "avg": -0.1003,
+     "t": -1.66,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.1003,
+     "wr_baru": 37.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 27,
+       "wr": 40.7,
+       "avg": -0.0619
+      },
+      "BTC_EXNESS": {
+       "n": 27,
+       "wr": 37.0,
+       "avg": -0.1003
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 25,
+     "wr": 20.0,
+     "avg": -0.0766,
+     "t": -2.65,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": -0.0766,
+     "wr_baru": 20.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 25,
+       "wr": 20.0,
+       "avg": -0.0766
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 25,
+     "wr": 44.0,
+     "avg": -0.0629,
+     "t": -0.75,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 25,
+     "baru": -0.0629,
+     "wr_baru": 44.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 25,
+       "wr": 44.0,
+       "avg": -0.0629
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 27,
+     "wr": 18.5,
+     "avg": -0.0836,
+     "t": -4.09,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.0836,
+     "wr_baru": 18.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 27,
+       "wr": 18.5,
+       "avg": -0.0836
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 27,
+     "wr": 33.3,
+     "avg": -0.0454,
+     "t": -1.07,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.0454,
+     "wr_baru": 33.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 27,
+       "wr": 33.3,
+       "avg": -0.0454
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 27,
+     "wr": 18.5,
+     "avg": -0.081,
+     "t": -2.96,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.081,
+     "wr_baru": 18.5,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 27,
+       "wr": 18.5,
+       "avg": -0.081
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 27,
+     "wr": 44.4,
+     "avg": -0.035,
+     "t": -0.42,
+     "n_lama": 0,
+     "lama": null,
+     "wr_lama": null,
+     "n_baru": 27,
+     "baru": -0.035,
+     "wr_baru": 44.4,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 27,
+       "wr": 44.4,
+       "avg": -0.035
+      }
+     }
+    }
+   }
+  },
+  "ISM": {
+   "XAU": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 114,
+     "wr": 39.5,
+     "avg": -0.3109,
+     "t": -1.23,
+     "n_lama": 58,
+     "lama": -0.707,
+     "wr_lama": 22.4,
+     "n_baru": 56,
+     "baru": 0.0994,
+     "wr_baru": 57.1,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 27,
+       "wr": 44.4,
+       "avg": -0.4561
+      },
+      "XAU_EXNESS": {
+       "n": 114,
+       "wr": 39.5,
+       "avg": -0.3109
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 114,
+     "wr": 38.6,
+     "avg": -0.3431,
+     "t": -1.1,
+     "n_lama": 58,
+     "lama": -0.5437,
+     "wr_lama": 34.5,
+     "n_baru": 56,
+     "baru": -0.1353,
+     "wr_baru": 42.9,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 27,
+       "wr": 44.4,
+       "avg": 0.0589
+      },
+      "XAU_EXNESS": {
+       "n": 114,
+       "wr": 38.6,
+       "avg": -0.3431
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 231,
+     "wr": 30.7,
+     "avg": -0.7196,
+     "t": -4.37,
+     "n_lama": 130,
+     "lama": -1.0055,
+     "wr_lama": 19.2,
+     "n_baru": 101,
+     "baru": -0.3515,
+     "wr_baru": 45.5,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 54,
+       "wr": 31.5,
+       "avg": -0.3332
+      },
+      "XAU_EXNESS": {
+       "n": 231,
+       "wr": 30.7,
+       "avg": -0.7196
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 231,
+     "wr": 35.5,
+     "avg": -0.9103,
+     "t": -3.72,
+     "n_lama": 130,
+     "lama": -0.9894,
+     "wr_lama": 30.8,
+     "n_baru": 101,
+     "baru": -0.8085,
+     "wr_baru": 41.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 54,
+       "wr": 44.4,
+       "avg": -0.4116
+      },
+      "XAU_EXNESS": {
+       "n": 231,
+       "wr": 35.5,
+       "avg": -0.9103
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 231,
+     "wr": 26.8,
+     "avg": -1.0823,
+     "t": -6.81,
+     "n_lama": 130,
+     "lama": -1.0304,
+     "wr_lama": 20.0,
+     "n_baru": 101,
+     "baru": -1.1492,
+     "wr_baru": 35.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 54,
+       "wr": 14.8,
+       "avg": -2.0392
+      },
+      "XAU_EXNESS": {
+       "n": 231,
+       "wr": 26.8,
+       "avg": -1.0823
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 231,
+     "wr": 39.8,
+     "avg": -0.9506,
+     "t": -3.76,
+     "n_lama": 130,
+     "lama": -0.8491,
+     "wr_lama": 36.2,
+     "n_baru": 101,
+     "baru": -1.0812,
+     "wr_baru": 44.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 54,
+       "wr": 35.2,
+       "avg": -1.7874
+      },
+      "XAU_EXNESS": {
+       "n": 231,
+       "wr": 39.8,
+       "avg": -0.9506
+      }
+     }
+    }
+   },
+   "BTC": {
+    "petunjuk|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 90,
+     "wr": 7.8,
+     "avg": -0.1627,
+     "t": -10.13,
+     "n_lama": 34,
+     "lama": -0.2567,
+     "wr_lama": 0.0,
+     "n_baru": 56,
+     "baru": -0.1056,
+     "wr_baru": 12.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 88,
+       "wr": 18.2,
+       "avg": -0.0611
+      },
+      "BTC_EXNESS": {
+       "n": 90,
+       "wr": 7.8,
+       "avg": -0.1627
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 90,
+     "wr": 25.6,
+     "avg": -0.2093,
+     "t": -4.96,
+     "n_lama": 34,
+     "lama": -0.2369,
+     "wr_lama": 20.6,
+     "n_baru": 56,
+     "baru": -0.1925,
+     "wr_baru": 28.6,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 88,
+       "wr": 35.2,
+       "avg": -0.1167
+      },
+      "BTC_EXNESS": {
+       "n": 90,
+       "wr": 25.6,
+       "avg": -0.2093
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 180,
+     "wr": 7.2,
+     "avg": -0.1757,
+     "t": -14.03,
+     "n_lama": 79,
+     "lama": -0.2605,
+     "wr_lama": 0.0,
+     "n_baru": 101,
+     "baru": -0.1093,
+     "wr_baru": 12.9,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 177,
+       "wr": 16.9,
+       "avg": -0.0629
+      },
+      "BTC_EXNESS": {
+       "n": 180,
+       "wr": 7.2,
+       "avg": -0.1757
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 180,
+     "wr": 16.1,
+     "avg": -0.1548,
+     "t": -5.97,
+     "n_lama": 79,
+     "lama": -0.269,
+     "wr_lama": 6.3,
+     "n_baru": 101,
+     "baru": -0.0655,
+     "wr_baru": 23.8,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 177,
+       "wr": 31.1,
+       "avg": -0.0436
+      },
+      "BTC_EXNESS": {
+       "n": 180,
+       "wr": 16.1,
+       "avg": -0.1548
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 180,
+     "wr": 3.9,
+     "avg": -0.183,
+     "t": -17.27,
+     "n_lama": 79,
+     "lama": -0.2685,
+     "wr_lama": 0.0,
+     "n_baru": 101,
+     "baru": -0.1161,
+     "wr_baru": 6.9,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 177,
+       "wr": 11.3,
+       "avg": -0.0721
+      },
+      "BTC_EXNESS": {
+       "n": 180,
+       "wr": 3.9,
+       "avg": -0.183
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 180,
+     "wr": 30.6,
+     "avg": -0.1499,
+     "t": -4.98,
+     "n_lama": 79,
+     "lama": -0.1983,
+     "wr_lama": 19.0,
+     "n_baru": 101,
+     "baru": -0.112,
+     "wr_baru": 39.6,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 177,
+       "wr": 40.1,
+       "avg": -0.0445
+      },
+      "BTC_EXNESS": {
+       "n": 180,
+       "wr": 30.6,
+       "avg": -0.1499
+      }
+     }
+    }
+   },
+   "ETH": {
+    "petunjuk|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 88,
+     "wr": 10.2,
+     "avg": -0.0861,
+     "t": -8.23,
+     "n_lama": 32,
+     "lama": -0.0887,
+     "wr_lama": 3.1,
+     "n_baru": 56,
+     "baru": -0.0846,
+     "wr_baru": 14.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 88,
+       "wr": 10.2,
+       "avg": -0.0861
+      }
+     }
+    },
+    "petunjuk|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 88,
+     "wr": 34.1,
+     "avg": -0.1318,
+     "t": -2.43,
+     "n_lama": 32,
+     "lama": -0.0812,
+     "wr_lama": 34.4,
+     "n_baru": 56,
+     "baru": -0.1607,
+     "wr_baru": 33.9,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 88,
+       "wr": 34.1,
+       "avg": -0.1318
+      }
+     }
+    },
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 177,
+     "wr": 14.1,
+     "avg": -0.0784,
+     "t": -9.53,
+     "n_lama": 76,
+     "lama": -0.0749,
+     "wr_lama": 10.5,
+     "n_baru": 101,
+     "baru": -0.0811,
+     "wr_baru": 16.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 177,
+       "wr": 14.1,
+       "avg": -0.0784
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 177,
+     "wr": 25.4,
+     "avg": -0.0774,
+     "t": -4.21,
+     "n_lama": 76,
+     "lama": -0.0952,
+     "wr_lama": 22.4,
+     "n_baru": 101,
+     "baru": -0.064,
+     "wr_baru": 27.7,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 177,
+       "wr": 25.4,
+       "avg": -0.0774
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 177,
+     "wr": 11.9,
+     "avg": -0.0947,
+     "t": -13.71,
+     "n_lama": 76,
+     "lama": -0.0963,
+     "wr_lama": 1.3,
+     "n_baru": 101,
+     "baru": -0.0935,
+     "wr_baru": 19.8,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 177,
+       "wr": 11.9,
+       "avg": -0.0947
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 177,
+     "wr": 40.7,
+     "avg": -0.0185,
+     "t": -0.55,
+     "n_lama": 76,
+     "lama": 0.0182,
+     "wr_lama": 36.8,
+     "n_baru": 101,
+     "baru": -0.0461,
+     "wr_baru": 43.6,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 177,
+       "wr": 40.7,
+       "avg": -0.0185
+      }
+     }
+    }
+   }
+  },
+  "ADP": {
+   "XAU": {
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 105,
+     "wr": 28.6,
+     "avg": -1.1187,
+     "t": -5.82,
+     "n_lama": 55,
+     "lama": -1.361,
+     "wr_lama": 16.4,
+     "n_baru": 50,
+     "baru": -0.8521,
+     "wr_baru": 42.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 167,
+       "wr": 23.4,
+       "avg": -1.3232
+      },
+      "XAU_EXNESS": {
+       "n": 105,
+       "wr": 28.6,
+       "avg": -1.1187
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "1 mnt",
+     "detik": 60,
+     "n": 105,
+     "wr": 36.2,
+     "avg": -0.8226,
+     "t": -3.12,
+     "n_lama": 55,
+     "lama": -1.1816,
+     "wr_lama": 27.3,
+     "n_baru": 50,
+     "baru": -0.4276,
+     "wr_baru": 46.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 167,
+       "wr": 32.3,
+       "avg": -1.0564
+      },
+      "XAU_EXNESS": {
+       "n": 105,
+       "wr": 36.2,
+       "avg": -0.8226
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 105,
+     "wr": 22.9,
+     "avg": -0.837,
+     "t": -5.11,
+     "n_lama": 55,
+     "lama": -0.827,
+     "wr_lama": 18.2,
+     "n_baru": 50,
+     "baru": -0.848,
+     "wr_baru": 28.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 167,
+       "wr": 21.6,
+       "avg": -0.9912
+      },
+      "XAU_EXNESS": {
+       "n": 105,
+       "wr": 22.9,
+       "avg": -0.837
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "4 mnt",
+     "detik": 240,
+     "n": 105,
+     "wr": 41.0,
+     "avg": -0.782,
+     "t": -2.71,
+     "n_lama": 55,
+     "lama": -0.4971,
+     "wr_lama": 47.3,
+     "n_baru": 50,
+     "baru": -1.0954,
+     "wr_baru": 34.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 167,
+       "wr": 40.1,
+       "avg": -0.7921
+      },
+      "XAU_EXNESS": {
+       "n": 105,
+       "wr": 41.0,
+       "avg": -0.782
+      }
+     }
+    }
+   },
+   "BTC": {
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 78,
+     "wr": 1.3,
+     "avg": -0.1753,
+     "t": -10.12,
+     "n_lama": 28,
+     "lama": -0.284,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -0.1144,
+     "wr_baru": 2.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 76,
+       "wr": 10.5,
+       "avg": -0.0717
+      },
+      "BTC_EXNESS": {
+       "n": 78,
+       "wr": 1.3,
+       "avg": -0.1753
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 78,
+     "wr": 25.6,
+     "avg": -0.1357,
+     "t": -5.19,
+     "n_lama": 28,
+     "lama": -0.1941,
+     "wr_lama": 25.0,
+     "n_baru": 50,
+     "baru": -0.103,
+     "wr_baru": 26.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 76,
+       "wr": 34.2,
+       "avg": -0.037
+      },
+      "BTC_EXNESS": {
+       "n": 78,
+       "wr": 25.6,
+       "avg": -0.1357
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 78,
+     "wr": 0.0,
+     "avg": -0.1731,
+     "t": -10.87,
+     "n_lama": 28,
+     "lama": -0.2862,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -0.1098,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 76,
+       "wr": 1.3,
+       "avg": -0.0735
+      },
+      "BTC_EXNESS": {
+       "n": 78,
+       "wr": 0.0,
+       "avg": -0.1731
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 78,
+     "wr": 10.3,
+     "avg": -0.1888,
+     "t": -8.48,
+     "n_lama": 28,
+     "lama": -0.302,
+     "wr_lama": 7.1,
+     "n_baru": 50,
+     "baru": -0.1254,
+     "wr_baru": 12.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 76,
+       "wr": 21.1,
+       "avg": -0.0943
+      },
+      "BTC_EXNESS": {
+       "n": 78,
+       "wr": 10.3,
+       "avg": -0.1888
+      }
+     }
+    }
+   },
+   "ETH": {
+    "BUY|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 76,
+     "wr": 3.9,
+     "avg": -0.0916,
+     "t": -13.45,
+     "n_lama": 26,
+     "lama": -0.0812,
+     "wr_lama": 3.8,
+     "n_baru": 50,
+     "baru": -0.0969,
+     "wr_baru": 4.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 76,
+       "wr": 3.9,
+       "avg": -0.0916
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 76,
+     "wr": 34.2,
+     "avg": -0.0534,
+     "t": -2.15,
+     "n_lama": 26,
+     "lama": 0.0193,
+     "wr_lama": 50.0,
+     "n_baru": 50,
+     "baru": -0.0913,
+     "wr_baru": 26.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 76,
+       "wr": 34.2,
+       "avg": -0.0534
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "2 dtk",
+     "detik": 2,
+     "n": 76,
+     "wr": 0.0,
+     "avg": -0.0898,
+     "t": -21.61,
+     "n_lama": 26,
+     "lama": -0.0943,
+     "wr_lama": 0.0,
+     "n_baru": 50,
+     "baru": -0.0874,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 76,
+       "wr": 0.0,
+       "avg": -0.0898
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 76,
+     "wr": 15.8,
+     "avg": -0.119,
+     "t": -6.0,
+     "n_lama": 26,
+     "lama": -0.1178,
+     "wr_lama": 15.4,
+     "n_baru": 50,
+     "baru": -0.1197,
+     "wr_baru": 16.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 76,
+       "wr": 15.8,
+       "avg": -0.119
+      }
+     }
+    }
+   }
+  },
+  "CLAIMS": {
+   "XAU": {
+    "BUY|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 207,
+     "wr": 11.1,
+     "avg": -1.1271,
+     "t": -13.17,
+     "n_lama": 109,
+     "lama": -1.2204,
+     "wr_lama": 0.9,
+     "n_baru": 98,
+     "baru": -1.0234,
+     "wr_baru": 22.4,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 78,
+       "wr": 1.3,
+       "avg": -1.6319
+      },
+      "XAU_EXNESS": {
+       "n": 207,
+       "wr": 11.1,
+       "avg": -1.1271
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 207,
+     "wr": 21.3,
+     "avg": -1.4725,
+     "t": -9.13,
+     "n_lama": 109,
+     "lama": -1.2983,
+     "wr_lama": 11.9,
+     "n_baru": 98,
+     "baru": -1.6662,
+     "wr_baru": 31.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 78,
+       "wr": 23.1,
+       "avg": -1.7862
+      },
+      "XAU_EXNESS": {
+       "n": 207,
+       "wr": 21.3,
+       "avg": -1.4725
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 207,
+     "wr": 15.9,
+     "avg": -0.939,
+     "t": -9.93,
+     "n_lama": 109,
+     "lama": -1.1491,
+     "wr_lama": 1.8,
+     "n_baru": 98,
+     "baru": -0.7053,
+     "wr_baru": 31.6,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 78,
+       "wr": 10.3,
+       "avg": -1.1247
+      },
+      "XAU_EXNESS": {
+       "n": 207,
+       "wr": 15.9,
+       "avg": -0.939
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "3 mnt",
+     "detik": 180,
+     "n": 207,
+     "wr": 34.3,
+     "avg": -0.5127,
+     "t": -2.82,
+     "n_lama": 109,
+     "lama": -0.8795,
+     "wr_lama": 21.1,
+     "n_baru": 98,
+     "baru": -0.1048,
+     "wr_baru": 49.0,
+     "teruji": false,
+     "feed": {
+      "XAU": {
+       "n": 78,
+       "wr": 30.8,
+       "avg": -0.5538
+      },
+      "XAU_EXNESS": {
+       "n": 207,
+       "wr": 34.3,
+       "avg": -0.5127
+      }
+     }
+    }
+   },
+   "BTC": {
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 115,
+     "wr": 7.0,
+     "avg": -0.1144,
+     "t": -10.23,
+     "n_lama": 17,
+     "lama": -0.2667,
+     "wr_lama": 0.0,
+     "n_baru": 98,
+     "baru": -0.088,
+     "wr_baru": 8.2,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 8.5,
+       "avg": -0.0646
+      },
+      "BTC_EXNESS": {
+       "n": 115,
+       "wr": 7.0,
+       "avg": -0.1144
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 115,
+     "wr": 23.5,
+     "avg": -0.0923,
+     "t": -4.57,
+     "n_lama": 17,
+     "lama": -0.236,
+     "wr_lama": 11.8,
+     "n_baru": 98,
+     "baru": -0.0674,
+     "wr_baru": 25.5,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 28.3,
+       "avg": -0.0353
+      },
+      "BTC_EXNESS": {
+       "n": 115,
+       "wr": 23.5,
+       "avg": -0.0923
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "3 dtk",
+     "detik": 3,
+     "n": 115,
+     "wr": 0.0,
+     "avg": -0.1229,
+     "t": -10.72,
+     "n_lama": 17,
+     "lama": -0.2828,
+     "wr_lama": 0.0,
+     "n_baru": 98,
+     "baru": -0.0951,
+     "wr_baru": 0.0,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 0.9,
+       "avg": -0.0724
+      },
+      "BTC_EXNESS": {
+       "n": 115,
+       "wr": 0.0,
+       "avg": -0.1229
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 115,
+     "wr": 33.9,
+     "avg": -0.0981,
+     "t": -3.7,
+     "n_lama": 17,
+     "lama": -0.136,
+     "wr_lama": 23.5,
+     "n_baru": 98,
+     "baru": -0.0916,
+     "wr_baru": 35.7,
+     "teruji": false,
+     "feed": {
+      "BTC": {
+       "n": 106,
+       "wr": 34.0,
+       "avg": -0.0785
+      },
+      "BTC_EXNESS": {
+       "n": 115,
+       "wr": 33.9,
+       "avg": -0.0981
+      }
+     }
+    }
+   },
+   "ETH": {
+    "BUY|dtk": {
+     "keluar": "5 dtk",
+     "detik": 5,
+     "n": 106,
+     "wr": 9.4,
+     "avg": -0.079,
+     "t": -10.78,
+     "n_lama": 7,
+     "lama": -0.0854,
+     "wr_lama": 0.0,
+     "n_baru": 99,
+     "baru": -0.0785,
+     "wr_baru": 10.1,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 9.4,
+       "avg": -0.079
+      }
+     }
+    },
+    "BUY|mnt": {
+     "keluar": "2 mnt",
+     "detik": 120,
+     "n": 106,
+     "wr": 28.3,
+     "avg": -0.0421,
+     "t": -1.69,
+     "n_lama": 7,
+     "lama": 0.0871,
+     "wr_lama": 71.4,
+     "n_baru": 99,
+     "baru": -0.0513,
+     "wr_baru": 25.3,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 28.3,
+       "avg": -0.0421
+      }
+     }
+    },
+    "SELL|dtk": {
+     "keluar": "1 dtk",
+     "detik": 1,
+     "n": 106,
+     "wr": 2.8,
+     "avg": -0.0875,
+     "t": -22.23,
+     "n_lama": 7,
+     "lama": -0.0981,
+     "wr_lama": 0.0,
+     "n_baru": 99,
+     "baru": -0.0868,
+     "wr_baru": 3.0,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 2.8,
+       "avg": -0.0875
+      }
+     }
+    },
+    "SELL|mnt": {
+     "keluar": "5 mnt",
+     "detik": 300,
+     "n": 106,
+     "wr": 36.8,
+     "avg": -0.1193,
+     "t": -3.08,
+     "n_lama": 7,
+     "lama": -0.1353,
+     "wr_lama": 14.3,
+     "n_baru": 99,
+     "baru": -0.1182,
+     "wr_baru": 38.4,
+     "teruji": false,
+     "feed": {
+      "ETH": {
+       "n": 106,
+       "wr": 36.8,
+       "avg": -0.1193
+      }
+     }
+    }
+   }
+  }
+ }
+}

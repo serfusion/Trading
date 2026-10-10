@@ -88,6 +88,34 @@ konsensus FF terbit — aplikasi menghitung ulang otomatis; bila konsensus headl
 Semua ditampilkan di aplikasi sebagai blok **🧭 Petunjuk teruji** (ketuk baris berita) dengan dua angka: ketepatan arah
 angka dan ketepatan arah emas. Batas jujur: arah emas 1 menit SEBELUM rilis paling tinggi ±60–65%.
 
+## 8. Sumber lain selain Kalshi (research/sumber_lain.py → docs/eksternal/hasil_sumber_lain.txt)
+Diuji 2010–2025 dengan tanggal terbit (vintage FRED): breakeven 5 th, yield 2 th, minyak WTI, survei Fed daerah (harga yang
+dibayar, karyawan, aktivitas), ekspektasi inflasi UMich, klaim berlanjut, indeks ekonomi mingguan, lowongan Indeed.
+| Berita | Sumber lain yang lolos | Digabung (sepakat) |
+|---|---|---|
+| CPI headline | **minyak WTI** bulan acuan 62% (lama 60%, baru 67%) | Kalshi/kejutan lalu & WTI sepakat **76%** (32/42) vs 65% |
+| CPI y/y | WTI 62% (baru 74%) | kejutan lalu & WTI 68% |
+| Pengangguran | lowongan Indeed 67%, karyawan Fed daerah 60% | Kalshi/kejutan lalu & Indeed **75%** (27/36) |
+| ISM Jasa | aktivitas Fed daerah 62% | berbalik & aktivitas Fed **73%** (35/48) vs 64% |
+| NFP, PPI, core PCE, ISM manufaktur, JOLTS, Retail, GDP | tidak ada | – |
+Polymarket juga punya pasar CPI bulanan, tetapi baru ±8 bulan (2026) dan arsip konsensus kita berhenti Jan 2026 → belum
+bisa diuji (info saja). Truflation/PriceStats tidak punya data historis gratis.
+WTI September $97,3 vs Agustus $83,9 (+16%) → CPI headline condong DI ATAS. Bila konsensus FF 0,5%: Kalshi, kejutan lalu
+& minyak sepakat DI ATAS (historis 76%). Bila 0,6%: Kalshi DI BAWAH vs minyak DI ATAS → bertentangan.
+
+## 9. Rencana pengguna: entry 1 detik sebelum, tutup 1–5 detik / 1–5 menit — XAU, BTC, ETH (research/pra_aset.py)
+Tick Dukascopy & Exness (XAU), Binance & Exness (BTC), Binance 1 detik (ETH, diunduh 934 rilis); slippage realistis.
+Arah = petunjuk teruji tiap berita. Hasil terbaik (keluar dipilih dari periode lama):
+| Berita | XAU ($/0,01 lot) | BTC | ETH |
+|---|---|---|---|
+| CPI | tutup 1 mnt: untung 43%, rata −$1,18 | 4 mnt: 30%, −0,27% | 4 mnt: 37%, −0,11% |
+| NFP | 1 mnt: 54%, −$0,43 | 1 mnt: 35%, −0,14% | 5 mnt: 41%, −0,08% |
+| PPI | 1 mnt: 36%, −$0,31 | 4 mnt: 28%, −0,14% | 1 mnt: 32%, −0,00% |
+| ISM | 5 dtk: 40%, −$0,31 | 4 mnt: 26%, −0,21% | 5 mnt: 34%, −0,13% |
+| GDP | 2 mnt: 31%, −$0,44 | 1 mnt: 11%, −0,28% | 3 mnt: 29%, −0,18% |
+Tutup 1–5 DETIK selalu lebih buruk (spread + slippage > gerak awal; BTC/ETH untung 0–30% rilis). 0 yang teruji positif.
+Angka per berita berikutnya tampil di bawah tile XAU · BTC · ETH (aplikasi 4.27, 🔴 = rata-rata rugi).
+
 ## Sumber
 - Kalshi API (KXCPI, KXCPICORE, KXCPIYOY), nowcast Cleveland Fed (`nowcast_month.json`), GDPNow Atlanta Fed, FRED.
 - Preview konsensus & konteks: admiralmarkets.com (US CPI September 2026 Preview), fxstreet.com (TD Securities core CPI),

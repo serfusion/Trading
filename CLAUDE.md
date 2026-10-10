@@ -406,6 +406,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   sebaran Kalshi sebelum konsensus. Menggabungkan sumber lemah menurunkan ketepatan — gabung hanya bila diuji naik.
   Arah ANGKA ±60–80% ≠ arah EMAS (±55–65%). Entry t−1 dtk: 0 lolos (pra_gabung).
 - Jaringan sesi dibuka penuh 10 Okt (GDELT 429, Truth Social/CNBC/investing 403).
+- Sumber lain (`research/sumber_lain.py`, jalankan SETELAH berita_gabung karena menggabung ke petunjuk.json): WTI → CPI,
+  Indeed & karyawan Fed daerah → pengangguran, aktivitas Fed daerah → ISM Jasa; dibaca cloud lewat FRED/Indeed (cache
+  `petunjuk_sumber` 6 jam). ⏱️ Rencana entry t−1 dtk tutup 1–5 dtk/mnt (`research/pra_aset.py`, ETH 1 dtk di
+  `data/research/eksternal/binance_1s_eth/`): semua rata-rata rugi → `_pra_aset.py` + sel di bawah tile (aplikasi 4.27).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

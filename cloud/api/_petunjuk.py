@@ -17,13 +17,21 @@ from datetime import datetime
 from pathlib import Path
 
 _PATH = Path(__file__).resolve().parent / "petunjuk.json"
-ATURAN = (json.loads(_PATH.read_text(encoding="utf-8")).get("aturan") or {}) if _PATH.exists() else {}
+_DATA = json.loads(_PATH.read_text(encoding="utf-8")) if _PATH.exists() else {}
+ATURAN = _DATA.get("aturan") or {}
+SEPAKAT_LAIN = _DATA.get("sepakat") or {}       # research/sumber_lain.py: petunjuk lama & sumber lain sepakat
+INDEED = "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/master/US/aggregate_job_postings_US.csv"
+SUMBER_TTL = 6 * 3600
 # kejutan terakhir yang sudah lewat dari kalender pekan ini (diisi tangan dari laporan resmi; dipakai bila memori kosong)
 SEED = {"CPI m/m": {"s": 0, "time": "2026-09-11T12:30:00+00:00"},          # Agu 2026: 0,4% = konsensus 0,4%
         "Core CPI m/m": {"s": 1, "time": "2026-09-11T12:30:00+00:00"}}     # Agu 2026: 0,3% > konsensus 0,2%
 SEPAKAT = (16, 20)            # Kalshi & kejutan bulan lalu sepakat (CPI + core CPI 2022–2025): 16 dari 20 benar
 NAMA = {"P": "Kejutan bulan lalu (searah)", "-P": "Kejutan bulan lalu (berbalik)", "K": "Pasar Kalshi",
-        "K|P": "Kalshi, cadangan kejutan lalu", "G": "GDPNow Atlanta Fed"}
+        "K|P": "Kalshi, cadangan kejutan lalu", "G": "GDPNow Atlanta Fed", "WTI": "Minyak WTI bulan acuan",
+        "IND": "Lowongan Indeed bulan acuan", "EMP": "Survei karyawan Fed daerah (Empire, Philly)",
+        "GA": "Survei aktivitas Fed daerah (Empire, Philly)"}
+FRED_SERI = {"WTI": ["DCOILWTICO"], "EMP": ["NECDISA066MSFRBNY", "NFBNDIF066MSFRBPHI"],
+             "GA": ["GACDFSA066MSFRBPHI", "GACDISA066MSFRBNY"]}
 INVERS = ("Unemployment Rate", "Unemployment Claims")      # angka naik = buruk bagi ekonomi
 
 
@@ -82,7 +90,98 @@ def gdpnow(env: dict) -> float | None:
         return None
 
 
-def blok(card: dict, mem: dict, env: dict | None = None) -> dict | None:
+def _fred(series: str, key: str, mulai: str) -> list[list]:
+    import urllib.request
+    u = (f"https://api.stlouisfed.org/fred/series/observations?series_id={series}&observation_start={mulai}"
+         f"&file_type=json&api_key={key}")
+    with urllib.request.urlopen(u, timeout=8) as r:
+        return [[o["date"], float(o["value"])] for o in json.load(r).get("observations") or [] if o["value"] != "."]
+
+
+def _indeed() -> list[list]:
+    import urllib.request
+    with urllib.request.urlopen(urllib.request.Request(INDEED, headers={"User-Agent": "xau-signal"}), timeout=8) as r:
+        rows = r.read().decode("utf-8").splitlines()[1:]
+    out = []
+    for line in rows:
+        x = line.split(",")
+        if len(x) >= 5 and x[4] == "total postings":
+            out.append([x[0], float(x[2])])
+    return out[-200:]
+
+
+def sumber(store, now: datetime, env: dict | None) -> dict:
+    """Data sumber lain (FRED: WTI & survei Fed daerah; Indeed) — cache baris Supabase 'petunjuk_sumber' 6 jam."""
+    old = {}
+    if store is not None:
+        try:
+            old = store.get_state("petunjuk_sumber") or {}
+        except Exception:  # noqa: BLE001
+            old = {}
+    if old.get("t") and now.timestamp() - old["t"] < SUMBER_TTL:
+        return old
+    data, key = {"t": now.timestamp()}, (env or {}).get("FRED_API_KEY")
+    mulai = f"{now.year - 1}-{now.month:02d}-01"
+    for kode, seri in FRED_SERI.items():
+        if not key:
+            break
+        for nama in seri:
+            try:
+                data[nama] = _fred(nama, key, mulai)
+            except Exception:  # noqa: BLE001 - sumber opsional
+                pass
+    try:
+        data["INDEED"] = _indeed()
+    except Exception:  # noqa: BLE001
+        pass
+    if len(data) == 1 and old:
+        return old
+    if store is not None:
+        try:
+            store.save_state(data, "petunjuk_sumber")
+        except Exception:  # noqa: BLE001
+            pass
+    return data
+
+
+def _bulan(rows: list, t: datetime) -> float | None:
+    """Rata-rata bulan acuan (bulan sebelum rilis) − bulan sebelumnya."""
+    y, m = (t.year, t.month - 1) if t.month > 1 else (t.year - 1, 12)
+    y0, m0 = (y, m - 1) if m > 1 else (y - 1, 12)
+    a = [v for d, v in rows if d[:7] == f"{y}-{m:02d}"]
+    b = [v for d, v in rows if d[:7] == f"{y0}-{m0:02d}"]
+    return (sum(a) / len(a) - sum(b) / len(b)) if a and b else None
+
+
+def _naik(rows: list) -> float | None:
+    return rows[-1][1] - rows[-2][1] if len(rows) >= 2 else None
+
+
+def _tanda(v) -> float | None:
+    return None if v is None or v == 0 else (1.0 if v > 0 else -1.0)
+
+
+def tanda_lain(kode: str, title: str, card: dict, data: dict) -> float | None:
+    """Tanda tebakan (+1 di atas / −1 di bawah konsensus) sumber lain, aturan sama dengan research/sumber_lain.py."""
+    try:
+        t = datetime.fromisoformat(card["time"])
+    except (KeyError, ValueError, TypeError):
+        return None
+    if kode == "WTI":
+        s = _tanda(_bulan(data.get("DCOILWTICO") or [], t))
+    elif kode == "IND":
+        s = _tanda(_bulan(data.get("INDEED") or [], t))
+    elif kode in ("EMP", "GA"):
+        tot = sum(x for x in (_tanda(_naik(data.get(n) or [])) for n in FRED_SERI[kode]) if x)
+        s = _tanda(tot)
+    else:
+        return None
+    if s is not None and title in INVERS and kode in ("IND", "EMP"):
+        s = -s                                          # data kerja kuat → pengangguran DI BAWAH
+    return s
+
+
+def blok(card: dict, mem: dict, env: dict | None = None, data: dict | None = None) -> dict | None:
     """{"judul", "teks", "catatan", "arah_emas"} untuk satu berita; None bila tidak ada aturan teruji / petunjuk."""
     title = card.get("title") or ""
     rules = ATURAN.get(title) or {}
@@ -108,6 +207,8 @@ def blok(card: dict, mem: dict, env: dict | None = None) -> dict | None:
             g, f = gdpnow(env or {}), _num(card.get("forecast"))
             if g is not None and f is not None and abs(g - f) >= 0.2:
                 s = 1.0 if g > f else -1.0
+        elif kode in ("WTI", "IND", "EMP", "GA"):
+            s = tanda_lain(kode, title, card, data or {})
         if s is None:
             continue
         tebak[kode] = s
@@ -124,8 +225,15 @@ def blok(card: dict, mem: dict, env: dict | None = None) -> dict | None:
     utama = tebak.get("K", tebak.get("K|P", tebak.get("G", next(iter(tebak.values())))))
     sepakat = "K" in tebak and s_lalu and float(s_lalu) == tebak["K"]
     teks = f"Angka condong {_kata(utama)} perkiraan"
+    lain = [(kk, kn) for kk, kn in (SEPAKAT_LAIN.get(title) or {}).items()
+            if kk.split("&")[0] in tebak and kk.split("&")[1] in tebak
+            and tebak[kk.split("&")[0]] == tebak[kk.split("&")[1]]]
     if sepakat:
         teks += f" — Kalshi & kejutan bulan lalu SEPAKAT (historis {_pct(*SEPAKAT)} benar)"
+    elif lain:
+        kk, (k2, n2) = max(lain, key=lambda x: x[1][0] / max(x[1][1], 1))
+        a, b = kk.split("&")
+        teks += f" — {NAMA.get(a, a)} & {NAMA.get(b, b)} SEPAKAT (historis {_pct(k2, n2)} benar)"
     elif len(set(tebak.values())) > 1:
         teks += " — petunjuk BERTENTANGAN, pakai yang paling teruji (Kalshi)"
     # arah emas: angka di bawah perkiraan → emas naik (kecuali berita "buruk = naik" seperti pengangguran)
@@ -143,7 +251,8 @@ def attach(persiapan: dict, calendar: list, store, now: datetime, env: dict | No
     if not any(c.get("title") in ATURAN for c in kartu):
         return
     mem = ingat(calendar, store, now)
+    data = sumber(store, now, env)
     for c in kartu:
-        b = blok(c, mem, env)
+        b = blok(c, mem, env, data)
         if b:
             c["petunjuk_teruji"] = b

@@ -243,3 +243,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Tes lambat `tests/test_cloud_{star,h4,funding}.py` > 5 menit juga di kode lama (bukan karena perubahan ini).
 - ⚠️ Keamanan: ada branch remote bernama seperti token GitHub (`github_pat_11AK…`) — pengguna diminta mencabut token itu
   dan menghapus branch-nya (belum dihapus: menunggu izin).
+- Lanjutan 10 Okt: sumber lain selain Kalshi (`research/sumber_lain.py`: WTI, Indeed, survei Fed daerah lolos; breakeven,
+  yield 2 th, UMich, klaim, WEI tidak) → 🧭 cloud; rencana pengguna entry t−1 dtk tutup 1–5 dtk/mnt untuk XAU/BTC/ETH
+  (`research/pra_aset.py`, data ETH 1 dtk 934 rilis) → semua rugi rata-rata; tampil di bawah tile (aplikasi 4.27).

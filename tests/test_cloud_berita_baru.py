@@ -87,3 +87,22 @@ def test_pernyataan_saring_dan_cache():
     prep2 = {}
     _pernyataan.attach(prep2, st_, NOW, {}, lambda *a, **k: (_ for _ in ()).throw(OSError("x")))   # cache 10 mnt
     assert prep2["pernyataan"]["penting"] == prep["pernyataan"]["penting"]
+
+
+def test_pra_aset_sel_per_aset(monkeypatch):
+    """⏱️ entry 1 dtk sebelum berita: sel XAU/BTC/ETH di bawah tile (arah dari petunjuk, keluar terbaik, status jujur)."""
+    import _pra_aset as A
+    rec = lambda avg, ter=False: {"keluar": "3 dtk", "detik": 3, "n": 40, "wr": 62.0, "avg": avg, "baru": avg,  # noqa: E731
+                                  "wr_baru": 60.0, "teruji": ter}
+    monkeypatch.setattr(A, "DATA", {"berita": {"CPI": {
+        "XAU": {"petunjuk|dtk": rec(0.7), "petunjuk|mnt": rec(-0.2)},
+        "BTC": {"petunjuk|dtk": rec(-0.01)}, "ETH": {}}}})
+    prep = {"mendatang": [{"title": "CPI m/m", "time": T0, "when": "Rab 14 Okt 19:30 WIB",
+                           "petunjuk_teruji": {"arah_emas": "turun"}}]}
+    A.attach(prep, NOW)
+    a = prep["pra"]["aset"]
+    assert a["XAU"]["teks"] == "SELL • tutup 3 dtk" and a["XAU"]["status"] == "belum terbukti" and "⚠️" in a["XAU"]["kecil"]
+    assert a["BTC"]["status"] == "rugi" and a["ETH"]["status"] == "acak"
+    prep2 = {"mendatang": [{"title": "CPI m/m", "time": T0}]}            # tanpa petunjuk → 50:50
+    A.attach(prep2, NOW)
+    assert prep2["pra"]["aset"]["XAU"]["teks"] == "arah ≈ 50:50"

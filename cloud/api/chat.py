@@ -244,6 +244,12 @@ class handler(BaseHTTPRequestHandler):
                     _prediksi.attach(persiapan, store, now, os.environ)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+            if isinstance(persiapan, dict):
+                try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
+                    import _pra_aset
+                    _pra_aset.attach(persiapan, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1":
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)
