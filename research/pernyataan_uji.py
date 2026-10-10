@@ -178,9 +178,44 @@ DOVE = r"(accommodative|accommodation|rate cuts?|cut rates|lower rates|easing|do
        r"(?:has )?(?:weakened|cooled))"
 
 
+def unduh_fed() -> None:
+    """Teks pidato Dewan Gubernur Fed (federalreserve.gov/json/ne-speeches.json). File .txt tidak di-commit (.gitignore)
+    → diunduh ulang bila belum ada. Situs menolak User-Agent bawaan urllib (403), jadi memakai User-Agent curl."""
+    import json
+    import time
+    import urllib.request
+    from concurrent.futures import ThreadPoolExecutor
+    fd = D / "fed"
+    fd.mkdir(parents=True, exist_ok=True)
+    hdr = {"User-Agent": "curl/8.5.0", "Accept": "*/*"}
+
+    def ambil(url: str) -> bytes:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=hdr), timeout=40) as r:
+            return r.read()
+    if not (fd / "daftar.json").exists():
+        src = json.loads(ambil("https://www.federalreserve.gov/json/ne-speeches.json").decode("utf-8-sig"))
+        (fd / "daftar.json").write_text(json.dumps([x for x in src if isinstance(x, dict) and x.get("l")],
+                                                   ensure_ascii=False), encoding="utf-8")
+
+    def satu(x: dict) -> None:
+        f = fd / x["l"].rsplit("/", 1)[-1].replace(".htm", ".txt")
+        for k in range(3):
+            if f.exists():
+                return
+            try:
+                html = ambil("https://www.federalreserve.gov" + x["l"]).decode("utf-8", "ignore")
+                m = re.search(r'<div[^>]*id="article"[^>]*>(.*?)<div[^>]*id="lastUpdate"', html, re.S)
+                f.write_text(re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(1) if m else html)), encoding="utf-8")
+            except Exception:  # noqa: BLE001
+                time.sleep(2 * (k + 1))
+    with ThreadPoolExecutor(4) as ex:
+        list(ex.map(satu, json.loads((fd / "daftar.json").read_text(encoding="utf-8"))))
+
+
 def pidato_fed() -> pd.DataFrame:
     import json
     fd = D / "fed"
+    unduh_fed()
     rows = []
     for x in json.loads((fd / "daftar.json").read_text(encoding="utf-8")):
         f = fd / x["l"].rsplit("/", 1)[-1].replace(".htm", ".txt")
