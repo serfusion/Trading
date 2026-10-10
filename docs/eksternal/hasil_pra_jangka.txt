@@ -1,0 +1,45 @@
+# ⏱️ Berlaku sampai kapan? Ketepatan arah tiap aturan 1 detik – 1 jam setelah rilis
+python -m research.pra_jangka              → docs/eksternal/hasil_pra_jangka.txt + cloud/api/pra_aset.json["jangka"]
+
+
+## CPI • Kalshi
+   1 dtk 51.4% (n 35) | 2 dtk 57.1% (n 35) | 3 dtk 57.1% (n 35) | 5 dtk 60.0% (n 35) | 10 dtk 62.9% (n 35) | 30 dtk 60.0% (n 35) | 1 mnt 57.1% (n 35) | 3 mnt 54.3% (n 35) | 5 mnt 57.1% (n 35) | 10 mnt 54.3% (n 35) | 15 mnt 54.3% (n 35) | 30 mnt 45.7% (n 35) | 1 jam 51.4% (n 35)
+
+## CPI • Kalshi & kejutan lalu sepakat
+   1 dtk 45.0% (n 20) | 2 dtk 65.0% (n 20) | 3 dtk 65.0% (n 20) | 5 dtk 65.0% (n 20) | 10 dtk 70.0% (n 20) | 30 dtk 65.0% (n 20) | 1 mnt 60.0% (n 20) | 3 mnt 50.0% (n 20) | 5 mnt 50.0% (n 20) | 10 mnt 50.0% (n 20) | 15 mnt 45.0% (n 20) | 30 mnt 45.0% (n 20) | 1 jam 55.0% (n 20)
+
+## CPI • Kalshi, cadangan kejutan lalu
+   1 dtk 49.1% (n 116) | 2 dtk 51.3% (n 119) | 3 dtk 52.9% (n 121) | 5 dtk 50.4% (n 123) | 10 dtk 51.2% (n 123) | 30 dtk 48.8% (n 123) | 1 mnt 52.8% (n 123) | 3 mnt 49.6% (n 123) | 5 mnt 50.4% (n 123) | 10 mnt 52.8% (n 123) | 15 mnt 50.4% (n 123) | 30 mnt 49.5% (n 111) | 1 jam 44.1% (n 111)
+
+## CPI • + minyak WTI sepakat
+   1 dtk 54.5% (n 55) | 2 dtk 58.9% (n 56) | 3 dtk 60.7% (n 56) | 5 dtk 56.1% (n 57) | 10 dtk 59.6% (n 57) | 30 dtk 56.1% (n 57) | 1 mnt 57.9% (n 57) | 3 mnt 61.4% (n 57) | 5 mnt 52.6% (n 57) | 10 mnt 52.6% (n 57) | 15 mnt 52.6% (n 57) | 30 mnt 48.2% (n 56) | 1 jam 50.0% (n 56)
+
+## CPI • minyak WTI saja
+   1 dtk 54.8% (n 168) | 2 dtk 55.8% (n 172) | 3 dtk 54.6% (n 174) | 5 dtk 54.0% (n 176) | 10 dtk 54.5% (n 176) | 30 dtk 50.0% (n 176) | 1 mnt 54.0% (n 176) | 3 mnt 58.0% (n 176) | 5 mnt 54.0% (n 176) | 10 mnt 51.1% (n 176) | 15 mnt 54.5% (n 176) | 30 mnt 50.9% (n 161) | 1 jam 50.9% (n 161)
+
+## ISM Jasa • berbalik
+   1 dtk 66.7% (n 114) | 2 dtk 63.5% (n 115) | 3 dtk 65.2% (n 115) | 5 dtk 61.7% (n 115) | 10 dtk 60.9% (n 115) | 30 dtk 61.7% (n 115) | 1 mnt 59.1% (n 115) | 3 mnt 55.7% (n 115) | 5 mnt 54.8% (n 115) | 10 mnt 54.8% (n 115) | 15 mnt 55.7% (n 115) | 30 mnt 53.6% (n 112) | 1 jam 50.0% (n 112)
+
+## ISM Jasa • + aktivitas Fed daerah sepakat
+   1 dtk 75.8% (n 33) | 2 dtk 75.8% (n 33) | 3 dtk 72.7% (n 33) | 5 dtk 72.7% (n 33) | 10 dtk 66.7% (n 33) | 30 dtk 66.7% (n 33) | 1 mnt 63.6% (n 33) | 3 mnt 60.6% (n 33) | 5 mnt 60.6% (n 33) | 10 mnt 63.6% (n 33) | 15 mnt 60.6% (n 33) | 30 mnt 45.5% (n 33) | 1 jam 48.5% (n 33)
+
+## GDP • GDPNow
+   1 dtk 38.6% (n 44) | 2 dtk 48.9% (n 45) | 3 dtk 52.2% (n 46) | 5 dtk 56.5% (n 46) | 10 dtk 63.0% (n 46) | 30 dtk 58.7% (n 46) | 1 mnt 56.5% (n 46) | 3 mnt 50.0% (n 46) | 5 mnt 50.0% (n 46) | 10 mnt 52.2% (n 46) | 15 mnt 60.9% (n 46) | 30 mnt 56.8% (n 44) | 1 jam 65.9% (n 44)
+
+## NFP • pengangguran Kalshi/kejutan lalu
+   1 dtk 53.6% (n 125) | 2 dtk 49.6% (n 129) | 3 dtk 48.8% (n 129) | 5 dtk 51.2% (n 129) | 10 dtk 55.0% (n 129) | 30 dtk 58.9% (n 129) | 1 mnt 58.9% (n 129) | 3 mnt 59.7% (n 129) | 5 mnt 61.2% (n 129) | 10 mnt 55.0% (n 129) | 15 mnt 51.9% (n 129) | 30 mnt 52.2% (n 115) | 1 jam 48.7% (n 115)
+
+## NFP • + Indeed sepakat
+   1 dtk 55.8% (n 43) | 2 dtk 41.9% (n 43) | 3 dtk 41.9% (n 43) | 5 dtk 41.9% (n 43) | 10 dtk 44.2% (n 43) | 30 dtk 55.8% (n 43) | 1 mnt 55.8% (n 43) | 3 mnt 51.2% (n 43) | 5 mnt 58.1% (n 43) | 10 mnt 51.2% (n 43) | 15 mnt 41.9% (n 43) | 30 mnt 41.9% (n 43) | 1 jam 39.5% (n 43)
+
+## Core PPI • berbalik
+   1 dtk 49.4% (n 87) | 2 dtk 47.9% (n 94) | 3 dtk 51.6% (n 95) | 5 dtk 51.5% (n 97) | 10 dtk 53.6% (n 97) | 30 dtk 53.6% (n 97) | 1 mnt 55.7% (n 97) | 3 mnt 53.6% (n 97) | 5 mnt 50.5% (n 97) | 10 mnt 49.5% (n 97) | 15 mnt 53.6% (n 97) | 30 mnt 49.4% (n 83) | 1 jam 55.4% (n 83)
+
+## JOLTS • berbalik
+   1 dtk 40.0% (n 55) | 2 dtk 44.4% (n 54) | 3 dtk 45.5% (n 55) | 5 dtk 49.1% (n 55) | 10 dtk 43.6% (n 55) | 30 dtk 49.1% (n 55) | 1 mnt 45.5% (n 55) | 3 mnt 49.1% (n 55) | 5 mnt 54.5% (n 55) | 10 mnt 54.5% (n 55) | 15 mnt 56.4% (n 55) | 30 mnt 61.8% (n 55) | 1 jam 58.2% (n 55)
+
+## Pengangguran • kalender survei BLS
+   1 dtk 53.3% (n 167) | 2 dtk 53.8% (n 171) | 3 dtk 57.3% (n 171) | 5 dtk 58.5% (n 171) | 10 dtk 56.7% (n 171) | 30 dtk 54.4% (n 171) | 1 mnt 53.2% (n 171) | 3 mnt 51.5% (n 171) | 5 mnt 59.1% (n 171) | 10 mnt 55.0% (n 171) | 15 mnt 57.3% (n 171) | 30 mnt 52.6% (n 156) | 1 jam 49.4% (n 156)
+
+## Tren emas 4 jam (berita tanpa petunjuk)
+   1 dtk 53.6% (n 1595) | 2 dtk 54.4% (n 1612) | 3 dtk 54.3% (n 1614) | 5 dtk 55.4% (n 1620) | 10 dtk 54.3% (n 1620) | 30 dtk 53.5% (n 1621) | 1 mnt 52.1% (n 1621) | 3 mnt 50.5% (n 1621) | 5 mnt 51.0% (n 1621) | 10 mnt 50.0% (n 1621) | 15 mnt 50.7% (n 1621) | 30 mnt 52.7% (n 1621) | 1 jam 51.3% (n 1621)

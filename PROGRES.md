@@ -270,3 +270,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   dolar & emas searah, Kalshi core PCE) → BARU 47–55%, lolos 1 vs kebetulan 2,9 (docs/XAU_DETIK.md bagian G). Tidak dipasang.
 - Keluhan pengguna (screenshot 4.30: turun 56% vs naik 1 jam 54%) → aplikasi 4.31: satu baris "CPI ▼ TURUN 56% ⚠️ • 4 hari
   lagi", satu arah di semua tempat (`arah_detik`), baris 1 jam dihapus dari bawah XAU.
+- CPI: petunjuk terkuat per waktu rilis (core Kalshi & kejutan lalu 66% bila konsensus FF terbit). Aplikasi 4.32: keterangan
+  jangka (1 dtk–1 jam, `research/pra_jangka.py`); riset Fed/PPI/PCE/JOLTS metode lain (`research/pra_lain.py`): tidak lolos,
+  kandidat Fed yield 2 th 60%.
