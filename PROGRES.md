@@ -255,4 +255,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   → `research/pra_xau_semua.py` (2.051 rilis; tick 10–120 dtk, BTC, konsensus vs lalu, kejutan lalu 18 judul, tren 15 mnt–24
   jam/EMA, model walk-forward, gabungan suara, uji permutasi). Kebocoran candle H1 ditemukan & diperbaiki. Hasil: semua
   ≈ 50–56% di periode baru kecuali petunjuk berita teruji; gabungan petunjuk × tren 4 jam searah 63–67% (ISM 70–76%) →
-  aplikasi 4.29 baris ➕ tren (docs/XAU_DETIK.md bagian C).
+  aplikasi 4.29 baris ➕ tren (docs/XAU_DETIK.md bagian C). PR serfusion/Trading#78 di-merge + bold-davinci dimajukan.
+- "Coba lagi": `research/pra_xau_mikro.py` (aliran tick, gerak 1/3 dtk, posisi rentang 60 mnt, angka bulat, tick sepi) +
+  rezim rilis terakhir → tidak ada yang baru (lolos 2 vs kebetulan 1,7). Dosis–respons tren × petunjuk mengonfirmasi aturan
+  terpasang (docs/XAU_DETIK.md bagian D).
