@@ -89,20 +89,23 @@ def test_pernyataan_saring_dan_cache():
     assert prep2["pernyataan"]["penting"] == prep["pernyataan"]["penting"]
 
 
-def test_pra_aset_sel_per_aset(monkeypatch):
-    """⏱️ entry 1 dtk sebelum berita: sel XAU/BTC/ETH di bawah tile (arah dari petunjuk, keluar terbaik, status jujur)."""
+def test_pra_xau_arah_1_10_detik(monkeypatch):
+    """⏱️ khusus XAU: arah 1–10 dtk dari petunjuk teruji + persen searah per detik (bukan untung/rugi)."""
     import _pra_aset as A
-    rec = lambda avg, ter=False: {"keluar": "3 dtk", "detik": 3, "n": 40, "wr": 62.0, "avg": avg, "baru": avg,  # noqa: E731
-                                  "wr_baru": 60.0, "teruji": ter}
-    monkeypatch.setattr(A, "DATA", {"berita": {"CPI": {
-        "XAU": {"petunjuk|dtk": rec(0.7), "petunjuk|mnt": rec(-0.2)},
-        "BTC": {"petunjuk|dtk": rec(-0.01)}, "ETH": {}}}})
-    prep = {"mendatang": [{"title": "CPI m/m", "time": T0, "when": "Rab 14 Okt 19:30 WIB",
-                           "petunjuk_teruji": {"arah_emas": "turun"}}]}
+    h = lambda b, k=False: {"exness": {"n": 20, "benar": b, "lama": None, "baru": b}, "konsisten": k}  # noqa: E731
+    monkeypatch.setattr(A, "DATA", {"xau_arah": {
+        "CPI • Kalshi & kejutan lalu sepakat": {"h": {"1|0": h(45.0), "2|0": h(65.0), "3|0": h(65.0), "5|0": h(65.0),
+                                                       "10|0": h(70.0)}},
+        "ISM Jasa • berbalik": {"h": {f"{x}|0": h(64.0, True) for x in (1, 2, 3, 5, 10)}}}})
+    b = {"arah_emas": "turun", "tebak": {"K": 1.0, "P": 1.0}, "kalshi_sepakat": True, "sepakat_lain": []}
+    prep = {"mendatang": [{"title": "CPI m/m", "time": T0, "when": "Rab 14 Okt 19:30 WIB", "petunjuk_teruji": b}]}
     A.attach(prep, NOW)
-    a = prep["pra"]["aset"]
-    assert a["XAU"]["teks"] == "SELL • tutup 3 dtk" and a["XAU"]["status"] == "belum terbukti" and "⚠️" in a["XAU"]["kecil"]
-    assert a["BTC"]["status"] == "rugi" and a["ETH"]["status"] == "acak"
-    prep2 = {"mendatang": [{"title": "CPI m/m", "time": T0}]}            # tanpa petunjuk → 50:50
-    A.attach(prep2, NOW)
-    assert prep2["pra"]["aset"]["XAU"]["teks"] == "arah ≈ 50:50"
+    p = prep["pra"]
+    assert p["teks"] == "XAU TURUN ▼ • benar 65–70% (2–10 dtk) ⚠️" and p["status"] == "belum terbukti"
+    assert p["kecil"].startswith("1 dtk 45% • 2 dtk 65%")
+    ism = {"mendatang": [{"title": "ISM Services PMI", "time": T0, "petunjuk_teruji": {"arah_emas": "naik", "tebak": {"-P": -1.0}}}]}
+    A.attach(ism, NOW)
+    assert ism["pra"]["teks"] == "XAU NAIK ▲ • benar 64% (2–10 dtk) ✅"
+    kosong = {"mendatang": [{"title": "Retail Sales m/m", "time": T0}]}
+    A.attach(kosong, NOW)
+    assert kosong["pra"]["status"] == "acak"

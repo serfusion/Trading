@@ -246,3 +246,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Lanjutan 10 Okt: sumber lain selain Kalshi (`research/sumber_lain.py`: WTI, Indeed, survei Fed daerah lolos; breakeven,
   yield 2 th, UMich, klaim, WEI tidak) → 🧭 cloud; rencana pengguna entry t−1 dtk tutup 1–5 dtk/mnt untuk XAU/BTC/ETH
   (`research/pra_aset.py`, data ETH 1 dtk 934 rilis) → semua rugi rata-rata; tampil di bawah tile (aplikasi 4.27).
+- Pengguna: "jangan untung/rugi, arah 1–10 detik saja, hanya XAU" → `research/pra_xau_arah.py`
+  (docs/eksternal/hasil_pra_xau_arah.txt, docs/CPI_14OKT.md bagian 10); aplikasi 4.27 menampilkan 1 baris XAU.

@@ -187,9 +187,81 @@ def nama_keluar(h: int) -> str:
     return f"{h} dtk" if h < 60 else f"{h // 60} mnt"
 
 
+# ------------------------------------------------------------------ ARAH SAJA (permintaan pengguna 10 Okt 2026)
+H_ARAH = [1, 2, 3, 5, 10]
+
+
+def gerak(p: Tick, h: int) -> float | None:
+    """Tanda gerak harga tengah (mid) dari t0−1 dtk ke t0+h dtk: +1 naik, −1 turun, 0 belum bergerak."""
+    i, k = p.at(-1), p.at(h)
+    if i < 0 or k < 0 or p.T[i] < -60 or p.T[-1] < h:
+        return None
+    d = float(p.mid[k] - p.mid[i])
+    return 0.0 if abs(d) < 1e-12 else float(np.sign(d))
+
+
+def arah_main() -> None:
+    """Tebakan arah SEBELUM rilis (petunjuk teruji) vs arah harga 1–10 detik setelah rilis — tanpa untung/rugi.
+    Benar = harga bergerak searah tebakan; "belum gerak" (harga sama persis) dilaporkan terpisah. Juga dasar: % rilis
+    harga naik (tanpa tebakan) supaya terlihat apakah tebakan lebih baik dari lempar koin."""
+    ev = events()
+    ev = ev[(ev.time >= pd.Timestamp("2010-01-01", tz="UTC")) & ev.group.isin(GRUP)]
+    grup = dict(zip(ev.time, ev.group))
+    arah = arah_petunjuk()
+    feeds = {"XAU": ("XAU_EXNESS", "XAU"), "BTC": ("BTC_EXNESS", "BTC"), "ETH": ("ETH",)}
+    gk = {}
+    for fs in feeds.values():
+        for f in fs:
+            gk[f] = {}
+            for t in sorted(ev.time):
+                p = eth_tick(t) if f == "ETH" else prepare(t, f)
+                if p is not None:
+                    gk[f][t] = {h: gerak(p, h) for h in H_ARAH}
+    L = ["# ⏱️ ARAH 1–10 detik setelah rilis vs tebakan sebelum rilis (tanpa untung/rugi)",
+         "Harga tengah (bid+ask)/2 pada t0−1 dtk dibanding t0+1/2/3/5/10 dtk. Benar = searah tebakan (dari rilis yang "
+         "harganya sudah bergerak); 'gerak' = % rilis yang harganya sudah berubah. Tebakan = petunjuk teruji "
+         "(research/berita_gabung.py & sumber_lain.py → arah emas; kripto disamakan). Dasar = % naik tanpa tebakan.", ""]
+    out = {}
+    for g in GRUP:
+        tg = [t for t in sorted(ev.time) if grup.get(t) == g]
+        L += ["", f"## {g} ({len(tg)} rilis)"]
+        out[g] = {}
+        for aset, fs in feeds.items():
+            res = {}
+            for h in H_ARAH:
+                per = {}
+                for f in fs:
+                    rows = [(t, gk[f][t][h]) for t in tg if t in gk[f] and gk[f][t][h] is not None]
+                    gerak_ = [(t, v) for t, v in rows if v != 0]
+                    tebak = [(t, v * arah[t]) for t, v in gerak_ if t in arah.index]
+                    def pct(x, f_=lambda v: v > 0):
+                        return (round(float(np.mean([f_(v) for _, v in x]) * 100), 1), len(x)) if x else (None, 0)
+                    lama = [(t, v) for t, v in tebak if t < NEW]
+                    baru = [(t, v) for t, v in tebak if t >= NEW]
+                    per[f] = {"benar": pct(tebak), "lama": pct(lama), "baru": pct(baru),
+                              "gerak": round(len(gerak_) / max(len(rows), 1) * 100), "dasar_naik": pct(gerak_)}
+                res[h] = per
+            out[g][aset] = {str(h): res[h][fs[0]] | {"feed": fs[0], "lain": {f: res[h][f]["benar"] for f in fs[1:]}}
+                            for h in H_ARAH}
+            for h in H_ARAH:
+                x = res[h][fs[0]]
+                lain = " ".join(f"| {f} {res[h][f]['benar'][0]}% (n {res[h][f]['benar'][1]})" for f in fs[1:])
+                L.append(f"   {aset} {h:2d} dtk: tebakan benar {x['benar'][0]}% (n {x['benar'][1]}; LAMA {x['lama'][0]}% "
+                         f"n {x['lama'][1]}, BARU {x['baru'][0]}% n {x['baru'][1]}) | sudah gerak {x['gerak']}% | dasar "
+                         f"naik {x['dasar_naik'][0]}% (n {x['dasar_naik'][1]}) {lain}")
+    d = json.loads(JSON.read_text(encoding="utf-8")) if JSON.exists() else {}
+    d["arah"] = out
+    JSON.write_text(json.dumps(d, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT.with_name("hasil_pra_arah.txt")).write_text("\n".join(L) + "\n", encoding="utf-8")
+    print("\n".join(L))
+
+
 def main() -> None:
     if sys.argv[1:2] == ["unduh"]:
         unduh()
+        return
+    if sys.argv[1:2] == ["arah"]:
+        arah_main()
         return
     ev = events()
     ev = ev[(ev.time >= pd.Timestamp("2010-01-01", tz="UTC")) & ev.group.isin(GRUP)]

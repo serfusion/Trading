@@ -4350,5 +4350,6932 @@
     }
    }
   }
+ },
+ "arah": {
+  "NFP": {
+   "XAU": {
+    "1": {
+     "benar": [
+      55.3,
+      94
+     ],
+     "lama": [
+      49.0,
+      49
+     ],
+     "baru": [
+      62.2,
+      45
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      51.2,
+      129
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       53.7,
+       123
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      49.5,
+      95
+     ],
+     "lama": [
+      50.0,
+      50
+     ],
+     "baru": [
+      48.9,
+      45
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.2,
+      130
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       49.6,
+       129
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      51.6,
+      95
+     ],
+     "lama": [
+      54.0,
+      50
+     ],
+     "baru": [
+      48.9,
+      45
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.9,
+      130
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       49.2,
+       128
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      54.7,
+      95
+     ],
+     "lama": [
+      58.0,
+      50
+     ],
+     "baru": [
+      51.1,
+      45
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.5,
+      130
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       49.6,
+       129
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      54.7,
+      95
+     ],
+     "lama": [
+      62.0,
+      50
+     ],
+     "baru": [
+      46.7,
+      45
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      47.7,
+      130
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       54.3,
+       129
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      59.0,
+      83
+     ],
+     "lama": [
+      59.5,
+      37
+     ],
+     "baru": [
+      58.7,
+      46
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      41.1,
+      107
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       43.5,
+       69
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      59.0,
+      83
+     ],
+     "lama": [
+      56.8,
+      37
+     ],
+     "baru": [
+      60.9,
+      46
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      48.6,
+      107
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       50.0,
+       76
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      56.6,
+      83
+     ],
+     "lama": [
+      56.8,
+      37
+     ],
+     "baru": [
+      56.5,
+      46
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      46.7,
+      107
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       55.3,
+       76
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      55.4,
+      83
+     ],
+     "lama": [
+      51.4,
+      37
+     ],
+     "baru": [
+      58.7,
+      46
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.8,
+      108
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       55.7,
+       79
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      55.4,
+      83
+     ],
+     "lama": [
+      51.4,
+      37
+     ],
+     "baru": [
+      58.7,
+      46
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.8,
+      108
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       52.5,
+       80
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      47.2,
+      72
+     ],
+     "lama": [
+      50.0,
+      28
+     ],
+     "baru": [
+      45.5,
+      44
+     ],
+     "gerak": 90,
+     "dasar_naik": [
+      55.8,
+      95
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      51.4,
+      74
+     ],
+     "lama": [
+      50.0,
+      28
+     ],
+     "baru": [
+      52.2,
+      46
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      54.5,
+      99
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      57.5,
+      73
+     ],
+     "lama": [
+      57.1,
+      28
+     ],
+     "baru": [
+      57.8,
+      45
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      55.6,
+      99
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      59.5,
+      74
+     ],
+     "lama": [
+      67.9,
+      28
+     ],
+     "baru": [
+      54.3,
+      46
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      54.5,
+      99
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      57.5,
+      80
+     ],
+     "lama": [
+      52.9,
+      34
+     ],
+     "baru": [
+      60.9,
+      46
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      57.1,
+      105
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "CPI": {
+   "XAU": {
+    "1": {
+     "benar": [
+      57.6,
+      92
+     ],
+     "lama": [
+      58.0,
+      50
+     ],
+     "baru": [
+      57.1,
+      42
+     ],
+     "gerak": 98,
+     "dasar_naik": [
+      48.4,
+      128
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       58.0,
+       131
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      55.9,
+      93
+     ],
+     "lama": [
+      54.9,
+      51
+     ],
+     "baru": [
+      57.1,
+      42
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      53.8,
+      130
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       56.1,
+       132
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      54.3,
+      94
+     ],
+     "lama": [
+      55.8,
+      52
+     ],
+     "baru": [
+      52.4,
+      42
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      55.7,
+      131
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       55.2,
+       134
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      53.2,
+      94
+     ],
+     "lama": [
+      51.9,
+      52
+     ],
+     "baru": [
+      54.8,
+      42
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      54.2,
+      131
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       51.5,
+       136
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      53.2,
+      94
+     ],
+     "lama": [
+      53.8,
+      52
+     ],
+     "baru": [
+      52.4,
+      42
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      54.2,
+      131
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       50.0,
+       136
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      54.2,
+      72
+     ],
+     "lama": [
+      50.0,
+      30
+     ],
+     "baru": [
+      57.1,
+      42
+     ],
+     "gerak": 98,
+     "dasar_naik": [
+      54.7,
+      106
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       58.2,
+       67
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      52.1,
+      73
+     ],
+     "lama": [
+      45.2,
+      31
+     ],
+     "baru": [
+      57.1,
+      42
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      54.2,
+      107
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       54.4,
+       68
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      52.1,
+      73
+     ],
+     "lama": [
+      41.9,
+      31
+     ],
+     "baru": [
+      59.5,
+      42
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      56.1,
+      107
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       54.3,
+       70
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      47.3,
+      74
+     ],
+     "lama": [
+      37.5,
+      32
+     ],
+     "baru": [
+      54.8,
+      42
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.7,
+      108
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       46.5,
+       71
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      45.9,
+      74
+     ],
+     "lama": [
+      37.5,
+      32
+     ],
+     "baru": [
+      52.4,
+      42
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.9,
+      108
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       48.6,
+       70
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      58.7,
+      63
+     ],
+     "lama": [
+      45.5,
+      22
+     ],
+     "baru": [
+      65.9,
+      41
+     ],
+     "gerak": 89,
+     "dasar_naik": [
+      62.8,
+      94
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      59.1,
+      66
+     ],
+     "lama": [
+      58.3,
+      24
+     ],
+     "baru": [
+      59.5,
+      42
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      52.5,
+      99
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      58.0,
+      69
+     ],
+     "lama": [
+      55.6,
+      27
+     ],
+     "baru": [
+      59.5,
+      42
+     ],
+     "gerak": 95,
+     "dasar_naik": [
+      53.5,
+      101
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      54.4,
+      68
+     ],
+     "lama": [
+      53.8,
+      26
+     ],
+     "baru": [
+      54.8,
+      42
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      50.5,
+      99
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      55.1,
+      69
+     ],
+     "lama": [
+      63.0,
+      27
+     ],
+     "baru": [
+      50.0,
+      42
+     ],
+     "gerak": 95,
+     "dasar_naik": [
+      51.5,
+      101
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "PPI": {
+   "XAU": {
+    "1": {
+     "benar": [
+      47.5,
+      61
+     ],
+     "lama": [
+      47.4,
+      38
+     ],
+     "baru": [
+      47.8,
+      23
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      50.5,
+      99
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       49.4,
+       83
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      47.5,
+      61
+     ],
+     "lama": [
+      50.0,
+      38
+     ],
+     "baru": [
+      43.5,
+      23
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      59.6,
+      99
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       50.5,
+       93
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      49.2,
+      61
+     ],
+     "lama": [
+      50.0,
+      38
+     ],
+     "baru": [
+      47.8,
+      23
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      57.6,
+      99
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       52.1,
+       94
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      50.8,
+      61
+     ],
+     "lama": [
+      50.0,
+      38
+     ],
+     "baru": [
+      52.2,
+      23
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      56.6,
+      99
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       51.5,
+       97
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      50.8,
+      61
+     ],
+     "lama": [
+      47.4,
+      38
+     ],
+     "baru": [
+      56.5,
+      23
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      57.6,
+      99
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       52.6,
+       97
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      43.6,
+      39
+     ],
+     "lama": [
+      41.2,
+      17
+     ],
+     "baru": [
+      45.5,
+      22
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      54.1,
+      74
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       59.4,
+       32
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      43.6,
+      39
+     ],
+     "lama": [
+      47.1,
+      17
+     ],
+     "baru": [
+      40.9,
+      22
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      50.0,
+      74
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       42.9,
+       35
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      43.6,
+      39
+     ],
+     "lama": [
+      47.1,
+      17
+     ],
+     "baru": [
+      40.9,
+      22
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.7,
+      74
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       47.2,
+       36
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      59.0,
+      39
+     ],
+     "lama": [
+      58.8,
+      17
+     ],
+     "baru": [
+      59.1,
+      22
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      58.1,
+      74
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       45.9,
+       37
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      56.4,
+      39
+     ],
+     "lama": [
+      58.8,
+      17
+     ],
+     "baru": [
+      54.5,
+      22
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      50.0,
+      74
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       48.6,
+       37
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      63.0,
+      27
+     ],
+     "lama": [
+      71.4,
+      7
+     ],
+     "baru": [
+      60.0,
+      20
+     ],
+     "gerak": 79,
+     "dasar_naik": [
+      46.6,
+      58
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      46.7,
+      30
+     ],
+     "lama": [
+      57.1,
+      7
+     ],
+     "baru": [
+      43.5,
+      23
+     ],
+     "gerak": 88,
+     "dasar_naik": [
+      53.1,
+      64
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      51.5,
+      33
+     ],
+     "lama": [
+      55.6,
+      9
+     ],
+     "baru": [
+      50.0,
+      24
+     ],
+     "gerak": 92,
+     "dasar_naik": [
+      53.7,
+      67
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      53.3,
+      30
+     ],
+     "lama": [
+      66.7,
+      6
+     ],
+     "baru": [
+      50.0,
+      24
+     ],
+     "gerak": 88,
+     "dasar_naik": [
+      56.2,
+      64
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      51.5,
+      33
+     ],
+     "lama": [
+      44.4,
+      9
+     ],
+     "baru": [
+      54.2,
+      24
+     ],
+     "gerak": 93,
+     "dasar_naik": [
+      58.8,
+      68
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "RETAIL": {
+   "XAU": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      43.2,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      43.2,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      42.0,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      42.0,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      36.4,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.0,
+      83
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.8,
+      83
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      49.4,
+      83
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      51.2,
+      82
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      60.2,
+      83
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 90,
+     "dasar_naik": [
+      50.7,
+      73
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      56.6,
+      76
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      52.6,
+      76
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 95,
+     "dasar_naik": [
+      49.4,
+      77
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 98,
+     "dasar_naik": [
+      53.2,
+      79
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "PCE": {
+   "XAU": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.9,
+      52
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      38.5,
+      52
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      30.8,
+      52
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.1,
+      52
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.2,
+      52
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      54.7,
+      53
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      49.1,
+      53
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      49.1,
+      53
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      49.1,
+      53
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      39.6,
+      53
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 89,
+     "dasar_naik": [
+      43.8,
+      48
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 91,
+     "dasar_naik": [
+      42.9,
+      49
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      51.0,
+      51
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 96,
+     "dasar_naik": [
+      44.2,
+      52
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.3,
+      54
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "GDP": {
+   "XAU": {
+    "1": {
+     "benar": [
+      35.3,
+      34
+     ],
+     "lama": [
+      42.1,
+      19
+     ],
+     "baru": [
+      26.7,
+      15
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      59.2,
+      76
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       40.9,
+       44
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      45.7,
+      35
+     ],
+     "lama": [
+      55.0,
+      20
+     ],
+     "baru": [
+      33.3,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.2,
+      77
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       48.9,
+       45
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      51.4,
+      35
+     ],
+     "lama": [
+      50.0,
+      20
+     ],
+     "baru": [
+      53.3,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.5,
+      77
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       50.0,
+       46
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      57.1,
+      35
+     ],
+     "lama": [
+      55.0,
+      20
+     ],
+     "baru": [
+      60.0,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.8,
+      77
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       50.0,
+       46
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      65.7,
+      35
+     ],
+     "lama": [
+      55.0,
+      20
+     ],
+     "baru": [
+      80.0,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.2,
+      77
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       60.9,
+       46
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      67.9,
+      28
+     ],
+     "lama": [
+      76.9,
+      13
+     ],
+     "baru": [
+      60.0,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      40.7,
+      59
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       52.0,
+       25
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      50.0,
+      28
+     ],
+     "lama": [
+      53.8,
+      13
+     ],
+     "baru": [
+      46.7,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.8,
+      59
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       52.0,
+       25
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      50.0,
+      28
+     ],
+     "lama": [
+      46.2,
+      13
+     ],
+     "baru": [
+      53.3,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.1,
+      59
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       53.8,
+       26
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      60.7,
+      28
+     ],
+     "lama": [
+      53.8,
+      13
+     ],
+     "baru": [
+      66.7,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.8,
+      59
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       48.1,
+       27
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      53.6,
+      28
+     ],
+     "lama": [
+      53.8,
+      13
+     ],
+     "baru": [
+      53.3,
+      15
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.8,
+      59
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       60.7,
+       28
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      56.5,
+      23
+     ],
+     "lama": [
+      55.6,
+      9
+     ],
+     "baru": [
+      57.1,
+      14
+     ],
+     "gerak": 75,
+     "dasar_naik": [
+      57.1,
+      42
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      64.0,
+      25
+     ],
+     "lama": [
+      63.6,
+      11
+     ],
+     "baru": [
+      64.3,
+      14
+     ],
+     "gerak": 84,
+     "dasar_naik": [
+      48.9,
+      47
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      63.0,
+      27
+     ],
+     "lama": [
+      58.3,
+      12
+     ],
+     "baru": [
+      66.7,
+      15
+     ],
+     "gerak": 89,
+     "dasar_naik": [
+      50.0,
+      50
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      59.3,
+      27
+     ],
+     "lama": [
+      58.3,
+      12
+     ],
+     "baru": [
+      60.0,
+      15
+     ],
+     "gerak": 88,
+     "dasar_naik": [
+      49.0,
+      49
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      59.3,
+      27
+     ],
+     "lama": [
+      58.3,
+      12
+     ],
+     "baru": [
+      60.0,
+      15
+     ],
+     "gerak": 98,
+     "dasar_naik": [
+      47.3,
+      55
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "FOMC": {
+   "XAU": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.4,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.3,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.6,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.9,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.1,
+      88
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 97,
+     "dasar_naik": [
+      49.3,
+      71
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.4,
+      73
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.4,
+      73
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.6,
+      73
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.1,
+      73
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 82,
+     "dasar_naik": [
+      50.0,
+      58
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 89,
+     "dasar_naik": [
+      50.8,
+      63
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 92,
+     "dasar_naik": [
+      56.9,
+      65
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 96,
+     "dasar_naik": [
+      42.6,
+      68
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      46.3,
+      67
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "JOLTS": {
+   "XAU": {
+    "1": {
+     "benar": [
+      32.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      32.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      40.7,
+      27
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       33.3,
+       30
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      52.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      52.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.4,
+      27
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       44.8,
+       29
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      52.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      52.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      37.0,
+      27
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       50.0,
+       30
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      52.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      52.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      37.0,
+      27
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       46.7,
+       30
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      48.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      48.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      33.3,
+      27
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       43.3,
+       30
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      56.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      56.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      74.1,
+      27
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       52.0,
+       25
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      60.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      60.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      59.3,
+      27
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       60.0,
+       25
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      68.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      68.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      55.6,
+      27
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       60.0,
+       25
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      60.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      60.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.1,
+      27
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       60.0,
+       25
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      60.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      60.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      55.6,
+      27
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       56.0,
+       25
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      72.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      72.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      70.4,
+      27
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      64.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      64.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      59.3,
+      27
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      60.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      60.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.1,
+      27
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      56.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      56.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.4,
+      27
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      52.0,
+      25
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      52.0,
+      25
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.1,
+      27
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "ISM": {
+   "XAU": {
+    "1": {
+     "benar": [
+      64.9,
+      114
+     ],
+     "lama": [
+      63.8,
+      58
+     ],
+     "baru": [
+      66.1,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      50.4,
+      230
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       65.4,
+       26
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      61.4,
+      114
+     ],
+     "lama": [
+      63.8,
+      58
+     ],
+     "baru": [
+      58.9,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.9,
+      231
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       59.3,
+       27
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      62.3,
+      114
+     ],
+     "lama": [
+      63.8,
+      58
+     ],
+     "baru": [
+      60.7,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.7,
+      231
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       63.0,
+       27
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      62.3,
+      114
+     ],
+     "lama": [
+      60.3,
+      58
+     ],
+     "baru": [
+      64.3,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.5,
+      231
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       63.0,
+       27
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      60.5,
+      114
+     ],
+     "lama": [
+      56.9,
+      58
+     ],
+     "baru": [
+      64.3,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.5,
+      231
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       63.0,
+       27
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      49.4,
+      89
+     ],
+     "lama": [
+      48.5,
+      33
+     ],
+     "baru": [
+      50.0,
+      56
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      55.1,
+      178
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       61.3,
+       80
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      52.2,
+      90
+     ],
+     "lama": [
+      50.0,
+      34
+     ],
+     "baru": [
+      53.6,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      57.2,
+      180
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       61.9,
+       84
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      55.6,
+      90
+     ],
+     "lama": [
+      55.9,
+      34
+     ],
+     "baru": [
+      55.4,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.9,
+      180
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       60.5,
+       86
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      54.4,
+      90
+     ],
+     "lama": [
+      47.1,
+      34
+     ],
+     "baru": [
+      58.9,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      53.3,
+      180
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       58.6,
+       87
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      57.8,
+      90
+     ],
+     "lama": [
+      52.9,
+      34
+     ],
+     "baru": [
+      60.7,
+      56
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      58.3,
+      180
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       59.1,
+       88
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      56.0,
+      75
+     ],
+     "lama": [
+      50.0,
+      20
+     ],
+     "baru": [
+      58.2,
+      55
+     ],
+     "gerak": 85,
+     "dasar_naik": [
+      54.7,
+      150
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      56.1,
+      82
+     ],
+     "lama": [
+      53.8,
+      26
+     ],
+     "baru": [
+      57.1,
+      56
+     ],
+     "gerak": 91,
+     "dasar_naik": [
+      52.2,
+      161
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      60.2,
+      83
+     ],
+     "lama": [
+      51.9,
+      27
+     ],
+     "baru": [
+      64.3,
+      56
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      52.1,
+      167
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      56.6,
+      83
+     ],
+     "lama": [
+      44.4,
+      27
+     ],
+     "baru": [
+      62.5,
+      56
+     ],
+     "gerak": 95,
+     "dasar_naik": [
+      56.5,
+      168
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      55.3,
+      85
+     ],
+     "lama": [
+      48.3,
+      29
+     ],
+     "baru": [
+      58.9,
+      56
+     ],
+     "gerak": 97,
+     "dasar_naik": [
+      52.9,
+      172
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "ADP": {
+   "XAU": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      52.9,
+      104
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      45.2,
+      104
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      47.6,
+      105
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.7,
+      105
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      41.9,
+      105
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      51.9,
+      77
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.3,
+      78
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      52.6,
+      78
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      47.4,
+      78
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      51.3,
+      78
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 78,
+     "dasar_naik": [
+      47.5,
+      59
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 83,
+     "dasar_naik": [
+      49.2,
+      63
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 86,
+     "dasar_naik": [
+      43.1,
+      65
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 91,
+     "dasar_naik": [
+      49.3,
+      69
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 95,
+     "dasar_naik": [
+      50.0,
+      72
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  },
+  "CLAIMS": {
+   "XAU": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      47.8,
+      205
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      46.9,
+      207
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      48.3,
+      207
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      45.4,
+      207
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      44.4,
+      207
+     ],
+     "feed": "XAU_EXNESS",
+     "lain": {
+      "XAU": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "BTC": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 97,
+     "dasar_naik": [
+      55.0,
+      111
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      52.6,
+      114
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      55.3,
+      114
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      49.6,
+      115
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 100,
+     "dasar_naik": [
+      55.7,
+      115
+     ],
+     "feed": "BTC_EXNESS",
+     "lain": {
+      "BTC": [
+       null,
+       0
+      ]
+     }
+    }
+   },
+   "ETH": {
+    "1": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 90,
+     "dasar_naik": [
+      48.4,
+      95
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "2": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 94,
+     "dasar_naik": [
+      46.0,
+      100
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "3": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 96,
+     "dasar_naik": [
+      50.0,
+      102
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "5": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 97,
+     "dasar_naik": [
+      49.5,
+      103
+     ],
+     "feed": "ETH",
+     "lain": {}
+    },
+    "10": {
+     "benar": [
+      null,
+      0
+     ],
+     "lama": [
+      null,
+      0
+     ],
+     "baru": [
+      null,
+      0
+     ],
+     "gerak": 99,
+     "dasar_naik": [
+      57.1,
+      105
+     ],
+     "feed": "ETH",
+     "lain": {}
+    }
+   }
+  }
+ },
+ "xau_arah": {
+  "CPI • Kalshi": {
+   "grup": "CPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 35,
+      "benar": 51.4,
+      "p": 0.5,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 51.4,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 35,
+      "benar": 57.1,
+      "p": 0.2498,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 57.1,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 35,
+      "benar": 57.1,
+      "p": 0.2498,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 57.1,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 62.9,
+      "p": 0.0877,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 62.9,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 35,
+      "benar": 62.9,
+      "p": 0.0877,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 62.9,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 62.9,
+      "p": 0.0877,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 62.9,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 24,
+      "benar": 41.7,
+      "p": 0.8463,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 41.7,
+      "n_baru": 24,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 22,
+      "benar": 50.0,
+      "p": 0.5841,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 50.0,
+      "n_baru": 22,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 34,
+      "benar": 58.8,
+      "p": 0.1958,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 58.8,
+      "n_baru": 34,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 34,
+      "benar": 58.8,
+      "p": 0.1958,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 58.8,
+      "n_baru": 34,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 60.0,
+      "p": 0.1553,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 34,
+      "benar": 61.8,
+      "p": 0.1147,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 61.8,
+      "n_baru": 34,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 62.9,
+      "p": 0.0877,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 62.9,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 35,
+      "benar": 62.9,
+      "p": 0.0877,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 62.9,
+      "n_baru": 35,
+      "tebakan": 35
+     },
+     "dukascopy": {
+      "n": 34,
+      "benar": 64.7,
+      "p": 0.0607,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 64.7,
+      "n_baru": 34,
+      "tebakan": 35
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "CPI • Kalshi & kejutan lalu sepakat": {
+   "grup": "CPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 20,
+      "benar": 45.0,
+      "p": 0.7483,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 45.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 60.0,
+      "p": 0.2517,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 60.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 20,
+      "benar": 65.0,
+      "p": 0.1316,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 65.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 20,
+      "benar": 65.0,
+      "p": 0.1316,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 65.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 20,
+      "benar": 65.0,
+      "p": 0.1316,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 65.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 14,
+      "benar": 28.6,
+      "p": 0.9713,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 28.6,
+      "n_baru": 14,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 14,
+      "benar": 42.9,
+      "p": 0.788,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 42.9,
+      "n_baru": 14,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 17,
+      "benar": 70.6,
+      "p": 0.0717,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.6,
+      "n_baru": 17,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 19,
+      "benar": 68.4,
+      "p": 0.0835,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 68.4,
+      "n_baru": 19,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 19,
+      "benar": 68.4,
+      "p": 0.0835,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 68.4,
+      "n_baru": 19,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 70.0,
+      "n_baru": 20,
+      "tebakan": 20
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "CPI • Kalshi, cadangan kejutan lalu": {
+   "grup": "CPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 83,
+      "benar": 53.0,
+      "p": 0.3304,
+      "lama": 53.2,
+      "n_lama": 47,
+      "baru": 52.8,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 118,
+      "benar": 54.2,
+      "p": 0.2037,
+      "lama": 51.2,
+      "n_lama": 82,
+      "baru": 61.1,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 84,
+      "benar": 52.4,
+      "p": 0.3718,
+      "lama": 54.2,
+      "n_lama": 48,
+      "baru": 50.0,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 119,
+      "benar": 54.6,
+      "p": 0.1797,
+      "lama": 54.2,
+      "n_lama": 83,
+      "baru": 55.6,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 85,
+      "benar": 52.9,
+      "p": 0.3323,
+      "lama": 53.1,
+      "n_lama": 49,
+      "baru": 52.8,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 121,
+      "benar": 55.4,
+      "p": 0.1376,
+      "lama": 54.1,
+      "n_lama": 85,
+      "baru": 58.3,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 85,
+      "benar": 54.1,
+      "p": 0.2577,
+      "lama": 51.0,
+      "n_lama": 49,
+      "baru": 58.3,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 123,
+      "benar": 52.0,
+      "p": 0.3593,
+      "lama": 48.3,
+      "n_lama": 87,
+      "baru": 61.1,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 85,
+      "benar": 55.3,
+      "p": 0.1928,
+      "lama": 55.1,
+      "n_lama": 49,
+      "baru": 55.6,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 123,
+      "benar": 50.4,
+      "p": 0.5,
+      "lama": 48.3,
+      "n_lama": 87,
+      "baru": 55.6,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 35,
+      "benar": 48.6,
+      "p": 0.6321,
+      "lama": 66.7,
+      "n_lama": 12,
+      "baru": 39.1,
+      "n_baru": 23,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 34,
+      "benar": 52.9,
+      "p": 0.4321,
+      "lama": 58.3,
+      "n_lama": 12,
+      "baru": 50.0,
+      "n_baru": 22,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 64,
+      "benar": 51.6,
+      "p": 0.4503,
+      "lama": 50.0,
+      "n_lama": 30,
+      "baru": 52.9,
+      "n_baru": 34,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 92,
+      "benar": 57.6,
+      "p": 0.0875,
+      "lama": 58.9,
+      "n_lama": 56,
+      "baru": 55.6,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 69,
+      "benar": 50.7,
+      "p": 0.5,
+      "lama": 48.6,
+      "n_lama": 35,
+      "baru": 52.9,
+      "n_baru": 34,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 96,
+      "benar": 56.2,
+      "p": 0.1307,
+      "lama": 55.7,
+      "n_lama": 61,
+      "baru": 57.1,
+      "n_baru": 35,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 77,
+      "benar": 55.8,
+      "p": 0.181,
+      "lama": 52.4,
+      "n_lama": 42,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 100,
+      "benar": 56.0,
+      "p": 0.1356,
+      "lama": 53.8,
+      "n_lama": 65,
+      "baru": 60.0,
+      "n_baru": 35,
+      "tebakan": 135
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 78,
+      "benar": 56.4,
+      "p": 0.1541,
+      "lama": 57.1,
+      "n_lama": 42,
+      "baru": 55.6,
+      "n_baru": 36,
+      "tebakan": 135
+     },
+     "dukascopy": {
+      "n": 105,
+      "benar": 54.3,
+      "p": 0.2176,
+      "lama": 53.5,
+      "n_lama": 71,
+      "baru": 55.9,
+      "n_baru": 34,
+      "tebakan": 135
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "CPI • + minyak WTI sepakat": {
+   "grup": "CPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 44,
+      "benar": 59.1,
+      "p": 0.1456,
+      "lama": 72.2,
+      "n_lama": 18,
+      "baru": 50.0,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 55,
+      "benar": 58.2,
+      "p": 0.1403,
+      "lama": 62.1,
+      "n_lama": 29,
+      "baru": 53.8,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 44,
+      "benar": 61.4,
+      "p": 0.0871,
+      "lama": 66.7,
+      "n_lama": 18,
+      "baru": 57.7,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 55,
+      "benar": 61.8,
+      "p": 0.0524,
+      "lama": 58.6,
+      "n_lama": 29,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 44,
+      "benar": 61.4,
+      "p": 0.0871,
+      "lama": 66.7,
+      "n_lama": 18,
+      "baru": 57.7,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 56,
+      "benar": 60.7,
+      "p": 0.0704,
+      "lama": 56.7,
+      "n_lama": 30,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 44,
+      "benar": 56.8,
+      "p": 0.2257,
+      "lama": 50.0,
+      "n_lama": 18,
+      "baru": 61.5,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 57,
+      "benar": 57.9,
+      "p": 0.1446,
+      "lama": 51.6,
+      "n_lama": 31,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 44,
+      "benar": 61.4,
+      "p": 0.0871,
+      "lama": 55.6,
+      "n_lama": 18,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 57,
+      "benar": 59.6,
+      "p": 0.0924,
+      "lama": 54.8,
+      "n_lama": 31,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 21,
+      "benar": 42.9,
+      "p": 0.8083,
+      "lama": 100.0,
+      "n_lama": 5,
+      "baru": 25.0,
+      "n_baru": 16,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 50.0,
+      "p": 0.5927,
+      "lama": 80.0,
+      "n_lama": 5,
+      "baru": 38.5,
+      "n_baru": 13,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 34,
+      "benar": 61.8,
+      "p": 0.1147,
+      "lama": 70.0,
+      "n_lama": 10,
+      "baru": 58.3,
+      "n_baru": 24,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 49,
+      "benar": 61.2,
+      "p": 0.0762,
+      "lama": 56.5,
+      "n_lama": 23,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 36,
+      "benar": 61.1,
+      "p": 0.1215,
+      "lama": 63.6,
+      "n_lama": 11,
+      "baru": 60.0,
+      "n_baru": 25,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 48,
+      "benar": 62.5,
+      "p": 0.0557,
+      "lama": 59.1,
+      "n_lama": 22,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 41,
+      "benar": 61.0,
+      "p": 0.1055,
+      "lama": 56.2,
+      "n_lama": 16,
+      "baru": 64.0,
+      "n_baru": 25,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 51,
+      "benar": 62.7,
+      "p": 0.046,
+      "lama": 60.0,
+      "n_lama": 25,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 42,
+      "benar": 61.9,
+      "p": 0.0821,
+      "lama": 56.2,
+      "n_lama": 16,
+      "baru": 65.4,
+      "n_baru": 26,
+      "tebakan": 61
+     },
+     "dukascopy": {
+      "n": 51,
+      "benar": 60.8,
+      "p": 0.0804,
+      "lama": 55.6,
+      "n_lama": 27,
+      "baru": 66.7,
+      "n_baru": 24,
+      "tebakan": 61
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "CPI • minyak WTI saja": {
+   "grup": "CPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 119,
+      "benar": 56.3,
+      "p": 0.0996,
+      "lama": 64.7,
+      "n_lama": 68,
+      "baru": 45.1,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 169,
+      "benar": 55.0,
+      "p": 0.1091,
+      "lama": 60.2,
+      "n_lama": 118,
+      "baru": 43.1,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 121,
+      "benar": 58.7,
+      "p": 0.0343,
+      "lama": 62.9,
+      "n_lama": 70,
+      "baru": 52.9,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 170,
+      "benar": 56.5,
+      "p": 0.0535,
+      "lama": 55.5,
+      "n_lama": 119,
+      "baru": 58.8,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "konsisten": true
+    },
+    "3|0": {
+     "exness": {
+      "n": 122,
+      "benar": 55.7,
+      "p": 0.1195,
+      "lama": 59.2,
+      "n_lama": 71,
+      "baru": 51.0,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 173,
+      "benar": 54.9,
+      "p": 0.1119,
+      "lama": 54.9,
+      "n_lama": 122,
+      "baru": 54.9,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 122,
+      "benar": 53.3,
+      "p": 0.2632,
+      "lama": 54.9,
+      "n_lama": 71,
+      "baru": 51.0,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 175,
+      "benar": 54.9,
+      "p": 0.1132,
+      "lama": 55.6,
+      "n_lama": 124,
+      "baru": 52.9,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 122,
+      "benar": 54.9,
+      "p": 0.1597,
+      "lama": 53.5,
+      "n_lama": 71,
+      "baru": 56.9,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 175,
+      "benar": 53.7,
+      "p": 0.1822,
+      "lama": 53.2,
+      "n_lama": 124,
+      "baru": 54.9,
+      "n_baru": 51,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 49,
+      "benar": 42.9,
+      "p": 0.8736,
+      "lama": 61.1,
+      "n_lama": 18,
+      "baru": 32.3,
+      "n_baru": 31,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 47,
+      "benar": 44.7,
+      "p": 0.8092,
+      "lama": 52.6,
+      "n_lama": 19,
+      "baru": 39.3,
+      "n_baru": 28,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 88,
+      "benar": 54.5,
+      "p": 0.2279,
+      "lama": 59.5,
+      "n_lama": 42,
+      "baru": 50.0,
+      "n_baru": 46,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 127,
+      "benar": 54.3,
+      "p": 0.1875,
+      "lama": 52.6,
+      "n_lama": 78,
+      "baru": 57.1,
+      "n_baru": 49,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 100,
+      "benar": 54.0,
+      "p": 0.2421,
+      "lama": 54.9,
+      "n_lama": 51,
+      "baru": 53.1,
+      "n_baru": 49,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 137,
+      "benar": 54.0,
+      "p": 0.1965,
+      "lama": 52.9,
+      "n_lama": 87,
+      "baru": 56.0,
+      "n_baru": 50,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 108,
+      "benar": 51.9,
+      "p": 0.3865,
+      "lama": 51.7,
+      "n_lama": 58,
+      "baru": 52.0,
+      "n_baru": 50,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 141,
+      "benar": 55.3,
+      "p": 0.1191,
+      "lama": 56.0,
+      "n_lama": 91,
+      "baru": 54.0,
+      "n_baru": 50,
+      "tebakan": 193
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 109,
+      "benar": 55.0,
+      "p": 0.1691,
+      "lama": 54.2,
+      "n_lama": 59,
+      "baru": 56.0,
+      "n_baru": 50,
+      "tebakan": 193
+     },
+     "dukascopy": {
+      "n": 148,
+      "benar": 54.7,
+      "p": 0.1426,
+      "lama": 54.0,
+      "n_lama": 100,
+      "baru": 56.2,
+      "n_baru": 48,
+      "tebakan": 193
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "ISM Jasa • berbalik": {
+   "grup": "ISM",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 107,
+      "benar": 66.4,
+      "p": 0.0005,
+      "lama": 65.0,
+      "n_lama": 60,
+      "baru": 68.1,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 22,
+      "benar": 72.7,
+      "p": 0.0262,
+      "lama": 66.7,
+      "n_lama": 12,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "2|0": {
+     "exness": {
+      "n": 107,
+      "benar": 64.5,
+      "p": 0.0018,
+      "lama": 65.0,
+      "n_lama": 60,
+      "baru": 63.8,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 23,
+      "benar": 65.2,
+      "p": 0.105,
+      "lama": 53.8,
+      "n_lama": 13,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "3|0": {
+     "exness": {
+      "n": 107,
+      "benar": 65.4,
+      "p": 0.0009,
+      "lama": 65.0,
+      "n_lama": 60,
+      "baru": 66.0,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 23,
+      "benar": 69.6,
+      "p": 0.0466,
+      "lama": 61.5,
+      "n_lama": 13,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "5|0": {
+     "exness": {
+      "n": 107,
+      "benar": 63.6,
+      "p": 0.0033,
+      "lama": 61.7,
+      "n_lama": 60,
+      "baru": 66.0,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 23,
+      "benar": 60.9,
+      "p": 0.2024,
+      "lama": 46.2,
+      "n_lama": 13,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "10|0": {
+     "exness": {
+      "n": 107,
+      "benar": 62.6,
+      "p": 0.0058,
+      "lama": 58.3,
+      "n_lama": 60,
+      "baru": 68.1,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 23,
+      "benar": 65.2,
+      "p": 0.105,
+      "lama": 53.8,
+      "n_lama": 13,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 79,
+      "benar": 70.9,
+      "p": 0.0001,
+      "lama": 74.3,
+      "n_lama": 35,
+      "baru": 68.2,
+      "n_baru": 44,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 19,
+      "benar": 73.7,
+      "p": 0.0318,
+      "lama": 66.7,
+      "n_lama": 9,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 89,
+      "benar": 64.0,
+      "p": 0.0053,
+      "lama": 64.3,
+      "n_lama": 42,
+      "baru": 63.8,
+      "n_baru": 47,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 77.8,
+      "p": 0.0154,
+      "lama": 75.0,
+      "n_lama": 8,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 91,
+      "benar": 62.6,
+      "p": 0.0103,
+      "lama": 60.9,
+      "n_lama": 46,
+      "baru": 64.4,
+      "n_baru": 45,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 77.8,
+      "p": 0.0154,
+      "lama": 75.0,
+      "n_lama": 8,
+      "baru": 80.0,
+      "n_baru": 10,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 90,
+      "benar": 64.4,
+      "p": 0.004,
+      "lama": 63.6,
+      "n_lama": 44,
+      "baru": 65.2,
+      "n_baru": 46,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 17,
+      "benar": 70.6,
+      "p": 0.0717,
+      "lama": 62.5,
+      "n_lama": 8,
+      "baru": 77.8,
+      "n_baru": 9,
+      "tebakan": 180
+     },
+     "konsisten": true
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 90,
+      "benar": 63.3,
+      "p": 0.0074,
+      "lama": 60.9,
+      "n_lama": 46,
+      "baru": 65.9,
+      "n_baru": 44,
+      "tebakan": 180
+     },
+     "dukascopy": {
+      "n": 19,
+      "benar": 68.4,
+      "p": 0.0835,
+      "lama": 60.0,
+      "n_lama": 10,
+      "baru": 77.8,
+      "n_baru": 9,
+      "tebakan": 180
+     },
+     "konsisten": true
+    }
+   }
+  },
+  "ISM Jasa • + aktivitas Fed daerah sepakat": {
+   "grup": "ISM",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 32,
+      "benar": 75.0,
+      "p": 0.0035,
+      "lama": 80.0,
+      "n_lama": 20,
+      "baru": 66.7,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "2|0": {
+     "exness": {
+      "n": 32,
+      "benar": 75.0,
+      "p": 0.0035,
+      "lama": 85.0,
+      "n_lama": 20,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "3|0": {
+     "exness": {
+      "n": 32,
+      "benar": 71.9,
+      "p": 0.01,
+      "lama": 80.0,
+      "n_lama": 20,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "5|0": {
+     "exness": {
+      "n": 32,
+      "benar": 71.9,
+      "p": 0.01,
+      "lama": 80.0,
+      "n_lama": 20,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "10|0": {
+     "exness": {
+      "n": 32,
+      "benar": 65.6,
+      "p": 0.0551,
+      "lama": 70.0,
+      "n_lama": 20,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 23,
+      "benar": 78.3,
+      "p": 0.0053,
+      "lama": 84.6,
+      "n_lama": 13,
+      "baru": 70.0,
+      "n_baru": 10,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 27,
+      "benar": 70.4,
+      "p": 0.0261,
+      "lama": 80.0,
+      "n_lama": 15,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 27,
+      "benar": 70.4,
+      "p": 0.0261,
+      "lama": 80.0,
+      "n_lama": 15,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 25,
+      "benar": 72.0,
+      "p": 0.0216,
+      "lama": 84.6,
+      "n_lama": 13,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 4,
+      "benar": 100.0,
+      "p": 0.0625,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": true
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 27,
+      "benar": 66.7,
+      "p": 0.061,
+      "lama": 73.3,
+      "n_lama": 15,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 48
+     },
+     "dukascopy": {
+      "n": 5,
+      "benar": 100.0,
+      "p": 0.0312,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 100.0,
+      "n_baru": 3,
+      "tebakan": 48
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "GDP • GDPNow": {
+   "grup": "GDP",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 34,
+      "benar": 35.3,
+      "p": 0.9712,
+      "lama": 42.1,
+      "n_lama": 19,
+      "baru": 26.7,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 44,
+      "benar": 40.9,
+      "p": 0.9129,
+      "lama": 48.3,
+      "n_lama": 29,
+      "baru": 26.7,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 35,
+      "benar": 45.7,
+      "p": 0.7502,
+      "lama": 55.0,
+      "n_lama": 20,
+      "baru": 33.3,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 45,
+      "benar": 48.9,
+      "p": 0.617,
+      "lama": 56.7,
+      "n_lama": 30,
+      "baru": 33.3,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 35,
+      "benar": 51.4,
+      "p": 0.5,
+      "lama": 50.0,
+      "n_lama": 20,
+      "baru": 53.3,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 46,
+      "benar": 50.0,
+      "p": 0.5585,
+      "lama": 48.4,
+      "n_lama": 31,
+      "baru": 53.3,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 35,
+      "benar": 57.1,
+      "p": 0.2498,
+      "lama": 55.0,
+      "n_lama": 20,
+      "baru": 60.0,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 46,
+      "benar": 50.0,
+      "p": 0.5585,
+      "lama": 48.4,
+      "n_lama": 31,
+      "baru": 53.3,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 35,
+      "benar": 65.7,
+      "p": 0.0448,
+      "lama": 55.0,
+      "n_lama": 20,
+      "baru": 80.0,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 46,
+      "benar": 60.9,
+      "p": 0.092,
+      "lama": 51.6,
+      "n_lama": 31,
+      "baru": 80.0,
+      "n_baru": 15,
+      "tebakan": 47
+     },
+     "konsisten": true
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 10,
+      "benar": 30.0,
+      "p": 0.9453,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 25.0,
+      "n_baru": 8,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 14,
+      "benar": 42.9,
+      "p": 0.788,
+      "lama": 80.0,
+      "n_lama": 5,
+      "baru": 22.2,
+      "n_baru": 9,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 21,
+      "benar": 47.6,
+      "p": 0.6682,
+      "lama": 70.0,
+      "n_lama": 10,
+      "baru": 27.3,
+      "n_baru": 11,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 50.0,
+      "p": 0.5775,
+      "lama": 62.5,
+      "n_lama": 16,
+      "baru": 30.0,
+      "n_baru": 10,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 26,
+      "benar": 50.0,
+      "p": 0.5775,
+      "lama": 53.3,
+      "n_lama": 15,
+      "baru": 45.5,
+      "n_baru": 11,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 45.2,
+      "p": 0.7634,
+      "lama": 45.0,
+      "n_lama": 20,
+      "baru": 45.5,
+      "n_baru": 11,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 25,
+      "benar": 56.0,
+      "p": 0.345,
+      "lama": 53.3,
+      "n_lama": 15,
+      "baru": 60.0,
+      "n_baru": 10,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 35,
+      "benar": 48.6,
+      "p": 0.6321,
+      "lama": 43.5,
+      "n_lama": 23,
+      "baru": 58.3,
+      "n_baru": 12,
+      "tebakan": 47
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 30,
+      "benar": 66.7,
+      "p": 0.0494,
+      "lama": 55.6,
+      "n_lama": 18,
+      "baru": 83.3,
+      "n_baru": 12,
+      "tebakan": 47
+     },
+     "dukascopy": {
+      "n": 41,
+      "benar": 61.0,
+      "p": 0.1055,
+      "lama": 53.6,
+      "n_lama": 28,
+      "baru": 76.9,
+      "n_baru": 13,
+      "tebakan": 47
+     },
+     "konsisten": true
+    }
+   }
+  },
+  "NFP • pengangguran Kalshi/kejutan lalu": {
+   "grup": "NFP",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 94,
+      "benar": 55.3,
+      "p": 0.1767,
+      "lama": 49.0,
+      "n_lama": 49,
+      "baru": 62.2,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 123,
+      "benar": 53.7,
+      "p": 0.2354,
+      "lama": 55.1,
+      "n_lama": 78,
+      "baru": 51.1,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 95,
+      "benar": 49.5,
+      "p": 0.5812,
+      "lama": 50.0,
+      "n_lama": 50,
+      "baru": 48.9,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 129,
+      "benar": 49.6,
+      "p": 0.5698,
+      "lama": 50.0,
+      "n_lama": 84,
+      "baru": 48.9,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 95,
+      "benar": 51.6,
+      "p": 0.4188,
+      "lama": 54.0,
+      "n_lama": 50,
+      "baru": 48.9,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 128,
+      "benar": 49.2,
+      "p": 0.6045,
+      "lama": 48.2,
+      "n_lama": 83,
+      "baru": 51.1,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 95,
+      "benar": 54.7,
+      "p": 0.206,
+      "lama": 58.0,
+      "n_lama": 50,
+      "baru": 51.1,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 129,
+      "benar": 49.6,
+      "p": 0.5698,
+      "lama": 50.0,
+      "n_lama": 84,
+      "baru": 48.9,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 95,
+      "benar": 54.7,
+      "p": 0.206,
+      "lama": 62.0,
+      "n_lama": 50,
+      "baru": 46.7,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 129,
+      "benar": 54.3,
+      "p": 0.1893,
+      "lama": 58.3,
+      "n_lama": 84,
+      "baru": 46.7,
+      "n_baru": 45,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 28,
+      "benar": 53.6,
+      "p": 0.4253,
+      "lama": 50.0,
+      "n_lama": 14,
+      "baru": 57.1,
+      "n_baru": 14,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 45,
+      "benar": 46.7,
+      "p": 0.7243,
+      "lama": 48.4,
+      "n_lama": 31,
+      "baru": 42.9,
+      "n_baru": 14,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 76,
+      "benar": 52.6,
+      "p": 0.3655,
+      "lama": 55.6,
+      "n_lama": 36,
+      "baru": 50.0,
+      "n_baru": 40,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 106,
+      "benar": 50.9,
+      "p": 0.4613,
+      "lama": 51.6,
+      "n_lama": 64,
+      "baru": 50.0,
+      "n_baru": 42,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 83,
+      "benar": 53.0,
+      "p": 0.3304,
+      "lama": 58.5,
+      "n_lama": 41,
+      "baru": 47.6,
+      "n_baru": 42,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 109,
+      "benar": 51.4,
+      "p": 0.4241,
+      "lama": 51.5,
+      "n_lama": 66,
+      "baru": 51.2,
+      "n_baru": 43,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 86,
+      "benar": 54.7,
+      "p": 0.2253,
+      "lama": 57.8,
+      "n_lama": 45,
+      "baru": 51.2,
+      "n_baru": 41,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 112,
+      "benar": 51.8,
+      "p": 0.3885,
+      "lama": 51.4,
+      "n_lama": 70,
+      "baru": 52.4,
+      "n_baru": 42,
+      "tebakan": 152
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 93,
+      "benar": 54.8,
+      "p": 0.2035,
+      "lama": 61.2,
+      "n_lama": 49,
+      "baru": 47.7,
+      "n_baru": 44,
+      "tebakan": 152
+     },
+     "dukascopy": {
+      "n": 120,
+      "benar": 53.3,
+      "p": 0.2615,
+      "lama": 56.6,
+      "n_lama": 76,
+      "baru": 47.7,
+      "n_baru": 44,
+      "tebakan": 152
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "NFP • + Indeed sepakat": {
+   "grup": "NFP",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 43,
+      "benar": 55.8,
+      "p": 0.2712,
+      "lama": 50.0,
+      "n_lama": 12,
+      "baru": 58.1,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 43,
+      "benar": 58.1,
+      "p": 0.1802,
+      "lama": 66.7,
+      "n_lama": 12,
+      "baru": 54.8,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 43,
+      "benar": 41.9,
+      "p": 0.889,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 43,
+      "benar": 41.9,
+      "p": 0.889,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 43,
+      "benar": 41.9,
+      "p": 0.889,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 43,
+      "benar": 44.2,
+      "p": 0.8198,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 45.2,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 43,
+      "benar": 41.9,
+      "p": 0.889,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 43,
+      "benar": 41.9,
+      "p": 0.889,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 43,
+      "benar": 44.2,
+      "p": 0.8198,
+      "lama": 50.0,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 43,
+      "benar": 44.2,
+      "p": 0.8198,
+      "lama": 50.0,
+      "n_lama": 12,
+      "baru": 41.9,
+      "n_baru": 31,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 10,
+      "benar": 60.0,
+      "p": 0.377,
+      "lama": 0.0,
+      "n_lama": 1,
+      "baru": 66.7,
+      "n_baru": 9,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 11,
+      "benar": 45.5,
+      "p": 0.7256,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 44.4,
+      "n_baru": 9,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 36,
+      "benar": 47.2,
+      "p": 0.6911,
+      "lama": 55.6,
+      "n_lama": 9,
+      "baru": 44.4,
+      "n_baru": 27,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 38,
+      "benar": 44.7,
+      "p": 0.7912,
+      "lama": 50.0,
+      "n_lama": 10,
+      "baru": 42.9,
+      "n_baru": 28,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 38,
+      "benar": 42.1,
+      "p": 0.8721,
+      "lama": 50.0,
+      "n_lama": 10,
+      "baru": 39.3,
+      "n_baru": 28,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 38,
+      "benar": 44.7,
+      "p": 0.7912,
+      "lama": 44.4,
+      "n_lama": 9,
+      "baru": 44.8,
+      "n_baru": 29,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 39,
+      "benar": 43.6,
+      "p": 0.8316,
+      "lama": 45.5,
+      "n_lama": 11,
+      "baru": 42.9,
+      "n_baru": 28,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 39,
+      "benar": 43.6,
+      "p": 0.8316,
+      "lama": 40.0,
+      "n_lama": 10,
+      "baru": 44.8,
+      "n_baru": 29,
+      "tebakan": 45
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 42,
+      "benar": 45.2,
+      "p": 0.7796,
+      "lama": 50.0,
+      "n_lama": 12,
+      "baru": 43.3,
+      "n_baru": 30,
+      "tebakan": 45
+     },
+     "dukascopy": {
+      "n": 40,
+      "benar": 42.5,
+      "p": 0.8659,
+      "lama": 40.0,
+      "n_lama": 10,
+      "baru": 43.3,
+      "n_baru": 30,
+      "tebakan": 45
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "Core PPI • berbalik": {
+   "grup": "PPI",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 61,
+      "benar": 47.5,
+      "p": 0.6955,
+      "lama": 47.4,
+      "n_lama": 38,
+      "baru": 47.8,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 83,
+      "benar": 49.4,
+      "p": 0.5868,
+      "lama": 54.2,
+      "n_lama": 59,
+      "baru": 37.5,
+      "n_baru": 24,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 61,
+      "benar": 47.5,
+      "p": 0.6955,
+      "lama": 50.0,
+      "n_lama": 38,
+      "baru": 43.5,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 93,
+      "benar": 50.5,
+      "p": 0.5,
+      "lama": 52.2,
+      "n_lama": 69,
+      "baru": 45.8,
+      "n_baru": 24,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 61,
+      "benar": 49.2,
+      "p": 0.6009,
+      "lama": 50.0,
+      "n_lama": 38,
+      "baru": 47.8,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 94,
+      "benar": 52.1,
+      "p": 0.3786,
+      "lama": 54.3,
+      "n_lama": 70,
+      "baru": 45.8,
+      "n_baru": 24,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 61,
+      "benar": 50.8,
+      "p": 0.5,
+      "lama": 50.0,
+      "n_lama": 38,
+      "baru": 52.2,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 97,
+      "benar": 51.5,
+      "p": 0.4196,
+      "lama": 52.1,
+      "n_lama": 73,
+      "baru": 50.0,
+      "n_baru": 24,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 61,
+      "benar": 50.8,
+      "p": 0.5,
+      "lama": 47.4,
+      "n_lama": 38,
+      "baru": 56.5,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 97,
+      "benar": 52.6,
+      "p": 0.3424,
+      "lama": 53.4,
+      "n_lama": 73,
+      "baru": 50.0,
+      "n_baru": 24,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 22,
+      "benar": 40.9,
+      "p": 0.8569,
+      "lama": 45.5,
+      "n_lama": 11,
+      "baru": 36.4,
+      "n_baru": 11,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 23,
+      "benar": 30.4,
+      "p": 0.9827,
+      "lama": 36.4,
+      "n_lama": 11,
+      "baru": 25.0,
+      "n_baru": 12,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 48,
+      "benar": 47.9,
+      "p": 0.6673,
+      "lama": 50.0,
+      "n_lama": 26,
+      "baru": 45.5,
+      "n_baru": 22,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 64,
+      "benar": 50.0,
+      "p": 0.5497,
+      "lama": 53.7,
+      "n_lama": 41,
+      "baru": 43.5,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 54,
+      "benar": 51.9,
+      "p": 0.446,
+      "lama": 54.8,
+      "n_lama": 31,
+      "baru": 47.8,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 66,
+      "benar": 53.0,
+      "p": 0.3561,
+      "lama": 58.1,
+      "n_lama": 43,
+      "baru": 43.5,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 54,
+      "benar": 53.7,
+      "p": 0.3417,
+      "lama": 56.2,
+      "n_lama": 32,
+      "baru": 50.0,
+      "n_baru": 22,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 73,
+      "benar": 54.8,
+      "p": 0.2414,
+      "lama": 58.0,
+      "n_lama": 50,
+      "baru": 47.8,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 55,
+      "benar": 52.7,
+      "p": 0.3939,
+      "lama": 51.5,
+      "n_lama": 33,
+      "baru": 54.5,
+      "n_baru": 22,
+      "tebakan": 108
+     },
+     "dukascopy": {
+      "n": 80,
+      "benar": 51.2,
+      "p": 0.4555,
+      "lama": 50.9,
+      "n_lama": 57,
+      "baru": 52.2,
+      "n_baru": 23,
+      "tebakan": 108
+     },
+     "konsisten": false
+    }
+   }
+  },
+  "JOLTS • berbalik": {
+   "grup": "JOLTS",
+   "h": {
+    "1|0": {
+     "exness": {
+      "n": 50,
+      "benar": 40.0,
+      "p": 0.9405,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 41.3,
+      "n_baru": 46,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 37,
+      "benar": 35.1,
+      "p": 0.9765,
+      "lama": 40.0,
+      "n_lama": 5,
+      "baru": 34.4,
+      "n_baru": 32,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "2|0": {
+     "exness": {
+      "n": 50,
+      "benar": 46.0,
+      "p": 0.7601,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 47.8,
+      "n_baru": 46,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 36,
+      "benar": 47.2,
+      "p": 0.6911,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 50.0,
+      "n_baru": 32,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "3|0": {
+     "exness": {
+      "n": 50,
+      "benar": 46.0,
+      "p": 0.7601,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 47.8,
+      "n_baru": 46,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 37,
+      "benar": 51.4,
+      "p": 0.5,
+      "lama": 40.0,
+      "n_lama": 5,
+      "baru": 53.1,
+      "n_baru": 32,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "5|0": {
+     "exness": {
+      "n": 50,
+      "benar": 50.0,
+      "p": 0.5561,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 52.2,
+      "n_baru": 46,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 37,
+      "benar": 54.1,
+      "p": 0.3714,
+      "lama": 40.0,
+      "n_lama": 5,
+      "baru": 56.2,
+      "n_baru": 32,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "10|0": {
+     "exness": {
+      "n": 50,
+      "benar": 46.0,
+      "p": 0.7601,
+      "lama": 25.0,
+      "n_lama": 4,
+      "baru": 47.8,
+      "n_baru": 46,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 37,
+      "benar": 48.6,
+      "p": 0.6286,
+      "lama": 20.0,
+      "n_lama": 5,
+      "baru": 53.1,
+      "n_baru": 32,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "1|0.3": {
+     "exness": {
+      "n": 30,
+      "benar": 46.7,
+      "p": 0.7077,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": 44.8,
+      "n_baru": 29,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 16,
+      "benar": 37.5,
+      "p": 0.8949,
+      "lama": null,
+      "n_lama": 0,
+      "baru": 37.5,
+      "n_baru": 16,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "2|0.3": {
+     "exness": {
+      "n": 41,
+      "benar": 43.9,
+      "p": 0.8256,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": 42.5,
+      "n_baru": 40,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 27,
+      "benar": 44.4,
+      "p": 0.779,
+      "lama": 0.0,
+      "n_lama": 1,
+      "baru": 46.2,
+      "n_baru": 26,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "3|0.3": {
+     "exness": {
+      "n": 43,
+      "benar": 48.8,
+      "p": 0.6196,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": 47.6,
+      "n_baru": 42,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 28,
+      "benar": 53.6,
+      "p": 0.4253,
+      "lama": 0.0,
+      "n_lama": 1,
+      "baru": 55.6,
+      "n_baru": 27,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "5|0.3": {
+     "exness": {
+      "n": 44,
+      "benar": 52.3,
+      "p": 0.4402,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": 51.2,
+      "n_baru": 43,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 56.7,
+      "p": 0.2923,
+      "lama": 0.0,
+      "n_lama": 2,
+      "baru": 60.7,
+      "n_baru": 28,
+      "tebakan": 133
+     },
+     "konsisten": false
+    },
+    "10|0.3": {
+     "exness": {
+      "n": 45,
+      "benar": 48.9,
+      "p": 0.617,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 48.8,
+      "n_baru": 43,
+      "tebakan": 133
+     },
+     "dukascopy": {
+      "n": 32,
+      "benar": 53.1,
+      "p": 0.43,
+      "lama": 0.0,
+      "n_lama": 2,
+      "baru": 56.7,
+      "n_baru": 30,
+      "tebakan": 133
+     },
+     "konsisten": false
+    }
+   }
+  }
  }
 }

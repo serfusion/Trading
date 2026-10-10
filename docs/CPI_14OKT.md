@@ -116,6 +116,23 @@ Arah = petunjuk teruji tiap berita. Hasil terbaik (keluar dipilih dari periode l
 Tutup 1–5 DETIK selalu lebih buruk (spread + slippage > gerak awal; BTC/ETH untung 0–30% rilis). 0 yang teruji positif.
 Angka per berita berikutnya tampil di bawah tile XAU · BTC · ETH (aplikasi 4.27, 🔴 = rata-rata rugi).
 
+## 10. KHUSUS XAU: arah 1–10 detik setelah rilis (naik/turun saja) — research/pra_xau_arah.py
+Permintaan pengguna: bukan untung/rugi, hanya apakah harga XAU 1–10 detik setelah rilis bergerak searah tebakan sebelum
+rilis. Harga tengah 1 dtk sebelum vs 1/2/3/5/10 dtk sesudah, tick Exness (Dukascopy pembanding):
+| Tebakan sebelum rilis | 1 dtk | 2 dtk | 3 dtk | 5 dtk | 10 dtk | Catatan |
+|---|---|---|---|---|---|---|
+| ISM Jasa: berbalik dari kejutan lalu | 66% | 65% | 65% | 64% | 63% | ✅ konsisten lama & baru, n 107 |
+| ISM Jasa: + aktivitas Fed daerah sepakat | 75% | 75% | 72% | 72% | 66% | ✅ (detik 1–5), n 32 |
+| CPI: Kalshi & kejutan lalu sepakat | 45% | 65% | 65% | 65% | 70% | ⚠️ n 20 (2022–2025) |
+| CPI: Kalshi saja | 51% | 57% | 57% | 60% | 63% | ⚠️ n 35 |
+| CPI: + minyak WTI sepakat | 59% | 61% | 61% | 57% | 61% | ⚠️ n 44 |
+| CPI: minyak WTI saja | 56% | 59% | 56% | 53% | 55% | lemah, n 122 |
+| GDP: GDPNow | 35% | 46% | 51% | 57% | 66% | hanya detik 10 |
+| NFP, Core PPI, JOLTS | 40–55% | | | | | ≈ lempar koin |
+Detik 1 sering belum bergerak berarti (< $0,30) sehingga untuk CPI angkanya acak; detik 2–10 lebih stabil.
+Tampil di aplikasi 4.27 sebagai satu baris XAU di bawah tile ("XAU TURUN ▼ • benar 65–70% (2–10 dtk) ⚠️"), diperbarui
+otomatis (konsensus FF hari Minggu → Kalshi ikut dihitung).
+
 ## Sumber
 - Kalshi API (KXCPI, KXCPICORE, KXCPIYOY), nowcast Cleveland Fed (`nowcast_month.json`), GDPNow Atlanta Fed, FRED.
 - Preview konsensus & konteks: admiralmarkets.com (US CPI September 2026 Preview), fxstreet.com (TD Securities core CPI),

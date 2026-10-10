@@ -241,7 +241,8 @@ def blok(card: dict, mem: dict, env: dict | None = None, data: dict | None = Non
     catatan = "\n".join(baris) + ("\nCatatan: tebakan ARAH ANGKA lebih tepat daripada arah EMAS — emas 1 menit setelah "
                                   "rilis hanya cocok ±55–65% walau angkanya tertebak.")
     return {"judul": "🧭 Petunjuk teruji sebelum rilis", "teks": teks, "catatan": catatan,
-            "arah_emas": "naik" if naik else "turun"}
+            "arah_emas": "naik" if naik else "turun", "tebak": tebak, "kalshi_sepakat": bool(sepakat),
+            "sepakat_lain": [k for k, _ in lain]}
 
 
 def attach(persiapan: dict, calendar: list, store, now: datetime, env: dict | None = None) -> None:
