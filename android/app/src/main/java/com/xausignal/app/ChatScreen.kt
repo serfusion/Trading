@@ -351,11 +351,18 @@ private fun PrediksiLine(b: JSONObject, open: Boolean, waktu: String, onToggle: 
     Row(Modifier.fillMaxWidth().clickable(onClick = onToggle).padding(top = 4.dp),
         verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
-            Text(teks, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleMedium,
-                color = if (ad != null) (if (ad.optString("arah") == "naik") BuyColor else SellColor)
-                else if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
+            // 4.33: teks warna biasa, hanya "turun 56%" merah / "naik 56%" hijau; tanpa arah → abu-abu
+            if (ad != null) Text(arahBerwarna(teks), fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.titleSmall,
+                color = if (ad.isNull("arah")) Muted else MaterialTheme.colorScheme.onSurface)
+            else Text(teks, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleMedium,
+                color = if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
                 else MaterialTheme.colorScheme.onSurface)
             if (waktu.isNotBlank()) Text(waktu, style = MaterialTheme.typography.labelSmall, color = Muted)
+            // 4.33: arah setelah beberapa menit = ikuti arah detik 2 (cloud _pra_aset.menit_info)
+            ad?.optString("menit")?.ifBlank { null }?.let {
+                Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
         }
         Text(if (open) "▴" else "▾", color = Muted, style = MaterialTheme.typography.titleMedium)
     }
@@ -496,9 +503,13 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             return@AppCard
         }
         if (list.length() == 0) Text("Tidak ada berita USD penting yang tersisa pekan ini.", color = Muted)
+        var adaBaris = false
         for (i in 0 until list.length()) {
             val b = list.getJSONObject(i)
-            if (i > 0) LineDivider()
+            // 4.33: kartu kembar di waktu rilis sama (core CPI, CPI tahunan …) disembunyikan sebelum rilis
+            if (b.optJSONObject("arah_detik")?.optBoolean("ganda") == true && b.optJSONObject("hasil_rilis") == null) continue
+            if (adaBaris) LineDivider()
+            adaBaris = true
             key(b.optString("title") + b.optString("time")) {
                 var open by remember { mutableStateOf(false) }
                 val hasil = b.optJSONObject("hasil_rilis")
@@ -529,9 +540,12 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
         if (next != null && next.length() > 0) {
             LineDivider()
             Text("📅 Berita besar berikutnya", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+            var adaNext = false
             for (i in 0 until next.length()) {
                 val b = next.getJSONObject(i)
-                if (i > 0) LineDivider()
+                if (b.optJSONObject("arah_detik")?.optBoolean("ganda") == true) continue    // 4.33: tanpa dobel
+                if (adaNext) LineDivider()
+                adaNext = true
                 key(b.optString("title") + b.optString("time")) {
                     var open by remember { mutableStateOf(false) }
                     PrediksiLine(b, open, "${b.optString("when")} • ${b.optString("dalam")}") { open = !open }

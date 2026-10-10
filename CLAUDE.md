@@ -438,6 +438,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Aplikasi 4.32: keterangan jangka "(1–10 dtk) • setelah 30 dtk ≈ 50:50" dari `research/pra_jangka.py` →
   pra_aset.json["jangka"] (`_pra_aset.jangka`; jalankan ulang bila aturan/variant berubah). `research/pra_lain.py`
   (Fed yield 2 th 60% p 0,08; PPI/PCE/JOLTS tidak lolos).
+- Aplikasi 4.33: teks biasa, hanya arah+% berwarna; `arah_detik` di SEMUA kartu belum rilis (tanpa petunjuk = "arah 1–10 dtk
+  muncul ≤ 6 jam sebelum rilis"), kartu kembar `ganda` disembunyikan. Jangan kembalikan judul "1 jam" ke tab News.
+  + arah menit: "1–5 mnt: ikuti arah detik 2 (76%)" (`research/pra_menit.py` → pra_aset.json["menit"], `menit_info`):
+  gerak detik 2 ≥ $0,50 → arah sama 5 mnt 79% (lama & baru), 1 jam 66%.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

@@ -25,7 +25,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -288,6 +292,24 @@ private fun StripDaftar(prep: JSONObject, daftar: org.json.JSONArray) {
     }
 }
 
+/** 4.33: hanya bagian arah + persen yang berwarna ("▼ TURUN 56%" merah, "▲ NAIK 56%" hijau); sisanya warna biasa. */
+@Composable
+internal fun arahBerwarna(teks: String): AnnotatedString {
+    val hijau = BuyColor                                  // warna tema = @Composable → dibaca di luar builder
+    val merah = SellColor
+    return buildAnnotatedString {
+        val m = Regex("(▲ NAIK|▼ TURUN|naik|turun|NAIK|TURUN) \\d+%").find(teks)
+        if (m == null) {
+            append(teks)
+        } else {
+            append(teks.substring(0, m.range.first))
+            val naik = m.value.contains("NAIK") || m.value.startsWith("naik")
+            withStyle(SpanStyle(color = if (naik) hijau else merah, fontWeight = FontWeight.Bold)) { append(m.value) }
+            append(teks.substring(m.range.last + 1))
+        }
+    }
+}
+
 /**
  * 🎯 SATU baris berita berikutnya (aplikasi 4.31, permintaan pengguna "cukup news berikutnya naik atau turun"):
  * "CPI ▼ TURUN 56% ⚠️ • 4 hari lagi" (arah emas 1–10 dtk setelah rilis, cloud _pra_aset.satu). Ketuk = dasar angka.
@@ -295,17 +317,10 @@ private fun StripDaftar(prep: JSONObject, daftar: org.json.JSONArray) {
 @Composable
 private fun StripSatu(r: JSONObject) {
     var buka by remember(r.optString("time") + r.optString("teks")) { mutableStateOf(false) }
-    val arah = r.optString("arah")
-    val warna = when (arah) {
-        "naik" -> BuyColor
-        "turun" -> SellColor
-        else -> Muted
-    }
     val teks = r.optString("teks").substringBeforeLast(" • ") + " • " + sisaTeks(instantOf(r.optString("time")))
     Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
-        // 4.32: + keterangan jangka "(s/d 1 mnt) • setelah 3 mnt ≈ 50:50" → boleh 2 baris
-        Text(teks, style = MaterialTheme.typography.titleMedium, color = warna, fontWeight = FontWeight.ExtraBold,
-            maxLines = 2)
+        // 4.33: ukuran biasa (keluhan "terlalu besar"); hanya arah + persen berwarna
+        Text(arahBerwarna(teks), style = MaterialTheme.typography.labelMedium, maxLines = 2)
         if (buka) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }

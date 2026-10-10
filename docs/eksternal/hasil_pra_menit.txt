@@ -1,0 +1,35 @@
+# ⏱️ Arah setelah beberapa menit — ikuti arah detik 2?
+python -m research.pra_menit              → docs/eksternal/hasil_pra_menit.txt + cloud/api/pra_aset.json["menit"]
+
+Rilis dengan data: 2051
+
+## Gerak detik 2 ≥ $0.50 → arah sama di jangka h (LAMA / BARU)
+   SEMUA     (n 970) 10 dtk 92% | 30 dtk 86% | 1 mnt 83% | 3 mnt 80% | 5 mnt 79% | 10 mnt 75% | 15 mnt 71% | 30 mnt 69% | 1 jam 66%
+   NFP       (n 116) 10 dtk 96% | 30 dtk 87% | 1 mnt 86% | 3 mnt 81% | 5 mnt 80% | 10 mnt 78% | 15 mnt 78% | 30 mnt 74% | 1 jam 68%
+   CPI       (n 102) 10 dtk 91% | 30 dtk 82% | 1 mnt 80% | 3 mnt 72% | 5 mnt 76% | 10 mnt 74% | 15 mnt 66% | 30 mnt 64% | 1 jam 68%
+   PPI       (n 85) 10 dtk 89% | 30 dtk 82% | 1 mnt 81% | 3 mnt 75% | 5 mnt 81% | 10 mnt 75% | 15 mnt 72% | 30 mnt 64% | 1 jam 65%
+   RETAIL    (n 81) 10 dtk 90% | 30 dtk 84% | 1 mnt 83% | 3 mnt 80% | 5 mnt 82% | 10 mnt 80% | 15 mnt 69% | 30 mnt 72% | 1 jam 67%
+   PCE       (n 18) 10 dtk 83% | 30 dtk 78% | 1 mnt 67% | 3 mnt 61% | 5 mnt 56% | 10 mnt 61% | 15 mnt 61% | 30 mnt 67% | 1 jam 61%
+   GDP       (n 31) 10 dtk 87% | 30 dtk 84% | 1 mnt 84% | 3 mnt 71% | 5 mnt 74% | 10 mnt 71% | 15 mnt 74% | 30 mnt 83% | 1 jam 73%
+   FOMC      (n 58) 10 dtk 84% | 30 dtk 78% | 1 mnt 64% | 3 mnt 67% | 5 mnt 62% | 10 mnt 69% | 15 mnt 71% | 30 mnt 67% | 1 jam 55%
+   JOLTS     (n 19) 10 dtk 100% | 30 dtk 90% | 1 mnt 95% | 3 mnt 95% | 5 mnt 84% | 10 mnt 74% | 15 mnt 74% | 30 mnt 74% | 1 jam 74%
+   ISM       (n 166) 10 dtk 97% | 30 dtk 90% | 1 mnt 90% | 3 mnt 87% | 5 mnt 88% | 10 mnt 81% | 15 mnt 75% | 30 mnt 68% | 1 jam 69%
+   ADP       (n 84) 10 dtk 94% | 30 dtk 95% | 1 mnt 92% | 3 mnt 90% | 5 mnt 87% | 10 mnt 82% | 15 mnt 80% | 30 mnt 74% | 1 jam 68%
+   CLAIMS    (n 75) 10 dtk 83% | 30 dtk 85% | 1 mnt 76% | 3 mnt 77% | 5 mnt 71% | 10 mnt 64% | 15 mnt 59% | 30 mnt 64% | 1 jam 55%
+   KONSUMEN  (n 62) 10 dtk 95% | 30 dtk 90% | 1 mnt 84% | 3 mnt 84% | 5 mnt 74% | 10 mnt 68% | 15 mnt 68% | 30 mnt 66% | 1 jam 56%
+   LAMA/BARU 5 mnt: SEMUA 79.2/78.4, NFP 76.9/84.3, CPI 79.2/72.2, PPI 78.0/84.1, RETAIL 82.6/80.0, PCE None/55.6, GDP 70.0/81.8, FOMC 54.3/73.9, JOLTS 100.0/83.3, ISM 87.5/88.4, ADP 92.0/79.4, CLAIMS 78.6/68.9, KONSUMEN 71.4/75.0
+
+## Gerak detik 2 ≥ $1.00 → arah sama di jangka h (LAMA / BARU)
+   SEMUA     (n 706) 10 dtk 95% | 30 dtk 90% | 1 mnt 88% | 3 mnt 85% | 5 mnt 82% | 10 mnt 78% | 15 mnt 74% | 30 mnt 71% | 1 jam 68%
+   NFP       (n 103) 10 dtk 96% | 30 dtk 88% | 1 mnt 87% | 3 mnt 82% | 5 mnt 82% | 10 mnt 79% | 15 mnt 79% | 30 mnt 74% | 1 jam 69%
+   CPI       (n 81) 10 dtk 93% | 30 dtk 88% | 1 mnt 88% | 3 mnt 80% | 5 mnt 80% | 10 mnt 78% | 15 mnt 70% | 30 mnt 69% | 1 jam 73%
+   PPI       (n 51) 10 dtk 86% | 30 dtk 84% | 1 mnt 82% | 3 mnt 78% | 5 mnt 80% | 10 mnt 71% | 15 mnt 71% | 30 mnt 61% | 1 jam 63%
+   RETAIL    (n 54) 10 dtk 94% | 30 dtk 91% | 1 mnt 89% | 3 mnt 91% | 5 mnt 89% | 10 mnt 91% | 15 mnt 80% | 30 mnt 78% | 1 jam 74%
+   GDP       (n 20) 10 dtk 90% | 30 dtk 90% | 1 mnt 85% | 3 mnt 80% | 5 mnt 80% | 10 mnt 85% | 15 mnt 95% | 30 mnt 90% | 1 jam 80%
+   FOMC      (n 46) 10 dtk 89% | 30 dtk 83% | 1 mnt 67% | 3 mnt 72% | 5 mnt 65% | 10 mnt 72% | 15 mnt 70% | 30 mnt 72% | 1 jam 59%
+   JOLTS     (n 16) 10 dtk 100% | 30 dtk 94% | 1 mnt 100% | 3 mnt 100% | 5 mnt 88% | 10 mnt 81% | 15 mnt 81% | 30 mnt 81% | 1 jam 81%
+   ISM       (n 126) 10 dtk 98% | 30 dtk 94% | 1 mnt 93% | 3 mnt 90% | 5 mnt 89% | 10 mnt 81% | 15 mnt 75% | 30 mnt 68% | 1 jam 68%
+   ADP       (n 60) 10 dtk 100% | 30 dtk 100% | 1 mnt 98% | 3 mnt 98% | 5 mnt 90% | 10 mnt 88% | 15 mnt 83% | 30 mnt 75% | 1 jam 68%
+   CLAIMS    (n 44) 10 dtk 91% | 30 dtk 93% | 1 mnt 84% | 3 mnt 84% | 5 mnt 82% | 10 mnt 66% | 15 mnt 57% | 30 mnt 64% | 1 jam 59%
+   KONSUMEN  (n 43) 10 dtk 98% | 30 dtk 93% | 1 mnt 88% | 3 mnt 88% | 5 mnt 79% | 10 mnt 72% | 15 mnt 74% | 30 mnt 72% | 1 jam 60%
+   LAMA/BARU 5 mnt: SEMUA 82.8/82.2, NFP 77.2/87.0, CPI 84.8/77.1, PPI 78.9/81.2, RETAIL 92.6/85.2, GDP 71.4/100.0, FOMC 59.3/73.7, JOLTS None/87.5, ISM 89.6/88.5, ADP 97.1/80.8, CLAIMS 100.0/79.5, KONSUMEN 66.7/80.0
