@@ -259,3 +259,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - "Coba lagi": `research/pra_xau_mikro.py` (aliran tick, gerak 1/3 dtk, posisi rentang 60 mnt, angka bulat, tick sepi) +
   rezim rilis terakhir → tidak ada yang baru (lolos 2 vs kebetulan 1,7). Dosis–respons tren × petunjuk mengonfirmasi aturan
   terpasang (docs/XAU_DETIK.md bagian D).
+- Pengguna: "cari metode lain per news, pasti ada di atas 65%; tampilkan di bawah XAU 'CPI peluang emas naik 68% - 4 hari
+  lagi'" → `research/pra_per_berita.py` (79 aturan, docs/XAU_DETIK.md bagian E): tebakan angka sampai 64–70% (upah per jam,
+  core retail, core CPI) tetapi arah emas 1–10 dtk 51–57%; > 65% hanya ISM Jasa + tren searah (69%). Aplikasi 4.30: daftar
+  berita mendatang (maks 5) dengan persen teruji / "≈ 50:50".

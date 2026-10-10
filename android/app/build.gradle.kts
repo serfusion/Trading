@@ -11,8 +11,8 @@ android {
         applicationId = "com.xausignal.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 86
-        versionName = "4.29"
+        versionCode = 87
+        versionName = "4.30"
     }
 
     // Kunci debug TETAP (di repo, sandi standar debug "android"): tanpa ini tiap build CI memakai kunci acak baru,

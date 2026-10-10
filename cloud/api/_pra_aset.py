@@ -146,18 +146,19 @@ def tren_emas(store, now: datetime, fetch, sisa: timedelta) -> dict | None:
     return t
 
 
-def _rentang(blok: dict) -> tuple[str, int, dict]:
+def _rentang(blok: dict) -> tuple[str, int, dict, float]:
     sel = [(blok.get(str(h)) or {}).get("exness") or {} for h in (2, 3, 5, 10)]
     sel = [x for x in sel if x.get("n")]
     if not sel:
-        return "", 0, {}
+        return "", 0, {}, 0.0
     lo, hi = min(x["benar"] for x in sel), max(x["benar"] for x in sel)
     r = f"{lo:.0f}%" if round(lo) == round(hi) else f"{lo:.0f}–{hi:.0f}%"
-    return r, max(x["n"] for x in sel), sel[-1]
+    return r, max(x["n"] for x in sel), sel[-1], sum(x["benar"] for x in sel) / len(sel)
 
 
-def baris_tren(title: str, arah_berita: str | None, t: dict) -> dict | None:
-    """➕ baris tren emas 4 jam: searah / berlawanan dengan petunjuk berita, atau tren saja (berita tanpa petunjuk)."""
+def baris_tren(title: str, arah_berita: str | None, t: dict, khusus: dict | None = None) -> dict | None:
+    """➕ baris tren emas 4 jam: searah / berlawanan dengan petunjuk berita, atau tren saja (berita tanpa petunjuk).
+    `khusus` = angka gabungan milik aturan per berita ({"sepakat"|"berlawanan": {benar, lama, baru, n}})."""
     tr = DATA.get("tren") or {}
     if not tr or not t:
         return None
@@ -169,13 +170,17 @@ def baris_tren(title: str, arah_berita: str | None, t: dict) -> dict | None:
     jam = _core.parse_iso(t["at"]).strftime("%H:%M")
     if arah_berita:
         hub = "sepakat" if (arah_berita == "naik") == naik else "berlawanan"
-        blok = (tr.get(hub) or {}).get(g) or {}
-        if not blok or ((blok.get("3") or {}).get("exness") or {}).get("n", 0) < 40:
-            g, blok = "SEMUA", (tr.get(hub) or {}).get("SEMUA") or {}
-        r, n, akhir = _rentang(blok)
+        k = (khusus or {}).get(hub)
+        if k:
+            r, n, akhir, rata, lingkup = f"{k['benar']:.0f}%", k["n"], k, k["benar"], "aturan berita ini"
+        else:
+            blok = (tr.get(hub) or {}).get(g) or {}
+            if not blok or ((blok.get("3") or {}).get("exness") or {}).get("n", 0) < 40:
+                g, blok = "SEMUA", (tr.get(hub) or {}).get("SEMUA") or {}
+            r, n, akhir, rata = _rentang(blok)
+            lingkup = "semua berita berpetunjuk" if g == "SEMUA" else g
         if not r:
             return None
-        lingkup = "semua berita berpetunjuk" if g == "SEMUA" else g
         if hub == "sepakat":
             teks = f"➕ Tren emas 4 jam {simbol} ({gerak}) SEARAH → benar {r} ⚠️"
             putusan = f"Tebakan terbaik: XAU {simbol} (petunjuk berita & tren searah)"
@@ -184,17 +189,121 @@ def baris_tren(title: str, arah_berita: str | None, t: dict) -> dict | None:
             putusan = "≈ 50:50 — petunjuk berita & tren berlawanan, lebih aman tidak entry"
     else:
         hub = "tanpa"
-        blok = (tr.get("tanpa") or {}).get("SEMUA") or {}
-        r, n, akhir = _rentang(blok)
+        r, n, akhir, rata = _rentang((tr.get("tanpa") or {}).get("SEMUA") or {})
         if not r:
             return None
         lingkup = "semua berita tanpa petunjuk"
         teks = f"Tren emas 4 jam {simbol} ({gerak}) → ikut tren benar {r} (lemah, ≈ lempar koin) ⚪"
         putusan = "≈ 50:50 — tanpa petunjuk berita, tren saja lemah"
     return {"arah": "naik" if naik else "turun", "hubungan": hub, "g4": t["g4"], "teks": teks, "putusan": putusan,
+            "persen": round(rata),
             "bukti": (f"tren = harga terbaru vs 4 jam lalu (dihitung {jam} UTC; cek lagi 1–5 mnt sebelum rilis) • "
                       f"{lingkup}: 2–10 dtk {r} (n {n}) • lama {akhir.get('lama')}% / baru {akhir.get('baru')}% • "
                       f"ditemukan setelah melihat data → perlu uji maju").replace(".", ",")}
+
+
+# 🎯 Daftar berita mendatang di bawah XAU (aplikasi 4.30, permintaan pengguna 10 Okt 2026: "CPI peluang emas naik 68%
+# - 4 hari lagi"). Persen = seberapa sering arah tebakan benar 2–10 dtk setelah rilis (rata-rata detik 2/3/5/10, tick
+# Exness). Sumber: petunjuk teruji (_petunjuk → xau_arah) atau aturan per berita yang konsisten lama & baru
+# (research/pra_per_berita.py → pra_aset.json["per_berita"]): hari NFP = kalender survei BLS (5 pekan antar pekan survei
+# → pengangguran di atas → emas naik, 57%; + tren 4 jam searah 62%). Tanpa petunjuk → "≈ 50:50" (tidak dikarang).
+URUT = ("Non-Farm Employment Change", "CPI m/m", "Core CPI m/m", "Federal Funds Rate", "PPI m/m", "Core PPI m/m",
+        "Retail Sales m/m", "Core Retail Sales m/m", "ISM Services PMI", "ISM Manufacturing PMI", "JOLTS Job Openings",
+        "Advance GDP q/q", "Core PCE Price Index m/m", "ADP Non-Farm Employment Change", "Unemployment Claims")
+NFP_HARI = ("Non-Farm Employment Change", "Unemployment Rate", "Average Hourly Earnings m/m")
+MAKS_DAFTAR = 5
+DAFTAR_HARI = 31
+
+
+def sisa_teks(dt: timedelta) -> str:
+    s = dt.total_seconds()
+    if s >= 86400:
+        return f"{int(s // 86400)} hari lagi"
+    if s >= 3600:
+        return f"{int(s // 3600)} jam lagi"
+    return f"{max(1, int(s // 60))} mnt lagi"
+
+
+def pekan5(t0: datetime) -> bool:
+    """True bila jarak pekan survei BLS (pekan Minggu–Sabtu yang memuat tgl 12) bulan acuan vs bulan sebelumnya 5 pekan."""
+    def minggu(th: int, bl: int) -> datetime:
+        d = datetime(th, bl, 12)
+        return d - timedelta(days=(d.weekday() + 1) % 7)
+    th, bl = (t0.year, t0.month - 1) if t0.month > 1 else (t0.year - 1, 12)
+    th0, bl0 = (th, bl - 1) if bl > 1 else (th - 1, 12)
+    return (minggu(th, bl) - minggu(th0, bl0)).days >= 35
+
+
+def _persen(sel: list) -> float:
+    jauh = [x["benar"] for x in sel if x["h"] >= 2] or [x["benar"] for x in sel]
+    return sum(jauh) / len(jauh)
+
+
+def tebak_kartu(c: dict) -> dict | None:
+    """Arah + persen untuk satu kartu berita (tanpa tren)."""
+    b = c.get("petunjuk_teruji") or {}
+    var = varian(c["title"], b) if b.get("arah_emas") else None
+    r = ringkas(var, b["arah_emas"]) if var else None
+    if r and r["status"] != "acak":
+        return {"arah": r["arah"], "persen": round(_persen(r["detik"])), "status": r["status"],
+                "dasar": var, "bukti": r["bukti"]}
+    pb = (DATA.get("per_berita") or {}).get("Unemployment Rate|PK5")
+    if c["title"] in NFP_HARI and pb:
+        lima = pekan5(datetime.fromisoformat(c["time"]))
+        ur_atas = (1.0 if lima else -1.0) * pb["arah"] > 0
+        return {"arah": "naik" if ur_atas else "turun", "persen": round(pb["benar"]), "status": "lemah",
+                "dasar": "Pengangguran • kalender survei BLS",
+                "khusus": {"sepakat": pb.get("tren_searah"), "berlawanan": pb.get("tren_lawan")},
+                "bukti": (f"dasar: {'5' if lima else '4'} pekan antar pekan survei BLS → pengangguran cenderung "
+                          f"{'DI ATAS' if ur_atas else 'DI BAWAH'} perkiraan (tebakan angka {pb['kejutan']:.0f}%) • emas "
+                          f"2–10 dtk benar {pb['benar']:.0f}% (n {pb['n']}; lama {pb['lama']:.0f}% / baru {pb['baru']:.0f}%) "
+                          f"• lemah, tetapi konsisten dua periode").replace(".", ",")}
+    return None
+
+
+def daftar(persiapan: dict, now: datetime, tren=None) -> list:
+    kartu = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)
+             and c.get("time") and not c.get("released") and datetime.fromisoformat(c["time"]) > now
+             and datetime.fromisoformat(c["time"]) - now <= timedelta(days=DAFTAR_HARI)]
+    per_waktu: dict[str, list] = {}
+    for c in kartu:
+        per_waktu.setdefault(c["time"], []).append(c)
+    out = []
+    for t0 in sorted(per_waktu)[:MAKS_DAFTAR * 2]:
+        cs = per_waktu[t0]
+        kandidat = [(tebak_kartu(c), c) for c in cs]
+        ada = [(g, c) for g, c in kandidat if g]
+        prio = lambda gc: (0 if gc[0] else 1, URUT.index(gc[1]["title"]) if gc[1]["title"] in URUT else 99)  # noqa: E731
+        g, c = sorted(ada or kandidat, key=prio)[0]
+        if not ada and c["title"] not in URUT:
+            continue                                              # berita kecil tanpa petunjuk: tidak ditampilkan
+        nm = _prediksi.nama(c["title"] if not (g and g["dasar"].startswith("Pengangguran")) else NFP_HARI[0])
+        sisa = sisa_teks(datetime.fromisoformat(t0) - now)
+        row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
+        if g:
+            tanda = "✅" if g["status"] == "teruji" else "⚠️"
+            row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"],
+                       teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
+        else:
+            row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
+                                                                  "untuk berita ini (diuji 2010–2026)",
+                       teks=f"{nm} • ≈ 50:50 (belum ada petunjuk teruji) • {sisa}")
+        if not out and tren is not None and datetime.fromisoformat(t0) - now <= timedelta(hours=TREN_JAM):
+            khusus = g.get("khusus") if g else None
+            bt = baris_tren(c["title"], g["arah"] if g else None, tren(datetime.fromisoformat(t0) - now), khusus)
+            if bt:
+                row["tren"] = bt
+                if g and bt["hubungan"] == "sepakat":
+                    pr = bt["persen"] if khusus else max(g["persen"], bt["persen"])
+                    row.update(persen=pr, status="tren searah",
+                               teks=f"{nm} • peluang emas {g['arah']} {pr}% (+ tren searah) ⚠️ • {sisa}")
+                elif g and bt["hubungan"] == "berlawanan":
+                    row.update(persen=50, status="acak",
+                               teks=f"{nm} • ≈ 50:50 (petunjuk & tren 4 jam berlawanan) • {sisa}")
+        out.append(row)
+        if len(out) >= MAKS_DAFTAR:
+            break
+    return out
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
@@ -225,6 +334,9 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
     k = kepastian(c["title"])
     if k:
         out["kepastian"] = k
+    if tren is not None:                                   # tren diambil sekali per permintaan (cache Supabase)
+        asli, memo = tren, {}
+        tren = lambda s_: memo["v"] if "v" in memo else memo.setdefault("v", asli(s_))  # noqa: E731
     sisa = datetime.fromisoformat(c["time"]) - now
     if tren is not None and sisa <= timedelta(hours=TREN_JAM):
         bt = baris_tren(c["title"], b.get("arah_emas") if r else None, tren(sisa))
@@ -233,3 +345,9 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
     elif tren is not None:
         out["tren_nanti"] = f"➕ Tren emas 4 jam tampil ≤ {TREN_JAM} jam sebelum rilis"
     persiapan["pra"] = out
+    try:
+        dl = daftar(persiapan, now, tren)
+        if dl:
+            persiapan["pra_daftar"] = dl
+    except Exception:  # noqa: BLE001 - daftar opsional
+        pass
