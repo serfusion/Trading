@@ -48,6 +48,8 @@ TOPIK = [(r"tariff", "tarif"), (r"sanction", "sanksi"), (r"attack|airstrike|miss
          (r"\bdeal\b|agreement", "kesepakatan"), (r"\bban\b|crackdown", "larangan"),
          (r"plunge|crash|tumble|sell-?off", "harga anjlok"), (r"surge|soar|rall(y|ies)", "harga melonjak")]
 PENTING = ("Trump", "Ketua Fed", "Fed", "Menkeu AS", "Gedung Putih")
+UMUM = {"trump", "says", "said", "president", "will", "with", "from", "after", "over", "amid", "could", "would", "that",
+        "this", "their", "about", "into", "more", "than", "what", "news", "report", "deal", "states", "united"}
 
 
 def _get(url: str, timeout: float = 5.0, opener=None) -> bytes:
@@ -114,8 +116,8 @@ def kumpulkan(now: datetime, get=_get) -> tuple[list[dict], list[str]]:
     seen, out = [], []
     # pernyataan orang penting (Trump, Fed, Menkeu, Gedung Putih) didahulukan, lalu yang terbaru
     for r in sorted(items, key=lambda r: (not any(x in PENTING for x in r["siapa"]), -r["t"].timestamp())):
-        kata = {w for w in re.findall(r"[a-z]{4,}", r["judul"].lower().rsplit(" - ", 1)[0])}
-        if any(len(kata & k) >= 0.5 * min(len(kata), len(k)) for k in seen if k):    # cerita sama, media lain
+        kata = {w[:5] for w in re.findall(r"[a-z]{4,}", r["judul"].lower().rsplit(" - ", 1)[0]) if w not in UMUM}
+        if any(len(kata & k) >= max(2, 0.25 * min(len(kata), len(k))) for k in seen if k):   # cerita sama, media lain
             continue
         seen.append(kata)
         r["topik"] = _cocok(r["judul"], TOPIK, True)

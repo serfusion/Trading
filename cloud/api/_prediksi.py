@@ -154,9 +154,9 @@ def detail(card: dict, pr: dict, persiapan: dict, titik: dict | None) -> list[di
     if card.get("kalshi_sebaran"):                      # 📅 sebelum konsensus terbit: angka paling mungkin menurut pasar
         k = card["kalshi_sebaran"]
         out.append({"judul": k["judul"], "teks": k["teks"], "catatan": k["catatan"]})
-    for x in (persiapan.get("pernyataan") or {}).get("penting") or []:
-        if title in (x.get("untuk") or ()):            # 🗣️ pernyataan Fed/Trump/pemerintah terbaru yang relevan
-            out.append({"judul": "🗣️ Pernyataan terbaru", "teks": x.get("judul") or "", "catatan": x.get("catatan") or ""})
+    terkait = [x for x in (persiapan.get("pernyataan") or {}).get("penting") or [] if title in (x.get("untuk") or ())]
+    for x in terkait[:2]:                               # 🗣️ maks 2 pernyataan terbaru yang relevan (daftar lengkap di kartu)
+        out.append({"judul": "🗣️ Pernyataan terbaru", "teks": x.get("judul") or "", "catatan": x.get("catatan") or ""})
     if title == NFP and titik and not card.get("released"):
         out.append({"judul": titik["judul"], "teks": titik["teks"],
                     "catatan": "\n".join((titik["kondisi"], titik["pendahulu"], titik["bukti"]))})
