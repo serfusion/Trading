@@ -416,6 +416,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   itu (aturan "CPI" di petunjuk.json); 📌 kepastian: gerak ≥ $0,50 di detik 2 bertahan s/d detik 10 pada 92% rilis →
   `pra_aset.json["lanjut"]`, baris 📌 (aplikasi 4.28). Urutan regenerasi petunjuk.json: berita_gabung → sumber_lain →
   pra_xau_dalam (masing-masing menggabung ke file yang sama).
+- `research/pra_xau_semua.py` (docs/XAU_DETIK.md bagian C; permintaan "prediksi arah XAU sebelum news APA PUN, semua metode"):
+  2.051 rilis, 18 petunjuk KETAT (≤ t0−1; putaran pertama BOCOR lewat candle H1 :30 yang belum tutup — jangan ulangi),
+  uji acak permutasi: 702 kombinasi → lolos 10 vs kebetulan 7,5 → tidak lebih baik dari acak. Hanya petunjuk berita teruji
+  konsisten (BARU 56–60%). `tren` → `pra_aset.json["tren"]`: petunjuk & tren emas 4 jam SEARAH 63–67% (ISM 70–76%),
+  BERLAWANAN 49–55%, tanpa petunjuk 55–56% → aplikasi 4.29 baris ➕ (`_pra_aset.tren_emas`, baris Supabase `pra_tren`,
+  env PRA_TREN). Cache `data/research/eksternal/pra_xau_semua_v2.parquet` (hapus bila data tick/berita bertambah).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

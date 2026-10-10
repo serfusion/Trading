@@ -251,3 +251,8 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - PR serfusion/Trading#76 di-merge ke main (live) + branch produksi bold-davinci dimajukan. Riset mendalam NFP/PPI/JOLTS
   (`research/pra_xau_dalam.py`, docs/XAU_DETIK.md): sebelum rilis NFP & JOLTS ≈ acak; PPI ← kejutan CPI; kepastian
   detik 2 ≥ $0,50 → detik 10 sama 92% (n 839) → aplikasi 4.28 baris 📌.
+- PR serfusion/Trading#77 di-merge. Pengguna: "2 detik terlalu lambat, prediksi arah XAU SEBELUM news apa pun, semua metode"
+  → `research/pra_xau_semua.py` (2.051 rilis; tick 10–120 dtk, BTC, konsensus vs lalu, kejutan lalu 18 judul, tren 15 mnt–24
+  jam/EMA, model walk-forward, gabungan suara, uji permutasi). Kebocoran candle H1 ditemukan & diperbaiki. Hasil: semua
+  ≈ 50–56% di periode baru kecuali petunjuk berita teruji; gabungan petunjuk × tren 4 jam searah 63–67% (ISM 70–76%) →
+  aplikasi 4.29 baris ➕ tren (docs/XAU_DETIK.md bagian C).

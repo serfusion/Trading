@@ -248,6 +248,21 @@ private fun StripPra(prep: JSONObject?) {
         Text(pra.optString("teks"), style = MaterialTheme.typography.labelMedium, color = warna,
             fontWeight = FontWeight.ExtraBold, maxLines = 2)
         Text(pra.optString("kecil"), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+        // ➕ tren emas 4 jam (aplikasi 4.29): searah petunjuk berita → % gabungan; berlawanan → ≈ lempar koin
+        pra.optJSONObject("tren")?.let { tr ->
+            val hub = tr.optString("hubungan")
+            val wTren = when (hub) {
+                "sepakat" -> if (tr.optString("arah") == "naik") BuyColor else SellColor
+                "berlawanan" -> Gold
+                else -> Muted
+            }
+            Text(tr.optString("teks"), style = MaterialTheme.typography.labelSmall, color = wTren,
+                fontWeight = FontWeight.Bold, maxLines = 2)
+            Text(tr.optString("putusan"), style = MaterialTheme.typography.labelSmall, color = wTren, maxLines = 2)
+            if (open) Text(tr.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
+        } ?: pra.optString("tren_nanti").ifBlank { null }?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
+        }
         // 📌 kepastian setelah detik 2 (aplikasi 4.28): arah yang sudah terlihat ≥ $0,50 hampir selalu bertahan s/d detik 10
         pra.optString("kepastian").ifBlank { null }?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold,

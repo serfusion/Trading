@@ -247,7 +247,11 @@ class handler(BaseHTTPRequestHandler):
             if isinstance(persiapan, dict):
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
                     import _pra_aset
-                    _pra_aset.attach(persiapan, now)
+                    key = os.environ.get("TWELVEDATA_API_KEY", "")
+                    tren = (lambda sisa: _pra_aset.tren_emas(
+                        store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(24, "15min"), sisa)) \
+                        if key and os.environ.get("PRA_TREN", "1") == "1" else None
+                    _pra_aset.attach(persiapan, now, tren)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \

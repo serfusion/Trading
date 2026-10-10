@@ -134,3 +134,51 @@ def test_ppi_dari_cpi_dan_kepastian_detik2(monkeypatch):
     retail = {"mendatang": [{"title": "Retail Sales m/m", "time": T0}]}
     A.attach(retail, NOW)
     assert "93% rilis (n 900)" in retail["pra"]["kepastian"]                  # tanpa data grup → SEMUA
+
+
+def test_tren_emas_4_jam_searah_berlawanan(monkeypatch):
+    """➕ tren emas 4 jam: searah petunjuk → % gabungan; berlawanan → ≈ lempar koin; tanpa petunjuk → tren saja."""
+    from datetime import timedelta
+
+    import _core
+    import _pra_aset as A
+    now = datetime(2026, 10, 14, 12, 0, tzinfo=timezone.utc)
+    bars = [_core.Bar(now - timedelta(minutes=15 * i), 4000 + i * 0.5, 4002 + i * 0.5, 3999 + i * 0.5, 4000.5 + i * 0.5)
+            for i in range(24, -1, -1)]                           # harga turun ±$8 dalam 4 jam
+    t = A.hitung_tren(bars, now)
+    assert t["g4"] == round(bars[-1].c - 4008.0, 2) and t["g4"] < 0
+    assert A.hitung_tren(bars[:-6], now) is None                  # data basi (> 45 mnt) → tanpa tren
+
+    class St:
+        d = {}
+
+        def get_state(self, row):
+            return self.d.get(row, {})
+
+        def save_state(self, data, row):
+            self.d[row] = data
+    st = St()
+    assert A.tren_emas(st, now, lambda: bars, timedelta(minutes=30))["g4"] == t["g4"]
+    later = now + timedelta(minutes=3)
+    assert A.tren_emas(st, later, lambda: (_ for _ in ()).throw(OSError("x")), timedelta(minutes=27)) == st.d["pra_tren"]
+
+    x = lambda b, n=142: {str(h): {"exness": {"n": n, "benar": b, "lama": 62.2, "baru": 66.2}} for h in (1, 2, 3, 5, 10)}  # noqa: E731
+    h = {"exness": {"n": 107, "benar": 65.4, "lama": 65.0, "baru": 66.0}, "konsisten": True}
+    monkeypatch.setattr(A, "DATA", {"xau_arah": {"ISM Jasa • berbalik": {"h": {f"{k}|0": h for k in (1, 2, 3, 5, 10)}}},
+                                    "tren": {"sepakat": {"SEMUA": x(64.0), "ISM": x(76.0, 46)},
+                                             "berlawanan": {"SEMUA": x(54.0, 124), "ISM": x(57.0, 42)},
+                                             "tanpa": {"SEMUA": x(55.0, 1410)}}})
+    T = "2026-10-14T14:00:00+00:00"
+    ism = {"mendatang": [{"title": "ISM Services PMI", "time": T, "petunjuk_teruji": {"arah_emas": "turun", "tebak": {"-P": 1.0}}}]}
+    A.attach(ism, now, lambda sisa: t)
+    tr = ism["pra"]["tren"]
+    assert tr["hubungan"] == "sepakat" and "SEARAH → benar 76%" in tr["teks"] and tr["putusan"] == "Tebakan terbaik: XAU TURUN ▼ (petunjuk berita & tren searah)"
+    naik = {"mendatang": [{"title": "ISM Services PMI", "time": T, "petunjuk_teruji": {"arah_emas": "naik", "tebak": {"-P": -1.0}}}]}
+    A.attach(naik, now, lambda sisa: t)
+    assert naik["pra"]["tren"]["hubungan"] == "berlawanan" and "57%" in naik["pra"]["tren"]["teks"]
+    retail = {"mendatang": [{"title": "Retail Sales m/m", "time": T}]}
+    A.attach(retail, now, lambda sisa: t)
+    assert retail["pra"]["tren"]["hubungan"] == "tanpa" and "lemah" in retail["pra"]["tren"]["teks"]
+    jauh = {"mendatang": [{"title": "Retail Sales m/m", "time": "2026-10-15T14:00:00+00:00"}]}
+    A.attach(jauh, now, lambda sisa: t)
+    assert "tren" not in jauh["pra"] and "≤ 6 jam" in jauh["pra"]["tren_nanti"]

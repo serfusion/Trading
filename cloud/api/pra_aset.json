@@ -13329,5 +13329,2942 @@
    "lama": 98.3,
    "baru": 96.2
   }
+ },
+ "tren": {
+  "catatan": "KEJ = arah emas dari petunjuk teruji berita; H4 = harga 1 dtk sebelum rilis vs 4 jam sebelumnya (candle M15 yang sudah tutup). Ditemukan setelah melihat data → perlu uji maju.",
+  "sepakat": {
+   "SEMUA": {
+    "1": {
+     "exness": {
+      "n": 140,
+      "benar": 64.3,
+      "p": 0.0005,
+      "lama": 68.1,
+      "n_lama": 72,
+      "baru": 60.3,
+      "n_baru": 68,
+      "p_baru": 0.0571,
+      "tahun": "8/10"
+     },
+     "dukascopy": {
+      "n": 124,
+      "benar": 56.5,
+      "p": 0.0889,
+      "lama": 58.8,
+      "n_lama": 68,
+      "baru": 53.6,
+      "n_baru": 56,
+      "p_baru": 0.3444,
+      "tahun": "9/13"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 142,
+      "benar": 64.1,
+      "p": 0.0005,
+      "lama": 68.9,
+      "n_lama": 74,
+      "baru": 58.8,
+      "n_baru": 68,
+      "p_baru": 0.0909,
+      "tahun": "8/10"
+     },
+     "dukascopy": {
+      "n": 125,
+      "benar": 61.6,
+      "p": 0.006,
+      "lama": 60.9,
+      "n_lama": 69,
+      "baru": 62.5,
+      "n_baru": 56,
+      "p_baru": 0.0407,
+      "tahun": "10/13"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 142,
+      "benar": 63.4,
+      "p": 0.0009,
+      "lama": 64.9,
+      "n_lama": 74,
+      "baru": 61.8,
+      "n_baru": 68,
+      "p_baru": 0.0341,
+      "tahun": "9/10"
+     },
+     "dukascopy": {
+      "n": 126,
+      "benar": 61.1,
+      "p": 0.0079,
+      "lama": 58.6,
+      "n_lama": 70,
+      "baru": 64.3,
+      "n_baru": 56,
+      "p_baru": 0.022,
+      "tahun": "9/13"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 142,
+      "benar": 66.9,
+      "p": 0.0,
+      "lama": 67.6,
+      "n_lama": 74,
+      "baru": 66.2,
+      "n_baru": 68,
+      "p_baru": 0.0052,
+      "tahun": "10/10"
+     },
+     "dukascopy": {
+      "n": 126,
+      "benar": 60.3,
+      "p": 0.0128,
+      "lama": 57.1,
+      "n_lama": 70,
+      "baru": 64.3,
+      "n_baru": 56,
+      "p_baru": 0.022,
+      "tahun": "9/13"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 142,
+      "benar": 64.1,
+      "p": 0.0005,
+      "lama": 62.2,
+      "n_lama": 74,
+      "baru": 66.2,
+      "n_baru": 68,
+      "p_baru": 0.0052,
+      "tahun": "9/10"
+     },
+     "dukascopy": {
+      "n": 126,
+      "benar": 59.5,
+      "p": 0.02,
+      "lama": 55.7,
+      "n_lama": 70,
+      "baru": 64.3,
+      "n_baru": 56,
+      "p_baru": 0.022,
+      "tahun": "9/13"
+     }
+    }
+   },
+   "CPI": {
+    "1": {
+     "exness": {
+      "n": 53,
+      "benar": 56.6,
+      "p": 0.2051,
+      "lama": 67.9,
+      "n_lama": 28,
+      "baru": 44.0,
+      "n_baru": 25,
+      "p_baru": 0.7878,
+      "tahun": "4/6"
+     },
+     "dukascopy": {
+      "n": 68,
+      "benar": 52.9,
+      "p": 0.3582,
+      "lama": 60.5,
+      "n_lama": 43,
+      "baru": 40.0,
+      "n_baru": 25,
+      "p_baru": 0.8852,
+      "tahun": "5/7"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 55,
+      "benar": 60.0,
+      "p": 0.0885,
+      "lama": 66.7,
+      "n_lama": 30,
+      "baru": 52.0,
+      "n_baru": 25,
+      "p_baru": 0.5,
+      "tahun": "3/6"
+     },
+     "dukascopy": {
+      "n": 69,
+      "benar": 58.0,
+      "p": 0.1142,
+      "lama": 59.1,
+      "n_lama": 44,
+      "baru": 56.0,
+      "n_baru": 25,
+      "p_baru": 0.345,
+      "tahun": "4/7"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 55,
+      "benar": 58.2,
+      "p": 0.1403,
+      "lama": 60.0,
+      "n_lama": 30,
+      "baru": 56.0,
+      "n_baru": 25,
+      "p_baru": 0.345,
+      "tahun": "3/6"
+     },
+     "dukascopy": {
+      "n": 70,
+      "benar": 60.0,
+      "p": 0.0598,
+      "lama": 60.0,
+      "n_lama": 45,
+      "baru": 60.0,
+      "n_baru": 25,
+      "p_baru": 0.2122,
+      "tahun": "4/7"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 55,
+      "benar": 61.8,
+      "p": 0.0524,
+      "lama": 63.3,
+      "n_lama": 30,
+      "baru": 60.0,
+      "n_baru": 25,
+      "p_baru": 0.2122,
+      "tahun": "4/6"
+     },
+     "dukascopy": {
+      "n": 70,
+      "benar": 60.0,
+      "p": 0.0598,
+      "lama": 60.0,
+      "n_lama": 45,
+      "baru": 60.0,
+      "n_baru": 25,
+      "p_baru": 0.2122,
+      "tahun": "4/7"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 55,
+      "benar": 60.0,
+      "p": 0.0885,
+      "lama": 63.3,
+      "n_lama": 30,
+      "baru": 56.0,
+      "n_baru": 25,
+      "p_baru": 0.345,
+      "tahun": "3/6"
+     },
+     "dukascopy": {
+      "n": 70,
+      "benar": 57.1,
+      "p": 0.141,
+      "lama": 60.0,
+      "n_lama": 45,
+      "baru": 52.0,
+      "n_baru": 25,
+      "p_baru": 0.5,
+      "tahun": "2/7"
+     }
+    }
+   },
+   "ISM": {
+    "1": {
+     "exness": {
+      "n": 46,
+      "benar": 78.3,
+      "p": 0.0001,
+      "lama": 77.8,
+      "n_lama": 27,
+      "baru": 78.9,
+      "n_baru": 19,
+      "p_baru": 0.0096,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 10,
+      "benar": 80.0,
+      "p": 0.0547,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 46,
+      "benar": 76.1,
+      "p": 0.0003,
+      "lama": 77.8,
+      "n_lama": 27,
+      "baru": 73.7,
+      "n_baru": 19,
+      "p_baru": 0.0318,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 10,
+      "benar": 80.0,
+      "p": 0.0547,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 46,
+      "benar": 76.1,
+      "p": 0.0003,
+      "lama": 77.8,
+      "n_lama": 27,
+      "baru": 73.7,
+      "n_baru": 19,
+      "p_baru": 0.0318,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 10,
+      "benar": 80.0,
+      "p": 0.0547,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 46,
+      "benar": 76.1,
+      "p": 0.0003,
+      "lama": 77.8,
+      "n_lama": 27,
+      "baru": 73.7,
+      "n_baru": 19,
+      "p_baru": 0.0318,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 10,
+      "benar": 70.0,
+      "p": 0.1719,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 46,
+      "benar": 69.6,
+      "p": 0.0057,
+      "lama": 66.7,
+      "n_lama": 27,
+      "baru": 73.7,
+      "n_baru": 19,
+      "p_baru": 0.0318,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 10,
+      "benar": 70.0,
+      "p": 0.1719,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    }
+   },
+   "PPI": {
+    "1": {
+     "exness": {
+      "n": 19,
+      "benar": 73.7,
+      "p": 0.0318,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 80.0,
+      "n_baru": 15,
+      "p_baru": 0.0176,
+      "tahun": "2/2"
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 16,
+      "p_baru": 0.0384,
+      "tahun": "2/2"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 19,
+      "benar": 63.2,
+      "p": 0.1796,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 66.7,
+      "n_baru": 15,
+      "p_baru": 0.1509,
+      "tahun": "2/2"
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 75.0,
+      "p": 0.0207,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 16,
+      "p_baru": 0.0384,
+      "tahun": "2/2"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 19,
+      "benar": 63.2,
+      "p": 0.1796,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 66.7,
+      "n_baru": 15,
+      "p_baru": 0.1509,
+      "tahun": "1/2"
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 16,
+      "p_baru": 0.0384,
+      "tahun": "2/2"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 19,
+      "benar": 68.4,
+      "p": 0.0835,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 73.3,
+      "n_baru": 15,
+      "p_baru": 0.0592,
+      "tahun": "2/2"
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 70.0,
+      "p": 0.0577,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 16,
+      "p_baru": 0.0384,
+      "tahun": "2/2"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 19,
+      "benar": 63.2,
+      "p": 0.1796,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 66.7,
+      "n_baru": 15,
+      "p_baru": 0.1509,
+      "tahun": "1/2"
+     },
+     "dukascopy": {
+      "n": 20,
+      "benar": 65.0,
+      "p": 0.1316,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 68.8,
+      "n_baru": 16,
+      "p_baru": 0.1051,
+      "tahun": "1/2"
+     }
+    }
+   },
+   "GDP": {
+    "1": {
+     "exness": {
+      "n": 22,
+      "benar": 45.5,
+      "p": 0.7383,
+      "lama": 53.8,
+      "n_lama": 13,
+      "baru": 33.3,
+      "n_baru": 9,
+      "p_baru": 0.9102,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 46.2,
+      "p": 0.7214,
+      "lama": 52.9,
+      "n_lama": 17,
+      "baru": 33.3,
+      "n_baru": 9,
+      "p_baru": 0.9102,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 22,
+      "benar": 50.0,
+      "p": 0.5841,
+      "lama": 61.5,
+      "n_lama": 13,
+      "baru": 33.3,
+      "n_baru": 9,
+      "p_baru": 0.9102,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 53.8,
+      "p": 0.4225,
+      "lama": 58.8,
+      "n_lama": 17,
+      "baru": 44.4,
+      "n_baru": 9,
+      "p_baru": 0.7461,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 22,
+      "benar": 50.0,
+      "p": 0.5841,
+      "lama": 53.8,
+      "n_lama": 13,
+      "baru": 44.4,
+      "n_baru": 9,
+      "p_baru": 0.7461,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 50.0,
+      "p": 0.5775,
+      "lama": 52.9,
+      "n_lama": 17,
+      "baru": 44.4,
+      "n_baru": 9,
+      "p_baru": 0.7461,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 22,
+      "benar": 59.1,
+      "p": 0.2617,
+      "lama": 61.5,
+      "n_lama": 13,
+      "baru": 55.6,
+      "n_baru": 9,
+      "p_baru": 0.5,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 50.0,
+      "p": 0.5775,
+      "lama": 52.9,
+      "n_lama": 17,
+      "baru": 44.4,
+      "n_baru": 9,
+      "p_baru": 0.7461,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 22,
+      "benar": 63.6,
+      "p": 0.1431,
+      "lama": 53.8,
+      "n_lama": 13,
+      "baru": 77.8,
+      "n_baru": 9,
+      "p_baru": 0.0898,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 26,
+      "benar": 57.7,
+      "p": 0.2786,
+      "lama": 47.1,
+      "n_lama": 17,
+      "baru": 77.8,
+      "n_baru": 9,
+      "p_baru": 0.0898,
+      "tahun": "0/0"
+     }
+    }
+   }
+  },
+  "berlawanan": {
+   "SEMUA": {
+    "1": {
+     "exness": {
+      "n": 122,
+      "benar": 53.3,
+      "p": 0.2632,
+      "lama": 55.0,
+      "n_lama": 60,
+      "baru": 51.6,
+      "n_baru": 62,
+      "p_baru": 0.4495,
+      "tahun": "5/10"
+     },
+     "dukascopy": {
+      "n": 113,
+      "benar": 55.8,
+      "p": 0.1294,
+      "lama": 53.7,
+      "n_lama": 67,
+      "baru": 58.7,
+      "n_baru": 46,
+      "p_baru": 0.151,
+      "tahun": "8/13"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 123,
+      "benar": 52.0,
+      "p": 0.3593,
+      "lama": 55.7,
+      "n_lama": 61,
+      "baru": 48.4,
+      "n_baru": 62,
+      "p_baru": 0.6482,
+      "tahun": "4/10"
+     },
+     "dukascopy": {
+      "n": 113,
+      "benar": 53.1,
+      "p": 0.2863,
+      "lama": 56.7,
+      "n_lama": 67,
+      "baru": 47.8,
+      "n_baru": 46,
+      "p_baru": 0.6706,
+      "tahun": "6/13"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 124,
+      "benar": 54.8,
+      "p": 0.1616,
+      "lama": 56.5,
+      "n_lama": 62,
+      "baru": 53.2,
+      "n_baru": 62,
+      "p_baru": 0.3518,
+      "tahun": "4/10"
+     },
+     "dukascopy": {
+      "n": 114,
+      "benar": 53.5,
+      "p": 0.2561,
+      "lama": 52.9,
+      "n_lama": 68,
+      "baru": 54.3,
+      "n_baru": 46,
+      "p_baru": 0.3294,
+      "tahun": "6/13"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 124,
+      "benar": 49.2,
+      "p": 0.6061,
+      "lama": 48.4,
+      "n_lama": 62,
+      "baru": 50.0,
+      "n_baru": 62,
+      "p_baru": 0.5505,
+      "tahun": "4/10"
+     },
+     "dukascopy": {
+      "n": 114,
+      "benar": 50.0,
+      "p": 0.5373,
+      "lama": 48.5,
+      "n_lama": 68,
+      "baru": 52.2,
+      "n_baru": 46,
+      "p_baru": 0.4415,
+      "tahun": "6/13"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 124,
+      "benar": 53.2,
+      "p": 0.2649,
+      "lama": 53.2,
+      "n_lama": 62,
+      "baru": 53.2,
+      "n_baru": 62,
+      "p_baru": 0.3518,
+      "tahun": "4/10"
+     },
+     "dukascopy": {
+      "n": 114,
+      "benar": 53.5,
+      "p": 0.2561,
+      "lama": 51.5,
+      "n_lama": 68,
+      "baru": 56.5,
+      "n_baru": 46,
+      "p_baru": 0.2307,
+      "tahun": "9/13"
+     }
+    }
+   },
+   "CPI": {
+    "1": {
+     "exness": {
+      "n": 48,
+      "benar": 62.5,
+      "p": 0.0557,
+      "lama": 60.7,
+      "n_lama": 28,
+      "baru": 65.0,
+      "n_baru": 20,
+      "p_baru": 0.1316,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 66,
+      "benar": 65.2,
+      "p": 0.0093,
+      "lama": 56.5,
+      "n_lama": 46,
+      "baru": 85.0,
+      "n_baru": 20,
+      "p_baru": 0.0013,
+      "tahun": "4/6"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 48,
+      "benar": 56.2,
+      "p": 0.2354,
+      "lama": 57.1,
+      "n_lama": 28,
+      "baru": 55.0,
+      "n_baru": 20,
+      "p_baru": 0.4119,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 66,
+      "benar": 57.6,
+      "p": 0.1339,
+      "lama": 56.5,
+      "n_lama": 46,
+      "baru": 60.0,
+      "n_baru": 20,
+      "p_baru": 0.2517,
+      "tahun": "4/6"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 49,
+      "benar": 55.1,
+      "p": 0.2841,
+      "lama": 58.6,
+      "n_lama": 29,
+      "baru": 50.0,
+      "n_baru": 20,
+      "p_baru": 0.5881,
+      "tahun": "2/4"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 53.7,
+      "p": 0.3127,
+      "lama": 53.2,
+      "n_lama": 47,
+      "baru": 55.0,
+      "n_baru": 20,
+      "p_baru": 0.4119,
+      "tahun": "3/6"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 49,
+      "benar": 46.9,
+      "p": 0.7159,
+      "lama": 48.3,
+      "n_lama": 29,
+      "baru": 45.0,
+      "n_baru": 20,
+      "p_baru": 0.7483,
+      "tahun": "1/4"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 49.3,
+      "p": 0.5964,
+      "lama": 48.9,
+      "n_lama": 47,
+      "baru": 50.0,
+      "n_baru": 20,
+      "p_baru": 0.5881,
+      "tahun": "3/6"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 49,
+      "benar": 53.1,
+      "p": 0.3877,
+      "lama": 55.2,
+      "n_lama": 29,
+      "baru": 50.0,
+      "n_baru": 20,
+      "p_baru": 0.5881,
+      "tahun": "2/4"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 49.3,
+      "p": 0.5964,
+      "lama": 48.9,
+      "n_lama": 47,
+      "baru": 50.0,
+      "n_baru": 20,
+      "p_baru": 0.5881,
+      "tahun": "3/6"
+     }
+    }
+   },
+   "ISM": {
+    "1": {
+     "exness": {
+      "n": 42,
+      "benar": 59.5,
+      "p": 0.14,
+      "lama": 59.1,
+      "n_lama": 22,
+      "baru": 60.0,
+      "n_baru": 20,
+      "p_baru": 0.2517,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 8,
+      "benar": 75.0,
+      "p": 0.1445,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 4,
+      "p_baru": 0.3125,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 42,
+      "benar": 57.1,
+      "p": 0.2204,
+      "lama": 59.1,
+      "n_lama": 22,
+      "baru": 55.0,
+      "n_baru": 20,
+      "p_baru": 0.4119,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 8,
+      "benar": 75.0,
+      "p": 0.1445,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 4,
+      "p_baru": 0.3125,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 42,
+      "benar": 57.1,
+      "p": 0.2204,
+      "lama": 54.5,
+      "n_lama": 22,
+      "baru": 60.0,
+      "n_baru": 20,
+      "p_baru": 0.2517,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 8,
+      "benar": 75.0,
+      "p": 0.1445,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 4,
+      "p_baru": 0.3125,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 42,
+      "benar": 50.0,
+      "p": 0.5612,
+      "lama": 45.5,
+      "n_lama": 22,
+      "baru": 55.0,
+      "n_baru": 20,
+      "p_baru": 0.4119,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 8,
+      "benar": 75.0,
+      "p": 0.1445,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 4,
+      "p_baru": 0.3125,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 42,
+      "benar": 52.4,
+      "p": 0.4388,
+      "lama": 50.0,
+      "n_lama": 22,
+      "baru": 55.0,
+      "n_baru": 20,
+      "p_baru": 0.4119,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 8,
+      "benar": 75.0,
+      "p": 0.1445,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 75.0,
+      "n_baru": 4,
+      "p_baru": 0.3125,
+      "tahun": "0/0"
+     }
+    }
+   },
+   "PPI": {
+    "1": {
+     "exness": {
+      "n": 20,
+      "benar": 40.0,
+      "p": 0.8684,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 37.5,
+      "n_baru": 16,
+      "p_baru": 0.8949,
+      "tahun": "0/2"
+     },
+     "dukascopy": {
+      "n": 21,
+      "benar": 42.9,
+      "p": 0.8083,
+      "lama": 60.0,
+      "n_lama": 5,
+      "baru": 37.5,
+      "n_baru": 16,
+      "p_baru": 0.8949,
+      "tahun": "0/2"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 20,
+      "benar": 40.0,
+      "p": 0.8684,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 37.5,
+      "n_baru": 16,
+      "p_baru": 0.8949,
+      "tahun": "0/2"
+     },
+     "dukascopy": {
+      "n": 21,
+      "benar": 42.9,
+      "p": 0.8083,
+      "lama": 60.0,
+      "n_lama": 5,
+      "baru": 37.5,
+      "n_baru": 16,
+      "p_baru": 0.8949,
+      "tahun": "0/2"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 20,
+      "benar": 50.0,
+      "p": 0.5881,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 43.8,
+      "n_baru": 16,
+      "p_baru": 0.7728,
+      "tahun": "0/2"
+     },
+     "dukascopy": {
+      "n": 21,
+      "benar": 47.6,
+      "p": 0.6682,
+      "lama": 60.0,
+      "n_lama": 5,
+      "baru": 43.8,
+      "n_baru": 16,
+      "p_baru": 0.7728,
+      "tahun": "0/2"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 20,
+      "benar": 50.0,
+      "p": 0.5881,
+      "lama": 75.0,
+      "n_lama": 4,
+      "baru": 43.8,
+      "n_baru": 16,
+      "p_baru": 0.7728,
+      "tahun": "0/2"
+     },
+     "dukascopy": {
+      "n": 21,
+      "benar": 42.9,
+      "p": 0.8083,
+      "lama": 40.0,
+      "n_lama": 5,
+      "baru": 43.8,
+      "n_baru": 16,
+      "p_baru": 0.7728,
+      "tahun": "0/2"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 20,
+      "benar": 45.0,
+      "p": 0.7483,
+      "lama": 50.0,
+      "n_lama": 4,
+      "baru": 43.8,
+      "n_baru": 16,
+      "p_baru": 0.7728,
+      "tahun": "0/2"
+     },
+     "dukascopy": {
+      "n": 21,
+      "benar": 47.6,
+      "p": 0.6682,
+      "lama": 40.0,
+      "n_lama": 5,
+      "baru": 50.0,
+      "n_baru": 16,
+      "p_baru": 0.5982,
+      "tahun": "1/2"
+     }
+    }
+   },
+   "GDP": {
+    "1": {
+     "exness": {
+      "n": 12,
+      "benar": 16.7,
+      "p": 0.9968,
+      "lama": 16.7,
+      "n_lama": 6,
+      "baru": 16.7,
+      "n_baru": 6,
+      "p_baru": 0.9844,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 27.8,
+      "p": 0.9846,
+      "lama": 33.3,
+      "n_lama": 12,
+      "baru": 16.7,
+      "n_baru": 6,
+      "p_baru": 0.9844,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 13,
+      "benar": 38.5,
+      "p": 0.8666,
+      "lama": 42.9,
+      "n_lama": 7,
+      "baru": 33.3,
+      "n_baru": 6,
+      "p_baru": 0.8906,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 38.9,
+      "p": 0.8811,
+      "lama": 50.0,
+      "n_lama": 12,
+      "baru": 16.7,
+      "n_baru": 6,
+      "p_baru": 0.9844,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 13,
+      "benar": 53.8,
+      "p": 0.5,
+      "lama": 42.9,
+      "n_lama": 7,
+      "baru": 66.7,
+      "n_baru": 6,
+      "p_baru": 0.3438,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 50.0,
+      "p": 0.5927,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 66.7,
+      "n_baru": 6,
+      "p_baru": 0.3438,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 13,
+      "benar": 53.8,
+      "p": 0.5,
+      "lama": 42.9,
+      "n_lama": 7,
+      "baru": 66.7,
+      "n_baru": 6,
+      "p_baru": 0.3438,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 50.0,
+      "p": 0.5927,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 66.7,
+      "n_baru": 6,
+      "p_baru": 0.3438,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 13,
+      "benar": 69.2,
+      "p": 0.1334,
+      "lama": 57.1,
+      "n_lama": 7,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     },
+     "dukascopy": {
+      "n": 18,
+      "benar": 66.7,
+      "p": 0.1189,
+      "lama": 58.3,
+      "n_lama": 12,
+      "baru": 83.3,
+      "n_baru": 6,
+      "p_baru": 0.1094,
+      "tahun": "0/0"
+     }
+    }
+   }
+  },
+  "tanpa": {
+   "SEMUA": {
+    "1": {
+     "exness": {
+      "n": 1405,
+      "benar": 53.8,
+      "p": 0.0023,
+      "lama": 55.4,
+      "n_lama": 789,
+      "baru": 51.8,
+      "n_baru": 616,
+      "p_baru": 0.1988,
+      "tahun": "9/12"
+     },
+     "dukascopy": {
+      "n": 875,
+      "benar": 53.3,
+      "p": 0.0291,
+      "lama": 54.3,
+      "n_lama": 523,
+      "baru": 51.7,
+      "n_baru": 352,
+      "p_baru": 0.2789,
+      "tahun": "8/15"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 1410,
+      "benar": 55.0,
+      "p": 0.0001,
+      "lama": 57.0,
+      "n_lama": 795,
+      "baru": 52.5,
+      "n_baru": 615,
+      "p_baru": 0.1132,
+      "tahun": "9/12"
+     },
+     "dukascopy": {
+      "n": 898,
+      "benar": 55.3,
+      "p": 0.0008,
+      "lama": 55.6,
+      "n_lama": 545,
+      "baru": 55.0,
+      "n_baru": 353,
+      "p_baru": 0.0351,
+      "tahun": "11/15"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 1410,
+      "benar": 55.5,
+      "p": 0.0,
+      "lama": 57.9,
+      "n_lama": 794,
+      "baru": 52.4,
+      "n_baru": 616,
+      "p_baru": 0.1213,
+      "tahun": "10/12"
+     },
+     "dukascopy": {
+      "n": 902,
+      "benar": 54.4,
+      "p": 0.0042,
+      "lama": 54.1,
+      "n_lama": 549,
+      "baru": 55.0,
+      "n_baru": 353,
+      "p_baru": 0.0351,
+      "tahun": "12/15"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 1414,
+      "benar": 56.2,
+      "p": 0.0,
+      "lama": 58.1,
+      "n_lama": 798,
+      "baru": 53.7,
+      "n_baru": 616,
+      "p_baru": 0.0349,
+      "tahun": "12/12"
+     },
+     "dukascopy": {
+      "n": 904,
+      "benar": 55.9,
+      "p": 0.0002,
+      "lama": 55.9,
+      "n_lama": 551,
+      "baru": 55.8,
+      "n_baru": 353,
+      "p_baru": 0.0166,
+      "tahun": "11/15"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 1414,
+      "benar": 55.3,
+      "p": 0.0,
+      "lama": 56.9,
+      "n_lama": 798,
+      "baru": 53.2,
+      "n_baru": 616,
+      "p_baru": 0.058,
+      "tahun": "9/12"
+     },
+     "dukascopy": {
+      "n": 905,
+      "benar": 54.5,
+      "p": 0.0039,
+      "lama": 53.4,
+      "n_lama": 552,
+      "baru": 56.1,
+      "n_baru": 353,
+      "p_baru": 0.0126,
+      "tahun": "11/15"
+     }
+    }
+   },
+   "NFP": {
+    "1": {
+     "exness": {
+      "n": 130,
+      "benar": 53.1,
+      "p": 0.2697,
+      "lama": 57.5,
+      "n_lama": 73,
+      "baru": 47.4,
+      "n_baru": 57,
+      "p_baru": 0.7017,
+      "tahun": "5/11"
+     },
+     "dukascopy": {
+      "n": 152,
+      "benar": 48.7,
+      "p": 0.6574,
+      "lama": 52.6,
+      "n_lama": 95,
+      "baru": 42.1,
+      "n_baru": 57,
+      "p_baru": 0.9076,
+      "tahun": "7/13"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 130,
+      "benar": 56.9,
+      "p": 0.0678,
+      "lama": 58.9,
+      "n_lama": 73,
+      "baru": 54.4,
+      "n_baru": 57,
+      "p_baru": 0.2983,
+      "tahun": "8/11"
+     },
+     "dukascopy": {
+      "n": 156,
+      "benar": 54.5,
+      "p": 0.149,
+      "lama": 55.6,
+      "n_lama": 99,
+      "baru": 52.6,
+      "n_baru": 57,
+      "p_baru": 0.3957,
+      "tahun": "7/14"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 130,
+      "benar": 57.7,
+      "p": 0.0476,
+      "lama": 60.3,
+      "n_lama": 73,
+      "baru": 54.4,
+      "n_baru": 57,
+      "p_baru": 0.2983,
+      "tahun": "7/11"
+     },
+     "dukascopy": {
+      "n": 156,
+      "benar": 53.2,
+      "p": 0.2356,
+      "lama": 54.5,
+      "n_lama": 99,
+      "baru": 50.9,
+      "n_baru": 57,
+      "p_baru": 0.5,
+      "tahun": "8/14"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 130,
+      "benar": 59.2,
+      "p": 0.0216,
+      "lama": 60.3,
+      "n_lama": 73,
+      "baru": 57.9,
+      "n_baru": 57,
+      "p_baru": 0.1446,
+      "tahun": "9/11"
+     },
+     "dukascopy": {
+      "n": 156,
+      "benar": 56.4,
+      "p": 0.064,
+      "lama": 55.6,
+      "n_lama": 99,
+      "baru": 57.9,
+      "n_baru": 57,
+      "p_baru": 0.1446,
+      "tahun": "9/14"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 130,
+      "benar": 58.5,
+      "p": 0.0325,
+      "lama": 60.3,
+      "n_lama": 73,
+      "baru": 56.1,
+      "n_baru": 57,
+      "p_baru": 0.2135,
+      "tahun": "9/11"
+     },
+     "dukascopy": {
+      "n": 156,
+      "benar": 57.1,
+      "p": 0.0462,
+      "lama": 56.6,
+      "n_lama": 99,
+      "baru": 57.9,
+      "n_baru": 57,
+      "p_baru": 0.1446,
+      "tahun": "11/14"
+     }
+    }
+   },
+   "CPI": {
+    "1": {
+     "exness": {
+      "n": 27,
+      "benar": 59.3,
+      "p": 0.221,
+      "lama": 66.7,
+      "n_lama": 12,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 48.4,
+      "p": 0.6399,
+      "lama": 50.0,
+      "n_lama": 16,
+      "baru": 46.7,
+      "n_baru": 15,
+      "p_baru": 0.6964,
+      "tahun": "0/1"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 27,
+      "benar": 48.1,
+      "p": 0.6494,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 45.2,
+      "p": 0.7634,
+      "lama": 37.5,
+      "n_lama": 16,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 27,
+      "benar": 48.1,
+      "p": 0.6494,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 41.9,
+      "p": 0.8595,
+      "lama": 31.2,
+      "n_lama": 16,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 27,
+      "benar": 48.1,
+      "p": 0.6494,
+      "lama": 33.3,
+      "n_lama": 12,
+      "baru": 60.0,
+      "n_baru": 15,
+      "p_baru": 0.3036,
+      "tahun": "1/1"
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 41.9,
+      "p": 0.8595,
+      "lama": 31.2,
+      "n_lama": 16,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 27,
+      "benar": 48.1,
+      "p": 0.6494,
+      "lama": 41.7,
+      "n_lama": 12,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     },
+     "dukascopy": {
+      "n": 31,
+      "benar": 41.9,
+      "p": 0.8595,
+      "lama": 31.2,
+      "n_lama": 16,
+      "baru": 53.3,
+      "n_baru": 15,
+      "p_baru": 0.5,
+      "tahun": "1/1"
+     }
+    }
+   },
+   "PPI": {
+    "1": {
+     "exness": {
+      "n": 60,
+      "benar": 48.3,
+      "p": 0.6506,
+      "lama": 46.3,
+      "n_lama": 41,
+      "baru": 52.6,
+      "n_baru": 19,
+      "p_baru": 0.5,
+      "tahun": "2/3"
+     },
+     "dukascopy": {
+      "n": 86,
+      "benar": 57.0,
+      "p": 0.1177,
+      "lama": 55.2,
+      "n_lama": 67,
+      "baru": 63.2,
+      "n_baru": 19,
+      "p_baru": 0.1796,
+      "tahun": "4/7"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 60,
+      "benar": 53.3,
+      "p": 0.3494,
+      "lama": 51.2,
+      "n_lama": 41,
+      "baru": 57.9,
+      "n_baru": 19,
+      "p_baru": 0.3238,
+      "tahun": "2/3"
+     },
+     "dukascopy": {
+      "n": 96,
+      "benar": 52.1,
+      "p": 0.3798,
+      "lama": 51.9,
+      "n_lama": 77,
+      "baru": 52.6,
+      "n_baru": 19,
+      "p_baru": 0.5,
+      "tahun": "3/7"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 60,
+      "benar": 53.3,
+      "p": 0.3494,
+      "lama": 51.2,
+      "n_lama": 41,
+      "baru": 57.9,
+      "n_baru": 19,
+      "p_baru": 0.3238,
+      "tahun": "2/3"
+     },
+     "dukascopy": {
+      "n": 96,
+      "benar": 53.1,
+      "p": 0.305,
+      "lama": 53.2,
+      "n_lama": 77,
+      "baru": 52.6,
+      "n_baru": 19,
+      "p_baru": 0.5,
+      "tahun": "4/7"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 60,
+      "benar": 50.0,
+      "p": 0.5513,
+      "lama": 53.7,
+      "n_lama": 41,
+      "baru": 42.1,
+      "n_baru": 19,
+      "p_baru": 0.8204,
+      "tahun": "2/3"
+     },
+     "dukascopy": {
+      "n": 97,
+      "benar": 51.5,
+      "p": 0.4196,
+      "lama": 53.8,
+      "n_lama": 78,
+      "baru": 42.1,
+      "n_baru": 19,
+      "p_baru": 0.8204,
+      "tahun": "3/7"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 60,
+      "benar": 51.7,
+      "p": 0.4487,
+      "lama": 56.1,
+      "n_lama": 41,
+      "baru": 42.1,
+      "n_baru": 19,
+      "p_baru": 0.8204,
+      "tahun": "2/3"
+     },
+     "dukascopy": {
+      "n": 97,
+      "benar": 50.5,
+      "p": 0.5,
+      "lama": 52.6,
+      "n_lama": 78,
+      "baru": 42.1,
+      "n_baru": 19,
+      "p_baru": 0.8204,
+      "tahun": "4/7"
+     }
+    }
+   },
+   "RETAIL": {
+    "1": {
+     "exness": {
+      "n": 88,
+      "benar": 54.5,
+      "p": 0.2279,
+      "lama": 55.3,
+      "n_lama": 47,
+      "baru": 53.7,
+      "n_baru": 41,
+      "p_baru": 0.3776,
+      "tahun": "5/8"
+     },
+     "dukascopy": {
+      "n": 112,
+      "benar": 54.5,
+      "p": 0.1976,
+      "lama": 57.7,
+      "n_lama": 71,
+      "baru": 48.8,
+      "n_baru": 41,
+      "p_baru": 0.6224,
+      "tahun": "6/11"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 88,
+      "benar": 56.8,
+      "p": 0.1204,
+      "lama": 57.4,
+      "n_lama": 47,
+      "baru": 56.1,
+      "n_baru": 41,
+      "p_baru": 0.2664,
+      "tahun": "5/8"
+     },
+     "dukascopy": {
+      "n": 116,
+      "benar": 51.7,
+      "p": 0.3904,
+      "lama": 49.3,
+      "n_lama": 75,
+      "baru": 56.1,
+      "n_baru": 41,
+      "p_baru": 0.2664,
+      "tahun": "6/11"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 88,
+      "benar": 55.7,
+      "p": 0.1687,
+      "lama": 57.4,
+      "n_lama": 47,
+      "baru": 53.7,
+      "n_baru": 41,
+      "p_baru": 0.3776,
+      "tahun": "4/8"
+     },
+     "dukascopy": {
+      "n": 116,
+      "benar": 53.4,
+      "p": 0.258,
+      "lama": 53.3,
+      "n_lama": 75,
+      "baru": 53.7,
+      "n_baru": 41,
+      "p_baru": 0.3776,
+      "tahun": "5/11"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 88,
+      "benar": 58.0,
+      "p": 0.0827,
+      "lama": 57.4,
+      "n_lama": 47,
+      "baru": 58.5,
+      "n_baru": 41,
+      "p_baru": 0.1744,
+      "tahun": "7/8"
+     },
+     "dukascopy": {
+      "n": 115,
+      "benar": 54.8,
+      "p": 0.1756,
+      "lama": 51.4,
+      "n_lama": 74,
+      "baru": 61.0,
+      "n_baru": 41,
+      "p_baru": 0.1055,
+      "tahun": "6/11"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 88,
+      "benar": 59.1,
+      "p": 0.0546,
+      "lama": 59.6,
+      "n_lama": 47,
+      "baru": 58.5,
+      "n_baru": 41,
+      "p_baru": 0.1744,
+      "tahun": "6/8"
+     },
+     "dukascopy": {
+      "n": 116,
+      "benar": 54.3,
+      "p": 0.2017,
+      "lama": 52.0,
+      "n_lama": 75,
+      "baru": 58.5,
+      "n_baru": 41,
+      "p_baru": 0.1744,
+      "tahun": "6/11"
+     }
+    }
+   },
+   "PCE": {
+    "1": {
+     "exness": {
+      "n": 52,
+      "benar": 57.7,
+      "p": 0.1659,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 58.0,
+      "n_baru": 50,
+      "p_baru": 0.1611,
+      "tahun": "3/5"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 55.8,
+      "p": 0.2442,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 56.0,
+      "n_baru": 50,
+      "p_baru": 0.2399,
+      "tahun": "2/5"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 60.0,
+      "n_baru": 50,
+      "p_baru": 0.1013,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 55.8,
+      "p": 0.2442,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 56.0,
+      "n_baru": 50,
+      "p_baru": 0.2399,
+      "tahun": "3/5"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 60.0,
+      "n_baru": 50,
+      "p_baru": 0.1013,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 55.8,
+      "p": 0.2442,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 56.0,
+      "n_baru": 50,
+      "p_baru": 0.2399,
+      "tahun": "3/5"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 52,
+      "benar": 53.8,
+      "p": 0.3389,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 54.0,
+      "n_baru": 50,
+      "p_baru": 0.3359,
+      "tahun": "3/5"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 51.9,
+      "p": 0.4449,
+      "lama": 100.0,
+      "n_lama": 2,
+      "baru": 50.0,
+      "n_baru": 50,
+      "p_baru": 0.5561,
+      "tahun": "3/5"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 52,
+      "benar": 61.5,
+      "p": 0.0632,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 62.0,
+      "n_baru": 50,
+      "p_baru": 0.0595,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 50.0,
+      "n_lama": 2,
+      "baru": 60.0,
+      "n_baru": 50,
+      "p_baru": 0.1013,
+      "tahun": "4/5"
+     }
+    }
+   },
+   "GDP": {
+    "1": {
+     "exness": {
+      "n": 42,
+      "benar": 45.2,
+      "p": 0.7796,
+      "lama": 50.0,
+      "n_lama": 30,
+      "baru": 33.3,
+      "n_baru": 12,
+      "p_baru": 0.927,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 51,
+      "benar": 51.0,
+      "p": 0.5,
+      "lama": 53.8,
+      "n_lama": 39,
+      "baru": 41.7,
+      "n_baru": 12,
+      "p_baru": 0.8062,
+      "tahun": "2/4"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 42,
+      "benar": 61.9,
+      "p": 0.0821,
+      "lama": 60.0,
+      "n_lama": 30,
+      "baru": 66.7,
+      "n_baru": 12,
+      "p_baru": 0.1938,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 52,
+      "benar": 63.5,
+      "p": 0.0352,
+      "lama": 62.5,
+      "n_lama": 40,
+      "baru": 66.7,
+      "n_baru": 12,
+      "p_baru": 0.1938,
+      "tahun": "3/4"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 42,
+      "benar": 57.1,
+      "p": 0.2204,
+      "lama": 53.3,
+      "n_lama": 30,
+      "baru": 66.7,
+      "n_baru": 12,
+      "p_baru": 0.1938,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 53,
+      "benar": 58.5,
+      "p": 0.1358,
+      "lama": 56.1,
+      "n_lama": 41,
+      "baru": 66.7,
+      "n_baru": 12,
+      "p_baru": 0.1938,
+      "tahun": "2/4"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 42,
+      "benar": 64.3,
+      "p": 0.0442,
+      "lama": 63.3,
+      "n_lama": 30,
+      "baru": 66.7,
+      "n_baru": 12,
+      "p_baru": 0.1938,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 54,
+      "benar": 63.0,
+      "p": 0.038,
+      "lama": 64.3,
+      "n_lama": 42,
+      "baru": 58.3,
+      "n_baru": 12,
+      "p_baru": 0.3872,
+      "tahun": "4/5"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 42,
+      "benar": 57.1,
+      "p": 0.2204,
+      "lama": 60.0,
+      "n_lama": 30,
+      "baru": 50.0,
+      "n_baru": 12,
+      "p_baru": 0.6128,
+      "tahun": "4/4"
+     },
+     "dukascopy": {
+      "n": 54,
+      "benar": 63.0,
+      "p": 0.038,
+      "lama": 64.3,
+      "n_lama": 42,
+      "baru": 58.3,
+      "n_baru": 12,
+      "p_baru": 0.3872,
+      "tahun": "4/5"
+     }
+    }
+   },
+   "FOMC": {
+    "1": {
+     "exness": {
+      "n": 88,
+      "benar": 56.8,
+      "p": 0.1204,
+      "lama": 56.2,
+      "n_lama": 48,
+      "baru": 57.5,
+      "n_baru": 40,
+      "p_baru": 0.2148,
+      "tahun": "6/11"
+     },
+     "dukascopy": {
+      "n": 105,
+      "benar": 56.2,
+      "p": 0.1207,
+      "lama": 58.5,
+      "n_lama": 65,
+      "baru": 52.5,
+      "n_baru": 40,
+      "p_baru": 0.4373,
+      "tahun": "8/14"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 88,
+      "benar": 58.0,
+      "p": 0.0827,
+      "lama": 66.7,
+      "n_lama": 48,
+      "baru": 47.5,
+      "n_baru": 40,
+      "p_baru": 0.6821,
+      "tahun": "8/11"
+     },
+     "dukascopy": {
+      "n": 107,
+      "benar": 63.6,
+      "p": 0.0033,
+      "lama": 67.2,
+      "n_lama": 67,
+      "baru": 57.5,
+      "n_baru": 40,
+      "p_baru": 0.2148,
+      "tahun": "9/14"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 88,
+      "benar": 59.1,
+      "p": 0.0546,
+      "lama": 60.4,
+      "n_lama": 48,
+      "baru": 57.5,
+      "n_baru": 40,
+      "p_baru": 0.2148,
+      "tahun": "7/11"
+     },
+     "dukascopy": {
+      "n": 107,
+      "benar": 60.7,
+      "p": 0.0165,
+      "lama": 61.2,
+      "n_lama": 67,
+      "baru": 60.0,
+      "n_baru": 40,
+      "p_baru": 0.1341,
+      "tahun": "9/14"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 88,
+      "benar": 56.8,
+      "p": 0.1204,
+      "lama": 58.3,
+      "n_lama": 48,
+      "baru": 55.0,
+      "n_baru": 40,
+      "p_baru": 0.3179,
+      "tahun": "5/11"
+     },
+     "dukascopy": {
+      "n": 106,
+      "benar": 60.4,
+      "p": 0.0204,
+      "lama": 63.6,
+      "n_lama": 66,
+      "baru": 55.0,
+      "n_baru": 40,
+      "p_baru": 0.3179,
+      "tahun": "9/14"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 88,
+      "benar": 50.0,
+      "p": 0.5424,
+      "lama": 43.8,
+      "n_lama": 48,
+      "baru": 57.5,
+      "n_baru": 40,
+      "p_baru": 0.2148,
+      "tahun": "3/11"
+     },
+     "dukascopy": {
+      "n": 106,
+      "benar": 53.8,
+      "p": 0.2484,
+      "lama": 53.0,
+      "n_lama": 66,
+      "baru": 55.0,
+      "n_baru": 40,
+      "p_baru": 0.3179,
+      "tahun": "5/13"
+     }
+    }
+   },
+   "ISM": {
+    "1": {
+     "exness": {
+      "n": 142,
+      "benar": 53.5,
+      "p": 0.2251,
+      "lama": 53.8,
+      "n_lama": 80,
+      "baru": 53.2,
+      "n_baru": 62,
+      "p_baru": 0.3518,
+      "tahun": "6/11"
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 46.7,
+      "p": 0.7077,
+      "lama": 47.1,
+      "n_lama": 17,
+      "baru": 46.2,
+      "n_baru": 13,
+      "p_baru": 0.7095,
+      "tahun": "0/1"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 143,
+      "benar": 52.4,
+      "p": 0.308,
+      "lama": 56.8,
+      "n_lama": 81,
+      "baru": 46.8,
+      "n_baru": 62,
+      "p_baru": 0.7371,
+      "tahun": "7/11"
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 46.7,
+      "p": 0.7077,
+      "lama": 47.1,
+      "n_lama": 17,
+      "baru": 46.2,
+      "n_baru": 13,
+      "p_baru": 0.7095,
+      "tahun": "0/1"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 143,
+      "benar": 52.4,
+      "p": 0.308,
+      "lama": 54.3,
+      "n_lama": 81,
+      "baru": 50.0,
+      "n_baru": 62,
+      "p_baru": 0.5505,
+      "tahun": "7/11"
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 46.7,
+      "p": 0.7077,
+      "lama": 41.2,
+      "n_lama": 17,
+      "baru": 53.8,
+      "n_baru": 13,
+      "p_baru": 0.5,
+      "tahun": "0/1"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 143,
+      "benar": 53.8,
+      "p": 0.2016,
+      "lama": 55.6,
+      "n_lama": 81,
+      "baru": 51.6,
+      "n_baru": 62,
+      "p_baru": 0.4495,
+      "tahun": "5/11"
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 53.3,
+      "p": 0.4278,
+      "lama": 47.1,
+      "n_lama": 17,
+      "baru": 61.5,
+      "n_baru": 13,
+      "p_baru": 0.2905,
+      "tahun": "1/1"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 143,
+      "benar": 53.1,
+      "p": 0.2518,
+      "lama": 50.6,
+      "n_lama": 81,
+      "baru": 56.5,
+      "n_baru": 62,
+      "p_baru": 0.1871,
+      "tahun": "7/11"
+     },
+     "dukascopy": {
+      "n": 30,
+      "benar": 53.3,
+      "p": 0.4278,
+      "lama": 47.1,
+      "n_lama": 17,
+      "baru": 61.5,
+      "n_baru": 13,
+      "p_baru": 0.2905,
+      "tahun": "0/1"
+     }
+    }
+   },
+   "ADP": {
+    "1": {
+     "exness": {
+      "n": 104,
+      "benar": 56.7,
+      "p": 0.1011,
+      "lama": 63.0,
+      "n_lama": 54,
+      "baru": 50.0,
+      "n_baru": 50,
+      "p_baru": 0.5561,
+      "tahun": "6/10"
+     },
+     "dukascopy": {
+      "n": 142,
+      "benar": 51.4,
+      "p": 0.4007,
+      "lama": 53.8,
+      "n_lama": 93,
+      "baru": 46.9,
+      "n_baru": 49,
+      "p_baru": 0.7159,
+      "tahun": "7/14"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 104,
+      "benar": 61.5,
+      "p": 0.0118,
+      "lama": 65.5,
+      "n_lama": 55,
+      "baru": 57.1,
+      "n_baru": 49,
+      "p_baru": 0.1958,
+      "tahun": "7/10"
+     },
+     "dukascopy": {
+      "n": 143,
+      "benar": 56.6,
+      "p": 0.066,
+      "lama": 59.1,
+      "n_lama": 93,
+      "baru": 52.0,
+      "n_baru": 50,
+      "p_baru": 0.4439,
+      "tahun": "8/14"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 105,
+      "benar": 59.0,
+      "p": 0.0392,
+      "lama": 67.3,
+      "n_lama": 55,
+      "baru": 50.0,
+      "n_baru": 50,
+      "p_baru": 0.5561,
+      "tahun": "7/10"
+     },
+     "dukascopy": {
+      "n": 144,
+      "benar": 57.6,
+      "p": 0.0399,
+      "lama": 59.6,
+      "n_lama": 94,
+      "baru": 54.0,
+      "n_baru": 50,
+      "p_baru": 0.3359,
+      "tahun": "9/14"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 105,
+      "benar": 59.0,
+      "p": 0.0392,
+      "lama": 63.6,
+      "n_lama": 55,
+      "baru": 54.0,
+      "n_baru": 50,
+      "p_baru": 0.3359,
+      "tahun": "7/10"
+     },
+     "dukascopy": {
+      "n": 145,
+      "benar": 56.6,
+      "p": 0.0673,
+      "lama": 56.8,
+      "n_lama": 95,
+      "baru": 56.0,
+      "n_baru": 50,
+      "p_baru": 0.2399,
+      "tahun": "10/14"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 105,
+      "benar": 55.2,
+      "p": 0.1646,
+      "lama": 56.4,
+      "n_lama": 55,
+      "baru": 54.0,
+      "n_baru": 50,
+      "p_baru": 0.3359,
+      "tahun": "4/10"
+     },
+     "dukascopy": {
+      "n": 145,
+      "benar": 52.4,
+      "p": 0.3092,
+      "lama": 51.6,
+      "n_lama": 95,
+      "baru": 54.0,
+      "n_baru": 50,
+      "p_baru": 0.3359,
+      "tahun": "6/14"
+     }
+    }
+   },
+   "CLAIMS": {
+    "1": {
+     "exness": {
+      "n": 207,
+      "benar": 47.8,
+      "p": 0.7564,
+      "lama": 46.8,
+      "n_lama": 109,
+      "baru": 49.0,
+      "n_baru": 98,
+      "p_baru": 0.619,
+      "tahun": "4/7"
+     },
+     "dukascopy": {
+      "n": 63,
+      "benar": 55.6,
+      "p": 0.225,
+      "lama": 50.0,
+      "n_lama": 42,
+      "baru": 66.7,
+      "n_baru": 21,
+      "p_baru": 0.0946,
+      "tahun": "6/7"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 207,
+      "benar": 50.2,
+      "p": 0.5,
+      "lama": 51.4,
+      "n_lama": 109,
+      "baru": 49.0,
+      "n_baru": 98,
+      "p_baru": 0.619,
+      "tahun": "4/7"
+     },
+     "dukascopy": {
+      "n": 66,
+      "benar": 54.5,
+      "p": 0.2693,
+      "lama": 51.1,
+      "n_lama": 45,
+      "baru": 61.9,
+      "n_baru": 21,
+      "p_baru": 0.1917,
+      "tahun": "6/9"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 207,
+      "benar": 53.6,
+      "p": 0.1653,
+      "lama": 58.7,
+      "n_lama": 109,
+      "baru": 48.0,
+      "n_baru": 98,
+      "p_baru": 0.6931,
+      "tahun": "4/7"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 52.2,
+      "p": 0.4036,
+      "lama": 47.8,
+      "n_lama": 46,
+      "baru": 61.9,
+      "n_baru": 21,
+      "p_baru": 0.1917,
+      "tahun": "4/9"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 207,
+      "benar": 56.5,
+      "p": 0.0352,
+      "lama": 58.7,
+      "n_lama": 109,
+      "baru": 54.1,
+      "n_baru": 98,
+      "p_baru": 0.2398,
+      "tahun": "6/7"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 62.7,
+      "p": 0.0249,
+      "lama": 56.5,
+      "n_lama": 46,
+      "baru": 76.2,
+      "n_baru": 21,
+      "p_baru": 0.0133,
+      "tahun": "7/9"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 207,
+      "benar": 57.5,
+      "p": 0.0184,
+      "lama": 63.3,
+      "n_lama": 109,
+      "baru": 51.0,
+      "n_baru": 98,
+      "p_baru": 0.4598,
+      "tahun": "5/7"
+     },
+     "dukascopy": {
+      "n": 67,
+      "benar": 59.7,
+      "p": 0.071,
+      "lama": 56.5,
+      "n_lama": 46,
+      "baru": 66.7,
+      "n_baru": 21,
+      "p_baru": 0.0946,
+      "tahun": "8/9"
+     }
+    }
+   },
+   "KONSUMEN": {
+    "1": {
+     "exness": {
+      "n": 147,
+      "benar": 59.2,
+      "p": 0.0158,
+      "lama": 64.4,
+      "n_lama": 73,
+      "baru": 54.1,
+      "n_baru": 74,
+      "p_baru": 0.2807,
+      "tahun": "7/10"
+     },
+     "dukascopy": {
+      "n": 3,
+      "benar": 100.0,
+      "p": 0.125,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": 100.0,
+      "n_baru": 3,
+      "p_baru": 0.125,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 146,
+      "benar": 56.2,
+      "p": 0.0796,
+      "lama": 61.1,
+      "n_lama": 72,
+      "baru": 51.4,
+      "n_baru": 74,
+      "p_baru": 0.4538,
+      "tahun": "7/10"
+     },
+     "dukascopy": {
+      "n": 3,
+      "benar": 66.7,
+      "p": 0.5,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": 66.7,
+      "n_baru": 3,
+      "p_baru": 0.5,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 147,
+      "benar": 53.7,
+      "p": 0.2048,
+      "lama": 56.2,
+      "n_lama": 73,
+      "baru": 51.4,
+      "n_baru": 74,
+      "p_baru": 0.4538,
+      "tahun": "6/10"
+     },
+     "dukascopy": {
+      "n": 3,
+      "benar": 66.7,
+      "p": 0.5,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": 66.7,
+      "n_baru": 3,
+      "p_baru": 0.5,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 147,
+      "benar": 55.1,
+      "p": 0.1241,
+      "lama": 57.5,
+      "n_lama": 73,
+      "baru": 52.7,
+      "n_baru": 74,
+      "p_baru": 0.3638,
+      "tahun": "6/10"
+     },
+     "dukascopy": {
+      "n": 3,
+      "benar": 66.7,
+      "p": 0.5,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": 66.7,
+      "n_baru": 3,
+      "p_baru": 0.5,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 147,
+      "benar": 53.1,
+      "p": 0.2548,
+      "lama": 57.5,
+      "n_lama": 73,
+      "baru": 48.6,
+      "n_baru": 74,
+      "p_baru": 0.6362,
+      "tahun": "6/10"
+     },
+     "dukascopy": {
+      "n": 3,
+      "benar": 66.7,
+      "p": 0.5,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": 66.7,
+      "n_baru": 3,
+      "p_baru": 0.5,
+      "tahun": "0/0"
+     }
+    }
+   },
+   "MINYAK": {
+    "1": {
+     "exness": {
+      "n": 147,
+      "benar": 53.1,
+      "p": 0.2548,
+      "lama": 53.1,
+      "n_lama": 147,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 1,
+      "benar": 0.0,
+      "p": 1.0,
+      "lama": 0.0,
+      "n_lama": 1,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 150,
+      "benar": 52.7,
+      "p": 0.2839,
+      "lama": 52.7,
+      "n_lama": 150,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 1,
+      "benar": 0.0,
+      "p": 1.0,
+      "lama": 0.0,
+      "n_lama": 1,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 147,
+      "benar": 57.8,
+      "p": 0.0346,
+      "lama": 57.8,
+      "n_lama": 147,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 1,
+      "benar": 100.0,
+      "p": 0.5,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 151,
+      "benar": 57.6,
+      "p": 0.0365,
+      "lama": 57.6,
+      "n_lama": 151,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 1,
+      "benar": 100.0,
+      "p": 0.5,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 151,
+      "benar": 55.6,
+      "p": 0.0964,
+      "lama": 55.6,
+      "n_lama": 151,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "3/4"
+     },
+     "dukascopy": {
+      "n": 1,
+      "benar": 100.0,
+      "p": 0.5,
+      "lama": 100.0,
+      "n_lama": 1,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    }
+   },
+   "PMI": {
+    "1": {
+     "exness": {
+      "n": 52,
+      "benar": 61.5,
+      "p": 0.0632,
+      "lama": 100.0,
+      "n_lama": 9,
+      "baru": 53.5,
+      "n_baru": 43,
+      "p_baru": 0.3804,
+      "tahun": "3/5"
+     },
+     "dukascopy": {
+      "n": 0,
+      "benar": NaN,
+      "p": 1.0,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "2": {
+     "exness": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 88.9,
+      "n_lama": 9,
+      "baru": 53.5,
+      "n_baru": 43,
+      "p_baru": 0.3804,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 0,
+      "benar": NaN,
+      "p": 1.0,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "3": {
+     "exness": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 88.9,
+      "n_lama": 9,
+      "baru": 53.5,
+      "n_baru": 43,
+      "p_baru": 0.3804,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 0,
+      "benar": NaN,
+      "p": 1.0,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "5": {
+     "exness": {
+      "n": 52,
+      "benar": 59.6,
+      "p": 0.1058,
+      "lama": 88.9,
+      "n_lama": 9,
+      "baru": 53.5,
+      "n_baru": 43,
+      "p_baru": 0.3804,
+      "tahun": "3/5"
+     },
+     "dukascopy": {
+      "n": 0,
+      "benar": NaN,
+      "p": 1.0,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    },
+    "10": {
+     "exness": {
+      "n": 52,
+      "benar": 61.5,
+      "p": 0.0632,
+      "lama": 100.0,
+      "n_lama": 9,
+      "baru": 53.5,
+      "n_baru": 43,
+      "p_baru": 0.3804,
+      "tahun": "4/5"
+     },
+     "dukascopy": {
+      "n": 0,
+      "benar": NaN,
+      "p": 1.0,
+      "lama": NaN,
+      "n_lama": 0,
+      "baru": NaN,
+      "n_baru": 0,
+      "p_baru": 1.0,
+      "tahun": "0/0"
+     }
+    }
+   }
+  }
  }
 }

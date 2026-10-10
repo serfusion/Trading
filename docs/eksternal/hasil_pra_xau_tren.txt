@@ -1,0 +1,35 @@
+# ⏱️ Petunjuk berita × tren emas 4 jam → arah XAU 1–10 detik setelah rilis
+Petunjuk berita (KEJ) × tren emas 4 jam (H4) + H4 saja untuk berita tanpa petunjuk → pra_aset.json["tren"].
+Ditemukan SETELAH melihat hasil putaran 1 (gabungan dua petunjuk), jadi dicek ketahanannya: definisi tren lain
+(24 jam, EMA 50 H1) memberi pola sama; tetap perlu uji maju.
+
+
+## sepakat
+   SEMUA      1 dtk 64.3% (n 140, LAMA 68.1 BARU 60.3, thn 8/10; Duka 56.5) | 3 dtk 63.4% (n 142, LAMA 64.9 BARU 61.8, thn 9/10; Duka 61.1) | 10 dtk 64.1% (n 142, LAMA 62.2 BARU 66.2, thn 9/10; Duka 59.5)
+   CPI        1 dtk 56.6% (n 53, LAMA 67.9 BARU 44.0, thn 4/6; Duka 52.9) | 3 dtk 58.2% (n 55, LAMA 60.0 BARU 56.0, thn 3/6; Duka 60.0) | 10 dtk 60.0% (n 55, LAMA 63.3 BARU 56.0, thn 3/6; Duka 57.1)
+   ISM        1 dtk 78.3% (n 46, LAMA 77.8 BARU 78.9, thn 4/4; Duka 80.0) | 3 dtk 76.1% (n 46, LAMA 77.8 BARU 73.7, thn 4/4; Duka 80.0) | 10 dtk 69.6% (n 46, LAMA 66.7 BARU 73.7, thn 4/4; Duka 70.0)
+   PPI        1 dtk 73.7% (n 19, LAMA 50.0 BARU 80.0, thn 2/2; Duka 70.0) | 3 dtk 63.2% (n 19, LAMA 50.0 BARU 66.7, thn 1/2; Duka 70.0) | 10 dtk 63.2% (n 19, LAMA 50.0 BARU 66.7, thn 1/2; Duka 65.0)
+   GDP        1 dtk 45.5% (n 22, LAMA 53.8 BARU 33.3, thn 0/0; Duka 46.2) | 3 dtk 50.0% (n 22, LAMA 53.8 BARU 44.4, thn 0/0; Duka 50.0) | 10 dtk 63.6% (n 22, LAMA 53.8 BARU 77.8, thn 0/0; Duka 57.7)
+
+## berlawanan
+   SEMUA      1 dtk 53.3% (n 122, LAMA 55.0 BARU 51.6, thn 5/10; Duka 55.8) | 3 dtk 54.8% (n 124, LAMA 56.5 BARU 53.2, thn 4/10; Duka 53.5) | 10 dtk 53.2% (n 124, LAMA 53.2 BARU 53.2, thn 4/10; Duka 53.5)
+   CPI        1 dtk 62.5% (n 48, LAMA 60.7 BARU 65.0, thn 4/4; Duka 65.2) | 3 dtk 55.1% (n 49, LAMA 58.6 BARU 50.0, thn 2/4; Duka 53.7) | 10 dtk 53.1% (n 49, LAMA 55.2 BARU 50.0, thn 2/4; Duka 49.3)
+   ISM        1 dtk 59.5% (n 42, LAMA 59.1 BARU 60.0, thn 3/4; Duka 75.0) | 3 dtk 57.1% (n 42, LAMA 54.5 BARU 60.0, thn 4/4; Duka 75.0) | 10 dtk 52.4% (n 42, LAMA 50.0 BARU 55.0, thn 3/4; Duka 75.0)
+   PPI        1 dtk 40.0% (n 20, LAMA 50.0 BARU 37.5, thn 0/2; Duka 42.9) | 3 dtk 50.0% (n 20, LAMA 75.0 BARU 43.8, thn 0/2; Duka 47.6) | 10 dtk 45.0% (n 20, LAMA 50.0 BARU 43.8, thn 0/2; Duka 47.6)
+   GDP        1 dtk 16.7% (n 12, LAMA 16.7 BARU 16.7, thn 0/0; Duka 27.8) | 3 dtk 53.8% (n 13, LAMA 42.9 BARU 66.7, thn 0/0; Duka 50.0) | 10 dtk 69.2% (n 13, LAMA 57.1 BARU 83.3, thn 0/0; Duka 66.7)
+
+## tanpa
+   SEMUA      1 dtk 53.8% (n 1405, LAMA 55.4 BARU 51.8, thn 9/12; Duka 53.3) | 3 dtk 55.5% (n 1410, LAMA 57.9 BARU 52.4, thn 10/12; Duka 54.4) | 10 dtk 55.3% (n 1414, LAMA 56.9 BARU 53.2, thn 9/12; Duka 54.5)
+   NFP        1 dtk 53.1% (n 130, LAMA 57.5 BARU 47.4, thn 5/11; Duka 48.7) | 3 dtk 57.7% (n 130, LAMA 60.3 BARU 54.4, thn 7/11; Duka 53.2) | 10 dtk 58.5% (n 130, LAMA 60.3 BARU 56.1, thn 9/11; Duka 57.1)
+   CPI        1 dtk 59.3% (n 27, LAMA 66.7 BARU 53.3, thn 1/1; Duka 48.4) | 3 dtk 48.1% (n 27, LAMA 41.7 BARU 53.3, thn 1/1; Duka 41.9) | 10 dtk 48.1% (n 27, LAMA 41.7 BARU 53.3, thn 1/1; Duka 41.9)
+   PPI        1 dtk 48.3% (n 60, LAMA 46.3 BARU 52.6, thn 2/3; Duka 57.0) | 3 dtk 53.3% (n 60, LAMA 51.2 BARU 57.9, thn 2/3; Duka 53.1) | 10 dtk 51.7% (n 60, LAMA 56.1 BARU 42.1, thn 2/3; Duka 50.5)
+   RETAIL     1 dtk 54.5% (n 88, LAMA 55.3 BARU 53.7, thn 5/8; Duka 54.5) | 3 dtk 55.7% (n 88, LAMA 57.4 BARU 53.7, thn 4/8; Duka 53.4) | 10 dtk 59.1% (n 88, LAMA 59.6 BARU 58.5, thn 6/8; Duka 54.3)
+   PCE        1 dtk 57.7% (n 52, LAMA 50.0 BARU 58.0, thn 3/5; Duka 55.8) | 3 dtk 59.6% (n 52, LAMA 50.0 BARU 60.0, thn 4/5; Duka 55.8) | 10 dtk 61.5% (n 52, LAMA 50.0 BARU 62.0, thn 4/5; Duka 59.6)
+   GDP        1 dtk 45.2% (n 42, LAMA 50.0 BARU 33.3, thn 3/4; Duka 51.0) | 3 dtk 57.1% (n 42, LAMA 53.3 BARU 66.7, thn 3/4; Duka 58.5) | 10 dtk 57.1% (n 42, LAMA 60.0 BARU 50.0, thn 4/4; Duka 63.0)
+   FOMC       1 dtk 56.8% (n 88, LAMA 56.2 BARU 57.5, thn 6/11; Duka 56.2) | 3 dtk 59.1% (n 88, LAMA 60.4 BARU 57.5, thn 7/11; Duka 60.7) | 10 dtk 50.0% (n 88, LAMA 43.8 BARU 57.5, thn 3/11; Duka 53.8)
+   ISM        1 dtk 53.5% (n 142, LAMA 53.8 BARU 53.2, thn 6/11; Duka 46.7) | 3 dtk 52.4% (n 143, LAMA 54.3 BARU 50.0, thn 7/11; Duka 46.7) | 10 dtk 53.1% (n 143, LAMA 50.6 BARU 56.5, thn 7/11; Duka 53.3)
+   ADP        1 dtk 56.7% (n 104, LAMA 63.0 BARU 50.0, thn 6/10; Duka 51.4) | 3 dtk 59.0% (n 105, LAMA 67.3 BARU 50.0, thn 7/10; Duka 57.6) | 10 dtk 55.2% (n 105, LAMA 56.4 BARU 54.0, thn 4/10; Duka 52.4)
+   CLAIMS     1 dtk 47.8% (n 207, LAMA 46.8 BARU 49.0, thn 4/7; Duka 55.6) | 3 dtk 53.6% (n 207, LAMA 58.7 BARU 48.0, thn 4/7; Duka 52.2) | 10 dtk 57.5% (n 207, LAMA 63.3 BARU 51.0, thn 5/7; Duka 59.7)
+   KONSUMEN   1 dtk 59.2% (n 147, LAMA 64.4 BARU 54.1, thn 7/10; Duka 100.0) | 3 dtk 53.7% (n 147, LAMA 56.2 BARU 51.4, thn 6/10; Duka 66.7) | 10 dtk 53.1% (n 147, LAMA 57.5 BARU 48.6, thn 6/10; Duka 66.7)
+   MINYAK     1 dtk 53.1% (n 147, LAMA 53.1 BARU nan, thn 3/4; Duka 0.0) | 3 dtk 57.8% (n 147, LAMA 57.8 BARU nan, thn 3/4; Duka 100.0) | 10 dtk 55.6% (n 151, LAMA 55.6 BARU nan, thn 3/4; Duka 100.0)
+   PMI        1 dtk 61.5% (n 52, LAMA 100.0 BARU 53.5, thn 3/5; Duka nan) | 3 dtk 59.6% (n 52, LAMA 88.9 BARU 53.5, thn 4/5; Duka nan) | 10 dtk 61.5% (n 52, LAMA 100.0 BARU 53.5, thn 4/5; Duka nan)
