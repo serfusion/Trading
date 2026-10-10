@@ -212,6 +212,7 @@ URUT = ("Non-Farm Employment Change", "CPI m/m", "Core CPI m/m", "Federal Funds 
         "Advance GDP q/q", "Core PCE Price Index m/m", "ADP Non-Farm Employment Change", "Unemployment Claims")
 NFP_HARI = ("Non-Farm Employment Change", "Unemployment Rate", "Average Hourly Earnings m/m")
 MAKS_DAFTAR = 5
+SATU_NAMA = {"Core CPI": "CPI", "CPI tahunan": "CPI", "Core PPI": "PPI", "Core Retail Sales": "Retail Sales"}
 DAFTAR_HARI = 31
 
 
@@ -273,11 +274,15 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         cs = per_waktu[t0]
         kandidat = [(tebak_kartu(c), c) for c in cs]
         ada = [(g, c) for g, c in kandidat if g]
-        prio = lambda gc: (0 if gc[0] else 1, URUT.index(gc[1]["title"]) if gc[1]["title"] in URUT else 99)  # noqa: E731
+        # petunjuk TERKUAT di waktu rilis itu (mis. core CPI "Kalshi & kejutan lalu sepakat" 66% mengalahkan headline
+        # "minyak WTI saja" 56%), seri → urutan URUT (permintaan pengguna 10 Okt: CPI ≥ 65% bila ada petunjuknya)
+        prio = lambda gc: (0 if gc[0] else 1, -(gc[0]["persen"] if gc[0] else 0),  # noqa: E731
+                           URUT.index(gc[1]["title"]) if gc[1]["title"] in URUT else 99)
         g, c = sorted(ada or kandidat, key=prio)[0]
         if not ada and c["title"] not in URUT:
             continue                                              # berita kecil tanpa petunjuk: tidak ditampilkan
         nm = _prediksi.nama(c["title"] if not (g and g["dasar"].startswith("Pengangguran")) else NFP_HARI[0])
+        nm = SATU_NAMA.get(nm, nm)                         # core & headline rilis bersamaan = satu berita
         sisa = sisa_teks(datetime.fromisoformat(t0) - now)
         row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
         if g:
@@ -350,7 +355,8 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
     sama = [c for c in kartu if c["time"] == t0]
     ber = [c for c in sama if (c.get("petunjuk_teruji") or {}).get("arah_emas") and varian(c["title"],
                                                                                          c["petunjuk_teruji"])]
-    c = next((x for x in ber if x["title"] == "CPI m/m"), ber[0] if ber else sama[0])
+    kuat = sorted(((tebak_kartu(x) or {}).get("persen", 0), -i) for i, x in enumerate(ber))
+    c = ber[-kuat[-1][1]] if kuat and kuat[-1][0] else (ber[0] if ber else sama[0])
     out = {"judul": f"⏱️ Entry 1 dtk sebelum {_prediksi.nama(c['title'])} • {c.get('when', '')}", "title": c["title"],
            "time": c["time"], "catatan": "Arah dari petunjuk teruji; persen = seberapa sering harga XAU 1–10 detik "
                                          "setelah rilis bergerak searah (bukan untung/rugi). Info saja."}

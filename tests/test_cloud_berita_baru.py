@@ -250,3 +250,23 @@ def test_satu_baris_berita_berikutnya_dan_arah_sama_di_semua_kartu(monkeypatch):
     assert ppi2["mendatang"][0]["arah_detik"]["arah"] == "naik"
     assert A.sisa_teks(timedelta(days=4, hours=1)) == "4 hari lagi"
 
+
+
+def test_cpi_pakai_petunjuk_terkuat_di_waktu_rilis(monkeypatch):
+    """Headline CPI hanya "minyak WTI" (56%) tetapi core CPI "Kalshi & kejutan lalu sepakat" (66%) → yang tampil 66%."""
+    import _pra_aset as A
+    h = lambda b: {"exness": {"n": 20, "benar": b, "lama": None, "baru": b}, "konsisten": False}  # noqa: E731
+    monkeypatch.setattr(A, "DATA", {"xau_arah": {
+        "CPI • minyak WTI saja": {"h": {f"{k}|0": h(56.0) for k in (1, 2, 3, 5, 10)}},
+        "CPI • Kalshi & kejutan lalu sepakat": {"h": {f"{k}|0": h(66.0) for k in (1, 2, 3, 5, 10)}}}})
+    now = datetime(2026, 10, 12, 11, 0, tzinfo=timezone.utc)
+    T = "2026-10-14T12:30:00+00:00"
+    head = {"title": "CPI m/m", "time": T, "petunjuk_teruji": {"arah_emas": "turun", "tebak": {"WTI": 1.0},
+                                                               "sepakat_lain": []}}
+    core = {"title": "Core CPI m/m", "time": T, "petunjuk_teruji": {"arah_emas": "turun", "tebak": {"K": 1.0, "P": 1.0},
+                                                                    "kalshi_sepakat": True, "sepakat_lain": []}}
+    prep = {"mendatang": [head, core]}
+    A.attach(prep, now)
+    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% ⚠️ • 2 hari lagi"
+    assert prep["pra"]["teks"].startswith("XAU TURUN ▼ • benar 66%")
+    assert head["arah_detik"]["persen"] == 66 and core["arah_detik"]["persen"] == 66

@@ -171,4 +171,10 @@ lagi" (`persiapan["pra_satu"]`, `_pra_aset.satu`). Arah yang sama dipasang di se
 dan dipakai hitung mundur, alarm, dan tab News (`prediksiTeks`). Baris 🎯 1 jam dihapus dari bawah XAU. Tanpa petunjuk:
 ≤ 6 jam sebelum rilis arah = tren emas 4 jam (55–56%, ⚠️), lebih awal "arah muncul ≤ 6 jam sebelum rilis". Petunjuk &
 tren berlawanan → tetap arah petunjuk dengan persen jujur (±53%, ⚠️). ⚠️ = belum terbukti / lemah.
+Pilihan petunjuk per waktu rilis kini yang TERKUAT (persen teruji tertinggi), bukan selalu headline CPI: contoh CPI 14 Okt —
+headline hanya "minyak WTI" (56%), sedangkan core CPI begitu konsensus ForexFactory terbit: Kalshi condong DI ATAS
+(≥ 0,3%: 36,5% vs ≤ 0,1%: 21,5%) & kejutan core bulan lalu DI ATAS → "Kalshi & kejutan lalu sepakat" 65–70% → baris
+menjadi "CPI ▼ TURUN 66%". Headline Kalshi condong DI BAWAH (≤ 0,5%: 41% vs ≥ 0,7%: 18,5%) — sinyal CPI saling
+bertentangan, jadi angka tetap ⚠️. Uji tambahan khusus CPI: Kalshi |lean| ≥ 0,25 → 61–65% (n 23); Kalshi headline 24 jam
+60–70% (n 30); core Kalshi & nowcast Cleveland sepakat 75% (n 8) — semua sampel kecil.
 
