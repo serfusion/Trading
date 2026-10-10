@@ -35,6 +35,53 @@ Gerak ≥ $1 di detik 2 → 94,2% (semua berita, n 620); ≥ $2 → 96,6% (n 325
 Cara pakai: entry t−1 dengan tebakan; di detik 2 lihat emas: sudah ≥ $0,50 searah posisi → tahan s/d detik 10;
 berlawanan ≥ $0,50 → tutup segera (arah itu yang hampir pasti berlanjut). Gerak < $0,50 di detik 2 = belum jelas.
 
+## C. SEMUA berita, SEMUA metode sebelum rilis (10 Okt sore — `research/pra_xau_semua.py`)
+Permintaan: "2 detik terlalu lambat — candle 1 detik setelah rilis bot sudah entry; prediksi arah XAU SEBELUM news
+apa pun". 2.051 rilis USD 2010–2026 (tick Exness 1.680, Dukascopy 1.260), target = harga tengah t0−1 → t0+1/2/3/5/10 dtk.
+Semua petunjuk diambil KETAT ≤ 1 detik sebelum rilis.
+
+**Koreksi penting**: putaran pertama memberi "tren 4 jam 60–72%" — ternyata BOCOR (candle H1 yang dipakai untuk rilis
+jam :30 belum tutup, jadi ikut berisi harga setelah rilis). Setelah diperbaiki (hanya candle M15 yang sudah tutup, harga
+"sekarang" dikoreksi ke t0−1) angka turun ke 53–56%. Hasil di bawah adalah versi KETAT.
+
+| Metode (semua berita) | Benar di periode BARU (≥ Okt 2021), 1 / 3 / 10 dtk | Catatan |
+|---|---|---|
+| Petunjuk berita teruji (Kalshi, kejutan lalu, berbalik, WTI, Fed daerah, GDPNow, CPI→PPI) | 56 / 58 / 60% (n 130) | lama 54–60%, 9/10 tahun ✅ — satu-satunya yang konsisten |
+| Gerak tick 10 / 30 / 120 dtk terakhir, tick terakhir | 48–55% | ≈ lempar koin |
+| BTC 10 / 60 dtk terakhir (Binance 1 dtk) | 47–52% | tidak memimpin emas |
+| Konsensus vs angka bulan lalu; kejutan rilis lalu (18 judul) | 47–51% | ≈ lempar koin |
+| Gerak emas 15 mnt / 60 mnt | 52–54% | lemah |
+| Tren emas 4 jam / 24 jam / EMA 50 H1 / EMA 200 H1 | 51–55% (lama 53–55%) | lemah tetapi searah di 2 periode |
+| Arah mayoritas jenis berita (walk-forward) / arah rilis lalu | 50–55% | ≈ lempar koin |
+| Model walk-forward (logistik, gradient boosting) semua fitur | 51–56%; subset "yakin" p ≥ 0,65: 53–62% (n 42–154) | lama 49–56% → tidak stabil |
+| Gabungan suara semua aturan yang bagus di lama | 53–56% | |
+
+Uji acak (permutasi 100×, hasil diacak di dalam tiap jenis berita): dari 702 kombinasi jenis berita × petunjuk × detik,
+"lolos" karena kebetulan rata-rata 7,5 (95% ≤ 15); sungguhan 10 → **secara keseluruhan tidak lebih baik dari kebetulan**.
+Yang tetap dipercaya hanya yang punya dasar & teruji sebelumnya (petunjuk berita, terutama ISM Jasa).
+
+**Gabungan petunjuk berita × tren emas 4 jam** (ditemukan setelah melihat data → perlu uji maju; pola sama bila tren
+diganti 24 jam atau EMA 50 H1):
+| | 2–10 dtk benar | n | lama / baru |
+|---|---|---|---|
+| Petunjuk & tren 4 jam SEARAH (semua berita berpetunjuk) | **63–67%** | 142 | 62–69% / 59–66% |
+| — ISM Jasa | **70–76%** (detik 1: 78%) | 46 | 67–78% / 74–79% |
+| — CPI | 58–62% | 55 | 60–67% / 44–60% (tidak menambah untuk CPI) |
+| Petunjuk & tren BERLAWANAN | 49–55% | 124 | ≈ lempar koin → lebih aman tidak entry |
+| Berita TANPA petunjuk (NFP, Fed, retail, klaim, JOLTS, …): tren 4 jam saja | 55–56% | 1.410 | 57–58% / 52–54% (lemah) |
+
+Kesimpulan jujur: untuk sebagian besar berita, arah XAU detik 1–10 tidak bisa ditebak lebih baik dari ±55% sebelum
+rilis — reaksi ditentukan oleh angka yang baru keluar, dan konsensus pasar sudah memperhitungkan informasi publik.
+Peluang terbaik: berita berpetunjuk teruji yang SEARAH dengan tren emas 4 jam (63–67%, ISM Jasa ±75%); bila berlawanan
+atau tanpa petunjuk ≈ 50–55%. Hasil lengkap: `docs/eksternal/hasil_pra_xau_semua.txt` & `hasil_pra_xau_tren.txt`.
+
 ## Di aplikasi (4.27–4.28)
 Satu baris di bawah tile XAU: arah tebakan + persen per detik (✅/⚠️/⚪) dan baris 📌 kepastian detik 2 untuk berita
 berikutnya (cloud `_pra_aset.py`; PPI memakai kejutan CPI yang baru keluar lewat memori `_petunjuk`).
+
+## Di aplikasi 4.29
+Di bawah baris arah XAU: "➕ Tren emas 4 jam TURUN ▼ (−$8,40) SEARAH → benar 64–67% ⚠️" + "Tebakan terbaik: …", atau
+"⚠️ … BERLAWANAN → hanya 49–55% ≈ lempar koin" / "tanpa petunjuk: tren saja 55–56% (lemah)". Cloud `_pra_aset.tren_emas`
+(Twelve Data XAU/USD 15 mnt, cache baris Supabase `pra_tren` 5 mnt bila rilis ≤ 1 jam lagi, selain itu 15 mnt; hanya
+≤ 6 jam sebelum rilis; env PRA_TREN=0 mematikan). Tren dihitung saat aplikasi dibuka → buka lagi 1–5 menit sebelum rilis.
+Info saja, tanpa order.
