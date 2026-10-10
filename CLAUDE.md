@@ -428,6 +428,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   emas 51–57%; lolos hanya ISM Jasa. `pra_aset.json["per_berita"]` (ISM Jasa, pengangguran kalender BLS 5 pekan) →
   aplikasi 4.30 daftar 🎯 berita mendatang di bawah XAU (`_pra_aset.daftar`, `persiapan.pra_daftar`). Jangan tampilkan
   angka > yang teruji; tanpa petunjuk = "≈ 50:50".
+- `research/pernyataan_uji.py` (+ `fed`): tweet Trump 2017–2021 (MarkHershey, waktu dari ID), Truth Social 2022–2026 (arsip
+  CNN ix.cnn.io), 1.344 pidato Fed (federalreserve.gov butuh User-Agent; urllib bawaan 403) di
+  `data/research/eksternal/pernyataan/` → tidak ada yang menaikkan arah emas (48–58%). Jangan klaim pernyataan memprediksi.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
