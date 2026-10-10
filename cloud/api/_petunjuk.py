@@ -1,0 +1,149 @@
+"""🧭 Petunjuk teruji sebelum rilis untuk SEMUA berita besar (blok detail di kartu 🎯).
+
+Permintaan pengguna 10 Okt 2026: "jika ada keakuratan selain Kalshi gabungkan juga, telusuri news yang lain juga, riset
+dan uji validitas". research/berita_gabung.py menguji 17 berita × 5 sumber (kejutan bulan lalu, Kalshi, nowcast
+Cleveland Fed, GDPNow Atlanta Fed, ADP/klaim/PPI) 2010–2025 tanpa look-ahead → cloud/api/petunjuk.json berisi aturan yang
+LOLOS (benar > 50% di periode lama & baru, p < 0,05). Dua angka selalu ditampilkan:
+  • ketepatan arah ANGKA (Act di atas/di bawah konsensus), dan
+  • ketepatan arah EMAS 1 menit setelah rilis bila mengikuti tebakan itu (lebih rendah: emas tidak selalu searah).
+Menggabungkan sumber lemah TIDAK menaikkan ketepatan (cpi_gabung: Kalshi 76% vs gabungan 65–71%), kecuali dua sumber
+kuat yang SEPAKAT (Kalshi & kejutan bulan lalu, CPI+core: 80%, n 20) — itu yang ditandai. Info saja, tanpa order.
+Memori kejutan terakhir per judul: baris Supabase "petunjuk". Hanya library standar Python.
+"""
+from __future__ import annotations
+
+import json
+from datetime import datetime
+from pathlib import Path
+
+_PATH = Path(__file__).resolve().parent / "petunjuk.json"
+ATURAN = (json.loads(_PATH.read_text(encoding="utf-8")).get("aturan") or {}) if _PATH.exists() else {}
+# kejutan terakhir yang sudah lewat dari kalender pekan ini (diisi tangan dari laporan resmi; dipakai bila memori kosong)
+SEED = {"CPI m/m": {"s": 0, "time": "2026-09-11T12:30:00+00:00"},          # Agu 2026: 0,4% = konsensus 0,4%
+        "Core CPI m/m": {"s": 1, "time": "2026-09-11T12:30:00+00:00"}}     # Agu 2026: 0,3% > konsensus 0,2%
+SEPAKAT = (16, 20)            # Kalshi & kejutan bulan lalu sepakat (CPI + core CPI 2022–2025): 16 dari 20 benar
+NAMA = {"P": "Kejutan bulan lalu (searah)", "-P": "Kejutan bulan lalu (berbalik)", "K": "Pasar Kalshi",
+        "K|P": "Kalshi, cadangan kejutan lalu", "G": "GDPNow Atlanta Fed"}
+INVERS = ("Unemployment Rate", "Unemployment Claims")      # angka naik = buruk bagi ekonomi
+
+
+def _num(text) -> float | None:
+    import _prarilis
+    return _prarilis.num(text)
+
+
+def ingat(calendar: list, store, now: datetime) -> dict:
+    """Memori kejutan terakhir per judul (Act vs konsensus) dari kalender; disimpan di baris 'petunjuk'."""
+    state = {}
+    if store is not None:
+        try:
+            state = store.get_state("petunjuk") or {}
+        except Exception:  # noqa: BLE001
+            state = {}
+    mem = {**SEED, **(state.get("mem") or {})}
+    changed = False
+    for c in calendar or []:
+        t = c.get("title")
+        a, f = _num(c.get("actual")), _num(c.get("forecast"))
+        if t in ATURAN and a is not None and f is not None:
+            when = c.get("time") or c.get("date") or ""
+            if mem.get(t, {}).get("time") != when:
+                mem[t] = {"s": (a > f) - (a < f), "time": when}
+                changed = True
+    if changed and store is not None:
+        try:
+            store.save_state({**state, "mem": mem}, "petunjuk")
+        except Exception:  # noqa: BLE001
+            pass
+    return mem
+
+
+def _kata(s: float) -> str:
+    return "DI ATAS" if s > 0 else "DI BAWAH"
+
+
+def _pct(k: int, n: int) -> str:
+    return f"{round(k / n * 100)}% ({k}/{n})" if n else "-"
+
+
+def gdpnow(env: dict) -> float | None:
+    """Nowcast GDP terbaru Atlanta Fed (FRED GDPNOW; butuh FRED_API_KEY di env Vercel)."""
+    key = (env or {}).get("FRED_API_KEY")
+    if not key:
+        return None
+    import urllib.request
+    u = ("https://api.stlouisfed.org/fred/series/observations?series_id=GDPNOW&sort_order=desc&limit=1&file_type=json"
+         f"&api_key={key}")
+    try:
+        with urllib.request.urlopen(u, timeout=6) as r:
+            obs = json.load(r).get("observations") or []
+        return float(obs[0]["value"]) if obs and obs[0]["value"] != "." else None
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def blok(card: dict, mem: dict, env: dict | None = None) -> dict | None:
+    """{"judul", "teks", "catatan", "arah_emas"} untuk satu berita; None bila tidak ada aturan teruji / petunjuk."""
+    title = card.get("title") or ""
+    rules = ATURAN.get(title) or {}
+    if not rules or card.get("released"):
+        return None
+    tebak, baris = {}, []
+    s_lalu = (mem.get(title) or {}).get("s")
+    pasar = (card.get("hari_h") or {}).get("pasar") or card.get("kalshi") or {}
+    lean = None
+    if pasar.get("atas") is not None and pasar.get("bawah") is not None:
+        lean = pasar["atas"] - pasar["bawah"]
+    for kode, st in rules.items():
+        s = None
+        if kode == "P" and s_lalu:
+            s = float(s_lalu)
+        elif kode == "-P" and s_lalu:
+            s = -float(s_lalu)
+        elif kode == "K" and lean is not None and abs(lean) >= 0.10:
+            s = 1.0 if lean > 0 else -1.0
+        elif kode == "K|P":
+            s = (1.0 if lean > 0 else -1.0) if lean is not None and abs(lean) >= 0.10 else (float(s_lalu) if s_lalu else None)
+        elif kode == "G":
+            g, f = gdpnow(env or {}), _num(card.get("forecast"))
+            if g is not None and f is not None and abs(g - f) >= 0.2:
+                s = 1.0 if g > f else -1.0
+        if s is None:
+            continue
+        tebak[kode] = s
+        ek, en = st.get("emas") or (0, 0)
+        baris.append(f"{NAMA.get(kode, kode)}: {_kata(s)} perkiraan • teruji {st.get('tahun', '')} benar "
+                     f"{_pct(st['benar'], st['n'])} • arah emas 1 mnt cocok {_pct(ek, en)}")
+    if not tebak:
+        if s_lalu == 0 and any(k in rules for k in ("P", "-P")):
+            baris.append("Kejutan bulan lalu: sama dengan perkiraan → petunjuk ini tidak memberi arah")
+        if not baris:
+            return None
+        return {"judul": "🧭 Petunjuk teruji sebelum rilis", "teks": "Belum ada petunjuk yang memberi arah",
+                "catatan": "\n".join(baris), "arah_emas": None}
+    utama = tebak.get("K", tebak.get("K|P", tebak.get("G", next(iter(tebak.values())))))
+    sepakat = "K" in tebak and s_lalu and float(s_lalu) == tebak["K"]
+    teks = f"Angka condong {_kata(utama)} perkiraan"
+    if sepakat:
+        teks += f" — Kalshi & kejutan bulan lalu SEPAKAT (historis {_pct(*SEPAKAT)} benar)"
+    elif len(set(tebak.values())) > 1:
+        teks += " — petunjuk BERTENTANGAN, pakai yang paling teruji (Kalshi)"
+    # arah emas: angka di bawah perkiraan → emas naik (kecuali berita "buruk = naik" seperti pengangguran)
+    naik = (utama < 0) != (title in INVERS)
+    catatan = "\n".join(baris) + ("\nCatatan: tebakan ARAH ANGKA lebih tepat daripada arah EMAS — emas 1 menit setelah "
+                                  "rilis hanya cocok ±55–65% walau angkanya tertebak.")
+    return {"judul": "🧭 Petunjuk teruji sebelum rilis", "teks": teks, "catatan": catatan,
+            "arah_emas": "naik" if naik else "turun"}
+
+
+def attach(persiapan: dict, calendar: list, store, now: datetime, env: dict | None = None) -> None:
+    if not isinstance(persiapan, dict) or not ATURAN:
+        return
+    kartu = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)]
+    if not any(c.get("title") in ATURAN for c in kartu):
+        return
+    mem = ingat(calendar, store, now)
+    for c in kartu:
+        b = blok(c, mem, env)
+        if b:
+            c["petunjuk_teruji"] = b

@@ -215,12 +215,27 @@ class handler(BaseHTTPRequestHandler):
                     _jadwal.attach(persiapan, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+                try:                                          # 🎲 CPI dst. sebelum konsensus terbit: sebaran pasar Kalshi
+                    _kalshi.mendatang(persiapan.get("mendatang") or [], store, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+                try:                                          # 🗣️ pernyataan Fed/Trump/pemerintah terbaru (_pernyataan.py)
+                    import _pernyataan
+                    _pernyataan.attach(persiapan, store, now, os.environ)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
                 try:                                          # 📊 peluang emas sebelum NFP/JOLTS/Fed (_prarilis.py)
                     import _prarilis
                     key = os.environ.get("TWELVEDATA_API_KEY", "")
                     _prarilis.attach(persiapan, calendar, store, now,
                                      lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict):
+                try:                                          # 🧭 petunjuk teruji semua berita (_petunjuk.py, petunjuk.json)
+                    import _petunjuk
+                    _petunjuk.attach(persiapan, calendar, store, now, os.environ)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):

@@ -299,7 +299,9 @@ def putaran(store, publish, now: float | None = None, fetch=None) -> dict:
                 for k, s, ev in res:
                     new_traders[k] = s
                     events += ev
-    log = (events[::-1] + list(snap.get("log") or []))[:LOG_MAX]
+    ikut = {kunci(it.get("platform"), str(it.get("id"))) for it in lst}
+    log = [e for e in events[::-1] + list(snap.get("log") or [])         # trader yang sudah di-unfollow dibuang
+           if kunci(e.get("platform"), str(e.get("trader"))) in ikut][:LOG_MAX]
     store.save_state({"t": _iso(now), "traders": new_traders, "log": log}, "ikuti_snap")
     for batch in paket(events):
         publish({"type": "copy", "time": _iso(now), "events": batch})
@@ -324,6 +326,17 @@ def atur(store, item: dict, now: float | None = None) -> dict:
         lst.append({"platform": platform, "id": id_, "name": str(item.get("name", ""))[:60],
                     "url": url if url.startswith("https://") else "", "since": _iso(now)})
     store.save_state({"list": lst}, "ikuti")
+    if not item.get("on", True):
+        # unfollow (permintaan pengguna 10 Okt 2026): potret & riwayat kejadian trader itu dihapus → tidak dicek lagi
+        # dan tidak muncul lagi di "Trader diikuti"; follow ulang nanti mulai dari potret baru
+        try:
+            snap = store.get_state("ikuti_snap") or {}
+            k = kunci(platform, id_)
+            snap["traders"] = {x: v for x, v in (snap.get("traders") or {}).items() if x != k}
+            snap["log"] = [e for e in snap.get("log") or [] if kunci(e.get("platform"), str(e.get("trader"))) != k]
+            store.save_state(snap, "ikuti_snap")
+        except Exception:  # noqa: BLE001 - daftar follow sudah tersimpan; potret dibersihkan putaran berikutnya
+            pass
     return {"ok": True, "list": lst}
 
 
@@ -343,10 +356,14 @@ def status(store, now: float | None = None) -> dict:
         s = traders.get(kunci(it.get("platform"), str(it.get("id")))) or {}
         rows.append(it | {"posisi": list((s.get("pos") or {}).values())[:15],
                           "status": s.get("status") or "Menunggu cek pertama", "cek": s.get("t")})
+    ikut = {kunci(it.get("platform"), str(it.get("id"))) for it in lst}
+    log = [e for e in snap.get("log") or [] if kunci(e.get("platform"), str(e.get("trader"))) in ikut]
+    if not lst:
+        return {"ok": True, "list": [], "log": [], "umur": umur, "pantau": "Belum ada trader yang diikuti"}
     pantau = ("Belum pernah dicek — pasang jadwal pg_cron /api/ikuti (docs/COPY_TRADE.md)" if umur is None else
               f"Dicek {umur} dtk lalu" if umur < 120 else
               f"⚠️ Cek terakhir {umur // 60} mnt lalu — jadwal pg_cron /api/ikuti mati?")
-    return {"ok": True, "list": rows, "log": (snap.get("log") or [])[:40], "umur": umur, "pantau": pantau}
+    return {"ok": True, "list": rows, "log": log[:40], "umur": umur, "pantau": pantau}
 
 
 def publisher(topic: str, server: str = "https://ntfy.sh"):

@@ -120,7 +120,20 @@ def forecast(card: dict, kalshi: dict, poly: dict, state: dict, now: datetime) -
                        if x)
     return {"label": "🎯 Perkiraan hari H • arah EMAS 1 menit setelah rilis", "teks": teks, "kuat": kuat,
             "bukti": bukti, "p_naik": round(p, 3),
-            "riwayat": [x[1] for x in state[key][-24:]], "pasar": avg}
+            "riwayat": [x[1] for x in state[key][-24:]], "pasar": avg, "geser": geser(state[key], now)}
+
+
+def geser(h: list, now: datetime, ambang: float = 0.05) -> dict | None:
+    """Perubahan peluang naik dibanding titik tertua dalam 24 jam terakhir (≥ ambang): pasar bereaksi pada data atau
+    pernyataan baru (Fed, Trump, pemerintah/negara lain). None bila tidak bergeser atau riwayat terlalu pendek."""
+    if len(h) < 2:
+        return None
+    lama = [x for x in h if datetime.fromisoformat(x[0]) >= now - timedelta(hours=24)] or h[-2:]
+    t0, p0 = datetime.fromisoformat(lama[0][0]), lama[0][1]
+    p1 = h[-1][1]
+    if abs(p1 - p0) < ambang or now - t0 < timedelta(minutes=30):
+        return None
+    return {"dari": round(p0, 3), "ke": round(p1, 3), "jam": round((now - t0).total_seconds() / 3600, 1)}
 
 
 def result(card: dict, actual: str) -> dict:

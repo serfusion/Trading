@@ -1,0 +1,45 @@
+# 🎯 CPI: petunjuk sendiri-sendiri vs digabung (tebakan arah kejutan Act vs konsensus)
+python -m research.cpi_gabung            → docs/eksternal/hasil_cpi_gabung.txt
+
+
+## CPI m/m (184 rilis 2010-01–2025-10; nowcast tersedia 140)
+   N nowcast Cleveland Fed      semua 25/44 = 57% (p 0.226) | LAMA 15/24 = 62% | BARU 10/20 = 50%
+   K Kalshi (2022–2025)         semua 16/21 = 76% (p 0.013) | LAMA n 0 | BARU 16/21 = 76%
+   P kejutan bulan lalu         semua 47/76 = 62% (p 0.025) | LAMA 31/51 = 61% | BARU 16/25 = 64%
+   B bensin                     semua 71/117 = 61% (p 0.013) | LAMA 54/84 = 64% | BARU 17/33 = 52%
+   N+P suara                    semua 41/69 = 59% (p 0.074) | LAMA 29/49 = 59% | BARU 12/20 = 60%
+   N+B suara                    semua 58/92 = 63% (p 0.008) | LAMA 47/72 = 65% | BARU 11/20 = 55%
+   N & K sepakat                semua 7/11 = 64% (p 0.274) | LAMA n 0 | BARU 7/11 = 64%
+   N+K+P suara                  semua 44/70 = 63% (p 0.021) | LAMA 29/49 = 59% | BARU 15/21 = 71%
+   Kalshi, cadangan nowcast     semua 34/52 = 65% (p 0.018) | LAMA 15/24 = 62% | BARU 19/28 = 68%
+   Kalshi, cadangan kejutan lalu semua 54/83 = 65% (p 0.004) | LAMA 31/51 = 61% | BARU 23/32 = 72%
+   K & P sepakat                semua 8/10 = 80% (p 0.055) | LAMA n 0 | BARU 8/10 = 80%
+
+## Core CPI m/m (183 rilis 2010-01–2025-10; nowcast tersedia 139)
+   N nowcast Cleveland Fed      semua 22/39 = 56% (p 0.261) | LAMA 11/22 = 50% | BARU 11/17 = 65%
+   K Kalshi (2022–2025)         semua 15/20 = 75% (p 0.021) | LAMA n 0 | BARU 15/20 = 75%
+   P kejutan bulan lalu         semua 47/70 = 67% (p 0.003) | LAMA 34/51 = 67% | BARU 13/19 = 68%
+   N+P suara                    semua 48/73 = 66% (p 0.005) | LAMA 34/52 = 65% | BARU 14/21 = 67%
+   N+B suara                    semua 22/39 = 56% (p 0.261) | LAMA 11/22 = 50% | BARU 11/17 = 65%
+   N & K sepakat                semua 7/8 = 88% (p 0.035) | LAMA n 0 | BARU 7/8 = 88%
+   N+K+P suara                  semua 51/76 = 67% (p 0.002) | LAMA 34/52 = 65% | BARU 17/24 = 71%
+   Kalshi, cadangan nowcast     semua 30/49 = 61% (p 0.076) | LAMA 11/22 = 50% | BARU 19/27 = 70%
+   Kalshi, cadangan kejutan lalu semua 52/76 = 68% (p 0.001) | LAMA 34/51 = 67% | BARU 18/25 = 72%
+   K & P sepakat                semua 8/10 = 80% (p 0.055) | LAMA n 0 | BARU 8/10 = 80%
+
+## gabungan (367 rilis 2010-01–2025-10; nowcast tersedia 279)
+   N nowcast Cleveland Fed      semua 47/83 = 57% (p 0.136) | LAMA 26/46 = 57% | BARU 21/37 = 57%
+   K Kalshi (2022–2025)         semua 31/41 = 76% (p 0.001) | LAMA n 0 | BARU 31/41 = 76%
+   P kejutan bulan lalu         semua 94/146 = 64% (p 0.000) | LAMA 65/102 = 64% | BARU 29/44 = 66%
+   B bensin                     semua 71/117 = 61% (p 0.013) | LAMA 54/84 = 64% | BARU 17/33 = 52%
+   N+P suara                    semua 89/142 = 63% (p 0.002) | LAMA 63/101 = 62% | BARU 26/41 = 63%
+   N+B suara                    semua 80/131 = 61% (p 0.007) | LAMA 58/94 = 62% | BARU 22/37 = 59%
+   N & K sepakat                semua 14/19 = 74% (p 0.032) | LAMA n 0 | BARU 14/19 = 74%
+   N+K+P suara                  semua 95/146 = 65% (p 0.000) | LAMA 63/101 = 62% | BARU 32/45 = 71%
+   Kalshi, cadangan nowcast     semua 64/101 = 63% (p 0.005) | LAMA 26/46 = 57% | BARU 38/55 = 69%
+   Kalshi, cadangan kejutan lalu semua 106/159 = 67% (p 0.000) | LAMA 65/102 = 64% | BARU 41/57 = 72%
+   K & P sepakat                semua 16/20 = 80% (p 0.006) | LAMA n 0 | BARU 16/20 = 80%
+
+Nowcast CPI m/m September 2026 per 09 Oct 2026: 0.53%
+
+Nowcast Core CPI m/m September 2026 per 09 Oct 2026: 0.20%

@@ -192,6 +192,95 @@ def info(card: dict, snap: dict) -> dict | None:
             "kuat": False, "atas": s["atas"], "sama": s["sama"], "bawah": s["bawah"]}
 
 
+def _angka(v: float, d: int = 1) -> str:
+    return f"{v:.{d}f}%".replace(".", ",")
+
+
+def sebaran(markets: list[dict], step: float) -> dict | None:
+    """Sebaran pasar untuk angka berlangkah 0,1 (CPI, core CPI, core PCE, pengangguran): nilai paling mungkin, peluangnya,
+    dan peluang "≥ nilai" di sekitar puncak. Dipakai SEBELUM konsensus ForexFactory terbit (permintaan 10 Okt 2026)."""
+    pts = sorted((k, p) for m in markets if (k := strike(m["ticker"])) is not None and (p := prob(m)) is not None)
+    if len(pts) < 3:
+        return None
+    # P(angka = k + step) = P(> k) - P(> k + step); ujung bawah/atas = sisa peluang
+    vals = {}
+    for (k0, p0), (k1, p1) in zip(pts, pts[1:]):
+        vals[round(k0 + step, 6)] = max(0.0, p0 - p1)
+    vals[round(pts[0][0], 6)] = max(0.0, 1 - pts[0][1])            # ≤ strike terendah
+    vals[round(pts[-1][0] + step, 6)] = max(0.0, pts[-1][1])        # ≥ strike tertinggi + langkah
+    tot = sum(vals.values()) or 1.0
+    vals = {k: v / tot for k, v in vals.items()}
+    top = max(vals, key=vals.get)
+    ge = {k: sum(v for x, v in vals.items() if x >= k - 1e-9) for k in vals}
+    near = [k for k in sorted(vals) if abs(k - top) <= step + 1e-9 and 0.02 <= ge[k] <= 0.98]
+    return {"puncak": top, "p": vals[top], "ge": {f"{k:.1f}": round(ge[k], 3) for k in near},
+            "rata": round(sum(k * v for k, v in vals.items()), 3)}
+
+
+def mendatang(cards: list[dict], store, now: datetime, get=fetch) -> None:
+    """Kartu 📅 berita berikutnya yang belum punya konsensus (di luar kalender pekan ini): tambahkan card["kalshi_sebaran"]
+    — angka paling mungkin menurut pasar Kalshi. Cache Supabase baris "kalshi_sebaran" (TTL 15 menit)."""
+    want = [c for c in cards if c.get("title") in SERIES and SERIES[c["title"]][1] and not c.get("forecast")]
+    want = [c for c in want if timedelta(0) < datetime.fromisoformat(c["time"]) - now <= AHEAD]
+    if not want:
+        return
+    old = {}
+    if store is not None:
+        try:
+            old = store.get_state("kalshi_sebaran") or {}
+        except Exception:  # noqa: BLE001
+            old = {}
+    data = old.get("data") or {}
+    if not old.get("t") or now - datetime.fromisoformat(old["t"]) >= TTL:
+        fresh, cache = {}, {}
+        for c in want:
+            series, step, _ = SERIES[c["title"]]
+            if series not in cache:
+                cache[series] = get(series)
+            t0 = datetime.fromisoformat(c["time"])
+            ms = [m for m in cache[series] if m.get("close_time") and timedelta(0) <= t0 - datetime.fromisoformat(
+                m["close_time"].replace("Z", "+00:00")) <= timedelta(minutes=20)]
+            s = sebaran(ms, step) if ms else None
+            if s:
+                fresh[f"{c['title']}|{c['time']}"] = s
+        if fresh:
+            hist = old.get("riwayat") or {}
+            for k, s in fresh.items():          # riwayat peluang angka puncak → terlihat bila pasar bergeser
+                h = list(hist.get(k) or [])
+                if not h or now - datetime.fromisoformat(h[-1][0]) >= timedelta(minutes=14):
+                    h.append([now.isoformat(), s["puncak"], round(s["p"], 3), s["rata"]])
+                hist[k] = h[-200:]
+            data = fresh
+            old = {"t": now.isoformat(), "data": data, "riwayat": {k: v for k, v in hist.items() if k in fresh}}
+            if store is not None:
+                try:
+                    store.save_state(old, "kalshi_sebaran")
+                except Exception:  # noqa: BLE001
+                    pass
+    w = datetime.fromisoformat(old["t"]) + WIB if old.get("t") else None
+    for c in want:
+        key = f"{c['title']}|{c['time']}"
+        s = data.get(key)
+        if not s:
+            continue
+        nama = {"CPI m/m": "CPI m/m", "Core CPI m/m": "Core CPI m/m", "Core PCE Price Index m/m": "Core PCE m/m",
+                "Unemployment Rate": "Pengangguran"}.get(c["title"], c["title"])
+        ge = " • ".join(f"≥ {_angka(float(k))}: {_pct(v)}%" for k, v in s["ge"].items())
+        geser = ""
+        h = (old.get("riwayat") or {}).get(key) or []
+        lama = [x for x in h if datetime.fromisoformat(x[0]) <= now - timedelta(hours=23)]
+        if lama and abs(lama[-1][3] - s["rata"]) >= 0.02:
+            geser = (f" • 24 jam lalu rata-rata {_angka(lama[-1][3], 2)} → sekarang {_angka(s['rata'], 2)} "
+                     "(pasar bergeser: ada data/pernyataan baru)")
+        c["kalshi_sebaran"] = {
+            "judul": "🎲 Pasar Kalshi (sebelum konsensus terbit)",
+            "teks": f"{nama} paling mungkin {_angka(s['puncak'])} ({_pct(s['p'])}%)",
+            "catatan": (f"{ge} • rata-rata pasar {_angka(s['rata'], 2)}{geser}"
+                        + (f" • diperbarui {w:%H:%M} WIB" if w else "")
+                        + " • peluang arah emas dihitung otomatis setelah konsensus ForexFactory terbit (biasanya Minggu)"),
+            "sebaran": s}
+
+
 def attach(persiapan: dict, store, now: datetime | None = None, get=fetch) -> None:
     """Tambahkan persiapan.berita[].kalshi dan persiapan.kalshi_waktu (WIB)."""
     now = now or datetime.now(timezone.utc)

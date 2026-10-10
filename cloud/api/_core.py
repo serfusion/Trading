@@ -148,6 +148,34 @@ def atr_last(bars: list[Bar], n: int) -> float:
     return sum(window) / len(window)
 
 
+# 🛑 BATAL saat guncangan EKSTREM (permintaan pengguna 10 Okt 2026: "tarik sinyal BUY bila ada pernyataan Trump/Fed/negara
+# yang menjatuhkan harga; sebaliknya batalkan SELL bila guncangan naik"). research/batal_guncang.py (replay cloud
+# 2013–2026): menutup saat guncangan 1,5–3 ATR MERUGIKAN (harga biasanya pulih: XAU BUY sejak 2021 +586R → +340…+540R);
+# hanya guncangan ≥ 4 × ATR14 H1 melawan posisi dalam ≤ 6 jam, SEBELUM TP1, sedikit menolong di XAU & BTC (BUY & SELL;
+# XAU +0,002/+0,004R per sinyal, 92% tahun tidak memburuk). Env GUNCANG_BATAL=0 mematikan.
+GUNCANG = (4.0, 6)
+
+
+def guncangan(bars: list[Bar], v: dict, price: float, k: float = GUNCANG[0], jam: int = GUNCANG[1]) -> dict | None:
+    """{"atr_x", "dari", "ke"} bila harga bergerak melawan posisi ≥ k × ATR14 H1 (ATR sebelum entry) dari harga terbaik
+    sejak entry dalam `jam` candle terakhir (termasuk candle berjalan dan harga sekarang); None bila tidak."""
+    start = parse_iso(v["bar_close"])
+    sebelum = [b for b in bars if b.t < start]
+    sejak = [b for b in bars if b.t >= start]
+    if len(sebelum) < 15 or not sejak:
+        return None
+    atr = atr_last(sebelum, 14)
+    if atr <= 0:
+        return None
+    buy = v["dir"] == "BUY"
+    w = sejak[-jam:]
+    ref = max([v["entry"]] + [b.h for b in w]) if buy else min([v["entry"]] + [b.l for b in w])
+    gerak = (ref - price) if buy else (price - ref)
+    if gerak < k * atr:
+        return None
+    return {"atr_x": round(gerak / atr, 1), "dari": ref, "ke": price}
+
+
 def evaluate(closed: list[Bar], position: str | None, cfg: dict = CFG) -> dict:
     """position: 'BUY' | 'SELL' | None. Hanya memakai bar yang SUDAH tertutup."""
     need = max(cfg["entry"], cfg["exit"], cfg["atr"]) + 2
@@ -643,7 +671,8 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
         dikirim untuk semua set."""
         return all(exit_of(n) < exit_of(name) for n in twins_open(name, v))
 
-    def close_virtual(name: str, v: dict, exit_price: float, why: str, quiet: bool = False) -> None:
+    def close_virtual(name: str, v: dict, exit_price: float, why: str, quiet: bool = False,
+                      extra: dict | None = None) -> None:
         sign = 1 if v["dir"] == "BUY" else -1
         points = (exit_price - v["entry"]) * sign
         r = f_result(v["legs"], v["entry"], v["risk"], sign, v.get("tp1_hit", False), exit_price, cfg["tp1_r"])
@@ -653,10 +682,13 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
               "legs": v["legs"], "tp1_hit": v.get("tp1_hit", False), "star": v.get("star", False),
               "cat": v.get("cat", ""), "tier": v.get("tier", ""), "point_value": cfg.get("point_value", 1.0),
               "tp1_time": v.get("be_bar"), "reason": why, **({"lapis": True} if v.get("lapis") else {}),
+              **(extra or {}),
               "r_by": {f"{n}_{'07' if e else 'tp1'}": round(scheme_r(bars, v, exit_price, n, e, cfg["tp1_r"],
                                                                      cfg["be_offset"]), 3)
                        for n in (1, 3) for e in (False, True)}}
-        text = (f"🏁 TUTUP {v['dir']} {symbol} @ {exit_price:.{td(cfg)}f} — tutup SEMUA posisi sinyal ini\n"
+        head = "🛑 BATAL" if (extra or {}).get("batal") else "🏁 TUTUP"
+        text = (f"{head} {v['dir']} {symbol} @ {exit_price:.{td(cfg)}f} — tutup SEMUA posisi sinyal ini"
+                + (" (belum entry = jangan entry)" if (extra or {}).get("batal") else "") + "\n"
                 f"Entry {v['entry']:.{td(cfg)}f} -> {points:+.{td(cfg)}f} poin | {'PROFIT (TP1 kena)' if v.get('tp1_hit') else 'MINUS'}"
                 f"\nAlasan: {why}")
         # sinyal kembar: hanya set terakhir yang masih terbuka mengirim teks (set lebih cepat tutup diam-diam)
@@ -683,6 +715,18 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             events.append(f"{name} BATAL {v['dir']} (data pasar tutup)")
             return None
         buy = v["dir"] == "BUY"
+        if not v.get("be_done") and cfg.get("guncang", True):
+            g = guncangan(bars, v, price)
+            if g and not any(((b.l <= v["sl"]) if buy else (b.h >= v["sl"])) or ((b.h >= v["tp1"]) if buy else
+                                                                                (b.l <= v["tp1"]))
+                             for b in bars if b.t >= parse_iso(v["bar_close"])):
+                arah = "anjlok" if buy else "melonjak"
+                close_virtual(name, v, price,
+                              f"🛑 BATAL: harga {arah} {g['atr_x']:.1f} ATR dalam ≤ {GUNCANG[1]} jam "
+                              f"({g['dari']:.{td(cfg)}f} → {g['ke']:.{td(cfg)}f}) — guncangan ekstrem, biasanya karena "
+                              "pernyataan/berita penting (Trump, Fed, pemerintah, negara lain)",
+                              extra={"batal": True, "guncang": g})
+                return None
         if not v.get("be_done"):
             for b in (b for b in bars if b.t >= parse_iso(v["bar_close"])):
                 if (b.l <= v["sl"]) if buy else (b.h >= v["sl"]):

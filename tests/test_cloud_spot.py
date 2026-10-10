@@ -170,3 +170,44 @@ def test_vol_rank_sama_dengan_pandas():
     v = np.log(c).diff().rolling(14).std()
     want = v.rolling(365, min_periods=120).rank(pct=True).iloc[-1]
     assert _spot.vol_rank(bars) == pytest.approx(want, rel=1e-9)
+
+
+def test_guncangan_spot_peringatan_tanpa_jual():
+    """10 Okt 2026: anjlok ≥ 8% dalam 3 jam → ⚠️ peringatan sekali (data: menjual saat itu lebih buruk); paksa = jual."""
+    from datetime import datetime, timedelta, timezone
+    import _core
+    import _spot as S
+    t0 = datetime(2026, 10, 8, 0, 5, tzinfo=timezone.utc)
+    pos = {"id": "SPOT-XLM-20261008", "coin": "XLM", "entry": 0.2005, "tp": 0.2065, "time": _core.iso(t0),
+           "day": _core.iso(t0.replace(minute=0)), "deadline": _core.iso(t0 + timedelta(days=10))}
+    hb = [_core.Bar(t0 + timedelta(hours=h), 0.20, 0.2012 if h == 13 else 0.1995, 0.186, 0.1995 if h < 15 else 0.1850)
+          for h in range(16)]
+    assert S.guncangan(hb, pos) is not None and S.guncangan(hb[:14], pos) is None
+    daily = [_core.Bar(t0.replace(minute=0) - timedelta(days=k), 0.2, 0.201, 0.186, 0.19) for k in range(3, -1, -1)]
+
+    class St:
+        def __init__(self):
+            self.s = {"open": {"XLM": dict(pos)}, "scan": {"day": "2026-10-08", "todo": []}}
+
+        def get_state(self):
+            return self.s
+
+        def save_state(self, d):
+            self.s = d
+
+    class Pub:
+        def __init__(self):
+            self.ev = []
+
+        def publish(self, ev, *a, **k):
+            self.ev.append(ev)
+    now = t0 + timedelta(hours=15, minutes=30)
+    st, pub = St(), Pub()
+    S.spot_tick(now, st, pub, fetch=lambda c, n, k, b: (daily, "x"), hourly=lambda c: hb)
+    assert [e["type"] for e in pub.ev if e["type"] != "spot_status"] == ["spot_warn"] and "XLM" in st.s["open"]
+    S.spot_tick(now + timedelta(hours=1), st, pub, fetch=lambda c, n, k, b: (daily, "x"), hourly=lambda c: hb)
+    assert sum(e["type"] == "spot_warn" for e in pub.ev) == 1                      # sekali per posisi
+    st2, pub2 = St(), Pub()
+    S.spot_tick(now, st2, pub2, fetch=lambda c, n, k, b: (daily, "x"), hourly=lambda c: hb, paksa_jual=True)
+    cl = [e for e in pub2.ev if e["type"] == "spot_close"]
+    assert cl and cl[0]["reason"].startswith("🛑 BATAL") and "XLM" not in st2.s["open"]

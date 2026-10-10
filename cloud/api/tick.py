@@ -123,7 +123,9 @@ def run() -> tuple[int, dict]:
            "max_leg_lot": float(env.get("MAX_LEG_LOT", 0.10)),
            "star_only": env.get("STAR_ONLY", "0") == "1",   # 1 = hanya kirim sinyal ⭐
            # validasi arah H4 EMA50 untuk 💰 XAU (research/alchemist.py; XAU_H4_FILTER=0 untuk mematikan)
-           "h4_filter": env.get("XAU_H4_FILTER", "1") == "1"}
+           "h4_filter": env.get("XAU_H4_FILTER", "1") == "1",
+           # 🛑 BATAL saat guncangan ekstrem ≥ 4 ATR melawan posisi (research/batal_guncang.py; GUNCANG_BATAL=0 mati)
+           "guncang": env.get("GUNCANG_BATAL", "1") == "1"}
     if env.get("XAU_EXTRA_SETS", "1") == "1":   # set 100/40 & 120/50 (research/sinyal_tambahan.py, izin 3 Okt 2026)
         cfg["sets"] = list(_core.CFG["sets"]) + [(100, 40), (120, 50)]
     if env.get("WAR_MODE", "1") == "1":    # ⚠️ mode perang (label saja, XAU tidak dijeda)
@@ -179,7 +181,7 @@ def run() -> tuple[int, dict]:
             btc = _core.tick(now, feeds["BTC"],
                              _core.RowStore(store, "btc"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result),
+                             {**_core.BTC_CFG, "skip_fn": btc_skip_fn(store, now, result), "guncang": cfg["guncang"],
                               # BTC konf dimatikan (research/tanpa_konf.py); BTC_SKIP_KONF=0 untuk menyalakan lagi
                               "skip_cats": ("konf",) if env.get("BTC_SKIP_KONF", "1") == "1" else (),
                               **signal_extras("BTC", store)}, symbol="BTC/USD")
@@ -197,6 +199,7 @@ def run() -> tuple[int, dict]:
                              _core.RowStore(store, "eth"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "asset": "ETH", "id_prefix": "ETH-", "skip_cats": ("konf", "biasa"),
+                              "guncang": cfg["guncang"],
                               "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
                              symbol="ETH/USD")
             result["eth"] = {k: eth.get(k) for k in ("ok", "price", "events", "error")}
@@ -213,7 +216,7 @@ def run() -> tuple[int, dict]:
                 feeds[sym] = Keep(KlineFeed(sym, env["TWELVEDATA_API_KEY"]))
                 kr = _core.tick(now, feeds[sym], _core.RowStore(store, sym.lower()),
                                 _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                                {**_core.KRIPTO_CFG, "asset": sym, "id_prefix": f"{sym}-",
+                                {**_core.KRIPTO_CFG, "asset": sym, "id_prefix": f"{sym}-", "guncang": cfg["guncang"],
                                  "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
                                 symbol=f"{sym}/USD")
                 result[sym.lower()] = {k: kr.get(k) for k in ("ok", "price", "events", "error")}
@@ -234,6 +237,7 @@ def run() -> tuple[int, dict]:
     try:                                   # 🌊 ikut arus (izin pengguna 6 Okt 2026; ARUS_SIGNALS=0 mati)
         if env.get("ARUS_SIGNALS", "1") == "1":
             import _arus
+            _arus.GUNCANG_ON = cfg["guncang"]
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
             result["arus"] = _arus.arus_tick(datetime.now(timezone.utc),
                                              {k: f.bars for k, f in feeds.items() if f.bars},
@@ -244,6 +248,7 @@ def run() -> tuple[int, dict]:
     try:                                   # 🔗 emas pulih → kripto ikut naik (izin pengguna 9 Okt 2026; PULIH_SIGNALS=0 mati)
         if env.get("PULIH_SIGNALS", "1") == "1":
             import _pulih
+            _pulih.GUNCANG_ON = cfg["guncang"]
             store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
             result["pulih"] = _pulih.pulih_tick(datetime.now(timezone.utc), feeds["XAU"].bars or [],
                                                 _core.RowStore(store, "pulih"),
@@ -257,7 +262,9 @@ def run() -> tuple[int, dict]:
             result["spot"] = _spot.spot_tick(datetime.now(timezone.utc), _core.RowStore(store, "spot"),
                                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                                              env.get("TWELVEDATA_API_KEY"), max_open=int(env.get("SPOT_MAX", "10")),
-                                             deadline_s=max(3.0, 45.0 - (time.monotonic() - started)))
+                                             deadline_s=max(3.0, 45.0 - (time.monotonic() - started)),
+                                             # ⚠️ guncangan spot = peringatan; SPOT_BATAL=1 paksa jual (tidak disarankan)
+                                             paksa_jual=env.get("SPOT_BATAL", "0") == "1")
     except Exception as exc:  # noqa: BLE001 - spot tidak boleh mengganggu sinyal lain
         result["spot_error"] = str(exc)
     return 200, result

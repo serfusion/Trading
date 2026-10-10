@@ -59,6 +59,7 @@ fun StatsTab(events: List<SignalEvent>, money: MoneySettings) {
         if (symbols.size > 2) item { SymbolChips(symbols, kind) { kind = it } }
         item { Selector(listOf("Harian", "Mingguan", "Bulanan"), period) { period = it } }
         item { TotalCard(all, money) }
+        item { LainCard(events) }       // 💎 / 🔗 / 🌊 dihitung terpisah (persen / R, bukan uang lot MT5) — 4.26
         item {
             SectionTitle(
                 listOf("Per hari", "Per minggu", "Per bulan")[period],
@@ -220,3 +221,34 @@ private fun RiwayatRow(label: String, c: org.json.JSONObject?) {
             style = MaterialTheme.typography.labelSmall)
     }
 }
+
+
+/**
+ * 💎 spot, 🔗 keranjang, 🌊 ikut arus: hasil sinyal yang sudah ditutup (pesan di HP), TERPISAH dari angka 💰 di atas.
+ * Angka 💰 dihitung per sinyal (5 posisi XAU = 1 sinyal) dalam uang akun MT5; spot & keranjang dalam persen modal yang
+ * dipakai, 🌊 dalam R. Pertanyaan pengguna 10 Okt 2026: "statistik menghitung semua sinyal XAU atau spot?".
+ */
+@Composable
+private fun LainCard(events: List<SignalEvent>) {
+    val rows = listOf(
+        Triple("💎 Spot", events.filter { it.type == "spot_close" }.mapNotNull { it.num("r") }, "%"),
+        Triple("🔗 Keranjang", events.filter { it.type == "pulih_close" }.mapNotNull { it.num("r_pct") }, "%"),
+        Triple("🌊 Ikut arus", events.filter { it.type == "arus_close" }.mapNotNull { it.num("r") }, "R"),
+    ).filter { it.second.isNotEmpty() }
+    if (rows.isEmpty()) return
+    AppCard {
+        CardTitle("Sinyal lain (terpisah dari 💰)")
+        rows.forEach { (name, v, unit) ->
+            val win = v.count { it > 0 }
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Text(name, Modifier.weight(1f), fontWeight = FontWeight.Bold)
+                Text("$win untung • ${v.size - win} minus • total ${signed(v.sum(), if (unit == "R") 2 else 1)}$unit",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (v.sum() >= 0) BuyColor else SellColor, fontWeight = FontWeight.Bold)
+            }
+        }
+        Text("💰 di atas = uang per sinyal (5 posisi XAU dihitung 1 sinyal). Spot & keranjang = % modal yang dipakai, " +
+            "🌊 = R. Dari pesan yang tersimpan di HP ini.", style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
+}
+

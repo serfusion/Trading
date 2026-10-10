@@ -25,6 +25,29 @@ DAY = timedelta(days=1)
 SCAN_AFTER = timedelta(minutes=5)       # tunggu candle harian benar-benar tutup
 KEEP_CLOSED = 30
 STATUS_EVERY = timedelta(hours=2)
+# ⚠️ guncangan pada posisi spot (permintaan pengguna 10 Okt 2026, kasus XLM 8 Okt): koin turun ≥ 8% dari high 3 jam
+# terakhir. research/batal_guncang.py bagian B (1.456 trade 2019–2026): MENJUAL saat itu LEBIH BURUK di setiap tahun
+# (setelah anjlok −8%/3 jam harga rata-rata pulih +6% s.d. TP/batas waktu; WR 92% → 86%) → bawaan hanya PERINGATAN.
+# Env SPOT_BATAL=1 = paksa jual (tidak disarankan). Sekali per posisi.
+GUNCANG = (0.08, 3)
+
+
+def _hourly(coin: str, n: int = 4) -> list[_core.Bar]:
+    q = urllib.parse.urlencode({"symbol": f"{coin}USDT", "interval": "1h", "limit": n})
+    rows = _core.http("GET", f"https://data-api.binance.vision/api/v3/klines?{q}", timeout=8) or []
+    return [_core.Bar(datetime.fromtimestamp(r[0] / 1000, timezone.utc), float(r[1]), float(r[2]), float(r[3]),
+                      float(r[4])) for r in rows]
+
+
+def guncangan(hourly: list[_core.Bar], pos: dict) -> float | None:
+    """Turun (0..1) dari high tertinggi `GUNCANG[1]` candle 1 jam terakhir (setelah beli) ke harga sekarang, bila ≥ ambang."""
+    t0 = _core.parse_iso(pos["time"]) - timedelta(hours=1)
+    w = [b for b in hourly if b.t >= t0][-GUNCANG[1]:]
+    if not w:
+        return None
+    top = max(b.h for b in w)
+    drop = 1 - w[-1].c / top if top > 0 else 0.0
+    return drop if drop >= GUNCANG[0] else None
 
 
 # ------------------------------------------------------------------ data
@@ -184,10 +207,11 @@ def _pct(v: float) -> str:
 
 # ------------------------------------------------------------------ putaran
 def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: int = 10, fetch=None,
-              deadline_s: float = 20.0) -> dict:
+              deadline_s: float = 20.0, hourly=None, paksa_jual: bool = False) -> dict:
     """Dipanggil tiap tick cloud (10 menit). Pindai sekali sehari, cek posisi sekali per jam. Idempoten."""
     if not MODEL:
         return {"ok": False, "error": "spot_model.json tidak ada"}
+    fetch_default = fetch is None
     fetch = fetch or klines
     started = time.monotonic()
     state = store.get_state() or {}
@@ -213,7 +237,36 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
             prices[coin] = bars[-1].c
             hit = next((b for b in bars if day0 <= b.t < dl and b.h >= pos["tp"]), None)
             reason = exit_px = None
-            if hit is not None:
+            drop = None
+            # tes/replay menyuntik `fetch` tanpa `hourly` → tanpa permintaan jaringan tambahan
+            hourly_fn = hourly or (_hourly if fetch_default else None)
+            if hit is None and now < dl and not pos.get("warn") and hourly_fn:
+                try:
+                    hb = hourly_fn(coin)
+                    drop = guncangan(hb, pos)
+                    if drop is not None:
+                        pos["warn"] = _core.iso(now)
+                        cur = hb[-1].c
+                        ev = {"type": "spot_warn", "id": pos["id"], "symbol": f"{coin}/USDT", "coin": coin,
+                              "entry": pos["entry"], "price": cur, "drop": round(drop * 100, 1),
+                              "r_now": round((cur / pos["entry"] - 1) * 100, 2), "time": _core.iso(now),
+                              "paksa": paksa_jual}
+                        if paksa_jual:
+                            exit_px, reason = cur, f"🛑 BATAL: anjlok {drop * 100:.1f}% dalam ≤ {GUNCANG[1]} jam"
+                        else:
+                            pub.publish(ev, f"{coin} anjlok {_pct(-drop * 100)} dalam ≤ {GUNCANG[1]} jam (kemungkinan "
+                                            "berita/pernyataan penting). Data 2019–2026: menjual saat anjlok seperti ini "
+                                            "rata-rata LEBIH BURUK — harga biasanya pulih (+6% rata-rata s.d. TP/batas "
+                                            f"waktu). Rencana tetap: limit jual {_px(pos['tp'])}, batas {_wib(dl)}. "
+                                            "Jangan menambah posisi.",
+                                        f"⚠️ GUNCANGAN SPOT {coin}/USDT {_pct(-drop * 100)}", 4, ["warning"])
+                            events.append(f"spot peringatan {coin}")
+                            changed = True
+                except Exception as exc:  # noqa: BLE001 - cek guncangan opsional
+                    errors.append(f"{coin} guncangan: {str(exc)[:60]}")
+            if reason:
+                pass                                       # 🛑 paksa jual saat guncangan (SPOT_BATAL=1)
+            elif hit is not None:
                 exit_px = max(hit.o, pos["tp"]) if hit.t > day0 else pos["tp"]
                 reason = f"TP +{tp * 100:.0f}% kena"
             elif now >= dl:
@@ -227,6 +280,7 @@ def spot_tick(now: datetime, store, pub, td_key: str | None = None, max_open: in
                       "time_open": pos["time"], "time": _core.iso(now), "win": r > 0}
                 head = "PROFIT" if r > 0 else "MINUS"
                 text = (f"Limit jual terisi di {_px(exit_px)}." if hit is not None else
+                        f"{reason}: jual sekarang (patokan {_px(exit_px)})." if reason.startswith("🛑") else
                         f"Belum kena TP setelah {days} hari: jual sekarang (patokan {_px(exit_px)}).") + \
                     f" Hasil {_pct(r)} setelah biaya. Beli {_px(pos['entry'])}."
                 pub.publish(ev, text, f"🏁 CLOSE SPOT {coin}/USDT • {head} {_pct(r)}", 4, ["checkered_flag"])

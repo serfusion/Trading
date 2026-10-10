@@ -27,6 +27,10 @@ KOIN = ["BTC", "ETH", "SOL", "XRP", "BNB", "DOGE", "ADA", "LINK", "AVAX"]
 TERUJI = {"baru": [111, 64, 1.11], "lama": [51, 63, 1.34], "tahun": "6/7 tahun +", "terburuk": -20.0,
           "dasar_baru": [46, -0.23]}
 KEEP_CLOSED = 20
+# 🛑 keranjang turun ≥ 5% dari puncaknya (atau dari harga beli) dalam ≤ 1 jam → jual semua (research/batal_guncang.py
+# bagian C: +0,09%/+0,13% per keranjang LAMA/BARU, 67% tahun; permintaan pengguna 10 Okt 2026). GUNCANG_BATAL=0 mati.
+GUNCANG = (0.05, 60)          # (turun, menit)
+GUNCANG_ON = True
 
 
 def atr_ewm(bars: list[_core.Bar], n: int = 24) -> list[float]:
@@ -117,6 +121,24 @@ def pulih_tick(now: datetime, xau_bars: list[_core.Bar], store, pub, btc_daily=N
     closed_log = state.get("closed") or []
     events = []
     pos = state.get("open")
+    # 0) 🛑 guncangan: keranjang anjlok ≥ 5% dalam ≤ 1 jam → jual sebelum 48 jam
+    if pos and GUNCANG_ON and now < _core.parse_iso(pos["deadline"]):
+        try:
+            px = prices(list(pos["entry"]))
+            r = [px[c] / e - 1 for c, e in pos["entry"].items() if c in px and e]
+            if r:
+                val = 1 + sum(r) / len(r)
+                jejak = [x for x in pos.get("jejak") or []
+                         if now - _core.parse_iso(x[0]) <= timedelta(minutes=GUNCANG[1])] + [[_core.iso(now), round(val, 5)]]
+                pos["jejak"] = jejak
+                top = max([1.0] + [x[1] for x in jejak])
+                if val <= top * (1 - GUNCANG[0]):
+                    pos["deadline"] = _core.iso(now)               # tutup sekarang lewat jalur penutupan biasa
+                    pos["batal"] = (f"🛑 BATAL: keranjang anjlok {(1 - val / top) * 100:.1f}% dalam ≤ 1 jam — guncangan "
+                                    "pasar kripto (biasanya pernyataan/berita penting)")
+                    events.append("pulih guncangan")
+        except Exception as exc:  # noqa: BLE001 - harga gagal: cek lagi tick berikutnya
+            events.append(f"pulih cek guncangan gagal: {exc}")
     # 1) tutup setelah 48 jam
     if pos and now >= _core.parse_iso(pos["deadline"]):
         try:
@@ -124,13 +146,16 @@ def pulih_tick(now: datetime, xau_bars: list[_core.Bar], store, pub, btc_daily=N
             hasil = {c: (px[c] / e - 1) * 100 - 0.2 for c, e in pos["entry"].items() if c in px and e}
             avg = sum(hasil.values()) / len(hasil) if hasil else 0.0
             naik = sum(1 for v in hasil.values() if v > 0)
+            batal = pos.get("batal")
             ev = {"type": "pulih_close", "id": pos["id"], "symbol": "KRIPTO", "r_pct": round(avg, 2), "win": avg > 0,
                   "per_koin": {c: round(v, 2) for c, v in hasil.items()}, "naik": naik, "n": len(hasil),
-                  "time": _core.iso(now)}
+                  "time": _core.iso(now), **({"batal": True, "reason": batal} if batal else {})}
             best = sorted(hasil.items(), key=lambda x: -x[1])[:3]
-            pub.publish(ev, f"48 jam selesai: jual keranjang. Rata-rata {_pct(avg)} setelah biaya; {naik}/{len(hasil)} "
+            pub.publish(ev, (f"{batal}. Jual keranjang sekarang. " if batal else "48 jam selesai: jual keranjang. ")
+                        + f"Rata-rata {_pct(avg)} setelah biaya; {naik}/{len(hasil)} "
                             f"koin naik. Terbaik: " + ", ".join(f"{c} {_pct(v)}" for c, v in best) + ".",
-                        f"🔗 TUTUP keranjang kripto • {'PROFIT' if avg > 0 else 'MINUS'} {_pct(avg)}", 4, ["link"])
+                        f"🔗 {'BATAL' if batal else 'TUTUP'} keranjang kripto • {'PROFIT' if avg > 0 else 'MINUS'} "
+                        f"{_pct(avg)}", 4, ["link"])
             closed_log = ([ev] + closed_log)[:KEEP_CLOSED]
             state["open"] = None
             pos = None

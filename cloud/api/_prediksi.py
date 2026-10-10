@@ -51,10 +51,43 @@ def nama(title: str) -> str:
     return NAMA.get(title) or title.replace(" m/m", "").replace(" q/q", "").replace(" y/y", "")
 
 
-def baris(title: str, naik: int, bukti: str, sumber: str) -> dict:
+def baris(title: str, naik: int, bukti: str, sumber: str, jangka: str = "1 jam") -> dict:
     up = naik >= 50
-    return {"teks": f"{nama(title)}: peluang emas {'naik' if up else 'turun'} 1 jam {naik if up else 100 - naik}%",
+    return {"teks": f"{nama(title)}: peluang emas {'naik' if up else 'turun'} {jangka} {naik if up else 100 - naik}%",
             "catatan": CATATAN, "bukti": bukti, "naik": int(naik), "kuat": abs(naik - 50) >= 10, "sumber": sumber}
+
+
+# 🎲 peluang PASAR (Kalshi/Polymarket × reaksi emas 1 menit, _hari_h.py) — hanya judul yang lolos uji: tebakan pasar
+# CPI & core CPI benar 76–78% (2022–2025, research/kalshi_uji.py); sinyal ≥ 60% benar 13 dari 17 (hari_h_uji.py).
+# Permintaan pengguna 10 Okt 2026: angka berita yang akan datang harus selalu terbaru dan ikut berubah bila ada pernyataan
+# penting — harga pasar prediksi bereaksi dalam hitungan menit, dibaca ulang tiap 15 menit. NFP TIDAK (Kalshi 33–57%).
+PASAR = ("CPI m/m", "Core CPI m/m")
+GESER = 0.05                     # perubahan peluang ≥ 5 poin dalam 24 jam → ditandai "pasar bergeser"
+
+
+def uji_pasar() -> tuple[int, int]:
+    """(benar, n) gabungan judul PASAR dari cloud/api/hari_h.json (sinyal ≥ 60%)."""
+    try:
+        import _hari_h
+        v = [(_hari_h.VALID.get(t) or {}).get("Kalshi") or {} for t in PASAR]
+    except Exception:  # noqa: BLE001
+        return 0, 0
+    n = sum(int(x.get("n") or 0) for x in v)
+    benar = sum(round((x.get("benar") or 0) * (x.get("n") or 0) / 100) for x in v)
+    return benar, n
+
+
+def pasar(card: dict) -> dict | None:
+    """Baris dari peluang pasar sebelum rilis (card["hari_h"]["p_naik"]) untuk CPI/core CPI."""
+    h = card.get("hari_h") or {}
+    if card.get("title") not in PASAR or card.get("released") or h.get("p_naik") is None:
+        return None
+    naik = int(round(float(h["p_naik"]) * 100))
+    benar, n = uji_pasar()
+    bukti = (f"pasar Kalshi/Polymarket × reaksi emas 1 menit (diperbarui tiap 15 menit; pernyataan Fed/Trump/negara "
+             f"langsung tercermin di harga pasar) • teruji 2022–2025: sinyal ≥ 60% benar {benar} dari {n} rilis "
+             "→ sampel kecil, belum pasti")
+    return baris(card["title"], naik, bukti, "pasar", "1 menit")
 
 
 PERINGKAT = {1: "⚡ Sangat kuat", 2: "🥈 Kuat", 3: "🥉 Lemah", 4: "Biasa"}
@@ -66,6 +99,9 @@ def peringkat(pr: dict, card: dict) -> int:
     """1 ⚡ = peluang ≥ 60% DAN teruji ≥ 60% di periode lama & baru; 2 = model teruji, peluang ≥ 60%;
     3 = model, peluang 55–59%; 4 = dasar historis (≈ lempar koin)."""
     pct = max(pr["naik"], 100 - pr["naik"])
+    if pr["sumber"] == "pasar":                     # sampel uji kecil (n ±17) → paling tinggi 🥈
+        benar, n = uji_pasar()
+        return 2 if pct >= 60 and n >= 15 and benar / n >= 0.6 else 3 if pct >= 55 else 4
     if pr["sumber"] == "aturan":
         return 1 if pct >= 60 else 3
     if pr["sumber"] == "model":
@@ -78,6 +114,9 @@ def peringkat(pr: dict, card: dict) -> int:
 
 def untuk(card: dict, mem: dict | None = None) -> dict | None:
     title = card.get("title") or ""
+    pa = pasar(card)
+    if pa:
+        return pa
     p = card.get("prarilis")
     if p and p.get("naik") is not None and not card.get("released"):
         return baris(title, int(p["naik"]), p.get("bukti") or "model sebelum rilis", "model")
@@ -99,6 +138,25 @@ def detail(card: dict, pr: dict, persiapan: dict, titik: dict | None) -> list[di
     """Blok di balik show/hide: dasar angka, 🔄 titik balik ekonomi (NFP), 🏦 keputusan Fed (Polymarket)."""
     out = [{"judul": "Dasar angka", "teks": pr["catatan"], "catatan": pr["bukti"]}]
     title = card.get("title")
+    h = card.get("hari_h") or {}
+    if h.get("teks") and not card.get("released"):     # 🎲 peluang pasar + riwayat (bergeser = ada berita/pernyataan)
+        g = h.get("geser") or {}
+        geser = ""
+        if g and abs(g["ke"] - g["dari"]) >= GESER:
+            jam = f"{g['jam']:g}".replace(".", ",")
+            geser = (f"⚠️ Peluang emas naik bergeser {round(g['dari'] * 100)}% → {round(g['ke'] * 100)}% dalam {jam} "
+                     "jam — pasar bereaksi pada data/pernyataan baru. ")
+        out.append({"judul": "🎲 Pasar prediksi (diperbarui tiap 15 menit)", "teks": h["teks"],
+                    "catatan": geser + (h.get("bukti") or "")})
+    if card.get("petunjuk_teruji"):                     # 🧭 petunjuk teruji (Kalshi, kejutan lalu, GDPNow, berbalik)
+        k = card["petunjuk_teruji"]
+        out.append({"judul": k["judul"], "teks": k["teks"], "catatan": k["catatan"]})
+    if card.get("kalshi_sebaran"):                      # 📅 sebelum konsensus terbit: angka paling mungkin menurut pasar
+        k = card["kalshi_sebaran"]
+        out.append({"judul": k["judul"], "teks": k["teks"], "catatan": k["catatan"]})
+    for x in (persiapan.get("pernyataan") or {}).get("penting") or []:
+        if title in (x.get("untuk") or ()):            # 🗣️ pernyataan Fed/Trump/pemerintah terbaru yang relevan
+            out.append({"judul": "🗣️ Pernyataan terbaru", "teks": x.get("judul") or "", "catatan": x.get("catatan") or ""})
     if title == NFP and titik and not card.get("released"):
         out.append({"judul": titik["judul"], "teks": titik["teks"],
                     "catatan": "\n".join((titik["kondisi"], titik["pendahulu"], titik["bukti"]))})

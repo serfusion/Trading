@@ -1,0 +1,388 @@
+# ⏱️ Entry 1 detik sebelum rilis + petunjuk teruji baru (tick Dukascopy & Exness)
+python -m research.pra_gabung            → docs/eksternal/hasil_pra_gabung.txt
+
+Dukascopy: tick tersedia untuk 482 dari 776 waktu rilis
+Exness: tick tersedia untuk 445 dari 776 waktu rilis
+
+## CPI: Kalshi (tebakan arah di 35 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  35 WR   8.6% rata  -1.07 total    -37.4 t  -8.0 | LAMA   +nan (n=0) BARU  -1.07 (n=35) | tahun+   0% dari 4
+                                                  REALISTIS rata -2.04 WR 6% | STRES rata -3.44
+   Exness    tutup 1s CEPAT                     n=  35 WR  20.0% rata  -0.37 total    -12.9 t  -3.2 | LAMA   +nan (n=0) BARU  -0.37 (n=35) | tahun+   0% dari 4
+                                                  REALISTIS rata -1.00 WR 3% | STRES rata -2.40
+   Dukascopy tutup 2s CEPAT                     n=  35 WR  11.4% rata  -1.47 total    -51.4 t  -3.4 | LAMA   +nan (n=0) BARU  -1.47 (n=35) | tahun+   0% dari 4
+                                                  REALISTIS rata -1.48 WR 51% | STRES rata -2.88
+   Exness    tutup 2s CEPAT                     n=  35 WR  31.4% rata  -0.46 total    -16.0 t  -2.2 | LAMA   +nan (n=0) BARU  -0.46 (n=35) | tahun+  25% dari 4
+                                                  REALISTIS rata -0.25 WR 51% | STRES rata -1.65
+   Dukascopy tutup 3s CEPAT                     n=  35 WR  54.3% rata  -0.91 total    -31.7 t  -0.8 | LAMA   +nan (n=0) BARU  -0.91 (n=35) | tahun+  25% dari 4
+                                                  REALISTIS rata -0.98 WR 57% | STRES rata -2.38
+   Exness    tutup 3s CEPAT                     n=  35 WR  57.1% rata  +0.30 total    +10.4 t  +0.4 | LAMA   +nan (n=0) BARU  +0.30 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata -0.16 WR 57% | STRES rata -1.56
+   Dukascopy tutup 10s CEPAT                    n=  35 WR  60.0% rata  +0.06 total     +2.2 t  +0.0 | LAMA   +nan (n=0) BARU  +0.06 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata +0.12 WR 60% | STRES rata -1.28
+   Exness    tutup 10s CEPAT                    n=  35 WR  60.0% rata  +0.88 total    +30.7 t  +0.7 | LAMA   +nan (n=0) BARU  +0.88 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata +0.21 WR 63% | STRES rata -1.19
+   Dukascopy tutup 30s CEPAT                    n=  35 WR  60.0% rata  +0.70 total    +24.6 t  +0.4 | LAMA   +nan (n=0) BARU  +0.70 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata +0.09 WR 60% | STRES rata -1.31
+   Exness    tutup 30s CEPAT                    n=  35 WR  60.0% rata  +1.06 total    +37.1 t  +0.6 | LAMA   +nan (n=0) BARU  +1.06 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata +0.47 WR 60% | STRES rata -0.93
+   Dukascopy tutup 60s CEPAT                    n=  35 WR  57.1% rata  +0.06 total     +2.3 t  +0.0 | LAMA   +nan (n=0) BARU  +0.06 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata -0.50 WR 57% | STRES rata -1.90
+   Exness    tutup 60s CEPAT                    n=  35 WR  57.1% rata  +0.26 total     +9.2 t  +0.2 | LAMA   +nan (n=0) BARU  +0.26 (n=35) | tahun+  75% dari 4
+                                                  REALISTIS rata -0.26 WR 57% | STRES rata -1.66
+   Dukascopy tutup 180s CEPAT                   n=  35 WR  48.6% rata  -0.34 total    -12.0 t  -0.2 | LAMA   +nan (n=0) BARU  -0.34 (n=35) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.95 WR 49% | STRES rata -2.35
+   Exness    tutup 180s CEPAT                   n=  35 WR  54.3% rata  +0.01 total     +0.4 t  +0.0 | LAMA   +nan (n=0) BARU  +0.01 (n=35) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.53 WR 49% | STRES rata -1.93
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  35 WR  71.4% rata  -1.03 total    -36.0 t  -0.9 | LAMA   +nan (n=0) BARU  -1.03 (n=35) | tahun+  25% dari 4
+                                                  REALISTIS rata -1.17 WR 69% | STRES rata -2.30
+   Exness    untung>=$1 maks 60s CEPAT          n=  35 WR  71.4% rata  -1.27 total    -44.5 t  -1.1 | LAMA   +nan (n=0) BARU  -1.27 (n=35) | tahun+  25% dari 4
+                                                  REALISTIS rata -1.12 WR 71% | STRES rata -2.44
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  35 WR  74.3% rata  -0.65 total    -22.7 t  -0.5 | LAMA   +nan (n=0) BARU  -0.65 (n=35) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.69 WR 71% | STRES rata -1.95
+   Exness    untung>=$2 maks 180s CEPAT         n=  35 WR  74.3% rata  -0.71 total    -24.9 t  -0.5 | LAMA   +nan (n=0) BARU  -0.71 (n=35) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.92 WR 74% | STRES rata -2.05
+
+## CPI: Kalshi & kejutan lalu sepakat (tebakan arah di 20 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  20 WR  10.0% rata  -0.97 total    -19.5 t  -6.7 | LAMA   +nan (n=0) BARU  -0.97 (n=20) | tahun+   0% dari 4
+                                                  REALISTIS rata -2.74 WR 5% | STRES rata -4.14
+   Exness    tutup 1s CEPAT                     n=  20 WR  15.0% rata  -0.23 total     -4.6 t  -2.9 | LAMA   +nan (n=0) BARU  -0.23 (n=20) | tahun+   0% dari 4
+                                                  REALISTIS rata -1.46 WR 5% | STRES rata -2.86
+   Dukascopy tutup 2s CEPAT                     n=  20 WR  10.0% rata  -2.06 total    -41.2 t  -2.7 | LAMA   +nan (n=0) BARU  -2.06 (n=20) | tahun+  25% dari 4
+                                                  REALISTIS rata -0.42 WR 60% | STRES rata -1.82
+   Exness    tutup 2s CEPAT                     n=  20 WR  20.0% rata  -0.85 total    -17.0 t  -1.6 | LAMA   +nan (n=0) BARU  -0.85 (n=20) | tahun+  25% dari 4
+                                                  REALISTIS rata +0.83 WR 50% | STRES rata -0.57
+   Dukascopy tutup 3s CEPAT                     n=  20 WR  65.0% rata  +0.26 total     +5.2 t  +0.2 | LAMA   +nan (n=0) BARU  +0.26 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.14 WR 65% | STRES rata -1.54
+   Exness    tutup 3s CEPAT                     n=  20 WR  60.0% rata  +1.45 total    +28.9 t  +1.3 | LAMA   +nan (n=0) BARU  +1.45 (n=20) | tahun+  75% dari 4
+                                                  REALISTIS rata +0.67 WR 65% | STRES rata -0.73
+   Dukascopy tutup 10s CEPAT                    n=  20 WR  70.0% rata  +0.73 total    +14.6 t  +0.4 | LAMA   +nan (n=0) BARU  +0.73 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata +0.69 WR 70% | STRES rata -0.71
+   Exness    tutup 10s CEPAT                    n=  20 WR  70.0% rata  +1.19 total    +23.9 t  +0.7 | LAMA   +nan (n=0) BARU  +1.19 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata +0.30 WR 70% | STRES rata -1.10
+   Dukascopy tutup 30s CEPAT                    n=  20 WR  65.0% rata  +1.19 total    +23.8 t  +0.6 | LAMA   +nan (n=0) BARU  +1.19 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata +0.38 WR 65% | STRES rata -1.02
+   Exness    tutup 30s CEPAT                    n=  20 WR  65.0% rata  +1.45 total    +29.1 t  +0.7 | LAMA   +nan (n=0) BARU  +1.45 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata +0.80 WR 65% | STRES rata -0.60
+   Dukascopy tutup 60s CEPAT                    n=  20 WR  60.0% rata  -0.15 total     -3.0 t  -0.1 | LAMA   +nan (n=0) BARU  -0.15 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.79 WR 60% | STRES rata -2.19
+   Exness    tutup 60s CEPAT                    n=  20 WR  60.0% rata  +0.10 total     +2.0 t  +0.0 | LAMA   +nan (n=0) BARU  +0.10 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.49 WR 60% | STRES rata -1.89
+   Dukascopy tutup 180s CEPAT                   n=  20 WR  40.0% rata  -0.63 total    -12.6 t  -0.3 | LAMA   +nan (n=0) BARU  -0.63 (n=20) | tahun+  25% dari 4
+                                                  REALISTIS rata -1.32 WR 40% | STRES rata -2.72
+   Exness    tutup 180s CEPAT                   n=  20 WR  50.0% rata  -0.17 total     -3.5 t  -0.1 | LAMA   +nan (n=0) BARU  -0.17 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.81 WR 40% | STRES rata -2.21
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  20 WR  70.0% rata  -1.05 total    -21.0 t  -0.6 | LAMA   +nan (n=0) BARU  -1.05 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -1.13 WR 70% | STRES rata -2.37
+   Exness    untung>=$1 maks 60s CEPAT          n=  20 WR  70.0% rata  -1.25 total    -25.0 t  -0.7 | LAMA   +nan (n=0) BARU  -1.25 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -1.29 WR 70% | STRES rata -2.67
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  20 WR  70.0% rata  -0.22 total     -4.4 t  -0.1 | LAMA   +nan (n=0) BARU  -0.22 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.33 WR 70% | STRES rata -1.50
+   Exness    untung>=$2 maks 180s CEPAT         n=  20 WR  70.0% rata  -0.37 total     -7.4 t  -0.2 | LAMA   +nan (n=0) BARU  -0.37 (n=20) | tahun+  50% dari 4
+                                                  REALISTIS rata -0.77 WR 70% | STRES rata -1.57
+
+## CPI: Kalshi, cadangan kejutan lalu (tebakan arah di 135 rilis)
+   Dukascopy tutup 1s CEPAT                     n= 123 WR   2.4% rata  -0.62 total    -76.6 t -13.3 | LAMA  -0.46 (n=87) BARU  -1.00 (n=36) | tahun+   0% dari 16
+                                                  REALISTIS rata -1.34 WR 4% | STRES rata -2.74
+   Exness    tutup 1s CEPAT                     n=  85 WR   7.1% rata  -0.37 total    -31.3 t  -5.6 | LAMA  -0.37 (n=49) BARU  -0.36 (n=36) | tahun+   9% dari 11
+                                                  REALISTIS rata -0.98 WR 6% | STRES rata -2.38
+   Dukascopy tutup 2s CEPAT                     n= 123 WR   7.3% rata  -0.73 total    -90.3 t  -5.5 | LAMA  -0.48 (n=87) BARU  -1.34 (n=36) | tahun+   6% dari 16
+                                                  REALISTIS rata -1.27 WR 28% | STRES rata -2.67
+   Exness    tutup 2s CEPAT                     n=  85 WR  17.6% rata  -0.41 total    -34.5 t  -3.6 | LAMA  -0.41 (n=49) BARU  -0.40 (n=36) | tahun+   9% dari 11
+                                                  REALISTIS rata -0.93 WR 26% | STRES rata -2.33
+   Dukascopy tutup 3s CEPAT                     n= 123 WR  36.6% rata  -0.67 total    -81.8 t  -1.9 | LAMA  -0.34 (n=87) BARU  -1.46 (n=36) | tahun+  25% dari 16
+                                                  REALISTIS rata -1.13 WR 31% | STRES rata -2.53
+   Exness    tutup 3s CEPAT                     n=  85 WR  37.6% rata  -0.36 total    -30.6 t  -1.0 | LAMA  -0.40 (n=49) BARU  -0.31 (n=36) | tahun+  27% dari 11
+                                                  REALISTIS rata -0.92 WR 35% | STRES rata -2.32
+   Dukascopy tutup 10s CEPAT                    n= 123 WR  40.7% rata  -0.35 total    -42.8 t  -0.8 | LAMA  -0.03 (n=87) BARU  -1.13 (n=36) | tahun+  38% dari 16
+                                                  REALISTIS rata -0.80 WR 33% | STRES rata -2.20
+   Exness    tutup 10s CEPAT                    n=  85 WR  51.8% rata  -0.28 total    -23.6 t  -0.5 | LAMA  +0.11 (n=49) BARU  -0.80 (n=36) | tahun+  45% dari 11
+                                                  REALISTIS rata -0.86 WR 44% | STRES rata -2.26
+   Dukascopy tutup 30s CEPAT                    n= 123 WR  43.1% rata  -0.20 total    -24.2 t  -0.4 | LAMA  -0.15 (n=87) BARU  -0.31 (n=36) | tahun+  38% dari 16
+                                                  REALISTIS rata -0.82 WR 35% | STRES rata -2.22
+   Exness    tutup 30s CEPAT                    n=  85 WR  48.2% rata  -0.07 total     -6.3 t  -0.1 | LAMA  -0.09 (n=49) BARU  -0.05 (n=36) | tahun+  27% dari 11
+                                                  REALISTIS rata -0.64 WR 44% | STRES rata -2.04
+   Dukascopy tutup 60s CEPAT                    n= 123 WR  44.7% rata  -0.41 total    -50.2 t  -0.8 | LAMA  -0.11 (n=87) BARU  -1.13 (n=36) | tahun+  44% dari 16
+                                                  REALISTIS rata -1.04 WR 36% | STRES rata -2.44
+   Exness    tutup 60s CEPAT                    n=  85 WR  49.4% rata  -0.44 total    -37.7 t  -0.6 | LAMA  -0.04 (n=49) BARU  -1.00 (n=36) | tahun+  27% dari 11
+                                                  REALISTIS rata -1.02 WR 41% | STRES rata -2.42
+   Dukascopy tutup 180s CEPAT                   n= 123 WR  43.9% rata  -0.69 total    -84.5 t  -1.2 | LAMA  -0.15 (n=87) BARU  -1.98 (n=36) | tahun+  50% dari 16
+                                                  REALISTIS rata -1.29 WR 37% | STRES rata -2.69
+   Exness    tutup 180s CEPAT                   n=  85 WR  43.5% rata  -0.84 total    -71.8 t  -1.1 | LAMA  -0.27 (n=49) BARU  -1.62 (n=36) | tahun+  45% dari 11
+                                                  REALISTIS rata -1.41 WR 39% | STRES rata -2.81
+   Dukascopy untung>=$1 maks 60s CEPAT          n= 123 WR  49.6% rata  -0.67 total    -82.0 t  -1.6 | LAMA  -0.27 (n=87) BARU  -1.64 (n=36) | tahun+  31% dari 16
+                                                  REALISTIS rata -1.20 WR 43% | STRES rata -2.52
+   Exness    untung>=$1 maks 60s CEPAT          n=  85 WR  57.6% rata  -0.96 total    -82.0 t  -1.7 | LAMA  -0.43 (n=49) BARU  -1.69 (n=36) | tahun+  18% dari 11
+                                                  REALISTIS rata -1.25 WR 52% | STRES rata -2.61
+   Dukascopy untung>=$2 maks 180s CEPAT         n= 123 WR  52.8% rata  -0.59 total    -72.6 t  -1.3 | LAMA  -0.17 (n=87) BARU  -1.61 (n=36) | tahun+  44% dari 16
+                                                  REALISTIS rata -1.09 WR 45% | STRES rata -2.40
+   Exness    untung>=$2 maks 180s CEPAT         n=  85 WR  52.9% rata  -0.97 total    -82.5 t  -1.5 | LAMA  -0.51 (n=49) BARU  -1.60 (n=36) | tahun+  18% dari 11
+                                                  REALISTIS rata -1.29 WR 51% | STRES rata -2.56
+
+## CPI: kejutan lalu (tebakan arah di 150 rilis)
+   Dukascopy tutup 1s CEPAT                     n= 137 WR   2.9% rata  -0.58 total    -79.8 t -13.5 | LAMA  -0.45 (n=94) BARU  -0.86 (n=43) | tahun+   0% dari 16
+                                                  REALISTIS rata -1.30 WR 5% | STRES rata -2.70
+   Exness    tutup 1s CEPAT                     n=  95 WR   6.3% rata  -0.31 total    -29.8 t  -5.8 | LAMA  -0.38 (n=52) BARU  -0.24 (n=43) | tahun+   9% dari 11
+                                                  REALISTIS rata -0.96 WR 8% | STRES rata -2.36
+   Dukascopy tutup 2s CEPAT                     n= 137 WR  10.2% rata  -0.67 total    -91.8 t  -5.0 | LAMA  -0.43 (n=94) BARU  -1.20 (n=43) | tahun+   6% dari 16
+                                                  REALISTIS rata -1.03 WR 29% | STRES rata -2.43
+   Exness    tutup 2s CEPAT                     n=  95 WR  21.1% rata  -0.33 total    -31.1 t  -2.3 | LAMA  -0.31 (n=52) BARU  -0.35 (n=43) | tahun+  18% dari 11
+                                                  REALISTIS rata -0.81 WR 25% | STRES rata -2.21
+   Dukascopy tutup 3s CEPAT                     n= 137 WR  38.0% rata  -0.39 total    -53.9 t  -1.2 | LAMA  -0.44 (n=94) BARU  -0.29 (n=43) | tahun+  25% dari 16
+                                                  REALISTIS rata -1.04 WR 32% | STRES rata -2.44
+   Exness    tutup 3s CEPAT                     n=  95 WR  38.9% rata  -0.18 total    -16.8 t  -0.5 | LAMA  -0.32 (n=52) BARU  -0.00 (n=43) | tahun+  18% dari 11
+                                                  REALISTIS rata -0.81 WR 38% | STRES rata -2.21
+   Dukascopy tutup 10s CEPAT                    n= 137 WR  41.6% rata  -0.23 total    -31.9 t  -0.6 | LAMA  -0.17 (n=94) BARU  -0.37 (n=43) | tahun+  31% dari 16
+                                                  REALISTIS rata -0.82 WR 34% | STRES rata -2.22
+   Exness    tutup 10s CEPAT                    n=  95 WR  51.6% rata  -0.19 total    -18.3 t  -0.3 | LAMA  -0.02 (n=52) BARU  -0.40 (n=43) | tahun+  36% dari 11
+                                                  REALISTIS rata -0.85 WR 42% | STRES rata -2.25
+   Dukascopy tutup 30s CEPAT                    n= 137 WR  45.3% rata  -0.10 total    -14.2 t  -0.2 | LAMA  -0.21 (n=94) BARU  +0.13 (n=43) | tahun+  38% dari 16
+                                                  REALISTIS rata -0.74 WR 36% | STRES rata -2.14
+   Exness    tutup 30s CEPAT                    n=  95 WR  48.4% rata  +0.13 total    +11.9 t  +0.2 | LAMA  -0.14 (n=52) BARU  +0.45 (n=43) | tahun+  27% dari 11
+                                                  REALISTIS rata -0.51 WR 44% | STRES rata -1.91
+   Dukascopy tutup 60s CEPAT                    n= 137 WR  45.3% rata  -0.36 total    -48.9 t  -0.7 | LAMA  -0.17 (n=94) BARU  -0.75 (n=43) | tahun+  38% dari 16
+                                                  REALISTIS rata -1.00 WR 37% | STRES rata -2.40
+   Exness    tutup 60s CEPAT                    n=  95 WR  50.5% rata  -0.29 total    -27.2 t  -0.4 | LAMA  -0.08 (n=52) BARU  -0.53 (n=43) | tahun+  36% dari 11
+                                                  REALISTIS rata -0.91 WR 43% | STRES rata -2.31
+   Dukascopy tutup 180s CEPAT                   n= 137 WR  43.1% rata  -0.37 total    -50.1 t  -0.7 | LAMA  -0.30 (n=94) BARU  -0.52 (n=43) | tahun+  38% dari 16
+                                                  REALISTIS rata -1.00 WR 36% | STRES rata -2.40
+   Exness    tutup 180s CEPAT                   n=  95 WR  42.1% rata  -0.25 total    -23.4 t  -0.3 | LAMA  -0.30 (n=52) BARU  -0.18 (n=43) | tahun+  36% dari 11
+                                                  REALISTIS rata -0.89 WR 39% | STRES rata -2.29
+   Dukascopy untung>=$1 maks 60s CEPAT          n= 137 WR  51.1% rata  -0.66 total    -90.0 t  -1.6 | LAMA  -0.35 (n=94) BARU  -1.32 (n=43) | tahun+  38% dari 16
+                                                  REALISTIS rata -1.14 WR 44% | STRES rata -2.43
+   Exness    untung>=$1 maks 60s CEPAT          n=  95 WR  61.1% rata  -0.91 total    -86.1 t  -1.6 | LAMA  -0.38 (n=52) BARU  -1.54 (n=43) | tahun+  27% dari 11
+                                                  REALISTIS rata -1.28 WR 53% | STRES rata -2.60
+   Dukascopy untung>=$2 maks 180s CEPAT         n= 137 WR  52.6% rata  -0.55 total    -75.2 t  -1.3 | LAMA  -0.29 (n=94) BARU  -1.10 (n=43) | tahun+  38% dari 16
+                                                  REALISTIS rata -1.02 WR 45% | STRES rata -2.31
+   Exness    untung>=$2 maks 180s CEPAT         n=  95 WR  51.6% rata  -0.85 total    -80.3 t  -1.5 | LAMA  -0.53 (n=52) BARU  -1.23 (n=43) | tahun+  27% dari 11
+                                                  REALISTIS rata -1.20 WR 51% | STRES rata -2.39
+
+## NFP-hari: pengangguran Kalshi/kejutan lalu (tebakan arah di 152 rilis)
+   Dukascopy tutup 1s CEPAT                     n= 129 WR   4.7% rata  -0.84 total   -108.3 t -12.0 | LAMA  -0.79 (n=84) BARU  -0.94 (n=45) | tahun+   0% dari 16
+                                                  REALISTIS rata -1.62 WR 5% | STRES rata -3.02
+   Exness    tutup 1s CEPAT                     n=  95 WR  13.7% rata  -0.34 total    -32.3 t  -6.1 | LAMA  -0.52 (n=50) BARU  -0.14 (n=45) | tahun+   0% dari 11
+                                                  REALISTIS rata -1.09 WR 5% | STRES rata -2.49
+   Dukascopy tutup 2s CEPAT                     n= 129 WR   7.8% rata  -0.94 total   -121.5 t  -7.5 | LAMA  -0.89 (n=84) BARU  -1.03 (n=45) | tahun+  12% dari 16
+                                                  REALISTIS rata -2.02 WR 26% | STRES rata -3.42
+   Exness    tutup 2s CEPAT                     n=  95 WR  13.7% rata  -0.41 total    -39.0 t  -4.1 | LAMA  -0.55 (n=50) BARU  -0.25 (n=45) | tahun+  18% dari 11
+                                                  REALISTIS rata -1.56 WR 26% | STRES rata -2.96
+   Dukascopy tutup 3s CEPAT                     n= 129 WR  33.3% rata  -1.33 total   -172.0 t  -3.5 | LAMA  -1.33 (n=84) BARU  -1.33 (n=45) | tahun+  12% dari 16
+                                                  REALISTIS rata -1.55 WR 38% | STRES rata -2.95
+   Exness    tutup 3s CEPAT                     n=  95 WR  36.8% rata  -0.88 total    -83.3 t  -2.2 | LAMA  -0.60 (n=50) BARU  -1.19 (n=45) | tahun+  18% dari 11
+                                                  REALISTIS rata -1.22 WR 39% | STRES rata -2.62
+   Dukascopy tutup 10s CEPAT                    n= 129 WR  48.1% rata  -0.74 total    -95.5 t  -1.2 | LAMA  -0.51 (n=84) BARU  -1.17 (n=45) | tahun+  31% dari 16
+                                                  REALISTIS rata -1.33 WR 43% | STRES rata -2.73
+   Exness    tutup 10s CEPAT                    n=  95 WR  49.5% rata  -0.27 total    -25.2 t  -0.4 | LAMA  -0.02 (n=50) BARU  -0.54 (n=45) | tahun+  45% dari 11
+                                                  REALISTIS rata -0.93 WR 44% | STRES rata -2.33
+   Dukascopy tutup 30s CEPAT                    n= 129 WR  55.0% rata  -0.05 total     -6.4 t  -0.1 | LAMA  +0.18 (n=84) BARU  -0.47 (n=45) | tahun+  50% dari 16
+                                                  REALISTIS rata -0.80 WR 51% | STRES rata -2.20
+   Exness    tutup 30s CEPAT                    n=  95 WR  55.8% rata  +0.20 total    +18.6 t  +0.3 | LAMA  +0.58 (n=50) BARU  -0.24 (n=45) | tahun+  45% dari 11
+                                                  REALISTIS rata -0.53 WR 48% | STRES rata -1.93
+   Dukascopy tutup 60s CEPAT                    n= 129 WR  55.8% rata  +0.10 total    +12.7 t  +0.1 | LAMA  +0.47 (n=84) BARU  -0.60 (n=45) | tahun+  56% dari 16
+                                                  REALISTIS rata -0.60 WR 51% | STRES rata -2.00
+   Exness    tutup 60s CEPAT                    n=  95 WR  56.8% rata  +0.30 total    +28.4 t  +0.4 | LAMA  +0.78 (n=50) BARU  -0.23 (n=45) | tahun+  55% dari 11
+                                                  REALISTIS rata -0.43 WR 52% | STRES rata -1.83
+   Dukascopy tutup 180s CEPAT                   n= 129 WR  55.8% rata  +0.16 total    +20.4 t  +0.2 | LAMA  +0.44 (n=84) BARU  -0.36 (n=45) | tahun+  56% dari 16
+                                                  REALISTIS rata -0.55 WR 53% | STRES rata -1.95
+   Exness    tutup 180s CEPAT                   n=  95 WR  54.7% rata  +0.24 total    +22.6 t  +0.3 | LAMA  +0.40 (n=50) BARU  +0.06 (n=45) | tahun+  55% dari 11
+                                                  REALISTIS rata -0.46 WR 51% | STRES rata -1.86
+   Dukascopy untung>=$1 maks 60s CEPAT          n= 129 WR  60.5% rata  -1.35 total   -174.6 t  -2.7 | LAMA  -0.70 (n=84) BARU  -2.57 (n=45) | tahun+  31% dari 16
+                                                  REALISTIS rata -1.48 WR 57% | STRES rata -2.72
+   Exness    untung>=$1 maks 60s CEPAT          n=  95 WR  61.1% rata  -1.65 total   -157.2 t  -3.2 | LAMA  -0.75 (n=50) BARU  -2.66 (n=45) | tahun+  18% dari 11
+                                                  REALISTIS rata -2.00 WR 57% | STRES rata -3.04
+   Dukascopy untung>=$2 maks 180s CEPAT         n= 129 WR  62.8% rata  -0.95 total   -122.4 t  -1.7 | LAMA  -0.33 (n=84) BARU  -2.11 (n=45) | tahun+  38% dari 16
+                                                  REALISTIS rata -1.24 WR 60% | STRES rata -2.59
+   Exness    untung>=$2 maks 180s CEPAT         n=  95 WR  63.2% rata  -1.20 total   -113.6 t  -2.0 | LAMA  -0.36 (n=50) BARU  -2.12 (n=45) | tahun+  36% dari 11
+                                                  REALISTIS rata -1.52 WR 59% | STRES rata -2.88
+
+## ISM Jasa: berbalik (tebakan arah di 180 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  23 WR   0.0% rata  -0.61 total    -14.0 t  -6.5 | LAMA  -0.46 (n=13) BARU  -0.79 (n=10) | tahun+   0% dari 14
+                                                  REALISTIS rata -0.46 WR 35% | STRES rata -1.86
+   Exness    tutup 1s CEPAT                     n= 107 WR   7.5% rata  -0.30 total    -32.6 t  -9.1 | LAMA  -0.36 (n=60) BARU  -0.23 (n=47) | tahun+   0% dari 12
+                                                  REALISTIS rata -0.26 WR 36% | STRES rata -1.66
+   Dukascopy tutup 2s CEPAT                     n=  23 WR  56.5% rata  +0.17 total     +3.8 t  +0.2 | LAMA  +0.12 (n=13) BARU  +0.23 (n=10) | tahun+  36% dari 14
+                                                  REALISTIS rata -0.26 WR 39% | STRES rata -1.66
+   Exness    tutup 2s CEPAT                     n= 107 WR  45.8% rata  +0.36 total    +38.3 t  +1.7 | LAMA  -0.16 (n=60) BARU  +1.01 (n=47) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.24 WR 39% | STRES rata -1.64
+   Dukascopy tutup 3s CEPAT                     n=  23 WR  60.9% rata  +0.37 total     +8.4 t  +0.5 | LAMA  +0.23 (n=13) BARU  +0.55 (n=10) | tahun+  50% dari 14
+                                                  REALISTIS rata -0.34 WR 35% | STRES rata -1.74
+   Exness    tutup 3s CEPAT                     n= 107 WR  48.6% rata  +0.38 total    +40.9 t  +1.5 | LAMA  -0.12 (n=60) BARU  +1.02 (n=47) | tahun+  50% dari 12
+                                                  REALISTIS rata -0.21 WR 38% | STRES rata -1.61
+   Dukascopy tutup 10s CEPAT                    n=  23 WR  56.5% rata  +0.39 total     +8.9 t  +0.5 | LAMA  +0.38 (n=13) BARU  +0.40 (n=10) | tahun+  57% dari 14
+                                                  REALISTIS rata -0.22 WR 39% | STRES rata -1.62
+   Exness    tutup 10s CEPAT                    n= 107 WR  54.2% rata  +0.46 total    +49.1 t  +1.8 | LAMA  -0.02 (n=60) BARU  +1.07 (n=47) | tahun+  50% dari 12
+                                                  REALISTIS rata -0.19 WR 37% | STRES rata -1.59
+   Dukascopy tutup 30s CEPAT                    n=  23 WR  60.9% rata  +0.88 total    +20.2 t  +1.4 | LAMA  +0.44 (n=13) BARU  +1.45 (n=10) | tahun+  57% dari 14
+                                                  REALISTIS rata +0.26 WR 43% | STRES rata -1.14
+   Exness    tutup 30s CEPAT                    n= 107 WR  54.2% rata  +0.55 total    +59.4 t  +2.1 | LAMA  -0.01 (n=60) BARU  +1.27 (n=47) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.08 WR 40% | STRES rata -1.48
+   Dukascopy tutup 60s CEPAT                    n=  23 WR  56.5% rata  +0.41 total     +9.3 t  +0.6 | LAMA  +0.57 (n=13) BARU  +0.19 (n=10) | tahun+  43% dari 14
+                                                  REALISTIS rata -0.26 WR 39% | STRES rata -1.66
+   Exness    tutup 60s CEPAT                    n= 107 WR  51.4% rata  +0.32 total    +34.2 t  +1.1 | LAMA  -0.02 (n=60) BARU  +0.76 (n=47) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.29 WR 36% | STRES rata -1.69
+   Dukascopy tutup 180s CEPAT                   n=  23 WR  56.5% rata  +0.91 total    +20.9 t  +1.0 | LAMA  +0.38 (n=13) BARU  +1.60 (n=10) | tahun+  57% dari 14
+                                                  REALISTIS rata +0.30 WR 52% | STRES rata -1.10
+   Exness    tutup 180s CEPAT                   n= 107 WR  52.3% rata  +0.50 total    +53.9 t  +1.3 | LAMA  +0.02 (n=60) BARU  +1.13 (n=47) | tahun+  50% dari 12
+                                                  REALISTIS rata -0.13 WR 41% | STRES rata -1.53
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  23 WR  60.9% rata  -0.01 total     -0.2 t  -0.0 | LAMA  -0.05 (n=13) BARU  +0.05 (n=10) | tahun+  50% dari 14
+                                                  REALISTIS rata -0.11 WR 52% | STRES rata -1.42
+   Exness    untung>=$1 maks 60s CEPAT          n= 107 WR  57.0% rata  -0.18 total    -19.5 t  -0.9 | LAMA  -0.23 (n=60) BARU  -0.12 (n=47) | tahun+  33% dari 12
+                                                  REALISTIS rata -0.44 WR 43% | STRES rata -1.70
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  23 WR  60.9% rata  +0.19 total     +4.3 t  +0.3 | LAMA  -0.37 (n=13) BARU  +0.91 (n=10) | tahun+  57% dari 14
+                                                  REALISTIS rata -0.17 WR 57% | STRES rata -1.74
+   Exness    untung>=$2 maks 180s CEPAT         n= 107 WR  57.9% rata  +0.01 total     +0.6 t  +0.0 | LAMA  -0.20 (n=60) BARU  +0.27 (n=47) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.42 WR 46% | STRES rata -1.75
+
+## Core PPI: berbalik (tebakan arah di 108 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  97 WR   1.0% rata  -0.55 total    -53.3 t -13.1 | LAMA  -0.46 (n=73) BARU  -0.82 (n=24) | tahun+   0% dari 13
+                                                  REALISTIS rata -1.28 WR 3% | STRES rata -2.68
+   Exness    tutup 1s CEPAT                     n=  61 WR   6.6% rata  -0.32 total    -19.4 t  -9.4 | LAMA  -0.43 (n=38) BARU  -0.14 (n=23) | tahun+   0% dari 8
+                                                  REALISTIS rata -1.11 WR 5% | STRES rata -2.51
+   Dukascopy tutup 2s CEPAT                     n=  97 WR   7.2% rata  -0.67 total    -64.7 t  -7.7 | LAMA  -0.50 (n=73) BARU  -1.18 (n=24) | tahun+   0% dari 13
+                                                  REALISTIS rata -1.16 WR 16% | STRES rata -2.56
+   Exness    tutup 2s CEPAT                     n=  61 WR  11.5% rata  -0.49 total    -29.7 t  -4.3 | LAMA  -0.48 (n=38) BARU  -0.49 (n=23) | tahun+   0% dari 8
+                                                  REALISTIS rata -0.90 WR 23% | STRES rata -2.30
+   Dukascopy tutup 3s CEPAT                     n=  97 WR  29.9% rata  -0.54 total    -52.9 t  -3.0 | LAMA  -0.45 (n=73) BARU  -0.83 (n=24) | tahun+  23% dari 13
+                                                  REALISTIS rata -1.09 WR 22% | STRES rata -2.49
+   Exness    tutup 3s CEPAT                     n=  61 WR  34.4% rata  -0.28 total    -17.2 t  -1.2 | LAMA  -0.47 (n=38) BARU  +0.02 (n=23) | tahun+  12% dari 8
+                                                  REALISTIS rata -0.78 WR 25% | STRES rata -2.18
+   Dukascopy tutup 10s CEPAT                    n=  97 WR  37.1% rata  -0.32 total    -31.1 t  -1.3 | LAMA  -0.47 (n=73) BARU  +0.13 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.90 WR 25% | STRES rata -2.30
+   Exness    tutup 10s CEPAT                    n=  61 WR  45.9% rata  +0.17 total    +10.6 t  +0.5 | LAMA  -0.34 (n=38) BARU  +1.02 (n=23) | tahun+  38% dari 8
+                                                  REALISTIS rata -0.45 WR 34% | STRES rata -1.85
+   Dukascopy tutup 30s CEPAT                    n=  97 WR  42.3% rata  -0.12 total    -11.3 t  -0.4 | LAMA  -0.32 (n=73) BARU  +0.50 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.71 WR 30% | STRES rata -2.11
+   Exness    tutup 30s CEPAT                    n=  61 WR  47.5% rata  +0.26 total    +15.6 t  +0.6 | LAMA  -0.24 (n=38) BARU  +1.08 (n=23) | tahun+  50% dari 8
+                                                  REALISTIS rata -0.33 WR 41% | STRES rata -1.73
+   Dukascopy tutup 60s CEPAT                    n=  97 WR  47.4% rata  -0.06 total     -6.1 t  -0.2 | LAMA  -0.31 (n=73) BARU  +0.68 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.66 WR 30% | STRES rata -2.06
+   Exness    tutup 60s CEPAT                    n=  61 WR  49.2% rata  +0.30 total    +18.0 t  +0.7 | LAMA  -0.23 (n=38) BARU  +1.17 (n=23) | tahun+  50% dari 8
+                                                  REALISTIS rata -0.29 WR 36% | STRES rata -1.69
+   Dukascopy tutup 180s CEPAT                   n=  97 WR  42.3% rata  -0.04 total     -4.3 t  -0.1 | LAMA  -0.25 (n=73) BARU  +0.59 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.65 WR 32% | STRES rata -2.05
+   Exness    tutup 180s CEPAT                   n=  61 WR  44.3% rata  +0.23 total    +13.9 t  +0.5 | LAMA  -0.27 (n=38) BARU  +1.05 (n=23) | tahun+  62% dari 8
+                                                  REALISTIS rata -0.38 WR 34% | STRES rata -1.78
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  97 WR  50.5% rata  -0.35 total    -34.3 t  -1.7 | LAMA  -0.33 (n=73) BARU  -0.41 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.94 WR 29% | STRES rata -2.28
+   Exness    untung>=$1 maks 60s CEPAT          n=  61 WR  49.2% rata  -0.40 total    -24.6 t  -1.5 | LAMA  -0.44 (n=38) BARU  -0.35 (n=23) | tahun+  25% dari 8
+                                                  REALISTIS rata -0.71 WR 38% | STRES rata -2.01
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  97 WR  46.4% rata  -0.20 total    -19.8 t  -0.9 | LAMA  -0.33 (n=73) BARU  +0.19 (n=24) | tahun+  31% dari 13
+                                                  REALISTIS rata -0.76 WR 35% | STRES rata -2.15
+   Exness    untung>=$2 maks 180s CEPAT         n=  61 WR  50.8% rata  -0.15 total     -9.4 t  -0.5 | LAMA  -0.40 (n=38) BARU  +0.26 (n=23) | tahun+  38% dari 8
+                                                  REALISTIS rata -0.55 WR 41% | STRES rata -1.92
+
+## JOLTS: berbalik (tebakan arah di 133 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  37 WR   0.0% rata  -0.61 total    -22.7 t  -9.0 | LAMA  -0.31 (n=5) BARU  -0.66 (n=32) | tahun+   0% dari 5
+                                                  REALISTIS rata -1.53 WR 0% | STRES rata -2.93
+   Exness    tutup 1s CEPAT                     n=  50 WR   8.0% rata  -0.22 total    -10.8 t  -8.0 | LAMA  -0.56 (n=4) BARU  -0.19 (n=46) | tahun+   0% dari 9
+                                                  REALISTIS rata -1.05 WR 10% | STRES rata -2.45
+   Dukascopy tutup 2s CEPAT                     n=  37 WR   5.4% rata  -0.91 total    -33.8 t  -7.7 | LAMA  -0.37 (n=5) BARU  -1.00 (n=32) | tahun+   0% dari 5
+                                                  REALISTIS rata -0.85 WR 30% | STRES rata -2.25
+   Exness    tutup 2s CEPAT                     n=  50 WR  28.0% rata  -0.44 total    -21.9 t  -2.5 | LAMA  -0.46 (n=4) BARU  -0.44 (n=46) | tahun+   0% dari 9
+                                                  REALISTIS rata -0.84 WR 30% | STRES rata -2.24
+   Dukascopy tutup 3s CEPAT                     n=  37 WR  29.7% rata  -0.23 total     -8.6 t  -0.6 | LAMA  -0.46 (n=5) BARU  -0.20 (n=32) | tahun+  40% dari 5
+                                                  REALISTIS rata -0.73 WR 30% | STRES rata -2.13
+   Exness    tutup 3s CEPAT                     n=  50 WR  38.0% rata  -0.23 total    -11.4 t  -0.7 | LAMA  -0.47 (n=4) BARU  -0.21 (n=46) | tahun+  22% dari 9
+                                                  REALISTIS rata -0.76 WR 36% | STRES rata -2.16
+   Dukascopy tutup 10s CEPAT                    n=  37 WR  37.8% rata  +0.14 total     +5.3 t  +0.3 | LAMA  -0.55 (n=5) BARU  +0.25 (n=32) | tahun+  60% dari 5
+                                                  REALISTIS rata -0.47 WR 38% | STRES rata -1.87
+   Exness    tutup 10s CEPAT                    n=  50 WR  44.0% rata  -0.07 total     -3.4 t  -0.2 | LAMA  -0.23 (n=4) BARU  -0.05 (n=46) | tahun+  33% dari 9
+                                                  REALISTIS rata -0.65 WR 42% | STRES rata -2.05
+   Dukascopy tutup 30s CEPAT                    n=  37 WR  48.6% rata  +0.04 total     +1.5 t  +0.1 | LAMA  -0.56 (n=5) BARU  +0.14 (n=32) | tahun+  40% dari 5
+                                                  REALISTIS rata -0.54 WR 38% | STRES rata -1.94
+   Exness    tutup 30s CEPAT                    n=  50 WR  52.0% rata  -0.16 total     -8.2 t  -0.3 | LAMA  -0.16 (n=4) BARU  -0.16 (n=46) | tahun+  44% dari 9
+                                                  REALISTIS rata -0.74 WR 46% | STRES rata -2.14
+   Dukascopy tutup 60s CEPAT                    n=  37 WR  43.2% rata  +0.27 total     +9.9 t  +0.5 | LAMA  -0.75 (n=5) BARU  +0.43 (n=32) | tahun+  40% dari 5
+                                                  REALISTIS rata -0.39 WR 41% | STRES rata -1.79
+   Exness    tutup 60s CEPAT                    n=  50 WR  46.0% rata  +0.05 total     +2.5 t  +0.1 | LAMA  +0.76 (n=4) BARU  -0.01 (n=46) | tahun+  56% dari 9
+                                                  REALISTIS rata -0.59 WR 42% | STRES rata -1.99
+   Dukascopy tutup 180s CEPAT                   n=  37 WR  51.4% rata  +0.82 total    +30.4 t  +1.2 | LAMA  -0.23 (n=5) BARU  +0.99 (n=32) | tahun+  80% dari 5
+                                                  REALISTIS rata +0.27 WR 46% | STRES rata -1.13
+   Exness    tutup 180s CEPAT                   n=  50 WR  48.0% rata  +0.06 total     +3.0 t  +0.1 | LAMA  +0.49 (n=4) BARU  +0.02 (n=46) | tahun+  56% dari 9
+                                                  REALISTIS rata -0.54 WR 48% | STRES rata -1.94
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  37 WR  48.6% rata  -0.35 total    -12.9 t  -0.8 | LAMA  -0.75 (n=5) BARU  -0.29 (n=32) | tahun+  20% dari 5
+                                                  REALISTIS rata -0.84 WR 43% | STRES rata -2.07
+   Exness    untung>=$1 maks 60s CEPAT          n=  50 WR  56.0% rata  -0.60 total    -30.1 t  -1.6 | LAMA  +0.04 (n=4) BARU  -0.66 (n=46) | tahun+  33% dari 9
+                                                  REALISTIS rata -0.92 WR 54% | STRES rata -2.31
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  37 WR  54.1% rata  +0.02 total     +0.6 t  +0.0 | LAMA  -0.23 (n=5) BARU  +0.05 (n=32) | tahun+  60% dari 5
+                                                  REALISTIS rata -0.33 WR 49% | STRES rata -1.70
+   Exness    untung>=$2 maks 180s CEPAT         n=  50 WR  50.0% rata  -0.75 total    -37.7 t  -1.5 | LAMA  +0.04 (n=4) BARU  -0.82 (n=46) | tahun+  33% dari 9
+                                                  REALISTIS rata -1.13 WR 50% | STRES rata -2.39
+
+## GDP: GDPNow (tebakan arah di 47 rilis)
+   Dukascopy tutup 1s CEPAT                     n=  46 WR   0.0% rata  -0.61 total    -27.9 t  -8.6 | LAMA  -0.56 (n=31) BARU  -0.71 (n=15) | tahun+   0% dari 14
+                                                  REALISTIS rata -1.28 WR 4% | STRES rata -2.68
+   Exness    tutup 1s CEPAT                     n=  35 WR   0.0% rata  -0.37 total    -13.0 t  -6.5 | LAMA  -0.47 (n=20) BARU  -0.25 (n=15) | tahun+   0% dari 11
+                                                  REALISTIS rata -1.14 WR 3% | STRES rata -2.54
+   Dukascopy tutup 2s CEPAT                     n=  46 WR  13.0% rata  -0.69 total    -31.7 t  -4.0 | LAMA  -0.41 (n=31) BARU  -1.27 (n=15) | tahun+   7% dari 14
+                                                  REALISTIS rata -1.14 WR 15% | STRES rata -2.54
+   Exness    tutup 2s CEPAT                     n=  35 WR  11.4% rata  -0.52 total    -18.1 t  -4.2 | LAMA  -0.47 (n=20) BARU  -0.58 (n=15) | tahun+   9% dari 11
+                                                  REALISTIS rata -1.17 WR 11% | STRES rata -2.57
+   Dukascopy tutup 3s CEPAT                     n=  46 WR  28.3% rata  -0.55 total    -25.1 t  -2.2 | LAMA  -0.19 (n=31) BARU  -1.28 (n=15) | tahun+  29% dari 14
+                                                  REALISTIS rata -1.16 WR 20% | STRES rata -2.56
+   Exness    tutup 3s CEPAT                     n=  35 WR  25.7% rata  -0.54 total    -19.0 t  -2.9 | LAMA  -0.45 (n=20) BARU  -0.67 (n=15) | tahun+  18% dari 11
+                                                  REALISTIS rata -1.05 WR 17% | STRES rata -2.45
+   Dukascopy tutup 10s CEPAT                    n=  46 WR  47.8% rata  +0.28 total    +12.7 t  +0.8 | LAMA  -0.11 (n=31) BARU  +1.06 (n=15) | tahun+  43% dari 14
+                                                  REALISTIS rata -0.32 WR 39% | STRES rata -1.72
+   Exness    tutup 10s CEPAT                    n=  35 WR  51.4% rata  +0.32 total    +11.1 t  +0.9 | LAMA  -0.42 (n=20) BARU  +1.30 (n=15) | tahun+  36% dari 11
+                                                  REALISTIS rata -0.27 WR 37% | STRES rata -1.67
+   Dukascopy tutup 30s CEPAT                    n=  46 WR  52.2% rata  +0.19 total     +8.7 t  +0.4 | LAMA  +0.08 (n=31) BARU  +0.41 (n=15) | tahun+  64% dari 14
+                                                  REALISTIS rata -0.43 WR 43% | STRES rata -1.83
+   Exness    tutup 30s CEPAT                    n=  35 WR  54.3% rata  +0.24 total     +8.5 t  +0.5 | LAMA  -0.14 (n=20) BARU  +0.75 (n=15) | tahun+  64% dari 11
+                                                  REALISTIS rata -0.48 WR 49% | STRES rata -1.88
+   Dukascopy tutup 60s CEPAT                    n=  46 WR  47.8% rata  -0.01 total     -0.6 t  -0.0 | LAMA  -0.21 (n=31) BARU  +0.40 (n=15) | tahun+  43% dari 14
+                                                  REALISTIS rata -0.58 WR 41% | STRES rata -1.98
+   Exness    tutup 60s CEPAT                    n=  35 WR  57.1% rata  +0.03 total     +1.0 t  +0.1 | LAMA  -0.42 (n=20) BARU  +0.62 (n=15) | tahun+  45% dari 11
+                                                  REALISTIS rata -0.58 WR 46% | STRES rata -1.98
+   Dukascopy tutup 180s CEPAT                   n=  46 WR  45.7% rata  +0.02 total     +0.7 t  +0.0 | LAMA  -0.44 (n=31) BARU  +0.95 (n=15) | tahun+  57% dari 14
+                                                  REALISTIS rata -0.57 WR 37% | STRES rata -1.97
+   Exness    tutup 180s CEPAT                   n=  35 WR  48.6% rata  +0.21 total     +7.3 t  +0.4 | LAMA  -0.59 (n=20) BARU  +1.27 (n=15) | tahun+  64% dari 11
+                                                  REALISTIS rata -0.43 WR 46% | STRES rata -1.83
+   Dukascopy untung>=$1 maks 60s CEPAT          n=  46 WR  60.9% rata  -0.01 total     -0.3 t  -0.0 | LAMA  -0.18 (n=31) BARU  +0.36 (n=15) | tahun+  50% dari 14
+                                                  REALISTIS rata -0.42 WR 50% | STRES rata -1.65
+   Exness    untung>=$1 maks 60s CEPAT          n=  35 WR  62.9% rata  -0.03 total     -1.1 t  -0.1 | LAMA  -0.51 (n=20) BARU  +0.61 (n=15) | tahun+  55% dari 11
+                                                  REALISTIS rata -0.30 WR 54% | STRES rata -1.37
+   Dukascopy untung>=$2 maks 180s CEPAT         n=  46 WR  54.3% rata  +0.11 total     +4.9 t  +0.3 | LAMA  -0.44 (n=31) BARU  +1.24 (n=15) | tahun+  36% dari 14
+                                                  REALISTIS rata -0.33 WR 48% | STRES rata -1.84
+   Exness    untung>=$2 maks 180s CEPAT         n=  35 WR  60.0% rata  +0.45 total    +15.6 t  +1.1 | LAMA  -0.48 (n=20) BARU  +1.68 (n=15) | tahun+  64% dari 11
+                                                  REALISTIS rata +0.08 WR 60% | STRES rata -1.36
+
+## SEMUA aturan teruji (suara) (tebakan arah di 757 rilis)
+   Dukascopy tutup 1s CEPAT                     n= 468 WR   2.4% rata  -0.66 total   -307.6 t -24.3 | LAMA  -0.56 (n=300) BARU  -0.84 (n=168) | tahun+   0% dari 16
+                                                  REALISTIS rata -1.35 WR 6% | STRES rata -2.75
+   Exness    tutup 1s CEPAT                     n= 430 WR   8.1% rata  -0.32 total   -139.6 t -15.4 | LAMA  -0.42 (n=219) BARU  -0.22 (n=211) | tahun+   0% dari 12
+                                                  REALISTIS rata -0.85 WR 13% | STRES rata -2.25
+   Dukascopy tutup 2s CEPAT                     n= 468 WR  10.9% rata  -0.72 total   -336.7 t -10.8 | LAMA  -0.55 (n=300) BARU  -1.02 (n=168) | tahun+   0% dari 16
+                                                  REALISTIS rata -1.39 WR 24% | STRES rata -2.79
+   Exness    tutup 2s CEPAT                     n= 430 WR  23.5% rata  -0.22 total    -96.3 t  -3.4 | LAMA  -0.37 (n=219) BARU  -0.07 (n=211) | tahun+   8% dari 12
+                                                  REALISTIS rata -0.89 WR 28% | STRES rata -2.29
+   Dukascopy tutup 3s CEPAT                     n= 468 WR  34.2% rata  -0.76 total   -354.2 t  -4.8 | LAMA  -0.64 (n=300) BARU  -0.97 (n=168) | tahun+   6% dari 16
+                                                  REALISTIS rata -1.22 WR 30% | STRES rata -2.62
+   Exness    tutup 3s CEPAT                     n= 430 WR  39.3% rata  -0.26 total   -113.0 t  -1.9 | LAMA  -0.37 (n=219) BARU  -0.15 (n=211) | tahun+  17% dari 12
+                                                  REALISTIS rata -0.79 WR 34% | STRES rata -2.19
+   Dukascopy tutup 10s CEPAT                    n= 468 WR  43.2% rata  -0.37 total   -171.7 t  -1.7 | LAMA  -0.31 (n=300) BARU  -0.46 (n=168) | tahun+  31% dari 16
+                                                  REALISTIS rata -0.93 WR 35% | STRES rata -2.33
+   Exness    tutup 10s CEPAT                    n= 430 WR  50.0% rata  -0.04 total    -18.1 t  -0.2 | LAMA  -0.12 (n=219) BARU  +0.03 (n=211) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.67 WR 40% | STRES rata -2.07
+   Dukascopy tutup 30s CEPAT                    n= 468 WR  48.9% rata  -0.06 total    -26.9 t  -0.2 | LAMA  -0.08 (n=300) BARU  -0.03 (n=168) | tahun+  38% dari 16
+                                                  REALISTIS rata -0.70 WR 40% | STRES rata -2.10
+   Exness    tutup 30s CEPAT                    n= 430 WR  52.1% rata  +0.19 total    +82.1 t  +0.8 | LAMA  +0.04 (n=219) BARU  +0.35 (n=211) | tahun+  50% dari 12
+                                                  REALISTIS rata -0.44 WR 44% | STRES rata -1.84
+   Dukascopy tutup 60s CEPAT                    n= 468 WR  49.1% rata  -0.11 total    -49.8 t  -0.4 | LAMA  -0.01 (n=300) BARU  -0.28 (n=168) | tahun+  44% dari 16
+                                                  REALISTIS rata -0.74 WR 40% | STRES rata -2.14
+   Exness    tutup 60s CEPAT                    n= 430 WR  51.9% rata  +0.08 total    +32.8 t  +0.3 | LAMA  +0.08 (n=219) BARU  +0.07 (n=211) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.55 WR 42% | STRES rata -1.95
+   Dukascopy tutup 180s CEPAT                   n= 468 WR  48.1% rata  -0.07 total    -32.0 t  -0.3 | LAMA  -0.06 (n=300) BARU  -0.07 (n=168) | tahun+  38% dari 16
+                                                  REALISTIS rata -0.69 WR 42% | STRES rata -2.09
+   Exness    tutup 180s CEPAT                   n= 430 WR  48.8% rata  +0.07 total    +31.0 t  +0.3 | LAMA  -0.08 (n=219) BARU  +0.23 (n=211) | tahun+  42% dari 12
+                                                  REALISTIS rata -0.56 WR 43% | STRES rata -1.96
+   Dukascopy untung>=$1 maks 60s CEPAT          n= 468 WR  54.3% rata  -0.75 total   -349.4 t  -3.8 | LAMA  -0.42 (n=300) BARU  -1.33 (n=168) | tahun+   6% dari 16
+                                                  REALISTIS rata -1.13 WR 45% | STRES rata -2.41
+   Exness    untung>=$1 maks 60s CEPAT          n= 430 WR  57.7% rata  -0.77 total   -330.4 t  -4.1 | LAMA  -0.44 (n=219) BARU  -1.11 (n=211) | tahun+   8% dari 12
+                                                  REALISTIS rata -1.07 WR 49% | STRES rata -2.30
+   Dukascopy untung>=$2 maks 180s CEPAT         n= 468 WR  54.7% rata  -0.51 total   -240.5 t  -2.4 | LAMA  -0.33 (n=300) BARU  -0.84 (n=168) | tahun+  19% dari 16
+                                                  REALISTIS rata -0.94 WR 48% | STRES rata -2.32
+   Exness    untung>=$2 maks 180s CEPAT         n= 430 WR  56.0% rata  -0.55 total   -236.0 t  -2.6 | LAMA  -0.38 (n=219) BARU  -0.72 (n=211) | tahun+   8% dari 12
+                                                  REALISTIS rata -0.91 WR 50% | STRES rata -2.24
+
+## Lolos di kedua feed
+TIDAK ADA

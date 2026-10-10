@@ -539,6 +539,7 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
                 }
             }
         }
+        PernyataanBlock(prep.optJSONObject("pernyataan"))
         Text("Peluang dari data historis, bukan kepastian. Ketuk baris untuk detail. Tidak membuka order.",
             style = MaterialTheme.typography.labelSmall, color = Muted)
         // status arsip berita ke GitHub (cloud/api/_arsip.py): tersimpan / tidak berubah / ditunda / mati (token kosong)
@@ -546,6 +547,35 @@ private fun PersiapanCard(prep: JSONObject?, loading: Boolean, alarmOn: Boolean,
             Text("🗄️ Arsip berita GitHub: $it", style = MaterialTheme.typography.labelSmall, color = Muted)
         }
     }
+}
+
+/**
+ * 🗣️ Pernyataan & berita penting terbaru (cloud _pernyataan.py: RSS resmi Fed + Google News Trump/Gedung Putih/Iran/
+ * China/OPEC, permintaan 10 Okt 2026). Judul asli; arah harga tidak ditebak dari kata-kata — lihat 🎲 peluang pasar.
+ */
+@Composable
+private fun PernyataanBlock(p: JSONObject?) {
+    val arr = p?.optJSONArray("penting") ?: return
+    if (arr.length() == 0) return
+    var open by remember { mutableStateOf(false) }
+    LineDivider()
+    Row(Modifier.fillMaxWidth().clickable { open = !open }, verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("🗣️ Pernyataan & berita penting", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.titleSmall)
+            Text("Fed, Trump, pemerintah AS, negara lain • diperbarui ${p.optString("waktu")}",
+                style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+        Text(if (open) "▴" else "▾", color = Muted)
+    }
+    for (i in 0 until minOf(arr.length(), if (open) 6 else 2)) {
+        val x = arr.optJSONObject(i) ?: continue
+        Column(Modifier.fillMaxWidth().padding(top = 4.dp)) {
+            Text(x.optString("judul"), style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+            Text(x.optString("catatan"), style = MaterialTheme.typography.labelSmall, color = Muted)
+        }
+    }
+    if (open) Text(p.optString("catatan") + " Sumber: " + p.optString("status"),
+        style = MaterialTheme.typography.labelSmall, color = Muted)
 }
 
 /** Blok detail dari cloud (prediksi.detail): judul kecil, teks tebal, catatan kecil (bisa beberapa baris). */
