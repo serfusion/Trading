@@ -136,6 +136,8 @@ fun SignalEvent.jedaText(): String? =
 /** 4.22: teks prediksi berita dari cloud ("NFP: peluang emas naik 1 jam 61%"), null bila belum ada. `pendek` =
  *  versi ringkas untuk tempat sempit ("NFP: emas naik 61%"). */
 fun prediksiTeks(b: JSONObject?, pendek: Boolean = false): String? {
+    // 4.31: arah 1–10 dtk (cloud _pra_aset.tandai) diutamakan → satu arah yang sama di semua tempat
+    b?.optJSONObject("arah_detik")?.optString("teks")?.ifBlank { null }?.let { return it }
     val t = b?.optJSONObject("prediksi")?.optString("teks")?.ifBlank { null }
         ?: b?.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null } ?: return null
     return if (pendek) t.replace("peluang emas ", "emas ").replace(" 1 jam", "") else t

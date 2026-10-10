@@ -212,6 +212,7 @@ URUT = ("Non-Farm Employment Change", "CPI m/m", "Core CPI m/m", "Federal Funds 
         "Advance GDP q/q", "Core PCE Price Index m/m", "ADP Non-Farm Employment Change", "Unemployment Claims")
 NFP_HARI = ("Non-Farm Employment Change", "Unemployment Rate", "Average Hourly Earnings m/m")
 MAKS_DAFTAR = 5
+SATU_NAMA = {"Core CPI": "CPI", "CPI tahunan": "CPI", "Core PPI": "PPI", "Core Retail Sales": "Retail Sales"}
 DAFTAR_HARI = 31
 
 
@@ -273,11 +274,15 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         cs = per_waktu[t0]
         kandidat = [(tebak_kartu(c), c) for c in cs]
         ada = [(g, c) for g, c in kandidat if g]
-        prio = lambda gc: (0 if gc[0] else 1, URUT.index(gc[1]["title"]) if gc[1]["title"] in URUT else 99)  # noqa: E731
+        # petunjuk TERKUAT di waktu rilis itu (mis. core CPI "Kalshi & kejutan lalu sepakat" 66% mengalahkan headline
+        # "minyak WTI saja" 56%), seri → urutan URUT (permintaan pengguna 10 Okt: CPI ≥ 65% bila ada petunjuknya)
+        prio = lambda gc: (0 if gc[0] else 1, -(gc[0]["persen"] if gc[0] else 0),  # noqa: E731
+                           URUT.index(gc[1]["title"]) if gc[1]["title"] in URUT else 99)
         g, c = sorted(ada or kandidat, key=prio)[0]
         if not ada and c["title"] not in URUT:
             continue                                              # berita kecil tanpa petunjuk: tidak ditampilkan
         nm = _prediksi.nama(c["title"] if not (g and g["dasar"].startswith("Pengangguran")) else NFP_HARI[0])
+        nm = SATU_NAMA.get(nm, nm)                         # core & headline rilis bersamaan = satu berita
         sisa = sisa_teks(datetime.fromisoformat(t0) - now)
         row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
         if g:
@@ -298,12 +303,43 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
                     row.update(persen=pr, status="tren searah",
                                teks=f"{nm} • peluang emas {g['arah']} {pr}% (+ tren searah) ⚠️ • {sisa}")
                 elif g and bt["hubungan"] == "berlawanan":
-                    row.update(persen=50, status="acak",
-                               teks=f"{nm} • ≈ 50:50 (petunjuk & tren 4 jam berlawanan) • {sisa}")
+                    # tetap SATU arah (permintaan pengguna 10 Okt: "cukup naik atau turun"): arah petunjuk, persen jujur
+                    row.update(persen=bt["persen"], status="lemah",
+                               teks=f"{nm} • peluang emas {g['arah']} {bt['persen']}% (tren berlawanan) ⚠️ • {sisa}")
+                elif not g:                                       # tanpa petunjuk: arah = tren 4 jam (55–56%, lemah)
+                    row.update(arah=bt["arah"], persen=bt["persen"], status="lemah", bukti=bt["bukti"],
+                               teks=f"{nm} • peluang emas {bt['arah']} {bt['persen']}% (tren 4 jam) ⚠️ • {sisa}")
         out.append(row)
         if len(out) >= MAKS_DAFTAR:
             break
     return out
+
+
+def satu(row: dict) -> dict:
+    """SATU baris untuk berita berikutnya (aplikasi 4.31, permintaan pengguna: "cukup news berikutnya naik atau turun"):
+    "CPI ▼ TURUN 56% ⚠️ • 4 hari lagi". Tanpa arah (belum ada petunjuk & > 6 jam) → kapan arah muncul."""
+    out = {k: row.get(k) for k in ("title", "nama", "time", "arah", "persen", "status", "bukti", "sisa")}
+    if row.get("arah"):
+        naik = row["arah"] == "naik"
+        tanda = "" if row.get("status") == "teruji" else " ⚠️"
+        out["teks"] = f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}%{tanda} • {row['sisa']}"
+    else:
+        out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
+        out["bukti"] = ("belum ada petunjuk teruji untuk berita ini; ≤ 6 jam sebelum rilis arah diambil dari tren emas "
+                        "4 jam (benar 55–56%, lemah)")
+    return out
+
+
+def tandai(persiapan: dict, daftar_: list) -> None:
+    """Arah 1–10 dtk yang SAMA dipasang di setiap kartu berita (c["arah_detik"]) → aplikasi memakai satu arah di semua
+    tempat (hitung mundur, alarm, tab News), tidak lagi bertentangan dengan angka 1 jam."""
+    per = {r["time"]: r for r in daftar_ if r.get("arah")}
+    for k in ("berita", "mendatang"):
+        for c in persiapan.get(k) or []:
+            r = per.get(c.get("time")) if isinstance(c, dict) else None
+            if r:
+                c["arah_detik"] = {"arah": r["arah"], "persen": r["persen"], "status": r["status"],
+                                   "teks": f"{r['nama']}: emas {r['arah']} {r['persen']}%"}
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
@@ -319,7 +355,8 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
     sama = [c for c in kartu if c["time"] == t0]
     ber = [c for c in sama if (c.get("petunjuk_teruji") or {}).get("arah_emas") and varian(c["title"],
                                                                                          c["petunjuk_teruji"])]
-    c = next((x for x in ber if x["title"] == "CPI m/m"), ber[0] if ber else sama[0])
+    kuat = sorted(((tebak_kartu(x) or {}).get("persen", 0), -i) for i, x in enumerate(ber))
+    c = ber[-kuat[-1][1]] if kuat and kuat[-1][0] else (ber[0] if ber else sama[0])
     out = {"judul": f"⏱️ Entry 1 dtk sebelum {_prediksi.nama(c['title'])} • {c.get('when', '')}", "title": c["title"],
            "time": c["time"], "catatan": "Arah dari petunjuk teruji; persen = seberapa sering harga XAU 1–10 detik "
                                          "setelah rilis bergerak searah (bukan untung/rugi). Info saja."}
@@ -349,5 +386,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         dl = daftar(persiapan, now, tren)
         if dl:
             persiapan["pra_daftar"] = dl
+            persiapan["pra_satu"] = satu(dl[0])
+            tandai(persiapan, dl)
     except Exception:  # noqa: BLE001 - daftar opsional
         pass

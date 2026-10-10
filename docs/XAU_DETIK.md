@@ -163,3 +163,18 @@ Di bawah baris arah XAU: "➕ Tren emas 4 jam TURUN ▼ (−$8,40) SEARAH → be
 (Twelve Data XAU/USD 15 mnt, cache baris Supabase `pra_tren` 5 mnt bila rilis ≤ 1 jam lagi, selain itu 15 mnt; hanya
 ≤ 6 jam sebelum rilis; env PRA_TREN=0 mematikan). Tren dihitung saat aplikasi dibuka → buka lagi 1–5 menit sebelum rilis.
 Info saja, tanpa order.
+
+## Di aplikasi 4.31 — SATU baris, satu arah (keluhan pengguna 10 Okt: "mana yang benar, naik atau turun?")
+Aplikasi 4.30 menampilkan "CPI • peluang emas turun 56%" (1–10 dtk) dan "CPI: peluang emas naik 1 jam 54%" (jangka 1 jam,
+sumber lain) bersamaan → membingungkan. Kini di bawah XAU hanya SATU baris berita berikutnya: "CPI ▼ TURUN 56% ⚠️ • 4 hari
+lagi" (`persiapan["pra_satu"]`, `_pra_aset.satu`). Arah yang sama dipasang di setiap kartu (`arah_detik`, `_pra_aset.tandai`)
+dan dipakai hitung mundur, alarm, dan tab News (`prediksiTeks`). Baris 🎯 1 jam dihapus dari bawah XAU. Tanpa petunjuk:
+≤ 6 jam sebelum rilis arah = tren emas 4 jam (55–56%, ⚠️), lebih awal "arah muncul ≤ 6 jam sebelum rilis". Petunjuk &
+tren berlawanan → tetap arah petunjuk dengan persen jujur (±53%, ⚠️). ⚠️ = belum terbukti / lemah.
+Pilihan petunjuk per waktu rilis kini yang TERKUAT (persen teruji tertinggi), bukan selalu headline CPI: contoh CPI 14 Okt —
+headline hanya "minyak WTI" (56%), sedangkan core CPI begitu konsensus ForexFactory terbit: Kalshi condong DI ATAS
+(≥ 0,3%: 36,5% vs ≤ 0,1%: 21,5%) & kejutan core bulan lalu DI ATAS → "Kalshi & kejutan lalu sepakat" 65–70% → baris
+menjadi "CPI ▼ TURUN 66%". Headline Kalshi condong DI BAWAH (≤ 0,5%: 41% vs ≥ 0,7%: 18,5%) — sinyal CPI saling
+bertentangan, jadi angka tetap ⚠️. Uji tambahan khusus CPI: Kalshi |lean| ≥ 0,25 → 61–65% (n 23); Kalshi headline 24 jam
+60–70% (n 30); core Kalshi & nowcast Cleveland sepakat 75% (n 8) — semua sampel kecil.
+

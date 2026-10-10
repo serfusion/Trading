@@ -268,3 +268,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   stabil; nowcast Cleveland + kejutan lalu (CPI) 67% n 21 tidak stabil. Tidak ada yang dipasang (docs/XAU_DETIK.md bagian F).
 - "Cari lagi di seluruh alam semesta": `research/pra_xau_global.py` (momentum kejutan ekonomi, COT, tren dolar EUR/USD,
   dolar & emas searah, Kalshi core PCE) → BARU 47–55%, lolos 1 vs kebetulan 2,9 (docs/XAU_DETIK.md bagian G). Tidak dipasang.
+- Keluhan pengguna (screenshot 4.30: turun 56% vs naik 1 jam 54%) → aplikasi 4.31: satu baris "CPI ▼ TURUN 56% ⚠️ • 4 hari
+  lagi", satu arah di semua tempat (`arah_detik`), baris 1 jam dihapus dari bawah XAU.
