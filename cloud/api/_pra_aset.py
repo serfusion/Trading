@@ -373,17 +373,52 @@ def satu(row: dict) -> dict:
     return out
 
 
-def tandai(persiapan: dict, daftar_: list) -> None:
-    """Arah 1–10 dtk yang SAMA dipasang di setiap kartu berita (c["arah_detik"]) → aplikasi memakai satu arah di semua
-    tempat (hitung mundur, alarm, tab News), tidak lagi bertentangan dengan angka 1 jam."""
-    per = {r["time"]: r for r in daftar_ if r.get("arah")}
+def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
+    """Arah 1–10 dtk yang SAMA dipasang di SETIAP kartu berita yang belum rilis (c["arah_detik"]) → aplikasi memakai satu
+    kerangka di semua tempat (hitung mundur, alarm, tab News) dan tidak lagi menampilkan angka "1 jam". Kartu lain di
+    waktu rilis yang sama (core CPI, CPI tahunan, …) diberi ganda=True supaya tidak tampil dobel. Tanpa petunjuk:
+    "arah 1–10 dtk muncul ≤ 6 jam sebelum rilis" (tidak dikarang)."""
+    now = now or datetime.now(timezone.utc)
+    per = {r["time"]: r for r in daftar_}
+    grup: dict[str, list] = {}
     for k in ("berita", "mendatang"):
         for c in persiapan.get(k) or []:
-            r = per.get(c.get("time")) if isinstance(c, dict) else None
-            if r:
-                j = jangka(r.get("dasar"), r["arah"]) or {"teks_sampai": "1–10 dtk"}
-                c["arah_detik"] = {"arah": r["arah"], "persen": r["persen"], "status": r["status"],
-                                   "teks": f"{r['nama']}: emas {r['arah']} {r['persen']}% ({j['teks_sampai']})"}
+            if isinstance(c, dict) and c.get("time") and not c.get("released") \
+                    and datetime.fromisoformat(c["time"]) > now:
+                grup.setdefault(c["time"], []).append(c)
+    for t0, cs in grup.items():
+        r = per.get(t0)
+        info = None
+        if r and r.get("arah"):
+            info, judul = r, r["title"]
+        else:
+            kand = [(tebak_kartu(c), c) for c in cs]
+            ada = sorted([(g["persen"], -i, g, c) for i, (g, c) in enumerate(kand) if g], key=lambda x: x[:2])
+            if ada:
+                _, _, g, c = ada[-1]
+                nm = _prediksi.nama(c["title"] if not g["dasar"].startswith("Pengangguran") else NFP_HARI[0])
+                info, judul = {**g, "nama": SATU_NAMA.get(nm, nm)}, c["title"]
+            else:
+                judul = sorted((URUT.index(c["title"]) if c["title"] in URUT else 99, i, c["title"])
+                               for i, c in enumerate(cs))[0][2]
+        nama_semua = []
+        for c in sorted(cs, key=lambda c: URUT.index(c["title"]) if c["title"] in URUT else 99):
+            n_ = SATU_NAMA.get(_prediksi.nama(c["title"]), _prediksi.nama(c["title"]))
+            if n_ not in nama_semua:
+                nama_semua.append(n_)
+        nm = (info or {}).get("nama") or " & ".join(nama_semua[:2])   # mis. "PPI & Retail Sales" (rilis bersamaan)
+        utama_dipakai = False
+        for c in cs:
+            ganda = c["title"] != judul or utama_dipakai
+            utama_dipakai = utama_dipakai or not ganda
+            if info:
+                j = jangka(info.get("dasar"), info["arah"]) or {"teks_sampai": "1–10 dtk"}
+                c["arah_detik"] = {"arah": info["arah"], "persen": info["persen"], "status": info["status"],
+                                   "ganda": ganda,
+                                   "teks": f"{nm}: emas {info['arah']} {info['persen']}% ({j['teks_sampai']})"}
+            else:
+                c["arah_detik"] = {"arah": None, "persen": None, "status": "acak", "ganda": ganda,
+                                   "teks": f"{nm}: arah 1–10 dtk muncul ≤ {TREN_JAM} jam sebelum rilis"}
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
@@ -431,6 +466,6 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         if dl:
             persiapan["pra_daftar"] = dl
             persiapan["pra_satu"] = satu(dl[0])
-            tandai(persiapan, dl)
+            tandai(persiapan, dl, now)
     except Exception:  # noqa: BLE001 - daftar opsional
         pass

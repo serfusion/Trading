@@ -206,3 +206,10 @@ Metode lain (bukan Kalshi), arah emas 2–10 dtk:
 | JOLTS | kejutan ADP bulan acuan | 48% |
 Tidak ada yang lolos (≥ 60%, lama & baru ≥ 55%, p < 0,05); tidak dipasang. Fed + yield 2 th paling layak diuji maju.
 
+## Di aplikasi 4.33 (keluhan screenshot: tulisan terlalu besar, CPI dobel, baris lain masih "1 jam")
+Baris di bawah XAU ukuran biasa; hanya "▼ TURUN 56%" merah / "▲ NAIK 56%" hijau (`arahBerwarna`). Cloud `_pra_aset.tandai`
+memberi SETIAP kartu yang belum rilis `arah_detik`: arah 1–10 dtk (petunjuk terkuat di waktu itu, dengan jangka) atau
+"PPI & Retail Sales: arah 1–10 dtk muncul ≤ 6 jam sebelum rilis" — tidak ada lagi "peluang emas naik 1 jam" di judul
+mana pun. Kartu kembar di waktu rilis sama (core CPI, CPI tahunan, Retail bersama PPI) ditandai `ganda` dan tidak
+ditampilkan dobel di tab News.
+

@@ -293,3 +293,31 @@ def test_jangka_data_asli_cpi():
     j = A.jangka("CPI • Kalshi & kejutan lalu sepakat", "turun")
     assert j and j["teks_sampai"] == "s/d 1 mnt" and "setelah 3 mnt" in j["teks_setelah"]
 
+
+
+def test_semua_kartu_satu_kerangka_tanpa_dobel(monkeypatch):
+    """Screenshot 4.32: CPI tampil 2× dan PPI/Retail/Fed/PCE/JOLTS masih "peluang emas naik 1 jam" → kini setiap kartu
+    yang belum rilis punya arah_detik (arah 1–10 dtk atau kapan arah muncul) dan kartu kembar ditandai ganda."""
+    import _pra_aset as A
+    h = lambda b: {"exness": {"n": 20, "benar": b, "lama": None, "baru": b}, "konsisten": False}  # noqa: E731
+    monkeypatch.setattr(A, "DATA", {"xau_arah": {"CPI • minyak WTI saja": {"h": {f"{k}|0": h(56.0)
+                                                                              for k in (1, 2, 3, 5, 10)}}}})
+    now = datetime(2026, 10, 10, 12, 0, tzinfo=timezone.utc)
+    T = "2026-10-14T12:30:00+00:00"
+    b = {"arah_emas": "turun", "tebak": {"WTI": 1.0}, "sepakat_lain": []}
+    kartu = [{"title": "CPI m/m", "time": T, "petunjuk_teruji": b},
+             {"title": "Core CPI m/m", "time": T, "prediksi": {"teks": "Core CPI: peluang emas naik 1 jam 54%"}},
+             {"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"},
+             {"title": "Retail Sales m/m", "time": "2026-10-15T12:30:00+00:00"},
+             {"title": "Federal Funds Rate", "time": "2026-10-28T18:00:00+00:00"},
+             {"title": "Core PCE Price Index m/m", "time": "2026-10-29T12:30:00+00:00"},
+             {"title": "JOLTS Job Openings", "time": "2026-11-03T15:00:00+00:00"}]
+    prep = {"mendatang": kartu}
+    A.attach(prep, now)
+    ad = [k["arah_detik"] for k in kartu]
+    assert ad[0]["teks"] == "CPI: emas turun 56% (1–10 dtk)" and not ad[0]["ganda"]
+    assert ad[1]["ganda"] and ad[1]["teks"] == ad[0]["teks"]                       # core CPI: sama, tidak dobel
+    assert ad[2]["teks"] == "PPI & Retail Sales: arah 1–10 dtk muncul ≤ 6 jam sebelum rilis" and not ad[2]["ganda"]
+    assert ad[3]["ganda"]                                                          # Retail rilis bersamaan dengan PPI
+    assert ad[4]["teks"] == "Fed: arah 1–10 dtk muncul ≤ 6 jam sebelum rilis"
+    assert all("1 jam" not in a["teks"] for a in ad)
