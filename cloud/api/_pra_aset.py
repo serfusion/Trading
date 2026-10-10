@@ -44,7 +44,7 @@ def varian(title: str, b: dict) -> str | None:
     if title in ("Unemployment Rate", "Non-Farm Employment Change"):
         return "NFP • pengangguran Kalshi/kejutan lalu"
     if title in ("Core PPI m/m", "PPI m/m"):
-        return "Core PPI • berbalik"
+        return "PPI • kejutan CPI pekan ini" if "CPI" in t else "Core PPI • berbalik"
     if title == "JOLTS Job Openings":
         return "JOLTS • berbalik"
     return None
@@ -79,6 +79,27 @@ def ringkas(var: str, arah: str) -> dict | None:
                      + " • ".join(f"{x['h']} dtk {x['lama'] or '-'}/{x['baru'] or '-'}%" for x in sel).replace(".", ",")}
 
 
+GRUP = [("Non-Farm", "NFP"), ("Unemployment Rate", "NFP"), ("Average Hourly", "NFP"), ("ADP", "ADP"), ("CPI", "CPI"),
+        ("PPI", "PPI"), ("Retail", "RETAIL"), ("PCE", "PCE"), ("GDP", "GDP"), ("Federal Funds", "FOMC"),
+        ("JOLTS", "JOLTS"), ("ISM Services", "ISM Jasa"), ("ISM", "ISM"), ("Claims", "CLAIMS")]
+
+
+def kepastian(title: str) -> str | None:
+    """Detik 2 (dan 1): bila emas sudah bergerak ≥ $0,50 dari harga 1 dtk sebelum rilis, seberapa sering arah itu masih
+    sama di detik 10 (research/pra_xau_dalam.py bagian B, tick Exness 2015–2026)."""
+    lj = DATA.get("lanjut") or {}
+    g = next((g for k, g in GRUP if k in title), "SEMUA")
+    r2 = lj.get(f"{g}|2|0.5|10") or lj.get("SEMUA|2|0.5|10")
+    if not r2:
+        return None
+    r1 = lj.get(f"{g}|1|0.5|10") or {}
+    teks = (f"📌 Pasti-nya di detik 2: bila emas sudah bergerak ≥ $0,50 dari harga 1 dtk sebelum rilis, arah itu masih "
+            f"sama di detik 10 pada {r2['tetap']:.0f}% rilis (n {r2['n']})")
+    if r1.get("n"):
+        teks += f" • di detik 1: {r1['tetap']:.0f}% (n {r1['n']})"
+    return teks.replace(".", ",") + ". Berlawanan dengan posisi → tutup cepat."
+
+
 def attach(persiapan: dict, now: datetime | None = None) -> None:
     """persiapan["pra"] = berita besar berikutnya + arah XAU 1–10 detik (atau alasan bila belum ada tebakan)."""
     if not isinstance(persiapan, dict) or not DATA.get("xau_arah"):
@@ -104,4 +125,7 @@ def attach(persiapan: dict, now: datetime | None = None) -> None:
     else:
         out.update({"status": "acak", "teks": "XAU • arah belum bisa ditebak (tanpa petunjuk teruji) ⚪",
                     "kecil": "≈ 50:50 di detik 1–10", "bukti": "berita ini tidak punya petunjuk sebelum rilis yang lolos uji"})
+    k = kepastian(c["title"])
+    if k:
+        out["kepastian"] = k
     persiapan["pra"] = out

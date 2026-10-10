@@ -248,3 +248,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   (`research/pra_aset.py`, data ETH 1 dtk 934 rilis) → semua rugi rata-rata; tampil di bawah tile (aplikasi 4.27).
 - Pengguna: "jangan untung/rugi, arah 1–10 detik saja, hanya XAU" → `research/pra_xau_arah.py`
   (docs/eksternal/hasil_pra_xau_arah.txt, docs/CPI_14OKT.md bagian 10); aplikasi 4.27 menampilkan 1 baris XAU.
+- PR serfusion/Trading#76 di-merge ke main (live) + branch produksi bold-davinci dimajukan. Riset mendalam NFP/PPI/JOLTS
+  (`research/pra_xau_dalam.py`, docs/XAU_DETIK.md): sebelum rilis NFP & JOLTS ≈ acak; PPI ← kejutan CPI; kepastian
+  detik 2 ≥ $0,50 → detik 10 sama 92% (n 839) → aplikasi 4.28 baris 📌.

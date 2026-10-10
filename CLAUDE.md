@@ -412,6 +412,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `data/research/eksternal/binance_1s_eth/`): semua rata-rata rugi. Pengguna lalu minta ARAH SAJA & KHUSUS XAU:
   `research/pra_xau_arah.py` (mid t0−1 vs t0+1/2/3/5/10 dtk) → `pra_aset.json["xau_arah"]` → `_pra_aset.py` (persiapan.pra)
   → satu baris XAU di bawah tile (aplikasi 4.27). Terbaik: ISM Jasa berbalik 63–71% ✅; CPI Kalshi&kejutan lalu 65–70% ⚠️.
+- `research/pra_xau_dalam.py` (docs/XAU_DETIK.md): NFP & JOLTS tidak ada petunjuk (10 sumber diuji); PPI ← kejutan CPI pekan
+  itu (aturan "CPI" di petunjuk.json); 📌 kepastian: gerak ≥ $0,50 di detik 2 bertahan s/d detik 10 pada 92% rilis →
+  `pra_aset.json["lanjut"]`, baris 📌 (aplikasi 4.28). Urutan regenerasi petunjuk.json: berita_gabung → sumber_lain →
+  pra_xau_dalam (masing-masing menggabung ke file yang sama).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
