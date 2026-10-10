@@ -107,6 +107,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
                 MiniTile(sym, hb, open == sym, Modifier.weight(1f)) { open = if (open == sym) null else sym }
             }
         }
+        StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
         StripPrediksi(prep)                      // 🎯 berita besar berikutnya + peluang emas 1 jam (4.17)
@@ -222,6 +223,36 @@ private fun StripPudar(prep: JSONObject?, now: Long) {
             Text("${if (key == "pudar") "XAU" else "BTC"} ${it.optString("label")}: $teks", maxLines = 2,
                 style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold,
                 color = if (teks.contains("🔴")) SellColor else if (teks.contains("🟢")) BuyColor else Gold)
+        }
+    }
+}
+
+/**
+ * ⏱️ KHUSUS XAU (10 Okt 2026): entry 1 detik SEBELUM berita berikutnya → arah emas 1–10 detik setelah rilis (naik/turun
+ * saja, bukan untung/rugi). Arah dari petunjuk teruji; persen = seberapa sering harga XAU bergerak searah di detik
+ * 1/2/3/5/10 (cloud _pra_aset.py ← research/pra_xau_arah.py, tick Exness 2015–2026). Ketuk = bukti.
+ */
+@Composable
+private fun StripPra(prep: JSONObject?) {
+    val pra = prep?.optJSONObject("pra") ?: return
+    var open by remember(pra.optString("time")) { mutableStateOf(false) }
+    val st = pra.optString("status")
+    val warna = when {
+        st == "acak" -> Muted
+        st == "teruji" -> if (pra.optString("arah") == "naik") BuyColor else SellColor
+        else -> Gold
+    }
+    Column(Modifier.fillMaxWidth().clickable { open = !open }) {
+        Text(pra.optString("judul"), maxLines = 1, style = MaterialTheme.typography.labelSmall, color = Muted,
+            fontWeight = FontWeight.Bold)
+        Text(pra.optString("teks"), style = MaterialTheme.typography.labelMedium, color = warna,
+            fontWeight = FontWeight.ExtraBold, maxLines = 2)
+        Text(pra.optString("kecil"), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+        if (open) {
+            pra.optString("bukti").ifBlank { null }?.let {
+                Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+            Text(pra.optString("catatan"), style = MaterialTheme.typography.labelSmall, color = Muted)
         }
     }
 }

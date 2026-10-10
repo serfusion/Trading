@@ -23,6 +23,8 @@ RULES = {
             "h": 12, "teruji": {"lama": [50, 64, 0.18], "baru": [94, 64, 0.19], "tahun": "8/9 tahun +"}},
 }
 KEEP_CLOSED = 20
+GUNCANG = (3.0, 3)          # (× ATR14 H1, jam) — 🛑 tutup saat guncangan melawan posisi (env GUNCANG_BATAL=0 mati)
+GUNCANG_ON = True
 
 
 def _atr(bars: list[_core.Bar], n: int = 24) -> list[float]:
@@ -109,14 +111,27 @@ def arus_tick(now: datetime, feeds: dict, store, pub) -> dict:
                     ex, why = pos["tp"], "TP"
                 elif b.t + H1 >= _core.parse_iso(pos["deadline"]):
                     ex, why = b.c, f"{rule['h']} jam habis"
+                elif GUNCANG_ON:
+                    # 🛑 guncangan ≥ 3 ATR14 melawan posisi dalam ≤ 3 jam (research/batal_guncang.py bagian D:
+                    # ETH SELL saat lonjakan naik +0,02R/sinyal di kedua periode, XAU/BTC BUY ≈ netral) → tutup
+                    fill = _core.parse_iso(pos["fill"])
+                    sebelum = [x for x in done if x.t < fill]
+                    w = [x for x in done if fill <= x.t <= b.t][-GUNCANG[1]:]
+                    a14 = _core.atr_last(sebelum, 14) if len(sebelum) >= 15 else 0.0
+                    ref = (max([pos["entry"]] + [x.h for x in w]) if d > 0 else min([pos["entry"]] + [x.l for x in w]))
+                    if a14 > 0 and (ref - b.c) * d >= GUNCANG[0] * a14:
+                        ex = b.c
+                        why = (f"🛑 BATAL: harga {'anjlok' if d > 0 else 'melonjak'} {(ref - b.c) * d / a14:.1f} ATR "
+                               f"dalam ≤ {GUNCANG[1]} jam — guncangan (pernyataan/berita penting)")
                 pos["first"] = False
                 if ex is not None:
                     r = (ex - pos["entry"]) * d / abs(pos["entry"] - pos["sl"])
                     ev = {"type": "arus_close", "id": pos["id"], "symbol": sym, "dir": "BUY" if d > 0 else "SELL",
                           "entry": round(pos["entry"], 2), "exit": round(ex, 2), "r": round(r, 2), "reason": why,
-                          "win": r > 0, "time": _core.iso(now)}
+                          "win": r > 0, "time": _core.iso(now), **({"batal": True} if why.startswith("🛑") else {})}
                     pub.publish(ev, f"Tutup {ev['dir']} {sym} @ {_fmt(sym, ex)} ({why}). Hasil {r:+.2f}R.",
-                                f"🌊 TUTUP {sym} • {'PROFIT' if r > 0 else 'MINUS'}", 4, ["wave"])
+                                f"🌊 {'BATAL' if ev.get('batal') else 'TUTUP'} {sym} • {'PROFIT' if r > 0 else 'MINUS'}",
+                                4, ["wave"])
                     closed_log = ([ev] + closed_log)[:KEEP_CLOSED]
                     st["open"] = None
                     events.append(f"{asset} tutup {why}")

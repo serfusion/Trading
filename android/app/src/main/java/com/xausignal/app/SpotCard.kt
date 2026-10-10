@@ -136,6 +136,11 @@ private fun SpotOpenCard(o: JSONObject, st: JSONObject?) {
         Text("Peluang naik +${fmt(tpPct, 0)}% dalam $days hari" +
             (o.optString("alasan").takeIf { it.isNotBlank() }?.let { " • $it" } ?: ""),
             style = MaterialTheme.typography.labelMedium, color = Muted)
+        if (o.optString("warn").isNotBlank()) {          // ⚠️ guncangan (cloud _spot.guncangan, 10 Okt 2026)
+            Text("⚠️ Sempat anjlok tajam (guncangan). Data 2019–2026: menjual saat anjlok rata-rata lebih buruk — " +
+                "rencana tetap: limit jual TP & batas waktu, jangan menambah posisi.",
+                style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold)
+        }
         TileGrid(listOf(
             TileData("Beli", spotPx(entry), Gold, "± harga sinyal"),
             TileData("Jual • TP +${fmt(tpPct, 0)}%", spotPx(tp), BuyColor, "pasang limit jual"),

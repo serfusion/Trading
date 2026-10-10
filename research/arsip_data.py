@@ -232,6 +232,16 @@ def prediksi(root: Path, now: datetime) -> str:
             _prarilis.attach(prep, calendar, store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(600, "1h"))
         except Exception:  # noqa: BLE001 - tanpa model prarilis: aturan/dasar
             pass
+    try:                                                # 🎲 sumber "pasar" CPI & 🧭 petunjuk teruji (10 Okt 2026)
+        import _hari_h
+        import _kalshi
+        import _petunjuk
+        _kalshi.attach(prep, store, now)
+        ks = _kalshi.cached_snapshot(prep.get("berita") or [], store, now)[0] if prep.get("berita") else {}
+        _hari_h.attach(prep, calendar, store, now, ks, {})
+        _petunjuk.attach(prep, calendar, store, now, os.environ)
+    except Exception:  # noqa: BLE001 - tanpa pasar: aturan/dasar
+        pass
     _prediksi.attach(prep, store, now, os.environ)
     p = root / "prediksi" / f"{senin}.json"
     old = json.loads(p.read_text()) if p.exists() else {}

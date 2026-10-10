@@ -1,0 +1,188 @@
+# 🎯 Semua berita besar USD: petunjuk sebelum rilis sendiri-sendiri vs digabung
+python -m research.berita_gabung          → docs/eksternal/hasil_berita_gabung.txt
+
+
+## Non-Farm Employment Change (195 rilis 2010-01–2025-12)
+      P kejutan bulan lalu     semua 92/188=49% (p 0.642) | LAMA 61/139=44% | BARU 31/49=63%
+      -P berbalik dari bulan lalu semua 96/188=51% (p 0.413) | LAMA 78/139=56% | BARU 18/49=37%
+      K Kalshi                 semua 10/19=53% (p 0.500) | LAMA n 0 | BARU 10/19=53%
+      A ADP/klaim/PPI          semua 72/139=52% (p 0.367) | LAMA 56/103=54% | BARU 16/36=44%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 96/188=51% (p 0.413) | LAMA 78/139=56% | BARU 18/49=37%
+      K & P sepakat            semua 9/15=60% (p 0.304) | LAMA n 0 | BARU 9/15=60%
+      K, cadangan P            semua 90/188=48% (p 0.744) | LAMA 61/139=44% | BARU 29/49=59%
+      A & P sepakat            semua 36/68=53% (p 0.358) | LAMA 25/50=50% | BARU 11/18=61%
+      A, cadangan P            semua 93/190=49% (p 0.642) | LAMA 70/141=50% | BARU 23/49=47%
+      suara semua              semua 76/144=53% (p 0.280) | LAMA 56/103=54% | BARU 20/41=49%
+
+## Unemployment Rate (195 rilis 2010-01–2025-12)
+      P kejutan bulan lalu     semua 62/109=57% (p 0.090) | LAMA 45/76=59% | BARU 17/33=52%
+      -P berbalik dari bulan lalu semua 47/109=43% (p 0.937) | LAMA 31/76=41% | BARU 16/33=48%
+      K Kalshi                 semua 14/23=61% (p 0.202) | LAMA n 0 | BARU 14/23=61%
+      A ADP/klaim/PPI          semua 75/133=56% (p 0.083) | LAMA 49/96=51% | BARU 26/37=70%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 47/109=43% (p 0.937) | LAMA 31/76=41% | BARU 16/33=48%
+      K & P sepakat            semua 6/11=55% (p 0.500) | LAMA n 0 | BARU 6/11=55%
+   ✅ K, cadangan P            semua 69/113=61% (p 0.012) | LAMA 45/76=59% | BARU 24/37=65%
+        → emas 1 mnt searah 77/129=60% (p 0.017; LAMA 51/84, BARU 26/45)
+   ✅ A & P sepakat            semua 29/44=66% (p 0.024) | LAMA 17/25=68% | BARU 12/19=63%
+        → emas 1 mnt searah 23/51=45% (p 0.799; LAMA 13/28, BARU 10/23)
+   ✅ A, cadangan P            semua 84/144=58% (p 0.027) | LAMA 56/105=53% | BARU 28/39=72%
+        → emas 1 mnt searah 74/160=46% (p 0.848; LAMA 52/113, BARU 22/47)
+      suara semua              semua 71/127=56% (p 0.107) | LAMA 49/96=51% | BARU 22/31=71%
+
+## Average Hourly Earnings m/m (195 rilis 2010-01–2025-12)
+      P kejutan bulan lalu     semua 40/104=38% (p 0.993) | LAMA 27/80=34% | BARU 13/24=54%
+      -P berbalik dari bulan lalu semua 64/104=62% (p 0.012) | LAMA 53/80=66% | BARU 11/24=46%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 64/104=62% (p 0.012) | LAMA 53/80=66% | BARU 11/24=46%
+
+## CPI m/m (184 rilis 2010-01–2025-10)
+   ✅ P kejutan bulan lalu     semua 47/76=62% (p 0.025) | LAMA 31/51=61% | BARU 16/25=64%
+        → emas 1 mnt searah 58/100=58% (p 0.067; LAMA 36/67, BARU 22/33)
+      -P berbalik dari bulan lalu semua 29/76=38% (p 0.986) | LAMA 20/51=39% | BARU 9/25=36%
+   ✅ K Kalshi                 semua 16/21=76% (p 0.013) | LAMA n 0 | BARU 16/21=76%
+        → emas 1 mnt searah 20/31=65% (p 0.075; LAMA n 0, BARU 20/31)
+      N nowcast Cleveland      semua 25/44=57% (p 0.226) | LAMA 15/24=62% | BARU 10/20=50%
+      A ADP/klaim/PPI          semua 38/61=62% (p 0.036) | LAMA 36/56=64% | BARU 2/5=40%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 29/76=38% (p 0.986) | LAMA 20/51=39% | BARU 9/25=36%
+      K & P sepakat            semua 8/10=80% (p 0.055) | LAMA n 0 | BARU 8/10=80%
+   ✅ K, cadangan P            semua 54/83=65% (p 0.004) | LAMA 31/51=61% | BARU 23/32=72%
+        → emas 1 mnt searah 64/112=57% (p 0.078; LAMA 36/67, BARU 28/45)
+      N & P sepakat            semua 14/17=82% (p 0.006) | LAMA 9/10=90% | BARU 5/7=71%
+      N, cadangan P            semua 47/86=55% (p 0.225) | LAMA 32/57=56% | BARU 15/29=52%
+      A & P sepakat            semua 16/22=73% (p 0.026) | LAMA 15/20=75% | BARU 1/2=50%
+   ✅ A, cadangan P            semua 62/100=62% (p 0.010) | LAMA 46/73=63% | BARU 16/27=59%
+        → emas 1 mnt searah 68/138=49% (p 0.601; LAMA 44/102, BARU 24/36)
+   ✅ suara semua              semua 55/86=64% (p 0.006) | LAMA 40/62=65% | BARU 15/24=62%
+        → emas 1 mnt searah 58/123=47% (p 0.765; LAMA 35/85, BARU 23/38)
+
+## Core CPI m/m (183 rilis 2010-01–2025-10)
+   ✅ P kejutan bulan lalu     semua 47/70=67% (p 0.003) | LAMA 34/51=67% | BARU 13/19=68%
+        → emas 1 mnt searah 58/103=56% (p 0.118; LAMA 40/71, BARU 18/32)
+      -P berbalik dari bulan lalu semua 23/70=33% (p 0.999) | LAMA 17/51=33% | BARU 6/19=32%
+   ✅ K Kalshi                 semua 15/20=75% (p 0.021) | LAMA n 0 | BARU 15/20=75%
+        → emas 1 mnt searah 15/28=54% (p 0.425; LAMA n 0, BARU 15/28)
+      N nowcast Cleveland      semua 22/39=56% (p 0.261) | LAMA 11/22=50% | BARU 11/17=65%
+      A ADP/klaim/PPI          semua 28/58=48% (p 0.653) | LAMA 26/55=47% | BARU 2/3=67%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 23/70=33% (p 0.999) | LAMA 17/51=33% | BARU 6/19=32%
+      K & P sepakat            semua 8/10=80% (p 0.055) | LAMA n 0 | BARU 8/10=80%
+   ✅ K, cadangan P            semua 52/76=68% (p 0.001) | LAMA 34/51=67% | BARU 18/25=72%
+        → emas 1 mnt searah 61/111=55% (p 0.171; LAMA 40/71, BARU 21/40)
+      N & P sepakat            semua 8/10=80% (p 0.055) | LAMA 3/5=60% | BARU 5/5=100%
+   ✅ N, cadangan P            semua 52/86=60% (p 0.033) | LAMA 36/60=60% | BARU 16/26=62%
+        → emas 1 mnt searah 61/119=51% (p 0.427; LAMA 42/79, BARU 19/40)
+      A & P sepakat            semua 13/21=62% (p 0.192) | LAMA 12/20=60% | BARU 1/1=100%
+      A, cadangan P            semua 53/94=56% (p 0.128) | LAMA 40/74=54% | BARU 13/20=65%
+      suara semua              semua 46/87=53% (p 0.334) | LAMA 29/62=47% | BARU 17/25=68%
+
+## CPI y/y (191 rilis 2010-01–2025-12)
+   ✅ P kejutan bulan lalu     semua 53/84=63% (p 0.011) | LAMA 34/57=60% | BARU 19/27=70%
+        → emas 1 mnt searah 58/113=51% (p 0.425; LAMA 36/77, BARU 22/36)
+      -P berbalik dari bulan lalu semua 31/84=37% (p 0.994) | LAMA 23/57=40% | BARU 8/27=30%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 31/84=37% (p 0.994) | LAMA 23/57=40% | BARU 8/27=30%
+
+## PPI m/m (173 rilis 2010-01–2025-11)
+      P kejutan bulan lalu     semua 54/123=44% (p 0.926) | LAMA 43/86=50% | BARU 11/37=30%
+      -P berbalik dari bulan lalu semua 69/123=56% (p 0.103) | LAMA 43/86=50% | BARU 26/37=70%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 69/123=56% (p 0.103) | LAMA 43/86=50% | BARU 26/37=70%
+
+## Core PPI m/m (155 rilis 2010-01–2025-11)
+      P kejutan bulan lalu     semua 32/80=40% (p 0.972) | LAMA 24/62=39% | BARU 8/18=44%
+   ✅ -P berbalik dari bulan lalu semua 48/80=60% (p 0.046) | LAMA 38/62=61% | BARU 10/18=56%
+        → emas 1 mnt searah 53/97=55% (p 0.208; LAMA 39/73, BARU 14/24)
+      -P & P sepakat           n 0
+   ✅ -P, cadangan P           semua 48/80=60% (p 0.046) | LAMA 38/62=61% | BARU 10/18=56%
+        → emas 1 mnt searah 53/97=55% (p 0.208; LAMA 39/73, BARU 14/24)
+
+## Retail Sales m/m (190 rilis 2010-01–2025-12)
+      P kejutan bulan lalu     semua 80/159=50% (p 0.500) | LAMA 55/110=50% | BARU 25/49=51%
+      -P berbalik dari bulan lalu semua 79/159=50% (p 0.563) | LAMA 55/110=50% | BARU 24/49=49%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 79/159=50% (p 0.563) | LAMA 55/110=50% | BARU 24/49=49%
+
+## Core Retail Sales m/m (191 rilis 2010-01–2025-12)
+      P kejutan bulan lalu     semua 66/148=45% (p 0.919) | LAMA 47/110=43% | BARU 19/38=50%
+      -P berbalik dari bulan lalu semua 82/148=55% (p 0.109) | LAMA 63/110=57% | BARU 19/38=50%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 82/148=55% (p 0.109) | LAMA 63/110=57% | BARU 19/38=50%
+
+## Core PCE Price Index m/m (172 rilis 2010-02–2025-12)
+      P kejutan bulan lalu     semua 15/30=50% (p 0.572) | LAMA 15/25=60% | BARU 0/5=0%
+      -P berbalik dari bulan lalu semua 15/30=50% (p 0.572) | LAMA 10/25=40% | BARU 5/5=100%
+      K Kalshi                 semua 3/3=100% (p 0.125) | LAMA n 0 | BARU 3/3=100%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 15/30=50% (p 0.572) | LAMA 10/25=40% | BARU 5/5=100%
+      K & P sepakat            n 0
+      K, cadangan P            semua 18/33=55% (p 0.364) | LAMA 15/25=60% | BARU 3/8=38%
+      suara semua              semua 3/3=100% (p 0.125) | LAMA n 0 | BARU 3/3=100%
+
+## Advance GDP q/q (63 rilis 2010-01–2025-07)
+      P kejutan bulan lalu     n 0
+      -P berbalik dari bulan lalu n 0
+   ✅ G GDPNow                 semua 30/45=67% (p 0.018) | LAMA 16/30=53% | BARU 14/15=93%
+        → emas 1 mnt searah 25/46=54% (p 0.329; LAMA 15/31, BARU 10/15)
+      -P & P sepakat           n 0
+      -P, cadangan P           n 0
+      G & P sepakat            n 0
+   ✅ G, cadangan P            semua 30/45=67% (p 0.018) | LAMA 16/30=53% | BARU 14/15=93%
+        → emas 1 mnt searah 25/46=54% (p 0.329; LAMA 15/31, BARU 10/15)
+   ✅ suara semua              semua 30/45=67% (p 0.018) | LAMA 16/30=53% | BARU 14/15=93%
+        → emas 1 mnt searah 25/46=54% (p 0.329; LAMA 15/31, BARU 10/15)
+
+## ISM Manufacturing PMI (193 rilis 2010-01–2026-01)
+      P kejutan bulan lalu     semua 91/184=49% (p 0.587) | LAMA 64/132=48% | BARU 27/52=52%
+      -P berbalik dari bulan lalu semua 93/184=51% (p 0.471) | LAMA 68/132=52% | BARU 25/52=48%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 93/184=51% (p 0.471) | LAMA 68/132=52% | BARU 25/52=48%
+
+## ISM Services PMI (187 rilis 2010-01–2026-01)
+      P kejutan bulan lalu     semua 63/177=36% (p 1.000) | LAMA 49/131=37% | BARU 14/46=30%
+   ✅ -P berbalik dari bulan lalu semua 114/177=64% (p 0.000) | LAMA 82/131=63% | BARU 32/46=70%
+        → emas 1 mnt searah 14/23=61% (p 0.202; LAMA 8/13, BARU 6/10)
+      -P & P sepakat           n 0
+   ✅ -P, cadangan P           semua 114/177=64% (p 0.000) | LAMA 82/131=63% | BARU 32/46=70%
+        → emas 1 mnt searah 14/23=61% (p 0.202; LAMA 8/13, BARU 6/10)
+
+## JOLTS Job Openings (140 rilis 2012-06–2026-01)
+      P kejutan bulan lalu     semua 54/129=42% (p 0.974) | LAMA 33/84=39% | BARU 21/45=47%
+   ✅ -P berbalik dari bulan lalu semua 75/129=58% (p 0.039) | LAMA 51/84=61% | BARU 24/45=53%
+        → emas 1 mnt searah 18/37=49% (p 0.629; LAMA 1/5, BARU 17/32)
+      -P & P sepakat           n 0
+   ✅ -P, cadangan P           semua 75/129=58% (p 0.039) | LAMA 51/84=61% | BARU 24/45=53%
+        → emas 1 mnt searah 18/37=49% (p 0.629; LAMA 1/5, BARU 17/32)
+
+## Unemployment Claims (675 rilis 2010-01–2026-01)
+      P kejutan bulan lalu     semua 332/630=53% (p 0.094) | LAMA 261/509=51% | BARU 71/121=59%
+      -P berbalik dari bulan lalu semua 298/630=47% (p 0.918) | LAMA 248/509=49% | BARU 50/121=41%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 298/630=47% (p 0.918) | LAMA 248/509=49% | BARU 50/121=41%
+
+## ADP Non-Farm Employment Change (187 rilis 2010-01–2026-01)
+      P kejutan bulan lalu     semua 92/178=52% (p 0.354) | LAMA 70/131=53% | BARU 22/47=47%
+      -P berbalik dari bulan lalu semua 86/178=48% (p 0.700) | LAMA 61/131=47% | BARU 25/47=53%
+      -P & P sepakat           n 0
+      -P, cadangan P           semua 86/178=48% (p 0.700) | LAMA 61/131=47% | BARU 25/47=53%
+
+## Ringkasan per berita
+Non-Farm Employment Change       terbaik lolos: TIDAK ADA (≈ lempar koin)
+Unemployment Rate                terbaik lolos: A & P sepakat 66% (n 44)
+Average Hourly Earnings m/m      terbaik lolos: TIDAK ADA (≈ lempar koin)
+CPI m/m                          terbaik lolos: K Kalshi 76% (n 21)
+Core CPI m/m                     terbaik lolos: K Kalshi 75% (n 20)
+CPI y/y                          terbaik lolos: P kejutan bulan lalu 63% (n 84)
+PPI m/m                          terbaik lolos: TIDAK ADA (≈ lempar koin)
+Core PPI m/m                     terbaik lolos: -P berbalik dari bulan lalu 60% (n 80)
+Retail Sales m/m                 terbaik lolos: TIDAK ADA (≈ lempar koin)
+Core Retail Sales m/m            terbaik lolos: TIDAK ADA (≈ lempar koin)
+Core PCE Price Index m/m         terbaik lolos: TIDAK ADA (≈ lempar koin)
+Advance GDP q/q                  terbaik lolos: G GDPNow 67% (n 45)
+ISM Manufacturing PMI            terbaik lolos: TIDAK ADA (≈ lempar koin)
+ISM Services PMI                 terbaik lolos: -P berbalik dari bulan lalu 64% (n 177)
+JOLTS Job Openings               terbaik lolos: -P berbalik dari bulan lalu 58% (n 129)
+Unemployment Claims              terbaik lolos: TIDAK ADA (≈ lempar koin)
+ADP Non-Farm Employment Change   terbaik lolos: TIDAK ADA (≈ lempar koin)

@@ -108,9 +108,12 @@ object Notifications {
         if ((SignalRepository.primaryOf(events)[event.id] ?: event.id) != event.id) return
         val m = SignalRepository.money()
         val win = SignalRepository.isWin(event, events)
-        val title = "🏁 TUTUP ${event.dir} $sym • ${if (win) "PROFIT" else "MINUS"}"
+        // 🛑 BATAL karena guncangan ekstrem (cloud _core.guncangan, 10 Okt 2026): belum entry = jangan entry
+        val batal = event.json.optBoolean("batal")
+        val title = "${if (batal) "🛑 BATAL" else "🏁 TUTUP"} ${event.dir} $sym • ${if (win) "PROFIT" else "MINUS"}"
         val amount = SignalRepository.amount(event, m)
-        val text = "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
+        val text = (if (batal) "Belum entry? JANGAN entry. Sudah entry: " else "") +
+            "Tutup SEMUA posisi sinyal ini di MT5. Harga @ ${event.price("price")}" +
             (event.str("reason").takeIf { it.isNotBlank() }?.let { " • $it" } ?: "") +
             (amount?.let { "\nHasil ≈ ${moneyMain(it, m)} (${idrLine(it, m)})" } ?: "")
         post(context, event.id.hashCode() + 1, title, text)
@@ -130,7 +133,7 @@ object Notifications {
                 "SL ${event.price("sl")} • TP ${event.price("tp")}")
             "arus_close" -> {
                 val r = event.num("r") ?: 0.0
-                ("🌊 TUTUP ${event.dir} $sym • ${if (r > 0) "PROFIT" else "MINUS"}" to
+                ("🌊 ${if (event.json.optBoolean("batal")) "🛑 BATAL" else "TUTUP"} ${event.dir} $sym • ${if (r > 0) "PROFIT" else "MINUS"}" to
                     "Tutup @ ${event.price("exit")} (${event.str("reason")}) • ${signed(r)}R")
             }
             else -> ("🌊 BATAL $sym" to "Hapus pending STOP: ${event.str("reason")}")
@@ -149,8 +152,10 @@ object Notifications {
                 (b?.let { " Teruji: naik ${it.optInt(1)}% kejadian, rata ${spotPct(it.optDouble(2))} per 48 jam; belum pasti." } ?: ""))
         } else {
             val r = event.num("r_pct") ?: 0.0
-            ("🔗 JUAL keranjang kripto • ${if (r > 0) "PROFIT" else "MINUS"} ${spotPct(r)}" to
-                "48 jam selesai: jual semua koin keranjang 🔗. ${event.num("naik")?.toInt() ?: 0}/" +
+            val batal = event.json.optBoolean("batal")
+            ("🔗 ${if (batal) "🛑 BATAL" else "JUAL"} keranjang kripto • ${if (r > 0) "PROFIT" else "MINUS"} ${spotPct(r)}" to
+                (if (batal) "${event.str("reason")}. Jual semua koin keranjang 🔗 sekarang. "
+                else "48 jam selesai: jual semua koin keranjang 🔗. ") + "${event.num("naik")?.toInt() ?: 0}/" +
                 "${event.num("n")?.toInt() ?: 0} koin naik (setelah biaya 0,2%).")
         }
         post(context, (event.id + event.type).hashCode(), title, text)
@@ -171,6 +176,16 @@ object Notifications {
             "(+${fmt(event.num("tp_pct"), 0)}%). Belum kena sampai ${formatTime(event.str("deadline"))} → jual. " +
             "Maks 10% modal spot per sinyal."
         post(context, event.id.hashCode(), title, text)
+    }
+
+    /** ⚠️ Guncangan pada posisi spot (cloud _spot.guncangan): PERINGATAN saja — data: menjual saat anjlok lebih buruk. */
+    fun spotWarn(context: Context, event: SignalEvent) {
+        val coin = event.str("coin")
+        val title = "⚠️ GUNCANGAN SPOT $coin/USDT ${spotPct(-(event.num("drop") ?: 0.0))}"
+        val text = if (event.json.optBoolean("paksa")) "Anjlok tajam: jual sekarang (pengaturan SPOT_BATAL)."
+            else "Anjlok tajam (kemungkinan berita/pernyataan penting). Data 2019–2026: menjual saat ini rata-rata LEBIH " +
+                "BURUK — harga biasanya pulih s.d. TP/batas waktu. Rencana tetap: limit jual TP. Jangan menambah posisi."
+        post(context, (event.id + "warn").hashCode(), title, text)
     }
 
     fun spotClose(context: Context, event: SignalEvent) {

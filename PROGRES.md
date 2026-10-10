@@ -224,3 +224,27 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Modul cloud `cloud/api/_pulih.py` + tes `tests/test_cloud_pulih.py` + replay `research/pulih_replay.py` (143/144 sinyal
   = riset). Penyambungan ke tick.py sempat ditolak pengaman sesi (belum ada izin) → pengguna: "Jika tinggi pasang" →
   DIPASANG: tick.py (PULIH_SIGNALS), aplikasi 4.25 (`PulihCard.kt`, `Notifications.pulih`, pair SPOT), peringkat.json.
+
+
+### 10 Okt 2026 — 🛑 batal saat guncangan, CPI 14 Okt, semua berita, entry t−1 dtk, follow trader (aplikasi 4.26)
+- `research/batal_guncang.py` (docs/BATAL_GUNCANG.md): tutup saat guncangan sedang MERUGIKAN (💰, 💎 di setiap tahun);
+  hanya guncangan ekstrem membantu → DIPASANG (izin pengguna "perbaiki"): 💰 ≥ 4 ATR/6 jam sebelum TP1 (BUY & SELL; replay
+  kode cloud penuh XAU +734,6 → +742,8R sejak 2021, `cloud_{XAU,BTC}_guncang.csv`), 🌊 3 ATR/3 jam, 🔗 −5%/1 jam; 💎 hanya
+  ⚠️ peringatan (`SPOT_BATAL=1` paksa). Env `GUNCANG_BATAL=0` mati semua. XLM 8 Okt direkonstruksi.
+- CPI 14 Okt (docs/CPI_14OKT.md): baris CPI kini sumber "pasar" (Kalshi × reaksi 1 mnt, 🥈 bila ≥ 60%), sebaran Kalshi
+  sebelum konsensus FF (`_kalshi.mendatang`, baris Supabase `kalshi_sebaran`), ⚠️ "peluang bergeser" (`_hari_h.geser`),
+  🗣️ pernyataan (`_pernyataan.py`, cache `pernyataan`, env PERNYATAAN), 🧭 petunjuk teruji semua berita (`_petunjuk.py`,
+  `petunjuk.json` dari `research/berita_gabung.py`, memori `petunjuk`). Data baru: nowcast Cleveland Fed
+  (`data/research/eksternal/cleveland/`), GDPNow (`gdpnow/`).
+- `research/cpi_gabung.py`: Kalshi 76%, gabungan sumber lemah lebih rendah; Kalshi & kejutan lalu sepakat 80% (n 20).
+  `research/pra_gabung.py`: entry t−1 dtk dengan petunjuk baru → 0 lolos (kandidat CPI sepakat tutup 10–30 dtk, n 20).
+- 👁 unfollow: potret & log trader dihapus di cloud, bagian "Trader diikuti" kosong/hilang, tidak dicek lagi.
+- 💎 skema keluar (docs/SPOT_SKEMA.md): TP penuh = WR 91%; 50/50 = profit rata lebih tinggi, WR 76–82% (menunggu pilihan).
+- Tes lambat `tests/test_cloud_{star,h4,funding}.py` > 5 menit juga di kode lama (bukan karena perubahan ini).
+- ⚠️ Keamanan: ada branch remote bernama seperti token GitHub (`github_pat_11AK…`) — pengguna diminta mencabut token itu
+  dan menghapus branch-nya (belum dihapus: menunggu izin).
+- Lanjutan 10 Okt: sumber lain selain Kalshi (`research/sumber_lain.py`: WTI, Indeed, survei Fed daerah lolos; breakeven,
+  yield 2 th, UMich, klaim, WEI tidak) → 🧭 cloud; rencana pengguna entry t−1 dtk tutup 1–5 dtk/mnt untuk XAU/BTC/ETH
+  (`research/pra_aset.py`, data ETH 1 dtk 934 rilis) → semua rugi rata-rata; tampil di bawah tile (aplikasi 4.27).
+- Pengguna: "jangan untung/rugi, arah 1–10 detik saja, hanya XAU" → `research/pra_xau_arah.py`
+  (docs/eksternal/hasil_pra_xau_arah.txt, docs/CPI_14OKT.md bagian 10); aplikasi 4.27 menampilkan 1 baris XAU.

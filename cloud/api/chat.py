@@ -215,6 +215,15 @@ class handler(BaseHTTPRequestHandler):
                     _jadwal.attach(persiapan, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+                try:                                          # 🎲 CPI dst. sebelum konsensus terbit: sebaran pasar Kalshi
+                    _kalshi.mendatang(persiapan.get("mendatang") or [], store, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+                try:                                          # 🗣️ pernyataan Fed/Trump/pemerintah terbaru (_pernyataan.py)
+                    import _pernyataan
+                    _pernyataan.attach(persiapan, store, now, os.environ)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
                 try:                                          # 📊 peluang emas sebelum NFP/JOLTS/Fed (_prarilis.py)
                     import _prarilis
@@ -224,9 +233,21 @@ class handler(BaseHTTPRequestHandler):
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):
+                try:                                          # 🧭 petunjuk teruji semua berita (_petunjuk.py, petunjuk.json)
+                    import _petunjuk
+                    _petunjuk.attach(persiapan, calendar, store, now, os.environ)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict):
                 try:                                          # 🎯 satu baris "NFP: peluang emas naik 1 jam 61%" (_prediksi.py)
                     import _prediksi
                     _prediksi.attach(persiapan, store, now, os.environ)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict):
+                try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
+                    import _pra_aset
+                    _pra_aset.attach(persiapan, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \

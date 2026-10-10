@@ -1,0 +1,183 @@
+# 🔎 Sumber lain selain Kalshi: tebakan kejutan berita (Act vs konsensus)
+python -m research.sumber_lain            → docs/eksternal/hasil_sumber_lain.txt
+
+
+## CPI m/m (184 rilis 2010-01–2025-10) — petunjuk terbaik lama: K|P
+      BE5    semua 54/111=49% (p 0.648) | LAMA 34/80=42% | BARU 20/31=65% | emas 1 mnt cocok 81/154=53%
+         K|P & BE5 sepakat: 20/29=69% (vs K|P saja 54/83=65%)
+      Y2     semua 57/110=52% (p 0.388) | LAMA 38/77=49% | BARU 19/33=58% | emas 1 mnt cocok 71/159=45%
+         K|P & Y2 sepakat: 21/30=70% (vs K|P saja 54/83=65%)
+   ✅ WTI    semua 72/117=62% (p 0.008) | LAMA 50/84=60% | BARU 22/33=67% | emas 1 mnt cocok 91/166=55%
+         K|P & WTI sepakat: 32/42=76% (vs K|P saja 54/83=65%)
+      PP     semua 60/117=51% (p 0.427) | LAMA 45/84=54% | BARU 15/33=45% | emas 1 mnt cocok 81/166=49%
+         K|P & PP sepakat: 29/43=67% (vs K|P saja 54/83=65%)
+      MICH   semua 49/96=51% (p 0.459) | LAMA 36/67=54% | BARU 13/29=45% | emas 1 mnt cocok 62/136=46%
+         K|P & MICH sepakat: 23/34=68% (vs K|P saja 54/83=65%)
+      SUARA  semua 64/110=58% (p 0.052) | LAMA 45/80=56% | BARU 19/30=63% | emas 1 mnt cocok 80/156=51%
+         K|P & SUARA sepakat: 27/36=75% (vs K|P saja 54/83=65%)
+      MODEL  semua 35/66=53% (p 0.356) | LAMA 22/39=56% | BARU 13/27=48% | emas 1 mnt cocok 54/96=56%
+
+## Core CPI m/m (183 rilis 2010-01–2025-10) — petunjuk terbaik lama: K|P
+      BE5    semua 49/106=46% (p 0.809) | LAMA 32/74=43% | BARU 17/32=53% | emas 1 mnt cocok 81/153=53%
+         K|P & BE5 sepakat: 24/32=75% (vs K|P saja 52/76=68%)
+      Y2     semua 55/110=50% (p 0.538) | LAMA 39/78=50% | BARU 16/32=50% | emas 1 mnt cocok 71/159=45%
+         K|P & Y2 sepakat: 23/32=72% (vs K|P saja 52/76=68%)
+      WTI    n 0 | emas 1 mnt cocok 0/0
+      PP     semua 57/114=50% (p 0.537) | LAMA 41/82=50% | BARU 16/32=50% | emas 1 mnt cocok 81/165=49%
+         K|P & PP sepakat: 23/33=70% (vs K|P saja 52/76=68%)
+      MICH   semua 45/93=48% (p 0.661) | LAMA 32/64=50% | BARU 13/29=45% | emas 1 mnt cocok 62/135=46%
+         K|P & MICH sepakat: 22/35=63% (vs K|P saja 52/76=68%)
+      SUARA  semua 42/82=51% (p 0.456) | LAMA 32/61=52% | BARU 10/21=48% | emas 1 mnt cocok 56/121=46%
+         K|P & SUARA sepakat: 16/22=73% (vs K|P saja 52/76=68%)
+      MODEL  semua 24/58=41% (p 0.926) | LAMA 17/37=46% | BARU 7/21=33% | emas 1 mnt cocok 43/84=51%
+
+## CPI y/y (191 rilis 2010-01–2025-12) — petunjuk terbaik lama: P
+      BE5    semua 60/119=50% (p 0.500) | LAMA 35/83=42% | BARU 25/36=69% | emas 1 mnt cocok 84/161=52%
+         P & BE5 sepakat: 25/37=68% (vs P saja 53/84=63%)
+      Y2     semua 64/119=54% (p 0.232) | LAMA 41/81=51% | BARU 23/38=61% | emas 1 mnt cocok 75/165=45%
+         P & Y2 sepakat: 24/37=65% (vs P saja 53/84=63%)
+   ✅ WTI    semua 77/124=62% (p 0.004) | LAMA 49/86=57% | BARU 28/38=74% | emas 1 mnt cocok 93/173=54%
+         P & WTI sepakat: 30/44=68% (vs P saja 53/84=63%)
+      PP     semua 57/124=46% (p 0.838) | LAMA 40/86=47% | BARU 17/38=45% | emas 1 mnt cocok 82/173=47%
+         P & PP sepakat: 22/38=58% (vs P saja 53/84=63%)
+      MICH   semua 48/99=48% (p 0.656) | LAMA 32/65=49% | BARU 16/34=47% | emas 1 mnt cocok 65/141=46%
+         P & MICH sepakat: 17/32=53% (vs P saja 53/84=63%)
+      SUARA  semua 65/118=55% (p 0.156) | LAMA 40/83=48% | BARU 25/35=71% | emas 1 mnt cocok 82/162=51%
+         P & SUARA sepakat: 23/38=61% (vs P saja 53/84=63%)
+      MODEL  semua 32/58=55% (p 0.256) | LAMA 14/30=47% | BARU 18/28=64% | emas 1 mnt cocok 48/89=54%
+
+## PPI m/m (173 rilis 2010-01–2025-11)
+      BE5    semua 76/142=54% (p 0.225) | LAMA 55/101=54% | BARU 21/41=51% | emas 1 mnt cocok 78/149=52%
+      Y2     semua 65/136=48% (p 0.726) | LAMA 47/97=48% | BARU 18/39=46% | emas 1 mnt cocok 66/143=46%
+      WTI    semua 78/147=53% (p 0.255) | LAMA 50/105=48% | BARU 28/42=67% | emas 1 mnt cocok 89/155=57%
+      PP     semua 82/147=56% (p 0.093) | LAMA 56/105=53% | BARU 26/42=62% | emas 1 mnt cocok 75/155=48%
+      MICH   semua 63/122=52% (p 0.393) | LAMA 43/84=51% | BARU 20/38=53% | emas 1 mnt cocok 60/127=47%
+      SUARA  semua 76/137=55% (p 0.116) | LAMA 52/98=53% | BARU 24/39=62% | emas 1 mnt cocok 75/142=53%
+      MODEL  semua 28/62=45% (p 0.813) | LAMA 16/36=44% | BARU 12/26=46% | emas 1 mnt cocok 29/72=40%
+
+## Core PPI m/m (155 rilis 2010-01–2025-11) — petunjuk terbaik lama: -P
+      BE5    semua 52/107=49% (p 0.650) | LAMA 39/81=48% | BARU 13/26=50% | emas 1 mnt cocok 67/131=51%
+         -P & BE5 sepakat: 26/44=59% (vs -P saja 48/80=60%)
+      Y2     semua 50/103=49% (p 0.653) | LAMA 40/80=50% | BARU 10/23=43% | emas 1 mnt cocok 54/125=43%
+         -P & Y2 sepakat: 18/33=55% (vs -P saja 48/80=60%)
+      WTI    n 0 | emas 1 mnt cocok 0/0
+      PP     semua 52/112=46% (p 0.802) | LAMA 37/86=43% | BARU 15/26=58% | emas 1 mnt cocok 72/137=53%
+         -P & PP sepakat: 25/45=56% (vs -P saja 48/80=60%)
+      MICH   semua 45/91=49% (p 0.583) | LAMA 35/66=53% | BARU 10/25=40% | emas 1 mnt cocok 55/113=49%
+         -P & MICH sepakat: 16/27=59% (vs -P saja 48/80=60%)
+      SUARA  semua 39/85=46% (p 0.807) | LAMA 33/70=47% | BARU 6/15=40% | emas 1 mnt cocok 50/103=49%
+         -P & SUARA sepakat: 17/31=55% (vs -P saja 48/80=60%)
+      MODEL  semua 12/43=28% (p 0.999) | LAMA 10/30=33% | BARU 2/13=15% | emas 1 mnt cocok 19/47=40%
+
+## Core PCE Price Index m/m (172 rilis 2010-02–2025-12)
+      BE5    semua 27/66=41% (p 0.946) | LAMA 20/49=41% | BARU 7/17=41% | emas 1 mnt cocok 27/55=49%
+      Y2     semua 30/66=45% (p 0.805) | LAMA 20/49=41% | BARU 10/17=59% | emas 1 mnt cocok 16/53=30%
+      WTI    n 0 | emas 1 mnt cocok 0/0
+      PP     semua 34/70=49% (p 0.640) | LAMA 26/52=50% | BARU 8/18=44% | emas 1 mnt cocok 23/57=40%
+      MICH   semua 31/56=55% (p 0.252) | LAMA 24/41=59% | BARU 7/15=47% | emas 1 mnt cocok 25/47=53%
+      SUARA  semua 23/52=44% (p 0.834) | LAMA 18/40=45% | BARU 5/12=42% | emas 1 mnt cocok 14/40=35%
+      MODEL  semua 13/20=65% (p 0.132) | LAMA 4/5=80% | BARU 9/15=60% | emas 1 mnt cocok 30/46=65%
+
+## Non-Farm Employment Change (195 rilis 2010-01–2025-12)
+      Y2     semua 87/173=50% (p 0.500) | LAMA 65/126=52% | BARU 22/47=47% | emas 1 mnt cocok 76/144=53%
+      EMP    semua 54/124=44% (p 0.937) | LAMA 42/92=46% | BARU 12/32=38% | emas 1 mnt cocok 47/101=47%
+      CC     semua 92/190=48% (p 0.694) | LAMA 72/142=51% | BARU 20/48=42% | emas 1 mnt cocok 80/160=50%
+      IND    semua 24/68=35% (p 0.995) | LAMA 8/18=44% | BARU 16/50=32% | emas 1 mnt cocok 31/66=47%
+      WEI    semua 87/191=46% (p 0.904) | LAMA 67/142=47% | BARU 20/49=41% | emas 1 mnt cocok 74/161=46%
+      SUARA  semua 58/147=39% (p 0.996) | LAMA 50/108=46% | BARU 8/39=21% | emas 1 mnt cocok 58/125=46%
+      MODEL  semua 56/96=58% (p 0.063) | LAMA 27/55=49% | BARU 29/41=71% | emas 1 mnt cocok 47/95=49%
+
+## Unemployment Rate (195 rilis 2010-01–2025-12) — petunjuk terbaik lama: K|P
+      Y2     semua 58/135=43% (p 0.958) | LAMA 37/96=39% | BARU 21/39=54% | emas 1 mnt cocok 76/144=53%
+         K|P & Y2 sepakat: 30/53=57% (vs K|P saja 69/113=61%)
+   ✅ EMP    semua 56/93=60% (p 0.031) | LAMA 40/67=60% | BARU 16/26=62% | emas 1 mnt cocok 47/101=47%
+         K|P & EMP sepakat: 29/43=67% (vs K|P saja 69/113=61%)
+      CC     semua 84/145=58% (p 0.034) | LAMA 65/106=61% | BARU 19/39=49% | emas 1 mnt cocok 80/160=50%
+         K|P & CC sepakat: 44/65=68% (vs K|P saja 69/113=61%)
+   ✅ IND    semua 38/57=67% (p 0.008) | LAMA 12/16=75% | BARU 26/41=63% | emas 1 mnt cocok 31/66=47%
+         K|P & IND sepakat: 27/36=75% (vs K|P saja 69/113=61%)
+      WEI    semua 59/146=40% (p 0.992) | LAMA 42/106=40% | BARU 17/40=42% | emas 1 mnt cocok 74/161=46%
+         K|P & WEI sepakat: 28/57=49% (vs K|P saja 69/113=61%)
+      SUARA  semua 58/114=51% (p 0.463) | LAMA 39/82=48% | BARU 19/32=59% | emas 1 mnt cocok 58/125=46%
+         K|P & SUARA sepakat: 33/52=63% (vs K|P saja 69/113=61%)
+   ✅ MODEL  semua 59/92=64% (p 0.004) | LAMA 37/57=65% | BARU 22/35=63% | emas 1 mnt cocok 65/120=54%
+
+## ADP Non-Farm Employment Change (187 rilis 2010-01–2026-01)
+      Y2     semua 85/165=52% (p 0.378) | LAMA 53/118=45% | BARU 32/47=68% | emas 1 mnt cocok 75/150=50%
+      EMP    semua 66/121=55% (p 0.182) | LAMA 47/90=52% | BARU 19/31=61% | emas 1 mnt cocok 51/106=48%
+      CC     semua 99/182=54% (p 0.133) | LAMA 72/135=53% | BARU 27/47=57% | emas 1 mnt cocok 87/164=53%
+      IND    semua 30/57=53% (p 0.396) | LAMA 0/8=0% | BARU 30/49=61% | emas 1 mnt cocok 32/58=55%
+      WEI    semua 82/183=45% (p 0.930) | LAMA 59/135=44% | BARU 23/48=48% | emas 1 mnt cocok 79/165=48%
+      SUARA  semua 72/142=51% (p 0.467) | LAMA 43/102=42% | BARU 29/40=72% | emas 1 mnt cocok 64/126=51%
+      MODEL  semua 42/93=45% (p 0.850) | LAMA 33/61=54% | BARU 9/32=28% | emas 1 mnt cocok 42/87=48%
+
+## ISM Manufacturing PMI (193 rilis 2010-01–2026-01)
+      GA     semua 44/90=49% (p 0.624) | LAMA 37/67=55% | BARU 7/23=30% | emas 1 mnt cocok 8/13=62%
+      WEI    semua 100/189=53% (p 0.234) | LAMA 75/138=54% | BARU 25/51=49% | emas 1 mnt cocok 10/30=33%
+      Y2     semua 84/163=52% (p 0.377) | LAMA 65/117=56% | BARU 19/46=41% | emas 1 mnt cocok 10/28=36%
+      SUARA  semua 75/143=52% (p 0.308) | LAMA 59/104=57% | BARU 16/39=41% | emas 1 mnt cocok 8/24=33%
+      MODEL  semua 39/90=43% (p 0.915) | LAMA 34/67=51% | BARU 5/23=22% | emas 1 mnt cocok 6/15=40%
+
+## ISM Services PMI (187 rilis 2010-01–2026-01) — petunjuk terbaik lama: -P
+   ✅ GA     semua 52/84=62% (p 0.019) | LAMA 41/63=65% | BARU 11/21=52% | emas 1 mnt cocok 6/7=86%
+         -P & GA sepakat: 35/48=73% (vs -P saja 114/177=64%)
+      WEI    semua 84/182=46% (p 0.867) | LAMA 61/135=45% | BARU 23/47=49% | emas 1 mnt cocok 13/24=54%
+         -P & WEI sepakat: 50/82=61% (vs -P saja 114/177=64%)
+      Y2     semua 83/171=49% (p 0.677) | LAMA 64/124=52% | BARU 19/47=40% | emas 1 mnt cocok 9/22=41%
+         -P & Y2 sepakat: 56/88=64% (vs -P saja 114/177=64%)
+      SUARA  semua 62/126=49% (p 0.605) | LAMA 51/98=52% | BARU 11/28=39% | emas 1 mnt cocok 7/12=58%
+         -P & SUARA sepakat: 40/63=63% (vs -P saja 114/177=64%)
+      MODEL  semua 51/92=55% (p 0.174) | LAMA 35/64=55% | BARU 16/28=57% | emas 1 mnt cocok 6/12=50%
+
+## Retail Sales m/m (190 rilis 2010-01–2025-12)
+      GA     semua 40/78=51% (p 0.455) | LAMA 29/55=53% | BARU 11/23=48% | emas 1 mnt cocok 41/83=49%
+      WEI    semua 94/174=54% (p 0.162) | LAMA 66/124=53% | BARU 28/50=56% | emas 1 mnt cocok 96/174=55%
+      Y2     semua 83/160=52% (p 0.346) | LAMA 51/110=46% | BARU 32/50=64% | emas 1 mnt cocok 76/160=48%
+      SUARA  semua 75/131=57% (p 0.058) | LAMA 52/97=54% | BARU 23/34=68% | emas 1 mnt cocok 69/129=53%
+      MODEL  semua 26/60=43% (p 0.877) | LAMA 16/40=40% | BARU 10/20=50% | emas 1 mnt cocok 30/66=45%
+
+## Core Retail Sales m/m (191 rilis 2010-01–2025-12)
+      GA     semua 41/74=55% (p 0.208) | LAMA 30/53=57% | BARU 11/21=52% | emas 1 mnt cocok 41/83=49%
+      WEI    semua 94/168=56% (p 0.071) | LAMA 70/124=56% | BARU 24/44=55% | emas 1 mnt cocok 97/175=55%
+      Y2     semua 80/152=53% (p 0.285) | LAMA 59/108=55% | BARU 21/44=48% | emas 1 mnt cocok 76/160=48%
+   ✅ SUARA  semua 72/124=58% (p 0.044) | LAMA 55/93=59% | BARU 17/31=55% | emas 1 mnt cocok 70/130=54%
+      MODEL  semua 39/82=48% (p 0.709) | LAMA 27/56=48% | BARU 12/26=46% | emas 1 mnt cocok 44/87=51%
+
+## Advance GDP q/q (63 rilis 2010-01–2025-07) — petunjuk terbaik lama: G
+      GA     semua 14/30=47% (p 0.708) | LAMA 12/24=50% | BARU 2/6=33% | emas 1 mnt cocok 14/29=48%
+         G & GA sepakat: 8/14=57% (vs G saja 30/45=67%)
+      WEI    semua 30/61=49% (p 0.601) | LAMA 24/45=53% | BARU 6/16=38% | emas 1 mnt cocok 23/58=40%
+         G & WEI sepakat: 16/23=70% (vs G saja 30/45=67%)
+      Y2     semua 29/55=53% (p 0.394) | LAMA 20/39=51% | BARU 9/16=56% | emas 1 mnt cocok 27/52=52%
+         G & Y2 sepakat: 13/17=76% (vs G saja 30/45=67%)
+      SUARA  semua 26/48=54% (p 0.333) | LAMA 20/36=56% | BARU 6/12=50% | emas 1 mnt cocok 21/46=46%
+         G & SUARA sepakat: 14/17=82% (vs G saja 30/45=67%)
+      MODEL  semua 9/17=53% (p 0.500) | LAMA 2/2=100% | BARU 7/15=47% | emas 1 mnt cocok 5/17=29%
+
+## JOLTS Job Openings (140 rilis 2012-06–2026-01) — petunjuk terbaik lama: -P
+      IND    semua 23/48=48% (p 0.667) | LAMA n 0 | BARU 23/48=48% | emas 1 mnt cocok 13/34=38%
+         -P & IND sepakat: 12/24=50% (vs -P saja 75/129=58%)
+      EMP    semua 44/80=55% (p 0.217) | LAMA 29/50=58% | BARU 15/30=50% | emas 1 mnt cocok 9/22=41%
+         -P & EMP sepakat: 23/37=62% (vs -P saja 75/129=58%)
+      CC     semua 66/134=49% (p 0.602) | LAMA 43/87=49% | BARU 23/47=49% | emas 1 mnt cocok 17/38=45%
+         -P & CC sepakat: 33/57=58% (vs -P saja 75/129=58%)
+      SUARA  semua 53/110=48% (p 0.683) | LAMA 35/67=52% | BARU 18/43=42% | emas 1 mnt cocok 12/34=35%
+         -P & SUARA sepakat: 26/50=52% (vs -P saja 75/129=58%)
+      MODEL  semua 27/54=50% (p 0.554) | LAMA 11/24=46% | BARU 16/30=53% | emas 1 mnt cocok 12/22=55%
+
+## Ringkasan
+CPI m/m                          sumber lain lolos: WTI 62%
+Core CPI m/m                     sumber lain lolos: TIDAK ADA
+CPI y/y                          sumber lain lolos: WTI 62%
+PPI m/m                          sumber lain lolos: TIDAK ADA
+Core PPI m/m                     sumber lain lolos: TIDAK ADA
+Core PCE Price Index m/m         sumber lain lolos: TIDAK ADA
+Non-Farm Employment Change       sumber lain lolos: TIDAK ADA
+Unemployment Rate                sumber lain lolos: EMP 60%, IND 67%, MODEL 64%
+ADP Non-Farm Employment Change   sumber lain lolos: TIDAK ADA
+ISM Manufacturing PMI            sumber lain lolos: TIDAK ADA
+ISM Services PMI                 sumber lain lolos: GA 62%
+Retail Sales m/m                 sumber lain lolos: TIDAK ADA
+Core Retail Sales m/m            sumber lain lolos: SUARA 58%
+Advance GDP q/q                  sumber lain lolos: TIDAK ADA
+JOLTS Job Openings               sumber lain lolos: TIDAK ADA

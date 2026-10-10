@@ -88,10 +88,35 @@ def test_paket_dan_status_belum_dicek():
     b = I.paket(ev)
     assert len(b) >= 2 and sum(len(x) for x in b) == 5
     assert all(len(json.dumps(x)) < 4096 for x in b)
-    assert "pg_cron" in I.status(Store())["pantau"]
+    st = Store()
+    assert I.status(st)["pantau"] == "Belum ada trader yang diikuti"
+    I.atur(st, {"platform": "OKX", "id": "A", "on": True})
+    assert "pg_cron" in I.status(st)["pantau"]
 
 
 def test_okx_mode_net():
     assert C.okx_side({"posSide": "net", "subPos": "11.5"}) is True
     assert C.okx_side({"posSide": "net", "subPos": "-3"}) is False
     assert C.okx_side({"posSide": "short"}) is False
+
+
+def test_unfollow_menghapus_potret_dan_log():
+    """Permintaan pengguna 10 Okt 2026: trader yang sudah di-unfollow tidak dicek & tidak tampil lagi (kosong)."""
+    st = Store()
+    I.atur(st, {"platform": "Bitget", "id": "u1", "name": "Budi", "on": True})
+    I.atur(st, {"platform": "OKX", "id": "o1", "name": "Ani", "on": True})
+    fetch = {"Bitget": lambda id_: ({"BTC|1": P("BTCUSDT", True, 100.0)}, ""),
+             "OKX": lambda id_: ({"ETH|1": P("ETHUSDT", False, 50.0)}, "")}
+    I.putaran(st, lambda m: None, now=1000, fetch=fetch)
+    assert len(st.d["ikuti_snap"]["log"]) == 2
+    I.atur(st, {"platform": "Bitget", "id": "u1", "on": False})
+    snap = st.d["ikuti_snap"]
+    assert list(snap["traders"]) == ["OKX|o1"] and [e["trader"] for e in snap["log"]] == ["o1"]
+    s = I.status(st, now=1010)
+    assert [x["id"] for x in s["list"]] == ["o1"] and all(e["trader"] == "o1" for e in s["log"])
+    I.atur(st, {"platform": "OKX", "id": "o1", "on": False})
+    s = I.status(st, now=1020)
+    assert s["list"] == [] and s["log"] == [] and s["pantau"] == "Belum ada trader yang diikuti"
+    calls = []
+    I.putaran(st, calls.append, now=1030, fetch=fetch)                    # tidak ada yang dicek / dikirim lagi
+    assert calls == [] and st.d["ikuti_snap"]["traders"] == {} and st.d["ikuti_snap"]["log"] == []

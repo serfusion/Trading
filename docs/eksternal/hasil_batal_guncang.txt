@@ -1,0 +1,116 @@
+# 🛑 Batalkan / tutup sinyal saat guncangan harga (proksi pernyataan penting)
+Permintaan pengguna 10 Okt 2026: "jika ada statement Trump, pemerintah AS, the Fed, orang penting atau negara yang
+membuat harga jatuh, tarik sinyal BUY (canceled/invalid) — seperti spot XLM yang dikirim sebelum jatuh lalu loss jauh".
+
+
+## A. 💰 XAU (replay cloud live, 5121 sinyal termasuk lapisan; aturan hanya sebelum TP1)
+### BUY
+   1.5 ATR / 1 jam: n 3464 kena 1409 | Δ/sinyal LAMA -0.123R BARU -0.141R | total BARU +586.4→+340.2R LAMA +513.1→+301.5R | WR 64→52% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.325R
+   1.5 ATR / 2 jam: n 3464 kena 1568 | Δ/sinyal LAMA -0.113R BARU -0.148R | total BARU +586.4→+328.5R LAMA +513.1→+318.0R | WR 64→49% | tahun Δ≥0 36% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.289R
+   1.5 ATR / 3 jam: n 3464 kena 1656 | Δ/sinyal LAMA -0.180R BARU -0.159R | total BARU +586.4→+308.8R LAMA +513.1→+203.5R | WR 64→48% | tahun Δ≥0 36% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.355R
+   1.5 ATR / 6 jam: n 3464 kena 1768 | Δ/sinyal LAMA -0.176R BARU -0.234R | total BARU +586.4→+178.3R LAMA +513.1→+209.5R | WR 64→46% | tahun Δ≥0 36% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.403R
+   2 ATR / 1 jam: n 3464 kena 837 | Δ/sinyal LAMA -0.026R BARU -0.123R | total BARU +586.4→+371.7R LAMA +513.1→+469.2R | WR 64→58% | tahun Δ≥0 50% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.309R
+   2 ATR / 2 jam: n 3464 kena 967 | Δ/sinyal LAMA -0.018R BARU -0.126R | total BARU +586.4→+367.5R LAMA +513.1→+482.2R | WR 64→57% | tahun Δ≥0 57% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.258R
+   2 ATR / 3 jam: n 3464 kena 1050 | Δ/sinyal LAMA -0.013R BARU -0.127R | total BARU +586.4→+365.4R LAMA +513.1→+491.4R | WR 64→56% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.231R
+   2 ATR / 6 jam: n 3464 kena 1192 | Δ/sinyal LAMA -0.005R BARU -0.123R | total BARU +586.4→+371.5R LAMA +513.1→+504.8R | WR 64→55% | tahun Δ≥0 64% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.187R
+   3 ATR / 1 jam: n 3464 kena 90 | Δ/sinyal LAMA -0.002R BARU -0.027R | total BARU +586.4→+540.0R LAMA +513.1→+510.5R | WR 64→64% | tahun Δ≥0 60% (10) | setelah guncangan (yang kena) tahan lanjut rata +0.546R
+   3 ATR / 2 jam: n 3464 kena 140 | Δ/sinyal LAMA +0.001R BARU -0.033R | total BARU +586.4→+528.3R LAMA +513.1→+515.4R | WR 64→63% | tahun Δ≥0 58% (12) | setelah guncangan (yang kena) tahan lanjut rata +0.399R
+   3 ATR / 3 jam: n 3464 kena 208 | Δ/sinyal LAMA -0.002R BARU -0.037R | total BARU +586.4→+522.6R LAMA +513.1→+510.2R | WR 64→63% | tahun Δ≥0 71% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.321R
+   3 ATR / 6 jam: n 3464 kena 341 | Δ/sinyal LAMA -0.008R BARU -0.030R | total BARU +586.4→+533.7R LAMA +513.1→+499.3R | WR 64→62% | tahun Δ≥0 64% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.195R
+   4 ATR / 1 jam: n 3464 kena 3 | Δ/sinyal LAMA +0.000R BARU -0.000R | total BARU +586.4→+586.4R LAMA +513.1→+513.2R | WR 64→64% | tahun Δ≥0 50% (2) | setelah guncangan (yang kena) tahan lanjut rata -0.016R
+   4 ATR / 2 jam: n 3464 kena 14 | Δ/sinyal LAMA +0.000R BARU +0.001R | total BARU +586.4→+587.7R LAMA +513.1→+513.3R | WR 64→64% | tahun Δ≥0 60% (5) | setelah guncangan (yang kena) tahan lanjut rata -0.106R
+   4 ATR / 3 jam: n 3464 kena 18 | Δ/sinyal LAMA +0.000R BARU +0.001R | total BARU +586.4→+587.7R LAMA +513.1→+513.6R | WR 64→64% | tahun Δ≥0 67% (6) | setelah guncangan (yang kena) tahan lanjut rata -0.100R
+   4 ATR / 6 jam: n 3464 kena 52 | Δ/sinyal LAMA +0.002R BARU +0.003R | total BARU +586.4→+591.3R LAMA +513.1→+515.8R | WR 64→64% | tahun Δ≥0 89% (9) | setelah guncangan (yang kena) tahan lanjut rata -0.146R
+   tahun (Δ total R) terbaik 4 ATR/6 jam: {2013: 0.0, 2014: 0.15, 2015: 0.0, 2016: 0.31, 2017: 0.0, 2018: 0.28, 2019: 0.03, 2020: 0.32, 2021: 3.75, 2022: 1.44, 2023: 1.35, 2024: -0.02, 2025: 0.0, 2026: 0.0}
+### SELL
+   1.5 ATR / 1 jam: n 1657 kena 743 | Δ/sinyal LAMA +0.040R BARU -0.176R | total BARU +148.2→+63.0R LAMA +279.2→+326.5R | WR 61→50% | tahun Δ≥0 50% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.051R
+   1.5 ATR / 2 jam: n 1657 kena 839 | Δ/sinyal LAMA -0.007R BARU -0.157R | total BARU +148.2→+72.6R LAMA +279.2→+271.1R | WR 61→46% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.100R
+   1.5 ATR / 3 jam: n 1657 kena 860 | Δ/sinyal LAMA -0.020R BARU -0.136R | total BARU +148.2→+82.3R LAMA +279.2→+256.2R | WR 61→45% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.103R
+   1.5 ATR / 6 jam: n 1657 kena 902 | Δ/sinyal LAMA -0.011R BARU -0.123R | total BARU +148.2→+88.8R LAMA +279.2→+266.0R | WR 61→44% | tahun Δ≥0 50% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.080R
+   2 ATR / 1 jam: n 1657 kena 420 | Δ/sinyal LAMA +0.014R BARU -0.064R | total BARU +148.2→+117.3R LAMA +279.2→+295.6R | WR 61→57% | tahun Δ≥0 71% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.035R
+   2 ATR / 2 jam: n 1657 kena 498 | Δ/sinyal LAMA +0.007R BARU -0.046R | total BARU +148.2→+126.2R LAMA +279.2→+287.8R | WR 61→55% | tahun Δ≥0 57% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.027R
+   2 ATR / 3 jam: n 1657 kena 538 | Δ/sinyal LAMA +0.003R BARU -0.041R | total BARU +148.2→+128.6R LAMA +279.2→+282.3R | WR 61→54% | tahun Δ≥0 57% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.031R
+   2 ATR / 6 jam: n 1657 kena 631 | Δ/sinyal LAMA +0.009R BARU -0.099R | total BARU +148.2→+100.3R LAMA +279.2→+289.3R | WR 61→50% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.060R
+   3 ATR / 1 jam: n 1657 kena 39 | Δ/sinyal LAMA +0.003R BARU +0.005R | total BARU +148.2→+150.7R LAMA +279.2→+282.8R | WR 61→61% | tahun Δ≥0 88% (8) | setelah guncangan (yang kena) tahan lanjut rata -0.156R
+   3 ATR / 2 jam: n 1657 kena 70 | Δ/sinyal LAMA +0.005R BARU +0.005R | total BARU +148.2→+150.8R LAMA +279.2→+285.4R | WR 61→61% | tahun Δ≥0 90% (10) | setelah guncangan (yang kena) tahan lanjut rata -0.125R
+   3 ATR / 3 jam: n 1657 kena 102 | Δ/sinyal LAMA -0.003R BARU +0.012R | total BARU +148.2→+154.0R LAMA +279.2→+275.5R | WR 61→60% | tahun Δ≥0 75% (12) | setelah guncangan (yang kena) tahan lanjut rata -0.021R
+   3 ATR / 6 jam: n 1657 kena 152 | Δ/sinyal LAMA +0.001R BARU +0.004R | total BARU +148.2→+150.0R LAMA +279.2→+280.5R | WR 61→59% | tahun Δ≥0 62% (13) | setelah guncangan (yang kena) tahan lanjut rata -0.020R
+   4 ATR / 1 jam: n 1657 kena 7 | Δ/sinyal LAMA +0.000R BARU +0.002R | total BARU +148.2→+149.1R LAMA +279.2→+279.2R | WR 61→61% | tahun Δ≥0 100% (1) | setelah guncangan (yang kena) tahan lanjut rata -0.119R
+✅ 4 ATR / 2 jam: n 1657 kena 9 | Δ/sinyal LAMA +0.001R BARU +0.002R | total BARU +148.2→+149.1R LAMA +279.2→+279.9R | WR 61→61% | tahun Δ≥0 100% (2) | setelah guncangan (yang kena) tahan lanjut rata -0.171R
+   4 ATR / 3 jam: n 1657 kena 17 | Δ/sinyal LAMA +0.001R BARU +0.009R | total BARU +148.2→+152.6R LAMA +279.2→+280.3R | WR 61→61% | tahun Δ≥0 80% (5) | setelah guncangan (yang kena) tahan lanjut rata -0.325R
+✅ 4 ATR / 6 jam: n 1657 kena 32 | Δ/sinyal LAMA +0.004R BARU +0.009R | total BARU +148.2→+152.6R LAMA +279.2→+283.6R | WR 61→61% | tahun Δ≥0 86% (7) | setelah guncangan (yang kena) tahan lanjut rata -0.274R
+   tahun (Δ total R) terbaik 3 ATR/2 jam: {2013: 0.0, 2014: 1.24, 2015: -2.97, 2016: 0.01, 2017: 1.74, 2018: 0.16, 2019: 4.1, 2020: 1.45, 2021: 0.47, 2022: 0.91, 2023: 0.0, 2024: 1.66, 2025: 0.0, 2026: 0.0}
+### semua
+   1.5 ATR / 1 jam: n 5121 kena 2152 | Δ/sinyal LAMA -0.057R BARU -0.149R | total BARU +734.6→+403.2R LAMA +792.3→+628.0R | WR 63→51% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.230R
+   1.5 ATR / 2 jam: n 5121 kena 2407 | Δ/sinyal LAMA -0.070R BARU -0.150R | total BARU +734.6→+401.1R LAMA +792.3→+589.1R | WR 63→48% | tahun Δ≥0 29% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.223R
+   1.5 ATR / 3 jam: n 5121 kena 2516 | Δ/sinyal LAMA -0.115R BARU -0.154R | total BARU +734.6→+391.2R LAMA +792.3→+459.6R | WR 63→47% | tahun Δ≥0 36% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.269R
+   1.5 ATR / 6 jam: n 5121 kena 2670 | Δ/sinyal LAMA -0.109R BARU -0.210R | total BARU +734.6→+267.1R LAMA +792.3→+475.5R | WR 63→46% | tahun Δ≥0 36% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.294R
+   2 ATR / 1 jam: n 5121 kena 1257 | Δ/sinyal LAMA -0.010R BARU -0.110R | total BARU +734.6→+489.0R LAMA +792.3→+764.7R | WR 63→58% | tahun Δ≥0 50% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.217R
+   2 ATR / 2 jam: n 5121 kena 1465 | Δ/sinyal LAMA -0.008R BARU -0.108R | total BARU +734.6→+493.7R LAMA +792.3→+770.0R | WR 63→56% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.180R
+   2 ATR / 3 jam: n 5121 kena 1588 | Δ/sinyal LAMA -0.006R BARU -0.108R | total BARU +734.6→+494.0R LAMA +792.3→+773.6R | WR 63→55% | tahun Δ≥0 50% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.163R
+   2 ATR / 6 jam: n 5121 kena 1823 | Δ/sinyal LAMA +0.001R BARU -0.118R | total BARU +734.6→+471.8R LAMA +792.3→+794.1R | WR 63→53% | tahun Δ≥0 43% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.143R
+   3 ATR / 1 jam: n 5121 kena 129 | Δ/sinyal LAMA +0.000R BARU -0.020R | total BARU +734.6→+690.6R LAMA +792.3→+793.3R | WR 63→63% | tahun Δ≥0 69% (13) | setelah guncangan (yang kena) tahan lanjut rata +0.333R
+   3 ATR / 2 jam: n 5121 kena 210 | Δ/sinyal LAMA +0.003R BARU -0.025R | total BARU +734.6→+679.1R LAMA +792.3→+800.7R | WR 63→62% | tahun Δ≥0 71% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.224R
+   3 ATR / 3 jam: n 5121 kena 310 | Δ/sinyal LAMA -0.002R BARU -0.026R | total BARU +734.6→+676.6R LAMA +792.3→+785.7R | WR 63→62% | tahun Δ≥0 57% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.208R
+   3 ATR / 6 jam: n 5121 kena 493 | Δ/sinyal LAMA -0.004R BARU -0.023R | total BARU +734.6→+683.7R LAMA +792.3→+779.8R | WR 63→61% | tahun Δ≥0 64% (14) | setelah guncangan (yang kena) tahan lanjut rata +0.129R
+   4 ATR / 1 jam: n 5121 kena 10 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +734.6→+735.4R LAMA +792.3→+792.4R | WR 63→63% | tahun Δ≥0 67% (3) | setelah guncangan (yang kena) tahan lanjut rata -0.088R
+   4 ATR / 2 jam: n 5121 kena 23 | Δ/sinyal LAMA +0.000R BARU +0.001R | total BARU +734.6→+736.8R LAMA +792.3→+793.1R | WR 63→63% | tahun Δ≥0 83% (6) | setelah guncangan (yang kena) tahan lanjut rata -0.131R
+   4 ATR / 3 jam: n 5121 kena 35 | Δ/sinyal LAMA +0.001R BARU +0.003R | total BARU +734.6→+740.3R LAMA +792.3→+793.9R | WR 63→63% | tahun Δ≥0 88% (8) | setelah guncangan (yang kena) tahan lanjut rata -0.209R
+   4 ATR / 6 jam: n 5121 kena 84 | Δ/sinyal LAMA +0.002R BARU +0.004R | total BARU +734.6→+743.9R LAMA +792.3→+799.4R | WR 63→63% | tahun Δ≥0 92% (12) | setelah guncangan (yang kena) tahan lanjut rata -0.195R
+   tahun (Δ total R) terbaik 4 ATR/6 jam: {2013: 2.38, 2014: 0.15, 2015: 0.0, 2016: 0.31, 2017: 0.86, 2018: 0.28, 2019: 0.73, 2020: 0.32, 2021: 4.22, 2022: 4.54, 2023: 1.35, 2024: 1.22, 2025: 0.0, 2026: -0.0}
+
+## A. 💰 BTC (replay cloud live, 2583 sinyal termasuk lapisan; aturan hanya sebelum TP1)
+### BUY
+   1.5 ATR / 1 jam: n 1537 kena 599 | Δ/sinyal LAMA -0.346R BARU -0.239R | total BARU +328.7→+182.3R LAMA +947.8→+628.0R | WR 61→50% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.778R
+   1.5 ATR / 2 jam: n 1537 kena 661 | Δ/sinyal LAMA -0.343R BARU -0.228R | total BARU +328.7→+189.3R LAMA +947.8→+630.2R | WR 61→48% | tahun Δ≥0 27% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.691R
+   1.5 ATR / 3 jam: n 1537 kena 730 | Δ/sinyal LAMA -0.411R BARU -0.218R | total BARU +328.7→+195.2R LAMA +947.8→+567.7R | WR 61→47% | tahun Δ≥0 27% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.703R
+   1.5 ATR / 6 jam: n 1537 kena 792 | Δ/sinyal LAMA -0.548R BARU -0.206R | total BARU +328.7→+202.7R LAMA +947.8→+440.9R | WR 61→44% | tahun Δ≥0 27% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.799R
+   2 ATR / 1 jam: n 1537 kena 316 | Δ/sinyal LAMA -0.048R BARU -0.186R | total BARU +328.7→+214.8R LAMA +947.8→+903.5R | WR 61→57% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.501R
+   2 ATR / 2 jam: n 1537 kena 360 | Δ/sinyal LAMA -0.080R BARU -0.204R | total BARU +328.7→+204.0R LAMA +947.8→+873.8R | WR 61→56% | tahun Δ≥0 27% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.552R
+   2 ATR / 3 jam: n 1537 kena 409 | Δ/sinyal LAMA -0.093R BARU -0.211R | total BARU +328.7→+199.6R LAMA +947.8→+861.7R | WR 61→54% | tahun Δ≥0 9% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.526R
+   2 ATR / 6 jam: n 1537 kena 517 | Δ/sinyal LAMA -0.294R BARU -0.207R | total BARU +328.7→+201.8R LAMA +947.8→+675.9R | WR 61→51% | tahun Δ≥0 9% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.771R
+   3 ATR / 1 jam: n 1537 kena 20 | Δ/sinyal LAMA -0.006R BARU -0.000R | total BARU +328.7→+328.7R LAMA +947.8→+942.4R | WR 61→60% | tahun Δ≥0 40% (5) | setelah guncangan (yang kena) tahan lanjut rata +0.269R
+   3 ATR / 2 jam: n 1537 kena 39 | Δ/sinyal LAMA -0.044R BARU -0.012R | total BARU +328.7→+321.2R LAMA +947.8→+906.7R | WR 61→60% | tahun Δ≥0 62% (8) | setelah guncangan (yang kena) tahan lanjut rata +1.248R
+   3 ATR / 3 jam: n 1537 kena 68 | Δ/sinyal LAMA -0.043R BARU -0.044R | total BARU +328.7→+301.7R LAMA +947.8→+908.1R | WR 61→59% | tahun Δ≥0 55% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.981R
+   3 ATR / 6 jam: n 1537 kena 99 | Δ/sinyal LAMA -0.045R BARU -0.082R | total BARU +328.7→+278.8R LAMA +947.8→+906.5R | WR 61→59% | tahun Δ≥0 55% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.921R
+   4 ATR / 1 jam: n 1537 kena 0 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +328.7→+328.7R LAMA +947.8→+947.8R | WR 61→61% | tahun Δ≥0 nan% (0) | setelah guncangan (yang kena) tahan lanjut rata +nanR
+   4 ATR / 2 jam: n 1537 kena 0 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +328.7→+328.7R LAMA +947.8→+947.8R | WR 61→61% | tahun Δ≥0 nan% (0) | setelah guncangan (yang kena) tahan lanjut rata +nanR
+   4 ATR / 3 jam: n 1537 kena 1 | Δ/sinyal LAMA -0.000R BARU +0.000R | total BARU +328.7→+328.7R LAMA +947.8→+947.4R | WR 61→61% | tahun Δ≥0 0% (1) | setelah guncangan (yang kena) tahan lanjut rata +0.311R
+   4 ATR / 6 jam: n 1537 kena 4 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +328.7→+328.7R LAMA +947.8→+948.1R | WR 61→61% | tahun Δ≥0 50% (2) | setelah guncangan (yang kena) tahan lanjut rata -0.089R
+   tahun (Δ total R) terbaik 4 ATR/1 jam: {2016: 0.0, 2017: 0.0, 2018: 0.0, 2019: 0.0, 2020: 0.0, 2021: 0.0, 2022: 0.0, 2023: 0.0, 2024: 0.0, 2025: 0.0, 2026: 0.0}
+### SELL
+   1.5 ATR / 1 jam: n 1046 kena 470 | Δ/sinyal LAMA -0.038R BARU -0.052R | total BARU +128.2→+97.5R LAMA +86.3→+68.9R | WR 60→49% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.102R
+   1.5 ATR / 2 jam: n 1046 kena 520 | Δ/sinyal LAMA -0.065R BARU -0.064R | total BARU +128.2→+90.3R LAMA +86.3→+57.0R | WR 60→46% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.129R
+   1.5 ATR / 3 jam: n 1046 kena 551 | Δ/sinyal LAMA -0.081R BARU -0.126R | total BARU +128.2→+53.3R LAMA +86.3→+49.9R | WR 60→45% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.202R
+   1.5 ATR / 6 jam: n 1046 kena 588 | Δ/sinyal LAMA -0.071R BARU -0.134R | total BARU +128.2→+48.5R LAMA +86.3→+54.2R | WR 60→43% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.190R
+   2 ATR / 1 jam: n 1046 kena 267 | Δ/sinyal LAMA -0.006R BARU -0.020R | total BARU +128.2→+116.4R LAMA +86.3→+83.5R | WR 60→58% | tahun Δ≥0 60% (10) | setelah guncangan (yang kena) tahan lanjut rata +0.055R
+   2 ATR / 2 jam: n 1046 kena 309 | Δ/sinyal LAMA -0.002R BARU -0.045R | total BARU +128.2→+101.3R LAMA +86.3→+85.5R | WR 60→55% | tahun Δ≥0 50% (10) | setelah guncangan (yang kena) tahan lanjut rata +0.090R
+   2 ATR / 3 jam: n 1046 kena 344 | Δ/sinyal LAMA -0.017R BARU -0.025R | total BARU +128.2→+113.6R LAMA +86.3→+78.7R | WR 60→54% | tahun Δ≥0 45% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.064R
+   2 ATR / 6 jam: n 1046 kena 388 | Δ/sinyal LAMA -0.010R BARU -0.018R | total BARU +128.2→+117.3R LAMA +86.3→+81.9R | WR 60→52% | tahun Δ≥0 55% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.040R
+   3 ATR / 1 jam: n 1046 kena 18 | Δ/sinyal LAMA +0.006R BARU +0.000R | total BARU +128.2→+128.3R LAMA +86.3→+89.2R | WR 60→60% | tahun Δ≥0 100% (4) | setelah guncangan (yang kena) tahan lanjut rata -0.165R
+   3 ATR / 2 jam: n 1046 kena 32 | Δ/sinyal LAMA +0.008R BARU +0.004R | total BARU +128.2→+130.6R LAMA +86.3→+89.8R | WR 60→60% | tahun Δ≥0 100% (5) | setelah guncangan (yang kena) tahan lanjut rata -0.182R
+   3 ATR / 3 jam: n 1046 kena 47 | Δ/sinyal LAMA +0.009R BARU +0.003R | total BARU +128.2→+130.3R LAMA +86.3→+90.5R | WR 60→60% | tahun Δ≥0 86% (7) | setelah guncangan (yang kena) tahan lanjut rata -0.132R
+   3 ATR / 6 jam: n 1046 kena 80 | Δ/sinyal LAMA +0.012R BARU +0.012R | total BARU +128.2→+135.2R LAMA +86.3→+91.6R | WR 60→60% | tahun Δ≥0 75% (8) | setelah guncangan (yang kena) tahan lanjut rata -0.153R
+   4 ATR / 1 jam: n 1046 kena 0 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +128.2→+128.2R LAMA +86.3→+86.3R | WR 60→60% | tahun Δ≥0 nan% (0) | setelah guncangan (yang kena) tahan lanjut rata +nanR
+   4 ATR / 2 jam: n 1046 kena 3 | Δ/sinyal LAMA +0.001R BARU +0.000R | total BARU +128.2→+128.2R LAMA +86.3→+86.6R | WR 60→60% | tahun Δ≥0 100% (1) | setelah guncangan (yang kena) tahan lanjut rata -0.090R
+✅ 4 ATR / 3 jam: n 1046 kena 9 | Δ/sinyal LAMA +0.001R BARU +0.002R | total BARU +128.2→+129.4R LAMA +86.3→+86.6R | WR 60→60% | tahun Δ≥0 100% (3) | setelah guncangan (yang kena) tahan lanjut rata -0.164R
+✅ 4 ATR / 6 jam: n 1046 kena 15 | Δ/sinyal LAMA +0.003R BARU +0.002R | total BARU +128.2→+129.4R LAMA +86.3→+87.5R | WR 60→60% | tahun Δ≥0 100% (4) | setelah guncangan (yang kena) tahan lanjut rata -0.157R
+   tahun (Δ total R) terbaik 3 ATR/6 jam: {2016: 0.0, 2017: 0.0, 2018: 3.59, 2019: 3.16, 2020: 0.0, 2021: -1.22, 2022: -0.74, 2023: 0.57, 2024: 2.35, 2025: 1.01, 2026: 3.48}
+### semua
+   1.5 ATR / 1 jam: n 2583 kena 1069 | Δ/sinyal LAMA -0.245R BARU -0.147R | total BARU +457.0→+279.9R LAMA +1034.1→+697.0R | WR 61→49% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.481R
+   1.5 ATR / 2 jam: n 2583 kena 1181 | Δ/sinyal LAMA -0.252R BARU -0.147R | total BARU +457.0→+279.6R LAMA +1034.1→+687.1R | WR 61→48% | tahun Δ≥0 9% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.444R
+   1.5 ATR / 3 jam: n 2583 kena 1281 | Δ/sinyal LAMA -0.302R BARU -0.173R | total BARU +457.0→+248.6R LAMA +1034.1→+617.7R | WR 61→46% | tahun Δ≥0 9% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.488R
+   1.5 ATR / 6 jam: n 2583 kena 1380 | Δ/sinyal LAMA -0.391R BARU -0.171R | total BARU +457.0→+251.1R LAMA +1034.1→+495.2R | WR 61→44% | tahun Δ≥0 9% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.540R
+   2 ATR / 1 jam: n 2583 kena 583 | Δ/sinyal LAMA -0.034R BARU -0.104R | total BARU +457.0→+331.2R LAMA +1034.1→+987.0R | WR 61→57% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.297R
+   2 ATR / 2 jam: n 2583 kena 669 | Δ/sinyal LAMA -0.054R BARU -0.126R | total BARU +457.0→+305.3R LAMA +1034.1→+959.3R | WR 61→56% | tahun Δ≥0 27% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.338R
+   2 ATR / 3 jam: n 2583 kena 753 | Δ/sinyal LAMA -0.068R BARU -0.119R | total BARU +457.0→+313.2R LAMA +1034.1→+940.4R | WR 61→54% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.315R
+   2 ATR / 6 jam: n 2583 kena 905 | Δ/sinyal LAMA -0.201R BARU -0.114R | total BARU +457.0→+319.2R LAMA +1034.1→+757.8R | WR 61→52% | tahun Δ≥0 18% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.458R
+   3 ATR / 1 jam: n 2583 kena 38 | Δ/sinyal LAMA -0.002R BARU +0.000R | total BARU +457.0→+457.0R LAMA +1034.1→+1031.6R | WR 61→60% | tahun Δ≥0 67% (9) | setelah guncangan (yang kena) tahan lanjut rata +0.064R
+   3 ATR / 2 jam: n 2583 kena 71 | Δ/sinyal LAMA -0.027R BARU -0.004R | total BARU +457.0→+451.7R LAMA +1034.1→+996.5R | WR 61→60% | tahun Δ≥0 67% (9) | setelah guncangan (yang kena) tahan lanjut rata +0.603R
+   3 ATR / 3 jam: n 2583 kena 115 | Δ/sinyal LAMA -0.026R BARU -0.021R | total BARU +457.0→+432.0R LAMA +1034.1→+998.5R | WR 61→60% | tahun Δ≥0 55% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.526R
+   3 ATR / 6 jam: n 2583 kena 179 | Δ/sinyal LAMA -0.026R BARU -0.036R | total BARU +457.0→+413.9R LAMA +1034.1→+998.1R | WR 61→59% | tahun Δ≥0 45% (11) | setelah guncangan (yang kena) tahan lanjut rata +0.441R
+   4 ATR / 1 jam: n 2583 kena 0 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +457.0→+457.0R LAMA +1034.1→+1034.1R | WR 61→61% | tahun Δ≥0 nan% (0) | setelah guncangan (yang kena) tahan lanjut rata +nanR
+   4 ATR / 2 jam: n 2583 kena 3 | Δ/sinyal LAMA +0.000R BARU +0.000R | total BARU +457.0→+457.0R LAMA +1034.1→+1034.3R | WR 61→61% | tahun Δ≥0 100% (1) | setelah guncangan (yang kena) tahan lanjut rata -0.090R
+   4 ATR / 3 jam: n 2583 kena 10 | Δ/sinyal LAMA -0.000R BARU +0.001R | total BARU +457.0→+458.2R LAMA +1034.1→+1034.0R | WR 61→61% | tahun Δ≥0 75% (4) | setelah guncangan (yang kena) tahan lanjut rata -0.116R
+   4 ATR / 6 jam: n 2583 kena 19 | Δ/sinyal LAMA +0.001R BARU +0.001R | total BARU +457.0→+458.2R LAMA +1034.1→+1035.6R | WR 61→61% | tahun Δ≥0 80% (5) | setelah guncangan (yang kena) tahan lanjut rata -0.143R
+   tahun (Δ total R) terbaik 4 ATR/6 jam: {2016: -0.31, 2017: 0.0, 2018: 1.0, 2019: 0.82, 2020: 0.0, 2021: 0.0, 2022: 0.0, 2023: 0.57, 2024: 0.0, 2025: 0.0, 2026: 0.63}

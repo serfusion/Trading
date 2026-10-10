@@ -95,11 +95,25 @@ object CopyFollow {
         return true
     }
 
+    /** Kunci trader pemilik kejadian ("platform|id"). */
+    fun eventKey(e: JSONObject): String = "${e.optString("platform")}|${e.optString("trader")}"
+
     @Synchronized
     fun addLog(events: List<JSONObject>) {
-        if (events.isEmpty()) return
+        // hanya kejadian trader yang MASIH diikuti (unfollow = riwayatnya tidak ditampilkan lagi; 10 Okt 2026)
+        val fresh = events.filter { eventKey(it) in keys }
+        if (fresh.isEmpty()) return
         val known = log.map { it.optString("id") }.toSet()
-        log = (events.filter { it.optString("id") !in known }.reversed() + log).take(60)
+        log = (fresh.filter { it.optString("id") !in known }.reversed() + log).take(60)
+        prefs?.edit()?.putString("log", JSONArray(log).toString())?.apply()
+    }
+
+    /** Buang kejadian trader yang sudah tidak diikuti (dipanggil setiap daftar follow berubah). */
+    @Synchronized
+    private fun pruneLog() {
+        val kept = log.filter { eventKey(it) in keys }
+        if (kept.size == log.size) return
+        log = kept
         prefs?.edit()?.putString("log", JSONArray(log).toString())?.apply()
     }
 
@@ -128,6 +142,8 @@ object CopyFollow {
     private fun syncKeys(list: JSONArray?) {
         list ?: return
         saveKeys((0 until list.length()).mapNotNull { list.optJSONObject(it) }.map { key(it) }.toSet())
+        pruneLog()
+        if (keys.isEmpty()) status = null
     }
 
     /** GET /api/chat?ikuti=1: trader diikuti + posisi terbuka terakhir + kejadian terbaru (cloud = sumber kebenaran). */
@@ -237,14 +253,16 @@ fun CopyFollowSection(onOpen: (JSONObject) -> Unit) {
     val context = androidx.compose.ui.platform.LocalContext.current
     LaunchedEffect(Unit) {
         CopyFollow.init(context)
-        while (true) {                                    // selama tab terbuka: segarkan tiap 15 detik
-            CopyFollow.refresh(context)
-            delay(15_000L)
+        CopyFollow.refresh(context)                       // sekali saat dibuka: sinkron daftar follow dari cloud
+        while (true) {                                    // selama tab terbuka: segarkan tiap 15 detik — hanya bila
+            delay(15_000L)                                // masih ada trader yang diikuti (unfollow semua = berhenti cek)
+            if (CopyFollow.keys.isNotEmpty()) CopyFollow.refresh(context)
         }
     }
-    if (CopyFollow.keys.isEmpty() && CopyFollow.log.isEmpty()) return
+    if (CopyFollow.keys.isEmpty()) return                 // semua di-unfollow: bagian "Trader diikuti" kosong/hilang
     val st = CopyFollow.status
     val rows = st?.optJSONArray("list")?.let { a -> (0 until a.length()).mapNotNull { a.optJSONObject(it) } }.orEmpty()
+        .filter { CopyFollow.key(it) in CopyFollow.keys }
     SectionTitle("👁 Trader diikuti", trailing = "${CopyFollow.keys.size}")
     AppCard {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -287,9 +305,10 @@ fun CopyFollowSection(onOpen: (JSONObject) -> Unit) {
                 if (pos.size > 6) Text("+${pos.size - 6} posisi lain (ketuk)", style = MaterialTheme.typography.labelSmall, color = Muted)
             }
         }
-        if (CopyFollow.log.isNotEmpty()) {
+        val logIkut = CopyFollow.log.filter { CopyFollow.eventKey(it) in CopyFollow.keys }
+        if (logIkut.isNotEmpty()) {
             Text("Kejadian terbaru", fontWeight = FontWeight.Bold, style = MaterialTheme.typography.bodySmall)
-            CopyFollow.log.take(8).forEach { e ->
+            logIkut.take(8).forEach { e ->
                 val (a, b) = copyEventText(e)
                 Column(Modifier.fillMaxWidth().padding(vertical = 1.dp)) {
                     Text(a, style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold, maxLines = 1,
