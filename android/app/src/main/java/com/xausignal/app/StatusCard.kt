@@ -232,8 +232,69 @@ private fun StripPudar(prep: JSONObject?, now: Long) {
  * saja, bukan untung/rugi). Arah dari petunjuk teruji; persen = seberapa sering harga XAU bergerak searah di detik
  * 1/2/3/5/10 (cloud _pra_aset.py ← research/pra_xau_arah.py, tick Exness 2015–2026). Ketuk = bukti.
  */
+/** "4 hari lagi" / "5 jam lagi" / "12 mnt lagi" dihitung di HP (teks cloud bisa sudah lama). */
+private fun sisaTeks(t: Instant?): String {
+    if (t == null) return ""
+    val s = java.time.Duration.between(Instant.now(), t).seconds
+    return when {
+        s <= 0 -> "sedang rilis"
+        s >= 86400 -> "${s / 86400} hari lagi"
+        s >= 3600 -> "${s / 3600} jam lagi"
+        else -> "${maxOf(1L, s / 60)} mnt lagi"
+    }
+}
+
+/**
+ * 🎯 Berita mendatang di bawah XAU (aplikasi 4.30, permintaan pengguna): satu baris per berita
+ * "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi" (arah emas 1–10 dtk setelah rilis; cloud _pra_aset.daftar).
+ * Persen = seberapa sering tebakan itu benar di data 2010–2026; tanpa petunjuk teruji → "≈ 50:50". Ketuk = bukti.
+ */
+@Composable
+private fun StripDaftar(prep: JSONObject, daftar: org.json.JSONArray) {
+    val pra = prep.optJSONObject("pra")
+    var buka by remember(daftar.toString()) { mutableStateOf(-1) }
+    Column(Modifier.fillMaxWidth()) {
+        Text("🎯 Berita mendatang • arah emas 1–10 dtk setelah rilis", maxLines = 1,
+            style = MaterialTheme.typography.labelSmall, color = Muted, fontWeight = FontWeight.Bold)
+        for (i in 0 until daftar.length()) {
+            val r = daftar.optJSONObject(i) ?: continue
+            val st = r.optString("status")
+            val naik = r.optString("arah") == "naik"
+            val warna = when (st) {
+                "acak" -> Muted
+                "teruji", "tren searah" -> if (naik) BuyColor else SellColor
+                else -> Gold
+            }
+            val teks = r.optString("teks").substringBeforeLast(" • ") + " • " +
+                sisaTeks(instantOf(r.optString("time")))
+            Column(Modifier.fillMaxWidth().clickable { buka = if (buka == i) -1 else i }) {
+                Text(teks, style = if (i == 0) MaterialTheme.typography.labelMedium else MaterialTheme.typography.labelSmall,
+                    color = warna, fontWeight = if (i == 0) FontWeight.ExtraBold else FontWeight.Bold, maxLines = 2)
+                val tr = r.optJSONObject("tren")
+                if (tr != null) {
+                    Text(tr.optString("teks"), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+                    if (buka == i) Text(tr.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
+                } else if (i == 0) {
+                    val nanti = pra?.optString("tren_nanti").orEmpty()
+                    if (nanti.isNotBlank()) Text(nanti, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 1)
+                }
+                if (buka == i) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
+        }
+        // 📌 kepastian setelah detik 2 (4.28) tetap tampil sekali di bawah daftar
+        pra?.optString("kepastian")?.ifBlank { null }?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold, maxLines = 2)
+        }
+    }
+}
+
 @Composable
 private fun StripPra(prep: JSONObject?) {
+    val daftar = prep?.optJSONArray("pra_daftar")
+    if (prep != null && daftar != null && daftar.length() > 0) {
+        StripDaftar(prep, daftar)
+        return
+    }
     val pra = prep?.optJSONObject("pra") ?: return
     var open by remember(pra.optString("time")) { mutableStateOf(false) }
     val st = pra.optString("status")

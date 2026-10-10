@@ -90,6 +90,35 @@ Konfirmasi aturan yang sudah dipasang (dosis–respons, bukan satu jendela kebet
 EMA 50 H1) yang SEARAH dengan petunjuk berita → benar 2–10 dtk: 0 dari 3 = 41–50%, 1 = 52–57%, 2 = 62–70%, 3 = 64–70%
 (n 84; lama 63–71%, baru 63–70%). Berita tanpa petunjuk + 3 tren searah: 56–57% (baru 52–53%) → tetap lemah.
 
+## E. Metode KHUSUS per berita (10 Okt sore — `research/pra_per_berita.py`)
+Permintaan: "cari metode lain untuk masing-masing news, saya yakin pasti ada di atas 65%". 79 aturan baru, semua dari
+data yang terbit LEBIH DULU (FRED nilai rilis pertama + tanggal terbitnya, tanpa revisi): penjualan mobil & bensin →
+Retail Sales; Flash PMI S&P & survei Fed daerah → ISM; kejutan core CPI/PPI → core PCE; kalender survei BLS (tgl 12,
+4/5 pekan) → upah per jam, NFP, pengangguran; saham S&P 500 & bensin → UMich/CB; klaim → ADP; efek Januari → CPI;
+kejutan lalu / berbalik / anchoring untuk semua judul.
+
+Hasil jujur — tebakan ANGKA sering bagus, tetapi arah EMAS 1–10 detik tidak ikut naik:
+| Berita | Petunjuk terbaik | Tebakan angka | Arah emas 2–10 dtk |
+|---|---|---|---|
+| ISM Jasa | kejutan bulan lalu berbalik | 65% | **62%** (lama 59 / baru 66) ✅; + tren 4 jam searah **69%** |
+| Upah per jam | tgl 12 jatuh Minggu–Rabu | **64%** (baru 70%) | 51% — emas digerakkan NFP, bukan upah |
+| Core Retail Sales | penjualan mobil bulan acuan | **64%** (baru 68%) | 56% (p 0,11) |
+| Core CPI | kejutan lalu searah | **67%** | 55% |
+| NFP / pengangguran | 5 pekan antar pekan survei BLS | 55% | **57%** (lama 57 / baru 57, p 0,01) ⚠️ lemah; + tren searah 62% |
+| ISM Manufaktur | survei Fed daerah | 54% | 56% (baru 48%) ❌ |
+| Core PCE | kejutan core CPI/PPI | 43–50% | 44–51% ❌ |
+| UMich / CB | saham S&P 500, bensin | 48–54% | 56–58% (p > 0,1) ❌ |
+| ADP, klaim, PPI, JOLTS, GDP | — | ≈ 50% | 46–55% ❌ |
+Lolos penuh hanya ISM Jasa (2 dari 79; kebetulan rata-rata 1,25 → keluarga uji tidak lebih baik dari acak). **Tidak ada
+berita selain ISM Jasa yang terbukti di atas 65% untuk arah emas 1–10 detik**, sekalipun dengan tren 4 jam.
+
+## Di aplikasi 4.30 — daftar berita mendatang di bawah XAU
+Satu baris per berita (maks 5, ≤ 31 hari): "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi" (sisa waktu dihitung di HP).
+Persen = ketepatan aturan yang dipakai (rata-rata detik 2/3/5/10): petunjuk teruji (`xau_arah`), hari NFP = kalender
+survei BLS 57% (`pra_aset.json["per_berita"]`), berita terdekat ≤ 6 jam + tren searah → angka gabungan, berlawanan →
+"≈ 50:50"; tanpa petunjuk → "≈ 50:50 (belum ada petunjuk teruji)". Cloud `_pra_aset.daftar` → `persiapan["pra_daftar"]`;
+aplikasi `StatusCard.StripDaftar` (ketuk baris = bukti). Info saja, tanpa order.
+
 ## Di aplikasi (4.27–4.28)
 Satu baris di bawah tile XAU: arah tebakan + persen per detik (✅/⚠️/⚪) dan baris 📌 kepastian detik 2 untuk berita
 berikutnya (cloud `_pra_aset.py`; PPI memakai kejutan CPI yang baru keluar lewat memori `_petunjuk`).

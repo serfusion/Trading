@@ -422,6 +422,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   konsisten (BARU 56–60%). `tren` → `pra_aset.json["tren"]`: petunjuk & tren emas 4 jam SEARAH 63–67% (ISM 70–76%),
   BERLAWANAN 49–55%, tanpa petunjuk 55–56% → aplikasi 4.29 baris ➕ (`_pra_aset.tren_emas`, baris Supabase `pra_tren`,
   env PRA_TREN). Cache `data/research/eksternal/pra_xau_semua_v2.parquet` (hapus bila data tick/berita bertambah).
+- `research/pra_xau_mikro.py` (aliran tick, posisi rentang, angka bulat): tidak ada yang baru. `research/pra_per_berita.py`
+  (79 aturan per berita, FRED rilis pertama `fred_<seri>_awal.json` via output_type=4 — fungsi `fred()` lama memberi
+  tanggal terbit TERLALU AWAL untuk data bulanan yang terbit bulan berikutnya, mis. TOTALSA/Dallas): angka 64–70% tetapi
+  emas 51–57%; lolos hanya ISM Jasa. `pra_aset.json["per_berita"]` (ISM Jasa, pengangguran kalender BLS 5 pekan) →
+  aplikasi 4.30 daftar 🎯 berita mendatang di bawah XAU (`_pra_aset.daftar`, `persiapan.pra_daftar`). Jangan tampilkan
+  angka > yang teruji; tanpa petunjuk = "≈ 50:50".
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

@@ -182,3 +182,40 @@ def test_tren_emas_4_jam_searah_berlawanan(monkeypatch):
     jauh = {"mendatang": [{"title": "Retail Sales m/m", "time": "2026-10-15T14:00:00+00:00"}]}
     A.attach(jauh, now, lambda sisa: t)
     assert "tren" not in jauh["pra"] and "≤ 6 jam" in jauh["pra"]["tren_nanti"]
+
+
+def test_daftar_berita_mendatang_di_bawah_xau(monkeypatch):
+    """🎯 baris per berita mendatang: "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi"; NFP = kalender survei BLS;
+    tanpa petunjuk → ≈ 50:50; tren 4 jam hanya untuk berita terdekat ≤ 6 jam."""
+    from datetime import timedelta
+
+    import _pra_aset as A
+    h = lambda b: {"exness": {"n": 20, "benar": b, "lama": None, "baru": b}, "konsisten": False}  # noqa: E731
+    monkeypatch.setattr(A, "DATA", {
+        "xau_arah": {"CPI • Kalshi & kejutan lalu sepakat": {"h": {"1|0": h(45.0), "2|0": h(65.0), "3|0": h(65.0),
+                                                                   "5|0": h(65.0), "10|0": h(70.0)}}},
+        "per_berita": {"Unemployment Rate|PK5": {"arah": 1.0, "benar": 57.3, "lama": 57.5, "baru": 57.0, "n": 164,
+                                                  "kejutan": 55.0,
+                                                  "tren_searah": {"benar": 61.7, "lama": 60.6, "baru": 64.1, "n": 75},
+                                                  "tren_lawan": {"benar": 53.0, "lama": 54.3, "baru": 50.9, "n": 74}}},
+        "tren": {"tanpa": {"SEMUA": {str(k): {"exness": {"n": 1400, "benar": 55.0}} for k in (2, 3, 5, 10)}}}})
+    now = datetime(2026, 10, 10, 11, 0, tzinfo=timezone.utc)
+    b = {"arah_emas": "turun", "tebak": {"K": 1.0, "P": 1.0}, "kalshi_sepakat": True, "sepakat_lain": []}
+    prep = {"mendatang": [{"title": "CPI m/m", "time": "2026-10-14T12:30:00+00:00", "petunjuk_teruji": b},
+                          {"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00"},
+                          {"title": "Retail Sales m/m", "time": "2026-10-16T12:30:00+00:00"},
+                          {"title": "Building Permits", "time": "2026-10-17T12:30:00+00:00"},
+                          {"title": "Non-Farm Employment Change", "time": "2026-11-06T13:30:00+00:00"}]}
+    d = A.daftar(prep, now)
+    assert [r["nama"] for r in d] == ["CPI", "Retail Sales", "NFP"]
+    assert d[0]["teks"] == "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi"
+    assert d[1]["teks"].startswith("Retail Sales • ≈ 50:50") and d[1]["status"] == "acak"
+    assert d[2]["teks"] == "NFP • peluang emas naik 57% ⚠️ • 27 hari lagi" and "5 pekan" in d[2]["bukti"]
+    assert A.pekan5(datetime(2026, 11, 6)) and not A.pekan5(datetime(2026, 10, 2))
+    dekat = now + timedelta(days=27, hours=1)                       # NFP 1,5 jam lagi + tren searah / berlawanan
+    for g4, harap in ((5.0, "NFP • peluang emas naik 62% (+ tren searah) ⚠️ • 1 jam lagi"),
+                      (-5.0, "NFP • ≈ 50:50 (petunjuk & tren 4 jam berlawanan) • 1 jam lagi")):
+        t = {"g4": g4, "harga": 1.0, "acuan": 1.0, "at": "2026-11-06T12:00:00+00:00"}
+        r = A.daftar(prep, dekat, lambda s: t)[0]
+        assert r["teks"] == harap and r["tren"]["hubungan"] in ("sepakat", "berlawanan")
+    assert A.sisa_teks(timedelta(minutes=12)) == "12 mnt lagi" and A.sisa_teks(timedelta(hours=5)) == "5 jam lagi"

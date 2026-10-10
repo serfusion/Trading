@@ -1,0 +1,128 @@
+# 🎯 Petunjuk khusus per berita → arah XAU 2–10 detik setelah rilis
+python -m research.pra_per_berita        → docs/eksternal/hasil_pra_per_berita.txt + cloud/api/pra_aset.json["per_berita"]
+
+
+## Retail Sales m/m
+      P     (searah) kejutan 50% (n 159, LAMA 50 BARU 51) → EMAS 2–10 dtk 51.2% (n 159; LAMA 53% n 109, BARU 48% n 50; p 0.437; Duka 51%)
+      -P    (searah) kejutan 50% (n 159, LAMA 50 BARU 49) → EMAS 2–10 dtk 48.8% (n 159; LAMA 47% n 109, BARU 52% n 50; p 0.624; Duka 49%)
+      ANK   (searah) kejutan 59% (n 159, LAMA 56 BARU 67) → EMAS 2–10 dtk 54.3% (n 160; LAMA 50% n 112, BARU 64% n 48; p 0.192; Duka 53%)
+      AUTO  (searah) kejutan 58% (n 127, LAMA 62 BARU 50) → EMAS 2–10 dtk 56.4% (n 134; LAMA 57% n 92, BARU 56% n 42; p 0.097; Duka 56%)
+      BBM   (searah) kejutan 56% (n 176, LAMA 57 BARU 52) → EMAS 2–10 dtk 52.7% (n 176; LAMA 53% n 125, BARU 53% n 51; p 0.470; Duka 52%)
+
+## Core Retail Sales m/m
+      P     (dibalik) kejutan 55% (n 148, LAMA 57 BARU 50) → EMAS 2–10 dtk 48.7% (n 156; LAMA 52% n 112, BARU 41% n 44; p 0.811; Duka 49%)
+      -P    (searah) kejutan 55% (n 148, LAMA 57 BARU 50) → EMAS 2–10 dtk 48.7% (n 156; LAMA 52% n 112, BARU 41% n 44; p 0.811; Duka 49%)
+      ANK   (searah) kejutan 54% (n 154, LAMA 57 BARU 46) → EMAS 2–10 dtk 51.1% (n 158; LAMA 54% n 113, BARU 44% n 45; p 0.532; Duka 50%)
+      AUTO  (searah) kejutan 64% (n 123, LAMA 63 BARU 68) → EMAS 2–10 dtk 55.8% (n 135; LAMA 56% n 93, BARU 56% n 42; p 0.114; Duka 55%)
+      BBM   (searah) kejutan 57% (n 169, LAMA 58 BARU 55) → EMAS 2–10 dtk 52.8% (n 177; LAMA 53% n 126, BARU 53% n 51; p 0.440; Duka 52%)
+
+## ISM Manufacturing PMI
+      P     (dibalik) kejutan 50% (n 186, LAMA 51 BARU 48) → EMAS 2–10 dtk 53.9% (n 123; LAMA 56% n 71, BARU 51% n 52; p 0.294; Duka 44%)
+      -P    (searah) kejutan 50% (n 186, LAMA 51 BARU 48) → EMAS 2–10 dtk 53.9% (n 123; LAMA 56% n 71, BARU 51% n 52; p 0.294; Duka 44%)
+      ANK   (searah) kejutan 52% (n 183, LAMA 56 BARU 40) → EMAS 2–10 dtk 47.9% (n 120; LAMA 54% n 70, BARU 39% n 50; p 0.915; Duka 41%)
+      FLASH (searah) kejutan 48% (n 40, LAMA 25 BARU 53) → EMAS 2–10 dtk 49.4% (n 40; LAMA 28% n 8, BARU 55% n 32; p 0.318; Duka 56%)
+      REG   (searah) kejutan 54% (n 123, LAMA 61 BARU 43) → EMAS 2–10 dtk 56.3% (n 111; LAMA 63% n 60, BARU 48% n 51; p 0.092; Duka 54%)
+
+## ISM Services PMI
+   ✅ P     (dibalik) kejutan 65% (n 172, LAMA 63 BARU 70) → EMAS 2–10 dtk 62.2% (n 113; LAMA 59% n 66, BARU 66% n 47; p 0.012; Duka 64%)
+   ✅ -P    (searah) kejutan 65% (n 172, LAMA 63 BARU 70) → EMAS 2–10 dtk 62.2% (n 113; LAMA 59% n 66, BARU 66% n 47; p 0.012; Duka 64%)
+      ANK   (searah) kejutan 57% (n 177, LAMA 60 BARU 49) → EMAS 2–10 dtk 57.3% (n 117; LAMA 65% n 69, BARU 46% n 48; p 0.069; Duka 56%)
+      FLASH (searah) kejutan 53% (n 38, LAMA 100 BARU 51) → EMAS 2–10 dtk 46.2% (n 39; LAMA 100% n 1, BARU 45% n 38; p 0.739; Duka 50%)
+
+## Core PCE Price Index m/m
+      P     (searah) kejutan 0% (n 5, LAMA nan BARU 0) → EMAS 2–10 dtk 53.9% (n 19; LAMA 0% n 1, BARU 57% n 18; p 0.500; Duka 54%)
+      -P    (searah) kejutan 100% (n 5, LAMA nan BARU 100) → EMAS 2–10 dtk 46.1% (n 19; LAMA 100% n 1, BARU 43% n 18; p 0.676; Duka 46%)
+      ANK   (searah) kejutan 54% (n 13, LAMA 0 BARU 58) → EMAS 2–10 dtk 46.7% (n 30; LAMA 0% n 2, BARU 50% n 28; p 0.708; Duka 48%)
+      CPIC  (searah) kejutan 43% (n 14, LAMA 0 BARU 46) → EMAS 2–10 dtk 43.9% (n 33; LAMA 0% n 2, BARU 47% n 31; p 0.919; Duka 43%)
+      PPIC  (searah) kejutan 50% (n 8, LAMA nan BARU 50) → EMAS 2–10 dtk 51.0% (n 25; LAMA nan% n 0, BARU 51% n 25; p 0.885; Duka 54%)
+      GAB   (searah) kejutan 50% (n 16, LAMA 0 BARU 53) → EMAS 2–10 dtk 45.1% (n 41; LAMA 0% n 2, BARU 47% n 39; p 0.970; Duka 46%)
+
+## Average Hourly Earnings m/m
+      P     (dibalik) kejutan 56% (n 68, LAMA 61 BARU 46) → EMAS 2–10 dtk 53.8% (n 93; LAMA 58% n 57, BARU 47% n 36; p 0.267; Duka 53%)
+      -P    (searah) kejutan 56% (n 68, LAMA 61 BARU 46) → EMAS 2–10 dtk 53.8% (n 93; LAMA 58% n 57, BARU 47% n 36; p 0.267; Duka 53%)
+      ANK   (searah) kejutan 55% (n 69, LAMA 55 BARU 55) → EMAS 2–10 dtk 52.9% (n 96; LAMA 57% n 62, BARU 46% n 34; p 0.459; Duka 52%)
+      K12   (searah) kejutan 64% (n 95, LAMA 60 BARU 70) → EMAS 2–10 dtk 50.6% (n 125; LAMA 46% n 75, BARU 58% n 50; p 0.571; Duka 50%)
+      PK5   (searah) kejutan 55% (n 95, LAMA 53 BARU 57) → EMAS 2–10 dtk 44.2% (n 125; LAMA 45% n 75, BARU 43% n 50; p 0.963; Duka 43%)
+
+## Non-Farm Employment Change
+      P     (dibalik) kejutan 51% (n 188, LAMA 56 BARU 37) → EMAS 2–10 dtk 52.9% (n 162; LAMA 57% n 113, BARU 44% n 49; p 0.091; Duka 55%)
+      -P    (searah) kejutan 51% (n 188, LAMA 56 BARU 37) → EMAS 2–10 dtk 52.9% (n 162; LAMA 57% n 113, BARU 44% n 49; p 0.091; Duka 55%)
+      ANK   (searah) kejutan 50% (n 194, LAMA 55 BARU 35) → EMAS 2–10 dtk 52.4% (n 164; LAMA 57% n 114, BARU 42% n 50; p 0.069; Duka 54%)
+      K12   (searah) kejutan 54% (n 194, LAMA 52 BARU 61) → EMAS 2–10 dtk 50.9% (n 164; LAMA 48% n 114, BARU 58% n 50; p 0.469; Duka 51%)
+      PK5   (searah) kejutan 48% (n 194, LAMA 50 BARU 43) → EMAS 2–10 dtk 42.7% (n 164; LAMA 43% n 114, BARU 43% n 50; p 0.992; Duka 42%)
+
+## Unemployment Claims
+      P     (searah) kejutan 53% (n 530, LAMA 51 BARU 59) → EMAS 2–10 dtk 53.1% (n 327; LAMA 50% n 199, BARU 58% n 128; p 0.112; Duka 51%)
+      -P    (dibalik) kejutan 53% (n 530, LAMA 51 BARU 59) → EMAS 2–10 dtk 53.1% (n 327; LAMA 50% n 199, BARU 58% n 128; p 0.112; Duka 51%)
+      ANK   (dibalik) kejutan 54% (n 529, LAMA 55 BARU 51) → EMAS 2–10 dtk 52.5% (n 324; LAMA 52% n 197, BARU 53% n 127; p 0.391; Duka 54%)
+
+## Prelim UoM Consumer Sentiment
+      P     (searah) kejutan 52% (n 116, LAMA 51 BARU 55) → EMAS 2–10 dtk 49.2% (n 49; LAMA 48% n 19, BARU 50% n 30; p 0.716; Duka nan%)
+      -P    (dibalik) kejutan 52% (n 116, LAMA 51 BARU 55) → EMAS 2–10 dtk 49.2% (n 49; LAMA 48% n 19, BARU 50% n 30; p 0.716; Duka nan%)
+      ANK   (dibalik) kejutan 45% (n 119, LAMA 51 BARU 28) → EMAS 2–10 dtk 60.2% (n 53; LAMA 48% n 20, BARU 67% n 33; p 0.136; Duka 100%)
+      SAHAM (dibalik) kejutan 48% (n 123, LAMA 51 BARU 41) → EMAS 2–10 dtk 57.5% (n 55; LAMA 54% n 20, BARU 59% n 35; p 0.140; Duka 100%)
+      BBM   (searah) kejutan 54% (n 91, LAMA 54 BARU 52) → EMAS 2–10 dtk 51.6% (n 38; LAMA 53% n 15, BARU 51% n 23; p 0.564; Duka nan%)
+
+## CB Consumer Confidence
+      P     (dibalik) kejutan 59% (n 148, LAMA 62 BARU 48) → EMAS 2–10 dtk 51.9% (n 79; LAMA 52% n 50, BARU 52% n 29; p 0.411; Duka 33%)
+      -P    (searah) kejutan 59% (n 148, LAMA 62 BARU 48) → EMAS 2–10 dtk 51.9% (n 79; LAMA 52% n 50, BARU 52% n 29; p 0.411; Duka 33%)
+      ANK   (searah) kejutan 56% (n 151, LAMA 57 BARU 48) → EMAS 2–10 dtk 50.9% (n 83; LAMA 50% n 52, BARU 52% n 31; p 0.330; Duka 67%)
+      SAHAM (dibalik) kejutan 51% (n 154, LAMA 54 BARU 42) → EMAS 2–10 dtk 56.2% (n 84; LAMA 54% n 53, BARU 60% n 31; p 0.223; Duka 67%)
+      BBM   (dibalik) kejutan 52% (n 153, LAMA 58 BARU 26) → EMAS 2–10 dtk 50.3% (n 84; LAMA 52% n 53, BARU 47% n 31; p 0.457; Duka 33%)
+      UM    (dibalik) kejutan 53% (n 110, LAMA 52 BARU 56) → EMAS 2–10 dtk 52.9% (n 43; LAMA 62% n 18, BARU 46% n 25; p 0.500; Duka 0%)
+
+## ADP Non-Farm Employment Change
+      P     (searah) kejutan 52% (n 167, LAMA 54 BARU 47) → EMAS 2–10 dtk 49.6% (n 159; LAMA 53% n 111, BARU 42% n 48; p 0.376; Duka 50%)
+      -P    (dibalik) kejutan 52% (n 167, LAMA 54 BARU 47) → EMAS 2–10 dtk 49.6% (n 159; LAMA 53% n 111, BARU 42% n 48; p 0.376; Duka 50%)
+      ANK   (dibalik) kejutan 55% (n 173, LAMA 58 BARU 49) → EMAS 2–10 dtk 54.8% (n 164; LAMA 59% n 114, BARU 46% n 50; p 0.069; Duka 56%)
+      KLM   (searah) kejutan 53% (n 99, LAMA 58 BARU 38) → EMAS 2–10 dtk 46.3% (n 93; LAMA 50% n 67, BARU 38% n 26; p 0.797; Duka 46%)
+
+## Core CPI m/m
+      P     (searah) kejutan 67% (n 70, LAMA 67 BARU 68) → EMAS 2–10 dtk 55.4% (n 103; LAMA 54% n 71, BARU 59% n 32; p 0.215; Duka 57%)
+      -P    (dibalik) kejutan 67% (n 70, LAMA 67 BARU 68) → EMAS 2–10 dtk 55.4% (n 103; LAMA 54% n 71, BARU 59% n 32; p 0.215; Duka 57%)
+      ANK   (dibalik) kejutan 67% (n 67, LAMA 69 BARU 63) → EMAS 2–10 dtk 53.1% (n 93; LAMA 54% n 64, BARU 50% n 29; p 0.267; Duka 54%)
+      Q1    (searah) kejutan 55% (n 31, LAMA 50 BARU 67) → EMAS 2–10 dtk 53.8% (n 40; LAMA 49% n 28, BARU 65% n 12; p 0.563; Duka 54%)
+
+## CPI m/m
+      P     (searah) kejutan 61% (n 54, LAMA 59 BARU 64) → EMAS 2–10 dtk 57.1% (n 76; LAMA 54% n 43, BARU 61% n 33; p 0.151; Duka 58%)
+      -P    (dibalik) kejutan 61% (n 54, LAMA 59 BARU 64) → EMAS 2–10 dtk 57.1% (n 76; LAMA 54% n 43, BARU 61% n 33; p 0.151; Duka 58%)
+      ANK   (dibalik) kejutan 52% (n 66, LAMA 53 BARU 50) → EMAS 2–10 dtk 54.5% (n 105; LAMA 53% n 64, BARU 57% n 41; p 0.165; Duka 53%)
+      Q1    (searah) kejutan 52% (n 21, LAMA 50 BARU 57) → EMAS 2–10 dtk 54.8% (n 31; LAMA 49% n 19, BARU 65% n 12; p 0.500; Duka 56%)
+
+## PPI m/m
+      P     (searah) kejutan 45% (n 118, LAMA 52 BARU 30) → EMAS 2–10 dtk 48.5% (n 129; LAMA 52% n 87, BARU 40% n 42; p 0.570; Duka 47%)
+      -P    (dibalik) kejutan 45% (n 118, LAMA 52 BARU 30) → EMAS 2–10 dtk 48.5% (n 129; LAMA 52% n 87, BARU 40% n 42; p 0.570; Duka 47%)
+      ANK   (searah) kejutan 56% (n 122, LAMA 52 BARU 65) → EMAS 2–10 dtk 53.8% (n 134; LAMA 52% n 93, BARU 59% n 41; p 0.273; Duka 55%)
+
+## Core PPI m/m
+      P     (searah) kejutan 44% (n 18, LAMA nan BARU 44) → EMAS 2–10 dtk 52.1% (n 24; LAMA nan% n 0, BARU 52% n 24; p 0.581; Duka 52%)
+      -P    (searah) kejutan 56% (n 18, LAMA nan BARU 56) → EMAS 2–10 dtk 47.9% (n 24; LAMA nan% n 0, BARU 48% n 24; p 0.581; Duka 48%)
+      ANK   (searah) kejutan 55% (n 22, LAMA nan BARU 55) → EMAS 2–10 dtk 54.2% (n 30; LAMA nan% n 0, BARU 54% n 30; p 0.292; Duka 53%)
+
+## Unemployment Rate
+      P     (searah) kejutan 57% (n 109, LAMA 59 BARU 52) → EMAS 2–10 dtk 47.0% (n 124; LAMA 52% n 84, BARU 36% n 40; p 0.790; Duka 46%)
+      -P    (dibalik) kejutan 57% (n 109, LAMA 59 BARU 52) → EMAS 2–10 dtk 47.0% (n 124; LAMA 52% n 84, BARU 36% n 40; p 0.790; Duka 46%)
+      ANK   (dibalik) kejutan 51% (n 65, LAMA 52 BARU 47) → EMAS 2–10 dtk 59.9% (n 68; LAMA 57% n 46, BARU 66% n 22; p 0.019; Duka 58%)
+      K12   (searah) kejutan 51% (n 149, LAMA 51 BARU 50) → EMAS 2–10 dtk 49.1% (n 164; LAMA 52% n 114, BARU 42% n 50; p 0.593; Duka 49%)
+      PK5   (searah) kejutan 55% (n 149, LAMA 56 BARU 52) → EMAS 2–10 dtk 57.3% (n 164; LAMA 57% n 114, BARU 57% n 50; p 0.012; Duka 58%)
+
+## JOLTS Job Openings
+      P     (searah) kejutan 45% (n 49, LAMA 25 BARU 47) → EMAS 2–10 dtk 51.8% (n 50; LAMA 60% n 4, BARU 51% n 46; p 0.664; Duka 48%)
+      -P    (searah) kejutan 55% (n 49, LAMA 75 BARU 53) → EMAS 2–10 dtk 48.2% (n 50; LAMA 40% n 4, BARU 49% n 46; p 0.444; Duka 52%)
+      ANK   (searah) kejutan 34% (n 53, LAMA 40 BARU 33) → EMAS 2–10 dtk 36.3% (n 54; LAMA 11% n 5, BARU 39% n 49; p 0.990; Duka 28%)
+
+## Advance GDP q/q
+      ANK   (searah) kejutan 61% (n 59, LAMA 57 BARU 73) → EMAS 2–10 dtk 47.9% (n 55; LAMA 50% n 40, BARU 43% n 15; p 0.606; Duka 47%)
+
+## CPI y/y
+      P     (searah) kejutan 63% (n 84, LAMA 60 BARU 70) → EMAS 2–10 dtk 53.7% (n 114; LAMA 52% n 77, BARU 56% n 37; p 0.463; Duka 54%)
+      -P    (dibalik) kejutan 63% (n 84, LAMA 60 BARU 70) → EMAS 2–10 dtk 53.7% (n 114; LAMA 52% n 77, BARU 56% n 37; p 0.463; Duka 54%)
+      ANK   (searah) kejutan 62% (n 102, LAMA 62 BARU 60) → EMAS 2–10 dtk 48.0% (n 147; LAMA 52% n 105, BARU 38% n 42; p 0.690; Duka 50%)
+
+## LOLOS: 2 dari 79 aturan
+   ISM Services PMI • P: emas 62.2% (LAMA 59%, BARU 66%, n 113)
+   ISM Services PMI • -P: emas 62.2% (LAMA 59%, BARU 66%, n 113)
+
+## UJI ACAK (permutasi 200×): lolos karena kebetulan rata-rata 1.25, 95% ≤ 4; sungguhan 2 → peluang kebetulan ≥ 2: 34%
+   → disimpan ISM Services PMI|-P: {'arah': 1.0, 'benar': 62.2, 'lama': 59.5, 'baru': 66.0, 'n': 113, 'p': 0.0118, 'lolos': True, 'kejutan': 65.1, 'tren_searah': {'benar': 69.0, 'lama': 69.6, 'baru': 68.3, 'n': 63}, 'tren_lawan': {'benar': 56.4, 'lama': 51.0, 'baru': 63.1, 'n': 47}}
+   → disimpan Unemployment Rate|PK5: {'arah': 1.0, 'benar': 57.3, 'lama': 57.5, 'baru': 57.0, 'n': 164, 'p': 0.0116, 'lolos': False, 'kejutan': 55.0, 'tren_searah': {'benar': 61.7, 'lama': 60.6, 'baru': 64.1, 'n': 75}, 'tren_lawan': {'benar': 53.0, 'lama': 54.3, 'baru': 50.9, 'n': 74}}

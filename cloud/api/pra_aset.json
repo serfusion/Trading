@@ -16266,5 +16266,51 @@
     }
    }
   }
+ },
+ "per_berita": {
+  "ISM Services PMI|-P": {
+   "arah": 1.0,
+   "benar": 62.2,
+   "lama": 59.5,
+   "baru": 66.0,
+   "n": 113,
+   "p": 0.0118,
+   "lolos": true,
+   "kejutan": 65.1,
+   "tren_searah": {
+    "benar": 69.0,
+    "lama": 69.6,
+    "baru": 68.3,
+    "n": 63
+   },
+   "tren_lawan": {
+    "benar": 56.4,
+    "lama": 51.0,
+    "baru": 63.1,
+    "n": 47
+   }
+  },
+  "Unemployment Rate|PK5": {
+   "arah": 1.0,
+   "benar": 57.3,
+   "lama": 57.5,
+   "baru": 57.0,
+   "n": 164,
+   "p": 0.0116,
+   "lolos": false,
+   "kejutan": 55.0,
+   "tren_searah": {
+    "benar": 61.7,
+    "lama": 60.6,
+    "baru": 64.1,
+    "n": 75
+   },
+   "tren_lawan": {
+    "benar": 53.0,
+    "lama": 54.3,
+    "baru": 50.9,
+    "n": 74
+   }
+  }
  }
 }
