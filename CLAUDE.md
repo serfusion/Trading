@@ -442,6 +442,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   muncul ≤ 6 jam sebelum rilis"), kartu kembar `ganda` disembunyikan. Jangan kembalikan judul "1 jam" ke tab News.
   + arah menit: "1–5 mnt: ikuti arah detik 2 (76%)" (`research/pra_menit.py` → pra_aset.json["menit"], `menit_info`):
   gerak detik 2 ≥ $0,50 → arah sama 5 mnt 79% (lama & baru), 1 jam 66%.
+- 10 Okt (keluhan "singkat jelas padat, langsung ke intinya"; cloud saja, aplikasi tetap 4.33): `_pra_aset.satu` baris utama
+  "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 3 hari lagi"; detail (ketuk) 2 baris: "⚠️ Belum terbukti • dulu 58% • sejak Okt 2021 53%
+  • dasar: minyak WTI" + "Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (76%)". Jangan kembalikan
+  daftar angka per detik/per jangka ke detail.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

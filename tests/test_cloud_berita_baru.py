@@ -284,7 +284,7 @@ def test_jangka_berlaku_sampai_dan_setelahnya(monkeypatch):
     assert y["teks_sampai"] == "1–10 dtk" and y["teks_setelah"] == "setelah 30 dtk ▲ NAIK 60%"
     r = A.satu({"nama": "CPI", "arah": "turun", "persen": 66, "status": "belum terbukti", "sisa": "4 hari lagi",
                 "dasar": "X", "bukti": "b"})
-    assert r["teks"] == "CPI ▼ TURUN 66% (s/d 1 mnt) ⚠️ • setelah 3 mnt ≈ 50:50 • 4 hari lagi"
+    assert r["teks"] == "CPI ▼ TURUN 66% (s/d 1 mnt) ⚠️ • 4 hari lagi"            # 10 Okt: singkat, tanpa "setelah"
 
 
 def test_jangka_data_asli_cpi():
@@ -328,9 +328,25 @@ def test_arah_setelah_beberapa_menit_ikuti_detik2():
     import _pra_aset as A
     mi = A.menit_info("CPI m/m")
     assert mi and mi["grup"] == "CPI" and mi["teks"].startswith("1–5 mnt: ikuti arah detik 2 (")
-    r = A.satu({"title": "CPI m/m", "nama": "CPI", "arah": "turun", "persen": 56, "status": "belum terbukti",
-                "sisa": "4 hari lagi", "dasar": "CPI • minyak WTI saja", "bukti": "x"})
-    assert r["teks"].startswith("CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 1–5 mnt: ikuti arah detik 2 (")
-    assert r["teks"].endswith("• 4 hari lagi") and "1 jam" in r["bukti"]
+    assert mi["singkat"].startswith("Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
     fed = A.menit_info("Federal Funds Rate")
     assert fed and fed["grup"] == "FOMC"
+
+
+def test_satu_singkat_langsung_ke_inti():
+    """Screenshot 10 Okt ("singkat jelas padat, langsung ke intinya"): baris utama hanya arah + jangka + kapan; detail
+    2 baris (status, LAMA/BARU, dasar; aturan setelah rilis) tanpa daftar angka per detik/per jangka. Data asli."""
+    import _pra_aset as A
+    c = {"title": "CPI m/m", "time": "2026-10-14T12:30:00+00:00",
+         "petunjuk_teruji": {"arah_emas": "turun", "tebak": {"WTI": 1.0}, "sepakat_lain": []}}
+    g = A.tebak_kartu(c)
+    assert g["persen"] == 56 and (g["lama"], g["baru"]) == (58, 53)
+    r = A.satu({"title": "CPI m/m", "nama": "CPI", "sisa": "3 hari lagi", **g})
+    assert r["teks"] == "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 3 hari lagi"
+    baris = r["bukti"].split("\n")
+    assert baris[0] == "⚠️ Belum terbukti • dulu 58% • sejak Okt 2021 53% • dasar: minyak WTI"
+    assert baris[1].startswith("Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
+    assert len(baris) == 2 and "per jangka" not in r["bukti"] and "lama/baru" not in r["bukti"]
+    kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi"})
+    assert kosong["teks"] == "PPI • arah muncul ≤ 6 jam sebelum rilis • 5 hari lagi"
+    assert kosong["bukti"].count("\n") == 1
