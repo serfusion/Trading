@@ -75,6 +75,21 @@ rilis — reaksi ditentukan oleh angka yang baru keluar, dan konsensus pasar sud
 Peluang terbaik: berita berpetunjuk teruji yang SEARAH dengan tren emas 4 jam (63–67%, ISM Jasa ±75%); bila berlawanan
 atau tanpa petunjuk ≈ 50–55%. Hasil lengkap: `docs/eksternal/hasil_pra_xau_semua.txt` & `hasil_pra_xau_tren.txt`.
 
+## D. "Coba lagi" — metode tambahan (10 Okt sore — `research/pra_xau_mikro.py`)
+| Metode (≤ 1 dtk sebelum rilis) | BARU 1 / 3 / 10 dtk | Catatan |
+|---|---|---|
+| Aliran tick naik vs turun 10 / 30 dtk terakhir | 49–52% | ≈ lempar koin |
+| Gerak 1 / 3 detik terakhir | 47–52% | ≈ lempar koin |
+| Posisi harga di rentang 60 menit (atas/bawah 25%), lanjut atau berbalik | 50–54% | lemah |
+| Magnet angka bulat $10 | ≈ 50% | |
+| Pasar "menahan napas" (tick sepi) × tren | n 25–45 | terlalu sedikit |
+| Rezim: arah mayoritas 10–40 rilis terakhir | 46–53% | ≈ lempar koin |
+Uji acak: lolos 2 vs kebetulan 1,7 → tidak ada yang baru.
+
+Konfirmasi aturan yang sudah dipasang (dosis–respons, bukan satu jendela kebetulan): jumlah ukuran tren (4 jam, 24 jam,
+EMA 50 H1) yang SEARAH dengan petunjuk berita → benar 2–10 dtk: 0 dari 3 = 41–50%, 1 = 52–57%, 2 = 62–70%, 3 = 64–70%
+(n 84; lama 63–71%, baru 63–70%). Berita tanpa petunjuk + 3 tren searah: 56–57% (baru 52–53%) → tetap lemah.
+
 ## Di aplikasi (4.27–4.28)
 Satu baris di bawah tile XAU: arah tebakan + persen per detik (✅/⚠️/⚪) dan baris 📌 kepastian detik 2 untuk berita
 berikutnya (cloud `_pra_aset.py`; PPI memakai kejutan CPI yang baru keluar lewat memori `_petunjuk`).
