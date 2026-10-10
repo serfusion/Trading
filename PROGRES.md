@@ -263,3 +263,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   lagi'" → `research/pra_per_berita.py` (79 aturan, docs/XAU_DETIK.md bagian E): tebakan angka sampai 64–70% (upah per jam,
   core retail, core CPI) tetapi arah emas 1–10 dtk 51–57%; > 65% hanya ISM Jasa + tren searah (69%). Aplikasi 4.30: daftar
   berita mendatang (maks 5) dengan persen teruji / "≈ 50:50".
+- Pengguna: "cari sampai dalam, seluruh dunia, statement orang penting" → `research/pernyataan_uji.py`: 59.849 unggahan Trump
+  (Twitter 2017–2021 + Truth Social 2022–2026, 2022–2024 sebagai pembanding) & 1.344 pidato Fed → arah emas 48–58%, tidak
+  stabil; nowcast Cleveland + kejutan lalu (CPI) 67% n 21 tidak stabil. Tidak ada yang dipasang (docs/XAU_DETIK.md bagian F).

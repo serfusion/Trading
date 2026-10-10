@@ -112,6 +112,27 @@ Hasil jujur — tebakan ANGKA sering bagus, tetapi arah EMAS 1–10 detik tidak 
 Lolos penuh hanya ISM Jasa (2 dari 79; kebetulan rata-rata 1,25 → keluarga uji tidak lebih baik dari acak). **Tidak ada
 berita selain ISM Jasa yang terbukti di atas 65% untuk arah emas 1–10 detik**, sekalipun dengan tren 4 jam.
 
+## F. Pernyataan orang penting & sumber dunia (10 Okt sore — `research/pernyataan_uji.py`)
+Permintaan: "cari sampai dalam, seluruh dunia, juga statement orang penting/petinggi". Hanya sumber yang punya ARSIP
+lengkap yang bisa diuji (tanpa arsip = tidak bisa dibuktikan):
+| Sumber | Aturan (ditetapkan sebelum melihat hasil) | Arah emas 2–10 dtk |
+|---|---|---|
+| 23.075 tweet Trump masa jabatan 1 (2017–2021) | unggahan bertopik ekonomi 16 jam sebelum rilis, nada positif → data kuat → emas turun | 53% (n 125) |
+| 36.774 Truth Social 2022–2024 (bukan presiden = pembanding) | sama | 48% (n 96) |
+| Truth Social masa jabatan 2 (2025–2026) | sama | 49% (n 53) |
+| Unggahan yang menyebut "numbers / jobs report / looking forward" | positif → emas turun | 56–58% (n 12–21; contoh terkenal 1 Jun 2018 benar) |
+| Unggahan soal harga/inflasi sebelum CPI/PPI | positif → angka di bawah → emas naik | n 4–9 (terlalu sedikit) |
+| Unggahan menyerang Fed/suku bunga | arah dari masa jabatan 1 | 56% → 36–40% (gagal) |
+| 1.344 pidato pejabat Fed (2006–2026), nada hawkish/dovish 7 hari sebelum rilis | arah dipilih di LAMA | semua 52% → 49%; per grup 31–59% |
+| Nowcast inflasi Cleveland Fed & kejutan lalu sepakat (CPI) | searah | 67% (n 21) tetapi lama 44% / baru 83% — tidak stabil |
+Tidak bisa diuji (tanpa arsip/terblokir): GDELT (429), Reddit (403), BLS (403), StockTwits (hanya pesan terbaru),
+pernyataan TV pejabat Gedung Putih, Truflation, Revelio, Chicago Fed real-time (riwayat < 1 tahun).
+
+Kesimpulan jujur: pernyataan orang penting TIDAK menaikkan ketepatan arah emas 1–10 detik. Angka berita dirahasiakan
+sampai detik rilis (hanya Presiden/CEA menerimanya sehari sebelumnya, dan petunjuk seperti 1 Jun 2018 sangat jarang);
+konsensus pasar sudah memuat informasi publik. Yang stabil > 65% tetap hanya ISM Jasa + tren searah (69%) dan, SETELAH
+entry, kepastian detik 2 (gerak ≥ $0,50 → arah sama di detik 10 pada 92% rilis).
+
 ## Di aplikasi 4.30 — daftar berita mendatang di bawah XAU
 Satu baris per berita (maks 5, ≤ 31 hari): "CPI • peluang emas turun 66% ⚠️ • 4 hari lagi" (sisa waktu dihitung di HP).
 Persen = ketepatan aturan yang dipakai (rata-rata detik 2/3/5/10): petunjuk teruji (`xau_arah`), hari NFP = kalender

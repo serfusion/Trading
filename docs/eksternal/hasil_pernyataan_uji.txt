@@ -1,0 +1,81 @@
+# 🗣️ Pernyataan Trump sebelum rilis → arah XAU 2–10 dtk
+python -m research.pernyataan_uji         → docs/eksternal/hasil_pernyataan_uji.txt
+
+Unggahan: 59849 (23075 tweet 2017–2021, 36774 Truth Social 2022-02-14 … 2026-10-10)
+Rilis dengan data emas per periode: JABATAN-1 586, PLASEBO 517, JABATAN-2 185
+
+## EKON
+   JABATAN-1  emas 2–10 dtk 52.7% (n 125, p 0.237) • arah kejutan cocok 60% (n 121)
+   PLASEBO    emas 2–10 dtk 48.4% (n 96, p 0.695) • arah kejutan cocok 57% (n 90)
+   JABATAN-2  emas 2–10 dtk 49.1% (n 53, p 0.795) • arah kejutan cocok 52% (n 42)
+
+## HARGA
+   JABATAN-1  emas 2–10 dtk 87.5% (n 4, p 0.062) • arah kejutan cocok 100% (n 3)
+   PLASEBO    emas 2–10 dtk 52.8% (n 9, p 0.500) • arah kejutan cocok 50% (n 6)
+   JABATAN-2  emas 2–10 dtk 72.2% (n 9, p 0.254) • arah kejutan cocok 50% (n 2)
+
+## ANGKA
+   JABATAN-1  emas 2–10 dtk 56.0% (n 21, p 0.332) • arah kejutan cocok 62% (n 21)
+   PLASEBO    emas 2–10 dtk 53.6% (n 7, p 0.500) • arah kejutan cocok 29% (n 7)
+   JABATAN-2  emas 2–10 dtk 58.3% (n 12, p 0.387) • arah kejutan cocok 83% (n 6)
+
+## FED (ada unggahan menyerang Fed/suku bunga di jendela) → arah emas dipilih dari JABATAN-1
+   JABATAN-1  emas NAIK benar 56.0% (n 25, p 0.212)
+   PLASEBO    emas NAIK benar 35.9% (n 23, p 0.895)
+   JABATAN-2  emas NAIK benar 40.2% (n 23, p 0.798)
+
+## Contoh unggahan ANGKA di jendela sebelum rilis
+   2017-07-03 14:00 ISM      tebak emas TURUN | emas 5 dtk -1.81 | 12:10 UTC: At some point the Fake News will be forced to discuss our great jobs numbers, strong economy, success with ISI
+   2017-11-30 13:30 CLAIMS   tebak emas TURUN | emas 5 dtk -0.05 | 13:05 UTC: Stock Market hits new Record High. Confidence and enthusiasm abound. More great numbers coming out!
+   2018-01-05 13:30 NFP      tebak emas TURUN | emas 5 dtk +2.63 | 04:04 UTC: The Fake News Media barely mentions the fact that the Stock Market just hit another New Record and that busine
+   2018-01-05 15:00 ISM      tebak emas TURUN | emas 5 dtk +0.29 | 04:04 UTC: The Fake News Media barely mentions the fact that the Stock Market just hit another New Record and that busine
+   2018-06-01 12:30 NFP      tebak emas TURUN | emas 5 dtk -3.20 | 11:21 UTC: Looking forward to seeing the employment numbers at 8:30 this morning.
+   2018-06-01 14:00 ISM      tebak emas TURUN | emas 5 dtk +0.02 | 11:21 UTC: Looking forward to seeing the employment numbers at 8:30 this morning.
+   2018-06-05 14:00 ISM      tebak emas TURUN | emas 5 dtk -0.25 | 10:51 UTC: The U.S. has an increased economic value of more than 7 Trillion Dollars since the Election. May be the best e
+   2019-03-13 12:30 PPI      tebak emas NAIK | emas 5 dtk +0.02 | 04:27 UTC: So many records being set with respect to our Economy. Unemployment numbers among BEST EVER. A beautiful thing
+   2019-05-15 12:30 RETAIL   tebak emas TURUN | emas 5 dtk +0.85 | 03:48 UTC: RT @EricTrump: Spare me? First you have never created a job in your life. Second, our great city has gone to s
+   2019-07-25 12:30 DURABLE  tebak emas TURUN | emas 5 dtk -0.81 | 12:07 UTC: President Trump’s Approval Rating on Economy is at 52%, a 4 point jump. Fox Poll @foxandfriends  Shouldn’t thi
+   2019-09-05 12:15 ADP      tebak emas TURUN | emas 5 dtk -2.63 | 03:43 UTC: Thank you Terrence. Best Employment Numbers In History for African Americans! https://t.co/YCf2WT4XHt
+   2019-09-06 12:30 NFP      tebak emas TURUN | emas 5 dtk +3.83 | 03:33 UTC: “I think President Trump is set in his ways because he doesn’t see any weakening. I mean, look at the joblessn
+   2019-11-05 15:00 ISM      tebak emas TURUN | emas 5 dtk -2.39 | 12:31 UTC: RT @realDonaldTrump: Virginia has the best Unemployment and Economic numbers in the history of the State. If t
+   2019-12-02 15:00 ISM      tebak emas TURUN | emas 5 dtk +3.27 | 12:35 UTC: “The United States has outperformed the rest of the world in an eye popping fashion. I don’t think we’ve seen 
+   2019-12-06 13:30 NFP      tebak emas TURUN | emas 5 dtk +1.91 | 13:16 UTC: Stock Markets Up Record Numbers. For this year alone, Dow up 18.65%, S&amp;P up 24.36%, Nasdaq Composite up 29
+   2019-12-16 14:45 PMI      tebak emas TURUN | emas 5 dtk -0.10 | 05:05 UTC: ....of the most successful presidencies in history. Just in the last few days, incredible jobs numbers, giant 
+   2019-12-16 14:45 PMI      tebak emas TURUN | emas 5 dtk -0.10 | 05:28 UTC: ....of the most successful presidencies in history. Just in the last few days, incredible jobs numbers, giant 
+   2020-03-11 12:30 CPI      tebak emas NAIK | emas 5 dtk +0.41 | 21:59 UTC: Best unemployment numbers in the history of our Country. Best employment number EVER, almost 160 million peopl
+   2020-04-24 12:30 DURABLE  tebak emas TURUN | emas 5 dtk +0.06 | 04:30 UTC: RT @DonaldJTrumpJr: After the pandemic passes and we can fire up our economic engine I’m truly looking forward
+   2020-07-06 14:00 ISM      tebak emas TURUN | emas 5 dtk -1.79 | 22:34 UTC: New China Virus Cases up (because of massive testing), deaths are down, “low and steady”. The Fake News Media 
+   2020-07-16 12:30 RETAIL   tebak emas TURUN | emas 5 dtk -0.83 | 00:57 UTC: ...campaign. Both were heavily involved in our historic 2016 win, and I look forward to having a big and very 
+   2020-12-04 13:30 NFP      tebak emas TURUN | emas 5 dtk +3.42 | 01:28 UTC: People in Georgia got caught cold bringing in massive numbers of ballots and putting them in “voting” machines
+   2022-08-12 14:00 KONSUMEN tebak emas TURUN | emas 5 dtk -2.39 | 03:40 UTC: …My poll numbers are the strongest they have ever been, fundraising by the Republican Party is breaking all re
+   2023-09-29 12:30 PCE      tebak emas TURUN | emas 5 dtk +0.73 | 00:05 UTC: I’m up 56 Points, so the Debates would seem to be a complete waste of time. I’m also up 10 on Crooked Joe! Wha
+   2023-09-29 14:00 KONSUMEN tebak emas NAIK | emas 5 dtk -0.39 | 00:05 UTC: I’m up 56 Points, so the Debates would seem to be a complete waste of time. I’m also up 10 on Crooked Joe! Wha
+   2023-11-28 15:00 KONSUMEN tebak emas NAIK | emas 5 dtk +0.02 | 01:58 UTC: RT: https://truthsocial.com/users/realDonaldTrump/statuses/111485551621840715FoxNews should look at these numb
+   2024-05-03 14:00 ISM      tebak emas NAIK | emas 5 dtk +10.16 | 12:50 UTC: HORRIBLE JOB NUMBERS JUST ANNOUNCED. A BIG MISS FROM FAKE ESTIMATES. THEY SHOULD HAVE ASKED ME TO GIVE THE FOR
+   2024-08-05 14:00 ISM      tebak emas NAIK | emas 5 dtk -1.32 | 12:12 UTC: STOCK MARKETS ARE CRASHING, JOBS NUMBERS ARE TERRIBLE, WE ARE HEADING TO WORLD WAR lll, AND WE HAVE TWO OF THE
+   2024-09-12 12:30 PPI      tebak emas NAIK | emas 5 dtk +1.15 | 02:25 UTC: RT @dbrodyreportsJUST IN: GREAT news for Trump: he’s killing it with White Evangelical Protestants (his faithf
+   2025-04-16 12:30 RETAIL   tebak emas TURUN | emas 5 dtk -0.93 | 03:31 UTC: The United States is taking in RECORD NUMBERS in Tariffs, with the cost of almost all products going down, inc
+   2025-07-03 12:30 NFP      tebak emas TURUN | emas 5 dtk -9.73 | 22:44 UTC: CONGRATULATIONS AMERICA! The June Border Statistics are in and, once again, they are the LOWEST RECORDED NUMBE
+   2025-07-03 14:00 ISM      tebak emas TURUN | emas 5 dtk -0.29 | 22:44 UTC: CONGRATULATIONS AMERICA! The June Border Statistics are in and, once again, they are the LOWEST RECORDED NUMBE
+   2025-08-12 12:30 CPI      tebak emas NAIK | emas 5 dtk +6.00 | 22:39 UTC: I am pleased to announce that I am nominating Highly Respected Economist, Dr. E.J. Antoni, as the next Commiss
+   2025-11-03 15:00 ISM      tebak emas TURUN | emas 5 dtk +2.43 | 23:54 UTC: Next week's Case on Tariffs is one of the most important in the History of the Country. If a President is not 
+   2025-11-26 13:30 CLAIMS   tebak emas TURUN | emas 5 dtk -2.24 | 12:28 UTC: The Creeps at the Failing New York Times are at it again. I won the 2024 Presidential Election in a Landslide,
+   2025-12-31 13:30 CLAIMS   tebak emas TURUN | emas 5 dtk +0.11 | 13:22 UTC: Paul Perez and the Border Patrol have done a fantastic job, and so proud that more than half are of Hispanic h
+   2026-01-09 13:30 NFP      tebak emas TURUN | emas 5 dtk -0.37 | 23:38 UTC: BREAKING NEWS: Numbers released today show that the United States of America has the lowest Trade Deficit sinc
+   2026-01-09 13:30 NFP      tebak emas TURUN | emas 5 dtk -0.37 | 09:19 UTC: Venezuela is releasing large numbers of political prisoners as a sign of "Seeking Peace." This is a very impor
+   2026-01-09 15:00 KONSUMEN tebak emas TURUN | emas 5 dtk +0.15 | 23:38 UTC: BREAKING NEWS: Numbers released today show that the United States of America has the lowest Trade Deficit sinc
+   2026-01-09 15:00 KONSUMEN tebak emas TURUN | emas 5 dtk +0.15 | 09:19 UTC: Venezuela is releasing large numbers of political prisoners as a sign of "Seeking Peace." This is a very impor
+   2026-01-14 13:30 PPI      tebak emas NAIK | emas 5 dtk -0.61 | 11:57 UTC: RT @realDonaldTrumpBREAKING NEWS: Numbers released today show that the United States of America has the lowest
+   2026-01-30 13:30 PPI      tebak emas NAIK | emas 5 dtk -2.62 | 23:11 UTC: America is setting Records in every way, and our Growth Numbers are among the best ever. The only thing that c
+   2026-07-14 12:30 CPI      tebak emas NAIK | emas 5 dtk +39.75 | 21:05 UTC: It is my Great Honor to endorse Porter County Commissioner, Barb Regnitz, who is running to represent the incr
+
+## Pidato pejabat Fed (1344 pidato 2006–2026): nada 7 hari sebelum rilis
+   terisi 912 rilis (hawkish 146, dovish 766)
+   SEMUA   hawkish → emas NAIK: LAMA 51.9% (n 573) → BARU 48.8% (n 339, p 0.586)
+   CPI     hawkish → emas NAIK: LAMA 50.8% (n 60) → BARU 30.9% (n 34, p 0.988)
+   NFP     hawkish → emas TURUN: LAMA 53.6% (n 62) → BARU 54.6% (n 27, p 0.500)
+   PPI     hawkish → emas TURUN: LAMA 56.5% (n 48) → BARU 57.7% (n 26, p 0.423)
+   RETAIL  hawkish → emas NAIK: LAMA 52.6% (n 44) → BARU 50.0% (n 17, p 0.500)
+   ISM     hawkish → emas NAIK: LAMA 58.6% (n 70) → BARU 58.7% (n 46, p 0.092)
+   PCE     hawkish → emas NAIK: LAMA nan% (n 0) → BARU 45.8% (n 24, p 0.846)
+   CLAIMS  hawkish → emas NAIK: LAMA 57.9% (n 70) → BARU 46.7% (n 45, p 0.617)
