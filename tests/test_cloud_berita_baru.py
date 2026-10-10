@@ -214,8 +214,39 @@ def test_daftar_berita_mendatang_di_bawah_xau(monkeypatch):
     assert A.pekan5(datetime(2026, 11, 6)) and not A.pekan5(datetime(2026, 10, 2))
     dekat = now + timedelta(days=27, hours=1)                       # NFP 1,5 jam lagi + tren searah / berlawanan
     for g4, harap in ((5.0, "NFP • peluang emas naik 62% (+ tren searah) ⚠️ • 1 jam lagi"),
-                      (-5.0, "NFP • ≈ 50:50 (petunjuk & tren 4 jam berlawanan) • 1 jam lagi")):
+                      (-5.0, "NFP • peluang emas naik 53% (tren berlawanan) ⚠️ • 1 jam lagi")):
         t = {"g4": g4, "harga": 1.0, "acuan": 1.0, "at": "2026-11-06T12:00:00+00:00"}
         r = A.daftar(prep, dekat, lambda s: t)[0]
         assert r["teks"] == harap and r["tren"]["hubungan"] in ("sepakat", "berlawanan")
     assert A.sisa_teks(timedelta(minutes=12)) == "12 mnt lagi" and A.sisa_teks(timedelta(hours=5)) == "5 jam lagi"
+
+
+def test_satu_baris_berita_berikutnya_dan_arah_sama_di_semua_kartu(monkeypatch):
+    """4.31: SATU baris "CPI ▼ TURUN 66% ⚠️ • 4 hari lagi"; arah yang sama dipasang di kartu (arah_detik) agar tidak
+    bertentangan dengan angka 1 jam; tanpa petunjuk ≤ 6 jam → arah tren 4 jam; > 6 jam → kapan arah muncul."""
+    from datetime import timedelta
+
+    import _pra_aset as A
+    h = lambda b: {"exness": {"n": 20, "benar": b, "lama": None, "baru": b}, "konsisten": False}  # noqa: E731
+    monkeypatch.setattr(A, "DATA", {
+        "xau_arah": {"CPI • Kalshi & kejutan lalu sepakat": {"h": {f"{k}|0": h(66.0) for k in (1, 2, 3, 5, 10)}}},
+        "tren": {"tanpa": {"SEMUA": {str(k): {"exness": {"n": 1400, "benar": 55.0}} for k in (2, 3, 5, 10)}}}})
+    now = datetime(2026, 10, 10, 11, 0, tzinfo=timezone.utc)
+    b = {"arah_emas": "turun", "tebak": {"K": 1.0, "P": 1.0}, "kalshi_sepakat": True, "sepakat_lain": []}
+    cpi = {"title": "CPI m/m", "time": "2026-10-14T12:30:00+00:00", "petunjuk_teruji": b,
+           "prediksi": {"teks": "CPI: peluang emas naik 1 jam 54%"}}
+    prep = {"mendatang": [cpi, {"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
+    A.attach(prep, now)
+    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% ⚠️ • 4 hari lagi"
+    assert cpi["arah_detik"]["teks"] == "CPI: emas turun 66%"
+    ppi = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
+    A.attach(ppi, now)
+    assert ppi["pra_satu"]["teks"] == "PPI • arah muncul ≤ 6 jam sebelum rilis • 5 hari lagi"
+    dekat = datetime(2026, 10, 15, 9, 0, tzinfo=timezone.utc)
+    t = {"g4": 4.0, "harga": 1.0, "acuan": 1.0, "at": "2026-10-15T09:00:00+00:00"}
+    ppi2 = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
+    A.attach(ppi2, dekat, lambda s: t)
+    assert ppi2["pra_satu"]["teks"] == "PPI ▲ NAIK 55% ⚠️ • 3 jam lagi"
+    assert ppi2["mendatang"][0]["arah_detik"]["arah"] == "naik"
+    assert A.sisa_teks(timedelta(days=4, hours=1)) == "4 hari lagi"
+

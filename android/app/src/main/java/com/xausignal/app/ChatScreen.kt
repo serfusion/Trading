@@ -346,14 +346,14 @@ private fun arahColor(teks: String, kuat: Boolean) = when {
 @Composable
 private fun PrediksiLine(b: JSONObject, open: Boolean, waktu: String, onToggle: () -> Unit) {
     val p = b.optJSONObject("prediksi")
-    val teks = p?.optString("teks")?.ifBlank { null }
-        ?: b.optJSONObject("prarilis")?.optString("teks")?.ifBlank { null }
-        ?: "${b.optString("title")} (prediksi memuat…)"   // cloud lama / gagal
+    val ad = b.optJSONObject("arah_detik")                 // 4.31: arah 1–10 dtk yang sama dengan baris di bawah XAU
+    val teks = prediksiTeks(b) ?: "${b.optString("title")} (prediksi memuat…)"   // cloud lama / gagal
     Row(Modifier.fillMaxWidth().clickable(onClick = onToggle).padding(top = 4.dp),
         verticalAlignment = Alignment.CenterVertically) {
         Column(Modifier.weight(1f)) {
             Text(teks, fontWeight = FontWeight.ExtraBold, style = MaterialTheme.typography.titleMedium,
-                color = if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
+                color = if (ad != null) (if (ad.optString("arah") == "naik") BuyColor else SellColor)
+                else if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
                 else MaterialTheme.colorScheme.onSurface)
             if (waktu.isNotBlank()) Text(waktu, style = MaterialTheme.typography.labelSmall, color = Muted)
         }

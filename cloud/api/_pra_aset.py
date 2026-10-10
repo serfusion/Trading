@@ -298,12 +298,43 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
                     row.update(persen=pr, status="tren searah",
                                teks=f"{nm} • peluang emas {g['arah']} {pr}% (+ tren searah) ⚠️ • {sisa}")
                 elif g and bt["hubungan"] == "berlawanan":
-                    row.update(persen=50, status="acak",
-                               teks=f"{nm} • ≈ 50:50 (petunjuk & tren 4 jam berlawanan) • {sisa}")
+                    # tetap SATU arah (permintaan pengguna 10 Okt: "cukup naik atau turun"): arah petunjuk, persen jujur
+                    row.update(persen=bt["persen"], status="lemah",
+                               teks=f"{nm} • peluang emas {g['arah']} {bt['persen']}% (tren berlawanan) ⚠️ • {sisa}")
+                elif not g:                                       # tanpa petunjuk: arah = tren 4 jam (55–56%, lemah)
+                    row.update(arah=bt["arah"], persen=bt["persen"], status="lemah", bukti=bt["bukti"],
+                               teks=f"{nm} • peluang emas {bt['arah']} {bt['persen']}% (tren 4 jam) ⚠️ • {sisa}")
         out.append(row)
         if len(out) >= MAKS_DAFTAR:
             break
     return out
+
+
+def satu(row: dict) -> dict:
+    """SATU baris untuk berita berikutnya (aplikasi 4.31, permintaan pengguna: "cukup news berikutnya naik atau turun"):
+    "CPI ▼ TURUN 56% ⚠️ • 4 hari lagi". Tanpa arah (belum ada petunjuk & > 6 jam) → kapan arah muncul."""
+    out = {k: row.get(k) for k in ("title", "nama", "time", "arah", "persen", "status", "bukti", "sisa")}
+    if row.get("arah"):
+        naik = row["arah"] == "naik"
+        tanda = "" if row.get("status") == "teruji" else " ⚠️"
+        out["teks"] = f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}%{tanda} • {row['sisa']}"
+    else:
+        out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
+        out["bukti"] = ("belum ada petunjuk teruji untuk berita ini; ≤ 6 jam sebelum rilis arah diambil dari tren emas "
+                        "4 jam (benar 55–56%, lemah)")
+    return out
+
+
+def tandai(persiapan: dict, daftar_: list) -> None:
+    """Arah 1–10 dtk yang SAMA dipasang di setiap kartu berita (c["arah_detik"]) → aplikasi memakai satu arah di semua
+    tempat (hitung mundur, alarm, tab News), tidak lagi bertentangan dengan angka 1 jam."""
+    per = {r["time"]: r for r in daftar_ if r.get("arah")}
+    for k in ("berita", "mendatang"):
+        for c in persiapan.get(k) or []:
+            r = per.get(c.get("time")) if isinstance(c, dict) else None
+            if r:
+                c["arah_detik"] = {"arah": r["arah"], "persen": r["persen"], "status": r["status"],
+                                   "teks": f"{r['nama']}: emas {r['arah']} {r['persen']}%"}
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
@@ -349,5 +380,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         dl = daftar(persiapan, now, tren)
         if dl:
             persiapan["pra_daftar"] = dl
+            persiapan["pra_satu"] = satu(dl[0])
+            tandai(persiapan, dl)
     except Exception:  # noqa: BLE001 - daftar opsional
         pass

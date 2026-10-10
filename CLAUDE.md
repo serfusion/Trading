@@ -431,6 +431,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - `research/pernyataan_uji.py` (+ `fed`): tweet Trump 2017–2021 (MarkHershey, waktu dari ID), Truth Social 2022–2026 (arsip
   CNN ix.cnn.io), 1.344 pidato Fed (federalreserve.gov butuh User-Agent; urllib bawaan 403) di
   `data/research/eksternal/pernyataan/` → tidak ada yang menaikkan arah emas (48–58%). Jangan klaim pernyataan memprediksi.
+  `research/pra_xau_global.py` (momentum kejutan, COT, tren dolar): 47–55% → tidak dipasang.
+- Aplikasi 4.31 (keluhan "mana yang benar naik atau turun, terlalu panjang"): di bawah XAU SATU baris `pra_satu`
+  ("CPI ▼ TURUN 56% ⚠️ • 4 hari lagi"); arah sama di semua kartu `arah_detik` (hitung mundur/alarm/tab News lewat
+  `prediksiTeks`); baris 🎯 1 jam dihapus dari bawah XAU. JANGAN tampilkan dua arah berbeda untuk berita yang sama.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

@@ -110,7 +110,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
         StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
-        StripPrediksi(prep)                      // 🎯 berita besar berikutnya + peluang emas 1 jam (4.17)
+        // 4.31: baris 🎯 "peluang emas naik 1 jam" DIHAPUS dari sini — bertentangan dengan arah 1–10 dtk; satu arah saja
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
@@ -288,8 +288,34 @@ private fun StripDaftar(prep: JSONObject, daftar: org.json.JSONArray) {
     }
 }
 
+/**
+ * 🎯 SATU baris berita berikutnya (aplikasi 4.31, permintaan pengguna "cukup news berikutnya naik atau turun"):
+ * "CPI ▼ TURUN 56% ⚠️ • 4 hari lagi" (arah emas 1–10 dtk setelah rilis, cloud _pra_aset.satu). Ketuk = dasar angka.
+ */
+@Composable
+private fun StripSatu(r: JSONObject) {
+    var buka by remember(r.optString("time") + r.optString("teks")) { mutableStateOf(false) }
+    val arah = r.optString("arah")
+    val warna = when (arah) {
+        "naik" -> BuyColor
+        "turun" -> SellColor
+        else -> Muted
+    }
+    val teks = r.optString("teks").substringBeforeLast(" • ") + " • " + sisaTeks(instantOf(r.optString("time")))
+    Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
+        Text(teks, style = MaterialTheme.typography.titleMedium, color = warna, fontWeight = FontWeight.ExtraBold,
+            maxLines = 1)
+        if (buka) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
+}
+
 @Composable
 private fun StripPra(prep: JSONObject?) {
+    val satu = prep?.optJSONObject("pra_satu")
+    if (satu != null) {
+        StripSatu(satu)
+        return
+    }
     val daftar = prep?.optJSONArray("pra_daftar")
     if (prep != null && daftar != null && daftar.length() > 0) {
         StripDaftar(prep, daftar)
