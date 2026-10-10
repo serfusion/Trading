@@ -29,7 +29,8 @@ SEPAKAT = (16, 20)            # Kalshi & kejutan bulan lalu sepakat (CPI + core 
 NAMA = {"P": "Kejutan bulan lalu (searah)", "-P": "Kejutan bulan lalu (berbalik)", "K": "Pasar Kalshi",
         "K|P": "Kalshi, cadangan kejutan lalu", "G": "GDPNow Atlanta Fed", "WTI": "Minyak WTI bulan acuan",
         "IND": "Lowongan Indeed bulan acuan", "EMP": "Survei karyawan Fed daerah (Empire, Philly)",
-        "GA": "Survei aktivitas Fed daerah (Empire, Philly)"}
+        "GA": "Survei aktivitas Fed daerah (Empire, Philly)", "CPI": "Kejutan CPI pekan ini (rilis sebelum PPI)"}
+CPI_UNTUK = {"PPI m/m": "CPI m/m", "Core PPI m/m": "Core CPI m/m"}    # research/pra_xau_dalam.py (≤ 10 hari sebelum)
 FRED_SERI = {"WTI": ["DCOILWTICO"], "EMP": ["NECDISA066MSFRBNY", "NFBNDIF066MSFRBPHI"],
              "GA": ["GACDFSA066MSFRBPHI", "GACDISA066MSFRBNY"]}
 INVERS = ("Unemployment Rate", "Unemployment Claims")      # angka naik = buruk bagi ekonomi
@@ -209,12 +210,20 @@ def blok(card: dict, mem: dict, env: dict | None = None, data: dict | None = Non
                 s = 1.0 if g > f else -1.0
         elif kode in ("WTI", "IND", "EMP", "GA"):
             s = tanda_lain(kode, title, card, data or {})
+        elif kode == "CPI" and title in CPI_UNTUK:
+            m = mem.get(CPI_UNTUK[title]) or {}
+            try:
+                umur = (datetime.fromisoformat(card["time"]) - datetime.fromisoformat(str(m.get("time")))).days
+            except (KeyError, TypeError, ValueError):
+                umur = 99
+            s = float(m["s"]) if m.get("s") and 0 <= umur <= 10 else None
         if s is None:
             continue
         tebak[kode] = s
         ek, en = st.get("emas") or (0, 0)
+        jenis = "arah XAU 3 dtk" if st.get("jenis") == "xau 3 dtk" else "arah emas 1 mnt"
         baris.append(f"{NAMA.get(kode, kode)}: {_kata(s)} perkiraan • teruji {st.get('tahun', '')} benar "
-                     f"{_pct(st['benar'], st['n'])} • arah emas 1 mnt cocok {_pct(ek, en)}")
+                     f"{_pct(st['benar'], st['n'])} • {jenis} cocok {_pct(ek, en)}")
     if not tebak:
         if s_lalu == 0 and any(k in rules for k in ("P", "-P")):
             baris.append("Kejutan bulan lalu: sama dengan perkiraan → petunjuk ini tidak memberi arah")

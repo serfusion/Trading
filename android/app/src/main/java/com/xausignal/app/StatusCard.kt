@@ -248,6 +248,11 @@ private fun StripPra(prep: JSONObject?) {
         Text(pra.optString("teks"), style = MaterialTheme.typography.labelMedium, color = warna,
             fontWeight = FontWeight.ExtraBold, maxLines = 2)
         Text(pra.optString("kecil"), style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+        // 📌 kepastian setelah detik 2 (aplikasi 4.28): arah yang sudah terlihat ≥ $0,50 hampir selalu bertahan s/d detik 10
+        pra.optString("kepastian").ifBlank { null }?.let {
+            Text(it, style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold,
+                maxLines = if (open) 4 else 2)
+        }
         if (open) {
             pra.optString("bukti").ifBlank { null }?.let {
                 Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)

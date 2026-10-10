@@ -1,0 +1,117 @@
+# ⏱️ XAU 1–10 detik: riset mendalam NFP, PPI, JOLTS
+python -m research.pra_xau_dalam          → docs/eksternal/hasil_pra_xau_dalam.txt + cloud/api/pra_aset.json
+
+
+## Non-Farm Employment Change (195 rilis 2010-01–2025-12)
+      P     angka: semua 92/188=49% (p 0.642) | LAMA 61/139=44% | BARU 31/49=63%
+         XAU searah (Exness, n 120): 1 dtk 52.5% • 2 dtk 47.5% • 3 dtk 49.2% • 5 dtk 45.0% • 10 dtk 47.5% | Dukascopy: 1 dtk 51.6% • 2 dtk 44.7% • 3 dtk 46.0% • 5 dtk 44.1% • 10 dtk 45.3%
+      -P    angka: semua 96/188=51% (p 0.413) | LAMA 78/139=56% | BARU 18/49=37%
+         XAU searah (Exness, n 120): 1 dtk 47.5% • 2 dtk 52.5% • 3 dtk 50.8% • 5 dtk 55.0% • 10 dtk 52.5% | Dukascopy: 1 dtk 48.4% • 2 dtk 55.3% • 3 dtk 54.0% • 5 dtk 55.9% • 10 dtk 54.7%
+      ADP   angka: semua 88/175=50% (p 0.500) | LAMA 71/130=55% | BARU 17/45=38%
+         XAU searah (Exness, n 106): 1 dtk 57.5% • 2 dtk 48.1% • 3 dtk 49.1% • 5 dtk 46.2% • 10 dtk 46.2% | Dukascopy: 1 dtk 52.5% • 2 dtk 48.3% • 3 dtk 49.0% • 5 dtk 48.3% • 10 dtk 46.3%
+      CLM   angka: semua 51/94=54% (p 0.235) | LAMA 38/72=53% | BARU 13/22=59%
+         XAU searah (Exness, n 56): 1 dtk 55.4% • 2 dtk 51.8% • 3 dtk 50.0% • 5 dtk 50.0% • 10 dtk 48.2% | Dukascopy: 1 dtk 53.3% • 2 dtk 49.4% • 3 dtk 49.4% • 5 dtk 53.2% • 10 dtk 53.2%
+      K     angka: semua 10/19=53% (p 0.500) | LAMA n 0 | BARU 10/19=53%
+         XAU searah (Exness, n 19): 1 dtk 68.4% • 2 dtk 42.1% • 3 dtk 47.4% • 5 dtk 47.4% • 10 dtk 42.1% | Dukascopy: 1 dtk 63.2% • 2 dtk 42.1% • 3 dtk 47.4% • 5 dtk 47.4% • 10 dtk 47.4%
+      IND   angka: semua 24/68=35% (p 0.995) | LAMA 8/18=44% | BARU 16/50=32%
+         XAU searah (Exness, n 66): 1 dtk 48.5% • 2 dtk 36.4% • 3 dtk 36.4% • 5 dtk 34.8% • 10 dtk 40.9% | Dukascopy: 1 dtk 54.5% • 2 dtk 39.4% • 3 dtk 39.4% • 5 dtk 37.9% • 10 dtk 40.9%
+      EMP   angka: semua 54/124=44% (p 0.937) | LAMA 42/92=46% | BARU 12/32=38%
+         XAU searah (Exness, n 77): 1 dtk 55.8% • 2 dtk 44.2% • 3 dtk 41.6% • 5 dtk 40.3% • 10 dtk 41.6% | Dukascopy: 1 dtk 55.7% • 2 dtk 46.5% • 3 dtk 43.6% • 5 dtk 40.6% • 10 dtk 44.6%
+      KUMP  angka: semua 56/128=44% (p 0.934) | LAMA 46/95=48% | BARU 10/33=30%
+         XAU searah (Exness, n 83): 1 dtk 50.6% • 2 dtk 47.0% • 3 dtk 45.8% • 5 dtk 47.0% • 10 dtk 47.0% | Dukascopy: 1 dtk 49.5% • 2 dtk 48.6% • 3 dtk 47.7% • 5 dtk 47.7% • 10 dtk 45.0%
+      BLN   angka: semua 35/61=57% (p 0.153) | LAMA 24/41=59% | BARU 11/20=55%
+         XAU searah (Exness, n 53): 1 dtk 52.8% • 2 dtk 49.1% • 3 dtk 52.8% • 5 dtk 47.2% • 10 dtk 47.2% | Dukascopy: 1 dtk 57.1% • 2 dtk 46.6% • 3 dtk 51.7% • 5 dtk 48.3% • 10 dtk 48.3%
+
+## Unemployment Rate (195 rilis 2010-01–2025-12)
+      P     angka: semua 62/109=57% (p 0.090) | LAMA 45/76=59% | BARU 17/33=52%
+         XAU searah (Exness, n 89): 1 dtk 55.1% • 2 dtk 42.7% • 3 dtk 47.2% • 5 dtk 49.4% • 10 dtk 49.4% | Dukascopy: 1 dtk 53.8% • 2 dtk 44.7% • 3 dtk 44.7% • 5 dtk 45.5% • 10 dtk 50.4%
+      -P    angka: semua 47/109=43% (p 0.937) | LAMA 31/76=41% | BARU 16/33=48%
+         XAU searah (Exness, n 89): 1 dtk 44.9% • 2 dtk 57.3% • 3 dtk 52.8% • 5 dtk 50.6% • 10 dtk 50.6% | Dukascopy: 1 dtk 46.2% • 2 dtk 55.3% • 3 dtk 55.3% • 5 dtk 54.5% • 10 dtk 49.6%
+      ADP   angka: semua 75/133=56% (p 0.083) | LAMA 49/96=51% | BARU 26/37=70%
+         XAU searah (Exness, n 106): 1 dtk 57.5% • 2 dtk 48.1% • 3 dtk 49.1% • 5 dtk 46.2% • 10 dtk 46.2% | Dukascopy: 1 dtk 52.5% • 2 dtk 48.3% • 3 dtk 49.0% • 5 dtk 48.3% • 10 dtk 46.3%
+      CLM   angka: semua 33/68=49% (p 0.642) | LAMA 26/51=51% | BARU 7/17=41%
+         XAU searah (Exness, n 56): 1 dtk 55.4% • 2 dtk 51.8% • 3 dtk 50.0% • 5 dtk 50.0% • 10 dtk 48.2% | Dukascopy: 1 dtk 53.3% • 2 dtk 49.4% • 3 dtk 49.4% • 5 dtk 53.2% • 10 dtk 53.2%
+      K     angka: semua 14/23=61% (p 0.202) | LAMA n 0 | BARU 14/23=61%
+         XAU searah (Exness, n 30): 1 dtk 60.0% • 2 dtk 50.0% • 3 dtk 50.0% • 5 dtk 53.3% • 10 dtk 46.7% | Dukascopy: 1 dtk 50.0% • 2 dtk 50.0% • 3 dtk 53.3% • 5 dtk 50.0% • 10 dtk 46.7%
+   🟡 IND   angka: semua 38/57=67% (p 0.008) | LAMA 12/16=75% | BARU 26/41=63%
+         XAU searah (Exness, n 66): 1 dtk 48.5% • 2 dtk 36.4% • 3 dtk 36.4% • 5 dtk 34.8% • 10 dtk 40.9% | Dukascopy: 1 dtk 54.5% • 2 dtk 39.4% • 3 dtk 39.4% • 5 dtk 37.9% • 10 dtk 40.9%
+   🟡 EMP   angka: semua 56/93=60% (p 0.031) | LAMA 40/67=60% | BARU 16/26=62%
+         XAU searah (Exness, n 77): 1 dtk 55.8% • 2 dtk 44.2% • 3 dtk 41.6% • 5 dtk 40.3% • 10 dtk 41.6% | Dukascopy: 1 dtk 55.7% • 2 dtk 46.5% • 3 dtk 43.6% • 5 dtk 40.6% • 10 dtk 44.6%
+      KUMP  angka: semua 41/101=41% (p 0.977) | LAMA 26/73=36% | BARU 15/28=54%
+         XAU searah (Exness, n 83): 1 dtk 50.6% • 2 dtk 47.0% • 3 dtk 45.8% • 5 dtk 47.0% • 10 dtk 47.0% | Dukascopy: 1 dtk 49.5% • 2 dtk 48.6% • 3 dtk 47.7% • 5 dtk 47.7% • 10 dtk 45.0%
+      BLN   angka: semua 24/46=52% (p 0.441) | LAMA 15/25=60% | BARU 9/21=43%
+         XAU searah (Exness, n 52): 1 dtk 42.3% • 2 dtk 46.2% • 3 dtk 46.2% • 5 dtk 40.4% • 10 dtk 42.3% | Dukascopy: 1 dtk 37.7% • 2 dtk 43.6% • 3 dtk 43.6% • 5 dtk 41.8% • 10 dtk 45.5%
+
+## Average Hourly Earnings m/m (195 rilis 2010-01–2025-12)
+      P     angka: semua 40/104=38% (p 0.993) | LAMA 27/80=34% | BARU 13/24=54%
+         XAU searah (Exness, n 92): 1 dtk 50.0% • 2 dtk 46.7% • 3 dtk 47.8% • 5 dtk 46.7% • 10 dtk 44.6% | Dukascopy: 1 dtk 52.1% • 2 dtk 49.2% • 3 dtk 50.0% • 5 dtk 49.2% • 10 dtk 47.5%
+      -P    angka: semua 64/104=62% (p 0.012) | LAMA 53/80=66% | BARU 11/24=46%
+         XAU searah (Exness, n 92): 1 dtk 50.0% • 2 dtk 53.3% • 3 dtk 52.2% • 5 dtk 53.3% • 10 dtk 55.4% | Dukascopy: 1 dtk 47.9% • 2 dtk 50.8% • 3 dtk 50.0% • 5 dtk 50.8% • 10 dtk 52.5%
+      BLN   angka: semua 28/49=57% (p 0.196) | LAMA 16/28=57% | BARU 12/21=57%
+         XAU searah (Exness, n 69): 1 dtk 60.9% • 2 dtk 47.8% • 3 dtk 46.4% • 5 dtk 47.8% • 10 dtk 43.5% | Dukascopy: 1 dtk 63.2% • 2 dtk 50.7% • 3 dtk 47.8% • 5 dtk 49.3% • 10 dtk 44.9%
+
+## PPI m/m (173 rilis 2010-01–2025-11)
+      CPI   angka: semua 21/29=72% (p 0.012) | LAMA 5/7=71% | BARU 16/22=73%
+         XAU searah (Exness, n 32): 1 dtk 62.5% • 2 dtk 53.1% • 3 dtk 56.2% • 5 dtk 59.4% • 10 dtk 53.1% | Dukascopy: 1 dtk 57.6% • 2 dtk 58.8% • 3 dtk 58.8% • 5 dtk 58.8% • 10 dtk 55.9%
+      P     angka: semua 54/123=44% (p 0.926) | LAMA 43/86=50% | BARU 11/37=30%
+         XAU searah (Exness, n 81): 1 dtk 53.1% • 2 dtk 45.7% • 3 dtk 44.4% • 5 dtk 43.2% • 10 dtk 43.2% | Dukascopy: 1 dtk 47.0% • 2 dtk 43.8% • 3 dtk 46.5% • 5 dtk 48.1% • 10 dtk 49.6%
+      -P    angka: semua 69/123=56% (p 0.103) | LAMA 43/86=50% | BARU 26/37=70%
+         XAU searah (Exness, n 81): 1 dtk 46.9% • 2 dtk 54.3% • 3 dtk 55.6% • 5 dtk 56.8% • 10 dtk 56.8% | Dukascopy: 1 dtk 53.0% • 2 dtk 56.2% • 3 dtk 53.5% • 5 dtk 51.9% • 10 dtk 50.4%
+      WTI   angka: semua 78/147=53% (p 0.255) | LAMA 50/105=48% | BARU 28/42=67%
+         XAU searah (Exness, n 97): 1 dtk 50.5% • 2 dtk 51.5% • 3 dtk 52.6% • 5 dtk 57.7% • 10 dtk 57.7% | Dukascopy: 1 dtk 52.9% • 2 dtk 52.3% • 3 dtk 53.0% • 5 dtk 57.4% • 10 dtk 54.8%
+      PP    angka: semua 82/147=56% (p 0.093) | LAMA 56/105=53% | BARU 26/42=62%
+         XAU searah (Exness, n 97): 1 dtk 47.4% • 2 dtk 52.6% • 3 dtk 51.5% • 5 dtk 50.5% • 10 dtk 52.6% | Dukascopy: 1 dtk 46.3% • 2 dtk 52.3% • 3 dtk 51.7% • 5 dtk 51.0% • 10 dtk 52.3%
+      BLN   angka: semua 20/39=51% (p 0.500) | LAMA 12/24=50% | BARU 8/15=53%
+         XAU searah (Exness, n 43): 1 dtk 48.8% • 2 dtk 41.9% • 3 dtk 44.2% • 5 dtk 41.9% • 10 dtk 46.5% | Dukascopy: 1 dtk 59.5% • 2 dtk 47.7% • 3 dtk 45.5% • 5 dtk 45.5% • 10 dtk 47.7%
+
+## Core PPI m/m (155 rilis 2010-01–2025-11)
+      CPI   angka: semua 15/18=83% (p 0.004) | LAMA 4/5=80% | BARU 11/13=85%
+         XAU searah (Exness, n 23): 1 dtk 52.2% • 2 dtk 56.5% • 3 dtk 65.2% • 5 dtk 65.2% • 10 dtk 65.2% | Dukascopy: 1 dtk 59.1% • 2 dtk 65.2% • 3 dtk 65.2% • 5 dtk 60.9% • 10 dtk 69.6%
+      P     angka: semua 32/80=40% (p 0.972) | LAMA 24/62=39% | BARU 8/18=44%
+         XAU searah (Exness, n 61): 1 dtk 52.5% • 2 dtk 52.5% • 3 dtk 50.8% • 5 dtk 49.2% • 10 dtk 49.2% | Dukascopy: 1 dtk 50.0% • 2 dtk 48.9% • 3 dtk 47.4% • 5 dtk 48.5% • 10 dtk 47.4%
+   🟡 -P    angka: semua 48/80=60% (p 0.046) | LAMA 38/62=61% | BARU 10/18=56%
+         XAU searah (Exness, n 61): 1 dtk 47.5% • 2 dtk 47.5% • 3 dtk 49.2% • 5 dtk 50.8% • 10 dtk 50.8% | Dukascopy: 1 dtk 50.0% • 2 dtk 51.1% • 3 dtk 52.6% • 5 dtk 51.5% • 10 dtk 52.6%
+      PP    angka: semua 52/112=46% (p 0.802) | LAMA 37/86=43% | BARU 15/26=58%
+         XAU searah (Exness, n 79): 1 dtk 48.1% • 2 dtk 51.9% • 3 dtk 50.6% • 5 dtk 50.6% • 10 dtk 53.2% | Dukascopy: 1 dtk 48.3% • 2 dtk 51.9% • 3 dtk 51.9% • 5 dtk 51.1% • 10 dtk 52.6%
+      BLN   angka: semua 11/23=48% (p 0.661) | LAMA 6/10=60% | BARU 5/13=38%
+         XAU searah (Exness, n 24): 1 dtk 58.3% • 2 dtk 50.0% • 3 dtk 50.0% • 5 dtk 45.8% • 10 dtk 41.7% | Dukascopy: 1 dtk 54.2% • 2 dtk 48.0% • 3 dtk 48.0% • 5 dtk 44.0% • 10 dtk 40.0%
+
+## JOLTS Job Openings (140 rilis 2012-06–2026-01)
+      IND2  angka: semua 20/48=42% (p 0.903) | LAMA n 0 | BARU 20/48=42%
+         XAU searah (Exness, n 49): 1 dtk 42.9% • 2 dtk 44.9% • 3 dtk 40.8% • 5 dtk 44.9% • 10 dtk 40.8% | Dukascopy: 1 dtk 55.9% • 2 dtk 41.2% • 3 dtk 38.2% • 5 dtk 41.2% • 10 dtk 38.2%
+      P     angka: semua 54/129=42% (p 0.974) | LAMA 33/84=39% | BARU 21/45=47%
+         XAU searah (Exness, n 50): 1 dtk 60.0% • 2 dtk 54.0% • 3 dtk 54.0% • 5 dtk 50.0% • 10 dtk 54.0% | Dukascopy: 1 dtk 64.9% • 2 dtk 52.8% • 3 dtk 48.6% • 5 dtk 45.9% • 10 dtk 51.4%
+   🟡 -P    angka: semua 75/129=58% (p 0.039) | LAMA 51/84=61% | BARU 24/45=53%
+         XAU searah (Exness, n 50): 1 dtk 40.0% • 2 dtk 46.0% • 3 dtk 46.0% • 5 dtk 50.0% • 10 dtk 46.0% | Dukascopy: 1 dtk 35.1% • 2 dtk 47.2% • 3 dtk 51.4% • 5 dtk 54.1% • 10 dtk 48.6%
+      CLM   angka: semua 42/77=55% (p 0.247) | LAMA 29/53=55% | BARU 13/24=54%
+         XAU searah (Exness, n 27): 1 dtk 55.6% • 2 dtk 51.9% • 3 dtk 51.9% • 5 dtk 51.9% • 10 dtk 51.9% | Dukascopy: 1 dtk 63.2% • 2 dtk 66.7% • 3 dtk 57.9% • 5 dtk 57.9% • 10 dtk 63.2%
+      BLN   angka: semua 7/21=33% (p 0.961) | LAMA 2/11=18% | BARU 5/10=50%
+         XAU searah (Exness, n 11): 1 dtk 54.5% • 2 dtk 63.6% • 3 dtk 63.6% • 5 dtk 54.5% • 10 dtk 54.5% | Dukascopy: 1 dtk 44.4% • 2 dtk 66.7% • 3 dtk 66.7% • 5 dtk 55.6% • 10 dtk 55.6%
+
+## B. Kepastian setelah detik pertama (tick Exness): arah detik k bertahan sampai detik h bila gerak detik k ≥ x
+   NFP      detik 1: ≥$0.3 (n 40): 3 dtk 75.0%, 5 dtk 77.5%, 10 dtk 75.0% | ≥$0.5 (n 28): 3 dtk 82.1%, 5 dtk 82.1%, 10 dtk 82.1% | ≥$1 (n 18): 3 dtk 77.8%, 5 dtk 77.8%, 10 dtk 77.8%
+   NFP      detik 2: ≥$0.3 (n 105): 3 dtk 95.2%, 5 dtk 96.2%, 10 dtk 94.3% | ≥$0.5 (n 95): 3 dtk 94.7%, 5 dtk 95.8%, 10 dtk 94.7% | ≥$1 (n 84): 3 dtk 95.2%, 5 dtk 97.6%, 10 dtk 95.2% | ≥$2 (n 50): 3 dtk 98.0%, 5 dtk 100.0%, 10 dtk 98.0%
+   CPI      detik 1: ≥$0.3 (n 57): 3 dtk 71.9%, 5 dtk 68.4%, 10 dtk 64.9% | ≥$0.5 (n 38): 3 dtk 73.7%, 5 dtk 73.7%, 10 dtk 65.8% | ≥$1 (n 24): 3 dtk 66.7%, 5 dtk 66.7%, 10 dtk 54.2% | ≥$2 (n 12): 3 dtk 75.0%, 5 dtk 75.0%, 10 dtk 58.3%
+   CPI      detik 2: ≥$0.3 (n 97): 3 dtk 95.9%, 5 dtk 91.8%, 10 dtk 88.7% | ≥$0.5 (n 85): 3 dtk 95.3%, 5 dtk 91.8%, 10 dtk 89.4% | ≥$1 (n 71): 3 dtk 97.2%, 5 dtk 95.8%, 10 dtk 91.5% | ≥$2 (n 48): 3 dtk 95.8%, 5 dtk 93.8%, 10 dtk 89.6%
+   PPI      detik 1: ≥$0.3 (n 35): 3 dtk 77.1%, 5 dtk 74.3%, 10 dtk 71.4% | ≥$0.5 (n 23): 3 dtk 73.9%, 5 dtk 78.3%, 10 dtk 73.9% | ≥$1 (n 10): 3 dtk 70.0%, 5 dtk 70.0%, 10 dtk 60.0%
+   PPI      detik 2: ≥$0.3 (n 78): 3 dtk 97.4%, 5 dtk 89.7%, 10 dtk 85.9% | ≥$0.5 (n 69): 3 dtk 97.1%, 5 dtk 91.3%, 10 dtk 87.0% | ≥$1 (n 43): 3 dtk 97.7%, 5 dtk 93.0%, 10 dtk 83.7% | ≥$2 (n 15): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   RETAIL   detik 1: ≥$0.3 (n 62): 3 dtk 96.8%, 5 dtk 95.2%, 10 dtk 90.3% | ≥$0.5 (n 46): 3 dtk 95.7%, 5 dtk 97.8%, 10 dtk 95.7% | ≥$1 (n 35): 3 dtk 97.1%, 5 dtk 100.0%, 10 dtk 97.1% | ≥$2 (n 15): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   RETAIL   detik 2: ≥$0.3 (n 71): 3 dtk 98.6%, 5 dtk 97.2%, 10 dtk 88.7% | ≥$0.5 (n 65): 3 dtk 100.0%, 5 dtk 98.5%, 10 dtk 89.2% | ≥$1 (n 42): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 92.9% | ≥$2 (n 21): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   PCE      detik 1: ≥$0.3 (n 22): 3 dtk 77.3%, 5 dtk 68.2%, 10 dtk 54.5% | ≥$0.5 (n 12): 3 dtk 83.3%, 5 dtk 83.3%, 10 dtk 75.0%
+   PCE      detik 2: ≥$0.3 (n 27): 3 dtk 92.6%, 5 dtk 74.1%, 10 dtk 59.3% | ≥$0.5 (n 18): 3 dtk 94.4%, 5 dtk 88.9%, 10 dtk 83.3%
+   GDP      detik 1: ≥$0.3 (n 15): 3 dtk 73.3%, 5 dtk 60.0%, 10 dtk 60.0%
+   GDP      detik 2: ≥$0.3 (n 34): 3 dtk 94.1%, 5 dtk 82.4%, 10 dtk 76.5% | ≥$0.5 (n 21): 3 dtk 95.2%, 5 dtk 85.7%, 10 dtk 85.7% | ≥$1 (n 14): 3 dtk 92.9%, 5 dtk 92.9%, 10 dtk 85.7%
+   FOMC     detik 1: ≥$0.3 (n 31): 3 dtk 77.4%, 5 dtk 77.4%, 10 dtk 54.8% | ≥$0.5 (n 25): 3 dtk 80.0%, 5 dtk 80.0%, 10 dtk 60.0% | ≥$1 (n 12): 3 dtk 75.0%, 5 dtk 75.0%, 10 dtk 75.0%
+   FOMC     detik 2: ≥$0.3 (n 55): 3 dtk 100.0%, 5 dtk 96.4%, 10 dtk 80.0% | ≥$0.5 (n 47): 3 dtk 100.0%, 5 dtk 97.9%, 10 dtk 83.0% | ≥$1 (n 35): 3 dtk 100.0%, 5 dtk 97.1%, 10 dtk 88.6% | ≥$2 (n 20): 3 dtk 100.0%, 5 dtk 95.0%, 10 dtk 90.0%
+   JOLTS    detik 1: ≥$0.3 (n 12): 3 dtk 66.7%, 5 dtk 66.7%, 10 dtk 66.7%
+   JOLTS    detik 2: ≥$0.3 (n 21): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$0.5 (n 18): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$1 (n 16): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$2 (n 11): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   ISM      detik 1: ≥$0.3 (n 169): 3 dtk 95.3%, 5 dtk 93.5%, 10 dtk 91.7% | ≥$0.5 (n 152): 3 dtk 95.4%, 5 dtk 94.7%, 10 dtk 92.8% | ≥$1 (n 112): 3 dtk 99.1%, 5 dtk 96.4%, 10 dtk 95.5% | ≥$2 (n 56): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 96.4%
+   ISM      detik 2: ≥$0.3 (n 190): 3 dtk 97.9%, 5 dtk 96.3%, 10 dtk 94.2% | ≥$0.5 (n 161): 3 dtk 99.4%, 5 dtk 98.1%, 10 dtk 96.9% | ≥$1 (n 125): 3 dtk 99.2%, 5 dtk 99.2%, 10 dtk 97.6% | ≥$2 (n 68): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 98.5%
+   ADP      detik 1: ≥$0.3 (n 36): 3 dtk 86.1%, 5 dtk 75.0%, 10 dtk 72.2% | ≥$0.5 (n 27): 3 dtk 88.9%, 5 dtk 81.5%, 10 dtk 81.5% | ≥$1 (n 19): 3 dtk 84.2%, 5 dtk 78.9%, 10 dtk 73.7%
+   ADP      detik 2: ≥$0.3 (n 67): 3 dtk 100.0%, 5 dtk 97.0%, 10 dtk 94.0% | ≥$0.5 (n 58): 3 dtk 100.0%, 5 dtk 96.6%, 10 dtk 93.1% | ≥$1 (n 42): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$2 (n 22): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   CLAIMS   detik 1: ≥$0.3 (n 71): 3 dtk 90.1%, 5 dtk 87.3%, 10 dtk 76.1% | ≥$0.5 (n 58): 3 dtk 91.4%, 5 dtk 91.4%, 10 dtk 79.3% | ≥$1 (n 35): 3 dtk 97.1%, 5 dtk 97.1%, 10 dtk 85.7% | ≥$2 (n 15): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   CLAIMS   detik 2: ≥$0.3 (n 88): 3 dtk 93.2%, 5 dtk 92.0%, 10 dtk 77.3% | ≥$0.5 (n 67): 3 dtk 95.5%, 5 dtk 95.5%, 10 dtk 83.6% | ≥$1 (n 43): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 90.7% | ≥$2 (n 12): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 91.7%
+   ISM Jasa detik 1: ≥$0.3 (n 81): 3 dtk 95.1%, 5 dtk 95.1%, 10 dtk 91.4% | ≥$0.5 (n 71): 3 dtk 95.8%, 5 dtk 97.2%, 10 dtk 94.4% | ≥$1 (n 55): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$2 (n 31): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   ISM Jasa detik 2: ≥$0.3 (n 92): 3 dtk 97.8%, 5 dtk 97.8%, 10 dtk 95.7% | ≥$0.5 (n 75): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 98.7% | ≥$1 (n 60): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0% | ≥$2 (n 34): 3 dtk 100.0%, 5 dtk 100.0%, 10 dtk 100.0%
+   SEMUA    detik 1: ≥$0.3 (n 685): 3 dtk 87.7%, 5 dtk 85.1%, 10 dtk 80.4% | ≥$0.5 (n 525): 3 dtk 89.3%, 5 dtk 88.8%, 10 dtk 84.8% | ≥$1 (n 347): 3 dtk 91.9%, 5 dtk 91.1%, 10 dtk 87.6% | ≥$2 (n 158): 3 dtk 94.9%, 5 dtk 94.9%, 10 dtk 92.4%
+   SEMUA    detik 2: ≥$0.3 (n 1001): 3 dtk 97.1%, 5 dtk 94.1%, 10 dtk 88.7% | ≥$0.5 (n 839): 3 dtk 97.6%, 5 dtk 95.8%, 10 dtk 91.8% | ≥$1 (n 620): 3 dtk 98.5%, 5 dtk 98.2%, 10 dtk 94.2% | ≥$2 (n 325): 3 dtk 99.1%, 5 dtk 98.8%, 10 dtk 96.6%

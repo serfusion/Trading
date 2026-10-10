@@ -109,3 +109,28 @@ def test_pra_xau_arah_1_10_detik(monkeypatch):
     kosong = {"mendatang": [{"title": "Retail Sales m/m", "time": T0}]}
     A.attach(kosong, NOW)
     assert kosong["pra"]["status"] == "acak"
+
+
+def test_ppi_dari_cpi_dan_kepastian_detik2(monkeypatch):
+    """PPI: kejutan CPI ≤ 10 hari sebelumnya memberi arah; 📌 kepastian detik 2 tampil untuk setiap berita."""
+    import _pra_aset as A
+    monkeypatch.setattr(_petunjuk, "ATURAN", {"PPI m/m": {"CPI": {"benar": 21, "n": 29, "tahun": "2010–2025",
+                                                                  "emas": [18, 32], "jenis": "xau 3 dtk"}}})
+    mem = {"CPI m/m": {"s": 1, "time": "2026-10-14T12:30:00+00:00"}}
+    ppi = {"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}
+    b = _petunjuk.blok(ppi, mem)
+    assert b["arah_emas"] == "turun" and "Kejutan CPI pekan ini" in b["catatan"] and "arah XAU 3 dtk" in b["catatan"]
+    lama = _petunjuk.blok(ppi, {"CPI m/m": {"s": 1, "time": "2026-09-11T12:30:00+00:00"}})
+    assert lama is None or not (lama.get("tebak") or {})                      # CPI > 10 hari: tidak dipakai
+    h = {"exness": {"n": 23, "benar": 65.2, "lama": 80.0, "baru": 61.5}, "konsisten": False}
+    monkeypatch.setattr(A, "DATA", {"xau_arah": {"PPI • kejutan CPI pekan ini": {"h": {f"{x}|0": h for x in (1, 2, 3, 5, 10)}}},
+                                    "lanjut": {"PPI|2|0.5|10": {"tetap": 86.6, "n": 67}, "PPI|1|0.5|10": {"tetap": 71.4, "n": 21},
+                                               "SEMUA|2|0.5|10": {"tetap": 93.0, "n": 900}}})
+    ppi["petunjuk_teruji"] = b
+    prep = {"mendatang": [ppi]}
+    A.attach(prep, NOW)
+    assert prep["pra"]["teks"].startswith("XAU TURUN ▼ • benar 65%")
+    assert "detik 10 pada 87% rilis (n 67)" in prep["pra"]["kepastian"]
+    retail = {"mendatang": [{"title": "Retail Sales m/m", "time": T0}]}
+    A.attach(retail, NOW)
+    assert "93% rilis (n 900)" in retail["pra"]["kepastian"]                  # tanpa data grup → SEMUA
