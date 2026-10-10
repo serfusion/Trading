@@ -213,3 +213,24 @@ memberi SETIAP kartu yang belum rilis `arah_detik`: arah 1–10 dtk (petunjuk te
 mana pun. Kartu kembar di waktu rilis sama (core CPI, CPI tahunan, Retail bersama PPI) ditandai `ganda` dan tidak
 ditampilkan dobel di tab News.
 
+## I. Arah SETELAH beberapa menit (10 Okt sore — `research/pra_menit.py`)
+Tebakan sebelum rilis kembali ≈ 50:50 setelah ±1–3 menit, jadi arah menit ke depan dibaca SETELAH rilis: bila emas di
+detik 2 sudah bergerak ≥ $0,50 dari harga 1 dtk sebelum rilis, arah itu masih sama di (2.051 rilis 2010–2026):
+| Berita | 10 dtk | 1 mnt | 3 mnt | 5 mnt | 15 mnt | 1 jam | n |
+|---|---|---|---|---|---|---|---|
+| Semua berita | 92% | 83% | 80% | 79% (lama 79 / baru 78) | 71% | 66% | 970 |
+| NFP | 96% | 86% | 81% | 80% | 78% | 68% | 116 |
+| CPI | 91% | 80% | 72% | 76% | 66% | 68% | 102 |
+| PPI | 89% | 81% | 75% | 81% | 72% | 65% | 85 |
+| Retail Sales | 90% | 83% | 80% | 82% | 69% | 67% | 81 |
+| ISM | 97% | 90% | 87% | 88% | 75% | 69% | 166 |
+| ADP | 94% | 92% | 90% | 87% | 80% | 68% | 84 |
+| Fed | 84% | 64% | 67% | 62% | 71% | 55% | 58 |
+| JOLTS | 100% | 95% | 95% | 84% | 74% | 74% | 19 |
+| PCE | 83% | 67% | 61% | 56% | 61% | 61% | 18 |
+Gerak ≥ $1 di detik 2 → 5 mnt 82% (semua berita). Aplikasi 4.33: "… • 1–5 mnt: ikuti arah detik 2 (76%)" di baris bawah XAU
+dan di tab News (`_pra_aset.menit_info`, pra_aset.json["menit"]).
+
+Metode tambahan (tidak lolos): nada pidato Fed 8–21 hari sebelum rapat (sebelum blackout) → hawkish = emas turun 56%
+(lama 56 / baru 55, n 85, p 0,3); core PCE ← saham S&P 500 bulan acuan (biaya pengelolaan portofolio) 49%.
+

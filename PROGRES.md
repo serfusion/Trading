@@ -274,4 +274,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   jangka (1 dtk–1 jam, `research/pra_jangka.py`); riset Fed/PPI/PCE/JOLTS metode lain (`research/pra_lain.py`): tidak lolos,
   kandidat Fed yield 2 th 60%.
 - Aplikasi 4.33 (screenshot pengguna): tulisan bawah XAU ukuran biasa, warna hanya di arah+%, CPI tidak dobel, semua berita
-  memakai arah 1–10 dtk (tanpa judul "1 jam").
+  memakai arah 1–10 dtk (tanpa judul "1 jam"). + arah setelah beberapa menit (`research/pra_menit.py`): ikuti arah detik 2
+  (≥ $0,50 → 5 mnt sama 79%, CPI 76%, PPI 81%, Fed 62%). Fed nada pra-blackout 56% & PCE ← S&P 49% tidak lolos.

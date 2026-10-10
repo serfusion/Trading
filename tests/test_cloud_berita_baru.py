@@ -321,3 +321,16 @@ def test_semua_kartu_satu_kerangka_tanpa_dobel(monkeypatch):
     assert ad[3]["ganda"]                                                          # Retail rilis bersamaan dengan PPI
     assert ad[4]["teks"] == "Fed: arah 1–10 dtk muncul ≤ 6 jam sebelum rilis"
     assert all("1 jam" not in a["teks"] for a in ad)
+
+
+def test_arah_setelah_beberapa_menit_ikuti_detik2():
+    """Data asli research/pra_menit.py: setelah rilis, arah detik 2 (≥ $0,50) masih sama di menit 5 pada ±76–79%."""
+    import _pra_aset as A
+    mi = A.menit_info("CPI m/m")
+    assert mi and mi["grup"] == "CPI" and mi["teks"].startswith("1–5 mnt: ikuti arah detik 2 (")
+    r = A.satu({"title": "CPI m/m", "nama": "CPI", "arah": "turun", "persen": 56, "status": "belum terbukti",
+                "sisa": "4 hari lagi", "dasar": "CPI • minyak WTI saja", "bukti": "x"})
+    assert r["teks"].startswith("CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 1–5 mnt: ikuti arah detik 2 (")
+    assert r["teks"].endswith("• 4 hari lagi") and "1 jam" in r["bukti"]
+    fed = A.menit_info("Federal Funds Rate")
+    assert fed and fed["grup"] == "FOMC"

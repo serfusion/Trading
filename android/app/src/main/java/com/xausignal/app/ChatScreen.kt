@@ -359,6 +359,10 @@ private fun PrediksiLine(b: JSONObject, open: Boolean, waktu: String, onToggle: 
                 color = if (p?.optBoolean("kuat") == true) (if (teks.contains("naik")) BuyColor else SellColor)
                 else MaterialTheme.colorScheme.onSurface)
             if (waktu.isNotBlank()) Text(waktu, style = MaterialTheme.typography.labelSmall, color = Muted)
+            // 4.33: arah setelah beberapa menit = ikuti arah detik 2 (cloud _pra_aset.menit_info)
+            ad?.optString("menit")?.ifBlank { null }?.let {
+                Text(it, style = MaterialTheme.typography.labelSmall, color = Muted)
+            }
         }
         Text(if (open) "▴" else "▾", color = Muted, style = MaterialTheme.typography.titleMedium)
     }
