@@ -293,16 +293,21 @@ private fun StripDaftar(prep: JSONObject, daftar: org.json.JSONArray) {
 }
 
 /** 4.33: hanya bagian arah + persen yang berwarna ("▼ TURUN 56%" merah, "▲ NAIK 56%" hijau); sisanya warna biasa. */
-internal fun arahBerwarna(teks: String): AnnotatedString = buildAnnotatedString {
-    val m = Regex("(▲ NAIK|▼ TURUN|naik|turun|NAIK|TURUN) \\d+%").find(teks)
-    if (m == null) {
-        append(teks)
-        return@buildAnnotatedString
+@Composable
+internal fun arahBerwarna(teks: String): AnnotatedString {
+    val hijau = BuyColor                                  // warna tema = @Composable → dibaca di luar builder
+    val merah = SellColor
+    return buildAnnotatedString {
+        val m = Regex("(▲ NAIK|▼ TURUN|naik|turun|NAIK|TURUN) \\d+%").find(teks)
+        if (m == null) {
+            append(teks)
+        } else {
+            append(teks.substring(0, m.range.first))
+            val naik = m.value.contains("NAIK") || m.value.startsWith("naik")
+            withStyle(SpanStyle(color = if (naik) hijau else merah, fontWeight = FontWeight.Bold)) { append(m.value) }
+            append(teks.substring(m.range.last + 1))
+        }
     }
-    append(teks.substring(0, m.range.first))
-    val naik = m.value.contains("NAIK") || m.value.startsWith("naik")
-    withStyle(SpanStyle(color = if (naik) BuyColor else SellColor, fontWeight = FontWeight.Bold)) { append(m.value) }
-    append(teks.substring(m.range.last + 1))
 }
 
 /**
