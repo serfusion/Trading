@@ -303,8 +303,9 @@ private fun StripSatu(r: JSONObject) {
     }
     val teks = r.optString("teks").substringBeforeLast(" • ") + " • " + sisaTeks(instantOf(r.optString("time")))
     Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
+        // 4.32: + keterangan jangka "(s/d 1 mnt) • setelah 3 mnt ≈ 50:50" → boleh 2 baris
         Text(teks, style = MaterialTheme.typography.titleMedium, color = warna, fontWeight = FontWeight.ExtraBold,
-            maxLines = 1)
+            maxLines = 2)
         if (buka) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }

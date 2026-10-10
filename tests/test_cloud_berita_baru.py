@@ -237,8 +237,8 @@ def test_satu_baris_berita_berikutnya_dan_arah_sama_di_semua_kartu(monkeypatch):
            "prediksi": {"teks": "CPI: peluang emas naik 1 jam 54%"}}
     prep = {"mendatang": [cpi, {"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
     A.attach(prep, now)
-    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% ⚠️ • 4 hari lagi"
-    assert cpi["arah_detik"]["teks"] == "CPI: emas turun 66%"
+    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% (1–10 dtk) ⚠️ • 4 hari lagi"
+    assert cpi["arah_detik"]["teks"] == "CPI: emas turun 66% (1–10 dtk)"
     ppi = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
     A.attach(ppi, now)
     assert ppi["pra_satu"]["teks"] == "PPI • arah muncul ≤ 6 jam sebelum rilis • 5 hari lagi"
@@ -246,7 +246,7 @@ def test_satu_baris_berita_berikutnya_dan_arah_sama_di_semua_kartu(monkeypatch):
     t = {"g4": 4.0, "harga": 1.0, "acuan": 1.0, "at": "2026-10-15T09:00:00+00:00"}
     ppi2 = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
     A.attach(ppi2, dekat, lambda s: t)
-    assert ppi2["pra_satu"]["teks"] == "PPI ▲ NAIK 55% ⚠️ • 3 jam lagi"
+    assert ppi2["pra_satu"]["teks"] == "PPI ▲ NAIK 55% (1–10 dtk) ⚠️ • 3 jam lagi"
     assert ppi2["mendatang"][0]["arah_detik"]["arah"] == "naik"
     assert A.sisa_teks(timedelta(days=4, hours=1)) == "4 hari lagi"
 
@@ -267,6 +267,29 @@ def test_cpi_pakai_petunjuk_terkuat_di_waktu_rilis(monkeypatch):
                                                                     "kalshi_sepakat": True, "sepakat_lain": []}}
     prep = {"mendatang": [head, core]}
     A.attach(prep, now)
-    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% ⚠️ • 2 hari lagi"
+    assert prep["pra_satu"]["teks"] == "CPI ▼ TURUN 66% (1–10 dtk) ⚠️ • 2 hari lagi"
     assert prep["pra"]["teks"].startswith("XAU TURUN ▼ • benar 66%")
     assert head["arah_detik"]["persen"] == 66 and core["arah_detik"]["persen"] == 66
+
+
+def test_jangka_berlaku_sampai_dan_setelahnya(monkeypatch):
+    """Keterangan jangka: 'CPI ▼ TURUN 66% (s/d 1 mnt) ⚠️ • setelah 3 mnt ≈ 50:50' dari profil 1 dtk–1 jam."""
+    import _pra_aset as A
+    prof = {"2": {"benar": 65.0}, "10": {"benar": 70.0}, "30": {"benar": 65.0}, "60": {"benar": 60.0},
+            "180": {"benar": 50.0}, "3600": {"benar": 55.0}}
+    monkeypatch.setattr(A, "DATA", {"jangka": {"X": prof, "Y": {"10": {"benar": 54.0}, "30": {"benar": 40.0}}}})
+    j = A.jangka("X", "turun")
+    assert j["teks_sampai"] == "s/d 1 mnt" and j["teks_setelah"] == "setelah 3 mnt ≈ 50:50"
+    y = A.jangka("Y", "turun")
+    assert y["teks_sampai"] == "1–10 dtk" and y["teks_setelah"] == "setelah 30 dtk ▲ NAIK 60%"
+    r = A.satu({"nama": "CPI", "arah": "turun", "persen": 66, "status": "belum terbukti", "sisa": "4 hari lagi",
+                "dasar": "X", "bukti": "b"})
+    assert r["teks"] == "CPI ▼ TURUN 66% (s/d 1 mnt) ⚠️ • setelah 3 mnt ≈ 50:50 • 4 hari lagi"
+
+
+def test_jangka_data_asli_cpi():
+    """Profil asli (research/pra_jangka.py): CPI Kalshi & kejutan lalu sepakat berlaku s/d 1 mnt."""
+    import _pra_aset as A
+    j = A.jangka("CPI • Kalshi & kejutan lalu sepakat", "turun")
+    assert j and j["teks_sampai"] == "s/d 1 mnt" and "setelah 3 mnt" in j["teks_setelah"]
+

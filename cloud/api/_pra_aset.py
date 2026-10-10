@@ -253,7 +253,7 @@ def tebak_kartu(c: dict) -> dict | None:
         lima = pekan5(datetime.fromisoformat(c["time"]))
         ur_atas = (1.0 if lima else -1.0) * pb["arah"] > 0
         return {"arah": "naik" if ur_atas else "turun", "persen": round(pb["benar"]), "status": "lemah",
-                "dasar": "Pengangguran • kalender survei BLS",
+                "dasar": "Pengangguran • kalender survei BLS",  # = kunci pra_aset.json["jangka"]
                 "khusus": {"sepakat": pb.get("tren_searah"), "berlawanan": pb.get("tren_lawan")},
                 "bukti": (f"dasar: {'5' if lima else '4'} pekan antar pekan survei BLS → pengangguran cenderung "
                           f"{'DI ATAS' if ur_atas else 'DI BAWAH'} perkiraan (tebakan angka {pb['kejutan']:.0f}%) • emas "
@@ -287,7 +287,7 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
         if g:
             tanda = "✅" if g["status"] == "teruji" else "⚠️"
-            row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"],
+            row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -308,10 +308,46 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
                                teks=f"{nm} • peluang emas {g['arah']} {bt['persen']}% (tren berlawanan) ⚠️ • {sisa}")
                 elif not g:                                       # tanpa petunjuk: arah = tren 4 jam (55–56%, lemah)
                     row.update(arah=bt["arah"], persen=bt["persen"], status="lemah", bukti=bt["bukti"],
+                               dasar="Tren emas 4 jam (berita tanpa petunjuk)",
                                teks=f"{nm} • peluang emas {bt['arah']} {bt['persen']}% (tren 4 jam) ⚠️ • {sisa}")
         out.append(row)
         if len(out) >= MAKS_DAFTAR:
             break
+    return out
+
+
+JANGKA_H = (10, 30, 60, 180, 300, 600, 900, 1800, 3600)
+
+
+def label_h(h: int) -> str:
+    return f"{h} dtk" if h < 60 else f"{h // 60} mnt" if h < 3600 else "1 jam"
+
+
+def jangka(dasar: str | None, arah: str | None) -> dict | None:
+    """Berlaku sampai kapan (pra_aset.json["jangka"], research/pra_jangka.py): X = jangka terpanjang (mulai 10 dtk)
+    yang ketepatannya tetap ≥ 55%; setelah X: arah & persen di jangka berikutnya (≈ 50:50 bila 45–55%)."""
+    p = (DATA.get("jangka") or {}).get(dasar or "")
+    if not p or not arah:
+        return None
+    x = 10
+    for h in JANGKA_H:
+        v = p.get(str(h))
+        if not v or v["benar"] < 55:
+            break
+        x = h
+    lanjut = next((h for h in JANGKA_H if h > x and p.get(str(h))), None)
+    out = {"sampai": x, "teks_sampai": f"1–{label_h(x)}" if x < 60 else f"s/d {label_h(x)}"}
+    if lanjut:
+        b = p[str(lanjut)]["benar"]
+        naik = arah == "naik"
+        if b >= 55:
+            ket = f"{'▲ NAIK' if naik else '▼ TURUN'} {b:.0f}%"
+        elif b <= 45:
+            ket = f"{'▼ TURUN' if naik else '▲ NAIK'} {100 - b:.0f}%"
+        else:
+            ket = "≈ 50:50"
+        out.update(setelah=lanjut, teks_setelah=f"setelah {label_h(lanjut)} {ket}")
+    out["rinci"] = " • ".join(f"{label_h(int(h))} {v['benar']:.0f}%" for h, v in p.items() if int(h) >= 2)
     return out
 
 
@@ -322,7 +358,14 @@ def satu(row: dict) -> dict:
     if row.get("arah"):
         naik = row["arah"] == "naik"
         tanda = "" if row.get("status") == "teruji" else " ⚠️"
-        out["teks"] = f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}%{tanda} • {row['sisa']}"
+        j = jangka(row.get("dasar"), row["arah"]) or {"teks_sampai": "1–10 dtk"}
+        bagian = [f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}% ({j['teks_sampai']}){tanda}"]
+        if j.get("teks_setelah"):
+            bagian.append(j["teks_setelah"])
+        out["teks"] = " • ".join(bagian + [row["sisa"]])
+        if j.get("rinci"):
+            out["bukti"] = (out.get("bukti") or "") + f" • per jangka: {j['rinci']}".replace(".", ",")
+        out["jangka"] = j
     else:
         out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
         out["bukti"] = ("belum ada petunjuk teruji untuk berita ini; ≤ 6 jam sebelum rilis arah diambil dari tren emas "
@@ -338,8 +381,9 @@ def tandai(persiapan: dict, daftar_: list) -> None:
         for c in persiapan.get(k) or []:
             r = per.get(c.get("time")) if isinstance(c, dict) else None
             if r:
+                j = jangka(r.get("dasar"), r["arah"]) or {"teks_sampai": "1–10 dtk"}
                 c["arah_detik"] = {"arah": r["arah"], "persen": r["persen"], "status": r["status"],
-                                   "teks": f"{r['nama']}: emas {r['arah']} {r['persen']}%"}
+                                   "teks": f"{r['nama']}: emas {r['arah']} {r['persen']}% ({j['teks_sampai']})"}
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:

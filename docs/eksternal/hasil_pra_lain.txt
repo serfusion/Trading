@@ -1,0 +1,28 @@
+# 🔎 Metode lain (bukan Kalshi) untuk Fed, PPI, PCE, JOLTS → arah XAU 2–10 dtk
+python -m research.pra_lain               → docs/eksternal/hasil_pra_lain.txt
+
+
+## FOMC (113 rilis dengan data emas)
+      Y2    (dibalik) 2–10 dtk 60.1% (n 103; LAMA 60% n 65, BARU 60% n 38; p 0.084)
+      AKSI  (searah) 2–10 dtk 50.9% (n 29; LAMA 52% n 12, BARU 50% n 17; p 0.500)
+      DOT   (dibalik) 2–10 dtk 51.3% (n 113; LAMA 51% n 73, BARU 52% n 40; p 0.500)
+      PRA2  (searah) 2–10 dtk 57.1% (n 107; LAMA 63% n 67, BARU 47% n 40; p 0.061)
+      T24   (dibalik) 2–10 dtk 52.0% (n 107; LAMA 54% n 67, BARU 48% n 40; p 0.281)
+      LALU  (searah) 2–10 dtk 51.6% (n 111; LAMA 54% n 71, BARU 47% n 40; p 0.500)
+
+## PPI (157 rilis dengan data emas)
+      PP    (searah) 2–10 dtk 55.9% (n 78; LAMA 58% n 40, BARU 53% n 38; p 0.070)
+      DXY   (searah) 2–10 dtk 49.7% (n 157; LAMA 52% n 106, BARU 45% n 51; p 0.563)
+      WTI   (dibalik) 2–10 dtk 46.6% (n 157; LAMA 51% n 106, BARU 37% n 51; p 0.925)
+
+## PCE (52 rilis dengan data emas)
+      NOW   (searah) 2–10 dtk 57.9% (n 35; LAMA 0% n 2, BARU 61% n 33; p 0.250)
+      CPIC  (searah) 2–10 dtk 43.9% (n 33; LAMA 0% n 2, BARU 47% n 31; p 0.919)
+
+## JOLTS (32 rilis dengan data emas)
+      NFP   (searah) 2–10 dtk 61.0% (n 31; LAMA 53% n 5, BARU 62% n 26; p 0.141)
+      ADP   (searah) 2–10 dtk 48.3% (n 22; LAMA 68% n 5, BARU 43% n 17; p 0.738)
+      IND   (searah) 2–10 dtk nan% (n 0; LAMA nan% n 0, BARU nan% n 0; p 1.000)
+
+## LOLOS (≥ 60%, LAMA & BARU ≥ 55%, p < 0,05)
+   TIDAK ADA

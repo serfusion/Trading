@@ -178,3 +178,31 @@ menjadi "CPI ▼ TURUN 66%". Headline Kalshi condong DI BAWAH (≤ 0,5%: 41% vs 
 bertentangan, jadi angka tetap ⚠️. Uji tambahan khusus CPI: Kalshi |lean| ≥ 0,25 → 61–65% (n 23); Kalshi headline 24 jam
 60–70% (n 30); core Kalshi & nowcast Cleveland sepakat 75% (n 8) — semua sampel kecil.
 
+## H. Berlaku sampai kapan? + metode lain Fed/PPI/PCE/JOLTS (10 Okt sore — `research/pra_jangka.py`, `research/pra_lain.py`)
+Ketepatan tiap aturan dari 1 detik sampai 1 jam setelah rilis (tick Exness s.d. 15 mnt, candle M15 untuk 30 mnt/1 jam):
+| Aturan | 2–10 dtk | 30 dtk | 1 mnt | 3–15 mnt | 30 mnt–1 jam |
+|---|---|---|---|---|---|
+| CPI Kalshi & kejutan lalu sepakat | 65–70% | 65% | 60% | 45–50% | 45–55% |
+| CPI minyak WTI saja | 54–56% | 50% | 54% | 51–58% | 51% |
+| ISM Jasa berbalik | 61–65% | 62% | 59% | 55–56% | 50–54% |
+| ISM Jasa + Fed daerah sepakat | 67–76% | 67% | 64% | 61–64% | 46–49% |
+| GDP GDPNow | 49–63% | 59% | 57% | 50–61% | 57–66% |
+| Pengangguran kalender BLS | 54–59% | 54% | 53% | 52–59% | 49–53% |
+| Tren emas 4 jam (tanpa petunjuk) | 54–55% | 54% | 52% | 50–51% | 51–53% |
+Kesimpulan: semua tebakan sebelum rilis paling kuat di detik 2–30; setelah ±1–3 menit kembali ≈ 50:50 (arah lanjutan
+ditentukan angka yang keluar). Aplikasi 4.32 menulis jangka ini di baris: "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • setelah 30 dtk
+≈ 50:50 • 4 hari lagi" (`_pra_aset.jangka`, pra_aset.json["jangka"]; X = jangka terpanjang yang tetap ≥ 55%).
+
+Metode lain (bukan Kalshi), arah emas 2–10 dtk:
+| Berita | Metode | Hasil |
+|---|---|---|
+| Fed | yield 2 th naik 5 hari sebelum rapat → emas TURUN saat pengumuman | 60% (lama 60 / baru 60, n 103, p 0,08) — kandidat |
+| Fed | aksi yang diharapkan, rapat dot plot, drift 2 jam, tren 24 jam, reaksi rapat lalu | 51–57% (baru 47–52%) |
+| PPI | survei harga Fed daerah | 56% (baru 53%) |
+| PPI | indeks dolar, minyak WTI | 37–52% |
+| PCE | nowcast core PCE Cleveland vs konsensus | 58% (n 35, p 0,25) |
+| PCE | kejutan core CPI bulan acuan | 44% |
+| JOLTS | kejutan NFP bulan acuan | 61% (n 31, sebagian besar periode baru, p 0,14) |
+| JOLTS | kejutan ADP bulan acuan | 48% |
+Tidak ada yang lolos (≥ 60%, lama & baru ≥ 55%, p < 0,05); tidak dipasang. Fed + yield 2 th paling layak diuji maju.
+

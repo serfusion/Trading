@@ -435,6 +435,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Aplikasi 4.31 (keluhan "mana yang benar naik atau turun, terlalu panjang"): di bawah XAU SATU baris `pra_satu`
   ("CPI ▼ TURUN 56% ⚠️ • 4 hari lagi"); arah sama di semua kartu `arah_detik` (hitung mundur/alarm/tab News lewat
   `prediksiTeks`); baris 🎯 1 jam dihapus dari bawah XAU. JANGAN tampilkan dua arah berbeda untuk berita yang sama.
+- Aplikasi 4.32: keterangan jangka "(1–10 dtk) • setelah 30 dtk ≈ 50:50" dari `research/pra_jangka.py` →
+  pra_aset.json["jangka"] (`_pra_aset.jangka`; jalankan ulang bila aturan/variant berubah). `research/pra_lain.py`
+  (Fed yield 2 th 60% p 0,08; PPI/PCE/JOLTS tidak lolos).
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
