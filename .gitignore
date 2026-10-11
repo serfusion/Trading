@@ -30,3 +30,6 @@ data/research/eksternal/binance_copy/*.json
 
 # eToro: riwayat per investor disatukan di hist.json.gz (research/etoro_copy.py pack)
 data/research/eksternal/etoro/hist/
+
+# cache riset snipe X1 (dibangun ulang: python -m research.snipe_x1_wr bangun)
+data/research/eksternal/snipe_x1/*.pkl
