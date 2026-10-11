@@ -1,0 +1,336 @@
+{
+ "ringkasan": "RISET LITERATUR (folder lit; 35 aturan diekstrak, 34 bisa dihitung on-chain di X1). Kesimpulan utama, jujur: (1) Tidak ditemukan satu pun bukti independen bahwa pembeli \"luar\" (bukan pembuat/insider) mencapai WR ≥ 75% pada snipe peluncuran token baru. Angka WR tinggi yang terpublikasi (87% Pine Analytics; 79% dompet deployer \"MNhB\" via GMGN) milik INSIDER: pembuat atau dompet yang didanai pembuat, membeli di blok/slot peluncuran dan menjual dalam < 1–5 menit (55% < 1 mnt, 85% < 5 mnt, 90% dalam 1–2 swap) ke arus beli berikutnya. Angka praktisi untuk orang luar jauh lebih rendah: bot sniper 40–60% (MadeOnSol, tanpa sampel), sniper berpengalaman rugi 70–80% trade, README bot sumber terbuka mengasumsikan WR 5–20%, makalah uji kertas 190 trade WR 40,5%. (2) Literatur akademik hampir seluruhnya mendeteksi RUG, bukan memprediksi kenaikan ≥ +10–50%. Saringan menekan kerugian tetapi jarang membuat untung: MemeTrans (arXiv 2602.13480) memilih 100 token teratas dengan presisi 0,80 tetapi rata-rata tetap rugi −26,64% (beli saat migrasi, jual ≤ 1 jam); penyalin dompet pintar hanya ≈ +3%/trade setelah friksi (arXiv 2601.08641); peluang graduation bersyarat level likuiditas pump.fun tetap di bawah kurva impas beli-tahan (arXiv 2602.14860); model graduation pra-registrasi AUROC 0,86 di pengembangan jatuh ke 0,46 di validasi (arXiv 2607.02823), peringatan overfitting yang langsung relevan untuk skema LATIH/UJI kita. Basis: 92–99% token peluncuran berakhir pump-and-dump/rug (Solidus 98,6% pump.fun, 93% pool Raydium; Marino 92,22% token ≥ 30 swap pernah dump −4σ), median umur rug ≈ 35 menit (SolRugDetector), 75% token tidak aktif mati < 1 hari (SolRPDS). (3) Implikasi yang bisa diuji di X1 (pilih ambang HANYA di LATIH): (a) keluar cepat, TP kecil 1,2–1,4× dan batas waktu ≤ 5–10 menit, meniru struktur keuntungan insider (warp-id: TP 40%, SL 20%, jual paksa 10 mnt); (b) tolak peluncuran dengan pembeli awal yang terhubung dana ke pembuat atau bundle di slot peluncuran (pakai penyandang.json + slot tx); (c) riwayat pembuat (repeat rugger ≥ 10 deploy & 0 sukses; pembuat elite ≥ 8 deploy & ≥ 70% sukses, tetapi angka ini sirkular); (d) momentum saat masuk: pembeli unik menit pertama (lulus 18–25 vs gagal 1–3), rasio beli:jual ≥ 5:1, kecepatan likuiditas, dev belum menjual; (e) status keamanan SAAT MASUK (mint/freeze authority dicabut, LP dibakar, tidak ada penarikan LP): otoritas.json adalah status SEKARANG, jadi harus direkonstruksi dari riwayat setAuthority/LP agar tidak bocor; (f) konsentrasi: 10 pembeli pertama (high-risk +17 pp), top-10 < 25–30%, pemegang tunggal/sisa pembuat ≤ 5%. Petunjuk awal X1 (porsi 50–90% WR tinggi) BERLAWANAN dengan literatur (dev ≤ 5% ⇒ porsi ≥ 0,95), jadi harus diuji, bukan diasumsikan. (4) Filter jam tidak signifikan (p 0,56). Socials tidak bisa diuji (off-chain, tanpa snapshot saat t0). (5) Keterbatasan: beberapa sumber praktisi tidak bisa dibuka (403: beincrypto, cryptorank, publish0x; 404: dokumen risk Solana Tracker), jadi angkanya tidak dipakai. Klaim pumpsnipe.org 92,2% tidak muncul di halaman yang terbuka, jadi tidak terkonfirmasi. Sebagian besar angka praktisi (MadeOnSol, Mobula, panduan RugCheck) adalah aturan praktis tanpa uji data. Teks PDF yang diekstrak ada di /tmp/claude-0/-home-user-Trading/1743ebc4-1a36-5d32-ace5-0a0b581e06bb/scratchpad/wr/lit/pdf/ (solrpds.txt, hour_aware.txt). Default bot warp-id ada di .../wr/lit/dl/warp_env.txt (data, tidak dijalankan). Tidak ada file repo yang diubah dan tidak ada commit.",
+ "aturan": [
+  {
+   "nama": "R1 Kecepatan likuiditas (liquidity velocity)",
+   "fitur": "XNT bersih masuk pool saat entry (xnt_beli - xnt_jual) dibagi jumlah transaksi (n_beli + n_jual); atau apakah XNT bersih mencapai k×y0 dalam ≤ N swap",
+   "ambang": "XNT bersih/transaksi ≥ P75 LATIH DAN XNT bersih ≥ 1–2×y0 tercapai dalam ≤ 50 swap (paper menguji batas 10/50/100/500/1000 swap); ambang final dipilih di LATIH",
+   "alasan": "Marino dkk. (655.770 token pump.fun, Sep 2025): kecepatan likuiditas (modal terkumpul dalam sedikit transaksi besar) adalah prediktor graduation paling informatif. Akumulasi lambat lewat banyak transaksi kecil menandakan minat lemah. Peringatan: beli-tahan berbasis level likuiditas saja tetap di bawah titik impas.",
+   "sumber_url": "https://arxiv.org/html/2602.14860v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda]: xnt_beli, xnt_jual, n_beli, n_jual; y0; swap/<pool> untuk menghitung jumlah swap hingga ambang"
+  },
+  {
+   "nama": "R2 Level likuiditas + syarat impas",
+   "fitur": "y_masuk/y0 (XNT di pool saat masuk relatif terhadap awal), padanan vSol pump.fun",
+   "ambang": "Masuk hanya bila p(naik ke target | level) > biaya impas. Pump.fun: p(lulus | vSol>50)=0,100; >80=0,354; >100=0,638; impas beli-tahan butuh p > (vSol/115)². Untuk X1, uji y_masuk/y0 ≥ 2, 3, 5 di LATIH dengan TP 1,2×.",
+   "alasan": "Kenaikan yang sudah terjadi menaikkan peluang lanjut, tetapi menurut paper tidak otomatis menguntungkan (baseline < kurva impas). Ini memberi cara memeriksa apakah WR naik cukup untuk menutup kerugian.",
+   "sumber_url": "https://arxiv.org/html/2602.14860v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].y_masuk, y0, naik"
+  },
+  {
+   "nama": "R3 Pembeli unik menit pertama",
+   "fitur": "pembeli (dompet unik non-pembuat) pada jeda 60 detik",
+   "ambang": "Pump.fun: token lulus median 18–25 pembeli unik di menit 1 vs 1–3 untuk yang gagal. X1 lebih sepi, jadi pakai kuantil P75–P90 LATIH (mis. ≥ 5–10).",
+   "alasan": "Data Deployer Hunter MadeOnSol, tanpa ukuran sampel dan belum diverifikasi independen. Catching the Rug memakai unique_buyers/unique_sellers 5 menit pertama di antara 23 fitur (XGBoost AUCPRC 0,76–0,80 untuk rug, MCC hanya 0,29–0,39).",
+   "sumber_url": "https://madeonsol.com/blog/pump-fun-first-3-minutes-graduation-math ; https://arxiv.org/html/2608.20271v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[60].pembeli, jalur[30].pembeli"
+  },
+  {
+   "nama": "R4 Rasio beli:jual awal",
+   "fitur": "n_beli / max(n_jual,1) dan xnt_beli/xnt_jual pada jeda masuk",
+   "ambang": "≥ 5:1 di menit pertama (pola token lulus pump.fun); token lulus hampir tanpa jual di menit ke-2",
+   "alasan": "MadeOnSol (tanpa sampel). Catching the Rug memakai buy_sell_cnt_ratio dan buy_sell_value_ratio sebagai fitur. Peringatan dari Midsummer: ≥ 90% volume beli dari ≤ 10 entitas adalah ciri kenaikan buatan (lihat R27).",
+   "sumber_url": "https://madeonsol.com/blog/pump-fun-first-3-minutes-graduation-math ; https://arxiv.org/html/2608.20271v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].n_beli, n_jual, xnt_beli, xnt_jual"
+  },
+  {
+   "nama": "R5 Pembeli besar (whale) di 60 detik pertama",
+   "fitur": "beli_maks (XNT terbesar satu transaksi beli) pada jeda 60",
+   "ambang": "≥ 1 beli > 2 SOL di 60 detik pertama (±60% token lulus pump.fun punya ini). X1: beli_maks ≥ P75 LATIH atau ≥ x% y0.",
+   "alasan": "Satu pembeli besar awal menandakan minat nyata. Naviglio dkk.: beberapa swap besar juga bisa tanda kenaikan buatan, jadi gabungkan dengan R10/R11.",
+   "sumber_url": "https://madeonsol.com/blog/pump-fun-first-3-minutes-graduation-math ; https://arxiv.org/html/2502.10512v2",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[60].beli_maks"
+  },
+  {
+   "nama": "R6 Pembuat belum menjual (tanpa jual tes)",
+   "fitur": "dev_jual (dan dev_beli) sampai saat masuk",
+   "ambang": "dev_jual = 0. Mobula: hijau = dev < 3% tanpa penjualan; kuning = sudah menjual < 10%. Token umpan sering menunjukkan jual tes deployer 1–2 SOL di menit ke-2.",
+   "alasan": "Jual oleh pembuat sebelum masuk adalah sinyal distribusi/umpan menurut panduan praktisi (aturan praktis, belum diuji data).",
+   "sumber_url": "https://docs.mobula.io/almanac/detecting-snipers-bundlers ; https://madeonsol.com/blog/pump-fun-first-3-minutes-graduation-math",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].dev_jual, dev_beli"
+  },
+  {
+   "nama": "R7 Tolak pembuat berantai (repeat rugger / token spammer)",
+   "fitur": "creator_prev, creator_prev_bagus (hanya peluncuran yang hasilnya diketahui ≥ 24 jam sebelum t0)",
+   "ambang": "Tolak bila creator_prev ≥ 10 dan creator_prev_bagus = 0 (definisi repeat rugger MadeOnSol: ≥ 10 deploy, 0 bond; 11.643 dompet, rata-rata 50,2 peluncuran)",
+   "alasan": "Cernera dkk.: 1% alamat membuat 20–25% token; 50% token spammer BSC melakukan rug; 65,1% token mereka hidup < 1 hari. Killy7: 1% deployer teratas = ±30% peluncuran pump.fun. Petunjuk awal X1 searah: creator_prev > 10 → WR 13%.",
+   "sumber_url": "https://madeonsol.com/blog/pump-fun-deployer-analysis-2026-561k-wallets ; https://arxiv.org/html/2206.08202v3 ; https://killy7.substack.com/p/serial-token-deployers-on-solana",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "creator_prev, creator_prev_bagus (sudah ada di R.muat_siap)"
+  },
+  {
+   "nama": "R8 Pembuat 'elite' (rekam jejak bagus)",
+   "fitur": "creator_prev_bagus / creator_prev",
+   "ambang": "creator_prev ≥ 3–8 dan rasio bagus ≥ 0,7 (tier elite MadeOnSol: ≥ 8 peluncuran & bond ≥ 70% → bond 73,4% vs dasar 1,89%)",
+   "alasan": "Kuat di atas kertas tetapi SIRKULAR: tier dihitung dari hasil yang sama, tanpa uji out-of-sample, dan 'rising' sering jadi 'cold' dalam 2 bulan. Marino: efek top-creator positif tetapi noisy (kesimpulan paper menyebut tidak memperbaiki prediksi). Di X1, n pembuat elite kemungkinan sangat kecil.",
+   "sumber_url": "https://madeonsol.com/blog/pump-fun-deployer-analysis-2026-561k-wallets ; https://arxiv.org/html/2602.14860v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "creator_prev, creator_prev_bagus"
+  },
+  {
+   "nama": "R9 Dompet pembuat segar / didanai tepat sebelum peluncuran",
+   "fitur": "umur_pembuat (hari sejak tx pertama), sumber XNT pertama pembuat (penyandang), jeda pendanaan→t0",
+   "ambang": "Tolak umur_pembuat < 1 hari atau dana masuk < X menit sebelum t0. Petunjuk X1: 1–7 hari buruk; pilih batas di LATIH.",
+   "alasan": "Mobula menandai dompet segar dan pendanaan tepat sebelum peluncuran sebagai ciri insider/sniper. Panduan RugCheck: periksa apakah dompet-dompet teratas didanai dari satu sumber.",
+   "sumber_url": "https://docs.mobula.io/almanac/detecting-snipers-bundlers ; https://madeonsol.com/blog/how-to-use-rugcheck",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "umur_pembuat, penyandang.json (pengirim XNT pertama + waktu tx pertama). Jangan pakai jumlah tx SEKARANG (bocor)."
+  },
+  {
+   "nama": "R10 Tolak penembak yang didanai pembuat (insider same-block)",
+   "fitur": "Ada pembeli awal (slot sama dengan pembuatan pool atau ≤ 5 blok) yang menerima XNT dari pembuat atau mengirim XNT ke pembuat sebelum membeli",
+   "ambang": "Tolak bila ≥ 1 dompet seperti itu ada di antara pembeli awal",
+   "alasan": "Pine Analytics (Mar–Apr 2025, 15.000+ peluncuran, 4.600+ dompet sniper): 87% snipe oleh dompet yang didanai deployer menguntungkan; > 55% keluar < 1 menit, ±85% < 5 menit, > 90% jual dalam 1–2 swap. Pembeli berikutnya menjadi exit liquidity. Hanya tautan langsung 1 hop, jadi skala sebenarnya lebih besar.",
+   "sumber_url": "https://pineanalytics.substack.com/p/exit-liquidity-machines",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "penyandang.json (pengirim XNT pertama 5 pembeli awal), transfer XNT pembuat↔pembeli sebelum t_masuk via getSignaturesForAddress, slot tx di tanda/<pool>"
+  },
+  {
+   "nama": "R11 Bundle (beli terkoordinasi di slot peluncuran / satu pendana)",
+   "fitur": "Jumlah dompet non-pembuat yang membeli di slot pembuatan pool; kluster dompet dengan pendana sama; porsi pasokan kluster",
+   "ambang": "Tolak bila ada beli non-pembuat di slot peluncuran (definisi bundle bot di 2601.08641) atau kluster ≥ 3 dompet berpendana sama. Mobula: kluster < 5% = kuning, jaringan ≥ 10 dompet = merah.",
+   "alasan": "2601.08641 (6.000 proyek pump.fun): bundle bot ada di ±25% proyek dan terkait return lebih rendah serta durasi dump lebih pendek. MemeTrans: akun bundle memegang 36,5% pasokan; pengelompokan bundle menaikkan median top-10 token high-risk +24% vs low-risk +6%; membuang fitur bundle menurunkan AUPRC 0,573→0,545.",
+   "sumber_url": "https://arxiv.org/html/2601.08641v2 ; https://arxiv.org/html/2602.13480v1 ; https://docs.mobula.io/almanac/detecting-snipers-bundlers",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "slot tiap swap (swap/, tanda/), penyandang.json; untuk > 5 pembeli perlu RPC tambahan"
+  },
+  {
+   "nama": "R12 Konsentrasi 10/20 pembeli pertama",
+   "fitur": "Porsi pasokan total yang dibeli 10 dan 20 pembeli non-pembuat pertama",
+   "ambang": "Lebih rendah lebih baik. High-risk +17 pp (10 pertama) / +19 pp (20 pertama) dibanding low-risk. Pilih batas di LATIH (mis. < 20–30% pasokan).",
+   "alasan": "MemeTrans (41.470 token pump.fun → Raydium): pembeli awal token berisiko tinggi memegang pasokan jauh lebih besar. Mazorra dkk. memakai indeks Herfindahl (HHI) distribusi token sebagai fitur deteksi rug (akurasi 0,9936 pada data sangat tidak seimbang).",
+   "sumber_url": "https://arxiv.org/html/2602.13480v1 ; https://eprint.iacr.org/2022/350",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "token keluar vault per pembeli dari swap/<pool>, pasok.json.gz"
+  },
+  {
+   "nama": "R13 Konsentrasi top-10 pemegang (di luar pool)",
+   "fitur": "Top-10 % pasokan beredar di luar vault pool, termasuk sisa pasokan pembuat",
+   "ambang": "< 25% hijau, 25–40% kuning, > 50% merah (Mobula); > 30% untuk token muda 'sangat berbahaya' (Degenesis)",
+   "alasan": "Midsummer (34.988 token, 4 chain): di antara 707 token return > 100%, 82,8% menunjukkan aktivitas mencurigakan dan 50,78% punya top-10 > 30%. Konsentrasi tinggi menyertai pump buatan.",
+   "sumber_url": "https://docs.mobula.io/almanac/detecting-snipers-bundlers ; https://boltzmannsoul.substack.com/p/degenesis-how-to-source-memes-to ; https://arxiv.org/html/2507.01963v2",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Rekonstruksi saldo dari swap + transfer token langsung (getSignaturesForAddress mint) sampai t_masuk; pasok.json"
+  },
+  {
+   "nama": "R14 Sisa pasokan pembuat / pemegang tunggal terbesar",
+   "fitur": "1 - porsi (pasokan yang tidak dimasukkan ke pool) dan pemegang tunggal terbesar non-pool",
+   "ambang": "Literatur: dev ≤ 3–5% (Mobula); pemegang tunggal > 5% red flag (Degenesis); > 10% risiko dump signifikan, > 20% sangat tinggi (panduan RugCheck). Artinya porsi ≥ 0,95.",
+   "alasan": "Pasokan yang dipegang pembuat bisa dijual kapan saja. Catatan penting: petunjuk awal X1 (porsi 0,5–0,9 WR tinggi) BERLAWANAN dengan literatur, jadi harus diuji di LATIH, bukan diasumsikan.",
+   "sumber_url": "https://madeonsol.com/blog/how-to-use-rugcheck ; https://docs.mobula.io/almanac/detecting-snipers-bundlers ; https://boltzmannsoul.substack.com/p/degenesis-how-to-source-memes-to",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "porsi (sudah ada), saldo pembuat saat t_masuk"
+  },
+  {
+   "nama": "R15 Mint authority dicabut saat masuk",
+   "fitur": "mint authority = null pada t_masuk",
+   "ambang": "Wajib null (default warp-id CHECK_IF_MINT_IS_RENOUNCED=true; RugCheck: risiko tinggi; bot vineetdev: hard fail bobot 10)",
+   "alasan": "Mint aktif memungkinkan pasokan dicetak lalu dibuang ke pool. Saringan standar semua bot sniper, tetapi tanpa angka efek terukur.",
+   "sumber_url": "https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy ; https://madeonsol.com/blog/how-to-use-rugcheck ; https://github.com/vineetdev02/Memcoin-Sniper-Bot",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "otoritas.json = status SEKARANG (BOCOR). Perlu rekonstruksi riwayat akun mint (initializeMint/setAuthority) sebelum t_masuk via getSignaturesForAddress(mint)."
+  },
+  {
+   "nama": "R16 Freeze authority dicabut saat masuk",
+   "fitur": "freeze authority = null pada t_masuk",
+   "ambang": "Wajib null (RugCheck: hampir selalu harus dicabut; vineetdev: hard fail)",
+   "alasan": "SolRugDetector: penyalahgunaan freeze hanya 461 dari 76.469 rug (0,6%), jadi kemungkinan efeknya kecil terhadap WR, tetapi murah untuk dicek.",
+   "sumber_url": "https://arxiv.org/html/2603.24625v1 ; https://github.com/vineetdev02/Memcoin-Sniper-Bot",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Rekonstruksi status freeze dari riwayat mint sebelum t_masuk (jangan pakai otoritas.json)"
+  },
+  {
+   "nama": "R17 LP dibakar/dikunci & belum ada penarikan LP",
+   "fitur": "Porsi token LP pembuat yang dibakar (dikirim ke burn/dikunci, BUKAN ditarik) pada t_masuk; lp_tarik",
+   "ambang": "≥ 90–100% LP dibakar (default warp-id CHECK_IF_BURNED=true; RugCheck: bakar atau kunci ≥ 6 bulan) DAN lp_tarik = 0",
+   "alasan": "Solidus: ±93% dari 388 rb pool Raydium = soft rug (LP ditarik ≥ 90%, median $2.832). Cernera: rug 1 hari = satu mint dan satu burn ≥ 99% LP. Struktur XDEX (pembuat menyediakan seluruh LP) sama dengan Raydium.",
+   "sumber_url": "https://www.soliduslabs.com/reports/solana-rug-pulls-pump-dumps-crypto-compliance ; https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy ; https://arxiv.org/html/2206.08202v3",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "folder lp/, pasokan LP mint & saldo LP pembuat pada t_masuk, jalur[jeda].lp_tarik/lp_tambah"
+  },
+  {
+   "nama": "R18 Ukuran pool awal min/maks",
+   "fitur": "y0 (XNT awal) atau nilainya dalam USD (xnt_usd.json)",
+   "ambang": "Default warp-id MIN_POOL_SIZE=5, MAX_POOL_SIZE=50 (SOL); vineetdev $5.000–$500.000; RugCheck: < $5k berisiko (satu jual sedang bisa −50%); Degenesis ≥ $20k. X1: uji pita y0 di LATIH.",
+   "alasan": "Pool terlalu tipis berarti slippage/manipulasi; pool terlalu dalam berarti tidak 'awal' lagi. Semua ini default/aturan praktis, bukan hasil uji.",
+   "sumber_url": "https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy ; https://github.com/vineetdev02/Memcoin-Sniper-Bot ; https://madeonsol.com/blog/how-to-use-rugcheck",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "y0, xnt_usd.json"
+  },
+  {
+   "nama": "R19 Saringan harus lolos berturut-turut (masuk tertunda)",
+   "fitur": "Semua saringan lolos pada beberapa pengecekan beruntun",
+   "ambang": "Default warp-id: CONSECUTIVE_FILTER_MATCHES=3, FILTER_CHECK_INTERVAL=2000 ms, FILTER_CHECK_DURATION=60000 ms. Padanan X1: lolos di jalur 0, 30 dan 60 detik.",
+   "alasan": "Menyaring token yang lolos sesaat lalu langsung ditarik/di-dump. Konfirmasi ini dibayar dengan harga masuk yang lebih tinggi.",
+   "sumber_url": "https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[0], jalur[30], jalur[60]"
+  },
+  {
+   "nama": "R20 Hindari blok pertama; masuk setelah N swap",
+   "fitur": "Jumlah swap sejak pool dibuat saat masuk",
+   "ambang": "Naviglio dkk. masuk di swap ke-60 (blok pertama rata-rata ±27 swap). Rata-rata return 722% (swap ke-50) → 575% (ke-70) → 495% (ke-100), tetapi didominasi outlier.",
+   "alasan": "Pada mayoritas token baru, harga melonjak di blok pertama lalu turun tajam. Token 'sellable' yang dibeli di swap ke-60: 31,98% berakhir negatif. Tanpa 0,28% outlier > 1 WETH, kumulatif negatif. Label sellable bersifat ex-post.",
+   "sumber_url": "https://arxiv.org/html/2502.10512v2",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "swap/<pool> (masuk berbasis jumlah swap, bukan detik); harness sisip"
+  },
+  {
+   "nama": "R21 Keluar cepat: TP kecil + batas waktu",
+   "fitur": "Aturan keluar",
+   "ambang": "Default warp-id TAKE_PROFIT=40%, STOP_LOSS=20%, PRICE_CHECK_DURATION=600000 ms (jual paksa 10 menit). Insider WR 87%: > 55% keluar < 1 mnt, 85% < 5 mnt, dalam 1–2 swap. X1: R.keluar tpsl k 1,2–1,4, T ≤ 300–600 detik.",
+   "alasan": "Semua WR tinggi yang terdokumentasi datang dari keluar cepat ke arus beli berikutnya. Median umur rug ±35 menit (SolRugDetector) dan 75% token tidak aktif mati < 1 hari (SolRPDS), jadi menahan lama memperbesar peluang terkena rug.",
+   "sumber_url": "https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy ; https://pineanalytics.substack.com/p/exit-liquidity-machines ; https://arxiv.org/html/2603.24625v1 ; https://www.arxiv.org/pdf/2504.07132",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "R.keluar((\"tpsl\", k, s, T, 1)) dengan telat = 1"
+  },
+  {
+   "nama": "R22 Tangga take-profit",
+   "fitur": "Jual bertahap di beberapa kelipatan",
+   "ambang": "vineetdev: 25% @+50%, 25% @+100%, 25% @+300%, 15% @+900%, SL −40%, trailing setelah +200%. MadeOnSol: 25/25/25/25 @ +50/+100/+300/+500. Degenesis: jual 50% di 2× (balik modal).",
+   "alasan": "Menaikkan peluang balik modal pada token yang naik sebentar, tetapi WR (XNT bersih > modal) terutama ditentukan anak tangga pertama. Tidak ada sumber yang memberi hasil uji.",
+   "sumber_url": "https://github.com/vineetdev02/Memcoin-Sniper-Bot ; https://madeonsol.com/blog/solana-auto-sell-strategies-pump-fun ; https://boltzmannsoul.substack.com/p/degenesis-how-to-source-memes-to",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "R.keluar((\"parsial\", f, k1, k2, T))"
+  },
+  {
+   "nama": "R23 Trailing stop lebar + SL keras",
+   "fitur": "Trailing dari puncak dan stop loss keras",
+   "ambang": "Trailing 40–50% untuk token kurva awal, 25–35% pasca-graduation; SL keras −30…−50%; SL 15% kena noise",
+   "alasan": "Panduan praktisi tanpa data. Pump.fun rutin pullback 30–40% di dalam tren naik.",
+   "sumber_url": "https://madeonsol.com/blog/solana-auto-sell-strategies-pump-fun",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Simulasi jalur harga per swap; harness sekarang hanya memiliki titik jeda tetap, jadi perlu perluasan"
+  },
+  {
+   "nama": "R24 Ikut dompet pintar (reputasi pembeli awal)",
+   "fitur": "Ada pembeli awal yang rekam jejaknya untung di peluncuran SEBELUMNYA (≥ 24 jam), bukan bundle, ukuran beli tidak ekstrem",
+   "ambang": "t-stat rata-rata return dompet > 1,645 atas 5–15 koin sebelumnya, bukan bundle bot, beli < P75 (2601.08641). WR dompet sehat 65–85%; > 90% atas ≥ 10 trade dicurigai bot/insider; ≤ 2 token per jam aktif; bundle rate < 5% (MadeOnSol).",
+   "alasan": "Dompet smart-money terpilih rata-rata +14%/trade, tetapi penyalin hanya ≈ +3% setelah friksi (simulasi). Model statistik murni memberi return penyalin negatif.",
+   "sumber_url": "https://arxiv.org/html/2601.08641v2 ; https://madeonsol.com/blog/why-100-percent-winrate-solana-wallet-red-flag",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].wallets, wallet_dikenal, penembak_rugi; pemain.csv (hanya peluncuran yang selesai ≥ 24 jam sebelum t0)"
+  },
+  {
+   "nama": "R25 Penembak menguasai pasokan",
+   "fitur": "Porsi pasokan yang dibeli non-pembuat dalam 0–5 blok / N detik pertama; penembak_n",
+   "ambang": "Tolak bila penembak gabungan > 20% pasokan (Mobula merah); ≥ 50% 'sangat mungkin dump terkoordinasi'. Bot vineetdev menolak bila blok pertama sudah ramai penembak.",
+   "alasan": "Peringatan: 2601.08641 menemukan sniper bot (beli ≤ 5 blok) ada di mayoritas proyek dengan dampak kinerja terbatas, jadi efeknya bisa lemah.",
+   "sumber_url": "https://docs.mobula.io/almanac/detecting-snipers-bundlers ; https://arxiv.org/html/2601.08641v2 ; https://github.com/vineetdev02/Memcoin-Sniper-Bot",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "swap/<pool> dengan slot/waktu, pasok.json, penembak_n"
+  },
+  {
+   "nama": "R26 Bump bot ada (aktivitas promosi on-chain)",
+   "fitur": "Dompet dengan skor flip α = F/(ΔP + 1) > 50 (banyak bolak-balik beli/jual, posisi bersih kecil) sebelum masuk",
+   "ambang": "Ada ≥ 1 dompet bump → dikaitkan dengan kinerja LEBIH BAIK (max return lebih tinggi)",
+   "alasan": "2601.08641: bump dan comment bot berasosiasi dengan metrik kinerja lebih baik (pembuat berinvestasi dalam promosi). Tidak ada ukuran efek numerik di teks, jadi ini hipotesis.",
+   "sumber_url": "https://arxiv.org/html/2601.08641v2",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "swap/<pool> per dompet sebelum t_masuk"
+  },
+  {
+   "nama": "R27 Tolak kenaikan harga buatan (LPI/wash) sebelum masuk",
+   "fitur": "naik (harga/harga awal) dibanding jumlah entitas unik dan porsi volume beli; volume vs perubahan harga",
+   "ambang": "Tolak bila harga naik > 100% dengan ≤ 10 entitas unik dan ≥ 90% volume = beli (LPI). Wash: volume naik > 500% sementara harga < 5%; ≥ 99% volume dari dompet yang beli dan jual.",
+   "alasan": "Midsummer: 62,9% pump-and-dump dan 86,67% token dengan ekstraksi profit didahului pertumbuhan buatan. Skala asli harian, sehingga perlu adaptasi ke menit (belum teruji).",
+   "sumber_url": "https://arxiv.org/html/2507.01963v2",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].naik, pembeli, xnt_beli, xnt_jual; swap per dompet"
+  },
+  {
+   "nama": "R28 Sudah ada dump −4σ sebelum masuk",
+   "fitur": "Log-return per swap < −4 × sigma robust (MAD) dengan baseline 30–200 trade",
+   "ambang": "Tolak/keluar bila sudah terjadi dump −4σ sebelum masuk",
+   "alasan": "Marino: 92,22% token ≥ 30 swap pernah dump −4σ; hanya 2,55% dari mereka yang lulus. Karena hampir semua token mengalaminya, daya pisah kemungkinan rendah.",
+   "sumber_url": "https://arxiv.org/html/2602.14860v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Jalur harga per swap dari swap/<pool>"
+  },
+  {
+   "nama": "R29 Uji honeypot / token bisa dijual",
+   "fitur": "Sudah ada ≥ 1 jual sukses oleh dompet non-pembuat sebelum masuk; token tanpa ekstensi Token-2022 berbahaya (transfer fee tinggi, transfer hook, permanent delegate, default frozen)",
+   "ambang": "n_jual non-dev ≥ 1 DAN tanpa ekstensi berbahaya / pajak jual ≤ batas",
+   "alasan": "Naviglio: ±88% token Uniswap V2 baru = honeypot. vineetdev memberi uji beli-jual 0,01 SOL bobot tertinggi (15).",
+   "sumber_url": "https://arxiv.org/html/2502.10512v2 ; https://github.com/vineetdev02/Memcoin-Sniper-Bot",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].n_jual dikurangi dev_jual; data akun mint (program Token-2022 + ekstensi) via getAccountInfo"
+  },
+  {
+   "nama": "R30 Snipe migrasi/graduation (launchpad → DEX)",
+   "fitur": "Beli tepat saat pool DEX dibuat oleh migrasi launchpad (degen.fyi → XDEX)",
+   "ambang": "Hindari tanpa model kuat. MemeTrans: 60,26% token migrasi jatuh < 0,2× harga migrasi dalam 20 menit; seleksi MLP 100 teratas tetap rata-rata −26,64%. Flydex 2024: per pekan 6–17% mencapai ≥ $500k, 28–77% 'dump' di bawah mcap migrasi.",
+   "alasan": "Bukti beberapa sumber konsisten bahwa beli di momen migrasi rata-rata rugi.",
+   "sumber_url": "https://arxiv.org/html/2602.13480v1 ; https://t.me/s/flydex/20",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Penanda pool hasil migrasi (pembuat pool = otoritas migrasi launchpad) di pools.json"
+  },
+  {
+   "nama": "R31 Filter jam (time-of-day)",
+   "fitur": "Jam UTC entry (t0)",
+   "ambang": "Kamat: jam 2, 13, 23 UTC terburuk (n 17, −11,6%) vs lainnya (n 173, +1,82%), Mann-Whitney p = 0,5634 → TIDAK signifikan; jangan dipakai kecuali lolos LATIH→UJI",
+   "alasan": "Dipilih setelah melihat data (in-sample). Penulis sendiri menyebutnya non-konfirmatori dan butuh n ≥ 1.000.",
+   "sumber_url": "https://arxiv.org/pdf/2606.08232",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "t0"
+  },
+  {
+   "nama": "R32 Sosial/metadata ada",
+   "fitur": "Link sosial di metadata token; metadata tidak bisa diubah",
+   "ambang": "Default warp-id CHECK_IF_SOCIALS=true, CHECK_IF_MUTABLE=false",
+   "alasan": "MemeChain: 74,8% token mengklaim website tetapi hanya 32,09% merespons HTTP 200; tidak diuji terhadap kelangsungan hidup. Isi sosial off-chain dan bisa berubah setelah t0.",
+   "sumber_url": "https://raw.githubusercontent.com/warp-id/solana-trading-bot/master/.env.copy ; https://arxiv.org/html/2601.22185",
+   "bisa_diuji_x1": false,
+   "data_dibutuhkan": "JSON metadata off-chain tanpa snapshot saat t0, jadi tidak bisa diuji tanpa look-ahead. Hanya flag isMutable on-chain yang bisa direkonstruksi."
+  },
+  {
+   "nama": "R33 Kepadatan aktivitas awal & horizon keluar",
+   "fitur": "Transaksi per menit / pemegang unik pada N menit pertama",
+   "ambang": "Minimal kepadatan tx (pilih di LATIH); horizon keluar < 30 menit",
+   "alasan": "SolRugDetector (sampel kecil 117 rug vs 65 legit, ex-post): median rug 9 pemegang, 0,08 tx/jam vs legit 41.026 pemegang, 299 tx/jam. Median umur rug in-the-wild ±0,0246 hari (±35 menit), P75 semua rug ±0,065 hari (±1,55 jam).",
+   "sumber_url": "https://arxiv.org/html/2603.24625v1",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "jalur[jeda].n_beli+n_jual, pembeli"
+  },
+  {
+   "nama": "R34 HHI distribusi & koefisien clustering transaksi",
+   "fitur": "Indeks Herfindahl saldo pemegang + koefisien clustering graf transfer token sebelum masuk",
+   "ambang": "HHI rendah / clustering rendah = lebih aman; pilih ambang di LATIH",
+   "alasan": "Mazorra dkk. (Uniswap V2): fitur propagasi token (HHI, clustering) → akurasi 0,9936, recall 0,954, presisi 0,9838. Data sangat tidak seimbang (26.957 scam vs 631 normal), jadi angka mungkin optimistis.",
+   "sumber_url": "https://eprint.iacr.org/2022/350",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "Saldo per dompet & graf transfer token sampai t_masuk (swap + transfer langsung via RPC)"
+  },
+  {
+   "nama": "R35 Model ML 5 menit pertama (bukan aturan tunggal)",
+   "fitur": "23 fitur 5 menit pertama: count_tx, unique_buyers/sellers, buy/sell ratio, nilai SOL, price_change_first_to_3_blocks, std harga, waktu jual pertama, dll.",
+   "ambang": "Gradient boosting dengan jendela latih bergulir 3 bulan; ambang probabilitas dipilih di LATIH",
+   "alasan": "Catching the Rug (6,3 jt token pump.fun + 98 rb Raydium): XGBoost AUCPRC 0,755–0,801, MCC 0,29–0,39 (sedang) untuk rug dalam 1 jam. Peringatan 2607.02823: model pra-registrasi AUROC 0,859 di pengembangan jatuh ke 0,464 di validasi → wajib uji di UJI sekali saja.",
+   "sumber_url": "https://arxiv.org/html/2608.20271v1 ; https://arxiv.org/abs/2607.02823",
+   "bisa_diuji_x1": true,
+   "data_dibutuhkan": "swap/<pool> 5 menit pertama; n kecil di X1 (556 peluncuran) → risiko overfitting tinggi"
+  }
+ ],
+ "klaim_wr": [
+  "Pine Analytics 'Exit Liquidity Machines' (https://pineanalytics.substack.com/p/exit-liquidity-machines): 87% snipe oleh dompet yang didanai deployer (beli di blok pembuatan) menguntungkan; > 15.000 SOL laba sebulan, 15.000+ peluncuran (±1,75% pump.fun), Mar–Apr 2025. Belum diverifikasi independen (dasbor penulis); definisi 87% tidak jelas (per snipe vs per dompet). INSIDER, tidak bisa ditiru orang luar.",
+  "Decrypt/GMGN (https://decrypt.co/303439/crypto-trader-840k-17000-meme-coins-three-months): dompet deployer 'MNhB' untung di 79% trade (17.794 token diluncurkan dalam ±3 bulan, > $840 rb), membeli pasokannya sendiri saat peluncuran dan menjual dalam detik–menit. Angka dari GMGN, tidak diverifikasi independen; posisinya pembuat/insider.",
+  "MadeOnSol (https://madeonsol.com/blog/pump-fun-first-3-minutes-graduation-math): bot sniper 30 detik pertama WR 40–60%; pengikut KOL top WR 50–60%. Tanpa ukuran sampel/metodologi, tidak terverifikasi.",
+  "MadeOnSol (https://madeonsol.com/blog/how-to-snipe-tokens-on-pump-fun): sniper berpengalaman rugi di 70–80% trade (WR 20–30%). Tanpa sumber data.",
+  "MadeOnSol (https://madeonsol.com/blog/why-100-percent-winrate-solana-wallet-red-flag): trader manusia terbaik ±60–70%; dompet alpha sehat 65–85%; > 90% atas ≥ 10 trade = tanda bot/insider/dompet buangan. Aturan praktis tanpa data.",
+  "README vineetdev/Memcoin-Sniper-Bot (https://github.com/vineetdev02/Memcoin-Sniper-Bot): 'A win rate of 5–20% is normal'. Asumsi desain, tidak diukur; validasi saringan belum dilakukan.",
+  "Kamat, arXiv 2606.08232 (https://arxiv.org/pdf/2606.08232): uji kertas 15 hari, 190 trade, WR 40,5%, rata-rata +0,62%/trade, kumulatif +117,7%; rentetan rugi terpanjang 12; pemenang ditahan median 3,6 mnt vs pecundang 0,6 mnt. Data disimpan di Zenodo tetapi tidak direplikasi; efek jam tidak signifikan.",
+  "arXiv 2601.08641 (https://arxiv.org/html/2601.08641v2): trade dompet smart-money terpilih rata-rata +14%; penyalin ≈ +3%/trade setelah friksi (simulasi). WR tidak dilaporkan.",
+  "MemeTrans arXiv 2602.13480 (https://arxiv.org/html/2602.13480v1): seleksi MLP 100 token teratas presisi 0,80 (bukan high-risk) vs 0,254 acak, TETAPI rata-rata tetap rugi −26,64% (beli saat migrasi, jual acak ≤ 1 jam); presisi tinggi ≠ untung. Teks ambigu soal arah peringkat.",
+  "Naviglio-Tarantelli-Lillo arXiv 2502.10512 (https://arxiv.org/html/2502.10512v2): beli di swap ke-60 token Uniswap V2 'sellable' → 31,98% berakhir negatif (≈ 68% positif), tetapi label sellable bersifat ex-post (look-ahead) dan tanpa 0,28% outlier > 1 WETH kumulatif negatif; 29,1% posisi keseluruhan gagal keluar (honeypot).",
+  "Cernera dkk. arXiv 2206.08202 (https://arxiv.org/html/2206.08202v3): 39,1% rug pull BSC dan 61,9% Ethereum ditutup untung bagi PEMBUAT ('WR' pembuat rug), peer-reviewed USENIX Security 2023.",
+  "MadeOnSol deployer (https://madeonsol.com/blog/pump-fun-deployer-analysis-2026-561k-wallets): pembuat tier elite bond 73,4% vs dasar 1,89%. Sirkular (tier didefinisikan dari hasil yang sama), tanpa uji out-of-sample.",
+  "Marino dkk. arXiv 2602.14860 (https://arxiv.org/html/2602.14860v1): p(lulus | vSol > 100) = 0,638 (0,748 dengan isBot > 0,3), tetapi baseline di bawah kurva impas beli-tahan, jadi peluang tinggi ≠ untung.",
+  "pumpsnipe.org (https://pumpsnipe.org/): klaim vendor '92,2% win rate' yang muncul di hasil pencarian TIDAK tampil di halaman yang berhasil dibuka (hanya judul), jadi tidak terkonfirmasi dan tanpa metodologi."
+ ]
+}
