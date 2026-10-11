@@ -60,3 +60,21 @@ Konsensus ForexFactory belum terbit (feed pekan ini masih pekan 4 Okt).
 - Core: kejutan lalu DI ATAS (0,3 > 0,2) → emas 1 mnt naik 51% bila DI ATAS → tidak ada keunggulan.
 Ini peluang, bukan kepastian; spread & slippage saat rilis CPI besar (lihat docs/NEWS_DETIK.md: entry detik pertama rugi).
 BELUM dipasang di cloud/aplikasi — tunggu "pasang".
+
+## 📄 Uji "tutup kertas" (walk-forward murni, `research/tutup_kertas.py`, `docs/eksternal/hasil_tutup_kertas.txt`)
+Permintaan pengguna: "tebak dulu seolah belum tahu, jawaban ditutup kertas, baru dibuka — semua tertebak atau ada yang salah?"
+Tiap tahun hanya data tahun-tahun sebelumnya yang dipakai untuk persen & arah; tiap rilis ditebak lalu dibuka.
+
+| Aturan | 1 dtk | 2 dtk | 10 dtk | 1 mnt | sejak 2022 (1 / 10 dtk / 1 mnt) |
+|---|---|---|---|---|---|
+| **WTI (yang tampil di aplikasi "CPI ▼ TURUN 56%")** | 55% (93/168) | 56% | 54% | 55% | **49% / 51% / 61%** |
+| YOY\|P (baru) | 49% | 57% | 62% (88/142) | 59% | 46% / **66%** / 61% |
+| Selalu BUY (pembanding) | 48% | 53% | 55% | 56% | 49% / 58% / 61% |
+
+- **Tidak semua tertebak.** Aturan WTI 2024–2026: 32 rilis bergerak → **16 benar, 16 salah**. CPI 11 Sep 2026: tebak TURUN
+  (WTI naik), emas NAIK $2,76 di detik pertama ❌.
+- Angka "56%" di aplikasi = rata-rata 2–10 dtk SELURUH periode (bukan tutup kertas); sejak 2022 aturan WTI = lempar koin
+  (49–51% untuk 1–10 dtk) dan kalah dari "selalu BUY" (58–60% di 2–10 dtk).
+- YOY|P lebih baik di 10 dtk (sejak 2022 66% vs BUY 58%) tetapi 1 dtk 46–49% (detik pertama belum bergerak / acak) dan
+  hanya 41 rilis sejak 2022 → masih kecil. Tahun buruk tetap ada (2017: 1 benar 8 salah; 2025: 3 benar 4 salah).
+- Saran (BELUM diubah, tunggu izin): baris CPI "minyak WTI" di aplikasi diganti "≈ 50:50 (tutup kertas sejak 2022 49%)".

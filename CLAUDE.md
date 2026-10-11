@@ -457,6 +457,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   bila DI BAWAH vs 44–48% bila DI ATAS (LAMA & BARU searah), hilang setelah 5 mnt; jumlah lolos ≈ kebetulan → belum terbukti.
   Berita lain: hanya ISM (petunjuk aplikasi) 2 dtk–1 mnt. Finnhub: riwayat kalender = Enterprise (berbayar); env
   FINNHUB_API_KEY belum ada. BELUM dipasang (tunggu "pasang").
+- Tutup kertas (`research/tutup_kertas.py`, walk-forward per tahun): aturan WTI yang tampil "CPI ▼ TURUN 56%" sejak 2022 hanya
+  49–51% (1–10 dtk), 2024–2026 16 benar/16 salah; selalu BUY 58–60%. YOY|P 10 dtk sejak 2022 66% (n 41). Usulan ganti baris
+  WTI → "≈ 50:50" menunggu izin. Selalu laporkan angka tutup kertas, bukan rata-rata seluruh periode.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak
