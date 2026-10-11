@@ -1,0 +1,378 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.4%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "105.6",
+"consensus": "105.5",
+"previous": "104.4"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "1.2%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "SECO Consumer Climate",
+"actual": "-11",
+"consensus": "-5",
+"previous": "-1"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "0.8%",
+"consensus": "2.3%",
+"previous": "-4.2%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "-0.4%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "8.8%",
+"consensus": "9.1%",
+"previous": "9.6%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Industrial Production",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Industrial Production",
+"actual": "1.5%",
+"consensus": "1.5%",
+"previous": "2.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Manufacturing Production",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Manufacturing Production",
+"actual": "2.9%",
+"consensus": "2.8%",
+"previous": "4.0%"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "2.123%",
+"consensus": "",
+"previous": "2.196%"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "0.692%",
+"consensus": "",
+"previous": "0.565%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "1.18%",
+"consensus": "",
+"previous": "1.23%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 15-Year OAT Auction",
+"actual": "1.81%",
+"consensus": "",
+"previous": "1.92%"
+},
+{
+"gmt": "06:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "0.59%",
+"consensus": "0.49%",
+"previous": "0.02%"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE QE Total",
+"actual": "375B",
+"consensus": "375B",
+"previous": "375B"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "0.50%",
+"consensus": "0.50%",
+"previous": "0.50%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "428.6B",
+"consensus": "",
+"previous": "439.1B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "11.9%",
+"consensus": "",
+"previous": "-24.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "51.2K",
+"consensus": "",
+"previous": "30.5K"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-2.5%",
+"consensus": "",
+"previous": "13.7%"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "3.6%",
+"consensus": "",
+"previous": "8.7%"
+},
+{
+"gmt": "08:45",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "0.05%",
+"consensus": "0.05%",
+"previous": "0.05%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,348K",
+"consensus": "2,360K",
+"previous": "2,387K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "278K",
+"consensus": "285K",
+"previous": "288K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "279.00K",
+"consensus": "",
+"previous": "281.25K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "2.0%",
+"consensus": "1.5%",
+"previous": "2.9%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "0.3%",
+"consensus": "0.5%",
+"previous": "-0.5%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Building Permits",
+"actual": "12.7%",
+"consensus": "5.2%",
+"previous": "-27.3%"
+},
+{
+"gmt": "09:30",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "38.1",
+"consensus": "",
+"previous": "37.2"
+},
+{
+"gmt": "11:00",
+"country": "United Kingdom",
+"eventName": "NIESR GDP Estimate",
+"actual": "0.7%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "54.2",
+"consensus": "",
+"previous": "65.2"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "51.2",
+"consensus": "57.0",
+"previous": "58.6"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "91B",
+"consensus": "85B",
+"previous": "87B"
+},
+{
+"gmt": "11:40",
+"country": "United States",
+"eventName": "Chicago Fed President Evans Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "",
+"consensus": "",
+"previous": "5.0%"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "Government Monthly Debt",
+"actual": "27.30%",
+"consensus": "",
+"previous": "26.20%"
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "Government Operating Balance",
+"actual": "-12.20%",
+"consensus": "",
+"previous": "-13.00%"
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "53.4",
+"consensus": "",
+"previous": "59.1"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "806.6B",
+"consensus": "",
+"previous": "43.4B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "904.7B",
+"consensus": "",
+"previous": "178.0B"
+},
+{
+"gmt": "20:05",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Gurunanak Jayanti",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

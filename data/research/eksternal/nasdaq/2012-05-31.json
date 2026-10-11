@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Housing Starts",
+"actual": "10.3%",
+"consensus": "3.2%",
+"previous": "5.0%"
+},
+{
+"gmt": "01:30",
+"country": "India",
+"eventName": "GDP Quarterly (YoY)",
+"actual": "5.3%",
+"consensus": "6.1%",
+"previous": "6.1%"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "GDP",
+"actual": "0.7%",
+"consensus": "0.1%",
+"previous": "0.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "-0.3%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Retail Sales",
+"actual": "0.6%",
+"consensus": "0.1%",
+"previous": "1.6%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Retail Sales",
+"actual": "-3.8%",
+"consensus": "0.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Consumer Spending",
+"actual": "0.6%",
+"consensus": "0.3%",
+"previous": "-2.6%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French PPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.5%"
+},
+{
+"gmt": "03:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "0K",
+"consensus": "-5K",
+"previous": "18K"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "6.7%",
+"consensus": "6.8%",
+"previous": "6.8%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Business Confidence",
+"actual": "-15",
+"consensus": "-18",
+"previous": "-16"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "11.40%",
+"consensus": "16.40%",
+"previous": "17.30%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.4%",
+"consensus": "2.5%",
+"previous": "2.6%"
+},
+{
+"gmt": "05:30",
+"country": "Spain",
+"eventName": "Spanish Government Budget Balance",
+"actual": "6.00B",
+"consensus": "2.20B",
+"previous": "1.00B"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "0.30%",
+"consensus": "0.50%",
+"previous": "-0.10%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "66.7%",
+"consensus": "",
+"previous": "11.2%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "-2.9%",
+"consensus": "-2.2%",
+"previous": "-1.9%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Trade Balance",
+"actual": "-9.90B",
+"consensus": "-4.50B",
+"previous": "-5.50B"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "133K",
+"consensus": "148K",
+"previous": "113K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,242K",
+"consensus": "3,250K",
+"previous": "3,278K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "1.9%",
+"consensus": "1.9%",
+"previous": "2.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "1.7%",
+"consensus": "1.5%",
+"previous": "1.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "383K",
+"consensus": "370K",
+"previous": "373K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Current Account",
+"actual": "-10.3B",
+"consensus": "-11.0B",
+"previous": "-9.7B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Net Debt-to-GDP ratio",
+"actual": "35.7%",
+"consensus": "35.9%",
+"previous": "36.6%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "30.4",
+"consensus": "",
+"previous": "29"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Chicago PMI",
+"actual": "52.7",
+"consensus": "56.5",
+"previous": "56.2"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "71B",
+"consensus": "70B",
+"previous": "77B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "2.213M",
+"consensus": "0.558M",
+"previous": "0.883M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-0.833M",
+"consensus": "-0.833M",
+"previous": "-3.299M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade Index",
+"actual": "-2.3%",
+"consensus": "-2.8%",
+"previous": "-1.4%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Manufacturing Index",
+"actual": "42.4",
+"consensus": "",
+"previous": "43.9"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Capital Spending",
+"actual": "3.30%",
+"consensus": "1.30%",
+"previous": "7.60%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "S&P Global South Korea Manufacturing PMI",
+"actual": "51.03",
+"consensus": "",
+"previous": "51.90"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "2.40B",
+"consensus": "1.40B",
+"previous": "2.10B"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "Manufacturing PMI",
+"actual": "50.40",
+"consensus": "52.20",
+"previous": "53.30"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "ANZ Commodity Price Index",
+"actual": "-4.2%",
+"consensus": "",
+"previous": "-4.5%"
+}
+]

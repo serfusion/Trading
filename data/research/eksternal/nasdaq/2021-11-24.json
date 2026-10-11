@@ -1,0 +1,682 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "109",
+"consensus": "106",
+"previous": "107"
+},
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "178.74B",
+"consensus": "",
+"previous": "149.02B"
+},
+{
+"gmt": "05:00",
+"country": "Switzerland",
+"eventName": "ZEW Expectations",
+"actual": "-10.8",
+"consensus": "",
+"previous": "15.6"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "94.2",
+"consensus": "95.0",
+"previous": "95.4"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "99.0",
+"consensus": "99.0",
+"previous": "100.2"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "96.5",
+"consensus": "96.6",
+"previous": "97.7"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "43.0",
+"consensus": "",
+"previous": "91.0"
+},
+{
+"gmt": "06:10",
+"country": "Euro Zone",
+"eventName": "ECB's Panetta Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "26",
+"consensus": "18",
+"previous": "9"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "FGV Consumer confidence",
+"actual": "74.9",
+"consensus": "",
+"previous": "76.3"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "3.24%",
+"consensus": "",
+"previous": "3.20%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "1.8%",
+"consensus": "",
+"previous": "-2.8%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "295.7",
+"consensus": "",
+"previous": "282.5"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "651.3",
+"consensus": "",
+"previous": "639.9"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "2,706.2",
+"consensus": "",
+"previous": "2,695.0"
+},
+{
+"gmt": "08:40",
+"country": "Australia",
+"eventName": "RBA Assist Gov Bullock Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,049K",
+"consensus": "2,033K",
+"previous": "2,109K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.7%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PCE Prices",
+"actual": "4.50%",
+"consensus": "4.50%",
+"previous": "6.10%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Corporate Profits",
+"actual": "4.2%",
+"consensus": "",
+"previous": "10.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-0.5%",
+"consensus": "0.2%",
+"previous": "-0.4%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "0.8%",
+"consensus": "",
+"previous": "-1.9%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "2.1%",
+"consensus": "2.2%",
+"previous": "2.0%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "5.9%",
+"consensus": "5.7%",
+"previous": "6.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Sales",
+"actual": "0.0%",
+"consensus": "",
+"previous": "8.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "1.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Trade Balance",
+"actual": "-82.89B",
+"consensus": "-94.90B",
+"previous": "-97.03B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "199K",
+"consensus": "260K",
+"previous": "270K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "252.25K",
+"consensus": "",
+"previous": "273.25K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PCE Prices",
+"actual": "5.3%",
+"consensus": "5.3%",
+"previous": "6.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Real Consumer Spending",
+"actual": "1.7%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.8%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Wholesale Inventories",
+"actual": "2.2%",
+"consensus": "1.0%",
+"previous": "1.4%"
+},
+{
+"gmt": "10:30",
+"country": "United Kingdom",
+"eventName": "MPC Member Tenreyro Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.125%",
+"consensus": "",
+"previous": "0.110%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "0.045%",
+"consensus": "",
+"previous": "0.045%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Core PCE Price Index",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.2%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Core PCE Price Index",
+"actual": "4.1%",
+"consensus": "4.1%",
+"previous": "3.7%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "4.9%",
+"consensus": "4.9%",
+"previous": "4.8%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "3.00%",
+"consensus": "2.90%",
+"previous": "2.90%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "63.5",
+"consensus": "63.0",
+"previous": "67.9"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "67.4",
+"consensus": "66.8",
+"previous": "71.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "73.6",
+"consensus": "73.2",
+"previous": "77.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "745K",
+"consensus": "800K",
+"previous": "742K"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "0.4%",
+"consensus": "",
+"previous": "7.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "PCE price index",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "PCE Price index",
+"actual": "5.0",
+"consensus": "",
+"previous": "4.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Personal Income",
+"actual": "0.5%",
+"consensus": "0.2%",
+"previous": "-1.0%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Personal Spending",
+"actual": "1.3%",
+"consensus": "1.0%",
+"previous": "0.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Real Personal Consumption",
+"actual": "0.7%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "ECB McCaul Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "1.017M",
+"consensus": "-0.481M",
+"previous": "-2.101M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.243M",
+"consensus": "",
+"previous": "0.031M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "1.266M",
+"consensus": "",
+"previous": "-0.490M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.787M",
+"consensus": "",
+"previous": "0.216M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.058M",
+"consensus": "",
+"previous": "-0.026M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-1.968M",
+"consensus": "-1.002M",
+"previous": "-0.824M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.177M",
+"consensus": "",
+"previous": "-0.132M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.375M",
+"consensus": "",
+"previous": "-0.585M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "1.2%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-0.603M",
+"consensus": "-0.461M",
+"previous": "-0.708M"
+},
+{
+"gmt": "12:00",
+"country": "Germany",
+"eventName": "German Buba President Weidmann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Business Confidence",
+"actual": "-2",
+"consensus": "",
+"previous": "-1"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "7.1%",
+"consensus": "6.0%",
+"previous": "6.9%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-1.0%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "27.5%",
+"consensus": "",
+"previous": "26.3%"
+},
+{
+"gmt": "12:00",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Dallas Fed PCE",
+"actual": "4.20%",
+"consensus": "",
+"previous": "4.90%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-21B",
+"consensus": "-22B",
+"previous": "26B"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-5.232B",
+"consensus": "",
+"previous": "-3.659B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "467",
+"consensus": "",
+"previous": "461"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "569",
+"consensus": "",
+"previous": "563"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,681.77B",
+"consensus": "",
+"previous": "8,674.97B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "5.35B",
+"consensus": "",
+"previous": "4.36B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "6.64B",
+"consensus": "",
+"previous": "6.57B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-1,286M",
+"consensus": "",
+"previous": "-2,206M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-4,920M",
+"consensus": "",
+"previous": "-4,110M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "1.0%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Capital Expenditure",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "4.6%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Plant/Machinery Capital Expenditure",
+"actual": "-4.1%",
+"consensus": "",
+"previous": "4.3%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private New Capital Expenditure",
+"actual": "-2.2%",
+"consensus": "-2.0%",
+"previous": "4.4%"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Monetary Policy Board's Policy Setting Meeting Dates",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Interest Rate Decision",
+"actual": "1.00%",
+"consensus": "1.00%",
+"previous": "0.75%"
+}
+]

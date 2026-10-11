@@ -1,0 +1,594 @@
+[
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Cash Reserve Ratio",
+"actual": "4.00%",
+"consensus": "4.00%",
+"previous": "4.00%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Interest Rate Decision",
+"actual": "4.00%",
+"consensus": "4.00%",
+"previous": "4.00%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Reverse REPO Rate",
+"actual": "3.35%",
+"consensus": "3.35%",
+"previous": "3.35%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.9%",
+"consensus": "",
+"previous": "-3.2%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "104.1",
+"consensus": "",
+"previous": "102.6"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "1.5%",
+"consensus": "",
+"previous": "-1.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "7.6%",
+"consensus": "",
+"previous": "8.7%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "-1.3%",
+"consensus": "0.5%",
+"previous": "-0.8%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "54.46B",
+"consensus": "",
+"previous": "54.47B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "51.649B",
+"consensus": "",
+"previous": "51.368B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-0.50B",
+"consensus": "",
+"previous": "-2.40B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "41.6B",
+"consensus": "",
+"previous": "39.5B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "47.4B",
+"consensus": "",
+"previous": "46.1B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Non-Farm Payrolls",
+"actual": "1.2%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Reserve Assets Total",
+"actual": "190,654.0M",
+"consensus": "",
+"previous": "186,242.0M"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-5.8B",
+"consensus": "",
+"previous": "-6.8B"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "11.1%",
+"consensus": "13.5%",
+"previous": "25.0%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "-1.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "13.9%",
+"consensus": "",
+"previous": "21.1%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "494.80B",
+"consensus": "",
+"previous": "491.60B"
+},
+{
+"gmt": "05:00",
+"country": "Singapore",
+"eventName": "Foreign Reserves USD",
+"actual": "407.7B",
+"consensus": "",
+"previous": "398.4B"
+},
+{
+"gmt": "07:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Broadbent Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "620.58B",
+"consensus": "",
+"previous": "611.15B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "4.0%",
+"consensus": "3.8%",
+"previous": "3.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.8",
+"consensus": "34.7",
+"previous": "34.8"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "240.0K",
+"consensus": "",
+"previous": "169.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "27K",
+"consensus": "25K",
+"previous": "39K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "943K",
+"consensus": "870K",
+"previous": "938K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "61.7%",
+"consensus": "",
+"previous": "61.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "703K",
+"consensus": "700K",
+"previous": "769K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "9.2%",
+"consensus": "",
+"previous": "9.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "5.4%",
+"consensus": "5.7%",
+"previous": "5.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "94.0K",
+"consensus": "177.5K",
+"previous": "230.7K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "83.0K",
+"consensus": "",
+"previous": "-33.2K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "11.0K",
+"consensus": "",
+"previous": "263.9K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.2%",
+"consensus": "",
+"previous": "65.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "7.5%",
+"consensus": "7.4%",
+"previous": "7.8%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "2.0%",
+"consensus": "",
+"previous": "13.4%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "3.8%",
+"consensus": "",
+"previous": "3.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Wholesale Inventories",
+"actual": "1.1%",
+"consensus": "",
+"previous": "1.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Wholesale Trade Sales",
+"actual": "2.0%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "59.8",
+"consensus": "",
+"previous": "67.7"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "56.4",
+"consensus": "",
+"previous": "71.9"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.7%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "6.5%",
+"consensus": "6.6%",
+"previous": "6.5%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "387",
+"consensus": "",
+"previous": "385"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "491",
+"consensus": "",
+"previous": "488"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Consumer Credit",
+"actual": "37.69B",
+"consensus": "23.00B",
+"previous": "36.69B"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-0.1K",
+"consensus": "",
+"previous": "-5.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "3.4K",
+"consensus": "",
+"previous": "3.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "35.1K",
+"consensus": "",
+"previous": "37.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "318.0K",
+"consensus": "",
+"previous": "306.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "430.5K",
+"consensus": "",
+"previous": "449.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "196.3K",
+"consensus": "",
+"previous": "199.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "-1.5K",
+"consensus": "",
+"previous": "-9.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-136.2K",
+"consensus": "",
+"previous": "-137.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "41.3K",
+"consensus": "",
+"previous": "39.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "36.1K",
+"consensus": "",
+"previous": "31.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "115.8K",
+"consensus": "",
+"previous": "125.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "41.0K",
+"consensus": "",
+"previous": "30.2K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "7.5K",
+"consensus": "",
+"previous": "5.4K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "7.5K",
+"consensus": "",
+"previous": "8.5K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-41.3K",
+"consensus": "",
+"previous": "-39.3K"
+},
+{
+"gmt": "15:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "23.4K",
+"consensus": "",
+"previous": "21.8K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-55.2K",
+"consensus": "",
+"previous": "-59.9K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-0.3K",
+"consensus": "",
+"previous": "1.4K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "8.9K",
+"consensus": "",
+"previous": "7.6K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "38.0K",
+"consensus": "",
+"previous": "38.1K"
+},
+{
+"gmt": "22:02",
+"country": "China",
+"eventName": "FX Reserves (USD)",
+"actual": "3.236T",
+"consensus": "3.217T",
+"previous": "3.214T"
+},
+{
+"gmt": "23:01",
+"country": "China",
+"eventName": "Exports",
+"actual": "19.3%",
+"consensus": "20.8%",
+"previous": "32.2%"
+},
+{
+"gmt": "23:01",
+"country": "China",
+"eventName": "Imports",
+"actual": "28.1%",
+"consensus": "33.0%",
+"previous": "36.7%"
+},
+{
+"gmt": "23:01",
+"country": "China",
+"eventName": "Trade Balance (USD)",
+"actual": "56.58B",
+"consensus": "51.54B",
+"previous": "51.53B"
+}
+]

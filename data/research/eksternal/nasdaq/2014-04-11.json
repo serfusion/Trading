@@ -1,0 +1,266 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.0%",
+"consensus": "-0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.40B",
+"consensus": "",
+"previous": "-3.70B"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "-0.1%",
+"consensus": "-0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "03:35",
+"country": "India",
+"eventName": "Exports (USD)",
+"actual": "29.58B",
+"consensus": "",
+"previous": "25.69B"
+},
+{
+"gmt": "03:35",
+"country": "India",
+"eventName": "Imports (USD)",
+"actual": "40.09B",
+"consensus": "",
+"previous": "33.82B"
+},
+{
+"gmt": "03:35",
+"country": "India",
+"eventName": "Trade Balance",
+"actual": "-10.51B",
+"consensus": "-5.90B",
+"previous": "-8.13B"
+},
+{
+"gmt": "07:00",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "306.65B",
+"consensus": "",
+"previous": "303.67B"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Industrial Production",
+"actual": "-1.9%",
+"consensus": "0.9%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Manufacturing Output",
+"actual": "-3.70%",
+"consensus": "",
+"previous": "-1.60%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "0.6%",
+"consensus": "0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "1.4%",
+"consensus": "1.1%",
+"previous": "1.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "0.5%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "1.4%",
+"consensus": "1.1%",
+"previous": "0.9%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Trade Balance",
+"actual": "12.43B",
+"consensus": "17.40B",
+"previous": "18.90B"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "3.1%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "73.3",
+"consensus": "71.4",
+"previous": "70.0"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "82.6",
+"consensus": "81.0",
+"previous": "80.0"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "97.1",
+"consensus": "96.3",
+"previous": "95.7"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "1517",
+"consensus": "",
+"previous": "1498"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "46.5K",
+"consensus": "",
+"previous": "33.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "88.6K",
+"consensus": "",
+"previous": "100.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "16.3K",
+"consensus": "",
+"previous": "14.5K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-34.3K",
+"consensus": "",
+"previous": "-37.0K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "11.3K",
+"consensus": "",
+"previous": "14.2K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "3.3K",
+"consensus": "",
+"previous": "-4.9K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-87.5K",
+"consensus": "",
+"previous": "-88.6K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "19.8K",
+"consensus": "",
+"previous": "18.5K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "23.3K",
+"consensus": "",
+"previous": "33.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "399.8k",
+"consensus": "",
+"previous": "391.8k"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-3.8K",
+"consensus": "",
+"previous": "-4.6K"
+}
+]

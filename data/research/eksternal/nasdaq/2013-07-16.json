@@ -1,0 +1,394 @@
+[
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "3.89B",
+"consensus": "2.14B",
+"previous": "2.03B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "0.89B",
+"consensus": "",
+"previous": "0.56B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "2.3%",
+"consensus": "2.3%",
+"previous": "2.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "1.0%",
+"consensus": "1.1%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "2.9%",
+"consensus": "3.0%",
+"previous": "2.7%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "-0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "2.9%",
+"consensus": "2.9%",
+"previous": "2.6%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "0.2%",
+"consensus": "-0.2%",
+"previous": "-0.6%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "4.2%",
+"consensus": "4.2%",
+"previous": "1.8%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "2.0%",
+"consensus": "1.9%",
+"previous": "1.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.1%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "1.503%",
+"consensus": "",
+"previous": "1.395%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "0.958%",
+"consensus": "",
+"previous": "0.821%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "36.3",
+"consensus": "39.6",
+"previous": "38.5"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "1.2%",
+"consensus": "1.2%",
+"previous": "1.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "14.6B",
+"consensus": "15.8B",
+"previous": "15.2B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "32.8",
+"consensus": "31.8",
+"previous": "30.6"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Government Budget Balance",
+"actual": "0.57T",
+"consensus": "0.37T",
+"previous": "0.40T"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "3.7%",
+"consensus": "3.1%",
+"previous": "1.6%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "-1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "1.8%",
+"consensus": "1.7%",
+"previous": "1.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "0.70%",
+"consensus": "1.00%",
+"previous": "-2.10%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "0.80%",
+"consensus": "",
+"previous": "-0.30%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "3.0%",
+"consensus": "",
+"previous": "3.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "11.30B",
+"consensus": "",
+"previous": "-38.30B"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "56.40B",
+"consensus": "",
+"previous": "28.30B"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "-27.2B",
+"consensus": "14.3B",
+"previous": "-21.8B"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "77.8%",
+"consensus": "77.7%",
+"previous": "77.7%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "57",
+"consensus": "52",
+"previous": "51"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.020%",
+"consensus": "",
+"previous": "0.025%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "5.30%",
+"consensus": "",
+"previous": "0.70%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "0.00%",
+"consensus": "",
+"previous": "-0.40%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-1.40%",
+"consensus": "",
+"previous": "-2.60%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "FDI",
+"actual": "4.90%",
+"consensus": "",
+"previous": "1.03%"
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "5-Year JGB Auction",
+"actual": "0.295%",
+"consensus": "",
+"previous": "0.361%"
+}
+]

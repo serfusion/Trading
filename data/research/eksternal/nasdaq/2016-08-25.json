@@ -1,0 +1,298 @@
+[
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "101",
+"consensus": "103",
+"previous": "103"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Industrial Investments",
+"actual": "6.0%",
+"consensus": "",
+"previous": "7.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "0.8%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "3.2%",
+"consensus": "3.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "-4.6%",
+"consensus": "",
+"previous": "-4.7%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "Industrial orders",
+"actual": "-5.6%",
+"consensus": "",
+"previous": "-2.3%"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "100.1",
+"consensus": "102.5",
+"previous": "102.1"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "112.8",
+"consensus": "114.9",
+"previous": "114.8"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "99.8",
+"consensus": "",
+"previous": "100.1"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "-5.1%",
+"consensus": "",
+"previous": "-1.0%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "-3.3%",
+"consensus": "",
+"previous": "-0.9%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-33.3B",
+"consensus": "",
+"previous": "-45.6B"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "0.8%",
+"consensus": "0.3%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "7.4%",
+"consensus": "6.9%",
+"previous": "6.8%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "9",
+"consensus": "-5",
+"previous": "-14"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,145K",
+"consensus": "2,153K",
+"previous": "2,175K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "1.5%",
+"consensus": "0.5%",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "4.4%",
+"consensus": "3.3%",
+"previous": "-4.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "3.8%",
+"consensus": "",
+"previous": "-4.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "1.6%",
+"consensus": "0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "261K",
+"consensus": "265K",
+"previous": "262K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "264.00K",
+"consensus": "",
+"previous": "265.25K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Corporate Profits",
+"actual": "-3.4%",
+"consensus": "",
+"previous": "-4.6%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "398.2B",
+"consensus": "",
+"previous": "395.7B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Bank lending",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "45.3",
+"consensus": "",
+"previous": "43.6"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "11B",
+"consensus": "18B",
+"previous": "22B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Composite Index",
+"actual": "-4",
+"consensus": "-2",
+"previous": "-6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Manufacturing Index",
+"actual": "-7",
+"consensus": "",
+"previous": "-15"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "7-Year Note Auction",
+"actual": "1.423%",
+"consensus": "",
+"previous": "1.340%"
+},
+{
+"gmt": "15:00",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "-94.72K",
+"consensus": "-88.00K",
+"previous": "-91.00K"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Jackson Hole Symposium",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "102",
+"consensus": "",
+"previous": "101"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "-0.5%",
+"consensus": "-0.4%",
+"previous": "-0.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "-0.4%",
+"consensus": "-0.4%",
+"previous": "-0.4%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Tokyo Core CPI",
+"actual": "-0.4%",
+"consensus": "-0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Tokyo CPI",
+"actual": "-0.5%",
+"consensus": "-0.4%",
+"previous": "-0.4%"
+}
+]

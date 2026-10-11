@@ -1,0 +1,434 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "1.1%",
+"consensus": "1.0%",
+"previous": "1.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "103",
+"consensus": "101",
+"previous": "102"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial New Orders",
+"actual": "2.7%",
+"consensus": "",
+"previous": "2.0%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial New Orders",
+"actual": "-0.3%",
+"consensus": "0.7%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Sales",
+"actual": "0.90%",
+"consensus": "",
+"previous": "-0.90%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Sales",
+"actual": "1.30%",
+"consensus": "",
+"previous": "0.40%"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "103.0",
+"consensus": "103.1",
+"previous": "103.4"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "114.3",
+"consensus": "113.5",
+"previous": "114.0"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "99.8",
+"consensus": "",
+"previous": "99.3"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "6.04B",
+"consensus": "7.80B",
+"previous": "6.06B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "-4.044B",
+"consensus": "",
+"previous": "21.595B"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.2%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "353.88B",
+"consensus": "",
+"previous": "352.13B"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.60%",
+"consensus": "0.59%",
+"previous": "1.07%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "8.24%",
+"consensus": "8.23%",
+"previous": "8.22%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.8%",
+"consensus": "1.7%",
+"previous": "1.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "241.41",
+"consensus": "",
+"previous": "240.79"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "236.60",
+"consensus": "236.71",
+"previous": "236.12"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "2.3%",
+"consensus": "2.4%",
+"previous": "2.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "1.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.8%",
+"consensus": "1.0%",
+"previous": "1.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "0.7%",
+"consensus": "0.3%",
+"previous": "1.5%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "-9.8%",
+"consensus": "-8.1%",
+"previous": "-8.7%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Unemployment Rate",
+"actual": "5.8%",
+"consensus": "6.0%",
+"previous": "5.9%"
+},
+{
+"gmt": "09:30",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Japan",
+"eventName": "BoJ Governor Kuroda Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "659",
+"consensus": "",
+"previous": "660"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Fed Chair Yellen Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-23.4K",
+"consensus": "",
+"previous": "-30.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "9.3K",
+"consensus": "",
+"previous": "8.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "122.6K",
+"consensus": "",
+"previous": "77.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-31.0K",
+"consensus": "",
+"previous": "-72.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "51.3K",
+"consensus": "",
+"previous": "29.3K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "4.3K",
+"consensus": "",
+"previous": "-4.0K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "9.4K",
+"consensus": "",
+"previous": "10.6K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "7.3K",
+"consensus": "",
+"previous": "4.5K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-22.0K",
+"consensus": "",
+"previous": "-23.6K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-2.2K",
+"consensus": "",
+"previous": "1.8K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "0.2K",
+"consensus": "",
+"previous": "0.6K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-168.3K",
+"consensus": "",
+"previous": "-179.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "343.4k",
+"consensus": "",
+"previous": "320.2k"
+}
+]

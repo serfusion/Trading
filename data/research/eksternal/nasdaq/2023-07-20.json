@@ -1,0 +1,346 @@
+[
+{
+"gmt": "02:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "4.823B",
+"consensus": "4.031B",
+"previous": "5.442B"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "0.1%",
+"consensus": "0.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "-0.3%",
+"consensus": "-0.4%",
+"previous": "-1.4%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "100",
+"consensus": "100",
+"previous": "100"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-3.11B",
+"consensus": "-6.99B",
+"previous": "-4.38B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "9.1B",
+"consensus": "2.5B",
+"previous": "3.8B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "-11.3B",
+"consensus": "",
+"previous": "4.3B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "0.20%",
+"consensus": "",
+"previous": "-0.30%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "1.90%",
+"consensus": "1.90%",
+"previous": "2.00%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 15-Year Obligacion Auction",
+"actual": "3.726%",
+"consensus": "",
+"previous": "3.842%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "3.303%",
+"consensus": "",
+"previous": "3.246%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "BCB National Monetary Council Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,754K",
+"consensus": "1,729K",
+"previous": "1,721K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "228K",
+"consensus": "242K",
+"previous": "237K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "237.50K",
+"consensus": "250.01K",
+"previous": "246.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "-13.5",
+"consensus": "-10.0",
+"previous": "-13.7"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "29.1",
+"consensus": "10.0",
+"previous": "12.7"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "8.60",
+"consensus": "6.20",
+"previous": "9.90"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "-1.0",
+"consensus": "-4.5",
+"previous": "-0.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "-15.9",
+"consensus": "-10.0",
+"previous": "-11.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "9.50",
+"consensus": "10.70",
+"previous": "10.50"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "594.4B",
+"consensus": "",
+"previous": "583.1B"
+},
+{
+"gmt": "09:00",
+"country": "South Africa",
+"eventName": "Interest Rate Decision",
+"actual": "8.25%",
+"consensus": "8.25%",
+"previous": "8.25%"
+},
+{
+"gmt": "09:00",
+"country": "South Africa",
+"eventName": "Prime Rate",
+"actual": "11.75%",
+"consensus": "",
+"previous": "11.75%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "4.16M",
+"consensus": "4.20M",
+"previous": "4.30M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "-3.3%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "-0.7%",
+"consensus": "-0.6%",
+"previous": "-0.6%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-15.1",
+"consensus": "-16.0",
+"previous": "-16.1"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "41B",
+"consensus": "40B",
+"previous": "49B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.255%",
+"consensus": "",
+"previous": "5.210%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.255%",
+"consensus": "",
+"previous": "5.230%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "1.495%",
+"consensus": "",
+"previous": "1.395%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,275B",
+"consensus": "",
+"previous": "8,297B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.221T",
+"consensus": "",
+"previous": "3.162T"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.2%",
+"consensus": "-0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.2%",
+"consensus": "0.1%",
+"previous": "3.3%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-30",
+"consensus": "-26",
+"previous": "-24"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "3.3%",
+"consensus": "3.5%",
+"previous": "3.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-77.4B",
+"consensus": "",
+"previous": "-956.0B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "238.6B",
+"consensus": "",
+"previous": "181.7B"
+}
+]

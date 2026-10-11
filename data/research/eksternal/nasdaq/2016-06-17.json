@@ -1,0 +1,266 @@
+[
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "4.520B",
+"consensus": "",
+"previous": "5.230B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "0.92B",
+"consensus": "",
+"previous": "1.20B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "36.2B",
+"consensus": "",
+"previous": "26.3B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "34.0B",
+"consensus": "",
+"previous": "31.3B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Net Investment Flow",
+"actual": "128.8B",
+"consensus": "",
+"previous": "22.5B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Wages in euro zone",
+"actual": "1.80%",
+"consensus": "",
+"previous": "1.50%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Labor Cost Index",
+"actual": "1.70%",
+"consensus": "",
+"previous": "1.30%"
+},
+{
+"gmt": "Tentative",
+"country": "Euro Zone",
+"eventName": "EU Finance Ministers Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "363.23B",
+"consensus": "",
+"previous": "360.19B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.138M",
+"consensus": "1.150M",
+"previous": "1.130M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "0.7%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.164M",
+"consensus": "1.150M",
+"previous": "1.167M"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "2.1%",
+"consensus": "2.1%",
+"previous": "2.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.5%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "1.5%",
+"consensus": "1.6%",
+"previous": "1.7%"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:05",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "337",
+"consensus": "",
+"previous": "328"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-36.7K",
+"consensus": "",
+"previous": "-66.3K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-44.8K",
+"consensus": "",
+"previous": "-39.3K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "312.6K",
+"consensus": "",
+"previous": "325.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "279.9K",
+"consensus": "",
+"previous": "228.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "118.2K",
+"consensus": "",
+"previous": "-31.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "69.6K",
+"consensus": "",
+"previous": "57.0K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "18.4K",
+"consensus": "",
+"previous": "21.5K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "7.1K",
+"consensus": "",
+"previous": "-9.6K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-6.8K",
+"consensus": "",
+"previous": "-15.8K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "55.7K",
+"consensus": "",
+"previous": "42.9K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-3.8K",
+"consensus": "",
+"previous": "8.5K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "6.2K",
+"consensus": "",
+"previous": "4.2K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-56.5K",
+"consensus": "",
+"previous": "-67.1K"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "House Prices",
+"actual": "6.9%",
+"consensus": "",
+"previous": "6.2%"
+}
+]

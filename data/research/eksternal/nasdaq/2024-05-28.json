@@ -1,0 +1,338 @@
+[
+{
+"gmt": "00:55",
+"country": "United States",
+"eventName": "FOMC Member Bowman Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "00:55",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "00:55",
+"country": "Switzerland",
+"eventName": "SNB Board Member Jordan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "00:55",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "1.8%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.4%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-1.8%",
+"consensus": "",
+"previous": "-2.6%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "8",
+"consensus": "-24",
+"previous": "-44"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "France Jobseekers Total",
+"actual": "2,775.4K",
+"consensus": "",
+"previous": "2,812.2K"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:05",
+"country": "Italy",
+"eventName": "Italian 2-Year CTZ Auction",
+"actual": "3.510%",
+"consensus": "",
+"previous": "3.420%"
+},
+{
+"gmt": "06:30",
+"country": "Italy",
+"eventName": "Italian 3-Year BTP Auction",
+"actual": "3.48%",
+"consensus": "",
+"previous": "3.32%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.44%",
+"consensus": "0.49%",
+"previous": "0.21%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "3.70%",
+"consensus": "3.75%",
+"previous": "3.77%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian PPI",
+"actual": "0.74%",
+"consensus": "",
+"previous": "0.35%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "1.5%",
+"consensus": "0.8%",
+"previous": "0.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "1.4%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "5.5%",
+"consensus": "3.1%",
+"previous": "4.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "3.1%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "6.7%",
+"consensus": "",
+"previous": "7.1%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.1%",
+"consensus": "0.5%",
+"previous": "1.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "423.4",
+"consensus": "",
+"previous": "423.0"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "1.6%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "7.4%",
+"consensus": "7.3%",
+"previous": "7.3%"
+},
+{
+"gmt": "09:30",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "5.255%",
+"consensus": "",
+"previous": "5.245%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "5.170%",
+"consensus": "",
+"previous": "5.160%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "102.0",
+"consensus": "96.0",
+"previous": "97.5"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Mfg Business Index",
+"actual": "-19.4",
+"consensus": "",
+"previous": "-14.5"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "4.917%",
+"consensus": "",
+"previous": "4.898%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "4.553%",
+"consensus": "",
+"previous": "4.659%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "20.87T",
+"consensus": "",
+"previous": "20.84T"
+},
+{
+"gmt": "13:05",
+"country": "United States",
+"eventName": "Fed Governor Cook Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:05",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "-0.0%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "ANZ Business Confidence",
+"actual": "11.2",
+"consensus": "",
+"previous": "14.9"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "NBNZ Own Activity",
+"actual": "11.8%",
+"consensus": "",
+"previous": "14.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "-2.9%",
+"consensus": "0.6%",
+"previous": "1.8%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "3.60%",
+"consensus": "3.40%",
+"previous": "3.50%"
+},
+{
+"gmt": "21:30",
+"country": "Japan",
+"eventName": "BoJ Board Member Adachi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

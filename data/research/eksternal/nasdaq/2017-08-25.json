@@ -1,0 +1,298 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "1.0%",
+"consensus": "-3.4%",
+"previous": "9.0%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "21.0%",
+"consensus": "14.0%",
+"previous": "12.7%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-0.4%",
+"consensus": "0.1%",
+"previous": "-1.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "1.9%",
+"consensus": "2.4%",
+"previous": "2.5%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "103",
+"consensus": "103",
+"previous": "104"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "3.2%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "107.9",
+"consensus": "106.8",
+"previous": "107.3"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "124.6",
+"consensus": "125.0",
+"previous": "125.5"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "103.7",
+"consensus": "",
+"previous": "103.8"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "FGV Consumer confidence",
+"actual": "80.9",
+"consensus": "82.5",
+"previous": "82.0"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "393.40B",
+"consensus": "",
+"previous": "393.61B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-6.8%",
+"consensus": "-6.0%",
+"previous": "6.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-7.8%",
+"consensus": "",
+"previous": "6.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Fed Chair Yellen Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "0.02B",
+"consensus": "",
+"previous": "-0.31B"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "0.08B",
+"consensus": "",
+"previous": "0.07B"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "759",
+"consensus": "",
+"previous": "763"
+},
+{
+"gmt": "Tentative",
+"country": "United States",
+"eventName": "Jackson Hole Symposium",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-45.9K",
+"consensus": "",
+"previous": "-31.9K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "40.8K",
+"consensus": "",
+"previous": "36.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "445.4K",
+"consensus": "",
+"previous": "463.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "208.4K",
+"consensus": "",
+"previous": "187.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "142.1K",
+"consensus": "",
+"previous": "150.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "44.5K",
+"consensus": "",
+"previous": "38.9K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "51.1K",
+"consensus": "",
+"previous": "51.3K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-2.0K",
+"consensus": "",
+"previous": "-1.2K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "60.5K",
+"consensus": "",
+"previous": "59.6K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-74.1K",
+"consensus": "",
+"previous": "-77.5K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "21.9K",
+"consensus": "",
+"previous": "24.8K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-3.5K",
+"consensus": "",
+"previous": "-6.8K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "88.0K",
+"consensus": "",
+"previous": "79.3K"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Ganesh Chaturthi",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

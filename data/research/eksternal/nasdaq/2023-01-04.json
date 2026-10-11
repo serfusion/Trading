@@ -1,0 +1,282 @@
+[
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-4.5%",
+"consensus": "-1.6%",
+"previous": "-1.2%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "14.5%",
+"consensus": "18.0%",
+"previous": "23.5%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "2.8%",
+"consensus": "2.9%",
+"previous": "3.0%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "82",
+"consensus": "84",
+"previous": "83"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "-0.1%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "5.9%",
+"consensus": "6.4%",
+"previous": "6.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "-0.1%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "6.7%",
+"consensus": "7.2%",
+"previous": "7.1%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-4.2%",
+"consensus": "",
+"previous": "3.9%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "1.507B",
+"consensus": "0.900B",
+"previous": "0.748B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "46.08K",
+"consensus": "55.00K",
+"previous": "57.88K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "4.36B",
+"consensus": "3.70B",
+"previous": "3.58B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "5.9B",
+"consensus": "4.5B",
+"previous": "4.3B"
+},
+{
+"gmt": "06:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.580%",
+"consensus": "",
+"previous": "2.110%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "6.58%",
+"consensus": "",
+"previous": "6.34%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-10.3%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "160.2",
+"consensus": "",
+"previous": "182.5"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "184.5",
+"consensus": "",
+"previous": "212.5"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "310.9",
+"consensus": "",
+"previous": "371.4"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian PPI",
+"actual": "-0.54%",
+"consensus": "",
+"previous": "-0.85%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "10.2%",
+"consensus": "",
+"previous": "9.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "51.4",
+"consensus": "48.3",
+"previous": "48.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "45.2",
+"consensus": "",
+"previous": "47.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "48.4",
+"consensus": "48.5",
+"previous": "49.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "39.4",
+"consensus": "42.6",
+"previous": "43.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "JOLTS Job Openings",
+"actual": "10.458M",
+"consensus": "10.000M",
+"previous": "10.512M"
+},
+{
+"gmt": "11:00",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-12.482B",
+"consensus": "",
+"previous": "-8.267B"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,507.43B",
+"consensus": "",
+"previous": "8,551.17B"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "3.298M",
+"consensus": "",
+"previous": "-1.300M"
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "13.30M",
+"consensus": "",
+"previous": "14.10M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "-6.1%",
+"consensus": "-3.2%",
+"previous": "-6.4%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.500%",
+"consensus": "",
+"previous": "0.250%"
+}
+]

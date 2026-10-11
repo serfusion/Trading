@@ -1,0 +1,538 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Trade Balance",
+"actual": "6.797B",
+"consensus": "4.390B",
+"previous": "4.090B"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-1.82B",
+"consensus": "-2.10B",
+"previous": "-1.47B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "6.860B",
+"consensus": "2.470B",
+"previous": "3.676B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "3.31B",
+"consensus": "",
+"previous": "1.22B"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.30%",
+"consensus": "0.20%",
+"previous": "0.50%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "5.80%",
+"consensus": "5.70%",
+"previous": "5.70%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "6.4%",
+"consensus": "6.2%",
+"previous": "6.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Average Earnings ex Bonus",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Average Earnings Index +Bonus",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "2",
+"consensus": "2",
+"previous": "2"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "7",
+"consensus": "7",
+"previous": "7"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Claimant Count Change",
+"actual": "-37.2K",
+"consensus": "-30.0K",
+"previous": "-37.4K"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Unemployment Rate",
+"actual": "6.2%",
+"consensus": "6.3%",
+"previous": "6.4%"
+},
+{
+"gmt": "05:00",
+"country": "Switzerland",
+"eventName": "ZEW Expectations",
+"actual": "-7.7",
+"consensus": "5.0",
+"previous": "2.5"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "-0.070%",
+"consensus": "",
+"previous": "0.000%"
+},
+{
+"gmt": "06:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "13.2%",
+"consensus": "",
+"previous": "13.0%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.36%",
+"consensus": "",
+"previous": "4.27%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "7.9%",
+"consensus": "",
+"previous": "-7.2%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "169.3",
+"consensus": "",
+"previous": "161.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "352.9",
+"consensus": "",
+"previous": "327.2"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,395.5",
+"consensus": "",
+"previous": "1,265.0"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Retail Sales",
+"actual": "2.4%",
+"consensus": "0.3%",
+"previous": "-0.9%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "5.7%",
+"consensus": "8.4%",
+"previous": "9.0%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "0.0%",
+"consensus": "0.9%",
+"previous": "1.6%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "1.4%",
+"consensus": "1.0%",
+"previous": "1.2%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Unemployment Rate",
+"actual": "4.8%",
+"consensus": "4.9%",
+"previous": "4.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.7%",
+"consensus": "1.9%",
+"previous": "1.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "238.35",
+"consensus": "",
+"previous": "238.31"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "1.7%",
+"consensus": "1.9%",
+"previous": "2.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "237.85",
+"consensus": "238.26",
+"previous": "238.25"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Current Account",
+"actual": "-98.5B",
+"consensus": "-114.0B",
+"previous": "-102.1B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "0.4%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "59",
+"consensus": "56",
+"previous": "55"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "3.673M",
+"consensus": "-1.614M",
+"previous": "-0.972M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.279M",
+"consensus": "0.486M",
+"previous": "4.094M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.635M",
+"consensus": "-0.257M",
+"previous": "2.381M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "2.25B",
+"consensus": "",
+"previous": "-1.90B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Economic Projections",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Fed Interest Rate Decision",
+"actual": "0.25%",
+"consensus": "0.25%",
+"previous": "0.25%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "QE MBS",
+"actual": "5B",
+"consensus": "5B",
+"previous": "10B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "QE Total",
+"actual": "15B",
+"consensus": "15B",
+"previous": "25B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "QE Treasuries",
+"actual": "10B",
+"consensus": "10B",
+"previous": "15B"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,449.59B",
+"consensus": "",
+"previous": "4,421.41B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "GDP",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "GDP",
+"actual": "3.9%",
+"consensus": "3.8%",
+"previous": "3.8%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "GDP Annual Average",
+"actual": "3.5%",
+"consensus": "3.6%",
+"previous": "3.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "GDP Expenditure",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "1.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "10",
+"consensus": "",
+"previous": "20"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.92T",
+"consensus": "-0.99T",
+"previous": "-1.02T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "-1.3%",
+"consensus": "-2.6%",
+"previous": "3.9%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "-1.5%",
+"consensus": "-1.2%",
+"previous": "2.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-949B",
+"consensus": "-1,029B",
+"previous": "-964B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "House Prices",
+"actual": "0.5%",
+"consensus": "2.3%",
+"previous": "2.5%"
+}
+]

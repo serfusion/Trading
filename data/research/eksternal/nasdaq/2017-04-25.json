@@ -1,0 +1,346 @@
+[
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "108",
+"consensus": "104",
+"previous": "105"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "6.0%",
+"consensus": "",
+"previous": "7.4%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "4.36B",
+"consensus": "1.50B",
+"previous": "-0.66B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "34.311B",
+"consensus": "",
+"previous": "12.880B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "16.9%",
+"consensus": "",
+"previous": "18.2%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "13.0%",
+"consensus": "",
+"previous": "25.4%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-42.3B",
+"consensus": "",
+"previous": "-56.3B"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "-0.690%",
+"consensus": "",
+"previous": "-0.710%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.2%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.7%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.8%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "6.4%",
+"consensus": "",
+"previous": "5.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "244.8",
+"consensus": "",
+"previous": "242.9"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.7%",
+"consensus": "0.8%",
+"previous": "0.9%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "5.9%",
+"consensus": "5.7%",
+"previous": "5.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "1.40B",
+"consensus": "0.60B",
+"previous": "-0.94B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "7.11B",
+"consensus": "7.00B",
+"previous": "5.31B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "120.3",
+"consensus": "122.5",
+"previous": "124.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "621K",
+"consensus": "583K",
+"previous": "587K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "5.8%",
+"consensus": "-0.8%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "20",
+"consensus": "16",
+"previous": "22"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "25",
+"consensus": "",
+"previous": "17"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "22",
+"consensus": "",
+"previous": "9"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "12.1",
+"consensus": "",
+"previous": "15.2"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "9.0",
+"consensus": "",
+"previous": "13.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.735%",
+"consensus": "",
+"previous": "0.750%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "52-Week Bill Auction",
+"actual": "1.060%",
+"consensus": "",
+"previous": "1.025%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "1.280%",
+"consensus": "",
+"previous": "1.261%"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "0.897M",
+"consensus": "-1.300M",
+"previous": "-0.840M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "-0.20%",
+"consensus": "",
+"previous": "1.80%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "6,100",
+"consensus": "",
+"previous": "5,980"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Visitor Arrivals",
+"actual": "1.5%",
+"consensus": "",
+"previous": "-1.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.5%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "2.1%",
+"consensus": "2.2%",
+"previous": "1.5%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI Index Number",
+"actual": "110.50",
+"consensus": "",
+"previous": "110.00"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "1.9%",
+"consensus": "1.8%",
+"previous": "1.6%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "0.4%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "1.7%",
+"consensus": "1.8%",
+"previous": "1.5%"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "7.1%",
+"consensus": "",
+"previous": "5.3%"
+},
+{
+"gmt": "All Day",
+"country": "Australia",
+"eventName": "Australia - ANZAC Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "New Zealand",
+"eventName": "New Zealand - ANZAC Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,330 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "-1.0%",
+"consensus": "-0.7%",
+"previous": "1.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "-3.2%",
+"consensus": "-3.1%",
+"previous": "-3.0%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "-3.1%",
+"consensus": "-3.1%",
+"previous": "-3.3%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "-0.9%",
+"consensus": "-0.5%",
+"previous": "1.1%"
+},
+{
+"gmt": "03:00",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "1.70%",
+"consensus": "1.80%",
+"previous": "1.70%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Government Budget to GDP",
+"actual": "-3.6%",
+"consensus": "",
+"previous": "-5.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Government Debt to GDP",
+"actual": "91.5%",
+"consensus": "",
+"previous": "95.4%"
+},
+{
+"gmt": "06:05",
+"country": "Italy",
+"eventName": "Italian 2-Year CTZ Auction",
+"actual": "3.580%",
+"consensus": "",
+"previous": "3.290%"
+},
+{
+"gmt": "08:15",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "15.7%",
+"consensus": "15.0%",
+"previous": "15.0%"
+},
+{
+"gmt": "08:15",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "10.2%",
+"consensus": "9.9%",
+"previous": "9.6%"
+},
+{
+"gmt": "08:15",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "586.41B",
+"consensus": "582.41B",
+"previous": "584.76B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "-0.7%",
+"consensus": "-0.1%",
+"previous": "0.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "-0.2%",
+"consensus": "-0.6%",
+"previous": "1.6%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "53.7",
+"consensus": "51.5",
+"previous": "52.6"
+},
+{
+"gmt": "10:30",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "591",
+"consensus": "",
+"previous": "588"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "753",
+"consensus": "",
+"previous": "748"
+},
+{
+"gmt": "13:45",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "1.3K",
+"consensus": "",
+"previous": "-2.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "5.6K",
+"consensus": "",
+"previous": "5.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "8.9K",
+"consensus": "",
+"previous": "-4.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "105.6K",
+"consensus": "",
+"previous": "103.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "244.6K",
+"consensus": "",
+"previous": "235.6K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "189.9K",
+"consensus": "",
+"previous": "192.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "2.7K",
+"consensus": "",
+"previous": "-2.1K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-140.0K",
+"consensus": "",
+"previous": "-140.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-344.3K",
+"consensus": "",
+"previous": "-307.6K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "26.6K",
+"consensus": "",
+"previous": "23.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "177.5K",
+"consensus": "",
+"previous": "179.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "-70.5K",
+"consensus": "",
+"previous": "-66.7K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-46.2K",
+"consensus": "",
+"previous": "-56.6K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-4.7K",
+"consensus": "",
+"previous": "-6.7K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-42.4K",
+"consensus": "",
+"previous": "-37.9K"
+},
+{
+"gmt": "16:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "13.6K",
+"consensus": "",
+"previous": "12.9K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-56.9K",
+"consensus": "",
+"previous": "-57.2K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-3.9K",
+"consensus": "",
+"previous": "-4.5K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-4.7K",
+"consensus": "",
+"previous": "-6.7K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "164.4K",
+"consensus": "",
+"previous": "163.3K"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "Fed Governor Cook Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Brazil",
+"eventName": "Brazil - Tiradentes Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

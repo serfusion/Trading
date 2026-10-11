@@ -1,0 +1,362 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "1.9%",
+"consensus": "1.7%",
+"previous": "1.7%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Leading Indicators",
+"actual": "114.70%",
+"consensus": "",
+"previous": "114.00%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "92",
+"consensus": "90",
+"previous": "89"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Rate",
+"actual": "10.61%",
+"consensus": "11.10%",
+"previous": "11.21%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "M3 Money Supply",
+"actual": "2.8%",
+"consensus": "",
+"previous": "2.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Bank Lending Survey",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.260%",
+"consensus": "",
+"previous": "2.180%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-2.2%",
+"consensus": "0.3%",
+"previous": "-2.0%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-2.4%",
+"consensus": "",
+"previous": "-1.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Transport",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.5%",
+"consensus": "0.3%",
+"previous": "0.9%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.9%",
+"consensus": "",
+"previous": "4.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "4.2%",
+"consensus": "",
+"previous": "4.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "433.4",
+"consensus": "",
+"previous": "432.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "4.3%",
+"consensus": "4.2%",
+"previous": "4.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "261.30B",
+"consensus": "",
+"previous": "209.22B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "104.1",
+"consensus": "105.7",
+"previous": "109.5"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-4",
+"consensus": "-13",
+"previous": "-10"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-9",
+"consensus": "",
+"previous": "-11"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "4",
+"consensus": "",
+"previous": "23"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "5.7",
+"consensus": "",
+"previous": "13.9"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "7.4",
+"consensus": "",
+"previous": "10.8"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.2%",
+"consensus": "3.0%",
+"previous": "3.0%"
+},
+{
+"gmt": "13:00",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "7-Year Note Auction",
+"actual": "4.457%",
+"consensus": "",
+"previous": "4.532%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "21.53T",
+"consensus": "",
+"previous": "21.45T"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "2.860M",
+"consensus": "3.700M",
+"previous": "1.000M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "2.4%",
+"consensus": "2.5%",
+"previous": "2.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI Index Number",
+"actual": "139.40",
+"consensus": "",
+"previous": "139.10"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.6%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "2.50%",
+"consensus": "2.50%",
+"previous": "2.30%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "3.4%",
+"consensus": "3.5%",
+"previous": "3.7%"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Chinese New Year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Chinese New Year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Korean new year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Korean new year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - Chinese New Year - Early close at 12:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

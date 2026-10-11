@@ -1,0 +1,346 @@
+[
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "4.5%",
+"consensus": "4.6%",
+"previous": "4.6%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "4.8%",
+"consensus": "4.8%",
+"previous": "5.1%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "06:35",
+"country": "Germany",
+"eventName": "German 30-Year Bund Auction",
+"actual": "1.200%",
+"consensus": "",
+"previous": "1.220%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.20%",
+"consensus": "",
+"previous": "4.18%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "0.1%",
+"consensus": "",
+"previous": "3.1%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "240.4",
+"consensus": "",
+"previous": "228.2"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "402.3",
+"consensus": "",
+"previous": "401.7"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,306.1",
+"consensus": "",
+"previous": "1,371.6"
+},
+{
+"gmt": "08:25",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "7.3%",
+"consensus": "",
+"previous": "6.5%"
+},
+{
+"gmt": "08:30",
+"country": "United Kingdom",
+"eventName": "Autumn Forecast Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,904K",
+"consensus": "1,882K",
+"previous": "1,868K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "0.4%",
+"consensus": "0.5%",
+"previous": "1.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-1.2%",
+"consensus": "0.3%",
+"previous": "2.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-0.8%",
+"consensus": "0.9%",
+"previous": "2.4%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "-0.5%",
+"consensus": "0.5%",
+"previous": "2.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "239K",
+"consensus": "240K",
+"previous": "252K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "239.75K",
+"consensus": "",
+"previous": "238.50K"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-2.01B",
+"consensus": "",
+"previous": "-3.41B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.5%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.40%",
+"consensus": "",
+"previous": "2.50%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "88.9",
+"consensus": "87.6",
+"previous": "87.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "98.5",
+"consensus": "98.0",
+"previous": "97.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "113.5",
+"consensus": "113.3",
+"previous": "113.6"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "0.1",
+"consensus": "-0.8",
+"previous": "-1.1"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-1.855M",
+"consensus": "-1.545M",
+"previous": "1.854M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.487M",
+"consensus": "",
+"previous": "0.261M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-1.827M",
+"consensus": "",
+"previous": "-1.504M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.104M",
+"consensus": "",
+"previous": "0.032M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.269M",
+"consensus": "-1.164M",
+"previous": "-0.799M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.580M",
+"consensus": "",
+"previous": "-0.315M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.060M",
+"consensus": "",
+"previous": "-0.463M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "0.044M",
+"consensus": "0.737M",
+"previous": "0.894M"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-46B",
+"consensus": "-51B",
+"previous": "-18B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "747",
+"consensus": "",
+"previous": "738"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,450.62B",
+"consensus": "",
+"previous": "4,448.29B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Core Retail Sales",
+"actual": "0.5%",
+"consensus": "0.9%",
+"previous": "1.9%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "0.4%",
+"previous": "2.0%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Retail Sales Quarterly Vs. Year Ago",
+"actual": "4.1%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "5.2%",
+"consensus": "5.0%",
+"previous": "4.6%"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "8.8%",
+"consensus": "7.4%",
+"previous": "2.2%"
+}
+]

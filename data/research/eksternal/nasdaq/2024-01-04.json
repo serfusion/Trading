@@ -1,0 +1,514 @@
+[
+{
+"gmt": "02:30",
+"country": "Germany",
+"eventName": "North Rhine Westphalia CPI",
+"actual": "3.5%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "02:30",
+"country": "Germany",
+"eventName": "North Rhine Westphalia CPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "3.7%",
+"consensus": "3.8%",
+"previous": "3.5%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "4.1%",
+"consensus": "4.1%",
+"previous": "3.9%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "15.9%",
+"consensus": "",
+"previous": "5.6%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Baden Wuerttemberg CPI",
+"actual": "3.8%",
+"consensus": "",
+"previous": "3.4%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Baden Wuerttemberg CPI",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Bavaria CPI",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Bavaria CPI",
+"actual": "3.4%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Brandenburg CPI",
+"actual": "4.5%",
+"consensus": "",
+"previous": "4.1%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Brandenburg CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Hesse CPI",
+"actual": "3.5%",
+"consensus": "",
+"previous": "2.9%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Hesse CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Saxony CPI",
+"actual": "4.3%",
+"consensus": "",
+"previous": "3.9%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "Saxony CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "2.005B",
+"consensus": "1.400B",
+"previous": "1.411B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M3 Money Supply",
+"actual": "2,984.7B",
+"consensus": "",
+"previous": "2,987.0B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "50.07K",
+"consensus": "48.50K",
+"previous": "47.89K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "-0.04B",
+"consensus": "",
+"previous": "-0.08B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "2.0B",
+"consensus": "1.6B",
+"previous": "1.3B"
+},
+{
+"gmt": "05:55",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "14.5%",
+"consensus": "",
+"previous": "14.0%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "15-Year Treasury Gilt Auction",
+"actual": "4.067%",
+"consensus": "",
+"previous": "4.871%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "2.59%",
+"consensus": "",
+"previous": "2.75%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 30-Year OAT Auction",
+"actual": "3.13%",
+"consensus": "",
+"previous": "3.92%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "2.582%",
+"consensus": "",
+"previous": "3.245%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Spanish 30-Year Obligacion Auction",
+"actual": "3.693%",
+"consensus": "",
+"previous": "4.465%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "2.621%",
+"consensus": "",
+"previous": "3.334%"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Bank lending",
+"actual": "0.9%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian PPI",
+"actual": "-0.43%",
+"consensus": "",
+"previous": "1.07%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "3.07M",
+"consensus": "",
+"previous": "3.00M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "12.76M",
+"consensus": "",
+"previous": "12.34M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-20.2%",
+"consensus": "",
+"previous": "-40.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "34.817K",
+"consensus": "",
+"previous": "45.510K"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "3.7%",
+"consensus": "3.7%",
+"previous": "3.2%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "-0.7%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "3.8%",
+"consensus": "3.8%",
+"previous": "2.3%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "164K",
+"consensus": "115K",
+"previous": "101K"
+},
+{
+"gmt": "09:15",
+"country": "Canada",
+"eventName": "Reserve Assets Total",
+"actual": "118.3B",
+"consensus": "",
+"previous": "115.4B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,855K",
+"consensus": "1,883K",
+"previous": "1,886K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "202K",
+"consensus": "216K",
+"previous": "220K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "207.75K",
+"consensus": "",
+"previous": "212.50K"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "51.4",
+"consensus": "51.3",
+"previous": "50.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "15.83M",
+"consensus": "15.50M",
+"previous": "15.34M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-14B",
+"consensus": "-40B",
+"previous": "-87B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-5.503M",
+"consensus": "-3.725M",
+"previous": "-7.114M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.121M",
+"consensus": "",
+"previous": "0.058M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.758M",
+"consensus": "",
+"previous": "-0.268M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.706M",
+"consensus": "",
+"previous": "1.508M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.115M",
+"consensus": "",
+"previous": "0.243M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "10.090M",
+"consensus": "0.588M",
+"previous": "0.741M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-1.275M",
+"consensus": "",
+"previous": "-0.008M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.433M",
+"consensus": "",
+"previous": "0.286M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "10.900M",
+"consensus": "-0.215M",
+"previous": "-0.669M"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.290%",
+"consensus": "",
+"previous": "5.325%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.285%",
+"consensus": "",
+"previous": "5.285%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-13.057B",
+"consensus": "-8.755B",
+"previous": "-8.170B"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,681B",
+"consensus": "",
+"previous": "7,713B"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.459T",
+"consensus": "",
+"previous": "3.434T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "7.9%",
+"consensus": "9.0%",
+"previous": "8.9%"
+}
+]

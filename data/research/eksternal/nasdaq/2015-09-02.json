@@ -1,0 +1,290 @@
+[
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "21.7K",
+"consensus": "35.5K",
+"previous": "-74.0K"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-2.1%",
+"consensus": "-2.1%",
+"previous": "-2.1%"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "0.120%",
+"consensus": "",
+"previous": "0.040%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.08%",
+"consensus": "",
+"previous": "4.08%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "11.3%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "206.9",
+"consensus": "",
+"previous": "198.7"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "459.5",
+"consensus": "",
+"previous": "412.7"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,902.4",
+"consensus": "",
+"previous": "1,629.3"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "11.3%",
+"consensus": "",
+"previous": "10.9%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "-8.9%",
+"consensus": "-6.2%",
+"previous": "-2.8%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "-1.5%",
+"consensus": "-0.1%",
+"previous": "-0.9%"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "190K",
+"consensus": "201K",
+"previous": "177K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "3.3%",
+"consensus": "2.8%",
+"previous": "1.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "-1.4%",
+"consensus": "-1.0%",
+"previous": "0.5%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.3",
+"consensus": "49.9",
+"previous": "49.7"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "ISM-New York Index",
+"actual": "700.2",
+"consensus": "",
+"previous": "699.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "0.4%",
+"consensus": "0.9%",
+"previous": "2.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "4.667M",
+"consensus": "0.032M",
+"previous": "-5.452M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.115M",
+"consensus": "0.920M",
+"previous": "1.436M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-0.271M",
+"consensus": "-1.328M",
+"previous": "1.660M"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "2.64B",
+"consensus": "",
+"previous": "1.83B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Beige Book",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,475.89B",
+"consensus": "",
+"previous": "4,475.11B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "FX Reserves - USD",
+"actual": "367.94B",
+"consensus": "",
+"previous": "370.82B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Services Index",
+"actual": "55.6",
+"consensus": "",
+"previous": "54.1"
+},
+{
+"gmt": "19:30",
+"country": "Brazil",
+"eventName": "Interest Rate Decision",
+"actual": "14.25%",
+"consensus": "14.25%",
+"previous": "14.25%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "900.3B",
+"consensus": "",
+"previous": "-277.2B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-630.3B",
+"consensus": "",
+"previous": "-462.8B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "2%",
+"consensus": "",
+"previous": "3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "0%",
+"consensus": "",
+"previous": "4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.4%",
+"previous": "0.6%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "-2.460B",
+"consensus": "-3.100B",
+"previous": "-3.050B"
+}
+]

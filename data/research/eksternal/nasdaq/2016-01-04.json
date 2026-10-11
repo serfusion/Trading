@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "-23.3%",
+"consensus": "",
+"previous": "-21.8%"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "52.1",
+"consensus": "50.2",
+"previous": "48.7"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-7.8%",
+"consensus": "-6.4%",
+"previous": "-3.0%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "1.476B",
+"consensus": "1.300B",
+"previous": "1.207B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.4%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "70.41K",
+"consensus": "69.65K",
+"previous": "69.87K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "3.90B",
+"consensus": "3.70B",
+"previous": "3.60B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "5.3B",
+"consensus": "4.9B",
+"previous": "4.8B"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.3%",
+"consensus": "0.6%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.2%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.5",
+"consensus": "",
+"previous": "49.2"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.385%",
+"consensus": "",
+"previous": "-0.314%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.437%",
+"consensus": "",
+"previous": "-0.328%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.397%",
+"consensus": "",
+"previous": "-0.317%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "-0.4%",
+"consensus": "0.6%",
+"previous": "0.3%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "48.1",
+"consensus": "49.7",
+"previous": "51.3"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "49.2",
+"consensus": "",
+"previous": "48.9"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "48.2",
+"consensus": "49.0",
+"previous": "48.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "33.5",
+"consensus": "35.0",
+"previous": "35.5"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.215%",
+"consensus": "",
+"previous": "0.260%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.500%",
+"consensus": "",
+"previous": "0.550%"
+},
+{
+"gmt": "13:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "6.24B",
+"consensus": "5.60B",
+"previous": "1.20B"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-31.0K",
+"consensus": "",
+"previous": "-26.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-30.1K",
+"consensus": "",
+"previous": "-30.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "196.4K",
+"consensus": "",
+"previous": "192.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "19.1K",
+"consensus": "",
+"previous": "26.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-97.2K",
+"consensus": "",
+"previous": "-95.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "20.7K",
+"consensus": "",
+"previous": "23.4K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-60.8K",
+"consensus": "",
+"previous": "-56.0K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "3.6K",
+"consensus": "",
+"previous": "2.8K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-17.5K",
+"consensus": "",
+"previous": "-20.9K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-17.2K",
+"consensus": "",
+"previous": "-30.4K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-0.1K",
+"consensus": "",
+"previous": "-0.2K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-0.8K",
+"consensus": "",
+"previous": "-0.8K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-160.6K",
+"consensus": "",
+"previous": "-161.0K"
+},
+{
+"gmt": "18:30",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Current Account",
+"actual": "6.75B",
+"consensus": "",
+"previous": "7.35B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "29.5%",
+"consensus": "33.2%",
+"previous": "32.5%"
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.254%",
+"consensus": "",
+"previous": "0.320%"
+},
+{
+"gmt": "All Day",
+"country": "New Zealand",
+"eventName": "New Zealand - New Year (Observed)",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,434 @@
+[
+{
+"gmt": "01:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "-4.2%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-1.0%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.3%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "49.4",
+"consensus": "45.0",
+"previous": "44.6"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-18.3%",
+"consensus": "",
+"previous": "-23.0%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "48.1",
+"consensus": "",
+"previous": "41.6"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "1.1%",
+"consensus": "1.9%",
+"previous": "-2.3%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.3%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "0.20%",
+"consensus": "-3.50%",
+"previous": "-0.90%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "51.98K",
+"consensus": "",
+"previous": "49.14K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "3.0%",
+"consensus": "3.0%",
+"previous": "3.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.4",
+"consensus": "34.4",
+"previous": "34.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "-3.0K",
+"consensus": "",
+"previous": "13.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "-36K",
+"consensus": "-50K",
+"previous": "-5K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "128K",
+"consensus": "89K",
+"previous": "180K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "63.3%",
+"consensus": "63.2%",
+"previous": "63.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "131K",
+"consensus": "80K",
+"previous": "167K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "7.0%",
+"consensus": "",
+"previous": "6.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "3.6%",
+"consensus": "3.6%",
+"previous": "3.5%"
+},
+{
+"gmt": "09:00",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "442.58B",
+"consensus": "",
+"previous": "440.75B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "0.5%",
+"consensus": "0.2%",
+"previous": "-0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "47.7",
+"consensus": "46.4",
+"previous": "46.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "49.1",
+"consensus": "",
+"previous": "47.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "48.3",
+"consensus": "48.9",
+"previous": "47.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "45.5",
+"consensus": "49.9",
+"previous": "49.7"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "691",
+"consensus": "",
+"previous": "696"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "FOMC Member Clarida Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "FOMC Member Quarles Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "822",
+"consensus": "",
+"previous": "830"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "1.21B",
+"consensus": "1.25B",
+"previous": "2.25B"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-32.4K",
+"consensus": "",
+"previous": "-52.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-25.2K",
+"consensus": "",
+"previous": "-41.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "-8.1K",
+"consensus": "",
+"previous": "-11.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "383.3K",
+"consensus": "",
+"previous": "366.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "276.5K",
+"consensus": "",
+"previous": "259.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "40.4K",
+"consensus": "",
+"previous": "31.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-185.6K",
+"consensus": "",
+"previous": "-209.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "33.5K",
+"consensus": "",
+"previous": "23.3K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "53.7K",
+"consensus": "",
+"previous": "46.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "102.7K",
+"consensus": "",
+"previous": "91.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "16.9K",
+"consensus": "",
+"previous": "21.8K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "43.6K",
+"consensus": "",
+"previous": "33.4K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-12.5K",
+"consensus": "",
+"previous": "-11.3K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-40.3K",
+"consensus": "",
+"previous": "-44.0K"
+},
+{
+"gmt": "15:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "-43.7K",
+"consensus": "",
+"previous": "-47.0K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-19.7K",
+"consensus": "",
+"previous": "-18.2K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-40.4K",
+"consensus": "",
+"previous": "-40.1K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "25.8K",
+"consensus": "",
+"previous": "25.0K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-53.4K",
+"consensus": "",
+"previous": "-51.0K"
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.60M",
+"consensus": "",
+"previous": "17.20M"
+}
+]

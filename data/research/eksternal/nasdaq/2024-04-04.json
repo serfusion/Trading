@@ -1,0 +1,426 @@
+[
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "1.0%",
+"consensus": "1.3%",
+"previous": "1.2%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.3%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "4.015%",
+"consensus": "",
+"previous": "3.927%"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "United Kingdom New Passenger Cars Registration",
+"actual": "317,786.0",
+"consensus": "",
+"previous": "84,886.0"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "2.87%",
+"consensus": "",
+"previous": "2.81%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 15-Year OAT Auction",
+"actual": "3.09%",
+"consensus": "",
+"previous": "0.98%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 30-Year OAT Auction",
+"actual": "3.38%",
+"consensus": "",
+"previous": "3.27%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-1.0%",
+"consensus": "-0.6%",
+"previous": "-0.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-8.3%",
+"consensus": "-8.6%",
+"previous": "-8.0%"
+},
+{
+"gmt": "05:10",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "3.190%",
+"consensus": "",
+"previous": "3.162%"
+},
+{
+"gmt": "05:35",
+"country": "Spain",
+"eventName": "Spanish 15-Year Obligacion Auction",
+"actual": "3.531%",
+"consensus": "",
+"previous": "3.630%"
+},
+{
+"gmt": "05:35",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "2.848%",
+"consensus": "",
+"previous": "2.857%"
+},
+{
+"gmt": "07:15",
+"country": "Germany",
+"eventName": "German Car Registration",
+"actual": "-6.2%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "07:15",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "-1.5%",
+"consensus": "",
+"previous": "13.0%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "0.7%",
+"consensus": "",
+"previous": "8.8%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "90.309K",
+"consensus": "",
+"previous": "84.638K"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-4.37B",
+"consensus": "-3.55B",
+"previous": "-5.07B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "5.01B",
+"consensus": "6.97B",
+"previous": "8.74B"
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Reserve Assets Total",
+"actual": "118.0B",
+"consensus": "",
+"previous": "116.3B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,791K",
+"consensus": "",
+"previous": "1,810K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "263.00B",
+"consensus": "",
+"previous": "257.20B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "331.90B",
+"consensus": "",
+"previous": "324.80B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "221K",
+"consensus": "213K",
+"previous": "212K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "214.25K",
+"consensus": "",
+"previous": "211.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-68.90B",
+"consensus": "-66.90B",
+"previous": "-67.60B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "66.62B",
+"consensus": "",
+"previous": "62.98B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "65.23B",
+"consensus": "",
+"previous": "62.37B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "1.39B",
+"consensus": "0.70B",
+"previous": "0.61B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "589.4B",
+"consensus": "",
+"previous": "590.1B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-37B",
+"consensus": "-42B",
+"previous": "-36B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.265%",
+"consensus": "",
+"previous": "5.285%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.260%",
+"consensus": "",
+"previous": "5.275%"
+},
+{
+"gmt": "12:15",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.5%",
+"consensus": "2.8%",
+"previous": "2.8%"
+},
+{
+"gmt": "12:45",
+"country": "United States",
+"eventName": "Fed Goolsbee Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "1.752B",
+"consensus": "",
+"previous": "2.292B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "7.48B",
+"consensus": "6.90B",
+"previous": "5.31B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,440B",
+"consensus": "",
+"previous": "7,485B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.541T",
+"consensus": "",
+"previous": "3.472T"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Current Account",
+"actual": "6.86B",
+"consensus": "",
+"previous": "3.05B"
+},
+{
+"gmt": "19:30",
+"country": "United States",
+"eventName": "FOMC Member Kugler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Household Spending",
+"actual": "-0.5%",
+"consensus": "-2.8%",
+"previous": "-6.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Household Spending",
+"actual": "1.4%",
+"consensus": "0.5%",
+"previous": "-2.1%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Reserves (USD)",
+"actual": "1,290.6B",
+"consensus": "",
+"previous": "1,281.5B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "-2.2%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "4.8%",
+"consensus": "",
+"previous": "1.4%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "1.1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "7.280B",
+"consensus": "10.500B",
+"previous": "10.058B"
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - Ching Ming Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Ching Ming Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Ching Ming Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

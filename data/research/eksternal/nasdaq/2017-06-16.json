@@ -1,0 +1,370 @@
+[
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "3.600B",
+"consensus": "3.410B",
+"previous": "5.310B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "1.05B",
+"consensus": "",
+"previous": "1.14B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "EU Finance Ministers Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "1.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "1.4%",
+"consensus": "1.4%",
+"previous": "1.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "1.4%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Wages in euro zone",
+"actual": "1.40%",
+"consensus": "",
+"previous": "1.60%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Labor Cost Index",
+"actual": "1.50%",
+"consensus": "",
+"previous": "1.50%"
+},
+{
+"gmt": "06:30",
+"country": "Russia",
+"eventName": "Interest Rate Decision",
+"actual": "9.00%",
+"consensus": "8.75%",
+"previous": "9.25%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Quarterly Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "381.16B",
+"consensus": "",
+"previous": "378.76B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "IBC-Br Economic Activity",
+"actual": "0.28%",
+"consensus": "",
+"previous": "-0.44%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.168M",
+"consensus": "1.250M",
+"previous": "1.228M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-4.9%",
+"consensus": "1.8%",
+"previous": "-2.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.092M",
+"consensus": "1.215M",
+"previous": "1.156M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-5.5%",
+"consensus": "4.1%",
+"previous": "-2.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "10.60B",
+"consensus": "12.14B",
+"previous": "15.05B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "-9.87B",
+"consensus": "",
+"previous": "15.42B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "5.6%",
+"consensus": "1.9%",
+"previous": "2.3%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "GDP Quarterly",
+"actual": "0.5%",
+"consensus": "0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Fed Labor Market Conditions Index",
+"actual": "2.3",
+"consensus": "3.0",
+"previous": "3.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.6%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.60%",
+"consensus": "",
+"previous": "2.40%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "84.7",
+"consensus": "87.5",
+"previous": "87.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "94.5",
+"consensus": "97.1",
+"previous": "97.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "109.6",
+"consensus": "111.7",
+"previous": "111.7"
+},
+{
+"gmt": "12:45",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "747",
+"consensus": "",
+"previous": "741"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-39.4K",
+"consensus": "",
+"previous": "-36.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "18.8K",
+"consensus": "",
+"previous": "12.7K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "359.0K",
+"consensus": "",
+"previous": "382.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "190.3K",
+"consensus": "",
+"previous": "204.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "57.8K",
+"consensus": "",
+"previous": "58.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "60.7K",
+"consensus": "",
+"previous": "65.9K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-88.6K",
+"consensus": "",
+"previous": "-94.5K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-14.5K",
+"consensus": "",
+"previous": "-16.6K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-1.5K",
+"consensus": "",
+"previous": "-0.1K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-50.6K",
+"consensus": "",
+"previous": "-55.0K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "1.6K",
+"consensus": "",
+"previous": "-1.8K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "6.4K",
+"consensus": "",
+"previous": "7.6K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "79.1K",
+"consensus": "",
+"previous": "74.0K"
+},
+{
+"gmt": "All Day",
+"country": "South Africa",
+"eventName": "South Africa - Youth Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

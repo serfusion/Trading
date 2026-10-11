@@ -1,0 +1,42 @@
+# 🔬 Validitas temuan CPI 1–10 detik
+python -m research.cpi_validitas          → docs/eksternal/hasil_cpi_validitas.txt
+
+## Ketepatan mentah (tanpa saringan tahun lalu) 2–10 dtk: 2016–2026 | 2022+
+   IDX|K       64.2% |  70.7%
+   SUARA_IDX   62.7% |  69.1%
+   mm_K        67.1% |  67.1%
+
+## 1 Permutasi keluarga (24 aturan, 2000× acak hasil emas)
+   acak: aturan TERBAIK rata-rata 61.4% (2016+), 64.2% (2022+); persentil 95: 70.2% / 75.0%
+   IDX|K      64.2% → p 0.249 | 2022+ 70.7% → p 0.131
+   SUARA_IDX  62.7% → p 0.350 | 2022+ 69.1% → p 0.182
+   mm_K       67.1% → p 0.130 | 2022+ 67.1% → p 0.277
+
+## 1b Permutasi keluarga terbatas (20 aturan dengan ≥ 40 rilis 2016+ & ≥ 20 rilis 2022+)
+   aturan: P_mm, P_core, P_yy, KON, YOY, IDXy, IDXm, mm_N, core_N, mm_WTI, mm_BENSIN, YOY|P, IDXc|P, IDXy|YOY, K|P core, K|P mm, SUARA, SUARA_IDX, IDX|K, K|IDX
+   acak: terbaik rata-rata 58.4% / 61.6%; persentil 95 64.7% / 69.7%
+   IDX|K      p 2016+ 0.062 | p 2022+ 0.037
+   SUARA_IDX  p 2016+ 0.117 | p 2022+ 0.060
+
+## 2 Permutasi petunjuk di dalam tahun yang sama (2000×, aturan tunggal)
+   IDX|K      p 2016+ 0.009 | p 2022+ 0.006 (acak rata 53.4% / 55.8%)
+   SUARA_IDX  p 2016+ 0.037 | p 2022+ 0.032 (acak rata 53.5% / 56.5%)
+   mm_K       p 2016+ 0.096 | p 2022+ 0.096 (acak rata 58.1% / 58.1%)
+
+## 3 Kepekaan ambang indeks (tutup kertas, 2–10 dtk)
+   ambang 0.01 SUARA_IDX  semua  61.5% (179/291) | LAMA  61.8% (81/131) | BARU  61.3% (98/160) | 2022+  63.5% (94/148) | rilis ditebak 73
+   ambang 0.01 IDX|K      semua  62.8% (213/339) | LAMA  61.8% (81/131) | BARU  63.5% (132/208) | 2022+  65.3% (128/196) | rilis ditebak 85
+   ambang 0.02 SUARA_IDX  semua  62.7% (200/319) | LAMA  58.5% (93/159) | BARU  66.9% (107/160) | 2022+  69.1% (105/152) | rilis ditebak 80
+   ambang 0.02 IDX|K      semua  64.2% (228/355) | LAMA  58.5% (93/159) | BARU  68.9% (135/196) | 2022+  70.7% (133/188) | rilis ditebak 89
+   ambang 0.03 SUARA_IDX  semua  57.1% (182/319) | LAMA  51.5% (84/163) | BARU  62.8% (98/156) | 2022+  64.9% (96/148) | rilis ditebak 80
+   ambang 0.03 IDX|K      semua  59.2% (210/355) | LAMA  51.5% (84/163) | BARU  65.6% (126/192) | 2022+  67.4% (124/184) | rilis ditebak 89
+   ambang 0.05 SUARA_IDX  semua  50.9% (85/167) | LAMA  49.0% (72/147) | BARU  65.0% (13/20) | 2022+  81.2% (13/16) | rilis ditebak 42
+   ambang 0.05 IDX|K      semua  59.3% (175/295) | LAMA  49.0% (72/147) | BARU  69.6% (103/148) | 2022+  71.5% (103/144) | rilis ditebak 74
+
+## 4 Feed terpisah (IDX|K tutup kertas, 2–10 dtk)
+   Exness    semua  64.2% (228/355) | LAMA  58.5% (93/159) | BARU  68.9% (135/196) | 2022+  70.7% (133/188) | rilis ditebak 89
+   Dukascopy semua  63.1% (221/350) | LAMA  59.1% (91/154) | BARU  66.3% (130/196) | 2022+  68.1% (128/188) | rilis ditebak 89
+
+## 5 Rilis ganjil vs genap (IDX|K tutup kertas, 2–10 dtk)
+   ganjil semua 116/171 = 67.8% | 2022+ 68/96 = 70.8%
+   genap  semua 112/184 = 60.9% | 2022+ 65/92 = 70.7%

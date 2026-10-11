@@ -245,6 +245,12 @@ class handler(BaseHTTPRequestHandler):
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):
+                try:                                          # ⏱️ CPI detik 2–10: aturan tutup kertas (_cpi_detik.py)
+                    import _cpi_detik
+                    _cpi_detik.attach(persiapan, store, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
+            if isinstance(persiapan, dict):
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
                     import _pra_aset
                     key = os.environ.get("TWELVEDATA_API_KEY", "")

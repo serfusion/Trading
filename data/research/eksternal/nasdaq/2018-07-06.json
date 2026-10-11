@@ -1,0 +1,410 @@
+[
+{
+"gmt": "Tentative",
+"country": "India",
+"eventName": "RBI Foreign Exchange Reserves Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "-1.4%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "106.9",
+"consensus": "106.5",
+"previous": "106.2"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "0.7%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "2.6%",
+"consensus": "0.3%",
+"previous": "-1.3%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "50.58B",
+"consensus": "",
+"previous": "51.15B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "42.447B",
+"consensus": "",
+"previous": "42.872B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-2.90B",
+"consensus": "",
+"previous": "-1.10B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "40.5B",
+"consensus": "",
+"previous": "41.6B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "46.5B",
+"consensus": "",
+"previous": "46.5B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-6.0B",
+"consensus": "-5.1B",
+"previous": "-5.2B"
+},
+{
+"gmt": "03:30",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "1.7%"
+},
+{
+"gmt": "03:30",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "1.8%",
+"consensus": "1.8%",
+"previous": "1.9%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "0.8%",
+"consensus": "0.3%",
+"previous": "-0.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-4.6%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "431.90B",
+"consensus": "",
+"previous": "432.20B"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "12.8%",
+"consensus": "",
+"previous": "12.7%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "7.6%",
+"consensus": "",
+"previous": "8.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "406.06B",
+"consensus": "",
+"previous": "407.82B"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "4.39%",
+"consensus": "4.42%",
+"previous": "2.86%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "1.26%",
+"consensus": "1.28%",
+"previous": "0.40%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "2.7%",
+"consensus": "2.8%",
+"previous": "2.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.5",
+"consensus": "34.5",
+"previous": "34.5"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "215.33B",
+"consensus": "",
+"previous": "211.25B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "11.0K",
+"consensus": "",
+"previous": "5.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "258.38B",
+"consensus": "",
+"previous": "257.44B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "36.0K",
+"consensus": "15.0K",
+"previous": "19.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "213K",
+"consensus": "200K",
+"previous": "244K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.9%",
+"consensus": "",
+"previous": "62.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "202K",
+"consensus": "190K",
+"previous": "239K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-43.10B",
+"consensus": "-43.70B",
+"previous": "-46.10B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "7.8%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "4.0%",
+"consensus": "3.8%",
+"previous": "3.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "31.8K",
+"consensus": "24.0K",
+"previous": "-7.5K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "48.34B",
+"consensus": "",
+"previous": "48.40B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "9.1K",
+"consensus": "",
+"previous": "-31.0K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "51.12B",
+"consensus": "",
+"previous": "50.26B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "22.7K",
+"consensus": "",
+"previous": "23.6K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.5%",
+"consensus": "65.3%",
+"previous": "65.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-2.77B",
+"consensus": "-2.05B",
+"previous": "-1.86B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "6.0%",
+"consensus": "5.8%",
+"previous": "5.8%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "2.3%",
+"consensus": "2.2%",
+"previous": "2.4%"
+},
+{
+"gmt": "09:40",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "20.7%",
+"consensus": "",
+"previous": "-20.2%"
+},
+{
+"gmt": "09:40",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-7.1%"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "65.1",
+"consensus": "",
+"previous": "69.5"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "63.1",
+"consensus": "63.2",
+"previous": "62.5"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "78B",
+"consensus": "75B",
+"previous": "66B"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "863",
+"consensus": "",
+"previous": "858"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "1,052.0",
+"consensus": "1,050.0",
+"previous": "1,047.0"
+}
+]

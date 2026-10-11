@@ -1,0 +1,314 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Household Confidence",
+"actual": "40.9",
+"consensus": "43.8",
+"previous": "42.3"
+},
+{
+"gmt": "02:30",
+"country": "United Kingdom",
+"eventName": "Investing.com GBP/USD Index",
+"actual": "30.5%",
+"consensus": "",
+"previous": "41.0%"
+},
+{
+"gmt": "02:30",
+"country": "United States",
+"eventName": "Investing.com Gold Index",
+"actual": "61.9%",
+"consensus": "",
+"previous": "62.4%"
+},
+{
+"gmt": "02:30",
+"country": "Canada",
+"eventName": "Investing.com USD/CAD Index",
+"actual": "48.9%",
+"consensus": "",
+"previous": "46.9%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "Investing.com USD/CHF Index",
+"actual": "43.0%",
+"consensus": "",
+"previous": "40.6%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Investing.com AUD/USD Index",
+"actual": "47.0%",
+"consensus": "",
+"previous": "46.3%"
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "Investing.com USD/JPY Index",
+"actual": "42.8%",
+"consensus": "",
+"previous": "41.4%"
+},
+{
+"gmt": "02:30",
+"country": "New Zealand",
+"eventName": "Investing.com NZD/USD Index",
+"actual": "40.4%",
+"consensus": "",
+"previous": "43.7%"
+},
+{
+"gmt": "02:30",
+"country": "Euro Zone",
+"eventName": "Investing.com EUR/USD Index",
+"actual": "33.8%",
+"consensus": "",
+"previous": "37.1%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "0.5%",
+"consensus": "0.7%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "10.0",
+"consensus": "13.1",
+"previous": "13.1"
+},
+{
+"gmt": "Tentative",
+"country": "Euro Zone",
+"eventName": "EU Finance Ministers Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "1.1%",
+"consensus": "0.8%",
+"previous": "-0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "2.4%",
+"consensus": "1.7%",
+"previous": "1.0%"
+},
+{
+"gmt": "Tentative",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "FOMC Member Dudley Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.665%",
+"consensus": "",
+"previous": "-0.666%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.751%",
+"consensus": "",
+"previous": "-0.736%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.732%",
+"consensus": "",
+"previous": "-0.692%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:10",
+"country": "United States",
+"eventName": "Chicago Fed President Evans Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Employment Trends Index",
+"actual": "129.96",
+"consensus": "",
+"previous": "128.95"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Fed Labor Market Conditions Index",
+"actual": "1.5",
+"consensus": "",
+"previous": "1.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "61.7",
+"consensus": "58.0",
+"previous": "57.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "58.2",
+"consensus": "",
+"previous": "53.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "57.0",
+"consensus": "",
+"previous": "57.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "57.2",
+"consensus": "55.4",
+"previous": "54.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "56.3",
+"consensus": "",
+"previous": "56.6"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.490%",
+"consensus": "",
+"previous": "0.490%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.615%",
+"consensus": "",
+"previous": "0.610%"
+},
+{
+"gmt": "13:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:05",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:00",
+"country": "Japan",
+"eventName": "Average Cash Earnings",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "20:00",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "-1.40%",
+"consensus": "",
+"previous": "-1.30%"
+},
+{
+"gmt": "20:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "0.6%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Current Account",
+"actual": "-11.4B",
+"consensus": "-13.7B",
+"previous": "-15.9B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Net Exports Contribution",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "1.50%",
+"consensus": "1.50%",
+"previous": "1.50%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

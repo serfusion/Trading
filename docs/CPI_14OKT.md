@@ -138,3 +138,28 @@ otomatis (konsensus FF hari Minggu → Kalshi ikut dihitung).
 - Preview konsensus & konteks: admiralmarkets.com (US CPI September 2026 Preview), fxstreet.com (TD Securities core CPI),
   mitrade.com (US September CPI preview), cnbc.com (CPI Agustus 2026), kiplinger.com (kalender 12–16 Okt),
   federalreserve.gov (pidato Jefferson 1 Okt), coindesk.com & finance.yahoo.com (kripto 8 Okt).
+
+## Putaran 2: petunjuk CPI baru (11 Okt 2026 — `research/cpi_petunjuk2.py`, `docs/eksternal/hasil_cpi_petunjuk2.txt`)
+Permintaan: "cari lagi petunjuk yang menaikkan persentase CPI, cek mundur". 8 petunjuk BARU, aturan tanda ditetapkan sebelum
+melihat hasil, semua sudah terbit sebelum rilis. Lolos = > 50% di LAMA (< Okt 2021) & BARU, n ≥ 8, p < 0,05.
+
+| Petunjuk | Berita | Semua | LAMA | BARU | |
+|---|---|---|---|---|---|
+| **YOY** konsistensi y/y: y/y tersirat (y/y lalu + m/m konsensus − m/m bulan sama tahun lalu) vs konsensus y/y, selisih ≥ 0,05 | CPI y/y | **71%** (57/80, p < 0,001) | 73% | 67% | ✅ |
+| YOY versi indeks NSA (tanpa revisi musiman) | CPI y/y | **74%** (55/74) | 79% | 62% | ✅ cek ketahanan |
+| YOY, bila 0 pakai kejutan bulan lalu | CPI y/y | **72%** (81/112) | 73% | 71% | ✅ naik dari 63% (P saja) |
+| **DSL** solar rata-rata bulan acuan naik | CPI m/m | 63% (74/117) | 64% | 61% | ✅ (mirip bensin 61% — tumpang tindih) |
+| **KON** konsensus < angka bulan lalu → di atas | Core CPI | 65% (44/68) | 65% | 63% | ✅ |
+| KON & kejutan lalu sepakat | Core CPI | 69% (41/59) | 70% | 69% | ✅ |
+| PPI rilis lebih dulu (≤ 10 hari) | CPI/y/y | 62–64% | 63–64% | n 4–5 | ✗ BARU terlalu sedikit (PPI kini rilis setelah CPI) |
+| Upah NFP, musiman, avtur, gas alam | semua | 45–56% | – | – | ✗ ≈ acak |
+
+Arti YOY: konsensus y/y dan m/m sering dibuat terpisah dan dibulatkan; aritmetika indeks (efek basis tahun lalu) membuka
+selisihnya. Per tahun 2010–2025 YOY benar ≥ 50% di 13/16 tahun (2010 0/3, 2017 1/4, 2021 2/5 lemah). Kalshi tetap terkuat
+untuk m/m (76%, hanya 2022–2025). Banyak uji (19 baris) → satu lolos bisa kebetulan; YOY paling meyakinkan karena ada alasan
+mekanis dan lolos dua versi data. Ini arah ANGKA, bukan arah emas (emas 1 menit hanya ±55–65% searah kejutan).
+
+**CPI 14 Okt (Sep 2026):** y/y Agu 3,40% (NSA). Bila konsensus FF m/m 0,6% & y/y 3,7% → tersirat 3,66–3,71% → selisih
+< 0,05 → YOY diam (pakai kejutan lalu: y/y Agu = konsensus → diam). Bila m/m 0,5% & y/y 3,7% → tersirat 3,56–3,61% →
+**y/y condong DI BAWAH**. Core: konsensus 0,2% < Agu 0,3% dan kejutan lalu di atas → KON & P sepakat **core DI ATAS (69%)**.
+BELUM dipasang di cloud/aplikasi — tunggu "pasang".

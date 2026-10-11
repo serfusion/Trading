@@ -1,0 +1,450 @@
+[
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "1.3%",
+"consensus": "",
+"previous": "1.4%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "0.5%",
+"consensus": "0.0%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:10",
+"country": "Italy",
+"eventName": "Italian 12-Month BOT Auction",
+"actual": "2.695%",
+"consensus": "",
+"previous": "2.699%"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "3.060%",
+"consensus": "",
+"previous": "3.160%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "6.60%",
+"consensus": "",
+"previous": "6.57%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "10.8%",
+"consensus": "",
+"previous": "-2.5%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "176.9",
+"consensus": "",
+"previous": "164.8"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "280.1",
+"consensus": "",
+"previous": "252.8"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "848.7",
+"consensus": "",
+"previous": "736.2"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "12.0%",
+"consensus": "",
+"previous": "12.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "2.9%",
+"consensus": "2.9%",
+"previous": "2.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "336.12",
+"consensus": "",
+"previous": "335.42"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "4.2%",
+"consensus": "4.2%",
+"previous": "3.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "335.12",
+"consensus": "335.11",
+"previous": "333.02"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, s.a",
+"actual": "333.98",
+"consensus": "",
+"previous": "332.41"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI, n.s.a",
+"actual": "0.63%",
+"consensus": "",
+"previous": "0.85%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:45",
+"country": "Canada",
+"eventName": "BoC Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "Canada",
+"eventName": "BoC Interest Rate Decision",
+"actual": "2.25%",
+"consensus": "2.25%",
+"previous": "2.25%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-7.227M",
+"consensus": "-3.000M",
+"previous": "-7.974M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.081M",
+"consensus": "",
+"previous": "-0.090M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.525M",
+"consensus": "",
+"previous": "-0.249M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.801M",
+"consensus": "",
+"previous": "-0.583M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.024M",
+"consensus": "",
+"previous": "0.098M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-0.200M",
+"consensus": "-0.500M",
+"previous": "1.502M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.296M",
+"consensus": "",
+"previous": "-0.515M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.246M",
+"consensus": "",
+"previous": "0.255M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "0.186M",
+"consensus": "-0.500M",
+"previous": "3.364M"
+},
+{
+"gmt": "10:30",
+"country": "Canada",
+"eventName": "BOC Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Algeria (Barrel)",
+"actual": "0.97M",
+"consensus": "",
+"previous": "0.97M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Congo (Barrel)",
+"actual": "0.27M",
+"consensus": "",
+"previous": "0.26M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Gabon (Barrel)",
+"actual": "0.22M",
+"consensus": "",
+"previous": "0.23M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Guinea (Barrel)",
+"actual": "0.05M",
+"consensus": "",
+"previous": "0.05M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iran (Barrel)",
+"actual": "2.00M",
+"consensus": "",
+"previous": "3.00M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iraq (Barrel)",
+"actual": "1.56M",
+"consensus": "",
+"previous": "1.40M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Libya (Barrel)",
+"actual": "1.25M",
+"consensus": "",
+"previous": "1.27M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Saudi Arabia (Barrel)",
+"actual": "6.50M",
+"consensus": "",
+"previous": "7.65M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production UAE (Barrel)",
+"actual": "2.10M",
+"consensus": "",
+"previous": "2.00M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Venezuela (Barrel)",
+"actual": "1.13M",
+"consensus": "",
+"previous": "1.10M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "49.14",
+"consensus": "",
+"previous": "49.65"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "48.95",
+"consensus": "",
+"previous": "47.58"
+},
+{
+"gmt": "11:00",
+"country": "Brazil",
+"eventName": "Brazil Thomson Reuters IPSOS PCSI",
+"actual": "53.00",
+"consensus": "",
+"previous": "52.35"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "5.3%",
+"consensus": "5.4%",
+"previous": "5.6%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year Note Auction",
+"actual": "4.538%",
+"consensus": "",
+"previous": "4.468%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "2.588B",
+"consensus": "",
+"previous": "2.805B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Federal Budget Balance",
+"actual": "-293.0B",
+"consensus": "-282.9B",
+"previous": "215.0B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "2.8%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "BSI Large Manufacturing Conditions",
+"actual": "-1.8",
+"consensus": "4.2",
+"previous": "3.8"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "197.5B",
+"consensus": "",
+"previous": "-184.4B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-701.0B",
+"consensus": "",
+"previous": "-491.5B"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Inflation Expectations",
+"actual": "5.5%",
+"consensus": "",
+"previous": "5.6%"
+}
+]

@@ -1,0 +1,138 @@
+[
+{
+"gmt": "02:30",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.4%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "4.8%",
+"consensus": "4.8%",
+"previous": "5.0%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "-0.4%",
+"consensus": "-0.9%",
+"previous": "-1.4%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "5.2%",
+"consensus": "5.1%",
+"previous": "5.4%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "-53.8",
+"consensus": "-55.8",
+"previous": "-55.2"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "-54.1",
+"consensus": "-60.3",
+"previous": "-59.1"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "4.3%",
+"consensus": "5.5%",
+"previous": "5.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "92.0",
+"consensus": "91.3",
+"previous": "90.2"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.2%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.8%",
+"consensus": "0.5%",
+"previous": "0.0%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "42.8",
+"consensus": "42.5",
+"previous": "40.6"
+},
+{
+"gmt": "15:15",
+"country": "United States",
+"eventName": "FOMC Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:15",
+"country": "United States",
+"eventName": "Fed Interest Rate Decision",
+"actual": "0.25%",
+"consensus": "0.25%",
+"previous": "0.25%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "3.1%",
+"consensus": "3.2%",
+"previous": "3.1%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "-8.30%",
+"consensus": "",
+"previous": "6.30%"
+}
+]

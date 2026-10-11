@@ -1,0 +1,170 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "1.8%",
+"consensus": "1.5%",
+"previous": "1.6%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "4.80%",
+"consensus": "4.70%",
+"previous": "4.40%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "7.0%",
+"consensus": "7.0%",
+"previous": "6.7%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Unemployment Rate",
+"actual": "33.90%",
+"consensus": "",
+"previous": "34.50%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Unemployment",
+"actual": "8.000M",
+"consensus": "",
+"previous": "7.900M"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "-7",
+"consensus": "3",
+"previous": "8"
+},
+{
+"gmt": "07:00",
+"country": "Euro Zone",
+"eventName": "ECB's Panetta Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "13.5%",
+"consensus": "",
+"previous": "12.7%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "44.1",
+"consensus": "49.2",
+"previous": "47.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "511K",
+"consensus": "575K",
+"previous": "585K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-12.6%",
+"consensus": "",
+"previous": "-7.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-8",
+"consensus": "-6",
+"previous": "0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-8",
+"consensus": "",
+"previous": "7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-12",
+"consensus": "",
+"previous": "-13"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-24.9",
+"consensus": "-28.0",
+"previous": "-27.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "21.70T",
+"consensus": "",
+"previous": "21.64T"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "3.307%",
+"consensus": "",
+"previous": "3.015%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-5.632M",
+"consensus": "-0.450M",
+"previous": "-0.448M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Manufacturing BSI Index",
+"actual": "82",
+"consensus": "",
+"previous": "80"
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "RBA Kearns Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

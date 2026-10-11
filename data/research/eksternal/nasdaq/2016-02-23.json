@@ -1,0 +1,362 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "-0.6%",
+"consensus": "-0.4%",
+"previous": "-0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "2.1%",
+"consensus": "2.1%",
+"previous": "2.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "103",
+"consensus": "102",
+"previous": "103"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "2.70%",
+"consensus": "2.50%",
+"previous": "2.50%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "98.8",
+"consensus": "101.6",
+"previous": "102.3"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "112.9",
+"consensus": "112.0",
+"previous": "112.5"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "98.8",
+"consensus": "",
+"previous": "99.7"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 3-Month Letras Auction",
+"actual": "-0.214%",
+"consensus": "",
+"previous": "-0.268%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "Inflation Report Hearings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:15",
+"country": "Switzerland",
+"eventName": "SNB Chairman Thomas Jordan speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "1.42%",
+"consensus": "1.30%",
+"previous": "0.92%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "10.84%",
+"consensus": "10.71%",
+"previous": "10.74%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-4.82B",
+"consensus": "-5.90B",
+"previous": "-2.46B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "5.45B",
+"consensus": "4.95B",
+"previous": "15.21B"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-2.3%",
+"consensus": "",
+"previous": "-2.5%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.2%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "1.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "5.7%",
+"consensus": "5.8%",
+"previous": "5.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "92.2",
+"consensus": "97.0",
+"previous": "97.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "5.47M",
+"consensus": "5.32M",
+"previous": "5.45M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "0.4%",
+"consensus": "-2.9%",
+"previous": "12.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-4",
+"consensus": "2",
+"previous": "2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-11",
+"consensus": "",
+"previous": "-6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-2",
+"consensus": "",
+"previous": "10"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.285%",
+"consensus": "",
+"previous": "0.270%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "0.752%",
+"consensus": "",
+"previous": "0.860%"
+},
+{
+"gmt": "17:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "7.100M",
+"consensus": "3.000M",
+"previous": "-3.300M"
+},
+{
+"gmt": "17:35",
+"country": "United States",
+"eventName": "API Weekly Cushing Crude Oil Stock",
+"actual": "0.307M",
+"consensus": "",
+"previous": "-0.175M"
+},
+{
+"gmt": "17:35",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "-0.267M",
+"consensus": "",
+"previous": "-2.000M"
+},
+{
+"gmt": "17:35",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "0.569M",
+"consensus": "",
+"previous": "0.750M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "1.8%",
+"consensus": "1.8%",
+"previous": "2.0%"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "6.2%",
+"consensus": "4.0%",
+"previous": "5.7%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "-3.6%",
+"consensus": "-2.0%",
+"previous": "-1.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "2.2%",
+"consensus": "2.3%",
+"previous": "2.3%"
+},
+{
+"gmt": "21:30",
+"country": "United States",
+"eventName": "FOMC Member Stanley Fischer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.9%"
+},
+{
+"gmt": "23:00",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "1.9%",
+"consensus": "2.0%",
+"previous": "2.3%"
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - Defender of the Fatherland Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

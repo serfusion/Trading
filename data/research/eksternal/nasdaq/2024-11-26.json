@@ -1,0 +1,362 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "1.5%",
+"consensus": "1.8%",
+"previous": "1.7%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "0.1%",
+"consensus": "-0.8%",
+"previous": "-1.5%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "1.2%",
+"consensus": "1.5%",
+"previous": "9.0%"
+},
+{
+"gmt": "03:00",
+"country": "South Africa",
+"eventName": "Leading Indicators",
+"actual": "113.90%",
+"consensus": "",
+"previous": "112.80%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "3.5%",
+"consensus": "",
+"previous": "4.7%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "4.5%",
+"consensus": "",
+"previous": "1.4%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-31.0B",
+"consensus": "",
+"previous": "-53.2B"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "ECB McCaul Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:30",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.040%",
+"consensus": "",
+"previous": "2.130%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "-18",
+"consensus": "-14",
+"previous": "-6"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.62%",
+"consensus": "0.48%",
+"previous": "0.54%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "4.77%",
+"consensus": "4.62%",
+"previous": "4.47%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.419M",
+"consensus": "1.416M",
+"previous": "1.425M"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-0.4%",
+"consensus": "-0.6%",
+"previous": "-3.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "0.5%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.9%",
+"consensus": "",
+"previous": "5.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.7%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "4.4%",
+"consensus": "",
+"previous": "4.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "430.3",
+"consensus": "",
+"previous": "427.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "4.6%",
+"consensus": "4.7%",
+"previous": "5.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "11:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "111.7",
+"consensus": "111.8",
+"previous": "109.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "610K",
+"consensus": "725K",
+"previous": "738K"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-17.3%",
+"consensus": "",
+"previous": "7.0%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-14",
+"consensus": "-10",
+"previous": "-14"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-12",
+"consensus": "",
+"previous": "-8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "9",
+"consensus": "",
+"previous": "3"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "10.9",
+"consensus": "",
+"previous": "9.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "9.8",
+"consensus": "",
+"previous": "2.0"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "21.34T",
+"consensus": "",
+"previous": "21.22T"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "52-Week Bill Auction",
+"actual": "4.190%",
+"consensus": "",
+"previous": "4.100%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "4.197%",
+"consensus": "",
+"previous": "4.138%"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Manufacturing BSI Index",
+"actual": "68",
+"consensus": "",
+"previous": "69"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-5.935M",
+"consensus": "0.250M",
+"previous": "4.753M"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "1.6%",
+"consensus": "0.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "2.10%",
+"consensus": "2.50%",
+"previous": "2.10%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "4.25%",
+"consensus": "4.25%",
+"previous": "4.75%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "Chinese Industrial profit YTD",
+"actual": "-4.3%",
+"consensus": "",
+"previous": "-3.5%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,266 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Household Confidence",
+"actual": "41.3",
+"consensus": "43.4",
+"previous": "42.5"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Government Budget Balance",
+"actual": "-87.0B",
+"consensus": "-80.0B",
+"previous": "-86.1B"
+},
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-0.4%",
+"consensus": "-0.5%",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "2.8%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "6.1%",
+"consensus": "3.2%",
+"previous": "2.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "2.6%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "5.3%",
+"consensus": "2.6%",
+"previous": "1.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "293.29B",
+"consensus": "",
+"previous": "293.11B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Trade Balance",
+"actual": "16.55B",
+"consensus": "13.60B",
+"previous": "12.71B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "0.986M",
+"consensus": "1.015M",
+"previous": "1.017M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-3.0%",
+"consensus": "0.3%",
+"previous": "-2.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "0.999M",
+"consensus": "0.990M",
+"previous": "1.107M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-9.8%",
+"consensus": "-8.3%",
+"previous": "23.1%"
+},
+{
+"gmt": "10:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "79.2%",
+"consensus": "79.1%",
+"previous": "79.1%"
+},
+{
+"gmt": "10:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "1.0%"
+},
+{
+"gmt": "10:55",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "3.0%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "10:55",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "80.4",
+"consensus": "83.5",
+"previous": "82.5"
+},
+{
+"gmt": "10:55",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "95.2",
+"consensus": "98.5",
+"previous": "98.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "JOLTS Job Openings",
+"actual": "4.00M",
+"consensus": "3.97M",
+"previous": "3.93M"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "1408",
+"consensus": "",
+"previous": "1393"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "11.2K",
+"consensus": "",
+"previous": "18.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "327.4k",
+"consensus": "",
+"previous": "331.0k"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "44.0K",
+"consensus": "",
+"previous": "38.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "16.5K",
+"consensus": "",
+"previous": "17.3K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-67.3K",
+"consensus": "",
+"previous": "-60.5K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-2.9K",
+"consensus": "",
+"previous": "4.7K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-52.0K",
+"consensus": "",
+"previous": "-56.9K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-118.1K",
+"consensus": "",
+"previous": "-128.9K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "9.6K",
+"consensus": "",
+"previous": "7.9K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-2.3K",
+"consensus": "",
+"previous": "1.2K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "9.2K",
+"consensus": "",
+"previous": "14.5K"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "House Prices",
+"actual": "9.9%",
+"consensus": "",
+"previous": "9.9%"
+}
+]

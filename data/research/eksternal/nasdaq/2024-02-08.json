@@ -1,0 +1,314 @@
+[
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Cash Reserve Ratio",
+"actual": "4.50%",
+"consensus": "4.50%",
+"previous": "4.50%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Interest Rate Decision",
+"actual": "6.50%",
+"consensus": "6.50%",
+"previous": "6.50%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Reverse REPO Rate",
+"actual": "3.35%",
+"consensus": "",
+"previous": "3.35%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "50.2",
+"consensus": "50.3",
+"previous": "51.8"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "112.1",
+"consensus": "",
+"previous": "111.5"
+},
+{
+"gmt": "05:31",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "112.3",
+"consensus": "",
+"previous": "112.1"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "-1.7%",
+"consensus": "0.5%",
+"previous": "1.2%"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "0.7%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "4.51%",
+"consensus": "4.42%",
+"previous": "4.62%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "0.42%",
+"consensus": "0.34%",
+"previous": "0.56%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian IPCA Inflation Index SA",
+"actual": "0.32%",
+"consensus": "",
+"previous": "0.49%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-11.0%",
+"consensus": "",
+"previous": "-15.3%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "-34.9%",
+"consensus": "",
+"previous": "16.9%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "586.4B",
+"consensus": "",
+"previous": "587.8B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,871K",
+"consensus": "1,878K",
+"previous": "1,894K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "218K",
+"consensus": "221K",
+"previous": "227K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "212.25K",
+"consensus": "",
+"previous": "208.50K"
+},
+{
+"gmt": "10:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Dhingra Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:15",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Wholesale Inventories",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "-0.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Wholesale Trade Sales",
+"actual": "0.7%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-75B",
+"consensus": "-73B",
+"previous": "-197B"
+},
+{
+"gmt": "11:30",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.280%",
+"consensus": "",
+"previous": "5.280%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.270%",
+"consensus": "",
+"previous": "5.265%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "WASDE Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:05",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-0.315B",
+"consensus": "",
+"previous": "6.355B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "4.360%",
+"consensus": "",
+"previous": "4.229%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.4%",
+"consensus": "3.4%",
+"previous": "3.4%"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,631B",
+"consensus": "",
+"previous": "7,630B"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.556T",
+"consensus": "",
+"previous": "3.412T"
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "RBA Gov Bullock Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M2 Money Stock",
+"actual": "2.4%",
+"consensus": "2.2%",
+"previous": "2.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M3 Money Supply",
+"actual": "2,130.3%",
+"consensus": "",
+"previous": "2,124.4%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "5-Year JGB Auction",
+"actual": "0.310%",
+"consensus": "",
+"previous": "0.197%"
+}
+]

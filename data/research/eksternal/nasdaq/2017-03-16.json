@@ -1,0 +1,362 @@
+[
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:00",
+"country": "China",
+"eventName": "FDI",
+"actual": "-2.30%",
+"consensus": "",
+"previous": "-9.20%"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "SNB Interest Rate Decision",
+"actual": "-0.75%",
+"consensus": "-0.75%",
+"previous": "-0.75%"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "SNB Monetary Policy Assessment",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.3%",
+"consensus": "",
+"previous": "3.3%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "1.935%",
+"consensus": "",
+"previous": "1.684%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.548%",
+"consensus": "",
+"previous": "0.487%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "-0.29%",
+"consensus": "",
+"previous": "-0.34%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "0.18%",
+"consensus": "",
+"previous": "0.09%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.9%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-1.7%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "-0.8%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "2.0%",
+"previous": "2.0%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-0.9%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "2.0%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "1",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "8",
+"consensus": "9",
+"previous": "9"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE QE Total",
+"actual": "435B",
+"consensus": "435B",
+"previous": "435B"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "0.25%",
+"consensus": "0.25%",
+"previous": "0.25%"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.213M",
+"consensus": "1.260M",
+"previous": "1.285M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-6.2%",
+"consensus": "-2.6%",
+"previous": "4.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,030K",
+"consensus": "2,050K",
+"previous": "2,060K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.288M",
+"consensus": "1.260M",
+"previous": "1.251M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "3.0%",
+"consensus": "1.4%",
+"previous": "-1.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "241K",
+"consensus": "240K",
+"previous": "243K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "237.25K",
+"consensus": "",
+"previous": "236.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "32.8",
+"consensus": "30.0",
+"previous": "43.3"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "59.5",
+"consensus": "",
+"previous": "53.5"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "34.50",
+"consensus": "",
+"previous": "22.10"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "17.5",
+"consensus": "",
+"previous": "11.1"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "38.6",
+"consensus": "",
+"previous": "38.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "40.70",
+"consensus": "",
+"previous": "29.90"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "6.20B",
+"consensus": "9.45B",
+"previous": "10.21B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "8.63B",
+"consensus": "",
+"previous": "6.66B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "391.4B",
+"consensus": "",
+"previous": "393.4B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "51.0",
+"consensus": "",
+"previous": "50.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "JOLTS Job Openings",
+"actual": "5.626M",
+"consensus": "5.450M",
+"previous": "5.539M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-53B",
+"consensus": "-56B",
+"previous": "-68B"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "35.61K",
+"consensus": "",
+"previous": "-40.86K"
+},
+{
+"gmt": "17:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "55.2",
+"consensus": "",
+"previous": "51.6"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "1.40%",
+"consensus": "0.80%",
+"previous": "5.00%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "21.50%",
+"consensus": "12.80%",
+"previous": "8.60%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Trade Balance",
+"actual": "7.800B",
+"consensus": "",
+"previous": "3.630B"
+}
+]

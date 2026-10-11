@@ -1,0 +1,274 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "3.144B",
+"consensus": "3.820B",
+"previous": "4.086B"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "-0.3%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-3.5%",
+"consensus": "-3.8%",
+"previous": "-4.1%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "9.4",
+"consensus": "9.3",
+"previous": "9.3"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance Non-EU",
+"actual": "3.31B",
+"consensus": "",
+"previous": "3.52B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "13.56B",
+"consensus": "11.00B",
+"previous": "6.75B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "5.381B",
+"consensus": "",
+"previous": "-3.840B"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Bank lending",
+"actual": "0.6%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PCE Prices",
+"actual": "1.40%",
+"consensus": "1.30%",
+"previous": "1.30%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Corporate Profits",
+"actual": "-1.7%",
+"consensus": "1.3%",
+"previous": "-1.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "2.0%",
+"consensus": "1.9%",
+"previous": "2.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "1.3%",
+"consensus": "1.3%",
+"previous": "1.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Sales",
+"actual": "2.7%",
+"consensus": "2.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PCE Prices",
+"actual": "1.3%",
+"consensus": "1.3%",
+"previous": "1.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Real Consumer Spending",
+"actual": "3.0%",
+"consensus": "2.9%",
+"previous": "3.0%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "2.1%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "6.1%",
+"consensus": "",
+"previous": "6.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "227.5",
+"consensus": "",
+"previous": "226.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "4.76M",
+"consensus": "5.35M",
+"previous": "5.32M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "-10.5%",
+"consensus": "-0.5%",
+"previous": "-4.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "6",
+"consensus": "-1",
+"previous": "-3"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "0",
+"consensus": "",
+"previous": "-2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "0",
+"consensus": "",
+"previous": "-1"
+},
+{
+"gmt": "12:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "-0.94B",
+"consensus": "",
+"previous": "-1.25B"
+},
+{
+"gmt": "12:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "0.63B",
+"consensus": "",
+"previous": "1.58B"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.195%",
+"consensus": "",
+"previous": "0.205%"
+},
+{
+"gmt": "17:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-3.600M",
+"consensus": "1.000M",
+"previous": "2.300M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "4.08B",
+"consensus": "3.90B",
+"previous": "3.81B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "4.86B",
+"consensus": "4.75B",
+"previous": "4.72B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-779M",
+"consensus": "-810M",
+"previous": "-905M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-3,680M",
+"consensus": "-3,760M",
+"previous": "-3,180M"
+},
+{
+"gmt": "22:25",
+"country": "United States",
+"eventName": "Personal Spending",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.0%"
+}
+]

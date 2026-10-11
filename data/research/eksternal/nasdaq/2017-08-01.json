@@ -1,0 +1,418 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "1.50%",
+"consensus": "1.50%",
+"previous": "1.50%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.3%",
+"consensus": "-0.1%",
+"previous": "1.1%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "2.9%",
+"consensus": "2.7%",
+"previous": "3.1%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "17.1%",
+"consensus": "",
+"previous": "23.7%"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "-9K",
+"consensus": "-5K",
+"previous": "6K"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "5.7%",
+"consensus": "5.7%",
+"previous": "5.7%"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment",
+"actual": "2.500M",
+"consensus": "",
+"previous": "2.500M"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment n.s.a.",
+"actual": "2.500M",
+"consensus": "2.500M",
+"previous": "2.473M"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "2.1%",
+"consensus": "2.4%",
+"previous": "1.9%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "42.9",
+"consensus": "",
+"previous": "46.7"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "-0.630%",
+"consensus": "",
+"previous": "-0.610%"
+},
+{
+"gmt": "05:40",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "1.267%",
+"consensus": "",
+"previous": "1.384%"
+},
+{
+"gmt": "07:30",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "4.10%",
+"consensus": "",
+"previous": "0.90%"
+},
+{
+"gmt": "07:30",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "46.72K",
+"consensus": "",
+"previous": "45.37K"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.5%",
+"consensus": "-0.1%",
+"previous": "4.1%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.0%",
+"consensus": "-0.4%",
+"previous": "1.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PCE Price Index",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PCE Price Index",
+"actual": "1.5%",
+"consensus": "1.3%",
+"previous": "1.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Personal Income",
+"actual": "0.0%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Personal Spending",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Personal Consumption",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "2.8%",
+"consensus": "",
+"previous": "2.1%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "-1.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "-1.3%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "55.2",
+"consensus": "55.1",
+"previous": "57.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "60.4",
+"consensus": "",
+"previous": "63.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "56.3",
+"consensus": "56.5",
+"previous": "57.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "62.0",
+"consensus": "55.5",
+"previous": "55.0"
+},
+{
+"gmt": "10:20",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "15.7",
+"consensus": "",
+"previous": "14.8"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "10.5",
+"consensus": "",
+"previous": "10.1"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.990%",
+"consensus": "",
+"previous": "0.980%"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "6.30B",
+"consensus": "6.39B",
+"previous": "7.20B"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "10.52M",
+"consensus": "",
+"previous": "10.66M"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "Domestic Truck Sales",
+"actual": "8.68M",
+"consensus": "8.67M",
+"previous": "8.90M"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "6.21M",
+"consensus": "",
+"previous": "5.91M"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Domestic Car Sales",
+"actual": "4.55M",
+"consensus": "",
+"previous": "4.27M"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.73M",
+"consensus": "16.80M",
+"previous": "16.51M"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "1.779M",
+"consensus": "-2.900M",
+"previous": "-10.230M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Employment Change",
+"actual": "-0.2%",
+"consensus": "0.7%",
+"previous": "1.2%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Labor Cost Index",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Labor Cost Index",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.5%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Participation Rate",
+"actual": "70.00%",
+"consensus": "70.70%",
+"previous": "70.60%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Unemployment Rate",
+"actual": "4.8%",
+"consensus": "4.8%",
+"previous": "4.9%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Shop Price Index",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "15.6%",
+"consensus": "16.6%",
+"previous": "17.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "10.9%",
+"consensus": "1.5%",
+"previous": "-5.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "3.4%",
+"consensus": "",
+"previous": "1.3%"
+},
+{
+"gmt": "All Day",
+"country": "Switzerland",
+"eventName": "Switzerland - National Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

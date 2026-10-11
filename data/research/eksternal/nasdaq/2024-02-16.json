@@ -1,0 +1,546 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "0.70",
+"consensus": "0.20",
+"previous": "-1.50"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "0.7%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "3.2%",
+"consensus": "1.7%",
+"previous": "-3.5%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "0.7%",
+"consensus": "-1.6%",
+"previous": "-2.1%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "3.4%",
+"consensus": "1.5%",
+"previous": "-3.3%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "0.7%",
+"consensus": "-1.4%",
+"previous": "-2.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.1%",
+"consensus": "-0.4%",
+"previous": "-0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-2.7%",
+"consensus": "",
+"previous": "-2.6%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "Industrial Production",
+"actual": "-0.40%",
+"consensus": "",
+"previous": "1.80%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI NSA",
+"actual": "-0.20%",
+"consensus": "",
+"previous": "0.10%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI NSA",
+"actual": "3.10%",
+"consensus": "",
+"previous": "3.70%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.7%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "3.4%",
+"consensus": "3.4%",
+"previous": "4.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "France Inflation Ex-Tobacco",
+"actual": "2.90%",
+"consensus": "",
+"previous": "3.60%"
+},
+{
+"gmt": "04:45",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:30",
+"country": "Russia",
+"eventName": "Interest Rate Decision",
+"actual": "16.00%",
+"consensus": "16.00%",
+"previous": "16.00%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "617.23B",
+"consensus": "",
+"previous": "622.47B"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CBR Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.470M",
+"consensus": "1.509M",
+"previous": "1.493M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-1.5%",
+"consensus": "1.3%",
+"previous": "1.8%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "0.5%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "2.0%",
+"consensus": "1.6%",
+"previous": "1.7%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.331M",
+"consensus": "1.450M",
+"previous": "1.562M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-14.8%",
+"consensus": "0.0%",
+"previous": "3.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "0.9%",
+"consensus": "0.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI ex. Food/Energy/Transport",
+"actual": "0.6%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI ex. Food/Energy/Transport",
+"actual": "2.6%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "10.44B",
+"consensus": "-6.45B",
+"previous": "11.31B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "29.400B",
+"consensus": "",
+"previous": "12.380B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "0.3%",
+"consensus": "0.7%",
+"previous": "0.9%"
+},
+{
+"gmt": "10:10",
+"country": "United States",
+"eventName": "Fed Vice Chair for Supervision Barr Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "3.0%",
+"consensus": "2.9%",
+"previous": "2.9%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.9%",
+"consensus": "2.8%",
+"previous": "2.9%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "78.4",
+"consensus": "76.5",
+"previous": "77.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "79.6",
+"consensus": "80.0",
+"previous": "79.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "81.5",
+"consensus": "82.0",
+"previous": "81.9"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.9%",
+"consensus": "2.9%",
+"previous": "2.9%"
+},
+{
+"gmt": "13:10",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "497",
+"consensus": "",
+"previous": "499"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "621",
+"consensus": "",
+"previous": "623"
+},
+{
+"gmt": "15:40",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "50.5K",
+"consensus": "",
+"previous": "34.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "3.9K",
+"consensus": "",
+"previous": "2.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-32.7K",
+"consensus": "",
+"previous": "-13.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "-245.9K",
+"consensus": "",
+"previous": "-229.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "171.0K",
+"consensus": "",
+"previous": "161.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "131.2K",
+"consensus": "",
+"previous": "161.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "32.1K",
+"consensus": "",
+"previous": "32.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-136.6K",
+"consensus": "",
+"previous": "-114.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-215.8K",
+"consensus": "",
+"previous": "-233.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "12.4K",
+"consensus": "",
+"previous": "16.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "-161.8K",
+"consensus": "",
+"previous": "-160.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "-29.0K",
+"consensus": "",
+"previous": "-38.3K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-5.5K",
+"consensus": "",
+"previous": "-7.7K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-6.0K",
+"consensus": "",
+"previous": "-5.6K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-79.0K",
+"consensus": "",
+"previous": "-71.8K"
+},
+{
+"gmt": "16:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "19.3K",
+"consensus": "",
+"previous": "19.7K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-111.5K",
+"consensus": "",
+"previous": "-84.2K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "3.4K",
+"consensus": "",
+"previous": "0.8K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "",
+"consensus": "",
+"previous": "-9.9K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "52.8K",
+"consensus": "",
+"previous": "62.2K"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Chinese New Year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Chinese New Year",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

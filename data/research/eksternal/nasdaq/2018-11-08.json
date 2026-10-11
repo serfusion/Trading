@@ -1,0 +1,330 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "49.5",
+"consensus": "48.9",
+"previous": "48.6"
+},
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "2.4%",
+"consensus": "2.4%",
+"previous": "2.4%"
+},
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "-0.8%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "-0.4%",
+"consensus": "0.8%",
+"previous": "-2.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "17.6B",
+"consensus": "18.0B",
+"previous": "18.2B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.90B",
+"consensus": "",
+"previous": "-2.00B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "40.4B",
+"consensus": "",
+"previous": "41.2B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "46.1B",
+"consensus": "",
+"previous": "46.9B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Industrial Investments",
+"actual": "1.0%",
+"consensus": "",
+"previous": "4.0%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-5.7B",
+"consensus": "-6.1B",
+"previous": "-5.7B"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "-0.1%",
+"consensus": "0.3%",
+"previous": "1.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "0.82%",
+"consensus": "",
+"previous": "0.86%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Gold Production",
+"actual": "-19.0%",
+"consensus": "",
+"previous": "-15.9%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Mining Production",
+"actual": "-1.8%",
+"consensus": "0.3%",
+"previous": "-6.7%"
+},
+{
+"gmt": "Tentative",
+"country": "Euro Zone",
+"eventName": "EU Economic Forecasts",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "-1.0%",
+"consensus": "-0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "459.7B",
+"consensus": "",
+"previous": "460.7B"
+},
+{
+"gmt": "09:15",
+"country": "Canada",
+"eventName": "Housing Starts",
+"actual": "205.9K",
+"consensus": "200.0K",
+"previous": "189.7K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,623K",
+"consensus": "1,635K",
+"previous": "1,631K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "214K",
+"consensus": "214K",
+"previous": "215K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "213.75K",
+"consensus": "",
+"previous": "214.00K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "09:30",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "0.102%",
+"consensus": "",
+"previous": "0.126%"
+},
+{
+"gmt": "09:30",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.565%",
+"consensus": "",
+"previous": "0.613%"
+},
+{
+"gmt": "10:15",
+"country": "Euro Zone",
+"eventName": "ECB's Coeure Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "MBA Delinquency Rates",
+"actual": "4.47%",
+"consensus": "",
+"previous": "4.36%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "65B",
+"consensus": "58B",
+"previous": "48B"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "WASDE Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Switzerland",
+"eventName": "SNB Gov Board Member Maechler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Fed Interest Rate Decision",
+"actual": "2.25%",
+"consensus": "2.25%",
+"previous": "2.25%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M2 Money Stock",
+"actual": "2.7%",
+"consensus": "2.8%",
+"previous": "2.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Home Loans",
+"actual": "-1.0%",
+"consensus": "-0.9%",
+"previous": "-2.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Invest Housing Finance",
+"actual": "-2.8%",
+"consensus": "",
+"previous": "-1.1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.7%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "PPI",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.6%"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Diwali-Balipratipada",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

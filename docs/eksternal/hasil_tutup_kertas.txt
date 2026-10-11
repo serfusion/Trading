@@ -1,0 +1,334 @@
+# 📄 Uji tutup kertas: tebakan arah emas sebelum CPI, tahun demi tahun
+python -m research.tutup_kertas           → docs/eksternal/hasil_tutup_kertas.txt
+
+
+## Aturan WTI — emas 1 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  44.4% (n   9) → TIDAK dipakai |  11 |   4 |   5 |  2 |  44.4%
+   2013 |  44.4% (n  18) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  44.8% (n  29) → TIDAK dipakai |  12 |   7 |   4 |  1 |  63.6%
+   2015 |  50.0% (n  40) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2016 |  51.9% (n  52) |  12 |  11 |   1 |  0 |  91.7%
+   2017 |  59.4% (n  64) |  11 |   8 |   2 |  1 |  80.0%
+   2018 |  62.2% (n  74) |  12 |   4 |   7 |  1 |  36.4%
+   2019 |  58.8% (n  85) |  12 |   9 |   3 |  0 |  75.0%
+   2020 |  60.8% (n  97) |  11 |   5 |   5 |  1 |  50.0%
+   2021 |  59.8% (n 107) |  13 |   5 |   8 |  0 |  38.5%
+   2022 |  57.5% (n 120) |  13 |   7 |   6 |  0 |  53.8%
+   2023 |  57.1% (n 133) |  12 |   5 |   7 |  0 |  41.7%
+   2024 |  55.9% (n 145) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  55.4% (n 157) |  11 |   5 |   6 |  0 |  45.5%
+   2026 |  54.8% (n 168) |   9 |   5 |   4 |  0 |  55.6%
+   TOTAL 2012–2026: benar 93, salah 75 → 55.4% | hanya tahun 'dipakai': 70/125 = 56.0% | 2022+: 28/57 = 49.1% | tahun ≥ 50% benar: 9/15
+
+   Rincian per rilis 2024–2026 (aturan WTI, 1 dtk) — kertas dibuka satu per satu:
+   2024-01-11 WTI  -5.78 → tebak emas NAIK  | gerak 1 dtk +9.31 $ ✅
+   2024-02-13 WTI  +2.25 → tebak emas TURUN | gerak 1 dtk +1.06 $ ❌
+   2024-03-12 WTI  +3.10 → tebak emas TURUN | gerak 1 dtk -0.09 $ ✅
+   2024-04-10 WTI  +4.03 → tebak emas TURUN | gerak 1 dtk -0.51 $ ✅
+   2024-05-15 WTI  +4.07 → tebak emas TURUN | gerak 1 dtk +0.95 $ ❌
+   2024-06-12 WTI  -5.32 → tebak emas NAIK  | gerak 1 dtk +0.44 $ ✅
+   2024-07-11 WTI  -0.26 → tebak emas NAIK  | gerak 1 dtk -0.48 $ ❌
+   2024-08-14 WTI  +2.03 → tebak emas TURUN | gerak 1 dtk -0.82 $ ✅
+   2024-09-11 WTI  -5.12 → tebak emas NAIK  | gerak 1 dtk +1.01 $ ✅
+   2024-10-10 WTI  -6.45 → tebak emas NAIK  | gerak 1 dtk -0.52 $ ❌
+   2024-11-13 WTI  +1.75 → tebak emas TURUN | gerak 1 dtk +0.48 $ ❌
+   2024-12-11 WTI  -2.03 → tebak emas NAIK  | gerak 1 dtk -0.65 $ ❌
+   2025-01-15 WTI  +0.17 → tebak emas TURUN | gerak 1 dtk +0.09 $ ❌
+   2025-02-12 WTI  +5.62 → tebak emas TURUN | gerak 1 dtk -0.50 $ ✅
+   2025-03-12 WTI  -4.21 → tebak emas NAIK  | gerak 1 dtk +1.33 $ ✅
+   2025-04-10 WTI  -3.29 → tebak emas NAIK  | gerak 1 dtk +0.24 $ ✅
+   2025-05-13 WTI  -4.70 → tebak emas NAIK  | gerak 1 dtk +0.18 $ ✅
+   2025-06-11 WTI  -1.37 → tebak emas NAIK  | gerak 1 dtk -0.32 $ ❌
+   2025-07-15 WTI  +6.00 → tebak emas TURUN | gerak 1 dtk +0.36 $ ❌
+   2025-08-12 WTI  +0.22 → tebak emas TURUN | gerak 1 dtk -0.15 $ ✅
+   2025-09-11 WTI  -3.53 → tebak emas NAIK  | gerak 1 dtk -0.25 $ ❌
+   2025-10-24 WTI  -0.91 → tebak emas NAIK  | gerak 1 dtk -0.43 $ ❌
+   2025-12-18 WTI  -0.83 → tebak emas NAIK  | gerak 1 dtk -0.28 $ ❌
+   2026-01-13 WTI  -2.09 → tebak emas NAIK  | gerak 1 dtk +0.38 $ ✅
+   2026-02-13 WTI  +2.06 → tebak emas TURUN | gerak 1 dtk +0.09 $ ❌
+   2026-03-11 WTI  +4.47 → tebak emas TURUN | gerak 1 dtk +0.52 $ ❌
+   2026-04-10 WTI +26.88 → tebak emas TURUN | gerak 1 dtk -1.26 $ ✅
+   2026-05-12 WTI  +8.93 → tebak emas TURUN | gerak 1 dtk +0.39 $ ❌
+   2026-06-10 WTI  +1.82 → tebak emas TURUN | gerak 1 dtk -0.34 $ ✅
+   2026-07-14 WTI -17.33 → tebak emas NAIK  | gerak 1 dtk +3.64 $ ✅
+   2026-08-12 WTI  -4.35 → tebak emas NAIK  | gerak 1 dtk +5.38 $ ✅
+   2026-09-11 WTI  +3.44 → tebak emas TURUN | gerak 1 dtk +2.76 $ ❌
+
+## Aturan WTI — emas 2 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  37.5% (n   8) → TIDAK dipakai |  11 |   4 |   7 |  0 |  36.4%
+   2013 |  36.8% (n  19) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  40.0% (n  30) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2015 |  45.2% (n  42) → TIDAK dipakai |  12 |   9 |   3 |  0 |  75.0%
+   2016 |  51.9% (n  54) |  12 |   6 |   6 |  0 |  50.0%
+   2017 |  51.5% (n  66) |  11 |   9 |   2 |  0 |  81.8%
+   2018 |  55.8% (n  77) |  12 |   8 |   3 |  1 |  72.7%
+   2019 |  58.0% (n  88) |  12 |   6 |   6 |  0 |  50.0%
+   2020 |  57.0% (n 100) |  11 |   7 |   4 |  0 |  63.6%
+   2021 |  57.7% (n 111) |  13 |   7 |   6 |  0 |  53.8%
+   2022 |  57.3% (n 124) |  13 |   7 |   6 |  0 |  53.8%
+   2023 |  56.9% (n 137) |  12 |   5 |   7 |  0 |  41.7%
+   2024 |  55.7% (n 149) |  12 |   5 |   7 |  0 |  41.7%
+   2025 |  54.7% (n 161) |  11 |   8 |   3 |  0 |  72.7%
+   2026 |  55.8% (n 172) |   9 |   3 |   6 |  0 |  33.3%
+   TOTAL 2012–2026: benar 96, salah 77 → 55.5% | hanya tahun 'dipakai': 71/127 = 55.9% | 2022+: 28/57 = 49.1% | tahun ≥ 50% benar: 10/15
+
+## Aturan WTI — emas 5 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  36.4% (n  11) → TIDAK dipakai |  11 |   4 |   7 |  0 |  36.4%
+   2013 |  36.4% (n  22) → TIDAK dipakai |  11 |   7 |   4 |  0 |  63.6%
+   2014 |  45.5% (n  33) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2015 |  48.9% (n  45) → TIDAK dipakai |  12 |  11 |   1 |  0 |  91.7%
+   2016 |  57.9% (n  57) |  12 |   6 |   6 |  0 |  50.0%
+   2017 |  56.5% (n  69) |  11 |   7 |   4 |  0 |  63.6%
+   2018 |  57.5% (n  80) |  12 |   8 |   4 |  0 |  66.7%
+   2019 |  58.7% (n  92) |  12 |   4 |   8 |  0 |  33.3%
+   2020 |  55.8% (n 104) |  11 |   6 |   5 |  0 |  54.5%
+   2021 |  55.7% (n 115) |  13 |   7 |   6 |  0 |  53.8%
+   2022 |  55.5% (n 128) |  13 |   5 |   8 |  0 |  38.5%
+   2023 |  53.9% (n 141) |  12 |   6 |   6 |  0 |  50.0%
+   2024 |  53.6% (n 153) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  53.3% (n 165) |  11 |   7 |   4 |  0 |  63.6%
+   2026 |  54.0% (n 176) |   9 |   5 |   4 |  0 |  55.6%
+   TOTAL 2012–2026: benar 96, salah 78 → 55.2% | hanya tahun 'dipakai': 67/128 = 52.3% | 2022+: 29/57 = 50.9% | tahun ≥ 50% benar: 12/15
+
+## Aturan WTI — emas 10 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  45.5% (n  11) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2013 |  45.5% (n  22) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  45.5% (n  33) → TIDAK dipakai |  12 |   6 |   6 |  0 |  50.0%
+   2015 |  46.7% (n  45) → TIDAK dipakai |  12 |  11 |   1 |  0 |  91.7%
+   2016 |  56.1% (n  57) |  12 |   6 |   6 |  0 |  50.0%
+   2017 |  55.1% (n  69) |  11 |   7 |   4 |  0 |  63.6%
+   2018 |  56.2% (n  80) |  12 |   7 |   5 |  0 |  58.3%
+   2019 |  56.5% (n  92) |  12 |   4 |   8 |  0 |  33.3%
+   2020 |  53.8% (n 104) |  11 |   6 |   5 |  0 |  54.5%
+   2021 |  53.9% (n 115) |  13 |   8 |   5 |  0 |  61.5%
+   2022 |  54.7% (n 128) |  13 |   7 |   6 |  0 |  53.8%
+   2023 |  54.6% (n 141) |  12 |   6 |   6 |  0 |  50.0%
+   2024 |  54.2% (n 153) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  53.9% (n 165) |  11 |   7 |   4 |  0 |  63.6%
+   2026 |  54.5% (n 176) |   9 |   3 |   6 |  0 |  33.3%
+   TOTAL 2012–2026: benar 94, salah 80 → 54.0% | hanya tahun 'dipakai': 67/128 = 52.3% | 2022+: 29/57 = 50.9% | tahun ≥ 50% benar: 11/15
+
+## Aturan WTI — emas 1 mnt
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  36.4% (n  11) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2013 |  40.9% (n  22) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  42.4% (n  33) → TIDAK dipakai |  12 |   6 |   6 |  0 |  50.0%
+   2015 |  44.4% (n  45) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2016 |  47.4% (n  57) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2017 |  49.3% (n  69) → TIDAK dipakai |  11 |   7 |   4 |  0 |  63.6%
+   2018 |  51.2% (n  80) |  12 |   7 |   5 |  0 |  58.3%
+   2019 |  52.2% (n  92) |  12 |   7 |   5 |  0 |  58.3%
+   2020 |  52.9% (n 104) |  11 |   4 |   7 |  0 |  36.4%
+   2021 |  51.3% (n 115) |  13 |   6 |   7 |  0 |  46.2%
+   2022 |  50.8% (n 128) |  13 |   5 |   8 |  0 |  38.5%
+   2023 |  49.6% (n 141) → TIDAK dipakai |  12 |   9 |   3 |  0 |  75.0%
+   2024 |  51.6% (n 153) |  12 |   8 |   4 |  0 |  66.7%
+   2025 |  52.7% (n 165) |  11 |   8 |   3 |  0 |  72.7%
+   2026 |  54.0% (n 176) |   9 |   5 |   4 |  0 |  55.6%
+   TOTAL 2012–2026: benar 96, salah 78 → 55.2% | hanya tahun 'dipakai': 50/93 = 53.8% | 2022+: 35/57 = 61.4% | tahun ≥ 50% benar: 10/15
+
+## Aturan YOY|P — emas 1 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  44.4% (n   9) → TIDAK dipakai |  10 |   5 |   4 |  1 |  55.6%
+   2013 |  50.0% (n  18) → TIDAK dipakai |  11 |   3 |   8 |  0 |  27.3%
+   2014 |  41.4% (n  29) → TIDAK dipakai |  10 |   5 |   4 |  1 |  55.6%
+   2015 |  44.7% (n  38) → TIDAK dipakai |  10 |   5 |   5 |  0 |  50.0%
+   2016 |  45.8% (n  48) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2017 |  48.3% (n  60) → TIDAK dipakai |   9 |   3 |   6 |  0 |  33.3%
+   2018 |  46.4% (n  69) → TIDAK dipakai |   8 |   3 |   4 |  1 |  42.9%
+   2019 |  46.1% (n  76) → TIDAK dipakai |  12 |   5 |   7 |  0 |  41.7%
+   2020 |  45.5% (n  88) → TIDAK dipakai |  10 |   6 |   3 |  1 |  66.7%
+   2021 |  47.4% (n  97) → TIDAK dipakai |   9 |   6 |   3 |  0 |  66.7%
+   2022 |  49.1% (n 106) → TIDAK dipakai |  12 |   5 |   7 |  0 |  41.7%
+   2023 |  48.3% (n 118) → TIDAK dipakai |  12 |  10 |   2 |  0 |  83.3%
+   2024 |  51.5% (n 130) |  10 |   3 |   7 |  0 |  30.0%
+   2025 |  50.0% (n 140) → TIDAK dipakai |   7 |   1 |   6 |  0 |  14.3%
+   TOTAL 2012–2025: benar 67, salah 71 → 48.6% | hanya tahun 'dipakai': 3/10 = 30.0% | 2022+: 19/41 = 46.3% | tahun ≥ 50% benar: 7/14
+
+## Aturan YOY|P — emas 2 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  37.5% (n   8) → TIDAK dipakai |  10 |   6 |   4 |  0 |  60.0%
+   2013 |  50.0% (n  18) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  48.3% (n  29) → TIDAK dipakai |  10 |   8 |   2 |  0 |  80.0%
+   2015 |  56.4% (n  39) |  10 |   6 |   4 |  0 |  60.0%
+   2016 |  57.1% (n  49) |  12 |   4 |   8 |  0 |  33.3%
+   2017 |  52.5% (n  61) |   9 |   3 |   6 |  0 |  33.3%
+   2018 |  50.0% (n  70) → TIDAK dipakai |   8 |   3 |   4 |  1 |  42.9%
+   2019 |  49.4% (n  77) → TIDAK dipakai |  12 |   8 |   4 |  0 |  66.7%
+   2020 |  51.7% (n  89) |  10 |   7 |   3 |  0 |  70.0%
+   2021 |  53.5% (n  99) |   9 |   7 |   2 |  0 |  77.8%
+   2022 |  55.6% (n 108) |  12 |   5 |   7 |  0 |  41.7%
+   2023 |  54.2% (n 120) |  12 |   8 |   4 |  0 |  66.7%
+   2024 |  55.3% (n 132) |  10 |   6 |   4 |  0 |  60.0%
+   2025 |  55.6% (n 142) |   7 |   4 |   3 |  0 |  57.1%
+   TOTAL 2012–2025: benar 80, salah 61 → 56.7% | hanya tahun 'dipakai': 50/91 = 54.9% | 2022+: 23/41 = 56.1% | tahun ≥ 50% benar: 9/14
+
+## Aturan YOY|P — emas 5 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  36.4% (n  11) → TIDAK dipakai |  10 |   6 |   4 |  0 |  60.0%
+   2013 |  47.6% (n  21) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  46.9% (n  32) → TIDAK dipakai |  10 |   8 |   2 |  0 |  80.0%
+   2015 |  54.8% (n  42) |  10 |   8 |   2 |  0 |  80.0%
+   2016 |  59.6% (n  52) |  12 |   4 |   8 |  0 |  33.3%
+   2017 |  54.7% (n  64) |   9 |   1 |   8 |  0 |  11.1%
+   2018 |  49.3% (n  73) → TIDAK dipakai |   8 |   4 |   4 |  0 |  50.0%
+   2019 |  49.4% (n  81) → TIDAK dipakai |  12 |  10 |   2 |  0 |  83.3%
+   2020 |  53.8% (n  93) |  10 |   6 |   4 |  0 |  60.0%
+   2021 |  54.4% (n 103) |   9 |   6 |   3 |  0 |  66.7%
+   2022 |  55.4% (n 112) |  12 |   5 |   7 |  0 |  41.7%
+   2023 |  54.0% (n 124) |  12 |   9 |   3 |  0 |  75.0%
+   2024 |  55.9% (n 136) |  10 |   8 |   2 |  0 |  80.0%
+   2025 |  57.5% (n 146) |   7 |   3 |   4 |  0 |  42.9%
+   TOTAL 2012–2025: benar 83, salah 59 → 58.5% | hanya tahun 'dipakai': 50/91 = 54.9% | 2022+: 25/41 = 61.0% | tahun ≥ 50% benar: 9/14
+
+## Aturan YOY|P — emas 10 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  27.3% (n  11) → TIDAK dipakai |  10 |   7 |   3 |  0 |  70.0%
+   2013 |  47.6% (n  21) → TIDAK dipakai |  11 |   7 |   4 |  0 |  63.6%
+   2014 |  53.1% (n  32) |  10 |   7 |   3 |  0 |  70.0%
+   2015 |  57.1% (n  42) |  10 |   8 |   2 |  0 |  80.0%
+   2016 |  61.5% (n  52) |  12 |   4 |   8 |  0 |  33.3%
+   2017 |  56.2% (n  64) |   9 |   1 |   8 |  0 |  11.1%
+   2018 |  50.7% (n  73) |   8 |   5 |   3 |  0 |  62.5%
+   2019 |  51.9% (n  81) |  12 |  10 |   2 |  0 |  83.3%
+   2020 |  55.9% (n  93) |  10 |   8 |   2 |  0 |  80.0%
+   2021 |  58.3% (n 103) |   9 |   4 |   5 |  0 |  44.4%
+   2022 |  57.1% (n 112) |  12 |   7 |   5 |  0 |  58.3%
+   2023 |  57.3% (n 124) |  12 |   9 |   3 |  0 |  75.0%
+   2024 |  58.8% (n 136) |  10 |   8 |   2 |  0 |  80.0%
+   2025 |  60.3% (n 146) |   7 |   3 |   4 |  0 |  42.9%
+   TOTAL 2012–2025: benar 88, salah 54 → 62.0% | hanya tahun 'dipakai': 74/121 = 61.2% | 2022+: 27/41 = 65.9% | tahun ≥ 50% benar: 10/14
+
+## Aturan YOY|P — emas 1 mnt
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  54.5% (n  11) |  10 |   7 |   3 |  0 |  70.0%
+   2013 |  61.9% (n  21) |  11 |   7 |   4 |  0 |  63.6%
+   2014 |  62.5% (n  32) |  10 |   6 |   4 |  0 |  60.0%
+   2015 |  61.9% (n  42) |  10 |   4 |   6 |  0 |  40.0%
+   2016 |  57.7% (n  52) |  12 |   5 |   7 |  0 |  41.7%
+   2017 |  54.7% (n  64) |   9 |   1 |   8 |  0 |  11.1%
+   2018 |  49.3% (n  73) → TIDAK dipakai |   8 |   5 |   3 |  0 |  62.5%
+   2019 |  50.6% (n  81) |  12 |  11 |   1 |  0 |  91.7%
+   2020 |  55.9% (n  93) |  10 |   7 |   3 |  0 |  70.0%
+   2021 |  57.3% (n 103) |   9 |   5 |   4 |  0 |  55.6%
+   2022 |  57.1% (n 112) |  12 |   6 |   6 |  0 |  50.0%
+   2023 |  56.5% (n 124) |  12 |   8 |   4 |  0 |  66.7%
+   2024 |  57.4% (n 136) |  10 |   7 |   3 |  0 |  70.0%
+   2025 |  58.2% (n 146) |   7 |   4 |   3 |  0 |  57.1%
+   TOTAL 2012–2025: benar 83, salah 59 → 58.5% | hanya tahun 'dipakai': 78/134 = 58.2% | 2022+: 25/41 = 61.0% | tahun ≥ 50% benar: 11/14
+
+## Aturan BUY — emas 1 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  44.4% (n   9) → TIDAK dipakai |  11 |   5 |   4 |  2 |  55.6%
+   2013 |  50.0% (n  18) → TIDAK dipakai |  11 |   3 |   8 |  0 |  27.3%
+   2014 |  41.4% (n  29) → TIDAK dipakai |  12 |   6 |   5 |  1 |  54.5%
+   2015 |  45.0% (n  40) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2016 |  48.1% (n  52) → TIDAK dipakai |  12 |   6 |   6 |  0 |  50.0%
+   2017 |  48.4% (n  64) → TIDAK dipakai |  11 |   4 |   6 |  1 |  40.0%
+   2018 |  47.3% (n  74) → TIDAK dipakai |  12 |   5 |   6 |  1 |  45.5%
+   2019 |  47.1% (n  85) → TIDAK dipakai |  12 |   4 |   8 |  0 |  33.3%
+   2020 |  45.4% (n  97) → TIDAK dipakai |  11 |   8 |   2 |  1 |  80.0%
+   2021 |  48.6% (n 107) → TIDAK dipakai |  13 |   5 |   8 |  0 |  38.5%
+   2022 |  47.5% (n 120) → TIDAK dipakai |  13 |   4 |   9 |  0 |  30.8%
+   2023 |  45.9% (n 133) → TIDAK dipakai |  12 |   6 |   6 |  0 |  50.0%
+   2024 |  46.2% (n 145) → TIDAK dipakai |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  46.5% (n 157) → TIDAK dipakai |  11 |   5 |   6 |  0 |  45.5%
+   2026 |  46.4% (n 168) → TIDAK dipakai |   9 |   7 |   2 |  0 |  77.8%
+   TOTAL 2012–2026: benar 81, salah 87 → 48.2% | hanya tahun 'dipakai': 0/0 = 0.0% | 2022+: 28/57 = 49.1% | tahun ≥ 50% benar: 8/15
+
+## Aturan BUY — emas 2 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  50.0% (n   8) → TIDAK dipakai |  11 |   7 |   4 |  0 |  63.6%
+   2013 |  57.9% (n  19) |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  53.3% (n  30) |  12 |   6 |   6 |  0 |  50.0%
+   2015 |  52.4% (n  42) |  12 |   5 |   7 |  0 |  41.7%
+   2016 |  50.0% (n  54) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2017 |  51.5% (n  66) |  11 |   4 |   7 |  0 |  36.4%
+   2018 |  49.4% (n  77) → TIDAK dipakai |  12 |   7 |   4 |  1 |  63.6%
+   2019 |  51.1% (n  88) |  12 |   5 |   7 |  0 |  41.7%
+   2020 |  50.0% (n 100) → TIDAK dipakai |  11 |   7 |   4 |  0 |  63.6%
+   2021 |  51.4% (n 111) |  13 |   5 |   8 |  0 |  38.5%
+   2022 |  50.0% (n 124) → TIDAK dipakai |  13 |   4 |   9 |  0 |  30.8%
+   2023 |  48.2% (n 137) → TIDAK dipakai |  12 |   4 |   8 |  0 |  33.3%
+   2024 |  47.0% (n 149) → TIDAK dipakai |  12 |   7 |   5 |  0 |  58.3%
+   2025 |  47.8% (n 161) → TIDAK dipakai |  11 |  10 |   1 |  0 |  90.9%
+   2026 |  50.6% (n 172) |   9 |   9 |   0 |  0 | 100.0%
+   TOTAL 2012–2026: benar 92, salah 81 → 53.2% | hanya tahun 'dipakai': 39/80 = 48.8% | 2022+: 34/57 = 59.6% | tahun ≥ 50% benar: 8/15
+
+## Aturan BUY — emas 5 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  63.6% (n  11) |  11 |   7 |   4 |  0 |  63.6%
+   2013 |  63.6% (n  22) |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  57.6% (n  33) |  12 |   6 |   6 |  0 |  50.0%
+   2015 |  55.6% (n  45) |  12 |   7 |   5 |  0 |  58.3%
+   2016 |  56.1% (n  57) |  12 |   7 |   5 |  0 |  58.3%
+   2017 |  56.5% (n  69) |  11 |   6 |   5 |  0 |  54.5%
+   2018 |  56.2% (n  80) |  12 |   8 |   4 |  0 |  66.7%
+   2019 |  57.6% (n  92) |  12 |   5 |   7 |  0 |  41.7%
+   2020 |  55.8% (n 104) |  11 |   6 |   5 |  0 |  54.5%
+   2021 |  55.7% (n 115) |  13 |   5 |   8 |  0 |  38.5%
+   2022 |  53.9% (n 128) |  13 |   6 |   7 |  0 |  46.2%
+   2023 |  53.2% (n 141) |  12 |   5 |   7 |  0 |  41.7%
+   2024 |  52.3% (n 153) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  52.1% (n 165) |  11 |   9 |   2 |  0 |  81.8%
+   2026 |  54.0% (n 176) |   9 |   7 |   2 |  0 |  77.8%
+   TOTAL 2012–2026: benar 95, salah 79 → 54.6% | hanya tahun 'dipakai': 95/174 = 54.6% | 2022+: 33/57 = 57.9% | tahun ≥ 50% benar: 10/15
+
+## Aturan BUY — emas 10 dtk
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 |  72.7% (n  11) |  11 |   8 |   3 |  0 |  72.7%
+   2013 |  72.7% (n  22) |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  63.6% (n  33) |  12 |   5 |   7 |  0 |  41.7%
+   2015 |  57.8% (n  45) |  12 |   7 |   5 |  0 |  58.3%
+   2016 |  57.9% (n  57) |  12 |   7 |   5 |  0 |  58.3%
+   2017 |  58.0% (n  69) |  11 |   6 |   5 |  0 |  54.5%
+   2018 |  57.5% (n  80) |  12 |   7 |   5 |  0 |  58.3%
+   2019 |  57.6% (n  92) |  12 |   5 |   7 |  0 |  41.7%
+   2020 |  55.8% (n 104) |  11 |   6 |   5 |  0 |  54.5%
+   2021 |  55.7% (n 115) |  13 |   6 |   7 |  0 |  46.2%
+   2022 |  54.7% (n 128) |  13 |   6 |   7 |  0 |  46.2%
+   2023 |  53.9% (n 141) |  12 |   5 |   7 |  0 |  41.7%
+   2024 |  52.9% (n 153) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  52.7% (n 165) |  11 |   9 |   2 |  0 |  81.8%
+   2026 |  54.5% (n 176) |   9 |   7 |   2 |  0 |  77.8%
+   TOTAL 2012–2026: benar 95, salah 79 → 54.6% | hanya tahun 'dipakai': 95/174 = 54.6% | 2022+: 33/57 = 57.9% | tahun ≥ 50% benar: 9/15
+
+## Aturan BUY — emas 1 mnt
+   tahun | persen tampil (dari data s/d tahun lalu) | tebakan | benar | salah | diam | % benar tahun itu
+   2012 | 100.0% (n  11) |  11 |   6 |   5 |  0 |  54.5%
+   2013 |  77.3% (n  22) |  11 |   5 |   6 |  0 |  45.5%
+   2014 |  66.7% (n  33) |  12 |   5 |   7 |  0 |  41.7%
+   2015 |  60.0% (n  45) |  12 |   5 |   7 |  0 |  41.7%
+   2016 |  56.1% (n  57) |  12 |   6 |   6 |  0 |  50.0%
+   2017 |  55.1% (n  69) |  11 |   6 |   5 |  0 |  54.5%
+   2018 |  55.0% (n  80) |  12 |   9 |   3 |  0 |  75.0%
+   2019 |  57.6% (n  92) |  12 |   6 |   6 |  0 |  50.0%
+   2020 |  56.7% (n 104) |  11 |   6 |   5 |  0 |  54.5%
+   2021 |  56.5% (n 115) |  13 |   8 |   5 |  0 |  61.5%
+   2022 |  57.0% (n 128) |  13 |   6 |   7 |  0 |  46.2%
+   2023 |  56.0% (n 141) |  12 |   8 |   4 |  0 |  66.7%
+   2024 |  56.9% (n 153) |  12 |   6 |   6 |  0 |  50.0%
+   2025 |  56.4% (n 165) |  11 |  10 |   1 |  0 |  90.9%
+   2026 |  58.5% (n 176) |   9 |   5 |   4 |  0 |  55.6%
+   TOTAL 2012–2026: benar 97, salah 77 → 55.7% | hanya tahun 'dipakai': 97/174 = 55.7% | 2022+: 35/57 = 61.4% | tahun ≥ 50% benar: 11/15
+
+## Ringkasan (benar/salah, rilis yang harganya bergerak)
+   WTI    1 dtk : semua 93/168 = 55.4% | 2022+ 28/57 = 49.1%
+   WTI    2 dtk : semua 96/173 = 55.5% | 2022+ 28/57 = 49.1%
+   WTI    5 dtk : semua 96/174 = 55.2% | 2022+ 29/57 = 50.9%
+   WTI    10 dtk: semua 94/174 = 54.0% | 2022+ 29/57 = 50.9%
+   WTI    1 mnt : semua 96/174 = 55.2% | 2022+ 35/57 = 61.4%
+   YOY|P  1 dtk : semua 67/138 = 48.6% | 2022+ 19/41 = 46.3%
+   YOY|P  2 dtk : semua 80/141 = 56.7% | 2022+ 23/41 = 56.1%
+   YOY|P  5 dtk : semua 83/142 = 58.5% | 2022+ 25/41 = 61.0%
+   YOY|P  10 dtk: semua 88/142 = 62.0% | 2022+ 27/41 = 65.9%
+   YOY|P  1 mnt : semua 83/142 = 58.5% | 2022+ 25/41 = 61.0%
+   BUY    1 dtk : semua 81/168 = 48.2% | 2022+ 28/57 = 49.1%
+   BUY    2 dtk : semua 92/173 = 53.2% | 2022+ 34/57 = 59.6%
+   BUY    5 dtk : semua 95/174 = 54.6% | 2022+ 33/57 = 57.9%
+   BUY    10 dtk: semua 95/174 = 54.6% | 2022+ 33/57 = 57.9%
+   BUY    1 mnt : semua 97/174 = 55.7% | 2022+ 35/57 = 61.4%
