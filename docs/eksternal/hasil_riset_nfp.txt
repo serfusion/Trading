@@ -1,0 +1,249 @@
+# 🧑‍💼 Riset NFP mendalam → arah lonjakan terbesar menit pertama (tutup kertas + permutasi keluarga)
+
+Permintaan pengguna 11 Okt 2026: "setelah data konsensus dan lain-lain ada, otomatis persentase berubah di apk? Jika iya
+terapkan juga news lain dengan pengujian, riset, validasi; jika persentase tinggi pasang". Putaran pertama NFP (ADP, klaim
+4 pekan, ISM ketenagakerjaan, Kalshi, P/P3/KON — research/berita_detik.py) GAGAL. Putaran ini memakai sumber & definisi baru.
+
+PRA-REGISTRASI (ditulis 11 Okt 2026 SEBELUM evaluasi apa pun dijalankan; tidak ada aturan yang ditambah setelah melihat hasil
+kecuali ditandai "pasca-lihat"). Bulan acuan M = bulan terakhir yang pertama kali terbit pada tanggal rilis (ALFRED PAYEMS;
+rilis tertunda 2025 tetap benar). Nilai "diketahui sebelum rilis" = vintage ALFRED yang berlaku H−1 (tanggal New York) atau
+baris kalender Nasdaq yang terbit pada tanggal < tanggal NFP (Challenger 07:30 ET boleh hari yang sama). Semua petunjuk
+disimpan dalam ARAH "BAIK UNTUK USD" (+1) → tebakan emas = kebalikannya. Nol = tidak menebak.
+
+A. Angka utama NFP (tebakan kejutan payrolls; USD = +tebakan)
+  1  ADPG    ADP bulan M (terbit < H) − konsensus payrolls SWASTA Nasdaq (cadangan: konsensus utama) → tanda.
+             Alasan: ADP = ukuran independen ketenagakerjaan swasta; bila ADP di atas yang diharapkan ekonom untuk swasta BLS,
+             BLS cenderung di atas. Harapan +.
+  2  ADPG50  idem, hanya bila |selisih| ≥ 50 rb (varian peredam derau).
+  3  KLSW    klaim awal pekan survei (pekan Minggu–Sabtu yang memuat tgl 12) bulan M vs pekan survei bulan M−1 (nilai rilis
+             pertama): turun → payrolls kuat (+). Alasan: klaim pekan survei = PHK pada pekan yang diukur BLS.
+  4  KL4SW   idem dengan rata-rata 4 pekan klaim awal (varian lebih halus).
+  5  ISMJ    indeks ketenagakerjaan ISM JASA (Act − sebelumnya) bulan M, terbit pada tanggal < H → naik = +.
+  6  ISM2    tanda (Δ ketenagakerjaan ISM manufaktur + Δ ISM jasa), yang sudah terbit < H.
+  7  PHIL    Philly Fed Employment bulan M (terbit pekan ke-3 bulan M) Act − sebelumnya → naik = +.
+  8  CHAL    Challenger job cuts bulan M, perubahan y/y (%) > 0 → PHK naik → payrolls lemah (−); < 0 → +.
+  9  IND     indeks lowongan Indeed (SA) tgl ≤ 12 bulan M vs tgl ≤ 12 bulan M−1 (terbit +7 hari) → naik = +.
+ 10  REV     revisi bersih 2 bulan pada rilis NFP SEBELUMNYA (ALFRED PAYEMS) → positif = + (revisi berautokorelasi; revisi
+             rilis ini ikut terlihat pasar).
+ 11  FFNQ    perkiraan ForexFactory − konsensus Nasdaq (|selisih| ≥ 5 rb) → FF lebih tinggi = + (konsensus yang lebih
+             baru/“bisikan” lebih tinggi).
+ 12  KON3    rata-rata perubahan payrolls 3 bulan terakhir (vintage H−1) − konsensus → konsensus di bawah tren = + .
+B. Tingkat pengangguran (tebakan kejutan UR; USD = −tebakan)
+ 13  URU     UR tanpa pembulatan bulan M−1 = UNEMPLOY/CLF16OV (vintage H−1) − konsensus UR; |selisih| ≥ 0,02 → tanda.
+             Alasan mekanis: UR acak-berjalan; bila angka tanpa pembulatan sudah dekat batas pembulatan atas, peluang dibulatkan
+             ke atas konsensus lebih besar. Harapan: selisih + → UR di atas → USD −.
+ 14  URU0    idem tanpa ambang (varian).
+ 15  KLLSW   klaim LANJUTAN pekan survei bulan M vs pekan survei M−1: naik → UR di atas → USD −.
+ 16  PK5U    5 pekan antar pekan survei (bukan 4) → UR di atas → USD − (aturan lama research/pra_per_berita, arah dari studi
+             itu; sudah pernah diuji dengan target 2–10 dtk — dicatat, bukan petunjuk baru).
+C. Upah per jam (AHE m/m; USD = +tebakan)
+ 17  AHEM    konsistensi y/y tanpa pembulatan (seperti CPI YOY): m/m tersirat = (1+konsensus y/y)·L(M−12)/L(M−1) − 1 dari
+             CES0500000003 vintage H−1; tersirat − konsensus m/m ≥ +0,05 → m/m di atas (+), ≤ −0,05 → di bawah (−).
+             Alasan: kedua konsensus dibulatkan 0,1; irisan keduanya menunjukkan harapan m/m tanpa pembulatan berada di sisi
+             atas/bawah konsensusnya. Hanya 2018+ (konsensus y/y Nasdaq).
+ 18  AHEY    kebalikan yang sama untuk y/y: y/y tersirat = L(M−1)·(1+konsensus m/m)/L(M−12) − 1; − konsensus y/y ≥ +0,05 →
+             y/y di atas (+). (Hampir selalu = −AHEM; dua-duanya dihitung karena pasar bisa membaca m/m atau y/y.)
+ 19  K12A    tgl 12 bulan M jatuh Minggu–Rabu (tgl 15 masuk pekan survei) → AHE di atas (+), selain itu (−). Aturan lama
+             research/pra_per_berita (sudah pernah diuji untuk angka/2–10 dtk) — dicatat.
+D. Gabungan (ditetapkan sebelum melihat hasil; bobot seperti plafon NFP 2 : UR 1 : AHE 1)
+ 20  KOMP    tanda(2·ADPG + URU + AHEM)   (nilai arah USD)
+ 21  RND     tanda(URU + AHEM)            (dua petunjuk mekanis pembulatan)
+ 22  SUARA   tanda(jumlah ADPG, KLSW, ISM2, PHIL, CHAL, IND, REV, FFNQ, KON3, URU, KLLSW, PK5U, AHEM, K12A)
+E. PASCA-LIHAT (ditambah 11 Okt 2026 SETELAH melihat hasil 22 aturan di atas — 0 lolos, terbaik KLLSW 58,5% p 0,54; tetap
+   dimasukkan ke keluarga yang sama, jadi p-nya ikut dihukum):
+ 23  KOLEKSI masa pengumpulan data BLS: jumlah Jumat sesudah pekan survei s/d hari rilis = 2 (pendek, tingkat respons
+             awal rendah) → payrolls di bawah (−); ≥ 4 (panjang) → (+); 3 (normal) → tidak menebak. Alasan dari literatur
+             analis (cetak awal bulan pengumpulan pendek cenderung lemah & direvisi naik).
+ 24  MODEL   regresi logistik walk-forward (tahun Y dilatih hanya rilis < Y, ≥ 30 rilis) memakai 14 petunjuk SUARA sebagai
+             fitur, target arah lonjakan. CATATAN: permutasi keluarga tidak melatih ulang model → p MODEL terlalu optimistis.
+ 25  UR2     tanda(KLLSW + PK5U) — gabungan dua petunjuk UR yang "terbaik" di hasil putaran ini (DATA-MINING, pasca-lihat).
+Total keluarga = 25 aturan (22 pra-registrasi + 3 pasca-lihat; semua ikut uji permutasi bila cukup rilis). Tidak diuji: Conference Board "jobs plentiful −
+hard to get" (berlisensi, tidak ada di Nasdaq/FRED), NFIB rencana rekrut (tidak ada di kalender), Kalshi/Polymarket (sejak
+2023 → < 40 rilis; putaran pertama KAL/KALUR), ADP mingguan & Revelio (sejak 2025).
+
+Data: 166 rilis NFP 2010-09–2026-09 (ada tick & baris Nasdaq); bulan acuan dari ALFRED PAYEMS. Cek UR tanpa pembulatan = UNRATE vintage: 166/166 cocok.
+Cakupan petunjuk (rilis ≠ 0 sejak 2016 / sejak 2022): ADPG 108/51, ADPG50 54/22, KLSW 121/53, KL4SW 122/53, ISMJ 74/35, ISM2 110/48, PHIL 84/44, CHAL 93/47, IND 73/53, REV 121/52, FFNQ 40/10, KON3 123/53, URU 96/41, URU0 123/53, KLLSW 123/53, PK5U 123/53, AHEM 22/5, AHEY 22/5, K12A 123/53, KOMP 116/50, RND 94/42, SUARA 105/44, KOLEKSI 9/5, MODEL 123/53, UR2 67/26
+Kolom: tutup kertas (tahun Y dipakai hanya bila rilis < Y benar > 50%, n ≥ 10) | 'mentah' = semua rilis tanpa saringan, 2016+/2022+, dengan p permutasi keluarga | 'angka' = ketepatan menebak kejutan komponen yang dituju (NFP / UR / AHE; gabungan → plafon) dalam arah USD.
+
+## Pembanding (target lonjakan menit pertama; arah emas)
+   selalu NAIK  2016–26  45.5% (56/123) | LAMA  49.3% (33/67) | BARU  41.1% (23/56) | 2022+  39.6% (21/53) | 2026  37.5% (3/8)
+   selalu TURUN 2016–26  54.5% (67/123) | LAMA  50.7% (34/67) | BARU  58.9% (33/56) | 2022+  60.4% (32/53) | 2026  62.5% (5/8)
+   PLAFON       2016–26  89.5% (85/95) | LAMA  92.3% (48/52) | BARU  86.0% (37/43) | 2022+  85.4% (35/41) | 2026  87.5% (7/8)   (kejutan sebenarnya NFP×2 − UR + AHE)
+   sekunder detik 2–10 gabungan, selalu NAIK: 2016–26  46.5% (229/492) | LAMA  50.0% (134/268) | BARU  42.4% (95/224)
+   sekunder detik 2–10 gabungan, PLAFON:      2016–26  87.9% (334/380) | LAMA  84.6% (176/208) | BARU  91.9% (158/172)
+
+## Hasil per aturan — tutup kertas, target LONJAKAN (keluarga 21 aturan cukup rilis, 2.000×)
+   ADPG    2016–26  38.1% (8/21) | LAMA  38.1% (8/21) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 45.4%/41.2% p 1.000/1.000 | angka semua  52.0% (77/148) ; 2016+  48.1% (52/108)
+           per tahun: 2013 1/1, 2014 6/12, 2015 3/11, 2017 5/10, 2018 3/11
+           sekunder per detik (2016–26): 2d  30.0% (3/10) | 3d  38.3% (23/60) | 5d  45.1% (37/82) | 10d  30.0% (3/10)
+           sekunder gabungan 2–10: 2016–26  35.2% (38/108) | LAMA  32.7% (17/52) | BARU  37.5% (21/56) | 2022+  38.6% (17/44) | mentah 48.1%/45.6% p 1.000/1.000
+           per feed (2016–26): ex  42.2% (19/45) | du  33.3% (7/21)
+   ADPG50  2016–26  25.0% (1/4) | LAMA  25.0% (1/4) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 38.9%/27.3% p 1.000/1.000 | angka semua  42.9% (27/63) ; 2016+  37.0% (20/54)
+           per tahun: 2018 1/4
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d  40.0% (2/5) | 5d  36.4% (8/22) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26  40.0% (8/20) | LAMA  33.3% (4/12) | BARU  50.0% (4/8) | 2022+    –   (0/0) | mentah 43.5%/35.2% p 1.000/1.000
+           per feed (2016–26): ex    –   (0/0) | du    –   (0/0)
+   KLSW    2016–26  44.4% (28/63) | LAMA  53.3% (16/30) | BARU  36.4% (12/33) | 2022+  33.3% (10/30) | 2026  50.0% (4/8)
+           mentah 52.1%/47.2% p 1.000/1.000 | angka semua  54.0% (88/163) ; 2016+  53.7% (65/121)
+           per tahun: 2019 5/10, 2020 8/12, 2021 5/11, 2022 2/12, 2025 4/10, 2026 4/8
+           sekunder per detik (2016–26): 2d  46.7% (35/75) | 3d  41.8% (23/55) | 5d  51.0% (50/98) | 10d  53.7% (65/121)
+           sekunder gabungan 2–10: 2016–26  51.3% (201/392) | LAMA  56.0% (94/168) | BARU  47.8% (107/224) | 2022+  46.7% (99/212) | mentah 52.7%/46.7% p 0.995/1.000
+           per feed (2016–26): ex  49.5% (49/99) | du  52.0% (51/98)
+   KL4SW   2016–26  46.2% (42/91) | LAMA  48.8% (21/43) | BARU  43.8% (21/48) | 2022+  44.4% (20/45) | 2026    –   (0/0)
+           mentah 52.5%/50.9% p 1.000/1.000 | angka semua  52.8% (86/163) ; 2016+  52.9% (64/121)
+           per tahun: 2017 4/12, 2018 5/11, 2020 8/12, 2021 5/11, 2022 5/12, 2023 5/11, 2024 8/12, 2025 2/10
+           sekunder per detik (2016–26): 2d  43.0% (34/79) | 3d  43.5% (20/46) | 5d  50.0% (55/110) | 10d  40.5% (32/79)
+           sekunder gabungan 2–10: 2016–26  43.3% (156/360) | LAMA  51.4% (111/216) | BARU  31.2% (45/144) | 2022+  31.1% (41/132) | mentah 51.4%/45.8% p 1.000/1.000
+           per feed (2016–26): ex  50.0% (55/110) | du  42.6% (29/68)
+   ISMJ    2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 50.0%/45.7% p 1.000/1.000 | angka semua  38.9% (37/95) ; 2016+  43.2% (32/74)
+           per tahun: –
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d    –   (0/0) | 5d    –   (0/0) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | mentah 47.0%/42.9% p 1.000/1.000
+   ISM2    2016–26  48.5% (32/66) | LAMA  53.3% (8/15) | BARU  47.1% (24/51) | 2022+  47.9% (23/48) | 2026  62.5% (5/8)
+           mentah 52.7%/47.9% p 0.998/1.000 | angka semua  45.5% (61/134) ; 2016+  48.6% (53/109)
+           per tahun: 2019 4/9, 2021 5/9, 2022 4/10, 2023 4/10, 2024 6/11, 2025 4/9, 2026 5/8
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d    –   (0/0) | 5d    –   (0/0) | 10d  30.0% (3/10)
+           sekunder gabungan 2–10: 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | mentah 48.6%/44.8% p 1.000/1.000
+           per feed (2016–26): ex  52.0% (52/100) | du  51.7% (46/89)
+   PHIL    2016–26  40.0% (4/10) | LAMA    –   (0/0) | BARU  40.0% (4/10) | 2022+  40.0% (4/10) | 2026    –   (0/0)
+           mentah 51.2%/50.0% p 1.000/1.000 | angka semua  50.0% (51/102) ; 2016+  52.4% (44/84)
+           per tahun: 2025 4/10
+           sekunder per detik (2016–26): 2d  53.6% (45/84) | 3d  52.4% (44/84) | 5d  53.6% (45/84) | 10d  53.3% (32/60)
+           sekunder gabungan 2–10: 2016–26  53.3% (179/336) | LAMA  57.9% (88/152) | BARU  49.5% (91/184) | 2022+  47.2% (83/176) | mentah 53.3%/47.2% p 0.989/1.000
+           per feed (2016–26): ex  40.9% (9/22) | du  40.9% (9/22)
+   CHAL    2016–26  52.7% (49/93) | LAMA  51.1% (23/45) | BARU  54.2% (26/48) | 2022+  53.2% (25/47) | 2026  37.5% (3/8)
+           mentah 52.7%/53.2% p 0.999/1.000 | angka semua  48.7% (56/115) ; 2016+  45.7% (42/92)
+           per tahun: 2014 3/4, 2015 4/4, 2016 5/12, 2017 10/12, 2018 4/8, 2019 1/5, 2020 2/6, 2021 2/3, 2022 4/8, 2023 6/9, 2024 7/12, 2025 5/10, 2026 3/8
+           sekunder per detik (2016–26): 2d  50.5% (47/93) | 3d  48.4% (45/93) | 5d  48.4% (45/93) | 10d  47.3% (44/93)
+           sekunder gabungan 2–10: 2016–26  48.7% (181/372) | LAMA  47.8% (86/180) | BARU  49.5% (95/192) | 2022+  48.4% (91/188) | mentah 48.7%/48.4% p 1.000/1.000
+           per feed (2016–26): ex  54.3% (44/81) | du  51.6% (48/93)
+   IND     2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 46.6%/45.3% p 1.000/1.000 | angka semua  32.9% (24/73) ; 2016+  32.9% (24/73)
+           per tahun: –
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d    –   (0/0) | 5d    –   (0/0) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | mentah 39.7%/41.0% p 1.000/1.000
+   REV     2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 36.4%/25.0% p 1.000/1.000 | angka semua  42.0% (68/162) ; 2016+  42.5% (51/120)
+           per tahun: –
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d    –   (0/0) | 5d    –   (0/0) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | mentah 37.2%/27.9% p 1.000/1.000
+   FFNQ    2016–26  52.6% (20/38) | LAMA  53.8% (14/26) | BARU  50.0% (6/12) | 2022+  40.0% (4/10) | 2026    –   (0/0)
+           di luar keluarga (rilis kurang) | angka semua  60.4% (29/48) ; 2016+  60.0% (24/40)
+           per tahun: 2017 2/5, 2018 3/4, 2019 1/3, 2020 4/7, 2021 6/9, 2022 1/5, 2023 3/4, 2024 0/1
+           sekunder per detik (2016–26): 2d  65.8% (25/38) | 3d  63.2% (24/38) | 5d  63.2% (24/38) | 10d  60.5% (23/38)
+           sekunder gabungan 2–10: 2016–26  63.2% (96/152) | LAMA  67.3% (70/104) | BARU  54.2% (26/48) | 2022+  45.0% (18/40)
+           per feed (2016–26): ex  51.7% (15/29) | du  55.3% (21/38)
+   KON3    2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 46.3%/50.9% p 1.000/1.000 | angka semua  43.9% (72/164) ; 2016+  45.9% (56/122)
+           per tahun: –
+           sekunder per detik (2016–26): 2d  30.0% (6/20) | 3d  48.0% (59/123) | 5d  44.4% (44/99) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26  26.2% (21/80) | LAMA  31.2% (15/48) | BARU  18.8% (6/32) | 2022+  18.8% (6/32) | mentah 47.8%/51.4% p 1.000/1.000
+   URU     2016–26  55.1% (43/78) | LAMA  52.9% (18/34) | BARU  56.8% (25/44) | 2022+  56.1% (23/41) | 2026  50.0% (2/4)
+           mentah 56.2%/56.1% p 0.839/0.983 | angka semua  46.2% (43/93) ; 2016+  48.6% (35/72)
+           per tahun: 2017 3/8, 2019 6/8, 2020 5/11, 2021 6/10, 2022 6/9, 2023 7/9, 2024 6/12, 2025 2/7, 2026 2/4
+           sekunder per detik (2016–26): 2d  60.4% (58/96) | 3d  61.5% (59/96) | 5d  61.5% (59/96) | 10d  58.2% (46/79)
+           sekunder gabungan 2–10: 2016–26  60.4% (232/384) | LAMA  58.2% (121/208) | BARU  63.1% (111/176) | 2022+  62.8% (103/164) | mentah 60.4%/62.8% p 0.244/0.454
+           per feed (2016–26): ex  55.1% (43/78) | du  56.3% (49/87)
+   URU0    2016–26  54.5% (67/123) | LAMA  56.7% (38/67) | BARU  51.8% (29/56) | 2022+  50.9% (27/53) | 2026  37.5% (3/8)
+           mentah 54.5%/50.9% p 0.972/1.000 | angka semua  45.9% (56/122) ; 2016+  47.3% (43/91)
+           per tahun: 2016 7/12, 2017 6/12, 2018 9/12, 2019 6/11, 2020 6/12, 2021 6/11, 2022 7/12, 2023 7/11, 2024 6/12, 2025 4/10, 2026 3/8
+           sekunder per detik (2016–26): 2d  57.7% (71/123) | 3d  60.6% (60/99) | 5d  58.5% (72/123) | 10d  55.9% (62/111)
+           sekunder gabungan 2–10: 2016–26  57.9% (285/492) | LAMA  59.0% (158/268) | BARU  56.7% (127/224) | 2022+  56.1% (119/212) | mentah 57.9%/56.1% p 0.558/0.972
+           per feed (2016–26): ex  54.1% (60/111) | du  54.5% (67/123)
+   KLLSW   2016–26  58.5% (72/123) | LAMA  58.2% (39/67) | BARU  58.9% (33/56) | 2022+  60.4% (32/53) | 2026  75.0% (6/8)
+           mentah 58.5%/60.4% p 0.577/0.798 | angka semua  57.4% (70/122) ; 2016+  61.5% (56/91)
+           per tahun: 2013 1/1, 2014 10/12, 2015 7/11, 2016 8/12, 2017 6/12, 2018 6/12, 2019 7/11, 2020 8/12, 2021 5/11, 2022 7/12, 2023 7/11, 2024 8/12, 2025 4/10, 2026 6/8
+           sekunder per detik (2016–26): 2d  50.4% (62/123) | 3d  50.4% (62/123) | 5d  51.2% (63/123) | 10d  52.0% (64/123)
+           sekunder gabungan 2–10: 2016–26  51.0% (251/492) | LAMA  47.8% (128/268) | BARU  54.9% (123/224) | 2022+  56.1% (119/212) | mentah 51.0%/56.1% p 1.000/0.972
+           per feed (2016–26): ex  57.7% (64/111) | du  56.9% (70/123)
+   PK5U    2016–26  56.9% (70/123) | LAMA  52.2% (35/67) | BARU  62.5% (35/56) | 2022+  62.3% (33/53) | 2026  50.0% (4/8)
+           mentah 56.9%/62.3% p 0.806/0.634 | angka semua  54.1% (66/122) ; 2016+  53.8% (49/91)
+           per tahun: 2013 0/1, 2015 3/11, 2016 7/12, 2017 5/12, 2018 6/12, 2019 9/11, 2020 3/12, 2021 7/11, 2022 8/12, 2023 7/11, 2024 7/12, 2025 7/10, 2026 4/8
+           sekunder per detik (2016–26): 2d  55.3% (68/123) | 3d  56.9% (70/123) | 5d  59.3% (73/123) | 10d  58.5% (72/123)
+           sekunder gabungan 2–10: 2016–26  57.5% (283/492) | LAMA  57.5% (154/268) | BARU  57.6% (129/224) | 2022+  57.1% (121/212) | mentah 57.5%/57.1% p 0.612/0.936
+           per feed (2016–26): ex  53.2% (41/77) | du  56.9% (70/123)
+   AHEM    2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           di luar keluarga (rilis kurang) | angka semua  75.0% (15/20) ; 2016+  75.0% (15/20)
+           per tahun: –
+           sekunder per detik (2016–26): 2d   0.0% (0/1) | 3d   0.0% (0/1) | 5d   0.0% (0/1) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26   0.0% (0/4) | LAMA    –   (0/0) | BARU   0.0% (0/4) | 2022+   0.0% (0/4)
+   AHEY    2016–26  60.0% (6/10) | LAMA  60.0% (3/5) | BARU  60.0% (3/5) | 2022+  60.0% (3/5) | 2026    –   (0/0)
+           di luar keluarga (rilis kurang) | angka semua  44.4% (8/18) ; 2016+  44.4% (8/18)
+           per tahun: 2021 3/5, 2022 1/2, 2023 1/1, 2025 1/2
+           sekunder per detik (2016–26): 2d  28.6% (2/7) | 3d  28.6% (2/7) | 5d  28.6% (2/7) | 10d  50.0% (5/10)
+           sekunder gabungan 2–10: 2016–26  36.1% (13/36) | LAMA  40.0% (8/20) | BARU  31.2% (5/16) | 2022+  31.2% (5/16)
+           per feed (2016–26): ex  60.0% (6/10) | du  50.0% (5/10)
+   K12A    2016–26  51.2% (63/123) | LAMA  46.3% (31/67) | BARU  57.1% (32/56) | 2022+  56.6% (30/53) | 2026  75.0% (6/8)
+           mentah 51.2%/56.6% p 1.000/0.982 | angka semua  65.3% (81/124) ; 2016+  62.6% (57/91)
+           per tahun: 2013 1/1, 2014 6/12, 2015 8/11, 2016 5/12, 2017 8/12, 2018 3/12, 2019 5/11, 2020 8/12, 2021 4/11, 2022 7/12, 2023 6/11, 2024 8/12, 2025 3/10, 2026 6/8
+           sekunder per detik (2016–26): 2d  54.5% (67/123) | 3d  52.8% (28/53) | 5d  50.6% (39/77) | 10d  43.1% (28/65)
+           sekunder gabungan 2–10: 2016–26  51.3% (158/308) | LAMA  43.8% (63/144) | BARU  57.9% (95/164) | 2022+  57.9% (95/164) | mentah 52.6%/59.9% p 0.996/0.732
+           per feed (2016–26): ex  27.3% (6/22) | du  51.2% (63/123)
+   KOMP    2016–26  41.7% (5/12) | LAMA  41.7% (5/12) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0)
+           mentah 45.7%/42.0% p 1.000/1.000 | angka semua  56.2% (72/128) ; 2016+  54.4% (49/90)
+           per tahun: 2014 6/12, 2015 3/11, 2017 5/12
+           sekunder per detik (2016–26): 2d  25.0% (3/12) | 3d  39.1% (9/23) | 5d  44.3% (39/88) | 10d  25.0% (3/12)
+           sekunder gabungan 2–10: 2016–26  27.1% (13/48) | LAMA  27.1% (13/48) | BARU    –   (0/0) | 2022+    –   (0/0) | mentah 47.8%/46.5% p 1.000/1.000
+           per feed (2016–26): ex  36.4% (16/44) | du  33.3% (4/12)
+   RND     2016–26  53.2% (41/77) | LAMA  50.0% (16/32) | BARU  55.6% (25/45) | 2022+  54.8% (23/42) | 2026  50.0% (2/4)
+           mentah 55.3%/54.8% p 0.923/0.989 | angka semua  64.6% (64/99) ; 2016+  68.5% (50/73)
+           per tahun: 2017 3/8, 2019 7/8, 2020 3/10, 2021 5/9, 2022 6/9, 2023 6/8, 2024 6/12, 2025 3/9, 2026 2/4
+           sekunder per detik (2016–26): 2d  60.6% (57/94) | 3d  61.7% (58/94) | 5d  61.7% (58/94) | 10d  58.4% (45/77)
+           sekunder gabungan 2–10: 2016–26  60.6% (228/376) | LAMA  59.7% (117/196) | BARU  61.7% (111/180) | 2022+  61.3% (103/168) | mentah 60.6%/61.3% p 0.221/0.619
+           per feed (2016–26): ex  53.2% (41/77) | du  56.5% (48/85)
+   SUARA   2016–26  55.2% (58/105) | LAMA  60.3% (35/58) | BARU  48.9% (23/47) | 2022+  50.0% (22/44) | 2026  66.7% (4/6)
+           mentah 55.2%/50.0% p 0.940/1.000 | angka semua  56.4% (62/110) ; 2016+  53.8% (42/78)
+           per tahun: 2014 7/10, 2015 4/10, 2016 8/11, 2017 6/10, 2018 5/11, 2019 7/9, 2020 6/10, 2021 4/10, 2022 4/10, 2023 6/10, 2024 6/10, 2025 2/8, 2026 4/6
+           sekunder per detik (2016–26): 2d  54.3% (57/105) | 3d  53.3% (56/105) | 5d  55.2% (58/105) | 10d  54.3% (57/105)
+           sekunder gabungan 2–10: 2016–26  54.3% (228/420) | LAMA  59.5% (138/232) | BARU  47.9% (90/188) | 2022+  48.9% (86/176) | mentah 54.3%/48.9% p 0.959/1.000
+           per feed (2016–26): ex  53.2% (50/94) | du  55.2% (58/105)
+   KOLEKSI 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0) | 2026    –   (0/0) [pasca-lihat]
+           di luar keluarga (rilis kurang) | angka semua  45.5% (5/11) ; 2016+  42.9% (3/7)
+           per tahun: –
+           sekunder per detik (2016–26): 2d    –   (0/0) | 3d    –   (0/0) | 5d    –   (0/0) | 10d    –   (0/0)
+           sekunder gabungan 2–10: 2016–26    –   (0/0) | LAMA    –   (0/0) | BARU    –   (0/0) | 2022+    –   (0/0)
+   MODEL   2016–26  59.3% (73/123) | LAMA  52.2% (35/67) | BARU  67.9% (38/56) | 2022+  67.9% (36/53) | 2026  62.5% (5/8) [pasca-lihat]
+           mentah 59.3%/67.9% p 0.484/0.208 | angka semua  55.2% (58/105) ; 2016+  54.7% (52/95)
+           per tahun: 2016 6/12, 2017 8/12, 2018 6/12, 2019 5/11, 2020 5/12, 2021 7/11, 2022 9/12, 2023 8/11, 2024 8/12, 2025 6/10, 2026 5/8
+           sekunder per detik (2016–26): 2d  46.2% (30/65) | 3d  53.4% (47/88) | 5d  53.0% (53/100) | 10d  53.4% (47/88)
+           sekunder gabungan 2–10: 2016–26  53.4% (188/352) | LAMA  46.3% (87/188) | BARU  61.6% (101/164) | 2022+  61.6% (101/164) | mentah 53.0%/63.7% p 0.992/0.371
+           per feed (2016–26): ex  60.4% (67/111) | du  57.7% (71/123)
+   UR2     2016–26  64.2% (43/67) | LAMA  59.0% (23/39) | BARU  71.4% (20/28) | 2022+  73.1% (19/26) | 2026 100.0% (2/2) [pasca-lihat]
+           mentah 64.2%/73.1% p 0.073/0.038 | angka semua  58.4% (45/77) ; 2016+  52.8% (28/53)  ✅ LOLOS
+           per tahun: 2014 8/9, 2015 1/3, 2016 4/5, 2017 4/9, 2018 4/8, 2019 6/7, 2020 2/5, 2021 4/7, 2022 4/5, 2023 4/5, 2024 6/9, 2025 3/5, 2026 2/2
+           sekunder per detik (2016–26): 2d  55.2% (37/67) | 3d  56.7% (38/67) | 5d  59.7% (40/67) | 10d  59.7% (40/67)
+           sekunder gabungan 2–10: 2016–26  57.8% (155/268) | LAMA  54.5% (85/156) | BARU  62.5% (70/112) | 2022+  63.5% (66/104) | mentah 57.8%/63.5% p 0.573/0.413
+           per feed (2016–26): ex  66.0% (35/53) | du  62.7% (42/67)
+
+## Rangkuman (diurutkan menurut tutup kertas 2016–26, target lonjakan)
+   aturan    2016–26        LAMA    BARU    2022+   p16    p22   | detik 2–10 gabungan (p16/p22)
+   UR2       64.2% n  67   59.0   71.4   73.1  0.073  0.038 |  57.8% (0.573/0.413)
+   AHEY      60.0% n  10   60.0   60.0   60.0    –      –   |  36.1% (  –  /  –  )
+   MODEL     59.3% n 123   52.2   67.9   67.9  0.484  0.208 |  53.4% (0.992/0.371)
+   KLLSW     58.5% n 123   58.2   58.9   60.4  0.577  0.798 |  51.0% (1.000/0.972)
+   PK5U      56.9% n 123   52.2   62.5   62.3  0.806  0.634 |  57.5% (0.612/0.936)
+   SUARA     55.2% n 105   60.3   48.9   50.0  0.940  1.000 |  54.3% (0.959/1.000)
+   URU       55.1% n  78   52.9   56.8   56.1  0.839  0.983 |  60.4% (0.244/0.454)
+   URU0      54.5% n 123   56.7   51.8   50.9  0.972  1.000 |  57.9% (0.558/0.972)
+   RND       53.2% n  77   50.0   55.6   54.8  0.923  0.989 |  60.6% (0.221/0.619)
+   CHAL      52.7% n  93   51.1   54.2   53.2  0.999  1.000 |  48.7% (1.000/1.000)
+   FFNQ      52.6% n  38   53.8   50.0   40.0    –      –   |  63.2% (  –  /  –  )
+   K12A      51.2% n 123   46.3   57.1   56.6  1.000  0.982 |  51.3% (0.996/0.732)
+   ISM2      48.5% n  66   53.3   47.1   47.9  0.998  1.000 |   –  % (1.000/1.000)
+   KL4SW     46.2% n  91   48.8   43.8   44.4  1.000  1.000 |  43.3% (1.000/1.000)
+   KLSW      44.4% n  63   53.3   36.4   33.3  1.000  1.000 |  51.3% (0.995/1.000)
+   KOMP      41.7% n  12   41.7    –      –    1.000  1.000 |  27.1% (1.000/1.000)
+   PHIL      40.0% n  10    –     40.0   40.0  1.000  1.000 |  53.3% (0.989/1.000)
+   ADPG      38.1% n  21   38.1    –      –    1.000  1.000 |  35.2% (1.000/1.000)
+   ADPG50    25.0% n   4   25.0    –      –    1.000  1.000 |  40.0% (1.000/1.000)
+   ISMJ       0.0% n   0    –      –      –    1.000  1.000 |   –  % (1.000/1.000)
+   IND        0.0% n   0    –      –      –    1.000  1.000 |   –  % (1.000/1.000)
+   REV        0.0% n   0    –      –      –    1.000  1.000 |   –  % (1.000/1.000)
+   KON3       0.0% n   0    –      –      –    1.000  1.000 |  26.2% (1.000/1.000)
+   AHEM       0.0% n   0    –      –      –      –      –   |   0.0% (  –  /  –  )
+   KOLEKSI    0.0% n   0    –      –      –      –      –   |   –  % (  –  /  –  )
+
+LOLOS (semua syarat): UR2
