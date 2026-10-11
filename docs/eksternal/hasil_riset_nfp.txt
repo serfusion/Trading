@@ -246,4 +246,58 @@ Kolom: tutup kertas (tahun Y dipakai hanya bila rilis < Y benar > 50%, n ≥ 10)
    AHEM       0.0% n   0    –      –      –      –      –   |   0.0% (  –  /  –  )
    KOLEKSI    0.0% n   0    –      –      –      –      –   |   –  % (  –  /  –  )
 
-LOLOS (semua syarat): UR2
+LOLOS menurut kriteria baku: UR2
+
+## Uji sadar-seleksi untuk UR2 (pasca-lihat) — 2000 acakan, langkah pemilihan diulang di tiap acakan
+   pasangan terbaik pada data asli: ('KLLSW', 'PK5U') (= KLLSW + PK5U, sesuai yang dipilih)
+   UR2 mentah 64.2% (2016+) / 73.1% (2022+); persentil 95 acakan terbaik-keluarga 67.9% / 74.1% → p sadar-seleksi 0.207 / 0.066
+
+LOLOS setelah koreksi seleksi (aturan pasca-lihat wajib lolos uji sadar-seleksi): TIDAK ADA
+
+## Cek ketahanan UR2 (diagnostik pasca-lihat, research/riset_nfp_cek.py — tidak memilih aturan baru)
+1) Sebaran tebakan tutup kertas (target lonjakan; rilis 2016–26 yang ditebak & bergerak):
+   2016–26  tebak NAIK  62.5% (10/16) | tebak TURUN  64.7% (33/51) | pembanding 'selalu TURUN' di rilis yang sama  58.2% (39/67)
+   LAMA     tebak NAIK  75.0% (6/8) | tebak TURUN  54.8% (17/31) | pembanding 'selalu TURUN' di rilis yang sama  48.7% (19/39)
+   BARU     tebak NAIK  50.0% (4/8) | tebak TURUN  80.0% (16/20) | pembanding 'selalu TURUN' di rilis yang sama  71.4% (20/28)
+2) Apakah UR2 menebak kejutan ANGKA (arah USD; rilis 2016–26 dengan kejutan ≠ 0)?
+   UR (−kejutan UR)    64.6% (31/48)
+   NFP utama           51.5% (34/66)
+   gabungan plafon     52.8% (28/53)
+   catatan: pada rilis yang ditebak, arah kejutan sebenarnya (plafon) menjelaskan lonjakan  84.9% (45/53); tebakan UR2 sama dengan arah plafon  52.8% (28/53)
+   penguraian tebakan benar UR2 (tutup kertas 2016–26) menurut hubungan emas ↔ kejutan sebenarnya:
+     emas SEARAH kejutan gabungan                    57.8% (26/45)
+     emas MELAWAN kejutan gabungan                   75.0% (6/8)
+     kejutan bercampur (plafon 0: NFP & UR searah)   78.6% (11/14)
+3) Rilis 2016–26 yang DIBUANG UR2 (KLLSW ≠ PK5U): 56; ketepatan mentah di sana: KLLSW  51.8% (29/56), PK5U  48.2% (27/56) (keduanya saling meniadakan → 1 benar, 1 salah)
+   rilis yang DIPAKAI (sepakat): 67, mentah  64.2% (43/67)
+4) KLLSW dengan vintage CCSA yang berlaku H−1 (bukan rilis pertama): tanda berubah di 8 dari 123 rilis 2016–26. UR2 versi ini: 2016–26  62.1% (41/66) | LAMA  56.4% (22/39) | BARU  70.4% (19/27) | 2022+  72.0% (18/25)
+5) Bootstrap 5.000× tutup kertas 2016–26: 64.2% (95%: 52.2–76.1%)
+   tanpa tahun terbaik (2019 6/7):  61.7% (37/60); tahun ≥ 50%: 9/11
+6) Binomial satu sisi 2016–26 (43/67): vs 50% p 0.014; vs kecenderungan dasar 'selalu TURUN' pada rilis yang sama (58.2%) p 0.194 (tanpa koreksi banyak uji)
+
+## Kesimpulan (11 Okt 2026)
+- Diuji 25 aturan (22 pra-registrasi + 3 pasca-lihat); 21 cukup rilis untuk permutasi keluarga 2.000×.
+- Pra-registrasi: 0 lolos. Terbaik (≥ 40 rilis): KLLSW 58.5% n 123 (LAMA 58.2, BARU 58.9, p 0.577/0.798); PK5U 56.9% n 123 (LAMA 52.2, BARU 62.5, p 0.806/0.634); SUARA 55.2% n 105 (LAMA 60.3, BARU 48.9, p 0.940/1.000); URU 55.1% n 78 (LAMA 52.9, BARU 56.8, p 0.839/0.983).
+  Petunjuk payrolls (ADP vs konsensus swasta, klaim awal pekan survei, ISM, Philly Fed, Challenger, Indeed, revisi,
+  tren 3 bulan) menebak kejutan NFP hanya 33–54% → konsensus ekonom sudah memuat informasi itu (kecuali FFNQ 60%
+  n 48, tetapi hanya 40 rilis ditebak & arah emas 52,6%). Konsistensi y/y upah
+  (AHEM) menebak kejutan AHE 75% (15/20) tetapi konsensus y/y Nasdaq hanya ada di 22 rilis → tidak bisa divalidasi.
+- UR2 (pasca-lihat, tanda(KLLSW + PK5U)) memenuhi kriteria BAKU: 64.2% n 67, LAMA 59.0%,
+  BARU 71.4%, p keluarga 0.073/0.038. TETAPI tidak dapat dipercaya:
+  (a) p sadar-seleksi (langkah 'pilih 2 aturan terbaik lalu gabungkan' diulang di tiap acakan) 0.207/0.066 → tidak signifikan;
+  (b) di BARU UR2 benar 20/28, sama dengan 'selalu TURUN' pada rilis yang sama (20/28) — 20 dari 28 tebakan BARU adalah TURUN, jadi keunggulan BARU = kecenderungan dasar emas turun saat NFP;
+      keunggulan hanya di LAMA (23/39);
+  (c) pada rilis normal (emas searah kejutan sebenarnya) UR2 hanya ±58%; sebagian besar kelebihan datang dari rilis
+      anomali/bercampur — tidak sesuai mekanisme 'menebak kejutan UR lalu emas ikut';
+  (d) bootstrap 95% mencakup 52%; binomial terhadap kecenderungan dasar p 0.194; target sekunder detik 2–10 57.8% (p 0.573/0.413).
+  → UR2 TIDAK disarankan dipasang. Kandidat yang lolos semua syarat + koreksi seleksi: TIDAK ADA.
+- Informasi ekonomi kecil yang nyata: klaim LANJUTAN pekan survei menebak arah kejutan pengangguran ±61% (2016+),
+  tetapi tidak berubah menjadi arah emas menit pertama (KLLSW 58,5%, p 0,58). Arah emas NFP tetap ditentukan kejutan
+  gabungan (plafon 89,5%) yang belum bisa ditebak sebelum rilis.
+- Tidak diuji (alasan): Conference Board 'jobs plentiful − hard to get' (berlisensi, tidak ada di Nasdaq/FRED), NFIB
+  rencana rekrut (tidak ada di kalender), Kalshi/Polymarket payrolls & U3 1 jam sebelum rilis (data sejak 2023 → < 40
+  rilis; putaran pertama KAL/KALUR 37,5% n 16), ADP mingguan & Revelio (sejak 2025).
+- Bila kelak ingin uji maju UR2 (perlu izin pengguna, TANPA ditampilkan): live = FRED API CCSA output_type=4 (rilis
+  pertama) untuk pekan survei (pekan Minggu–Sabtu berisi tgl 12) bulan ini & bulan lalu + hitung pekan kalender (PK5).
+- Ulang: PYTHONPATH=. python3 -m research.riset_nfp segar && PYTHONPATH=. python3 -m research.riset_nfp_cek
+  (tabel dibangun ulang dari cache Nasdaq/ALFRED/tick 11 Okt 2026 → identik dengan percobaan sebelumnya).

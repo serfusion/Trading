@@ -3,6 +3,7 @@ INDEKS CPI tanpa pembulatan ("CPI Index, n.s.a.", "Core CPI Index") dan rilis 20
 
 python -m research.nasdaq_kalender unduh [CPI|SEMUA]     → data/research/eksternal/nasdaq/<tanggal>.json
 python -m research.nasdaq_kalender lihat 2026-10-14
+python -m research.nasdaq_kalender harikerja [2010-01-04] [2026-10-30]   → semua hari kerja (cache yang ada dilewati)
 
 Ditemukan 11 Okt 2026 (permintaan pengguna "cari di manapun datanya"). Catatan: parameter `date` API bergeser +1 hari
 (query 2024-02-14 memuat CPI 13 Feb 2024) → fungsi di sini memakai tanggal rilis lalu menambah 1 hari. Kolom `gmt` bukan
@@ -115,9 +116,22 @@ def tanggal_cpi() -> list[pd.Timestamp]:
     return sorted(set(t))
 
 
+def unduh_harikerja(mulai: str = "2010-01-04", sampai: str | None = None, pekerja: int = 6) -> None:
+    """Semua hari kerja yang belum ada di cache (terbaru dulu), paralel. Server ±7 dtk/permintaan → ±60 tanggal/menit."""
+    from concurrent.futures import ThreadPoolExecutor
+    sampai = sampai or f"{pd.Timestamp.now():%Y-%m-%d}"
+    tg = sorted((d for d in pd.bdate_range(mulai, sampai) if not (DIR / f"{d:%Y-%m-%d}.json").exists()), reverse=True)
+    print("tanggal", len(tg), flush=True)
+    with ThreadPoolExecutor(pekerja) as ex:
+        r = list(ex.map(hari, tg))
+    print("selesai", sum(bool(x) for x in r), len(tg), flush=True)
+
+
 def main() -> None:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "unduh"
-    if cmd == "unduh":
+    if cmd == "harikerja":                                  # python -m research.nasdaq_kalender harikerja [mulai] [sampai]
+        unduh_harikerja(*sys.argv[2:4])
+    elif cmd == "unduh":
         jenis = sys.argv[2] if len(sys.argv) > 2 else "CPI"
         if jenis == "CPI":
             tg = tanggal_cpi()

@@ -99,6 +99,20 @@ LIVE = {
 LIVE_PCE_SUARA = "perlu dicek — komponen NOW5 dari Cleveland Fed"
 BESAR_LAIN = ("GDP", "Retail Sales", "Nonfarm Payrolls", "CPI")
 
+# Ditulis di sesi 2 (11 Okt, setelah restart kontainer) SEBELUM evaluasi apa pun dijalankan; aturan tidak diubah.
+CATATAN_DATA = """CATATAN DATA (sesi 2, ditulis sebelum evaluasi; aturan pra-registrasi TIDAK diubah):
+- Konsensus INDEKS PPI/PCE tanpa pembulatan (analog aturan IDX|K CPI) TIDAK ada di kalender Nasdaq: judul yang ada hanya
+  "PPI", "Core PPI", "PPI ex. Food/Energy/Transport" (15 berkonsensus), "Core PCE Price Index", "PCE price index",
+  "Core PCE Prices" (kuartalan, rilis GDP), "PCE Deflator" (6). → ide itu tidak bisa diuji; pengganti terdekat = YOY
+  (identitas y/y↔m/m) dan NOW (nowcast Cleveland tak dibulatkan).
+- Nowcast Cleveland Fed = berkas statis https://www.clevelandfed.org/-/media/files/webcharts/inflationnowcasting/
+  nowcast_month.json (7,6 MB; HTTP 200 tanpa User-Agent dari sesi riset 11 Okt; BELUM dites dari Vercel → status live
+  tetap "perlu dicek" sesuai pra-registrasi). Riwayat mulai 2013-07; tidak bisa dipastikan apakah nilai lama = nowcast
+  real-time asli atau rekonstruksi (model dipasang dengan data belakangan) → kemungkinan bias optimistis untuk tahun awal.
+- Jam rilis: ForexFactory, cadangan Nasdaq (kolom gmt = jam New York musim panas tetap; dicek cocok 79/79 PCE, 159/159 PPI).
+- Sesi 1 terputus (restart kontainer) setelah mengunduh 16 jam tick Dukascopy; sesi 2 mengunduh 82 jam sisanya (PCE
+  2014–2020 + 11 PPI), lalu menghitung ulang target. Tidak ada evaluasi yang dijalankan di sesi 1 (berkas hasil belum ada)."""
+
 
 # ───────────────────────── sumber data ─────────────────────────
 def us(d) -> tuple:
@@ -558,8 +572,8 @@ def uji(x: pd.DataFrame, nama: str, aturan: list[str], L: list, hasil: list, rng
 def main() -> None:
     df = tabel()
     L = ["# 🔬 PPI & PCE → arah lonjakan terbesar emas menit pertama (riset putaran 2, tutup kertas + validitas)",
-         __doc__.split("\n\n")[1], "", "PRA-REGISTRASI (disalin dari docstring research/riset_inflasi.py):",
-         __doc__.split("\n\n")[2]]
+         __doc__.split("\n\n")[2], "", "(disalin apa adanya dari docstring research/riset_inflasi.py)",
+         "\n\n".join(__doc__.split("\n\n")[3:]).rstrip(), "", CATATAN_DATA]
     hasil, rng = [], np.random.default_rng(11)
     for g in ("PPI", "PCE"):
         x = df[df.grup == g]

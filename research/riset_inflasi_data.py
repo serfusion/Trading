@@ -106,13 +106,18 @@ def perlu() -> list[pd.Timestamp]:
     return sorted(set(hs), key=lambda h: (h.year < 2026, h))     # 2026 dulu (paling berharga), lalu urut waktu
 
 
-def unduh(maks: int | None = None) -> None:
+def unduh(maks: int | None = None, mundur: bool = False) -> None:
+    """mundur=True: dari jam terakhir ke awal (pekerja kedua); jam yang sudah ada (pekerja lain) dilewati."""
     from .dukascopy import URL
     DUKA.mkdir(parents=True, exist_ok=True)
     todo = perlu()[:maks] if maks else perlu()
+    if mundur:
+        todo = todo[::-1]
     print(f"{len(todo)} jam tick perlu diunduh", flush=True)
     wait, t_a = 15.0, time.time()
     for i, h in enumerate(todo, 1):
+        if _file(h) is not None:
+            continue
         url = f"{URL}/XAUUSD/{h.year}/{h.month - 1:02d}/{h.day:02d}/{h.hour:02d}h_ticks.bi5"
         for _ in range(12):
             try:
@@ -121,7 +126,9 @@ def unduh(maks: int | None = None) -> None:
                     raw = r.read()
                 if raw:
                     lzma.decompress(raw)
-                (DUKA / f"{h:%Y%m%d_%H}.bi5").write_bytes(raw)
+                tmp = DUKA / f"{h:%Y%m%d_%H}.bi5.tmp"
+                tmp.write_bytes(raw)
+                tmp.replace(DUKA / f"{h:%Y%m%d_%H}.bi5")
                 wait = max(12.0, wait * 0.8)
                 break
             except urllib.error.HTTPError as e:
@@ -225,7 +232,7 @@ def main() -> None:
                   r.sumber_jam.value_counts().to_dict())
         print("jam tick perlu:", len(perlu()))
     elif cmd == "unduh":
-        unduh(int(sys.argv[2]) if len(sys.argv) > 2 else None)
+        unduh(int(sys.argv[2]) or None if len(sys.argv) > 2 else None, mundur="mundur" in sys.argv[3:])
     elif cmd == "target":
         df = target(segar=True)
         print(df.groupby(["grup", "sumber_target"]).size())
