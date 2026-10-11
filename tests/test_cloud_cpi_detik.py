@@ -53,10 +53,12 @@ def test_kalshi_cadangan_bila_indeks_kosong():
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI)
     g = prep["mendatang"][0]["cpi_detik"]
     assert g["jalur"] == "kalshi" and g["arah"] == "naik" and g["status"] == "tutup kertas"
-    assert g["persen"] == round(_cpi_detik.DATA["uji"]["semua"]) and "di bawah 35%" in g["bukti"]
+    lj = _cpi_detik.DATA["lonjakan"]                       # patokan utama: lonjakan terbesar menit pertama
+    assert g["persen"] == round(lj["semua"]) and g["teks_sampai"] == "lonjakan menit 1" and "di bawah 35%" in g["bukti"]
+    assert "detik 2–10" in g["bukti"] and "puncak rata-rata detik" in g["bukti"]
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
-    assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (2–10 dtk)") and "⚠️" not in s["teks"]
+    assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (lonjakan menit 1)") and "⚠️" not in s["teks"]
     assert "✅ Teruji tutup kertas" in s["bukti"] and "Kalshi" in s["bukti"]
     assert prep["pra"]["status"] == "tutup kertas" and prep["pra"]["arah"] == "naik"
 
@@ -82,9 +84,38 @@ def test_tanpa_petunjuk_tidak_menebak_dan_wti_lama_tidak_dipakai():
     assert prep["pra"]["status"] == "acak"
 
 
+class Toko:
+    def __init__(self):
+        self.d = {}
+
+    def get_state(self, row):
+        return self.d.get(row, {})
+
+    def save_state(self, data, row):
+        self.d[row] = data
+
+
+def test_nasdaq_kosong_tidak_menimpa_cache():
+    toko, t0 = Toko(), datetime.fromisoformat(T0)
+    rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
+            baris("CPI Index, n.s.a.", "", "336.10", "334.98")]
+    assert _cpi_detik.konsensus_nasdaq(t0, toko, NOW, opener(rows))["nsa_f"] == 336.10
+    nanti = NOW.replace(day=13)                              # TTL habis; Nasdaq kini "No record found"
+    n = _cpi_detik.konsensus_nasdaq(t0, toko, nanti, opener([]))
+    assert n["nsa_f"] == 336.10 and n["mm_f"] == 0.6
+    assert toko.d["cpi_detik"]["nasdaq"][T0]["t"] == nanti.timestamp()
+
+
 def test_nan_tidak_jadi_tanda():
     assert _cpi_detik.tanda(float("nan"), 0.02) == 0 and _cpi_detik.tanda(0.019, 0.02) == 0
     assert _cpi_detik.tanda(-0.03, 0.02) == -1
+
+
+def test_cadangan_detik_2_10_bila_angka_lonjakan_tidak_ada(monkeypatch):
+    monkeypatch.setattr(_cpi_detik, "DATA", {k: v for k, v in _cpi_detik.DATA.items() if k != "lonjakan"})
+    n = {"mm_f": 0.6, "yy_f": 3.6, "core_f": 0.2, "nsa_f": 335.90, "nsa_p": 334.98}
+    g = _cpi_detik.tebak(datetime.fromisoformat(T0), kartu()["mendatang"], n, get=lambda s: KALSHI)
+    assert g["teks_sampai"] == "2–10 dtk" and g["persen"] == round(_cpi_detik.DATA["uji"]["semua"])
 
 
 def test_env_mati(monkeypatch):

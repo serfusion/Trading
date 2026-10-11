@@ -1,0 +1,442 @@
+[
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Cash Reserve Ratio",
+"actual": "3.00%",
+"consensus": "3.00%",
+"previous": "3.00%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Interest Rate Decision",
+"actual": "5.50%",
+"consensus": "5.50%",
+"previous": "5.25%"
+},
+{
+"gmt": "00:30",
+"country": "India",
+"eventName": "Reverse REPO Rate",
+"actual": "3.35%",
+"consensus": "",
+"previous": "3.35%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "-1.9%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "0.4%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "118.0",
+"consensus": "118.1",
+"previous": "117.7"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "-0.3%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "2.0%",
+"consensus": "0.5%",
+"previous": "-1.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "2.33%",
+"consensus": "0.70%",
+"previous": "-1.74%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "75.43B",
+"consensus": "",
+"previous": "75.95B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "72.258B",
+"consensus": "",
+"previous": "73.686B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.50B",
+"consensus": "",
+"previous": "-3.90B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "54.2B",
+"consensus": "",
+"previous": "54.6B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "60.3B",
+"consensus": "",
+"previous": "61.2B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Reserve Assets Total",
+"actual": "370,203.0M",
+"consensus": "",
+"previous": "380,694.0M"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-6.1B",
+"consensus": "-6.5B",
+"previous": "-6.6B"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Foreign Reserves (USD)",
+"actual": "770.5B",
+"consensus": "",
+"previous": "770.1B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Rate (GBP)",
+"actual": "6.58%",
+"consensus": "",
+"previous": "6.58%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "443.00B",
+"consensus": "",
+"previous": "442.80B"
+},
+{
+"gmt": "04:50",
+"country": "Singapore",
+"eventName": "Foreign Reserves USD",
+"actual": "433.4B",
+"consensus": "",
+"previous": "433.0B"
+},
+{
+"gmt": "06:00",
+"country": "Canada",
+"eventName": "Leading Index",
+"actual": "0.08%",
+"consensus": "",
+"previous": "0.12%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "7.49%",
+"consensus": "",
+"previous": "7.30%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-4.2%",
+"consensus": "",
+"previous": "-6.0%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "145.1",
+"consensus": "",
+"previous": "148.2"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "204.7",
+"consensus": "",
+"previous": "213.6"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "515.8",
+"consensus": "",
+"previous": "557.8"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "1.50%",
+"consensus": "",
+"previous": "0.06%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-3.186M",
+"consensus": "1.900M",
+"previous": "0.922M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.223M",
+"consensus": "",
+"previous": "-0.554M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.053M",
+"consensus": "",
+"previous": "-0.468M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.444M",
+"consensus": "",
+"previous": "0.553M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.287M",
+"consensus": "",
+"previous": "-0.156M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-0.042M",
+"consensus": "-2.100M",
+"previous": "-2.251M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.117M",
+"consensus": "",
+"previous": "-0.124M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.668M",
+"consensus": "",
+"previous": "-0.620M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-1.5%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "0.382M",
+"consensus": "-1.700M",
+"previous": "-1.684M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "NY Fed 1-Year Consumer Inflation Expectations",
+"actual": "3.9%",
+"consensus": "3.6%",
+"previous": "3.6%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year Note Auction",
+"actual": "5.300%",
+"consensus": "",
+"previous": "4.834%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. President Trump Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-0.267B",
+"consensus": "",
+"previous": "3.054B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Consumer Credit",
+"actual": "8.28B",
+"consensus": "14.50B",
+"previous": "17.74B"
+},
+{
+"gmt": "17:00",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-1.1%",
+"consensus": "",
+"previous": "6.8%"
+},
+{
+"gmt": "17:00",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "2.3%",
+"consensus": "",
+"previous": "-1.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Current Account",
+"actual": "46.11B",
+"consensus": "",
+"previous": "42.08B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Current Account",
+"actual": "2.98T",
+"consensus": "2.14T",
+"previous": "2.52T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Current Account n.s.a.",
+"actual": "4.062T",
+"consensus": "3.194T",
+"previous": "2.989T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-347.6B",
+"consensus": "",
+"previous": "-682.3B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "2,191.9B",
+"consensus": "",
+"previous": "-354.2B"
+},
+{
+"gmt": "20:00",
+"country": "Australia",
+"eventName": "MI Inflation Expectations",
+"actual": "5.3%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "4.109%",
+"consensus": "",
+"previous": "4.100%"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

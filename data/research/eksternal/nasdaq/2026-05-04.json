@@ -1,0 +1,354 @@
+[
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC India Manufacturing PMI",
+"actual": "54.7",
+"consensus": "55.9",
+"previous": "53.9"
+},
+{
+"gmt": "02:00",
+"country": "Russia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "48.1",
+"consensus": "",
+"previous": "48.3"
+},
+{
+"gmt": "03:15",
+"country": "Spain",
+"eventName": "HCOB Spain Manufacturing PMI",
+"actual": "51.7",
+"consensus": "49.5",
+"previous": "48.7"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "54.5",
+"consensus": "52.0",
+"previous": "53.3"
+},
+{
+"gmt": "03:45",
+"country": "Italy",
+"eventName": "HCOB Italy Manufacturing PMI",
+"actual": "52.1",
+"consensus": "51.6",
+"previous": "51.3"
+},
+{
+"gmt": "03:50",
+"country": "France",
+"eventName": "HCOB France Manufacturing PMI",
+"actual": "52.8",
+"consensus": "52.8",
+"previous": "50.0"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "HCOB Germany Manufacturing PMI",
+"actual": "51.4",
+"consensus": "51.2",
+"previous": "52.2"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Manufacturing PMI",
+"actual": "52.2",
+"consensus": "52.2",
+"previous": "51.6"
+},
+{
+"gmt": "04:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "-16.4",
+"consensus": "-20.9",
+"previous": "-19.2"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "52.6",
+"consensus": "",
+"previous": "49.0"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "8.40%",
+"consensus": "",
+"previous": "11.70%"
+},
+{
+"gmt": "07:40",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "12.9%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "15.90M",
+"consensus": "16.00M",
+"previous": "16.30M"
+},
+{
+"gmt": "08:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "-18.00%",
+"consensus": "",
+"previous": "34.30%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "13.00%",
+"consensus": "",
+"previous": "17.30%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "47.98K",
+"consensus": "",
+"previous": "58.06K"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.670%",
+"consensus": "",
+"previous": "2.551%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.219%",
+"consensus": "",
+"previous": "2.192%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.476%",
+"consensus": "",
+"previous": "2.342%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "52.6",
+"consensus": "",
+"previous": "49.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "2.60M",
+"consensus": "",
+"previous": "2.64M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "13.32M",
+"consensus": "",
+"previous": "13.53M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-0.3%",
+"consensus": "-0.3%",
+"previous": "-0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Transport",
+"actual": "0.9%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "1.5%",
+"consensus": "0.5%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "1.6%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "3.610%",
+"consensus": "",
+"previous": "3.590%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "3.610%",
+"consensus": "",
+"previous": "3.590%"
+},
+{
+"gmt": "12:30",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "11.6%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "12:50",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:05",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Loan Officer Survey",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "50.40",
+"consensus": "50.10",
+"previous": "46.60"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "50.7",
+"consensus": "50.3",
+"previous": "46.3"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "ANZ Commodity Price Index",
+"actual": "-0.8%",
+"consensus": "",
+"previous": "4.2%"
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Greenery Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - Early May Bank Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - Early May Bank Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

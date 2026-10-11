@@ -1,0 +1,89 @@
+# 📈 Tutup kertas — target: arah lonjakan terbesar menit pertama
+python -m research.lonjakan_uji [cpi|pola|berita|semua]   → docs/eksternal/hasil_lonjakan_uji.txt
+
+
+## POLA CPI (183 rilis 2010-09–2026-09; lonjakan naik 59%)
+   selalu NAIK  semua  58.7% (74/126) | LAMA  58.2% (39/67) | BARU  59.3% (35/59) | 2022+  58.9% (33/56) | 2026  55.6% (5/9)
+   MAYOR     semua  58.7% (74/126) | LAMA  58.2% (39/67) | BARU  59.3% (35/59) | 2022+  58.9% (33/56) | 2026  55.6% (5/9) | p 0.661/0.704
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.998
+   LALU1     semua  55.0% (11/20) | LAMA     – | BARU  55.0% (11/20) | 2022+  55.0% (11/20) | 2026  44.4% (4/9) | p 0.999/0.891
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000
+
+## POLA PPI (157 rilis 2010-03–2026-01; lonjakan naik 54%)
+   selalu NAIK  semua  55.7% (54/97) | LAMA  50.0% (23/46) | BARU  60.8% (31/51) | 2022+  58.3% (28/48) | 2026   0.0% (0/2)
+   MAYOR     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.940/0.570
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.954/0.724
+   LALU1     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.997/0.975
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.999
+
+## POLA FOMC (113 rilis 2010-08–2026-09; lonjakan naik 50%)
+   selalu NAIK  semua  50.0% (43/86) | LAMA  47.8% (22/46) | BARU  52.5% (21/40) | 2022+  52.6% (20/38) | 2026  50.0% (3/6)
+   MAYOR     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.976
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     –
+   LALU1     semua  41.7% (20/48) | LAMA  47.4% (18/38) | BARU  20.0% (2/10) | 2022+  25.0% (2/8) | 2026     – | p 0.943/0.984
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.868/0.909
+
+## POLA ISM (246 rilis 2010-11–2026-01; lonjakan naik 50%)
+   selalu NAIK  semua  50.7% (114/225) | LAMA  46.8% (58/124) | BARU  55.4% (56/101) | 2022+  56.8% (54/95) | 2026  50.0% (1/2)
+   MAYOR     semua  49.7% (99/199) | LAMA  53.2% (66/124) | BARU  44.0% (33/75) | 2022+  42.0% (29/69) | 2026     – | p 0.983/1.000
+   TAHUN     semua  56.5% (83/147) | LAMA  66.7% (42/63) | BARU  48.8% (41/84) | 2022+  50.0% (39/78) | 2026     – | p 0.104/0.940
+   LALU1     semua  50.7% (114/225) | LAMA  54.0% (67/124) | BARU  46.5% (47/101) | 2022+  47.4% (45/95) | 2026  50.0% (1/2) | p 0.855/0.995
+   LALU3     semua  53.0% (106/200) | LAMA  52.5% (52/99) | BARU  53.5% (54/101) | 2022+  53.7% (51/95) | 2026  50.0% (1/2) | p 0.317/0.680
+
+## POLA NFP (171 rilis 2010-09–2026-09; lonjakan naik 46%)
+   selalu NAIK  semua  46.5% (59/127) | LAMA  50.0% (35/70) | BARU  42.1% (24/57) | 2022+  40.7% (22/54) | 2026  37.5% (3/8)
+   MAYOR     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.930/0.393
+   TAHUN     semua  45.5% (10/22) | LAMA  47.6% (10/21) | BARU   0.0% (0/1) | 2022+     – | 2026     – | p 0.992/0.995
+   LALU1     semua  23.1% (3/13) | LAMA  23.1% (3/13) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.994
+
+## POLA RETAIL (126 rilis 2010-07–2025-09; lonjakan naik 41%)
+   selalu NAIK  semua  36.8% (32/87) | LAMA  37.0% (17/46) | BARU  36.6% (15/41) | 2022+  36.8% (14/38) | 2026     –
+   MAYOR     semua  63.2% (24/38) | LAMA     – | BARU  63.2% (24/38) | 2022+  63.2% (24/38) | 2026     – | p 0.364/0.475
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.984
+   LALU1     semua  45.6% (36/79) | LAMA  43.5% (20/46) | BARU  48.5% (16/33) | 2022+  46.7% (14/30) | 2026     – | p 1.000/0.984
+   LALU3     semua  40.0% (14/35) | LAMA  40.0% (14/35) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000
+
+## POLA PCE (52 rilis 2021-07–2026-01; lonjakan naik 52%)
+   selalu NAIK  semua  51.9% (27/52) | LAMA   0.0% (0/2) | BARU  54.0% (27/50) | 2022+  54.3% (25/46) | 2026   0.0% (0/1)
+   MAYOR     semua  40.0% (4/10) | LAMA     – | BARU  40.0% (4/10) | 2022+  40.0% (4/10) | 2026     –
+   TAHUN     semua   0.0% (0/5) | LAMA     – | BARU   0.0% (0/5) | 2022+   0.0% (0/5) | 2026     –
+   LALU1     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.966/0.946
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.910/0.894
+
+## POLA GDP (107 rilis 2010-10–2025-12; lonjakan naik 44%)
+   selalu NAIK  semua  39.2% (29/74) | LAMA  44.7% (21/47) | BARU  29.6% (8/27) | 2022+  28.0% (7/25) | 2026     –
+   MAYOR     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.945/0.093
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     –
+   LALU1     semua  42.9% (21/49) | LAMA  44.7% (17/38) | BARU  36.4% (4/11) | 2022+  44.4% (4/9) | 2026     – | p 0.760/0.579
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.983/0.579
+
+## POLA JOLTS (32 rilis 2014-01–2025-12; lonjakan naik 50%)
+   selalu NAIK  semua  44.4% (12/27) | LAMA     – | BARU  44.4% (12/27) | 2022+  42.3% (11/26) | 2026     –
+   MAYOR     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     –
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     –
+   LALU1     semua  36.8% (7/19) | LAMA     – | BARU  36.8% (7/19) | 2022+  36.8% (7/19) | 2026     –
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     –
+
+## POLA ADP (167 rilis 2010-05–2026-01; lonjakan naik 46%)
+   selalu NAIK  semua  47.1% (48/102) | LAMA  38.5% (20/52) | BARU  56.0% (28/50) | 2022+  57.4% (27/47) | 2026 100.0% (1/1)
+   MAYOR     semua  52.9% (54/102) | LAMA  61.5% (32/52) | BARU  44.0% (22/50) | 2022+  42.6% (20/47) | 2026   0.0% (0/1) | p 0.850/1.000
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.961/1.000
+   LALU1     semua  52.0% (53/102) | LAMA  63.5% (33/52) | BARU  40.0% (20/50) | 2022+  40.4% (19/47) | 2026 100.0% (1/1) | p 0.916/1.000
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.999/0.999
+
+## POLA CLAIMS (242 rilis 2011-01–2026-01; lonjakan naik 44%)
+   selalu NAIK  semua  44.3% (86/194) | LAMA  49.0% (47/96) | BARU  39.8% (39/98) | 2022+  39.8% (39/98) | 2026   0.0% (0/3)
+   MAYOR     semua  58.4% (45/77) | LAMA  16.7% (1/6) | BARU  62.0% (44/71) | 2022+  62.0% (44/71) | 2026 100.0% (3/3) | p 0.688/0.267
+   TAHUN     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.799
+   LALU1     semua  53.0% (61/115) | LAMA  40.9% (18/44) | BARU  60.6% (43/71) | 2022+  60.6% (43/71) | 2026 100.0% (3/3) | p 0.688/0.267
+   LALU3     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.995/0.376
+
+## POLA KONSUMEN (147 rilis 2015-09–2026-01; lonjakan naik 50%)
+   selalu NAIK  semua  50.0% (70/140) | LAMA  45.5% (30/66) | BARU  54.1% (40/74) | 2022+  54.1% (40/74) | 2026   0.0% (0/1)
+   MAYOR     semua  46.3% (38/82) | LAMA  47.1% (8/17) | BARU  46.2% (30/65) | 2022+  46.2% (30/65) | 2026     – | p 0.979/1.000
+   TAHUN     semua  42.9% (6/14) | LAMA  42.9% (6/14) | BARU     – | 2022+     – | 2026     – | p 0.974/0.996
+   LALU1     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 0.984/0.979
+   LALU3     semua  40.9% (9/22) | LAMA  40.9% (9/22) | BARU     – | 2022+     – | 2026     – | p 0.946/0.831
+
+LOLOS: TIDAK ADA

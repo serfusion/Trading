@@ -1,0 +1,418 @@
+[
+{
+"gmt": "02:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "8.730B",
+"consensus": "",
+"previous": "5.049B"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "1.1%",
+"consensus": "0.5%",
+"previous": "-0.3%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "3.0%",
+"consensus": "2.7%",
+"previous": "1.8%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "0.20%",
+"consensus": "",
+"previous": "0.00%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "1.70%",
+"consensus": "1.70%",
+"previous": "2.00%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.7%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Construction Output",
+"actual": "-1.34%",
+"consensus": "",
+"previous": "0.19%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "-25",
+"consensus": "-40",
+"previous": "-45"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German Buba Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Infrastructure Output",
+"actual": "5.4%",
+"consensus": "",
+"previous": "6.0%"
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "BCB National Monetary Council Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,799K",
+"consensus": "1,790K",
+"previous": "1,781K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "206K",
+"consensus": "210K",
+"previous": "212K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "204.00K",
+"consensus": "",
+"previous": "199.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "47.4",
+"consensus": "24.1",
+"previous": "41.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "73.6",
+"consensus": "",
+"previous": "34.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "48.20",
+"consensus": "",
+"previous": "30.10"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "27.9",
+"consensus": "",
+"previous": "10.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "30.1",
+"consensus": "",
+"previous": "37.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "40.90",
+"consensus": "",
+"previous": "53.90"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "12.4%",
+"consensus": "",
+"previous": "12.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "0.6%",
+"consensus": "-0.4%",
+"previous": "-1.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "-0.1%",
+"consensus": "0.0%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-2.2%",
+"consensus": "-1.8%",
+"previous": "-6.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "18.1%",
+"consensus": "",
+"previous": "21.0%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "755.6B",
+"consensus": "",
+"previous": "740.0B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "16B",
+"consensus": "15B",
+"previous": "36B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "3.640%",
+"consensus": "",
+"previous": "3.625%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "3.655%",
+"consensus": "",
+"previous": "3.665%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year TIPS Auction",
+"actual": "2.973%",
+"consensus": "",
+"previous": "2.473%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "6,746B",
+"consensus": "",
+"previous": "6,760B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "2.930T",
+"consensus": "",
+"previous": "2.947T"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "7.7%",
+"consensus": "",
+"previous": "8.5%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "7.39B",
+"consensus": "",
+"previous": "7.82B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "9.34B",
+"consensus": "",
+"previous": "8.07B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-5,236M",
+"consensus": "",
+"previous": "-4,049M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-1,949M",
+"consensus": "-175M",
+"previous": "-237M"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "52.50",
+"consensus": "",
+"previous": "53.20"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "52.0",
+"consensus": "",
+"previous": "52.0"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "52.9",
+"consensus": "",
+"previous": "53.6"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-14",
+"consensus": "-18",
+"previous": "-17"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "1.8%",
+"consensus": "1.8%",
+"previous": "1.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "1.9%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "53.40",
+"consensus": "",
+"previous": "52.70"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "55.1",
+"consensus": "55.1",
+"previous": "54.5"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "52.3",
+"consensus": "",
+"previous": "51.2"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "5.3%",
+"consensus": "",
+"previous": "3.2%"
+}
+]

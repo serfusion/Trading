@@ -1,0 +1,234 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "45.1",
+"consensus": "45.1",
+"previous": "45.6"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.90B",
+"consensus": "",
+"previous": "-1.30B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "49.7B",
+"consensus": "",
+"previous": "49.7B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "57.5B",
+"consensus": "",
+"previous": "56.2B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-7.9B",
+"consensus": "-5.4B",
+"previous": "-6.5B"
+},
+{
+"gmt": "04:40",
+"country": "Russia",
+"eventName": "Budget Balance % of GDP",
+"actual": "-1.00%",
+"consensus": "",
+"previous": "-1.30%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "2.007%",
+"consensus": "",
+"previous": "2.173%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "2.115%",
+"consensus": "",
+"previous": "2.255%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:10",
+"country": "United Kingdom",
+"eventName": "30-Year Treasury Gilt Auction",
+"actual": "5.357%",
+"consensus": "",
+"previous": "5.104%"
+},
+{
+"gmt": "06:00",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "97.4",
+"consensus": "98.9",
+"previous": "100.7"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Net Debt-to-GDP ratio",
+"actual": "61.4%",
+"consensus": "",
+"previous": "60.8%"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Budget Balance",
+"actual": "-97.226B",
+"consensus": "-91.800B",
+"previous": "63.737B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Budget Surplus",
+"actual": "-18.973B",
+"consensus": "",
+"previous": "104.096B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Gross Debt-to-GDP ratio",
+"actual": "76.2%",
+"consensus": "76.2%",
+"previous": "75.3%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "7.2%",
+"consensus": "",
+"previous": "4.8%"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "55.6",
+"consensus": "",
+"previous": "53.6"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "51.3",
+"consensus": "53.2",
+"previous": "55.3"
+},
+{
+"gmt": "10:00",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-12.6%",
+"consensus": "",
+"previous": "23.8%"
+},
+{
+"gmt": "10:00",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "5.7%",
+"consensus": "",
+"previous": "8.0%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Short-Term Energy Outlook",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "3.784%",
+"consensus": "",
+"previous": "3.908%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-1.057M",
+"consensus": "",
+"previous": "6.037M"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "2.9%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-0.3%",
+"consensus": "-0.3%",
+"previous": "6.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.4%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "3.50%",
+"consensus": "3.50%",
+"previous": "3.75%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

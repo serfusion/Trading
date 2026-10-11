@@ -472,6 +472,16 @@ alarm tepat waktu) hanya menyentuh `android/`].
   hanya memakai aturan ini (WTI lama tidak lagi), env CPI_DETIK=0 = varian lama. Berita lain: pasang HANYA bila lolos uji
   validitas yang sama (tutup kertas detik 2–10 + permutasi keluarga).
 - CPI selalu 08:30 New York; cache pra_xau_semua_v2/pra_menit memuat 2 rilis ganda 07:30 (Mar 2021/2022) — saring.
+- Produksi Vercel = branch `claude/bold-davinci-ykgq8j`; setelah merge ke main, sinkronkan lewat PR main → bold-davinci
+  (PR serfusion/Trading#89) — workflow hanya sinkron bila jadwal/validasi berubah.
+
+## Lonjakan menit pertama & berita lain (11 Okt 2026 — `docs/BERITA_DETIK.md`)
+- Patokan pengguna terbaru: arah LONJAKAN TERBESAR 0–60 dtk (`research/lonjakan.py` → lonjakan60.parquet; puncak median
+  detik 25–41). Aplikasi CPI kini "CPI ▲ NAIK 65% (lonjakan menit 1)" (cpi_detik.json["lonjakan"], `lonjakan_uji cpi`).
+- "Pola tetap per jenis berita" (CPI selalu turun, FOMC selalu naik): TIDAK lolos (`research/pola_jenis.py`); arah = kejutan
+  angka (plafon 74–93%). Berita lain (`research/berita_detik.py`, Nasdaq 4.390 hari kerja): 0 lolos di detik 2–10 maupun
+  lonjakan; terdekat GDP (73% sejak 2022, n 22, lama 45%) → tidak dipasang.
+- Nasdaq kadang kosong untuk pekan berjalan → `_cpi_detik.konsensus_nasdaq` menggabung, tidak menimpa cache.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

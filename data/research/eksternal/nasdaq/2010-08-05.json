@@ -1,0 +1,82 @@
+[
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "3.2%",
+"consensus": "1.5%",
+"previous": "-0.1%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "0.50%",
+"consensus": "0.50%",
+"previous": "0.50%"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "1.00%",
+"consensus": "1.00%",
+"previous": "1.00%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "479K",
+"consensus": "455K",
+"previous": "460K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Building Permits",
+"actual": "6.5%",
+"consensus": "0.6%",
+"previous": "-8.2%"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "29B",
+"consensus": "",
+"previous": "28B"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-1.30%",
+"consensus": "",
+"previous": "-8.10%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "43.3",
+"consensus": "",
+"previous": "46.4"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

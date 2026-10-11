@@ -1,0 +1,354 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "-23.6",
+"consensus": "-21.5",
+"previous": "-21.7"
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "ZEW Expectations",
+"actual": "-53.8",
+"consensus": "",
+"previous": "2.4"
+},
+{
+"gmt": "05:10",
+"country": "Italy",
+"eventName": "Italian 6-Month BOT Auction",
+"actual": "2.012%",
+"consensus": "",
+"previous": "2.003%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "-32",
+"consensus": "-26",
+"previous": "-34"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "France Jobseekers Total",
+"actual": "3,033.5K",
+"consensus": "",
+"previous": "2,980.6K"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "6.69%",
+"consensus": "",
+"previous": "6.68%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "163.8",
+"consensus": "",
+"previous": "160.3"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "275.8",
+"consensus": "",
+"previous": "277.1"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "894.1",
+"consensus": "",
+"previous": "926.1"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Bank lending",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-2.392M",
+"consensus": "-1.700M",
+"previous": "-6.014M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.328M",
+"consensus": "",
+"previous": "0.028M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.299M",
+"consensus": "",
+"previous": "-1.218M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.838M",
+"consensus": "",
+"previous": "0.419M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.113M",
+"consensus": "",
+"previous": "0.193M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-1.786M",
+"consensus": "1.100M",
+"previous": "2.343M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.427M",
+"consensus": "",
+"previous": "-0.259M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.102M",
+"consensus": "",
+"previous": "-0.503M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-2.0%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.236M",
+"consensus": "-2.500M",
+"previous": "-2.720M"
+},
+{
+"gmt": "11:45",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Business Confidence",
+"actual": "-0.4",
+"consensus": "",
+"previous": "-0.1"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "0.7%",
+"consensus": "",
+"previous": "1.9%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Russian Real Wage Growth",
+"actual": "5.1%",
+"consensus": "5.3%",
+"previous": "4.2%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "2.0%",
+"consensus": "1.8%",
+"previous": "1.2%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Unemployment Rate",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "3.724%",
+"consensus": "",
+"previous": "3.983%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "129.78K",
+"consensus": "135.60K",
+"previous": "166.62K"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-1.982B",
+"consensus": "",
+"previous": "0.031B"
+},
+{
+"gmt": "14:00",
+"country": "Russia",
+"eventName": "GDP Monthly",
+"actual": "1.1%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "14:01",
+"country": "Russia",
+"eventName": "GDP Monthly",
+"actual": "0.4%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-167.2B",
+"consensus": "",
+"previous": "-310.9B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-496.8B",
+"consensus": "",
+"previous": "1,167.0B"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Bank of Korea Monetary Policy Board’s Policy Setting Meeting Dates",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Interest Rate Decision",
+"actual": "2.50%",
+"consensus": "2.50%",
+"previous": "2.50%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "ANZ Business Confidence",
+"actual": "49.7",
+"consensus": "",
+"previous": "47.8"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "NBNZ Own Activity",
+"actual": "38.7%",
+"consensus": "",
+"previous": "40.6%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Capital Expenditure",
+"actual": "0.2%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Plant/Machinery Capital Expenditure",
+"actual": "0.3%",
+"consensus": "",
+"previous": "-1.7%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Private New Capital Expenditure",
+"actual": "0.2%",
+"consensus": "0.8%",
+"previous": "-0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Japan",
+"eventName": "BoJ Board Member Nakagawa Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "2-Year JGB Auction",
+"actual": "0.863%",
+"consensus": "",
+"previous": "0.841%"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Ganesh Chaturthi",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

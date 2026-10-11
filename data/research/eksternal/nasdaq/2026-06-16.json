@@ -1,0 +1,458 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "4.35%",
+"consensus": "4.35%",
+"previous": "4.35%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "3.2%",
+"consensus": "3.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI Ex Tobacco",
+"actual": "3.0%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "2.8%"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.7%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "4.858%",
+"consensus": "",
+"previous": "5.030%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Current Conditions",
+"actual": "-81.0",
+"consensus": "-77.5",
+"previous": "-77.8"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "10.5",
+"consensus": "-5.8",
+"previous": "-10.2"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Wages in euro zone",
+"actual": "3.40%",
+"consensus": "",
+"previous": "3.00%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Labor Cost Index",
+"actual": "3.20%",
+"consensus": "3.30%",
+"previous": "3.30%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "9.5",
+"consensus": "-7.2",
+"previous": "-9.1"
+},
+{
+"gmt": "05:50",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.640%",
+"consensus": "",
+"previous": "2.850%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "-0.3%",
+"consensus": "0.3%",
+"previous": "0.9%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "1.0%",
+"consensus": "2.0%",
+"previous": "4.0%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "-1.5%",
+"consensus": "-0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "25.50K",
+"consensus": "",
+"previous": "29.00K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.413M",
+"consensus": "1.420M",
+"previous": "1.423M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "4.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "11.2%",
+"consensus": "",
+"previous": "8.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "1.3%",
+"consensus": "1.2%",
+"previous": "3.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.177M",
+"consensus": "1.430M",
+"previous": "1.392M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-15.4%",
+"consensus": "",
+"previous": "-8.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "1.9%",
+"consensus": "0.9%",
+"previous": "2.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "6.7%",
+"consensus": "",
+"previous": "4.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "46.91B",
+"consensus": "8.16B",
+"previous": "4.40B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "-11.360B",
+"consensus": "",
+"previous": "3.860B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "9.4%",
+"consensus": "",
+"previous": "9.1%"
+},
+{
+"gmt": "09:10",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:15",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-2.8%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "11:15",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,979.0",
+"consensus": "",
+"previous": "4,021.0"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.8%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.927%",
+"consensus": "",
+"previous": "5.122%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-8.330M",
+"consensus": "-4.500M",
+"previous": "-9.119M"
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "80.4",
+"consensus": "",
+"previous": "94.7"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-1.01B",
+"consensus": "-1.01B",
+"previous": "-5.64B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-16.30B",
+"consensus": "",
+"previous": "-16.35B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account % of GDP",
+"actual": "-3.60%",
+"consensus": "",
+"previous": "-3.70%"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "13",
+"consensus": "",
+"previous": "8"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.09T",
+"consensus": "-0.21T",
+"previous": "0.20T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "8.7%",
+"consensus": "1.2%",
+"previous": "-9.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "15.6%",
+"consensus": "9.3%",
+"previous": "5.9%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "17.0%",
+"consensus": "16.2%",
+"previous": "14.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "12.5%",
+"consensus": "12.8%",
+"previous": "9.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-378.7B",
+"consensus": "-564.6B",
+"previous": "299.3B"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "7.70%",
+"consensus": "",
+"previous": "11.00%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "38.40%",
+"consensus": "30.00%",
+"previous": "24.40%"
+},
+{
+"gmt": "20:45",
+"country": "Singapore",
+"eventName": "Trade Balance",
+"actual": "5.573B",
+"consensus": "",
+"previous": "13.132B"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "-0.0%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Assistant Governor Jones Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Chart Pack Release",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Offshore Holdings",
+"actual": "57.50%",
+"consensus": "",
+"previous": "57.10%"
+},
+{
+"gmt": "All Day",
+"country": "South Africa",
+"eventName": "South Africa - Youth Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

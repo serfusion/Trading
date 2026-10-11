@@ -1,0 +1,522 @@
+[
+{
+"gmt": "01:30",
+"country": "France",
+"eventName": "French Unemployment Rate",
+"actual": "7.8%",
+"consensus": "8.4%",
+"previous": "8.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.9%",
+"consensus": "0.8%",
+"previous": "1.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "1.3%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-1.4%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-3.5%",
+"consensus": "",
+"previous": "-1.5%"
+},
+{
+"gmt": "02:00",
+"country": "Japan",
+"eventName": "Machine Tool Orders",
+"actual": "-48.3%",
+"consensus": "",
+"previous": "-40.7%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-4.0%",
+"consensus": "",
+"previous": "-2.7%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-1.3%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "2.55%",
+"consensus": "",
+"previous": "4.91%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-10.12%",
+"consensus": "",
+"previous": "-1.76%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "0.00%",
+"consensus": "0.30%",
+"previous": "1.00%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "0.00%",
+"consensus": "",
+"previous": "0.34%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "-0.7%",
+"consensus": "-0.7%",
+"previous": "0.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "-0.7%",
+"consensus": "-0.6%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:00",
+"country": "United States",
+"eventName": "IEA Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "5.685B",
+"consensus": "",
+"previous": "6.086B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "0.60B",
+"consensus": "",
+"previous": "1.02B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:15",
+"country": "China",
+"eventName": "FDI",
+"actual": "-6.10%",
+"consensus": "",
+"previous": "-10.80%"
+},
+{
+"gmt": "05:45",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "0.037%",
+"consensus": "",
+"previous": "0.168%"
+},
+{
+"gmt": "06:30",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "42.3",
+"consensus": "",
+"previous": "41.6"
+},
+{
+"gmt": "07:00",
+"country": "Italy",
+"eventName": "Italy Thomson Reuters IPSOS PCSI",
+"actual": "32.08",
+"consensus": "",
+"previous": "31.82"
+},
+{
+"gmt": "07:00",
+"country": "Germany",
+"eventName": "Germany Thomson Reuters IPSOS PCSI",
+"actual": "45.89",
+"consensus": "",
+"previous": "44.33"
+},
+{
+"gmt": "07:00",
+"country": "France",
+"eventName": "France Thomson Reuters IPSOS PCSI",
+"actual": "38.77",
+"consensus": "",
+"previous": "38.20"
+},
+{
+"gmt": "07:00",
+"country": "Russia",
+"eventName": "Russia Thomon Reuters IPSOS PCSI",
+"actual": "27.00",
+"consensus": "",
+"previous": "31.30"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "22,833K",
+"consensus": "25,100K",
+"previous": "22,377K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "-7.0%",
+"consensus": "",
+"previous": "-3.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "-3.3%",
+"consensus": "-2.1%",
+"previous": "-1.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "-2.6%",
+"consensus": "-3.1%",
+"previous": "-2.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "-6.8%",
+"consensus": "",
+"previous": "-4.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index ex Petroleum",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "2,981K",
+"consensus": "2,500K",
+"previous": "3,176K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "3,616.50K",
+"consensus": "",
+"previous": "4,180.50K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "-9.2%",
+"consensus": "-5.7%",
+"previous": "0.5%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "562.4B",
+"consensus": "",
+"previous": "567.3B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "103B",
+"consensus": "107B",
+"previous": "109B"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:15",
+"country": "Canada",
+"eventName": "BoC Gov Poloz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.090%",
+"consensus": "",
+"previous": "0.095%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "0.110%",
+"consensus": "",
+"previous": "0.110%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Export Price Index",
+"actual": "-5.9%",
+"consensus": "",
+"previous": "-3.8%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Import Price Index",
+"actual": "-14.1%",
+"consensus": "",
+"previous": "-7.9%"
+},
+{
+"gmt": "18:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "38.0",
+"consensus": "",
+"previous": "53.7"
+},
+{
+"gmt": "18:35",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "26.1",
+"consensus": "",
+"previous": "38.0"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "-2.3%",
+"consensus": "-1.6%",
+"previous": "-0.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "-1.5%",
+"consensus": "-0.9%",
+"previous": "-0.9%"
+},
+{
+"gmt": "22:00",
+"country": "South Korea",
+"eventName": "Exports",
+"actual": "-25.1%",
+"consensus": "",
+"previous": "-24.3%"
+},
+{
+"gmt": "22:00",
+"country": "South Korea",
+"eventName": "Imports",
+"actual": "-15.8%",
+"consensus": "",
+"previous": "-15.9%"
+},
+{
+"gmt": "22:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "-1.39B",
+"consensus": "",
+"previous": "-0.95B"
+},
+{
+"gmt": "22:00",
+"country": "Japan",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "29.58",
+"consensus": "",
+"previous": "32.31"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "China Thomson Reuters IPSOS PCSI",
+"actual": "66.46",
+"consensus": "",
+"previous": "67.96"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Fixed Asset Investment",
+"actual": "-10.3%",
+"consensus": "-10.0%",
+"previous": "-16.1%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Industrial Production",
+"actual": "3.9%",
+"consensus": "1.5%",
+"previous": "-1.1%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Chinese Industrial Production YTD",
+"actual": "-4.9%",
+"consensus": "",
+"previous": "-8.4%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Retail Sales",
+"actual": "-7.5%",
+"consensus": "-7.0%",
+"previous": "-15.8%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Chinese Retail Sales YTD",
+"actual": "-16.84%",
+"consensus": "",
+"previous": "-19.64%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Chinese Unemployment Rate",
+"actual": "6.0%",
+"consensus": "",
+"previous": "5.9%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "NBS Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

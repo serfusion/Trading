@@ -1,0 +1,330 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings ex Bonus",
+"actual": "3.5%",
+"consensus": "3.4%",
+"previous": "3.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings Index +Bonus",
+"actual": "4.1%",
+"consensus": "4.0%",
+"previous": "4.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Claimant Count Change",
+"actual": "-11.0K",
+"consensus": "16.5K",
+"previous": "-6.4K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Employment Change 3M/3M",
+"actual": "83K",
+"consensus": "",
+"previous": "147K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Unemployment Rate",
+"actual": "4.9%",
+"consensus": "4.8%",
+"previous": "4.9%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-7.69B",
+"consensus": "",
+"previous": "-8.24B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Labour Productivity",
+"actual": "0.5%",
+"consensus": "-0.5%",
+"previous": "-0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Current Conditions",
+"actual": "-61.1",
+"consensus": "-68.8",
+"previous": "-77.6"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "34.2",
+"consensus": "30.1",
+"previous": "26.3"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "31.4",
+"consensus": "25.9",
+"previous": "23.4"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "5.155%",
+"consensus": "",
+"previous": "5.040%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "123.5",
+"consensus": "",
+"previous": "124.1"
+},
+{
+"gmt": "05:31",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "125.4",
+"consensus": "",
+"previous": "123.5"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "9.50K",
+"consensus": "",
+"previous": "8.30K"
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Housing Starts",
+"actual": "229.1K",
+"consensus": "249.0K",
+"previous": "240.8K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.443M",
+"consensus": "1.370M",
+"previous": "1.374M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "5.0%",
+"consensus": "",
+"previous": "-2.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "8.2%",
+"consensus": "",
+"previous": "10.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "-1.3%",
+"consensus": "0.2%",
+"previous": "-0.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-12.4%",
+"consensus": "",
+"previous": "19.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.239M",
+"consensus": "1.340M",
+"previous": "1.415M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "5.9%",
+"consensus": "",
+"previous": "7.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "-0.4%",
+"consensus": "0.1%",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "7.6%",
+"consensus": "",
+"previous": "8.3%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "76.3%",
+"consensus": "76.3%",
+"previous": "76.2%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "1.08%",
+"consensus": "",
+"previous": "1.29%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Manufacturing Production",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Pending Home Sales",
+"actual": "-2.3%",
+"consensus": "0.1%",
+"previous": "-4.8%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Pending Home Sales Index",
+"actual": "71.2",
+"consensus": "",
+"previous": "72.9"
+},
+{
+"gmt": "10:20",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "4.0%",
+"consensus": "4.3%",
+"previous": "4.3%"
+},
+{
+"gmt": "11:40",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "2.3%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "11:40",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,873.0",
+"consensus": "",
+"previous": "3,778.0"
+},
+{
+"gmt": "16:50",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-0.328M",
+"consensus": "",
+"previous": "9.072M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "PPI Input",
+"actual": "2.9%",
+"consensus": "1.3%",
+"previous": "1.4%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "PPI Output",
+"actual": "1.6%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "9.7%",
+"consensus": "7.2%",
+"previous": "-12.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "16.9%",
+"consensus": "10.8%",
+"previous": "-1.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "3.2%",
+"consensus": "3.2%",
+"previous": "3.2%"
+}
+]

@@ -1,0 +1,346 @@
+[
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC India Manufacturing PMI",
+"actual": "53.5",
+"consensus": "53.9",
+"previous": "54.2"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Retail Sales",
+"actual": "-1.1%",
+"consensus": "-0.4%",
+"previous": "1.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Retail Sales",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-2.8%"
+},
+{
+"gmt": "02:00",
+"country": "Russia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "50.7",
+"consensus": "",
+"previous": "50.3"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "03:15",
+"country": "Spain",
+"eventName": "HCOB Spain Manufacturing PMI",
+"actual": "50.2",
+"consensus": "50.5",
+"previous": "49.7"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "53.2",
+"consensus": "54.5",
+"previous": "54.3"
+},
+{
+"gmt": "03:45",
+"country": "Italy",
+"eventName": "HCOB Italy Manufacturing PMI",
+"actual": "51.3",
+"consensus": "52.5",
+"previous": "52.2"
+},
+{
+"gmt": "03:50",
+"country": "France",
+"eventName": "HCOB France Manufacturing PMI",
+"actual": "49.8",
+"consensus": "50.0",
+"previous": "50.0"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "HCOB Germany Manufacturing PMI",
+"actual": "52.2",
+"consensus": "52.2",
+"previous": "52.2"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Manufacturing PMI",
+"actual": "51.9",
+"consensus": "52.0",
+"previous": "52.0"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "51.9",
+"consensus": "52.8",
+"previous": "52.8"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "46.8",
+"consensus": "",
+"previous": "47.3"
+},
+{
+"gmt": "07:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "-20.60%",
+"consensus": "",
+"previous": "14.80%"
+},
+{
+"gmt": "07:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "3.70%",
+"consensus": "",
+"previous": "7.80%"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "11.90%",
+"consensus": "",
+"previous": "15.30%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "57.71K",
+"consensus": "",
+"previous": "54.41K"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.738%",
+"consensus": "",
+"previous": "2.753%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.448%",
+"consensus": "",
+"previous": "2.424%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.585%",
+"consensus": "",
+"previous": "2.587%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "47.5",
+"consensus": "",
+"previous": "50.8"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "51.4",
+"consensus": "",
+"previous": "51.3"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "53.9",
+"consensus": "53.8",
+"previous": "53.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "52.8",
+"consensus": "50.0",
+"previous": "49.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "56.7",
+"consensus": "56.7",
+"previous": "56.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "55.6",
+"consensus": "54.0",
+"previous": "53.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "71.1",
+"consensus": "70.0",
+"previous": "73.0"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "3.750%",
+"consensus": "",
+"previous": "3.815%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "3.855%",
+"consensus": "",
+"previous": "3.945%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "6.2%",
+"consensus": "5.0%",
+"previous": "5.0%"
+},
+{
+"gmt": "12:30",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "3.9%",
+"consensus": "",
+"previous": "10.6%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Loan Officer Survey",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:40",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.30M",
+"consensus": "16.30M",
+"previous": "16.50M"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.8%",
+"consensus": "3.0%",
+"previous": "3.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "-13.8%",
+"consensus": "-13.0%",
+"previous": "-13.7%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "2.840%",
+"consensus": "",
+"previous": "2.730%"
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

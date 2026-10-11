@@ -1,0 +1,330 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "49.3",
+"consensus": "",
+"previous": "43.9"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Current Account Balance n.s.a",
+"actual": "16.5B",
+"consensus": "",
+"previous": "21.0B"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "2.4%",
+"consensus": "1.4%",
+"previous": "4.7%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "5.8%",
+"consensus": "1.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "15.7B",
+"consensus": "18.2B",
+"previous": "18.0B"
+},
+{
+"gmt": "03:25",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:25",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE FPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "453.30B",
+"consensus": "",
+"previous": "449.90B"
+},
+{
+"gmt": "05:30",
+"country": "Switzerland",
+"eventName": "SNB Chairman Thomas Jordan speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "6.1%",
+"consensus": "7.0%",
+"previous": "5.5%"
+},
+{
+"gmt": "06:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "3.4%",
+"consensus": "3.1%",
+"previous": "4.7%"
+},
+{
+"gmt": "06:15",
+"country": "Euro Zone",
+"eventName": "ECB's Mersch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Housing Starts",
+"actual": "209.0K",
+"consensus": "240.0K",
+"previous": "261.5K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "10,976K",
+"consensus": "11,400K",
+"previous": "11,979K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "840K",
+"consensus": "820K",
+"previous": "849K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "857.00K",
+"consensus": "",
+"previous": "870.25K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "585.8B",
+"consensus": "",
+"previous": "580.7B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "75B",
+"consensus": "73B",
+"previous": "76B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.090%",
+"consensus": "",
+"previous": "0.085%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "0.090%",
+"consensus": "",
+"previous": "0.085%"
+},
+{
+"gmt": "12:10",
+"country": "United States",
+"eventName": "FOMC Member Rosengren Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "1.578%",
+"consensus": "",
+"previous": "1.473%"
+},
+{
+"gmt": "14:25",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Average Cash Earnings",
+"actual": "-1.3%",
+"consensus": "",
+"previous": "-1.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Household Spending",
+"actual": "-6.9%",
+"consensus": "-6.9%",
+"previous": "-7.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Household Spending",
+"actual": "1.7%",
+"consensus": "3.2%",
+"previous": "-6.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overall wage income of employees",
+"actual": "-1.3%",
+"consensus": "",
+"previous": "-1.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "-14.00%",
+"consensus": "",
+"previous": "-17.10%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Invest Housing Finance",
+"actual": "9.3%",
+"consensus": "",
+"previous": "3.5%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Financial Stability Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Home Loans",
+"actual": "13.6%",
+"consensus": "",
+"previous": "10.7%"
+},
+{
+"gmt": "21:45",
+"country": "China",
+"eventName": "Chinese Composite PMI",
+"actual": "54.5",
+"consensus": "",
+"previous": "55.1"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

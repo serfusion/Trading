@@ -1,0 +1,146 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Trade Balance",
+"actual": "4.00B",
+"consensus": "5.00B",
+"previous": "7.02B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "103",
+"consensus": "100",
+"previous": "100"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "103.2",
+"consensus": "",
+"previous": "103.7"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "3.6B",
+"consensus": "2.9B",
+"previous": "2.0B"
+},
+{
+"gmt": "07:05",
+"country": "Brazil",
+"eventName": "Unemployment Rate",
+"actual": "5.7%",
+"consensus": "5.9%",
+"previous": "6.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "1.1%",
+"consensus": "1.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "756",
+"consensus": "",
+"previous": "763"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-8.2K",
+"consensus": "",
+"previous": "-12.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "162.8k",
+"consensus": "",
+"previous": "176.6k"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "220.2K",
+"consensus": "",
+"previous": "232.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "30.2K",
+"consensus": "",
+"previous": "33.0K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "33.4K",
+"consensus": "",
+"previous": "33.7K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "10.7K",
+"consensus": "",
+"previous": "9.0K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "53.8K",
+"consensus": "",
+"previous": "43.4K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "12.7K",
+"consensus": "",
+"previous": "23.3K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "12.5K",
+"consensus": "",
+"previous": "18.3K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "6.4K",
+"consensus": "",
+"previous": "5.0K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-10.3K",
+"consensus": "",
+"previous": "-15.3K"
+}
+]
