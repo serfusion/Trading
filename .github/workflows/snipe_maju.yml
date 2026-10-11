@@ -1,0 +1,48 @@
+name: Uji maju snipe X1 (tiap jam)
+
+# 🔁 Uji maju otomatis aturan snipe token baru di X1 (research/snipe_x1_maju.py, docs/SNIPE_X1.md & docs/SNIPE_X1_WR.md).
+# Token baru XDEX (≥ 25 jam setelah dibuat) diunduh dari RPC publik X1, aturan di research/snipe_x1_aturan.json diputar
+# ulang dengan simulator riset → persentase snipe untung pada data yang belum pernah dilihat. Hasil & data baru disimpan di
+# branch `arsip-snipe` (snipe_x1/HASIL_MAJU.md). Tanpa secret, tanpa wallet, tanpa order.
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arsip-snipe
+  cancel-in-progress: false
+
+jobs:
+  maju:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          path: kode
+      - name: Siapkan branch arsip-snipe
+        run: |
+          git clone --depth 1 --branch arsip-snipe "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" arsip \
+            || (mkdir arsip && cd arsip && git init -b arsip-snipe && git remote add origin "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git")
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Pasang pustaka
+        run: pip install -q numpy pandas
+      - name: Unduh token baru & nilai aturan
+        run: cd kode && python -m research.snipe_x1_maju ../arsip
+      - name: Commit arsip bila berubah
+        run: |
+          cd arsip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "tidak ada perubahan"; else
+            git commit -q -m "Uji maju snipe X1 $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push origin HEAD:arsip-snipe
+          fi

@@ -1,0 +1,12 @@
+{
+  "catatan": "Aturan kandidat snipe X1 yang diuji maju otomatis (research/snipe_x1_maju.py). keluar = argumen research.snipe_x1_wr.keluar; saringan = ekspresi Python atas r (peluncuran) dan J (fitur saat masuk). Diisi dari riset 11 Okt 2026; ubah hanya lewat riset baru.",
+  "mulai_maju": "2026-10-10T00:00:00Z",
+  "aturan": [
+    {"nama": "dasar: semua token, masuk 60 dtk, TP 1,2× telat 1", "jeda": 60, "keluar": ["tp", 1.2, null, 1],
+     "saringan": "", "riset": "WR latih 59% / uji 52%, ROI +18% / +30%"},
+    {"nama": "porsi 50–95% & bukan pembuat berantai, masuk 60 dtk, TP 1,2× telat 1", "jeda": 60,
+     "keluar": ["tp", 1.2, null, 1],
+     "saringan": "r['creator_prev'] <= 10 and 0.5 < (r['porsi'] if r['porsi'] == r['porsi'] else 0) <= 0.95",
+     "riset": "WR latih 82% (n 51) / uji 89% (n 9) — n uji terlalu kecil"}
+  ]
+}
