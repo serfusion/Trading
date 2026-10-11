@@ -1,0 +1,290 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "1.50%",
+"consensus": "1.50%",
+"previous": "1.50%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "GDP",
+"actual": "2.0%",
+"consensus": "0.9%",
+"previous": "1.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "0.2%",
+"consensus": "0.5%",
+"previous": "-0.3%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.6%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP Annualized",
+"actual": "3.3%",
+"consensus": "2.3%",
+"previous": "-1.2%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:35",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "0.685%",
+"consensus": "",
+"previous": "0.912%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Employment Trends Index",
+"actual": "128.02",
+"consensus": "",
+"previous": "128.44"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Fed Labor Market Conditions Index",
+"actual": "-0.7",
+"consensus": "0.0",
+"previous": "1.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "46.7",
+"consensus": "48.6",
+"previous": "48.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "51.8",
+"consensus": "58.8",
+"previous": "59.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "50.7",
+"consensus": "",
+"previous": "51.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "51.4",
+"consensus": "",
+"previous": "60.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "51.4",
+"consensus": "55.0",
+"previous": "55.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "51.8",
+"consensus": "",
+"previous": "51.9"
+},
+{
+"gmt": "10:25",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "7.7%",
+"consensus": "",
+"previous": "12.7%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-6.4%",
+"consensus": "",
+"previous": "4.7%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "1.4%",
+"consensus": "",
+"previous": "5.6%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.335%",
+"consensus": "",
+"previous": "0.335%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.250%",
+"consensus": "",
+"previous": "0.255%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.470%",
+"consensus": "",
+"previous": "0.480%"
+},
+{
+"gmt": "12:15",
+"country": "Switzerland",
+"eventName": "SNB Chairman Thomas Jordan speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Manufacturing Sales Volume",
+"actual": "2.8%",
+"consensus": "",
+"previous": "-1.2%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "46.6",
+"consensus": "",
+"previous": "51.6"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Reserves (USD)",
+"actual": "1,256.1B",
+"consensus": "",
+"previous": "1,264.8B"
+},
+{
+"gmt": "21:15",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Capital Expenditure",
+"actual": "0.0%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Chain Price Index",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Final Consumption",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.8%"
+}
+]

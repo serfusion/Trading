@@ -1,0 +1,354 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Capacity Utilization",
+"actual": "1.6%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "0.9%",
+"consensus": "1.7%",
+"previous": "1.7%"
+},
+{
+"gmt": "02:00",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "2.2%",
+"consensus": "2.1%",
+"previous": "2.0%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "0.7%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "2.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "2.7%",
+"consensus": "2.6%",
+"previous": "2.4%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "2.6%",
+"consensus": "2.6%",
+"previous": "2.7%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "-0.3%",
+"consensus": "0.1%",
+"previous": "-2.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "2.2%",
+"consensus": "2.5%",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "1.2%",
+"consensus": "1.4%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "2.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.40%",
+"consensus": "3.50%",
+"previous": "3.50%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "1.395%",
+"consensus": "",
+"previous": "1.015%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "0.821%",
+"consensus": "",
+"previous": "0.500%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "38.5",
+"consensus": "38.1",
+"previous": "36.4"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "30.6",
+"consensus": "29.4",
+"previous": "27.6"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "-1.40%",
+"consensus": "0.30%",
+"previous": "2.30%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-3.1%",
+"consensus": "-2.8%",
+"previous": "12.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "0.974M",
+"consensus": "0.975M",
+"previous": "1.005M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.7%",
+"consensus": "1.7%",
+"previous": "1.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "1.4%",
+"consensus": "1.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "0.914M",
+"consensus": "0.950M",
+"previous": "0.856M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "6.8%",
+"consensus": "11.4%",
+"previous": "-14.8%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-0.40%",
+"consensus": "",
+"previous": "-0.50%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "2.9%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.045%",
+"consensus": "",
+"previous": "0.040%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "2.40%",
+"consensus": "",
+"previous": "-5.30%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-4.29M",
+"consensus": "-0.62M",
+"previous": "8.97M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "0.92M",
+"consensus": "0.27M",
+"previous": "1.04M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-0.66B",
+"consensus": "-0.60B",
+"previous": "-3.23B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.82T",
+"consensus": "-0.89T",
+"previous": "-0.70T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "10.1%",
+"consensus": "6.5%",
+"previous": "1.1%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "10.0%",
+"consensus": "10.8%",
+"previous": "5.5%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-994B",
+"consensus": "-1,200B",
+"previous": "362B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.1%"
+}
+]

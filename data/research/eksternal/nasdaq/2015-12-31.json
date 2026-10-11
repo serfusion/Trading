@@ -1,0 +1,258 @@
+[
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "M3 Money Supply",
+"actual": "9.35%",
+"consensus": "9.13%",
+"previous": "9.74%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Private Sector Credit",
+"actual": "9.53%",
+"consensus": "8.31%",
+"previous": "8.87%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "M3 Money Supply",
+"actual": "10.9%",
+"consensus": "",
+"previous": "10.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Housing Equity Withdrawal",
+"actual": "-8.8B",
+"consensus": "-10.5B",
+"previous": "-10.9B"
+},
+{
+"gmt": "06:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "06:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "12.9%",
+"consensus": "13.0%",
+"previous": "15.0%"
+},
+{
+"gmt": "06:30",
+"country": "India",
+"eventName": "Federal Fiscal Deficit",
+"actual": "4,835.23B",
+"consensus": "",
+"previous": "4,112.46B"
+},
+{
+"gmt": "06:30",
+"country": "India",
+"eventName": "Infrastructure Output",
+"actual": "-1.3%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "370.2B",
+"consensus": "",
+"previous": "368.9B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,198K",
+"consensus": "2,201K",
+"previous": "2,195K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "287K",
+"consensus": "270K",
+"previous": "267K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "277.00K",
+"consensus": "",
+"previous": "272.50K"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Chicago PMI",
+"actual": "42.9",
+"consensus": "49.8",
+"previous": "48.7"
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "43.6",
+"consensus": "",
+"previous": "42.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-58B",
+"consensus": "-57B",
+"previous": "-32B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "536",
+"consensus": "",
+"previous": "538"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Exports",
+"actual": "-13.8%",
+"consensus": "-10.9%",
+"previous": "-4.8%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Imports",
+"actual": "-19.2%",
+"consensus": "-18.6%",
+"previous": "-17.6%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "7.20B",
+"consensus": "8.82B",
+"previous": "10.30B"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "Manufacturing PMI",
+"actual": "49.7",
+"consensus": "49.7",
+"previous": "49.6"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "Non-Manufacturing PMI",
+"actual": "54.4",
+"consensus": "",
+"previous": "53.6"
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Exchange Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Germany",
+"eventName": "Germany - New Year's Eve",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Switzerland",
+"eventName": "Switzerland - New Year's Eve",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Italy",
+"eventName": "Italy - New Year's Eve",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - New Year's Eve",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Brazil",
+"eventName": "Brazil - New Year's Eve",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Market Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - New Year's Eve - Early close at 13:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Spain",
+"eventName": "Spain - New Year's Eve - Early close at 14:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "France",
+"eventName": "France - New Year's Eve - Early close at 14:05",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - New Year's Eve - Early close at 14:05",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

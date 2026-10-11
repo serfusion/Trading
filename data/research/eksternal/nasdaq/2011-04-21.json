@@ -1,0 +1,130 @@
+[
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "104.7",
+"consensus": "105.5",
+"previous": "106.5"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "116.3",
+"consensus": "115.5",
+"previous": "115.8"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "101.7",
+"consensus": "",
+"previous": "102.0"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "44K",
+"consensus": "48K",
+"previous": "47K"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "16.4B",
+"consensus": "18.7B",
+"previous": "7.9B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "-0.5%",
+"previous": "-0.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,695K",
+"consensus": "3,650K",
+"previous": "3,702K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "403K",
+"consensus": "390K",
+"previous": "416K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "0.7%",
+"consensus": "0.5%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "0.4%",
+"consensus": "0.6%",
+"previous": "-0.4%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "28.7",
+"consensus": "-43.6",
+"previous": "28.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "-1.6%",
+"consensus": "-0.2%",
+"previous": "-1.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "18.5",
+"consensus": "36.8",
+"previous": "43.4"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "47B",
+"consensus": "51B",
+"previous": "28B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "1%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "913",
+"consensus": "",
+"previous": "880"
+}
+]

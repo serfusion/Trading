@@ -1,0 +1,434 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Business Investment",
+"actual": "2.4%",
+"consensus": "",
+"previous": "-10.7%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Business Investment",
+"actual": "9.7%",
+"consensus": "",
+"previous": "-16.9%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "U.K. Construction Output",
+"actual": "30.0%",
+"consensus": "32.0%",
+"previous": "57.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Construction Output",
+"actual": "-1.3%",
+"consensus": "0.9%",
+"previous": "-0.7%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "GDP",
+"actual": "4.8%",
+"consensus": "4.8%",
+"previous": "-1.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "GDP",
+"actual": "22.2%",
+"consensus": "22.1%",
+"previous": "-6.1%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Index of Services",
+"actual": "5.7%",
+"consensus": "",
+"previous": "3.9%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Industrial Production",
+"actual": "8.3%",
+"consensus": "9.4%",
+"previous": "20.7%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Industrial Production",
+"actual": "0.7%",
+"consensus": "0.3%",
+"previous": "0.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Manufacturing Production",
+"actual": "13.9%",
+"consensus": "13.5%",
+"previous": "28.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Manufacturing Production",
+"actual": "0.2%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Monthly GDP 3M/3M Change",
+"actual": "4.8%",
+"consensus": "4.8%",
+"previous": "3.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Trade Balance",
+"actual": "-11.99B",
+"consensus": "-9.10B",
+"previous": "-9.60B"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Trade Balance Non-EU",
+"actual": "-7.10B",
+"consensus": "",
+"previous": "-5.24B"
+},
+{
+"gmt": "04:00",
+"country": "United States",
+"eventName": "IEA Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "5.681B",
+"consensus": "",
+"previous": "5.633B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "0.88B",
+"consensus": "",
+"previous": "0.85B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "-1.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "9.7%",
+"consensus": "10.4%",
+"previous": "20.6%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "55.3",
+"consensus": "",
+"previous": "56.5"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italy Thomson Reuters IPSOS PCSI",
+"actual": "46.09",
+"consensus": "",
+"previous": "46.93"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "Germany Thomson Reuters IPSOS PCSI",
+"actual": "58.34",
+"consensus": "",
+"previous": "59.08"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "France Thomson Reuters IPSOS PCSI",
+"actual": "47.34",
+"consensus": "",
+"previous": "48.04"
+},
+{
+"gmt": "06:00",
+"country": "Russia",
+"eventName": "Russia Thomon Reuters IPSOS PCSI",
+"actual": "38.36",
+"consensus": "",
+"previous": "37.33"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "OPEC Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "CPI",
+"actual": "5.59%",
+"consensus": "5.78%",
+"previous": "6.26%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Cumulative Industrial Production",
+"actual": "45.00%",
+"consensus": "",
+"previous": "68.80%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Industrial Production",
+"actual": "13.6%",
+"consensus": "13.5%",
+"previous": "28.6%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Manufacturing Output",
+"actual": "13.0%",
+"consensus": "",
+"previous": "33.5%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian Service Sector Growth",
+"actual": "1.7%",
+"consensus": "0.2%",
+"previous": "1.2%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian Service Sector Growth",
+"actual": "21.1%",
+"consensus": "17.5%",
+"previous": "23.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,866K",
+"consensus": "2,880K",
+"previous": "2,980K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "1.0%",
+"consensus": "0.5%",
+"previous": "1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "6.2%",
+"consensus": "5.6%",
+"previous": "5.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "375K",
+"consensus": "375K",
+"previous": "387K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "396.25K",
+"consensus": "",
+"previous": "394.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "1.0%",
+"consensus": "0.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "7.8%",
+"consensus": "7.3%",
+"previous": "7.3%"
+},
+{
+"gmt": "09:00",
+"country": "United Kingdom",
+"eventName": "NIESR Monthly GDP Tracker",
+"actual": "3.9%",
+"consensus": "",
+"previous": "4.8%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "599.3B",
+"consensus": "",
+"previous": "599.6B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "49B",
+"consensus": "49B",
+"previous": "13B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.045%",
+"consensus": "",
+"previous": "0.040%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "0.055%",
+"consensus": "",
+"previous": "0.050%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "WASDE Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "2.040%",
+"consensus": "",
+"previous": "2.000%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Export Price Index",
+"actual": "16.9%",
+"consensus": "",
+"previous": "13.0%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Import Price Index",
+"actual": "19.2%",
+"consensus": "",
+"previous": "14.4%"
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "62.6",
+"consensus": "",
+"previous": "60.7"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "1,365.20%",
+"consensus": "",
+"previous": "2,531.60%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "897",
+"consensus": "",
+"previous": "881"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-1,103.6B",
+"consensus": "",
+"previous": "225.6B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "104.9B",
+"consensus": "",
+"previous": "3.2B"
+},
+{
+"gmt": "22:00",
+"country": "Japan",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "40.79",
+"consensus": "",
+"previous": "40.93"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "China Thomson Reuters IPSOS PCSI",
+"actual": "68.94",
+"consensus": "",
+"previous": "74.07"
+}
+]

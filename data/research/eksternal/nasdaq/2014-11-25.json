@@ -1,0 +1,362 @@
+[
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "1.2%",
+"consensus": "1.2%",
+"previous": "1.2%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "99",
+"consensus": "97",
+"previous": "98"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "-1.2%",
+"consensus": "-0.1%",
+"previous": "-0.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "2.7%",
+"consensus": "4.0%",
+"previous": "4.5%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "5.6%",
+"consensus": "4.3%",
+"previous": "6.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-49.8B",
+"consensus": "-45.3B",
+"previous": "-50.4B"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-3.0%"
+},
+{
+"gmt": "05:05",
+"country": "Australia",
+"eventName": "RBA Governor Lowe Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Gross Mortgage Approvals",
+"actual": "37.1K",
+"consensus": "38.5K",
+"previous": "39.1K"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP Annualized",
+"actual": "1.4%",
+"consensus": "1.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP",
+"actual": "1.4%",
+"consensus": "1.3%",
+"previous": "1.3%"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 3-Month Letras Auction",
+"actual": "0.073%",
+"consensus": "",
+"previous": "0.130%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "1.7%",
+"consensus": "",
+"previous": "2.2%"
+},
+{
+"gmt": "08:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "2.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Corporate Profits",
+"actual": "3.2%",
+"consensus": "",
+"previous": "8.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "3.9%",
+"consensus": "3.3%",
+"previous": "3.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "1.4%",
+"consensus": "1.3%",
+"previous": "1.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Real Consumer Spending",
+"actual": "2.2%",
+"consensus": "1.9%",
+"previous": "1.8%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "0.0%",
+"consensus": "0.4%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Corporate Profits",
+"actual": "3.7%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "0.8%",
+"consensus": "0.6%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-0.8%",
+"consensus": "",
+"previous": "-0.9%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.2%",
+"consensus": "",
+"previous": "3.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.0%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "4.3%",
+"consensus": "",
+"previous": "4.8%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "214.0",
+"consensus": "",
+"previous": "213.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.3%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "4.9%",
+"consensus": "4.7%",
+"previous": "5.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "0.2%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "88.7",
+"consensus": "95.9",
+"previous": "94.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "4",
+"consensus": "17",
+"previous": "20"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "1",
+"consensus": "",
+"previous": "23"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "25",
+"consensus": "",
+"previous": "27"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "25.4",
+"consensus": "",
+"previous": "14.0"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "17.3",
+"consensus": "",
+"previous": "18.0"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.060%",
+"consensus": "",
+"previous": "0.035%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "1.595%",
+"consensus": "",
+"previous": "1.567%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "103",
+"consensus": "105",
+"previous": "105"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "2.800M",
+"consensus": "",
+"previous": "3.700M"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "-1.300M",
+"consensus": "",
+"previous": "-3.300M"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "0.043M",
+"consensus": "",
+"previous": "0.519M"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "-2.2%",
+"consensus": "-1.7%",
+"previous": "-1.2%"
+}
+]

@@ -1,0 +1,114 @@
+[
+{
+"gmt": "01:15",
+"country": "India",
+"eventName": "CPI",
+"actual": "9.5%",
+"consensus": "8.2%",
+"previous": "8.3%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.3%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "2.7%",
+"consensus": "4.0%",
+"previous": "5.3%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "11.3%",
+"consensus": "",
+"previous": "-12.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-46.0%",
+"consensus": "",
+"previous": "-29.0%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "187K",
+"consensus": "150K",
+"previous": "247K"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "2.600M",
+"consensus": "2.500M",
+"previous": "4.800M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "6.200M",
+"consensus": "3.000M",
+"previous": "2.400M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "2,469.42B",
+"consensus": "",
+"previous": "2,443.53B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Employment Change",
+"actual": "-0.5%",
+"consensus": "0.2%",
+"previous": "1.0%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Unemployment Rate",
+"actual": "6.8%",
+"consensus": "6.5%",
+"previous": "6.4%"
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "AIG Services Index",
+"actual": "45.5",
+"consensus": "",
+"previous": "46.4"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "8.7%",
+"consensus": "1.3%",
+"previous": "-3.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "1.98B",
+"consensus": "1.63B",
+"previous": "2.08B"
+}
+]

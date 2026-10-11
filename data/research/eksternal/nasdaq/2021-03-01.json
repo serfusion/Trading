@@ -1,0 +1,554 @@
+[
+{
+"gmt": "01:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "23.9%",
+"consensus": "",
+"previous": "19.5%"
+},
+{
+"gmt": "02:30",
+"country": "United Kingdom",
+"eventName": "Investing.com GBP/USD Index",
+"actual": "42.5%",
+"consensus": "",
+"previous": "40.2%"
+},
+{
+"gmt": "02:30",
+"country": "United States",
+"eventName": "Investing.com Gold Index",
+"actual": "52.0%",
+"consensus": "",
+"previous": "56.3%"
+},
+{
+"gmt": "02:30",
+"country": "Canada",
+"eventName": "Investing.com USD/CAD Index",
+"actual": "37.8%",
+"consensus": "",
+"previous": "52.9%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "Investing.com USD/CHF Index",
+"actual": "34.7%",
+"consensus": "",
+"previous": "55.0%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Investing.com AUD/USD Index",
+"actual": "36.2%",
+"consensus": "",
+"previous": "42.9%"
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "Investing.com USD/JPY Index",
+"actual": "33.0%",
+"consensus": "",
+"previous": "43.7%"
+},
+{
+"gmt": "02:30",
+"country": "New Zealand",
+"eventName": "Investing.com NZD/USD Index",
+"actual": "46.4%",
+"consensus": "",
+"previous": "49.7%"
+},
+{
+"gmt": "02:30",
+"country": "Euro Zone",
+"eventName": "Investing.com EUR/USD Index",
+"actual": "48.5%",
+"consensus": "",
+"previous": "56.3%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "61.3",
+"consensus": "60.0",
+"previous": "59.4"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "-2.392B",
+"consensus": "-1.900B",
+"previous": "-0.870B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.7%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "98.99K",
+"consensus": "96.00K",
+"previous": "102.81K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "5.17B",
+"consensus": "5.59B",
+"previous": "5.34B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "2.8B",
+"consensus": "3.3B",
+"previous": "4.6B"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.6%",
+"consensus": "-0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.2%",
+"consensus": "-0.5%",
+"previous": "-0.9%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "1.0%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "-20.9%",
+"consensus": "",
+"previous": "-5.8%"
+},
+{
+"gmt": "07:00",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "6.6%",
+"consensus": "",
+"previous": "5.9%"
+},
+{
+"gmt": "07:00",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "11.8%",
+"consensus": "",
+"previous": "11.1%"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "-13.30%",
+"consensus": "",
+"previous": "-13.90%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "37.52K",
+"consensus": "",
+"previous": "34.78K"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.7%",
+"consensus": "0.5%",
+"previous": "0.8%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "1.3%",
+"consensus": "1.2%",
+"previous": "1.0%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "1.4%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Current Account",
+"actual": "-7.3B",
+"consensus": "-8.3B",
+"previous": "-10.5B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.590%",
+"consensus": "",
+"previous": "-0.614%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.606%",
+"consensus": "",
+"previous": "-0.617%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.603%",
+"consensus": "",
+"previous": "-0.616%"
+},
+{
+"gmt": "10:05",
+"country": "United States",
+"eventName": "FOMC Member Brainard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "1.7%",
+"consensus": "0.8%",
+"previous": "1.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "54.4",
+"consensus": "53.0",
+"previous": "52.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "64.8",
+"consensus": "",
+"previous": "61.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "60.8",
+"consensus": "58.8",
+"previous": "58.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "86.0",
+"consensus": "80.0",
+"previous": "82.1"
+},
+{
+"gmt": "11:20",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:20",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Business Confidence",
+"actual": "-1",
+"consensus": "",
+"previous": "-2"
+},
+{
+"gmt": "12:10",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.040%",
+"consensus": "",
+"previous": "0.030%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.060%",
+"consensus": "",
+"previous": "0.045%"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "1.20B",
+"consensus": "0.90B",
+"previous": "-1.13B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Prices",
+"actual": "-0.4%",
+"consensus": "-3.5%",
+"previous": "-8.3%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Volume",
+"actual": "3.3%",
+"consensus": "0.9%",
+"previous": "5.6%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Imports Prices",
+"actual": "-1.7%",
+"consensus": "-1.0%",
+"previous": "-3.7%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade Index",
+"actual": "1.3%",
+"consensus": "1.3%",
+"previous": "-4.7%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Industrial Production",
+"actual": "7.5%",
+"consensus": "5.3%",
+"previous": "2.5%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Industrial Production",
+"actual": "-1.6%",
+"consensus": "1.0%",
+"previous": "2.7%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Retail Sales",
+"actual": "1.6%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Service Sector Output",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-1.1%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Jobs/applications ratio",
+"actual": "1.10",
+"consensus": "1.06",
+"previous": "1.06"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Unemployment Rate",
+"actual": "2.9%",
+"consensus": "3.0%",
+"previous": "2.9%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Capital Spending",
+"actual": "-4.8%",
+"consensus": "",
+"previous": "-10.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "19.6%",
+"consensus": "",
+"previous": "18.9%"
+},
+{
+"gmt": "20:30",
+"country": "South Korea",
+"eventName": "S&P Global South Korea Manufacturing PMI",
+"actual": "55.3",
+"consensus": "",
+"previous": "53.2"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-19.4%",
+"consensus": "-3.0%",
+"previous": "12.0%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Current Account",
+"actual": "14.5B",
+"consensus": "13.1B",
+"previous": "10.0B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Net Exports Contribution",
+"actual": "-0.1%",
+"consensus": "-0.3%",
+"previous": "-1.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "-12.2%",
+"consensus": "",
+"previous": "15.8%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "0.10%",
+"consensus": "0.10%",
+"previous": "0.10%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.131%",
+"consensus": "",
+"previous": "0.053%"
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Independence Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,290 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-0.1%",
+"consensus": "-0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.60B",
+"consensus": "",
+"previous": "-1.50B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "M2 Money Stock",
+"actual": "13.4%",
+"consensus": "13.1%",
+"previous": "13.2%"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "New Loans",
+"actual": "871B",
+"consensus": "750B",
+"previous": "775B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "1.4%",
+"consensus": "0.9%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "0.8%",
+"consensus": "0.4%",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:20",
+"country": "Italy",
+"eventName": "Italian 3-Year BTP Auction",
+"actual": "0.89%",
+"consensus": "",
+"previous": "1.12%"
+},
+{
+"gmt": "05:20",
+"country": "Italy",
+"eventName": "Italian 7-Year BTP Auction",
+"actual": "2.12%",
+"consensus": "",
+"previous": "2.71%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "CPI",
+"actual": "8.28%",
+"consensus": "8.40%",
+"previous": "8.59%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Industrial Production",
+"actual": "3.4%",
+"consensus": "1.9%",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Manufacturing Output",
+"actual": "2.60%",
+"consensus": "",
+"previous": "-1.20%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "6.7%",
+"consensus": "6.2%",
+"previous": "-1.1%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Retail Sales",
+"actual": "-0.4%",
+"consensus": "-0.2%",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,614K",
+"consensus": "2,598K",
+"previous": "2,603K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.1%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "317K",
+"consensus": "310K",
+"previous": "313K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "315.25K",
+"consensus": "",
+"previous": "310.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.3%",
+"consensus": "0.6%",
+"previous": "0.5%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Capacity Utilization Rate",
+"actual": "82.5%",
+"consensus": "82.6%",
+"previous": "82.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "107B",
+"consensus": "110B",
+"previous": "119B"
+},
+{
+"gmt": "11:15",
+"country": "Canada",
+"eventName": "BoC Gov Poloz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "3.444%",
+"consensus": "",
+"previous": "3.440%"
+},
+{
+"gmt": "14:00",
+"country": "Germany",
+"eventName": "German Buba President Weidmann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "52.7",
+"consensus": "",
+"previous": "54.4"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "FPI",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "22:00",
+"country": "Singapore",
+"eventName": "Unemployment Rate",
+"actual": "2.0%",
+"consensus": "2.1%",
+"previous": "2.1%"
+},
+{
+"gmt": "22:40",
+"country": "Japan",
+"eventName": "BoJ Interest Rate Decision",
+"actual": "0.10%",
+"consensus": "0.10%",
+"previous": "0.10%"
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - Independence Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

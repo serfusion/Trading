@@ -1,0 +1,386 @@
+[
+{
+"gmt": "01:30",
+"country": "United Kingdom",
+"eventName": "Investing.com GBP/USD Index",
+"actual": "52.9%",
+"consensus": "",
+"previous": "52.8%"
+},
+{
+"gmt": "01:30",
+"country": "United States",
+"eventName": "Investing.com Gold Index",
+"actual": "60.8%",
+"consensus": "",
+"previous": "62.1%"
+},
+{
+"gmt": "01:30",
+"country": "Canada",
+"eventName": "Investing.com USD/CAD Index",
+"actual": "48.5%",
+"consensus": "",
+"previous": "47.8%"
+},
+{
+"gmt": "01:30",
+"country": "Switzerland",
+"eventName": "Investing.com USD/CHF Index",
+"actual": "58.5%",
+"consensus": "",
+"previous": "57.6%"
+},
+{
+"gmt": "01:30",
+"country": "Australia",
+"eventName": "Investing.com AUD/USD Index",
+"actual": "46.0%",
+"consensus": "",
+"previous": "50.4%"
+},
+{
+"gmt": "01:30",
+"country": "Japan",
+"eventName": "Investing.com USD/JPY Index",
+"actual": "68.2%",
+"consensus": "",
+"previous": "65.8%"
+},
+{
+"gmt": "01:30",
+"country": "New Zealand",
+"eventName": "Investing.com NZD/USD Index",
+"actual": "52.8%",
+"consensus": "",
+"previous": "60.4%"
+},
+{
+"gmt": "01:30",
+"country": "Euro Zone",
+"eventName": "Investing.com EUR/USD Index",
+"actual": "42.2%",
+"consensus": "",
+"previous": "40.3%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "12.6%",
+"consensus": "",
+"previous": "15.1%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "48.6",
+"consensus": "49.1",
+"previous": "48.5"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "45.4",
+"consensus": "",
+"previous": "47.2"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "-5.70%",
+"consensus": "",
+"previous": "0.70%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "40.51K",
+"consensus": "",
+"previous": "36.79K"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.562%",
+"consensus": "",
+"previous": "-0.547%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.543%",
+"consensus": "",
+"previous": "-0.544%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.557%",
+"consensus": "",
+"previous": "-0.550%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.9",
+"consensus": "",
+"previous": "50.3"
+},
+{
+"gmt": "09:10",
+"country": "United States",
+"eventName": "FOMC Member Quarles Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "0.0%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "53.7",
+"consensus": "52.5",
+"previous": "52.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "52.7",
+"consensus": "",
+"previous": "51.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "52.1",
+"consensus": "53.0",
+"previous": "52.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "53.2",
+"consensus": "52.0",
+"previous": "50.0"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "2.300%",
+"consensus": "",
+"previous": "2.310%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "2.255%",
+"consensus": "",
+"previous": "2.320%"
+},
+{
+"gmt": "12:40",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:25",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "6.42B",
+"consensus": "6.70B",
+"previous": "6.06B"
+},
+{
+"gmt": "17:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "17.30M",
+"consensus": "16.80M",
+"previous": "16.40M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Prices",
+"actual": "-2.6%",
+"consensus": "-1.5%",
+"previous": "-1.7%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Volume",
+"actual": "5.0%",
+"consensus": "1.5%",
+"previous": "0.8%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Imports Prices",
+"actual": "-3.5%",
+"consensus": "-2.5%",
+"previous": "1.4%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade Index",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "-3.0%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.7%",
+"consensus": "0.8%",
+"previous": "0.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "-0.4%",
+"consensus": "-0.3%",
+"previous": "1.0%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "1.7%",
+"consensus": "1.8%",
+"previous": "1.8%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "-3.0%",
+"consensus": "0.9%",
+"previous": "3.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Capital Spending",
+"actual": "6.1%",
+"consensus": "2.6%",
+"previous": "5.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "3.6%",
+"consensus": "3.2%",
+"previous": "3.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Current Account",
+"actual": "-2.9B",
+"consensus": "-2.5B",
+"previous": "-6.3B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Net Exports Contribution",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "-0.110%",
+"consensus": "",
+"previous": "-0.060%"
+},
+{
+"gmt": "All Day",
+"country": "New Zealand",
+"eventName": "New Zealand - Queen's Birthday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

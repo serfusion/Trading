@@ -1,0 +1,266 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "-2.5%",
+"consensus": "-2.5%",
+"previous": "-0.4%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Industrial Production",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "-4.7%",
+"consensus": "",
+"previous": "-5.6%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Gross Mortgage Approvals",
+"actual": "40.1K",
+"consensus": "40.2K",
+"previous": "41.8K"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "-1.0%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "-0.9%",
+"consensus": "",
+"previous": "-4.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-45.6B",
+"consensus": "",
+"previous": "-26.2B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "5.2%",
+"consensus": "5.5%",
+"previous": "5.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.9%",
+"consensus": "1.1%",
+"previous": "1.1%"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-2.48B",
+"consensus": "-1.50B",
+"previous": "1.20B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "3.92B",
+"consensus": "4.00B",
+"previous": "6.15B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "97.3",
+"consensus": "95.9",
+"previous": "97.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "592K",
+"consensus": "560K",
+"previous": "572K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "3.5%",
+"consensus": "1.6%",
+"previous": "-6.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "10",
+"consensus": "-4",
+"previous": "-7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "7",
+"consensus": "",
+"previous": "-3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "8",
+"consensus": "",
+"previous": "2"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "10.3",
+"consensus": "",
+"previous": "15.6"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "-1.3",
+"consensus": "",
+"previous": "-7.7"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.270%",
+"consensus": "",
+"previous": "0.275%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "1.180%",
+"consensus": "",
+"previous": "1.218%"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-8.270M",
+"consensus": "",
+"previous": "-2.300M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "101",
+"consensus": "",
+"previous": "99"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "-0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "1.0%",
+"consensus": "1.1%",
+"previous": "1.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI Index Number",
+"actual": "108.60",
+"consensus": "",
+"previous": "108.20"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "1.7%",
+"consensus": "1.5%",
+"previous": "1.7%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "1.3%",
+"consensus": "1.3%",
+"previous": "1.4%"
+}
+]

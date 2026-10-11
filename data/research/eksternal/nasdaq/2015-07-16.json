@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "-1.8%",
+"consensus": "1.9%",
+"previous": "1.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "4.180B",
+"consensus": "2.830B",
+"previous": "3.730B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "1.31B",
+"consensus": "",
+"previous": "1.13B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:55",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "2.099%",
+"consensus": "",
+"previous": "2.258%"
+},
+{
+"gmt": "04:55",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "0.395%",
+"consensus": "",
+"previous": "0.691%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "-0.08%",
+"consensus": "",
+"previous": "-0.04%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "0.28%",
+"consensus": "",
+"previous": "0.35%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "18.8B",
+"consensus": "22.3B",
+"previous": "24.9B"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "Deposit Facility Rate",
+"actual": "-0.20%",
+"consensus": "-0.20%",
+"previous": "-0.20%"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "0.05%",
+"consensus": "0.05%",
+"previous": "0.05%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "359.9B",
+"consensus": "",
+"previous": "359.6B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,215K",
+"consensus": "2,295K",
+"previous": "2,327K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "281K",
+"consensus": "285K",
+"previous": "296K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "282.50K",
+"consensus": "",
+"previous": "279.25K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "-5.45B",
+"consensus": "10.23B",
+"previous": "16.73B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "5.58B",
+"consensus": "",
+"previous": "9.70B"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "43.2",
+"consensus": "",
+"previous": "43.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "60",
+"consensus": "60",
+"previous": "60"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "5.7",
+"consensus": "12.0",
+"previous": "15.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "41.5",
+"consensus": "",
+"previous": "39.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "7.70",
+"consensus": "",
+"previous": "8.10"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "-0.4",
+"consensus": "",
+"previous": "3.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "7.1",
+"consensus": "",
+"previous": "15.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "20.20",
+"consensus": "",
+"previous": "17.20"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "99B",
+"consensus": "95B",
+"previous": "91B"
+},
+{
+"gmt": "14:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "Fed Chair Yellen Testifies",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "53.40B",
+"consensus": "",
+"previous": "6.40B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "115.00B",
+"consensus": "",
+"previous": "107.90B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "93.0B",
+"consensus": "30.0B",
+"previous": "54.4B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "76.50B",
+"consensus": "",
+"previous": "38.70B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-3.6%",
+"consensus": "",
+"previous": "-3.5%"
+}
+]

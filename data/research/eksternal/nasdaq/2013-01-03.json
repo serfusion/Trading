@@ -1,0 +1,306 @@
+[
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "-59.10K",
+"consensus": "50.30K",
+"previous": "74.30K"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "49.5",
+"consensus": "48.5",
+"previous": "48.6"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "9.50%",
+"consensus": "4.50%",
+"previous": "4.00%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "3K",
+"consensus": "10K",
+"previous": "5K"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "6.9%",
+"consensus": "6.9%",
+"previous": "6.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "M3 Money Supply",
+"actual": "3.8%",
+"consensus": "3.8%",
+"previous": "3.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Private Sector Loans",
+"actual": "-0.8%",
+"consensus": "-0.5%",
+"previous": "-0.8%"
+},
+{
+"gmt": "06:05",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "2.07%",
+"consensus": "",
+"previous": "2.22%"
+},
+{
+"gmt": "06:05",
+"country": "France",
+"eventName": "French 7-Year OAT Auction",
+"actual": "1.32%",
+"consensus": "",
+"previous": "1.27%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-10.4%",
+"consensus": "",
+"previous": "-11.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-22.1%",
+"consensus": "",
+"previous": "34.4%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "215K",
+"consensus": "133K",
+"previous": "148K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,245K",
+"consensus": "3,215K",
+"previous": "3,201K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "372K",
+"consensus": "355K",
+"previous": "362K"
+},
+{
+"gmt": "09:30",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "48.60",
+"consensus": "49.50",
+"previous": "48.80"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-6.76B",
+"consensus": "",
+"previous": "-7.07B"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "34.1",
+"consensus": "",
+"previous": "33.95"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "ISM-New York Index",
+"actual": "563.20",
+"consensus": "",
+"previous": "561.10"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "36.3K",
+"consensus": "",
+"previous": "37.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "198.1k",
+"consensus": "",
+"previous": "194.7k"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "148.5K",
+"consensus": "",
+"previous": "150.1K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "29.2K",
+"consensus": "",
+"previous": "30.6K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "65.9K",
+"consensus": "",
+"previous": "63.4K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "11.6K",
+"consensus": "",
+"previous": "11.4K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "79.5K",
+"consensus": "",
+"previous": "75.4K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-80.5K",
+"consensus": "",
+"previous": "-85.6K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "17.1K",
+"consensus": "",
+"previous": "14.7K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "5.1K",
+"consensus": "",
+"previous": "-2.5K"
+},
+{
+"gmt": "17:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "15.40M",
+"consensus": "15.20M",
+"previous": "15.47M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "FX Reserves - USD",
+"actual": "326.97B",
+"consensus": "",
+"previous": "326.09B"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-12.03M",
+"consensus": "-0.63M",
+"previous": "-1.17M"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "3.32M",
+"consensus": "1.95M",
+"previous": "2.41M"
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "AIG Services Index",
+"actual": "43.2",
+"consensus": "",
+"previous": "47.1"
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Exchange Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

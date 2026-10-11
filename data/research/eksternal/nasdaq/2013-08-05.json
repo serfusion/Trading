@@ -1,0 +1,130 @@
+[
+{
+"gmt": "04:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "-4.9",
+"consensus": "-10.0",
+"previous": "-12.6"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-0.5%",
+"consensus": "-0.6%",
+"previous": "1.1%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "0.138%",
+"consensus": "",
+"previous": "0.145%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "0.043%",
+"consensus": "",
+"previous": "0.040%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "0.072%",
+"consensus": "",
+"previous": "0.066%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Employment Trends Index",
+"actual": "112.20",
+"consensus": "",
+"previous": "111.60"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "56.0",
+"consensus": "53.0",
+"previous": "52.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.040%",
+"consensus": "",
+"previous": "0.030%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.075%",
+"consensus": "",
+"previous": "0.065%"
+},
+{
+"gmt": "11:45",
+"country": "United States",
+"eventName": "FOMC Member Fisher Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "2.2%",
+"consensus": "2.0%",
+"previous": "1.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "ANZ Job Advertisements",
+"actual": "-1.10%",
+"consensus": "",
+"previous": "-1.60%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "House Price Index",
+"actual": "2.40%",
+"consensus": "1.00%",
+"previous": "0.80%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "0.602B",
+"consensus": "0.800B",
+"previous": "0.507B"
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

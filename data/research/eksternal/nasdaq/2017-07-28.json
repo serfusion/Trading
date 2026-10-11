@@ -1,0 +1,474 @@
+[
+{
+"gmt": "01:30",
+"country": "France",
+"eventName": "French GDP",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Consumer Spending",
+"actual": "-0.8%",
+"consensus": "-0.2%",
+"previous": "0.9%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "-0.3%",
+"consensus": "-0.4%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "KOF Leading Indicators",
+"actual": "106.8",
+"consensus": "106.0",
+"previous": "105.8"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "1.5%",
+"consensus": "1.5%",
+"previous": "1.5%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "1.7%",
+"consensus": "1.5%",
+"previous": "1.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Business and Consumer Survey",
+"actual": "111.2",
+"consensus": "110.8",
+"previous": "111.1"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Business Climate",
+"actual": "1.05",
+"consensus": "1.12",
+"previous": "1.15"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-1.7",
+"consensus": "-1.7",
+"previous": "-1.7"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Consumer Inflation Expectation",
+"actual": "11.7",
+"consensus": "",
+"previous": "13.0"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Selling Price Expectations",
+"actual": "7.5",
+"consensus": "",
+"previous": "7.1"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Services Sentiment",
+"actual": "14.0",
+"consensus": "13.0",
+"previous": "13.0"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Sentiment",
+"actual": "5.0",
+"consensus": "4.0",
+"previous": "4.5"
+},
+{
+"gmt": "05:30",
+"country": "Italy",
+"eventName": "Italian 10-Year BTP Auction",
+"actual": "2.16%",
+"consensus": "",
+"previous": "2.16%"
+},
+{
+"gmt": "05:30",
+"country": "Italy",
+"eventName": "Italian 5-Year BTP Auction",
+"actual": "0.88%",
+"consensus": "",
+"previous": "0.81%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "1.7%",
+"consensus": "1.5%",
+"previous": "1.6%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "1.5%",
+"consensus": "1.4%",
+"previous": "1.5%"
+},
+{
+"gmt": "06:30",
+"country": "Russia",
+"eventName": "Interest Rate Decision",
+"actual": "9.00%",
+"consensus": "9.00%",
+"previous": "9.00%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-M Inflation Index",
+"actual": "-0.72%",
+"consensus": "-0.65%",
+"previous": "-0.67%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "391.33B",
+"consensus": "",
+"previous": "389.06B"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Unemployment Rate",
+"actual": "13.0%",
+"consensus": "13.5%",
+"previous": "13.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Employment Benefits",
+"actual": "0.60%",
+"consensus": "",
+"previous": "0.70%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Employment Cost Index",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Employment Wages",
+"actual": "0.50%",
+"consensus": "",
+"previous": "0.80%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "2.6%",
+"consensus": "2.6%",
+"previous": "1.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "1.0%",
+"consensus": "1.3%",
+"previous": "2.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Consumer Spending",
+"actual": "2.8%",
+"consensus": "2.8%",
+"previous": "1.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.6%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.60%",
+"consensus": "",
+"previous": "2.60%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "80.5",
+"consensus": "80.4",
+"previous": "80.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "93.4",
+"consensus": "93.1",
+"previous": "93.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "113.4",
+"consensus": "112.9",
+"previous": "113.2"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Net Debt-to-GDP ratio",
+"actual": "48.7%",
+"consensus": "48.5%",
+"previous": "48.1%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Budget Balance",
+"actual": "-51.060B",
+"consensus": "-30.000B",
+"previous": "-66.989B"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Budget Surplus",
+"actual": "-19.550B",
+"consensus": "-19.250B",
+"previous": "-30.700B"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "766",
+"consensus": "",
+"previous": "764"
+},
+{
+"gmt": "13:20",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-26.2K",
+"consensus": "",
+"previous": "-16.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "24.3K",
+"consensus": "",
+"previous": "15.3K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "423.3K",
+"consensus": "",
+"previous": "396.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "90.8K",
+"consensus": "",
+"previous": "60.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "108.2K",
+"consensus": "",
+"previous": "102.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "19.4K",
+"consensus": "",
+"previous": "9.4K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "26.6K",
+"consensus": "",
+"previous": "8.0K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-1.6K",
+"consensus": "",
+"previous": "-3.7K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "56.4K",
+"consensus": "",
+"previous": "51.4K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-121.5K",
+"consensus": "",
+"previous": "-126.9K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "34.8K",
+"consensus": "",
+"previous": "36.0K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-6.3K",
+"consensus": "",
+"previous": "-6.2K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "90.8K",
+"consensus": "",
+"previous": "91.3K"
+}
+]

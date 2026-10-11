@@ -1,0 +1,482 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "5.50%",
+"consensus": "5.60%",
+"previous": "5.10%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "6.6%",
+"consensus": "7.1%",
+"previous": "6.5%"
+},
+{
+"gmt": "01:15",
+"country": "Australia",
+"eventName": "RBA Assist Gov Bullock Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:15",
+"country": "Australia",
+"eventName": "RBA Cagliarini Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "2.40%",
+"consensus": "1.90%",
+"previous": "2.00%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "-0.6%",
+"consensus": "-0.4%",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "12.7%",
+"consensus": "12.8%",
+"previous": "13.5%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "5.3%",
+"consensus": "5.2%",
+"previous": "5.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "-0.8%",
+"consensus": "-0.8%",
+"previous": "-0.8%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "8.6%",
+"consensus": "8.6%",
+"previous": "9.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "-0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "8.8%",
+"consensus": "",
+"previous": "9.3%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "7.1%",
+"consensus": "6.9%",
+"previous": "7.0%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "-0.4%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "06:45",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Cunliffe Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "2",
+"consensus": "-13",
+"previous": "-23"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Chicago Fed National Activity",
+"actual": "0.23",
+"consensus": "",
+"previous": "-0.46"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,654K",
+"consensus": "1,700K",
+"previous": "1,691K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PCE Prices",
+"actual": "4.30%",
+"consensus": "3.90%",
+"previous": "4.70%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "2.7%",
+"consensus": "2.9%",
+"previous": "3.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "3.9%",
+"consensus": "3.5%",
+"previous": "4.4%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Sales",
+"actual": "1.2%",
+"consensus": "",
+"previous": "4.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "192K",
+"consensus": "200K",
+"previous": "195K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "191.25K",
+"consensus": "",
+"previous": "189.75K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PCE Prices",
+"actual": "3.7%",
+"consensus": "",
+"previous": "4.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Real Consumer Spending",
+"actual": "1.4%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "251.75B",
+"consensus": "243.01B",
+"previous": "210.19B"
+},
+{
+"gmt": "11:00",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "5.357B",
+"consensus": "",
+"previous": "3.651B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-71B",
+"consensus": "-67B",
+"previous": "-100B"
+},
+{
+"gmt": "11:50",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "7.648M",
+"consensus": "2.083M",
+"previous": "16.283M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.017M",
+"consensus": "",
+"previous": "-0.383M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-1.357M",
+"consensus": "",
+"previous": "-1.072M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.700M",
+"consensus": "",
+"previous": "0.659M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.191M",
+"consensus": "",
+"previous": "-0.155M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "2.698M",
+"consensus": "-1.126M",
+"previous": "-1.285M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.339M",
+"consensus": "",
+"previous": "-0.004M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.597M",
+"consensus": "",
+"previous": "-0.349M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-0.6%",
+"consensus": "-0.2%",
+"previous": "-1.4%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.856M",
+"consensus": "0.108M",
+"previous": "2.317M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "KC Fed Composite Index",
+"actual": "0",
+"consensus": "",
+"previous": "-1"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "KC Fed Manufacturing Index",
+"actual": "-9",
+"consensus": "",
+"previous": "-4"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "4.515%",
+"consensus": "",
+"previous": "4.510%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "4.660%",
+"consensus": "",
+"previous": "4.650%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "7-Year Note Auction",
+"actual": "4.062%",
+"consensus": "",
+"previous": "3.517%"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "2.984T",
+"consensus": "",
+"previous": "3.107T"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "4.2%",
+"consensus": "4.2%",
+"previous": "4.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "4.3%",
+"consensus": "",
+"previous": "4.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "2,693.3B",
+"consensus": "",
+"previous": "716.3B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "197.7B",
+"consensus": "",
+"previous": "105.1B"
+},
+{
+"gmt": "20:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-38",
+"consensus": "-43",
+"previous": "-45"
+},
+{
+"gmt": "20:15",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:15",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:05",
+"country": "Japan",
+"eventName": "BOJ Gov Ueda Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Emperor's Birthday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - Defender of the Fatherland Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

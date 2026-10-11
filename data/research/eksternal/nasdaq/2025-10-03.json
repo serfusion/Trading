@@ -1,0 +1,426 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "0.5%",
+"consensus": "",
+"previous": "3.9%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "5.2%",
+"consensus": "",
+"previous": "4.6%"
+},
+{
+"gmt": "02:00",
+"country": "Russia",
+"eventName": "S&P Global Services PMI",
+"actual": "47",
+"consensus": "",
+"previous": "50"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Industrial Production",
+"actual": "-0.7%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "03:15",
+"country": "Spain",
+"eventName": "HCOB Spain Services PMI",
+"actual": "54.3",
+"consensus": "53.3",
+"previous": "53.2"
+},
+{
+"gmt": "03:15",
+"country": "South Africa",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "50.2",
+"consensus": "",
+"previous": "50.1"
+},
+{
+"gmt": "03:45",
+"country": "Italy",
+"eventName": "HCOB Italy Composite PMI",
+"actual": "51.7",
+"consensus": "",
+"previous": "51.7"
+},
+{
+"gmt": "03:45",
+"country": "Italy",
+"eventName": "HCOB Italy Services PMI",
+"actual": "52.5",
+"consensus": "51.5",
+"previous": "51.5"
+},
+{
+"gmt": "03:50",
+"country": "France",
+"eventName": "HCOB France Composite PMI",
+"actual": "48.1",
+"consensus": "48.4",
+"previous": "49.8"
+},
+{
+"gmt": "03:50",
+"country": "France",
+"eventName": "HCOB France Services PMI",
+"actual": "48.5",
+"consensus": "48.9",
+"previous": "49.8"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "HCOB Germany Composite PMI",
+"actual": "52",
+"consensus": "52.4",
+"previous": "50.5"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "HCOB Germany Services PMI",
+"actual": "51.5",
+"consensus": "52.5",
+"previous": "49.3"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.0%",
+"previous": "0.0%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "0.5%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Composite PMI",
+"actual": "51.2",
+"consensus": "51.2",
+"previous": "51"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Services PMI",
+"actual": "51.3",
+"consensus": "51.4",
+"previous": "50.5"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Composite PMI",
+"actual": "50.1",
+"consensus": "51",
+"previous": "53.5"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Services PMI",
+"actual": "50.8",
+"consensus": "51.9",
+"previous": "54.2"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Public Deficit",
+"actual": "2.0%",
+"consensus": "",
+"previous": "8.1%"
+},
+{
+"gmt": "05:00",
+"country": "Russia",
+"eventName": "Russian Forex Intervention",
+"actual": "-13.9B",
+"consensus": "",
+"previous": "-31.5B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-0.3%",
+"consensus": "-0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-0.6%",
+"consensus": "-0.4%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:40",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:05",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:25",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "1.0%",
+"consensus": "",
+"previous": "2.2%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "10.4%",
+"consensus": "",
+"previous": "10.3%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.5%",
+"consensus": "",
+"previous": "9.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "700.24B",
+"consensus": "",
+"previous": "702.57B"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "-0.7%",
+"consensus": "-0.8%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.8%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Reserve Assets Total",
+"actual": "126.6B",
+"consensus": "",
+"previous": "127.9B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Fed Goolsbee Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "S&P Global Composite PMI",
+"actual": "46",
+"consensus": "",
+"previous": "48.8"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "S&P Global Services PMI",
+"actual": "46.3",
+"consensus": "",
+"previous": "49.3"
+},
+{
+"gmt": "09:20",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "S&P Global Services PMI",
+"actual": "46.3",
+"consensus": "",
+"previous": "48.6"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Composite PMI",
+"actual": "53.9",
+"consensus": "53.6",
+"previous": "54.6"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "54.2",
+"consensus": "53.9",
+"previous": "54.5"
+},
+{
+"gmt": "09:50",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "49.9",
+"consensus": "51.8",
+"previous": "55.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "47.2",
+"consensus": "46.6",
+"previous": "46.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "50.4",
+"consensus": "54.0",
+"previous": "56.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "50.0",
+"consensus": "51.8",
+"previous": "52.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "69.4",
+"consensus": "68.0",
+"previous": "69.2"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "422",
+"consensus": "",
+"previous": "424"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "549",
+"consensus": "",
+"previous": "549"
+},
+{
+"gmt": "13:30",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:40",
+"country": "United States",
+"eventName": "Fed Governor Jefferson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "",
+"consensus": "",
+"previous": "-27.8K"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

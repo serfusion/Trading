@@ -1,0 +1,442 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "4.35%",
+"consensus": "4.35%",
+"previous": "4.35%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Current Conditions",
+"actual": "-73.8",
+"consensus": "-65.0",
+"previous": "-72.3"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "47.5",
+"consensus": "49.6",
+"previous": "47.1"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "2.9%",
+"consensus": "2.9%",
+"previous": "2.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.6%",
+"consensus": "2.6%",
+"previous": "2.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "2.5%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI, n.s.a",
+"actual": "126.31",
+"consensus": "126.32",
+"previous": "126.04"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "2.9%",
+"consensus": "2.9%",
+"previous": "2.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "51.3",
+"consensus": "47.8",
+"previous": "47.0"
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "4.083%",
+"consensus": "",
+"previous": "4.199%"
+},
+{
+"gmt": "05:50",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.450%",
+"consensus": "",
+"previous": "2.560%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Control",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "2.27%",
+"consensus": "",
+"previous": "2.74%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales Ex Gas/Autos",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.9%",
+"consensus": "",
+"previous": "5.5%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "78.7%",
+"consensus": "78.6%",
+"previous": "78.2%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.9%",
+"consensus": "0.3%",
+"previous": "0.0%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.39%",
+"consensus": "",
+"previous": "-0.68%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Manufacturing Production",
+"actual": "0.9%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "09:30",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "11:10",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "11:10",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,893.0",
+"consensus": "",
+"previous": "3,824.0"
+},
+{
+"gmt": "11:40",
+"country": "United States",
+"eventName": "Fed Collins Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.1%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.452%",
+"consensus": "",
+"previous": "4.635%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "FOMC Member Kugler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Fed Goolsbee Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "75.00B",
+"consensus": "",
+"previous": "45.90B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "66.20B",
+"consensus": "",
+"previous": "104.20B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "123.1B",
+"consensus": "69.0B",
+"previous": "102.6B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "123.10B",
+"consensus": "69.30B",
+"previous": "102.60B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "2.264M",
+"consensus": "",
+"previous": "-2.428M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-4.36B",
+"consensus": "-4.69B",
+"previous": "-7.84B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-27.64B",
+"consensus": "",
+"previous": "-27.80B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account % of GDP",
+"actual": "-6.80%",
+"consensus": "",
+"previous": "-6.90%"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "6",
+"consensus": "",
+"previous": "9"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.62T",
+"consensus": "-0.64T",
+"previous": "-0.58T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "13.5%",
+"consensus": "10.4%",
+"previous": "8.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "9.5%",
+"consensus": "13.0%",
+"previous": "8.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-1,221.3B",
+"consensus": "-1,300.0B",
+"previous": "-465.6B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Chart Pack Release",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Offshore Holdings",
+"actual": "57.80%",
+"consensus": "",
+"previous": "58.50%"
+}
+]

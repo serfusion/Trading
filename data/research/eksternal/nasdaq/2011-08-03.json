@@ -1,0 +1,98 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "SNB Interest Rate Decision",
+"actual": "0.00%",
+"consensus": "",
+"previous": "0.25%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.9%",
+"consensus": "0.5%",
+"previous": "-1.3%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "7.1%",
+"consensus": "",
+"previous": "-5.0%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "59.4%",
+"consensus": "",
+"previous": "5.3%"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "114K",
+"consensus": "100K",
+"previous": "145K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "-0.8%",
+"consensus": "-0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "52.7",
+"consensus": "53.8",
+"previous": "53.3"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "1.000M",
+"consensus": "1.500M",
+"previous": "2.300M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "1.700M",
+"consensus": "0.500M",
+"previous": "1.000M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "2,867.22B",
+"consensus": "",
+"previous": "2,863.58B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Employment Change",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "1.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Unemployment Rate",
+"actual": "6.5%",
+"consensus": "6.5%",
+"previous": "6.5%"
+}
+]

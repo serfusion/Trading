@@ -1,0 +1,90 @@
+[
+{
+"gmt": "02:15",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "0.570B",
+"consensus": "1.970B",
+"previous": "2.840B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "15.3B",
+"consensus": "12.2B",
+"previous": "2.0B"
+},
+{
+"gmt": "07:00",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "07:00",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "0.0%",
+"previous": "0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "0.570M",
+"consensus": "0.560M",
+"previous": "0.560M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "0.600M",
+"consensus": "0.550M",
+"previous": "0.540M"
+},
+{
+"gmt": "14:15",
+"country": "United States",
+"eventName": "FOMC Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:15",
+"country": "United States",
+"eventName": "Fed Interest Rate Decision",
+"actual": "0.25%",
+"consensus": "0.25%",
+"previous": "0.25%"
+},
+{
+"gmt": "17:00",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "27",
+"consensus": "",
+"previous": "28.5"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-0.88B",
+"consensus": "0.15B",
+"previous": "0.16B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-0.1%"
+}
+]

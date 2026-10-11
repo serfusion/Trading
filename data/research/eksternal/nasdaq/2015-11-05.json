@@ -1,0 +1,362 @@
+[
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "SECO Consumer Climate",
+"actual": "-18",
+"consensus": "-14",
+"previous": "-19"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-1.7%",
+"consensus": "1.0%",
+"previous": "-1.8%"
+},
+{
+"gmt": "03:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.88%",
+"consensus": "0.86%",
+"previous": "0.66%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "1.1%",
+"consensus": "0.6%",
+"previous": "-0.9%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "9.7%",
+"consensus": "9.5%",
+"previous": "8.6%"
+},
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.0%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-1.4%",
+"consensus": "-1.4%",
+"previous": "-1.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "1.746%",
+"consensus": "",
+"previous": "1.767%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "0.95%",
+"consensus": "",
+"previous": "0.98%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 15-Year OAT Auction",
+"actual": "1.49%",
+"consensus": "",
+"previous": "1.61%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "2.9%",
+"consensus": "3.0%",
+"previous": "2.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "06:45",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE Inflation Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "1",
+"consensus": "1",
+"previous": "1"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "8",
+"consensus": "8",
+"previous": "8"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE QE Total",
+"actual": "375B",
+"consensus": "375B",
+"previous": "375B"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "0.50%",
+"consensus": "0.50%",
+"previous": "0.50%"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "369.2B",
+"consensus": "375.0B",
+"previous": "374.6B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-1.3%",
+"consensus": "",
+"previous": "93.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "50.5K",
+"consensus": "",
+"previous": "58.9K"
+},
+{
+"gmt": "08:45",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.6%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "15.6%",
+"consensus": "15.6%",
+"previous": "15.7%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,163K",
+"consensus": "2,144K",
+"previous": "2,146K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "FOMC Member Dudley Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "276K",
+"consensus": "262K",
+"previous": "260K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "262.75K",
+"consensus": "",
+"previous": "259.25K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "1.6%",
+"consensus": "-0.2%",
+"previous": "3.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "1.4%",
+"consensus": "2.3%",
+"previous": "-1.8%"
+},
+{
+"gmt": "10:10",
+"country": "United States",
+"eventName": "FOMC Member Stanley Fischer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "41.1",
+"consensus": "",
+"previous": "42.8"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "52.3",
+"consensus": "",
+"previous": "63.3"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "53.1",
+"consensus": "54.0",
+"previous": "53.7"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "52B",
+"consensus": "60B",
+"previous": "63B"
+},
+{
+"gmt": "14:25",
+"country": "United States",
+"eventName": "FOMC Member Tarullo Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Lockhart Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:15",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "52.1",
+"consensus": "",
+"previous": "51.9"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "882.8B",
+"consensus": "",
+"previous": "464.9B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "187.1B",
+"consensus": "",
+"previous": "325.0B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

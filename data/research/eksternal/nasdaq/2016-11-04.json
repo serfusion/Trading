@@ -1,0 +1,354 @@
+[
+{
+"gmt": "05:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.27%",
+"consensus": "0.30%",
+"previous": "-0.14%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "0.1%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-1.5%",
+"consensus": "-1.8%",
+"previous": "-1.9%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "367.16B",
+"consensus": "",
+"previous": "367.14B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.4",
+"consensus": "34.4",
+"previous": "34.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "19.0K",
+"consensus": "",
+"previous": "3.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "-9.0K",
+"consensus": "-5.0K",
+"previous": "-8.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "161K",
+"consensus": "175K",
+"previous": "191K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.8%",
+"consensus": "",
+"previous": "62.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "142K",
+"consensus": "166K",
+"previous": "188K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-36.44B",
+"consensus": "-37.80B",
+"previous": "-40.46B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "9.5%",
+"consensus": "",
+"previous": "9.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "4.9%",
+"consensus": "4.9%",
+"previous": "5.0%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "43.9K",
+"consensus": "-10.0K",
+"previous": "67.2K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "43.55B",
+"consensus": "",
+"previous": "43.50B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "-23.1K",
+"consensus": "",
+"previous": "23.0K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "47.63B",
+"consensus": "",
+"previous": "45.50B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "67.1K",
+"consensus": "",
+"previous": "44.1K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.8%",
+"consensus": "65.6%",
+"previous": "65.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-4.08B",
+"consensus": "-1.70B",
+"previous": "-1.99B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "7.0%",
+"consensus": "7.0%",
+"previous": "7.0%"
+},
+{
+"gmt": "08:45",
+"country": "United States",
+"eventName": "FOMC Member Lockhart Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "FOMC Member Brainard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "56.5",
+"consensus": "",
+"previous": "68.1"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "59.7",
+"consensus": "",
+"previous": "58.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "450",
+"consensus": "",
+"previous": "441"
+},
+{
+"gmt": "13:30",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-83.0K",
+"consensus": "",
+"previous": "-84.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "11.3K",
+"consensus": "",
+"previous": "-13.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "354.4K",
+"consensus": "",
+"previous": "403.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "215.1K",
+"consensus": "",
+"previous": "197.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-20.7K",
+"consensus": "",
+"previous": "-21.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "62.1K",
+"consensus": "",
+"previous": "57.1K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-16.0K",
+"consensus": "",
+"previous": "-13.3K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-20.0K",
+"consensus": "",
+"previous": "-18.7K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "40.9K",
+"consensus": "",
+"previous": "31.9K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "43.2K",
+"consensus": "",
+"previous": "44.6K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-1.0K",
+"consensus": "",
+"previous": "-0.4K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "31.2K",
+"consensus": "",
+"previous": "32.3K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-137.4K",
+"consensus": "",
+"previous": "-123.9K"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "FOMC Member Stanley Fischer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - Unity Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

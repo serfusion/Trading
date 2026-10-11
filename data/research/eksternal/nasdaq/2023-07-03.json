@@ -1,0 +1,306 @@
+[
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "1.7%",
+"consensus": "1.8%",
+"previous": "2.2%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "-21.5%",
+"consensus": "-15.5%",
+"previous": "-22.2%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Government Budget Balance",
+"actual": "-107.2B",
+"consensus": "",
+"previous": "-83.7B"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "44.9",
+"consensus": "42.3",
+"previous": "43.2"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "18.4%",
+"consensus": "11.5%",
+"previous": "15.0%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "47.6",
+"consensus": "48.9",
+"previous": "49.2"
+},
+{
+"gmt": "Tentative",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "11.5%",
+"consensus": "",
+"previous": "14.8%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "9.80%",
+"consensus": "",
+"previous": "23.10%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "13.30%",
+"consensus": "",
+"previous": "8.30%"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "14.00%",
+"consensus": "34.20%",
+"previous": "10.10%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "46.81K",
+"consensus": "",
+"previous": "43.06K"
+},
+{
+"gmt": "08:55",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "3.697%",
+"consensus": "",
+"previous": "3.623%"
+},
+{
+"gmt": "08:55",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "3.439%",
+"consensus": "",
+"previous": "3.431%"
+},
+{
+"gmt": "08:55",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "3.584%",
+"consensus": "",
+"previous": "3.551%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.7",
+"consensus": "49.5",
+"previous": "49.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "0.9%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "48.1",
+"consensus": "50.8",
+"previous": "51.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "45.6",
+"consensus": "44.0",
+"previous": "42.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "46.0",
+"consensus": "47.2",
+"previous": "46.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "41.8",
+"consensus": "44.0",
+"previous": "44.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "5.230%",
+"consensus": "",
+"previous": "5.180%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "5.260%",
+"consensus": "",
+"previous": "5.215%"
+},
+{
+"gmt": "12:00",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "9.2%",
+"consensus": "",
+"previous": "23.1%"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "10.59B",
+"consensus": "9.90B",
+"previous": "11.38B"
+},
+{
+"gmt": "18:00",
+"country": "New Zealand",
+"eventName": "NZIER Business Confidence",
+"actual": "-63%",
+"consensus": "",
+"previous": "-66%"
+},
+{
+"gmt": "18:00",
+"country": "New Zealand",
+"eventName": "NZIER QSBO Capacity Utilization",
+"actual": "81.7%",
+"consensus": "",
+"previous": "94.0%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.7%",
+"consensus": "2.9%",
+"previous": "3.3%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "-1.0%",
+"consensus": "-0.7%",
+"previous": "-1.1%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.428%",
+"consensus": "",
+"previous": "0.436%"
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Canada Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Canada Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Canada Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Canada Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "United States",
+"eventName": "United States - Independence Day - Early close at 13:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

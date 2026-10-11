@@ -1,0 +1,322 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Household Confidence",
+"actual": "35.6",
+"consensus": "38.2",
+"previous": "37.1"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "13.9K",
+"consensus": "37.6K",
+"previous": "54.4K"
+},
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.00%",
+"consensus": "",
+"previous": "0.33%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE FPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-23.0%",
+"consensus": "",
+"previous": "-11.4%"
+},
+{
+"gmt": "05:40",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "-0.770%",
+"consensus": "",
+"previous": "-0.880%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "3.99%",
+"consensus": "",
+"previous": "4.02%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "8.1%",
+"consensus": "",
+"previous": "-10.1%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "263.8",
+"consensus": "",
+"previous": "261.4"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "553.8",
+"consensus": "",
+"previous": "512.2"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "2,202.6",
+"consensus": "",
+"previous": "1,928.0"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "135K",
+"consensus": "140K",
+"previous": "157K"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "FOMC Member Harker Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "ISM NY Business Conditions",
+"actual": "42.8%",
+"consensus": "",
+"previous": "50.3%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "ISM-New York Index",
+"actual": "875.4",
+"consensus": "",
+"previous": "879.0"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "3.100M",
+"consensus": "1.567M",
+"previous": "2.412M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.496M",
+"consensus": "",
+"previous": "-0.194M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.029M",
+"consensus": "",
+"previous": "-0.480M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.201M",
+"consensus": "",
+"previous": "2.256M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.187M",
+"consensus": "",
+"previous": "-0.109M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-2.418M",
+"consensus": "-1.789M",
+"previous": "-2.978M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.159M",
+"consensus": "",
+"previous": "0.789M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.481M",
+"consensus": "",
+"previous": "0.238M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-3.4%",
+"consensus": "-0.5%",
+"previous": "-1.4%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-0.228M",
+"consensus": "0.449M",
+"previous": "0.519M"
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-6.035B",
+"consensus": "",
+"previous": "-2.362B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "3,945.83B",
+"consensus": "",
+"previous": "3,857.72B"
+},
+{
+"gmt": "18:30",
+"country": "Australia",
+"eventName": "AIG Services Index",
+"actual": "51.5",
+"consensus": "",
+"previous": "51.4"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "869.2B",
+"consensus": "",
+"previous": "-164.8B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-221.2B",
+"consensus": "",
+"previous": "-1,178.0B"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "ANZ Commodity Price Index",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "21:00",
+"country": "Japan",
+"eventName": "BOJ Board Member Funo Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "-3%",
+"consensus": "",
+"previous": "1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "0%",
+"consensus": "",
+"previous": "3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "5.926B",
+"consensus": "6.000B",
+"previous": "7.253B"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Mahatma Gandhi Jayanti",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

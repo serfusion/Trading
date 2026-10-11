@@ -1,0 +1,354 @@
+[
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.3%",
+"consensus": "0.5%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "5.5%",
+"consensus": "5.5%",
+"previous": "5.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "6.2%",
+"consensus": "6.3%",
+"previous": "6.3%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Average Earnings ex Bonus",
+"actual": "2.1%",
+"consensus": "2.3%",
+"previous": "2.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Average Earnings Index +Bonus",
+"actual": "2.0%",
+"consensus": "1.7%",
+"previous": "1.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Claimant Count Change",
+"actual": "-2.4K",
+"consensus": "4.3K",
+"previous": "14.7K"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Unemployment Rate",
+"actual": "5.1%",
+"consensus": "5.1%",
+"previous": "5.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.0%",
+"consensus": "",
+"previous": "1.3%"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "0.140%",
+"consensus": "",
+"previous": "0.150%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "3.82%",
+"consensus": "",
+"previous": "3.82%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "222.0",
+"consensus": "",
+"previous": "235.6"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "482.6",
+"consensus": "",
+"previous": "490.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,991.5",
+"consensus": "",
+"previous": "1,963.1"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Retail Sales",
+"actual": "2.8%",
+"consensus": "3.6%",
+"previous": "4.0%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "17.17B",
+"consensus": "10.35B",
+"previous": "15.94B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "2.27B",
+"consensus": "",
+"previous": "4.37B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "1.310M",
+"consensus": "-2.833M",
+"previous": "-3.410M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.022M",
+"consensus": "",
+"previous": "-0.005M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.461M",
+"consensus": "",
+"previous": "1.520M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.160M",
+"consensus": "",
+"previous": "0.021M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-3.170M",
+"consensus": "-0.642M",
+"previous": "-1.647M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.054M",
+"consensus": "",
+"previous": "0.240M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.645M",
+"consensus": "",
+"previous": "-0.590M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-2.496M",
+"consensus": "-0.150M",
+"previous": "-1.231M"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-2.24B",
+"consensus": "",
+"previous": "-1.22B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,473.74B",
+"consensus": "",
+"previous": "4,478.41B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-3.1%",
+"consensus": "-3.1%",
+"previous": "-3.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "5.5%",
+"consensus": "0.5%",
+"previous": "-9.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "3.2%",
+"consensus": "0.8%",
+"previous": "-0.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "1,121.8B",
+"consensus": "",
+"previous": "270.2B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "71.7B",
+"consensus": "",
+"previous": "-435.0B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Employment Change",
+"actual": "10.8K",
+"consensus": "12.5K",
+"previous": "25.7K"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Full Employment Change",
+"actual": "-9.3K",
+"consensus": "",
+"previous": "-10.1K"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Participation Rate",
+"actual": "64.8%",
+"consensus": "64.9%",
+"previous": "64.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Unemployment Rate",
+"actual": "5.7%",
+"consensus": "5.8%",
+"previous": "5.7%"
+}
+]

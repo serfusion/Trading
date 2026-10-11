@@ -1,0 +1,450 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "All Industries Activity Index",
+"actual": "-0.9%",
+"consensus": "-0.8%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "4.2%",
+"consensus": "4.3%",
+"previous": "4.2%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "5.1%",
+"consensus": "5.1%",
+"previous": "4.9%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-3.30B",
+"consensus": "",
+"previous": "-3.06B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "7.96B",
+"consensus": "5.35B",
+"previous": "1.98B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "-3.346B",
+"consensus": "",
+"previous": "18.307B"
+},
+{
+"gmt": "06:40",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "-0.220%",
+"consensus": "",
+"previous": "-0.180%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "5.16%",
+"consensus": "",
+"previous": "5.17%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-3.2%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "227.7",
+"consensus": "",
+"previous": "220.8"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "316.4",
+"consensus": "",
+"previous": "316.7"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "783.7",
+"consensus": "",
+"previous": "824.7"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Cap Goods Ship Non Defense Ex Air",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,668K",
+"consensus": "1,635K",
+"previous": "1,670K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "0.1%",
+"consensus": "0.4%",
+"previous": "-0.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-4.4%",
+"consensus": "-2.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-1.2%",
+"consensus": "0.1%",
+"previous": "-1.4%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "-0.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "224K",
+"consensus": "215K",
+"previous": "221K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "218.50K",
+"consensus": "",
+"previous": "216.50K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "-0.5%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-1.151B",
+"consensus": "",
+"previous": "-0.628B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "5.22M",
+"consensus": "5.20M",
+"previous": "5.15M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "1.4%",
+"consensus": "1.0%",
+"previous": "-3.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.8%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.60%",
+"consensus": "",
+"previous": "2.60%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "88.1",
+"consensus": "89.1",
+"previous": "88.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "97.5",
+"consensus": "98.4",
+"previous": "98.3"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "112.3",
+"consensus": "114.4",
+"previous": "113.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "4.851M",
+"consensus": "2.500M",
+"previous": "10.270M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.183M",
+"consensus": "",
+"previous": "0.268M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.116M",
+"consensus": "",
+"previous": "1.167M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.208M",
+"consensus": "",
+"previous": "0.030M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-0.077M",
+"consensus": "-2.754M",
+"previous": "-3.589M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.020M",
+"consensus": "",
+"previous": "0.342M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "1.162M",
+"consensus": "",
+"previous": "-0.308M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.295M",
+"consensus": "-0.198M",
+"previous": "-1.411M"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-134B",
+"consensus": "-105B",
+"previous": "39B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "1.109%",
+"consensus": "",
+"previous": "0.910%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "885",
+"consensus": "",
+"previous": "888"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "1,079",
+"consensus": "",
+"previous": "1,082"
+},
+{
+"gmt": "16:00",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "57.73K",
+"consensus": "70.45K",
+"previous": "137.34K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,106.20B",
+"consensus": "",
+"previous": "4,145.89B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "4.80%",
+"consensus": "",
+"previous": "2.10%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "4,660",
+"consensus": "",
+"previous": "4,630"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Visitor Arrivals",
+"actual": "4.0%",
+"consensus": "",
+"previous": "-1.9%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "1.4%",
+"consensus": "1.4%",
+"previous": "1.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-145.2B",
+"consensus": "",
+"previous": "1,620.6B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-179.2B",
+"consensus": "",
+"previous": "362.0B"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "2.2%",
+"consensus": "2.4%",
+"previous": "2.6%"
+},
+{
+"gmt": "20:00",
+"country": "Singapore",
+"eventName": "GDP",
+"actual": "3.0%",
+"consensus": "4.2%",
+"previous": "1.0%"
+}
+]

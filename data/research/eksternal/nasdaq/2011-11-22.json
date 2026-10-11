@@ -1,0 +1,98 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "2.150B",
+"consensus": "2.060B",
+"previous": "1.910B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "3.4B",
+"consensus": "4.3B",
+"previous": "10.2B"
+},
+{
+"gmt": "06:30",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-4.90B",
+"consensus": "-3.20B",
+"previous": "-4.90B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP",
+"actual": "2.0%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "GDP Price Index",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "1.0%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Mass Layoffs",
+"actual": "1.35K",
+"consensus": "",
+"previous": "1.49K"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "0",
+"consensus": "-2",
+"previous": "-6"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-20.0",
+"consensus": "-21.0",
+"previous": "-20.0"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "12.5%",
+"consensus": "2.0%",
+"previous": "-0.1%"
+}
+]

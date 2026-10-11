@@ -1,0 +1,290 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "All Industries Activity Index",
+"actual": "-1.0%",
+"consensus": "-0.7%",
+"previous": "0.9%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "102",
+"consensus": "103",
+"previous": "101"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "2.50%",
+"consensus": "",
+"previous": "2.40%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-1.90B",
+"consensus": "",
+"previous": "-1.90B"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "0.291%",
+"consensus": "",
+"previous": "0.124%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "-0.20%",
+"consensus": "",
+"previous": "-0.25%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "0.01%",
+"consensus": "",
+"previous": "0.01%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 7-Year OAT Auction",
+"actual": "0.28%",
+"consensus": "",
+"previous": "0.27%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "121.50B",
+"consensus": "117.00B",
+"previous": "95.00B"
+},
+{
+"gmt": "08:45",
+"country": "Euro Zone",
+"eventName": "Deposit Facility Rate",
+"actual": "-0.30%",
+"consensus": "-0.30%",
+"previous": "-0.30%"
+},
+{
+"gmt": "08:45",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "0.05%",
+"consensus": "0.05%",
+"previous": "0.05%"
+},
+{
+"gmt": "09:00",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "-596.21K",
+"consensus": "-655.00K",
+"previous": "-131.00K"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "368.3B",
+"consensus": "",
+"previous": "368.1B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,208K",
+"consensus": "2,248K",
+"previous": "2,264K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "293K",
+"consensus": "278K",
+"previous": "283K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "285.00K",
+"consensus": "",
+"previous": "278.50K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "-3.5",
+"consensus": "-5.0",
+"previous": "-5.9"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "19.1",
+"consensus": "",
+"previous": "23.0"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "9.40",
+"consensus": "",
+"previous": "10.90"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "-1.9",
+"consensus": "",
+"previous": "4.1"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "-1.4",
+"consensus": "",
+"previous": "-9.5"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "-1.10",
+"consensus": "",
+"previous": "-9.80"
+},
+{
+"gmt": "09:30",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "44.0",
+"consensus": "",
+"previous": "44.4"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-6.3",
+"consensus": "-5.7",
+"previous": "-5.7"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-178B",
+"consensus": "-184B",
+"previous": "-168B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "3.979M",
+"consensus": "2.811M",
+"previous": "0.234M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.409M",
+"consensus": "",
+"previous": "0.678M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.191M",
+"consensus": "",
+"previous": "0.097M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.208M",
+"consensus": "",
+"previous": "-0.216M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-1.025M",
+"consensus": "0.133M",
+"previous": "6.136M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.633M",
+"consensus": "",
+"previous": "0.054M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.338M",
+"consensus": "",
+"previous": "0.427M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "4.563M",
+"consensus": "1.378M",
+"previous": "8.438M"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "0.725%",
+"consensus": "",
+"previous": "0.664%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "URA Property Index",
+"actual": "-0.50%",
+"consensus": "",
+"previous": "-0.50%"
+}
+]

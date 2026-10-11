@@ -1,0 +1,298 @@
+[
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "2.6%",
+"consensus": "2.0%",
+"previous": "2.5%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.6%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "1.400B",
+"consensus": "1.500B",
+"previous": "1.362B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.1%",
+"consensus": "0.4%",
+"previous": "0.6%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "65.14K",
+"consensus": "64.00K",
+"previous": "64.89K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "3.50B",
+"consensus": "3.40B",
+"previous": "3.35B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "4.9B",
+"consensus": "4.9B",
+"previous": "4.7B"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "1.525%",
+"consensus": "",
+"previous": "1.488%"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.356%",
+"consensus": "",
+"previous": "0.290%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "0.79%",
+"consensus": "",
+"previous": "0.36%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-3.6%",
+"consensus": "",
+"previous": "30.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "32.4K",
+"consensus": "",
+"previous": "35.0K"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "250K",
+"consensus": "191K",
+"previous": "185K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,914K",
+"consensus": "1,925K",
+"previous": "1,951K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "250K",
+"consensus": "241K",
+"previous": "247K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "241.75K",
+"consensus": "",
+"previous": "238.25K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "1.4%",
+"consensus": "0.8%",
+"previous": "1.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "2.7%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "14.2%",
+"consensus": "",
+"previous": "6.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "5.5%",
+"consensus": "4.0%",
+"previous": "3.8%"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "51.8",
+"consensus": "",
+"previous": "52.4"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-206B",
+"consensus": "-221B",
+"previous": "-112B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-7.419M",
+"consensus": "-5.148M",
+"previous": "-4.609M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.292M",
+"consensus": "",
+"previous": "0.807M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-2.441M",
+"consensus": "",
+"previous": "-1.584M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.116M",
+"consensus": "",
+"previous": "0.270M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "8.899M",
+"consensus": "0.477M",
+"previous": "1.090M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.564M",
+"consensus": "",
+"previous": "0.181M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.132M",
+"consensus": "",
+"previous": "-0.545M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "4.813M",
+"consensus": "2.182M",
+"previous": "0.591M"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Current Account",
+"actual": "5.67B",
+"consensus": "",
+"previous": "5.01B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "11.2%",
+"consensus": "13.0%",
+"previous": "13.2%"
+},
+{
+"gmt": "20:01",
+"country": "United Kingdom",
+"eventName": "BRC Shop Price Index",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "0%",
+"consensus": "",
+"previous": "-3%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "1%",
+"consensus": "",
+"previous": "2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "-0.628B",
+"consensus": "0.550B",
+"previous": "-0.302B"
+}
+]

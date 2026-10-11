@@ -1,0 +1,265 @@
+# 🥇 Semua berita USD: petunjuk → peluang emas naik
+python -m research.news_emas              → docs/eksternal/hasil_news_emas.txt
+
+
+## ISM (246 rilis 2010-11–2026-01; petunjuk ada 96)
+   2 dtk  PLAFON naik bila petunjuk NAIK 90% (n122) | bila TURUN 10% (n121) | dasar 50% | beda +80 p 0.000 | LAMA 90%/8% (n70/73) BARU 90%/12% (n52/48)  ✅
+   2 dtk  KEJ    naik bila petunjuk NAIK 65% (n52) | bila TURUN 34% (n44) | dasar 50% | beda +31 p 0.002 | LAMA 67%/33% (n30/27) BARU 64%/35% (n22/17)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 49% (n117) | bila TURUN 54% (n113) | dasar 50% | beda -5 p 0.826 | LAMA 50%/50% (n64/66) BARU 47%/60% (n53/47)
+   10 dtk PLAFON naik bila petunjuk NAIK 86% (n122) | bila TURUN 12% (n121) | dasar 49% | beda +74 p 0.000 | LAMA 86%/12% (n70/73) BARU 87%/10% (n52/48)  ✅
+   10 dtk KEJ    naik bila petunjuk NAIK 58% (n52) | bila TURUN 39% (n44) | dasar 49% | beda +19 p 0.051 | LAMA 53%/41% (n30/27) BARU 64%/35% (n22/17)
+   10 dtk P      naik bila petunjuk NAIK 48% (n117) | bila TURUN 49% (n113) | dasar 49% | beda -1 p 0.603 | LAMA 50%/45% (n64/66) BARU 45%/53% (n53/47)
+   1 mnt  PLAFON naik bila petunjuk NAIK 82% (n122) | bila TURUN 17% (n121) | dasar 49% | beda +65 p 0.000 | LAMA 83%/19% (n70/73) BARU 81%/15% (n52/48)  ✅
+   1 mnt  KEJ    naik bila petunjuk NAIK 58% (n52) | bila TURUN 36% (n44) | dasar 49% | beda +21 p 0.030 | LAMA 57%/33% (n30/27) BARU 59%/41% (n22/17)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 48% (n117) | bila TURUN 50% (n113) | dasar 49% | beda -2 p 0.656 | LAMA 53%/45% (n64/66) BARU 42%/55% (n53/47)
+   5 mnt  PLAFON naik bila petunjuk NAIK 80% (n122) | bila TURUN 18% (n121) | dasar 49% | beda +61 p 0.000 | LAMA 79%/16% (n70/73) BARU 81%/21% (n52/48)  ✅
+   5 mnt  KEJ    naik bila petunjuk NAIK 50% (n52) | bila TURUN 45% (n44) | dasar 49% | beda +5 p 0.413 | LAMA 47%/44% (n30/27) BARU 55%/47% (n22/17)
+   5 mnt  P      naik bila petunjuk NAIK 49% (n117) | bila TURUN 47% (n113) | dasar 49% | beda +2 p 0.437 | LAMA 48%/42% (n64/66) BARU 49%/53% (n53/47)
+   15 mnt PLAFON naik bila petunjuk NAIK 66% (n122) | bila TURUN 29% (n121) | dasar 48% | beda +37 p 0.000 | LAMA 69%/33% (n70/73) BARU 63%/23% (n52/48)  ✅
+   15 mnt KEJ    naik bila petunjuk NAIK 48% (n52) | bila TURUN 41% (n44) | dasar 48% | beda +7 p 0.299 | LAMA 43%/48% (n30/27) BARU 55%/29% (n22/17)
+   15 mnt P      naik bila petunjuk NAIK 48% (n117) | bila TURUN 47% (n113) | dasar 48% | beda +1 p 0.501 | LAMA 52%/50% (n64/66) BARU 43%/43% (n53/47)
+   1 jam  PLAFON naik bila petunjuk NAIK 61% (n119) | bila TURUN 32% (n118) | dasar 46% | beda +28 p 0.000 | LAMA 60%/33% (n67/70) BARU 62%/31% (n52/48)  ✅
+   1 jam  KEJ    naik bila petunjuk NAIK 41% (n51) | bila TURUN 48% (n42) | dasar 46% | beda -6 p 0.794 | LAMA 34%/44% (n29/25) BARU 50%/53% (n22/17)
+   1 jam  P      naik bila petunjuk NAIK 46% (n117) | bila TURUN 48% (n111) | dasar 46% | beda -2 p 0.645 | LAMA 42%/53% (n64/64) BARU 51%/40% (n53/47)
+
+## CLAIMS (242 rilis 2011-01–2026-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 63% (n94) | bila TURUN 38% (n136) | dasar 48% | beda +25 p 0.000 | LAMA 54%/44% (n61/77) BARU 79%/29% (n33/59)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 44% (n59) | bila TURUN 47% (n83) | dasar 48% | beda -3 p 0.693 | LAMA 42%/48% (n45/48) BARU 50%/46% (n14/35)
+   10 dtk PLAFON naik bila petunjuk NAIK 71% (n94) | bila TURUN 27% (n136) | dasar 44% | beda +44 p 0.000 | LAMA 64%/25% (n61/77) BARU 85%/31% (n33/59)  ✅
+   10 dtk P      naik bila petunjuk NAIK 42% (n59) | bila TURUN 42% (n83) | dasar 44% | beda +0 p 0.557 | LAMA 36%/42% (n45/48) BARU 64%/43% (n14/35)
+   1 mnt  PLAFON naik bila petunjuk NAIK 76% (n94) | bila TURUN 21% (n136) | dasar 42% | beda +55 p 0.000 | LAMA 77%/23% (n61/77) BARU 73%/17% (n33/59)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 37% (n59) | bila TURUN 51% (n83) | dasar 42% | beda -13 p 0.958 | LAMA 42%/52% (n45/48) BARU 21%/49% (n14/35)
+   5 mnt  PLAFON naik bila petunjuk NAIK 68% (n94) | bila TURUN 32% (n136) | dasar 46% | beda +36 p 0.000 | LAMA 67%/36% (n61/77) BARU 70%/25% (n33/59)  ✅
+   5 mnt  P      naik bila petunjuk NAIK 44% (n59) | bila TURUN 45% (n83) | dasar 46% | beda -1 p 0.591 | LAMA 47%/48% (n45/48) BARU 36%/40% (n14/35)
+   15 mnt PLAFON naik bila petunjuk NAIK 57% (n94) | bila TURUN 36% (n136) | dasar 44% | beda +21 p 0.000 | LAMA 64%/40% (n61/77) BARU 45%/31% (n33/59)  ✅
+   15 mnt P      naik bila petunjuk NAIK 41% (n59) | bila TURUN 46% (n83) | dasar 44% | beda -5 p 0.778 | LAMA 51%/52% (n45/48) BARU 7%/37% (n14/35)
+   1 jam  PLAFON naik bila petunjuk NAIK 52% (n88) | bila TURUN 39% (n132) | dasar 43% | beda +14 p 0.038 | LAMA 53%/36% (n55/73) BARU 52%/42% (n33/59)  ✅
+   1 jam  P      naik bila petunjuk NAIK 40% (n57) | bila TURUN 48% (n83) | dasar 43% | beda -8 p 0.861 | LAMA 42%/50% (n43/48) BARU 36%/46% (n14/35)
+
+## CPI (185 rilis 2010-09–2026-09; petunjuk ada 150)
+   2 dtk  PLAFON naik bila petunjuk NAIK 79% (n70) | bila TURUN 24% (n63) | dasar 53% | beda +55 p 0.000 | LAMA 76%/22% (n50/40) BARU 85%/26% (n20/23)  ✅
+   2 dtk  KEJ    naik bila petunjuk NAIK 57% (n72) | bila TURUN 45% (n74) | dasar 53% | beda +12 p 0.093 | LAMA 57%/42% (n49/52) BARU 57%/50% (n23/22)
+   2 dtk  P      naik bila petunjuk NAIK 53% (n66) | bila TURUN 44% (n61) | dasar 53% | beda +9 p 0.206 | LAMA 48%/42% (n46/38) BARU 65%/48% (n20/23)
+   10 dtk PLAFON naik bila petunjuk NAIK 92% (n71) | bila TURUN 14% (n65) | dasar 56% | beda +78 p 0.000 | LAMA 90%/17% (n51/42) BARU 95%/9% (n20/23)  ✅
+   10 dtk KEJ    naik bila petunjuk NAIK 59% (n73) | bila TURUN 52% (n77) | dasar 56% | beda +7 p 0.243 | LAMA 60%/53% (n50/55) BARU 57%/50% (n23/22)
+   10 dtk P      naik bila petunjuk NAIK 52% (n67) | bila TURUN 48% (n62) | dasar 56% | beda +4 p 0.403 | LAMA 49%/49% (n47/39) BARU 60%/48% (n20/23)
+   1 mnt  PLAFON naik bila petunjuk NAIK 83% (n71) | bila TURUN 26% (n65) | dasar 58% | beda +57 p 0.000 | LAMA 78%/26% (n51/42) BARU 95%/26% (n20/23)  ✅
+   1 mnt  KEJ    naik bila petunjuk NAIK 68% (n73) | bila TURUN 56% (n77) | dasar 58% | beda +13 p 0.071 | LAMA 66%/56% (n50/55) BARU 74%/55% (n23/22)
+   1 mnt  P      naik bila petunjuk NAIK 58% (n67) | bila TURUN 55% (n62) | dasar 58% | beda +3 p 0.411 | LAMA 53%/56% (n47/39) BARU 70%/52% (n20/23)
+   5 mnt  PLAFON naik bila petunjuk NAIK 69% (n71) | bila TURUN 34% (n65) | dasar 57% | beda +35 p 0.000 | LAMA 61%/38% (n51/42) BARU 90%/26% (n20/23)  ✅
+   5 mnt  KEJ    naik bila petunjuk NAIK 60% (n73) | bila TURUN 57% (n77) | dasar 57% | beda +3 p 0.411 | LAMA 58%/55% (n50/55) BARU 65%/64% (n23/22)
+   5 mnt  P      naik bila petunjuk NAIK 51% (n67) | bila TURUN 60% (n62) | dasar 57% | beda -9 p 0.888 | LAMA 49%/62% (n47/39) BARU 55%/57% (n20/23)
+   15 mnt PLAFON naik bila petunjuk NAIK 70% (n71) | bila TURUN 45% (n65) | dasar 62% | beda +26 p 0.001 | LAMA 63%/45% (n51/42) BARU 90%/43% (n20/23)  ✅
+   15 mnt KEJ    naik bila petunjuk NAIK 66% (n73) | bila TURUN 58% (n77) | dasar 62% | beda +7 p 0.223 | LAMA 66%/53% (n50/55) BARU 65%/73% (n23/22)
+   15 mnt P      naik bila petunjuk NAIK 55% (n67) | bila TURUN 66% (n62) | dasar 62% | beda -11 p 0.918 | LAMA 55%/62% (n47/39) BARU 55%/74% (n20/23)
+   1 jam  PLAFON naik bila petunjuk NAIK 66% (n68) | bila TURUN 36% (n59) | dasar 52% | beda +31 p 0.001 | LAMA 62%/39% (n48/36) BARU 75%/30% (n20/23)  ✅
+   1 jam  KEJ    naik bila petunjuk NAIK 46% (n71) | bila TURUN 55% (n67) | dasar 52% | beda -9 p 0.888 | LAMA 46%/56% (n48/45) BARU 48%/55% (n23/22)
+   1 jam  P      naik bila petunjuk NAIK 42% (n66) | bila TURUN 57% (n56) | dasar 52% | beda -15 p 0.962 | LAMA 37%/61% (n46/33) BARU 55%/52% (n20/23)
+
+## NFP (171 rilis 2010-09–2026-09; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 79% (n67) | bila TURUN 24% (n94) | dasar 47% | beda +55 p 0.000 | LAMA 77%/25% (n52/60) BARU 87%/24% (n15/34)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 49% (n86) | dasar 47% | beda -3 p 0.711 | LAMA 45%/53% (n51/53) BARU 47%/42% (n15/33)
+   10 dtk PLAFON naik bila petunjuk NAIK 90% (n67) | bila TURUN 19% (n94) | dasar 47% | beda +70 p 0.000 | LAMA 88%/18% (n52/60) BARU 93%/21% (n15/34)  ✅
+   10 dtk P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 50% (n86) | dasar 47% | beda -5 p 0.764 | LAMA 43%/57% (n51/53) BARU 53%/39% (n15/33)
+   1 mnt  PLAFON naik bila petunjuk NAIK 81% (n67) | bila TURUN 20% (n94) | dasar 45% | beda +60 p 0.000 | LAMA 79%/13% (n52/60) BARU 87%/32% (n15/34)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 39% (n66) | bila TURUN 50% (n86) | dasar 45% | beda -11 p 0.930 | LAMA 31%/55% (n51/53) BARU 67%/42% (n15/33)
+   5 mnt  PLAFON naik bila petunjuk NAIK 79% (n67) | bila TURUN 30% (n94) | dasar 51% | beda +49 p 0.000 | LAMA 77%/27% (n52/60) BARU 87%/35% (n15/34)  ✅
+   5 mnt  P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 57% (n86) | dasar 51% | beda -12 p 0.944 | LAMA 41%/60% (n51/53) BARU 60%/52% (n15/33)
+   15 mnt PLAFON naik bila petunjuk NAIK 76% (n67) | bila TURUN 27% (n94) | dasar 48% | beda +50 p 0.000 | LAMA 71%/28% (n52/60) BARU 93%/24% (n15/34)  ✅
+   15 mnt P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 51% (n86) | dasar 48% | beda -6 p 0.791 | LAMA 43%/55% (n51/53) BARU 53%/45% (n15/33)
+   1 jam  PLAFON naik bila petunjuk NAIK 73% (n62) | bila TURUN 43% (n84) | dasar 55% | beda +30 p 0.000 | LAMA 70%/44% (n47/50) BARU 80%/41% (n15/34)  ✅
+   1 jam  P      naik bila petunjuk NAIK 44% (n62) | bila TURUN 65% (n80) | dasar 55% | beda -21 p 0.997 | LAMA 43%/68% (n47/47) BARU 47%/61% (n15/33)
+
+## ADP (167 rilis 2010-05–2026-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 77% (n71) | bila TURUN 17% (n88) | dasar 44% | beda +60 p 0.000 | LAMA 80%/19% (n44/67) BARU 74%/10% (n27/21)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 38% (n63) | bila TURUN 48% (n87) | dasar 44% | beda -10 p 0.923 | LAMA 42%/43% (n38/65) BARU 32%/64% (n25/22)
+   10 dtk PLAFON naik bila petunjuk NAIK 84% (n75) | bila TURUN 13% (n89) | dasar 45% | beda +71 p 0.000 | LAMA 81%/16% (n48/67) BARU 89%/5% (n27/22)  ✅
+   10 dtk P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 40% (n87) | dasar 45% | beda +5 p 0.306 | LAMA 48%/35% (n40/65) BARU 42%/55% (n26/22)
+   1 mnt  PLAFON naik bila petunjuk NAIK 84% (n75) | bila TURUN 14% (n90) | dasar 46% | beda +70 p 0.000 | LAMA 79%/18% (n48/68) BARU 93%/5% (n27/22)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 42% (n66) | bila TURUN 45% (n88) | dasar 46% | beda -3 p 0.698 | LAMA 42%/39% (n40/66) BARU 42%/64% (n26/22)
+   5 mnt  PLAFON naik bila petunjuk NAIK 76% (n75) | bila TURUN 13% (n90) | dasar 42% | beda +63 p 0.000 | LAMA 75%/15% (n48/68) BARU 78%/9% (n27/22)  ✅
+   5 mnt  P      naik bila petunjuk NAIK 42% (n66) | bila TURUN 41% (n88) | dasar 42% | beda +2 p 0.495 | LAMA 35%/39% (n40/66) BARU 54%/45% (n26/22)
+   15 mnt PLAFON naik bila petunjuk NAIK 72% (n75) | bila TURUN 29% (n90) | dasar 49% | beda +43 p 0.000 | LAMA 71%/25% (n48/68) BARU 74%/41% (n27/22)  ✅
+   15 mnt P      naik bila petunjuk NAIK 45% (n66) | bila TURUN 49% (n88) | dasar 49% | beda -3 p 0.721 | LAMA 35%/44% (n40/66) BARU 62%/64% (n26/22)
+   1 jam  PLAFON naik bila petunjuk NAIK 66% (n67) | bila TURUN 30% (n76) | dasar 46% | beda +35 p 0.000 | LAMA 62%/20% (n40/54) BARU 70%/55% (n27/22)  ✅
+   1 jam  P      naik bila petunjuk NAIK 56% (n61) | bila TURUN 37% (n76) | dasar 46% | beda +19 p 0.017 | LAMA 46%/30% (n35/54) BARU 69%/55% (n26/22)  ✅
+
+## PPI (157 rilis 2010-03–2026-01; petunjuk ada 41)
+   2 dtk  PLAFON naik bila petunjuk NAIK 77% (n70) | bila TURUN 37% (n60) | dasar 56% | beda +40 p 0.000 | LAMA 70%/43% (n44/42) BARU 88%/22% (n26/18)  ✅
+   2 dtk  KEJ    naik bila petunjuk NAIK 75% (n16) | bila TURUN 64% (n25) | dasar 56% | beda +11 p 0.351 | LAMA 67%/67% (n3/6) BARU 77%/63% (n13/19)
+   2 dtk  P      naik bila petunjuk NAIK 56% (n66) | bila TURUN 60% (n57) | dasar 56% | beda -4 p 0.715 | LAMA 55%/53% (n42/38) BARU 58%/74% (n24/19)
+   10 dtk PLAFON naik bila petunjuk NAIK 83% (n72) | bila TURUN 29% (n62) | dasar 57% | beda +54 p 0.000 | LAMA 74%/34% (n46/44) BARU 100%/17% (n26/18)  ✅
+   10 dtk KEJ    naik bila petunjuk NAIK 81% (n16) | bila TURUN 64% (n25) | dasar 57% | beda +17 p 0.213 | LAMA 33%/50% (n3/6) BARU 92%/68% (n13/19)
+   10 dtk P      naik bila petunjuk NAIK 56% (n66) | bila TURUN 60% (n58) | dasar 57% | beda -4 p 0.747 | LAMA 55%/49% (n42/39) BARU 58%/84% (n24/19)
+   1 mnt  PLAFON naik bila petunjuk NAIK 83% (n72) | bila TURUN 31% (n62) | dasar 55% | beda +53 p 0.000 | LAMA 78%/36% (n46/44) BARU 92%/17% (n26/18)  ✅
+   1 mnt  KEJ    naik bila petunjuk NAIK 75% (n16) | bila TURUN 56% (n25) | dasar 55% | beda +19 p 0.182 | LAMA 33%/50% (n3/6) BARU 85%/58% (n13/19)
+   1 mnt  P      naik bila petunjuk NAIK 48% (n66) | bila TURUN 57% (n58) | dasar 55% | beda -8 p 0.868 | LAMA 48%/49% (n42/39) BARU 50%/74% (n24/19)
+   5 mnt  PLAFON naik bila petunjuk NAIK 72% (n72) | bila TURUN 35% (n62) | dasar 53% | beda +37 p 0.000 | LAMA 67%/41% (n46/44) BARU 81%/22% (n26/18)  ✅
+   5 mnt  KEJ    naik bila petunjuk NAIK 62% (n16) | bila TURUN 64% (n25) | dasar 53% | beda -2 p 0.679 | LAMA 67%/50% (n3/6) BARU 62%/68% (n13/19)
+   5 mnt  P      naik bila petunjuk NAIK 55% (n66) | bila TURUN 53% (n58) | dasar 53% | beda +1 p 0.519 | LAMA 50%/49% (n42/39) BARU 62%/63% (n24/19)
+   15 mnt PLAFON naik bila petunjuk NAIK 65% (n72) | bila TURUN 42% (n62) | dasar 55% | beda +23 p 0.007 | LAMA 61%/43% (n46/44) BARU 73%/39% (n26/18)  ✅
+   15 mnt KEJ    naik bila petunjuk NAIK 50% (n16) | bila TURUN 72% (n25) | dasar 55% | beda -22 p 0.962 | LAMA 33%/67% (n3/6) BARU 54%/74% (n13/19)
+   15 mnt P      naik bila petunjuk NAIK 53% (n66) | bila TURUN 64% (n58) | dasar 55% | beda -11 p 0.921 | LAMA 48%/59% (n42/39) BARU 62%/74% (n24/19)
+   1 jam  PLAFON naik bila petunjuk NAIK 62% (n61) | bila TURUN 33% (n55) | dasar 50% | beda +30 p 0.002 | LAMA 60%/35% (n35/37) BARU 65%/28% (n26/18)  ✅
+   1 jam  KEJ    naik bila petunjuk NAIK 62% (n16) | bila TURUN 64% (n25) | dasar 50% | beda -2 p 0.664 | LAMA 67%/83% (n3/6) BARU 62%/58% (n13/19)
+   1 jam  P      naik bila petunjuk NAIK 55% (n58) | bila TURUN 48% (n52) | dasar 50% | beda +7 p 0.290 | LAMA 50%/42% (n34/33) BARU 62%/58% (n24/19)
+
+## MINYAK (151 rilis 2016-01–2020-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 54% (n81) | bila TURUN 52% (n65) | dasar 52% | beda +2 p 0.462 | LAMA 54%/52% (n81/65) BARU –/– (n0/0)
+   2 dtk  P      naik bila petunjuk NAIK 49% (n79) | bila TURUN 58% (n64) | dasar 52% | beda -8 p 0.883 | LAMA 49%/58% (n79/64) BARU –/– (n0/0)
+   10 dtk PLAFON naik bila petunjuk NAIK 52% (n81) | bila TURUN 55% (n66) | dasar 52% | beda -3 p 0.695 | LAMA 52%/55% (n81/66) BARU –/– (n0/0)
+   10 dtk P      naik bila petunjuk NAIK 51% (n80) | bila TURUN 55% (n64) | dasar 52% | beda -3 p 0.713 | LAMA 51%/55% (n80/64) BARU –/– (n0/0)
+   1 mnt  PLAFON naik bila petunjuk NAIK 51% (n81) | bila TURUN 50% (n66) | dasar 50% | beda +1 p 0.543 | LAMA 51%/50% (n81/66) BARU –/– (n0/0)
+   1 mnt  P      naik bila petunjuk NAIK 52% (n80) | bila TURUN 48% (n64) | dasar 50% | beda +4 p 0.381 | LAMA 52%/48% (n80/64) BARU –/– (n0/0)
+   5 mnt  PLAFON naik bila petunjuk NAIK 48% (n81) | bila TURUN 50% (n66) | dasar 50% | beda -2 p 0.648 | LAMA 48%/50% (n81/66) BARU –/– (n0/0)
+   5 mnt  P      naik bila petunjuk NAIK 48% (n80) | bila TURUN 52% (n64) | dasar 50% | beda -4 p 0.726 | LAMA 48%/52% (n80/64) BARU –/– (n0/0)
+   15 mnt PLAFON naik bila petunjuk NAIK 46% (n81) | bila TURUN 48% (n66) | dasar 48% | beda -3 p 0.698 | LAMA 46%/48% (n81/66) BARU –/– (n0/0)
+   15 mnt P      naik bila petunjuk NAIK 54% (n80) | bila TURUN 38% (n64) | dasar 48% | beda +16 p 0.036 | LAMA 54%/38% (n80/64) BARU –/– (n0/0)  ✅
+   1 jam  PLAFON naik bila petunjuk NAIK 48% (n81) | bila TURUN 55% (n66) | dasar 52% | beda -6 p 0.833 | LAMA 48%/55% (n81/66) BARU –/– (n0/0)
+   1 jam  P      naik bila petunjuk NAIK 55% (n80) | bila TURUN 47% (n64) | dasar 52% | beda +8 p 0.208 | LAMA 55%/47% (n80/64) BARU –/– (n0/0)
+
+## KONSUMEN (147 rilis 2015-09–2026-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 76% (n72) | bila TURUN 29% (n72) | dasar 53% | beda +47 p 0.000 | LAMA 83%/24% (n35/37) BARU 70%/34% (n37/35)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 49% (n70) | bila TURUN 55% (n66) | dasar 53% | beda -6 p 0.803 | LAMA 51%/52% (n35/33) BARU 46%/58% (n35/33)
+   10 dtk PLAFON naik bila petunjuk NAIK 79% (n72) | bila TURUN 25% (n73) | dasar 52% | beda +55 p 0.000 | LAMA 89%/18% (n35/38) BARU 70%/31% (n37/35)  ✅
+   10 dtk P      naik bila petunjuk NAIK 46% (n70) | bila TURUN 58% (n67) | dasar 52% | beda -12 p 0.954 | LAMA 43%/62% (n35/34) BARU 49%/55% (n35/33)
+   1 mnt  PLAFON naik bila petunjuk NAIK 68% (n72) | bila TURUN 25% (n73) | dasar 46% | beda +43 p 0.000 | LAMA 60%/32% (n35/38) BARU 76%/17% (n37/35)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 47% (n70) | bila TURUN 43% (n67) | dasar 46% | beda +4 p 0.390 | LAMA 40%/47% (n35/34) BARU 54%/39% (n35/33)
+   5 mnt  PLAFON naik bila petunjuk NAIK 68% (n72) | bila TURUN 29% (n73) | dasar 48% | beda +39 p 0.000 | LAMA 60%/32% (n35/38) BARU 76%/26% (n37/35)  ✅
+   5 mnt  P      naik bila petunjuk NAIK 51% (n70) | bila TURUN 46% (n67) | dasar 48% | beda +5 p 0.337 | LAMA 49%/44% (n35/34) BARU 54%/48% (n35/33)
+   15 mnt PLAFON naik bila petunjuk NAIK 74% (n72) | bila TURUN 34% (n73) | dasar 54% | beda +39 p 0.000 | LAMA 69%/37% (n35/38) BARU 78%/31% (n37/35)  ✅
+   15 mnt P      naik bila petunjuk NAIK 57% (n70) | bila TURUN 46% (n67) | dasar 54% | beda +11 p 0.131 | LAMA 54%/47% (n35/34) BARU 60%/45% (n35/33)
+   1 jam  PLAFON naik bila petunjuk NAIK 61% (n72) | bila TURUN 36% (n73) | dasar 49% | beda +25 p 0.003 | LAMA 63%/32% (n35/38) BARU 59%/40% (n37/35)  ✅
+   1 jam  P      naik bila petunjuk NAIK 49% (n70) | bila TURUN 46% (n67) | dasar 49% | beda +2 p 0.462 | LAMA 51%/44% (n35/34) BARU 46%/48% (n35/33)
+
+## RETAIL (127 rilis 2010-07–2025-09; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 82% (n50) | bila TURUN 15% (n60) | dasar 46% | beda +67 p 0.000 | LAMA 77%/19% (n35/42) BARU 93%/6% (n15/18)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 49% (n43) | bila TURUN 45% (n42) | dasar 46% | beda +4 p 0.459 | LAMA 50%/48% (n30/29) BARU 46%/38% (n13/13)
+   10 dtk PLAFON naik bila petunjuk NAIK 76% (n51) | bila TURUN 14% (n59) | dasar 43% | beda +63 p 0.000 | LAMA 78%/20% (n36/41) BARU 73%/0% (n15/18)  ✅
+   10 dtk P      naik bila petunjuk NAIK 42% (n43) | bila TURUN 44% (n41) | dasar 43% | beda -2 p 0.663 | LAMA 47%/50% (n30/28) BARU 31%/31% (n13/13)
+   1 mnt  PLAFON naik bila petunjuk NAIK 73% (n51) | bila TURUN 18% (n60) | dasar 43% | beda +54 p 0.000 | LAMA 78%/24% (n36/42) BARU 60%/6% (n15/18)  ✅
+   1 mnt  P      naik bila petunjuk NAIK 35% (n43) | bila TURUN 48% (n42) | dasar 43% | beda -13 p 0.923 | LAMA 40%/48% (n30/29) BARU 23%/46% (n13/13)
+   5 mnt  PLAFON naik bila petunjuk NAIK 65% (n51) | bila TURUN 20% (n60) | dasar 39% | beda +45 p 0.000 | LAMA 67%/24% (n36/42) BARU 60%/11% (n15/18)  ✅
+   5 mnt  P      naik bila petunjuk NAIK 42% (n43) | bila TURUN 36% (n42) | dasar 39% | beda +6 p 0.357 | LAMA 47%/41% (n30/29) BARU 31%/23% (n13/13)
+   15 mnt PLAFON naik bila petunjuk NAIK 57% (n51) | bila TURUN 33% (n60) | dasar 44% | beda +24 p 0.011 | LAMA 56%/33% (n36/42) BARU 60%/33% (n15/18)  ✅
+   15 mnt P      naik bila petunjuk NAIK 40% (n43) | bila TURUN 48% (n42) | dasar 44% | beda -8 p 0.822 | LAMA 33%/52% (n30/29) BARU 54%/38% (n13/13)
+   1 jam  PLAFON naik bila petunjuk NAIK 64% (n47) | bila TURUN 38% (n55) | dasar 49% | beda +26 p 0.008 | LAMA 66%/38% (n32/37) BARU 60%/39% (n15/18)  ✅
+   1 jam  P      naik bila petunjuk NAIK 42% (n40) | bila TURUN 55% (n40) | dasar 49% | beda -13 p 0.910 | LAMA 37%/56% (n27/27) BARU 54%/54% (n13/13)
+
+## FOMC (113 rilis 2010-08–2026-09; petunjuk ada 0)
+
+## GDP (107 rilis 2010-10–2025-12; petunjuk ada 46)
+   2 dtk  PLAFON naik bila petunjuk NAIK 65% (n49) | bila TURUN 40% (n42) | dasar 54% | beda +25 p 0.012 | LAMA 75%/34% (n36/29) BARU 38%/54% (n13/13)
+   2 dtk  KEJ    naik bila petunjuk NAIK 59% (n22) | bila TURUN 61% (n23) | dasar 54% | beda -2 p 0.672 | LAMA 75%/64% (n16/14) BARU 17%/56% (n6/9)
+   2 dtk  P      naik bila petunjuk NAIK 52% (n25) | bila TURUN 58% (n24) | dasar 54% | beda -6 p 0.770 | LAMA 50%/59% (n22/17) BARU 67%/57% (n3/7)
+   10 dtk PLAFON naik bila petunjuk NAIK 76% (n51) | bila TURUN 12% (n42) | dasar 47% | beda +65 p 0.000 | LAMA 79%/10% (n38/29) BARU 69%/15% (n13/13)  ✅
+   10 dtk KEJ    naik bila petunjuk NAIK 64% (n22) | bila TURUN 38% (n24) | dasar 47% | beda +26 p 0.068 | LAMA 56%/47% (n16/15) BARU 83%/22% (n6/9)
+   10 dtk P      naik bila petunjuk NAIK 56% (n25) | bila TURUN 33% (n24) | dasar 47% | beda +23 p 0.092 | LAMA 59%/29% (n22/17) BARU 33%/43% (n3/7)
+   1 mnt  PLAFON naik bila petunjuk NAIK 59% (n51) | bila TURUN 12% (n42) | dasar 40% | beda +47 p 0.000 | LAMA 61%/14% (n38/29) BARU 54%/8% (n13/13)  ✅
+   1 mnt  KEJ    naik bila petunjuk NAIK 50% (n22) | bila TURUN 38% (n24) | dasar 40% | beda +12 p 0.290 | LAMA 50%/47% (n16/15) BARU 50%/22% (n6/9)
+   1 mnt  P      naik bila petunjuk NAIK 48% (n25) | bila TURUN 38% (n24) | dasar 40% | beda +10 p 0.328 | LAMA 45%/41% (n22/17) BARU 67%/29% (n3/7)
+   5 mnt  PLAFON naik bila petunjuk NAIK 65% (n51) | bila TURUN 17% (n42) | dasar 43% | beda +48 p 0.000 | LAMA 71%/17% (n38/29) BARU 46%/15% (n13/13)  ✅
+   5 mnt  KEJ    naik bila petunjuk NAIK 41% (n22) | bila TURUN 42% (n24) | dasar 43% | beda -1 p 0.636 | LAMA 44%/60% (n16/15) BARU 33%/11% (n6/9)
+   5 mnt  P      naik bila petunjuk NAIK 44% (n25) | bila TURUN 42% (n24) | dasar 43% | beda +2 p 0.554 | LAMA 45%/47% (n22/17) BARU 33%/29% (n3/7)
+   15 mnt PLAFON naik bila petunjuk NAIK 63% (n51) | bila TURUN 24% (n42) | dasar 46% | beda +39 p 0.000 | LAMA 58%/28% (n38/29) BARU 77%/15% (n13/13)  ✅
+   15 mnt KEJ    naik bila petunjuk NAIK 59% (n22) | bila TURUN 38% (n24) | dasar 46% | beda +22 p 0.116 | LAMA 56%/47% (n16/15) BARU 67%/22% (n6/9)
+   15 mnt P      naik bila petunjuk NAIK 52% (n25) | bila TURUN 29% (n24) | dasar 46% | beda +23 p 0.088 | LAMA 50%/29% (n22/17) BARU 67%/29% (n3/7)
+   1 jam  PLAFON naik bila petunjuk NAIK 64% (n44) | bila TURUN 41% (n41) | dasar 52% | beda +22 p 0.032 | LAMA 58%/57% (n31/28) BARU 77%/8% (n13/13)  ✅
+   1 jam  KEJ    naik bila petunjuk NAIK 73% (n22) | bila TURUN 41% (n22) | dasar 52% | beda +32 p 0.032 | LAMA 69%/62% (n16/13) BARU 83%/11% (n6/9)
+   1 jam  P      naik bila petunjuk NAIK 65% (n23) | bila TURUN 38% (n24) | dasar 52% | beda +28 p 0.053 | LAMA 70%/35% (n20/17) BARU 33%/43% (n3/7)
+
+## PMI (52 rilis 2019-11–2026-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 91% (n11) | bila TURUN 10% (n21) | dasar 42% | beda +81 p 0.000 | LAMA 50%/33% (n2/6) BARU 100%/0% (n9/15)
+   2 dtk  P      naik bila petunjuk NAIK 40% (n10) | bila TURUN 33% (n18) | dasar 42% | beda +7 p 0.520 | LAMA 0%/67% (n1/3) BARU 44%/27% (n9/15)
+   10 dtk PLAFON naik bila petunjuk NAIK 91% (n11) | bila TURUN 10% (n21) | dasar 44% | beda +81 p 0.000 | LAMA 100%/33% (n2/6) BARU 89%/0% (n9/15)
+   10 dtk P      naik bila petunjuk NAIK 50% (n10) | bila TURUN 33% (n18) | dasar 44% | beda +17 p 0.317 | LAMA 0%/100% (n1/3) BARU 56%/20% (n9/15)
+   1 mnt  PLAFON naik bila petunjuk NAIK 82% (n11) | bila TURUN 14% (n21) | dasar 46% | beda +68 p 0.001 | LAMA 50%/33% (n2/6) BARU 89%/7% (n9/15)
+   1 mnt  P      naik bila petunjuk NAIK 60% (n10) | bila TURUN 39% (n18) | dasar 46% | beda +21 p 0.250 | LAMA 100%/0% (n1/3) BARU 56%/47% (n9/15)
+   5 mnt  PLAFON naik bila petunjuk NAIK 91% (n11) | bila TURUN 14% (n21) | dasar 48% | beda +77 p 0.000 | LAMA 100%/33% (n2/6) BARU 89%/7% (n9/15)
+   5 mnt  P      naik bila petunjuk NAIK 60% (n10) | bila TURUN 44% (n18) | dasar 48% | beda +16 p 0.340 | LAMA 100%/67% (n1/3) BARU 56%/40% (n9/15)
+   15 mnt PLAFON naik bila petunjuk NAIK 82% (n11) | bila TURUN 19% (n21) | dasar 40% | beda +63 p 0.001 | LAMA 100%/17% (n2/6) BARU 78%/20% (n9/15)
+   15 mnt P      naik bila petunjuk NAIK 50% (n10) | bila TURUN 33% (n18) | dasar 40% | beda +17 p 0.328 | LAMA 100%/33% (n1/3) BARU 44%/33% (n9/15)
+   1 jam  PLAFON naik bila petunjuk NAIK 73% (n11) | bila TURUN 33% (n21) | dasar 46% | beda +39 p 0.043 | LAMA 50%/50% (n2/6) BARU 78%/27% (n9/15)
+   1 jam  P      naik bila petunjuk NAIK 80% (n10) | bila TURUN 39% (n18) | dasar 46% | beda +41 p 0.049 | LAMA 100%/33% (n1/3) BARU 78%/40% (n9/15)
+
+## PCE (52 rilis 2021-07–2026-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 36% (n11) | bila TURUN 25% (n8) | dasar 38% | beda +11 p 0.500 | LAMA 100%/– (n1/0) BARU 30%/25% (n10/8)
+   2 dtk  P      naik bila petunjuk NAIK 55% (n11) | bila TURUN 12% (n8) | dasar 38% | beda +42 p 0.079 | LAMA 0%/– (n1/0) BARU 60%/12% (n10/8)
+   10 dtk PLAFON naik bila petunjuk NAIK 91% (n11) | bila TURUN 0% (n8) | dasar 44% | beda +91 p 0.000 | LAMA 100%/– (n1/0) BARU 90%/0% (n10/8)  ✅
+   10 dtk P      naik bila petunjuk NAIK 18% (n11) | bila TURUN 50% (n8) | dasar 44% | beda -32 p 0.974 | LAMA 0%/– (n1/0) BARU 20%/50% (n10/8)
+   1 mnt  PLAFON naik bila petunjuk NAIK 73% (n11) | bila TURUN 25% (n8) | dasar 63% | beda +48 p 0.055 | LAMA 0%/– (n1/0) BARU 80%/25% (n10/8)
+   1 mnt  P      naik bila petunjuk NAIK 45% (n11) | bila TURUN 88% (n8) | dasar 63% | beda -42 p 0.991 | LAMA 100%/– (n1/0) BARU 40%/88% (n10/8)
+   5 mnt  PLAFON naik bila petunjuk NAIK 64% (n11) | bila TURUN 50% (n8) | dasar 60% | beda +14 p 0.435 | LAMA 0%/– (n1/0) BARU 70%/50% (n10/8)
+   5 mnt  P      naik bila petunjuk NAIK 55% (n11) | bila TURUN 88% (n8) | dasar 60% | beda -33 p 0.986 | LAMA 100%/– (n1/0) BARU 50%/88% (n10/8)
+   15 mnt PLAFON naik bila petunjuk NAIK 73% (n11) | bila TURUN 38% (n8) | dasar 54% | beda +35 p 0.141 | LAMA 0%/– (n1/0) BARU 80%/38% (n10/8)
+   15 mnt P      naik bila petunjuk NAIK 64% (n11) | bila TURUN 62% (n8) | dasar 54% | beda +1 p 0.665 | LAMA 100%/– (n1/0) BARU 60%/62% (n10/8)
+   1 jam  PLAFON naik bila petunjuk NAIK 91% (n11) | bila TURUN 25% (n8) | dasar 48% | beda +66 p 0.008 | LAMA 0%/– (n1/0) BARU 100%/25% (n10/8)  ✅
+   1 jam  P      naik bila petunjuk NAIK 18% (n11) | bila TURUN 62% (n8) | dasar 48% | beda -44 p 0.994 | LAMA 0%/– (n1/0) BARU 20%/62% (n10/8)
+
+## RUMAH (33 rilis 2015-10–2024-07; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 69% (n16) | bila TURUN 29% (n14) | dasar 52% | beda +40 p 0.032 | LAMA 83%/27% (n12/11) BARU 25%/33% (n4/3)
+   2 dtk  P      naik bila petunjuk NAIK 33% (n12) | bila TURUN 60% (n10) | dasar 52% | beda -27 p 0.960 | LAMA 44%/62% (n9/8) BARU 0%/50% (n3/2)
+   10 dtk PLAFON naik bila petunjuk NAIK 88% (n16) | bila TURUN 36% (n14) | dasar 64% | beda +52 p 0.004 | LAMA 83%/27% (n12/11) BARU 100%/67% (n4/3)
+   10 dtk P      naik bila petunjuk NAIK 58% (n12) | bila TURUN 60% (n10) | dasar 64% | beda -2 p 0.693 | LAMA 44%/62% (n9/8) BARU 100%/50% (n3/2)
+   1 mnt  PLAFON naik bila petunjuk NAIK 94% (n16) | bila TURUN 29% (n14) | dasar 61% | beda +65 p 0.001 | LAMA 92%/18% (n12/11) BARU 100%/67% (n4/3)
+   1 mnt  P      naik bila petunjuk NAIK 42% (n12) | bila TURUN 80% (n10) | dasar 61% | beda -38 p 0.988 | LAMA 22%/88% (n9/8) BARU 100%/50% (n3/2)
+   5 mnt  PLAFON naik bila petunjuk NAIK 75% (n16) | bila TURUN 29% (n14) | dasar 58% | beda +46 p 0.013 | LAMA 75%/36% (n12/11) BARU 75%/0% (n4/3)
+   5 mnt  P      naik bila petunjuk NAIK 67% (n12) | bila TURUN 60% (n10) | dasar 58% | beda +7 p 0.550 | LAMA 67%/62% (n9/8) BARU 67%/50% (n3/2)
+   15 mnt PLAFON naik bila petunjuk NAIK 69% (n16) | bila TURUN 50% (n14) | dasar 58% | beda +19 p 0.249 | LAMA 67%/36% (n12/11) BARU 75%/100% (n4/3)
+   15 mnt P      naik bila petunjuk NAIK 58% (n12) | bila TURUN 60% (n10) | dasar 58% | beda -2 p 0.687 | LAMA 44%/62% (n9/8) BARU 100%/50% (n3/2)
+   1 jam  PLAFON naik bila petunjuk NAIK 50% (n16) | bila TURUN 64% (n14) | dasar 58% | beda -14 p 0.879 | LAMA 50%/64% (n12/11) BARU 50%/67% (n4/3)
+   1 jam  P      naik bila petunjuk NAIK 67% (n12) | bila TURUN 40% (n10) | dasar 58% | beda +27 p 0.210 | LAMA 67%/38% (n9/8) BARU 67%/50% (n3/2)
+
+## DURABLE (33 rilis 2015-10–2024-02; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 90% (n21) | bila TURUN 20% (n10) | dasar 69% | beda +70 p 0.000 | LAMA 90%/20% (n20/10) BARU 100%/– (n1/0)  ✅
+   2 dtk  P      naik bila petunjuk NAIK 55% (n11) | bila TURUN 83% (n6) | dasar 69% | beda -29 p 0.959 | LAMA 55%/83% (n11/6) BARU –/– (n0/0)
+   10 dtk PLAFON naik bila petunjuk NAIK 82% (n22) | bila TURUN 30% (n10) | dasar 64% | beda +52 p 0.008 | LAMA 81%/30% (n21/10) BARU 100%/– (n1/0)  ✅
+   10 dtk P      naik bila petunjuk NAIK 67% (n12) | bila TURUN 50% (n6) | dasar 64% | beda +17 p 0.424 | LAMA 67%/50% (n12/6) BARU –/– (n0/0)
+   1 mnt  PLAFON naik bila petunjuk NAIK 68% (n22) | bila TURUN 50% (n10) | dasar 64% | beda +18 p 0.280 | LAMA 67%/50% (n21/10) BARU 100%/– (n1/0)
+   1 mnt  P      naik bila petunjuk NAIK 67% (n12) | bila TURUN 50% (n6) | dasar 64% | beda +17 p 0.425 | LAMA 67%/50% (n12/6) BARU –/– (n0/0)
+   5 mnt  PLAFON naik bila petunjuk NAIK 64% (n22) | bila TURUN 50% (n10) | dasar 58% | beda +14 p 0.371 | LAMA 62%/50% (n21/10) BARU 100%/– (n1/0)
+   5 mnt  P      naik bila petunjuk NAIK 50% (n12) | bila TURUN 33% (n6) | dasar 58% | beda +17 p 0.437 | LAMA 50%/33% (n12/6) BARU –/– (n0/0)
+   15 mnt PLAFON naik bila petunjuk NAIK 55% (n22) | bila TURUN 40% (n10) | dasar 48% | beda +15 p 0.345 | LAMA 57%/40% (n21/10) BARU 0%/– (n1/0)
+   15 mnt P      naik bila petunjuk NAIK 58% (n12) | bila TURUN 50% (n6) | dasar 48% | beda +8 p 0.568 | LAMA 58%/50% (n12/6) BARU –/– (n0/0)
+   1 jam  PLAFON naik bila petunjuk NAIK 59% (n22) | bila TURUN 60% (n10) | dasar 58% | beda -1 p 0.670 | LAMA 62%/60% (n21/10) BARU 0%/– (n1/0)
+   1 jam  P      naik bila petunjuk NAIK 58% (n12) | bila TURUN 50% (n6) | dasar 58% | beda +8 p 0.559 | LAMA 58%/50% (n12/6) BARU –/– (n0/0)
+
+## JOLTS (32 rilis 2014-01–2025-12; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 92% (n13) | bila TURUN 18% (n17) | dasar 48% | beda +75 p 0.000 | LAMA 67%/100% (n3/1) BARU 100%/12% (n10/16)
+   2 dtk  P      naik bila petunjuk NAIK 50% (n8) | bila TURUN 43% (n7) | dasar 48% | beda +7 p 0.591 | LAMA 100%/50% (n1/2) BARU 43%/40% (n7/5)
+   10 dtk PLAFON naik bila petunjuk NAIK 85% (n13) | bila TURUN 11% (n18) | dasar 41% | beda +74 p 0.000 | LAMA 67%/100% (n3/2) BARU 90%/0% (n10/16)
+   10 dtk P      naik bila petunjuk NAIK 44% (n9) | bila TURUN 29% (n7) | dasar 41% | beda +16 p 0.449 | LAMA 100%/50% (n2/2) BARU 29%/20% (n7/5)
+   1 mnt  PLAFON naik bila petunjuk NAIK 85% (n13) | bila TURUN 28% (n18) | dasar 50% | beda +57 p 0.003 | LAMA 67%/100% (n3/2) BARU 90%/19% (n10/16)
+   1 mnt  P      naik bila petunjuk NAIK 56% (n9) | bila TURUN 43% (n7) | dasar 50% | beda +13 p 0.503 | LAMA 100%/50% (n2/2) BARU 43%/40% (n7/5)
+   5 mnt  PLAFON naik bila petunjuk NAIK 77% (n13) | bila TURUN 33% (n18) | dasar 53% | beda +44 p 0.021 | LAMA 67%/100% (n3/2) BARU 80%/25% (n10/16)
+   5 mnt  P      naik bila petunjuk NAIK 44% (n9) | bila TURUN 86% (n7) | dasar 53% | beda -41 p 0.989 | LAMA 50%/100% (n2/2) BARU 43%/80% (n7/5)
+   15 mnt PLAFON naik bila petunjuk NAIK 69% (n13) | bila TURUN 28% (n18) | dasar 47% | beda +41 p 0.026 | LAMA 33%/0% (n3/2) BARU 80%/31% (n10/16)
+   15 mnt P      naik bila petunjuk NAIK 33% (n9) | bila TURUN 71% (n7) | dasar 47% | beda -38 p 0.982 | LAMA 0%/50% (n2/2) BARU 43%/80% (n7/5)
+   1 jam  PLAFON naik bila petunjuk NAIK 62% (n13) | bila TURUN 50% (n18) | dasar 53% | beda +12 p 0.396 | LAMA 33%/50% (n3/2) BARU 70%/50% (n10/16)
+   1 jam  P      naik bila petunjuk NAIK 44% (n9) | bila TURUN 57% (n7) | dasar 53% | beda -13 p 0.842 | LAMA 0%/50% (n2/2) BARU 57%/60% (n7/5)
+
+## MANUFAKTUR (20 rilis 2015-10–2024-07; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 58% (n12) | bila TURUN 25% (n8) | dasar 45% | beda +33 p 0.159 | LAMA 67%/50% (n3/2) BARU 56%/17% (n9/6)
+   2 dtk  P      naik bila petunjuk NAIK 40% (n5) | bila TURUN 75% (n4) | dasar 45% | beda -35 p 0.961 | LAMA 50%/100% (n2/1) BARU 33%/67% (n3/3)
+   10 dtk PLAFON naik bila petunjuk NAIK 75% (n12) | bila TURUN 38% (n8) | dasar 60% | beda +38 p 0.120 | LAMA 67%/50% (n3/2) BARU 78%/33% (n9/6)
+   10 dtk P      naik bila petunjuk NAIK 60% (n5) | bila TURUN 75% (n4) | dasar 60% | beda -15 p 0.873 | LAMA 50%/100% (n2/1) BARU 67%/67% (n3/3)
+   1 mnt  PLAFON naik bila petunjuk NAIK 83% (n12) | bila TURUN 12% (n8) | dasar 55% | beda +71 p 0.003 | LAMA 67%/0% (n3/2) BARU 89%/17% (n9/6)
+   1 mnt  P      naik bila petunjuk NAIK 40% (n5) | bila TURUN 100% (n4) | dasar 55% | beda -60 p 1.000 | LAMA 0%/100% (n2/1) BARU 67%/100% (n3/3)
+   5 mnt  PLAFON naik bila petunjuk NAIK 42% (n12) | bila TURUN 0% (n8) | dasar 25% | beda +42 p 0.052 | LAMA 33%/0% (n3/2) BARU 44%/0% (n9/6)
+   5 mnt  P      naik bila petunjuk NAIK 20% (n5) | bila TURUN 25% (n4) | dasar 25% | beda -5 p 0.839 | LAMA 0%/0% (n2/1) BARU 33%/33% (n3/3)
+   15 mnt PLAFON naik bila petunjuk NAIK 42% (n12) | bila TURUN 25% (n8) | dasar 35% | beda +17 p 0.402 | LAMA 33%/50% (n3/2) BARU 44%/17% (n9/6)
+   15 mnt P      naik bila petunjuk NAIK 20% (n5) | bila TURUN 25% (n4) | dasar 35% | beda -5 p 0.828 | LAMA 0%/0% (n2/1) BARU 33%/33% (n3/3)
+   1 jam  PLAFON naik bila petunjuk NAIK 50% (n12) | bila TURUN 25% (n8) | dasar 40% | beda +25 p 0.263 | LAMA 67%/0% (n3/2) BARU 44%/33% (n9/6)
+   1 jam  P      naik bila petunjuk NAIK 40% (n5) | bila TURUN 25% (n4) | dasar 40% | beda +15 p 0.594 | LAMA 50%/0% (n2/1) BARU 33%/33% (n3/3)
+
+## NERACA (10 rilis 2013-12–2016-01; petunjuk ada 0)
+   2 dtk  PLAFON naik bila petunjuk NAIK 75% (n4) | bila TURUN 25% (n4) | dasar 44% | beda +50 p 0.245 | LAMA 75%/25% (n4/4) BARU –/– (n0/0)
+   10 dtk PLAFON naik bila petunjuk NAIK 50% (n4) | bila TURUN 20% (n5) | dasar 40% | beda +30 p 0.394 | LAMA 50%/20% (n4/5) BARU –/– (n0/0)
+   1 mnt  PLAFON naik bila petunjuk NAIK 25% (n4) | bila TURUN 20% (n5) | dasar 30% | beda +5 p 0.733 | LAMA 25%/20% (n4/5) BARU –/– (n0/0)
+   5 mnt  PLAFON naik bila petunjuk NAIK 0% (n4) | bila TURUN 40% (n5) | dasar 30% | beda -40 p 1.000 | LAMA 0%/40% (n4/5) BARU –/– (n0/0)
+   15 mnt PLAFON naik bila petunjuk NAIK 25% (n4) | bila TURUN 40% (n5) | dasar 40% | beda -15 p 0.880 | LAMA 25%/40% (n4/5) BARU –/– (n0/0)
+   1 jam  PLAFON naik bila petunjuk NAIK 50% (n4) | bila TURUN 60% (n5) | dasar 60% | beda -10 p 0.834 | LAMA 50%/60% (n4/5) BARU –/– (n0/0)
+
+## ECI (6 rilis 2015-10–2025-12; petunjuk ada 0)
+
+Petunjuk lolos (tanpa plafon): ISM KEJ [2 dtk], ISM KEJ [1 mnt], ADP P [1 jam], MINYAK P [15 mnt]

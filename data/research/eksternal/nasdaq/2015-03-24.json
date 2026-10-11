@@ -1,0 +1,426 @@
+[
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Wage Inflation",
+"actual": "1.0%",
+"consensus": "",
+"previous": "1.1%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Wage Inflation",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "1.2%",
+"consensus": "1.3%",
+"previous": "1.4%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.2%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "-0.9%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.9%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "8.4%",
+"consensus": "10.2%",
+"previous": "9.8%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "-13.5%",
+"consensus": "-12.4%",
+"previous": "-14.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "0.2%",
+"consensus": "1.6%",
+"previous": "-3.6%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "-1.8%",
+"consensus": "-1.9%",
+"previous": "-1.9%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "0.2%",
+"consensus": "-0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "-0.8%"
+},
+{
+"gmt": "06:05",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "3.0%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "07:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.7%",
+"consensus": "1.6%",
+"previous": "1.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "240.25",
+"consensus": "",
+"previous": "239.87"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "-0.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "234.72",
+"consensus": "234.60",
+"previous": "233.71"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.1%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "2.8%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.3%",
+"consensus": "0.5%",
+"previous": "0.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "5.1%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "219.0",
+"consensus": "",
+"previous": "218.3"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-6.90B",
+"consensus": "-7.70B",
+"previous": "-10.65B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "2.80B",
+"consensus": "3.20B",
+"previous": "3.97B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "539K",
+"consensus": "465K",
+"previous": "500K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "7.8%",
+"consensus": "-1.3%",
+"previous": "4.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-8",
+"consensus": "2",
+"previous": "0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-13",
+"consensus": "",
+"previous": "-1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "12",
+"consensus": "",
+"previous": "18"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.020%",
+"consensus": "",
+"previous": "0.050%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "0.598%",
+"consensus": "",
+"previous": "0.603%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "89.98B",
+"consensus": "89.00B",
+"previous": "125.00B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "4.800M",
+"consensus": "",
+"previous": "10.500M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "-0.641M",
+"consensus": "",
+"previous": "-0.252M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "-2.600M",
+"consensus": "",
+"previous": "-0.583M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "3.92B",
+"consensus": "4.09B",
+"previous": "3.68B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "3.87B",
+"consensus": "3.75B",
+"previous": "3.64B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "50M",
+"consensus": "392M",
+"previous": "33M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-2,180M",
+"consensus": "-1,820M",
+"previous": "-1,430M"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "2.7%",
+"consensus": "2.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.5%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Financial Stability Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

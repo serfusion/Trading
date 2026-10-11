@@ -1,0 +1,378 @@
+[
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "-0.3%"
+},
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Public Deficit",
+"actual": "2.1%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "1.450%",
+"consensus": "",
+"previous": "1.423%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 30-Year Obligacion Auction",
+"actual": "2.761%",
+"consensus": "",
+"previous": "2.569%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.271%",
+"consensus": "",
+"previous": "0.207%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "0.78%",
+"consensus": "",
+"previous": "0.46%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 30-Year OAT Auction",
+"actual": "1.76%",
+"consensus": "",
+"previous": "1.01%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "0.8%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "0.1%",
+"consensus": "-0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "06:35",
+"country": "United Kingdom",
+"eventName": "20-Year Treasury Gilt Auction",
+"actual": "1.970%",
+"consensus": "",
+"previous": "1.811%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "-1.1%",
+"consensus": "0.5%",
+"previous": "-7.3%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.2%",
+"consensus": "2.0%",
+"previous": "-1.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "42.4%",
+"consensus": "",
+"previous": "-13.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "33.6K",
+"consensus": "",
+"previous": "26.9K"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "153K",
+"consensus": "170K",
+"previous": "215K"
+},
+{
+"gmt": "09:20",
+"country": "Brazil",
+"eventName": "Auto Production",
+"actual": "-7.1%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "09:20",
+"country": "Brazil",
+"eventName": "Auto Sales",
+"actual": "14.7%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,112K",
+"consensus": "2,051K",
+"previous": "2,096K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "235K",
+"consensus": "260K",
+"previous": "263K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "256.75K",
+"consensus": "",
+"previous": "262.50K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.7%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "1.4%",
+"consensus": "",
+"previous": "0.8%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "4.1%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-2.0%",
+"consensus": "-1.5%",
+"previous": "3.3%"
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "45.5",
+"consensus": "",
+"previous": "46.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "61.4",
+"consensus": "61.0",
+"previous": "61.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "53.8",
+"consensus": "",
+"previous": "58.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "61.6",
+"consensus": "",
+"previous": "57.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "57.2",
+"consensus": "56.6",
+"previous": "57.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "57.0",
+"consensus": "",
+"previous": "56.3"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-49B",
+"consensus": "-82B",
+"previous": "-237B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-7.051M",
+"consensus": "-2.152M",
+"previous": "0.614M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-1.043M",
+"consensus": "",
+"previous": "-0.374M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "1.074M",
+"consensus": "",
+"previous": "0.172M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.372M",
+"consensus": "",
+"previous": "-0.165M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "10.051M",
+"consensus": "1.100M",
+"previous": "-1.881M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-1.070M",
+"consensus": "",
+"previous": "0.387M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.986M",
+"consensus": "",
+"previous": "-0.585M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "8.307M",
+"consensus": "1.786M",
+"previous": "-1.593M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-501.4B",
+"consensus": "",
+"previous": "-216.7B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "58.5B",
+"consensus": "",
+"previous": "114.1B"
+},
+{
+"gmt": "20:00",
+"country": "Japan",
+"eventName": "Average Cash Earnings",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "20:00",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "-1.30%",
+"consensus": "",
+"previous": "-1.40%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "8%",
+"consensus": "",
+"previous": "1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "0%",
+"consensus": "",
+"previous": "2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "1.243B",
+"consensus": "-0.500B",
+"previous": "-1.119B"
+}
+]

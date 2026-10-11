@@ -1,0 +1,306 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "2.594B",
+"consensus": "1.470B",
+"previous": "0.521B"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "-1.1%",
+"consensus": "-0.8%",
+"previous": "-0.5%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "-0.6%",
+"consensus": "-0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "14.3%",
+"consensus": "",
+"previous": "14.5%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Industrial New Orders",
+"actual": "-4.9%",
+"consensus": "-0.5%",
+"previous": "2.1%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Industrial New Orders",
+"actual": "1.9%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Industrial Sales",
+"actual": "-0.30%",
+"consensus": "",
+"previous": "0.90%"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "3.559%",
+"consensus": "",
+"previous": "4.098%"
+},
+{
+"gmt": "05:45",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "2.263%",
+"consensus": "",
+"previous": "2.254%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 2-Year BTAN Auction",
+"actual": "0.28%",
+"consensus": "",
+"previous": "0.34%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "0.57%",
+"consensus": "",
+"previous": "0.31%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "1.06%",
+"consensus": "",
+"previous": "1.24%"
+},
+{
+"gmt": "06:35",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "2.730%",
+"consensus": "",
+"previous": "2.870%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "3",
+"consensus": "5",
+"previous": "-2"
+},
+{
+"gmt": "07:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "492.50B",
+"consensus": "",
+"previous": "490.20B"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Unemployment Rate",
+"actual": "4.8%",
+"consensus": "5.1%",
+"previous": "4.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,981K",
+"consensus": "2,970K",
+"previous": "2,944K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.7%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "1.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "336K",
+"consensus": "335K",
+"previous": "339K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "338.50K",
+"consensus": "",
+"previous": "336.75K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "0.1%",
+"consensus": "-0.1%",
+"previous": "-0.5%"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "34.7",
+"consensus": "",
+"previous": "34.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "MBA Delinquency Rates",
+"actual": "6.39%",
+"consensus": "",
+"previous": "6.41%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "-6.3",
+"consensus": "8.0",
+"previous": "9.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "40.2",
+"consensus": "",
+"previous": "34.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "4.8",
+"consensus": "",
+"previous": "10.0"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.3%",
+"consensus": "0.5%",
+"previous": "0%"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-12.7",
+"consensus": "-11.3",
+"previous": "-11.7"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-250B",
+"consensus": "-251B",
+"previous": "-237B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "0.973M",
+"consensus": "2.013M",
+"previous": "3.267M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-0.339M",
+"consensus": "-1.888M",
+"previous": "-0.731M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "0.309M",
+"consensus": "-0.538M",
+"previous": "-1.853M"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

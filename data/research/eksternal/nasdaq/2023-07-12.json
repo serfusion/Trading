@@ -1,0 +1,618 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "BoE Financial Stability Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "BoE FPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Core CPI",
+"actual": "5.9%",
+"consensus": "5.9%",
+"previous": "6.1%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "1.9%",
+"consensus": "1.9%",
+"previous": "3.2%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.0%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "-0.1%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "1.6%",
+"consensus": "1.6%",
+"previous": "2.9%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "10-Year Treasury Gilt Auction",
+"actual": "4.595%",
+"consensus": "",
+"previous": "4.351%"
+},
+{
+"gmt": "05:10",
+"country": "Italy",
+"eventName": "Italian 12-Month BOT Auction",
+"actual": "3.947%",
+"consensus": "",
+"previous": "3.637%"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "2.640%",
+"consensus": "",
+"previous": "2.430%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "7.07%",
+"consensus": "",
+"previous": "6.85%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-4.4%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "165.3",
+"consensus": "",
+"previous": "162.4"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "208.4",
+"consensus": "",
+"previous": "206.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "416.0",
+"consensus": "",
+"previous": "421.3"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "11.3%",
+"consensus": "10.5%",
+"previous": "10.6%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "CPI",
+"actual": "4.81%",
+"consensus": "4.58%",
+"previous": "4.31%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Cumulative Industrial Production",
+"actual": "4.80%",
+"consensus": "5.10%",
+"previous": "5.10%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Industrial Production",
+"actual": "5.2%",
+"consensus": "4.8%",
+"previous": "4.2%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Manufacturing Output",
+"actual": "5.7%",
+"consensus": "1.8%",
+"previous": "5.2%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian Service Sector Growth",
+"actual": "0.9%",
+"consensus": "0.0%",
+"previous": "-1.5%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian Service Sector Growth",
+"actual": "4.7%",
+"consensus": "4.5%",
+"previous": "2.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "4.8%",
+"consensus": "5.0%",
+"previous": "5.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "308.31",
+"consensus": "309.03",
+"previous": "307.82"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "3.0%",
+"consensus": "3.1%",
+"previous": "4.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "305.11",
+"consensus": "305.22",
+"previous": "304.13"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, s.a",
+"actual": "303.84",
+"consensus": "303.70",
+"previous": "303.29"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI, n.s.a",
+"actual": "0.32%",
+"consensus": "",
+"previous": "0.25%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "0.5%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Trade Balance",
+"actual": "10.42B",
+"consensus": "",
+"previous": "7.27B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Monetary Policy Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Interest Rate Decision",
+"actual": "5.00%",
+"consensus": "5.00%",
+"previous": "4.75%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "5.946M",
+"consensus": "0.483M",
+"previous": "-1.508M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.629M",
+"consensus": "",
+"previous": "-0.224M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.599M",
+"consensus": "-0.527M",
+"previous": "1.895M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-1.605M",
+"consensus": "-0.805M",
+"previous": "-0.400M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.236M",
+"consensus": "-0.011M",
+"previous": "0.141M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "4.815M",
+"consensus": "-0.262M",
+"previous": "-1.045M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.158M",
+"consensus": "-0.047M",
+"previous": "0.148M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.439M",
+"consensus": "-0.234M",
+"previous": "-0.061M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "2.6%",
+"consensus": "",
+"previous": "-1.1%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-0.003M",
+"consensus": "-0.727M",
+"previous": "-2.550M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "54.41",
+"consensus": "",
+"previous": "49.62"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "BoC Senior Deputy Governor Rogers Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "BOC Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "49.55",
+"consensus": "",
+"previous": "51.43"
+},
+{
+"gmt": "11:00",
+"country": "Brazil",
+"eventName": "Brazil Thomson Reuters IPSOS PCSI",
+"actual": "60.03",
+"consensus": "",
+"previous": "58.64"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "WASDE Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "2.5%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year Note Auction",
+"actual": "3.857%",
+"consensus": "",
+"previous": "3.791%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "0.706B",
+"consensus": "",
+"previous": "2.843B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Beige Book",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Export Price Index",
+"actual": "-14.7%",
+"consensus": "-11.6%",
+"previous": "-11.3%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Import Price Index",
+"actual": "-15.7%",
+"consensus": "-15.2%",
+"previous": "-12.3%"
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "47.5",
+"consensus": "49.8",
+"previous": "48.9"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Electronic Card Retail Sales",
+"actual": "4.2%",
+"consensus": "9.9%",
+"previous": "3.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Electronic Card Retail Sales",
+"actual": "1.0%",
+"consensus": "-0.2%",
+"previous": "-1.7%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "FPI",
+"actual": "1.6%",
+"consensus": "1.5%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-950.5B",
+"consensus": "",
+"previous": "1,252.7B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "181.7B",
+"consensus": "",
+"previous": "195.0B"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Monetary Policy Board's Policy Setting Meeting Dates",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Interest Rate Decision",
+"actual": "3.50%",
+"consensus": "3.50%",
+"previous": "3.50%"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Inflation Expectations",
+"actual": "5.2%",
+"consensus": "5.1%",
+"previous": "5.2%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Exports",
+"actual": "-12.4%",
+"consensus": "-9.5%",
+"previous": "-7.5%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Imports",
+"actual": "-6.8%",
+"consensus": "-4.0%",
+"previous": "-4.5%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Trade Balance (USD)",
+"actual": "70.62B",
+"consensus": "74.80B",
+"previous": "65.81B"
+}
+]

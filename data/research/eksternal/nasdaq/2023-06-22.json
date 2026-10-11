@@ -1,0 +1,450 @@
+[
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "101",
+"consensus": "98",
+"previous": "99"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "SNB Interest Rate Decision",
+"actual": "1.75%",
+"consensus": "1.75%",
+"previous": "1.50%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "SNB Monetary Policy Assessment",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "United States",
+"eventName": "Fed Waller Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "SNB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:15",
+"country": "Euro Zone",
+"eventName": "ECB's Panetta Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "7",
+"consensus": "7",
+"previous": "7"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "2",
+"consensus": "2",
+"previous": "2"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "5.00%",
+"consensus": "4.75%",
+"previous": "4.50%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BOE Inflation Letter",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:05",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Chicago Fed National Activity",
+"actual": "-0.15",
+"consensus": "0.00",
+"previous": "0.14"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,759K",
+"consensus": "1,782K",
+"previous": "1,772K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Current Account",
+"actual": "-219.3B",
+"consensus": "-216.9B",
+"previous": "-216.2B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "264K",
+"consensus": "260K",
+"previous": "264K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "255.75K",
+"consensus": "242.01K",
+"previous": "247.25K"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "587.5B",
+"consensus": "",
+"previous": "585.7B"
+},
+{
+"gmt": "09:25",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "203.89B",
+"consensus": "",
+"previous": "171.06B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Federal Tax Revenue",
+"actual": "176.81B",
+"consensus": "",
+"previous": "203.89B"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "FOMC Member Bowman Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "4.30M",
+"consensus": "4.25M",
+"previous": "4.29M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-3.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Fed Chair Powell Testifies",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "-0.7%",
+"consensus": "-0.7%",
+"previous": "-0.6%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-16.1",
+"consensus": "-17.0",
+"previous": "-17.4"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "95B",
+"consensus": "91B",
+"previous": "84B"
+},
+{
+"gmt": "10:30",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-3.831M",
+"consensus": "0.329M",
+"previous": "7.919M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.116M",
+"consensus": "",
+"previous": "-0.061M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-1.493M",
+"consensus": "-0.048M",
+"previous": "-0.814M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.098M",
+"consensus": "0.618M",
+"previous": "1.554M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.089M",
+"consensus": "0.020M",
+"previous": "-0.255M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.433M",
+"consensus": "-0.001M",
+"previous": "2.123M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.352M",
+"consensus": "0.031M",
+"previous": "0.106M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.380M",
+"consensus": "0.368M",
+"previous": "1.405M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "-2.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "0.479M",
+"consensus": "1.091M",
+"previous": "2.108M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Composite Index",
+"actual": "-12",
+"consensus": "-5",
+"previous": "-1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Manufacturing Index",
+"actual": "-10",
+"consensus": "-11",
+"previous": "-2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.010%",
+"consensus": "",
+"previous": "5.010%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.140%",
+"consensus": "",
+"previous": "5.080%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year TIPS Auction",
+"actual": "1.832%",
+"consensus": "",
+"previous": "1.320%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,362B",
+"consensus": "",
+"previous": "8,388B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.203T",
+"consensus": "",
+"previous": "3.306T"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-24",
+"consensus": "-26",
+"previous": "-27"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "3.2%",
+"consensus": "3.1%",
+"previous": "3.4%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "3.2%",
+"consensus": "4.1%",
+"previous": "3.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - Dragon Boat Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Dragon Boat Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Dragon Boat Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

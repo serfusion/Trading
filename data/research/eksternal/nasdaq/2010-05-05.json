@@ -1,0 +1,90 @@
+[
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "4.0%",
+"consensus": "",
+"previous": "-2.9%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "-71.1%",
+"consensus": "",
+"previous": "-55.0%"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "32K",
+"consensus": "30K",
+"previous": "19K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "55.4",
+"consensus": "56.1",
+"previous": "55.4"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "2.800M",
+"consensus": "",
+"previous": "1.900M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "2,326.16B",
+"consensus": "",
+"previous": "2,330.47B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Employment Change",
+"actual": "1.0%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Unemployment Rate",
+"actual": "6.0%",
+"consensus": "7.3%",
+"previous": "7.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.3%",
+"consensus": "0.8%",
+"previous": "-1.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "-2.08B",
+"consensus": "-2.02B",
+"previous": "-1.70B"
+}
+]

@@ -1,0 +1,31 @@
+# 🎯 CPI putaran 2 — petunjuk baru, uji mundur
+python -m research.cpi_petunjuk2          → docs/eksternal/hasil_cpi_petunjuk2.txt
+
+
+## CPI m/m (184 rilis 2010-01–2025-10)
+   PPI  semua 38/61 = 62% (p 0.036) | LAMA 36/56 = 64% | BARU 2/5 = 40%
+   AHE  semua 44/78 = 56% (p 0.154) | LAMA 33/56 = 59% | BARU 11/22 = 50%
+   MUS  semua 35/76 = 46% (p 0.789) | LAMA 23/49 = 47% | BARU 12/27 = 44%
+   KON  semua 48/97 = 49% (p 0.580) | LAMA 34/69 = 49% | BARU 14/28 = 50%
+   YOY  semua 33/81 = 41% (p 0.963) | LAMA 22/61 = 36% | BARU 11/20 = 55%
+   DSL  semua 74/117 = 63% (p 0.003) | LAMA 54/84 = 64% | BARU 20/33 = 61%  ✅ LOLOS
+   JET  semua 64/117 = 55% (p 0.178) | LAMA 46/84 = 55% | BARU 18/33 = 55%
+   NG   semua 57/117 = 49% (p 0.644) | LAMA 39/84 = 46% | BARU 18/33 = 55%
+
+## Core CPI m/m (183 rilis 2010-01–2025-10)
+   PPI  semua 22/43 = 51% (p 0.500) | LAMA 21/41 = 51% | BARU 1/2 = 50%
+   AHE  semua 40/80 = 50% (p 0.544) | LAMA 30/58 = 52% | BARU 10/22 = 45%
+   MUS  semua 45/80 = 56% (p 0.157) | LAMA 33/53 = 62% | BARU 12/27 = 44%
+   KON  semua 44/68 = 65% (p 0.010) | LAMA 32/49 = 65% | BARU 12/19 = 63%  ✅ LOLOS
+
+## CPI y/y (191 rilis 2010-01–2025-12)
+   PPI  semua 36/56 = 64% (p 0.022) | LAMA 33/52 = 63% | BARU 3/4 = 75%
+   AHE  semua 40/88 = 45% (p 0.831) | LAMA 30/63 = 48% | BARU 10/25 = 40%
+   MUS  semua 42/77 = 55% (p 0.247) | LAMA 21/43 = 49% | BARU 21/34 = 62%
+   KON  semua 37/100 = 37% (p 0.997) | LAMA 25/70 = 36% | BARU 12/30 = 40%
+   YOY  semua 57/80 = 71% (p 0.000) | LAMA 43/59 = 73% | BARU 14/21 = 67%  ✅ LOLOS
+   DSL  semua 68/124 = 55% (p 0.162) | LAMA 45/86 = 52% | BARU 23/38 = 61%
+   JET  semua 69/124 = 56% (p 0.121) | LAMA 45/86 = 52% | BARU 24/38 = 63%
+   NG   semua 61/124 = 49% (p 0.606) | LAMA 39/86 = 45% | BARU 22/38 = 58%
+
+Lolos: CPI m/m ← DSL, Core CPI m/m ← KON, CPI y/y ← YOY

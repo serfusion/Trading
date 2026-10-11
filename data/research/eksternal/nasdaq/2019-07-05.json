@@ -1,0 +1,298 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.1%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "95.2",
+"consensus": "95.3",
+"previous": "95.9"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-2.2%",
+"consensus": "-0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "49.80B",
+"consensus": "",
+"previous": "48.33B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "43.940B",
+"consensus": "",
+"previous": "43.178B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "0.30B",
+"consensus": "",
+"previous": "-1.20B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "44.3B",
+"consensus": "",
+"previous": "42.3B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "47.5B",
+"consensus": "",
+"previous": "47.2B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-3.3B",
+"consensus": "-5.0B",
+"previous": "-4.9B"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "1.4%",
+"consensus": "-0.1%",
+"previous": "1.8%"
+},
+{
+"gmt": "03:30",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:30",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "5.7%",
+"consensus": "5.9%",
+"previous": "5.2%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "445.60B",
+"consensus": "",
+"previous": "437.80B"
+},
+{
+"gmt": "06:15",
+"country": "Spain",
+"eventName": "Spanish Consumer Confidence",
+"actual": "102.3",
+"consensus": "",
+"previous": "96.9"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "12.0%",
+"consensus": "",
+"previous": "12.3%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "10.0%",
+"consensus": "",
+"previous": "9.9%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "427.68B",
+"consensus": "",
+"previous": "426.42B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "3.1%",
+"consensus": "3.2%",
+"previous": "3.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.4",
+"consensus": "34.4",
+"previous": "34.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "33.0K",
+"consensus": "",
+"previous": "-11.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "17K",
+"consensus": "2K",
+"previous": "3K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "224K",
+"consensus": "160K",
+"previous": "72K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.9%",
+"consensus": "",
+"previous": "62.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "191K",
+"consensus": "153K",
+"previous": "83K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "7.2%",
+"consensus": "",
+"previous": "7.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "3.7%",
+"consensus": "3.6%",
+"previous": "3.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "-2.2K",
+"consensus": "10.0K",
+"previous": "27.7K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "24.1K",
+"consensus": "",
+"previous": "27.7K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "-26.2K",
+"consensus": "",
+"previous": "33.6K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.7%",
+"consensus": "",
+"previous": "65.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "5.5%",
+"consensus": "5.5%",
+"previous": "5.4%"
+},
+{
+"gmt": "09:00",
+"country": "United Kingdom",
+"eventName": "NIESR Monthly GDP Tracker",
+"actual": "-0.1%",
+"consensus": "-0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "53.7",
+"consensus": "",
+"previous": "61.8"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "52.4",
+"consensus": "55.0",
+"previous": "55.9"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Fed Monetary Policy Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

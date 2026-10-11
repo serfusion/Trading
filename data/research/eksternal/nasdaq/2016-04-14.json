@@ -1,0 +1,418 @@
+[
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "",
+"consensus": "",
+"previous": "-0.58%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "0.0%",
+"consensus": "-0.2%",
+"previous": "-0.6%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-4.7%",
+"consensus": "",
+"previous": "-4.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "2.1%",
+"consensus": "2.0%",
+"previous": "2.0%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.2%",
+"consensus": "-0.3%",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "1.5%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "1.2%",
+"consensus": "1.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "1.3%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Gold Production",
+"actual": "11.1%",
+"consensus": "7.7%",
+"previous": "27.0%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Mining Production",
+"actual": "-8.7%",
+"consensus": "-5.6%",
+"previous": "-5.5%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "9",
+"consensus": "9",
+"previous": "9"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE QE Total",
+"actual": "375B",
+"consensus": "375B",
+"previous": "375B"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "0.50%",
+"consensus": "0.50%",
+"previous": "0.50%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,171K",
+"consensus": "2,183K",
+"previous": "2,189K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI",
+"actual": "2.2%",
+"consensus": "2.3%",
+"previous": "2.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core CPI Index",
+"actual": "246.10",
+"consensus": "",
+"previous": "245.93"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.9%",
+"consensus": "1.1%",
+"previous": "1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "CPI Index, n.s.a.",
+"actual": "238.13",
+"consensus": "238.55",
+"previous": "237.11"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "253K",
+"consensus": "270K",
+"previous": "266K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "265.00K",
+"consensus": "",
+"previous": "266.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Real Earnings",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "387.9B",
+"consensus": "",
+"previous": "387.0B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "43.6",
+"consensus": "",
+"previous": "42.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Lockhart Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-3B",
+"consensus": "",
+"previous": "12B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cleveland CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "2.596%",
+"consensus": "",
+"previous": "2.720%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "3.8%",
+"consensus": "4.0%",
+"previous": "4.1%"
+},
+{
+"gmt": "20:01",
+"country": "South Korea",
+"eventName": "Exports",
+"actual": "-8.1%",
+"consensus": "-8.2%",
+"previous": "-8.2%"
+},
+{
+"gmt": "20:01",
+"country": "South Korea",
+"eventName": "Imports",
+"actual": "-13.9%",
+"consensus": "-13.8%",
+"previous": "-13.8%"
+},
+{
+"gmt": "20:01",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "9.90B",
+"consensus": "9.80B",
+"previous": "9.80B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Financial Stability Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Fixed Asset Investment",
+"actual": "10.7%",
+"consensus": "10.3%",
+"previous": "10.2%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "GDP",
+"actual": "6.7%",
+"consensus": "6.7%",
+"previous": "6.8%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "GDP",
+"actual": "1.1%",
+"consensus": "1.5%",
+"previous": "1.6%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Industrial Production",
+"actual": "6.8%",
+"consensus": "5.9%",
+"previous": "5.4%"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "Retail Sales",
+"actual": "10.5%",
+"consensus": "10.4%",
+"previous": "10.2%"
+},
+{
+"gmt": "22:05",
+"country": "China",
+"eventName": "M2 Money Stock",
+"actual": "13.4%",
+"consensus": "13.5%",
+"previous": "13.3%"
+},
+{
+"gmt": "22:05",
+"country": "China",
+"eventName": "New Loans",
+"actual": "1,370.0B",
+"consensus": "1,046.7B",
+"previous": "726.6B"
+},
+{
+"gmt": "22:05",
+"country": "China",
+"eventName": "Outstanding Loan Growth",
+"actual": "14.7%",
+"consensus": "14.5%",
+"previous": "14.7%"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Dr.Baba Saheb Ambedkar Jayanti",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

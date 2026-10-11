@@ -1,0 +1,394 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "-5.2%",
+"consensus": "-2.4%",
+"previous": "4.0%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "-6.4%",
+"consensus": "-1.7%",
+"previous": "4.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "16.7B",
+"consensus": "16.1B",
+"previous": "16.1B"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "-73.9K",
+"consensus": "-23.1K",
+"previous": "-48.8K"
+},
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.43%",
+"consensus": "0.39%",
+"previous": "0.39%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "1.574B",
+"consensus": "1.200B",
+"previous": "1.485B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "-0.6%",
+"consensus": "0.2%",
+"previous": "-0.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "52.01K",
+"consensus": "46.25K",
+"previous": "44.13K"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "0.02B",
+"consensus": "1.25B",
+"previous": "0.67B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "1.6B",
+"consensus": "2.8B",
+"previous": "2.2B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "40.9%",
+"consensus": "19.6%",
+"previous": "31.3%"
+},
+{
+"gmt": "04:55",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "2.941%",
+"consensus": "",
+"previous": "3.004%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "2.83%",
+"consensus": "",
+"previous": "2.70%"
+},
+{
+"gmt": "05:00",
+"country": "Russia",
+"eventName": "Russian Forex Intervention",
+"actual": "-40.4B",
+"consensus": "-27.5B",
+"previous": "-74.6B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-1.6%",
+"consensus": "-1.7%",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "5.9%",
+"consensus": "5.9%",
+"previous": "13.3%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "175.9%",
+"consensus": "",
+"previous": "319.4%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "66.995K",
+"consensus": "",
+"previous": "89.703K"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "9.5%",
+"consensus": "9.5%",
+"previous": "10.0%"
+},
+{
+"gmt": "08:15",
+"country": "Euro Zone",
+"eventName": "Deposit Facility Rate",
+"actual": "3.25%",
+"consensus": "3.25%",
+"previous": "3.00%"
+},
+{
+"gmt": "08:15",
+"country": "Euro Zone",
+"eventName": "ECB Marginal Lending Facility",
+"actual": "4.00%",
+"consensus": "",
+"previous": "3.75%"
+},
+{
+"gmt": "08:15",
+"country": "Euro Zone",
+"eventName": "ECB Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "3.75%",
+"consensus": "3.75%",
+"previous": "3.50%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,805K",
+"consensus": "1,865K",
+"previous": "1,843K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "256.20B",
+"consensus": "",
+"previous": "250.90B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "320.40B",
+"consensus": "",
+"previous": "321.50B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "242K",
+"consensus": "240K",
+"previous": "229K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "239.25K",
+"consensus": "217.09K",
+"previous": "235.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "-2.7%",
+"consensus": "-1.8%",
+"previous": "1.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-64.20B",
+"consensus": "-63.30B",
+"previous": "-70.60B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "6.3%",
+"consensus": "5.5%",
+"previous": "3.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "63.56B",
+"consensus": "",
+"previous": "64.00B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "62.59B",
+"consensus": "",
+"previous": "64.48B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "0.97B",
+"consensus": "0.20B",
+"previous": "-0.49B"
+},
+{
+"gmt": "08:45",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "55.6",
+"consensus": "",
+"previous": "65.2"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "56.8",
+"consensus": "59.0",
+"previous": "58.2"
+},
+{
+"gmt": "10:10",
+"country": "Spain",
+"eventName": "Spanish 8-Year Obligacion Auction",
+"actual": "2.920%",
+"consensus": "",
+"previous": "2.980%"
+},
+{
+"gmt": "10:15",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "54B",
+"consensus": "86B",
+"previous": "79B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.840%",
+"consensus": "",
+"previous": "3.830%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.400%",
+"consensus": "",
+"previous": "4.940%"
+},
+{
+"gmt": "12:50",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,504B",
+"consensus": "",
+"previous": "8,563B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.166T",
+"consensus": "",
+"previous": "3.132T"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Home Loans",
+"actual": "6.5%",
+"consensus": "-1.0%",
+"previous": "-1.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Invest Housing Finance",
+"actual": "3.7%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Greenery Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

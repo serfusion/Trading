@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:30",
+"country": "India",
+"eventName": "Interest Rate Decision",
+"actual": "7.75%",
+"consensus": "7.50%",
+"previous": "7.50%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "85",
+"consensus": "85",
+"previous": "85"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Retail Sales",
+"actual": "2.2%",
+"consensus": "-1.1%",
+"previous": "-4.8%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "0.41B",
+"consensus": "0.70B",
+"previous": "0.62B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "67K",
+"consensus": "66K",
+"previous": "63K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "1.00B",
+"consensus": "1.20B",
+"previous": "1.10B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "1.9B",
+"consensus": "2.5B",
+"previous": "1.7B"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Unemployment Rate",
+"actual": "24.70%",
+"consensus": "25.60%",
+"previous": "25.60%"
+},
+{
+"gmt": "06:10",
+"country": "Italy",
+"eventName": "Italian 6-Month BOT Auction",
+"actual": "0.629%",
+"consensus": "",
+"previous": "0.781%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "1.2%",
+"consensus": "1.2%",
+"previous": "1.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "0.3%",
+"consensus": "0.6%",
+"previous": "1.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-1.5%",
+"consensus": "-1.0%",
+"previous": "0.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "2.1%",
+"consensus": "3.0%",
+"previous": "5.1%"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Bank lending",
+"actual": "0.80%",
+"consensus": "",
+"previous": "1.30%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-1.30%",
+"consensus": "",
+"previous": "-1.50%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "3.6%",
+"consensus": "",
+"previous": "2.9%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "12.8%",
+"consensus": "12.5%",
+"previous": "12.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "1.3%",
+"consensus": "0.8%",
+"previous": "1.8%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "71.2",
+"consensus": "75.0",
+"previous": "80.2"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.055%",
+"consensus": "",
+"previous": "0.030%"
+},
+{
+"gmt": "12:00",
+"country": "Canada",
+"eventName": "BoC Gov Poloz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year Note Auction",
+"actual": "1.300%",
+"consensus": "",
+"previous": "1.436%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "5.90M",
+"consensus": "3.50M",
+"previous": "3.00M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "-2.700M",
+"consensus": "-1.200M",
+"previous": "0.815M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "0.74M",
+"consensus": "1.50M",
+"previous": "-0.51M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Manufacturing BSI Index",
+"actual": "86.00",
+"consensus": "",
+"previous": "82.00"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Industrial Production",
+"actual": "-3.6%",
+"consensus": "1.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Industrial Production",
+"actual": "-2.1%",
+"consensus": "-0.4%",
+"previous": "1.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Service Sector Output",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.8%"
+},
+{
+"gmt": "19:30",
+"country": "South Korea",
+"eventName": "Retail Sales",
+"actual": "-2.0%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:35",
+"country": "Australia",
+"eventName": "HIA New Home Sales",
+"actual": "6.4%",
+"consensus": "",
+"previous": "3.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "1.5%",
+"consensus": "1.8%",
+"previous": "-0.9%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production forecast 1m ahead",
+"actual": "4.7%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production forecast 2m ahead",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "1.7%"
+}
+]

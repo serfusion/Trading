@@ -1,0 +1,383 @@
+# 🥇 Petunjuk CPI → arah emas (uji mundur langsung)
+python -m research.cpi_emas               → docs/eksternal/hasil_cpi_emas.txt
+
+185 rilis CPI 2010-09–2026-09 (konsensus FF s.d. 2025-10). Kolom: % emas searah tebakan, n, p | LAMA | BARU | rincian per arah.
+
+## Emas 2 dtk setelah rilis
+   PLAFON headline (kejutan asli)  69% n103 p 0.000 | LAMA  67% n70  BARU  73% n33  | atas→TURUN 67% (46) bawah→NAIK 70% (57)  ✅
+   PLAFON core (kejutan asli)  79% n100 p 0.000 | LAMA  78% n68  BARU  81% n32  | atas→TURUN 86% (42) bawah→NAIK 74% (58)  ✅
+   PLAFON y/y (kejutan asli)   73% n111 p 0.000 | LAMA  71% n73  BARU  76% n38  | atas→TURUN 72% (58) bawah→NAIK 74% (53)  ✅
+   headline K Kalshi           61% n31  p 0.141 | LAMA    – n0   BARU  61% n31  | atas→TURUN 56% (16) bawah→NAIK 67% (15)
+   headline P kejutan lalu     57% n98  p 0.094 | LAMA  57% n65  BARU  58% n33  | atas→TURUN 54% (41) bawah→NAIK 60% (57)
+   headline N nowcast          56% n64  p 0.191 | LAMA  47% n36  BARU  68% n28  | atas→TURUN 54% (26) bawah→NAIK 58% (38)
+   headline bensin             52% n181 p 0.276 | LAMA  55% n121 BARU  47% n60  | atas→TURUN 49% (95) bawah→NAIK 56% (86)
+   headline WTI                55% n181 p 0.117 | LAMA  57% n121 BARU  50% n60  | atas→TURUN 51% (103) bawah→NAIK 59% (78)
+   headline solar              49% n181 p 0.617 | LAMA  50% n121 BARU  48% n60  | atas→TURUN 46% (85) bawah→NAIK 52% (96)
+   headline K|P                56% n110 p 0.107 | LAMA  57% n65  BARU  56% n45  | atas→TURUN 55% (47) bawah→NAIK 57% (63)
+   core K Kalshi               54% n28  p 0.425 | LAMA    – n0   BARU  54% n28  | atas→TURUN 42% (12) bawah→NAIK 62% (16)
+   core P kejutan lalu         54% n100 p 0.242 | LAMA  51% n68  BARU  59% n32  | atas→TURUN 58% (43) bawah→NAIK 51% (57)
+   core N nowcast              48% n52  p 0.661 | LAMA  27% n26  BARU  69% n26  | atas→TURUN 59% (22) bawah→NAIK 40% (30)
+   core KON                    49% n93  p 0.582 | LAMA  48% n64  BARU  52% n29  | atas→TURUN 48% (40) bawah→NAIK 51% (53)
+   core KON&P                  52% n82  p 0.370 | LAMA  51% n57  BARU  56% n25  | atas→TURUN 56% (34) bawah→NAIK 50% (48)
+   core K|P                    51% n108 p 0.462 | LAMA  51% n68  BARU  50% n40  | atas→TURUN 52% (44) bawah→NAIK 50% (64)
+   y/y YOY konsistensi         50% n109 p 0.576 | LAMA  52% n81  BARU  43% n28  | atas→TURUN 52% (54) bawah→NAIK 47% (55)
+   y/y P kejutan lalu          56% n111 p 0.127 | LAMA  55% n75  BARU  58% n36  | atas→TURUN 54% (57) bawah→NAIK 57% (54)
+   y/y YOY|P                   56% n149 p 0.095 | LAMA  55% n105 BARU  57% n44  | atas→TURUN 56% (71) bawah→NAIK 55% (78)
+   GABUNG suara 3 judul        56% n132 p 0.096 | LAMA  58% n89  BARU  51% n43  | atas→TURUN 56% (55) bawah→NAIK 56% (77)
+   GABUNG terbaik 3 judul      51% n147 p 0.435 | LAMA  54% n94  BARU  45% n53  | atas→TURUN 44% (66) bawah→NAIK 57% (81)
+   GABUNG core & y/y sepakat   50% n60  p 0.551 | LAMA  49% n41  BARU  53% n19  | atas→TURUN 52% (23) bawah→NAIK 49% (37)
+
+## Emas 10 dtk setelah rilis
+   PLAFON headline (kejutan asli)  84% n105 p 0.000 | LAMA  81% n72  BARU  91% n33  | atas→TURUN 81% (47) bawah→NAIK 86% (58)  ✅
+   PLAFON core (kejutan asli)  90% n104 p 0.000 | LAMA  89% n72  BARU  94% n32  | atas→TURUN 89% (44) bawah→NAIK 92% (60)  ✅
+   PLAFON y/y (kejutan asli)   83% n112 p 0.000 | LAMA  78% n74  BARU  92% n38  | atas→TURUN 80% (59) bawah→NAIK 87% (53)  ✅
+   headline K Kalshi           65% n31  p 0.075 | LAMA    – n0   BARU  65% n31  | atas→TURUN 62% (16) bawah→NAIK 67% (15)
+   headline P kejutan lalu     55% n100 p 0.184 | LAMA  52% n67  BARU  61% n33  | atas→TURUN 48% (42) bawah→NAIK 60% (58)
+   headline N nowcast          52% n64  p 0.450 | LAMA  47% n36  BARU  57% n28  | atas→TURUN 50% (26) bawah→NAIK 53% (38)
+   headline bensin             51% n185 p 0.384 | LAMA  52% n125 BARU  50% n60  | atas→TURUN 46% (98) bawah→NAIK 57% (87)
+   headline WTI                54% n185 p 0.189 | LAMA  54% n125 BARU  53% n60  | atas→TURUN 48% (106) bawah→NAIK 61% (79)
+   headline solar              48% n185 p 0.722 | LAMA  48% n125 BARU  48% n60  | atas→TURUN 42% (88) bawah→NAIK 54% (97)
+   headline K|P                55% n112 p 0.149 | LAMA  52% n67  BARU  60% n45  | atas→TURUN 52% (48) bawah→NAIK 58% (64)
+   core K Kalshi               54% n28  p 0.425 | LAMA    – n0   BARU  54% n28  | atas→TURUN 50% (12) bawah→NAIK 56% (16)
+   core P kejutan lalu         56% n103 p 0.118 | LAMA  55% n71  BARU  59% n32  | atas→TURUN 56% (45) bawah→NAIK 57% (58)
+   core N nowcast              55% n53  p 0.292 | LAMA  41% n27  BARU  69% n26  | atas→TURUN 61% (23) bawah→NAIK 50% (30)
+   core KON                    52% n94  p 0.379 | LAMA  54% n65  BARU  48% n29  | atas→TURUN 49% (41) bawah→NAIK 55% (53)
+   core KON&P                  57% n83  p 0.136 | LAMA  57% n58  BARU  56% n25  | atas→TURUN 57% (35) bawah→NAIK 56% (48)
+   core K|P                    53% n111 p 0.285 | LAMA  55% n71  BARU  50% n40  | atas→TURUN 52% (46) bawah→NAIK 54% (65)
+   y/y YOY konsistensi         59% n112 p 0.036 | LAMA  58% n84  BARU  61% n28  | atas→TURUN 56% (55) bawah→NAIK 61% (57)  ✅
+   y/y P kejutan lalu          51% n113 p 0.425 | LAMA  49% n77  BARU  56% n36  | atas→TURUN 46% (59) bawah→NAIK 57% (54)
+   y/y YOY|P                   59% n153 p 0.012 | LAMA  58% n109 BARU  64% n44  | atas→TURUN 56% (73) bawah→NAIK 62% (80)  ✅
+   GABUNG suara 3 judul        58% n135 p 0.042 | LAMA  59% n92  BARU  56% n43  | atas→TURUN 54% (57) bawah→NAIK 60% (78)  ✅
+   GABUNG terbaik 3 judul      54% n150 p 0.185 | LAMA  55% n97  BARU  53% n53  | atas→TURUN 43% (68) bawah→NAIK 63% (82)
+   GABUNG core & y/y sepakat   60% n62  p 0.081 | LAMA  58% n43  BARU  63% n19  | atas→TURUN 58% (24) bawah→NAIK 61% (38)
+
+## Emas 1 mnt setelah rilis
+   PLAFON headline (kejutan asli)  78% n105 p 0.000 | LAMA  75% n72  BARU  85% n33  | atas→TURUN 74% (47) bawah→NAIK 81% (58)  ✅
+   PLAFON core (kejutan asli)  82% n104 p 0.000 | LAMA  78% n72  BARU  91% n32  | atas→TURUN 75% (44) bawah→NAIK 87% (60)  ✅
+   PLAFON y/y (kejutan asli)   79% n112 p 0.000 | LAMA  74% n74  BARU  87% n38  | atas→TURUN 75% (59) bawah→NAIK 83% (53)  ✅
+   headline K Kalshi           61% n31  p 0.141 | LAMA    – n0   BARU  61% n31  | atas→TURUN 50% (16) bawah→NAIK 73% (15)
+   headline P kejutan lalu     57% n100 p 0.097 | LAMA  54% n67  BARU  64% n33  | atas→TURUN 50% (42) bawah→NAIK 62% (58)
+   headline N nowcast          50% n64  p 0.550 | LAMA  47% n36  BARU  54% n28  | atas→TURUN 54% (26) bawah→NAIK 47% (38)
+   headline bensin             50% n185 p 0.558 | LAMA  49% n125 BARU  52% n60  | atas→TURUN 42% (98) bawah→NAIK 59% (87)
+   headline WTI                54% n185 p 0.152 | LAMA  50% n125 BARU  62% n60  | atas→TURUN 46% (106) bawah→NAIK 65% (79)
+   headline solar              49% n185 p 0.670 | LAMA  45% n125 BARU  57% n60  | atas→TURUN 40% (88) bawah→NAIK 57% (97)
+   headline K|P                56% n112 p 0.110 | LAMA  54% n67  BARU  60% n45  | atas→TURUN 50% (48) bawah→NAIK 61% (64)
+   core K Kalshi               54% n28  p 0.425 | LAMA    – n0   BARU  54% n28  | atas→TURUN 42% (12) bawah→NAIK 62% (16)
+   core P kejutan lalu         55% n103 p 0.162 | LAMA  56% n71  BARU  53% n32  | atas→TURUN 49% (45) bawah→NAIK 60% (58)
+   core N nowcast              49% n53  p 0.608 | LAMA  44% n27  BARU  54% n26  | atas→TURUN 52% (23) bawah→NAIK 47% (30)
+   core KON                    50% n94  p 0.541 | LAMA  52% n65  BARU  45% n29  | atas→TURUN 44% (41) bawah→NAIK 55% (53)
+   core KON&P                  53% n83  p 0.330 | LAMA  53% n58  BARU  52% n25  | atas→TURUN 49% (35) bawah→NAIK 56% (48)
+   core K|P                    54% n111 p 0.224 | LAMA  56% n71  BARU  50% n40  | atas→TURUN 48% (46) bawah→NAIK 58% (65)
+   y/y YOY konsistensi         61% n112 p 0.015 | LAMA  61% n84  BARU  61% n28  | atas→TURUN 58% (55) bawah→NAIK 63% (57)  ✅
+   y/y P kejutan lalu          50% n113 p 0.500 | LAMA  47% n77  BARU  58% n36  | atas→TURUN 41% (59) bawah→NAIK 61% (54)
+   y/y YOY|P                   58% n153 p 0.026 | LAMA  57% n109 BARU  61% n44  | atas→TURUN 52% (73) bawah→NAIK 64% (80)  ✅
+   GABUNG suara 3 judul        59% n135 p 0.019 | LAMA  61% n92  BARU  56% n43  | atas→TURUN 47% (57) bawah→NAIK 68% (78)  ✅
+   GABUNG terbaik 3 judul      55% n150 p 0.144 | LAMA  54% n97  BARU  57% n53  | atas→TURUN 44% (68) bawah→NAIK 63% (82)
+   GABUNG core & y/y sepakat   63% n62  p 0.028 | LAMA  60% n43  BARU  68% n19  | atas→TURUN 58% (24) bawah→NAIK 66% (38)  ✅
+
+## Emas 5 mnt setelah rilis
+   PLAFON headline (kejutan asli)  70% n105 p 0.000 | LAMA  62% n72  BARU  85% n33  | atas→TURUN 72% (47) bawah→NAIK 67% (58)  ✅
+   PLAFON core (kejutan asli)  68% n104 p 0.000 | LAMA  62% n72  BARU  81% n32  | atas→TURUN 70% (44) bawah→NAIK 67% (60)  ✅
+   PLAFON y/y (kejutan asli)   68% n112 p 0.000 | LAMA  61% n74  BARU  82% n38  | atas→TURUN 66% (59) bawah→NAIK 70% (53)  ✅
+   headline K Kalshi           58% n31  p 0.237 | LAMA    – n0   BARU  58% n31  | atas→TURUN 50% (16) bawah→NAIK 67% (15)
+   headline P kejutan lalu     50% n100 p 0.540 | LAMA  51% n67  BARU  48% n33  | atas→TURUN 43% (42) bawah→NAIK 55% (58)
+   headline N nowcast          56% n64  p 0.191 | LAMA  58% n36  BARU  54% n28  | atas→TURUN 54% (26) bawah→NAIK 58% (38)
+   headline bensin             49% n185 p 0.616 | LAMA  48% n125 BARU  52% n60  | atas→TURUN 43% (98) bawah→NAIK 56% (87)
+   headline WTI                55% n185 p 0.120 | LAMA  53% n125 BARU  58% n60  | atas→TURUN 48% (106) bawah→NAIK 63% (79)
+   headline solar              48% n185 p 0.722 | LAMA  44% n125 BARU  57% n60  | atas→TURUN 41% (88) bawah→NAIK 55% (97)
+   headline K|P                53% n112 p 0.318 | LAMA  51% n67  BARU  56% n45  | atas→TURUN 46% (48) bawah→NAIK 58% (64)
+   core K Kalshi               54% n28  p 0.425 | LAMA    – n0   BARU  54% n28  | atas→TURUN 33% (12) bawah→NAIK 69% (16)
+   core P kejutan lalu         49% n103 p 0.653 | LAMA  52% n71  BARU  41% n32  | atas→TURUN 49% (45) bawah→NAIK 48% (58)
+   core N nowcast              55% n53  p 0.292 | LAMA  56% n27  BARU  54% n26  | atas→TURUN 57% (23) bawah→NAIK 53% (30)
+   core KON                    45% n94  p 0.872 | LAMA  48% n65  BARU  38% n29  | atas→TURUN 41% (41) bawah→NAIK 47% (53)
+   core KON&P                  42% n83  p 0.938 | LAMA  45% n58  BARU  36% n25  | atas→TURUN 40% (35) bawah→NAIK 44% (48)
+   core K|P                    49% n111 p 0.648 | LAMA  52% n71  BARU  42% n40  | atas→TURUN 48% (46) bawah→NAIK 49% (65)
+   y/y YOY konsistensi         55% n112 p 0.149 | LAMA  54% n84  BARU  61% n28  | atas→TURUN 55% (55) bawah→NAIK 56% (57)
+   y/y P kejutan lalu          43% n113 p 0.934 | LAMA  40% n77  BARU  50% n36  | atas→TURUN 39% (59) bawah→NAIK 48% (54)
+   y/y YOY|P                   53% n153 p 0.259 | LAMA  50% n109 BARU  59% n44  | atas→TURUN 49% (73) bawah→NAIK 56% (80)
+   GABUNG suara 3 judul        54% n135 p 0.195 | LAMA  55% n92  BARU  51% n43  | atas→TURUN 49% (57) bawah→NAIK 58% (78)
+   GABUNG terbaik 3 judul      49% n150 p 0.658 | LAMA  46% n97  BARU  53% n53  | atas→TURUN 38% (68) bawah→NAIK 57% (82)
+   GABUNG core & y/y sepakat   50% n62  p 0.550 | LAMA  49% n43  BARU  53% n19  | atas→TURUN 54% (24) bawah→NAIK 47% (38)
+
+## Emas 15 mnt setelah rilis
+   PLAFON headline (kejutan asli)  69% n105 p 0.000 | LAMA  65% n72  BARU  76% n33  | atas→TURUN 60% (47) bawah→NAIK 76% (58)  ✅
+   PLAFON core (kejutan asli)  63% n104 p 0.004 | LAMA  61% n72  BARU  69% n32  | atas→TURUN 55% (44) bawah→NAIK 70% (60)  ✅
+   PLAFON y/y (kejutan asli)   63% n112 p 0.003 | LAMA  57% n74  BARU  76% n38  | atas→TURUN 54% (59) bawah→NAIK 74% (53)  ✅
+   headline K Kalshi           55% n31  p 0.360 | LAMA    – n0   BARU  55% n31  | atas→TURUN 44% (16) bawah→NAIK 67% (15)
+   headline P kejutan lalu     49% n100 p 0.618 | LAMA  54% n67  BARU  39% n33  | atas→TURUN 31% (42) bawah→NAIK 62% (58)
+   headline N nowcast          52% n64  p 0.450 | LAMA  53% n36  BARU  50% n28  | atas→TURUN 46% (26) bawah→NAIK 55% (38)
+   headline bensin             46% n185 p 0.848 | LAMA  47% n125 BARU  45% n60  | atas→TURUN 36% (98) bawah→NAIK 59% (87)
+   headline WTI                54% n185 p 0.152 | LAMA  54% n125 BARU  55% n60  | atas→TURUN 43% (106) bawah→NAIK 68% (79)
+   headline solar              48% n185 p 0.769 | LAMA  45% n125 BARU  53% n60  | atas→TURUN 35% (88) bawah→NAIK 59% (97)
+   headline K|P                52% n112 p 0.388 | LAMA  54% n67  BARU  49% n45  | atas→TURUN 35% (48) bawah→NAIK 64% (64)
+   core K Kalshi               54% n28  p 0.425 | LAMA    – n0   BARU  54% n28  | atas→TURUN 33% (12) bawah→NAIK 69% (16)
+   core P kejutan lalu         49% n103 p 0.653 | LAMA  55% n71  BARU  34% n32  | atas→TURUN 40% (45) bawah→NAIK 55% (58)
+   core N nowcast              55% n53  p 0.292 | LAMA  52% n27  BARU  58% n26  | atas→TURUN 43% (23) bawah→NAIK 63% (30)
+   core KON                    45% n94  p 0.872 | LAMA  51% n65  BARU  31% n29  | atas→TURUN 34% (41) bawah→NAIK 53% (53)
+   core KON&P                  43% n83  p 0.906 | LAMA  50% n58  BARU  28% n25  | atas→TURUN 34% (35) bawah→NAIK 50% (48)
+   core K|P                    49% n111 p 0.648 | LAMA  55% n71  BARU  38% n40  | atas→TURUN 39% (46) bawah→NAIK 55% (65)
+   y/y YOY konsistensi         50% n112 p 0.538 | LAMA  46% n84  BARU  61% n28  | atas→TURUN 45% (55) bawah→NAIK 54% (57)
+   y/y P kejutan lalu          47% n113 p 0.774 | LAMA  48% n77  BARU  44% n36  | atas→TURUN 37% (59) bawah→NAIK 57% (54)
+   y/y YOY|P                   49% n153 p 0.627 | LAMA  47% n109 BARU  55% n44  | atas→TURUN 41% (73) bawah→NAIK 56% (80)
+   GABUNG suara 3 judul        51% n135 p 0.432 | LAMA  54% n92  BARU  44% n43  | atas→TURUN 39% (57) bawah→NAIK 60% (78)
+   GABUNG terbaik 3 judul      46% n150 p 0.856 | LAMA  45% n97  BARU  47% n53  | atas→TURUN 31% (68) bawah→NAIK 59% (82)
+   GABUNG core & y/y sepakat   48% n62  p 0.648 | LAMA  51% n43  BARU  42% n19  | atas→TURUN 42% (24) bawah→NAIK 53% (38)
+
+## Emas 1 jam setelah rilis
+   PLAFON headline (kejutan asli)  63% n95  p 0.007 | LAMA  56% n62  BARU  76% n33  | atas→TURUN 58% (43) bawah→NAIK 67% (52)  ✅
+   PLAFON core (kejutan asli)  68% n96  p 0.000 | LAMA  67% n64  BARU  69% n32  | atas→TURUN 66% (41) bawah→NAIK 69% (55)  ✅
+   PLAFON y/y (kejutan asli)   63% n102 p 0.006 | LAMA  56% n64  BARU  74% n38  | atas→TURUN 63% (51) bawah→NAIK 63% (51)  ✅
+   headline K Kalshi           52% n31  p 0.500 | LAMA    – n0   BARU  52% n31  | atas→TURUN 50% (16) bawah→NAIK 53% (15)
+   headline P kejutan lalu     48% n91  p 0.662 | LAMA  47% n58  BARU  52% n33  | atas→TURUN 49% (39) bawah→NAIK 48% (52)
+   headline N nowcast          48% n64  p 0.646 | LAMA  47% n36  BARU  50% n28  | atas→TURUN 50% (26) bawah→NAIK 47% (38)
+   headline bensin             48% n170 p 0.704 | LAMA  45% n110 BARU  53% n60  | atas→TURUN 47% (90) bawah→NAIK 50% (80)
+   headline WTI                50% n170 p 0.531 | LAMA  46% n110 BARU  57% n60  | atas→TURUN 48% (95) bawah→NAIK 52% (75)
+   headline solar              44% n170 p 0.947 | LAMA  38% n110 BARU  55% n60  | atas→TURUN 42% (81) bawah→NAIK 46% (89)
+   headline K|P                49% n103 p 0.653 | LAMA  47% n58  BARU  51% n45  | atas→TURUN 49% (45) bawah→NAIK 48% (58)
+   core K Kalshi               46% n28  p 0.714 | LAMA    – n0   BARU  46% n28  | atas→TURUN 42% (12) bawah→NAIK 50% (16)
+   core P kejutan lalu         48% n95  p 0.659 | LAMA  46% n63  BARU  53% n32  | atas→TURUN 54% (41) bawah→NAIK 44% (54)
+   core N nowcast              55% n53  p 0.292 | LAMA  52% n27  BARU  58% n26  | atas→TURUN 52% (23) bawah→NAIK 57% (30)
+   core KON                    45% n87  p 0.858 | LAMA  43% n58  BARU  48% n29  | atas→TURUN 47% (38) bawah→NAIK 43% (49)
+   core KON&P                  44% n77  p 0.873 | LAMA  40% n52  BARU  52% n25  | atas→TURUN 50% (32) bawah→NAIK 40% (45)
+   core K|P                    45% n103 p 0.882 | LAMA  46% n63  BARU  42% n40  | atas→TURUN 48% (42) bawah→NAIK 43% (61)
+   y/y YOY konsistensi         52% n99  p 0.420 | LAMA  45% n71  BARU  68% n28  | atas→TURUN 53% (49) bawah→NAIK 50% (50)
+   y/y P kejutan lalu          46% n101 p 0.840 | LAMA  43% n65  BARU  50% n36  | atas→TURUN 48% (50) bawah→NAIK 43% (51)
+   y/y YOY|P                   49% n138 p 0.601 | LAMA  43% n94  BARU  64% n44  | atas→TURUN 52% (65) bawah→NAIK 47% (73)
+   GABUNG suara 3 judul        43% n123 p 0.948 | LAMA  40% n80  BARU  49% n43  | atas→TURUN 41% (51) bawah→NAIK 44% (72)
+   GABUNG terbaik 3 judul      41% n139 p 0.986 | LAMA  36% n86  BARU  49% n53  | atas→TURUN 38% (63) bawah→NAIK 43% (76)
+   GABUNG core & y/y sepakat   45% n55  p 0.791 | LAMA  42% n36  BARU  53% n19  | atas→TURUN 52% (21) bawah→NAIK 41% (34)
+
+## PELUANG EMAS NAIK menurut petunjuk (dibanding dasar semua rilis CPI; tidak tergantung tebakan arah)
+  2 dtk:
+   PLAFON headline (kejutan asli) naik bila DI BAWAH 70% (n57) | bila DI ATAS 33% (n46) | dasar 53% | beda +38 poin p 0.000 | LAMA bawah 67%/atas 32% | BARU bawah 80%/atas 33%
+   PLAFON core (kejutan asli) naik bila DI BAWAH 74% (n58) | bila DI ATAS 14% (n42) | dasar 53% | beda +60 poin p 0.000 | LAMA bawah 70%/atas 8% | BARU bawah 87%/atas 24%
+   PLAFON y/y (kejutan asli)  naik bila DI BAWAH 74% (n53) | bila DI ATAS 28% (n58) | dasar 53% | beda +46 poin p 0.000 | LAMA bawah 68%/atas 26% | BARU bawah 84%/atas 32%
+   headline K Kalshi          naik bila DI BAWAH 67% (n15) | bila DI ATAS 44% (n16) | dasar 53% | beda +23 poin p 0.182 | LAMA bawah –/atas – | BARU bawah 67%/atas 44%
+   headline P kejutan lalu    naik bila DI BAWAH 60% (n57) | bila DI ATAS 46% (n41) | dasar 53% | beda +13 poin p 0.129 | LAMA bawah 55%/atas 39% | BARU bawah 73%/atas 56%
+   headline N nowcast         naik bila DI BAWAH 58% (n38) | bila DI ATAS 46% (n26) | dasar 53% | beda +12 poin p 0.257 | LAMA bawah 48%/atas 56% | BARU bawah 82%/atas 41%
+   headline bensin            naik bila DI BAWAH 56% (n86) | bila DI ATAS 51% (n95) | dasar 53% | beda +5 poin p 0.296 | LAMA bawah 55%/atas 44% | BARU bawah 57%/atas 62%
+   headline WTI               naik bila DI BAWAH 59% (n78) | bila DI ATAS 49% (n103) | dasar 53% | beda +10 poin p 0.107 | LAMA bawah 58%/atas 44% | BARU bawah 60%/atas 60%
+   headline solar             naik bila DI BAWAH 52% (n96) | bila DI ATAS 54% (n85) | dasar 53% | beda -2 poin p 0.665 | LAMA bawah 49%/atas 50% | BARU bawah 58%/atas 62%
+   headline K|P               naik bila DI BAWAH 57% (n63) | bila DI ATAS 45% (n47) | dasar 53% | beda +12 poin p 0.126 | LAMA bawah 55%/atas 39% | BARU bawah 62%/atas 50%
+   core K Kalshi              naik bila DI BAWAH 62% (n16) | bila DI ATAS 58% (n12) | dasar 53% | beda +4 poin p 0.572 | LAMA bawah –/atas – | BARU bawah 62%/atas 58%
+   core P kejutan lalu        naik bila DI BAWAH 51% (n57) | bila DI ATAS 42% (n43) | dasar 53% | beda +9 poin p 0.248 | LAMA bawah 48%/atas 42% | BARU bawah 60%/atas 41%
+   core N nowcast             naik bila DI BAWAH 40% (n30) | bila DI ATAS 41% (n22) | dasar 53% | beda -1 poin p 0.635 | LAMA bawah 27%/atas 75% | BARU bawah 75%/atas 33%
+   core KON                   naik bila DI BAWAH 51% (n53) | bila DI ATAS 52% (n40) | dasar 53% | beda -2 poin p 0.640 | LAMA bawah 50%/atas 54% | BARU bawah 54%/atas 50%
+   core KON&P                 naik bila DI BAWAH 50% (n48) | bila DI ATAS 44% (n34) | dasar 53% | beda +6 poin p 0.385 | LAMA bawah 49%/atas 45% | BARU bawah 55%/atas 43%
+   core K|P                   naik bila DI BAWAH 50% (n64) | bila DI ATAS 48% (n44) | dasar 53% | beda +2 poin p 0.492 | LAMA bawah 48%/atas 42% | BARU bawah 55%/atas 56%
+   y/y YOY konsistensi        naik bila DI BAWAH 47% (n55) | bila DI ATAS 48% (n54) | dasar 53% | beda -1 poin p 0.618 | LAMA bawah 48%/atas 44% | BARU bawah 47%/atas 62%
+   y/y P kejutan lalu         naik bila DI BAWAH 57% (n54) | bila DI ATAS 46% (n57) | dasar 53% | beda +12 poin p 0.146 | LAMA bawah 54%/atas 45% | BARU bawah 65%/atas 47%
+   y/y YOY|P                  naik bila DI BAWAH 55% (n78) | bila DI ATAS 44% (n71) | dasar 53% | beda +11 poin p 0.113 | LAMA bawah 53%/atas 42% | BARU bawah 61%/atas 48%
+   GABUNG suara 3 judul       naik bila DI BAWAH 56% (n77) | bila DI ATAS 44% (n55) | dasar 53% | beda +12 poin p 0.122 | LAMA bawah 55%/atas 36% | BARU bawah 57%/atas 55%
+   GABUNG terbaik 3 judul     naik bila DI BAWAH 57% (n81) | bila DI ATAS 56% (n66) | dasar 53% | beda +1 poin p 0.547 | LAMA bawah 56%/atas 49% | BARU bawah 58%/atas 67%
+   GABUNG core & y/y sepakat  naik bila DI BAWAH 49% (n37) | bila DI ATAS 48% (n23) | dasar 53% | beda +1 poin p 0.599 | LAMA bawah 46%/atas 47% | BARU bawah 55%/atas 50%
+  10 dtk:
+   PLAFON headline (kejutan asli) naik bila DI BAWAH 86% (n58) | bila DI ATAS 19% (n47) | dasar 56% | beda +67 poin p 0.000 | LAMA bawah 84%/atas 24% | BARU bawah 93%/atas 11%
+   PLAFON core (kejutan asli) naik bila DI BAWAH 92% (n60) | bila DI ATAS 11% (n44) | dasar 56% | beda +80 poin p 0.000 | LAMA bawah 89%/atas 11% | BARU bawah 100%/atas 12%
+   PLAFON y/y (kejutan asli)  naik bila DI BAWAH 87% (n53) | bila DI ATAS 20% (n59) | dasar 56% | beda +66 poin p 0.000 | LAMA bawah 82%/atas 25% | BARU bawah 95%/atas 11%
+   headline K Kalshi          naik bila DI BAWAH 67% (n15) | bila DI ATAS 38% (n16) | dasar 56% | beda +29 poin p 0.095 | LAMA bawah –/atas – | BARU bawah 67%/atas 38%
+   headline P kejutan lalu    naik bila DI BAWAH 60% (n58) | bila DI ATAS 52% (n42) | dasar 56% | beda +8 poin p 0.277 | LAMA bawah 56%/atas 54% | BARU bawah 73%/atas 50%
+   headline N nowcast         naik bila DI BAWAH 53% (n38) | bila DI ATAS 50% (n26) | dasar 56% | beda +3 poin p 0.520 | LAMA bawah 52%/atas 67% | BARU bawah 55%/atas 41%
+   headline bensin            naik bila DI BAWAH 57% (n87) | bila DI ATAS 54% (n98) | dasar 56% | beda +3 poin p 0.372 | LAMA bawah 58%/atas 53% | BARU bawah 57%/atas 56%
+   headline WTI               naik bila DI BAWAH 61% (n79) | bila DI ATAS 52% (n106) | dasar 56% | beda +9 poin p 0.146 | LAMA bawah 61%/atas 51% | BARU bawah 60%/atas 53%
+   headline solar             naik bila DI BAWAH 54% (n97) | bila DI ATAS 58% (n88) | dasar 56% | beda -4 poin p 0.763 | LAMA bawah 53%/atas 58% | BARU bawah 55%/atas 59%
+   headline K|P               naik bila DI BAWAH 58% (n64) | bila DI ATAS 48% (n48) | dasar 56% | beda +10 poin p 0.204 | LAMA bawah 56%/atas 54% | BARU bawah 62%/atas 42%
+   core K Kalshi              naik bila DI BAWAH 56% (n16) | bila DI ATAS 50% (n12) | dasar 56% | beda +6 poin p 0.515 | LAMA bawah –/atas – | BARU bawah 56%/atas 50%
+   core P kejutan lalu        naik bila DI BAWAH 57% (n58) | bila DI ATAS 44% (n45) | dasar 56% | beda +12 poin p 0.138 | LAMA bawah 56%/atas 46% | BARU bawah 60%/atas 41%
+   core N nowcast             naik bila DI BAWAH 50% (n30) | bila DI ATAS 39% (n23) | dasar 56% | beda +11 poin p 0.316 | LAMA bawah 41%/atas 60% | BARU bawah 75%/atas 33%
+   core KON                   naik bila DI BAWAH 55% (n53) | bila DI ATAS 51% (n41) | dasar 56% | beda +3 poin p 0.440 | LAMA bawah 57%/atas 52% | BARU bawah 46%/atas 50%
+   core KON&P                 naik bila DI BAWAH 56% (n48) | bila DI ATAS 43% (n35) | dasar 56% | beda +13 poin p 0.167 | LAMA bawah 57%/atas 43% | BARU bawah 55%/atas 43%
+   core K|P                   naik bila DI BAWAH 54% (n65) | bila DI ATAS 48% (n46) | dasar 56% | beda +6 poin p 0.339 | LAMA bawah 56%/atas 46% | BARU bawah 50%/atas 50%
+   y/y YOY konsistensi        naik bila DI BAWAH 61% (n57) | bila DI ATAS 44% (n55) | dasar 56% | beda +18 poin p 0.047 | LAMA bawah 62%/atas 45% | BARU bawah 60%/atas 38%
+   y/y P kejutan lalu         naik bila DI BAWAH 57% (n54) | bila DI ATAS 54% (n59) | dasar 56% | beda +3 poin p 0.440 | LAMA bawah 57%/atas 57% | BARU bawah 59%/atas 47%
+   y/y YOY|P                  naik bila DI BAWAH 62% (n80) | bila DI ATAS 44% (n73) | dasar 56% | beda +19 poin p 0.014 | LAMA bawah 61%/atas 46% | BARU bawah 65%/atas 38%
+   GABUNG suara 3 judul       naik bila DI BAWAH 60% (n78) | bila DI ATAS 46% (n57) | dasar 56% | beda +15 poin p 0.067 | LAMA bawah 60%/atas 43% | BARU bawah 62%/atas 50%
+   GABUNG terbaik 3 judul     naik bila DI BAWAH 63% (n82) | bila DI ATAS 57% (n68) | dasar 56% | beda +6 poin p 0.271 | LAMA bawah 62%/atas 56% | BARU bawah 65%/atas 59%
+   GABUNG core & y/y sepakat  naik bila DI BAWAH 61% (n38) | bila DI ATAS 42% (n24) | dasar 56% | beda +19 poin p 0.114 | LAMA bawah 59%/atas 44% | BARU bawah 64%/atas 38%
+  1 mnt:
+   PLAFON headline (kejutan asli) naik bila DI BAWAH 81% (n58) | bila DI ATAS 26% (n47) | dasar 58% | beda +56 poin p 0.000 | LAMA bawah 74%/atas 24% | BARU bawah 100%/atas 28%
+   PLAFON core (kejutan asli) naik bila DI BAWAH 87% (n60) | bila DI ATAS 25% (n44) | dasar 58% | beda +62 poin p 0.000 | LAMA bawah 82%/atas 30% | BARU bawah 100%/atas 18%
+   PLAFON y/y (kejutan asli)  naik bila DI BAWAH 83% (n53) | bila DI ATAS 25% (n59) | dasar 58% | beda +58 poin p 0.000 | LAMA bawah 76%/atas 28% | BARU bawah 95%/atas 21%
+   headline K Kalshi          naik bila DI BAWAH 73% (n15) | bila DI ATAS 50% (n16) | dasar 58% | beda +23 poin p 0.171 | LAMA bawah –/atas – | BARU bawah 73%/atas 50%
+   headline P kejutan lalu    naik bila DI BAWAH 62% (n58) | bila DI ATAS 50% (n42) | dasar 58% | beda +12 poin p 0.155 | LAMA bawah 56%/atas 50% | BARU bawah 80%/atas 50%
+   headline N nowcast         naik bila DI BAWAH 47% (n38) | bila DI ATAS 46% (n26) | dasar 58% | beda +1 poin p 0.564 | LAMA bawah 41%/atas 33% | BARU bawah 64%/atas 53%
+   headline bensin            naik bila DI BAWAH 59% (n87) | bila DI ATAS 58% (n98) | dasar 58% | beda +0 poin p 0.535 | LAMA bawah 56%/atas 58% | BARU bawah 64%/atas 59%
+   headline WTI               naik bila DI BAWAH 65% (n79) | bila DI ATAS 54% (n106) | dasar 58% | beda +11 poin p 0.087 | LAMA bawah 59%/atas 55% | BARU bawah 73%/atas 50%
+   headline solar             naik bila DI BAWAH 57% (n97) | bila DI ATAS 60% (n88) | dasar 58% | beda -4 poin p 0.742 | LAMA bawah 52%/atas 63% | BARU bawah 68%/atas 55%
+   headline K|P               naik bila DI BAWAH 61% (n64) | bila DI ATAS 50% (n48) | dasar 58% | beda +11 poin p 0.165 | LAMA bawah 56%/atas 50% | BARU bawah 71%/atas 50%
+   core K Kalshi              naik bila DI BAWAH 62% (n16) | bila DI ATAS 58% (n12) | dasar 58% | beda +4 poin p 0.566 | LAMA bawah –/atas – | BARU bawah 62%/atas 58%
+   core P kejutan lalu        naik bila DI BAWAH 60% (n58) | bila DI ATAS 51% (n45) | dasar 58% | beda +9 poin p 0.229 | LAMA bawah 58%/atas 46% | BARU bawah 67%/atas 59%
+   core N nowcast             naik bila DI BAWAH 47% (n30) | bila DI ATAS 48% (n23) | dasar 58% | beda -1 poin p 0.650 | LAMA bawah 41%/atas 40% | BARU bawah 62%/atas 50%
+   core KON                   naik bila DI BAWAH 55% (n53) | bila DI ATAS 56% (n41) | dasar 58% | beda -1 poin p 0.623 | LAMA bawah 55%/atas 52% | BARU bawah 54%/atas 62%
+   core KON&P                 naik bila DI BAWAH 56% (n48) | bila DI ATAS 51% (n35) | dasar 58% | beda +5 poin p 0.410 | LAMA bawah 54%/atas 48% | BARU bawah 64%/atas 57%
+   core K|P                   naik bila DI BAWAH 58% (n65) | bila DI ATAS 52% (n46) | dasar 58% | beda +6 poin p 0.318 | LAMA bawah 58%/atas 46% | BARU bawah 59%/atas 61%
+   y/y YOY konsistensi        naik bila DI BAWAH 63% (n57) | bila DI ATAS 42% (n55) | dasar 58% | beda +21 poin p 0.020 | LAMA bawah 62%/atas 40% | BARU bawah 67%/atas 46%
+   y/y P kejutan lalu         naik bila DI BAWAH 61% (n54) | bila DI ATAS 59% (n59) | dasar 58% | beda +2 poin p 0.503 | LAMA bawah 57%/atas 62% | BARU bawah 71%/atas 53%
+   y/y YOY|P                  naik bila DI BAWAH 64% (n80) | bila DI ATAS 48% (n73) | dasar 58% | beda +16 poin p 0.033 | LAMA bawah 61%/atas 48% | BARU bawah 70%/atas 48%
+   GABUNG suara 3 judul       naik bila DI BAWAH 68% (n78) | bila DI ATAS 53% (n57) | dasar 58% | beda +15 poin p 0.048 | LAMA bawah 67%/atas 49% | BARU bawah 71%/atas 59%
+   GABUNG terbaik 3 judul     naik bila DI BAWAH 63% (n82) | bila DI ATAS 56% (n68) | dasar 58% | beda +8 poin p 0.216 | LAMA bawah 61%/atas 56% | BARU bawah 69%/atas 56%
+   GABUNG core & y/y sepakat  naik bila DI BAWAH 66% (n38) | bila DI ATAS 42% (n24) | dasar 58% | beda +24 poin p 0.050 | LAMA bawah 63%/atas 44% | BARU bawah 73%/atas 38%
+  5 mnt:
+   PLAFON headline (kejutan asli) naik bila DI BAWAH 67% (n58) | bila DI ATAS 28% (n47) | dasar 57% | beda +40 poin p 0.000 | LAMA bawah 58%/atas 31% | BARU bawah 93%/atas 22%
+   PLAFON core (kejutan asli) naik bila DI BAWAH 67% (n60) | bila DI ATAS 30% (n44) | dasar 57% | beda +37 poin p 0.000 | LAMA bawah 60%/atas 33% | BARU bawah 87%/atas 24%
+   PLAFON y/y (kejutan asli)  naik bila DI BAWAH 70% (n53) | bila DI ATAS 34% (n59) | dasar 57% | beda +36 poin p 0.000 | LAMA bawah 59%/atas 38% | BARU bawah 89%/atas 26%
+   headline K Kalshi          naik bila DI BAWAH 67% (n15) | bila DI ATAS 50% (n16) | dasar 57% | beda +17 poin p 0.274 | LAMA bawah –/atas – | BARU bawah 67%/atas 50%
+   headline P kejutan lalu    naik bila DI BAWAH 55% (n58) | bila DI ATAS 57% (n42) | dasar 57% | beda -2 poin p 0.642 | LAMA bawah 53%/atas 54% | BARU bawah 60%/atas 61%
+   headline N nowcast         naik bila DI BAWAH 58% (n38) | bila DI ATAS 46% (n26) | dasar 57% | beda +12 poin p 0.248 | LAMA bawah 56%/atas 33% | BARU bawah 64%/atas 53%
+   headline bensin            naik bila DI BAWAH 56% (n87) | bila DI ATAS 57% (n98) | dasar 57% | beda -1 poin p 0.598 | LAMA bawah 53%/atas 56% | BARU bawah 64%/atas 59%
+   headline WTI               naik bila DI BAWAH 63% (n79) | bila DI ATAS 52% (n106) | dasar 57% | beda +11 poin p 0.080 | LAMA bawah 59%/atas 51% | BARU bawah 70%/atas 53%
+   headline solar             naik bila DI BAWAH 55% (n97) | bila DI ATAS 59% (n88) | dasar 57% | beda -4 poin p 0.772 | LAMA bawah 48%/atas 61% | BARU bawah 68%/atas 55%
+   headline K|P               naik bila DI BAWAH 58% (n64) | bila DI ATAS 54% (n48) | dasar 57% | beda +4 poin p 0.421 | LAMA bawah 53%/atas 54% | BARU bawah 67%/atas 54%
+   core K Kalshi              naik bila DI BAWAH 69% (n16) | bila DI ATAS 67% (n12) | dasar 57% | beda +2 poin p 0.610 | LAMA bawah –/atas – | BARU bawah 69%/atas 67%
+   core P kejutan lalu        naik bila DI BAWAH 48% (n58) | bila DI ATAS 51% (n45) | dasar 57% | beda -3 poin p 0.683 | LAMA bawah 49%/atas 43% | BARU bawah 47%/atas 65%
+   core N nowcast             naik bila DI BAWAH 53% (n30) | bila DI ATAS 43% (n23) | dasar 57% | beda +10 poin p 0.347 | LAMA bawah 50%/atas 20% | BARU bawah 62%/atas 50%
+   core KON                   naik bila DI BAWAH 47% (n53) | bila DI ATAS 59% (n41) | dasar 57% | beda -11 poin p 0.904 | LAMA bawah 48%/atas 52% | BARU bawah 46%/atas 69%
+   core KON&P                 naik bila DI BAWAH 44% (n48) | bila DI ATAS 60% (n35) | dasar 57% | beda -16 poin p 0.951 | LAMA bawah 46%/atas 57% | BARU bawah 36%/atas 64%
+   core K|P                   naik bila DI BAWAH 49% (n65) | bila DI ATAS 52% (n46) | dasar 57% | beda -3 poin p 0.689 | LAMA bawah 49%/atas 43% | BARU bawah 50%/atas 67%
+   y/y YOY konsistensi        naik bila DI BAWAH 56% (n57) | bila DI ATAS 45% (n55) | dasar 57% | beda +11 poin p 0.170 | LAMA bawah 52%/atas 45% | BARU bawah 67%/atas 46%
+   y/y P kejutan lalu         naik bila DI BAWAH 48% (n54) | bila DI ATAS 61% (n59) | dasar 57% | beda -13 poin p 0.942 | LAMA bawah 43%/atas 62% | BARU bawah 59%/atas 58%
+   y/y YOY|P                  naik bila DI BAWAH 56% (n80) | bila DI ATAS 51% (n73) | dasar 57% | beda +6 poin p 0.300 | LAMA bawah 53%/atas 52% | BARU bawah 65%/atas 48%
+   GABUNG suara 3 judul       naik bila DI BAWAH 58% (n78) | bila DI ATAS 51% (n57) | dasar 57% | beda +7 poin p 0.262 | LAMA bawah 56%/atas 46% | BARU bawah 62%/atas 59%
+   GABUNG terbaik 3 judul     naik bila DI BAWAH 57% (n82) | bila DI ATAS 62% (n68) | dasar 57% | beda -4 poin p 0.767 | LAMA bawah 54%/atas 63% | BARU bawah 65%/atas 59%
+   GABUNG core & y/y sepakat  naik bila DI BAWAH 47% (n38) | bila DI ATAS 46% (n24) | dasar 57% | beda +2 poin p 0.575 | LAMA bawah 44%/atas 44% | BARU bawah 55%/atas 50%
+  1 jam:
+   PLAFON headline (kejutan asli) naik bila DI BAWAH 67% (n52) | bila DI ATAS 42% (n43) | dasar 52% | beda +25 poin p 0.009 | LAMA bawah 62%/atas 52% | BARU bawah 80%/atas 28%
+   PLAFON core (kejutan asli) naik bila DI BAWAH 69% (n55) | bila DI ATAS 34% (n41) | dasar 52% | beda +35 poin p 0.000 | LAMA bawah 65%/atas 29% | BARU bawah 80%/atas 41%
+   PLAFON y/y (kejutan asli)  naik bila DI BAWAH 63% (n51) | bila DI ATAS 37% (n51) | dasar 52% | beda +25 poin p 0.006 | LAMA bawah 56%/atas 44% | BARU bawah 74%/atas 26%
+   headline K Kalshi          naik bila DI BAWAH 53% (n15) | bila DI ATAS 50% (n16) | dasar 52% | beda +3 poin p 0.560 | LAMA bawah –/atas – | BARU bawah 53%/atas 50%
+   headline P kejutan lalu    naik bila DI BAWAH 48% (n52) | bila DI ATAS 51% (n39) | dasar 52% | beda -3 poin p 0.698 | LAMA bawah 46%/atas 52% | BARU bawah 53%/atas 50%
+   headline N nowcast         naik bila DI BAWAH 47% (n38) | bila DI ATAS 50% (n26) | dasar 52% | beda -3 poin p 0.679 | LAMA bawah 44%/atas 44% | BARU bawah 55%/atas 53%
+   headline bensin            naik bila DI BAWAH 50% (n80) | bila DI ATAS 53% (n90) | dasar 52% | beda -3 poin p 0.721 | LAMA bawah 44%/atas 53% | BARU bawah 61%/atas 53%
+   headline WTI               naik bila DI BAWAH 52% (n75) | bila DI ATAS 52% (n95) | dasar 52% | beda +0 poin p 0.543 | LAMA bawah 44%/atas 52% | BARU bawah 63%/atas 50%
+   headline solar             naik bila DI BAWAH 46% (n89) | bila DI ATAS 58% (n81) | dasar 52% | beda -12 poin p 0.956 | LAMA bawah 38%/atas 62% | BARU bawah 61%/atas 52%
+   headline K|P               naik bila DI BAWAH 48% (n58) | bila DI ATAS 51% (n45) | dasar 52% | beda -3 poin p 0.675 | LAMA bawah 46%/atas 52% | BARU bawah 52%/atas 50%
+   core K Kalshi              naik bila DI BAWAH 50% (n16) | bila DI ATAS 58% (n12) | dasar 52% | beda -8 poin p 0.779 | LAMA bawah –/atas – | BARU bawah 50%/atas 58%
+   core P kejutan lalu        naik bila DI BAWAH 44% (n54) | bila DI ATAS 46% (n41) | dasar 52% | beda -2 poin p 0.658 | LAMA bawah 44%/atas 50% | BARU bawah 47%/atas 41%
+   core N nowcast             naik bila DI BAWAH 57% (n30) | bila DI ATAS 48% (n23) | dasar 52% | beda +9 poin p 0.376 | LAMA bawah 55%/atas 60% | BARU bawah 62%/atas 44%
+   core KON                   naik bila DI BAWAH 43% (n49) | bila DI ATAS 53% (n38) | dasar 52% | beda -10 poin p 0.862 | LAMA bawah 42%/atas 55% | BARU bawah 46%/atas 50%
+   core KON&P                 naik bila DI BAWAH 40% (n45) | bila DI ATAS 50% (n32) | dasar 52% | beda -10 poin p 0.866 | LAMA bawah 38%/atas 56% | BARU bawah 45%/atas 43%
+   core K|P                   naik bila DI BAWAH 43% (n61) | bila DI ATAS 52% (n42) | dasar 52% | beda -10 poin p 0.886 | LAMA bawah 44%/atas 50% | BARU bawah 41%/atas 56%
+   y/y YOY konsistensi        naik bila DI BAWAH 50% (n50) | bila DI ATAS 47% (n49) | dasar 52% | beda +3 poin p 0.457 | LAMA bawah 40%/atas 50% | BARU bawah 73%/atas 38%
+   y/y P kejutan lalu         naik bila DI BAWAH 43% (n51) | bila DI ATAS 52% (n50) | dasar 52% | beda -9 poin p 0.859 | LAMA bawah 41%/atas 55% | BARU bawah 47%/atas 47%
+   y/y YOY|P                  naik bila DI BAWAH 47% (n73) | bila DI ATAS 48% (n65) | dasar 52% | beda -1 poin p 0.619 | LAMA bawah 40%/atas 55% | BARU bawah 61%/atas 33%
+   GABUNG suara 3 judul       naik bila DI BAWAH 44% (n72) | bila DI ATAS 59% (n51) | dasar 52% | beda -14 poin p 0.962 | LAMA bawah 43%/atas 66% | BARU bawah 48%/atas 50%
+   GABUNG terbaik 3 judul     naik bila DI BAWAH 43% (n76) | bila DI ATAS 62% (n63) | dasar 52% | beda -18 poin p 0.991 | LAMA bawah 38%/atas 67% | BARU bawah 54%/atas 56%
+   GABUNG core & y/y sepakat  naik bila DI BAWAH 41% (n34) | bila DI ATAS 48% (n21) | dasar 52% | beda -6 poin p 0.782 | LAMA bawah 39%/atas 54% | BARU bawah 45%/atas 38%
+
+## Ditambah tren emas 4 jam sebelum rilis (H4): tebakan emas searah tren vs berlawanan
+   headline K Kalshi SEARAH 10 dtk  62% n13  p 0.291 | LAMA    – n0   BARU  62% n13  | atas→TURUN 56% (9) bawah→NAIK 75% (4)
+   headline K Kalshi LAWAN  10 dtk  67% n18  p 0.119 | LAMA    – n0   BARU  67% n18  | atas→TURUN 71% (7) bawah→NAIK 64% (11)
+   headline K Kalshi SEARAH 1 mnt  46% n13  p 0.709 | LAMA    – n0   BARU  46% n13  | atas→TURUN 44% (9) bawah→NAIK 50% (4)
+   headline K Kalshi LAWAN  1 mnt  72% n18  p 0.048 | LAMA    – n0   BARU  72% n18  | atas→TURUN 57% (7) bawah→NAIK 82% (11)
+   headline K Kalshi SEARAH 1 jam  38% n13  p 0.867 | LAMA    – n0   BARU  38% n13  | atas→TURUN 33% (9) bawah→NAIK 50% (4)
+   headline K Kalshi LAWAN  1 jam  61% n18  p 0.240 | LAMA    – n0   BARU  61% n18  | atas→TURUN 71% (7) bawah→NAIK 55% (11)
+   headline P kejutan lalu SEARAH 10 dtk  56% n48  p 0.235 | LAMA  57% n30  BARU  56% n18  | atas→TURUN 50% (18) bawah→NAIK 60% (30)
+   headline P kejutan lalu LAWAN  10 dtk  57% n42  p 0.220 | LAMA  52% n27  BARU  67% n15  | atas→TURUN 55% (20) bawah→NAIK 59% (22)
+   headline P kejutan lalu SEARAH 1 mnt  54% n48  p 0.333 | LAMA  50% n30  BARU  61% n18  | atas→TURUN 50% (18) bawah→NAIK 57% (30)
+   headline P kejutan lalu LAWAN  1 mnt  62% n42  p 0.082 | LAMA  59% n27  BARU  67% n15  | atas→TURUN 55% (20) bawah→NAIK 68% (22)
+   headline P kejutan lalu SEARAH 1 jam  48% n48  p 0.667 | LAMA  47% n30  BARU  50% n18  | atas→TURUN 44% (18) bawah→NAIK 50% (30)
+   headline P kejutan lalu LAWAN  1 jam  48% n42  p 0.678 | LAMA  44% n27  BARU  53% n15  | atas→TURUN 50% (20) bawah→NAIK 45% (22)
+   headline N nowcast SEARAH 10 dtk  52% n25  p 0.500 | LAMA  50% n14  BARU  55% n11  | atas→TURUN 50% (6) bawah→NAIK 53% (19)
+   headline N nowcast LAWAN  10 dtk  51% n39  p 0.500 | LAMA  45% n22  BARU  59% n17  | atas→TURUN 50% (20) bawah→NAIK 53% (19)
+   headline N nowcast SEARAH 1 mnt  48% n25  p 0.655 | LAMA  43% n14  BARU  55% n11  | atas→TURUN 33% (6) bawah→NAIK 53% (19)
+   headline N nowcast LAWAN  1 mnt  51% n39  p 0.500 | LAMA  50% n22  BARU  53% n17  | atas→TURUN 60% (20) bawah→NAIK 42% (19)
+   headline N nowcast SEARAH 1 jam  40% n25  p 0.885 | LAMA  43% n14  BARU  36% n11  | atas→TURUN 17% (6) bawah→NAIK 47% (19)
+   headline N nowcast LAWAN  1 jam  54% n39  p 0.375 | LAMA  50% n22  BARU  59% n17  | atas→TURUN 60% (20) bawah→NAIK 47% (19)
+   headline bensin SEARAH 10 dtk  54% n99  p 0.273 | LAMA  54% n61  BARU  53% n38  | atas→TURUN 50% (52) bawah→NAIK 57% (47)
+   headline bensin LAWAN  10 dtk  49% n70  p 0.640 | LAMA  50% n48  BARU  45% n22  | atas→TURUN 43% (37) bawah→NAIK 55% (33)
+   headline bensin SEARAH 1 mnt  48% n99  p 0.656 | LAMA  46% n61  BARU  53% n38  | atas→TURUN 48% (52) bawah→NAIK 49% (47)
+   headline bensin LAWAN  1 mnt  50% n70  p 0.548 | LAMA  50% n48  BARU  50% n22  | atas→TURUN 35% (37) bawah→NAIK 67% (33)
+   headline bensin SEARAH 1 jam  43% n99  p 0.920 | LAMA  39% n61  BARU  50% n38  | atas→TURUN 40% (52) bawah→NAIK 47% (47)
+   headline bensin LAWAN  1 jam  54% n70  p 0.275 | LAMA  52% n48  BARU  59% n22  | atas→TURUN 54% (37) bawah→NAIK 55% (33)
+   headline WTI SEARAH 10 dtk  56% n95  p 0.152 | LAMA  56% n59  BARU  56% n36  | atas→TURUN 49% (53) bawah→NAIK 64% (42)
+   headline WTI LAWAN  10 dtk  51% n74  p 0.454 | LAMA  52% n50  BARU  50% n24  | atas→TURUN 50% (42) bawah→NAIK 53% (32)
+   headline WTI SEARAH 1 mnt   54% n95  p 0.269 | LAMA  49% n59  BARU  61% n36  | atas→TURUN 53% (53) bawah→NAIK 55% (42)
+   headline WTI LAWAN  1 mnt   57% n74  p 0.148 | LAMA  54% n50  BARU  62% n24  | atas→TURUN 43% (42) bawah→NAIK 75% (32)
+   headline WTI SEARAH 1 jam   45% n95  p 0.848 | LAMA  41% n59  BARU  53% n36  | atas→TURUN 40% (53) bawah→NAIK 52% (42)
+   headline WTI LAWAN  1 jam   57% n74  p 0.148 | LAMA  54% n50  BARU  62% n24  | atas→TURUN 60% (42) bawah→NAIK 53% (32)
+   headline solar SEARAH 10 dtk  49% n89  p 0.584 | LAMA  48% n58  BARU  52% n31  | atas→TURUN 42% (43) bawah→NAIK 57% (46)
+   headline solar LAWAN  10 dtk  44% n80  p 0.891 | LAMA  43% n51  BARU  45% n29  | atas→TURUN 42% (38) bawah→NAIK 45% (42)
+   headline solar SEARAH 1 mnt  47% n89  p 0.737 | LAMA  41% n58  BARU  58% n31  | atas→TURUN 47% (43) bawah→NAIK 48% (46)
+   headline solar LAWAN  1 mnt  49% n80  p 0.631 | LAMA  45% n51  BARU  55% n29  | atas→TURUN 34% (38) bawah→NAIK 62% (42)
+   headline solar SEARAH 1 jam  39% n89  p 0.983 | LAMA  33% n58  BARU  52% n31  | atas→TURUN 33% (43) bawah→NAIK 46% (46)
+   headline solar LAWAN  1 jam  50% n80  p 0.544 | LAMA  45% n51  BARU  59% n29  | atas→TURUN 53% (38) bawah→NAIK 48% (42)
+   headline K|P SEARAH 10 dtk  58% n52  p 0.166 | LAMA  57% n30  BARU  59% n22  | atas→TURUN 55% (22) bawah→NAIK 60% (30)
+   headline K|P LAWAN  10 dtk  56% n50  p 0.240 | LAMA  52% n27  BARU  61% n23  | atas→TURUN 59% (22) bawah→NAIK 54% (28)
+   headline K|P SEARAH 1 mnt   52% n52  p 0.445 | LAMA  50% n30  BARU  55% n22  | atas→TURUN 50% (22) bawah→NAIK 53% (30)
+   headline K|P LAWAN  1 mnt   62% n50  p 0.059 | LAMA  59% n27  BARU  65% n23  | atas→TURUN 55% (22) bawah→NAIK 68% (28)
+   headline K|P SEARAH 1 jam   46% n52  p 0.756 | LAMA  47% n30  BARU  45% n22  | atas→TURUN 41% (22) bawah→NAIK 50% (30)
+   headline K|P LAWAN  1 jam   50% n50  p 0.556 | LAMA  44% n27  BARU  57% n23  | atas→TURUN 55% (22) bawah→NAIK 46% (28)
+   core K Kalshi SEARAH 10 dtk  50% n16  p 0.598 | LAMA    – n0   BARU  50% n16  | atas→TURUN 43% (7) bawah→NAIK 56% (9)
+   core K Kalshi LAWAN  10 dtk  58% n12  p 0.387 | LAMA    – n0   BARU  58% n12  | atas→TURUN 60% (5) bawah→NAIK 57% (7)
+   core K Kalshi SEARAH 1 mnt  44% n16  p 0.773 | LAMA    – n0   BARU  44% n16  | atas→TURUN 29% (7) bawah→NAIK 56% (9)
+   core K Kalshi LAWAN  1 mnt  67% n12  p 0.194 | LAMA    – n0   BARU  67% n12  | atas→TURUN 60% (5) bawah→NAIK 71% (7)
+   core K Kalshi SEARAH 1 jam  44% n16  p 0.773 | LAMA    – n0   BARU  44% n16  | atas→TURUN 29% (7) bawah→NAIK 56% (9)
+   core K Kalshi LAWAN  1 jam  50% n12  p 0.613 | LAMA    – n0   BARU  50% n12  | atas→TURUN 60% (5) bawah→NAIK 43% (7)
+   core P kejutan lalu SEARAH 10 dtk  58% n48  p 0.156 | LAMA  62% n29  BARU  53% n19  | atas→TURUN 59% (22) bawah→NAIK 58% (26)
+   core P kejutan lalu LAWAN  10 dtk  60% n47  p 0.121 | LAMA  56% n34  BARU  69% n13  | atas→TURUN 63% (19) bawah→NAIK 57% (28)
+   core P kejutan lalu SEARAH 1 mnt  54% n48  p 0.333 | LAMA  59% n29  BARU  47% n19  | atas→TURUN 50% (22) bawah→NAIK 58% (26)
+   core P kejutan lalu LAWAN  1 mnt  57% n47  p 0.191 | LAMA  56% n34  BARU  62% n13  | atas→TURUN 53% (19) bawah→NAIK 61% (28)
+   core P kejutan lalu SEARAH 1 jam  46% n48  p 0.765 | LAMA  45% n29  BARU  47% n19  | atas→TURUN 55% (22) bawah→NAIK 38% (26)
+   core P kejutan lalu LAWAN  1 jam  51% n47  p 0.500 | LAMA  47% n34  BARU  62% n13  | atas→TURUN 53% (19) bawah→NAIK 50% (28)
+   core N nowcast SEARAH 10 dtk  58% n24  p 0.271 | LAMA  43% n14  BARU  80% n10  | atas→TURUN 70% (10) bawah→NAIK 50% (14)
+   core N nowcast LAWAN  10 dtk  52% n29  p 0.500 | LAMA  38% n13  BARU  62% n16  | atas→TURUN 54% (13) bawah→NAIK 50% (16)
+   core N nowcast SEARAH 1 mnt  33% n24  p 0.968 | LAMA  29% n14  BARU  40% n10  | atas→TURUN 30% (10) bawah→NAIK 36% (14)
+   core N nowcast LAWAN  1 mnt  62% n29  p 0.132 | LAMA  62% n13  BARU  62% n16  | atas→TURUN 69% (13) bawah→NAIK 56% (16)
+   core N nowcast SEARAH 1 jam  46% n24  p 0.729 | LAMA  43% n14  BARU  50% n10  | atas→TURUN 30% (10) bawah→NAIK 57% (14)
+   core N nowcast LAWAN  1 jam  62% n29  p 0.132 | LAMA  62% n13  BARU  62% n16  | atas→TURUN 69% (13) bawah→NAIK 56% (16)
+   core KON SEARAH 10 dtk      56% n45  p 0.276 | LAMA  60% n30  BARU  47% n15  | atas→TURUN 55% (22) bawah→NAIK 57% (23)
+   core KON LAWAN  10 dtk      50% n42  p 0.561 | LAMA  50% n28  BARU  50% n14  | atas→TURUN 50% (16) bawah→NAIK 50% (26)
+   core KON SEARAH 1 mnt       53% n45  p 0.383 | LAMA  57% n30  BARU  47% n15  | atas→TURUN 50% (22) bawah→NAIK 57% (23)
+   core KON LAWAN  1 mnt       45% n42  p 0.780 | LAMA  46% n28  BARU  43% n14  | atas→TURUN 38% (16) bawah→NAIK 50% (26)
+   core KON SEARAH 1 jam       44% n45  p 0.814 | LAMA  43% n30  BARU  47% n15  | atas→TURUN 50% (22) bawah→NAIK 39% (23)
+   core KON LAWAN  1 jam       45% n42  p 0.780 | LAMA  43% n28  BARU  50% n14  | atas→TURUN 44% (16) bawah→NAIK 46% (26)
+   core KON&P SEARAH 10 dtk    60% n40  p 0.134 | LAMA  65% n26  BARU  50% n14  | atas→TURUN 67% (18) bawah→NAIK 55% (22)
+   core KON&P LAWAN  10 dtk    57% n37  p 0.256 | LAMA  54% n26  BARU  64% n11  | atas→TURUN 57% (14) bawah→NAIK 57% (23)
+   core KON&P SEARAH 1 mnt     57% n40  p 0.215 | LAMA  62% n26  BARU  50% n14  | atas→TURUN 61% (18) bawah→NAIK 55% (22)
+   core KON&P LAWAN  1 mnt     49% n37  p 0.629 | LAMA  46% n26  BARU  55% n11  | atas→TURUN 36% (14) bawah→NAIK 57% (23)
+   core KON&P SEARAH 1 jam     45% n40  p 0.785 | LAMA  42% n26  BARU  50% n14  | atas→TURUN 56% (18) bawah→NAIK 36% (22)
+   core KON&P LAWAN  1 jam     43% n37  p 0.838 | LAMA  38% n26  BARU  55% n11  | atas→TURUN 43% (14) bawah→NAIK 43% (23)
+   core K|P SEARAH 10 dtk      55% n53  p 0.292 | LAMA  62% n29  BARU  46% n24  | atas→TURUN 52% (23) bawah→NAIK 57% (30)
+   core K|P LAWAN  10 dtk      56% n50  p 0.240 | LAMA  56% n34  BARU  56% n16  | atas→TURUN 63% (19) bawah→NAIK 52% (31)
+   core K|P SEARAH 1 mnt       53% n53  p 0.392 | LAMA  59% n29  BARU  46% n24  | atas→TURUN 48% (23) bawah→NAIK 57% (30)
+   core K|P LAWAN  1 mnt       56% n50  p 0.240 | LAMA  56% n34  BARU  56% n16  | atas→TURUN 53% (19) bawah→NAIK 58% (31)
+   core K|P SEARAH 1 jam       42% n53  p 0.916 | LAMA  45% n29  BARU  38% n24  | atas→TURUN 43% (23) bawah→NAIK 40% (30)
+   core K|P LAWAN  1 jam       48% n50  p 0.664 | LAMA  47% n34  BARU  50% n16  | atas→TURUN 53% (19) bawah→NAIK 45% (31)
+   y/y YOY konsistensi SEARAH 10 dtk  64% n55  p 0.029 | LAMA  66% n38  BARU  59% n17  | atas→TURUN 57% (28) bawah→NAIK 70% (27)  ✅
+   y/y YOY konsistensi LAWAN  10 dtk  60% n43  p 0.111 | LAMA  59% n32  BARU  64% n11  | atas→TURUN 67% (21) bawah→NAIK 55% (22)
+   y/y YOY konsistensi SEARAH 1 mnt  58% n55  p 0.140 | LAMA  58% n38  BARU  59% n17  | atas→TURUN 54% (28) bawah→NAIK 63% (27)
+   y/y YOY konsistensi LAWAN  1 mnt  65% n43  p 0.033 | LAMA  66% n32  BARU  64% n11  | atas→TURUN 71% (21) bawah→NAIK 59% (22)  ✅
+   y/y YOY konsistensi SEARAH 1 jam  45% n55  p 0.791 | LAMA  37% n38  BARU  65% n17  | atas→TURUN 50% (28) bawah→NAIK 41% (27)
+   y/y YOY konsistensi LAWAN  1 jam  60% n43  p 0.111 | LAMA  56% n32  BARU  73% n11  | atas→TURUN 57% (21) bawah→NAIK 64% (22)
+   y/y P kejutan lalu SEARAH 10 dtk  52% n48  p 0.443 | LAMA  50% n30  BARU  56% n18  | atas→TURUN 39% (23) bawah→NAIK 64% (25)
+   y/y P kejutan lalu LAWAN  10 dtk  51% n53  p 0.500 | LAMA  49% n35  BARU  56% n18  | atas→TURUN 52% (27) bawah→NAIK 50% (26)
+   y/y P kejutan lalu SEARAH 1 mnt  44% n48  p 0.844 | LAMA  40% n30  BARU  50% n18  | atas→TURUN 30% (23) bawah→NAIK 56% (25)
+   y/y P kejutan lalu LAWAN  1 mnt  60% n53  p 0.084 | LAMA  57% n35  BARU  67% n18  | atas→TURUN 56% (27) bawah→NAIK 65% (26)
+   y/y P kejutan lalu SEARAH 1 jam  40% n48  p 0.944 | LAMA  37% n30  BARU  44% n18  | atas→TURUN 35% (23) bawah→NAIK 44% (25)
+   y/y P kejutan lalu LAWAN  1 jam  51% n53  p 0.500 | LAMA  49% n35  BARU  56% n18  | atas→TURUN 59% (27) bawah→NAIK 42% (26)
+   y/y YOY|P SEARAH 10 dtk     64% n73  p 0.009 | LAMA  65% n48  BARU  64% n25  | atas→TURUN 57% (35) bawah→NAIK 71% (38)  ✅
+   y/y YOY|P LAWAN  10 dtk     61% n64  p 0.052 | LAMA  60% n45  BARU  63% n19  | atas→TURUN 67% (30) bawah→NAIK 56% (34)
+   y/y YOY|P SEARAH 1 mnt      55% n73  p 0.241 | LAMA  54% n48  BARU  56% n25  | atas→TURUN 49% (35) bawah→NAIK 61% (38)
+   y/y YOY|P LAWAN  1 mnt      64% n64  p 0.016 | LAMA  62% n45  BARU  68% n19  | atas→TURUN 63% (30) bawah→NAIK 65% (34)  ✅
+   y/y YOY|P SEARAH 1 jam      45% n73  p 0.825 | LAMA  38% n48  BARU  60% n25  | atas→TURUN 51% (35) bawah→NAIK 39% (38)
+   y/y YOY|P LAWAN  1 jam      55% n64  p 0.266 | LAMA  49% n45  BARU  68% n19  | atas→TURUN 53% (30) bawah→NAIK 56% (34)
+   GABUNG suara 3 judul SEARAH 10 dtk  62% n64  p 0.030 | LAMA  68% n41  BARU  52% n23  | atas→TURUN 54% (26) bawah→NAIK 68% (38)  ✅
+   GABUNG suara 3 judul LAWAN  10 dtk  61% n59  p 0.059 | LAMA  62% n39  BARU  60% n20  | atas→TURUN 68% (25) bawah→NAIK 56% (34)
+   GABUNG suara 3 judul SEARAH 1 mnt  58% n64  p 0.130 | LAMA  61% n41  BARU  52% n23  | atas→TURUN 46% (26) bawah→NAIK 66% (38)
+   GABUNG suara 3 judul LAWAN  1 mnt  63% n59  p 0.034 | LAMA  64% n39  BARU  60% n20  | atas→TURUN 56% (25) bawah→NAIK 68% (34)  ✅
+   GABUNG suara 3 judul SEARAH 1 jam  39% n64  p 0.970 | LAMA  37% n41  BARU  43% n23  | atas→TURUN 35% (26) bawah→NAIK 42% (38)
+   GABUNG suara 3 judul LAWAN  1 jam  47% n59  p 0.699 | LAMA  44% n39  BARU  55% n20  | atas→TURUN 48% (25) bawah→NAIK 47% (34)
+   GABUNG terbaik 3 judul SEARAH 10 dtk  57% n76  p 0.151 | LAMA  60% n45  BARU  52% n31  | atas→TURUN 40% (35) bawah→NAIK 71% (41)
+   GABUNG terbaik 3 judul LAWAN  10 dtk  53% n62  p 0.352 | LAMA  52% n40  BARU  55% n22  | atas→TURUN 50% (28) bawah→NAIK 56% (34)
+   GABUNG terbaik 3 judul SEARAH 1 mnt  55% n76  p 0.211 | LAMA  53% n45  BARU  58% n31  | atas→TURUN 49% (35) bawah→NAIK 61% (41)
+   GABUNG terbaik 3 judul LAWAN  1 mnt  53% n62  p 0.352 | LAMA  52% n40  BARU  55% n22  | atas→TURUN 39% (28) bawah→NAIK 65% (34)
+   GABUNG terbaik 3 judul SEARAH 1 jam  38% n76  p 0.986 | LAMA  31% n45  BARU  48% n31  | atas→TURUN 31% (35) bawah→NAIK 44% (41)
+   GABUNG terbaik 3 judul LAWAN  1 jam  45% n62  p 0.813 | LAMA  42% n40  BARU  50% n22  | atas→TURUN 46% (28) bawah→NAIK 44% (34)
+   GABUNG core & y/y sepakat SEARAH 10 dtk  68% n31  p 0.035 | LAMA  71% n17  BARU  64% n14  | atas→TURUN 64% (11) bawah→NAIK 70% (20)  ✅
+   GABUNG core & y/y sepakat LAWAN  10 dtk  58% n24  p 0.271 | LAMA  58% n19  BARU  60% n5   | atas→TURUN 70% (10) bawah→NAIK 50% (14)
+   GABUNG core & y/y sepakat SEARAH 1 mnt  68% n31  p 0.035 | LAMA  65% n17  BARU  71% n14  | atas→TURUN 64% (11) bawah→NAIK 70% (20)  ✅
+   GABUNG core & y/y sepakat LAWAN  1 mnt  58% n24  p 0.271 | LAMA  58% n19  BARU  60% n5   | atas→TURUN 60% (10) bawah→NAIK 57% (14)
+   GABUNG core & y/y sepakat SEARAH 1 jam  52% n31  p 0.500 | LAMA  47% n17  BARU  57% n14  | atas→TURUN 64% (11) bawah→NAIK 45% (20)
+   GABUNG core & y/y sepakat LAWAN  1 jam  38% n24  p 0.924 | LAMA  37% n19  BARU  40% n5   | atas→TURUN 40% (10) bawah→NAIK 36% (14)
+
+Lolos (tanpa plafon): y/y YOY konsistensi [10 dtk]; y/y YOY|P [10 dtk]; GABUNG suara 3 judul [10 dtk]; y/y YOY konsistensi [1 mnt]; y/y YOY|P [1 mnt]; GABUNG suara 3 judul [1 mnt]; GABUNG core & y/y sepakat [1 mnt]; y/y YOY konsistensi + searah tren 4 jam [10 dtk]; y/y YOY|P + searah tren 4 jam [10 dtk]; GABUNG suara 3 judul + searah tren 4 jam [10 dtk]; GABUNG core & y/y sepakat + searah tren 4 jam [10 dtk]; GABUNG core & y/y sepakat + searah tren 4 jam [1 mnt]

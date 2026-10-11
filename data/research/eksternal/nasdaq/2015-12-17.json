@@ -1,0 +1,386 @@
+[
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "SECO Economic Forecasts",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "4.810B",
+"consensus": "2.870B",
+"previous": "2.190B"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "1.29B",
+"consensus": "",
+"previous": "0.76B"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "104.7",
+"consensus": "105.0",
+"previous": "104.7"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "112.8",
+"consensus": "113.4",
+"previous": "113.4"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "101.0",
+"consensus": "",
+"previous": "101.3"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "1.7%",
+"consensus": "0.6%",
+"previous": "-0.8%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "3.9%",
+"consensus": "2.3%",
+"previous": "3.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "5.0%",
+"consensus": "3.0%",
+"previous": "4.2%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "1.7%",
+"consensus": "0.5%",
+"previous": "-0.5%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.9%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "PPI",
+"actual": "4.3%",
+"consensus": "4.5%",
+"previous": "4.2%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.657%",
+"consensus": "",
+"previous": "0.437%"
+},
+{
+"gmt": "05:50",
+"country": "Spain",
+"eventName": "Spanish 8-Year Obligacion Auction",
+"actual": "1.354%",
+"consensus": "",
+"previous": "1.192%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Wages in euro zone",
+"actual": "1.40%",
+"consensus": "",
+"previous": "2.00%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Labor Cost Index",
+"actual": "1.10%",
+"consensus": "",
+"previous": "1.60%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "-7",
+"consensus": "-10",
+"previous": "-11"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Unemployment Rate",
+"actual": "7.5%",
+"consensus": "8.0%",
+"previous": "7.9%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "371.2B",
+"consensus": "",
+"previous": "364.4B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "13.9%",
+"consensus": "14.7%",
+"previous": "14.2%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "-13.1%",
+"consensus": "-11.5%",
+"previous": "-11.7%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Unemployment Rate",
+"actual": "5.8%",
+"consensus": "5.6%",
+"previous": "5.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,238K",
+"consensus": "2,220K",
+"previous": "2,245K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Current Account",
+"actual": "-124.1B",
+"consensus": "-118.0B",
+"previous": "-111.1B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "271K",
+"consensus": "275K",
+"previous": "282K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "270.50K",
+"consensus": "",
+"previous": "270.75K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "-5.9",
+"consensus": "1.5",
+"previous": "1.9"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "23.0",
+"consensus": "",
+"previous": "43.4"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "10.90",
+"consensus": "",
+"previous": "25.90"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "4.1",
+"consensus": "",
+"previous": "2.6"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "-9.5",
+"consensus": "",
+"previous": "-3.7"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "-9.80",
+"consensus": "",
+"previous": "-4.90"
+},
+{
+"gmt": "10:50",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "40.9",
+"consensus": "",
+"previous": "40.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-34B",
+"consensus": "-40B",
+"previous": "-76B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "5-Year TIPS Auction",
+"actual": "0.472%",
+"consensus": "",
+"previous": "0.305%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-4.6%",
+"consensus": "",
+"previous": "-4.6%"
+},
+{
+"gmt": "17:00",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "103",
+"consensus": "101",
+"previous": "102"
+},
+{
+"gmt": "17:33",
+"country": "Brazil",
+"eventName": "Long Term Interest Rate TJLP",
+"actual": "7.50%",
+"consensus": "7.50%",
+"previous": "7.00%"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "ANZ Business Confidence",
+"actual": "23.0",
+"consensus": "",
+"previous": "14.6"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "NBNZ Own Activity",
+"actual": "34.4%",
+"consensus": "",
+"previous": "32.0%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "House Prices",
+"actual": "0.9%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "23:50",
+"country": "Japan",
+"eventName": "BoJ Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:50",
+"country": "Japan",
+"eventName": "BoJ Interest Rate Decision",
+"actual": "0.10%",
+"consensus": "0.10%",
+"previous": "0.10%"
+}
+]

@@ -1,0 +1,466 @@
+[
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "1.4%",
+"consensus": "1.4%",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.1%",
+"consensus": "0.0%",
+"previous": "0.5%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "1.0%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "1.4%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "1.6%",
+"consensus": "1.4%",
+"previous": "1.2%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.1%",
+"consensus": "0.0%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "1.4%",
+"consensus": "1.4%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "-34.6K",
+"consensus": "",
+"previous": "20.5K"
+},
+{
+"gmt": "04:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "50.2",
+"consensus": "49.1",
+"previous": "48.8"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-23.6%",
+"consensus": "",
+"previous": "-24.3%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "8K",
+"consensus": "2K",
+"previous": "-16K"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "5.0%",
+"consensus": "5.0%",
+"previous": "5.0%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment",
+"actual": "2.279M",
+"consensus": "",
+"previous": "2.266M"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment n.s.a.",
+"actual": "2.227M",
+"consensus": "2.216M",
+"previous": "2.180M"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "M3 Money Supply",
+"actual": "5.6%",
+"consensus": "5.7%",
+"previous": "5.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Loans to Non Financial Corporations",
+"actual": "3.4%",
+"consensus": "",
+"previous": "3.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Private Sector Loans",
+"actual": "3.5%",
+"consensus": "3.6%",
+"previous": "3.5%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "0.563B",
+"consensus": "1.000B",
+"previous": "1.339B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "64.99K",
+"consensus": "64.45K",
+"previous": "64.66K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "4.05B",
+"consensus": "3.90B",
+"previous": "4.31B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "4.5B",
+"consensus": "",
+"previous": "5.6B"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "7.1%",
+"consensus": "",
+"previous": "7.9%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "10.1%",
+"consensus": "",
+"previous": "10.3%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "457.47B",
+"consensus": "",
+"previous": "454.95B"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "-0.8%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "1.5%",
+"consensus": "1.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "-0.8%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "1.5%",
+"consensus": "1.4%",
+"previous": "1.2%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "50.1",
+"consensus": "49.9",
+"previous": "49.8"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Seevol Cushing Storage Report",
+"actual": "-0.980M",
+"consensus": "",
+"previous": "-2.330M"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "ISM NY Business Conditions",
+"actual": "39.1%",
+"consensus": "",
+"previous": "50.4%"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "ISM-New York Index",
+"actual": "869.0",
+"consensus": "",
+"previous": "874.5"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "0.6%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "45.1",
+"consensus": "",
+"previous": "46.6"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "46.8",
+"consensus": "",
+"previous": "47.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "47.2",
+"consensus": "49.0",
+"previous": "48.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "51.7",
+"consensus": "47.5",
+"previous": "46.7"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-58B",
+"consensus": "-57B",
+"previous": "-161B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-11.463M",
+"consensus": "-3.288M",
+"previous": "-5.474M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.303M",
+"consensus": "",
+"previous": "0.418M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-1.522M",
+"consensus": "",
+"previous": "0.466M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-1.449M",
+"consensus": "-0.980M",
+"previous": "-2.393M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.083M",
+"consensus": "",
+"previous": "0.322M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "8.776M",
+"consensus": "1.122M",
+"previous": "-0.152M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.096M",
+"consensus": "",
+"previous": "0.429M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.552M",
+"consensus": "",
+"previous": "0.588M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "1.2%",
+"consensus": "0.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "3.212M",
+"consensus": "1.823M",
+"previous": "1.963M"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "670",
+"consensus": "",
+"previous": "677"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "796",
+"consensus": "",
+"previous": "805"
+},
+{
+"gmt": "14:15",
+"country": "United States",
+"eventName": "FOMC Member Brainard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:15",
+"country": "Canada",
+"eventName": "BoC Gov Council Member Wilkins Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "FOMC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.70M",
+"consensus": "17.00M",
+"previous": "17.10M"
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Market Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

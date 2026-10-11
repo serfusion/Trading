@@ -4,6 +4,8 @@ import os
 import sys
 from datetime import datetime, timezone
 
+import pytest
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "cloud", "api"))
 
 import _kalshi  # noqa: E402
@@ -12,6 +14,15 @@ import _petunjuk  # noqa: E402
 import _prediksi  # noqa: E402
 
 NOW = datetime(2026, 10, 10, 9, 0, tzinfo=timezone.utc)
+
+
+@pytest.fixture(autouse=True)
+def _cpi_lama(monkeypatch):
+    """Test di file ini menguji mekanisme varian lama (pra_aset.json). Sejak 11 Okt 2026 kartu CPI memakai aturan tutup
+    kertas _cpi_detik.py (diuji di test_cloud_cpi_detik.py); varian lama tetap tersedia lewat env CPI_DETIK=0."""
+    monkeypatch.setenv("CPI_DETIK", "0")
+
+
 T0 = "2026-10-14T12:30:00+00:00"
 
 
