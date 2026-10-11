@@ -176,7 +176,10 @@ def pnl_wallet(d: pd.DataFrame, fee: float) -> pd.DataFrame:
     x, y = float(d.x.iloc[-1]), float(d.y.iloc[-1])
     g = sw.groupby("w").agg(xnt=("dxnt", "sum"), tok=("dtok", lambda s: -s.sum()), t1=("t", "min"),
                             modal=("dxnt", lambda s: s[s > 0].sum()))
-    g["sisa"] = [S.jual(x, y, t, fee) if t > 0 else 0.0 for t in g.tok]
+    pos = g.tok.clip(lower=0)
+    total = float(pos.sum())
+    # sisa token semua wallet dinilai seolah DIJUAL BERSAMAAN ke pool (jual sendiri-sendiri = menghitung likuiditas ganda)
+    g["sisa"] = S.jual(x, y, total, fee) * pos / total if total > 0 else 0.0
     g["pnl"] = -g.xnt + g.sisa
     g["urut"] = g.t1.rank(method="first")
     return g
@@ -213,6 +216,7 @@ def uji() -> None:
     M.to_csv(S.DIR / "simulasi.csv", index=False)
     P["bulan"] = pd.to_datetime(P.t0, unit="s").dt.to_period("M").astype(str)
     usd0 = [hx.asof(pd.Timestamp(t, unit="s")) for t in P.t0]
+    usd0 = [u if u == u else float(hx.iloc[0]) for u in usd0]  # sebelum 2 Jan 2026 (grafik XNT/USDC.X mulai) → kurs pertama
     P["usd_xnt"] = usd0
 
     L = []
@@ -237,6 +241,16 @@ def uji() -> None:
     if P.porsi_pool.notna().any():
         w(f"Porsi pasokan yang dimasukkan ke pool saat dibuat: median {P.porsi_pool.median():.0%}; < 50% (sisa di "
           f"tangan pembuat → bisa dibuang) {(P.porsi_pool < 0.5).mean():.0%}")
+    fo = S.DIR / "otoritas.json.gz"
+    if fo.exists():
+        O = S.muat(fo)
+        mint_of = {q["pool"]: q["mint"] for q in launches}
+        o = [O.get(mint_of.get(pl)) or {} for pl in P.pool]
+        w(f"Status mint SEKARANG: mint authority aktif (bisa cetak token baru) {np.mean([x.get('mint_auth', False) for x in o]):.0%}; "
+          f"freeze authority aktif (bisa membekukan akun pembeli) {np.mean([x.get('freeze', False) for x in o]):.0%}; "
+          f"Token-2022 {np.mean([x.get('t22', False) for x in o]):.0%} (ekstensi: hampir semua hanya metadata); "
+          f"pajak transfer > 0 {np.mean([x.get('fee_bp', 0) > 0 for x in o]):.1%}; permanent delegate/transfer hook "
+          f"{np.mean([bool(set(x.get('ext', [])) & {'permanentDelegate', 'transferHook', 'defaultAccountState'}) for x in o]):.0%}")
     P["mati"] = P.y_now <= 0.1 * P.y_maks24
     w(f"Likuiditas sekarang ≤ 10% dari puncak 24 jam ('mati'): {P.mati.mean():.0%}; harga sekarang < harga awal: "
       f"{(P.harga_now < P.harga0).mean():.0%}")
@@ -260,6 +274,23 @@ def uji() -> None:
     w("Kolom kiri = peluang nilai jual NYATA pernah mencapai k× (jual tepat di puncak = tahu masa depan).")
     w("Kolom kanan = hasil total bila snipe SEMUA peluncuran dengan aturan itu (ROI gabungan, + = untung).")
     w("")
+    w("-- uji ketahanan (modal 2 XNT): median & % rugi per snipe, ROI tanpa 5 peluncuran terbaik, pool awal ≥ 5 XNT --")
+    hx_now = float(hx.iloc[-1])
+    usd_masuk = dict(zip(P.pool, P.usd_xnt))
+    for nama in ("pertama (sebelum siapa pun)", "1 mnt", "5 mnt", "30 mnt"):
+        m = M[(M.jeda == nama) & (M.modal == 2.0)].merge(P[["pool", "y0"]], on="pool")
+        for c in ("24j", "tp10", "now"):
+            v = m[c] / 2.0
+            top = m.nlargest(5, c)[c].sum()
+            big = m[m.y0 >= 5]
+            u_in = sum(2.0 * (usd_masuk.get(q) or np.nan) for q in m.pool)
+            u_out = (m[c] * hx_now).sum() if c == "now" else sum(
+                v_ * (usd_masuk.get(q) or np.nan) for v_, q in zip(m[c], m.pool))
+            w(f"{nama:28s} {c:5s}: median ×{v.median():.2f}, rugi {(v < 1).mean():.0%}, ≥ 2× {(v >= 2).mean():.0%} | "
+              f"ROI {m[c].sum() / (2 * len(m)) - 1:+.0%}, tanpa 5 terbaik {(m[c].sum() - top) / (2 * (len(m) - 5)) - 1:+.0%}, "
+              f"pool awal ≥ 5 XNT (n {len(big)}) {big[c].sum() / (2 * max(len(big), 1)) - 1:+.0%} | dalam USD {u_out / u_in - 1:+.0%}")
+    w("(USD: modal dinilai kurs XNT hari masuk; 24j/tp10 kurs hari masuk; 'now' kurs hari ini)")
+    w("")
     w("== 3. Semua aturan TP & waktu (modal 2 XNT) ==")
     kol = [f"tp{m}" for m in TP] + [f"tp{m}_telat" for m in (2, 5, 10)] + [f"tp{m}_now" for m in (2, 10, 100)] + \
           [f"w{k}" for k in WAKTU] + ["puncak", "now"]
@@ -273,12 +304,13 @@ def uji() -> None:
     w("(angka = ROI % gabungan; tpM = jual saat nilai ≥ M×, bila tak kena jual di jam ke-24; _telat = jual 1 transaksi "
       "setelah sinyal; _now = bila tak kena tahan s/d sekarang; wT = jual setelah T)")
     w("")
-    w("== 4. Per bulan (masuk 30 dtk, modal 2 XNT) ==")
-    m = M[(M.jeda == "30 dtk") & (M.modal == 2.0)].merge(P[["pool", "bulan", "usd_xnt"]], on="pool")
+    w("== 4. Per bulan (masuk 1 mnt, modal 2 XNT) ==")
+    m = M[(M.jeda == "1 mnt") & (M.modal == 2.0)].merge(P[["pool", "bulan", "usd_xnt"]], on="pool")
     g = m.groupby("bulan").apply(lambda z: pd.Series({
         "n": len(z), "puncak≥10×": (z.puncak >= 20).mean(), "puncak≥200×": (z.puncak >= 400).mean(),
         "ROI_TP2": z.tp2.sum() / (2 * len(z)) - 1, "ROI_TP10": z.tp10.sum() / (2 * len(z)) - 1,
-        "ROI_24j": z["24j"].sum() / (2 * len(z)) - 1, "XNT_usd": z.usd_xnt.mean()}), include_groups=False)
+        "ROI_24j": z["24j"].sum() / (2 * len(z)) - 1, "median24j": z["24j"].median() / 2,
+        "rugi24j": (z["24j"] < 2).mean(), "XNT_usd": z.usd_xnt.mean()}), include_groups=False)
     w(g.round(2).to_string())
     w("")
     w("== 5. Peluncuran terbaik bagi penyisip 'pertama' (modal 2 XNT, jual di puncak = batas atas) ==")
@@ -288,6 +320,27 @@ def uji() -> None:
         w(f"{r.sym[:12]:12s} {pd.to_datetime(r.t0, unit='s'):%Y-%m-%d} puncak {r.puncak:8.1f} XNT ({r.puncak / 2:5.0f}×) "
           f"30dtk-TP10 {r.tp10:6.1f} | pool awal {r.y0:7.1f} → maks {r.y_maks24:8.1f} → now {r.y_now:8.1f} XNT, "
           f"pembeli24 {r.pembeli24}")
+    w("")
+    w("== 5b. Ketahanan aturan 'masuk 1 mnt' (modal 2 XNT): bootstrap, dua paruh waktu, tanpa N terbaik, $ per bulan ==")
+    m = M[(M.jeda == "1 mnt") & (M.modal == 2.0)].merge(P[["pool", "usd_xnt"]], on="pool")
+    tgl = pd.to_datetime(m.t0, unit="s")
+    rng = np.random.default_rng(1)
+    for c in ("24j", "tp10", "tp2", "w1 jam"):
+        v = m[c].values
+        bs = np.array([v[rng.integers(0, len(v), len(v))].sum() / (2 * len(v)) - 1 for _ in range(5000)])
+        a, b = m[tgl < "2026-02-15"], m[tgl >= "2026-02-15"]
+        srt = np.sort(v)[::-1]
+        w(f"{c:7s} ROI {v.sum() / (2 * len(v)) - 1:+.0%} (CI90 {np.percentile(bs, 5):+.0%}…{np.percentile(bs, 95):+.0%}) | "
+          f"Des–14 Feb n {len(a)} {a[c].sum() / (2 * len(a)) - 1:+.0%}, 15 Feb–Okt n {len(b)} {b[c].sum() / (2 * len(b)) - 1:+.0%} | "
+          f"tanpa 5/10/20 terbaik {srt[5:].sum() / (2 * (len(v) - 5)) - 1:+.0%} / {srt[10:].sum() / (2 * (len(v) - 10)) - 1:+.0%} / "
+          f"{srt[20:].sum() / (2 * (len(v) - 20)) - 1:+.0%}")
+    m["bulan"] = tgl.dt.to_period("M").astype(str)
+    g = m.groupby("bulan").apply(lambda z: pd.Series({
+        "n": len(z), "modal_usd": (2 * z.usd_xnt).sum(), "untung_xnt_24j": (z["24j"] - 2).sum(),
+        "untung_usd_24j": ((z["24j"] - 2) * z.usd_xnt).sum()}), include_groups=False)
+    w(g.round(1).to_string())
+    w(f"Total bila snipe SEMUA {len(m)} peluncuran 2 XNT (masuk 1 mnt, jual jam ke-24): modal ${g.modal_usd.sum():.0f} → "
+      f"untung ${g.untung_usd_24j.sum():.0f} (Mei–Okt 2026: ${g.loc[g.index >= '2026-05', 'untung_usd_24j'].sum():.0f})")
     w("")
     w("== 6. Pemain NYATA (bukan simulasi): untung/rugi wallet di 24 jam pertama ==")
     W = pd.concat(pemain, ignore_index=True)

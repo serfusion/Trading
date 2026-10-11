@@ -81,6 +81,28 @@ def rpc(method: str, params: list, tries: int = 8):
     raise RuntimeError(f"rpc gagal {method}")
 
 
+def rpc_batch(method: str, params: list[list], tries: int = 8) -> list:
+    """Satu permintaan HTTP berisi banyak panggilan JSON-RPC (jauh lebih cepat untuk getTransaction)."""
+    body = json.dumps([{"jsonrpc": "2.0", "id": i, "method": method, "params": p}
+                       for i, p in enumerate(params)]).encode()
+    for i in range(tries):
+        _tunggu()
+        try:
+            with urllib.request.urlopen(urllib.request.Request(RPC, data=body, headers=UA), timeout=120) as r:
+                d = json.load(r)
+            res = {x["id"]: x.get("result") for x in d}
+            if any("error" in x for x in d):
+                raise RuntimeError([x["error"] for x in d if "error" in x][:1])
+            return [res.get(j) for j in range(len(params))]
+        except urllib.error.HTTPError as exc:
+            time.sleep(float(exc.headers.get("Retry-After") or 2 * (i + 1)) if exc.code == 429 else 2 * (i + 1))
+        except Exception:  # noqa: BLE001
+            if i == tries - 1:
+                raise
+            time.sleep(2 * (i + 1))
+    raise RuntimeError(f"rpc batch gagal {method}")
+
+
 def get(url: str, tries: int = 6):
     for i in range(tries):
         try:
@@ -159,10 +181,14 @@ def unduh_cadangan(pools: list[dict]) -> dict:
     return out
 
 
-def _sigs(addr: str, batas_jam: float | None = None) -> dict:
-    """Semua tanda tangan (baru → lama). Simpan jumlah + yang ≤ batas_jam sejak transaksi pertama."""
-    semua, before = [], None
+def _sigs(addr: str, batas_jam: float | None = None, maks_hal: int | None = None) -> dict:
+    """Semua tanda tangan (baru → lama). Simpan jumlah + yang ≤ batas_jam sejak transaksi pertama.
+    maks_hal: berhenti setelah N halaman (1.000/halaman) → "awal" kosong & "terpotong" = True."""
+    semua, before, hal = [], None, 0
     while True:
+        hal += 1
+        if maks_hal and hal > maks_hal:
+            return {"n": len(semua), "terpotong": True, "awal": [], "t0": 0, "n_err": 0, "t_akhir": 0}
         p = {"limit": 1000}
         if before:
             p["before"] = before
@@ -234,11 +260,12 @@ def unduh_swap(pools: list[dict], maks: int = 400, pekerja: int = 12) -> None:
         s = muat(DIR / "tanda" / f"{p['pool']}.json.gz")
         sigs = [x[0] for x in s["awal"] if not x[2]][:maks]
         rows = []
-        for sig in sigs:
-            r = _tx(sig)
-            if r:
-                d = _saldo_tx(r, [p["vault0"], p["vault1"]])
-                rows.append({"sig": sig, **d})
+        opt = {"encoding": "json", "maxSupportedTransactionVersion": 0, "commitment": "confirmed"}
+        for i in range(0, len(sigs), 40):
+            part = sigs[i:i + 40]
+            for sig, r in zip(part, rpc_batch("getTransaction", [[g, opt] for g in part])):
+                if r:
+                    rows.append({"sig": sig, **_saldo_tx(r, [p["vault0"], p["vault1"]])})
         simpan(f, rows)
 
     t = time.time()
@@ -254,7 +281,9 @@ def penyandang(wallets: list[str], pekerja: int = 10) -> dict:
     out = muat(f) if f.exists() else {}
 
     def satu(w):
-        s = _sigs(w)
+        s = _sigs(w, maks_hal=15)
+        if s.get("terpotong"):
+            return w, {"dari": None, "t": None, "n": s["n"], "terpotong": True}  # wallet > 15 rb transaksi (bot besar)
         if not s["awal"]:
             return w, None
         r = _tx(s["awal"][0][0])
@@ -273,7 +302,28 @@ def penyandang(wallets: list[str], pekerja: int = 10) -> dict:
             out[w] = v
             if i % 200 == 0:
                 print(f"  penyandang {i}/{len(baru)}", flush=True)
+                simpan(f, out)
     simpan(f, out)
+    return out
+
+
+def unduh_otoritas(mints: list[str]) -> dict:
+    """Status mint SEKARANG: mint authority (bisa cetak token baru), freeze authority (bisa membekukan akun = tidak bisa
+    jual), program Token-2022 & ekstensinya (transfer fee, permanent delegate, transfer hook)."""
+    out = {}
+    for i in range(0, len(mints), 100):
+        res = rpc("getMultipleAccounts", [mints[i:i + 100], {"encoding": "jsonParsed"}])["value"]
+        for m, v in zip(mints[i:i + 100], res):
+            if not v or not isinstance(v.get("data"), dict):
+                continue
+            info = v["data"]["parsed"]["info"]
+            ext = info.get("extensions") or []
+            fee = [e["state"].get("newerTransferFee", {}).get("transferFeeBasisPoints", 0)
+                   for e in ext if e["extension"] == "transferFeeConfig"]
+            out[m] = {"mint_auth": bool(info.get("mintAuthority")), "freeze": bool(info.get("freezeAuthority")),
+                      "t22": v["owner"] != "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+                      "ext": [e["extension"] for e in ext], "fee_bp": max(fee) if fee else 0}
+    simpan(DIR / "otoritas.json.gz", out)
     return out
 
 
@@ -332,6 +382,7 @@ def main(argv: list[str]) -> None:
         from research import snipe_x1_uji as U
         L = U.peluncuran()
         unduh_pasok([q["mint"] for q in L])
+        unduh_otoritas([q["mint"] for q in L])
         simpan(DIR / "xnt_usd.json.gz", unduh_bar(WXNT, USDC_X, 1759276800, int(time.time()), 1440))
         unduh_swap(L, maks=int(argv[1]) if len(argv) > 1 else 3000)
     else:

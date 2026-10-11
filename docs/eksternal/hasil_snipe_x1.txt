@@ -1,0 +1,159 @@
+🎯 SNIPE TOKEN BARU DI X1 (XDEX) — data on-chain rpc.mainnet.x1.xyz, diunduh 10 Oct 2026 12:13 UTC
+Pool XDEX: 1381; peluncuran token (pool pertama, pasangan WXNT, bukan aset jembatan): 556
+Periode: 25 Dec 2025 – 09 Oct 2026
+
+== 1. Seberapa besar 'pasar'-nya ==
+            y0  y_maks24     y_now      n24  pembeli24  dtk_beli1
+count   556.00    556.00    556.00   556.00     556.00     467.00
+mean    104.87    255.69    261.23    40.31       7.10    5134.59
+std     253.23    755.76   1824.40   102.00      11.02   14286.08
+min       0.00      0.00      0.00     1.00       0.00       3.00
+25%       2.29     10.00      0.01     3.00       1.00      17.00
+50%      11.00     50.01      1.08    10.00       3.00     195.00
+75%     100.00    125.94     20.14    31.00       8.00    2077.00
+90%     300.00    518.69    236.04    95.00      20.00   12166.00
+99%     985.00   4863.17   5882.54   406.15      53.15   79727.44
+max    2910.00   6466.79  34759.25  1486.00      79.00   83215.00
+Likuiditas XNT di pool saat puncak 24 jam (≈ uang maksimum yang bisa ditarik SEMUA penjual): median 50.0 XNT (≈ $34.7); ≥ 1.000 XNT hanya 5.8%
+Peluncuran tanpa pembeli lain dalam 24 jam: 16%; ≤ 3 pembeli: 55%
+Pembeli pertama (bukan pembuat) masuk: median 195 dtk setelah pool dibuat; ≤ 10 dtk 11%, ≤ 60 dtk 32%
+Pembuat menjual token di 24 jam pertama: 18%; pembuat menarik likuiditas 24 jam: 32%; siapa pun menarik likuiditas 24 jam: 38%
+Porsi pasokan yang dimasukkan ke pool saat dibuat: median 34%; < 50% (sisa di tangan pembuat → bisa dibuang) 53%
+Status mint SEKARANG: mint authority aktif (bisa cetak token baru) 14%; freeze authority aktif (bisa membekukan akun pembeli) 5%; Token-2022 84% (ekstensi: hampir semua hanya metadata); pajak transfer > 0 1.6%; permanent delegate/transfer hook 0%
+Likuiditas sekarang ≤ 10% dari puncak 24 jam ('mati'): 50%; harga sekarang < harga awal: 36%
+
+== 2. Klaim '$1 jadi $200' — simulasi beli 2 XNT (≈ $1 saat XNT $0,45) disisipkan ke transaksi asli ==
+Biaya: DEX 0,28–0,30% + bot 1% per sisi. Kelipatan = XNT bersih diterima / modal.
+-- modal 2 XNT --
+masuk                           n puncak≥2×   ≥10×  ≥100×  ≥200× | tahan→now  24 jam   TP2×   TP5×  TP10×  TP2×½
+pertama (sebelum siapa pun)   556       42%    15%     2%     1% |     +584%   +518%   +72%  +153%  +198%  +295%
+10 dtk                        556       42%    15%     2%     1% |     +582%   +515%   +70%  +151%  +196%  +292%
+30 dtk                        556       39%    13%     2%     1% |     +573%   +448%   +46%  +121%  +166%  +247%
+1 mnt                         556       38%    13%     2%     1% |     +568%   +429%   +45%  +115%  +160%  +237%
+5 mnt                         556       35%    12%     1%     1% |     +469%   +220%   +78%  +135%  +168%  +149%
+30 mnt                        556       26%     8%     1%     0% |     +244%    +89%   +57%  +100%  +115%   +73%
+-- modal 10 XNT --
+masuk                           n puncak≥2×   ≥10×  ≥100×  ≥200× | tahan→now  24 jam   TP2×   TP5×  TP10×  TP2×½
+pertama (sebelum siapa pun)   556       31%     8%     1%     0% |     +197%   +199%   +33%   +54%   +79%  +116%
+10 dtk                        556       31%     8%     1%     0% |     +196%   +198%   +32%   +54%   +79%  +115%
+30 dtk                        556       30%     8%     1%     0% |     +192%   +175%   +20%   +42%   +64%   +98%
+1 mnt                         556       29%     8%     1%     0% |     +189%   +168%   +18%   +39%   +62%   +93%
+5 mnt                         556       26%     6%     1%     0% |     +166%    +83%   +52%   +72%   +86%   +67%
+30 mnt                        556       20%     4%     0%     0% |      +64%    +21%   +36%   +50%   +55%   +28%
+Kolom kiri = peluang nilai jual NYATA pernah mencapai k× (jual tepat di puncak = tahu masa depan).
+Kolom kanan = hasil total bila snipe SEMUA peluncuran dengan aturan itu (ROI gabungan, + = untung).
+
+-- uji ketahanan (modal 2 XNT): median & % rugi per snipe, ROI tanpa 5 peluncuran terbaik, pool awal ≥ 5 XNT --
+pertama (sebelum siapa pun)  24j  : median ×0.98, rugi 55%, ≥ 2× 23% | ROI +518%, tanpa 5 terbaik +229%, pool awal ≥ 5 XNT (n 393) +685% | dalam USD +411%
+pertama (sebelum siapa pun)  tp10 : median ×0.98, rugi 53%, ≥ 2× 27% | ROI +198%, tanpa 5 terbaik +156%, pool awal ≥ 5 XNT (n 393) +205% | dalam USD +175%
+pertama (sebelum siapa pun)  now  : median ×0.07, rugi 79%, ≥ 2× 12% | ROI +584%, tanpa 5 terbaik +143%, pool awal ≥ 5 XNT (n 393) +846% | dalam USD +62%
+1 mnt                        24j  : median ×0.98, rugi 58%, ≥ 2× 21% | ROI +429%, tanpa 5 terbaik +177%, pool awal ≥ 5 XNT (n 393) +564% | dalam USD +356%
+1 mnt                        tp10 : median ×0.98, rugi 56%, ≥ 2× 24% | ROI +160%, tanpa 5 terbaik +131%, pool awal ≥ 5 XNT (n 393) +162% | dalam USD +145%
+1 mnt                        now  : median ×0.07, rugi 80%, ≥ 2× 11% | ROI +568%, tanpa 5 terbaik +127%, pool awal ≥ 5 XNT (n 393) +825% | dalam USD +58%
+5 mnt                        24j  : median ×0.98, rugi 61%, ≥ 2× 19% | ROI +220%, tanpa 5 terbaik +96%, pool awal ≥ 5 XNT (n 393) +273% | dalam USD +218%
+5 mnt                        tp10 : median ×0.98, rugi 59%, ≥ 2× 23% | ROI +168%, tanpa 5 terbaik +112%, pool awal ≥ 5 XNT (n 393) +128% | dalam USD +163%
+5 mnt                        now  : median ×0.06, rugi 82%, ≥ 2× 10% | ROI +469%, tanpa 5 terbaik +96%, pool awal ≥ 5 XNT (n 393) +687% | dalam USD +35%
+30 mnt                       24j  : median ×0.98, rugi 68%, ≥ 2× 12% | ROI +89%, tanpa 5 terbaik +34%, pool awal ≥ 5 XNT (n 393) +100% | dalam USD +101%
+30 mnt                       tp10 : median ×0.98, rugi 66%, ≥ 2× 15% | ROI +115%, tanpa 5 terbaik +70%, pool awal ≥ 5 XNT (n 393) +78% | dalam USD +112%
+30 mnt                       now  : median ×0.05, rugi 86%, ≥ 2× 8% | ROI +244%, tanpa 5 terbaik +8%, pool awal ≥ 5 XNT (n 393) +374% | dalam USD -19%
+(USD: modal dinilai kurs XNT hari masuk; 24j/tp10 kurs hari masuk; 'now' kurs hari ini)
+
+== 3. Semua aturan TP & waktu (modal 2 XNT) ==
+masuk       pertama (sebelum siapa pun)  10 dtk  30 dtk  1 mnt  5 mnt  30 mnt
+tp2                                72.0    70.0    46.0   45.0   78.0    57.0
+tp3                               110.0   108.0    85.0   80.0  107.0    74.0
+tp5                               153.0   151.0   121.0  115.0  135.0   100.0
+tp10                              198.0   196.0   166.0  160.0  168.0   115.0
+tp20                              261.0   258.0   228.0  222.0  219.0   125.0
+tp50                              353.0   350.0   302.0  295.0  225.0   110.0
+tp100                             412.0   409.0   368.0  337.0  275.0   143.0
+tp200                             467.0   464.0   408.0  388.0  267.0    89.0
+tp2_telat                          77.0    74.0    52.0   49.0   40.0    19.0
+tp5_telat                         143.0   139.0   111.0  104.0   87.0    54.0
+tp10_telat                        187.0   186.0   153.0  147.0  123.0    74.0
+tp2_now                            87.0    85.0    61.0   58.0   88.0   130.0
+tp10_now                          197.0   195.0   167.0  161.0  167.0   211.0
+tp100_now                         660.0   657.0   619.0  575.0  459.0   246.0
+w5 mnt                             55.0    53.0    24.0   19.0    6.0    -2.0
+w15 mnt                           188.0   185.0   124.0  112.0   28.0    30.0
+w1 jam                            338.0   334.0   269.0  248.0  127.0    20.0
+w6 jam                            484.0   481.0   415.0  391.0  184.0    41.0
+w24 jam                           518.0   515.0   448.0  429.0  220.0    89.0
+puncak                           1037.0  1029.0   943.0  907.0  644.0   329.0
+now                               584.0   582.0   573.0  568.0  469.0   244.0
+(angka = ROI % gabungan; tpM = jual saat nilai ≥ M×, bila tak kena jual di jam ke-24; _telat = jual 1 transaksi setelah sinyal; _now = bila tak kena tahan s/d sekarang; wT = jual setelah T)
+
+== 4. Per bulan (masuk 1 mnt, modal 2 XNT) ==
+             n  puncak≥10×  puncak≥200×  ROI_TP2  ROI_TP10  ROI_24j  median24j  rugi24j  XNT_usd
+bulan                                                                                           
+2025-12    8.0        0.25         0.00     0.52      2.89     3.47       1.41     0.25     1.09
+2026-01  216.0        0.12         0.00     0.55      1.67     2.79       1.07     0.43     0.94
+2026-02  137.0        0.11         0.01    -0.06      0.58     2.56       0.01     0.77     0.65
+2026-03   30.0        0.10         0.00     0.18      1.49     4.56       0.91     0.60     0.37
+2026-04   67.0        0.19         0.03     0.46      2.30    14.81       0.57     0.69     0.45
+2026-05   20.0        0.05         0.00     1.73      0.88    -0.35       0.77     0.70     0.81
+2026-06   16.0        0.06         0.00     0.86      0.79     0.08       0.96     0.69     0.64
+2026-07   25.0        0.20         0.00     0.62      2.45     3.83       0.98     0.60     0.59
+2026-08   16.0        0.00         0.00     0.57      0.46     0.46       1.13     0.44     0.48
+2026-09   18.0        0.33         0.00     1.14      5.93     6.09       1.00     0.50     0.31
+2026-10    3.0        0.67         0.00     1.08      7.98    22.44       6.37     0.33     0.24
+
+== 5. Peluncuran terbaik bagi penyisip 'pertama' (modal 2 XNT, jual di puncak = batas atas) ==
+X1T          2026-04-17 puncak   1535.3 XNT (  768×) 30dtk-TP10   23.4 | pool awal    84.0 → maks   6466.8 → now    180.4 XNT, pembeli24 24
+BABYANAL     2026-04-12 puncak    850.5 XNT (  425×) 30dtk-TP10   20.1 | pool awal    10.0 → maks   1348.2 → now     37.8 XNT, pembeli24 50
+THEO         2026-02-01 puncak    768.5 XNT (  384×) 30dtk-TP10   20.3 | pool awal   100.0 → maks   5087.9 → now   6997.4 XNT, pembeli24 79
+BC           2026-04-20 puncak    636.5 XNT (  318×) 30dtk-TP10   21.1 | pool awal    84.0 → maks   1894.0 → now     33.8 XNT, pembeli24 3
+AGI          2026-02-01 puncak    539.4 XNT (  270×) 30dtk-TP10   24.0 | pool awal   100.0 → maks   2101.6 → now   2490.3 XNT, pembeli24 39
+KMN          2026-03-01 puncak    327.3 XNT (  164×) 30dtk-TP10   75.2 | pool awal    20.0 → maks   1201.6 → now     29.3 XNT, pembeli24 21
+JACK         2026-01-09 puncak    325.8 XNT (  163×) 30dtk-TP10   21.0 | pool awal     5.0 → maks    513.0 → now   1908.8 XNT, pembeli24 19
+EVIE         2026-02-02 puncak    268.4 XNT (  134×) 30dtk-TP10   25.0 | pool awal    34.0 → maks    623.6 → now    133.4 XNT, pembeli24 33
+XION         2026-01-26 puncak    254.3 XNT (  127×) 30dtk-TP10   86.3 | pool awal    15.0 → maks    355.5 → now     27.9 XNT, pembeli24 41
+THEO         2026-02-01 puncak    253.9 XNT (  127×) 30dtk-TP10   29.7 | pool awal     1.0 → maks    351.6 → now      9.0 XNT, pembeli24 25
+1337         2026-01-18 puncak    237.6 XNT (  119×) 30dtk-TP10   21.3 | pool awal    15.0 → maks    540.7 → now    399.8 XNT, pembeli24 42
+1010         2026-04-19 puncak    235.2 XNT (  118×) 30dtk-TP10  198.4 | pool awal    84.0 → maks   1059.2 → now    148.0 XNT, pembeli24 11
+SPC          2026-04-17 puncak    219.9 XNT (  110×) 30dtk-TP10   27.9 | pool awal    50.0 → maks    663.8 → now      0.5 XNT, pembeli24 8
+AGENTX1      2026-10-05 puncak    195.3 XNT (   98×) 30dtk-TP10   32.0 | pool awal    20.0 → maks    332.6 → now    277.3 XNT, pembeli24 34
+FOREST       2026-02-04 puncak    181.1 XNT (   91×) 30dtk-TP10   20.7 | pool awal   120.0 → maks   1621.1 → now    160.8 XNT, pembeli24 66
+
+== 5b. Ketahanan aturan 'masuk 1 mnt' (modal 2 XNT): bootstrap, dua paruh waktu, tanpa N terbaik, $ per bulan ==
+24j     ROI +429% (CI90 +219%…+708%) | Des–14 Feb n 358 +274%, 15 Feb–Okt n 198 +709% | tanpa 5/10/20 terbaik +177% / +109% / +43%
+tp10    ROI +160% (CI90 +127%…+196%) | Des–14 Feb n 358 +127%, 15 Feb–Okt n 198 +220% | tanpa 5/10/20 terbaik +131% / +115% / +93%
+tp2     ROI +45% (CI90 +32%…+58%) | Des–14 Feb n 358 +31%, 15 Feb–Okt n 198 +68% | tanpa 5/10/20 terbaik +32% / +27% / +21%
+w1 jam  ROI +248% (CI90 +140%…+382%) | Des–14 Feb n 358 +129%, 15 Feb–Okt n 198 +464% | tanpa 5/10/20 terbaik +112% / +69% / +40%
+             n  modal_usd  untung_xnt_24j  untung_usd_24j
+bulan                                                    
+2025-12    8.0       17.5            55.6            60.8
+2026-01  216.0      404.3          1205.3          1120.3
+2026-02  137.0      179.3           701.1           492.4
+2026-03   30.0       22.1           273.5           111.1
+2026-04   67.0       60.2          1984.7           837.4
+2026-05   20.0       32.4           -14.0           -11.9
+2026-06   16.0       20.4             2.6             2.2
+2026-07   25.0       29.4           191.6           107.4
+2026-08   16.0       15.4            14.6             6.6
+2026-09   18.0       11.1           219.3            59.7
+2026-10    3.0        1.4           134.6            36.2
+Total bila snipe SEMUA 556 peluncuran 2 XNT (masuk 1 mnt, jual jam ke-24): modal $794 → untung $2822 (Mei–Okt 2026: $200)
+
+== 6. Pemain NYATA (bukan simulasi): untung/rugi wallet di 24 jam pertama ==
+masuk ≤ 1 mnt  :   271 posisi, modal      3884 XNT, untung bersih     +3524 XNT (+91%), wallet untung 56%, ≥ 10× 9.2%, ≥ 100× 0.37%
+masuk 1–5 mnt  :   289 posisi, modal      4683 XNT, untung bersih     +4257 XNT (+91%), wallet untung 60%, ≥ 10× 9.0%, ≥ 100× 0.35%
+masuk 5–60 mnt :  1078 posisi, modal     36624 XNT, untung bersih    +10609 XNT (+29%), wallet untung 44%, ≥ 10× 3.3%, ≥ 100× 0.09%
+masuk 1–6 jam  :  1172 posisi, modal     36157 XNT, untung bersih     -9605 XNT (-27%), wallet untung 26%, ≥ 10× 2.1%, ≥ 100× 0.17%
+masuk > 6 jam  :  1138 posisi, modal     32539 XNT, untung bersih    -16395 XNT (-50%), wallet untung 13%, ≥ 10× 0.9%, ≥ 100× 0.26%
+Wallet yang ≥ 5 kali jadi 3 pembeli pertama (penembak/bot snipe): 41; gabungan modal 3436 XNT, untung +4336 XNT (+126%)
+  AKqn1g…  81 peluncuran, modal    523.8, untung   +925.9 XNT, untung di 52%
+  CmSnHu…  55 peluncuran, modal    120.5, untung   +289.0 XNT, untung di 58%
+  4ysNej…  55 peluncuran, modal     96.8, untung   +116.3 XNT, untung di 64%
+  DX38UJ…  48 peluncuran, modal    296.2, untung    +19.6 XNT, untung di 44%
+  5HS89c…  31 peluncuran, modal     33.0, untung     +2.8 XNT, untung di 35%
+  9Jpavs…  28 peluncuran, modal    108.6, untung    +27.4 XNT, untung di 46%
+  RVNFmE…  27 peluncuran, modal    165.2, untung  +1272.3 XNT, untung di 44%
+  3Ndn8F…  26 peluncuran, modal    175.2, untung    +77.2 XNT, untung di 38%
+  48GFaq…  23 peluncuran, modal    132.4, untung     -2.9 XNT, untung di 43%
+  4zGbuY…  18 peluncuran, modal     60.0, untung    +21.8 XNT, untung di 33%
+  7FZQhC…  17 peluncuran, modal     63.4, untung    +50.3 XNT, untung di 59%
+  9hMhLX…  14 peluncuran, modal     20.6, untung     +1.7 XNT, untung di 36%
+Peluncuran yang salah satu dari 5 pembeli pertamanya TERHUBUNG ke pembuat (didanai pembuat / mendanai pembuat / penyandang sama): 15% dari 556
+  pembeli awal tidak terkait   : 1379 posisi, untung   +13139 XNT (+73%), wallet untung 44%
+  pembeli awal TERKAIT pembuat:  108 posisi, untung    +1464 XNT (+73%), wallet untung 52%
