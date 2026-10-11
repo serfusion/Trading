@@ -1,0 +1,370 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "All Industries Activity Index",
+"actual": "-0.9%",
+"consensus": "-0.8%",
+"previous": "2.3%"
+},
+{
+"gmt": "02:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "2.813B",
+"consensus": "2.890B",
+"previous": "3.388B"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German PPI",
+"actual": "2.4%",
+"consensus": "2.3%",
+"previous": "2.8%"
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "30.1B",
+"consensus": "23.3B",
+"previous": "23.5B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "18.3B",
+"consensus": "",
+"previous": "22.8B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "0.9%",
+"consensus": "0.5%",
+"previous": "-1.5%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "3.0%",
+"consensus": "2.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "-1.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "2.9%",
+"consensus": "2.5%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "1.90%",
+"consensus": "",
+"previous": "2.00%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "1.649%",
+"consensus": "",
+"previous": "1.395%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "0.026%",
+"consensus": "",
+"previous": "0.021%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "0.314%",
+"consensus": "",
+"previous": "0.337%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "-0.41%",
+"consensus": "",
+"previous": "-0.48%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "-0.04%",
+"consensus": "",
+"previous": "-0.22%"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "Deposit Facility Rate",
+"actual": "-0.40%",
+"consensus": "-0.40%",
+"previous": "-0.40%"
+},
+{
+"gmt": "07:45",
+"country": "Euro Zone",
+"eventName": "ECB Interest Rate Decision",
+"actual": "0.00%",
+"consensus": "0.00%",
+"previous": "0.00%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "-0.18%",
+"consensus": "-0.09%",
+"previous": "0.16%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "2.78%",
+"consensus": "2.87%",
+"previous": "3.52%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,977K",
+"consensus": "1,950K",
+"previous": "1,949K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "233K",
+"consensus": "245K",
+"previous": "248K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "243.75K",
+"consensus": "",
+"previous": "246.00K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "19.5",
+"consensus": "24.0",
+"previous": "27.6"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "36.9",
+"consensus": "",
+"previous": "31.3"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "42.00",
+"consensus": "",
+"previous": "28.60"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "10.9",
+"consensus": "",
+"previous": "16.1"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "2.1",
+"consensus": "",
+"previous": "25.9"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "19.10",
+"consensus": "",
+"previous": "23.60"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "412.6B",
+"consensus": "",
+"previous": "410.9B"
+},
+{
+"gmt": "09:00",
+"country": "South Africa",
+"eventName": "Interest Rate Decision",
+"actual": "6.75%",
+"consensus": "7.00%",
+"previous": "7.00%"
+},
+{
+"gmt": "09:00",
+"country": "South Africa",
+"eventName": "Prime Rate",
+"actual": "10.25%",
+"consensus": "",
+"previous": "10.50%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "47.6",
+"consensus": "",
+"previous": "47.0"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-1.7",
+"consensus": "-1.1",
+"previous": "-1.0"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "28B",
+"consensus": "32B",
+"previous": "57B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "0.2%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "0.489%",
+"consensus": "",
+"previous": "0.420%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "17.30%",
+"consensus": "",
+"previous": "8.00%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "6,350",
+"consensus": "",
+"previous": "5,940"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Visitor Arrivals",
+"actual": "5.1%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "947.8B",
+"consensus": "",
+"previous": "805.8B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "341.0B",
+"consensus": "",
+"previous": "-35.2B"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "8.3%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "23:40",
+"country": "Australia",
+"eventName": "RBA Assist Gov Debelle Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

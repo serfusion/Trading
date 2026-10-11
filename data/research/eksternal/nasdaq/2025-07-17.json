@@ -1,0 +1,506 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings ex Bonus",
+"actual": "5.0%",
+"consensus": "4.9%",
+"previous": "5.3%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings Index +Bonus",
+"actual": "5.0%",
+"consensus": "5.0%",
+"previous": "5.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Claimant Count Change",
+"actual": "25.9K",
+"consensus": "17.9K",
+"previous": "15.3K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Employment Change 3M/3M",
+"actual": "134K",
+"consensus": "46K",
+"previous": "89K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Unemployment Rate",
+"actual": "4.7%",
+"consensus": "4.6%",
+"previous": "4.6%"
+},
+{
+"gmt": "02:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "5.790B",
+"consensus": "4.220B",
+"previous": "4.008B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.5%",
+"consensus": "",
+"previous": "3.5%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "3.303%",
+"consensus": "",
+"previous": "3.163%"
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "2.479%",
+"consensus": "",
+"previous": "2.506%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "2.3%",
+"consensus": "2.3%",
+"previous": "2.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "2.0%",
+"previous": "1.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "1.9%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.3%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI, n.s.a",
+"actual": "129.10",
+"consensus": "129.07",
+"previous": "128.71"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "2.4%",
+"consensus": "2.4%",
+"previous": "2.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "4.078%",
+"consensus": "",
+"previous": "4.060%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "-1.7%",
+"consensus": "",
+"previous": "-1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,956K",
+"consensus": "1,970K",
+"previous": "1,954K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.5%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "2.8%",
+"consensus": "",
+"previous": "1.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Export Price Index",
+"actual": "0.5%",
+"consensus": "0.0%",
+"previous": "-0.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "221K",
+"consensus": "233K",
+"previous": "228K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "229.50K",
+"consensus": "",
+"previous": "235.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "15.9",
+"consensus": "-1.2",
+"previous": "-4.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "21.5",
+"consensus": "",
+"previous": "18.3"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "17.10",
+"consensus": "",
+"previous": "14.50"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "10.3",
+"consensus": "",
+"previous": "-9.8"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "18.4",
+"consensus": "",
+"previous": "2.3"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "58.80",
+"consensus": "",
+"previous": "41.40"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Control",
+"actual": "0.5%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.6%",
+"consensus": "0.1%",
+"previous": "-0.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "3.92%",
+"consensus": "",
+"previous": "3.29%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales Ex Gas/Autos",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "-2.79B",
+"consensus": "-7.32B",
+"previous": "-9.46B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "13.370B",
+"consensus": "",
+"previous": "4.070B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "685.3B",
+"consensus": "",
+"previous": "690.6B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "0.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Kugler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "33",
+"consensus": "33",
+"previous": "32"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "46B",
+"consensus": "44B",
+"previous": "53B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "4.230%",
+"consensus": "",
+"previous": "4.235%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "4.270%",
+"consensus": "",
+"previous": "4.275%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.4%",
+"consensus": "2.6%",
+"previous": "2.6%"
+},
+{
+"gmt": "12:45",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "United States",
+"eventName": "Fed Governor Cook Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "146.30B",
+"consensus": "",
+"previous": "-40.80B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "311.10B",
+"consensus": "",
+"previous": "-14.60B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "259.4B",
+"consensus": "",
+"previous": "-8.2B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "259.40B",
+"consensus": "48.30B",
+"previous": "-8.20B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "6,659B",
+"consensus": "",
+"previous": "6,662B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.375T",
+"consensus": "",
+"previous": "3.342T"
+},
+{
+"gmt": "18:30",
+"country": "United States",
+"eventName": "Fed Waller Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.7%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "3.3%",
+"consensus": "",
+"previous": "3.5%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "0.9%",
+"consensus": "",
+"previous": "2.0%"
+}
+]

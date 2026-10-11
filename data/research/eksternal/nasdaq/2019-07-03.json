@@ -1,0 +1,426 @@
+[
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.15%",
+"consensus": "",
+"previous": "-0.02%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "93.3",
+"consensus": "",
+"previous": "93.0"
+},
+{
+"gmt": "05:40",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "-0.660%",
+"consensus": "",
+"previous": "-0.560%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Cunliffe Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.07%",
+"consensus": "",
+"previous": "4.06%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "1.3%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "269.3",
+"consensus": "",
+"previous": "266.3"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "518.1",
+"consensus": "",
+"previous": "518.7"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,925.6",
+"consensus": "",
+"previous": "1,949.5"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "12.8%",
+"consensus": "",
+"previous": "85.9%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "42.0K",
+"consensus": "",
+"previous": "58.6K"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "10.1%",
+"consensus": "",
+"previous": "10.1%"
+},
+{
+"gmt": "08:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Broadbent Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "102K",
+"consensus": "140K",
+"previous": "41K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,686K",
+"consensus": "1,675K",
+"previous": "1,694K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "210.64B",
+"consensus": "",
+"previous": "206.41B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "266.16B",
+"consensus": "",
+"previous": "257.64B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "221K",
+"consensus": "220K",
+"previous": "229K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "222.25K",
+"consensus": "",
+"previous": "221.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-55.50B",
+"consensus": "-53.20B",
+"previous": "-51.20B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "53.11B",
+"consensus": "50.40B",
+"previous": "50.75B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "52.34B",
+"consensus": "52.10B",
+"previous": "51.84B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "0.76B",
+"consensus": "-1.70B",
+"previous": "-1.08B"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.6",
+"consensus": "",
+"previous": "49.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Cap Goods Ship Non Defense Ex Air",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "-0.7%",
+"consensus": "-0.4%",
+"previous": "-1.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "58.2",
+"consensus": "60.0",
+"previous": "61.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "55.0",
+"consensus": "",
+"previous": "58.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "55.8",
+"consensus": "",
+"previous": "58.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "55.1",
+"consensus": "56.1",
+"previous": "56.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "58.9",
+"consensus": "",
+"previous": "55.4"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-1.085M",
+"consensus": "-2.964M",
+"previous": "-12.788M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "1.709M",
+"consensus": "",
+"previous": "-1.159M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.652M",
+"consensus": "",
+"previous": "-1.746M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.031M",
+"consensus": "",
+"previous": "-0.066M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "1.408M",
+"consensus": "-0.997M",
+"previous": "-2.441M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.564M",
+"consensus": "",
+"previous": "0.089M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.134M",
+"consensus": "",
+"previous": "-0.538M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.583M",
+"consensus": "-2.167M",
+"previous": "-0.996M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "2.210%",
+"consensus": "",
+"previous": "2.145%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "2.155%",
+"consensus": "",
+"previous": "2.120%"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-8.286B",
+"consensus": "",
+"previous": "0.343B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "89B",
+"consensus": "85B",
+"previous": "98B"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "788",
+"consensus": "",
+"previous": "793"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "963",
+"consensus": "",
+"previous": "967"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "3,813.20B",
+"consensus": "",
+"previous": "3,826.82B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Current Account",
+"actual": "4.95B",
+"consensus": "",
+"previous": "-0.66B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "514.3B",
+"consensus": "",
+"previous": "497.8B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "58.5B",
+"consensus": "",
+"previous": "-313.3B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "0.360%",
+"consensus": "",
+"previous": "0.320%"
+},
+{
+"gmt": "All Day",
+"country": "United States",
+"eventName": "United States - Independence Day - Early close at 13:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

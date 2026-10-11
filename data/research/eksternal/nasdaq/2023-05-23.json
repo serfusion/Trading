@@ -1,0 +1,378 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "3.0%",
+"consensus": "2.8%",
+"previous": "2.9%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "5.00%",
+"consensus": "4.70%",
+"previous": "5.00%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "5.7%",
+"consensus": "5.3%",
+"previous": "5.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "24.74B",
+"consensus": "17.50B",
+"previous": "20.02B"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "13.667B",
+"consensus": "-0.572B",
+"previous": "19.684B"
+},
+{
+"gmt": "03:15",
+"country": "Euro Zone",
+"eventName": "ECB's Supervisory Board Member Jochnick Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:15",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "31.2B",
+"consensus": "20.2B",
+"previous": "24.5B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "45.0B",
+"consensus": "",
+"previous": "21.4B"
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "MPC Member Tenreyro Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.820%",
+"consensus": "",
+"previous": "2.880%"
+},
+{
+"gmt": "05:50",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:25",
+"country": "Euro Zone",
+"eventName": "ECB's Enria Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.417M",
+"consensus": "1.416M",
+"previous": "1.437M"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-1.4%",
+"consensus": "-1.5%",
+"previous": "-7.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-0.2%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-3.5%",
+"consensus": "-5.6%",
+"previous": "-2.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "2.9%",
+"consensus": "0.7%",
+"previous": "-0.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-10.8%",
+"consensus": "-24.5%",
+"previous": "-15.1%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.5%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "55.1",
+"consensus": "52.6",
+"previous": "53.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "683K",
+"consensus": "663K",
+"previous": "656K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "4.1%",
+"consensus": "3.3%",
+"previous": "4.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-15",
+"consensus": "-8",
+"previous": "-10"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-13",
+"consensus": "",
+"previous": "-7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-10",
+"consensus": "-29",
+"previous": "-23"
+},
+{
+"gmt": "10:35",
+"country": "United Kingdom",
+"eventName": "MPC Member Haskel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Fed Chair Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "4.300%",
+"consensus": "",
+"previous": "3.969%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "20.82T",
+"consensus": "",
+"previous": "21.08T"
+},
+{
+"gmt": "13:00",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:50",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-6.799M",
+"consensus": "0.525M",
+"previous": "3.690M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Manufacturing BSI Index",
+"actual": "70",
+"consensus": "72",
+"previous": "68"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Core Retail Sales",
+"actual": "-1.1%",
+"consensus": "-1.0%",
+"previous": "-1.6%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Retail Sales",
+"actual": "-1.4%",
+"consensus": "0.2%",
+"previous": "-1.0%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Retail Sales Quarterly Vs. Year Ago",
+"actual": "-4.1%",
+"consensus": "3.6%",
+"previous": "-4.0%"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "6",
+"consensus": "",
+"previous": "-3"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "-0.0%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "5.50%",
+"consensus": "5.50%",
+"previous": "5.25%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

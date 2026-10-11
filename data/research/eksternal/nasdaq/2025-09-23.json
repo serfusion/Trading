@@ -1,0 +1,418 @@
+[
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC India Manufacturing PMI",
+"actual": "58.5",
+"consensus": "",
+"previous": "59.3"
+},
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC India Services PMI",
+"actual": "61.6",
+"consensus": "",
+"previous": "62.9"
+},
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC Manufacturing & Services PMI",
+"actual": "61.90%",
+"consensus": "",
+"previous": "63.20%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "0.30%",
+"consensus": "0.40%",
+"previous": "0.50%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.50%",
+"consensus": "",
+"previous": "-0.40%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "03:00",
+"country": "South Africa",
+"eventName": "Leading Indicators",
+"actual": "113.70%",
+"consensus": "",
+"previous": "112.68%"
+},
+{
+"gmt": "03:15",
+"country": "France",
+"eventName": "HCOB France Manufacturing PMI",
+"actual": "48.1",
+"consensus": "50.2",
+"previous": "50.4"
+},
+{
+"gmt": "03:15",
+"country": "France",
+"eventName": "HCOB France Composite PMI",
+"actual": "48.4",
+"consensus": "49.9",
+"previous": "49.8"
+},
+{
+"gmt": "03:15",
+"country": "France",
+"eventName": "HCOB France Services PMI",
+"actual": "48.9",
+"consensus": "49.7",
+"previous": "49.8"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "HCOB Germany Composite PMI",
+"actual": "52.4",
+"consensus": "50.5",
+"previous": "50.5"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "HCOB Germany Manufacturing PMI",
+"actual": "48.5",
+"consensus": "50",
+"previous": "49.8"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "HCOB Germany Services PMI",
+"actual": "52.5",
+"consensus": "49.5",
+"previous": "49.3"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-4.01B",
+"consensus": "",
+"previous": "-3.59B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Manufacturing PMI",
+"actual": "49.5",
+"consensus": "50.7",
+"previous": "50.7"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Composite PMI",
+"actual": "51.2",
+"consensus": "51.1",
+"previous": "51"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Services PMI",
+"actual": "51.4",
+"consensus": "50.6",
+"previous": "50.5"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Composite PMI",
+"actual": "51",
+"consensus": "52.7",
+"previous": "53.5"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "46.2",
+"consensus": "47.1",
+"previous": "47"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Services PMI",
+"actual": "51.9",
+"consensus": "53.4",
+"previous": "54.2"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "30-Year Treasury Gilt Auction",
+"actual": "5.480%",
+"consensus": "",
+"previous": "5.170%"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.010%",
+"consensus": "",
+"previous": "1.960%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Industrial Trends Orders",
+"actual": "-27",
+"consensus": "-30",
+"previous": "-33"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "BCB Copom Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Current Account",
+"actual": "-251.3B",
+"consensus": "-259.0B",
+"previous": "-439.8B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Fed Goolsbee Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "-0.3%",
+"consensus": "0.0%",
+"previous": "-0.1%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.7%",
+"consensus": "",
+"previous": "6.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "FOMC Member Bowman Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "52",
+"consensus": "52.2",
+"previous": "53"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Composite PMI",
+"actual": "53.6",
+"consensus": "54.6",
+"previous": "54.6"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "53.9",
+"consensus": "54",
+"previous": "54.5"
+},
+{
+"gmt": "09:50",
+"country": "United States",
+"eventName": "U.S. President Trump Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-17",
+"consensus": "-5",
+"previous": "-7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-20",
+"consensus": "",
+"previous": "-5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "1",
+"consensus": "",
+"previous": "4"
+},
+{
+"gmt": "12:35",
+"country": "United States",
+"eventName": "Fed Chair Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "3.561%",
+"consensus": "",
+"previous": "3.641%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "22.20T",
+"consensus": "",
+"previous": "22.12T"
+},
+{
+"gmt": "14:15",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "Fed Goolsbee Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-3.821M",
+"consensus": "",
+"previous": "-3.420M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "110.1",
+"consensus": "",
+"previous": "111.4"
+},
+{
+"gmt": "18:00",
+"country": "Germany",
+"eventName": "German Buba Mauderer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:20",
+"country": "United States",
+"eventName": "U.S. President Trump Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "51.10%",
+"consensus": "",
+"previous": "52.00%"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "48.4",
+"consensus": "49.5",
+"previous": "49.7"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "53",
+"consensus": "",
+"previous": "53.1"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "3.00%",
+"consensus": "2.90%",
+"previous": "2.80%"
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Autumn Equinox",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

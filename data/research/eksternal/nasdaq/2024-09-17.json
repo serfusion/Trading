@@ -1,0 +1,490 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "2.50",
+"consensus": "",
+"previous": "1.50"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "1.4%",
+"consensus": "0.8%",
+"previous": "-1.2%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "3.11%",
+"consensus": "",
+"previous": "3.45%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-0.67%",
+"consensus": "",
+"previous": "1.72%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "1.31%",
+"consensus": "1.80%",
+"previous": "2.04%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "1.22%",
+"consensus": "",
+"previous": "1.58%"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Current Conditions",
+"actual": "-84.5",
+"consensus": "-80.0",
+"previous": "-77.3"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "3.6",
+"consensus": "17.1",
+"previous": "19.2"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB McCaul Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "9.3",
+"consensus": "16.3",
+"previous": "17.9"
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "30-Year Treasury Gilt Auction",
+"actual": "4.329%",
+"consensus": "",
+"previous": "4.636%"
+},
+{
+"gmt": "06:00",
+"country": "India",
+"eventName": "Exports (USD)",
+"actual": "34.71B",
+"consensus": "",
+"previous": "33.98B"
+},
+{
+"gmt": "06:00",
+"country": "India",
+"eventName": "Imports (USD)",
+"actual": "64.36B",
+"consensus": "",
+"previous": "57.48B"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Housing Starts",
+"actual": "217.4K",
+"consensus": "252.0K",
+"previous": "279.8K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Control",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "-0.2%",
+"previous": "1.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "2.13%",
+"consensus": "",
+"previous": "2.86%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales Ex Gas/Autos",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Common CPI",
+"actual": "2.0%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "1.5%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "-0.2%",
+"consensus": "0.0%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "",
+"previous": "2.5%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Median CPI",
+"actual": "2.3%",
+"consensus": "2.2%",
+"previous": "2.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trimmed CPI",
+"actual": "2.4%",
+"consensus": "2.5%",
+"previous": "2.7%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.6%",
+"consensus": "",
+"previous": "6.5%"
+},
+{
+"gmt": "09:00",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "78.0%",
+"consensus": "77.9%",
+"previous": "77.4%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.8%",
+"consensus": "0.2%",
+"previous": "-0.9%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.04%",
+"consensus": "",
+"previous": "-0.74%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Manufacturing Production",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "09:50",
+"country": "India",
+"eventName": "Trade Balance",
+"actual": "-29.65B",
+"consensus": "",
+"previous": "-23.50B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "41",
+"consensus": "41",
+"previous": "39"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.3%"
+},
+{
+"gmt": "11:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "0.8%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "11:00",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,883.0",
+"consensus": "",
+"previous": "3,833.0"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.0%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.039%",
+"consensus": "",
+"previous": "4.160%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "1.960M",
+"consensus": "-0.100M",
+"previous": "-2.790M"
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "90.8",
+"consensus": "",
+"previous": "82.2"
+},
+{
+"gmt": "18:00",
+"country": "Canada",
+"eventName": "BoC Senior Deputy Governor Rogers Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-4.83B",
+"consensus": "-3.95B",
+"previous": "-4.36B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-27.76B",
+"consensus": "",
+"previous": "-27.62B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Current Account % of GDP",
+"actual": "-6.70%",
+"consensus": "",
+"previous": "-6.80%"
+},
+{
+"gmt": "19:20",
+"country": "Australia",
+"eventName": "RBA Assistant Governor Jones Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.60T",
+"consensus": "-0.96T",
+"previous": "-0.68T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "-0.1%",
+"consensus": "0.4%",
+"previous": "2.1%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "8.7%",
+"consensus": "",
+"previous": "-1.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "5.6%",
+"consensus": "10.0%",
+"previous": "10.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "2.3%",
+"consensus": "13.4%",
+"previous": "16.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-695.3B",
+"consensus": "-1,380.0B",
+"previous": "-628.7B"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Mid-Autumn Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - Mid-Autumn Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Chuseok - Thanksgiving Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Chuseok - Thanksgiving Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

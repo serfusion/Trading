@@ -1,0 +1,298 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.7%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "108.6",
+"consensus": "108.9",
+"previous": "106.5"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "2.1%",
+"consensus": "",
+"previous": "-0.4%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "4.2%",
+"consensus": "3.1%",
+"previous": "4.4%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "1.1%",
+"consensus": "0.3%",
+"previous": "-1.0%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "1.4%",
+"consensus": "",
+"previous": "-2.3%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German GDP Annual",
+"actual": "2.20%",
+"consensus": "2.40%",
+"previous": "1.90%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BOE Credit Conditions Survey",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "1.0%",
+"consensus": "0.8%",
+"previous": "0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "3.2%",
+"consensus": "3.0%",
+"previous": "3.9%"
+},
+{
+"gmt": "06:45",
+"country": "Italy",
+"eventName": "Italian 3-Year BTP Auction",
+"actual": "0.04%",
+"consensus": "",
+"previous": "-0.02%"
+},
+{
+"gmt": "06:45",
+"country": "Italy",
+"eventName": "Italian 7-Year BTP Auction",
+"actual": "1.35%",
+"consensus": "",
+"previous": "1.21%"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "0.9%",
+"consensus": "-0.1%",
+"previous": "0.7%"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "432.6B",
+"consensus": "",
+"previous": "432.0B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,867K",
+"consensus": "1,915K",
+"previous": "1,902K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "2.3%",
+"consensus": "2.5%",
+"previous": "2.4%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "261K",
+"consensus": "246K",
+"previous": "250K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "250.75K",
+"consensus": "",
+"previous": "241.75K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "2.6%",
+"consensus": "3.0%",
+"previous": "3.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "53.5",
+"consensus": "",
+"previous": "51.8"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-359B",
+"consensus": "-318B",
+"previous": "-206B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "2.867%",
+"consensus": "",
+"previous": "2.804%"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Federal Budget Balance",
+"actual": "-23.0B",
+"consensus": "-34.5B",
+"previous": "-139.0B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "FOMC Member Dudley Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Building Consents",
+"actual": "10.8%",
+"consensus": "",
+"previous": "-10.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Current Account",
+"actual": "1.70T",
+"consensus": "2.19T",
+"previous": "2.44T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Bank Lending",
+"actual": "2.5%",
+"consensus": "2.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Current Account n.s.a.",
+"actual": "1.347T",
+"consensus": "1.836T",
+"previous": "2.176T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "173.0B",
+"consensus": "",
+"previous": "427.4B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "597.9B",
+"consensus": "",
+"previous": "76.1B"
+},
+{
+"gmt": "23:06",
+"country": "China",
+"eventName": "Exports",
+"actual": "10.9%",
+"consensus": "9.1%",
+"previous": "12.3%"
+},
+{
+"gmt": "23:06",
+"country": "China",
+"eventName": "Imports",
+"actual": "4.5%",
+"consensus": "13.0%",
+"previous": "17.7%"
+},
+{
+"gmt": "23:06",
+"country": "China",
+"eventName": "Trade Balance (USD)",
+"actual": "54.69B",
+"consensus": "37.00B",
+"previous": "40.21B"
+}
+]

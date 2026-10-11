@@ -19,6 +19,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import _core
+import _cpi_detik
 import _prediksi
 
 _PATH = Path(__file__).resolve().parent / "pra_aset.json"
@@ -243,6 +244,10 @@ def _persen(sel: list) -> float:
 
 def tebak_kartu(c: dict) -> dict | None:
     """Arah + persen untuk satu kartu berita (tanpa tren)."""
+    if c.get("title") in _cpi_detik.JUDUL and _cpi_detik.aktif():
+        # CPI: HANYA aturan tutup kertas IDX|K (_cpi_detik.py, 11 Okt 2026); varian lama (minyak WTI dst.) tidak lolos
+        # tutup kertas sejak 2022 → tidak dipakai lagi. Tanpa petunjuk = None (≈ 50:50).
+        return c.get("cpi_detik") or None
     b = c.get("petunjuk_teruji") or {}
     var = varian(c["title"], b) if b.get("arah_emas") else None
     r = ringkas(var, b["arah_emas"]) if var else None
@@ -291,15 +296,16 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         sisa = sisa_teks(datetime.fromisoformat(t0) - now)
         row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
         if g:
-            tanda = "✅" if g["status"] == "teruji" else "⚠️"
+            tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
-                       **{k: g[k] for k in ("lama", "baru", "n") if k in g},
+                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
                                                                   "untuk berita ini (diuji 2010–2026)",
                        teks=f"{nm} • ≈ 50:50 (belum ada petunjuk teruji) • {sisa}")
-        if not out and tren is not None and datetime.fromisoformat(t0) - now <= timedelta(hours=TREN_JAM):
+        if not out and tren is not None and datetime.fromisoformat(t0) - now <= timedelta(hours=TREN_JAM) \
+                and not (g and g.get("tanpa_tren")):                 # gabungan tren × aturan CPI baru belum diuji
             khusus = g.get("khusus") if g else None
             bt = baris_tren(c["title"], g["arah"] if g else None, tren(datetime.fromisoformat(t0) - now), khusus)
             if bt:
@@ -380,7 +386,8 @@ def menit_info(title: str) -> dict | None:
 
 
 STATUS_SATU = {"teruji": "✅ Teruji", "belum terbukti": "⚠️ Belum terbukti", "tren searah": "⚠️ Belum terbukti",
-               "lemah": "⚠️ Lemah"}
+               "lemah": "⚠️ Lemah", "tutup kertas": "✅ Teruji tutup kertas"}
+TERUJI = ("teruji", "tutup kertas")
 
 
 def dasar_singkat(dasar: str | None) -> str:
@@ -398,8 +405,8 @@ def satu(row: dict) -> dict:
     mi = menit_info(row.get("title") or "")
     if row.get("arah"):
         naik = row["arah"] == "naik"
-        tanda = "" if row.get("status") == "teruji" else " ⚠️"
-        j = jangka(row.get("dasar"), row["arah"]) or {"teks_sampai": "1–10 dtk"}
+        tanda = "" if row.get("status") in TERUJI else " ⚠️"
+        j = jangka(row.get("dasar"), row["arah"]) or {"teks_sampai": row.get("teks_sampai") or "1–10 dtk"}
         out["teks"] = (f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}% ({j['teks_sampai']}){tanda}"
                        f" • {row['sisa']}")
         uji = [STATUS_SATU.get(row.get("status"), "⚠️ Belum terbukti")]
@@ -462,7 +469,7 @@ def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
             ganda = c["title"] != judul or utama_dipakai
             utama_dipakai = utama_dipakai or not ganda
             if info:
-                j = jangka(info.get("dasar"), info["arah"]) or {"teks_sampai": "1–10 dtk"}
+                j = jangka(info.get("dasar"), info["arah"]) or {"teks_sampai": info.get("teks_sampai") or "1–10 dtk"}
                 c["arah_detik"] = {"arah": info["arah"], "persen": info["persen"], "status": info["status"],
                                    "ganda": ganda,
                                    "teks": f"{nm}: emas {info['arah']} {info['persen']}% ({j['teks_sampai']})"}
@@ -499,6 +506,22 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
     else:
         out.update({"status": "acak", "teks": "XAU • arah belum bisa ditebak (tanpa petunjuk teruji) ⚪",
                     "kecil": "≈ 50:50 di detik 1–10", "bukti": "berita ini tidak punya petunjuk sebelum rilis yang lolos uji"})
+    cpi = next((x for x in sama if x.get("title") in _cpi_detik.JUDUL), None) if _cpi_detik.aktif() else None
+    if cpi is not None:                                    # CPI: aturan tutup kertas IDX|K menggantikan varian lama
+        c, g, r = cpi, cpi.get("cpi_detik"), None
+        out.update(title=c["title"], judul=f"⏱️ Entry 1 dtk sebelum {_prediksi.nama(c['title'])} • {c.get('when', '')}")
+        out.pop("detik", None)
+        if g:
+            u = _cpi_detik.DATA.get("uji") or {}
+            naik = g["arah"] == "naik"
+            out.update(arah=g["arah"], status="tutup kertas", bukti=g["bukti"],
+                       teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% (2–10 dtk) ✅",
+                       kecil=" • ".join(f"{h} dtk {v:.0f}%" for h, v in (u.get("per_detik") or {}).items()
+                                        if v is not None) + f" ({u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
+        else:
+            out.update(status="acak", arah=None, teks="XAU • arah belum bisa ditebak (konsensus indeks & Kalshi belum "
+                                                      "memberi arah) ⚪",
+                       kecil="≈ 50:50 di detik 2–10", bukti="aturan CPI tutup kertas belum punya petunjuk untuk rilis ini")
     k = kepastian(c["title"])
     if k:
         out["kepastian"] = k
@@ -507,7 +530,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         tren = lambda s_: memo["v"] if "v" in memo else memo.setdefault("v", asli(s_))  # noqa: E731
     sisa = datetime.fromisoformat(c["time"]) - now
     if tren is not None and sisa <= timedelta(hours=TREN_JAM):
-        bt = baris_tren(c["title"], b.get("arah_emas") if r else None, tren(sisa))
+        bt = baris_tren(c["title"], (b.get("arah_emas") if r else None) if cpi is None else None, tren(sisa))
         if bt:
             out["tren"] = bt
     elif tren is not None:

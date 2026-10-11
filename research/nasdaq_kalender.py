@@ -93,7 +93,8 @@ def cpi(tgl) -> dict:
             g = g[:2]
             mm, yy = _ref(seri, tgl)
             if mm == mm:
-                e = lambda a, b: abs(angka(a["previous"]) - mm) + abs(angka(b["previous"]) - yy)  # noqa: E731
+                def e(a: dict, b: dict, mm: float = mm, yy: float = yy) -> float:
+                    return abs(angka(a["previous"]) - mm) + abs(angka(b["previous"]) - yy)
                 if e(g[1], g[0]) < e(g[0], g[1]):
                     g = [g[1], g[0]]
             o[f"{kunci}_a"], o[f"{kunci}_f"], o[f"{kunci}_p"] = (angka(g[0][k]) for k in ("actual", "consensus", "previous"))

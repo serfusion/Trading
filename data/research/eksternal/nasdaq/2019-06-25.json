@@ -1,0 +1,330 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "102",
+"consensus": "104",
+"previous": "104"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "1.1%",
+"consensus": "",
+"previous": "2.4%"
+},
+{
+"gmt": "03:05",
+"country": "Australia",
+"eventName": "RBA Assist Gov Bullock Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "-2.4%",
+"consensus": "",
+"previous": "-2.6%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "-4.3%",
+"consensus": "",
+"previous": "-5.5%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-34.7B",
+"consensus": "",
+"previous": "-35.1B"
+},
+{
+"gmt": "05:40",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "-0.740%",
+"consensus": "",
+"previous": "-0.650%"
+},
+{
+"gmt": "05:45",
+"country": "United Kingdom",
+"eventName": "30-Year Treasury Gilt Auction",
+"actual": "1.421%",
+"consensus": "",
+"previous": "1.739%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "-42",
+"consensus": "-10",
+"previous": "-27"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "BCB Copom Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "FGV Consumer confidence",
+"actual": "88.5",
+"consensus": "",
+"previous": "86.6"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.06%",
+"consensus": "0.06%",
+"previous": "0.35%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "3.84%",
+"consensus": "3.84%",
+"previous": "4.93%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "1.7%",
+"consensus": "0.2%",
+"previous": "1.4%"
+},
+{
+"gmt": "08:45",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "-2.5%",
+"consensus": "",
+"previous": "-2.4%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.0%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "5.2%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "274.7",
+"consensus": "",
+"previous": "273.4"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.8%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "2.5%",
+"consensus": "2.6%",
+"previous": "2.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "121.5",
+"consensus": "131.1",
+"previous": "131.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "626K",
+"consensus": "680K",
+"previous": "679K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-7.8%",
+"consensus": "1.9%",
+"previous": "-3.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "3",
+"consensus": "7",
+"previous": "5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "7",
+"consensus": "",
+"previous": "2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "17",
+"consensus": "",
+"previous": "1"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "13.6",
+"consensus": "",
+"previous": "2.7"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "3.2",
+"consensus": "",
+"previous": "-0.3"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "1.695%",
+"consensus": "",
+"previous": "2.125%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Fed Chair Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-7.550M",
+"consensus": "",
+"previous": "-0.812M"
+},
+{
+"gmt": "18:30",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "1.50%",
+"consensus": "1.50%",
+"previous": "1.50%"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

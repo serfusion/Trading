@@ -1,0 +1,250 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "-0.1%",
+"consensus": "-0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.4%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.5%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "1.9%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "04:40",
+"country": "China",
+"eventName": "M2 Money Stock",
+"actual": "11.6%",
+"consensus": "11.4%",
+"previous": "11.5%"
+},
+{
+"gmt": "04:40",
+"country": "China",
+"eventName": "New Loans",
+"actual": "651.3B",
+"consensus": "700.0B",
+"previous": "1,220.0B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Construction Output",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "-1.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "U.K. Construction Output",
+"actual": "0.20%",
+"consensus": "",
+"previous": "0.80%"
+},
+{
+"gmt": "06:30",
+"country": "Italy",
+"eventName": "Italian 3-Year BTP Auction",
+"actual": "0.30%",
+"consensus": "",
+"previous": "0.03%"
+},
+{
+"gmt": "06:30",
+"country": "Italy",
+"eventName": "Italian 7-Year BTP Auction",
+"actual": "1.37%",
+"consensus": "",
+"previous": "0.83%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "OPEC Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "9.1%",
+"consensus": "",
+"previous": "8.9%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.8%",
+"consensus": "",
+"previous": "10.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "368.23B",
+"consensus": "",
+"previous": "367.16B"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Cumulative Industrial Production",
+"actual": "-0.10%",
+"consensus": "",
+"previous": "-0.30%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Industrial Production",
+"actual": "0.7%",
+"consensus": "0.5%",
+"previous": "-0.7%"
+},
+{
+"gmt": "08:00",
+"country": "India",
+"eventName": "Manufacturing Output",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Trade Balance",
+"actual": "7.38B",
+"consensus": "6.90B",
+"previous": "4.93B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Stanley Fischer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.7%",
+"consensus": "",
+"previous": "2.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.70%",
+"consensus": "",
+"previous": "2.40%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "82.5",
+"consensus": "77.3",
+"previous": "76.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "91.6",
+"consensus": "87.5",
+"previous": "87.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "105.9",
+"consensus": "103.4",
+"previous": "103.2"
+},
+{
+"gmt": "11:50",
+"country": "Canada",
+"eventName": "BoC Gov Poloz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "452",
+"consensus": "",
+"previous": "450"
+}
+]

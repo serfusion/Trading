@@ -36,6 +36,7 @@ EKS = ROOT / "data" / "research" / "eksternal"
 DET = (1, 2, 3, 5, 10)
 JAUH = (2, 3, 5, 10)
 MULAI = 2013
+AMBANG_IDX = 0.02
 HARGA = ["D30", "D120", "M15", "M60", "H4", "H24"]
 
 
@@ -48,17 +49,20 @@ def emas() -> pd.DataFrame:
     v = v[v.grup == "CPI"].copy()
     for h in DET:
         v[f"g{h}"] = v[f"y{h}_XAU_EXNESS"].fillna(v[f"y{h}_XAU"])
+        v[f"ex{h}"], v[f"du{h}"] = v[f"y{h}_XAU_EXNESS"], v[f"y{h}_XAU"]          # per feed (uji validitas)
     for c in HARGA:                                   # gerak harga SEBELUM rilis (+1 naik); dibalik agar "−" = emas naik
         v[f"h_{c}"] = -np.sign(v[c].fillna(0))
     ny = v.t0.dt.tz_convert("America/New_York")
     v = v[(ny.dt.hour == 8) & (ny.dt.minute == 30)]   # CPI selalu 08:30 New York (10 Mar 2021/2022 tercatat ganda 07:30)
-    return v[["t0"] + [f"g{h}" for h in DET] + [f"h_{c}" for c in HARGA]].sort_values("t0").reset_index(drop=True)
+    kol = ["t0"] + [f"{p}{h}" for p in ("g", "ex", "du") for h in DET] + [f"h_{c}" for c in HARGA]
+    return v[kol].sort_values("t0").reset_index(drop=True)
 
 
 def kalshi(df: pd.DataFrame) -> pd.DataFrame:
     """Kalshi 1 jam sebelum tutup pasar vs konsensus tabel ini (FF, cadangan Nasdaq) → juga rilis 2026."""
     import glob
     import json
+
     from .kalshi_uji import curve, lean
     for seri, kol, fk in (("KXCPI", "mm_K", "mm_f"), ("KXCPICORE", "core_K", "core_f")):
         df[kol] = 0.0
@@ -113,15 +117,18 @@ def tabel() -> pd.DataFrame:
             o["YOY"] = sgn(imp - o["yy_f"], 0.05)
         # konsensus indeks tanpa pembulatan (Nasdaq)
         o["IDXc"] = o["IDXy"] = o["IDXm"] = 0.0
+        o["d_IDXc"] = o["d_IDXy"] = o["d_IDXm"] = np.nan        # selisih mentah (uji kepekaan ambang)
         cf, cp = n.get("cidx_f", np.nan), n.get("cidx_p", np.nan)
         if cf == cf and cp == cp and o["core_f"] == o["core_f"]:
-            o["IDXc"] = sgn((cf / cp - 1) * 100 - o["core_f"], 0.02)
+            o["d_IDXc"] = (cf / cp - 1) * 100 - o["core_f"]
         nf = n.get("nsa_f", np.nan)
         if nf == nf and p12 in nsa.index and o["yy_f"] == o["yy_f"]:
-            o["IDXy"] = sgn((nf / nsa[p12] - 1) * 100 - o["yy_f"], 0.02)
+            o["d_IDXy"] = (nf / nsa[p12] - 1) * 100 - o["yy_f"]
         if nf == nf and p1 in nsa.index and p13 in nsa.index and o["mm_f"] == o["mm_f"]:
             sea = (nsa[p12] / nsa[p13] - 1) - (sa[p12] / sa[p13] - 1)
-            o["IDXm"] = sgn(((nf / nsa[p1] - 1) - sea) * 100 - o["mm_f"], 0.02)
+            o["d_IDXm"] = ((nf / nsa[p1] - 1) - sea) * 100 - o["mm_f"]
+        for k in ("IDXc", "IDXy", "IDXm"):
+            o[k] = sgn(o[f"d_{k}"], AMBANG_IDX)
         o["IDXcy"] = 0.0
         if cf == cf and p12 in core_sa.index and n.get("core_yy_f") == n.get("core_yy_f"):
             o["IDXcy"] = sgn((cf / core_sa[p12] - 1) * 100 - n["core_yy_f"], 0.02)
@@ -237,8 +244,51 @@ def model(df: pd.DataFrame, kolom: list[str], ambang: float) -> pd.Series:
     return out
 
 
+JSON = ROOT / "cloud" / "api" / "cpi_detik.json"
+
+
+def simpan_json(df: pd.DataFrame) -> dict:
+    """cloud/api/cpi_detik.json: angka uji tutup kertas aturan IDX|K + tabel indeks CPI (FRED) untuk hitungan live."""
+    import json
+
+    from .eksternal_makro import fred
+
+    def st(tb, hs=JAUH, m=None):
+        m = df.th >= MULAI if m is None else m
+        k, n = tepat(df[m], tb[m], hs)
+        return round(k / n * 100, 1) if n else None
+
+    tb = tetap(df, "IDX|K")
+    lama, baru, b22 = (df.th >= MULAI) & (df.t0 < "2021-10-01"), df.t0 >= "2021-10-01", df.th >= 2022
+    uji = {"semua": st(tb), "lama": st(tb, m=lama), "baru": st(tb, m=baru), "s2022": st(tb, m=b22),
+           "n_rilis": int(((tb != 0) & (df.th >= MULAI)).sum()), "n_2022": int(((tb != 0) & b22).sum()),
+           "per_detik": {str(h): st(tb, (h,)) for h in DET}, "per_detik_2022": {str(h): st(tb, (h,), b22) for h in DET},
+           "selalu_naik": st(pd.Series(1.0, index=df.index)), "selalu_naik_2022": st(pd.Series(1.0, index=df.index), m=b22),
+           "plafon": st(-df.PLAFON_net), "per_tahun": {}}
+    for th in range(MULAI, int(df.th.max()) + 1):
+        k, n = tepat(df[df.th == th], tb[df.th == th])
+        if n:
+            uji["per_tahun"][str(th)] = [k, n]
+    for nama, c in (("indeks", "SUARA_IDX"), ("kalshi", "mm_K")):
+        t2 = tetap(df, c)
+        uji[nama] = {"semua": st(t2), "s2022": st(t2, m=b22), "n_rilis": int(((t2 != 0) & (df.th >= MULAI)).sum())}
+    old = json.loads(JSON.read_text(encoding="utf-8")) if JSON.exists() else {}
+    tab = {}
+    for k, seri in (("nsa", "CPIAUCNS"), ("sa", "CPIAUCSL"), ("core", "CPILFESL")):
+        v = fred(seri).value
+        tab[k] = {f"{d:%Y-%m}": round(float(x), 3) for d, x in v[v.index >= "2021-01-01"].items() if x == x}
+    out = {"dibuat": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d %H:%M UTC"),
+           "aturan": "IDX|K: suara 3 konsensus indeks CPI tanpa pembulatan (Nasdaq/Investing: core m/m, y/y NSA, "
+                     "headline m/m NSA) − konsensus dibulatkan, |selisih| ≥ 0,02; bila 0 → Kalshi headline |atas−bawah| "
+                     "≥ 0,10. Tebakan CPI di atas → emas TURUN detik 2–10.",
+           "ambang": AMBANG_IDX, "lean": 0.10, "uji": uji, "validitas": old.get("validitas", {}), **tab}
+    JSON.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return out
+
+
 def main() -> None:
     df = turunan(tabel())
+    simpan_json(df)
     L = ["# ⏱️ CPI → arah emas 1–10 detik, tutup kertas", __doc__.split("\n\n")[1], ""]
     cocok = df[(df.sumber == "FF") & df.core_ns_f.notna()]
     L.append(f"Cek konsensus FF vs Nasdaq (rilis sama): headline {np.mean(cocok.mm_f == cocok.mm_ns_f) * 100:.0f}%, core "
@@ -288,7 +338,7 @@ def main() -> None:
             tb = model(df, kol, a)
             L.append(f"   {kol_nama:22s} ambang {a:.2f} 2–10: {per_periode(df, tb)}")
     L.append("\n## Per tahun — aturan tetap terbaik 2022+ (2–10 dtk)")
-    for s, c, n in sorted(hasil, reverse=True)[:5]:
+    for s, c, _n in sorted(hasil, reverse=True)[:5]:
         tb = tetap(df, c)
         row = []
         for th in range(MULAI, int(df.th.max()) + 1):

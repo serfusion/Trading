@@ -1,0 +1,282 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "2.00%",
+"consensus": "2.00%",
+"previous": "2.00%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:00",
+"country": "United States",
+"eventName": "Chicago Fed President Evans Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "01:30",
+"country": "India",
+"eventName": "Cash Reserve Ratio",
+"actual": "4.00%",
+"consensus": "4.00%",
+"previous": "4.00%"
+},
+{
+"gmt": "01:30",
+"country": "India",
+"eventName": "Interest Rate Decision",
+"actual": "6.50%",
+"consensus": "6.50%",
+"previous": "6.75%"
+},
+{
+"gmt": "01:30",
+"country": "India",
+"eventName": "Reverse REPO Rate",
+"actual": "6.00%",
+"consensus": "5.50%",
+"previous": "5.75%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-1.2%",
+"consensus": "0.2%",
+"previous": "0.5%"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "German Buba President Weidmann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.97%",
+"consensus": "0.88%",
+"previous": "0.89%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "-0.076%",
+"consensus": "",
+"previous": "-0.066%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "-0.142%",
+"consensus": "",
+"previous": "-0.114%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "2.4%",
+"consensus": "1.9%",
+"previous": "2.0%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "7.3%",
+"consensus": "7.5%",
+"previous": "8.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-47.06B",
+"consensus": "-46.20B",
+"previous": "-45.88B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "43.68B",
+"consensus": "",
+"previous": "46.18B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "45.58B",
+"consensus": "",
+"previous": "46.81B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-1.91B",
+"consensus": "-0.90B",
+"previous": "-0.63B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "3.1%",
+"consensus": "",
+"previous": "3.1%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "0.6%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "46.3",
+"consensus": "47.7",
+"previous": "46.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "59.8",
+"consensus": "57.4",
+"previous": "57.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "50.3",
+"consensus": "",
+"previous": "49.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "56.7",
+"consensus": "",
+"previous": "55.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "54.5",
+"consensus": "54.0",
+"previous": "53.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "49.1",
+"consensus": "",
+"previous": "45.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "JOLTS Job Openings",
+"actual": "5.445M",
+"consensus": "5.500M",
+"previous": "5.604M"
+},
+{
+"gmt": "10:30",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "2.1%",
+"consensus": "",
+"previous": "-2.9%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.185%",
+"consensus": "",
+"previous": "0.200%"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-4.300M",
+"consensus": "2.900M",
+"previous": "2.600M"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Cushing Crude Oil Stock",
+"actual": "0.620M",
+"consensus": "",
+"previous": "-0.319M"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "2.700M",
+"consensus": "",
+"previous": "-0.095M"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "-0.116M",
+"consensus": "",
+"previous": "-1.940M"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Shop Price Index",
+"actual": "-1.7%",
+"consensus": "",
+"previous": "-2.0%"
+}
+]

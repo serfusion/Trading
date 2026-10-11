@@ -1,0 +1,306 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "1.9%",
+"consensus": "1.9%",
+"previous": "1.9%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-0.3%",
+"consensus": "0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "1.8%",
+"consensus": "1.8%",
+"previous": "2.1%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "-0.5%",
+"consensus": "-0.5%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "2.0%",
+"consensus": "2.3%",
+"previous": "2.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "1.1%",
+"consensus": "1.2%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "3.2%",
+"consensus": "3.1%",
+"previous": "3.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "2.8%",
+"consensus": "2.8%",
+"previous": "2.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "3.1%",
+"consensus": "3.6%",
+"previous": "2.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "5.0%",
+"consensus": "5.5%",
+"previous": "4.0%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "1.1%",
+"consensus": "1.4%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "2.1%",
+"consensus": "2.1%",
+"previous": "2.0%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.3%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "42.0",
+"consensus": "40.0",
+"previous": "36.3"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "-1.3%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "0.7%",
+"consensus": "0.8%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "44.0",
+"consensus": "37.4",
+"previous": "32.8"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "94.1",
+"consensus": "95.4",
+"previous": "93.5"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "0.2%",
+"consensus": "0.6%",
+"previous": "-0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "0.6%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "0.40%",
+"consensus": "",
+"previous": "1.00%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "3.7%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.055%",
+"consensus": "",
+"previous": "0.045%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Core Retail Sales",
+"actual": "2.3%",
+"consensus": "1.3%",
+"previous": "1.0%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Retail Sales",
+"actual": "1.7%",
+"consensus": "1.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "3.2%",
+"consensus": "3.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "3.50%",
+"consensus": "",
+"previous": "-0.10%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "0.7%",
+"consensus": "0.8%",
+"previous": "0.7%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Wage Price Index",
+"actual": "2.9%",
+"consensus": "3.0%",
+"previous": "3.2%"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "2.54B",
+"consensus": "",
+"previous": "2.70B"
+}
+]

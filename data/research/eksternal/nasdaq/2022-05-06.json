@@ -1,0 +1,538 @@
+[
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "2.3%",
+"consensus": "2.2%",
+"previous": "2.4%"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "1.1%",
+"consensus": "0.7%",
+"previous": "1.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "10.8%",
+"consensus": "",
+"previous": "11.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "-3.9%",
+"consensus": "-1.0%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Non-Farm Payrolls",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Reserve Assets Total",
+"actual": "245,991.0M",
+"consensus": "",
+"previous": "235,521.0M"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "0.1%",
+"consensus": "2.7%",
+"previous": "2.8%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "5.6%",
+"consensus": "",
+"previous": "4.6%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "465.70B",
+"consensus": "",
+"previous": "481.60B"
+},
+{
+"gmt": "05:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:30",
+"country": "Spain",
+"eventName": "Spanish Consumer Confidence",
+"actual": "74.6",
+"consensus": "",
+"previous": "53.8"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "0.41%",
+"consensus": "0.88%",
+"previous": "2.37%"
+},
+{
+"gmt": "07:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "11.1%",
+"consensus": "",
+"previous": "11.2%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.8%",
+"consensus": "",
+"previous": "10.1%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "597.73B",
+"consensus": "",
+"previous": "600.42B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "5.5%",
+"consensus": "5.5%",
+"previous": "5.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.6",
+"consensus": "34.7",
+"previous": "34.6"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "22.0K",
+"consensus": "",
+"previous": "4.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "55K",
+"consensus": "35K",
+"previous": "43K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "428K",
+"consensus": "391K",
+"previous": "428K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.2%",
+"consensus": "",
+"previous": "62.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "406K",
+"consensus": "385K",
+"previous": "424K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "7.0%",
+"consensus": "",
+"previous": "6.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "3.6%",
+"consensus": "3.5%",
+"previous": "3.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "15.3K",
+"consensus": "55.0K",
+"previous": "72.5K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "-31.6K",
+"consensus": "",
+"previous": "92.7K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "47.1K",
+"consensus": "",
+"previous": "-20.3K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.3%",
+"consensus": "65.4%",
+"previous": "65.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "5.2%",
+"consensus": "5.2%",
+"previous": "5.3%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "593.1B",
+"consensus": "",
+"previous": "607.1B"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "68.0",
+"consensus": "",
+"previous": "68.4"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "66.3",
+"consensus": "60.0",
+"previous": "74.2"
+},
+{
+"gmt": "11:00",
+"country": "United Kingdom",
+"eventName": "MPC Member Tenreyro Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "557",
+"consensus": "",
+"previous": "552"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "705",
+"consensus": "",
+"previous": "698"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Consumer Credit",
+"actual": "52.43B",
+"consensus": "25.00B",
+"previous": "37.70B"
+},
+{
+"gmt": "15:20",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-73.8K",
+"consensus": "",
+"previous": "-69.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "3.7K",
+"consensus": "",
+"previous": "3.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-15.6K",
+"consensus": "",
+"previous": "-3.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "501.9K",
+"consensus": "",
+"previous": "497.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "321.7K",
+"consensus": "",
+"previous": "316.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "199.2K",
+"consensus": "",
+"previous": "218.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "16.1K",
+"consensus": "",
+"previous": "15.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-117.7K",
+"consensus": "",
+"previous": "-117.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "52.2K",
+"consensus": "",
+"previous": "122.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "28.1K",
+"consensus": "",
+"previous": "35.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "190.4K",
+"consensus": "",
+"previous": "203.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "20.0K",
+"consensus": "",
+"previous": "21.6K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "9.0K",
+"consensus": "",
+"previous": "20.9K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-13.9K",
+"consensus": "",
+"previous": "-12.9K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-28.5K",
+"consensus": "",
+"previous": "-27.7K"
+},
+{
+"gmt": "15:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "41.8K",
+"consensus": "",
+"previous": "46.9K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-100.8K",
+"consensus": "",
+"previous": "-95.5K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-6.6K",
+"consensus": "",
+"previous": "0.1K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-13.9K",
+"consensus": "",
+"previous": "-12.9K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-6.4K",
+"consensus": "",
+"previous": "22.2K"
+},
+{
+"gmt": "19:15",
+"country": "United States",
+"eventName": "Fed Waller Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:15",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:00",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

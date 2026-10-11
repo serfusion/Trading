@@ -1,0 +1,458 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "54.6",
+"consensus": "54.1",
+"previous": "53.3"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Buba Mauderer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "M2 Money Stock",
+"actual": "12.4%",
+"consensus": "12.5%",
+"previous": "12.7%"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "New Loans",
+"actual": "718.8B",
+"consensus": "1,402.5B",
+"previous": "3,890.0B"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "Outstanding Loan Growth",
+"actual": "11.8%",
+"consensus": "12.0%",
+"previous": "11.8%"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "Chinese Total Social Financing",
+"actual": "1,220.0B",
+"consensus": "2,000.0B",
+"previous": "5,380.0B"
+},
+{
+"gmt": "05:20",
+"country": "Italy",
+"eventName": "Italian 3-Year BTP Auction",
+"actual": "3.45%",
+"consensus": "",
+"previous": "3.59%"
+},
+{
+"gmt": "05:20",
+"country": "Italy",
+"eventName": "Italian 7-Year BTP Auction",
+"actual": "3.94%",
+"consensus": "",
+"previous": "4.02%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Gold Production",
+"actual": "21.6%",
+"consensus": "-4.7%",
+"previous": "1.5%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Mining Production",
+"actual": "-2.6%",
+"consensus": "-5.0%",
+"previous": "-7.6%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "46.4",
+"consensus": "",
+"previous": "44.0"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italy Thomson Reuters IPSOS PCSI",
+"actual": "44.83",
+"consensus": "",
+"previous": "43.79"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "Germany Thomson Reuters IPSOS PCSI",
+"actual": "50.47",
+"consensus": "",
+"previous": "50.29"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "France Thomson Reuters IPSOS PCSI",
+"actual": "42.54",
+"consensus": "",
+"previous": "39.85"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "44.03",
+"consensus": "",
+"previous": "43.16"
+},
+{
+"gmt": "06:00",
+"country": "South Africa",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "38.85",
+"consensus": "",
+"previous": "39.06"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "7",
+"consensus": "7",
+"previous": "7"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "2",
+"consensus": "2",
+"previous": "2"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "4.50%",
+"consensus": "4.50%",
+"previous": "4.25%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "OPEC Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "4.0%",
+"consensus": "-0.3%",
+"previous": "-1.3%"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "-1.1%",
+"consensus": "-6.1%",
+"previous": "-5.6%"
+},
+{
+"gmt": "08:00",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,813K",
+"consensus": "1,820K",
+"previous": "1,801K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core PPI",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "264K",
+"consensus": "245K",
+"previous": "242K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "245.25K",
+"consensus": "220.35K",
+"previous": "239.25K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "2.3%",
+"consensus": "2.4%",
+"previous": "2.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI ex. Food/Energy/Transport",
+"actual": "3.4%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "PPI ex. Food/Energy/Transport",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "09:15",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:15",
+"country": "United States",
+"eventName": "Fed Waller Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "78B",
+"consensus": "74B",
+"previous": "54B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.605%",
+"consensus": "",
+"previous": "5.840%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "4.680%",
+"consensus": "",
+"previous": "5.400%"
+},
+{
+"gmt": "12:00",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year Bond Auction",
+"actual": "3.741%",
+"consensus": "",
+"previous": "3.661%"
+},
+{
+"gmt": "13:30",
+"country": "Euro Zone",
+"eventName": "ECB's De Guindos Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "8,503B",
+"consensus": "",
+"previous": "8,504B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.225T",
+"consensus": "",
+"previous": "3.166T"
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "49.1",
+"consensus": "50.7",
+"previous": "48.1"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "805.00%",
+"consensus": "",
+"previous": "4,998.00%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "12,108",
+"consensus": "",
+"previous": "12,609"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Visitor Arrivals",
+"actual": "-2.9%",
+"consensus": "106.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M2 Money Stock",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M3 Money Supply",
+"actual": "2,110.8T",
+"consensus": "",
+"previous": "2,104.9T"
+},
+{
+"gmt": "22:00",
+"country": "South Korea",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "37.76",
+"consensus": "",
+"previous": "38.76"
+},
+{
+"gmt": "22:00",
+"country": "India",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "58.66",
+"consensus": "",
+"previous": "55.55"
+},
+{
+"gmt": "22:00",
+"country": "Australia",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "50.70",
+"consensus": "",
+"previous": "49.65"
+},
+{
+"gmt": "22:00",
+"country": "Japan",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "38.80",
+"consensus": "",
+"previous": "38.84"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "China Thomson Reuters IPSOS PCSI",
+"actual": "76.54",
+"consensus": "",
+"previous": "82.25"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M2 Money supply",
+"actual": "4.50%",
+"consensus": "4.80%",
+"previous": "4.60%"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Inflation Expectations",
+"actual": "2.8%",
+"consensus": "",
+"previous": "3.3%"
+}
+]

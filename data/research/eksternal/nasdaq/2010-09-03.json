@@ -1,0 +1,170 @@
+[
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "GDP",
+"actual": "8.8%",
+"consensus": "7.5%",
+"previous": "9.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.2",
+"consensus": "34.2",
+"previous": "34.2"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "-54K",
+"consensus": "-118K",
+"previous": "-54K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "16.50%",
+"consensus": "",
+"previous": "16.40%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "9.6%",
+"consensus": "9.6%",
+"previous": "9.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "51.5",
+"consensus": "53.2",
+"previous": "54.3"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "665",
+"consensus": "",
+"previous": "672"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-15.3K",
+"consensus": "",
+"previous": "-4.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "238.1K",
+"consensus": "",
+"previous": "221.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "44.8K",
+"consensus": "",
+"previous": "34.8K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-4.8K",
+"consensus": "",
+"previous": "16.1K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "14.3K",
+"consensus": "",
+"previous": "13.9K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "43.8K",
+"consensus": "",
+"previous": "47.0K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "49.9K",
+"consensus": "",
+"previous": "51.1K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "7.0K",
+"consensus": "",
+"previous": "10.7K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-25.6K",
+"consensus": "",
+"previous": "-21.6K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "13.1k",
+"consensus": "",
+"previous": "27.3k"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "2.7K",
+"consensus": "",
+"previous": "2.7K"
+}
+]

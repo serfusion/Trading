@@ -1,0 +1,274 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Consumption Indicator",
+"actual": "1.42",
+"consensus": "",
+"previous": "1.29"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-1.7%",
+"consensus": "-1.5%",
+"previous": "-0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "-3.7%",
+"consensus": "-3.5%",
+"previous": "-2.1%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "9.3",
+"consensus": "9.1",
+"previous": "9.0"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "90",
+"consensus": "91",
+"previous": "90"
+},
+{
+"gmt": "06:10",
+"country": "Italy",
+"eventName": "Italian 6-Month BOT Auction",
+"actual": "0.160%",
+"consensus": "",
+"previous": "0.272%"
+},
+{
+"gmt": "06:35",
+"country": "Germany",
+"eventName": "German 30-Year Bund Auction",
+"actual": "1.070%",
+"consensus": "",
+"previous": "1.770%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "3.83%",
+"consensus": "",
+"previous": "3.80%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-3.2%",
+"consensus": "",
+"previous": "16.1%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "191.6",
+"consensus": "",
+"previous": "191.7"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "544.2",
+"consensus": "",
+"previous": "561.9"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "2,605.4",
+"consensus": "",
+"previous": "2,746.1"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "5.3%",
+"consensus": "2.7%",
+"previous": "1.8%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Unemployment Rate",
+"actual": "5.3%",
+"consensus": "5.4%",
+"previous": "5.2%"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "0.66B",
+"consensus": "",
+"previous": "-0.09B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "8.874M",
+"consensus": "4.080M",
+"previous": "10.071M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-3.892M",
+"consensus": "-1.700M",
+"previous": "-3.272M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-2.587M",
+"consensus": "0.320M",
+"previous": "0.588M"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "0.540%",
+"consensus": "",
+"previous": "0.703%"
+},
+{
+"gmt": "14:50",
+"country": "United Kingdom",
+"eventName": "BoE Gov Carney Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Fed Interest Rate Decision",
+"actual": "0.25%",
+"consensus": "0.25%",
+"previous": "0.25%"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "3.50%",
+"consensus": "3.50%",
+"previous": "3.50%"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,500.06B",
+"consensus": "",
+"previous": "4,512.94B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "4.42B",
+"consensus": "4.21B",
+"previous": "4.02B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "4.58B",
+"consensus": "4.21B",
+"previous": "4.24B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-159M",
+"consensus": "-27M",
+"previous": "-285M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-1,150M",
+"consensus": "-980M",
+"previous": "-499M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "45.6B",
+"consensus": "",
+"previous": "-395.1B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "466.9B",
+"consensus": "",
+"previous": "-577.1B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "0.9%",
+"previous": "0.5%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Export Price Index",
+"actual": "0.0%",
+"consensus": "-1.0%",
+"previous": "-3.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Import Price Index",
+"actual": "0.9%",
+"consensus": "1.5%",
+"previous": "-0.8%"
+}
+]

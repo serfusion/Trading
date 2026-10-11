@@ -1,0 +1,354 @@
+[
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "-29.0",
+"consensus": "-29.0",
+"previous": "-29.6"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "89",
+"consensus": "92",
+"previous": "91"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "33.6%",
+"consensus": "",
+"previous": "11.0%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "21.7%",
+"consensus": "",
+"previous": "11.6%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "3.6B",
+"consensus": "",
+"previous": "-59.9B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "M3 Money Supply",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Loans to Non Financial Corporations",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Private Sector Loans",
+"actual": "0.3%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "06:10",
+"country": "Italy",
+"eventName": "Italian 6-Month BOT Auction",
+"actual": "3.769%",
+"consensus": "",
+"previous": "3.770%"
+},
+{
+"gmt": "06:30",
+"country": "Russia",
+"eventName": "CBR Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "France",
+"eventName": "France Jobseekers Total",
+"actual": "2,827.7K",
+"consensus": "",
+"previous": "2,825.2K"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.78%",
+"consensus": "0.82%",
+"previous": "0.31%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "4.49%",
+"consensus": "4.52%",
+"previous": "4.47%"
+},
+{
+"gmt": "09:00",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-6.1%",
+"consensus": "-4.9%",
+"previous": "-0.3%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-7.3%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.6%"
+},
+{
+"gmt": "09:40",
+"country": "United Kingdom",
+"eventName": "MPC Member Ramsden Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "2.7%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "6.6%",
+"consensus": "",
+"previous": "6.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "417.8",
+"consensus": "",
+"previous": "417.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "6.1%",
+"consensus": "6.0%",
+"previous": "5.4%"
+},
+{
+"gmt": "10:05",
+"country": "United States",
+"eventName": "Fed Vice Chair for Supervision Barr Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "106.7",
+"consensus": "114.8",
+"previous": "110.9"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-5",
+"consensus": "-9",
+"previous": "-15"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-15",
+"consensus": "-4",
+"previous": "-15"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-16",
+"consensus": "",
+"previous": "4"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "5.2",
+"consensus": "",
+"previous": "-3.6"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "-3.9",
+"consensus": "",
+"previous": "-9.3"
+},
+{
+"gmt": "12:00",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.2%",
+"consensus": "2.9%",
+"previous": "2.9%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "7-Year Note Auction",
+"actual": "4.327%",
+"consensus": "",
+"previous": "4.109%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "20.78T",
+"consensus": "",
+"previous": "20.83T"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "8.428M",
+"consensus": "",
+"previous": "7.168M"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "1.4%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "3.40%",
+"consensus": "3.60%",
+"previous": "3.40%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "5.50%",
+"consensus": "5.50%",
+"previous": "5.50%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

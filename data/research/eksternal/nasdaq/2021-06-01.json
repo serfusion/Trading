@@ -1,0 +1,538 @@
+[
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "0.10%",
+"consensus": "0.10%",
+"previous": "0.10%"
+},
+{
+"gmt": "00:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "10.9%",
+"consensus": "9.2%",
+"previous": "7.1%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "1.8%",
+"consensus": "0.8%",
+"previous": "2.3%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "35.7%",
+"consensus": "",
+"previous": "23.1%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "39.7%",
+"consensus": "",
+"previous": "33.6%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "GDP",
+"actual": "-0.5%",
+"consensus": "-0.5%",
+"previous": "0.1%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "GDP",
+"actual": "-0.5%",
+"consensus": "-0.2%",
+"previous": "-1.6%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "69.9",
+"consensus": "70.0",
+"previous": "69.5"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "-15K",
+"consensus": "-9K",
+"previous": "8K"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "6.0%",
+"consensus": "6.0%",
+"previous": "6.0%"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment",
+"actual": "2.739M",
+"consensus": "",
+"previous": "2.754M"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment n.s.a.",
+"actual": "2.687M",
+"consensus": "",
+"previous": "2.771M"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Monthly Unemployment Rate",
+"actual": "10.7%",
+"consensus": "10.1%",
+"previous": "10.4%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "12.1%",
+"consensus": "",
+"previous": "20.1%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "0.1%",
+"consensus": "-0.4%",
+"previous": "-0.4%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "-0.8%",
+"consensus": "-1.4%",
+"previous": "-1.4%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "46.4%",
+"consensus": "",
+"previous": "568.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.9%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "1.9%",
+"previous": "1.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI, n.s.a",
+"actual": "107.43",
+"consensus": "",
+"previous": "107.14"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "0.2%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Unemployment Rate",
+"actual": "8.0%",
+"consensus": "8.1%",
+"previous": "8.1%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Unemployment Rate",
+"actual": "32.60%",
+"consensus": "",
+"previous": "32.50%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Unemployment",
+"actual": "7.200M",
+"consensus": "",
+"previous": "7.200M"
+},
+{
+"gmt": "06:00",
+"country": "United States",
+"eventName": "OPEC Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:55",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "197.80%",
+"consensus": "",
+"previous": "6,133.30%"
+},
+{
+"gmt": "06:55",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "38.34K",
+"consensus": "",
+"previous": "35.62K"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "GDP",
+"actual": "1.0%",
+"consensus": "0.8%",
+"previous": "-1.1%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "GDP",
+"actual": "1.2%",
+"consensus": "1.0%",
+"previous": "3.2%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian PPI",
+"actual": "1.89%",
+"consensus": "",
+"previous": "4.78%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP Implicit Price",
+"actual": "2.90%",
+"consensus": "",
+"previous": "1.30%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "1.4%",
+"consensus": "",
+"previous": "2.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "1.1%",
+"consensus": "1.0%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP Annualized",
+"actual": "5.6%",
+"consensus": "6.7%",
+"previous": "9.3%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "6.60%",
+"consensus": "",
+"previous": "-3.23%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "0.2%",
+"consensus": "0.5%",
+"previous": "1.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Quarles Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "50.9",
+"consensus": "61.5",
+"previous": "55.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "67.0",
+"consensus": "",
+"previous": "64.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "61.2",
+"consensus": "60.9",
+"previous": "60.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "88.0",
+"consensus": "89.8",
+"previous": "89.6"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Mfg Business Index",
+"actual": "34.9",
+"consensus": "",
+"previous": "37.3"
+},
+{
+"gmt": "Tentative",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-0.9%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "11:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.020%",
+"consensus": "",
+"previous": "0.015%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.035%",
+"consensus": "",
+"previous": "0.030%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "FOMC Member Brainard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "9.30B",
+"consensus": "9.18B",
+"previous": "10.30B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Prices",
+"actual": "-0.8%",
+"consensus": "0.6%",
+"previous": "-0.4%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Volume",
+"actual": "-1.9%",
+"consensus": "-0.2%",
+"previous": "3.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Imports Prices",
+"actual": "-0.8%",
+"consensus": "0.6%",
+"previous": "-1.7%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade Index",
+"actual": "0.1%",
+"consensus": "-0.1%",
+"previous": "1.3%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.6%",
+"consensus": "2.6%",
+"previous": "2.3%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Shop Price Index",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "-1.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "22.4%",
+"consensus": "",
+"previous": "24.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP",
+"actual": "1.8%",
+"consensus": "1.5%",
+"previous": "3.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP",
+"actual": "1.1%",
+"consensus": "0.6%",
+"previous": "-1.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Capital Expenditure",
+"actual": "4.7%",
+"consensus": "",
+"previous": "3.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Chain Price Index",
+"actual": "3.1%",
+"consensus": "",
+"previous": "1.7%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "GDP Final Consumption",
+"actual": "0.7%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Chart Pack Release",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Japan",
+"eventName": "BoJ Board Member Adachi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

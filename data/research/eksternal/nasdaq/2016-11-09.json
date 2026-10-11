@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "49.3",
+"consensus": "44.4",
+"previous": "44.8"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Trade Balance",
+"actual": "-12.70B",
+"consensus": "-11.20B",
+"previous": "-11.15B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Trade Balance Non-EU",
+"actual": "-3.97B",
+"consensus": "-3.35B",
+"previous": "-3.29B"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "93.0",
+"consensus": "",
+"previous": "90.3"
+},
+{
+"gmt": "06:35",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "-0.640%",
+"consensus": "",
+"previous": "-0.700%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "7.87%",
+"consensus": "7.90%",
+"previous": "8.48%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "0.26%",
+"consensus": "0.28%",
+"previous": "0.08%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "10.9%",
+"consensus": "",
+"previous": "11.5%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "3.77%",
+"consensus": "",
+"previous": "3.75%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "-1.2%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "210.0",
+"consensus": "",
+"previous": "207.0"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "480.5",
+"consensus": "",
+"previous": "486.2"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "2,031.9",
+"consensus": "",
+"previous": "2,088.0"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-0.33B",
+"consensus": "",
+"previous": "8.79B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Wholesale Inventories",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "2.432M",
+"consensus": "1.330M",
+"previous": "14.420M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-1.559M",
+"consensus": "",
+"previous": "1.990M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.028M",
+"consensus": "",
+"previous": "0.089M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.122M",
+"consensus": "",
+"previous": "0.126M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-1.948M",
+"consensus": "-2.144M",
+"previous": "-1.828M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.632M",
+"consensus": "",
+"previous": "-0.013M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.141M",
+"consensus": "",
+"previous": "0.118M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-2.841M",
+"consensus": "-1.025M",
+"previous": "-2.207M"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "10-Year Note Auction",
+"actual": "2.020%",
+"consensus": "",
+"previous": "1.793%"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "1.75%",
+"consensus": "1.75%",
+"previous": "2.00%"
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "RBNZ Monetary Policy Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,455.09B",
+"consensus": "",
+"previous": "4,453.09B"
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "RBNZ Gov Wheeler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "-3.3%",
+"consensus": "-0.8%",
+"previous": "-2.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "4.3%",
+"consensus": "3.5%",
+"previous": "11.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "604.9B",
+"consensus": "",
+"previous": "892.3B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-106.4B",
+"consensus": "",
+"previous": "108.9B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M2 Money Stock",
+"actual": "3.7%",
+"consensus": "3.6%",
+"previous": "3.5%"
+},
+{
+"gmt": "20:00",
+"country": "Australia",
+"eventName": "MI Inflation Expectations",
+"actual": "3.2%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "20:10",
+"country": "New Zealand",
+"eventName": "RBNZ Gov Wheeler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Home Loans",
+"actual": "1.6%",
+"consensus": "-2.0%",
+"previous": "-2.7%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Invest Housing Finance",
+"actual": "4.6%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "22:00",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M2 Money supply",
+"actual": "7.90%",
+"consensus": "",
+"previous": "7.70%"
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "0.511%",
+"consensus": "",
+"previous": "0.514%"
+}
+]

@@ -1,0 +1,338 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Capacity Utilization",
+"actual": "-5.4%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "-5.2%",
+"consensus": "-6.2%",
+"previous": "-6.2%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "-3.2%",
+"consensus": "4.5%",
+"previous": "7.6%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "1.7%",
+"consensus": "",
+"previous": "-1.1%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "3.860B",
+"consensus": "2.330B",
+"previous": "0.030B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "1.25B",
+"consensus": "",
+"previous": "0.52B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "19.0B",
+"consensus": "",
+"previous": "6.2B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Construction Output",
+"actual": "-0.3%",
+"consensus": "0.0%",
+"previous": "-0.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "10.7%",
+"consensus": "",
+"previous": "11.3%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.7%",
+"consensus": "",
+"previous": "9.9%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "359.92B",
+"consensus": "",
+"previous": "359.76B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "NY Empire State Manufacturing Index",
+"actual": "9.56",
+"consensus": "2.21",
+"previous": "0.62"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "-3.3%",
+"consensus": "-1.5%",
+"previous": "2.3%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "-0.5%",
+"consensus": "-1.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "74.8%",
+"consensus": "75.4%",
+"previous": "75.3%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "-0.6%",
+"consensus": "-0.1%",
+"previous": "-0.6%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Manufacturing Production",
+"actual": "-0.3%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.7%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.50%",
+"consensus": "",
+"previous": "2.70%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "79.6",
+"consensus": "82.5",
+"previous": "81.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "89.7",
+"consensus": "92.0",
+"previous": "91.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "105.4",
+"consensus": "106.0",
+"previous": "105.6"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Chicago Fed President Evans Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:05",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "351",
+"consensus": "",
+"previous": "354"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-51.3K",
+"consensus": "",
+"previous": "-46.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "-22.3K",
+"consensus": "",
+"previous": "-10.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "289.2K",
+"consensus": "",
+"previous": "290.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "213.8K",
+"consensus": "",
+"previous": "190.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-89.5K",
+"consensus": "",
+"previous": "-104.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "62.5K",
+"consensus": "",
+"previous": "52.0K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "2.4K",
+"consensus": "",
+"previous": "0.1K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "8.2K",
+"consensus": "",
+"previous": "5.6K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "35.1K",
+"consensus": "",
+"previous": "26.8K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "66.2K",
+"consensus": "",
+"previous": "60.1K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "4.3K",
+"consensus": "",
+"previous": "2.9K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "2.8K",
+"consensus": "",
+"previous": "3.4K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-52.1K",
+"consensus": "",
+"previous": "-53.5K"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "9.90B",
+"consensus": "",
+"previous": "-50.40B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "33.50B",
+"consensus": "",
+"previous": "116.60B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "72.0B",
+"consensus": "32.2B",
+"previous": "-11.9B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "60.90B",
+"consensus": "",
+"previous": "-42.70B"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Ram Navmi",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

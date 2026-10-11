@@ -1,0 +1,218 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Construction Orders",
+"actual": "-6.0%",
+"consensus": "",
+"previous": "15.2%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Housing Starts",
+"actual": "6.7%",
+"consensus": "10.2%",
+"previous": "13.1%"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Net Debt-to-GDP ratio",
+"actual": "43.8%",
+"consensus": "44.5%",
+"previous": "44.2%"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Budget Balance",
+"actual": "-80.430B",
+"consensus": "-70.000B",
+"previous": "3.384B"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Budget Surplus",
+"actual": "-39.140B",
+"consensus": "-35.900B",
+"previous": "39.589B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "5.1%",
+"consensus": "5.1%",
+"previous": "5.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "113.7",
+"consensus": "109.0",
+"previous": "109.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "8",
+"consensus": "5",
+"previous": "4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "12",
+"consensus": "",
+"previous": "1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "4",
+"consensus": "",
+"previous": "3"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Mfg Business Index",
+"actual": "15.5",
+"consensus": "",
+"previous": "10.2"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.555%",
+"consensus": "",
+"previous": "0.515%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.660%",
+"consensus": "",
+"previous": "0.645%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "1.280%",
+"consensus": "",
+"previous": "1.085%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.485%",
+"consensus": "",
+"previous": "0.490%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "1.5%",
+"consensus": "1.6%",
+"previous": "0.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production forecast 1m ahead",
+"actual": "2.0%",
+"consensus": "",
+"previous": "4.5%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Industrial Production forecast 2m ahead",
+"actual": "2.2%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Retail Sales",
+"actual": "1.7%",
+"consensus": "0.9%",
+"previous": "-0.1%"
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - Christmas",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - Christmas",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Australia",
+"eventName": "Australia - Boxing Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Boxing Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "New Zealand",
+"eventName": "New Zealand - Christmas Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

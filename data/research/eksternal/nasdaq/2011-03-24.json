@@ -1,0 +1,114 @@
+[
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "109",
+"consensus": "105",
+"previous": "106"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-25.1B",
+"consensus": "-30.0B",
+"previous": "-16.0B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "-0.8%",
+"consensus": "-0.4%",
+"previous": "1.5%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Unemployment Rate",
+"actual": "6.4%",
+"consensus": "6.5%",
+"previous": "6.1%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,721K",
+"consensus": "3,700K",
+"previous": "3,723K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "-0.6%",
+"consensus": "1.8%",
+"previous": "-3.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-0.9%",
+"consensus": "1.0%",
+"previous": "3.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "382K",
+"consensus": "384K",
+"previous": "387K"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "25.55",
+"consensus": "",
+"previous": "25.75"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-6B",
+"consensus": "-11B",
+"previous": "-56B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "98",
+"consensus": "105",
+"previous": "105"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "-0.3%",
+"consensus": "-0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Tokyo Core CPI",
+"actual": "-0.3%",
+"consensus": "-0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "-1.0%",
+"consensus": "-1.1%",
+"previous": "-1.1%"
+}
+]

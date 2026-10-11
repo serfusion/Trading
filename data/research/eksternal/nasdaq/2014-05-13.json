@@ -1,0 +1,298 @@
+[
+{
+"gmt": "01:30",
+"country": "China",
+"eventName": "Fixed Asset Investment",
+"actual": "17.3%",
+"consensus": "17.7%",
+"previous": "17.6%"
+},
+{
+"gmt": "01:30",
+"country": "China",
+"eventName": "Industrial Production",
+"actual": "8.7%",
+"consensus": "8.9%",
+"previous": "8.8%"
+},
+{
+"gmt": "01:30",
+"country": "China",
+"eventName": "Retail Sales",
+"actual": "11.9%",
+"consensus": "12.2%",
+"previous": "12.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.2%",
+"consensus": "-0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "-1.50B",
+"consensus": "",
+"previous": "-1.40B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "0.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "0.598%",
+"consensus": "",
+"previous": "0.556%"
+},
+{
+"gmt": "04:45",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "0.362%",
+"consensus": "",
+"previous": "0.369%"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Current Conditions",
+"actual": "62.1",
+"consensus": "60.5",
+"previous": "59.5"
+},
+{
+"gmt": "05:00",
+"country": "Germany",
+"eventName": "German ZEW Economic Sentiment",
+"actual": "33.1",
+"consensus": "41.0",
+"previous": "43.2"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ZEW Economic Sentiment",
+"actual": "55.2",
+"consensus": "63.5",
+"previous": "61.2"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "95.2",
+"consensus": "94.6",
+"previous": "93.4"
+},
+{
+"gmt": "07:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "3.9%",
+"consensus": "",
+"previous": "2.0%"
+},
+{
+"gmt": "07:45",
+"country": "United States",
+"eventName": "Chain Store Sales",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-2.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "0.0%",
+"consensus": "0.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Import Price Index",
+"actual": "-0.4%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.4%",
+"previous": "1.5%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "1.1%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.2%",
+"consensus": "",
+"previous": "4.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.5%"
+},
+{
+"gmt": "10:30",
+"country": "Canada",
+"eventName": "BoC Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.025%",
+"consensus": "",
+"previous": "0.025%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "0.912M",
+"consensus": "-1.500M",
+"previous": "-1.800M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Distillates Stocks",
+"actual": "0.883M",
+"consensus": "1.000M",
+"previous": "0.763M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Gasoline Stock",
+"actual": "-2.020M",
+"consensus": "-1.000M",
+"previous": "2.400M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Export Price Index",
+"actual": "-7.30%",
+"consensus": "",
+"previous": "-4.20%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Import Price Index",
+"actual": "-7.00%",
+"consensus": "",
+"previous": "-4.50%"
+},
+{
+"gmt": "17:05",
+"country": "New Zealand",
+"eventName": "RBNZ Gov Wheeler Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Core Retail Sales",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "1.0%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Retail Sales",
+"actual": "0.7%",
+"consensus": "0.9%",
+"previous": "1.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "3.7%",
+"consensus": "3.4%",
+"previous": "3.5%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "4.1%",
+"consensus": "4.0%",
+"previous": "1.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "2.8%",
+"consensus": "2.8%",
+"previous": "0.0%"
+},
+{
+"gmt": "All Day",
+"country": "Singapore",
+"eventName": "Singapore - Vesak Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,482 @@
+[
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "M3 Money Supply",
+"actual": "8.26%",
+"consensus": "",
+"previous": "7.52%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Private Sector Credit",
+"actual": "7.79%",
+"consensus": "",
+"previous": "7.26%"
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "Official Reserves Assets",
+"actual": "852.4B",
+"consensus": "",
+"previous": "844.9B"
+},
+{
+"gmt": "04:00",
+"country": "Hong Kong",
+"eventName": "M3 Money Supply",
+"actual": "4.5%",
+"consensus": "",
+"previous": "3.5%"
+},
+{
+"gmt": "06:00",
+"country": "India",
+"eventName": "Federal Fiscal Deficit",
+"actual": "9,766.71B",
+"consensus": "",
+"previous": "8,251.44B"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "RBI Monetary and Credit Information Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Long Term Interest Rate TJLP",
+"actual": "9.19%",
+"consensus": "",
+"previous": "7.43%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Trade Balance",
+"actual": "37.73B",
+"consensus": "",
+"previous": "15.00B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,866K",
+"consensus": "",
+"previous": "1,913K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "199K",
+"consensus": "219K",
+"previous": "215K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "218.75K",
+"consensus": "",
+"previous": "217.00K"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-1.934M",
+"consensus": "0.500M",
+"previous": "0.405M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.071M",
+"consensus": "",
+"previous": "-0.212M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.957M",
+"consensus": "",
+"previous": "0.609M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.543M",
+"consensus": "",
+"previous": "0.707M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.076M",
+"consensus": "",
+"previous": "0.107M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "4.977M",
+"consensus": "2.000M",
+"previous": "0.202M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.352M",
+"consensus": "",
+"previous": "0.215M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.134M",
+"consensus": "",
+"previous": "-0.399M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "5.845M",
+"consensus": "2.000M",
+"previous": "2.862M"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "3.590%",
+"consensus": "",
+"previous": "3.570%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "3.580%",
+"consensus": "",
+"previous": "3.585%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-38B",
+"consensus": "-51B",
+"previous": "-166B"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-41.2K",
+"consensus": "",
+"previous": "-48.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "-2.4K",
+"consensus": "",
+"previous": "-2.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "67.1K",
+"consensus": "",
+"previous": "64.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "64.9K",
+"consensus": "",
+"previous": "14.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "64.9K",
+"consensus": "",
+"previous": "54.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "240.7K",
+"consensus": "",
+"previous": "234.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "31.8K",
+"consensus": "",
+"previous": "46.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-156.3K",
+"consensus": "",
+"previous": "-128.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-81.8K",
+"consensus": "",
+"previous": "-166.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "35.9K",
+"consensus": "",
+"previous": "36.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "157.8K",
+"consensus": "",
+"previous": "192.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "-71.8K",
+"consensus": "",
+"previous": "-50.2K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-55.8K",
+"consensus": "",
+"previous": "-86.6K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-44.0K",
+"consensus": "",
+"previous": "-38.9K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-21.6K",
+"consensus": "",
+"previous": "-21.9K"
+},
+{
+"gmt": "16:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "47.7K",
+"consensus": "",
+"previous": "48.0K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "1.2K",
+"consensus": "",
+"previous": "-2.9K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-44.0K",
+"consensus": "",
+"previous": "-48.0K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "159.9K",
+"consensus": "",
+"previous": "144.9K"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Exports",
+"actual": "13.4%",
+"consensus": "8.3%",
+"previous": "8.4%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Imports",
+"actual": "4.6%",
+"consensus": "2.4%",
+"previous": "1.1%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "12.18B",
+"consensus": "10.00B",
+"previous": "9.74B"
+},
+{
+"gmt": "All Day",
+"country": "Germany",
+"eventName": "Germany - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Switzerland",
+"eventName": "Switzerland - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Italy",
+"eventName": "Italy - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Brazil",
+"eventName": "Brazil - New Year's Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Market Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Last day of the year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Last day of the year",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - New Year's Day - Early close at 12:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - New Year's Day - Early close at 12:30",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "New Zealand",
+"eventName": "New Zealand - New Year's Day - Early close at 12:45",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Spain",
+"eventName": "Spain - New Year's Day - Early close at 14:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Australia",
+"eventName": "Australia - New Year's Day - Early close at 14:00",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "France",
+"eventName": "France - New Year's Day - Early close at 14:05",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

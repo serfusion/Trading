@@ -1,0 +1,346 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "3.80%",
+"consensus": "3.80%",
+"previous": "4.20%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "-0.20%",
+"consensus": "",
+"previous": "0.50%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "4.1%",
+"consensus": "4.1%",
+"previous": "4.5%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.5%",
+"consensus": "0.6%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "4.7%",
+"consensus": "4.9%",
+"previous": "5.0%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "4.7%",
+"consensus": "5.0%",
+"previous": "5.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.9%",
+"consensus": "1.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:15",
+"country": "Brazil",
+"eventName": "BRICS Summit",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "EU Economic Forecasts",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "7.31%",
+"consensus": "",
+"previous": "7.16%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-4.2%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "142.0",
+"consensus": "",
+"previous": "149.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "184.8",
+"consensus": "",
+"previous": "193.0"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "397.1",
+"consensus": "",
+"previous": "408.4"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "10.9%",
+"consensus": "10.6%",
+"previous": "10.6%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.443M",
+"consensus": "1.442M",
+"previous": "1.441M"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-3.7%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "-0.8%",
+"consensus": "0.3%",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.0%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "51",
+"consensus": "52.3",
+"previous": "52.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "4.4%",
+"consensus": "0.2%",
+"previous": "-2.8%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "714K",
+"consensus": "705K",
+"previous": "684K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Payrolls Benchmark, n.s.a.",
+"actual": "-306.00K",
+"consensus": "",
+"previous": "506.00K"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-16.0",
+"consensus": "-14.3",
+"previous": "-15.1"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-6.135M",
+"consensus": "-2.850M",
+"previous": "-5.960M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.030M",
+"consensus": "",
+"previous": "0.167M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.116M",
+"consensus": "-2.270M",
+"previous": "-1.763M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-3.133M",
+"consensus": "-0.906M",
+"previous": "-0.837M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.337M",
+"consensus": "0.011M",
+"previous": "-0.182M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.945M",
+"consensus": "0.218M",
+"previous": "0.296M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.130M",
+"consensus": "0.015M",
+"previous": "-0.336M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.502M",
+"consensus": "0.183M",
+"previous": "-0.101M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "1.467M",
+"consensus": "-0.888M",
+"previous": "-0.261M"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "4.9%",
+"consensus": "5.1%",
+"previous": "5.8%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.499%",
+"consensus": "",
+"previous": "4.036%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "3.790B",
+"consensus": "3.795B",
+"previous": "5.749B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "0.3%",
+"consensus": "0.0%",
+"previous": "-0.2%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.2%",
+"consensus": "-0.4%",
+"previous": "-0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-263.2B",
+"consensus": "",
+"previous": "-333.6B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-740.7B",
+"consensus": "",
+"previous": "226.0B"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Monetary Policy Board's Policy Setting Meeting Dates",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Interest Rate Decision",
+"actual": "3.50%",
+"consensus": "3.50%",
+"previous": "3.50%"
+}
+]

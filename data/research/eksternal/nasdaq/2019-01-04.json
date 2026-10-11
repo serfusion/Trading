@@ -1,0 +1,498 @@
+[
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.5%",
+"consensus": "1.5%",
+"previous": "1.9%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "-0.7%",
+"consensus": "0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.09%",
+"consensus": "0.15%",
+"previous": "0.15%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "1.6%",
+"consensus": "",
+"previous": "1.9%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.1%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "1.9%",
+"consensus": "2.0%",
+"previous": "2.2%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "-14K",
+"consensus": "-12K",
+"previous": "-16K"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "5.0%",
+"consensus": "5.0%",
+"previous": "5.0%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment",
+"actual": "2.261M",
+"consensus": "",
+"previous": "2.276M"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment n.s.a.",
+"actual": "2.210M",
+"consensus": "",
+"previous": "2.186M"
+},
+{
+"gmt": "05:20",
+"country": "China",
+"eventName": "PBoC Reserve Requirement Ratio",
+"actual": "14.00%",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "0.924B",
+"consensus": "0.950B",
+"previous": "0.754B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.0%",
+"consensus": "0.6%",
+"previous": "0.7%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "63.73K",
+"consensus": "66.50K",
+"previous": "66.71K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "3.45B",
+"consensus": "3.96B",
+"previous": "4.09B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "4.4B",
+"consensus": "4.9B",
+"previous": "4.8B"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "1.1%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "1.2%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "1.0%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "1.6%",
+"consensus": "1.8%",
+"previous": "1.9%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "4.0%",
+"consensus": "4.1%",
+"previous": "4.9%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "PPI",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "15.1%",
+"consensus": "",
+"previous": "15.1%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.2%",
+"consensus": "",
+"previous": "9.7%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "393.40B",
+"consensus": "",
+"previous": "393.29B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings (YoY)",
+"actual": "3.2%",
+"consensus": "3.0%",
+"previous": "3.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.5",
+"consensus": "34.5",
+"previous": "34.4"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "11.0K",
+"consensus": "",
+"previous": "3.0K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "32K",
+"consensus": "20K",
+"previous": "27K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "312K",
+"consensus": "178K",
+"previous": "176K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "63.1%",
+"consensus": "",
+"previous": "62.9%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "301K",
+"consensus": "175K",
+"previous": "173K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "7.6%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "3.9%",
+"consensus": "3.7%",
+"previous": "3.7%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "9.3K",
+"consensus": "6.8K",
+"previous": "94.1K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "-18.9K",
+"consensus": "",
+"previous": "89.9K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "2.8%",
+"consensus": "",
+"previous": "5.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-0.8%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "28.3K",
+"consensus": "",
+"previous": "4.1K"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.4%",
+"consensus": "",
+"previous": "65.4%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-9.9%",
+"consensus": "",
+"previous": "7.7%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-11.7%",
+"consensus": "",
+"previous": "-2.3%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "5.6%",
+"consensus": "5.7%",
+"previous": "5.6%"
+},
+{
+"gmt": "11:15",
+"country": "United States",
+"eventName": "Fed Chair Powell Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:15",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-20B",
+"consensus": "-47B",
+"previous": "-48B"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "0.007M",
+"consensus": "-3.086M",
+"previous": "-0.046M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.468M",
+"consensus": "",
+"previous": "-0.411M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.641M",
+"consensus": "",
+"previous": "0.799M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.147M",
+"consensus": "",
+"previous": "0.051M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "9.529M",
+"consensus": "1.633M",
+"previous": "0.002M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "-0.611M",
+"consensus": "",
+"previous": "-0.190M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.256M",
+"consensus": "",
+"previous": "-0.169M"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "6.890M",
+"consensus": "1.967M",
+"previous": "3.003M"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "877",
+"consensus": "",
+"previous": "885"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "1,075",
+"consensus": "",
+"previous": "1,083"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Bullard Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

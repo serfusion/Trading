@@ -1,0 +1,418 @@
+[
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "1.7%",
+"consensus": "1.7%",
+"previous": "1.7%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Government Budget Balance",
+"actual": "-186.1B",
+"consensus": "",
+"previous": "-187.9B"
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "SECO Consumer Climate",
+"actual": "-28",
+"consensus": "",
+"previous": "-8"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "30K",
+"consensus": "15K",
+"previous": "12K"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "5.8%",
+"consensus": "5.8%",
+"previous": "5.7%"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment",
+"actual": "2.678M",
+"consensus": "",
+"previous": "2.648M"
+},
+{
+"gmt": "04:55",
+"country": "Germany",
+"eventName": "German Unemployment n.s.a.",
+"actual": "2.607M",
+"consensus": "",
+"previous": "2.627M"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 30-Year Obligacion Auction",
+"actual": "4.465%",
+"consensus": "",
+"previous": "4.190%"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 5-Year Bonos Auction",
+"actual": "3.334%",
+"consensus": "",
+"previous": "3.644%"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 8-Year Obligacion Auction",
+"actual": "3.582%",
+"consensus": "",
+"previous": "3.591%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "3.32%",
+"consensus": "",
+"previous": "3.56%"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "French 30-Year OAT Auction",
+"actual": "3.92%",
+"consensus": "",
+"previous": "3.37%"
+},
+{
+"gmt": "07:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "13.20%",
+"consensus": "",
+"previous": "23.00%"
+},
+{
+"gmt": "07:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "18.10%",
+"consensus": "",
+"previous": "2.30%"
+},
+{
+"gmt": "07:00",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "8.8%",
+"consensus": "",
+"previous": "58.2%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "36.836K",
+"consensus": "",
+"previous": "47.457K"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "3",
+"consensus": "2",
+"previous": "4"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "6",
+"consensus": "7",
+"previous": "5"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "5.25%",
+"consensus": "5.25%",
+"previous": "5.25%"
+},
+{
+"gmt": "08:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,818K",
+"consensus": "1,800K",
+"previous": "1,783K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "217K",
+"consensus": "210K",
+"previous": "212K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "210.00K",
+"consensus": "",
+"previous": "208.00K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "4.7%",
+"consensus": "4.1%",
+"previous": "3.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "-0.8%",
+"consensus": "0.7%",
+"previous": "3.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "3.10M",
+"consensus": "",
+"previous": "3.22M"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "12.40M",
+"consensus": "",
+"previous": "12.46M"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "50.2",
+"consensus": "",
+"previous": "50.1"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "575.5B",
+"consensus": "",
+"previous": "573.2B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "5.7%",
+"consensus": "",
+"previous": "5.8%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Transport",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "2.8%",
+"consensus": "2.4%",
+"previous": "1.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "0.8%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "15.50M",
+"consensus": "15.30M",
+"previous": "15.68M"
+},
+{
+"gmt": "10:15",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "79B",
+"consensus": "80B",
+"previous": "74B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.290%",
+"consensus": "",
+"previous": "5.295%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.300%",
+"consensus": "",
+"previous": "5.330%"
+},
+{
+"gmt": "12:45",
+"country": "Euro Zone",
+"eventName": "ECB Supervisory Board Member Fernandez-Bollo Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "20.0%",
+"consensus": "",
+"previous": "22.8%"
+},
+{
+"gmt": "13:00",
+"country": "Switzerland",
+"eventName": "SNB Chairman Thomas Jordan speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,867B",
+"consensus": "",
+"previous": "7,908B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.315T",
+"consensus": "",
+"previous": "3.264T"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "FX Reserves - USD",
+"actual": "412.87B",
+"consensus": "",
+"previous": "414.12B"
+},
+{
+"gmt": "18:30",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:50",
+"country": "Australia",
+"eventName": "RBA Assistant Governor Jones Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.9%",
+"consensus": "-0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "All Day",
+"country": "Brazil",
+"eventName": "Brazil - All Souls' Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

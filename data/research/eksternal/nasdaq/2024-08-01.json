@@ -1,0 +1,434 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "2.1%",
+"consensus": "1.8%",
+"previous": "1.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "-3.0%",
+"consensus": "",
+"previous": "-3.5%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Monthly Unemployment Rate",
+"actual": "7.0%",
+"consensus": "6.8%",
+"previous": "6.9%"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Retail Sales",
+"actual": "-9.7%",
+"consensus": "",
+"previous": "-11.5%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 10-Year OAT Auction",
+"actual": "3.01%",
+"consensus": "",
+"previous": "3.23%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 15-Year OAT Auction",
+"actual": "3.21%",
+"consensus": "",
+"previous": "3.21%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 30-Year OAT Auction",
+"actual": "3.49%",
+"consensus": "",
+"previous": "3.61%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Unemployment Rate",
+"actual": "6.5%",
+"consensus": "6.4%",
+"previous": "6.4%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "52.4",
+"consensus": "",
+"previous": "45.7"
+},
+{
+"gmt": "05:30",
+"country": "Spain",
+"eventName": "Spanish 10-Year Obligacion Auction",
+"actual": "3.107%",
+"consensus": "",
+"previous": "3.192%"
+},
+{
+"gmt": "05:30",
+"country": "Spain",
+"eventName": "Spanish 3-Year Bonos Auction",
+"actual": "2.701%",
+"consensus": "",
+"previous": "3.067%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "3.40%",
+"consensus": "",
+"previous": "2.20%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "-18.70%",
+"consensus": "",
+"previous": "8.60%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote cut",
+"actual": "5",
+"consensus": "6",
+"previous": "2"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote hike",
+"actual": "0",
+"consensus": "0",
+"previous": "0"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC vote unchanged",
+"actual": "4",
+"consensus": "3",
+"previous": "7"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE Interest Rate Decision",
+"actual": "5.00%",
+"consensus": "5.00%",
+"previous": "5.25%"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "9.2%",
+"consensus": "",
+"previous": "19.8%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "25.885K",
+"consensus": "",
+"previous": "48.786K"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "1.50%",
+"consensus": "",
+"previous": "-14.00%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "44.23K",
+"consensus": "",
+"previous": "39.87K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,877K",
+"consensus": "1,860K",
+"previous": "1,844K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "249K",
+"consensus": "236K",
+"previous": "235K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "238.00K",
+"consensus": "",
+"previous": "235.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "2.3%",
+"consensus": "1.7%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "0.9%",
+"consensus": "1.8%",
+"previous": "3.8%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "606.7B",
+"consensus": "",
+"previous": "611.3B"
+},
+{
+"gmt": "09:15",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "44.23K",
+"consensus": "",
+"previous": "40.07K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "-0.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "43.4",
+"consensus": "49.0",
+"previous": "49.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "47.4",
+"consensus": "49.0",
+"previous": "49.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "46.8",
+"consensus": "48.8",
+"previous": "48.5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "52.9",
+"consensus": "51.9",
+"previous": "52.1"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "18B",
+"consensus": "31B",
+"previous": "22B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.285%",
+"consensus": "",
+"previous": "5.285%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.230%",
+"consensus": "",
+"previous": "5.260%"
+},
+{
+"gmt": "12:00",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "4.7%",
+"consensus": "",
+"previous": "15.1%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.5%",
+"consensus": "2.8%",
+"previous": "2.8%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,178B",
+"consensus": "",
+"previous": "7,205B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.179T",
+"consensus": "",
+"previous": "3.276T"
+},
+{
+"gmt": "17:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.6%",
+"consensus": "2.5%",
+"previous": "2.4%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "1.2%",
+"consensus": "0.9%",
+"previous": "0.6%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Home Loans",
+"actual": "0.5%",
+"consensus": "-1.0%",
+"previous": "-1.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Invest Housing Finance",
+"actual": "2.7%",
+"consensus": "",
+"previous": "-1.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "PPI",
+"actual": "1.0%",
+"consensus": "1.0%",
+"previous": "0.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "PPI",
+"actual": "4.8%",
+"consensus": "",
+"previous": "4.3%"
+},
+{
+"gmt": "All Day",
+"country": "Switzerland",
+"eventName": "Switzerland - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

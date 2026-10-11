@@ -1,0 +1,306 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "3.10%",
+"consensus": "3.10%",
+"previous": "3.10%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.10%",
+"consensus": "",
+"previous": "-0.10%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "2.7%",
+"consensus": "2.6%",
+"previous": "2.7%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "-0.70%",
+"consensus": "",
+"previous": "0.00%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "1.10%",
+"consensus": "2.10%",
+"previous": "2.00%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "BCB National Monetary Council Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:25",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.440M",
+"consensus": "1.440M",
+"previous": "1.467M"
+},
+{
+"gmt": "08:25",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-3.0%",
+"consensus": "-3.0%",
+"previous": "-3.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Chicago Fed National Activity",
+"actual": "-0.23",
+"consensus": "0.12",
+"previous": "-0.04"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,794K",
+"consensus": "1,794K",
+"previous": "1,786K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "215K",
+"consensus": "220K",
+"previous": "223K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "219.75K",
+"consensus": "",
+"previous": "218.00K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "603.7B",
+"consensus": "",
+"previous": "598.4B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "54.8",
+"consensus": "51.2",
+"previous": "51.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-4.7%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "634K",
+"consensus": "677K",
+"previous": "665K"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-14.3",
+"consensus": "-14.0",
+"previous": "-14.7"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "78B",
+"consensus": "84B",
+"previous": "70B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Composite Index",
+"actual": "-2",
+"consensus": "",
+"previous": "-8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Manufacturing Index",
+"actual": "-1",
+"consensus": "",
+"previous": "-13"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "5.270%",
+"consensus": "",
+"previous": "5.270%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "5.275%",
+"consensus": "",
+"previous": "5.270%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "2.184%",
+"consensus": "",
+"previous": "1.932%"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "7,300B",
+"consensus": "",
+"previous": "7,304B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "3.375T",
+"consensus": "",
+"previous": "3.416T"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "6.42B",
+"consensus": "",
+"previous": "6.38B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "6.32B",
+"consensus": "",
+"previous": "5.90B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "91M",
+"consensus": "",
+"previous": "476M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-10,110M",
+"consensus": "",
+"previous": "-9,980M"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-17",
+"consensus": "-18",
+"previous": "-19"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "2.5%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+}
+]

@@ -1,0 +1,402 @@
+[
+{
+"gmt": "02:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "3.585B",
+"consensus": "",
+"previous": "3.683B"
+},
+{
+"gmt": "03:03",
+"country": "China",
+"eventName": "FDI",
+"actual": "17.30%",
+"consensus": "",
+"previous": "17.40%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-5.39B",
+"consensus": "",
+"previous": "-4.76B"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 3-Year BTAN Auction",
+"actual": "0.98%",
+"consensus": "",
+"previous": "1.00%"
+},
+{
+"gmt": "05:00",
+"country": "France",
+"eventName": "French 5-Year BTAN Auction",
+"actual": "1.27%",
+"consensus": "",
+"previous": "1.47%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Construction Output",
+"actual": "-1.25%",
+"consensus": "",
+"previous": "-0.27%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "4.0%",
+"consensus": "4.0%",
+"previous": "3.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "8.9%",
+"consensus": "8.9%",
+"previous": "8.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "9.0%",
+"consensus": "",
+"previous": "8.8%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI, n.s.a",
+"actual": "117.14",
+"consensus": "117.14",
+"previous": "117.01"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "5.1%",
+"consensus": "5.0%",
+"previous": "4.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "0.2%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "BCB National Monetary Council Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,437K",
+"consensus": "1,438K",
+"previous": "1,430K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "250K",
+"consensus": "265K",
+"previous": "252K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "246.75K",
+"consensus": "",
+"previous": "249.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "6.2",
+"consensus": "-5.0",
+"previous": "-12.3"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "-10.6",
+"consensus": "",
+"previous": "-18.6"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "18.00",
+"consensus": "",
+"previous": "4.40"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "24.1",
+"consensus": "",
+"previous": "19.4"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "-5.1",
+"consensus": "",
+"previous": "-24.8"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "43.60",
+"consensus": "",
+"previous": "52.20"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "11.9%",
+"consensus": "",
+"previous": "14.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-2.1%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "19.1%",
+"consensus": "",
+"previous": "32.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-7.4%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "580.6B",
+"consensus": "",
+"previous": "574.8B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "4.81M",
+"consensus": "4.89M",
+"previous": "5.11M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "-5.9%",
+"consensus": "",
+"previous": "-5.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "-0.4%",
+"consensus": "-0.5%",
+"previous": "-0.7%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "18B",
+"consensus": "34B",
+"previous": "44B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "2.150%",
+"consensus": "",
+"previous": "2.150%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "2.490%",
+"consensus": "",
+"previous": "2.430%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "30-Year TIPS Auction",
+"actual": "0.920%",
+"consensus": "",
+"previous": "0.195%"
+},
+{
+"gmt": "13:15",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:20",
+"country": "United States",
+"eventName": "FOMC Member George Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:45",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "6.68B",
+"consensus": "",
+"previous": "6.27B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "7.77B",
+"consensus": "",
+"previous": "7.38B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-1,092M",
+"consensus": "",
+"previous": "-1,102M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-11,640M",
+"consensus": "",
+"previous": "-10,940M"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "GfK Consumer Confidence",
+"actual": "-44",
+"consensus": "-42",
+"previous": "-41"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "CPI, n.s.a",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "2.4%",
+"consensus": "2.4%",
+"previous": "2.2%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "2.6%",
+"consensus": "",
+"previous": "2.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "National CPI",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "4.9%",
+"consensus": "",
+"previous": "3.9%"
+}
+]

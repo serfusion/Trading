@@ -1,0 +1,338 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-0.7%",
+"consensus": "0.3%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "-0.2%",
+"consensus": "0.4%",
+"previous": "0.6%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Retail Sales",
+"actual": "0.0%",
+"consensus": "1.1%",
+"previous": "1.3%"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "-0.360%",
+"consensus": "",
+"previous": "-0.260%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.06%",
+"consensus": "",
+"previous": "4.11%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "3.3%",
+"consensus": "",
+"previous": "-2.3%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "227.3",
+"consensus": "",
+"previous": "224.1"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "420.5",
+"consensus": "",
+"previous": "407.2"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,502.6",
+"consensus": "",
+"previous": "1,430.3"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "0.24%",
+"consensus": "0.17%",
+"previous": "-0.30%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "0.19%",
+"consensus": "0.31%",
+"previous": "0.24%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "2.46%",
+"consensus": "2.60%",
+"previous": "2.71%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-43.70B",
+"consensus": "-44.60B",
+"previous": "-43.50B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "44.14B",
+"consensus": "",
+"previous": "46.43B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "47.18B",
+"consensus": "",
+"previous": "50.20B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Labor Productivity",
+"actual": "-0.1%",
+"consensus": "0.9%",
+"previous": "1.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-3.04B",
+"consensus": "-3.10B",
+"previous": "-3.76B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "0.3%",
+"consensus": "",
+"previous": "2.0%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.4%",
+"consensus": "",
+"previous": "4.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "57.5",
+"consensus": "56.0",
+"previous": "55.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "56.2",
+"consensus": "",
+"previous": "53.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "57.1",
+"consensus": "",
+"previous": "55.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "55.3",
+"consensus": "55.4",
+"previous": "53.9"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "57.9",
+"consensus": "",
+"previous": "55.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Payrolls Benchmark",
+"actual": "",
+"consensus": "",
+"previous": "-60.00"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Payrolls Benchmark, n.s.a.",
+"actual": "95.00K",
+"consensus": "",
+"previous": "-81.00K"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Interest Rate Decision",
+"actual": "1.00%",
+"consensus": "0.75%",
+"previous": "0.75%"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-0.28B",
+"consensus": "",
+"previous": "-0.14B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Beige Book",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,453.47B",
+"consensus": "",
+"previous": "4,452.36B"
+},
+{
+"gmt": "16:35",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "2.791M",
+"consensus": "4.000M",
+"previous": "-5.780M"
+},
+{
+"gmt": "17:00",
+"country": "Brazil",
+"eventName": "Interest Rate Decision",
+"actual": "8.25%",
+"consensus": "8.25%",
+"previous": "9.25%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "55.3",
+"consensus": "",
+"previous": "60.5"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-117.9B",
+"consensus": "",
+"previous": "397.0B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-158.3B",
+"consensus": "",
+"previous": "-246.0B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Reserves (USD)",
+"actual": "1,268.0B",
+"consensus": "",
+"previous": "1,260.0B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "-2%",
+"consensus": "",
+"previous": "-1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "-1%",
+"consensus": "",
+"previous": "2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Retail Sales",
+"actual": "0.0%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "0.460B",
+"consensus": "0.875B",
+"previous": "0.888B"
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "0.832%",
+"consensus": "",
+"previous": "0.876%"
+}
+]

@@ -466,7 +466,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   54–58% walau kejutan diketahui → laporkan detik 2–10.
 - Sumber baru `research/nasdaq_kalender.py` (api.nasdaq.com, tanggal +1 hari, data `data/research/eksternal/nasdaq/`):
   konsensus 2026 + konsensus INDEKS CPI tanpa pembulatan. IDX|K (suara indeks, cadangan Kalshi headline): 2–10 dtk 64%
-  (2016–2026), 71% sejak 2022; 2019–2021 < 45%. Kalshi headline 74% (n 21). BELUM dipasang (tunggu "pasang").
+  (2016–2026), 71% sejak 2022; 2019–2021 < 45%. Kalshi headline 74% (n 21). Validitas (`research/cpi_validitas.py`):
+  koreksi banyak-uji p 0,037 sejak 2022 / 0,062 seluruh; feed & ganjil-genap konsisten.
+- DIPASANG 11 Okt (izin "uji validitas dapat dipercaya PASANG"): `cloud/api/_cpi_detik.py` + `cpi_detik.json`, kartu CPI
+  hanya memakai aturan ini (WTI lama tidak lagi), env CPI_DETIK=0 = varian lama. Berita lain: pasang HANYA bila lolos uji
+  validitas yang sama (tutup kertas detik 2–10 + permutasi keluarga).
 - CPI selalu 08:30 New York; cache pra_xau_semua_v2/pra_menit memuat 2 rilis ganda 07:30 (Mar 2021/2022) — saring.
 
 ## Keamanan (wajib)

@@ -1,0 +1,282 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "9.8",
+"consensus": "10.0",
+"previous": "10.0"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Business Survey",
+"actual": "104",
+"consensus": "107",
+"previous": "107"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Broadbent Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "ECB Economic Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "1.3%",
+"consensus": "0.4%",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "4.1%",
+"consensus": "3.1%",
+"previous": "2.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "1.4%",
+"consensus": "0.4%",
+"previous": "-0.5%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "3.7%",
+"consensus": "2.6%",
+"previous": "1.0%"
+},
+{
+"gmt": "06:30",
+"country": "Euro Zone",
+"eventName": "ECB LTRO",
+"actual": "233.5B",
+"consensus": "",
+"previous": "62.2B"
+},
+{
+"gmt": "07:00",
+"country": "United Kingdom",
+"eventName": "CBI Distributive Trades Survey",
+"actual": "9",
+"consensus": "5",
+"previous": "9"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,000K",
+"consensus": "2,035K",
+"previous": "2,039K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "258K",
+"consensus": "240K",
+"previous": "243K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "240.00K",
+"consensus": "",
+"previous": "239.00K"
+},
+{
+"gmt": "08:45",
+"country": "United States",
+"eventName": "Fed Chair Yellen Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "395.7B",
+"consensus": "",
+"previous": "391.4B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "51.3",
+"consensus": "",
+"previous": "51.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "592K",
+"consensus": "565K",
+"previous": "558K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "6.1%",
+"consensus": "0.7%",
+"previous": "5.3%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "-150B",
+"consensus": "-150B",
+"previous": "-53B"
+},
+{
+"gmt": "10:45",
+"country": "Euro Zone",
+"eventName": "ECB's Lautenschlaeger Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Composite Index",
+"actual": "20",
+"consensus": "14",
+"previous": "14"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "KC Fed Manufacturing Index",
+"actual": "37",
+"consensus": "11",
+"previous": "11"
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-5.0",
+"consensus": "-5.7",
+"previous": "-6.0"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "10-Year TIPS Auction",
+"actual": "0.466%",
+"consensus": "",
+"previous": "0.436%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "97",
+"consensus": "",
+"previous": "94"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "4.01B",
+"consensus": "4.20B",
+"previous": "3.91B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "4.02B",
+"consensus": "3.99B",
+"previous": "4.16B"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-18M",
+"consensus": "160M",
+"previous": "-257M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-3,790M",
+"consensus": "-3,655M",
+"previous": "-3,410M"
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "25",
+"consensus": "",
+"previous": "20"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "149.4B",
+"consensus": "",
+"previous": "-696.1B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-580.4B",
+"consensus": "",
+"previous": "-722.7B"
+}
+]

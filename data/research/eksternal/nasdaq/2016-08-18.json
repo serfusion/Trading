@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:30",
+"country": "France",
+"eventName": "French Unemployment Rate",
+"actual": "9.9%",
+"consensus": "10.1%",
+"previous": "10.2%"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "28.2B",
+"consensus": "27.3B",
+"previous": "31.8B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "37.6B",
+"consensus": "",
+"previous": "16.5B"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Net Investment Flow",
+"actual": "21.4B",
+"consensus": "",
+"previous": "46.2B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "1.5%",
+"consensus": "0.4%",
+"previous": "-0.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "5.4%",
+"consensus": "3.9%",
+"previous": "3.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "1.4%",
+"consensus": "0.2%",
+"previous": "-0.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "5.9%",
+"consensus": "4.2%",
+"previous": "4.3%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.4%",
+"consensus": "3.4%",
+"previous": "3.4%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.9%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "-0.6%",
+"consensus": "-0.5%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "2,175K",
+"consensus": "2,140K",
+"previous": "2,160K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "262K",
+"consensus": "265K",
+"previous": "266K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "265.25K",
+"consensus": "",
+"previous": "262.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "2.0",
+"consensus": "2.0",
+"previous": "-2.9"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "45.8",
+"consensus": "",
+"previous": "33.7"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "19.20",
+"consensus": "",
+"previous": "15.10"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "-20.0",
+"consensus": "",
+"previous": "-1.6"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "-7.2",
+"consensus": "",
+"previous": "11.8"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "19.70",
+"consensus": "",
+"previous": "9.90"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases",
+"actual": "9.02B",
+"consensus": "",
+"previous": "13.99B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Foreign Securities Purchases by Canadians",
+"actual": "4.15B",
+"consensus": "",
+"previous": "4.90B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "395.7B",
+"consensus": "",
+"previous": "396.4B"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "43.6",
+"consensus": "",
+"previous": "41.8"
+},
+{
+"gmt": "10:05",
+"country": "United States",
+"eventName": "FOMC Member Dudley Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "22B",
+"consensus": "27B",
+"previous": "29B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "US Leading Index",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "5-Year TIPS Auction",
+"actual": "-0.209%",
+"consensus": "",
+"previous": "-0.195%"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-2.4%",
+"consensus": "",
+"previous": "-2.7%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "External Migration & Visitors",
+"actual": "14.40%",
+"consensus": "",
+"previous": "10.90%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Permanent/Long-Term Migration",
+"actual": "5,600",
+"consensus": "",
+"previous": "5,670"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Visitor Arrivals",
+"actual": "2.9%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "1",
+"consensus": "",
+"previous": "3"
+},
+{
+"gmt": "20:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "5.6%",
+"consensus": "",
+"previous": "4.1%"
+}
+]

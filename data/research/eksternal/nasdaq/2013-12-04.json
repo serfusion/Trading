@@ -1,0 +1,290 @@
+[
+{
+"gmt": "04:15",
+"country": "Switzerland",
+"eventName": "Industrial orders",
+"actual": "-2.3%",
+"consensus": "2.0%",
+"previous": "-4.3%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "-0.4%",
+"consensus": "-0.4%",
+"previous": "-0.4%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-0.2%",
+"consensus": "0.3%",
+"previous": "-0.6%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-0.1%",
+"consensus": "0.9%",
+"previous": "0.3%"
+},
+{
+"gmt": "06:35",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "0.680%",
+"consensus": "",
+"previous": "0.710%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "Industrial Production",
+"actual": "0.9%",
+"consensus": "0.4%",
+"previous": "1.8%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.51%",
+"consensus": "",
+"previous": "4.48%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-12.8%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "OPEC Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "215K",
+"consensus": "173K",
+"previous": "184K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-40.64B",
+"consensus": "-40.00B",
+"previous": "-42.97B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "40.47B",
+"consensus": "40.00B",
+"previous": "40.59B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "40.40B",
+"consensus": "41.00B",
+"previous": "40.89B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "0.08B",
+"consensus": "-1.00B",
+"previous": "-0.30B"
+},
+{
+"gmt": "10:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "2.54B",
+"consensus": "",
+"previous": "3.83B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "52.5",
+"consensus": "",
+"previous": "56.2"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "53.9",
+"consensus": "55.0",
+"previous": "55.4"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "444K",
+"consensus": "428K",
+"previous": "354K"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-6.6%",
+"consensus": "",
+"previous": "7.9%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "25.4%",
+"consensus": "",
+"previous": "-6.6%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "354K",
+"consensus": "427K",
+"previous": "379K"
+},
+{
+"gmt": "11:00",
+"country": "Canada",
+"eventName": "BoC Interest Rate Decision",
+"actual": "1.00%",
+"consensus": "1.00%",
+"previous": "1.00%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-5.585M",
+"consensus": "-0.500M",
+"previous": "2.953M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "2.649M",
+"consensus": "-1.767M",
+"previous": "-1.666M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "1.828M",
+"consensus": "1.517M",
+"previous": "1.751M"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Beige Book",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Global Semiconductor Sales",
+"actual": "0.8%",
+"consensus": "",
+"previous": "2.9%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "3,932.63B",
+"consensus": "",
+"previous": "3,925.88B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "1.1%",
+"consensus": "1.1%",
+"previous": "1.1%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "65.5B",
+"consensus": "",
+"previous": "1,410.1B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "0%",
+"consensus": "",
+"previous": "0%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "1%",
+"consensus": "",
+"previous": "-1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "-0.529B",
+"consensus": "-0.375B",
+"previous": "-0.271B"
+},
+{
+"gmt": "23:45",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.648%",
+"consensus": "",
+"previous": "0.605%"
+}
+]

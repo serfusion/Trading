@@ -1,0 +1,330 @@
+[
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "1.9%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "1.2%",
+"consensus": "0.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "",
+"consensus": "",
+"previous": "9.7%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "",
+"consensus": "",
+"previous": "13.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "314.18B",
+"consensus": "",
+"previous": "315.60B"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "8.0%",
+"consensus": "8.0%",
+"previous": "7.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.6",
+"consensus": "34.5",
+"previous": "34.5"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "12.0K",
+"consensus": "",
+"previous": "5.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "4.0K",
+"consensus": "12.0K",
+"previous": "-4.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "248K",
+"consensus": "215K",
+"previous": "180K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.7%",
+"consensus": "",
+"previous": "62.8%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "236K",
+"consensus": "210K",
+"previous": "175K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-40.10B",
+"consensus": "-40.90B",
+"previous": "-40.30B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "11.80%",
+"consensus": "",
+"previous": "12.00%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "5.9%",
+"consensus": "6.1%",
+"previous": "6.1%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "44.19B",
+"consensus": "45.00B",
+"previous": "45.31B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "44.80B",
+"consensus": "43.00B",
+"previous": "43.12B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-0.61B",
+"consensus": "1.50B",
+"previous": "2.20B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "62.9",
+"consensus": "63.5",
+"previous": "65.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "58.5",
+"consensus": "",
+"previous": "57.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "61.0",
+"consensus": "",
+"previous": "63.8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "58.6",
+"consensus": "58.5",
+"previous": "59.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "55.2",
+"consensus": "",
+"previous": "57.7"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "1591",
+"consensus": "",
+"previous": "1592"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "3.6K",
+"consensus": "",
+"previous": "-1.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "64.9K",
+"consensus": "",
+"previous": "63.9K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "6.6K",
+"consensus": "",
+"previous": "8.8K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-4.6K",
+"consensus": "",
+"previous": "3.1K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-12.6K",
+"consensus": "",
+"previous": "-13.4K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-2.0K",
+"consensus": "",
+"previous": "8.3K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-120.9K",
+"consensus": "",
+"previous": "-105.4K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "0.1K",
+"consensus": "",
+"previous": "1.8K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-137.5K",
+"consensus": "",
+"previous": "-142.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "295.9k",
+"consensus": "",
+"previous": "296.1k"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-2.7K",
+"consensus": "",
+"previous": "-1.5K"
+},
+{
+"gmt": "All Day",
+"country": "Germany",
+"eventName": "Germany - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - National Foundation Day of Korea",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Dussehra",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

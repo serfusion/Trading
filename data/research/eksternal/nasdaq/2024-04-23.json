@@ -1,0 +1,346 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "2.2%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "3.10%",
+"consensus": "",
+"previous": "3.60%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "-0.10%",
+"consensus": "",
+"previous": "1.10%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "2.7%",
+"consensus": "3.1%",
+"previous": "3.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "11.02B",
+"consensus": "8.90B",
+"previous": "8.60B"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Cash Requirement",
+"actual": "20.739B",
+"consensus": "",
+"previous": "3.236B"
+},
+{
+"gmt": "03:00",
+"country": "South Africa",
+"eventName": "Leading Indicators",
+"actual": "112.80%",
+"consensus": "",
+"previous": "110.80%"
+},
+{
+"gmt": "04:00",
+"country": "United Kingdom",
+"eventName": "MPC Member Haskel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:15",
+"country": "Euro Zone",
+"eventName": "ECB Supervisory Board Member Fernandez-Bollo Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "0.00%",
+"consensus": "",
+"previous": "0.40%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "CPI",
+"actual": "2.00%",
+"consensus": "",
+"previous": "2.10%"
+},
+{
+"gmt": "05:25",
+"country": "Italy",
+"eventName": "Italian 2-Year CTZ Auction",
+"actual": "3.420%",
+"consensus": "",
+"previous": "3.310%"
+},
+{
+"gmt": "05:45",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.910%",
+"consensus": "",
+"previous": "2.840%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.467M",
+"consensus": "1.458M",
+"previous": "1.524M"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-3.7%",
+"consensus": "-4.3%",
+"previous": "2.4%"
+},
+{
+"gmt": "07:30",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.3%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "50.9",
+"consensus": "52",
+"previous": "51.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "693K",
+"consensus": "668K",
+"previous": "637K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "8.8%",
+"consensus": "",
+"previous": "-5.1%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "-7",
+"consensus": "-7",
+"previous": "-11"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "-10",
+"consensus": "",
+"previous": "-14"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-13",
+"consensus": "",
+"previous": "-7"
+},
+{
+"gmt": "12:00",
+"country": "South Africa",
+"eventName": "SARB Monetary Policy Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "4.898%",
+"consensus": "",
+"previous": "4.595%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "20.84T",
+"consensus": "",
+"previous": "20.78T"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-3.230M",
+"consensus": "1.800M",
+"previous": "4.090M"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "100.7",
+"consensus": "",
+"previous": "100.7"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "6.50B",
+"consensus": "",
+"previous": "5.79B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "5.91B",
+"consensus": "",
+"previous": "6.10B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-9,870M",
+"consensus": "",
+"previous": "-12,060M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "588M",
+"consensus": "-505M",
+"previous": "-315M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "2.3%",
+"consensus": "2.1%",
+"previous": "2.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "1.0%",
+"consensus": "0.8%",
+"previous": "0.6%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "3.6%",
+"consensus": "3.4%",
+"previous": "4.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "CPI Index Number",
+"actual": "137.40",
+"consensus": "",
+"previous": "136.10"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "1.0%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "4.0%",
+"consensus": "3.8%",
+"previous": "4.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "3.50%",
+"consensus": "3.40%",
+"previous": "3.40%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "1.1%",
+"consensus": "0.9%",
+"previous": "0.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "4.4%",
+"consensus": "4.1%",
+"previous": "4.4%"
+}
+]

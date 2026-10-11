@@ -47,8 +47,8 @@ def tabel() -> pd.DataFrame:
     from .cpi_gabung import tabel as t1
     from .cpi_petunjuk2 import tabel as t2
     from .eksternal_makro import fred
-    from .sumber_lain import ubah_bulan
     from .news_prediksi import calendar, last_before
+    from .sumber_lain import ubah_bulan
     cal = calendar()
     a = t1()[["event", "t0", "N", "K", "P"]]
     b = t2()[["event", "t0", "s", "KON", "YOY"]]

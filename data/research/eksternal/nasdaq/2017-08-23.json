@@ -1,0 +1,314 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.6%",
+"consensus": "0.8%",
+"previous": "0.5%"
+},
+{
+"gmt": "03:25",
+"country": "Euro Zone",
+"eventName": "ECB President Draghi Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "4.7%",
+"consensus": "4.7%",
+"previous": "4.8%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "4.6%",
+"consensus": "4.6%",
+"previous": "5.1%"
+},
+{
+"gmt": "05:35",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "0.635%",
+"consensus": "",
+"previous": "0.769%"
+},
+{
+"gmt": "05:35",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "0.410%",
+"consensus": "",
+"previous": "0.490%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "4.12%",
+"consensus": "",
+"previous": "4.12%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "230.4",
+"consensus": "",
+"previous": "233.8"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "416.8",
+"consensus": "",
+"previous": "419.1"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,459.9",
+"consensus": "",
+"previous": "1,455.9"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "0.35%",
+"consensus": "0.40%",
+"previous": "-0.18%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Mid-Month CPI",
+"actual": "2.68%",
+"consensus": "2.73%",
+"previous": "2.78%"
+},
+{
+"gmt": "08:50",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "7.5%",
+"consensus": "",
+"previous": "7.1%"
+},
+{
+"gmt": "09:05",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-3.40B",
+"consensus": "-3.20B",
+"previous": "1.33B"
+},
+{
+"gmt": "09:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "4.10B",
+"consensus": "5.00B",
+"previous": "3.99B"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "571K",
+"consensus": "612K",
+"previous": "630K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-9.4%",
+"consensus": "0.3%",
+"previous": "1.9%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-1.5",
+"consensus": "-1.8",
+"previous": "-1.7"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-3.327M",
+"consensus": "-3.450M",
+"previous": "-8.945M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.605M",
+"consensus": "",
+"previous": "0.194M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.503M",
+"consensus": "",
+"previous": "0.678M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.196M",
+"consensus": "",
+"previous": "-0.018M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "0.028M",
+"consensus": "0.093M",
+"previous": "0.702M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.518M",
+"consensus": "",
+"previous": "-0.253M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.450M",
+"consensus": "",
+"previous": "0.555M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.223M",
+"consensus": "-0.643M",
+"previous": "0.022M"
+},
+{
+"gmt": "11:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "3.44B",
+"consensus": "",
+"previous": "2.53B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "4,463.84B",
+"consensus": "",
+"previous": "4,462.87B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Exports",
+"actual": "4.63B",
+"consensus": "4.42B",
+"previous": "4.70B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Imports",
+"actual": "4.55B",
+"consensus": "4.60B",
+"previous": "4.45B"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "85M",
+"consensus": "-200M",
+"previous": "246M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Trade Balance",
+"actual": "-3,210M",
+"consensus": "-3,507M",
+"previous": "-3,650M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-453.2B",
+"consensus": "",
+"previous": "-147.3B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-300.1B",
+"consensus": "",
+"previous": "-302.5B"
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - Typhoon - no trading day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

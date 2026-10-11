@@ -1,0 +1,378 @@
+[
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "M3 Money Supply",
+"actual": "7.25%",
+"consensus": "",
+"previous": "6.11%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Private Sector Credit",
+"actual": "4.63%",
+"consensus": "",
+"previous": "4.95%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "-18.3",
+"consensus": "-20.4",
+"previous": "-21.0"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "1.231B",
+"consensus": "1.400B",
+"previous": "1.352B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M3 Money Supply",
+"actual": "3,082.4B",
+"consensus": "",
+"previous": "3,064.3B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.6%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "65.65K",
+"consensus": "65.00K",
+"previous": "64.96K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "2.54B",
+"consensus": "",
+"previous": "2.85B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "3.800B",
+"consensus": "4.100B",
+"previous": "4.156B"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "4.148%",
+"consensus": "",
+"previous": "3.880%"
+},
+{
+"gmt": "06:10",
+"country": "Italy",
+"eventName": "Italian 6-Month BOT Auction",
+"actual": "3.003%",
+"consensus": "",
+"previous": "3.112%"
+},
+{
+"gmt": "06:30",
+"country": "Italy",
+"eventName": "Italian Trade Balance Non-EU",
+"actual": "3.66B",
+"consensus": "",
+"previous": "2.79B"
+},
+{
+"gmt": "06:30",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.130%",
+"consensus": "",
+"previous": "1.900%"
+},
+{
+"gmt": "07:30",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-6.50B",
+"consensus": "-5.00B",
+"previous": "-6.90B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "5.20B",
+"consensus": "5.60B",
+"previous": "6.10B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Goods Trade Balance",
+"actual": "-108.23B",
+"consensus": "-95.90B",
+"previous": "-94.22B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Wholesale Inventories",
+"actual": "-0.1%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "0.9%",
+"consensus": "",
+"previous": "-0.6%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.6%",
+"consensus": "",
+"previous": "4.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "4.2%",
+"consensus": "",
+"previous": "4.7%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "427.0",
+"consensus": "",
+"previous": "425.8"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "5.2%",
+"consensus": "4.9%",
+"previous": "5.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "108.7",
+"consensus": "99.5",
+"previous": "99.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "JOLTS Job Openings",
+"actual": "7.443M",
+"consensus": "7.980M",
+"previous": "7.861M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.8%",
+"consensus": "3.3%",
+"previous": "3.3%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Dallas Fed Services Revenues",
+"actual": "9.2",
+"consensus": "",
+"previous": "10.1"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Texas Services Sector Outlook",
+"actual": "2.0",
+"consensus": "",
+"previous": "-2.6"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "52-Week Bill Auction",
+"actual": "4.100%",
+"consensus": "",
+"previous": "3.780%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "7-Year Note Auction",
+"actual": "4.215%",
+"consensus": "",
+"previous": "3.668%"
+},
+{
+"gmt": "14:00",
+"country": "Switzerland",
+"eventName": "SNB Chairman Schlegel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "BoC Senior Deputy Governor Rogers Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "BoC Gov Macklem Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-0.573M",
+"consensus": "2.300M",
+"previous": "1.643M"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.3%",
+"previous": "1.0%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI",
+"actual": "2.8%",
+"consensus": "2.3%",
+"previous": "3.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "CPI Index Number",
+"actual": "139.10",
+"consensus": "",
+"previous": "138.80"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Trimmed Mean CPI",
+"actual": "3.5%",
+"consensus": "3.5%",
+"previous": "3.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "2.10%",
+"consensus": "2.40%",
+"previous": "2.70%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "0.9%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Weighted mean CPI",
+"actual": "3.8%",
+"consensus": "3.6%",
+"previous": "4.2%"
+},
+{
+"gmt": "22:00",
+"country": "Singapore",
+"eventName": "Bank Lending",
+"actual": "808.8B",
+"consensus": "",
+"previous": "800.0B"
+}
+]

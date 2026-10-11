@@ -1,0 +1,490 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-11.7%",
+"consensus": "-4.0%",
+"previous": "7.6%"
+},
+{
+"gmt": "05:00",
+"country": "United Kingdom",
+"eventName": "5-Year Treasury Gilt Auction",
+"actual": "4.803%",
+"consensus": "",
+"previous": "4.575%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-0.2%",
+"consensus": "-0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "-1.0%",
+"consensus": "-1.2%",
+"previous": "-1.0%"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "2.630%",
+"consensus": "",
+"previous": "2.460%"
+},
+{
+"gmt": "06:05",
+"country": "Germany",
+"eventName": "German Buba Wuermeling Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "7.21%",
+"consensus": "",
+"previous": "7.31%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-2.9%",
+"consensus": "",
+"previous": "2.3%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "141.9",
+"consensus": "",
+"previous": "144.9"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "183.6",
+"consensus": "",
+"previous": "189.0"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "388.1",
+"consensus": "",
+"previous": "407.1"
+},
+{
+"gmt": "07:00",
+"country": "Canada",
+"eventName": "Leading Index",
+"actual": "0.05%",
+"consensus": "",
+"previous": "0.04%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "0.05%",
+"consensus": "",
+"previous": "-0.40%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "10.8%",
+"consensus": "",
+"previous": "10.9%"
+},
+{
+"gmt": "08:00",
+"country": "Euro Zone",
+"eventName": "ECB McCaul Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "Canada",
+"eventName": "Reserve Assets Total",
+"actual": "114.7B",
+"consensus": "",
+"previous": "114.5B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "251.66B",
+"consensus": "",
+"previous": "247.50B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Fed Collins Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "316.70B",
+"consensus": "",
+"previous": "313.00B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-65.00B",
+"consensus": "-68.00B",
+"previous": "-63.70B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "60.42B",
+"consensus": "",
+"previous": "59.97B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "61.40B",
+"consensus": "",
+"previous": "64.89B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Labor Productivity",
+"actual": "-0.6%",
+"consensus": "-0.1%",
+"previous": "-0.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-0.99B",
+"consensus": "-3.65B",
+"previous": "-4.92B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.1%",
+"consensus": "",
+"previous": "4.2%"
+},
+{
+"gmt": "09:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Treasury Committee Hearings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:35",
+"country": "Germany",
+"eventName": "German Buba Wuermeling Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "50.5",
+"consensus": "51",
+"previous": "52.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "43.2",
+"consensus": "41.1",
+"previous": "40.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Business Activity",
+"actual": "57.3",
+"consensus": "",
+"previous": "57.1"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Employment",
+"actual": "54.7",
+"consensus": "",
+"previous": "50.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing New Orders",
+"actual": "57.5",
+"consensus": "",
+"previous": "55.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "54.5",
+"consensus": "52.5",
+"previous": "52.7"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing Prices",
+"actual": "58.9",
+"consensus": "",
+"previous": "56.8"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "BoC Interest Rate Decision",
+"actual": "5.00%",
+"consensus": "5.00%",
+"previous": "5.00%"
+},
+{
+"gmt": "11:10",
+"country": "Australia",
+"eventName": "RBA Governor Lowe Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "-0.566B",
+"consensus": "",
+"previous": "1.922B"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Beige Book",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-5.521M",
+"consensus": "-1.429M",
+"previous": "-11.486M"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Manufacturing Sales Volume",
+"actual": "2.9%",
+"consensus": "",
+"previous": "-1.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "90.7B",
+"consensus": "",
+"previous": "425.3B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "531.9B",
+"consensus": "",
+"previous": "-603.2B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Reserves (USD)",
+"actual": "1,251.2B",
+"consensus": "",
+"previous": "1,253.7B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-10.60%",
+"consensus": "-10.60%",
+"previous": "-18.00%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-8.1%",
+"consensus": "-8.1%",
+"previous": "-7.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Exports",
+"actual": "-2.0%",
+"consensus": "",
+"previous": "-3.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Imports",
+"actual": "3.0%",
+"consensus": "",
+"previous": "-3.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-1.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Trade Balance",
+"actual": "8.039B",
+"consensus": "10.000B",
+"previous": "10.268B"
+},
+{
+"gmt": "21:30",
+"country": "Japan",
+"eventName": "BoJ Board Member Nakagawa Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Exports",
+"actual": "-3.20M",
+"consensus": "",
+"previous": "-9.20M"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Imports",
+"actual": "-1.60M",
+"consensus": "",
+"previous": "-6.90M"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Trade Balance",
+"actual": "488.00B",
+"consensus": "494.00B",
+"previous": "575.70B"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Exports",
+"actual": "-8.8%",
+"consensus": "-9.2%",
+"previous": "-14.5%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Imports",
+"actual": "-7.3%",
+"consensus": "-9.0%",
+"previous": "-12.4%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "Trade Balance (USD)",
+"actual": "68.36B",
+"consensus": "73.90B",
+"previous": "80.60B"
+},
+{
+"gmt": "23:10",
+"country": "Australia",
+"eventName": "RBA Governor Lowe Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "1.640%",
+"consensus": "",
+"previous": "1.593%"
+}
+]

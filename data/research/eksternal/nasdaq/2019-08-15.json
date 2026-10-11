@@ -1,0 +1,482 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Capacity Utilization",
+"actual": "-2.6%",
+"consensus": "0.2%",
+"previous": "1.7%"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "-3.3%",
+"consensus": "-3.6%",
+"previous": "-3.6%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "-0.2%",
+"previous": "-0.5%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-1.7%",
+"consensus": "-1.5%",
+"previous": "-1.4%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "0.2%",
+"consensus": "-0.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Core Retail Sales",
+"actual": "2.9%",
+"consensus": "2.3%",
+"previous": "3.6%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "0.2%",
+"consensus": "-0.2%",
+"previous": "0.9%"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Retail Sales",
+"actual": "3.3%",
+"consensus": "2.6%",
+"previous": "3.8%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "48.3",
+"consensus": "",
+"previous": "49.0"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italy Thomson Reuters IPSOS PCSI",
+"actual": "42.97",
+"consensus": "",
+"previous": "44.92"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "Germany Thomson Reuters IPSOS PCSI",
+"actual": "54.17",
+"consensus": "",
+"previous": "55.17"
+},
+{
+"gmt": "06:00",
+"country": "France",
+"eventName": "France Thomson Reuters IPSOS PCSI",
+"actual": "45.21",
+"consensus": "",
+"previous": "44.22"
+},
+{
+"gmt": "06:00",
+"country": "Russia",
+"eventName": "Russia Thomon Reuters IPSOS PCSI",
+"actual": "41.99",
+"consensus": "",
+"previous": "40.21"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Reserve Assets Total",
+"actual": "797.86B",
+"consensus": "",
+"previous": "770.78B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "1,726K",
+"consensus": "1,690K",
+"previous": "1,687K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Core Retail Sales",
+"actual": "1.0%",
+"consensus": "0.4%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "220K",
+"consensus": "214K",
+"previous": "211K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "213.75K",
+"consensus": "",
+"previous": "212.75K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "2.3%",
+"consensus": "1.5%",
+"previous": "3.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "NY Empire State Manufacturing Index",
+"actual": "4.80",
+"consensus": "3.00",
+"previous": "4.30"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philadelphia Fed Manufacturing Index",
+"actual": "16.8",
+"consensus": "10.0",
+"previous": "21.8"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Business Conditions",
+"actual": "32.6",
+"consensus": "",
+"previous": "38.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed CAPEX Index",
+"actual": "22.60",
+"consensus": "",
+"previous": "36.90"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Employment",
+"actual": "3.6",
+"consensus": "",
+"previous": "30.0"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed New Orders",
+"actual": "25.8",
+"consensus": "",
+"previous": "18.9"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Philly Fed Prices Paid",
+"actual": "12.80",
+"consensus": "",
+"previous": "16.10"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Control",
+"actual": "1.0%",
+"consensus": "0.3%",
+"previous": "0.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "0.7%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales",
+"actual": "3.45%",
+"consensus": "",
+"previous": "3.29%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Retail Sales Ex Gas/Autos",
+"actual": "0.9%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "2.4%",
+"consensus": "2.0%",
+"previous": "5.5%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "ADP Nonfarm Employment Change",
+"actual": "73.7K",
+"consensus": "",
+"previous": "-9.6K"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "527.1B",
+"consensus": "",
+"previous": "516.8B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "2.8%",
+"consensus": "3.0%",
+"previous": "3.3%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Capacity Utilization Rate",
+"actual": "77.5%",
+"consensus": "77.8%",
+"previous": "77.8%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "-0.2%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Industrial Production",
+"actual": "0.48%",
+"consensus": "",
+"previous": "1.15%"
+},
+{
+"gmt": "09:15",
+"country": "United States",
+"eventName": "Manufacturing Production",
+"actual": "-0.4%",
+"consensus": "-0.1%",
+"previous": "0.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Business Inventories",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "66",
+"consensus": "65",
+"previous": "65"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Retail Inventories Ex Auto",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "49B",
+"consensus": "58B",
+"previous": "55B"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "2.040%",
+"consensus": "",
+"previous": "2.065%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "1.950%",
+"consensus": "",
+"previous": "2.050%"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "-7.70B",
+"consensus": "",
+"previous": "-32.80B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "1.70B",
+"consensus": "",
+"previous": "37.60B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "99.1B",
+"consensus": "4.4B",
+"previous": "4.6B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "79.90B",
+"consensus": "",
+"previous": "-13.60B"
+},
+{
+"gmt": "18:30",
+"country": "New Zealand",
+"eventName": "Business NZ PMI",
+"actual": "48.2",
+"consensus": "51.8",
+"previous": "51.3"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "173.1B",
+"consensus": "",
+"previous": "292.0B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "-187.0B",
+"consensus": "",
+"previous": "-339.9B"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "3.70%",
+"consensus": "2.70%",
+"previous": "-7.80%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Non-Oil Exports",
+"actual": "-11.20%",
+"consensus": "-15.20%",
+"previous": "-17.40%"
+},
+{
+"gmt": "20:30",
+"country": "Singapore",
+"eventName": "Trade Balance",
+"actual": "2.830B",
+"consensus": "",
+"previous": "2.450B"
+},
+{
+"gmt": "22:00",
+"country": "Japan",
+"eventName": "Thomson Reuters IPSOS PCSI",
+"actual": "39.44",
+"consensus": "",
+"previous": "40.27"
+},
+{
+"gmt": "22:00",
+"country": "China",
+"eventName": "China Thomson Reuters IPSOS PCSI",
+"actual": "71.26",
+"consensus": "",
+"previous": "78.83"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Offshore Holdings",
+"actual": "51.70%",
+"consensus": "",
+"previous": "50.30%"
+},
+{
+"gmt": "All Day",
+"country": "Italy",
+"eventName": "Italy - Assumption Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Independence Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Liberation Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

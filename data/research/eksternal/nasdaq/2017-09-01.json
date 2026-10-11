@@ -1,0 +1,442 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Household Confidence",
+"actual": "43.3",
+"consensus": "43.7",
+"previous": "43.8"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "20.1%",
+"consensus": "",
+"previous": "21.7%"
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "-0.7%",
+"consensus": "1.7%",
+"previous": "1.7%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "61.2",
+"consensus": "60.5",
+"previous": "60.3"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "0.4%",
+"consensus": "0.4%",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "1.5%",
+"consensus": "1.5%",
+"previous": "1.5%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "44.0",
+"consensus": "",
+"previous": "42.9"
+},
+{
+"gmt": "05:15",
+"country": "Euro Zone",
+"eventName": "ECB's Constancio Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "GDP",
+"actual": "0.3%",
+"consensus": "0.0%",
+"previous": "-0.4%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "GDP",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "1.0%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "6.3%",
+"consensus": "",
+"previous": "6.3%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "10.3%",
+"consensus": "",
+"previous": "10.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "394.55B",
+"consensus": "",
+"previous": "393.40B"
+},
+{
+"gmt": "07:30",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "49.22K",
+"consensus": "",
+"previous": "46.72K"
+},
+{
+"gmt": "07:30",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "6.70%",
+"consensus": "",
+"previous": "4.10%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Hourly Earnings",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Average Weekly Hours",
+"actual": "34.4",
+"consensus": "34.5",
+"previous": "34.5"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Government Payrolls",
+"actual": "-9.0K",
+"consensus": "",
+"previous": "-13.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Manufacturing Payrolls",
+"actual": "36.0K",
+"consensus": "9.0K",
+"previous": "26.0K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Nonfarm Payrolls",
+"actual": "156K",
+"consensus": "180K",
+"previous": "189K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Participation Rate",
+"actual": "62.9%",
+"consensus": "",
+"previous": "62.9%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Private Nonfarm Payrolls",
+"actual": "165K",
+"consensus": "179K",
+"previous": "202K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "U6 Unemployment Rate",
+"actual": "8.6%",
+"consensus": "",
+"previous": "8.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Unemployment Rate",
+"actual": "4.4%",
+"consensus": "4.3%",
+"previous": "4.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Construction Spending",
+"actual": "-0.6%",
+"consensus": "0.5%",
+"previous": "-1.4%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Employment",
+"actual": "59.9",
+"consensus": "54.0",
+"previous": "55.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing New Orders Index",
+"actual": "60.3",
+"consensus": "60.0",
+"previous": "60.4"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing PMI",
+"actual": "58.8",
+"consensus": "56.5",
+"previous": "56.3"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Manufacturing Prices",
+"actual": "62.0",
+"consensus": "62.0",
+"previous": "62.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 1-Year Inflation Expectations",
+"actual": "2.6%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan 5-Year Inflation Expectations",
+"actual": "2.50%",
+"consensus": "",
+"previous": "2.50%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Expectations",
+"actual": "87.7",
+"consensus": "88.3",
+"previous": "89.0"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Consumer Sentiment",
+"actual": "96.8",
+"consensus": "97.4",
+"previous": "97.6"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Michigan Current Conditions",
+"actual": "110.9",
+"consensus": "111.0",
+"previous": "111.0"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "759",
+"consensus": "",
+"previous": "759"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "5.60B",
+"consensus": "5.70B",
+"previous": "6.30B"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-51.6K",
+"consensus": "",
+"previous": "-45.9K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "10.11M",
+"consensus": "",
+"previous": "10.52M"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "43.7K",
+"consensus": "",
+"previous": "40.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "365.9K",
+"consensus": "",
+"previous": "445.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "231.0K",
+"consensus": "",
+"previous": "208.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "199.7K",
+"consensus": "",
+"previous": "142.1K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "53.6K",
+"consensus": "",
+"previous": "44.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "Domestic Truck Sales",
+"actual": "8.32M",
+"consensus": "8.60M",
+"previous": "8.68M"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "53.2K",
+"consensus": "",
+"previous": "51.1K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-1.8K",
+"consensus": "",
+"previous": "-2.0K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "66.5K",
+"consensus": "",
+"previous": "60.5K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-68.5K",
+"consensus": "",
+"previous": "-74.1K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "18.8K",
+"consensus": "",
+"previous": "21.9K"
+},
+{
+"gmt": "15:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "0.0K",
+"consensus": "",
+"previous": "-3.5K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "86.5K",
+"consensus": "",
+"previous": "88.0K"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "6.03M",
+"consensus": "",
+"previous": "6.21M"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Domestic Car Sales",
+"actual": "4.36M",
+"consensus": "",
+"previous": "4.51M"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.14M",
+"consensus": "16.60M",
+"previous": "16.77M"
+},
+{
+"gmt": "All Day",
+"country": "Singapore",
+"eventName": "Singapore - Hari Raya Haji",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -46,3 +46,26 @@ Per tahun (2–10 dtk benar/total): 2016 16/20, 2017 20/28, 2018 26/35, **2019 1
   Kalshi): **emas NAIK detik 2–10** (Kalshi saja 74%, n 21). Core Kalshi condong di atas (37% vs 22%), y/y di atas
   (48% vs 14%) — bertentangan; aturan teruji memakai headline. Nilai akhir dihitung 1 jam sebelum rilis.
 - BELUM dipasang di aplikasi (tunggu "pasang").
+
+## 🔬 Uji validitas (`research/cpi_validitas.py`, `docs/eksternal/hasil_cpi_validitas.txt`)
+| Uji | Hasil IDX\|K |
+|---|---|
+| Permutasi keluarga (20 aturan dengan ≥ 40 rilis; hasil emas diacak 2.000×, dibandingkan dengan aturan TERBAIK acakan) | sejak 2022 **p 0,037** ✅ • 2016–2026 p 0,062 (hampir) |
+| Permutasi keluarga semua 24 aturan (termasuk aturan 4–15 rilis yang angkanya ekstrem karena kebetulan) | p 0,13 / 0,25 ✗ |
+| Petunjuk diacak di dalam tahun yang sama (aturan tunggal) | p 0,009 / 0,006 ✅ |
+| Ambang indeks 0,01 / 0,02 / 0,03 / 0,05 | sejak 2022: 65% / 71% / 67% / 72% (seluruh: 63 / 64 / 59 / 59%) |
+| Feed Exness vs Dukascopy | 71% vs 68% (sejak 2022) |
+| Rilis ganjil vs genap | 71% vs 71% (sejak 2022), 68% vs 61% (seluruh) |
+Kesimpulan: sejak 2022 lolos koreksi banyak-uji; seluruh periode hampir (2019–2021 lemah). Status: "✅ Teruji tutup kertas".
+
+## ✅ DIPASANG 11 Okt 2026 (izin pengguna: "setelah mendapatkan persentase tinggi dan uji validitas dapat dipercaya PASANG")
+- `cloud/api/_cpi_detik.py` (dipanggil `chat.py` sebelum `_pra_aset`): Nasdaq (cache Supabase baris `cpi_detik`: ≥ 24 jam
+  sebelum rilis tiap 3 jam, ≤ 24 jam tiap 30 mnt, ≤ 3 jam tiap 10 mnt) + Kalshi headline live → `c["cpi_detik"]` di kartu
+  CPI m/m, core, y/y. `cloud/api/cpi_detik.json` = angka uji + tabel indeks CPI FRED 2021→ (jalankan ulang
+  `python -m research.cpi_detik` lalu `python -m research.cpi_validitas` bila data bertambah; tabel cukup ±1 tahun).
+- `_pra_aset.tebak_kartu`: kartu CPI HANYA memakai aturan ini (varian lama minyak WTI/Kalshi&kejutan lalu tidak dipakai);
+  tanpa petunjuk → tidak ada arah (≈ 50:50). Tren 4 jam tidak digabung (kombinasi belum diuji). Env `CPI_DETIK=0` = kembali
+  ke varian lama.
+- Tampilan (aplikasi tidak berubah, teks dari cloud): "CPI ▲ NAIK 64% (2–10 dtk) • 3 hari lagi"; detail "✅ Teruji tutup
+  kertas • dulu 58% • sejak Okt 2021 69% • dasar: pasar Kalshi headline" / "konsensus indeks tanpa pembulatan".
+- Paritas: hitungan cloud = riset pada 54/54 rilis 2022–2026 (`indeks()` vs `research.cpi_detik.tabel`).
