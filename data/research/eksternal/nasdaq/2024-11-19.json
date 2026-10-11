@@ -1,0 +1,386 @@
+[
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "8.063B",
+"consensus": "4.250B",
+"previous": "4.942B"
+},
+{
+"gmt": "04:45",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Current Account",
+"actual": "37.0B",
+"consensus": "27.0B",
+"previous": "31.5B"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Current Account n.s.a.",
+"actual": "51.5B",
+"consensus": "",
+"previous": "38.8B"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "15-Year Treasury Gilt Auction",
+"actual": "4.558%",
+"consensus": "",
+"previous": "4.131%"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Treasury Committee Hearings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Spanish Consumer Confidence",
+"actual": "79.6",
+"consensus": "",
+"previous": "84.8"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "2.7%",
+"consensus": "2.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "2.0%",
+"previous": "2.0%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "0.3%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI ex Tobacco",
+"actual": "1.9%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "CPI, n.s.a",
+"actual": "127.03",
+"consensus": "127.03",
+"previous": "126.60"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy & Food",
+"actual": "2.7%",
+"consensus": "2.7%",
+"previous": "2.7%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "HICP ex Energy and Food",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Labor Cost Index",
+"actual": "4.60%",
+"consensus": "",
+"previous": "4.70%"
+},
+{
+"gmt": "07:00",
+"country": "Germany",
+"eventName": "German Buba Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "1.9%",
+"consensus": "",
+"previous": "4.8%"
+},
+{
+"gmt": "08:00",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "4,089.0",
+"consensus": "",
+"previous": "3,997.0"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German Buba Mauderer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.416M",
+"consensus": "1.440M",
+"previous": "1.425M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "-3.1%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "1.311M",
+"consensus": "1.340M",
+"previous": "1.353M"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Housing Starts",
+"actual": "-3.1%",
+"consensus": "",
+"previous": "-1.9%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Common CPI",
+"actual": "2.2%",
+"consensus": "2.1%",
+"previous": "2.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "1.7%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "-0.4%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "1.9%",
+"previous": "1.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Median CPI",
+"actual": "2.5%",
+"consensus": "2.2%",
+"previous": "2.3%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Trimmed CPI",
+"actual": "2.6%",
+"consensus": "2.4%",
+"previous": "2.4%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.1%",
+"consensus": "",
+"previous": "4.8%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "2.6%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "12:45",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:10",
+"country": "United States",
+"eventName": "Fed Schmid Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "1.0%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "4.753M",
+"consensus": "0.800M",
+"previous": "-0.777M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "-0.36T",
+"consensus": "-0.15T",
+"previous": "-0.27T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Exports",
+"actual": "3.1%",
+"consensus": "2.2%",
+"previous": "-1.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Imports",
+"actual": "0.4%",
+"consensus": "-0.3%",
+"previous": "1.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Trade Balance",
+"actual": "-461.2B",
+"consensus": "-360.4B",
+"previous": "-294.1B"
+},
+{
+"gmt": "20:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "China Loan Prime Rate 5Y",
+"actual": "3.60%",
+"consensus": "3.60%",
+"previous": "3.60%"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "PBoC Loan Prime Rate",
+"actual": "3.10%",
+"consensus": "3.10%",
+"previous": "3.10%"
+}
+]

@@ -1,0 +1,122 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "99.8",
+"consensus": "99.8",
+"previous": "96.2"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "1.2%",
+"consensus": "0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "-0.4%",
+"consensus": "-0.3%",
+"previous": "-1.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "1.8%",
+"consensus": "-0.5%",
+"previous": "2.9%"
+},
+{
+"gmt": "06:30",
+"country": "China",
+"eventName": "PBoC Interest Rate",
+"actual": "6.56%",
+"consensus": "",
+"previous": "6.31%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "-5.2%",
+"consensus": "",
+"previous": "-2.7%"
+},
+{
+"gmt": "07:30",
+"country": "United States",
+"eventName": "Challenger Job Cuts",
+"actual": "5.3%",
+"consensus": "",
+"previous": "-4.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Building Permits",
+"actual": "20.9%",
+"consensus": "5.0%",
+"previous": "-21.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "ISM Non-Manufacturing PMI",
+"actual": "53.3",
+"consensus": "54.0",
+"previous": "54.6"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "2,870.10B",
+"consensus": "",
+"previous": "2,865.25B"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "35.8",
+"consensus": "",
+"previous": "39.6"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Core Machinery Orders",
+"actual": "3.0%",
+"consensus": "3.0%",
+"previous": "-3.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Employment Change",
+"actual": "23.4K",
+"consensus": "15.0K",
+"previous": "-0.5K"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Unemployment Rate",
+"actual": "4.9%",
+"consensus": "4.9%",
+"previous": "4.9%"
+}
+]

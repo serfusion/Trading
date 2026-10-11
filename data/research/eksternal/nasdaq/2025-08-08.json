@@ -1,0 +1,410 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "45.2",
+"consensus": "45.5",
+"previous": "45.0"
+},
+{
+"gmt": "01:30",
+"country": "France",
+"eventName": "French Unemployment Rate",
+"actual": "7.5%",
+"consensus": "7.5%",
+"previous": "7.5%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "SECO Consumer Climate",
+"actual": "-33",
+"consensus": "-30",
+"previous": "-39"
+},
+{
+"gmt": "07:15",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Pill Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "10.0%",
+"consensus": "",
+"previous": "9.8%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "10.2%",
+"consensus": "",
+"previous": "10.1%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "688.87B",
+"consensus": "",
+"previous": "698.19B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Avg hourly wages Permanent employee",
+"actual": "3.5%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Employment Change",
+"actual": "-40.8K",
+"consensus": "15.3K",
+"previous": "83.1K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Full Employment Change",
+"actual": "-51.0K",
+"consensus": "",
+"previous": "13.5K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Part Time Employment Change",
+"actual": "10.3K",
+"consensus": "",
+"previous": "69.5K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Participation Rate",
+"actual": "65.2%",
+"consensus": "",
+"previous": "65.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Unemployment Rate",
+"actual": "6.9%",
+"consensus": "7.0%",
+"previous": "6.9%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Algeria (Barrel)",
+"actual": "0.94M",
+"consensus": "",
+"previous": "0.94M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Congo (Barrel)",
+"actual": "0.26M",
+"consensus": "",
+"previous": "0.26M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Gabon (Barrel)",
+"actual": "0.23M",
+"consensus": "",
+"previous": "0.22M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Guinea (Barrel)",
+"actual": "0.05M",
+"consensus": "",
+"previous": "0.05M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iran (Barrel)",
+"actual": "3.30M",
+"consensus": "",
+"previous": "3.28M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iraq (Barrel)",
+"actual": "3.80M",
+"consensus": "",
+"previous": "3.85M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Kuwait (Barrel)",
+"actual": "2.44M",
+"consensus": "",
+"previous": "2.45M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Libya (Barrel)",
+"actual": "1.27M",
+"consensus": "",
+"previous": "1.25M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Nigeria (Barrel)",
+"actual": "1.67M",
+"consensus": "",
+"previous": "1.62M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Saudi Arabia (Barrel)",
+"actual": "9.45M",
+"consensus": "",
+"previous": "9.30M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production UAE (Barrel)",
+"actual": "3.14M",
+"consensus": "",
+"previous": "3.04M"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Venezuela (Barrel)",
+"actual": "0.82M",
+"consensus": "",
+"previous": "0.76M"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Retail Sales",
+"actual": "1.2%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "411",
+"consensus": "410",
+"previous": "410"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "539",
+"consensus": "",
+"previous": "540"
+},
+{
+"gmt": "15:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-33.3K",
+"consensus": "",
+"previous": "-12.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "0.3K",
+"consensus": "",
+"previous": "0.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "20.7K",
+"consensus": "",
+"previous": "37.3K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "-108.0K",
+"consensus": "",
+"previous": "-133.5K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "141.8K",
+"consensus": "",
+"previous": "156.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "237.1K",
+"consensus": "",
+"previous": "223.6K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "33.8K",
+"consensus": "",
+"previous": "35.0K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-93.8K",
+"consensus": "",
+"previous": "-85.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-139.6K",
+"consensus": "",
+"previous": "-163.2K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "50.7K",
+"consensus": "",
+"previous": "59.4K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "-39.2K",
+"consensus": "",
+"previous": "-10.8K"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "-78.6K",
+"consensus": "",
+"previous": "-69.7K"
+},
+{
+"gmt": "15:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-79.4K",
+"consensus": "",
+"previous": "-76.4K"
+},
+{
+"gmt": "15:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-27.4K",
+"consensus": "",
+"previous": "-24.0K"
+},
+{
+"gmt": "15:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-83.6K",
+"consensus": "",
+"previous": "-78.1K"
+},
+{
+"gmt": "15:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "24.6K",
+"consensus": "",
+"previous": "23.9K"
+},
+{
+"gmt": "15:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "82.0K",
+"consensus": "",
+"previous": "89.2K"
+},
+{
+"gmt": "15:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-4.8K",
+"consensus": "",
+"previous": "-2.1K"
+},
+{
+"gmt": "15:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "116.0K",
+"consensus": "",
+"previous": "123.4K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "",
+"consensus": "",
+"previous": "-25.9K"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "-0.1%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "PPI",
+"actual": "-3.6%",
+"consensus": "-3.4%",
+"previous": "-3.6%"
+}
+]

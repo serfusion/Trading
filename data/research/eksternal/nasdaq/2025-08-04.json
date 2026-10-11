@@ -1,0 +1,322 @@
+[
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "CPI",
+"actual": "0.0%",
+"consensus": "-0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "03:00",
+"country": "France",
+"eventName": "French Car Registration",
+"actual": "-7.7%",
+"consensus": "",
+"previous": "-6.7%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Unemployment Change",
+"actual": "-1.4K",
+"consensus": "-21.3K",
+"previous": "-48.9K"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "48.8",
+"consensus": "49.8",
+"previous": "49.6"
+},
+{
+"gmt": "04:00",
+"country": "Brazil",
+"eventName": "IPC-Fipe Inflation Index",
+"actual": "0.28%",
+"consensus": "",
+"previous": "-0.08%"
+},
+{
+"gmt": "04:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "-3.7",
+"consensus": "6.2",
+"previous": "4.5"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "1.952%",
+"consensus": "",
+"previous": "1.968%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "1.957%",
+"consensus": "",
+"previous": "1.977%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "1.961%",
+"consensus": "",
+"previous": "1.973%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "2.61M",
+"consensus": "",
+"previous": "2.54M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "13.80M",
+"consensus": "",
+"previous": "12.80M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Employment Trends Index",
+"actual": "107.55",
+"consensus": "",
+"previous": "108.19"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-9.4%",
+"consensus": "-9.4%",
+"previous": "15.5%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Durables Excluding Transport",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "-4.8%",
+"consensus": "-4.9%",
+"previous": "8.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Total Vehicle Sales",
+"actual": "16.40M",
+"consensus": "16.00M",
+"previous": "15.30M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "4.165%",
+"consensus": "",
+"previous": "4.235%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "3.980%",
+"consensus": "",
+"previous": "4.120%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "CAGED Net Payroll Jobs",
+"actual": "166.62K",
+"consensus": "",
+"previous": "148.99K"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Loan Officer Survey",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "FX Reserves - USD",
+"actual": "411.33B",
+"consensus": "",
+"previous": "410.20B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.1%",
+"consensus": "2.1%",
+"previous": "2.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.0%"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "53.80%",
+"consensus": "",
+"previous": "53.60%"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "54.1",
+"consensus": "53.8",
+"previous": "53.8"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "51.60%",
+"consensus": "",
+"previous": "51.50%"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "53.6",
+"consensus": "53.5",
+"previous": "51.7"
+},
+{
+"gmt": "20:30",
+"country": "Hong Kong",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.2",
+"consensus": "",
+"previous": "47.8"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "ANZ Commodity Price Index",
+"actual": "-1.8%",
+"consensus": "",
+"previous": "-2.4%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "ANZ Job Advertisements",
+"actual": "-1.0%",
+"consensus": "",
+"previous": "1.6%"
+},
+{
+"gmt": "21:45",
+"country": "China",
+"eventName": "RatingDog Services PMI",
+"actual": "52.6",
+"consensus": "50.4",
+"previous": "50.6"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "1.462%",
+"consensus": "",
+"previous": "1.442%"
+},
+{
+"gmt": "All Day",
+"country": "United Kingdom",
+"eventName": "United Kingdom - Bank Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Civic Holiday",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

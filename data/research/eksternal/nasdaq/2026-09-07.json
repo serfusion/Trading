@@ -1,0 +1,498 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.7%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "118.1",
+"consensus": "117.9",
+"previous": "116.2"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "1.7%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "1.5%",
+"consensus": "",
+"previous": "4.0%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Retail Sales",
+"actual": "0.9%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "-0.2%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "-1.1%",
+"consensus": "0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Industrial Production",
+"actual": "-1.63%",
+"consensus": "",
+"previous": "-0.43%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "75.95B",
+"consensus": "",
+"previous": "73.45B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "73.686B",
+"consensus": "",
+"previous": "71.761B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Reserve Assets Total",
+"actual": "380,694.0M",
+"consensus": "",
+"previous": "357,050.0M"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Foreign Reserves (USD)",
+"actual": "770.1B",
+"consensus": "",
+"previous": "768.1B"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "3.0%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.1%"
+},
+{
+"gmt": "04:00",
+"country": "China",
+"eventName": "FX Reserves (USD)",
+"actual": "3.438T",
+"consensus": "3.430T",
+"previous": "3.419T"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Rate (GBP)",
+"actual": "6.58%",
+"consensus": "",
+"previous": "6.58%"
+},
+{
+"gmt": "04:30",
+"country": "Singapore",
+"eventName": "Foreign Reserves USD",
+"actual": "433.0B",
+"consensus": "",
+"previous": "427.9B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Foreign Reserves (USD)",
+"actual": "442.90B",
+"consensus": "",
+"previous": "447.90B"
+},
+{
+"gmt": "04:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "5.1",
+"consensus": "2.1",
+"previous": "0.9"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Employment Change",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Employment Change",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.5%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Employment Overall",
+"actual": "176,448.2K",
+"consensus": "176,577.2K",
+"previous": "176,308.0K"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.4%",
+"previous": "-0.2%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.5%",
+"consensus": "1.0%",
+"previous": "0.3%"
+},
+{
+"gmt": "06:00",
+"country": "Canada",
+"eventName": "Leading Index",
+"actual": "0.13%",
+"consensus": "",
+"previous": "0.17%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.940%",
+"consensus": "",
+"previous": "2.860%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.540%",
+"consensus": "",
+"previous": "2.533%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.720%",
+"consensus": "",
+"previous": "2.655%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Manufacturing Sales Volume",
+"actual": "0.8%",
+"consensus": "",
+"previous": "3.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "1.7%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "3.7%",
+"consensus": "3.7%",
+"previous": "3.6%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "0.5%",
+"consensus": "1.2%",
+"previous": "1.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overall wage income of employees",
+"actual": "4.7%",
+"consensus": "3.9%",
+"previous": "4.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "3.10%",
+"consensus": "3.90%",
+"previous": "3.40%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Current Account",
+"actual": "2.52T",
+"consensus": "2.46T",
+"previous": "1.40T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Bank Lending",
+"actual": "5.4%",
+"consensus": "5.5%",
+"previous": "5.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Current Account n.s.a.",
+"actual": "2.989T",
+"consensus": "",
+"previous": "-0.092T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP Annualized",
+"actual": "1.4%",
+"consensus": "1.1%",
+"previous": "1.8%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP Capital Expenditure",
+"actual": "-0.9%",
+"consensus": "-1.2%",
+"previous": "-0.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP External Demand",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP Price Index",
+"actual": "2.6%",
+"consensus": "2.6%",
+"previous": "3.2%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP Private Consumption",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "0.3%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "-5.2%",
+"consensus": "",
+"previous": "6.0%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "9.00%",
+"consensus": "9.00%",
+"previous": "8.90%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-3.6%",
+"consensus": "-3.6%",
+"previous": "7.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "NAB Business Confidence",
+"actual": "-8",
+"consensus": "",
+"previous": "-7"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "NAB Business Survey",
+"actual": "-1",
+"consensus": "",
+"previous": "4"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "-4.2%",
+"consensus": "-4.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Exports",
+"actual": "18.60M",
+"consensus": "",
+"previous": "17.80M"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Imports",
+"actual": "21.70M",
+"consensus": "",
+"previous": "21.30M"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Trade Balance",
+"actual": "809.30B",
+"consensus": "805.00B",
+"previous": "767.07B"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Exports",
+"actual": "25.0%",
+"consensus": "25.0%",
+"previous": "23.9%"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Imports",
+"actual": "28.2%",
+"consensus": "30.0%",
+"previous": "27.5%"
+},
+{
+"gmt": "22:30",
+"country": "China",
+"eventName": "Trade Balance (USD)",
+"actual": "119.09B",
+"consensus": "118.60B",
+"previous": "112.50B"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "5-Year JGB Auction",
+"actual": "2.239%",
+"consensus": "",
+"previous": "2.163%"
+},
+{
+"gmt": "All Day",
+"country": "United States",
+"eventName": "United States - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Brazil",
+"eventName": "Brazil - Independence Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

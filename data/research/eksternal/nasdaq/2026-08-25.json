@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "2.3%",
+"consensus": "",
+"previous": "2.6%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "0.6%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "116.5",
+"consensus": "116.4",
+"previous": "116.5"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "0.0%",
+"consensus": "0.0%",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German GDP",
+"actual": "1.0%",
+"consensus": "0.9%",
+"previous": "0.7%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Consumer Confidence",
+"actual": "86",
+"consensus": "87",
+"previous": "86"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish PPI",
+"actual": "9.2%",
+"consensus": "",
+"previous": "7.0%"
+},
+{
+"gmt": "03:00",
+"country": "South Africa",
+"eventName": "Leading Indicators",
+"actual": "116.60%",
+"consensus": "",
+"previous": "118.22%"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Business Expectations",
+"actual": "89.1",
+"consensus": "87.5",
+"previous": "86.8"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Current Assessment",
+"actual": "88.5",
+"consensus": "87.0",
+"previous": "86.5"
+},
+{
+"gmt": "04:00",
+"country": "Germany",
+"eventName": "German Ifo Business Climate Index",
+"actual": "88.8",
+"consensus": "87.2",
+"previous": "86.7"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Exports",
+"actual": "50.7%",
+"consensus": "",
+"previous": "53.4%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Imports",
+"actual": "41.0%",
+"consensus": "",
+"previous": "45.4%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Trade Balance",
+"actual": "-4.9B",
+"consensus": "",
+"previous": "-52.0B"
+},
+{
+"gmt": "05:45",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.850%",
+"consensus": "",
+"previous": "2.780%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "FGV Consumer confidence",
+"actual": "84.7",
+"consensus": "",
+"previous": "88.3"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "11.80K",
+"consensus": "",
+"previous": "9.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "4.3%",
+"consensus": "5.0%",
+"previous": "-2.6%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.433M",
+"consensus": "1.443M",
+"previous": "1.374M"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "-0.6%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "9.1%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "2.3%",
+"consensus": "",
+"previous": "2.4%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "House Price Index",
+"actual": "442.5",
+"consensus": "",
+"previous": "442.4"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 s.a.",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "2.1%",
+"consensus": "1.8%",
+"previous": "1.6%"
+},
+{
+"gmt": "09:00",
+"country": "United States",
+"eventName": "S&P/CS HPI Composite - 20 n.s.a.",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "89.4",
+"consensus": "90.3",
+"previous": "90.2"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "607K",
+"consensus": "620K",
+"previous": "678K"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "-10.5%",
+"consensus": "",
+"previous": "7.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Index",
+"actual": "4",
+"consensus": "6",
+"previous": "5"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Manufacturing Shipments",
+"actual": "11",
+"consensus": "",
+"previous": "8"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Richmond Services Index",
+"actual": "-8",
+"consensus": "",
+"previous": "-3"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "M2 Money Supply",
+"actual": "23.22T",
+"consensus": "",
+"previous": "23.15T"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "FOMC Member Barkin Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "4.200M",
+"consensus": "1.800M",
+"previous": "-0.328M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Corporate Services Price Index (CSPI)",
+"actual": "3.6%",
+"consensus": "3.2%",
+"previous": "3.4%"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Construction Work Done",
+"actual": "-2.1%",
+"consensus": "0.5%",
+"previous": "4.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Monthly CPI Indicator",
+"actual": "3.50%",
+"consensus": "3.30%",
+"previous": "3.80%"
+}
+]

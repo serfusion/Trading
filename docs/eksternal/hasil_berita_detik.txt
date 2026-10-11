@@ -1,0 +1,167 @@
+# ⏱️ Semua berita USD → arah emas 1–10 detik, tutup kertas + validitas
+python -m research.berita_detik           → docs/eksternal/hasil_berita_detik.txt (+ data/research/eksternal/berita_detik.pkl)
+
+
+## NFP (167 rilis 2010-09–2026-09; Nasdaq: {'Nonfarm Payrolls': 167})
+   selalu NAIK   semua  45.3% (268/592) | LAMA  46.4% (169/364) | BARU  43.4% (99/228) | 2022+  42.1% (91/216) | rilis ditebak 148
+   PLAFON        semua  87.1% (411/472) | LAMA  84.3% (253/300) | BARU  91.9% (158/172) | 2022+  91.5% (150/164) | rilis ditebak 118
+   PLAFON 1 dtk  semua  59.8% (70/117) | LAMA  63.5% (47/74) | BARU  53.5% (23/43) | 2022+  53.7% (22/41) | rilis ditebak 118
+   P      angka  46.7% (n 152) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   P3     angka  45.6% (n 158) | emas 2–10 semua  36.4% (16/44) | LAMA     – (0/0) | BARU  36.4% (16/44) | 2022+  36.4% (16/44) | rilis ditebak 11
+   KON    angka  47.9% (n 165) | emas 2–10 semua   0.0% (0/4) | LAMA   0.0% (0/4) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 1
+   ADP    angka  51.3% (n 150) | emas 2–10 semua  47.7% (124/260) | LAMA  48.5% (99/204) | BARU  44.6% (25/56) | 2022+  47.7% (21/44) | rilis ditebak 65
+   KLAIM  angka  52.2% (n 115) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   ISME   angka  47.5% (n  80) | emas 2–10 semua  47.0% (79/168) | LAMA  52.1% (25/48) | BARU  45.0% (54/120) | 2022+  45.0% (54/120) | rilis ditebak 42
+   KAL    angka  54.5% (n  22) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KALUR  angka  37.5% (n  32) | emas 2–10 semua  34.4% (22/64) | LAMA     – (0/0) | BARU  34.4% (22/64) | 2022+  34.4% (22/64) | rilis ditebak 16
+   SUARA  angka  46.5% (n 129) | emas 2–10 semua  17.5% (7/40) | LAMA  17.5% (7/40) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 10
+   keluarga (7 aturan): acak terbaik persentil 95 61.5% / 67.5%
+     P      mentah 45.6% / 53.4% → p 1.000 / 0.887
+     P3     mentah 50.6% / 51.4% → p 0.967 / 0.953
+     KON    mentah 45.8% / 51.4% → p 1.000 / 0.953
+     ADP    mentah 46.8% / 44.5% → p 1.000 / 0.999
+     KLAIM  mentah 50.9% / 55.2% → p 0.959 / 0.777
+     ISME   mentah 51.6% / 45.0% → p 0.923 / 0.999
+     SUARA  mentah 45.3% / 39.3% → p 1.000 / 1.000
+
+## ADP (162 rilis 2010-05–2026-01; Nasdaq: {'ADP Nonfarm Employment Change': 162})
+   selalu NAIK   semua  46.0% (245/533) | LAMA  43.4% (145/334) | BARU  50.3% (100/199) | 2022+  53.5% (100/187) | rilis ditebak 134
+   PLAFON        semua  91.6% (488/533) | LAMA  93.7% (313/334) | BARU  87.9% (175/199) | 2022+  87.2% (163/187) | rilis ditebak 134
+   PLAFON 1 dtk  semua  71.2% (94/132) | LAMA  82.9% (68/82) | BARU  52.0% (26/50) | 2022+  48.9% (23/47) | rilis ditebak 134
+   P      angka  53.3% (n 150) | emas 2–10 semua  49.7% (251/505) | LAMA  54.8% (170/310) | BARU  41.5% (81/195) | 2022+  39.9% (73/183) | rilis ditebak 127
+   P3     angka  46.5% (n 159) | emas 2–10 semua  34.1% (15/44) | LAMA  34.1% (15/44) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 11
+   KON    angka  55.3% (n 161) | emas 2–10 semua  52.7% (281/533) | LAMA  57.8% (193/334) | BARU  44.2% (88/199) | 2022+  42.8% (80/187) | rilis ditebak 134
+   KLAIM  angka  55.0% (n 109) | emas 2–10 semua  53.0% (97/183) | LAMA  53.6% (15/28) | BARU  52.9% (82/155) | 2022+  53.1% (78/147) | rilis ditebak 46
+   SUARA  angka  59.6% (n 104) | emas 2–10 semua  55.3% (188/340) | LAMA  58.8% (141/240) | BARU  47.0% (47/100) | 2022+  44.3% (39/88) | rilis ditebak 85
+   keluarga (5 aturan): acak terbaik persentil 95 62.7% / 69.3%
+     P      mentah 49.9% / 39.9% → p 0.948 / 1.000
+     P3     mentah 47.8% / 40.6% → p 0.986 / 1.000
+     KON    mentah 51.9% / 42.8% → p 0.841 / 1.000
+     KLAIM  mentah 57.6% / 53.1% → p 0.304 / 0.820
+     SUARA  mentah 57.7% / 44.3% → p 0.298 / 0.999
+
+## PPI (157 rilis 2010-03–2026-01; Nasdaq: {'PPI': 157})
+   selalu NAIK   semua  57.0% (300/526) | LAMA  53.4% (172/322) | BARU  62.7% (128/204) | 2022+  63.0% (121/192) | rilis ditebak 132
+   PLAFON        semua  78.8% (391/496) | LAMA  74.7% (221/296) | BARU  85.0% (170/200) | 2022+  84.6% (159/188) | rilis ditebak 124
+   PLAFON 1 dtk  semua  54.6% (65/119) | LAMA  52.2% (36/69) | BARU  58.0% (29/50) | 2022+  59.6% (28/47) | rilis ditebak 124
+   P      angka  42.3% (n  97) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   P3     angka  43.4% (n  99) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  42.9% (n 112) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   CPI    angka  76.7% (n  30) | emas 2–10 semua  59.1% (26/44) | LAMA     – (0/0) | BARU  59.1% (26/44) | 2022+  59.1% (26/44) | rilis ditebak 11
+   SUARA  angka  48.3% (n  89) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   keluarga (4 aturan): acak terbaik persentil 95 61.3% / 66.3%
+     P      mentah 45.7% / 43.1% → p 0.965 / 0.979
+     P3     mentah 43.2% / 41.9% → p 0.990 / 0.989
+     KON    mentah 44.9% / 38.7% → p 0.979 / 1.000
+     SUARA  mentah 47.8% / 48.4% → p 0.911 / 0.892
+
+## RETAIL (126 rilis 2010-07–2025-09; Nasdaq: {'Retail Sales': 126})
+   selalu NAIK   semua  44.1% (199/451) | LAMA  46.7% (134/287) | BARU  39.6% (65/164) | 2022+  40.1% (61/152) | rilis ditebak 113
+   PLAFON        semua  85.9% (378/440) | LAMA  85.1% (235/276) | BARU  87.2% (143/164) | 2022+  86.2% (131/152) | rilis ditebak 110
+   PLAFON 1 dtk  semua  77.6% (83/107) | LAMA  74.2% (49/66) | BARU  82.9% (34/41) | 2022+  81.6% (31/38) | rilis ditebak 110
+   P      angka  41.9% (n  86) | emas 2–10 semua  43.3% (78/180) | LAMA  41.7% (70/168) | BARU  66.7% (8/12) | 2022+     – (0/0) | rilis ditebak 45
+   P3     angka  44.3% (n 106) | emas 2–10 semua  42.2% (57/135) | LAMA  42.2% (57/135) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 34
+   KON    angka  33.6% (n 110) | emas 2–10 semua  43.6% (120/275) | LAMA  44.1% (116/263) | BARU  33.3% (4/12) | 2022+     – (0/0) | rilis ditebak 69
+   CPI    angka  57.1% (n  56) | emas 2–10 semua  56.9% (107/188) | LAMA  52.6% (40/76) | BARU  59.8% (67/112) | 2022+  56.7% (59/104) | rilis ditebak 47
+   MOBIL  angka  55.0% (n  40) | emas 2–10 semua  47.6% (59/124) | LAMA  50.0% (30/60) | BARU  45.3% (29/64) | 2022+  45.3% (29/64) | rilis ditebak 31
+   SUARA  angka  47.1% (n  85) | emas 2–10 semua  47.5% (135/284) | LAMA  47.0% (79/168) | BARU  48.3% (56/116) | 2022+  46.2% (48/104) | rilis ditebak 71
+   keluarga (5 aturan): acak terbaik persentil 95 63.1% / 69.2%
+     P      mentah 42.6% / 45.0% → p 1.000 / 0.984
+     P3     mentah 41.0% / 39.9% → p 1.000 / 0.999
+     KON    mentah 39.8% / 37.5% → p 1.000 / 1.000
+     CPI    mentah 54.5% / 56.7% → p 0.599 / 0.585
+     SUARA  mentah 45.8% / 46.2% → p 0.994 / 0.972
+
+## PCE (52 rilis 2021-07–2026-01; Nasdaq: {'Core PCE Price Index': 52})
+   selalu NAIK   semua  40.4% (84/208) | LAMA  50.0% (4/8) | BARU  40.0% (80/200) | 2022+  43.5% (80/184) | rilis ditebak 52
+   PLAFON        semua  58.3% (56/96) | LAMA 100.0% (4/4) | BARU  56.5% (52/92) | 2022+  52.4% (44/84) | rilis ditebak 24
+   PLAFON 1 dtk  semua  54.2% (13/24) | LAMA 100.0% (1/1) | BARU  52.2% (12/23) | 2022+  52.4% (11/21) | rilis ditebak 24
+   P      angka   0.0% (n   5) | emas 2–10 semua  62.5% (10/16) | LAMA     – (0/0) | BARU  62.5% (10/16) | 2022+  62.5% (10/16) | rilis ditebak 4
+   P3     angka  33.3% (n   9) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  41.7% (n  12) | emas 2–10 semua  35.7% (10/28) | LAMA     – (0/0) | BARU  35.7% (10/28) | 2022+  35.7% (10/28) | rilis ditebak 7
+   CPIC   angka  38.5% (n  13) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   PPIC   angka  60.0% (n  15) | emas 2–10 semua  41.2% (28/68) | LAMA     – (0/0) | BARU  41.2% (28/68) | 2022+  41.2% (28/68) | rilis ditebak 17
+   KALPCE angka 100.0% (n   2) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   SUARA  angka  42.9% (n  14) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   keluarga (1 aturan): acak terbaik persentil 95 57.9% / 57.9%
+     PPIC   mentah 47.0% / 46.4% → p 0.628 / 0.605
+
+## ISM (244 rilis 2010-11–2026-01; Nasdaq: {'ISM Manufacturing PMI': 126, 'ISM Non-Manufacturing PMI': 118})
+   selalu NAIK   semua  51.3% (482/940) | LAMA  49.4% (267/540) | BARU  53.8% (215/400) | 2022+  55.6% (209/376) | rilis ditebak 235
+   PLAFON        semua  88.1% (814/924) | LAMA  88.2% (473/536) | BARU  87.9% (341/388) | 2022+  88.7% (323/364) | rilis ditebak 231
+   PLAFON 1 dtk  semua  90.0% (207/230) | LAMA  87.2% (116/133) | BARU  93.8% (91/97) | 2022+  94.5% (86/91) | rilis ditebak 231
+   P      angka  43.2% (n 213) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   P3     angka  44.7% (n 226) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  43.6% (n 236) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   CHI    angka  53.7% (n  82) | emas 2–10 semua  51.1% (145/284) | LAMA  51.1% (47/92) | BARU  51.0% (98/192) | 2022+  52.1% (98/188) | rilis ditebak 71
+   FED    angka  62.0% (n 184) | emas 2–10 semua  58.8% (416/708) | LAMA  60.5% (247/408) | BARU  56.3% (169/300) | 2022+  54.7% (151/276) | rilis ditebak 177
+   SPG    angka  48.2% (n  56) | emas 2–10 semua  46.3% (87/188) | LAMA     – (0/0) | BARU  46.3% (87/188) | 2022+  46.3% (87/188) | rilis ditebak 47
+   SUARA  angka  54.4% (n 182) | emas 2–10 semua  51.2% (287/560) | LAMA  50.0% (122/244) | BARU  52.2% (165/316) | 2022+  50.3% (147/292) | rilis ditebak 140
+   keluarga (7 aturan): acak terbaik persentil 95 61.0% / 64.4%
+     P      mentah 43.5% / 40.4% → p 1.000 / 1.000
+     P3     mentah 44.2% / 40.8% → p 1.000 / 1.000
+     KON    mentah 45.8% / 55.1% → p 1.000 / 0.668
+     CHI    mentah 53.1% / 52.1% → p 0.708 / 0.886
+     FED    mentah 59.0% / 54.7% → p 0.113 / 0.708
+     SPG    mentah 52.5% / 46.3% → p 0.788 / 0.999
+     SUARA  mentah 53.1% / 50.3% → p 0.712 / 0.954
+
+## GDP (106 rilis 2010-10–2025-12; Nasdaq: {'GDP': 106})
+   selalu NAIK   semua  48.7% (185/380) | LAMA  51.1% (139/272) | BARU  42.6% (46/108) | 2022+  42.0% (42/100) | rilis ditebak 95
+   PLAFON        semua  76.9% (246/320) | LAMA  85.2% (184/216) | BARU  59.6% (62/104) | 2022+  60.4% (58/96) | rilis ditebak 80
+   PLAFON 1 dtk  semua  50.6% (40/79) | LAMA  52.8% (28/53) | BARU  46.2% (12/26) | 2022+  45.8% (11/24) | rilis ditebak 80
+   P      angka  47.2% (n  36) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   P3     angka  40.3% (n  67) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  45.0% (n  80) | emas 2–10 semua  56.9% (116/204) | LAMA  53.0% (53/100) | BARU  60.6% (63/104) | 2022+  57.3% (55/96) | rilis ditebak 51
+   NOW    angka  70.0% (n  40) | emas 2–10 semua  53.7% (73/136) | LAMA  51.3% (39/76) | BARU  56.7% (34/60) | 2022+  60.7% (34/56) | rilis ditebak 34
+   SUARA  angka  60.0% (n  65) | emas 2–10 semua  32.1% (27/84) | LAMA  25.0% (12/48) | BARU  41.7% (15/36) | 2022+  39.3% (11/28) | rilis ditebak 21
+   keluarga (3 aturan): acak terbaik persentil 95 61.5% / 69.3%
+     P3     mentah 40.9% / 48.9% → p 1.000 / 0.885
+     KON    mentah 58.1% / 57.3% → p 0.185 / 0.510
+     SUARA  mentah 50.0% / 51.1% → p 0.834 / 0.796
+
+## JOLTS (32 rilis 2014-01–2025-12; Nasdaq: {'JOLTS Job Openings': 32})
+   selalu NAIK   semua  45.7% (58/127) | LAMA  89.5% (17/19) | BARU  38.0% (41/108) | 2022+  39.4% (41/104) | rilis ditebak 32
+   PLAFON        semua  84.3% (107/127) | LAMA  52.6% (10/19) | BARU  89.8% (97/108) | 2022+  89.4% (93/104) | rilis ditebak 32
+   PLAFON 1 dtk  semua  62.5% (20/32) | LAMA  60.0% (3/5) | BARU  63.0% (17/27) | 2022+  61.5% (16/26) | rilis ditebak 32
+   P      angka  31.2% (n  16) | emas 2–10 semua  31.2% (5/16) | LAMA     – (0/0) | BARU  31.2% (5/16) | 2022+  31.2% (5/16) | rilis ditebak 4
+   P3     angka  27.6% (n  29) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  62.5% (n  32) | emas 2–10 semua  51.3% (39/76) | LAMA     – (0/0) | BARU  51.3% (39/76) | 2022+  51.3% (39/76) | rilis ditebak 19
+   IND    angka  51.9% (n  27) | emas 2–10 semua  55.4% (31/56) | LAMA     – (0/0) | BARU  55.4% (31/56) | 2022+  55.4% (31/56) | rilis ditebak 14
+   SUARA  angka  45.8% (n  24) | emas 2–10 semua  58.3% (28/48) | LAMA     – (0/0) | BARU  58.3% (28/48) | 2022+  58.3% (28/48) | rilis ditebak 12
+
+## CLAIMS (239 rilis 2011-01–2026-01; Nasdaq: {'Initial Jobless Claims': 239})
+   selalu NAIK   semua  45.3% (402/888) | LAMA  42.7% (212/496) | BARU  48.5% (190/392) | 2022+  48.5% (190/392) | rilis ditebak 222
+   PLAFON        semua  69.9% (601/860) | LAMA  64.0% (310/484) | BARU  77.4% (291/376) | 2022+  77.4% (291/376) | rilis ditebak 215
+   PLAFON 1 dtk  semua  59.6% (127/213) | LAMA  48.7% (58/119) | BARU  73.4% (69/94) | 2022+  73.4% (69/94) | rilis ditebak 215
+   P      angka  55.8% (n 138) | emas 2–10 semua  51.4% (185/360) | LAMA  46.2% (74/160) | BARU  55.5% (111/200) | 2022+  55.5% (111/200) | rilis ditebak 90
+   P3     angka  54.6% (n 218) | emas 2–10 semua  52.9% (451/852) | LAMA  50.4% (240/476) | BARU  56.1% (211/376) | 2022+  56.1% (211/376) | rilis ditebak 213
+   KON    angka  51.9% (n 214) | emas 2–10 semua  52.2% (430/824) | LAMA  52.1% (248/476) | BARU  52.3% (182/348) | 2022+  52.3% (182/348) | rilis ditebak 206
+   KONT   angka  51.5% (n 196) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   SUARA  angka  55.1% (n 138) | emas 2–10 semua  47.7% (42/88) | LAMA     – (0/0) | BARU  47.7% (42/88) | 2022+  47.7% (42/88) | rilis ditebak 22
+   keluarga (5 aturan): acak terbaik persentil 95 58.1% / 62.0%
+     P      mentah 53.3% / 55.5% → p 0.546 / 0.518
+     P3     mentah 52.7% / 56.1% → p 0.646 / 0.453
+     KON    mentah 53.0% / 52.3% → p 0.591 / 0.806
+     KONT   mentah 49.7% / 45.5% → p 0.933 / 1.000
+     SUARA  mentah 52.0% / 49.0% → p 0.736 / 0.970
+
+## KONSUMEN (147 rilis 2015-09–2026-01; Nasdaq: {'CB Consumer Confidence': 84, 'Michigan Consumer Sentiment': 63})
+   selalu NAIK   semua  52.1% (306/587) | LAMA  52.6% (153/291) | BARU  51.7% (153/296) | 2022+  51.7% (153/296) | rilis ditebak 147
+   PLAFON        semua  74.1% (435/587) | LAMA  83.2% (242/291) | BARU  65.2% (193/296) | 2022+  65.2% (193/296) | rilis ditebak 147
+   PLAFON 1 dtk  semua  60.5% (89/147) | LAMA  64.4% (47/73) | BARU  56.8% (42/74) | 2022+  56.8% (42/74) | rilis ditebak 147
+   P      angka  46.2% (n 132) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   P3     angka  45.4% (n 141) | emas 2–10 semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
+   KON    angka  46.8% (n 139) | emas 2–10 semua  81.2% (26/32) | LAMA     – (0/0) | BARU  81.2% (26/32) | 2022+  81.2% (26/32) | rilis ditebak 8
+   SPX    angka  56.6% (n 122) | emas 2–10 semua  37.0% (34/92) | LAMA  37.0% (34/92) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 23
+   BENSIN angka  61.2% (n 147) | emas 2–10 semua  53.8% (254/472) | LAMA  63.1% (111/176) | BARU  48.3% (143/296) | 2022+  48.3% (143/296) | rilis ditebak 118
+   SUARA  angka  56.5% (n 131) | emas 2–10 semua  47.6% (200/420) | LAMA  50.6% (83/164) | BARU  45.7% (117/256) | 2022+  45.7% (117/256) | rilis ditebak 105
+   keluarga (6 aturan): acak terbaik persentil 95 59.1% / 62.5%
+     P      mentah 48.3% / 48.1% → p 0.992 / 0.996
+     P3     mentah 45.6% / 45.6% → p 1.000 / 1.000
+     KON    mentah 52.2% / 57.5% → p 0.808 / 0.346
+     SPX    mentah 43.4% / 39.5% → p 1.000 / 1.000
+     BENSIN mentah 54.9% / 48.3% → p 0.417 / 0.996
+     SUARA  mentah 47.2% / 44.1% → p 0.998 / 1.000
+
+LOLOS (layak dipasang): TIDAK ADA

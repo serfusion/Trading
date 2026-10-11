@@ -1,0 +1,450 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "-0.7%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "1.3%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "107.4",
+"consensus": "107.1",
+"previous": "106.1"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Lloyds House Price Index",
+"actual": "1.3%",
+"consensus": "2.2%",
+"previous": "2.0%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-0.8%",
+"consensus": "1.2%",
+"previous": "-2.7%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Foreign Reserves (USD)",
+"actual": "69.74B",
+"consensus": "",
+"previous": "70.42B"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Net FX Reserves  (USD)",
+"actual": "67.865B",
+"consensus": "",
+"previous": "65.899B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "1.50B",
+"consensus": "",
+"previous": "-1.90B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "51.8B",
+"consensus": "",
+"previous": "51.8B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "57.3B",
+"consensus": "",
+"previous": "57.6B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Reserve Assets Total",
+"actual": "330,268.0M",
+"consensus": "",
+"previous": "304,802.0M"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-5.5B",
+"consensus": "-5.2B",
+"previous": "-5.7B"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Foreign Reserves (USD)",
+"actual": "726.7B",
+"consensus": "",
+"previous": "715.2B"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Rate (GBP)",
+"actual": "6.78%",
+"consensus": "",
+"previous": "6.86%"
+},
+{
+"gmt": "04:40",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "2.006%",
+"consensus": "",
+"previous": "1.986%"
+},
+{
+"gmt": "04:40",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "1.937%",
+"consensus": "",
+"previous": "1.958%"
+},
+{
+"gmt": "05:00",
+"country": "Singapore",
+"eventName": "Foreign Reserves USD",
+"actual": "393.1B",
+"consensus": "",
+"previous": "391.3B"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.310%",
+"consensus": "",
+"previous": "2.290%"
+},
+{
+"gmt": "06:00",
+"country": "Canada",
+"eventName": "Leading Index",
+"actual": "0.23%",
+"consensus": "",
+"previous": "0.24%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-DI Inflation Index",
+"actual": "0.36%",
+"consensus": "",
+"previous": "0.20%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "60.58B",
+"consensus": "",
+"previous": "62.46B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "66.91B",
+"consensus": "",
+"previous": "66.28B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "-6.32B",
+"consensus": "-5.70B",
+"previous": "-3.82B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "5.8%",
+"consensus": "",
+"previous": "5.9%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "61.6",
+"consensus": "",
+"previous": "50.0"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "59.8",
+"consensus": "51.2",
+"previous": "50.1"
+},
+{
+"gmt": "10:05",
+"country": "United States",
+"eventName": "FOMC Member Bowman Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:10",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "48.3",
+"consensus": "49.3",
+"previous": "48.7"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "NY Fed 1-Year Consumer Inflation Expectations",
+"actual": "3.4%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "11:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "11:00",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,921.0",
+"consensus": "",
+"previous": "4,041.0"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "FOMC Member Kashkari Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.8%",
+"consensus": "3.8%",
+"previous": "3.8%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Short-Term Energy Outlook",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:10",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "3.576%",
+"consensus": "",
+"previous": "3.485%"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Consumer Credit",
+"actual": "0.36B",
+"consensus": "12.90B",
+"previous": "18.05B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "2.780M",
+"consensus": "2.250M",
+"previous": "-3.674M"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "8",
+"consensus": "",
+"previous": "13"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Average Cash Earnings",
+"actual": "1.5%",
+"consensus": "2.6%",
+"previous": "3.4%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overall wage income of employees",
+"actual": "1.5%",
+"consensus": "2.6%",
+"previous": "3.4%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "1.30%",
+"consensus": "",
+"previous": "3.00%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Current Account",
+"actual": "2.46T",
+"consensus": "2.45T",
+"previous": "1.88T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Current Account n.s.a.",
+"actual": "3.776T",
+"consensus": "3.540T",
+"previous": "2.684T"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-6.0%",
+"consensus": "-6.0%",
+"previous": "-8.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "-2.6%",
+"consensus": "-2.6%",
+"previous": "1.1%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Interest Rate Decision",
+"actual": "2.50%",
+"consensus": "2.75%",
+"previous": "3.00%"
+},
+{
+"gmt": "21:00",
+"country": "New Zealand",
+"eventName": "RBNZ Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Chuseok - Thanksgiving Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "South Korea",
+"eventName": "South Korea - Chuseok - Thanksgiving Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Hong Kong",
+"eventName": "Hong Kong - The day following the Chinese Mid-Autumn Festival",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

@@ -1,0 +1,282 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Economy Watchers Current Index",
+"actual": "47.6",
+"consensus": "",
+"previous": "38.1"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "2.8%",
+"consensus": "2.9%",
+"previous": "3.1%"
+},
+{
+"gmt": "01:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "3.1%",
+"consensus": "2.9%",
+"previous": "3.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Current Account Balance n.s.a",
+"actual": "13.1B",
+"consensus": "",
+"previous": "21.3B"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "0.3%",
+"consensus": "0.6%",
+"previous": "0.2%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "3.4%",
+"consensus": "0.4%",
+"previous": "-1.4%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "12.6B",
+"consensus": "15.4B",
+"previous": "15.6B"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "German Buba Wuermeling Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "8.35%",
+"consensus": "8.40%",
+"previous": "8.06%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "0.53%",
+"consensus": "0.59%",
+"previous": "0.83%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian IPCA Inflation Index SA",
+"actual": "0.59%",
+"consensus": "",
+"previous": "0.88%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,339K",
+"consensus": "3,335K",
+"previous": "3,484K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "373K",
+"consensus": "350K",
+"previous": "371K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Jobless Claims 4-Week Avg.",
+"actual": "394.50K",
+"consensus": "",
+"previous": "394.75K"
+},
+{
+"gmt": "08:30",
+"country": "Euro Zone",
+"eventName": "ECB Publishes Account of Monetary Policy Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Central Bank reserves (USD)",
+"actual": "590.7B",
+"consensus": "",
+"previous": "592.4B"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "16B",
+"consensus": "34B",
+"previous": "76B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-6.866M",
+"consensus": "-4.033M",
+"previous": "-6.718M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.184M",
+"consensus": "",
+"previous": "0.187M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "0.558M",
+"consensus": "",
+"previous": "-0.603M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "-0.614M",
+"consensus": "",
+"previous": "-1.460M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "-0.062M",
+"consensus": "",
+"previous": "-0.083M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "1.616M",
+"consensus": "0.171M",
+"previous": "-0.869M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.976M",
+"consensus": "",
+"previous": "-0.749M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.373M",
+"consensus": "",
+"previous": "0.016M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-0.7%",
+"consensus": "0.4%",
+"previous": "0.7%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-6.076M",
+"consensus": "-2.176M",
+"previous": "1.522M"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "4-Week Bill Auction",
+"actual": "0.050%",
+"consensus": "",
+"previous": "0.050%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "8-Week Bill Auction",
+"actual": "0.045%",
+"consensus": "",
+"previous": "0.045%"
+},
+{
+"gmt": "15:00",
+"country": "United States",
+"eventName": "Consumer Credit",
+"actual": "35.28B",
+"consensus": "18.40B",
+"previous": "20.04B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M2 Money Stock",
+"actual": "5.9%",
+"consensus": "",
+"previous": "7.9%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "M3 Money Supply",
+"actual": "1,992.0T",
+"consensus": "",
+"previous": "1,988.4T"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "1.1%",
+"consensus": "1.3%",
+"previous": "1.3%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "-0.4%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "PPI",
+"actual": "8.8%",
+"consensus": "8.8%",
+"previous": "9.0%"
+}
+]

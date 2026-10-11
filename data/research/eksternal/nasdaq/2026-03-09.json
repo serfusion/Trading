@@ -1,0 +1,218 @@
+[
+{
+"gmt": "02:00",
+"country": "Japan",
+"eventName": "Machine Tool Orders",
+"actual": "24.2%",
+"consensus": "25.3%",
+"previous": "10.6%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "-2.3%",
+"consensus": "-2.0%",
+"previous": "3.9%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "-5.9%",
+"consensus": "",
+"previous": "1.3%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "21.2B",
+"consensus": "15.4B",
+"previous": "17.4B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Current Account",
+"actual": "2.10B",
+"consensus": "",
+"previous": "0.10B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Exports",
+"actual": "53.4B",
+"consensus": "",
+"previous": "53.0B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Imports",
+"actual": "55.3B",
+"consensus": "",
+"previous": "57.3B"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French Trade Balance",
+"actual": "-1.8B",
+"consensus": "-5.2B",
+"previous": "-4.3B"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian PPI",
+"actual": "1.5%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian PPI",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP Annualized",
+"actual": "0.4%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "GDP",
+"actual": "0.8%",
+"consensus": "",
+"previous": "2.1%"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 3-Month Letras Auction",
+"actual": "1.964%",
+"consensus": "",
+"previous": "1.939%"
+},
+{
+"gmt": "06:00",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "98.8",
+"consensus": "99.6",
+"previous": "99.3"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "ECOFIN Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "2.270%",
+"consensus": "",
+"previous": "2.020%"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "15.50K",
+"consensus": "",
+"previous": "12.80K"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "6.2%",
+"consensus": "",
+"previous": "7.0%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "4.09M",
+"consensus": "3.89M",
+"previous": "4.02M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "1.7%",
+"consensus": "",
+"previous": "-5.9%"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Short-Term Energy Outlook",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:10",
+"country": "Russia",
+"eventName": "Budget Balance % of GDP",
+"actual": "-1.50%",
+"consensus": "",
+"previous": "-0.70%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "3.579%",
+"consensus": "",
+"previous": "3.518%"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-1.700M",
+"consensus": "1.400M",
+"previous": "5.600M"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "2.0%",
+"consensus": "2.2%",
+"previous": "2.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "5-Year JGB Auction",
+"actual": "1.633%",
+"consensus": "",
+"previous": "1.640%"
+}
+]

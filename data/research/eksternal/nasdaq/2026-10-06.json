@@ -1,0 +1,474 @@
+[
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC India Services PMI",
+"actual": "55.2",
+"consensus": "55.8",
+"previous": "54.1"
+},
+{
+"gmt": "01:00",
+"country": "India",
+"eventName": "HSBC Manufacturing & Services PMI",
+"actual": "55.90",
+"consensus": "56.50",
+"previous": "54.30"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Factory Orders",
+"actual": "-10.6%",
+"consensus": "-0.9%",
+"previous": "3.2%"
+},
+{
+"gmt": "02:35",
+"country": "Japan",
+"eventName": "BOJ Gov Ueda Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Government Budget Balance",
+"actual": "-159.6B",
+"consensus": "",
+"previous": "-145.9B"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Industrial Production",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "-0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "3.0%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "03:00",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.1%"
+},
+{
+"gmt": "03:00",
+"country": "Spain",
+"eventName": "Spanish Industrial Production",
+"actual": "1.5%",
+"consensus": "",
+"previous": "2.5%"
+},
+{
+"gmt": "03:30",
+"country": "Italy",
+"eventName": "HCOB Italy Construction PMI",
+"actual": "46.5",
+"consensus": "",
+"previous": "41.7"
+},
+{
+"gmt": "03:30",
+"country": "Germany",
+"eventName": "HCOB Germany Construction PMI",
+"actual": "43.5",
+"consensus": "",
+"previous": "48.7"
+},
+{
+"gmt": "03:30",
+"country": "France",
+"eventName": "HCOB France Construction PMI",
+"actual": "39.8",
+"consensus": "",
+"previous": "37.3"
+},
+{
+"gmt": "03:30",
+"country": "Euro Zone",
+"eventName": "HCOB Eurozone Construction PMI",
+"actual": "43.4",
+"consensus": "",
+"previous": "43.0"
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Mann Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "S&P Global Construction PMI",
+"actual": "46.1",
+"consensus": "45.0",
+"previous": "44.3"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 12-Month Letras Auction",
+"actual": "2.999%",
+"consensus": "",
+"previous": "2.832%"
+},
+{
+"gmt": "04:50",
+"country": "Spain",
+"eventName": "Spanish 6-Month Letras Auction",
+"actual": "2.769%",
+"consensus": "",
+"previous": "2.623%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "-0.6%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Retail Sales",
+"actual": "0.8%",
+"consensus": "1.0%",
+"previous": "0.4%"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 2-Year Schatz Auction",
+"actual": "3.100%",
+"consensus": "",
+"previous": "3.270%"
+},
+{
+"gmt": "07:40",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:14",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "22.50K",
+"consensus": "",
+"previous": "20.00K"
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "23.80K",
+"consensus": "",
+"previous": "22.50K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Exports",
+"actual": "315.20B",
+"consensus": "",
+"previous": "310.70B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Imports",
+"actual": "420.80B",
+"consensus": "",
+"previous": "403.60B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Trade Balance",
+"actual": "-105.60B",
+"consensus": "-100.80B",
+"previous": "-92.80B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Exports",
+"actual": "77.91B",
+"consensus": "",
+"previous": "76.03B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Imports",
+"actual": "73.71B",
+"consensus": "",
+"previous": "75.24B"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trade Balance",
+"actual": "4.20B",
+"consensus": "1.50B",
+"previous": "0.79B"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "8.6%",
+"consensus": "",
+"previous": "8.2%"
+},
+{
+"gmt": "09:00",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:05",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "IBD/TIPP Economic Optimism",
+"actual": "46.8",
+"consensus": "44.5",
+"previous": "45.6"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI n.s.a",
+"actual": "61.9",
+"consensus": "",
+"previous": "62.7"
+},
+{
+"gmt": "10:00",
+"country": "Canada",
+"eventName": "Ivey PMI",
+"actual": "58.2",
+"consensus": "65.2",
+"previous": "64.3"
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "FOMC Member Bowman Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Atlanta Fed GDPNow",
+"actual": "3.7%",
+"consensus": "3.7%",
+"previous": "3.7%"
+},
+{
+"gmt": "11:30",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "1.2%",
+"consensus": "",
+"previous": "-1.1%"
+},
+{
+"gmt": "11:30",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "3,928.0",
+"consensus": "",
+"previous": "3,868.0"
+},
+{
+"gmt": "12:00",
+"country": "United States",
+"eventName": "EIA Short-Term Energy Outlook",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:00",
+"country": "South Africa",
+"eventName": "SARB Monetary Policy Review",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "4.932%",
+"consensus": "",
+"previous": "4.474%"
+},
+{
+"gmt": "13:15",
+"country": "United States",
+"eventName": "Fed Schmid Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "7.74B",
+"consensus": "7.19B",
+"previous": "6.91B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-2.090M",
+"consensus": "",
+"previous": "1.019M"
+},
+{
+"gmt": "18:00",
+"country": "Australia",
+"eventName": "AIG Construction Index",
+"actual": "-34.5",
+"consensus": "",
+"previous": "-6.9"
+},
+{
+"gmt": "18:00",
+"country": "Australia",
+"eventName": "AIG Manufacturing Index",
+"actual": "-8.7",
+"consensus": "",
+"previous": "-16.6"
+},
+{
+"gmt": "19:00",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "22",
+"consensus": "",
+"previous": "21"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Average Cash Earnings",
+"actual": "3.8%",
+"consensus": "3.7%",
+"previous": "4.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overall wage income of employees",
+"actual": "3.8%",
+"consensus": "3.7%",
+"previous": "4.3%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Overtime Pay",
+"actual": "5.20%",
+"consensus": "",
+"previous": "4.50%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Reserves (USD)",
+"actual": "1,178.4B",
+"consensus": "",
+"previous": "1,207.5B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "10.30%",
+"consensus": "10.30%",
+"previous": "10.90%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-6.1%",
+"consensus": "-6.1%",
+"previous": "-1.9%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "3.7%",
+"consensus": "3.7%",
+"previous": "-1.9%"
+},
+{
+"gmt": "23:00",
+"country": "China",
+"eventName": "FX Reserves (USD)",
+"actual": "3.400T",
+"consensus": "",
+"previous": "3.438T"
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "China",
+"eventName": "China - National Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

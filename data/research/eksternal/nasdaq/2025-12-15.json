@@ -1,0 +1,442 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "-0.70",
+"consensus": "",
+"previous": "4.70"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "0.9%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "-2.60%",
+"consensus": "",
+"previous": "-5.04%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-2.27%",
+"consensus": "",
+"previous": "-2.55%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "-0.32%",
+"consensus": "-0.60%",
+"previous": "-1.21%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "1.33%",
+"consensus": "",
+"previous": "1.54%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "1.5%",
+"consensus": "",
+"previous": "1.1%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "SECO Economic Forecasts",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-1.6%",
+"consensus": "",
+"previous": "-1.7%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-0.5%",
+"consensus": "0.1%",
+"previous": "-0.3%"
+},
+{
+"gmt": "03:30",
+"country": "India",
+"eventName": "Exports (USD)",
+"actual": "38.13B",
+"consensus": "",
+"previous": "34.38B"
+},
+{
+"gmt": "03:30",
+"country": "India",
+"eventName": "Imports (USD)",
+"actual": "62.66B",
+"consensus": "",
+"previous": "76.06B"
+},
+{
+"gmt": "03:30",
+"country": "India",
+"eventName": "Trade Balance",
+"actual": "-24.53B",
+"consensus": "",
+"previous": "-41.68B"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "SARB Quarterly Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Industrial Production",
+"actual": "5.40%",
+"consensus": "",
+"previous": "0.80%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "PPI",
+"actual": "7.70%",
+"consensus": "",
+"previous": "4.00%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "0.8%",
+"consensus": "0.7%",
+"previous": "0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Industrial Production",
+"actual": "2.0%",
+"consensus": "",
+"previous": "1.2%"
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "0.0%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "07:00",
+"country": "Euro Zone",
+"eventName": "Reserve Assets Total",
+"actual": "1,754.63B",
+"consensus": "",
+"previous": "1,709.78B"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "IBC-Br Economic Activity",
+"actual": "-0.20%",
+"consensus": "",
+"previous": "-0.20%"
+},
+{
+"gmt": "09:15",
+"country": "Canada",
+"eventName": "Housing Starts",
+"actual": "254.1K",
+"consensus": "248.0K",
+"previous": "232.2K"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "NY Empire State Manufacturing Index",
+"actual": "-3.90",
+"consensus": "9.80",
+"previous": "18.70"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Common CPI",
+"actual": "2.8%",
+"consensus": "2.8%",
+"previous": "2.7%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "2.9%",
+"consensus": "",
+"previous": "2.9%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "2.2%",
+"consensus": "2.3%",
+"previous": "2.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "-1.0%",
+"consensus": "-1.0%",
+"previous": "3.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Median CPI",
+"actual": "2.8%",
+"consensus": "2.9%",
+"previous": "3.0%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Trimmed CPI",
+"actual": "2.8%",
+"consensus": "2.9%",
+"previous": "3.0%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.146%",
+"consensus": "",
+"previous": "2.148%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.079%",
+"consensus": "",
+"previous": "2.088%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.117%",
+"consensus": "",
+"previous": "2.103%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "NAHB Housing Market Index",
+"actual": "39",
+"consensus": "39",
+"previous": "38"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "FOMC Member Williams Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "3.560%",
+"consensus": "",
+"previous": "3.650%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "3.495%",
+"consensus": "",
+"previous": "3.580%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "FPI",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "-0.3%"
+},
+{
+"gmt": "18:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "51.1",
+"consensus": "",
+"previous": "52.6"
+},
+{
+"gmt": "18:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "52.2",
+"consensus": "",
+"previous": "51.6"
+},
+{
+"gmt": "18:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "51",
+"consensus": "",
+"previous": "52.8"
+},
+{
+"gmt": "18:15",
+"country": "Australia",
+"eventName": "RBA Assistant Governor Jones Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "-9.0%",
+"consensus": "",
+"previous": "12.8%"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "Budget Balance",
+"actual": "-14.800B",
+"consensus": "",
+"previous": "-10.000B"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "Net Debt Forecast",
+"actual": "43.30%",
+"consensus": "",
+"previous": "42.70%"
+},
+{
+"gmt": "20:00",
+"country": "New Zealand",
+"eventName": "Economic Forecast",
+"actual": "-16.930B",
+"consensus": "",
+"previous": "-14.740B"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "51.5",
+"consensus": "",
+"previous": "52"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "49.7",
+"consensus": "49",
+"previous": "48.7"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "52.5",
+"consensus": "",
+"previous": "53.2"
+},
+{
+"gmt": "22:00",
+"country": "New Zealand",
+"eventName": "RBNZ Offshore Holdings",
+"actual": "58.00%",
+"consensus": "",
+"previous": "58.60%"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M3 Money Supply",
+"actual": "6,032.5B",
+"consensus": "",
+"previous": "5,998.5B"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M2 Money supply",
+"actual": "7.10%",
+"consensus": "",
+"previous": "7.20%"
+}
+]

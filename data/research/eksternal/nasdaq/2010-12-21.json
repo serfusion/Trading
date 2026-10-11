@@ -1,0 +1,114 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "All Industries Activity Index",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "-0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "GfK German Consumer Climate",
+"actual": "5.4",
+"consensus": "5.7",
+"previous": "5.5"
+},
+{
+"gmt": "03:10",
+"country": "Japan",
+"eventName": "BoJ Press Conference",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "Trade Balance",
+"actual": "1.930B",
+"consensus": "1.880B",
+"previous": "2.050B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Public Sector Net Borrowing",
+"actual": "22.8B",
+"consensus": "16.8B",
+"previous": "8.6B"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian Quarterly Unemployment Rate",
+"actual": "8.3%",
+"consensus": "8.3%",
+"previous": "8.4%"
+},
+{
+"gmt": "08:00",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "08:00",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Core Retail Sales",
+"actual": "0.9%",
+"consensus": "0.7%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Retail Sales",
+"actual": "0.8%",
+"consensus": "0.5%",
+"previous": "0.4%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Current Account",
+"actual": "-1.77B",
+"consensus": "-2.23B",
+"previous": "-0.99B"
+},
+{
+"gmt": "18:00",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "29.5",
+"consensus": "",
+"previous": "28.5"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "MI Leading Index",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Trade Balance",
+"actual": "0.43T",
+"consensus": "0.63T",
+"previous": "0.58T"
+}
+]

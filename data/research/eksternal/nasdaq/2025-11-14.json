@@ -1,0 +1,434 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "5.00",
+"consensus": "",
+"previous": "-3.90"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "0.3%",
+"consensus": "0.3%",
+"previous": "0.1%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "-8.31%",
+"consensus": "",
+"previous": "-5.22%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-2.55%",
+"consensus": "",
+"previous": "-2.58%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "-1.21%",
+"consensus": "-0.60%",
+"previous": "0.13%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "1.54%",
+"consensus": "",
+"previous": "2.33%"
+},
+{
+"gmt": "03:15",
+"country": "Germany",
+"eventName": "German Buba Balz Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI NSA",
+"actual": "0.10%",
+"consensus": "",
+"previous": "0.10%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI NSA",
+"actual": "0.90%",
+"consensus": "",
+"previous": "1.00%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-1.0%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French CPI",
+"actual": "0.9%",
+"consensus": "1.0%",
+"previous": "1.2%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "-1.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "French HICP",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "1.1%"
+},
+{
+"gmt": "03:45",
+"country": "France",
+"eventName": "France Inflation Ex-Tobacco",
+"actual": "0.90%",
+"consensus": "",
+"previous": "1.10%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Core CPI",
+"actual": "2.5%",
+"consensus": "2.5%",
+"previous": "2.4%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.0%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "-0.3%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "0.5%",
+"consensus": "0.5%",
+"previous": "0.2%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "3.2%",
+"consensus": "3.2%",
+"previous": "3.0%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "0.7%",
+"consensus": "0.7%",
+"previous": "0.7%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "GDP",
+"actual": "3.8%",
+"consensus": "3.8%",
+"previous": "3.8%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "2.852B",
+"consensus": "3.180B",
+"previous": "1.875B"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "-0.04B",
+"consensus": "",
+"previous": "-0.00B"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Employment Change",
+"actual": "0.1%",
+"consensus": "0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Employment Change",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Employment Overall",
+"actual": "170,278.9K",
+"consensus": "",
+"previous": "170,072.0K"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "EU Economic Forecasts",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "1.4%",
+"consensus": "1.3%",
+"previous": "1.5%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "GDP",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "19.4B",
+"consensus": "",
+"previous": "1.9B"
+},
+{
+"gmt": "06:30",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "Brazil",
+"eventName": "IGP-10 Inflation Index",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.1%"
+},
+{
+"gmt": "07:00",
+"country": "Euro Zone",
+"eventName": "Reserve Assets Total",
+"actual": "1,709.78B",
+"consensus": "",
+"previous": "1,622.22B"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Bank Loan Growth",
+"actual": "11.3%",
+"consensus": "",
+"previous": "11.5%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Deposit Growth",
+"actual": "9.7%",
+"consensus": "",
+"previous": "9.5%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "FX Reserves, USD",
+"actual": "687.03B",
+"consensus": "",
+"previous": "689.73B"
+},
+{
+"gmt": "09:00",
+"country": "Russia",
+"eventName": "Trade Balance",
+"actual": "13.60B",
+"consensus": "",
+"previous": "7.47B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "3.3%",
+"consensus": "-1.0%",
+"previous": "-1.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "0.6%",
+"consensus": "0.0%",
+"previous": "-1.0%"
+},
+{
+"gmt": "09:30",
+"country": "Germany",
+"eventName": "German Buba Mauderer Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:30",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:20",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:05",
+"country": "United States",
+"eventName": "Fed Schmid Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "45B",
+"consensus": "34B",
+"previous": "33B"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "CPI",
+"actual": "7.7%",
+"consensus": "",
+"previous": "8.0%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "GDP Quarterly",
+"actual": "0.6%",
+"consensus": "",
+"previous": "1.1%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Oil Rig Count",
+"actual": "417",
+"consensus": "415",
+"previous": "414"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "U.S. Baker Hughes Total Rig Count",
+"actual": "549",
+"consensus": "",
+"previous": "548"
+},
+{
+"gmt": "15:30",
+"country": "United States",
+"eventName": "Fed Logan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:20",
+"country": "United States",
+"eventName": "FOMC Member Bostic Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "",
+"consensus": "",
+"previous": "-38.9K"
+}
+]
