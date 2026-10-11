@@ -1,0 +1,418 @@
+[
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "0.8%",
+"consensus": "1.3%",
+"previous": "1.5%"
+},
+{
+"gmt": "05:25",
+"country": "United Kingdom",
+"eventName": "Car Registration",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "-1.9%"
+},
+{
+"gmt": "05:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "-17.7",
+"consensus": "-17.7",
+"previous": "-17.5"
+},
+{
+"gmt": "06:00",
+"country": "United Kingdom",
+"eventName": "United Kingdom New Passenger Cars Registration",
+"actual": "140,786.0",
+"consensus": "",
+"previous": "153,610.0"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:40",
+"country": "Germany",
+"eventName": "German Car Registration",
+"actual": "-7.1%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "All Car Sales",
+"actual": "2.98M",
+"consensus": "",
+"previous": "2.98M"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "All Truck Sales",
+"actual": "13.82M",
+"consensus": "",
+"previous": "13.67M"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "2.6%",
+"consensus": "2.4%",
+"previous": "2.2%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "0.7%",
+"consensus": "0.5%",
+"previous": "-0.7%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "2.8%",
+"consensus": "2.5%",
+"previous": "2.4%"
+},
+{
+"gmt": "09:15",
+"country": "Canada",
+"eventName": "Reserve Assets Total",
+"actual": "121.6B",
+"consensus": "",
+"previous": "122.6B"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.435%",
+"consensus": "",
+"previous": "2.372%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.704%",
+"consensus": "",
+"previous": "2.770%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.592%",
+"consensus": "",
+"previous": "2.575%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Fed Governor Cook Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "S&P Global Services PMI",
+"actual": "56.8",
+"consensus": "58.5",
+"previous": "56.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-0.4%",
+"consensus": "-0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Durables Excluding Transport",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Factory Orders",
+"actual": "-0.4%",
+"consensus": "-0.3%",
+"previous": "0.5%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Factory orders ex transportation",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "4.205%",
+"consensus": "",
+"previous": "4.230%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "4.110%",
+"consensus": "",
+"previous": "4.135%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "4.332%",
+"consensus": "",
+"previous": "4.117%"
+},
+{
+"gmt": "14:00",
+"country": "Brazil",
+"eventName": "Trade Balance",
+"actual": "4.80B",
+"consensus": "3.90B",
+"previous": "6.87B"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "20.8K",
+"consensus": "",
+"previous": "19.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Aluminium speculative net positions",
+"actual": "2.5K",
+"consensus": "",
+"previous": "2.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "0.8K",
+"consensus": "",
+"previous": "1.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "290.5K",
+"consensus": "",
+"previous": "225.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "254.3K",
+"consensus": "",
+"previous": "247.0K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "247.3K",
+"consensus": "",
+"previous": "247.6K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "23.9K",
+"consensus": "",
+"previous": "27.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "-118.1K",
+"consensus": "",
+"previous": "-120.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-56.8K",
+"consensus": "",
+"previous": "-63.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "37.9K",
+"consensus": "",
+"previous": "40.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "-69.9K",
+"consensus": "",
+"previous": "-104.9K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "-76.5K",
+"consensus": "",
+"previous": "-87.3K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-175.7K",
+"consensus": "",
+"previous": "-176.7K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "-32.8K",
+"consensus": "",
+"previous": "-28.4K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-71.4K",
+"consensus": "",
+"previous": "-68.2K"
+},
+{
+"gmt": "16:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "-25.6K",
+"consensus": "",
+"previous": "-20.7K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "-8.4K",
+"consensus": "",
+"previous": "2.3K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "-48.3K",
+"consensus": "",
+"previous": "-46.0K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "-69.6K",
+"consensus": "",
+"previous": "-68.5K"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "-0.9%",
+"consensus": "-0.2%",
+"previous": "-0.3%"
+},
+{
+"gmt": "20:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "3.1%",
+"consensus": "-0.2%",
+"previous": "-3.4%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "6.00%",
+"consensus": "",
+"previous": "13.80%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "-3.6%",
+"consensus": "-0.9%",
+"previous": "5.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "-1.7%",
+"consensus": "",
+"previous": "-4.0%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "1.140%",
+"consensus": "",
+"previous": "1.084%"
+},
+{
+"gmt": "All Day",
+"country": "Russia",
+"eventName": "Russia - New-Year Holidays",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

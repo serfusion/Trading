@@ -515,7 +515,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
             u = _cpi_detik.DATA.get("uji") or {}
             naik = g["arah"] == "naik"
             out.update(arah=g["arah"], status="tutup kertas", bukti=g["bukti"],
-                       teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% (2–10 dtk) ✅",
+                       teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% ({g.get('teks_sampai')}) ✅",
                        kecil=" • ".join(f"{h} dtk {v:.0f}%" for h, v in (u.get("per_detik") or {}).items()
                                         if v is not None) + f" ({u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
         else:

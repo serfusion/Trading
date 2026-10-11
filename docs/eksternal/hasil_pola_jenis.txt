@@ -1,0 +1,197 @@
+# 🔁 Pola tetap per jenis berita? (tutup kertas, arah XAU detik 1 & 2–10)
+python -m research.pola_jenis             → docs/eksternal/hasil_pola_jenis.txt
+
+
+## CPI (183 rilis 2010-09–2026-09)
+   emas naik (semua rilis): 1 dtk 48% • 2 dtk 53% • 3 dtk 54% • 5 dtk 55% • 10 dtk 56%
+   1 dtk    NAIK   semua  48.0% (84/175) | LAMA  46.6% (54/116) | BARU  50.8% (30/59) | 2026  77.8% (7/9)
+   1 dtk    MAYOR  semua  50.3% (80/159) | LAMA  51.0% (51/100) | BARU  49.2% (29/59) | 2026  22.2% (2/9)
+   1 dtk    TAHUN  semua  46.1% (53/115) | LAMA  45.8% (33/72) | BARU  46.5% (20/43) | 2026  71.4% (5/7)
+   1 dtk    LALU1  semua  52.9% (92/174) | LAMA  57.4% (66/115) | BARU  44.1% (26/59) | 2026  44.4% (4/9)
+   1 dtk    LALU3  semua  43.0% (74/172) | LAMA  44.2% (50/113) | BARU  40.7% (24/59) | 2026  44.4% (4/9)
+   1 dtk    BALIK1 semua  47.1% (82/174) | LAMA  42.6% (49/115) | BARU  55.9% (33/59) | 2026  55.6% (5/9)
+   1 dtk    terbaik LALU1 52.9% → permutasi keluarga p 0.661
+   2–10 dtk NAIK   semua  54.4% (395/726) | LAMA  52.0% (255/490) | BARU  59.3% (140/236) | 2026  86.1% (31/36)
+   2–10 dtk MAYOR  semua  50.2% (321/639) | LAMA  46.4% (189/407) | BARU  56.9% (132/232) | 2026  86.1% (31/36)
+   2–10 dtk TAHUN  semua  45.8% (216/472) | LAMA  38.1% (111/291) | BARU  58.0% (105/181) | 2026  82.1% (23/28)
+   2–10 dtk LALU1  semua  53.6% (387/722) | LAMA  49.6% (241/486) | BARU  61.9% (146/236) | 2026  86.1% (31/36)
+   2–10 dtk LALU3  semua  44.5% (318/714) | LAMA  40.4% (193/478) | BARU  53.0% (125/236) | 2026  86.1% (31/36)
+   2–10 dtk BALIK1 semua  46.4% (335/722) | LAMA  50.4% (245/486) | BARU  38.1% (90/236) | 2026  13.9% (5/36)
+
+## PPI (157 rilis 2010-03–2026-01)
+   emas naik (semua rilis): 1 dtk 50% • 2 dtk 56% • 3 dtk 58% • 5 dtk 57% • 10 dtk 57%
+   1 dtk    NAIK   semua  49.6% (70/141) | LAMA  50.0% (45/90) | BARU  49.0% (25/51) | 2026  50.0% (1/2)
+   1 dtk    MAYOR  semua  46.3% (57/123) | LAMA  46.1% (35/76) | BARU  46.8% (22/47) | 2026  50.0% (1/2)
+   1 dtk    TAHUN  semua  38.6% (32/83) | LAMA  48.1% (25/52) | BARU  22.6% (7/31) | 2026     –
+   1 dtk    LALU1  semua  54.3% (76/140) | LAMA  55.1% (49/89) | BARU  52.9% (27/51) | 2026   0.0% (0/2)
+   1 dtk    LALU3  semua  52.2% (72/138) | LAMA  52.9% (46/87) | BARU  51.0% (26/51) | 2026  50.0% (1/2)
+   1 dtk    BALIK1 semua  45.7% (64/140) | LAMA  44.9% (40/89) | BARU  47.1% (24/51) | 2026 100.0% (2/2)
+   1 dtk    terbaik LALU1 54.3% → permutasi keluarga p 0.502
+   2–10 dtk NAIK   semua  56.8% (352/620) | LAMA  53.8% (224/416) | BARU  62.7% (128/204) | 2026  25.0% (2/8)
+   2–10 dtk MAYOR  semua  55.8% (315/565) | LAMA  51.8% (187/361) | BARU  62.7% (128/204) | 2026  25.0% (2/8)
+   2–10 dtk TAHUN  semua  49.5% (190/384) | LAMA  45.9% (113/246) | BARU  55.8% (77/138) | 2026     –
+   2–10 dtk LALU1  semua  50.5% (311/616) | LAMA  49.5% (204/412) | BARU  52.5% (107/204) | 2026  25.0% (2/8)
+   2–10 dtk LALU3  semua  46.9% (285/608) | LAMA  42.8% (173/404) | BARU  54.9% (112/204) | 2026  25.0% (2/8)
+   2–10 dtk BALIK1 semua  49.5% (305/616) | LAMA  50.5% (208/412) | BARU  47.5% (97/204) | 2026  75.0% (6/8)
+
+## FOMC (113 rilis 2010-08–2026-09)
+   emas naik (semua rilis): 1 dtk 55% • 2 dtk 55% • 3 dtk 50% • 5 dtk 52% • 10 dtk 51%
+   1 dtk    NAIK   semua  55.1% (59/107) | LAMA  58.2% (39/67) | BARU  50.0% (20/40) | 2026  66.7% (4/6)
+   1 dtk    MAYOR  semua  54.3% (51/94) | LAMA  57.4% (31/54) | BARU  50.0% (20/40) | 2026  66.7% (4/6)
+   1 dtk    TAHUN  semua  53.3% (32/60) | LAMA  48.6% (18/37) | BARU  60.9% (14/23) | 2026  50.0% (2/4)
+   1 dtk    LALU1  semua  52.8% (56/106) | LAMA  51.5% (34/66) | BARU  55.0% (22/40) | 2026  66.7% (4/6)
+   1 dtk    LALU3  semua  51.0% (53/104) | LAMA  54.7% (35/64) | BARU  45.0% (18/40) | 2026  33.3% (2/6)
+   1 dtk    BALIK1 semua  47.2% (50/106) | LAMA  48.5% (32/66) | BARU  45.0% (18/40) | 2026  33.3% (2/6)
+   1 dtk    terbaik MAYOR 54.3% → permutasi keluarga p 0.646
+   2–10 dtk NAIK   semua  52.2% (233/446) | LAMA  57.3% (164/286) | BARU  43.1% (69/160) | 2026  37.5% (9/24)
+   2–10 dtk MAYOR  semua  47.4% (181/382) | LAMA  53.2% (125/235) | BARU  38.1% (56/147) | 2026  34.8% (8/23)
+   2–10 dtk TAHUN  semua  48.0% (121/252) | LAMA  48.8% (78/160) | BARU  46.7% (43/92) | 2026  42.9% (6/14)
+   2–10 dtk LALU1  semua  50.5% (223/442) | LAMA  52.5% (148/282) | BARU  46.9% (75/160) | 2026  37.5% (9/24)
+   2–10 dtk LALU3  semua  47.5% (206/434) | LAMA  51.1% (140/274) | BARU  41.2% (66/160) | 2026  37.5% (9/24)
+   2–10 dtk BALIK1 semua  49.5% (219/442) | LAMA  47.5% (134/282) | BARU  53.1% (85/160) | 2026  62.5% (15/24)
+
+## ISM (246 rilis 2010-11–2026-01)
+   emas naik (semua rilis): 1 dtk 50% • 2 dtk 50% • 3 dtk 52% • 5 dtk 52% • 10 dtk 49%
+   1 dtk    NAIK   semua  49.6% (121/244) | LAMA  48.3% (69/143) | BARU  51.5% (52/101) | 2026  50.0% (1/2)
+   1 dtk    MAYOR  semua  50.0% (117/234) | LAMA  51.1% (68/133) | BARU  48.5% (49/101) | 2026  50.0% (1/2)
+   1 dtk    TAHUN  semua  46.8% (80/171) | LAMA  46.8% (44/94) | BARU  46.8% (36/77) | 2026     –
+   1 dtk    LALU1  semua  52.3% (127/243) | LAMA  56.3% (80/142) | BARU  46.5% (47/101) | 2026   0.0% (0/2)
+   1 dtk    LALU3  semua  46.1% (111/241) | LAMA  47.1% (66/140) | BARU  44.6% (45/101) | 2026   0.0% (0/2)
+   1 dtk    BALIK1 semua  47.7% (116/243) | LAMA  43.7% (62/142) | BARU  53.5% (54/101) | 2026 100.0% (2/2)
+   1 dtk    terbaik LALU1 52.3% → permutasi keluarga p 0.694
+   2–10 dtk NAIK   semua  50.8% (500/984) | LAMA  49.0% (284/580) | BARU  53.5% (216/404) | 2026  50.0% (4/8)
+   2–10 dtk MAYOR  semua  48.2% (431/894) | LAMA  47.6% (244/513) | BARU  49.1% (187/381) | 2026  50.0% (4/8)
+   2–10 dtk TAHUN  semua  49.2% (354/719) | LAMA  50.9% (205/403) | BARU  47.2% (149/316) | 2026     –
+   2–10 dtk LALU1  semua  50.2% (492/980) | LAMA  50.2% (289/576) | BARU  50.2% (203/404) | 2026  12.5% (1/8)
+   2–10 dtk LALU3  semua  49.4% (480/972) | LAMA  48.9% (278/568) | BARU  50.0% (202/404) | 2026  12.5% (1/8)
+   2–10 dtk BALIK1 semua  49.8% (488/980) | LAMA  49.8% (287/576) | BARU  49.8% (201/404) | 2026  87.5% (7/8)
+
+## NFP (171 rilis 2010-09–2026-09)
+   emas naik (semua rilis): 1 dtk 50% • 2 dtk 47% • 3 dtk 49% • 5 dtk 50% • 10 dtk 47%
+   1 dtk    NAIK   semua  49.7% (83/167) | LAMA  47.3% (52/110) | BARU  54.4% (31/57) | 2026  75.0% (6/8)
+   1 dtk    MAYOR  semua  49.0% (76/155) | LAMA  51.5% (51/99) | BARU  44.6% (25/56) | 2026  14.3% (1/7)
+   1 dtk    TAHUN  semua  55.2% (64/116) | LAMA  57.7% (45/78) | BARU  50.0% (19/38) | 2026  80.0% (4/5)
+   1 dtk    LALU1  semua  49.4% (82/166) | LAMA  50.5% (55/109) | BARU  47.4% (27/57) | 2026  62.5% (5/8)
+   1 dtk    LALU3  semua  54.3% (89/164) | LAMA  55.1% (59/107) | BARU  52.6% (30/57) | 2026  75.0% (6/8)
+   1 dtk    BALIK1 semua  50.6% (84/166) | LAMA  49.5% (54/109) | BARU  52.6% (30/57) | 2026  37.5% (3/8)
+   1 dtk    terbaik TAHUN 55.2% → permutasi keluarga p 0.311
+   2–10 dtk NAIK   semua  48.4% (331/684) | LAMA  50.9% (232/456) | BARU  43.4% (99/228) | 2026  43.8% (14/32)
+   2–10 dtk MAYOR  semua  49.3% (305/619) | LAMA  49.1% (197/401) | BARU  49.5% (108/218) | 2026  48.4% (15/31)
+   2–10 dtk TAHUN  semua  52.7% (251/476) | LAMA  55.6% (178/320) | BARU  46.8% (73/156) | 2026  35.0% (7/20)
+   2–10 dtk LALU1  semua  50.6% (344/680) | LAMA  54.0% (244/452) | BARU  43.9% (100/228) | 2026  37.5% (12/32)
+   2–10 dtk LALU3  semua  52.5% (353/672) | LAMA  55.4% (246/444) | BARU  46.9% (107/228) | 2026  40.6% (13/32)
+   2–10 dtk BALIK1 semua  49.4% (336/680) | LAMA  46.0% (208/452) | BARU  56.1% (128/228) | 2026  62.5% (20/32)
+
+## RETAIL (126 rilis 2010-07–2025-09)
+   emas naik (semua rilis): 1 dtk 42% • 2 dtk 46% • 3 dtk 46% • 5 dtk 46% • 10 dtk 42%
+   1 dtk    NAIK   semua  42.0% (50/119) | LAMA  39.7% (31/78) | BARU  46.3% (19/41) | 2026     –
+   1 dtk    MAYOR  semua  57.0% (61/107) | LAMA  59.1% (39/66) | BARU  53.7% (22/41) | 2026     –
+   1 dtk    TAHUN  semua  45.5% (30/66) | LAMA  45.0% (18/40) | BARU  46.2% (12/26) | 2026     –
+   1 dtk    LALU1  semua  50.0% (59/118) | LAMA  49.4% (38/77) | BARU  51.2% (21/41) | 2026     –
+   1 dtk    LALU3  semua  53.4% (62/116) | LAMA  57.3% (43/75) | BARU  46.3% (19/41) | 2026     –
+   1 dtk    BALIK1 semua  50.0% (59/118) | LAMA  50.6% (39/77) | BARU  48.8% (20/41) | 2026     –
+   1 dtk    terbaik MAYOR 57.0% → permutasi keluarga p 0.565
+   2–10 dtk NAIK   semua  45.0% (225/500) | LAMA  47.6% (160/336) | BARU  39.6% (65/164) | 2026     –
+   2–10 dtk MAYOR  semua  50.9% (215/422) | LAMA  45.0% (116/258) | BARU  60.4% (99/164) | 2026     –
+   2–10 dtk TAHUN  semua  47.5% (134/282) | LAMA  43.6% (78/179) | BARU  54.4% (56/103) | 2026     –
+   2–10 dtk LALU1  semua  51.2% (254/496) | LAMA  51.8% (172/332) | BARU  50.0% (82/164) | 2026     –
+   2–10 dtk LALU3  semua  47.5% (232/488) | LAMA  46.9% (152/324) | BARU  48.8% (80/164) | 2026     –
+   2–10 dtk BALIK1 semua  48.8% (242/496) | LAMA  48.2% (160/332) | BARU  50.0% (82/164) | 2026     –
+
+## PCE (52 rilis 2021-07–2026-01)
+   emas naik (semua rilis): 1 dtk 52% • 2 dtk 38% • 3 dtk 31% • 5 dtk 48% • 10 dtk 44%
+   1 dtk    NAIK   semua  51.9% (27/52) | LAMA  50.0% (1/2) | BARU  52.0% (26/50) | 2026   0.0% (0/1)
+   1 dtk    MAYOR  semua  44.4% (16/36) | LAMA     – | BARU  44.4% (16/36) | 2026   0.0% (0/1)
+   1 dtk    TAHUN  semua  46.9% (15/32) | LAMA     – | BARU  46.9% (15/32) | 2026     –
+   1 dtk    LALU1  semua  35.3% (18/51) | LAMA   0.0% (0/1) | BARU  36.0% (18/50) | 2026   0.0% (0/1)
+   1 dtk    LALU3  semua  42.9% (21/49) | LAMA     – | BARU  42.9% (21/49) | 2026   0.0% (0/1)
+   1 dtk    BALIK1 semua  64.7% (33/51) | LAMA 100.0% (1/1) | BARU  64.0% (32/50) | 2026 100.0% (1/1)
+   1 dtk    terbaik BALIK1 64.7% → permutasi keluarga p 0.095
+   2–10 dtk NAIK   semua  40.4% (84/208) | LAMA  50.0% (4/8) | BARU  40.0% (80/200) | 2026   0.0% (0/4)
+   2–10 dtk MAYOR  semua  56.5% (91/161) | LAMA     – | BARU  56.5% (91/161) | 2026 100.0% (4/4)
+   2–10 dtk TAHUN  semua  58.6% (82/140) | LAMA     – | BARU  58.6% (82/140) | 2026     –
+   2–10 dtk LALU1  semua  50.0% (102/204) | LAMA   0.0% (0/4) | BARU  51.0% (102/200) | 2026   0.0% (0/4)
+   2–10 dtk LALU3  semua  57.7% (113/196) | LAMA     – | BARU  57.7% (113/196) | 2026   0.0% (0/4)
+   2–10 dtk BALIK1 semua  50.0% (102/204) | LAMA 100.0% (4/4) | BARU  49.0% (98/200) | 2026 100.0% (4/4)
+
+## GDP (107 rilis 2010-10–2025-12)
+   emas naik (semua rilis): 1 dtk 55% • 2 dtk 54% • 3 dtk 47% • 5 dtk 48% • 10 dtk 47%
+   1 dtk    NAIK   semua  55.3% (57/103) | LAMA  56.6% (43/76) | BARU  51.9% (14/27) | 2026     –
+   1 dtk    MAYOR  semua  53.3% (48/90) | LAMA  54.0% (34/63) | BARU  51.9% (14/27) | 2026     –
+   1 dtk    TAHUN  semua  56.9% (33/58) | LAMA  59.1% (26/44) | BARU  50.0% (7/14) | 2026     –
+   1 dtk    LALU1  semua  52.9% (54/102) | LAMA  58.7% (44/75) | BARU  37.0% (10/27) | 2026     –
+   1 dtk    LALU3  semua  50.0% (50/100) | LAMA  54.8% (40/73) | BARU  37.0% (10/27) | 2026     –
+   1 dtk    BALIK1 semua  47.1% (48/102) | LAMA  41.3% (31/75) | BARU  63.0% (17/27) | 2026     –
+   1 dtk    terbaik TAHUN 56.9% → permutasi keluarga p 0.295
+   2–10 dtk NAIK   semua  48.9% (208/425) | LAMA  51.1% (162/317) | BARU  42.6% (46/108) | 2026     –
+   2–10 dtk MAYOR  semua  45.9% (155/338) | LAMA  43.5% (104/239) | BARU  51.5% (51/99) | 2026     –
+   2–10 dtk TAHUN  semua  43.2% (98/227) | LAMA  41.5% (68/164) | BARU  47.6% (30/63) | 2026     –
+   2–10 dtk LALU1  semua  48.2% (203/421) | LAMA  48.6% (152/313) | BARU  47.2% (51/108) | 2026     –
+   2–10 dtk LALU3  semua  42.4% (175/413) | LAMA  40.7% (124/305) | BARU  47.2% (51/108) | 2026     –
+   2–10 dtk BALIK1 semua  51.8% (218/421) | LAMA  51.4% (161/313) | BARU  52.8% (57/108) | 2026     –
+
+## JOLTS (32 rilis 2014-01–2025-12)
+   emas naik (semua rilis): 1 dtk 44% • 2 dtk 48% • 3 dtk 47% • 5 dtk 47% • 10 dtk 41%
+   1 dtk    NAIK   semua  43.8% (14/32) | LAMA  60.0% (3/5) | BARU  40.7% (11/27) | 2026     –
+   1 dtk    MAYOR  semua  50.0% (11/22) | LAMA     – | BARU  50.0% (11/22) | 2026     –
+   1 dtk    TAHUN  semua  50.0% (7/14) | LAMA   0.0% (0/1) | BARU  53.8% (7/13) | 2026     –
+   1 dtk    LALU1  semua  38.7% (12/31) | LAMA   0.0% (0/4) | BARU  44.4% (12/27) | 2026     –
+   1 dtk    LALU3  semua  48.3% (14/29) | LAMA   0.0% (0/2) | BARU  51.9% (14/27) | 2026     –
+   1 dtk    BALIK1 semua  61.3% (19/31) | LAMA 100.0% (4/4) | BARU  55.6% (15/27) | 2026     –
+   1 dtk    terbaik BALIK1 61.3% → permutasi keluarga p 0.395
+   2–10 dtk NAIK   semua  45.7% (58/127) | LAMA  89.5% (17/19) | BARU  38.0% (41/108) | 2026     –
+   2–10 dtk MAYOR  semua  45.2% (33/73) | LAMA     – | BARU  45.2% (33/73) | 2026     –
+   2–10 dtk TAHUN  semua  52.3% (34/65) | LAMA 100.0% (9/9) | BARU  44.6% (25/56) | 2026     –
+   2–10 dtk LALU1  semua  48.0% (59/123) | LAMA  73.3% (11/15) | BARU  44.4% (48/108) | 2026     –
+   2–10 dtk LALU3  semua  41.7% (48/115) | LAMA 100.0% (7/7) | BARU  38.0% (41/108) | 2026     –
+   2–10 dtk BALIK1 semua  52.0% (64/123) | LAMA  26.7% (4/15) | BARU  55.6% (60/108) | 2026     –
+
+## ADP (167 rilis 2010-05–2026-01)
+   emas naik (semua rilis): 1 dtk 49% • 2 dtk 44% • 3 dtk 46% • 5 dtk 44% • 10 dtk 45%
+   1 dtk    NAIK   semua  48.7% (77/158) | LAMA  48.1% (52/108) | BARU  50.0% (25/50) | 2026   0.0% (0/1)
+   1 dtk    MAYOR  semua  47.5% (67/141) | LAMA  50.0% (49/98) | BARU  41.9% (18/43) | 2026 100.0% (1/1)
+   1 dtk    TAHUN  semua  48.0% (48/100) | LAMA  52.2% (36/69) | BARU  38.7% (12/31) | 2026     –
+   1 dtk    LALU1  semua  50.3% (79/157) | LAMA  52.3% (56/107) | BARU  46.0% (23/50) | 2026   0.0% (0/1)
+   1 dtk    LALU3  semua  43.9% (68/155) | LAMA  46.7% (49/105) | BARU  38.0% (19/50) | 2026   0.0% (0/1)
+   1 dtk    BALIK1 semua  49.7% (78/157) | LAMA  47.7% (51/107) | BARU  54.0% (27/50) | 2026 100.0% (1/1)
+   1 dtk    terbaik LALU1 50.3% → permutasi keluarga p 1.000
+   2–10 dtk NAIK   semua  44.9% (295/657) | LAMA  42.6% (195/458) | BARU  50.3% (100/199) | 2026  50.0% (2/4)
+   2–10 dtk MAYOR  semua  53.3% (324/608) | LAMA  55.0% (225/409) | BARU  49.7% (99/199) | 2026  50.0% (2/4)
+   2–10 dtk TAHUN  semua  45.0% (190/422) | LAMA  48.2% (146/303) | BARU  37.0% (44/119) | 2026     –
+   2–10 dtk LALU1  semua  54.2% (354/653) | LAMA  57.9% (263/454) | BARU  45.7% (91/199) | 2026  50.0% (2/4)
+   2–10 dtk LALU3  semua  47.1% (304/645) | LAMA  49.6% (221/446) | BARU  41.7% (83/199) | 2026  50.0% (2/4)
+   2–10 dtk BALIK1 semua  45.8% (299/653) | LAMA  42.1% (191/454) | BARU  54.3% (108/199) | 2026  50.0% (2/4)
+
+## CLAIMS (242 rilis 2011-01–2026-01)
+   emas naik (semua rilis): 1 dtk 47% • 2 dtk 48% • 3 dtk 49% • 5 dtk 45% • 10 dtk 44%
+   1 dtk    NAIK   semua  46.8% (111/237) | LAMA  46.8% (65/139) | BARU  46.9% (46/98) | 2026  33.3% (1/3)
+   1 dtk    MAYOR  semua  50.7% (111/219) | LAMA  48.8% (59/121) | BARU  53.1% (52/98) | 2026  66.7% (2/3)
+   1 dtk    TAHUN  semua  41.3% (71/172) | LAMA  43.0% (43/100) | BARU  38.9% (28/72) | 2026     –
+   1 dtk    LALU1  semua  47.9% (113/236) | LAMA  48.6% (67/138) | BARU  46.9% (46/98) | 2026  33.3% (1/3)
+   1 dtk    LALU3  semua  44.0% (103/234) | LAMA  47.1% (64/136) | BARU  39.8% (39/98) | 2026  66.7% (2/3)
+   1 dtk    BALIK1 semua  52.1% (123/236) | LAMA  51.4% (71/138) | BARU  53.1% (52/98) | 2026  66.7% (2/3)
+   1 dtk    terbaik BALIK1 52.1% → permutasi keluarga p 0.823
+   2–10 dtk NAIK   semua  46.7% (452/968) | LAMA  45.5% (262/576) | BARU  48.5% (190/392) | 2026   8.3% (1/12)
+   2–10 dtk MAYOR  semua  51.2% (454/887) | LAMA  52.4% (267/510) | BARU  49.6% (187/377) | 2026  91.7% (11/12)
+   2–10 dtk TAHUN  semua  49.3% (382/775) | LAMA  51.2% (230/449) | BARU  46.6% (152/326) | 2026 100.0% (3/3)
+   2–10 dtk LALU1  semua  53.7% (518/964) | LAMA  53.8% (308/572) | BARU  53.6% (210/392) | 2026  66.7% (8/12)
+   2–10 dtk LALU3  semua  50.0% (478/956) | LAMA  48.6% (274/564) | BARU  52.0% (204/392) | 2026  50.0% (6/12)
+   2–10 dtk BALIK1 semua  46.3% (446/964) | LAMA  46.2% (264/572) | BARU  46.4% (182/392) | 2026  33.3% (4/12)
+
+## KONSUMEN (147 rilis 2015-09–2026-01)
+   emas naik (semua rilis): 1 dtk 48% • 2 dtk 53% • 3 dtk 52% • 5 dtk 51% • 10 dtk 52%
+   1 dtk    NAIK   semua  48.3% (71/147) | LAMA  45.2% (33/73) | BARU  51.4% (38/74) | 2026   0.0% (0/1)
+   1 dtk    MAYOR  semua  49.6% (67/135) | LAMA  50.8% (31/61) | BARU  48.6% (36/74) | 2026 100.0% (1/1)
+   1 dtk    TAHUN  semua  44.2% (46/104) | LAMA  43.4% (23/53) | BARU  45.1% (23/51) | 2026     –
+   1 dtk    LALU1  semua  49.3% (72/146) | LAMA  50.0% (36/72) | BARU  48.6% (36/74) | 2026 100.0% (1/1)
+   1 dtk    LALU3  semua  53.5% (77/144) | LAMA  57.1% (40/70) | BARU  50.0% (37/74) | 2026 100.0% (1/1)
+   1 dtk    BALIK1 semua  50.7% (74/146) | LAMA  50.0% (36/72) | BARU  51.4% (38/74) | 2026   0.0% (0/1)
+   1 dtk    terbaik LALU3 53.5% → permutasi keluarga p 0.558
+   2–10 dtk NAIK   semua  52.1% (306/587) | LAMA  52.6% (153/291) | BARU  51.7% (153/296) | 2026  75.0% (3/4)
+   2–10 dtk MAYOR  semua  45.7% (221/484) | LAMA  45.9% (102/222) | BARU  45.4% (119/262) | 2026  75.0% (3/4)
+   2–10 dtk TAHUN  semua  45.9% (183/399) | LAMA  45.5% (90/198) | BARU  46.3% (93/201) | 2026     –
+   2–10 dtk LALU1  semua  49.7% (290/583) | LAMA  48.4% (139/287) | BARU  51.0% (151/296) | 2026  25.0% (1/4)
+   2–10 dtk LALU3  semua  49.7% (286/575) | LAMA  46.6% (130/279) | BARU  52.7% (156/296) | 2026  75.0% (3/4)
+   2–10 dtk BALIK1 semua  50.3% (293/583) | LAMA  51.6% (148/287) | BARU  49.0% (145/296) | 2026  75.0% (3/4)
+
+Lolos (≥ 60% & p < 0,05, detik 1): TIDAK ADA

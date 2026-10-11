@@ -147,11 +147,12 @@ def konsensus_nasdaq(t0: datetime, store, now: datetime, opener=None) -> dict:
     if c.get("t") and now.timestamp() - c["t"] < _ttl(t0 - now).total_seconds():
         return c.get("data") or {}
     try:
-        data = nasdaq(t0, opener)
+        baru = nasdaq(t0, opener)
     except Exception:  # noqa: BLE001 - Nasdaq opsional; pakai cache lama bila ada
-        data = None
-    if data is None:
-        return c.get("data") or {}
+        baru = {}
+    # Nasdaq kadang mengosongkan kalender pekan berjalan ("No record found") → nilai lama TIDAK ditimpa; hanya nilai baru
+    # yang terisi yang menggantikan. Waktu cache tetap diperbarui supaya permintaan berikutnya tidak menunggu ±7 dtk lagi.
+    data = {**(c.get("data") or {}), **{k: v for k, v in baru.items() if v is not None}}
     if store is not None:
         try:
             store.save_state({"nasdaq": {key: {"t": now.timestamp(), "data": data}}}, "cpi_detik")
@@ -192,19 +193,31 @@ def tebak(t0: datetime, cards: list[dict], n: dict, get=_kalshi.fetch) -> dict |
         return None
     arah = "turun" if cpi_arah > 0 else "naik"
     pd2 = u.get("per_detik_2022") or {}
-    bukti = (f"{rinci} → CPI condong DI {'ATAS' if cpi_arah > 0 else 'BAWAH'} perkiraan → emas {arah.upper()} • "
-             f"uji tutup kertas 2016–2026 benar {_pct(u.get('semua'))} (detik 2–10, {u.get('n_rilis')} rilis; "
-             f"lama {_pct(u.get('lama'))} / sejak Okt 2021 {_pct(u.get('baru'))}; sejak 2022 detik 2 {_pct(pd2.get('2'))}, "
-             f"10 {_pct(pd2.get('10'))}) • detik 1 hanya {_pct((u.get('per_detik') or {}).get('1'))} (harga belum "
-             f"bergerak) • selalu NAIK {_pct(u.get('selalu_naik'))}")
+    # patokan utama (permintaan pengguna 11 Okt): arah LONJAKAN TERBESAR menit pertama (research/lonjakan_uji.py);
+    # cadangan: detik 2–10 (research/cpi_detik.py) bila angka lonjakan belum ada di cpi_detik.json
+    lj = DATA.get("lonjakan") or {}
+    utama = lj if lj.get("semua") is not None else u
+    sampai = "lonjakan menit 1" if utama is lj else "2–10 dtk"
+    bukti = f"{rinci} → CPI condong DI {'ATAS' if cpi_arah > 0 else 'BAWAH'} perkiraan → emas {arah.upper()} • "
+    if utama is lj:
+        bukti += (f"uji tutup kertas 2016–2026: lonjakan terbesar menit pertama searah {_pct(lj['semua'])} "
+                  f"({lj.get('n_rilis')} rilis; lama {_pct(lj.get('lama'))} / sejak Okt 2021 {_pct(lj.get('baru'))}; "
+                  f"sejak 2022 {_pct(lj.get('s2022'))}; puncak rata-rata detik {lj.get('puncak_detik', 0):.0f}) • "
+                  f"detik 2–10 {_pct(u.get('semua'))} • ")
+    else:
+        bukti += (f"uji tutup kertas 2016–2026 benar {_pct(u.get('semua'))} (detik 2–10, {u.get('n_rilis')} rilis; "
+                  f"lama {_pct(u.get('lama'))} / sejak Okt 2021 {_pct(u.get('baru'))}; sejak 2022 detik 2 "
+                  f"{_pct(pd2.get('2'))}, 10 {_pct(pd2.get('10'))}) • ")
+    bukti += (f"detik 1 hanya {_pct((u.get('per_detik') or {}).get('1'))} (harga belum bergerak) • selalu NAIK "
+              f"{_pct(utama.get('selalu_naik'))}")
     v = DATA.get("validitas") or {}
     if v.get("p_keluarga_2022") is not None:
-        bukti += (f" • koreksi banyak-uji p {v['p_keluarga_2022']:.3f} (sejak 2022) / {v.get('p_keluarga_2016', 0):.3f} "
-                  f"(2016–2026)").replace(".", ",")
-    return {"arah": arah, "persen": round(u.get("semua") or 0), "status": "tutup kertas", "dasar": DASAR[jalur],
-            "lama": round(u["lama"]) if u.get("lama") is not None else None,
-            "baru": round(u["baru"]) if u.get("baru") is not None else None, "n": u.get("n_rilis"),
-            "teks_sampai": "2–10 dtk", "tanpa_tren": True, "bukti": bukti, "jalur": jalur,
+        bukti += (f" • koreksi banyak-uji (detik 2–10) p {v['p_keluarga_2022']:.3f} sejak 2022 / "
+                  f"{v.get('p_keluarga_2016', 0):.3f} 2016–2026").replace(".", ",")
+    return {"arah": arah, "persen": round(utama.get("semua") or 0), "status": "tutup kertas", "dasar": DASAR[jalur],
+            "lama": round(utama["lama"]) if utama.get("lama") is not None else None,
+            "baru": round(utama["baru"]) if utama.get("baru") is not None else None, "n": utama.get("n_rilis"),
+            "teks_sampai": sampai, "tanpa_tren": True, "bukti": bukti, "jalur": jalur,
             "indeks": ix, "konsensus": kons}
 
 

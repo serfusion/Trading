@@ -1,0 +1,354 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "-6.0%",
+"consensus": "",
+"previous": "-3.8%"
+},
+{
+"gmt": "01:30",
+"country": "United Kingdom",
+"eventName": "Investing.com GBP/USD Index",
+"actual": "43.8%",
+"consensus": "",
+"previous": "30.1%"
+},
+{
+"gmt": "01:30",
+"country": "United States",
+"eventName": "Investing.com Gold Index",
+"actual": "51.5%",
+"consensus": "",
+"previous": "55.4%"
+},
+{
+"gmt": "01:30",
+"country": "Canada",
+"eventName": "Investing.com USD/CAD Index",
+"actual": "52.5%",
+"consensus": "",
+"previous": "59.7%"
+},
+{
+"gmt": "01:30",
+"country": "Switzerland",
+"eventName": "Investing.com USD/CHF Index",
+"actual": "63.5%",
+"consensus": "",
+"previous": "50.7%"
+},
+{
+"gmt": "01:30",
+"country": "Australia",
+"eventName": "Investing.com AUD/USD Index",
+"actual": "38.7%",
+"consensus": "",
+"previous": "31.3%"
+},
+{
+"gmt": "01:30",
+"country": "Japan",
+"eventName": "Investing.com USD/JPY Index",
+"actual": "52.2%",
+"consensus": "",
+"previous": "40.6%"
+},
+{
+"gmt": "01:30",
+"country": "New Zealand",
+"eventName": "Investing.com NZD/USD Index",
+"actual": "43.7%",
+"consensus": "",
+"previous": "43.7%"
+},
+{
+"gmt": "01:30",
+"country": "Euro Zone",
+"eventName": "Investing.com EUR/USD Index",
+"actual": "57.3%",
+"consensus": "",
+"previous": "55.7%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-1.3%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-4.5%",
+"consensus": "",
+"previous": "-4.0%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "1.13%",
+"consensus": "",
+"previous": "2.55%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-19.83%",
+"consensus": "",
+"previous": "-10.12%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "-3.21%",
+"consensus": "-1.05%",
+"previous": "0.42%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "-0.42%",
+"consensus": "",
+"previous": "0.25%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.2%",
+"consensus": "-0.1%",
+"previous": "0.1%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.2%",
+"consensus": "-0.1%",
+"previous": "0.0%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian CPI Ex Tobacco",
+"actual": "-0.4%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.3%",
+"consensus": "-0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "2.9B",
+"consensus": "",
+"previous": "28.2B"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Reserve Assets Total",
+"actual": "895.81B",
+"consensus": "",
+"previous": "909.92B"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:24",
+"country": "India",
+"eventName": "Imports (USD)",
+"actual": "22.20B",
+"consensus": "",
+"previous": "17.12B"
+},
+{
+"gmt": "08:25",
+"country": "India",
+"eventName": "Trade Balance",
+"actual": "-3.15B",
+"consensus": "-7.00B",
+"previous": "-6.76B"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "NY Empire State Manufacturing Index",
+"actual": "-0.20",
+"consensus": "-27.50",
+"previous": "-48.50"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "-28.5%",
+"consensus": "-18.7%",
+"previous": "-9.8%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.496%",
+"consensus": "",
+"previous": "-0.488%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.510%",
+"consensus": "",
+"previous": "-0.514%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.507%",
+"consensus": "",
+"previous": "-0.513%"
+},
+{
+"gmt": "09:05",
+"country": "India",
+"eventName": "Exports (USD)",
+"actual": "19.05B",
+"consensus": "",
+"previous": "10.36B"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "FOMC Member Kaplan Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.175%",
+"consensus": "",
+"previous": "0.170%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.185%",
+"consensus": "",
+"previous": "0.185%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "FOMC Member Daly Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "US Foreign Buying, T-bonds",
+"actual": "-176.70B",
+"consensus": "",
+"previous": "-298.90B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "Overall Net Capital Flow",
+"actual": "125.30B",
+"consensus": "",
+"previous": "355.30B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions",
+"actual": "-128.4B",
+"consensus": "",
+"previous": "-111.6B"
+},
+{
+"gmt": "16:00",
+"country": "United States",
+"eventName": "TIC Net Long-Term Transactions including Swaps",
+"actual": "-155.10B",
+"consensus": "",
+"previous": "-138.80B"
+},
+{
+"gmt": "17:00",
+"country": "New Zealand",
+"eventName": "Westpac Consumer Sentiment",
+"actual": "97.2",
+"consensus": "",
+"previous": "104.2"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "BOK Financial Stability Board Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "House Price Index",
+"actual": "1.6%",
+"consensus": "2.7%",
+"previous": "3.9%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "22:33",
+"country": "Japan",
+"eventName": "BoJ Interest Rate Decision",
+"actual": "-0.10%",
+"consensus": "",
+"previous": "-0.10%"
+}
+]

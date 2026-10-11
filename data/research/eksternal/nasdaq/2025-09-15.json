@@ -1,0 +1,322 @@
+[
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "0.7%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German WPI",
+"actual": "-0.6%",
+"consensus": "0.2%",
+"previous": "-0.1%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-1.8%",
+"consensus": "",
+"previous": "-0.9%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "-0.6%",
+"consensus": "0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Food",
+"actual": "-3.06%",
+"consensus": "",
+"previous": "-6.29%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Fuel",
+"actual": "-3.17%",
+"consensus": "",
+"previous": "-2.43%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Inflation",
+"actual": "0.52%",
+"consensus": "0.30%",
+"previous": "-0.58%"
+},
+{
+"gmt": "02:30",
+"country": "India",
+"eventName": "WPI Manufacturing Inflation",
+"actual": "2.55%",
+"consensus": "",
+"previous": "2.05%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance",
+"actual": "7.908B",
+"consensus": "5.500B",
+"previous": "5.384B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance EU",
+"actual": "1.92B",
+"consensus": "",
+"previous": "-0.09B"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance Non-EU",
+"actual": "5.99B",
+"consensus": "",
+"previous": "5.39B"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Industrial Production",
+"actual": "0.80%",
+"consensus": "",
+"previous": "0.70%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "PPI",
+"actual": "4.00%",
+"consensus": "",
+"previous": "4.80%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "12.4B",
+"consensus": "11.7B",
+"previous": "8.0B"
+},
+{
+"gmt": "05:30",
+"country": "India",
+"eventName": "Exports (USD)",
+"actual": "35.10B",
+"consensus": "",
+"previous": "37.24B"
+},
+{
+"gmt": "05:30",
+"country": "India",
+"eventName": "Imports (USD)",
+"actual": "61.59B",
+"consensus": "",
+"previous": "64.59B"
+},
+{
+"gmt": "05:50",
+"country": "Germany",
+"eventName": "German 12-Month Bubill Auction",
+"actual": "1.938%",
+"consensus": "",
+"previous": "1.895%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German Buba Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Reserve Assets Total",
+"actual": "1,507.85B",
+"consensus": "",
+"previous": "1,499.04B"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "Trade Balance",
+"actual": "-26.49B",
+"consensus": "",
+"previous": "-27.35B"
+},
+{
+"gmt": "07:30",
+"country": "Euro Zone",
+"eventName": "ECB's Schnabel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "IBC-Br Economic Activity",
+"actual": "-0.50%",
+"consensus": "-0.20%",
+"previous": "-0.10%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "NY Empire State Manufacturing Index",
+"actual": "-8.70",
+"consensus": "4.30",
+"previous": "11.90"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Manufacturing Sales",
+"actual": "2.5%",
+"consensus": "1.7%",
+"previous": "0.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Motor Vehicle Sales",
+"actual": "179.8K",
+"consensus": "",
+"previous": "177.2K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Wholesale Sales",
+"actual": "1.2%",
+"consensus": "1.4%",
+"previous": "1.0%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.046%",
+"consensus": "",
+"previous": "1.997%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "2.007%",
+"consensus": "",
+"previous": "1.989%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "2.027%",
+"consensus": "",
+"previous": "2.006%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "3.905%",
+"consensus": "",
+"previous": "3.940%"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "3.715%",
+"consensus": "",
+"previous": "3.730%"
+},
+{
+"gmt": "14:30",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Export Price Index",
+"actual": "-1.0%",
+"consensus": "",
+"previous": "-4.5%"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Import Price Index",
+"actual": "-2.2%",
+"consensus": "",
+"previous": "-5.9%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "FPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M3 Money Supply",
+"actual": "5,906.8B",
+"consensus": "",
+"previous": "5,851.1B"
+},
+{
+"gmt": "23:00",
+"country": "South Korea",
+"eventName": "M2 Money supply",
+"actual": "6.40%",
+"consensus": "",
+"previous": "5.40%"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "RBNZ Offshore Holdings",
+"actual": "59.60%",
+"consensus": "",
+"previous": "60.80%"
+},
+{
+"gmt": "All Day",
+"country": "Japan",
+"eventName": "Japan - Respect for the Aged Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

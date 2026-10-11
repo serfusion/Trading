@@ -1,0 +1,346 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "BoJ Core CPI",
+"actual": "2.3%",
+"consensus": "2.5%",
+"previous": "2.5%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "0.60%",
+"consensus": "0.70%",
+"previous": "0.60%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "-0.10%",
+"consensus": "",
+"previous": "0.70%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.8%",
+"consensus": "0.9%",
+"previous": "0.8%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.0%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "2.9%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.3%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "3.0%",
+"consensus": "",
+"previous": "2.8%"
+},
+{
+"gmt": "05:30",
+"country": "Germany",
+"eventName": "German 10-Year Bund Auction",
+"actual": "2.620%",
+"consensus": "",
+"previous": "2.630%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "6.84%",
+"consensus": "",
+"previous": "6.82%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "0.8%",
+"consensus": "",
+"previous": "-10.0%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "165.1",
+"consensus": "",
+"previous": "159.6"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "255.5",
+"consensus": "",
+"previous": "253.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "747.5",
+"consensus": "",
+"previous": "767.6"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "M3 Money Supply",
+"actual": "9.5%",
+"consensus": "",
+"previous": "9.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "-0.2%",
+"consensus": "0.0%",
+"previous": "-0.2%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "3.93M",
+"consensus": "4.00M",
+"previous": "4.04M"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Existing Home Sales",
+"actual": "-2.7%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-14.7",
+"consensus": "-15.0",
+"previous": "-15.3"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "-3.169M",
+"consensus": "-1.400M",
+"previous": "-3.859M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "0.087M",
+"consensus": "",
+"previous": "-0.157M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "-0.740M",
+"consensus": "",
+"previous": "-0.395M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.455M",
+"consensus": "",
+"previous": "0.213M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.095M",
+"consensus": "",
+"previous": "-0.109M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "2.931M",
+"consensus": "-1.100M",
+"previous": "4.173M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.282M",
+"consensus": "",
+"previous": "-0.815M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "0.003M",
+"consensus": "",
+"previous": "-0.846M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "1.6%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-1.738M",
+"consensus": "-0.900M",
+"previous": "3.399M"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "2.0%",
+"consensus": "2.5%",
+"previous": "1.8%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.935%",
+"consensus": "",
+"previous": "4.942%"
+},
+{
+"gmt": "13:30",
+"country": "Brazil",
+"eventName": "Foreign Exchange Flows",
+"actual": "0.216B",
+"consensus": "",
+"previous": "0.638B"
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Manufacturing BSI Index",
+"actual": "68",
+"consensus": "",
+"previous": "70"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "0.5%",
+"consensus": "0.4%",
+"previous": "0.0%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "-0.2%"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "53.60%",
+"consensus": "",
+"previous": "51.60%"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "51.6",
+"consensus": "",
+"previous": "50.6"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "53.8",
+"consensus": "",
+"previous": "51.8"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "51.50%",
+"consensus": "",
+"previous": "51.50%"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "48.8",
+"consensus": "50.2",
+"previous": "50.1"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "53.5",
+"consensus": "",
+"previous": "51.7"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Bulletin",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:05",
+"country": "Australia",
+"eventName": "RBA Gov Bullock Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

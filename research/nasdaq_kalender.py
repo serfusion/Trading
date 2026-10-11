@@ -31,12 +31,14 @@ def _get(q: str) -> dict:
         return json.loads(r.read().decode("utf-8"))
 
 
-def hari(tgl, segar: bool = False) -> list[dict]:
-    """Baris kalender untuk tanggal rilis `tgl` (tanggal New York). Cache per tanggal."""
+def hari(tgl, segar: bool = False, ambil: bool = True) -> list[dict]:
+    """Baris kalender untuk tanggal rilis `tgl` (tanggal New York). Cache per tanggal; ambil=False = cache saja."""
     t = pd.Timestamp(tgl).normalize()
     f = DIR / f"{t:%Y-%m-%d}.json"
     if f.exists() and not segar:
         return json.loads(f.read_text(encoding="utf-8"))
+    if not ambil:
+        return []
     for i in range(4):
         try:
             d = _get(f"{t + pd.Timedelta(days=1):%Y-%m-%d}")

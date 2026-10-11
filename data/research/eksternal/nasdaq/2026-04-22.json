@@ -1,0 +1,522 @@
+[
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "3.1%",
+"consensus": "3.2%",
+"previous": "3.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core CPI",
+"actual": "0.4%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "2.0%",
+"consensus": "",
+"previous": "2.0%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core PPI Output",
+"actual": "0.2%",
+"consensus": "",
+"previous": "-0.7%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "4.0%",
+"consensus": "",
+"previous": "3.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Core RPI",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "3.3%",
+"consensus": "3.3%",
+"previous": "3.0%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "CPI",
+"actual": "0.7%",
+"consensus": "0.6%",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "CPI, n.s.a",
+"actual": "141.00",
+"consensus": "",
+"previous": "140.10"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "CPIH",
+"actual": "3.4%",
+"consensus": "",
+"previous": "3.2%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "5.4%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "PPI Input",
+"actual": "4.4%",
+"consensus": "2.9%",
+"previous": "0.9%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "0.9%",
+"consensus": "1.0%",
+"previous": "-0.5%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "PPI Output",
+"actual": "2.6%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "0.8%",
+"consensus": "0.7%",
+"previous": "0.4%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "RPI",
+"actual": "4.1%",
+"consensus": "3.9%",
+"previous": "3.6%"
+},
+{
+"gmt": "03:00",
+"country": "Euro Zone",
+"eventName": "ECB's Elderson Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:40",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "3.2%",
+"consensus": "",
+"previous": "3.0%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "Core CPI",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "0.6%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "South Africa",
+"eventName": "CPI",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.0%"
+},
+{
+"gmt": "04:05",
+"country": "United Kingdom",
+"eventName": "BoE Breeden Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "House Price Index",
+"actual": "1.2%",
+"consensus": "0.9%",
+"previous": "1.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Government Budget to GDP",
+"actual": "-2.9%",
+"consensus": "",
+"previous": "-3.0%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Government Debt to GDP",
+"actual": "87.8%",
+"consensus": "",
+"previous": "87.0%"
+},
+{
+"gmt": "06:00",
+"country": "Germany",
+"eventName": "German Buba Monthly Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA 30-Year Mortgage Rate",
+"actual": "6.35%",
+"consensus": "",
+"previous": "6.42%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Mortgage Applications",
+"actual": "7.9%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "MBA Purchase Index",
+"actual": "175.6",
+"consensus": "",
+"previous": "159.5"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Market Index",
+"actual": "303.3",
+"consensus": "",
+"previous": "281.0"
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "Mortgage Refinance Index",
+"actual": "1,023.1",
+"consensus": "",
+"previous": "966.8"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Retail Sales",
+"actual": "1.6%",
+"consensus": "4.8%",
+"previous": "4.4%"
+},
+{
+"gmt": "07:30",
+"country": "India",
+"eventName": "RBI MPC Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "-0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:15",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "Consumer Confidence",
+"actual": "-20.6",
+"consensus": "-18.0",
+"previous": "-16.4"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Inventories",
+"actual": "1.925M",
+"consensus": "-1.900M",
+"previous": "-0.913M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Refinery Crude Runs",
+"actual": "-0.055M",
+"consensus": "",
+"previous": "-0.208M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Crude Oil Imports",
+"actual": "1.214M",
+"consensus": "",
+"previous": "-2.109M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Cushing Crude Oil Inventories",
+"actual": "0.806M",
+"consensus": "",
+"previous": "-1.727M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Distillate Fuel Production",
+"actual": "0.087M",
+"consensus": "",
+"previous": "-0.169M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Distillates Stocks",
+"actual": "-3.427M",
+"consensus": "-2.500M",
+"previous": "-3.122M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Production",
+"actual": "0.315M",
+"consensus": "",
+"previous": "0.392M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Heating Oil Stockpiles",
+"actual": "-0.328M",
+"consensus": "",
+"previous": "-0.463M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "EIA Weekly Refinery Utilization Rates",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-2.4%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Gasoline Inventories",
+"actual": "-4.570M",
+"consensus": "-1.500M",
+"previous": "-6.328M"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "Industrial Production",
+"actual": "2.3%",
+"consensus": "0.9%",
+"previous": "-0.9%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "-1.8%",
+"consensus": "",
+"previous": "-5.2%"
+},
+{
+"gmt": "12:00",
+"country": "Russia",
+"eventName": "PPI",
+"actual": "2.0%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "20-Year Bond Auction",
+"actual": "4.883%",
+"consensus": "",
+"previous": "4.817%"
+},
+{
+"gmt": "13:00",
+"country": "Germany",
+"eventName": "German Buba President Nagel Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:30",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "99.2",
+"consensus": "",
+"previous": "107.0"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "1.7%",
+"consensus": "1.0%",
+"previous": "-0.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "3.6%",
+"consensus": "2.7%",
+"previous": "1.6%"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing & Services PMI",
+"actual": "50.10",
+"consensus": "",
+"previous": "46.60"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "51.0",
+"consensus": "",
+"previous": "49.8"
+},
+{
+"gmt": "19:00",
+"country": "Australia",
+"eventName": "S&P Global Services PMI",
+"actual": "50.3",
+"consensus": "",
+"previous": "46.3"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Bonds Buying",
+"actual": "-12.8B",
+"consensus": "",
+"previous": "698.2B"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Foreign Investments in Japanese Stocks",
+"actual": "2,380.9B",
+"consensus": "",
+"previous": "3,941.4B"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "Manufacturing & Services PMI",
+"actual": "52.40",
+"consensus": "",
+"previous": "53.00"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "54.9",
+"consensus": "51.1",
+"previous": "51.6"
+},
+{
+"gmt": "20:30",
+"country": "Japan",
+"eventName": "S&P Global Services PMI",
+"actual": "51.2",
+"consensus": "",
+"previous": "53.4"
+},
+{
+"gmt": "23:00",
+"country": "New Zealand",
+"eventName": "Credit Card Spending",
+"actual": "2.1%",
+"consensus": "",
+"previous": "1.1%"
+}
+]

@@ -1,0 +1,234 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Housing Starts",
+"actual": "6.4%",
+"consensus": "3.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "01:00",
+"country": "Russia",
+"eventName": "Interest Rate Decision",
+"actual": "8.25%",
+"consensus": "",
+"previous": "8.25%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Nationwide HPI",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "02:00",
+"country": "Germany",
+"eventName": "German Retail Sales",
+"actual": "-2.8%",
+"consensus": "0.7%",
+"previous": "0.0%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French Consumer Spending",
+"actual": "-0.8%",
+"consensus": "1.0%",
+"previous": "-1.4%"
+},
+{
+"gmt": "02:45",
+"country": "France",
+"eventName": "French PPI",
+"actual": "-0.5%",
+"consensus": "0.2%",
+"previous": "0.8%"
+},
+{
+"gmt": "03:00",
+"country": "Euro Zone",
+"eventName": "ECB President Trichet Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Change",
+"actual": "-8K",
+"consensus": "-17K",
+"previous": "-8K"
+},
+{
+"gmt": "03:55",
+"country": "Germany",
+"eventName": "German Unemployment Rate",
+"actual": "7.0%",
+"consensus": "7.0%",
+"previous": "7.0%"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "M3 Money Supply",
+"actual": "2.4%",
+"consensus": "2.1%",
+"previous": "2.0%"
+},
+{
+"gmt": "04:00",
+"country": "Euro Zone",
+"eventName": "Private Sector Loans",
+"actual": "2.7%",
+"consensus": "2.8%",
+"previous": "2.6%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "CPI",
+"actual": "2.7%",
+"consensus": "2.8%",
+"previous": "2.7%"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Continuing Jobless Claims",
+"actual": "3,702K",
+"consensus": "3,690K",
+"previous": "3,714K"
+},
+{
+"gmt": "08:30",
+"country": "United States",
+"eventName": "Initial Jobless Claims",
+"actual": "428K",
+"consensus": "420K",
+"previous": "429K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "0.3%"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Bloomberg Consumer Confidence",
+"actual": "28.05",
+"consensus": "-45.2",
+"previous": "27.55"
+},
+{
+"gmt": "09:45",
+"country": "United States",
+"eventName": "Chicago PMI",
+"actual": "61.1",
+"consensus": "54.0",
+"previous": "56.6"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Natural Gas Storage",
+"actual": "78B",
+"consensus": "80B",
+"previous": "98B"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "4.4%",
+"consensus": "4.2%",
+"previous": "4.1%"
+},
+{
+"gmt": "19:30",
+"country": "Australia",
+"eventName": "AIG Manufacturing Index",
+"actual": "52.9",
+"consensus": "",
+"previous": "47.7"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Household Spending",
+"actual": "-1.9%",
+"consensus": "-1.7%",
+"previous": "-3.0%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "National Core CPI",
+"actual": "0.6%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Tokyo Core CPI",
+"actual": "0.1%",
+"consensus": "0.2%",
+"previous": "0.1%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Unemployment Rate",
+"actual": "4.5%",
+"consensus": "4.8%",
+"previous": "4.7%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Tankan Large Manufacturers Index",
+"actual": "-9",
+"consensus": "-7",
+"previous": "6"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Tankan Large Non-Manufacturers Index",
+"actual": "-5",
+"consensus": "-4",
+"previous": "3"
+},
+{
+"gmt": "21:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "3.20B",
+"consensus": "2.80B",
+"previous": "2.20B"
+},
+{
+"gmt": "21:00",
+"country": "Australia",
+"eventName": "HIA New Home Sales",
+"actual": "-0.2%",
+"consensus": "",
+"previous": "0.2%"
+}
+]

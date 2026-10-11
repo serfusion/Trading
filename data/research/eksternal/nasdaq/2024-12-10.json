@@ -1,0 +1,290 @@
+[
+{
+"gmt": "02:00",
+"country": "Japan",
+"eventName": "Machine Tool Orders",
+"actual": "3.0%",
+"consensus": "",
+"previous": "9.3%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "-0.2%",
+"consensus": "-0.2%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.0%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "-0.7%",
+"consensus": "-0.7%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "2.4%",
+"consensus": "2.4%",
+"previous": "2.4%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "0.0%",
+"consensus": "-0.1%",
+"previous": "-0.3%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Industrial Production",
+"actual": "-3.6%",
+"consensus": "",
+"previous": "-3.9%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "114.2",
+"consensus": "",
+"previous": "110.2"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Gold Production",
+"actual": "-3.4%",
+"consensus": "",
+"previous": "-3.7%"
+},
+{
+"gmt": "05:30",
+"country": "South Africa",
+"eventName": "Mining Production",
+"actual": "1.4%",
+"consensus": "",
+"previous": "4.9%"
+},
+{
+"gmt": "05:31",
+"country": "South Africa",
+"eventName": "Business Confidence",
+"actual": "118.1",
+"consensus": "",
+"previous": "114.2"
+},
+{
+"gmt": "05:40",
+"country": "Spain",
+"eventName": "Spanish 3-Month Letras Auction",
+"actual": "2.567%",
+"consensus": "",
+"previous": "2.716%"
+},
+{
+"gmt": "06:00",
+"country": "United States",
+"eventName": "OPEC Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "ECOFIN Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:00",
+"country": "United States",
+"eventName": "NFIB Small Business Optimism",
+"actual": "101.7",
+"consensus": "94.6",
+"previous": "93.7"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "0.4%",
+"consensus": "",
+"previous": "-0.2%"
+},
+{
+"gmt": "07:00",
+"country": "South Africa",
+"eventName": "Manufacturing Production",
+"actual": "0.8%",
+"consensus": "",
+"previous": "-1.4%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "4.87%",
+"consensus": "4.85%",
+"previous": "4.76%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "CPI",
+"actual": "0.39%",
+"consensus": "0.37%",
+"previous": "0.56%"
+},
+{
+"gmt": "08:00",
+"country": "Brazil",
+"eventName": "Brazilian IPCA Inflation Index SA",
+"actual": "0.33%",
+"consensus": "",
+"previous": "0.54%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Nonfarm Productivity",
+"actual": "2.2%",
+"consensus": "2.2%",
+"previous": "2.5%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Unit Labor Costs",
+"actual": "0.8%",
+"consensus": "1.9%",
+"previous": "0.4%"
+},
+{
+"gmt": "09:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "4.2%",
+"consensus": "",
+"previous": "7.4%"
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "EIA Short-Term Energy Outlook",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "13:00",
+"country": "United States",
+"eventName": "WASDE Report",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "4.117%",
+"consensus": "",
+"previous": "4.152%"
+},
+{
+"gmt": "17:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "0.499M",
+"consensus": "-1.300M",
+"previous": "1.232M"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Manufacturing Sales Volume",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "0.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "Unemployment Rate",
+"actual": "2.7%",
+"consensus": "",
+"previous": "2.7%"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "-1",
+"consensus": "",
+"previous": "5"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "BSI Large Manufacturing Conditions",
+"actual": "6.3",
+"consensus": "1.8",
+"previous": "4.5"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "GDP External Demand",
+"actual": "-0.2%",
+"consensus": "-0.4%",
+"previous": "-0.1%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "3.7%",
+"consensus": "3.4%",
+"previous": "3.6%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "PPI",
+"actual": "0.3%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "RBA Chart Pack Release",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

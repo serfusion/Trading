@@ -1,0 +1,818 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Construction Orders",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "-10.6%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Housing Starts",
+"actual": "-8.3%",
+"consensus": "-8.6%",
+"previous": "-9.9%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "M3 Money Supply",
+"actual": "9.83%",
+"consensus": "",
+"previous": "9.48%"
+},
+{
+"gmt": "02:00",
+"country": "South Africa",
+"eventName": "Private Sector Credit",
+"actual": "3.24%",
+"consensus": "4.00%",
+"previous": "3.12%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "3.1%",
+"consensus": "",
+"previous": "0.4%"
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "KOF Leading Indicators",
+"actual": "103.5",
+"consensus": "101.0",
+"previous": "106.3"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.5%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish CPI",
+"actual": "-0.8%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish HICP",
+"actual": "-0.9%",
+"consensus": "-0.8%",
+"previous": "-0.9%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "M3 Money Supply",
+"actual": "20.5%",
+"consensus": "",
+"previous": "10.7%"
+},
+{
+"gmt": "04:30",
+"country": "Euro Zone",
+"eventName": "ECB's Enria Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:00",
+"country": "Spain",
+"eventName": "Spanish Current account",
+"actual": "0.30B",
+"consensus": "",
+"previous": "1.35B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "BoE Consumer Credit",
+"actual": "-0.590B",
+"consensus": "",
+"previous": "-0.630B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "M4 Money Supply",
+"actual": "0.6%",
+"consensus": "1.0%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Approvals",
+"actual": "97.53K",
+"consensus": "84.49K",
+"previous": "92.09K"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Mortgage Lending",
+"actual": "4.29B",
+"consensus": "4.46B",
+"previous": "4.86B"
+},
+{
+"gmt": "05:30",
+"country": "United Kingdom",
+"eventName": "Net Lending to Individuals",
+"actual": "3.7B",
+"consensus": "4.7B",
+"previous": "4.2B"
+},
+{
+"gmt": "06:00",
+"country": "United States",
+"eventName": "OPEC Meeting",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.1%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian CPI",
+"actual": "-0.2%",
+"consensus": "-0.4%",
+"previous": "-0.3%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "0.0%",
+"consensus": "0.2%",
+"previous": "0.6%"
+},
+{
+"gmt": "06:00",
+"country": "Italy",
+"eventName": "Italian HICP",
+"actual": "-0.3%",
+"consensus": "-0.5%",
+"previous": "-0.6%"
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "06:00",
+"country": "Euro Zone",
+"eventName": "Eurogroup Meetings",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Trade Balance",
+"actual": "36.13B",
+"consensus": "",
+"previous": "33.36B"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Net Debt-to-GDP ratio",
+"actual": "61.2%",
+"consensus": "62.1%",
+"previous": "61.4%"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Budget Balance",
+"actual": "-30.900B",
+"consensus": "-96.000B",
+"previous": "-103.420B"
+},
+{
+"gmt": "08:30",
+"country": "Brazil",
+"eventName": "Budget Surplus",
+"actual": "3.000B",
+"consensus": "-8.950B",
+"previous": "-64.560B"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "-0.8%",
+"consensus": "-0.7%",
+"previous": "0.1%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German CPI",
+"actual": "-0.3%",
+"consensus": "-0.1%",
+"previous": "-0.2%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "-1.0%",
+"consensus": "-0.8%",
+"previous": "0.0%"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German HICP",
+"actual": "-0.7%",
+"consensus": "-0.5%",
+"previous": "-0.5%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Building Permits",
+"actual": "-14.6%",
+"consensus": "-5.0%",
+"previous": "18.6%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "Current Account",
+"actual": "-7.5B",
+"consensus": "-9.1B",
+"previous": "-7.0B"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "-0.4%",
+"consensus": "0.1%",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "0.7%",
+"consensus": "",
+"previous": "-2.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "0.5%",
+"consensus": "",
+"previous": "-2.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "-9.4%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.647%",
+"consensus": "",
+"previous": "-0.616%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.655%",
+"consensus": "",
+"previous": "-0.634%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.646%",
+"consensus": "",
+"previous": "-0.618%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "ECB Hakkarainen Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:30",
+"country": "United Kingdom",
+"eventName": "MPC Member Tenreyro Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:45",
+"country": "United States",
+"eventName": "Chicago PMI",
+"actual": "58.2",
+"consensus": "59.0",
+"previous": "61.1"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Algeria (Barrel)",
+"actual": "0.86M",
+"consensus": "",
+"previous": "0.85M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Congo (Barrel)",
+"actual": "0.27M",
+"consensus": "",
+"previous": "0.28M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Gabon (Barrel)",
+"actual": "0.19M",
+"consensus": "",
+"previous": "0.18M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Guinea (Barrel)",
+"actual": "0.11M",
+"consensus": "",
+"previous": "0.10M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iran (Barrel)",
+"actual": "1.96M",
+"consensus": "",
+"previous": "1.96M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Iraq (Barrel)",
+"actual": "3.84M",
+"consensus": "",
+"previous": "3.69M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Kuwait (Barrel)",
+"actual": "2.29M",
+"consensus": "",
+"previous": "2.29M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Libya (Barrel)",
+"actual": "0.45M",
+"consensus": "",
+"previous": "0.16M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude Oil Production Nigeria (Barrel)",
+"actual": "1.49M",
+"consensus": "",
+"previous": "1.46M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Saudi Arabia (Barrel)",
+"actual": "8.96M",
+"consensus": "",
+"previous": "8.96M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude oil Production UAE (Barrel)",
+"actual": "2.44M",
+"consensus": "",
+"previous": "2.53M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "OPEC Crude oil Production Venezuela (Barrel)",
+"actual": "0.37M",
+"consensus": "",
+"previous": "0.38M"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Pending Home Sales",
+"actual": "-1.1%",
+"consensus": "1.0%",
+"previous": "-2.0%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "Pending Home Sales Index",
+"actual": "128.9",
+"consensus": "",
+"previous": "130.3"
+},
+{
+"gmt": "11:30",
+"country": "United States",
+"eventName": "Dallas Fed Mfg Business Index",
+"actual": "12.0",
+"consensus": "",
+"previous": "19.8"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.085%",
+"consensus": "",
+"previous": "0.085%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.090%",
+"consensus": "",
+"previous": "0.090%"
+},
+{
+"gmt": "16:30",
+"country": "United Kingdom",
+"eventName": "CFTC GBP speculative net positions",
+"actual": "-17.1K",
+"consensus": "",
+"previous": "-19.7K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Copper speculative net positions",
+"actual": "73.8K",
+"consensus": "",
+"previous": "67.2K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Corn speculative net positions",
+"actual": "451.3K",
+"consensus": "",
+"previous": "411.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Crude Oil speculative net positions",
+"actual": "522.6K",
+"consensus": "",
+"previous": "480.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Gold speculative net positions",
+"actual": "243.9K",
+"consensus": "",
+"previous": "251.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Nasdaq 100 speculative net positions",
+"actual": "-22.8K",
+"consensus": "",
+"previous": "-16.5K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Natural Gas speculative net positions",
+"actual": "25.3K",
+"consensus": "",
+"previous": "46.4K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC S&P 500 speculative net positions",
+"actual": "-13.4K",
+"consensus": "",
+"previous": "38.8K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Silver speculative net positions",
+"actual": "45.7K",
+"consensus": "",
+"previous": "45.6K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Soybeans speculative net positions",
+"actual": "281.7K",
+"consensus": "",
+"previous": "276.3K"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "CFTC Wheat speculative net positions",
+"actual": "31.4K",
+"consensus": "",
+"previous": "18.4K"
+},
+{
+"gmt": "16:30",
+"country": "Canada",
+"eventName": "CFTC CAD speculative net positions",
+"actual": "-16.8K",
+"consensus": "",
+"previous": "-20.4K"
+},
+{
+"gmt": "16:30",
+"country": "Switzerland",
+"eventName": "CFTC CHF speculative net positions",
+"actual": "15.0K",
+"consensus": "",
+"previous": "14.9K"
+},
+{
+"gmt": "16:30",
+"country": "Australia",
+"eventName": "CFTC AUD speculative net positions",
+"actual": "-5.3K",
+"consensus": "",
+"previous": "-6.1K"
+},
+{
+"gmt": "16:30",
+"country": "Brazil",
+"eventName": "CFTC BRL speculative net positions",
+"actual": "-18.1K",
+"consensus": "",
+"previous": "-21.1K"
+},
+{
+"gmt": "16:30",
+"country": "Japan",
+"eventName": "CFTC JPY speculative net positions",
+"actual": "40.2K",
+"consensus": "",
+"previous": "29.7K"
+},
+{
+"gmt": "16:30",
+"country": "New Zealand",
+"eventName": "CFTC NZD speculative net positions",
+"actual": "8.3K",
+"consensus": "",
+"previous": "8.9K"
+},
+{
+"gmt": "16:30",
+"country": "Russia",
+"eventName": "CFTC RUB speculative positions",
+"actual": "-3.9K",
+"consensus": "",
+"previous": "-5.2K"
+},
+{
+"gmt": "16:30",
+"country": "Euro Zone",
+"eventName": "CFTC EUR speculative net positions",
+"actual": "138.2K",
+"consensus": "",
+"previous": "134.0K"
+},
+{
+"gmt": "17:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "-27.60B",
+"consensus": "",
+"previous": "-21.94B"
+},
+{
+"gmt": "17:00",
+"country": "Canada",
+"eventName": "Budget Balance",
+"actual": "-190.41B",
+"consensus": "",
+"previous": "-170.52B"
+},
+{
+"gmt": "17:30",
+"country": "Australia",
+"eventName": "AIG Manufacturing Index",
+"actual": "52.1",
+"consensus": "",
+"previous": "56.3"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "2.1%",
+"consensus": "1.9%",
+"previous": "-3.2%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "GDP",
+"actual": "-1.1%",
+"consensus": "-1.3%",
+"previous": "-2.7%"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Jobs/applications ratio",
+"actual": "1.04",
+"consensus": "1.03",
+"previous": "1.03"
+},
+{
+"gmt": "19:30",
+"country": "Japan",
+"eventName": "Unemployment Rate",
+"actual": "3.1%",
+"consensus": "3.1%",
+"previous": "3.0%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Capital Spending",
+"actual": "-10.6%",
+"consensus": "-12.0%",
+"previous": "-11.3%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Exports",
+"actual": "4.0%",
+"consensus": "6.8%",
+"previous": "-3.8%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Imports",
+"actual": "-2.1%",
+"consensus": "0.2%",
+"previous": "-5.6%"
+},
+{
+"gmt": "20:00",
+"country": "South Korea",
+"eventName": "Trade Balance",
+"actual": "5.93B",
+"consensus": "5.83B",
+"previous": "5.80B"
+},
+{
+"gmt": "20:30",
+"country": "South Korea",
+"eventName": "S&P Global South Korea Manufacturing PMI",
+"actual": "52.9",
+"consensus": "",
+"previous": "51.2"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Building Approvals",
+"actual": "3.8%",
+"consensus": "-3.0%",
+"previous": "16.2%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Current Account",
+"actual": "10.0B",
+"consensus": "7.1B",
+"previous": "16.3B"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Net Exports Contribution",
+"actual": "-1.9%",
+"consensus": "-1.7%",
+"previous": "1.0%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "Private House Approvals",
+"actual": "3.1%",
+"consensus": "",
+"previous": "10.8%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Interest Rate Decision",
+"actual": "0.10%",
+"consensus": "0.10%",
+"previous": "0.10%"
+},
+{
+"gmt": "23:30",
+"country": "Australia",
+"eventName": "RBA Rate Statement",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.019%",
+"consensus": "",
+"previous": "0.046%"
+},
+{
+"gmt": "All Day",
+"country": "India",
+"eventName": "India - Guru Nanak Jayanti",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

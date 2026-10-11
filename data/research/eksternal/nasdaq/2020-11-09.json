@@ -1,0 +1,370 @@
+[
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Coincident Indicator",
+"actual": "1.4%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "4.4%",
+"consensus": "",
+"previous": "1.8%"
+},
+{
+"gmt": "01:00",
+"country": "Japan",
+"eventName": "Leading Index",
+"actual": "92.9",
+"consensus": "88.6",
+"previous": "88.4"
+},
+{
+"gmt": "02:30",
+"country": "United Kingdom",
+"eventName": "Investing.com GBP/USD Index",
+"actual": "35.3%",
+"consensus": "",
+"previous": "42.7%"
+},
+{
+"gmt": "02:30",
+"country": "United States",
+"eventName": "Investing.com Gold Index",
+"actual": "54.1%",
+"consensus": "",
+"previous": "56.5%"
+},
+{
+"gmt": "02:30",
+"country": "Canada",
+"eventName": "Investing.com USD/CAD Index",
+"actual": "55.7%",
+"consensus": "",
+"previous": "52.2%"
+},
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "Investing.com USD/CHF Index",
+"actual": "53.2%",
+"consensus": "",
+"previous": "50.2%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Investing.com AUD/USD Index",
+"actual": "37.8%",
+"consensus": "",
+"previous": "46.9%"
+},
+{
+"gmt": "02:30",
+"country": "Japan",
+"eventName": "Investing.com USD/JPY Index",
+"actual": "47.6%",
+"consensus": "",
+"previous": "52.2%"
+},
+{
+"gmt": "02:30",
+"country": "New Zealand",
+"eventName": "Investing.com NZD/USD Index",
+"actual": "44.5%",
+"consensus": "",
+"previous": "47.7%"
+},
+{
+"gmt": "02:30",
+"country": "Euro Zone",
+"eventName": "Investing.com EUR/USD Index",
+"actual": "46.6%",
+"consensus": "",
+"previous": "53.2%"
+},
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate n.s.a.",
+"actual": "3.2%",
+"consensus": "3.3%",
+"previous": "3.2%"
+},
+{
+"gmt": "02:45",
+"country": "Switzerland",
+"eventName": "Unemployment Rate s.a.",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.4%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Current Account Balance n.s.a",
+"actual": "26.3B",
+"consensus": "",
+"previous": "16.5B"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Exports",
+"actual": "2.3%",
+"consensus": "2.0%",
+"previous": "2.9%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Imports",
+"actual": "-0.1%",
+"consensus": "2.1%",
+"previous": "5.8%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Trade Balance",
+"actual": "17.8B",
+"consensus": "15.8B",
+"previous": "15.4B"
+},
+{
+"gmt": "05:00",
+"country": "Singapore",
+"eventName": "Foreign Reserves USD",
+"actual": "338.0B",
+"consensus": "",
+"previous": "328.0B"
+},
+{
+"gmt": "05:25",
+"country": "Euro Zone",
+"eventName": "ECB President Lagarde Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "05:30",
+"country": "Euro Zone",
+"eventName": "Sentix Investor Confidence",
+"actual": "-10.0",
+"consensus": "-15.0",
+"previous": "-8.3"
+},
+{
+"gmt": "06:35",
+"country": "United Kingdom",
+"eventName": "BoE Gov Bailey Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Euro Zone",
+"eventName": "ECB's Mersch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "United Kingdom",
+"eventName": "BoE MPC Member Haldane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "-0.627%",
+"consensus": "",
+"previous": "-0.648%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "-0.635%",
+"consensus": "",
+"previous": "-0.676%"
+},
+{
+"gmt": "10:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "-0.628%",
+"consensus": "",
+"previous": "-0.653%"
+},
+{
+"gmt": "10:00",
+"country": "Euro Zone",
+"eventName": "ECB's Enria Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Employment Trends Index",
+"actual": "97.57",
+"consensus": "",
+"previous": "96.33"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "0.100%",
+"consensus": "",
+"previous": "0.095%"
+},
+{
+"gmt": "12:30",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "0.110%",
+"consensus": "",
+"previous": "0.110%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "3-Year Note Auction",
+"actual": "0.250%",
+"consensus": "",
+"previous": "0.193%"
+},
+{
+"gmt": "14:30",
+"country": "United States",
+"eventName": "FOMC Member Mester Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "15:20",
+"country": "United States",
+"eventName": "FOMC Member Harker Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Electronic Card Retail Sales",
+"actual": "8.8%",
+"consensus": "",
+"previous": "5.4%"
+},
+{
+"gmt": "17:45",
+"country": "New Zealand",
+"eventName": "Electronic Card Retail Sales",
+"actual": "8.2%",
+"consensus": "",
+"previous": "7.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Adjusted Current Account",
+"actual": "1.35T",
+"consensus": "1.79T",
+"previous": "1.66T"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Bank Lending",
+"actual": "6.2%",
+"consensus": "5.6%",
+"previous": "6.4%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Current Account n.s.a.",
+"actual": "1.660T",
+"consensus": "1.995T",
+"previous": "2.103T"
+},
+{
+"gmt": "20:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "5.2%",
+"consensus": "",
+"previous": "6.1%"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "NAB Business Confidence",
+"actual": "5",
+"consensus": "",
+"previous": "-4"
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "NAB Business Survey",
+"actual": "1",
+"consensus": "",
+"previous": "0"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "0.5%",
+"consensus": "0.8%",
+"previous": "1.7%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "CPI",
+"actual": "-0.3%",
+"consensus": "0.2%",
+"previous": "0.2%"
+},
+{
+"gmt": "21:30",
+"country": "China",
+"eventName": "PPI",
+"actual": "-2.1%",
+"consensus": "-2.0%",
+"previous": "-2.1%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "30-Year JGB Auction",
+"actual": "0.643%",
+"consensus": "",
+"previous": "0.638%"
+}
+]

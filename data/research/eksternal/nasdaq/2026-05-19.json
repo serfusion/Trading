@@ -1,0 +1,290 @@
+[
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Capacity Utilization",
+"actual": "-1.2%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Industrial Production",
+"actual": "-0.4%",
+"consensus": "-0.5%",
+"previous": "-2.0%"
+},
+{
+"gmt": "00:30",
+"country": "Japan",
+"eventName": "Tertiary Industry Activity Index",
+"actual": "16.50",
+"consensus": "-0.40",
+"previous": "-1.10"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings ex Bonus",
+"actual": "3.4%",
+"consensus": "3.4%",
+"previous": "3.6%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Average Earnings Index +Bonus",
+"actual": "4.1%",
+"consensus": "3.8%",
+"previous": "3.9%"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Claimant Count Change",
+"actual": "26.5K",
+"consensus": "23.1K",
+"previous": "4.9K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Employment Change 3M/3M",
+"actual": "148K",
+"consensus": "107K",
+"previous": "25K"
+},
+{
+"gmt": "02:00",
+"country": "United Kingdom",
+"eventName": "Unemployment Rate",
+"actual": "5.0%",
+"consensus": "4.9%",
+"previous": "4.9%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish Trade Balance",
+"actual": "-4.40B",
+"consensus": "",
+"previous": "-3.30B"
+},
+{
+"gmt": "04:10",
+"country": "United Kingdom",
+"eventName": "BoE Breeden Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "04:30",
+"country": "United Kingdom",
+"eventName": "Labour Productivity",
+"actual": "-0.5%",
+"consensus": "",
+"previous": "-0.5%"
+},
+{
+"gmt": "04:30",
+"country": "Hong Kong",
+"eventName": "Unemployment Rate",
+"actual": "3.7%",
+"consensus": "",
+"previous": "3.7%"
+},
+{
+"gmt": "05:00",
+"country": "Euro Zone",
+"eventName": "Trade Balance",
+"actual": "7.8B",
+"consensus": "5.4B",
+"previous": "11.1B"
+},
+{
+"gmt": "05:50",
+"country": "Germany",
+"eventName": "German 5-Year Bobl Auction",
+"actual": "2.850%",
+"consensus": "",
+"previous": "2.740%"
+},
+{
+"gmt": "08:00",
+"country": "United States",
+"eventName": "Fed Waller Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "Euro Zone",
+"eventName": "ECB's Lane Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:10",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:15",
+"country": "United States",
+"eventName": "ADP Employment Change Weekly",
+"actual": "42.25K",
+"consensus": "",
+"previous": "33.00K"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Building Permits",
+"actual": "10.3%",
+"consensus": "2.1%",
+"previous": "-7.8%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Common CPI",
+"actual": "2.5%",
+"consensus": "2.6%",
+"previous": "2.6%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "2.1%",
+"consensus": "",
+"previous": "2.5%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Core CPI",
+"actual": "0.2%",
+"consensus": "",
+"previous": "0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.7%",
+"previous": "0.9%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "CPI",
+"actual": "2.8%",
+"consensus": "3.1%",
+"previous": "2.4%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Median CPI",
+"actual": "2.1%",
+"consensus": "2.3%",
+"previous": "2.3%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "New Housing Price Index",
+"actual": "-0.4%",
+"consensus": "0.0%",
+"previous": "-0.2%"
+},
+{
+"gmt": "08:30",
+"country": "Canada",
+"eventName": "Trimmed CPI",
+"actual": "2.0%",
+"consensus": "2.2%",
+"previous": "2.2%"
+},
+{
+"gmt": "08:55",
+"country": "United States",
+"eventName": "Redbook",
+"actual": "8.1%",
+"consensus": "",
+"previous": "9.6%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Pending Home Sales",
+"actual": "1.4%",
+"consensus": "1.0%",
+"previous": "1.7%"
+},
+{
+"gmt": "10:00",
+"country": "United States",
+"eventName": "Pending Home Sales Index",
+"actual": "74.8",
+"consensus": "",
+"previous": "73.8"
+},
+{
+"gmt": "12:00",
+"country": "New Zealand",
+"eventName": "GlobalDairyTrade Price Index",
+"actual": "0.6%",
+"consensus": "",
+"previous": "1.5%"
+},
+{
+"gmt": "12:00",
+"country": "New Zealand",
+"eventName": "Milk Auctions",
+"actual": "4,198.0",
+"consensus": "",
+"previous": "4,127.0"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "API Weekly Crude Oil Stock",
+"actual": "-9.100M",
+"consensus": "-3.400M",
+"previous": "-2.188M"
+},
+{
+"gmt": "19:00",
+"country": "Japan",
+"eventName": "Reuters Tankan Index",
+"actual": "8",
+"consensus": "",
+"previous": "7"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "China Loan Prime Rate 5Y",
+"actual": "3.50%",
+"consensus": "3.50%",
+"previous": "3.50%"
+},
+{
+"gmt": "21:00",
+"country": "China",
+"eventName": "PBoC Loan Prime Rate",
+"actual": "3.00%",
+"consensus": "3.00%",
+"previous": "3.00%"
+}
+]

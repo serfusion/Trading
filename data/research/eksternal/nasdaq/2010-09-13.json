@@ -1,0 +1,34 @@
+[
+{
+"gmt": "03:15",
+"country": "Switzerland",
+"eventName": "PPI",
+"actual": "0.1%",
+"consensus": "0.3%",
+"previous": "-0.5%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "Federal Budget Balance",
+"actual": "-90.5B",
+"consensus": "-109.0B",
+"previous": "-165.0B"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "Nationwide Consumer Confidence",
+"actual": "61",
+"consensus": "59",
+"previous": "56"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "NAB Business Confidence",
+"actual": "11",
+"consensus": "",
+"previous": "2"
+}
+]

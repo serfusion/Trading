@@ -1,0 +1,338 @@
+[
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "Core CPI",
+"actual": "1.90%",
+"consensus": "2.10%",
+"previous": "2.10%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "0.00%",
+"consensus": "",
+"previous": "-0.30%"
+},
+{
+"gmt": "01:00",
+"country": "Singapore",
+"eventName": "CPI",
+"actual": "1.6%",
+"consensus": "1.8%",
+"previous": "1.4%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Business Investment",
+"actual": "1.9%",
+"consensus": "1.2%",
+"previous": "1.8%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Business Investment",
+"actual": "5.8%",
+"consensus": "4.5%",
+"previous": "1.4%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "Current Account",
+"actual": "-18.1B",
+"consensus": "-22.9B",
+"previous": "-24.0B"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "GDP",
+"actual": "0.0%",
+"consensus": "0.1%",
+"previous": "0.4%"
+},
+{
+"gmt": "03:00",
+"country": "United Kingdom",
+"eventName": "GDP",
+"actual": "0.9%",
+"consensus": "1.0%",
+"previous": "0.7%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "0.9%",
+"consensus": "0.5%",
+"previous": "0.6%"
+},
+{
+"gmt": "03:00",
+"country": "Germany",
+"eventName": "German Import Price Index",
+"actual": "0.6%",
+"consensus": "",
+"previous": "-0.8%"
+},
+{
+"gmt": "04:00",
+"country": "Switzerland",
+"eventName": "M3 Money Supply",
+"actual": "1,155.9B",
+"consensus": "",
+"previous": "1,148.4B"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "3.3%",
+"consensus": "3.4%",
+"previous": "3.1%"
+},
+{
+"gmt": "04:00",
+"country": "Spain",
+"eventName": "Spanish GDP",
+"actual": "0.8%",
+"consensus": "0.8%",
+"previous": "0.8%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian Trade Balance Non-EU",
+"actual": "5.91B",
+"consensus": "",
+"previous": "5.81B"
+},
+{
+"gmt": "05:00",
+"country": "Switzerland",
+"eventName": "ZEW Expectations",
+"actual": "-20.0",
+"consensus": "",
+"previous": "-12.4"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Current Account (USD)",
+"actual": "-3.10B",
+"consensus": "-3.20B",
+"previous": "-5.88B"
+},
+{
+"gmt": "07:30",
+"country": "Brazil",
+"eventName": "Foreign direct investment (USD)",
+"actual": "7.00B",
+"consensus": "7.14B",
+"previous": "5.72B"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Chicago Fed National Activity",
+"actual": "-0.12",
+"consensus": "",
+"previous": "-0.50"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Core Durable Goods Orders",
+"actual": "-0.1%",
+"consensus": "0.3%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durable Goods Orders",
+"actual": "-1.1%",
+"consensus": "-0.3%",
+"previous": "0.8%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Durables Excluding Defense",
+"actual": "-0.3%",
+"consensus": "",
+"previous": "1.0%"
+},
+{
+"gmt": "09:30",
+"country": "United States",
+"eventName": "Goods Orders Non Defense Ex Air",
+"actual": "0.7%",
+"consensus": "",
+"previous": "-0.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "0.3%",
+"consensus": "0.1%",
+"previous": "0.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "0.6%",
+"consensus": "0.3%",
+"previous": "1.2%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "IPPI",
+"actual": "2.2%",
+"consensus": "",
+"previous": "1.1%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "-0.5%",
+"consensus": "0.4%",
+"previous": "4.0%"
+},
+{
+"gmt": "09:30",
+"country": "Canada",
+"eventName": "RMPI",
+"actual": "2.0%",
+"consensus": "",
+"previous": "-2.6%"
+},
+{
+"gmt": "09:31",
+"country": "Canada",
+"eventName": "GDP",
+"actual": "-0.1%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "1.493M",
+"consensus": "1.505M",
+"previous": "1.419M"
+},
+{
+"gmt": "10:30",
+"country": "United States",
+"eventName": "Building Permits",
+"actual": "5.2%",
+"consensus": "6.1%",
+"previous": "-0.4%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "3-Month Bill Auction",
+"actual": "4.240%",
+"consensus": "",
+"previous": "4.250%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "6-Month Bill Auction",
+"actual": "4.170%",
+"consensus": "",
+"previous": "4.160%"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "CB Consumer Confidence",
+"actual": "104.7",
+"consensus": "112.9",
+"previous": "112.8"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "664K",
+"consensus": "666K",
+"previous": "627K"
+},
+{
+"gmt": "11:00",
+"country": "United States",
+"eventName": "New Home Sales",
+"actual": "5.9%",
+"consensus": "",
+"previous": "-14.8%"
+},
+{
+"gmt": "12:37",
+"country": "United States",
+"eventName": "52-Week Bill Auction",
+"actual": "4.070%",
+"consensus": "",
+"previous": "4.190%"
+},
+{
+"gmt": "14:00",
+"country": "United States",
+"eventName": "2-Year Note Auction",
+"actual": "4.335%",
+"consensus": "",
+"previous": "4.274%"
+},
+{
+"gmt": "14:30",
+"country": "Canada",
+"eventName": "BOC Summary of Deliberations",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "17:00",
+"country": "South Korea",
+"eventName": "Consumer Confidence",
+"actual": "88.4",
+"consensus": "",
+"previous": "100.7"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Policy Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "20:30",
+"country": "Australia",
+"eventName": "RBA Meeting Minutes",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]

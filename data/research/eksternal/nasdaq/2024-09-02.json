@@ -1,0 +1,282 @@
+[
+{
+"gmt": "02:30",
+"country": "Switzerland",
+"eventName": "Retail Sales",
+"actual": "2.7%",
+"consensus": "-0.2%",
+"previous": "-2.6%"
+},
+{
+"gmt": "02:30",
+"country": "Australia",
+"eventName": "Commodity Prices",
+"actual": "-5.2%",
+"consensus": "",
+"previous": "-4.1%"
+},
+{
+"gmt": "03:30",
+"country": "Switzerland",
+"eventName": "procure.ch Manufacturing PMI",
+"actual": "49.0",
+"consensus": "43.7",
+"previous": "43.5"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "0.2%",
+"consensus": "0.2%",
+"previous": "0.3%"
+},
+{
+"gmt": "04:00",
+"country": "Italy",
+"eventName": "Italian GDP",
+"actual": "0.9%",
+"consensus": "0.9%",
+"previous": "0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian PPI",
+"actual": "1.3%",
+"consensus": "",
+"previous": "0.7%"
+},
+{
+"gmt": "05:00",
+"country": "Italy",
+"eventName": "Italian PPI",
+"actual": "-1.1%",
+"consensus": "",
+"previous": "-2.5%"
+},
+{
+"gmt": "05:00",
+"country": "South Africa",
+"eventName": "Manufacturing PMI",
+"actual": "43.6",
+"consensus": "",
+"previous": "52.4"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "-37.70%",
+"consensus": "",
+"previous": "-18.70%"
+},
+{
+"gmt": "06:00",
+"country": "Spain",
+"eventName": "Car Registration",
+"actual": "-6.50%",
+"consensus": "",
+"previous": "3.40%"
+},
+{
+"gmt": "07:25",
+"country": "Brazil",
+"eventName": "BCB Focus Market Readout",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "-4.90%",
+"consensus": "",
+"previous": "1.50%"
+},
+{
+"gmt": "08:00",
+"country": "South Africa",
+"eventName": "Total Vehicle Sales",
+"actual": "43.59K",
+"consensus": "",
+"previous": "44.33K"
+},
+{
+"gmt": "09:00",
+"country": "Germany",
+"eventName": "German Buba Vice President Buch Speaks",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 12-Month BTF Auction",
+"actual": "2.997%",
+"consensus": "",
+"previous": "2.999%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 3-Month BTF Auction",
+"actual": "3.462%",
+"consensus": "",
+"previous": "3.372%"
+},
+{
+"gmt": "09:00",
+"country": "France",
+"eventName": "French 6-Month BTF Auction",
+"actual": "3.308%",
+"consensus": "",
+"previous": "3.285%"
+},
+{
+"gmt": "09:00",
+"country": "Singapore",
+"eventName": "S&P Global Manufacturing PMI",
+"actual": "50.9",
+"consensus": "",
+"previous": "50.7"
+},
+{
+"gmt": "12:30",
+"country": "Italy",
+"eventName": "Italian Car Registration",
+"actual": "-13.4%",
+"consensus": "",
+"previous": "4.7%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Prices",
+"actual": "5.2%",
+"consensus": "2.8%",
+"previous": "-0.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Exports Volume",
+"actual": "-4.3%",
+"consensus": "",
+"previous": "6.3%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade - Imports Prices",
+"actual": "3.1%",
+"consensus": "0.5%",
+"previous": "-5.1%"
+},
+{
+"gmt": "18:45",
+"country": "New Zealand",
+"eventName": "Terms of Trade Index",
+"actual": "2.1%",
+"consensus": "2.6%",
+"previous": "5.1%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "2.0%",
+"consensus": "2.0%",
+"previous": "2.6%"
+},
+{
+"gmt": "19:00",
+"country": "South Korea",
+"eventName": "CPI",
+"actual": "0.4%",
+"consensus": "0.3%",
+"previous": "0.3%"
+},
+{
+"gmt": "19:01",
+"country": "United Kingdom",
+"eventName": "BRC Retail Sales Monitor",
+"actual": "0.8%",
+"consensus": "",
+"previous": "0.3%"
+},
+{
+"gmt": "19:50",
+"country": "Japan",
+"eventName": "Monetary Base",
+"actual": "0.6%",
+"consensus": "0.6%",
+"previous": "1.2%"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Current Account",
+"actual": "-10.7B",
+"consensus": "-4.5B",
+"previous": "-6.3B"
+},
+{
+"gmt": "21:30",
+"country": "Australia",
+"eventName": "Net Exports Contribution",
+"actual": "0.2%",
+"consensus": "0.6%",
+"previous": "-0.9%"
+},
+{
+"gmt": "23:35",
+"country": "Japan",
+"eventName": "10-Year JGB Auction",
+"actual": "0.915%",
+"consensus": "",
+"previous": "0.926%"
+},
+{
+"gmt": "All Day",
+"country": "United States",
+"eventName": "United States - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+},
+{
+"gmt": "All Day",
+"country": "Canada",
+"eventName": "Canada - Labor Day",
+"actual": "",
+"consensus": "",
+"previous": ""
+}
+]
