@@ -1,6 +1,6 @@
 """🧱 PPI DARI DASAR: perkiraan angka per KOMPONEN (data versi hari itu) → kejutan → arah emas (13 Okt 2026).
 
-python -m research.ppi_dasar            → docs/eksternal/hasil_ppi_dasar.txt
+python -m research.ppi_dasar [simpan]   → docs/eksternal/hasil_ppi_dasar.txt (+ ppi_wti.json["cpi_ppi"])
 
 Pasangan research/cpi_dasar.py untuk PPI final demand. Tanggal rilis = hari pertama bulan acuan muncul di ALFRED PPIFIS
 (rilis pertama; 08:30 New York), Mar 2014 – Sep 2026. Konsensus & aktual bulat: ForexFactory mentah, cadangan Nasdaq.
@@ -192,6 +192,34 @@ def tahap3(df: pd.DataFrame, L: list) -> None:
             for per, mm_ in (("LAMA", m.t0 < SPLIT), ("BARU", m.t0 >= SPLIT))))
 
 
+def cpi_ppi(df: pd.DataFrame, L: list) -> dict:
+    """Tebakan PPI-WTI (cloud/api/_ppi_wti.py) × kejutan INTI CPI bulan acuan sama yang terbit LEBIH DULU → arah lonjakan
+    menit 1 saat PPI: searah / CPI inti sesuai / berlawanan (cloud/api/ppi_wti.json["cpi_ppi"])."""
+    w = harian("DCOILWTICO")
+    wt = []
+    for r in df.itertuples():
+        h = w[w.index < r.R]
+        a, b = jendela13(h, r.ref), jendela13(h, r.ref - pd.DateOffset(months=1))
+        wt.append((a / b - 1) * 100 if a == a and b == b else np.nan)
+    x = df.assign(wti=wt)
+    x["tb"] = np.where(x.wti >= 5, -1.0, np.where(x.wti <= -5, 1.0, 0.0))
+    c = pd.read_pickle(SC / "cpi_dasar_tab.pkl")[["t0", "s_core", "ref"]].rename(columns={"t0": "t_cpi", "s_core": "cs_c"})
+    m = x.merge(c, on="ref", how="left")
+    m = m[(m.t_cpi < m.t0) & (m.th >= 2016) & (m.tb != 0) & m.arah.notna() & (m.arah != 0)]
+    rel = np.where(m.cs_c == 0, "sesuai", np.where(-m.cs_c == m.tb, "sepakat", "berlawanan"))
+    out = {"n": int(len(m))}
+    L.append(f"\n## TAHAP 4 — Tebakan PPI-WTI setelah CPI inti terbit ({len(m)} rilis bersinyal, lonjakan menit 1)")
+    for k in ("sepakat", "sesuai", "berlawanan"):
+        o = {}
+        for per, p in (("semua", m.th > 0), ("lama", m.t0 < SPLIT), ("baru", m.t0 >= SPLIT)):
+            z = m[p.to_numpy() & (rel == k)]
+            o[per] = round(float((z.tb == z.arah).mean() * 100), 1) if len(z) else None
+            o[f"n_{per}"] = int(len(z))
+        out[k] = o
+        L.append(f"   {k:10s} benar {o['semua']}% (n {o['n_semua']}) • lama {o['lama']}% (n {o['n_lama']}) • baru {o['baru']}% (n {o['n_baru']})")
+    return out
+
+
 def hari_ini(df: pd.DataFrame, L: list, R: str = "2026-10-15", kons: dict | None = None) -> None:
     kons = kons or {"h_f": 0.5, "c_f": 0.3}
     R_ = pd.Timestamp(R)
@@ -283,6 +311,13 @@ def main() -> None:
                 f"{per} n{int((mk & m).sum())} d1 {up(df.d1[mk & m])} d2 {up(df.d2[mk & m])} lonjakan {up(df.arah[mk & m])}"
                 for per, m in periode(df).items()))
     tahap3(df, L)
+    cp = cpi_ppi(df, L)
+    if "simpan" in sys.argv:
+        f = ROOT / "cloud" / "api" / "ppi_wti.json"
+        d = json.loads(f.read_text(encoding="utf-8"))
+        d["cpi_ppi"] = cp
+        f.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+        L.append("   → cloud/api/ppi_wti.json kunci cpi_ppi ditulis")
     hari_ini(df, L)
     df.to_pickle(SC / "ppi_dasar_hasil.pkl")
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")

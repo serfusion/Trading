@@ -473,6 +473,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   Emas mengikuti INTI sejak detik 2 (76%), bukan total. Mesin skenario Kalshi × hasil dolar per sel → 14 Okt: BUY t−1 tutup
   detik 2 (naik 61–76% BARU/2024+, +$0,5–1,3/oz; LAMA rugi), JANGAN lentur, leverage ≤ 1:200. Pakai mesin skenario (peluang pasar
   terkalibrasi) daripada naive Bayes banyak sumber lemah (menghitung ganda).
+- KOREKSI 13 Okt malam: mesin skenario GAGAL tutup kertas (bagian D: 52–59% vs aturan aplikasi IDX|K 76%, n 46) → TIDAK dipasang.
+  DIPASANG (izin "Pasang!"): `_kalshi.fetch` tanpa status=open (API memberi 0 event KXCPICORE/KXCPIYOY → pasar inti & y/y tak
+  pernah terbaca) + ulang 429 + cache 60 dtk; YOYc `_cpi_detik.yoyc/pakai_yoyc` (NAIK & YOYc −1 → ⚠️ lemah 55%, 💥 JANGAN /
+  tutup detik 2; `cpi_detik.json["yoyc"]` dari `python -m research.cpi_skenario simpan`, env CPI_YOYC); PPI setelah CPI
+  `_ppi_wti.pakai_cpi` (searah 74%, sesuai 82%, berlawanan 44% ⚠️; `ppi_wti.json["cpi_ppi"]` dari `python -m research.ppi_dasar
+  simpan`, env PPI_CPI; `research/ppi_wti.py` menjaga kunci ini). Lentur tetap untuk tebakan biasa (NAIK biasa lentur +$4,0/oz).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

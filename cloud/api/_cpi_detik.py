@@ -19,6 +19,14 @@ harian, cache baris Supabase "cpi_tren" 6 jam; tidak terbaca → dianggap lemah)
 62%; sejak 2024 detik 2 45%). Tebakan lain = angka aturan tersaring (uji["saring"]): detik 2 68% (2016–2026),
 sejak Okt 2021 81%, sejak 2024 95%. Patokan tampilan = DETIK 2 (pengguna 13 Okt: "yang penting detik 1–2").
 Env CPI_SARING=0 = tanpa pemisahan (angka lama).
+
+KONSISTENSI INTI / YOYc (13 Okt 2026, pengguna "Pasang! sesuaikan hitung konsensus, algoritma dll secara otomatis";
+research/cpi_skenario.py, docs/CPI_PPI_DASAR.md bagian 8): inti y/y TERSIRAT = indeks inti bulan lalu × (1 + konsensus inti
+m/m) ÷ indeks inti 12 bulan lalu (cpi_detik.json["core"], cadangan Nasdaq "Core CPI Index" sebelumnya). Bila konsensus inti
+y/y (Nasdaq) ≥ 0,03 poin LEBIH TINGGI dari tersirat, angka inti tak-dibulatkan para ekonom ada di batas atas → inti m/m
+jarang di bawah (3/33 rilis, dasar 36%, p 0,0005; LAMA & BARU). Tebakan emas NAIK dalam situasi itu tetap tampil tetapi ⚠️
+LEMAH dengan angkanya sendiri (cpi_detik.json["yoyc"]["naik"]: detik 2 55% n 11 vs biasa 71%; modal kecil lentur −$3,3/oz,
+tutup detik 2 −$0,1/oz → 💥 JANGAN lentur). Env CPI_YOYC=0 mematikan.
 """
 from __future__ import annotations
 
@@ -255,6 +263,45 @@ def pakai_saring(g: dict | None, alasan: str | None) -> dict | None:
     return g
 
 
+def yoyc_aktif() -> bool:
+    return os.environ.get("CPI_YOYC", "1") != "0" and bool((DATA.get("yoyc") or {}).get("naik"))
+
+
+def yoyc(t0: datetime, kons: dict, n: dict) -> dict | None:
+    """Inti y/y tersirat dari konsensus inti m/m vs konsensus inti y/y. arah −1 = konsensus y/y LEBIH TINGGI (≥ ambang)
+    → inti m/m jarang DI BAWAH; +1 kebalikannya (tanpa klaim teruji); 0 konsisten."""
+    core = DATA.get("core") or {}
+    p1 = core.get(_bulan(t0, 1)) or n.get("cidx_p")
+    p12 = core.get(_bulan(t0, 12))
+    cf, cyf = kons.get("core"), n.get("core_yy_f")
+    if not p1 or not p12 or cf is None or cyf is None or cf != cf or cyf != cyf:
+        return None
+    imp = (p1 * (1 + cf / 100) / p12 - 1) * 100
+    d = imp - cyf
+    a = (DATA.get("yoyc") or {}).get("ambang", 0.03)
+    return {"tersirat": round(imp, 2), "konsensus": cyf, "selisih": round(d, 3),
+            "arah": -1 if d <= -a else (1 if d >= a else 0)}
+
+
+def pakai_yoyc(g: dict | None, yc: dict | None) -> dict | None:
+    """Tebakan NAIK saat YOYc −1 → ⚠️ lemah dengan angka uji situasi itu (tutup kertas, research/cpi_skenario.py)."""
+    if not g or g.get("arah") != "naik" or not yc or yc.get("arah") != -1 or not yoyc_aktif():
+        return g
+    y = DATA["yoyc"]
+    b, bl, bb, bs = y["naik"]["semua"], y["naik"]["lama"], y["naik"]["baru"], (y.get("naik_biasa") or {}).get("semua") or {}
+    k, n = y.get("inti_bawah", [None, None])
+    alasan = (f"inti m/m jarang di bawah perkiraan (konsensus inti y/y {yc['konsensus']:g}% > tersirat "
+              f"{yc['tersirat']:.2f}%; dulu inti di bawah hanya {k} dari {n} rilis)").replace(".", ",")
+    usd = lambda v: f"{'+' if v >= 0 else '−'}${abs(v):.1f}".replace(".", ",")  # noqa: E731
+    return {**g, "status": "lemah", "lemah_jenis": "yoyc", "peringatan": alasan,
+            "persen": round(b["benar"]), "lama": round(bl["benar"]), "baru": round(bb["benar"]), "n": b["n"],
+            "teks_sampai": "detik 2", "per_detik": dict(b.get("per_detik") or {}),
+            "bukti": (f"⚠️ Tebakan NAIK lemah: {alasan} • tebakan NAIK seperti ini dulu benar detik 2 {_pct(b['benar'])} "
+                      f"({b['n']} rilis; sebelum Okt 2021 {_pct(bl['benar'])} / sejak {_pct(bb['benar'])}) vs biasa "
+                      f"{_pct(bs.get('benar'))} • BUY t−1 dtk: tutup detik 2 {usd(b['d2'])}/oz, lentur {usd(b['lentur'])}/oz "
+                      f"(terburuk {usd(b['terburuk_lentur'])}) • " + g["bukti"])}
+
+
 def _pct(x) -> str:
     return f"{x:.0f}%".replace(".", ",") if x is not None else "–"
 
@@ -362,6 +409,12 @@ def terbaru(t0: datetime, g: dict, n: dict, now: datetime, get=_kalshi.fetch) ->
     if yo and yo["arah"]:
         baris.append(f"🧮 y/y tersirat {yo['tersirat']:.2f}% vs perkiraan {yo['konsensus']:g}% → y/y condong DI "
                      f"{'ATAS' if yo['arah'] > 0 else 'BAWAH'}".replace(".", ","))
+    yc = g.get("yoyc_inti") or yoyc(t0, kons, n)
+    if yc and yc["arah"] < 0:
+        y = DATA.get("yoyc") or {}
+        k, nn = y.get("inti_bawah", ["?", "?"])
+        baris.append(f"🧮 inti y/y tersirat {yc['tersirat']:.2f}% vs perkiraan {yc['konsensus']:g}% → inti m/m jarang DI BAWAH "
+                     f"perkiraan (dulu {k} dari {nn} rilis)".replace(".", ","))
     # situasi hari ini vs tebakan (CPI di atas = +1)
     cpi = -1 if g.get("arah") == "naik" else 1
     lawan_y = bool(yo and yo["arah"] and yo["arah"] != cpi)
@@ -376,11 +429,13 @@ def terbaru(t0: datetime, g: dict, n: dict, now: datetime, get=_kalshi.fetch) ->
         if (x.get("d2") or {}).get("n", 0) >= 10:
             sel, nama = x["d2"], p
             break
-    out = {"waktu": now.isoformat(), "konsensus": kons, "kalshi": pasar, "yoy": yo,
+    out = {"waktu": now.isoformat(), "konsensus": kons, "kalshi": pasar, "yoy": yo, "yoyc": yc,
            "situasi": "sepakat" if not (lawan_y or lawan_i) else ("keduanya" if lawan_y and lawan_i else
                                                                  ("yoy" if lawan_y else "inti"))}
     ket = {"sepakat": "petunjuk lain sepakat", "yoy": "y/y tersirat berlawanan", "inti": "Kalshi inti berlawanan",
            "keduanya": "y/y tersirat & Kalshi inti berlawanan"}
+    if sel and g.get("lemah_jenis") == "yoyc":
+        sel = None                                     # situasi YOYc lebih khusus → angka utama sudah memakai situasi itu
     if sel:
         arah_e = "NAIK" if cpi < 0 else "TURUN"
         teks = (f"⚖️ Sekarang {ket[out['situasi']]} dengan tebakan → rilis dengan {ket[nama]} dulu emas {arah_e} detik 2 "
@@ -412,6 +467,10 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get
         g = tebak(t0, cs, n, get)
         tren_fn = tren or (lambda t0=t0: tren200(t0, store, now))
         g = pakai_saring(g, saring(t0, g, tren_fn, get))
+        yc = yoyc(t0, (g or {}).get("konsensus") or {}, n) if g else None
+        g = pakai_yoyc(g, yc)
+        if g:
+            g["yoyc_inti"] = yc
         if g and t0 - now <= timedelta(days=8):
             try:
                 g["terbaru"] = terbaru(t0, g, n, now, get)

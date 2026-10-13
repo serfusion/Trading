@@ -1,5 +1,5 @@
 # 🧱 PPI dari dasar (research/ppi_dasar.py)
-python -m research.ppi_dasar            → docs/eksternal/hasil_ppi_dasar.txt
+python -m research.ppi_dasar [simpan]   → docs/eksternal/hasil_ppi_dasar.txt (+ ppi_wti.json["cpi_ppi"])
 Pasangan research/cpi_dasar.py untuk PPI final demand. Tanggal rilis = hari pertama bulan acuan muncul di ALFRED PPIFIS
 (rilis pertama; 08:30 New York), Mar 2014 – Sep 2026. Konsensus & aktual bulat: ForexFactory mentah, cadangan Nasdaq.
 Angka sebenarnya = versi hari rilis (rekonstruksi diuji terhadap aktual kalender). Target emas = tick Exness
@@ -79,6 +79,12 @@ Angka sebenarnya = versi hari rilis (rekonstruksi diuji terhadap aktual kalender
    CPI inti di bawah → emas naik saat PPI: LAMA d2  50% (4/8) lonjakan  50% (4/8) | BARU d2  76% (13/17) lonjakan  76% (13/17)
    CPI inti sesuai   → emas naik saat PPI: LAMA d2  89% (8/9) lonjakan  78% (7/9) | BARU d2  50% (8/16) lonjakan  50% (8/16)
    CPI inti di atas  → emas naik saat PPI: LAMA d2  57% (4/7) lonjakan  43% (3/7) | BARU d2  62% (10/16) lonjakan  50% (8/16)
+
+## TAHAP 4 — Tebakan PPI-WTI setelah CPI inti terbit (52 rilis bersinyal, lonjakan menit 1)
+   sepakat    benar 73.7% (n 19) • lama 60.0% (n 5) • baru 78.6% (n 14)
+   sesuai     benar 82.4% (n 17) • lama 50.0% (n 6) • baru 100.0% (n 11)
+   berlawanan benar 43.8% (n 16) • lama 42.9% (n 7) • baru 44.4% (n 9)
+   → cloud/api/ppi_wti.json kunci cpi_ppi ditulis
 
 ## HARI INI — PPI 2026-10-15 (bulan acuan Sep 2026); konsensus {'h_f': 0.5, 'c_f': 0.3}
    energi grosir tgl 13 +15.9% • sebulan +14.8% • avtur +17.8% • margin BBM -0.112 $/gal • S&P bulan t -0.5% / t−1 +3.1% • PPI inti 1/3 bln 0.16/0.28 • makanan 3 bln -0.46

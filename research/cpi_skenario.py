@@ -1,6 +1,6 @@
 """🎯 CPI: konsistensi inti (YOYc) + mesin SKENARIO pasar × hasil dolar historis (13 Okt 2026 sore).
 
-python -m research.cpi_skenario [--live]     → docs/eksternal/hasil_cpi_skenario.txt
+python -m research.cpi_skenario [--live] [simpan]     → docs/eksternal/hasil_cpi_skenario.txt (+ cpi_detik.json["yoyc"])
 
 Lanjutan docs/CPI_PPI_DASAR.md setelah pengguna menolak jawaban "50:50". Tiga bagian:
  A. YOYc — inti y/y TERSIRAT dari konsensus inti m/m + indeks inti (versi hari sebelum rilis) vs konsensus inti y/y Nasdaq.
@@ -173,6 +173,192 @@ def bagian_c(df: pd.DataFrame, L: list, live: bool) -> None:
         f"{r.t0.date()} (total {int(r.sm):+d}, inti {int(r.sc):+d}) {r.buy2:+.2f}" for r in w.itertuples()))
 
 
+H_MID = (1, 2, 3, 5, 10, 15, 30, 60)
+
+
+def tick_tabel(df: pd.DataFrame) -> pd.DataFrame:
+    """Per rilis CPI 2016+: kejutan (total, inti), gerak harga tengah di beberapa detik, hasil BUY/SELL t−1 dtk."""
+    from .riset_dalam_data import ticks
+    rows = []
+    for r in df[df.th >= 2016].itertuples():
+        tk = ticks(r.t0)
+        if tk is None:
+            continue
+        b0, a0 = at(tk, r.t0, -1)
+        o = {"t0": r.t0, "th": r.th, "sm": r.s_mm, "sc": r.s_core}
+        for s in H_MID:
+            b, a = at(tk, r.t0, s)
+            o[f"mid{s}"] = (a + b) / 2 - (a0 + b0) / 2
+        for s in (2, 10):
+            b, a = at(tk, r.t0, s)
+            o[f"buy{s}"], o[f"sell{s}"] = b - a0, b0 - a
+        o["buyL"] = o["buy10"] if o["buy2"] > 0 else o["buy2"]
+        o["sellL"] = o["sell10"] if o["sell2"] > 0 else o["sell2"]
+        rows.append(o)
+    return pd.DataFrame(rows).dropna(subset=["buy2"])
+
+
+STRAT = ("buy2", "sell2", "buy10", "sell10", "buyL", "sellL")
+
+
+def sel_tabel(x: pd.DataFrame) -> dict:
+    """{"sm,sc": {n, rata per strategi, naik per detik}} + cadangan per inti saja ("*,sc")."""
+    out = {}
+    for sm in (-1, 0, 1, None):
+        for sc in (-1, 0, 1):
+            z = x[(x.sc == sc) & ((x.sm == sm) if sm is not None else True)]
+            if not len(z):
+                continue
+            k = f"{'*' if sm is None else int(sm)},{int(sc)}"
+            out[k] = {"n": int(len(z)), **{s: round(float(z[s].mean()), 3) for s in STRAT},
+                      "naik": {str(h): round(float((z[f"mid{h}"] > 0).mean()), 3) for h in H_MID}}
+    return out
+
+
+def harapan(cells: dict, ph: dict, pc: dict, min_n: int = 3) -> dict:
+    """Σ peluang skenario × hasil sel (sel n < min_n → sel inti saja). Sama persis dengan cloud/api/_cpi_skenario.py."""
+    ev = {s: 0.0 for s in STRAT}
+    naik = {str(h): 0.0 for h in H_MID}
+    for sm in (-1, 0, 1):
+        for sc in (-1, 0, 1):
+            w = ph[sm] * pc[sc]
+            c = cells.get(f"{sm},{sc}")
+            if not c or c["n"] < min_n:
+                c = cells.get(f"*,{sc}")
+            if not c:
+                continue
+            for s in STRAT:
+                ev[s] += w * c[s]
+            for h in naik:
+                naik[h] += w * c["naik"][h]
+    return {"ev": ev, "naik": naik}
+
+
+def keputusan(e: dict) -> dict:
+    """Arah = sisi dengan harapan tutup detik 2 lebih besar; keluar lentur hanya bila harapannya lebih besar dari detik 2."""
+    ev = e["ev"]
+    sisi = "buy" if ev["buy2"] >= ev["sell2"] else "sell"
+    keluar = "lentur" if ev[f"{sisi}L"] > ev[f"{sisi}2"] else "detik2"
+    return {"sisi": sisi, "keluar": keluar, "ev": ev[f"{sisi}{'L' if keluar == 'lentur' else '2'}"],
+            "naik2": e["naik"]["2"]}
+
+
+def peluang_baris(r) -> tuple[dict, dict] | None:
+    if r.ku_h != r.ku_h or r.ku_c != r.ku_c:
+        return None
+    ph = {1: r.ku_h, -1: r.kd_h, 0: max(0.0, 1 - r.ku_h - r.kd_h)}
+    pc = {1: r.ku_c, -1: r.kd_c, 0: max(0.0, 1 - r.ku_c - r.kd_c)}
+    t = sum(ph.values()), sum(pc.values())
+    return {k: v / t[0] for k, v in ph.items()}, {k: v / t[1] for k, v in pc.items()}
+
+
+def uji_maju(df: pd.DataFrame, x: pd.DataFrame, L: list) -> dict:
+    """TUTUP KERTAS: tiap rilis 2022–2026 ber-Kalshi, sel & frekuensi YOYc hanya dari rilis SEBELUMNYA."""
+    L.append("\n## D. UJI TUTUP KERTAS mesin skenario (rilis 2022–2026 dengan pasar Kalshi total & inti 1 jam sebelum tutup)")
+    rows = []
+    for r in df[df.ku_h.notna() & df.ku_c.notna()].sort_values("t0").itertuples():
+        p = peluang_baris(r)
+        hasil = x[x.t0 == r.t0]
+        if p is None or not len(hasil):
+            continue
+        h = hasil.iloc[0]
+        lalu = x[x.t0 < r.t0]
+        o = {"t0": r.t0, "th": r.th, "mid2": h.mid2, "mid10": h.mid10, **{s: h[s] for s in STRAT}}
+        for nm, src in (("semua", lalu), ("baru", lalu[lalu.t0 >= SPLIT] if (lalu.t0 >= SPLIT).sum() >= 15 else lalu)):
+            cells = sel_tabel(src)
+            for var in ("kalshi", "yoyc"):
+                ph, pc = p
+                if var == "yoyc" and r.YOYc < 0:
+                    z = df[(df.t0 < r.t0) & (df.YOYc < 0)]
+                    if len(z) >= 10:
+                        fq = {v: float((z.s_core == v).mean()) for v in (-1, 0, 1)}
+                        pc = {v: 0.5 * pc[v] + 0.5 * fq[v] for v in (-1, 0, 1)}
+                k = keputusan(harapan(cells, ph, pc))
+                o[f"{nm}_{var}_sisi"], o[f"{nm}_{var}_keluar"], o[f"{nm}_{var}_p"] = k["sisi"], k["keluar"], k["naik2"]
+        o["app"] = "buy" if r._asdict().get("IDX_K", np.nan) == np.nan else None
+        o["idxk"] = getattr(r, "_70", None)
+        rows.append(o)
+    u = pd.DataFrame(rows)
+    if not len(u):
+        return {}
+    app = df.set_index("t0")["IDX|K"]
+    u["app_sisi"] = [("buy" if app.get(t, 0) < 0 else "sell") if app.get(t, 0) != 0 else None for t in u.t0]
+    hasil = {}
+    for kolom, nama in (("semua_kalshi", "skenario (sel semua tahun)"), ("baru_kalshi", "skenario (sel sejak Okt 2021)"),
+                        ("semua_yoyc", "skenario + YOYc (sel semua tahun)"), ("baru_yoyc", "skenario + YOYc (sel sejak Okt 2021)")):
+        sisi = u[f"{kolom}_sisi"]
+        benar = np.where(sisi == "buy", u.mid2 > 0, u.mid2 < 0)
+        ada = u.mid2 != 0
+        uang = np.where(u[f"{kolom}_keluar"] == "lentur", np.where(sisi == "buy", u.buyL, u.sellL),
+                        np.where(sisi == "buy", u.buy2, u.sell2))
+        uang2 = np.where(sisi == "buy", u.buy2, u.sell2)
+        L.append(f"   {nama:38s} arah detik 2 benar {pct(int(benar[ada].sum()), int(ada.sum()))} • tebak BUY {int((sisi == 'buy').sum())}"
+                 f" • $/oz (keluar pilihan mesin) rata {np.mean(uang):+.2f}, untung {pct(int((uang > 0).sum()), len(uang))} • "
+                 f"tutup detik 2 saja rata {np.mean(uang2):+.2f} • lentur dipilih {int((u[f'{kolom}_keluar'] == 'lentur').sum())}×")
+        hasil[kolom] = {"benar": round(float(benar[ada].mean() * 100), 1), "n": int(ada.sum()), "rata": round(float(np.mean(uang)), 2),
+                        "untung": round(float((uang > 0).mean() * 100), 1), "rata_d2": round(float(np.mean(uang2)), 2)}
+    m = u.app_sisi.notna()
+    ben = np.where(u.app_sisi[m] == "buy", u.mid2[m] > 0, u.mid2[m] < 0)
+    ua = np.where(u.app_sisi[m] == "buy", u.buy2[m], u.sell2[m])
+    L.append(f"   {'aturan aplikasi sekarang (IDX|K, tutup d2)':38s} arah detik 2 benar {pct(int(ben[(u.mid2[m] != 0).to_numpy()].sum()), int((u.mid2[m] != 0).sum()))}"
+             f" • $/oz rata {np.mean(ua):+.2f} (menebak {int(m.sum())} dari {len(u)} rilis)")
+    L.append(f"   {'selalu BUY tutup detik 2':38s} arah detik 2 benar {pct(int((u.mid2 > 0).sum()), int((u.mid2 != 0).sum()))} • $/oz rata "
+             f"{u.buy2.mean():+.2f} • lentur {u.buyL.mean():+.2f}")
+    hasil["app"] = {"benar": round(float(ben[(u.mid2[m] != 0).to_numpy()].mean() * 100), 1), "rata": round(float(np.mean(ua)), 2)}
+    hasil["selalu_buy"] = {"benar": round(float((u.mid2 > 0).sum() / (u.mid2 != 0).sum() * 100), 1), "rata": round(float(u.buy2.mean()), 2)}
+    for th, g in u.groupby("th"):
+        sisi = g.baru_yoyc_sisi
+        b = np.where(sisi == "buy", g.mid2 > 0, g.mid2 < 0)
+        L.append(f"     {th}: skenario+YOYc benar {int(b.sum())}/{len(g)} • $/oz {np.where(sisi == 'buy', g.buy2, g.sell2).mean():+.2f} "
+                 f"| selalu BUY {int((g.mid2 > 0).sum())}/{len(g)} {g.buy2.mean():+.2f}")
+    hasil["n"] = int(len(u))
+    return hasil
+
+
+def yoyc_json(df: pd.DataFrame, x: pd.DataFrame, L: list) -> dict:
+    """Angka untuk cloud (cpi_detik.json["yoyc"]): tebakan NAIK aturan aplikasi (IDX|K tutup kertas) saat YOYc −1 vs biasa —
+    arah detik 1…60, $/oz tutup detik 2 vs lentur, LAMA/BARU; + kejutan inti saat YOYc −1."""
+    from . import cpi_detik as C
+    df = df.copy()
+    df["tb"] = C.tetap(df, "IDX|K").to_numpy()           # +1 = emas NAIK
+    m = df.merge(x, on="t0", how="inner", suffixes=("", "_x"))
+
+    def blok(mask) -> dict:
+        z = m[mask & (m.tb > 0)]
+        ok = z.mid2 != 0
+        o = {"n": int(len(z)), "benar": round(float((z.mid2[ok] > 0).mean() * 100), 1) if ok.any() else None,
+             "d2": round(float(z.buy2.mean()), 2), "lentur": round(float(z.buyL.mean()), 2),
+             "d10": round(float(z.buy10.mean()), 2), "terburuk_lentur": round(float(z.buyL.min()), 2) if len(z) else None,
+             "per_detik": {str(h): round(float((z[f"mid{h}"][z[f"mid{h}"] != 0] > 0).mean() * 100), 1)
+                           for h in H_MID if (z[f"mid{h}"] != 0).any()}}
+        return o
+    y = m.YOYc < 0
+    out = {"ambang": 0.03, "dibuat": pd.Timestamp.now(tz="UTC").isoformat(timespec="minutes"),
+           "aturan": "research/cpi_skenario.py (docs/CPI_PPI_DASAR.md bagian 8)",
+           "inti_bawah": [int((df.s_core[df.YOYc < 0] < 0).sum()), int((df.YOYc < 0).sum())],
+           "inti_atas": int((df.s_core[df.YOYc < 0] > 0).sum()),
+           "dasar_bawah": round(float((df.s_core < 0).mean() * 100), 1),
+           "p_binom": float(binomtest(int((df.s_core[df.YOYc < 0] < 0).sum()), int((df.YOYc < 0).sum()),
+                                      float((df.s_core < 0).mean()), alternative="less").pvalue),
+           "naik": {"semua": blok(y), "lama": blok(y & (m.t0 < SPLIT)), "baru": blok(y & (m.t0 >= SPLIT))},
+           "naik_biasa": {"semua": blok(~y), "lama": blok(~y & (m.t0 < SPLIT)), "baru": blok(~y & (m.t0 >= SPLIT))}}
+    L.append("\n## E. Untuk cloud: tebakan NAIK aplikasi saat YOYc −1 vs biasa (tutup kertas, $/oz BUY t−1 dtk)")
+    for k in ("naik", "naik_biasa"):
+        for per in ("semua", "lama", "baru"):
+            b = out[k][per]
+            L.append(f"   {k:10s} {per:5s} n{b['n']:3d} benar detik 2 {b['benar']}% • tutup detik 2 {b['d2']:+.2f} • lentur "
+                     f"{b['lentur']:+.2f} • detik 10 {b['d10']:+.2f}")
+    return out
+
+
+def simpan(yo: dict) -> None:
+    """Gabung ke cloud/api/cpi_detik.json kunci "yoyc" (research/cpi_detik.simpan_json menjaga kunci ini)."""
+    f = ROOT / "cloud" / "api" / "cpi_detik.json"
+    d = json.loads(f.read_text(encoding="utf-8"))
+    d["yoyc"] = yo
+    f.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     L = ["# 🎯 CPI: konsistensi inti + mesin skenario (research/cpi_skenario.py)", __doc__.split("\n\n")[1]]
     df = pd.read_pickle(SC / "cpi_dasar_hasil.pkl")
@@ -180,6 +366,12 @@ def main() -> None:
     bagian_a(df, L)
     bagian_b(df, L)
     bagian_c(df, L, "--live" in sys.argv)
+    x = tick_tabel(df)
+    uji = uji_maju(df, x, L)
+    yo = yoyc_json(df, x, L)
+    if "simpan" in sys.argv:
+        simpan(yo)
+        L.append("\n→ cloud/api/cpi_detik.json kunci yoyc ditulis")
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L))
 

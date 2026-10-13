@@ -8,6 +8,11 @@ lonjakan menit 1 69% (lama 66% / sejak Okt 2021 72%), detik 1 48% (≈ acak), de
 
 Data live berlapis: FRED API (env FRED_API_KEY) → FRED CSV publik (_perang.fred_rows) → ETF USO Twelve Data (cadangan, ≈ WTI).
 Cache baris Supabase 'ppi_wti' 6 jam. Env PPI_WTI=0 mematikan (kartu PPI kembali tanpa tebakan). INFORMASI saja, tanpa order.
+
+🔗 SETELAH CPI (13 Okt 2026, izin pengguna "Pasang! … otomatis jika sudah keluar"; research/ppi_dasar.py tahap 4 →
+ppi_wti.json["cpi_ppi"]): bila CPI bulan acuan sama sudah terbit ≤ 4 hari sebelum PPI (kartu "Core CPI m/m" rilis dengan
+Act & perkiraan), tebakan WTI diperbarui otomatis: kejutan inti CPI SEARAH tebakan (inti di atas ↔ emas TURUN) 74% (lama 60 /
+baru 79), CPI inti SESUAI 82% (lama 50 / baru 100), BERLAWANAN 44% (lama 43 / baru 44) → ⚠️ lemah. Env PPI_CPI=0 mematikan.
 """
 from __future__ import annotations
 
@@ -122,6 +127,47 @@ def tebak(t0: datetime, obs: list[tuple[date, float]], src: str = "FRED") -> dic
                       f"(≈ acak), detik 2 {teks_d('2')}, detik 5 {teks_d('5')}").replace(".", ",")}
 
 
+def _num(v) -> float | None:
+    try:
+        return float(str(v).replace("%", "").replace(",", ".").strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def cpi_inti(persiapan: dict, t0: datetime) -> dict | None:
+    """Kejutan inti CPI yang terbit ≤ 4 hari sebelum PPI t0 dari kartu kalender (Act & perkiraan)."""
+    for c in persiapan.get("berita") or []:
+        if not isinstance(c, dict) or c.get("title") != "Core CPI m/m" or not c.get("released") or not c.get("time"):
+            continue
+        t = datetime.fromisoformat(c["time"])
+        a, f = _num(c.get("actual")), _num(c.get("forecast"))
+        if t0 - timedelta(days=4) <= t < t0 and a is not None and f is not None:
+            return {"actual": a, "forecast": f, "s": (a > f) - (a < f), "time": c["time"]}
+    return None
+
+
+def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
+    cp = DATA.get("cpi_ppi") or {}
+    if not g or not ci or not cp or os.environ.get("PPI_CPI", "1") == "0":
+        return g
+    emas_cpi = -ci["s"]                                       # inti CPI di atas → emas turun
+    tb = 1 if g["arah"] == "naik" else -1
+    rel = "sesuai" if ci["s"] == 0 else ("sepakat" if emas_cpi == tb else "berlawanan")
+    x = cp.get(rel) or {}
+    if x.get("semua") is None:
+        return g
+    ket = {"sepakat": "searah tebakan", "sesuai": "sesuai perkiraan", "berlawanan": "BERLAWANAN dengan tebakan"}[rel]
+    arah_c = "DI ATAS" if ci["s"] > 0 else ("DI BAWAH" if ci["s"] < 0 else "SESUAI")
+    awal = (f"🔗 CPI inti {ci['actual']:g}% vs perkiraan {ci['forecast']:g}% ({arah_c}) → {ket} • tebakan PPI-WTI dalam "
+            f"situasi ini dulu benar {x['semua']:.0f}% ({x['n_semua']} rilis; lama {x['lama']:.0f}% / sejak Okt 2021 "
+            f"{x['baru']:.0f}%)").replace(".", ",")
+    out = {**g, "persen": round(x["semua"]), "lama": round(x["lama"]), "baru": round(x["baru"]), "n": x["n_semua"],
+           "cpi_inti": {**ci, "hubungan": rel}, "bukti": awal + " • " + g["bukti"]}
+    if rel == "berlawanan":
+        out.update(status="lemah", peringatan="kejutan inti CPI kemarin berlawanan dengan tebakan minyak")
+    return out
+
+
 def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env=None) -> None:
     """c["ppi_wti"] = tebakan (atau None) di setiap kartu PPI yang belum rilis (≤ 31 hari)."""
     if not isinstance(persiapan, dict) or not aktif():
@@ -134,4 +180,6 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env
         return
     obs, src = minyak(store, now, opener, env)
     for c in kartu:
-        c["ppi_wti"] = tebak(datetime.fromisoformat(c["time"]), obs, src) if obs else None
+        t0 = datetime.fromisoformat(c["time"])
+        g = tebak(t0, obs, src) if obs else None
+        c["ppi_wti"] = pakai_cpi(g, cpi_inti(persiapan, t0))
