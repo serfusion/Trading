@@ -326,3 +326,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   menit 1 + arah detik (cek: 999 rilis = lonjakan60 100% sama). `research/riset_dalam.py`: 66 aturan pra-registrasi, 10 kelompok.
 - `research/riset_dalam_cek.py` verifikasi adversarial: 2 lolos per kelompok (GDP P, UoM final S&P) terbantah (p global
   0,17/0,14, rapuh) → 0 layak pasang. Uji maju: JOLTS ← NFP bulan acuan. Belum: Dukascopy untuk rilis tambahan, Kalshi GDP/Fed.
+- 13 Okt (PPI "kurang puas, metode lain"): `research/riset_ppi3.py` (target Exness detik 1–10, plafon per komponen, 10 petunjuk
+  baru + model logistik, keluarga 22) & `riset_ppi3_cek.py` (bootstrap, Bayes, mekanisme, plasebo, feed, rolling, holdout,
+  bersamaan Retail, modal kecil, lonjakan detik 1) → 0 lolos baru; WTI nyata tetapi bergantung rezim; PPI aman ≤ 1:400.

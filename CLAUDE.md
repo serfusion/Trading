@@ -440,6 +440,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Permintaan pengguna: lanjut sesuai urutan rilis PPI → FOMC → PCE → JOLTS → NFP → dll, lalu ETH & BTC. Riset sesi 11 Okt
   (branch awesome-mendel) DIGABUNG; `research/riset_inflasi.py` dijalankan: PPI-WTI lolos semua kriteria + verifikasi
   (`research/ppi_wti_cek.py`); PCE 0 lolos. DIPASANG cloud (`_ppi_wti.py`, `ppi_wti.json`, env PPI_WTI, cache `ppi_wti`).
+- PPI putaran 3 (13 Okt, `research/riset_ppi3.py` + `riset_ppi3_cek.py`, PPI_WTI bagian 🔬): detik 1 PPI acak walau angka diketahui
+  (plafon 51–54%); 10 petunjuk baru + 12 lama → 0 lolos; WTI ketat 61–63% (BARU 69%), plasebo 52%, gagal 2018–21, bersamaan
+  Retail 81% (n 16); lonjakan aman ≤ 1:400. Usulan angka tampilan 63% + ⚖️ bersamaan Retail menunggu izin.
 - `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
 - Sisa workflow 11 Okt SELESAI 13 Okt (`docs/RISET_DALAM.md`, `research/riset_dalam_data.py` jadwal SEMUA dampak FF mentah +
   tick Exness `tambah_<bln>.parquet`, `riset_dalam.py` 66 aturan, `riset_dalam_cek.py` verifikasi): lolos per kelompok GDP P &

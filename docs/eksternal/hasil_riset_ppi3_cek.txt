@@ -1,0 +1,91 @@
+# 🔎 PPI putaran 3 — uji validitas lain (research/riset_ppi3_cek.py)
+python -m research.riset_ppi3_cek     → docs/eksternal/hasil_riset_ppi3_cek.txt
+
+## 1. Mentah (tebakan emas = −petunjuk), 2016–2026 | LAMA | BARU
+   WTI     lonjakan 63% (86) [57% (44) | 69% (42)] • d1 43% (86) [39% (44) | 48% (42)] • d2 52% (86) [45% (44) | 60% (42)] • d3 56% (86) [50% (44) | 62% (42)] • d5 62% (86) [52% (44) | 71% (42)] • d10 60% (86) [55% (44) | 67% (42)]
+   E_KOMB  lonjakan 65% (79) [57% (37) | 71% (42)] • d1 47% (79) [41% (37) | 52% (42)] • d2 53% (79) [46% (37) | 60% (42)] • d3 54% (79) [49% (37) | 60% (42)] • d5 61% (79) [49% (37) | 71% (42)] • d10 65% (79) [57% (37) | 71% (42)]
+   BENSIN  lonjakan 60% (78) [54% (37) | 66% (41)] • d1 47% (78) [46% (37) | 49% (41)] • d2 54% (78) [51% (37) | 56% (41)] • d3 55% (78) [54% (37) | 56% (41)] • d5 60% (78) [54% (37) | 66% (41)] • d10 62% (78) [57% (37) | 66% (41)]
+   CPIX    lonjakan 57% (61) [40% (15) | 63% (46)] • d1 48% (60) [33% (15) | 53% (45)] • d2 46% (61) [27% (15) | 52% (46)] • d3 51% (61) [33% (15) | 57% (46)] • d5 56% (61) [40% (15) | 61% (46)] • d10 52% (61) [47% (15) | 54% (46)]
+   CPIC    lonjakan 57% (42) [40% (10) | 62% (32)] • d1 48% (42) [40% (10) | 50% (32)] • d2 50% (42) [40% (10) | 53% (32)] • d3 57% (42) [50% (10) | 59% (32)] • d5 55% (42) [40% (10) | 59% (32)] • d10 52% (42) [40% (10) | 56% (32)]
+   CPIH    lonjakan 59% (37) [56% (9) | 61% (28)] • d1 56% (36) [44% (9) | 59% (27)] • d2 54% (37) [44% (9) | 57% (28)] • d3 57% (37) [44% (9) | 61% (28)] • d5 59% (37) [44% (9) | 64% (28)] • d10 57% (37) [56% (9) | 57% (28)]
+   GABUNG  lonjakan 61% (94) [51% (43) | 69% (51)] • d1 41% (93) [37% (43) | 44% (50)] • d2 50% (94) [42% (43) | 57% (51)] • d3 54% (94) [47% (43) | 61% (51)] • d5 56% (94) [44% (43) | 67% (51)] • d10 55% (94) [44% (43) | 65% (51)]
+
+## 2. Bootstrap blok TAHUN (2.000×, lonjakan) — rentang 90% | 3. Bayes P(akurasi > 50%) / P(> 60%)
+   WTI     63% (86) → 90%: 55–70% | Bayes semua P>50% 0.99 P>60% 0.69 • BARU P>50% 0.99 P>60% 0.88
+   E_KOMB  65% (79) → 90%: 54–74% | Bayes semua P>50% 1.00 P>60% 0.79 • BARU P>50% 1.00 P>60% 0.93
+   BENSIN  60% (78) → 90%: 52–67% | Bayes semua P>50% 0.96 P>60% 0.51 • BARU P>50% 0.98 P>60% 0.76
+   CPIX    57% (61) → 90%: 47–68% | Bayes semua P>50% 0.87 P>60% 0.33 • BARU P>50% 0.96 P>60% 0.65
+   CPIC    57% (42) → 90%: 44–69% | Bayes semua P>50% 0.82 P>60% 0.34 • BARU P>50% 0.92 P>60% 0.59
+   CPIH    59% (37) → 90%: 43–75% | Bayes semua P>50% 0.87 P>60% 0.46 • BARU P>50% 0.87 P>60% 0.51
+   GABUNG  61% (94) → 90%: 52–68% | Bayes semua P>50% 0.98 P>60% 0.54 • BARU P>50% 1.00 P>60% 0.89
+
+## 4. Mekanisme: harapan = a·q + (1−a)(1−q), a = tebak ANGKA benar, q = PLAFON (emas ikut kejutan)
+   WTI     via headline: angka 64% × plafon 80% → harapan 59% vs teramati 67% (n 70)
+   WTI     via core    : angka 56% × plafon 86% → harapan 54% vs teramati 61% (n 70)
+   E_KOMB  via headline: angka 68% × plafon 79% → harapan 60% vs teramati 69% (n 62)
+   E_KOMB  via core    : angka 57% × plafon 85% → harapan 55% vs teramati 63% (n 65)
+   BENSIN  via headline: angka 60% × plafon 82% → harapan 56% vs teramati 65% (n 62)
+   BENSIN  via core    : angka 51% × plafon 85% → harapan 51% vs teramati 62% (n 61)
+   CPIX    via headline: angka 65% × plafon 81% → harapan 59% vs teramati 57% (n 54)
+   CPIX    via core    : angka 69% × plafon 81% → harapan 62% vs teramati 67% (n 48)
+   CPIC    via headline: angka 67% × plafon 86% → harapan 62% vs teramati 58% (n 36)
+   CPIC    via core    : angka 74% × plafon 86% → harapan 67% vs teramati 66% (n 35)
+   CPIH    via headline: angka 72% × plafon 81% → harapan 64% vs teramati 59% (n 32)
+   CPIH    via core    : angka 72% × plafon 81% → harapan 64% vs teramati 66% (n 32)
+   GABUNG  via headline: angka 64% × plafon 81% → harapan 58% vs teramati 65% (n 77)
+   GABUNG  via core    : angka 59% × plafon 86% → harapan 57% vs teramati 59% (n 74)
+
+## 5. Plasebo: petunjuk PPI bulan itu dipakai pada rilis 08:30 LAIN di bulan yang sama (lonjakan)
+   WTI     PPI 63% (86) vs rilis lain 52% (650) (CPI 52% (82) • RETAIL 54% (65) • CLAIMS 52% (273) • NFP 58% (86) • GDP 39% (59))
+   E_KOMB  PPI 65% (79) vs rilis lain 52% (604) (CPI 53% (78) • RETAIL 55% (56) • CLAIMS 54% (258) • NFP 57% (80) • GDP 33% (54))
+   BENSIN  PPI 60% (78) vs rilis lain 53% (596) (CPI 53% (78) • RETAIL 51% (55) • CLAIMS 57% (246) • NFP 59% (80) • GDP 35% (54))
+
+## 6. Feed: target Exness vs Dukascopy (rilis yang punya keduanya, lonjakan)
+   WTI     Exness 68% (72) • Dukascopy 67% (72)
+   E_KOMB  Exness 68% (66) • Dukascopy 67% (66)
+   BENSIN  Exness 62% (66) • Dukascopy 61% (66)
+   CPIX    Exness 52% (54) • Dukascopy 52% (54)
+   CPIC    Exness 54% (37) • Dukascopy 54% (37)
+   CPIH    Exness 56% (32) • Dukascopy 56% (32)
+   GABUNG  Exness 67% (78) • Dukascopy 65% (78)
+
+## 7. Rolling 3 tahun (lonjakan) & HOLDOUT 2024–2026
+   WTI     2016–18 65% (26) • 2017–19 52% (23) • 2018–20 45% (20) • 2019–21 42% (19) • 2020–22 52% (21) • 2021–23 65% (26) • 2022–24 75% (28) • 2023–25 75% (24) • 2024–26 68% (22) | holdout 2024+ 68% (22)
+   E_KOMB  2016–18 70% (23) • 2017–19 58% (19) • 2018–20 47% (15) • 2019–21 33% (15) • 2020–22 47% (19) • 2021–23 65% (23) • 2022–24 81% (27) • 2023–25 82% (22) • 2024–26 70% (23) | holdout 2024+ 70% (23)
+   BENSIN  2016–18 64% (22) • 2017–19 57% (23) • 2018–20 50% (18) • 2019–21 38% (16) • 2020–22 47% (19) • 2021–23 61% (23) • 2022–24 70% (30) • 2023–25 71% (21) • 2024–26 67% (21) | holdout 2024+ 67% (21)
+   CPIX    2016–18 67% (3) • 2017–19 44% (9) • 2018–20 50% (10) • 2019–21 36% (14) • 2020–22 56% (18) • 2021–23 57% (28) • 2022–24 58% (31) • 2023–25 57% (28) • 2024–26 61% (23) | holdout 2024+ 61% (23)
+   CPIC    2016–18 100% (2) • 2017–19 60% (5) • 2018–20 67% (6) • 2019–21 25% (8) • 2020–22 43% (14) • 2021–23 44% (18) • 2022–24 57% (21) • 2023–25 67% (18) • 2024–26 67% (18) | holdout 2024+ 67% (18)
+   CPIH    2016–18 100% (1) • 2017–19 67% (6) • 2018–20 71% (7) • 2019–21 40% (10) • 2020–22 46% (13) • 2021–23 53% (17) • 2022–24 58% (19) • 2023–25 62% (16) • 2024–26 62% (13) | holdout 2024+ 62% (13)
+   GABUNG  2016–18 64% (25) • 2017–19 50% (24) • 2018–20 43% (21) • 2019–21 35% (20) • 2020–22 47% (19) • 2021–23 63% (27) • 2022–24 74% (31) • 2023–25 75% (32) • 2024–26 67% (30) | holdout 2024+ 67% (30)
+
+## 8. Bersamaan dengan Retail Sales vs PPI sendiri (lonjakan / detik 2 / detik 5)
+   WTI     bersama Retail: 81% (16) / 62% (16) / 62% (16) • sendiri: 59% (70) / 50% (70) / 61% (70)
+   E_KOMB  bersama Retail: 82% (17) / 59% (17) / 65% (17) • sendiri: 60% (62) / 52% (62) / 60% (62)
+   BENSIN  bersama Retail: 80% (15) / 60% (15) / 67% (15) • sendiri: 56% (63) / 52% (63) / 59% (63)
+   CPIX    bersama Retail: 42% (12) / 33% (12) / 42% (12) • sendiri: 61% (49) / 49% (49) / 59% (49)
+   CPIC    bersama Retail: 50% (8) / 38% (8) / 50% (8) • sendiri: 59% (34) / 53% (34) / 56% (34)
+   CPIH    bersama Retail: 75% (4) / 50% (4) / 75% (4) • sendiri: 58% (33) / 55% (33) / 58% (33)
+   GABUNG  bersama Retail: 74% (19) / 53% (19) / 58% (19) • sendiri: 57% (75) / 49% (75) / 56% (75)
+
+## 9. Modal kecil (t−1 dtk, lot penuh, lentur, tick Exness, per $100; acak = arah acak 2.000×)
+   WTI     1:200 LAMA: n 44 untung  25% rata $  -1.9 habis 0 | acak $  -6.1 (p 0.09)
+   WTI     1:200 BARU: n 42 untung  52% rata $  +7.4 habis 0 | acak $  +0.5 (p 0.02)
+   WTI     1:500 LAMA: n 44 untung  25% rata $  -4.7 habis 1 | acak $ -13.6 (p 0.09)
+   WTI     1:500 BARU: n 42 untung  52% rata $ +20.2 habis 2 | acak $  +0.7 (p 0.02)
+   E_KOMB  1:200 LAMA: n 37 untung  27% rata $  -2.1 habis 0 | acak $  -5.7 (p 0.10)
+   E_KOMB  1:200 BARU: n 42 untung  52% rata $  +8.0 habis 0 | acak $  -0.2 (p 0.00)
+   E_KOMB  1:500 LAMA: n 37 untung  27% rata $  -5.1 habis 1 | acak $ -13.8 (p 0.10)
+   E_KOMB  1:500 BARU: n 42 untung  52% rata $ +22.9 habis 2 | acak $  +0.4 (p 0.00)
+   GABUNG  1:200 LAMA: n 43 untung  21% rata $  -3.6 habis 0 | acak $  -6.1 (p 0.17)
+   GABUNG  1:200 BARU: n 50 untung  50% rata $  +5.6 habis 0 | acak $  -0.6 (p 0.03)
+   GABUNG  1:500 LAMA: n 43 untung  21% rata $  -9.1 habis 1 | acak $ -14.8 (p 0.15)
+   GABUNG  1:500 BARU: n 50 untung  50% rata $ +15.7 habis 4 | acak $  -1.0 (p 0.03)
+   CPIX    1:200 LAMA: n 15 untung  13% rata $  -9.3 habis 0 | acak $  -3.6 (p 0.97)
+   CPIX    1:200 BARU: n 45 untung  40% rata $  +3.5 habis 0 | acak $  -0.9 (p 0.07)
+   CPIX    1:500 LAMA: n 15 untung  13% rata $ -23.3 habis 0 | acak $ -10.3 (p 0.93)
+   CPIX    1:500 BARU: n 45 untung  40% rata $  +9.2 habis 2 | acak $  -1.9 (p 0.08)
+   lonjakan melawan s/d detik 10 saat arah WTI benar (n 52): median 0.024% • P90 0.067% • maks 0.202% harga → batas habis 1:500 = 0,200%, 1:1000 = 0,100%
+
+## 10. PPI 15 Okt 2026 (acuan Sep; konsensus headline 0,5% / core 0,3%; BERSAMAAN Retail Sales 0,3%)
+   energi bulan acuan: WTI +17.5% • bensin +14.0% • solar +16.2% → keranjang +15.9%
+   WTI ≥ +5% → PPI di ATAS → emas TURUN • E_KOMB sama • E_GAP: konsensus headline − core = +0,2 (> 0,1) → energi dianggap SUDAH masuk konsensus → diam • margin dagang Agu m/m -0.08% → M_BALIK diam • CPIC/CPIH/CPIX: menunggu CPI 14 Okt

@@ -1,0 +1,37 @@
+# 🔬 PPI putaran 3 (research/riset_ppi3.py)
+python -m research.riset_ppi3        → docs/eksternal/hasil_riset_ppi3.txt + data/research/eksternal/riset_ppi3/tabel.parquet
+
+Rilis PPI Sep 2015–2026: 123; target lonjakan ada 122; tick Exness detik 1 ada 120; bersamaan Retail/GDP 25
+
+## Bila kejutan SUDAH diketahui (PLAFON): emas berlawanan dengan komponen mana? (2015-09–2026)
+   headline m/m               lonjakan 81% (97) | d1 54% (96) | d2 74% (97) | d3 77% (97) | d5 81% (97) | d10 80% (97)
+   core m/m                   lonjakan 85% (96) | d1 54% (95) | d2 78% (96) | d3 81% (96) | d5 80% (96) | d10 82% (96)
+   core dulu, lalu headline   lonjakan 83% (113) | d1 54% (112) | d2 77% (113) | d3 79% (113) | d5 78% (113) | d10 79% (113)
+   headline & core sepakat    lonjakan 86% (74) | d1 51% (73) | d2 77% (74) | d3 82% (74) | d5 85% (74) | d10 86% (74)
+
+## Tutup kertas — target lonjakan (2016–2026 | LAMA | BARU | 2022+ | 2026) + p keluarga 22 aturan + detik 1–5
+   selalu NAIK  semua  55.1% (65/118) | LAMA  51.7% (30/58) | BARU  58.3% (35/60) | 2022+  56.1% (32/57) | 2026  40.0% (4/10)
+   P         semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 48% d2 30% d3 39% d5 39% | angka head 41% core 40%
+   KONV      semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 52% d2 45% d3 46% d5 48% | angka head 44% core 43%
+   YOY       semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 53% d2 41% d3 41% d5 37% | angka head 49% core 41%
+   CPIX      semua  61.8% (21/34) | LAMA     – | BARU  61.8% (21/34) | 2022+  61.8% (21/34) | 2026  83.3% (5/6) | p 0.803/0.531 | d1 31% d2 – d3 – d5 83% | angka head 64% core 69%
+   IMPOR     semua   0.0% (0/1) | LAMA   0.0% (0/1) | BARU     – | 2022+     – | 2026     – | p – | d1 25% d2 50% d3 50% d5 50% | angka head 62% core 69%
+   ISMP      semua  45.9% (28/61) | LAMA  47.4% (9/19) | BARU  45.2% (19/42) | 2022+  46.2% (18/39) | 2026   0.0% (0/5) | p 1.000/1.000 | d1 57% d2 49% d3 51% d5 51% | angka head 53% core 47%
+   WTI       semua  60.8% (45/74) | LAMA  50.0% (16/32) | BARU  69.0% (29/42) | 2022+  70.7% (29/41) | 2026  66.7% (4/6) | p 0.219/0.098 | d1 33% d2 50% d3 64% d5 77% | angka head 62% core 53%
+   BENSIN    semua  60.0% (42/70) | LAMA  51.7% (15/29) | BARU  65.9% (27/41) | 2022+  67.5% (27/40) | 2026  71.4% (5/7) | p 0.450/0.233 | d1 43% d2 52% d3 48% d5 60% | angka head 59% core 50%
+   SAHAM     semua  33.3% (2/6) | LAMA  33.3% (2/6) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 29% d2 – d3 – d5 – | angka head 46% core 47%
+   SUARA     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 45% d2 31% d3 22% d5 38% | angka head 55% core 48%
+   PBALIK    semua  54.2% (45/83) | LAMA  51.6% (16/31) | BARU  55.8% (29/52) | 2022+  56.0% (28/50) | 2026  37.5% (3/8) | p 0.918/0.990 | d1 33% d2 41% d3 46% d5 46% | angka head 59% core 60%
+   KONBALIK  semua  54.5% (48/88) | LAMA  53.8% (21/39) | BARU  55.1% (27/49) | 2022+  54.3% (25/46) | 2026  14.3% (1/7) | p 0.959/0.999 | d1 – d2 46% d3 40% d5 44% | angka head 56% core 57%
+   E_KOMB    semua  63.2% (43/68) | LAMA  50.0% (13/26) | BARU  71.4% (30/42) | 2022+  73.2% (30/41) | 2026  62.5% (5/8) | p 0.111/0.043 | d1 32% d2 57% d3 57% d5 70% | angka head 67% core 56%
+   E_GAP     semua  50.0% (9/18) | LAMA  40.0% (4/10) | BARU  62.5% (5/8) | 2022+  62.5% (5/8) | 2026 100.0% (2/2) | p 0.749/0.017 | d1 – d2 – d3 – d5 62% | angka head 67% core 54%
+   M_BALIK   semua  47.1% (8/17) | LAMA     – | BARU  47.1% (8/17) | 2022+  47.1% (8/17) | 2026  16.7% (1/6) | p 1.000/0.999 | d1 25% d2 48% d3 55% d5 41% | angka head 55% core 62%
+   M_EN      semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 49% d2 47% d3 31% d5 37% | angka head 33% core 44%
+   CPIC      semua  72.7% (8/11) | LAMA     – | BARU  72.7% (8/11) | 2022+  72.7% (8/11) | 2026  60.0% (3/5) | p 0.824/0.625 | d1 24% d2 – d3 80% d5 60% | angka head 65% core 74%
+   CPIH      semua  66.7% (12/18) | LAMA     – | BARU  66.7% (12/18) | 2022+  66.7% (12/18) | 2026 100.0% (2/2) | p – | d1 56% d2 100% d3 100% d5 67% | angka head 70% core 72%
+   MUS       semua  45.2% (19/42) | LAMA  37.5% (3/8) | BARU  47.1% (16/34) | 2022+  46.9% (15/32) | 2026     – | p 1.000/1.000 | d1 – d2 40% d3 49% d5 48% | angka head 47% core 46%
+   KONC      semua  33.3% (3/9) | LAMA  33.3% (3/9) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | d1 53% d2 48% d3 46% d5 48% | angka head 46% core 42%
+   GABUNG    semua  59.2% (45/76) | LAMA  45.5% (15/33) | BARU  69.8% (30/43) | 2022+  70.7% (29/41) | 2026  55.6% (5/9) | p 0.418/0.153 | d1 17% d2 – d3 67% d5 63% | angka head 61% core 58%
+   MODEL     semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.901 | d1 – d2 58% d3 50% d5 58% | angka head 62% core 51%
+
+## Nilai petunjuk PPI 15 Okt 2026 dihitung di research/riset_ppi3_cek.py (bagian 'hari ini')
