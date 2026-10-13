@@ -7,6 +7,8 @@ Data ditambahkan (append + buang duplikat), tidak pernah ditimpa:
   candle/<SIMBOL>_1h.csv      XAU/USD (Twelve Data, butuh secret TWELVEDATA_API_KEY), BTC/ETH/DOGE/ADA (Binance publik)
   candle/XAUUSD_5min.csv      XAU/USD 5 menit (untuk menilai reaksi emas 1 jam setelah tiap berita)
   prediksi/<pekan>.json       baris prediksi berita PERSIS seperti di aplikasi (pipa cloud yang sama), terakhir sebelum rilis
+  pra/<pekan>.json            tebakan arah 1–10 dtk CPI/PPI (pra_satu) + jalur + konsensus + jam pertama konsensus indeks
+                              → uji maju: python -m research.uji_maju_berita
   nfp_titik/<tgl>.json        potret harian 🔄 titik balik NFP (FRED live)
   berita/ff_<pekan>.json      kalender ForexFactory pekan ini (Act/Cons/Prev, diperbarui tiap jam)
   berita/aktual.jsonl         Act resmi FRED (NFP, CPI, PPI, Retail, klaim, JOLTS, PCE; butuh secret FRED_API_KEY)
@@ -262,6 +264,52 @@ def prediksi(root: Path, now: datetime) -> str:
     return f"{n} prediksi aktif"
 
 
+def pra(root: Path, now: datetime) -> str:
+    """UJI MAJU CPI/PPI (13 Okt 2026, pengguna: "yakin tidak ada uji validasi yang terlewat?"): rekam baris arah 1–10 dtk
+    (pra_satu) PERSIS seperti aplikasi — arah, persen, status, jalur (indeks/Kalshi), konsensus, peluang Kalshi — untuk berita
+    berikutnya, versi terakhir sebelum rilis; plus jam PERTAMA konsensus indeks CPI terlihat (bukti bebas look-ahead).
+    Dinilai setelah rilis dengan tick Exness: python -m research.uji_maju_berita."""
+    _cloud()
+    import _cpi_detik
+    import _jadwal
+    import _persiapan
+    import _ppi_wti
+    import _pra_aset
+    senin = (now - timedelta(days=now.weekday())).strftime("%Y-%m-%d")
+    ff = root / "berita" / f"ff_{senin}.json"
+    rows = json.loads(ff.read_text()) if ff.exists() else get("https://nfs.faireconomy.media/ff_calendar_thisweek.json")
+    prep = _persiapan.cards(rows, now)
+    _jadwal.attach(prep, now)
+    store = _Store({})
+    _cpi_detik.attach(prep, store, now)
+    _ppi_wti.attach(prep, store, now)
+    _pra_aset.attach(prep, now, None)
+    s = prep.get("pra_satu") or {}
+    p = root / "pra" / f"{senin}.json"
+    old = json.loads(p.read_text()) if p.exists() else {}
+    n = 0
+    for c in (prep.get("berita") or []) + (prep.get("mendatang") or []):
+        g = c.get("cpi_detik") or c.get("ppi_wti")
+        t = datetime.fromisoformat(c["time"]).astimezone(timezone.utc)
+        if not g or t <= now or t - now > timedelta(days=8):
+            continue
+        k = f"{c['title']}|{c['time']}"
+        lama = old.get(k) or {}
+        ix = (g.get("indeks") or {}).get("selisih") or {}
+        ada_ix = any(v is not None for v in ix.values())
+        old[k] = {"title": c["title"], "time": c["time"], "arah": g.get("arah"), "persen": g.get("persen"),
+                  "status": g.get("status"), "jalur": g.get("jalur") or ("minyak" if c.get("ppi_wti") else None),
+                  "konsensus": g.get("konsensus"), "indeks": ix, "kalshi": (g.get("terbaru") or {}).get("kalshi"),
+                  "situasi": (g.get("terbaru") or {}).get("situasi"),
+                  "indeks_pertama": lama.get("indeks_pertama") or (now.isoformat() if ada_ix else None),
+                  "pra_satu": s.get("teks") if s.get("time") == c["time"] else lama.get("pra_satu"),
+                  "dicatat": now.isoformat()}
+        n += 1
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(old, ensure_ascii=False, indent=1))
+    return f"{n} tebakan CPI/PPI aktif"
+
+
 def nfp_titik(root: Path, now: datetime) -> str:
     key = os.environ.get("FRED_API_KEY", "")
     if not key:
@@ -282,7 +330,7 @@ def main(root: Path) -> None:
     hasil = {"waktu": now.strftime("%Y-%m-%dT%H:%MZ")}
     for lab, fn in (("candle_kripto", candle_binance), ("candle_xau", candle_xau), ("berita_ff", berita_ff),
                     ("berita_fred", berita_fred), ("copytrader", copytrader), ("kalshi", kalshi),
-                    ("nfp_titik", nfp_titik), ("prediksi", prediksi)):
+                    ("nfp_titik", nfp_titik), ("prediksi", prediksi), ("pra", pra)):
         try:
             hasil[lab] = fn(root, now)
         except Exception as e:  # noqa: BLE001 - satu sumber gagal, lainnya tetap

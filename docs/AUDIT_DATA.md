@@ -50,5 +50,28 @@ Skrip: `research/audit_cpi_ppi.py` → `docs/eksternal/hasil_audit_cpi_ppi.txt`.
 Tidak ada metode yang memberi kepastian di pasar; yang bisa dibuat pasti adalah ANGKANYA: dihitung dari SEMUA rilis resmi,
 tanggal benar, tick asli, tanpa data hilang, dengan rentang kepercayaan. Angka di atas adalah versi itu.
 
+## G. Uji validasi tambahan CPI & PPI (`research/audit_cpi2.py` → `docs/eksternal/hasil_audit_cpi2.txt`)
+| uji | CPI (aturan aplikasi) | PPI-WTI (128 rilis resmi) |
+|---|---|---|
+| plasebo berita (aturan dipakai di rilis 08:30 lain bulan sama) | 64–70% vs lain 47–50% ✅ khas CPI | 63% vs lain 53% ✅ khas PPI |
+| plasebo waktu (searah gerak emas t−100 → t−1 dtk?) | 67% (p 0,01) — karena saringan menyisakan tebakan NAIK saat tren naik; IDX|K 59%, Kalshi 54% | 55% / BARU 49% ✅ |
+| Bonferroni seluruh riset (CPI ±100 aturan, PPI ±35) | BARU detik 2 p 0,027 ✅; 2016–26 0,31 ✗; **Kalshi saja 1,0 ✗** | lonjakan BARU 0,20 ✗; detik 5 BARU 0,076 ✗ |
+| jam rilis (lonjakan di t0?) | 12 "curiga" → dicek: tick melonjak tepat di t0, reaksinya kecil → jam benar | 24 "curiga" → sama, jam benar |
+| per tahun: angka vs plafon | gagal 2019–21 karena tebakan ANGKA salah (plafon tetap 62–88%) | gagal 2018–21: tebakan angka 25–57% (plafon 60–100%) |
+
+**Pembanding "selalu NAIK" pada periode yang sama (uji yang paling penting dan dulu terlewat):**
+- CPI detik 2: selalu NAIK 2016–26 54%, sejak Okt 2021 61%, **2024+ 81% (26/32)**. Aplikasi 2024+ 95% (18/19) hanya karena
+  semua tebakannya NAIK (TURUN disaring lemah); pada rilis yang sama aplikasi vs selalu-NAIK: 0 beda (2024+), 4 vs 1 (BARU,
+  p 0,19) → **keunggulan aturan di atas tren emas BELUM terbukti**. IDX|K tebakan TURUN 2024+ 45% (5/11).
+- PPI-WTI: tebakan NAIK (minyak turun) 72–91%, tebakan **TURUN (minyak naik — seperti 15 Okt 2026) lonjakan 55% (2024+ 50%),
+  detik 2 39% (2024+ 30%)** → lebih buruk dari acak; vs selalu-NAIK BARU p 0,26 (lonjakan) / 0,86 (detik 2).
+- Pelajaran: di pasar emas tren naik (2022–2026) tebakan NAIK tampak hebat, tebakan TURUN lemah. Selalu laporkan akurasi PER
+  ARAH tebakan dan pembanding selalu-NAIK pada periode yang sama.
+
+## H. Uji maju otomatis (mulai 13 Okt 2026)
+`research/arsip_data.pra` (workflow arsip tiap jam :07) merekam tebakan CPI/PPI persis seperti aplikasi (arah, persen, jalur,
+konsensus, Kalshi, jam pertama konsensus indeks) → `arsip-data:pra/<pekan>.json`; dinilai setelah rilis dengan tick Exness:
+`python -m research.uji_maju_berita` → `docs/eksternal/hasil_uji_maju_berita.txt`.
+
 ## F. Cek langsung 14 Okt (terjadwal 11:40 UTC)
 Pemantau mencatat jam pertama konsensus indeks CPI muncul di Nasdaq (`docs/eksternal/hasil_cek_indeks_cpi.txt`).

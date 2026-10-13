@@ -1,0 +1,63 @@
+# 🧾 Audit CPI putaran 2 (research/audit_cpi2.py)
+python -m research.audit_cpi2      → docs/eksternal/hasil_audit_cpi2.txt
+
+## a. Plasebo berita (lonjakan menit 1): CPI vs rilis 08:30 LAIN di bulan yang sama
+   aplikasi (IDX|K+saringan)  CPI 70% (43/61) vs lain 47% (210/450) (PPI 54% (25/46) • RETAIL 47% (22/47) • CLAIMS 42% (81/191) • NFP 44% (27/61) • GDP 37% (16/43))
+   IDX|K                      CPI 64% (58/90) vs lain 48% (320/667) (PPI 48% (34/71) • RETAIL 53% (38/72) • CLAIMS 46% (130/283) • NFP 46% (41/89) • GDP 42% (25/60))
+   Kalshi saja                CPI 57% (21/37) vs lain 50% (139/280) (PPI 55% (18/33) • RETAIL 45% (15/33) • CLAIMS 49% (54/110) • NFP 43% (15/35) • GDP 43% (10/23))
+
+## b. Plasebo waktu: tebakan vs gerak emas SEBELUM rilis (t−100 → t−1 dtk; jendela tick mulai t−120)
+   aplikasi (IDX|K+saringan)  2016–26 67% (41/61) (p 0.01) | BARU 72% (23/32) (p 0.02)
+   IDX|K                      2016–26 59% (53/90) (p 0.11) | BARU 62% (31/50) (p 0.12)
+   Kalshi saja                2016–26 54% (20/37) (p 0.74) | BARU 54% (20/37) (p 0.74)
+
+## c. Per tahun: tebak ANGKA (headline / core) • PLAFON emas ikut kejutan core (detik 2) • aturan aplikasi detik 2
+   2016: angka head 50% (1/2) core 67% (2/3) • plafon core 100% (8/8) • aturan detik 2 67% (2/3)
+   2017: angka head 60% (3/5) core 75% (3/4) • plafon core 71% (5/7) • aturan detik 2 67% (4/6)
+   2018: angka head 100% (5/5) core 80% (4/5) • plafon core 80% (4/5) • aturan detik 2 71% (5/7)
+   2019: angka head 50% (1/2) core 100% (2/2) • plafon core 62% (5/8) • aturan detik 2 40% (2/5)
+   2020: angka head 33% (1/3) core 33% (1/3) • plafon core 88% (7/8) • aturan detik 2 33% (1/3)
+   2021: angka head 67% (2/3) core 50% (2/4) • plafon core 67% (6/9) • aturan detik 2 33% (2/6)
+   2022: angka head 75% (3/4) core 75% (3/4) • plafon core 82% (9/11) • aturan detik 2 60% (3/5)
+   2023: angka head 100% (2/2) core 67% (2/3) • plafon core 60% (3/5) • aturan detik 2 67% (4/6)
+   2024: angka head 50% (2/4) core 67% (2/3) • plafon core 86% (6/7) • aturan detik 2 86% (6/7)
+   2025: angka head 100% (4/4) core 100% (6/6) • plafon core 100% (8/8) • aturan detik 2 100% (7/7)
+   2026: angka head 100% (3/3) core 67% (2/3) • plafon core 67% (4/6) • aturan detik 2 100% (5/5)
+
+## d. Banyak-uji seluruh riset CPI (Bonferroni × 100 aturan), detik 2, p binomial satu sisi
+   aplikasi (IDX|K+saringan)  2016–26  68% (41/60) p 0.0031 → Bonferroni 0.311
+   aplikasi (IDX|K+saringan)  BARU     81% (26/32) p 0.0003 → Bonferroni 0.027  ✅ tetap < 0,05
+   IDX|K                      2016–26  66% (59/89) p 0.0014 → Bonferroni 0.139
+   IDX|K                      BARU     74% (37/50) p 0.0005 → Bonferroni 0.047  ✅ tetap < 0,05
+   Kalshi saja                2016–26  65% (24/37) p 0.0494 → Bonferroni 1.000
+   Kalshi saja                BARU     65% (24/37) p 0.0494 → Bonferroni 1.000
+
+## e. Jam rilis: |gerak 0→10 dtk| vs |gerak t−70→t−60 dtk| (rilis tanpa lonjakan = curiga jam/tanggal salah)
+   CPI: 126 rilis bertick, median lonjakan $2.93 vs tenang $0.09; curiga 12: ['2016-05-17', '2017-01-18', '2018-03-13', '2018-06-12', '2019-09-12', '2020-02-13', '2020-05-12', '2020-10-13', '2020-11-12', '2021-10-13', '2022-01-12', '2024-12-11']
+   PPI: 127 rilis bertick, median lonjakan $1.07 vs tenang $0.10; curiga 24: ['2016-10-14', '2017-04-13', '2017-07-13', '2018-04-10', '2018-10-10', '2019-03-13', '2019-06-11', '2020-01-15', '2020-05-13', '2020-06-11', '2020-07-10', '2020-09-10', '2020-11-13', '2020-12-11', '2021-04-09', '2021-06-15', '2021-12-14', '2022-01-13', '2022-02-15', '2022-03-15', '2022-08-11', '2022-09-14', '2024-10-11', '2025-04-11']
+   (dicek manual 21 rilis curiga: jumlah tick melonjak tepat di t0 & lonjakan 1 dtk terbesar umumnya T+1…+6 dtk →
+    jam BENAR; 'curiga' = rilis yang reaksinya kecil / tick Exness 2016–17 masih ±1 per detik)
+
+
+# PPI-WTI — uji yang sama (128 rilis resmi, tick 126)
+## a. Plasebo berita (lonjakan): PPI 63% (57/91) vs rilis 08:30 lain bulan sama 53% (360/684) (CPI 54% (48/89) • RETAIL 56% (40/71) • CLAIMS 53% (153/288) • NFP 58% (52/90) • GDP 37% (23/62))
+## b. Plasebo waktu (tebakan vs gerak emas t−100 → t−1 dtk): 2016–26 55% (50/91) (p 0.40) | BARU 49% (20/41) (p 1.00)
+## c. Per tahun: tebak ANGKA headline / core • PLAFON emas ikut kejutan core (lonjakan) • aturan (lonjakan / detik 2)
+   2016: angka head 50% (5/10) core 56% (5/9) • plafon core 89% (8/9) • aturan lonjakan 75% (9/12) / detik 2 58% (7/12)
+   2017: angka head 75% (3/4) core 50% (3/6) • plafon core 92% (11/12) • aturan lonjakan 67% (4/6) / detik 2 33% (2/6)
+   2018: angka head 43% (3/7) core 57% (4/7) • plafon core 100% (9/9) • aturan lonjakan 50% (4/8) / detik 2 38% (3/8)
+   2019: angka head 40% (2/5) core 25% (2/8) • plafon core 73% (8/11) • aturan lonjakan 38% (3/8) / detik 2 38% (3/8)
+   2020: angka head 57% (4/7) core 43% (3/7) • plafon core 64% (7/11) • aturan lonjakan 57% (4/7) / detik 2 86% (6/7)
+   2021: angka head 67% (6/9) core 62% (5/8) • plafon core 60% (6/10) • aturan lonjakan 40% (4/10) / detik 2 20% (2/10)
+   2022: angka head 62% (5/8) core 44% (4/9) • plafon core 80% (8/10) • aturan lonjakan 64% (7/11) / detik 2 45% (5/11)
+   2023: angka head 86% (6/7) core 100% (4/4) • plafon core 100% (7/7) • aturan lonjakan 88% (7/8) / detik 2 88% (7/8)
+   2024: angka head 62% (5/8) core 67% (4/6) • plafon core 100% (8/8) • aturan lonjakan 78% (7/9) / detik 2 67% (6/9)
+   2025: angka head 83% (5/6) core 80% (4/5) • plafon core 100% (9/9) • aturan lonjakan 67% (4/6) / detik 2 67% (4/6)
+   2026: angka head 80% (4/5) core 67% (4/6) • plafon core 88% (7/8) • aturan lonjakan 67% (4/6) / detik 2 50% (3/6)
+## d. Banyak-uji seluruh riset PPI (Bonferroni × 35 aturan), p binomial satu sisi
+   lonjakan  2016–26  63% (57/91) p 0.0103 → Bonferroni 0.360
+   lonjakan  BARU     71% (29/41) p 0.0058 → Bonferroni 0.201
+   detik 2   2016–26  53% (48/91) p 0.3376 → Bonferroni 1.000
+   detik 2   BARU     61% (25/41) p 0.1055 → Bonferroni 1.000
+   detik 5   2016–26  59% (54/91) p 0.0465 → Bonferroni 1.000
+   detik 5   BARU     73% (30/41) p 0.0022 → Bonferroni 0.076
