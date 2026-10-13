@@ -1,0 +1,16 @@
+# 🏦 FOMC → arah lonjakan emas menit pertama (research/riset_fomc.py)
+python -m research.riset_fomc          → docs/eksternal/hasil_riset_fomc.txt
+
+107 pengumuman 2013-01–2026-09; lonjakan naik 52/107; aksi diharapkan: potong 8, naik 21, tahan 78
+   selalu NAIK  semua  50.0% (43/86) | LAMA  47.8% (22/46) | BARU  52.5% (21/40) | 2022+  52.6% (20/38) | 2026  50.0% (3/6)
+   Y2_BALIK   semua  50.0% (5/10) | LAMA  40.0% (2/5) | BARU  60.0% (3/5) | 2022+  60.0% (3/5) | 2026  60.0% (3/5) | p 1.000/0.881 | detik 2   50% (10)
+   Y2_IKUT    semua  45.0% (9/20) | LAMA     – | BARU  45.0% (9/20) | 2022+  45.0% (9/20) | 2026     – | p 1.000/1.000 | detik 2   75% (20)
+   DXY_BALIK  semua   0.0% (0/2) | LAMA     – | BARU   0.0% (0/2) | 2022+   0.0% (0/2) | 2026     – | p – | detik 2    0% (2)
+   H24_BALIK  semua  55.8% (48/86) | LAMA  52.2% (24/46) | BARU  60.0% (24/40) | 2022+  60.5% (23/38) | 2026  50.0% (3/6) | p 0.703/0.574 | detik 2   47% (86)
+   M60_BALIK  semua  52.6% (41/78) | LAMA  47.8% (22/46) | BARU  59.4% (19/32) | 2022+  63.3% (19/30) | 2026  83.3% (5/6) | p 0.864/0.240 | detik 2   42% (78)
+   LALU_IKUT  semua  36.7% (11/30) | LAMA  42.9% (6/14) | BARU  31.2% (5/16) | 2022+  28.6% (4/14) | 2026  50.0% (3/6) | p 1.000/1.000 | detik 2   40% (30)
+   DOT        semua  41.7% (10/24) | LAMA     – | BARU  41.7% (10/24) | 2022+  41.7% (10/24) | 2026     – | p 0.989/0.931 | detik 2   42% (24)
+   AKSI_JUAL  semua  35.7% (5/14) | LAMA     – | BARU  35.7% (5/14) | 2022+  35.7% (5/14) | 2026   0.0% (0/1) | p – | detik 2   57% (14)
+   AKSI_IKUT  semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p – | detik 2 –
+
+LOLOS: TIDAK ADA

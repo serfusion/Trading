@@ -27,3 +27,14 @@ Rata-rata WTI (FRED DCOILWTICO) 5 observasi s/d tanggal 13 bulan acuan vs bulan 
   itu" tidak lolos → tidak dipakai); `_pra_aset.allin` PPI = "💥 Modal kecil PPI: lemah — utamakan CPI".
 - Tampilan: "PPI ▼ TURUN 69% (lonjakan menit 1)"; baris ⏱️ per detik memakai kurva PPI (detik 1 48% ⚠️ … detik 30 69%).
 - PPI 15 Okt 2026: WTI 5 hari s/d 13 Sep $97,80 vs s/d 13 Agu $83,21 (+17,5%) → emas ▼ TURUN.
+
+## Berita berikutnya (13 Okt 2026, urutan rilis) — semua 0 lolos, tidak dipasang
+| Berita | Skrip | Aturan diuji | Hasil |
+|---|---|---|---|
+| FOMC (28 Okt) | `research/riset_fomc.py` | 9 (yield 2 th ×2, dolar, drift 24 jam/60 mnt, FOMC lalu, dot plot, aksi ×2) | lonjakan ±50%; terbaik drift 24 jam 56% (p 0,70) |
+| Core PCE (29 Okt) | `research/riset_inflasi.py` | 11 (nowcast Cleveland, YOY, Kalshi, kuartalan, CPI+PPI) | 0 lolos |
+| JOLTS (3 Nov), ADP, klaim, Retail, GDP, konsumen | `research/riset_lain.py` | aturan lama + 9 baru (Redbook, bensin, Kalshi GDP, GDPNow ±0,5, NFP lalu, rata 4 pekan, revisi Michigan) | 0 lolos; terdekat GDPNow ±0,5 71% (n 14) |
+| NFP (6 Nov) | `research/riset_nfp.py` (11 Okt) | 25 | 0 layak; UR2 pasca-lihat 64% tidak tahan uji sadar-seleksi |
+| ISM | `research/riset_ism.py` (11 Okt) | 38 | ISM Jasa "-P&REGK" 70% pasca-lihat → kandidat uji maju saja |
+- Modal kecil semua berita (`research/berita_allin.py`): 7 dari ±195 uji "lolos" ≈ jumlah kebetulan; terbaik +$3–7/$100.
+- Retail "selalu turun" 63% sudah diuji 11 Okt (pola tetap, p 0,36) → tidak lolos.
