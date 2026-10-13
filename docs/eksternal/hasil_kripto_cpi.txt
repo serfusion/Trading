@@ -1,0 +1,36 @@
+# ₿ CPI → BTC & ETH (research/kripto_cpi.py)
+python -m research.kripto_cpi      → docs/eksternal/hasil_kripto_cpi.txt
+
+
+## BTC Exness (spread asli) — 44 rilis CPI dengan tebakan kuat (2019-01–2026-09)
+   LAMA  n 12 | arah d1  45% d2  36% d3  36% d5  42% d10  50% | lonjakan menit 1  50%
+         modal kecil 1:200 tutup detik 2: untung   8% $ -36.6/$100 (acak $ -38.7, p 0.35) habis 1
+         modal kecil 1:200 lentur       : untung   8% $ -36.6/$100 (acak $ -38.7, p 0.35) habis 1
+   BARU  n 32 | arah d1  69% d2  75% d3  78% d5  78% d10  72% | lonjakan menit 1  75%
+         modal kecil 1:200 tutup detik 2: untung  53% $ +11.8/$100 (acak $ -13.5, p 0.00) habis 0
+         modal kecil 1:200 lentur       : untung  38% $ +18.4/$100 (acak $ -11.3, p 0.00) habis 3
+   2024+ n 19 | arah d1  74% d2  84% d3  84% d5  79% d10  74% | lonjakan menit 1  79%
+         modal kecil 1:200 tutup detik 2: untung  68% $ +22.8/$100 (acak $  -6.5, p 0.00) habis 0
+         modal kecil 1:200 lentur       : untung  53% $ +31.1/$100 (acak $  -7.7, p 0.00) habis 2
+
+## BTC Binance (mid) — 44 rilis CPI dengan tebakan kuat (2019-01–2026-09)
+   LAMA  n 12 | arah d1  50% d2  67% d3  67% d5  45% d10  42% | lonjakan menit 1  75%
+         modal kecil 1:200 tutup detik 2: untung  17% $  -4.6/$100 (acak $  -6.0, p 0.35) habis 0
+         modal kecil 1:200 lentur       : untung  17% $  -3.7/$100 (acak $  -4.5, p 0.41) habis 0
+   BARU  n 32 | arah d1  71% d2  75% d3  78% d5  72% d10  72% | lonjakan menit 1  75%
+         modal kecil 1:200 tutup detik 2: untung  69% $ +25.5/$100 (acak $  -4.0, p 0.00) habis 1
+         modal kecil 1:200 lentur       : untung  62% $ +57.3/$100 (acak $ +14.0, p 0.00) habis 2
+   2024+ n 19 | arah d1  74% d2  74% d3  79% d5  74% d10  74% | lonjakan menit 1  79%
+         modal kecil 1:200 tutup detik 2: untung  74% $ +31.5/$100 (acak $  -4.8, p 0.00) habis 0
+         modal kecil 1:200 lentur       : untung  68% $ +57.7/$100 (acak $ +11.4, p 0.00) habis 0
+
+## ETH Binance — 44 rilis CPI dengan tebakan kuat (2019-01–2026-09)
+   LAMA  n 12 | arah d1  70% d2  70% d3  73% d5  67% d10  75% | lonjakan menit 1  58%
+         modal kecil 1:200 tutup detik 2: untung   8% $  -8.4/$100 (acak $ -10.0, p 0.22) habis 0
+         modal kecil 1:200 lentur       : untung   8% $  -8.5/$100 (acak $  -8.7, p 0.47) habis 0
+   BARU  n 32 | arah d1  78% d2  78% d3  78% d5  72% d10  72% | lonjakan menit 1  72%
+         modal kecil 1:200 tutup detik 2: untung  62% $ +30.9/$100 (acak $  -4.5, p 0.00) habis 1
+         modal kecil 1:200 lentur       : untung  56% $ +71.6/$100 (acak $ +18.4, p 0.00) habis 2
+   2024+ n 19 | arah d1  84% d2  79% d3  79% d5  74% d10  74% | lonjakan menit 1  74%
+         modal kecil 1:200 tutup detik 2: untung  68% $ +38.3/$100 (acak $  -6.5, p 0.00) habis 0
+         modal kecil 1:200 lentur       : untung  63% $ +70.1/$100 (acak $ +12.3, p 0.00) habis 0

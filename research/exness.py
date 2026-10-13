@@ -28,7 +28,7 @@ import pandas as pd
 from .eksternal import cache_path
 
 URL = "https://ticks.ex2archive.com/ticks"
-SCALE = {"XAU": 1000, "BTC": 100}          # harga disimpan sebagai int (x1000 XAU, x100 BTC), parquet zstd
+SCALE = {"XAU": 1000, "BTC": 100, "ETH": 100}          # harga disimpan sebagai int (x1000 XAU, x100 BTC), parquet zstd
 BEFORE, AFTER = pd.Timedelta(minutes=2), pd.Timedelta(minutes=16)
 
 
