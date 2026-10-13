@@ -150,3 +150,21 @@ maju lot minimum.
   (berbayar), requote/slip nyata Exness (hanya lewat uji maju lot kecil).
 - **Kesimpulan:** aturan aplikasi (konsensus indeks tanpa pembulatan + Kalshi + saringan) tetap yang terbaik dari semua
   yang bisa diuji; tidak ada perubahan pada cloud/aplikasi.
+
+## ₿ CPI → BTC & ETH (13 Okt 2026, `research/kripto_cpi.py` → `docs/eksternal/hasil_kripto_cpi.txt`)
+Tebakan CPI kuat dipakai searah untuk kripto (CPI di bawah → emas, BTC, ETH naik). Sejak Okt 2021 (spread asli Exness, HMR 1:200):
+| | arah detik 1 / 2 / 3 | lonjakan menit 1 | tutup detik 2 | lentur |
+|---|---|---|---|---|
+| BTC Exness (32 rilis) | 69% / 75% / 78% | 75% | +$11,8/$100 (acak −$13,5), untung 53% | +$18,4, untung 38%, habis 3× |
+| ETH Exness (30 rilis, tick ETHUSDm diunduh 13 Okt) | 63% / 77% / 83% | 77% | +$2,0 (spread ±$1,8 memakan) | +$27,8, untung 37%, habis 3× |
+| Emas (pembanding) | 41%* / 78% | – | +$20,3, untung 78% | +$29,8, untung 72%, habis 2× |
+*persen untung setelah spread. 2019–2021 kripto rugi (sama dengan emas). Kesimpulan: emas tetap terbaik (lebih sering untung);
+kripto hanya lewat cara lentur. Info dipasang di bukti 💥 CPI (`_pra_aset.kripto_teks`, `cpi_detik.json["allin"]["kripto"]`).
+
+## 🎯 BTC & ETH WR tinggi + tutup dini (antrian pengguna, 13 Okt 2026)
+- Tutup dini saat candle melonjak melawan sinyal: SUDAH diuji 10 & 13 Okt (`docs/BATAL_GUNCANG.md`): lonjakan sedang 1,5–3 ATR
+  MERUGIKAN (harga pulih); ≥ 4 ATR close candle 1 jam sedikit menolong XAU/BTC (terpasang 🛑); ETH/DOGE/ADA ≈ 0 (dimatikan).
+- `research/kripto_wr.py` (replay kode cloud, subset dipilih di LAMA → diuji BARU): BTC sesi Eropa (08–12 UTC = 15–19 WIB)
+  WR 70% → 69% vs dasar 58% (BUY + Eropa 72% → 77%, n 77); 8/17 subset bertahan vs acak 1,9. Tetapi per sinyal unik per
+  tahun sesi Eropa lebih baik hanya 6 dari 11 tahun → BELUM TERBUKTI, tidak dipasang (kandidat label/uji maju). ETH: 2
+  bertahan ≈ kebetulan.

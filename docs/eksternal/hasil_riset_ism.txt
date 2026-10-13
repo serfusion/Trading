@@ -1,0 +1,217 @@
+# 🏭 ISM manufaktur & jasa → arah lonjakan emas menit pertama (tutup kertas + permutasi keluarga)
+Dibuat oleh `python -m research.riset_ism` (11 Okt 2026). Pra-registrasi lengkap = docstring research/riset_ism.py.
+Format sel: persen benar (benar/ditebak). 'angka' = tebakan TANDA KEJUTAN ISM (tanpa saringan tahun lalu);
+tutup kertas = tahun Y hanya memakai aturan bila rilis sebelum Y benar > 50% (n ≥ 10); tebakan emas = −petunjuk.
+p = permutasi keluarga pra-registrasi per jenis (15 aturan; terbaik acakan, 2.000×); pd = keluarga diperluas
+(+ 4 aturan pasca-lihat per jenis = 19); pg = gabungan diperluas 38 aturan kedua jenis. LOLOS memakai p untuk
+aturan pra-registrasi, pd untuk aturan pasca-lihat, dan untuk gabungan pasca-lihat (S19) juga p sadar-seleksi.
+Rilis 2010–2015 bertarget sedikit (tick hanya 10–11 rilis per jenis; unduhan Dukascopy ±60 dtk/file terlalu lambat)
+→ syarat tutup kertas (≥ 10 tebakan sebelumnya) membuat kebanyakan aturan baru dipakai mulai 2016–2018.
+detik 2–10 = target kedua (arah mid t0−1 → t0+2/3/5/10 dtk, dijumlah keempatnya).
+
+## Mutu data
+   ISM Manufaktur (ISM Manufacturing PMI): 202 rilis di kalender; konsensus dari {'NQ': 154, 'FF': 48}; target {'lonjakan60': 127, 'tanpa tick': 63, 'exness': 12}; kejutan 0 (Act = konsensus) 0
+     arah lonjakan Exness = Dukascopy:  95.8% (23/24)
+   ISM Jasa (ISM Services / Non-Manufacturing PMI): 202 rilis di kalender; konsensus dari {'NQ': 163, 'FF': 39}; target {'lonjakan60': 119, 'tanpa tick': 63, 'exness': 20}; kejutan 0 (Act = konsensus) 6
+     arah lonjakan Exness = Dukascopy: 100.0% (18/18)
+   ISM_M: tanda kejutan Nasdaq = ForexFactory pada  96.6% (140/145)
+   ISM_S: tanda kejutan Nasdaq = ForexFactory pada  98.1% (151/154)
+
+## Cakupan petunjuk (rilis dengan petunjuk ≠ 0, per tahun)
+   ISM Manufaktur (ISM Manufacturing PMI)
+     M01 -P         10:11 11:12 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M02 -KON       10:12 11:12 12:12 13:11 14:12 15:12 16:12 17:11 18:12 19:12 20:12 21:12 22:12 23:11 24:12 25:12 26:10
+     M03 FLASH_K    10:0 11:0 12:6 13:12 14:12 15:12 16:12 17:11 18:11 19:12 20:12 21:12 22:12 23:12 24:11 25:12 26:9
+     M04 FLASH_D    10:0 11:0 12:0 13:0 14:6 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M05 FINAL_R    10:0 11:0 12:7 13:11 14:9 15:11 16:10 17:11 18:9 19:11 20:10 21:12 22:12 23:7 24:2 25:9 26:9
+     M06 CHI_K      10:11 11:12 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M07 CHI_D      10:0 11:0 12:11 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M08 REG_K      10:11 11:12 12:12 13:12 14:12 15:10 16:12 17:12 18:11 19:12 20:12 21:12 22:11 23:10 24:9 25:10 26:10
+     M09 REG_D      10:0 11:0 12:0 13:11 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M10 REG_D+     10:0 11:0 12:0 13:7 14:9 15:2 16:1 17:5 18:3 19:5 20:7 21:6 22:7 23:4 24:9 25:3 26:5
+     M11 NOG        10:0 11:0 12:0 13:0 14:0 15:0 16:10 17:12 18:12 19:12 20:12 21:9 22:11 23:12 24:12 25:12 26:10
+     M12 MR6        10:6 11:12 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:11 22:12 23:12 24:12 25:12 26:10
+     M13 SEAS       10:0 11:0 12:0 13:0 14:9 15:12 16:6 17:12 18:10 19:12 20:10 21:12 22:11 23:12 24:9 25:12 26:7
+     M14 VOTE_INFO  10:0 11:0 12:9 13:12 14:11 15:10 16:9 17:8 18:10 19:9 20:8 21:7 22:10 23:10 24:12 25:10 26:6
+     M15 VOTE_ALL   10:9 11:6 12:5 13:10 14:8 15:9 16:11 17:11 18:12 19:12 20:11 21:11 22:11 23:9 24:11 25:12 26:9
+     M16 FLASH_S    10:0 11:0 12:0 13:0 14:6 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M17 CHI_S      10:0 11:0 12:11 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M18 REG_S      10:0 11:0 12:0 13:11 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     M19 NOG_S      10:0 11:0 12:0 13:0 14:0 15:0 16:10 17:12 18:12 19:12 20:12 21:9 22:11 23:12 24:12 25:12 26:10
+   ISM Jasa (ISM Services / Non-Manufacturing PMI)
+     S01 -P         10:11 11:11 12:12 13:11 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:11 22:12 23:11 24:11 25:11 26:10
+     S02 -KON       10:12 11:12 12:12 13:12 14:11 15:12 16:12 17:11 18:12 19:11 20:12 21:11 22:12 23:12 24:12 25:12 26:9
+     S03 FLASH_K    10:0 11:0 12:0 13:0 14:12 15:12 16:12 17:12 18:12 19:11 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S04 FLASH_D    10:0 11:0 12:0 13:0 14:0 15:1 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S05 FINAL_R    10:0 11:0 12:0 13:1 14:12 15:11 16:11 17:12 18:9 19:8 20:10 21:12 22:12 23:11 24:10 25:12 26:8
+     S06 MFG_K      10:12 11:12 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S07 MFG_D      10:0 11:0 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S08 REGS_D     10:0 11:0 12:0 13:0 14:0 15:0 16:0 17:2 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S09 ADP_K      10:11 11:11 12:11 13:11 14:11 15:10 16:11 17:9 18:11 19:11 20:10 21:11 22:10 23:9 24:11 25:11 26:9
+     S10 MR6        10:6 11:12 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S11 SEAS       10:0 11:0 12:0 13:0 14:7 15:12 16:10 17:12 18:8 19:12 20:10 21:11 22:12 23:12 24:11 25:12 26:10
+     S12 -P&MFG     10:3 11:4 12:5 13:3 14:7 15:8 16:7 17:7 18:8 19:4 20:1 21:5 22:4 23:7 24:6 25:6 26:5
+     S13 VOTE_INFO  10:0 11:0 12:12 13:11 14:8 15:6 16:12 17:12 18:10 19:9 20:10 21:11 22:10 23:8 24:12 25:7 26:8
+     S14 VOTE_ALL   10:6 11:7 12:12 13:11 14:5 15:8 16:11 17:9 18:10 19:11 20:10 21:8 22:7 23:6 24:8 25:8 26:9
+     S15 REG_K      10:11 11:12 12:12 13:12 14:12 15:10 16:12 17:12 18:11 19:12 20:12 21:12 22:11 23:10 24:9 25:10 26:10
+     S16 FLASH_S    10:0 11:0 12:0 13:0 14:0 15:1 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S17 MFG_S      10:0 11:0 12:12 13:12 14:12 15:12 16:12 17:12 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S18 REGS_S     10:0 11:0 12:0 13:0 14:0 15:0 16:0 17:2 18:12 19:12 20:12 21:12 22:12 23:12 24:12 25:12 26:10
+     S19 -P&REGK    10:2 11:4 12:6 13:7 14:4 15:8 16:5 17:7 18:4 19:11 20:4 21:5 22:5 23:7 24:3 25:5 26:7
+
+## ISM Manufaktur (ISM Manufacturing PMI) — 139 rilis bertarget 2010-11–2026-10; lonjakan naik 53%; rilis per tahun 2010:1 2011:1 2012:4 2014:1 2015:3 2016:12 2017:12 2018:12 2019:12 2020:12 2021:11 2022:12 2023:12 2024:12 2025:12 2026:10
+   selalu NAIK   semua  52.7% (68/129) | LAMA  50.0% (34/68) | BARU  55.7% (34/61) | 2022+  55.2% (32/58) | 2026  30.0% (3/10)
+   PLAFON        semua  88.4% (114/129) | LAMA  94.1% (64/68) | BARU  82.0% (50/61) | 2022+  84.5% (49/58) | 2026  80.0% (8/10)   (emas = −kejutan sebenarnya)
+   (permutasi keluarga M: pra-registrasi 15/15 aturan cukup n, diperluas 19/19; 2000× acak)
+   kode aturan              angka | tutup kertas lonjakan menit 1 → semua (2016–2026) | LAMA | BARU | 2022+ | 2026 | p keluarga pra-reg 2016+/2022+ | p diperluas | p gabungan diperluas | detik 2–10 (semua/LAMA/BARU)
+   M01 -P          54.0% (75/139) | semua  50.0% (23/46) | LAMA     – | BARU  50.0% (23/46) | 2022+  50.0% (23/46) | 2026  60.0% (6/10) | p 0.994/0.961 | pd 0.996/0.971 | pg 1.000/0.999 | dtk  53.1% (154/290) /  50.0% (32/64) /  54.0% (122/226) [pasca-lihat]
+   M02 -KON        53.3% (73/137) | semua  45.7% (48/105) | LAMA  54.5% (30/55) | BARU  36.0% (18/50) | 2022+  36.2% (17/47) | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  49.6% (206/415) /  53.9% (125/232) /  44.3% (81/183) [pasca-lihat]
+   M03 FLASH_K     47.0% (62/132) | semua  36.4% (8/22) | LAMA  36.4% (8/22) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  36.4% (12/33) /  36.4% (12/33) /     –
+   M04 FLASH_D     48.1% (64/133) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.607 | pd 1.000/0.616 | pg 1.000/0.916 | dtk  16.7% (2/12) /  16.7% (2/12) /     –
+   M05 FINAL_R     51.9% (56/108) | semua  51.6% (47/91) | LAMA  51.0% (25/49) | BARU  52.4% (22/42) | 2022+  48.7% (19/39) | 2026  55.6% (5/9) | p 0.787/1.000 | pd 0.814/1.000 | pg 0.987/1.000 | dtk  54.4% (193/355) /  53.5% (100/187) /  55.4% (93/168)
+   M06 CHI_K       53.2% (74/139) | semua  53.5% (69/129) | LAMA  51.5% (35/68) | BARU  55.7% (34/61) | 2022+  56.9% (33/58) | 2026  60.0% (6/10) | p 0.956/0.888 | pd 0.972/0.900 | pg 1.000/0.997 | dtk  53.8% (252/468) /  54.5% (122/224) /  53.3% (130/244)
+   M07 CHI_D       50.4% (69/137) | semua  61.8% (21/34) | LAMA     – | BARU  61.8% (21/34) | 2022+  61.8% (21/34) | 2026  60.0% (6/10) | p 0.994/0.400 | pd 0.996/0.417 | pg 1.000/0.775 | dtk  52.8% (85/161) /  43.2% (19/44) /  56.4% (66/117)
+   M08 REG_K       53.1% (69/130) | semua  51.7% (62/120) | LAMA  55.2% (37/67) | BARU  47.2% (25/53) | 2022+  46.0% (23/50) | 2026  80.0% (8/10) | p 0.997/1.000 | pd 0.997/1.000 | pg 1.000/1.000 | dtk  53.0% (244/460) /  54.9% (147/268) /  50.5% (97/192)
+   M09 REG_D       49.6% (66/133) | semua  49.4% (40/81) | LAMA  47.7% (21/44) | BARU  51.4% (19/37) | 2022+  52.9% (18/34) | 2026  60.0% (6/10) | p 0.994/0.888 | pd 0.996/0.900 | pg 1.000/0.997 | dtk  48.4% (62/128) /  40.0% (24/60) /  55.9% (38/68)
+   M10 REG_D+      47.3% (26/55) | semua  44.8% (13/29) | LAMA  50.0% (8/16) | BARU  38.5% (5/13) | 2022+  41.7% (5/12) | 2026  60.0% (3/5) | p 0.996/0.987 | pd 0.997/0.992 | pg 1.000/1.000 | dtk  36.8% (14/38) /  36.8% (14/38) /     –
+   M11 NOG         41.9% (52/124) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/0.810 | pd 1.000/0.822 | pg 1.000/0.989 | dtk     – /     – /     –
+   M12 MR6         46.4% (64/138) | semua  20.0% (2/10) | LAMA     – | BARU  20.0% (2/10) | 2022+  20.0% (2/10) | 2026  20.0% (2/10) | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  31.0% (18/58) /  31.2% (15/48) /  30.0% (3/10)
+   M13 SEAS        47.8% (55/115) | semua  50.0% (47/94) | LAMA  55.0% (22/40) | BARU  46.3% (25/54) | 2022+  49.0% (25/51) | 2026  57.1% (4/7) | p 0.997/1.000 | pd 0.997/1.000 | pg 1.000/1.000 | dtk  49.8% (155/311) /  61.4% (86/140) /  40.4% (69/171)
+   M14 VOTE_INFO   49.5% (53/107) | semua  64.3% (18/28) | LAMA     – | BARU  64.3% (18/28) | 2022+  64.3% (18/28) | 2026  66.7% (4/6) | p 0.941/0.184 | pd 0.964/0.202 | pg 0.999/0.439 | dtk  52.0% (65/125) /  34.1% (14/41) /  60.7% (51/84)
+   M15 VOTE_ALL    51.2% (64/125) | semua  57.4% (31/54) | LAMA  47.4% (9/19) | BARU  62.9% (22/35) | 2022+  65.6% (21/32) | 2026  66.7% (6/9) | p 0.841/0.162 | pd 0.878/0.182 | pg 0.993/0.407 | dtk  54.4% (117/215) /  44.3% (27/61) /  58.4% (90/154)
+   M16 FLASH_S     52.6% (70/133) | semua  51.3% (60/117) | LAMA  51.8% (29/56) | BARU  50.8% (31/61) | 2022+  51.7% (30/58) | 2026  60.0% (6/10) | p – | pd 0.990/1.000 | pg 1.000/1.000 | dtk  52.1% (244/468) /  57.1% (128/224) /  47.5% (116/244) [pasca-lihat]
+   M17 CHI_S       48.9% (67/137) | semua  41.7% (15/36) | LAMA  41.7% (15/36) | BARU     – | 2022+     – | 2026     – | p – | pd 1.000/0.996 | pg 1.000/1.000 | dtk  40.8% (58/142) /  39.4% (52/132) /  60.0% (6/10) [pasca-lihat]
+   M18 REG_S       46.6% (62/133) | semua  40.0% (14/35) | LAMA  40.6% (13/32) | BARU  33.3% (1/3) | 2022+     – | 2026     – | p – | pd 1.000/1.000 | pg 1.000/1.000 | dtk  43.6% (119/273) /  47.0% (79/168) /  38.1% (40/105) [pasca-lihat]
+   M19 NOG_S       39.5% (49/124) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p – | pd 1.000/1.000 | pg 1.000/1.000 | dtk     – /     – /     – [pasca-lihat]
+   per tahun (tutup kertas, benar/ditebak):
+     M01 -P         23:7/12 24:5/12 25:5/12 26:6/10
+     M02 -KON       17:9/11 18:5/12 19:5/12 20:8/12 21:4/11 22:5/12 23:4/11 24:5/12 25:3/12
+     M03 FLASH_K    17:5/11 18:3/11
+     M04 FLASH_D    
+     M05 FINAL_R    17:3/11 18:7/9 19:5/11 20:6/10 21:7/11 22:5/12 23:5/7 24:0/2 25:4/9 26:5/9
+     M06 CHI_K      16:7/12 17:6/12 18:9/12 19:6/12 20:5/12 21:3/11 22:7/12 23:9/12 24:6/12 25:5/12 26:6/10
+     M07 CHI_D      24:6/12 25:9/12 26:6/10
+     M08 REG_K      16:7/12 17:11/12 18:4/11 19:5/12 20:7/12 21:5/11 22:2/11 23:4/10 24:4/9 25:5/10 26:8/10
+     M09 REG_D      18:6/12 19:7/12 20:5/12 21:4/11 24:6/12 25:6/12 26:6/10
+     M10 REG_D+     19:3/5 20:3/7 21:2/5 22:2/7 26:3/5
+     M11 NOG        
+     M12 MR6        26:2/10
+     M13 SEAS       18:7/10 19:5/12 20:5/10 21:5/11 22:6/11 23:5/12 24:4/9 25:6/12 26:4/7
+     M14 VOTE_INFO  24:7/12 25:7/10 26:4/6
+     M15 VOTE_ALL   20:6/11 21:4/11 24:6/11 25:9/12 26:6/9
+     M16 FLASH_S    17:9/12 18:7/12 19:5/12 20:5/12 21:4/11 22:6/12 23:5/12 24:5/12 25:8/12 26:6/10
+     M17 CHI_S      17:6/12 18:7/12 19:2/12
+     M18 REG_S      19:4/12 20:6/12 21:4/11
+     M19 NOG_S      
+
+## ISM Jasa (ISM Services / Non-Manufacturing PMI) — 139 rilis bertarget 2010-11–2026-10; lonjakan naik 45%; rilis per tahun 2010:1 2011:1 2012:1 2013:2 2014:1 2015:5 2016:12 2017:12 2018:12 2019:12 2020:12 2021:10 2022:12 2023:12 2024:12 2025:12 2026:10
+   selalu NAIK   semua  46.1% (59/128) | LAMA  43.3% (29/67) | BARU  49.2% (30/61) | 2022+  51.7% (30/58) | 2026  50.0% (5/10)
+   PLAFON        semua  83.9% (104/124) | LAMA  83.3% (55/66) | BARU  84.5% (49/58) | 2022+  83.6% (46/55) | 2026  60.0% (6/10)   (emas = −kejutan sebenarnya)
+   (permutasi keluarga S: pra-registrasi 15/15 aturan cukup n, diperluas 19/19; 2000× acak)
+   kode aturan              angka | tutup kertas lonjakan menit 1 → semua (2016–2026) | LAMA | BARU | 2022+ | 2026 | p keluarga pra-reg 2016+/2022+ | p diperluas | p gabungan diperluas | detik 2–10 (semua/LAMA/BARU)
+   S01 -P          60.8% (79/130) | semua  58.9% (73/124) | LAMA  56.1% (37/66) | BARU  62.1% (36/58) | 2022+  65.5% (36/55) | 2026  50.0% (5/10) | p 0.377/0.205 | pd 0.491/0.284 | pg 0.658/0.406 | dtk  61.4% (297/484) /  63.1% (159/252) /  59.5% (138/232) [pasca-lihat]
+   S02 -KON        58.0% (76/131) | semua  58.4% (73/125) | LAMA  63.1% (41/65) | BARU  53.3% (32/60) | 2022+  54.4% (31/57) | 2026  55.6% (5/9) | p 0.458/0.987 | pd 0.593/0.993 | pg 0.740/0.999 | dtk  56.4% (275/488) /  64.5% (160/248) /  47.9% (115/240) [pasca-lihat]
+   S03 FLASH_K     46.5% (60/129) | semua  50.0% (16/32) | LAMA  42.9% (3/7) | BARU  52.0% (13/25) | 2022+  54.5% (12/22) | 2026  60.0% (6/10) | p 1.000/0.997 | pd 1.000/0.999 | pg 1.000/1.000 | dtk  45.3% (129/285) /  48.4% (77/159) /  41.3% (52/126)
+   S04 FLASH_D     38.4% (48/125) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk     – /     – /     –
+   S05 FINAL_R     49.6% (57/115) | semua  47.8% (44/92) | LAMA  44.4% (16/36) | BARU  50.0% (28/56) | 2022+  47.2% (25/53) | 2026  62.5% (5/8) | p 0.998/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  39.9% (69/173) /  29.4% (5/17) /  41.0% (64/156)
+   S06 MFG_K       58.2% (78/134) | semua  52.3% (67/128) | LAMA  55.2% (37/67) | BARU  49.2% (30/61) | 2022+  46.6% (27/58) | 2026  40.0% (4/10) | p 0.997/1.000 | pd 0.999/1.000 | pg 1.000/1.000 | dtk  52.3% (268/512) /  54.1% (145/268) /  50.4% (123/244)
+   S07 MFG_D       43.9% (58/132) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk     – /     – /     –
+   S08 REGS_D      48.0% (49/102) | semua  16.7% (2/12) | LAMA  16.7% (2/12) | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  28.3% (17/60) /  16.7% (6/36) /  45.8% (11/24)
+   S09 ADP_K       45.2% (52/115) | semua  43.3% (26/60) | LAMA  43.8% (21/48) | BARU  41.7% (5/12) | 2022+  30.0% (3/10) | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  41.6% (42/101) /  47.8% (32/67) /  29.4% (10/34)
+   S10 MR6         58.2% (78/134) | semua  54.7% (70/128) | LAMA  52.2% (35/67) | BARU  57.4% (35/61) | 2022+  56.9% (33/58) | 2026  50.0% (5/10) | p 0.934/0.919 | pd 0.975/0.958 | pg 0.996/0.997 | dtk  55.1% (282/512) /  54.1% (145/268) /  56.1% (137/244)
+   S11 SEAS        55.4% (67/121) | semua  59.2% (45/76) | LAMA  70.6% (12/17) | BARU  55.9% (33/59) | 2022+  54.4% (31/57) | 2026  50.0% (5/10) | p 0.679/0.987 | pd 0.801/0.993 | pg 0.914/0.999 | dtk  59.5% (182/306) /  55.7% (39/70) /  60.6% (143/236)
+   S12 -P&MFG      68.2% (45/66) | semua  62.3% (33/53) | LAMA  64.0% (16/25) | BARU  60.7% (17/28) | 2022+  60.7% (17/28) | 2026  40.0% (2/5) | p 0.128/0.548 | pd 0.172/0.664 | pg 0.241/0.860 | dtk  62.3% (132/212) /  66.0% (66/100) /  58.9% (66/112) [pasca-lihat]
+   S13 VOTE_INFO   38.9% (42/108) | semua     – | LAMA     – | BARU     – | 2022+     – | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk     – /     – /     –
+   S14 VOTE_ALL    49.5% (50/101) | semua  27.6% (8/29) | LAMA  33.3% (7/21) | BARU  12.5% (1/8) | 2022+  12.5% (1/8) | 2026     – | p 1.000/1.000 | pd 1.000/1.000 | pg 1.000/1.000 | dtk  28.6% (22/77) /  25.0% (8/32) /  31.1% (14/45)
+   S15 REG_K       61.9% (78/126) | semua  61.3% (73/119) | LAMA  65.2% (43/66) | BARU  56.6% (30/53) | 2022+  56.0% (28/50) | 2026  40.0% (4/10) | p 0.139/0.957 | pd 0.179/0.971 | pg 0.265/0.998 | dtk  57.8% (275/476) /  59.1% (156/264) /  56.1% (119/212)
+   S16 FLASH_S     55.2% (69/125) | semua  51.7% (60/116) | LAMA  56.4% (31/55) | BARU  47.5% (29/61) | 2022+  44.8% (26/58) | 2026  50.0% (5/10) | p – | pd 0.997/1.000 | pg 1.000/1.000 | dtk  51.0% (200/392) /  53.4% (79/148) /  49.6% (121/244) [pasca-lihat]
+   S17 MFG_S       58.3% (77/132) | semua  51.7% (60/116) | LAMA  60.0% (33/55) | BARU  44.3% (27/61) | 2022+  41.4% (24/58) | 2026  40.0% (4/10) | p – | pd 0.990/1.000 | pg 0.998/1.000 | dtk  51.3% (238/464) /  56.8% (125/220) /  46.3% (113/244) [pasca-lihat]
+   S18 REGS_S      53.9% (55/102) | semua  50.0% (40/80) | LAMA  52.6% (10/19) | BARU  49.2% (30/61) | 2022+  46.6% (27/58) | 2026  50.0% (5/10) | p – | pd 1.000/1.000 | pg 1.000/1.000 | dtk  51.9% (160/308) /  54.7% (35/64) /  51.2% (125/244) [pasca-lihat]
+   S19 -P&REGK     72.7% (48/66) | semua  70.2% (40/57) | LAMA  72.4% (21/29) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  42.9% (3/7) | p – | pd 0.002/0.057 | pg 0.004/0.092 | dtk  68.0% (155/228) /  71.6% (83/116) /  64.3% (72/112) [pasca-lihat]  ⚠️ lolos formal (keluarga diperluas) tetapi GAGAL uji sadar-seleksi semua pasangan p 0.170/0.584
+   per tahun (tutup kertas, benar/ditebak):
+     S01 -P         16:6/12 17:10/12 18:5/12 19:9/12 20:4/12 21:3/9 22:6/12 23:7/11 24:7/11 25:11/11 26:5/10
+     S02 -KON       16:9/12 17:7/11 18:6/12 19:9/11 20:7/12 21:4/10 22:5/12 23:6/12 24:8/12 25:7/12 26:5/9
+     S03 FLASH_K    21:4/10 25:6/12 26:6/10
+     S04 FLASH_D    
+     S05 FINAL_R    17:7/12 18:5/9 19:0/8 21:7/10 22:8/12 23:8/11 24:2/10 25:2/12 26:5/8
+     S06 MFG_K      16:7/12 17:7/12 18:7/12 19:5/12 20:7/12 21:7/10 22:4/12 23:8/12 24:4/12 25:7/12 26:4/10
+     S07 MFG_D      
+     S08 REGS_D     19:2/12
+     S09 ADP_K      17:4/9 18:5/11 19:6/11 20:3/10 21:5/9 22:3/10
+     S10 MR6        16:8/12 17:9/12 18:5/12 19:5/12 20:3/12 21:7/10 22:7/12 23:6/12 24:7/12 25:8/12 26:5/10
+     S11 SEAS       20:7/10 21:7/9 22:6/12 23:7/12 24:9/11 25:4/12 26:5/10
+     S12 -P&MFG     17:6/7 18:4/8 19:3/4 20:0/1 21:3/5 22:1/4 23:5/7 24:3/6 25:6/6 26:2/5
+     S13 VOTE_INFO  
+     S14 VOTE_ALL   18:6/10 19:1/11 24:1/8
+     S15 REG_K      16:7/12 17:9/12 18:6/11 19:10/12 20:8/12 21:5/10 22:7/11 23:7/10 24:5/9 25:5/10 26:4/10
+     S16 FLASH_S    17:8/12 18:5/12 19:9/12 20:7/12 21:5/10 22:6/12 23:5/12 24:4/12 25:6/12 26:5/10
+     S17 MFG_S      17:9/12 18:7/12 19:6/12 20:8/12 21:6/10 22:5/12 23:4/12 24:5/12 25:6/12 26:4/10
+     S18 REGS_S     20:8/12 21:5/10 22:6/12 23:5/12 24:5/12 25:6/12 26:5/10
+     S19 -P&REGK    17:7/7 18:2/4 19:9/11 20:2/4 21:1/4 22:3/5 23:5/7 24:3/3 25:5/5 26:3/7
+
+## Uji sadar-seleksi untuk aturan gabungan pasca-lihat (nol = terbaik dari semua aturan + semua pasangan)
+   ISM Manufaktur (ISM Manufacturing PMI): 127 aturan+pasangan memenuhi n; acak terbaik persentil 95 69.6% (2016+) / 80.0% (2022+)
+     FINAL_R&CHI_D      mentah 2016+ 60.4% | 2022+ 61.9% → p sadar-seleksi 0.701 / 0.883
+     FINAL_R&CHI_K      mentah 2016+ 60.0% | 2022+ 60.0% → p sadar-seleksi 0.757 / 0.952
+     FINAL_R&REG_K      mentah 2016+ 58.0% | 2022+ 47.6% → p sadar-seleksi 0.891 / 1.000
+     FINAL_R&SEAS       mentah 2016+ 57.8% | 2022+ 50.0% → p sadar-seleksi 0.900 / 1.000
+     FINAL_R&CHI_S      mentah 2016+ 57.4% | 2022+ 58.3% → p sadar-seleksi 0.914 / 0.969
+   ISM Jasa (ISM Services / Non-Manufacturing PMI): 111 aturan+pasangan memenuhi n; acak terbaik persentil 95 72.3% (2016+) / 81.0% (2022+)
+     -P&REG_K           mentah 2016+ 69.4% | 2022+ 70.4% → p sadar-seleksi 0.170 / 0.584
+     -P&REGK            mentah 2016+ 69.4% | 2022+ 70.4% → p sadar-seleksi 0.170 / 0.584
+     FINAL_R&REG_K      mentah 2016+ 67.9% | 2022+ 58.3% → p sadar-seleksi 0.265 / 0.992
+     -P&SEAS            mentah 2016+ 67.9% | 2022+ 75.0% → p sadar-seleksi 0.267 / 0.296
+     MR6&REG_K          mentah 2016+ 67.3% | 2022+ 63.6% → p sadar-seleksi 0.329 / 0.917
+     → -P&REG_K: p sadar-seleksi SEMUA pasangan 0.170 / 0.584; nol templat '-P & X' 0.023 / 0.163
+     → -P&MFG_K: p sadar-seleksi SEMUA pasangan 0.820 / 0.974; nol templat '-P & X' 0.279 / 0.734
+
+## Ketahanan S19 -P&REGK (hanya pemeriksaan; aturan tidak diubah)
+   target utama (Exness, cadangan Duka) semua  70.2% (40/57) | LAMA  72.4% (21/29) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  42.9% (3/7)
+   feed Exness saja                   semua  66.0% (33/50) | LAMA  63.6% (14/22) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  42.9% (3/7)
+   feed Dukascopy saja                semua 100.0% (1/1) | LAMA     – | BARU 100.0% (1/1) | 2022+ 100.0% (1/1) | 2026     –
+   arah detik 2                       semua  73.7% (42/57) | LAMA  79.3% (23/29) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  57.1% (4/7)
+   arah detik 3                       semua  66.7% (38/57) | LAMA  72.4% (21/29) | BARU  60.7% (17/28) | 2022+  63.0% (17/27) | 2026  28.6% (2/7)
+   arah detik 5                       semua  64.9% (37/57) | LAMA  69.0% (20/29) | BARU  60.7% (17/28) | 2022+  63.0% (17/27) | 2026  28.6% (2/7)
+   arah detik 10                      semua  66.7% (38/57) | LAMA  65.5% (19/29) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  42.9% (3/7)
+   hanya rilis berkonsensus Nasdaq    semua  69.8% (37/53) | LAMA  72.0% (18/25) | BARU  67.9% (19/28) | 2022+  70.4% (19/27) | 2026  42.9% (3/7)
+   tanpa saringan tutup kertas (mentah) 2016+:  69.4% (43/62)
+   Live (bila kelak diuji maju): -P = Nasdaq API rilis ISM jasa bulan lalu (Act vs konsensus); REG_K = Nasdaq API
+   Empire (±tgl 15), Philly (Kamis ke-3), Richmond (Selasa ke-4), KC (akhir bulan) bulan acuan, Act vs konsensus;
+   semuanya terbit ≥ 4 hari sebelum ISM jasa (hari kerja ke-3, 10:00 ET).
+
+## Info tambahan: Kalshi (bukan aturan keluarga; n kecil, pasar tipis)
+   KXISMPMI: 10 rilis 2025-04–2026-06; tebakan (selisih ≥ 10 poin) angka  60.0% (3/5), emas lonjakan  60.0% (3/5)
+     2025-05-01 P(atas) 0.23 P(bawah) 0.76 tebak -1 kejutan +1 lonjakan -1
+     2025-09-02 P(atas) 0.49 P(bawah) 0.48 tebak +0 kejutan -1 lonjakan +1
+     2025-08-01 P(atas) 0.48 P(bawah) 0.50 tebak +0 kejutan -1 lonjakan +1
+     2025-07-01 P(atas) 0.49 P(bawah) 0.49 tebak +0 kejutan +1 lonjakan -1
+     2025-04-01 P(atas) 0.57 P(bawah) 0.42 tebak +1 kejutan -1 lonjakan +1
+     2025-06-02 P(atas) 0.43 P(bawah) 0.54 tebak -1 kejutan -1 lonjakan +1
+     2025-11-03 P(atas) 0.35 P(bawah) 0.62 tebak -1 kejutan -1 lonjakan +1
+     2026-05-01 P(atas) 0.46 P(bawah) 0.53 tebak +0 kejutan -1 lonjakan +1
+     2026-04-01 P(atas) 0.65 P(bawah) 0.35 tebak +1 kejutan +1 lonjakan -1
+     2026-06-01 P(atas) 0.51 P(bawah) 0.45 tebak +0 kejutan +1 lonjakan -1
+   KXUSISMSERV: 2 rilis 2026-05–2026-06; tebakan (selisih ≥ 10 poin) angka 100.0% (1/1), emas lonjakan   0.0% (0/1)
+     2026-06-03 P(atas) 0.67 P(bawah) 0.32 tebak +1 kejutan +1 lonjakan +1
+     2026-05-05 P(atas) 0.50 P(bawah) 0.50 tebak +0 kejutan -1 lonjakan +1
+
+## Kesimpulan (jujur)
+1. ISM MANUFAKTUR: tidak ada petunjuk yang bekerja. Flash S&P, final S&P 09:45, Chicago PMI, survei Fed daerah,
+   New Orders, musiman, pembalikan: 36–54% tutup kertas (n ≥ 40), atau 62–64% hanya pada n 28–34 sejak 2024
+   (CHI_D, VOTE_INFO; p 0,94/0,18–0,99/0,40), VOTE_ALL 57% (LAMA 47%). Tebakan ANGKA kejutan pun 40–54%.
+   Aturan '_D' (perubahan tersirat vs perubahan konsensus) malah berlawanan karena ekonom KURANG bereaksi
+   (angka melampaui arah perubahan konsensus); versi perbaikan '_S' (regresi kejutan) juga gagal.
+2. ISM JASA, aturan pra-registrasi terbaik: S15 REG_K 61.3% (73/119) (LAMA 65.2% (43/66), BARU 56.6% (30/53), 2026 40.0% (4/10)), p keluarga 0.14/0.96; S12 -P&MFG 62.3% (33/53) (LAMA 64.0% (16/25), BARU 60.7% (17/28), 2026 40.0% (2/5)), p 0.13/0.55; S01 -P 58.9% (73/124) (LAMA 56.1% (37/66), BARU 62.1% (36/58), 2026 50.0% (5/10)) → TIDAK lolos.
+3. S19 -P&REGK (PASCA-LIHAT: berbalik dari kejutan ISM jasa bulan lalu DAN survei Fed daerah manufaktur bulan
+   acuan sepakat): 70.2% (40/57) (LAMA 72.4% (21/29), BARU 67.9% (19/28), 2026 42.9% (3/7)), n 57 rilis, keluarga diperluas p 0.002/0.057,
+   nol templat '-P & X' p 0.023/0.163, tetapi uji sadar-seleksi SEMUA pasangan p 0.170/0.584
+   (≥ 0,05) dan 2026 hanya 3/7. Secara mekanisme masuk akal (dua sinyal lemah ±61% yang independen → saat sepakat
+   ±71%), tetapi DITEMUKAN SETELAH MELIHAT DATA → BELUM TERBUKTI. Saran: uji maju (catat tiap rilis ISM jasa) tanpa
+   dipasang di aplikasi sampai ≥ 12 rilis baru ≥ 65%.
+4. Kalshi ISM: n 10–12 (sejak Apr 2025), pasar tipis → belum bisa dinilai.
+5. Temuan data: file ForexFactory spoluan memuat baris Januari tahun berikutnya bertanda tahun berjalan (contoh
+   '2023-01-03 ISM 47,4' = 3 Jan 2024) dan Nasdaq kadang mundur 1 hari (2019-07-31, 2025-09-01, 2026-01-06) —
+   diperbaiki di research/riset_ism_data.kalender; lonjakan60 memuat satu baris ISM palsu (2016-01-05 15:00 UTC).
+
+## LOLOS (semua kriteria): TIDAK ADA
+   Teratas menurut tutup kertas 2016–2026: S19 -P&REGK  70.2% (40/57) (p 0.00/0.06); M14 VOTE_INFO  64.3% (18/28) (p 0.94/0.18); S12 -P&MFG  62.3% (33/53) (p 0.13/0.55); M07 CHI_D  61.8% (21/34) (p 0.99/0.40); S15 REG_K  61.3% (73/119) (p 0.14/0.96); S11 SEAS  59.2% (45/76) (p 0.68/0.99)

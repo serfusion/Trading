@@ -219,6 +219,7 @@ def test_allin_tebakan_kuat_masuk_tutup_detik_2():
     assert a["teks"] == "💥 Modal kecil: BUY 1 dtk sebelum rilis → detik 2 rugi TUTUP, untung tahan s/d detik 10"
     assert f"untung di {d['lentur']['untung_baru']}% rilis" in a["bukti"] and "2019–2021 GAGAL" in a["bukti"]
     assert "1:200 +$" in a["bukti"] and "HMR" in a["bukti"] and "akun terpisah" in a["bukti"] and "menang" not in a["bukti"]
+    assert "₿ Kripto" in a["bukti"] and "ETH arah detik 2" in a["bukti"] and "emas tetap terbaik" in a["bukti"]
     # persen per detik: SETIAP detik 1–10 + 15 dtk…5 mnt ikut ke aplikasi
     pd_ = prep["pra_satu"]["per_detik"]
     assert all(str(h) in pd_ for h in list(range(1, 11)) + [30, 60, 300])

@@ -427,6 +427,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   diakali); Truflation butuh API key (secret pengguna). Tidak ada perubahan cloud/aplikasi.
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
+## ⛽ PPI ← minyak WTI & urutan berita berikutnya (13 Okt 2026 — `docs/PPI_WTI.md`)
+- Permintaan pengguna: lanjut sesuai urutan rilis PPI → FOMC → PCE → JOLTS → NFP → dll, lalu ETH & BTC. Riset sesi 11 Okt
+  (branch awesome-mendel) DIGABUNG; `research/riset_inflasi.py` dijalankan: PPI-WTI lolos semua kriteria + verifikasi
+  (`research/ppi_wti_cek.py`); PCE 0 lolos. DIPASANG cloud (`_ppi_wti.py`, `ppi_wti.json`, env PPI_WTI, cache `ppi_wti`).
+- `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
+- Sisa dari workflow 11 Okt: Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (lihat docs/LANJUTAN.md).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
@@ -531,6 +538,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   angka (plafon 74–93%). Berita lain (`research/berita_detik.py`, Nasdaq 4.390 hari kerja): 0 lolos di detik 2–10 maupun
   lonjakan; terdekat GDP (73% sejak 2022, n 22, lama 45%) → tidak dipasang.
 - Nasdaq kadang kosong untuk pekan berjalan → `_cpi_detik.konsensus_nasdaq` menggabung, tidak menimpa cache.
+
+## 🔁 Lanjutan riset per berita (11 Okt 2026 — BACA `docs/LANJUTAN.md` DULU)
+- Workflow `.claude/workflows/riset-berita-lonjakan.js` (6 kelompok → verifikasi adversarial → kritik; args = daftar kode
+  kelompok; agen melanjutkan file yang ada). Hasil agen: `docs/eksternal/riset_agen_hasil.json`. NFP & ISM selesai: 0 layak
+  pasang (ISM Jasa -P&REGK 70% pasca-lihat = kandidat uji maju). PPI/PCE, Retail/GDP, ADP/JOLTS/klaim, FOMC/konsumen: lanjutkan.
 
 ## Keamanan (wajib)
 - `kandidat/` (salinan kode) dan `arsip_repo/` (git bundle repo mentah) berisi **kode pihak ketiga yang tidak

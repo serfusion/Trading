@@ -21,6 +21,7 @@ from pathlib import Path
 
 import _core
 import _cpi_detik
+import _ppi_wti
 import _prediksi
 
 _PATH = Path(__file__).resolve().parent / "pra_aset.json"
@@ -249,6 +250,9 @@ def tebak_kartu(c: dict) -> dict | None:
         # CPI: HANYA aturan tutup kertas IDX|K (_cpi_detik.py, 11 Okt 2026); varian lama (minyak WTI dst.) tidak lolos
         # tutup kertas sejak 2022 → tidak dipakai lagi. Tanpa petunjuk = None (≈ 50:50).
         return c.get("cpi_detik") or None
+    if c.get("title") in _ppi_wti.JUDUL and _ppi_wti.aktif() and "ppi_wti" in c:
+        # PPI: aturan minyak WTI bulan acuan (13 Okt 2026, lolos + verifikasi); "kejutan CPI pekan itu" lama tidak lolos
+        return c.get("ppi_wti") or None
     b = c.get("petunjuk_teruji") or {}
     var = varian(c["title"], b) if b.get("arah_emas") else None
     r = ringkas(var, b["arah_emas"]) if var else None
@@ -441,11 +445,32 @@ def satu(row: dict) -> dict:
     return out
 
 
+def kripto_teks() -> str:
+    """13 Okt (pengguna "setelah itu ETH dan BTC"): tebakan CPI kuat juga diuji di kripto (research/kripto_cpi.py, spread
+    asli Exness) → info di bukti 💥; emas tetap terbaik (lebih sering untung)."""
+    k = (_cpi_detik.DATA.get("allin") or {}).get("kripto") or {}
+    e, b = k.get("ETH") or {}, k.get("BTC") or {}
+    if not e or not b:
+        return ""
+    return (f"\n₿ Kripto (CPI kuat, sejak 2022, spread asli Exness, HMR 1:200): ETH arah detik 2 {e['d2']}%, lentur "
+            f"+${e['lentur']:.0f}/$100 (untung {e['untung']}% rilis, habis {e['mc']}×) • BTC {b['d2']}%, +${b['lentur']:.0f} "
+            f"(untung {b['untung']}%, habis {b['mc']}×) — emas tetap terbaik")
+
+
 def allin(row: dict) -> dict | None:
     """💥 Modal kecil + lot maksimal (permintaan pengguna 13 Okt 2026: masuk 1 dtk sebelum rilis, modal kecil siap hilang,
     untung berlipat bila arah 1–5 dtk benar). HANYA CPI: research/cpi_allin2.py (tick Exness, tutup kertas, vs arah acak)
     → cpi_detik.json["allin"]. Tebakan kuat → masuk & tutup detik 2; ⚠️ lemah → JANGAN (sumber margin call). Info saja,
     tanpa order. Env CPI_ALLIN=0 mematikan."""
+    if row.get("title") in _ppi_wti.JUDUL and row.get("arah") and row.get("status") in TERUJI:
+        # 13 Okt: PPI-WTI diuji dengan cara yang sama (research/ppi_wti.py) → jauh lebih lemah dari CPI
+        lv = (_ppi_wti.DATA.get("allin_lentur") or {})
+        x2 = lv.get("200") or {}
+        return {"kuat": False, "teks": "💥 Modal kecil PPI: lemah — utamakan CPI",
+                "bukti": (f"Uji sejak 2022 (lentur, {x2.get('n_baru')} rilis): untung di {x2.get('untung_baru')}% rilis; per "
+                          f"modal $100 1:100 +${(lv.get('100') or {}).get('rata', 0):.0f}, 1:200 +${x2.get('rata', 0):.0f}, "
+                          f"1:500 +${(lv.get('500') or {}).get('rata', 0):.0f} (modal habis {(lv.get('500') or {}).get('mc', 0)}×) • "
+                          "2016–2021 rugi • detik 1 ≈ acak (48%) — CPI jauh lebih kuat (+$30, 72%)")}
     d = _cpi_detik.DATA.get("allin") or {}
     if os.environ.get("CPI_ALLIN", "1") == "0" or not d or row.get("title") not in _cpi_detik.JUDUL \
             or not row.get("arah"):
@@ -478,7 +503,7 @@ def allin(row: dict) -> dict | None:
             "bukti": (f"{uji}\n"
                       f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness HMR: order "
                       "15 mnt sebelum–90 dtk sesudah berita, leverage emas dibatasi 1:100–1:1000 (cek di akun) • pakai "
-                      "akun terpisah berisi modal kecil saja")}
+                      "akun terpisah berisi modal kecil saja" + kripto_teks())}
 
 
 def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
