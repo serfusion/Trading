@@ -395,11 +395,17 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `research/nasdaq_kalender.cpi` (urutan m/m–y/y bila FRED bulan acuan kosong, rilis 13 Jan 2026). Cloud tidak terdampak.
   `cloud/api/cpi_detik.json` dihitung ulang 13 Okt dengan data perbaikan (aturan dasar 2–10 dtk 64,2 → 63,5%).
 
-## 💥 CPI modal kecil + lot maksimal (15 Okt 2026 — `docs/CPI_ALLIN.md`, `research/cpi_allin.py`)
+## 💥 CPI modal kecil + lot maksimal (13 Okt 2026 — `docs/CPI_ALLIN.md`, `research/cpi_allin.py`)
 - Tick Exness, masuk t−1 dtk, margin call = −modal. Tebakan kuat, tutup detik 2: sejak Okt 2021 untung (1:200 +$649/32 rilis
   tanpa MC; 1:500 +$1.795; 1:2000 +$6.556 tetapi 1 dari 3,6 rilis modal habis), sebelum Okt 2021 RUGI; detik 1 rugi di semua
   leverage; ⚠️ lemah = sumber margin call. Exness kemungkinan membatasi leverage ±1:200 saat berita (minta pengguna cek).
-- ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 15 Okt).
+- Semua metode (`research/cpi_allin2.py`, 570 konfigurasi + pembanding ARAH ACAK — rugi dibatasi modal membuat acak pun
+  untung di leverage besar, jadi selalu bandingkan dengan acak): masuk t−1 dtk (cara pengguna) tebakan kuat tutup detik 2
+  sejak 2022 untung 78% rilis, 1:200 +$20/rilis vs acak −$4 (p < 0,001), 2026 5/5; 2019–2021 untung 25% (lebih buruk dari acak).
+  KEJAR (masuk setelah rilis) rugi. DIPASANG 13 Okt (izin "kalau bagus pasang") sebagai INFO: `_pra_aset.allin` →
+  `pra_satu.allin` (hanya CPI, `cpi_detik.json["allin"]` dari `cpi_allin2 simpan`, env CPI_ALLIN), aplikasi 4.35 baris 💥 +
+  lot maks modal kecil contoh + aba-aba MASUK/TUTUP di baris ⏱️. ⚠️ lemah = "JANGAN". Tanpa order otomatis.
+- ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
@@ -419,7 +425,7 @@ alarm tepat waktu) hanya menyentuh `android/`].
   EMA50 untuk 💰 XAU → DIPASANG (izin pengguna "terapkan yang baik"): `_core.h4_ema_check`, env XAU_H4_FILTER.
 
 ## Batal saat guncangan & berita 10 Okt 2026 (`docs/BATAL_GUNCANG.md`, `docs/CPI_14OKT.md`, `docs/SPOT_SKEMA.md`)
-- 15 Okt: 🛑 💰 kini HANYA close candle 1 jam tertutup (versi harga berjalan/wick merugikan: XAU −14R, BTC −32R, DOGE/ADA
+- 13 Okt: 🛑 💰 kini HANYA close candle 1 jam tertutup (versi harga berjalan/wick merugikan: XAU −14R, BTC −32R, DOGE/ADA
   turun) dan MATI untuk ETH/DOGE/ADA (keluhan DOGE batal lalu TP1). Lihat docs/BATAL_GUNCANG.md bagian akhir.
 - 🛑 DIPASANG (izin "perbaiki"): `_core.guncangan` (💰 ≥ 4 ATR/≤ 6 jam sebelum TP1, BUY & SELL simetris, event close
   `batal`), `_arus.GUNCANG` 3 ATR/3 jam, `_pulih.GUNCANG` −5%/1 jam; 💎 hanya ⚠️ `spot_warn` (SPOT_BATAL=1 paksa jual —

@@ -1,6 +1,6 @@
 """💥 Strategi "modal kecil, lot maksimal" saat rilis CPI — python -m research.cpi_allin → docs/eksternal/hasil_cpi_allin.txt
 
-Permintaan pengguna 15 Okt 2026: modal kecil (5–10 ribu cent = $50–100), lot sebesar mungkin; bila arah emas 1–5 detik
+Permintaan pengguna 13 Okt 2026: modal kecil (5–10 ribu cent = $50–100), lot sebesar mungkin; bila arah emas 1–5 detik
 setelah rilis benar → untung berlipat, bila salah → modal habis (margin call). "Akurasi harus benar-benar teruji, terutama
 1–5 detik pertama, terutama CPI."
 

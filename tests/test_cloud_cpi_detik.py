@@ -205,3 +205,34 @@ def test_tren200_dan_cache():
     assert _cpi_detik.tren200(t0, toko, NOW, feed=Feed(False)) == 1          # cache 6 jam: feed tidak dipanggil
     nanti = NOW.replace(hour=20)
     assert _cpi_detik.tren200(t0, toko, nanti, feed=Feed(False)) == -1
+
+
+def test_allin_tebakan_kuat_masuk_tutup_detik_2():
+    prep = kartu()
+    rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+    _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI)
+    _pra_aset.attach(prep, NOW, None)
+    a = prep["pra_satu"]["allin"]
+    d = _cpi_detik.DATA["allin"]
+    assert a["kuat"] and a["arah"] == "BUY" and a["teks"] == "💥 Modal kecil: BUY 1 dtk sebelum rilis → TUTUP detik 2"
+    assert f"untung di {d['untung_baru']}% rilis" in a["bukti"] and "2019–2021 GAGAL" in a["bukti"]
+    assert "1:200 +$" in a["bukti"] and "akun terpisah" in a["bukti"] and "menang" not in a["bukti"]
+
+
+def test_allin_lemah_jangan_dan_env_mati(monkeypatch):
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=lambda s: KALSHI, tren=lambda: 1)
+    _pra_aset.attach(prep, NOW, None)
+    a = prep["pra_satu"]["allin"]
+    assert not a["kuat"] and "JANGAN" in a["teks"] and "modal habis" in a["bukti"]
+    monkeypatch.setenv("CPI_ALLIN", "0")
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=lambda s: KALSHI, tren=lambda: 1)
+    _pra_aset.attach(prep, NOW, None)
+    assert "allin" not in prep["pra_satu"]
+
+
+def test_allin_bukan_cpi_tidak_ada():
+    assert _pra_aset.allin({"title": "Non-Farm Employment Change", "arah": "naik", "status": "teruji"}) is None
+    assert _pra_aset.allin({"title": "CPI m/m", "arah": None, "status": "acak"}) is None

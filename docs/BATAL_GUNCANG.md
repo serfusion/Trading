@@ -43,7 +43,7 @@ dengan pola data: menjual spot saat anjlok rata-rata lebih buruk.
 Batasan jujur: guncangan ekstrem jarang (XAU ±5 kali/tahun) dan manfaatnya kecil (+0,003R per sinyal). Pernyataan yang
 menjatuhkan harga pelan-pelan tidak terdeteksi — SL tetap pelindung utama.
 
-## Perbaikan 15 Okt 2026 (keluhan: DOGE "batal" lalu hari berikutnya TP1 kena)
+## Perbaikan 13 Okt 2026 (keluhan: DOGE "batal" lalu hari berikutnya TP1 kena)
 - Live memakai **harga berjalan tiap 10 menit** (ekor/wick sesaat ikut memicu), padahal yang diuji = **close candle 1 jam**.
   Uji versi wick (4 ATR/6 jam, replay cloud): XAU sejak Okt 2021 +734,6R → +720,5R (WR 65,1 → 64,4%), BTC +457 → +425R,
   DOGE lama +115 → +101R (WR 62,1 → 60,3%), ADA −9R per periode → merugikan.
