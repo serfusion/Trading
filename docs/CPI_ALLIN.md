@@ -82,3 +82,29 @@ acak). DIPASANG 13 Okt (izin "kalau bagus pasang") sebagai INFO, tanpa order, de
   detik 1. Cek batas leverage Exness saat berita; perlu tangan cepat atau EA untuk tutup tepat detik 2–5.
 - Per jalur tebakan (1:200, detik 2, sejak 2022): jalur indeks konsensus 25 rilis untung 76% (+$17,6/rilis); jalur Kalshi
   (dipakai bila konsensus indeks belum ada — seperti CPI 14 Okt 2026) 7 rilis untung 86% (+$29,8) — sampel sangat kecil.
+
+## Saldo 200.000 USC, tutup detik 1–10, HMR Exness (13 Okt 2026, `python -m research.cpi_allin2 bank`)
+**HMR Exness (resmi, Pusat Bantuan diperbarui 13 Okt 2026):** order yang dibuka 15 menit sebelum sampai 90 detik sesudah
+berita penting terkena margin lebih tinggi; leverage emas (XAU) dibatasi **1:100–1:1000** (forex & kripto 1:200). Leverage
+"tanpa batas" akun Cent TIDAK berlaku saat masuk 1 detik sebelum CPI. Batas untuk akun sendiri: indikator HMR di Exness
+Terminal/Trade atau Personal Area. Lot yang melebihi margin HMR akan ditolak.
+
+**Tutup detik 1–10** (masuk t−1 dtk, tebakan kuat, per modal $100, sejak 2022; lengkap di
+`docs/eksternal/hasil_cpi_allin_bank.txt`):
+
+| Tutup | untung | 1:100 | 1:200 | 1:500 | 1:1000 |
+|---|---|---|---|---|---|
+| detik 1 | 41% | +$1 | +$2 | +$5 | +$11 (habis 2) |
+| **detik 2** | **78%** | +$10 | +$20 (habis 0) | +$56 (habis 2) | +$107 (habis 6) |
+| detik 5 | 72% | +$9 | +$21 (habis 2) | +$72 (habis 6) | +$150 (habis 9) |
+| detik 10 | 72% | +$10 | +$24 (habis 5) | +$86 (habis 6) | +$178 (habis 9) |
+| **lentur** (detik 2 rugi → tutup; untung → tahan s/d detik 10) | 72% | +$14 | +$30 (habis 2) | +$89 (habis 4) | +$180 (habis 8) |
+
+Semua varian 2019–2021 negatif (−$1 … −$40). Di leverage besar, arah acak pun naik (1:1000 detik 10 acak +$72), jadi
+kelebihan tebakan = selisih dengan acak (±+$25 di 1:200, ±+$105 di 1:1000).
+
+**Saldo 200.000 USC (bank) + "peluru" tetap per CPI di akun terpisah** (untung ditarik ke bank, rugi maks = peluru):
+- Peluru 10.000 USC (5%): mulai 2019 (termasuk masa gagal) saldo terendah 193 rb (1:100) / 185 rb (1:200) / 167 rb (1:500) /
+  132 rb (1:1000, detik 2) — tidak pernah habis; akhir 2026 226 rb / 253 rb / 351 rb / 493 rb (lentur: 241/289/470/751 rb).
+- Peluru 20.000 (10%) 1:1000: terendah 64 rb. Peluru 40.000 (20%) 1:1000: **bangkrut** (−71 rb) bila mulai 2019.
+- Saran: peluru ≤ 5% saldo (10.000 USC), akun terpisah; lot = peluru × leverage HMR ÷ (harga × 100).

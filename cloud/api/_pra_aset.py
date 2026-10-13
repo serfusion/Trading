@@ -467,8 +467,9 @@ def allin(row: dict) -> dict | None:
             "teks": f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → TUTUP detik 2",
             "bukti": (f"Teruji 2022–2026: untung di {d.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; 2026: "
                       f"{th[0]}/{th[1]}) • rata-rata per modal $100: {rp('200')}, {rp('500')}, {rp('2000')}\n"
-                      f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness bisa "
-                      "membatasi leverage 1:200 saat berita • pakai akun terpisah berisi modal kecil saja")}
+                      f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness HMR: order "
+                      "15 mnt sebelum–90 dtk sesudah berita, leverage emas dibatasi 1:100–1:1000 (cek di akun) • pakai "
+                      "akun terpisah berisi modal kecil saja")}
 
 
 def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:

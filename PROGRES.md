@@ -293,3 +293,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   `research/cpi_allin2.py` (570 konfigurasi + pembanding arah acak) → docs/CPI_ALLIN.md bagian "Semua metode". Tebakan kuat
   t−1 dtk tutup detik 2: sejak 2022 untung 78% rilis (acak kalah, p < 0,001), 2019–2021 gagal. DIPASANG sebagai info:
   `_pra_aset.allin`, `cpi_detik.json["allin"]`, aplikasi 4.35 (baris 💥, lot maks modal kecil, aba-aba MASUK/TUTUP), +3 tes.
+- 13 Okt (lanjutan, saldo 200.000 USC, akun Cent tanpa batas, tutup 1–10 dtk): HMR Exness resmi (XAU 1:100–1:1000 saat 15 mnt
+  sebelum–90 dtk sesudah berita); `research/cpi_allin2.py bank` → docs/eksternal/hasil_cpi_allin_bank.txt, docs/CPI_ALLIN.md
+  bagian akhir (peluru 10.000 USC/CPI di akun terpisah; lentur detik 2→10). Teks bukti 💥 di cloud diperbarui (HMR).
