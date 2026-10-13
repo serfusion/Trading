@@ -298,7 +298,7 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         if g:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
-                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren") if k in g},
+                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -419,6 +419,8 @@ def satu(row: dict) -> dict:
         if dasar:
             uji.append(f"dasar: {dasar}")
         baris = [" • ".join(uji)]
+        if row.get("peringatan"):                          # CPI: tebakan TURUN saat tren naik / Kalshi core berlawanan
+            baris.append(f"Lemah karena {row['peringatan']}")
         out["jangka"] = j
     else:
         out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
@@ -514,10 +516,12 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         if g:
             u = _cpi_detik.DATA.get("uji") or {}
             naik = g["arah"] == "naik"
-            out.update(arah=g["arah"], status="tutup kertas", bukti=g["bukti"],
-                       teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% ({g.get('teks_sampai')}) ✅",
-                       kecil=" • ".join(f"{h} dtk {v:.0f}%" for h, v in (u.get("per_detik") or {}).items()
-                                        if v is not None) + f" ({u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
+            pdk = g.get("per_detik") or u.get("per_detik") or {}
+            out.update(arah=g["arah"], status=g.get("status", "tutup kertas"), bukti=g["bukti"],
+                       teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% ({g.get('teks_sampai')}) "
+                            f"{'✅' if g.get('status', 'tutup kertas') in TERUJI else '⚠️'}",
+                       kecil=" • ".join(f"{h} dtk {v:.0f}%" for h, v in pdk.items()
+                                        if v is not None) + f" ({g.get('n') or u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
         else:
             out.update(status="acak", arah=None, teks="XAU • arah belum bisa ditebak (konsensus indeks & Kalshi belum "
                                                       "memberi arah) ⚪",

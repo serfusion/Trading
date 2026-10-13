@@ -11,6 +11,14 @@ Aturan (sama persis dengan riset):
 Konsensus m/m & y/y: ForexFactory (kartu) bila sudah terbit, selain itu Nasdaq. Persen = uji tutup kertas detik 2/3/5/10
 (cloud/api/cpi_detik.json). Nasdaq lambat (±7 dtk) → cache baris Supabase "cpi_detik" (≥ 24 jam sebelum rilis tiap 3 jam,
 ≤ 24 jam tiap 30 mnt, ≤ 3 jam tiap 10 mnt). Env CPI_DETIK=0 mematikan. INFORMASI saja, tanpa order. Library standar.
+
+SARINGAN (13 Okt 2026, docs/CPI_SALAH.md; pengguna: "perbaiki" lalu "bukannya bisa di predict malah bagus kenapa
+dilewati?"): tebakan emas TURUN (CPI di atas) saat emas tren naik (close harian kemarin > rata-rata 200 hari, Twelve Data
+harian, cache baris Supabase "cpi_tren" 6 jam; tidak terbaca → dianggap lemah) ATAU pasar Kalshi core condong berlawanan
+(|atas−bawah| ≥ 0,10) TETAP ditampilkan tetapi ⚠️ LEMAH dengan angkanya sendiri (uji["saring"]["lemah"]: detik 1–2
+62%; sejak 2024 detik 2 45%). Tebakan lain = angka aturan tersaring (uji["saring"]): detik 2 68% (2016–2026),
+sejak Okt 2021 81%, sejak 2024 95%. Patokan tampilan = DETIK 2 (pengguna 13 Okt: "yang penting detik 1–2").
+Env CPI_SARING=0 = tanpa pemisahan (angka lama).
 """
 from __future__ import annotations
 
@@ -21,6 +29,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+import _core
 import _kalshi
 
 _PATH = Path(__file__).resolve().parent / "cpi_detik.json"
@@ -115,13 +124,13 @@ def indeks(t0: datetime, kons: dict, n: dict) -> dict:
             "suara": (s > 0) - (s < 0)}
 
 
-def kalshi(t0: datetime, kons_mm: float | None, get=_kalshi.fetch) -> dict | None:
-    """Kalshi headline (event bulan acuan) vs konsensus m/m → {"atas", "bawah", "lean"}."""
+def kalshi(t0: datetime, kons_mm: float | None, get=_kalshi.fetch, seri: str = "KXCPI") -> dict | None:
+    """Kalshi headline (atau core: seri KXCPICORE) event bulan acuan vs konsensus → {"atas", "bawah", "lean"}."""
     if kons_mm is None:
         return None
     y, m = (t0.year, t0.month - 1) if t0.month > 1 else (t0.year - 1, 12)
-    ev = f"KXCPI-{y % 100:02d}{BULAN[m - 1]}-"
-    ms = [x for x in get("KXCPI") if str(x.get("ticker", "")).startswith(ev)]
+    ev = f"{seri}-{y % 100:02d}{BULAN[m - 1]}-"
+    ms = [x for x in get(seri) if str(x.get("ticker", "")).startswith(ev)]
     sp = _kalshi.split(ms, kons_mm, 0.1) if ms else None
     if not sp:
         return None
@@ -159,6 +168,90 @@ def konsensus_nasdaq(t0: datetime, store, now: datetime, opener=None) -> dict:
         except Exception:  # noqa: BLE001
             pass
     return data
+
+
+def saring_aktif() -> bool:
+    return os.environ.get("CPI_SARING", "1") != "0" and bool((DATA.get("uji") or {}).get("saring"))
+
+
+def tren200(t0: datetime, store, now: datetime, key: str | None = None, feed=None) -> int | None:
+    """+1 = close harian emas (Senin–Jumat) terakhir sebelum tanggal rilis (UTC) di atas rata-rata 200 hari bursa, −1 di
+    bawah, None tidak terbaca. Twelve Data XAU/USD 1day 300 candle (1 kredit), cache baris Supabase 'cpi_tren' 6 jam."""
+    old = {}
+    if store is not None:
+        try:
+            old = store.get_state("cpi_tren") or {}
+        except Exception:  # noqa: BLE001
+            old = {}
+    hari = t0.strftime("%Y-%m-%d")
+    if old.get("hari") == hari and old.get("t") and now.timestamp() - old["t"] < 6 * 3600:
+        return old.get("nilai")
+    try:
+        key = key or os.environ.get("TWELVEDATA_API_KEY")
+        if feed is None and not key:
+            return old.get("nilai") if old.get("hari") == hari else None
+        bars = (feed or _core.TwelveData(key, "XAU/USD")).candles(300, "1day")
+        per_hari = {b.t.strftime("%Y-%m-%d"): b.c for b in sorted(bars, key=lambda b: b.t)
+                    if b.t.weekday() < 5}            # Twelve Data memuat candle Sabtu/Minggu (kadang ganda) → buang
+        tutup = [c for h, c in sorted(per_hari.items()) if h < hari]
+        if len(tutup) < 200:
+            return None
+        rata = sum(tutup[-200:]) / 200
+        nilai = 1 if tutup[-1] > rata else -1
+    except Exception:  # noqa: BLE001 - Twelve Data gagal → pakai cache lama untuk rilis yang sama
+        return old.get("nilai") if old.get("hari") == hari else None
+    if store is not None:
+        try:
+            store.save_state({"t": now.timestamp(), "hari": hari, "nilai": nilai, "close": round(tutup[-1], 2),
+                              "rata200": round(rata, 2)}, "cpi_tren")
+        except Exception:  # noqa: BLE001
+            pass
+    return nilai
+
+
+def saring(t0: datetime, g: dict | None, tren_fn, get=_kalshi.fetch) -> str | None:
+    """Alasan tebakan TURUN ditandai ⚠️ lemah (None = tebakan kuat / bukan TURUN). tren_fn() → +1/−1/None."""
+    if not g or g.get("arah") != "turun" or not saring_aktif():
+        return None
+    t = tren_fn()
+    if t is None:
+        return "tren emas 200 hari tidak terbaca"
+    if t > 0:
+        return "emas sedang tren naik (di atas rata-rata 200 hari)"
+    try:
+        kc = kalshi(t0, (g.get("konsensus") or {}).get("core"), get, "KXCPICORE")
+    except Exception:  # noqa: BLE001
+        kc = None
+    if kc and kc["lean"] <= -DATA.get("lean", 0.10):
+        return (f"pasar Kalshi core condong DI BAWAH perkiraan (di bawah {_pct(kc['bawah'] * 100)}, di atas "
+                f"{_pct(kc['atas'] * 100)}), berlawanan dengan tebakan")
+    return None
+
+
+def pakai_saring(g: dict | None, alasan: str | None) -> dict | None:
+    """Ganti persen/bukti tebakan dengan angka DETIK 2 aturan tersaring; tebakan yang kena saringan = ⚠️ lemah."""
+    if not g or not saring_aktif():
+        return g
+    sr = (DATA.get("uji") or {})["saring"]
+    lm = sr.get("lemah") or {}
+    pdk = (lm if alasan else sr).get("per_detik") or {}
+    if alasan:
+        g = {**g, "persen": round(lm.get("semua") or 0), "status": "lemah", "peringatan": alasan,
+             "lama": round(lm["lama"]) if lm.get("lama") is not None else None,
+             "baru": round(lm["baru"]) if lm.get("baru") is not None else None, "n": lm.get("n_rilis"),
+             "teks_sampai": "detik 2",
+             "bukti": (f"⚠️ Tebakan TURUN lemah: {alasan} • tebakan seperti ini dulu benar detik 1 "
+                       f"{_pct(pdk.get('1'))}, detik 2 {_pct(pdk.get('2'))} ({lm.get('n_rilis')} rilis 2016–2026; sejak "
+                       f"2024 detik 2 {_pct(lm.get('s2024'))}) • " + g["bukti"])}
+    else:
+        g = {**g, "persen": round(sr.get("semua") or 0), "lama": round(sr["lama"]) if sr.get("lama") is not None else None,
+             "baru": round(sr["baru"]) if sr.get("baru") is not None else None, "n": sr.get("n_rilis"),
+             "teks_sampai": "detik 2",
+             "bukti": (f"uji tutup kertas detik 2: {_pct(sr.get('semua'))} 2016–2026 ({sr.get('n_rilis')} rilis), sejak "
+                       f"Okt 2021 {_pct(sr.get('baru'))}, sejak 2024 {_pct(sr.get('s2024'))}; detik 1 {_pct(pdk.get('1'))} "
+                       f"(harga belum bergerak) • " + g["bukti"])}
+    g["per_detik"] = pdk
+    return g
 
 
 def _pct(x) -> str:
@@ -221,7 +314,7 @@ def tebak(t0: datetime, cards: list[dict], n: dict, get=_kalshi.fetch) -> dict |
             "indeks": ix, "konsensus": kons}
 
 
-def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get=_kalshi.fetch) -> None:
+def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get=_kalshi.fetch, tren=None) -> None:
     """c["cpi_detik"] = tebakan (atau None) di setiap kartu CPI yang belum rilis (≤ 31 hari)."""
     if not isinstance(persiapan, dict) or not aktif():
         return
@@ -237,5 +330,7 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get
         t0 = datetime.fromisoformat(t0s)
         n = konsensus_nasdaq(t0, store, now, opener) if i == 0 and t0 - now <= timedelta(days=8) else {}
         g = tebak(t0, cs, n, get)
+        tren_fn = tren or (lambda t0=t0: tren200(t0, store, now))
+        g = pakai_saring(g, saring(t0, g, tren_fn, get))
         for c in cs:
             c["cpi_detik"] = g

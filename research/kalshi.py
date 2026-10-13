@@ -100,12 +100,23 @@ def candles(series: str, m: dict, archived: bool) -> list[list]:
             else f"/series/{series}/markets/{m['ticker']}/candlesticks")
     d = _get(path, **q) or {}
     out = []
+
+    def px(o: dict | None, k: str) -> float | None:
+        # format lama: "close" (sen/desimal); sejak ±Jul 2026 API memakai "close_dollars" (string) → dulu tersimpan None
+        o = o or {}
+        return _num(o.get(k)) if o.get(k) is not None else _num(o.get(f"{k}_dollars"))
+
     for c in d.get("candlesticks", []):
-        out.append([c["end_period_ts"], _num((c.get("yes_bid") or {}).get("close")),
-                    _num((c.get("yes_ask") or {}).get("close")),
-                    _num((c.get("price") or {}).get("close")) or _num((c.get("price") or {}).get("previous")),
-                    _num(c.get("volume"))])
+        out.append([c["end_period_ts"], px(c.get("yes_bid"), "close"), px(c.get("yes_ask"), "close"),
+                    px(c.get("price"), "close") or px(c.get("price"), "previous"),
+                    _num(c.get("volume")) if c.get("volume") is not None else _num(c.get("volume_fp"))])
     return out
+
+
+def kosong(f) -> bool:
+    """File event yang semua candle-nya tanpa harga (korban perubahan format API) → unduh ulang."""
+    d = json.loads(f.read_text(encoding="utf-8"))
+    return not any(x is not None for m in d["pasar"] for c in m["candle"] for x in c[1:4])
 
 
 def download(series_list: list[str] | None = None) -> None:
@@ -116,7 +127,7 @@ def download(series_list: list[str] | None = None) -> None:
         print(f"{s}: {len(evs)} event", flush=True)
         for e in sorted(evs, key=lambda x: x["event_ticker"]):
             f = d / f"{e['event_ticker']}.json"
-            if f.exists():
+            if f.exists() and not kosong(f):
                 continue
             ms, archived = markets(e["event_ticker"])
             if not ms:
