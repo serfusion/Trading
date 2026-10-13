@@ -147,7 +147,26 @@ def tabel() -> pd.DataFrame:
     for c in ("mm_N", "core_N"):
         df[c] = df[c].fillna(0.0)
     df = kalshi(df)
+    df = tren200(df)
     df["th"] = df.t0.dt.year
+    return df
+
+
+def tren200(df: pd.DataFrame) -> pd.DataFrame:
+    """T200: close emas harian (Senin–Jumat) terakhir SEBELUM tanggal rilis (UTC) di atas (+1) / di bawah (−1) rata-rata
+    200 hari bursa."""
+    from .eksternal import asset
+    x = asset("XAUUSD").b.df
+    x = x[x.high > x.low]
+    d = x.close.resample("D").last().dropna()
+    if d.index.tz is None:
+        d.index = d.index.tz_localize("UTC")
+    d = d[d.index.dayofweek < 5]                  # Senin–Jumat saja (= cloud; Twelve Data harian memuat Sabtu/Minggu ganda)
+    out = []
+    for t in df.t0:
+        s = d[d.index < t.normalize()]
+        out.append(0.0 if len(s) < 200 else (1.0 if s.iloc[-1] > s.iloc[-200:].mean() else -1.0))
+    df["T200"] = out
     return df
 
 
@@ -165,6 +184,11 @@ def turunan(df: pd.DataFrame) -> pd.DataFrame:
     # ditambahkan SETELAH melihat hasil putaran pertama (dicatat di laporan): indeks dulu, cadangan Kalshi headline
     df["IDX|K"] = np.where(df.SUARA_IDX != 0, df.SUARA_IDX, df.mm_K)
     df["K|IDX"] = np.where(df.mm_K != 0, df.mm_K, df.SUARA_IDX)
+    # SARINGAN (13 Okt 2026, docs/CPI_SALAH.md): tebakan CPI DI ATAS (= emas TURUN) saat emas tren naik (T200) ATAU Kalshi
+    # core condong berlawanan → dipisah (IDX|K+S = tanpa tebakan itu; cloud menampilkannya sebagai ⚠️ lemah, tidak
+    # dibuang). Ditemukan setelah melihat kesalahan Jan & Jun 2026 → diuji tutup kertas; tebakan NAIK tidak diubah.
+    lewat = (df["IDX|K"] > 0) & ((df.T200 > 0) | ((df.core_K != 0) & (df.core_K != df["IDX|K"])))
+    df["IDX|K+S"] = np.where(lewat, 0.0, df["IDX|K"])
     df["PLAFON_core"], df["PLAFON_yy"], df["PLAFON_mm"] = df.s_core, df.s_yy, df.s_mm
     df["PLAFON_net"] = np.sign(df.s_core * 2 + df.s_mm + df.s_yy)
     return df
@@ -269,6 +293,43 @@ def simpan_json(df: pd.DataFrame) -> dict:
         k, n = tepat(df[df.th == th], tb[df.th == th])
         if n:
             uji["per_tahun"][str(th)] = [k, n]
+    # aturan tersaring (dipakai cloud bila CPI_SARING aktif): patokan DETIK 2 (permintaan pengguna 13 Okt: detik 1–2)
+    ts = tetap(df, "IDX|K+S")
+    b24 = df.th >= 2024
+    d2 = (2,)
+    rng = np.random.default_rng(1)
+
+    def p_acak(m):
+        g = np.sign(df.g2[m].fillna(0))
+        t, nv = tb[m], ts[m]
+        ok, keep = (t != 0) & (g != 0), (nv != 0) & (g != 0)
+        if not (0 < keep.sum() < ok.sum()):
+            return None
+        obs, hit, idx = (g[keep] == nv[keep]).mean(), (g.values == t.values), np.where(ok)[0]
+        sims = np.array([hit[rng.choice(idx, int(keep.sum()), replace=False)].mean() for _ in range(5000)])
+        return round(float((sims >= obs).mean()), 3)
+
+    def arah24(a):
+        k, n = tepat(df[b24], ts.where(ts == a, 0)[b24], d2)
+        return [k, n]
+    uji["saring"] = {"semua": st(ts, d2), "lama": st(ts, d2, lama), "baru": st(ts, d2, baru), "s2022": st(ts, d2, b22),
+                     "s2024": st(ts, d2, b24), "n_rilis": int(((ts != 0) & (df.th >= MULAI)).sum()),
+                     "n_2024": int(((ts != 0) & b24).sum()),
+                     "per_detik": {str(h): st(ts, (h,)) for h in DET},
+                     "per_detik_2024": {str(h): st(ts, (h,), b24) for h in DET},
+                     "dulu_2_10": st(ts), "baru_2_10": st(ts, m=baru),
+                     "selalu_naik": st(pd.Series(1.0, index=df.index), d2),
+                     "plafon": st(-pd.Series(np.where(df.s_core != 0, df.s_core, df.s_mm), index=df.index), d2),
+                     "naik_2024": arah24(1), "turun_2024": arah24(-1),
+                     "tanpa_saring": {"semua": st(tb, d2), "baru": st(tb, d2, baru), "s2024": st(tb, d2, b24)},
+                     "p_acak_baru": p_acak(baru), "p_acak_2024": p_acak(b24)}
+    # tebakan yang KENA saringan (TURUN saat tren naik / Kalshi core berlawanan) — 13 Okt 2026 pengguna: "bukannya bisa di
+    # predict malah bagus kenapa dilewati?" → tetap ditampilkan sebagai ⚠️ lemah dengan angkanya sendiri (detik 1 ±67%)
+    lm = pd.Series(np.where((tb != 0) & (ts == 0), tb, 0.0), index=df.index)
+    uji["saring"]["lemah"] = {"semua": st(lm, d2), "lama": st(lm, d2, lama), "baru": st(lm, d2, baru),
+                              "s2024": st(lm, d2, b24), "n_rilis": int(((lm != 0) & (df.th >= MULAI)).sum()),
+                              "per_detik": {str(h): st(lm, (h,)) for h in DET},
+                              "per_detik_2024": {str(h): st(lm, (h,), b24) for h in DET}}
     for nama, c in (("indeks", "SUARA_IDX"), ("kalshi", "mm_K")):
         t2 = tetap(df, c)
         uji[nama] = {"semua": st(t2), "s2022": st(t2, m=b22), "n_rilis": int(((t2 != 0) & (df.th >= MULAI)).sum())}
@@ -280,8 +341,10 @@ def simpan_json(df: pd.DataFrame) -> dict:
     out = {"dibuat": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d %H:%M UTC"),
            "aturan": "IDX|K: suara 3 konsensus indeks CPI tanpa pembulatan (Nasdaq/Investing: core m/m, y/y NSA, "
                      "headline m/m NSA) − konsensus dibulatkan, |selisih| ≥ 0,02; bila 0 → Kalshi headline |atas−bawah| "
-                     "≥ 0,10. Tebakan CPI di atas → emas TURUN detik 2–10.",
-           "ambang": AMBANG_IDX, "lean": 0.10, "uji": uji, "validitas": old.get("validitas", {}), **tab}
+                     "≥ 0,10. Tebakan CPI di atas → emas TURUN detik 2–10. SARINGAN (IDX|K+S, 13 Okt 2026): tebakan "
+                     "TURUN saat emas di atas rata-rata 200 hari atau Kalshi core condong berlawanan = ⚠️ lemah.",
+           "ambang": AMBANG_IDX, "lean": 0.10, "uji": uji, "validitas": old.get("validitas", {}),
+           **({"lonjakan": old["lonjakan"]} if "lonjakan" in old else {}), **tab}
     JSON.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
 
@@ -304,7 +367,7 @@ def main() -> None:
     for c in ("PLAFON_core", "PLAFON_yy", "PLAFON_mm", "PLAFON_net"):
         L.append(f"   {c:12s} 1 dtk: {per_periode(df, -df[c], (1,))}")
         L.append(f"   {c:12s} 2–10: {per_periode(df, -df[c])}")
-    semua = PETUNJUK + list(TURUNAN) + ["SUARA", "SUARA_IDX", "IDX|K", "K|IDX"]
+    semua = PETUNJUK + list(TURUNAN) + ["SUARA", "SUARA_IDX", "IDX|K", "K|IDX", "IDX|K+S"]
     L.append("\n## (0) Ketepatan ANGKA petunjuk (tebakan kejutan benar?) — untuk konteks")
     for c in semua:
         for k in ("core", "yy", "mm"):

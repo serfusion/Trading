@@ -42,10 +42,11 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
    IDXy|YOY   vs s_yy  :  82.7% (n 98) | BARU  75.0% (n 36)
    K|P core   vs s_core:  67.5% (n 77) | BARU  70.0% (n 30)
    K|P mm     vs s_mm  :  66.2% (n 77) | BARU  74.3% (n 35)
-   SUARA      vs s_core:  64.6% (n 96) | BARU  65.6% (n 32)
+   SUARA      vs s_core:  64.9% (n 97) | BARU  66.7% (n 33)
    SUARA_IDX  vs s_core:  67.9% (n 56) | BARU  68.0% (n 25)
    IDX|K      vs s_yy  :  70.1% (n 67) | BARU  72.2% (n 36)
    K|IDX      vs s_yy  :  70.1% (n 67) | BARU  72.2% (n 36)
+   IDX|K+S    vs s_yy  :  70.8% (n 48) | BARU  80.0% (n 25)
 
 ## (a) Aturan tetap, tutup kertas (dipakai hanya bila tahun-tahun lalu > 50%) — 2–10 dtk | 1 dtk
    P_mm       2–10: semua  60.2% (130/216) | LAMA  55.6% (40/72) | BARU  62.5% (90/144) | 2022+  65.2% (86/132) | rilis ditebak 54
@@ -56,8 +57,8 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
               1 dtk: semua  55.9% (33/59) | LAMA  45.0% (9/20) | BARU  61.5% (24/39) | 2022+  61.5% (24/39) | rilis ditebak 59
    KON        2–10: semua  53.5% (169/316) | LAMA  51.7% (93/180) | BARU  55.9% (76/136) | 2022+  58.1% (72/124) | rilis ditebak 79
               1 dtk: semua  55.8% (43/77) | LAMA  53.5% (23/43) | BARU  58.8% (20/34) | 2022+  54.8% (17/31) | rilis ditebak 79
-   YOY        2–10: semua  53.6% (203/379) | LAMA  58.6% (140/239) | BARU  45.0% (63/140) | 2022+  43.4% (59/136) | rilis ditebak 95
-              1 dtk: semua  41.5% (39/94) | LAMA  44.1% (26/59) | BARU  37.1% (13/35) | 2022+  38.2% (13/34) | rilis ditebak 95
+   YOY        2–10: semua  54.1% (203/375) | LAMA  58.6% (140/239) | BARU  46.3% (63/136) | 2022+  44.7% (59/132) | rilis ditebak 94
+              1 dtk: semua  41.9% (39/93) | LAMA  44.1% (26/59) | BARU  38.2% (13/34) | 2022+  39.4% (13/33) | rilis ditebak 94
    IDXc       2–10: semua  56.7% (34/60) | LAMA 100.0% (4/4) | BARU  53.6% (30/56) | 2022+  53.6% (30/56) | rilis ditebak 15
               1 dtk: semua  53.3% (8/15) | LAMA   0.0% (0/1) | BARU  57.1% (8/14) | 2022+  57.1% (8/14) | rilis ditebak 15
    IDXy       2–10: semua  60.1% (202/336) | LAMA  58.5% (103/176) | BARU  61.9% (99/160) | 2022+  63.8% (97/152) | rilis ditebak 84
@@ -66,10 +67,10 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
               1 dtk: semua  66.7% (12/18) | LAMA  66.7% (12/18) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 19
    IDXcy      2–10: semua  66.1% (37/56) | LAMA 100.0% (4/4) | BARU  63.5% (33/52) | 2022+  63.5% (33/52) | rilis ditebak 14
               1 dtk: semua  50.0% (7/14) | LAMA   0.0% (0/1) | BARU  53.8% (7/13) | 2022+  53.8% (7/13) | rilis ditebak 14
-   mm_K       2–10: semua  73.8% (62/84) | LAMA     – (0/0) | BARU  73.8% (62/84) | 2022+  73.8% (62/84) | rilis ditebak 21
-              1 dtk: semua  66.7% (14/21) | LAMA     – (0/0) | BARU  66.7% (14/21) | 2022+  66.7% (14/21) | rilis ditebak 21
-   core_K     2–10: semua  32.1% (9/28) | LAMA     – (0/0) | BARU  32.1% (9/28) | 2022+  32.1% (9/28) | rilis ditebak 7
-              1 dtk: semua   0.0% (0/7) | LAMA     – (0/0) | BARU   0.0% (0/7) | 2022+   0.0% (0/7) | rilis ditebak 7
+   mm_K       2–10: semua  68.5% (63/92) | LAMA     – (0/0) | BARU  68.5% (63/92) | 2022+  68.5% (63/92) | rilis ditebak 23
+              1 dtk: semua  65.2% (15/23) | LAMA     – (0/0) | BARU  65.2% (15/23) | 2022+  65.2% (15/23) | rilis ditebak 23
+   core_K     2–10: semua  37.5% (12/32) | LAMA     – (0/0) | BARU  37.5% (12/32) | 2022+  37.5% (12/32) | rilis ditebak 8
+              1 dtk: semua  12.5% (1/8) | LAMA     – (0/0) | BARU  12.5% (1/8) | 2022+  12.5% (1/8) | rilis ditebak 8
    mm_N       2–10: semua  51.0% (102/200) | LAMA  38.6% (34/88) | BARU  60.7% (68/112) | 2022+  60.0% (60/100) | rilis ditebak 50
               1 dtk: semua  46.9% (23/49) | LAMA  42.9% (9/21) | BARU  50.0% (14/28) | 2022+  52.0% (13/25) | rilis ditebak 50
    core_N     2–10: semua     – (0/0) | LAMA     – (0/0) | BARU     – (0/0) | 2022+     – (0/0) | rilis ditebak 0
@@ -78,57 +79,59 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
               1 dtk: semua  56.1% (69/123) | LAMA  65.6% (42/64) | BARU  45.8% (27/59) | 2022+  48.2% (27/56) | rilis ditebak 126
    mm_BENSIN  2–10: semua  44.0% (142/323) | LAMA  45.3% (81/179) | BARU  42.4% (61/144) | 2022+  43.2% (57/132) | rilis ditebak 81
               1 dtk: semua  58.8% (47/80) | LAMA  65.9% (29/44) | BARU  50.0% (18/36) | 2022+  51.5% (17/33) | rilis ditebak 81
-   YOY|P      2–10: semua  56.3% (284/504) | LAMA  58.9% (179/304) | BARU  52.5% (105/200) | 2022+  51.6% (99/192) | rilis ditebak 126
-              1 dtk: semua  44.0% (55/125) | LAMA  48.0% (36/75) | BARU  38.0% (19/50) | 2022+  39.6% (19/48) | rilis ditebak 126
+   YOY|P      2–10: semua  57.1% (288/504) | LAMA  58.9% (179/304) | BARU  54.5% (109/200) | 2022+  53.6% (103/192) | rilis ditebak 126
+              1 dtk: semua  44.8% (56/125) | LAMA  48.0% (36/75) | BARU  40.0% (20/50) | 2022+  41.7% (20/48) | rilis ditebak 126
    IDXc|P     2–10: semua  58.5% (217/371) | LAMA  57.9% (113/195) | BARU  59.1% (104/176) | 2022+  60.7% (102/168) | rilis ditebak 93
               1 dtk: semua  60.0% (54/90) | LAMA  58.7% (27/46) | BARU  61.4% (27/44) | 2022+  59.5% (25/42) | rilis ditebak 93
-   IDXy|YOY   2–10: semua  56.5% (298/527) | LAMA  60.1% (194/323) | BARU  51.0% (104/204) | 2022+  52.0% (102/196) | rilis ditebak 132
-              1 dtk: semua  48.8% (63/129) | LAMA  51.3% (40/78) | BARU  45.1% (23/51) | 2022+  44.9% (22/49) | rilis ditebak 132
+   IDXy|YOY   2–10: semua  57.0% (298/523) | LAMA  60.1% (194/323) | BARU  52.0% (104/200) | 2022+  53.1% (102/192) | rilis ditebak 131
+              1 dtk: semua  49.2% (63/128) | LAMA  51.3% (40/78) | BARU  46.0% (23/50) | 2022+  45.8% (22/48) | rilis ditebak 131
    K|P core   2–10: semua  48.4% (137/283) | LAMA  49.5% (45/91) | BARU  47.9% (92/192) | 2022+  48.9% (90/184) | rilis ditebak 71
               1 dtk: semua  41.4% (29/70) | LAMA  45.5% (10/22) | BARU  39.6% (19/48) | 2022+  37.0% (17/46) | rilis ditebak 71
-   K|P mm     2–10: semua  60.9% (168/276) | LAMA  55.6% (40/72) | BARU  62.7% (128/204) | 2022+  64.6% (124/192) | rilis ditebak 69
-              1 dtk: semua  58.0% (40/69) | LAMA  55.6% (10/18) | BARU  58.8% (30/51) | 2022+  58.3% (28/48) | rilis ditebak 69
-   SUARA      2–10: semua  60.5% (326/539) | LAMA  60.2% (204/339) | BARU  61.0% (122/200) | 2022+  62.5% (120/192) | rilis ditebak 135
-              1 dtk: semua  55.3% (73/132) | LAMA  57.3% (47/82) | BARU  52.0% (26/50) | 2022+  50.0% (24/48) | rilis ditebak 135
+   K|P mm     2–10: semua  59.5% (169/284) | LAMA  55.6% (40/72) | BARU  60.8% (129/212) | 2022+  62.5% (125/200) | rilis ditebak 71
+              1 dtk: semua  57.7% (41/71) | LAMA  55.6% (10/18) | BARU  58.5% (31/53) | 2022+  58.0% (29/50) | rilis ditebak 71
+   SUARA      2–10: semua  60.8% (330/543) | LAMA  60.2% (204/339) | BARU  61.8% (126/204) | 2022+  63.3% (124/196) | rilis ditebak 136
+              1 dtk: semua  55.6% (74/133) | LAMA  57.3% (47/82) | BARU  52.9% (27/51) | 2022+  51.0% (25/49) | rilis ditebak 136
    SUARA_IDX  2–10: semua  62.7% (200/319) | LAMA  58.5% (93/159) | BARU  66.9% (107/160) | 2022+  69.1% (105/152) | rilis ditebak 80
               1 dtk: semua  59.0% (46/78) | LAMA  60.5% (23/38) | BARU  57.5% (23/40) | 2022+  57.9% (22/38) | rilis ditebak 80
-   IDX|K      2–10: semua  64.2% (228/355) | LAMA  58.5% (93/159) | BARU  68.9% (135/196) | 2022+  70.7% (133/188) | rilis ditebak 89
-              1 dtk: semua  58.6% (51/87) | LAMA  60.5% (23/38) | BARU  57.1% (28/49) | 2022+  57.4% (27/47) | rilis ditebak 89
-   K|IDX      2–10: semua  62.0% (220/355) | LAMA  58.5% (93/159) | BARU  64.8% (127/196) | 2022+  66.5% (125/188) | rilis ditebak 89
-              1 dtk: semua  57.5% (50/87) | LAMA  60.5% (23/38) | BARU  55.1% (27/49) | 2022+  55.3% (26/47) | rilis ditebak 89
+   IDX|K      2–10: semua  63.5% (228/359) | LAMA  58.5% (93/159) | BARU  67.5% (135/200) | 2022+  69.3% (133/192) | rilis ditebak 90
+              1 dtk: semua  58.0% (51/88) | LAMA  60.5% (23/38) | BARU  56.0% (28/50) | 2022+  56.2% (27/48) | rilis ditebak 90
+   K|IDX      2–10: semua  61.3% (220/359) | LAMA  58.5% (93/159) | BARU  63.5% (127/200) | 2022+  65.1% (125/192) | rilis ditebak 90
+              1 dtk: semua  56.8% (50/88) | LAMA  60.5% (23/38) | BARU  54.0% (27/50) | 2022+  54.2% (26/48) | rilis ditebak 90
+   IDX|K+S    2–10: semua  66.7% (162/243) | LAMA  57.4% (66/115) | BARU  75.0% (96/128) | 2022+  78.3% (94/120) | rilis ditebak 61
+              1 dtk: semua  55.9% (33/59) | LAMA  55.6% (15/27) | BARU  56.2% (18/32) | 2022+  56.7% (17/30) | rilis ditebak 61
 
 ## (b) Pilih aturan terbaik tiap tahun (dari tahun-tahun lalu)
-   2013: SUARA (54%); 2014: KON (59%); 2015: IDXy|YOY (58%); 2016: IDXy|YOY (62%); 2017: SUARA_IDX (77%); 2018: SUARA_IDX (75%); 2019: SUARA_IDX (75%); 2020: SUARA_IDX (68%); 2021: IDXy (63%); 2022: IDXy (62%); 2023: IDX|K (61%); 2024: IDX|K (61%); 2025: IDX|K (63%); 2026: IDX|K (65%)
-   2–10: semua  58.2% (288/495) | LAMA  53.9% (159/295) | BARU  64.5% (129/200) | 2022+  66.1% (127/192) | rilis ditebak 124
-   1 dtk: semua  54.5% (66/121) | LAMA  53.5% (38/71) | BARU  56.0% (28/50) | 2022+  56.2% (27/48) | rilis ditebak 124
+   2013: SUARA (54%); 2014: KON (59%); 2015: IDXy|YOY (58%); 2016: IDXy|YOY (62%); 2017: SUARA_IDX (77%); 2018: SUARA_IDX (75%); 2019: SUARA_IDX (75%); 2020: IDX|K+S (69%); 2021: IDX|K+S (65%); 2022: IDXy (62%); 2023: IDX|K (61%); 2024: IDX|K (61%); 2025: IDX|K (63%); 2026: IDX|K+S (67%)
+   2–10: semua  58.2% (274/471) | LAMA  52.7% (145/275) | BARU  65.8% (129/196) | 2022+  67.6% (127/188) | rilis ditebak 118
+   1 dtk: semua  54.8% (63/115) | LAMA  54.5% (36/66) | BARU  55.1% (27/49) | 2022+  55.3% (26/47) | rilis ditebak 118
 
 ## (c) Model logistik walk-forward (semua petunjuk + kecenderungan naik)
-   semua petunjuk         ambang 0.50 2–10: semua  53.7% (296/551) | LAMA  47.0% (148/315) | BARU  62.7% (148/236) | 2022+  62.5% (140/224) | rilis ditebak 138
+   semua petunjuk         ambang 0.50 2–10: semua  53.0% (292/551) | LAMA  47.0% (148/315) | BARU  61.0% (144/236) | 2022+  60.7% (136/224) | rilis ditebak 138
    semua petunjuk         ambang 0.55 2–10: semua  53.8% (221/411) | LAMA  49.3% (110/223) | BARU  59.0% (111/188) | 2022+  58.3% (105/180) | rilis ditebak 103
-   semua petunjuk         ambang 0.60 2–10: semua  56.9% (164/288) | LAMA  55.1% (86/156) | BARU  59.1% (78/132) | 2022+  57.8% (74/128) | rilis ditebak 72
-   semua petunjuk         ambang 0.65 2–10: semua  55.0% (110/200) | LAMA  54.0% (67/124) | BARU  56.6% (43/76) | 2022+  56.6% (43/76) | rilis ditebak 50
+   semua petunjuk         ambang 0.60 2–10: semua  56.7% (161/284) | LAMA  55.1% (86/156) | BARU  58.6% (75/128) | 2022+  57.3% (71/124) | rilis ditebak 71
+   semua petunjuk         ambang 0.65 2–10: semua  54.4% (111/204) | LAMA  54.0% (67/124) | BARU  55.0% (44/80) | 2022+  55.0% (44/80) | rilis ditebak 51
    tanpa Kalshi/nowcast   ambang 0.50 2–10: semua  54.1% (298/551) | LAMA  48.3% (152/315) | BARU  61.9% (146/236) | 2022+  61.6% (138/224) | rilis ditebak 138
    tanpa Kalshi/nowcast   ambang 0.55 2–10: semua  56.4% (221/392) | LAMA  50.9% (114/224) | BARU  63.7% (107/168) | 2022+  63.1% (101/160) | rilis ditebak 98
    tanpa Kalshi/nowcast   ambang 0.60 2–10: semua  58.1% (165/284) | LAMA  58.5% (103/176) | BARU  57.4% (62/108) | 2022+  55.8% (58/104) | rilis ditebak 71
    tanpa Kalshi/nowcast   ambang 0.65 2–10: semua  56.5% (113/200) | LAMA  60.2% (77/128) | BARU  50.0% (36/72) | 2022+  50.0% (36/72) | rilis ditebak 50
    + harga sebelum rilis  ambang 0.50 2–10: semua  51.2% (282/551) | LAMA  48.9% (154/315) | BARU  54.2% (128/236) | 2022+  53.6% (120/224) | rilis ditebak 138
    + harga sebelum rilis  ambang 0.55 2–10: semua  51.5% (224/435) | LAMA  50.6% (125/247) | BARU  52.7% (99/188) | 2022+  52.7% (99/188) | rilis ditebak 109
-   + harga sebelum rilis  ambang 0.60 2–10: semua  52.6% (179/340) | LAMA  51.1% (96/188) | BARU  54.6% (83/152) | 2022+  54.6% (83/152) | rilis ditebak 85
-   + harga sebelum rilis  ambang 0.65 2–10: semua  55.6% (120/216) | LAMA  50.8% (63/124) | BARU  62.0% (57/92) | 2022+  62.0% (57/92) | rilis ditebak 54
+   + harga sebelum rilis  ambang 0.60 2–10: semua  52.4% (176/336) | LAMA  51.1% (96/188) | BARU  54.1% (80/148) | 2022+  54.1% (80/148) | rilis ditebak 84
+   + harga sebelum rilis  ambang 0.65 2–10: semua  54.0% (121/224) | LAMA  50.8% (63/124) | BARU  58.0% (58/100) | 2022+  58.0% (58/100) | rilis ditebak 56
 
 ## Per tahun — aturan tetap terbaik 2022+ (2–10 dtk)
-   mm_K       (74% 2022+) 13:– 14:– 15:– 16:– 17:– 18:– 19:– 20:– 21:– 22:– 23:– 24:20/36 25:26/32 26:16/16
-   IDX|K      (71% 2022+) 13:– 14:– 15:– 16:16/20 17:20/28 18:26/35 19:10/28 20:11/28 21:12/28 22:20/32 23:25/40 24:37/48 25:34/44 26:17/24
+   IDX|K+S    (78% 2022+) 13:– 14:– 15:– 16:8/12 17:16/24 18:25/31 19:8/20 20:3/12 21:8/24 22:12/20 23:16/24 24:21/28 25:28/28 26:17/20
+   IDX|K      (69% 2022+) 13:– 14:– 15:– 16:16/20 17:20/28 18:26/35 19:10/28 20:11/28 21:12/28 22:20/32 23:25/40 24:37/48 25:34/44 26:17/28
    SUARA_IDX  (69% 2022+) 13:– 14:– 15:– 16:16/20 17:20/28 18:26/35 19:10/28 20:11/28 21:12/28 22:12/24 23:17/28 24:29/40 25:30/36 26:17/24
-   K|IDX      (66% 2022+) 13:– 14:– 15:– 16:16/20 17:20/28 18:26/35 19:10/28 20:11/28 21:12/28 22:16/32 23:23/40 24:31/48 25:38/44 26:17/24
+   mm_K       (68% 2022+) 13:– 14:– 15:– 16:– 17:– 18:– 19:– 20:– 21:– 22:– 23:– 24:20/36 25:26/32 26:17/24
    P_mm       (65% 2022+) 13:15/28 14:8/24 15:– 16:– 17:– 18:– 19:– 20:– 21:21/32 22:25/40 23:13/24 24:22/32 25:16/24 26:10/12
 
 ## IDX|K per detik (tutup kertas)
-    1 dtk: semua  58.6% (51/87) | LAMA  60.5% (23/38) | BARU  57.1% (28/49) | 2022+  57.4% (27/47) | rilis ditebak 89
-    2 dtk: semua  67.0% (59/88) | LAMA  56.4% (22/39) | BARU  75.5% (37/49) | 2022+  76.6% (36/47) | rilis ditebak 89
-    3 dtk: semua  61.8% (55/89) | LAMA  57.5% (23/40) | BARU  65.3% (32/49) | 2022+  68.1% (32/47) | rilis ditebak 89
-    5 dtk: semua  62.9% (56/89) | LAMA  57.5% (23/40) | BARU  67.3% (33/49) | 2022+  70.2% (33/47) | rilis ditebak 89
-   10 dtk: semua  65.2% (58/89) | LAMA  62.5% (25/40) | BARU  67.3% (33/49) | 2022+  68.1% (32/47) | rilis ditebak 89
+    1 dtk: semua  58.0% (51/88) | LAMA  60.5% (23/38) | BARU  56.0% (28/50) | 2022+  56.2% (27/48) | rilis ditebak 90
+    2 dtk: semua  66.3% (59/89) | LAMA  56.4% (22/39) | BARU  74.0% (37/50) | 2022+  75.0% (36/48) | rilis ditebak 90
+    3 dtk: semua  61.1% (55/90) | LAMA  57.5% (23/40) | BARU  64.0% (32/50) | 2022+  66.7% (32/48) | rilis ditebak 90
+    5 dtk: semua  62.2% (56/90) | LAMA  57.5% (23/40) | BARU  66.0% (33/50) | 2022+  68.8% (33/48) | rilis ditebak 90
+   10 dtk: semua  64.4% (58/90) | LAMA  62.5% (25/40) | BARU  66.0% (33/50) | 2022+  66.7% (32/48) | rilis ditebak 90
 
 ## Kertas dibuka satu per satu — IDX|K, rilis 2022–2026 (gerak $ 1/2/3/5/10 dtk; ✅/❌ per detik 2–10)
    2022-01-12 indeks +1 Kalshi +0 → tebak TURUN |  -0.20  -1.05  -1.59  -1.45  +0.42 | ✅✅✅❌
@@ -178,7 +181,7 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
    2025-09-11 indeks +1 Kalshi +1 → tebak TURUN |  -0.25  +2.09  +1.05  -7.90  -4.61 | ❌❌✅✅
    2025-10-24 indeks -1 Kalshi +0 → tebak NAIK  |  -0.43 +12.42 +11.43 +21.04 +19.13 | ✅✅✅✅
    2025-12-18 indeks -1 Kalshi +0 → tebak NAIK  |  -0.28 +10.81 +10.18 +11.27 +13.90 | ✅✅✅✅
-   2026-01-13 tidak menebak (petunjuk kosong / tahun lalu ≤ 50%)
+   2026-01-13 indeks +0 Kalshi +1 → tebak TURUN |  +0.38  +4.75  +2.88  +4.87  +5.79 | ❌❌❌❌
    2026-02-13 indeks -1 Kalshi -1 → tebak NAIK  |  +0.09  +4.13  +3.72 +12.10 +19.79 | ✅✅✅✅
    2026-03-11 indeks -1 Kalshi -1 → tebak NAIK  |  +0.52  +1.34  +3.82  +3.02  +1.45 | ✅✅✅✅
    2026-04-10 indeks -1 Kalshi -1 → tebak NAIK  |  -1.26  +7.76 +13.19  +7.79 +11.27 | ✅✅✅✅
@@ -186,4 +189,4 @@ Cek konsensus FF vs Nasdaq (rilis sama): headline 83%, core 96%, y/y 77% sama (n
    2026-06-10 indeks +1 Kalshi +0 → tebak TURUN |  -0.34  +5.91  +7.70 +13.73  +9.90 | ❌❌❌❌
    2026-07-14 indeks -1 Kalshi -1 → tebak NAIK  |  +3.64  +3.89 +31.25 +39.75 +56.58 | ✅✅✅✅
    2026-08-12 tidak menebak (petunjuk kosong / tahun lalu ≤ 50%)
-   2026-09-11 indeks -1 Kalshi +0 → tebak NAIK  |  +2.76  +2.76 -21.57 -28.40 -34.87 | ✅❌❌❌
+   2026-09-11 indeks -1 Kalshi -1 → tebak NAIK  |  +2.76  +2.76 -21.57 -28.40 -34.87 | ✅❌❌❌

@@ -99,6 +99,10 @@ def cpi(tgl) -> dict:
                     return abs(angka(a["previous"]) - mm) + abs(angka(b["previous"]) - yy)
                 if e(g[1], g[0]) < e(g[0], g[1]):
                     g = [g[1], g[0]]
+            elif abs(angka(g[0]["previous"])) > abs(angka(g[1]["previous"])):
+                # FRED bulan acuan kosong (CPI Okt 2025 tidak terbit, shutdown) → m/m = baris dengan angka lebih kecil
+                # (sama dengan cadangan di cloud/api/_cpi_detik.nasdaq); dulu rilis 13 Jan 2026 tertukar
+                g = [g[1], g[0]]
             o[f"{kunci}_a"], o[f"{kunci}_f"], o[f"{kunci}_p"] = (angka(g[0][k]) for k in ("actual", "consensus", "previous"))
             yk = "yy" if kunci == "mm" else "core_yy"
             o[f"{yk}_a"], o[f"{yk}_f"], o[f"{yk}_p"] = (angka(g[1][k]) for k in ("actual", "consensus", "previous"))

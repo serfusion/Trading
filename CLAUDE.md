@@ -380,6 +380,21 @@ alarm tepat waktu) hanya menyentuh `android/`].
   pulih_close), replay `research/pulih_replay.py` 143/144 = riset, aplikasi 4.25 `PulihCard.kt` (pair "SPOT"), baris 🔗 di
   peringkat.json. Twelve Data ATR ±9% < data riset → ±20% kejadian tambahan di batas 5 ATR (dicatat, aturan tidak diubah).
 
+## 🔍 Kesalahan CPI detik 1–2 (13 Okt 2026 — `docs/CPI_SALAH.md`, `research/cpi_salah.py`)
+- Pengguna: "yang penting pasca release detik 1–2 benar". Detik 1 = noise (median $0,48, plafon 57% walau angka diketahui);
+  detik 2 aturan IDX|K BARU 74% / 2024+ 77% (plafon 75–80%). Sep 2026 benar di detik 1–2 (salah mulai detik 3); Jun & Jan
+  2026 salah: CPI utama sesuai perkiraan, core di BAWAH → emas naik, padahal tebakan TURUN. Core paling menggerakkan emas
+  (86%); konsensus indeks core kosong sepanjang 2026; Kalshi core sebagai penentu memperburuk.
+- Sejak 2024 tebakan NAIK detik 2 95% (18/19), TURUN 45% (5/11). DIPASANG 13 Okt (izin "perbaiki", lalu "kenapa
+  dilewati?"): tebakan TURUN saat emas > rata-rata 200 hari ATAU Kalshi core berlawanan TETAP tampil sebagai ⚠️ lemah
+  (detik 1–2 62%); tebakan lain detik 2 68% / BARU 81% / 2024+ 95% (`_cpi_detik.saring`/`pakai_saring`/`tren200`,
+  cache Supabase `cpi_tren`, env CPI_SARING=0; `cpi_detik.json["uji"]["saring"]`; tren = close Senin–Jumat karena
+  Twelve Data harian memuat Sabtu/Minggu ganda). Patokan tampilan CPI = DETIK 2.
+  JANGAN membuang tebakan yang masih > 50% — tandai lemah.
+- Data riset diperbaiki: `research/kalshi.py` (API `close_dollars` sejak ±Jul 2026; 13 event diunduh ulang, `kosong()`),
+  `research/nasdaq_kalender.cpi` (urutan m/m–y/y bila FRED bulan acuan kosong, rilis 13 Jan 2026). Cloud tidak terdampak.
+  `cloud/api/cpi_detik.json` dihitung ulang 13 Okt dengan data perbaikan (aturan dasar 2–10 dtk 64,2 → 63,5%).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

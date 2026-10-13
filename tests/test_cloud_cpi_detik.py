@@ -53,12 +53,12 @@ def test_kalshi_cadangan_bila_indeks_kosong():
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI)
     g = prep["mendatang"][0]["cpi_detik"]
     assert g["jalur"] == "kalshi" and g["arah"] == "naik" and g["status"] == "tutup kertas"
-    lj = _cpi_detik.DATA["lonjakan"]                       # patokan utama: lonjakan terbesar menit pertama
-    assert g["persen"] == round(lj["semua"]) and g["teks_sampai"] == "lonjakan menit 1" and "di bawah 35%" in g["bukti"]
-    assert "detik 2–10" in g["bukti"] and "puncak rata-rata detik" in g["bukti"]
+    sr = _cpi_detik.DATA["uji"]["saring"]                 # patokan utama sejak 13 Okt: DETIK 2 aturan tersaring
+    assert g["persen"] == round(sr["semua"]) and g["teks_sampai"] == "detik 2" and "di bawah 35%" in g["bukti"]
+    assert "detik 2–10" in g["bukti"] and "sejak 2024" in g["bukti"] and "peringatan" not in g
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
-    assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (lonjakan menit 1)") and "⚠️" not in s["teks"]
+    assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (detik 2)") and "⚠️" not in s["teks"]
     assert "✅ Teruji tutup kertas" in s["bukti"] and "Kalshi" in s["bukti"]
     assert prep["pra"]["status"] == "tutup kertas" and prep["pra"]["arah"] == "naik"
 
@@ -123,3 +123,85 @@ def test_env_mati(monkeypatch):
     prep = kartu()
     _cpi_detik.attach(prep, None, NOW, opener([]), get=lambda s: KALSHI)
     assert "cpi_detik" not in prep["mendatang"][0]
+
+
+ROWS_TURUN = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
+              baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%"),
+              baris("CPI Index, n.s.a.", "", "337.20", "334.98")]           # indeks tersirat DI ATAS → emas TURUN
+
+
+def mkc(t, p):
+    return {"ticker": f"KXCPICORE-26SEP-T{t}", "yes_bid_dollars": f"{p:.4f}", "yes_ask_dollars": f"{p:.4f}"}
+
+
+CORE_BAWAH = [mkc(0.1, 0.40), mkc(0.2, 0.10), mkc(0.3, 0.02)]               # core condong DI BAWAH 0,2%
+
+
+def test_saring_turun_saat_tren_naik_tetap_tampil_lemah():
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=lambda s: KALSHI, tren=lambda: 1)
+    g = prep["mendatang"][0]["cpi_detik"]
+    lm = _cpi_detik.DATA["uji"]["saring"]["lemah"]
+    assert g["arah"] == "turun" and g["status"] == "lemah" and "tren naik" in g["peringatan"]   # TIDAK dibuang
+    assert g["persen"] == round(lm["semua"]) and g["teks_sampai"] == "detik 2" and "detik 1" in g["bukti"]
+    _pra_aset.attach(prep, NOW, None)
+    s = prep["pra_satu"]
+    assert "▼ TURUN" in s["teks"] and "⚠️" in s["teks"] and "Lemah karena emas sedang tren naik" in s["bukti"]
+    assert prep["pra"]["arah"] == "turun" and "⚠️" in prep["pra"]["teks"]
+
+
+def test_saring_turun_kalshi_core_berlawanan_lemah():
+    prep = kartu()
+    get = lambda s: KALSHI if s == "KXCPI" else CORE_BAWAH                    # noqa: E731
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=get, tren=lambda: -1)
+    g = prep["mendatang"][0]["cpi_detik"]
+    assert g["arah"] == "turun" and g["status"] == "lemah" and "Kalshi core condong DI BAWAH" in g["peringatan"]
+
+
+def test_saring_turun_tren_turun_tanpa_konflik_kuat():
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=lambda s: KALSHI if s == "KXCPI" else [],
+                      tren=lambda: -1)
+    g = prep["mendatang"][0]["cpi_detik"]
+    assert g["arah"] == "turun" and g["status"] == "tutup kertas" and "peringatan" not in g
+    assert g["persen"] == round(_cpi_detik.DATA["uji"]["saring"]["semua"])
+
+
+def test_saring_tren_tidak_terbaca_lemah():
+    g = {"arah": "turun", "konsensus": {"core": 0.2}}
+    assert "tidak terbaca" in _cpi_detik.saring(datetime.fromisoformat(T0), g, lambda: None, get=lambda s: [])
+    assert _cpi_detik.saring(datetime.fromisoformat(T0), {"arah": "naik"}, lambda: 1) is None   # NAIK tak disaring
+
+
+def test_saring_env_mati_kembali_ke_angka_lama(monkeypatch):
+    monkeypatch.setenv("CPI_SARING", "0")
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_TURUN), get=lambda s: KALSHI, tren=lambda: 1)
+    g = prep["mendatang"][0]["cpi_detik"]
+    assert g["status"] == "tutup kertas" and g["teks_sampai"] == "lonjakan menit 1"
+
+
+class Bar:
+    def __init__(self, t, c):
+        self.t, self.c = t, c
+
+
+class Feed:
+    def __init__(self, naik):
+        self.naik, self.n = naik, 0
+
+    def candles(self, n, interval="1h"):
+        from datetime import timedelta
+        self.n += 1
+        assert interval == "1day"
+        t0 = datetime(2026, 1, 1, tzinfo=timezone.utc)
+        return [Bar(t0 + timedelta(days=i), 4000 + (i if self.naik else -i)) for i in range(286)]
+
+
+def test_tren200_dan_cache():
+    toko, t0 = Toko(), datetime.fromisoformat(T0)
+    f = Feed(True)
+    assert _cpi_detik.tren200(t0, toko, NOW, feed=f) == 1 and toko.d["cpi_tren"]["hari"] == "2026-10-14"
+    assert _cpi_detik.tren200(t0, toko, NOW, feed=Feed(False)) == 1          # cache 6 jam: feed tidak dipanggil
+    nanti = NOW.replace(hour=20)
+    assert _cpi_detik.tren200(t0, toko, nanti, feed=Feed(False)) == -1

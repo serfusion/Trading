@@ -276,3 +276,11 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - Aplikasi 4.33 (screenshot pengguna): tulisan bawah XAU ukuran biasa, warna hanya di arah+%, CPI tidak dobel, semua berita
   memakai arah 1–10 dtk (tanpa judul "1 jam"). + arah setelah beberapa menit (`research/pra_menit.py`): ikuti arah detik 2
   (≥ $0,50 → 5 mnt sama 79%, CPI 76%, PPI 81%, Fed 62%). Fed nada pra-blackout 56% & PCE ← S&P 49% tidak lolos.
+
+### 13 Okt 2026 — 🔍 bedah kesalahan CPI detik 1–2 (riset; belum dipasang)
+- `research/cpi_salah.py` → docs/eksternal/hasil_cpi_salah.txt, ringkasan docs/CPI_SALAH.md. Kandidat filter tren (TURUN
+  dilewati saat emas di atas rata-rata 200 hari) menunggu "pasang".
+- Perbaikan data riset: research/kalshi.py (close_dollars; 13 event Kalshi Jul–Sep 2026 diunduh ulang ke
+  data/research/eksternal/kalshi), research/nasdaq_kalender.py (urutan baris CPI saat FRED kosong).
+- 13 Okt (lanjutan): saringan CPI DIPASANG sebagai ⚠️ lemah (bukan dibuang) — cloud/api/_cpi_detik.py, _pra_aset.py,
+  cpi_detik.json, tests/test_cloud_cpi_detik.py (+6 tes). Docs/CPI_SALAH.md bagian 7.
