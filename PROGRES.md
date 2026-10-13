@@ -319,3 +319,10 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt (konsensus CPI 14 Okt terbit, "selalu cek forecast, konsensus … agar persentase up to date"): `_cpi_detik.terbaru` (🔄
   konsensus, 🎲 Kalshi m/m/inti/y/y, 🧮 y/y tersirat, ⚖️ persen rilis serupa) + 💥 per situasi (`research/cpi_konflik.py`).
   CPI 14 Okt: NAIK 68% (Kalshi), tetapi y/y tersirat & Kalshi inti berlawanan → rilis serupa 65%/69%, modal kecil untung 53%.
+
+### 13 Okt 2026 — riset MENDALAM Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (docs/RISET_DALAM.md)
+- Putaran cepat sebelumnya kekurangan data (kalender bintang 3 saja). `research/riset_dalam_data.py`: jadwal SEMUA dampak (FF
+  mentah 2010–2023 + FF/Nasdaq/FRED 2024+), 1.645 jendela tick Exness tambahan (`exness/XAUUSDc/tambah_*.parquet`), lonjakan
+  menit 1 + arah detik (cek: 999 rilis = lonjakan60 100% sama). `research/riset_dalam.py`: 66 aturan pra-registrasi, 10 kelompok.
+- `research/riset_dalam_cek.py` verifikasi adversarial: 2 lolos per kelompok (GDP P, UoM final S&P) terbantah (p global
+  0,17/0,14, rapuh) → 0 layak pasang. Uji maju: JOLTS ← NFP bulan acuan. Belum: Dukascopy untuk rilis tambahan, Kalshi GDP/Fed.

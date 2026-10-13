@@ -1,0 +1,75 @@
+# 🔎 Verifikasi adversarial riset mendalam (research/riset_dalam_cek.py)
+python -m research.riset_dalam_cek      → docs/eksternal/hasil_riset_dalam_cek.txt
+
+## 1. GDP prelim/final ← kejutan GDP sebelumnya (hitung ulang dari FF mentah; 78 rilis s/d 2025-12; catatan: FF mentah berhenti Jan 2026 → 2026 dari Nasdaq tidak ikut di sini)
+   lonjakan            2016+ 64% (34/53) | LAMA 52% (12/23) | BARU 73% (22/30)
+   angka: P menebak kejutan rilis ini 59% (n 51; LAMA 63%, BARU 54%)
+   hanya prelim        2016+ 53% (16/30) | LAMA 31% (4/13) | BARU 71% (12/17)
+   hanya final         2016+ 78% (18/23) | LAMA 80% (8/10) | BARU 77% (10/13)
+   ganjil              2016+ 52% (15/29) | LAMA 25% (3/12) | BARU 71% (12/17)
+   genap               2016+ 79% (19/24) | LAMA 82% (9/11) | BARU 77% (10/13)
+   sendiri             2016+ 64% (9/14) | LAMA 57% (4/7) | BARU 71% (5/7)
+   target d2           2016+ 57% (30/53) | LAMA 57% (13/23) | BARU 57% (17/30)
+   target d5           2016+ 55% (29/53) | LAMA 61% (14/23) | BARU 50% (15/30)
+   target d10          2016+ 51% (27/53) | LAMA 61% (14/23) | BARU 43% (13/30)
+   target d60          2016+ 66% (35/53) | LAMA 57% (13/23) | BARU 73% (22/30)
+   per tahun: 2016: – • 2017: – • 2018: 57% (4/7) • 2019: 60% (3/5) • 2020: 40% (2/5) • 2021: 50% (4/8) • 2022: 86% (6/7) • 2023: 75% (6/8) • 2024: 71% (5/7) • 2025: 67% (4/6)
+   contoh look-ahead (rilis → masukan P dari rilis sebelumnya, harus lebih awal):
+     2016-09-29 12:30 Final GDP q/q   ← 2016-08-26 12:30 kejutan +0 (OK)
+     2016-12-22 13:30 Final GDP q/q   ← 2016-11-29 13:30 kejutan +1 (OK)
+     2017-02-28 13:30 Prelim GDP q/q  ← 2017-01-27 13:30 kejutan -1 (OK)
+     2017-06-29 12:30 Final GDP q/q   ← 2017-05-26 12:30 kejutan +1 (OK)
+     2017-08-30 12:30 Prelim GDP q/q  ← 2017-07-28 12:30 kejutan +1 (OK)
+     2019-12-20 13:30 Final GDP q/q   ← 2019-11-27 13:30 kejutan +1 (OK)
+     2020-02-27 13:30 Prelim GDP q/q  ← 2020-01-30 13:30 kejutan +0 (OK)
+     2022-02-24 13:30 Prelim GDP q/q  ← 2022-01-27 13:30 kejutan +1 (OK)
+     2022-06-29 12:30 Final GDP q/q   ← 2022-05-26 12:30 kejutan -1 (OK)
+     2022-11-30 13:30 Prelim GDP q/q  ← 2022-10-27 12:30 kejutan +1 (OK)
+     2022-12-22 13:30 Final GDP q/q   ← 2022-11-30 13:30 kejutan +1 (OK)
+     2023-06-29 12:30 Final GDP q/q   ← 2023-05-25 12:30 kejutan +1 (OK)
+     2023-12-21 13:30 Final GDP q/q   ← 2023-11-29 13:30 kejutan +1 (OK)
+     2024-03-28 12:30 Final GDP q/q   ← 2024-02-28 13:30 kejutan -1 (OK)
+     2025-02-27 13:30 Prelim GDP q/q  ← 2025-01-30 13:30 kejutan -1 (OK)
+
+## 2. UoM final ← S&P 500 sejak prelim (hitung ulang dari FF mentah; 92 rilis)
+   ambang ±0.5%       2016+ 64% (44/69) | LAMA 68% (26/38) | BARU 58% (18/31)
+   ambang ±1.0%       2016+ 64% (30/47) | LAMA 62% (13/21) | BARU 65% (17/26)
+   ambang ±1.5%       2016+ 68% (26/38) | LAMA 67% (10/15) | BARU 70% (16/23)
+   angka: menebak kejutan UoM final 57% (n 60)
+   ganjil              2016+ 61% (14/23) | LAMA 56% (5/9) | BARU 64% (9/14)
+   genap               2016+ 67% (16/24) | LAMA 67% (8/12) | BARU 67% (8/12)
+   sendiri             2016+ 67% (28/42) | LAMA 61% (11/18) | BARU 71% (17/24)
+   target d2           2016+ 10% (1/10) | LAMA 10% (1/10) | BARU –
+   target d5           2016+ 41% (16/39) | LAMA 23% (3/13) | BARU 50% (13/26)
+   target d10          2016+ 62% (29/47) | LAMA 62% (13/21) | BARU 62% (16/26)
+   target d60          2016+ 49% (23/47) | LAMA 48% (10/21) | BARU 50% (13/26)
+   contoh look-ahead (final ← close S&P terakhir dipakai, harus < hari final):
+     final 2017-07-28 14:00 prelim 2017-07-14 | S&P 2017-07-13 → 2017-07-27 +1.1% (OK)
+     final 2018-11-21 15:00 prelim 2018-11-09 | S&P 2018-11-08 → 2018-11-20 -5.9% (OK)
+     final 2019-05-31 14:00 prelim 2019-05-17 | S&P 2019-05-16 → 2019-05-30 -3.0% (OK)
+     final 2020-07-31 14:00 prelim 2020-07-17 | S&P 2020-07-16 → 2020-07-30 +1.0% (OK)
+     final 2021-02-26 15:00 prelim 2021-02-12 | S&P 2021-02-11 → 2021-02-25 -2.2% (OK)
+     final 2021-05-28 14:00 prelim 2021-05-14 | S&P 2021-05-13 → 2021-05-27 +2.1% (OK)
+     final 2021-08-27 14:00 prelim 2021-08-13 | S&P 2021-08-12 → 2021-08-26 +0.2% (OK)
+     final 2022-05-27 14:00 prelim 2022-05-13 | S&P 2022-05-12 → 2022-05-26 +3.3% (OK)
+     final 2022-06-24 14:00 prelim 2022-06-10 | S&P 2022-06-09 → 2022-06-23 -5.5% (OK)
+     final 2022-08-26 14:00 prelim 2022-08-12 | S&P 2022-08-11 → 2022-08-25 -0.2% (OK)
+     final 2022-11-23 15:00 prelim 2022-11-11 | S&P 2022-11-10 → 2022-11-22 +1.2% (OK)
+     final 2023-04-28 14:00 prelim 2023-04-14 | S&P 2023-04-13 → 2023-04-27 -0.3% (OK)
+     final 2023-10-27 14:00 prelim 2023-10-13 | S&P 2023-10-12 → 2023-10-26 -4.9% (OK)
+     final 2023-11-22 15:00 prelim 2023-11-10 | S&P 2023-11-09 → 2023-11-21 +4.4% (OK)
+     final 2024-04-26 14:00 prelim 2024-04-12 | S&P 2024-04-11 → 2024-04-25 -2.9% (OK)
+
+## 3. Plasebo U_REVSPX: Jumat 10:00 ET tanpa UoM/CB/JOLTS yang punya tick (26 hari)
+   emas lonjakan berlawanan arah S&P: 39% (n 18)
+
+## 4. Permutasi GLOBAL (66 aturan, 10 kelompok, ≥ 40 rilis 2016+, akurasi mentah tanpa saringan tahun)
+   UOM_FIN   U_REVSPX  mentah 65.8% → p global 0.142  ← kandidat
+   GDP_LAIN  P         mentah 64.8% → p global 0.174  ← kandidat
+   JOLTS     J_NFP     mentah 60.9% → p global 0.624
+   UOM_PRE   P3        mentah 60.2% → p global 0.721
+   RETAIL    ANK       mentah 59.0% → p global 0.875
+   RETAIL    R_BBM     mentah 58.0% → p global 0.950
+   RETAIL    R_SUARA   mentah 56.6% → p global 0.995
+   CLAIMS    C_KONT    mentah 56.4% → p global 0.997
+   (rata-rata aturan terbaik acakan 62.2%, P95 67.8%)

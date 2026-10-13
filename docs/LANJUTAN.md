@@ -36,10 +36,10 @@ Hasil agen tersimpan di `docs/eksternal/riset_agen_hasil.json`.
 |---|---|---|
 | NFP (`research/riset_nfp.py`, `riset_nfp_cek.py`, `docs/eksternal/hasil_riset_nfp.txt`) | ✅ selesai | **0 layak pasang** (lihat catatan di bawah tabel) |
 | ISM (`research/riset_ism*.py`, `docs/eksternal/hasil_riset_ism.txt`) | ✅ selesai | **0 layak pasang** (lihat catatan di bawah tabel) |
-| PPI + PCE (`research/riset_inflasi*.py`) | ⏳ berjalan / mungkin terputus | – |
-| Retail + GDP (`research/riset_retail_gdp*.py`) | ⏳ berjalan / mungkin terputus | – |
-| ADP + JOLTS + klaim | ⏳ belum mulai | – |
-| FOMC + konsumen | ⏳ belum mulai | – |
+| PPI + PCE (`research/riset_inflasi*.py`) | ✅ selesai 13 Okt | PPI ← WTI DIPASANG (docs/PPI_WTI.md); PCE 0 |
+| Retail + GDP | ✅ selesai 13 Okt (`research/riset_dalam*.py`, docs/RISET_DALAM.md) | **0 layak pasang** |
+| ADP + JOLTS + klaim | ✅ selesai 13 Okt (sama) | **0 layak pasang** (JOLTS ← NFP = kandidat uji maju) |
+| FOMC + konsumen | ✅ selesai 13 Okt (sama) | **0 layak pasang** |
 
 Catatan NFP: 25 aturan diuji. UR2 (pasca-lihat) 64% tetapi uji sadar-seleksi p 0,21/0,07, dan sama dengan "selalu turun" di periode BARU.
 

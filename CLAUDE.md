@@ -441,7 +441,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (branch awesome-mendel) DIGABUNG; `research/riset_inflasi.py` dijalankan: PPI-WTI lolos semua kriteria + verifikasi
   (`research/ppi_wti_cek.py`); PCE 0 lolos. DIPASANG cloud (`_ppi_wti.py`, `ppi_wti.json`, env PPI_WTI, cache `ppi_wti`).
 - `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
-- Sisa dari workflow 11 Okt: Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (lihat docs/LANJUTAN.md).
+- Sisa workflow 11 Okt SELESAI 13 Okt (`docs/RISET_DALAM.md`, `research/riset_dalam_data.py` jadwal SEMUA dampak FF mentah +
+  tick Exness `tambah_<bln>.parquet`, `riset_dalam.py` 66 aturan, `riset_dalam_cek.py` verifikasi): lolos per kelompok GDP P &
+  UoM final S&P, tetapi permutasi GLOBAL p 0,17/0,14 & rapuh → 0 layak pasang. Uji maju: JOLTS ← NFP bulan acuan.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
