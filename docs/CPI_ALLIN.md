@@ -119,3 +119,34 @@ kelebihan tebakan = selisih dengan acak (±+$25 di 1:200, ±+$105 di 1:1000).
 - Aplikasi: baris ⏱️ tampil T−15 mnt (awal HMR) s/d +10 mnt, hitung mundur per detik; setelah rilis persen = kunci kurva
   terdekat ≤ detik sekarang (< 50% diberi ⚠️); aba-aba 💥: siapkan → MASUK (T−5…0) → tahan s/d detik 2 → "rugi → TUTUP •
   untung → tahan" → hitung mundur s/d detik 10 → "TUTUP SEKARANG (detik 10)".
+
+## Sumber & metode yang BARU diuji (13 Okt 2026, pertanyaan "yakin tidak ada yang terlewat?")
+| Diuji | Hasil |
+|---|---|
+| **Cleveland Fed nowcast** (`research/cpi_cleveland.py`, 160 bulan 2013–2026, dulu diblokir) | tebak kejutan 59–60%; emas detik 2 sendirian 52–58%, LAMA < 50%. Nowcast core hampir selalu ±0,2% (sejak 2025 selalu "di bawah konsensus") ≈ "selalu BUY". Sepakat dengan aplikasi: detik 2 73% (22; BARU 92% n 13, LAMA 44% n 9) vs berlawanan 60% (15) → kandidat lemah, sampel kecil |
+| Breakeven inflasi 5 th, ekspektasi Univ. Michigan, harga bayar/jual Fed New York & Philadelphia (`research/cpi_lain2.py`) | sendirian 43–54% (≈ acak). Bucket "sepakat" 57–86% dengan n 22–37 → setelah ±10 uji, satu bucket ±2 SE di atas wajar terjadi karena kebetulan → TIDAK dipasang |
+| Feed lain (Dukascopy) untuk strategi modal kecil (tebakan kuat, masuk t−1) | sejak 2022 untung 62% rilis (Exness 78%); lentur 1:200 +$27/rilis (Exness +$30), habis 3×; LAMA negatif → keunggulan bertahan di feed lain, lentur lebih tahan |
+
+**Belum diuji (alasan):** sebaran ramalan ekonom Bloomberg/Reuters (berbayar), pasar swap/fixing CPI CME (berbayar/diblokir),
+NFIB rencana harga (403), ISM harga (lisensi), Manheim mobil bekas & sewa Zillow/Apartment List (bisa diunduh; komponen
+lambat dan sudah dipakai ekonom penyusun konsensus), Truflation (riwayat sejak 2021 saja), ramalan per komponen CPI
+(bensin + mobil bekas + tiket pesawat + sewa + asuransi — kerja besar), posisi opsi emas sebelum CPI (data berbayar), dan
+yang terpenting: **eksekusi nyata** (leverage HMR akun pengguna, slip/requote di t−1 dtk) — hanya bisa diukur dengan uji
+maju lot minimum.
+
+## Uji SEMUA sumber tersisa (13 Okt 2026, permintaan "uji semua" — `research/cpi_semua.py` → `docs/eksternal/hasil_cpi_semua.txt`)
+- **29 sinyal tunggal** (tutup kertas, emas detik 2; kejutan CPI/core): harga ISM manufaktur & jasa, PPI & core PPI, harga
+  impor, NFIB, Michigan 1 th, Fed NY ekspektasi 1 th, harga bayar Philly (Nasdaq, *_chg & *_sur), **Manheim mobil bekas**
+  (xlsx resmi 1997–Nov 2025), **Zillow ZORI sewa** (2015–2026), Cleveland Fed, breakeven 5 th, UMich, harga bayar/jual Fed NY &
+  Philly → mentah detik 2 42–60%, kejutan angka 33–60%. **Lolos 0 dari 29** (syarat detik 2 ≥ 60% + LAMA & BARU > 50%, n ≥ 20);
+  bila arah emas diacak 200× rata-rata lolos 0,4 → tidak ada sinyal tersembunyi. Terdekat: Manheim 60% (n 48) tetapi BARU 50%.
+- **Model gabungan** (logistik 32 fitur + aturan aplikasi + Kalshi, walk-forward per tahun): detik 2 57% (LAMA 59%, BARU 54%)
+  — LEBIH BURUK dari aturan aplikasi (68%; BARU 81%). Menambah sumber lemah menurunkan ketepatan (sama seperti 10 Okt).
+- **Telat eksekusi** (strategi modal kecil, tebakan kuat, lentur, tick Exness): masuk t−1,5/−1/−0,5/−0,2 dtk × tutup rugi di
+  detik 2/2,5/3 × akhir detik 10/10,5/11 → sejak 2022 1:200 +$25…+$32 per $100, 1:500 +$80…+$90, untung 66–75% rilis, modal
+  habis 2–6 → **tahan telat ±1 dtk**; LAMA tetap negatif.
+- **Tidak bisa diuji:** CME (memblokir akses otomatis — tidak dicoba diakali), Truflation (API berkunci; bisa diuji bila
+  pengguna memberi kunci lewat secret environment), NFIB rencana harga (403), sebaran ramalan Bloomberg/Reuters & opsi emas
+  (berbayar), requote/slip nyata Exness (hanya lewat uji maju lot kecil).
+- **Kesimpulan:** aturan aplikasi (konsensus indeks tanpa pembulatan + Kalshi + saringan) tetap yang terbaik dari semua
+  yang bisa diuji; tidak ada perubahan pada cloud/aplikasi.

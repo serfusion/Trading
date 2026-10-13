@@ -1,0 +1,61 @@
+# 🔎 Cleveland Fed nowcast vs konsensus (research/cpi_cleveland.py)
+Pertanyaan pengguna 13 Okt 2026: "yakin tidak ada informasi & metode yang terlewat untuk CPI?". Cleveland Fed nowcast
+(ramalan harian CPI & core CPI m/m dari harga minyak, bensin harian & data inflasi) dulu diblokir jaringan (403); kini 200.
+Data: clevelandfed.org/-/media/files/webcharts/inflationnowcasting/nowcast_month.json (160 bulan acuan 2013-07…2026-10,
+semua vintage harian) → data/research/eksternal/cleveland/nowcast_month.json.
+
+Vintage nowcast: 4352 baris, bulan acuan 2013-08 … 2026-10; rilis CPI 183
+
+## Ambang 0.03
+   CLV_mm    tebak kejutan angka:  64% (n 67) • sejak Okt 2021  56% (n 25)
+   CLV_mm    emas detik 2–10 MENTAH: semua   56% (106) lama   49% (63) baru   67% (43) 2024+   76% (22) | detik 2   58% (106)
+   CLV_mm    emas TUTUP KERTAS : semua   56% (86) lama   47% (52) baru   70% (34) 2024+   76% (22) | detik 1   47% (85) detik 2   56% (86) detik 10   55% (86)
+   CLV_core  tebak kejutan angka:  62% (n 68) • sejak Okt 2021  59% (n 27)
+   CLV_core  emas detik 2–10 MENTAH: semua   54% (98) lama   47% (58) baru   65% (40) 2024+   75% (19) | detik 2   55% (98)
+   CLV_core  emas TUTUP KERTAS : semua   46% (19) lama   31% (13) baru   79% (6) 2024+   79% (6) | detik 1   44% (18) detik 2   42% (19) detik 10   45% (20)
+   CLV       emas detik 2–10 MENTAH: semua   54% (134) lama   47% (82) baru   65% (52) 2024+   75% (27) | detik 2   54% (134)
+   CLV       emas TUTUP KERTAS : semua   53% (53) lama   40% (36) baru   79% (17) 2024+   79% (17) | detik 1   44% (52) detik 2   49% (53) detik 10   52% (54)
+
+## Ambang 0.05
+   CLV_mm    tebak kejutan angka:  59% (n 46) • sejak Okt 2021  55% (n 22)
+   CLV_mm    emas detik 2–10 MENTAH: semua   56% (72) lama   48% (39) baru   66% (33) 2024+   81% (12) | detik 2   58% (72)
+   CLV_mm    emas TUTUP KERTAS : semua   54% (49) lama   38% (25) baru   70% (24) 2024+   81% (12) | detik 1   48% (48) detik 2   55% (49) detik 10   53% (49)
+   CLV_core  tebak kejutan angka:  60% (n 45) • sejak Okt 2021  67% (n 21)
+   CLV_core  emas detik 2–10 MENTAH: semua   55% (61) lama   39% (30) baru   71% (31) 2024+   83% (13) | detik 2   52% (61)
+   CLV_core  emas TUTUP KERTAS : semua   95% (5) lama   – baru   95% (5) 2024+   95% (5) | detik 1   60% (5) detik 2  100% (5) detik 10  100% (5)
+   CLV       emas detik 2–10 MENTAH: semua   55% (96) lama   47% (53) baru   65% (43) 2024+   78% (19) | detik 2   53% (96)
+   CLV       emas TUTUP KERTAS : semua   52% (32) lama   42% (26) baru   96% (6) 2024+   96% (6) | detik 1   45% (31) detik 2   47% (32) detik 10   52% (33)
+
+## Ambang 0.10
+   CLV_mm    tebak kejutan angka:  45% (n 20) • sejak Okt 2021  42% (n 12)
+   CLV_mm    emas detik 2–10 MENTAH: semua   57% (30) lama   48% (11) baru   63% (19) 2024+   88% (4) | detik 2   60% (30)
+   CLV_mm    emas TUTUP KERTAS : semua   62% (17) lama   – baru   62% (17) 2024+   88% (4) | detik 1   53% (17) detik 2   65% (17) detik 10   59% (17)
+   CLV_core  tebak kejutan angka:  42% (n 12) • sejak Okt 2021  71% (n 7)
+   CLV_core  emas detik 2–10 MENTAH: semua   42% (16) lama    5% (5) baru   59% (11) 2024+   – | detik 2   44% (16)
+   CLV_core  emas TUTUP KERTAS : semua   – lama   – baru   – 2024+   – | detik 1   – detik 2   – detik 10   –
+   CLV       emas detik 2–10 MENTAH: semua   55% (34) lama   40% (13) baru   64% (21) 2024+   88% (4) | detik 2   59% (34)
+   CLV       emas TUTUP KERTAS : semua   62% (12) lama   – baru   62% (12) 2024+   88% (4) | detik 1   50% (12) detik 2   58% (12) detik 10   67% (12)
+
+## Gabung dengan aturan aplikasi (IDX|K+S tutup kertas), ambang 0,05, detik 2 / detik 2–10
+   aplikasi semua                     detik 2: semua   68% (60) lama   54% (28) baru   81% (32) | 2–10: semua   67% (60) baru   75% (32)
+   aplikasi + Cleveland SEPAKAT       detik 2: semua   73% (22) lama   44% (9) baru   92% (13) | 2–10: semua   70% (22) baru   83% (13)
+   aplikasi + Cleveland BERLAWANAN    detik 2: semua   60% (15) lama   50% (4) baru   64% (11) | 2–10: semua   53% (15) baru   57% (11)
+   aplikasi, Cleveland netral         detik 2: semua   70% (23) lama   60% (15) baru   88% (8) | 2–10: semua   72% (23) baru   88% (8)
+   aplikasi, kosong diisi Cleveland     detik 2: semua   61% (80) lama   44% (45) baru   83% (35) | 2–10 semua   61% (80)
+
+## Rilis terbaru (nowcast vs konsensus)
+   2025-06-11 CPI nc 0.13 vs kons 0.2 (aktual 0.1) • core nc 0.23 vs 0.3 (aktual 0.1) • CLV -1 • emas detik 2 +7.42
+   2025-07-15 CPI nc 0.25 vs kons 0.3 (aktual 0.3) • core nc 0.23 vs 0.3 (aktual 0.2) • CLV -1 • emas detik 2 +2.62
+   2025-08-12 CPI nc 0.16 vs kons 0.2 (aktual 0.2) • core nc 0.24 vs 0.3 (aktual 0.3) • CLV -1 • emas detik 2 +4.06
+   2025-09-11 CPI nc 0.30 vs kons 0.3 (aktual 0.4) • core nc 0.25 vs 0.3 (aktual 0.3) • CLV +0 • emas detik 2 +2.09
+   2025-10-24 CPI nc 0.38 vs kons 0.4 (aktual 0.3) • core nc 0.26 vs 0.3 (aktual 0.2) • CLV +0 • emas detik 2 +12.42
+   2025-12-18 CPI nc 0.32 vs kons nan (aktual nan) • core nc 0.25 vs nan (aktual nan) • CLV +0 • emas detik 2 +10.81
+   2026-01-13 CPI nc 0.20 vs kons 0.3 (aktual 0.3) • core nc 0.22 vs 0.3 (aktual 0.2) • CLV -1 • emas detik 2 +4.75
+   2026-02-13 CPI nc 0.13 vs kons 0.3 (aktual 0.2) • core nc 0.22 vs 0.3 (aktual 0.3) • CLV -1 • emas detik 2 +4.13
+   2026-03-11 CPI nc 0.25 vs kons 0.3 (aktual 0.3) • core nc 0.21 vs 0.2 (aktual 0.2) • CLV -1 • emas detik 2 +1.34
+   2026-04-10 CPI nc 0.84 vs kons 1.0 (aktual 0.9) • core nc 0.20 vs 0.3 (aktual 0.2) • CLV -1 • emas detik 2 +7.76
+   2026-05-12 CPI nc 0.45 vs kons 0.6 (aktual 0.6) • core nc 0.21 vs 0.3 (aktual 0.4) • CLV -1 • emas detik 2 +0.93
+   2026-06-10 CPI nc 0.46 vs kons 0.5 (aktual 0.5) • core nc 0.23 vs 0.3 (aktual 0.2) • CLV -1 • emas detik 2 +5.91
+   2026-07-14 CPI nc -0.06 vs kons -0.1 (aktual -0.4) • core nc 0.23 vs 0.2 (aktual 0.0) • CLV +0 • emas detik 2 +3.89
+   2026-08-12 CPI nc 0.09 vs kons 0.1 (aktual 0.1) • core nc 0.21 vs 0.2 (aktual 0.2) • CLV +0 • emas detik 2 +5.38
+   2026-09-11 CPI nc 0.36 vs kons 0.4 (aktual 0.4) • core nc 0.20 vs 0.2 (aktual 0.3) • CLV +0 • emas detik 2 +2.76
