@@ -345,3 +345,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt malam ("Pasang!"): mesin skenario gagal tutup kertas (52–59% vs aturan aplikasi 76%) → tidak dipasang. Dipasang: perbaikan
   Kalshi inti/y/y (status=open → 0 event), YOYc ⚠️ lemah + 💥 tutup detik 2 (NAIK & YOYc −1: 55%, lentur −$3,3/oz), PPI diperbarui
   otomatis setelah CPI inti (74/82/44%). CPI 14 Okt tampil "NAIK 54% ⚠️". docs/CPI_PPI_DASAR.md bagian 8.
+- 14 Okt (tab News "data tidak sesuai"): status tren tertimpa lambda di chat.py (diperbaiki), PPI-WTI angka audit per arah (TURUN 55%
+  ⚠️, bukan 69%), detail kartu CPI/PPI diselaraskan dengan baris utama (`_pra_aset.selaras`).

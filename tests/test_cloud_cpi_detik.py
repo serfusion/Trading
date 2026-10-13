@@ -366,3 +366,20 @@ def test_kalshi_fetch_tanpa_filter_status_dan_saring_aktif():
         return io.BytesIO(json.dumps({"events": ev}).encode())
     ms = _kalshi.fetch("KXCPICORE", opener=buka)
     assert [m["ticker"] for m in ms] == ["KXCPICORE-26SEP-T0.2", "KXCPICORE-26SEP-T0.3"]
+
+
+def test_detail_kartu_selaras_dengan_baris_utama():
+    # 14 Okt ("isi tab News ada data yang tidak sesuai"): detail tidak boleh memuat badge 1 jam "🥈 Kuat" yang bertentangan
+    prep = kartu()
+    prep["mendatang"][0]["prediksi"] = {"teks": "CPI: peluang emas naik 1 menit 63%", "detail": [
+        {"judul": "Dasar angka", "teks": "🥈 Kuat • teruji, belum pasti"},
+        {"judul": "🎲 Pasar prediksi (diperbarui tiap 15 menit)", "teks": "EMAS 63% naik ⚪"}]}
+    prep["mendatang"][0]["hari_h"] = {"label": "🎯 Perkiraan hari H", "teks": "EMAS 63% naik ⚪"}
+    get = lambda s: {"KXCPI": KALSHI, "KXCPICORE": CORE_ATAS, "KXCPIYOY": YOY_ATAS}.get(s, [])   # noqa: E731
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_14OKT), get=get)
+    _pra_aset.attach(prep, NOW, None)
+    c = prep["mendatang"][0]
+    det = c["prediksi"]["detail"]
+    assert det[0]["judul"] == "⏱️ Arah yang dipakai aplikasi" and "NAIK 54%" in det[0]["teks"] and "lemah" in det[0]["teks"]
+    assert all(d["judul"] != "Dasar angka" for d in det) and "bukan arah utama" in det[1]["judul"]
+    assert "bukan arah utama" in c["hari_h"]["label"]

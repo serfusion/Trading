@@ -68,6 +68,62 @@
  "verifikasi": "ambang 3–10% 66–71%; rata sebulan 66%; Dukascopy 66%; p keluarga 0,004/0,009; tanpa look-ahead",
  "cpi_ppi": {
   "n": 52,
+  "lonjakan_audit": {
+   "semua": {
+    "persen": 62.6,
+    "n": 91
+   },
+   "lama": {
+    "persen": 56.0,
+    "n": 50
+   },
+   "baru": {
+    "persen": 70.7,
+    "n": 41
+   },
+   "s2024": {
+    "persen": 71.4,
+    "n": 21
+   }
+  },
+  "per_arah": {
+   "turun": {
+    "semua": {
+     "persen": 54.9,
+     "n": 51
+    },
+    "lama": {
+     "persen": 51.7,
+     "n": 29
+    },
+    "baru": {
+     "persen": 59.1,
+     "n": 22
+    },
+    "s2024": {
+     "persen": 50.0,
+     "n": 10
+    }
+   },
+   "naik": {
+    "semua": {
+     "persen": 72.5,
+     "n": 40
+    },
+    "lama": {
+     "persen": 61.9,
+     "n": 21
+    },
+    "baru": {
+     "persen": 84.2,
+     "n": 19
+    },
+    "s2024": {
+     "persen": 90.9,
+     "n": 11
+    }
+   }
+  },
   "sepakat": {
    "semua": 73.7,
    "n_semua": 19,

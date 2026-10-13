@@ -479,6 +479,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tutup detik 2; `cpi_detik.json["yoyc"]` dari `python -m research.cpi_skenario simpan`, env CPI_YOYC); PPI setelah CPI
   `_ppi_wti.pakai_cpi` (searah 74%, sesuai 82%, berlawanan 44% ⚠️; `ppi_wti.json["cpi_ppi"]` dari `python -m research.ppi_dasar
   simpan`, env PPI_CPI; `research/ppi_wti.py` menjaga kunci ini). Lentur tetap untuk tebakan biasa (NAIK biasa lentur +$4,0/oz).
+- 14 Okt (pengguna "isi tab News ada data tidak sesuai"): (1) `chat.py` variabel `tren` (status tren ke aplikasi) tertimpa
+  lambda tren 4 jam → aplikasi menerima teks "<function …>" → kini `tren_fn`; (2) PPI-WTI memakai angka AUDIT per arah
+  (`ppi_wti.json["cpi_ppi"]["per_arah"]`, TURUN 55% → ⚠️ lemah tanpa kurva per detik, NAIK 72%; dulu 69%); (3)
+  `_pra_aset.selaras`: detail kartu diawali "⏱️ Arah yang dipakai aplikasi", blok "Dasar angka" 1 jam dibuang, 🎲/hari H/📈
+  diberi label "bukan arah utama" (dulu detail CPI "🥈 Kuat 63%" vs baris utama "54% ⚠️").
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

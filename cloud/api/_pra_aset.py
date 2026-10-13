@@ -604,6 +604,37 @@ def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
                                    "teks": f"{nm}: arah 1–10 dtk muncul ≤ {TREN_JAM} jam sebelum rilis"}
             if mi:
                 c["arah_detik"]["menit"] = mi["teks"]
+            if info:
+                selaras(c, info, nm)
+
+
+def selaras(c: dict, info: dict, nm: str) -> None:
+    """14 Okt (pengguna: "isi tab News ada data yang tidak sesuai"): detail kartu memuat angka lain untuk berita yang sama
+    (prediksi 1 jam "🥈 Kuat", 🎲 Kalshi × reaksi 63%, perkiraan hari H) padahal baris utama memakai arah teruji detik
+    (mis. "CPI: emas naik 54% ⚠️ lemah"). Blok pertama detail kini = arah yang dipakai aplikasi + alasannya; blok lain diberi
+    label "info tambahan, bukan arah utama" dan badge peringkat 1 jam yang bertentangan dibuang."""
+    lemah = info.get("status") not in TERUJI
+    utama = {"judul": "⏱️ Arah yang dipakai aplikasi",
+             "teks": f"{nm}: emas {info['arah'].upper()} {info['persen']}% ({info.get('teks_sampai') or '1–10 dtk'})"
+                     + (" ⚠️ lemah" if lemah else " ✅ teruji"),
+             "catatan": (f"Lemah karena {info['peringatan']} • " if info.get("peringatan") else "")
+                        + (f"dulu {info['lama']}% • sejak Okt 2021 {info['baru']}% • " if info.get("lama") is not None
+                           and info.get("baru") is not None else "")
+                        + "angka lain di bawah ini hanya info tambahan"}
+    p = c.get("prediksi")
+    if isinstance(p, dict):
+        lain = [b for b in p.get("detail") or [] if isinstance(b, dict) and b.get("judul") != "Dasar angka"]
+        for b in lain:
+            if str(b.get("judul", "")).startswith("🎲"):
+                b["judul"] = "🎲 Info pasar (Kalshi × reaksi 1 menit, bukan arah utama)"
+            elif str(b.get("judul", "")).startswith("📈") and "bukan arah utama" not in b["judul"]:
+                b["judul"] += " • prediksi 1 jam (bukan arah utama)"
+                for lbl in ("⚡ Sangat kuat: ", "🥈 Kuat: ", "🥉 Cukup: ", "Biasa: "):
+                    b["teks"] = str(b.get("teks", "")).replace(lbl, "")
+        p["detail"] = [utama] + lain
+    h = c.get("hari_h")
+    if isinstance(h, dict) and h.get("label"):
+        h["label"] = "🎯 Info pasar hari H (Kalshi × reaksi 1 menit, bukan arah utama)"
 
 
 def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
