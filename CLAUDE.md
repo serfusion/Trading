@@ -467,6 +467,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Tebakan inti CPI DI ATAS 3/7 (tidak terbukti), DI BAWAH LAMA 10/10 BARU 10/15. CPI inti → PPI inti searah 71%/74%.
 - 14 Okt: petunjuk berlawanan → rantai Bayes P(emas naik) 41–51% → saran lewati; aplikasi tetap "NAIK 68%" (tidak diubah).
   Usulan ⚖️ berlawanan, rantai Bayes di kartu CPI & PPI diperbarui setelah CPI menunggu "pasang".
+- 13 Okt sore (pengguna menolak "50:50"; `research/cpi_skenario.py`): Kalshi punya pasar per KOMPONEN (KXCPICORE, KXCPICOMBO,
+  KXECONSTAT*, KXCPICOREYOY, bensin/tiket/mobil bekas/shelter — sepi); preview analis via Google News RSS + investinglive.com
+  sitemap (`latest.xml`). YOYc (konsensus inti y/y Nasdaq > tersirat inti m/m) → inti m/m di bawah 3/33 (p 0,0005, LAMA & BARU).
+  Emas mengikuti INTI sejak detik 2 (76%), bukan total. Mesin skenario Kalshi × hasil dolar per sel → 14 Okt: BUY t−1 tutup
+  detik 2 (naik 61–76% BARU/2024+, +$0,5–1,3/oz; LAMA rugi), JANGAN lentur, leverage ≤ 1:200. Pakai mesin skenario (peluang pasar
+  terkalibrasi) daripada naive Bayes banyak sumber lemah (menghitung ganda).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

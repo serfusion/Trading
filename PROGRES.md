@@ -339,3 +339,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   komponen, versi hari itu), `research/cpi_dasar.py`, `research/ppi_dasar.py` → docs/CPI_PPI_DASAR.md. Mekanisme kejutan→emas
   kuat & asimetris; konsensus > semua nowcast; rantai Bayes ≠ lebih baik dari selalu-NAIK; tebakan inti CPI DI ATAS 3/7;
   CPI→PPI inti searah 71/74%. 14 Okt: petunjuk berlawanan → P(naik) 41–51% → saran lewati. Usulan tampilan menunggu "pasang".
+- 13 Okt sore ("50:50 bukan jawaban"): `research/cpi_skenario.py` — pasar Kalshi per komponen, Cleveland 0,53/0,20, preview
+  analis (inti Agustus terdongkrak metode telepon), aturan YOYc (inti tidak di bawah 30/33, p 0,0005), emas ikut inti sejak
+  detik 2, mesin skenario → CPI 14 Okt: BUY t−1 tutup detik 2 (61–76%, +$0,5–1,3/oz), jangan lentur, ≤ 1:200.
