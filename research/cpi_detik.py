@@ -344,7 +344,7 @@ def simpan_json(df: pd.DataFrame) -> dict:
                      "≥ 0,10. Tebakan CPI di atas → emas TURUN detik 2–10. SARINGAN (IDX|K+S, 13 Okt 2026): tebakan "
                      "TURUN saat emas di atas rata-rata 200 hari atau Kalshi core condong berlawanan = ⚠️ lemah.",
            "ambang": AMBANG_IDX, "lean": 0.10, "uji": uji, "validitas": old.get("validitas", {}),
-           **({"lonjakan": old["lonjakan"]} if "lonjakan" in old else {}), **tab}
+           **{k: old[k] for k in ("lonjakan", "allin") if k in old}, **tab}
     JSON.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
 

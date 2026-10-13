@@ -15,6 +15,7 @@ walk-forward) ≈ 50–55% di periode baru dan tidak lebih baik dari uji acak. I
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -403,7 +404,7 @@ def satu(row: dict) -> dict:
     (status + LAMA/BARU + dasar; aturan setelah rilis) menggantikan daftar angka per detik/per jangka."""
     out = {k: row.get(k) for k in ("title", "nama", "time", "arah", "persen", "status", "sisa")}
     mi = menit_info(row.get("title") or "")
-    # ⏱️ baris langsung per detik di aplikasi (15 Okt 2026, pengguna: "persentase berubah setiap detik hingga menit XX,
+    # ⏱️ baris langsung per detik di aplikasi (13 Okt 2026, pengguna: "persentase berubah setiap detik hingga menit XX,
     # menggantikan jeda XAU"): angka uji per detik (CPI: tutup kertas aturan tersaring) + arah menit
     if row.get("per_detik"):
         out["per_detik"] = {k: round(v) for k, v in row["per_detik"].items() if v is not None}
@@ -434,7 +435,40 @@ def satu(row: dict) -> dict:
     if mi:
         baris.append(mi["singkat"])
     out["bukti"] = "\n".join(baris)
+    a = allin(row)
+    if a:
+        out["allin"] = a
     return out
+
+
+def allin(row: dict) -> dict | None:
+    """💥 Modal kecil + lot maksimal (permintaan pengguna 13 Okt 2026: masuk 1 dtk sebelum rilis, modal kecil siap hilang,
+    untung berlipat bila arah 1–5 dtk benar). HANYA CPI: research/cpi_allin2.py (tick Exness, tutup kertas, vs arah acak)
+    → cpi_detik.json["allin"]. Tebakan kuat → masuk & tutup detik 2; ⚠️ lemah → JANGAN (sumber margin call). Info saja,
+    tanpa order. Env CPI_ALLIN=0 mematikan."""
+    d = _cpi_detik.DATA.get("allin") or {}
+    if os.environ.get("CPI_ALLIN", "1") == "0" or not d or row.get("title") not in _cpi_detik.JUDUL \
+            or not row.get("arah"):
+        return None
+    lv = d.get("lev") or {}
+    if row.get("status") not in TERUJI:
+        w = d.get("lemah") or {}
+        return {"kuat": False, "teks": "💥 Modal kecil: JANGAN (tebakan ⚠️ lemah)",
+                "bukti": f"Tebakan lemah sejak 2022 untung di {w.get('untung_baru')}% rilis • 1:2000 modal habis "
+                         f"{w.get('mc_2000')} dari {w.get('n_baru')} rilis"}
+    sisi = "BUY" if row["arah"] == "naik" else "SELL"
+    th = d.get("th_2026") or [0, 0]
+
+    def rp(k: str) -> str:
+        x = lv.get(k) or {}
+        habis = f" (modal habis {x['mc']}×)" if x.get("mc") else ""
+        return f"1:{k} +${x.get('rata', 0):.0f}{habis}"
+    return {"kuat": True, "arah": sisi, "lev": 200,
+            "teks": f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → TUTUP detik 2",
+            "bukti": (f"Teruji 2022–2026: untung di {d.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; 2026: "
+                      f"{th[0]}/{th[1]}) • rata-rata per modal $100: {rp('200')}, {rp('500')}, {rp('2000')}\n"
+                      f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness bisa "
+                      "membatasi leverage 1:200 saat berita • pakai akun terpisah berisi modal kecil saja")}
 
 
 def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:

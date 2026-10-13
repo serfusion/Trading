@@ -284,3 +284,12 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   data/research/eksternal/kalshi), research/nasdaq_kalender.py (urutan baris CPI saat FRED kosong).
 - 13 Okt (lanjutan): saringan CPI DIPASANG sebagai ⚠️ lemah (bukan dibuang) — cloud/api/_cpi_detik.py, _pra_aset.py,
   cpi_detik.json, tests/test_cloud_cpi_detik.py (+6 tes). Docs/CPI_SALAH.md bagian 7.
+
+### 13 Okt 2026 — 💥 CPI modal kecil + lot maksimal (riset) & antrian
+- `research/cpi_allin.py` → docs/CPI_ALLIN.md (tick Exness, margin call, 1:200/500/2000, detik 1–5).
+- ANTRIAN (permintaan pengguna, dikesampingkan dulu): riset ETH/BTC/koin lain WR tinggi + tutup lebih awal saat candle
+  tiba-tiba melonjak berlawanan dengan sinyal (🌊 ETH SELL 13 Okt melonjak).
+- 13 Okt (lanjutan, "sudah diuji metode apapun? kalau bagus pasang", pengguna masuk 1 dtk sebelum rilis):
+  `research/cpi_allin2.py` (570 konfigurasi + pembanding arah acak) → docs/CPI_ALLIN.md bagian "Semua metode". Tebakan kuat
+  t−1 dtk tutup detik 2: sejak 2022 untung 78% rilis (acak kalah, p < 0,001), 2019–2021 gagal. DIPASANG sebagai info:
+  `_pra_aset.allin`, `cpi_detik.json["allin"]`, aplikasi 4.35 (baris 💥, lot maks modal kecil, aba-aba MASUK/TUTUP), +3 tes.

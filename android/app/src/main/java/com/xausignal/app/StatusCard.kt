@@ -113,19 +113,20 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
         }
         StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
         StripLangsung(prep, now)                 // ⏱️ 4.34: persen berubah tiap detik T−60 dtk s/d menit 5 (ganti ⏸️ jeda)
+        StripAllin(prep, prices.values.firstOrNull { it.symbol() == "XAU/USD" }?.num("price"))   // 💥 4.35 (CPI)
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
         // 4.31: baris 🎯 "peluang emas naik 1 jam" DIHAPUS dari sini — bertentangan dengan arah 1–10 dtk; satu arah saja
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
-        // ⏸️ jeda pra-berita: baris disembunyikan sejak 4.34 (permintaan pengguna 15 Okt: diganti persen berita per detik);
+        // ⏸️ jeda pra-berita: baris disembunyikan sejak 4.34 (permintaan pengguna 13 Okt: diganti persen berita per detik);
         // aturan jeda di cloud tetap berjalan (teruji menaikkan WR XAU)
     }
 }
 
 /**
- * ⏱️ Baris langsung di bawah kotak XAU (4.34, pengguna 15 Okt 2026: "persentase news berubah setiap detik sebelum &
+ * ⏱️ Baris langsung di bawah kotak XAU (4.34, pengguna 13 Okt 2026: "persentase news berubah setiap detik sebelum &
  * sesudah rilis hingga menit XX"). Angka dari cloud (pra_satu.per_detik = uji tutup kertas, menit_pct = arah detik 2
  * bertahan s/d 5 mnt). Tidak mengarang: tanpa arah → "≈ 50:50". Rilis yang baru lewat diingat 10 menit.
  */
@@ -149,16 +150,58 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     val teks = when {
         arah == null -> if (det < 0) "⏱️ $nama T−${-det.toInt()} dtk • arah ≈ 50:50 (tanpa petunjuk teruji)"
                         else "🔴 $nama rilis +${det.toInt()} dtk • ≈ 50:50"
-        det < 0 -> "⏱️ $nama T−${-det.toInt()} dtk • emas $ar • detik 1 ${p(1) ?: "–"}% • detik 2 ${p(2) ?: "–"}%"
+        det < 0 -> "⏱️ $nama T−${-det.toInt()} dtk • emas $ar • detik 1 ${p(1) ?: "–"}% • detik 2 ${p(2) ?: "–"}%" +
+            aba(r, det)
         det < 10 -> {
             val h = listOf(1, 2, 3, 5, 10).first { it >= kotlin.math.ceil(det.coerceAtLeast(0.01)) }
-            "🔴 $nama detik ${kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()} • emas $ar ${p(h) ?: r.optInt("persen")}%"
+            "🔴 $nama detik ${kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()} • emas $ar ${p(h) ?: r.optInt("persen")}%" +
+                aba(r, det)
         }
         det < 300 -> "🔴 $nama menit ${(det / 60).toInt()}:${"%02d".format(det.toInt() % 60)} • ikuti arah detik 2" +
             (r.optInt("menit_pct", 0).takeIf { it > 0 }?.let { " ($it%)" } ?: "")
         else -> "$nama +${(det / 60).toInt()} mnt • arah ≈ 50:50 (setelah 5 mnt)"
     }
     Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 2)
+}
+
+/** 💥 aba-aba modal kecil (4.35, hanya tebakan CPI kuat): T−5…0 MASUK, detik 0–2 tahan, detik 2–5 TUTUP. */
+private fun aba(r: JSONObject, det: Double): String {
+    val a = r.optJSONObject("allin")?.takeIf { it.optBoolean("kuat") } ?: return ""
+    return when {
+        det >= -5 && det < 0 -> " • 💥 MASUK ${a.optString("arah")}"
+        det >= 0 && det < 2 -> " • 💥 tahan s/d detik 2"
+        det >= 2 && det < 5 -> " • 💥 TUTUP SEKARANG"
+        else -> ""
+    }
+}
+
+/**
+ * 💥 Modal kecil + lot maksimal (4.35, permintaan pengguna 13 Okt 2026: masuk 1 dtk sebelum rilis, modal kecil siap hilang).
+ * Cloud pra_satu.allin hanya untuk CPI (research/cpi_allin2.py): tebakan kuat → arah + tutup detik 2; ⚠️ lemah → JANGAN.
+ * Lot maks dihitung untuk modal KECIL contoh (bukan modal utama di ⚙️): lot = saldo × leverage ÷ (harga × 100)
+ * (Cent: 0,01 lot = 1 oz → saldo USC; akun USD: saldo USD). Ketuk = bukti. Info saja, tanpa order.
+ */
+@Composable
+private fun StripAllin(prep: JSONObject?, xau: Double?) {
+    val a = prep?.optJSONObject("pra_satu")?.optJSONObject("allin") ?: return
+    var buka by remember(a.optString("teks")) { mutableStateOf(false) }
+    val kuat = a.optBoolean("kuat")
+    Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
+        Text(arahBerwarna(a.optString("teks")), style = MaterialTheme.typography.labelMedium,
+            fontWeight = FontWeight.ExtraBold, color = if (kuat) Gold else Muted, maxLines = 2)
+        if (kuat && xau != null && xau > 0) {
+            val m = SignalRepository.money()
+            val lev = a.optInt("lev", 200)
+            val contoh = if (m.cent) listOf(5_000.0, 10_000.0) else listOf(50.0, 100.0)
+            val teks = contoh.joinToString(" • ") { saldo ->
+                val lot = Math.floor(saldo * lev / (xau * 100.0) * 100.0 + 1e-9) / 100.0
+                "${"%,.0f".format(saldo).replace(',', '.')} ${m.currency} ≈ ${lotText(lot)} lot"
+            }
+            Text("Lot maks 1:$lev: $teks • rugi maks = seluruh saldo", style = MaterialTheme.typography.labelSmall,
+                color = Muted, maxLines = 2)
+        }
+        if (buka) Text(a.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
+    }
 }
 
 @Composable

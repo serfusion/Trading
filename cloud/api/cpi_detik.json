@@ -418,5 +418,47 @@
   "2026-06": 336.065,
   "2026-07": 336.789,
   "2026-08": 337.765
+ },
+ "allin": {
+  "aturan": "masuk 1 dtk sebelum rilis searah tebakan kuat, tutup detik 2, lot maks (modal × leverage); tick asli Exness XAUUSDc 2016–2026, modal $100/rilis, rugi maks = modal",
+  "dibuat": "2026-10-13 06:25 UTC",
+  "lev": {
+   "200": {
+    "rata": 20.3,
+    "mc": 0,
+    "menang_rata": 34.6,
+    "kalah_beruntun": 2,
+    "lama_rata": -10.0
+   },
+   "500": {
+    "rata": 56.1,
+    "mc": 2,
+    "menang_rata": 86.5,
+    "kalah_beruntun": 2,
+    "lama_rata": -23.7
+   },
+   "2000": {
+    "rata": 204.9,
+    "mc": 9,
+    "menang_rata": 340.2,
+    "kalah_beruntun": 3,
+    "lama_rata": -45.5
+   }
+  },
+  "n_baru": 32,
+  "untung_baru": 78,
+  "n_lama": 12,
+  "untung_lama": 25,
+  "th_2026": [
+   5,
+   5
+  ],
+  "gagal": "2019–2021",
+  "detik1_untung_baru": 41,
+  "lemah": {
+   "n_baru": 18,
+   "untung_baru": 39,
+   "mc_2000": 10
+  }
  }
 }

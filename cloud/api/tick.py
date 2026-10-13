@@ -199,7 +199,7 @@ def run() -> tuple[int, dict]:
                              _core.RowStore(store, "eth"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "asset": "ETH", "id_prefix": "ETH-", "skip_cats": ("konf", "biasa"),
-                              "guncang": False,          # 15 Okt 2026: 🛑 batal tidak menolong ETH/DOGE/ADA (diuji)
+                              "guncang": False,          # 13 Okt 2026: 🛑 batal tidak menolong ETH/DOGE/ADA (diuji)
                               "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
                              symbol="ETH/USD")
             result["eth"] = {k: eth.get(k) for k in ("ok", "price", "events", "error")}

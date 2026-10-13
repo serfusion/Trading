@@ -1,0 +1,261 @@
+# 💥 CPI modal kecil — semua metode (research/cpi_allin2.py)
+python -m research.cpi_allin2
+
+Rilis dengan tick: 126 • konfigurasi diuji: 570 • lolos syarat dasar: 184 • lolos + tetangga: 142
+
+## Ringkasan per ARAH (konfigurasi terbaik menurut min(LAMA, BARU) $/rilis)
+   kuat           masuk -10.0 dtk keluar sl50 1:2000 | LAMA n 12 $  +55.5 benar  25% MC  0 | BARU n 32 $ +159.2 benar  41% MC  2 | tahun +  62% | ✅ LOLOS
+   kuat           masuk -10.0 dtk keluar d5   1:2000 | LAMA n 12 $  +52.9 benar  33% MC  7 | BARU n 32 $ +274.8 benar  62% MC 12 | tahun +  88% | lolos dasar
+   kuat           masuk -1.0 dtk keluar d5   1:2000 | LAMA n 12 $  +49.4 benar  33% MC  7 | BARU n 32 $ +296.1 benar  66% MC 11 | tahun +  88% | ✅ LOLOS
+   aplikasi       masuk -10.0 dtk keluar d5   1:2000 | LAMA n 28 $  +32.7 benar  39% MC 13 | BARU n 50 $ +200.2 benar  50% MC 25 | tahun +  78% | ✅ LOLOS
+   aplikasi       masuk -3.0 dtk keluar d5   1:2000 | LAMA n 28 $  +27.9 benar  36% MC 15 | BARU n 50 $ +208.9 benar  52% MC 24 | tahun +  78% | ✅ LOLOS
+   aplikasi       masuk -1.0 dtk keluar d5   1:2000 | LAMA n 28 $  +26.7 benar  36% MC 14 | BARU n 50 $ +220.8 benar  54% MC 23 | tahun +  78% | ✅ LOLOS
+   hanya NAIK     masuk -10.0 dtk keluar d5   1:2000 | LAMA n 18 $  +48.9 benar  44% MC  9 | BARU n 27 $ +290.3 benar  67% MC  9 | tahun +  78% | ✅ LOLOS
+   hanya NAIK     masuk -3.0 dtk keluar d5   1:2000 | LAMA n 18 $  +47.7 benar  39% MC 10 | BARU n 27 $ +297.7 benar  67% MC  9 | tahun +  89% | ✅ LOLOS
+   hanya NAIK     masuk -1.0 dtk keluar d5   1:2000 | LAMA n 18 $  +47.3 benar  39% MC  9 | BARU n 27 $ +317.8 benar  70% MC  8 | tahun +  89% | ✅ LOLOS
+   Kalshi m/m     masuk -1.0 dtk keluar d10  1:2000 | LAMA n  0 $   +nan benar nan% MC  0 | BARU n 37 $ +225.0 benar  46% MC 20 | tahun + 100% | 
+   Kalshi m/m     masuk -10.0 dtk keluar d10  1:2000 | LAMA n  0 $   +nan benar nan% MC  0 | BARU n 37 $ +217.2 benar  43% MC 21 | tahun +  80% | 
+   Kalshi m/m     masuk -3.0 dtk keluar d10  1:2000 | LAMA n  0 $   +nan benar nan% MC  0 | BARU n 37 $ +207.5 benar  43% MC 21 | tahun +  80% | 
+   KEJAR detik 1  masuk +1.5 dtk keluar d3   1:1000 | LAMA n 39 $   -2.0 benar  46% MC  9 | BARU n 53 $  +15.9 benar  47% MC 12 | tahun +  36% | 
+   KEJAR detik 1  masuk +1.5 dtk keluar d3   1:100  | LAMA n 39 $   -2.1 benar  51% MC  0 | BARU n 53 $   -1.0 benar  51% MC  0 | tahun +  18% | 
+   KEJAR detik 1  masuk +1.5 dtk keluar d2   1:100  | LAMA n 39 $   -2.9 benar  21% MC  0 | BARU n 53 $   -2.5 benar  32% MC  0 | tahun +   9% | 
+   SEMPURNA       masuk -10.0 dtk keluar d10  1:2000 | LAMA n 56 $ +189.4 benar  66% MC 14 | BARU n 48 $ +324.4 benar  56% MC 20 | tahun + 100% | ✅ LOLOS
+   SEMPURNA       masuk -10.0 dtk keluar d5   1:2000 | LAMA n 56 $ +186.9 benar  66% MC 14 | BARU n 48 $ +284.8 benar  58% MC 20 | tahun + 100% | ✅ LOLOS
+   SEMPURNA       masuk -3.0 dtk keluar d10  1:2000 | LAMA n 56 $ +164.1 benar  64% MC 16 | BARU n 48 $ +352.6 benar  60% MC 18 | tahun + 100% | ✅ LOLOS
+   selalu BUY     masuk -10.0 dtk keluar d10  1:2000 | LAMA n 67 $  +36.6 benar  39% MC 36 | BARU n 59 $ +199.4 benar  44% MC 32 | tahun +  82% | ✅ LOLOS
+   selalu BUY     masuk -10.0 dtk keluar d5   1:2000 | LAMA n 67 $  +34.1 benar  34% MC 35 | BARU n 59 $ +159.0 benar  49% MC 30 | tahun +  82% | ✅ LOLOS
+   selalu BUY     masuk -3.0 dtk keluar d10  1:1000 | LAMA n 67 $  +14.2 benar  48% MC 22 | BARU n 59 $  +90.8 benar  47% MC 27 | tahun +  64% | lolos dasar
+
+## Semua konfigurasi yang LOLOS (+ tetangga)
+   hanya NAIK     masuk -1.0 keluar d10  1:2000 | LAMA $  +24.0 (n18, MC 9) | BARU $ +371.0 (n27, MC 8) | tahun + 89%
+   SEMPURNA       masuk -1.0 keluar d10  1:2000 | LAMA $ +155.4 (n56, MC 16) | BARU $ +355.0 (n48, MC 17) | tahun + 100%
+   SEMPURNA       masuk -3.0 keluar d10  1:2000 | LAMA $ +164.1 (n56, MC 16) | BARU $ +352.6 (n48, MC 18) | tahun + 100%
+   hanya NAIK     masuk -3.0 keluar d10  1:2000 | LAMA $  +24.0 (n18, MC 10) | BARU $ +349.6 (n27, MC 9) | tahun + 89%
+   hanya NAIK     masuk -10.0 keluar d10  1:2000 | LAMA $  +25.6 (n18, MC 9) | BARU $ +335.7 (n27, MC 9) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar d10  1:2000 | LAMA $ +189.4 (n56, MC 14) | BARU $ +324.4 (n48, MC 20) | tahun + 100%
+   hanya NAIK     masuk -1.0 keluar d5   1:2000 | LAMA $  +47.3 (n18, MC 9) | BARU $ +317.8 (n27, MC 8) | tahun + 89%
+   SEMPURNA       masuk -1.0 keluar d5   1:2000 | LAMA $ +152.4 (n56, MC 16) | BARU $ +316.4 (n48, MC 16) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d5   1:2000 | LAMA $ +159.8 (n56, MC 16) | BARU $ +299.3 (n48, MC 18) | tahun + 91%
+   hanya NAIK     masuk -3.0 keluar d5   1:2000 | LAMA $  +47.7 (n18, MC 10) | BARU $ +297.7 (n27, MC 9) | tahun + 89%
+   kuat           masuk -1.0 keluar d5   1:2000 | LAMA $  +49.4 (n12, MC 7) | BARU $ +296.1 (n32, MC 11) | tahun + 88%
+   hanya NAIK     masuk -10.0 keluar d5   1:2000 | LAMA $  +48.9 (n18, MC 9) | BARU $ +290.3 (n27, MC 9) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar d5   1:2000 | LAMA $ +186.9 (n56, MC 14) | BARU $ +284.8 (n48, MC 20) | tahun + 100%
+   kuat           masuk -3.0 keluar d5   1:2000 | LAMA $  +49.0 (n12, MC 8) | BARU $ +280.5 (n32, MC 12) | tahun + 88%
+   aplikasi       masuk -1.0 keluar d10  1:2000 | LAMA $  +16.4 (n28, MC 14) | BARU $ +246.5 (n50, MC 23) | tahun + 78%
+   hanya NAIK     masuk -10.0 keluar d3   1:2000 | LAMA $   +0.4 (n18, MC 8) | BARU $ +243.5 (n27, MC 9) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar sl50 1:2000 | LAMA $  +30.1 (n56, MC 8) | BARU $ +236.4 (n48, MC 1) | tahun + 64%
+   aplikasi       masuk -3.0 keluar d10  1:2000 | LAMA $  +17.5 (n28, MC 15) | BARU $ +233.9 (n50, MC 24) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar d3   1:2000 | LAMA $  +92.6 (n56, MC 16) | BARU $ +232.4 (n48, MC 15) | tahun + 91%
+   aplikasi       masuk -10.0 keluar d10  1:2000 | LAMA $  +24.8 (n28, MC 13) | BARU $ +222.0 (n50, MC 25) | tahun + 78%
+   SEMPURNA       masuk -3.0 keluar d3   1:2000 | LAMA $ +102.2 (n56, MC 16) | BARU $ +221.6 (n48, MC 18) | tahun + 91%
+   aplikasi       masuk -1.0 keluar d5   1:2000 | LAMA $  +26.7 (n28, MC 14) | BARU $ +220.8 (n50, MC 23) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar sl50 1:2000 | LAMA $  +20.0 (n56, MC 3) | BARU $ +220.0 (n48, MC 3) | tahun + 73%
+   selalu BUY     masuk -3.0 keluar d10  1:2000 | LAMA $   +7.2 (n67, MC 41) | BARU $ +214.6 (n59, MC 30) | tahun + 73%
+   aplikasi       masuk -3.0 keluar d5   1:2000 | LAMA $  +27.9 (n28, MC 15) | BARU $ +208.9 (n50, MC 24) | tahun + 78%
+   kuat           masuk -1.0 keluar sl50 1:2000 | LAMA $   +6.0 (n12, MC 1) | BARU $ +207.9 (n32, MC 3) | tahun + 75%
+   kuat           masuk -3.0 keluar sl50 1:2000 | LAMA $   +8.6 (n12, MC 1) | BARU $ +207.3 (n32, MC 4) | tahun + 62%
+   SEMPURNA       masuk -1.0 keluar d10  1:1000 | LAMA $ +116.0 (n56, MC 2) | BARU $ +207.2 (n48, MC 9) | tahun + 100%
+   SEMPURNA       masuk -10.0 keluar d3   1:2000 | LAMA $ +128.5 (n56, MC 14) | BARU $ +202.1 (n48, MC 20) | tahun + 100%
+   aplikasi       masuk -10.0 keluar d5   1:2000 | LAMA $  +32.7 (n28, MC 13) | BARU $ +200.2 (n50, MC 25) | tahun + 78%
+   selalu BUY     masuk -10.0 keluar d10  1:2000 | LAMA $  +36.6 (n67, MC 36) | BARU $ +199.4 (n59, MC 32) | tahun + 82%
+   hanya NAIK     masuk -1.0 keluar d10  1:1000 | LAMA $  +21.0 (n18, MC 5) | BARU $ +197.1 (n27, MC 6) | tahun + 89%
+   SEMPURNA       masuk -3.0 keluar d10  1:1000 | LAMA $ +125.6 (n56, MC 1) | BARU $ +192.9 (n48, MC 10) | tahun + 100%
+   SEMPURNA       masuk -1.0 keluar d5   1:1000 | LAMA $ +114.6 (n56, MC 2) | BARU $ +183.8 (n48, MC 9) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d10  1:1000 | LAMA $ +120.0 (n56, MC 3) | BARU $ +178.0 (n48, MC 11) | tahun + 100%
+   hanya NAIK     masuk -3.0 keluar d10  1:1000 | LAMA $  +21.5 (n18, MC 5) | BARU $ +174.6 (n27, MC 7) | tahun + 89%
+   selalu BUY     masuk -3.0 keluar d5   1:2000 | LAMA $   +6.6 (n67, MC 40) | BARU $ +172.8 (n59, MC 28) | tahun + 73%
+   SEMPURNA       masuk -3.0 keluar d5   1:1000 | LAMA $ +122.1 (n56, MC 1) | BARU $ +171.1 (n48, MC 10) | tahun + 91%
+   hanya NAIK     masuk -1.0 keluar d5   1:1000 | LAMA $  +35.1 (n18, MC 5) | BARU $ +166.4 (n27, MC 6) | tahun + 78%
+   kuat           masuk -10.0 keluar sl50 1:2000 | LAMA $  +55.5 (n12, MC 0) | BARU $ +159.2 (n32, MC 2) | tahun + 62%
+   selalu BUY     masuk -10.0 keluar d5   1:2000 | LAMA $  +34.1 (n67, MC 35) | BARU $ +159.0 (n59, MC 30) | tahun + 82%
+   SEMPURNA       masuk -1.0 keluar d2   1:2000 | LAMA $  +30.3 (n56, MC 16) | BARU $ +157.0 (n48, MC 15) | tahun + 73%
+   SEMPURNA       masuk -10.0 keluar d5   1:1000 | LAMA $ +118.3 (n56, MC 3) | BARU $ +155.6 (n48, MC 11) | tahun + 91%
+   hanya NAIK     masuk -10.0 keluar d10  1:1000 | LAMA $  +18.9 (n18, MC 6) | BARU $ +153.7 (n27, MC 8) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar sl50 1:1000 | LAMA $  +73.5 (n56, MC 0) | BARU $ +153.7 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d2   1:2000 | LAMA $  +37.9 (n56, MC 16) | BARU $ +149.6 (n48, MC 18) | tahun + 64%
+   hanya NAIK     masuk -3.0 keluar d5   1:1000 | LAMA $  +35.6 (n18, MC 5) | BARU $ +146.8 (n27, MC 7) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar sl50 1:1000 | LAMA $  +92.3 (n56, MC 0) | BARU $ +136.9 (n48, MC 3) | tahun + 100%
+   SEMPURNA       masuk -1.0 keluar d3   1:1000 | LAMA $  +77.8 (n56, MC 2) | BARU $ +133.3 (n48, MC 9) | tahun + 91%
+   kuat           masuk -3.0 keluar sl50 1:1000 | LAMA $  +19.9 (n12, MC 0) | BARU $ +132.4 (n32, MC 3) | tahun + 88%
+   SEMPURNA       masuk -10.0 keluar d2   1:2000 | LAMA $  +63.8 (n56, MC 14) | BARU $ +130.0 (n48, MC 20) | tahun + 82%
+   hanya NAIK     masuk -10.0 keluar d5   1:1000 | LAMA $  +34.0 (n18, MC 6) | BARU $ +129.8 (n27, MC 8) | tahun + 67%
+   aplikasi       masuk -1.0 keluar d5   1:1000 | LAMA $  +14.0 (n28, MC 8) | BARU $ +123.9 (n50, MC 17) | tahun + 78%
+   aplikasi       masuk -3.0 keluar d10  1:1000 | LAMA $  +10.6 (n28, MC 8) | BARU $ +122.3 (n50, MC 18) | tahun + 78%
+   SEMPURNA       masuk -3.0 keluar d3   1:1000 | LAMA $  +84.6 (n56, MC 1) | BARU $ +121.5 (n48, MC 10) | tahun + 91%
+   aplikasi       masuk -10.0 keluar sl50 1:2000 | LAMA $  +16.4 (n28, MC 0) | BARU $ +119.9 (n50, MC 5) | tahun + 67%
+   aplikasi       masuk -10.0 keluar d10  1:1000 | LAMA $   +9.2 (n28, MC 10) | BARU $ +114.2 (n50, MC 18) | tahun + 78%
+   aplikasi       masuk -3.0 keluar d5   1:1000 | LAMA $  +15.0 (n28, MC 8) | BARU $ +112.7 (n50, MC 18) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar d3   1:1000 | LAMA $  +81.7 (n56, MC 3) | BARU $ +109.9 (n48, MC 11) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d10  1:500  | LAMA $  +61.9 (n56, MC 1) | BARU $ +107.2 (n48, MC 5) | tahun + 100%
+   aplikasi       masuk -10.0 keluar d5   1:1000 | LAMA $  +15.4 (n28, MC 10) | BARU $ +105.7 (n50, MC 17) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar d10  1:500  | LAMA $  +60.8 (n56, MC 1) | BARU $ +101.4 (n48, MC 6) | tahun + 100%
+   SEMPURNA       masuk -3.0 keluar d5   1:500  | LAMA $  +60.1 (n56, MC 1) | BARU $  +95.1 (n48, MC 5) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d2   1:1000 | LAMA $  +35.6 (n56, MC 2) | BARU $  +93.0 (n48, MC 7) | tahun + 82%
+   aplikasi       masuk -10.0 keluar sl50 1:1000 | LAMA $  +12.5 (n28, MC 0) | BARU $  +91.1 (n50, MC 5) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar sl50 1:500  | LAMA $  +57.2 (n56, MC 0) | BARU $  +90.8 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d5   1:500  | LAMA $  +59.0 (n56, MC 1) | BARU $  +89.8 (n48, MC 6) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d10  1:500  | LAMA $  +62.7 (n56, MC 1) | BARU $  +89.5 (n48, MC 8) | tahun + 100%
+   SEMPURNA       masuk -3.0 keluar sl50 1:500  | LAMA $  +61.0 (n56, MC 0) | BARU $  +83.7 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d2   1:1000 | LAMA $  +41.4 (n56, MC 1) | BARU $  +82.4 (n48, MC 9) | tahun + 82%
+   SEMPURNA       masuk -10.0 keluar d5   1:500  | LAMA $  +60.9 (n56, MC 1) | BARU $  +78.1 (n48, MC 8) | tahun + 91%
+   hanya NAIK     masuk -1.0 keluar sl50 1:500  | LAMA $  +16.3 (n18, MC 0) | BARU $  +76.4 (n27, MC 3) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar sl50 1:500  | LAMA $  +59.1 (n56, MC 0) | BARU $  +74.8 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d2   1:1000 | LAMA $  +41.6 (n56, MC 3) | BARU $  +72.9 (n48, MC 9) | tahun + 82%
+   hanya NAIK     masuk -1.0 keluar d5   1:500  | LAMA $  +12.1 (n18, MC 2) | BARU $  +72.1 (n27, MC 6) | tahun + 78%
+   SEMPURNA       masuk -1.0 keluar tp50 1:2000 | LAMA $  +43.4 (n56, MC 16) | BARU $  +72.0 (n48, MC 15) | tahun + 73%
+   hanya NAIK     masuk -3.0 keluar d5   1:500  | LAMA $  +12.5 (n18, MC 2) | BARU $  +71.2 (n27, MC 6) | tahun + 78%
+   hanya NAIK     masuk -3.0 keluar sl50 1:500  | LAMA $  +17.1 (n18, MC 0) | BARU $  +67.7 (n27, MC 2) | tahun + 78%
+   SEMPURNA       masuk -3.0 keluar d3   1:500  | LAMA $  +41.4 (n56, MC 1) | BARU $  +65.6 (n48, MC 5) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d3   1:500  | LAMA $  +40.3 (n56, MC 1) | BARU $  +65.1 (n48, MC 6) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar tp50 1:2000 | LAMA $  +38.1 (n56, MC 16) | BARU $  +63.8 (n48, MC 17) | tahun + 73%
+   hanya NAIK     masuk -10.0 keluar d5   1:500  | LAMA $  +12.5 (n18, MC 2) | BARU $  +61.4 (n27, MC 7) | tahun + 67%
+   hanya NAIK     masuk -10.0 keluar sl50 1:500  | LAMA $  +16.0 (n18, MC 0) | BARU $  +57.7 (n27, MC 3) | tahun + 67%
+   SEMPURNA       masuk -1.0 keluar tp50 1:1000 | LAMA $  +54.6 (n56, MC 2) | BARU $  +56.7 (n48, MC 9) | tahun + 82%
+   SEMPURNA       masuk -10.0 keluar tp50 1:2000 | LAMA $  +48.0 (n56, MC 14) | BARU $  +55.3 (n48, MC 19) | tahun + 82%
+   SEMPURNA       masuk -10.0 keluar d3   1:500  | LAMA $  +42.2 (n56, MC 1) | BARU $  +55.1 (n48, MC 8) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar tp50 1:1000 | LAMA $  +58.0 (n56, MC 1) | BARU $  +48.2 (n48, MC 10) | tahun + 82%
+   SEMPURNA       masuk -1.0 keluar tp50 1:500  | LAMA $  +38.2 (n56, MC 1) | BARU $  +47.1 (n48, MC 6) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d10  1:200  | LAMA $  +26.1 (n56, MC 0) | BARU $  +46.7 (n48, MC 2) | tahun + 100%
+   SEMPURNA       masuk -10.0 keluar d10  1:200  | LAMA $  +26.7 (n56, MC 0) | BARU $  +46.0 (n48, MC 2) | tahun + 100%
+   SEMPURNA       masuk -3.0 keluar d10  1:200  | LAMA $  +26.5 (n56, MC 0) | BARU $  +46.0 (n48, MC 2) | tahun + 100%
+   SEMPURNA       masuk -1.0 keluar d2   1:500  | LAMA $  +18.7 (n56, MC 1) | BARU $  +45.6 (n48, MC 4) | tahun + 82%
+   SEMPURNA       masuk -3.0 keluar tp50 1:500  | LAMA $  +38.5 (n56, MC 1) | BARU $  +44.4 (n48, MC 5) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d2   1:500  | LAMA $  +19.8 (n56, MC 1) | BARU $  +44.0 (n48, MC 4) | tahun + 82%
+   SEMPURNA       masuk -10.0 keluar tp50 1:1000 | LAMA $  +53.1 (n56, MC 3) | BARU $  +41.9 (n48, MC 11) | tahun + 82%
+   SEMPURNA       masuk -1.0 keluar d5   1:200  | LAMA $  +24.7 (n56, MC 0) | BARU $  +41.4 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d5   1:200  | LAMA $  +25.1 (n56, MC 0) | BARU $  +40.6 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d5   1:200  | LAMA $  +25.3 (n56, MC 0) | BARU $  +40.6 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar tp50 1:500  | LAMA $  +40.0 (n56, MC 1) | BARU $  +37.4 (n48, MC 8) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar sl50 1:200  | LAMA $  +24.7 (n56, MC 0) | BARU $  +36.4 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d2   1:500  | LAMA $  +20.6 (n56, MC 1) | BARU $  +36.3 (n48, MC 7) | tahun + 82%
+   SEMPURNA       masuk -3.0 keluar sl50 1:200  | LAMA $  +25.1 (n56, MC 0) | BARU $  +35.5 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar sl50 1:200  | LAMA $  +24.2 (n56, MC 0) | BARU $  +33.3 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar tp50 1:200  | LAMA $  +22.5 (n56, MC 0) | BARU $  +33.2 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar tp50 1:200  | LAMA $  +22.9 (n56, MC 0) | BARU $  +32.9 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar tp50 1:200  | LAMA $  +23.0 (n56, MC 0) | BARU $  +32.2 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d3   1:200  | LAMA $  +16.4 (n56, MC 0) | BARU $  +28.5 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d3   1:200  | LAMA $  +16.8 (n56, MC 0) | BARU $  +27.7 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d3   1:200  | LAMA $  +17.0 (n56, MC 0) | BARU $  +27.7 (n48, MC 1) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar d10  1:100  | LAMA $  +13.0 (n56, MC 0) | BARU $  +25.0 (n48, MC 0) | tahun + 100%
+   hanya NAIK     masuk -1.0 keluar sl50 1:200  | LAMA $   +0.9 (n18, MC 1) | BARU $  +25.0 (n27, MC 0) | tahun + 78%
+   SEMPURNA       masuk -10.0 keluar d10  1:100  | LAMA $  +13.3 (n56, MC 0) | BARU $  +24.6 (n48, MC 0) | tahun + 100%
+   SEMPURNA       masuk -3.0 keluar d10  1:100  | LAMA $  +13.2 (n56, MC 0) | BARU $  +24.6 (n48, MC 0) | tahun + 100%
+   hanya NAIK     masuk -10.0 keluar sl50 1:200  | LAMA $   +1.0 (n18, MC 1) | BARU $  +23.4 (n27, MC 0) | tahun + 78%
+   hanya NAIK     masuk -3.0 keluar sl50 1:200  | LAMA $   +0.9 (n18, MC 1) | BARU $  +23.4 (n27, MC 0) | tahun + 67%
+   SEMPURNA       masuk -1.0 keluar d5   1:100  | LAMA $  +12.3 (n56, MC 0) | BARU $  +22.2 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d5   1:100  | LAMA $  +12.7 (n56, MC 0) | BARU $  +21.8 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d5   1:100  | LAMA $  +12.6 (n56, MC 0) | BARU $  +21.8 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar tp50 1:100  | LAMA $  +12.4 (n56, MC 0) | BARU $  +20.7 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -1.0 keluar sl50 1:100  | LAMA $  +12.3 (n56, MC 0) | BARU $  +20.5 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar tp50 1:100  | LAMA $  +12.7 (n56, MC 0) | BARU $  +20.4 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar tp50 1:100  | LAMA $  +12.1 (n56, MC 0) | BARU $  +20.2 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar sl50 1:100  | LAMA $  +12.7 (n56, MC 0) | BARU $  +20.2 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar sl50 1:100  | LAMA $  +12.6 (n56, MC 0) | BARU $  +20.1 (n48, MC 0) | tahun + 91%
+   hanya NAIK     masuk -1.0 keluar d5   1:200  | LAMA $   +0.4 (n18, MC 1) | BARU $  +19.6 (n27, MC 2) | tahun + 67%
+   hanya NAIK     masuk -3.0 keluar d5   1:200  | LAMA $   +0.6 (n18, MC 1) | BARU $  +19.2 (n27, MC 3) | tahun + 67%
+   hanya NAIK     masuk -10.0 keluar d5   1:200  | LAMA $   +0.5 (n18, MC 1) | BARU $  +19.0 (n27, MC 2) | tahun + 67%
+   SEMPURNA       masuk -1.0 keluar d2   1:200  | LAMA $   +7.5 (n56, MC 0) | BARU $  +16.8 (n48, MC 1) | tahun + 82%
+   SEMPURNA       masuk -3.0 keluar d2   1:200  | LAMA $   +8.0 (n56, MC 0) | BARU $  +16.0 (n48, MC 1) | tahun + 73%
+   SEMPURNA       masuk -10.0 keluar d2   1:200  | LAMA $   +8.2 (n56, MC 0) | BARU $  +16.0 (n48, MC 1) | tahun + 73%
+   SEMPURNA       masuk -1.0 keluar d3   1:100  | LAMA $   +8.2 (n56, MC 0) | BARU $  +15.4 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -10.0 keluar d3   1:100  | LAMA $   +8.5 (n56, MC 0) | BARU $  +15.0 (n48, MC 0) | tahun + 91%
+   SEMPURNA       masuk -3.0 keluar d3   1:100  | LAMA $   +8.4 (n56, MC 0) | BARU $  +14.9 (n48, MC 0) | tahun + 91%
+   hanya NAIK     masuk -1.0 keluar sl50 1:100  | LAMA $   +0.1 (n18, MC 0) | BARU $   +9.7 (n27, MC 0) | tahun + 67%
+   hanya NAIK     masuk -3.0 keluar sl50 1:100  | LAMA $   +0.2 (n18, MC 0) | BARU $   +9.5 (n27, MC 0) | tahun + 67%
+   hanya NAIK     masuk -10.0 keluar sl50 1:100  | LAMA $   +0.1 (n18, MC 0) | BARU $   +9.4 (n27, MC 0) | tahun + 67%
+   SEMPURNA       masuk -1.0 keluar d2   1:100  | LAMA $   +3.8 (n56, MC 0) | BARU $   +9.4 (n48, MC 0) | tahun + 82%
+   SEMPURNA       masuk -10.0 keluar d2   1:100  | LAMA $   +4.1 (n56, MC 0) | BARU $   +9.0 (n48, MC 0) | tahun + 73%
+   SEMPURNA       masuk -3.0 keluar d2   1:100  | LAMA $   +4.0 (n56, MC 0) | BARU $   +8.9 (n48, MC 0) | tahun + 73%
+   hanya NAIK     masuk -1.0 keluar d5   1:100  | LAMA $   +0.4 (n18, MC 0) | BARU $   +7.9 (n27, MC 0) | tahun + 67%
+   hanya NAIK     masuk -3.0 keluar d5   1:100  | LAMA $   +0.4 (n18, MC 0) | BARU $   +7.8 (n27, MC 0) | tahun + 67%
+   hanya NAIK     masuk -10.0 keluar d5   1:100  | LAMA $   +0.4 (n18, MC 0) | BARU $   +7.7 (n27, MC 0) | tahun + 67%
+
+## Pembanding acak: berapa konfigurasi 'selalu BUY' / 'SEMPURNA' yang lolos dasar
+   selalu BUY: 11/90
+   SEMPURNA: 89/90
+
+## Masuk t0 − 1 dtk: tebakan vs ARAH ACAK (rilis yang sama; p = peluang acak ≥ tebakan)
+### kuat (aplikasi tanpa ⚠️)
+   tutup d1 1:100  | LAMA n12 benar   0% $   -2.8 (acak $   -2.3) MC  0 p 0.78 | BARU n32 benar  41% $   +1.0 (acak $   -1.4) MC  0 p 0.05
+   tutup d1 1:200  | LAMA n12 benar   0% $   -5.6 (acak $   -4.6) MC  0 p 0.78 | BARU n32 benar  41% $   +2.1 (acak $   -3.3) MC  0 p 0.05
+   tutup d1 1:500  | LAMA n12 benar   0% $  -14.1 (acak $  -11.4) MC  0 p 0.77 | BARU n32 benar  41% $   +5.2 (acak $   -5.7) MC  0 p 0.05
+   tutup d1 1:1000 | LAMA n12 benar   0% $  -28.2 (acak $  -22.8) MC  0 p 0.77 | BARU n32 benar  41% $  +11.4 (acak $   -5.5) MC  2 p 0.06
+   tutup d1 1:2000 | LAMA n12 benar   0% $  -51.1 (acak $  -41.7) MC  2 p 0.81 | BARU n32 benar  41% $  +27.8 (acak $   +1.2) MC  4 p 0.06
+   tutup d2 1:100  | LAMA n12 benar  25% $   -5.0 (acak $   -2.5) MC  0 p 0.84 | BARU n32 benar  78% $  +10.1 (acak $   -1.7) MC  0 p 0.00
+   tutup d2 1:200  | LAMA n12 benar  25% $  -10.0 (acak $   -5.1) MC  0 p 0.84 | BARU n32 benar  78% $  +20.3 (acak $   -4.3) MC  0 p 0.00
+   tutup d2 1:500  | LAMA n12 benar  25% $  -23.7 (acak $  -12.0) MC  1 p 0.84 | BARU n32 benar  78% $  +56.1 (acak $   +3.5) MC  2 p 0.00
+   tutup d2 1:1000 | LAMA n12 benar  25% $  -40.3 (acak $  -20.2) MC  3 p 0.85 | BARU n32 benar  72% $ +106.6 (acak $  +27.9) MC  6 p 0.00
+   tutup d2 1:2000 | LAMA n12 benar  25% $  -45.5 (acak $  -15.1) MC  7 p 0.84 | BARU n32 benar  69% $ +204.9 (acak $  +87.9) MC  9 p 0.00
+   tutup d3 1:100  | LAMA n12 benar  25% $   -4.4 (acak $   -2.4) MC  0 p 0.73 | BARU n32 benar  72% $  +10.1 (acak $   -1.7) MC  0 p 0.01
+   tutup d3 1:200  | LAMA n12 benar  25% $   -8.9 (acak $   -4.7) MC  0 p 0.74 | BARU n32 benar  72% $  +19.9 (acak $   -4.4) MC  2 p 0.01
+   tutup d3 1:500  | LAMA n12 benar  25% $  -19.0 (acak $  -10.2) MC  1 p 0.73 | BARU n32 benar  72% $  +63.2 (acak $   +5.0) MC  5 p 0.00
+   tutup d3 1:1000 | LAMA n12 benar  25% $  -32.4 (acak $  -14.4) MC  3 p 0.76 | BARU n32 benar  69% $ +127.9 (acak $  +41.4) MC  8 p 0.00
+   tutup d3 1:2000 | LAMA n12 benar  25% $  -26.2 (acak $   +3.1) MC  7 p 0.78 | BARU n32 benar  66% $ +251.6 (acak $ +119.0) MC 11 p 0.00
+   tutup d5 1:100  | LAMA n12 benar  33% $   -1.5 (acak $   -2.4) MC  0 p 0.42 | BARU n32 benar  72% $   +8.9 (acak $   -1.6) MC  0 p 0.05
+   tutup d5 1:200  | LAMA n12 benar  33% $   -2.9 (acak $   -4.8) MC  0 p 0.42 | BARU n32 benar  72% $  +20.9 (acak $   -2.3) MC  2 p 0.02
+   tutup d5 1:500  | LAMA n12 benar  33% $   -3.3 (acak $   -5.9) MC  1 p 0.45 | BARU n32 benar  72% $  +71.7 (acak $  +11.2) MC  6 p 0.00
+   tutup d5 1:1000 | LAMA n12 benar  33% $   +1.5 (acak $   +2.0) MC  4 p 0.51 | BARU n32 benar  69% $ +149.7 (acak $  +56.9) MC  9 p 0.00
+   tutup d5 1:2000 | LAMA n12 benar  33% $  +49.4 (acak $  +44.6) MC  7 p 0.46 | BARU n32 benar  66% $ +296.1 (acak $ +152.6) MC 11 p 0.01
+### aplikasi (semua)
+   tutup d1 1:100  | LAMA n28 benar   7% $   -2.3 (acak $   -2.8) MC  0 p 0.34 | BARU n50 benar  36% $   -0.1 (acak $   -1.3) MC  0 p 0.10
+   tutup d1 1:200  | LAMA n28 benar   7% $   -4.6 (acak $   -5.5) MC  0 p 0.35 | BARU n50 benar  36% $   -0.2 (acak $   -3.0) MC  0 p 0.10
+   tutup d1 1:500  | LAMA n28 benar   7% $  -11.6 (acak $  -13.5) MC  0 p 0.35 | BARU n50 benar  36% $   -0.5 (acak $   -5.9) MC  0 p 0.11
+   tutup d1 1:1000 | LAMA n28 benar   7% $  -20.4 (acak $  -23.0) MC  1 p 0.38 | BARU n50 benar  36% $   -0.2 (acak $   -8.1) MC  2 p 0.14
+   tutup d1 1:2000 | LAMA n28 benar   7% $  -35.0 (acak $  -37.6) MC  3 p 0.42 | BARU n50 benar  36% $   +4.9 (acak $   -7.2) MC  9 p 0.16
+   tutup d2 1:100  | LAMA n28 benar  29% $   -3.3 (acak $   -2.8) MC  0 p 0.58 | BARU n50 benar  70% $   +7.7 (acak $   -1.6) MC  0 p 0.00
+   tutup d2 1:200  | LAMA n28 benar  29% $   -6.6 (acak $   -5.5) MC  1 p 0.58 | BARU n50 benar  70% $  +15.4 (acak $   -3.9) MC  0 p 0.00
+   tutup d2 1:500  | LAMA n28 benar  29% $  -10.6 (acak $   -9.1) MC  2 p 0.56 | BARU n50 benar  70% $  +42.4 (acak $   +1.6) MC  4 p 0.00
+   tutup d2 1:1000 | LAMA n28 benar  29% $  -14.2 (acak $   -9.5) MC  5 p 0.61 | BARU n50 benar  66% $  +87.1 (acak $  +25.6) MC 11 p 0.00
+   tutup d2 1:2000 | LAMA n28 benar  25% $  -27.4 (acak $   -9.7) MC 13 p 0.75 | BARU n50 benar  58% $ +153.8 (acak $  +73.0) MC 19 p 0.00
+   tutup d3 1:100  | LAMA n28 benar  32% $   -2.6 (acak $   -2.5) MC  0 p 0.51 | BARU n50 benar  64% $   +6.4 (acak $   -1.6) MC  0 p 0.02
+   tutup d3 1:200  | LAMA n28 benar  32% $   -5.3 (acak $   -5.1) MC  1 p 0.51 | BARU n50 benar  64% $  +12.5 (acak $   -3.9) MC  2 p 0.01
+   tutup d3 1:500  | LAMA n28 benar  32% $   -6.4 (acak $   -7.8) MC  2 p 0.45 | BARU n50 benar  64% $  +42.2 (acak $   +2.1) MC 11 p 0.00
+   tutup d3 1:1000 | LAMA n28 benar  32% $   -5.7 (acak $   -3.8) MC  6 p 0.54 | BARU n50 benar  62% $  +97.4 (acak $  +37.3) MC 16 p 0.00
+   tutup d3 1:2000 | LAMA n28 benar  29% $   -6.0 (acak $   +6.6) MC 13 p 0.67 | BARU n50 benar  54% $ +177.3 (acak $ +100.3) MC 23 p 0.02
+   tutup d5 1:100  | LAMA n28 benar  43% $   -0.9 (acak $   -2.6) MC  0 p 0.30 | BARU n50 benar  66% $   +5.5 (acak $   -1.6) MC  0 p 0.06
+   tutup d5 1:200  | LAMA n28 benar  43% $   -2.0 (acak $   -5.3) MC  1 p 0.30 | BARU n50 benar  66% $  +13.5 (acak $   -2.4) MC  3 p 0.04
+   tutup d5 1:500  | LAMA n28 benar  43% $   +2.0 (acak $   -7.0) MC  2 p 0.24 | BARU n50 benar  66% $  +53.0 (acak $   +8.9) MC 12 p 0.00
+   tutup d5 1:1000 | LAMA n28 benar  43% $  +14.0 (acak $   +4.9) MC  8 p 0.33 | BARU n50 benar  64% $ +123.9 (acak $  +57.2) MC 17 p 0.01
+   tutup d5 1:2000 | LAMA n28 benar  36% $  +26.7 (acak $  +25.5) MC 14 p 0.48 | BARU n50 benar  54% $ +220.8 (acak $ +137.7) MC 23 p 0.03
+### hanya NAIK
+   tutup d1 1:100  | LAMA n18 benar   0% $   -3.6 (acak $   -3.1) MC  0 p 0.69 | BARU n27 benar  41% $   +1.5 (acak $   -1.4) MC  0 p 0.02
+   tutup d1 1:200  | LAMA n18 benar   0% $   -7.2 (acak $   -6.1) MC  0 p 0.70 | BARU n27 benar  41% $   +3.0 (acak $   -3.4) MC  0 p 0.02
+   tutup d1 1:500  | LAMA n18 benar   0% $  -18.0 (acak $  -15.3) MC  0 p 0.70 | BARU n27 benar  41% $   +7.5 (acak $   -5.4) MC  0 p 0.02
+   tutup d1 1:1000 | LAMA n18 benar   0% $  -31.8 (acak $  -27.2) MC  1 p 0.74 | BARU n27 benar  41% $  +15.0 (acak $   -6.5) MC  0 p 0.02
+   tutup d1 1:2000 | LAMA n18 benar   0% $  -54.6 (acak $  -44.3) MC  3 p 0.82 | BARU n27 benar  41% $  +28.4 (acak $   -3.7) MC  2 p 0.03
+   tutup d2 1:100  | LAMA n18 benar  33% $   -4.1 (acak $   -3.1) MC  0 p 0.60 | BARU n27 benar  78% $   +9.7 (acak $   -1.7) MC  0 p 0.00
+   tutup d2 1:200  | LAMA n18 benar  33% $   -8.1 (acak $   -6.1) MC  1 p 0.60 | BARU n27 benar  78% $  +19.5 (acak $   -4.5) MC  0 p 0.00
+   tutup d2 1:500  | LAMA n18 benar  33% $  -11.1 (acak $   -8.5) MC  2 p 0.57 | BARU n27 benar  78% $  +55.0 (acak $   +2.9) MC  2 p 0.00
+   tutup d2 1:1000 | LAMA n18 benar  33% $  -11.9 (acak $   -7.0) MC  4 p 0.58 | BARU n27 benar  78% $ +118.5 (acak $  +34.8) MC  4 p 0.00
+   tutup d2 1:2000 | LAMA n18 benar  28% $  -33.6 (acak $   -4.5) MC  9 p 0.79 | BARU n27 benar  74% $ +219.8 (acak $  +98.5) MC  6 p 0.00
+   tutup d3 1:100  | LAMA n18 benar  44% $   -2.8 (acak $   -2.7) MC  0 p 0.51 | BARU n27 benar  74% $   +9.3 (acak $   -1.6) MC  0 p 0.02
+   tutup d3 1:200  | LAMA n18 benar  44% $   -5.6 (acak $   -5.5) MC  1 p 0.50 | BARU n27 benar  74% $  +18.3 (acak $   -4.5) MC  2 p 0.02
+   tutup d3 1:500  | LAMA n18 benar  44% $   -3.6 (acak $   -7.1) MC  2 p 0.41 | BARU n27 benar  74% $  +61.7 (acak $   +3.6) MC  5 p 0.00
+   tutup d3 1:1000 | LAMA n18 benar  44% $   +2.0 (acak $   +0.8) MC  4 p 0.48 | BARU n27 benar  74% $ +142.0 (acak $  +49.0) MC  5 p 0.00
+   tutup d3 1:2000 | LAMA n18 benar  39% $   -2.9 (acak $  +16.2) MC  9 p 0.68 | BARU n27 benar  70% $ +267.8 (acak $ +129.9) MC  8 p 0.00
+   tutup d5 1:100  | LAMA n18 benar  50% $   +0.4 (acak $   -2.8) MC  0 p 0.25 | BARU n27 benar  74% $   +7.9 (acak $   -1.6) MC  0 p 0.10
+   tutup d5 1:200  | LAMA n18 benar  50% $   +0.4 (acak $   -5.7) MC  1 p 0.25 | BARU n27 benar  74% $  +19.6 (acak $   -2.2) MC  2 p 0.05
+   tutup d5 1:500  | LAMA n18 benar  50% $  +12.1 (acak $   -5.0) MC  2 p 0.18 | BARU n27 benar  74% $  +72.1 (acak $  +11.5) MC  6 p 0.00
+   tutup d5 1:1000 | LAMA n18 benar  50% $  +35.1 (acak $  +12.7) MC  5 p 0.22 | BARU n27 benar  74% $ +166.4 (acak $  +66.7) MC  6 p 0.00
+   tutup d5 1:2000 | LAMA n18 benar  39% $  +47.3 (acak $  +38.5) MC  9 p 0.42 | BARU n27 benar  70% $ +317.8 (acak $ +168.7) MC  8 p 0.01
+### ⚠️ lemah saja
+   tutup d1 1:100  | LAMA n16 benar  12% $   -1.9 (acak $   -3.1) MC  0 p 0.28 | BARU n18 benar  28% $   -2.1 (acak $   -1.2) MC  0 p 0.90
+   tutup d1 1:200  | LAMA n16 benar  12% $   -3.9 (acak $   -6.3) MC  0 p 0.27 | BARU n18 benar  28% $   -4.2 (acak $   -2.5) MC  0 p 0.90
+   tutup d1 1:500  | LAMA n16 benar  12% $   -9.6 (acak $  -15.1) MC  0 p 0.27 | BARU n18 benar  28% $  -10.5 (acak $   -6.2) MC  0 p 0.91
+   tutup d1 1:1000 | LAMA n16 benar  12% $  -14.6 (acak $  -23.1) MC  1 p 0.27 | BARU n18 benar  28% $  -21.0 (acak $  -12.5) MC  0 p 0.90
+   tutup d1 1:2000 | LAMA n16 benar  12% $  -23.0 (acak $  -35.0) MC  1 p 0.31 | BARU n18 benar  28% $  -35.8 (acak $  -21.8) MC  5 p 0.88
+   tutup d2 1:100  | LAMA n16 benar  31% $   -2.1 (acak $   -2.9) MC  0 p 0.43 | BARU n18 benar  56% $   +3.4 (acak $   -1.5) MC  0 p 0.12
+   tutup d2 1:200  | LAMA n16 benar  31% $   -4.0 (acak $   -5.9) MC  1 p 0.42 | BARU n18 benar  56% $   +6.8 (acak $   -3.1) MC  0 p 0.12
+   tutup d2 1:500  | LAMA n16 benar  31% $   -0.7 (acak $   -6.9) MC  1 p 0.36 | BARU n18 benar  56% $  +18.0 (acak $   -1.8) MC  2 p 0.14
+   tutup d2 1:1000 | LAMA n16 benar  31% $   +5.4 (acak $   -1.2) MC  2 p 0.40 | BARU n18 benar  56% $  +52.4 (acak $  +21.7) MC  5 p 0.15
+   tutup d2 1:2000 | LAMA n16 benar  25% $  -13.7 (acak $   -5.9) MC  6 p 0.58 | BARU n18 benar  39% $  +63.1 (acak $  +46.9) MC 10 p 0.36
+   tutup d3 1:100  | LAMA n16 benar  38% $   -1.2 (acak $   -2.7) MC  0 p 0.38 | BARU n18 benar  50% $   -0.3 (acak $   -1.5) MC  0 p 0.41
+   tutup d3 1:200  | LAMA n16 benar  38% $   -2.5 (acak $   -5.4) MC  1 p 0.38 | BARU n18 benar  50% $   -0.6 (acak $   -3.0) MC  0 p 0.40
+   tutup d3 1:500  | LAMA n16 benar  38% $   +3.0 (acak $   -6.1) MC  1 p 0.30 | BARU n18 benar  50% $   +4.9 (acak $   -3.2) MC  6 p 0.35
+   tutup d3 1:1000 | LAMA n16 benar  38% $  +14.2 (acak $   +4.2) MC  3 p 0.36 | BARU n18 benar  50% $  +43.2 (acak $  +30.4) MC  8 p 0.35
+   tutup d3 1:2000 | LAMA n16 benar  31% $   +9.1 (acak $   +8.6) MC  6 p 0.49 | BARU n18 benar  33% $  +45.2 (acak $  +68.0) MC 12 p 0.67
+   tutup d5 1:100  | LAMA n16 benar  50% $   -0.5 (acak $   -2.7) MC  0 p 0.30 | BARU n18 benar  56% $   -0.3 (acak $   -1.6) MC  0 p 0.42
+   tutup d5 1:200  | LAMA n16 benar  50% $   -1.3 (acak $   -5.6) MC  1 p 0.32 | BARU n18 benar  56% $   +0.3 (acak $   -2.6) MC  1 p 0.41
+   tutup d5 1:500  | LAMA n16 benar  50% $   +6.0 (acak $   -7.8) MC  1 p 0.22 | BARU n18 benar  56% $  +19.6 (acak $   +5.1) MC  6 p 0.29
+   tutup d5 1:1000 | LAMA n16 benar  50% $  +23.4 (acak $   +7.0) MC  4 p 0.28 | BARU n18 benar  56% $  +78.0 (acak $  +58.3) MC  8 p 0.32
+   tutup d5 1:2000 | LAMA n16 benar  38% $   +9.6 (acak $  +11.6) MC  7 p 0.52 | BARU n18 benar  33% $  +86.9 (acak $ +111.3) MC 12 p 0.64
