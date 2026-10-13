@@ -282,3 +282,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   dilewati saat emas di atas rata-rata 200 hari) menunggu "pasang".
 - Perbaikan data riset: research/kalshi.py (close_dollars; 13 event Kalshi Jul–Sep 2026 diunduh ulang ke
   data/research/eksternal/kalshi), research/nasdaq_kalender.py (urutan baris CPI saat FRED kosong).
+- 13 Okt (lanjutan): saringan CPI DIPASANG sebagai ⚠️ lemah (bukan dibuang) — cloud/api/_cpi_detik.py, _pra_aset.py,
+  cpi_detik.json, tests/test_cloud_cpi_detik.py (+6 tes). Docs/CPI_SALAH.md bagian 7.

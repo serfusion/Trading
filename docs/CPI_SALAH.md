@@ -55,8 +55,7 @@ Tren = close emas kemarin di atas rata-rata 200 hari (diuji juga 50/100 hari & r
 
 - Uji "buang tebakan secara acak" sebanyak yang sama: BARU p 0,062, 2024+ **p 0,028**, LAMA p 0,82 (tidak berpengaruh).
 - Pada 12 bulan terakhir: menghindari salah Jan 2026; **Juni tetap salah** (saat itu emas di bawah rata-rata 200 hari).
-- Ditemukan SETELAH melihat kesalahan → **kandidat, BELUM dipasang** (tunggu "pasang"). Biaya: lebih sedikit rilis ditebak
-  (89 → 65 sejak 2016).
+- Ditemukan SETELAH melihat kesalahan → diuji tutup kertas; biaya bila dilewati: lebih sedikit rilis ditebak (89 → 65).
 - Kandidat lain yang diuji dan TIDAK lebih baik: Kalshi core diutamakan, suara Kalshi core+headline+indeks, lewati bila
   Kalshi core / headline berlawanan.
 
@@ -71,3 +70,28 @@ Tren = close emas kemarin di atas rata-rata 200 hari (diuji juga 50/100 hari & r
 "Sempurna" (100%) tidak mungkin: walau angka CPI sudah diketahui, emas di detik 2 hanya searah ±76–80%, dan detik 1 ±57%.
 Aturan sekarang di detik 2 sudah dekat batas itu sejak 2024 (77%). Perbaikan yang terbukti paling kuat sejauh ini: jangan
 mengikuti tebakan TURUN saat emas tren naik (2024+ 77% → 90%) — perlu izin untuk dipasang dan uji maju.
+
+## 7. DIPASANG 13 Okt 2026 — tebakan TURUN yang meragukan TETAP tampil sebagai ⚠️ lemah
+Urutan permintaan pengguna: "perbaiki supaya predict mu akan skip ini" (Juni) → lalu "bukannya bisa di predict malah bagus
+kenapa dilewati?". Diuji: tebakan TURUN yang kena saringan masih benar ±62–67% di detik 1 → TIDAK dibuang, ditampilkan
+dengan tanda lemah dan angkanya sendiri.
+
+Saringan (D): tebakan TURUN saat emas di atas rata-rata 200 hari bursa (close Senin–Jumat; Twelve Data harian memuat
+candle Sabtu/Minggu ganda → dibuang, riset disamakan) **atau** Kalshi core condong berlawanan (≥ 0,10). Menangkap Jan 2026
+(tren naik) dan Jun 2026 (Kalshi core condong di bawah). Angka tutup kertas detik 2 (`cpi_detik.json["uji"]["saring"]`):
+
+| | semua 2016–2026 | lama | sejak Okt 2021 | sejak 2024 |
+|---|---|---|---|---|
+| Tebakan kuat (tidak kena saringan) | **68%** (61 rilis) | 54% | **81%** | **95%** (18/19) |
+| Tebakan ⚠️ lemah (kena saringan) | 62% (29 rilis; detik 1 62%) | 64% | 61% | 45% |
+| Aturan lama tanpa pemisahan | 66% | 58% | 74% | 77% |
+
+Uji "buang acak" tebakan kuat: sejak 2024 p 0,004, sejak Okt 2021 p 0,12 (belum meyakinkan). Saringan core hanya teruji
+sejak 2022 (Kalshi). Detik 1 tebakan kuat 56% (harga belum bergerak).
+- Cloud: `_cpi_detik.saring` / `pakai_saring` / `tren200` (Twelve Data XAU harian 300 candle, cache baris Supabase
+  `cpi_tren` 6 jam; tidak terbaca → lemah), env `CPI_SARING=0` = angka lama. Patokan tampilan kini **detik 2**
+  ("CPI ▲ NAIK 68% (detik 2)"); detail tebakan lemah: "Lemah karena emas sedang tren naik …".
+- Riset: `research/cpi_detik.py` kolom `T200`, aturan `IDX|K+S`, `cpi_detik.json["uji"]["saring"]` (+ `"lemah"`); jalankan
+  ulang `python -m research.cpi_detik` bila data bertambah (angka "lonjakan" dipertahankan).
+- Cek langsung 13 Okt untuk CPI 14 Okt: emas di bawah rata-rata 200 hari, Kalshi CPI utama di bawah (37% vs 14%) →
+  **NAIK (detik 2), tebakan kuat**.
