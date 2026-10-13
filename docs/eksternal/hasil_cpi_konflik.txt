@@ -1,0 +1,33 @@
+# ⚖️ CPI: tebakan saat petunjuk lain sepakat / berlawanan (research/cpi_konflik.py)
+Permintaan pengguna 13 Okt 2026 (setelah konsensus CPI 14 Okt terbit): "silahkan dikalkulasikan … kedepannya selalu cek
+forecast, konsensus, dll agar persentase berubah up to date". Cloud mengambil konsensus (ForexFactory/Nasdaq, cache 10–30
+mnt) & Kalshi (langsung) setiap aplikasi dibuka; file ini memberi angka historis untuk SITUASI yang sedang terjadi supaya
+persen di detail ikut berubah ketika petunjuk berubah. Aturan tebakan TIDAK diubah (IDX|K tutup kertas, saringan sama).
+
+NAIK  sepakat   | detik 2 70% (n 27; sejak Okt 2021 100% n 11) | detik 10 70% | lonjakan 78% (n 27) | ⚠️ lemah 0
+      2016-01✓, 2016-02✗, 2017-02✗, 2017-03✗, 2017-05✓, 2018-01✗, 2018-04✓, 2018-05✓, 2018-07✓, 2018-10✗, 2018-12✓, 2019-01✗, 2019-03✓, 2019-06✓, 2020-09✗, 2021-05✗, 2023-07✓, 2023-08✓, 2024-06✓, 2024-07✓, 2024-08✓, 2024-11✓, 2025-06✓, 2025-10✓, 2025-12✓, 2026-04✓, 2026-09✓
+NAIK  yoy       | detik 2 65% (n 23; sejak Okt 2021 69% n 13) | detik 10 65% | lonjakan 70% (n 23) | ⚠️ lemah 0
+      2016-10✓, 2017-06✓, 2017-08✓, 2018-09✓, 2019-02✗, 2019-11✗, 2020-05✓, 2020-07✗, 2021-03✓, 2021-08✗, 2022-03✗, 2022-08✓, 2023-02✗, 2023-05✓, 2023-06✗, 2024-01✓, 2024-02✓, 2024-12✗, 2025-01✓, 2025-05✓, 2025-07✓, 2026-03✓, 2026-07✓
+NAIK  inti      | detik 2 86% (n 7; sejak Okt 2021 86% n 7) | detik 10 86% | lonjakan 71% (n 7) | ⚠️ lemah 0
+      2022-08✓, 2022-09✗, 2023-05✓, 2025-03✓, 2026-02✓, 2026-03✓, 2026-07✓
+NAIK  keduanya  | detik 2 100% (n 4; sejak Okt 2021 100% n 4) | detik 10 100% | lonjakan 75% (n 4) | ⚠️ lemah 0
+      2022-08✓, 2023-05✓, 2026-03✓, 2026-07✓
+TURUN sepakat   | detik 2 65% (n 20; sejak Okt 2021 64% n 11) | detik 10 70% | lonjakan 65% (n 20) | ⚠️ lemah 15
+      2016-05✓, 2017-01✓, 2017-09✓, 2019-04✗, 2020-03✗, 2020-08✓, 2020-10✓, 2021-02✗, 2021-06✓, 2021-10✓, 2022-05✓, 2022-06✓, 2023-04✗, 2023-09✓, 2024-03✓, 2024-05✗, 2024-09✓, 2025-02✓, 2025-09✗, 2026-01✗
+TURUN yoy       | detik 2 71% (n 14; sejak Okt 2021 80% n 10) | detik 10 53% | lonjakan 40% (n 15) | ⚠️ lemah 12
+      2016-09✓, 2018-03✗, 2018-06✗, 2019-05✓, 2020-01✗, 2021-12✗, 2022-01✓, 2022-10✓, 2022-11✓, 2023-10✓, 2023-11✓, 2023-12✓, 2024-04✓, 2024-10✓, 2025-08✗
+TURUN inti      | detik 2 60% (n 5; sejak Okt 2021 60% n 5) | detik 10 40% | lonjakan 40% (n 5) | ⚠️ lemah 5
+      2022-11✓, 2023-10✓, 2024-04✓, 2025-04✗, 2026-06✗
+TURUN keduanya  | detik 2 100% (n 3; sejak Okt 2021 100% n 3) | detik 10 67% | lonjakan 67% (n 3) | ⚠️ lemah 3
+      2022-11✓, 2023-10✓, 2024-04✓
+
+## 💥 Modal kecil (lentur, tebakan kuat) per situasi — per modal $100
+   semua    sejak Okt 2021    n 32 | 1:200 untung 69% rata +31.5 habis 2 | 1:500 untung 69% rata +89.4 habis 4 | 1:1000 untung 66% rata +178.7 habis 8
+   semua    sebelum Okt 2021  n 29 | 1:200 untung 28% rata -2.7 habis 0 | 1:500 untung 28% rata -3.5 habis 2 | 1:1000 untung 24% rata -11.6 habis 6
+   sepakat  sejak Okt 2021    n 14 | 1:200 untung 86% rata +41.9 habis 1 | 1:500 untung 86% rata +115.4 habis 1 | 1:1000 untung 79% rata +210.0 habis 3
+   sepakat  sebelum Okt 2021  n 18 | 1:200 untung 17% rata -13.0 habis 0 | 1:500 untung 17% rata -27.3 habis 2 | 1:1000 untung 17% rata -38.8 habis 4
+   yoy      sejak Okt 2021    n 15 | 1:200 untung 53% rata +23.8 habis 1 | 1:500 untung 53% rata +71.0 habis 2 | 1:1000 untung 53% rata +154.4 habis 4
+   yoy      sebelum Okt 2021  n 11 | 1:200 untung 45% rata +14.2 habis 0 | 1:500 untung 45% rata +35.5 habis 0 | 1:1000 untung 36% rata +32.8 habis 2
+   inti     sejak Okt 2021    n  7 | 1:200 untung 86% rata +68.2 habis 0 | 1:500 untung 86% rata +173.9 habis 1 | 1:1000 untung 86% rata +362.1 habis 1
+
+Catatan: n per situasi kecil → angka bisa berubah banyak dengan 1–2 rilis; aturan utama tidak diubah.

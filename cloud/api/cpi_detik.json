@@ -673,5 +673,329 @@
     "lama_rata": -13.5
    }
   }
+ },
+ "konflik": {
+  "naik_sepakat": {
+   "d2": {
+    "pct": 70,
+    "n": 27,
+    "pct_baru": 100,
+    "n_baru": 11
+   },
+   "d10": {
+    "pct": 70,
+    "n": 27,
+    "pct_baru": 91,
+    "n_baru": 11
+   },
+   "lonjakan": {
+    "pct": 78,
+    "n": 27,
+    "pct_baru": 91,
+    "n_baru": 11
+   },
+   "lemah": 0
+  },
+  "naik_yoy": {
+   "d2": {
+    "pct": 65,
+    "n": 23,
+    "pct_baru": 69,
+    "n_baru": 13
+   },
+   "d10": {
+    "pct": 65,
+    "n": 23,
+    "pct_baru": 62,
+    "n_baru": 13
+   },
+   "lonjakan": {
+    "pct": 70,
+    "n": 23,
+    "pct_baru": 69,
+    "n_baru": 13
+   },
+   "lemah": 0
+  },
+  "naik_inti": {
+   "d2": {
+    "pct": 86,
+    "n": 7,
+    "pct_baru": 86,
+    "n_baru": 7
+   },
+   "d10": {
+    "pct": 86,
+    "n": 7,
+    "pct_baru": 86,
+    "n_baru": 7
+   },
+   "lonjakan": {
+    "pct": 71,
+    "n": 7,
+    "pct_baru": 71,
+    "n_baru": 7
+   },
+   "lemah": 0
+  },
+  "naik_keduanya": {
+   "d2": {
+    "pct": 100,
+    "n": 4,
+    "pct_baru": 100,
+    "n_baru": 4
+   },
+   "d10": {
+    "pct": 100,
+    "n": 4,
+    "pct_baru": 100,
+    "n_baru": 4
+   },
+   "lonjakan": {
+    "pct": 75,
+    "n": 4,
+    "pct_baru": 75,
+    "n_baru": 4
+   },
+   "lemah": 0
+  },
+  "turun_sepakat": {
+   "d2": {
+    "pct": 65,
+    "n": 20,
+    "pct_baru": 64,
+    "n_baru": 11
+   },
+   "d10": {
+    "pct": 70,
+    "n": 20,
+    "pct_baru": 73,
+    "n_baru": 11
+   },
+   "lonjakan": {
+    "pct": 65,
+    "n": 20,
+    "pct_baru": 64,
+    "n_baru": 11
+   },
+   "lemah": 15
+  },
+  "turun_yoy": {
+   "d2": {
+    "pct": 71,
+    "n": 14,
+    "pct_baru": 80,
+    "n_baru": 10
+   },
+   "d10": {
+    "pct": 53,
+    "n": 15,
+    "pct_baru": 50,
+    "n_baru": 10
+   },
+   "lonjakan": {
+    "pct": 40,
+    "n": 15,
+    "pct_baru": 40,
+    "n_baru": 10
+   },
+   "lemah": 12
+  },
+  "turun_inti": {
+   "d2": {
+    "pct": 60,
+    "n": 5,
+    "pct_baru": 60,
+    "n_baru": 5
+   },
+   "d10": {
+    "pct": 40,
+    "n": 5,
+    "pct_baru": 40,
+    "n_baru": 5
+   },
+   "lonjakan": {
+    "pct": 40,
+    "n": 5,
+    "pct_baru": 40,
+    "n_baru": 5
+   },
+   "lemah": 5
+  },
+  "turun_keduanya": {
+   "d2": {
+    "pct": 100,
+    "n": 3,
+    "pct_baru": 100,
+    "n_baru": 3
+   },
+   "d10": {
+    "pct": 67,
+    "n": 3,
+    "pct_baru": 67,
+    "n_baru": 3
+   },
+   "lonjakan": {
+    "pct": 67,
+    "n": 3,
+    "pct_baru": 67,
+    "n_baru": 3
+   },
+   "lemah": 3
+  },
+  "allin": {
+   "semua": {
+    "baru": {
+     "n": 32,
+     "200": {
+      "untung": 69,
+      "rata": 31.5,
+      "habis": 2
+     },
+     "500": {
+      "untung": 69,
+      "rata": 89.4,
+      "habis": 4
+     },
+     "1000": {
+      "untung": 66,
+      "rata": 178.7,
+      "habis": 8
+     }
+    },
+    "lama": {
+     "n": 29,
+     "200": {
+      "untung": 28,
+      "rata": -2.7,
+      "habis": 0
+     },
+     "500": {
+      "untung": 28,
+      "rata": -3.5,
+      "habis": 2
+     },
+     "1000": {
+      "untung": 24,
+      "rata": -11.6,
+      "habis": 6
+     }
+    }
+   },
+   "sepakat": {
+    "baru": {
+     "n": 14,
+     "200": {
+      "untung": 86,
+      "rata": 41.9,
+      "habis": 1
+     },
+     "500": {
+      "untung": 86,
+      "rata": 115.4,
+      "habis": 1
+     },
+     "1000": {
+      "untung": 79,
+      "rata": 210.0,
+      "habis": 3
+     }
+    },
+    "lama": {
+     "n": 18,
+     "200": {
+      "untung": 17,
+      "rata": -13.0,
+      "habis": 0
+     },
+     "500": {
+      "untung": 17,
+      "rata": -27.3,
+      "habis": 2
+     },
+     "1000": {
+      "untung": 17,
+      "rata": -38.8,
+      "habis": 4
+     }
+    }
+   },
+   "yoy": {
+    "baru": {
+     "n": 15,
+     "200": {
+      "untung": 53,
+      "rata": 23.8,
+      "habis": 1
+     },
+     "500": {
+      "untung": 53,
+      "rata": 71.0,
+      "habis": 2
+     },
+     "1000": {
+      "untung": 53,
+      "rata": 154.4,
+      "habis": 4
+     }
+    },
+    "lama": {
+     "n": 11,
+     "200": {
+      "untung": 45,
+      "rata": 14.2,
+      "habis": 0
+     },
+     "500": {
+      "untung": 45,
+      "rata": 35.5,
+      "habis": 0
+     },
+     "1000": {
+      "untung": 36,
+      "rata": 32.8,
+      "habis": 2
+     }
+    }
+   },
+   "inti": {
+    "baru": {
+     "n": 7,
+     "200": {
+      "untung": 86,
+      "rata": 68.2,
+      "habis": 0
+     },
+     "500": {
+      "untung": 86,
+      "rata": 173.9,
+      "habis": 1
+     },
+     "1000": {
+      "untung": 86,
+      "rata": 362.1,
+      "habis": 1
+     }
+    },
+    "lama": {
+     "n": 0,
+     "200": {
+      "untung": null,
+      "rata": null,
+      "habis": 0
+     },
+     "500": {
+      "untung": null,
+      "rata": null,
+      "habis": 0
+     },
+     "1000": {
+      "untung": null,
+      "rata": null,
+      "habis": 0
+     }
+    }
+   }
+  }
  }
 }

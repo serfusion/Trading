@@ -422,6 +422,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   habis 2/24; bertahap 1:200→1:1000 di detik 2,5 satu-satunya positif sebelum 2021. Aplikasi 4.37 tabel leverage peluru
   10.000 USC (`allin.lev_tabel/saran_lev/bertahap`). Jalankan ulang `cpi_spike` setelah `cpi_allin2 simpan` (simpan menjaga
   kunci `spike`/`kripto`).
+- 🔄 Data terbaru & ⚖️ situasi (`_cpi_detik.terbaru`, `research/cpi_konflik.py` → `cpi_detik.json["konflik"]`, CPI_ALLIN bagian 🔄;
+  pengguna "selalu cek forecast, konsensus, dll agar persentase berubah up to date"): detail CPI menampilkan konsensus + Kalshi
+  m/m/inti/y/y + y/y tersirat + persen rilis serupa (sel n ≥ 10); 💥 menulis untung per situasi (y/y berlawanan 53% vs biasa
+  69%). Jalankan ulang `cpi_konflik` setelah `cpi_detik`/`cpi_spike` (simpan_json menjaga kunci `konflik`).
 - 13 Okt sumber baru (docs/CPI_ALLIN.md bagian akhir): Cleveland Fed nowcast DIBUKA (clevelandfed.org/-/media/files/webcharts/
   inflationnowcasting/nowcast_month.json → data/research/eksternal/cleveland/; `research/cpi_cleveland.py`) — sendirian lemah,
   core ≈ selalu 0,2% (bias); breakeven/UMich/harga bayar Fed NY & Philly (`research/cpi_lain2.py`) ≈ acak; bucket "sepakat"

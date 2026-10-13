@@ -203,3 +203,30 @@ lot penuh, modal habis bila emas melawan ≥ **harga ÷ leverage** (berlaku untu
 - DIPASANG (info, aplikasi 4.37): `cpi_detik.json["allin"]["spike"]` → `_pra_aset.allin` (`lev_tabel`, `saran_lev`, `bertahap`,
   baris ⚡ di bukti) → `StatusCard.StripAllin`: "1 peluru 10.000 USC: 1:200 x • 1:500 y ⭐ • 1:1000 z lot", jarak habis = harga
   ÷ leverage (harga langsung), ketuk = tabel per leverage + bertahap. Tanpa order otomatis.
+
+## 🔄 Data terbaru & ⚖️ situasi hari ini (13 Okt 2026, `research/cpi_konflik.py` → `docs/eksternal/hasil_cpi_konflik.txt`)
+Permintaan pengguna setelah konsensus CPI 14 Okt terbit (m/m 0,6% • y/y 3,6% • inti 0,2% / 2,5%): "silahkan dikalkulasikan,
+kedepannya selalu cek forecast, konsensus, dll agar persentase berubah up to date".
+- Cloud sudah mengambil data otomatis setiap aplikasi dibuka: konsensus ForexFactory (kartu) / Nasdaq (cache 3 jam → 30 mnt
+  ≤ 24 jam → 10 mnt ≤ 3 jam sebelum rilis), konsensus INDEKS tanpa pembulatan (Nasdaq, biasanya muncul menjelang rilis —
+  13 Okt 18:10 WIB belum ada), Kalshi langsung. Persen utama = aturan teruji (tidak berubah kecuali jalurnya berubah).
+- BARU: `_cpi_detik.terbaru` → baris di detail CPI: 🔄 konsensus + jam cek • 🎲 Kalshi m/m, inti, y/y • 🧮 y/y tersirat
+  (konsensus m/m + efek basis, indeks NSA; sama dengan petunjuk YOY riset) • ⚖️ persen RILIS SERUPA untuk situasi hari ini.
+- Situasi (tebakan IDX|K tutup kertas 2016–2026, detik 2):
+
+| tebakan | situasi | emas searah detik 2 | sejak Okt 2021 |
+|---|---|---|---|
+| NAIK | petunjuk lain sepakat | 70% (27 rilis) | 100% (11) |
+| NAIK | y/y tersirat berlawanan (semua) | 65% (23) | 69% (13) |
+| NAIK | Kalshi inti berlawanan (semua) | 86% (7) | 86% (7) |
+| NAIK | keduanya berlawanan (= 14 Okt) | 100% (4) — terlalu sedikit, cloud memakai baris y/y | 100% (4) |
+| TURUN | sepakat / y/y berlawanan | 65% (20) / 71% (14) | 64% / 80% |
+
+  Cloud memakai sel paling khusus yang n ≥ 10 (keduanya → y/y → inti) supaya tidak memamerkan persen dari 3–4 rilis.
+- 💥 modal kecil per situasi (lentur, tebakan kuat, per $100, sejak Okt 2021 | sebelum): sepakat untung 86% (14 rilis),
+  1:500 +$115, habis 1 | 17%, −$27; **y/y berlawanan untung 53% (15)**, 1:200 +$24, 1:500 +$71 (habis 2), 1:1000 +$154
+  (habis 4) | 45%, +$36. Baris 💥 kini menulis "⚖️ situasi sekarang untung X% (biasa 69%)" bila situasi lebih lemah.
+- **CPI 14 Okt (dicek 13 Okt 18:10 WIB):** Kalshi m/m di atas 14% / di bawah 39% → tebakan CPI DI BAWAH → emas NAIK 68%
+  (detik 2). Berlawanan: y/y tersirat 3,71% > 3,6% (Kalshi y/y di atas 51%) dan Kalshi inti di atas 36% / di bawah 22%.
+  Rilis serupa: NAIK detik 2 65% (sejak Okt 2021 69%); modal kecil untung 53% rilis (rata-rata tetap positif). Bila konsensus
+  indeks terbit sebelum rilis, jalur indeks didahulukan dan tebakan bisa berubah otomatis.
