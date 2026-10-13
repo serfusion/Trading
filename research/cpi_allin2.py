@@ -157,9 +157,6 @@ def main() -> None:
     print("\n".join(L))
 
 
-if __name__ == "__main__" and len(__import__("sys").argv) == 1:
-    main()
-
 
 def acak(n_acak: int = 20000, seed: int = 7) -> list[str]:
     """Masuk t0−1 dtk (cara pengguna): tebakan vs ARAH ACAK pada rilis yang sama (lempar koin per rilis).
@@ -221,12 +218,6 @@ def sim1(a, arah: int, keluar: str, lev: int):
     return sim(a, arah, -1, keluar, lev)
 
 
-if __name__ == "__main__" and len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "acak":
-    L = acak()
-    print("\n".join(L))
-    with OUT.open("a", encoding="utf-8") as f:
-        f.write("\n".join(L) + "\n")
-
 
 def simpan() -> dict:
     """Angka untuk baris 💥 aplikasi → cloud/api/cpi_detik.json["allin"] (masuk t0−1 dtk, tutup detik 2, modal $100)."""
@@ -263,6 +254,20 @@ def simpan() -> dict:
                        gagal="2019–2021")
     d1 = jalan(ts, 200, "d1")
     out["detik1_untung_baru"] = round(float((d1[d1.t0 >= SPLIT].pl > 0).mean() * 100))
+    # lentur (detik 2 rugi → tutup, untung → tahan s/d detik 10) — pilihan pengguna 13 Okt
+    out["lentur"] = {"lev": {}}
+    for lev in (100, 200, 500, 1000):
+        rec = []
+        for i, a in A.items():
+            g = int(np.sign(ts.get(i, 0)))
+            if g and (o := sim_keluar(a, g, ("lentur", 10), lev)):
+                rec.append((df.t0[i], *o))
+        x = pd.DataFrame(rec, columns=["t0", "pl", "mc"])
+        b = x[x.t0 >= SPLIT]
+        out["lentur"]["lev"][str(lev)] = {"rata": round(float(b.pl.mean()), 1), "mc": int(b.mc.sum()),
+                                          "lama_rata": round(float(x[x.t0 < SPLIT].pl.mean()), 1)}
+        if lev == 200:
+            out["lentur"]["untung_baru"] = round(float((b.pl > 0).mean() * 100))
     w = jalan(lemah, 2000)
     wb = w[w.t0 >= SPLIT]
     out["lemah"] = {"n_baru": len(wb), "untung_baru": round(float((wb.pl > 0).mean() * 100)), "mc_2000": int(wb.mc.sum())}
@@ -272,9 +277,6 @@ def simpan() -> dict:
     f.write_text(json.dumps(d, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return out
 
-
-if __name__ == "__main__" and len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "simpan":
-    print(simpan())
 
 
 def sim_keluar(a, arah: int, keluar, lev: int):
@@ -356,7 +358,19 @@ def bank() -> list[str]:
     return L
 
 
-if __name__ == "__main__" and len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "bank":
-    L = bank()
-    print("\n".join(L))
-    (ROOT / "docs" / "eksternal" / "hasil_cpi_allin_bank.txt").write_text("\n".join(L) + "\n", encoding="utf-8")
+if __name__ == "__main__":
+    import sys
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ""
+    if cmd == "acak":
+        L = acak()
+        print("\n".join(L))
+        with OUT.open("a", encoding="utf-8") as f:
+            f.write("\n".join(L) + "\n")
+    elif cmd == "simpan":
+        print(simpan())
+    elif cmd == "bank":
+        L = bank()
+        print("\n".join(L))
+        (ROOT / "docs" / "eksternal" / "hasil_cpi_allin_bank.txt").write_text("\n".join(L) + "\n", encoding="utf-8")
+    else:
+        main()

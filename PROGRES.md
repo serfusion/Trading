@@ -296,3 +296,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt (lanjutan, saldo 200.000 USC, akun Cent tanpa batas, tutup 1–10 dtk): HMR Exness resmi (XAU 1:100–1:1000 saat 15 mnt
   sebelum–90 dtk sesudah berita); `research/cpi_allin2.py bank` → docs/eksternal/hasil_cpi_allin_bank.txt, docs/CPI_ALLIN.md
   bagian akhir (peluru 10.000 USC/CPI di akun terpisah; lentur detik 2→10). Teks bukti 💥 di cloud diperbarui (HMR).
+- 13 Okt (lanjutan, "ya boleh lentur", per detik): `research/cpi_detik_penuh.py` (kurva setiap detik 1–10 + s/d 5 mnt),
+  cloud lentur + kurva penuh, aplikasi 4.36 (baris ⏱️ T−15 mnt s/d +10 mnt, aba-aba lentur), tes diperbarui.

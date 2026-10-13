@@ -412,6 +412,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (5%) di akun TERPISAH; mulai 2019 terendah 132–196 rb (tidak habis) di 1:100–1:1000; peluru 40.000 di 1:1000 = bangkrut.
   Tutup: detik 1 rugi; detik 2 untung 78%; "lentur" (detik 2 rugi → tutup, untung → tahan s/d detik 10) rata-rata tertinggi
   di 1:100–1:500 (1:200 +$29,8 vs +$20,3 per $100) tetapi modal habis 2/32; semua varian 2019–2021 negatif.
+- Aplikasi 4.36 (izin "ya boleh lentur", "per detik dan berubah persentase"): `research/cpi_detik_penuh.py` → kurva
+  `per_detik_penuh` (detik 1–10 + 15 dtk…5 mnt) dipakai `_cpi_detik.pakai_saring`; `_pra_aset.allin` keluar "lentur"
+  (`cpi_detik.json["allin"]["lentur"]`); baris ⏱️ T−15 mnt s/d +10 mnt + aba-aba lentur (`StatusCard.aba`). Jalankan ulang
+  `cpi_detik` → `cpi_detik_penuh` → `cpi_allin2 simpan` bila data CPI bertambah (simpan_json mempertahankan allin, tetapi
+  per_detik_penuh perlu dijalankan ulang).
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

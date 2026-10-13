@@ -458,15 +458,24 @@ def allin(row: dict) -> dict | None:
                          f"{w.get('mc_2000')} dari {w.get('n_baru')} rilis"}
     sisi = "BUY" if row["arah"] == "naik" else "SELL"
     th = d.get("th_2026") or [0, 0]
+    le = d.get("lentur") or {}
+    # 13 Okt (pengguna: "ya boleh lentur", tutup 1–10 dtk): detik 2 rugi → tutup, untung → tahan s/d detik 10
+    lv_ = le.get("lev") or lv
 
     def rp(k: str) -> str:
-        x = lv.get(k) or {}
+        x = lv_.get(k) or {}
         habis = f" (modal habis {x['mc']}×)" if x.get("mc") else ""
         return f"1:{k} +${x.get('rata', 0):.0f}{habis}"
-    return {"kuat": True, "arah": sisi, "lev": 200,
-            "teks": f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → TUTUP detik 2",
-            "bukti": (f"Teruji 2022–2026: untung di {d.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; 2026: "
-                      f"{th[0]}/{th[1]}) • rata-rata per modal $100: {rp('200')}, {rp('500')}, {rp('2000')}\n"
+    if le:
+        teks = f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → detik 2 rugi TUTUP, untung tahan s/d detik 10"
+        uji = (f"Teruji 2022–2026 (lentur): untung di {le.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; tutup detik 2 "
+               f"saja {d.get('untung_baru')}%) • rata-rata per modal $100: {rp('100')}, {rp('200')}, {rp('500')}, {rp('1000')}")
+    else:
+        teks = f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → TUTUP detik 2"
+        uji = (f"Teruji 2022–2026: untung di {d.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; 2026: {th[0]}/{th[1]}) "
+               f"• rata-rata per modal $100: {rp('200')}, {rp('500')}, {rp('2000')}")
+    return {"kuat": True, "arah": sisi, "lev": 200, "keluar": "lentur" if le else "detik2", "teks": teks,
+            "bukti": (f"{uji}\n"
                       f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness HMR: order "
                       "15 mnt sebelum–90 dtk sesudah berita, leverage emas dibatasi 1:100–1:1000 (cek di akun) • pakai "
                       "akun terpisah berisi modal kecil saja")}
@@ -562,7 +571,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
                        teks=f"XAU {'NAIK ▲' if naik else 'TURUN ▼'} • benar {g['persen']}% ({g.get('teks_sampai')}) "
                             f"{'✅' if g.get('status', 'tutup kertas') in TERUJI else '⚠️'}",
                        kecil=" • ".join(f"{h} dtk {v:.0f}%" for h, v in pdk.items()
-                                        if v is not None) + f" ({g.get('n') or u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
+                                        if v is not None and h in ("1", "2", "3", "5", "10")) + f" ({g.get('n') or u.get('n_rilis')} rilis, tutup kertas 2016–2026)")
         else:
             out.update(status="acak", arah=None, teks="XAU • arah belum bisa ditebak (konsensus indeks & Kalshi belum "
                                                       "memberi arah) ⚪",
