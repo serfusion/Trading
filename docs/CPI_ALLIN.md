@@ -119,3 +119,17 @@ kelebihan tebakan = selisih dengan acak (±+$25 di 1:200, ±+$105 di 1:1000).
 - Aplikasi: baris ⏱️ tampil T−15 mnt (awal HMR) s/d +10 mnt, hitung mundur per detik; setelah rilis persen = kunci kurva
   terdekat ≤ detik sekarang (< 50% diberi ⚠️); aba-aba 💥: siapkan → MASUK (T−5…0) → tahan s/d detik 2 → "rugi → TUTUP •
   untung → tahan" → hitung mundur s/d detik 10 → "TUTUP SEKARANG (detik 10)".
+
+## Sumber & metode yang BARU diuji (13 Okt 2026, pertanyaan "yakin tidak ada yang terlewat?")
+| Diuji | Hasil |
+|---|---|
+| **Cleveland Fed nowcast** (`research/cpi_cleveland.py`, 160 bulan 2013–2026, dulu diblokir) | tebak kejutan 59–60%; emas detik 2 sendirian 52–58%, LAMA < 50%. Nowcast core hampir selalu ±0,2% (sejak 2025 selalu "di bawah konsensus") ≈ "selalu BUY". Sepakat dengan aplikasi: detik 2 73% (22; BARU 92% n 13, LAMA 44% n 9) vs berlawanan 60% (15) → kandidat lemah, sampel kecil |
+| Breakeven inflasi 5 th, ekspektasi Univ. Michigan, harga bayar/jual Fed New York & Philadelphia (`research/cpi_lain2.py`) | sendirian 43–54% (≈ acak). Bucket "sepakat" 57–86% dengan n 22–37 → setelah ±10 uji, satu bucket ±2 SE di atas wajar terjadi karena kebetulan → TIDAK dipasang |
+| Feed lain (Dukascopy) untuk strategi modal kecil (tebakan kuat, masuk t−1) | sejak 2022 untung 62% rilis (Exness 78%); lentur 1:200 +$27/rilis (Exness +$30), habis 3×; LAMA negatif → keunggulan bertahan di feed lain, lentur lebih tahan |
+
+**Belum diuji (alasan):** sebaran ramalan ekonom Bloomberg/Reuters (berbayar), pasar swap/fixing CPI CME (berbayar/diblokir),
+NFIB rencana harga (403), ISM harga (lisensi), Manheim mobil bekas & sewa Zillow/Apartment List (bisa diunduh; komponen
+lambat dan sudah dipakai ekonom penyusun konsensus), Truflation (riwayat sejak 2021 saja), ramalan per komponen CPI
+(bensin + mobil bekas + tiket pesawat + sewa + asuransi — kerja besar), posisi opsi emas sebelum CPI (data berbayar), dan
+yang terpenting: **eksekusi nyata** (leverage HMR akun pengguna, slip/requote di t−1 dtk) — hanya bisa diukur dengan uji
+maju lot minimum.

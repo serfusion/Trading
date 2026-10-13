@@ -298,3 +298,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   bagian akhir (peluru 10.000 USC/CPI di akun terpisah; lentur detik 2→10). Teks bukti 💥 di cloud diperbarui (HMR).
 - 13 Okt (lanjutan, "ya boleh lentur", per detik): `research/cpi_detik_penuh.py` (kurva setiap detik 1–10 + s/d 5 mnt),
   cloud lentur + kurva penuh, aplikasi 4.36 (baris ⏱️ T−15 mnt s/d +10 mnt, aba-aba lentur), tes diperbarui.
+- 13 Okt (lanjutan, "yakin tidak ada yang terlewat?"): Cleveland Fed nowcast (`research/cpi_cleveland.py`, data
+  data/research/eksternal/cleveland/), breakeven/UMich/harga bayar Fed (`research/cpi_lain2.py`), cek Dukascopy strategi modal
+  kecil → tidak ada yang dipasang; daftar yang belum diuji di docs/CPI_ALLIN.md.

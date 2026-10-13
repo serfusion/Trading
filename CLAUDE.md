@@ -417,6 +417,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (`cpi_detik.json["allin"]["lentur"]`); baris ⏱️ T−15 mnt s/d +10 mnt + aba-aba lentur (`StatusCard.aba`). Jalankan ulang
   `cpi_detik` → `cpi_detik_penuh` → `cpi_allin2 simpan` bila data CPI bertambah (simpan_json mempertahankan allin, tetapi
   per_detik_penuh perlu dijalankan ulang).
+- 13 Okt sumber baru (docs/CPI_ALLIN.md bagian akhir): Cleveland Fed nowcast DIBUKA (clevelandfed.org/-/media/files/webcharts/
+  inflationnowcasting/nowcast_month.json → data/research/eksternal/cleveland/; `research/cpi_cleveland.py`) — sendirian lemah,
+  core ≈ selalu 0,2% (bias); breakeven/UMich/harga bayar Fed NY & Philly (`research/cpi_lain2.py`) ≈ acak; bucket "sepakat"
+  kecil = jebakan banyak-uji → tidak dipasang. Dukascopy: strategi modal kecil tetap positif sejak 2022 (lebih lemah).
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

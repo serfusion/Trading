@@ -1,0 +1,12 @@
+# 🔎 Sumber CPI baru (research/cpi_lain2.py)
+python -m research.cpi_lain2
+
+BEI5  kejutan CPI  49% / core  50% (n 107) | emas mentah 2–10  54% (154) lama  53% (97) baru  55% (57) | tutup kertas  51% (121) detik 2  54% (121) | aplikasi+BEI5 sepakat detik 2  77% (22) lama  67% (9) baru  85% (13)
+MICH  kejutan CPI  49% / core  45% (n 91) | emas mentah 2–10  43% (132) lama  43% (79) baru  44% (53) | tutup kertas  47% (43) detik 2  49% (43) | aplikasi+MICH sepakat detik 2  65% (31) lama  50% (12) baru  74% (19)
+NYPP  kejutan CPI  52% / core  54% (n 112) | emas mentah 2–10  51% (159) lama  50% (100) baru  52% (59) | tutup kertas  47% (136) detik 2  46% (136) | aplikasi+NYPP sepakat detik 2  64% (33) lama  46% (13) baru  75% (20)
+NYPR  kejutan CPI  51% / core  47% (n 112) | emas mentah 2–10  51% (158) lama  50% (100) baru  54% (58) | tutup kertas  46% (42) detik 2  45% (42) | aplikasi+NYPR sepakat detik 2  86% (28) lama  80% (10) baru  89% (18)
+PHPP  kejutan CPI  50% / core  46% (n 111) | emas mentah 2–10  50% (159) lama  52% (100) baru  47% (59) | tutup kertas  46% (23) detik 2  52% (23) | aplikasi+PHPP sepakat detik 2  62% (37) lama  47% (19) baru  78% (18)
+PHPR  kejutan CPI  54% / core  51% (n 110) | emas mentah 2–10  53% (159) lama  59% (100) baru  43% (59) | tutup kertas  50% (136) detik 2  48% (136) | aplikasi+PHPR sepakat detik 2  66% (35) lama  56% (16) baru  74% (19)
+PP2   kejutan CPI  51% / core  49% (n 74) | emas mentah 2–10  51% (96) lama  52% (58) baru  49% (38) | tutup kertas  45% (62) detik 2  44% (62) | aplikasi+PP2 sepakat detik 2  57% (23) lama  40% (10) baru  69% (13)
+
+Pembanding aplikasi (IDX|K+S) detik 2: semua  68% (60) lama  54% (28) baru  81% (32)
