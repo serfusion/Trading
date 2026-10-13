@@ -112,7 +112,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             }
         }
         StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
-        StripLangsung(prep, now)                 // ⏱️ 4.34: persen berubah tiap detik T−60 dtk s/d menit 5 (ganti ⏸️ jeda)
+        StripLangsung(prep, now)                 // ⏱️ 4.36: per detik T−15 mnt s/d +10 mnt, persen tiap detik, 💥 lentur
         StripAllin(prep, prices.values.firstOrNull { it.symbol() == "XAU/USD" }?.num("price"))   // 💥 4.35 (CPI)
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
@@ -126,7 +126,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
 }
 
 /**
- * ⏱️ Baris langsung di bawah kotak XAU (4.34, pengguna 13 Okt 2026: "persentase news berubah setiap detik sebelum &
+ * ⏱️ Baris langsung di bawah kotak XAU (4.34/4.36, pengguna 13 Okt 2026: "persentase news berubah setiap detik sebelum &
  * sesudah rilis hingga menit XX"). Angka dari cloud (pra_satu.per_detik = uji tutup kertas, menit_pct = arah detik 2
  * bertahan s/d 5 mnt). Tidak mengarang: tanpa arah → "≈ 50:50". Rilis yang baru lewat diingat 10 menit.
  */
@@ -141,36 +141,49 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     LaunchedEffect(tBaru) { if (baru != null && (tLama == null || now - tLama !in 0..600_000L)) simpan = baru }
     val t0 = r?.let { instantOf(it.optString("time"))?.toEpochMilli() } ?: return
     val det = (now - t0) / 1000.0
-    if (det < -60 || det > 600) return
+    // 4.36 (pengguna 13 Okt: "per detik dan berubah persentase, saya buka sebelum hingga sesudah news"): tampil sejak T−15 mnt
+    // (awal HMR Exness) s/d +10 mnt; persen = kurva uji SETIAP detik 1–10 lalu 15 dtk…5 mnt (cloud per_detik)
+    if (det < -900 || det > 600) return
     val arah = r.optString("arah").ifBlank { null }
     val nama = r.optString("nama").ifBlank { "Berita" }
     val pd = r.optJSONObject("per_detik")
     fun p(h: Int): Int? = pd?.optInt(h.toString(), -1)?.takeIf { it > 0 }
+    /** Persen untuk detik ke-s: kunci terdekat ≤ s (1…10, 15, 20, 30, 45, 60, 90, 120, 180, 240, 300). */
+    fun pAt(s: Int): Int? = pd?.keys()?.asSequence()?.mapNotNull { it.toIntOrNull() }?.filter { it <= s }?.maxOrNull()
+        ?.let { p(it) }
     val ar = if (arah == "naik") "▲ NAIK" else "▼ TURUN"
+    fun mmss(x: Double): String = "${(x / 60).toInt()}:${"%02d".format(x.toInt() % 60)}"
+    fun pct(x: Int?): String = x?.let { if (it < 50) "$it% ⚠️" else "$it%" } ?: "–"
+    val dtk = kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()
     val teks = when {
-        arah == null -> if (det < 0) "⏱️ $nama T−${-det.toInt()} dtk • arah ≈ 50:50 (tanpa petunjuk teruji)"
-                        else "🔴 $nama rilis +${det.toInt()} dtk • ≈ 50:50"
-        det < 0 -> "⏱️ $nama T−${-det.toInt()} dtk • emas $ar • detik 1 ${p(1) ?: "–"}% • detik 2 ${p(2) ?: "–"}%" +
-            aba(r, det)
-        det < 10 -> {
-            val h = listOf(1, 2, 3, 5, 10).first { it >= kotlin.math.ceil(det.coerceAtLeast(0.01)) }
-            "🔴 $nama detik ${kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()} • emas $ar ${p(h) ?: r.optInt("persen")}%" +
-                aba(r, det)
-        }
-        det < 300 -> "🔴 $nama menit ${(det / 60).toInt()}:${"%02d".format(det.toInt() % 60)} • ikuti arah detik 2" +
-            (r.optInt("menit_pct", 0).takeIf { it > 0 }?.let { " ($it%)" } ?: "")
-        else -> "$nama +${(det / 60).toInt()} mnt • arah ≈ 50:50 (setelah 5 mnt)"
+        arah == null -> if (det < 0) "⏱️ $nama T−${mmss(-det)} • arah ≈ 50:50 (tanpa petunjuk teruji)"
+                        else "🔴 $nama rilis +${mmss(det)} • ≈ 50:50"
+        det < 0 -> "⏱️ $nama T−${if (det < -60) mmss(-det) else "${-det.toInt()} dtk"} • emas $ar • detik 1 " +
+            "${p(1) ?: "–"}% • detik 2 ${p(2) ?: "–"}%" + aba(r, det)
+        det < 60 -> "🔴 $nama detik $dtk • emas $ar ${pct(pAt(dtk) ?: r.optInt("persen"))}" + aba(r, det)
+        det < 300 -> "🔴 $nama menit ${mmss(det)} • emas $ar ${pct(pAt(dtk))}" +
+            (r.optInt("menit_pct", 0).takeIf { it > 0 }?.let { " • ikuti arah detik 2 ($it%)" } ?: "")
+        else -> "$nama +${(det / 60).toInt()} mnt • di luar jangka uji (5 mnt)"
     }
     Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 2)
 }
 
-/** 💥 aba-aba modal kecil (4.35, hanya tebakan CPI kuat): T−5…0 MASUK, detik 0–2 tahan, detik 2–5 TUTUP. */
+/**
+ * 💥 aba-aba modal kecil (hanya tebakan CPI kuat). 4.36 "lentur" (pilihan pengguna 13 Okt, research/cpi_allin2.py bank):
+ * T−5…0 MASUK, detik 0–2 tahan, detik 2 rugi → TUTUP / untung → tahan s/d detik 10, detik 10–13 TUTUP. Cloud lama (tanpa
+ * allin.keluar) = tutup detik 2–5 seperti 4.35.
+ */
 private fun aba(r: JSONObject, det: Double): String {
     val a = r.optJSONObject("allin")?.takeIf { it.optBoolean("kuat") } ?: return ""
+    val lentur = a.optString("keluar") == "lentur"
     return when {
+        det >= -900 && det < -5 -> " • 💥 siapkan ${a.optString("arah")}"
         det >= -5 && det < 0 -> " • 💥 MASUK ${a.optString("arah")}"
         det >= 0 && det < 2 -> " • 💥 tahan s/d detik 2"
-        det >= 2 && det < 5 -> " • 💥 TUTUP SEKARANG"
+        !lentur && det >= 2 && det < 5 -> " • 💥 TUTUP SEKARANG"
+        lentur && det >= 2 && det < 3 -> " • 💥 rugi → TUTUP • untung → tahan s/d detik 10"
+        lentur && det >= 3 && det < 10 -> " • 💥 untung? tahan ${10 - det.toInt()} dtk lagi • rugi → TUTUP"
+        lentur && det >= 10 && det < 13 -> " • 💥 TUTUP SEKARANG (detik 10)"
         else -> ""
     }
 }

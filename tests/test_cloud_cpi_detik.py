@@ -215,9 +215,22 @@ def test_allin_tebakan_kuat_masuk_tutup_detik_2():
     _pra_aset.attach(prep, NOW, None)
     a = prep["pra_satu"]["allin"]
     d = _cpi_detik.DATA["allin"]
-    assert a["kuat"] and a["arah"] == "BUY" and a["teks"] == "💥 Modal kecil: BUY 1 dtk sebelum rilis → TUTUP detik 2"
-    assert f"untung di {d['untung_baru']}% rilis" in a["bukti"] and "2019–2021 GAGAL" in a["bukti"]
-    assert "1:200 +$" in a["bukti"] and "akun terpisah" in a["bukti"] and "menang" not in a["bukti"]
+    assert a["kuat"] and a["arah"] == "BUY" and a["keluar"] == "lentur"
+    assert a["teks"] == "💥 Modal kecil: BUY 1 dtk sebelum rilis → detik 2 rugi TUTUP, untung tahan s/d detik 10"
+    assert f"untung di {d['lentur']['untung_baru']}% rilis" in a["bukti"] and "2019–2021 GAGAL" in a["bukti"]
+    assert "1:200 +$" in a["bukti"] and "HMR" in a["bukti"] and "akun terpisah" in a["bukti"] and "menang" not in a["bukti"]
+    # persen per detik: SETIAP detik 1–10 + 15 dtk…5 mnt ikut ke aplikasi
+    pd_ = prep["pra_satu"]["per_detik"]
+    assert all(str(h) in pd_ for h in list(range(1, 11)) + [30, 60, 300])
+    assert pd_["2"] == round(_cpi_detik.DATA["uji"]["saring"]["per_detik"]["2"])
+    assert "4 dtk" not in prep["pra"]["kecil"]                       # baris lama tetap ringkas (1/2/3/5/10)
+
+
+def test_allin_tanpa_lentur_kembali_detik_2(monkeypatch):
+    d = {k: v for k, v in _cpi_detik.DATA["allin"].items() if k != "lentur"}
+    monkeypatch.setattr(_cpi_detik, "DATA", {**_cpi_detik.DATA, "allin": d})
+    a = _pra_aset.allin({"title": "CPI m/m", "arah": "turun", "status": "tutup kertas"})
+    assert a["keluar"] == "detik2" and a["teks"] == "💥 Modal kecil: SELL 1 dtk sebelum rilis → TUTUP detik 2"
 
 
 def test_allin_lemah_jangan_dan_env_mati(monkeypatch):

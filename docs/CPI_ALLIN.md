@@ -108,3 +108,14 @@ kelebihan tebakan = selisih dengan acak (±+$25 di 1:200, ±+$105 di 1:1000).
   132 rb (1:1000, detik 2) — tidak pernah habis; akhir 2026 226 rb / 253 rb / 351 rb / 493 rb (lentur: 241/289/470/751 rb).
 - Peluru 20.000 (10%) 1:1000: terendah 64 rb. Peluru 40.000 (20%) 1:1000: **bangkrut** (−71 rb) bila mulai 2019.
 - Saran: peluru ≤ 5% saldo (10.000 USC), akun terpisah; lot = peluru × leverage HMR ÷ (harga × 100).
+
+## Aplikasi 4.36: per detik + lentur (13 Okt 2026, pengguna "ya boleh lentur … per detik dan berubah persentase")
+- `research/cpi_detik_penuh.py` → `cpi_detik.json["uji"]["saring"]["per_detik_penuh"]` (+ `lemah`): persen arah emas untuk
+  SETIAP detik 1–10 dan 15/20/30/45/60/90/120/180/240/300 dtk, cara sama dengan `cpi_detik.tepat` (cocok persis di detik
+  1/2/3/5/10). Tebakan kuat 2016–2026: detik 1 56%, detik 2 68%, detik 3–10 64–69%, 30 dtk–3 mnt 69–74%, 4–5 mnt 61–66%.
+  ⚠️ lemah: detik 1–2 62%, detik 15–5 mnt 41–48% (lebih sering salah).
+- Cloud: `_cpi_detik.pakai_saring` memakai kurva penuh; `_pra_aset.allin` lentur ("detik 2 rugi TUTUP, untung tahan s/d
+  detik 10", angka `cpi_detik.json["allin"]["lentur"]`).
+- Aplikasi: baris ⏱️ tampil T−15 mnt (awal HMR) s/d +10 mnt, hitung mundur per detik; setelah rilis persen = kunci kurva
+  terdekat ≤ detik sekarang (< 50% diberi ⚠️); aba-aba 💥: siapkan → MASUK (T−5…0) → tahan s/d detik 2 → "rugi → TUTUP •
+  untung → tahan" → hitung mundur s/d detik 10 → "TUTUP SEKARANG (detik 10)".

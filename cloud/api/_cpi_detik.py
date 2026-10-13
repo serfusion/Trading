@@ -234,7 +234,8 @@ def pakai_saring(g: dict | None, alasan: str | None) -> dict | None:
         return g
     sr = (DATA.get("uji") or {})["saring"]
     lm = sr.get("lemah") or {}
-    pdk = (lm if alasan else sr).get("per_detik") or {}
+    # 13 Okt: kurva SETIAP detik 1–10 + 15 dtk…5 mnt (research/cpi_detik_penuh.py) → persen di aplikasi berubah tiap detik
+    pdk = (lm if alasan else sr).get("per_detik_penuh") or (lm if alasan else sr).get("per_detik") or {}
     if alasan:
         g = {**g, "persen": round(lm.get("semua") or 0), "status": "lemah", "peringatan": alasan,
              "lama": round(lm["lama"]) if lm.get("lama") is not None else None,
