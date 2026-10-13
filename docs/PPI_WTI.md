@@ -38,3 +38,40 @@ Rata-rata WTI (FRED DCOILWTICO) 5 observasi s/d tanggal 13 bulan acuan vs bulan 
 | ISM | `research/riset_ism.py` (11 Okt) | 38 | ISM Jasa "-P&REGK" 70% pasca-lihat → kandidat uji maju saja |
 - Modal kecil semua berita (`research/berita_allin.py`): 7 dari ±195 uji "lolos" ≈ jumlah kebetulan; terbaik +$3–7/$100.
 - Retail "selalu turun" 63% sudah diuji 11 Okt (pola tetap, p 0,36) → tidak lolos.
+
+## 🔬 Putaran 3: metode & uji validitas lain (13 Okt 2026 — `research/riset_ppi3.py`, `research/riset_ppi3_cek.py`)
+Permintaan pengguna: "untuk PPI saya masih kurang puas, cari metode lain untuk uji validitas serta riset mendalam seluruhnya".
+Hasil: `docs/eksternal/hasil_riset_ppi3.txt`, `docs/eksternal/hasil_riset_ppi3_cek.txt`.
+- **Data baru:** target tick ASLI Exness detik 1/2/3/5/10 + lonjakan untuk 123 rilis PPI Sep 2015–2026 (jendela yang belum ada
+  diunduh); konsensus & Act CORE PPI; margin dagang PPITSS (rilis pertama); solar Gulf; pasar Kalshi PPI (KXUSPPI/KXUSPPIYOY —
+  baru ada sejak Mei 2026, 2–5 rilis → tidak bisa diuji, hanya info).
+- **PLAFON (angka sudah diketahui):** emas searah kejutan headline/core — lonjakan 81–86%, detik 2 74–78%, detik 5 80–85%, tetapi
+  **detik 1 hanya 51–54%**. Artinya detik 1 PPI pada dasarnya acak walau angkanya sudah tahu → tidak ada metode yang bisa
+  membuat detik 1 benar; core sedikit lebih menggerakkan emas (85% vs 81%).
+- **10 petunjuk baru pra-registrasi** (keranjang energi WTI+bensin+solar, energi vs konsensus headline−core, margin dagang
+  berbalik, energi→margin→core, kejutan CPI core/headline bulan sama, musiman, KON core, gabungan, model logistik walk-forward)
+  + 12 aturan putaran 2 = keluarga 22 → **tidak ada yang lolos semua kriteria**. WTI dengan target Exness Sep 2015+ & keluarga
+  22: tutup kertas 61% (LAMA 50% / BARU 69%), p 0,22/0,10 (putaran 2 dengan 11 aturan & target campuran: 68%, p 0,004).
+  Keranjang energi 63% (LAMA 50 / BARU 71%). Kejutan CPI bulan sama: angka core 74% tetapi emas mentah 57% (feed 52–54%).
+- **Uji validitas lain untuk aturan energi (mentah, lonjakan):**
+  | metode | WTI | keranjang energi |
+  |---|---|---|
+  | mentah 2016–26 (LAMA / BARU) | 63% (57 / 69) | 65% (57 / 71) |
+  | detik 1 / 2 / 5 / 10 | 43 / 52 / 62 / 60% | 47 / 53 / 61 / 65% |
+  | bootstrap blok tahun 90% | 55–70% | 54–74% |
+  | Bayes P(> 50%) / P(> 60%) | 0,99 / 0,69 | 1,00 / 0,79 |
+  | mekanisme: harapan dari angka × plafon | 59% (teramati 67%) | 60% (teramati 69%) |
+  | plasebo: rilis 08:30 LAIN bulan sama | 52% (650 rilis) | 52% (604) |
+  | feed Exness / Dukascopy | 68 / 67% | 68 / 67% |
+  | rolling 3 th | 2016–18 65%, **2018–21 42–52%**, 2022–26 68–75% | 2019–21 33%, 2022–25 81–82% |
+  | holdout 2024–26 | 68% (22) | 70% (23) |
+  | bersamaan Retail / sendiri | **81% (16)** / 59% (70) | 82% (17) / 60% (62) |
+  | modal kecil BARU 1:200 / 1:500 (per $100, vs acak) | +$7,4 / +$20,2 (acak +$0,5, p 0,02), untung 52% | +$8,0 / +$22,9 (p 0,00) |
+  Kesimpulan: efek energi KHAS PPI (plasebo 52%), sama di dua feed, tetapi BERGANTUNG REZIM (gagal 2018–2021, kuat sejak inflasi
+  2022) dan keunggulannya di lonjakan/detik 5–10, bukan detik 1–2. Teramati > harapan mekanisme → sebagian bisa kebetulan.
+- **Lonjakan melawan detik 0–10 saat arah benar (52 rilis):** median 0,024%, P90 0,067%, maks 0,202% harga (Jan 2017) →
+  aman terhadap lonjakan: **≤ 1:400**; 1:500 pernah habis 1× padahal benar, 1:750–1:1000 2×.
+- **PPI 15 Okt 2026:** energi bulan acuan WTI +17,5%, bensin +14,0%, solar +16,2% → PPI condong DI ATAS → emas TURUN; BERSAMAAN
+  Retail Sales (situasi yang dulu 81%, n 16); konsensus headline − core = +0,2 → aturan "energi belum masuk konsensus" diam;
+  margin dagang Agu −0,08% → diam. Tidak ada perubahan cloud/aplikasi (angka tampilan masih putaran 2; usulan: tampilkan angka
+  putaran 3 yang lebih ketat 63% + baris ⚖️ bersamaan Retail — menunggu izin).
