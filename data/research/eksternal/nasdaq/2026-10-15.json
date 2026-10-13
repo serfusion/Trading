@@ -533,7 +533,7 @@
 "eventName": "Retail Sales",
 "actual": "",
 "consensus": "",
-"previous": "10.53%"
+"previous": "5.36%"
 },
 {
 "gmt": "08:30",
@@ -710,6 +710,22 @@
 "actual": "",
 "consensus": "",
 "previous": "0.382M"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Fed's Balance Sheet",
+"actual": "",
+"consensus": "",
+"previous": "6,748B"
+},
+{
+"gmt": "16:30",
+"country": "United States",
+"eventName": "Reserve Balances with Federal Reserve Banks",
+"actual": "",
+"consensus": "",
+"previous": "3.022T"
 },
 {
 "gmt": "17:00",
