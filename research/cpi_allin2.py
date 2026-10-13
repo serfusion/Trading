@@ -275,3 +275,88 @@ def simpan() -> dict:
 
 if __name__ == "__main__" and len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "simpan":
     print(simpan())
+
+
+def sim_keluar(a, arah: int, keluar, lev: int):
+    """Masuk t0−1 dtk. keluar = detik tutup (int 1–10) atau ("lentur", h): di detik 2 untung → tahan s/d detik h, rugi →
+    tutup di detik 2. Rugi maks = modal (akun "peluru" terpisah, perlindungan saldo negatif)."""
+    s, bid, ask = a
+    i0 = np.searchsorted(s, -1, side="right") - 1
+    if i0 < 0 or -1 - s[i0] > 30:
+        return None
+    masuk = ask[i0] if arah > 0 else bid[i0]
+    oz = MODAL * lev / masuk
+    keluar_px = bid if arah > 0 else ask
+
+    def pada(h):
+        i1 = np.searchsorted(s, h, side="left")
+        if i1 >= len(s):
+            return None
+        pl = oz * (keluar_px[i0 + 1:i1 + 1] - masuk) * arah
+        return pl if len(pl) else None
+    if isinstance(keluar, tuple):
+        p2 = pada(2)
+        if p2 is None:
+            return None
+        if p2.min() <= -MODAL:
+            return -MODAL, True
+        if p2[-1] <= 0:
+            return float(p2[-1]), False
+        keluar = keluar[1]
+    pl = pada(keluar)
+    if pl is None:
+        return None
+    return (-MODAL, True) if pl.min() <= -MODAL else (max(-MODAL, float(pl[-1])), False)
+
+
+def bank() -> list[str]:
+    """Pertanyaan pengguna 13 Okt: modal terpisah 200.000 USC — berapa per CPI? + tutup di detik 1–10 mana yang terbaik.
+    HMR Exness (get.exness.help, diperbarui 13 Okt 2026): order dibuka 15 mnt sebelum s/d 90 dtk sesudah berita → leverage
+    XAU dibatasi 1:100–1:1000 (tergantung akun) → leverage tanpa batas TIDAK berlaku saat masuk t−1 dtk."""
+    df = C.turunan(C.tabel())
+    df = df[df.th >= 2016].reset_index(drop=True)
+    ts = C.tetap(df, "IDX|K+S")
+    A = {i: arr(tk, r.t0) for i, r in df.iterrows() if (tk := ticks_around("XAUUSDc", r.t0)) is not None}
+    rng = np.random.default_rng(3)
+    L = ["", "## Masuk t−1 dtk, tebakan kuat: tutup detik 1–10 (rata-rata per modal $100; acak = lempar koin rilis sama)"]
+    KEL = [1, 2, 3, 4, 5, 7, 10, ("lentur", 5), ("lentur", 10)]
+    hasil = {}
+    for lev in (100, 200, 500, 1000):
+        for kel in KEL:
+            rec = []
+            for i, a in A.items():
+                g = int(np.sign(ts.get(i, 0)))
+                if not g:
+                    continue
+                o, ob, os_ = sim_keluar(a, g, kel, lev), sim_keluar(a, 1, kel, lev), sim_keluar(a, -1, kel, lev)
+                if o and ob and os_:
+                    rec.append((df.t0[i], o[0], o[1], ob[0], os_[0]))
+            x = pd.DataFrame(rec, columns=["t0", "pl", "mc", "buy", "sell"])
+            hasil[(lev, str(kel))] = x
+            b, lm = x[x.t0 >= SPLIT], x[x.t0 < SPLIT]
+            koin = rng.integers(0, 2, size=(5000, len(b)))
+            acak_b = np.where(koin == 1, b.buy.to_numpy(), b.sell.to_numpy()).mean()
+            nama = f"detik {kel}" if isinstance(kel, int) else f"lentur→{kel[1]}"
+            L.append(f"   1:{lev:<4} {nama:10s} | sejak 2022 n{len(b)} untung {(b.pl > 0).mean() * 100:3.0f}% ${b.pl.mean():+6.1f} "
+                     f"(acak ${acak_b:+6.1f}) habis {int(b.mc.sum())} | 2019–2021 n{len(lm)} ${lm.pl.mean():+6.1f} | "
+                     f"2026 ${x[x.t0.dt.year == 2026].pl.sum():+5.0f}")
+    L.append("\n## Saldo 200.000 USC, peluru per CPI tetap (dipindah ke akun terpisah; untung ditarik kembali ke bank)")
+    for mulai, label in (("2019-01-01", "mulai 2019 (termasuk masa gagal 2019–2021)"), ("2022-01-01", "mulai 2022")):
+        L.append(f"### {label}")
+        for lev in (100, 200, 500, 1000):
+            for kel in ("2", "('lentur', 10)"):
+                x = hasil[(lev, kel)]
+                x = x[x.t0 >= mulai]
+                for peluru in (5_000, 10_000, 20_000, 40_000):
+                    jalur = 200_000 + (x.pl / MODAL * peluru).cumsum()
+                    dd = (jalur - np.maximum.accumulate(np.r_[200_000, jalur.to_numpy()])[1:]).min()
+                    L.append(f"   1:{lev:<4} {'detik 2' if kel == '2' else 'lentur→10':9s} peluru {peluru:>6,} | akhir "
+                             f"{jalur.iloc[-1]:>9,.0f} | terendah {min(200_000, jalur.min()):>9,.0f} | DD {dd:>8,.0f} | "
+                             f"habis {int(x.mc.sum())}/{len(x)}".replace(",", "."))
+    return L
+
+
+if __name__ == "__main__" and len(__import__("sys").argv) > 1 and __import__("sys").argv[1] == "bank":
+    L = bank()
+    print("\n".join(L))
+    (ROOT / "docs" / "eksternal" / "hasil_cpi_allin_bank.txt").write_text("\n".join(L) + "\n", encoding="utf-8")

@@ -405,6 +405,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   KEJAR (masuk setelah rilis) rugi. DIPASANG 13 Okt (izin "kalau bagus pasang") sebagai INFO: `_pra_aset.allin` →
   `pra_satu.allin` (hanya CPI, `cpi_detik.json["allin"]` dari `cpi_allin2 simpan`, env CPI_ALLIN), aplikasi 4.35 baris 💥 +
   lot maks modal kecil contoh + aba-aba MASUK/TUTUP di baris ⏱️. ⚠️ lemah = "JANGAN". Tanpa order otomatis.
+- HMR Exness RESMI (get.exness.help artikel 20618327917596, diperbarui 13 Okt 2026; halaman web 403 → pakai
+  `/api/v2/help_center/en-us/articles/<id>.json`): order dibuka 15 mnt sebelum s/d 90 dtk sesudah berita penting → leverage
+  dibatasi; XAU 1:100–1:1000, forex & kripto 1:200 → "tanpa batas" tidak berlaku saat masuk t−1 dtk.
+  `python -m research.cpi_allin2 bank` (docs/eksternal/hasil_cpi_allin_bank.txt): saldo 200.000 USC → peluru 10.000 USC/CPI
+  (5%) di akun TERPISAH; mulai 2019 terendah 132–196 rb (tidak habis) di 1:100–1:1000; peluru 40.000 di 1:1000 = bangkrut.
+  Tutup: detik 1 rugi; detik 2 untung 78%; "lentur" (detik 2 rugi → tutup, untung → tahan s/d detik 10) rata-rata tertinggi
+  di 1:100–1:500 (1:200 +$29,8 vs +$20,3 per $100) tetapi modal habis 2/32; semua varian 2019–2021 negatif.
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
