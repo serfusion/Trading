@@ -456,6 +456,18 @@ alarm tepat waktu) hanya menyentuh `android/`].
   tick Exness `tambah_<bln>.parquet`, `riset_dalam.py` 66 aturan, `riset_dalam_cek.py` verifikasi): lolos per kelompok GDP P &
   UoM final S&P, tetapi permutasi GLOBAL p 0,17/0,14 & rapuh → 0 layak pasang. Uji maju: JOLTS ← NFP bulan acuan.
 
+## 🧱 CPI & PPI dari dasar (13 Okt 2026 — `docs/CPI_PPI_DASAR.md`)
+- Kritik pengguna "riset hanya sebatas selalu buy". `research/cpi_dasar_data.py` (ALFRED semua vintage 34 seri komponen,
+  `potret(seri, hari)` = versi hari itu; rekonstruksi rilis pertama cocok CPI 100%, PPI 99%), `research/cpi_dasar.py` &
+  `research/ppi_dasar.py` (nowcast bottom-up fisik/ridge tutup kertas, encompassing, arah PER SISI tebakan, rantai Bayes
+  sumber → kejutan NET → peta mekanisme → emas, kalibrasi Kalshi, anchoring, musiman, CPI→PPI, bagian HARI INI).
+- Mekanisme kuat (NET di bawah → lonjakan naik 85–100%, di atas → 10–31%) tetapi konsensus mengalahkan semua nowcast (RMSE);
+  sisa info kecil & memudar sejak 2021; rantai Bayes tidak mengalahkan selalu-NAIK (McNemar p ≥ 0,08). Tebakan TURUN lemah
+  karena aritmetika asimetri (perlu P(kejutan atas) ≥ 75–80%). "Selalu NAIK" = 2025–26 (82%/56% kejutan di bawah), gagal 2022–23.
+- Tebakan inti CPI DI ATAS 3/7 (tidak terbukti), DI BAWAH LAMA 10/10 BARU 10/15. CPI inti → PPI inti searah 71%/74%.
+- 14 Okt: petunjuk berlawanan → rantai Bayes P(emas naik) 41–51% → saran lewati; aplikasi tetap "NAIK 68%" (tidak diubah).
+  Usulan ⚖️ berlawanan, rantai Bayes di kartu CPI & PPI diperbarui setelah CPI menunggu "pasang".
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
