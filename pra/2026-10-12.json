@@ -13,14 +13,14 @@
   },
   "indeks": {
    "c": null,
-   "y": null,
-   "m": null
+   "y": 0.048,
+   "m": -0.061
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.145,
+    "atas": 0.135,
     "bawah": 0.405,
-    "lean": -0.26
+    "lean": -0.27
    },
    "inti": {
     "atas": 0.365,
@@ -28,15 +28,15 @@
     "lean": 0.15
    },
    "y/y": {
-    "atas": 0.505,
+    "atas": 0.515,
     "bawah": 0.125,
-    "lean": 0.38
+    "lean": 0.39
    }
   },
   "situasi": "keduanya",
-  "indeks_pertama": null,
-  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 23 jam lagi",
-  "dicatat": "2026-10-13T12:53:06.877147+00:00"
+  "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
+  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 20 jam lagi",
+  "dicatat": "2026-10-13T15:54:12.858531+00:00"
  },
  "CPI m/m|2026-10-14T12:30:00+00:00": {
   "title": "CPI m/m",
@@ -52,14 +52,14 @@
   },
   "indeks": {
    "c": null,
-   "y": null,
-   "m": null
+   "y": 0.048,
+   "m": -0.061
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.145,
+    "atas": 0.135,
     "bawah": 0.405,
-    "lean": -0.26
+    "lean": -0.27
    },
    "inti": {
     "atas": 0.365,
@@ -67,15 +67,15 @@
     "lean": 0.15
    },
    "y/y": {
-    "atas": 0.505,
+    "atas": 0.515,
     "bawah": 0.125,
-    "lean": 0.38
+    "lean": 0.39
    }
   },
   "situasi": "keduanya",
-  "indeks_pertama": null,
-  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 23 jam lagi",
-  "dicatat": "2026-10-13T12:53:06.877147+00:00"
+  "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
+  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 20 jam lagi",
+  "dicatat": "2026-10-13T15:54:12.858531+00:00"
  },
  "CPI y/y|2026-10-14T12:30:00+00:00": {
   "title": "CPI y/y",
@@ -91,14 +91,14 @@
   },
   "indeks": {
    "c": null,
-   "y": null,
-   "m": null
+   "y": 0.048,
+   "m": -0.061
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.145,
+    "atas": 0.135,
     "bawah": 0.405,
-    "lean": -0.26
+    "lean": -0.27
    },
    "inti": {
     "atas": 0.365,
@@ -106,15 +106,15 @@
     "lean": 0.15
    },
    "y/y": {
-    "atas": 0.505,
+    "atas": 0.515,
     "bawah": 0.125,
-    "lean": 0.38
+    "lean": 0.39
    }
   },
   "situasi": "keduanya",
-  "indeks_pertama": null,
-  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 23 jam lagi",
-  "dicatat": "2026-10-13T12:53:06.877147+00:00"
+  "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
+  "pra_satu": "CPI ▲ NAIK 68% (detik 2) • 20 jam lagi",
+  "dicatat": "2026-10-13T15:54:12.858531+00:00"
  },
  "Core PPI m/m|2026-10-15T12:30:00+00:00": {
   "title": "Core PPI m/m",
@@ -129,7 +129,7 @@
   "situasi": null,
   "indeks_pertama": null,
   "pra_satu": null,
-  "dicatat": "2026-10-13T12:53:06.877147+00:00"
+  "dicatat": "2026-10-13T15:54:12.858531+00:00"
  },
  "PPI m/m|2026-10-15T12:30:00+00:00": {
   "title": "PPI m/m",
@@ -144,6 +144,6 @@
   "situasi": null,
   "indeks_pertama": null,
   "pra_satu": null,
-  "dicatat": "2026-10-13T12:53:06.877147+00:00"
+  "dicatat": "2026-10-13T15:54:12.858531+00:00"
  }
 }
