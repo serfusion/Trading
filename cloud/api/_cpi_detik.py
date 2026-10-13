@@ -315,6 +315,85 @@ def tebak(t0: datetime, cards: list[dict], n: dict, get=_kalshi.fetch) -> dict |
             "indeks": ix, "konsensus": kons}
 
 
+def yoy(t0: datetime, kons: dict, n: dict) -> dict | None:
+    """y/y tersirat dari konsensus m/m + efek basis (indeks NSA, musiman tahun lalu) — sama dengan research/cpi_detik "YOY".
+    arah +1 = y/y condong DI ATAS konsensus (selisih ≥ 0,05), −1 di bawah, 0 diam."""
+    nsa, sa = DATA.get("nsa") or {}, DATA.get("sa") or {}
+    p1 = nsa.get(_bulan(t0, 1)) or n.get("nsa_p")
+    p12, p13, s12, s13 = nsa.get(_bulan(t0, 12)), nsa.get(_bulan(t0, 13)), sa.get(_bulan(t0, 12)), sa.get(_bulan(t0, 13))
+    mm, yy = kons.get("mm"), kons.get("yy")
+    if None in (p1, p12, p13, s12, s13, mm, yy):
+        return None
+    musim = (p12 / p13 - 1) - (s12 / s13 - 1)
+    imp = (p1 * (1 + mm / 100 + musim) / p12 - 1) * 100
+    d = imp - yy
+    return {"tersirat": round(imp, 2), "konsensus": yy, "selisih": round(d, 2),
+            "arah": 0 if abs(d) < 0.05 else (1 if d > 0 else -1)}
+
+
+def terbaru(t0: datetime, g: dict, n: dict, now: datetime, get=_kalshi.fetch) -> dict:
+    """🔄 Data terbaru yang dicek setiap aplikasi dibuka (pengguna 13 Okt 2026: "selalu cek forecast, konsensus, dll agar
+    persentase berubah up to date"): konsensus (ForexFactory/Nasdaq), pasar Kalshi headline/inti/y/y, y/y tersirat, lalu
+    persen RILIS SERUPA dulu (research/cpi_konflik.py → cpi_detik.json["konflik"]) sesuai situasi sekarang — sepakat atau
+    petunjuk lain berlawanan. Aturan tebakan tidak berubah; ini menjelaskan seberapa kuat tebakan untuk situasi hari ini."""
+    kons = g.get("konsensus") or {}
+    wib = (now + timedelta(hours=7)).strftime("%H:%M")
+    bag = []
+    if kons.get("mm") is not None:
+        bag.append(f"m/m {kons['mm']:g}%")
+    if kons.get("yy") is not None:
+        bag.append(f"y/y {kons['yy']:g}%")
+    if kons.get("core") is not None:
+        bag.append(f"inti {kons['core']:g}%" + (f" / {n['core_yy_f']:g}%" if n.get("core_yy_f") is not None else ""))
+    pasar = {}
+    for kunci, seri, nilai in (("m/m", "KXCPI", kons.get("mm")), ("inti", "KXCPICORE", kons.get("core")),
+                               ("y/y", "KXCPIYOY", kons.get("yy"))):
+        try:
+            k = kalshi(t0, nilai, get, seri)
+        except Exception:  # noqa: BLE001 - Kalshi opsional
+            k = None
+        if k:
+            pasar[kunci] = k
+    yo = yoy(t0, kons, n)
+    baris = [f"🔄 Data terbaru {wib} WIB: perkiraan " + (" • ".join(bag).replace(".", ",") if bag else "belum terbit")]
+    if pasar:
+        baris.append("🎲 Kalshi: " + " • ".join(
+            f"{k} di atas {_pct(v['atas'] * 100)} / di bawah {_pct(v['bawah'] * 100)}" for k, v in pasar.items()))
+    if yo and yo["arah"]:
+        baris.append(f"🧮 y/y tersirat {yo['tersirat']:.2f}% vs perkiraan {yo['konsensus']:g}% → y/y condong DI "
+                     f"{'ATAS' if yo['arah'] > 0 else 'BAWAH'}".replace(".", ","))
+    # situasi hari ini vs tebakan (CPI di atas = +1)
+    cpi = -1 if g.get("arah") == "naik" else 1
+    lawan_y = bool(yo and yo["arah"] and yo["arah"] != cpi)
+    ki = (pasar.get("inti") or {}).get("lean")
+    lawan_i = ki is not None and abs(ki) >= DATA.get("lean", 0.10) and (1 if ki > 0 else -1) != cpi
+    kf = DATA.get("konflik") or {}
+    pilihan = ["keduanya", "yoy", "inti"] if lawan_y and lawan_i else (["yoy"] if lawan_y else (["inti"] if lawan_i
+                                                                                              else ["sepakat"]))
+    sel, nama = None, None
+    for p in pilihan:                                 # sel paling khusus dengan n ≥ 10 (jangan pamer persen 3–4 rilis)
+        x = kf.get(f"{g.get('arah')}_{p}") or {}
+        if (x.get("d2") or {}).get("n", 0) >= 10:
+            sel, nama = x["d2"], p
+            break
+    out = {"waktu": now.isoformat(), "konsensus": kons, "kalshi": pasar, "yoy": yo,
+           "situasi": "sepakat" if not (lawan_y or lawan_i) else ("keduanya" if lawan_y and lawan_i else
+                                                                 ("yoy" if lawan_y else "inti"))}
+    ket = {"sepakat": "petunjuk lain sepakat", "yoy": "y/y tersirat berlawanan", "inti": "Kalshi inti berlawanan",
+           "keduanya": "y/y tersirat & Kalshi inti berlawanan"}
+    if sel:
+        arah_e = "NAIK" if cpi < 0 else "TURUN"
+        teks = (f"⚖️ Sekarang {ket[out['situasi']]} dengan tebakan → rilis dengan {ket[nama]} dulu emas {arah_e} detik 2 "
+                f"{_pct(sel['pct'])} ({sel['n']} rilis; sejak Okt 2021 {_pct(sel.get('pct_baru'))} dari {sel.get('n_baru')})")
+        sp = (kf.get(f"{g.get('arah')}_sepakat") or {}).get("d2") or {}
+        if nama != "sepakat" and sp.get("n"):
+            teks += f" • bila sepakat {_pct(sp['pct'])} (sejak Okt 2021 {_pct(sp.get('pct_baru'))})"
+        baris.append(teks)
+        out["persen_situasi"], out["n_situasi"] = sel["pct"], sel["n"]
+    out["teks"] = "\n".join(baris)
+    return out
+
+
 def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get=_kalshi.fetch, tren=None) -> None:
     """c["cpi_detik"] = tebakan (atau None) di setiap kartu CPI yang belum rilis (≤ 31 hari)."""
     if not isinstance(persiapan, dict) or not aktif():
@@ -333,5 +412,10 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, get
         g = tebak(t0, cs, n, get)
         tren_fn = tren or (lambda t0=t0: tren200(t0, store, now))
         g = pakai_saring(g, saring(t0, g, tren_fn, get))
+        if g and t0 - now <= timedelta(days=8):
+            try:
+                g["terbaru"] = terbaru(t0, g, n, now, get)
+            except Exception:  # noqa: BLE001 - info tambahan, jangan menggagalkan kartu
+                pass
         for c in cs:
             c["cpi_detik"] = g

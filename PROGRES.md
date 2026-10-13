@@ -316,3 +316,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   kedua periode; masuk setelah rilis lebih buruk. Cloud `allin.lev_tabel/saran_lev/bertahap` + baris ⚡ di bukti; aplikasi 4.37
   tabel lot peluru 10.000 USC per leverage. Docs/CPI_ALLIN.md bagian ⚡.
 - Berikutnya: riset mendalam ulang Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (task #48).
+- 13 Okt (konsensus CPI 14 Okt terbit, "selalu cek forecast, konsensus … agar persentase up to date"): `_cpi_detik.terbaru` (🔄
+  konsensus, 🎲 Kalshi m/m/inti/y/y, 🧮 y/y tersirat, ⚖️ persen rilis serupa) + 💥 per situasi (`research/cpi_konflik.py`).
+  CPI 14 Okt: NAIK 68% (Kalshi), tetapi y/y tersirat & Kalshi inti berlawanan → rilis serupa 65%/69%, modal kecil untung 53%.

@@ -303,7 +303,8 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         if g:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
-                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik") if k in g},
+                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik",
+                                            "terbaru") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -432,6 +433,9 @@ def satu(row: dict) -> dict:
         baris = [" • ".join(uji)]
         if row.get("peringatan"):                          # CPI: tebakan TURUN saat tren naik / Kalshi core berlawanan
             baris.append(f"Lemah karena {row['peringatan']}")
+        if (row.get("terbaru") or {}).get("teks"):         # 13 Okt: konsensus/Kalshi/y/y terbaru + persen rilis serupa
+            baris.append(row["terbaru"]["teks"])
+            out["terbaru"] = row["terbaru"]
         out["jangka"] = j
     else:
         out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
@@ -506,6 +510,27 @@ def allin(row: dict) -> dict | None:
                 f"lonjakan melawan terbesar saat arah benar {sp['mae_benar_maks_pct']:.3f}% harga → lot ≤ 1:{sp['saran_lev']} tidak "
                 f"pernah habis karena lonjakan itu (habis bila melawan {100 / sp['saran_lev']:.1f}%); 1:1000 habis "
                 f"{next((t['habis_benar'] for t in sp['tabel'] if t['lev'] == 1000), 0)}× padahal arah benar").replace(".", ",")
+    # 13 Okt (pengguna: "selalu cek forecast, konsensus, dll agar persentase berubah up to date"): hasil modal kecil untuk
+    # SITUASI hari ini (research/cpi_konflik.py: y/y tersirat / Kalshi inti berlawanan vs sepakat), dari data terbaru
+    sit = (row.get("terbaru") or {}).get("situasi")
+    ka = ((_cpi_detik.DATA.get("konflik") or {}).get("allin") or {})
+    kunci = {"keduanya": "yoy", "yoy": "yoy", "inti": "inti", "sepakat": "sepakat"}.get(sit or "")
+    sb, sm = ((ka.get(kunci) or {}).get("baru") or {}), ((ka.get("semua") or {}).get("baru") or {})
+    if kunci and sb.get("n", 0) >= 10 and sm.get("n"):
+        x5, a5 = sb.get("500") or {}, sm.get("500") or {}
+        lemah = (x5.get("untung") or 0) < (a5.get("untung") or 0)
+        ket = {"yoy": "y/y tersirat berlawanan", "inti": "Kalshi inti berlawanan", "sepakat": "petunjuk lain sepakat"}[kunci]
+        if lemah:
+            teks = (f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis (lentur) • ⚖️ situasi sekarang untung {x5['untung']}% "
+                    f"(biasa {a5['untung']}%)")
+        def usd(v: float | None) -> str:
+            v = v or 0.0
+            return f"{'+' if v >= 0 else '−'}${abs(v):.0f}"
+        uji = (f"⚖️ Situasi sekarang ({ket}): sejak Okt 2021 untung di {x5.get('untung')}% rilis ({sb['n']} rilis) • per "
+               f"$100 1:200 {usd((sb.get('200') or {}).get('rata'))}, 1:500 {usd(x5.get('rata'))} (habis "
+               f"{x5.get('habis', 0)}×), 1:1000 {usd((sb.get('1000') or {}).get('rata'))} (habis "
+               f"{(sb.get('1000') or {}).get('habis', 0)}×)" + (f" — lebih lemah dari biasa ({a5['untung']}%)" if lemah else "")
+               + "\n" + uji)
     out = {"kuat": True, "arah": sisi, "lev": 200, "keluar": "lentur" if le else "detik2", "teks": teks}
     if sp:
         out.update(lev_tabel=[{k: t[k] for k in ("lev", "untung", "rata", "habis", "habis_benar", "n", "lama_rata") if k in t}
