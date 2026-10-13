@@ -445,6 +445,18 @@ def satu(row: dict) -> dict:
     return out
 
 
+def kripto_teks() -> str:
+    """13 Okt (pengguna "setelah itu ETH dan BTC"): tebakan CPI kuat juga diuji di kripto (research/kripto_cpi.py, spread
+    asli Exness) → info di bukti 💥; emas tetap terbaik (lebih sering untung)."""
+    k = (_cpi_detik.DATA.get("allin") or {}).get("kripto") or {}
+    e, b = k.get("ETH") or {}, k.get("BTC") or {}
+    if not e or not b:
+        return ""
+    return (f"\n₿ Kripto (CPI kuat, sejak 2022, spread asli Exness, HMR 1:200): ETH arah detik 2 {e['d2']}%, lentur "
+            f"+${e['lentur']:.0f}/$100 (untung {e['untung']}% rilis, habis {e['mc']}×) • BTC {b['d2']}%, +${b['lentur']:.0f} "
+            f"(untung {b['untung']}%, habis {b['mc']}×) — emas tetap terbaik")
+
+
 def allin(row: dict) -> dict | None:
     """💥 Modal kecil + lot maksimal (permintaan pengguna 13 Okt 2026: masuk 1 dtk sebelum rilis, modal kecil siap hilang,
     untung berlipat bila arah 1–5 dtk benar). HANYA CPI: research/cpi_allin2.py (tick Exness, tutup kertas, vs arah acak)
@@ -491,7 +503,7 @@ def allin(row: dict) -> dict | None:
             "bukti": (f"{uji}\n"
                       f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness HMR: order "
                       "15 mnt sebelum–90 dtk sesudah berita, leverage emas dibatasi 1:100–1:1000 (cek di akun) • pakai "
-                      "akun terpisah berisi modal kecil saja")}
+                      "akun terpisah berisi modal kecil saja" + kripto_teks())}
 
 
 def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:

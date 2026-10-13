@@ -572,6 +572,23 @@
    "n_baru": 18,
    "untung_baru": 39,
    "mc_2000": 10
+  },
+  "kripto": {
+   "ETH": {
+    "d2": 77,
+    "lentur": 27.8,
+    "untung": 37,
+    "mc": 3,
+    "n": 30
+   },
+   "BTC": {
+    "d2": 75,
+    "lentur": 18.4,
+    "untung": 38,
+    "mc": 3,
+    "n": 32
+   },
+   "sumber": "research/kripto_cpi.py 13 Okt 2026 (tick Exness ETHUSDm/BTCUSDm, sejak Okt 2021)"
   }
  }
 }

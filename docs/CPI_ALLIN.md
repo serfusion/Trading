@@ -150,3 +150,13 @@ maju lot minimum.
   (berbayar), requote/slip nyata Exness (hanya lewat uji maju lot kecil).
 - **Kesimpulan:** aturan aplikasi (konsensus indeks tanpa pembulatan + Kalshi + saringan) tetap yang terbaik dari semua
   yang bisa diuji; tidak ada perubahan pada cloud/aplikasi.
+
+## ₿ CPI → BTC & ETH (13 Okt 2026, `research/kripto_cpi.py` → `docs/eksternal/hasil_kripto_cpi.txt`)
+Tebakan CPI kuat dipakai searah untuk kripto (CPI di bawah → emas, BTC, ETH naik). Sejak Okt 2021 (spread asli Exness, HMR 1:200):
+| | arah detik 1 / 2 / 3 | lonjakan menit 1 | tutup detik 2 | lentur |
+|---|---|---|---|---|
+| BTC Exness (32 rilis) | 69% / 75% / 78% | 75% | +$11,8/$100 (acak −$13,5), untung 53% | +$18,4, untung 38%, habis 3× |
+| ETH Exness (30 rilis, tick ETHUSDm diunduh 13 Okt) | 63% / 77% / 83% | 77% | +$2,0 (spread ±$1,8 memakan) | +$27,8, untung 37%, habis 3× |
+| Emas (pembanding) | 41%* / 78% | – | +$20,3, untung 78% | +$29,8, untung 72%, habis 2× |
+*persen untung setelah spread. 2019–2021 kripto rugi (sama dengan emas). Kesimpulan: emas tetap terbaik (lebih sering untung);
+kripto hanya lewat cara lentur. Info dipasang di bukti 💥 CPI (`_pra_aset.kripto_teks`, `cpi_detik.json["allin"]["kripto"]`).

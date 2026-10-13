@@ -51,8 +51,17 @@ def main() -> None:
     ts = C.tetap(df, "IDX|K+S")
     rng = np.random.default_rng(23)
     L = ["# ₿ CPI → BTC & ETH (research/kripto_cpi.py)", __doc__.split("\n\n")[1], ""]
+    def eth_exness(t):
+        from .exness import ticks_around
+        from .news_detik import Tick
+        d = ticks_around("ETHUSDm", t)
+        if d is None or not len(d):
+            return None
+        p = Tick(t, d, 1.0)
+        return p if ((p.T >= -60) & (p.T < 0)).any() and ((p.T >= 0) & (p.T < 5)).any() else None
     for nama, ambil in (("BTC Exness (spread asli)", lambda t: prepare(t, "BTC_EXNESS")),
-                        ("BTC Binance (mid)", lambda t: prepare(t, "BTC")), ("ETH Binance", eth_tick)):
+                        ("BTC Binance (mid)", lambda t: prepare(t, "BTC")), ("ETH Binance", eth_tick),
+                        ("ETH Exness (spread asli, 2022+)", eth_exness)):
         rows = []
         for i, r in df.iterrows():
             g = int(np.sign(ts.iloc[i]))
