@@ -395,6 +395,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `research/nasdaq_kalender.cpi` (urutan m/m–y/y bila FRED bulan acuan kosong, rilis 13 Jan 2026). Cloud tidak terdampak.
   `cloud/api/cpi_detik.json` dihitung ulang 13 Okt dengan data perbaikan (aturan dasar 2–10 dtk 64,2 → 63,5%).
 
+## 💥 CPI modal kecil + lot maksimal (15 Okt 2026 — `docs/CPI_ALLIN.md`, `research/cpi_allin.py`)
+- Tick Exness, masuk t−1 dtk, margin call = −modal. Tebakan kuat, tutup detik 2: sejak Okt 2021 untung (1:200 +$649/32 rilis
+  tanpa MC; 1:500 +$1.795; 1:2000 +$6.556 tetapi 1 dari 3,6 rilis modal habis), sebelum Okt 2021 RUGI; detik 1 rugi di semua
+  leverage; ⚠️ lemah = sumber margin call. Exness kemungkinan membatasi leverage ±1:200 saat berita (minta pengguna cek).
+- ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 15 Okt).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

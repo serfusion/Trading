@@ -1,0 +1,170 @@
+# 💥 Modal kecil + lot maksimal saat CPI (research/cpi_allin.py)
+Permintaan pengguna 15 Okt 2026: modal kecil (5–10 ribu cent = $50–100), lot sebesar mungkin; bila arah emas 1–5 detik
+setelah rilis benar → untung berlipat, bila salah → modal habis (margin call). "Akurasi harus benar-benar teruji, terutama
+1–5 detik pertama, terutama CPI."
+
+Rilis CPI 2016–2026: 126, tick Exness tersedia: 126
+
+## aplikasi (semua tebakan)
+   1:200  tutup detik 1: SEMUA n  78 | benar  26% | margin call  0 | rata $   -1.8 | total $    -139 | menang rata $    12 (×0.1) | modal habis = 1 dari 78.0
+                         sejak Okt 2021 n  50 | benar  36% | margin call  0 | rata $   -0.2 | total $      -9 | menang rata $    11 (×0.1) | modal habis = 1 dari 50.0
+   1:200  tutup detik 2: SEMUA n  78 | benar  55% | margin call  1 | rata $   +7.5 | total $    +588 | menang rata $    31 (×0.3) | modal habis = 1 dari 78.0
+                         sejak Okt 2021 n  50 | benar  70% | margin call  0 | rata $  +15.4 | total $    +772 | menang rata $    34 (×0.3) | modal habis = 1 dari 50.0
+   1:200  tutup detik 3: SEMUA n  78 | benar  53% | margin call  3 | rata $   +6.1 | total $    +478 | menang rata $    38 (×0.4) | modal habis = 1 dari 26.0
+                         sejak Okt 2021 n  50 | benar  64% | margin call  2 | rata $  +12.5 | total $    +625 | menang rata $    43 (×0.4) | modal habis = 1 dari 25.0
+   1:200  tutup detik 5: SEMUA n  78 | benar  58% | margin call  4 | rata $   +7.9 | total $    +616 | menang rata $    43 (×0.4) | modal habis = 1 dari 19.5
+                         sejak Okt 2021 n  50 | benar  66% | margin call  3 | rata $  +13.5 | total $    +673 | menang rata $    50 (×0.5) | modal habis = 1 dari 16.7
+   1:500  tutup detik 1: SEMUA n  78 | benar  26% | margin call  0 | rata $   -4.4 | total $    -346 | menang rata $    30 (×0.3) | modal habis = 1 dari 78.0
+                         sejak Okt 2021 n  50 | benar  36% | margin call  0 | rata $   -0.5 | total $     -23 | menang rata $    27 (×0.3) | modal habis = 1 dari 50.0
+   1:500  tutup detik 2: SEMUA n  78 | benar  55% | margin call  6 | rata $  +23.4 | total $   +1822 | menang rata $    77 (×0.8) | modal habis = 1 dari 13.0
+                         sejak Okt 2021 n  50 | benar  70% | margin call  4 | rata $  +42.4 | total $   +2118 | menang rata $    85 (×0.8) | modal habis = 1 dari 12.5
+   1:500  tutup detik 3: SEMUA n  78 | benar  53% | margin call 13 | rata $  +24.8 | total $   +1933 | menang rata $    96 (×1.0) | modal habis = 1 dari 6.0
+                         sejak Okt 2021 n  50 | benar  64% | margin call 11 | rata $  +42.2 | total $   +2112 | menang rata $   108 (×1.1) | modal habis = 1 dari 4.5
+   1:500  tutup detik 5: SEMUA n  78 | benar  58% | margin call 14 | rata $  +34.7 | total $   +2705 | menang rata $   109 (×1.1) | modal habis = 1 dari 5.6
+                         sejak Okt 2021 n  50 | benar  66% | margin call 12 | rata $  +53.0 | total $   +2648 | menang rata $   124 (×1.2) | modal habis = 1 dari 4.2
+   1:2000 tutup detik 1: SEMUA n  78 | benar  26% | margin call 12 | rata $   -9.4 | total $    -737 | menang rata $   121 (×1.2) | modal habis = 1 dari 6.5
+                         sejak Okt 2021 n  50 | benar  36% | margin call  9 | rata $   +4.9 | total $    +244 | menang rata $   109 (×1.1) | modal habis = 1 dari 5.6
+   1:2000 tutup detik 2: SEMUA n  78 | benar  46% | margin call 32 | rata $  +88.8 | total $   +6926 | menang rata $   293 (×2.9) | modal habis = 1 dari 2.4
+                         sejak Okt 2021 n  50 | benar  58% | margin call 19 | rata $ +153.8 | total $   +7692 | menang rata $   332 (×3.3) | modal habis = 1 dari 2.6
+   1:2000 tutup detik 3: SEMUA n  78 | benar  45% | margin call 36 | rata $ +111.5 | total $   +8695 | menang rata $   361 (×3.6) | modal habis = 1 dari 2.2
+                         sejak Okt 2021 n  50 | benar  54% | margin call 23 | rata $ +177.3 | total $   +8864 | menang rata $   413 (×4.1) | modal habis = 1 dari 2.2
+   1:2000 tutup detik 5: SEMUA n  78 | benar  47% | margin call 37 | rata $ +151.1 | total $  +11788 | menang rata $   424 (×4.2) | modal habis = 1 dari 2.1
+                         sejak Okt 2021 n  50 | benar  54% | margin call 23 | rata $ +220.8 | total $  +11041 | menang rata $   494 (×4.9) | modal habis = 1 dari 2.2
+
+## hanya tebakan kuat (tanpa ⚠️)
+   1:200  tutup detik 1: SEMUA n  44 | benar  30% | margin call  0 | rata $   -0.0 | total $      -1 | menang rata $    14 (×0.1) | modal habis = 1 dari 44.0
+                         sejak Okt 2021 n  32 | benar  41% | margin call  0 | rata $   +2.1 | total $     +66 | menang rata $    14 (×0.1) | modal habis = 1 dari 32.0
+   1:200  tutup detik 2: SEMUA n  44 | benar  64% | margin call  0 | rata $  +12.0 | total $    +529 | menang rata $    32 (×0.3) | modal habis = 1 dari 44.0
+                         sejak Okt 2021 n  32 | benar  78% | margin call  0 | rata $  +20.3 | total $    +649 | menang rata $    35 (×0.3) | modal habis = 1 dari 32.0
+   1:200  tutup detik 3: SEMUA n  44 | benar  59% | margin call  2 | rata $  +12.0 | total $    +529 | menang rata $    43 (×0.4) | modal habis = 1 dari 22.0
+                         sejak Okt 2021 n  32 | benar  72% | margin call  2 | rata $  +19.9 | total $    +635 | menang rata $    46 (×0.5) | modal habis = 1 dari 16.0
+   1:200  tutup detik 5: SEMUA n  44 | benar  61% | margin call  2 | rata $  +14.4 | total $    +633 | menang rata $    49 (×0.5) | modal habis = 1 dari 22.0
+                         sejak Okt 2021 n  32 | benar  72% | margin call  2 | rata $  +20.9 | total $    +668 | menang rata $    52 (×0.5) | modal habis = 1 dari 16.0
+   1:500  tutup detik 1: SEMUA n  44 | benar  30% | margin call  0 | rata $   -0.1 | total $      -3 | menang rata $    36 (×0.4) | modal habis = 1 dari 44.0
+                         sejak Okt 2021 n  32 | benar  41% | margin call  0 | rata $   +5.2 | total $    +166 | menang rata $    36 (×0.4) | modal habis = 1 dari 32.0
+   1:500  tutup detik 2: SEMUA n  44 | benar  64% | margin call  3 | rata $  +34.3 | total $   +1510 | menang rata $    80 (×0.8) | modal habis = 1 dari 14.7
+                         sejak Okt 2021 n  32 | benar  78% | margin call  2 | rata $  +56.1 | total $   +1795 | menang rata $    86 (×0.9) | modal habis = 1 dari 16.0
+   1:500  tutup detik 3: SEMUA n  44 | benar  59% | margin call  6 | rata $  +40.8 | total $   +1796 | menang rata $   107 (×1.1) | modal habis = 1 dari 7.3
+                         sejak Okt 2021 n  32 | benar  72% | margin call  5 | rata $  +63.2 | total $   +2023 | menang rata $   115 (×1.1) | modal habis = 1 dari 6.4
+   1:500  tutup detik 5: SEMUA n  44 | benar  61% | margin call  7 | rata $  +51.3 | total $   +2256 | menang rata $   124 (×1.2) | modal habis = 1 dari 6.3
+                         sejak Okt 2021 n  32 | benar  72% | margin call  6 | rata $  +71.7 | total $   +2295 | menang rata $   130 (×1.3) | modal habis = 1 dari 5.3
+   1:2000 tutup detik 1: SEMUA n  44 | benar  30% | margin call  6 | rata $   +6.3 | total $    +276 | menang rata $   144 (×1.4) | modal habis = 1 dari 7.3
+                         sejak Okt 2021 n  32 | benar  41% | margin call  4 | rata $  +27.8 | total $    +889 | menang rata $   144 (×1.4) | modal habis = 1 dari 8.0
+   1:2000 tutup detik 2: SEMUA n  44 | benar  57% | margin call 16 | rata $ +136.6 | total $   +6010 | menang rata $   311 (×3.1) | modal habis = 1 dari 2.8
+                         sejak Okt 2021 n  32 | benar  69% | margin call  9 | rata $ +204.9 | total $   +6556 | menang rata $   340 (×3.4) | modal habis = 1 dari 3.6
+   1:2000 tutup detik 3: SEMUA n  44 | benar  55% | margin call 18 | rata $ +175.8 | total $   +7736 | menang rata $   404 (×4.0) | modal habis = 1 dari 2.4
+                         sejak Okt 2021 n  32 | benar  66% | margin call 11 | rata $ +251.6 | total $   +8050 | menang rata $   436 (×4.4) | modal habis = 1 dari 2.9
+   1:2000 tutup detik 5: SEMUA n  44 | benar  57% | margin call 18 | rata $ +228.9 | total $  +10070 | menang rata $   478 (×4.8) | modal habis = 1 dari 2.4
+                         sejak Okt 2021 n  32 | benar  66% | margin call 11 | rata $ +296.1 | total $   +9476 | menang rata $   504 (×5.0) | modal habis = 1 dari 2.9
+
+## hanya NAIK
+   1:200  tutup detik 1: SEMUA n  45 | benar  24% | margin call  0 | rata $   -1.1 | total $     -49 | menang rata $    14 (×0.1) | modal habis = 1 dari 45.0
+                         sejak Okt 2021 n  27 | benar  41% | margin call  0 | rata $   +3.0 | total $     +81 | menang rata $    14 (×0.1) | modal habis = 1 dari 27.0
+   1:200  tutup detik 2: SEMUA n  45 | benar  60% | margin call  1 | rata $   +8.4 | total $    +379 | menang rata $    31 (×0.3) | modal habis = 1 dari 45.0
+                         sejak Okt 2021 n  27 | benar  78% | margin call  0 | rata $  +19.5 | total $    +525 | menang rata $    35 (×0.3) | modal habis = 1 dari 27.0
+   1:200  tutup detik 3: SEMUA n  45 | benar  62% | margin call  3 | rata $   +8.7 | total $    +391 | menang rata $    37 (×0.4) | modal habis = 1 dari 15.0
+                         sejak Okt 2021 n  27 | benar  74% | margin call  2 | rata $  +18.3 | total $    +493 | menang rata $    45 (×0.4) | modal habis = 1 dari 13.5
+   1:200  tutup detik 5: SEMUA n  45 | benar  64% | margin call  3 | rata $  +11.9 | total $    +536 | menang rata $    45 (×0.4) | modal habis = 1 dari 15.0
+                         sejak Okt 2021 n  27 | benar  74% | margin call  2 | rata $  +19.6 | total $    +529 | menang rata $    52 (×0.5) | modal habis = 1 dari 13.5
+   1:500  tutup detik 1: SEMUA n  45 | benar  24% | margin call  0 | rata $   -2.7 | total $    -121 | menang rata $    35 (×0.3) | modal habis = 1 dari 45.0
+                         sejak Okt 2021 n  27 | benar  41% | margin call  0 | rata $   +7.5 | total $    +203 | menang rata $    35 (×0.3) | modal habis = 1 dari 27.0
+   1:500  tutup detik 2: SEMUA n  45 | benar  60% | margin call  4 | rata $  +28.6 | total $   +1286 | menang rata $    77 (×0.8) | modal habis = 1 dari 11.2
+                         sejak Okt 2021 n  27 | benar  78% | margin call  2 | rata $  +55.0 | total $   +1486 | menang rata $    87 (×0.9) | modal habis = 1 dari 13.5
+   1:500  tutup detik 3: SEMUA n  45 | benar  62% | margin call  7 | rata $  +35.6 | total $   +1602 | menang rata $    93 (×0.9) | modal habis = 1 dari 6.4
+                         sejak Okt 2021 n  27 | benar  74% | margin call  5 | rata $  +61.7 | total $   +1667 | menang rata $   111 (×1.1) | modal habis = 1 dari 5.4
+   1:500  tutup detik 5: SEMUA n  45 | benar  64% | margin call  8 | rata $  +48.1 | total $   +2163 | menang rata $   112 (×1.1) | modal habis = 1 dari 5.6
+                         sejak Okt 2021 n  27 | benar  74% | margin call  6 | rata $  +72.1 | total $   +1946 | menang rata $   129 (×1.3) | modal habis = 1 dari 4.5
+   1:2000 tutup detik 1: SEMUA n  45 | benar  24% | margin call  5 | rata $   -4.8 | total $    -214 | menang rata $   138 (×1.4) | modal habis = 1 dari 9.0
+                         sejak Okt 2021 n  27 | benar  41% | margin call  2 | rata $  +28.4 | total $    +767 | menang rata $   138 (×1.4) | modal habis = 1 dari 13.5
+   1:2000 tutup detik 2: SEMUA n  45 | benar  56% | margin call 15 | rata $ +118.4 | total $   +5329 | menang rata $   281 (×2.8) | modal habis = 1 dari 3.0
+                         sejak Okt 2021 n  27 | benar  74% | margin call  6 | rata $ +219.8 | total $   +5934 | menang rata $   328 (×3.3) | modal habis = 1 dari 4.5
+   1:2000 tutup detik 3: SEMUA n  45 | benar  58% | margin call 17 | rata $ +159.5 | total $   +7178 | menang rata $   347 (×3.5) | modal habis = 1 dari 2.6
+                         sejak Okt 2021 n  27 | benar  70% | margin call  8 | rata $ +267.8 | total $   +7230 | menang rata $   423 (×4.2) | modal habis = 1 dari 3.4
+   1:2000 tutup detik 5: SEMUA n  45 | benar  58% | margin call 17 | rata $ +209.6 | total $   +9433 | menang rata $   432 (×4.3) | modal habis = 1 dari 2.6
+                         sejak Okt 2021 n  27 | benar  70% | margin call  8 | rata $ +317.8 | total $   +8581 | menang rata $   494 (×4.9) | modal habis = 1 dari 3.4
+
+## SEMPURNA (kejutan sudah diketahui)
+   1:200  tutup detik 1: SEMUA n 104 | benar  26% | margin call  1 | rata $   -4.2 | total $    -433 | menang rata $     9 (×0.1) | modal habis = 1 dari 104.0
+                         sejak Okt 2021 n  48 | benar  38% | margin call  1 | rata $   -5.3 | total $    -256 | menang rata $     6 (×0.1) | modal habis = 1 dari 48.0
+   1:200  tutup detik 2: SEMUA n 104 | benar  60% | margin call  1 | rata $  +11.8 | total $   +1228 | menang rata $    29 (×0.3) | modal habis = 1 dari 104.0
+                         sejak Okt 2021 n  48 | benar  71% | margin call  1 | rata $  +16.8 | total $    +807 | menang rata $    34 (×0.3) | modal habis = 1 dari 48.0
+   1:200  tutup detik 3: SEMUA n 104 | benar  73% | margin call  1 | rata $  +22.0 | total $   +2286 | menang rata $    36 (×0.4) | modal habis = 1 dari 104.0
+                         sejak Okt 2021 n  48 | benar  77% | margin call  1 | rata $  +28.5 | total $   +1369 | menang rata $    45 (×0.4) | modal habis = 1 dari 48.0
+   1:200  tutup detik 5: SEMUA n 104 | benar  82% | margin call  1 | rata $  +32.4 | total $   +3371 | menang rata $    44 (×0.4) | modal habis = 1 dari 104.0
+                         sejak Okt 2021 n  48 | benar  83% | margin call  1 | rata $  +41.4 | total $   +1988 | menang rata $    57 (×0.6) | modal habis = 1 dari 48.0
+   1:500  tutup detik 1: SEMUA n 104 | benar  26% | margin call  3 | rata $   -8.9 | total $    -927 | menang rata $    23 (×0.2) | modal habis = 1 dari 34.7
+                         sejak Okt 2021 n  48 | benar  38% | margin call  2 | rata $   -9.8 | total $    -473 | menang rata $    14 (×0.1) | modal habis = 1 dari 24.0
+   1:500  tutup detik 2: SEMUA n 104 | benar  60% | margin call  5 | rata $  +31.1 | total $   +3234 | menang rata $    72 (×0.7) | modal habis = 1 dari 20.8
+                         sejak Okt 2021 n  48 | benar  71% | margin call  4 | rata $  +45.6 | total $   +2188 | menang rata $    85 (×0.8) | modal habis = 1 dari 12.0
+   1:500  tutup detik 3: SEMUA n 104 | benar  71% | margin call  7 | rata $  +51.7 | total $   +5382 | menang rata $    88 (×0.9) | modal habis = 1 dari 14.9
+                         sejak Okt 2021 n  48 | benar  73% | margin call  6 | rata $  +65.1 | total $   +3126 | menang rata $   110 (×1.1) | modal habis = 1 dari 8.0
+   1:500  tutup detik 5: SEMUA n 104 | benar  78% | margin call  7 | rata $  +73.2 | total $   +7617 | menang rata $   106 (×1.1) | modal habis = 1 dari 14.9
+                         sejak Okt 2021 n  48 | benar  77% | margin call  6 | rata $  +89.8 | total $   +4311 | menang rata $   135 (×1.4) | modal habis = 1 dari 8.0
+   1:2000 tutup detik 1: SEMUA n 104 | benar  23% | margin call 24 | rata $  -29.9 | total $   -3108 | menang rata $    77 (×0.8) | modal habis = 1 dari 4.3
+                         sejak Okt 2021 n  48 | benar  38% | margin call 11 | rata $  -15.9 | total $    -764 | menang rata $    57 (×0.6) | modal habis = 1 dari 4.4
+   1:2000 tutup detik 2: SEMUA n 104 | benar  48% | margin call 31 | rata $  +88.8 | total $   +9234 | menang rata $   269 (×2.7) | modal habis = 1 dari 3.4
+                         sejak Okt 2021 n  48 | benar  58% | margin call 15 | rata $ +157.0 | total $   +7536 | menang rata $   332 (×3.3) | modal habis = 1 dari 3.2
+   1:2000 tutup detik 3: SEMUA n 104 | benar  58% | margin call 31 | rata $ +157.1 | total $  +16343 | menang rata $   335 (×3.3) | modal habis = 1 dari 3.4
+                         sejak Okt 2021 n  48 | benar  62% | margin call 15 | rata $ +232.4 | total $  +11155 | menang rata $   427 (×4.3) | modal habis = 1 dari 3.2
+   1:2000 tutup detik 5: SEMUA n 104 | benar  61% | margin call 32 | rata $ +228.1 | total $  +23722 | menang rata $   432 (×4.3) | modal habis = 1 dari 3.2
+                         sejak Okt 2021 n  48 | benar  62% | margin call 16 | rata $ +316.4 | total $  +15188 | menang rata $   561 (×5.6) | modal habis = 1 dari 3.0
+
+## selalu BUY
+   1:200  tutup detik 1: SEMUA n 126 | benar  23% | margin call  0 | rata $   -4.5 | total $    -573 | menang rata $    10 (×0.1) | modal habis = 1 dari 126.0
+                         sejak Okt 2021 n  59 | benar  41% | margin call  0 | rata $   -0.9 | total $     -52 | menang rata $    10 (×0.1) | modal habis = 1 dari 59.0
+   1:200  tutup detik 2: SEMUA n 126 | benar  41% | margin call  1 | rata $   -4.5 | total $    -569 | menang rata $    23 (×0.2) | modal habis = 1 dari 126.0
+                         sejak Okt 2021 n  59 | benar  56% | margin call  0 | rata $   +1.1 | total $     +65 | menang rata $    28 (×0.3) | modal habis = 1 dari 59.0
+   1:200  tutup detik 3: SEMUA n 126 | benar  48% | margin call  4 | rata $   -3.6 | total $    -449 | menang rata $    29 (×0.3) | modal habis = 1 dari 31.5
+                         sejak Okt 2021 n  59 | benar  58% | margin call  2 | rata $   +2.1 | total $    +127 | menang rata $    37 (×0.4) | modal habis = 1 dari 29.5
+   1:200  tutup detik 5: SEMUA n 126 | benar  48% | margin call  5 | rata $   -2.4 | total $    -304 | menang rata $    37 (×0.4) | modal habis = 1 dari 25.2
+                         sejak Okt 2021 n  59 | benar  54% | margin call  3 | rata $   +1.4 | total $     +81 | menang rata $    47 (×0.5) | modal habis = 1 dari 19.7
+   1:500  tutup detik 1: SEMUA n 126 | benar  23% | margin call  5 | rata $  -10.4 | total $   -1314 | menang rata $    26 (×0.3) | modal habis = 1 dari 25.2
+                         sejak Okt 2021 n  59 | benar  41% | margin call  2 | rata $   -0.5 | total $     -30 | menang rata $    25 (×0.3) | modal habis = 1 dari 29.5
+   1:500  tutup detik 2: SEMUA n 126 | benar  41% | margin call 17 | rata $   -2.8 | total $    -349 | menang rata $    59 (×0.6) | modal habis = 1 dari 7.4
+                         sejak Okt 2021 n  59 | benar  56% | margin call 10 | rata $  +13.0 | total $    +768 | menang rata $    71 (×0.7) | modal habis = 1 dari 5.9
+   1:500  tutup detik 3: SEMUA n 126 | benar  47% | margin call 26 | rata $   +2.6 | total $    +329 | menang rata $    74 (×0.7) | modal habis = 1 dari 4.8
+                         sejak Okt 2021 n  59 | benar  56% | margin call 15 | rata $  +19.2 | total $   +1130 | menang rata $    94 (×0.9) | modal habis = 1 dari 3.9
+   1:500  tutup detik 5: SEMUA n 126 | benar  47% | margin call 33 | rata $   +7.7 | total $    +967 | menang rata $    92 (×0.9) | modal habis = 1 dari 3.8
+                         sejak Okt 2021 n  59 | benar  53% | margin call 20 | rata $  +22.4 | total $   +1319 | menang rata $   116 (×1.2) | modal habis = 1 dari 3.0
+   1:2000 tutup detik 1: SEMUA n 126 | benar  21% | margin call 27 | rata $  -28.2 | total $   -3550 | menang rata $    93 (×0.9) | modal habis = 1 dari 4.7
+                         sejak Okt 2021 n  59 | benar  41% | margin call  5 | rata $  +11.8 | total $    +696 | menang rata $   101 (×1.0) | modal habis = 1 dari 11.8
+   1:2000 tutup detik 2: SEMUA n 126 | benar  37% | margin call 59 | rata $  +24.0 | total $   +3019 | menang rata $   210 (×2.1) | modal habis = 1 dari 2.1
+                         sejak Okt 2021 n  59 | benar  54% | margin call 22 | rata $ +105.8 | total $   +6243 | menang rata $   270 (×2.7) | modal habis = 1 dari 2.7
+   1:2000 tutup detik 3: SEMUA n 126 | benar  40% | margin call 64 | rata $  +56.3 | total $   +7098 | menang rata $   276 (×2.8) | modal habis = 1 dari 2.0
+                         sejak Okt 2021 n  59 | benar  54% | margin call 24 | rata $ +151.7 | total $   +8952 | menang rata $   358 (×3.6) | modal habis = 1 dari 2.5
+   1:2000 tutup detik 5: SEMUA n 126 | benar  38% | margin call 68 | rata $  +82.4 | total $  +10380 | menang rata $   364 (×3.6) | modal habis = 1 dari 1.9
+                         sejak Okt 2021 n  59 | benar  51% | margin call 26 | rata $ +182.8 | total $  +10783 | menang rata $   449 (×4.5) | modal habis = 1 dari 2.3
+
+## Rincian per rilis 2024–2026 (aplikasi, 1:2000, tutup detik 2 / detik 5)
+   2024-01-11 BUY  | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $1.20
+   2024-02-13 BUY  | detik 2 $   +324 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.96
+   2024-03-12 SELL ⚠️ | detik 2 $   +362 | detik 5 $   +723 | spread maks t−1..t+5 $0.96
+   2024-04-10 SELL ⚠️ | detik 2 $   +103 | detik 5 $   +329 | spread maks t−1..t+5 $0.60
+   2024-05-15 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.60
+   2024-06-12 BUY  | detik 2 $   +263 | detik 5 $   +521 | spread maks t−1..t+5 $1.00
+   2024-07-11 BUY  | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.50
+   2024-08-14 BUY  | detik 2 $   +567 | detik 5 $   +572 | spread maks t−1..t+5 $0.43
+   2024-09-11 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.40
+   2024-10-10 SELL ⚠️ | detik 2 $   +802 | detik 5 $   +648 | spread maks t−1..t+5 $0.40
+   2024-11-13 BUY  | detik 2 $   +300 | detik 5 $   +266 | spread maks t−1..t+5 $0.16
+   2024-12-11 BUY  | detik 2 $    -28 | detik 5 $   +206 | spread maks t−1..t+5 $0.17
+   2025-01-15 BUY  | detik 2 $   +204 | detik 5 $   +367 | spread maks t−1..t+5 $0.24
+   2025-02-12 SELL ⚠️ | detik 2 $   +152 | detik 5 $   +620 | spread maks t−1..t+5 $0.40
+   2025-03-12 BUY  | detik 2 $   +291 | detik 5 $   +364 | spread maks t−1..t+5 $0.24
+   2025-04-10 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.40
+   2025-05-13 BUY  | detik 2 $    +84 | detik 5 $    +58 | spread maks t−1..t+5 $0.24
+   2025-06-11 BUY  | detik 2 $   +432 | detik 5 $   +370 | spread maks t−1..t+5 $0.24
+   2025-07-15 BUY  | detik 2 $   +154 | detik 5 $   +162 | spread maks t−1..t+5 $0.24
+   2025-08-12 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.24
+   2025-09-11 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.24
+   2025-10-24 BUY  | detik 2 $   +564 | detik 5 $  +1029 | spread maks t−1..t+5 $0.40
+   2025-12-18 BUY  | detik 2 $   +447 | detik 5 $   +517 | spread maks t−1..t+5 $0.40
+   2026-01-13 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.24
+   2026-02-13 BUY  | detik 2 $   +138 | detik 5 $   +506 | spread maks t−1..t+5 $0.60
+   2026-03-11 BUY  | detik 2 $    +55 | detik 5 $    +90 | spread maks t−1..t+5 $0.60
+   2026-04-10 BUY  | detik 2 $   +299 | detik 5 $   +315 | spread maks t−1..t+5 $0.70
+   2026-05-12 tidak menebak / tanpa tick
+   2026-06-10 SELL ⚠️ | detik 2 MC $   -100 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.60
+   2026-07-14 BUY  | detik 2 $  +1186 | detik 5 $  +1903 | spread maks t−1..t+5 $0.70
+   2026-08-12 tidak menebak / tanpa tick
+   2026-09-11 BUY  | detik 2 $   +150 | detik 5 MC $   -100 | spread maks t−1..t+5 $0.68
