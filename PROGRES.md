@@ -309,3 +309,10 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   berita: tidak ada yang layak); `research/riset_inflasi.py` dijalankan → PPI-WTI lolos; verifikasi `research/ppi_wti_cek.py`;
   `research/ppi_wti.py` → `cloud/api/ppi_wti.json`; cloud `_ppi_wti.py` + `_pra_aset` + `chat.py`; tes `tests/test_cloud_ppi_wti.py`.
 - Berikutnya: Retail+GDP, FOMC+konsumen, ADP+JOLTS+klaim (workflow 11 Okt yang terputus), lalu ETH & BTC.
+
+### 13 Okt 2026 — ⚡ lonjakan detik 1 & leverage peluru CPI (aplikasi 4.37)
+- `research/cpi_spike.py` (tick Exness, tebakan CPI kuat): detik 1 melawan 14/32 rilis (10 akhirnya benar); saat arah benar
+  gerak melawan maks 0,131% harga → ⭐ 1:500 (0/24 habis saat arah benar), 1:1000 habis 2/24; bertahap 1:200→1:1000 positif di
+  kedua periode; masuk setelah rilis lebih buruk. Cloud `allin.lev_tabel/saran_lev/bertahap` + baris ⚡ di bukti; aplikasi 4.37
+  tabel lot peluru 10.000 USC per leverage. Docs/CPI_ALLIN.md bagian ⚡.
+- Berikutnya: riset mendalam ulang Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (task #48).

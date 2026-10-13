@@ -38,6 +38,7 @@ import org.json.JSONObject
 import java.time.Duration
 import java.time.Instant
 import java.time.OffsetDateTime
+import java.util.Locale
 
 /**
  * 📊 Status tren & hitung mundur per pair (tab Sinyal, aplikasi 3.24; permintaan pengguna 3 Okt 2026).
@@ -193,25 +194,64 @@ private fun aba(r: JSONObject, det: Double): String {
  * Cloud pra_satu.allin hanya untuk CPI (research/cpi_allin2.py): tebakan kuat → arah + tutup detik 2; ⚠️ lemah → JANGAN.
  * Lot maks dihitung untuk modal KECIL contoh (bukan modal utama di ⚙️): lot = saldo × leverage ÷ (harga × 100)
  * (Cent: 0,01 lot = 1 oz → saldo USC; akun USD: saldo USD). Ketuk = bukti. Info saja, tanpa order.
+ * 4.37 (pengguna 13 Okt: "detik pertama bisa spike berlawanan lalu habis padahal prediksi benar"): tabel leverage dari
+ * research/cpi_spike.py (allin.lev_tabel/saran_lev): lot untuk 1 peluru 10.000 USC, emas boleh melawan berapa dolar sebelum
+ * modal habis (= harga ÷ leverage), hasil uji 2022–2026. ⭐ = leverage terbesar yang tidak pernah habis saat arah benar.
  */
 @Composable
 private fun StripAllin(prep: JSONObject?, xau: Double?) {
     val a = prep?.optJSONObject("pra_satu")?.optJSONObject("allin") ?: return
     var buka by remember(a.optString("teks")) { mutableStateOf(false) }
     val kuat = a.optBoolean("kuat")
+    val tabel = a.optJSONArray("lev_tabel")
+    val saran = a.optInt("saran_lev", 0)
     Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
         Text(arahBerwarna(a.optString("teks")), style = MaterialTheme.typography.labelMedium,
             fontWeight = FontWeight.ExtraBold, color = if (kuat) Gold else Muted, maxLines = 2)
         if (kuat && xau != null && xau > 0) {
             val m = SignalRepository.money()
-            val lev = a.optInt("lev", 200)
-            val contoh = if (m.cent) listOf(5_000.0, 10_000.0) else listOf(50.0, 100.0)
-            val teks = contoh.joinToString(" • ") { saldo ->
-                val lot = Math.floor(saldo * lev / (xau * 100.0) * 100.0 + 1e-9) / 100.0
-                "${"%,.0f".format(saldo).replace(',', '.')} ${m.currency} ≈ ${lotText(lot)} lot"
+            fun lot(saldo: Double, lev: Int) = Math.floor(saldo * lev / (xau * 100.0) * 100.0 + 1e-9) / 100.0
+            fun dolar(x: Double) = "$" + fmt(x).replace(',', ' ').replace('.', ',').replace(' ', '.')
+            val saldoTxt: (Double) -> String = { "${"%,.0f".format(Locale.US, it).replace(',', '.')} ${m.currency}" }
+            if (tabel != null && tabel.length() > 0 && saran > 0) {
+                val saldo = if (m.cent) 10_000.0 else 100.0
+                val levs = (0 until tabel.length()).map { tabel.getJSONObject(it).optInt("lev") }.filter { it >= 200 }
+                Text("1 peluru ${saldoTxt(saldo)}: " + levs.joinToString(" • ") {
+                    "1:$it ${lotText(lot(saldo, it))}${if (it == saran) " ⭐" else ""}"
+                } + " lot", style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, color = Gold,
+                    maxLines = 2)
+                Text("⭐ 1:$saran: habis bila emas melawan ${dolar(xau / saran)} • lonjakan detik 1 saat arah benar " +
+                    "sejak 2022 tidak pernah sejauh itu • ketuk = tabel", style = MaterialTheme.typography.labelSmall,
+                    color = Muted, maxLines = 2)
+                if (buka) {
+                    for (i in 0 until tabel.length()) {
+                        val t = tabel.getJSONObject(i)
+                        val lev = t.optInt("lev")
+                        val hb = t.optInt("habis_benar")
+                        Text("${if (lev == saran) "⭐ " else ""}1:$lev • ${lotText(lot(saldo, lev))} lot • habis bila melawan " +
+                            "${dolar(xau / lev)} • untung ${t.optInt("untung")}% rilis • rata ${"%+.0f".format(t.optDouble("rata"))}" +
+                            "/$100 • habis ${t.optInt("habis")}/${t.optInt("n")}" +
+                            (if (hb > 0) " ($hb× padahal arah benar)" else ""),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = if (lev == saran) Gold else if (hb > 0) SellColor else Muted)
+                    }
+                    a.optJSONObject("bertahap")?.let { b ->
+                        Text("Pilihan BERTAHAP: 1:200 saat T−1 dtk → detik 2 untung, tambah lot sampai total 1:1000 → rata " +
+                            "${"%+.0f".format(b.optDouble("rata"))}/$100, habis ${b.optInt("habis")}× • satu-satunya yang juga " +
+                            "positif sebelum 2021 (${"%+.1f".format(b.optDouble("lama_rata")).replace('.', ',')})",
+                            style = MaterialTheme.typography.labelSmall, color = Muted)
+                    }
+                    Text("Sebelum Okt 2021 semua leverage rata-rata RUGI • pakai ±95% lot (spread & margin) • order ditolak " +
+                        "(Exness HMR membatasi leverage saat berita) → pakai baris leverage yang lebih kecil",
+                        style = MaterialTheme.typography.labelSmall, color = Muted)
+                }
+            } else {
+                val lev = a.optInt("lev", 200)
+                val contoh = if (m.cent) listOf(5_000.0, 10_000.0) else listOf(50.0, 100.0)
+                val teks = contoh.joinToString(" • ") { "${saldoTxt(it)} ≈ ${lotText(lot(it, lev))} lot" }
+                Text("Lot maks 1:$lev: $teks • rugi maks = seluruh saldo", style = MaterialTheme.typography.labelSmall,
+                    color = Muted, maxLines = 2)
             }
-            Text("Lot maks 1:$lev: $teks • rugi maks = seluruh saldo", style = MaterialTheme.typography.labelSmall,
-                color = Muted, maxLines = 2)
         }
         if (buka) Text(a.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
     }

@@ -168,3 +168,38 @@ kripto hanya lewat cara lentur. Info dipasang di bukti 💥 CPI (`_pra_aset.krip
   WR 70% → 69% vs dasar 58% (BUY + Eropa 72% → 77%, n 77); 8/17 subset bertahan vs acak 1,9. Tetapi per sinyal unik per
   tahun sesi Eropa lebih baik hanya 6 dari 11 tahun → BELUM TERBUKTI, tidak dipasang (kandidat label/uji maju). ETH: 2
   bertahan ≈ kebetulan.
+
+## ⚡ Lonjakan melawan di detik 1 & leverage peluru (13 Okt 2026, `research/cpi_spike.py` → `docs/eksternal/hasil_cpi_spike.txt`)
+Pertanyaan pengguna: "detik pertama bisa spike berlawanan, padahal prediksi benar di detik 2/3 → habis semua. Berapa lotnya?"
+Tick asli Exness XAUUSDc, tebakan CPI KUAT (IDX|K+S tutup kertas), masuk t−1 dtk dengan lot penuh, spread ikut dihitung. Dengan
+lot penuh, modal habis bila emas melawan ≥ **harga ÷ leverage** (berlaku untuk besar modal berapa pun) — di $4.190: 1:200 $20,95,
+1:500 $8,38, 1:750 $5,59, 1:1000 $4,19.
+- **Detik 1 melawan tebakan di 14 dari 32 rilis sejak Okt 2021, 10 di antaranya arah akhirnya benar** → kekhawatiran pengguna nyata.
+- Di 24 rilis yang arahnya benar, gerak melawan terbesar s/d detik 10: median 0,019% harga, P90 0,064%, **maks 0,131%**
+  (13 Sep 2023, SELL) dan 0,113% (13 Okt 2021, SELL). 2025–2026 jauh lebih kecil (maks 0,031%, 10 Apr 2026 $1,46) walau harga
+  emas dua kali lipat — lonjakan tidak membesar seiring harga.
+- Per leverage (lentur, per modal $100, sejak Okt 2021 | sebelum Okt 2021):
+
+| leverage | untung | rata-rata | modal habis | habis padahal arah benar | arah acak | sebelum Okt 2021 |
+|---|---|---|---|---|---|---|
+| 1:100 | 69% | +$14,7 | 0/32 | 0 | +$3,0 | −$2,3 |
+| 1:200 | 69% | +$31,5 | 2/32 | 0 | +$5,6 | −$4,7 |
+| 1:300 | 69% | +$49,5 | 3/32 | 0 | +$10,2 | −$7,0 |
+| **1:500 ⭐** | 69% | +$89,4 | 4/32 | **0** | +$28,2 | −$11,6 |
+| 1:750 | 69% | +$140,8 | 5/32 | 0 (nyaris) | +$55,1 | −$14,4 |
+| 1:1000 | 66% | +$178,7 | 8/32 | **2** | +$76,1 | −$16,3 |
+
+  Semua leverage mengalahkan arah acak sejak 2021 (p ≤ 0,01) dan RUGI sebelum Okt 2021. Modal habis di 1:200–1:750 = tebakan
+  yang memang salah, bukan lonjakan.
+- **⭐ 1:500** = leverage terbesar yang tidak pernah habis saat arah benar, dengan cadangan 1,5× terhadap lonjakan terburuk
+  (habis bila melawan 0,2% vs terburuk 0,131%). 1:1000 rata-rata dua kali lebih besar tetapi 2 dari 24 tebakan benar habis.
+- Cara meredam (sejak 2021 | sebelum 2021, per $100):
+  - **Bertahap** 1:200 di t−1 → detik 2 untung, tambah lot sampai total 1:1000 (harga t+2,5 dtk) → +$92, habis 2, sebelum 2021
+    **+$3,9** (satu-satunya cara yang positif di kedua periode; 1:100 → 1:1000 +$80,7 / +$7,3). Butuh klik kedua cepat.
+  - **SL darurat −80% modal** di 1:1000 → +$181,1, habis 3 (vs 8), sebelum 2021 −$13,5. SL −50% memotong untung.
+  - Masuk SETELAH rilis (t+0,5 / +1 / +1,5 dtk) lebih buruk (+$5,9…+$65,6) — lonjakan sudah lewat, harga sudah lari.
+- **Batas uji:** 32 rilis (24 benar) → lonjakan terburuk berikutnya bisa melebihi 0,131%; slip/requote nyata Exness saat lot
+  besar tidak terlihat di tick; leverage HMR akun bisa lebih kecil dari yang dipilih (order ditolak → pakai leverage di bawahnya).
+- DIPASANG (info, aplikasi 4.37): `cpi_detik.json["allin"]["spike"]` → `_pra_aset.allin` (`lev_tabel`, `saran_lev`, `bertahap`,
+  baris ⚡ di bukti) → `StatusCard.StripAllin`: "1 peluru 10.000 USC: 1:200 x • 1:500 y ⭐ • 1:1000 z lot", jarak habis = harga
+  ÷ leverage (harga langsung), ketuk = tabel per leverage + bertahap. Tanpa order otomatis.

@@ -499,7 +499,19 @@ def allin(row: dict) -> dict | None:
         teks = f"💥 Modal kecil: {sisi} 1 dtk sebelum rilis → TUTUP detik 2"
         uji = (f"Teruji 2022–2026: untung di {d.get('untung_baru')}% rilis ({d.get('n_baru')} rilis; 2026: {th[0]}/{th[1]}) "
                f"• rata-rata per modal $100: {rp('200')}, {rp('500')}, {rp('2000')}")
-    return {"kuat": True, "arah": sisi, "lev": 200, "keluar": "lentur" if le else "detik2", "teks": teks,
+    sp = d.get("spike") or {}
+    if sp:
+        # 13 Okt (pengguna: "detik pertama bisa berlawanan lalu habis padahal prediksi benar"): research/cpi_spike.py
+        uji += (f"\n⚡ Detik 1 melawan tebakan di {sp['d1_lawan']}/{sp['n_baru']} rilis ({sp['d1_lawan_benar']} akhirnya benar) • "
+                f"lonjakan melawan terbesar saat arah benar {sp['mae_benar_maks_pct']:.3f}% harga → lot ≤ 1:{sp['saran_lev']} tidak "
+                f"pernah habis karena lonjakan itu (habis bila melawan {100 / sp['saran_lev']:.1f}%); 1:1000 habis "
+                f"{next((t['habis_benar'] for t in sp['tabel'] if t['lev'] == 1000), 0)}× padahal arah benar").replace(".", ",")
+    out = {"kuat": True, "arah": sisi, "lev": 200, "keluar": "lentur" if le else "detik2", "teks": teks}
+    if sp:
+        out.update(lev_tabel=[{k: t[k] for k in ("lev", "untung", "rata", "habis", "habis_benar", "n", "lama_rata") if k in t}
+                              for t in sp["tabel"] if t["lev"] in (100, 200, 500, 1000)],
+                   saran_lev=sp["saran_lev"], bertahap=sp.get("bertahap"))
+    return {**out,
             "bukti": (f"{uji}\n"
                       f"⚠️ {d.get('gagal')} GAGAL (untung {d.get('untung_lama')}%) • tutup detik 1 = rugi • Exness HMR: order "
                       "15 mnt sebelum–90 dtk sesudah berita, leverage emas dibatasi 1:100–1:1000 (cek di akun) • pakai "
