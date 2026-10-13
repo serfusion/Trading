@@ -783,10 +783,21 @@
     }
    ],
    "kandidat": []
+  },
+  {
+   "kode": "riset_dalam (retail_gdp, kerja_lain, fomc_konsumen)",
+   "file_skrip": [
+    "research/riset_dalam_data.py",
+    "research/riset_dalam.py",
+    "research/riset_dalam_cek.py"
+   ],
+   "file_hasil": "docs/eksternal/hasil_riset_dalam.txt",
+   "jumlah_aturan_diuji": 66,
+   "ringkasan": "13 Okt 2026 (sesi confident-keller, tanpa agen): jadwal SEMUA dampak (FF mentah + Nasdaq + FRED) + 1.645 jendela tick Exness tambahan; 66 aturan pra-registrasi di 10 kelompok. Lolos per kelompok: GDP prelim/final P (66%) & UoM final U_REVSPX (66%), tetapi permutasi GLOBAL p 0,17/0,14 dan rapuh → 0 layak pasang. Kandidat uji maju: JOLTS ← NFP bulan acuan (60%, angka 66%). Lihat docs/RISET_DALAM.md.",
+   "kandidat": []
   }
  ],
  "berjalan": [
-  "riset:inflasi",
-  "riset:retail_gdp"
+  "riset:inflasi"
  ]
 }
