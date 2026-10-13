@@ -1,0 +1,33 @@
+# 🎯 CPI: konsistensi inti + mesin skenario (research/cpi_skenario.py)
+python -m research.cpi_skenario [--live]     → docs/eksternal/hasil_cpi_skenario.txt
+
+## A. YOYc — konsensus inti y/y > tersirat dari konsensus inti m/m → inti m/m jarang DI BAWAH
+   ambang 0.02: n 39 inti di atas 18 sesuai 15 di bawah 6 (dasar 36%, p 0.0039) | LAMA di bawah 5/25 vs dasar 38% (p 0.046) | BARU di bawah 1/14 vs dasar 32% (p 0.033)
+   ambang 0.03: n 33 inti di atas 15 sesuai 15 di bawah 3 (dasar 36%, p 0.0005) | LAMA di bawah 3/23 vs dasar 38% (p 0.009) | BARU di bawah 0/10 vs dasar 32% (p 0.021)
+   ambang 0.04: n 24 inti di atas 12 sesuai 10 di bawah 2 (dasar 36%, p 0.0022) | LAMA di bawah 2/16 vs dasar 38% (p 0.027) | BARU di bawah 0/8 vs dasar 32% (p 0.045)
+   ambang 0.05: n 13 inti di atas 7 sesuai 5 di bawah 1 (dasar 36%, p 0.0249) | LAMA di bawah 1/9 vs dasar 38% (p 0.089) | BARU di bawah 0/4 vs dasar 32% (p 0.211)
+   emas saat YOYc −1 LAMA   n23: detik 2 naik 41% (9/22) • detik 10 52% (12/23) • lonjakan 65% (15/23)
+   emas saat YOYc −1 BARU   n10: detik 2 naik 70% (7/10) • detik 10 40% (4/10) • lonjakan 20% (2/10)
+   emas saat YOYc −1 2024+  n 6: detik 2 naik 83% (5/6) • detik 10 33% (2/6) • lonjakan 0% (0/6)
+
+## B. Kejutan total ≠ inti: emas mengikuti yang mana? (ikut total | ikut inti)
+   d1   LAMA total 47% (15/32) inti 68% (23/34) | BARU total 60% (6/10) inti 42% (5/12) | semua total 50% (21/42) inti 61% (28/46)
+   d2   LAMA total 53% (18/34) inti 76% (25/33) | BARU total 60% (6/10) inti 75% (9/12) | semua total 55% (24/44) inti 76% (34/45)
+   d3   LAMA total 66% (23/35) inti 80% (28/35) | BARU total 60% (6/10) inti 83% (10/12) | semua total 64% (29/45) inti 81% (38/47)
+   d5   LAMA total 67% (24/36) inti 84% (31/37) | BARU total 70% (7/10) inti 92% (11/12) | semua total 67% (31/46) inti 86% (42/49)
+   d10  LAMA total 64% (23/36) inti 81% (30/37) | BARU total 80% (8/10) inti 83% (10/12) | semua total 67% (31/46) inti 82% (40/49)
+   lj   LAMA total 69% (25/36) inti 73% (27/37) | BARU total 50% (5/10) inti 92% (11/12) | semua total 65% (30/46) inti 78% (38/49)
+
+## C. MESIN SKENARIO — Kalshi 13 Okt 14:20 UTC: total m/m {-1: 0.395, 0: 0.46, 1: 0.145} • inti {-1: 0.215, 0: 0.42, 1: 0.365} | inti versi YOYc {-1: 0.091, 0: 0.455, 1: 0.455}
+   ($/oz, harga beli ask t−1 dtk, jual bid; harapan = Σ peluang skenario × rata-rata hasil nyata sel itu)
+   Kalshi                    LAMA   peluang naik detik 2  45% • detik 10  41% | BUY tutup d2 -0.79 • d10 -1.02 • lentur -0.67 | SELL d2 -0.24 • d10 +0.18 • lentur +0.17
+   Kalshi                    BARU   peluang naik detik 2  61% • detik 10  55% | BUY tutup d2 +0.52 • d10 +0.01 • lentur +0.78 | SELL d2 -1.38 • d10 -0.86 • lentur -0.74
+   Kalshi                    2024+  peluang naik detik 2  76% • detik 10  61% | BUY tutup d2 +1.32 • d10 +0.78 • lentur +1.12 | SELL d2 -2.04 • d10 -1.43 • lentur -1.83
+   Kalshi total + inti YOYc  LAMA   peluang naik detik 2  38% • detik 10  30% | BUY tutup d2 -0.96 • d10 -1.52 • lentur -0.92 | SELL d2 -0.05 • d10 +0.71 • lentur +0.48
+   Kalshi total + inti YOYc  BARU   peluang naik detik 2  55% • detik 10  46% | BUY tutup d2 -0.09 • d10 -1.52 • lentur -0.53 | SELL d2 -0.80 • d10 +0.64 • lentur -0.05
+   Kalshi total + inti YOYc  2024+  peluang naik detik 2  70% • detik 10  52% | BUY tutup d2 +0.58 • d10 -1.14 • lentur -0.74 | SELL d2 -1.33 • d10 +0.47 • lentur -1.06
+   isi sel BARU (n • rata BUY d2 / d10):
+     total di bawah | inti bawah n14 +3.95/+11.46 | inti sesuai n4 +1.33/+8.02 | inti atas n0 +nan/+nan
+     total sesuai   | inti bawah n5 +3.41/+4.32 | inti sesuai n11 +1.67/-1.69 | inti atas n7 -1.85/-7.49
+     total di atas  | inti bawah n0 +nan/+nan | inti sesuai n6 -0.93/-3.02 | inti atas n12 -2.45/-5.92
+   5 hasil BUY detik 2 terburuk sejak Okt 2021: 2024-10-10 (total +1, inti +1) -10.58 • 2024-09-11 (total +0, inti +1) -7.65 • 2023-01-12 (total +0, inti +0) -7.16 • 2022-10-13 (total +1, inti +1) -5.65 • 2023-09-13 (total +0, inti +1) -5.08

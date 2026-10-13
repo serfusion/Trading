@@ -170,3 +170,79 @@ Kesimpulan:
   2. Kartu PPI diperbarui otomatis setelah CPI bulan sama terbit.
   3. Tebakan TURUN (CPI di atas) selalu diberi ⚠️ beserta aritmetikanya.
 - **Uji maju otomatis** (`research/uji_maju_berita.py`) akan menilai tebakan 14 & 15 Okt setelah rilis.
+
+## 7. Lanjutan 13 Okt sore — pengguna menolak "50:50"
+
+Kode: `research/cpi_skenario.py`. Hasil: `docs/eksternal/hasil_cpi_skenario.txt`.
+
+### Informasi baru yang belum dipakai sebelumnya
+
+- **Kalshi punya puluhan pasar per komponen.** Potret 13 Okt 14:20 UTC disimpan di
+  `data/research/eksternal/cpi_dasar/kalshi_live_20261013.json`. Untuk September:
+  - **Inti m/m:** ≤ 0,1 21% • 0,2 42–48% • ≥ 0,3 33–37%.
+  - **Total m/m:** ≤ 0,5 40% • 0,6 46% • ≥ 0,7 14,5%.
+  - **y/y:** ≥ 3,7 51–53%.
+  - **Inti y/y:** 2,4 44–56%.
+  - **Kombinasi:** total ≥ 0,5 & inti 0,2 = 43,5%; total ≥ 0,5 & inti ≥ 0,3 = 38,5%.
+  - Pasar per komponen (bensin, tiket pesawat, mobil bekas, shelter) sepi transaksi, jadi tidak dipakai.
+- **Cleveland Fed** (9 Okt): total 0,53, inti 0,20.
+- **Preview analis** (investingLive & MUFG, 11–12 Okt):
+  - Konsensus kalender Westpac: total 0,6 / y/y ±3,7; inti 0,2 / inti y/y **2,4**. MUFG: y/y 3,6.
+  - Inti Agustus 0,3 terdongkrak SATU KALI oleh perubahan metode jasa telepon.
+  - Hotel & mobil bekas diperkirakan berbalik turun; tiket pesawat naik (avtur).
+  - Konteks: The Fed menaikkan bunga 16 Sep, payroll +29 ribu, peluang naik lagi di Oktober ±25%.
+  - Karena efek satu kali itu, perkiraan inti `cpi_dasar` (0,29) ikut terdongkrak (memakai inti bulan lalu).
+
+### Uji baru
+
+- **A. Konsistensi inti (YOYc).** Bila konsensus inti y/y (Nasdaq) lebih tinggi dari yang tersirat oleh konsensus inti m/m
+  (selisih ≤ −0,03, seperti besok: 2,5 vs 2,43), inti m/m keluar di bawah perkiraan hanya **3/33** (dasar 36%, p 0,0005).
+  - LAMA 3/23 (p 0,009), BARU 0/10 (p 0,02).
+  - Tetap kuat di ambang 0,02–0,04.
+  - Catatan: konsensus Westpac/investingLive inti y/y = 2,4. Ketidakkonsistenan ini hanya ada di survei Nasdaq, dan survei
+    itulah yang diuji secara historis.
+- **B. "Total dibaca dulu" DITOLAK.** Saat kejutan total ≠ inti, emas mengikuti inti:
+  - detik 2: inti 76% vs total 55%;
+  - detik 5: inti 86%;
+  - lonjakan menit 1: inti 78%.
+  - Detik 1 tetap noise.
+- **C. Mesin skenario.** Peluang skenario dari Kalshi (total × inti) dikalikan hasil dolar nyata per sel (tick Exness 2016+,
+  beli di ask t−1 dtk, jual di bid).
+
+  Peluang inti versi Kalshi:
+
+  | | LAMA | BARU | 2024+ |
+  |---|---|---|---|
+  | Peluang naik detik 2 | 45% | **61%** | **76%** |
+  | BUY tutup detik 2 ($/oz) | −0,79 | **+0,52** | **+1,32** |
+  | BUY tahan s/d detik 10 | −1,02 | +0,01 | +0,78 |
+  | SELL tutup detik 2 | −0,24 | −1,38 | −2,04 |
+
+  Peluang inti versi YOYc (di bawah 9%, sesuai 45%, di atas 45%):
+
+  | | LAMA | BARU | 2024+ |
+  |---|---|---|---|
+  | Peluang naik detik 2 | 38% | 55% | **70%** |
+  | BUY tutup detik 2 ($/oz) | −0,96 | −0,09 | **+0,58** |
+  | BUY tahan s/d detik 10 | −1,52 | **−1,52** | **−1,14** |
+
+  Hasil per sel sejak Okt 2021 (BUY detik 2 / detik 10, $/oz):
+  - Inti di atas: −1,85/−7,49 (total sesuai), −2,45/−5,92 (total di atas).
+  - Inti sesuai & total sesuai: +1,67/−1,69.
+  - Total di bawah: +3,95/+11,46.
+  - Terburuk: 2024-10-10 −10,58; 2024-09-11 −7,65 (keduanya inti di atas).
+
+### Jawaban tegas untuk CPI 14 Okt 2026
+
+1. **Angka:** inti m/m 0,2 atau 0,3, hampir pasti TIDAK di bawah (Kalshi 79%; aturan YOYc 91%). Total 0,5–0,6.
+2. **Emas detik 1–2:** condong **NAIK**. Peluang 61–76% (BARU–2024+). Tidak terbukti sebelum 2021 (38–45%).
+3. **Rencana modal kecil:**
+   - BUY 1 detik sebelum rilis, **TUTUP DI DETIK 2**.
+   - Jangan lentur, jangan tahan ke detik 10. Bila inti 0,3 atau total dan inti sesuai, detik 10 berbalik turun (rata-rata
+     −$1,7…−$7,5).
+   - Leverage **maks 1:200** (±4,5 lot per 10.000 USC): modal habis bila emas melawan $20,9. Di 1:500 batasnya $8,4, dan
+     2 dari 5 kejadian terburuk melewati itu.
+4. **Risiko utama:** inti keluar 0,3 (peluang 36–45%). Rata-rata BUY detik 2 di skenario itu −$1,85/oz.
+5. **Tampilan aplikasi** "CPI ▲ NAIK 68%" searah dengan hasil ini, jadi tidak perlu diubah. Yang perlu ditambahkan di
+   aba-aba: "tutup detik 2" (menunggu "pasang").
+6. **PPI 15 Okt:** masuk hanya bila CPI inti keluar ≤ 0,1 (emas naik saat PPI 76% BARU, LAMA 50%). Selain itu lewati.
