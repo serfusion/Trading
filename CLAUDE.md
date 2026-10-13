@@ -447,6 +447,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (semua salah) + 2 tanggal salah + 11 rilis 2020–21 hilang; PPI-WTI final 128 rilis resmi: 62,6% (LAMA 56 / BARU 70,7%).
   CPI bersih (target ulang 100% sama). CPI jalur Kalshi saja 65% detik 2 (2024+ 70%); 81–95% = jalur indeks + saringan
   pasca-lihat. SELALU audit kelengkapan vs tanggal resmi FRED sebelum melaporkan angka. Cek konsensus indeks 14 Okt (bagian F).
+  Uji tambahan (`research/audit_cpi2.py`, AUDIT_DATA G): plasebo berita lolos (CPI & PPI khas), jam rilis benar, tetapi
+  SELALU-NAIK CPI 2024+ = 81% detik 2 → keunggulan aturan di atas tren belum terbukti; PPI-WTI tebakan TURUN (minyak naik)
+  detik 2 39% (2024+ 30%), lonjakan 55%. SELALU laporkan akurasi per arah tebakan + pembanding selalu-NAIK periode sama.
+  Uji maju otomatis: `arsip_data.pra` → `research/uji_maju_berita.py` (AUDIT_DATA H).
 - `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
 - Sisa workflow 11 Okt SELESAI 13 Okt (`docs/RISET_DALAM.md`, `research/riset_dalam_data.py` jadwal SEMUA dampak FF mentah +
   tick Exness `tambah_<bln>.parquet`, `riset_dalam.py` 66 aturan, `riset_dalam_cek.py` verifikasi): lolos per kelompok GDP P &

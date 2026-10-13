@@ -332,3 +332,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt (audit "kenapa 69 → 63, CPI sama?"): `research/audit_cpi_ppi.py`, docs/AUDIT_DATA.md — PPI: data hilang (8 rilis tanpa
   tick semua salah, 2 tanggal salah, 11 rilis 2020–21 hilang) → angka final 62,6% (BARU 70,7%). CPI: bersih; jalur Kalshi 65%.
   Pengecekan konsensus indeks CPI terjadwal 14 Okt 11:40 UTC (send_later trig_01DoaNaUE6KaSKnFGtYWBbfW).
+- 13 Okt ("yakin tidak ada yang terlewat?", "uji juga PPI"): `research/audit_cpi2.py` (plasebo berita & waktu, per tahun,
+  Bonferroni, jam rilis, CPI & PPI) + pembanding selalu-NAIK per arah: CPI 2024+ selalu-NAIK 81% (aturan belum terbukti lebih
+  baik); PPI tebakan TURUN detik 2 39% (2024+ 30%). Uji maju otomatis CPI/PPI (`arsip_data.pra`, `uji_maju_berita.py`).
