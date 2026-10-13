@@ -589,6 +589,89 @@
     "n": 32
    },
    "sumber": "research/kripto_cpi.py 13 Okt 2026 (tick Exness ETHUSDm/BTCUSDm, sejak Okt 2021)"
+  },
+  "spike": {
+   "dibuat": "2026-10-13 10:24 UTC",
+   "mae_benar_maks_pct": 0.131,
+   "mae_benar_p90_pct": 0.064,
+   "d1_lawan": 14,
+   "d1_lawan_benar": 10,
+   "n_baru": 32,
+   "tabel": [
+    {
+     "lev": 100,
+     "untung": 69,
+     "rata": 14.7,
+     "habis": 0,
+     "n": 32,
+     "habis_benar": 0,
+     "acak": 3.0,
+     "lama_rata": -2.3
+    },
+    {
+     "lev": 200,
+     "untung": 69,
+     "rata": 31.5,
+     "habis": 2,
+     "n": 32,
+     "habis_benar": 0,
+     "acak": 5.6,
+     "lama_rata": -4.7
+    },
+    {
+     "lev": 300,
+     "untung": 69,
+     "rata": 49.5,
+     "habis": 3,
+     "n": 32,
+     "habis_benar": 0,
+     "acak": 10.2,
+     "lama_rata": -7.0
+    },
+    {
+     "lev": 500,
+     "untung": 69,
+     "rata": 89.4,
+     "habis": 4,
+     "n": 32,
+     "habis_benar": 0,
+     "acak": 28.2,
+     "lama_rata": -11.6
+    },
+    {
+     "lev": 750,
+     "untung": 69,
+     "rata": 140.8,
+     "habis": 5,
+     "n": 32,
+     "habis_benar": 0,
+     "acak": 55.1,
+     "lama_rata": -14.4
+    },
+    {
+     "lev": 1000,
+     "untung": 66,
+     "rata": 178.7,
+     "habis": 8,
+     "n": 32,
+     "habis_benar": 2,
+     "acak": 76.1,
+     "lama_rata": -16.3
+    }
+   ],
+   "saran_lev": 500,
+   "bertahap": {
+    "untung": 53,
+    "rata": 92.0,
+    "habis": 2,
+    "lama_rata": 3.9
+   },
+   "sl80_1000": {
+    "untung": 66,
+    "rata": 181.1,
+    "habis": 3,
+    "lama_rata": -13.5
+   }
   }
  }
 }

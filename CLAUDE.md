@@ -417,6 +417,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   (`cpi_detik.json["allin"]["lentur"]`); baris ⏱️ T−15 mnt s/d +10 mnt + aba-aba lentur (`StatusCard.aba`). Jalankan ulang
   `cpi_detik` → `cpi_detik_penuh` → `cpi_allin2 simpan` bila data CPI bertambah (simpan_json mempertahankan allin, tetapi
   per_detik_penuh perlu dijalankan ulang).
+- ⚡ Lonjakan detik 1 (`research/cpi_spike.py`, CPI_ALLIN bagian ⚡): detik 1 melawan tebakan 14/32 rilis (10 akhirnya benar);
+  saat arah benar gerak melawan maks 0,131% harga (2025–26 ≤ 0,031%) → ⭐ 1:500 tidak pernah habis saat arah benar, 1:1000
+  habis 2/24; bertahap 1:200→1:1000 di detik 2,5 satu-satunya positif sebelum 2021. Aplikasi 4.37 tabel leverage peluru
+  10.000 USC (`allin.lev_tabel/saran_lev/bertahap`). Jalankan ulang `cpi_spike` setelah `cpi_allin2 simpan` (simpan menjaga
+  kunci `spike`/`kripto`).
 - 13 Okt sumber baru (docs/CPI_ALLIN.md bagian akhir): Cleveland Fed nowcast DIBUKA (clevelandfed.org/-/media/files/webcharts/
   inflationnowcasting/nowcast_month.json → data/research/eksternal/cleveland/; `research/cpi_cleveland.py`) — sendirian lemah,
   core ≈ selalu 0,2% (bias); breakeven/UMich/harga bayar Fed NY & Philly (`research/cpi_lain2.py`) ≈ acak; bucket "sepakat"

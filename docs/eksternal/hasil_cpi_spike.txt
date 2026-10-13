@@ -1,0 +1,73 @@
+# ⚡ CPI: lonjakan melawan di detik pertama & leverage (research/cpi_spike.py)
+Pertanyaan pengguna 13 Okt 2026: "kadang ada spike — prediksi benar di detik 2/3 tetapi detik pertama berlawanan, alhasil habis
+semua tanpa menikmati profit. Berapa lot kira-kira? Riset & uji validasi, keluarkan seluruh kemampuan."
+
+Rilis CPI tebakan kuat dengan tick: 44 (BARU 32); harga median $1,953; spread saat masuk median $0.24
+
+## 1. Gerak melawan terbesar (MAE, $/ons, termasuk spread) dari masuk t−1 dtk
+   LAMA arah BENAR n  5 | s/d detik 1: median $0.25 P90 $0.87 maks $1.16 | s/d detik 2: median $0.25 P90 $0.93 maks $1.16 | s/d detik 10: median $0.25 P90 $0.93 maks $1.16
+   LAMA arah SALAH n  7 | s/d detik 1: median $0.40 P90 $1.14 maks $1.66 | s/d detik 2: median $1.56 P90 $2.66 maks $3.33 | s/d detik 10: median $1.87 P90 $3.93 maks $6.50
+   LAMA detik 1 berlawanan arah tebakan: 6/12, di antaranya arah akhirnya BENAR 2
+   BARU arah BENAR n 24 | s/d detik 1: median $0.48 P90 $1.60 maks $2.50 | s/d detik 2: median $0.50 P90 $1.60 maks $2.50 | s/d detik 10: median $0.50 P90 $1.60 maks $2.50
+   BARU arah SALAH n  8 | s/d detik 1: median $0.49 P90 $1.56 maks $1.77 | s/d detik 2: median $1.80 P90 $5.72 maks $8.47 | s/d detik 10: median $10.68 P90 $22.13 maks $35.84
+   BARU detik 1 berlawanan arah tebakan: 14/32, di antaranya arah akhirnya BENAR 10
+
+## 2. Per leverage (lot penuh, lentur): habis bila melawan ≥ harga/leverage
+   1:100  (habis bila melawan $19.53) LAMA: habis  0/12 (padahal arah benar 0) | untung  25% | rata $   -2.3 median $  -4.2 /$100 (acak $  -1.2, p 0.65)
+   1:100  (habis bila melawan $19.53) BARU: habis  0/32 (padahal arah benar 0) | untung  69% | rata $  +14.7 median $ +16.0 /$100 (acak $  +3.0, p 0.01)
+   1:200  (habis bila melawan $ 9.76) LAMA: habis  0/12 (padahal arah benar 0) | untung  25% | rata $   -4.7 median $  -8.5 /$100 (acak $  -2.4, p 0.65)
+   1:200  (habis bila melawan $ 9.76) BARU: habis  2/32 (padahal arah benar 0) | untung  69% | rata $  +31.5 median $ +32.1 /$100 (acak $  +5.6, p 0.00)
+   1:300  (habis bila melawan $ 6.51) LAMA: habis  0/12 (padahal arah benar 0) | untung  25% | rata $   -7.0 median $ -12.7 /$100 (acak $  -3.5, p 0.66)
+   1:300  (habis bila melawan $ 6.51) BARU: habis  3/32 (padahal arah benar 0) | untung  69% | rata $  +49.5 median $ +48.1 /$100 (acak $ +10.2, p 0.00)
+   1:500  (habis bila melawan $ 3.91) LAMA: habis  0/12 (padahal arah benar 0) | untung  25% | rata $  -11.6 median $ -21.2 /$100 (acak $  -6.4, p 0.64)
+   1:500  (habis bila melawan $ 3.91) BARU: habis  4/32 (padahal arah benar 0) | untung  69% | rata $  +89.4 median $ +80.2 /$100 (acak $ +28.2, p 0.00)
+   1:750  (habis bila melawan $ 2.60) LAMA: habis  1/12 (padahal arah benar 0) | untung  25% | rata $  -14.4 median $ -31.9 /$100 (acak $  -7.8, p 0.64)
+   1:750  (habis bila melawan $ 2.60) BARU: habis  5/32 (padahal arah benar 0) | untung  69% | rata $ +140.8 median $+120.3 /$100 (acak $ +55.1, p 0.00)
+   1:1000 (habis bila melawan $ 1.95) LAMA: habis  3/12 (padahal arah benar 0) | untung  25% | rata $  -16.3 median $ -42.5 /$100 (acak $  -8.4, p 0.63)
+   1:1000 (habis bila melawan $ 1.95) BARU: habis  8/32 (padahal arah benar 2) | untung  66% | rata $ +178.7 median $+155.4 /$100 (acak $ +76.1, p 0.00)
+
+## 3. Cara meredam (BARU | LAMA, per $100; vs acak BARU)
+   (A) bertahap 1:100 di t−1 → total 1:500 di detik 2,5 BARU untung  53% rata $  +42.9 habis  2 (acak $ +20.0, p 0.03) | LAMA rata $   +2.0 habis 0
+   (A) bertahap 1:100 di t−1 → total 1:1000 di detik 2,5 BARU untung  44% rata $  +80.7 habis  3 (acak $ +36.0, p 0.01) | LAMA rata $   +7.3 habis 0
+   (A) bertahap 1:200 di t−1 → total 1:1000 di detik 2,5 BARU untung  53% rata $  +92.0 habis  2 (acak $ +39.9, p 0.01) | LAMA rata $   +3.9 habis 0
+   (A) bertahap 1:200 di t−1 → total 1:500 di detik 2,5 BARU untung  56% rata $  +54.2 habis  2 (acak $ +19.1, p 0.00) | LAMA rata $   -1.4 habis 0
+       pembanding: langsung 1:200 di t−1 (lentur) BARU untung  69% rata $  +31.5 habis  2 (acak $  +6.1, p 0.00) | LAMA rata $   -4.7 habis 0
+       pembanding: langsung 1:500 di t−1 (lentur) BARU untung  69% rata $  +89.4 habis  4 (acak $ +27.9, p 0.00) | LAMA rata $  -11.6 habis 0
+       pembanding: langsung 1:1000 di t−1 (lentur) BARU untung  66% rata $ +178.7 habis  8 (acak $ +75.5, p 0.00) | LAMA rata $  -16.3 habis 3
+   (B) masuk t+0.5 dtk 1:200 (lentur)           BARU untung  59% rata $  +18.2 habis  2 (acak $  +3.8, p 0.05) | LAMA rata $   -3.5 habis 0
+   (B) masuk t+0.5 dtk 1:500 (lentur)           BARU untung  59% rata $  +58.6 habis  5 (acak $ +14.7, p 0.01) | LAMA rata $   -8.7 habis 0
+   (B) masuk t+1.0 dtk 1:200 (lentur)           BARU untung  65% rata $  +21.9 habis  2 (acak $  +5.6, p 0.04) | LAMA rata $   -3.3 habis 0
+   (B) masuk t+1.0 dtk 1:500 (lentur)           BARU untung  65% rata $  +65.6 habis  4 (acak $ +25.6, p 0.02) | LAMA rata $   -8.4 habis 0
+   (B) masuk t+1.5 dtk 1:200 (lentur)           BARU untung  31% rata $   +5.9 habis  0 (acak $  +2.3, p 0.30) | LAMA rata $   -4.1 habis 0
+   (B) masuk t+1.5 dtk 1:500 (lentur)           BARU untung  31% rata $  +19.9 habis  3 (acak $ +10.0, p 0.26) | LAMA rata $  -10.3 habis 0
+   (C) SL darurat −50% modal 1:500 (lentur)     BARU untung  66% rata $  +83.3 habis  3 (acak $ +29.3, p 0.00) | LAMA rata $   -9.3 habis 0
+   (C) SL darurat −50% modal 1:1000 (lentur)    BARU untung  62% rata $ +164.2 habis  3 (acak $ +76.9, p 0.01) | LAMA rata $   -4.5 habis 0
+   (C) SL darurat −80% modal 1:500 (lentur)     BARU untung  69% rata $  +89.4 habis  4 (acak $ +28.1, p 0.00) | LAMA rata $  -11.5 habis 0
+   (C) SL darurat −80% modal 1:1000 (lentur)    BARU untung  66% rata $ +181.1 habis  3 (acak $ +78.3, p 0.00) | LAMA rata $  -13.5 habis 0
+
+## 4. Per rilis BARU arah BENAR: gerak melawan terbesar s/d detik 10 (% harga) — urut terbesar
+   2023-09-13 SELL harga $1,912 melawan $2.50 = 0.131% • detik 1 MELAWAN
+   2021-10-13 SELL harga $1,775 melawan $2.01 = 0.113% • detik 1 MELAWAN
+   2024-07-11 BUY  harga $2,380 melawan $1.66 = 0.070% • detik 1 MELAWAN
+   2023-07-12 BUY  harga $1,935 melawan $0.97 = 0.050% • detik 1 MELAWAN
+   2024-08-14 BUY  harga $2,472 melawan $1.02 = 0.041% • detik 1 MELAWAN
+   2026-04-10 BUY  harga $4,763 melawan $1.46 = 0.031% • detik 1 MELAWAN
+   2024-12-11 BUY  harga $2,696 melawan $0.82 = 0.030% • detik 1 MELAWAN
+   2022-08-10 BUY  harga $1,790 melawan $0.54 = 0.030% • detik 1 searah
+   2025-06-11 BUY  harga $3,341 melawan $0.84 = 0.025% • detik 1 MELAWAN
+   2023-08-10 BUY  harga $1,923 melawan $0.44 = 0.023% • detik 1 searah
+   2026-03-11 BUY  harga $5,192 melawan $1.07 = 0.021% • detik 1 searah
+   2024-06-12 BUY  harga $2,315 melawan $0.46 = 0.020% • detik 1 searah
+   2025-10-24 BUY  harga $4,062 melawan $0.70 = 0.017% • detik 1 MELAWAN
+   2025-12-18 BUY  harga $4,321 melawan $0.64 = 0.015% • detik 1 MELAWAN
+   2022-10-13 SELL harga $1,675 melawan $0.21 = 0.012% • detik 1 searah
+   2026-07-14 BUY  harga $4,030 melawan $0.42 = 0.011% • detik 1 searah
+   2022-05-11 SELL harga $1,850 melawan $0.17 = 0.009% • detik 1 searah
+   2024-11-13 BUY  harga $2,609 melawan $0.22 = 0.009% • detik 1 searah
+   2023-05-10 BUY  harga $2,028 melawan $0.17 = 0.009% • detik 1 searah
+   2025-01-15 BUY  harga $2,684 melawan $0.21 = 0.008% • detik 1 searah
+   2025-03-12 BUY  harga $2,915 melawan $0.22 = 0.008% • detik 1 searah
+   2025-05-13 BUY  harga $3,241 melawan $0.24 = 0.007% • detik 1 searah
+   2026-02-13 BUY  harga $4,968 melawan $0.37 = 0.007% • detik 1 searah
+   2025-07-15 BUY  harga $3,354 melawan $0.15 = 0.005% • detik 1 searah
+   per tahun (n / median / maks %): 2021: 1 / 0.113 / 0.113 • 2022: 3 / 0.012 / 0.030 • 2023: 4 / 0.036 / 0.131 • 2024: 5 / 0.030 / 0.070 • 2025: 7 / 0.008 / 0.025 • 2026: 4 / 0.016 / 0.031

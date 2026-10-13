@@ -270,9 +270,10 @@ def simpan() -> dict:
             out["lentur"]["untung_baru"] = round(float((b.pl > 0).mean() * 100))
     w = jalan(lemah, 2000)
     wb = w[w.t0 >= SPLIT]
-    old_k = (json.loads((ROOT / "cloud" / "api" / "cpi_detik.json").read_text(encoding="utf-8")).get("allin") or {}).get("kripto")
-    if old_k:                                              # dari research/kripto_cpi.py (diisi manual 13 Okt)
-        out["kripto"] = old_k
+    lama = json.loads((ROOT / "cloud" / "api" / "cpi_detik.json").read_text(encoding="utf-8")).get("allin") or {}
+    for k in ("kripto", "spike"):                          # dari research/kripto_cpi.py & research/cpi_spike.py
+        if lama.get(k):
+            out[k] = lama[k]
     out["lemah"] = {"n_baru": len(wb), "untung_baru": round(float((wb.pl > 0).mean() * 100)), "mc_2000": int(wb.mc.sum())}
     f = ROOT / "cloud" / "api" / "cpi_detik.json"
     d = json.loads(f.read_text(encoding="utf-8"))
