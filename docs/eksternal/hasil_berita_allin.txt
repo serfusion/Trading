@@ -1,0 +1,296 @@
+# 💥 Strategi modal kecil untuk semua berita (research/berita_allin.py)
+python -m research.berita_allin
+
+Rilis: 1417 (tick Exness 1240)
+
+## PPI (132 rilis 2013-01–2026-01; tick Exness 100)
+   bd_P       arah detik 1  50% detik 2  30% (n 10)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -19.6
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -19.6
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -49.1
+   bd_P3      arah detik 1  42% detik 2  54% (n 72)
+      d2     1:200 | baru n38 untung  55% $  +3.0 (acak $  -2.3, p 0.06) habis 0 | lama n25 $  -5.8
+      lentur 1:200 | baru n38 untung  47% $  +6.5 (acak $  -0.1, p 0.05) habis 0 | lama n25 $  -7.6
+      lentur 1:500 | baru n38 untung  47% $ +17.3 (acak $  +0.1, p 0.05) habis 1 | lama n25 $ -18.8
+   bd_KON     arah detik 1  37% detik 2  41% (n 41)
+      d2     1:200 | baru n21 untung  43% $  -1.1 (acak $  -1.3, p 0.48) habis 0 | lama n13 $ -12.3
+      lentur 1:200 | baru n21 untung  38% $  +6.9 (acak $  +1.5, p 0.17) habis 0 | lama n13 $  -6.4
+      lentur 1:500 | baru n21 untung  38% $ +17.7 (acak $  +2.8, p 0.15) habis 2 | lama n13 $  -9.6
+   bd_SUARA   arah detik 1  50% detik 2  30% (n 10)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -19.6
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -19.6
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n3 $ -49.1
+   pl_DXY     arah detik 1  42% detik 2  43% (n 23)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n14 $ -12.0
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n14 $ -12.4
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n14 $ -30.9
+   pl_PP      arah detik 1  52% detik 2  51% (n 61)
+      d2     1:200 | baru n37 untung  43% $  -0.9 (acak $  -2.2, p 0.33) habis 0 | lama n23 $  -6.1
+      lentur 1:200 | baru n37 untung  43% $  +4.5 (acak $  +0.4, p 0.13) habis 0 | lama n23 $  -5.1
+      lentur 1:500 | baru n37 untung  43% $ +11.4 (acak $  +0.7, p 0.14) habis 0 | lama n23 $ -12.7
+   pl_WTI     arah detik 1  47% detik 2  50% (n 36)
+      d2     1:200 | baru n12 untung  42% $  -3.0 (acak $  -2.3, p 0.59) habis 0 | lama n24 $ -10.6
+      lentur 1:200 | baru n12 untung  33% $  -1.7 (acak $  -6.0, p 0.19) habis 0 | lama n24 $ -11.0
+      lentur 1:500 | baru n12 untung  33% $ -11.1 (acak $ -14.6, p 0.36) habis 1 | lama n24 $ -24.4
+   NAIK       arah detik 1  50% detik 2  58% (n 131)
+      d2     1:200 | baru n50 untung  58% $  +1.2 (acak $  -2.1, p 0.10) habis 0 | lama n49 $  -3.4
+      lentur 1:200 | baru n50 untung  48% $  +1.9 (acak $  -0.9, p 0.20) habis 0 | lama n49 $  -2.2
+      lentur 1:500 | baru n50 untung  48% $  +6.8 (acak $  -2.3, p 0.13) habis 3 | lama n49 $  -4.6
+
+## RETAIL (113 rilis 2013-02–2025-09; tick Exness 87)
+   bd_P       arah detik 1  29% detik 2  40% (n 25)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n18 $ -13.3
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n18 $ -12.3
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n18 $ -26.6
+   bd_P3      arah detik 1  39% detik 2  39% (n 18)
+      d2     1:200 | baru n18 untung  39% $  -5.3 (acak $  -2.6, p 0.65) habis 0 | lama –
+      lentur 1:200 | baru n18 untung  39% $  -2.8 (acak $  -1.4, p 0.58) habis 0 | lama –
+      lentur 1:500 | baru n18 untung  39% $ -16.8 (acak $  -7.6, p 0.69) habis 7 | lama –
+   bd_KON     arah detik 1  62% detik 2  61% (n 46)
+      d2     1:200 | baru n38 untung  61% $  -0.6 (acak $  -2.2, p 0.35) habis 0 | lama –
+      lentur 1:200 | baru n38 untung  50% $  -0.1 (acak $  -2.7, p 0.24) habis 0 | lama –
+      lentur 1:500 | baru n38 untung  50% $  -0.2 (acak $  -8.0, p 0.19) habis 6 | lama –
+   bd_SUARA   arah detik 1  42% detik 2  53% (n 36)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n30 $  -8.8
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n30 $  -9.0
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n30 $ -21.5
+   bd_CPI     arah detik 1  53% detik 2  56% (n 36)
+      d2     1:200 | baru n22 untung  50% $  -3.9 (acak $  -1.8, p 0.65) habis 0 | lama n14 $  -1.0
+      lentur 1:200 | baru n22 untung  36% $  -2.6 (acak $  -2.7, p 0.49) habis 0 | lama n14 $  +1.7
+      lentur 1:500 | baru n22 untung  36% $  -2.4 (acak $  -5.3, p 0.42) habis 2 | lama n14 $  +4.3
+   bd_MOBIL   arah detik 1  48% detik 2  52% (n 25)
+      d2     1:200 | baru n16 untung  50% $  -0.7 (acak $  -1.7, p 0.42) habis 0 | lama n9 $  -3.2
+      lentur 1:200 | baru n16 untung  38% $  -2.5 (acak $  -1.9, p 0.54) habis 0 | lama n9 $  -2.5
+      lentur 1:500 | baru n16 untung  38% $  -5.6 (acak $  -5.9, p 0.50) habis 2 | lama n9 $  -6.1
+   NAIK       arah detik 1  43% detik 2  45% (n 113)
+      d2     1:200 | baru n41 untung  41% $  -8.2 (acak $  -2.2, p 0.95) habis 0 | lama n46 $  -8.9
+      lentur 1:200 | baru n41 untung  29% $  -9.9 (acak $  -3.0, p 0.98) habis 0 | lama n46 $  -7.8
+      lentur 1:500 | baru n41 untung  29% $ -25.1 (acak $  -8.1, p 0.98) habis 8 | lama n46 $ -19.0
+
+## FOMC (107 rilis 2013-01–2026-09; tick Exness 88)
+   pl_LALU    arah detik 1  49% detik 2  46% (n 56)
+      d2     1:200 | baru n10 untung  20% $  -6.2 (acak $  -2.4, p 0.75) habis 0 | lama n40 $  -1.7
+      lentur 1:200 | baru n10 untung  20% $  +3.2 (acak $  +5.0, p 0.60) habis 0 | lama n40 $  -0.2
+      lentur 1:500 | baru n10 untung  20% $  +8.1 (acak $ +12.8, p 0.61) habis 1 | lama n40 $  +3.2
+   pl_PRA2    arah detik 1  65% detik 2  55% (n 94)
+      d2     1:200 | baru n40 untung  38% $  -1.2 (acak $  -2.2, p 0.39) habis 0 | lama n48 $  -2.4
+      lentur 1:200 | baru n40 untung  25% $  +1.3 (acak $  +2.7, p 0.59) habis 0 | lama n48 $  +1.4
+      lentur 1:500 | baru n40 untung  25% $  +6.1 (acak $  +8.9, p 0.59) habis 3 | lama n48 $  +8.8
+   pl_T24     arah detik 1  50% detik 2  48% (n 48)
+      d2     1:200 | baru n2 untung   0% $ -13.9 (acak $  +nan, p nan) habis 0 | lama n46 $  -5.2
+      lentur 1:200 | baru n2 untung   0% $ -13.9 (acak $  +nan, p nan) habis 0 | lama n46 $  -4.1
+      lentur 1:500 | baru n2 untung   0% $ -34.7 (acak $  +nan, p nan) habis 0 | lama n46 $  -7.7
+   pl_Y2      arah detik 1  54% detik 2  61% (n 77)
+      d2     1:200 | baru n38 untung  53% $  +5.0 (acak $  -2.3, p 0.03) habis 0 | lama n33 $  -0.4
+      lentur 1:200 | baru n38 untung  37% $  +6.0 (acak $  +3.0, p 0.30) habis 0 | lama n33 $  +0.5
+      lentur 1:500 | baru n38 untung  37% $ +16.4 (acak $  +9.9, p 0.30) habis 4 | lama n33 $  +5.2
+   NAIK       arah detik 1  56% detik 2  55% (n 107)
+      d2     1:200 | baru n40 untung  22% $  -4.7 (acak $  -2.2, p 0.75) habis 0 | lama n48 $ -10.1
+      lentur 1:200 | baru n40 untung  22% $  +3.1 (acak $  +2.7, p 0.47) habis 0 | lama n48 $  -9.0
+      lentur 1:500 | baru n40 untung  22% $ +10.2 (acak $  +9.3, p 0.48) habis 3 | lama n48 $ -14.4
+
+## PCE (52 rilis 2021-07–2026-01; tick Exness 52)
+   bd_SUARA   arah detik 1  36% detik 2  45% (n 11)
+      d2     1:200 | baru n11 untung  27% $  -6.6 (acak $  -3.1, p 0.78) habis 0 | lama –
+      lentur 1:200 | baru n11 untung   0% $  -8.3 (acak $  -2.8, p 0.86) habis 0 | lama –
+      lentur 1:500 | baru n11 untung   0% $ -20.9 (acak $  -7.3, p 0.84) habis 0 | lama –
+   bd_CPIC    arah detik 1  27% detik 2  36% (n 11)
+      d2     1:200 | baru n11 untung  27% $  -2.5 (acak $  -2.1, p 0.57) habis 0 | lama –
+      lentur 1:200 | baru n11 untung  27% $  -3.5 (acak $  -4.5, p 0.39) habis 0 | lama –
+      lentur 1:500 | baru n11 untung  27% $  -8.7 (acak $ -11.3, p 0.38) habis 0 | lama –
+   pl_NOW     arah detik 1  50% detik 2  59% (n 22)
+      d2     1:200 | baru n22 untung  32% $  -2.2 (acak $  -1.7, p 0.57) habis 0 | lama –
+      lentur 1:200 | baru n22 untung  23% $  -2.7 (acak $  -1.4, p 0.67) habis 0 | lama –
+      lentur 1:500 | baru n22 untung  23% $  -6.7 (acak $  -3.5, p 0.68) habis 0 | lama –
+   NAIK       arah detik 1  52% detik 2  38% (n 52)
+      d2     1:200 | baru n50 untung  24% $  -4.0 (acak $  -2.0, p 0.95) habis 0 | lama n2 $  -3.3
+      lentur 1:200 | baru n50 untung  18% $  -3.3 (acak $  -1.6, p 0.83) habis 0 | lama n2 $  -3.3
+      lentur 1:500 | baru n50 untung  18% $  -8.7 (acak $  -4.3, p 0.83) habis 1 | lama n2 $  -8.2
+
+## JOLTS (32 rilis 2014-01–2025-12; tick Exness 27)
+   bd_KON     arah detik 1  53% detik 2  47% (n 19)
+      d2     1:200 | baru n19 untung  47% $  -1.6 (acak $  -1.7, p 0.50) habis 0 | lama –
+      lentur 1:200 | baru n19 untung  47% $  +2.8 (acak $  +0.6, p 0.37) habis 0 | lama –
+      lentur 1:500 | baru n19 untung  47% $  +9.9 (acak $  +3.9, p 0.34) habis 1 | lama –
+   bd_SUARA   arah detik 1  58% detik 2  58% (n 12)
+      d2     1:200 | baru n12 untung  50% $  +5.0 (acak $  -1.4, p 0.11) habis 0 | lama –
+      lentur 1:200 | baru n12 untung  50% $  +8.1 (acak $  +0.9, p 0.13) habis 0 | lama –
+      lentur 1:500 | baru n12 untung  50% $ +20.2 (acak $  +2.3, p 0.13) habis 0 | lama –
+   pl_NFP     arah detik 1  50% detik 2  67% (n 18)
+      d2     1:200 | baru n18 untung  67% $  +6.8 (acak $  -1.8, p 0.07) habis 0 | lama –
+      lentur 1:200 | baru n18 untung  61% $ +11.7 (acak $  +0.6, p 0.05) habis 0 | lama –
+      lentur 1:500 | baru n18 untung  61% $ +29.2 (acak $  +3.3, p 0.05) habis 0 | lama –
+   NAIK       arah detik 1  44% detik 2  48% (n 31)
+      d2     1:200 | baru n27 untung  33% $  -3.1 (acak $  -2.1, p 0.59) habis 0 | lama –
+      lentur 1:200 | baru n27 untung  30% $  -2.4 (acak $  -0.1, p 0.68) habis 0 | lama –
+      lentur 1:500 | baru n27 untung  30% $  -3.2 (acak $  +1.2, p 0.64) habis 2 | lama –
+
+## NFP (148 rilis 2013-03–2026-09; tick Exness 127)
+   bd_P       arah detik 1  41% detik 2  44% (n 64)
+      d2     1:200 | baru n25 untung  36% $  -8.9 (acak $  -4.9, p 0.71) habis 1 | lama n32 $  -5.9
+      lentur 1:200 | baru n25 untung  28% $  -7.8 (acak $  +0.5, p 0.84) habis 1 | lama n32 $  +4.9
+      lentur 1:500 | baru n25 untung  28% $  -6.6 (acak $ +10.0, p 0.82) habis 5 | lama n32 $ +20.1
+   bd_P3      arah detik 1  50% detik 2  46% (n 67)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n59 $  -6.8
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n59 $ +12.0
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n59 $ +38.8
+   bd_KON     arah detik 1  48% detik 2  50% (n 104)
+      d2     1:200 | baru n38 untung  39% $ -10.8 (acak $  -3.7, p 0.83) habis 3 | lama n58 $  -8.5
+      lentur 1:200 | baru n38 untung  32% $  -4.9 (acak $  +4.0, p 0.84) habis 3 | lama n58 $  +9.7
+      lentur 1:500 | baru n38 untung  32% $  +6.8 (acak $ +22.7, p 0.80) habis 12 | lama n58 $ +36.1
+   bd_ADP     arah detik 1  50% detik 2  25% (n 12)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -39.0
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -35.7
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -52.7
+   bd_KLAIM   arah detik 1  44% detik 2  47% (n 34)
+      d2     1:200 | baru n3 untung   0% $ -16.7 (acak $  +nan, p nan) habis 0 | lama n31 $  -2.4
+      lentur 1:200 | baru n3 untung   0% $ -16.7 (acak $  +nan, p nan) habis 0 | lama n31 $ +13.5
+      lentur 1:500 | baru n3 untung   0% $ -41.6 (acak $  +nan, p nan) habis 0 | lama n31 $ +35.4
+   bd_ISME    arah detik 1  36% detik 2  36% (n 11)
+      d2     1:200 | baru n11 untung  36% $ -13.4 (acak $  -1.2, p 0.74) habis 1 | lama –
+      lentur 1:200 | baru n11 untung  36% $  -1.1 (acak $ +17.3, p 0.78) habis 1 | lama –
+      lentur 1:500 | baru n11 untung  36% $ +23.7 (acak $ +65.0, p 0.79) habis 6 | lama –
+   bd_SUARA   arah detik 1  32% detik 2  26% (n 19)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n19 $ -23.0
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n19 $ -18.3
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n19 $ -30.4
+   NAIK       arah detik 1  48% detik 2  44% (n 148)
+      d2     1:200 | baru n57 untung  39% $ -15.3 (acak $  -2.9, p 0.98) habis 3 | lama n70 $  -9.3
+      lentur 1:200 | baru n57 untung  35% $  -4.4 (acak $  +9.0, p 0.96) habis 3 | lama n70 $  +4.7
+      lentur 1:500 | baru n57 untung  35% $  +7.8 (acak $ +33.9, p 0.93) habis 23 | lama n70 $ +22.9
+
+## ADP (134 rilis 2013-01–2026-01; tick Exness 102)
+   bd_P       arah detik 1  39% detik 2  36% (n 22)
+      d2     1:200 | baru n9 untung  22% $  -3.0 (acak $  -2.7, p 0.56) habis 0 | lama n3 $ -17.2
+      lentur 1:200 | baru n9 untung  22% $  -3.2 (acak $  -3.2, p 0.49) habis 0 | lama n3 $ -17.2
+      lentur 1:500 | baru n9 untung  22% $  -7.9 (acak $  -8.0, p 0.50) habis 0 | lama n3 $ -43.0
+   bd_P3      arah detik 1  63% detik 2  60% (n 121)
+      d2     1:200 | baru n50 untung  48% $  -0.4 (acak $  -2.3, p 0.24) habis 0 | lama n52 $ -11.9
+      lentur 1:200 | baru n50 untung  42% $  -0.5 (acak $  -2.5, p 0.23) habis 0 | lama n52 $  -9.9
+      lentur 1:500 | baru n50 untung  42% $  -0.0 (acak $  -5.2, p 0.22) habis 3 | lama n52 $ -21.0
+   bd_KON     arah detik 1  44% detik 2  46% (n 108)
+      d2     1:200 | baru n49 untung  33% $  -3.6 (acak $  -2.4, p 0.67) habis 0 | lama n49 $  -6.5
+      lentur 1:200 | baru n49 untung  31% $  -3.6 (acak $  -2.5, p 0.66) habis 0 | lama n49 $  -4.3
+      lentur 1:500 | baru n49 untung  31% $  -8.2 (acak $  -5.2, p 0.67) habis 1 | lama n49 $  -9.0
+   bd_KLAIM   arah detik 1  41% detik 2  42% (n 43)
+      d2     1:200 | baru n27 untung  41% $  -6.6 (acak $  -2.9, p 0.80) habis 0 | lama n8 $ -10.1
+      lentur 1:200 | baru n27 untung  33% $  -7.6 (acak $  -3.2, p 0.85) habis 0 | lama n8 $  -3.5
+      lentur 1:500 | baru n27 untung  33% $ -16.2 (acak $  -6.6, p 0.83) habis 2 | lama n8 $  -8.8
+   bd_SUARA   arah detik 1  41% detik 2  46% (n 50)
+      d2     1:200 | baru n25 untung  36% $  -4.5 (acak $  -2.6, p 0.68) habis 0 | lama n20 $  -2.4
+      lentur 1:200 | baru n25 untung  28% $  -5.7 (acak $  -3.2, p 0.73) habis 0 | lama n20 $  -1.8
+      lentur 1:500 | baru n25 untung  28% $ -12.8 (acak $  -6.7, p 0.74) habis 1 | lama n20 $  -4.4
+   NAIK       arah detik 1  52% detik 2  45% (n 132)
+      d2     1:200 | baru n50 untung  40% $  -3.2 (acak $  -2.4, p 0.62) habis 0 | lama n52 $ -14.4
+      lentur 1:200 | baru n50 untung  36% $  -2.9 (acak $  -2.5, p 0.57) habis 0 | lama n52 $ -12.2
+      lentur 1:500 | baru n50 untung  36% $  -5.3 (acak $  -5.2, p 0.51) habis 4 | lama n52 $ -25.6
+
+## ISM (235 rilis 2013-02–2026-01; tick Exness 229)
+   bd_P       arah detik 1  58% detik 2  57% (n 167)
+      d2     1:200 | baru n95 untung  56% $  +4.1 (acak $  -2.0, p 0.02) habis 1 | lama n72 $  -5.4
+      lentur 1:200 | baru n95 untung  52% $  +3.6 (acak $  -2.9, p 0.01) habis 1 | lama n72 $  -4.9
+      lentur 1:500 | baru n95 untung  52% $ +10.8 (acak $  -3.8, p 0.02) habis 7 | lama n72 $ -11.8
+   bd_P3      arah detik 1  54% detik 2  55% (n 136)
+      d2     1:200 | baru n67 untung  57% $  +3.6 (acak $  -1.8, p 0.08) habis 1 | lama n69 $  -6.4
+      lentur 1:200 | baru n67 untung  54% $  +3.2 (acak $  -1.9, p 0.09) habis 1 | lama n69 $  -5.9
+      lentur 1:500 | baru n67 untung  54% $  +9.8 (acak $  -1.6, p 0.09) habis 9 | lama n69 $ -12.6
+   bd_KON     arah detik 1  53% detik 2  53% (n 193)
+      d2     1:200 | baru n97 untung  44% $  -0.8 (acak $  -2.0, p 0.35) habis 1 | lama n96 $  -3.9
+      lentur 1:200 | baru n97 untung  40% $  -2.6 (acak $  -2.6, p 0.51) habis 1 | lama n96 $  -2.2
+      lentur 1:500 | baru n97 untung  40% $  -4.7 (acak $  -3.5, p 0.57) habis 10 | lama n96 $  -4.2
+   bd_CHI     arah detik 1  51% detik 2  49% (n 61)
+      d2     1:200 | baru n41 untung  46% $  +0.3 (acak $  -1.9, p 0.33) habis 0 | lama n20 $ -10.3
+      lentur 1:200 | baru n41 untung  39% $  -0.8 (acak $  -3.3, p 0.30) habis 0 | lama n20 $ -10.2
+      lentur 1:500 | baru n41 untung  39% $  -1.5 (acak $  -4.5, p 0.39) habis 6 | lama n20 $ -25.8
+   bd_FED     arah detik 1  61% detik 2  63% (n 129)
+      d2     1:200 | baru n75 untung  57% $  +0.8 (acak $  -2.0, p 0.21) habis 0 | lama n54 $  +1.3
+      lentur 1:200 | baru n75 untung  48% $  -0.1 (acak $  -2.2, p 0.27) habis 0 | lama n54 $  +2.3
+      lentur 1:500 | baru n75 untung  48% $  +2.1 (acak $  -1.7, p 0.32) habis 8 | lama n54 $  +5.8
+   bd_SPG     arah detik 1  40% detik 2  47% (n 47)
+      d2     1:200 | baru n47 untung  47% $  -4.9 (acak $  -1.8, p 0.75) habis 1 | lama –
+      lentur 1:200 | baru n47 untung  43% $  -5.5 (acak $  -2.1, p 0.78) habis 1 | lama –
+      lentur 1:500 | baru n47 untung  43% $  -7.7 (acak $  -0.8, p 0.76) habis 6 | lama –
+   NAIK       arah detik 1  50% detik 2  51% (n 235)
+      d2     1:200 | baru n100 untung  54% $  +0.4 (acak $  -2.0, p 0.21) habis 0 | lama n129 $  -6.8
+      lentur 1:200 | baru n100 untung  47% $  +0.5 (acak $  -2.7, p 0.13) habis 0 | lama n129 $  -5.6
+      lentur 1:500 | baru n100 untung  47% $  +4.0 (acak $  -3.5, p 0.13) habis 13 | lama n129 $ -13.9
+
+## GDP (95 rilis 2013-01–2025-12; tick Exness 76)
+   bd_P       arah detik 1  38% detik 2  38% (n 16)
+      d2     1:200 | baru n4 untung  25% $  -9.0 (acak $  +nan, p nan) habis 0 | lama n12 $  -9.4
+      lentur 1:200 | baru n4 untung  25% $  -5.4 (acak $  +nan, p nan) habis 0 | lama n12 $  -9.8
+      lentur 1:500 | baru n4 untung  25% $ -13.5 (acak $  +nan, p nan) habis 0 | lama n12 $ -24.4
+   bd_P3      arah detik 1  61% detik 2  64% (n 58)
+      d2     1:200 | baru n25 untung  44% $  -1.8 (acak $  -2.4, p 0.42) habis 0 | lama n32 $  -6.1
+      lentur 1:200 | baru n25 untung  24% $  -2.7 (acak $  -5.2, p 0.16) habis 0 | lama n32 $  -5.2
+      lentur 1:500 | baru n25 untung  24% $  -5.4 (acak $ -12.2, p 0.14) habis 2 | lama n32 $ -13.0
+   bd_KON     arah detik 1  58% detik 2  67% (n 24)
+      d2     1:200 | baru n24 untung  50% $  +0.4 (acak $  -2.5, p 0.14) habis 0 | lama –
+      lentur 1:200 | baru n24 untung  29% $  -3.4 (acak $  -5.7, p 0.16) habis 0 | lama –
+      lentur 1:500 | baru n24 untung  29% $  -7.9 (acak $ -13.1, p 0.18) habis 1 | lama –
+   bd_NOW     arah detik 1  18% detik 2  18% (n 17)
+      d2     1:200 | baru n11 untung  18% $  -9.5 (acak $  -2.3, p 0.95) habis 0 | lama n6 $ -10.2
+      lentur 1:200 | baru n11 untung  18% $  -6.6 (acak $  -8.5, p 0.32) habis 0 | lama n6 $ -10.2
+      lentur 1:500 | baru n11 untung  18% $ -14.2 (acak $ -19.4, p 0.30) habis 1 | lama n6 $ -25.5
+   NAIK       arah detik 1  56% detik 2  55% (n 95)
+      d2     1:200 | baru n27 untung  33% $  -6.5 (acak $  -2.4, p 0.95) habis 0 | lama n49 $  -8.2
+      lentur 1:200 | baru n27 untung  15% $  -9.9 (acak $  -4.9, p 0.99) habis 0 | lama n49 $  -7.7
+      lentur 1:500 | baru n27 untung  15% $ -23.1 (acak $ -11.7, p 0.98) habis 3 | lama n49 $ -19.2
+
+## CLAIMS (222 rilis 2013-02–2026-01; tick Exness 205)
+   bd_P       arah detik 1  39% detik 2  45% (n 38)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n38 $ -11.4
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n38 $ -11.5
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n38 $ -28.7
+   bd_P3      arah detik 1  47% detik 2  44% (n 43)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n43 $  -8.3
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n43 $  -8.3
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n43 $ -20.7
+   bd_KON     arah detik 1  43% detik 2  27% (n 15)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -13.2
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -13.2
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n12 $ -32.9
+   bd_SUARA   arah detik 1  38% detik 2  41% (n 29)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n29 $ -11.2
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n29 $ -11.2
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n29 $ -28.1
+   bd_KONT    arah detik 1  41% detik 2  39% (n 44)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n44 $ -10.3
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n44 $ -10.1
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n44 $ -25.3
+   NAIK       arah detik 1  46% detik 2  46% (n 222)
+      d2     1:200 | baru n98 untung  37% $  -2.4 (acak $  -1.7, p 0.75) habis 0 | lama n107 $  -9.9
+      lentur 1:200 | baru n98 untung  24% $  -3.0 (acak $  -2.1, p 0.76) habis 0 | lama n107 $ -10.0
+      lentur 1:500 | baru n98 untung  24% $  -7.4 (acak $  -5.3, p 0.77) habis 0 | lama n107 $ -25.0
+
+## KONSUMEN (147 rilis 2015-09–2026-01; tick Exness 147)
+   bd_P3      arah detik 1  48% detik 2  47% (n 66)
+      d2     1:200 | baru n22 untung  41% $  -4.3 (acak $  -1.8, p 0.75) habis 0 | lama n44 $  -5.5
+      lentur 1:200 | baru n22 untung  32% $  -3.7 (acak $  -1.9, p 0.68) habis 0 | lama n44 $  -4.8
+      lentur 1:500 | baru n22 untung  32% $  -8.0 (acak $  -3.7, p 0.69) habis 1 | lama n44 $ -11.9
+   bd_SUARA   arah detik 1  54% detik 2  50% (n 26)
+      d2     1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n26 $  -4.9
+      lentur 1:200 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n26 $  -4.4
+      lentur 1:500 | baru n0 untung   0% $  +0.0 (acak $  +nan, p nan) habis 0 | lama n26 $ -11.0
+   bd_SPX     arah detik 1  59% detik 2  46% (n 61)
+      d2     1:200 | baru n39 untung  44% $  -5.0 (acak $  -2.3, p 0.84) habis 0 | lama n22 $  -5.4
+      lentur 1:200 | baru n39 untung  31% $  -6.4 (acak $  -2.2, p 0.94) habis 0 | lama n22 $  -5.1
+      lentur 1:500 | baru n39 untung  31% $ -16.1 (acak $  -5.6, p 0.94) habis 2 | lama n22 $ -12.8
+   bd_BENSIN  arah detik 1  46% detik 2  50% (n 118)
+      d2     1:200 | baru n74 untung  41% $  -1.1 (acak $  -2.1, p 0.30) habis 0 | lama n44 $  -4.5
+      lentur 1:200 | baru n74 untung  35% $  -0.6 (acak $  -2.0, p 0.24) habis 0 | lama n44 $  -4.0
+      lentur 1:500 | baru n74 untung  35% $  -1.4 (acak $  -4.9, p 0.24) habis 0 | lama n44 $ -10.1
+   NAIK       arah detik 1  48% detik 2  53% (n 146)
+      d2     1:200 | baru n74 untung  46% $  -2.1 (acak $  -2.2, p 0.47) habis 0 | lama n73 $  -6.9
+      lentur 1:200 | baru n74 untung  38% $  -1.5 (acak $  -1.9, p 0.42) habis 0 | lama n73 $  -6.3
+      lentur 1:500 | baru n74 untung  38% $  -3.7 (acak $  -4.9, p 0.41) habis 2 | lama n73 $ -15.9
+
+## LOLOS (BARU > 0, > acak p < 0,05, n ≥ 15)
+   PPI bd_P3 lentur 1:500 (seperti CPI; baru $+17.3 vs acak $+0.1, p 0.05; lama lama n25 $ -18.8)
+   FOMC pl_Y2 d2 1:200 (seperti CPI; baru $+5.0 vs acak $-2.3, p 0.03; lama lama n33 $  -0.4)
+   JOLTS pl_NFP lentur 1:200 (seperti CPI; baru $+11.7 vs acak $+0.6, p 0.05; lama lama –)
+   JOLTS pl_NFP lentur 1:500 (seperti CPI; baru $+29.2 vs acak $+3.3, p 0.05; lama lama –)
+   ISM bd_P d2 1:200 (seperti CPI; baru $+4.1 vs acak $-2.0, p 0.02; lama lama n72 $  -5.4)
+   ISM bd_P lentur 1:200 (seperti CPI; baru $+3.6 vs acak $-2.9, p 0.01; lama lama n72 $  -4.9)
+   ISM bd_P lentur 1:500 (seperti CPI; baru $+10.8 vs acak $-3.8, p 0.02; lama lama n72 $ -11.8)
+   (jumlah uji ±195; bila semua acak, ±5% lolos karena kebetulan)
