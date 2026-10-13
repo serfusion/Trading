@@ -427,6 +427,13 @@ alarm tepat waktu) hanya menyentuh `android/`].
   diakali); Truflation butuh API key (secret pengguna). Tidak ada perubahan cloud/aplikasi.
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
+## ⛽ PPI ← minyak WTI & urutan berita berikutnya (13 Okt 2026 — `docs/PPI_WTI.md`)
+- Permintaan pengguna: lanjut sesuai urutan rilis PPI → FOMC → PCE → JOLTS → NFP → dll, lalu ETH & BTC. Riset sesi 11 Okt
+  (branch awesome-mendel) DIGABUNG; `research/riset_inflasi.py` dijalankan: PPI-WTI lolos semua kriteria + verifikasi
+  (`research/ppi_wti_cek.py`); PCE 0 lolos. DIPASANG cloud (`_ppi_wti.py`, `ppi_wti.json`, env PPI_WTI, cache `ppi_wti`).
+- `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
+- Sisa dari workflow 11 Okt: Retail+GDP, ADP+JOLTS+klaim, FOMC+konsumen (lihat docs/LANJUTAN.md).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

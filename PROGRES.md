@@ -303,3 +303,9 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   kecil → tidak ada yang dipasang; daftar yang belum diuji di docs/CPI_ALLIN.md.
 - 13 Okt (lanjutan, "uji semua"): `research/cpi_semua.py` — 29 sinyal tunggal (0 lolos), model gabungan (57% < aplikasi 68%),
   telat eksekusi (strategi tahan ±1 dtk); data Manheim/ZORI di data/research/eksternal/cpi_lain/. Docs/CPI_ALLIN.md bagian akhir.
+
+### 13 Okt 2026 — urutan berita: PPI (⛽ WTI dipasang), lainnya
+- Gabung branch awesome-mendel (riset NFP/ISM, workflow lonjakan, data); `research/berita_allin.py` (modal kecil semua
+  berita: tidak ada yang layak); `research/riset_inflasi.py` dijalankan → PPI-WTI lolos; verifikasi `research/ppi_wti_cek.py`;
+  `research/ppi_wti.py` → `cloud/api/ppi_wti.json`; cloud `_ppi_wti.py` + `_pra_aset` + `chat.py`; tes `tests/test_cloud_ppi_wti.py`.
+- Berikutnya: Retail+GDP, FOMC+konsumen, ADP+JOLTS+klaim (workflow 11 Okt yang terputus), lalu ETH & BTC.

@@ -250,6 +250,11 @@ class handler(BaseHTTPRequestHandler):
                     _cpi_detik.attach(persiapan, store, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+                try:                                          # ⛽ PPI: minyak WTI bulan acuan (_ppi_wti.py, 13 Okt 2026)
+                    import _ppi_wti
+                    _ppi_wti.attach(persiapan, store, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
             if isinstance(persiapan, dict):
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
                     import _pra_aset

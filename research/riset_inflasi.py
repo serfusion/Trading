@@ -432,10 +432,10 @@ def _pce(d, d1, r, t0, cm, cy, ch_f) -> dict:
     c["NOW"] = sgn(nc - cm) if cm == cm else 0.0
     c["NOW5"] = sgn(nc - cm, 0.05) if cm == cm else 0.0
     c["NOWH"] = sgn(nh - ch_f, 0.05) if ch_f == ch_f else 0.0
-    I = vintage("PCEPILFE", d1)
+    idx = vintage("PCEPILFE", d1)
     c["YOY5"] = c["YOY3"] = 0.0
     try:
-        imp = ((1 + cy / 100) * I[r - pd.DateOffset(months=12)] / I[r - pd.DateOffset(months=1)] - 1) * 100
+        imp = ((1 + cy / 100) * idx[r - pd.DateOffset(months=12)] / idx[r - pd.DateOffset(months=1)] - 1) * 100
         c["yoy_imp"] = imp
         if cm == cm and imp == imp:
             c["YOY5"], c["YOY3"] = sgn(imp - cm, 0.05), sgn(imp - cm, 0.03)
