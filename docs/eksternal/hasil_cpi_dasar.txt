@@ -1,0 +1,199 @@
+# 🧱 CPI dari dasar (research/cpi_dasar.py)
+python -m research.cpi_dasar            → docs/eksternal/hasil_cpi_dasar.txt
+Kritik pengguna: "riset datamu hanya sebatas selalu buy, tidak mendasar". Jawaban riset ini: bangun angka CPI seperti ekonom
+(bottom-up), bandingkan dengan konsensus, lalu ukur apakah tebakan kejutan menambah sesuatu DI ATAS pembanding arah emas
+(selalu-NAIK & tren emas). Semua angka komponen dari ALFRED (research/cpi_dasar_data): petunjuk = versi hari sebelum rilis,
+angka sebenarnya = versi hari rilis (rilis pertama, bukan revisi). Rekonstruksi cocok 100% dengan angka aktual kalender.
+
+## TAHAP 0 — PETA MEKANISME: kejutan bulat (m/m / inti / y/y; −1 di bawah, 0 sesuai, +1 di atas) → emas naik
+   kelompok             LAMA d2 / lonjakan        BARU d2 / lonjakan        2024+ d2 / lonjakan
+   net DI BAWAH (−)      72% n46  /  85% n46     89% n27  /  96% n27    100% n18  / 100% n18 
+   net SESUAI (0)        47% n19  /  53% n19     50% n6   /  50% n6      75% n4   /  50% n4  
+   net DI ATAS (+)       17% n36  /  19% n37     35% n26  /  23% n26     50% n10  /  10% n10 
+   semua 3 di bawah      72% n18  /  94% n18     86% n14  / 100% n14    100% n9   / 100% n9  
+   semua 3 sesuai        50% n14  /  57% n14     50% n6   /  50% n6      75% n4   /  50% n4  
+   semua 3 di atas        0% n11  /   9% n11     27% n11  /   0% n11     25% n4   /   0% n4  
+   inti di bawah         71% n38  /  87% n38     89% n19  / 100% n19    100% n13  / 100% n13 
+   inti sesuai           49% n37  /  43% n37     62% n21  /  67% n21     91% n11  /  73% n11 
+   inti di atas          12% n26  /  26% n27     32% n19  /  11% n19     38% n8   /   0% n8  
+   SEMUA rilis           48% n101 /  55% n102    61% n59  /  59% n59     81% n32  /  66% n32 
+   Porsi rilis per kelompok net:  LAMA 45% • 19% • 36% | BARU 46% • 10% • 44% | 2024+ 56% • 12% • 31%  (urutan di bawah • sesuai • di atas)
+
+## TAHAP 1 — ANGKA: perkiraan bottom-up vs konsensus (angka rilis pertama, versi hari itu)
+
+### TOTAL m/m
+   2014–26  n 149 RMSE konsensus 0.125 • fisik 0.142 • fit 0.144 | encompassing fisik b +0.24 (t +2.2, n 149) • fit b +0.22 (t +1.9, n 149)
+   LAMA     n  91 RMSE konsensus 0.123 • fisik 0.135 • fit 0.136 | encompassing fisik b +0.31 (t +2.3, n 91) • fit b +0.34 (t +2.5, n 91)
+   BARU     n  58 RMSE konsensus 0.127 • fisik 0.151 • fit 0.157 | encompassing fisik b +0.13 (t +0.7, n 58) • fit b -0.05 (t -0.2, n 58)
+   2024+    n  31 RMSE konsensus 0.101 • fisik 0.120 • fit 0.115 | encompassing fisik b -0.04 (t -0.1, n 31) • fit b +0.17 (t +0.7, n 31)
+   arah kejutan head_fis  |selisih| ≥ 0.05: 2014–26 65% (30/46) [tak-bulat 58% (45/78); tebak 78] | LAMA 75% (18/24) [tak-bulat 61% (25/41); tebak 41] | BARU 55% (12/22) [tak-bulat 54% (20/37); tebak 37] | 2024+ 44% (4/9) [tak-bulat 53% (10/19); tebak 19]
+   arah kejutan head_fit  |selisih| ≥ 0.05: 2014–26 63% (34/54) [tak-bulat 55% (51/92); tebak 92] | LAMA 74% (23/31) [tak-bulat 57% (32/56); tebak 56] | BARU 48% (11/23) [tak-bulat 53% (19/36); tebak 36] | 2024+ 56% (5/9) [tak-bulat 56% (10/18); tebak 18]
+   arah kejutan head_fis  |selisih| ≥ 0.08: 2014–26 73% (24/33) [tak-bulat 67% (31/46); tebak 46] | LAMA 78% (14/18) [tak-bulat 68% (17/25); tebak 25] | BARU 67% (10/15) [tak-bulat 67% (14/21); tebak 21] | 2024+ 67% (4/6) [tak-bulat 64% (7/11); tebak 11]
+   arah kejutan head_fit  |selisih| ≥ 0.08: 2014–26 64% (23/36) [tak-bulat 54% (31/57); tebak 57] | LAMA 70% (16/23) [tak-bulat 55% (21/38); tebak 38] | BARU 54% (7/13) [tak-bulat 53% (10/19); tebak 19] | 2024+ 80% (4/5) [tak-bulat 60% (6/10); tebak 10]
+   arah kejutan head_fis  |selisih| ≥ 0.10: 2014–26 70% (14/20) [tak-bulat 67% (18/27); tebak 27] | LAMA 70% (7/10) [tak-bulat 67% (10/15); tebak 15] | BARU 70% (7/10) [tak-bulat 67% (8/12); tebak 12] | 2024+ 50% (1/2) [tak-bulat 50% (2/4); tebak 4]
+   arah kejutan head_fit  |selisih| ≥ 0.10: 2014–26 57% (16/28) [tak-bulat 47% (20/43); tebak 43] | LAMA 67% (12/18) [tak-bulat 52% (15/29); tebak 29] | BARU 40% (4/10) [tak-bulat 36% (5/14); tebak 14] | 2024+ 67% (2/3) [tak-bulat 43% (3/7); tebak 7]
+
+### INTI m/m
+   2014–26  n 149 RMSE konsensus 0.123 • fisik 0.169 • fit 0.143 | encompassing fisik b -0.16 (t -1.6, n 149) • fit b +0.20 (t +1.7, n 149)
+   LAMA     n  91 RMSE konsensus 0.129 • fisik 0.184 • fit 0.143 | encompassing fisik b -0.24 (t -2.0, n 91) • fit b +0.21 (t +1.2, n 91)
+   BARU     n  58 RMSE konsensus 0.111 • fisik 0.140 • fit 0.144 | encompassing fisik b +0.03 (t +0.2, n 58) • fit b +0.19 (t +1.2, n 58)
+   2024+    n  31 RMSE konsensus 0.098 • fisik 0.116 • fit 0.096 | encompassing fisik b -0.23 (t -0.7, n 31) • fit b +0.48 (t +2.1, n 31)
+   arah kejutan core_fis  |selisih| ≥ 0.05: 2014–26 56% (25/45) [tak-bulat 45% (31/69); tebak 69] | LAMA 58% (14/24) [tak-bulat 43% (16/37); tebak 37] | BARU 52% (11/21) [tak-bulat 47% (15/32); tebak 32] | 2024+ 50% (5/10) [tak-bulat 47% (7/15); tebak 15]
+   arah kejutan core_fit  |selisih| ≥ 0.05: 2014–26 69% (36/52) [tak-bulat 60% (50/83); tebak 83] | LAMA 77% (23/30) [tak-bulat 67% (33/49); tebak 49] | BARU 59% (13/22) [tak-bulat 50% (17/34); tebak 34] | 2024+ 88% (7/8) [tak-bulat 67% (8/12); tebak 12]
+   arah kejutan core_fis  |selisih| ≥ 0.08: 2014–26 52% (14/27) [tak-bulat 43% (15/35); tebak 35] | LAMA 50% (9/18) [tak-bulat 43% (9/21); tebak 21] | BARU 56% (5/9) [tak-bulat 43% (6/14); tebak 14] | 2024+ 100% (2/2) [tak-bulat 67% (2/3); tebak 3]
+   arah kejutan core_fit  |selisih| ≥ 0.08: 2014–26 72% (23/32) [tak-bulat 70% (33/47); tebak 47] | LAMA 80% (12/15) [tak-bulat 79% (19/24); tebak 24] | BARU 65% (11/17) [tak-bulat 61% (14/23); tebak 23] | 2024+ 86% (6/7) [tak-bulat 78% (7/9); tebak 9]
+   arah kejutan core_fis  |selisih| ≥ 0.10: 2014–26 52% (13/25) [tak-bulat 42% (14/33); tebak 33] | LAMA 50% (8/16) [tak-bulat 42% (8/19); tebak 19] | BARU 56% (5/9) [tak-bulat 43% (6/14); tebak 14] | 2024+ 100% (2/2) [tak-bulat 67% (2/3); tebak 3]
+   arah kejutan core_fit  |selisih| ≥ 0.10: 2014–26 70% (14/20) [tak-bulat 63% (19/30); tebak 30] | LAMA 80% (4/5) [tak-bulat 67% (6/9); tebak 9] | BARU 67% (10/15) [tak-bulat 62% (13/21); tebak 21] | 2024+ 83% (5/6) [tak-bulat 75% (6/8); tebak 8]
+
+### Komponen (korelasi petunjuk → angka komponen rilis pertama, 2014–26)
+   gas_act   ← gas_pred  r +0.99 (n 150)
+   gas_act   ← gas_eia   r +0.88 (n 150)
+   used_act  ← manh_1    r +0.41 (n 142)
+   used_act  ← manh_2    r +0.60 (n 143)
+   used_act  ← used_l1   r +0.51 (n 149)
+   air_act   ← jet_mm    r +0.26 (n 149)
+   shel_act  ← shel_l3   r +0.71 (n 149)
+   core_act  ← core_l3   r +0.46 (n 149)
+   food_act  ← food_l3   r +0.64 (n 149)
+   elec_act  ← elec_l3   r +0.15 (n 149)
+   en_act    ← en_now    r +0.98 (n 149)
+
+### y/y: tersirat konsensus m/m (YOY) vs tersirat perkiraan FIT (YOYn) → kejutan y/y bulat
+   2014–26  YOY 71% (37/52) • YOYn 63% (36/57)
+   LAMA     YOY 80% (24/30) • YOYn 67% (20/30)
+   BARU     YOY 59% (13/22) • YOYn 59% (16/27)
+   2024+    YOY 56% (5/9) • YOYn 69% (9/13)
+
+## TAHAP 2 — EMAS: apakah tebakan kejutan menambah sesuatu DI ATAS selalu-NAIK & tren emas?
+
+### target detik 2 (tutup kertas, tahun < Y untuk melatih)
+   2014–26  n 149 | B0 LL 0.698 acc 49% | B1 LL 0.742 acc 44% | F1 LL 0.814 acc 50% | F2 LL 0.746 acc 53%
+   LAMA     n  90 | B0 LL 0.698 acc 44% | B1 LL 0.767 acc 47% | F1 LL 0.877 acc 48% | F2 LL 0.771 acc 50%
+   BARU     n  59 | B0 LL 0.697 acc 56% | B1 LL 0.706 acc 41% | F1 LL 0.719 acc 54% | F2 LL 0.709 acc 58%
+   2024+    n  32 | B0 LL 0.707 acc 47% | B1 LL 0.715 acc 38% | F1 LL 0.733 acc 59% | F2 LL 0.723 acc 66%
+   2014–26  F1 tebak NAIK 53% (39/73) • tebak TURUN 47% (36/76) | selalu-NAIK 53% (79/149) | vs selalu-NAIK: model benar & pembanding salah 36 vs sebaliknya 40 (p 0.73) | vs rezim: model benar & pembanding salah 35 vs sebaliknya 26 (p 0.31)
+   LAMA     F1 tebak NAIK 46% (22/48) • tebak TURUN 50% (21/42) | selalu-NAIK 48% (43/90) | vs selalu-NAIK: model benar & pembanding salah 21 vs sebaliknya 21 (p 1.00) | vs rezim: model benar & pembanding salah 17 vs sebaliknya 16 (p 1.00)
+   BARU     F1 tebak NAIK 68% (17/25) • tebak TURUN 44% (15/34) | selalu-NAIK 61% (36/59) | vs selalu-NAIK: model benar & pembanding salah 15 vs sebaliknya 19 (p 0.61) | vs rezim: model benar & pembanding salah 18 vs sebaliknya 10 (p 0.18)
+   2024+    F1 tebak NAIK 88% (15/17) • tebak TURUN 27% (4/15) | selalu-NAIK 81% (26/32) | vs selalu-NAIK: model benar & pembanding salah 4 vs sebaliknya 11 (p 0.12) | vs rezim: model benar & pembanding salah 10 vs sebaliknya 3 (p 0.09)
+   SKOR |≥2| 2014–26  tebak NAIK 69% (20/29) • tebak TURUN 53% (8/15) | selalu-NAIK di rilis yang sama 61% (27/44) (semua rilis 53% (79/149))
+   SKOR |≥2| LAMA     tebak NAIK 67% (10/15) • tebak TURUN 62% (5/8) | selalu-NAIK di rilis yang sama 57% (13/23) (semua rilis 48% (43/90))
+   SKOR |≥2| BARU     tebak NAIK 71% (10/14) • tebak TURUN 43% (3/7) | selalu-NAIK di rilis yang sama 67% (14/21) (semua rilis 61% (36/59))
+   SKOR |≥2| 2024+    tebak NAIK 86% (6/7) • tebak TURUN 50% (1/2) | selalu-NAIK di rilis yang sama 78% (7/9) (semua rilis 81% (26/32))
+
+### target lonjakan menit 1 (tutup kertas, tahun < Y untuk melatih)
+   2014–26  n 150 | B0 LL 0.689 acc 57% | B1 LL 0.751 acc 53% | F1 LL 0.828 acc 56% | F2 LL 0.747 acc 56%
+   LAMA     n  91 | B0 LL 0.696 acc 56% | B1 LL 0.777 acc 51% | F1 LL 0.809 acc 62% | F2 LL 0.735 acc 57%
+   BARU     n  59 | B0 LL 0.678 acc 59% | B1 LL 0.711 acc 58% | F1 LL 0.857 acc 47% | F2 LL 0.766 acc 54%
+   2024+    n  32 | B0 LL 0.657 acc 66% | B1 LL 0.654 acc 66% | F1 LL 0.715 acc 56% | F2 LL 0.695 acc 56%
+   2014–26  F1 tebak NAIK 61% (57/94) • tebak TURUN 48% (27/56) | selalu-NAIK 57% (86/150) | vs selalu-NAIK: model benar & pembanding salah 27 vs sebaliknya 29 (p 0.89) | vs rezim: model benar & pembanding salah 24 vs sebaliknya 20 (p 0.65)
+   LAMA     F1 tebak NAIK 63% (39/62) • tebak TURUN 59% (17/29) | selalu-NAIK 56% (51/91) | vs selalu-NAIK: model benar & pembanding salah 17 vs sebaliknya 12 (p 0.46) | vs rezim: model benar & pembanding salah 16 vs sebaliknya 6 (p 0.05)
+   BARU     F1 tebak NAIK 56% (18/32) • tebak TURUN 37% (10/27) | selalu-NAIK 59% (35/59) | vs selalu-NAIK: model benar & pembanding salah 10 vs sebaliknya 17 (p 0.25) | vs rezim: model benar & pembanding salah 8 vs sebaliknya 14 (p 0.29)
+   2024+    F1 tebak NAIK 68% (13/19) • tebak TURUN 38% (5/13) | selalu-NAIK 66% (21/32) | vs selalu-NAIK: model benar & pembanding salah 5 vs sebaliknya 8 (p 0.58) | vs rezim: model benar & pembanding salah 5 vs sebaliknya 8 (p 0.58)
+   SKOR |≥2| 2014–26  tebak NAIK 62% (18/29) • tebak TURUN 47% (7/15) | selalu-NAIK di rilis yang sama 59% (26/44) (semua rilis 57% (86/150))
+   SKOR |≥2| LAMA     tebak NAIK 53% (8/15) • tebak TURUN 50% (4/8) | selalu-NAIK di rilis yang sama 52% (12/23) (semua rilis 56% (51/91))
+   SKOR |≥2| BARU     tebak NAIK 71% (10/14) • tebak TURUN 43% (3/7) | selalu-NAIK di rilis yang sama 67% (14/21) (semua rilis 59% (35/59))
+   SKOR |≥2| 2024+    tebak NAIK 71% (5/7) • tebak TURUN 50% (1/2) | selalu-NAIK di rilis yang sama 67% (6/9) (semua rilis 66% (21/32))
+
+## TAHAP 3 — RANTAI MENDASAR: sumber → peluang kejutan NET (inti ×2 + total + y/y) → peta mekanisme → peluang emas
+   (naive Bayes tutup kertas; ALL = 11 sumber pra-registrasi; 5 = dipilih pasca-lihat; k = peredam korelasi)
+   detik 2  ALL k1 2014–26  NET benar 61% (78/127) • LL 0.685 (rasio periode 0.691) • p≥0.50 NAIK 67% (32/48) • p≥0.65 NAIK – • p<0.50 TURUN 53% (54/101) • p<0.35 TURUN 48% (14/29) • vs selalu-NAIK 54 vs sebaliknya 47 (p 0.55)
+   detik 2  ALL k1 LAMA     NET benar 57% (42/74) • LL 0.686 (rasio periode 0.692) • p≥0.50 NAIK 56% (18/32) • p≥0.65 NAIK – • p<0.50 TURUN 57% (33/58) • p<0.35 TURUN 55% (6/11) • vs selalu-NAIK 33 vs sebaliknya 25 (p 0.36)
+   detik 2  ALL k1 BARU     NET benar 68% (36/53) • LL 0.684 (rasio periode 0.669) • p≥0.50 NAIK 88% (14/16) • p≥0.65 NAIK – • p<0.50 TURUN 49% (21/43) • p<0.35 TURUN 44% (8/18) • vs selalu-NAIK 21 vs sebaliknya 22 (p 1.00)
+   detik 2  ALL k1 2024+    NET benar 68% (19/28) • LL 0.708 (rasio periode 0.483) • p≥0.50 NAIK 93% (13/14) • p≥0.65 NAIK – • p<0.50 TURUN 28% (5/18) • p<0.35 TURUN 38% (3/8) • vs selalu-NAIK 5 vs sebaliknya 13 (p 0.10)
+   detik 2  ALL k½ 2014–26  NET benar 66% (84/127) • LL 0.685 (rasio periode 0.691) • p≥0.50 NAIK 67% (32/48) • p≥0.65 NAIK – • p<0.50 TURUN 53% (54/101) • p<0.35 TURUN 67% (2/3) • vs selalu-NAIK 54 vs sebaliknya 47 (p 0.55)
+   detik 2  ALL k½ LAMA     NET benar 62% (46/74) • LL 0.686 (rasio periode 0.692) • p≥0.50 NAIK 56% (19/34) • p≥0.65 NAIK – • p<0.50 TURUN 57% (32/56) • p<0.35 TURUN – • vs selalu-NAIK 32 vs sebaliknya 24 (p 0.35)
+   detik 2  ALL k½ BARU     NET benar 72% (38/53) • LL 0.684 (rasio periode 0.669) • p≥0.50 NAIK 93% (13/14) • p≥0.65 NAIK – • p<0.50 TURUN 49% (22/45) • p<0.35 TURUN 67% (2/3) • vs selalu-NAIK 22 vs sebaliknya 23 (p 1.00)
+   detik 2  ALL k½ 2024+    NET benar 68% (19/28) • LL 0.700 (rasio periode 0.483) • p≥0.50 NAIK 100% (11/11) • p≥0.65 NAIK – • p<0.50 TURUN 29% (6/21) • p<0.35 TURUN 100% (2/2) • vs selalu-NAIK 6 vs sebaliknya 15 (p 0.08)
+   detik 2  5 k1   2014–26  NET benar 66% (84/127) • LL 0.677 (rasio periode 0.691) • p≥0.50 NAIK 64% (46/72) • p≥0.65 NAIK – • p<0.50 TURUN 57% (44/77) • p<0.35 TURUN 69% (9/13) • vs selalu-NAIK 44 vs sebaliknya 33 (p 0.25)
+   detik 2  5 k1   LAMA     NET benar 66% (49/74) • LL 0.685 (rasio periode 0.692) • p≥0.50 NAIK 54% (26/48) • p≥0.65 NAIK – • p<0.50 TURUN 60% (25/42) • p<0.35 TURUN 80% (4/5) • vs selalu-NAIK 25 vs sebaliknya 17 (p 0.28)
+   detik 2  5 k1   BARU     NET benar 66% (35/53) • LL 0.664 (rasio periode 0.669) • p≥0.50 NAIK 83% (20/24) • p≥0.65 NAIK – • p<0.50 TURUN 54% (19/35) • p<0.35 TURUN 62% (5/8) • vs selalu-NAIK 19 vs sebaliknya 16 (p 0.74)
+   detik 2  5 k1   2024+    NET benar 68% (19/28) • LL 0.669 (rasio periode 0.483) • p≥0.50 NAIK 94% (16/17) • p≥0.65 NAIK – • p<0.50 TURUN 33% (5/15) • p<0.35 TURUN 60% (3/5) • vs selalu-NAIK 5 vs sebaliknya 10 (p 0.30)
+   detik 2  5 k½   2014–26  NET benar 60% (76/127) • LL 0.683 (rasio periode 0.691) • p≥0.50 NAIK 59% (44/74) • p≥0.65 NAIK – • p<0.50 TURUN 53% (40/75) • p<0.35 TURUN 0% (0/1) • vs selalu-NAIK 40 vs sebaliknya 35 (p 0.64)
+   detik 2  5 k½   LAMA     NET benar 58% (43/74) • LL 0.689 (rasio periode 0.692) • p≥0.50 NAIK 50% (27/54) • p≥0.65 NAIK – • p<0.50 TURUN 56% (20/36) • p<0.35 TURUN – • vs selalu-NAIK 20 vs sebaliknya 16 (p 0.62)
+   detik 2  5 k½   BARU     NET benar 62% (33/53) • LL 0.675 (rasio periode 0.669) • p≥0.50 NAIK 85% (17/20) • p≥0.65 NAIK – • p<0.50 TURUN 51% (20/39) • p<0.35 TURUN 0% (0/1) • vs selalu-NAIK 20 vs sebaliknya 19 (p 1.00)
+   detik 2  5 k½   2024+    NET benar 61% (17/28) • LL 0.680 (rasio periode 0.483) • p≥0.50 NAIK 93% (14/15) • p≥0.65 NAIK – • p<0.50 TURUN 29% (5/17) • p<0.35 TURUN – • vs selalu-NAIK 5 vs sebaliknya 12 (p 0.14)
+   lonjakan ALL k1 2014–26  NET benar 61% (78/127) • LL 0.689 (rasio periode 0.682) • p≥0.50 NAIK 60% (50/84) • p≥0.65 NAIK 64% (9/14) • p<0.50 TURUN 45% (30/66) • p<0.35 TURUN 60% (3/5) • vs selalu-NAIK 30 vs sebaliknya 36 (p 0.54)
+   lonjakan ALL k1 LAMA     NET benar 57% (42/74) • LL 0.692 (rasio periode 0.686) • p≥0.50 NAIK 60% (31/52) • p≥0.65 NAIK 50% (2/4) • p<0.50 TURUN 49% (19/39) • p<0.35 TURUN 50% (1/2) • vs selalu-NAIK 19 vs sebaliknya 20 (p 1.00)
+   lonjakan ALL k1 BARU     NET benar 68% (36/53) • LL 0.683 (rasio periode 0.676) • p≥0.50 NAIK 59% (19/32) • p≥0.65 NAIK 70% (7/10) • p<0.50 TURUN 41% (11/27) • p<0.35 TURUN 67% (2/3) • vs selalu-NAIK 11 vs sebaliknya 16 (p 0.44)
+   lonjakan ALL k1 2024+    NET benar 68% (19/28) • LL 0.635 (rasio periode 0.643) • p≥0.50 NAIK 71% (15/21) • p≥0.65 NAIK 75% (6/8) • p<0.50 TURUN 45% (5/11) • p<0.35 TURUN 100% (2/2) • vs selalu-NAIK 5 vs sebaliknya 6 (p 1.00)
+   lonjakan ALL k½ 2014–26  NET benar 66% (84/127) • LL 0.680 (rasio periode 0.682) • p≥0.50 NAIK 61% (69/113) • p≥0.65 NAIK 33% (1/3) • p<0.50 TURUN 54% (20/37) • p<0.35 TURUN – • vs selalu-NAIK 20 vs sebaliknya 17 (p 0.74)
+   lonjakan ALL k½ LAMA     NET benar 62% (46/74) • LL 0.686 (rasio periode 0.686) • p≥0.50 NAIK 61% (46/76) • p≥0.65 NAIK 0% (0/1) • p<0.50 TURUN 67% (10/15) • p<0.35 TURUN – • vs selalu-NAIK 10 vs sebaliknya 5 (p 0.30)
+   lonjakan ALL k½ BARU     NET benar 72% (38/53) • LL 0.671 (rasio periode 0.676) • p≥0.50 NAIK 62% (23/37) • p≥0.65 NAIK 50% (1/2) • p<0.50 TURUN 45% (10/22) • p<0.35 TURUN – • vs selalu-NAIK 10 vs sebaliknya 12 (p 0.83)
+   lonjakan ALL k½ 2024+    NET benar 68% (19/28) • LL 0.634 (rasio periode 0.643) • p≥0.50 NAIK 74% (17/23) • p≥0.65 NAIK 50% (1/2) • p<0.50 TURUN 56% (5/9) • p<0.35 TURUN – • vs selalu-NAIK 5 vs sebaliknya 4 (p 1.00)
+   lonjakan 5 k1   2014–26  NET benar 66% (84/127) • LL 0.683 (rasio periode 0.682) • p≥0.50 NAIK 59% (63/107) • p≥0.65 NAIK 75% (12/16) • p<0.50 TURUN 47% (20/43) • p<0.35 TURUN 0% (0/1) • vs selalu-NAIK 20 vs sebaliknya 23 (p 0.76)
+   lonjakan 5 k1   LAMA     NET benar 66% (49/74) • LL 0.688 (rasio periode 0.686) • p≥0.50 NAIK 58% (42/73) • p≥0.65 NAIK 67% (2/3) • p<0.50 TURUN 50% (9/18) • p<0.35 TURUN – • vs selalu-NAIK 9 vs sebaliknya 9 (p 1.00)
+   lonjakan 5 k1   BARU     NET benar 66% (35/53) • LL 0.674 (rasio periode 0.676) • p≥0.50 NAIK 62% (21/34) • p≥0.65 NAIK 77% (10/13) • p<0.50 TURUN 44% (11/25) • p<0.35 TURUN 0% (0/1) • vs selalu-NAIK 11 vs sebaliknya 14 (p 0.69)
+   lonjakan 5 k1   2024+    NET benar 68% (19/28) • LL 0.617 (rasio periode 0.643) • p≥0.50 NAIK 71% (15/21) • p≥0.65 NAIK 73% (8/11) • p<0.50 TURUN 45% (5/11) • p<0.35 TURUN – • vs selalu-NAIK 5 vs sebaliknya 6 (p 1.00)
+   lonjakan 5 k½   2014–26  NET benar 60% (76/127) • LL 0.680 (rasio periode 0.682) • p≥0.50 NAIK 58% (77/133) • p≥0.65 NAIK 75% (3/4) • p<0.50 TURUN 47% (8/17) • p<0.35 TURUN – • vs selalu-NAIK 8 vs sebaliknya 9 (p 1.00)
+   lonjakan 5 k½   LAMA     NET benar 58% (43/74) • LL 0.687 (rasio periode 0.686) • p≥0.50 NAIK 56% (48/85) • p≥0.65 NAIK – • p<0.50 TURUN 50% (3/6) • p<0.35 TURUN – • vs selalu-NAIK 3 vs sebaliknya 3 (p 1.00)
+   lonjakan 5 k½   BARU     NET benar 62% (33/53) • LL 0.670 (rasio periode 0.676) • p≥0.50 NAIK 60% (29/48) • p≥0.65 NAIK 75% (3/4) • p<0.50 TURUN 45% (5/11) • p<0.35 TURUN – • vs selalu-NAIK 5 vs sebaliknya 6 (p 1.00)
+   lonjakan 5 k½   2024+    NET benar 61% (17/28) • LL 0.628 (rasio periode 0.643) • p≥0.50 NAIK 73% (19/26) • p≥0.65 NAIK 75% (3/4) • p<0.50 TURUN 67% (4/6) • p<0.35 TURUN – • vs selalu-NAIK 4 vs sebaliknya 2 (p 0.69)
+
+## TAHAP 4 — Pemeriksaan tambahan (setelah tahap 1–3)
+### a. Tebakan perkiraan INTI dipisah per arah (|selisih| ≥ 0,08) → kejutan inti & emas
+   DI ATAS   LAMA   n 8 kejutan inti atas 2 sesuai 3 bawah 3 | emas naik d1 50% (4/8) d2 50% (4/8) d10 62% (5/8) lonjakan 88% (7/8)
+   DI ATAS   BARU   n 3 kejutan inti atas 1 sesuai 1 bawah 1 | emas naik d1 33% (1/3) d2 67% (2/3) d10 67% (2/3) lonjakan 33% (1/3)
+   DI ATAS   2024+  n 3 kejutan inti atas 1 sesuai 1 bawah 1 | emas naik d1 33% (1/3) d2 67% (2/3) d10 67% (2/3) lonjakan 33% (1/3)
+   DI BAWAH  LAMA   n16 kejutan inti atas 0 sesuai 6 bawah 10 | emas naik d1 47% (7/15) d2 56% (9/16) d10 69% (11/16) lonjakan 75% (12/16)
+   DI BAWAH  BARU   n20 kejutan inti atas 5 sesuai 5 bawah 10 | emas naik d1 55% (11/20) d2 55% (11/20) d10 55% (11/20) lonjakan 70% (14/20)
+   DI BAWAH  2024+  n 6 kejutan inti atas 0 sesuai 1 bawah 5 | emas naik d1 100% (6/6) d2 100% (6/6) d10 83% (5/6) lonjakan 100% (6/6)
+   netral    LAMA   n42 kejutan inti atas 14 sesuai 13 bawah 15 | emas naik d1 48% (19/40) d2 46% (19/41) d10 50% (21/42) lonjakan 52% (22/42)
+   netral    BARU   n24 kejutan inti atas 8 sesuai 8 bawah 8 | emas naik d1 46% (11/24) d2 67% (16/24) d10 67% (16/24) lonjakan 62% (15/24)
+   netral    2024+  n19 kejutan inti atas 6 sesuai 6 bawah 7 | emas naik d1 53% (10/19) d2 74% (14/19) d10 68% (13/19) lonjakan 63% (12/19)
+### b. Kalibrasi Kalshi (1 jam sebelum tutup, 2022–2026): condong = P(atas) − P(bawah) → kejutan bulat nyata
+   total condong -1.0…-0.3 n 8: nyata atas   0% sesuai  12% bawah  88% | Kalshi P atas 0.12 P bawah 0.61
+   total condong -0.3…-0.1 n12: nyata atas  17% sesuai  50% bawah  33% | Kalshi P atas 0.15 P bawah 0.34
+   total condong -0.1…+0.1 n11: nyata atas  18% sesuai  55% bawah  27% | Kalshi P atas 0.26 P bawah 0.28
+   total condong +0.1…+0.3 n 6: nyata atas  50% sesuai  33% bawah  17% | Kalshi P atas 0.38 P bawah 0.18
+   total condong +0.3…+1.0 n11: nyata atas  45% sesuai  36% bawah  18% | Kalshi P atas 0.56 P bawah 0.14
+   inti  condong -1.0…-0.3 n 8: nyata atas   0% sesuai  38% bawah  62% | Kalshi P atas 0.10 P bawah 0.54
+   inti  condong -0.3…-0.1 n11: nyata atas  18% sesuai  36% bawah  45% | Kalshi P atas 0.17 P bawah 0.36
+   inti  condong -0.1…+0.1 n12: nyata atas  33% sesuai  50% bawah  17% | Kalshi P atas 0.30 P bawah 0.28
+   inti  condong +0.1…+0.3 n 8: nyata atas  25% sesuai  25% bawah  50% | Kalshi P atas 0.39 P bawah 0.20
+   inti  condong +0.3…+1.0 n 9: nyata atas  67% sesuai  22% bawah  11% | Kalshi P atas 0.53 P bawah 0.11
+### c. ANCHORING (tren inflasi naik → kejutan di atas?) — tebakan = tanda tren
+   TREN_c   → s_core 2014–26 47% (46/97) | LAMA 51% (30/59) | BARU 42% (16/38) | 2024+ 33% (7/21)
+   TREN_c   → net    2014–26 47% (60/127) | LAMA 50% (37/74) | BARU 43% (23/53) | 2024+ 36% (10/28)
+   TREN_h   → s_core 2014–26 47% (46/97) | LAMA 53% (31/59) | BARU 39% (15/38) | 2024+ 29% (6/21)
+   TREN_h   → net    2014–26 46% (59/127) | LAMA 47% (35/74) | BARU 45% (24/53) | 2024+ 29% (8/28)
+   TREN_yy  → s_core 2014–26 50% (48/96) | LAMA 47% (28/59) | BARU 54% (20/37) | 2024+ 40% (8/20)
+   TREN_yy  → net    2014–26 50% (63/125) | LAMA 47% (35/74) | BARU 55% (28/51) | 2024+ 42% (11/26)
+### d. Musiman sisa: kejutan inti per bulan acuan (atas / sesuai / bawah), LAMA | BARU
+   bulan  1: 5/3/1 | 3/2/0
+   bulan  2: 2/5/2 | 2/2/1
+   bulan  3: 2/2/3 | 1/1/3
+   bulan  4: 3/1/5 | 3/1/1
+   bulan  5: 3/2/4 | 1/1/3
+   bulan  6: 3/4/2 | 1/0/4
+   bulan  7: 2/1/5 | 0/4/1
+   bulan  8: 3/3/3 | 4/1/0
+   bulan  9: 1/1/6 | 2/2/1
+   bulan 10: 0/6/2 | 1/1/2
+   bulan 11: 2/5/1 | 0/4/1
+   bulan 12: 1/4/4 | 1/2/2
+### e. Per tahun: porsi kejutan NET di bawah / di atas & emas naik (dari mana 'selalu NAIK' datang)
+   2013: bawah  55% atas  27% | emas naik d2 45% (5/11) lonjakan 45% (5/11)
+   2014: bawah  42% atas  33% | emas naik d2 50% (6/12) lonjakan 50% (6/12)
+   2015: bawah  42% atas  50% | emas naik d2 42% (5/12) lonjakan 50% (6/12)
+   2016: bawah  58% atas  33% | emas naik d2 58% (7/12) lonjakan 50% (6/12)
+   2017: bawah  55% atas  27% | emas naik d2 36% (4/11) lonjakan 55% (6/11)
+   2018: bawah  42% atas  25% | emas naik d2 64% (7/11) lonjakan 67% (8/12)
+   2019: bawah  33% atas  42% | emas naik d2 42% (5/12) lonjakan 58% (7/12)
+   2020: bawah  36% atas  45% | emas naik d2 64% (7/11) lonjakan 64% (7/11)
+   2021: bawah  33% atas  58% | emas naik d2 33% (4/12) lonjakan 58% (7/12)
+   2022: bawah  33% atas  58% | emas naik d2 33% (4/12) lonjakan 50% (6/12)
+   2023: bawah  42% atas  50% | emas naik d2 33% (4/12) lonjakan 50% (6/12)
+   2024: bawah  33% atas  50% | emas naik d2 58% (7/12) lonjakan 58% (7/12)
+   2025: bawah  82% atas  18% | emas naik d2 91% (10/11) lonjakan 82% (9/11)
+   2026: bawah  56% atas  22% | emas naik d2 100% (9/9) lonjakan 56% (5/9)
+
+## HARI INI — CPI 2026-10-14 (bulan acuan Sep 2026); konsensus {'mm_f': 0.6, 'core_f': 0.2, 'yy_f': 3.6}
+   bensin EIA +7.3% − musiman -2.4 → bensin SA +9.8% | avtur +17.8% | inti 1/3/6 bln 0.29/0.16/0.21 | shelter 3 bln 0.17 | mobil bekas +0.37 | Manheim tidak ada (xlsx s/d Nov 2025)
+   PERKIRAAN total fisik 0.50 • fit 0.59 | inti fit 0.29 | y/y tersirat fit 3.70
+   sumber: {'kal_h': -1.0, 'kal_c': 0.0, 'SUARA_IDX': 0.0, 'now_c': 1.0, 'now_h': 0.0, 'YOY': 1.0, 'P_core': 1.0, 'P_mm': 0.0, 'P_yy': 0.0, 'KON': 1.0, 'JAN': 0.0}
+   detik 2  ALL k1 P(net atas) 0.63 sesuai 0.15 bawah 0.23 → P(emas naik) 0.41
+   detik 2  ALL k½ P(net atas) 0.51 sesuai 0.15 bawah 0.34 → P(emas naik) 0.47
+   detik 2  5 k1   P(net atas) 0.51 sesuai 0.15 bawah 0.34 → P(emas naik) 0.47
+   lonjakan ALL k1 P(net atas) 0.63 sesuai 0.15 bawah 0.23 → P(emas naik) 0.44
+   lonjakan ALL k½ P(net atas) 0.51 sesuai 0.15 bawah 0.34 → P(emas naik) 0.51
+   lonjakan 5 k1   P(net atas) 0.51 sesuai 0.15 bawah 0.34 → P(emas naik) 0.51

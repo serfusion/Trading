@@ -1,0 +1,90 @@
+# 🧱 PPI dari dasar (research/ppi_dasar.py)
+python -m research.ppi_dasar            → docs/eksternal/hasil_ppi_dasar.txt
+Pasangan research/cpi_dasar.py untuk PPI final demand. Tanggal rilis = hari pertama bulan acuan muncul di ALFRED PPIFIS
+(rilis pertama; 08:30 New York), Mar 2014 – Sep 2026. Konsensus & aktual bulat: ForexFactory mentah, cadangan Nasdaq.
+Angka sebenarnya = versi hari rilis (rekonstruksi diuji terhadap aktual kalender). Target emas = tick Exness
+(research/riset_dalam_data.satu: lonjakan menit 1, detik 1/2/5/10), 2016+.
+   rekonstruksi head_act cocok angka bulat kalender: 99% (148/149)
+   rekonstruksi core_act cocok angka bulat kalender: 99% (148/149)
+   rilis 150 (2014-03-14 … 2026-09-10), bertick 126, CPI bulan sama sudah terbit sebelum PPI: 74
+
+## TAHAP 0 — PETA MEKANISME: kejutan bulat → emas naik (detik 2 / lonjakan menit 1)
+   kelompok          LAMA d2 / lonjakan              BARU d2 / lonjakan              2024+ d2 / lonjakan
+   net DI BAWAH      75% (21/28) /  86% (24/28)    91% (31/34) /  91% (31/34)    94% (17/18) /  94% (17/18)
+   net SESUAI       100% (4/4) /  25% (1/4)    50% (1/2) /   0% (0/2)    50% (1/2) /   0% (0/2)
+   net DI ATAS       42% (15/36) /  31% (11/36)    23% (5/22) /  14% (3/22)    33% (4/12) /  17% (2/12)
+   inti di bawah     75% (18/24) /  88% (21/24)    93% (26/28) /  89% (25/28)   100% (16/16) /  94% (15/16)
+   inti sesuai       89% (8/9) /  67% (6/9)    64% (7/11) /  73% (8/11)    60% (3/5) /  80% (4/5)
+   inti di atas      38% (13/34) /  26% (9/34)    22% (4/18) /   6% (1/18)    30% (3/10) /   0% (0/10)
+   total di bawah    82% (18/22) /  86% (19/22)    88% (23/26) /  96% (25/26)    93% (14/15) / 100% (15/15)
+   total di atas     45% (15/33) /  36% (12/33)    30% (7/23) /  13% (3/23)    38% (5/13) /  15% (2/13)
+   SEMUA             59% (40/68) /  53% (36/68)    64% (37/58) /  59% (34/58)    69% (22/32) /  59% (19/32)
+   porsi net di bawah • sesuai • di atas: LAMA 41% • 4% • 54% | BARU 60% • 2% • 38% | 2024+ 58% • 3% • 39%
+
+## TAHAP 1 — ANGKA: perkiraan bottom-up vs konsensus
+
+### TOTAL m/m
+   2016–26  n 114 RMSE konsensus 0.303 • fisik 1.012 • fit 0.369 | encompassing fisik b +0.07 (t +2.5, n 114) • fit b +0.13 (t +1.0, n 114)
+   LAMA     n  56 RMSE konsensus 0.278 • fisik 1.058 • fit 0.364 | encompassing fisik b +0.03 (t +0.9, n 56) • fit b +0.10 (t +0.6, n 56)
+   BARU     n  58 RMSE konsensus 0.326 • fisik 0.965 • fit 0.373 | encompassing fisik b +0.10 (t +2.6, n 58) • fit b +0.17 (t +0.8, n 58)
+   2024+    n  31 RMSE konsensus 0.350 • fisik 1.025 • fit 0.341 | encompassing fisik b +0.04 (t +0.7, n 31) • fit b +0.80 (t +1.8, n 31)
+   head_fis  ≥0.05: 2016–26 ATAS 65% (35/54) | 2016–26 BAWAH 57% (28/49) | LAMA ATAS 63% (19/30) | LAMA BAWAH 39% (9/23) | BARU ATAS 67% (16/24) | BARU BAWAH 73% (19/26) | 2024+ ATAS 69% (9/13) | 2024+ BAWAH 73% (11/15)
+   head_fit  ≥0.05: 2016–26 ATAS 79% (19/24) | 2016–26 BAWAH 51% (29/57) | LAMA ATAS 85% (11/13) | LAMA BAWAH 42% (11/26) | BARU ATAS 73% (8/11) | BARU BAWAH 58% (18/31) | 2024+ ATAS 75% (3/4) | 2024+ BAWAH 60% (12/20)
+   head_fis  ≥0.08: 2016–26 ATAS 65% (34/52) | 2016–26 BAWAH 57% (27/47) | LAMA ATAS 62% (18/29) | LAMA BAWAH 41% (9/22) | BARU ATAS 70% (16/23) | BARU BAWAH 72% (18/25) | 2024+ ATAS 75% (9/12) | 2024+ BAWAH 71% (10/14)
+   head_fit  ≥0.08: 2016–26 ATAS 74% (14/19) | 2016–26 BAWAH 59% (26/44) | LAMA ATAS 78% (7/9) | LAMA BAWAH 48% (10/21) | BARU ATAS 70% (7/10) | BARU BAWAH 70% (16/23) | 2024+ ATAS 67% (2/3) | 2024+ BAWAH 73% (11/15)
+   head_fis  ≥0.10: 2016–26 ATAS 65% (34/52) | 2016–26 BAWAH 58% (26/45) | LAMA ATAS 62% (18/29) | LAMA BAWAH 40% (8/20) | BARU ATAS 70% (16/23) | BARU BAWAH 72% (18/25) | 2024+ ATAS 75% (9/12) | 2024+ BAWAH 71% (10/14)
+   head_fit  ≥0.10: 2016–26 ATAS 72% (13/18) | 2016–26 BAWAH 60% (24/40) | LAMA ATAS 75% (6/8) | LAMA BAWAH 50% (9/18) | BARU ATAS 70% (7/10) | BARU BAWAH 68% (15/22) | 2024+ ATAS 67% (2/3) | 2024+ BAWAH 71% (10/14)
+
+### INTI m/m
+   2016–26  n 114 RMSE konsensus 0.270 • fisik 0.305 • fit 0.296 | encompassing fisik b -0.13 (t -0.6, n 114) • fit b +0.35 (t +2.8, n 114)
+   LAMA     n  56 RMSE konsensus 0.254 • fisik 0.297 • fit 0.268 | encompassing fisik b -0.15 (t -0.6, n 56) • fit b +0.48 (t +3.2, n 56)
+   BARU     n  58 RMSE konsensus 0.284 • fisik 0.312 • fit 0.322 | encompassing fisik b -0.09 (t -0.3, n 58) • fit b +0.19 (t +1.0, n 58)
+   2024+    n  31 RMSE konsensus 0.326 • fisik 0.338 • fit 0.315 | encompassing fisik b +0.22 (t +0.4, n 31) • fit b +0.82 (t +1.4, n 31)
+   core_fis  ≥0.05: 2016–26 ATAS 42% (15/36) | 2016–26 BAWAH 41% (13/32) | LAMA ATAS 47% (8/17) | LAMA BAWAH 30% (6/20) | BARU ATAS 37% (7/19) | BARU BAWAH 58% (7/12) | 2024+ ATAS 44% (4/9) | 2024+ BAWAH 71% (5/7)
+   core_fit  ≥0.05: 2016–26 ATAS 62% (16/26) | 2016–26 BAWAH 59% (30/51) | LAMA ATAS 92% (12/13) | LAMA BAWAH 50% (13/26) | BARU ATAS 31% (4/13) | BARU BAWAH 68% (17/25) | 2024+ ATAS 29% (2/7) | 2024+ BAWAH 73% (8/11)
+   core_fis  ≥0.08: 2016–26 ATAS 41% (12/29) | 2016–26 BAWAH 42% (11/26) | LAMA ATAS 50% (7/14) | LAMA BAWAH 35% (6/17) | BARU ATAS 33% (5/15) | BARU BAWAH 56% (5/9) | 2024+ ATAS 43% (3/7) | 2024+ BAWAH 71% (5/7)
+   core_fit  ≥0.08: 2016–26 ATAS 58% (14/24) | 2016–26 BAWAH 63% (27/43) | LAMA ATAS 91% (10/11) | LAMA BAWAH 55% (12/22) | BARU ATAS 31% (4/13) | BARU BAWAH 71% (15/21) | 2024+ ATAS 29% (2/7) | 2024+ BAWAH 75% (6/8)
+   core_fis  ≥0.10: 2016–26 ATAS 38% (9/24) | 2016–26 BAWAH 48% (10/21) | LAMA ATAS 54% (7/13) | LAMA BAWAH 38% (5/13) | BARU ATAS 18% (2/11) | BARU BAWAH 62% (5/8) | 2024+ ATAS 33% (2/6) | 2024+ BAWAH 71% (5/7)
+   core_fit  ≥0.10: 2016–26 ATAS 57% (12/21) | 2016–26 BAWAH 63% (26/41) | LAMA ATAS 90% (9/10) | LAMA BAWAH 57% (12/21) | BARU ATAS 27% (3/11) | BARU BAWAH 70% (14/20) | 2024+ ATAS 20% (1/5) | 2024+ BAWAH 71% (5/7)
+
+### Komponen (korelasi petunjuk → angka komponen rilis pertama, 2014–26)
+   en_act    ← e13       r +0.79 (n 150)
+   en_act    ← emon      r +0.73 (n 150)
+   trade_act ← marg      r +0.14 (n 150)
+   trade_act ← trade_l1  r -0.04 (n 149)
+   pm_act    ← sp_mm     r +0.24 (n 136)
+   pm_act    ← sp_mm1    r +0.64 (n 136)
+   trans_act ← jet_mm    r +0.34 (n 150)
+   core_act  ← cpi_core  r +0.44 (n 74)
+   head_act  ← cpi_head  r +0.75 (n 74)
+   cg_act    ← cpi_cg    r +0.56 (n 74)
+   core_act  ← core_l3   r +0.31 (n 150)
+
+## TAHAP 2 — EMAS saat perkiraan berkata DI ATAS / DI BAWAH (selisih ≥ 0,08) vs selalu-NAIK
+   head_fit  ATAS (emas ↓)   2016–26 n23 d1  48% (11/23) d2  52% (12/23) lonjakan  48% (11/23) | LAMA n12 d1  42% (5/12) d2  42% (5/12) lonjakan  42% (5/12) | BARU n11 d1  55% (6/11) d2  64% (7/11) lonjakan  55% (6/11) | 2024+ n3 d1  33% (1/3) d2 100% (3/3) lonjakan  67% (2/3)
+   head_fit  BAWAH (emas ↑)  2016–26 n52 d1  51% (26/51) d2  75% (38/51) lonjakan  69% (35/51) | LAMA n25 d1  58% (14/24) d2  75% (18/24) lonjakan  62% (15/24) | BARU n27 d1  44% (12/27) d2  74% (20/27) lonjakan  74% (20/27) | 2024+ n16 d1  56% (9/16) d2  81% (13/16) lonjakan  81% (13/16)
+   head_fit  netral          2016–26 n39 d1  47% (18/38) d2  50% (19/38) lonjakan  45% (17/38) | LAMA n19 d1  42% (8/19) d2  47% (9/19) lonjakan  47% (9/19) | BARU n20 d1  53% (10/19) d2  53% (10/19) lonjakan  42% (8/19) | 2024+ n12 d1  58% (7/12) d2  50% (6/12) lonjakan  33% (4/12)
+   core_fit  ATAS (emas ↓)   2016–26 n26 d1  48% (12/25) d2  64% (16/25) lonjakan  56% (14/25) | LAMA n12 d1  50% (6/12) d2  58% (7/12) lonjakan  42% (5/12) | BARU n14 d1  46% (6/13) d2  69% (9/13) lonjakan  69% (9/13) | 2024+ n7 d1  43% (3/7) d2  71% (5/7) lonjakan  71% (5/7)
+   core_fit  BAWAH (emas ↑)  2016–26 n50 d1  45% (22/49) d2  63% (31/49) lonjakan  61% (30/49) | LAMA n24 d1  52% (12/23) d2  61% (14/23) lonjakan  65% (15/23) | BARU n26 d1  38% (10/26) d2  65% (17/26) lonjakan  58% (15/26) | 2024+ n10 d1  40% (4/10) d2  90% (9/10) lonjakan  60% (6/10)
+   core_fit  netral          2016–26 n38 d1  55% (21/38) d2  58% (22/38) lonjakan  50% (19/38) | LAMA n20 d1  45% (9/20) d2  55% (11/20) lonjakan  45% (9/20) | BARU n18 d1  67% (12/18) d2  61% (11/18) lonjakan  56% (10/18) | 2024+ n14 d1  71% (10/14) d2  57% (8/14) lonjakan  57% (8/14)
+   head_fis  ATAS (emas ↓)   2016–26 n62 d1  51% (31/61) d2  57% (35/61) lonjakan  43% (26/61) | LAMA n35 d1  53% (18/34) d2  59% (20/34) lonjakan  47% (16/34) | BARU n27 d1  48% (13/27) d2  56% (15/27) lonjakan  37% (10/27) | 2024+ n14 d1  57% (8/14) d2  57% (8/14) lonjakan  36% (5/14)
+   head_fis  BAWAH (emas ↑)  2016–26 n56 d1  51% (28/55) d2  65% (36/55) lonjakan  71% (39/55) | LAMA n27 d1  52% (14/27) d2  59% (16/27) lonjakan  63% (17/27) | BARU n29 d1  50% (14/28) d2  71% (20/28) lonjakan  79% (22/28) | 2024+ n15 d1  53% (8/15) d2  80% (12/15) lonjakan  80% (12/15)
+   head_fis  netral          2016–26 n8 d1  38% (3/8) d2  62% (5/8) lonjakan  62% (5/8) | LAMA n6 d1  33% (2/6) d2  50% (3/6) lonjakan  50% (3/6) | BARU n2 d1  50% (1/2) d2 100% (2/2) lonjakan 100% (2/2) | 2024+ n2 d1  50% (1/2) d2 100% (2/2) lonjakan 100% (2/2)
+
+## TAHAP 3 — CPI bulan sama terbit LEBIH DULU (75 rilis): kejutan CPI → kejutan PPI & emas saat PPI
+   CPI total → PPI total searah: LAMA 58% (7/12) | BARU 72% (18/25)
+   CPI total → PPI inti searah: LAMA 64% (9/14) | BARU 68% (17/25)
+   CPI inti → PPI total searah: LAMA 54% (7/13) | BARU 69% (20/29)
+   CPI inti → PPI inti searah: LAMA 71% (10/14) | BARU 74% (20/27)
+   CPI inti di bawah → emas naik saat PPI: LAMA d2  50% (4/8) lonjakan  50% (4/8) | BARU d2  76% (13/17) lonjakan  76% (13/17)
+   CPI inti sesuai   → emas naik saat PPI: LAMA d2  89% (8/9) lonjakan  78% (7/9) | BARU d2  50% (8/16) lonjakan  50% (8/16)
+   CPI inti di atas  → emas naik saat PPI: LAMA d2  57% (4/7) lonjakan  43% (3/7) | BARU d2  62% (10/16) lonjakan  50% (8/16)
+
+## HARI INI — PPI 2026-10-15 (bulan acuan Sep 2026); konsensus {'h_f': 0.5, 'c_f': 0.3}
+   energi grosir tgl 13 +15.9% • sebulan +14.8% • avtur +17.8% • margin BBM -0.112 $/gal • S&P bulan t -0.5% / t−1 +3.1% • PPI inti 1/3 bln 0.16/0.28 • makanan 3 bln -0.46
+   perkiraan total fisik 1.79
+   sebelum CPI terbit: PPI total fit 0.32 (konsensus 0.5) • inti fit 0.24 (konsensus 0.3)
+   bila CPI Sep total 0.4 / inti 0.1: PPI total fit 0.39 (konsensus 0.5) • inti fit 0.22 (konsensus 0.3)
+   bila CPI Sep total 0.6 / inti 0.2: PPI total fit 0.52 (konsensus 0.5) • inti fit 0.23 (konsensus 0.3)
+   bila CPI Sep total 0.6 / inti 0.3: PPI total fit 0.52 (konsensus 0.5) • inti fit 0.24 (konsensus 0.3)
+   bila CPI Sep total 0.8 / inti 0.3: PPI total fit 0.66 (konsensus 0.5) • inti fit 0.24 (konsensus 0.3)

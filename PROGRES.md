@@ -335,3 +335,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt ("yakin tidak ada yang terlewat?", "uji juga PPI"): `research/audit_cpi2.py` (plasebo berita & waktu, per tahun,
   Bonferroni, jam rilis, CPI & PPI) + pembanding selalu-NAIK per arah: CPI 2024+ selalu-NAIK 81% (aturan belum terbukti lebih
   baik); PPI tebakan TURUN detik 2 39% (2024+ 30%). Uji maju otomatis CPI/PPI (`arsip_data.pra`, `uji_maju_berita.py`).
+- 13 Okt ("riset hanya sebatas selalu buy? tidak mendasar"): riset DARI DASAR `research/cpi_dasar_data.py` (ALFRED 34 seri
+  komponen, versi hari itu), `research/cpi_dasar.py`, `research/ppi_dasar.py` → docs/CPI_PPI_DASAR.md. Mekanisme kejutan→emas
+  kuat & asimetris; konsensus > semua nowcast; rantai Bayes ≠ lebih baik dari selalu-NAIK; tebakan inti CPI DI ATAS 3/7;
+  CPI→PPI inti searah 71/74%. 14 Okt: petunjuk berlawanan → P(naik) 41–51% → saran lewati. Usulan tampilan menunggu "pasang".
