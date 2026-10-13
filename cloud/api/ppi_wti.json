@@ -65,5 +65,32 @@
    "n_baru": 35
   }
  },
- "verifikasi": "ambang 3–10% 66–71%; rata sebulan 66%; Dukascopy 66%; p keluarga 0,004/0,009; tanpa look-ahead"
+ "verifikasi": "ambang 3–10% 66–71%; rata sebulan 66%; Dukascopy 66%; p keluarga 0,004/0,009; tanpa look-ahead",
+ "cpi_ppi": {
+  "n": 52,
+  "sepakat": {
+   "semua": 73.7,
+   "n_semua": 19,
+   "lama": 60.0,
+   "n_lama": 5,
+   "baru": 78.6,
+   "n_baru": 14
+  },
+  "sesuai": {
+   "semua": 82.4,
+   "n_semua": 17,
+   "lama": 50.0,
+   "n_lama": 6,
+   "baru": 100.0,
+   "n_baru": 11
+  },
+  "berlawanan": {
+   "semua": 43.8,
+   "n_semua": 16,
+   "lama": 42.9,
+   "n_lama": 7,
+   "baru": 44.4,
+   "n_baru": 9
+  }
+ }
 }

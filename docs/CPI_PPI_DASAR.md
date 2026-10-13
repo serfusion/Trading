@@ -246,3 +246,68 @@ Kode: `research/cpi_skenario.py`. Hasil: `docs/eksternal/hasil_cpi_skenario.txt`
 5. **Tampilan aplikasi** "CPI ▲ NAIK 68%" searah dengan hasil ini, jadi tidak perlu diubah. Yang perlu ditambahkan di
    aba-aba: "tutup detik 2" (menunggu "pasang").
 6. **PPI 15 Okt:** masuk hanya bila CPI inti keluar ≤ 0,1 (emas naik saat PPI 76% BARU, LAMA 50%). Selain itu lewati.
+
+## 8. DIPASANG 13 Okt malam (izin pengguna "Pasang! … otomatis jika sudah keluar") — dan koreksi bagian 7
+
+### Koreksi: mesin skenario GAGAL uji tutup kertas, tidak dipasang
+
+`research/cpi_skenario.py` bagian D: 46 rilis 2022–2026 dengan pasar Kalshi total & inti. Sel dan frekuensi diambil hanya
+dari rilis sebelumnya.
+
+| Metode | Arah detik 2 benar | $/oz rata-rata |
+|---|---|---|
+| Mesin skenario (4 varian) | 52–59% | +0,6…+1,3 |
+| **Aturan aplikasi IDX|K** | **76% (31/41)** | **+1,67** |
+| Selalu BUY | 67% | +0,91 |
+
+Anjuran di bagian 7 ("BUY tutup detik 2" dari mesin skenario) dicabut sebagai dasar. Aturan aplikasi tetap menjadi penentu
+arah.
+
+### Yang lolos uji dan dipasang
+
+**1. Perbaikan data pasar Kalshi** (`cloud/api/_kalshi.fetch`)
+- API `status=open` mengembalikan 0 event untuk KXCPICORE & KXCPIYOY. Akibatnya cloud tidak pernah membaca pasar inti dan
+  y/y, sehingga saringan "Kalshi inti berlawanan" dan situasi ⚖️ inti tidak pernah aktif.
+- Kini pasar diambil tanpa filter lalu disaring status active/open, dengan 1× ulang bila kena batas laju (429) dan cache
+  60 detik.
+
+**2. Konsistensi inti (YOYc)** (`_cpi_detik.yoyc` / `pakai_yoyc`, `cpi_detik.json["yoyc"]` dari `cpi_skenario simpan`, env
+`CPI_YOYC`)
+- Tebakan aplikasi NAIK saat konsensus inti y/y > tersirat (selisih ≤ −0,03), tutup kertas:
+
+  | Tebakan NAIK | n | Detik 2 benar | Tutup detik 2 | Lentur |
+  |---|---|---|---|---|
+  | YOYc −1 (semua) | 11 | 55% | −$0,12 | **−$3,29** |
+  | YOYc −1, LAMA | 6 | 33% | −0,78 | −0,60 |
+  | YOYc −1, BARU | 5 | 80% | +0,66 | **−6,51** |
+  | Biasa (semua) | 42 | 71% | +1,48 | +4,00 |
+  | Biasa, LAMA | 20 | 60% | −0,63 | −0,04 |
+  | Biasa, BARU | 22 | 82% | +3,40 | +7,66 |
+
+- Lentur jauh lebih buruk dari biasa di KEDUA periode.
+- → Tebakan tetap tampil tetapi **⚠️ lemah** (persen 55%, kurva per detik dari situasi ini). 💥 Modal kecil: "JANGAN • bila
+  tetap masuk BUY: TUTUP detik 2, jangan lentur" (`allin.keluar = detik2`).
+- Baris 🧮 "inti y/y tersirat … → inti m/m jarang DI BAWAH (dulu 3 dari 33 rilis)" di 🔄 Data terbaru.
+- Baris ⚖️ lama disembunyikan bila YOYc aktif, karena situasinya lebih khusus.
+
+**3. PPI diperbarui setelah CPI** (`_ppi_wti.cpi_inti` / `pakai_cpi`, `ppi_wti.json["cpi_ppi"]` dari `ppi_dasar simpan`,
+env `PPI_CPI`)
+- Kartu "Core CPI m/m" yang sudah rilis (Act & perkiraan, ≤ 4 hari sebelum PPI) mengubah tebakan PPI-WTI:
+
+  | Kejutan inti CPI vs tebakan PPI-WTI | Benar | LAMA | BARU |
+  |---|---|---|---|
+  | Searah | 74% (n 19) | 60% | 79% |
+  | CPI inti sesuai perkiraan | 82% (n 17) | 50% | 100% |
+  | Berlawanan | 44% (n 16) → ⚠️ lemah | 43% | 44% |
+
+**Hasil langsung 13 Okt 21:20 WIB** (data Nasdaq + Kalshi asli):
+- Baris CPI: "**CPI ▲ NAIK 54% (detik 2) ⚠️**".
+- Alasan: "inti m/m jarang di bawah perkiraan (konsensus inti y/y 2,5% > tersirat 2,43%)".
+- 💥 Modal kecil: JANGAN (bila masuk: tutup detik 2).
+
+**PPI 15 Okt:** tebakan TURUN (minyak +17,5%) otomatis menjadi:
+- 74% bila CPI inti 0,3;
+- 82% bila 0,2;
+- ⚠️ 44% bila 0,1.
+
+Uji maju otomatis tetap berjalan (`research/uji_maju_berita.py`).

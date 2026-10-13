@@ -94,3 +94,29 @@ def test_env_mati(monkeypatch):
     prep = kartu()
     _ppi_wti.attach(prep, Toko(), NOW, lambda *a, **k: None, env={})
     assert "ppi_wti" not in prep["mendatang"][0]
+
+
+def cpi_kartu(actual, forecast="0.2%"):
+    return {"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00", "released": True, "actual": actual,
+            "forecast": forecast}
+
+
+def test_setelah_cpi_inti_tebakan_ppi_diperbarui_otomatis():
+    # 13 Okt (izin "Pasang! … otomatis jika sudah keluar"): minyak naik → tebakan TURUN; CPI inti kemarin menentukan persen
+    cp = _ppi_wti.DATA["cpi_ppi"]
+    t0 = datetime.fromisoformat(T0)
+    g = _ppi_wti.tebak(t0, deret(80.0, 90.0))
+    for act, rel in (("0.3%", "sepakat"), ("0.2%", "sesuai"), ("0.1%", "berlawanan")):
+        prep = {"berita": [cpi_kartu(act)]}
+        h = _ppi_wti.pakai_cpi(g, _ppi_wti.cpi_inti(prep, t0))
+        assert h["cpi_inti"]["hubungan"] == rel and h["persen"] == round(cp[rel]["semua"]) and h["arah"] == "turun"
+        assert h["bukti"].startswith("🔗 CPI inti") and (h["status"] == "lemah") == (rel == "berlawanan")
+    assert _ppi_wti.cpi_inti({"berita": [{**cpi_kartu("0.3%"), "released": False}]}, t0) is None
+    assert _ppi_wti.cpi_inti({"berita": [cpi_kartu("")]}, t0) is None
+
+
+def test_setelah_cpi_env_mati(monkeypatch):
+    monkeypatch.setenv("PPI_CPI", "0")
+    t0 = datetime.fromisoformat(T0)
+    g = _ppi_wti.tebak(t0, deret(80.0, 90.0))
+    assert _ppi_wti.pakai_cpi(g, _ppi_wti.cpi_inti({"berita": [cpi_kartu("0.1%")]}, t0)) is g

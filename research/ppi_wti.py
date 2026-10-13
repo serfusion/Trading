@@ -49,6 +49,8 @@ def main() -> dict:
            "ambang": 5.0, "lonjakan": {k: {"persen": v[0], "n": v[1]} for k, v in lj.items()},
            "per_detik": kurva, "allin_lentur": allin,
            "verifikasi": "ambang 3–10% 66–71%; rata sebulan 66%; Dukascopy 66%; p keluarga 0,004/0,009; tanpa look-ahead"}
+    lama_isi = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
+    out.update({k: lama_isi[k] for k in ("cpi_ppi",) if k in lama_isi})     # dari research/ppi_dasar.py simpan
     OUT.write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(out, ensure_ascii=False, indent=1))
     return out

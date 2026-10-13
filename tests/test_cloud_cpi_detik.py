@@ -48,8 +48,8 @@ def test_nasdaq_urutan_terbalik_dikenali():
 
 def test_kalshi_cadangan_bila_indeks_kosong():
     prep = kartu()
-    rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
-            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+    rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),     # inti y/y 2,4 = konsisten (YOYc diam)
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.4%", "2.4%")]
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI)
     g = prep["mendatang"][0]["cpi_detik"]
     assert g["jalur"] == "kalshi" and g["arah"] == "naik" and g["status"] == "tutup kertas"
@@ -210,7 +210,7 @@ def test_tren200_dan_cache():
 def test_allin_tebakan_kuat_masuk_tutup_detik_2():
     prep = kartu()
     rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.7%", "3.4%"),    # y/y ≈ tersirat → situasi sepakat
-            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.4%", "2.4%")]
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI)
     _pra_aset.attach(prep, NOW, None)
     a = prep["pra_satu"]["allin"]
@@ -266,12 +266,13 @@ YOY_ATAS = [mky(3.5, 0.88), mky(3.6, 0.51), mky(3.7, 0.11)]
 
 
 def test_terbaru_konsensus_kalshi_yoy_dan_situasi_14okt():
-    # 13 Okt (pengguna: "selalu cek forecast, konsensus, dll agar persentase berubah up to date"): konsensus 0,6/3,6/0,2/2,5
+    # 13 Okt (pengguna: "selalu cek forecast, konsensus, dll agar persentase berubah up to date"): konsensus 0,6/3,6/0,2/2,4
+    # (inti y/y 2,4 = konsisten; versi 2,5 = YOYc −1 diuji di test_yoyc_naik_jadi_lemah…)
     # → y/y tersirat 3,71% > 3,6% (berlawanan dengan tebakan NAIK) & Kalshi inti condong di atas → sel "keduanya" n < 10
     # → pakai sel "y/y berlawanan" (n ≥ 10), bukan persen 4 rilis
     prep = kartu()
     rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
-            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.4%", "2.4%")]
     get = lambda s: {"KXCPI": KALSHI, "KXCPICORE": CORE_ATAS, "KXCPIYOY": YOY_ATAS}.get(s, [])   # noqa: E731
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=get)
     g = prep["mendatang"][0]["cpi_detik"]
@@ -280,7 +281,7 @@ def test_terbaru_konsensus_kalshi_yoy_dan_situasi_14okt():
     assert set(tb["kalshi"]) == {"m/m", "inti", "y/y"} and tb["situasi"] == "keduanya"
     kf = _cpi_detik.DATA["konflik"]
     assert kf["naik_keduanya"]["d2"]["n"] < 10 and tb["n_situasi"] == kf["naik_yoy"]["d2"]["n"] >= 10
-    assert "perkiraan m/m 0,6% • y/y 3,6% • inti 0,2% / 2,5%" in tb["teks"] and "y/y condong DI ATAS" in tb["teks"]
+    assert "perkiraan m/m 0,6% • y/y 3,6% • inti 0,2% / 2,4%" in tb["teks"] and "y/y condong DI ATAS" in tb["teks"]
     assert "y/y tersirat & Kalshi inti berlawanan" in tb["teks"] and "bila sepakat" in tb["teks"]
     _pra_aset.attach(prep, NOW, None)
     assert "🔄 Data terbaru" in prep["pra_satu"]["bukti"] and "⚖️" in prep["pra_satu"]["bukti"]
@@ -289,7 +290,7 @@ def test_terbaru_konsensus_kalshi_yoy_dan_situasi_14okt():
 def test_terbaru_sepakat_dan_yoy_diam():
     prep = kartu()
     rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.7%", "3.4%"),     # y/y 3,7 ≈ tersirat → diam
-            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.4%", "2.4%")]
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=lambda s: KALSHI if s == "KXCPI" else [])
     tb = prep["mendatang"][0]["cpi_detik"]["terbaru"]
     assert tb["yoy"]["arah"] == 0 and tb["situasi"] == "sepakat" and "y/y condong" not in tb["teks"]
@@ -299,7 +300,7 @@ def test_terbaru_sepakat_dan_yoy_diam():
 def test_allin_situasi_berlawanan_lebih_lemah():
     prep = kartu()
     rows = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
-            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+            baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.4%", "2.4%")]
     get = lambda s: {"KXCPI": KALSHI, "KXCPICORE": CORE_ATAS, "KXCPIYOY": YOY_ATAS}.get(s, [])   # noqa: E731
     _cpi_detik.attach(prep, None, NOW, opener(rows), get=get)
     _pra_aset.attach(prep, NOW, None)
@@ -310,3 +311,58 @@ def test_allin_situasi_berlawanan_lebih_lemah():
     assert f"situasi sekarang untung {y5['untung']}% (biasa {s5['untung']}%)" in a["teks"]
     assert a["bukti"].startswith("⚖️ Situasi sekarang (y/y tersirat berlawanan)") and "lebih lemah dari biasa" in a["bukti"]
     assert a["saran_lev"] == _cpi_detik.DATA["allin"]["spike"]["saran_lev"]
+
+
+ROWS_14OKT = [baris("CPI", "", "0.6%", "0.4%"), baris("CPI", "", "3.6%", "3.4%"),
+              baris("Core CPI", "", "0.2%", "0.3%"), baris("Core CPI", "", "2.5%", "2.4%")]
+
+
+def test_yoyc_tersirat_14okt():
+    # inti Agustus 337,765 × 1,002 ÷ inti Sep 2025 330,418 → 2,43% < konsensus 2,5% → arah −1 (inti jarang di bawah)
+    yc = _cpi_detik.yoyc(datetime.fromisoformat(T0), {"core": 0.2}, {"core_yy_f": 2.5})
+    assert yc["arah"] == -1 and abs(yc["tersirat"] - 2.43) < 0.01 and yc["selisih"] < -0.03
+    assert _cpi_detik.yoyc(datetime.fromisoformat(T0), {"core": 0.2}, {"core_yy_f": 2.4})["arah"] == 0
+    assert _cpi_detik.yoyc(datetime.fromisoformat(T0), {"core": 0.2}, {}) is None
+
+
+def test_yoyc_naik_jadi_lemah_dan_modal_kecil_jangan_lentur_14okt():
+    # 13 Okt (izin "Pasang!"): situasi 14 Okt — tebakan NAIK (Kalshi m/m condong di bawah) + YOYc −1 → ⚠️ lemah
+    prep = kartu()
+    get = lambda s: {"KXCPI": KALSHI, "KXCPICORE": CORE_ATAS, "KXCPIYOY": YOY_ATAS}.get(s, [])   # noqa: E731
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_14OKT), get=get)
+    g = prep["mendatang"][0]["cpi_detik"]
+    y = _cpi_detik.DATA["yoyc"]
+    assert g["arah"] == "naik" and g["status"] == "lemah" and g["lemah_jenis"] == "yoyc"
+    assert g["persen"] == round(y["naik"]["semua"]["benar"]) and g["n"] == y["naik"]["semua"]["n"]
+    assert "inti m/m jarang di bawah" in g["peringatan"] and g["per_detik"]["2"] == y["naik"]["semua"]["per_detik"]["2"]
+    assert "🧮 inti y/y tersirat 2,43% vs perkiraan 2,5%" in g["terbaru"]["teks"]
+    _pra_aset.attach(prep, NOW, None)
+    s = prep["pra_satu"]
+    assert "⚠️" in s["teks"] and "Lemah karena inti m/m jarang di bawah" in s["bukti"]
+    a = s["allin"]
+    assert not a["kuat"] and a["keluar"] == "detik2" and "JANGAN" in a["teks"] and "TUTUP detik 2" in a["teks"]
+    assert "lentur −$" in a["bukti"] and "1:200" in a["bukti"]
+
+
+def test_yoyc_env_mati_dan_turun_tidak_disentuh(monkeypatch):
+    monkeypatch.setenv("CPI_YOYC", "0")
+    prep = kartu()
+    _cpi_detik.attach(prep, None, NOW, opener(ROWS_14OKT), get=lambda s: KALSHI if s == "KXCPI" else [])
+    assert prep["mendatang"][0]["cpi_detik"]["status"] == "tutup kertas"
+    monkeypatch.delenv("CPI_YOYC")
+    g = {"arah": "turun", "status": "tutup kertas", "bukti": "x"}
+    assert _cpi_detik.pakai_yoyc(g, {"arah": -1, "konsensus": 2.5, "tersirat": 2.43}) is g
+
+
+def test_kalshi_fetch_tanpa_filter_status_dan_saring_aktif():
+    # 13 Okt: API status=open → 0 event KXCPICORE/KXCPIYOY; kini tanpa filter, pasar disaring status active/open
+    import _kalshi
+
+    def buka(req, timeout=None):
+        assert "status=" not in req.full_url
+        ev = [{"event_ticker": "KXCPICORE-26SEP", "markets": [
+            {"ticker": "KXCPICORE-26SEP-T0.2", "status": "active"}, {"ticker": "KXCPICORE-26SEP-T0.3", "status": "active"}]},
+            {"event_ticker": "KXCPICORE-26AUG", "markets": [{"ticker": "KXCPICORE-26AUG-T0.2", "status": "finalized"}]}]
+        return io.BytesIO(json.dumps({"events": ev}).encode())
+    ms = _kalshi.fetch("KXCPICORE", opener=buka)
+    assert [m["ticker"] for m in ms] == ["KXCPICORE-26SEP-T0.2", "KXCPICORE-26SEP-T0.3"]

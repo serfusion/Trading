@@ -1,5 +1,5 @@
 # 🎯 CPI: konsistensi inti + mesin skenario (research/cpi_skenario.py)
-python -m research.cpi_skenario [--live]     → docs/eksternal/hasil_cpi_skenario.txt
+python -m research.cpi_skenario [--live] [simpan]     → docs/eksternal/hasil_cpi_skenario.txt (+ cpi_detik.json["yoyc"])
 
 ## A. YOYc — konsensus inti y/y > tersirat dari konsensus inti m/m → inti m/m jarang DI BAWAH
    ambang 0.02: n 39 inti di atas 18 sesuai 15 di bawah 6 (dasar 36%, p 0.0039) | LAMA di bawah 5/25 vs dasar 38% (p 0.046) | BARU di bawah 1/14 vs dasar 32% (p 0.033)
@@ -31,3 +31,26 @@ python -m research.cpi_skenario [--live]     → docs/eksternal/hasil_cpi_skenar
      total sesuai   | inti bawah n5 +3.41/+4.32 | inti sesuai n11 +1.67/-1.69 | inti atas n7 -1.85/-7.49
      total di atas  | inti bawah n0 +nan/+nan | inti sesuai n6 -0.93/-3.02 | inti atas n12 -2.45/-5.92
    5 hasil BUY detik 2 terburuk sejak Okt 2021: 2024-10-10 (total +1, inti +1) -10.58 • 2024-09-11 (total +0, inti +1) -7.65 • 2023-01-12 (total +0, inti +0) -7.16 • 2022-10-13 (total +1, inti +1) -5.65 • 2023-09-13 (total +0, inti +1) -5.08
+
+## D. UJI TUTUP KERTAS mesin skenario (rilis 2022–2026 dengan pasar Kalshi total & inti 1 jam sebelum tutup)
+   skenario (sel semua tahun)             arah detik 2 benar 54% (25/46) • tebak BUY 14 • $/oz (keluar pilihan mesin) rata +0.71, untung 43% (20/46) • tutup detik 2 saja rata +0.60 • lentur dipilih 46×
+   skenario (sel sejak Okt 2021)          arah detik 2 benar 59% (27/46) • tebak BUY 18 • $/oz (keluar pilihan mesin) rata +1.27, untung 50% (23/46) • tutup detik 2 saja rata +0.72 • lentur dipilih 46×
+   skenario + YOYc (sel semua tahun)      arah detik 2 benar 52% (24/46) • tebak BUY 13 • $/oz (keluar pilihan mesin) rata +0.62, untung 41% (19/46) • tutup detik 2 saja rata +0.54 • lentur dipilih 46×
+   skenario + YOYc (sel sejak Okt 2021)   arah detik 2 benar 57% (26/46) • tebak BUY 17 • $/oz (keluar pilihan mesin) rata +1.21, untung 48% (22/46) • tutup detik 2 saja rata +0.66 • lentur dipilih 46×
+   aturan aplikasi sekarang (IDX|K, tutup d2) arah detik 2 benar 76% (31/41) • $/oz rata +1.67 (menebak 41 dari 46 rilis)
+   selalu BUY tutup detik 2               arah detik 2 benar 67% (31/46) • $/oz rata +0.91 • lentur +1.60
+     2022: skenario+YOYc benar 1/5 • $/oz -0.25 | selalu BUY 3/5 -0.67
+     2023: skenario+YOYc benar 8/11 • $/oz +0.30 | selalu BUY 4/11 -1.31
+     2024: skenario+YOYc benar 5/12 • $/oz -0.23 | selalu BUY 7/12 -0.06
+     2025: skenario+YOYc benar 6/9 • $/oz +1.32 | selalu BUY 8/9 +2.97
+     2026: skenario+YOYc benar 6/9 • $/oz +2.16 | selalu BUY 9/9 +3.72
+
+## E. Untuk cloud: tebakan NAIK aplikasi saat YOYc −1 vs biasa (tutup kertas, $/oz BUY t−1 dtk)
+   naik       semua n 11 benar detik 2 54.5% • tutup detik 2 -0.12 • lentur -3.29 • detik 10 -3.78
+   naik       lama  n  6 benar detik 2 33.3% • tutup detik 2 -0.78 • lentur -0.60 • detik 10 -0.22
+   naik       baru  n  5 benar detik 2 80.0% • tutup detik 2 +0.66 • lentur -6.51 • detik 10 -8.06
+   naik_biasa semua n 42 benar detik 2 71.4% • tutup detik 2 +1.48 • lentur +4.00 • detik 10 +3.63
+   naik_biasa lama  n 20 benar detik 2 60.0% • tutup detik 2 -0.63 • lentur -0.04 • detik 10 +0.02
+   naik_biasa baru  n 22 benar detik 2 81.8% • tutup detik 2 +3.40 • lentur +7.66 • detik 10 +6.91
+
+→ cloud/api/cpi_detik.json kunci yoyc ditulis

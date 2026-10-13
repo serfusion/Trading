@@ -304,7 +304,7 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
                        **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik",
-                                            "terbaru") if k in g},
+                                            "terbaru", "lemah_jenis") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -480,6 +480,18 @@ def allin(row: dict) -> dict | None:
             or not row.get("arah"):
         return None
     lv = d.get("lev") or {}
+    if row.get("lemah_jenis") == "yoyc" and (_cpi_detik.DATA.get("yoyc") or {}).get("naik"):
+        # 13 Okt (izin "Pasang!"): inti jarang di bawah → BUY lentur rugi rata-rata (research/cpi_skenario.py bagian E)
+        y = _cpi_detik.DATA["yoyc"]["naik"]
+        b, bb, bs = y["semua"], y["baru"], (_cpi_detik.DATA["yoyc"].get("naik_biasa") or {}).get("semua") or {}
+        usd = lambda v: f"{'+' if v >= 0 else '−'}${abs(v):.1f}".replace(".", ",")  # noqa: E731
+        return {"kuat": False, "keluar": "detik2",
+                "teks": "💥 Modal kecil: JANGAN (inti jarang di bawah) • bila tetap masuk BUY: TUTUP detik 2, jangan lentur",
+                "bukti": (f"Situasi ini (konsensus inti y/y lebih tinggi dari tersirat) {b['n']} rilis 2016–2026: BUY t−1 dtk "
+                          f"tutup detik 2 {usd(b['d2'])}/oz, lentur {usd(b['lentur'])}/oz, terburuk lentur "
+                          f"{usd(b['terburuk_lentur'])} • sejak Okt 2021 ({bb['n']} rilis): detik 2 {usd(bb['d2'])}, lentur {usd(bb['lentur'])} • "
+                          f"tebakan NAIK biasa: detik 2 {usd(bs.get('d2', 0))}, lentur {usd(bs.get('lentur', 0))} • leverage maks "
+                          "1:200 bila tetap masuk")}
     if row.get("status") not in TERUJI:
         w = d.get("lemah") or {}
         return {"kuat": False, "teks": "💥 Modal kecil: JANGAN (tebakan ⚠️ lemah)",

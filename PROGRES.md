@@ -342,3 +342,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt sore ("50:50 bukan jawaban"): `research/cpi_skenario.py` — pasar Kalshi per komponen, Cleveland 0,53/0,20, preview
   analis (inti Agustus terdongkrak metode telepon), aturan YOYc (inti tidak di bawah 30/33, p 0,0005), emas ikut inti sejak
   detik 2, mesin skenario → CPI 14 Okt: BUY t−1 tutup detik 2 (61–76%, +$0,5–1,3/oz), jangan lentur, ≤ 1:200.
+- 13 Okt malam ("Pasang!"): mesin skenario gagal tutup kertas (52–59% vs aturan aplikasi 76%) → tidak dipasang. Dipasang: perbaikan
+  Kalshi inti/y/y (status=open → 0 event), YOYc ⚠️ lemah + 💥 tutup detik 2 (NAIK & YOYc −1: 55%, lentur −$3,3/oz), PPI diperbarui
+  otomatis setelah CPI inti (74/82/44%). CPI 14 Okt tampil "NAIK 54% ⚠️". docs/CPI_PPI_DASAR.md bagian 8.

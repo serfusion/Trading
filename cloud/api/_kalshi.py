@@ -40,17 +40,37 @@ def _num(text) -> float | None:
     return float(m.group(2).replace(",", ".")) * mult
 
 
+AKTIF = ("active", "open")
+_MEMO: dict[str, tuple[float, list]] = {}          # cache singkat per proses: satu permintaan aplikasi memanggil seri sama 2–3×
+
+
 def fetch(series: str, opener=None) -> list[dict]:
-    """Pasar terbuka satu seri (semua event terbuka), [] bila gagal."""
-    url = f"{API}/events?" + urllib.parse.urlencode({"series_ticker": series, "status": "open",
-                                                      "with_nested_markets": "true", "limit": 20})
-    try:
-        with (opener or urllib.request.urlopen)(urllib.request.Request(url, headers={"User-Agent": "xau-signal"}),
-                                                timeout=6) as r:
-            events = json.load(r).get("events", [])
-    except Exception:  # noqa: BLE001 - Kalshi opsional
+    """Pasar yang masih diperdagangkan satu seri (semua event terbaru), [] bila gagal.
+    13 Okt 2026: filter API status=open mengembalikan 0 event untuk KXCPICORE & KXCPIYOY (padahal pasarnya aktif) → cloud
+    tidak pernah membaca pasar inti & y/y. Kini event terbaru diambil tanpa filter lalu pasar disaring status "active"/"open"
+    (event terbaru lebih dulu; 12 cukup untuk seri bulanan). Kalshi membatasi laju (429) bila banyak seri diminta beruntun →
+    1× ulang setelah 0,7 dtk + cache 60 dtk per seri."""
+    import time
+    if opener is None and series in _MEMO and time.time() - _MEMO[series][0] < 60:
+        return _MEMO[series][1]
+    url = f"{API}/events?" + urllib.parse.urlencode({"series_ticker": series, "with_nested_markets": "true",
+                                                      "limit": 12})
+    events = None
+    for coba in range(2):
+        try:
+            with (opener or urllib.request.urlopen)(urllib.request.Request(url, headers={"User-Agent": "xau-signal"}),
+                                                    timeout=6) as r:
+                events = json.load(r).get("events", [])
+            break
+        except Exception:  # noqa: BLE001 - Kalshi opsional (429/jaringan) → sekali ulang
+            if coba == 0:
+                time.sleep(0.7)
+    if events is None:
         return []
-    return [m for e in events for m in e.get("markets") or []]
+    out = [m for e in events for m in e.get("markets") or [] if str(m.get("status", "active")).lower() in AKTIF]
+    if opener is None and out:
+        _MEMO[series] = (time.time(), out)
+    return out
 
 
 def strike(ticker: str) -> float | None:
