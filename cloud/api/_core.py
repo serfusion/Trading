@@ -716,7 +716,10 @@ def tick(now: datetime, prices, store, pub, cfg: dict = CFG, symbol: str = "XAU/
             return None
         buy = v["dir"] == "BUY"
         if not v.get("be_done") and cfg.get("guncang", True):
-            g = guncangan(bars, v, price)
+            # 15 Okt 2026: HANYA candle 1 jam yang SUDAH tutup + harga close-nya (= yang diuji research/batal_guncang.py).
+            # Versi lama memakai harga berjalan tiap 10 menit (ekor/wick sesaat ikut memicu) → uji "wick" merugikan:
+            # XAU sejak Okt 2021 −14R (WR 65,1→64,4%), BTC −32R, DOGE/ADA −2…−15R (pengguna: DOGE "batal" lalu TP1 kena).
+            g = guncangan(closed, v, closed[-1].c) if closed else None
             if g and not any(((b.l <= v["sl"]) if buy else (b.h >= v["sl"])) or ((b.h >= v["tp1"]) if buy else
                                                                                 (b.l <= v["tp1"]))
                              for b in bars if b.t >= parse_iso(v["bar_close"])):

@@ -413,6 +413,8 @@ alarm tepat waktu) hanya menyentuh `android/`].
   EMA50 untuk 💰 XAU → DIPASANG (izin pengguna "terapkan yang baik"): `_core.h4_ema_check`, env XAU_H4_FILTER.
 
 ## Batal saat guncangan & berita 10 Okt 2026 (`docs/BATAL_GUNCANG.md`, `docs/CPI_14OKT.md`, `docs/SPOT_SKEMA.md`)
+- 15 Okt: 🛑 💰 kini HANYA close candle 1 jam tertutup (versi harga berjalan/wick merugikan: XAU −14R, BTC −32R, DOGE/ADA
+  turun) dan MATI untuk ETH/DOGE/ADA (keluhan DOGE batal lalu TP1). Lihat docs/BATAL_GUNCANG.md bagian akhir.
 - 🛑 DIPASANG (izin "perbaiki"): `_core.guncangan` (💰 ≥ 4 ATR/≤ 6 jam sebelum TP1, BUY & SELL simetris, event close
   `batal`), `_arus.GUNCANG` 3 ATR/3 jam, `_pulih.GUNCANG` −5%/1 jam; 💎 hanya ⚠️ `spot_warn` (SPOT_BATAL=1 paksa jual —
   data: menjual spot saat anjlok merugikan di setiap tahun). Guncangan sedang (1,5–3 ATR) MERUGIKAN → jangan diperketat.

@@ -112,17 +112,53 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             }
         }
         StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
+        StripLangsung(prep, now)                 // ⏱️ 4.34: persen berubah tiap detik T−60 dtk s/d menit 5 (ganti ⏸️ jeda)
         assets.firstOrNull { it.first == open }?.let { (sym, hb) -> TileDetail(sym, hb) }
         StripPudar(prep, now)                    // 📉/📈 lonjakan memudar ≤ 6 jam setelah rilis (hilang sejak 4.5)
         // 4.31: baris 🎯 "peluang emas naik 1 jam" DIHAPUS dari sini — bertentangan dengan arah 1–10 dtk; satu arah saja
         assets.firstOrNull { it.first.startsWith("XAU") }?.second?.warText()?.let {
             Text(it, style = MaterialTheme.typography.labelSmall, color = SellColor, fontWeight = FontWeight.Bold)
         }
-        // ⏸️ jeda pra-berita (4.20): sinyal XAU baru tidak dikirim ≤ 60 jam sebelum NFP/CPI/Fed
-        assets.firstOrNull { it.first.startsWith("XAU") }?.second?.jedaText()?.let {
-            Text(it, style = MaterialTheme.typography.labelSmall, color = Gold, fontWeight = FontWeight.Bold)
-        }
+        // ⏸️ jeda pra-berita: baris disembunyikan sejak 4.34 (permintaan pengguna 15 Okt: diganti persen berita per detik);
+        // aturan jeda di cloud tetap berjalan (teruji menaikkan WR XAU)
     }
+}
+
+/**
+ * ⏱️ Baris langsung di bawah kotak XAU (4.34, pengguna 15 Okt 2026: "persentase news berubah setiap detik sebelum &
+ * sesudah rilis hingga menit XX"). Angka dari cloud (pra_satu.per_detik = uji tutup kertas, menit_pct = arah detik 2
+ * bertahan s/d 5 mnt). Tidak mengarang: tanpa arah → "≈ 50:50". Rilis yang baru lewat diingat 10 menit.
+ */
+@Composable
+private fun StripLangsung(prep: JSONObject?, now: Long) {
+    var simpan by remember { mutableStateOf<JSONObject?>(null) }
+    val baru = prep?.optJSONObject("pra_satu")
+    val tBaru = baru?.let { instantOf(it.optString("time"))?.toEpochMilli() }
+    val tLama = simpan?.let { instantOf(it.optString("time"))?.toEpochMilli() }
+    // rilis yang baru lewat (≤ 10 mnt) tetap dipakai walau cloud sudah pindah ke berita berikutnya
+    val r = if (tLama != null && now - tLama in 0..600_000L && tBaru != tLama) simpan else baru
+    LaunchedEffect(tBaru) { if (baru != null && (tLama == null || now - tLama !in 0..600_000L)) simpan = baru }
+    val t0 = r?.let { instantOf(it.optString("time"))?.toEpochMilli() } ?: return
+    val det = (now - t0) / 1000.0
+    if (det < -60 || det > 600) return
+    val arah = r.optString("arah").ifBlank { null }
+    val nama = r.optString("nama").ifBlank { "Berita" }
+    val pd = r.optJSONObject("per_detik")
+    fun p(h: Int): Int? = pd?.optInt(h.toString(), -1)?.takeIf { it > 0 }
+    val ar = if (arah == "naik") "▲ NAIK" else "▼ TURUN"
+    val teks = when {
+        arah == null -> if (det < 0) "⏱️ $nama T−${-det.toInt()} dtk • arah ≈ 50:50 (tanpa petunjuk teruji)"
+                        else "🔴 $nama rilis +${det.toInt()} dtk • ≈ 50:50"
+        det < 0 -> "⏱️ $nama T−${-det.toInt()} dtk • emas $ar • detik 1 ${p(1) ?: "–"}% • detik 2 ${p(2) ?: "–"}%"
+        det < 10 -> {
+            val h = listOf(1, 2, 3, 5, 10).first { it >= kotlin.math.ceil(det.coerceAtLeast(0.01)) }
+            "🔴 $nama detik ${kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()} • emas $ar ${p(h) ?: r.optInt("persen")}%"
+        }
+        det < 300 -> "🔴 $nama menit ${(det / 60).toInt()}:${"%02d".format(det.toInt() % 60)} • ikuti arah detik 2" +
+            (r.optInt("menit_pct", 0).takeIf { it > 0 }?.let { " ($it%)" } ?: "")
+        else -> "$nama +${(det / 60).toInt()} mnt • arah ≈ 50:50 (setelah 5 mnt)"
+    }
+    Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 2)
 }
 
 @Composable

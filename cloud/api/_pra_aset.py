@@ -298,7 +298,7 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         if g:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
-                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan") if k in g},
+                       **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -403,6 +403,12 @@ def satu(row: dict) -> dict:
     (status + LAMA/BARU + dasar; aturan setelah rilis) menggantikan daftar angka per detik/per jangka."""
     out = {k: row.get(k) for k in ("title", "nama", "time", "arah", "persen", "status", "sisa")}
     mi = menit_info(row.get("title") or "")
+    # ⏱️ baris langsung per detik di aplikasi (15 Okt 2026, pengguna: "persentase berubah setiap detik hingga menit XX,
+    # menggantikan jeda XAU"): angka uji per detik (CPI: tutup kertas aturan tersaring) + arah menit
+    if row.get("per_detik"):
+        out["per_detik"] = {k: round(v) for k, v in row["per_detik"].items() if v is not None}
+    if mi:
+        out["menit_pct"] = mi["persen"]
     if row.get("arah"):
         naik = row["arah"] == "naik"
         tanda = "" if row.get("status") in TERUJI else " ⚠️"

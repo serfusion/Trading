@@ -199,7 +199,7 @@ def run() -> tuple[int, dict]:
                              _core.RowStore(store, "eth"),
                              _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
                              {**_core.BTC_CFG, "asset": "ETH", "id_prefix": "ETH-", "skip_cats": ("konf", "biasa"),
-                              "guncang": cfg["guncang"],
+                              "guncang": False,          # 15 Okt 2026: 🛑 batal tidak menolong ETH/DOGE/ADA (diuji)
                               "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
                              symbol="ETH/USD")
             result["eth"] = {k: eth.get(k) for k in ("ok", "price", "events", "error")}
@@ -216,7 +216,7 @@ def run() -> tuple[int, dict]:
                 feeds[sym] = Keep(KlineFeed(sym, env["TWELVEDATA_API_KEY"]))
                 kr = _core.tick(now, feeds[sym], _core.RowStore(store, sym.lower()),
                                 _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")),
-                                {**_core.KRIPTO_CFG, "asset": sym, "id_prefix": f"{sym}-", "guncang": cfg["guncang"],
+                                {**_core.KRIPTO_CFG, "asset": sym, "id_prefix": f"{sym}-", "guncang": False,
                                  "skip_fn": lambda d, t: None if d in btc_dirs else "tidak ada 💰 BTC searah terbuka"},
                                 symbol=f"{sym}/USD")
                 result[sym.lower()] = {k: kr.get(k) for k in ("ok", "price", "events", "error")}
