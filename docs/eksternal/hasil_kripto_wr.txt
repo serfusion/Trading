@@ -1,0 +1,38 @@
+# 🎯 BTC & ETH: subset WR tinggi (research/kripto_wr.py)
+Data: replay kode cloud asli (data/research/eksternal/verifikasi/cloud_{BTC,ETH}.csv, research/verifikasi_cloud.py).
+Fitur (ditetapkan sebelum melihat hasil): arah, kategori, tier, set, lapisan, sesi jam UTC (Asia 0–7, Eropa 8–12, AS 13–20,
+malam 21–23), akhir pekan, dan semua PASANGAN dua fitur. Seleksi di LAMA (< Okt 2021): WR ≥ WR dasar LAMA + 5 poin & n ≥ 30.
+Uji di BARU: tetap ≥ dasar BARU + 5 poin DAN R/sinyal ≥ dasar BARU, n ≥ 20. Pembanding kebetulan: label TP1 BARU diacak
+200× → berapa subset terpilih yang "bertahan" karena kebetulan.
+
+
+## BTC: 2583 sinyal • dasar WR LAMA 62% (1377) • BARU 58% (1206), R/sinyal BARU +0.38
+   terpilih di LAMA: 17 subset • diuji di BARU (n ≥ 20): 17 • BERTAHAN: 8 (label diacak: rata-rata 1.9, ≥ 8 pada 1%)
+   ✅ dir=BUY & sesi=Eropa                          LAMA WR  72% → BARU WR  77% (n 77) R/sinyal +0.98
+   ✅ sesi=Eropa & akhir_pekan=False                LAMA WR  72% → BARU WR  76% (n 143) R/sinyal +0.65
+   ✅ set=T55/20 & sesi=Eropa                       LAMA WR  69% → BARU WR  71% (n 56) R/sinyal +0.50
+   ✅ sesi=Eropa                                    LAMA WR  70% → BARU WR  69% (n 167) R/sinyal +0.47
+   ✅ set=T40/15 & sesi=Eropa                       LAMA WR  69% → BARU WR  67% (n 60) R/sinyal +0.53
+   ✅ lapis=False & sesi=Eropa                      LAMA WR  72% → BARU WR  67% (n 102) R/sinyal +0.58
+   ✅ cat=⭐ & sesi=Eropa                            LAMA WR  92% → BARU WR  65% (n 55) R/sinyal +0.43
+   ✅ tier=zap & sesi=Eropa                         LAMA WR  92% → BARU WR  65% (n 55) R/sinyal +0.43
+      set=T80/30 & sesi=Eropa                       LAMA WR  72% → BARU WR  69% (n 51) R/sinyal +0.35
+      dir=SELL & cat=⭐                              LAMA WR  68% → BARU WR  59% (n 239) R/sinyal +0.34
+      dir=SELL & tier=zap                           LAMA WR  68% → BARU WR  59% (n 239) R/sinyal +0.34
+      cat=⭐ & set=T80/30                            LAMA WR  71% → BARU WR  58% (n 142) R/sinyal +0.51
+
+## ETH: 913 sinyal • dasar WR LAMA 70% (383) • BARU 56% (530), R/sinyal BARU +0.26
+   terpilih di LAMA: 16 subset • diuji di BARU (n ≥ 20): 16 • BERTAHAN: 2 (label diacak: rata-rata 1.0, ≥ 2 pada 33%)
+   ✅ cat=⭐ & sesi=Eropa                            LAMA WR 100% → BARU WR  82% (n 33) R/sinyal +0.54
+   ✅ tier=biasa & sesi=Eropa                       LAMA WR 100% → BARU WR  82% (n 33) R/sinyal +0.54
+      sesi=Eropa & akhir_pekan=False                LAMA WR  81% → BARU WR  61% (n 71) R/sinyal +0.56
+      sesi=Eropa                                    LAMA WR  83% → BARU WR  58% (n 79) R/sinyal +0.44
+      lapis=False & sesi=Eropa                      LAMA WR  83% → BARU WR  58% (n 79) R/sinyal +0.44
+      sesi=Asia & akhir_pekan=True                  LAMA WR  92% → BARU WR  58% (n 26) R/sinyal +0.13
+      dir=SELL & sesi=Asia                          LAMA WR  80% → BARU WR  57% (n 90) R/sinyal +0.11
+      dir=SELL & akhir_pekan=False                  LAMA WR  75% → BARU WR  56% (n 211) R/sinyal +0.18
+      akhir_pekan=True                              LAMA WR  78% → BARU WR  56% (n 97) R/sinyal +0.13
+      lapis=False & akhir_pekan=True                LAMA WR  78% → BARU WR  56% (n 97) R/sinyal +0.13
+      dir=SELL & set=T40/15                         LAMA WR  75% → BARU WR  55% (n 95) R/sinyal +0.19
+      set=T55/20 & akhir_pekan=True                 LAMA WR  80% → BARU WR  55% (n 33) R/sinyal +0.03
+

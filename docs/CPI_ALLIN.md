@@ -160,3 +160,11 @@ Tebakan CPI kuat dipakai searah untuk kripto (CPI di bawah → emas, BTC, ETH na
 | Emas (pembanding) | 41%* / 78% | – | +$20,3, untung 78% | +$29,8, untung 72%, habis 2× |
 *persen untung setelah spread. 2019–2021 kripto rugi (sama dengan emas). Kesimpulan: emas tetap terbaik (lebih sering untung);
 kripto hanya lewat cara lentur. Info dipasang di bukti 💥 CPI (`_pra_aset.kripto_teks`, `cpi_detik.json["allin"]["kripto"]`).
+
+## 🎯 BTC & ETH WR tinggi + tutup dini (antrian pengguna, 13 Okt 2026)
+- Tutup dini saat candle melonjak melawan sinyal: SUDAH diuji 10 & 13 Okt (`docs/BATAL_GUNCANG.md`): lonjakan sedang 1,5–3 ATR
+  MERUGIKAN (harga pulih); ≥ 4 ATR close candle 1 jam sedikit menolong XAU/BTC (terpasang 🛑); ETH/DOGE/ADA ≈ 0 (dimatikan).
+- `research/kripto_wr.py` (replay kode cloud, subset dipilih di LAMA → diuji BARU): BTC sesi Eropa (08–12 UTC = 15–19 WIB)
+  WR 70% → 69% vs dasar 58% (BUY + Eropa 72% → 77%, n 77); 8/17 subset bertahan vs acak 1,9. Tetapi per sinyal unik per
+  tahun sesi Eropa lebih baik hanya 6 dari 11 tahun → BELUM TERBUKTI, tidak dipasang (kandidat label/uji maju). ETH: 2
+  bertahan ≈ kebetulan.
