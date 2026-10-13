@@ -301,3 +301,5 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt (lanjutan, "yakin tidak ada yang terlewat?"): Cleveland Fed nowcast (`research/cpi_cleveland.py`, data
   data/research/eksternal/cleveland/), breakeven/UMich/harga bayar Fed (`research/cpi_lain2.py`), cek Dukascopy strategi modal
   kecil → tidak ada yang dipasang; daftar yang belum diuji di docs/CPI_ALLIN.md.
+- 13 Okt (lanjutan, "uji semua"): `research/cpi_semua.py` — 29 sinyal tunggal (0 lolos), model gabungan (57% < aplikasi 68%),
+  telat eksekusi (strategi tahan ±1 dtk); data Manheim/ZORI di data/research/eksternal/cpi_lain/. Docs/CPI_ALLIN.md bagian akhir.

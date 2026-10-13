@@ -421,6 +421,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   inflationnowcasting/nowcast_month.json → data/research/eksternal/cleveland/; `research/cpi_cleveland.py`) — sendirian lemah,
   core ≈ selalu 0,2% (bias); breakeven/UMich/harga bayar Fed NY & Philly (`research/cpi_lain2.py`) ≈ acak; bucket "sepakat"
   kecil = jebakan banyak-uji → tidak dipasang. Dukascopy: strategi modal kecil tetap positif sejak 2022 (lebih lemah).
+- "Uji semua" 13 Okt (`research/cpi_semua.py`, data `data/research/eksternal/cpi_lain/` Manheim xlsx + Zillow ZORI): 29 sinyal
+  (ISM harga, PPI, impor, NFIB, UMich, Fed NY, Manheim, ZORI, Cleveland, breakeven, harga bayar Fed) → 0 lolos (acak 0,4);
+  model gabungan 57% < aturan aplikasi 68%; telat eksekusi ±1 dtk tetap +$25–32/rilis (1:200). CME memblokir scraping (jangan
+  diakali); Truflation butuh API key (secret pengguna). Tidak ada perubahan cloud/aplikasi.
 - ANTRIAN: riset ETH/BTC/koin WR tinggi + tutup dini saat lonjakan berlawanan (dikesampingkan pengguna 13 Okt).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)

@@ -1,0 +1,67 @@
+# 🔎 CPI: uji semua sumber tersisa (research/cpi_semua.py)
+python -m research.cpi_semua [sinyal|model|telat|semua]
+
+## A–D. Sinyal tunggal (tutup kertas; emas detik 2 | detik 2–10; kejutan CPI/core)
+   ISMM_chg    mentah detik 2   46% (n 123) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  52% core  49% (n 86) 
+   ISMM_sur    mentah detik 2   48% (n 125) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  55% core  50% (n 85) 
+   ISMS_chg    mentah detik 2   46% (n 134) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  48% core  47% (n 91) 
+   ISMS_sur    mentah detik 2   42% (n  40) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  41% core  43% (n 22) 
+   PPI_chg     mentah detik 2   50% (n 138) | tutup kertas detik 2   47% (n  94) lama   48% baru   42% | 2–10   48% | kejutan CPI  60% core  54% (n 97) 
+   PPI_sur     mentah detik 2   51% (n 119) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  53% core  49% (n 86) 
+   CPPI_chg    mentah detik 2   52% (n 128) | tutup kertas detik 2   44% (n  18) lama   40% baru   50% | 2–10   37% | kejutan CPI  53% core  51% (n 87) 
+   CPPI_sur    mentah detik 2   58% (n 118) | tutup kertas detik 2   50% (n   8) lama  nan% baru   50% | 2–10   34% | kejutan CPI  45% core  46% (n 77) 
+   IMP_chg     mentah detik 2   46% (n 114) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  51% core  49% (n 75) 
+   IMP_sur     mentah detik 2   42% (n 109) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  49% core  44% (n 69) 
+   NFIB_chg    mentah detik 2   55% (n  78) | tutup kertas detik 2   51% (n  53) lama   52% baru   50% | 2–10   46% | kejutan CPI  55% core  53% (n 53) 
+   NFIB_sur    mentah detik 2   54% (n  65) | tutup kertas detik 2   52% (n  48) lama   54% baru   50% | 2–10   46% | kejutan CPI  59% core  60% (n 39) 
+   UM1_chg     mentah detik 2   51% (n 113) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  45% core  43% (n 78) 
+   UM1_sur     mentah detik 2   51% (n  39) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  48% core  39% (n 21) 
+   NY1_chg     mentah detik 2   44% (n  18) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  33% core  36% (n 9) 
+   NY1_sur     mentah detik 2  nan% (n   0) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI nan% core nan% (n 0) 
+   PHPP_N_chg  mentah detik 2   55% (n  96) | tutup kertas detik 2   54% (n  93) lama   59% baru   49% | 2–10   53% | kejutan CPI  48% core  50% (n 65) 
+   PHPP_N_sur  mentah detik 2   80% (n   5) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI   0% core  33% (n 2) 
+   MANHEIM     mentah detik 2   60% (n  58) | tutup kertas detik 2   60% (n  48) lama   73% baru   50% | 2–10   56% | kejutan CPI  46% core  55% (n 37) 
+   ZORI        mentah detik 2   48% (n  44) | tutup kertas detik 2  nan% (n   0) lama  nan% baru  nan% | 2–10  nan% | kejutan CPI  60% core  57% (n 30) 
+   CLV_mm      mentah detik 2   58% (n  72) | tutup kertas detik 2   55% (n  49) lama   36% baru   75% | 2–10   54% | kejutan CPI  59% core  48% (n 46) 
+   CLV_core    mentah detik 2   52% (n  61) | tutup kertas detik 2  100% (n   5) lama  nan% baru  100% | 2–10   95% | kejutan CPI  43% core  60% (n 37) 
+   CLV         mentah detik 2   53% (n  96) | tutup kertas detik 2   47% (n  32) lama   35% baru  100% | 2–10   52% | kejutan CPI  52% core  56% (n 58) 
+   BEI5        mentah detik 2   54% (n 154) | tutup kertas detik 2   54% (n 121) lama   54% baru   53% | 2–10   51% | kejutan CPI  49% core  50% (n 107) 
+   MICH        mentah detik 2   45% (n 132) | tutup kertas detik 2   49% (n  43) lama   49% baru  nan% | 2–10   47% | kejutan CPI  49% core  45% (n 91) 
+   NYPP        mentah detik 2   49% (n 159) | tutup kertas detik 2   46% (n 136) lama   48% baru   40% | 2–10   47% | kejutan CPI  52% core  54% (n 112) 
+   NYPR        mentah detik 2   53% (n 158) | tutup kertas detik 2   45% (n  42) lama    9% baru   58% | 2–10   46% | kejutan CPI  51% core  47% (n 112) 
+   PHPP        mentah detik 2   48% (n 159) | tutup kertas detik 2   52% (n  23) lama   52% baru  nan% | 2–10   46% | kejutan CPI  50% core  46% (n 111) 
+   PHPR        mentah detik 2   52% (n 159) | tutup kertas detik 2   48% (n 136) lama   53% baru   41% | 2–10   50% | kejutan CPI  54% core  51% (n 110) 
+
+## F. Banyak-uji: lolos 0 dari 29 sinyal; bila arah emas diacak (200×) rata-rata lolos 0.4, ≥ 0 pada 100% acakan
+
+## E. Model gabungan (logistik, walk-forward per tahun, target emas detik 2, |p−0,5| ≥ 0,05)
+   fitur: 32
+   model     detik 2: semua  57% (104) lama  59% (54) baru  54% (50) | 2–10  57% (104)
+   aplikasi  detik 2: semua  68% (60) lama  54% (28) baru  81% (32) | 2–10  67% (60)
+   aplikasi & model sepakat detik 2:  68% (34) lama  59% (17) baru  76% (17) | berlawanan  76% (17)
+
+## G. Telat eksekusi (tebakan kuat, lentur, tick Exness, rata-rata per $100 sejak 2022 | LAMA)
+   masuk -1.5 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:200 | untung  69% $ +31.7 habis 2 | lama $  -4.5
+   masuk -1.5 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:500 | untung  69% $ +89.8 habis 4 | lama $ -11.2
+   masuk -1.5 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:200 | untung  72% $ +26.5 habis 3 | lama $  -6.5
+   masuk -1.5 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:500 | untung  72% $ +87.3 habis 5 | lama $ -14.8
+   masuk -1.5 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:200 | untung  72% $ +26.4 habis 3 | lama $  -7.3
+   masuk -1.5 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:500 | untung  72% $ +85.2 habis 6 | lama $ -15.1
+   masuk -1.0 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:200 | untung  69% $ +31.5 habis 2 | lama $  -4.7
+   masuk -1.0 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:500 | untung  69% $ +89.4 habis 4 | lama $ -11.6
+   masuk -1.0 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:200 | untung  72% $ +26.2 habis 3 | lama $  -6.6
+   masuk -1.0 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:500 | untung  72% $ +86.3 habis 5 | lama $ -15.2
+   masuk -1.0 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:200 | untung  72% $ +26.2 habis 3 | lama $  -7.5
+   masuk -1.0 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:500 | untung  72% $ +84.3 habis 6 | lama $ -15.6
+   masuk -0.5 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:200 | untung  69% $ +30.4 habis 2 | lama $  -4.3
+   masuk -0.5 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:500 | untung  69% $ +86.8 habis 4 | lama $ -10.7
+   masuk -0.5 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:200 | untung  75% $ +25.2 habis 3 | lama $  -6.2
+   masuk -0.5 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:500 | untung  75% $ +83.4 habis 5 | lama $ -14.3
+   masuk -0.5 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:200 | untung  72% $ +25.2 habis 3 | lama $  -7.1
+   masuk -0.5 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:500 | untung  72% $ +81.3 habis 6 | lama $ -14.7
+   masuk -0.2 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:200 | untung  66% $ +29.8 habis 2 | lama $  -4.2
+   masuk -0.2 dtk • tutup rugi di 2.0 • akhir 10.0 • 1:500 | untung  66% $ +85.3 habis 4 | lama $ -10.6
+   masuk -0.2 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:200 | untung  72% $ +24.7 habis 3 | lama $  -6.2
+   masuk -0.2 dtk • tutup rugi di 2.5 • akhir 10.5 • 1:500 | untung  72% $ +81.8 habis 5 | lama $ -14.2
+   masuk -0.2 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:200 | untung  72% $ +24.9 habis 3 | lama $  -7.0
+   masuk -0.2 dtk • tutup rugi di 3.0 • akhir 11.0 • 1:500 | untung  72% $ +80.4 habis 6 | lama $ -14.6

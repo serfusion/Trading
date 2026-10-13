@@ -133,3 +133,20 @@ lambat dan sudah dipakai ekonom penyusun konsensus), Truflation (riwayat sejak 2
 (bensin + mobil bekas + tiket pesawat + sewa + asuransi — kerja besar), posisi opsi emas sebelum CPI (data berbayar), dan
 yang terpenting: **eksekusi nyata** (leverage HMR akun pengguna, slip/requote di t−1 dtk) — hanya bisa diukur dengan uji
 maju lot minimum.
+
+## Uji SEMUA sumber tersisa (13 Okt 2026, permintaan "uji semua" — `research/cpi_semua.py` → `docs/eksternal/hasil_cpi_semua.txt`)
+- **29 sinyal tunggal** (tutup kertas, emas detik 2; kejutan CPI/core): harga ISM manufaktur & jasa, PPI & core PPI, harga
+  impor, NFIB, Michigan 1 th, Fed NY ekspektasi 1 th, harga bayar Philly (Nasdaq, *_chg & *_sur), **Manheim mobil bekas**
+  (xlsx resmi 1997–Nov 2025), **Zillow ZORI sewa** (2015–2026), Cleveland Fed, breakeven 5 th, UMich, harga bayar/jual Fed NY &
+  Philly → mentah detik 2 42–60%, kejutan angka 33–60%. **Lolos 0 dari 29** (syarat detik 2 ≥ 60% + LAMA & BARU > 50%, n ≥ 20);
+  bila arah emas diacak 200× rata-rata lolos 0,4 → tidak ada sinyal tersembunyi. Terdekat: Manheim 60% (n 48) tetapi BARU 50%.
+- **Model gabungan** (logistik 32 fitur + aturan aplikasi + Kalshi, walk-forward per tahun): detik 2 57% (LAMA 59%, BARU 54%)
+  — LEBIH BURUK dari aturan aplikasi (68%; BARU 81%). Menambah sumber lemah menurunkan ketepatan (sama seperti 10 Okt).
+- **Telat eksekusi** (strategi modal kecil, tebakan kuat, lentur, tick Exness): masuk t−1,5/−1/−0,5/−0,2 dtk × tutup rugi di
+  detik 2/2,5/3 × akhir detik 10/10,5/11 → sejak 2022 1:200 +$25…+$32 per $100, 1:500 +$80…+$90, untung 66–75% rilis, modal
+  habis 2–6 → **tahan telat ±1 dtk**; LAMA tetap negatif.
+- **Tidak bisa diuji:** CME (memblokir akses otomatis — tidak dicoba diakali), Truflation (API berkunci; bisa diuji bila
+  pengguna memberi kunci lewat secret environment), NFIB rencana harga (403), sebaran ramalan Bloomberg/Reuters & opsi emas
+  (berbayar), requote/slip nyata Exness (hanya lewat uji maju lot kecil).
+- **Kesimpulan:** aturan aplikasi (konsensus indeks tanpa pembulatan + Kalshi + saringan) tetap yang terbaik dari semua
+  yang bisa diuji; tidak ada perubahan pada cloud/aplikasi.
