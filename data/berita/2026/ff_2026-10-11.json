@@ -339,6 +339,26 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   },
   {
+   "title": "M2 Money Supply y/y",
+   "country": "CNY",
+   "time_utc": "2026-10-14T08:03:00+00:00",
+   "date": "2026-10-14T04:03:00-04:00",
+   "impact": "Low",
+   "forecast": "7.4%",
+   "previous": "7.5%",
+   "first_seen": "2026-10-13T10:48:59.157452+00:00"
+  },
+  {
+   "title": "New Loans",
+   "country": "CNY",
+   "time_utc": "2026-10-14T08:03:00+00:00",
+   "date": "2026-10-14T04:03:00-04:00",
+   "impact": "Low",
+   "forecast": "1025B",
+   "previous": "60B",
+   "first_seen": "2026-10-13T10:48:59.157452+00:00"
+  },
+  {
    "title": "ECB President Lagarde Speaks",
    "country": "EUR",
    "time_utc": "2026-10-14T08:30:00+00:00",
@@ -362,6 +382,14 @@
    "date": "2026-10-14T05:40:00-04:00",
    "impact": "Low",
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
+  },
+  {
+   "title": "EU Economic Summit",
+   "country": "EUR",
+   "time_utc": "2026-10-14T10:15:00+00:00",
+   "date": "2026-10-14T06:15:00-04:00",
+   "impact": "Medium",
+   "first_seen": "2026-10-13T10:48:59.157452+00:00"
   },
   {
    "title": "Building Permits m/m",
@@ -647,6 +675,14 @@
    "forecast": "0.0%",
    "previous": "-0.1%",
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
+  },
+  {
+   "title": "EU Economic Summit",
+   "country": "EUR",
+   "time_utc": "2026-10-15T10:15:00+00:00",
+   "date": "2026-10-15T06:15:00-04:00",
+   "impact": "Medium",
+   "first_seen": "2026-10-13T10:48:59.157452+00:00"
   },
   {
    "title": "Manufacturing Sales m/m",
@@ -990,5 +1026,5 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   }
  ],
- "diperbarui": "2026-10-12T23:20:49.567685+00:00"
+ "diperbarui": "2026-10-13T10:48:59.157452+00:00"
 }
