@@ -329,3 +329,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 13 Okt (PPI "kurang puas, metode lain"): `research/riset_ppi3.py` (target Exness detik 1–10, plafon per komponen, 10 petunjuk
   baru + model logistik, keluarga 22) & `riset_ppi3_cek.py` (bootstrap, Bayes, mekanisme, plasebo, feed, rolling, holdout,
   bersamaan Retail, modal kecil, lonjakan detik 1) → 0 lolos baru; WTI nyata tetapi bergantung rezim; PPI aman ≤ 1:400.
+- 13 Okt (audit "kenapa 69 → 63, CPI sama?"): `research/audit_cpi_ppi.py`, docs/AUDIT_DATA.md — PPI: data hilang (8 rilis tanpa
+  tick semua salah, 2 tanggal salah, 11 rilis 2020–21 hilang) → angka final 62,6% (BARU 70,7%). CPI: bersih; jalur Kalshi 65%.
+  Pengecekan konsensus indeks CPI terjadwal 14 Okt 11:40 UTC (send_later trig_01DoaNaUE6KaSKnFGtYWBbfW).

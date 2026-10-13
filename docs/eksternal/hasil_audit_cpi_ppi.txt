@@ -1,0 +1,49 @@
+# 🧾 Audit data CPI & PPI (research/audit_cpi_ppi.py)
+python -m research.audit_cpi_ppi      → docs/eksternal/hasil_audit_cpi_ppi.txt
+
+## A/B. CPI: tanggal riset vs FRED (2016–Sep 2026): resmi 135, di tabel riset 126
+   tanggal di riset yang BUKAN tanggal resmi: tidak ada
+   tanggal resmi yang TIDAK ada di tabel riset: ['2017-02-13', '2017-04-14', '2019-02-11', '2020-02-11', '2020-04-10', '2021-02-08', '2022-02-08', '2023-02-10', '2024-02-09']
+
+## C. CPI target ulang (tick Exness) vs target tabel riset (g2/g10 = Exness, cadangan Dukascopy)
+   detik 2: tabel ada 126, ulang ada 126, sama arah 100.0% (125); tabel kosong tapi ulang ada 0
+   detik 10: tabel ada 126, ulang ada 126, sama arah 100.0% (126); tabel kosong tapi ulang ada 0
+
+## D. Aturan aplikasi CPI (tutup kertas) — target lama vs target ulang LENGKAP, per jalur
+   IDX|K tanpa saringan         detik 2: 2016–26 lama 66.3% (59/89) → ulang 66.3% (59/89) | LAMA lama 56.4% (22/39) → ulang 56.4% (22/39) | BARU lama 74.0% (37/50) → ulang 74.0% (37/50) | 2024+ lama 76.7% (23/30) → ulang 76.7% (23/30)
+   IDX|K tanpa saringan         detik 10: 2016–26 lama 64.4% (58/90) → ulang 64.4% (58/90) | LAMA lama 62.5% (25/40) → ulang 62.5% (25/40) | BARU lama 66.0% (33/50) → ulang 66.0% (33/50) | 2024+ lama 73.3% (22/30) → ulang 73.3% (22/30)
+   IDX|K + saringan (aplikasi)  detik 2: 2016–26 lama 68.3% (41/60) → ulang 68.3% (41/60) | LAMA lama 53.6% (15/28) → ulang 53.6% (15/28) | BARU lama 81.2% (26/32) → ulang 81.2% (26/32) | 2024+ lama 94.7% (18/19) → ulang 94.7% (18/19)
+   IDX|K + saringan (aplikasi)  detik 10: 2016–26 lama 68.9% (42/61) → ulang 68.9% (42/61) | LAMA lama 62.1% (18/29) → ulang 62.1% (18/29) | BARU lama 75.0% (24/32) → ulang 75.0% (24/32) | 2024+ lama 84.2% (16/19) → ulang 84.2% (16/19)
+   jalur indeks  (aplikasi, detik 2, target ulang): semua 66.0% (35/53) | BARU 80.0% (20/25) | 2024+ 93.8% (15/16)
+   jalur kalshi  (aplikasi, detik 2, target ulang): semua 85.7% (6/7) | BARU 85.7% (6/7) | 2024+ 100.0% (3/3)
+   rilis per jalur per tahun:
+      jalur  -  indeks  kalshi
+      th                      
+      2022   4       6       2
+      2023   2       7       3
+      2024   0      10       2
+      2025   0       9       2
+      2026   2       6       1
+   rilis bersinyal yang DULU tanpa target: 0 → dengan target ulang benar – []
+
+## A/B. PPI: tanggal riset vs FRED (2016–Sep 2026): resmi 135, di tabel riset 117
+   tanggal di riset yang BUKAN tanggal resmi: ['2019-12-11', '2025-09-09']
+   tanggal resmi yang TIDAK ada di tabel riset: ['2017-02-10', '2019-02-12', '2020-01-15', '2020-02-14', '2020-02-19', '2020-03-12', '2020-05-13', '2020-08-11', '2020-09-10', '2020-10-14', '2020-12-11', '2021-02-12', '2021-03-12', '2021-04-09', '2021-05-13', '2022-02-11', '2023-02-14', '2024-02-14']
+   tanggal FRED tanpa angka PPI (revisi musiman, dibuang): ['2017-02-10', '2019-02-12', '2020-02-14', '2021-02-12', '2022-02-11', '2023-02-14', '2024-02-14']
+
+## D'. PPI-WTI dengan tanggal RESMI & target ulang lengkap (mentah, tebakan emas = −WTI)
+   2016–26  lonjakan putaran 2 68.8% (53/77) → resmi+lengkap 63.1% (53/84) | detik 2 53.6% (45/84) | detik 10 60.7% (51/84)
+   LAMA     lonjakan putaran 2 64.9% (24/37) → resmi+lengkap 55.8% (24/43) | detik 2 46.5% (20/43) | detik 10 53.5% (23/43)
+   BARU     lonjakan putaran 2 72.5% (29/40) → resmi+lengkap 70.7% (29/41) | detik 2 61.0% (25/41) | detik 10 68.3% (28/41)
+   2024+    lonjakan putaran 2 75.0% (15/20) → resmi+lengkap 71.4% (15/21) | detik 2 61.9% (13/21) | detik 10 71.4% (15/21)
+
+## E. PPI LENGKAP: 128 tanggal resmi 2016–Sep 2026, tick ada 126 (tanpa tick = pasar tutup/data bolong: ['2020-06-11', '2023-04-13'])
+   WTI ±5%              2016–26  lonjakan 62.6% (57/91) • d1 45.1% (41/91) • d2 52.7% (48/91) • d5 59.3% (54/91) • d10 59.3% (54/91) • Bayes P>50% 0.99 P>60% 0.69
+   WTI ±5%              LAMA     lonjakan 56.0% (28/50) • d1 42.0% (21/50) • d2 46.0% (23/50) • d5 48.0% (24/50) • d10 52.0% (26/50) • Bayes P>50% 0.80 P>60% 0.27
+   WTI ±5%              BARU     lonjakan 70.7% (29/41) • d1 48.8% (20/41) • d2 61.0% (25/41) • d5 73.2% (30/41) • d10 68.3% (28/41) • Bayes P>50% 1.00 P>60% 0.91
+   WTI ±5%              2024+    lonjakan 71.4% (15/21) • d1 47.6% (10/21) • d2 61.9% (13/21) • d5 76.2% (16/21) • d10 71.4% (15/21) • Bayes P>50% 0.97 P>60% 0.84
+   keranjang energi ±5% 2016–26  lonjakan 64.0% (55/86) • d1 47.7% (41/86) • d2 52.3% (45/86) • d5 58.1% (50/86) • d10 62.8% (54/86) • Bayes P>50% 1.00 P>60% 0.76
+   keranjang energi ±5% LAMA     lonjakan 56.8% (25/44) • d1 43.2% (19/44) • d2 45.5% (20/44) • d5 45.5% (20/44) • d10 54.5% (24/44) • Bayes P>50% 0.81 P>60% 0.32
+   keranjang energi ±5% BARU     lonjakan 71.4% (30/42) • d1 52.4% (22/42) • d2 59.5% (25/42) • d5 71.4% (30/42) • d10 71.4% (30/42) • Bayes P>50% 1.00 P>60% 0.93
+   keranjang energi ±5% 2024+    lonjakan 69.6% (16/23) • d1 47.8% (11/23) • d2 56.5% (13/23) • d5 69.6% (16/23) • d10 73.9% (17/23) • Bayes P>50% 0.97 P>60% 0.81
+   rilis resmi yang dulu TIDAK ada di tabel: 11, WTI bersinyal 7, benar 57.1% (4/7)

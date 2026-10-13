@@ -443,6 +443,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - PPI putaran 3 (13 Okt, `research/riset_ppi3.py` + `riset_ppi3_cek.py`, PPI_WTI bagian 🔬): detik 1 PPI acak walau angka diketahui
   (plafon 51–54%); 10 petunjuk baru + 12 lama → 0 lolos; WTI ketat 61–63% (BARU 69%), plasebo 52%, gagal 2018–21, bersamaan
   Retail 81% (n 16); lonjakan aman ≤ 1:400. Usulan angka tampilan 63% + ⚖️ bersamaan Retail menunggu izin.
+- AUDIT DATA (13 Okt, `docs/AUDIT_DATA.md`, `research/audit_cpi_ppi.py`): PPI 69%→63% karena 8 rilis tanpa tick tidak dihitung
+  (semua salah) + 2 tanggal salah + 11 rilis 2020–21 hilang; PPI-WTI final 128 rilis resmi: 62,6% (LAMA 56 / BARU 70,7%).
+  CPI bersih (target ulang 100% sama). CPI jalur Kalshi saja 65% detik 2 (2024+ 70%); 81–95% = jalur indeks + saringan
+  pasca-lihat. SELALU audit kelengkapan vs tanggal resmi FRED sebelum melaporkan angka. Cek konsensus indeks 14 Okt (bagian F).
 - `research/berita_allin.py`: strategi modal kecil semua berita lain → 7/±195 "lolos" ≈ kebetulan → tidak dipasang.
 - Sisa workflow 11 Okt SELESAI 13 Okt (`docs/RISET_DALAM.md`, `research/riset_dalam_data.py` jadwal SEMUA dampak FF mentah +
   tick Exness `tambah_<bln>.parquet`, `riset_dalam.py` 66 aturan, `riset_dalam_cek.py` verifikasi): lolos per kelompok GDP P &
