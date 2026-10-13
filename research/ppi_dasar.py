@@ -208,6 +208,15 @@ def cpi_ppi(df: pd.DataFrame, L: list) -> dict:
     m = m[(m.t_cpi < m.t0) & (m.th >= 2016) & (m.tb != 0) & m.arah.notna() & (m.arah != 0)]
     rel = np.where(m.cs_c == 0, "sesuai", np.where(-m.cs_c == m.tb, "sepakat", "berlawanan"))
     out = {"n": int(len(m))}
+    # angka aturan PPI-WTI final (semua rilis resmi bertick 2016+, sama dengan docs/AUDIT_DATA.md) + PER ARAH tebakan
+    a = x[(x.th >= 2016) & (x.tb != 0) & x.arah.notna() & (x.arah != 0)]
+    def blok(z):
+        return {"persen": round(float((z.tb == z.arah).mean() * 100), 1), "n": int(len(z))}
+    out["lonjakan_audit"] = {k: blok(a[mk]) for k, mk in (("semua", a.th > 0), ("lama", a.t0 < SPLIT),
+                                                          ("baru", a.t0 >= SPLIT), ("s2024", a.th >= 2024))}
+    out["per_arah"] = {nm: {k: blok(a[(a.tb == v) & mk]) for k, mk in (("semua", a.th > 0), ("lama", a.t0 < SPLIT),
+                                                                      ("baru", a.t0 >= SPLIT), ("s2024", a.th >= 2024))}
+                       for nm, v in (("turun", -1.0), ("naik", 1.0))}
     L.append(f"\n## TAHAP 4 — Tebakan PPI-WTI setelah CPI inti terbit ({len(m)} rilis bersinyal, lonjakan menit 1)")
     for k in ("sepakat", "sesuai", "berlawanan"):
         o = {}

@@ -40,10 +40,14 @@ def kartu():
 
 
 def test_minyak_naik_tebak_turun():
+    # 14 Okt: angka AUDIT per arah — tebakan TURUN (minyak naik) hanya 55% → ⚠️ lemah, kurva per detik lama tidak dipakai
     g = _ppi_wti.tebak(datetime.fromisoformat(T0), deret(80.0, 90.0))
-    assert g["arah"] == "turun" and g["status"] == "tutup kertas" and g["teks_sampai"] == "lonjakan menit 1"
-    assert g["persen"] == round(_ppi_wti.DATA["lonjakan"]["semua"]["persen"]) and g["minyak"]["ubah"] == 12.5
-    assert "DI ATAS" in g["bukti"] and "≈ acak" in g["bukti"] and g["per_detik"]["1"] < 50
+    pa = _ppi_wti.DATA["cpi_ppi"]["per_arah"]["turun"]
+    assert g["arah"] == "turun" and g["status"] == "lemah" and g["teks_sampai"] == "lonjakan menit 1"
+    assert g["persen"] == round(pa["semua"]["persen"]) and g["n"] == pa["semua"]["n"] and g["minyak"]["ubah"] == 12.5
+    assert "DI ATAS" in g["bukti"] and "TURUN saja" in g["bukti"] and g["per_detik"] == {} and "55%" in g["peringatan"]
+    n = _ppi_wti.tebak(datetime.fromisoformat(T0), deret(90.0, 80.0))
+    assert n["status"] == "tutup kertas" and n["persen"] == round(_ppi_wti.DATA["cpi_ppi"]["per_arah"]["naik"]["semua"]["persen"])
 
 
 def test_minyak_turun_tebak_naik_dan_kecil_tidak_menebak():
@@ -68,10 +72,9 @@ def test_attach_fred_cache_dan_tampil_di_aplikasi():
     assert "ppi_wti" not in prep["mendatang"][1]                                           # Retail tidak disentuh
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
-    assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}% (lonjakan menit 1)") and "⚠️" not in s["teks"]
-    assert "minyak WTI" in s["bukti"] and s["per_detik"]["1"] == round(_ppi_wti.DATA["per_detik"]["1"])
-    a = s["allin"]
-    assert not a["kuat"] and "lemah" in a["teks"] and "utamakan CPI" in a["teks"] and "menang" not in a["bukti"]
+    assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}% (lonjakan menit 1)") and "⚠️" in s["teks"]
+    assert "minyak WTI" in s["bukti"] and "Lemah karena tebakan TURUN" in s["bukti"]
+    assert "allin" not in s                                    # tebakan lemah → tanpa 💥 modal kecil PPI
 
 
 def test_cadangan_uso_bila_fred_gagal(monkeypatch):
@@ -111,6 +114,7 @@ def test_setelah_cpi_inti_tebakan_ppi_diperbarui_otomatis():
         h = _ppi_wti.pakai_cpi(g, _ppi_wti.cpi_inti(prep, t0))
         assert h["cpi_inti"]["hubungan"] == rel and h["persen"] == round(cp[rel]["semua"]) and h["arah"] == "turun"
         assert h["bukti"].startswith("🔗 CPI inti") and (h["status"] == "lemah") == (rel == "berlawanan")
+        assert ("peringatan" in h) == (rel == "berlawanan")
     assert _ppi_wti.cpi_inti({"berita": [{**cpi_kartu("0.3%"), "released": False}]}, t0) is None
     assert _ppi_wti.cpi_inti({"berita": [cpi_kartu("")]}, t0) is None
 

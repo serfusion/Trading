@@ -114,9 +114,17 @@ def tebak(t0: datetime, obs: list[tuple[date, float]], src: str = "FRED") -> dic
         return None
     naik = d < 0                                             # minyak turun → PPI di bawah → emas NAIK
     lj, pdk = DATA["lonjakan"], DATA["per_detik"]
+    cp = DATA.get("cpi_ppi") or {}
+    # 14 Okt (pengguna "perbaiki data tidak sesuai"): angka AUDIT 128 rilis resmi (docs/AUDIT_DATA.md) PER ARAH tebakan —
+    # dulu 69% (data lama tanpa 8 rilis salah); tebakan TURUN (minyak naik) hanya 55% → ⚠️ lemah
+    pa = (cp.get("per_arah") or {}).get("naik" if naik else "turun")
+    if pa:
+        lj = pa
     nama_src = "minyak WTI" if src != "USO" else "ETF minyak USO (cadangan)"
     teks_d = lambda h: f"{pdk[h]:.0f}%".replace(".", ",") if pdk.get(h) is not None else "–"  # noqa: E731
-    return {"arah": "naik" if naik else "turun", "persen": round(lj["semua"]["persen"]), "status": "tutup kertas",
+    lemah = bool(pa) and not naik and lj["semua"]["persen"] < 60
+    out = {"arah": "naik" if naik else "turun", "persen": round(lj["semua"]["persen"]),
+            "status": "lemah" if lemah else "tutup kertas",
             "teks_sampai": "lonjakan menit 1", "lama": round(lj["lama"]["persen"]), "baru": round(lj["baru"]["persen"]),
             "n": lj["semua"]["n"], "dasar": "PPI • minyak WTI", "tanpa_tren": True, "per_detik": pdk,
             "minyak": {"ref": ref.isoformat(), "rata": round(a, 2), "lalu": round(b, 2), "ubah": round(d, 1), "src": src},
@@ -125,6 +133,14 @@ def tebak(t0: datetime, obs: list[tuple[date, float]], src: str = "FRED") -> dic
                       f"2016–2026: arah lonjakan menit 1 {lj['semua']['persen']:.0f}% ({lj['semua']['n']} rilis), lama "
                       f"{lj['lama']['persen']:.0f}% / sejak Okt 2021 {lj['baru']['persen']:.0f}% • detik 1 {teks_d('1')} "
                       f"(≈ acak), detik 2 {teks_d('2')}, detik 5 {teks_d('5')}").replace(".", ",")}
+    if pa:
+        out["bukti"] = out["bukti"].replace("uji 2016–2026: arah", f"uji 128 rilis resmi, tebakan {out['arah'].upper()} saja: arah")
+    if lemah:                                                # kurva per detik lama = semua arah → tidak berlaku untuk TURUN
+        out["per_detik"] = {}
+        out["bukti"] = out["bukti"].split(" • detik 1")[0] + " • detik 1–10 untuk tebakan TURUN di bawah 50% (audit)"
+        out["peringatan"] = (f"tebakan TURUN (minyak naik) dulu hanya benar {lj['semua']['persen']:.0f}% (sejak 2024 "
+                             f"{lj['s2024']['persen']:.0f}%)").replace(".", ",")
+    return out
 
 
 def _num(v) -> float | None:
@@ -165,6 +181,9 @@ def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
            "cpi_inti": {**ci, "hubungan": rel}, "bukti": awal + " • " + g["bukti"]}
     if rel == "berlawanan":
         out.update(status="lemah", peringatan="kejutan inti CPI kemarin berlawanan dengan tebakan minyak")
+    else:                                                    # CPI sudah mendukung → angka situasi ini yang berlaku
+        out["status"] = "tutup kertas"
+        out.pop("peringatan", None)
     return out
 
 
