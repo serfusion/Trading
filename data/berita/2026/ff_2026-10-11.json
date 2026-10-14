@@ -389,6 +389,26 @@
   {
    "title": "M2 Money Supply y/y",
    "country": "CNY",
+   "time_utc": "2026-10-14T09:00:00+00:00",
+   "date": "2026-10-14T05:00:00-04:00",
+   "impact": "Low",
+   "forecast": "7.4%",
+   "previous": "7.5%",
+   "first_seen": "2026-10-14T10:56:44.915001+00:00"
+  },
+  {
+   "title": "New Loans",
+   "country": "CNY",
+   "time_utc": "2026-10-14T09:01:00+00:00",
+   "date": "2026-10-14T05:01:00-04:00",
+   "impact": "Low",
+   "forecast": "1025B",
+   "previous": "60B",
+   "first_seen": "2026-10-14T10:56:44.915001+00:00"
+  },
+  {
+   "title": "M2 Money Supply y/y",
+   "country": "CNY",
    "time_utc": "2026-10-14T09:03:00+00:00",
    "date": "2026-10-14T05:03:00-04:00",
    "impact": "Low",
@@ -414,6 +434,15 @@
    "impact": "Low",
    "previous": "3.80|1.6",
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
+  },
+  {
+   "title": "German 30-y Bond Auction",
+   "country": "EUR",
+   "time_utc": "2026-10-14T09:38:00+00:00",
+   "date": "2026-10-14T05:38:00-04:00",
+   "impact": "Low",
+   "previous": "3.80|1.6",
+   "first_seen": "2026-10-14T10:56:44.915001+00:00"
   },
   {
    "title": "FOMC Member Bowman Speaks",
@@ -1075,5 +1104,5 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   }
  ],
- "diperbarui": "2026-10-14T09:38:33.224150+00:00"
+ "diperbarui": "2026-10-14T10:56:44.915001+00:00"
 }
