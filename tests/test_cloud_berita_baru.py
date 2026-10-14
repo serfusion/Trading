@@ -361,6 +361,7 @@ def test_satu_singkat_langsung_ke_inti():
     assert r["poin"][0].startswith("⚠️ Belum terbukti: 56%")
     kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi", "kons": {"f": "0.3%", "p": "0.4%"}})
     assert kosong["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"
+    assert kosong["poin"][0].startswith("🧾 Tutup kertas: ±2 ribu aturan sebelum rilis") and "→ belum ada tebakan" in kosong["poin"][0]
     assert kosong["poin"][1] == "📊 Konsensus: 0.3% • sebelumnya 0.4%" and kosong["bukti"].count("\n") == 2   # PPI: BARU < 85% → tanpa poin ✅
     A.tambah_orang(kosong, {"poin": "👥 Orang: ritel 8 broker BUY 70% → info"})
     assert kosong["poin"][2] == "👥 Orang: ritel 8 broker BUY 70% → info" and kosong["poin"][3].startswith("Setelah rilis")

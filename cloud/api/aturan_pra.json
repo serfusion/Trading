@@ -1,0 +1,21 @@
+{
+ "dibuat": "2026-10-14",
+ "lolos": false,
+ "hasil": {
+  "n": 198,
+  "benar": 0.5252525252525253,
+  "dasar": 0.5656565656565656,
+  "lama": 0.5,
+  "n_lama": 68,
+  "baru": 0.5384615384615384,
+  "n_baru": 130,
+  "naik": 0.5978260869565217,
+  "n_naik": 92,
+  "turun": 0.46226415094339623,
+  "n_turun": 106
+ },
+ "acak_rata": 0.4844013607661467,
+ "acak_p95": 0.5284806540391775,
+ "n_rilis": 2026,
+ "docs": "docs/eksternal/hasil_aturan_pra.txt"
+}

@@ -1,0 +1,31 @@
+🔎 ATURAN SEBELUM RILIS (gabungan 1–3 syarat) — TUTUP KERTAS per tahun, target arah XAU detik 2
+   2026 rilis 2010–Sep 2026; naik detik 2 50% (dasar)
+==============================================================================================================
+A. Fitur LIVE (bisa dihitung cloud):
+  semua aturan terpilih: tutup kertas 53% (n 198 dari 2026 rilis) | selalu-NAIK 57% | LAMA 50% (n 68) / BARU 54% (n 130) | tebak NAIK 60% (n 92) / TURUN 46% (n 106)
+     per tahun: 2018 56% (16.0) • 2019 41% (22.0) • 2020 55% (20.0) • 2021 50% (14.0) • 2022 47% (15.0) • 2023 61% (23.0) • 2024 56% (36.0) • 2025 57% (46.0) • 2026 17% (6.0)
+     aturan paling sering terpakai: SEMUA: EXP− & M15+ ×23 | SEMUA: EXP+ & H24+ & GRUP− ×23 | ISM: EXP− ×20 | FOMC: H4+ ×14 | SEMUA: EXP− & GRUP− & LALU− ×14 | SEMUA: EXP− & M15+ & H4− ×13 | ISM: EXP+ & PS− & TREN+ ×13 | FOMC: M60+ ×9 | ADP: M60− & H4− ×8 | PPI: M60+ & H24+ ×8 | CLAIMS: PS− & TRD− & LALU− ×8 | FOMC: M60+ & TREN+ ×5
+       ADP: M60− & H4−: 50% (n 8)
+       CLAIMS: PS− & TRD− & LALU−: 88% (n 8)
+       FOMC: H4+: 57% (n 14)
+       FOMC: M60+: 44% (n 9)
+       ISM: EXP+ & PS− & TREN+: 62% (n 13)
+       ISM: EXP−: 35% (n 20)
+       PPI: M60+ & H24+: 88% (n 8)
+       SEMUA: EXP+ & H24+ & GRUP−: 74% (n 23)
+       SEMUA: EXP− & GRUP− & LALU−: 64% (n 14)
+       SEMUA: EXP− & M15+: 52% (n 23)
+       SEMUA: EXP− & M15+ & H4−: 31% (n 13)
+  target detik 1: tutup kertas 55% (n 403 dari 1983 rilis) | selalu-NAIK 49% | LAMA 51% (n 218) / BARU 59% (n 185) | tebak NAIK 60% (n 84) / TURUN 54% (n 319)
+     per tahun: 2014 53% (55.0) • 2015 50% (42.0) • 2017 67% (18.0) • 2018 43% (47.0) • 2019 45% (22.0) • 2020 60% (20.0) • 2021 58% (19.0) • 2022 73% (15.0) • 2023 58% (48.0) • 2024 58% (53.0) • 2025 59% (56.0) • 2026 38% (8.0)
+  target detik 5: tutup kertas 55% (n 251 dari 2049 rilis) | selalu-NAIK 54% | LAMA 60% (n 40) / BARU 54% (n 211) | tebak NAIK 67% (n 69) / TURUN 51% (n 182)
+     per tahun: 2017 67% (21.0) • 2018 25% (12.0) • 2020 100% (2.0) • 2021 89% (9.0) • 2022 71% (14.0) • 2023 54% (59.0) • 2024 45% (69.0) • 2025 57% (61.0) • 2026 75% (4.0)
+  target detik 10: tutup kertas 52% (n 206 dari 2048 rilis) | selalu-NAIK 51% | LAMA 64% (n 11) / BARU 52% (n 195) | tebak NAIK 68% (n 19) / TURUN 51% (n 187)
+     per tahun: 2019 40% (5.0) • 2020 100% (3.0) • 2021 86% (7.0) • 2022 60% (10.0) • 2023 47% (53.0) • 2024 51% (75.0) • 2025 53% (51.0) • 2026 50% (2.0)
+B. Pembanding: fitur LIVE + tick (D10/D30/D120/TIK/BTC10 — tidak bisa dipasang, hanya untuk melihat batas atas):
+  dengan fitur tick (2 syarat): tutup kertas 50% (n 212 dari 2026 rilis) | selalu-NAIK 52% | LAMA 53% (n 70) / BARU 49% (n 142) | tebak NAIK 53% (n 85) / TURUN 49% (n 127)
+     per tahun: 2018 56% (16.0) • 2019 44% (27.0) • 2020 75% (12.0) • 2021 48% (21.0) • 2022 42% (26.0) • 2023 50% (32.0) • 2024 58% (31.0) • 2025 50% (38.0) • 2026 33% (9.0)
+C. ACAK (arah emas diacak dalam tiap tahun, prosedur sama, 30×):
+  acak: rata-rata 48.4%, P95 52.8% (30 dari 30 putaran memilih aturan)
+==============================================================================================================
+PUTUSAN: TIDAK LOLOS → tidak dipasang (syarat: ≥ 65%, n ≥ 40, LAMA & BARU ≥ 60%, > selalu-NAIK +10 poin, > P95 acak)

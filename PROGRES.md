@@ -351,3 +351,6 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   + `sentimen_orang_uji.py` — 7 sumber (Kitco Main/Wall Street 155 pekan, StockTwits, Wikipedia, COT trader kecil, Google Trends,
   UMich/OECD) → 0 lolos (orang hampir selalu BUY; kontrarian hanya LAMA). Dipasang info 👥 (`_sentimen.py`) + baris XAU selalu
   persen + detail poin ringkas (`_pra_aset.satu`). docs/SENTIMEN_ORANG.md.
+- 14 Okt ("tutup kertas sebelum rilis", "cari aturan sebelum rilis dan pasang"): poin 🧾 tutup kertas sebelum rilis (CPI/PPI) +
+  `research/aturan_pra.py` (±40 rb aturan, tutup kertas 53% = acak → 0 lolos; angka uji tampil di poin 🧾 berita tanpa tebakan).
+
