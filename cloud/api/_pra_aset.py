@@ -343,7 +343,7 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
                        **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik",
-                                            "terbaru", "lemah_jenis") if k in g},
+                                            "terbaru", "lemah_jenis", "cpi_inti") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
@@ -606,7 +606,16 @@ def allin(row: dict) -> dict | None:
         # 13 Okt: PPI-WTI diuji dengan cara yang sama (research/ppi_wti.py) → jauh lebih lemah dari CPI
         lv = (_ppi_wti.DATA.get("allin_lentur") or {})
         x2 = lv.get("200") or {}
-        return {"kuat": False, "teks": "💥 Modal kecil PPI: lemah — utamakan CPI",
+        if (row.get("cpi_inti") or {}).get("hubungan") == "sepakat":
+            # 15 Okt (pengguna: "PPI 74% turun, kenapa lemah?"): 74% = arah LONJAKAN menit 1, bukan detik 2. Diuji tick
+            # Exness masuk t−1 dtk pada 16 PPI "CPI inti searah" 2016–2026: tutup detik 2 untung 56% (≈ impas), tutup detik
+            # 10 untung 62%, 1:200 +$4,7/$100 (sejak Okt 2021 +$9,5, n 12; sebelum rugi −$9,6, n 4), 1:500 modal habis 1×.
+            return {"kuat": False, "teks": "💥 Modal kecil PPI: 74% = arah menit 1; masuk t−1 tutup detik 2 untung "
+                                           "hanya 56% rilis → lemah • bila tetap: maks 1:200, tutup detik 10",
+                    "bukti": "Uji tick Exness 16 PPI serupa (CPI inti searah): tutup detik 2 untung 56% (≈ impas) • tutup "
+                             "detik 10 untung 62%, 1:200 +$4,7 per $100 (sejak 2021 +$9,5, n 12; sebelum 2021 rugi) • 1:500 "
+                             "modal habis 1× • CPI tebakan kuat dulu +$20, untung 78% — PPI jauh lebih tipis"}
+        return {"kuat": False, "teks": "💥 Modal kecil PPI: arah detik 1–2 lemah → hindari modal kecil",
                 "bukti": (f"Uji sejak 2022 (lentur, {x2.get('n_baru')} rilis): untung di {x2.get('untung_baru')}% rilis; per "
                           f"modal $100 1:100 +${(lv.get('100') or {}).get('rata', 0):.0f}, 1:200 +${x2.get('rata', 0):.0f}, "
                           f"1:500 +${(lv.get('500') or {}).get('rata', 0):.0f} (modal habis {(lv.get('500') or {}).get('mc', 0)}×) • "
