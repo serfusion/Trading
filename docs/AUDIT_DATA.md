@@ -75,3 +75,16 @@ konsensus, Kalshi, jam pertama konsensus indeks) → `arsip-data:pra/<pekan>.jso
 
 ## F. Cek langsung 14 Okt (terjadwal 11:40 UTC)
 Pemantau mencatat jam pertama konsensus indeks CPI muncul di Nasdaq (`docs/eksternal/hasil_cek_indeks_cpi.txt`).
+
+**Hasil (14 Okt 2026, 12 pembacaan tiap 5 mnt 11:41–12:37 UTC):**
+- Konsensus **indeks CPI utama NSA** (`nsa_f` 336,65; bulan lalu 334,98) SUDAH ADA paling lambat **11:41 UTC = 49 menit sebelum
+  rilis** (13 Okt 18:55 WIB masih kosong → muncul antara H−1 malam dan pagi hari rilis), nilainya tidak berubah s/d rilis.
+- Konsensus **indeks inti** (`cidx_f`) KOSONG sampai sesudah rilis (sama seperti sepanjang 2026).
+- Nasdaq belum mengisi angka aktual 7 menit setelah rilis (`nsa_a` kosong) → sumber Act tetap BLS/FRED.
+- Kesimpulan: jalur IDX (indeks utama) **sah tanpa look-ahead** untuk rilis ini — konsensus indeks tersedia sebelum t0. Jalur
+  indeks INTI tidak bisa dipakai (tidak pernah tersedia sebelum rilis 2026). Uji riwayat tetap perlu dicek per rilis: tanggal
+  munculnya konsensus indeks di masa lalu tidak terekam, hanya nilainya.
+- Reaksi emas (Twelve Data 1 mnt, XAU/USD): candle 12:30 open 4.153,2 → high 4.172,8 / low 4.135,2 → close 4.166,3 (menit 1
+  NAIK +$13, sejalan "NAIK ⚠️ lemah" aplikasi), lalu turun ke 4.113,8 di 12:36 (−$52 dari puncak). Arah detik 1–10 perlu tick
+  Exness (arsip bulanan) untuk dinilai; Act CPI belum terbaca (BLS batas harian habis, FRED belum terbit).
+
