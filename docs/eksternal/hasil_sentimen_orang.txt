@@ -1,0 +1,124 @@
+👥 SENTIMEN ORANG → ARAH EMAS (dibuat 14 Oct 2026 04:22 UTC; emas harian Twelve Data 2008–14 Oct 2026)
+Benar = arah close emas k hari kerja sesudah data terbit sama dengan tebakan. p = binomial vs laju dasar terbesar.
+==============================================================================================================
+A. KITCO — survei mingguan: Main Street (orang umum, voting online) & Wall Street (analis)
+   155 pekan (27 May 2022 – 09 Oct 2026); suara Main Street median 219 (min 16, maks 2490); total 44,601 suara
+   rata-rata Main Street: naik 58% / turun 23% / datar 19% — mayoritas NAIK di 97% pekan
+ — target 1 pekan:
+  Main Street ikut mayoritas                     n 154 benar  53.2% | tebak NAIK  54.0% (n 150) TURUN  25.0% (n 4) | selalu-NAIK  54.5% | paruh 51/55% | p 0.658
+  Main Street LAWAN mayoritas                    n 154 benar  46.8% | tebak NAIK  75.0% (n 4) TURUN  46.0% (n 150) | selalu-NAIK  54.5% | paruh 49/45% | p 0.978
+  Main Street ekstrem (P80) ikut                 n  72 benar  58.3% | tebak NAIK  65.2% (n 46) TURUN  46.2% (n 26) | selalu-NAIK  61.1% | paruh 62/54% | p 0.729
+  Wall Street (analis) ikut                      n 149 benar  47.7% | tebak NAIK  51.9% (n 108) TURUN  36.6% (n 41) | selalu-NAIK  55.0% | paruh 49/46% | p 0.971
+  orang & analis sepakat                         n 110 benar  50.9% | tebak NAIK  52.3% (n 107) TURUN   0.0% (n 3) | selalu-NAIK  53.6% | paruh 50/52% | p 0.749
+  beda → ikut analis                             n  39 benar  38.5% | tebak NAIK   0.0% (n 1) TURUN  39.5% (n 38) | selalu-NAIK  59.0% | paruh 40/37% | p 0.997
+  orang makin optimis → naik                     n 151 benar  49.7% | tebak NAIK  54.8% (n 73) TURUN  45.5% (n 77) | selalu-NAIK  54.3% | paruh 51/48% | p 0.890
+  ⤷ tutup kertas Main Street: 43.2% (n 132) vs selalu-NAIK 56.8% • 2024:lawan 49% (n 47, naik 51%) | 2025:lawan 33% (n 46, naik 70%) | 2026:ikut 49% (n 39, naik 49%)
+  ⤷ tutup kertas Wall Street: 41.9% (n 129) vs selalu-NAIK 56.6% • 2024:ikut 43% (n 47, naik 51%) | 2025:lawan 43% (n 44, naik 68%) | 2026:ikut 39% (n 38, naik 50%)
+ — target 1 hari:
+  Main Street ikut mayoritas                     n 155 benar  54.2% | tebak NAIK  55.0% (n 151) TURUN  25.0% (n 4) | selalu-NAIK  55.5% | paruh 54/55% | p 0.658
+  Main Street LAWAN mayoritas                    n 155 benar  45.8% | tebak NAIK  75.0% (n 4) TURUN  45.0% (n 151) | selalu-NAIK  55.5% | paruh 46/45% | p 0.994
+  Main Street ekstrem (P80) ikut                 n  73 benar  63.0% | tebak NAIK  67.4% (n 46) TURUN  55.6% (n 27) | selalu-NAIK  58.9% | paruh 54/72% | p 0.278
+  Wall Street (analis) ikut                      n 150 benar  50.0% | tebak NAIK  54.1% (n 109) TURUN  39.0% (n 41) | selalu-NAIK  56.0% | paruh 49/51% | p 0.941
+  orang & analis sepakat                         n 111 benar  53.2% | tebak NAIK  53.7% (n 108) TURUN  33.3% (n 3) | selalu-NAIK  54.1% | paruh 52/55% | p 0.613
+  beda → ikut analis                             n  39 benar  41.0% | tebak NAIK 100.0% (n 1) TURUN  39.5% (n 38) | selalu-NAIK  61.5% | paruh 35/47% | p 0.997
+  orang makin optimis → naik                     n 152 benar  53.9% | tebak NAIK  60.3% (n 73) TURUN  48.7% (n 78) | selalu-NAIK  55.9% | paruh 53/55% | p 0.717
+  ⤷ tutup kertas Main Street: 51.9% (n 133) vs selalu-NAIK 57.9% • 2024:lawan 43% (n 47, naik 57%) | 2025:ikut 67% (n 46, naik 70%) | 2026:ikut 45% (n 40, naik 45%)
+  ⤷ tutup kertas Wall Street: 43.8% (n 130) vs selalu-NAIK 57.7% • 2024:lawan 51% (n 47, naik 57%) | 2025:lawan 39% (n 44, naik 68%) | 2026:ikut 41% (n 39, naik 46%)
+==============================================================================================================
+B. STOCKTWITS — pesan berlabel Bullish/Bearish (percakapan trader)
+   GLD: 15,019 pesan (4,033 berlabel, bull 72%), 19 Mar 2026 – 13 Oct 2026
+   gabungan: 188 hari dengan ≥ 5 pesan berlabel, rasio bull median 74%
+ — target 1 hari:
+  mayoritas bull → naik                          n 181 benar  48.1% | tebak NAIK  46.6% (n 163) TURUN  61.1% (n 18) | selalu-NAIK  45.9% | paruh 49/47% | p 0.957
+  lonjakan bull (z ≥ 1) → naik                   n  62 benar  45.2% | tebak NAIK  41.4% (n 29) TURUN  48.5% (n 33) | selalu-NAIK  46.8% | paruh 53/37% | p 0.919
+  lonjakan bull (z ≥ 1) → TURUN (kontrarian)     n  62 benar  54.8% | tebak NAIK  51.5% (n 33) TURUN  58.6% (n 29) | selalu-NAIK  46.8% | paruh 47/63% | p 0.451
+ — target 1 pekan:
+  mayoritas bull → naik                          n 175 benar  44.6% | tebak NAIK  45.9% (n 157) TURUN  33.3% (n 18) | selalu-NAIK  48.0% | paruh 42/47% | p 0.979
+  lonjakan bull (z ≥ 1) → naik                   n  60 benar  41.7% | tebak NAIK  33.3% (n 27) TURUN  48.5% (n 33) | selalu-NAIK  43.3% | paruh 52/31% | p 0.993
+  lonjakan bull (z ≥ 1) → TURUN (kontrarian)     n  60 benar  58.3% | tebak NAIK  51.5% (n 33) TURUN  66.7% (n 27) | selalu-NAIK  43.3% | paruh 48/69% | p 0.451
+==============================================================================================================
+C. WIKIPEDIA — perhatian publik (kunjungan harian artikel emas)
+   2945 hari kerja, lonjakan perhatian (z ≥ 2) 128 hari
+ — target 1 hari:
+  perhatian melonjak → balik arah                n 128 benar  55.5% | tebak NAIK  56.9% (n 58) TURUN  54.3% (n 70) | selalu-NAIK  50.8% | paruh 52/59% | p 0.165
+  perhatian melonjak → lanjut arah               n 128 benar  44.5% | tebak NAIK  45.7% (n 70) TURUN  43.1% (n 58) | selalu-NAIK  50.8% | paruh 48/41% | p 0.934
+     LAMA <Okt21: balik arah                     n  59 benar  54.2% | tebak NAIK  56.7% (n 30) TURUN  51.7% (n 29) | selalu-NAIK  52.5% | paruh 47/62% | p 0.449
+     BARU: balik arah                            n  69 benar  56.5% | tebak NAIK  57.1% (n 28) TURUN  56.1% (n 41) | selalu-NAIK  49.3% | paruh 57/56% | p 0.200
+ — target 1 pekan:
+  perhatian melonjak → balik arah                n 128 benar  54.7% | tebak NAIK  62.1% (n 58) TURUN  48.6% (n 70) | selalu-NAIK  56.2% | paruh 52/57% | p 0.673
+  perhatian melonjak → lanjut arah               n 128 benar  45.3% | tebak NAIK  51.4% (n 70) TURUN  37.9% (n 58) | selalu-NAIK  56.2% | paruh 48/43% | p 0.995
+     LAMA <Okt21: balik arah                     n  59 benar  54.2% | tebak NAIK  66.7% (n 30) TURUN  41.4% (n 29) | selalu-NAIK  62.7% | paruh 53/55% | p 0.929
+     BARU: balik arah                            n  69 benar  55.1% | tebak NAIK  57.1% (n 28) TURUN  53.7% (n 41) | selalu-NAIK  50.7% | paruh 57/53% | p 0.274
+==============================================================================================================
+D. COT CFTC — posisi TRADER KECIL (non-reportable = ritel futures emas) vs managed money; mingguan sejak 2006
+   1036 pekan 2006–09 Oct 2026; trader kecil kini 76% long
+ — target 1 pekan:
+  trader kecil ekstrem (z ±1,5) → LAWAN          n 241 benar  53.5% | tebak NAIK  55.3% (n 114) TURUN  52.0% (n 127) | selalu-NAIK  51.5% | paruh 57/50% | p 0.281
+     LAMA < Okt 2021                             n 179 benar  55.3% | tebak NAIK  53.5% (n 86) TURUN  57.0% (n 93) | selalu-NAIK  48.0% | paruh 59/52% | p 0.205
+     BARU                                        n  62 benar  48.4% | tebak NAIK  60.7% (n 28) TURUN  38.2% (n 34) | selalu-NAIK  61.3% | paruh 53/43% | p 0.986
+  trader kecil menambah long → naik              n 943 benar  50.1% | tebak NAIK  53.7% (n 482) TURUN  46.2% (n 461) | selalu-NAIK  53.8% | paruh 52/48% | p 0.990
+     LAMA < Okt 2021                             n 694 benar  51.4% | tebak NAIK  54.4% (n 360) TURUN  48.2% (n 334) | selalu-NAIK  53.2% | paruh 51/52% | p 0.829
+     BARU                                        n 249 benar  46.2% | tebak NAIK  51.6% (n 122) TURUN  40.9% (n 127) | selalu-NAIK  55.4% | paruh 46/46% | p 0.999
+  managed money ekstrem → LAWAN                  n 256 benar  55.5% | tebak NAIK  58.4% (n 166) TURUN  50.0% (n 90) | selalu-NAIK  55.5% | paruh 59/52% | p 0.526
+     LAMA < Okt 2021                             n 190 benar  55.8% | tebak NAIK  58.7% (n 138) TURUN  48.1% (n 52) | selalu-NAIK  56.8% | paruh 56/55% | p 0.644
+     BARU                                        n  66 benar  54.5% | tebak NAIK  57.1% (n 28) TURUN  52.6% (n 38) | selalu-NAIK  51.5% | paruh 59/50% | p 0.356
+  managed money menambah long → naik             n 943 benar  48.4% | tebak NAIK  52.1% (n 476) TURUN  44.5% (n 467) | selalu-NAIK  53.8% | paruh 49/48% | p 1.000
+     LAMA < Okt 2021                             n 694 benar  48.7% | tebak NAIK  51.8% (n 353) TURUN  45.5% (n 341) | selalu-NAIK  53.2% | paruh 50/47% | p 0.992
+     BARU                                        n 249 benar  47.4% | tebak NAIK  52.8% (n 123) TURUN  42.1% (n 126) | selalu-NAIK  55.4% | paruh 47/48% | p 0.995
+  ⤷ tutup kertas trader kecil ekstrem: 52.8% (n 218) vs selalu-NAIK 50.5% • 2010:ikut 67% (n 6, naik 33%) | 2011:ikut 50% (n 10, naik 60%) | 2012:ikut 56% (n 18, naik 39%) | 2013:ikut 59% (n 17, naik 59%) | 2014:ikut 60% (n 15, naik 47%) | 2015:ikut 67% (n 6, naik 17%) | 2016:ikut 60% (n 20, naik 40%) | 2017:ikut 45% (n 11, naik 18%) | 2018:ikut 50% (n 16, naik 31%) | 2019:ikut 38% (n 13, naik 62%) | 2020:ikut 44% (n 16, naik 56%) | 2021:ikut 67% (n 12, naik 75%) | 2022:ikut 56% (n 18, naik 56%) | 2023:ikut 100% (n 1, naik 0%) | 2024:ikut 50% (n 8, naik 62%) | 2025:ikut 47% (n 17, naik 65%) | 2026:ikut 36% (n 14, naik 71%)
+ — target 1 bulan:
+  trader kecil ekstrem (z ±1,5) → LAWAN          n 241 benar  58.9% | tebak NAIK  57.9% (n 114) TURUN  59.8% (n 127) | selalu-NAIK  48.5% | paruh 60/57% | p 0.012
+     LAMA < Okt 2021                             n 179 benar  60.9% | tebak NAIK  57.0% (n 86) TURUN  64.5% (n 93) | selalu-NAIK  45.8% | paruh 62/60% | p 0.042
+     BARU                                        n  62 benar  53.2% | tebak NAIK  60.7% (n 28) TURUN  47.1% (n 34) | selalu-NAIK  56.5% | paruh 56/50% | p 0.740
+  trader kecil menambah long → naik              n 940 benar  47.2% | tebak NAIK  51.4% (n 481) TURUN  42.9% (n 459) | selalu-NAIK  54.1% | paruh 47/47% | p 1.000
+     LAMA < Okt 2021                             n 694 benar  46.4% | tebak NAIK  48.9% (n 360) TURUN  43.7% (n 334) | selalu-NAIK  52.4% | paruh 45/47% | p 0.999
+     BARU                                        n 246 benar  49.6% | tebak NAIK  58.7% (n 121) TURUN  40.8% (n 125) | selalu-NAIK  58.9% | paruh 52/47% | p 0.999
+  managed money ekstrem → LAWAN                  n 253 benar  55.7% | tebak NAIK  57.8% (n 166) TURUN  51.7% (n 87) | selalu-NAIK  54.5% | paruh 61/50% | p 0.377
+     LAMA < Okt 2021                             n 190 benar  55.3% | tebak NAIK  58.0% (n 138) TURUN  48.1% (n 52) | selalu-NAIK  56.3% | paruh 65/46% | p 0.644
+     BARU                                        n  63 benar  57.1% | tebak NAIK  57.1% (n 28) TURUN  57.1% (n 35) | selalu-NAIK  49.2% | paruh 53/61% | p 0.189
+  managed money menambah long → naik             n 940 benar  48.4% | tebak NAIK  52.5% (n 474) TURUN  44.2% (n 466) | selalu-NAIK  54.1% | paruh 49/48% | p 1.000
+     LAMA < Okt 2021                             n 694 benar  49.1% | tebak NAIK  51.6% (n 353) TURUN  46.6% (n 341) | selalu-NAIK  52.4% | paruh 47/51% | p 0.963
+     BARU                                        n 246 benar  46.3% | tebak NAIK  55.4% (n 121) TURUN  37.6% (n 125) | selalu-NAIK  58.9% | paruh 48/45% | p 1.000
+  ⤷ tutup kertas trader kecil ekstrem: 58.3% (n 218) vs selalu-NAIK 45.9% • 2010:ikut 50% (n 6, naik 50%) | 2011:ikut 50% (n 10, naik 60%) | 2012:ikut 78% (n 18, naik 28%) | 2013:ikut 47% (n 17, naik 47%) | 2014:ikut 67% (n 15, naik 27%) | 2015:ikut 83% (n 6, naik 33%) | 2016:ikut 55% (n 20, naik 45%) | 2017:ikut 55% (n 11, naik 45%) | 2018:ikut 62% (n 16, naik 44%) | 2019:ikut 54% (n 13, naik 46%) | 2020:ikut 62% (n 16, naik 38%) | 2021:ikut 67% (n 12, naik 58%) | 2022:ikut 44% (n 18, naik 44%) | 2023:ikut 100% (n 1, naik 0%) | 2024:ikut 75% (n 8, naik 62%) | 2025:ikut 41% (n 17, naik 71%) | 2026:ikut 57% (n 14, naik 50%)
+==============================================================================================================
+E. GOOGLE TRENDS — pencarian 'buy gold' vs 'sell gold' (niat orang sedunia), mingguan 2004–2026
+   1190 pekan; rata-rata rasio buy/(buy+sell) 79% (orang lebih sering mencari 'buy')
+ — target 1 pekan:
+  'buy gold' melonjak → LAWAN (turun)            n 106 benar  55.7% | tebak NAIK  58.0% (n 50) TURUN  53.6% (n 56) | selalu-NAIK  51.9% | paruh 56/56% | p 0.248
+     LAMA < Okt 2021                             n  91 benar  56.0% | tebak NAIK  57.9% (n 38) TURUN  54.7% (n 53) | selalu-NAIK  50.5% | paruh 57/56% | p 0.173
+     BARU                                        n  15 benar  53.3% | tebak NAIK  58.3% (n 12) TURUN  33.3% (n 3) | selalu-NAIK  60.0% | paruh 50/57% | p 0.787
+  'buy gold' melonjak → ikut (naik)              n 106 benar  44.3% | tebak NAIK  46.4% (n 56) TURUN  42.0% (n 50) | selalu-NAIK  51.9% | paruh 44/44% | p 0.951
+     LAMA < Okt 2021                             n  91 benar  44.0% | tebak NAIK  45.3% (n 53) TURUN  42.1% (n 38) | selalu-NAIK  50.5% | paruh 43/44% | p 0.914
+     BARU                                        n  15 benar  46.7% | tebak NAIK  66.7% (n 3) TURUN  41.7% (n 12) | selalu-NAIK  60.0% | paruh 50/43% | p 0.905
+  'gold price' melonjak → balik arah 1 bln       n  85 benar  51.8% | tebak NAIK  74.2% (n 31) TURUN  39.6% (n 53) | selalu-NAIK  65.9% | paruh 58/45% | p 0.997
+     LAMA < Okt 2021                             n  61 benar  55.7% | tebak NAIK  75.0% (n 24) TURUN  44.4% (n 36) | selalu-NAIK  63.9% | paruh 58/53% | p 0.927
+     BARU                                        n  24 benar  41.7% | tebak NAIK  71.4% (n 7) TURUN  29.4% (n 17) | selalu-NAIK  70.8% | paruh 46/36% | p 0.999
+  ⤷ tutup kertas 'buy gold': 54.2% (n 83) vs selalu-NAIK 53.0% • 2011:ikut 58% (n 12, naik 67%) | 2012:ikut 50% (n 10, naik 50%) | 2013:ikut 60% (n 5, naik 40%) | 2014:ikut 0% (n 2, naik 100%) | 2015:ikut 50% (n 6, naik 33%) | 2016:ikut 80% (n 5, naik 40%) | 2017:ikut 50% (n 2, naik 50%) | 2018:ikut 14% (n 7, naik 43%) | 2019:ikut 75% (n 8, naik 75%) | 2020:ikut 50% (n 8, naik 50%) | 2021:ikut 100% (n 3, naik 0%) | 2025:ikut 50% (n 6, naik 50%) | 2026:ikut 56% (n 9, naik 67%)
+ — target 1 bulan:
+  'buy gold' melonjak → LAWAN (turun)            n 106 benar  50.0% | tebak NAIK  52.0% (n 50) TURUN  48.2% (n 56) | selalu-NAIK  51.9% | paruh 39/62% | p 0.687
+     LAMA < Okt 2021                             n  91 benar  45.1% | tebak NAIK  39.5% (n 38) TURUN  49.1% (n 53) | selalu-NAIK  46.2% | paruh 41/49% | p 0.963
+     BARU                                        n  15 benar  80.0% | tebak NAIK  91.7% (n 12) TURUN  33.3% (n 3) | selalu-NAIK  86.7% | paruh 75/86% | p 0.871
+  'buy gold' melonjak → ikut (naik)              n 106 benar  50.0% | tebak NAIK  51.8% (n 56) TURUN  48.0% (n 50) | selalu-NAIK  51.9% | paruh 61/38% | p 0.687
+     LAMA < Okt 2021                             n  91 benar  54.9% | tebak NAIK  50.9% (n 53) TURUN  60.5% (n 38) | selalu-NAIK  46.2% | paruh 59/51% | p 0.459
+     BARU                                        n  15 benar  20.0% | tebak NAIK  66.7% (n 3) TURUN   8.3% (n 12) | selalu-NAIK  86.7% | paruh 25/14% | p 1.000
+  'gold price' melonjak → balik arah 1 bln       n  85 benar  51.8% | tebak NAIK  74.2% (n 31) TURUN  39.6% (n 53) | selalu-NAIK  64.7% | paruh 63/40% | p 0.995
+     LAMA < Okt 2021                             n  61 benar  59.0% | tebak NAIK  75.0% (n 24) TURUN  50.0% (n 36) | selalu-NAIK  59.0% | paruh 61/57% | p 0.555
+     BARU                                        n  24 benar  33.3% | tebak NAIK  71.4% (n 7) TURUN  17.6% (n 17) | selalu-NAIK  79.2% | paruh 38/27% | p 1.000
+  ⤷ tutup kertas 'buy gold': 47.0% (n 83) vs selalu-NAIK 59.0% • 2011:lawan 50% (n 12, naik 58%) | 2012:lawan 60% (n 10, naik 40%) | 2013:lawan 60% (n 5, naik 60%) | 2014:lawan 100% (n 2, naik 100%) | 2015:lawan 100% (n 6, naik 50%) | 2016:lawan 40% (n 5, naik 60%) | 2017:lawan 0% (n 2, naik 100%) | 2018:lawan 71% (n 7, naik 29%) | 2019:lawan 25% (n 8, naik 75%) | 2020:lawan 50% (n 8, naik 50%) | 2021:lawan 0% (n 3, naik 0%) | 2025:lawan 0% (n 6, naik 100%) | 2026:lawan 33% (n 9, naik 78%)
+==============================================================================================================
+F. SURVEI KONSUMEN (kepuasan/keyakinan konsumen AS, bulanan) → emas 1 bulan
+ UMich sentimen konsumen (UMCSENT): 273 bulan
+  UMich sentimen konsumen turun → emas naik      n 220 benar  54.1% | tebak NAIK  55.8% (n 104) TURUN  52.6% (n 116) | selalu-NAIK  51.4% | paruh 58/50% | p 0.229
+     LAMA < Okt 2021                             n 161 benar  54.0% | tebak NAIK  53.4% (n 73) TURUN  54.5% (n 88) | selalu-NAIK  49.1% | paruh 63/45% | p 0.239
+     BARU                                        n  59 benar  54.2% | tebak NAIK  61.3% (n 31) TURUN  46.4% (n 28) | selalu-NAIK  57.6% | paruh 53/55% | p 0.746
+  ⤷ tutup kertas UMich sentimen konsumen: 54.3% (n 199) vs selalu-NAIK 50.3% • 2010:ikut 55% (n 11, naik 73%) | 2011:ikut 75% (n 12, naik 50%) | 2012:ikut 75% (n 12, naik 42%) | 2013:ikut 50% (n 12, naik 33%) | 2014:ikut 83% (n 12, naik 33%) | 2015:ikut 42% (n 12, naik 42%) | 2016:ikut 42% (n 12, naik 42%) | 2017:ikut 67% (n 12, naik 75%) | 2018:ikut 33% (n 12, naik 33%) | 2019:ikut 50% (n 12, naik 50%) | 2020:ikut 58% (n 12, naik 58%) | 2021:ikut 17% (n 12, naik 42%) | 2022:ikut 67% (n 12, naik 33%) | 2023:ikut 42% (n 12, naik 58%) | 2024:ikut 58% (n 12, naik 67%) | 2025:ikut 82% (n 11, naik 91%) | 2026:ikut 22% (n 9, naik 33%)
+ OECD keyakinan konsumen AS (CSCICP03USM665S): 242 bulan
+  OECD keyakinan konsumen AS turun → emas naik   n 191 benar  54.5% | tebak NAIK  53.7% (n 95) TURUN  55.2% (n 96) | selalu-NAIK  49.2% | paruh 54/55% | p 0.173
+     LAMA < Okt 2021                             n 162 benar  55.6% | tebak NAIK  55.0% (n 80) TURUN  56.1% (n 82) | selalu-NAIK  49.4% | paruh 55/56% | p 0.119
+     BARU                                        n  29 benar  48.3% | tebak NAIK  46.7% (n 15) TURUN  50.0% (n 14) | selalu-NAIK  48.3% | paruh 40/57% | p 0.711
+  ⤷ tutup kertas OECD keyakinan konsumen AS: 54.7% (n 170) vs selalu-NAIK 47.6% • 2010:ikut 67% (n 12, naik 75%) | 2011:ikut 50% (n 12, naik 50%) | 2012:ikut 58% (n 12, naik 42%) | 2013:ikut 50% (n 12, naik 33%) | 2014:ikut 58% (n 12, naik 33%) | 2015:ikut 58% (n 12, naik 42%) | 2016:ikut 42% (n 12, naik 42%) | 2017:ikut 67% (n 12, naik 75%) | 2018:ikut 42% (n 12, naik 33%) | 2019:ikut 50% (n 12, naik 50%) | 2020:ikut 83% (n 12, naik 58%) | 2021:ikut 50% (n 12, naik 42%) | 2022:ikut 33% (n 12, naik 33%) | 2023:ikut 58% (n 12, naik 58%) | 2024:ikut 50% (n 2, naik 50%)
+ UMich ekspektasi inflasi (MICH): 273 bulan
+  UMich ekspektasi inflasi turun → emas naik     n 184 benar  48.9% | tebak NAIK  52.0% (n 100) TURUN  45.2% (n 84) | selalu-NAIK  53.3% | paruh 41/57% | p 0.895
+     LAMA < Okt 2021                             n 130 benar  48.5% | tebak NAIK  50.0% (n 70) TURUN  46.7% (n 60) | selalu-NAIK  51.5% | paruh 39/58% | p 0.785
+     BARU                                        n  54 benar  50.0% | tebak NAIK  56.7% (n 30) TURUN  41.7% (n 24) | selalu-NAIK  57.4% | paruh 43/58% | p 0.892
+  ⤷ tutup kertas UMich ekspektasi inflasi: 49.0% (n 155) vs selalu-NAIK 50.3% • 2011:lawan 38% (n 8, naik 75%) | 2012:lawan 50% (n 10, naik 50%) | 2013:lawan 70% (n 10, naik 30%) | 2014:lawan 80% (n 10, naik 30%) | 2015:lawan 50% (n 8, naik 25%) | 2016:lawan 44% (n 9, naik 56%) | 2017:lawan 62% (n 8, naik 75%) | 2018:lawan 30% (n 10, naik 30%) | 2019:lawan 44% (n 9, naik 44%) | 2020:lawan 30% (n 10, naik 70%) | 2021:lawan 36% (n 11, naik 36%) | 2022:lawan 88% (n 8, naik 25%) | 2023:lawan 42% (n 12, naik 58%) | 2024:lawan 36% (n 11, naik 73%) | 2025:lawan 58% (n 12, naik 83%) | 2026:lawan 33% (n 9, naik 33%)

@@ -14,6 +14,7 @@ Data ditambahkan (append + buang duplikat), tidak pernah ditimpa:
   berita/aktual.jsonl         Act resmi FRED (NFP, CPI, PPI, Retail, klaim, JOLTS, PCE; butuh secret FRED_API_KEY)
   copytrader/<tgl>.json.gz    potret harian OKX/Bitget/Hyperliquid (vault + 300 trader leaderboard teratas)
   kalshi/<tgl>.json.gz        peluang pasar Kalshi CPI/NFP/Fed (harian)
+  sentimen/fxssi.jsonl        👥 % posisi BUY XAUUSD per broker ritel (FXSSI, tiap jam) + harian_<bln>.jsonl Kitco & COT
   log.jsonl                   ringkasan tiap putaran (berhasil/gagal per pengumpul)
 """
 from __future__ import annotations
@@ -325,12 +326,39 @@ def nfp_titik(root: Path, now: datetime) -> str:
     return f"lead {f['lead']:+d}, peluang {_nfp_titik.ringkas(f)['peluang']}%"
 
 
+def sentimen(root: Path, now: datetime) -> str:
+    """👥 posisi ritel XAUUSD per broker (FXSSI, tiap jam) + survei Kitco & COT trader kecil (harian) → uji maju
+    sentimen orang (riwayat FXSSI tidak tersedia gratis, jadi dikumpulkan sendiri mulai 14 Okt 2026)."""
+    d = get("https://fxssi.com/api/current-ratios")
+    br = {k: float(v["XAUUSD"]) for k, v in (d.get("brokers") or {}).items() if isinstance(v, dict) and v.get("XAUUSD")}
+    if not br:
+        return "FXSSI kosong"
+    p = root / "sentimen" / "fxssi.jsonl"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with p.open("a") as f:
+        f.write(json.dumps({"t": now.strftime("%Y-%m-%dT%H:%MZ"), "formed": d.get("formed"), "xau": br}) + "\n")
+    harian = root / "sentimen" / f"harian_{now:%Y-%m}.jsonl"
+    hari = now.strftime("%Y-%m-%d")
+    if not (harian.exists() and f'"{hari}"' in harian.read_text()):
+        _cloud()
+        import _sentimen
+        row = {"hari": hari}
+        for k in ("kitco", "cot"):
+            try:
+                row[k] = getattr(_sentimen, k)()
+            except Exception as e:  # noqa: BLE001
+                row[k] = f"GAGAL {type(e).__name__}"
+        with harian.open("a") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+    return f"FXSSI {len(br)} broker, BUY rata-rata {sum(br.values()) / len(br):.0f}%"
+
+
 def main(root: Path) -> None:
     now = datetime.now(timezone.utc)
     hasil = {"waktu": now.strftime("%Y-%m-%dT%H:%MZ")}
     for lab, fn in (("candle_kripto", candle_binance), ("candle_xau", candle_xau), ("berita_ff", berita_ff),
                     ("berita_fred", berita_fred), ("copytrader", copytrader), ("kalshi", kalshi),
-                    ("nfp_titik", nfp_titik), ("prediksi", prediksi), ("pra", pra)):
+                    ("nfp_titik", nfp_titik), ("prediksi", prediksi), ("pra", pra), ("sentimen", sentimen)):
         try:
             hasil[lab] = fn(root, now)
         except Exception as e:  # noqa: BLE001 - satu sumber gagal, lainnya tetap

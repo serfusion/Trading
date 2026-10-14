@@ -256,6 +256,11 @@ class handler(BaseHTTPRequestHandler):
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):
+                try:                                          # 👥 sentimen orang (_sentimen.py, info saja, 14 Okt 2026)
+                    import _sentimen
+                    _sentimen.attach(persiapan, store, now)
+                except Exception:  # noqa: BLE001 - opsional
+                    pass
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
                     import _pra_aset
                     key = os.environ.get("TWELVEDATA_API_KEY", "")

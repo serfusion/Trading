@@ -347,3 +347,7 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   otomatis setelah CPI inti (74/82/44%). CPI 14 Okt tampil "NAIK 54% ⚠️". docs/CPI_PPI_DASAR.md bagian 8.
 - 14 Okt (tab News "data tidak sesuai"): status tren tertimpa lambda di chat.py (diperbaiki), PPI-WTI angka audit per arah (TURUN 55%
   ⚠️, bukan 69%), detail kartu CPI/PPI diselaraskan dengan baris utama (`_pra_aset.selaras`).
+- 14 Okt ("kebanyakan orang sedunia buy atau sell? … di bawah XAU selalu persentase, poin-poin show/hide"): `research/sentimen_orang.py`
+  + `sentimen_orang_uji.py` — 7 sumber (Kitco Main/Wall Street 155 pekan, StockTwits, Wikipedia, COT trader kecil, Google Trends,
+  UMich/OECD) → 0 lolos (orang hampir selalu BUY; kontrarian hanya LAMA). Dipasang info 👥 (`_sentimen.py`) + baris XAU selalu
+  persen + detail poin ringkas (`_pra_aset.satu`). docs/SENTIMEN_ORANG.md.
