@@ -297,6 +297,26 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   },
   {
+   "title": "Trade Balance",
+   "country": "CNY",
+   "time_utc": "2026-10-14T02:31:00+00:00",
+   "date": "2026-10-13T22:31:00-04:00",
+   "impact": "Low",
+   "forecast": "790B",
+   "previous": "809B",
+   "first_seen": "2026-10-14T03:26:26.569180+00:00"
+  },
+  {
+   "title": "USD-Denominated Trade Balance",
+   "country": "CNY",
+   "time_utc": "2026-10-14T02:31:00+00:00",
+   "date": "2026-10-13T22:31:00-04:00",
+   "impact": "Low",
+   "forecast": "116.8B",
+   "previous": "119.1B",
+   "first_seen": "2026-10-14T03:26:26.569180+00:00"
+  },
+  {
    "title": "MPC Member Breeden Speaks",
    "country": "GBP",
    "time_utc": "2026-10-14T03:30:00+00:00",
@@ -1034,5 +1054,5 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   }
  ],
- "diperbarui": "2026-10-14T01:44:02.097406+00:00"
+ "diperbarui": "2026-10-14T03:26:26.569180+00:00"
 }
