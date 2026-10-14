@@ -18,9 +18,9 @@
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.155,
-    "bawah": 0.4,
-    "lean": -0.245
+    "atas": 0.175,
+    "bawah": 0.325,
+    "lean": -0.15
    },
    "inti": {
     "atas": 0.355,
@@ -28,15 +28,15 @@
     "lean": 0.13
    },
    "y/y": {
-    "atas": 0.45,
-    "bawah": 0.125,
-    "lean": 0.325
+    "atas": 0.465,
+    "bawah": 0.105,
+    "lean": 0.36
    }
   },
   "situasi": "keduanya",
   "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
-  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 15 jam lagi",
-  "dicatat": "2026-10-13T21:11:43.105046+00:00"
+  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 11 jam lagi",
+  "dicatat": "2026-10-14T01:09:47.964570+00:00"
  },
  "CPI m/m|2026-10-14T12:30:00+00:00": {
   "title": "CPI m/m",
@@ -57,9 +57,9 @@
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.155,
-    "bawah": 0.4,
-    "lean": -0.245
+    "atas": 0.175,
+    "bawah": 0.325,
+    "lean": -0.15
    },
    "inti": {
     "atas": 0.355,
@@ -67,15 +67,15 @@
     "lean": 0.13
    },
    "y/y": {
-    "atas": 0.45,
-    "bawah": 0.125,
-    "lean": 0.325
+    "atas": 0.465,
+    "bawah": 0.105,
+    "lean": 0.36
    }
   },
   "situasi": "keduanya",
   "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
-  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 15 jam lagi",
-  "dicatat": "2026-10-13T21:11:43.105046+00:00"
+  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 11 jam lagi",
+  "dicatat": "2026-10-14T01:09:47.964570+00:00"
  },
  "CPI y/y|2026-10-14T12:30:00+00:00": {
   "title": "CPI y/y",
@@ -96,9 +96,9 @@
   },
   "kalshi": {
    "m/m": {
-    "atas": 0.155,
-    "bawah": 0.4,
-    "lean": -0.245
+    "atas": 0.175,
+    "bawah": 0.325,
+    "lean": -0.15
    },
    "inti": {
     "atas": 0.355,
@@ -106,22 +106,22 @@
     "lean": 0.13
    },
    "y/y": {
-    "atas": 0.45,
-    "bawah": 0.125,
-    "lean": 0.325
+    "atas": 0.465,
+    "bawah": 0.105,
+    "lean": 0.36
    }
   },
   "situasi": "keduanya",
   "indeks_pertama": "2026-10-13T15:54:12.858531+00:00",
-  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 15 jam lagi",
-  "dicatat": "2026-10-13T21:11:43.105046+00:00"
+  "pra_satu": "CPI ▲ NAIK 54% (detik 2) ⚠️ • 11 jam lagi",
+  "dicatat": "2026-10-14T01:09:47.964570+00:00"
  },
  "Core PPI m/m|2026-10-15T12:30:00+00:00": {
   "title": "Core PPI m/m",
   "time": "2026-10-15T12:30:00+00:00",
   "arah": "turun",
-  "persen": 69,
-  "status": "tutup kertas",
+  "persen": 55,
+  "status": "lemah",
   "jalur": "minyak",
   "konsensus": null,
   "indeks": {},
@@ -129,14 +129,14 @@
   "situasi": null,
   "indeks_pertama": null,
   "pra_satu": null,
-  "dicatat": "2026-10-13T21:11:43.105046+00:00"
+  "dicatat": "2026-10-14T01:09:47.964570+00:00"
  },
  "PPI m/m|2026-10-15T12:30:00+00:00": {
   "title": "PPI m/m",
   "time": "2026-10-15T12:30:00+00:00",
   "arah": "turun",
-  "persen": 69,
-  "status": "tutup kertas",
+  "persen": 55,
+  "status": "lemah",
   "jalur": "minyak",
   "konsensus": null,
   "indeks": {},
@@ -144,6 +144,6 @@
   "situasi": null,
   "indeks_pertama": null,
   "pra_satu": null,
-  "dicatat": "2026-10-13T21:11:43.105046+00:00"
+  "dicatat": "2026-10-14T01:09:47.964570+00:00"
  }
 }
