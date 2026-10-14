@@ -150,15 +150,31 @@ def _num(v) -> float | None:
         return None
 
 
-def cpi_inti(persiapan: dict, t0: datetime) -> dict | None:
-    """Kejutan inti CPI yang terbit ≤ 4 hari sebelum PPI t0 dari kartu kalender (Act & perkiraan)."""
-    for c in persiapan.get("berita") or []:
-        if not isinstance(c, dict) or c.get("title") != "Core CPI m/m" or not c.get("released") or not c.get("time"):
+def cpi_inti(persiapan: dict, t0: datetime, calendar: list | None = None, store=None) -> dict | None:
+    """Kejutan inti CPI yang terbit ≤ 4 hari sebelum PPI t0: kartu persiapan → kalender pekan ini → simpanan Supabase
+    'ppi_cpi'. 15 Okt 2026 (bug): kartu CPI hilang 6 jam setelah rilis (_persiapan.KEEP_AFTER) sedangkan PPI terbit ±1 hari
+    kemudian → hasil CPI tidak terbaca dan PPI kembali ke angka tanpa CPI (74% → 55%). Kini hasil disimpan."""
+    for c in list(persiapan.get("berita") or []) + list(calendar or []):
+        if not isinstance(c, dict) or c.get("title") != "Core CPI m/m" or not c.get("time") or c.get("released") is False:
             continue
         t = datetime.fromisoformat(c["time"])
         a, f = _num(c.get("actual")), _num(c.get("forecast"))
         if t0 - timedelta(days=4) <= t < t0 and a is not None and f is not None:
-            return {"actual": a, "forecast": f, "s": (a > f) - (a < f), "time": c["time"]}
+            ci = {"actual": a, "forecast": f, "s": (a > f) - (a < f), "time": c["time"]}
+            if store is not None:
+                try:
+                    if (store.get_state("ppi_cpi") or {}).get("time") != ci["time"]:
+                        store.save_state(ci, "ppi_cpi")
+                except Exception:  # noqa: BLE001
+                    pass
+            return ci
+    if store is not None:
+        try:
+            ci = store.get_state("ppi_cpi") or {}
+        except Exception:  # noqa: BLE001
+            ci = {}
+        if ci.get("time") and t0 - timedelta(days=4) <= datetime.fromisoformat(ci["time"]) < t0:
+            return ci
     return None
 
 
@@ -187,7 +203,7 @@ def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
     return out
 
 
-def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env=None) -> None:
+def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env=None, calendar=None) -> None:
     """c["ppi_wti"] = tebakan (atau None) di setiap kartu PPI yang belum rilis (≤ 31 hari)."""
     if not isinstance(persiapan, dict) or not aktif():
         return
@@ -201,4 +217,4 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env
     for c in kartu:
         t0 = datetime.fromisoformat(c["time"])
         g = tebak(t0, obs, src) if obs else None
-        c["ppi_wti"] = pakai_cpi(g, cpi_inti(persiapan, t0))
+        c["ppi_wti"] = pakai_cpi(g, cpi_inti(persiapan, t0, calendar, store))
