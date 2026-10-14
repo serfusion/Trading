@@ -133,6 +133,10 @@ def tutup_kertas(row: dict) -> str | None:
         if row.get("lemah_jenis") == "yoyc":
             teks += " • situasi inti y/y sekarang (YOYc) hanya 55%"
         return teks.replace(".", ",")
+    if t in _ppi_wti.JUDUL and row.get("status") in TERUJI and row.get("persen"):
+        # 14 Okt: setelah CPI terbit, angka situasi "CPI inti searah/sesuai" (_ppi_wti.pakai_cpi) yang berlaku
+        return (f"🧾 Tutup kertas sebelum rilis (setelah CPI inti, tebakan {arah.upper()}): {row['persen']}% "
+                f"({row.get('n')} rilis) • dulu {row.get('lama')}% • sejak Okt 2021 {row.get('baru')}%").replace(".", ",")
     if t in _ppi_wti.JUDUL:
         pa = ((_ppi_wti.DATA.get("cpi_ppi") or {}).get("per_arah") or {}).get(arah) or {}
         if not pa:
@@ -520,7 +524,9 @@ def satu(row: dict) -> dict:
         naik = row["arah"] == "naik"
         tanda = "" if row.get("status") in TERUJI else " ⚠️"
         j = jangka(row.get("dasar"), row["arah"]) or {"teks_sampai": row.get("teks_sampai") or "1–10 dtk"}
-        out["teks"] = (f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}% ({j['teks_sampai']}){tanda}"
+        # 14 Okt (CPI salah, "perbaiki semuanya"): petunjuk lain berlawanan → baris utama menyuruh menunggu ⚡ LIVE detik 1
+        tunggu = " ⚖️ tunggu ⚡LIVE" if row.get("peringatan") else ""
+        out["teks"] = (f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}% ({j['teks_sampai']}){tanda}{tunggu}"
                        f" • {row['sisa']}")
         uji = [f"{STATUS_SATU.get(row.get('status'), '⚠️ Belum terbukti')}: {row['persen']}% ({j['teks_sampai']})"]
         if row.get("lama") is not None and row.get("baru") is not None:

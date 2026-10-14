@@ -58,6 +58,10 @@ def main() -> None:
         for k in ("d1", "d2", "d5", "d10", "arah"):
             y = o.get(k)
             r[k] = None if y is None or y != y or y == 0 else bool(y == g)
+        sk = v.get("sekilas_tren4")                       # pembanding "cara sekilas": ikut tren emas 4 jam
+        gs = 1.0 if sk == "naik" else -1.0 if sk == "turun" else None
+        y2 = o.get("d2")
+        r["sekilas_d2"] = None if gs is None or y2 is None or y2 != y2 or y2 == 0 else bool(y2 == gs)
         rows.append(r)
         L.append(f"   {ts} {v['title']:14s} tebak {v['arah'].upper():5s} {v.get('persen')}% ({v.get('jalur')}, {v.get('status')}) → "
                  + " ".join(f"{k} {'✓' if r[k] else ('✗' if r[k] is False else '–')}" for k in ("d1", "d2", "d5", "d10", "arah"))
@@ -65,7 +69,7 @@ def main() -> None:
     x = pd.DataFrame(rows)
     if len(x):
         L.append("\nRingkas (benar / dinilai): " + " • ".join(
-            f"{k} {int(x[k].eq(True).sum())}/{int(x[k].notna().sum())}" for k in ("d1", "d2", "d5", "d10", "arah")))
+            f"{k} {int(x[k].eq(True).sum())}/{int(x[k].notna().sum())}" for k in ("d1", "d2", "d5", "d10", "arah", "sekilas_d2")))
     else:
         L.append("Belum ada rilis yang lewat sejak pencatatan dimulai (13 Okt 2026).")
     OUT.write_text("\n".join(L) + "\n", encoding="utf-8")

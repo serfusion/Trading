@@ -91,6 +91,16 @@ def _tren_status(now: datetime) -> dict:
     return data
 
 
+def isi_act(persiapan: dict, calendar: list) -> None:
+    """Salin Act resmi kalender (_aktual.fill) ke kartu persiapan yang sama (judul + waktu) bila kartu belum punya Act."""
+    act = {(c.get("title"), c.get("time")): c for c in calendar or [] if isinstance(c, dict) and c.get("actual")}
+    for k in ("berita", "mendatang"):
+        for c in persiapan.get(k) or []:
+            if isinstance(c, dict) and not c.get("actual") and (c.get("title"), c.get("time")) in act:
+                src = act[(c["title"], c["time"])]
+                c["actual"], c["actual_src"] = src["actual"], src.get("actual_src")
+
+
 class handler(BaseHTTPRequestHandler):
     def _send(self, code: int, body: dict) -> None:
         raw = json.dumps(body, default=str, ensure_ascii=False).encode("utf-8")
@@ -201,6 +211,8 @@ class handler(BaseHTTPRequestHandler):
                         c["arah"] = _persiapan.kesimpulan(c["title"], c["actual"], c.get("forecast", ""))
                     except Exception:  # noqa: BLE001
                         pass
+            if isinstance(persiapan, dict):                   # 14 Okt: Act juga ke kartu (dulu kartu dibuat sebelum Act
+                isi_act(persiapan, calendar)                  # diisi → PPI tidak pernah diperbarui oleh hasil CPI)
             if isinstance(persiapan, dict) and persiapan.get("berita") is not None:
                 try:                                          # 🎯 perkiraan hari H / ✅ hasil + 🏦 Fed (Polymarket)
                     berita = persiapan["berita"]

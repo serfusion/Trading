@@ -503,6 +503,14 @@ alarm tepat waktu) hanya menyentuh `android/`].
   per tahun dari tahun sebelumnya → tutup kertas detik 2 53% (selalu-NAIK 57%, acak P95 53%) → 0 lolos. Dipasang hanya angka
   ujinya di poin 🧾 berita tanpa tebakan (`_pra_aset.cari_teks`, `aturan_pra.json`). Jalankan ulang bila cache pra_xau_semua_v2 diperbarui.
 
+## ⚡ CPI 14 Okt salah → LIVE per detik (14 Okt 2026 — `docs/CPI_SALAH.md` bagian akhir)
+- CPI Sep: y/y 3,7% & inti 0,3% DI ATAS; aplikasi "NAIK 54% ⚠️" (Kalshi utama) salah; emas −$13 detik 1 (OKX XAUT 1 dtk).
+  Aturan pengganti sebelum rilis diuji → tidak lebih baik; "cara sekilas" AI lain (tren turun/bensin/Fed) secara riwayat 8–52%.
+- DIPASANG: aplikasi 4.39 `LiveGold.kt` (XAUT OKX→KuCoin→Bitget→Gate tiap ±0,5 dtk T−15 dtk…+2 mnt, arah LIVE ≥ $0,50,
+  tebakan berlawanan "SALAH", 💥 berlawanan "TUTUP SEKARANG", `pra_satu.lanjut`); 4.40 tile XAU harga LIVE 5 dtk;
+  `chat.isi_act` (Act kalender → kartu; dulu PPI ← CPI tidak pernah jalan); "⚖️ tunggu ⚡LIVE" bila ada peringatan;
+  uji maju `sekilas_tren4`. OKX XAUT ±1 dtk lebih cepat dari Exness (10/11 rilis searah detik 2). Pyth Hermes kini 401.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

@@ -117,3 +117,17 @@ sejak 2022 (Kalshi). Detik 1 tebakan kuat 56% (harga belum bergerak).
   gerak harga sungguhan (≥ $0,50 → arah, "bertahan s/d detik 10: X%" dari `pra_satu.lanjut`), tebakan sebelum rilis yang
   berlawanan ditandai SALAH, posisi 💥 berlawanan → "TUTUP SEKARANG". Uji 2026: OKX ±1 dtk lebih cepat dari Exness; gerak OKX
   ≥ $1 di detik 1 searah Exness detik 2 pada 10/11 rilis (n kecil).
+- Evaluasi "cara sekilas" AI lain (tren bearish, bensin naik, Fed baru menaikkan bunga) pada CPI 2016–2026 (tick Exness detik 2):
+  tren H4 turun → emas turun 43% (n 58; sejak 2024 1/12 = 8%); tren H24 turun → 45% (2024+ 19%); bensin bulan acuan ≥ +5% →
+  CPI utama di atas hanya 30%, emas turun 41% (konsensus sudah memasukkan bensin); Fed naik bunga ≤ 60 hari → emas turun 52%.
+  Malam ini cara itu benar, tetapi secara riwayat ≈ lempar koin atau lebih buruk. Aturan aplikasi per tahun detik 2: 2022 75%,
+  2023 70%, 2024 83%, 2025 73%, 2026 71% (sebelum 14 Okt); 2019–2021 43%.
+- Kesalahan analisa saya 14 Okt: (1) candle 1 mnt Twelve Data (puncak 4.172) dipakai tanpa cek → kesimpulan "naik dulu lalu
+  turun" salah; data 1 dtk OKX menunjukkan turun sejak detik 1. (2) Baris utama "NAIK 54%" tidak cukup menonjolkan bahwa dua
+  petunjuk lain (y/y tersirat, inti y/y) condong DI ATAS. (3) Harga tile XAU aplikasi tertinggal (4.166 vs 4.108 MT5).
+- DIPASANG 14 Okt malam (izin "pasang … terapkan pada semua NEWS terutama PPI"): (1) BUG: kartu persiapan dibuat SEBELUM Act
+  diisi → PPI tidak pernah diperbarui hasil CPI; kini `chat.isi_act` menyalin Act kalender ke kartu (juga di arsip uji maju)
+  → PPI 15 Okt "▼ TURUN 74%" (CPI inti 0,3% > 0,2%, situasi searah: dulu 60% / sejak Okt 2021 79%); (2) baris utama semua
+  berita dengan peringatan (petunjuk berlawanan) diberi "⚖️ tunggu ⚡LIVE"; (3) aplikasi 4.40: harga tile XAU ikut harga
+  LIVE emas token tiap 5 dtk (tanda ⚡); (4) uji maju mencatat "cara sekilas" (tren emas 4 jam) untuk dibandingkan tiap rilis
+  (`arsip_data.tren4`, `uji_maju_berita` kolom sekilas_d2). ⚡ LIVE per detik (4.39) berlaku untuk semua berita di baris XAU.
