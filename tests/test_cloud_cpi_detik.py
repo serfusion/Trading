@@ -284,7 +284,7 @@ def test_terbaru_konsensus_kalshi_yoy_dan_situasi_14okt():
     assert "perkiraan m/m 0,6% • y/y 3,6% • inti 0,2% / 2,4%" in tb["teks"] and "y/y condong DI ATAS" in tb["teks"]
     assert "y/y tersirat & Kalshi inti berlawanan" in tb["teks"] and "bila sepakat" in tb["teks"]
     _pra_aset.attach(prep, NOW, None)
-    assert "🔄 Data terbaru" in prep["pra_satu"]["bukti"] and "⚖️" in prep["pra_satu"]["bukti"]
+    assert "📊 Konsensus (" in prep["pra_satu"]["bukti"] and "⚖️" in prep["pra_satu"]["bukti"]   # poin ringkas 14 Okt
 
 
 def test_terbaru_sepakat_dan_yoy_diam():

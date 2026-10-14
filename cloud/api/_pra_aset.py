@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -300,6 +301,8 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
         nm = SATU_NAMA.get(nm, nm)                         # core & headline rilis bersamaan = satu berita
         sisa = sisa_teks(datetime.fromisoformat(t0) - now)
         row = {"title": c["title"], "nama": nm, "time": t0, "when": c.get("when", ""), "sisa": sisa}
+        if c.get("forecast"):                                      # 📊 poin konsensus (14 Okt 2026)
+            row["kons"] = {"f": c["forecast"], "p": c.get("previous") or ""}
         if g:
             tanda = "✅" if g["status"] in TERUJI else "⚠️"
             row.update(arah=g["arah"], persen=g["persen"], status=g["status"], bukti=g["bukti"], dasar=g["dasar"],
@@ -402,12 +405,53 @@ def dasar_singkat(dasar: str | None) -> str:
     return s.removeprefix("+ ").removesuffix(" saja")
 
 
+def ringkas_terbaru(teks: str) -> list[str]:
+    """Baris 🔄/🎲/🧮/⚖️ dari _cpi_detik.terbaru → poin pendek (14 Okt, "dipersingkat poin-poin saja"):
+    "📊 Konsensus (11:15 WIB): m/m 0,6% • …", "🎲 Kalshi atas/bawah perkiraan: m/m 18/34% • …",
+    satu "🧮 Tersirat vs konsensus: y/y 3,71 vs 3,6 → condong DI ATAS • inti y/y 2,43 vs 2,5 → inti jarang DI BAWAH (3/33)"."""
+    out, tersirat = [], []
+    for x in (b.strip() for b in teks.split("\n")):
+        if not x:
+            continue
+        if m := re.match(r"🔄 Data terbaru (.+?): perkiraan (.*)", x):
+            out.append(f"📊 Konsensus ({m.group(1)}): {m.group(2)}")
+        elif x.startswith("🎲 Kalshi: "):
+            out.append("🎲 Kalshi atas/bawah perkiraan: " + re.sub(r" di atas ([\d,]+)% / di bawah ([\d,]+)%", r" \1/\2%",
+                                                                  x.removeprefix("🎲 Kalshi: ")))
+        elif m := re.match(r"🧮 (.+?) tersirat ([\d,]+)% vs perkiraan ([\d,]+)% → (.*)", x):
+            ekor = re.sub(r"\(dulu (\d+) dari (\d+) rilis\)", r"(\1/\2)", m.group(4)).replace(" perkiraan", "")
+            ekor = ekor.replace("y/y condong", "condong").replace("inti m/m jarang", "inti jarang")
+            tersirat.append(f"{m.group(1)} {m.group(2)} vs {m.group(3)} → {ekor}")
+        else:
+            out.append(x)
+    if tersirat:
+        i = next((k for k, x in enumerate(out) if x.startswith("⚖️")), len(out))
+        out.insert(i, "🧮 Tersirat vs konsensus: " + " • ".join(tersirat))
+    return out
+
+
+def kons_teks(k: dict) -> str:
+    return f"📊 Konsensus: {k['f']}" + (f" • sebelumnya {k['p']}" if k.get("p") else "")
+
+
+def tambah_orang(s: dict, sent: dict | None) -> None:
+    """Poin 👥 sentimen orang (_sentimen.py, INFO — diuji tidak menambah ketepatan) disisipkan sebelum poin "Setelah rilis"."""
+    pn = (sent or {}).get("poin") if isinstance(sent, dict) else None
+    if not pn or not isinstance(s.get("poin"), list):
+        return
+    i = next((k for k, x in enumerate(s["poin"]) if x.startswith("Setelah rilis")), len(s["poin"]))
+    s["poin"].insert(i, pn)
+    s["bukti"] = "\n".join("• " + x for x in s["poin"])
+
+
 def satu(row: dict) -> dict:
     """SATU baris untuk berita berikutnya (aplikasi 4.31, permintaan pengguna: "cukup news berikutnya naik atau turun"):
     "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 4 hari lagi". Tanpa arah (belum ada petunjuk & > 6 jam) → kapan arah muncul.
     10 Okt (permintaan "singkat jelas padat, langsung ke intinya"): keterangan menit pindah ke detail; detail = 2 baris
     (status + LAMA/BARU + dasar; aturan setelah rilis) menggantikan daftar angka per detik/per jangka."""
     out = {k: row.get(k) for k in ("title", "nama", "time", "arah", "persen", "status", "sisa")}
+    # 14 Okt 2026 (permintaan pengguna "di bawah XAU selalu tampil persentase; hide/show dipersingkat poin-poin saja:
+    # tutup kertas, konsensus, survei orang, dll"): detail = daftar poin "• …" (aplikasi menampilkan bukti saat diketuk)
     mi = menit_info(row.get("title") or "")
     # ⏱️ baris langsung per detik di aplikasi (13 Okt 2026, pengguna: "persentase berubah setiap detik hingga menit XX,
     # menggantikan jeda XAU"): angka uji per detik (CPI: tutup kertas aturan tersaring) + arah menit
@@ -421,7 +465,7 @@ def satu(row: dict) -> dict:
         j = jangka(row.get("dasar"), row["arah"]) or {"teks_sampai": row.get("teks_sampai") or "1–10 dtk"}
         out["teks"] = (f"{row['nama']} {'▲ NAIK' if naik else '▼ TURUN'} {row['persen']}% ({j['teks_sampai']}){tanda}"
                        f" • {row['sisa']}")
-        uji = [STATUS_SATU.get(row.get("status"), "⚠️ Belum terbukti")]
+        uji = [f"{STATUS_SATU.get(row.get('status'), '⚠️ Belum terbukti')}: {row['persen']}% ({j['teks_sampai']})"]
         if row.get("lama") is not None and row.get("baru") is not None:
             uji.append(f"dulu {row['lama']}% • sejak Okt 2021 {row['baru']}%")
         dasar = dasar_singkat(row.get("dasar"))
@@ -432,17 +476,24 @@ def satu(row: dict) -> dict:
             uji.append(f"dasar: {dasar}")
         baris = [" • ".join(uji)]
         if row.get("peringatan"):                          # CPI: tebakan TURUN saat tren naik / Kalshi core berlawanan
-            baris.append(f"Lemah karena {row['peringatan']}")
+            baris.append(f"Lemah karena {row['peringatan'].split(' (')[0]}")   # angka rinci ada di poin 🧮
         if (row.get("terbaru") or {}).get("teks"):         # 13 Okt: konsensus/Kalshi/y/y terbaru + persen rilis serupa
-            baris.append(row["terbaru"]["teks"])
+            baris += ringkas_terbaru(row["terbaru"]["teks"])
             out["terbaru"] = row["terbaru"]
+        elif row.get("kons"):
+            baris.append(kons_teks(row["kons"]))
         out["jangka"] = j
     else:
-        out["teks"] = f"{row['nama']} • arah muncul ≤ {TREN_JAM} jam sebelum rilis • {row['sisa']}"
-        baris = ["Belum ada petunjuk teruji • ≤ 6 jam sebelum rilis arah dari tren emas 4 jam (55–56%, lemah)"]
+        # selalu ada persen (14 Okt): tanpa petunjuk teruji = ≈ 50%, jujur; arah tren 4 jam muncul ≤ 6 jam sebelum rilis
+        out["teks"] = f"{row['nama']} ⚪ ≈50% (arah muncul ≤ {TREN_JAM} jam sebelum rilis) • {row['sisa']}"
+        baris = ["⚪ Tutup kertas: belum ada petunjuk teruji sebelum rilis (≈ 50%) • ≤ 6 jam sebelum rilis arah dari tren "
+                 "emas 4 jam (55–56%, lemah)"]
+        if row.get("kons"):
+            baris.append(kons_teks(row["kons"]))
     if mi:
         baris.append(mi["singkat"])
-    out["bukti"] = "\n".join(baris)
+    out["poin"] = baris
+    out["bukti"] = "\n".join("• " + x for x in baris)
     a = allin(row)
     if a:
         out["allin"] = a
@@ -700,6 +751,7 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         if dl:
             persiapan["pra_daftar"] = dl
             persiapan["pra_satu"] = satu(dl[0])
+            tambah_orang(persiapan["pra_satu"], persiapan.get("sentimen"))
             tandai(persiapan, dl, now)
     except Exception:  # noqa: BLE001 - daftar opsional
         pass

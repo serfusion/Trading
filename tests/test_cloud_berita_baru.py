@@ -252,7 +252,7 @@ def test_satu_baris_berita_berikutnya_dan_arah_sama_di_semua_kartu(monkeypatch):
     assert cpi["arah_detik"]["teks"] == "CPI: emas turun 66% (1–10 dtk)"
     ppi = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
     A.attach(ppi, now)
-    assert ppi["pra_satu"]["teks"] == "PPI • arah muncul ≤ 6 jam sebelum rilis • 5 hari lagi"
+    assert ppi["pra_satu"]["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"   # selalu ada %
     dekat = datetime(2026, 10, 15, 9, 0, tzinfo=timezone.utc)
     t = {"g4": 4.0, "harga": 1.0, "acuan": 1.0, "at": "2026-10-15T09:00:00+00:00"}
     ppi2 = {"mendatang": [{"title": "PPI m/m", "time": "2026-10-15T12:30:00+00:00"}]}
@@ -354,10 +354,14 @@ def test_satu_singkat_langsung_ke_inti():
     assert g["persen"] == 56 and (g["lama"], g["baru"]) == (58, 53)
     r = A.satu({"title": "CPI m/m", "nama": "CPI", "sisa": "3 hari lagi", **g})
     assert r["teks"] == "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 3 hari lagi"
-    baris = r["bukti"].split("\n")
-    assert baris[0] == "⚠️ Belum terbukti • dulu 58% • sejak Okt 2021 53% • dasar: minyak WTI"
-    assert baris[1].startswith("Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
+    baris = r["bukti"].split("\n")                     # 14 Okt: detail = poin "• …" (tutup kertas, konsensus, orang)
+    assert baris[0] == "• ⚠️ Belum terbukti: 56% (1–10 dtk) • dulu 58% • sejak Okt 2021 53% • dasar: minyak WTI"
+    assert baris[1].startswith("• Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
     assert len(baris) == 2 and "per jangka" not in r["bukti"] and "lama/baru" not in r["bukti"]
-    kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi"})
-    assert kosong["teks"] == "PPI • arah muncul ≤ 6 jam sebelum rilis • 5 hari lagi"
-    assert kosong["bukti"].count("\n") == 1
+    assert r["poin"][0].startswith("⚠️ Belum terbukti: 56%")
+    kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi", "kons": {"f": "0.3%", "p": "0.4%"}})
+    assert kosong["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"
+    assert kosong["poin"][1] == "📊 Konsensus: 0.3% • sebelumnya 0.4%" and kosong["bukti"].count("\n") == 2
+    A.tambah_orang(kosong, {"poin": "👥 Orang: ritel 8 broker BUY 70% → info"})
+    assert kosong["poin"][2] == "👥 Orang: ritel 8 broker BUY 70% → info" and kosong["poin"][3].startswith("Setelah rilis")
+    assert kosong["bukti"].split("\n")[2] == "• 👥 Orang: ritel 8 broker BUY 70% → info"

@@ -485,6 +485,18 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `_pra_aset.selaras`: detail kartu diawali "⏱️ Arah yang dipakai aplikasi", blok "Dasar angka" 1 jam dibuang, 🎲/hari H/📈
   diberi label "bukan arah utama" (dulu detail CPI "🥈 Kuat 63%" vs baris utama "54% ⚠️").
 
+## 👥 Sentimen orang & poin di bawah XAU (14 Okt 2026 — `docs/SENTIMEN_ORANG.md`)
+- Permintaan "kebanyakan orang sedunia buy atau sell? survei, kepuasan konsumen, percakapan": `research/sentimen_orang.py`
+  (kitco|stocktwits|wiki|trends|konsumen|uji; Kitco survei Main Street/Wall Street Mei 2022–kini lewat GraphQL
+  `cms.prod.kitco.com`, FXSSI ritel ±8 broker hanya potret kini, COT trader kecil 2006–, Google Trends buy/sell gold 2004–,
+  StockTwits GLD, Wikipedia, UMich/OECD) + `sentimen_orang_uji.py`. Orang hampir SELALU BUY (Kitco mayoritas naik 97% pekan,
+  ritel ±70% BUY, COT kecil ±76% long) → ikut = selalu-NAIK; kontrarian COT 1 bulan 61% hanya LAMA, BARU 53% < selalu-NAIK →
+  0 lolos. Myfxbook/IG/OANDA butuh akun; AAII/CNN/Reddit 403.
+- DIPASANG sebagai INFO (permintaan pengguna): `cloud/api/_sentimen.py` (cache Supabase `sentimen`, env SENTIMEN=0) → poin 👥;
+  `_pra_aset.satu`: baris XAU SELALU ada persen (tanpa petunjuk "⚪ ≈50%"), detail = `poin` / bukti "• …" (tutup kertas,
+  📊 konsensus, 🎲 Kalshi, 🧮 tersirat, 👥 orang, setelah rilis; `ringkas_terbaru`, `tambah_orang`). Sentimen TIDAK mengubah arah.
+  Arsip FXSSI per broker tiap jam + Kitco/COT harian (`arsip_data.sentimen`) untuk uji maju.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
