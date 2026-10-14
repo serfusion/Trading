@@ -255,6 +255,15 @@ def run() -> tuple[int, dict]:
                                                 _core.Ntfy(env["NTFY_TOPIC"], env.get("NTFY_SERVER", "https://ntfy.sh")))
     except Exception as exc:  # noqa: BLE001 - pulih tidak boleh mengganggu sinyal lain
         result["pulih_error"] = str(exc)
+    try:                                   # 📝 rekam hasil berita tiap jam (15 Okt 2026; _rekam.py, REKAM_HASIL=0 mati)
+        import _arsip
+        import _chat
+        import _rekam
+        now = datetime.now(timezone.utc)
+        result["rekam"] = _rekam.jalankan(main_store, now, env,
+                                          lambda: _arsip.calendar_cached(main_store, now, _chat.fetch_calendar))
+    except Exception as exc:  # noqa: BLE001 - rekam hasil berita tidak boleh mengganggu sinyal
+        result["rekam_error"] = str(exc)[:200]
     try:                                   # 💎 sinyal spot Binance harian (izin pengguna 4 Okt 2026; SPOT_SIGNALS=0 mati)
         if env.get("SPOT_SIGNALS", "1") == "1":
             import _spot

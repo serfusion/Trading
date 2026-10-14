@@ -163,4 +163,9 @@ def test_cpi_inti_tetap_terbaca_setelah_kartu_cpi_hilang_15okt():
     ci = P.cpi_inti({"berita": []}, t0, kal, toko)
     assert ci["s"] == 1 and toko["ppi_cpi"]["time"] == "2026-10-14T12:30:00+00:00"
     assert P.cpi_inti({"berita": []}, t0, [], toko)["actual"] == 0.3          # kalender pun hilang → simpanan
-    assert P.cpi_inti({}, datetime(2026, 11, 13, 13, 30, tzinfo=timezone.utc), [], toko) is None   # basi > 4 hari
+    assert P.cpi_inti({}, datetime(2026, 11, 13, 13, 30, tzinfo=timezone.utc), [], toko) is None   # CPI bulan lain
+    # jarak CPI → PPI sampai 17 hari (Feb 2026 14 hari) tetap terhubung; CPI bulan sebelumnya (2015) tidak
+    feb = [{"title": "Core CPI m/m", "time": "2026-02-13T13:30:00+00:00", "actual": "0.2%", "forecast": "0.3%"}]
+    assert P.cpi_inti({}, datetime(2026, 2, 27, 13, 30, tzinfo=timezone.utc), feb, Toko())["s"] == -1
+    lama = [{"title": "Core CPI m/m", "time": "2015-02-26T13:30:00+00:00", "actual": "0.2%", "forecast": "0.1%"}]
+    assert P.cpi_inti({}, datetime(2015, 3, 13, 12, 30, tzinfo=timezone.utc), lama, Toko()) is None

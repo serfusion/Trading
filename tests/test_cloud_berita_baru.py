@@ -54,11 +54,14 @@ def test_baris_pasar_cpi_dan_peringkat():
 
 
 def test_petunjuk_sepakat_dan_berbalik():
-    mem = {"Core CPI m/m": {"s": 1}, "ISM Services PMI": {"s": 1}}
-    core = {"title": "Core CPI m/m", "hari_h": {"pasar": {"atas": 0.365, "bawah": 0.215}}}
+    mem = {"Core CPI m/m": {"s": 1, "time": "2026-09-11T12:30:00+00:00"},
+           "ISM Services PMI": {"s": 1, "time": "2026-09-03T14:00:00+00:00"}}
+    core = {"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00", "hari_h": {"pasar": {"atas": 0.365, "bawah": 0.215}}}
     b = _petunjuk.blok(core, mem)
     assert "SEPAKAT" in b["teks"] and b["arah_emas"] == "turun"
-    ism = _petunjuk.blok({"title": "ISM Services PMI"}, mem)
+    basi = _petunjuk.blok({**core, "time": "2026-11-10T13:30:00+00:00"}, mem)       # memori 2 bulan lalu: tidak dipakai
+    assert "SEPAKAT" not in basi["teks"]
+    ism = _petunjuk.blok({"title": "ISM Services PMI", "time": "2026-10-05T14:00:00+00:00"}, mem)
     assert "DI BAWAH" in ism["teks"] and "berbalik" in ism["catatan"]
     assert _petunjuk.blok({"title": "Retail Sales m/m"}, mem) is None        # tidak ada aturan teruji
 

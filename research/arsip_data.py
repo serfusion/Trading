@@ -297,6 +297,7 @@ def pra(root: Path, now: datetime) -> str:
     prep = _persiapan.cards(rows, now)
     _jadwal.attach(prep, now)
     store = _Store({})
+    cal: list = []
     try:                                   # 14 Okt: Act resmi ke kartu supaya PPI ← CPI tercatat seperti di aplikasi
         import _aktual
         import _chat
@@ -304,10 +305,14 @@ def pra(root: Path, now: datetime) -> str:
         cal = _chat.calendar_json(rows, now, fetch=lambda s: [])
         _aktual.fill(cal, None, now, os.environ)
         _chat_api.isi_act(prep, cal)
+        # 15 Okt: CPI pekan LALU (PPI bisa terbit 1–17 hari setelah CPI) → Act dari FRED supaya PPI ← CPI tercatat
+        lalu = root / "berita" / f"ff_{(now - timedelta(days=now.weekday() + 7)):%Y-%m-%d}.json"
+        if lalu.exists():
+            cal += _chat.calendar_json([r for r in json.loads(lalu.read_text()) if r.get("title") == "Core CPI m/m"], now)
     except Exception:  # noqa: BLE001
         pass
     _cpi_detik.attach(prep, store, now)
-    _ppi_wti.attach(prep, store, now)
+    _ppi_wti.attach(prep, store, now, calendar=cal)
     _pra_aset.attach(prep, now, None)
     s = prep.get("pra_satu") or {}
     p = root / "pra" / f"{senin}.json"

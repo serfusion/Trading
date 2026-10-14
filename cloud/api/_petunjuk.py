@@ -50,15 +50,8 @@ def ingat(calendar: list, store, now: datetime) -> dict:
         except Exception:  # noqa: BLE001
             state = {}
     mem = {**SEED, **(state.get("mem") or {})}
-    changed = False
-    for c in calendar or []:
-        t = c.get("title")
-        a, f = _num(c.get("actual")), _num(c.get("forecast"))
-        if t in ATURAN and a is not None and f is not None:
-            when = c.get("time") or c.get("date") or ""
-            if mem.get(t, {}).get("time") != when:
-                mem[t] = {"s": (a > f) - (a < f), "time": when}
-                changed = True
+    import _prarilis
+    changed = _prarilis.ingat(mem, calendar, ATURAN)
     if changed and store is not None:
         try:
             store.save_state({**state, "mem": mem}, "petunjuk")
@@ -189,7 +182,9 @@ def blok(card: dict, mem: dict, env: dict | None = None, data: dict | None = Non
     if not rules or card.get("released"):
         return None
     tebak, baris = {}, []
-    s_lalu = (mem.get(title) or {}).get("s")
+    import _prarilis                                   # 15 Okt: kejutan lalu hanya bila memori = rilis sebelumnya (≤ 45 hari)
+    m_lalu = mem.get(title) or {}
+    s_lalu = m_lalu.get("s") if _prarilis.segar(m_lalu, card.get("time"), title) else None
     pasar = (card.get("hari_h") or {}).get("pasar") or card.get("kalshi") or {}
     lean = None
     if pasar.get("atas") is not None and pasar.get("bawah") is not None:

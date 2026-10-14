@@ -150,30 +150,53 @@ def _num(v) -> float | None:
         return None
 
 
+def _cpi_bulan_sama(t: datetime, t0: datetime) -> bool:
+    """CPI bulan acuan SAMA dengan PPI t0 = CPI terbit di bulan kalender yang sama, sebelum PPI (research/ppi_dasar.py:
+    CPI bulan acuan sama sudah terbit sebelum PPI). Cek ALFRED 2014–2026: 74/75 pasangan cocok, 0 salah pasang; jarak CPI→PPI
+    1–17 hari (Feb 2026: 14, Jan 2026: 17) — batas hari tetap (dulu 4 hari) melewatkan 11 dari 75 pasangan."""
+    return t < t0 and (t.year, t.month) == (t0.year, t0.month)
+
+
+def _ci(c: dict) -> dict | None:
+    if not isinstance(c, dict) or c.get("title") != "Core CPI m/m" or not c.get("time") or c.get("released") is False:
+        return None
+    a, f = _num(c.get("actual")), _num(c.get("forecast"))
+    if a is None or f is None:
+        return None
+    return {"actual": a, "forecast": f, "s": (a > f) - (a < f), "time": c["time"]}
+
+
+def simpan_cpi(calendar: list, store) -> dict | None:
+    """Simpan hasil CPI inti terakhir dari kalender ke baris Supabase 'ppi_cpi' (dipanggil tiap GET & tiap jam oleh tick)."""
+    ci = None
+    for c in calendar or []:
+        x = _ci(c)
+        if x and (ci is None or x["time"] > ci["time"]):
+            ci = x
+    if ci and store is not None:
+        try:
+            if (store.get_state("ppi_cpi") or {}) != ci:
+                store.save_state(ci, "ppi_cpi")
+        except Exception:  # noqa: BLE001
+            pass
+    return ci
+
+
 def cpi_inti(persiapan: dict, t0: datetime, calendar: list | None = None, store=None) -> dict | None:
-    """Kejutan inti CPI yang terbit ≤ 4 hari sebelum PPI t0: kartu persiapan → kalender pekan ini → simpanan Supabase
-    'ppi_cpi'. 15 Okt 2026 (bug): kartu CPI hilang 6 jam setelah rilis (_persiapan.KEEP_AFTER) sedangkan PPI terbit ±1 hari
-    kemudian → hasil CPI tidak terbaca dan PPI kembali ke angka tanpa CPI (74% → 55%). Kini hasil disimpan."""
+    """Kejutan inti CPI bulan acuan sama sebelum PPI t0: kartu persiapan → kalender pekan ini → simpanan Supabase 'ppi_cpi'.
+    15 Okt 2026 (bug): kartu CPI hilang 6 jam setelah rilis (_persiapan.KEEP_AFTER) sedangkan PPI terbit 1–17 hari kemudian
+    → hasil CPI tidak terbaca dan PPI kembali ke angka tanpa CPI (74% → 55%)."""
     for c in list(persiapan.get("berita") or []) + list(calendar or []):
-        if not isinstance(c, dict) or c.get("title") != "Core CPI m/m" or not c.get("time") or c.get("released") is False:
-            continue
-        t = datetime.fromisoformat(c["time"])
-        a, f = _num(c.get("actual")), _num(c.get("forecast"))
-        if t0 - timedelta(days=4) <= t < t0 and a is not None and f is not None:
-            ci = {"actual": a, "forecast": f, "s": (a > f) - (a < f), "time": c["time"]}
-            if store is not None:
-                try:
-                    if (store.get_state("ppi_cpi") or {}).get("time") != ci["time"]:
-                        store.save_state(ci, "ppi_cpi")
-                except Exception:  # noqa: BLE001
-                    pass
-            return ci
+        x = _ci(c)
+        if x and _cpi_bulan_sama(datetime.fromisoformat(x["time"]), t0):
+            simpan_cpi([c], store)
+            return x
     if store is not None:
         try:
             ci = store.get_state("ppi_cpi") or {}
         except Exception:  # noqa: BLE001
             ci = {}
-        if ci.get("time") and t0 - timedelta(days=4) <= datetime.fromisoformat(ci["time"]) < t0:
+        if ci.get("time") and ci.get("s") is not None and _cpi_bulan_sama(datetime.fromisoformat(ci["time"]), t0):
             return ci
     return None
 
@@ -208,6 +231,7 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env
     if not isinstance(persiapan, dict) or not aktif():
         return
     now = now or datetime.now(timezone.utc)
+    simpan_cpi(calendar or [], store)                      # 15 Okt: hasil CPI inti disimpan selagi masih di kalender
     kartu = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)
              and c.get("title") in JUDUL and c.get("time") and not c.get("released")]
     kartu = [c for c in kartu if now < datetime.fromisoformat(c["time"]) <= now + timedelta(days=31)]
