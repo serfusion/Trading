@@ -75,7 +75,7 @@ def test_attach_fred_cache_dan_tampil_di_aplikasi():
     assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}% (lonjakan menit 1)") and "⚠️" in s["teks"]
     assert "minyak WTI" in s["bukti"] and "Lemah karena tebakan TURUN" in s["bukti"]
     assert "allin" not in s                                    # tebakan lemah → tanpa 💥 modal kecil PPI
-    assert "🧾 Tutup kertas sebelum rilis (tebakan TURUN): 55%" in s["bukti"]    # 14 Okt: uji sebelum rilis, per arah
+    assert "⚠️ Lemah: 55% dari 51 rilis • sejak 2021 59%" in s["bukti"]    # 14 Okt: uji sebelum rilis, per arah
 
 
 def test_cadangan_uso_bila_fred_gagal(monkeypatch):
@@ -143,4 +143,4 @@ def test_isi_act_kartu_dari_kalender_lalu_ppi_ikut_cpi_14okt():
     row = {"title": "PPI m/m", "nama": "PPI", "sisa": "1 hari lagi", **g}
     s = _pra_aset.satu(row)
     assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}%") and "⚖️" not in s["teks"]
-    assert any(x.startswith("🧾 Tutup kertas sebelum rilis (setelah CPI inti") for x in s["poin"])
+    assert s["poin"][0].startswith("✅ Teruji sebelum rilis: 74% dari 19 rilis")

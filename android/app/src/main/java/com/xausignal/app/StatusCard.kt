@@ -1,5 +1,7 @@
 package com.xausignal.app
 
+import androidx.compose.ui.text.style.TextOverflow
+
 import androidx.compose.foundation.background
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.style.TextAlign
@@ -109,10 +111,11 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             PulseDot(if (online) BuyColor else SellColor, 7.dp)
             Text(if (online) "LIVE" else connection, style = MaterialTheme.typography.labelMedium,
                 fontWeight = FontWeight.ExtraBold, color = if (online) BuyColor else SellColor,
-                modifier = Modifier.padding(start = 4.dp).weight(1f))
+                maxLines = 1, softWrap = false, modifier = Modifier.padding(start = 4.dp, end = 8.dp))
             val (label, ms) = headerCountdown(prep, now)
             Text("$label ${clockShort(ms)}", style = MaterialTheme.typography.labelMedium, color = Gold,
-                fontWeight = FontWeight.Bold, maxLines = 1)
+                fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End, modifier = Modifier.weight(1f))
         }
         if (assets.isEmpty()) Text("Menunggu data cloud", style = MaterialTheme.typography.labelMedium, color = Muted)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

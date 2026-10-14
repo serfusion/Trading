@@ -511,6 +511,10 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `chat.isi_act` (Act kalender → kartu; dulu PPI ← CPI tidak pernah jalan); "⚖️ tunggu ⚡LIVE" bila ada peringatan;
   uji maju `sekilas_tren4`. OKX XAUT ±1 dtk lebih cepat dari Exness (10/11 rilis searah detik 2). Pyth Hermes kini 401.
 
+- Aplikasi 4.41 (keluhan "LIVE" pecah & poin terlalu panjang): header LIVE tidak dibungkus; poin di bawah XAU singkat —
+  "📊 Perkiraan X (naik dari Y): keluar di atas → emas TURUN • di bawah → emas NAIK" (`_pra_aset.kons_teks`, pengangguran/klaim
+  dibalik), 🧾 & ✅ digabung bila angkanya sama, 👥 "survei 45% naik • ritel 72% BUY • COT 76% long (info)", label 📉/📈 pendek.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

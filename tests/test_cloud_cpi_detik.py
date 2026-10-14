@@ -59,8 +59,8 @@ def test_kalshi_cadangan_bila_indeks_kosong():
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
     assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (detik 2)") and "⚠️" not in s["teks"]
-    assert "✅ Teruji tutup kertas" in s["bukti"] and "Kalshi" in s["bukti"]
-    assert "🧾 Tutup kertas sebelum rilis (detik 2): 2016–2026" in s["bukti"] and "tebakan NAIK sejak 2024 18/19" in s["bukti"]
+    assert "✅ Teruji sebelum rilis: 68% dari 61 rilis" in s["bukti"] and "Kalshi" in s["bukti"]
+    assert "✅ Teruji sebelum rilis: 68%" in s["bukti"] and "NAIK 2024+ 18/19" in s["bukti"]
     assert prep["pra"]["status"] == "tutup kertas" and prep["pra"]["arah"] == "naik"
 
 
@@ -285,7 +285,7 @@ def test_terbaru_konsensus_kalshi_yoy_dan_situasi_14okt():
     assert "perkiraan m/m 0,6% • y/y 3,6% • inti 0,2% / 2,4%" in tb["teks"] and "y/y condong DI ATAS" in tb["teks"]
     assert "y/y tersirat & Kalshi inti berlawanan" in tb["teks"] and "bila sepakat" in tb["teks"]
     _pra_aset.attach(prep, NOW, None)
-    assert "📊 Konsensus (" in prep["pra_satu"]["bukti"] and "⚖️" in prep["pra_satu"]["bukti"]   # poin ringkas 14 Okt
+    assert "📊 Perkiraan " in prep["pra_satu"]["bukti"] and "⚖️" in prep["pra_satu"]["bukti"]   # poin ringkas 14 Okt
 
 
 def test_terbaru_sepakat_dan_yoy_diam():
