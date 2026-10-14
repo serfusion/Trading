@@ -478,7 +478,10 @@
    "impact": "High",
    "forecast": "0.6%",
    "previous": "0.4%",
-   "first_seen": "2026-10-11T07:15:02.431100+00:00"
+   "first_seen": "2026-10-11T07:15:02.431100+00:00",
+   "actual": "0.6%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-14T12:32:10.684187+00:00"
   },
   {
    "title": "CPI y/y",
@@ -488,7 +491,10 @@
    "impact": "High",
    "forecast": "3.6%",
    "previous": "3.4%",
-   "first_seen": "2026-10-11T07:15:02.431100+00:00"
+   "first_seen": "2026-10-11T07:15:02.431100+00:00",
+   "actual": "3.7%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-14T12:32:10.684187+00:00"
   },
   {
    "title": "Core CPI m/m",
@@ -498,7 +504,10 @@
    "impact": "High",
    "forecast": "0.2%",
    "previous": "0.3%",
-   "first_seen": "2026-10-11T07:15:02.431100+00:00"
+   "first_seen": "2026-10-11T07:15:02.431100+00:00",
+   "actual": "0.3%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-14T12:32:10.684187+00:00"
   },
   {
    "title": "Core CPI y/y",
@@ -1104,5 +1113,5 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   }
  ],
- "diperbarui": "2026-10-14T10:56:44.915001+00:00"
+ "diperbarui": "2026-10-14T12:32:10.684187+00:00"
 }
