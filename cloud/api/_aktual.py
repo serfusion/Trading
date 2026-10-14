@@ -34,6 +34,27 @@ FAST_FOR = timedelta(minutes=10)
 WINDOW = timedelta(days=4)          # berita yang lebih lama dari ini tidak dicari lagi
 KEEP = timedelta(days=21)           # Act tersimpan dibuang setelah 3 pekan
 TIMEOUT = 8
+# 15 Okt 2026 (audit): berita tanpa seri FRED/BLS — ISM Jasa (ISM bukan data publik FRED) & keputusan suku bunga Fed —
+# dulu Act-nya hanya dari isian manual, jadi memori "kejutan lalu" (petunjuk ISM Jasa -P, model Fed _prarilis) tidak pernah
+# terisi otomatis. Sumber: kalender Nasdaq (api.nasdaq.com, parameter tanggal = tanggal rilis + 1 hari, sama dengan
+# _cpi_detik.nasdaq). Dicek 15 Okt: ISM 5 Okt 54,9 (konsensus 55,1) & Fed 16 Sep 4,00% sama dengan rilis resmi.
+NASDAQ_URL = "https://api.nasdaq.com/api/calendar/economicevents?date={}"
+NASDAQ_MAP = {"ISM Services PMI": "ISM Non-Manufacturing PMI", "Federal Funds Rate": "Fed Interest Rate Decision"}
+
+
+def nasdaq_act(title: str, t: datetime, opener=None) -> str | None:
+    """Act dari kalender Nasdaq untuk berita tanpa seri FRED (None bila belum ada)."""
+    nama = NASDAQ_MAP.get(title)
+    if not nama:
+        return None
+    q = ((t - timedelta(hours=5)).date() + timedelta(days=1)).isoformat()
+    req = urllib.request.Request(NASDAQ_URL.format(q), headers={"User-Agent": "Mozilla/5.0", "Accept": "application/json"})
+    with (opener or urllib.request.urlopen)(req, timeout=TIMEOUT) as r:
+        rows = (json.load(r).get("data") or {}).get("rows") or []
+    for x in rows:
+        if x.get("country") == "United States" and x.get("eventName") == nama and str(x.get("actual") or "").strip():
+            return str(x["actual"]).strip()
+    return None
 
 
 def _short(exc: Exception) -> str:
@@ -166,7 +187,8 @@ def _key(c: dict) -> str:
     return f"{c['title']}|{c['time']}"
 
 
-def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher | None = None) -> dict:
+def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher | None = None,
+         nasdaq=None) -> dict:
     """Isi calendar[].actual / actual_src (dan actual_info bila kosong). Return status sumber (untuk diagnosa)."""
     state = {}
     if store is not None:
@@ -183,7 +205,7 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
             c["actual"], c["actual_src"] = f["actual"], f["src"]
     # Act manual tetap dicek ke sumber resmi: bila angka resmi berbeda, otomatis direvisi (permintaan 2 Okt 2026)
     missing = [c for c in calendar if c.get("released") and (not c.get("actual") or c.get("actual_src") == "manual")
-               and c["title"] in _chat.FRED_MAP
+               and (c["title"] in _chat.FRED_MAP or c["title"] in NASDAQ_MAP)
                and now - datetime.fromisoformat(c["time"]) <= WINDOW]
     if not missing:
         return {"status": "lengkap"}
@@ -196,12 +218,22 @@ def fill(calendar: list[dict], store, now: datetime, env: dict, fetcher: Fetcher
                 continue
             c["actual_info"] = state.get("info") or ("dicek ulang tiap 30 detik" if fast else "dicek ulang tiap 2 menit")
         return {"status": "ditunda", "sumber": state.get("sumber") or {}}
-    fetcher = fetcher or Fetcher(env, {_chat.FRED_MAP[c["title"]][0] for c in missing})
+    fetcher = fetcher or Fetcher(env, {_chat.FRED_MAP[c["title"]][0] for c in missing if c["title"] in _chat.FRED_MAP})
     cache: dict = {}
     for c in missing:
-        act = _chat.fred_actual(c["title"], datetime.fromisoformat(c["time"]), now, fetcher, cache)
-        if act:
+        if c["title"] in NASDAQ_MAP:
+            try:
+                act = (nasdaq or nasdaq_act)(c["title"], datetime.fromisoformat(c["time"]))
+            except Exception as exc:  # noqa: BLE001 - Nasdaq gagal → coba lagi nanti
+                fetcher.status["Nasdaq"] = _short(exc)
+                act = None
+            else:
+                fetcher.status["Nasdaq"] = "ok" if act else "ok, belum ada angka"
+            src = "Nasdaq"
+        else:
+            act = _chat.fred_actual(c["title"], datetime.fromisoformat(c["time"]), now, fetcher, cache)
             src = "BLS" if _chat.FRED_MAP[c["title"]][0] in (fetcher.bls or {}) else "FRED"
+        if act:
             manual = c.get("actual") if c.get("actual_src") == "manual" else None
             if manual is not None and _num(manual) != _num(act):
                 c["actual_info"] = f"direvisi otomatis: isian manual {manual} → resmi {act} ({src})"

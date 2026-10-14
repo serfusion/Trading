@@ -21,7 +21,8 @@ def test_urutan_sumber_dan_format():
     assert m["teks"] == "NFP: peluang emas turun 1 jam 62%" and m["sumber"] == "model" and m["catatan"] == "teruji, belum pasti"
     assert "<" not in m["teks"] and ">" not in m["teks"]
     # setelah rilis model tidak dipakai; rilis lalu di atas perkiraan → aturan teruji 61%
-    a = P.untuk({"title": nfp, "released": True, "prarilis": {"naik": 70}}, {nfp: {"s": 1}})
+    a = P.untuk({"title": nfp, "released": True, "prarilis": {"naik": 70}, "time": "2026-11-06T13:30:00+00:00"},
+                {nfp: {"s": 1, "time": "2026-10-02T12:30:00+00:00"}})
     assert a["teks"] == "NFP: peluang emas naik 1 jam 61%" and a["sumber"] == "aturan" and a["kuat"]
     d = P.untuk({"title": "CPI m/m"})
     assert d["sumber"] == "dasar" and d["teks"].startswith("CPI: peluang emas ") and "1 jam" in d["teks"]
@@ -30,16 +31,17 @@ def test_urutan_sumber_dan_format():
 
 def test_attach_berita_dan_mendatang():
     prep = {"berita": [{"title": "JOLTS Job Openings", "prarilis": {"naik": 66, "bukti": "x"}}],
-            "mendatang": [{"title": "Non-Farm Employment Change"}, {"title": "Federal Funds Rate"}]}
-    P.attach(prep, Store({"prarilis": {"mem": {"Non-Farm Employment Change": {"s": 1, "time": "t"}}}}))
+            "mendatang": [{"title": "Non-Farm Employment Change", "time": "2026-11-06T13:30:00+00:00"},
+                          {"title": "Federal Funds Rate"}]}
+    P.attach(prep, Store({"prarilis": {"mem": {"Non-Farm Employment Change": {"s": 1, "time": "2026-10-02T12:30:00+00:00"}}}}))
     assert prep["berita"][0]["prediksi"]["teks"] == "JOLTS: peluang emas naik 1 jam 66%"
     assert prep["mendatang"][0]["prediksi"]["sumber"] == "aturan"
     assert prep["mendatang"][1]["prediksi"]["teks"].startswith("Fed: peluang emas")
 
 
 def test_peringkat_kilat():
-    prep = {"mendatang": [{"title": "Non-Farm Employment Change"}, {"title": "CPI m/m"}]}
-    P.attach(prep, Store({"prarilis": {"mem": {"Non-Farm Employment Change": {"s": 1, "time": "t"}}}}))
+    prep = {"mendatang": [{"title": "Non-Farm Employment Change", "time": "2026-11-06T13:30:00+00:00"}, {"title": "CPI m/m"}]}
+    P.attach(prep, Store({"prarilis": {"mem": {"Non-Farm Employment Change": {"s": 1, "time": "2026-10-02T12:30:00+00:00"}}}}))
     nfp, cpi = (c["prediksi"] for c in prep["mendatang"])
     assert nfp["teks"].startswith("⚡ NFP:") and nfp["peringkat"] == 1
     assert cpi["peringkat"] == 4 and not cpi["teks"].startswith("⚡")

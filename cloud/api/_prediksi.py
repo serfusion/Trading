@@ -16,6 +16,7 @@ import json
 from pathlib import Path
 
 import _persiapan
+import _prarilis
 
 _MAJU = Path(__file__).resolve().parent / "validasi_maju.json"   # 📈 uji maju otomatis (research/validasi_maju.py)
 KANDIDAT_BARU = (8, 10)          # kandidat NFP "pendahulu membaik → emas naik": naik/n sejak Okt 2021 (news_gabung.py)
@@ -120,7 +121,8 @@ def untuk(card: dict, mem: dict | None = None) -> dict | None:
     p = card.get("prarilis")
     if p and p.get("naik") is not None and not card.get("released"):
         return baris(title, int(p["naik"]), p.get("bukti") or "model sebelum rilis", "model")
-    if title == NFP and ((mem or {}).get(NFP) or {}).get("s") == 1:
+    m = (mem or {}).get(NFP) or {}
+    if title == NFP and m.get("s") == 1 and _prarilis.segar(m, card.get("time"), NFP):   # 15 Okt: memori basi tidak dipakai
         return baris(title, ATURAN_NFP[0], ATURAN_NFP[1], "aturan")
     st = _persiapan.STATS.get("dasar", {}).get(title) or {}
     seb = st.get("emas_sebelum") or {}

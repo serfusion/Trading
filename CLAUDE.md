@@ -515,8 +515,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   "📊 Perkiraan X (naik dari Y): keluar di atas → emas TURUN • di bawah → emas NAIK" (`_pra_aset.kons_teks`, pengangguran/klaim
   dibalik), 🧾 & ✅ digabung bila angkanya sama, 👥 "survei 45% naik • ritel 72% BUY • COT 76% long (info)", label 📉/📈 pendek.
 
-- 14 Okt malam (bug "PPI 74% → 55%"): kartu CPI hilang 6 jam setelah rilis (`_persiapan.KEEP_AFTER`) → `_ppi_wti.cpi_inti`
-  kini membaca kartu → kalender pekan ini → simpanan Supabase baris `ppi_cpi` (≤ 4 hari sebelum PPI).
+- 14–15 Okt (bug "PPI 74% → 55%", audit rantai hasil berita — `docs/RANTAI_HASIL.md`): kartu CPI hilang 6 jam setelah rilis
+  (`_persiapan.KEEP_AFTER`) → `_ppi_wti.cpi_inti` membaca kartu → kalender pekan ini → Supabase `ppi_cpi`, syarat CPI terbit di
+  BULAN KALENDER SAMA sebelum PPI (= aturan riset "CPI bulan acuan sama"; ALFRED 74/75 cocok, 0 salah; jarak 1–17 hari).
+  `_rekam.py` dipanggil tick tiap jam (env REKAM_HASIL): Act → memori `prarilis`/`petunjuk`/`ppi_cpi` tanpa menunggu aplikasi
+  dibuka (FF hanya pekan ini & tanpa Act). `_prarilis.segar`: "kejutan lalu" hanya bila memori = rilis sebelumnya (≤ 45 hari,
+  Fed ≤ 60) di `_prarilis`/`_petunjuk`/`_prediksi`. ISM Jasa & Fed: Act dari Nasdaq (`_aktual.NASDAQ_MAP`, dulu manual saja).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
