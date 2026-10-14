@@ -464,6 +464,23 @@ def ringkas_terbaru(teks: str) -> list[str]:
     return out
 
 
+_F_ATURAN = Path(__file__).with_name("aturan_pra.json")
+ATURAN = json.loads(_F_ATURAN.read_text(encoding="utf-8")) if _F_ATURAN.exists() else {}
+
+
+def cari_teks() -> str:
+    """Poin 🧾 berita TANPA tebakan (14 Okt 2026, "cari aturan sebelum rilis dan pasang"): hasil pencarian aturan gabungan
+    1–3 syarat, tutup kertas per tahun (research/aturan_pra.py → aturan_pra.json) — tidak lolos → tetap ≈ 50%."""
+    h = ATURAN.get("hasil") or {}
+    if not h.get("n"):
+        return ("⚪ Tutup kertas: belum ada petunjuk teruji sebelum rilis (≈ 50%) • ≤ 6 jam sebelum rilis arah dari tren "
+                "emas 4 jam (55–56%, lemah)")
+    n_rilis = f"{ATURAN.get('n_rilis', 0):,}".replace(",", ".")
+    return (f"🧾 Tutup kertas: ±2 ribu aturan sebelum rilis dicari di {n_rilis} rilis → di tahun berikutnya hanya "
+            f"benar {100 * h['benar']:.0f}% (n {h['n']}; selalu-NAIK {100 * h['dasar']:.0f}%, acak {100 * ATURAN['acak_rata']:.0f}–"
+            f"{100 * ATURAN['acak_p95']:.0f}%) → belum ada tebakan, ≈ 50% • ≤ 6 jam sebelum rilis: tren emas 4 jam (55–56%, lemah)")
+
+
 def kons_teks(k: dict) -> str:
     return f"📊 Konsensus: {k['f']}" + (f" • sebelumnya {k['p']}" if k.get("p") else "")
 
@@ -520,8 +537,7 @@ def satu(row: dict) -> dict:
     else:
         # selalu ada persen (14 Okt): tanpa petunjuk teruji = ≈ 50%, jujur; arah tren 4 jam muncul ≤ 6 jam sebelum rilis
         out["teks"] = f"{row['nama']} ⚪ ≈50% (arah muncul ≤ {TREN_JAM} jam sebelum rilis) • {row['sisa']}"
-        baris = ["⚪ Tutup kertas: belum ada petunjuk teruji sebelum rilis (≈ 50%) • ≤ 6 jam sebelum rilis arah dari tren "
-                 "emas 4 jam (55–56%, lemah)"]
+        baris = [cari_teks()]
         if row.get("kons"):
             baris.append(kons_teks(row["kons"]))
     tk = tutup_kertas(row)

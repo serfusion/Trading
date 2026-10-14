@@ -98,3 +98,23 @@ data tahun sebelumnya, per arah + pembanding selalu-NAIK):
 - PPI-WTI: TURUN 55% (n 51; 2024+ 50%), NAIK 72% (2024+ 91%, n 11).
 - Berita lain: tidak ada tebakan sebelum rilis yang lolos → poin tidak tampil. Tidak ada aturan sebelum rilis yang ≥ 85% di
   periode lama DAN baru.
+
+## 6. Cari aturan sebelum rilis baru (14 Okt 2026, "cari aturan sebelum rilis dan pasang") — `research/aturan_pra.py`
+
+2.026 rilis USD 2010–2026, target arah XAU detik 2. Aturan gabungan 1–3 syarat dari 12 fitur yang bisa dihitung cloud (petunjuk
+berita, perkiraan vs angka lalu, kejutan lalu, gerak emas 15 mnt–24 jam, EMA 50/200, arah mayoritas & rilis lalu, BTC 60 dtk),
+per jenis berita atau semua: ±40 ribu kombinasi. Tiap tahun aturan DIPILIH hanya dari tahun sebelumnya (n ≥ 25, ≥ 65%,
+p ≤ 0,005, stabil di dua paruh), lalu dinilai di tahun itu:
+
+| Uji | Tutup kertas | Selalu-NAIK | LAMA / BARU |
+|---|---|---|---|
+| Detik 2 (patokan) | **53%** (n 198) | 57% | 50% / 54% |
+| Detik 1 / 5 / 10 | 55% / 55% / 52% | 49% / 54% / 51% | – |
+| + fitur tick (tidak bisa live) | 50% | 52% | 53% / 49% |
+| Arah emas diacak (30×) | rata-rata 48%, P95 53% | – | – |
+
+Aturan yang tampak 65–90% di masa lalu (mis. "EXP+ & H24+ & GRUP−" 74%, "CLAIMS PS− & TRD− & LALU−" 88%, n 8) jatuh ke
+±53% di tahun berikutnya = setara acak → **tidak ada yang lolos, tidak dipasang sebagai tebakan**. Yang dipasang: angka uji
+ini sebagai poin 🧾 untuk berita tanpa tebakan (`_pra_aset.cari_teks`, `cloud/api/aturan_pra.json`). Tebakan yang tampil tetap
+hanya aturan lama yang lolos (CPI, PPI-WTI, ISM Jasa, NFP, tren searah).
+

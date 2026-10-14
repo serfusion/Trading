@@ -499,6 +499,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
 - Poin "🧾 Tutup kertas sebelum rilis" (`_pra_aset.tutup_kertas`, pengguna "UJI TUTUP KERTAS bukan setelah rilisnya";
   menggantikan poin ✅ setelah rilis): CPI 68% / sejak Okt 2021 81% / NAIK 2024+ 18/19 vs selalu-NAIK 81%, lemah 62%, YOYc 55%;
   PPI per arah. Tidak ada aturan sebelum rilis ≥ 85% di LAMA & BARU.
+- `research/aturan_pra.py` ("cari aturan sebelum rilis dan pasang"): ±40 rb aturan gabungan 1–3 syarat (fitur live), dipilih
+  per tahun dari tahun sebelumnya → tutup kertas detik 2 53% (selalu-NAIK 57%, acak P95 53%) → 0 lolos. Dipasang hanya angka
+  ujinya di poin 🧾 berita tanpa tebakan (`_pra_aset.cari_teks`, `aturan_pra.json`). Jalankan ulang bila cache pra_xau_semua_v2 diperbarui.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
