@@ -86,3 +86,12 @@ dari kalender.
 
 Uji maju: `research/arsip_data.py` menyimpan FXSSI per broker tiap jam (`sentimen/fxssi.jsonl` di branch `arsip-data`) + Kitco &
 COT harian → setelah ±6–12 bulan posisi ritel bisa diuji tutup kertas (riwayat gratis tidak tersedia).
+
+## 5. Poin "✅ Hampir selalu benar" (14 Okt 2026, permintaan "tambahkan uji tutup kertas yg hampir selalu benar")
+
+Sebelum rilis TIDAK ADA aturan yang hampir selalu benar (terbaik 63–76%). Yang ≥ 85% di periode LAMA **dan** BARU hanya aturan
+SETELAH rilis (`pra_aset.json["lanjut"]`, tick Exness 2015–2026): bila emas sudah bergerak ≥ $0,50 di detik 2, arahnya masih sama
+di detik 10 — CPI 89% (dulu 97% • sejak Okt 2021 85%, n 85), NFP 95%, semua berita 92% (96/90%, n 839). Poin ini tampil
+(`_pra_aset.hampir_pasti`) hanya bila LAMA & BARU ≥ 85% (PPI BARU 84% → tidak tampil). Bukan tebakan sebelum rilis: ia
+memberitahu kapan arah yang SUDAH terlihat hampir pasti berlanjut.
+

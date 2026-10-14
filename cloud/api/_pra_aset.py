@@ -110,6 +110,18 @@ def kepastian(title: str) -> str | None:
     return teks.replace(".", ",") + ". Berlawanan dengan posisi → tutup cepat."
 
 
+def hampir_pasti(title: str) -> str | None:
+    """Poin "✅ Hampir selalu benar" (14 Okt 2026, permintaan "tambahkan uji tutup kertas yg hampir selalu benar"): aturan
+    SETELAH rilis dengan ketepatan ≥ 85% di periode LAMA dan BARU (pra_aset.json["lanjut"], tick Exness 2015–2026)."""
+    lj = DATA.get("lanjut") or {}
+    g = next((g for k, g in GRUP if k in title), "SEMUA")
+    r = lj.get(f"{g}|2|0.5|10") or lj.get("SEMUA|2|0.5|10")
+    if not r or min(r.get("lama", 0), r.get("baru", 0)) < 85:
+        return None
+    return (f"✅ Hampir selalu benar (setelah rilis): emas sudah gerak ≥ $0,50 di detik 2 → arah sama s/d detik 10 "
+            f"{r['tetap']:.0f}% (dulu {r['lama']:.0f}% • sejak Okt 2021 {r['baru']:.0f}%, n {r['n']})").replace(".", ",")
+
+
 TREN_JAM = 6                      # tren hanya dihitung bila rilis ≤ 6 jam lagi (sebelumnya tidak bermakna)
 
 
@@ -490,6 +502,9 @@ def satu(row: dict) -> dict:
                  "emas 4 jam (55–56%, lemah)"]
         if row.get("kons"):
             baris.append(kons_teks(row["kons"]))
+    hp = hampir_pasti(row.get("title") or "")
+    if hp:
+        baris.append(hp)
     if mi:
         baris.append(mi["singkat"])
     out["poin"] = baris
