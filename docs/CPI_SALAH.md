@@ -95,3 +95,15 @@ sejak 2022 (Kalshi). Detik 1 tebakan kuat 56% (harga belum bergerak).
   ulang `python -m research.cpi_detik` bila data bertambah (angka "lonjakan" dipertahankan).
 - Cek langsung 13 Okt untuk CPI 14 Okt: emas di bawah rata-rata 200 hari, Kalshi CPI utama di bawah (37% vs 14%) →
   **NAIK (detik 2), tebakan kuat**.
+
+## 14 Okt 2026 — bedah rilis CPI September (pengguna: "predictmu salah langsung menukik")
+- Hasil: CPI y/y 3,7% (perkiraan 3,6%) DI ATAS; inti "lebih tinggi dari perkiraan" (Reuters "core CPI firmer"). Dua poin detail
+  aplikasi BENAR: 🧮 "y/y tersirat 3,71 → condong DI ATAS" dan "inti jarang DI BAWAH (3/33)". Baris utama "NAIK 54% ⚠️ lemah"
+  berasal dari Kalshi CPI utama m/m (condong di bawah) → arah utama SALAH untuk gerak besar.
+- Emas (Twelve Data 1 mnt): candle 12:30 buka 4.153 → puncak 4.172,8 → lalu jatuh ke 4.108 (screenshot MT5 pengguna) ≈ −$64
+  dari puncak dalam 6–9 menit. Tick detik 1–10 belum tersedia (arsip Exness bulanan).
+- Pola berulang (data riset cpi_skenario + tick): situasi YOYc −1 (konsensus inti y/y > tersirat) sejak 2024 n 6 → detik 2
+  NAIK 83%, tetapi detik 5–10 TURUN 67%, SELL t−1 tahan 10 dtk rata-rata +$12/oz (Agu & Sep 2026: detik 2 +$5,4/+$2,8 lalu
+  detik 10 −$34,7/−$34,9). Sejak Okt 2021 n 10: detik 2 turun 30%, detik 10 turun 60%. Seluruh periode n 24: 52–58% (≈ acak).
+  Ditemukan SETELAH melihat hasil & n kecil → kandidat, belum terbukti. Usulan tampilan "⚠️ 2 arah: detik 1–2 sering naik, lalu
+  TURUN" menunggu izin "pasang".
