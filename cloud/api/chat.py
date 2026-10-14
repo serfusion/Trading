@@ -264,7 +264,7 @@ class handler(BaseHTTPRequestHandler):
                     pass
                 try:                                          # ⛽ PPI: minyak WTI bulan acuan (_ppi_wti.py, 13 Okt 2026)
                     import _ppi_wti
-                    _ppi_wti.attach(persiapan, store, now)
+                    _ppi_wti.attach(persiapan, store, now, calendar=calendar)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):

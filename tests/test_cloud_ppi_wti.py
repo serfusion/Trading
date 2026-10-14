@@ -144,3 +144,23 @@ def test_isi_act_kartu_dari_kalender_lalu_ppi_ikut_cpi_14okt():
     s = _pra_aset.satu(row)
     assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}%") and "⚖️" not in s["teks"]
     assert s["poin"][0].startswith("✅ Teruji sebelum rilis: 74% dari 19 rilis")
+
+
+def test_cpi_inti_tetap_terbaca_setelah_kartu_cpi_hilang_15okt():
+    """Bug 15 Okt: kartu CPI hilang 6 jam setelah rilis → PPI kembali 55%. Kini dari kalender & simpanan Supabase."""
+    import _ppi_wti as P
+    from datetime import datetime, timezone
+
+    class Toko(dict):
+        def get_state(self, r):
+            return self.get(r, {})
+
+        def save_state(self, d, r):
+            self[r] = d
+    t0 = datetime(2026, 10, 15, 12, 30, tzinfo=timezone.utc)
+    kal = [{"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00", "actual": "0.3%", "forecast": "0.2%"}]
+    toko = Toko()
+    ci = P.cpi_inti({"berita": []}, t0, kal, toko)
+    assert ci["s"] == 1 and toko["ppi_cpi"]["time"] == "2026-10-14T12:30:00+00:00"
+    assert P.cpi_inti({"berita": []}, t0, [], toko)["actual"] == 0.3          # kalender pun hilang → simpanan
+    assert P.cpi_inti({}, datetime(2026, 11, 13, 13, 30, tzinfo=timezone.utc), [], toko) is None   # basi > 4 hari

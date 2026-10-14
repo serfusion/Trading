@@ -515,6 +515,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   "📊 Perkiraan X (naik dari Y): keluar di atas → emas TURUN • di bawah → emas NAIK" (`_pra_aset.kons_teks`, pengangguran/klaim
   dibalik), 🧾 & ✅ digabung bila angkanya sama, 👥 "survei 45% naik • ritel 72% BUY • COT 76% long (info)", label 📉/📈 pendek.
 
+- 14 Okt malam (bug "PPI 74% → 55%"): kartu CPI hilang 6 jam setelah rilis (`_persiapan.KEEP_AFTER`) → `_ppi_wti.cpi_inti`
+  kini membaca kartu → kalender pekan ini → simpanan Supabase baris `ppi_cpi` (≤ 4 hari sebelum PPI).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
