@@ -496,8 +496,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `_pra_aset.satu`: baris XAU SELALU ada persen (tanpa petunjuk "⚪ ≈50%"), detail = `poin` / bukti "• …" (tutup kertas,
   📊 konsensus, 🎲 Kalshi, 🧮 tersirat, 👥 orang, setelah rilis; `ringkas_terbaru`, `tambah_orang`). Sentimen TIDAK mengubah arah.
   Arsip FXSSI per broker tiap jam + Kitco/COT harian (`arsip_data.sentimen`) untuk uji maju.
-- Poin "✅ Hampir selalu benar (setelah rilis)" (`_pra_aset.hampir_pasti`): gerak ≥ $0,50 di detik 2 → arah sama s/d detik 10,
-  tampil hanya bila LAMA & BARU ≥ 85% (CPI 97/85%, NFP, semua 96/90%; PPI 92/84% tidak). Sebelum rilis tidak ada yang ≥ 85%.
+- Poin "🧾 Tutup kertas sebelum rilis" (`_pra_aset.tutup_kertas`, pengguna "UJI TUTUP KERTAS bukan setelah rilisnya";
+  menggantikan poin ✅ setelah rilis): CPI 68% / sejak Okt 2021 81% / NAIK 2024+ 18/19 vs selalu-NAIK 81%, lemah 62%, YOYc 55%;
+  PPI per arah. Tidak ada aturan sebelum rilis ≥ 85% di LAMA & BARU.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

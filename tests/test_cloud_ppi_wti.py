@@ -75,6 +75,7 @@ def test_attach_fred_cache_dan_tampil_di_aplikasi():
     assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}% (lonjakan menit 1)") and "⚠️" in s["teks"]
     assert "minyak WTI" in s["bukti"] and "Lemah karena tebakan TURUN" in s["bukti"]
     assert "allin" not in s                                    # tebakan lemah → tanpa 💥 modal kecil PPI
+    assert "🧾 Tutup kertas sebelum rilis (tebakan TURUN): 55%" in s["bukti"]    # 14 Okt: uji sebelum rilis, per arah
 
 
 def test_cadangan_uso_bila_fred_gagal(monkeypatch):

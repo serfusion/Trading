@@ -60,6 +60,7 @@ def test_kalshi_cadangan_bila_indeks_kosong():
     s = prep["pra_satu"]
     assert s["teks"].startswith(f"CPI ▲ NAIK {g['persen']}% (detik 2)") and "⚠️" not in s["teks"]
     assert "✅ Teruji tutup kertas" in s["bukti"] and "Kalshi" in s["bukti"]
+    assert "🧾 Tutup kertas sebelum rilis (detik 2): 2016–2026" in s["bukti"] and "tebakan NAIK sejak 2024 18/19" in s["bukti"]
     assert prep["pra"]["status"] == "tutup kertas" and prep["pra"]["arah"] == "naik"
 
 
