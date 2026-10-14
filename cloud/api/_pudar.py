@@ -114,9 +114,10 @@ def row(m: dict, title: str, t0: datetime, now: datetime | None = None, asset: s
             teks = f"{_pct(1 - p6)}% berbalik {balik.lower()} ⚪"
     else:
         teks, kuat = f"≈ 50:50 ⚪ ({_pct(p6)}% tetap {arah.lower()})", False
-    label = (f"{'📈' if m['keep'] >= 0.6 else '📉'} {nama} {w:%H:%M} WIB: {pct_kembali}% lonjakan kembali di menit 60"
-             + (f" → peluang balik {'ke bawah' if m['s'] > 0 else 'ke atas'} harga rilis "
-                f"{m['open']:,.0f}".replace(",", ".") if fade >= 0.8 and m["keep"] < 0.6 else ""))
+    # 14 Okt (pengguna "intinya saja singkat jelas padat"): rincian lonjakan pindah ke bukti
+    label = (f"{'📈' if m['keep'] >= 0.6 else '📉'} Setelah {nama} {w:%H:%M} WIB, 6 jam"
+             + (f" (ke bawah harga rilis {m['open']:,.0f})" if m['s'] > 0 else f" (ke atas harga rilis {m['open']:,.0f})"
+                ).replace(",", ".") * (fade >= 0.8 and m["keep"] < 0.6))
     kel = {"sudah berbalik": "sudah melewati harga rilis", "sisa < 30%": "≥ 70% kembali",
            "sisa 30–60%": "40–70% kembali", "sisa ≥ 60%": "< 40% kembali"}.get(c["label"], c["label"])
     per = STATS.get("btc_periode" if btc else "periode", "")

@@ -90,8 +90,7 @@ def test_sumber_gagal_pakai_nilai_lama_dan_poin_ringkas():
     _sentimen.ambil(toko, NOW + timedelta(days=2, minutes=40), opener_ok(dip))
     assert dip                                                            # lewat jeda → dicoba lagi
     p = _sentimen.poin(s)
-    assert p.startswith("👥 Orang: Kitco 206 suara naik 45% / turun 37% • ritel 3 broker BUY 68% • trader kecil COT long 76%")
-    assert "→" in p and "%" in p
+    assert p == "👥 Orang: survei 45% naik • ritel 68% BUY • COT 76% long (info, tidak mengubah arah)"
     assert _sentimen.poin({}) is None
     assert _sentimen.ambil(None, NOW, mati) == {}
 
@@ -104,7 +103,7 @@ def test_attach_masuk_poin_di_bawah_xau_tanpa_ubah_arah(monkeypatch):
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
     assert s["teks"].startswith("PPI ⚪ ≈50%")                        # arah/persen tidak diubah oleh sentimen
-    assert any(x.startswith("👥 Orang:") for x in s["poin"]) and "• 📊 Konsensus: 0.3% • sebelumnya 0.2%" in s["bukti"]
+    assert any(x.startswith("👥 Orang:") for x in s["poin"]) and "• 📊 Perkiraan 0.3% (naik dari 0.2%): keluar di atas → emas TURUN • di bawah → emas NAIK" in s["bukti"]
     assert s["poin"][-1].startswith("Setelah rilis")
     monkeypatch.setenv("SENTIMEN", "0")
     p2 = {"mendatang": list(prep["mendatang"]), "berita": []}

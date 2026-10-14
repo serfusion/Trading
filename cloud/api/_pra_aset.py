@@ -123,28 +123,26 @@ def tutup_kertas(row: dict) -> str | None:
             return None
         if row.get("status") == "lemah" and row.get("lemah_jenis") != "yoyc":
             lm = sr.get("lemah") or {}
-            return (f"🧾 Tutup kertas sebelum rilis (situasi lemah seperti ini): {lm.get('semua', 0):.0f}% dari "
-                    f"{lm.get('n_rilis')} rilis • sejak Okt 2021 {lm.get('baru', 0):.0f}% • 2024+ {lm.get('s2024', 0):.0f}%"
+            return (f"🧾 Uji sebelum rilis (situasi lemah): benar {lm.get('semua', 0):.0f}% ({lm.get('n_rilis')} rilis) • "
+                    f"2024+ {lm.get('s2024', 0):.0f}%"
                     ).replace(".", ",")
         k, n = sr.get("naik_2024") or [0, 0]
-        teks = (f"🧾 Tutup kertas sebelum rilis (detik 2): 2016–2026 {sr['semua']:.0f}% ({sr['n_rilis']} rilis) • sejak "
-                f"Okt 2021 {sr['baru']:.0f}% • tebakan NAIK sejak 2024 {k}/{n}" + (f" ({100 * k / n:.0f}%)" if n else "")
-                + f" vs selalu-NAIK 2024+ {(_cpi_detik.DATA['uji'].get('selalu_naik_2024') or 81):.0f}%")
+        teks = (f"🧾 Uji sebelum rilis: benar {sr['semua']:.0f}% ({sr['n_rilis']} rilis) • sejak 2021 {sr['baru']:.0f}%"
+                + (f" • NAIK 2024+ {k}/{n}" if n else ""))
         if row.get("lemah_jenis") == "yoyc":
-            teks += " • situasi inti y/y sekarang (YOYc) hanya 55%"
+            teks += " • situasi sekarang hanya 55%"
         return teks.replace(".", ",")
     if t in _ppi_wti.JUDUL and row.get("status") in TERUJI and row.get("persen"):
         # 14 Okt: setelah CPI terbit, angka situasi "CPI inti searah/sesuai" (_ppi_wti.pakai_cpi) yang berlaku
-        return (f"🧾 Tutup kertas sebelum rilis (setelah CPI inti, tebakan {arah.upper()}): {row['persen']}% "
-                f"({row.get('n')} rilis) • dulu {row.get('lama')}% • sejak Okt 2021 {row.get('baru')}%").replace(".", ",")
+        return (f"🧾 Uji sebelum rilis (ikut CPI inti): benar {row['persen']}% ({row.get('n')} rilis) • "
+                f"sejak 2021 {row.get('baru')}%").replace(".", ",")
     if t in _ppi_wti.JUDUL:
         pa = ((_ppi_wti.DATA.get("cpi_ppi") or {}).get("per_arah") or {}).get(arah) or {}
         if not pa:
             return None
         g = lambda k: pa.get(k) or {}                                     # noqa: E731
-        return (f"🧾 Tutup kertas sebelum rilis (tebakan {arah.upper()}): {g('semua').get('persen', 0):.0f}% ({g('semua').get('n')} "
-                f"rilis) • dulu {g('lama').get('persen', 0):.0f}% • sejak Okt 2021 {g('baru').get('persen', 0):.0f}% • 2024+ "
-                f"{g('s2024').get('persen', 0):.0f}% (n {g('s2024').get('n')})").replace(".", ",")
+        return (f"🧾 Uji sebelum rilis ({arah.upper()}): benar {g('semua').get('persen', 0):.0f}% ({g('semua').get('n')} "
+                f"rilis) • sejak 2021 {g('baru').get('persen', 0):.0f}%").replace(".", ",")
     return None
 
 
@@ -427,13 +425,13 @@ def menit_info(title: str) -> dict | None:
     rinci = " • ".join(f"{label_h(int(h))} {r[h]['sama']:.0f}%" for h in ("60", "300", "900", "3600") if h in r)
     return {"persen": round(r["300"]["sama"]), "grup": g,
             "teks": f"1–5 mnt: ikuti arah detik 2 ({r['300']['sama']:.0f}%)",
-            "singkat": f"Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt ({r['300']['sama']:.0f}%)",
+            "singkat": f"Setelah rilis: ikuti arah emas detik 2 (≥ $0,50) s/d 5 mnt ({r['300']['sama']:.0f}%)",
             "bukti": (f"setelah rilis: bila emas di detik 2 sudah bergerak ≥ $0,50, arah itu masih sama di {rinci} "
                       f"(n {r['300']['n']}, {'semua berita' if g == 'SEMUA' else g}, 2010–2026)").replace(".", ",")}
 
 
 STATUS_SATU = {"teruji": "✅ Teruji", "belum terbukti": "⚠️ Belum terbukti", "tren searah": "⚠️ Belum terbukti",
-               "lemah": "⚠️ Lemah", "tutup kertas": "✅ Teruji tutup kertas"}
+               "lemah": "⚠️ Lemah", "tutup kertas": "✅ Teruji sebelum rilis"}
 TERUJI = ("teruji", "tutup kertas")
 
 
@@ -452,7 +450,7 @@ def ringkas_terbaru(teks: str) -> list[str]:
         if not x:
             continue
         if m := re.match(r"🔄 Data terbaru (.+?): perkiraan (.*)", x):
-            out.append(f"📊 Konsensus ({m.group(1)}): {m.group(2)}")
+            out.append(f"📊 Perkiraan {m.group(2)}: keluar di atas → emas TURUN • di bawah → emas NAIK")
         elif x.startswith("🎲 Kalshi: "):
             out.append("🎲 Kalshi atas/bawah perkiraan: " + re.sub(r" di atas ([\d,]+)% / di bawah ([\d,]+)%", r" \1/\2%",
                                                                   x.removeprefix("🎲 Kalshi: ")))
@@ -477,16 +475,28 @@ def cari_teks() -> str:
     1–3 syarat, tutup kertas per tahun (research/aturan_pra.py → aturan_pra.json) — tidak lolos → tetap ≈ 50%."""
     h = ATURAN.get("hasil") or {}
     if not h.get("n"):
-        return ("⚪ Tutup kertas: belum ada petunjuk teruji sebelum rilis (≈ 50%) • ≤ 6 jam sebelum rilis arah dari tren "
-                "emas 4 jam (55–56%, lemah)")
+        return "⚪ Belum ada petunjuk teruji → ≈ 50:50"
     n_rilis = f"{ATURAN.get('n_rilis', 0):,}".replace(",", ".")
-    return (f"🧾 Tutup kertas: ±40 ribu aturan sebelum rilis dicari di {n_rilis} rilis → di tahun berikutnya hanya "
-            f"benar {100 * h['benar']:.0f}% (n {h['n']}; selalu-NAIK {100 * h['dasar']:.0f}%, acak {100 * ATURAN['acak_rata']:.0f}–"
-            f"{100 * ATURAN['acak_p95']:.0f}%) → belum ada tebakan, ≈ 50% • ≤ 6 jam sebelum rilis: tren emas 4 jam (55–56%, lemah)")
+    return (f"⚪ Belum ada petunjuk teruji → ≈ 50:50 (±40 ribu aturan diuji di {n_rilis} rilis, terbaik "
+            f"{100 * h['benar']:.0f}%)")
 
 
-def kons_teks(k: dict) -> str:
-    return f"📊 Konsensus: {k['f']}" + (f" • sebelumnya {k['p']}" if k.get("p") else "")
+_KEBALIK = ("Unemployment", "Jobless", "Claims", "Pengangguran")   # angka tinggi = ekonomi lemah → emas naik
+
+
+def _angka(x) -> float | None:
+    m = re.search(r"-?\d+(?:[.,]\d+)?", str(x or ""))
+    return float(m.group(0).replace(",", ".")) if m else None
+
+
+def kons_teks(k: dict, title: str = "") -> str:
+    """📊 Konsensus = perkiraan analis + ARTINYA untuk emas (14 Okt, "konsensus maksud angkanya apa? naik atau turun?")."""
+    f, p = _angka(k.get("f")), _angka(k.get("p"))
+    ubah = "" if f is None or p is None else (" (naik dari " if f > p else " (turun dari " if f < p else " (sama dgn ") \
+        + f"{k['p']})"
+    balik = any(w in (title or "") for w in _KEBALIK)
+    atas, bawah = ("NAIK", "TURUN") if balik else ("TURUN", "NAIK")
+    return f"📊 Perkiraan {k['f']}{ubah}: keluar di atas → emas {atas} • di bawah → emas {bawah}"
 
 
 def tambah_orang(s: dict, sent: dict | None) -> None:
@@ -520,6 +530,7 @@ def satu(row: dict) -> dict:
     if r2:
         r1 = lj.get(f"{g_}|1|0.5|10") or {}
         out["lanjut"] = {"2": round(r2["tetap"]), "1": round(r1["tetap"]) if r1.get("tetap") else None, "n": r2["n"]}
+    dasar = ""
     if row.get("arah"):
         naik = row["arah"] == "naik"
         tanda = "" if row.get("status") in TERUJI else " ⚠️"
@@ -544,15 +555,24 @@ def satu(row: dict) -> dict:
             baris += ringkas_terbaru(row["terbaru"]["teks"])
             out["terbaru"] = row["terbaru"]
         elif row.get("kons"):
-            baris.append(kons_teks(row["kons"]))
+            baris.append(kons_teks(row["kons"], row.get("title") or ""))
         out["jangka"] = j
     else:
         # selalu ada persen (14 Okt): tanpa petunjuk teruji = ≈ 50%, jujur; arah tren 4 jam muncul ≤ 6 jam sebelum rilis
         out["teks"] = f"{row['nama']} ⚪ ≈50% (arah muncul ≤ {TREN_JAM} jam sebelum rilis) • {row['sisa']}"
         baris = [cari_teks()]
         if row.get("kons"):
-            baris.append(kons_teks(row["kons"]))
+            baris.append(kons_teks(row["kons"], row.get("title") or ""))
     tk = tutup_kertas(row)
+    if tk and f"benar {row.get('persen')}%" in tk and row.get("n"):   # 14 Okt: angka sama dengan poin pertama → satu poin
+        baris[0] = baris[0].split(":", 1)[0] + f": {row['persen']}% dari {row['n']} rilis" + \
+            (f" • sejak 2021 {row['baru']}%" if row.get("baru") is not None else "") + \
+            (f" • dasar: {dasar}" if row.get("arah") and dasar else "")
+        if m_ := re.search(r" • NAIK 2024\+ \d+/\d+", tk):                 # pembanding tebakan NAIK tetap tampil
+            baris[0] += m_.group(0)
+        if "ikut CPI inti" in baris[0] or "ikut CPI inti" in (tk or ""):
+            baris[0] = baris[0].replace("dasar: ", "dasar: CPI inti + ")
+        tk = None
     if tk:
         baris.insert(1, tk)
     if mi:

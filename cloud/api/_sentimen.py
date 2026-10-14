@@ -176,16 +176,16 @@ def poin(s: dict) -> str | None:
     bag = []
     k = s.get("kitco")
     if k:
-        bag.append(f"Kitco {k['ms_n']} suara naik {_p(k['ms_up'])} / turun {_p(k['ms_down'])}")
+        bag.append(f"survei {_p(k['ms_up'])} naik")
     f = s.get("fxssi")
     if f:
-        bag.append(f"ritel {f['n_broker']} broker BUY {_p(f['buy'])}")
+        bag.append(f"ritel {_p(f['buy'])} BUY")
     c = s.get("cot")
     if c:
-        bag.append(f"trader kecil COT long {_p(c['long'])}")
+        bag.append(f"COT {_p(c['long'])} long")
     if not bag:
         return None
-    return "👥 Orang: " + " • ".join(bag) + f" → {UJI.get('putusan_singkat', 'info, belum teruji')}"
+    return "👥 Orang: " + " • ".join(bag) + " (info, tidak mengubah arah)"
 
 
 def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env=None) -> None:
