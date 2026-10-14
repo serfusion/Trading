@@ -145,6 +145,26 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     // 4.36 (pengguna 13 Okt: "per detik dan berubah persentase, saya buka sebelum hingga sesudah news"): tampil sejak T−15 mnt
     // (awal HMR Exness) s/d +10 mnt; persen = kurva uji SETIAP detik 1–10 lalu 15 dtk…5 mnt (cloud per_detik)
     if (det < -900 || det > 600) return
+    // ⚡ 4.39 (pengguna 14 Okt "apk gagal predict di detik awal"): harga emas LIVE tiap ±0,5 dtk dari T−15 dtk s/d +2 mnt
+    // (LiveGold: XAUT OKX/KuCoin/Bitget/Gate). Setelah rilis baris ini memakai gerak harga SUNGGUHAN, bukan tebakan.
+    var live by remember(t0) { mutableStateOf<List<Pair<Long, Double>>>(emptyList()) }
+    var liveSrc by remember(t0) { mutableStateOf("") }
+    val jendela = det >= -15 && det <= 120
+    LaunchedEffect(t0, jendela) {
+        while (jendela) {
+            val hp = withContext(Dispatchers.IO) { LiveGold.harga() }
+            if (hp != null) {
+                live = (live + (System.currentTimeMillis() to hp.first)).takeLast(400)
+                liveSrc = hp.second
+            }
+            if (System.currentTimeMillis() - t0 > 120_000L) break
+            delay(500L)
+        }
+    }
+    val dasar = live.lastOrNull { it.first <= t0 - 300 }?.second           // harga ±1 dtk sebelum rilis
+    val kini = live.lastOrNull()?.takeIf { it.first > t0 }
+    val gerak = if (dasar != null && kini != null) kini.second - dasar else null
+    val liveArah = gerak?.let { if (it >= 0.5) "naik" else if (it <= -0.5) "turun" else null }
     val arah = r.optString("arah").ifBlank { null }
     val nama = r.optString("nama").ifBlank { "Berita" }
     val pd = r.optJSONObject("per_detik")
@@ -156,7 +176,20 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     fun mmss(x: Double): String = "${(x / 60).toInt()}:${"%02d".format(x.toInt() % 60)}"
     fun pct(x: Int?): String = x?.let { if (it < 50) "$it% ⚠️" else "$it%" } ?: "–"
     val dtk = kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()
+    fun usd(g: Double): String = (if (g < 0) "−" else "+") + "\$" + "%.2f".format(Locale.US, kotlin.math.abs(g)).replace('.', ',')
+    val liveTeks = gerak?.let { g ->
+        if (liveArah == null) "⚡ $nama detik $dtk • LIVE emas ${usd(g)} • belum jelas (< \$0,50), tunggu"
+        else {
+            val la = if (liveArah == "naik") "▲ NAIK" else "▼ TURUN"
+            val tahan = r.optJSONObject("lanjut")?.optInt("2", 0)?.takeIf { it > 0 }
+            val beda = arah != null && arah != liveArah
+            "⚡ $nama detik $dtk • LIVE emas $la ${usd(g)}" +
+                (tahan?.let { " • bertahan s/d detik 10: $it%" } ?: "") +
+                (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "") + abaLive(r, det, liveArah)
+        }
+    }
     val teks = when {
+        det >= 0 && det <= 120 && liveTeks != null -> liveTeks
         arah == null -> if (det < 0) "⏱️ $nama T−${mmss(-det)} • arah ≈ 50:50 (tanpa petunjuk teruji)"
                         else "🔴 $nama rilis +${mmss(det)} • ≈ 50:50"
         det < 0 -> "⏱️ $nama T−${if (det < -60) mmss(-det) else "${-det.toInt()} dtk"} • emas $ar • detik 1 " +
@@ -166,7 +199,24 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
             (r.optInt("menit_pct", 0).takeIf { it > 0 }?.let { " • ikuti arah detik 2 ($it%)" } ?: "")
         else -> "$nama +${(det / 60).toInt()} mnt • di luar jangka uji (5 mnt)"
     }
-    Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 2)
+    Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 3)
+    if (jendela) {
+        val info = when {
+            live.isEmpty() -> "⚡ LIVE: menghubungi bursa emas token…"
+            det < 0 -> "⚡ LIVE siap: ${liveSrc} ${"%.1f".format(Locale.US, live.last().second)} • setelah rilis arah = gerak harga"
+            dasar == null -> "⚡ LIVE: buka aplikasi sebelum rilis supaya harga dasar tercatat"
+            else -> "⚡ sumber ${liveSrc} (≈ spot, bisa ±1 dtk lebih cepat dari MT5)"
+        }
+        Text(info, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
+    }
+}
+
+/** 💥 + ⚡: posisi modal kecil berlawanan dengan arah LIVE → tutup segera; searah → aba-aba biasa. */
+private fun abaLive(r: JSONObject, det: Double, liveArah: String): String {
+    val a = r.optJSONObject("allin")?.takeIf { it.optBoolean("kuat") } ?: return ""
+    val posisi = a.optString("arah").uppercase(Locale.US)
+    val lawan = (posisi.contains("BUY") && liveArah == "turun") || (posisi.contains("SELL") && liveArah == "naik")
+    return if (lawan) " • 💥 BERLAWANAN → TUTUP SEKARANG" else aba(r, det)
 }
 
 /**

@@ -107,3 +107,13 @@ sejak 2022 (Kalshi). Detik 1 tebakan kuat 56% (harga belum bergerak).
   detik 10 −$34,7/−$34,9). Sejak Okt 2021 n 10: detik 2 turun 30%, detik 10 turun 60%. Seluruh periode n 24: 52–58% (≈ acak).
   Ditemukan SETELAH melihat hasil & n kecil → kandidat, belum terbukti. Usulan tampilan "⚠️ 2 arah: detik 1–2 sering naik, lalu
   TURUN" menunggu izin "pasang".
+- Detik per detik 14 Okt (OKX XAUT-USDT candle 1 dtk): t−1 4.153,0 → detik 1 4.139,9 (−$13) → detik 2 4.125,8 (−$27) → detik 6
+  4.121 → pantul 4.141 (detik 39) → 4.108 (MT5). Puncak 4.172 di candle 1 mnt Twelve Data = tick salah. Tebakan NAIK salah
+  sejak detik 1.
+- Uji ulang aturan sebelum rilis (tutup kertas, tick Exness): aplikasi IDX|K detik 2 66%/74%/77% (semua/BARU/2024+); "YOYc −1 →
+  TURUN" 64/65/66; "YOY & YOYc atas → TURUN" 66/70/73; suara app+YOY+YOYc 64/63/64 → tidak ada pengganti yang lebih baik.
+- DIPASANG aplikasi 4.39 (permintaan "perbaiki sistem apk yang gagal predict di detik awal"): ⚡ LIVE `LiveGold.kt` — HP membaca
+  harga XAUT (OKX → KuCoin → Bitget → Gate, tanpa kunci) tiap ±0,5 dtk dari T−15 dtk s/d +2 mnt; setelah rilis baris XAU =
+  gerak harga sungguhan (≥ $0,50 → arah, "bertahan s/d detik 10: X%" dari `pra_satu.lanjut`), tebakan sebelum rilis yang
+  berlawanan ditandai SALAH, posisi 💥 berlawanan → "TUTUP SEKARANG". Uji 2026: OKX ±1 dtk lebih cepat dari Exness; gerak OKX
+  ≥ $1 di detik 1 searah Exness detik 2 pada 10/11 rilis (n kecil).

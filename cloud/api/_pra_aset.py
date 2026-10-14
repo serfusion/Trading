@@ -510,6 +510,12 @@ def satu(row: dict) -> dict:
         out["per_detik"] = {k: round(v) for k, v in row["per_detik"].items() if v is not None}
     if mi:
         out["menit_pct"] = mi["persen"]
+    lj = DATA.get("lanjut") or {}                         # ⚡ 4.39: arah LIVE ≥ $0,50 di detik 1/2 → bertahan s/d detik 10
+    g_ = next((g for k, g in GRUP if k in (row.get("title") or "")), "SEMUA")
+    r2 = lj.get(f"{g_}|2|0.5|10") or lj.get("SEMUA|2|0.5|10")
+    if r2:
+        r1 = lj.get(f"{g_}|1|0.5|10") or {}
+        out["lanjut"] = {"2": round(r2["tetap"]), "1": round(r1["tetap"]) if r1.get("tetap") else None, "n": r2["n"]}
     if row.get("arah"):
         naik = row["arah"] == "naik"
         tanda = "" if row.get("status") in TERUJI else " ⚠️"
