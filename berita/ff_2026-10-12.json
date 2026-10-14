@@ -299,9 +299,32 @@
 "impact": "Medium"
 },
 {
+"title": "M2 Money Supply y/y",
+"country": "CNY",
+"date": "2026-10-14T05:00:00-04:00",
+"impact": "Low",
+"forecast": "7.4%",
+"previous": "7.5%"
+},
+{
+"title": "New Loans",
+"country": "CNY",
+"date": "2026-10-14T05:01:00-04:00",
+"impact": "Low",
+"forecast": "1025B",
+"previous": "60B"
+},
+{
 "title": "German 30-y Bond Auction",
 "country": "EUR",
 "date": "2026-10-14T05:34:00-04:00",
+"impact": "Low",
+"previous": "3.80|1.6"
+},
+{
+"title": "German 30-y Bond Auction",
+"country": "EUR",
+"date": "2026-10-14T05:38:00-04:00",
 "impact": "Low",
 "previous": "3.80|1.6"
 },
