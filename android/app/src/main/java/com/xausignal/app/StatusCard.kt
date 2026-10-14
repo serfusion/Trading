@@ -452,7 +452,11 @@ private fun StripSatu(r: JSONObject) {
     val teks = r.optString("teks").substringBeforeLast(" • ") + " • " + sisaTeks(instantOf(r.optString("time")))
     Column(Modifier.fillMaxWidth().clickable { buka = !buka }) {
         // 4.33: ukuran biasa (keluhan "terlalu besar"); hanya arah + persen berwarna
-        Text(arahBerwarna(teks), style = MaterialTheme.typography.labelMedium, maxLines = 2)
+        // 4.38: tanda ▾/▴ supaya jelas bisa diketuk; detail = poin "• …" dari cloud (tutup kertas, konsensus, orang, dll)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(arahBerwarna(teks), Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, maxLines = 2)
+            Text(if (buka) "▴" else "▾", color = Muted, style = MaterialTheme.typography.labelMedium)
+        }
         if (buka) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }

@@ -476,7 +476,7 @@ def cari_teks() -> str:
         return ("⚪ Tutup kertas: belum ada petunjuk teruji sebelum rilis (≈ 50%) • ≤ 6 jam sebelum rilis arah dari tren "
                 "emas 4 jam (55–56%, lemah)")
     n_rilis = f"{ATURAN.get('n_rilis', 0):,}".replace(",", ".")
-    return (f"🧾 Tutup kertas: ±2 ribu aturan sebelum rilis dicari di {n_rilis} rilis → di tahun berikutnya hanya "
+    return (f"🧾 Tutup kertas: ±40 ribu aturan sebelum rilis dicari di {n_rilis} rilis → di tahun berikutnya hanya "
             f"benar {100 * h['benar']:.0f}% (n {h['n']}; selalu-NAIK {100 * h['dasar']:.0f}%, acak {100 * ATURAN['acak_rata']:.0f}–"
             f"{100 * ATURAN['acak_p95']:.0f}%) → belum ada tebakan, ≈ 50% • ≤ 6 jam sebelum rilis: tren emas 4 jam (55–56%, lemah)")
 
