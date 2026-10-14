@@ -110,16 +110,38 @@ def kepastian(title: str) -> str | None:
     return teks.replace(".", ",") + ". Berlawanan dengan posisi → tutup cepat."
 
 
-def hampir_pasti(title: str) -> str | None:
-    """Poin "✅ Hampir selalu benar" (14 Okt 2026, permintaan "tambahkan uji tutup kertas yg hampir selalu benar"): aturan
-    SETELAH rilis dengan ketepatan ≥ 85% di periode LAMA dan BARU (pra_aset.json["lanjut"], tick Exness 2015–2026)."""
-    lj = DATA.get("lanjut") or {}
-    g = next((g for k, g in GRUP if k in title), "SEMUA")
-    r = lj.get(f"{g}|2|0.5|10") or lj.get("SEMUA|2|0.5|10")
-    if not r or min(r.get("lama", 0), r.get("baru", 0)) < 85:
+def tutup_kertas(row: dict) -> str | None:
+    """Poin "🧾 Tutup kertas SEBELUM rilis" (14 Okt 2026, pengguna: "UJI TUTUP KERTAS bukan setelah rilisnya", "yang hampir
+    selalu benar"): ketepatan tebakan yang dibuat SEBELUM rilis, diuji per tahun hanya dengan data tahun-tahun sebelumnya,
+    per arah tebakan + pembanding selalu-NAIK. Hanya CPI (cpi_detik.json uji.saring) & PPI (ppi_wti.json cpi_ppi.per_arah)."""
+    t, arah = row.get("title") or "", row.get("arah")
+    if not arah:
         return None
-    return (f"✅ Hampir selalu benar (setelah rilis): emas sudah gerak ≥ $0,50 di detik 2 → arah sama s/d detik 10 "
-            f"{r['tetap']:.0f}% (dulu {r['lama']:.0f}% • sejak Okt 2021 {r['baru']:.0f}%, n {r['n']})").replace(".", ",")
+    if t in _cpi_detik.JUDUL and "WTI" not in (row.get("dasar") or ""):       # hanya aturan CPI detik (bukan WTI lama)
+        sr = (_cpi_detik.DATA.get("uji") or {}).get("saring") or {}
+        if not sr:
+            return None
+        if row.get("status") == "lemah" and row.get("lemah_jenis") != "yoyc":
+            lm = sr.get("lemah") or {}
+            return (f"🧾 Tutup kertas sebelum rilis (situasi lemah seperti ini): {lm.get('semua', 0):.0f}% dari "
+                    f"{lm.get('n_rilis')} rilis • sejak Okt 2021 {lm.get('baru', 0):.0f}% • 2024+ {lm.get('s2024', 0):.0f}%"
+                    ).replace(".", ",")
+        k, n = sr.get("naik_2024") or [0, 0]
+        teks = (f"🧾 Tutup kertas sebelum rilis (detik 2): 2016–2026 {sr['semua']:.0f}% ({sr['n_rilis']} rilis) • sejak "
+                f"Okt 2021 {sr['baru']:.0f}% • tebakan NAIK sejak 2024 {k}/{n}" + (f" ({100 * k / n:.0f}%)" if n else "")
+                + f" vs selalu-NAIK 2024+ {(_cpi_detik.DATA['uji'].get('selalu_naik_2024') or 81):.0f}%")
+        if row.get("lemah_jenis") == "yoyc":
+            teks += " • situasi inti y/y sekarang (YOYc) hanya 55%"
+        return teks.replace(".", ",")
+    if t in _ppi_wti.JUDUL:
+        pa = ((_ppi_wti.DATA.get("cpi_ppi") or {}).get("per_arah") or {}).get(arah) or {}
+        if not pa:
+            return None
+        g = lambda k: pa.get(k) or {}                                     # noqa: E731
+        return (f"🧾 Tutup kertas sebelum rilis (tebakan {arah.upper()}): {g('semua').get('persen', 0):.0f}% ({g('semua').get('n')} "
+                f"rilis) • dulu {g('lama').get('persen', 0):.0f}% • sejak Okt 2021 {g('baru').get('persen', 0):.0f}% • 2024+ "
+                f"{g('s2024').get('persen', 0):.0f}% (n {g('s2024').get('n')})").replace(".", ",")
+    return None
 
 
 TREN_JAM = 6                      # tren hanya dihitung bila rilis ≤ 6 jam lagi (sebelumnya tidak bermakna)
@@ -502,9 +524,9 @@ def satu(row: dict) -> dict:
                  "emas 4 jam (55–56%, lemah)"]
         if row.get("kons"):
             baris.append(kons_teks(row["kons"]))
-    hp = hampir_pasti(row.get("title") or "")
-    if hp:
-        baris.append(hp)
+    tk = tutup_kertas(row)
+    if tk:
+        baris.insert(1, tk)
     if mi:
         baris.append(mi["singkat"])
     out["poin"] = baris

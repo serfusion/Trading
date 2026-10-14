@@ -356,10 +356,8 @@ def test_satu_singkat_langsung_ke_inti():
     assert r["teks"] == "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 3 hari lagi"
     baris = r["bukti"].split("\n")                     # 14 Okt: detail = poin "• …" (tutup kertas, konsensus, orang)
     assert baris[0] == "• ⚠️ Belum terbukti: 56% (1–10 dtk) • dulu 58% • sejak Okt 2021 53% • dasar: minyak WTI"
-    assert baris[1].startswith("• ✅ Hampir selalu benar (setelah rilis): emas sudah gerak ≥ $0,50 di detik 2")
-    assert "dulu " in baris[1] and "sejak Okt 2021" in baris[1]
-    assert baris[2].startswith("• Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
-    assert len(baris) == 3 and "per jangka" not in r["bukti"] and "lama/baru" not in r["bukti"]
+    assert baris[1].startswith("• Setelah rilis: emas gerak ≥ $0,50 di detik 2 → ikuti arahnya s/d 5 mnt (")
+    assert len(baris) == 2 and "per jangka" not in r["bukti"] and "lama/baru" not in r["bukti"]
     assert r["poin"][0].startswith("⚠️ Belum terbukti: 56%")
     kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi", "kons": {"f": "0.3%", "p": "0.4%"}})
     assert kosong["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"
