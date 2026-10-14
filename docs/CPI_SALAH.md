@@ -125,3 +125,9 @@ sejak 2022 (Kalshi). Detik 1 tebakan kuat 56% (harga belum bergerak).
 - Kesalahan analisa saya 14 Okt: (1) candle 1 mnt Twelve Data (puncak 4.172) dipakai tanpa cek → kesimpulan "naik dulu lalu
   turun" salah; data 1 dtk OKX menunjukkan turun sejak detik 1. (2) Baris utama "NAIK 54%" tidak cukup menonjolkan bahwa dua
   petunjuk lain (y/y tersirat, inti y/y) condong DI ATAS. (3) Harga tile XAU aplikasi tertinggal (4.166 vs 4.108 MT5).
+- DIPASANG 14 Okt malam (izin "pasang … terapkan pada semua NEWS terutama PPI"): (1) BUG: kartu persiapan dibuat SEBELUM Act
+  diisi → PPI tidak pernah diperbarui hasil CPI; kini `chat.isi_act` menyalin Act kalender ke kartu (juga di arsip uji maju)
+  → PPI 15 Okt "▼ TURUN 74%" (CPI inti 0,3% > 0,2%, situasi searah: dulu 60% / sejak Okt 2021 79%); (2) baris utama semua
+  berita dengan peringatan (petunjuk berlawanan) diberi "⚖️ tunggu ⚡LIVE"; (3) aplikasi 4.40: harga tile XAU ikut harga
+  LIVE emas token tiap 5 dtk (tanda ⚡); (4) uji maju mencatat "cara sekilas" (tren emas 4 jam) untuk dibandingkan tiap rilis
+  (`arsip_data.tren4`, `uji_maju_berita` kolom sekilas_d2). ⚡ LIVE per detik (4.39) berlaku untuk semua berita di baris XAU.

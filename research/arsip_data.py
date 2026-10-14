@@ -265,6 +265,21 @@ def prediksi(root: Path, now: datetime) -> str:
     return f"{n} prediksi aktif"
 
 
+def tren4(root: Path) -> str | None:
+    """Arah emas 4 jam terakhir dari arsip candle XAU 1 jam (naik/turun) — pembanding "cara sekilas" di uji maju."""
+    f = root / "candle" / "XAUUSD_1h.csv"
+    if not f.exists():
+        return None
+    rows = list(csv.reader(f.open()))[1:]
+    if len(rows) < 5:
+        return None
+    try:
+        a, b = float(rows[-1][4]), float(rows[-5][4])
+    except (ValueError, IndexError):
+        return None
+    return "naik" if a > b else "turun" if a < b else None
+
+
 def pra(root: Path, now: datetime) -> str:
     """UJI MAJU CPI/PPI (13 Okt 2026, pengguna: "yakin tidak ada uji validasi yang terlewat?"): rekam baris arah 1–10 dtk
     (pra_satu) PERSIS seperti aplikasi — arah, persen, status, jalur (indeks/Kalshi), konsensus, peluang Kalshi — untuk berita
@@ -282,6 +297,15 @@ def pra(root: Path, now: datetime) -> str:
     prep = _persiapan.cards(rows, now)
     _jadwal.attach(prep, now)
     store = _Store({})
+    try:                                   # 14 Okt: Act resmi ke kartu supaya PPI ← CPI tercatat seperti di aplikasi
+        import _aktual
+        import _chat
+        import chat as _chat_api
+        cal = _chat.calendar_json(rows, now, fetch=lambda s: [])
+        _aktual.fill(cal, None, now, os.environ)
+        _chat_api.isi_act(prep, cal)
+    except Exception:  # noqa: BLE001
+        pass
     _cpi_detik.attach(prep, store, now)
     _ppi_wti.attach(prep, store, now)
     _pra_aset.attach(prep, now, None)
@@ -304,6 +328,8 @@ def pra(root: Path, now: datetime) -> str:
                   "situasi": (g.get("terbaru") or {}).get("situasi"),
                   "indeks_pertama": lama.get("indeks_pertama") or (now.isoformat() if ada_ix else None),
                   "pra_satu": s.get("teks") if s.get("time") == c["time"] else lama.get("pra_satu"),
+                  # 14 Okt: pembanding "cara sekilas" (AI lain): ikut tren emas 4 jam terakhir sebelum rilis
+                  "sekilas_tren4": tren4(root) if t - now <= timedelta(hours=2) else lama.get("sekilas_tren4"),
                   "dicatat": now.isoformat()}
         n += 1
     p.parent.mkdir(parents=True, exist_ok=True)

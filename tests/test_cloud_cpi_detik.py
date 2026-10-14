@@ -340,6 +340,7 @@ def test_yoyc_naik_jadi_lemah_dan_modal_kecil_jangan_lentur_14okt():
     _pra_aset.attach(prep, NOW, None)
     s = prep["pra_satu"]
     assert "⚠️" in s["teks"] and "Lemah karena inti m/m jarang di bawah" in s["bukti"]
+    assert "⚖️ tunggu ⚡LIVE" in s["teks"]                     # 14 Okt: petunjuk berlawanan → tunggu arah LIVE detik 1
     a = s["allin"]
     assert not a["kuat"] and a["keluar"] == "detik2" and "JANGAN" in a["teks"] and "TUTUP detik 2" in a["teks"]
     assert "lentur −$" in a["bukti"] and "1:200" in a["bukti"]

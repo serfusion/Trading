@@ -92,6 +92,14 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             delay(60_000L)
         }
     }
+    // ⚡ 4.40 (14 Okt: tile XAU 4.166 padahal MT5 4.108): harga XAU ikut harga LIVE emas token tiap 5 dtk saat layar terbuka
+    var xauLive by remember { mutableStateOf<Pair<Double, Long>?>(null) }
+    LaunchedEffect(Unit) {
+        while (true) {
+            withContext(Dispatchers.IO) { LiveGold.harga() }?.let { xauLive = it.first to System.currentTimeMillis() }
+            delay(5_000L)
+        }
+    }
     val online = connection == "Terhubung"
     val assets = listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "BTC" to "ETH/USD")
         .filter { (g, _) -> g in follow }
@@ -109,7 +117,8 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
         if (assets.isEmpty()) Text("Menunggu data cloud", style = MaterialTheme.typography.labelMedium, color = Muted)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             assets.forEach { (sym, hb) ->
-                MiniTile(sym, hb, open == sym, Modifier.weight(1f)) { open = if (open == sym) null else sym }
+                val lv = xauLive?.takeIf { sym.startsWith("XAU") && now - it.second < 30_000L }?.first
+                MiniTile(sym, hb, open == sym, Modifier.weight(1f), lv) { open = if (open == sym) null else sym }
             }
         }
         StripPra(prep)                           // ⏱️ XAU: arah 1–10 dtk setelah berita berikutnya (4.27)
@@ -320,10 +329,11 @@ private fun trendOf(hb: SignalEvent): Pair<String, Color> {
 }
 
 @Composable
-private fun MiniTile(sym: String, hb: SignalEvent, selected: Boolean, modifier: Modifier, onClick: () -> Unit) {
+private fun MiniTile(sym: String, hb: SignalEvent, selected: Boolean, modifier: Modifier, live: Double? = null,
+                     onClick: () -> Unit) {
     val (arrow, color) = trendOf(hb)
     val btc = !sym.startsWith("XAU")
-    val price = hb.num("price")
+    val price = live ?: hb.num("price")
     Column(
         modifier.clip(TileShape)
             .background(if (selected) color.copy(alpha = 0.16f) else CardHigh.copy(alpha = 0.85f))
@@ -337,7 +347,7 @@ private fun MiniTile(sym: String, hb: SignalEvent, selected: Boolean, modifier: 
         }
         Text(if (price == null) "–" else px(price, btc), fontWeight = FontWeight.ExtraBold, maxLines = 1,
             style = MaterialTheme.typography.titleSmall, textAlign = TextAlign.Center)
-        Text(sym.substringBefore("/"), style = MaterialTheme.typography.labelSmall, color = Muted)
+        Text(sym.substringBefore("/") + if (live != null) " ⚡" else "", style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }
 

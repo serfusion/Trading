@@ -125,3 +125,22 @@ def test_setelah_cpi_env_mati(monkeypatch):
     t0 = datetime.fromisoformat(T0)
     g = _ppi_wti.tebak(t0, deret(80.0, 90.0))
     assert _ppi_wti.pakai_cpi(g, _ppi_wti.cpi_inti({"berita": [cpi_kartu("0.1%")]}, t0)) is g
+
+
+def test_isi_act_kartu_dari_kalender_lalu_ppi_ikut_cpi_14okt():
+    """14 Okt: kartu dibuat sebelum Act diisi → PPI tidak pernah diperbarui oleh CPI. chat.isi_act menyalin Act kalender."""
+    import chat
+    prep = {"berita": [{"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00", "forecast": "0.2%",
+                        "released": True}], "mendatang": []}
+    cal = [{"title": "Core CPI m/m", "time": "2026-10-14T12:30:00+00:00", "actual": "0.3%", "actual_src": "FRED"},
+           {"title": "PPI m/m", "time": T0}]
+    chat.isi_act(prep, cal)
+    assert prep["berita"][0]["actual"] == "0.3%" and prep["berita"][0]["actual_src"] == "FRED"
+    ci = _ppi_wti.cpi_inti(prep, datetime.fromisoformat(T0))
+    assert ci and ci["s"] == 1
+    g = _ppi_wti.pakai_cpi({"arah": "turun", "persen": 55, "status": "lemah", "bukti": "x", "peringatan": "p"}, ci)
+    assert g["status"] == "tutup kertas" and g["cpi_inti"]["hubungan"] == "sepakat" and "peringatan" not in g
+    row = {"title": "PPI m/m", "nama": "PPI", "sisa": "1 hari lagi", **g}
+    s = _pra_aset.satu(row)
+    assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}%") and "⚖️" not in s["teks"]
+    assert any(x.startswith("🧾 Tutup kertas sebelum rilis (setelah CPI inti") for x in s["poin"])
