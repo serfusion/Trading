@@ -537,6 +537,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   berbalik TURUN 37%, JOLTS berbalik NAIK 34–41%, NFP+Indeed 40%, TURUN melawan tren naik 45–48%). ISM Jasa berbalik tetap
   ✅ (TURUN 69%). JANGAN lagi memakai angka sel campuran; jalankan ulang audit_arah setelah xau_arah/per_berita/tren diperbarui.
 
+- Aplikasi 4.43 (15 Okt, "persentase 1 detik hingga 1 menit minimal 70%"): `research/live_kurva.py` → `cloud/api/live_kurva.json`
+  (kurva SETIAP detik 2–60 menurut gerak detik 1/2 ≥ $X per kelompok + "PPI+RETAIL"/"PPI sendiri"; cache gerak
+  `data/research/eksternal/live_kurva_gerak.parquet`) → `pra_satu.lanjut.kurva` (`bersama_retail` dari kartu jam sama) → ⚡LIVE
+  "tetap NAIK/TURUN sekarang X% • s/d menit 1 ≥ Y% ✅". Detik 1 dipercaya hanya bila kurvanya ≥ 70% (PPI+Retail 77–80%, n 13–15;
+  PPI sendiri & CPI 42–63% ✗). Sebelum rilis tetap tidak ada yang ≥ 70% di detik 1 (plafon 51–58%).
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

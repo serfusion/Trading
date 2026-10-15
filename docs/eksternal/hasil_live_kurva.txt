@@ -1,0 +1,161 @@
+# ⚡ Kurva setiap detik 1–60 setelah rilis (research/live_kurva.py)
+python -m research.live_kurva        → cloud/api/live_kurva.json + docs/eksternal/hasil_live_kurva.txt
+rilis bertick 2016–2026: 1629
+
+## SEMUA (1629 rilis)
+   gerak detik 1 ≥ $0.3 (n 676): terendah s/d detik 60 73% (detik 59; lama 78 / baru 71) | detik 2 92 • 3 88 • 5 85 • 10 80 • 20 77 • 30 75 • 45 74 • 60 74  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 523): terendah s/d detik 60 77% (detik 59; lama 81 / baru 75) | detik 2 93 • 3 89 • 5 89 • 10 85 • 20 83 • 30 80 • 45 78 • 60 78  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 346): terendah s/d detik 60 81% (detik 59; lama 86 / baru 79) | detik 2 95 • 3 92 • 5 91 • 10 88 • 20 86 • 30 84 • 45 83 • 60 81  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 157): terendah s/d detik 60 85% (detik 48; lama 85 / baru 84) | detik 2 98 • 3 95 • 5 95 • 10 92 • 20 90 • 30 88 • 45 86 • 60 85  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 830): terendah s/d detik 60 83% (detik 54; lama 86 / baru 81) | detik 2 – • 3 98 • 5 96 • 10 92 • 20 88 • 30 86 • 45 84 • 60 83  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 616): terendah s/d detik 60 87% (detik 59; lama 89 / baru 86) | detik 2 – • 3 99 • 5 98 • 10 94 • 20 91 • 30 90 • 45 88 • 60 87  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 323): terendah s/d detik 60 91% (detik 44; lama 95 / baru 90) | detik 2 – • 3 99 • 5 99 • 10 97 • 20 94 • 30 92 • 45 91 • 60 91  ✅ ≥ 70% sepanjang menit 1
+
+## ADP (102 rilis)
+   gerak detik 1 ≥ $0.3 (n 36): terendah s/d detik 60 67% (detik 56; lama 88 / baru 50) | detik 2 86 • 3 86 • 5 75 • 10 72 • 20 75 • 30 75 • 45 72 • 60 72
+   gerak detik 1 ≥ $0.5 (n 27): terendah s/d detik 60 78% (detik 9; lama 88 / baru 55) | detik 2 89 • 3 89 • 5 81 • 10 81 • 20 85 • 30 85 • 45 81 • 60 78  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 19): terendah s/d detik 60 74% (detik 9; lama 91 / baru 50) | detik 2 84 • 3 84 • 5 79 • 10 74 • 20 79 • 30 79 • 45 79 • 60 79  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 6): terendah s/d detik 60 83% (detik 2; lama None / baru None) | detik 2 83 • 3 83 • 5 83 • 10 83 • 20 83 • 30 83 • 45 83 • 60 83
+   gerak detik 2 ≥ $0.5 (n 57): terendah s/d detik 60 89% (detik 56; lama 96 / baru 85) | detik 2 – • 3 100 • 5 96 • 10 93 • 20 95 • 30 95 • 45 95 • 60 89  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 41): terendah s/d detik 60 98% (detik 9; lama 100 / baru 96) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 98  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 22): terendah s/d detik 60 100% (detik 3; lama 100 / baru 100) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 100  ✅ ≥ 70% sepanjang menit 1
+
+## CLAIMS (194 rilis)
+   gerak detik 1 ≥ $0.3 (n 71): terendah s/d detik 60 69% (detik 60; lama 86 / baru 67) | detik 2 94 • 3 90 • 5 87 • 10 76 • 20 75 • 30 79 • 45 77 • 60 69
+   gerak detik 1 ≥ $0.5 (n 58): terendah s/d detik 60 76% (detik 60; lama None / baru 74) | detik 2 95 • 3 91 • 5 91 • 10 79 • 20 83 • 30 88 • 45 86 • 60 76  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 35): terendah s/d detik 60 80% (detik 60; lama None / baru 79) | detik 2 97 • 3 97 • 5 97 • 10 86 • 20 89 • 30 91 • 45 89 • 60 80  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 15): terendah s/d detik 60 73% (detik 57; lama None / baru 73) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 93 • 30 93 • 45 93 • 60 73  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 67): terendah s/d detik 60 76% (detik 11; lama 83 / baru 74) | detik 2 – • 3 96 • 5 96 • 10 84 • 20 82 • 30 87 • 45 82 • 60 76  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 43): terendah s/d detik 60 84% (detik 60; lama None / baru 82) | detik 2 – • 3 100 • 5 100 • 10 91 • 20 91 • 30 93 • 45 91 • 60 84  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 12): terendah s/d detik 60 75% (detik 21; lama None / baru 75) | detik 2 – • 3 100 • 5 100 • 10 92 • 20 83 • 30 83 • 45 83 • 60 75  ✅ ≥ 70% sepanjang menit 1
+
+## CPI (128 rilis)
+   gerak detik 1 ≥ $0.3 (n 57): terendah s/d detik 60 53% (detik 38; lama 67 / baru 46) | detik 2 75 • 3 72 • 5 68 • 10 65 • 20 67 • 30 60 • 45 53 • 60 56
+   gerak detik 1 ≥ $0.5 (n 38): terendah s/d detik 60 55% (detik 38; lama 75 / baru 46) | detik 2 79 • 3 74 • 5 74 • 10 66 • 20 68 • 30 66 • 45 55 • 60 61
+   gerak detik 1 ≥ $1.0 (n 24): terendah s/d detik 60 50% (detik 38; lama 57 / baru 41) | detik 2 75 • 3 67 • 5 67 • 10 54 • 20 67 • 30 62 • 45 54 • 60 58
+   gerak detik 1 ≥ $2.0 (n 12): terendah s/d detik 60 42% (detik 38; lama None / baru 44) | detik 2 92 • 3 75 • 5 75 • 10 58 • 20 58 • 30 58 • 45 50 • 60 50
+   gerak detik 2 ≥ $0.5 (n 85): terendah s/d detik 60 78% (detik 38; lama 81 / baru 74) | detik 2 – • 3 95 • 5 92 • 10 89 • 20 85 • 30 82 • 45 79 • 60 79  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 71): terendah s/d detik 60 83% (detik 38; lama 83 / baru 81) | detik 2 – • 3 97 • 5 96 • 10 92 • 20 87 • 30 87 • 45 85 • 60 86  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 48): terendah s/d detik 60 83% (detik 16; lama 78 / baru 82) | detik 2 – • 3 96 • 5 94 • 10 90 • 20 85 • 30 85 • 45 85 • 60 83  ✅ ≥ 70% sepanjang menit 1
+
+## DURABLE (31 rilis)
+   gerak detik 1 ≥ $0.3 (n 11): terendah s/d detik 60 73% (detik 24; lama 70 / baru None) | detik 2 91 • 3 100 • 5 100 • 10 100 • 20 91 • 30 91 • 45 91 • 60 82  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 6): terendah s/d detik 60 67% (detik 24; lama 60 / baru None) | detik 2 83 • 3 100 • 5 100 • 10 100 • 20 100 • 30 83 • 45 83 • 60 83
+   gerak detik 2 ≥ $0.5 (n 7): terendah s/d detik 60 71% (detik 24; lama 67 / baru None) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 86 • 45 86 • 60 100
+
+## ECI (5 rilis)
+   gerak detik 2 ≥ $0.5 (n 5): terendah s/d detik 60 60% (detik 17; lama None / baru 60) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 80 • 30 60 • 45 80 • 60 80
+
+## FOMC (86 rilis)
+   gerak detik 1 ≥ $0.3 (n 29): terendah s/d detik 60 48% (detik 57; lama 50 / baru 31) | detik 2 83 • 3 76 • 5 76 • 10 55 • 20 55 • 30 62 • 45 52 • 60 48
+   gerak detik 1 ≥ $0.5 (n 23): terendah s/d detik 60 52% (detik 57; lama 57 / baru 33) | detik 2 87 • 3 78 • 5 78 • 10 61 • 20 61 • 30 65 • 45 57 • 60 52
+   gerak detik 1 ≥ $1.0 (n 11): terendah s/d detik 60 73% (detik 3; lama 62 / baru None) | detik 2 82 • 3 73 • 5 73 • 10 73 • 20 73 • 30 82 • 45 73 • 60 73  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 6): terendah s/d detik 60 67% (detik 19; lama None / baru None) | detik 2 100 • 3 83 • 5 83 • 10 83 • 20 67 • 30 83 • 45 83 • 60 83
+   gerak detik 2 ≥ $0.5 (n 45): terendah s/d detik 60 64% (detik 58; lama 59 / baru 70) | detik 2 – • 3 100 • 5 98 • 10 84 • 20 78 • 30 78 • 45 69 • 60 64
+   gerak detik 2 ≥ $1.0 (n 33): terendah s/d detik 60 70% (detik 58; lama 64 / baru 74) | detik 2 – • 3 100 • 5 97 • 10 91 • 20 85 • 30 85 • 45 76 • 60 70  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 19): terendah s/d detik 60 79% (detik 57; lama 83 / baru 77) | detik 2 – • 3 100 • 5 95 • 10 89 • 20 84 • 30 84 • 45 84 • 60 79  ✅ ≥ 70% sepanjang menit 1
+
+## GDP (74 rilis)
+   gerak detik 1 ≥ $0.3 (n 15): terendah s/d detik 60 33% (detik 17; lama None / baru 36) | detik 2 93 • 3 73 • 5 60 • 10 60 • 20 47 • 30 47 • 45 53 • 60 53
+   gerak detik 1 ≥ $0.5 (n 8): terendah s/d detik 60 50% (detik 5; lama None / baru 50) | detik 2 100 • 3 75 • 5 50 • 10 50 • 20 75 • 30 75 • 45 75 • 60 75
+   gerak detik 1 ≥ $1.0 (n 5): terendah s/d detik 60 60% (detik 9; lama None / baru 60) | detik 2 100 • 3 80 • 5 80 • 10 60 • 20 80 • 30 80 • 45 80 • 60 80
+   gerak detik 2 ≥ $0.5 (n 21): terendah s/d detik 60 81% (detik 6; lama 100 / baru 64) | detik 2 – • 3 95 • 5 86 • 10 86 • 20 86 • 30 90 • 45 95 • 60 95  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 14): terendah s/d detik 60 79% (detik 11; lama 100 / baru 50) | detik 2 – • 3 93 • 5 93 • 10 86 • 20 86 • 30 93 • 45 93 • 60 93  ✅ ≥ 70% sepanjang menit 1
+
+## ISM (225 rilis)
+   gerak detik 1 ≥ $0.3 (n 166): terendah s/d detik 60 86% (detik 33; lama 86 / baru 84) | detik 2 98 • 3 95 • 5 93 • 10 92 • 20 88 • 30 87 • 45 86 • 60 89  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 151): terendah s/d detik 60 86% (detik 36; lama 87 / baru 85) | detik 2 98 • 3 95 • 5 95 • 10 93 • 20 89 • 30 88 • 45 87 • 60 89  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 112): terendah s/d detik 60 88% (detik 36; lama 89 / baru 87) | detik 2 99 • 3 99 • 5 96 • 10 96 • 20 92 • 30 92 • 45 89 • 60 90  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 56): terendah s/d detik 60 93% (detik 11; lama 100 / baru 92) | detik 2 100 • 3 100 • 5 100 • 10 96 • 20 95 • 30 93 • 45 93 • 60 95  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 160): terendah s/d detik 60 89% (detik 45; lama 89 / baru 87) | detik 2 – • 3 99 • 5 98 • 10 97 • 20 92 • 30 91 • 45 89 • 60 91  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 125): terendah s/d detik 60 91% (detik 45; lama 94 / baru 88) | detik 2 – • 3 99 • 5 99 • 10 98 • 20 94 • 30 94 • 45 91 • 60 93  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 68): terendah s/d detik 60 93% (detik 45; lama 100 / baru 91) | detik 2 – • 3 100 • 5 100 • 10 99 • 20 97 • 30 94 • 45 93 • 60 96  ✅ ≥ 70% sepanjang menit 1
+
+## JOLTS (27 rilis)
+   gerak detik 1 ≥ $0.3 (n 12): terendah s/d detik 60 50% (detik 26; lama None / baru 50) | detik 2 67 • 3 67 • 5 67 • 10 67 • 20 67 • 30 50 • 45 58 • 60 58
+   gerak detik 1 ≥ $0.5 (n 7): terendah s/d detik 60 43% (detik 26; lama None / baru 43) | detik 2 71 • 3 71 • 5 71 • 10 71 • 20 71 • 30 43 • 45 57 • 60 57
+   gerak detik 2 ≥ $0.5 (n 18): terendah s/d detik 60 89% (detik 26; lama None / baru 89) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 89 • 45 94 • 60 94  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 16): terendah s/d detik 60 94% (detik 4; lama None / baru 94) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 94 • 45 100 • 60 100  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 11): terendah s/d detik 60 100% (detik 3; lama None / baru 100) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 100  ✅ ≥ 70% sepanjang menit 1
+
+## KONSUMEN (140 rilis)
+   gerak detik 1 ≥ $0.3 (n 52): terendah s/d detik 60 65% (detik 58; lama 29 / baru 69) | detik 2 94 • 3 90 • 5 88 • 10 85 • 20 77 • 30 73 • 45 73 • 60 69
+   gerak detik 1 ≥ $0.5 (n 40): terendah s/d detik 60 68% (detik 59; lama None / baru 69) | detik 2 92 • 3 88 • 5 88 • 10 88 • 20 85 • 30 80 • 45 80 • 60 72
+   gerak detik 1 ≥ $1.0 (n 21): terendah s/d detik 60 81% (detik 58; lama None / baru 81) | detik 2 100 • 3 100 • 5 100 • 10 95 • 20 90 • 30 86 • 45 90 • 60 86  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 10): terendah s/d detik 60 80% (detik 58; lama None / baru 80) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 90  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 59): terendah s/d detik 60 81% (detik 58; lama 73 / baru 81) | detik 2 – • 3 98 • 5 98 • 10 95 • 20 90 • 30 90 • 45 86 • 60 85  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 43): terendah s/d detik 60 86% (detik 59; lama None / baru 88) | detik 2 – • 3 100 • 5 100 • 10 98 • 20 95 • 30 93 • 45 93 • 60 88  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 19): terendah s/d detik 60 79% (detik 58; lama None / baru 79) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 95 • 30 95 • 45 89 • 60 84  ✅ ≥ 70% sepanjang menit 1
+
+## MANUFAKTUR (19 rilis)
+   gerak detik 1 ≥ $0.3 (n 10): terendah s/d detik 60 70% (detik 46; lama None / baru 67) | detik 2 100 • 3 100 • 5 100 • 10 90 • 20 80 • 30 80 • 45 80 • 60 90  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 9): terendah s/d detik 60 67% (detik 46; lama None / baru 67) | detik 2 100 • 3 100 • 5 100 • 10 89 • 20 78 • 30 78 • 45 78 • 60 89
+   gerak detik 1 ≥ $1.0 (n 7): terendah s/d detik 60 71% (detik 47; lama None / baru 71) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 86
+   gerak detik 2 ≥ $0.5 (n 8): terendah s/d detik 60 75% (detik 47; lama None / baru 75) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 88
+   gerak detik 2 ≥ $1.0 (n 7): terendah s/d detik 60 71% (detik 47; lama None / baru 71) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 86
+
+## MINYAK (151 rilis)
+   gerak detik 1 ≥ $0.3 (n 8): terendah s/d detik 60 75% (detik 57; lama 75 / baru None) | detik 2 100 • 3 100 • 5 88 • 10 88 • 20 88 • 30 88 • 45 88 • 60 75
+   gerak detik 2 ≥ $0.5 (n 5): terendah s/d detik 60 80% (detik 30; lama 80 / baru None) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 80 • 45 80 • 60 80
+
+## NFP (127 rilis)
+   gerak detik 1 ≥ $0.3 (n 39): terendah s/d detik 60 64% (detik 26; lama 68 / baru 55) | detik 2 87 • 3 74 • 5 77 • 10 74 • 20 69 • 30 67 • 45 69 • 60 69
+   gerak detik 1 ≥ $0.5 (n 28): terendah s/d detik 60 68% (detik 26; lama 67 / baru 69) | detik 2 93 • 3 82 • 5 82 • 10 82 • 20 79 • 30 71 • 45 75 • 60 75
+   gerak detik 1 ≥ $1.0 (n 18): terendah s/d detik 60 67% (detik 26; lama 67 / baru 67) | detik 2 94 • 3 78 • 5 78 • 10 78 • 20 78 • 30 67 • 45 78 • 60 72
+   gerak detik 1 ≥ $2.0 (n 7): terendah s/d detik 60 86% (detik 2; lama None / baru 80) | detik 2 86 • 3 86 • 5 86 • 10 86 • 20 86 • 30 86 • 45 86 • 60 86
+   gerak detik 2 ≥ $0.5 (n 93): terendah s/d detik 60 85% (detik 28; lama 81 / baru 84) | detik 2 – • 3 95 • 5 96 • 10 95 • 20 90 • 30 85 • 45 88 • 60 85  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 82): terendah s/d detik 60 85% (detik 49; lama 81 / baru 87) | detik 2 – • 3 95 • 5 98 • 10 95 • 20 91 • 30 87 • 45 89 • 60 87  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 48): terendah s/d detik 60 90% (detik 47; lama 92 / baru 89) | detik 2 – • 3 98 • 5 100 • 10 98 • 20 94 • 30 92 • 45 94 • 60 92  ✅ ≥ 70% sepanjang menit 1
+
+## PCE (52 rilis)
+   gerak detik 1 ≥ $0.3 (n 22): terendah s/d detik 60 50% (detik 20; lama None / baru 50) | detik 2 86 • 3 77 • 5 68 • 10 55 • 20 50 • 30 59 • 45 64 • 60 68
+   gerak detik 1 ≥ $0.5 (n 12): terendah s/d detik 60 50% (detik 49; lama None / baru 50) | detik 2 92 • 3 83 • 5 83 • 10 75 • 20 58 • 30 67 • 45 67 • 60 67
+   gerak detik 1 ≥ $1.0 (n 5): terendah s/d detik 60 40% (detik 18; lama None / baru 40) | detik 2 80 • 3 80 • 5 80 • 10 80 • 20 40 • 30 60 • 45 60 • 60 60
+   gerak detik 2 ≥ $0.5 (n 18): terendah s/d detik 60 61% (detik 49; lama None / baru 61) | detik 2 – • 3 94 • 5 89 • 10 83 • 20 72 • 30 78 • 45 78 • 60 67
+   gerak detik 2 ≥ $1.0 (n 9): terendah s/d detik 60 44% (detik 49; lama None / baru 44) | detik 2 – • 3 100 • 5 100 • 10 89 • 20 67 • 30 67 • 45 67 • 60 67
+
+## PMI (52 rilis)
+   gerak detik 1 ≥ $0.3 (n 43): terendah s/d detik 60 72% (detik 54; lama 60 / baru 74) | detik 2 98 • 3 93 • 5 93 • 10 95 • 20 86 • 30 74 • 45 74 • 60 74  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 40): terendah s/d detik 60 75% (detik 54; lama None / baru 75) | detik 2 100 • 3 95 • 5 95 • 10 98 • 20 90 • 30 78 • 45 78 • 60 78  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 37): terendah s/d detik 60 76% (detik 54; lama None / baru 77) | detik 2 100 • 3 95 • 5 95 • 10 97 • 20 89 • 30 78 • 45 78 • 60 78  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 20): terendah s/d detik 60 90% (detik 44; lama None / baru 90) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 100 • 30 95 • 45 90 • 60 95  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 42): terendah s/d detik 60 76% (detik 54; lama None / baru 76) | detik 2 – • 3 95 • 5 95 • 10 95 • 20 88 • 30 79 • 45 79 • 60 79  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 37): terendah s/d detik 60 81% (detik 54; lama None / baru 82) | detik 2 – • 3 100 • 5 100 • 10 97 • 20 92 • 30 84 • 45 84 • 60 84  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 25): terendah s/d detik 60 88% (detik 44; lama None / baru 88) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 92 • 45 88 • 60 92  ✅ ≥ 70% sepanjang menit 1
+
+## PPI (97 rilis)
+   gerak detik 1 ≥ $0.3 (n 35): terendah s/d detik 60 63% (detik 43; lama 67 / baru 61) | detik 2 83 • 3 77 • 5 74 • 10 71 • 20 74 • 30 69 • 45 63 • 60 69
+   gerak detik 1 ≥ $0.5 (n 24): terendah s/d detik 60 62% (detik 43; lama 67 / baru 60) | detik 2 83 • 3 75 • 5 79 • 10 75 • 20 79 • 30 71 • 45 62 • 60 71
+   gerak detik 1 ≥ $1.0 (n 10): terendah s/d detik 60 60% (detik 9; lama 80 / baru 40) | detik 2 80 • 3 70 • 5 70 • 10 60 • 20 60 • 30 60 • 45 60 • 60 60
+   gerak detik 2 ≥ $0.5 (n 69): terendah s/d detik 60 75% (detik 45; lama 80 / baru 73) | detik 2 – • 3 97 • 5 91 • 10 87 • 20 86 • 30 78 • 45 75 • 60 78  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 44): terendah s/d detik 60 75% (detik 45; lama 75 / baru 75) | detik 2 – • 3 98 • 5 93 • 10 84 • 20 86 • 30 82 • 45 75 • 60 80  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 16): terendah s/d detik 60 94% (detik 43; lama None / baru 92) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 94 • 60 100  ✅ ≥ 70% sepanjang menit 1
+
+## RETAIL (88 rilis)
+   gerak detik 1 ≥ $0.3 (n 62): terendah s/d detik 60 79% (detik 22; lama 76 / baru 76) | detik 2 98 • 3 97 • 5 95 • 10 90 • 20 85 • 30 85 • 45 85 • 60 84  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 46): terendah s/d detik 60 80% (detik 16; lama 81 / baru 77) | detik 2 98 • 3 96 • 5 98 • 10 96 • 20 87 • 30 85 • 45 85 • 60 83  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 35): terendah s/d detik 60 80% (detik 22; lama 89 / baru 73) | detik 2 100 • 3 97 • 5 100 • 10 97 • 20 89 • 30 86 • 45 86 • 60 83  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $2.0 (n 15): terendah s/d detik 60 73% (detik 22; lama None / baru 73) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 93 • 30 80 • 45 73 • 60 80  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $0.5 (n 65): terendah s/d detik 60 78% (detik 22; lama 80 / baru 71) | detik 2 – • 3 100 • 5 98 • 10 89 • 20 85 • 30 82 • 45 83 • 60 82  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 42): terendah s/d detik 60 83% (detik 17; lama 100 / baru 74) | detik 2 – • 3 100 • 5 100 • 10 93 • 20 90 • 30 88 • 45 86 • 60 88  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 21): terendah s/d detik 60 86% (detik 16; lama 100 / baru 81) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 95 • 30 86 • 45 86 • 60 90  ✅ ≥ 70% sepanjang menit 1
+
+## RUMAH (30 rilis)
+   gerak detik 1 ≥ $0.3 (n 7): terendah s/d detik 60 57% (detik 40; lama None / baru None) | detik 2 100 • 3 100 • 5 100 • 10 86 • 20 86 • 30 71 • 45 57 • 60 57
+   gerak detik 1 ≥ $0.5 (n 5): terendah s/d detik 60 80% (detik 40; lama None / baru None) | detik 2 100 • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 80 • 60 80
+   gerak detik 2 ≥ $0.5 (n 6): terendah s/d detik 60 83% (detik 40; lama None / baru None) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 83 • 60 83
+
+## PPI+RETAIL (22 rilis)
+   gerak detik 1 ≥ $0.3 (n 15): terendah s/d detik 60 80% (detik 23; lama 73 / baru None) | detik 2 100 • 3 100 • 5 100 • 10 87 • 20 87 • 30 80 • 45 87 • 60 87  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $0.5 (n 13): terendah s/d detik 60 77% (detik 28; lama 78 / baru None) | detik 2 100 • 3 100 • 5 100 • 10 92 • 20 92 • 30 77 • 45 85 • 60 85  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 1 ≥ $1.0 (n 6): terendah s/d detik 60 83% (detik 9; lama 80 / baru None) | detik 2 100 • 3 100 • 5 100 • 10 83 • 20 83 • 30 83 • 45 83 • 60 83
+   gerak detik 2 ≥ $0.5 (n 21): terendah s/d detik 60 81% (detik 23; lama 71 / baru 86) | detik 2 – • 3 100 • 5 100 • 10 90 • 20 86 • 30 81 • 45 86 • 60 86  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 14): terendah s/d detik 60 93% (detik 9; lama 90 / baru None) | detik 2 – • 3 100 • 5 100 • 10 93 • 20 93 • 30 93 • 45 93 • 60 93  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $2.0 (n 5): terendah s/d detik 60 100% (detik 3; lama None / baru None) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 100 • 60 100
+
+## PPI sendiri (79 rilis)
+   gerak detik 1 ≥ $0.3 (n 22): terendah s/d detik 60 50% (detik 43; lama None / baru 53) | detik 2 73 • 3 64 • 5 59 • 10 59 • 20 64 • 30 64 • 45 50 • 60 59
+   gerak detik 1 ≥ $0.5 (n 12): terendah s/d detik 60 42% (detik 43; lama None / baru 45) | detik 2 67 • 3 50 • 5 58 • 10 58 • 20 67 • 30 67 • 45 42 • 60 58
+   gerak detik 2 ≥ $0.5 (n 50): terendah s/d detik 60 72% (detik 45; lama 85 / baru 68) | detik 2 – • 3 96 • 5 88 • 10 84 • 20 84 • 30 78 • 45 72 • 60 76  ✅ ≥ 70% sepanjang menit 1
+   gerak detik 2 ≥ $1.0 (n 31): terendah s/d detik 60 68% (detik 45; lama None / baru 71) | detik 2 – • 3 97 • 5 90 • 10 81 • 20 84 • 30 77 • 45 68 • 60 74
+   gerak detik 2 ≥ $2.0 (n 11): terendah s/d detik 60 91% (detik 43; lama None / baru 91) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 91 • 60 100  ✅ ≥ 70% sepanjang menit 1

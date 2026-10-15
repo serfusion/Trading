@@ -528,6 +528,8 @@ def ringkas_terbaru(teks: str) -> list[str]:
 
 _F_LIVE = Path(__file__).with_name("live_tingkat.json")
 LIVE_T = json.loads(_F_LIVE.read_text(encoding="utf-8")) if _F_LIVE.exists() else {}
+_F_KURVA = Path(__file__).with_name("live_kurva.json")
+LIVE_K = json.loads(_F_KURVA.read_text(encoding="utf-8")) if _F_KURVA.exists() else {}
 _F_ATURAN = Path(__file__).with_name("aturan_pra.json")
 ATURAN = json.loads(_F_ATURAN.read_text(encoding="utf-8")) if _F_ATURAN.exists() else {}
 
@@ -597,6 +599,13 @@ def satu(row: dict) -> dict:
     lt = (LIVE_T.get("grup") or {}).get({"ISM Jasa": "ISM"}.get(g_, g_)) or (LIVE_T.get("grup") or {}).get("SEMUA")
     if lt:
         out.setdefault("lanjut", {}).update(tingkat=lt.get("tingkat"), kejar=lt.get("kejar"))
+    # ⚡ 4.43 (15 Okt, pengguna "data persentase 1 detik hingga 1 menit minimal 70%"): kurva SETIAP detik 2–60 menurut gerak
+    # detik 1 atau 2 (research/live_kurva.py → live_kurva.json); PPI dipisah bersamaan Retail / sendiri
+    kg = LIVE_K.get("grup") or {}
+    kunci = ("PPI+RETAIL" if row.get("bersama_retail") else "PPI sendiri") if g_ == "PPI" else {"ISM Jasa": "ISM"}.get(g_, g_)
+    kv = kg.get(kunci) or kg.get("SEMUA")
+    if kv:
+        out.setdefault("lanjut", {}).update(kurva=kv, kurva_grup=kunci if kunci in kg else "SEMUA")
     dasar = ""
     if row.get("arah"):
         naik = row["arah"] == "naik"
@@ -915,7 +924,10 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
         dl = daftar(persiapan, now, tren)
         if dl:
             persiapan["pra_daftar"] = dl
-            persiapan["pra_satu"] = satu(dl[0])
+            # 15 Okt: rilis bersamaan Retail Sales → kurva LIVE khusus (PPI+RETAIL: detik 1 bisa dipercaya, PPI sendiri tidak)
+            bersama = {c.get("title") for k in ("berita", "mendatang") for c in persiapan.get(k) or []
+                       if isinstance(c, dict) and c.get("time") == dl[0].get("time")}
+            persiapan["pra_satu"] = satu({**dl[0], "bersama_retail": any("Retail Sales" in (t or "") for t in bersama)})
             tambah_orang(persiapan["pra_satu"], persiapan.get("sentimen"))
             tandai(persiapan, dl, now)
     except Exception:  # noqa: BLE001 - daftar opsional

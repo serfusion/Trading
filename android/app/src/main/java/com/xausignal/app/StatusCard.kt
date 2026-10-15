@@ -163,6 +163,8 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     var liveSrc by remember(t0) { mutableStateOf("") }
     // ⚡ 4.42: gerak emas tepat di DETIK 2 (dari harga ±1 dtk sebelum rilis) = dasar tingkat keyakinan (research/live_tingkat.py)
     var g2 by remember(t0) { mutableStateOf<Double?>(null) }
+    // ⚡ 4.43: gerak di DETIK 1 (pemicu lebih awal; hanya dipakai bila kurvanya teruji, mis. PPI bersamaan Retail)
+    var g1 by remember(t0) { mutableStateOf<Double?>(null) }
     val jendela = det >= -15 && det <= 120
     LaunchedEffect(t0, jendela) {
         while (jendela) {
@@ -170,6 +172,9 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
             if (hp != null) {
                 live = (live + (System.currentTimeMillis() to hp.first)).takeLast(400)
                 liveSrc = hp.second
+                if (g1 == null && System.currentTimeMillis() - t0 >= 1_000L) {
+                    live.lastOrNull { it.first <= t0 - 300 }?.second?.let { d0 -> g1 = hp.first - d0 }
+                }
                 if (g2 == null && System.currentTimeMillis() - t0 >= 2_000L) {
                     live.lastOrNull { it.first <= t0 - 300 }?.second?.let { d0 -> g2 = hp.first - d0 }
                 }
@@ -202,7 +207,41 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
         ?.mapNotNull { k -> k.toDoubleOrNull()?.let { it to k } }?.filter { kotlin.math.abs(g) >= it.first }
         ?.maxByOrNull { it.first }?.let { (_, k) -> ting?.optJSONObject(k)?.let { k to it } }
     val g2v = g2
-    val liveTeks = if (g2v != null && gerak != null && ting != null) {
+    val g1v = g1
+    // ⚡ 4.43 (pengguna 15 Okt: "data persentase 1 detik hingga 1 menit minimal 70%"): kurva SETIAP detik s/d 60 menurut gerak
+    // detik 1 / 2 (cloud lanjut.kurva, research/live_kurva.py) → persen detik berjalan + terendah s/d menit 1 (✅ bila ≥ 70%)
+    val kv = lj?.optJSONObject("kurva")
+    fun kurvaUntuk(d: Int, g: Double): Pair<String, JSONObject>? = kv?.keys()?.asSequence()
+        ?.filter { it.startsWith("$d|") }
+        ?.mapNotNull { k -> k.substringAfter('|').toDoubleOrNull()?.let { it to k } }
+        ?.filter { kotlin.math.abs(g) >= it.first }
+        ?.mapNotNull { (_, k) -> kv?.optJSONObject(k)?.takeIf { it.optInt("n") >= 10 }?.let { k to it } }
+        ?.maxByOrNull { it.first.substringAfter('|').toDoubleOrNull() ?: 0.0 }
+    val pemicu: Triple<Int, Double, Pair<String, JSONObject>>? = when {
+        det >= 2 && g2v != null -> kurvaUntuk(2, g2v)?.let { Triple(2, g2v, it) }
+        det >= 1 && det < 2 && g1v != null -> kurvaUntuk(1, g1v)?.let { Triple(1, g1v, it) }
+        else -> null
+    }
+    val liveKurva = if (pemicu != null && gerak != null) {
+        val (d, gd, kp) = pemicu
+        val o = kp.second
+        val aK = if (gd > 0) "naik" else "turun"
+        val la = if (aK == "naik") "▲ NAIK" else "▼ TURUN"
+        val pNow = o.optJSONObject("p")?.optInt(dtk.toString(), -1)?.takeIf { it > 0 }
+        val mn = o.optInt("min")
+        val n = o.optInt("n")
+        val kejar = if (d == 2) tingkatUntuk(gd)?.first?.let { k -> kj?.optJSONObject(k)?.optJSONObject("t10") }?.let { q ->
+            val u = q.optInt("untung")
+            if (q.optDouble("rata") < 0) " • ⚠️ masuk sekarang: dulu untung $u% (rata-rata rugi)" else " • masuk sekarang: dulu untung $u%"
+        } ?: "" else ""
+        val beda = arah != null && arah != aK
+        "⚡ $nama detik $dtk • LIVE $la ${usd(gerak)} (detik $d ${usd(gd)})" +
+            (pNow?.let { " • tetap ${if (aK == "naik") "NAIK" else "TURUN"} sekarang $it%" } ?: "") +
+            " • s/d menit 1 ≥ $mn% ${if (mn >= 70) "✅" else "⚠️"} ($n rilis)" +
+            (if (d == 1 && mn < 70) " • detik 1 belum bisa dipercaya, tunggu detik 2" else "") +
+            kejar + (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "") + abaLive(r, det, aK)
+    } else null
+    val liveTeks = liveKurva ?: if (g2v != null && gerak != null && ting != null) {
         // ⚡ 4.42: setelah detik 2 → arah = gerak detik 2; keyakinan menurut besar gerak (≥ 85% & n ≥ 10 → ✅ YAKIN)
         val a2 = if (g2v >= 0.5) "naik" else if (g2v <= -0.5) "turun" else null
         if (a2 == null) "⚡ $nama detik $dtk • LIVE emas ${usd(gerak)} • detik 2 hanya ${usd(g2v)} (< \$0,50) → belum jelas, jangan ikut"

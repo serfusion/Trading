@@ -153,6 +153,9 @@ def test_isi_act_kartu_dari_kalender_lalu_ppi_ikut_cpi_14okt():
     assert not any(x.startswith("Lemah karena") for x in s["poin"])            # angka sama tidak diulang
     assert s["allin"]["teks"].startswith("💥 Modal kecil PPI: JANGAN")
     assert any(x.startswith("⚠️ Tapi masuk SETELAH detik 2") for x in s["poin"])   # kejar setelah detik 2 rata-rata rugi
+    k = _pra_aset.satu({**row, "bersama_retail": True})["lanjut"]          # ⚡ 4.43: kurva setiap detik s/d 60
+    assert k["kurva_grup"] == "PPI+RETAIL" and k["kurva"]["1|0.3"]["min"] >= 70 and k["kurva"]["2|0.5"]["p"]["60"] >= 70
+    assert s["lanjut"]["kurva_grup"] == "PPI sendiri" and s["lanjut"]["kurva"]["1|0.3"]["min"] < 70   # detik 1 PPI sendiri ✗
     t = s["lanjut"]["tingkat"]                                                  # ⚡ 4.42: tingkat YAKIN per gerak detik 2
     assert t["2.0"]["d5"] == 100 and t["1.0"]["d5"] >= 85 and t["0.5"]["n"] >= 60 and s["lanjut"]["kejar"]["0.5"]["t10"]["rata"] < 0
 
