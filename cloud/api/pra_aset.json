@@ -18840,5 +18840,1371 @@
     }
    }
   }
+ },
+ "per_arah": {
+  "CPI • Kalshi": {
+   "2": {
+    "naik": {
+     "benar": 66.7,
+     "n": 18,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 66.7,
+     "n_baru": 18,
+     "dasar": 63.5
+    },
+    "turun": {
+     "benar": 47.1,
+     "n": 17,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 47.1,
+     "n_baru": 17,
+     "dasar": 36.5
+    },
+    "semua": {
+     "benar": 57.1,
+     "n": 35,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 57.1,
+     "n_baru": 35
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 66.7,
+     "n": 18,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 66.7,
+     "n_baru": 18,
+     "dasar": 59.6
+    },
+    "turun": {
+     "benar": 52.9,
+     "n": 17,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 52.9,
+     "n_baru": 17,
+     "dasar": 40.4
+    },
+    "semua": {
+     "benar": 60.0,
+     "n": 35,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 60.0,
+     "n_baru": 35
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 66.7,
+     "n": 18,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 66.7,
+     "n_baru": 18,
+     "dasar": 57.7
+    },
+    "turun": {
+     "benar": 58.8,
+     "n": 17,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 58.8,
+     "n_baru": 17,
+     "dasar": 42.3
+    },
+    "semua": {
+     "benar": 62.9,
+     "n": 35,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 62.9,
+     "n_baru": 35
+    }
+   }
+  },
+  "CPI • Kalshi & kejutan lalu sepakat": {
+   "2": {
+    "naik": {
+     "benar": 88.9,
+     "n": 9,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 88.9,
+     "n_baru": 9,
+     "dasar": 64.7
+    },
+    "turun": {
+     "benar": 45.5,
+     "n": 11,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 45.5,
+     "n_baru": 11,
+     "dasar": 35.3
+    },
+    "semua": {
+     "benar": 65.0,
+     "n": 20,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 65.0,
+     "n_baru": 20
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 88.9,
+     "n": 9,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 88.9,
+     "n_baru": 9,
+     "dasar": 60.8
+    },
+    "turun": {
+     "benar": 45.5,
+     "n": 11,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 45.5,
+     "n_baru": 11,
+     "dasar": 39.2
+    },
+    "semua": {
+     "benar": 65.0,
+     "n": 20,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 65.0,
+     "n_baru": 20
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 88.9,
+     "n": 9,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 88.9,
+     "n_baru": 9,
+     "dasar": 58.8
+    },
+    "turun": {
+     "benar": 54.5,
+     "n": 11,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 54.5,
+     "n_baru": 11,
+     "dasar": 41.2
+    },
+    "semua": {
+     "benar": 70.0,
+     "n": 20,
+     "lama": null,
+     "n_lama": 0,
+     "baru": 70.0,
+     "n_baru": 20
+    }
+   }
+  },
+  "CPI • Kalshi, cadangan kejutan lalu": {
+   "2": {
+    "naik": {
+     "benar": 55.3,
+     "n": 47,
+     "lama": 51.7,
+     "n_lama": 29,
+     "baru": 61.1,
+     "n_baru": 18,
+     "dasar": 53.8
+    },
+    "turun": {
+     "benar": 48.6,
+     "n": 37,
+     "lama": 57.9,
+     "n_lama": 19,
+     "baru": 38.9,
+     "n_baru": 18,
+     "dasar": 46.2
+    },
+    "semua": {
+     "benar": 52.4,
+     "n": 84,
+     "lama": 54.2,
+     "n_lama": 48,
+     "baru": 50.0,
+     "n_baru": 36
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 56.2,
+     "n": 48,
+     "lama": 50.0,
+     "n_lama": 30,
+     "baru": 66.7,
+     "n_baru": 18,
+     "dasar": 54.2
+    },
+    "turun": {
+     "benar": 51.4,
+     "n": 37,
+     "lama": 52.6,
+     "n_lama": 19,
+     "baru": 50.0,
+     "n_baru": 18,
+     "dasar": 45.8
+    },
+    "semua": {
+     "benar": 54.1,
+     "n": 85,
+     "lama": 51.0,
+     "n_lama": 49,
+     "baru": 58.3,
+     "n_baru": 36
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 56.2,
+     "n": 48,
+     "lama": 53.3,
+     "n_lama": 30,
+     "baru": 61.1,
+     "n_baru": 18,
+     "dasar": 54.2
+    },
+    "turun": {
+     "benar": 54.1,
+     "n": 37,
+     "lama": 57.9,
+     "n_lama": 19,
+     "baru": 50.0,
+     "n_baru": 18,
+     "dasar": 45.8
+    },
+    "semua": {
+     "benar": 55.3,
+     "n": 85,
+     "lama": 55.1,
+     "n_lama": 49,
+     "baru": 55.6,
+     "n_baru": 36
+    }
+   }
+  },
+  "CPI • + minyak WTI sepakat": {
+   "2": {
+    "naik": {
+     "benar": 60.0,
+     "n": 20,
+     "lama": 71.4,
+     "n_lama": 7,
+     "baru": 53.8,
+     "n_baru": 13,
+     "dasar": 54.0
+    },
+    "turun": {
+     "benar": 62.5,
+     "n": 24,
+     "lama": 63.6,
+     "n_lama": 11,
+     "baru": 61.5,
+     "n_baru": 13,
+     "dasar": 46.0
+    },
+    "semua": {
+     "benar": 61.4,
+     "n": 44,
+     "lama": 66.7,
+     "n_lama": 18,
+     "baru": 57.7,
+     "n_baru": 26
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 60.0,
+     "n": 20,
+     "lama": 57.1,
+     "n_lama": 7,
+     "baru": 61.5,
+     "n_baru": 13,
+     "dasar": 54.3
+    },
+    "turun": {
+     "benar": 54.2,
+     "n": 24,
+     "lama": 45.5,
+     "n_lama": 11,
+     "baru": 61.5,
+     "n_baru": 13,
+     "dasar": 45.7
+    },
+    "semua": {
+     "benar": 56.8,
+     "n": 44,
+     "lama": 50.0,
+     "n_lama": 18,
+     "baru": 61.5,
+     "n_baru": 26
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 65.0,
+     "n": 20,
+     "lama": 71.4,
+     "n_lama": 7,
+     "baru": 61.5,
+     "n_baru": 13,
+     "dasar": 54.3
+    },
+    "turun": {
+     "benar": 58.3,
+     "n": 24,
+     "lama": 45.5,
+     "n_lama": 11,
+     "baru": 69.2,
+     "n_baru": 13,
+     "dasar": 45.7
+    },
+    "semua": {
+     "benar": 61.4,
+     "n": 44,
+     "lama": 55.6,
+     "n_lama": 18,
+     "baru": 65.4,
+     "n_baru": 26
+    }
+   }
+  },
+  "CPI • minyak WTI saja": {
+   "2": {
+    "naik": {
+     "benar": 60.8,
+     "n": 51,
+     "lama": 66.7,
+     "n_lama": 24,
+     "baru": 55.6,
+     "n_baru": 27,
+     "dasar": 53.8
+    },
+    "turun": {
+     "benar": 57.1,
+     "n": 70,
+     "lama": 60.9,
+     "n_lama": 46,
+     "baru": 50.0,
+     "n_baru": 24,
+     "dasar": 46.2
+    },
+    "semua": {
+     "benar": 58.7,
+     "n": 121,
+     "lama": 62.9,
+     "n_lama": 70,
+     "baru": 52.9,
+     "n_baru": 51
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 56.9,
+     "n": 51,
+     "lama": 58.3,
+     "n_lama": 24,
+     "baru": 55.6,
+     "n_baru": 27,
+     "dasar": 54.2
+    },
+    "turun": {
+     "benar": 50.7,
+     "n": 71,
+     "lama": 53.2,
+     "n_lama": 47,
+     "baru": 45.8,
+     "n_baru": 24,
+     "dasar": 45.8
+    },
+    "semua": {
+     "benar": 53.3,
+     "n": 122,
+     "lama": 54.9,
+     "n_lama": 71,
+     "baru": 51.0,
+     "n_baru": 51
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 58.8,
+     "n": 51,
+     "lama": 58.3,
+     "n_lama": 24,
+     "baru": 59.3,
+     "n_baru": 27,
+     "dasar": 54.2
+    },
+    "turun": {
+     "benar": 52.1,
+     "n": 71,
+     "lama": 51.1,
+     "n_lama": 47,
+     "baru": 54.2,
+     "n_baru": 24,
+     "dasar": 45.8
+    },
+    "semua": {
+     "benar": 54.9,
+     "n": 122,
+     "lama": 53.5,
+     "n_lama": 71,
+     "baru": 56.9,
+     "n_baru": 51
+    }
+   }
+  },
+  "ISM Jasa • berbalik": {
+   "2": {
+    "naik": {
+     "benar": 61.3,
+     "n": 62,
+     "lama": 62.9,
+     "n_lama": 35,
+     "baru": 59.3,
+     "n_baru": 27,
+     "dasar": 51.7
+    },
+    "turun": {
+     "benar": 68.9,
+     "n": 45,
+     "lama": 68.0,
+     "n_lama": 25,
+     "baru": 70.0,
+     "n_baru": 20,
+     "dasar": 48.3
+    },
+    "semua": {
+     "benar": 64.5,
+     "n": 107,
+     "lama": 65.0,
+     "n_lama": 60,
+     "baru": 63.8,
+     "n_baru": 47
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 59.7,
+     "n": 62,
+     "lama": 60.0,
+     "n_lama": 35,
+     "baru": 59.3,
+     "n_baru": 27,
+     "dasar": 51.3
+    },
+    "turun": {
+     "benar": 68.9,
+     "n": 45,
+     "lama": 64.0,
+     "n_lama": 25,
+     "baru": 75.0,
+     "n_baru": 20,
+     "dasar": 48.7
+    },
+    "semua": {
+     "benar": 63.6,
+     "n": 107,
+     "lama": 61.7,
+     "n_lama": 60,
+     "baru": 66.0,
+     "n_baru": 47
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 58.1,
+     "n": 62,
+     "lama": 54.3,
+     "n_lama": 35,
+     "baru": 63.0,
+     "n_baru": 27,
+     "dasar": 48.7
+    },
+    "turun": {
+     "benar": 68.9,
+     "n": 45,
+     "lama": 64.0,
+     "n_lama": 25,
+     "baru": 75.0,
+     "n_baru": 20,
+     "dasar": 51.3
+    },
+    "semua": {
+     "benar": 62.6,
+     "n": 107,
+     "lama": 58.3,
+     "n_lama": 60,
+     "baru": 68.1,
+     "n_baru": 47
+    }
+   }
+  },
+  "ISM Jasa • + aktivitas Fed daerah sepakat": {
+   "2": {
+    "naik": {
+     "benar": 85.0,
+     "n": 20,
+     "lama": 91.7,
+     "n_lama": 12,
+     "baru": 75.0,
+     "n_baru": 8,
+     "dasar": 51.6
+    },
+    "turun": {
+     "benar": 58.3,
+     "n": 12,
+     "lama": 75.0,
+     "n_lama": 8,
+     "baru": 25.0,
+     "n_baru": 4,
+     "dasar": 48.4
+    },
+    "semua": {
+     "benar": 75.0,
+     "n": 32,
+     "lama": 85.0,
+     "n_lama": 20,
+     "baru": 58.3,
+     "n_baru": 12
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 85.0,
+     "n": 20,
+     "lama": 91.7,
+     "n_lama": 12,
+     "baru": 75.0,
+     "n_baru": 8,
+     "dasar": 51.6
+    },
+    "turun": {
+     "benar": 50.0,
+     "n": 12,
+     "lama": 62.5,
+     "n_lama": 8,
+     "baru": 25.0,
+     "n_baru": 4,
+     "dasar": 48.4
+    },
+    "semua": {
+     "benar": 71.9,
+     "n": 32,
+     "lama": 80.0,
+     "n_lama": 20,
+     "baru": 58.3,
+     "n_baru": 12
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 75.0,
+     "n": 20,
+     "lama": 75.0,
+     "n_lama": 12,
+     "baru": 75.0,
+     "n_baru": 8,
+     "dasar": 49.3
+    },
+    "turun": {
+     "benar": 50.0,
+     "n": 12,
+     "lama": 62.5,
+     "n_lama": 8,
+     "baru": 25.0,
+     "n_baru": 4,
+     "dasar": 50.7
+    },
+    "semua": {
+     "benar": 65.6,
+     "n": 32,
+     "lama": 70.0,
+     "n_lama": 20,
+     "baru": 58.3,
+     "n_baru": 12
+    }
+   }
+  },
+  "GDP • GDPNow": {
+   "2": {
+    "naik": {
+     "benar": 53.3,
+     "n": 15,
+     "lama": 77.8,
+     "n_lama": 9,
+     "baru": 16.7,
+     "n_baru": 6,
+     "dasar": 54.5
+    },
+    "turun": {
+     "benar": 40.0,
+     "n": 20,
+     "lama": 36.4,
+     "n_lama": 11,
+     "baru": 44.4,
+     "n_baru": 9,
+     "dasar": 45.5
+    },
+    "semua": {
+     "benar": 45.7,
+     "n": 35,
+     "lama": 55.0,
+     "n_lama": 20,
+     "baru": 33.3,
+     "n_baru": 15
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 60.0,
+     "n": 15,
+     "lama": 66.7,
+     "n_lama": 9,
+     "baru": 50.0,
+     "n_baru": 6,
+     "dasar": 48.1
+    },
+    "turun": {
+     "benar": 55.0,
+     "n": 20,
+     "lama": 45.5,
+     "n_lama": 11,
+     "baru": 66.7,
+     "n_baru": 9,
+     "dasar": 51.9
+    },
+    "semua": {
+     "benar": 57.1,
+     "n": 35,
+     "lama": 55.0,
+     "n_lama": 20,
+     "baru": 60.0,
+     "n_baru": 15
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 66.7,
+     "n": 15,
+     "lama": 55.6,
+     "n_lama": 9,
+     "baru": 83.3,
+     "n_baru": 6,
+     "dasar": 45.5
+    },
+    "turun": {
+     "benar": 65.0,
+     "n": 20,
+     "lama": 54.5,
+     "n_lama": 11,
+     "baru": 77.8,
+     "n_baru": 9,
+     "dasar": 54.5
+    },
+    "semua": {
+     "benar": 65.7,
+     "n": 35,
+     "lama": 55.0,
+     "n_lama": 20,
+     "baru": 80.0,
+     "n_baru": 15
+    }
+   }
+  },
+  "NFP • pengangguran Kalshi/kejutan lalu": {
+   "2": {
+    "naik": {
+     "benar": 46.0,
+     "n": 50,
+     "lama": 47.6,
+     "n_lama": 21,
+     "baru": 44.8,
+     "n_baru": 29,
+     "dasar": 46.2
+    },
+    "turun": {
+     "benar": 53.3,
+     "n": 45,
+     "lama": 51.7,
+     "n_lama": 29,
+     "baru": 56.2,
+     "n_baru": 16,
+     "dasar": 53.8
+    },
+    "semua": {
+     "benar": 49.5,
+     "n": 95,
+     "lama": 50.0,
+     "n_lama": 50,
+     "baru": 48.9,
+     "n_baru": 45
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 54.0,
+     "n": 50,
+     "lama": 61.9,
+     "n_lama": 21,
+     "baru": 48.3,
+     "n_baru": 29,
+     "dasar": 48.5
+    },
+    "turun": {
+     "benar": 55.6,
+     "n": 45,
+     "lama": 55.2,
+     "n_lama": 29,
+     "baru": 56.2,
+     "n_baru": 16,
+     "dasar": 51.5
+    },
+    "semua": {
+     "benar": 54.7,
+     "n": 95,
+     "lama": 58.0,
+     "n_lama": 50,
+     "baru": 51.1,
+     "n_baru": 45
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 52.0,
+     "n": 50,
+     "lama": 66.7,
+     "n_lama": 21,
+     "baru": 41.4,
+     "n_baru": 29,
+     "dasar": 47.7
+    },
+    "turun": {
+     "benar": 57.8,
+     "n": 45,
+     "lama": 58.6,
+     "n_lama": 29,
+     "baru": 56.2,
+     "n_baru": 16,
+     "dasar": 52.3
+    },
+    "semua": {
+     "benar": 54.7,
+     "n": 95,
+     "lama": 62.0,
+     "n_lama": 50,
+     "baru": 46.7,
+     "n_baru": 45
+    }
+   }
+  },
+  "NFP • + Indeed sepakat": {
+   "2": {
+    "naik": {
+     "benar": 40.0,
+     "n": 25,
+     "lama": 0.0,
+     "n_lama": 1,
+     "baru": 41.7,
+     "n_baru": 24,
+     "dasar": 45.2
+    },
+    "turun": {
+     "benar": 44.4,
+     "n": 18,
+     "lama": 45.5,
+     "n_lama": 11,
+     "baru": 42.9,
+     "n_baru": 7,
+     "dasar": 54.8
+    },
+    "semua": {
+     "benar": 41.9,
+     "n": 43,
+     "lama": 41.7,
+     "n_lama": 12,
+     "baru": 41.9,
+     "n_baru": 31
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 40.0,
+     "n": 25,
+     "lama": 0.0,
+     "n_lama": 1,
+     "baru": 41.7,
+     "n_baru": 24,
+     "dasar": 45.2
+    },
+    "turun": {
+     "benar": 44.4,
+     "n": 18,
+     "lama": 45.5,
+     "n_lama": 11,
+     "baru": 42.9,
+     "n_baru": 7,
+     "dasar": 54.8
+    },
+    "semua": {
+     "benar": 41.9,
+     "n": 43,
+     "lama": 41.7,
+     "n_lama": 12,
+     "baru": 41.9,
+     "n_baru": 31
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 40.0,
+     "n": 25,
+     "lama": 0.0,
+     "n_lama": 1,
+     "baru": 41.7,
+     "n_baru": 24,
+     "dasar": 42.5
+    },
+    "turun": {
+     "benar": 50.0,
+     "n": 18,
+     "lama": 54.5,
+     "n_lama": 11,
+     "baru": 42.9,
+     "n_baru": 7,
+     "dasar": 57.5
+    },
+    "semua": {
+     "benar": 44.2,
+     "n": 43,
+     "lama": 50.0,
+     "n_lama": 12,
+     "baru": 41.9,
+     "n_baru": 31
+    }
+   }
+  },
+  "Core PPI • berbalik": {
+   "2": {
+    "naik": {
+     "benar": 58.1,
+     "n": 31,
+     "lama": 57.1,
+     "n_lama": 21,
+     "baru": 60.0,
+     "n_baru": 10,
+     "dasar": 60.0
+    },
+    "turun": {
+     "benar": 36.7,
+     "n": 30,
+     "lama": 41.2,
+     "n_lama": 17,
+     "baru": 30.8,
+     "n_baru": 13,
+     "dasar": 40.0
+    },
+    "semua": {
+     "benar": 47.5,
+     "n": 61,
+     "lama": 50.0,
+     "n_lama": 38,
+     "baru": 43.5,
+     "n_baru": 23
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 64.5,
+     "n": 31,
+     "lama": 57.1,
+     "n_lama": 21,
+     "baru": 80.0,
+     "n_baru": 10,
+     "dasar": 57.0
+    },
+    "turun": {
+     "benar": 36.7,
+     "n": 30,
+     "lama": 41.2,
+     "n_lama": 17,
+     "baru": 30.8,
+     "n_baru": 13,
+     "dasar": 43.0
+    },
+    "semua": {
+     "benar": 50.8,
+     "n": 61,
+     "lama": 50.0,
+     "n_lama": 38,
+     "baru": 52.2,
+     "n_baru": 23
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 61.3,
+     "n": 31,
+     "lama": 52.4,
+     "n_lama": 21,
+     "baru": 80.0,
+     "n_baru": 10,
+     "dasar": 58.0
+    },
+    "turun": {
+     "benar": 40.0,
+     "n": 30,
+     "lama": 41.2,
+     "n_lama": 17,
+     "baru": 38.5,
+     "n_baru": 13,
+     "dasar": 42.0
+    },
+    "semua": {
+     "benar": 50.8,
+     "n": 61,
+     "lama": 47.4,
+     "n_lama": 38,
+     "baru": 56.5,
+     "n_baru": 23
+    }
+   }
+  },
+  "JOLTS • berbalik": {
+   "2": {
+    "naik": {
+     "benar": 41.4,
+     "n": 29,
+     "lama": 0.0,
+     "n_lama": 2,
+     "baru": 44.4,
+     "n_baru": 27,
+     "dasar": 44.4
+    },
+    "turun": {
+     "benar": 52.4,
+     "n": 21,
+     "lama": 50.0,
+     "n_lama": 2,
+     "baru": 52.6,
+     "n_baru": 19,
+     "dasar": 55.6
+    },
+    "semua": {
+     "benar": 46.0,
+     "n": 50,
+     "lama": 25.0,
+     "n_lama": 4,
+     "baru": 47.8,
+     "n_baru": 46
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 41.4,
+     "n": 29,
+     "lama": 0.0,
+     "n_lama": 2,
+     "baru": 44.4,
+     "n_baru": 27,
+     "dasar": 37.0
+    },
+    "turun": {
+     "benar": 61.9,
+     "n": 21,
+     "lama": 50.0,
+     "n_lama": 2,
+     "baru": 63.2,
+     "n_baru": 19,
+     "dasar": 63.0
+    },
+    "semua": {
+     "benar": 50.0,
+     "n": 50,
+     "lama": 25.0,
+     "n_lama": 4,
+     "baru": 52.2,
+     "n_baru": 46
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 34.5,
+     "n": 29,
+     "lama": 0.0,
+     "n_lama": 2,
+     "baru": 37.0,
+     "n_baru": 27,
+     "dasar": 33.3
+    },
+    "turun": {
+     "benar": 61.9,
+     "n": 21,
+     "lama": 50.0,
+     "n_lama": 2,
+     "baru": 63.2,
+     "n_baru": 19,
+     "dasar": 66.7
+    },
+    "semua": {
+     "benar": 46.0,
+     "n": 50,
+     "lama": 25.0,
+     "n_lama": 4,
+     "baru": 47.8,
+     "n_baru": 46
+    }
+   }
+  },
+  "ISM Services PMI|-P": {
+   "2": {
+    "naik": {
+     "benar": 58.7,
+     "n": 63,
+     "lama": 58.3,
+     "n_lama": 36,
+     "baru": 59.3,
+     "n_baru": 27,
+     "dasar": 50.6
+    },
+    "turun": {
+     "benar": 68.0,
+     "n": 50,
+     "lama": 66.7,
+     "n_lama": 30,
+     "baru": 70.0,
+     "n_baru": 20,
+     "dasar": 49.4
+    },
+    "semua": {
+     "benar": 62.8,
+     "n": 113,
+     "lama": 62.1,
+     "n_lama": 66,
+     "baru": 63.8,
+     "n_baru": 47
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 57.1,
+     "n": 63,
+     "lama": 55.6,
+     "n_lama": 36,
+     "baru": 59.3,
+     "n_baru": 27,
+     "dasar": 51.8
+    },
+    "turun": {
+     "benar": 66.0,
+     "n": 50,
+     "lama": 60.0,
+     "n_lama": 30,
+     "baru": 75.0,
+     "n_baru": 20,
+     "dasar": 48.2
+    },
+    "semua": {
+     "benar": 61.1,
+     "n": 113,
+     "lama": 57.6,
+     "n_lama": 66,
+     "baru": 66.0,
+     "n_baru": 47
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 55.6,
+     "n": 63,
+     "lama": 50.0,
+     "n_lama": 36,
+     "baru": 63.0,
+     "n_baru": 27,
+     "dasar": 49.0
+    },
+    "turun": {
+     "benar": 66.0,
+     "n": 50,
+     "lama": 60.0,
+     "n_lama": 30,
+     "baru": 75.0,
+     "n_baru": 20,
+     "dasar": 51.0
+    },
+    "semua": {
+     "benar": 60.2,
+     "n": 113,
+     "lama": 54.5,
+     "n_lama": 66,
+     "baru": 68.1,
+     "n_baru": 47
+    }
+   }
+  },
+  "Unemployment Rate|PK5": {
+   "2": {
+    "naik": {
+     "benar": 51.7,
+     "n": 60,
+     "lama": 52.4,
+     "n_lama": 42,
+     "baru": 50.0,
+     "n_baru": 18,
+     "dasar": 46.8
+    },
+    "turun": {
+     "benar": 56.7,
+     "n": 104,
+     "lama": 54.2,
+     "n_lama": 72,
+     "baru": 62.5,
+     "n_baru": 32,
+     "dasar": 53.2
+    },
+    "semua": {
+     "benar": 54.9,
+     "n": 164,
+     "lama": 53.5,
+     "n_lama": 114,
+     "baru": 58.0,
+     "n_baru": 50
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 63.3,
+     "n": 60,
+     "lama": 69.0,
+     "n_lama": 42,
+     "baru": 50.0,
+     "n_baru": 18,
+     "dasar": 50.3
+    },
+    "turun": {
+     "benar": 56.7,
+     "n": 104,
+     "lama": 55.6,
+     "n_lama": 72,
+     "baru": 59.4,
+     "n_baru": 32,
+     "dasar": 49.7
+    },
+    "semua": {
+     "benar": 59.1,
+     "n": 164,
+     "lama": 60.5,
+     "n_lama": 114,
+     "baru": 56.0,
+     "n_baru": 50
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 56.7,
+     "n": 60,
+     "lama": 59.5,
+     "n_lama": 42,
+     "baru": 50.0,
+     "n_baru": 18,
+     "dasar": 47.4
+    },
+    "turun": {
+     "benar": 57.7,
+     "n": 104,
+     "lama": 55.6,
+     "n_lama": 72,
+     "baru": 62.5,
+     "n_baru": 32,
+     "dasar": 52.6
+    },
+    "semua": {
+     "benar": 57.3,
+     "n": 164,
+     "lama": 57.0,
+     "n_lama": 114,
+     "baru": 58.0,
+     "n_baru": 50
+    }
+   }
+  },
+  "tren|sepakat": {
+   "2": {
+    "naik": {
+     "benar": 66.7,
+     "n": 81,
+     "lama": 68.1,
+     "n_lama": 47,
+     "baru": 64.7,
+     "n_baru": 34
+    },
+    "turun": {
+     "benar": 57.6,
+     "n": 85,
+     "lama": 60.0,
+     "n_lama": 50,
+     "baru": 54.3,
+     "n_baru": 35
+    },
+    "semua": {
+     "benar": 62.0,
+     "n": 166,
+     "lama": 63.9,
+     "n_lama": 97,
+     "baru": 59.4,
+     "n_baru": 69
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 72.8,
+     "n": 81,
+     "lama": 70.2,
+     "n_lama": 47,
+     "baru": 76.5,
+     "n_baru": 34
+    },
+    "turun": {
+     "benar": 57.6,
+     "n": 85,
+     "lama": 58.0,
+     "n_lama": 50,
+     "baru": 57.1,
+     "n_baru": 35
+    },
+    "semua": {
+     "benar": 65.1,
+     "n": 166,
+     "lama": 63.9,
+     "n_lama": 97,
+     "baru": 66.7,
+     "n_baru": 69
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 69.1,
+     "n": 81,
+     "lama": 63.8,
+     "n_lama": 47,
+     "baru": 76.5,
+     "n_baru": 34
+    },
+    "turun": {
+     "benar": 56.5,
+     "n": 85,
+     "lama": 56.0,
+     "n_lama": 50,
+     "baru": 57.1,
+     "n_baru": 35
+    },
+    "semua": {
+     "benar": 62.7,
+     "n": 166,
+     "lama": 59.8,
+     "n_lama": 97,
+     "baru": 66.7,
+     "n_baru": 69
+    }
+   }
+  },
+  "tren|berlawanan": {
+   "2": {
+    "naik": {
+     "benar": 57.7,
+     "n": 78,
+     "lama": 60.4,
+     "n_lama": 48,
+     "baru": 53.3,
+     "n_baru": 30
+    },
+    "turun": {
+     "benar": 47.9,
+     "n": 71,
+     "lama": 51.3,
+     "n_lama": 39,
+     "baru": 43.8,
+     "n_baru": 32
+    },
+    "semua": {
+     "benar": 53.0,
+     "n": 149,
+     "lama": 56.3,
+     "n_lama": 87,
+     "baru": 48.4,
+     "n_baru": 62
+    }
+   },
+   "5": {
+    "naik": {
+     "benar": 53.2,
+     "n": 79,
+     "lama": 51.0,
+     "n_lama": 49,
+     "baru": 56.7,
+     "n_baru": 30
+    },
+    "turun": {
+     "benar": 45.1,
+     "n": 71,
+     "lama": 46.2,
+     "n_lama": 39,
+     "baru": 43.8,
+     "n_baru": 32
+    },
+    "semua": {
+     "benar": 49.3,
+     "n": 150,
+     "lama": 48.9,
+     "n_lama": 88,
+     "baru": 50.0,
+     "n_baru": 62
+    }
+   },
+   "10": {
+    "naik": {
+     "benar": 54.4,
+     "n": 79,
+     "lama": 51.0,
+     "n_lama": 49,
+     "baru": 60.0,
+     "n_baru": 30
+    },
+    "turun": {
+     "benar": 50.7,
+     "n": 71,
+     "lama": 53.8,
+     "n_lama": 39,
+     "baru": 46.9,
+     "n_baru": 32
+    },
+    "semua": {
+     "benar": 52.7,
+     "n": 150,
+     "lama": 52.3,
+     "n_lama": 88,
+     "baru": 53.2,
+     "n_baru": 62
+    }
+   }
+  }
  }
 }

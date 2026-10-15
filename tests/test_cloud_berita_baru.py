@@ -354,14 +354,15 @@ def test_satu_singkat_langsung_ke_inti():
     c = {"title": "CPI m/m", "time": "2026-10-14T12:30:00+00:00",
          "petunjuk_teruji": {"arah_emas": "turun", "tebak": {"WTI": 1.0}, "sepakat_lain": []}}
     g = A.tebak_kartu(c)
-    assert g["persen"] == 56 and (g["lama"], g["baru"]) == (58, 53)
+    # 15 Okt: angka PER ARAH tebakan (research/audit_arah.py) — TURUN minyak WTI saja 53% (dulu campuran 56%)
+    assert g["persen"] == 53 and (g["lama"], g["baru"]) == (55, 50) and g["status"] == "lemah"
     r = A.satu({"title": "CPI m/m", "nama": "CPI", "sisa": "3 hari lagi", **g})
-    assert r["teks"] == "CPI ▼ TURUN 56% (1–10 dtk) ⚠️ • 3 hari lagi"
+    assert r["teks"] == "CPI ▼ TURUN 53% (1–10 dtk) ⚠️ • 3 hari lagi"
     baris = r["bukti"].split("\n")                     # 14 Okt: detail = poin "• …" (tutup kertas, konsensus, orang)
-    assert baris[0] == "• ⚠️ Belum terbukti: 56% (1–10 dtk) • dulu 58% • sejak Okt 2021 53% • dasar: minyak WTI"
+    assert baris[0] == "• ⚠️ Lemah: 53% (1–10 dtk) • dulu 55% • sejak Okt 2021 50% • dasar: minyak WTI"
     assert baris[1].startswith("• Setelah rilis: ikuti arah emas detik 2 (≥ $0,50) s/d 5 mnt (")
     assert len(baris) == 2 and "per jangka" not in r["bukti"] and "lama/baru" not in r["bukti"]
-    assert r["poin"][0].startswith("⚠️ Belum terbukti: 56%")
+    assert r["poin"][0].startswith("⚠️ Lemah: 53%")
     kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi", "kons": {"f": "0.3%", "p": "0.4%"}})
     assert kosong["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"
     assert kosong["poin"][0].startswith("⚪ Belum ada petunjuk teruji → ≈ 50:50")
@@ -370,3 +371,17 @@ def test_satu_singkat_langsung_ke_inti():
     A.tambah_orang(kosong, {"poin": "👥 Orang: ritel 8 broker BUY 70% → info"})
     assert kosong["poin"][2] == "👥 Orang: ritel 8 broker BUY 70% → info" and kosong["poin"][3].startswith("Setelah rilis")
     assert kosong["bukti"].split("\n")[2] == "• 👥 Orang: ritel 8 broker BUY 70% → info"
+
+
+def test_per_arah_aturan_lemah_satu_arah_tidak_ditampilkan(monkeypatch):
+    """15 Okt (pengguna "curiga salah semua"): aturan dinilai PER ARAH tebakan. Core PPI berbalik tebakan TURUN dulu 37% →
+    tidak ditampilkan (≈ 50:50); ISM Jasa berbalik TURUN 68% (lama & baru > 60%) tetap tampil."""
+    import _pra_aset as A
+    monkeypatch.setenv("CPI_DETIK", "0")
+    st = A.per_arah("Core PPI • berbalik", "turun")
+    assert st["benar"] < 40 and A.status_arah(st) == "acak"
+    assert A.ringkas("Core PPI • berbalik", "turun")["status"] == "acak"
+    ism = A.ringkas("ISM Jasa • berbalik", "turun")
+    assert ism["status"] == "teruji" and "pembanding selalu-TURUN" in ism["bukti"]
+    assert A.status_arah(A.per_arah("JOLTS • berbalik", "naik")) == "acak"
+    assert A.per_arah("tren|berlawanan", "turun")["benar"] < 50
