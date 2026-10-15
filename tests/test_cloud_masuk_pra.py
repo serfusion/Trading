@@ -190,3 +190,17 @@ def test_get_lama_melewati_langkah_info(monkeypatch):
     assert {"pernyataan", "sentimen", "arsip"} <= set(p["dilewati"]) and p["waktu_dtk"] >= 20
     assert p["pra_satu"]["time"] == "2026-10-21T18:00:00+00:00" and p["pra_satu"]["teks"]
     assert p["pra_satu"]["t1"]["status"] == "jangan" and p["pra_satu"]["lanjut"]["posisi"]["g"] == "FOMC"
+
+
+def test_pra_peluang_persen_sebelum_rilis_tanpa_arah():
+    import _pra_peluang
+    ps = {"title": "Federal Funds Rate", "nama": "Fed", "time": "2026-10-28T18:00:00+00:00", "arah": None,
+          "sisa": "13 hari lagi", "teks": "Fed ⚪ ≈50% • 13 hari lagi", "poin": ["⚪ Belum ada petunjuk teruji → ≈ 50:50"]}
+    prep = {"pra_satu": ps, "fed": {"teks": "94% TETAP"}}
+    _pra_peluang.attach(prep, datetime(2026, 10, 15, 16, tzinfo=UTC))
+    assert "naik 49%" in ps["teks"] and "turun 51%" in ps["teks"] and ps["teks"].endswith("13 hari lagi")
+    assert ps["peluang"]["grup"] == "FOMC" and "Polymarket 94% TETAP" in ps["bukti"]
+    assert not any(p.startswith("⚪ Belum ada") for p in ps["poin"])
+    berarah = {"pra_satu": {"title": "CPI m/m", "time": T0, "arah": "naik", "teks": "CPI ▲ NAIK 68%"}}
+    _pra_peluang.attach(berarah)
+    assert berarah["pra_satu"]["teks"] == "CPI ▲ NAIK 68%"          # arah teruji tidak ditimpa

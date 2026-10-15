@@ -359,6 +359,11 @@ class handler(BaseHTTPRequestHandler):
                     _masuk_pra.attach(persiapan)
                 except Exception:  # noqa: BLE001 - info opsional
                     pass
+                try:                                          # 🎯 persen sebelum rilis berita tanpa arah (_pra_peluang.py)
+                    import _pra_peluang
+                    _pra_peluang.attach(persiapan, now)
+                except Exception:  # noqa: BLE001 - info opsional
+                    pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1" and sempat("pudar"):
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)

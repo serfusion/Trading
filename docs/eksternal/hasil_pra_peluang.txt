@@ -1,0 +1,97 @@
+# 🎯 Peluang emas sebelum rilis, semua berita (research/pra_peluang.py)
+python -m research.pra_peluang         → cloud/api/pra_peluang.json + docs/eksternal/hasil_pra_peluang.txt
+rilis: 1627 jam rilis, 1627 baris; fitur ['M60', 'H4', 'H24', 'TREN', 'TRD', 'KEJ', 'Y2', 'USD']
+
+## SEMUA (n 1627; emas naik 1 mnt: semua 48.6% • LAMA 48.0% • BARU 49.2%)
+   up30: benar 53.1% (n 1405; LAMA 54.3 / BARU 52.0) • tebakan NAIK 52.3% (n 602) • TURUN 53.7% (n 803) • Brier 0.251 vs dasar 0.2502 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 35.8% → nyata 41.5% (n 313) • p 0.40–0.45: rata 42.3% → nyata 47.3% (n 203) • p 0.45–0.50: rata 47.3% → nyata 50.9% (n 287) • p 0.50–0.55: rata 52.2% → nyata 49.4% (n 253) • p 0.55–0.60: rata 57.2% → nyata 53.4% (n 236) • p 0.60–1.00: rata 63.1% → nyata 56.6% (n 113)
+   up60: benar 52.5% (n 1405; LAMA 51.9 / BARU 52.9) • tebakan NAIK 51.5% (n 592) • TURUN 53.1% (n 813) • Brier 0.2534 vs dasar 0.2503 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 35.8% → nyata 46.4% (n 211) • p 0.40–0.45: rata 42.9% → nyata 45.5% (n 354) • p 0.45–0.50: rata 47.4% → nyata 49.2% (n 248) • p 0.50–0.55: rata 52.7% → nyata 51.7% (n 373) • p 0.55–0.60: rata 57.1% → nyata 55.3% (n 159) • p 0.60–1.00: rata 62.7% → nyata 40.0% (n 60)
+      koef: M60 -0.06, H4 +0.16, H24 +0.03, TREN +0.02, TRD -0.05, KEJ +0.32, Y2 -0.02, USD +0.02
+
+## ADP (n 102; emas naik 1 mnt: semua 47.1% • LAMA 40.4% • BARU 54.0%)
+   up30: benar 46.3% (n 67; LAMA 47.1 / BARU 46.0) • tebakan NAIK 50.0% (n 16) • TURUN 45.1% (n 51) • Brier 0.2833 vs dasar 0.2657 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 28.9% → nyata 50.0% (n 38) • p 0.45–0.50: rata 46.7% → nyata 80.0% (n 10) • p 0.50–0.55: rata 52.4% → nyata 50.0% (n 10)
+   up60: benar 53.7% (n 67; LAMA 35.3 / BARU 60.0) • tebakan NAIK 72.7% (n 11) • TURUN 50.0% (n 56) • Brier 0.2811 vs dasar 0.2648 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 28.7% → nyata 46.2% (n 39) • p 0.40–0.45: rata 42.0% → nyata 87.5% (n 8) • p 0.45–0.50: rata 48.2% → nyata 33.3% (n 9) • p 0.50–0.55: rata 52.7% → nyata 100.0% (n 5) • p 0.55–0.60: rata 57.8% → nyata 50.0% (n 6)
+      koef: M60 -0.31, H4 +0.20, H24 +0.07, TREN +0.10, TRD -0.20, KEJ +0.00, Y2 -0.22, USD -0.17
+
+## CLAIMS (n 194; emas naik 1 mnt: semua 41.8% • LAMA 46.9% • BARU 36.7%)
+   up30: benar 51.4% (n 148; LAMA 44.0 / BARU 55.1) • tebakan NAIK 39.1% (n 46) • TURUN 56.9% (n 102) • Brier 0.2583 vs dasar 0.2448 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 32.1% → nyata 44.2% (n 52) • p 0.40–0.45: rata 42.2% → nyata 44.0% (n 25) • p 0.45–0.50: rata 47.1% → nyata 40.0% (n 25) • p 0.50–0.55: rata 52.2% → nyata 31.6% (n 19) • p 0.55–0.60: rata 58.0% → nyata 43.8% (n 16) • p 0.60–1.00: rata 62.5% → nyata 45.5% (n 11)
+   up60: benar 55.4% (n 148; LAMA 48.0 / BARU 59.2) • tebakan NAIK 44.8% (n 58) • TURUN 62.2% (n 90) • Brier 0.2439 vs dasar 0.2429 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 32.1% → nyata 33.9% (n 56) • p 0.40–0.45: rata 42.5% → nyata 10.0% (n 10) • p 0.45–0.50: rata 47.5% → nyata 58.3% (n 24) • p 0.50–0.55: rata 51.9% → nyata 28.6% (n 14) • p 0.55–0.60: rata 56.8% → nyata 57.7% (n 26) • p 0.60–1.00: rata 64.1% → nyata 38.9% (n 18)
+      koef: M60 -0.26, H4 +0.37, H24 -0.00, TREN +0.36, TRD -0.08, KEJ +0.00, Y2 +0.09, USD -0.19
+
+## CPI (n 128; emas naik 1 mnt: semua 59.4% • LAMA 57.4% • BARU 61.7%)
+   up30: benar 52.7% (n 93; LAMA 57.6 / BARU 50.0) • tebakan NAIK 61.5% (n 52) • TURUN 41.5% (n 41) • Brier 0.2594 vs dasar 0.2438 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 34.8% → nyata 64.7% (n 17) • p 0.40–0.45: rata 42.0% → nyata 63.6% (n 11) • p 0.45–0.50: rata 47.5% → nyata 46.2% (n 13) • p 0.50–0.55: rata 52.7% → nyata 64.7% (n 17) • p 0.55–0.60: rata 57.4% → nyata 61.5% (n 13) • p 0.60–1.00: rata 65.0% → nyata 59.1% (n 22)
+   up60: benar 57.0% (n 93; LAMA 51.5 / BARU 60.0) • tebakan NAIK 60.6% (n 71) • TURUN 45.5% (n 22) • Brier 0.2474 vs dasar 0.2439 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 34.3% → nyata 71.4% (n 7) • p 0.40–0.45: rata 42.9% → nyata 50.0% (n 6) • p 0.45–0.50: rata 47.9% → nyata 44.4% (n 9) • p 0.50–0.55: rata 52.2% → nyata 54.5% (n 11) • p 0.55–0.60: rata 57.1% → nyata 68.8% (n 16) • p 0.60–1.00: rata 66.9% → nyata 59.1% (n 44)
+      koef: M60 +0.25, H4 +0.02, H24 -0.32, TREN +0.14, TRD +0.14, KEJ +0.27, Y2 +0.04, USD +0.32
+
+## FOMC (n 86; emas naik 1 mnt: semua 48.8% • LAMA 45.7% • BARU 52.5%)
+   up30: benar 51.9% (n 54; LAMA 64.3 / BARU 47.5) • tebakan NAIK 57.9% (n 19) • TURUN 48.6% (n 35) • Brier 0.2676 vs dasar 0.2531 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 29.0% → nyata 47.6% (n 21) • p 0.40–0.45: rata 42.7% → nyata 71.4% (n 7) • p 0.45–0.50: rata 47.6% → nyata 42.9% (n 7) • p 0.60–1.00: rata 67.4% → nyata 61.5% (n 13)
+   up60: benar 51.9% (n 54; LAMA 71.4 / BARU 45.0) • tebakan NAIK 55.6% (n 18) • TURUN 50.0% (n 36) • Brier 0.2716 vs dasar 0.2533 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 32.5% → nyata 58.8% (n 17) • p 0.45–0.50: rata 47.7% → nyata 26.7% (n 15) • p 0.50–0.55: rata 52.3% → nyata 62.5% (n 8) • p 0.60–1.00: rata 62.2% → nyata 50.0% (n 6)
+      koef: M60 -0.17, H4 +0.09, H24 +0.00, TREN -0.19, TRD -0.09, KEJ +0.00, Y2 -0.15, USD +0.08
+
+## GDP (n 73; emas naik 1 mnt: semua 38.4% • LAMA 41.3% • BARU 33.3%)
+   up30: benar 40.5% (n 37; LAMA 0.0 / BARU 55.6) • tebakan NAIK 27.8% (n 18) • TURUN 52.6% (n 19) • Brier 0.2818 vs dasar 0.2514 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 37.1% → nyata 44.4% (n 9) • p 0.45–0.50: rata 47.9% → nyata 37.5% (n 8) • p 0.50–0.55: rata 51.7% → nyata 50.0% (n 6) • p 0.55–0.60: rata 57.2% → nyata 28.6% (n 7) • p 0.60–1.00: rata 66.4% → nyata 0.0% (n 5)
+   up60: benar 48.6% (n 37; LAMA 30.0 / BARU 55.6) • tebakan NAIK 22.2% (n 9) • TURUN 57.1% (n 28) • Brier 0.2448 vs dasar 0.2378 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 27.3% → nyata 31.6% (n 19) • p 0.40–0.45: rata 42.4% → nyata 80.0% (n 5) • p 0.50–0.55: rata 52.5% → nyata 20.0% (n 5)
+      koef: M60 -0.30, H4 +0.18, H24 +0.04, TREN -0.26, TRD +0.21, KEJ +0.33, Y2 -0.50, USD -0.26
+
+## ISM (n 225; emas naik 1 mnt: semua 48.9% • LAMA 49.2% • BARU 48.5%)
+   up30: benar 53.4% (n 176; LAMA 45.3 / BARU 59.4) • tebakan NAIK 52.4% (n 82) • TURUN 54.3% (n 94) • Brier 0.2619 vs dasar 0.2535 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 31.1% → nyata 46.5% (n 43) • p 0.40–0.45: rata 42.8% → nyata 39.1% (n 23) • p 0.45–0.50: rata 47.9% → nyata 50.0% (n 28) • p 0.50–0.55: rata 52.4% → nyata 45.0% (n 20) • p 0.55–0.60: rata 57.2% → nyata 60.9% (n 23) • p 0.60–1.00: rata 67.0% → nyata 51.3% (n 39)
+   up60: benar 55.1% (n 176; LAMA 49.3 / BARU 59.4) • tebakan NAIK 54.9% (n 82) • TURUN 55.3% (n 94) • Brier 0.2615 vs dasar 0.2529 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 29.8% → nyata 50.0% (n 38) • p 0.40–0.45: rata 42.5% → nyata 39.3% (n 28) • p 0.45–0.50: rata 47.6% → nyata 42.9% (n 28) • p 0.50–0.55: rata 53.1% → nyata 44.4% (n 18) • p 0.55–0.60: rata 57.5% → nyata 60.0% (n 25) • p 0.60–1.00: rata 66.8% → nyata 56.4% (n 39)
+      koef: M60 +0.34, H4 -0.01, H24 +0.09, TREN -0.06, TRD +0.12, KEJ +0.39, Y2 +0.04, USD +0.13
+
+## KONSUMEN (n 140; emas naik 1 mnt: semua 46.4% • LAMA 45.5% • BARU 47.3%)
+   up30: benar 41.2% (n 102; LAMA 28.6 / BARU 45.9) • tebakan NAIK 45.5% (n 55) • TURUN 36.2% (n 47) • Brier 0.2776 vs dasar 0.2519 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 35.7% → nyata 44.4% (n 9) • p 0.40–0.45: rata 42.7% → nyata 63.2% (n 19) • p 0.45–0.50: rata 47.7% → nyata 73.7% (n 19) • p 0.50–0.55: rata 52.3% → nyata 44.4% (n 9) • p 0.55–0.60: rata 57.5% → nyata 52.6% (n 19) • p 0.60–1.00: rata 68.1% → nyata 40.7% (n 27)
+   up60: benar 42.2% (n 102; LAMA 46.4 / BARU 40.5) • tebakan NAIK 36.1% (n 36) • TURUN 45.5% (n 66) • Brier 0.2892 vs dasar 0.2517 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 31.3% → nyata 53.1% (n 32) • p 0.40–0.45: rata 41.8% → nyata 68.8% (n 16) • p 0.45–0.50: rata 47.6% → nyata 44.4% (n 18) • p 0.50–0.55: rata 52.6% → nyata 50.0% (n 10) • p 0.55–0.60: rata 57.9% → nyata 12.5% (n 8) • p 0.60–1.00: rata 66.5% → nyata 38.9% (n 18)
+      koef: M60 -0.18, H4 +0.19, H24 +0.05, TREN -0.22, TRD +0.04, KEJ +0.00, Y2 -0.14, USD +0.11
+
+## MINYAK (n 151; emas naik 1 mnt: semua 50.3% • LAMA 50.3% • BARU nan%)
+   up30: benar 51.5% (n 101; LAMA 51.5 / BARU None) • tebakan NAIK 52.2% (n 46) • TURUN 50.9% (n 55) • Brier 0.2654 vs dasar 0.251 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 32.1% → nyata 37.5% (n 24) • p 0.40–0.45: rata 42.7% → nyata 46.2% (n 13) • p 0.45–0.50: rata 47.5% → nyata 66.7% (n 18) • p 0.50–0.55: rata 52.6% → nyata 70.6% (n 17) • p 0.55–0.60: rata 57.0% → nyata 42.1% (n 19) • p 0.60–1.00: rata 69.4% → nyata 40.0% (n 10)
+   up60: benar 46.5% (n 101; LAMA 46.5 / BARU None) • tebakan NAIK 48.3% (n 60) • TURUN 43.9% (n 41) • Brier 0.2632 vs dasar 0.2515 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 34.8% → nyata 55.6% (n 18) • p 0.40–0.45: rata 42.8% → nyata 55.6% (n 18) • p 0.45–0.50: rata 46.4% → nyata 60.0% (n 5) • p 0.50–0.55: rata 52.4% → nyata 35.3% (n 17) • p 0.55–0.60: rata 58.0% → nyata 55.6% (n 27) • p 0.60–1.00: rata 64.0% → nyata 50.0% (n 16)
+      koef: M60 -0.01, H4 +0.21, H24 +0.18, TREN +0.01, TRD -0.28, KEJ +0.00, Y2 +0.07, USD -0.15
+
+## NFP (n 127; emas naik 1 mnt: semua 46.5% • LAMA 45.7% • BARU 47.4%)
+   up30: benar 55.1% (n 89; LAMA 56.2 / BARU 54.4) • tebakan NAIK 47.4% (n 38) • TURUN 60.8% (n 51) • Brier 0.2549 vs dasar 0.2599 ✅ lebih baik
+      kalibrasi: p 0.00–0.40: rata 33.9% → nyata 33.3% (n 27) • p 0.40–0.45: rata 41.7% → nyata 46.2% (n 13) • p 0.45–0.50: rata 47.1% → nyata 45.5% (n 11) • p 0.50–0.55: rata 52.8% → nyata 50.0% (n 8) • p 0.55–0.60: rata 57.1% → nyata 44.4% (n 9) • p 0.60–1.00: rata 69.5% → nyata 47.6% (n 21)
+   up60: benar 51.7% (n 89; LAMA 56.2 / BARU 49.1) • tebakan NAIK 43.3% (n 30) • TURUN 55.9% (n 59) • Brier 0.2507 vs dasar 0.2507 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 33.6% → nyata 30.4% (n 23) • p 0.40–0.45: rata 42.4% → nyata 44.4% (n 18) • p 0.45–0.50: rata 47.7% → nyata 61.1% (n 18) • p 0.50–0.55: rata 52.7% → nyata 54.5% (n 11) • p 0.55–0.60: rata 57.5% → nyata 33.3% (n 9) • p 0.60–1.00: rata 67.7% → nyata 40.0% (n 10)
+      koef: M60 -0.34, H4 +0.41, H24 -0.01, TREN +0.05, TRD -0.10, KEJ +0.00, Y2 -0.02, USD +0.15
+
+## PPI (n 96; emas naik 1 mnt: semua 53.1% • LAMA 47.8% • BARU 58.0%)
+   up30: benar 52.5% (n 61; LAMA 45.5 / BARU 54.0) • tebakan NAIK 62.9% (n 35) • TURUN 38.5% (n 26) • Brier 0.2508 vs dasar 0.2523 ✅ lebih baik
+      kalibrasi: p 0.00–0.40: rata 34.8% → nyata 44.4% (n 9) • p 0.40–0.45: rata 43.3% → nyata 75.0% (n 8) • p 0.45–0.50: rata 47.7% → nyata 66.7% (n 9) • p 0.50–0.55: rata 52.4% → nyata 42.9% (n 14) • p 0.55–0.60: rata 57.6% → nyata 87.5% (n 8) • p 0.60–1.00: rata 66.8% → nyata 69.2% (n 13)
+   up60: benar 50.8% (n 61; LAMA 27.3 / BARU 56.0) • tebakan NAIK 58.1% (n 31) • TURUN 43.3% (n 30) • Brier 0.2652 vs dasar 0.2533 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 31.8% → nyata 70.0% (n 10) • p 0.40–0.45: rata 41.7% → nyata 66.7% (n 9) • p 0.45–0.50: rata 48.5% → nyata 36.4% (n 11) • p 0.55–0.60: rata 57.8% → nyata 25.0% (n 8) • p 0.60–1.00: rata 69.5% → nyata 70.0% (n 20)
+      koef: M60 -0.15, H4 +0.35, H24 +0.21, TREN -0.08, TRD +0.12, KEJ +0.26, Y2 -0.03, USD -0.08
+
+## RETAIL (n 88; emas naik 1 mnt: semua 39.8% • LAMA 42.6% • BARU 36.6%)
+   up30: benar 66.0% (n 50; LAMA None / BARU 65.9) • tebakan NAIK 61.5% (n 13) • TURUN 67.6% (n 37) • Brier 0.2371 vs dasar 0.2406 ✅ lebih baik
+      kalibrasi: p 0.00–0.40: rata 30.0% → nyata 40.0% (n 25) • p 0.40–0.45: rata 42.5% → nyata 0.0% (n 5) • p 0.45–0.50: rata 47.3% → nyata 28.6% (n 7) • p 0.50–0.55: rata 52.9% → nyata 42.9% (n 7) • p 0.55–0.60: rata 57.4% → nyata 80.0% (n 5)
+   up60: benar 62.0% (n 50; LAMA None / BARU 56.1) • tebakan NAIK 53.3% (n 15) • TURUN 65.7% (n 35) • Brier 0.2529 vs dasar 0.242 ✗ tidak lebih baik
+      kalibrasi: p 0.00–0.40: rata 28.3% → nyata 50.0% (n 20) • p 0.40–0.45: rata 42.4% → nyata 12.5% (n 8) • p 0.45–0.50: rata 46.7% → nyata 14.3% (n 7) • p 0.50–0.55: rata 52.8% → nyata 62.5% (n 8)
+      koef: M60 +0.18, H4 +0.06, H24 +0.18, TREN +0.14, TRD -0.33, KEJ +0.00, Y2 +0.09, USD -0.26
+
+## Fitur tunggal (SEMUA rilis): emas naik 1 mnt bila fitur +1 / −1 (LAMA | BARU)
+   M60  : LAMA +1 50% (n 423) / −1 46% (n 458) | BARU +1 48% (n 359) / −1 51% (n 387)
+   H4   : LAMA +1 53% (n 439) / −1 43% (n 442) | BARU +1 51% (n 389) / −1 48% (n 357)
+   H24  : LAMA +1 51% (n 445) / −1 45% (n 436) | BARU +1 49% (n 411) / −1 50% (n 335)
+   TREN : LAMA +1 50% (n 481) / −1 46% (n 400) | BARU +1 50% (n 438) / −1 49% (n 308)
+   TRD  : LAMA +1 49% (n 489) / −1 47% (n 392) | BARU +1 49% (n 460) / −1 50% (n 286)
+   KEJ  : LAMA +1 62% (n 65) / −1 47% (n 68) | BARU +1 68% (n 63) / −1 48% (n 67)
+   Y2   : LAMA +1 47% (n 408) / −1 47% (n 383) | BARU +1 48% (n 395) / −1 50% (n 316)
+   USD  : LAMA +1 48% (n 429) / −1 48% (n 452) | BARU +1 50% (n 391) / −1 48% (n 355)
