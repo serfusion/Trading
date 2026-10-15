@@ -198,7 +198,7 @@ def test_pra_peluang_persen_sebelum_rilis_tanpa_arah():
           "sisa": "13 hari lagi", "teks": "Fed ⚪ ≈50% • 13 hari lagi", "poin": ["⚪ Belum ada petunjuk teruji → ≈ 50:50"]}
     prep = {"pra_satu": ps, "fed": {"teks": "94% TETAP"}}
     _pra_peluang.attach(prep, datetime(2026, 10, 15, 16, tzinfo=UTC))
-    assert "naik 49%" in ps["teks"] and "turun 51%" in ps["teks"] and ps["teks"].endswith("13 hari lagi")
+    assert "▼ TURUN 51%" in ps["teks"] and "NAIK" not in ps["teks"] and ps["teks"].endswith("13 hari lagi")
     assert ps["peluang"]["grup"] == "FOMC" and "Polymarket 94% TETAP" in ps["bukti"]
     assert not any(p.startswith("⚪ Belum ada") for p in ps["poin"])
     berarah = {"pra_satu": {"title": "CPI m/m", "time": T0, "arah": "naik", "teks": "CPI ▲ NAIK 68%"}}

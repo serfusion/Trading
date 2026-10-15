@@ -65,7 +65,10 @@ def attach(persiapan: dict, now: datetime | None = None) -> None:
     sisa = ps.get("sisa") or str(ps.get("teks") or "").rsplit(" • ", 1)[-1]
     ps["peluang"] = {"naik": round(naik, 1), "turun": round(turun, 1), "grup": lingkup, "n": x.get("n"),
                      "lama": x.get("dasar_lama"), "baru": x.get("dasar_baru"), "dihitung": now.isoformat()}
-    ps["teks"] = f"{nama} ⚪ naik {_f(naik)}% • turun {_f(turun)}% (masuk t−1 → 1 mnt) • {sisa}"
+    # 16 Okt (pengguna: "cukup satu persen, unggul turun = merah"): hanya sisi yang unggul, format ▲ NAIK / ▼ TURUN
+    # supaya aplikasi mewarnai hijau/merah (arahBerwarna)
+    unggul = f"▲ NAIK {_f(naik)}%" if naik > turun else f"▼ TURUN {_f(turun)}%"
+    ps["teks"] = f"{nama} {unggul} (masuk t−1 → 1 mnt) ⚠️ • {sisa}"
     u = ((x.get("uji") or {}).get("up60") or {})
     jam = (now + WIB).strftime("%H:%M")
     poin = [f"🎯 Sebelum rilis ({lingkup}, {x.get('n')} rilis 2016–2026, masuk t−1 → detik 60): emas naik {_f(naik)}% / turun "
