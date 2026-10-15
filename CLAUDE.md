@@ -526,6 +526,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   arah (NAIK 7/7, TURUN 7/12, detik 2 4/12) → `ppi_wti.json["cpi_ppi"][rel]["per_arah"]` (`research/ppi_dasar.py simpan`) dan
   `_ppi_wti.pakai_cpi` memakai angka ARAH tebakan (TURUN 58% ⚠️ ⚖️, 💥 JANGAN). Sebelum rilis semua petunjuk 44–65%, model 51%;
   LIVE detik 2 ≥ $0,50 bertahan s/d detik 5 91% TETAPI masuk setelah detik 2 rata-rata rugi (untung 20–45% rilis) → poin ⚠️ di kartu PPI.
+  Hipotesis pengguna "perkiraan 0,6 manipulasi/ketinggian → keluar di bawah" (PPI_15OKT bagian akhir): di bawah perkiraan hanya
+  46% bila perkiraan naik ≥ 0,2, 18% bila ≥ 0,5%, 32% setelah 2 rilis di bawah/sesuai → tidak didukung; emas per hasil: di bawah
+  → naik 85–88%, sesuai 43–57%, di atas 22–35% → gabungan ≈ 60% = selalu-NAIK.
 
 - Aplikasi 4.42 (15 Okt, "PPI wajib 85%+ alias yakin"): ⚡LIVE memakai gerak DETIK 2 → tingkat keyakinan per kelompok berita
   (`research/live_tingkat.py` → `cloud/api/live_tingkat.json` → `pra_satu.lanjut.tingkat/kejar`): "✅ YAKIN X% s/d detik 5" bila
