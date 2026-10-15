@@ -60,7 +60,50 @@ def varian(title: str, b: dict) -> str | None:
     return None
 
 
+def per_arah(kunci: str, arah: str) -> dict | None:
+    """15 Okt 2026 (pengguna: "curiga salah semua"; research/audit_arah.py → pra_aset.json["per_arah"]): ketepatan aturan
+    HANYA untuk arah yang ditebak (dulu angka campuran NAIK & TURUN, mis. PPI 74% padahal TURUN 58%), rata-rata detik
+    2/5/10 tick Exness + pembanding tanpa syarat (selalu NAIK/TURUN di semua rilis kelompok berita itu)."""
+    pa = (DATA.get("per_arah") or {}).get(kunci) or {}
+    sel = [(int(h), (pa.get(h) or {}).get(arah) or {}) for h in ("2", "5", "10")]
+    sel = [(h, r) for h, r in sel if r.get("n")]
+    if not sel:
+        return None
+    rata = lambda k: (sum(r[k] for _, r in sel if r.get(k) is not None) / len([1 for _, r in sel if r.get(k) is not None])  # noqa: E731
+                      if any(r.get(k) is not None for _, r in sel) else None)
+    return {"benar": rata("benar"), "lama": rata("lama"), "baru": rata("baru"), "dasar": rata("dasar"),
+            "n": max(r["n"] for _, r in sel), "detik": [{"h": h, "benar": r["benar"], "n": r["n"], "lama": r.get("lama"),
+                                                          "baru": r.get("baru"), "konsisten": False} for h, r in sel]}
+
+
+def status_arah(st: dict) -> str:
+    """Status jujur dari angka PER ARAH: < 52% atau lama/baru < 50% → acak (arah tidak ditampilkan); ≥ 60% & unggul ≥ 5 poin
+    dari pembanding & lama/baru ≥ 55% & n ≥ 20 → teruji; ≥ 55% → belum terbukti; selain itu lemah."""
+    b, lm, br, d = st["benar"], st.get("lama"), st.get("baru"), st.get("dasar")
+    if b < 52 or (lm is not None and lm < 50) or (br is not None and br < 50):
+        return "acak"
+    if b >= 60 and (d is None or b - d >= 5) and (lm is None or lm >= 55) and (br is None or br >= 55) and st["n"] >= 20:
+        return "teruji"
+    return "belum terbukti" if b >= 55 else "lemah"
+
+
 def ringkas(var: str, arah: str) -> dict | None:
+    st = per_arah(var, arah)
+    if st:                                                   # 15 Okt: angka per arah tebakan (research/audit_arah.py)
+        status = status_arah(st)
+        tanda = {"teruji": "✅", "acak": "⚪"}.get(status, "⚠️")
+        simbol = "NAIK ▲" if arah == "naik" else "TURUN ▼"
+        sel = st["detik"]
+        lo, hi = min(x["benar"] for x in sel), max(x["benar"] for x in sel)
+        rentang = f"{lo:.0f}%" if round(lo) == round(hi) else f"{lo:.0f}–{hi:.0f}%"
+        dasar = f" • pembanding selalu-{arah.upper()} {st['dasar']:.0f}%" if st.get("dasar") is not None else ""
+        return {"arah": arah, "status": status,
+                "teks": f"XAU {simbol} • benar {rentang} (2–10 dtk) {tanda}" if status != "acak"
+                else f"XAU • ≈ 50:50 (tebakan {arah.upper()} aturan ini dulu hanya {st['benar']:.0f}%) {tanda}",
+                "detik": sel, "kecil": " • ".join(f"{x['h']} dtk {x['benar']:.0f}%" for x in sel) + f" (n {st['n']} rilis)",
+                "bukti": (f"dasar: {var} • tebakan {arah.upper()} saja: detik 2–10 {rentang} (n {st['n']}; lama "
+                          f"{'-' if st.get('lama') is None else round(st['lama'])}% / baru "
+                          f"{'-' if st.get('baru') is None else round(st['baru'])}%){dasar} • tick Exness").replace(".", ",")}
     v = ((DATA.get("xau_arah") or {}).get(var) or {}).get("h") or {}
     sel = []
     for h in H:
@@ -213,6 +256,9 @@ def baris_tren(title: str, arah_berita: str | None, t: dict, khusus: dict | None
     if arah_berita:
         hub = "sepakat" if (arah_berita == "naik") == naik else "berlawanan"
         k = (khusus or {}).get(hub)
+        st = per_arah(f"tren|{hub}", arah_berita)            # 15 Okt: tren × petunjuk PER ARAH tebakan (dulu campuran)
+        if st:
+            k = {"benar": st["benar"], "n": st["n"], "lama": st.get("lama"), "baru": st.get("baru")}
         if k:
             r, n, akhir, rata, lingkup = f"{k['benar']:.0f}%", k["n"], k, k["benar"], "aturan berita ini"
         else:
@@ -305,6 +351,12 @@ def tebak_kartu(c: dict) -> dict | None:
     if c["title"] in NFP_HARI and pb:
         lima = pekan5(datetime.fromisoformat(c["time"]))
         ur_atas = (1.0 if lima else -1.0) * pb["arah"] > 0
+        st = per_arah("Unemployment Rate|PK5", "naik" if ur_atas else "turun")   # 15 Okt: angka per arah tebakan
+        if st:
+            pb = {**pb, "benar": st["benar"], "lama": st.get("lama") or pb["lama"], "baru": st.get("baru") or pb["baru"],
+                  "n": st["n"]}
+            if status_arah(st) == "acak":
+                return None
         return {"arah": "naik" if ur_atas else "turun", "persen": round(pb["benar"]), "status": "lemah",
                 "lama": round(pb["lama"]), "baru": round(pb["baru"]), "n": pb["n"],
                 "dasar": "Pengangguran • kalender survei BLS",  # = kunci pra_aset.json["jangka"]
@@ -364,6 +416,12 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
                         row.update(angka_tren)
                     row.update(persen=pr, status="tren searah",
                                teks=f"{nm} • peluang emas {g['arah']} {pr}% (+ tren searah) ⚠️ • {sisa}")
+                elif g and bt["hubungan"] == "berlawanan" and bt["persen"] < 52:
+                    # 15 Okt: tebakan melawan tren 4 jam dulu < 52% untuk arah ini (per arah) → jujur ≈ 50:50
+                    row.update(arah=None, persen=50, status="acak", **angka_tren,
+                               bukti=f"petunjuk berita & tren emas 4 jam berlawanan: tebakan {g['arah'].upper()} seperti "
+                                     f"ini dulu hanya {bt['persen']}% → ≈ 50:50",
+                               teks=f"{nm} • ≈ 50:50 (petunjuk & tren berlawanan) • {sisa}")
                 elif g and bt["hubungan"] == "berlawanan":
                     # tetap SATU arah (permintaan pengguna 10 Okt: "cukup naik atau turun"): arah petunjuk, persen jujur
                     row.update(persen=bt["persen"], status="lemah", **angka_tren,

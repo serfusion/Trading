@@ -532,6 +532,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   ≥ 85% & n ≥ 10 (PPI ≥ $0,5 91%, ≥ $1 93%, ≥ $2 16/16; SEMUA 96/98/99%) + catatan KEJAR (masuk detik 2,5: rugi rata-rata kecuali
   NFP/JOLTS/CPI). Jalankan ulang live_tingkat bila cache pra_xau_semua_v2/lonjakan60 bertambah.
 
+- 15 Okt audit SEMUA berita per arah (`docs/AUDIT_ARAH.md`, `research/audit_arah.py` → `pra_aset.json["per_arah"]`):
+  `_pra_aset.per_arah/status_arah` — tebakan memakai angka ARAH yang ditebak; < 52% / lama-baru < 50% → ≈ 50:50 (mis. Core PPI
+  berbalik TURUN 37%, JOLTS berbalik NAIK 34–41%, NFP+Indeed 40%, TURUN melawan tren naik 45–48%). ISM Jasa berbalik tetap
+  ✅ (TURUN 69%). JANGAN lagi memakai angka sel campuran; jalankan ulang audit_arah setelah xau_arah/per_berita/tren diperbarui.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
