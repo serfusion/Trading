@@ -81,9 +81,9 @@ Angka sebenarnya = versi hari rilis (rekonstruksi diuji terhadap aktual kalender
    CPI inti di atas  → emas naik saat PPI: LAMA d2  57% (4/7) lonjakan  43% (3/7) | BARU d2  62% (10/16) lonjakan  50% (8/16)
 
 ## TAHAP 4 — Tebakan PPI-WTI setelah CPI inti terbit (52 rilis bersinyal, lonjakan menit 1)
-   sepakat    benar 73.7% (n 19) • lama 60.0% (n 5) • baru 78.6% (n 14)
-   sesuai     benar 82.4% (n 17) • lama 50.0% (n 6) • baru 100.0% (n 11)
-   berlawanan benar 43.8% (n 16) • lama 42.9% (n 7) • baru 44.4% (n 9)
+   sepakat    benar 73.7% (n 19) • lama 60.0% (n 5) • baru 78.6% (n 14) | TURUN 58.3% (n 12; lama 50.0 / baru 62.5; detik 2 33.3%) | NAIK 100.0% (n 7; lama 100.0 / baru 100.0; detik 2 100.0%)
+   sesuai     benar 82.4% (n 17) • lama 50.0% (n 6) • baru 100.0% (n 11) | TURUN 71.4% (n 7; lama 0.0 / baru 100.0; detik 2 42.9%) | NAIK 90.0% (n 10; lama 75.0 / baru 100.0; detik 2 90.0%)
+   berlawanan benar 43.8% (n 16) • lama 42.9% (n 7) • baru 44.4% (n 9) | TURUN 44.4% (n 9; lama 60.0 / baru 25.0; detik 2 44.4%) | NAIK 42.9% (n 7; lama 0.0 / baru 60.0; detik 2 57.1%)
    → cloud/api/ppi_wti.json kunci cpi_ppi ditulis
 
 ## HARI INI — PPI 2026-10-15 (bulan acuan Sep 2026); konsensus {'h_f': 0.5, 'c_f': 0.3}

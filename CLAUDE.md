@@ -522,6 +522,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   dibuka (FF hanya pekan ini & tanpa Act). `_prarilis.segar`: "kejutan lalu" hanya bila memori = rilis sebelumnya (≤ 45 hari,
   Fed ≤ 60) di `_prarilis`/`_petunjuk`/`_prediksi`. ISM Jasa & Fed: Act dari Nasdaq (`_aktual.NASDAQ_MAP`, dulu manual saja).
 
+- 15 Okt (pengguna "stuck TURUN 74%, mau angka pasti 85%", `docs/PPI_15OKT.md`, `research/ppi_malam.py`): sel CPI→PPI 74% MENCAMPUR
+  arah (NAIK 7/7, TURUN 7/12, detik 2 4/12) → `ppi_wti.json["cpi_ppi"][rel]["per_arah"]` (`research/ppi_dasar.py simpan`) dan
+  `_ppi_wti.pakai_cpi` memakai angka ARAH tebakan (TURUN 58% ⚠️ ⚖️, 💥 JANGAN). Sebelum rilis semua petunjuk 44–65%, model 51%;
+  LIVE detik 2 ≥ $0,50 bertahan s/d detik 5 91% TETAPI masuk setelah detik 2 rata-rata rugi (untung 20–45% rilis) → poin ⚠️ di kartu PPI.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

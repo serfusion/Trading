@@ -130,7 +130,29 @@
    "lama": 60.0,
    "n_lama": 5,
    "baru": 78.6,
-   "n_baru": 14
+   "n_baru": 14,
+   "per_arah": {
+    "turun": {
+     "semua": 58.3,
+     "n_semua": 12,
+     "lama": 50.0,
+     "n_lama": 4,
+     "baru": 62.5,
+     "n_baru": 8,
+     "d2": 33.3,
+     "n_d2": 12
+    },
+    "naik": {
+     "semua": 100.0,
+     "n_semua": 7,
+     "lama": 100.0,
+     "n_lama": 1,
+     "baru": 100.0,
+     "n_baru": 6,
+     "d2": 100.0,
+     "n_d2": 7
+    }
+   }
   },
   "sesuai": {
    "semua": 82.4,
@@ -138,7 +160,29 @@
    "lama": 50.0,
    "n_lama": 6,
    "baru": 100.0,
-   "n_baru": 11
+   "n_baru": 11,
+   "per_arah": {
+    "turun": {
+     "semua": 71.4,
+     "n_semua": 7,
+     "lama": 0.0,
+     "n_lama": 2,
+     "baru": 100.0,
+     "n_baru": 5,
+     "d2": 42.9,
+     "n_d2": 7
+    },
+    "naik": {
+     "semua": 90.0,
+     "n_semua": 10,
+     "lama": 75.0,
+     "n_lama": 4,
+     "baru": 100.0,
+     "n_baru": 6,
+     "d2": 90.0,
+     "n_d2": 10
+    }
+   }
   },
   "berlawanan": {
    "semua": 43.8,
@@ -146,7 +190,29 @@
    "lama": 42.9,
    "n_lama": 7,
    "baru": 44.4,
-   "n_baru": 9
+   "n_baru": 9,
+   "per_arah": {
+    "turun": {
+     "semua": 44.4,
+     "n_semua": 9,
+     "lama": 60.0,
+     "n_lama": 5,
+     "baru": 25.0,
+     "n_baru": 4,
+     "d2": 44.4,
+     "n_d2": 9
+    },
+    "naik": {
+     "semua": 42.9,
+     "n_semua": 7,
+     "lama": 0.0,
+     "n_lama": 2,
+     "baru": 60.0,
+     "n_baru": 5,
+     "d2": 57.1,
+     "n_d2": 7
+    }
+   }
   }
  }
 }

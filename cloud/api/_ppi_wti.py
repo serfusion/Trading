@@ -211,15 +211,29 @@ def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
     x = cp.get(rel) or {}
     if x.get("semua") is None:
         return g
+    # 15 Okt 2026 (pengguna: "aplikasi stuck TURUN 74%"): angka sel MENCAMPUR tebakan NAIK & TURUN (sepakat: NAIK 7/7,
+    # TURUN 7/12 dan detik 2 hanya 4/12) → pakai angka ARAH yang ditebak bila tersedia (research/ppi_dasar.cpi_ppi).
+    xa = (x.get("per_arah") or {}).get(g["arah"]) or {}
+    per_arah = xa.get("semua") is not None and xa.get("n_semua", 0) >= 5
+    if per_arah:
+        x = xa
     ket = {"sepakat": "searah tebakan", "sesuai": "sesuai perkiraan", "berlawanan": "BERLAWANAN dengan tebakan"}[rel]
     arah_c = "DI ATAS" if ci["s"] > 0 else ("DI BAWAH" if ci["s"] < 0 else "SESUAI")
-    awal = (f"🔗 CPI inti {ci['actual']:g}% vs perkiraan {ci['forecast']:g}% ({arah_c}) → {ket} • tebakan PPI-WTI dalam "
-            f"situasi ini dulu benar {x['semua']:.0f}% ({x['n_semua']} rilis; lama {x['lama']:.0f}% / sejak Okt 2021 "
-            f"{x['baru']:.0f}%)").replace(".", ",")
-    out = {**g, "persen": round(x["semua"]), "lama": round(x["lama"]), "baru": round(x["baru"]), "n": x["n_semua"],
-           "cpi_inti": {**ci, "hubungan": rel}, "bukti": awal + " • " + g["bukti"]}
+    pct = lambda v: "–" if v is None else f"{v:.0f}%"           # noqa: E731
+    d2 = f"; detik 2 {pct(x.get('d2'))}" if per_arah and x.get("d2") is not None else ""
+    awal = (f"🔗 CPI inti {ci['actual']:g}% vs perkiraan {ci['forecast']:g}% ({arah_c}) → {ket} • tebakan "
+            f"{g['arah'].upper() if per_arah else 'PPI-WTI'} dalam situasi ini dulu benar {x['semua']:.0f}% ({x['n_semua']} "
+            f"rilis; lama {pct(x.get('lama'))} / sejak Okt 2021 {pct(x.get('baru'))}{d2})").replace(".", ",")
+    out = {**g, "persen": round(x["semua"]), "lama": round(x["lama"]) if x.get("lama") is not None else None,
+           "baru": round(x["baru"]) if x.get("baru") is not None else None, "n": x["n_semua"],
+           "cpi_inti": {**ci, "hubungan": rel, **({"d2": x.get("d2")} if per_arah else {})},
+           "bukti": awal + " • " + g["bukti"]}
+    kuat = (x["semua"] >= 60 and all(v is None or v >= 50 for v in (x.get("lama"), x.get("baru"))))
     if rel == "berlawanan":
         out.update(status="lemah", peringatan="kejutan inti CPI kemarin berlawanan dengan tebakan minyak")
+    elif not kuat:
+        out.update(status="lemah", peringatan=(f"tebakan {g['arah'].upper()} di situasi ini dulu hanya {x['semua']:.0f}%, "
+                                                f"detik 2 {pct(x.get('d2'))}").replace(".", ","))
     else:                                                    # CPI sudah mendukung → angka situasi ini yang berlaku
         out["status"] = "tutup kertas"
         out.pop("peringatan", None)
