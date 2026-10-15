@@ -104,7 +104,8 @@ def test_attach_masuk_poin_di_bawah_xau_tanpa_ubah_arah(monkeypatch):
     s = prep["pra_satu"]
     assert s["teks"].startswith("PPI ⚪ ≈50%")                        # arah/persen tidak diubah oleh sentimen
     assert any(x.startswith("👥 Orang:") for x in s["poin"]) and "• 📊 Perkiraan 0.3% (naik dari 0.2%): keluar di atas → emas TURUN • di bawah → emas NAIK" in s["bukti"]
-    assert s["poin"][-1].startswith("Setelah rilis")
+    i = next(k for k, x in enumerate(s["poin"]) if x.startswith("Setelah rilis"))
+    assert s["poin"][i - 1].startswith("👥 Orang:")                            # 👥 tepat sebelum "Setelah rilis"
     monkeypatch.setenv("SENTIMEN", "0")
     p2 = {"mendatang": list(prep["mendatang"]), "berita": []}
     _sentimen.attach(p2, Toko(), NOW, opener_ok([]))

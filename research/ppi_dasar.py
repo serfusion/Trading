@@ -224,8 +224,23 @@ def cpi_ppi(df: pd.DataFrame, L: list) -> dict:
             z = m[p.to_numpy() & (rel == k)]
             o[per] = round(float((z.tb == z.arah).mean() * 100), 1) if len(z) else None
             o[f"n_{per}"] = int(len(z))
+        # 15 Okt 2026 (pengguna: "aplikasi stuck TURUN 74%"): angka sel di atas MENCAMPUR tebakan NAIK & TURUN — sepakat
+        # NAIK 7/7, TURUN hanya 7/12 (detik 2 4/12). Simpan PER ARAH tebakan; cloud memakai angka arah yang ditebak.
+        o["per_arah"] = {}
+        for nm, v in (("turun", -1.0), ("naik", 1.0)):
+            q = {}
+            for per, p in (("semua", m.th > 0), ("lama", m.t0 < SPLIT), ("baru", m.t0 >= SPLIT)):
+                z = m[p.to_numpy() & (rel == k) & (m.tb == v).to_numpy()]
+                q[per] = round(float((z.tb == z.arah).mean() * 100), 1) if len(z) else None
+                q[f"n_{per}"] = int(len(z))
+            z = m[(rel == k) & (m.tb == v).to_numpy() & m.d2.notna().to_numpy() & (m.d2 != 0).to_numpy()]
+            q["d2"] = round(float((np.sign(z.d2) == z.tb).mean() * 100), 1) if len(z) else None
+            q["n_d2"] = int(len(z))
+            o["per_arah"][nm] = q
         out[k] = o
-        L.append(f"   {k:10s} benar {o['semua']}% (n {o['n_semua']}) • lama {o['lama']}% (n {o['n_lama']}) • baru {o['baru']}% (n {o['n_baru']})")
+        L.append(f"   {k:10s} benar {o['semua']}% (n {o['n_semua']}) • lama {o['lama']}% (n {o['n_lama']}) • baru {o['baru']}% (n {o['n_baru']})"
+                 + "".join(f" | {nm.upper()} {q['semua']}% (n {q['n_semua']}; lama {q['lama']} / baru {q['baru']}; detik 2 {q['d2']}%)"
+                           for nm, q in o["per_arah"].items()))
     return out
 
 

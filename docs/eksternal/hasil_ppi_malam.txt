@@ -1,0 +1,32 @@
+# 🌙 PPI 15 Okt 2026 (research/ppi_malam.py)
+python -m research.ppi_malam        → docs/eksternal/hasil_ppi_malam.txt
+rilis PPI 2016–2026: 119 • malam ini: {'WTI': 1, 'E_KOMB': 1, 'CPIC': 1, 'CPIH': 0, 'KONC': -1, 'KONV': -1, 'M_EN': -1, 'P': 0, 'dgn_retail': 1, 'gap': 0.3, 'H4': 1, 'H24': 1}
+
+## A. Petunjuk SEBELUM rilis yang berlaku malam ini (per arah tebakan; L = LAMA, B = BARU)
+   selalu NAIK (pembanding)                                               lonjakan 55%(118) L52%(58) B58%(60) | d2 60%(118) L57%(58) B63%(60) | d5 55%(118) L52%(58) B58%(60) | d10 55%(118) L47%(58) B63%(60)
+   minyak naik ≥5% → TURUN                                                lonjakan 55%(49) L52%(27) B59%(22) | d2 41%(49) L41%(27) B41%(22) | d5 55%(49) L52%(27) B59%(22) | d10 53%(49) L56%(27) B50%(22)
+   minyak naik & CPI inti di atas → TURUN (dulu tampil 74%)               lonjakan 58%(12) L50%(4) B62%(8) | d2 33%(12) L25%(4) B38%(8) | d5 58%(12) L50%(4) B62%(8) | d10 50%(12) L50%(4) B50%(8)
+   minyak naik & bersamaan Retail → TURUN                                 lonjakan 67%(9) L57%(7) B100%(2) | d2 44%(9) L29%(7) B100%(2) | d5 44%(9) L29%(7) B100%(2) | d10 67%(9) L57%(7) B100%(2)
+   minyak naik & konsensus sudah naik (gap ≥ 0,2) → TURUN [pasca-lihat]   lonjakan 69%(13) L60%(5) B75%(8) | d2 54%(13) L80%(5) B38%(8) | d5 69%(13) L80%(5) B62%(8) | d10 77%(13) L100%(5) B62%(8)
+   minyak naik & tren 24 jam naik → TURUN                                 lonjakan 44%(18) L44%(9) B44%(9) | d2 33%(18) L22%(9) B44%(9) | d5 50%(18) L44%(9) B56%(9) | d10 44%(18) L44%(9) B44%(9)
+   tren 24 jam naik → NAIK                                                lonjakan 65%(51) L59%(22) B69%(29) | d2 65%(51) L64%(22) B66%(29) | d5 61%(51) L55%(22) B66%(29) | d10 61%(51) L50%(22) B69%(29)
+   tren 4 jam naik → NAIK                                                 lonjakan 63%(49) L56%(18) B68%(31) | d2 67%(49) L61%(18) B71%(31) | d5 61%(49) L56%(18) B65%(31) | d10 63%(49) L56%(18) B68%(31)
+   core lalu < konsensus core (KONC) → NAIK                               lonjakan 55%(47) L55%(20) B56%(27) | d2 64%(47) L55%(20) B70%(27) | d5 57%(47) L55%(20) B59%(27) | d10 57%(47) L55%(20) B59%(27)
+   sebelumnya < konsensus (KONV) → NAIK                                   lonjakan 52%(50) L45%(22) B57%(28) | d2 60%(50) L64%(22) B57%(28) | d5 58%(50) L59%(22) B57%(28) | d10 58%(50) L50%(22) B64%(28)
+
+## B. Model gabungan 12 petunjuk (logistik, tutup kertas per tahun): benar 51% (n 82) ≈ lempar koin • malam ini P(emas naik menit 1) 59%
+
+## C. SETELAH rilis: arah emas detik 2 (≥ $X) masih sama di detik 5 / 10 / lonjakan menit 1
+   detik 2 ≥ $0.5: d5 91% (68; BARU 86%) | d10 87% (68; BARU 84%) | arah 84% (68; BARU 81%)
+   detik 2 ≥ $1.0: d5 93% (43; BARU 90%) | d10 84% (43; BARU 84%) | arah 88% (43; BARU 87%)
+   detik 2 ≥ $2.0: d5 100% (15; BARU 100%) | d10 100% (15; BARU 100%) | arah 100% (15; BARU 100%)
+   minyak naik & detik 2 turun (searah tebakan minyak): lonjakan searah detik 2 100% (n 12)
+   minyak naik & detik 2 naik (melawan tebakan): lonjakan searah detik 2 73% (n 15)
+
+## D. KEJAR: masuk setelah melihat detik 2 (tick Exness, 100 rilis) — untung % rilis, rata-rata $/oz
+   detik 2 ≥ $0.5, masuk detik 2.5 (n 70): tutup 5s 24% $-0.43 | tutup 10s 37% $-0.31 | tutup 30s 36% $-0.51 | tutup 60s 45% $-0.71
+   detik 2 ≥ $0.5, masuk detik 3.5 (n 70): tutup 5s 20% $-0.39 | tutup 10s 36% $-0.27 | tutup 30s 37% $-0.47 | tutup 60s 39% $-0.66
+   detik 2 ≥ $1.0, masuk detik 2.5 (n 44): tutup 5s 34% $-0.32 | tutup 10s 43% $-0.28 | tutup 30s 41% $-0.42 | tutup 60s 50% $-0.45
+   detik 2 ≥ $1.0, masuk detik 3.5 (n 44): tutup 5s 27% $-0.29 | tutup 10s 43% $-0.24 | tutup 30s 45% $-0.39 | tutup 60s 41% $-0.42
+   detik 2 ≥ $2.0, masuk detik 2.5 (n 15): tutup 5s 53% $-0.14 | tutup 10s 40% $+0.42 | tutup 30s 47% $+0.67 | tutup 60s 60% $+0.49
+   detik 2 ≥ $2.0, masuk detik 3.5 (n 15): tutup 5s 40% $-0.11 | tutup 10s 53% $+0.45 | tutup 30s 60% $+0.70 | tutup 60s 47% $+0.52

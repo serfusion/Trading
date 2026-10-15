@@ -365,7 +365,8 @@ def test_satu_singkat_langsung_ke_inti():
     kosong = A.satu({"title": "PPI m/m", "nama": "PPI", "sisa": "5 hari lagi", "kons": {"f": "0.3%", "p": "0.4%"}})
     assert kosong["teks"] == "PPI ⚪ ≈50% (arah muncul ≤ 6 jam sebelum rilis) • 5 hari lagi"
     assert kosong["poin"][0].startswith("⚪ Belum ada petunjuk teruji → ≈ 50:50")
-    assert kosong["poin"][1] == "📊 Perkiraan 0.3% (turun dari 0.4%): keluar di atas → emas TURUN • di bawah → emas NAIK" and kosong["bukti"].count("\n") == 2   # PPI: BARU < 85% → tanpa poin ✅
+    assert kosong["poin"][1] == "📊 Perkiraan 0.3% (turun dari 0.4%): keluar di atas → emas TURUN • di bawah → emas NAIK" and kosong["bukti"].count("\n") == 3   # PPI: BARU < 85% → tanpa poin ✅
+    assert kosong["poin"][-1].startswith("⚠️ Tapi masuk SETELAH detik 2")      # 15 Okt: kejar setelah detik 2 rata-rata rugi
     A.tambah_orang(kosong, {"poin": "👥 Orang: ritel 8 broker BUY 70% → info"})
     assert kosong["poin"][2] == "👥 Orang: ritel 8 broker BUY 70% → info" and kosong["poin"][3].startswith("Setelah rilis")
     assert kosong["bukti"].split("\n")[2] == "• 👥 Orang: ritel 8 broker BUY 70% → info"

@@ -74,7 +74,7 @@ def test_attach_fred_cache_dan_tampil_di_aplikasi():
     s = prep["pra_satu"]
     assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}% (lonjakan menit 1)") and "⚠️" in s["teks"]
     assert "minyak WTI" in s["bukti"] and "Lemah karena tebakan TURUN" in s["bukti"]
-    assert "allin" not in s                                    # tebakan lemah → tanpa 💥 modal kecil PPI
+    assert s["allin"]["teks"].startswith("💥 Modal kecil PPI: JANGAN")    # 15 Okt: tebakan lemah → JANGAN (dulu kosong)
     assert "⚠️ Lemah: 55% dari 51 rilis • sejak 2021 59%" in s["bukti"]    # 14 Okt: uji sebelum rilis, per arah
 
 
@@ -110,12 +110,18 @@ def test_setelah_cpi_inti_tebakan_ppi_diperbarui_otomatis():
     cp = _ppi_wti.DATA["cpi_ppi"]
     t0 = datetime.fromisoformat(T0)
     g = _ppi_wti.tebak(t0, deret(80.0, 90.0))
+    # 15 Okt: angka PER ARAH tebakan (dulu angka sel campuran NAIK & TURUN: sepakat 74% padahal TURUN 58%, detik 2 33%)
     for act, rel in (("0.3%", "sepakat"), ("0.2%", "sesuai"), ("0.1%", "berlawanan")):
         prep = {"berita": [cpi_kartu(act)]}
         h = _ppi_wti.pakai_cpi(g, _ppi_wti.cpi_inti(prep, t0))
-        assert h["cpi_inti"]["hubungan"] == rel and h["persen"] == round(cp[rel]["semua"]) and h["arah"] == "turun"
-        assert h["bukti"].startswith("🔗 CPI inti") and (h["status"] == "lemah") == (rel == "berlawanan")
-        assert ("peringatan" in h) == (rel == "berlawanan")
+        pa = cp[rel]["per_arah"]["turun"]
+        assert h["cpi_inti"]["hubungan"] == rel and h["persen"] == round(pa["semua"]) and h["arah"] == "turun"
+        assert h["bukti"].startswith("🔗 CPI inti") and "tebakan TURUN dalam situasi ini" in h["bukti"]
+        assert h["status"] == "lemah" and "peringatan" in h                   # TURUN 58% / 71% (lama 0%) / 44%
+    assert round(cp["sepakat"]["per_arah"]["turun"]["semua"]) == 58 and round(cp["sepakat"]["per_arah"]["turun"]["d2"]) == 33
+    naik = _ppi_wti.tebak(t0, deret(90.0, 80.0))                              # minyak turun → NAIK; CPI inti di bawah
+    h = _ppi_wti.pakai_cpi(naik, _ppi_wti.cpi_inti({"berita": [cpi_kartu("0.1%")]}, t0))
+    assert h["cpi_inti"]["hubungan"] == "sepakat" and h["status"] == "tutup kertas" and h["persen"] == 100
     assert _ppi_wti.cpi_inti({"berita": [{**cpi_kartu("0.3%"), "released": False}]}, t0) is None
     assert _ppi_wti.cpi_inti({"berita": [cpi_kartu("")]}, t0) is None
 
@@ -139,11 +145,14 @@ def test_isi_act_kartu_dari_kalender_lalu_ppi_ikut_cpi_14okt():
     ci = _ppi_wti.cpi_inti(prep, datetime.fromisoformat(T0))
     assert ci and ci["s"] == 1
     g = _ppi_wti.pakai_cpi({"arah": "turun", "persen": 55, "status": "lemah", "bukti": "x", "peringatan": "p"}, ci)
-    assert g["status"] == "tutup kertas" and g["cpi_inti"]["hubungan"] == "sepakat" and "peringatan" not in g
+    assert g["status"] == "lemah" and g["cpi_inti"]["hubungan"] == "sepakat" and "di situasi ini" in g["peringatan"]
     row = {"title": "PPI m/m", "nama": "PPI", "sisa": "1 hari lagi", **g}
     s = _pra_aset.satu(row)
-    assert s["teks"].startswith(f"PPI ▼ TURUN {g['persen']}%") and "⚖️" not in s["teks"]
-    assert s["poin"][0].startswith("✅ Teruji sebelum rilis: 74% dari 19 rilis")
+    assert s["teks"].startswith("PPI ▼ TURUN 58%") and "⚠️ ⚖️ tunggu ⚡LIVE" in s["teks"]       # 15 Okt: per arah
+    assert s["poin"][0].startswith("⚠️ Lemah: 58% dari 12 rilis") and "detik 2 33%" in s["poin"][0]
+    assert not any(x.startswith("Lemah karena") for x in s["poin"])            # angka sama tidak diulang
+    assert s["allin"]["teks"].startswith("💥 Modal kecil PPI: JANGAN")
+    assert any(x.startswith("⚠️ Tapi masuk SETELAH detik 2") for x in s["poin"])   # kejar setelah detik 2 rata-rata rugi
 
 
 def test_cpi_inti_tetap_terbaca_setelah_kartu_cpi_hilang_15okt():

@@ -132,10 +132,12 @@ def tutup_kertas(row: dict) -> str | None:
         if row.get("lemah_jenis") == "yoyc":
             teks += " • situasi sekarang hanya 55%"
         return teks.replace(".", ",")
-    if t in _ppi_wti.JUDUL and row.get("status") in TERUJI and row.get("persen"):
-        # 14 Okt: setelah CPI terbit, angka situasi "CPI inti searah/sesuai" (_ppi_wti.pakai_cpi) yang berlaku
-        return (f"🧾 Uji sebelum rilis (ikut CPI inti): benar {row['persen']}% ({row.get('n')} rilis) • "
-                f"sejak 2021 {row.get('baru')}%").replace(".", ",")
+    if t in _ppi_wti.JUDUL and row.get("cpi_inti") and row.get("persen"):
+        # 14 Okt: setelah CPI terbit, angka situasi "CPI inti searah/sesuai" (_ppi_wti.pakai_cpi) yang berlaku;
+        # 15 Okt: angka PER ARAH tebakan + detik 2 (dulu angka campuran NAIK & TURUN 74%)
+        d2 = (row.get("cpi_inti") or {}).get("d2")
+        return (f"🧾 Uji sebelum rilis (ikut CPI inti, {arah.upper()}): benar {row['persen']}% ({row.get('n')} rilis) • "
+                f"sejak 2021 {row.get('baru')}%" + (f" • detik 2 {d2:.0f}%" if d2 is not None else "")).replace(".", ",")
     if t in _ppi_wti.JUDUL:
         pa = ((_ppi_wti.DATA.get("cpi_ppi") or {}).get("per_arah") or {}).get(arah) or {}
         if not pa:
@@ -549,8 +551,9 @@ def satu(row: dict) -> dict:
         if dasar:
             uji.append(f"dasar: {dasar}")
         baris = [" • ".join(uji)]
-        if row.get("peringatan"):                          # CPI: tebakan TURUN saat tren naik / Kalshi core berlawanan
-            baris.append(f"Lemah karena {row['peringatan'].split(' (')[0]}")   # angka rinci ada di poin 🧮
+        pr = row.get("peringatan") or ""
+        if pr and not ("di situasi ini" in pr and f"{row['persen']}%" in pr):   # 15 Okt: angka sama sudah di poin 1
+            baris.append(f"Lemah karena {pr.split(' (')[0]}")   # CPI: tren naik / Kalshi core berlawanan; rinci di 🧮
         if (row.get("terbaru") or {}).get("teks"):         # 13 Okt: konsensus/Kalshi/y/y terbaru + persen rilis serupa
             baris += ringkas_terbaru(row["terbaru"]["teks"])
             out["terbaru"] = row["terbaru"]
@@ -568,7 +571,7 @@ def satu(row: dict) -> dict:
         baris[0] = baris[0].split(":", 1)[0] + f": {row['persen']}% dari {row['n']} rilis" + \
             (f" • sejak 2021 {row['baru']}%" if row.get("baru") is not None else "") + \
             (f" • dasar: {dasar}" if row.get("arah") and dasar else "")
-        if m_ := re.search(r" • NAIK 2024\+ \d+/\d+", tk):                 # pembanding tebakan NAIK tetap tampil
+        for m_ in re.finditer(r" • (?:NAIK 2024\+ \d+/\d+|detik 2 \d+%)", tk):   # pembanding NAIK & detik 2 tetap tampil
             baris[0] += m_.group(0)
         if "ikut CPI inti" in baris[0] or "ikut CPI inti" in (tk or ""):
             baris[0] = baris[0].replace("dasar: ", "dasar: CPI inti + ")
@@ -577,6 +580,11 @@ def satu(row: dict) -> dict:
         baris.insert(1, tk)
     if mi:
         baris.append(mi["singkat"])
+        if (row.get("title") or "") in _ppi_wti.JUDUL:
+            # 15 Okt 2026 (research/ppi_malam.py bagian D, tick Exness 100 rilis PPI): arah detik 2 memang bertahan 87–91%,
+            # tetapi MASUK setelah melihatnya (telat 0,5–1,5 dtk + spread berita) untung hanya 20–45% rilis, rata-rata rugi
+            baris.append("⚠️ Tapi masuk SETELAH detik 2 (telat 0,5–1,5 dtk + spread): dulu untung hanya 20–45% rilis, "
+                         "rata-rata rugi $0,3–0,7/oz — kecuali gerak ≥ $2")
     out["poin"] = baris
     out["bukti"] = "\n".join("• " + x for x in baris)
     a = allin(row)
@@ -602,19 +610,17 @@ def allin(row: dict) -> dict | None:
     untung berlipat bila arah 1–5 dtk benar). HANYA CPI: research/cpi_allin2.py (tick Exness, tutup kertas, vs arah acak)
     → cpi_detik.json["allin"]. Tebakan kuat → masuk & tutup detik 2; ⚠️ lemah → JANGAN (sumber margin call). Info saja,
     tanpa order. Env CPI_ALLIN=0 mematikan."""
+    if row.get("title") in _ppi_wti.JUDUL and row.get("arah") and row.get("status") not in TERUJI:
+        # 15 Okt 2026: tebakan PPI lemah (mis. TURUN setelah CPI inti searah: 58%, detik 2 33%) → modal kecil JANGAN
+        d2 = (row.get("cpi_inti") or {}).get("d2")
+        return {"kuat": False, "teks": f"💥 Modal kecil PPI: JANGAN — tebakan lemah ({row.get('persen')}%"
+                                       + (f", detik 2 dulu {d2:.0f}%" if d2 is not None else "") + ")",
+                "bukti": "Masuk 1 dtk sebelum rilis butuh arah detik 1–2 benar; untuk tebakan ini detik 2 lebih sering "
+                         "berlawanan. Tunggu ⚡LIVE detik 2."}
     if row.get("title") in _ppi_wti.JUDUL and row.get("arah") and row.get("status") in TERUJI:
         # 13 Okt: PPI-WTI diuji dengan cara yang sama (research/ppi_wti.py) → jauh lebih lemah dari CPI
         lv = (_ppi_wti.DATA.get("allin_lentur") or {})
         x2 = lv.get("200") or {}
-        if (row.get("cpi_inti") or {}).get("hubungan") == "sepakat":
-            # 15 Okt (pengguna: "PPI 74% turun, kenapa lemah?"): 74% = arah LONJAKAN menit 1, bukan detik 2. Diuji tick
-            # Exness masuk t−1 dtk pada 16 PPI "CPI inti searah" 2016–2026: tutup detik 2 untung 56% (≈ impas), tutup detik
-            # 10 untung 62%, 1:200 +$4,7/$100 (sejak Okt 2021 +$9,5, n 12; sebelum rugi −$9,6, n 4), 1:500 modal habis 1×.
-            return {"kuat": False, "teks": "💥 Modal kecil PPI: 74% = arah menit 1; masuk t−1 tutup detik 2 untung "
-                                           "hanya 56% rilis → lemah • bila tetap: maks 1:200, tutup detik 10",
-                    "bukti": "Uji tick Exness 16 PPI serupa (CPI inti searah): tutup detik 2 untung 56% (≈ impas) • tutup "
-                             "detik 10 untung 62%, 1:200 +$4,7 per $100 (sejak 2021 +$9,5, n 12; sebelum 2021 rugi) • 1:500 "
-                             "modal habis 1× • CPI tebakan kuat dulu +$20, untung 78% — PPI jauh lebih tipis"}
         return {"kuat": False, "teks": "💥 Modal kecil PPI: arah detik 1–2 lemah → hindari modal kecil",
                 "bukti": (f"Uji sejak 2022 (lentur, {x2.get('n_baru')} rilis): untung di {x2.get('untung_baru')}% rilis; per "
                           f"modal $100 1:100 +${(lv.get('100') or {}).get('rata', 0):.0f}, 1:200 +${x2.get('rata', 0):.0f}, "
