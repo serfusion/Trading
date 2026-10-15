@@ -318,6 +318,7 @@ object SignalRepository {
     fun init(context: Context) {
         if (prefs != null) return
         prefs = context.applicationContext.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        NewsCache.init(context)                          // 4.45: berita terakhir dari HP → baris di bawah XAU langsung tampil
         load()
         loadChat()
         refreshAutoModal()

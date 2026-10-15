@@ -216,6 +216,30 @@ def berita() -> list[dict]:
                          status="dikirim", lama={"wr": s.get("d5_lama")},
                          catatan=f"menit 1 {s.get('m1')}% • per berita: {per} • masuk SETELAH detik 2 rata-rata rugi "
                                  "kecuali gerak ≥ $2 (spread & telat)"))
+    # 📍 15 Okt 2026 (pengguna: "entry 1 detik sebelum release, bertahan 1 detik hingga 1–3 menit"): masuk t−1 searah tebakan
+    # (spread asli Exness, research/masuk_pra.py) + keputusan tahan/tutup di detik 2 untuk posisi apa pun
+    mp = _j("masuk_pra.json") if (API / "masuk_pra.json").exists() else {}
+    for g, arah in (("CPI", "naik"), ("CPI", "turun"), ("PPI", "naik"), ("PPI", "turun")):
+        x = ((mp.get("t1") or {}).get(g) or {}).get(arah)
+        if not x:
+            continue
+        w60, r60 = x["H"]["60"]
+        lama, baru = x.get("lama") or [None, None, 0], x.get("baru") or [None, None, 0]
+        rows.append(_row("info", f"📍 Masuk 1 dtk sebelum {g} searah tebakan {arah.upper()}, tahan 1 mnt (lot biasa)",
+                         {"n": x["n"], "wr": float(w60), "avg": r60, "periode": "2016–2026"}, satuan="$/oz",
+                         status="kandidat" if w60 >= 55 and r60 >= 0.2 else "lemah", lama={"wr": lama[0], "avg": lama[1]},
+                         catatan=(f"sejak Okt 2021 {baru[0]}% ({baru[1]:+.2f} $/oz) • tutup di detik 1 {x['H']['1'][0]}% • "
+                                  "spread asli Exness saat berita").replace(".", ",")))
+    sp = (((mp.get("posisi") or {}).get("SEMUA") or {}).get("2") or {})
+    s5, l5 = sp.get("s|0.5"), sp.get("l|0.5")
+    if s5 and l5:
+        rows.append(_row("info", "📍 Posisi t−1, emas detik 2 ≥ $0,50 SEARAH posisi → tahan 1 mnt",
+                         {"n": s5["n"], "wr": float(s5["60"][0]), "avg": s5["60"][1], "periode": "2016–2026"}, satuan="$/oz",
+                         status="dikirim", lama={"wr": (s5.get("wr60") or [None])[0]},
+                         catatan=(f"sejak Okt 2021 {(s5.get('wr60') or [None, None])[1]}% • 30 dtk {s5['30'][0]}% • 3 mnt "
+                                  f"{s5['180'][0]}% • BERLAWANAN: ditahan 1 mnt hanya {l5['60'][0]}% balik untung "
+                                  f"(rata-rata {l5['60'][1]:+.2f} vs tutup detik 3 {l5['tutup'][1]:+.2f} $/oz) → tutup")
+                         .replace(".", ",")))
     kf = (_j("rilis_gabung.json").get("konflik") or {})
     x = kf.get("Non-Farm Employment Change|Unemployment Rate") or {}
     if x:

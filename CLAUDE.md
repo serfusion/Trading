@@ -559,6 +559,19 @@ alarm tepat waktu) hanya menyentuh `android/`].
   pra_xau_semua_v2/cpi_detik/riset_ppi3 berubah.
 - `tests/test_cloud_simulasi.py` = kode cloud asli diputar ±100 titik waktu (jaringan mati + tiruan): wajib lolos sebelum push.
 
+## 📍 Masuk 1 dtk sebelum rilis & baris XAU langsung muncul (15 Okt 2026 — `docs/MASUK_PRA.md`)
+- Gaya pengguna: masuk t−1 dtk, tahan 1 dtk s/d 1–3 mnt; masuk di detik 2 = telat. `research/masuk_pra.py` (tick asli Exness,
+  1.627 rilis 2016–2026) → `cloud/api/masuk_pra.json` (+ lengkap `docs/eksternal/hasil_masuk_pra.{txt,json}`). Tutup detik 1
+  untung 16–27% (spread median $0,26); searah tebakan tahan 30 dtk–1 mnt 58–62% (LAMA impas, BARU untung ≈ selalu-BUY); CPI/PPI
+  NAIK 65–74% ⚠️ belum terbukti, TURUN rugi → JANGAN; 144 aturan kelola tidak lebih baik dari tahan tetap. Kuat: posisi APA PUN,
+  emas detik 2 ≥ $0,50 SEARAH → tahan 1 mnt 79% (829 rilis, LAMA 79/BARU 78), BERLAWANAN → hanya 14% balik untung → tutup.
+- DIPASANG (aplikasi 4.45): `_masuk_pra.py` (pra_satu.t1 + lanjut.posisi, env MASUK_PRA), baris 📍 di bawah XAU & di ⚡LIVE
+  (`StatusCard.posisiBaris`, BUY & SELL), info KEJAR detik 2,5 dibuang dari ⚡LIVE, ⓘ peringkat satuan $/oz.
+- Baris XAU lambat/hilang: aplikasi `NewsCache.kt` (respons terakhir di HP → tampil instan, satu GET bersama, ulang 5–40 dtk,
+  20 dtk dekat rilis); cloud `chat.MemoStore` + `_core.Supabase.get_many` (±20 baca Supabase → 1), langkah info dilewati bila
+  GET > 20 dtk (`ANGGARAN_DTK`, `persiapan.dilewati/waktu_dtk`), `_pra_aset.cadangan` (pra_satu ≈ 50% bila galat, `pra_galat`).
+  Tes `tests/test_cloud_masuk_pra.py` + simulasi mewajibkan pra_satu & t1 di setiap titik waktu.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

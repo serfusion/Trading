@@ -465,6 +465,13 @@ class Supabase:
         rows = http("GET", f"{self.base}/xau_state?id=eq.{row}&select=data", self.headers) or []
         return rows[0]["data"] if rows else {}
 
+    def get_many(self, rows) -> dict:
+        """Banyak baris sekaligus dalam SATU permintaan (15 Okt 2026, GET /api/chat): {id: data}; baris yang belum ada tidak
+        ikut (= {} seperti get_state)."""
+        ids = ",".join(sorted({str(r) for r in rows}))
+        got = http("GET", f"{self.base}/xau_state?id=in.({ids})&select=id,data", self.headers) or []
+        return {r["id"]: r.get("data") or {} for r in got if isinstance(r, dict) and r.get("id")}
+
     def save_state(self, data: dict, row: str = "main") -> None:
         headers = {**self.headers, "Prefer": "resolution=merge-duplicates,return=minimal"}
         http("POST", f"{self.base}/xau_state", headers,

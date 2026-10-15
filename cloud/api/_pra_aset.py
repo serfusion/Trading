@@ -979,5 +979,40 @@ def attach(persiapan: dict, now: datetime | None = None, tren=None) -> None:
             persiapan["pra_satu"] = satu({**dl[0], "bersama_retail": any("Retail Sales" in (t or "") for t in bersama)})
             tambah_orang(persiapan["pra_satu"], persiapan.get("sentimen"))
             tandai(persiapan, dl, now)
-    except Exception:  # noqa: BLE001 - daftar opsional
-        pass
+    except Exception as exc:  # noqa: BLE001 - daftar opsional; alasan dicatat (diagnosa "baris XAU tidak muncul")
+        persiapan["pra_galat"] = f"{type(exc).__name__}: {exc}"[:200]
+
+
+def _sisa_teks(sisa: timedelta) -> str:
+    s = int(sisa.total_seconds())
+    if s >= 86400:
+        return f"{s // 86400} hari lagi"
+    if s >= 3600:
+        return f"{s // 3600} jam lagi"
+    return f"{max(1, s // 60)} mnt lagi"
+
+
+def cadangan(persiapan: dict, now: datetime | None = None) -> None:
+    """15 Okt 2026 (pengguna: "news di bawah XAU terkadang tidak muncul, saya mau langsung muncul"): bila pra_satu tidak
+    terbentuk (galat / data kurang), baris di bawah XAU tetap ada untuk berita berikutnya — jujur ≈ 50% tanpa arah."""
+    if not isinstance(persiapan, dict) or isinstance(persiapan.get("pra_satu"), dict):
+        return
+    now = now or datetime.now(timezone.utc)
+    kartu = []
+    for k in ("berita", "mendatang"):
+        for c in persiapan.get(k) or []:
+            try:
+                if isinstance(c, dict) and not c.get("released") and datetime.fromisoformat(c["time"]) > now:
+                    kartu.append(c)
+            except (KeyError, TypeError, ValueError):
+                continue
+    if not kartu:
+        return
+    c = min(kartu, key=lambda x: x["time"])
+    nama = _prediksi.nama(c.get("title") or "")
+    nama = nama[:1].upper() + nama[1:]
+    sisa = _sisa_teks(datetime.fromisoformat(c["time"]) - now)
+    poin = ["⚪ Arah belum dihitung untuk rilis ini (data petunjuk belum lengkap) → ≈ 50:50"]
+    persiapan["pra_satu"] = {"title": c.get("title"), "nama": nama, "time": c["time"], "arah": None, "status": "acak",
+                             "sisa": sisa, "teks": f"{nama} ⚪ ≈50% • {sisa}", "poin": poin,
+                             "bukti": "\n".join("• " + x for x in poin), "cadangan": True}

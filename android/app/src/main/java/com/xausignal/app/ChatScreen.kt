@@ -85,28 +85,49 @@ object ChatClient {
         .callTimeout(40, TimeUnit.SECONDS)
         .build()
 
-    /** Kalender pekan ini + status tren per indikator + 🎯 persiapan berita (GET /api/chat). */
+    /** Kalender pekan ini + status tren per indikator + 🎯 persiapan berita (GET /api/chat). 4.45: satu permintaan bersama
+     *  (NewsCache); gagal → data terakhir yang tersimpan di HP (dulu kosong → baris di bawah XAU hilang). */
     fun news(): Triple<List<CalEvent>, JSONObject?, JSONObject?> {
+        val raw = NewsCache.fetch { fetchNewsRaw() } ?: NewsCache.raw()
+        return raw?.let { parseNews(it) } ?: Triple(emptyList(), null, null)
+    }
+
+    /** Data berita yang tersimpan di HP (tanpa jaringan) — untuk tampil langsung saat layar dibuka. */
+    fun newsCached(): Triple<List<CalEvent>, JSONObject?, JSONObject?>? = NewsCache.raw()?.let { parseNews(it) }
+
+    /** Ambil ulang dari cloud (hasil disimpan & disebar lewat NewsCache.prep); true = berhasil. */
+    fun refreshNews(): Boolean = NewsCache.fetch { fetchNewsRaw() } != null
+
+    private fun fetchNewsRaw(): String? {
         val base = SignalRepository.cloudUrl()
-        if (base.isBlank()) return Triple(emptyList(), null, null)
+        if (base.isBlank()) return null
         val request = Request.Builder().url("$base/api/chat").get()
             .header("X-Chat-Key", SignalRepository.topic()).build()
         return try {
             client.newCall(request).execute().use { res ->
-                val obj = JSONObject(res.body?.string().orEmpty())
-                val arr = obj.optJSONArray("calendar") ?: JSONArray()
-                Triple((0 until arr.length()).map { i ->
-                    val o = arr.getJSONObject(i)
-                    CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
-                        o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"),
-                        o.optJSONObject("arah")?.optString("teks").orEmpty(),
-                        o.optJSONObject("arah")?.optString("catatan").orEmpty(),
-                        o.optJSONObject("arah")?.optBoolean("kuat") ?: false, o.optString("actual_info"))
-                }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
+                val body = res.body?.string().orEmpty()
+                val obj = JSONObject(body)
+                // kunci ditolak ({"info": …}) / galat → jangan menimpa data tersimpan
+                if (res.isSuccessful && obj.optBoolean("ok") && obj.has("persiapan")) body else null
             }
         } catch (e: Exception) {
-            Triple(emptyList(), null, null)
+            null
         }
+    }
+
+    private fun parseNews(body: String): Triple<List<CalEvent>, JSONObject?, JSONObject?>? = try {
+        val obj = JSONObject(body)
+        val arr = obj.optJSONArray("calendar") ?: JSONArray()
+        Triple((0 until arr.length()).map { i ->
+            val o = arr.getJSONObject(i)
+            CalEvent(o.optString("title"), o.optString("when"), o.optString("forecast"), o.optString("previous"),
+                o.optString("time"), o.optBoolean("released"), o.optString("actual"), o.optString("group"),
+                o.optJSONObject("arah")?.optString("teks").orEmpty(),
+                o.optJSONObject("arah")?.optString("catatan").orEmpty(),
+                o.optJSONObject("arah")?.optBoolean("kuat") ?: false, o.optString("actual_info"))
+        }, obj.optJSONObject("tren"), obj.optJSONObject("persiapan"))
+    } catch (e: Exception) {
+        null
     }
 
     /** Act isian manual (mis. tempel baris investing.com); teks kosong = hapus. Hasil: null bila sukses, atau galat. */
@@ -639,10 +660,12 @@ fun NewsTab() {
     var busy by remember { mutableStateOf(false) }
     var showForm by remember { mutableStateOf(false) }
     var prefill by remember { mutableStateOf<CalEvent?>(null) }
-    var calendar by remember { mutableStateOf<List<CalEvent>>(emptyList()) }
-    var tren by remember { mutableStateOf<JSONObject?>(null) }
-    var persiapan by remember { mutableStateOf<JSONObject?>(null) }
-    var calLoading by remember { mutableStateOf(true) }
+    // 4.45: isi terakhir yang tersimpan di HP langsung tampil; GET cloud memperbarui di latar
+    val awal = remember { ChatClient.newsCached() }
+    var calendar by remember { mutableStateOf(awal?.first ?: emptyList()) }
+    var tren by remember { mutableStateOf(awal?.second) }
+    var persiapan by remember { mutableStateOf(awal?.third) }
+    var calLoading by remember { mutableStateOf(awal == null) }
     val scope = rememberCoroutineScope()
     val list = rememberLazyListState()
     val app = LocalContext.current.applicationContext
