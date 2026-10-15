@@ -161,6 +161,8 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     // (LiveGold: XAUT OKX/KuCoin/Bitget/Gate). Setelah rilis baris ini memakai gerak harga SUNGGUHAN, bukan tebakan.
     var live by remember(t0) { mutableStateOf<List<Pair<Long, Double>>>(emptyList()) }
     var liveSrc by remember(t0) { mutableStateOf("") }
+    // ⚡ 4.42: gerak emas tepat di DETIK 2 (dari harga ±1 dtk sebelum rilis) = dasar tingkat keyakinan (research/live_tingkat.py)
+    var g2 by remember(t0) { mutableStateOf<Double?>(null) }
     val jendela = det >= -15 && det <= 120
     LaunchedEffect(t0, jendela) {
         while (jendela) {
@@ -168,6 +170,9 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
             if (hp != null) {
                 live = (live + (System.currentTimeMillis() to hp.first)).takeLast(400)
                 liveSrc = hp.second
+                if (g2 == null && System.currentTimeMillis() - t0 >= 2_000L) {
+                    live.lastOrNull { it.first <= t0 - 300 }?.second?.let { d0 -> g2 = hp.first - d0 }
+                }
             }
             if (System.currentTimeMillis() - t0 > 120_000L) break
             delay(500L)
@@ -189,7 +194,35 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     fun pct(x: Int?): String = x?.let { if (it < 50) "$it% ⚠️" else "$it%" } ?: "–"
     val dtk = kotlin.math.ceil(det.coerceAtLeast(0.01)).toInt()
     fun usd(g: Double): String = (if (g < 0) "−" else "+") + "\$" + "%.2f".format(Locale.US, kotlin.math.abs(g)).replace('.', ',')
-    val liveTeks = gerak?.let { g ->
+    val lj = r.optJSONObject("lanjut")
+    val ting = lj?.optJSONObject("tingkat")
+    val kj = lj?.optJSONObject("kejar")
+    /** Tingkat tertinggi yang ≤ |gerak detik 2| ("0.5", "1.0", "2.0") beserta angkanya. */
+    fun tingkatUntuk(g: Double): Pair<String, JSONObject>? = ting?.keys()?.asSequence()
+        ?.mapNotNull { k -> k.toDoubleOrNull()?.let { it to k } }?.filter { kotlin.math.abs(g) >= it.first }
+        ?.maxByOrNull { it.first }?.let { (_, k) -> ting?.optJSONObject(k)?.let { k to it } }
+    val g2v = g2
+    val liveTeks = if (g2v != null && gerak != null && ting != null) {
+        // ⚡ 4.42: setelah detik 2 → arah = gerak detik 2; keyakinan menurut besar gerak (≥ 85% & n ≥ 10 → ✅ YAKIN)
+        val a2 = if (g2v >= 0.5) "naik" else if (g2v <= -0.5) "turun" else null
+        if (a2 == null) "⚡ $nama detik $dtk • LIVE emas ${usd(gerak)} • detik 2 hanya ${usd(g2v)} (< \$0,50) → belum jelas, jangan ikut"
+        else {
+            val la = if (a2 == "naik") "▲ NAIK" else "▼ TURUN"
+            val t = tingkatUntuk(g2v)
+            val yakin = t?.second?.let { o ->
+                val d5 = o.optInt("d5"); val m1 = o.optInt("m1"); val n = o.optInt("n")
+                if (d5 >= 85 && n >= 10) " • ✅ YAKIN $d5% s/d detik 5 • menit 1 $m1% ($n rilis)"
+                else " • s/d detik 5 $d5% • menit 1 $m1% ($n rilis)"
+            } ?: ""
+            val kejar = t?.first?.let { k -> kj?.optJSONObject(k)?.optJSONObject("t10") }?.let { o ->
+                val u = o.optInt("untung")
+                if (o.optDouble("rata") < 0) " • ⚠️ masuk sekarang: dulu untung $u% (rata-rata rugi)" else " • masuk sekarang: dulu untung $u%"
+            } ?: ""
+            val beda = arah != null && arah != a2
+            "⚡ $nama detik $dtk • LIVE emas $la ${usd(gerak)} (detik 2 ${usd(g2v)})$yakin$kejar" +
+                (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "") + abaLive(r, det, a2)
+        }
+    } else gerak?.let { g ->
         if (liveArah == null) "⚡ $nama detik $dtk • LIVE emas ${usd(g)} • belum jelas (< \$0,50), tunggu"
         else {
             val la = if (liveArah == "naik") "▲ NAIK" else "▼ TURUN"

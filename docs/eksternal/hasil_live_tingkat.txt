@@ -1,0 +1,93 @@
+# ⚡ Tingkat LIVE detik 2 per berita (research/live_tingkat.py)
+python -m research.live_tingkat        → cloud/api/live_tingkat.json + docs/eksternal/hasil_live_tingkat.txt
+
+## SEMUA (1629 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 96% (n 830; lama 99 / baru 94) • detik 10 92% • lonjakan menit 1 90% • detik 60 83% | KEJAR tutup 10 dtk 39% $0.04 • 60 dtk 46% $0.13
+   detik 2 ≥ $1.0: detik 5 98% (n 616; lama 99 / baru 98) • detik 10 94% • lonjakan menit 1 94% • detik 60 87% | KEJAR tutup 10 dtk 42% $0.13 • 60 dtk 49% $0.34
+   detik 2 ≥ $2.0: detik 5 99% (n 323; lama 100 / baru 98) • detik 10 97% • lonjakan menit 1 97% • detik 60 91% | KEJAR tutup 10 dtk 40% $0.23 • 60 dtk 50% $0.68
+
+## ADP (102 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 96% (n 57; lama 100 / baru 94) • detik 10 93% • lonjakan menit 1 95% • detik 60 89% | KEJAR tutup 10 dtk 32% $-0.27 • 60 dtk 35% $-0.29
+   detik 2 ≥ $1.0: detik 5 100% (n 41; lama 100 / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 98% | KEJAR tutup 10 dtk 32% $-0.24 • 60 dtk 34% $-0.37
+   detik 2 ≥ $2.0: detik 5 100% (n 22; lama 100 / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk 23% $-0.52 • 60 dtk 14% $-0.8
+
+## CLAIMS (194 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 96% (n 67; lama 100 / baru 95) • detik 10 84% • lonjakan menit 1 88% • detik 60 76% | KEJAR tutup 10 dtk 42% $-0.16 • 60 dtk 54% $-0.09
+   detik 2 ≥ $1.0: detik 5 100% (n 43; lama None / baru 100) • detik 10 91% • lonjakan menit 1 95% • detik 60 84% | KEJAR tutup 10 dtk 49% $-0.09 • 60 dtk 53% $0.08
+   detik 2 ≥ $2.0: detik 5 100% (n 12; lama None / baru 100) • detik 10 92% • lonjakan menit 1 92% • detik 60 75% | KEJAR tutup 10 dtk 50% $-0.46 • 60 dtk 42% $-0.99
+
+## CPI (128 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 92% (n 85; lama 100 / baru 87) • detik 10 89% • lonjakan menit 1 82% • detik 60 79% | KEJAR tutup 10 dtk 48% $0.56 • 60 dtk 49% $0.73
+   detik 2 ≥ $1.0: detik 5 96% (n 71; lama 100 / baru 94) • detik 10 92% • lonjakan menit 1 87% • detik 60 86% | KEJAR tutup 10 dtk 51% $0.67 • 60 dtk 55% $1.24
+   detik 2 ≥ $2.0: detik 5 94% (n 48; lama 100 / baru 92) • detik 10 90% • lonjakan menit 1 88% • detik 60 83% | KEJAR tutup 10 dtk 52% $0.66 • 60 dtk 54% $1.29
+
+## DURABLE (31 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 7; lama 100 / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk 29% $-0.44 • 60 dtk 29% $-0.29
+   detik 2 ≥ $1.0: detik 5 100% (n 2; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+
+## ECI (5 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 5; lama None / baru 100) • detik 10 100% • lonjakan menit 1 80% • detik 60 80% | KEJAR tutup 10 dtk 0% $-0.72 • 60 dtk 20% $-1.29
+   detik 2 ≥ $1.0: detik 5 100% (n 4; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+   detik 2 ≥ $2.0: detik 5 100% (n 4; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+
+## FOMC (86 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 98% (n 45; lama 100 / baru 96) • detik 10 84% • lonjakan menit 1 78% • detik 60 64% | KEJAR tutup 10 dtk 40% $0.01 • 60 dtk 49% $-0.3
+   detik 2 ≥ $1.0: detik 5 97% (n 33; lama 100 / baru 95) • detik 10 91% • lonjakan menit 1 85% • detik 60 70% | KEJAR tutup 10 dtk 36% $0.07 • 60 dtk 52% $-0.04
+   detik 2 ≥ $2.0: detik 5 95% (n 19; lama 100 / baru 92) • detik 10 89% • lonjakan menit 1 89% • detik 60 79% | KEJAR tutup 10 dtk 37% $-0.05 • 60 dtk 47% $0.29
+
+## GDP (74 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 86% (n 21; lama 100 / baru 73) • detik 10 86% • lonjakan menit 1 90% • detik 60 95% | KEJAR tutup 10 dtk 33% $-0.6 • 60 dtk 43% $0.07
+   detik 2 ≥ $1.0: detik 5 93% (n 14; lama 100 / baru 83) • detik 10 86% • lonjakan menit 1 93% • detik 60 93% | KEJAR tutup 10 dtk 36% $-0.95 • 60 dtk 29% $-0.43
+   detik 2 ≥ $2.0: detik 5 100% (n 3; lama None / baru None) • detik 10 67% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+
+## ISM (225 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 98% (n 160; lama 99 / baru 98) • detik 10 97% • lonjakan menit 1 96% • detik 60 91% | KEJAR tutup 10 dtk 28% $-0.44 • 60 dtk 44% $-0.22
+   detik 2 ≥ $1.0: detik 5 99% (n 125; lama 100 / baru 99) • detik 10 98% • lonjakan menit 1 98% • detik 60 93% | KEJAR tutup 10 dtk 30% $-0.51 • 60 dtk 46% $-0.21
+   detik 2 ≥ $2.0: detik 5 100% (n 68; lama 100 / baru 100) • detik 10 99% • lonjakan menit 1 100% • detik 60 96% | KEJAR tutup 10 dtk 28% $-0.57 • 60 dtk 50% $-0.18
+
+## JOLTS (27 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 18; lama None / baru 100) • detik 10 100% • lonjakan menit 1 94% • detik 60 94% | KEJAR tutup 10 dtk 50% $0.08 • 60 dtk 78% $1.04
+   detik 2 ≥ $1.0: detik 5 100% (n 16; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk 50% $0.05 • 60 dtk 81% $1.22
+   detik 2 ≥ $2.0: detik 5 100% (n 11; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk 55% $0.1 • 60 dtk 82% $1.33
+
+## KONSUMEN (140 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 98% (n 59; lama 100 / baru 98) • detik 10 95% • lonjakan menit 1 95% • detik 60 85% | KEJAR tutup 10 dtk 31% $-0.21 • 60 dtk 37% $-0.56
+   detik 2 ≥ $1.0: detik 5 100% (n 43; lama None / baru 100) • detik 10 98% • lonjakan menit 1 100% • detik 60 88% | KEJAR tutup 10 dtk 35% $-0.17 • 60 dtk 44% $-0.38
+   detik 2 ≥ $2.0: detik 5 100% (n 19; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 84% | KEJAR tutup 10 dtk 21% $-0.58 • 60 dtk 37% $-0.96
+
+## MANUFAKTUR (19 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 8; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 88% | KEJAR tutup 10 dtk 12% $-0.57 • 60 dtk 25% $-0.71
+   detik 2 ≥ $1.0: detik 5 100% (n 7; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 86% | KEJAR tutup 10 dtk 14% $-0.6 • 60 dtk 29% $-0.79
+   detik 2 ≥ $2.0: detik 5 100% (n 4; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+
+## MINYAK (151 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 5; lama 100 / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 80% | KEJAR tutup 10 dtk 40% $-0.23 • 60 dtk 60% $-0.13
+
+## NFP (127 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 96% (n 93; lama 98 / baru 94) • detik 10 95% • lonjakan menit 1 94% • detik 60 85% | KEJAR tutup 10 dtk 68% $1.92 • 60 dtk 61% $2.55
+   detik 2 ≥ $1.0: detik 5 98% (n 82; lama 97 / baru 98) • detik 10 95% • lonjakan menit 1 94% • detik 60 87% | KEJAR tutup 10 dtk 66% $2.11 • 60 dtk 61% $2.75
+   detik 2 ≥ $2.0: detik 5 100% (n 48; lama 100 / baru 100) • detik 10 98% • lonjakan menit 1 100% • detik 60 92% | KEJAR tutup 10 dtk 67% $2.79 • 60 dtk 65% $4.24
+
+## PCE (52 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 89% (n 18; lama None / baru 89) • detik 10 83% • lonjakan menit 1 89% • detik 60 67% | KEJAR tutup 10 dtk 50% $0.03 • 60 dtk 39% $-0.63
+   detik 2 ≥ $1.0: detik 5 100% (n 9; lama None / baru 100) • detik 10 89% • lonjakan menit 1 89% • detik 60 67% | KEJAR tutup 10 dtk 56% $0.2 • 60 dtk 22% $-1.5
+   detik 2 ≥ $2.0: detik 5 100% (n 3; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
+
+## PMI (52 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 95% (n 42; lama None / baru 95) • detik 10 95% • lonjakan menit 1 88% • detik 60 79% | KEJAR tutup 10 dtk 38% $-0.35 • 60 dtk 45% $-0.33
+   detik 2 ≥ $1.0: detik 5 100% (n 37; lama None / baru 100) • detik 10 97% • lonjakan menit 1 95% • detik 60 84% | KEJAR tutup 10 dtk 41% $-0.36 • 60 dtk 49% $-0.17
+   detik 2 ≥ $2.0: detik 5 100% (n 25; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 92% | KEJAR tutup 10 dtk 36% $-0.21 • 60 dtk 52% $0.01
+
+## PPI (97 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 91% (n 69; lama 100 / baru 86) • detik 10 87% • lonjakan menit 1 84% • detik 60 78% | KEJAR tutup 10 dtk 37% $-0.3 • 60 dtk 45% $-0.73
+   detik 2 ≥ $1.0: detik 5 93% (n 44; lama 100 / baru 91) • detik 10 84% • lonjakan menit 1 89% • detik 60 80% | KEJAR tutup 10 dtk 42% $-0.29 • 60 dtk 49% $-0.49
+   detik 2 ≥ $2.0: detik 5 100% (n 16; lama None / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk 40% $0.42 • 60 dtk 60% $0.49
+
+## RETAIL (88 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 98% (n 65; lama 97 / baru 100) • detik 10 89% • lonjakan menit 1 88% • detik 60 81% | KEJAR tutup 10 dtk 32% $-0.43 • 60 dtk 42% $-0.27
+   detik 2 ≥ $1.0: detik 5 100% (n 42; lama 100 / baru 100) • detik 10 93% • lonjakan menit 1 93% • detik 60 88% | KEJAR tutup 10 dtk 45% $-0.37 • 60 dtk 48% $-0.17
+   detik 2 ≥ $2.0: detik 5 100% (n 21; lama 100 / baru 100) • detik 10 100% • lonjakan menit 1 100% • detik 60 90% | KEJAR tutup 10 dtk 38% $-0.54 • 60 dtk 43% $-0.38
+
+## RUMAH (30 rilis 2016–2026)
+   detik 2 ≥ $0.5: detik 5 100% (n 6; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 83% | KEJAR tutup 10 dtk 17% $-0.22 • 60 dtk 17% $-0.54
+   detik 2 ≥ $1.0: detik 5 100% (n 3; lama None / baru None) • detik 10 100% • lonjakan menit 1 100% • detik 60 100% | KEJAR tutup 10 dtk None% $None • 60 dtk None% $None
