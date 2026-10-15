@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -51,25 +52,48 @@ import java.util.Locale
 @Composable
 fun StatusCards(prices: Map<String, SignalEvent>, follow: Set<String>) {
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    var prep by remember { mutableStateOf<JSONObject?>(null) }
+    val prep by NewsCache.prep.collectAsState()   // 4.45: tersimpan di HP → langsung tampil
     LaunchedEffect(Unit) {                     // detik berjalan untuk hitung mundur
         while (true) {
             now = System.currentTimeMillis()
             delay(1_000L)
         }
     }
-    LaunchedEffect(Unit) {                     // berita & lonjakan: muat ulang tiap 60 detik (cache di cloud)
-        while (true) {
-            prep = withContext(Dispatchers.IO) { ChatClient.news().third } ?: prep
-            delay(60_000L)
-        }
-    }
+    LaunchedEffect(Unit) { muatBerita() }      // berita & lonjakan: muat ulang (cache di cloud)
     for ((grp, sym) in listOf("XAU" to "XAU/USD", "BTC" to "BTC/USD", "BTC" to "ETH/USD")) {
         if (grp !in follow) continue
         val hb = prices.values.firstOrNull { it.symbol() == sym } ?: continue
         val st = hb.json.optJSONObject("status") ?: continue
         StatusCard(sym, grp == "BTC", hb, st, prep, now)
     }
+}
+
+/**
+ * 4.45: muat ulang berita dari cloud selama layar terbuka — tiap 60 dtk; tiap 20 dtk bila rilis ≤ 15 mnt lagi atau baru lewat
+ * ≤ 10 mnt (Act & hasil cepat tampil); gagal → 5, 10, 20, 40, 60 dtk. Data yang baru saja diambil (< 20 dtk, mis. pindah tab)
+ * tidak diambil ulang. Semua layar memakai satu permintaan bersama (NewsCache).
+ */
+internal suspend fun muatBerita() {
+    var gagal = 0
+    while (true) {
+        val umur = System.currentTimeMillis() - NewsCache.savedAt
+        if (gagal == 0 && umur in 0 until 20_000L) delay(20_000L - umur)
+        val ok = withContext(Dispatchers.IO) { ChatClient.refreshNews() }
+        gagal = if (ok) 0 else gagal + 1
+        delay(if (!ok) minOf(60_000L, 5_000L shl minOf(gagal - 1, 4)) else if (dekatRilis(NewsCache.prep.value)) 20_000L else 60_000L)
+    }
+}
+
+/** Ada berita (kartu / baris di bawah XAU) yang rilis ≤ 15 mnt lagi atau baru lewat ≤ 10 mnt. */
+private fun dekatRilis(prep: JSONObject?): Boolean {
+    val now = Instant.now()
+    fun dekat(t: String?): Boolean = instantOf(t ?: "")?.let {
+        val s = Duration.between(now, it).seconds
+        s in -600..900
+    } ?: false
+    if (dekat(prep?.optJSONObject("pra_satu")?.optString("time"))) return true
+    val b = prep?.optJSONArray("berita") ?: return false
+    return (0 until b.length()).any { dekat(b.optJSONObject(it)?.optString("time")) }
 }
 
 /**
@@ -80,7 +104,9 @@ fun StatusCards(prices: Map<String, SignalEvent>, follow: Set<String>) {
 @Composable
 fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Set<String>) {
     var now by remember { mutableLongStateOf(System.currentTimeMillis()) }
-    var prep by remember { mutableStateOf<JSONObject?>(null) }
+    // 4.45 (pengguna 15 Okt: "news di bawah XAU lama muncul, terkadang tidak muncul, saya mau langsung muncul"): data terakhir
+    // tersimpan di HP langsung tampil; cloud memperbarui di latar (gagal → coba lagi 5/10/20/40 dtk, bukan menunggu 60 dtk)
+    val prep by NewsCache.prep.collectAsState()
     var open by remember { mutableStateOf<String?>(null) }
     LaunchedEffect(Unit) {
         while (true) {
@@ -88,12 +114,7 @@ fun MarketStrip(prices: Map<String, SignalEvent>, connection: String, follow: Se
             delay(1_000L)
         }
     }
-    LaunchedEffect(Unit) {
-        while (true) {
-            prep = withContext(Dispatchers.IO) { ChatClient.news().third } ?: prep
-            delay(60_000L)
-        }
-    }
+    LaunchedEffect(Unit) { muatBerita() }
     // ⚡ 4.40 (14 Okt: tile XAU 4.166 padahal MT5 4.108): harga XAU ikut harga LIVE emas token tiap 5 dtk saat layar terbuka
     var xauLive by remember { mutableStateOf<Pair<Double, Long>?>(null) }
     LaunchedEffect(Unit) {
@@ -201,7 +222,6 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     fun usd(g: Double): String = (if (g < 0) "−" else "+") + "\$" + "%.2f".format(Locale.US, kotlin.math.abs(g)).replace('.', ',')
     val lj = r.optJSONObject("lanjut")
     val ting = lj?.optJSONObject("tingkat")
-    val kj = lj?.optJSONObject("kejar")
     /** Tingkat tertinggi yang ≤ |gerak detik 2| ("0.5", "1.0", "2.0") beserta angkanya. */
     fun tingkatUntuk(g: Double): Pair<String, JSONObject>? = ting?.keys()?.asSequence()
         ?.mapNotNull { k -> k.toDoubleOrNull()?.let { it to k } }?.filter { kotlin.math.abs(g) >= it.first }
@@ -240,10 +260,6 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
         val pNow = o.optJSONObject("p")?.optInt(dtk.toString(), -1)?.takeIf { it > 0 }
         val mn = o.optInt("min")
         val n = o.optInt("n")
-        val kejar = if (d == 2) tingkatUntuk(gd)?.first?.let { k -> kj?.optJSONObject(k)?.optJSONObject("t10") }?.let { q ->
-            val u = q.optInt("untung")
-            if (q.optDouble("rata") < 0) " • ⚠️ masuk sekarang: dulu untung $u% (rata-rata rugi)" else " • masuk sekarang: dulu untung $u%"
-        } ?: "" else ""
         val beda = arah != null && arah != aK
         val tanda = if (mn >= 70) "✅" else "⚠️"
         val inti = when (kurvaJenis) {           // 4.44: kurva menurut tebakan sebelum rilis searah / berlawanan
@@ -255,9 +271,10 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
                 (if (d == 1 && mn < 70) " • detik 1 belum bisa dipercaya, tunggu detik 2" else "") +
                 (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "")
         }
+        // 4.45: info "masuk sekarang" (KEJAR detik 2,5) dibuang — pengguna masuk t−1, keputusan = baris 📍 tahan/tutup
         "⚡ $nama detik $dtk • LIVE $la ${usd(gerak)} (detik $d ${usd(gd)})" +
             (pNow?.let { " • tetap ${if (aK == "naik") "NAIK" else "TURUN"} sekarang $it%" } ?: "") +
-            inti + kejar + abaLive(r, det, aK)
+            inti + abaLive(r, det, aK)
     } else null
     val liveTeks = liveKurva ?: if (g2v != null && gerak != null && ting != null) {
         // ⚡ 4.42: setelah detik 2 → arah = gerak detik 2; keyakinan menurut besar gerak (≥ 85% & n ≥ 10 → ✅ YAKIN)
@@ -271,12 +288,8 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
                 if (d5 >= 85 && n >= 10) " • ✅ YAKIN $d5% s/d detik 5 • menit 1 $m1% ($n rilis)"
                 else " • s/d detik 5 $d5% • menit 1 $m1% ($n rilis)"
             } ?: ""
-            val kejar = t?.first?.let { k -> kj?.optJSONObject(k)?.optJSONObject("t10") }?.let { o ->
-                val u = o.optInt("untung")
-                if (o.optDouble("rata") < 0) " • ⚠️ masuk sekarang: dulu untung $u% (rata-rata rugi)" else " • masuk sekarang: dulu untung $u%"
-            } ?: ""
             val beda = arah != null && arah != a2
-            "⚡ $nama detik $dtk • LIVE emas $la ${usd(gerak)} (detik 2 ${usd(g2v)})$yakin$kejar" +
+            "⚡ $nama detik $dtk • LIVE emas $la ${usd(gerak)} (detik 2 ${usd(g2v)})$yakin" +
                 (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "") + abaLive(r, det, a2)
         }
     } else gerak?.let { g ->
@@ -302,6 +315,17 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
         else -> "$nama +${(det / 60).toInt()} mnt • di luar jangka uji (5 mnt)"
     }
     Text(arahBerwarna(teks), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.ExtraBold, maxLines = 3)
+    // 📍 4.45 (pengguna 15 Okt: "entry 1 detik sebelum release, bertahan 1 detik hingga 1–3 menit; entry di detik 2 pasti
+    // telat"): posisi yang SUDAH dibuka t−1 → di detik 1/2 tahan atau tutup, untuk BUY & SELL (research/masuk_pra.py)
+    for ((t, jenis) in posisiBaris(r, det, g1v, g2v)) {
+        val w = when (jenis) {
+            "BUY" -> BuyColor
+            "SELL" -> SellColor
+            "lawan" -> Gold
+            else -> Muted
+        }
+        Text(t, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, color = w, maxLines = 3)
+    }
     if (jendela) {
         val info = when {
             live.isEmpty() -> "⚡ LIVE: menghubungi bursa emas token…"
@@ -311,6 +335,75 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
         }
         Text(info, style = MaterialTheme.typography.labelSmall, color = Muted, maxLines = 2)
     }
+}
+
+/**
+ * 📍 4.45 Gaya masuk 1 dtk sebelum rilis (cloud pra_satu.t1 & lanjut.posisi, research/masuk_pra.py, tick asli Exness 2016–2026):
+ * T−15…0 dtk = siap/MASUK (hanya bila tebakan t−1 tidak "jangan"); detik 0–1 = tahan dulu; detik 1/2 = emas bergerak ≥ $X
+ * SEARAH posisi → untung% bila tahan 30 dtk / 1 mnt / 3 mnt, BERLAWANAN → seberapa sering kembali untung bila ditahan (kecil →
+ * TUTUP); hampir diam (< $0,30) → rata-rata rugi ±spread. Baris untuk posisi tebakan sebelum rilis tampil lebih dulu.
+ * Hasil: (teks, jenis warna "BUY" / "SELL" / "lawan" / "info").
+ */
+private fun posisiBaris(r: JSONObject, det: Double, g1: Double?, g2: Double?): List<Pair<String, String>> {
+    if (det < -15 || det > 180) return emptyList()
+    fun usd(g: Double): String = (if (g < 0) "−" else "+") + "\$" + "%.2f".format(Locale.US, kotlin.math.abs(g)).replace('.', ',')
+    if (det < 0) {
+        val t = r.optJSONObject("t1") ?: return emptyList()
+        val st = t.optString("status")
+        val pos = if (t.optString("arah") == "naik") "BUY" else "SELL"
+        val w60 = t.optJSONObject("tahan")?.optInt("60", -1)?.takeIf { it >= 0 }
+        return if ((st == "teruji" || st == "belum terbukti") && t.optString("arah").isNotBlank())
+            listOf("📍 ${if (det >= -3) "MASUK" else "Siap"} $pos t−1 ${if (st == "teruji") "✅" else "⚠️ belum terbukti"}" +
+                (w60?.let { " • tahan 1 mnt dulu untung $it%" } ?: "") to pos)
+        else if (st == "belum diuji") listOf("📍 t−1 $pos: belum diuji untuk tebakan ini → hati-hati, putuskan di detik 2" to "info")
+        else listOf("📍 t−1: jangan masuk — ${t.optString("teks").substringAfter("— ", "tanpa tebakan teruji")}" to "info")
+    }
+    val ps = r.optJSONObject("lanjut")?.optJSONObject("posisi") ?: return emptyList()
+    val d = if (det >= 2 && g2 != null) 2 else if (det >= 1 && g1 != null) 1 else
+        // harga LIVE detik 1/2 belum/tidak tercatat (mis. aplikasi baru dibuka setelah rilis) → tanpa saran setelah detik 3
+        return if (det < 3) listOf("📍 Posisi t−1: tahan dulu — putuskan di detik 2 (tutup di detik 1 = rugi spread)" to "info")
+        else emptyList()
+    val g = (if (d == 2) g2 else g1) ?: return emptyList()
+    val tab = ps.optJSONObject(d.toString()) ?: return emptyList()
+    val ag = kotlin.math.abs(g)
+    fun wr(o: JSONObject?, h: String): Int? = o?.optJSONArray(h)?.optInt(0)
+    if (ag < 0.3) {
+        val w = wr(tab.optJSONObject("kecil"), "180") ?: return emptyList()
+        return listOf("📍 Emas hampir diam di detik $d (${usd(g)}) → posisi t−1 rata-rata rugi ±spread; ditahan s/d 3 mnt " +
+            "hanya $w% balik untung" to "info")
+    }
+    val key = listOf(2.0, 1.0, 0.5, 0.3).filter { ag >= it }.map { "%.1f".format(Locale.US, it) }
+        .firstOrNull { tab.optJSONObject("s|$it") != null && tab.optJSONObject("l|$it") != null } ?: return emptyList()
+    val sa = tab.optJSONObject("s|$key")
+    val la = tab.optJSONObject("l|$key")
+    val naik = g > 0
+    val pS = if (naik) "BUY" else "SELL"
+    val pL = if (naik) "SELL" else "BUY"
+    val w30 = wr(sa, "30")
+    val w60 = wr(sa, "60") ?: 0
+    val w180 = wr(sa, "180")
+    val semua = if (sa?.optString("g") == "SEMUA") " (semua berita)" else ""
+    // detik 1 belum bisa dipercaya untuk berita ini (mis. CPI/FOMC: searah bertahan 1 mnt ±58–64%) → tunggu detik 2
+    if (d == 1 && w60 < 70) return listOf("📍 Detik 1 ${usd(g)} belum pasti (searah bertahan 1 mnt hanya $w60%) → " +
+        "putuskan di detik 2" to "info")
+    val tahan = when {
+        w60 >= 70 -> "TAHAN s/d 1–3 mnt: untung 30 dtk $w30% • 1 mnt $w60% • 3 mnt $w180%"
+        w60 >= 55 -> "tahan ⚠️: untung 30 dtk $w30% • 1 mnt $w60% • 3 mnt $w180%"
+        else -> "belum pasti (1 mnt $w60%)" + if (d == 1) " → putuskan di detik 2" else " → tutup bila berbalik"
+    }
+    val lw = wr(la, "60") ?: 50
+    val tutup = when {
+        lw <= 30 -> "TUTUP SEKARANG: ditahan s/d 1 mnt hanya $lw% balik untung"
+        lw <= 45 -> "lebih baik tutup: ditahan s/d 1 mnt $lw% balik untung"
+        else -> "≈ lempar koin ($lw% balik untung)" + if (d == 1) " → putuskan di detik 2" else ""
+    }
+    val baris = listOf("📍 $pS t−1 (searah ${usd(g)}) → $tahan$semua" to pS, "📍 $pL t−1 (berlawanan) → $tutup" to "lawan")
+    val tebak = when (r.optString("arah")) {
+        "naik" -> "BUY"
+        "turun" -> "SELL"
+        else -> pS
+    }
+    return if (tebak == pL) baris.reversed() else baris
 }
 
 /** 💥 + ⚡: posisi modal kecil berlawanan dengan arah LIVE → tutup segera; searah → aba-aba biasa. */
@@ -610,13 +703,32 @@ private fun StripSatu(r: JSONObject) {
             Text(arahBerwarna(teks), Modifier.weight(1f), style = MaterialTheme.typography.labelMedium, maxLines = 2)
             Text(if (buka) "▴" else "▾", color = Muted, style = MaterialTheme.typography.labelMedium)
         }
+        // 📍 4.45 (pengguna 15 Okt: "entry 1 detik sebelum rilis, bertahan 1 detik hingga 1–3 menit"): untung% masuk t−1 searah
+        // tebakan lalu tahan 30 dtk–1 mnt (spread asli Exness, research/masuk_pra.py) — selalu tampil di bawah baris utama
+        r.optJSONObject("t1")?.let { t ->
+            val warna = when (t.optString("status")) {
+                "teruji" -> BuyColor
+                "belum terbukti" -> Gold
+                else -> Muted
+            }
+            Text(t.optString("teks"), style = MaterialTheme.typography.labelSmall, color = warna, fontWeight = FontWeight.Bold,
+                maxLines = 2)
+        }
         if (buka) Text(r.optString("bukti"), style = MaterialTheme.typography.labelSmall, color = Muted)
     }
 }
 
 @Composable
 private fun StripPra(prep: JSONObject?) {
-    val satu = prep?.optJSONObject("pra_satu")
+    // 4.45: data tersimpan di HP bisa sudah lewat (rilis > 10 mnt lalu) → pakai berita berikutnya dari daftar sambil menunggu
+    // pembaruan cloud, supaya baris di bawah XAU tidak hilang
+    val kini = Instant.now()
+    val segar = prep?.optJSONObject("pra_satu")?.takeIf { s ->
+        instantOf(s.optString("time"))?.let { it.isAfter(kini.minusSeconds(600)) } ?: true
+    }
+    val satu = segar ?: prep?.optJSONArray("pra_daftar")?.let { d ->
+        (0 until d.length()).mapNotNull { d.optJSONObject(it) }.firstOrNull { instantOf(it.optString("time"))?.isAfter(kini) == true }
+    }
     if (satu != null) {
         StripSatu(satu)
         return

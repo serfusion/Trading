@@ -61,6 +61,9 @@ class Toko(dict):
     def get_state(self, r="main"):
         return json.loads(json.dumps(self.get(r, {})))
 
+    def get_many(self, rows):                     # 15 Okt: GET membaca semua baris sekaligus (chat.MemoStore)
+        return {r: json.loads(json.dumps(self[r])) for r in rows if r in self}
+
     def save_state(self, d, r="main"):
         self[r] = json.loads(json.dumps(d, default=str))
 
@@ -220,6 +223,10 @@ def test_simulasi_okt_nov_tanpa_galat_dan_satu_arah(sim):
                     masalah.append(f"{now} arah_detik < 50% {ad}")
         masalah += [f"{now} arah ganda {t}: {s}" for t, s in per.items() if len(s) > 1]
         ps = p.get("pra_satu") or {}
+        # 15 Okt (pengguna "news di bawah XAU terkadang tidak muncul"): baris XAU + 📍 masuk t−1 selalu ada, tanpa galat
+        if not ps.get("teks") or not (ps.get("t1") or {}).get("teks") or "pra_galat" in p or p.get("dilewati"):
+            masalah.append(f"{now} baris XAU kurang: {ps.get('teks')} t1={ps.get('t1')} galat={p.get('pra_galat')} "
+                           f"dilewati={p.get('dilewati')}")
         if ps.get("time") in per and per[ps["time"]] != {ps.get("arah")}:
             masalah.append(f"{now} pra_satu {ps.get('teks')} ≠ kartu {per[ps['time']]}")
         if ps.get("arah") and (ps.get("persen") or 0) < 50:

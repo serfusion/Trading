@@ -144,6 +144,7 @@ private fun PeringkatList(daftar: org.json.JSONArray, keterangan: String) {
             r.optJSONObject("lama")?.let { l ->
                 if (l.has("wr")) append(" • s.d. 2021: ${fmt(l.optDouble("wr"), 0)}%")
                 if (l.has("avg") && satuan == "R") append(" ${signed(l.optDouble("avg"))}R".replace('.', ','))
+                if (l.has("avg") && !l.isNull("avg") && satuan == "\$/oz") append(" ${signed(l.optDouble("avg"))} \$/oz".replace('.', ','))
             }
             when (r.optString("status")) {
                 "label" -> append(" • label"); "kandidat" -> append(" • kandidat, belum terbukti")
@@ -162,9 +163,14 @@ private fun PeringkatList(daftar: org.json.JSONArray, keterangan: String) {
                 }
             }
             if (avg != null && !avg.isNaN()) {
-                val txt = if (satuan == "%") "${signed(avg)}%" else "${signed(avg)}R"
+                // 4.45: 📍 masuk t−1 dalam $/ons (USD per 0,01 lot)
+                val txt = when (satuan) {
+                    "%" -> "${signed(avg)}%"
+                    "\$/oz" -> "${signed(avg)} \$/oz"
+                    else -> "${signed(avg)}R"
+                }
                 Text(txt.replace('.', ','), fontWeight = FontWeight.ExtraBold,
-                    color = if (avg < (if (satuan == "%") 0.0 else 0.05)) SellColor else BuyColor,
+                    color = if (avg < (if (satuan == "R") 0.05 else 0.0)) SellColor else BuyColor,
                     style = MaterialTheme.typography.labelLarge)
             } else if (wr != null && satuan == "akurasi") {
                 Text("${fmt(wr, 0)}%", fontWeight = FontWeight.ExtraBold, color = Gold,

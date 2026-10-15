@@ -12,9 +12,11 @@ POST /api/chat {"ikuti": {"platform", "id", "name", "url", "on": true|false}} ->
 Header wajib: X-Chat-Key: <CHAT_KEY>, atau (bila CHAT_KEY kosong) topik ntfy yang sama dengan aplikasi.
 Balasan: {"ok": true, "reply": "...", "sources": [], "model": "data (tanpa AI)"}
 """
+import copy
 import json
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler
 
@@ -32,6 +34,40 @@ import _persiapan  # noqa: E402
 import _tren  # noqa: E402
 
 TREN_TTL = timedelta(hours=3)
+# 15 Okt 2026 (pengguna: "news di bawah XAU lama muncul, terkadang tidak muncul, saya mau langsung muncul"): GET membaca ±20
+# baris Supabase SATU PER SATU (tiap baca = 1 perjalanan Vercel ↔ Supabase) → kini dibaca sekaligus dalam 1 permintaan.
+BARIS_GET = ("kalender", "aktual", "arsip", "tren", "kalshi", "kalshi_sebaran", "polymarket", "polymarket_fed", "hari_h",
+             "pernyataan", "prarilis", "petunjuk", "petunjuk_sumber", "nfp_titik", "cpi_detik", "cpi_tren", "ppi_wti",
+             "ppi_cpi", "pra_tren", "sentimen", "hasil_rilis", "pudar", "pudar_btc", "perang")
+# langkah INFO yang boleh dilewati bila GET sudah lama (aplikasi menunggu maks 40 dtk; isi lain tetap terkirim)
+ANGGARAN_DTK = 20.0
+
+
+class MemoStore:
+    """Supabase dengan baca sekaligus di awal permintaan; get_state melayani dari memori (salinan), save_state menulis ke
+    Supabase + memori. Gagal baca sekaligus → kembali ke baca per baris (perilaku lama)."""
+
+    def __init__(self, store, rows=BARIS_GET):
+        self.store, self.memo, self.ada = store, {}, set()
+        try:
+            self.memo = store.get_many(rows)
+            self.ada = set(rows)
+        except Exception:  # noqa: BLE001 - opsional, baca per baris
+            self.memo, self.ada = {}, set()
+
+    def get_state(self, row: str = "main") -> dict:
+        if row not in self.ada:
+            self.memo[row] = self.store.get_state(row) or {}
+            self.ada.add(row)
+        return copy.deepcopy(self.memo.get(row) or {})
+
+    def save_state(self, data: dict, row: str = "main") -> None:
+        self.store.save_state(data, row)
+        self.memo[row] = copy.deepcopy(data)
+        self.ada.add(row)
+
+    def __getattr__(self, name):          # log, get_control, … diteruskan
+        return getattr(self.store, name)
 
 
 def _states() -> tuple[dict, dict]:
@@ -68,14 +104,14 @@ def _calendar(store, now: datetime) -> list | None:
         return _chat.fetch_calendar()
 
 
-def _tren_status(now: datetime) -> dict:
+def _tren_status(now: datetime, store=None) -> dict:
     """Status tren per indikator (tab News), cache 3 jam di baris Supabase 'tren' (hemat kuota Twelve Data)."""
     env = os.environ
     if not env.get("TWELVEDATA_API_KEY"):
         return {}
-    store = None
-    if env.get("SUPABASE_URL") and env.get("SUPABASE_SERVICE_KEY"):
+    if store is None and env.get("SUPABASE_URL") and env.get("SUPABASE_SERVICE_KEY"):
         store = _core.Supabase(env["SUPABASE_URL"], env["SUPABASE_SERVICE_KEY"])
+    if store is not None:
         try:
             cached = store.get_state("tren") or {}
             if cached.get("dihitung") and now - datetime.fromisoformat(cached["dihitung"]) < TREN_TTL:
@@ -185,11 +221,23 @@ class handler(BaseHTTPRequestHandler):
             return
         try:
             now = datetime.now(timezone.utc)
+            mulai = time.monotonic()
+            dilewati: list[str] = []
+
+            def sempat(nama: str) -> bool:
+                """Langkah INFO dijalankan hanya bila GET belum melewati anggaran (baris XAU harus cepat sampai)."""
+                if time.monotonic() - mulai <= ANGGARAN_DTK:
+                    return True
+                dilewati.append(nama)
+                return False
+
+            store = _store()
+            if store is not None:
+                store = MemoStore(store)
             try:
-                tren = _tren_status(now)
+                tren = _tren_status(now, store)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim walau status tren gagal
                 tren = {"error": _arsip.redact(f"{type(exc).__name__}: {exc}")}
-            store = _store()
             rows = _calendar(store, now)
             try:
                 persiapan = _persiapan.cards(rows, now)     # 🎯 kartu persiapan berita (pengganti contoh pertanyaan)
@@ -238,12 +286,14 @@ class handler(BaseHTTPRequestHandler):
                 except Exception:  # noqa: BLE001 - opsional
                     pass
                 try:                                          # 🎲 CPI dst. sebelum konsensus terbit: sebaran pasar Kalshi
-                    _kalshi.mendatang(persiapan.get("mendatang") or [], store, now)
+                    if sempat("kalshi_mendatang"):
+                        _kalshi.mendatang(persiapan.get("mendatang") or [], store, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
                 try:                                          # 🗣️ pernyataan Fed/Trump/pemerintah terbaru (_pernyataan.py)
                     import _pernyataan
-                    _pernyataan.attach(persiapan, store, now, os.environ)
+                    if sempat("pernyataan"):
+                        _pernyataan.attach(persiapan, store, now, os.environ)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict) and os.environ.get("PRARILIS", "1") == "1":
@@ -280,7 +330,8 @@ class handler(BaseHTTPRequestHandler):
             if isinstance(persiapan, dict):
                 try:                                          # 👥 sentimen orang (_sentimen.py, info saja, 14 Okt 2026)
                     import _sentimen
-                    _sentimen.attach(persiapan, store, now)
+                    if sempat("sentimen"):
+                        _sentimen.attach(persiapan, store, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
@@ -291,27 +342,43 @@ class handler(BaseHTTPRequestHandler):
                         store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(24, "15min"), sisa)) \
                         if key and os.environ.get("PRA_TREN", "1") == "1" else None
                     _pra_aset.attach(persiapan, now, tren_fn)
-                except Exception:  # noqa: BLE001 - opsional
-                    pass
+                except Exception as exc:  # noqa: BLE001 - opsional (alasan dicatat untuk diagnosa)
+                    persiapan["pra_galat"] = _arsip.redact(f"{type(exc).__name__}: {exc}")[:200]
                 try:                                          # 🔗 keterkaitan berita sebelumnya (_keterkaitan.py, 15 Okt)
                     import _keterkaitan
                     _keterkaitan.attach(persiapan, calendar, store, now)
                 except Exception:  # noqa: BLE001 - info opsional
                     pass
+                try:                                          # 15 Okt: baris di bawah XAU SELALU ada (cadangan ≈ 50%)
+                    import _pra_aset
+                    _pra_aset.cadangan(persiapan, now)
+                except Exception:  # noqa: BLE001
+                    pass
+                try:                                          # 📍 gaya masuk t−1 dtk + ⚡LIVE tahan/tutup (_masuk_pra.py)
+                    import _masuk_pra
+                    _masuk_pra.attach(persiapan)
+                except Exception:  # noqa: BLE001 - info opsional
+                    pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
-                    and os.environ.get("FADE_WARNING", "1") == "1":
+                    and os.environ.get("FADE_WARNING", "1") == "1" and sempat("pudar"):
                 try:                                          # 📉 lonjakan memudar? (sisa lonjakan menit 30/60)
                     key = os.environ["TWELVEDATA_API_KEY"]
                     _pudar.attach(persiapan, store, now, _pudar.fetch_twelvedata(key),
                                   _pudar.fetch_twelvedata(key, "BTC/USD"))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
-            try:                                              # arsip berita ke GitHub (tiap aplikasi dibuka)
-                arsip = _arsip.save(rows, calendar, now, store, os.environ)
-            except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
-                arsip = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {str(exc)[:160]}")}
+            if sempat("arsip"):
+                try:                                          # arsip berita ke GitHub (tiap aplikasi dibuka)
+                    arsip = _arsip.save(rows, calendar, now, store, os.environ)
+                except Exception as exc:  # noqa: BLE001 - arsip tidak boleh mengganggu kalender
+                    arsip = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {str(exc)[:160]}")}
+            else:
+                arsip = {"status": "dilewati (GET lama; dicoba lagi saat aplikasi memuat ulang)"}
             if isinstance(persiapan, dict):
                 persiapan["arsip"] = arsip                    # ditampilkan di kartu 🎯 (cek token tanpa curl)
+                persiapan["waktu_dtk"] = round(time.monotonic() - mulai, 1)
+                if dilewati:
+                    persiapan["dilewati"] = dilewati
             self._send(200, {"ok": True, "calendar": calendar, "tren": tren, "persiapan": persiapan,
                              "arsip": arsip, "aktual": aktual})
         except Exception as exc:  # noqa: BLE001

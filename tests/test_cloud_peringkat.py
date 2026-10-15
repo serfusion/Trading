@@ -22,7 +22,10 @@ def test_struktur_dan_urutan():
     assert nomor == list(range(1, len(nomor) + 1))              # nomor urut tanpa loncat
     sig = [r for r in rows if r["grup"] == "sinyal"]
     assert [r["avg"] for r in sig] == sorted((r["avg"] for r in sig), reverse=True)   # profit dulu
-    assert all(r["satuan"] == "akurasi" for r in rows if r["grup"] == "info" and "Sinyal trader" not in r["label"])
+    # info = akurasi; 📍 masuk t−1 (15 Okt 2026, research/masuk_pra.py) = untung $/ons setelah spread asli
+    assert all(r["satuan"] == "akurasi" or (r["satuan"] == "$/oz" and r["label"].startswith("📍"))
+               for r in rows if r["grup"] == "info" and "Sinyal trader" not in r["label"])
+    assert any(r["label"].startswith("📍") for r in rows)
     grup = [r["grup"] for r in rows]
     assert grup == sorted(grup, key=["sinyal", "spot", "info", "filter"].index)       # grup tidak bercampur
 

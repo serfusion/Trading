@@ -307,6 +307,21 @@
   },
   {
    "grup": "info",
+   "label": "📍 Posisi t−1, emas detik 2 ≥ $0,50 SEARAH posisi → tahan 1 mnt",
+   "n": 829,
+   "wr": 79.0,
+   "avg": 2.53,
+   "satuan": "$/oz",
+   "status": "dikirim",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 79
+   },
+   "catatan": "sejak Okt 2021 78% • 30 dtk 82% • 3 mnt 77% • BERLAWANAN: ditahan 1 mnt hanya 14% balik untung (rata-rata -3,24 vs tutup detik 3 -2,90 $/oz) → tutup",
+   "peringkat": 20
+  },
+  {
+   "grup": "info",
    "label": "🔗 Rilis bersamaan berlawanan: emas ikut NFP, bukan pengangguran (menit 1)",
    "n": 66,
    "wr": 75.8,
@@ -318,7 +333,23 @@
     "wr": 84.1
    },
    "catatan": "sejak Okt 2021 59% • NFP vs upah sejak 2021 50% → ≈ 50:50 • Retail vs PPI 67% (12 rilis) • CPI inti vs tahunan 54% → ≈ 50:50 (research/rilis_gabung,py)",
-   "peringkat": 20
+   "peringkat": 21
+  },
+  {
+   "grup": "info",
+   "label": "📍 Masuk 1 dtk sebelum CPI searah tebakan NAIK, tahan 1 mnt (lot biasa)",
+   "n": 53,
+   "wr": 74.0,
+   "avg": 2.81,
+   "satuan": "$/oz",
+   "status": "kandidat",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 73,
+    "avg": -0.05
+   },
+   "catatan": "sejak Okt 2021 74% (+5,56 $/oz) • tutup di detik 1 21% • spread asli Exness saat berita",
+   "peringkat": 22
   },
   {
    "grup": "info",
@@ -333,7 +364,7 @@
     "wr": 61.9
    },
    "catatan": "sejak Okt 2021 84%; setelah CPI inti bulan sama: angka per arah situasi (searah/sesuai/berlawanan), berlawanan → ≈ 50:50",
-   "peringkat": 21
+   "peringkat": 23
   },
   {
    "grup": "info",
@@ -348,7 +379,7 @@
     "wr": 65
    },
    "catatan": "sejak Okt 2021 73% • pembanding selalu-TURUN 49%",
-   "peringkat": 22
+   "peringkat": 24
   },
   {
    "grup": "info",
@@ -363,7 +394,7 @@
     "wr": 53.6
    },
    "catatan": "sejak Okt 2021 81%, 2024+ 95% (NAIK 18/19); tebakan TURUN saat emas tren naik = ⚠️ lemah 62% (29 rilis)",
-   "peringkat": 23
+   "peringkat": 25
   },
   {
    "grup": "info",
@@ -375,7 +406,23 @@
    "status": "info",
    "periode": "2010–2026",
    "catatan": "angka ikut 58–72% tetapi arah emas paling tinggi 65% (CPI m/m → Core CPI m/m); emas ±20% + 60% × angka tertebak (research/keterkaitan,py)",
-   "peringkat": 24
+   "peringkat": 26
+  },
+  {
+   "grup": "info",
+   "label": "📍 Masuk 1 dtk sebelum PPI searah tebakan NAIK, tahan 1 mnt (lot biasa)",
+   "n": 31,
+   "wr": 65.0,
+   "avg": 1.22,
+   "satuan": "$/oz",
+   "status": "kandidat",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 50,
+    "avg": 0.42
+   },
+   "catatan": "sejak Okt 2021 76% (+1,89 $/oz) • tutup di detik 1 19% • spread asli Exness saat berita",
+   "peringkat": 27
   },
   {
    "grup": "info",
@@ -387,7 +434,7 @@
    "status": "kandidat",
    "periode": "2012–2021",
    "catatan": "uji maju sejak 7 Okt 2026: 0/0 naik; lolos bila n ≥ 30 & ≥ 58%",
-   "peringkat": 25
+   "peringkat": 28
   },
   {
    "grup": "info",
@@ -403,7 +450,7 @@
     "wr": 57.7
    },
    "catatan": "dasar naik 57.9%",
-   "peringkat": 26
+   "peringkat": 29
   },
   {
    "grup": "info",
@@ -418,7 +465,7 @@
     "wr": 72.0
    },
    "catatan": "aturan ⚡ sangat kuat (72% s.d. 2021 / 61% sejak Okt 2021)",
-   "peringkat": 27
+   "peringkat": 30
   },
   {
    "grup": "info",
@@ -430,7 +477,7 @@
    "status": "info",
    "periode": "2001–2026",
    "catatan": "info ekonomi, bukan arah emas; dasar 47%",
-   "peringkat": 28
+   "peringkat": 31
   },
   {
    "grup": "info",
@@ -445,7 +492,7 @@
     "wr": 59
    },
    "catatan": "sejak Okt 2021 61% • pembanding selalu-NAIK 51%",
-   "peringkat": 29
+   "peringkat": 32
   },
   {
    "grup": "info",
@@ -461,7 +508,7 @@
     "wr": 72.3
    },
    "catatan": "dasar naik 46.3%",
-   "peringkat": 30
+   "peringkat": 33
   },
   {
    "grup": "info",
@@ -476,7 +523,7 @@
     "wr": 60
    },
    "catatan": "sejak Okt 2021 50% • pembanding selalu-NAIK 48%",
-   "peringkat": 31
+   "peringkat": 34
   },
   {
    "grup": "info",
@@ -491,7 +538,7 @@
     "wr": 55
    },
    "catatan": "sejak Okt 2021 61% • pembanding selalu-TURUN 52%",
-   "peringkat": 32
+   "peringkat": 35
   },
   {
    "grup": "info",
@@ -507,7 +554,23 @@
     "wr": 65.4
    },
    "catatan": "dasar naik 55.9%",
-   "peringkat": 33
+   "peringkat": 36
+  },
+  {
+   "grup": "info",
+   "label": "📍 Masuk 1 dtk sebelum PPI searah tebakan TURUN, tahan 1 mnt (lot biasa)",
+   "n": 38,
+   "wr": 55.0,
+   "avg": 0.03,
+   "satuan": "$/oz",
+   "status": "lemah",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 50,
+    "avg": -0.16
+   },
+   "catatan": "sejak Okt 2021 61% (+0,24 $/oz) • tutup di detik 1 13% • spread asli Exness saat berita",
+   "peringkat": 37
   },
   {
    "grup": "info",
@@ -522,7 +585,23 @@
     "wr": 51.7
    },
    "catatan": "sejak Okt 2021 59%; setelah CPI inti bulan sama: angka per arah situasi (searah/sesuai/berlawanan), berlawanan → ≈ 50:50",
-   "peringkat": 34
+   "peringkat": 38
+  },
+  {
+   "grup": "info",
+   "label": "📍 Masuk 1 dtk sebelum CPI searah tebakan TURUN, tahan 1 mnt (lot biasa)",
+   "n": 38,
+   "wr": 42.0,
+   "avg": -2.0,
+   "satuan": "$/oz",
+   "status": "lemah",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 43,
+    "avg": -0.02
+   },
+   "catatan": "sejak Okt 2021 42% (-3,15 $/oz) • tutup di detik 1 18% • spread asli Exness saat berita",
+   "peringkat": 39
   },
   {
    "grup": "info",
@@ -534,7 +613,7 @@
    "status": "tidak lolos",
    "periode": "30 hari terakhir (potret)",
    "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
-   "peringkat": 35
+   "peringkat": 40
   },
   {
    "grup": "filter",

@@ -354,3 +354,8 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
 - 14 Okt ("tutup kertas sebelum rilis", "cari aturan sebelum rilis dan pasang"): poin 🧾 tutup kertas sebelum rilis (CPI/PPI) +
   `research/aturan_pra.py` (±40 rb aturan, tutup kertas 53% = acak → 0 lolos; angka uji tampil di poin 🧾 berita tanpa tebakan).
 
+- 15 Okt ("entry 1 detik sebelum release, bertahan 1 detik hingga 1–3 menit; news di bawah XAU lama/tidak muncul"):
+  `research/masuk_pra.py` (tick asli Exness 1.627 rilis) → docs/MASUK_PRA.md. Masuk t−1 tutup detik 1 untung 16–27%; searah
+  tebakan tahan 30 dtk–1 mnt 58–62% (LAMA impas); kuat hanya keputusan detik 2 (searah ≥ $0,50 → tahan 1 mnt 79%, berlawanan →
+  14% balik untung → tutup). Aplikasi 4.45: 📍 baris t−1 & tahan/tutup BUY/SELL, NewsCache (tampil instan dari HP, satu GET
+  bersama, ulang cepat), cloud baca Supabase sekaligus + anggaran 20 dtk langkah info + pra_satu cadangan.

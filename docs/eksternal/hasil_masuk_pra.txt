@@ -1,0 +1,424 @@
+# ⏱️ Masuk 1 detik SEBELUM rilis, tahan 1 detik s/d 3 menit (research/masuk_pra.py)
+python -m research.masuk_pra            → cloud/api/masuk_pra.json + docs/eksternal/hasil_masuk_pra.txt
+rilis bertick Exness: 1627 jam rilis, 1627 baris (rilis × grup); bertebakan 281 ({'CPI': 91, 'GDP': 34, 'ISM': 87, 'PPI': 69}) — berita lain tanpa tebakan (aplikasi: ≈ 50:50)
+spread saat masuk (t0−1): median $0.26, P90 $0.60, maks $8.00
+pembanding selalu BUY t−1, semua rilis LAMA (n 881): 1s 9% -0.50 • 2s 19% -0.53 • 5s 26% -0.46 • 10s 29% -0.45 • 30s 30% -0.50 • 60s 33% -0.46 • 180s 39% -0.39
+pembanding selalu BUY t−1, semua rilis BARU (n 746): 1s 32% -0.26 • 2s 41% -0.34 • 5s 44% -0.33 • 10s 44% -0.27 • 30s 47% -0.16 • 60s 46% -0.16 • 180s 48% -0.08
+pembanding selalu BUY t−1, bertebakan LAMA (n 141): 1s 16% -0.43 • 2s 33% -0.43 • 5s 43% -0.33 • 10s 44% -0.38 • 30s 41% -0.38 • 60s 49% -0.36 • 180s 45% -0.10
+pembanding selalu BUY t−1, bertebakan BARU (n 140): 1s 34% -0.07 • 2s 54% +0.51 • 5s 55% +0.57 • 10s 53% +0.98 • 30s 55% +1.26 • 60s 56% +1.51 • 180s 56% +1.73
+tanpa tebakan, masuk t−1 arah acak (semua jam rilis): 5s -0.37 • 30s -0.37 • 60s -0.37 • 180s -0.32
+
+## SEMUA: masuk t−1 searah tebakan, tahan tetap (n 281)
+   tahan | tebakan untung% rata $ (t) | selalu BUY untung% rata $ | acak rata $ | LAMA tebakan | BARU tebakan | tebakan NAIK | tebakan TURUN
+      1s | 27% -0.05 (t -0.5) | 25% -0.25 | -0.35 | 17% -0.27 (n 141) | 37% +0.18 (n 140) | 29% +0.05 (n 146) | 25% -0.15 (n 135)
+      2s | 46% +0.32 (t 2.0) | 43% +0.04 | -0.40 | 33% -0.25 (n 141) | 59% +0.89 (n 140) | 53% +0.71 (n 146) | 39% -0.10 (n 135)
+      3s | 49% +0.48 (t 2.1) | 48% +0.11 | -0.38 | 39% -0.12 (n 141) | 59% +1.09 (n 140) | 57% +0.91 (n 146) | 40% +0.01 (n 135)
+      5s | 53% +0.60 (t 2.1) | 49% +0.12 | -0.38 | 43% -0.04 (n 141) | 64% +1.24 (n 140) | 59% +1.03 (n 146) | 47% +0.12 (n 135)
+     10s | 55% +0.61 (t 1.8) | 48% +0.30 | -0.36 | 46% -0.03 (n 141) | 64% +1.25 (n 140) | 60% +1.20 (n 146) | 49% -0.03 (n 135)
+     20s | 56% +0.55 (t 1.5) | 49% +0.43 | -0.35 | 49% +0.05 (n 141) | 63% +1.06 (n 140) | 59% +1.27 (n 146) | 53% -0.23 (n 135)
+     30s | 58% +0.64 (t 1.8) | 48% +0.44 | -0.36 | 54% +0.06 (n 141) | 62% +1.21 (n 140) | 59% +1.37 (n 146) | 57% -0.16 (n 135)
+     60s | 58% +0.48 (t 1.2) | 52% +0.57 | -0.36 | 53% +0.00 (n 141) | 62% +0.96 (n 140) | 62% +1.34 (n 146) | 53% -0.46 (n 135)
+     90s | 54% +0.55 (t 1.4) | 50% +0.62 | -0.32 | 49% +0.04 (n 141) | 59% +1.07 (n 140) | 58% +1.43 (n 146) | 50% -0.40 (n 135)
+    120s | 51% +0.58 (t 1.5) | 51% +0.68 | -0.32 | 46% +0.02 (n 141) | 56% +1.15 (n 140) | 57% +1.51 (n 146) | 45% -0.43 (n 135)
+    180s | 53% +0.61 (t 1.5) | 51% +0.81 | -0.31 | 50% +0.00 (n 141) | 57% +1.23 (n 140) | 58% +1.66 (n 146) | 48% -0.52 (n 135)
+
+## SEMUA: masuk t−1 + aturan kelola (untung% rata $/ons; LAMA / BARU; NAIK / TURUN = arah tebakan)
+   tahan tetap                              s/d  10s | tebakan 55% +0.61 (n 281) | LAMA 46% -0.03 / BARU 64% +1.25 | NAIK 60% +1.20 / TURUN 49% -0.03 | selalu BUY LAMA 44% -0.38 / BARU 53% +0.98 | acak -0.36
+   tahan tetap                              s/d  30s | tebakan 58% +0.64 (n 281) | LAMA 54% +0.06 / BARU 62% +1.21 | NAIK 59% +1.37 / TURUN 57% -0.16 | selalu BUY LAMA 41% -0.38 / BARU 55% +1.26 | acak -0.36
+   tahan tetap                              s/d  60s | tebakan 58% +0.48 (n 281) | LAMA 53% +0.00 / BARU 62% +0.96 | NAIK 62% +1.34 / TURUN 53% -0.46 | selalu BUY LAMA 49% -0.36 / BARU 56% +1.51 | acak -0.36
+   tahan tetap                              s/d 120s | tebakan 51% +0.58 (n 281) | LAMA 46% +0.02 / BARU 56% +1.15 | NAIK 57% +1.51 / TURUN 45% -0.43 | selalu BUY LAMA 45% -0.16 / BARU 56% +1.53 | acak -0.32
+   tahan tetap                              s/d 180s | tebakan 53% +0.61 (n 281) | LAMA 50% +0.00 / BARU 57% +1.23 | NAIK 58% +1.66 / TURUN 48% -0.52 | selalu BUY LAMA 45% -0.10 / BARU 56% +1.73 | acak -0.31
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  10s | tebakan 53% +0.67 (n 281) | LAMA 46% -0.04 / BARU 61% +1.39 | NAIK 59% +1.19 / TURUN 47% +0.11 | selalu BUY LAMA 44% -0.37 / BARU 51% +1.04 | acak -0.23
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  30s | tebakan 54% +0.73 (n 281) | LAMA 50% +0.01 / BARU 58% +1.45 | NAIK 56% +1.30 / TURUN 52% +0.11 | selalu BUY LAMA 40% -0.40 / BARU 50% +1.38 | acak -0.18
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  60s | tebakan 53% +0.62 (n 281) | LAMA 48% -0.03 / BARU 57% +1.27 | NAIK 58% +1.33 / TURUN 47% -0.15 | selalu BUY LAMA 47% -0.36 / BARU 51% +1.49 | acak -0.19
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 120s | tebakan 47% +0.68 (n 281) | LAMA 42% -0.02 / BARU 52% +1.38 | NAIK 53% +1.44 / TURUN 41% -0.15 | selalu BUY LAMA 43% -0.18 / BARU 48% +1.45 | acak -0.16
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 180s | tebakan 49% +0.76 (n 281) | LAMA 45% -0.05 / BARU 53% +1.57 | NAIK 55% +1.59 / TURUN 42% -0.14 | selalu BUY LAMA 44% -0.18 / BARU 49% +1.67 | acak -0.09
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  10s | tebakan 53% +0.63 (n 281) | LAMA 46% -0.01 / BARU 61% +1.27 | NAIK 59% +1.17 / TURUN 47% +0.05 | selalu BUY LAMA 43% -0.33 / BARU 52% +1.03 | acak -0.31
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  30s | tebakan 56% +0.69 (n 281) | LAMA 52% +0.06 / BARU 61% +1.34 | NAIK 57% +1.34 / TURUN 56% -0.01 | selalu BUY LAMA 40% -0.35 / BARU 54% +1.50 | acak -0.27
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  60s | tebakan 56% +0.59 (n 281) | LAMA 51% +0.02 / BARU 61% +1.17 | NAIK 61% +1.38 / TURUN 51% -0.25 | selalu BUY LAMA 47% -0.29 / BARU 54% +1.71 | acak -0.27
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 120s | tebakan 50% +0.67 (n 281) | LAMA 45% +0.03 / BARU 56% +1.32 | NAIK 55% +1.57 / TURUN 44% -0.29 | selalu BUY LAMA 43% -0.10 / BARU 53% +1.69 | acak -0.2
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 180s | tebakan 52% +0.71 (n 281) | LAMA 48% -0.00 / BARU 56% +1.43 | NAIK 58% +1.77 / TURUN 46% -0.43 | selalu BUY LAMA 44% -0.10 / BARU 54% +2.02 | acak -0.14
+
+## SEMUA: aturan keluar setelah masuk t−1 (dipilih LAMA n 141, diuji BARU n 140; 144 aturan)
+   B d1 reaksi 0.5s ≥$1.0 tahan 30s sisanya tahan LAMA 53% +0.13 | BARU 61% +1.16 (t 1.7)
+   C TP $3 SL $1 maks 60s                        LAMA 48% +0.12 | BARU 53% +0.48 (t 2.2)
+   C TP $5 SL $1 maks 180s                       LAMA 42% +0.11 | BARU 46% +0.95 (t 3.3)
+   C TP $3 SL $1 maks 180s                       LAMA 43% +0.10 | BARU 50% +0.46 (t 2.1)
+   B d1 reaksi 0.5s ≥$0.5 tahan 30s sisanya tahan LAMA 52% +0.09 | BARU 59% +1.38 (t 2.1)
+   B d1 reaksi 1.0s ≥$1.0 tahan 30s sisanya tahan LAMA 53% +0.09 | BARU 62% +1.18 (t 1.7)
+   C TP $5 SL $1 maks 60s                        LAMA 47% +0.09 | BARU 51% +0.97 (t 3.5)
+   C TP $5 SL $1 maks 120s                       LAMA 40% +0.09 | BARU 47% +0.95 (t 3.4)
+   pembanding tahan tetap terbaik LAMA: tahan tetap 30s → BARU 62% +1.21
+
+## CPI: masuk t−1 searah tebakan, tahan tetap (n 91)
+   tahan | tebakan untung% rata $ (t) | selalu BUY untung% rata $ | acak rata $ | LAMA tebakan | BARU tebakan | tebakan NAIK | tebakan TURUN
+      1s | 20% -0.18 (t -1.2) | 22% -0.20 | -0.37 | 5% -0.42 (n 40) | 31% +0.02 (n 51) | 21% -0.09 (n 53) | 18% -0.29 (n 38)
+      2s | 49% +0.76 (t 2.1) | 45% +0.24 | -0.46 | 28% -0.49 (n 40) | 67% +1.73 (n 51) | 55% +1.15 (n 53) | 42% +0.21 (n 38)
+      3s | 53% +0.94 (t 1.5) | 52% +0.46 | -0.43 | 40% -0.22 (n 40) | 63% +1.85 (n 51) | 60% +1.48 (n 53) | 42% +0.19 (n 38)
+      5s | 57% +1.09 (t 1.4) | 54% +0.49 | -0.43 | 48% -0.05 (n 40) | 65% +1.98 (n 51) | 62% +1.63 (n 53) | 50% +0.34 (n 38)
+     10s | 57% +1.05 (t 1.1) | 55% +1.09 | -0.40 | 50% +0.05 (n 40) | 63% +1.84 (n 51) | 64% +2.09 (n 53) | 47% -0.40 (n 38)
+     20s | 56% +0.87 (t 0.8) | 62% +1.68 | -0.38 | 57% +0.13 (n 40) | 55% +1.44 (n 51) | 66% +2.43 (n 53) | 42% -1.32 (n 38)
+     30s | 59% +1.10 (t 1.1) | 62% +1.80 | -0.39 | 57% -0.02 (n 40) | 61% +1.99 (n 51) | 68% +2.75 (n 53) | 47% -1.19 (n 38)
+     60s | 60% +0.80 (t 0.7) | 65% +2.16 | -0.38 | 62% -0.04 (n 40) | 59% +1.46 (n 51) | 74% +2.81 (n 53) | 42% -2.00 (n 38)
+     90s | 58% +0.87 (t 0.7) | 63% +1.90 | -0.34 | 57% +0.02 (n 40) | 59% +1.54 (n 51) | 70% +2.61 (n 53) | 42% -1.56 (n 38)
+    120s | 57% +1.17 (t 1.0) | 63% +2.01 | -0.35 | 55% +0.11 (n 40) | 59% +1.99 (n 51) | 68% +2.97 (n 53) | 42% -1.35 (n 38)
+    180s | 56% +1.14 (t 1.0) | 62% +2.61 | -0.34 | 55% +0.07 (n 40) | 57% +1.98 (n 51) | 66% +3.45 (n 53) | 42% -2.08 (n 38)
+
+## CPI: masuk t−1 + aturan kelola (untung% rata $/ons; LAMA / BARU; NAIK / TURUN = arah tebakan)
+   tahan tetap                              s/d  10s | tebakan 57% +1.05 (n 91) | LAMA 50% +0.05 / BARU 63% +1.84 | NAIK 64% +2.09 / TURUN 47% -0.40 | selalu BUY LAMA 50% -0.38 / BARU 59% +2.25 | acak -0.4
+   tahan tetap                              s/d  30s | tebakan 59% +1.10 (n 91) | LAMA 57% -0.02 / BARU 61% +1.99 | NAIK 68% +2.75 / TURUN 47% -1.19 | selalu BUY LAMA 48% -0.50 / BARU 73% +3.60 | acak -0.39
+   tahan tetap                              s/d  60s | tebakan 60% +0.80 (n 91) | LAMA 62% -0.04 / BARU 59% +1.46 | NAIK 74% +2.81 / TURUN 42% -2.00 | selalu BUY LAMA 65% -0.30 / BARU 65% +4.09 | acak -0.38
+   tahan tetap                              s/d 120s | tebakan 57% +1.17 (n 91) | LAMA 55% +0.11 / BARU 59% +1.99 | NAIK 68% +2.97 / TURUN 42% -1.35 | selalu BUY LAMA 62% +0.05 / BARU 63% +3.55 | acak -0.35
+   tahan tetap                              s/d 180s | tebakan 56% +1.14 (n 91) | LAMA 55% +0.07 / BARU 57% +1.98 | NAIK 66% +3.45 / TURUN 42% -2.08 | selalu BUY LAMA 52% +0.21 / BARU 69% +4.49 | acak -0.34
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  10s | tebakan 57% +1.36 (n 91) | LAMA 50% -0.01 / BARU 63% +2.44 | NAIK 66% +2.28 / TURUN 45% +0.08 | selalu BUY LAMA 50% -0.43 / BARU 59% +2.52 | acak -0.0
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  30s | tebakan 56% +1.50 (n 91) | LAMA 55% -0.06 / BARU 57% +2.71 | NAIK 64% +2.56 / TURUN 45% +0.01 | selalu BUY LAMA 48% -0.58 / BARU 63% +3.51 | acak 0.12
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  60s | tebakan 55% +1.32 (n 91) | LAMA 55% -0.01 / BARU 55% +2.36 | NAIK 66% +2.67 / TURUN 39% -0.57 | selalu BUY LAMA 60% -0.31 / BARU 57% +3.77 | acak 0.15
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 120s | tebakan 51% +1.51 (n 91) | LAMA 48% +0.06 / BARU 53% +2.65 | NAIK 60% +2.71 / TURUN 37% -0.16 | selalu BUY LAMA 57% -0.04 / BARU 53% +3.40 | acak 0.18
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 180s | tebakan 51% +1.54 (n 91) | LAMA 50% -0.05 / BARU 51% +2.79 | NAIK 58% +2.96 / TURUN 39% -0.43 | selalu BUY LAMA 50% -0.08 / BARU 55% +3.93 | acak 0.21
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  10s | tebakan 57% +1.36 (n 91) | LAMA 50% +0.15 / BARU 63% +2.31 | NAIK 64% +2.26 / TURUN 47% +0.10 | selalu BUY LAMA 50% -0.29 / BARU 59% +2.55 | acak -0.17
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  30s | tebakan 59% +1.45 (n 91) | LAMA 57% +0.16 / BARU 61% +2.46 | NAIK 64% +2.74 / TURUN 53% -0.37 | selalu BUY LAMA 48% -0.38 / BARU 67% +3.97 | acak -0.09
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  60s | tebakan 62% +1.18 (n 91) | LAMA 62% +0.17 / BARU 61% +1.97 | NAIK 72% +2.80 / TURUN 47% -1.08 | selalu BUY LAMA 62% -0.13 / BARU 61% +4.22 | acak -0.13
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 120s | tebakan 57% +1.55 (n 91) | LAMA 55% +0.26 / BARU 59% +2.56 | NAIK 66% +3.10 / TURUN 45% -0.62 | selalu BUY LAMA 60% +0.14 / BARU 59% +3.88 | acak 0.02
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 180s | tebakan 56% +1.45 (n 91) | LAMA 55% +0.11 / BARU 57% +2.50 | NAIK 64% +3.51 / TURUN 45% -1.43 | selalu BUY LAMA 50% +0.11 / BARU 65% +4.76 | acak 0.04
+
+## CPI: aturan keluar setelah masuk t−1 (dipilih LAMA n 40, diuji BARU n 51; 144 aturan)
+   C TP $5 SL $3 maks 180s                       LAMA 55% +0.42 | BARU 67% +1.32 (t 1.7)
+   C TP $3 SL $1 maks 180s                       LAMA 50% +0.41 | BARU 53% +0.44 (t 1.1)
+   C TP $5 SL $2 maks 180s                       LAMA 52% +0.40 | BARU 61% +1.04 (t 1.4)
+   C TP $3 SL $1 maks 60s                        LAMA 57% +0.39 | BARU 53% +0.44 (t 1.1)
+   C TP $3 SL $1 maks 120s                       LAMA 52% +0.37 | BARU 53% +0.44 (t 1.1)
+   C TP $3 SL $3 maks 180s                       LAMA 57% +0.37 | BARU 71% +0.39 (t 0.6)
+   C TP $5 SL $1 maks 180s                       LAMA 45% +0.37 | BARU 51% +1.32 (t 2.4)
+   B d1 reaksi 0.5s ≥$0.5 tahan 120s sisanya tahan LAMA 55% +0.36 | BARU 57% +2.64 (t 1.4)
+   pembanding tahan tetap terbaik LAMA: tahan tetap 20s → BARU 55% +1.44
+
+## PPI: masuk t−1 searah tebakan, tahan tetap (n 69)
+   tahan | tebakan untung% rata $ (t) | selalu BUY untung% rata $ | acak rata $ | LAMA tebakan | BARU tebakan | tebakan NAIK | tebakan TURUN
+      1s | 16% -0.34 (t -3.6) | 17% -0.26 | -0.33 | 9% -0.33 (n 34) | 23% -0.35 (n 35) | 19% -0.26 (n 31) | 13% -0.41 (n 38)
+      2s | 46% +0.00 (t 0.0) | 52% +0.19 | -0.36 | 32% -0.23 (n 34) | 60% +0.23 (n 35) | 61% +0.65 (n 31) | 34% -0.53 (n 38)
+      3s | 48% +0.27 (t 1.2) | 57% +0.25 | -0.34 | 35% -0.08 (n 34) | 60% +0.62 (n 35) | 68% +0.99 (n 31) | 32% -0.31 (n 38)
+      5s | 57% +0.47 (t 1.8) | 55% +0.16 | -0.33 | 41% +0.01 (n 34) | 71% +0.92 (n 35) | 71% +1.10 (n 31) | 45% -0.05 (n 38)
+     10s | 54% +0.50 (t 1.6) | 49% +0.20 | -0.33 | 44% -0.01 (n 34) | 63% +0.99 (n 35) | 65% +1.18 (n 31) | 45% -0.05 (n 38)
+     20s | 58% +0.44 (t 1.4) | 49% +0.29 | -0.33 | 44% +0.04 (n 34) | 71% +0.83 (n 35) | 65% +1.21 (n 31) | 53% -0.19 (n 38)
+     30s | 61% +0.49 (t 1.4) | 46% +0.20 | -0.34 | 53% +0.19 (n 34) | 69% +0.78 (n 35) | 61% +1.17 (n 31) | 61% -0.07 (n 38)
+     60s | 59% +0.57 (t 1.8) | 51% +0.16 | -0.34 | 50% +0.08 (n 34) | 69% +1.04 (n 35) | 65% +1.22 (n 31) | 55% +0.03 (n 38)
+     90s | 52% +0.45 (t 1.4) | 51% +0.46 | -0.30 | 44% -0.01 (n 34) | 60% +0.90 (n 35) | 61% +1.39 (n 31) | 45% -0.31 (n 38)
+    120s | 54% +0.37 (t 1.1) | 52% +0.41 | -0.31 | 41% -0.12 (n 34) | 66% +0.84 (n 35) | 65% +1.24 (n 31) | 45% -0.34 (n 38)
+    180s | 54% +0.36 (t 1.1) | 49% +0.41 | -0.30 | 44% +0.06 (n 34) | 63% +0.66 (n 35) | 61% +1.22 (n 31) | 47% -0.33 (n 38)
+
+## PPI: masuk t−1 + aturan kelola (untung% rata $/ons; LAMA / BARU; NAIK / TURUN = arah tebakan)
+   tahan tetap                              s/d  10s | tebakan 54% +0.50 (n 69) | LAMA 44% -0.01 / BARU 63% +0.99 | NAIK 65% +1.18 / TURUN 45% -0.05 | selalu BUY LAMA 44% -0.07 / BARU 54% +0.47 | acak -0.33
+   tahan tetap                              s/d  30s | tebakan 61% +0.49 (n 69) | LAMA 53% +0.19 / BARU 69% +0.78 | NAIK 61% +1.17 / TURUN 61% -0.07 | selalu BUY LAMA 38% -0.17 / BARU 54% +0.55 | acak -0.34
+   tahan tetap                              s/d  60s | tebakan 59% +0.57 (n 69) | LAMA 50% +0.08 / BARU 69% +1.04 | NAIK 65% +1.22 / TURUN 55% +0.03 | selalu BUY LAMA 44% -0.16 / BARU 57% +0.47 | acak -0.34
+   tahan tetap                              s/d 120s | tebakan 54% +0.37 (n 69) | LAMA 41% -0.12 / BARU 66% +0.84 | NAIK 65% +1.24 / TURUN 45% -0.34 | selalu BUY LAMA 38% -0.13 / BARU 66% +0.94 | acak -0.31
+   tahan tetap                              s/d 180s | tebakan 54% +0.36 (n 69) | LAMA 44% +0.06 / BARU 63% +0.66 | NAIK 61% +1.22 / TURUN 47% -0.33 | selalu BUY LAMA 41% -0.06 / BARU 57% +0.86 | acak -0.3
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  10s | tebakan 51% +0.44 (n 69) | LAMA 44% -0.00 / BARU 57% +0.87 | NAIK 61% +1.14 / TURUN 42% -0.14 | selalu BUY LAMA 44% -0.06 / BARU 51% +0.56 | acak -0.3
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  30s | tebakan 51% +0.30 (n 69) | LAMA 44% +0.02 / BARU 57% +0.57 | NAIK 55% +1.06 / TURUN 47% -0.32 | selalu BUY LAMA 35% -0.27 / BARU 49% +0.59 | acak -0.39
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  60s | tebakan 49% +0.30 (n 69) | LAMA 41% -0.09 / BARU 57% +0.67 | NAIK 58% +1.19 / TURUN 42% -0.43 | selalu BUY LAMA 41% -0.24 / BARU 51% +0.48 | acak -0.44
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 120s | tebakan 45% +0.18 (n 69) | LAMA 32% -0.24 / BARU 57% +0.59 | NAIK 58% +1.15 / TURUN 34% -0.61 | selalu BUY LAMA 35% -0.24 / BARU 57% +0.72 | acak -0.41
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 180s | tebakan 45% +0.18 (n 69) | LAMA 35% -0.09 / BARU 54% +0.43 | NAIK 61% +1.22 / TURUN 32% -0.68 | selalu BUY LAMA 38% -0.15 / BARU 51% +0.67 | acak -0.4
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  10s | tebakan 54% +0.42 (n 69) | LAMA 44% -0.03 / BARU 63% +0.86 | NAIK 65% +1.02 / TURUN 45% -0.06 | selalu BUY LAMA 44% -0.06 / BARU 57% +0.55 | acak -0.29
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  30s | tebakan 58% +0.32 (n 69) | LAMA 47% -0.02 / BARU 69% +0.66 | NAIK 58% +0.90 / TURUN 58% -0.14 | selalu BUY LAMA 35% -0.27 / BARU 57% +0.62 | acak -0.37
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  60s | tebakan 57% +0.43 (n 69) | LAMA 44% -0.08 / BARU 69% +0.93 | NAIK 61% +1.06 / TURUN 53% -0.08 | selalu BUY LAMA 41% -0.23 / BARU 60% +0.64 | acak -0.36
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 120s | tebakan 51% +0.20 (n 69) | LAMA 35% -0.22 / BARU 66% +0.61 | NAIK 61% +0.93 / TURUN 42% -0.39 | selalu BUY LAMA 35% -0.22 / BARU 69% +0.89 | acak -0.36
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 180s | tebakan 52% +0.22 (n 69) | LAMA 41% -0.05 / BARU 63% +0.47 | NAIK 61% +1.01 / TURUN 45% -0.43 | selalu BUY LAMA 41% -0.13 / BARU 60% +0.83 | acak -0.34
+
+## PPI: aturan keluar setelah masuk t−1 (dipilih LAMA n 34, diuji BARU n 35; 144 aturan)
+   tahan tetap 30s                               LAMA 53% +0.19 | BARU 69% +0.78 (t 1.3)
+   B d2 reaksi 0.5s ≥$1.0 tahan 30s sisanya tahan LAMA 50% +0.12 | BARU 66% +0.77 (t 1.3)
+   B d2 reaksi 1.0s ≥$1.0 tahan 30s sisanya tahan LAMA 50% +0.12 | BARU 66% +0.81 (t 1.3)
+   B d1 reaksi 0.5s ≥$1.0 tahan 30s sisanya tahan LAMA 50% +0.11 | BARU 66% +0.54 (t 1.0)
+   B d1 reaksi 1.0s ≥$1.0 tahan 30s sisanya tahan LAMA 50% +0.09 | BARU 69% +0.56 (t 1.0)
+   C TP $3 SL tanpa maks 60s                     LAMA 50% +0.09 | BARU 69% +0.69 (t 1.5)
+   tahan tetap 60s                               LAMA 50% +0.08 | BARU 69% +1.04 (t 1.8)
+   C TP $3 SL tanpa maks 180s                    LAMA 44% +0.07 | BARU 69% +0.74 (t 1.6)
+   pembanding tahan tetap terbaik LAMA: tahan tetap 30s → BARU 69% +0.78
+
+## GDP: masuk t−1 searah tebakan, tahan tetap (n 34)
+   tahan | tebakan untung% rata $ (t) | selalu BUY untung% rata $ | acak rata $ | LAMA tebakan | BARU tebakan | tebakan NAIK | tebakan TURUN
+      1s | 12% -0.51 (t -4.0) | 15% -0.39 | -0.38 | 5% -0.45 (n 19) | 20% -0.58 (n 15) | 7% -0.46 (n 14) | 15% -0.55 (n 20)
+      2s | 26% -0.54 (t -2.8) | 26% -0.66 | -0.43 | 32% -0.43 (n 19) | 20% -0.67 (n 15) | 29% -0.73 (n 14) | 25% -0.41 (n 20)
+      3s | 32% -0.42 (t -1.4) | 26% -0.83 | -0.43 | 32% -0.36 (n 19) | 33% -0.49 (n 15) | 29% -0.78 (n 14) | 35% -0.16 (n 20)
+      5s | 35% -0.09 (t -0.3) | 35% -0.86 | -0.42 | 32% -0.30 (n 19) | 40% +0.17 (n 15) | 36% -0.44 (n 14) | 35% +0.16 (n 20)
+     10s | 53% +0.37 (t 0.9) | 41% -0.92 | -0.41 | 32% -0.46 (n 19) | 80% +1.41 (n 15) | 64% -0.02 (n 14) | 45% +0.64 (n 20)
+     20s | 56% +0.33 (t 0.7) | 35% -1.03 | -0.40 | 47% -0.23 (n 19) | 67% +1.04 (n 15) | 43% -0.24 (n 14) | 65% +0.73 (n 20)
+     30s | 56% +0.10 (t 0.2) | 38% -1.00 | -0.42 | 53% -0.30 (n 19) | 60% +0.59 (n 15) | 43% -0.46 (n 14) | 65% +0.49 (n 20)
+     60s | 56% +0.01 (t 0.0) | 41% -0.67 | -0.41 | 47% -0.48 (n 19) | 67% +0.64 (n 15) | 50% -0.17 (n 14) | 60% +0.14 (n 20)
+     90s | 50% +0.24 (t 0.6) | 35% -0.30 | -0.36 | 37% -0.41 (n 19) | 67% +1.07 (n 15) | 43% +0.53 (n 14) | 55% +0.04 (n 20)
+    120s | 41% +0.13 (t 0.3) | 35% -0.31 | -0.35 | 32% -0.48 (n 19) | 53% +0.90 (n 15) | 43% +0.35 (n 14) | 40% -0.02 (n 20)
+    180s | 47% +0.15 (t 0.3) | 41% -0.52 | -0.34 | 32% -0.72 (n 19) | 67% +1.25 (n 15) | 43% +0.11 (n 14) | 50% +0.19 (n 20)
+
+## GDP: masuk t−1 + aturan kelola (untung% rata $/ons; LAMA / BARU; NAIK / TURUN = arah tebakan)
+   tahan tetap                              s/d  10s | tebakan 53% +0.37 (n 34) | LAMA 32% -0.46 / BARU 80% +1.41 | NAIK 64% -0.02 / TURUN 45% +0.64 | selalu BUY LAMA 42% -0.66 / BARU 40% -1.25 | acak -0.41
+   tahan tetap                              s/d  30s | tebakan 56% +0.10 (n 34) | LAMA 53% -0.30 / BARU 60% +0.59 | NAIK 43% -0.46 / TURUN 65% +0.49 | selalu BUY LAMA 47% -0.47 / BARU 27% -1.67 | acak -0.42
+   tahan tetap                              s/d  60s | tebakan 56% +0.01 (n 34) | LAMA 47% -0.48 / BARU 67% +0.64 | NAIK 50% -0.17 / TURUN 60% +0.14 | selalu BUY LAMA 47% -0.38 / BARU 33% -1.04 | acak -0.41
+   tahan tetap                              s/d 120s | tebakan 41% +0.13 (n 34) | LAMA 32% -0.48 / BARU 53% +0.90 | NAIK 43% +0.35 / TURUN 40% -0.02 | selalu BUY LAMA 42% -0.02 / BARU 27% -0.67 | acak -0.35
+   tahan tetap                              s/d 180s | tebakan 47% +0.15 (n 34) | LAMA 32% -0.72 / BARU 67% +1.25 | NAIK 43% +0.11 / TURUN 50% +0.19 | selalu BUY LAMA 47% -0.06 / BARU 33% -1.09 | acak -0.34
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  10s | tebakan 47% +0.07 (n 34) | LAMA 32% -0.47 / BARU 67% +0.75 | NAIK 50% -0.64 / TURUN 45% +0.56 | selalu BUY LAMA 42% -0.66 / BARU 27% -1.59 | acak -0.52
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  30s | tebakan 56% +0.14 (n 34) | LAMA 53% -0.31 / BARU 60% +0.71 | NAIK 43% -0.34 / TURUN 65% +0.48 | selalu BUY LAMA 47% -0.49 / BARU 27% -1.04 | acak -0.27
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  60s | tebakan 56% +0.07 (n 34) | LAMA 47% -0.50 / BARU 67% +0.80 | NAIK 50% -0.25 / TURUN 60% +0.30 | selalu BUY LAMA 47% -0.49 / BARU 33% -0.70 | acak -0.35
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 120s | tebakan 44% +0.14 (n 34) | LAMA 32% -0.56 / BARU 60% +1.02 | NAIK 43% +0.07 / TURUN 45% +0.19 | selalu BUY LAMA 42% -0.25 / BARU 27% -0.83 | acak -0.39
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 180s | tebakan 47% +0.19 (n 34) | LAMA 32% -0.80 / BARU 67% +1.44 | NAIK 43% -0.12 / TURUN 50% +0.40 | selalu BUY LAMA 47% -0.32 / BARU 33% -0.78 | acak -0.31
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  10s | tebakan 41% -0.20 (n 34) | LAMA 32% -0.46 / BARU 53% +0.11 | NAIK 50% -0.60 / TURUN 35% +0.07 | selalu BUY LAMA 42% -0.66 / BARU 27% -1.76 | acak -0.69
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  30s | tebakan 50% -0.05 (n 34) | LAMA 53% -0.30 / BARU 47% +0.26 | NAIK 43% -0.32 / TURUN 55% +0.14 | selalu BUY LAMA 47% -0.47 / BARU 27% -1.40 | acak -0.46
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  60s | tebakan 50% -0.03 (n 34) | LAMA 47% -0.48 / BARU 53% +0.55 | NAIK 50% +0.05 / TURUN 50% -0.08 | selalu BUY LAMA 47% -0.38 / BARU 33% -0.73 | acak -0.41
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 120s | tebakan 38% -0.02 (n 34) | LAMA 32% -0.48 / BARU 47% +0.56 | NAIK 43% +0.29 / TURUN 35% -0.24 | selalu BUY LAMA 42% -0.02 / BARU 27% -0.71 | acak -0.42
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 180s | tebakan 41% -0.02 (n 34) | LAMA 32% -0.72 / BARU 53% +0.87 | NAIK 43% +0.01 / TURUN 40% -0.03 | selalu BUY LAMA 47% -0.06 / BARU 33% -0.88 | acak -0.36
+
+## GDP: aturan keluar setelah masuk t−1 (dipilih LAMA n 19, diuji BARU n 15; 144 aturan)
+   B d2 reaksi 0.5s ≥$0.3 tahan 30s sisanya tutup LAMA 37% +0.04 | BARU 33% -0.10 (t -0.2)
+   B d2 reaksi 1.0s ≥$0.3 tahan 30s sisanya tutup LAMA 37% -0.07 | BARU 33% -0.07 (t -0.1)
+   B d2 reaksi 0.5s ≥$0.5 tahan 30s sisanya tutup LAMA 37% -0.08 | BARU 33% -0.10 (t -0.2)
+   B d2 reaksi 0.5s ≥$1.0 tahan 30s sisanya tutup LAMA 37% -0.08 | BARU 33% -0.56 (t -1.3)
+   B d2 reaksi 1.0s ≥$0.5 tahan 30s sisanya tutup LAMA 37% -0.15 | BARU 33% -0.07 (t -0.1)
+   B d2 reaksi 1.0s ≥$1.0 tahan 30s sisanya tutup LAMA 37% -0.15 | BARU 33% -0.51 (t -1.0)
+   B d2 reaksi 0.5s ≥$0.3 tahan 60s sisanya tutup LAMA 32% -0.19 | BARU 33% -0.20 (t -0.4)
+   C TP $5 SL $1 maks 60s                        LAMA 47% -0.19 | BARU 40% +0.21 (t 0.3)
+   pembanding tahan tetap terbaik LAMA: tahan tetap 20s → BARU 67% +1.04
+
+## ISM: masuk t−1 searah tebakan, tahan tetap (n 87)
+   tahan | tebakan untung% rata $ (t) | selalu BUY untung% rata $ | acak rata $ | LAMA tebakan | BARU tebakan | tebakan NAIK | tebakan TURUN
+      1s | 49% +0.50 (t 2.3) | 38% -0.23 | -0.34 | 38% -0.03 (n 48) | 64% +1.16 (n 39) | 50% +0.54 (n 48) | 49% +0.46 (n 39)
+      2s | 51% +0.45 (t 1.7) | 41% -0.03 | -0.35 | 40% +0.01 (n 48) | 64% +0.99 (n 39) | 52% +0.67 (n 48) | 49% +0.17 (n 39)
+      3s | 52% +0.50 (t 1.9) | 45% -0.02 | -0.34 | 44% +0.01 (n 48) | 62% +1.11 (n 39) | 54% +0.72 (n 48) | 49% +0.24 (n 39)
+      5s | 54% +0.45 (t 1.6) | 45% +0.08 | -0.34 | 46% +0.03 (n 48) | 64% +0.96 (n 39) | 54% +0.76 (n 48) | 54% +0.06 (n 39)
+     10s | 54% +0.33 (t 1.1) | 44% +0.02 | -0.33 | 50% +0.07 (n 48) | 59% +0.66 (n 39) | 52% +0.59 (n 48) | 56% +0.01 (n 39)
+     20s | 54% +0.40 (t 1.3) | 40% -0.18 | -0.33 | 46% +0.10 (n 48) | 64% +0.77 (n 39) | 52% +0.47 (n 48) | 56% +0.31 (n 39)
+     30s | 55% +0.47 (t 1.6) | 39% -0.22 | -0.33 | 52% +0.19 (n 48) | 59% +0.82 (n 39) | 52% +0.50 (n 48) | 59% +0.44 (n 39)
+     60s | 54% +0.25 (t 0.8) | 45% -0.28 | -0.32 | 50% +0.17 (n 48) | 59% +0.35 (n 39) | 52% +0.23 (n 48) | 56% +0.27 (n 39)
+     90s | 52% +0.42 (t 1.2) | 41% -0.23 | -0.29 | 50% +0.26 (n 48) | 54% +0.61 (n 39) | 46% +0.41 (n 48) | 59% +0.42 (n 39)
+    120s | 47% +0.31 (t 0.8) | 43% -0.11 | -0.29 | 48% +0.23 (n 48) | 46% +0.41 (n 39) | 44% +0.42 (n 48) | 51% +0.17 (n 39)
+    180s | 53% +0.44 (t 1.1) | 45% -0.23 | -0.28 | 56% +0.20 (n 48) | 49% +0.75 (n 39) | 52% +0.43 (n 48) | 54% +0.46 (n 39)
+
+## ISM: masuk t−1 + aturan kelola (untung% rata $/ons; LAMA / BARU; NAIK / TURUN = arah tebakan)
+   tahan tetap                              s/d  10s | tebakan 54% +0.33 (n 87) | LAMA 50% +0.07 / BARU 59% +0.66 | NAIK 52% +0.59 / TURUN 56% +0.01 | selalu BUY LAMA 40% -0.50 / BARU 49% +0.65 | acak -0.33
+   tahan tetap                              s/d  30s | tebakan 55% +0.47 (n 87) | LAMA 52% +0.19 / BARU 59% +0.82 | NAIK 52% +0.50 / TURUN 59% +0.44 | selalu BUY LAMA 35% -0.38 / BARU 44% -0.03 | acak -0.33
+   tahan tetap                              s/d  60s | tebakan 54% +0.25 (n 87) | LAMA 50% +0.17 / BARU 59% +0.35 | NAIK 52% +0.23 / TURUN 56% +0.27 | selalu BUY LAMA 40% -0.56 / BARU 51% +0.05 | acak -0.32
+   tahan tetap                              s/d 120s | tebakan 47% +0.31 (n 87) | LAMA 48% +0.23 / BARU 46% +0.41 | NAIK 44% +0.42 / TURUN 51% +0.17 | selalu BUY LAMA 38% -0.41 / BARU 49% +0.26 | acak -0.29
+   tahan tetap                              s/d 180s | tebakan 53% +0.44 (n 87) | LAMA 56% +0.20 / BARU 49% +0.75 | NAIK 52% +0.43 / TURUN 54% +0.46 | selalu BUY LAMA 42% -0.41 / BARU 49% +0.00 | acak -0.28
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  10s | tebakan 54% +0.37 (n 87) | LAMA 50% +0.09 / BARU 59% +0.72 | NAIK 52% +0.54 / TURUN 56% +0.16 | selalu BUY LAMA 40% -0.42 / BARU 49% +0.55 | acak -0.32
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  30s | tebakan 54% +0.49 (n 87) | LAMA 50% +0.20 / BARU 59% +0.86 | NAIK 52% +0.55 / TURUN 56% +0.43 | selalu BUY LAMA 35% -0.31 / BARU 44% +0.22 | acak -0.3
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d  60s | tebakan 52% +0.36 (n 87) | LAMA 48% +0.19 / BARU 56% +0.57 | NAIK 52% +0.39 / TURUN 51% +0.32 | selalu BUY LAMA 40% -0.42 / BARU 49% +0.25 | acak -0.29
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 120s | tebakan 46% +0.41 (n 87) | LAMA 48% +0.28 / BARU 44% +0.57 | NAIK 44% +0.64 / TURUN 49% +0.13 | selalu BUY LAMA 38% -0.23 / BARU 41% +0.42 | acak -0.23
+   R1 tutup bila detik 2 berlawanan ≥ $0,50 s/d 180s | tebakan 52% +0.63 (n 87) | LAMA 54% +0.29 / BARU 49% +1.04 | NAIK 52% +0.80 / TURUN 51% +0.41 | selalu BUY LAMA 42% -0.22 / BARU 46% +0.55 | acak -0.07
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  10s | tebakan 54% +0.36 (n 87) | LAMA 50% +0.06 / BARU 59% +0.73 | NAIK 52% +0.57 / TURUN 56% +0.10 | selalu BUY LAMA 38% -0.42 / BARU 49% +0.53 | acak -0.33
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  30s | tebakan 54% +0.49 (n 87) | LAMA 50% +0.16 / BARU 59% +0.89 | NAIK 52% +0.57 / TURUN 56% +0.39 | selalu BUY LAMA 33% -0.33 / BARU 44% +0.19 | acak -0.29
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d  60s | tebakan 53% +0.35 (n 87) | LAMA 48% +0.15 / BARU 59% +0.60 | NAIK 52% +0.40 / TURUN 54% +0.30 | selalu BUY LAMA 38% -0.43 / BARU 49% +0.32 | acak -0.27
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 120s | tebakan 47% +0.41 (n 87) | LAMA 48% +0.23 / BARU 46% +0.62 | NAIK 44% +0.65 / TURUN 51% +0.10 | selalu BUY LAMA 35% -0.25 / BARU 41% +0.46 | acak -0.22
+   R2 tutup bila detik 1 berlawanan ≥ $0,50 s/d 180s | tebakan 52% +0.62 (n 87) | LAMA 54% +0.22 / BARU 49% +1.11 | NAIK 52% +0.85 / TURUN 51% +0.34 | selalu BUY LAMA 40% -0.26 / BARU 44% +0.62 | acak -0.08
+
+## ISM: aturan keluar setelah masuk t−1 (dipilih LAMA n 48, diuji BARU n 39; 144 aturan)
+   B d1 reaksi 0.5s ≥$1.0 tahan 180s sisanya tutup LAMA 40% +0.37 | BARU 51% +1.44 (t 2.0)
+   B d2 reaksi 0.5s ≥$0.3 tahan 180s sisanya tutup LAMA 40% +0.37 | BARU 49% +1.31 (t 1.8)
+   B d1 reaksi 1.0s ≥$1.0 tahan 180s sisanya tutup LAMA 40% +0.36 | BARU 51% +1.32 (t 1.8)
+   B d2 reaksi 0.5s ≥$0.5 tahan 180s sisanya tutup LAMA 42% +0.36 | BARU 51% +1.33 (t 1.8)
+   B d2 reaksi 1.0s ≥$0.3 tahan 180s sisanya tutup LAMA 40% +0.36 | BARU 49% +1.37 (t 1.9)
+   B d1 reaksi 0.5s ≥$0.3 tahan 180s sisanya tutup LAMA 38% +0.35 | BARU 49% +1.39 (t 1.9)
+   B d1 reaksi 0.5s ≥$1.0 tahan 120s sisanya tutup LAMA 40% +0.35 | BARU 49% +1.00 (t 1.6)
+   B d1 reaksi 1.0s ≥$1.0 tahan 120s sisanya tutup LAMA 40% +0.35 | BARU 49% +0.89 (t 1.3)
+   pembanding tahan tetap terbaik LAMA: tahan tetap 90s → BARU 54% +0.61
+
+## ⚡LIVE posisi APA PUN dibuka t−1 (semua rilis): gerak detik d ≥ $X SEARAH / BERLAWANAN posisi → untung% & rata $ bila tahan s/d H; 'tutup' = tutup di detik d+1
+   SEMUA    detik 1 searah ≥ $0.3  (n 675; lama 228 / baru 447): 5s 80% +1.27 • 10s 76% +1.19 • 30s 71% +1.19 • 60s 69% +1.18 • 120s 67% +1.31 • 180s 68% +1.43 | tutup d+1 85% +1.22
+   SEMUA    detik 1 lawan ≥ $0.3   (n 675; lama 228 / baru 447): 5s 13% -1.95 • 10s 16% -1.87 • 30s 21% -1.88 • 60s 24% -1.86 • 120s 26% -1.89 • 180s 26% -2.00 | tutup d+1 7% -1.93
+   SEMUA    detik 1 searah ≥ $0.5  (n 522; lama 162 / baru 360): 5s 85% +1.62 • 10s 82% +1.58 • 30s 76% +1.62 • 60s 74% +1.65 • 120s 72% +1.84 • 180s 73% +2.04 | tutup d+1 90% +1.55
+   SEMUA    detik 1 lawan ≥ $0.5   (n 522; lama 162 / baru 360): 5s 10% -2.30 • 10s 12% -2.25 • 30s 16% -2.31 • 60s 20% -2.34 • 120s 22% -2.42 • 180s 23% -2.61 | tutup d+1 6% -2.26
+   SEMUA    detik 1 searah ≥ $1.0  (n 346; lama 90 / baru 256): 5s 89% +2.06 • 10s 86% +1.91 • 30s 80% +1.94 • 60s 79% +2.05 • 120s 76% +2.17 • 180s 76% +2.42 | tutup d+1 93% +2.01
+   SEMUA    detik 1 lawan ≥ $1.0   (n 346; lama 90 / baru 256): 5s 8% -2.75 • 10s 10% -2.60 • 30s 14% -2.65 • 60s 17% -2.77 • 120s 19% -2.75 • 180s 20% -2.99 | tutup d+1 4% -2.73
+   SEMUA    detik 1 searah ≥ $2.0  (n 157; lama 20 / baru 137): 5s 94% +2.99 • 10s 92% +2.61 • 30s 87% +2.67 • 60s 85% +2.74 • 120s 80% +3.00 • 180s 81% +3.47 | tutup d+1 97% +2.96
+   SEMUA    detik 1 lawan ≥ $2.0   (n 157; lama 20 / baru 137): 5s 5% -3.61 • 10s 7% -3.23 • 30s 11% -3.34 • 60s 15% -3.41 • 120s 17% -3.50 • 180s 17% -3.96 | tutup d+1 2% -3.59
+   SEMUA    detik 2 searah ≥ $0.3  (n 984; lama 380 / baru 604): 5s 88% +2.09 • 10s 84% +2.12 • 30s 77% +2.17 • 60s 75% +2.24 • 120s 73% +2.28 • 180s 73% +2.43 | tutup d+1 90% +1.87
+   SEMUA    detik 2 lawan ≥ $0.3   (n 984; lama 380 / baru 604): 5s 5% -2.80 • 10s 8% -2.82 • 30s 14% -2.88 • 60s 17% -2.94 • 120s 20% -2.89 • 180s 21% -3.03 | tutup d+1 2% -2.60
+   SEMUA    detik 2 searah ≥ $0.5  (n 829; lama 293 / baru 536): 5s 92% +2.42 • 10s 89% +2.44 • 30s 82% +2.48 • 60s 79% +2.53 • 120s 76% +2.58 • 180s 77% +2.78 | tutup d+1 95% +2.17
+   SEMUA    detik 2 lawan ≥ $0.5   (n 829; lama 293 / baru 536): 5s 3% -3.13 • 10s 6% -3.15 • 30s 12% -3.19 • 60s 14% -3.24 • 120s 18% -3.19 • 180s 18% -3.37 | tutup d+1 1% -2.90
+   SEMUA    detik 2 searah ≥ $1.0  (n 615; lama 183 / baru 432): 5s 96% +3.04 • 10s 93% +3.08 • 30s 87% +3.20 • 60s 84% +3.30 • 120s 82% +3.35 • 180s 82% +3.59 | tutup d+1 98% +2.75
+   SEMUA    detik 2 lawan ≥ $1.0   (n 615; lama 183 / baru 432): 5s 2% -3.78 • 10s 4% -3.80 • 30s 9% -3.93 • 60s 11% -4.03 • 120s 14% -3.96 • 180s 14% -4.18 | tutup d+1 1% -3.49
+   SEMUA    detik 2 searah ≥ $2.0  (n 322; lama 57 / baru 265): 5s 99% +4.47 • 10s 96% +4.43 • 30s 92% +4.66 • 60s 90% +4.88 • 120s 87% +4.98 • 180s 87% +5.31 | tutup d+1 99% +4.06
+   SEMUA    detik 2 lawan ≥ $2.0   (n 322; lama 57 / baru 265): 5s 1% -5.16 • 10s 3% -5.11 • 30s 7% -5.36 • 60s 9% -5.58 • 120s 10% -5.54 • 180s 11% -5.85 | tutup d+1 1% -4.76
+   CPI      detik 1 searah ≥ $0.3  (n 57; lama 18 / baru 39): 5s 67% +0.72 • 10s 63% +0.62 • 30s 58% +0.66 • 60s 54% -0.09 • 120s 53% +0.68 • 180s 51% +0.91 | tutup d+1 70% +0.31
+   CPI      detik 1 lawan ≥ $0.3   (n 57; lama 18 / baru 39): 5s 30% -1.66 • 10s 33% -1.47 • 30s 37% -1.50 • 60s 42% -0.74 • 120s 47% -1.40 • 180s 46% -1.60 | tutup d+1 23% -1.29
+   CPI      detik 1 searah ≥ $0.5  (n 38; lama 12 / baru 26): 5s 74% +1.75 • 10s 63% +1.15 • 30s 63% +1.51 • 60s 58% +1.02 • 120s 58% +2.12 • 180s 55% +2.37 | tutup d+1 74% +0.91
+   CPI      detik 1 lawan ≥ $0.5   (n 38; lama 12 / baru 26): 5s 26% -2.69 • 10s 32% -2.01 • 30s 34% -2.36 • 60s 39% -1.89 • 120s 42% -2.85 • 180s 45% -3.06 | tutup d+1 18% -1.89
+   CPI      detik 1 searah ≥ $1.0  (n 24; lama 7 / baru 17): 5s 67% +1.32 • 10s 54% -0.27 • 30s 58% +0.41 • 60s 58% +0.02 • 120s 54% +1.16 • 180s 50% +1.47 | tutup d+1 67% +1.04
+   CPI      detik 1 lawan ≥ $1.0   (n 24; lama 7 / baru 17): 5s 33% -2.26 • 10s 46% -0.61 • 30s 38% -1.29 • 60s 42% -0.94 • 120s 46% -1.90 • 180s 50% -2.15 | tutup d+1 21% -2.02
+   CPI      detik 1 searah ≥ $2.0  (n 12; lama 3 / baru 9): 5s 75% +3.40 • 10s 58% +0.51 • 30s 50% +0.31 • 60s 50% -0.24 • 120s 50% +3.00 • 180s 50% +4.43 | tutup d+1 75% +2.64
+   CPI      detik 1 lawan ≥ $2.0   (n 12; lama 3 / baru 9): 5s 25% -4.49 • 10s 42% -1.57 • 30s 42% -1.39 • 60s 50% -0.85 • 120s 50% -3.82 • 180s 50% -5.19 | tutup d+1 8% -3.71
+   CPI      detik 2 searah ≥ $0.3  (n 96; lama 41 / baru 55): 5s 88% +3.41 • 10s 85% +3.47 • 30s 78% +3.80 • 60s 74% +3.73 • 120s 72% +3.96 • 180s 70% +4.15 | tutup d+1 91% +3.01
+   CPI      detik 2 lawan ≥ $0.3   (n 96; lama 41 / baru 55): 5s 7% -4.29 • 10s 9% -4.28 • 30s 17% -4.61 • 60s 23% -4.55 • 120s 27% -4.66 • 180s 26% -4.84 | tutup d+1 4% -3.90
+   CPI      detik 2 searah ≥ $0.5  (n 85; lama 31 / baru 54): 5s 91% +3.81 • 10s 89% +3.88 • 30s 80% +4.05 • 60s 76% +4.05 • 120s 75% +4.27 • 180s 72% +4.50 | tutup d+1 95% +3.38
+   CPI      detik 2 lawan ≥ $0.5   (n 85; lama 31 / baru 54): 5s 7% -4.68 • 10s 9% -4.68 • 30s 16% -4.84 • 60s 20% -4.84 • 120s 25% -4.95 • 180s 25% -5.16 | tutup d+1 5% -4.24
+   CPI      detik 2 searah ≥ $1.0  (n 71; lama 23 / baru 48): 5s 94% +4.50 • 10s 92% +4.54 • 30s 86% +5.04 • 60s 83% +5.11 • 120s 82% +5.47 • 180s 79% +5.66 | tutup d+1 97% +3.99
+   CPI      detik 2 lawan ≥ $1.0   (n 71; lama 23 / baru 48): 5s 4% -5.38 • 10s 8% -5.35 • 30s 11% -5.84 • 60s 13% -5.92 • 120s 18% -6.15 • 180s 20% -6.33 | tutup d+1 3% -4.87
+   CPI      detik 2 searah ≥ $2.0  (n 48; lama 9 / baru 39): 5s 94% +5.56 • 10s 90% +5.43 • 30s 85% +5.94 • 60s 83% +6.05 • 120s 79% +6.23 • 180s 77% +6.37 | tutup d+1 96% +5.06
+   CPI      detik 2 lawan ≥ $2.0   (n 48; lama 9 / baru 39): 5s 6% -6.43 • 10s 10% -6.22 • 30s 15% -6.73 • 60s 15% -6.83 • 120s 21% -6.88 • 180s 23% -7.00 | tutup d+1 4% -5.93
+   PPI      detik 1 searah ≥ $0.3  (n 34; lama 12 / baru 22): 5s 71% +0.90 • 10s 68% +1.11 • 30s 65% +0.75 • 60s 62% +0.61 • 120s 74% +0.91 • 180s 65% +0.77 | tutup d+1 79% +0.82
+   PPI      detik 1 lawan ≥ $0.3   (n 34; lama 12 / baru 22): 5s 24% -1.62 • 10s 24% -1.80 • 30s 29% -1.49 • 60s 32% -1.36 • 120s 21% -1.53 • 180s 26% -1.37 | tutup d+1 18% -1.56
+   PPI      detik 1 searah ≥ $0.5  (n 23; lama 9 / baru 14): 5s 74% +0.85 • 10s 70% +1.09 • 30s 65% +0.50 • 60s 65% +0.11 • 120s 74% +0.65 • 180s 65% +0.43 | tutup d+1 78% +0.80
+   PPI      detik 1 lawan ≥ $0.5   (n 23; lama 9 / baru 14): 5s 22% -1.61 • 10s 17% -1.83 • 30s 26% -1.30 • 60s 30% -0.92 • 120s 22% -1.30 • 180s 26% -1.06 | tutup d+1 17% -1.60
+   PPI      detik 1 searah ≥ $1.0  (n 10; lama 5 / baru 5): 5s 70% +0.24 • 10s 60% -0.35 • 30s 50% -1.06 • 60s 50% -1.09 • 120s 50% -1.23 • 180s 60% -0.63 | tutup d+1 80% +0.96
+   PPI      detik 1 lawan ≥ $1.0   (n 10; lama 5 / baru 5): 5s 30% -1.33 • 10s 30% -0.67 • 30s 40% -0.02 • 60s 40% -0.01 • 120s 40% +0.39 • 180s 40% -0.18 | tutup d+1 20% -2.09
+   PPI      detik 2 searah ≥ $0.3  (n 77; lama 31 / baru 46): 5s 87% +1.41 • 10s 81% +1.50 • 30s 71% +1.35 • 60s 74% +1.16 • 120s 77% +1.44 • 180s 73% +1.41 | tutup d+1 91% +1.42
+   PPI      detik 2 lawan ≥ $0.3   (n 77; lama 31 / baru 46): 5s 6% -2.05 • 10s 12% -2.12 • 30s 21% -1.99 • 60s 22% -1.81 • 120s 18% -2.01 • 180s 21% -1.96 | tutup d+1 3% -2.08
+   PPI      detik 2 searah ≥ $0.5  (n 68; lama 25 / baru 43): 5s 90% +1.55 • 10s 82% +1.69 • 30s 74% +1.48 • 60s 75% +1.26 • 120s 78% +1.56 • 180s 75% +1.51 | tutup d+1 94% +1.58
+   PPI      detik 2 lawan ≥ $0.5   (n 68; lama 25 / baru 43): 5s 6% -2.21 • 10s 10% -2.33 • 30s 19% -2.14 • 60s 21% -1.93 • 120s 18% -2.15 • 180s 22% -2.07 | tutup d+1 3% -2.26
+   PPI      detik 2 searah ≥ $1.0  (n 43; lama 12 / baru 31): 5s 93% +2.17 • 10s 84% +2.22 • 30s 77% +2.07 • 60s 77% +2.01 • 120s 79% +2.02 • 180s 81% +2.03 | tutup d+1 98% +2.10
+   PPI      detik 2 lawan ≥ $1.0   (n 43; lama 12 / baru 31): 5s 5% -2.83 • 10s 12% -2.85 • 30s 19% -2.74 • 60s 19% -2.70 • 120s 19% -2.60 • 180s 19% -2.58 | tutup d+1 2% -2.76
+   PPI      detik 2 searah ≥ $2.0  (n 15; lama 3 / baru 12): 5s 100% +3.85 • 10s 100% +4.41 • 30s 100% +4.66 • 60s 100% +4.48 • 120s 100% +4.34 • 180s 100% +4.23 | tutup d+1 100% +3.34
+   PPI      detik 2 lawan ≥ $2.0   (n 15; lama 3 / baru 12): 5s 0% -4.56 • 10s 0% -5.06 • 30s 0% -5.35 • 60s 0% -5.17 • 120s 0% -4.92 • 180s 0% -4.81 | tutup d+1 0% -4.07
+   NFP      detik 1 searah ≥ $0.3  (n 39; lama 19 / baru 20): 5s 77% +3.36 • 10s 74% +3.62 • 30s 67% +2.86 • 60s 69% +3.22 • 120s 67% +3.70 • 180s 64% +4.05 | tutup d+1 82% +2.30
+   NFP      detik 1 lawan ≥ $0.3   (n 39; lama 19 / baru 20): 5s 21% -4.45 • 10s 21% -4.65 • 30s 31% -3.84 • 60s 31% -4.19 • 120s 31% -4.52 • 180s 31% -4.85 | tutup d+1 13% -3.37
+   NFP      detik 1 searah ≥ $0.5  (n 28; lama 15 / baru 13): 5s 82% +4.54 • 10s 82% +4.72 • 30s 71% +4.21 • 60s 75% +5.15 • 120s 79% +6.44 • 180s 71% +6.98 | tutup d+1 89% +3.28
+   NFP      detik 1 lawan ≥ $0.5   (n 28; lama 15 / baru 13): 5s 18% -5.79 • 10s 18% -5.90 • 30s 25% -5.31 • 60s 25% -6.23 • 120s 21% -7.36 • 180s 25% -7.90 | tutup d+1 7% -4.49
+   NFP      detik 1 searah ≥ $1.0  (n 18; lama 9 / baru 9): 5s 78% +4.82 • 10s 78% +4.91 • 30s 67% +4.31 • 60s 72% +5.81 • 120s 78% +7.41 • 180s 72% +8.45 | tutup d+1 94% +3.97
+   NFP      detik 1 lawan ≥ $1.0   (n 18; lama 9 / baru 9): 5s 22% -6.07 • 10s 22% -6.16 • 30s 33% -5.44 • 60s 28% -6.93 • 120s 22% -8.37 • 180s 22% -9.41 | tutup d+1 6% -5.18
+   NFP      detik 2 searah ≥ $0.3  (n 103; lama 51 / baru 52): 5s 93% +5.16 • 10s 94% +6.03 • 30s 83% +6.15 • 60s 83% +6.69 • 120s 78% +6.19 • 180s 75% +6.53 | tutup d+1 87% +3.96
+   NFP      detik 2 lawan ≥ $0.3   (n 103; lama 51 / baru 52): 5s 4% -6.28 • 10s 5% -7.10 • 30s 12% -7.13 • 60s 14% -7.64 • 120s 19% -7.00 • 180s 18% -7.33 | tutup d+1 4% -5.11
+   NFP      detik 2 searah ≥ $0.5  (n 93; lama 42 / baru 51): 5s 94% +5.38 • 10s 95% +6.11 • 30s 85% +6.32 • 60s 83% +6.74 • 120s 80% +6.29 • 180s 77% +6.61 | tutup d+1 91% +4.17
+   NFP      detik 2 lawan ≥ $0.5   (n 93; lama 42 / baru 51): 5s 4% -6.44 • 10s 4% -7.15 • 30s 11% -7.29 • 60s 13% -7.68 • 120s 18% -7.09 • 180s 17% -7.40 | tutup d+1 4% -5.26
+   NFP      detik 2 searah ≥ $1.0  (n 82; lama 36 / baru 46): 5s 95% +5.80 • 10s 95% +6.66 • 30s 87% +6.88 • 60s 84% +7.31 • 120s 79% +6.75 • 180s 79% +7.25 | tutup d+1 94% +4.59
+   NFP      detik 2 lawan ≥ $1.0   (n 82; lama 36 / baru 46): 5s 2% -6.86 • 10s 4% -7.69 • 30s 11% -7.84 • 60s 12% -8.25 • 120s 18% -7.55 • 180s 15% -8.03 | tutup d+1 4% -5.66
+   NFP      detik 2 searah ≥ $2.0  (n 48; lama 12 / baru 36): 5s 100% +8.28 • 10s 98% +9.47 • 30s 92% +9.95 • 60s 90% +10.92 • 120s 83% +10.21 • 180s 85% +10.83 | tutup d+1 98% +6.72
+   NFP      detik 2 lawan ≥ $2.0   (n 48; lama 12 / baru 36): 5s 0% -9.29 • 10s 0% -10.45 • 30s 8% -10.85 • 60s 8% -11.83 • 120s 12% -11.00 • 180s 12% -11.60 | tutup d+1 0% -7.73
+   FOMC     detik 1 searah ≥ $0.3  (n 29; lama 16 / baru 13): 5s 59% +0.05 • 10s 55% -1.23 • 30s 62% -0.25 • 60s 48% -1.05 • 120s 48% -1.19 • 180s 45% -1.73 | tutup d+1 69% +1.05
+   FOMC     detik 1 lawan ≥ $0.3   (n 29; lama 16 / baru 13): 5s 21% -1.01 • 10s 38% +0.30 • 30s 38% -0.66 • 60s 48% +0.16 • 120s 52% +0.42 • 180s 55% +0.94 | tutup d+1 7% -2.05
+   FOMC     detik 1 searah ≥ $0.5  (n 23; lama 14 / baru 9): 5s 65% +0.06 • 10s 61% -0.16 • 30s 65% +0.28 • 60s 52% -0.39 • 120s 52% -1.35 • 180s 48% -0.92 | tutup d+1 78% +1.25
+   FOMC     detik 1 lawan ≥ $0.5   (n 23; lama 14 / baru 9): 5s 17% -0.98 • 10s 30% -0.72 • 30s 35% -1.14 • 60s 43% -0.46 • 120s 48% +0.61 • 180s 52% +0.17 | tutup d+1 4% -2.23
+   FOMC     detik 1 searah ≥ $1.0  (n 11; lama 8 / baru 3): 5s 64% +1.61 • 10s 73% +2.27 • 30s 82% +3.09 • 60s 73% +3.24 • 120s 55% +0.52 • 180s 55% +0.35 | tutup d+1 82% +1.69
+   FOMC     detik 1 lawan ≥ $1.0   (n 11; lama 8 / baru 3): 5s 18% -2.62 • 10s 18% -3.28 • 30s 18% -4.07 • 60s 27% -4.23 • 120s 45% -1.32 • 180s 45% -1.16 | tutup d+1 0% -2.75
+   FOMC     detik 2 searah ≥ $0.3  (n 53; lama 28 / baru 25): 5s 81% +3.13 • 10s 75% +2.32 • 30s 72% +2.63 • 60s 62% +2.20 • 120s 66% +2.98 • 180s 62% +2.64 | tutup d+1 87% +2.33
+   FOMC     detik 2 lawan ≥ $0.3   (n 53; lama 28 / baru 25): 5s 4% -4.08 • 10s 15% -3.27 • 30s 23% -3.55 • 60s 32% -3.08 • 120s 32% -3.76 • 180s 32% -3.41 | tutup d+1 0% -3.28
+   FOMC     detik 2 searah ≥ $0.5  (n 45; lama 22 / baru 23): 5s 89% +3.72 • 10s 82% +2.94 • 30s 78% +3.20 • 60s 64% +2.63 • 120s 67% +3.26 • 180s 62% +3.19 | tutup d+1 96% +2.74
+   FOMC     detik 2 lawan ≥ $0.5   (n 45; lama 22 / baru 23): 5s 2% -4.64 • 10s 13% -3.82 • 30s 22% -4.09 • 60s 31% -3.50 • 120s 31% -4.02 • 180s 31% -3.90 | tutup d+1 0% -3.65
+   FOMC     detik 2 searah ≥ $1.0  (n 33; lama 14 / baru 19): 5s 91% +4.77 • 10s 88% +3.70 • 30s 85% +4.40 • 60s 70% +3.59 • 120s 70% +4.48 • 180s 67% +4.50 | tutup d+1 100% +3.46
+   FOMC     detik 2 lawan ≥ $1.0   (n 33; lama 14 / baru 19): 5s 3% -5.71 • 10s 9% -4.61 • 30s 15% -5.31 • 60s 24% -4.48 • 120s 27% -5.26 • 180s 24% -5.20 | tutup d+1 0% -4.40
+   FOMC     detik 2 searah ≥ $2.0  (n 19; lama 6 / baru 13): 5s 95% +6.68 • 10s 89% +4.94 • 30s 84% +6.17 • 60s 79% +5.28 • 120s 79% +7.04 • 180s 79% +7.04 | tutup d+1 100% +5.06
+   FOMC     detik 2 lawan ≥ $2.0   (n 19; lama 6 / baru 13): 5s 5% -7.65 • 10s 11% -5.88 • 30s 16% -7.11 • 60s 21% -6.21 • 120s 21% -7.79 • 180s 16% -7.77 | tutup d+1 0% -6.06
+   PCE      detik 1 searah ≥ $0.3  (n 22; lama 0 / baru 22): 5s 68% +0.34 • 10s 55% +0.43 • 30s 55% +0.18 • 60s 59% +0.54 • 120s 68% +0.59 • 180s 59% +0.31 | tutup d+1 86% +0.55
+   PCE      detik 1 lawan ≥ $0.3   (n 22; lama 0 / baru 22): 5s 32% -0.77 • 10s 36% -0.90 • 30s 36% -0.73 • 60s 32% -1.11 • 120s 27% -0.99 • 180s 41% -0.72 | tutup d+1 9% -0.97
+   PCE      detik 1 searah ≥ $0.5  (n 12; lama 0 / baru 12): 5s 83% +0.77 • 10s 75% +1.31 • 30s 58% +0.55 • 60s 50% +0.63 • 120s 75% +1.01 • 180s 75% +1.05 | tutup d+1 92% +1.00
+   PCE      detik 1 lawan ≥ $0.5   (n 12; lama 0 / baru 12): 5s 17% -1.24 • 10s 17% -1.84 • 30s 25% -1.22 • 60s 33% -1.36 • 120s 25% -1.43 • 180s 25% -1.48 | tutup d+1 8% -1.44
+   PCE      detik 2 searah ≥ $0.3  (n 27; lama 0 / baru 27): 5s 74% +0.72 • 10s 56% +0.52 • 30s 52% +0.20 • 60s 48% +0.23 • 120s 59% -0.02 • 180s 52% -0.09 | tutup d+1 85% +0.81
+   PCE      detik 2 lawan ≥ $0.3   (n 27; lama 0 / baru 27): 5s 22% -1.15 • 10s 30% -1.02 • 30s 33% -0.79 • 60s 37% -0.87 • 120s 37% -0.40 • 180s 48% -0.33 | tutup d+1 4% -1.23
+   PCE      detik 2 searah ≥ $0.5  (n 18; lama 0 / baru 18): 5s 89% +1.05 • 10s 78% +1.33 • 30s 67% +0.81 • 60s 50% +0.67 • 120s 56% -0.12 • 180s 61% +0.13 | tutup d+1 89% +1.10
+   PCE      detik 2 lawan ≥ $0.5   (n 18; lama 0 / baru 18): 5s 11% -1.52 • 10s 11% -1.85 • 30s 17% -1.45 • 60s 33% -1.35 • 120s 44% -0.32 • 180s 39% -0.57 | tutup d+1 0% -1.55
+   RETAIL   detik 1 searah ≥ $0.3  (n 62; lama 29 / baru 33): 5s 90% +1.51 • 10s 87% +1.40 • 30s 81% +1.63 • 60s 79% +1.73 • 120s 76% +1.56 • 180s 73% +1.64 | tutup d+1 92% +1.41
+   RETAIL   detik 1 lawan ≥ $0.3   (n 62; lama 29 / baru 33): 5s 2% -2.12 • 10s 6% -2.00 • 30s 10% -2.26 • 60s 13% -2.37 • 120s 21% -2.07 • 180s 19% -2.16 | tutup d+1 2% -2.08
+   RETAIL   detik 1 searah ≥ $0.5  (n 46; lama 16 / baru 30): 5s 98% +1.95 • 10s 93% +1.85 • 30s 83% +1.96 • 60s 80% +1.94 • 120s 76% +1.85 • 180s 74% +2.03 | tutup d+1 96% +1.78
+   RETAIL   detik 1 lawan ≥ $0.5   (n 46; lama 16 / baru 30): 5s 2% -2.53 • 10s 2% -2.41 • 30s 11% -2.55 • 60s 13% -2.56 • 120s 20% -2.33 • 180s 17% -2.51 | tutup d+1 2% -2.41
+   RETAIL   detik 1 searah ≥ $1.0  (n 35; lama 9 / baru 26): 5s 100% +2.33 • 10s 94% +2.22 • 30s 83% +2.24 • 60s 83% +2.26 • 120s 77% +2.18 • 180s 80% +2.43 | tutup d+1 97% +2.16
+   RETAIL   detik 1 lawan ≥ $1.0   (n 35; lama 9 / baru 26): 5s 0% -2.94 • 10s 0% -2.79 • 30s 9% -2.85 • 60s 11% -2.89 • 120s 17% -2.65 • 180s 17% -2.91 | tutup d+1 0% -2.80
+   RETAIL   detik 1 searah ≥ $2.0  (n 15; lama 0 / baru 15): 5s 100% +3.30 • 10s 100% +3.09 • 30s 73% +3.00 • 60s 80% +2.67 • 120s 80% +3.07 • 180s 87% +3.99 | tutup d+1 100% +3.42
+   RETAIL   detik 1 lawan ≥ $2.0   (n 15; lama 0 / baru 15): 5s 0% -3.80 • 10s 0% -3.56 • 30s 13% -3.51 • 60s 20% -3.18 • 120s 13% -3.45 • 180s 13% -4.36 | tutup d+1 0% -3.90
+   RETAIL   detik 2 searah ≥ $0.3  (n 71; lama 34 / baru 37): 5s 93% +1.51 • 10s 86% +1.38 • 30s 79% +1.44 • 60s 79% +1.58 • 120s 72% +1.40 • 180s 73% +1.53 | tutup d+1 92% +1.48
+   RETAIL   detik 2 lawan ≥ $0.3   (n 71; lama 34 / baru 37): 5s 0% -2.15 • 10s 8% -1.99 • 30s 14% -2.07 • 60s 14% -2.22 • 120s 23% -1.93 • 180s 20% -2.06 | tutup d+1 0% -2.13
+   RETAIL   detik 2 searah ≥ $0.5  (n 65; lama 30 / baru 35): 5s 97% +1.63 • 10s 88% +1.48 • 30s 78% +1.47 • 60s 78% +1.64 • 120s 72% +1.51 • 180s 74% +1.69 | tutup d+1 95% +1.62
+   RETAIL   detik 2 lawan ≥ $0.5   (n 65; lama 30 / baru 35): 5s 0% -2.25 • 10s 8% -2.08 • 30s 14% -2.09 • 60s 14% -2.27 • 120s 22% -2.03 • 180s 18% -2.21 | tutup d+1 0% -2.26
+   RETAIL   detik 2 searah ≥ $1.0  (n 42; lama 15 / baru 27): 5s 98% +2.26 • 10s 93% +2.18 • 30s 86% +2.09 • 60s 88% +2.38 • 120s 83% +2.38 • 180s 86% +2.73 | tutup d+1 98% +2.25
+   RETAIL   detik 2 lawan ≥ $1.0   (n 42; lama 15 / baru 27): 5s 0% -2.89 • 10s 5% -2.79 • 30s 10% -2.73 • 60s 7% -3.03 • 120s 12% -2.88 • 180s 10% -3.24 | tutup d+1 0% -2.89
+   RETAIL   detik 2 searah ≥ $2.0  (n 21; lama 5 / baru 16): 5s 100% +3.05 • 10s 100% +2.85 • 30s 86% +3.02 • 60s 90% +3.01 • 120s 90% +3.25 • 180s 90% +3.97 | tutup d+1 100% +3.21
+   RETAIL   detik 2 lawan ≥ $2.0   (n 21; lama 5 / baru 16): 5s 0% -3.65 • 10s 0% -3.42 • 30s 10% -3.59 • 60s 10% -3.59 • 120s 5% -3.72 • 180s 5% -4.45 | tutup d+1 0% -3.80
+   GDP      detik 1 searah ≥ $0.3  (n 15; lama 4 / baru 11): 5s 47% -0.13 • 10s 47% -0.70 • 30s 47% +0.22 • 60s 47% +0.34 • 120s 47% -0.05 • 180s 67% +0.49 | tutup d+1 80% +0.55
+   GDP      detik 1 lawan ≥ $0.3   (n 15; lama 4 / baru 11): 5s 27% -0.53 • 10s 40% +0.03 • 30s 40% -0.93 • 60s 47% -1.06 • 120s 33% -0.54 • 180s 33% -1.07 | tutup d+1 7% -1.21
+   GDP      detik 2 searah ≥ $0.3  (n 34; lama 16 / baru 18): 5s 65% +0.56 • 10s 62% +0.39 • 30s 74% +1.07 • 60s 71% +0.86 • 120s 65% +0.52 • 180s 71% +0.80 | tutup d+1 82% +0.70
+   GDP      detik 2 lawan ≥ $0.3   (n 34; lama 16 / baru 18): 5s 12% -1.38 • 10s 21% -1.15 • 30s 18% -1.87 • 60s 24% -1.65 • 120s 24% -1.19 • 180s 26% -1.46 | tutup d+1 3% -1.52
+   GDP      detik 2 searah ≥ $0.5  (n 21; lama 10 / baru 11): 5s 81% +1.04 • 10s 76% +0.80 • 30s 90% +1.72 • 60s 86% +1.47 • 120s 76% +1.35 • 180s 81% +1.69 | tutup d+1 90% +1.03
+   GDP      detik 2 lawan ≥ $0.5   (n 21; lama 10 / baru 11): 5s 10% -2.02 • 10s 14% -1.69 • 30s 10% -2.65 • 60s 5% -2.40 • 120s 5% -2.11 • 180s 14% -2.42 | tutup d+1 5% -2.03
+   GDP      detik 2 searah ≥ $1.0  (n 14; lama 8 / baru 6): 5s 86% +1.34 • 10s 79% +0.81 • 30s 93% +1.76 • 60s 86% +1.33 • 120s 79% +1.58 • 180s 86% +1.77 | tutup d+1 86% +1.29
+   GDP      detik 2 lawan ≥ $1.0   (n 14; lama 8 / baru 6): 5s 7% -2.45 • 10s 14% -1.80 • 30s 7% -2.80 • 60s 7% -2.35 • 120s 0% -2.36 • 180s 7% -2.53 | tutup d+1 7% -2.44
+   ISM      detik 1 searah ≥ $0.3  (n 166; lama 72 / baru 94): 5s 89% +1.71 • 10s 88% +1.67 • 30s 83% +1.79 • 60s 82% +1.96 • 120s 78% +2.08 • 180s 78% +2.36 | tutup d+1 93% +1.74
+   ISM      detik 1 lawan ≥ $0.3   (n 166; lama 72 / baru 94): 5s 5% -2.32 • 10s 7% -2.27 • 30s 8% -2.41 • 60s 11% -2.57 • 120s 16% -2.61 • 180s 16% -2.88 | tutup d+1 2% -2.38
+   ISM      detik 1 searah ≥ $0.5  (n 151; lama 60 / baru 91): 5s 92% +1.88 • 10s 90% +1.84 • 30s 84% +1.96 • 60s 83% +2.15 • 120s 79% +2.27 • 180s 81% +2.62 | tutup d+1 97% +1.91
+   ISM      detik 1 lawan ≥ $0.5   (n 151; lama 60 / baru 91): 5s 4% -2.47 • 10s 6% -2.42 • 30s 8% -2.56 • 60s 11% -2.74 • 120s 16% -2.79 • 180s 15% -3.13 | tutup d+1 1% -2.54
+   ISM      detik 1 searah ≥ $1.0  (n 112; lama 36 / baru 76): 5s 96% +2.41 • 10s 94% +2.27 • 30s 88% +2.36 • 60s 87% +2.53 • 120s 82% +2.58 • 180s 86% +2.98 | tutup d+1 98% +2.41
+   ISM      detik 1 lawan ≥ $1.0   (n 112; lama 36 / baru 76): 5s 2% -2.97 • 10s 4% -2.83 • 30s 6% -2.95 • 60s 10% -3.10 • 120s 14% -3.07 • 180s 12% -3.46 | tutup d+1 1% -3.01
+   ISM      detik 1 searah ≥ $2.0  (n 56; lama 6 / baru 50): 5s 100% +3.46 • 10s 95% +3.25 • 30s 93% +3.31 • 60s 95% +3.64 • 120s 88% +3.93 • 180s 89% +4.51 | tutup d+1 100% +3.55
+   ISM      detik 1 lawan ≥ $2.0   (n 56; lama 6 / baru 50): 5s 0% -3.96 • 10s 2% -3.76 • 30s 5% -3.87 • 60s 5% -4.19 • 120s 11% -4.37 • 180s 11% -4.93 | tutup d+1 0% -4.06
+   ISM      detik 2 searah ≥ $0.3  (n 187; lama 88 / baru 99): 5s 91% +1.74 • 10s 89% +1.70 • 30s 82% +1.76 • 60s 81% +1.88 • 120s 78% +2.06 • 180s 79% +2.37 | tutup d+1 92% +1.72
+   ISM      detik 2 lawan ≥ $0.3   (n 187; lama 88 / baru 99): 5s 3% -2.36 • 10s 5% -2.31 • 30s 7% -2.39 • 60s 10% -2.50 • 120s 14% -2.60 • 180s 14% -2.90 | tutup d+1 1% -2.36
+   ISM      detik 2 searah ≥ $0.5  (n 160; lama 74 / baru 86): 5s 95% +1.98 • 10s 93% +1.90 • 30s 86% +1.98 • 60s 84% +2.12 • 120s 81% +2.26 • 180s 83% +2.63 | tutup d+1 96% +1.97
+   ISM      detik 2 lawan ≥ $0.5   (n 160; lama 74 / baru 86): 5s 1% -2.61 • 10s 2% -2.52 • 30s 5% -2.61 • 60s 8% -2.74 • 120s 12% -2.80 • 180s 12% -3.16 | tutup d+1 0% -2.63
+   ISM      detik 2 searah ≥ $1.0  (n 125; lama 47 / baru 78): 5s 98% +2.39 • 10s 95% +2.27 • 30s 89% +2.34 • 60s 89% +2.57 • 120s 83% +2.64 • 180s 86% +3.08 | tutup d+1 99% +2.41
+   ISM      detik 2 lawan ≥ $1.0   (n 125; lama 47 / baru 78): 5s 1% -3.01 • 10s 2% -2.87 • 30s 5% -2.96 • 60s 7% -3.18 • 120s 13% -3.16 • 180s 10% -3.59 | tutup d+1 0% -3.04
+   ISM      detik 2 searah ≥ $2.0  (n 68; lama 13 / baru 55): 5s 100% +3.42 • 10s 96% +3.26 • 30s 94% +3.32 • 60s 93% +3.65 • 120s 90% +3.87 • 180s 93% +4.34 | tutup d+1 100% +3.50
+   ISM      detik 2 lawan ≥ $2.0   (n 68; lama 13 / baru 55): 5s 0% -3.97 • 10s 0% -3.81 • 30s 4% -3.90 • 60s 4% -4.23 • 120s 7% -4.33 • 180s 6% -4.78 | tutup d+1 0% -4.05
+   JOLTS    detik 1 searah ≥ $0.3  (n 12; lama 0 / baru 12): 5s 67% +0.97 • 10s 67% +0.52 • 30s 50% +0.32 • 60s 58% +0.89 • 120s 58% +1.06 • 180s 58% +1.18 | tutup d+1 67% +0.85
+   JOLTS    detik 1 lawan ≥ $0.3   (n 12; lama 0 / baru 12): 5s 33% -1.40 • 10s 33% -0.96 • 30s 50% -0.79 • 60s 42% -1.38 • 120s 42% -1.44 • 180s 42% -1.56 | tutup d+1 33% -1.28
+   JOLTS    detik 2 searah ≥ $0.3  (n 21; lama 0 / baru 21): 5s 100% +2.42 • 10s 100% +2.65 • 30s 90% +3.23 • 60s 95% +3.63 • 120s 81% +3.32 • 180s 90% +4.33 | tutup d+1 100% +2.32
+   JOLTS    detik 2 lawan ≥ $0.3   (n 21; lama 0 / baru 21): 5s 0% -2.85 • 10s 0% -3.09 • 30s 10% -3.70 • 60s 5% -4.11 • 120s 14% -3.71 • 180s 10% -4.71 | tutup d+1 0% -2.75
+   JOLTS    detik 2 searah ≥ $0.5  (n 18; lama 0 / baru 18): 5s 100% +2.67 • 10s 100% +2.86 • 30s 89% +3.28 • 60s 94% +3.82 • 120s 83% +3.79 • 180s 94% +4.69 | tutup d+1 100% +2.62
+   JOLTS    detik 2 lawan ≥ $0.5   (n 18; lama 0 / baru 18): 5s 0% -3.11 • 10s 0% -3.30 • 30s 11% -3.77 • 60s 6% -4.32 • 120s 11% -4.16 • 180s 6% -5.06 | tutup d+1 0% -3.06
+   JOLTS    detik 2 searah ≥ $1.0  (n 16; lama 0 / baru 16): 5s 100% +2.95 • 10s 100% +3.07 • 30s 94% +3.59 • 60s 100% +4.24 • 120s 88% +4.18 • 180s 100% +5.38 | tutup d+1 100% +2.86
+   JOLTS    detik 2 lawan ≥ $1.0   (n 16; lama 0 / baru 16): 5s 0% -3.40 • 10s 0% -3.52 • 30s 6% -4.06 • 60s 0% -4.74 • 120s 6% -4.55 • 180s 0% -5.75 | tutup d+1 0% -3.31
+   JOLTS    detik 2 searah ≥ $2.0  (n 11; lama 0 / baru 11): 5s 100% +3.92 • 10s 100% +3.84 • 30s 100% +4.51 • 60s 100% +5.07 • 120s 100% +5.49 • 180s 100% +6.77 | tutup d+1 100% +3.61
+   JOLTS    detik 2 lawan ≥ $2.0   (n 11; lama 0 / baru 11): 5s 0% -4.38 • 10s 0% -4.31 • 30s 0% -5.03 • 60s 0% -5.62 • 120s 0% -5.85 • 180s 0% -7.14 | tutup d+1 0% -4.07
+   ADP      detik 1 searah ≥ $0.3  (n 36; lama 16 / baru 20): 5s 72% +0.71 • 10s 69% +0.78 • 30s 69% +0.54 • 60s 67% +0.55 • 120s 64% +0.61 • 180s 64% +0.58 | tutup d+1 78% +0.71
+   ADP      detik 1 lawan ≥ $0.3   (n 36; lama 16 / baru 20): 5s 17% -1.47 • 10s 22% -1.54 • 30s 25% -1.29 • 60s 25% -1.29 • 120s 33% -1.27 • 180s 31% -1.23 | tutup d+1 14% -1.50
+   ADP      detik 1 searah ≥ $0.5  (n 27; lama 16 / baru 11): 5s 78% +1.02 • 10s 78% +1.23 • 30s 78% +0.99 • 60s 78% +0.97 • 120s 74% +1.15 • 180s 74% +1.07 | tutup d+1 81% +1.00
+   ADP      detik 1 lawan ≥ $0.5   (n 27; lama 16 / baru 11): 5s 11% -1.83 • 10s 15% -2.03 • 30s 15% -1.76 • 60s 19% -1.72 • 120s 26% -1.84 • 180s 22% -1.75 | tutup d+1 11% -1.87
+   ADP      detik 1 searah ≥ $1.0  (n 19; lama 11 / baru 8): 5s 74% +1.07 • 10s 74% +1.26 • 30s 79% +0.90 • 60s 79% +0.84 • 120s 74% +1.06 • 180s 74% +1.09 | tutup d+1 84% +1.05
+   ADP      detik 1 lawan ≥ $1.0   (n 19; lama 11 / baru 8): 5s 16% -1.83 • 10s 21% -2.04 • 30s 21% -1.63 • 60s 21% -1.56 • 120s 26% -1.71 • 180s 21% -1.73 | tutup d+1 16% -1.90
+   ADP      detik 2 searah ≥ $0.3  (n 66; lama 28 / baru 38): 5s 95% +1.60 • 10s 89% +1.63 • 30s 91% +1.57 • 60s 88% +1.73 • 120s 91% +1.83 • 180s 85% +1.89 | tutup d+1 98% +1.61
+   ADP      detik 2 lawan ≥ $0.3   (n 66; lama 28 / baru 38): 5s 0% -2.29 • 10s 3% -2.34 • 30s 5% -2.30 • 60s 5% -2.46 • 120s 8% -2.44 • 180s 8% -2.48 | tutup d+1 0% -2.31
+   ADP      detik 2 searah ≥ $0.5  (n 57; lama 23 / baru 34): 5s 95% +1.76 • 10s 89% +1.77 • 30s 91% +1.61 • 60s 88% +1.74 • 120s 89% +1.89 • 180s 86% +1.99 | tutup d+1 100% +1.79
+   ADP      detik 2 lawan ≥ $0.5   (n 57; lama 23 / baru 34): 5s 0% -2.45 • 10s 4% -2.48 • 30s 5% -2.34 • 60s 5% -2.48 • 120s 9% -2.51 • 180s 9% -2.59 | tutup d+1 0% -2.48
+   ADP      detik 2 searah ≥ $1.0  (n 41; lama 15 / baru 26): 5s 100% +2.18 • 10s 98% +2.24 • 30s 100% +1.98 • 60s 98% +2.11 • 120s 95% +2.38 • 180s 93% +2.37 | tutup d+1 100% +2.26
+   ADP      detik 2 lawan ≥ $1.0   (n 41; lama 15 / baru 26): 5s 0% -2.88 • 10s 0% -2.97 • 30s 0% -2.74 • 60s 0% -2.88 • 120s 2% -3.00 • 180s 2% -2.96 | tutup d+1 0% -2.95
+   ADP      detik 2 searah ≥ $2.0  (n 22; lama 7 / baru 15): 5s 100% +2.56 • 10s 100% +2.56 • 30s 100% +2.16 • 60s 100% +2.28 • 120s 95% +2.71 • 180s 95% +2.86 | tutup d+1 100% +2.78
+   ADP      detik 2 lawan ≥ $2.0   (n 22; lama 7 / baru 15): 5s 0% -3.29 • 10s 0% -3.38 • 30s 0% -3.00 • 60s 0% -3.10 • 120s 5% -3.35 • 180s 0% -3.48 | tutup d+1 0% -3.53
+   KONSUMEN detik 1 searah ≥ $0.3  (n 52; lama 7 / baru 45): 5s 83% +1.02 • 10s 75% +1.00 • 30s 71% +0.81 • 60s 60% +0.63 • 120s 63% +0.68 • 180s 67% +0.70 | tutup d+1 87% +1.09
+   KONSUMEN detik 1 lawan ≥ $0.3   (n 52; lama 7 / baru 45): 5s 8% -1.53 • 10s 12% -1.53 • 30s 23% -1.40 • 60s 27% -1.23 • 120s 29% -1.16 • 180s 25% -1.17 | tutup d+1 6% -1.61
+   KONSUMEN detik 1 searah ≥ $0.5  (n 40; lama 4 / baru 36): 5s 85% +1.05 • 10s 80% +1.14 • 30s 78% +1.08 • 60s 62% +0.89 • 120s 68% +0.98 • 180s 70% +0.90 | tutup d+1 88% +1.18
+   KONSUMEN detik 1 lawan ≥ $0.5   (n 40; lama 4 / baru 36): 5s 8% -1.57 • 10s 10% -1.68 • 30s 18% -1.70 • 60s 25% -1.52 • 120s 22% -1.47 • 180s 20% -1.38 | tutup d+1 8% -1.71
+   KONSUMEN detik 1 searah ≥ $1.0  (n 21; lama 0 / baru 21): 5s 100% +1.89 • 10s 95% +1.95 • 30s 86% +1.94 • 60s 81% +1.86 • 120s 81% +1.95 • 180s 71% +1.67 | tutup d+1 100% +1.84
+   KONSUMEN detik 1 lawan ≥ $1.0   (n 21; lama 0 / baru 21): 5s 0% -2.39 • 10s 5% -2.49 • 30s 10% -2.61 • 60s 14% -2.54 • 120s 14% -2.44 • 180s 14% -2.13 | tutup d+1 0% -2.36
+   KONSUMEN detik 1 searah ≥ $2.0  (n 10; lama 0 / baru 10): 5s 100% +2.24 • 10s 100% +2.05 • 30s 100% +2.45 • 60s 80% +2.03 • 120s 70% +1.79 • 180s 70% +1.51 | tutup d+1 100% +2.40
+   KONSUMEN detik 1 lawan ≥ $2.0   (n 10; lama 0 / baru 10): 5s 0% -2.80 • 10s 0% -2.65 • 30s 0% -3.18 • 60s 10% -2.81 • 120s 20% -2.30 • 180s 10% -1.97 | tutup d+1 0% -2.99
+   KONSUMEN detik 2 searah ≥ $0.3  (n 73; lama 18 / baru 55): 5s 89% +1.28 • 10s 85% +1.20 • 30s 79% +0.98 • 60s 68% +0.97 • 120s 71% +1.15 • 180s 75% +1.21 | tutup d+1 95% +1.23
+   KONSUMEN detik 2 lawan ≥ $0.3   (n 73; lama 18 / baru 55): 5s 1% -1.83 • 10s 5% -1.76 • 30s 12% -1.59 • 60s 16% -1.58 • 120s 19% -1.68 • 180s 16% -1.73 | tutup d+1 0% -1.78
+   KONSUMEN detik 2 searah ≥ $0.5  (n 59; lama 11 / baru 48): 5s 92% +1.54 • 10s 90% +1.45 • 30s 85% +1.20 • 60s 73% +1.11 • 120s 76% +1.31 • 180s 78% +1.38 | tutup d+1 97% +1.47
+   KONSUMEN detik 2 lawan ≥ $0.5   (n 59; lama 11 / baru 48): 5s 0% -2.09 • 10s 2% -2.02 • 30s 8% -1.83 • 60s 12% -1.74 • 120s 14% -1.85 • 180s 12% -1.90 | tutup d+1 0% -2.03
+   KONSUMEN detik 2 searah ≥ $1.0  (n 43; lama 3 / baru 40): 5s 98% +1.93 • 10s 95% +1.86 • 30s 91% +1.63 • 60s 84% +1.64 • 120s 88% +1.83 • 180s 81% +1.71 | tutup d+1 100% +1.87
+   KONSUMEN detik 2 lawan ≥ $1.0   (n 43; lama 3 / baru 40): 5s 0% -2.41 • 10s 2% -2.36 • 30s 5% -2.22 • 60s 9% -2.24 • 120s 7% -2.30 • 180s 9% -2.16 | tutup d+1 0% -2.36
+   KONSUMEN detik 2 searah ≥ $2.0  (n 19; lama 0 / baru 19): 5s 100% +2.61 • 10s 100% +2.30 • 30s 95% +2.01 • 60s 79% +1.92 • 120s 79% +2.06 • 180s 74% +2.12 | tutup d+1 100% +2.57
+   KONSUMEN detik 2 lawan ≥ $2.0   (n 19; lama 0 / baru 19): 5s 0% -3.10 • 10s 0% -2.84 • 30s 5% -2.68 • 60s 16% -2.61 • 120s 11% -2.50 • 180s 11% -2.55 | tutup d+1 0% -3.06
+   CLAIMS   detik 1 searah ≥ $0.3  (n 71; lama 7 / baru 64): 5s 79% +1.13 • 10s 70% +0.99 • 30s 73% +1.02 • 60s 68% +1.04 • 120s 68% +1.21 • 180s 75% +1.42 | tutup d+1 87% +0.94
+   CLAIMS   detik 1 lawan ≥ $0.3   (n 71; lama 7 / baru 64): 5s 10% -1.63 • 10s 18% -1.53 • 30s 20% -1.55 • 60s 25% -1.56 • 120s 21% -1.69 • 180s 21% -1.89 | tutup d+1 6% -1.47
+   CLAIMS   detik 1 searah ≥ $0.5  (n 58; lama 4 / baru 54): 5s 88% +1.36 • 10s 78% +1.26 • 30s 81% +1.46 • 60s 74% +1.52 • 120s 72% +1.67 • 180s 78% +1.79 | tutup d+1 91% +1.13
+   CLAIMS   detik 1 lawan ≥ $0.5   (n 58; lama 4 / baru 54): 5s 7% -1.83 • 10s 16% -1.74 • 30s 12% -1.94 • 60s 21% -2.00 • 120s 16% -2.11 • 180s 17% -2.23 | tutup d+1 5% -1.62
+   CLAIMS   detik 1 searah ≥ $1.0  (n 35; lama 2 / baru 33): 5s 94% +1.78 • 10s 86% +1.58 • 30s 83% +1.59 • 60s 77% +1.61 • 120s 80% +1.81 • 180s 83% +1.94 | tutup d+1 91% +1.51
+   CLAIMS   detik 1 lawan ≥ $1.0   (n 35; lama 2 / baru 33): 5s 3% -2.25 • 10s 9% -2.07 • 30s 9% -2.08 • 60s 17% -2.11 • 120s 11% -2.25 • 180s 14% -2.37 | tutup d+1 3% -2.00
+   CLAIMS   detik 1 searah ≥ $2.0  (n 15; lama 0 / baru 15): 5s 93% +2.78 • 10s 100% +2.19 • 30s 93% +1.98 • 60s 73% +1.67 • 120s 80% +1.56 • 180s 87% +2.02 | tutup d+1 100% +2.28
+   CLAIMS   detik 1 lawan ≥ $2.0   (n 15; lama 0 / baru 15): 5s 0% -3.18 • 10s 0% -2.58 • 30s 7% -2.34 • 60s 27% -2.03 • 120s 13% -1.92 • 180s 13% -2.38 | tutup d+1 0% -2.70
+   CLAIMS   detik 2 searah ≥ $0.3  (n 85; lama 12 / baru 73): 5s 80% +1.03 • 10s 73% +0.95 • 30s 71% +0.90 • 60s 65% +0.92 • 120s 64% +1.03 • 180s 69% +1.13 | tutup d+1 85% +0.93
+   CLAIMS   detik 2 lawan ≥ $0.3   (n 85; lama 12 / baru 73): 5s 8% -1.55 • 10s 15% -1.48 • 30s 18% -1.43 • 60s 24% -1.43 • 120s 25% -1.51 • 180s 26% -1.62 | tutup d+1 4% -1.46
+   CLAIMS   detik 2 searah ≥ $0.5  (n 67; lama 6 / baru 61): 5s 88% +1.39 • 10s 79% +1.27 • 30s 79% +1.27 • 60s 75% +1.34 • 120s 70% +1.40 • 180s 76% +1.53 | tutup d+1 94% +1.22
+   CLAIMS   detik 2 lawan ≥ $0.5   (n 67; lama 6 / baru 61): 5s 4% -1.86 • 10s 12% -1.76 • 30s 13% -1.75 • 60s 19% -1.81 • 120s 18% -1.85 • 180s 21% -1.98 | tutup d+1 1% -1.70
+   CLAIMS   detik 2 searah ≥ $1.0  (n 43; lama 4 / baru 39): 5s 95% +1.76 • 10s 91% +1.73 • 30s 88% +1.99 • 60s 81% +1.89 • 120s 81% +1.90 • 180s 84% +2.04 | tutup d+1 100% +1.66
+   CLAIMS   detik 2 lawan ≥ $1.0   (n 43; lama 4 / baru 39): 5s 0% -2.25 • 10s 7% -2.22 • 30s 7% -2.46 • 60s 14% -2.36 • 120s 12% -2.35 • 180s 14% -2.48 | tutup d+1 0% -2.15
+   CLAIMS   detik 2 searah ≥ $2.0  (n 12; lama 0 / baru 12): 5s 100% +3.27 • 10s 92% +2.33 • 30s 83% +1.68 • 60s 75% +1.80 • 120s 75% +1.61 • 180s 83% +2.01 | tutup d+1 100% +2.75
+   CLAIMS   detik 2 lawan ≥ $2.0   (n 12; lama 0 / baru 12): 5s 0% -3.68 • 10s 8% -2.73 • 30s 17% -2.04 • 60s 25% -2.17 • 120s 17% -1.98 • 180s 17% -2.38 | tutup d+1 0% -3.17
+   SEMUA    detik 1 gerak < $0,30 (n 952, BUY & SELL dirata-rata): 5s 26% -0.40 • 10s 31% -0.39 • 30s 35% -0.39 • 60s 37% -0.38 • 120s 40% -0.35 • 180s 41% -0.35 | tutup d+1 17% -0.41
+   SEMUA    detik 2 gerak < $0,30 (n 643, BUY & SELL dirata-rata): 5s 16% -0.40 • 10s 23% -0.39 • 30s 30% -0.39 • 60s 33% -0.38 • 120s 37% -0.36 • 180s 38% -0.36 | tutup d+1 10% -0.40
+   CPI      detik 1 gerak < $0,30 (n 71, BUY & SELL dirata-rata): 5s 39% -0.45 • 10s 42% -0.42 • 30s 43% -0.41 • 60s 46% -0.40 • 120s 42% -0.36 • 180s 44% -0.36 | tutup d+1 25% -0.46
+   CPI      detik 2 gerak < $0,30 (n 32, BUY & SELL dirata-rata): 5s 31% -0.51 • 10s 36% -0.46 • 30s 38% -0.45 • 60s 44% -0.41 • 120s 33% -0.38 • 180s 41% -0.37 | tutup d+1 20% -0.49
+   PPI      detik 1 gerak < $0,30 (n 62, BUY & SELL dirata-rata): 5s 40% -0.30 • 10s 40% -0.30 • 30s 44% -0.30 • 60s 45% -0.30 • 120s 44% -0.28 • 180s 44% -0.27 | tutup d+1 29% -0.34
+   PPI      detik 2 gerak < $0,30 (n 19, BUY & SELL dirata-rata): 5s 26% -0.33 • 10s 24% -0.33 • 30s 39% -0.33 • 60s 37% -0.34 • 120s 37% -0.31 • 180s 37% -0.31 | tutup d+1 16% -0.33
+   NFP      detik 1 gerak < $0,30 (n 88, BUY & SELL dirata-rata): 5s 44% -0.59 • 10s 48% -0.57 • 30s 47% -0.56 • 60s 47% -0.52 • 120s 47% -0.44 • 180s 45% -0.43 | tutup d+1 33% -0.61
+   NFP      detik 2 gerak < $0,30 (n 24, BUY & SELL dirata-rata): 5s 33% -0.63 • 10s 42% -0.64 • 30s 46% -0.75 • 60s 46% -0.66 • 120s 44% -0.54 • 180s 42% -0.53 | tutup d+1 27% -0.58
+   FOMC     detik 1 gerak < $0,30 (n 57, BUY & SELL dirata-rata): 5s 31% -0.42 • 10s 39% -0.44 • 30s 45% -0.42 • 60s 44% -0.41 • 120s 47% -0.37 • 180s 47% -0.36 | tutup d+1 21% -0.44
+   FOMC     detik 2 gerak < $0,30 (n 33, BUY & SELL dirata-rata): 5s 20% -0.38 • 10s 35% -0.41 • 30s 45% -0.40 • 60s 42% -0.39 • 120s 47% -0.35 • 180s 50% -0.35 | tutup d+1 17% -0.38
+   PCE      detik 1 gerak < $0,30 (n 30, BUY & SELL dirata-rata): 5s 35% -0.23 • 10s 42% -0.24 • 30s 38% -0.28 • 60s 40% -0.29 • 120s 45% -0.22 • 180s 45% -0.22 | tutup d+1 17% -0.22
+   PCE      detik 2 gerak < $0,30 (n 25, BUY & SELL dirata-rata): 5s 34% -0.23 • 10s 44% -0.23 • 30s 40% -0.25 • 60s 42% -0.26 • 120s 44% -0.22 • 180s 44% -0.22 | tutup d+1 24% -0.22
+   RETAIL   detik 1 gerak < $0,30 (n 26, BUY & SELL dirata-rata): 5s 35% -0.37 • 10s 44% -0.36 • 30s 44% -0.38 • 60s 40% -0.37 • 120s 40% -0.34 • 180s 48% -0.33 | tutup d+1 13% -0.39
+   RETAIL   detik 2 gerak < $0,30 (n 17, BUY & SELL dirata-rata): 5s 26% -0.36 • 10s 41% -0.34 • 30s 38% -0.39 • 60s 35% -0.38 • 120s 41% -0.35 • 180s 47% -0.33 | tutup d+1 15% -0.34
+   GDP      detik 1 gerak < $0,30 (n 58, BUY & SELL dirata-rata): 5s 28% -0.42 • 10s 37% -0.40 • 30s 41% -0.39 • 60s 46% -0.38 • 120s 39% -0.35 • 180s 41% -0.34 | tutup d+1 16% -0.43
+   GDP      detik 2 gerak < $0,30 (n 39, BUY & SELL dirata-rata): 5s 22% -0.39 • 10s 36% -0.39 • 30s 38% -0.38 • 60s 45% -0.36 • 120s 35% -0.33 • 180s 38% -0.33 | tutup d+1 15% -0.40
+   ISM      detik 1 gerak < $0,30 (n 59, BUY & SELL dirata-rata): 5s 28% -0.42 • 10s 31% -0.41 • 30s 33% -0.41 • 60s 36% -0.40 • 120s 40% -0.37 • 180s 42% -0.38 | tutup d+1 19% -0.43
+   ISM      detik 2 gerak < $0,30 (n 38, BUY & SELL dirata-rata): 5s 18% -0.44 • 10s 26% -0.44 • 30s 32% -0.44 • 60s 37% -0.43 • 120s 41% -0.40 • 180s 42% -0.42 | tutup d+1 14% -0.46
+   JOLTS    detik 1 gerak < $0,30 (n 15, BUY & SELL dirata-rata): 5s 43% -0.20 • 10s 43% -0.20 • 30s 50% -0.21 • 60s 43% -0.23 • 120s 47% -0.20 • 180s 47% -0.19 | tutup d+1 37% -0.21
+   ADP      detik 1 gerak < $0,30 (n 66, BUY & SELL dirata-rata): 5s 35% -0.39 • 10s 39% -0.39 • 30s 45% -0.39 • 60s 44% -0.39 • 120s 47% -0.36 • 180s 43% -0.33 | tutup d+1 23% -0.38
+   ADP      detik 2 gerak < $0,30 (n 36, BUY & SELL dirata-rata): 5s 21% -0.46 • 10s 33% -0.45 • 30s 43% -0.41 • 60s 42% -0.42 • 120s 44% -0.43 • 180s 42% -0.40 | tutup d+1 7% -0.45
+   KONSUMEN detik 1 gerak < $0,30 (n 88, BUY & SELL dirata-rata): 5s 24% -0.35 • 10s 30% -0.35 • 30s 34% -0.34 • 60s 37% -0.34 • 120s 42% -0.34 • 180s 42% -0.34 | tutup d+1 15% -0.36
+   KONSUMEN detik 2 gerak < $0,30 (n 67, BUY & SELL dirata-rata): 5s 18% -0.36 • 10s 23% -0.36 • 30s 31% -0.35 • 60s 36% -0.35 • 120s 42% -0.34 • 180s 41% -0.34 | tutup d+1 10% -0.36
+   CLAIMS   detik 1 gerak < $0,30 (n 123, BUY & SELL dirata-rata): 5s 15% -0.47 • 10s 21% -0.47 • 30s 28% -0.44 • 60s 35% -0.44 • 120s 39% -0.42 • 180s 40% -0.43 | tutup d+1 7% -0.48
+   CLAIMS   detik 2 gerak < $0,30 (n 109, BUY & SELL dirata-rata): 5s 12% -0.50 • 10s 18% -0.50 • 30s 28% -0.47 • 60s 35% -0.47 • 120s 39% -0.44 • 180s 39% -0.45 | tutup d+1 7% -0.50
