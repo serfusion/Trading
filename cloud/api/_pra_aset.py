@@ -368,10 +368,25 @@ def tebak_kartu(c: dict) -> dict | None:
     return None
 
 
+def alasan_acak(cs: list) -> str | None:
+    """Alasan berita TANPA arah walau ada petunjuk (15 Okt 2026): petunjuk berlawanan & tebakan seperti itu dulu < 52%
+    (mis. PPI: minyak → NAIK, CPI inti DI ATAS → TURUN, dulu 43% dari 7 rilis) — _ppi_wti.pakai_cpi."""
+    for c in cs:
+        a = (c.get("ppi_wti_acak") or {}).get("alasan") if isinstance(c, dict) else None
+        if a:
+            return a
+    return None
+
+
 def daftar(persiapan: dict, now: datetime, tren=None) -> list:
-    kartu = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)
-             and c.get("time") and not c.get("released") and datetime.fromisoformat(c["time"]) > now
-             and datetime.fromisoformat(c["time"]) - now <= timedelta(days=DAFTAR_HARI)]
+    semua = [c for k in ("berita", "mendatang") for c in persiapan.get(k) or [] if isinstance(c, dict)
+             and c.get("time") and not c.get("released") and datetime.fromisoformat(c["time"]) > now]
+    kartu = [c for c in semua if datetime.fromisoformat(c["time"]) - now <= timedelta(days=DAFTAR_HARI)]
+    if not kartu and semua:
+        # 15 Okt (simulasi): jadwal resmi FRED baru s/d 23 Des → setelahnya baris di bawah XAU kosong. Tampilkan berita
+        # terdekat yang diketahui walau > 31 hari (mis. Fed Jan 2027) supaya baris tidak hilang.
+        t_min = min(c["time"] for c in semua)
+        kartu = [c for c in semua if c["time"] == t_min]
     per_waktu: dict[str, list] = {}
     for c in kartu:
         per_waktu.setdefault(c["time"], []).append(c)
@@ -399,6 +414,9 @@ def daftar(persiapan: dict, now: datetime, tren=None) -> list:
                        **{k: g[k] for k in ("lama", "baru", "n", "teks_sampai", "tanpa_tren", "peringatan", "per_detik",
                                             "terbaru", "lemah_jenis", "cpi_inti") if k in g},
                        teks=f"{nm} • peluang emas {g['arah']} {g['persen']}% {tanda} • {sisa}")
+        elif (ac := alasan_acak(cs)):
+            row.update(arah=None, persen=50, status="acak", alasan_acak=ac, bukti=f"petunjuk berlawanan: {ac}",
+                       teks=f"{nm} • ≈ 50:50 (petunjuk berlawanan) • {sisa}")
         else:
             row.update(arah=None, persen=50, status="acak", bukti="belum ada petunjuk sebelum rilis yang lolos uji "
                                                                   "untuk berita ini (diuji 2010–2026)",
@@ -606,6 +624,21 @@ def satu(row: dict) -> dict:
     kv = kg.get(kunci) or kg.get("SEMUA")
     if kv:
         out.setdefault("lanjut", {}).update(kurva=kv, kurva_grup=kunci if kunci in kg else "SEMUA")
+    # ⚡ 4.44 (15 Okt, pengguna "54–65% itu lempar koin"): kurva bila gerak detik 1/2 SEARAH / BERLAWANAN dengan tebakan sebelum
+    # rilis (research/live_kurva.py → live_kurva.json searah/lawan; semua berita detik 1 ≥ $0,30: searah 83%, berlawanan 53%).
+    # Per kunci "d|ambang": kelompok berita ini bila ≥ 10 rilis, selain itu SEMUA berita (field "g" = kelompok yang dipakai).
+    # Arah dari tren 4 jam saja (berita tanpa petunjuk) tidak memakai kurva ini (tren searah/berlawanan detik 1: 74% vs 72%).
+    if row.get("arah") and not str(row.get("dasar") or "").startswith("Tren"):
+        g_k = "PPI" if g_ == "PPI" else {"ISM Jasa": "ISM"}.get(g_, g_)
+        for nama in ("searah", "lawan"):
+            src, semua_ = (LIVE_K.get(nama) or {}).get(g_k) or {}, (LIVE_K.get(nama) or {}).get("SEMUA") or {}
+            gab = {}
+            for k_ in set(src) | set(semua_):
+                x = src.get(k_) if (src.get(k_) or {}).get("n", 0) >= 10 else semua_.get(k_)
+                if x and x.get("n", 0) >= 10:
+                    gab[k_] = {**x, "g": g_k if x is src.get(k_) else "SEMUA"}
+            if gab:
+                out.setdefault("lanjut", {})[f"kurva_{nama}"] = gab
     dasar = ""
     if row.get("arah"):
         naik = row["arah"] == "naik"
@@ -634,6 +667,12 @@ def satu(row: dict) -> dict:
         elif row.get("kons"):
             baris.append(kons_teks(row["kons"], row.get("title") or ""))
         out["jangka"] = j
+    elif row.get("alasan_acak"):
+        # 15 Okt: petunjuk berlawanan & tebakan seperti itu dulu < 52% → ≈ 50:50 dengan alasannya (bukan "belum ada petunjuk")
+        out["teks"] = f"{row['nama']} ⚪ ≈50% (petunjuk berlawanan) • {row['sisa']}"
+        baris = [f"⚪ Petunjuk berlawanan: {row['alasan_acak']}"]
+        if row.get("kons"):
+            baris.append(kons_teks(row["kons"], row.get("title") or ""))
     else:
         # selalu ada persen (14 Okt): tanpa petunjuk teruji = ≈ 50%, jujur; arah tren 4 jam muncul ≤ 6 jam sebelum rilis
         out["teks"] = f"{row['nama']} ⚪ ≈50% (arah muncul ≤ {TREN_JAM} jam sebelum rilis) • {row['sisa']}"
@@ -687,7 +726,9 @@ def allin(row: dict) -> dict | None:
     if row.get("title") in _ppi_wti.JUDUL and row.get("arah") and row.get("status") not in TERUJI:
         # 15 Okt 2026: tebakan PPI lemah (mis. TURUN setelah CPI inti searah: 58%, detik 2 33%) → modal kecil JANGAN
         d2 = (row.get("cpi_inti") or {}).get("d2")
-        return {"kuat": False, "teks": f"💥 Modal kecil PPI: JANGAN — tebakan lemah ({row.get('persen')}%"
+        jenis = "belum terbukti" if row.get("status") == "belum terbukti" else "tebakan lemah"
+        return {"kuat": False, "teks": f"💥 Modal kecil PPI: JANGAN — {jenis} ({row.get('persen')}%"
+                                       + (f" dari {row['n']} rilis" if row.get("n") else "")
                                        + (f", detik 2 dulu {d2:.0f}%" if d2 is not None else "") + ")",
                 "bukti": "Masuk 1 dtk sebelum rilis butuh arah detik 1–2 benar; untuk tebakan ini detik 2 lebih sering "
                          "berlawanan. Tunggu ⚡LIVE detik 2."}
@@ -798,6 +839,10 @@ def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
         info = None
         if r and r.get("arah"):
             info, judul = r, r["title"]
+        elif r:
+            # 15 Okt (simulasi): daftar sudah memutuskan ≈ 50:50 (petunjuk & tren berlawanan / petunjuk berlawanan) → dulu
+            # kartu menghitung ulang tebak_kartu → baris XAU "NFP ≈50%" tetapi kartu "NFP: emas turun 57%" (dua arah)
+            judul = r["title"]
         else:
             kand = [(tebak_kartu(c), c) for c in cs]
             ada = sorted([(g["persen"], -i, g, c) for i, (g, c) in enumerate(kand) if g], key=lambda x: x[:2])
@@ -824,6 +869,10 @@ def tandai(persiapan: dict, daftar_: list, now: datetime | None = None) -> None:
                 c["arah_detik"] = {"arah": info["arah"], "persen": info["persen"], "status": info["status"],
                                    "ganda": ganda,
                                    "teks": f"{nm}: emas {info['arah']} {info['persen']}% ({j['teks_sampai']})"}
+            elif (r or {}).get("arah") is None and r and r.get("status") == "acak" and \
+                    ((r.get("alasan_acak")) or (r.get("tren") or {}).get("hubungan") == "berlawanan"):
+                c["arah_detik"] = {"arah": None, "persen": None, "status": "acak", "ganda": ganda,
+                                   "teks": f"{nm}: ≈ 50:50 (petunjuk berlawanan)"}
             else:
                 c["arah_detik"] = {"arah": None, "persen": None, "status": "acak", "ganda": ganda,
                                    "teks": f"{nm}: arah 1–10 dtk muncul ≤ {TREN_JAM} jam sebelum rilis"}

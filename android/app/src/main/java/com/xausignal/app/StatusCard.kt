@@ -211,15 +211,25 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
     // ⚡ 4.43 (pengguna 15 Okt: "data persentase 1 detik hingga 1 menit minimal 70%"): kurva SETIAP detik s/d 60 menurut gerak
     // detik 1 / 2 (cloud lanjut.kurva, research/live_kurva.py) → persen detik berjalan + terendah s/d menit 1 (✅ bila ≥ 70%)
     val kv = lj?.optJSONObject("kurva")
-    fun kurvaUntuk(d: Int, g: Double): Pair<String, JSONObject>? = kv?.keys()?.asSequence()
+    fun kurvaUntuk(d: Int, g: Double, src: JSONObject? = kv): Pair<String, JSONObject>? = src?.keys()?.asSequence()
         ?.filter { it.startsWith("$d|") }
         ?.mapNotNull { k -> k.substringAfter('|').toDoubleOrNull()?.let { it to k } }
         ?.filter { kotlin.math.abs(g) >= it.first }
-        ?.mapNotNull { (_, k) -> kv?.optJSONObject(k)?.takeIf { it.optInt("n") >= 10 }?.let { k to it } }
+        ?.mapNotNull { (_, k) -> src?.optJSONObject(k)?.takeIf { it.optInt("n") >= 10 }?.let { k to it } }
         ?.maxByOrNull { it.first.substringAfter('|').toDoubleOrNull() ?: 0.0 }
+    // ⚡ 4.44 (pengguna 15 Okt "54–65% itu lempar koin"): gerak detik 1/2 SEARAH tebakan sebelum rilis → kurva searah (semua
+    // berita detik 1 ≥ $0,30: 83%), BERLAWANAN → kurva berlawanan (53% ≈ lempar koin) — cloud lanjut.kurva_searah/kurva_lawan
+    var kurvaJenis = ""
+    fun pilih(d: Int, g: Double): Triple<Int, Double, Pair<String, JSONObject>>? {
+        val aK = if (g > 0) "naik" else "turun"
+        val jenis = if (arah == null) null else if (arah == aK) "kurva_searah" else "kurva_lawan"
+        val khusus = jenis?.let { lj?.optJSONObject(it) }?.let { kurvaUntuk(d, g, it) }
+        kurvaJenis = if (khusus != null) jenis.orEmpty() else ""
+        return (khusus ?: kurvaUntuk(d, g, kv))?.let { Triple(d, g, it) }
+    }
     val pemicu: Triple<Int, Double, Pair<String, JSONObject>>? = when {
-        det >= 2 && g2v != null -> kurvaUntuk(2, g2v)?.let { Triple(2, g2v, it) }
-        det >= 1 && det < 2 && g1v != null -> kurvaUntuk(1, g1v)?.let { Triple(1, g1v, it) }
+        det >= 2 && g2v != null -> pilih(2, g2v)
+        det >= 1 && det < 2 && g1v != null -> pilih(1, g1v)
         else -> null
     }
     val liveKurva = if (pemicu != null && gerak != null) {
@@ -235,11 +245,19 @@ private fun StripLangsung(prep: JSONObject?, now: Long) {
             if (q.optDouble("rata") < 0) " • ⚠️ masuk sekarang: dulu untung $u% (rata-rata rugi)" else " • masuk sekarang: dulu untung $u%"
         } ?: "" else ""
         val beda = arah != null && arah != aK
+        val tanda = if (mn >= 70) "✅" else "⚠️"
+        val inti = when (kurvaJenis) {           // 4.44: kurva menurut tebakan sebelum rilis searah / berlawanan
+            "kurva_searah" -> " • searah tebakan → s/d menit 1 ≥ $mn% $tanda ($n rilis)"
+            "kurva_lawan" -> " • BERLAWANAN tebakan → s/d menit 1 ≥ $mn% $tanda ($n rilis)" +
+                (if (mn < 70) " • ≈ lempar koin, tunggu ${if (d == 1) "detik 2" else "lebih lama"}"
+                 else " • ⚠️ tebakan sebelum rilis SALAH")
+            else -> " • s/d menit 1 ≥ $mn% $tanda ($n rilis)" +
+                (if (d == 1 && mn < 70) " • detik 1 belum bisa dipercaya, tunggu detik 2" else "") +
+                (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "")
+        }
         "⚡ $nama detik $dtk • LIVE $la ${usd(gerak)} (detik $d ${usd(gd)})" +
             (pNow?.let { " • tetap ${if (aK == "naik") "NAIK" else "TURUN"} sekarang $it%" } ?: "") +
-            " • s/d menit 1 ≥ $mn% ${if (mn >= 70) "✅" else "⚠️"} ($n rilis)" +
-            (if (d == 1 && mn < 70) " • detik 1 belum bisa dipercaya, tunggu detik 2" else "") +
-            kejar + (if (beda) " • ⚠️ tebakan sebelum rilis SALAH" else "") + abaLive(r, det, aK)
+            inti + kejar + abaLive(r, det, aK)
     } else null
     val liveTeks = liveKurva ?: if (g2v != null && gerak != null && ting != null) {
         // ⚡ 4.42: setelah detik 2 → arah = gerak detik 2; keyakinan menurut besar gerak (≥ 85% & n ≥ 10 → ✅ YAKIN)

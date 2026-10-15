@@ -83,8 +83,32 @@ def kurva(x: pd.DataFrame, d: int, amb: float) -> dict | None:
             "n_lama": int((m & (x.t0 < SPLIT)).sum()), "n_baru": int((m & (x.t0 >= SPLIT)).sum())}
 
 
+def tebakan(df: pd.DataFrame) -> pd.Series:
+    """Arah emas TEBAKAN SEBELUM RILIS per rilis (+1 naik / −1 turun / 0 tanpa tebakan), sama dengan aplikasi: CPI = aturan
+    indeks/Kalshi (research.cpi_detik IDX|K, CPI di atas → emas turun), PPI = minyak WTI bulan acuan (riset_ppi3 WTI), berita
+    lain = petunjuk teruji KEJ (research/pra_xau_semua). Semua fitur ≤ 1 dtk sebelum rilis (tanpa look-ahead)."""
+    s = pd.read_parquet(EKS / "pra_xau_semua_v2.parquet")
+    s["t0"] = pd.to_datetime(s.t0, utc=True)
+    kej = s.drop_duplicates(["t0", "grup"]).set_index(["t0", "grup"]).KEJ
+    out = pd.Series([float(kej.get((t, g), 0.0) or 0.0) for t, g in zip(df.t0, df.grup)], index=df.index)
+    from . import cpi_detik as C
+    c = C.turunan(C.tabel())
+    c["t0"] = pd.to_datetime(c.t0, utc=True)
+    cpi = dict(zip(c.t0, -c["IDX|K"]))
+    f = pd.read_parquet(EKS / "riset_ppi3" / "fitur.parquet")
+    f["t0"] = pd.to_datetime(f.t0, utc=True)
+    ppi = dict(zip(f.t0, -f.WTI.fillna(0)))
+    for i, (t, g) in enumerate(zip(df.t0, df.grup)):
+        if g == "CPI" and t in cpi:
+            out.iloc[i] = cpi[t]
+        elif g == "PPI" and t in ppi:
+            out.iloc[i] = ppi[t]
+    return out.fillna(0.0)
+
+
 def main() -> None:
     df = gerak()
+    df["tebak"] = tebakan(df)
     L = ["# ⚡ Kurva setiap detik 1–60 setelah rilis (research/live_kurva.py)", __doc__.split("\n\n")[1],
          f"rilis bertick 2016–2026: {len(df)}"]
     hasil = {}
@@ -104,6 +128,18 @@ def main() -> None:
         if not res:
             continue
         hasil[grp] = res
+        # 15 Okt (pengguna: "54–65% itu lempar koin"): tebakan sebelum rilis SEARAH / BERLAWANAN dengan gerak detik d → kurva
+        # terpisah (detik 1 CPI: semua 53% → searah ±78%, berlawanan ±42%). Aplikasi 4.44 memilih kurva sesuai tebakannya.
+        for nama, tanda in (("searah", 1), ("lawan", -1)):
+            sub = {}
+            for d, ambs in PEMICU.items():
+                for amb in ambs:
+                    q = x[(x.tebak != 0) & (np.sign(x[f"g{int(d)}"]) == tanda * x.tebak)]
+                    k = kurva(q, int(d), amb)
+                    if k:
+                        sub[f"{d}|{amb}"] = k
+            if sub:
+                hasil.setdefault("_" + nama, {})[grp] = sub
         L.append(f"\n## {grp} ({len(x)} rilis)")
         for key, k in res.items():
             d, amb = key.split("|")
@@ -112,8 +148,17 @@ def main() -> None:
                      f"{k['min_lama']} / baru {k['min_baru']}) | detik 2 {ps.get('2', '–')} • 3 {ps.get('3')} • 5 {ps.get('5')} • "
                      f"10 {ps.get('10')} • 20 {ps.get('20')} • 30 {ps.get('30')} • 45 {ps.get('45')} • 60 {ps.get('60')}"
                      + ("  ✅ ≥ 70% sepanjang menit 1" if k["min"] >= 70 and k["n"] >= 10 else ""))
+    searah, lawan = hasil.pop("_searah", {}), hasil.pop("_lawan", {})
+    L.append("\n## Tebakan sebelum rilis SEARAH vs BERLAWANAN gerak detik 1/2 (terendah s/d detik 60)")
+    for grp in ["SEMUA", "CPI", "PPI", "NFP", "FOMC", "ISM", "RETAIL", "GDP", "PCE", "JOLTS"]:
+        for key in ("1|0.3", "1|0.5", "2|0.5", "2|1.0"):
+            a, b = (searah.get(grp) or {}).get(key), (lawan.get(grp) or {}).get(key)
+            if a or b:
+                f = lambda k: "–" if not k else f"{k['min']}% (n {k['n']}; lama {k['min_lama']} / baru {k['min_baru']})"  # noqa: E731
+                L.append(f"   {grp:7s} detik {key.replace('|', ' ≥ $')}: searah {f(a)} • berlawanan {f(b)}")
     OUT_JSON.write_text(json.dumps({"dibuat": pd.Timestamp.now(tz="UTC").strftime("%Y-%m-%d"), "sumber": "research/live_kurva.py",
-                                    "grup": hasil}, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+                                    "grup": hasil, "searah": searah, "lawan": lawan},
+                                   ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     OUT_TXT.write_text("\n".join(L) + "\n", encoding="utf-8")
     print("\n".join(L))
 

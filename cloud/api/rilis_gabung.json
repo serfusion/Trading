@@ -1,0 +1,452 @@
+{
+ "dibuat": "2026-10-15",
+ "sumber": "research/rilis_gabung.py",
+ "plafon": {
+  "Non-Farm Employment Change": {
+   "m1": 82.0,
+   "n": 161,
+   "d2": 77.0,
+   "n_d2": 161
+  },
+  "Unemployment Rate": {
+   "m1": 51.2,
+   "n": 121,
+   "d2": 51.2,
+   "n_d2": 121
+  },
+  "Average Hourly Earnings m/m": {
+   "m1": 55.9,
+   "n": 93,
+   "d2": 59.1,
+   "n_d2": 93
+  },
+  "Core CPI m/m": {
+   "m1": 85.6,
+   "n": 104,
+   "d2": 79.0,
+   "n_d2": 100
+  },
+  "CPI m/m": {
+   "m1": 87.3,
+   "n": 79,
+   "d2": 75.9,
+   "n_d2": 79
+  },
+  "CPI y/y": {
+   "m1": 83.0,
+   "n": 112,
+   "d2": 73.0,
+   "n_d2": 111
+  },
+  "Core PPI m/m": {
+   "m1": 100.0,
+   "n": 26,
+   "d2": 84.6,
+   "n_d2": 26
+  },
+  "PPI m/m": {
+   "m1": 78.0,
+   "n": 132,
+   "d2": 70.3,
+   "n_d2": 128
+  },
+  "Retail Sales m/m": {
+   "m1": 77.9,
+   "n": 163,
+   "d2": 80.2,
+   "n_d2": 162
+  },
+  "Core Retail Sales m/m": {
+   "m1": 78.3,
+   "n": 157,
+   "d2": 79.7,
+   "n_d2": 158
+  },
+  "Core PCE Price Index m/m": {
+   "m1": 78.9,
+   "n": 19,
+   "d2": 52.6,
+   "n_d2": 19
+  },
+  "Advance GDP q/q": {
+   "m1": 76.8,
+   "n": 56,
+   "d2": 61.1,
+   "n_d2": 54
+  },
+  "Prelim GDP q/q": {
+   "m1": 68.6,
+   "n": 35,
+   "d2": 60.0,
+   "n_d2": 35
+  },
+  "Final GDP q/q": {
+   "m1": 82.6,
+   "n": 23,
+   "d2": 69.6,
+   "n_d2": 23
+  },
+  "Unemployment Claims": {
+   "m1": 76.5,
+   "n": 328,
+   "d2": 62.9,
+   "n_d2": 326
+  },
+  "ADP Non-Farm Employment Change": {
+   "m1": 88.5,
+   "n": 165,
+   "d2": 80.5,
+   "n_d2": 159
+  },
+  "ISM Manufacturing PMI": {
+   "m1": 88.1,
+   "n": 126,
+   "d2": 86.5,
+   "n_d2": 126
+  },
+  "ISM Services PMI": {
+   "m1": 85.5,
+   "n": 117,
+   "d2": 94.0,
+   "n_d2": 117
+  },
+  "JOLTS Job Openings": {
+   "m1": 84.9,
+   "n": 53,
+   "d2": 84.6,
+   "n_d2": 52
+  },
+  "CB Consumer Confidence": {
+   "m1": 81.0,
+   "n": 84,
+   "d2": 81.0,
+   "n_d2": 84
+  },
+  "Prelim UoM Consumer Sentiment": {
+   "m1": 66.7,
+   "n": 54,
+   "d2": 60.4,
+   "n_d2": 53
+  },
+  "Philly Fed Manufacturing Index": {
+   "m1": 56.0,
+   "n": 25,
+   "d2": 40.0,
+   "n_d2": 25
+  },
+  "Empire State Manufacturing Index": {
+   "m1": 69.6,
+   "n": 23,
+   "d2": 65.2,
+   "n_d2": 23
+  },
+  "Core Durable Goods Orders m/m": {
+   "m1": 68.1,
+   "n": 47,
+   "d2": 84.8,
+   "n_d2": 46
+  }
+ },
+ "konflik": {
+  "Non-Farm Employment Change|Unemployment Rate": {
+   "m1": 75.8,
+   "n": 66,
+   "d2": 74.2,
+   "n_d2": 66,
+   "lama": 84.1,
+   "n_lama": 44,
+   "baru": 59.1,
+   "n_baru": 22
+  },
+  "Non-Farm Employment Change|Average Hourly Earnings m/m": {
+   "m1": 70.4,
+   "n": 54,
+   "d2": 63.0,
+   "n_d2": 54,
+   "lama": 82.4,
+   "n_lama": 34,
+   "baru": 50.0,
+   "n_baru": 20
+  },
+  "Unemployment Claims|Non-Farm Employment Change": {
+   "m1": 66.7,
+   "n": 3,
+   "d2": 33.3,
+   "n_d2": 3,
+   "lama": 66.7,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "Average Hourly Earnings m/m|Unemployment Rate": {
+   "m1": 59.3,
+   "n": 27,
+   "d2": 63.0,
+   "n_d2": 27,
+   "lama": 52.6,
+   "n_lama": 19,
+   "baru": 75.0,
+   "n_baru": 8
+  },
+  "CPI m/m|Core CPI m/m": {
+   "m1": 66.7,
+   "n": 3,
+   "d2": 33.3,
+   "n_d2": 3,
+   "lama": 66.7,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "CPI y/y|Core CPI m/m": {
+   "m1": 53.8,
+   "n": 13,
+   "d2": 50.0,
+   "n_d2": 12,
+   "lama": 60.0,
+   "n_lama": 10,
+   "baru": 33.3,
+   "n_baru": 3
+  },
+  "Core CPI m/m|Retail Sales m/m": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 100.0,
+   "n_d2": 3,
+   "lama": 100.0,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "Core CPI m/m|Core Retail Sales m/m": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 66.7,
+   "n_d2": 3,
+   "lama": 100.0,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "Core CPI m/m|Unemployment Claims": {
+   "m1": 57.1,
+   "n": 7,
+   "d2": 100.0,
+   "n_d2": 7,
+   "lama": 40.0,
+   "n_lama": 5,
+   "baru": 100.0,
+   "n_baru": 2
+  },
+  "CPI y/y|CPI m/m": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 33.3,
+   "n_d2": 3,
+   "lama": 100.0,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "CPI m/m|Unemployment Claims": {
+   "m1": 100.0,
+   "n": 6,
+   "d2": 83.3,
+   "n_d2": 6,
+   "lama": 100.0,
+   "n_lama": 3,
+   "baru": 100.0,
+   "n_baru": 3
+  },
+  "CPI y/y|Core Retail Sales m/m": {
+   "m1": 66.7,
+   "n": 3,
+   "d2": 33.3,
+   "n_d2": 3,
+   "lama": 66.7,
+   "n_lama": 3,
+   "baru": null,
+   "n_baru": 0
+  },
+  "CPI y/y|Unemployment Claims": {
+   "m1": 71.4,
+   "n": 7,
+   "d2": 71.4,
+   "n_d2": 7,
+   "lama": 60.0,
+   "n_lama": 5,
+   "baru": 100.0,
+   "n_baru": 2
+  },
+  "Core PPI m/m|Retail Sales m/m": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 66.7,
+   "n_d2": 3,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 100.0,
+   "n_baru": 3
+  },
+  "Core PPI m/m|Unemployment Claims": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 33.3,
+   "n_d2": 3,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 100.0,
+   "n_baru": 3
+  },
+  "Retail Sales m/m|PPI m/m": {
+   "m1": 66.7,
+   "n": 12,
+   "d2": 75.0,
+   "n_d2": 12,
+   "lama": 88.9,
+   "n_lama": 9,
+   "baru": 0.0,
+   "n_baru": 3
+  },
+  "Core Retail Sales m/m|PPI m/m": {
+   "m1": 58.3,
+   "n": 12,
+   "d2": 83.3,
+   "n_d2": 12,
+   "lama": 70.0,
+   "n_lama": 10,
+   "baru": 0.0,
+   "n_baru": 2
+  },
+  "PPI m/m|Unemployment Claims": {
+   "m1": 56.2,
+   "n": 16,
+   "d2": 35.7,
+   "n_d2": 14,
+   "lama": 45.5,
+   "n_lama": 11,
+   "baru": 80.0,
+   "n_baru": 5
+  },
+  "Retail Sales m/m|Core Retail Sales m/m": {
+   "m1": 50.0,
+   "n": 22,
+   "d2": 50.0,
+   "n_d2": 22,
+   "lama": 41.7,
+   "n_lama": 12,
+   "baru": 60.0,
+   "n_baru": 10
+  },
+  "Retail Sales m/m|Unemployment Claims": {
+   "m1": 57.1,
+   "n": 7,
+   "d2": 57.1,
+   "n_d2": 7,
+   "lama": 75.0,
+   "n_lama": 4,
+   "baru": 33.3,
+   "n_baru": 3
+  },
+  "Retail Sales m/m|Empire State Manufacturing Index": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 100.0,
+   "n_d2": 3,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 100.0,
+   "n_baru": 3
+  },
+  "Core Retail Sales m/m|Unemployment Claims": {
+   "m1": 57.1,
+   "n": 7,
+   "d2": 57.1,
+   "n_d2": 7,
+   "lama": 60.0,
+   "n_lama": 5,
+   "baru": 50.0,
+   "n_baru": 2
+  },
+  "Core Retail Sales m/m|Empire State Manufacturing Index": {
+   "m1": 75.0,
+   "n": 4,
+   "d2": 75.0,
+   "n_d2": 4,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 75.0,
+   "n_baru": 4
+  },
+  "Advance GDP q/q|Unemployment Claims": {
+   "m1": 66.7,
+   "n": 9,
+   "d2": 55.6,
+   "n_d2": 9,
+   "lama": 75.0,
+   "n_lama": 4,
+   "baru": 60.0,
+   "n_baru": 5
+  },
+  "Unemployment Claims|Prelim GDP q/q": {
+   "m1": 100.0,
+   "n": 3,
+   "d2": 0.0,
+   "n_d2": 3,
+   "lama": 100.0,
+   "n_lama": 1,
+   "baru": 100.0,
+   "n_baru": 2
+  },
+  "Final GDP q/q|Unemployment Claims": {
+   "m1": 57.1,
+   "n": 7,
+   "d2": 57.1,
+   "n_d2": 7,
+   "lama": 75.0,
+   "n_lama": 4,
+   "baru": 33.3,
+   "n_baru": 3
+  },
+  "Unemployment Claims|Philly Fed Manufacturing Index": {
+   "m1": 83.3,
+   "n": 6,
+   "d2": 66.7,
+   "n_d2": 6,
+   "lama": 83.3,
+   "n_lama": 6,
+   "baru": null,
+   "n_baru": 0
+  },
+  "Core Durable Goods Orders m/m|Unemployment Claims": {
+   "m1": 71.4,
+   "n": 7,
+   "d2": 100.0,
+   "n_d2": 7,
+   "lama": 71.4,
+   "n_lama": 7,
+   "baru": null,
+   "n_baru": 0
+  },
+  "JOLTS Job Openings|ISM Manufacturing PMI": {
+   "m1": 80.0,
+   "n": 5,
+   "d2": 80.0,
+   "n_d2": 5,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 80.0,
+   "n_baru": 5
+  },
+  "ISM Services PMI|JOLTS Job Openings": {
+   "m1": 66.7,
+   "n": 3,
+   "d2": 66.7,
+   "n_d2": 3,
+   "lama": null,
+   "n_lama": 0,
+   "baru": 66.7,
+   "n_baru": 3
+  }
+ }
+}

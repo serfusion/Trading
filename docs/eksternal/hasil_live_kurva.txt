@@ -159,3 +159,25 @@ rilis bertick 2016–2026: 1629
    gerak detik 2 ≥ $0.5 (n 50): terendah s/d detik 60 72% (detik 45; lama 85 / baru 68) | detik 2 – • 3 96 • 5 88 • 10 84 • 20 84 • 30 78 • 45 72 • 60 76  ✅ ≥ 70% sepanjang menit 1
    gerak detik 2 ≥ $1.0 (n 31): terendah s/d detik 60 68% (detik 45; lama None / baru 71) | detik 2 – • 3 97 • 5 90 • 10 81 • 20 84 • 30 77 • 45 68 • 60 74
    gerak detik 2 ≥ $2.0 (n 11): terendah s/d detik 60 91% (detik 43; lama None / baru 91) | detik 2 – • 3 100 • 5 100 • 10 100 • 20 100 • 30 100 • 45 91 • 60 100  ✅ ≥ 70% sepanjang menit 1
+
+## Tebakan sebelum rilis SEARAH vs BERLAWANAN gerak detik 1/2 (terendah s/d detik 60)
+   SEMUA   detik 1 ≥ $0.3: searah 83% (n 83; lama 85 / baru 80) • berlawanan 53% (n 60; lama 47 / baru 53)
+   SEMUA   detik 1 ≥ $0.5: searah 82% (n 68; lama 84 / baru 79) • berlawanan 59% (n 41; lama 50 / baru 55)
+   SEMUA   detik 2 ≥ $0.5: searah 90% (n 125; lama 95 / baru 85) • berlawanan 71% (n 63; lama 68 / baru 71)
+   SEMUA   detik 2 ≥ $1.0: searah 88% (n 103; lama 93 / baru 85) • berlawanan 81% (n 43; lama 77 / baru 83)
+   CPI     detik 1 ≥ $0.3: searah 67% (n 21; lama 80 / baru 62) • berlawanan 46% (n 24; lama 67 / baru 33)
+   CPI     detik 1 ≥ $0.5: searah 60% (n 15; lama None / baru 58) • berlawanan 43% (n 14; lama None / baru 27)
+   CPI     detik 2 ≥ $0.5: searah 82% (n 45; lama 91 / baru 76) • berlawanan 71% (n 21; lama 62 / baru 77)
+   CPI     detik 2 ≥ $1.0: searah 82% (n 40; lama 86 / baru 79) • berlawanan 88% (n 17; lama 83 / baru 91)
+   PPI     detik 1 ≥ $0.3: searah 82% (n 11; lama 100 / baru 67) • berlawanan 38% (n 13; lama 20 / baru 50)
+   PPI     detik 1 ≥ $0.5: searah 78% (n 9; lama None / baru 60) • berlawanan 29% (n 7; lama None / baru None)
+   PPI     detik 2 ≥ $0.5: searah 87% (n 31; lama 90 / baru 86) • berlawanan 56% (n 18; lama 56 / baru 56)
+   PPI     detik 2 ≥ $1.0: searah 82% (n 22; lama 83 / baru 81) • berlawanan 62% (n 8; lama None / baru 80)
+   ISM     detik 1 ≥ $0.3: searah 85% (n 48; lama 83 / baru 88) • berlawanan 81% (n 16; lama 60 / baru 91)
+   ISM     detik 1 ≥ $0.5: searah 88% (n 42; lama 83 / baru 88) • berlawanan 80% (n 15; lama None / baru 91)
+   ISM     detik 2 ≥ $0.5: searah 93% (n 42; lama 94 / baru 92) • berlawanan 75% (n 16; lama 60 / baru 82)
+   ISM     detik 2 ≥ $1.0: searah 94% (n 36; lama 92 / baru 91) • berlawanan 85% (n 13; lama None / baru 82)
+   GDP     detik 1 ≥ $0.3: searah – • berlawanan 14% (n 7; lama None / baru 17)
+   GDP     detik 1 ≥ $0.5: searah – • berlawanan 20% (n 5; lama None / baru 20)
+   GDP     detik 2 ≥ $0.5: searah 86% (n 7; lama None / baru None) • berlawanan 62% (n 8; lama None / baru 40)
+   GDP     detik 2 ≥ $1.0: searah 100% (n 5; lama None / baru None) • berlawanan 60% (n 5; lama None / baru None)

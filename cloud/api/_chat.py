@@ -88,11 +88,11 @@ def _numbers(text: str) -> list[float]:
     return out
 
 
-def calendar_rows_for(calendar_rows: list | None) -> list[dict]:
+def calendar_rows_for(calendar_rows: list | None, dampak: tuple = ("High",)) -> list[dict]:
     """Berita USD high-impact minggu ini: [{time (UTC), title, group, forecast, previous}]."""
     out = []
     for r in calendar_rows or []:
-        if r.get("country") != "USD" or r.get("impact") != "High":
+        if r.get("country") != "USD" or r.get("impact") not in dampak:
             continue
         try:
             t = datetime.fromisoformat(r["date"]).astimezone(timezone.utc)
@@ -773,13 +773,14 @@ def fred_actual(title: str, t: datetime, now: datetime, fetch=fred_fetch, cache:
     return ""
 
 
-def calendar_json(calendar_rows, now: datetime | None = None, fetch=fred_fetch) -> list[dict]:
+def calendar_json(calendar_rows, now: datetime | None = None, fetch=fred_fetch, dampak: tuple = ("High",)) -> list[dict]:
     """Kalender minggu ini untuk tab News: judul, grup, waktu WIB, forecast, previous, dan actual otomatis (FRED)
-    untuk berita yang sudah rilis bila tersedia."""
+    untuk berita yang sudah rilis bila tersedia. dampak=("Medium",) dipakai untuk kartu 🎯 berdampak sedang (mis. klaim
+    pengangguran pekan tertentu) supaya Act-nya juga terisi (15 Okt 2026: dulu tertahan "menunggu Act…")."""
     now = now or datetime.now(timezone.utc)
     cache: dict = {}
     out = []
-    for c in calendar_rows_for(calendar_rows):
+    for c in calendar_rows_for(calendar_rows, dampak):
         act = fred_actual(c["title"], c["time"], now, fetch, cache)
         out.append({"title": c["title"], "group": c["group"], "time": c["time"].isoformat(), "when": _when(c["time"]),
                     "forecast": c["forecast"], "previous": c["previous"], "released": now >= c["time"],

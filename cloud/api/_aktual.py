@@ -39,7 +39,14 @@ TIMEOUT = 8
 # terisi otomatis. Sumber: kalender Nasdaq (api.nasdaq.com, parameter tanggal = tanggal rilis + 1 hari, sama dengan
 # _cpi_detik.nasdaq). Dicek 15 Okt: ISM 5 Okt 54,9 (konsensus 55,1) & Fed 16 Sep 4,00% sama dengan rilis resmi.
 NASDAQ_URL = "https://api.nasdaq.com/api/calendar/economicevents?date={}"
-NASDAQ_MAP = {"ISM Services PMI": "ISM Non-Manufacturing PMI", "Federal Funds Rate": "Fed Interest Rate Decision"}
+NASDAQ_MAP = {"ISM Services PMI": "ISM Non-Manufacturing PMI", "Federal Funds Rate": "Fed Interest Rate Decision",
+              # 15 Okt (simulasi menyeluruh): judul tanpa seri FRED/BLS ini juga tertahan "menunggu Act…" → Nasdaq
+              "ISM Manufacturing PMI": "ISM Manufacturing PMI", "CB Consumer Confidence": "CB Consumer Confidence",
+              "Prelim UoM Consumer Sentiment": "Michigan Consumer Sentiment",
+              "Revised UoM Consumer Sentiment": "Michigan Consumer Sentiment",
+              "Empire State Manufacturing Index": "NY Empire State Manufacturing Index",
+              "Philly Fed Manufacturing Index": "Philadelphia Fed Manufacturing Index",
+              "Core Durable Goods Orders m/m": "Core Durable Goods Orders", "Durable Goods Orders m/m": "Durable Goods Orders"}
 
 
 def nasdaq_act(title: str, t: datetime, opener=None) -> str | None:

@@ -59,3 +59,9 @@ mengikuti hasil 8/8, tetapi detik 2 berlawanan pada 3 dari 5 rilis "di atas".
 Gabungan ≈ 0,42×85 + 0,17×57 + 0,41×35 ≈ 60% emas naik detik 2 = pembanding selalu-NAIK. Logika "di bawah → emas naik" benar,
 tetapi kejutan TIDAK berulang dan perkiraan tinggi jarang meleset ke bawah → hipotesis tidak didukung. Perkiraan 0,6 vs inti 0,3
 dijelaskan energi bulan acuan (WTI +17,5%, bensin +14%, solar +16%). Tidak ada perubahan cloud/aplikasi.
+
+## Hasil rilis (15 Okt 12:30 UTC) — uji maju 1 rilis
+- Act (BLS, produksi 12:33 UTC): PPI 1,3% vs 0,6% (DI ATAS), inti 0,7% vs 0,3% (DI ATAS); Retail 0,8% vs 0,3%; klaim 199K = 199K.
+- Emas OKX XAUT 1 dtk (t−1 dtk $4.150,0): detik 1 −$9,60 • detik 2 −$16,30 • detik 5 −$25,40 • menit 1 −$8,10.
+- Tebakan aplikasi "TURUN 58% ⚠️" benar; hipotesis "perkiraan 0,6 ketinggian → di bawah" salah (PPI malah 1,3%). Satu rilis
+  tidak mengubah angka uji (58%). ⚡LIVE detik 1 searah tebakan → aplikasi 4.44 memakai kurva searah (docs/KETERKAITAN_BERITA.md 5).

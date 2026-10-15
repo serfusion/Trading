@@ -1,0 +1,43 @@
+# 🔗 Keterkaitan antar berita (research/keterkaitan.py)
+python -m research.keterkaitan        → docs/eksternal/hasil_keterkaitan.txt + cloud/api/keterkaitan.json
+pasangan diuji: 263 • lolos: 6 • uji acak 200×: rata-rata lolos kebetulan 0.3 (P95 1) • p = 0.00
+
+## Lolos
+   Prelim GDP q/q → CB Consumer Confidence (searah): angka lama 61.1% (n 36) / baru 84.6% (n 13) • emas menit 1 baru 69.2% (n 13; naik 60.0 / turun 75.0; pembanding 52%) • detik 2 baru 69.2%
+   Core CPI m/m → CPI y/y (searah): angka lama 62.0% (n 50) / baru 61.5% (n 26) • emas menit 1 baru 64.5% (n 31; naik 73.3 / turun 56.2; pembanding 59%) • detik 2 baru 59.4%
+   CB Consumer Confidence → Core CPI m/m (berbalik): angka lama 61.1% (n 72) / baru 68.4% (n 19) • emas menit 1 baru 64.5% (n 31; naik 64.7 / turun 64.3; pembanding 59%) • detik 2 baru 64.5%
+   Advance GDP q/q → Core Retail Sales m/m (searah): angka lama 63.6% (n 44) / baru 71.4% (n 14) • emas menit 1 baru 62.5% (n 16; naik 62.5 / turun 62.5; pembanding 56%) • detik 2 baru 62.5%
+   Advance GDP q/q → ISM Services PMI (berbalik): angka lama 61.2% (n 49) / baru 62.5% (n 16) • emas menit 1 baru 62.5% (n 16; naik 62.5 / turun 62.5; pembanding 51%) • detik 2 baru 56.2%
+   Advance GDP q/q → Retail Sales m/m (searah): angka lama 62.8% (n 43) / baru 68.8% (n 16) • emas menit 1 baru 62.5% (n 16; naik 62.5 / turun 62.5; pembanding 56%) • detik 2 baru 62.5%
+
+## Angka berkaitan kuat di LAMA & BARU (≥ 60%) — terlepas dari emas
+   Prelim GDP q/q → CB Consumer Confidence (searah): angka lama 61.1% (n 36) / baru 84.6% (n 13) • emas menit 1 lama 38.5% / baru 69.2% (pembanding baru 52%)
+   CPI m/m → PPI m/m (searah): angka lama 62.1% (n 29) / baru 73.1% (n 26) • emas menit 1 lama 50.0% / baru 59.4% (pembanding baru 63%)
+   CPI m/m → Core CPI m/m (searah): angka lama 60.7% (n 28) / baru 72.7% (n 22) • emas menit 1 lama 54.8% / baru 62.5% (pembanding baru 59%)
+   Advance GDP q/q → Core Retail Sales m/m (searah): angka lama 63.6% (n 44) / baru 71.4% (n 14) • emas menit 1 lama 50.0% / baru 62.5% (pembanding baru 56%)
+   Advance GDP q/q → Retail Sales m/m (searah): angka lama 62.8% (n 43) / baru 68.8% (n 16) • emas menit 1 lama 48.8% / baru 62.5% (pembanding baru 56%)
+   CB Consumer Confidence → Core CPI m/m (berbalik): angka lama 61.1% (n 72) / baru 68.4% (n 19) • emas menit 1 lama 57.0% / baru 64.5% (pembanding baru 59%)
+   Advance GDP q/q → ISM Services PMI (berbalik): angka lama 61.2% (n 49) / baru 62.5% (n 16) • emas menit 1 lama 57.7% / baru 62.5% (pembanding baru 51%)
+   CPI m/m → Core Retail Sales m/m (searah): angka lama 65.2% (n 46) / baru 62.1% (n 29) • emas menit 1 lama 57.4% / baru 60.6% (pembanding baru 56%)
+   Core CPI m/m → Prelim UoM Consumer Sentiment (berbalik): angka lama 64.0% (n 50) / baru 61.9% (n 21) • emas menit 1 lama 36.4% / baru 52.4% (pembanding baru 59%)
+   Core CPI m/m → CPI y/y (searah): angka lama 62.0% (n 50) / baru 61.5% (n 26) • emas menit 1 lama 50.7% / baru 64.5% (pembanding baru 59%)
+
+## Ditampilkan di aplikasi (angka berkaitan konsisten; emas walk-forward per tahun)
+   PPI m/m → Advance GDP q/q (searah): angka walk-forward 58.8% (n 34; lama 66.7 / baru 56.2) • emas menit 1 walk-forward 35.3% (n 34; lama 51.7 / baru 31.2) → ≈ acak
+   Prelim GDP q/q → CB Consumer Confidence (searah): angka walk-forward 63.9% (n 36; lama 61.1 / baru 84.6) • emas menit 1 walk-forward 53.8% (n 26; lama 38.5 / baru 69.2) → ≈ acak
+   CB Consumer Confidence → CPI y/y (berbalik): angka walk-forward 62.7% (n 83; lama 58.7 / baru 70.8) • emas menit 1 walk-forward 58.3% (n 127; lama 57.0 / baru 64.5) → lemah
+   Advance GDP q/q → CPI y/y (berbalik): angka walk-forward 59.3% (n 27; lama 59.3 / baru 57.1) • emas menit 1 walk-forward 52.9% (n 34; lama 38.5 / baru 50.0) → ≈ acak
+   Core CPI m/m → CPI y/y (searah): angka walk-forward 58.7% (n 63; lama 62.0 / baru 61.5) • emas menit 1 walk-forward 57.0% (n 86; lama 50.7 / baru 64.5) → lemah
+   CPI m/m → Core CPI m/m (searah): angka walk-forward 70.3% (n 37; lama 60.7 / baru 72.7) • emas menit 1 walk-forward 65.4% (n 52; lama 54.8 / baru 62.5) → lemah
+   CB Consumer Confidence → Core CPI m/m (berbalik): angka walk-forward 63.6% (n 77; lama 61.1 / baru 68.4) • emas menit 1 walk-forward 58.3% (n 127; lama 57.0 / baru 64.5) → lemah
+   Advance GDP q/q → Core CPI m/m (berbalik): angka walk-forward 60.0% (n 25; lama 59.3 / baru 60.0) • emas menit 1 walk-forward 52.8% (n 36; lama 37.8 / baru 50.0) → ≈ acak
+   Advance GDP q/q → Core Retail Sales m/m (searah): angka walk-forward 63.6% (n 44; lama 63.6 / baru 71.4) • emas menit 1 walk-forward 58.7% (n 46; lama 50.0 / baru 62.5) → lemah
+   CPI m/m → Core Retail Sales m/m (searah): angka walk-forward 60.0% (n 60; lama 65.2 / baru 62.1) • emas menit 1 walk-forward 56.9% (n 65; lama 57.4 / baru 60.6) → lemah
+   Core Retail Sales m/m → ISM Manufacturing PMI (searah): angka walk-forward 60.8% (n 148; lama 60.3 / baru 57.8) • emas menit 1 walk-forward 58.6% (n 111; lama 71.6 / baru 40.0) → ≈ acak
+   CPI m/m → ISM Manufacturing PMI (searah): angka walk-forward 60.3% (n 63; lama 69.6 / baru 58.8) • emas menit 1 walk-forward 56.2% (n 64; lama 67.6 / baru 50.0) → lemah
+   Advance GDP q/q → ISM Services PMI (berbalik): angka walk-forward 62.7% (n 51; lama 61.2 / baru 62.5) • emas menit 1 walk-forward 59.0% (n 39; lama 57.7 / baru 62.5) → lemah
+   CPI m/m → PPI m/m (searah): angka walk-forward 70.7% (n 41; lama 62.1 / baru 73.1) • emas menit 1 walk-forward 56.6% (n 53; lama 50.0 / baru 59.4) → lemah
+   Prelim GDP q/q → PPI m/m (berbalik): angka walk-forward 65.4% (n 26; lama 64.3 / baru 70.0) • emas menit 1 walk-forward 58.1% (n 31; lama 60.7 / baru 53.8) → lemah
+   Core CPI m/m → Prelim UoM Consumer Sentiment (berbalik): angka walk-forward 62.5% (n 56; lama 64.0 / baru 61.9) • emas menit 1 walk-forward 46.9% (n 32; lama 36.4 / baru 52.4) → ≈ acak
+   Advance GDP q/q → Retail Sales m/m (searah): angka walk-forward 65.2% (n 46; lama 62.8 / baru 68.8) • emas menit 1 walk-forward 57.4% (n 47; lama 48.8 / baru 62.5) → ≈ acak
+   Unemployment Rate → Retail Sales m/m (berbalik): angka walk-forward 59.7% (n 119; lama 62.5 / baru 56.1) • emas menit 1 walk-forward 54.5% (n 123; lama 57.6 / baru 48.8) → ≈ acak

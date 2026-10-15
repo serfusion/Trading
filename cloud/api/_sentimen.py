@@ -174,14 +174,15 @@ def poin(s: dict) -> str | None:
     """SATU poin ringkas: "👥 Orang: Kitco 206 suara naik 45% / turun 37% • ritel 9 broker BUY 68% • trader kecil COT
     long 76% → info (diuji: tidak menambah ketepatan)"."""
     bag = []
-    k = s.get("kitco")
-    if k:
+    # 15 Okt (simulasi): data cache bentuk lama/sebagian dulu membuat poin KeyError → seluruh blok sentimen hilang
+    k = s.get("kitco") if isinstance(s.get("kitco"), dict) else {}
+    if k.get("ms_up") is not None:
         bag.append(f"survei {_p(k['ms_up'])} naik")
-    f = s.get("fxssi")
-    if f:
+    f = s.get("fxssi") if isinstance(s.get("fxssi"), dict) else {}
+    if f.get("buy") is not None:
         bag.append(f"ritel {_p(f['buy'])} BUY")
-    c = s.get("cot")
-    if c:
+    c = s.get("cot") if isinstance(s.get("cot"), dict) else {}
+    if c.get("long") is not None:
         bag.append(f"COT {_p(c['long'])} long")
     if not bag:
         return None

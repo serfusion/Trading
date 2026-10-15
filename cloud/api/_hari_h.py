@@ -142,8 +142,8 @@ def result(card: dict, actual: str) -> dict:
         return {"label": "✅ Hasil rilis", "teks": f"Act {actual}", "kuat": False,
                 "bukti": f"Perkiraan {card.get('forecast') or '-'} • arah emas: data historis tidak cukup"}
     f = card.get("forecast") or "-"
-    out = {"label": "✅ Hasil rilis • emas 1 menit", "teks": k["teks"], "kuat": k["kuat"],
-           "bukti": f"Act {actual} vs perkiraan {f} • {k['catatan']}"}
+    out = {"label": "✅ Hasil rilis • emas 1 menit", "teks": k["teks"], "kuat": k["kuat"], "arah": k.get("arah"),
+           "hasil": k.get("hasil"), "bukti": f"Act {actual} vs perkiraan {f} • {k['catatan']}"}
     if any(x["dtk"].endswith("dtk") for x in k.get("tahap") or []):
         # aplikasi 3.18: "✅ Act 45K < 89K → arah emas" + deretan 1 dtk / 2 dtk / 3 dtk / 1 mnt (permintaan 2 Okt 2026)
         out.update(tahap=k["tahap"], judul_tahap=f"✅ Act {actual} {_persiapan.KATA[k['hasil']]} perkiraan {f} → arah emas"
@@ -195,6 +195,7 @@ def attach(persiapan: dict, calendar: list[dict], store, now: datetime, kalshi: 
             f = forecast(card, kalshi or {}, poly or {}, state, now)
             if f:
                 card["hari_h"] = f
+    _persiapan.satukan(persiapan.get("berita") or [], "hasil_rilis")   # rilis bersamaan → satu arah (15 Okt 2026)
     line = fed_line(fed, now)
     if line:
         persiapan["fed"] = line

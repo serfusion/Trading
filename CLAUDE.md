@@ -546,6 +546,19 @@ alarm tepat waktu) hanya menyentuh `android/`].
   "tetap NAIK/TURUN sekarang X% • s/d menit 1 ≥ Y% ✅". Detik 1 dipercaya hanya bila kurvanya ≥ 70% (PPI+Retail 77–80%, n 13–15;
   PPI sendiri & CPI 42–63% ✗). Sebelum rilis tetap tidak ada yang ≥ 70% di detik 1 (plafon 51–58%).
 
+## 🔗 Keterkaitan & audit menyeluruh (15 Okt 2026 malam — `docs/KETERKAITAN_BERITA.md`)
+- PPI 15 Okt: 1,3% vs 0,6% (inti 0,7 vs 0,3), Retail 0,8 vs 0,3 → emas −$16 detik 2; tebakan TURUN 58% benar (1 rilis).
+- Pengguna: "54–65% itu lempar koin" → keterkaitan antar berita (`research/keterkaitan.py`, 263 pasangan, lolos 6 vs acak 0,3)
+  hanya INFO (`_keterkaitan.py`, memori Supabase `hasil_rilis`, blok 🔗 di detail kartu); emas ≈ 20% + 60% × angka tertebak.
+- DIPASANG (izin "betulkan bug"): satu arah per rilis bersamaan setelah Act (`_persiapan.satukan` + `rilis_gabung.json` dari
+  `research/rilis_gabung.py`; NFP vs upah sejak 2021 50% → ≈ 50:50); PPI berlawanan < 52% → ≈ 50:50 (`_ppi_wti.status_sel`);
+  `tandai` ikut keputusan daftar; Act kartu Medium + Nasdaq untuk ISM Manufaktur/CB/Michigan/Empire/Philly/durable; jadwal
+  kosong → berita terdekat; ⓘ peringkat bagian 📰 berita (`research/peringkat.py berita()`).
+- Aplikasi 4.44: ⚡LIVE kurva SEARAH / BERLAWANAN tebakan sebelum rilis (`live_kurva.json` searah/lawan → `lanjut.kurva_searah/
+  kurva_lawan`): detik 1 ≥ $0,30 searah 83% (83 rilis) vs berlawanan 53%. Jalankan ulang `python -m research.live_kurva` bila cache
+  pra_xau_semua_v2/cpi_detik/riset_ppi3 berubah.
+- `tests/test_cloud_simulasi.py` = kode cloud asli diputar ±100 titik waktu (jaringan mati + tiruan): wajib lolos sebelum push.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
