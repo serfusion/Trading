@@ -806,7 +806,10 @@
    "impact": "High",
    "forecast": "0.3%",
    "previous": "0.2%",
-   "first_seen": "2026-10-11T07:15:02.431100+00:00"
+   "first_seen": "2026-10-11T07:15:02.431100+00:00",
+   "actual": "0.7%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-15T12:33:25.130933+00:00"
   },
   {
    "title": "Core Retail Sales m/m",
@@ -836,7 +839,10 @@
    "impact": "High",
    "forecast": "0.6%",
    "previous": "0.4%",
-   "first_seen": "2026-10-11T07:15:02.431100+00:00"
+   "first_seen": "2026-10-11T07:15:02.431100+00:00",
+   "actual": "1.3%",
+   "actual_src": "BLS",
+   "actual_saved": "2026-10-15T12:33:25.130933+00:00"
   },
   {
    "title": "Philly Fed Manufacturing Index",
@@ -1123,5 +1129,5 @@
    "first_seen": "2026-10-11T07:15:02.431100+00:00"
   }
  ],
- "diperbarui": "2026-10-15T07:53:08.152333+00:00"
+ "diperbarui": "2026-10-15T12:33:25.130933+00:00"
 }
