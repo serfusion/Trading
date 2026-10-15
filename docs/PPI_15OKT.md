@@ -40,3 +40,28 @@ searah kejutan hanya 81–86% (lonjakan) dan detik 1 51–54% (putaran 3).
 - **Tetapi masuk SETELAH melihat detik 2** (telat 0,5–1,5 dtk, bid/ask Exness): untung hanya 20–45% rilis, rata-rata −$0,3…−$0,7/oz
   (tutup detik 5–60); hanya gerak ≥ $2 sedikit positif (+$0,4–0,7/oz, n 15). 85%+ = arah BERTAHAN, bukan untung saat mengejar.
   → kartu PPI kini memuat poin "⚠️ Tapi masuk SETELAH detik 2 … rata-rata rugi".
+
+## Hipotesis pengguna (15 Okt 12:00 UTC): "perkiraan 0,6% manipulasi; PPI kemarin di bawah perkiraan → bad for USD → BUY"
+Data `data/research/eksternal/riset_ppi3/fitur.parquet` (123 rilis PPI Sep 2015–Sep 2026): kejutan = tanda(am − cm) (headline
+m/m, dibulatkan 0,1); emas = tanda gerak detik 2 / detik 5 / lonjakan menit 1 (`d2`, `d5`, `arah`).
+
+| keadaan sebelum rilis | PPI keluar DI BAWAH perkiraan | emas naik detik 2 |
+|---|---|---|
+| semua rilis | 42% (123; lama 37 / baru 48) | 60% |
+| perkiraan naik ≥ 0,2 dari angka lalu (malam ini 0,4 → 0,6) | 46% (37) | 61% |
+| perkiraan ≥ 0,5% | 18% (17) | 76% (detik 5 47%, menit 1 53% → tidak konsisten) |
+| 2 rilis lalu di bawah/sesuai (jumlah kejutan < 0) | 32% (31; lama 20 / baru 44) | 48% |
+| persis pola yang dilingkari (lalu sesuai, sebelumnya di bawah) | 0/7 | 1/7 |
+
+Reaksi emas MENURUT hasil (angka sudah diketahui): DI BAWAH → naik detik 2 85% / detik 5 87% / menit 1 88% (n 52; menit 1 lama 83 /
+baru 93); SESUAI → 57% / 52% / 43% (21); DI ATAS → 35% / 22% / 24% (49). 2026: di atas 5×, di bawah 3×, sesuai 2×; lonjakan menit 1
+mengikuti hasil 8/8, tetapi detik 2 berlawanan pada 3 dari 5 rilis "di atas".
+Gabungan ≈ 0,42×85 + 0,17×57 + 0,41×35 ≈ 60% emas naik detik 2 = pembanding selalu-NAIK. Logika "di bawah → emas naik" benar,
+tetapi kejutan TIDAK berulang dan perkiraan tinggi jarang meleset ke bawah → hipotesis tidak didukung. Perkiraan 0,6 vs inti 0,3
+dijelaskan energi bulan acuan (WTI +17,5%, bensin +14%, solar +16%). Tidak ada perubahan cloud/aplikasi.
+
+## Hasil rilis (15 Okt 12:30 UTC) — uji maju 1 rilis
+- Act (BLS, produksi 12:33 UTC): PPI 1,3% vs 0,6% (DI ATAS), inti 0,7% vs 0,3% (DI ATAS); Retail 0,8% vs 0,3%; klaim 199K = 199K.
+- Emas OKX XAUT 1 dtk (t−1 dtk $4.150,0): detik 1 −$9,60 • detik 2 −$16,30 • detik 5 −$25,40 • menit 1 −$8,10.
+- Tebakan aplikasi "TURUN 58% ⚠️" benar; hipotesis "perkiraan 0,6 ketinggian → di bawah" salah (PPI malah 1,3%). Satu rilis
+  tidak mengubah angka uji (58%). ⚡LIVE detik 1 searah tebakan → aplikasi 4.44 memakai kurva searah (docs/KETERKAITAN_BERITA.md 5).

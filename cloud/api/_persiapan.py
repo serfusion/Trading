@@ -317,6 +317,105 @@ def kesimpulan(title: str, actual: str, forecast: str) -> dict | None:
             "catatan": f"{LABEL_HASIL[hasil].replace('Data', 'Act')} → emas {detik_txt or jangka + ' • '}{r['bukti']}"}
 
 
+# Rilis BERSAMAAN → SATU arah emas setelah Act (15 Okt 2026, simulasi menyeluruh: CPI 14 Okt tampil "CPI m/m 60% NAIK 🟢"
+# sekaligus "Core CPI 69% TURUN 🔴" & "CPI y/y 71% TURUN 🔴"; emas nyatanya turun). Urutan dari data ForexFactory 2010–2026 ×
+# tick (docs/KETERKAITAN_BERITA.md bagian A): saat angkanya berlawanan, emas mengikuti NFP, bukan pengangguran (74–76%, 66
+# rilis) atau upah (63–70%, 54); upah > pengangguran (59–63%, 27); Retail Sales > PPI (67–75%, 12); klaim kalah dari berita
+# besar sejam; CPI inti ≈ headline ≈ tahunan → inti dipakai (penggerak emas terkuat di detik 2, docs/CPI_SALAH.md).
+UTAMA_RILIS = ("Non-Farm Employment Change", "Average Hourly Earnings m/m", "Unemployment Rate",
+               "Core CPI m/m", "CPI m/m", "CPI y/y",
+               "Retail Sales m/m", "Core Retail Sales m/m", "Core PPI m/m", "PPI m/m",
+               "Core PCE Price Index m/m", "Advance GDP q/q", "Prelim GDP q/q", "Final GDP q/q",
+               "JOLTS Job Openings", "ISM Services PMI", "ISM Manufacturing PMI", "ADP Non-Farm Employment Change",
+               "CB Consumer Confidence", "Unemployment Claims")
+NAMA_PENDEK = {"Non-Farm Employment Change": "NFP", "Average Hourly Earnings m/m": "upah per jam",
+               "Unemployment Rate": "pengangguran", "Core CPI m/m": "CPI inti", "CPI m/m": "CPI", "CPI y/y": "CPI tahunan",
+               "Retail Sales m/m": "Retail Sales", "Core Retail Sales m/m": "Retail inti", "Core PPI m/m": "PPI inti",
+               "PPI m/m": "PPI", "Core PCE Price Index m/m": "PCE inti", "Unemployment Claims": "klaim pengangguran"}
+
+
+def satukan(rows: list, kunci: str) -> None:
+    """Satu waktu rilis = satu arah emas: baris/kartu yang arahnya berlawanan dengan JUDUL UTAMA (UTAMA_RILIS; judul yang
+    angkanya tidak sama dengan perkiraan didahulukan) diganti arah judul utama + catatan "ikut …". `kunci` = "arah"
+    (kalender tab News) atau "hasil_rilis" (kartu 🎯); keduanya memuat "arah" (naik/turun) & "hasil" (bawah/atas/sesuai)."""
+    per: dict[str, list] = {}
+    for r in rows or []:
+        k = r.get(kunci) if isinstance(r, dict) else None
+        if isinstance(k, dict) and k.get("arah") in ("naik", "turun") and r.get("time"):
+            per.setdefault(r["time"], []).append(r)
+    prio = lambda r: UTAMA_RILIS.index(r["title"]) if r["title"] in UTAMA_RILIS else 99   # noqa: E731
+    nama = lambda r: NAMA_PENDEK.get(r["title"], r["title"])                             # noqa: E731
+    for rs in per.values():
+        if len({r[kunci]["arah"] for r in rs}) < 2:
+            continue
+        kej = [r for r in rs if r[kunci].get("hasil") in ("atas", "bawah")]
+        if len({r[kunci]["arah"] for r in kej}) < 2:
+            # tidak ada kejutan berlawanan: judul "sesuai perkiraan" ikut judul utama yang angkanya meleset
+            utama = min(kej or rs, key=prio)
+            gabung = {**utama[kunci], "ikut": utama["title"]}
+            awal = (f"Rilis bersamaan: {nama(utama)} {KATA.get(gabung.get('hasil'), '')} perkiraan yang menentukan → "
+                    f"emas {gabung.get('teks')}")
+            ganti = [r for r in rs if r is not utama and r[kunci]["arah"] != gabung["arah"]]
+        else:
+            # kejutan BERLAWANAN (mis. NFP di atas, upah di bawah) → tabel research/rilis_gabung.py; SEMUA baris rilis ini
+            # memakai hasil gabungan (angka per judul menyesatkan saat berlawanan)
+            a = min((r for r in kej if r[kunci]["arah"] == "naik"), key=prio)
+            b = min((r for r in kej if r[kunci]["arah"] == "turun"), key=prio)
+            gabung, awal = hasil_berlawanan(a, b, kunci)
+            ganti = list(rs)
+        for r in ganti:
+            sendiri = str(r[kunci].get("teks") or "").replace(" 🟢", "").replace(" 🔴", "").replace(" ⚪", "")
+            catatan = (f"{awal} • {nama(r)} {KATA.get(r[kunci].get('hasil'), '')} perkiraan sendiri biasanya "
+                       f"{sendiri}").replace("  ", " ")
+            baru = {**r[kunci], **gabung, "asli": r[kunci].get("teks"), "catatan": catatan}
+            if gabung.get("hasil") == "berlawanan":         # sel per detik & ukuran kejutan milik satu judul → dibuang
+                for k_ in ("tahap", "kejutan", "judul_tahap", "bukti_tahap", "n"):
+                    baru.pop(k_, None)
+            if kunci == "hasil_rilis":
+                baru["bukti"] = catatan
+                if gabung.get("judul_tahap") and gabung.get("ikut"):
+                    baru["judul_tahap"] = f"✅ Ikut {NAMA_PENDEK.get(gabung['ikut'], gabung['ikut'])}: " + \
+                        str(gabung["judul_tahap"]).removeprefix("✅ ")
+            r[kunci] = baru
+
+
+_F_GABUNG = Path(__file__).resolve().parent / "rilis_gabung.json"
+GABUNG = json.loads(_F_GABUNG.read_text(encoding="utf-8")) if _F_GABUNG.exists() else {}
+
+
+def hasil_berlawanan(a: dict, b: dict, kunci: str) -> tuple[dict, str]:
+    """Arah gabungan dua judul yang kejutannya BERLAWANAN (a → emas naik, b → emas turun) dari tabel pasangan
+    (research/rilis_gabung.py): ditampilkan hanya bila ≥ 55% (n ≥ 10, LAMA & BARU ≥ 55% bila ≥ 5 rilis), selain itu
+    ≈ 50:50 — mis. NFP vs upah: dulu 82% ikut NFP, sejak Okt 2021 hanya 50%."""
+    ka, kb = a[kunci], b[kunci]
+    na, nb = NAMA_PENDEK.get(a["title"], a["title"]), NAMA_PENDEK.get(b["title"], b["title"])
+    awal = (f"Angka berlawanan: {na} {KATA.get(ka.get('hasil'), '')} perkiraan (→ emas naik), {nb} "
+            f"{KATA.get(kb.get('hasil'), '')} perkiraan (→ emas turun)")
+    k = GABUNG.get("konflik") or {}
+    x, menang = k.get(f"{a['title']}|{b['title']}"), a
+    if x is None:
+        x, menang = k.get(f"{b['title']}|{a['title']}"), b
+    if not x or x.get("n", 0) < 10:
+        return ({"arah": None, "persen": None, "teks": "≈ 50:50 ⚪", "kuat": False, "hasil": "berlawanan",
+                 "bukti": "belum cukup riwayat rilis dengan angka berlawanan seperti ini"},
+                awal + f" → riwayat kasus seperti ini {(x or {}).get('n', 0)} rilis (terlalu sedikit) → ≈ 50:50")
+    m1 = x["m1"]
+    per = [(x.get("lama"), x.get("n_lama", 0)), (x.get("baru"), x.get("n_baru", 0))]
+    ok = m1 >= 55 and all(v is None or n_ < 5 or v >= 55 for v, n_ in per)
+    bulat = lambda v: "-" if v is None else f"{v:.0f}"                                   # noqa: E731
+    rinci = (f"dulu emas ikut {NAMA_PENDEK.get(menang['title'], menang['title'])} {m1:.0f}% dari {x['n']} rilis (sebelum "
+             f"Okt 2021 {bulat(x.get('lama'))}% / sejak {bulat(x.get('baru'))}%)")
+    if not ok:
+        return ({"arah": None, "persen": None, "teks": "≈ 50:50 ⚪", "kuat": False, "hasil": "berlawanan",
+                 "bukti": rinci}, (awal + " → " + rinci + " → ≈ 50:50").replace(".", ","))
+    arah = menang[kunci]["arah"]
+    kuat = m1 >= 60 and x["n"] >= 20 and all(v is None or n_ < 5 or v >= 55 for v, n_ in per)
+    teks = f"{m1:.0f}% {'NAIK' if arah == 'naik' else 'TURUN'} {'🟢' if arah == 'naik' else '🔴'}" if kuat \
+        else f"{m1:.0f}% {arah} ⚪"
+    return ({"arah": arah, "persen": round(m1), "teks": teks, "kuat": kuat, "hasil": "berlawanan",
+             "ikut": menang["title"], "bukti": rinci}, (awal + " → " + rinci).replace(".", ","))
+
+
 def alarm_texts() -> dict:
     """{grup: {"alarm": teks}} untuk pengingat ⏱️ 1 menit sebelum rilis di aplikasi (NewsAlarm)."""
     groups = {g for _, g in GROUP if g} | {"SEMUA"}

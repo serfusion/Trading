@@ -167,6 +167,78 @@ def info() -> list[dict]:
     return rows
 
 
+def berita() -> list[dict]:
+    """📰 Aturan berita yang DIPAKAI aplikasi sekarang (15 Okt 2026, pengguna: "rangkumkan dari semua informasi") — angka
+    PER ARAH tebakan dari JSON yang sama dengan cloud (cpi_detik, ppi_wti, pra_aset per_arah, live_tingkat, rilis_gabung,
+    keterkaitan). Dulu ⓘ hanya memuat model "1 jam" yang bukan arah utama lagi."""
+    sys.path.insert(0, str(API))
+    import _pra_aset
+    rows = []
+    sr = ((_j("cpi_detik.json").get("uji") or {}).get("saring")) or {}
+    if sr:
+        k, n = sr.get("naik_2024") or [0, 0]
+        lm = sr.get("lemah") or {}
+        rows.append(_row("info", "📰 CPI sebelum rilis (konsensus indeks / Kalshi, tersaring) → arah emas detik 2",
+                         {"n": sr["n_rilis"], "wr": sr["semua"], "avg": None, "periode": "2016–2026"},
+                         satuan="akurasi", status="dikirim", lama={"wr": sr.get("lama")},
+                         catatan=(f"sejak Okt 2021 {sr['baru']:.0f}%, 2024+ {sr['s2024']:.0f}% (NAIK {k}/{n}); tebakan TURUN "
+                                  f"saat emas tren naik = ⚠️ lemah {lm.get('semua', 0):.0f}% ({lm.get('n_rilis')} rilis)")
+                         .replace(".", ",")))
+    pw = ((_j("ppi_wti.json").get("cpi_ppi") or {}).get("per_arah")) or {}
+    for arah, kata in (("naik", "minyak turun → emas NAIK"), ("turun", "minyak naik → emas TURUN")):
+        x = pw.get(arah) or {}
+        if x:
+            st = "dikirim" if x["semua"]["persen"] >= 60 else "lemah"
+            rows.append(_row("info", f"📰 PPI sebelum rilis: {kata} (lonjakan menit 1)",
+                             {"n": x["semua"]["n"], "wr": x["semua"]["persen"], "avg": None, "periode": "2016–2026"},
+                             satuan="akurasi", status=st, lama={"wr": x["lama"]["persen"]},
+                             catatan=(f"sejak Okt 2021 {x['baru']['persen']:.0f}%; setelah CPI inti bulan sama: angka per "
+                                      "arah situasi (searah/sesuai/berlawanan), berlawanan → ≈ 50:50").replace(".", ",")))
+    for kunci, label, arah in (("ISM Jasa • berbalik", "📰 ISM Jasa: kejutan lalu berbalik → emas TURUN", "turun"),
+                               ("ISM Jasa • berbalik", "📰 ISM Jasa: kejutan lalu berbalik → emas NAIK", "naik"),
+                               ("Unemployment Rate|PK5", "📰 NFP: kalender survei BLS → emas NAIK", "naik"),
+                               ("Unemployment Rate|PK5", "📰 NFP: kalender survei BLS → emas TURUN", "turun")):
+        st = _pra_aset.per_arah(kunci, arah)
+        if st:
+            status = {"teruji": "dikirim"}.get(_pra_aset.status_arah(st), "lemah")
+            rows.append(_row("info", label + " (detik 2–10)", {"n": st["n"], "wr": round(st["benar"], 1), "avg": None,
+                                                                 "periode": "2010–2026"},
+                             satuan="akurasi", status=status, lama={"wr": None if st.get("lama") is None else round(st["lama"])},
+                             catatan=(f"sejak Okt 2021 {st['baru']:.0f}%" if st.get("baru") is not None else "")
+                             + (f" • pembanding selalu-{arah.upper()} {st['dasar']:.0f}%" if st.get("dasar") is not None else "")))
+    lt = (_j("live_tingkat.json").get("grup") or {})
+    s = ((lt.get("SEMUA") or {}).get("tingkat") or {}).get("0.5") or {}
+    if s:
+        per = " • ".join(f"{g} {((lt.get(g) or {}).get('tingkat') or {}).get('0.5', {}).get('d5', '-')}%"
+                         for g in ("CPI", "PPI", "NFP", "FOMC", "ISM", "RETAIL"))
+        rows.append(_row("info", "⚡ LIVE setelah rilis: gerak emas detik 2 ≥ $0,50 → arah bertahan s/d detik 5",
+                         {"n": s["n"], "wr": float(s["d5"]), "avg": None, "periode": "2016–2026"}, satuan="akurasi",
+                         status="dikirim", lama={"wr": s.get("d5_lama")},
+                         catatan=f"menit 1 {s.get('m1')}% • per berita: {per} • masuk SETELAH detik 2 rata-rata rugi "
+                                 "kecuali gerak ≥ $2 (spread & telat)"))
+    kf = (_j("rilis_gabung.json").get("konflik") or {})
+    x = kf.get("Non-Farm Employment Change|Unemployment Rate") or {}
+    if x:
+        rows.append(_row("info", "🔗 Rilis bersamaan berlawanan: emas ikut NFP, bukan pengangguran (menit 1)",
+                         {"n": x["n"], "wr": x["m1"], "avg": None, "periode": "2010–2026"}, satuan="akurasi",
+                         status="dikirim", lama={"wr": x.get("lama")},
+                         catatan=(f"sejak Okt 2021 {x.get('baru'):.0f}% • NFP vs upah sejak 2021 50% → ≈ 50:50 • Retail vs "
+                                  "PPI 67% (12 rilis) • CPI inti vs tahunan 54% → ≈ 50:50 (research/rilis_gabung.py)")
+                         .replace(".", ",")))
+    kt = _j("keterkaitan.json") if (API / "keterkaitan.json").exists() else {}
+    if kt.get("tampil"):
+        terbaik = max(({**r, "B": b} for b, v in kt["tampil"].items() for r in v if r.get("status_emas") != "≈ acak"),
+                      key=lambda r: r.get("emas_wf") or 0, default=None)
+        if terbaik:
+            rows.append(_row("info", "🔗 Keterkaitan berita sebelumnya → angka berita berikutnya (info)",
+                             {"n": terbaik["n_emas_wf"], "wr": terbaik["emas_wf"], "avg": None, "periode": "2010–2026"},
+                             satuan="akurasi", status="info",
+                             catatan=(f"angka ikut 58–72% tetapi arah emas paling tinggi {terbaik['emas_wf']:.0f}% "
+                                      f"({terbaik['A']} → {terbaik['B']}); emas ±20% + 60% × angka tertebak "
+                                      "(research/keterkaitan.py)").replace(".", ",")))
+    return rows
+
+
 def _sinyal_trader() -> dict | None:
     """Ringkasan uji 🧪 sinyal trader (research/sinyal_trader.py) bila sudah ada."""
     p = ROOT / "data" / "research" / "eksternal" / "copy_multi" / "sinyal_trader_ringkas.json"
@@ -190,7 +262,8 @@ def filter_() -> list[dict]:
 
 
 def main() -> dict:
-    rows = sinyal() + spot() + info() + filter_()
+    rows = sinyal() + spot() + sorted(info() + berita(), key=lambda r: (r["status"] == "tidak lolos", -r["wr"])) \
+        + filter_()
     rank = 0
     for r in rows:
         if r["grup"] in ("sinyal", "spot", "info"):

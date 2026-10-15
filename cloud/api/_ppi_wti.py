@@ -201,6 +201,20 @@ def cpi_inti(persiapan: dict, t0: datetime, calendar: list | None = None, store=
     return None
 
 
+def status_sel(benar: float, n: int, lama=None, n_lama: int = 0, baru=None, n_baru: int = 0) -> str:
+    """Status jujur satu sel (aturan audit 15 Okt, sama dengan _pra_aset.status_arah; LAMA/BARU hanya menentukan bila
+    sub-periodenya ≥ 5 rilis): < 52% atau LAMA/BARU < 50% → "acak" (arah TIDAK ditampilkan — dulu "PPI NAIK 43%" tampil,
+    arah yang lebih sering salah); ≥ 60% & n ≥ 20 & LAMA/BARU ≥ 55% → "tutup kertas" (✅); ≥ 55% → "belum terbukti"
+    (sampel kecil, mis. 9/10); selain itu "lemah"."""
+    lm = lama if lama is not None and n_lama >= 5 else None
+    br = baru if baru is not None and n_baru >= 5 else None
+    if benar < 52 or (lm is not None and lm < 50) or (br is not None and br < 50):
+        return "acak"
+    if benar >= 60 and n >= 20 and (lm is None or lm >= 55) and (br is None or br >= 55):
+        return "tutup kertas"
+    return "belum terbukti" if benar >= 55 else "lemah"
+
+
 def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
     cp = DATA.get("cpi_ppi") or {}
     if not g or not ci or not cp or os.environ.get("PPI_CPI", "1") == "0":
@@ -228,14 +242,25 @@ def pakai_cpi(g: dict | None, ci: dict | None) -> dict | None:
            "baru": round(x["baru"]) if x.get("baru") is not None else None, "n": x["n_semua"],
            "cpi_inti": {**ci, "hubungan": rel, **({"d2": x.get("d2")} if per_arah else {})},
            "bukti": awal + " • " + g["bukti"]}
-    kuat = (x["semua"] >= 60 and all(v is None or v >= 50 for v in (x.get("lama"), x.get("baru"))))
+    # 15 Okt malam (simulasi menyeluruh): dulu sel BERLAWANAN tetap menampilkan arah minyak "PPI NAIK 43%" (lebih sering
+    # salah) dan sel 9/10 rilis berlabel ✅ teruji → kini aturan audit yang sama dengan berita lain (status_sel)
+    st = status_sel(x["semua"], x["n_semua"], x.get("lama"), x.get("n_lama", 0), x.get("baru"), x.get("n_baru", 0))
+    if st == "acak":
+        tebak_cpi = "TURUN" if ci["s"] > 0 else "NAIK" if ci["s"] < 0 else None
+        out.update(arah=None, acak=True, status="acak",
+                   alasan=(f"minyak → emas {g['arah'].upper()}" + (f", CPI inti {arah_c} → emas {tebak_cpi}" if tebak_cpi
+                                                                   else f", CPI inti {arah_c}")
+                           + f"; tebakan {g['arah'].upper()} seperti ini dulu hanya benar {x['semua']:.0f}% "
+                             f"({x['n_semua']} rilis) → ≈ 50:50").replace(".", ","))
+        return out
+    out["status"] = st
     if rel == "berlawanan":
-        out.update(status="lemah", peringatan="kejutan inti CPI kemarin berlawanan dengan tebakan minyak")
-    elif not kuat:
-        out.update(status="lemah", peringatan=(f"tebakan {g['arah'].upper()} di situasi ini dulu hanya {x['semua']:.0f}%, "
-                                                f"detik 2 {pct(x.get('d2'))}").replace(".", ","))
+        out["peringatan"] = "kejutan inti CPI kemarin berlawanan dengan tebakan minyak"
+    elif st != "tutup kertas":
+        out["peringatan"] = (f"tebakan {g['arah'].upper()} di situasi ini dulu {x['semua']:.0f}% dari {x['n_semua']} rilis"
+                             + (f", detik 2 {pct(x.get('d2'))}" if x.get("d2") is not None else "")
+                             + (" (sampel kecil)" if x["n_semua"] < 20 else "")).replace(".", ",")
     else:                                                    # CPI sudah mendukung → angka situasi ini yang berlaku
-        out["status"] = "tutup kertas"
         out.pop("peringatan", None)
     return out
 
@@ -255,4 +280,9 @@ def attach(persiapan: dict, store, now: datetime | None = None, opener=None, env
     for c in kartu:
         t0 = datetime.fromisoformat(c["time"])
         g = tebak(t0, obs, src) if obs else None
-        c["ppi_wti"] = pakai_cpi(g, cpi_inti(persiapan, t0, calendar, store))
+        h = pakai_cpi(g, cpi_inti(persiapan, t0, calendar, store))
+        if h and h.get("acak"):                            # petunjuk berlawanan → tanpa arah, alasan tetap dikirim
+            c["ppi_wti"], c["ppi_wti_acak"] = None, h
+        else:
+            c["ppi_wti"] = h
+            c.pop("ppi_wti_acak", None)

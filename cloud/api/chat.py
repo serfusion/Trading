@@ -201,8 +201,14 @@ class handler(BaseHTTPRequestHandler):
                 except Exception:  # noqa: BLE001 - Kalshi opsional
                     pass
             calendar = _chat.calendar_json(rows, now, fetch=lambda s: [])
+            # 15 Okt: kartu 🎯 juga memuat berita berdampak SEDANG (mis. klaim pengangguran) yang tidak ada di kalender tab News
+            # (High saja) → dulu Act-nya tidak pernah diambil ("menunggu Act…"). Diisi bersama, tetapi tidak dikirim ke daftar.
+            kartu_judul = {(c.get("title"), c.get("time")) for c in (persiapan.get("berita") or [])
+                           if isinstance(c, dict)} if isinstance(persiapan, dict) else set()
+            sedang = [c for c in _chat.calendar_json(rows, now, fetch=lambda s: [], dampak=("Medium",))
+                      if (c["title"], c["time"]) in kartu_judul]
             try:                                              # Act berlapis: BLS -> FRED API -> FRED CSV (_aktual.py)
-                aktual = _aktual.fill(calendar, store, now, os.environ)
+                aktual = _aktual.fill(calendar + sedang, store, now, os.environ)
             except Exception as exc:  # noqa: BLE001 - kalender tetap dikirim
                 aktual = {"status": _arsip.redact(f"gagal: {type(exc).__name__}: {exc}"[:200])}
             for c in calendar:                                # Act sudah keluar -> kesimpulan arah otomatis
@@ -211,14 +217,18 @@ class handler(BaseHTTPRequestHandler):
                         c["arah"] = _persiapan.kesimpulan(c["title"], c["actual"], c.get("forecast", ""))
                     except Exception:  # noqa: BLE001
                         pass
+            try:                                              # 15 Okt: rilis bersamaan → satu arah emas (judul utama)
+                _persiapan.satukan(calendar, "arah")
+            except Exception:  # noqa: BLE001
+                pass
             if isinstance(persiapan, dict):                   # 14 Okt: Act juga ke kartu (dulu kartu dibuat sebelum Act
-                isi_act(persiapan, calendar)                  # diisi → PPI tidak pernah diperbarui oleh hasil CPI)
+                isi_act(persiapan, calendar + sedang)         # diisi → PPI tidak pernah diperbarui oleh hasil CPI)
             if isinstance(persiapan, dict) and persiapan.get("berita") is not None:
                 try:                                          # 🎯 perkiraan hari H / ✅ hasil + 🏦 Fed (Polymarket)
                     berita = persiapan["berita"]
                     ks = _kalshi.cached_snapshot(berita, store, now)[0] if berita else {}
                     ps = _polymarket.cached_snapshot(berita, store, now)[0] if berita else {}
-                    _hari_h.attach(persiapan, calendar, store, now, ks, ps, _polymarket.cached_fed(store, now))
+                    _hari_h.attach(persiapan, calendar + sedang, store, now, ks, ps, _polymarket.cached_fed(store, now))
                 except Exception:  # noqa: BLE001 - opsional
                     pass
             if isinstance(persiapan, dict):
@@ -282,6 +292,11 @@ class handler(BaseHTTPRequestHandler):
                         if key and os.environ.get("PRA_TREN", "1") == "1" else None
                     _pra_aset.attach(persiapan, now, tren_fn)
                 except Exception:  # noqa: BLE001 - opsional
+                    pass
+                try:                                          # 🔗 keterkaitan berita sebelumnya (_keterkaitan.py, 15 Okt)
+                    import _keterkaitan
+                    _keterkaitan.attach(persiapan, calendar, store, now)
+                except Exception:  # noqa: BLE001 - info opsional
                     pass
             if isinstance(persiapan, dict) and persiapan.get("berita") and os.environ.get("TWELVEDATA_API_KEY") \
                     and os.environ.get("FADE_WARNING", "1") == "1":

@@ -526,6 +526,9 @@ alarm tepat waktu) hanya menyentuh `android/`].
   arah (NAIK 7/7, TURUN 7/12, detik 2 4/12) → `ppi_wti.json["cpi_ppi"][rel]["per_arah"]` (`research/ppi_dasar.py simpan`) dan
   `_ppi_wti.pakai_cpi` memakai angka ARAH tebakan (TURUN 58% ⚠️ ⚖️, 💥 JANGAN). Sebelum rilis semua petunjuk 44–65%, model 51%;
   LIVE detik 2 ≥ $0,50 bertahan s/d detik 5 91% TETAPI masuk setelah detik 2 rata-rata rugi (untung 20–45% rilis) → poin ⚠️ di kartu PPI.
+  Hipotesis pengguna "perkiraan 0,6 manipulasi/ketinggian → keluar di bawah" (PPI_15OKT bagian akhir): di bawah perkiraan hanya
+  46% bila perkiraan naik ≥ 0,2, 18% bila ≥ 0,5%, 32% setelah 2 rilis di bawah/sesuai → tidak didukung; emas per hasil: di bawah
+  → naik 85–88%, sesuai 43–57%, di atas 22–35% → gabungan ≈ 60% = selalu-NAIK.
 
 - Aplikasi 4.42 (15 Okt, "PPI wajib 85%+ alias yakin"): ⚡LIVE memakai gerak DETIK 2 → tingkat keyakinan per kelompok berita
   (`research/live_tingkat.py` → `cloud/api/live_tingkat.json` → `pra_satu.lanjut.tingkat/kejar`): "✅ YAKIN X% s/d detik 5" bila
@@ -542,6 +545,19 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `data/research/eksternal/live_kurva_gerak.parquet`) → `pra_satu.lanjut.kurva` (`bersama_retail` dari kartu jam sama) → ⚡LIVE
   "tetap NAIK/TURUN sekarang X% • s/d menit 1 ≥ Y% ✅". Detik 1 dipercaya hanya bila kurvanya ≥ 70% (PPI+Retail 77–80%, n 13–15;
   PPI sendiri & CPI 42–63% ✗). Sebelum rilis tetap tidak ada yang ≥ 70% di detik 1 (plafon 51–58%).
+
+## 🔗 Keterkaitan & audit menyeluruh (15 Okt 2026 malam — `docs/KETERKAITAN_BERITA.md`)
+- PPI 15 Okt: 1,3% vs 0,6% (inti 0,7 vs 0,3), Retail 0,8 vs 0,3 → emas −$16 detik 2; tebakan TURUN 58% benar (1 rilis).
+- Pengguna: "54–65% itu lempar koin" → keterkaitan antar berita (`research/keterkaitan.py`, 263 pasangan, lolos 6 vs acak 0,3)
+  hanya INFO (`_keterkaitan.py`, memori Supabase `hasil_rilis`, blok 🔗 di detail kartu); emas ≈ 20% + 60% × angka tertebak.
+- DIPASANG (izin "betulkan bug"): satu arah per rilis bersamaan setelah Act (`_persiapan.satukan` + `rilis_gabung.json` dari
+  `research/rilis_gabung.py`; NFP vs upah sejak 2021 50% → ≈ 50:50); PPI berlawanan < 52% → ≈ 50:50 (`_ppi_wti.status_sel`);
+  `tandai` ikut keputusan daftar; Act kartu Medium + Nasdaq untuk ISM Manufaktur/CB/Michigan/Empire/Philly/durable; jadwal
+  kosong → berita terdekat; ⓘ peringkat bagian 📰 berita (`research/peringkat.py berita()`).
+- Aplikasi 4.44: ⚡LIVE kurva SEARAH / BERLAWANAN tebakan sebelum rilis (`live_kurva.json` searah/lawan → `lanjut.kurva_searah/
+  kurva_lawan`): detik 1 ≥ $0,30 searah 83% (83 rilis) vs berlawanan 53%. Jalankan ulang `python -m research.live_kurva` bila cache
+  pra_xau_semua_v2/cpi_detik/riset_ppi3 berubah.
+- `tests/test_cloud_simulasi.py` = kode cloud asli diputar ±100 titik waktu (jaringan mati + tiruan): wajib lolos sebelum push.
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):

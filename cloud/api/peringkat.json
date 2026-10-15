@@ -1,5 +1,5 @@
 {
- "dibuat": "2026-10-09",
+ "dibuat": "2026-10-15",
  "keterangan": "Sinyal: profit rata-rata per sinyal dalam R (1R = jarak SL) setelah spread, urut profit lalu WR. Spot: % per trade. Info: akurasi tebakan (bukan profit). Periode BARU = Okt 2021–2026, 'lama' = sebelum Okt 2021. Hasil historis, bukan jaminan.",
  "daftar": [
   {
@@ -292,6 +292,93 @@
   },
   {
    "grup": "info",
+   "label": "⚡ LIVE setelah rilis: gerak emas detik 2 ≥ $0,50 → arah bertahan s/d detik 5",
+   "n": 830,
+   "wr": 96.0,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "dikirim",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 99
+   },
+   "catatan": "menit 1 90% • per berita: CPI 92% • PPI 91% • NFP 96% • FOMC 98% • ISM 98% • RETAIL 98% • masuk SETELAH detik 2 rata-rata rugi kecuali gerak ≥ $2 (spread & telat)",
+   "peringkat": 19
+  },
+  {
+   "grup": "info",
+   "label": "🔗 Rilis bersamaan berlawanan: emas ikut NFP, bukan pengangguran (menit 1)",
+   "n": 66,
+   "wr": 75.8,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "dikirim",
+   "periode": "2010–2026",
+   "lama": {
+    "wr": 84.1
+   },
+   "catatan": "sejak Okt 2021 59% • NFP vs upah sejak 2021 50% → ≈ 50:50 • Retail vs PPI 67% (12 rilis) • CPI inti vs tahunan 54% → ≈ 50:50 (research/rilis_gabung,py)",
+   "peringkat": 20
+  },
+  {
+   "grup": "info",
+   "label": "📰 PPI sebelum rilis: minyak turun → emas NAIK (lonjakan menit 1)",
+   "n": 40,
+   "wr": 72.5,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "dikirim",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 61.9
+   },
+   "catatan": "sejak Okt 2021 84%; setelah CPI inti bulan sama: angka per arah situasi (searah/sesuai/berlawanan), berlawanan → ≈ 50:50",
+   "peringkat": 21
+  },
+  {
+   "grup": "info",
+   "label": "📰 ISM Jasa: kejutan lalu berbalik → emas TURUN (detik 2–10)",
+   "n": 45,
+   "wr": 68.9,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "dikirim",
+   "periode": "2010–2026",
+   "lama": {
+    "wr": 65
+   },
+   "catatan": "sejak Okt 2021 73% • pembanding selalu-TURUN 49%",
+   "peringkat": 22
+  },
+  {
+   "grup": "info",
+   "label": "📰 CPI sebelum rilis (konsensus indeks / Kalshi, tersaring) → arah emas detik 2",
+   "n": 61,
+   "wr": 68.3,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "dikirim",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 53.6
+   },
+   "catatan": "sejak Okt 2021 81%, 2024+ 95% (NAIK 18/19); tebakan TURUN saat emas tren naik = ⚠️ lemah 62% (29 rilis)",
+   "peringkat": 23
+  },
+  {
+   "grup": "info",
+   "label": "🔗 Keterkaitan berita sebelumnya → angka berita berikutnya (info)",
+   "n": 52,
+   "wr": 65.4,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "info",
+   "periode": "2010–2026",
+   "catatan": "angka ikut 58–72% tetapi arah emas paling tinggi 65% (CPI m/m → Core CPI m/m); emas ±20% + 60% × angka tertebak (research/keterkaitan,py)",
+   "peringkat": 24
+  },
+  {
+   "grup": "info",
    "label": "🧪 Kandidat NFP: pendahulu membaik → emas naik 1 jam",
    "n": 46,
    "wr": 63.0,
@@ -300,7 +387,7 @@
    "status": "kandidat",
    "periode": "2012–2021",
    "catatan": "uji maju sejak 7 Okt 2026: 0/0 naik; lolos bila n ≥ 30 & ≥ 58%",
-   "peringkat": 19
+   "peringkat": 25
   },
   {
    "grup": "info",
@@ -316,7 +403,7 @@
     "wr": 57.7
    },
    "catatan": "dasar naik 57.9%",
-   "peringkat": 20
+   "peringkat": 26
   },
   {
    "grup": "info",
@@ -331,7 +418,7 @@
     "wr": 72.0
    },
    "catatan": "aturan ⚡ sangat kuat (72% s.d. 2021 / 61% sejak Okt 2021)",
-   "peringkat": 21
+   "peringkat": 27
   },
   {
    "grup": "info",
@@ -343,7 +430,22 @@
    "status": "info",
    "periode": "2001–2026",
    "catatan": "info ekonomi, bukan arah emas; dasar 47%",
-   "peringkat": 22
+   "peringkat": 28
+  },
+  {
+   "grup": "info",
+   "label": "📰 ISM Jasa: kejutan lalu berbalik → emas NAIK (detik 2–10)",
+   "n": 62,
+   "wr": 59.7,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "lemah",
+   "periode": "2010–2026",
+   "lama": {
+    "wr": 59
+   },
+   "catatan": "sejak Okt 2021 61% • pembanding selalu-NAIK 51%",
+   "peringkat": 29
   },
   {
    "grup": "info",
@@ -359,7 +461,37 @@
     "wr": 72.3
    },
    "catatan": "dasar naik 46.3%",
-   "peringkat": 23
+   "peringkat": 30
+  },
+  {
+   "grup": "info",
+   "label": "📰 NFP: kalender survei BLS → emas NAIK (detik 2–10)",
+   "n": 60,
+   "wr": 57.2,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "lemah",
+   "periode": "2010–2026",
+   "lama": {
+    "wr": 60
+   },
+   "catatan": "sejak Okt 2021 50% • pembanding selalu-NAIK 48%",
+   "peringkat": 31
+  },
+  {
+   "grup": "info",
+   "label": "📰 NFP: kalender survei BLS → emas TURUN (detik 2–10)",
+   "n": 104,
+   "wr": 57.0,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "lemah",
+   "periode": "2010–2026",
+   "lama": {
+    "wr": 55
+   },
+   "catatan": "sejak Okt 2021 61% • pembanding selalu-TURUN 52%",
+   "peringkat": 32
   },
   {
    "grup": "info",
@@ -375,7 +507,22 @@
     "wr": 65.4
    },
    "catatan": "dasar naik 55.9%",
-   "peringkat": 24
+   "peringkat": 33
+  },
+  {
+   "grup": "info",
+   "label": "📰 PPI sebelum rilis: minyak naik → emas TURUN (lonjakan menit 1)",
+   "n": 51,
+   "wr": 54.9,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "lemah",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 51.7
+   },
+   "catatan": "sejak Okt 2021 59%; setelah CPI inti bulan sama: angka per arah situasi (searah/sesuai/berlawanan), berlawanan → ≈ 50:50",
+   "peringkat": 34
   },
   {
    "grup": "info",
@@ -387,7 +534,7 @@
    "status": "tidak lolos",
    "periode": "30 hari terakhir (potret)",
    "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
-   "peringkat": 25
+   "peringkat": 35
   },
   {
    "grup": "filter",
