@@ -572,6 +572,12 @@ alarm tepat waktu) hanya menyentuh `android/`].
   GET > 20 dtk (`ANGGARAN_DTK`, `persiapan.dilewati/waktu_dtk`), `_pra_aset.cadangan` (pra_satu ≈ 50% bila galat, `pra_galat`).
   Tes `tests/test_cloud_masuk_pra.py` + simulasi mewajibkan pra_satu & t1 di setiap titik waktu.
 
+## 🎯 Persen sebelum rilis semua berita / FOMC (16 Okt 2026 — `docs/PRA_PELUANG.md`)
+- Pengguna minta persen naik/turun SEBELUM rilis, up to date + data internet, "70% untuk FOMC". `research/pra_peluang.py`
+  (8 data live, walk-forward per kelompok, target masuk t−1 → detik 30/60): tidak lebih baik dari angka dasar (FOMC dasar naik 49%,
+  model 52%). DIPASANG `_pra_peluang.py` (env PRA_PELUANG): baris XAU berita tanpa arah = "naik X% • turun Y% (masuk t−1 → 1 mnt)"
+  + poin 🌐 data live dicek (Polymarket Fed, pernyataan, tren 4 jam). Jangan tampilkan 70% yang tidak teruji.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong
