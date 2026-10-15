@@ -527,6 +527,11 @@ alarm tepat waktu) hanya menyentuh `android/`].
   `_ppi_wti.pakai_cpi` memakai angka ARAH tebakan (TURUN 58% ⚠️ ⚖️, 💥 JANGAN). Sebelum rilis semua petunjuk 44–65%, model 51%;
   LIVE detik 2 ≥ $0,50 bertahan s/d detik 5 91% TETAPI masuk setelah detik 2 rata-rata rugi (untung 20–45% rilis) → poin ⚠️ di kartu PPI.
 
+- Aplikasi 4.42 (15 Okt, "PPI wajib 85%+ alias yakin"): ⚡LIVE memakai gerak DETIK 2 → tingkat keyakinan per kelompok berita
+  (`research/live_tingkat.py` → `cloud/api/live_tingkat.json` → `pra_satu.lanjut.tingkat/kejar`): "✅ YAKIN X% s/d detik 5" bila
+  ≥ 85% & n ≥ 10 (PPI ≥ $0,5 91%, ≥ $1 93%, ≥ $2 16/16; SEMUA 96/98/99%) + catatan KEJAR (masuk detik 2,5: rugi rata-rata kecuali
+  NFP/JOLTS/CPI). Jalankan ulang live_tingkat bila cache pra_xau_semua_v2/lonjakan60 bertambah.
+
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
   setelah −0,5R sebelum TP1: 58% SL, 21% TP1, rata akhir BTC −0,30R / XAU −0,41R (> −0,5R) → jangan potong; potong

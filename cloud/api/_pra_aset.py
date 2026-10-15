@@ -468,6 +468,8 @@ def ringkas_terbaru(teks: str) -> list[str]:
     return out
 
 
+_F_LIVE = Path(__file__).with_name("live_tingkat.json")
+LIVE_T = json.loads(_F_LIVE.read_text(encoding="utf-8")) if _F_LIVE.exists() else {}
 _F_ATURAN = Path(__file__).with_name("aturan_pra.json")
 ATURAN = json.loads(_F_ATURAN.read_text(encoding="utf-8")) if _F_ATURAN.exists() else {}
 
@@ -532,6 +534,11 @@ def satu(row: dict) -> dict:
     if r2:
         r1 = lj.get(f"{g_}|1|0.5|10") or {}
         out["lanjut"] = {"2": round(r2["tetap"]), "1": round(r1["tetap"]) if r1.get("tetap") else None, "n": r2["n"]}
+    # ⚡ 4.42 (15 Okt 2026, pengguna "PPI wajib 85%+ alias yakin"): tingkat keyakinan SETELAH rilis menurut besar gerak emas di
+    # detik 2 (research/live_tingkat.py → live_tingkat.json) + hasil KEJAR (masuk detik 2,5, spread asli) per kelompok berita
+    lt = (LIVE_T.get("grup") or {}).get({"ISM Jasa": "ISM"}.get(g_, g_)) or (LIVE_T.get("grup") or {}).get("SEMUA")
+    if lt:
+        out.setdefault("lanjut", {}).update(tingkat=lt.get("tingkat"), kejar=lt.get("kejar"))
     dasar = ""
     if row.get("arah"):
         naik = row["arah"] == "naik"
