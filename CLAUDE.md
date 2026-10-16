@@ -6,6 +6,7 @@ Indonesia. Jawab dan tulis dokumentasi dalam **bahasa Indonesia**, jujur soal ri
 ## Mulai dari sini
 - **`PROGRES.md`** — status pekerjaan audit & uji 63 repo GitHub (A: riwayat & Releases, B: uji strategi, C: baca
   setiap file). Lanjutkan item yang belum selesai, perbarui file itu, commit & push setiap tahap.
+- **Peta kode & cara menambah metode: `docs/ARSITEKTUR.md`.**
 - Laporan: `docs/RISET_GITHUB.md`, `docs/AUDIT_63_REPO.md`, `docs/AUDIT_RIWAYAT_RELEASES.md`,
   `docs/AUDIT_SETIAP_FILE.md`, `docs/AUDIT_ISI_ARSIP_DEPENDENSI.md`, `docs/AUDIT_FORK_WIKI.md`,
   `docs/TINJAUAN_MANUAL.md`, `docs/BACKTEST.md`, `kandidat/KATALOG.md`.
