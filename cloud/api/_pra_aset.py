@@ -206,7 +206,20 @@ def hitung_tren(bars: list, now: datetime) -> dict | None:
     g4 = round(bars[-1].c - ref.o, 2)
     if g4 == 0:
         return None
-    return {"g4": g4, "harga": bars[-1].c, "acuan": ref.o, "at": _core.iso(now)}
+    return {"g4": g4, "harga": bars[-1].c, "acuan": ref.o, "at": _core.iso(now), **ema_atr_m15(bars, now)}
+
+
+def ema_atr_m15(bars: list, now: datetime) -> dict:
+    """🧩 vektor sapuan dokumen konfluensi_85 (16 Okt 2026): EMA 16 × 15 mnt (= 4 jam, pandas ewm adjust=False) & ATR20
+    15 mnt dari candle yang SUDAH tutup — definisi sama dengan research/konfluensi_85.py (v_sweep). Kosong bila < 21 candle."""
+    tutup = [b for b in bars if b.t + timedelta(minutes=15) <= now]
+    if len(tutup) < 21:
+        return {}
+    ema, k = tutup[0].c, 2 / 17
+    for b in tutup[1:]:
+        ema += k * (b.c - ema)
+    tr = [max(b.h - b.l, abs(b.h - p.c), abs(b.l - p.c)) for p, b in zip(tutup[:-1], tutup[1:])]
+    return {"ema16": round(ema, 3), "atr20": round(sum(tr[-20:]) / 20, 3)}
 
 
 def tren_emas(store, now: datetime, fetch, sisa: timedelta) -> dict | None:

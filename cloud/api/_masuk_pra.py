@@ -126,7 +126,8 @@ def attach(persiapan: dict) -> None:
     if t:
         ps["t1"] = t
         if isinstance(ps.get("poin"), list) and not any(str(x).startswith("📍") for x in ps["poin"]):
-            i = next((k for k, x in enumerate(ps["poin"]) if str(x).startswith(("👥", "🔗", "Setelah rilis"))), len(ps["poin"]))
+            awal = ("🧩", "🧪", "👥", "🔗", "Setelah rilis")          # 📍 sebelum poin dokumen konfluensi (16 Okt)
+            i = next((k for k, x in enumerate(ps["poin"]) if str(x).startswith(awal)), len(ps["poin"]))
             ps["poin"].insert(i, t["bukti"])
             ps["bukti"] = "\n".join("• " + x for x in ps["poin"])
     p = posisi(ps.get("title") or "")

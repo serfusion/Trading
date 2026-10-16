@@ -359,3 +359,12 @@ python -m xau_bot audit --ringkas /tmp/repos/*/
   tebakan tahan 30 dtk–1 mnt 58–62% (LAMA impas); kuat hanya keputusan detik 2 (searah ≥ $0,50 → tahan 1 mnt 79%, berlawanan →
   14% balik untung → tutup). Aplikasi 4.45: 📍 baris t−1 & tahan/tutup BUY/SELL, NewsCache (tampil instan dari HP, satu GET
   bersama, ulang cepat), cloud baca Supabase sekaligus + anggaran 20 dtk langkah info + pra_satu cadangan.
+
+- 16 Okt ("sebelum rilis pun predict persentase naik/turun, up to date + data internet, termasuk FOMC"; "cukup satu persen, unggul
+  turun merah"): `research/pra_peluang.py` (8 data live, walk-forward per kelompok) tidak lebih baik dari angka dasar → baris XAU
+  berita tanpa arah = sisi unggul angka dasar "▼ TURUN 51%" + poin 🌐 data live (`_pra_peluang.py`). docs/PRA_PELUANG.md.
+  Peta kode & resep menambah metode: docs/ARSITEKTUR.md.
+- 16 Okt ("baca dan terapkan semuanya secara menyeluruh supaya bisa 75 persen winrate", dokumen unggahan konfluensi_85):
+  `research/konfluensi_85.py` — 5 metode dokumen dihitung dari data asli (1.627 rilis tick Exness), aturan rezim apa adanya →
+  tak satu rezim pun lolos (semua rezim 174 rilis 51,7%; klaim 77–88% tanpa dasar data). Dipasang `_konfluensi_85.py`: vektor
+  live + poin 🧩/🧪 angka uji asli, gerbang timpa dokumen memakai status uji → arah utama tidak berubah. docs/KONFLUENSI_85.md.

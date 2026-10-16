@@ -99,6 +99,7 @@ karena modul belakang membaca hasil modul depan:
 | 15 | 👥 sentimen (info) | `_sentimen` | `persiapan.sentimen` |
 | 16 | **Arah XAU per detik** | `_pra_aset.attach` | `persiapan.pra`, `pra_daftar`, **`pra_satu`** |
 | 17 | 🔗 keterkaitan antar berita | `_keterkaitan` | poin 🔗 |
+| 17b | 🧩 dokumen konfluensi 5 metode (info; gerbang timpa hanya bila rezim teruji) | `_konfluensi_85` | `pra_satu.konfluensi`, poin 🧩/🧪 |
 | 18 | Cadangan baris XAU | `_pra_aset.cadangan` | `pra_satu` ≈ 50% bila galat |
 | 19 | 📍 gaya masuk t−1 | `_masuk_pra` | `pra_satu.t1`, `lanjut.posisi` |
 | 20 | 🎯 persen sebelum rilis berita tanpa arah | `_pra_peluang` | `pra_satu.teks` "▼ TURUN 51%" |
@@ -164,6 +165,7 @@ Contoh rantai lengkap:
 |---|---|---|---|
 | `research/masuk_pra.py` | `cloud/api/masuk_pra.json` | `_masuk_pra.py` | baris 📍 |
 | `research/pra_peluang.py` | `pra_peluang.json` | `_pra_peluang.py` | "▼ TURUN 51%" |
+| `research/konfluensi_85.py` | `konfluensi_85.json` | `_konfluensi_85.py` | poin 🧩/🧪 (angka uji asli) |
 | `research/cpi_detik.py` | `cpi_detik.json` | `_cpi_detik.py` | arah CPI |
 
 ## 6. Resep menambah metode baru

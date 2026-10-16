@@ -1,5 +1,5 @@
 {
- "dibuat": "2026-10-15",
+ "dibuat": "2026-10-16",
  "keterangan": "Sinyal: profit rata-rata per sinyal dalam R (1R = jarak SL) setelah spread, urut profit lalu WR. Spot: % per trade. Info: akurasi tebakan (bukan profit). Periode BARU = Okt 2021–2026, 'lama' = sebelum Okt 2021. Hasil historis, bukan jaminan.",
  "daftar": [
   {
@@ -614,6 +614,21 @@
    "periode": "30 hari terakhir (potret)",
    "catatan": "4 platform futures (Hyperliquid, OKX, Bitget, Binance), posisi masih terbuka ikut dihitung: rata-rata +0,65% vs semua trader +0,36%, p-acak 0,14 (tidak lebih baik dari pilihan acak). Posisi terbuka trader ber-WR tinggi rata-rata rugi (rugi ditahan). Binance saja +0,66% p 0,03 (1 periode → kandidat).",
    "peringkat": 40
+  },
+  {
+   "grup": "info",
+   "label": "🧩 Dokumen konfluensi 5 metode (semua rezim) → arah emas detik 3",
+   "n": 174,
+   "wr": 51.7,
+   "avg": null,
+   "satuan": "akurasi",
+   "status": "tidak lolos",
+   "periode": "2016–2026",
+   "lama": {
+    "wr": 49.5
+   },
+   "catatan": "sejak Okt 2021 55% • klaim dokumen 77–88% • rezim lolos: 0 dari 6 • tampil sebagai info 🧩 di detail baris XAU, arah utama tidak diubah (research/konfluensi_85.py)",
+   "peringkat": 41
   },
   {
    "grup": "filter",

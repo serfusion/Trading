@@ -576,8 +576,19 @@ alarm tepat waktu) hanya menyentuh `android/`].
 ## 🎯 Persen sebelum rilis semua berita / FOMC (16 Okt 2026 — `docs/PRA_PELUANG.md`)
 - Pengguna minta persen naik/turun SEBELUM rilis, up to date + data internet, "70% untuk FOMC". `research/pra_peluang.py`
   (8 data live, walk-forward per kelompok, target masuk t−1 → detik 30/60): tidak lebih baik dari angka dasar (FOMC dasar naik 49%,
-  model 52%). DIPASANG `_pra_peluang.py` (env PRA_PELUANG): baris XAU berita tanpa arah = "naik X% • turun Y% (masuk t−1 → 1 mnt)"
-  + poin 🌐 data live dicek (Polymarket Fed, pernyataan, tren 4 jam). Jangan tampilkan 70% yang tidak teruji.
+  model 52%). DIPASANG `_pra_peluang.py` (env PRA_PELUANG): baris XAU berita tanpa arah = SISI UNGGUL saja "▼ TURUN 51% (masuk
+  t−1 → 1 mnt)" (pengguna: "cukup satu persen, unggul turun merah") + poin 🌐 data live dicek (Polymarket Fed, pernyataan, tren
+  4 jam). Jangan tampilkan 70% yang tidak teruji.
+
+## 🧩 Dokumen konfluensi_85 (16 Okt 2026 — `docs/KONFLUENSI_85.md`)
+- Unggahan pengguna "terapkan semuanya … supaya bisa 75 persen winrate": 5 metode (palang Z perkiraan, Kalshi, petunjuk, sapuan
+  EMA/ATR 15 mnt, rilis bersamaan) + 6 rezim, klaim 77–88% — angka JSON dokumen TIDAK dihitung dari data (skrip tanpa data, modul
+  membaca kata kunci). `research/konfluensi_85.py` (1.627 rilis tick Exness, aturan apa adanya): 0 rezim lolos (MENENGAH 48–55%,
+  PENUH/SAPUAN n 1–10; semua 174 rilis 51,7%); hanya petunjuk teruji 60,5% (sudah dipakai); sapuan terbalik 43%.
+- DIPASANG sebagai info (`cloud/api/_konfluensi_85.py`, env KONFLUENSI_85, setelah `_keterkaitan`): vektor live + poin 🧩/🧪
+  (angka uji), `pra_satu["konfluensi"]`; gerbang timpa dokumen hanya bila rezim "teruji" (≥ 75%, Wilson ≥ 70, p ≤ 0,01, LAMA &
+  BARU) → kini tidak pernah menimpa. `_pra_aset.hitung_tren` + `ema16`/`atr20` (Twelve Data 64 candle 15 mnt). JANGAN pasang
+  angka dokumen. Jalankan ulang riset bila tick/kalender/Kalshi bertambah (hapus cache `konfluensi_85_vektor.parquet`).
 
 ## Potong rugi / batas waktu sinyal 💰 (2 Okt 2026 — `docs/POTONG_RUGI.md`)
 - `research/potong_rugi.py` (+ opsi `cut_at`, `time_stop`, `rec` di `sl_tangga.backtest`, bawaan tidak berubah):
