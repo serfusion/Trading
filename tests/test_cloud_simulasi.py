@@ -103,6 +103,7 @@ def sim(monkeypatch):
     import _jadwal
     import _kalshi
     import _keterkaitan
+    import _konfluensi_85
     import _persiapan
     import _pernyataan
     import _petunjuk
@@ -174,7 +175,7 @@ def sim(monkeypatch):
                     (_hari_h, "attach"), (_jadwal, "attach"), (_prarilis, "attach"), (_petunjuk, "attach"),
                     (_prediksi, "attach"), (_cpi_detik, "attach"), (_ppi_wti, "attach"), (_sentimen, "attach"),
                     (_pra_aset, "attach"), (_pra_aset, "daftar"), (_pra_aset, "satu"), (_pra_aset, "tandai"),
-                    (_pudar, "attach"), (_aktual, "fill"), (_keterkaitan, "attach")]:
+                    (_pudar, "attach"), (_aktual, "fill"), (_keterkaitan, "attach"), (_konfluensi_85, "attach")]:
         bungkus(mod, nm)
 
     def get(now):
@@ -227,6 +228,10 @@ def test_simulasi_okt_nov_tanpa_galat_dan_satu_arah(sim):
         if not ps.get("teks") or not (ps.get("t1") or {}).get("teks") or "pra_galat" in p or p.get("dilewati"):
             masalah.append(f"{now} baris XAU kurang: {ps.get('teks')} t1={ps.get('t1')} galat={p.get('pra_galat')} "
                            f"dilewati={p.get('dilewati')}")
+        # 16 Okt: 🧩 dokumen konfluensi_85 dihitung di setiap GET, angka uji asli, TIDAK menimpa arah (tak ada rezim teruji)
+        kf = ps.get("konfluensi") or {}
+        if not kf or kf.get("timpa") or sum(str(x).startswith(("🧩", "🧪")) for x in ps.get("poin") or []) != 2:
+            masalah.append(f"{now} 🧩 konfluensi kurang/menimpa: {kf.get('rezim')} timpa={kf.get('timpa')}")
         if ps.get("time") in per and per[ps["time"]] != {ps.get("arah")}:
             masalah.append(f"{now} pra_satu {ps.get('teks')} ≠ kartu {per[ps['time']]}")
         if ps.get("arah") and (ps.get("persen") or 0) < 50:

@@ -1,0 +1,52 @@
+# 🧩 Uji dokumen konfluensi_85 dengan data asli (research/konfluensi_85.py)
+python -m research.konfluensi_85        → cloud/api/konfluensi_85.json + docs/eksternal/hasil_konfluensi_85.txt
+rilis bertick Exness: 1627 jam rilis, 1627 baris (rilis × kelompok)
+   v_bar: +1 196 • −1 229 • 0 1202
+   v_kalshi: +1 34 • −1 8 • 0 1585
+   v_lead: +1 146 • −1 135 • 0 1346
+   v_sweep: +1 395 • −1 518 • 0 714
+pembanding: emas naik di detik 3 pada 49.4% rilis (selalu-NAIK); acak = 50%
+
+## Varian rilis bersamaan A_berita (ko_rilis = n_event ≥ 2: 593 baris)
+   rezim | n (LAMA/BARU) | klaim dokumen | arah benar detik 1 • 2 • 3 • 5 • 10 • 30 • 60 | LAMA / BARU detik 3 | untung bersih t−1 tutup 3 dtk / 10 dtk / 1 mnt | Wilson LB d3 | V-shape | p (acak 50% / acak rilis) | status
+   KONFLUENSI_PENUH_NAIK        | n 1 (1/0) | 87.5% | 0 • 100 • 100 • 100 • 100 • 100 • 100 | 100.0 / – | 100% +0.72 / 100% +0.64 / 100% +0.47 | 37.8 | 0.0% | 0.491 / 0.4868 | tidak lolos
+   KONFLUENSI_PENUH_TURUN       | n 2 (2/0) | 86.7% | 0 • 0 • 0 • 0 • 50 • 50 • 50 | 0.0 / – | 0% -0.97 / 0% -1.50 / 50% -0.64 | 0.0 | 0.0% | 1.0 / 1.0 | tidak lolos
+   SAPUAN_PUCUK_V_SHAPE_NAIK    | n 1 (0/1) | 85.7% | 100 • 100 • 0 • 0 • 0 • 0 • 0 | – / 0.0 | 0% -4.46 / 0% -12.03 / 0% -22.18 | 0.0 | 0.0% | 1.0 / 1.0 | tidak lolos
+   SAPUAN_DASAR_V_SHAPE_TURUN   | n 5 (2/3) | 85.0% | 60 • 80 • 80 • 60 • 80 • 100 • 100 | 100.0 / 66.7 | 60% +0.42 / 60% +2.19 / 100% +6.37 | 51.4 | 0.0% | 0.1858 / 0.1778 | tidak lolos
+   KONFLUENSI_MENENGAH_NAIK     | n 74 (42/32) | 77.8% | 42 • 50 • 55 • 53 • 51 • 58 • 51 | 54.8 / 56.2 | 42% +0.13 / 45% +0.21 / 47% +0.12 | 48.0 | 5.4% | 0.2046 / 0.1646 | tidak lolos
+   KONFLUENSI_MENENGAH_TURUN    | n 91 (50/41) | 76.9% | 54 • 52 • 48 • 47 • 48 • 50 • 48 | 44.0 / 53.7 | 31% -0.01 / 36% -0.06 / 43% -0.03 | 41.7 | 9.9% | 0.6592 / 0.6938 | tidak lolos
+   Jumlah metode searah (dari 4 vektor arah; mayoritas tanpa lawan) → arah benar detik 3 / 10 / 60:
+     1 metode → NAIK  n  348 (186/162): detik 3 44% (LAMA 41.9 / BARU 46.9) • 10 dtk 43% • 1 mnt 49% • untung bersih 1 mnt 38% (-0.33 $/oz)
+     1 metode → TURUN n  436 (232/204): detik 3 47% (LAMA 43.1 / BARU 50.5) • 10 dtk 48% • 1 mnt 53% • untung bersih 1 mnt 43% (-0.12 $/oz)
+     2 metode → NAIK  n   64 (41/23): detik 3 52% (LAMA 56.1 / BARU 43.5) • 10 dtk 47% • 1 mnt 48% • untung bersih 1 mnt 44% (-0.45 $/oz)
+     2 metode → TURUN n   85 (48/37): detik 3 49% (LAMA 45.8 / BARU 54.1) • 10 dtk 49% • 1 mnt 47% • untung bersih 1 mnt 41% (+0.00 $/oz)
+     3 metode → NAIK  n    8 (2/6): detik 3 75% (LAMA 50.0 / BARU 83.3) • 10 dtk 75% • 1 mnt 62% • untung bersih 1 mnt 62% (+2.95 $/oz)
+     3 metode → TURUN n    7 (4/3): detik 3 29% (LAMA 0.0 / BARU 66.7) • 10 dtk 43% • 1 mnt 71% • untung bersih 1 mnt 71% (+0.28 $/oz)
+     4 metode → NAIK  n    3 (0/3): detik 3 100% (LAMA – / BARU 100.0) • 10 dtk 100% • 1 mnt 100% • untung bersih 1 mnt 100% (+4.80 $/oz)
+
+## Varian rilis bersamaan B_kelompok (ko_rilis = n_grup ≥ 2: 86 baris)
+   rezim | n (LAMA/BARU) | klaim dokumen | arah benar detik 1 • 2 • 3 • 5 • 10 • 30 • 60 | LAMA / BARU detik 3 | untung bersih t−1 tutup 3 dtk / 10 dtk / 1 mnt | Wilson LB d3 | V-shape | p (acak 50% / acak rilis) | status
+   KONFLUENSI_PENUH_NAIK        | n 10 (2/8) | 87.5% | 40 • 70 • 80 • 80 • 80 • 80 • 70 | 50.0 / 87.5 | 80% +1.53 / 70% +1.19 / 70% +2.18 | 60.2 | 0.0% | 0.0558 / 0.0532 | belum terbukti
+   KONFLUENSI_PENUH_TURUN       | n 5 (3/2) | 86.7% | 40 • 20 • 20 • 20 • 20 • 40 • 60 | 0.0 / 50.0 | 20% -0.55 / 0% -1.31 / 60% -0.18 | 6.2 | 20.0% | 0.9704 / 0.9706 | tidak lolos
+   SAPUAN_PUCUK_V_SHAPE_NAIK    | n 0 — tidak pernah terjadi
+   SAPUAN_DASAR_V_SHAPE_TURUN   | n 1 (0/1) | 85.0% | 0 • 100 • 100 • 100 • 100 • 100 • 100 | – / 100.0 | 100% +3.39 / 100% +10.31 / 100% +10.06 | 37.8 | 0.0% | 0.491 / 0.4868 | tidak lolos
+   KONFLUENSI_MENENGAH_NAIK     | n 66 (41/25) | 77.8% | 41 • 47 • 52 • 48 • 47 • 56 • 50 | 56.1 / 44.0 | 36% -0.19 / 41% -0.07 / 46% -0.11 | 43.7 | 6.1% | 0.453 / 0.3958 | tidak lolos
+   KONFLUENSI_MENENGAH_TURUN    | n 88 (49/39) | 76.9% | 53 • 52 • 49 • 48 • 50 • 50 • 48 | 44.9 / 53.8 | 31% +0.00 / 38% -0.02 / 42% -0.03 | 42.1 | 9.1% | 0.6254 / 0.6524 | tidak lolos
+   Jumlah metode searah (dari 4 vektor arah; mayoritas tanpa lawan) → arah benar detik 3 / 10 / 60:
+     1 metode → NAIK  n  348 (186/162): detik 3 44% (LAMA 41.9 / BARU 46.9) • 10 dtk 43% • 1 mnt 49% • untung bersih 1 mnt 38% (-0.33 $/oz)
+     1 metode → TURUN n  436 (232/204): detik 3 47% (LAMA 43.1 / BARU 50.5) • 10 dtk 48% • 1 mnt 53% • untung bersih 1 mnt 43% (-0.12 $/oz)
+     2 metode → NAIK  n   64 (41/23): detik 3 52% (LAMA 56.1 / BARU 43.5) • 10 dtk 47% • 1 mnt 48% • untung bersih 1 mnt 44% (-0.45 $/oz)
+     2 metode → TURUN n   85 (48/37): detik 3 49% (LAMA 45.8 / BARU 54.1) • 10 dtk 49% • 1 mnt 47% • untung bersih 1 mnt 41% (+0.00 $/oz)
+     3 metode → NAIK  n    8 (2/6): detik 3 75% (LAMA 50.0 / BARU 83.3) • 10 dtk 75% • 1 mnt 62% • untung bersih 1 mnt 62% (+2.95 $/oz)
+     3 metode → TURUN n    7 (4/3): detik 3 29% (LAMA 0.0 / BARU 66.7) • 10 dtk 43% • 1 mnt 71% • untung bersih 1 mnt 71% (+0.28 $/oz)
+     4 metode → NAIK  n    3 (0/3): detik 3 100% (LAMA – / BARU 100.0) • 10 dtk 100% • 1 mnt 100% • untung bersih 1 mnt 100% (+4.80 $/oz)
+
+## Tiap metode sendirian: arah benar detik 3 / 1 mnt bila vektor ≠ 0 (LAMA | BARU)
+   v_bar    n  425: detik 3 49.6% (LAMA 48.1 | BARU 51.5) • 1 mnt 49.4% • untung bersih 1 mnt 46% (-0.42) • p acak rilis 0.5764
+   v_kalshi n   42: detik 3 54.8% (LAMA – | BARU 54.8) • 1 mnt 69.0% • untung bersih 1 mnt 64% (+1.69) • p acak rilis 0.3064
+   v_lead   n  281: detik 3 60.5% (LAMA 58.2 | BARU 62.9) • 1 mnt 61.9% • untung bersih 1 mnt 58% (+0.48) • p acak rilis 0.0004
+   v_sweep  n  913: detik 3 43.2% (LAMA 40.9 | BARU 45.7) • 1 mnt 48.0% • untung bersih 1 mnt 39% (-0.35) • p acak rilis 1.0
+
+## Kesimpulan (syarat teruji: arah benar detik 3 ≥ 75%, Wilson LB ≥ 70%, p acak rilis ≤ 0.01, LAMA & BARU masing-masing ≥ 5 rilis dan ≥ 60%)
+   rezim teruji: TIDAK ADA → cloud tidak menimpa arah (hanya info 🧩)
+   MAD terakhir (pembagi Z palang live): Advance GDP q/q 1.65 (s/d 2025-07-30) • CPI m/m 0.15 (s/d 2026-10-14) • Core PCE Price Index m/m 0.1 (s/d 2026-09-30) • Federal Funds Rate 0.25 (s/d 2026-01-28) • ISM Manufacturing PMI 0.5 (s/d 2026-01-05) • ISM Services PMI 1.5 (s/d 2026-01-07) • Non-Farm Employment Change 53000 (s/d 2026-10-02) • PPI m/m 0.4 (s/d 2026-10-15) • Retail Sales m/m 1.05 (s/d 2026-10-15) • Unemployment Claims 12000 (s/d 2026-01-29)

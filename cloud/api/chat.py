@@ -334,19 +334,30 @@ class handler(BaseHTTPRequestHandler):
                         _sentimen.attach(persiapan, store, now)
                 except Exception:  # noqa: BLE001 - opsional
                     pass
+                tren_fn = None
                 try:                                          # ⏱️ entry 1 dtk sebelum berita: % per aset (_pra_aset.py)
                     import _pra_aset
                     key = os.environ.get("TWELVEDATA_API_KEY", "")
                     # nama terpisah: dulu memakai "tren" sehingga status tren (dikirim ke aplikasi) tertimpa lambda
+                    # 64 candle (kredit Twelve Data sama dengan 24): EMA 4 jam & ATR20 untuk vektor sapuan 🧩 (_konfluensi_85)
                     tren_fn = (lambda sisa: _pra_aset.tren_emas(
-                        store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(24, "15min"), sisa)) \
+                        store, now, lambda: _core.TwelveData(key, "XAU/USD").candles(64, "15min"), sisa)) \
                         if key and os.environ.get("PRA_TREN", "1") == "1" else None
+                    if tren_fn is not None:                   # sekali per permintaan (dipakai juga oleh 🧩 konfluensi)
+                        _tren_asli, _tren_memo = tren_fn, {}
+                        tren_fn = (lambda s_: _tren_memo["v"] if "v" in _tren_memo
+                                   else _tren_memo.setdefault("v", _tren_asli(s_)))
                     _pra_aset.attach(persiapan, now, tren_fn)
                 except Exception as exc:  # noqa: BLE001 - opsional (alasan dicatat untuk diagnosa)
                     persiapan["pra_galat"] = _arsip.redact(f"{type(exc).__name__}: {exc}")[:200]
                 try:                                          # 🔗 keterkaitan berita sebelumnya (_keterkaitan.py, 15 Okt)
                     import _keterkaitan
                     _keterkaitan.attach(persiapan, calendar, store, now)
+                except Exception:  # noqa: BLE001 - info opsional
+                    pass
+                try:                                          # 🧩 dokumen konfluensi 5 metode, angka uji asli (_konfluensi_85.py)
+                    import _konfluensi_85
+                    _konfluensi_85.attach(persiapan, now, calendar=calendar, tren=tren_fn)
                 except Exception:  # noqa: BLE001 - info opsional
                     pass
                 try:                                          # 15 Okt: baris di bawah XAU SELALU ada (cadangan ≈ 50%)

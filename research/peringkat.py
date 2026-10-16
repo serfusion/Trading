@@ -249,6 +249,22 @@ def berita() -> list[dict]:
                          catatan=(f"sejak Okt 2021 {x.get('baru'):.0f}% • NFP vs upah sejak 2021 50% → ≈ 50:50 • Retail vs "
                                   "PPI 67% (12 rilis) • CPI inti vs tahunan 54% → ≈ 50:50 (research/rilis_gabung.py)")
                          .replace(".", ",")))
+    # 🧩 16 Okt 2026: dokumen "konfluensi_85" unggahan pengguna (klaim 77–88%) diuji data asli — semua rezim digabung
+    k85 = _j("konfluensi_85.json") if (API / "konfluensi_85.json").exists() else {}
+    va = (k85.get("varian") or {}).get("A_berita") or {}
+    rz = [o for nm, o in va.items() if nm.startswith(("KONFLUENSI", "SAPUAN")) and isinstance(o, dict) and o.get("n")]
+    if rz:
+        n = sum(o["n"] for o in rz)
+        hit = lambda kunci, nk: sum(o[nk] * o.get(kunci, 0) / 100 for o in rz)  # noqa: E731
+        nl, nb = sum(o["n_lama"] for o in rz), sum(o["n_baru"] for o in rz)
+        lolos = [nm for nm, o in va.items() if isinstance(o, dict) and o.get("status") == "teruji"]
+        rows.append(_row("info", "🧩 Dokumen konfluensi 5 metode (semua rezim) → arah emas detik 3",
+                         {"n": n, "wr": round(hit("d3", "n") / n * 100, 1), "avg": None, "periode": k85.get("tahun", "2016–2026")},
+                         satuan="akurasi", status="dikirim" if lolos else "tidak lolos",
+                         lama={"wr": round(hit("d3_lama", "n_lama") / nl * 100, 1) if nl else None},
+                         catatan=(f"sejak Okt 2021 {hit('d3_baru', 'n_baru') / nb * 100:.0f}% • klaim dokumen 77–88% • rezim "
+                                  f"lolos: {len(lolos)} dari 6 • tampil sebagai info 🧩 di detail baris XAU, arah utama tidak "
+                                  "diubah (research/konfluensi_85.py)" if nb else "")))
     kt = _j("keterkaitan.json") if (API / "keterkaitan.json").exists() else {}
     if kt.get("tampil"):
         terbaik = max(({**r, "B": b} for b, v in kt["tampil"].items() for r in v if r.get("status_emas") != "≈ acak"),
