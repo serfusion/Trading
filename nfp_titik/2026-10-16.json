@@ -1,0 +1,27 @@
+{
+ "bulan": "2026-09-01",
+ "rilis": "2026-10-02",
+ "chg": 29.0,
+ "prev": 162.0,
+ "z24": -0.8298294495637816,
+ "d1": -133.0,
+ "d1_prev": 185.0,
+ "d2": 52.0,
+ "revision": -29.0,
+ "n_claims": -0.026960784313725505,
+ "n_ur_d3": 0.0,
+ "n_jolts3": -0.0607668833753483,
+ "lead": -1,
+ "dihitung": "2026-10-16T01:13Z",
+ "sumber": "FRED live",
+ "ringkas": {
+  "judul": "🔄 Titik balik ekonomi (mean reversion)",
+  "teks": "Peluang NFP berikutnya lebih tinggi dari +29K (Sep 2026): 44%",
+  "kondisi": "Belum pelemahan ekstrem (z-score −0,83) • pendahulu netral (skor -1)",
+  "pendahulu": "Pendahulu: klaim pengangguran 4 mgg −2,7% (tetap) • pengangguran 3 bln +0,0 poin (tetap) • JOLTS −6,1% (memburuk) • revisi bulan lalu −29K",
+  "bukti": "Teruji 2001–2026 (data vintage, 306 rilis): NFP melemah + pendahulu membaik 68% / netral 70% / memburuk 31% (dasar 47%) • walk-forward 61% • info ekonomi, BUKAN arah emas (emas digerakkan kejutan vs perkiraan) • FRED live 2026-10-16T01:13Z",
+  "peluang": 44,
+  "lemah": false,
+  "lead": -1
+ }
+}
